@@ -71,7 +71,8 @@ model BenchmarkBuilding "Benchmark building model"
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
+        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
+
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -185,11 +186,12 @@ model BenchmarkBuilding "Benchmark building model"
     "Weather data bus"
     annotation (Placement(transformation(extent={{54,328},{88,360}}),
     iconTransformation(extent={{-150,388},{-130,408}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone2(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone2(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
+        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
+
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -197,14 +199,14 @@ model BenchmarkBuilding "Benchmark building model"
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2)
-    "Thermal zone"
+    nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{240,340},{272,366}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone3(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone3(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_ConferenceRoom(),
+        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_ConferenceRoom(),
+
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -212,14 +214,14 @@ model BenchmarkBuilding "Benchmark building model"
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2)
-    "Thermal zone"
+    nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{346,338},{374,364}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone4(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone4(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
+        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
+
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -227,14 +229,14 @@ model BenchmarkBuilding "Benchmark building model"
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2)
-    "Thermal zone"
+    nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{444,338},{470,366}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone5(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone5(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice(),
+        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice(),
+
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -242,8 +244,7 @@ model BenchmarkBuilding "Benchmark building model"
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2)
-    "Thermal zone"
+    nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{538,340},{568,370}})));
   ModularAHU.GenericAHU                genericAHU(
     redeclare package Medium1 = MediumAir,

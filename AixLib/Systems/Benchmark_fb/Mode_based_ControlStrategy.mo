@@ -659,9 +659,9 @@ Controller")}),
       connect(mainBus.ahuBus, controller_CentralAHU.genericAHUBus) annotation (
           Line(
           points={{38.05,120.05},{-20,120.05},{-20,32},{-70,32},{-70,32.9286}},
-
           color={255,204,51},
           thickness=0.5));
+
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -120}, {100, 120}}), graphics={  Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                               FillPattern.Solid,
@@ -5293,13 +5293,13 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
   package Controller
     model Controller_HTSSystem
       Modelica.Blocks.Sources.Constant rpmPumps(k = rpm_pumps) annotation (
-        Placement(visible = true, transformation(extent = {{20, 30}, {40, 50}}, rotation = 0)));
+        Placement(visible = true, transformation(extent={{20,40},{40,60}},      rotation = 0)));
       Modelica.Blocks.Sources.Constant TChpSet(final k = T_chp_set) annotation (
-        Placement(visible = true, transformation(extent = {{18, -50}, {38, -30}}, rotation = 0)));
+        Placement(visible = true, transformation(extent={{20,-60},{40,-40}},      rotation = 0)));
       AixLib.Controls.Continuous.LimPID PIDBoiler(Td = 0, Ti = 60, controllerType = Modelica.Blocks.Types.SimpleController.PID, k = 0.01, reverseAction = false, strict = true, yMax = 1, yMin = 0) annotation (
-        Placement(visible = true, transformation(extent = {{20, -10}, {40, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(extent={{-60,40},{-40,60}},     rotation = 0)));
       Modelica.Blocks.Sources.Constant TBoilerSet_out(final k = T_boi_set) annotation (
-        Placement(visible = true, transformation(extent = {{-20, -10}, {0, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(extent={{-90,40},{-70,60}},     rotation = 0)));
       parameter Real T_boi_set = 273.15 + 80 "Set point temperature of boiler" annotation (
         Dialog(enable = true, group = "CHP, Boiler and Pumps"));
       parameter Real T_chp_set = 333.15 "Set point temperature of chp" annotation (
@@ -5309,40 +5309,53 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
       AixLib.Systems.Benchmark.BaseClasses.HighTempSystemBus highTempSystemBus1 annotation (
         Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.BooleanInput HTS_Heating_I annotation (
-        Placement(visible = true, transformation(origin = {114, 60}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {114, 60}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
+        Placement(visible = true, transformation(origin={114,80},    extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin={114,80},    extent = {{-14, -14}, {14, 14}}, rotation = 180)));
       Modelica.Blocks.Interfaces.BooleanInput HTS_Heating_II annotation (
-        Placement(visible = true, transformation(origin = {114, -60}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {114, -60}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
+        Placement(visible = true, transformation(origin={114,-80},    extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin={114,-80},    extent = {{-14, -14}, {14, 14}}, rotation = 180)));
       Modelica.Blocks.Logical.Or or1 annotation (
-        Placement(visible = true, transformation(origin = {-70, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Modelica.Blocks.Logical.Or or2 annotation (
-        Placement(visible = true, transformation(origin={-80,80},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin={-80,10},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Blocks.Logical.Switch switch1
+        annotation (Placement(transformation(extent={{-20,20},{0,40}})));
+      Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(visible
+            =true, transformation(extent={{-90,-40},{-70,-20}}, rotation=0)));
     equation
       connect(rpmPumps.y, highTempSystemBus1.pumpBoilerBus.pumpBus.rpmSet) annotation (
-        Line(points = {{41, 40}, {70.525, 40}, {70.525, 36}, {100.05, 36}, {100.05, 0.05}}, color = {0, 0, 127}));
+        Line(points={{41,50},{60,50},{60,0},{100.05,0},{100.05,0.05}},                      color = {0, 0, 127}));
       connect(HTS_Heating_II, highTempSystemBus1.pumpBoilerBus.pumpBus.onSet) annotation (
-        Line(points = {{114, -60}, {-40, -60}, {-40, 20}, {100, 20}, {100, 0}, {100, 0.05}, {100.05, 0.05}}, color = {255, 0, 255}));
+        Line(points={{114,-80},{-40,-80},{-40,0},{100,0},{100,0.05},{100.05,
+              0.05}},                                                                                        color = {255, 0, 255}));
       connect(or1.y, highTempSystemBus1.pumpChpBus.pumpBus.onSet) annotation (
-        Line(points = {{-59, 20}, {100, 20}, {100, 0}, {100, 0.05}, {100.05, 0.05}}, color = {255, 0, 255}));
+        Line(points={{-69,10},{-40,10},{-40,0},{100.05,0},{100.05,0.05}},            color = {255, 0, 255}));
       connect(or1.y, highTempSystemBus1.onOffChpSet) annotation (
-        Line(points = {{-59, 20}, {100, 20}, {100, 0}, {100, 0.05}, {100.05, 0.05}}, color = {255, 0, 255}));
+        Line(points={{-69,10},{-40,10},{-40,0.05},{100.05,0.05}},                    color = {255, 0, 255}));
       connect(highTempSystemBus1.pumpBoilerBus.TRtrnInMea, PIDBoiler.u_m) annotation (
-        Line(points = {{100.05, 0.05}, {60, 0.05}, {60, -20}, {30, -20}, {30, -12}, {30, -12}, {30, -12}}, color = {0, 0, 127}));
-      connect(PIDBoiler.y, highTempSystemBus1.uRelBoilerSet) annotation (
-        Line(points = {{41, 0}, {100, 0}, {100, 0.05}, {100.05, 0.05}}, color = {0, 0, 127}));
+        Line(points={{100.05,0.05},{100,0.05},{100,-80},{-100,-80},{-100,30},{
+              -50,30},{-50,38}},                                                                           color = {0, 0, 127}));
       connect(HTS_Heating_II, or1.u2) annotation (
-        Line(points = {{114, -60}, {-100, -60}, {-100, 12}, {-84, 12}, {-84, 12}, {-82, 12}}, color = {255, 0, 255}));
+        Line(points={{114,-80},{-100,-80},{-100,2},{-92,2}},                                  color = {255, 0, 255}));
       connect(HTS_Heating_I, or1.u1) annotation (
-        Line(points = {{114, 60}, {-100, 60}, {-100, 20}, {-84, 20}, {-84, 20}, {-82, 20}}, color = {255, 0, 255}));
+        Line(points={{114,80},{-100,80},{-100,10},{-92,10}},                                color = {255, 0, 255}));
       connect(TBoilerSet_out.y, PIDBoiler.u_s) annotation (
-        Line(points = {{1, 0}, {18, 0}}, color = {0, 0, 127}));
+        Line(points={{-69,50},{-62,50}}, color = {0, 0, 127}));
       connect(TChpSet.y, highTempSystemBus1.TChpSet) annotation (
-        Line(points = {{39, -40}, {100.05, -40}, {100.05, 0.05}}, color = {0, 0, 127}));
+        Line(points={{41,-50},{60,-50},{60,0},{100.05,0},{100.05,0.05}},
+                                                                  color = {0, 0, 127}));
       connect(rpmPumps.y, highTempSystemBus1.pumpChpBus.pumpBus.rpmSet) annotation (
-        Line(points = {{41, 40}, {100.05, 40}, {100.05, 0.05}}, color = {0, 0, 127}));
-      connect(HTS_Heating_II, or2.u1) annotation (Line(points={{114,-60},{-100,
-              -60},{-100,80},{-92,80}}, color={255,0,255}));
-      connect(HTS_Heating_I, or2.u2) annotation (Line(points={{114,60},{-100,60},
-              {-100,72},{-92,72}}, color={255,0,255}));
+        Line(points={{41,50},{60,50},{60,0},{100.05,0},{100.05,0.05}},
+                                                                color = {0, 0, 127}));
+      connect(PIDBoiler.y, switch1.u1) annotation (Line(points={{-39,50},{-30,
+              50},{-30,38},{-22,38}}, color={0,0,127}));
+      connect(const.y, switch1.u3) annotation (Line(points={{-69,-30},{-40,-30},
+              {-40,22},{-22,22}}, color={0,0,127}));
+      connect(HTS_Heating_II, switch1.u2) annotation (Line(points={{114,-80},{
+              -100,-80},{-100,30},{-22,30}}, color={255,0,255}));
+      connect(switch1.y, highTempSystemBus1.uRelBoilerSet) annotation (Line(
+            points={{1,30},{20,30},{20,0.05},{100.05,0.05}}, color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}},
+          horizontalAlignment=TextAlignment.Left));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Line(points = {{20, 80}, {80, 0}, {40, -80}}, color = {95, 95, 95}, thickness = 0.5), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                                                                        FillPattern.Solid,

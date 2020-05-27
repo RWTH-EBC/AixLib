@@ -13,7 +13,7 @@ package CCCS
     Modelica.Blocks.Math.Add OverallCost annotation (
       Placement(visible = true, transformation(extent={{70,-10},{90,10}},      rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.PerformanceReductionCosts
-      performanceReductionCosts1 annotation (Placement(visible=true,
+      performanceReductionCosts1( sim_time=simulation_time) annotation (Placement(visible=true,
           transformation(
           origin={-50,30},
           extent={{-10,-10},{10,10}},
@@ -682,7 +682,8 @@ Strategy")}),
         Placement(visible = true, transformation(origin = {90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Math.Feedback feedback2[5] annotation (
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-      Modelica.Blocks.Sources.Constant salary_per_annum(k = sal) annotation (
+      Modelica.Blocks.Sources.Constant salary_per_annum(k=sal*sim_time/(365*24*
+            3600))                                               annotation (
         Placement(visible = true, transformation(origin = {90, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Sources.Constant productivity_factor(k = prodFac) annotation (
         Placement(visible = true, transformation(origin = {90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
@@ -694,6 +695,7 @@ Strategy")}),
       parameter Real sal = 50000 "average salary of employee per annum [€]";
       parameter Real TSet = 293.14 "set room temperature [K]";
       parameter Real TSetWorkshop = 288.15 "set room temperature for workshop [K]";
+      parameter Real sim_time;
       Modelica.Blocks.Sources.BooleanExpression booleanExpression[5](each y = true) annotation (
         Placement(visible = true, transformation(extent = {{-100, -50}, {-80, -30}}, rotation = 0)));
       Modelica.Blocks.Math.MultiProduct multiProduct[5](each nu = 4) annotation (
@@ -1995,8 +1997,6 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
         Line(points = {{1, -60}, {8, -60}, {8, -8}, {12, -8}, {12, -8}, {14, -8}}, color = {0, 0, 127}));
       connect(feedback1.y, product2.u1) annotation (
         Line(points = {{-33, -60}, {-28, -60}, {-28, -54}, {-22, -54}, {-22, -54}}, color = {0, 0, 127}));
-      connect(integrator1.y, feedback1.u1) annotation (
-        Line(points = {{61, 60}, {68, 60}, {68, 12}, {-86, 12}, {-86, -60}, {-52, -60}, {-52, -60}, {-50, -60}}, color = {0, 0, 127}));
       connect(const4.y, feedback1.u2) annotation (
         Line(points = {{-59, -30}, {-54, -30}, {-54, -74}, {-42, -74}, {-42, -68}}, color = {0, 0, 127}));
       connect(const.y, switch11.u1) annotation (
@@ -2027,6 +2027,8 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
         Line(points = {{-59, 60}, {-52, 60}}, color = {0, 0, 127}));
       connect(u, derivative1.u) annotation (
         Line(points = {{-104, 0}, {-92, 0}, {-92, 60}, {-82, 60}}, color = {0, 0, 127}));
+      connect(product1.y, feedback1.u1) annotation (Line(points={{-29,0},{-26,0},
+              {-26,-14},{-88,-14},{-88,-60},{-50,-60}}, color={0,0,127}));
       annotation (
         Icon(graphics={  Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {1, 2}, lineColor = {95, 95, 95}, extent = {{-63, 30}, {63, -30}}, textString = "LifespanReductionCost \n One Component")}, coordinateSystem(initialScale = 0.1)),
         Documentation(info = "<html><head></head><body>calculation costs as part of the operational costs of the CCCS evaluation method caused by reduced lifespan of a single component due to wear during opration</body></html>"));
