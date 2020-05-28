@@ -7,10 +7,8 @@ model Throttle "Test for ummixed throttle circuit"
 
   AixLib.Systems.HydraulicModules.Throttle Throttle(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_28x1(),
     m_flow_nominal=1,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_amb=293.15,
     length=1,
@@ -37,6 +35,7 @@ model Throttle "Test for ummixed throttle circuit"
       startTime=180)
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   AixLib.Fluid.Sources.Boundary_pT   boundary(
+    p=boundary1.p + 1000,
     T=323.15,
     redeclare package Medium = Medium,
     nPorts=1) annotation (Placement(transformation(
