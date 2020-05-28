@@ -56,13 +56,14 @@ model Wall
       descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Custom hCon (constant)",
+      choice=3 "ASHRAE140-2017",
+      choice=4 "Custom hCon (constant)",
       radioButtons=true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=2.5
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
                                                                                  annotation(Dialog(tab="Surface Parameters",   group=
           "Inside surface",                                                                                                                              enable=
-          calcMethodIn == 3));
+          calcMethodIn == 4));
   // window parameters
   parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));

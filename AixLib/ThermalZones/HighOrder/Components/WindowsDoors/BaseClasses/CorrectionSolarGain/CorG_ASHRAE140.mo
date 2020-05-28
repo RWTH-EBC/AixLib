@@ -27,9 +27,9 @@ model CorG_ASHRAE140
 equation
   for i in 1:n loop
     // Snell's Law
-    AOI[i] = to_deg(SR_input[i].AOI); // in rad
+    AOI[i] = SR_input[i].AOI; // in rad to deg
 
-    AOR[i] = asin(sin((AOI[i])/INDRG)); //  Angle of refraction in deg
+    AOR[i] = asin(sin(AOI[i])/INDRG); //  Angle of refraction in deg
 
     //Fresnel Equations(Reflectance at 1 air to glass interface)
     RPERP[i]*(sin(AOR[i]+(AOI[i])))^2 = (sin(AOR[i]-(AOI[i])))^2;
@@ -45,7 +45,7 @@ equation
     T[i] = Trn[i]*Tabs[i];
 
     //Solar radiation transmitted through window
-    solarRadWinTrans[i]= SR_input[i].I*T[i];
+    solarRadWinTrans[i]= (SR_input[i].I_diff + SR_input[i].I_dir + SR_input[i].I_gr) *T[i];
 
   end for;
 

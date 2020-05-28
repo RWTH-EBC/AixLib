@@ -1,7 +1,7 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatConvInside
-  "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, or a constant convective heat transfer coefficient"
-  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient hCon_const
+  "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, according to ASHRAE140-2017 or a constant convective heat transfer coefficient"
+  /* calculation of natural convection in the inside of a building according to B.Glueck, ASHRAE140-2017, EN ISO 6946 or using a constant convective heat transfer coefficient hCon_const
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
@@ -10,13 +10,14 @@ model HeatConvInside
     choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Custom hCon (constant)",
+      choice=3 "ASHRAE140-2017",
+      choice=4 "Custom hCon (constant)",
       radioButtons=true),
     Evaluate=true);
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Custom convective heat transfer coefficient"
                                          annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 3 then true else false));
+        enable=if calcMethod == 4 then true else false));
 
   parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 1 then true else false));
@@ -86,6 +87,32 @@ equation
     // vertical plate
     else
       hCon = 1.6*(posDiff^0.3);
+    end if;
+
+    // ++++++++++++++++ASHRAE140-2017++++++++++++++++
+  // upward heat flow: hCon = 4.13, downward heat flow: hCon = 1, horizontal heat flow: hCon = 3.16
+
+  elseif calcMethod == 3 then
+
+    // floor (horizontal facing up)
+    if surfaceOrientation == 2 then
+      hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
+        y1=4.13,
+        y2=1,
+        x_small=dT_small);
+
+    // ceiling (horizontal facing down)
+    elseif surfaceOrientation == 3 then
+      hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
+        y1=1,
+        y2=4.13,
+        x_small=dT_small);
+
+    // vertical
+    else
+      hCon = 3.16;
     end if;
 
   // ++++++++++++++++hCon_const++++++++++++++++
