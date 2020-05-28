@@ -46,6 +46,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-80,28},{-64,12}})));
@@ -59,6 +60,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(
@@ -74,6 +76,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(
@@ -90,6 +93,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{70,28},{86,12}})));
@@ -102,6 +106,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{60,-68},{44,-52}})));
@@ -114,6 +119,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{0,-68},{-16,-52}})));
@@ -127,6 +133,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-58,-68},{-74,-52}})));
@@ -139,6 +146,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)     annotation (Dialog(enable=true, group=
           "Pipes"), Placement(transformation(
@@ -154,6 +162,7 @@ model Injection "Injection circuit with pump and three way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(

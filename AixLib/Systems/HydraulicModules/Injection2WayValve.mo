@@ -21,6 +21,7 @@ model Injection2WayValve
     final m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal,
     Kv=Kv,
+    order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     y_start=0)
            annotation (Dialog(enable=true, group="Actuators"), Placement(
@@ -38,6 +39,7 @@ model Injection2WayValve
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-40,28},{-24,12}})));
@@ -50,6 +52,7 @@ model Injection2WayValve
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{16,28},{32,12}})));
@@ -63,6 +66,7 @@ model Injection2WayValve
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{68,28},{84,12}})));
@@ -75,6 +79,7 @@ model Injection2WayValve
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{60,-68},{44,-52}})));
@@ -87,6 +92,7 @@ model Injection2WayValve
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-4,-68},{-20,-52}})));
@@ -100,6 +106,7 @@ model Injection2WayValve
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-58,-68},{-74,-52}})));
@@ -112,6 +119,7 @@ model Injection2WayValve
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(

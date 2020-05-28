@@ -33,6 +33,8 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   parameter  Modelica.SIunits.Temperature T_amb=298.15 "Ambient temperature for heat loss" annotation(Dialog(tab="Advanced"));
   parameter Modelica.SIunits.Time tauHeaTra=3600
     "Time constant for heat transfer of temperature sensors to ambient" annotation(Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=4
+    "Convection heat transfer coeffient for all pipes" annotation (Dialog(tab="Advanced"));
 
   // Assumptions
   parameter Boolean allowFlowReversal=true

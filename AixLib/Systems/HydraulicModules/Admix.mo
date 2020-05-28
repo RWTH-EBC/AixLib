@@ -32,6 +32,7 @@ model Admix "Admix circuit with three way valve and pump"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-78,28},{-62,12}})));
@@ -44,6 +45,7 @@ model Admix "Admix circuit with three way valve and pump"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-8,28},{8,12}})));
@@ -56,6 +58,7 @@ model Admix "Admix circuit with three way valve and pump"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{60,28},{76,12}})));
@@ -68,6 +71,7 @@ model Admix "Admix circuit with three way valve and pump"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(
@@ -83,6 +87,7 @@ model Admix "Admix circuit with three way valve and pump"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(
@@ -98,6 +103,7 @@ model Admix "Admix circuit with three way valve and pump"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(

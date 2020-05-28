@@ -22,6 +22,7 @@ model Throttle "Throttle circuit with two way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{-60,30},{-40,10}})));
@@ -35,6 +36,7 @@ model Throttle "Throttle circuit with two way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{40,30},{60,10}})));
@@ -48,6 +50,7 @@ model Throttle "Throttle circuit with two way valve"
     length=length,
     parameterPipe=parameterPipe,
     parameterIso=parameterIso,
+    final hCon=hCon,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)           annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{10,-70},{-10,-50}})));
