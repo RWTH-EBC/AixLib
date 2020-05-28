@@ -11,7 +11,9 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
 
 
   // General Parameters
-  parameter String pipeModel="SimplePipe" annotation (choicesAllMatching=true, Dialog(group="Pipes"));
+  parameter String pipeModel="SimplePipe" annotation(choices(
+              choice="SimplePipe",
+              choice="PlugFlowPipe"),Dialog(group="Parameters"));
   parameter Modelica.SIunits.Length length "Pipe length of all pipes (can be overwritten in each pipe)"
     annotation (Dialog(group="Pipes"));
   parameter DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
