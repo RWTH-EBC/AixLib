@@ -6,16 +6,13 @@ model ThrottlePump "Test for unmixed throttle and pump circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.ThrottlePump ThrottlePump(
+    parameterPipe=DataBase.Pipes.Copper.Copper_40x1(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=ThrottlePump.energyDynamics)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     Kv=6.3,
