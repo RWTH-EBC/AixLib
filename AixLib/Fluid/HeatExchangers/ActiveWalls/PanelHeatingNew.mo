@@ -2835,5 +2835,53 @@ Added documentation.</li>
             Line(points={{0,64},{4,68}}, color={28,108,200}),
             Line(points={{-4,68},{0,64}}, color={28,108,200})}));
     end TestingParameters;
+
+    package Calculating_q
+      extends Modelica.Icons.UtilitiesPackage;
+      function DIN1642_4a "Calculation of q for Type A and C"
+
+       input Modelica.SIunits.CoefficientOfHeatTransfer B "system dependent coefficient in W/(m^(2)*K)";
+       input Real a_B "factor for flooring";
+       input Real a_T "factor for division";
+       input Real m_T "m_T= f(spacing T)";
+       input Real a_u "factor for coverage";
+       input Real m_u "m_u = f(thickness of screed coverage s_u)";
+       input Real a_D "factor for outer diameter of pipe";
+       input Real m_D "m_D = f(outer Diameter D)";
+       input Modelica.SIunits.TemperatureDifference dT_H "temperature difference between heated pipe and room";
+
+       output Modelica.SIunits.HeatFlux q;
+
+
+
+      algorithm
+        q := B * a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D) * dT_H;
+
+      end DIN1642_4a;
+
+      function logDT
+
+        import Modelica.Math.log;
+
+      input Modelica.SIunits.Temperature Temp_in[3];
+      output Modelica.SIunits.Temperature Temp_out;
+
+      algorithm
+      Temp_out :=(Temp_in[1] - Temp_in[2])/log((Temp_in[1] - Temp_in[3])/(Temp_in[2] -
+          Temp_in[3]));
+
+        annotation (Documentation(revisions="<html>
+<ul>
+<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
+Added documentation.</li>
+</ul>
+</html>",   info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>Calculation of the logarithmic over temperature. </p>
+</html>"));
+      end logDT;
+    end Calculating_q;
   end AddParameters;
 end PanelHeatingNew;
