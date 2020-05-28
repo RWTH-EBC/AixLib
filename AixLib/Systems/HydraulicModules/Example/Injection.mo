@@ -6,17 +6,13 @@ model Injection "Test for injection circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.Injection Injection(
+    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Injection.energyDynamics)),
-    valve(Kv=10),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     pipe8(length=0.5),
     length=1,

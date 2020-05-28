@@ -6,16 +6,13 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.Injection2WayValve Injection(
+    parameterPipe=DataBase.Pipes.Copper.Copper_28x1(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Injection.energyDynamics)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    dIns=0.02,
-    kIns=0.028,
-    d=0.032,
     pipe7(length=0.5),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
