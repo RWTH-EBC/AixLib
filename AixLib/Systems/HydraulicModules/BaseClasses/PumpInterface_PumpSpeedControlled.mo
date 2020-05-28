@@ -7,7 +7,8 @@ model PumpInterface_PumpSpeedControlled
 
   replaceable
     AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN
-    pumpController(pumpParam=pumpParam) constrainedby Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
+    pumpController(pumpParam=pumpParam) constrainedby
+    Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
     annotation (
     Dialog(enable=true, tab="Control Strategy"),
     Placement(transformation(extent={{-20,40},{20,80}})),
@@ -91,13 +92,6 @@ model PumpInterface_PumpSpeedControlled
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=physics.system.energyDynamics
-    "Formulation of energy balance" annotation (choicesAllMatching=true, Dialog(
-        tab="Assumptions", group="Dynamics"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=physics.system.massDynamics
-    "Formulation of mass balance" annotation (choicesAllMatching=true, Dialog(
-        tab="Assumptions", group="Dynamics"));
-
   // Power and Efficiency
   parameter Boolean calculatePower=false "calc. power consumption?"
     annotation (Dialog(tab="General", group="Power and Efficiency"));

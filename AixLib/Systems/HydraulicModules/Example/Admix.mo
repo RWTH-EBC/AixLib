@@ -6,13 +6,13 @@ model Admix "Test for admix circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.Admix Admix(
+    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Admix.energyDynamics)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    m_flow_nominal=0.1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     Kv=10,

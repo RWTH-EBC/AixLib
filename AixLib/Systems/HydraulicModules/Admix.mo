@@ -6,14 +6,17 @@ model Admix "Admix circuit with three way valve and pump"
     annotation (Dialog(tab="Advanced"));
 
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear valve(
+    final massDynamics=massDynamics,
+    order=1,
+    init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     l={0.001,0.001},
     redeclare package Medium = Medium,
     T_start=T_start,
-    y_start=0.5,
+    y_start=0,
     tau=0.2,
     final m_flow_nominal=m_flow_nominal,
-    energyDynamics=energyDynamics,
+    final energyDynamics=energyDynamics,
     Kv=Kv,
     dpFixed_nominal={1000,1000}) annotation (Dialog(enable=true, group="Actuators"),
       Placement(transformation(
@@ -113,7 +116,9 @@ model Admix "Admix circuit with three way valve and pump"
   replaceable BaseClasses.BasicPumpInterface PumpInterface(
     redeclare package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m_flow_nominal) "Needs to be redeclared" annotation (
+    final m_flow_nominal=m_flow_nominal,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics)     "Needs to be redeclared" annotation (
     Dialog(group="Actuators"),
     choicesAllMatching=true,
     Placement(transformation(extent={{22,12},{38,28}})));
