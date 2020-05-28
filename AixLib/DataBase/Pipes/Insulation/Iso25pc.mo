@@ -1,5 +1,5 @@
 within AixLib.DataBase.Pipes.Insulation;
-record Iso25pc "100% Insulation (thickness insulation = 0.25 x d_o)"
+record Iso25pc "25% Insulation (thickness insulation = 0.25 x d_o)"
   extends InsulationBaseDataDefinition(
     factor=0.25,
     d=30,
