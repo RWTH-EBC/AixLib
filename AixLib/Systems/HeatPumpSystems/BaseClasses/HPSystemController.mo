@@ -6,7 +6,7 @@ model HPSystemController
 
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
-    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
+    constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
 
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
