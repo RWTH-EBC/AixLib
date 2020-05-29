@@ -12,7 +12,8 @@ partial model PartialBorehole "Partial model for borehole example models"
     annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
 
   replaceable AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialBorehole borHol
-    constrainedby AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialBorehole(
+    constrainedby
+    AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialBorehole(
     redeclare package Medium = Medium,
     borFieDat=borFieDat,
     m_flow_nominal=borFieDat.conDat.mBor_flow_nominal,

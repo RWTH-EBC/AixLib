@@ -1,7 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses;
 record SmallScale_Soil
   "Soil data record for the Cimmino and Bernier (2015) experiment"
-  extends AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template(
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template(
       kSoi=0.262,
       cSoi=745,
       dSoi=1750);

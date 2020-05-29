@@ -1,7 +1,8 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeTraceSubstanceReverseFlow
   "Validation model for mixing volume with trace substance input and flow reversal"
-  extends AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MixingVolumeReverseFlow(
+  extends
+    AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MixingVolumeReverseFlow(
     Medium(extraPropertiesNames={"CO2"}),
     volDyn(use_C_flow=true),
     volSte(use_C_flow=true),

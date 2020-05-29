@@ -63,8 +63,8 @@ model StratifiedLoadingUnloading "Test model for stratified tank"
         Medium, m_flow_nominal=m_flow_nominal) "Enthalpy flow rate"
                                      annotation (Placement(transformation(
           extent={{-60,0},{-44,16}})));
-  AixLib.Fluid.Sensors.EnthalpyFlowRate HOutEnh_flow(redeclare package Medium =
-               Medium, m_flow_nominal=m_flow_nominal) "Enthalpy flow rate"
+  AixLib.Fluid.Sensors.EnthalpyFlowRate HOutEnh_flow(redeclare package
+      Medium = Medium, m_flow_nominal=m_flow_nominal) "Enthalpy flow rate"
                                      annotation (Placement(transformation(
           extent={{2,0},{18,16}})));
   Modelica.Blocks.Math.Add add(k2=-1) annotation (Placement(transformation(

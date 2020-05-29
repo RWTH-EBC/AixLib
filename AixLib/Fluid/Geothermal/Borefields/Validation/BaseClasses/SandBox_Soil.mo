@@ -1,7 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
 record SandBox_Soil
   "Soil data record for the Beier et al. (2011) experiment"
-  extends AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template(
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template(
       kSoi=2.88,
       cSoi=1275,
       dSoi=2000);

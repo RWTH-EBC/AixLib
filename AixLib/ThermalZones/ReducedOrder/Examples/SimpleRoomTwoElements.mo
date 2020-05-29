@@ -97,8 +97,8 @@ model SimpleRoomTwoElements
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
     (convective)"
     annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
-  Modelica.Blocks.Sources.Constant const[2](each k=1)
-    "Sets sunblind signal to 1 (open)"
+  Modelica.Blocks.Sources.Constant const[2](each k=0)
+    "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
   BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(

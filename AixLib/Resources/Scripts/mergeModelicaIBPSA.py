@@ -9,6 +9,8 @@ This approach is taken from
 https://github.com/open-ideas/IDEAS/tree/master/IDEAS/Scripts/mergeAnnex60Script.py
 '''
 
+os.environ["HOME"] = "D:\Programme\anaconda3\Lib\site-packages\pyfunnel"
+
 fileName = "mergePaths.json"
 if os.path.isfile(fileName):
     with open(fileName, 'r') as dataFile:

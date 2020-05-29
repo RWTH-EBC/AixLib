@@ -1,7 +1,8 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeMoistureReverseFlow
   "Validation model for mixing volume with moisture input and flow reversal"
-  extends AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MixingVolumeReverseFlow(
+  extends
+    AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MixingVolumeReverseFlow(
     gain(k=0.005),
     redeclare MixingVolumeMoistAir volDyn,
     redeclare MixingVolumeMoistAir volSte);

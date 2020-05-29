@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation;
+within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation;
 model Analytic_20Years
   "Long term validation of ground temperature response model"
   extends Modelica.Icons.Example;

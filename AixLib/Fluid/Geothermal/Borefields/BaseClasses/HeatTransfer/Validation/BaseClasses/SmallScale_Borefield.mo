@@ -1,7 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses;
 record SmallScale_Borefield
   "Borefield data record for the Cimmino and Bernier (2015) experiment"
-  extends AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template(
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template(
       filDat=AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses.SmallScale_Filling(),
       soiDat=AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses.SmallScale_Soil(),
       conDat=AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses.SmallScale_Configuration());
