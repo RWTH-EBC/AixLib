@@ -72,6 +72,8 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     withAHU=true,
     minAHU=0,
     maxAHU=12,
+    maxIrr = {100,100,100,100,0},
+    shadingFactor = {0.7,0.7,0.7,0.7,0},
     hHeat=167500,
     lHeat=0,
     KRHeat=1000,

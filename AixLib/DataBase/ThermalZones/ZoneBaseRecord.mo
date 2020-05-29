@@ -70,7 +70,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real specificPeople "people per squaremeter";
   parameter Real activityDegree "acitivity degree of people in met";
   parameter Modelica.SIunits.HeatFlowRate fixedHeatFlowRatePersons
-    "Area specific heatflowrate by persons in case of temperature independent 
+    "Area specific heatflowrate by persons in case of temperature independent
     calculation";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
@@ -98,6 +98,8 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Minimum specific air flow supplied by the AHU";
   parameter Real maxAHU(unit = "m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
+  parameter Real shadingFactor[nOrientations] "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds.";
+  parameter Real maxIrr[nOrientations](unit = "W/m2") "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature.";
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";
   parameter Real KRHeat "Gain of the controller";
@@ -143,14 +145,14 @@ record ZoneBaseRecord "Base record definition for zone records"
   </li>
   <li>
   February 4, 2014, by Ole Odendahl:<br/>
-  Added new parameters for the setup of the ACH. It is 
-  now possible to assign different values to the ACH for 
+  Added new parameters for the setup of the ACH. It is
+  now possible to assign different values to the ACH for
   each zone based on this record.
   </li>
   <li>
   January 27, 2014, by Ole Odendahl:<br/>
   Added new parameter withAHU to choose whether the zone
-  is connected to a central air handling unit. Default 
+  is connected to a central air handling unit. Default
   is false.
   </li>
   <li>
