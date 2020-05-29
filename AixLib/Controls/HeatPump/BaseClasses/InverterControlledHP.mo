@@ -1,5 +1,5 @@
 ﻿within AixLib.Controls.HeatPump.BaseClasses;
-model InverterControlledHP "Converter model for a inverter controlled HP"
+model InverterControlledHP "Converter model for an inverter / speed controlled HP"
   extends PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=hys,
