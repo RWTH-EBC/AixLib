@@ -23,7 +23,7 @@ With these tests, models are validated or simulated or models will  compared and
 
 #### Correct HTML and Style Check: [SyntaxTest](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/02_CITests/SyntaxTests)
 
-The html code (documentation) is tested and corrected if necessary. Thus the deposited HTML code is checked for correctness and correct
+The html code (documentation) is tested and corrected if necessary. Thus the deposited HTML code is checked for correctness and corrected.
 
 With the ModelManagement library in dymola the style of the models is checked. 
 
