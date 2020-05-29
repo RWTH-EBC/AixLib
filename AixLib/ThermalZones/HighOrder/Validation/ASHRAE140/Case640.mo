@@ -3,6 +3,7 @@ model Case640
   extends Modelica.Icons.Example;
 
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX40();
+
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,
@@ -24,65 +25,100 @@ model Case640
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=
-        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
-    annotation (Placement(transformation(extent={{-114,0},{-94,20}})));
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    annotation (Placement(transformation(extent={{-114,2},{-94,22}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_Weather(
     tableOnFile=true,
     tableName="Table",
     columns={4,5,6,7},
-    fileName=
-        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-114,30},{-94,50}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
-  Rooms.ASHRAE140.SouthFacingWindows Room(absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
-    annotation (Placement(transformation(extent={{-9,17},{33,58}})));
+  Rooms.ASHRAE140.SouthFacingWindows Room(
+    calcMethodIn=2,
+    calcMethodOut=2,
+    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
+    outerWall_South(
+      calcMethodIn=2,
+                    heatTransfer_Outside(calcMethod=2), windowSimple(redeclare
+          model correctionSolarGain =
+            Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140),
+      Wall(heatConv(calcMethod=2))),
+    ceiling(ISOrientation=3,
+      calcMethodIn=2,        heatTransfer_Outside(calcMethod=2)),
+    outerWall_West(calcMethodIn=2,
+                   heatTransfer_Outside(calcMethod=2)),
+    outerWall_North(calcMethodIn=2,
+                    heatTransfer_Outside(calcMethod=2)),
+    outerWall_East(calcMethodIn=2,
+                   heatTransfer_Outside(calcMethod=2)),
+    floor(ISOrientation=2, calcMethodIn=2),
+    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)                         annotation (Placement(transformation(extent={{-4,36},
+            {38,77}})));
+
   Utilities.Sources.HourOfDay hourOfDay
-    annotation (Placement(transformation(extent={{80,69},{100,89}})));
-  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
-    annotation (Placement(transformation(extent={{90,40},{110,60}})));
-  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
-    annotation (Placement(transformation(extent={{90,22},{110,42}})));
+    annotation (Placement(transformation(extent={{104,78},{117,90}})));
+  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in kWh"
+    annotation (Placement(transformation(extent={{111,54},{131,74}})));
+  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in kWh"
+    annotation (Placement(transformation(extent={{111,38},{131,58}})));
   Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
-    annotation (Placement(transformation(extent={{90,6},{110,26}})));
+    annotation (Placement(transformation(extent={{111,22},{131,42}})));
   Modelica.Blocks.Sources.Constant AirExchangeRate(k=0.41)
-    annotation (Placement(transformation(extent={{-40,-50},{-27,-37}})));
-  Modelica.Blocks.Sources.Constant Source_InternalGains_convective(k=0.4*200)
-    annotation (Placement(transformation(extent={{-112,-31},{-99,-18}})));
-  Modelica.Blocks.Sources.Constant Source_InternalGains_radiative(k=0.6*200)
-    annotation (Placement(transformation(extent={{-112,-58},{-100,-46}})));
-  Modelica.Blocks.Sources.Constant Source_TsetC(k=273.15 + 27)
-    annotation (Placement(transformation(extent={{-10,-50},{3,-37}})));
+    annotation (Placement(transformation(extent={{-42,-35},{-29,-22}})));
+  Modelica.Blocks.Sources.Constant Source_InternalGains(k=200)
+    annotation (Placement(transformation(extent={{-146,-57},{-133,-44}})));
+  Modelica.Blocks.Sources.Constant Tset_Cooler(k=27)
+    annotation (Placement(transformation(extent={{-38,-74},{-27,-63}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
     TN_cooler=1,
     h_heater=1e6,
     KR_heater=1000,
     l_cooler=-1e6,
-    KR_cooler=1000)
-    annotation (Placement(transformation(extent={{6,-34},{26,-14}})));
+    KR_cooler=1000,
+    recOrSep=false)
+    annotation (Placement(transformation(extent={{-16,-39},{4,-19}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow Ground(Q_flow=0)
     "adiabatic boundary"
-    annotation (Placement(transformation(extent={{-75,0},{-55,20}})));
+    annotation (Placement(transformation(extent={{-99,-32},{-79,-12}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_convective
-    annotation (Placement(transformation(extent={{-91,-34},{-71,-14}})));
+    annotation (Placement(transformation(extent={{-99,-54},{-79,-34}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_radiative
-    annotation (Placement(transformation(extent={{-92,-62},{-72,-42}})));
+    annotation (Placement(transformation(extent={{-99,-79},{-79,-59}})));
+  Modelica.Blocks.Continuous.Integrator integrator1
+    annotation (Placement(transformation(extent={{71,58.5},{82,69.5}})));
+  Modelica.Blocks.Continuous.Integrator integrator
+    annotation (Placement(transformation(extent={{72,41.5},{83,52.5}})));
+  Modelica.Blocks.Sources.RealExpression HeatingPower(y=idealHeaterCooler.heatingPower)
+    annotation (Placement(transformation(extent={{44,54},{64,74}})));
+  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh
+    annotation (Placement(transformation(extent={{89,58},{101,70}})));
+  Modelica.Blocks.Sources.RealExpression CoolingPower(y=idealHeaterCooler.coolingPower)
+    annotation (Placement(transformation(extent={{44,37},{64,57}})));
+  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh1
+    annotation (Placement(transformation(extent={{90,42},{101,53}})));
+  Modelica.Blocks.Math.UnitConversions.From_degC from_degC
+    annotation (Placement(transformation(extent={{-22,-74},{-11,-63}})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=2)
+    "Sum of heating and cooling power"
+    annotation (Placement(transformation(extent={{83,27},{93,37}})));
+  Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiant part"
+    annotation (Placement(transformation(extent={{-123,-49},{-113,-39}})));
+  Modelica.Blocks.Math.Gain convectiveInternalGains(k=0.4) "Convective part"
+    annotation (Placement(transformation(extent={{-122,-74},{-112,-64}})));
+  Modelica.Blocks.Math.Gain gain(k=1/1000) "Converts to kW"
+    annotation (Placement(transformation(extent={{99,28},{106,35}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_TsetHeat(
     columns={2},
     tableOnFile=false,
     table=SetTempProfile.Profile,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
-    annotation (Placement(transformation(extent={{39,-50},{26,-37}})));
-  Modelica.Blocks.Continuous.Integrator integrator1
-    annotation (Placement(transformation(extent={{71,44.5},{82,55.5}})));
-  Modelica.Blocks.Continuous.Integrator integrator
-    annotation (Placement(transformation(extent={{71,26.5},{82,37.5}})));
+    annotation (Placement(transformation(extent={{35,-75},{22,-62}})));
 equation
     //Connections for input solar model
   for i in 1:5 loop
@@ -93,87 +129,109 @@ equation
     connect(Solar_Radiation.y[2], radOnTiltedSurf_Perez[i].solarInput2);
   end for;
 
-  // Set outputs
-    integrator1.u =idealHeaterCooler.heatingPower /(1000*1000*3600); //in MWh
-    integrator.u =idealHeaterCooler.coolingPower /(1000*1000*3600); //in MWh
-
-    PowerLoad =(idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower)/1000;
-
   connect(Source_Weather.y[1], outsideTemp.T) annotation (Line(
       points={{-93,40},{-80,40},{-80,46.5},{-71.1,46.5}},
       color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-75.4,75.6},{-50,75.6},{-50,49.8},{-11.1,49.8}},
+      points={{-75.4,75.6},{-46,75.6},{-46,69},{-26,69},{-26,68.8},{-6.1,68.8}},
       color={255,128,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
-      points={{-93,40},{-11.1,40},{-11.1,43.65}},
+      points={{-93,40},{-6.1,40},{-6.1,62.65}},
       color={0,0,127}));
-  connect(Source_TsetC.y, idealHeaterCooler.setPointCool) annotation (Line(
-        points={{3.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));
   connect(Room.thermRoom,idealHeaterCooler.heatCoolRoom)  annotation (Line(
-      points={{9.06,37.5},{9.06,19},{30,19},{30,-28},{25,-28}},
+      points={{14.06,56.5},{14.06,-16},{10,-16},{10,-33},{3,-33}},
       color={191,0,0}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
-      points={{-55,10},{5.28,10},{5.28,17.82}},
+      points={{-79,-22},{-48,-22},{-48,-10},{10.28,-10},{10.28,36.82}},
       color={191,0,0}));
-  connect(Source_InternalGains_convective.y, InternalGains_convective.Q_flow)
-    annotation (Line(
-      points={{-98.35,-24.5},{-93,-24.5},{-93,-23},{-92,-23},{-92,-24},{-91,-24}},
-      color={0,0,127}));
 
-  connect(Source_InternalGains_radiative.y, InternalGains_radiative.Q_flow)
-    annotation (Line(
-      points={{-99.4,-52},{-92,-52}},
-      color={0,0,127}));
   connect(InternalGains_convective.port, Room.thermRoom) annotation (Line(
-      points={{-71,-24},{-50,-24},{-50,-14},{6,-14},{6,37.5},{9.06,37.5}},
+      points={{-79,-44},{-48,-44},{-48,-10},{6,-10},{6,56.5},{14.06,56.5}},
       color={191,0,0}));
   connect(InternalGains_radiative.port, Room.starRoom) annotation (Line(
-      points={{-72,-52},{-60,-52},{-60,-24},{-50,-24},{-50,-14},{15.36,-14},{15.36,
-          37.5}},
+      points={{-79,-69},{-48,-69},{-48,-10},{20.36,-10},{20.36,56.5}},
       color={191,0,0}));
-  connect(Source_TsetHeat.y[1], idealHeaterCooler.setPointHeat) annotation (
-      Line(points={{25.35,-43.5},{18.2,-43.5},{18.2,-31.2}},
-                                                         color={0,0,127}));
-  connect(integrator1.y, AnnualHeatingLoad)
-    annotation (Line(points={{82.55,50},{87,50},{100,50}}, color={0,0,127}));
-  connect(integrator.y, AnnualCoolingLoad)
-    annotation (Line(points={{82.55,32},{90,32},{100,32}}, color={0,0,127}));
   connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-59,46.5},
-          {-37,46.5},{-37,57.59},{-9,57.59}}, color={191,0,0}));
-  connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{-11.1,
-          51.7475},{-21,51.7475},{-21,-43.5},{-26.35,-43.5}}, color={0,0,127}));
+          {-46,46.5},{-46,76.59},{-4,76.59}}, color={191,0,0}));
+  connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{-6.1,
+          70.7475},{-20,70.7475},{-20,-28.5},{-28.35,-28.5}}, color={0,0,127}));
+  connect(HeatingPower.y, integrator1.u)
+    annotation (Line(points={{65,64},{69.9,64}}, color={0,0,127}));
+  connect(integrator1.y, to_kWh.u)
+    annotation (Line(points={{82.55,64},{87.8,64}}, color={0,0,127}));
+  connect(to_kWh.y, AnnualHeatingLoad)
+    annotation (Line(points={{101.6,64},{121,64}},color={0,0,127}));
+  connect(integrator.u, CoolingPower.y)
+    annotation (Line(points={{70.9,47},{65,47}}, color={0,0,127}));
+  connect(integrator.y, to_kWh1.u) annotation (Line(points={{83.55,47},{82,47},
+          {82,47.5},{88.9,47.5}},color={0,0,127}));
+  connect(Tset_Cooler.y, from_degC.u)
+    annotation (Line(points={{-26.45,-68.5},{-23.1,-68.5}},
+                                                          color={0,0,127}));
+  connect(from_degC.y, idealHeaterCooler.setPointCool) annotation (Line(points={{-10.45,
+          -68.5},{-8.4,-68.5},{-8.4,-36.2}},      color={0,0,127}));
+  connect(HeatingPower.y, multiSum.u[1]) annotation (Line(points={{65,64},{66,
+          64},{66,33.75},{83,33.75}}, color={0,0,127}));
+  connect(PowerLoad, PowerLoad)
+    annotation (Line(points={{121,32},{121,32}}, color={0,0,127}));
+  connect(Source_InternalGains.y, radiativeInternalGains.u) annotation (Line(
+        points={{-132.35,-50.5},{-128,-50.5},{-128,-44},{-124,-44}}, color={0,0,
+          127}));
+  connect(radiativeInternalGains.y, InternalGains_convective.Q_flow)
+    annotation (Line(points={{-112.5,-44},{-99,-44}}, color={0,0,127}));
+  connect(Source_InternalGains.y, convectiveInternalGains.u) annotation (Line(
+        points={{-132.35,-50.5},{-128,-50.5},{-128,-69},{-123,-69}}, color={0,0,
+          127}));
+  connect(convectiveInternalGains.y, InternalGains_radiative.Q_flow)
+    annotation (Line(points={{-111.5,-69},{-99,-69}}, color={0,0,127}));
+  connect(CoolingPower.y, multiSum.u[2]) annotation (Line(points={{65,47},{66,
+          47},{66,30.25},{83,30.25}}, color={0,0,127}));
+  connect(to_kWh1.y, AnnualCoolingLoad) annotation (Line(points={{101.55,47.5},
+          {121,47.5},{121,48}}, color={0,0,127}));
+  connect(multiSum.y, gain.u) annotation (Line(points={{93.85,32},{97,32},{97,
+          31.5},{98.3,31.5}}, color={0,0,127}));
+  connect(gain.y, PowerLoad) annotation (Line(points={{106.35,31.5},{112.675,
+          31.5},{112.675,32},{121,32}}, color={0,0,127}));
+  connect(Source_TsetHeat.y[1], idealHeaterCooler.setPointHeat) annotation (
+      Line(points={{21.35,-68.5},{-3.8,-68.5},{-3.8,-36.2}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
         grid={1,1}), graphics={
+        Text(
+          extent={{-56,-2},{12,-10}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Building physics"),
         Rectangle(
-          extent={{-48,90},{48,-10}},
+          extent={{-47,90},{41,-11}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-116,-13},{-60,-70}},
+          extent={{-150,-11},{-48,-99}},
           lineColor={0,0,127},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{50,90},{120,-100}},
+          extent={{41,90},{120,-99}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-150,90},{-50,-10}},
+          extent={{-150,90},{-47,-11}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),Text(
-          extent={{-150,20},{-122,4}},
+          extent={{-146,17},{-118,1}},
           lineColor={0,0,255},
-          textString="1 - Direct normal irradiance in W/m2
-2 - global horizontal
-     radiance in W/m2
+          textString="1 - Direct normal
+     irradiance [W/m2]
+2 - global horizontal 
+     radiance in [W/m2]
 "),     Text(
           extent={{-147,-2},{-79,-10}},
           lineColor={0,0,255},
@@ -183,35 +241,35 @@ equation
                                          Text(
           extent={{-148,48},{-116,30}},
           lineColor={0,0,255},
-          textString="1 - Air Temperature in K
-2 - Wind Speed m/s
-3- Dew Point Temperature in K
+          textString="1 - Air Temp [K]
+2 - Wind Speed [m/s]
+3- Dew Point Temp [K]
 4- Cloud Cover"),
         Text(
-          extent={{35,-91},{96,-99}},
+          extent={{26,-91},{87,-99}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Outputs"),
         Rectangle(
-          extent={{-50,-14},{47,-64}},
+          extent={{-48,-11},{41,-99}},
           lineColor={0,0,127},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-54,-55},{7,-63}},
+          extent={{-55,-90},{6,-98}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="HVAC system"),
         Text(
-          extent={{-125,-61},{-68,-68}},
+          extent={{-157,-90},{-100,-97}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Internal gains"),
         Text(
-          extent={{-56,0},{12,-8}},
+          extent={{-54,0},{14,-8}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,

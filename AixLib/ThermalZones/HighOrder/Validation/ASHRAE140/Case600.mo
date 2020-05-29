@@ -34,24 +34,51 @@ model Case600
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(
-    calcMethodIn=3,
+    calcMethodIn=2,
     calcMethodOut=2,
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
     outerWall_South(
-      calcMethodIn=3,
+      calcMethodIn=2,
                     heatTransfer_Outside(calcMethod=2), windowSimple(redeclare
           model correctionSolarGain =
             Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140),
-      Wall(heatConv(calcMethod=3))),
+      Wall(
+        surfaceOrientation=1,
+        calcMethod=2,
+           heatConv(calcMethod=2, surfaceOrientation=1))),
     ceiling(ISOrientation=3,
-      calcMethodIn=3,        heatTransfer_Outside(calcMethod=2)),
-    outerWall_West(calcMethodIn=3,
-                   heatTransfer_Outside(calcMethod=2)),
-    outerWall_North(calcMethodIn=3,
-                    heatTransfer_Outside(calcMethod=2)),
-    outerWall_East(calcMethodIn=3,
-                   heatTransfer_Outside(calcMethod=2)),
-    floor(ISOrientation=2, calcMethodIn=3),
+      calcMethodIn=2,        heatTransfer_Outside(calcMethod=2),
+      Wall(
+        surfaceOrientation=3,
+        calcMethod=2,
+        heatConv(calcMethod=2, surfaceOrientation=3))),
+    outerWall_West(
+      calcMethodIn=2,
+                   heatTransfer_Outside(calcMethod=2),
+      Wall(
+        surfaceOrientation=1,
+        calcMethod=2,
+        heatConv(calcMethod=2, surfaceOrientation=1))),
+    outerWall_North(
+      calcMethodIn=2,
+                    heatTransfer_Outside(calcMethod=2),
+      Wall(
+        surfaceOrientation=1,
+        calcMethod=2,
+        heatConv(calcMethod=2, surfaceOrientation=1))),
+    outerWall_East(
+      calcMethodIn=2,
+                   heatTransfer_Outside(calcMethod=2),
+      Wall(
+        surfaceOrientation=1,
+        calcMethod=2,
+        heatConv(calcMethod=2, surfaceOrientation=1))),
+    floor(ISOrientation=2,
+      calcMethodIn=2,
+      Wall(
+        surfaceOrientation=2,
+        calcMethod=2,
+        heatConv(calcMethod=2, surfaceOrientation=2))),
     redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)                         annotation (Placement(transformation(extent={{-4,36},
             {38,77}})));
 
