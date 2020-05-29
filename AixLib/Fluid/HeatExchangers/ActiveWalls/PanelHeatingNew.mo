@@ -2838,7 +2838,8 @@ Added documentation.</li>
 
     package Calculating_q
       extends Modelica.Icons.UtilitiesPackage;
-      function DIN1642_4a "Calculation of q for Type A and C"
+      function K_H
+        "Coefficient of heat transfer for panel heating Type A and C"
 
        input Modelica.SIunits.CoefficientOfHeatTransfer B "system dependent coefficient in W/(m^(2)*K)";
        input Real a_B "factor for flooring";
@@ -2848,16 +2849,13 @@ Added documentation.</li>
        input Real m_u "m_u = f(thickness of screed coverage s_u)";
        input Real a_D "factor for outer diameter of pipe";
        input Real m_D "m_D = f(outer Diameter D)";
-       input Modelica.SIunits.TemperatureDifference dT_H "temperature difference between heated pipe and room";
 
-       output Modelica.SIunits.HeatFlux q;
-
-
+       output Modelica.SIunits.CoefficientOfHeatTransfer K_H;
 
       algorithm
-        q := B * a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D) * dT_H;
+        K_H := B * a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D);
 
-      end DIN1642_4a;
+      end K_H;
 
       function logDT
 
@@ -2882,6 +2880,79 @@ Added documentation.</li>
 <p>Calculation of the logarithmic over temperature. </p>
 </html>"));
       end logDT;
+
+      model Calculating_q
+        "Merge of all functions to calculate q by typing in needed parameters"
+        parameter Modelica.SIunits.Distance T = 0.1 "Spacing between tubes in m";
+        parameter Modelica.SIunits.Diameter D = 0.1 "Outer diameter of pipe, including sheathing in m";
+        parameter Modelica.SIunits.Thickness s_u = 0.01 "thickness of screed above pipe in m";
+        parameter Modelica.SIunits.CoefficientOfHeatTransfer lambda_R = 0.35 "Coefficient of heat transfer of pipe material";
+        parameter Modelica.SIunits.Thickness s_R = 0.002 "thickness of pipe wall in m";
+        parameter Modelica.SIunits.ThermalInsulance R_lambdaB "Thermal resistance of flooring in W/(m^2*K)";
+        parameter Modelica.SIunits.ThermalConductivity lambda_E "Thermal Conductivity of screed";
+
+        Modelica.SIunits.CoefficientOfHeatTransfer B = 6.7 "system dependent coefficient in W/(m^2*K)";
+
+        Modelica.SIunits.CoefficientOfHeatTransfer alpha = 10.8;
+        Modelica.SIunits.ThermalConductivity lambda_u0 = 1;
+        Modelica.SIunits.Diameter s_u0 = 0.045;
+        Real a_B;
+        Real a_T = 1;
+        Real a_u = 1;
+        Real a_D = 1;
+
+          Real m_T;
+        Real m_u;
+        Real m_D;
+
+        Modelica.SIunits.Thickness s_uStar;
+
+        Modelica.SIunits.CoefficientOfHeatTransfer K_H;
+        Modelica.SIunits.CoefficientOfHeatTransfer K_H0 = 1;
+        Modelica.SIunits.TemperatureDifference dT_H = 1;
+
+        Modelica.SIunits.HeatFlux q;
+
+
+
+      equation
+        a_B = (1 / alpha + s_u0 / lambda_u0) / (1 / alpha + s_u0 / lambda_E + R_lambdaB);
+
+        m_T = 1 - T / 0.075;
+        assert(T > 0.375, "Pipe spacing > 0.375,calculation with equation 9 p. 9");
+        assert(T <0.05, "Pipe spacing too low, 0.050 <= T <= 0.375");
+
+        m_u = 100 * (0.045 - s_u);
+        assert(s_u < 0.01, "thickness of screed too low, s_u => 0.010");
+
+        m_D = 250 * (D - 0.02);
+        assert(D < 0.008, "Outer diameter too low, 0.008 <= D <= 0.030");
+        assert(D > 0.03, "Outer diametr too high, 0.008 <= D <= 0.030");
+
+        if T > 0.2 then
+          s_uStar = 0.5 * T;
+        else
+          s_uStar = 0.1;
+        end if;
+
+      if s_u > s_uStar then
+        K_H = 1 / ( (1 / K_H0) + ((s_u - s_uStar) / lambda_E));
+        else
+        if T > 0.375 then
+          K_H = 5;
+        else
+          K_H = B * a_B * a_T^(m_T) * a_u ^(m_u) * a_D ^(m_D);
+        end if;
+      end if;
+
+        q = K_H * dT_H;
+
+
+
+
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+              coordinateSystem(preserveAspectRatio=false)));
+      end Calculating_q;
     end Calculating_q;
   end AddParameters;
 end PanelHeatingNew;
