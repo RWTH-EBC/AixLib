@@ -81,12 +81,10 @@ model PlugFlowPipeZeta
     "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
     annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
 
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(Evaluate=true, Dialog(tab="Advanced"));
-
   parameter Boolean linearized = false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
+
 
   Modelica.SIunits.Velocity v_water;
 
@@ -113,7 +111,6 @@ model PlugFlowPipeZeta
     final thickness=thickness,
     final roughness=roughness,
     final allowFlowReversal=allowFlowReversal,
-    final homotopyInitialization=homotopyInitialization,
     final linearized=linearized) "Describing the pipe behavior"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -169,7 +166,6 @@ public
     zeta=sum_zetas,
     allowFlowReversal=allowFlowReversal,
     from_dp=from_dp,
-    homotopyInitialization=homotopyInitialization,
     linearized=linearized,
     m_flow_start=m_flow_start) if use_zeta
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));

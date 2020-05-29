@@ -19,8 +19,8 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
-                                                "Blackbox model of refrigerant cycle of a thermal machine"
+  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
+    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
     annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
@@ -205,7 +205,6 @@ partial model PartialReversibleThermalMachine
     final use_cap=use_conCap,
     final X_start=XCon_start,
     final from_dp=from_dp,
-    final homotopyInitialization=homotopyInitialization,
     final massDynamics=massDynamics,
     final energyDynamics=energyDynamics,
     final is_con=true,
@@ -228,7 +227,6 @@ partial model PartialReversibleThermalMachine
     final p_start=pEva_start,
     final X_start=XEva_start,
     final from_dp=from_dp,
-    final homotopyInitialization=homotopyInitialization,
     final massDynamics=massDynamics,
     final energyDynamics=energyDynamics,
     final is_con=false,

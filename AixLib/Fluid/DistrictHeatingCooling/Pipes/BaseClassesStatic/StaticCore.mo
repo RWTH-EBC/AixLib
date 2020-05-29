@@ -52,8 +52,6 @@ model StaticCore
   parameter Real ReC=4000
     "Reynolds number where transition to turbulent starts";
 
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(Evaluate=true, Dialog(tab="Advanced"));
   parameter Boolean linearized = false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
@@ -70,7 +68,6 @@ model StaticCore
     final v_nominal=v_nominal,
     final allowFlowReversal=allowFlowReversal,
     final show_T=false,
-    final homotopyInitialization=homotopyInitialization,
     final linearized=linearized,
     dp(nominal=fac*200*length))
                  "Pressure drop calculation for this pipe"

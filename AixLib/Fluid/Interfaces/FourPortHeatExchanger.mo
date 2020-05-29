@@ -71,7 +71,8 @@ model FourPortHeatExchanger
     "Heat flow rate into medium 2";
 
   replaceable AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort vol1[nNodes](
-    each V = m1_flow_nominal*tau1/rho1_nominal/nNodes) constrainedby MixingVolumes.BaseClasses.PartialMixingVolume(
+    each V = m1_flow_nominal*tau1/rho1_nominal/nNodes) constrainedby
+    MixingVolumes.BaseClasses.PartialMixingVolume(
     redeclare final package Medium = Medium1,
     each nPorts=2,
     each V=m1_flow_nominal*tau1/rho1_nominal,
@@ -91,7 +92,8 @@ model FourPortHeatExchanger
       __Dymola_choicesAllMatching=true);
 
   replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2[nNodes](
-    each V = m2_flow_nominal*tau2/rho2_nominal/nNodes) constrainedby MixingVolumes.BaseClasses.PartialMixingVolume(
+    each V = m2_flow_nominal*tau2/rho2_nominal/nNodes) constrainedby
+    MixingVolumes.BaseClasses.PartialMixingVolume(
     redeclare final package Medium = Medium2,
     each nPorts=2,
     each V=m2_flow_nominal*tau2/rho2_nominal,
@@ -120,7 +122,6 @@ model FourPortHeatExchanger
     final show_T=false,
     final from_dp=from_dp1,
     final linearized=linearizeFlowResistance1,
-    final homotopyInitialization=homotopyInitialization,
     final dp_nominal=dp1_nominal) "Flow resistance of fluid 1"
     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
 
@@ -132,7 +133,6 @@ model FourPortHeatExchanger
     final show_T=false,
     final from_dp=from_dp2,
     final linearized=linearizeFlowResistance2,
-    final homotopyInitialization=homotopyInitialization,
     final dp_nominal=dp2_nominal) "Flow resistance of fluid 2"
     annotation (Placement(transformation(extent={{80,-70},{60,-50}})));
 
