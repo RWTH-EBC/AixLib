@@ -69,8 +69,9 @@ block SecurityControl "Block including all security levels"
 
   DefrostControl defrostControl(
     final minIceFac=minIceFac,
-    use_chiller=use_chiller,
-    calcPel_deFro=calcPel_deFro) if use_deFro
+    final deltaIceFac=deltaIceFac,
+    final use_chiller=use_chiller,
+    final calcPel_deFro=calcPel_deFro) if use_deFro
     annotation (Placement(transformation(extent={{-112,-16},{-76,14}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrDef if not use_deFro
     "No 2. Layer"
