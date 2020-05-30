@@ -223,7 +223,7 @@ model HPSystemController
         extent={{14,-14},{-14,14}},
         rotation=90,
         origin={-60,-114})));
-  Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
+  Modelica.Blocks.Math.MultiSum multiSum(k=fill(1, if not use_chiller and use_deFro then 2 else 1), nu=if not use_chiller and use_deFro then 2 else 1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
   AixLib.DataBase.HeatPump.PerformanceData.IcingBlock
     icingBlock(redeclare final function iceFunc =
@@ -287,7 +287,7 @@ equation
   connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-56,70},
           {-56,72},{-48,72},{-48,72.4},{-48.6,72.4}},
                                  color={0,0,127}));
-  connect(securityControl.Pel_deFro, multiSum.u[1]) annotation (Line(
+  connect(securityControl.Pel_deFro, multiSum.u[2]) annotation (Line(
       points={{49.6667,20},{54,20},{54,26},{-80,26},{-80,70},{-78,70}},
       color={0,0,127},
       pattern=LinePattern.Dash));
