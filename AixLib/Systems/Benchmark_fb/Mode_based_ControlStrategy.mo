@@ -391,10 +391,10 @@ Controller")}),
         Line(points={{60.6,-34},{80,-34},{80,-120},{-40,-120},{-40,128.216}},
                                                                            color = {255, 0, 255}));
       connect(u[2], controller_HTSSystem1.HTS_Heating_I) annotation (
-        Line(points={{-40,144.865},{-40,116},{-68.6,116}},
+        Line(points={{-40,144.865},{-40,118},{-68.6,118}},
                                                         color = {255, 0, 255}));
       connect(u[3], controller_HTSSystem1.HTS_Heating_II) annotation (
-        Line(points={{-40,144.108},{-40,104},{-68.6,104}},
+        Line(points={{-40,144.108},{-40,102},{-68.6,102}},
                                                         color = {255, 0, 255}));
       connect(mainBus.htsBus, controller_HTSSystem1.highTempSystemBus1)
         annotation (Line(
@@ -5296,7 +5296,8 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
         Placement(visible = true, transformation(extent={{20,40},{40,60}},      rotation = 0)));
       Modelica.Blocks.Sources.Constant TChpSet(final k = T_chp_set) annotation (
         Placement(visible = true, transformation(extent={{20,-60},{40,-40}},      rotation = 0)));
-      AixLib.Controls.Continuous.LimPID PIDBoiler(Td = 0, Ti = 60, controllerType = Modelica.Blocks.Types.SimpleController.PID, k = 0.01, reverseAction = false, strict = true, yMax = 1, yMin = 0) annotation (
+      AixLib.Controls.Continuous.LimPID PIDBoiler(Td = 0, Ti = 60, controllerType = Modelica.Blocks.Types.SimpleController.PID,
+        k=0.01,                                                                                                                           reverseAction = false, strict = true, yMax = 1, yMin = 0) annotation (
         Placement(visible = true, transformation(extent={{-60,40},{-40,60}},     rotation = 0)));
       Modelica.Blocks.Sources.Constant TBoilerSet_out(final k = T_boi_set) annotation (
         Placement(visible = true, transformation(extent={{-90,40},{-70,60}},     rotation = 0)));
@@ -5316,8 +5317,8 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
         Placement(visible = true, transformation(origin={-80,10},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Logical.Switch switch1
         annotation (Placement(transformation(extent={{-20,20},{0,40}})));
-      Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(visible
-            =true, transformation(extent={{-90,-40},{-70,-20}}, rotation=0)));
+      Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(visible=
+             true, transformation(extent={{-90,-40},{-70,-20}}, rotation=0)));
     equation
       connect(rpmPumps.y, highTempSystemBus1.pumpBoilerBus.pumpBus.rpmSet) annotation (
         Line(points={{41,50},{60,50},{60,0},{100.05,0},{100.05,0.05}},                      color = {0, 0, 127}));
@@ -5723,11 +5724,14 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
         Placement(visible = true, transformation(origin = {90, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Sources.Constant ConstVflow(k = VFlowSet) annotation (
         Placement(visible = true, transformation(origin = {-80, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Controls.Continuous.LimPID PID_Hot(Nd = 10, Ni = 0.9, Td = Td_Hot, Ti = Ti_Hot, initType = Modelica.Blocks.Types.InitPID.InitialState, k = k_Hot, reverseAction = true, strict = true, wd = 0, wp = 1, xd_start = xd_start_Hot, xi_start = xi_start_Hot, yMax = 1, yMin = 0, y_start = y_start_Hot) annotation (
+      AixLib.Controls.Continuous.LimPID PID_Hot(Nd = 10, Ni = 0.9, Td = Td_Hot, Ti = Ti_Hot,
+        initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,                                                                     k = k_Hot, reverseAction = true, strict = true, wd = 0, wp = 1, xd_start = xd_start_Hot, xi_start = xi_start_Hot, yMax = 1, yMin = 0, y_start = y_start_Hot) annotation (
         Placement(visible = true, transformation(origin = {-20, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Controls.Continuous.LimPID PID_Cold(Nd = 10, Ni = 0.9, Td = Td_Cold, Ti = Ti_Cold, initType = Modelica.Blocks.Types.InitPID.InitialState, k = k_Cold, strict = true, wd = 0, wp = 1, xd_start = xd_start_Cold, xi_start = xi_start_Cold, yMax = 1, yMin = 0, y_start = y_start_Cold) annotation (
+      AixLib.Controls.Continuous.LimPID PID_Cold(Nd = 10, Ni = 0.9, Td = Td_Cold, Ti = Ti_Cold,
+        initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,                                                                        k = k_Cold, strict = true, wd = 0, wp = 1, xd_start = xd_start_Cold, xi_start = xi_start_Cold, yMax = 1, yMin = 0, y_start = y_start_Cold) annotation (
         Placement(visible = true, transformation(origin = {-20, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Controls.Continuous.LimPID PID_Fan(Nd = 10, Ni = 0.9, Td = 0, Ti = Ti_Fan, initType = Modelica.Blocks.Types.InitPID.InitialOutput, k = k_Fan, reset = AixLib.Types.Reset.Disabled, strict = true, wd = 0, wp = 1, yMax = 1, yMin = 0, y_start = yStart) annotation (
+      AixLib.Controls.Continuous.LimPID PID_Fan(Nd = 10, Ni = 0.9, Td = 0, Ti = Ti_Fan,
+        initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,                                                                 k = k_Fan, reset = AixLib.Types.Reset.Disabled, strict = true, wd = 0, wp = 1, yMax = 1, yMin = 0, y_start = yStart) annotation (
         Placement(visible = true, transformation(origin = {-40, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       connect(genericAHUBus1.heaterBus.hydraulicBus.TFwrdOutMea, PID_Hot.u_m) annotation (

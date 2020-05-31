@@ -8,7 +8,7 @@ package CCCS
       Placement(visible = true, transformation(origin={40,30},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.RBF RBF(i = 0.05, t = 1) annotation (
       Placement(visible = true, transformation(origin={0,90},      extent = {{-10, -10}, {10, 10}}, rotation=0)));
-    Modelica.Blocks.Math.MultiSum OperationalCosts(k = {1, 1, 1, 1}, nu = 4) annotation (
+    Modelica.Blocks.Math.MultiSum OperationalCosts(k={1,1,1},        nu=3)   annotation (
       Placement(visible = true, transformation(extent={{8,18},{20,30}},         rotation = 0)));
     Modelica.Blocks.Math.Add OverallCost annotation (
       Placement(visible = true, transformation(extent={{70,-10},{90,10}},      rotation = 0)));
@@ -33,10 +33,6 @@ package CCCS
     Components.InvestmentCostsComponents investmentCostsComponents(k_Investment=
          0)
       annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
-    AixLib.Systems.Benchmark_fb.CCCS.Components.LifespanReductionCosts
-      lifespanReductionCosts_2_1( simTime=simulation_time)
-                                                          annotation (Placement(visible=true,
-          transformation(extent={{-62,-12},{-40,10}},rotation=0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.EnergyCosts energyCosts1
       annotation (Placement(visible=true, transformation(
           origin={-52,90},
@@ -49,13 +45,11 @@ package CCCS
           rotation=0)));
   equation
     connect(energyCosts1.EnergyCost, OperationalCosts.u[1]) annotation (
-      Line(points={{-41,90},{-20,90},{-20,28},{4,28},{4,27.15},{8,27.15}},                    color = {0, 0, 127}));
+      Line(points={{-41,90},{-20,90},{-20,28},{4,28},{4,26.8},{8,26.8}},                      color = {0, 0, 127}));
     connect(emissionsCosts1.Emission_Cost, OperationalCosts.u[3]) annotation (
-      Line(points={{-39,60},{-20,60},{-20,22.95},{8,22.95}},            color = {0, 0, 127}));
-    connect(lifespanReductionCosts_2_1.y, OperationalCosts.u[4]) annotation (
-      Line(points={{-39.4923,-1},{-20,-1},{-20,20.85},{8,20.85}},             color = {0, 0, 127}));
+      Line(points={{-39,60},{-20,60},{-20,21.2},{8,21.2}},              color = {0, 0, 127}));
     connect(performanceReductionCosts1.PRC, OperationalCosts.u[2]) annotation (
-      Line(points={{-39,22},{0,22},{0,24},{4,24},{4,25.05},{8,25.05}},  color = {0, 0, 127}));
+      Line(points={{-39,22},{0,22},{0,24},{4,24},{4,24},{8,24}},        color = {0, 0, 127}));
     connect(OperationalCosts.y, product1.u2) annotation (
       Line(points={{21.02,24},{28,24}},      color = {0, 0, 127}));
     connect(RBF.RBF, product1.u1) annotation (
@@ -71,10 +65,6 @@ package CCCS
     connect(OverallCost.y, OverallCosts_Output) annotation (
       Line(points={{91,0},{108,0}},      color = {0, 0, 127}));
 
-    connect(mainBus, lifespanReductionCosts_2_1.mainBus) annotation (Line(
-        points={{-100,0},{-68,0},{-68,-0.5875},{-62,-0.5875}},
-        color={255,204,51},
-        thickness=0.5));
     connect(mainBus, performanceReductionCosts1.mainBus) annotation (Line(
         points={{-100,0},{-100,30},{-60.2,30}},
         color={255,204,51},
