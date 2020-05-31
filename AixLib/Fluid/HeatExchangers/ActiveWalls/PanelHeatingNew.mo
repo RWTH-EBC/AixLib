@@ -2728,6 +2728,12 @@ Added documentation.</li>
         annotation (Placement(transformation(extent={{-10,84},{10,104}})));
       Utilities.Interfaces.ConvRadComb convRadComb_ceiling
         annotation (Placement(transformation(extent={{-10,-104},{10,-84}})));
+      Calculating_q.Calculating_q calculating_q(
+        lambda_M=0.3,
+        R_lambdaB=0.1,
+        dT_H=dT_H,
+        D=0.01)
+        annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
     equation
       connect(port_a, TFlow.port_a)
         annotation (Line(points={{-100,0},{-58,0}}, color={0,127,255}));
@@ -2883,14 +2889,21 @@ Added documentation.</li>
       model Calculating_q
         "Merge of all functions to calculate q by typing in needed parameters"
         parameter Modelica.SIunits.Distance T = 0.1 "Spacing between tubes in m";
-        parameter Modelica.SIunits.Diameter D = 0.1 "Outer diameter of pipe, including sheathing in m";
+        parameter Modelica.SIunits.Diameter D = 0.01 "Outer diameter of pipe, including insulating in m";
+        parameter Boolean withInsulating = false;
+        parameter Modelica.SIunits.Diameter d_a = 0.1 "outer diameter of pipe without insulating in m";
+        Modelica.SIunits.Diameter d_M = D "Outer diameter of insulating in m";
+        parameter Modelica.SIunits.CoefficientOfHeatTransfer lambda_M = 0.2 "Coefficient of heat transfer for insulating";
         parameter Modelica.SIunits.Thickness s_u = 0.01 "thickness of screed above pipe in m";
         parameter Modelica.SIunits.CoefficientOfHeatTransfer lambda_R = 0.35 "Coefficient of heat transfer of pipe material";
+        Modelica.SIunits.CoefficientOfHeatTransfer lambda_R0 = lambda_R "Coeffieicnt of heat transfer of pipe";
         parameter Modelica.SIunits.Thickness s_R = 0.002 "thickness of pipe wall in m";
-        parameter Modelica.SIunits.ThermalInsulance R_lambdaB "Thermal resistance of flooring in W/(m^2*K)";
+        Modelica.SIunits.Thickness s_R0 = s_R;
+        parameter Modelica.SIunits.ThermalInsulance R_lambdaB = 0.1 "Thermal resistance of flooring in W/(m^2*K)";
         parameter Modelica.SIunits.ThermalConductivity lambda_E = 1.2 "Thermal Conductivity of screed";
 
-        Modelica.SIunits.CoefficientOfHeatTransfer B = 6.7 "system dependent coefficient in W/(m^2*K)";
+        Modelica.SIunits.CoefficientOfHeatTransfer B( start = 6.7) "system dependent coefficient in W/(m^2*K)";
+        Modelica.SIunits.CoefficientOfHeatTransfer B_0 = 6.7 "system dependent coefficient for lambda_R0 = 0.35 W/(m.K) abd s_R0 = 0.002 m";
 
         Modelica.SIunits.CoefficientOfHeatTransfer alpha = 10.8;
         Modelica.SIunits.ThermalConductivity lambda_u0 = 1;
@@ -2898,7 +2911,7 @@ Added documentation.</li>
         Real a_B;
         Real a_T = Determine_aT.a_T;
         Real a_u = Determine_au.a_u;
-        Real a_D = 1;
+        Real a_D = Determine_aD.a_D;
 
         Real m_T;
         Real m_u;
@@ -2911,9 +2924,11 @@ Added documentation.</li>
 
         Modelica.SIunits.CoefficientOfHeatTransfer K_H;
         Modelica.SIunits.CoefficientOfHeatTransfer K_HStar;
-        Modelica.SIunits.TemperatureDifference dT_H = 1;
+        replaceable Modelica.SIunits.TemperatureDifference dT_H = 1;
 
         Modelica.SIunits.HeatFlux q;
+
+        import Modelica.Math.log;
 
 
 
@@ -2923,22 +2938,43 @@ Added documentation.</li>
         AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Calculating_q.a_u
           Determine_au(T=T, R=R_lambdaB)
           annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
+        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Calculating_q.a_D
+          Determine_aD(T=T, R=R_lambdaB)
+          annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
+        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Calculating_q.a_u
+          Determine_au375(R=R_lambdaB, T=0.375)
+          annotation (Placement(transformation(extent={{0,20},{20,40}})));
+        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Calculating_q.a_D
+          Determine_aD375(R=R_lambdaB, T=0.375)
+          annotation (Placement(transformation(extent={{0,-20},{20,0}})));
       equation
+
+
+        if lambda_R0 == 0.35 and s_R0 == 0.002 then
+          B = 6.7;
+        else
+         if withInsulating == false then
+          1 / B = 1 / B_0 + 1.1 / Modelica.Constants.pi * product_ai * T * ( 1 / 2 * lambda_R * log(d_a / (d_a - 2 * s_R)) - 1 / 2 * lambda_R0 * log(d_a / (d_a - 2 * s_R0)));
+          else
+          1 / B = 1 / B_0 + 1.1 / Modelica.Constants.pi * product_ai * T * ( 1 / 2 * lambda_M * log(d_M / d_a) + 1 / 2 * lambda_R * log(d_a / (d_a - 2 * s_R)) - 1 / 2 * lambda_R0 * log(d_M / (d_M - 2 * s_R0)));
+         end if;
+        end if;
+
+
         a_B = (1 / alpha + s_u0 / lambda_u0) / (1 / alpha + s_u0 / lambda_E + R_lambdaB);
 
         m_T = 1 - T / 0.075;
-        assert(T > 0.375, "Pipe spacing > 0.375,calculation with equation 9 p. 9");
-        assert(T <0.05, "Pipe spacing too low, 0.050 <= T <= 0.375");
+        assert(T >= 0.05 and T <= 0.375, "Pipe spacing for m_T should be between 0.05 and 0.375", AssertionLevel.warning);
 
         m_u = 100 * (0.045 - s_u);
-        assert(s_u < 0.01, "thickness of screed too low, s_u => 0.010");
+        assert(s_u >= 0.01, "thickness of screed too low, s_u => 0.010 for calculation of m_u", AssertionLevel.warning);
 
         m_D = 250 * (D - 0.02);
-        assert(D < 0.008, "Outer diameter too low, 0.008 <= D <= 0.030");
-        assert(D > 0.03, "Outer diametr too high, 0.008 <= D <= 0.030");
+        assert(D <= 0.08  and D >= 0.03, "Outer diameter should be between 0.008 <= D <= 0.030 for calculation of m_T", AssertionLevel.warning);
+
 
         product_ai =  a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D);
-        product_ai375 =  a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D);
+        product_ai375 =  a_B * a_T^(1-0.375/0.075) * Determine_au375.a_u^(m_u) * Determine_aD375.a_D^(m_D);
 
          if T > 0.2 then
           s_uStar = 0.5 * T;
@@ -2948,7 +2984,7 @@ Added documentation.</li>
 
          K_HStar = B * a_B * a_T^(m_T) * a_u^(100*(0.045-s_uStar)) * a_D^(m_D);
 
-      if s_u > s_uStar then
+      if s_u > s_uStar and s_u > 0.065 then
         K_H = 1 / ( (1 / K_HStar) + ((s_u - s_uStar) / lambda_E));
         else
         if T > 0.375 then
@@ -2961,9 +2997,7 @@ Added documentation.</li>
         q = K_H * dT_H;
 
 
-
-
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
       end Calculating_q;
 
@@ -3012,6 +3046,33 @@ Added documentation.</li>
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
       end a_u;
+
+      block a_D "Determine a_D following Table A.3 p. 30 DIN 1264-2"
+
+        parameter Modelica.SIunits.Distance T;
+        parameter Modelica.SIunits.ThermalInsulance R;
+        Modelica.Blocks.Tables.CombiTable2D Table_A3(table=[0.0,0,0.05,0.1,0.15;
+              0.05,1.013,1.013,1.012,1.011; 0.075,1.021,1.019,1.016,1.014; 0.1,
+              1.029,1.025,1.022,1.018; 0.15,1.04,1.034,1.029,1.024; 0.2,1.046,
+              1.04,1.035,1.03; 0.225,1.049,1.043,1.038,1.033; 0.3,1.053,1.049,
+              1.044,1.039; 0.375,1.056,1.051,1.046,1.042])
+          annotation (Placement(transformation(extent={{-14,-16},{18,16}})));
+        Modelica.Blocks.Sources.RealExpression Spacing(y=T)
+          annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
+        Modelica.Blocks.Sources.RealExpression R_lambdaB(y=R)
+          annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
+        Modelica.Blocks.Interfaces.RealOutput a_D
+          annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      equation
+        connect(Spacing.y,Table_A3. u1) annotation (Line(points={{-79,10},{-17.2,10},{
+                -17.2,9.6}}, color={0,0,127}));
+        connect(R_lambdaB.y,Table_A3. u2) annotation (Line(points={{-79,-10},{-17.2,-10},
+                {-17.2,-9.6}}, color={0,0,127}));
+        connect(Table_A3.y,a_D)
+          annotation (Line(points={{19.6,0},{100,0}}, color={0,0,127}));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+              coordinateSystem(preserveAspectRatio=false)));
+      end a_D;
     end Calculating_q;
   end AddParameters;
 end PanelHeatingNew;
