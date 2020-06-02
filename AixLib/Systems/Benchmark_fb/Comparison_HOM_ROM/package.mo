@@ -1,6 +1,6 @@
 within AixLib.Systems.Benchmark_fb;
-package Modularization
+package Comparison_HOM_ROM
   extends Modelica.Icons.ExamplesPackage;
 
 
-end Modularization;
+end Comparison_HOM_ROM;

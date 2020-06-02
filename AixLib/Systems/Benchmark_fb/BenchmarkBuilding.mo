@@ -71,7 +71,7 @@ model BenchmarkBuilding "Benchmark building model"
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
+        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
 
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -82,6 +82,7 @@ model BenchmarkBuilding "Benchmark building model"
     Cooler_on=false,
     nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{122,340},{154,368}})));
+
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -190,7 +191,7 @@ model BenchmarkBuilding "Benchmark building model"
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
+        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
 
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -201,11 +202,12 @@ model BenchmarkBuilding "Benchmark building model"
     Cooler_on=false,
     nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{240,340},{272,366}})));
+
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone3(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_ConferenceRoom(),
+        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_ConferenceRoom(),
 
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -216,11 +218,12 @@ model BenchmarkBuilding "Benchmark building model"
     Cooler_on=false,
     nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{346,338},{374,364}})));
+
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone4(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
+        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
 
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -231,11 +234,12 @@ model BenchmarkBuilding "Benchmark building model"
     Cooler_on=false,
     nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{444,338},{470,366}})));
+
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone5(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
-        Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice(),
+        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice(),
 
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -246,6 +250,7 @@ model BenchmarkBuilding "Benchmark building model"
     Cooler_on=false,
     nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{538,340},{568,370}})));
+
   ModularAHU.GenericAHU                genericAHU(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,

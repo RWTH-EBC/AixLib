@@ -5,91 +5,112 @@ package CCCS
   model Evaluation_CCCS
     parameter Real simulation_time=4838400;
     Modelica.Blocks.Math.Product product1 annotation (
-      Placement(visible = true, transformation(origin={40,30},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin={20,40},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.RBF RBF(i = 0.05, t = 1) annotation (
-      Placement(visible = true, transformation(origin={0,90},      extent = {{-10, -10}, {10, 10}}, rotation=0)));
+      Placement(visible = true, transformation(origin={-20,80},    extent = {{-10, -10}, {10, 10}}, rotation=0)));
     Modelica.Blocks.Math.MultiSum OperationalCosts(k={1,1,1},        nu=3)   annotation (
-      Placement(visible = true, transformation(extent={{8,18},{20,30}},         rotation = 0)));
+      Placement(visible = true, transformation(extent={{-26,34},{-14,46}},      rotation = 0)));
     Modelica.Blocks.Math.Add OverallCost annotation (
-      Placement(visible = true, transformation(extent={{70,-10},{90,10}},      rotation = 0)));
+      Placement(visible = true, transformation(extent={{50,-10},{70,10}},      rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.PerformanceReductionCosts
       performanceReductionCosts1( sim_time=simulation_time) annotation (Placement(visible=true,
           transformation(
-          origin={-50,30},
+          origin={-70,20},
           extent={{-10,-10},{10,10}},
           rotation=0)));
     Modelica.Blocks.Math.Add InvestmentCosts annotation (
-      Placement(visible = true, transformation(origin={40,-30},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin={-18,-70},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.InvestmentCostsStrategy
       investmentCostsStrategy1 annotation (Placement(visible=true,
           transformation(
-          origin={-50,-30},
+          origin={-70,-40},
           extent={{-10,-10},{10,10}},
           rotation=0)));
-    Modelica.Blocks.Interfaces.RealOutput OverallCosts_Output annotation (
-      Placement(transformation(extent = {{98, -10}, {118, 10}})));
     Benchmark.BaseClasses.MainBus mainBus annotation (
       Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
     Components.InvestmentCostsComponents investmentCostsComponents(k_Investment=
          0)
-      annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
+      annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
     AixLib.Systems.Benchmark_fb.CCCS.Components.EnergyCosts energyCosts1
       annotation (Placement(visible=true, transformation(
-          origin={-52,90},
+          origin={-70,80},
           extent={{-10,-10},{10,10}},
           rotation=0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.EmissionsCosts emissionsCosts1
       annotation (Placement(visible=true, transformation(
-          origin={-50,60},
+          origin={-70,52},
           extent={{-10,-10},{10,10}},
           rotation=0)));
+    BaseClasses.CCCSBus CCCSBus
+      annotation (Placement(transformation(extent={{78,-18},{118,18}})));
   equation
     connect(energyCosts1.EnergyCost, OperationalCosts.u[1]) annotation (
-      Line(points={{-41,90},{-20,90},{-20,28},{4,28},{4,26.8},{8,26.8}},                      color = {0, 0, 127}));
+      Line(points={{-59,80},{-40,80},{-40,42.8},{-26,42.8}},                                  color = {0, 0, 127}));
     connect(emissionsCosts1.Emission_Cost, OperationalCosts.u[3]) annotation (
-      Line(points={{-39,60},{-20,60},{-20,21.2},{8,21.2}},              color = {0, 0, 127}));
+      Line(points={{-59,52},{-40,52},{-40,37.2},{-26,37.2}},            color = {0, 0, 127}));
     connect(performanceReductionCosts1.PRC, OperationalCosts.u[2]) annotation (
-      Line(points={{-39,22},{0,22},{0,24},{4,24},{4,24},{8,24}},        color = {0, 0, 127}));
+      Line(points={{-59,12},{-40,12},{-40,40},{-26,40}},                color = {0, 0, 127}));
     connect(OperationalCosts.y, product1.u2) annotation (
-      Line(points={{21.02,24},{28,24}},      color = {0, 0, 127}));
+      Line(points={{-12.98,40},{0,40},{0,34},{8,34}},
+                                             color = {0, 0, 127}));
     connect(RBF.RBF, product1.u1) annotation (
-      Line(points={{11,90},{20,90},{20,36.5},{28,36.5},{28,36}},                        color = {0, 0, 127}));
+      Line(points={{-9,80},{0,80},{0,46},{8,46}},                                       color = {0, 0, 127}));
     connect(product1.y, OverallCost.u1) annotation (
-      Line(points={{51,30},{60,30},{60,6},{68,6}},                                         color = {0, 0, 127}));
+      Line(points={{31,40},{40,40},{40,6},{48,6}},                                         color = {0, 0, 127}));
     connect(InvestmentCosts.y, OverallCost.u2) annotation (
-      Line(points={{51,-30},{60,-30},{60,-6},{68,-6}},          color = {0, 0, 127}));
+      Line(points={{-7,-70},{40,-70},{40,-6},{48,-6}},          color = {0, 0, 127}));
     connect(investmentCostsComponents.y, InvestmentCosts.u2) annotation (
-      Line(points={{-39.4,-60},{20,-60},{20,-36},{28,-36}},           color = {0, 0, 127}));
+      Line(points={{-59.4,-70},{-40,-70},{-40,-76},{-30,-76}},        color = {0, 0, 127}));
     connect(investmentCostsStrategy1.kStrat, InvestmentCosts.u1) annotation (
-      Line(points={{-39.8,-30},{20,-30},{20,-24},{28,-24}},           color = {0, 0, 127}));
-    connect(OverallCost.y, OverallCosts_Output) annotation (
-      Line(points={{91,0},{108,0}},      color = {0, 0, 127}));
+      Line(points={{-59.8,-40},{-40,-40},{-40,-64},{-30,-64}},        color = {0, 0, 127}));
 
     connect(mainBus, performanceReductionCosts1.mainBus) annotation (Line(
-        points={{-100,0},{-100,30},{-60.2,30}},
+        points={{-100,0},{-100,20},{-80.2,20}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.evaBus.WelTotalMea, energyCosts1.WelTotal) annotation (Line(
-        points={{-99.95,0.05},{-100,0.05},{-100,90},{-64,90}},
+        points={{-99.95,0.05},{-100,0.05},{-100,80},{-82,80}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.evaBus.QbrTotalMea, energyCosts1.FuelTotal) annotation (
         Line(
-        points={{-99.95,0.05},{-102,0.05},{-102,2},{-100,2},{-100,82},{-64,82},
-            {-64,81}},
+        points={{-99.95,0.05},{-102,0.05},{-102,2},{-100,2},{-100,72},{-82,72},
+            {-82,71}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.evaBus.WelTotalMea, emissionsCosts1.WelTotal) annotation (
         Line(
         points={{-99.95,0.05},{-102,0.05},{-102,2},{-100,2},{-100,60},{-82,60},
-            {-82,61},{-62,61}},
+            {-82,53}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.evaBus.QbrTotalMea, emissionsCosts1.FuelTotal) annotation (
         Line(
-        points={{-99.95,0.05},{-100,0.05},{-100,54},{-62,54},{-62,53}},
+        points={{-99.95,0.05},{-100,0.05},{-100,54},{-82,54},{-82,45}},
         color={255,204,51},
         thickness=0.5));
+    connect(OverallCost.y, CCCSBus.CCCS)
+      annotation (Line(points={{71,0},{98,0}}, color={0,0,127}));
+    connect(energyCosts1.EnergyCost, CCCSBus.EnergyCosts) annotation (Line(
+          points={{-59,80},{-40,80},{-40,100},{100,100},{100,0},{98,0}}, color=
+            {0,0,127}));
+    connect(emissionsCosts1.Emission_Cost, CCCSBus.EmissionCosts) annotation (
+        Line(points={{-59,52},{-40,52},{-40,100},{100,100},{100,0},{98,0}},
+          color={0,0,127}));
+    connect(performanceReductionCosts1.PRC, CCCSBus.PerformanceReductionCosts)
+      annotation (Line(points={{-59,12},{-40,12},{-40,100},{100,100},{100,0},{
+            98,0}}, color={0,0,127}));
+    connect(investmentCostsStrategy1.kStrat, CCCSBus.InvestmenCostsStrategy)
+      annotation (Line(points={{-59.8,-40},{-40,-40},{-40,-100},{100,-100},{100,
+            -2},{98,-2},{98,0}}, color={0,0,127}));
+    connect(investmentCostsComponents.y, CCCSBus.InvestmentCostsComponents)
+      annotation (Line(points={{-59.4,-70},{-40,-70},{-40,-100},{100,-100},{100,
+            0},{98,0}}, color={0,0,127}));
+    connect(InvestmentCosts.y, CCCSBus.InvestmentCosts) annotation (Line(points
+          ={{-7,-70},{40,-70},{40,-100},{100,-100},{100,0},{98,0}}, color={0,0,
+            127}));
+    connect(product1.y, CCCSBus.OperationalCosts) annotation (Line(points={{31,
+            40},{40,40},{40,100},{100,100},{100,0},{98,0}}, color={0,0,127}));
     annotation (
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(fillColor = {215, 215, 215},
               fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
@@ -2448,5 +2469,25 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
                   Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
     end EnergyCounter2;
+
+    expandable connector CCCSBus
+      "Data bus for Cost Coefficient of Control Strategies (CCCS)"
+    extends Modelica.Icons.SignalBus;
+    import SI = Modelica.SIunits;
+
+    annotation (
+      Icon(graphics,
+           coordinateSystem(preserveAspectRatio=false)),
+      Diagram(graphics,
+              coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>Definition of a bus connector for the ERC Heatpump System.</p>
+</html>",   revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
+<li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
+</ul>
+</html>"));
+    end CCCSBus;
   end BaseClasses;
 end CCCS;

@@ -24,8 +24,10 @@ equation
       points={{0.59,-0.622222},{0.59,60},{0,60}},
       color={255,204,51},
       thickness=0.5));
-  connect(evaluation_CCCS.OverallCosts_Output, mainBus.CCCS) annotation (Line(
-        points={{40.8,30},{48,30},{48,60},{0,60}}, color={0,0,127}));
+  connect(evaluation_CCCS.CCCSBus, mainBus.CCCSBus) annotation (Line(
+      points={{39.8,30},{50,30},{50,60},{0,60}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Benchmark_MODI;
