@@ -59,14 +59,11 @@ For the implementation of the html_tidy errors.py the following step must be don
 
 [Create a GL_TOKEN](https://docs.gitlab.com/ce/user/profile/personal_access_tokens.html#creating-a-personal-access-token)
 
-### $Github_Repository 
-Add the owner/repo as Variable in Gitlab as Github_Repository(e.g. "RWTH-EBC/AixLib")
 
-### GITHUB_PRIVATE_KEY
-Add you Private Key as Variable GITHUB_PRIVATE_KEY. Also add your public key as deploy key in your github repository. 
 
-### GITHUB_API_TOKEN
-Add your github api Token as Variable GITHUB_API_TOKEN. The Variable is necessary for api function e.g. create a pull request. 
+
+$TARGET_BRANCH: Your current work branch.
+
 
 ![E.ON EBC RWTH Aachen University](../04_Documentation/Images/CreateNewBranch.png)
 

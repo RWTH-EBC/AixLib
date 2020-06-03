@@ -71,7 +71,10 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
     ut = u.Tester(tool=tool)
     ut.batchMode(batch)
     ut.setLibraryRoot(path)
-    if package is not None:
+    if package 
+
+
+	not None:
         ut.setSinglePackage(package)
     ut.setNumberOfThreads(n_pro)
     ut.pedanticModelica(False)
