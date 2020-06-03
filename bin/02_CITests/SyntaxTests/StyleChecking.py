@@ -76,9 +76,11 @@ class StyleCheck(object):
 		# Start CheckLibrary in ModelManagement
 		print("Start Style Check")
 		if self.Changedmodels == False:
+			print("test")
 			print("Check package or model "+ self.Package)
 			dymola.ExecuteCommand('ModelManagement.Check.checkLibrary(false, false, false, true, "'+self.Package+'", translationStructure=false);')
 			Logfile = self.Library.replace("package.mo",self.Package+"_StyleCheckLog.html")
+			model_list = self.Package
 		else:
 			changed_model_list=[]
 			list_mo_models = git_models(".mo",self.Package)
@@ -101,6 +103,7 @@ class StyleCheck(object):
 			Logfile = path+path_outfile
 		dymola.close()
 		print("Style Check Complete")
+		print(model_list)
 		return Logfile, model_list
 
 	def _StyleCheckLog_Check(self):
