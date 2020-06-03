@@ -1,16 +1,15 @@
 within AixLib.DataBase.Pipes.Insulation;
-record Iso0pc "No insulation"
+record Iso25pc "25% Insulation (thickness insulation = 0.25 x d_o)"
   extends InsulationBaseDataDefinition(
-    factor=0.001,
-    d=1000,
-    lambda=100,
-    c=1);
+    factor=0.25,
+    d=30,
+    lambda=0.04,
+    c=1400);
   // Constant chemical Values assumed
-  // neglectable heat capacity and resistance
 
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>0 % insulation. </p>
+<p>25 % insulation. Calculated according to: <i>thickness insulation = 1 x d_o</i></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <p>Record is used with <a href=\"AixLib.Fluid.FixedResistances.Pipe\">AixLib.Fluid.FixedResistances.Pipe</a></p>
 </html>",
@@ -21,4 +20,4 @@ Moved into AixLib</li>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul>
 </html>"));
-end Iso0pc;
+end Iso25pc;
