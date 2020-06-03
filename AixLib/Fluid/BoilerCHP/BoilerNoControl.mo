@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP;
+within AixLib.Fluid.BoilerCHP;
 model BoilerNoControl "Boiler model with physics only"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(final a=a),
                                      vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -188,17 +188,33 @@ equation
           color={28,108,200},
           thickness=1)}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>A boiler model consisting of physical components.The efficiency is based on the part load rate and the inflow water temperature.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <p>
-<br/>Assumptions for predefined parameter values (based on <i><a href=\"http://www.viessmann.com/web/netherlands/nl_tdis.nsf/39085ab6c8b4f206c1257195003fd054/8A84BA9E240BA23DC12575210055DB56/$file/5811_009-DE_Simplex-PS.pdf\">Vissmann data cheat</a></i>): 
+  A boiler model consisting of physical components.The efficiency is
+  based on the part load rate and the inflow water temperature.
 </p>
-<p>G: a heat loss of 0.3 % of nominal power at a temperature difference of 50 K to ambient is assumed.</p>
-<p>C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default.</p>
-</html>", revisions="<html>
+<p>
+  <br/>
+  Assumptions for predefined parameter values (based on <i><a href=
+  \"http://www.viessmann.com/web/netherlands/nl_tdis.nsf/39085ab6c8b4f206c1257195003fd054/8A84BA9E240BA23DC12575210055DB56/$file/5811_009-DE_Simplex-PS.pdf\">
+  Vissmann data cheat</a></i>):
+</p>
+<p>
+  G: a heat loss of 0.3 % of nominal power at a temperature difference
+  of 50 K to ambient is assumed.
+</p>
+<p>
+  C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal
+  power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus,
+  a value of 1.5 is used as default.
+</p>
 <ul>
-<li><i>September 19, 2019&nbsp;</i> by Alexander Kümpel:<br/>First implementation</li>
+  <li>
+    <i>September 19, 2019&#160;</i> by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end BoilerNoControl;

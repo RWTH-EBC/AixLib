@@ -371,23 +371,58 @@ equation
           textStyle={TextStyle.Bold})}),
     experiment(StopTime=86400, Interval=1),
     __Dymola_experimentSetupOutput,
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>This is a model for Facade Ventilation Unit (FVU), which can be used for heating, cooling and ventilation purposes. It is equipped with two speed-controlled fans, a recuperator and two air-water heat exchangers. The figure below shows a scheme of the unit. </p>
-<h4><span style=\"color: #008000\">Operation Modes</span></h4>
-<p>The portion of fresh air flowing through the recuperator is controlled by means of a bypass damper. The portion of extract air that is recirculated and mixed with the fresh air stream is controlled by means of a circulation damper. The mixed air stream is either heated or cooled in the air-water heat exchangers. The water flow in these heat exchangers is controlled by two-way-valves. </p>
-<h4><span style=\"color: #008000\">Actuators</span></h4>
-<p>All actuators receive normailized signals (0-1). The supply and exhaust air fans are table-based. A relative input signal is transformed into a mass-flow set point for a flow-controlled mover. If the exhaust air fan is not in operation, the entire air flow should be recirculated. Thus, the circulation damper should be fully opened. In that case, the fresh air flap should be closed so that no fresh air can enter the unit. The exhaust air fan has a minimum mass flow rate of 1 m&sup3;/h to make the model more stable. </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitScheme.PNG\" 
-alt=\"Scheme of the facade ventilation unit\"/></p>
-<h4><span style=\"color: #008000\">References</span></h4>
-<p>Baranski, M., Sangi, R., Fuetterer, J., Mueller, D. (2016). An Algorithm for Stepwise Exergy-based Model Predictive Control of Building HVAC Supply Chains. <i>29th international conference on Efficiency, Cost, Optimisation, Simulation and Environmental Impact of Energy Systems</i>. </p>
-</html>", revisions="<html>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  This is a model for Facade Ventilation Unit (FVU), which can be used
+  for heating, cooling and ventilation purposes. It is equipped with
+  two speed-controlled fans, a recuperator and two air-water heat
+  exchangers. The figure below shows a scheme of the unit.
+</p>
+<h4>
+  <span style=\"color: #008000\">Operation Modes</span>
+</h4>
+<p>
+  The portion of fresh air flowing through the recuperator is
+  controlled by means of a bypass damper. The portion of extract air
+  that is recirculated and mixed with the fresh air stream is
+  controlled by means of a circulation damper. The mixed air stream is
+  either heated or cooled in the air-water heat exchangers. The water
+  flow in these heat exchangers is controlled by two-way-valves.
+</p>
+<h4>
+  <span style=\"color: #008000\">Actuators</span>
+</h4>
+<p>
+  All actuators receive normailized signals (0-1). The supply and
+  exhaust air fans are table-based. A relative input signal is
+  transformed into a mass-flow set point for a flow-controlled mover.
+  If the exhaust air fan is not in operation, the entire air flow
+  should be recirculated. Thus, the circulation damper should be fully
+  opened. In that case, the fresh air flap should be closed so that no
+  fresh air can enter the unit. The exhaust air fan has a minimum mass
+  flow rate of 1 m³/h to make the model more stable.
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitScheme.PNG\"
+  alt=\"Scheme of the facade ventilation unit\">
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  Baranski, M., Sangi, R., Fuetterer, J., Mueller, D. (2016). An
+  Algorithm for Stepwise Exergy-based Model Predictive Control of
+  Building HVAC Supply Chains. <i>29th international conference on
+  Efficiency, Cost, Optimisation, Simulation and Environmental Impact
+  of Energy Systems</i>.
+</p>
 <ul>
-<li>
-July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
-First implementation.
-</li>
+  <li>July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end FacadeVentilationUnit;

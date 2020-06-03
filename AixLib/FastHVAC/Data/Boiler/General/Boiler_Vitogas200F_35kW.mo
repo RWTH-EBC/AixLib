@@ -19,13 +19,13 @@ record Boiler_Vitogas200F_35kW "Gas-fired boiler Viessmann Vitogas200-F 35kW"
 </ul>
 </html>", info="<html>
 <h4>
-  <font color=\"#008000\">Level of Development</font>
+  <span style=\"color:#008000\">Level of Development</span>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars5.png\" alt=\"\" />
+  <img src=\"modelica://HVAC/Images/stars5.png\" alt=\"\">
 </p>
 <h4>
-  <font color=\"#008000\">References</font>
+  <span style=\"color:#008000\">References</span>
 </h4>
 <p>
   Record is used with <a href=

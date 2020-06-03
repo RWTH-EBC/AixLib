@@ -83,11 +83,15 @@ equation
           -0.0230769}},
       color={255,204,51},
       thickness=0.5));
-  annotation (Documentation(info="<html>
-<p>This example demonstrates the use of the RegisterModule for a heating register with an admix circuit. The controller controls the outflow air temperature to 20&deg;C.</p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  This example demonstrates the use of the RegisterModule for a heating
+  register with an admix circuit. The controller controls the outflow
+  air temperature to 20°C.
+</p>
 <ul>
-<li>August 30, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+  <li>August 30, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(

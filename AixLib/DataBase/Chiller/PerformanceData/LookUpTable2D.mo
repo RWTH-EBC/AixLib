@@ -190,16 +190,52 @@ equation
   </li>
 </ul>
 </html>", info="<html>
-<p>This model uses the 2-dimensional table data given in the DIN EN 14511 (formerly EN255) to calculate <i>QEva</i> and <i>P_el</i>. To model an inverter controlled chiller, the relative <b>compressor speed <i>n</i> is scaled linearly</b> with the ouput of the tables. Furthermore, the design of a chiller is modeled via a scaling factor. As a result, the equations follow below: </p>
-<p align=\"center\"><i>QEva,n = n * scalingFactor * TableQEva.y</i> </p>
-<p align=\"center\"><i>P_el = n * scalingFactor * TablePel.y</i> </p>
-<p align=\"justify\">To simulate possible icing of the evaporator on air-source chillers, the icing factor is used to influence the output as well. As the factor resembles the reduction of heat transfer between refrigerant and source, the factor is implemented as follows: </p>
-<p align=\"center\"><i>QEva = iceFac * QEva,n</i> </p>
-<p>With <i>iceFac</i> as a relative value between 0 and 1: </p>
-<p align=\"center\"><i>iceFac = kA/kA_noIce</i> </p>
-<p>Finally, to follow the first law of thermodynamics: </p>
-<p align=\"center\"><i>QCon = P_el,n + QEva</i> </p>
-<h4>Known Limitations </h4>
-<p>The model <a href=\"modelica://AixLib.Utilities.Tables.CombiTable2DExtra\">CombiTable2DExtra</a> is able to disallow extrapolation by holding the last value. If one extrapolates the given perfomance data, warnings about occuring extrapolations are emitted. <b>CAUTION: Checking for possible extrapolations will trigger state events which results in higher computing time.</b> </p>
+<p>
+  This model uses the 2-dimensional table data given in the DIN EN
+  14511 (formerly EN255) to calculate <i>QEva</i> and <i>P_el</i>. To
+  model an inverter controlled chiller, the relative <b>compressor
+  speed <i>n</i> is scaled linearly</b> with the ouput of the tables.
+  Furthermore, the design of a chiller is modeled via a scaling factor.
+  As a result, the equations follow below:
+</p>
+<p style=\"text-align:center;\">
+  <i>QEva,n = n * scalingFactor * TableQEva.y</i>
+</p>
+<p style=\"text-align:center;\">
+  <i>P_el = n * scalingFactor * TablePel.y</i>
+</p>
+<p style=\"text-align:justify;\">
+  To simulate possible icing of the evaporator on air-source chillers,
+  the icing factor is used to influence the output as well. As the
+  factor resembles the reduction of heat transfer between refrigerant
+  and source, the factor is implemented as follows:
+</p>
+<p style=\"text-align:center;\">
+  <i>QEva = iceFac * QEva,n</i>
+</p>
+<p>
+  With <i>iceFac</i> as a relative value between 0 and 1:
+</p>
+<p style=\"text-align:center;\">
+  <i>iceFac = kA/kA_noIce</i>
+</p>
+<p>
+  Finally, to follow the first law of thermodynamics:
+</p>
+<p style=\"text-align:center;\">
+  <i>QCon = P_el,n + QEva</i>
+</p>
+<h4>
+  Known Limitations
+</h4>
+<p>
+  The model <a href=
+  \"modelica://AixLib.Utilities.Tables.CombiTable2DExtra\">CombiTable2DExtra</a>
+  is able to disallow extrapolation by holding the last value. If one
+  extrapolates the given perfomance data, warnings about occuring
+  extrapolations are emitted. <b>CAUTION: Checking for possible
+  extrapolations will trigger state events which results in higher
+  computing time.</b>
+</p>
 </html>"));
 end LookUpTable2D;
