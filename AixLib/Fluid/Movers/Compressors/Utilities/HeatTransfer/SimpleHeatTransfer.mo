@@ -82,25 +82,26 @@ equation
 
   heatPort.Q_flow = -Q_flow "Connect heat flow with heat port";
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 28, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 28, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a model of a simple one-directional heat transfer without storage of
-energy or mass. Therefore, some assumptions are made:
+  This is a model of a simple one-directional heat transfer without
+  storage of energy or mass. Therefore, some assumptions are made:
 </p>
 <ul>
-<li>No storage of energy or mass.</li>
-<li>No pressure losses.</li>
-<li>Calculation of the heat flow between fluid and fictitious wall using a 
-logarithmic temperature difference and time invariante effective thermal
-conductance.</li>
+  <li>No storage of energy or mass.
+  </li>
+  <li>No pressure losses.
+  </li>
+  <li>Calculation of the heat flow between fluid and fictitious wall
+  using a logarithmic temperature difference and time invariante
+  effective thermal conductance.
+  </li>
 </ul>
 </html>"), Icon(graphics={
         Rectangle(

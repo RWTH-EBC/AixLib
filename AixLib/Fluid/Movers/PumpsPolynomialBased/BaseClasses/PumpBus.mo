@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses;
 expandable connector PumpBus "Standard data bus with pump information"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
@@ -19,14 +19,16 @@ expandable connector PumpBus "Standard data bus with pump information"
   annotation (
     Icon(graphics, coordinateSystem(preserveAspectRatio=false)),
     Diagram(graphics, coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>
-Definition of a standard pump bus for use with the Zugabe library.
+    Documentation(info="<html><p>
+  Definition of a standard pump bus for use with the Zugabe library.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>2020-01-09, by Alexander Kümpel:<br/>Variable names changed. </li>
-<li>2017-02-06, by Peter Matthes:<br/>First implementation. </li>
+  <li>2020-01-09, by Alexander Kümpel:<br/>
+    Variable names changed.
+  </li>
+  <li>2017-02-06, by Peter Matthes:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end PumpBus;
