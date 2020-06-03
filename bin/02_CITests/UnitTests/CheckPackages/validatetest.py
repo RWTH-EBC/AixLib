@@ -312,14 +312,14 @@ class ValidateTest(object):
 		### Writes all information in the log file, not only the last entries
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
 		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
-		'''if not dym_sta_lic_available:
+		if not dym_sta_lic_available:
 			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
 			print("No Dymola License is available")
 			dymola.close()
 			exit(1)
 		else:
 			print("Dymola License is available")
-		'''
+		
 		PackageCheck = dymola.openModel(self.Library)
 		if PackageCheck == True:
 			print("Found AixLib Library and start Checkmodel Tests \n Check Package " + self.Package+" \n")
