@@ -135,8 +135,8 @@ public
     k=0.002,
     Ti=7,
     Td=0.1,
-    yMax=10,
-    yMin=0.0,
+    yMax=2,
+    yMin=0.01,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=0.3)      "Pressure controller" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},

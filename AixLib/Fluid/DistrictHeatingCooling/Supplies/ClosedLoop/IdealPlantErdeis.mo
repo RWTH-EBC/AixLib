@@ -18,8 +18,8 @@ model IdealPlantErdeis
         Medium)
     "Fluid connector for connecting the ideal plant to the warm line of the network"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium
-      = Medium,
+  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
+        Medium,
     QMin_flow=0,use_X_wSet=false,
     dp_nominal=dp_nominal,
     m_flow_nominal=m_flow_nominal,
@@ -39,7 +39,7 @@ model IdealPlantErdeis
         origin={30,70})));
   FixedResistances.PlugFlowPipe plugFlowPipe(
     redeclare package Medium = Medium,
-    dh=0.1,
+    dh=0.7,
     length=1700,
     m_flow_nominal=m_flow_nominal,
     dIns=0.01,
@@ -49,7 +49,7 @@ model IdealPlantErdeis
   FixedResistances.PressureDrop res(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
-    dp_nominal=35000)
+    dp_nominal(displayUnit="bar") = 11000)
     annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
 equation
   connect(heater.port_b, senTem.port_a)
