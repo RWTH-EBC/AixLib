@@ -85,10 +85,9 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=600),
-    Documentation(revisions="<html><ul>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
-    Transfer from ZUGABE to AixLib.
-  </li>
+    Documentation(revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
 </ul>
 </html>"));
 end Pump;

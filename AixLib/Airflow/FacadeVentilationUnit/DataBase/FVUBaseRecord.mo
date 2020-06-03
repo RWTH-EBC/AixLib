@@ -37,18 +37,17 @@ record FVUBaseRecord
   parameter Modelica.SIunits.Time damperRiseTimeShort = 20 "Rising time of the 
    slowly moving dampers";
 
-  annotation (Documentation(info="<html><p>
-  <b><span style=\"color: #008000;\">Overview</span></b>
-</p>
-<p>
-  This is the base definition of the paramter record that can be used
-  for the <a href=
-  \"AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit\">AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit</a>.
-</p>
+  annotation (Documentation(info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>This is the base definition of the paramter record that can be used for the
+<a href=\"AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit\">
+AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit</a>.</p>
+</html>",  revisions="<html>
 <ul>
-  <li>July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
-    First implementation.
-  </li>
+<li>
+July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+First implementation.
+</li>
 </ul>
 </html>"));
 

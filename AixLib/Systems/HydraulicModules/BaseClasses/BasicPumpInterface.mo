@@ -35,17 +35,11 @@ partial model BasicPumpInterface "Pump interface for different pump types"
           fillPattern=FillPattern.Sphere,
           fillColor={220,220,220})}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html><ul>
-  <li>May 20, 2018, by Alexander Kümpel:<br/>
-    First implementation.
-  </li>
+    Documentation(revisions="<html>
+<ul>
+<li>May 20, 2018, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>
-  This is a basic container model for different pump typs. A new
-  container model for a specific pump should be extended from this
-  class. In this way, replacing the pump model in the hydraulic modules
-  is easy.
-</p>
+<p>This is a basic container model for different pump typs. A new container model for a specific pump should be extended from this class. In this way, replacing the pump model in the hydraulic modules is easy.</p>
 </html>"));
 end BasicPumpInterface;

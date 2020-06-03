@@ -202,17 +202,12 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (Diagram(coordinateSystem(extent={{-180,-100},{100,100}})), Icon(
         coordinateSystem(extent={{-180,-100},{100,100}})),
-    Documentation(revisions="<html><ul>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
-    First implementation.
-  </li>
+    Documentation(revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>
-  This example demonstrates the use of the hydraulic modules and the
-  controllers. The model represents a cooling circuit with different
-  hydraulic circuits.
-</p>
+<p>This example demonstrates the use of the hydraulic modules and the controllers. The model represents a cooling circuit with different hydraulic circuits. </p>
 </html>"),
     experiment(StopTime=3600));
 end ERC_ExperimentalHall_CoolingCircuit;
