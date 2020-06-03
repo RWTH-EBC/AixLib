@@ -312,14 +312,14 @@ class ValidateTest(object):
 		### Writes all information in the log file, not only the last entries
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
 		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
-		if not dym_sta_lic_available:
+		'''if not dym_sta_lic_available:
 			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
 			print("No Dymola License is available")
 			dymola.close()
 			exit(1)
 		else:
 			print("Dymola License is available")
-	
+		'''
 		PackageCheck = dymola.openModel(self.Library)
 		if PackageCheck == True:
 			print("Found AixLib Library and start Checkmodel Tests \n Check Package " + self.Package+" \n")
@@ -328,7 +328,6 @@ class ValidateTest(object):
 			exit(1)
 		## Check the Package	
 		ErrorList = []	
-			
 		if self.Changedmodels == False:
 		
 			ModelList = ValidateTest._CompareWhiteList(self)
@@ -355,6 +354,7 @@ class ValidateTest(object):
 						print(Log)
 		
 		if self.Changedmodels == True:
+			print("Test only changed or new models")
 			list_mo_models = git_models(".mo",self.Package)
 			model_list= list_mo_models.sort_mo_models()
 			for i in model_list:
@@ -607,7 +607,7 @@ if  __name__ == '__main__':
 	check_test_group.add_argument("-WL", "--WhiteList", help="Create a WhiteList of IBPSA Library: y: Create WhiteList, n: Don´t create WhiteList" , action="store_true")
 	check_test_group.add_argument("-SE", "--SimulateExamples", help="Check and Simulate Examples in the Package" , action="store_true")
 	check_test_group.add_argument("-DS", "--DymolaVersion",default="2020", help="Version of Dymola(Give the number e.g. 2020")
-	check_test_group.add_argument("-CM", "--Changedmodels",default="Tests only models that were changed or added during the push", action="store_true")
+	check_test_group.add_argument("-CM", "--Changedmodels",default=False, action="store_true")
 	
 	
 	# Parse the arguments
