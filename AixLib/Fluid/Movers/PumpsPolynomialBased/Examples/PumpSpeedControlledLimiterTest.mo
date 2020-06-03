@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledLimiterTest
   "Testing the pump speed algorithm with the new \"one record\" pump model that bounds speed instead of pump head."
   extends Modelica.Icons.Example;
@@ -81,17 +81,40 @@ equation
       extent={{6,3},{6,3}}));
   annotation (
     experiment(StopTime=200),
-    Documentation(revisions="<html>
-<ul>
-<li>2019-09-18 by Alexander Kümpel:<br />Renaming and restructuring.</li>
-<li>2018-05-08 by Peter Matthes:<br />Removes most advanced Dymola settings from plot script. This fixes a situation when Dymola didn&apos;t display anything in the plot windows and it removed the variables tree.</li>
-<li>2018-03-01 by Peter Matthes:<br />Adjusted parameter settings. From pump model removed m_flow_start (should be used as output from pump rather than a setting). Changed setting of system.m_flow_start to become pump.m_flow_start.</li>
-<li>2018-01-29 by Peter Matthes:<br />* The selectable function for efficiency calculation could be removed from the parameter dialog.<br />* Increases simulation time and table time settings.</li>
-<li>2017-12-06 by Peter Matthes<br />Switches to useABCformulas=false since the Pico 1-4 data set does not contain usable ABC coefficients.</li>
-<li>2017-12-01 by Peter Matthes<br />Implemented. Plot script needed updating due to name changes in pump model.</li>
+    Documentation(revisions="<html><ul>
+  <li>2019-09-18 by Alexander Kümpel:<br/>
+    Renaming and restructuring.
+  </li>
+  <li>2018-05-08 by Peter Matthes:<br/>
+    Removes most advanced Dymola settings from plot script. This fixes
+    a situation when Dymola didn't display anything in the plot windows
+    and it removed the variables tree.
+  </li>
+  <li>2018-03-01 by Peter Matthes:<br/>
+    Adjusted parameter settings. From pump model removed m_flow_start
+    (should be used as output from pump rather than a setting). Changed
+    setting of system.m_flow_start to become pump.m_flow_start.
+  </li>
+  <li>2018-01-29 by Peter Matthes:<br/>
+    * The selectable function for efficiency calculation could be
+    removed from the parameter dialog.<br/>
+    * Increases simulation time and table time settings.
+  </li>
+  <li>2017-12-06 by Peter Matthes<br/>
+    Switches to useABCformulas=false since the Pico 1-4 data set does
+    not contain usable ABC coefficients.
+  </li>
+  <li>2017-12-01 by Peter Matthes<br/>
+    Implemented. Plot script needed updating due to name changes in
+    pump model.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Tests the pump model with single parameter record that also uses the limitiation of the pump speed (<i>pumpParam.maxMinSpeedCurves</i>) instead of the pump head limitation (<i>maxMinHead</i>).</p>
+<p>
+  Tests the pump model with single parameter record that also uses the
+  limitiation of the pump speed (<i>pumpParam.maxMinSpeedCurves</i>)
+  instead of the pump head limitation (<i>maxMinHead</i>).
+</p>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledLimiterTest.mos"

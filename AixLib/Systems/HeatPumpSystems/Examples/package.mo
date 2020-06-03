@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems;
+within AixLib.Systems.HeatPumpSystems;
 package Examples "Package with Examples for Heat Pump Systems"
 
 annotation (Icon(graphics={

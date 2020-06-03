@@ -33,63 +33,103 @@ record EoS_IIR_P05_30_T263_343
     f_ResG6={2.33,3.47,3.15,3.19,0.92,18.8,547.8},
     f_ResG7={0.684,0.829,1.419,0.817,1.5,1.426,1.093});
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  June 10, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 10, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-In this record, fitting coefficients are provided for the Helmholtz equation
-of state (EoS). For detailed information of the EoS as well as the fitting
-coefficients, please checkout
-<a href=\"modelica://AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition\">
-AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-</a>.
-The fitting coefficients are used in a hybrid refrigerant model provided in
-<a href=\"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>.
-For detailed information, please checkout
-<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
-AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>.
+  In this record, fitting coefficients are provided for the Helmholtz
+  equation of state (EoS). For detailed information of the EoS as well
+  as the fitting coefficients, please checkout <a href=
+  \"modelica://AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition\">
+  AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition</a>
+  . The fitting coefficients are used in a hybrid refrigerant model
+  provided in <a href=
+  \"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>.
+  For detailed information, please checkout <a href=
+  \"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
+  AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>.
 </p>
-<h4>Assumptions and limitations</h4>
+<h4>
+  Assumptions and limitations
+</h4>
 <p>
-The provided coefficients are fitted to external data by Sangi et al. and are
-valid within the following range:<br />
+  The provided coefficients are fitted to external data by Sangi et al.
+  and are valid within the following range:<br/>
 </p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
 border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
-<tr>
-  <td><p>Parameter</p></td>
-  <td><p>Minimum Value</p></td>
-  <td><p>Maximum Value</p></td>
-</tr>
-<tr>
-  <td><p>Pressure (p) in bar</p></td>
-  <td><p>0.5</p></td>
-  <td><p>30</p></td>
-</tr>
-<tr>
-  <td><p>Temperature (T) in K</p></td>
-  <td><p>263.15</p></td>
-  <td><p>343.15</p></td>
-</tr>
+  <tr>
+    <td>
+      <p>
+        Parameter
+      </p>
+    </td>
+    <td>
+      <p>
+        Minimum Value
+      </p>
+    </td>
+    <td>
+      <p>
+        Maximum Value
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Pressure (p) in bar
+      </p>
+    </td>
+    <td>
+      <p>
+        0.5
+      </p>
+    </td>
+    <td>
+      <p>
+        30
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Temperature (T) in K
+      </p>
+    </td>
+    <td>
+      <p>
+        263.15
+      </p>
+    </td>
+    <td>
+      <p>
+        343.15
+      </p>
+    </td>
+  </tr>
 </table>
 <p>
-The reference point is defined as 200 kJ/kg and 1 kJ/kg/K, respectively, for
-enthalpy and entropy for the saturated liquid at 273.15 K.
+  The reference point is defined as 200 kJ/kg and 1 kJ/kg/K,
+  respectively, for enthalpy and entropy for the saturated liquid at
+  273.15 K.
 </p>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
-M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">
-A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic
-Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund,
-Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press
-(Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275
+  Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
+  Müller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A
+  Medium Model for the Refrigerant Propane for Fast and Accurate
+  Dynamic Simulations</a>. In: <i>The 10th International Modelica
+  Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping University
+  Electronic Press (Linköping Electronic Conference Proceedings), S.
+  1271–1275
 </p>
 </html>"));
 end EoS_IIR_P05_30_T263_343;

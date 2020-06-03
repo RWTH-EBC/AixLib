@@ -119,17 +119,37 @@ equation
           lineColor={135,135,135},
           textString="4")}),Diagram(coordinateSystem(extent={{-120,-120},{120,120}},
           initialScale=0.1)),
-    Documentation(revisions="<html>
-<ul>
-<li>August 09, 2018, by Alexander K&uuml;mpel:<br/>Extension from base PartioalHydraulicModuls</li>
-<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
-<li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>2017-06 by Alexander K&uuml;mpel:<br/>Implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>August 09, 2018, by Alexander Kümpel:<br/>
+    Extension from base PartioalHydraulicModuls
+  </li>
+  <li>Mai 30, 2018, by Alexander Kümpel:<br/>
+    Transfer from ZUGABE to AixLib
+  </li>
+  <li>2017-07-25 by Peter Matthes:<br/>
+    Renames sensors and introduces PT1 behavior for temperature
+    sensors. Adds sensors to icon.
+  </li>
+  <li>2017-06 by Alexander Kümpel:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Throttle circuit with a valve for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>
-<h4><span style=\"color: #008c48\">Characteristics</span></h4>
-<p>The volume flow depends on the valve opening. If the valve is completly closed, there is no volume flow (except leackage). </p>
-<p>This model uses a pipe model to include the heat loss and insulation effects.</p>
+<p>
+  Throttle circuit with a valve for the distribution of hot or cold
+  water. All sensor and actor values are connected to the hydraulic
+  bus.
+</p>
+<h4>
+  <span style=\"color: #008c48\">Characteristics</span>
+</h4>
+<p>
+  The volume flow depends on the valve opening. If the valve is
+  completly closed, there is no volume flow (except leackage).
+</p>
+<p>
+  This model uses a pipe model to include the heat loss and insulation
+  effects.
+</p>
 </html>"));
 end Throttle;
