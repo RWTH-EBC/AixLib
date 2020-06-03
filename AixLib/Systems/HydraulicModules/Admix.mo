@@ -123,6 +123,7 @@ model Admix "Admix circuit with three way valve and pump"
     redeclare package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics)     "Needs to be redeclared" annotation (
     Dialog(group="Actuators"),

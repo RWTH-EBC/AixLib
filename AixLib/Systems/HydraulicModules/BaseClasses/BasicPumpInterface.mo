@@ -7,6 +7,11 @@ partial model BasicPumpInterface "Pump interface for different pump types"
         iconTransformation(extent={{-20,80},{20,120}})));
 
 
+
+  // Initialization
+  parameter Modelica.SIunits.Temperature T_start=303.15
+    "Initialization temperature" annotation(Dialog(tab="Initialization"));
+
   // Dynamics
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"

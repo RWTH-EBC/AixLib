@@ -6,6 +6,7 @@ model Injection "Injection circuit with pump and three way valve"
     redeclare package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics)           "Needs to be redeclared" annotation (
     Dialog(group="Actuators"),

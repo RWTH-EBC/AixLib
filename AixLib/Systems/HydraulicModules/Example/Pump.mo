@@ -88,7 +88,7 @@ equation
 <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
 </ul>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true) =
+    __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Pump.mos"
         "Simulate and plot"));
 end Pump;

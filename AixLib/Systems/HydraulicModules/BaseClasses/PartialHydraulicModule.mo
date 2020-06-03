@@ -25,9 +25,11 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
 
-  // Advanced
+  // Initialization
   parameter Modelica.SIunits.Temperature T_start=303.15
-    "Initialization temperature" annotation(Dialog(tab="Advanced"));
+    "Initialization temperature" annotation(Dialog(tab="Initialization"));
+
+  // Advanced
   parameter Modelica.SIunits.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
   parameter  Modelica.SIunits.Temperature T_amb=298.15 "Ambient temperature for heat loss" annotation(Dialog(tab="Advanced"));
@@ -45,7 +47,7 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
 

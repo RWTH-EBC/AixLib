@@ -84,9 +84,6 @@ model PumpInterface_PumpHeadControlled
       group="Pressure",
       enable=false));
 
-  parameter Medium.Temperature T_start=physics.system.T_start
-    "Start value of temperature in PartialLumpedVolume of PumpPhysics"
-    annotation (Dialog(tab="Initialization"));
 
   // Assumptions
   parameter Boolean checkValve=false "= true to prevent reverse flow"

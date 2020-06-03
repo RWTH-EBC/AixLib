@@ -54,20 +54,23 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
   Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare HydraulicModules.Admix hydraulicModule(
+      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
+      parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       tau=5,
-      dIns=0.01,
-      kIns=0.028,
-      d=0.025,
       length=1,
       Kv=6.3,
       valve(use_inputFilter=false),
       pipe1(length=3),
       pipe2(length=0.63),
-      pipe3(dh=0.032, length=1.85),
-      pipe4(dh=0.032, length=0.4),
+      pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
+            1.85),
+      pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
+            0.4),
       pipe5(length=2.8),
-      pipe6(dh=0.015, length=0.82),
+      pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(), length=
+            0.82),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
         PumpInterface(pumpParam=
