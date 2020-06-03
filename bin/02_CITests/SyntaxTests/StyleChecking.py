@@ -7,10 +7,7 @@ import argparse
 import os
 import sys 
 import platform
-
-
 from git import Repo
-
 from sort_models import git_models
 
 class Git_Repository_Clone(object):
