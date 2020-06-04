@@ -149,28 +149,15 @@ model Wall
     annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
   Utilities.Interfaces.ShortRadSurf shortRadWall if use_shortWaveRadIn
     annotation (Placement(transformation(extent={{92,66},{118,92}}),
-        iconTransformation(extent={{92,66},{118,92}})));
+        iconTransformation(extent={{7,66},{33,92}})));
   Utilities.Interfaces.ShortRadSurf shortRadWin if withWindow and
-    use_shortWaveRadOut annotation (Placement(transformation(extent={{13,-72},{
-            39,-46}}), iconTransformation(extent={{13,-72},{39,-46}})));
-  Modelica.Blocks.Sources.Constant constAlpha(k=wallPar.eps) if
+    use_shortWaveRadOut annotation (Placement(transformation(extent={{91,-72},{
+            117,-46}}),iconTransformation(extent={{6,-72},{32,-46}})));
+  Modelica.Blocks.Sources.Constant constFixShoRadPar[6](k={0,wallPar.eps,1 -
+        wallPar.eps,wall_length,wall_height,0}) if
     use_shortWaveRadIn
-    annotation (Placement(transformation(extent={{68,92},{76,100}})));
-  Modelica.Blocks.Sources.Constant constLength(k=wall_length) if
-    use_shortWaveRadIn
-    annotation (Placement(transformation(extent={{68,66},{76,74}})));
-  Modelica.Blocks.Sources.Constant constHeight(k=wall_height) if
-    use_shortWaveRadIn
-    annotation (Placement(transformation(extent={{68,52},{76,60}})));
-  Modelica.Blocks.Sources.Constant constTau(k=0) if
-    use_shortWaveRadIn "For walls always zero"
-    annotation (Placement(transformation(extent={{68,104},{76,112}})));
-  Modelica.Blocks.Sources.Constant constRho(k=1 - wallPar.eps) if
-    use_shortWaveRadIn "For walls always 1 - alpha"
-    annotation (Placement(transformation(extent={{68,80},{76,88}})));
-  Modelica.Blocks.Sources.Constant constQRad_in(k=0) if
-    use_shortWaveRadIn "Fix input value to zero"
-    annotation (Placement(transformation(extent={{68,38},{76,46}})));
+    "Parameteres used for the short radiaton models. See connections to check which array corresponds to which parameter"
+    annotation (Placement(transformation(extent={{80,88},{90,98}})));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
@@ -251,8 +238,8 @@ equation
   connect(WindSpeedPort, windowSimple.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
 
 
-  connect(shortRadWin, windowSimple.shortRadWin) annotation (Line(points={{26,
-          -59},{60,-59},{60,-23.56},{9.7,-23.56}}, color={0,0,0}), Text(
+  connect(shortRadWin, windowSimple.shortRadWin) annotation (Line(points={{104,-59},
+          {60,-59},{60,-23.56},{9.7,-23.56}},      color={0,0,0}), Text(
       string="%first",
       index=-1,
       extent={{6,3},{6,3}},
@@ -264,40 +251,41 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constHeight.y, shortRadWall.H) annotation (Line(points={{76.4,56},{
-          105.065,56},{105.065,79.065}},
-                                       color={0,0,127}), Text(
+  connect(constFixShoRadPar[1].y, shortRadWall.g) annotation (Line(points={{
+          90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constLength.y, shortRadWall.L) annotation (Line(points={{76.4,70},{
-          105.065,70},{105.065,79.065}},
-                                       color={0,0,127}), Text(
+  connect(constFixShoRadPar[2].y, shortRadWall.solar_absorptance) annotation (
+      Line(points={{90.5,93},{104,93},{104,88},{105.065,88},{105.065,79.065}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constAlpha.y, shortRadWall.alpha) annotation (Line(points={{76.4,96},
-          {105.065,96},{105.065,79.065}}, color={0,0,127}), Text(
+  connect(constFixShoRadPar[3].y, shortRadWall.rho) annotation (Line(points={{
+          90.5,93},{104,93},{104,86},{105.065,86},{105.065,79.065}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constTau.y, shortRadWall.tau) annotation (Line(points={{76.4,108},{
-          105.065,108},{105.065,79.065}}, color={0,0,127}), Text(
+  connect(constFixShoRadPar[4].y, shortRadWall.length) annotation (Line(points=
+          {{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constRho.y, shortRadWall.rho) annotation (Line(points={{76.4,84},{90,
-          84},{90,79.065},{105.065,79.065}}, color={0,0,127}), Text(
+  connect(constFixShoRadPar[5].y, shortRadWall.height) annotation (Line(points=
+          {{90.5,93},{104,93},{104,79.065},{105.065,79.065}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constQRad_in.y, shortRadWall.QRad_in) annotation (Line(points={{76.4,
-          42},{105.065,42},{105.065,79.065}}, color={0,0,127}), Text(
+  connect(constFixShoRadPar[6].y, shortRadWall.QRad_in) annotation (Line(points
+        ={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

@@ -232,24 +232,24 @@ equation
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{-54,-56},{-54,4},{-62,4}},
         color={191,0,0}));
   connect(outerWall_South.shortRadWin, solarRadInRoom.win_in[1]) annotation (
-      Line(points={{-59.9,-15.6667},{-55.2,-15.6667},{-55.2,48}},
+      Line(points={{-62.35,-15.6667},{-55.2,-15.6667},{-55.2,48}},
                                                         color={0,0,0}));
   connect(solarRadInRoom.walls[1], outerWall_West.shortRadWall) annotation (
-      Line(points={{-28.8,54.3},{41.8,54.3},{41.8,57}},   color={0,0,0}));
+      Line(points={{-28.8,54.3},{41.8,54.3},{41.8,74}},   color={0,0,0}));
   connect(solarRadInRoom.walls[2], outerWall_North.shortRadWall) annotation (
-      Line(points={{-28.8,54.9},{40,54.9},{40,30.3333},{30.25,30.3333}},
+      Line(points={{-28.8,54.9},{40,54.9},{40,30.3333},{60,30.3333}},
                                                               color={0,0,0}));
   connect(solarRadInRoom.ceilings[1], ceiling.shortRadWall) annotation (Line(
-        points={{-28.8,45.6},{-14,45.6},{-14,68},{-24.1,68},{-24.1,67.5}},
+        points={{-28.8,45.6},{-24,45.6},{-24,68},{-24.1,68},{-24.1,76}},
         color={0,0,0}));
   connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-28.8,
-          50.4},{40,50.4},{40,-50},{-42,-50},{-42,-53.4992},{-39.9,-53.4992}},
+          50.4},{40,50.4},{40,-52},{-40,-52},{-40,-62},{-39.9,-62}},
         color={0,0,0}));
   connect(solarRadInRoom.walls[3], outerWall_East.shortRadWall) annotation (
-      Line(points={{-28.8,55.5},{40,55.5},{40,-50},{10.2,-50},{10.2,-46.9999}},
+      Line(points={{-28.8,55.5},{40,55.5},{40,-52},{10.2,-52},{10.2,-64}},
         color={0,0,0}));
   connect(solarRadInRoom.walls[4], outerWall_South.shortRadWall) annotation (
-      Line(points={{-28.8,56.1},{-16,56.1},{-16,60},{-32.25,60},{-32.25,30.3333}},
+      Line(points={{-28.8,56.1},{-12,56.1},{-12,62},{-62,62},{-62,30.3333}},
         color={0,0,0}));
     annotation ( Icon(coordinateSystem(extent={{-100,-100},
               {100,100}}, preserveAspectRatio=false),

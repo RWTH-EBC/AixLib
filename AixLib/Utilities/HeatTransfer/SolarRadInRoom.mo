@@ -68,13 +68,13 @@ model SolarRadInRoom
   Real solar_frac_win_abs_int = bounce_1_win_abs + bounce_2_floor_win_abs + bounce_3_rem_win_abs + bounce_R_rem_win_abs "Solar fractions for windows";
   Real solar_frac_win_lost_int = bounce_1_win_lost + bounce_2_floor_win_lost + bounce_3_rem_win_lost + bounce_R_rem_win_lost "Solar fractions for windows";
   Real solar_frac_flo_int = bounce_1_floor + bounce_2_floor_floor + bounce_3_rem_floor + bounce_R_rem_floor "Solar fractions for floors";
-  Real alpha_flo_int = sum(floors.alpha) / nFloors;
-  Real alpha_win_int = sum(win_in.alpha) / nWin;
+  Real alpha_flo_int=sum(floors.solar_absorptance)/nFloors;
+  Real alpha_win_int=sum(win_in.solar_absorptance)/nWin;
   Real rho_win_int = sum(win_in.rho) / nWin;
-  Modelica.SIunits.Area A_floor = sum(floors.L .* floors.H);
-  Modelica.SIunits.Area A_win = sum(win_in.L .* win_in.H);
-  Modelica.SIunits.Area A_walls[nWalls] = walls.L .* walls.H;
-  Modelica.SIunits.Area A_ceil[nCei] = ceilings.L .* ceilings.H;
+  Modelica.SIunits.Area A_floor=sum(floors.length .* floors.height);
+  Modelica.SIunits.Area A_win=sum(win_in.length .* win_in.height);
+  Modelica.SIunits.Area A_walls[nWalls]=walls.length .* walls.height;
+  Modelica.SIunits.Area A_ceil[nCei]=ceilings.length .* ceilings.height;
   Modelica.SIunits.Area area_total = A_floor + sum(A_ceil) + sum(A_walls) + A_win "Total area of all surfaces, used for bounce";
 
   // Define first bounce values:
@@ -87,15 +87,19 @@ model SolarRadInRoom
 
   // Define second bounce values:
   Real bounce_2_floor_floor = 0;
-  Real bounce_2_floor_cei[nCei] = (1-alpha_flo_int) .* sight_fac_floor_cei .* ceilings.alpha;
-  Real bounce_2_floor_wall[nWalls] = (1-alpha_flo_int) .* sight_fac_floor_wall .* walls.alpha;
+  Real bounce_2_floor_cei[nCei]=(1 - alpha_flo_int) .* sight_fac_floor_cei .*
+      ceilings.solar_absorptance;
+  Real bounce_2_floor_wall[nWalls]=(1 - alpha_flo_int) .* sight_fac_floor_wall .*
+      walls.solar_absorptance;
   Real bounce_2_floor_win_lost = (1-alpha_flo_int) * sight_fac_floor_win * (1-(rho_win_int + alpha_win_int/2));
   Real bounce_2_floor_win_abs = (1-alpha_flo_int) * sight_fac_floor_win * alpha_win_int/2;
   Real sum_bounce_2 = sum(bounce_2_floor_cei) + sum(bounce_2_floor_wall) + bounce_2_floor_win_lost + bounce_2_floor_win_abs;
 
   // Define third bounce values. Info: rem means remaining, non absorbed heat:
-  Real bounce_3_rem_cei[nCei] = (1 - sum_bounce_1 - sum_bounce_2) .* A_ceil .* ceilings.alpha / area_total;
-  Real bounce_3_rem_wall[nWalls] = (1 - sum_bounce_1 - sum_bounce_2) .* A_walls .* walls.alpha / area_total;
+  Real bounce_3_rem_cei[nCei]=(1 - sum_bounce_1 - sum_bounce_2) .* A_ceil .*
+      ceilings.solar_absorptance/area_total;
+  Real bounce_3_rem_wall[nWalls]=(1 - sum_bounce_1 - sum_bounce_2) .* A_walls .*
+      walls.solar_absorptance/area_total;
   Real bounce_3_rem_floor = (1 - sum_bounce_1 - sum_bounce_2) *  A_floor / area_total * alpha_flo_int;
   Real bounce_3_rem_win_lost = (1 - sum_bounce_1 - sum_bounce_2) *  A_win / area_total * (1-(rho_win_int + alpha_win_int/2));
   Real bounce_3_rem_win_abs = (1 - sum_bounce_1 - sum_bounce_2) *  A_win / area_total * alpha_win_int;
@@ -110,10 +114,18 @@ model SolarRadInRoom
 
   // Define sight factors used in bounce 2:
   // Assumption: All walls have the same heigh +  ceiling and floor have the same area.
-  Real sight_fac_floor_cei[nCei] = fill(sight_fac_parallel(x=floors[1].L, y=floors[1].H,  D=walls[1].H)/nCei, nCei);
-  Real sight_fac_floor_wall[nWalls] = fill(sight_fac_orthogonal(x=floors[1].L, y=floors[1].H,  z=walls[1].H), nWalls);
-  Real sight_fac_floor_win = sight_fac_orthogonal(x=floors[1].L, y=floors[1].H,  z=walls[1].H);
-
+  Real sight_fac_floor_cei[nCei]=fill(sight_fac_parallel(
+      x=floors[1].length,
+      y=floors[1].height,
+      D=walls[1].height)/nCei, nCei);
+  Real sight_fac_floor_wall[nWalls]=fill(sight_fac_orthogonal(
+      x=floors[1].length,
+      y=floors[1].height,
+      z=walls[1].height), nWalls);
+  Real sight_fac_floor_win=sight_fac_orthogonal(
+      x=floors[1].length,
+      y=floors[1].height,
+      z=walls[1].height);
 
   // Define connectors:
   Real Q_flow_in = sum(win_in.QRad_in) "Sum of all windows directly goes to floor";

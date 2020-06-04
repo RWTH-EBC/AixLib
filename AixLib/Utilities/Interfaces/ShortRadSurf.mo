@@ -1,15 +1,20 @@
 within AixLib.Utilities.Interfaces;
 expandable connector ShortRadSurf
   "Expandable connector for short wave radiation for a surface"
-  Modelica.SIunits.Power QRad_out "Output short waved radiation from the room to the surface";
-  Modelica.SIunits.Power QRad_in "Input short waved radiation from the surface to the room";
+  // Note: For this bus, the naming convention was not considered on purpose, as the convention is mainly for bus connectors used in controls.
+  Modelica.SIunits.Power Q_flow_ShoRadOnSur
+    "Short waved radiation from the room on to the surface";
+  Modelica.SIunits.Power Q_flow_ShoRadFroSur
+    "Short waved radiation from the surface to the room";
 
-  Modelica.SIunits.Length L "Length of surface" annotation(HideResult=false);
-  Modelica.SIunits.Height H "Height of surface" annotation(HideResult=false);
-  //Real eps "Emissivity of surface" annotation(HideResult=false);
+  Modelica.SIunits.Length length "Length of surface"
+                                                annotation(HideResult=false);
+  Modelica.SIunits.Height height "Height of surface"
+                                                annotation(HideResult=false);
   Real rho "Reflectivity of surface" annotation(HideResult=false);
-  Real tau "Transmissivity of surface" annotation(HideResult=false);
-  Real alpha "Absorptivity of surface, equal to eps or 1-rho-tau" annotation(HideResult=false);
+  Real g "Transmissivity of surface"   annotation(HideResult=false);
+  Real solar_absorptance "Absorptivity of surface, equal to eps or 1-rho-tau"
+                                                                  annotation(HideResult=false);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={                                                                       Polygon(points = {{-13, 86}, {13, 86}, {13, 12}, {77, 34}, {85, 6}, {22, -14}, {62, -72}, {37, -88}, {0, -28}, {-35, -88}, {-60, -72}, {-22, -14}, {-85, 6}, {-77, 34}, {-13, 12}, {-13, 86}}, lineColor=
               {0,0,0},                                                                                                                                                                                                        fillColor=
               {0,255,0},
