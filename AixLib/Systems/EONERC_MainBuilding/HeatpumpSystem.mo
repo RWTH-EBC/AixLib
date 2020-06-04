@@ -29,7 +29,6 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         energyDynamics=pump_hot.energyDynamics,
         redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
-
         addPowerToMedium=false)),
     d=0.125,
     T_amb=T_amb,
@@ -52,7 +51,6 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         energyDynamics=pump_hot.energyDynamics,
         redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
-
         addPowerToMedium=false)),
     d=0.100,
     length=4,
@@ -61,6 +59,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         extent={{-20,20},{20,-20}},
         rotation=180,
         origin={60,0})));
+
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=T_amb)
                 annotation (Placement(transformation(extent={{88,-4},{96,4}})));
   Fluid.Storage.BufferStorage coldStorage(
@@ -828,7 +827,7 @@ equation
           fillColor={28,108,200},
           textString="HS"),
         Text(
-          extent={{110,4},{152,-26}},
+          extent={{108,-2},{150,-32}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={28,108,200},
