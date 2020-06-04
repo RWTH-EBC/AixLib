@@ -3,16 +3,17 @@ clear
 convertClear();
 
 // Change wall and window record parametrization
-convertModifier("AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow", fill("",0), {"windowarea=2"});
-convertModifier("AixLib.Utilities.HeatTransfer.HeatConv", fill("",0), {hCon=2});
+convertModifiers("AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow", fill("",0), {"windowarea=2"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv", fill("",0), {"hCon=2"});
 convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", {"WallType"}, {"wallPar"});
-convertElement("AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5", {"ThermAttic", "TIR", "TMC", "T0_RO1", "T0_RO2", "T0_OW1", "T0_OW2", "T0_FL1", "T0_FL2", "T0_FL3", "T0_FL4", "T0_FL5"}, {"thermRoom"});
-convertModifier("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Gr1Uf1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_IW1", "T0_IW2a", "T0_IW2b", "T0_IW3", "T0_CE", "T0_FL"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_IW1", "T0_IW2a", "T0_IW2b", "T0_IW3", "T0_CE", "T0_RO", "T0_FL"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_OW2", "T0_IW1", "T0_IW2", "T0_CE", "T0_FL"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_OW2", "T0_IW1", "T0_IW2", "T0_CE", "T0_RO", "T0_FL"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Gr1Uf1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_OW2", "T0_IW1a", "T0_IW1b", "T0_IW2", "T0_CE", "T0_FL"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_OW2", "T0_IW1a", "T0_IW1b", "T0_IW2", "T0_CE", "T0_RO", "T0_FL"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope", {"withFloorHeating", "TIR", "TMC"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope", {"withFloorHeating", "TIR", "TMC"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope", {"withFloorHeating", "TIR", "TMC", "AirExchangeAttic"}, fill("",0));
+convertElement("AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5", {"ThermAttic"}, {"thermRoom"});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5", {"TIR", "TMC", "T0_RO1", "T0_RO2", "T0_OW1", "T0_OW2", "T0_FL1", "T0_FL2", "T0_FL3", "T0_FL4", "T0_FL5"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Gr1Uf1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_IW1", "T0_IW2a", "T0_IW2b", "T0_IW3", "T0_CE", "T0_FL"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_IW1", "T0_IW2a", "T0_IW2b", "T0_IW3", "T0_CE", "T0_RO", "T0_FL"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_OW2", "T0_IW1", "T0_IW2", "T0_CE", "T0_FL"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_OW2", "T0_IW1", "T0_IW2", "T0_CE", "T0_RO", "T0_FL"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Gr1Uf1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_OW2", "T0_IW1a", "T0_IW1b", "T0_IW2", "T0_CE", "T0_FL"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1", {"withFloorHeating", "TIR", "TMC", "T0_OW1", "T0_OW2", "T0_IW1a", "T0_IW1b", "T0_IW2", "T0_CE", "T0_RO", "T0_FL"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope", {"withFloorHeating", "TIR", "TMC"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope", {"withFloorHeating", "TIR", "TMC"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope", {"withFloorHeating", "TIR", "TMC", "AirExchangeAttic"}, fill("",0));
