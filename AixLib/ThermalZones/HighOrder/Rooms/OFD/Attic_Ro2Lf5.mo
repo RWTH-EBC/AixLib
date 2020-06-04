@@ -418,6 +418,8 @@ equation
   connect(OW1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-73,-22},{-56,-22},{-56,-40},{-7,-40},{-7,-8}},              color={191,0,0}));
   connect(roof1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-41,54},{-41,48},{-58,48},{-58,-22},{-56,-22},{-56,-40},{-7,-40},{-7,-8}},              color={191,0,0}));
   connect(roof2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{47,54},{48,54},{48,46},{-58,46},{-58,-22},{-56,-22},{-56,-40},{-7,-40},{-7,-8}},              color={191,0,0}));
+  connect(OW2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{81,-16},{76,-16},{76,-38},{-7,-38},{-7,-8}}, color={191,0,0}));
+  connect(OW2.port_outside, thermOutside) annotation (Line(points={{89.2,-16},{94,-16},{94,100},{-100,100},{-100,100}}, color={191,0,0}));
   annotation (Icon(graphics={
         Polygon(
           points={{-96,-60},{0,80},{96,-60},{82,-60},{0,60},{-82,-60},{-96,-60}},
