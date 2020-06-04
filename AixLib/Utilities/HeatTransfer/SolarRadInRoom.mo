@@ -6,6 +6,12 @@ model SolarRadInRoom
   parameter Integer nWalls=1 "Number of walls in room";
   parameter Integer nFloors=1 "Number of floors in room";
   parameter Integer nCei=1 "Number of ceilings in room";
+  parameter Modelica.SIunits.Length floor_length=0 "Total length of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor" annotation(Dialog(enable=nFloors>1));
+  parameter Modelica.SIunits.Height floor_height=0 "Total height of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor"  annotation(Dialog(enable=nFloors>1));
+
+  Modelica.SIunits.Length floor_length_int = if nFloors>1 then floor_length else floors[1].length "Total length of floors";
+  Modelica.SIunits.Height floor_height_int = if nFloors>1 then floor_height else floors[1].height "Total height of floors";
+
 
   Interfaces.ShortRadSurf win_in[nWin] "Windows input" annotation (Placement(
         transformation(extent={{-120,-10},{-100,10}}), iconTransformation(
@@ -70,7 +76,7 @@ model SolarRadInRoom
   Real solar_frac_flo_int = bounce_1_floor + bounce_2_floor_floor + bounce_3_rem_floor + bounce_R_rem_floor "Solar fractions for floors";
   Real alpha_flo_int=sum(floors.solar_absorptance)/nFloors;
   Real alpha_win_int=sum(win_in.solar_absorptance)/nWin;
-  Real rho_win_int = sum(win_in.rho) / nWin;
+  Real rho_win_int=sum(win_in.solar_reflectance)/nWin;
   Modelica.SIunits.Area A_floor=sum(floors.length .* floors.height);
   Modelica.SIunits.Area A_win=sum(win_in.length .* win_in.height);
   Modelica.SIunits.Area A_walls[nWalls]=walls.length .* walls.height;
@@ -113,46 +119,49 @@ model SolarRadInRoom
   Real bounce_R_rem_win_abs = (1 - sum_bounce_1 - sum_bounce_2 - sum_bounce_3) * (bounce_3_rem_win_abs / sum_bounce_3);
 
   // Define sight factors used in bounce 2:
-  // Assumption: All walls have the same heigh +  ceiling and floor have the same area.
+  // Assumption: All walls have the same heigh + ceiling and floor have the same area.
+  // Equally split the sight factor onto possible multiple ceilings
   Real sight_fac_floor_cei[nCei]=fill(sight_fac_parallel(
-      x=floors[1].length,
-      y=floors[1].height,
+      x=floor_length_int,
+      y=floor_height_int,
       D=walls[1].height)/nCei, nCei);
-  Real sight_fac_floor_wall[nWalls]=fill(sight_fac_orthogonal(
-      x=floors[1].length,
-      y=floors[1].height,
-      z=walls[1].height), nWalls);
-  Real sight_fac_floor_win=sight_fac_orthogonal(
-      x=floors[1].length,
-      y=floors[1].height,
-      z=walls[1].height);
+
+  Real sight_fac_floor_win = A_win / (A_win + sum(A_walls)) * (1 - sum(sight_fac_floor_cei));
+  Real sight_fac_floor_wall[nWalls] = A_walls / (A_win + sum(A_walls)) * (1 - sum(sight_fac_floor_cei));
 
   // Define connectors:
-  Real Q_flow_in = sum(win_in.QRad_in) "Sum of all windows directly goes to floor";
+  Real Q_flow_in=sum(win_in.Q_flow_ShoRadFroSur)
+    "Sum of all windows directly goes to floor";
   Modelica.Blocks.Sources.RealExpression QRadWalls_out[nWalls](y={Q_flow_in * solar_frac_wall[n] for n in 1:nWalls});
   Modelica.Blocks.Sources.RealExpression QRadCei_out[nCei](y={Q_flow_in * solar_frac_cei[n] for n in 1:nCei});
   Modelica.Blocks.Sources.RealExpression QRadFloors_out[nFloors](y={Q_flow_in * solar_frac_flo[n] for n in 1:nFloors});
   Modelica.Blocks.Sources.RealExpression QRadWin_out[nWin](y={Q_flow_in * solar_frac_win_abs[n] for n in 1:nWin});
 
 initial equation
-  // TODO: Build correct sum and test assert for numerical stability.
+  // Asssert energy balance matches
   assert(abs(sum(cat(1, solar_frac_cei, solar_frac_flo, solar_frac_wall, solar_frac_win_lost, solar_frac_win_abs)) - 1) < Modelica.Constants.eps, "Sum of solar fractions is not equal to 1", AssertionLevel.error);
+  // Assert all walls have the same height:
+  assert(((sum(walls.height) / size(walls, 1)) - walls[1].height) <  Modelica.Constants.eps, "Not all walls have the same height", AssertionLevel.error);
+  assert(sum(A_ceil) - A_floor < Modelica.Constants.eps, "Ceiling and floor have mismatching areas", AssertionLevel.error);
+  // Check correct user input if multiple floors are selected
+  assert(A_floor - floor_height_int*floor_length_int < Modelica.Constants.eps, "Total floor area mismatches area specified by user", AssertionLevel.error);
+
 equation
 
   for n in 1:nWalls loop
-    connect(walls[n].QRad_out, QRadWalls_out[n].y);
+    connect(walls[n].Q_flow_ShoRadOnSur, QRadWalls_out[n].y);
   end for;
 
   for n in 1:nWin loop
-    connect(win_out[n].QRad_out, QRadWin_out[n].y);
+    connect(win_out[n].Q_flow_ShoRadOnSur, QRadWin_out[n].y);
   end for;
 
   for n in 1:nCei loop
-    connect(ceilings[n].QRad_out, QRadCei_out[n].y);
+    connect(ceilings[n].Q_flow_ShoRadOnSur, QRadCei_out[n].y);
   end for;
 
   for n in 1:nFloors loop
-   connect(floors[n].QRad_out, QRadFloors_out[n].y);
+    connect(floors[n].Q_flow_ShoRadOnSur, QRadFloors_out[n].y);
   end for;
 
 

@@ -11,7 +11,8 @@ expandable connector ShortRadSurf
                                                 annotation(HideResult=false);
   Modelica.SIunits.Height height "Height of surface"
                                                 annotation(HideResult=false);
-  Real rho "Reflectivity of surface" annotation(HideResult=false);
+  Real solar_reflectance "Reflectivity of surface"
+                                     annotation(HideResult=false);
   Real g "Transmissivity of surface"   annotation(HideResult=false);
   Real solar_absorptance "Absorptivity of surface, equal to eps or 1-rho-tau"
                                                                   annotation(HideResult=false);
