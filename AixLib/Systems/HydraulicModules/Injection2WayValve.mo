@@ -14,7 +14,7 @@ model Injection2WayValve
   parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"  annotation(Dialog(tab="Advanced"));
 
 
-  Fluid.Actuators.Valves.TwoWayLinear valve(
+  Fluid.Actuators.Valves.TwoWayTable  valve(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,

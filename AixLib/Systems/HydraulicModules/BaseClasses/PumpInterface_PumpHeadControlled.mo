@@ -8,7 +8,8 @@ model PumpInterface_PumpHeadControlled
 
   replaceable
     AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH
-    pumpController(pumpParam=pumpParam) constrainedby Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
+    pumpController(pumpParam=pumpParam) constrainedby
+    Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
     annotation (
     Dialog(enable=true, tab="Control Strategy"),
     Placement(transformation(extent={{-20,40},{20,80}})),

@@ -2,7 +2,7 @@ within AixLib.Systems.HydraulicModules;
 model Throttle "Throttle circuit with two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-  AixLib.Fluid.Actuators.Valves.TwoWayLinear valve(
+  Fluid.Actuators.Valves.TwoWayTable         valve(
     redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,

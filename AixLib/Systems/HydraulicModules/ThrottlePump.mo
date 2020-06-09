@@ -11,7 +11,7 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     Dialog(group="Actuators"),
     choicesAllMatching=true,
     Placement(transformation(extent={{32,12},{48,28}})));
-  AixLib.Fluid.Actuators.Valves.TwoWayLinear valve(
+  Fluid.Actuators.Valves.TwoWayTable         valve(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,

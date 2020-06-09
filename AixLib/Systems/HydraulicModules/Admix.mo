@@ -5,9 +5,8 @@ model Admix "Admix circuit with three way valve and pump"
   parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
-  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear valve(
+  Fluid.Actuators.Valves.ThreeWayTable                 valve(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    l={0.001,0.001},
     redeclare package Medium = Medium,
     T_start=T_start,
     y_start=0.5,

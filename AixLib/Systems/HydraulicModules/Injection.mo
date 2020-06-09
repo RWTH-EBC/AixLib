@@ -16,9 +16,8 @@ model Injection "Injection circuit with pump and three way valve"
     annotation (Dialog(tab="Advanced"));
 
 
-  AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear valve(
+  Fluid.Actuators.Valves.ThreeWayTable                        valve(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    l={0.001,0.001},
     redeclare package Medium = Medium,
     T_start=T_start,
     tau=0.2,
