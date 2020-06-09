@@ -99,8 +99,8 @@ equation
       color={255,128,0}));
   connect(pane2.port_b, twoStar_RadEx.convPort) annotation (Line(points={{38,-8},{42,-8},{42,32},{44,32}}, color={191,0,0}));
   connect(WindSpeedPort, heatConv_outside.WindSpeedPort) annotation (Line(points={{-99,-59},{-70,-59},{-70,-17},{-65,-17}}, color={0,0,127}));
-  connect(Ag.y, shortRadWin.QRad_in) annotation (Line(points={{8.6,60},{50,60},
-          {50,88.05},{90.05,88.05}}, color={0,0,127}), Text(
+  connect(Ag.y, shortRadWin.Q_flow_ShoRadFroSur) annotation (Line(points={{8.6,
+          60},{50,60},{50,88.05},{90.05,88.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -118,14 +118,14 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constFixShoRadPar[3].y, shortRadWin.rho) annotation (Line(points={{
-          78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[3].y, shortRadWin.solar_reflectance) annotation (
+      Line(points={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
   connect(constFixShoRadPar[4].y, shortRadWin.length) annotation (Line(points={
           {78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
   connect(constFixShoRadPar[5].y, shortRadWin.height) annotation (Line(points={
           {78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
-  connect(constFixShoRadPar[6].y, shortRadWin.QRad_out) annotation (Line(points
-        ={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[6].y, shortRadWin.Q_flow_ShoRadOnSur) annotation (
+      Line(points={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,

@@ -244,9 +244,9 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(shortRadWall.QRad_out, absSolarRadWin.Q_flow) annotation (Line(points={{105.065,
-          79.065},{79.5,79.065},{79.5,80},{55,80}},         color={0,0,0}),
-      Text(
+  connect(shortRadWall.Q_flow_ShoRadOnSur, absSolarRadWin.Q_flow) annotation (
+      Line(points={{105.065,79.065},{79.5,79.065},{79.5,80},{55,80}}, color={0,
+          0,0}), Text(
       string="%first",
       index=-1,
       extent={{6,3},{6,3}},
@@ -264,9 +264,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constFixShoRadPar[3].y, shortRadWall.rho) annotation (Line(points={{
-          90.5,93},{104,93},{104,86},{105.065,86},{105.065,79.065}}, color={0,0,
-          127}), Text(
+  connect(constFixShoRadPar[3].y, shortRadWall.solar_reflectance) annotation (
+      Line(points={{90.5,93},{104,93},{104,86},{105.065,86},{105.065,79.065}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -284,8 +284,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constFixShoRadPar[6].y, shortRadWall.QRad_in) annotation (Line(points
-        ={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}), Text(
+  connect(constFixShoRadPar[6].y, shortRadWall.Q_flow_ShoRadFroSur) annotation
+    (Line(points={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
