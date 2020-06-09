@@ -74,9 +74,9 @@ model Case650FF
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_radiative
     annotation (Placement(transformation(extent={{-99,-79},{-79,-59}})));
-  Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiant part"
+  Modelica.Blocks.Math.Gain convectiveInternalGains(k=0.4) "Conective part"
     annotation (Placement(transformation(extent={{-123,-49},{-113,-39}})));
-  Modelica.Blocks.Math.Gain convectiveInternalGains(k=0.4) "Convective part"
+  Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiative part"
     annotation (Placement(transformation(extent={{-122,-74},{-112,-64}})));
   Modelica.Blocks.Sources.RealExpression RoomTemp(y=Room.airload.T)
     annotation (Placement(transformation(extent={{45,41},{65,61}})));
@@ -121,15 +121,15 @@ equation
       color={191,0,0}));
   connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-59,46.5},
           {-46,46.5},{-46,76.59},{-4,76.59}}, color={191,0,0}));
-  connect(Source_InternalGains.y, radiativeInternalGains.u) annotation (Line(
+  connect(Source_InternalGains.y, convectiveInternalGains.u) annotation (Line(
         points={{-132.35,-50.5},{-128,-50.5},{-128,-44},{-124,-44}}, color={0,0,
           127}));
-  connect(radiativeInternalGains.y, InternalGains_convective.Q_flow)
+  connect(convectiveInternalGains.y, InternalGains_convective.Q_flow)
     annotation (Line(points={{-112.5,-44},{-99,-44}}, color={0,0,127}));
-  connect(Source_InternalGains.y, convectiveInternalGains.u) annotation (Line(
+  connect(Source_InternalGains.y, radiativeInternalGains.u) annotation (Line(
         points={{-132.35,-50.5},{-128,-50.5},{-128,-69},{-123,-69}}, color={0,0,
           127}));
-  connect(convectiveInternalGains.y, InternalGains_radiative.Q_flow)
+  connect(radiativeInternalGains.y, InternalGains_radiative.Q_flow)
     annotation (Line(points={{-111.5,-69},{-99,-69}}, color={0,0,127}));
   connect(to_degC.y, FreeFloatTemperature) annotation (Line(points={{91.45,50.5},
           {120,50.5},{120,51}}, color={0,0,127}));

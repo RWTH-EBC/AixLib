@@ -111,9 +111,9 @@ model Case620
   Modelica.Blocks.Math.MultiSum multiSum(nu=2)
     "Sum of heating and cooling power"
     annotation (Placement(transformation(extent={{83,27},{93,37}})));
-  Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiant part"
-    annotation (Placement(transformation(extent={{-123,-49},{-113,-39}})));
   Modelica.Blocks.Math.Gain convectiveInternalGains(k=0.4) "Convective part"
+    annotation (Placement(transformation(extent={{-123,-49},{-113,-39}})));
+  Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiative part"
     annotation (Placement(transformation(extent={{-122,-74},{-112,-64}})));
   Modelica.Blocks.Math.Gain gain(k=1/1000) "Converts to kW"
     annotation (Placement(transformation(extent={{99,28},{106,35}})));
@@ -178,15 +178,15 @@ equation
           64},{66,33.75},{83,33.75}}, color={0,0,127}));
   connect(PowerLoad, PowerLoad)
     annotation (Line(points={{121,32},{121,32}}, color={0,0,127}));
-  connect(Source_InternalGains.y, radiativeInternalGains.u) annotation (Line(
+  connect(Source_InternalGains.y, convectiveInternalGains.u) annotation (Line(
         points={{-132.35,-50.5},{-128,-50.5},{-128,-44},{-124,-44}}, color={0,0,
           127}));
-  connect(radiativeInternalGains.y, InternalGains_convective.Q_flow)
+  connect(convectiveInternalGains.y, InternalGains_convective.Q_flow)
     annotation (Line(points={{-112.5,-44},{-99,-44}}, color={0,0,127}));
-  connect(Source_InternalGains.y, convectiveInternalGains.u) annotation (Line(
+  connect(Source_InternalGains.y, radiativeInternalGains.u) annotation (Line(
         points={{-132.35,-50.5},{-128,-50.5},{-128,-69},{-123,-69}}, color={0,0,
           127}));
-  connect(convectiveInternalGains.y, InternalGains_radiative.Q_flow)
+  connect(radiativeInternalGains.y, InternalGains_radiative.Q_flow)
     annotation (Line(points={{-111.5,-69},{-99,-69}}, color={0,0,127}));
   connect(CoolingPower.y, multiSum.u[2]) annotation (Line(points={{65,47},{66,
           47},{66,30.25},{83,30.25}}, color={0,0,127}));
