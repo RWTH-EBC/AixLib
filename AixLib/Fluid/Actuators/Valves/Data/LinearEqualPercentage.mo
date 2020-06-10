@@ -1,6 +1,7 @@
 ﻿within AixLib.Fluid.Actuators.Valves.Data;
-record LinearLinear = GenericThreeWay(a_ab = Linear(), b_ab=Linear())
-  "Linear-linear valve characteristic for three way valve"
+record LinearEqualPercentage =
+                      GenericThreeWay(a_ab = Linear(), b_ab=EqualPercentage())
+  "Linear-equal percentage valve characteristic for three way valve"
   annotation (
 defaultComponentName="datValLin",
 defaultComponentPrefixes="parameter",
