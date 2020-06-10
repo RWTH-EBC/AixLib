@@ -8,7 +8,8 @@ model PumpInterface_PumpHeadControlled
 
   replaceable
     AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH
-    pumpController(pumpParam=pumpParam) constrainedby Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
+    pumpController(pumpParam=pumpParam) constrainedby
+    Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
     annotation (
     Dialog(enable=true, tab="Control Strategy"),
     Placement(transformation(extent={{-20,40},{20,80}})),
@@ -83,21 +84,12 @@ model PumpInterface_PumpHeadControlled
       group="Pressure",
       enable=false));
 
-  parameter Medium.Temperature T_start=physics.system.T_start
-    "Start value of temperature in PartialLumpedVolume of PumpPhysics"
-    annotation (Dialog(tab="Initialization"));
 
   // Assumptions
   parameter Boolean checkValve=false "= true to prevent reverse flow"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=physics.system.energyDynamics
-    "Formulation of energy balance" annotation (choicesAllMatching=true, Dialog(
-        tab="Assumptions", group="Dynamics"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=physics.system.massDynamics
-    "Formulation of mass balance" annotation (choicesAllMatching=true, Dialog(
-        tab="Assumptions", group="Dynamics"));
 
   // Power and Efficiency
   parameter Boolean calculatePower=false "calc. power consumption?"

@@ -9,16 +9,14 @@ model Heater "Heating register"
 
   RegisterModule registerModule(
     redeclare HydraulicModules.Admix hydraulicModule(
-      dIns=0.01,
-      kIns=0.028,
-      d=0.032,
+      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
+      parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       length=1,
       Kv=6.3,
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-            redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4
-            per))),
+        PumpInterface(pump(redeclare
+            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
     redeclare package Medium2 = MediumWater,
     m1_flow_nominal=1,
     m2_flow_nominal=0.1,

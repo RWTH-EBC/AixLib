@@ -6,56 +6,52 @@ model Pump "Unmixed circuit with pump"
   replaceable BaseClasses.BasicPumpInterface PumpInterface(
     redeclare package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m_flow_nominal)
-                                        "Needs to be redeclared" annotation (
+    final m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics)    "Needs to be redeclared" annotation (
     Dialog(group="Actuators"),
     choicesAllMatching=true,
     Placement(transformation(extent={{-8,12},{8,28}})));
-  Fluid.FixedResistances.PlugFlowPipe pipe1(
+  Fluid.FixedResistances.GenericPipe  pipe1(
     redeclare package Medium = Medium,
+    pipeModel=pipeModel,
+    T_start=T_start,
     final m_flow_nominal=m_flow_nominal,
-    T_start_in=T_start,
-    T_start_out=T_start,
-    nPorts=1,
-    final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
-    dh=d,
-    dIns=dIns,
-    kIns=kIns,
-    final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2 +
-        pipe1.dIns)/(pipe1.dh/2))),
-    length=length)                             annotation (Dialog(enable=true,group="Pipes"),
+    length=length,
+    parameterPipe=parameterPipe,
+    parameterIso=parameterIso,
+    final hCon=hCon,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics)           annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{-60,30},{-40,10}})));
 
-  Fluid.FixedResistances.PlugFlowPipe pipe2(
+  Fluid.FixedResistances.GenericPipe  pipe2(
     redeclare package Medium = Medium,
-    T_start_in=T_start,
-    T_start_out=T_start,
+    pipeModel=pipeModel,
+    T_start=T_start,
     final m_flow_nominal=m_flow_nominal,
-    final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
-    nPorts=1,
-    dh=d,
-    dIns=dIns,
-    kIns=kIns,
-    final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2 +
-        pipe2.dIns)/(pipe2.dh/2))),
-    length=length)                             annotation (Dialog(enable=true,group="Pipes"),
+    length=length,
+    parameterPipe=parameterPipe,
+    parameterIso=parameterIso,
+    final hCon=hCon,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics)           annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{40,30},{60,10}})));
-  Fluid.FixedResistances.PlugFlowPipe pipe3(
+  Fluid.FixedResistances.GenericPipe  pipe3(
     redeclare package Medium = Medium,
-    T_start_in=T_start,
-    T_start_out=T_start,
+    pipeModel=pipeModel,
+    T_start=T_start,
     final m_flow_nominal=m_flow_nominal,
-    final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
-    nPorts=1,
-    dh=d,
-    dIns=dIns,
-    kIns=kIns,
-    final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2 +
-        pipe3.dIns)/(pipe3.dh/2))),
-    length=length)                             annotation (Dialog(enable=true,group="Pipes"),
+    length=length,
+    parameterPipe=parameterPipe,
+    parameterIso=parameterIso,
+    final hCon=hCon,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics)           annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{10,-70},{-10,-50}})));
 
 
@@ -69,22 +65,22 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pipe1.ports_b[1], PumpInterface.port_a)
-    annotation (Line(points={{-40,20},{-8,20}}, color={0,127,255}));
   connect(senT_a1.port_b, pipe1.port_a)
     annotation (Line(points={{-88,20},{-60,20}}, color={0,127,255}));
-  connect(senT_b2.port_a, pipe3.ports_b[1])
-    annotation (Line(points={{-78,-60},{-10,-60}}, color={0,127,255}));
   connect(pipe3.port_a, senT_a2.port_b)
     annotation (Line(points={{10,-60},{72,-60}}, color={0,127,255}));
-  connect(pipe2.ports_b[1], senT_b1.port_a)
-    annotation (Line(points={{60,20},{88,20}}, color={0,127,255}));
   connect(pipe1.heatPort, prescribedTemperature.port) annotation (Line(points={{-50,
           10},{-50,-2},{32,-2},{32,-20}}, color={191,0,0}));
   connect(pipe2.heatPort, prescribedTemperature.port) annotation (Line(points={{50,
           10},{50,-2},{32,-2},{32,-20}}, color={191,0,0}));
   connect(pipe3.heatPort, prescribedTemperature.port)
     annotation (Line(points={{0,-50},{0,-20},{32,-20}}, color={191,0,0}));
+  connect(pipe1.port_b, PumpInterface.port_a)
+    annotation (Line(points={{-40,20},{-8,20}}, color={0,127,255}));
+  connect(pipe2.port_b, senT_b1.port_a)
+    annotation (Line(points={{60,20},{88,20}}, color={0,127,255}));
+  connect(pipe3.port_b, senT_b2.port_a)
+    annotation (Line(points={{-10,-60},{-78,-60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
         Ellipse(
           extent={{-20,80},{20,40}},
