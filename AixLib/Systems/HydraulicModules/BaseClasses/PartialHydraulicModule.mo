@@ -8,34 +8,48 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
+
+  // General Parameters
+  parameter String pipeModel="SimplePipe" annotation(choices(
+              choice="SimplePipe",
+              choice="PlugFlowPipe"),Dialog(group="Parameters"));
+  parameter Modelica.SIunits.Length length "Pipe length of all pipes (can be overwritten in each pipe)"
+    annotation (Dialog(group="Pipes"));
+  parameter DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
+      AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type and diameter (can be overwritten in each pipe)" annotation (choicesAllMatching=true, Dialog(group="Pipes"));
+  parameter DataBase.Pipes.InsulationBaseDataDefinition parameterIso=
+      AixLib.DataBase.Pipes.Insulation.Iso0pc() "Insulation Type (can be overwritten in each pipe)" annotation (choicesAllMatching=true, Dialog(group="Pipes"));
+  parameter Real Kv "Kv value of valve (can be overwritten in the valve)"  annotation (Dialog(group="Actuators"));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+
+
+  // Initialization
+  parameter Modelica.SIunits.Temperature T_start=303.15
+    "Initialization temperature" annotation(Dialog(tab="Initialization"));
+
+  // Advanced
+  parameter Modelica.SIunits.Time tau=15
+    "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
+  parameter  Modelica.SIunits.Temperature T_amb=298.15 "Ambient temperature for heat loss" annotation(Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.Time tauHeaTra=parameterPipe.d_i*parameterPipe.d_i/4*1000*4180*(log(parameterPipe.d_i/parameterPipe.d_o)/2/parameterPipe.lambda + log(parameterPipe.d_o/parameterPipe.d_o*(1+parameterIso.factor))/2/parameterIso.lambda + 1/hCon/parameterPipe.d_o*(1+parameterIso.factor))
+    "Time constant for heat transfer of temperature sensors to ambient" annotation(Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=4
+    "Convection heat transfer coeffient for all pipes" annotation (Dialog(tab="Advanced"));
+
+  // Assumptions
   parameter Boolean allowFlowReversal=true
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
-    "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start=303.15
-    "Initialization temperature" annotation(Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Time tau=15
-    "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Time tauHeaTra=1200
-    "Time constant for heat transfer of temperature sensors" annotation(Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Length dIns
-    "Thickness of insulation of all pipes (can be overwritten in each pipe) "
-    annotation (Dialog(group="Pipes"));
-  parameter Modelica.SIunits.ThermalConductivity kIns
-    "Heat conductivity of pipe insulation of all pipes (can be overwritten in each pipe)"
-    annotation (Dialog(group="Pipes"));
-  parameter Modelica.SIunits.Length d
-    "Hydraulic diameter of all pipes (can be overwritten in each pipe)"
-    annotation (Dialog(group="Pipes"));
-  parameter Modelica.SIunits.Length length "Pipe length of all pipes (can be overwritten in each pipe)"
-    annotation (Dialog(group="Pipes"));
-  parameter Real Kv "Kv value of valve (can be overwritten in valve)"  annotation (Dialog(group="Actuators"));
+
+  // Dynamics
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+
 
   BaseClasses.HydraulicBus hydraulicBus annotation (Placement(transformation(
           extent={{-20,80},{20,120}}), iconTransformation(extent={{-20,80},{20,120}})));
