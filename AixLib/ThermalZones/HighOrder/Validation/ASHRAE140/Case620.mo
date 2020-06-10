@@ -46,7 +46,11 @@ model Case620
     ceiling(ISOrientation=3,
       calcMethodIn=2,        heatTransfer_Outside(calcMethod=2)),
     outerWall_West(calcMethodIn=2,
-                   heatTransfer_Outside(calcMethod=2)),
+                   heatTransfer_Outside(calcMethod=2),
+      windowSimple(WindowType=
+            AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
+          redeclare model correctionSolarGain =
+            Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140)),
     outerWall_North(calcMethodIn=2,
                     heatTransfer_Outside(calcMethod=2)),
     outerWall_East(calcMethodIn=2,
