@@ -2,29 +2,19 @@ within AixLib.Systems.HydraulicModules;
 model Injection "Injection circuit with pump and three way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-  replaceable BaseClasses.BasicPumpInterface PumpInterface(
-    redeclare package Medium = Medium,
-    final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m_flow_nominal,
-    T_start=T_start,
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics)           "Needs to be redeclared" annotation (
-    Dialog(group="Actuators"),
-    choicesAllMatching=true,
-    Placement(transformation(extent={{48,12},{64,28}})));
-
+  parameter Fluid.Actuators.Valves.Data.GenericThreeWay valveCharacteristic "Valve characteristic of three way valve"
+    annotation (choicesAllMatching=true,Placement(transformation(extent={{-120,-120},{-100,-100}})),Dialog(group="Actuators"));
 
 
   parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
 
-  AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear valve(
+  Fluid.Actuators.Valves.ThreeWayTable                        valve(
     final massDynamics=massDynamics,
     order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    l={0.001,0.001},
     redeclare package Medium = Medium,
     T_start=T_start,
     tau=0.2,
@@ -32,7 +22,10 @@ model Injection "Injection circuit with pump and three way valve"
     final energyDynamics=energyDynamics,
     y_start=0,
     Kv=Kv,
-    dpFixed_nominal={1000,1000}) annotation (Dialog(enable=true, group="Actuators"),
+    dpFixed_nominal={1000,1000},
+    flowCharacteristics1=valveCharacteristic.a_ab,
+    flowCharacteristics3=valveCharacteristic.b_ab)
+                                 annotation (Dialog(enable=true, group="Actuators"),
       Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
@@ -181,6 +174,19 @@ model Injection "Injection circuit with pump and three way valve"
     final allowFlowReversal=allowFlowReversal,
     final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{10,-60},{22,-72}})));
+
+
+  replaceable BaseClasses.BasicPumpInterface PumpInterface(
+    redeclare package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics)           "Needs to be redeclared" annotation (
+    Dialog(group="Actuators"),
+    choicesAllMatching=true,
+    Placement(transformation(extent={{48,12},{64,28}})));
+
 
 
 

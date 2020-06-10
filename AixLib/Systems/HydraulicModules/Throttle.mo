@@ -10,7 +10,8 @@ model Throttle "Throttle circuit with two way valve"
     Kv=Kv,
     order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
-    y_start=0)
+    y_start=0,
+    flowCharacteristics=Fluid.Actuators.Valves.Data.Linear())
            annotation (Dialog(enable=true, group="Actuators"), Placement(
         transformation(extent={{-12,10},{8,30}})));
   Fluid.FixedResistances.GenericPipe  pipe1(

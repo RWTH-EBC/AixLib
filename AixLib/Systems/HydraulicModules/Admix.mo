@@ -5,7 +5,7 @@ model Admix "Admix circuit with three way valve and pump"
   parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
-  parameter Fluid.Actuators.Valves.Data.GenericThreeWay valveCharacteristic
+  parameter Fluid.Actuators.Valves.Data.GenericThreeWay valveCharacteristic "Valve characteristic of three way valve"
     annotation (choicesAllMatching=true,Placement(transformation(extent={{-120,-120},{-100,-100}})),Dialog(group="Actuators"));
                                                                            // = AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage()
 

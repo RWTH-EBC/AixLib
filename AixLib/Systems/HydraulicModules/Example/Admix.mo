@@ -7,6 +7,7 @@ model Admix "Test for admix circuit"
 
   AixLib.Systems.HydraulicModules.Admix Admix(
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare

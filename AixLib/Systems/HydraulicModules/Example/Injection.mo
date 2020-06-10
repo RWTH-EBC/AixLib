@@ -14,6 +14,7 @@ model Injection "Test for injection circuit"
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
     pipe8(length=0.5),
     length=1,
     Kv=10,
