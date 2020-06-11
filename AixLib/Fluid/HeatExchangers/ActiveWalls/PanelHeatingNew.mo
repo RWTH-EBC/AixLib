@@ -2727,13 +2727,13 @@ Added documentation.</li>
         annotation (Placement(transformation(extent={{-10,84},{10,104}})));
       Utilities.Interfaces.ConvRadComb convRadComb_ceiling
         annotation (Placement(transformation(extent={{-10,-104},{10,-84}})));
-      Verification.Checking_q_TypesAandC.q_TypesAandC calculating_q(
+      Determine_q.Checking_q_TypesAandC.q_TypesAandC calculating_q(
         lambda_M=0.3,
         R_lambdaB=0.1,
         dT_H=dT_H,
         D=0.01)
         annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
-      Verification.Checking_q_TypesAandC.qG_TypeAandC qG_TypeAandC(ZoneType=
+      Determine_q.Checking_q_TypesAandC.qG_TypeAandC qG_TypeAandC(ZoneType=
             ZoneSpecification.ZoneDefinition())
         annotation (Placement(transformation(extent={{-100,-44},{-80,-24}})));
     equation
@@ -2844,7 +2844,7 @@ Added documentation.</li>
             Line(points={{-4,68},{0,64}}, color={28,108,200})}));
     end TestingParameters;
 
-    package Verification
+    package Determine_q
       package Checking_q_TypeB
         extends Modelica.Icons.UtilitiesPackage;
         block a_T "Defining a_T following table A.6 p.32 DIN 1264-2"
@@ -2878,7 +2878,7 @@ Added documentation.</li>
 
         model q_TypeB
           "Merge of all functions to calculate q by typing in needed parameters for panel heating type B"
-          parameter Modelica.SIunits.Distance T = 0.1 "Spacing between tubes in m";
+          parameter Modelica.SIunits.Distance T "Spacing between tubes in m";
           parameter Modelica.SIunits.Diameter D = 0.01 "Outer diameter of pipe, including insulating in m";
           parameter Boolean withInsulating = false;
           parameter Modelica.SIunits.Diameter d_a = 0.1 "outer diameter of pipe without insulating in m";
@@ -2893,7 +2893,7 @@ Added documentation.</li>
           parameter Modelica.SIunits.ThermalConductivity lambda_E = 1.2 "Thermal Conductivity of cover";
           parameter Modelica.SIunits.Thickness s_WL=0.001 "Thickness of constitution for themal conduction";
           parameter Modelica.SIunits.ThermalConductivity lambda_WL=0.1 "Thermal conductivity of constitution for thermal conduction";
-          parameter Modelica.SIunits.Length L=1 "Width of constitution for thermal conduction";
+          parameter Modelica.SIunits.Length L "Width of constitution for thermal conduction";
 
           Modelica.SIunits.CoefficientOfHeatTransfer B(start = 6.7) "system dependent coefficient in W/(m^2*K)";
           Modelica.SIunits.CoefficientOfHeatTransfer B_0 = 6.7 "system dependent coefficient for lambda_R0 = 0.35 W/(m.K) abd s_R0 = 0.002 m";
@@ -2909,11 +2909,10 @@ Added documentation.</li>
 
           Real m_T;
 
-          Real K_WL;
           Real b_u=Determine_bu.b_u;
           Real fT;
 
-          Real product_ai "product of powers for parameters of floor heating";
+          Real product_ai;
           Modelica.SIunits.CoefficientOfHeatTransfer K_H;
           replaceable Modelica.SIunits.TemperatureDifference dT_H = 1;
 
@@ -2922,13 +2921,13 @@ Added documentation.</li>
           import Modelica.Math.log;
           import Modelica.Blocks.Math.Sqrt;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.a_T
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.a_T
             Determine_aT(s_u=s_u, lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.a_K
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.a_K
             Determine_aK(T=T)
             annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.a_WL
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.a_WL
             Determine_aWL(
             T=T,
             D=D,
@@ -2937,20 +2936,19 @@ Added documentation.</li>
             s_u=s_u,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.a_WL
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.a_WL
             Determine_aWL0(
             T=T,
             D=D,
             lambda_WL=lambda_WL,
             s_u=s_u,
             lambda_E=lambda_E,
-            s_WL=0)
-            annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.b_u
-            Determine_bu(T=T)
-            annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
+            s_WL=0) annotation (Placement(transformation(extent={{-100,-40},{-80,
+                    -20}})));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.b_u
+            Determine_bu(T=T) annotation (Placement(transformation(extent={{-100,
+                    -80},{-80,-60}})));
         equation
-          K_WL = CalculateK_WL(s_WL = s_WL, lambda_WL = lambda_WL, b_u=b_u, s_u = s_u, lambda_E = lambda_E);
 
           if lambda_R0 == 0.35 and s_R0 == 0.002 then
             B = 6.7;
@@ -2995,12 +2993,8 @@ Added documentation.</li>
           parameter Modelica.SIunits.Thickness s_u "Thickness of cover above pipe";
           parameter Modelica.SIunits.ThermalConductivity lambda_E "Thermal conductivity of cover";
 
-
           Real b_u = Determine_bu.b_u;
           Real K_WL = CalculateK_WL(s_WL=s_WL,lambda_WL=lambda_WL,b_u=b_u,s_u=s_u,lambda_E=lambda_E);
-
-
-
 
           Modelica.Blocks.Interfaces.RealOutput a_WL
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
@@ -3053,14 +3047,12 @@ Added documentation.</li>
           Modelica.Blocks.Tables.CombiTable1D TableKWL_Infinity(table=[0.05,1; 0.075,1.01;
                 0.1,1.02; 0.15,1.04; 0.2,1.06; 0.225,1.07; 0.3,1.09; 0.375,1.1; 0.45,1.1])
             annotation (Placement(transformation(extent={{-20,-110},{0,-90}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.b_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.b_u
             Determine_bu(T=T)
             annotation (Placement(transformation(extent={{-80,80},{-60,100}})));
         equation
 
-              a_WL = smooth(1, noEvent(if K_WL == 0 then
-           TableA8a.y
-              elseif K_WL <= 0.1 and K_WL > 0 then
+              a_WL = if K_WL <= 0.1 and K_WL > 0 then
           TableA8b.y
               elseif K_WL <= 0.2 and K_WL > 0.1 then
           TableA8c.y
@@ -3069,10 +3061,10 @@ Added documentation.</li>
               elseif K_WL <= 0.4 and K_WL >0.3 then
           TableA8e.y
               elseif K_WL <= 1 and K_WL > 0.4 then
-          TableA8f.y  else
-                        (TableKWL_Infinity.y[1]-(TableKWL_Infinity.y[1] - TableA8a.y) * ((TableKWL_Infinity.y[1] -1) / (TableKWL_Infinity.y[1] - TableA8a.y))^(K_WL))));
-
-
+          TableA8f.y
+        elseif K_WL > 1 then
+                        (TableKWL_Infinity.y[1]-(TableKWL_Infinity.y[1] - TableA8a.y) * ((TableKWL_Infinity.y[1] -1) / (TableKWL_Infinity.y[1] - TableA8a.y))^(K_WL))
+        else TableA8a.y;
 
           connect(Spacing.y, TableA8a.u1) annotation (Line(points={{-79,10},{-60,10},{-60,
                   76},{-22,76}}, color={0,0,127}));
@@ -3099,7 +3091,6 @@ Added documentation.</li>
           connect(ParameterK_WL.y, TableA8f.u2)
             annotation (Line(points={{-79,-80},{-22,-80}}, color={0,0,127}));
 
-
           connect(Spacing.y, TableKWL_Infinity.u[1]) annotation (Line(points={{-79,10},{
                   -60,10},{-60,-100},{-22,-100}}, color={0,0,127}));
 
@@ -3109,7 +3100,6 @@ Added documentation.</li>
 
         block a_K "Defining a_T following table A.6 p.32 DIN 1264-2"
           parameter Modelica.SIunits.Distance T;
-
 
           Modelica.Blocks.Tables.CombiTable1D Table_A9(table=[0.05,1; 0.075,
                 0.99; 0.1,0.98; 0.15,0.95; 0.2,0.92; 0.225,0.9; 0.3,0.82; 0.375,
@@ -3130,42 +3120,52 @@ Added documentation.</li>
 
         model qG_TypeB
           "Calculating the limiting heat flux for panel heating Type B"
-          extends AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.q_TypeB;
+          extends
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.q_TypeB;
+          replaceable parameter
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.ZoneDefinition
+            ZoneType=
+              AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.OccupancyZone()
+                 annotation (Dialog(group="Type"), choicesAllMatching=true);
 
-          parameter Modelica.SIunits.Distance T = 0.1 "Spacing between tubes in m";
-          parameter Modelica.SIunits.Diameter D = 0.01 "Outer diameter of pipe, including insulating in m";
-          parameter Boolean withInsulating = false;
-          parameter Modelica.SIunits.Diameter d_a = 0.1 "outer diameter of pipe without insulating in m";
-          Modelica.SIunits.Diameter d_M = D "Outer diameter of insulating in m";
-          parameter Modelica.SIunits.CoefficientOfHeatTransfer lambda_M = 0.2 "Coefficient of heat transfer for insulating";
-          parameter Modelica.SIunits.Thickness s_u = 0.01 "thickness of cover above pipe in m";
-          parameter Modelica.SIunits.CoefficientOfHeatTransfer lambda_R = 0.35 "Coefficient of heat transfer of pipe material";
-          Modelica.SIunits.CoefficientOfHeatTransfer lambda_R0 = lambda_R "Coeffieicnt of heat transfer of pipe";
-          parameter Modelica.SIunits.Thickness s_R = 0.002 "thickness of pipe wall in m";
-          Modelica.SIunits.Thickness s_R0 = s_R;
-          parameter Modelica.SIunits.ThermalInsulance R_lambdaB = 0.1 "Thermal resistance of flooring in W/(m^2*K)";
-          parameter Modelica.SIunits.ThermalConductivity lambda_E = 1.2 "Thermal Conductivity of cover";
-          parameter Modelica.SIunits.Thickness s_WL=0.001 "Thickness of constitution for themal conduction";
-          parameter Modelica.SIunits.ThermalConductivity lambda_WL=0.1 "Thermal conductivity of constitution for thermal conduction";
-          parameter Modelica.SIunits.Length L=1 "Width of constitution for thermal conduction";
-
-          parameter Modelica.SIunits.Temperature T_Fmax "maximum surface temperature";
-          parameter Modelica.SIunits.Temperature T_Room "Room temperature";
+          Modelica.SIunits.Temperature T_Fmax = ZoneType.T_Fmax "maximum surface temperature";
+          Modelica.SIunits.Temperature T_Room = ZoneType.T_Room "Room temperature";
 
           Real phi = (T_Fmax - T_Room / d_T0)^(1.1);
           Modelica.SIunits.TemperatureDifference d_T0 = 9;
           Real B_G = Determine_BG.B_G;
-          Modelica.SIunits.TemperatureDifference dTeta_H = T_Fmax - T_Room "maximum temperature difference between floor surface and room";
           Real n_G = Determine_nG.n_G;
           Modelica.SIunits.TemperatureDifference dT_HG = phi * ( B_G / (B * product_ai))^(1/(1-n_G));
 
-          Modelica.SIunits.HeatFlux q_G = LimitingCurve(phi = phi, B_G = B_G, dTeta_H = dTeta_H, n_G = n_G);
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.B_G
-            Determine_BG(T=T, K_WL=K_WL)
+          Real B_GL = Determine_BGL.B_G;
+          Real n_GL = Determine_nGL.n_G;
+
+          Modelica.SIunits.HeatFlux q_G;
+          Modelica.SIunits.HeatFlux q_GL = LimitingCurve(phi = phi, B_G = B_GL, n_G = n_GL, dT_H = dT_H);
+
+          Modelica.SIunits.HeatFlux q_Gmax = ZoneType.q_Gmax;
+
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.B_G
+            Determine_BG(T=T, K_WL=Determine_aWL.K_WL)
             annotation (Placement(transformation(extent={{0,60},{20,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypeB.n_G
-            Determine_nG(T=T, K_WL=K_WL)
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.n_G
+            Determine_nG(T=T, K_WL=Determine_aWL.K_WL)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.B_G
+            Determine_BGL(T=T, K_WL=Determine_aWL.K_WL)
+            annotation (Placement(transformation(extent={{40,60},{60,80}})));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.n_G
+            Determine_nGL(T=T, K_WL=Determine_aWL.K_WL)
+            annotation (Placement(transformation(extent={{40,20},{60,40}})));
+
+        equation
+
+          if T == L then
+            q_G = q_GL;
+          elseif L < T then
+            q_G = a_WL / Determine_aWL.a_WL * q_GL;
+          end if;
+
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
         end qG_TypeB;
@@ -3276,6 +3276,35 @@ Added documentation.</li>
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
         end b_u;
+
+        model qN_TypeB
+          "Calculating the normative heat flux for panel heating Type B for the condition that L = T"
+          extends
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.q_TypeB(
+              R_lambdaB=0);
+
+          Modelica.SIunits.Temperature T_Fmax = 29 "maximum surface temperature";
+          Modelica.SIunits.Temperature T_Room = 20 "Room temperature";
+
+          Real phi = 1;
+          Modelica.SIunits.TemperatureDifference d_T0 = 9;
+          Real B_G = Determine_BG.B_G;
+          Real n_G = Determine_nG.n_G;
+          Modelica.SIunits.TemperatureDifference dT_N = phi * (B_G / (B * product_ai))^(1/(1-n_G));
+
+          Modelica.SIunits.HeatFlux q_N = LimitingCurve(phi = phi, B_G = B_G, dT_H = dT_H, n_G = n_G);
+
+           Modelica.SIunits.HeatFlux q_Gmax = 100;
+
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.B_G
+            Determine_BG(T=T, K_WL=Determine_aWL.K_WL)
+            annotation (Placement(transformation(extent={{0,60},{20,80}})));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeB.n_G
+            Determine_nG(T=T, K_WL=Determine_aWL.K_WL)
+            annotation (Placement(transformation(extent={{0,20},{20,40}})));
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+                coordinateSystem(preserveAspectRatio=false)));
+        end qN_TypeB;
       end Checking_q_TypeB;
 
       package Checking_q_TypesAandC
@@ -3324,19 +3353,19 @@ Added documentation.</li>
 
           import Modelica.Math.log;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.a_T
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.a_T
             Determine_aT(R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.a_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.a_u
             Determine_au(T=T, R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.a_D
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.a_D
             Determine_aD(T=T, R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.a_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.a_u
             Determine_au375(R=R_lambdaB, T=0.375)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.a_D
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.a_D
             Determine_aD375(R=R_lambdaB, T=0.375)
             annotation (Placement(transformation(extent={{0,-20},{20,0}})));
         equation
@@ -3465,65 +3494,36 @@ Added documentation.</li>
         model qG_TypeAandC
           "Calculating the limiting heat flux for panel heating Types A and C"
           import Modelica.Constants.e;
-          parameter
+          extends
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.q_TypesAandC;
+          replaceable parameter
             AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.ZoneDefinition
             ZoneType=
               AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.OccupancyZone()
                  annotation (Dialog(group="Type"), choicesAllMatching=true);
-          parameter Modelica.SIunits.Distance T = 0.1 "Spacing between tubes in m";
-          parameter Modelica.SIunits.Diameter D = 0.01 "Outer diameter of pipe, including insulating in m";
-          parameter Boolean withInsulating = false;
-          parameter Modelica.SIunits.Diameter d_a = 0.1 "outer diameter of pipe without insulating in m";
-          Modelica.SIunits.Diameter d_M = D "Outer diameter of insulating in m";
-          parameter Modelica.SIunits.CoefficientOfHeatTransfer lambda_M = 0.2 "Coefficient of heat transfer for insulating";
-          parameter Modelica.SIunits.Thickness s_u = 0.01 "thickness of screed above pipe in m";
-          parameter Modelica.SIunits.CoefficientOfHeatTransfer lambda_R = 0.35 "Coefficient of heat transfer of pipe material";
-          Modelica.SIunits.CoefficientOfHeatTransfer lambda_R0 = lambda_R "Coeffieicnt of heat transfer of pipe";
-          parameter Modelica.SIunits.Thickness s_R = 0.002 "thickness of pipe wall in m";
-          Modelica.SIunits.Thickness s_R0 = s_R;
-          parameter Modelica.SIunits.ThermalInsulance R_lambdaB = 0.1 "Thermal resistance of flooring in W/(m^2*K)";
-          parameter Modelica.SIunits.ThermalConductivity lambda_E = 1.2 "Thermal Conductivity of screed";
 
-          replaceable Modelica.SIunits.TemperatureDifference dT_H = 1;
-
-          parameter Modelica.SIunits.Temperature T_Fmax = ZoneType.T_Fmax "maximum surface temperature";
-          parameter Modelica.SIunits.Temperature T_Room = ZoneType.T_Room "Room temperature";
+          Modelica.SIunits.Temperature T_Fmax = ZoneType.T_Fmax "maximum surface temperature";
+          Modelica.SIunits.Temperature T_Room = ZoneType.T_Room "Room temperature";
 
           Real f_G;
           Real phi = (T_Fmax - T_Room / d_T0)^(1.1);
           Modelica.SIunits.TemperatureDifference d_T0 = 9;
           Real B_G = Determine_BG.B_G;
-          Modelica.SIunits.TemperatureDifference dTeta_H = T_Fmax - T_Room "maximum temperature difference between floor surface and room";
           Real n_G = Determine_nG.n_G;
 
           Modelica.SIunits.HeatFlux q_G;
-          Modelica.SIunits.HeatFlux q_G375 = LimitingCurve(phi = phi, B_G = Determine_BG375.B_G, dTeta_H = dTeta_H, n_G = Determine_nG375.n_G);
+          Modelica.SIunits.HeatFlux q_G375 = LimitingCurve(phi = phi, B_G = Determine_BG375.B_G, dT_H = dT_H, n_G = Determine_nG375.n_G);
           Modelica.SIunits.HeatFlux q_Gmax = ZoneType.q_Gmax;
-
-
 
           Modelica.SIunits.TemperatureDifference dT_HG;
 
-          q_TypesAandC Determine_q(
-            T=T,
-            D=D,
-            withInsulating=withInsulating,
-            d_a=d_a,
-            lambda_M=lambda_M,
-            s_u=s_u,
-            lambda_R=lambda_R,
-            s_R=s_R,
-            R_lambdaB=R_lambdaB,
-            lambda_E=lambda_E,
-            dT_H=dT_H)
-            annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.B_G
             Determine_BG(
             s_u=s_u,
             T=T,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.n_G
             Determine_nG(
             s_u=s_u,
             T=T,
@@ -3541,28 +3541,30 @@ Added documentation.</li>
             lambda_E=lambda_E,
             dT_H=dT_H,
             T=0.375) annotation (Placement(transformation(extent={{0,60},{20,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.B_G
             Determine_BG375(
             s_u=s_u,
             lambda_E=lambda_E,
-            T=0.375) annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Verification.Checking_q_TypesAandC.n_G
+            T=0.375)
+            annotation (Placement(transformation(extent={{0,20},{20,40}})));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.n_G
             Determine_nG375(
             s_u=s_u,
             lambda_E=lambda_E,
-            T=0.375) annotation (Placement(transformation(extent={{0,-20},{20,0}})));
+            T=0.375)
+            annotation (Placement(transformation(extent={{0,-20},{20,0}})));
 
         equation
           if T <= 0.375 then
-          q_G = LimitingCurve(phi = phi, B_G = B_G, dTeta_H = dTeta_H, n_G = n_G);
+          q_G = LimitingCurve(phi = phi, B_G = B_G, dT_H = dT_H, n_G = n_G);
           else
             q_G = q_G375 * 0.375 / T * f_G;
           end if;
 
           if T <= 0.375 then
-            dT_HG = phi * ( B_G / (Determine_q.B * Determine_q.product_ai))^(1/(1-n_G));
+            dT_HG = phi * ( B_G / (B * product_ai))^(1/(1-n_G));
           else
-            dT_HG = phi * ( Determine_BG375.B_G / (Determine_q.B * Determine_q.product_ai))^(1/(1-Determine_nG.n_G));
+            dT_HG = phi * ( Determine_BG375.B_G / (B * product_ai))^(1/(1-Determine_nG.n_G));
           end if;
 
           if s_u/T <= 0.173 then
@@ -3580,7 +3582,6 @@ Added documentation.</li>
           parameter Modelica.SIunits.Thickness s_u= 0.1 "thickness of cover above pipe in m";
           parameter Modelica.SIunits.Distance T=0.2 "spacing in m";
           parameter Modelica.SIunits.ThermalConductivity lambda_E=1.2 "Thermal Conductivity of cover";
-
 
           Modelica.Blocks.Sources.RealExpression Spacing(y=T)
             annotation (Placement(transformation(extent={{-100,4},{-80,24}})));
@@ -3689,6 +3690,88 @@ Added documentation.</li>
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
         end n_G;
+
+        model qN_TypeAandC
+          "Calculating the normative heat flux for panel heating Types A and C"
+          import Modelica.Constants.e;
+          extends
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.q_TypesAandC(
+              R_lambdaB=0);
+
+          Modelica.SIunits.Temperature T_Fmax = 29 "maximum surface temperature";
+          Modelica.SIunits.Temperature T_Room = 20 "Room temperature";
+
+          Real f_G;
+          Real phi = 1;
+          Modelica.SIunits.TemperatureDifference d_T0 = 9;
+          Real B_G = Determine_BG.B_G;
+          Real n_G = Determine_nG.n_G;
+
+          Modelica.SIunits.HeatFlux q_N;
+          Modelica.SIunits.HeatFlux q_N375 = LimitingCurve(phi = phi, B_G = Determine_BG375.B_G, dT_H = dT_H, n_G = Determine_nG375.n_G);
+          Modelica.SIunits.HeatFlux q_Gmax = 100;
+
+          Modelica.SIunits.TemperatureDifference dT_N;
+
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.B_G
+            Determine_BG(
+            s_u=s_u,
+            T=T,
+            lambda_E=lambda_E)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.n_G
+            Determine_nG(
+            s_u=s_u,
+            T=T,
+            lambda_E=lambda_E)
+            annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
+          q_TypesAandC Determine_q375(
+            D=D,
+            withInsulating=withInsulating,
+            d_a=d_a,
+            lambda_M=lambda_M,
+            s_u=s_u,
+            lambda_R=lambda_R,
+            s_R=s_R,
+            R_lambdaB=R_lambdaB,
+            lambda_E=lambda_E,
+            dT_H=dT_H,
+            T=0.375) annotation (Placement(transformation(extent={{0,60},{20,80}})));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.B_G
+            Determine_BG375(
+            s_u=s_u,
+            lambda_E=lambda_E,
+            T=0.375)
+            annotation (Placement(transformation(extent={{0,20},{20,40}})));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypesAandC.n_G
+            Determine_nG375(
+            s_u=s_u,
+            lambda_E=lambda_E,
+            T=0.375)
+            annotation (Placement(transformation(extent={{0,-20},{20,0}})));
+
+        equation
+          if T <= 0.375 then
+          q_N = LimitingCurve(phi = phi, B_G = B_G, dT_H = dT_H, n_G = n_G);
+          else
+            q_N = q_N375 * 0.375 / T * f_G;
+          end if;
+
+          if T <= 0.375 then
+            dT_N = phi * ( B_G / (B * product_ai))^(1/(1-n_G));
+          else
+            dT_N = phi * ( Determine_BG375.B_G / (B * product_ai))^(1/(1-Determine_nG.n_G));
+          end if;
+
+          if s_u/T <= 0.173 then
+            f_G = 1;
+          else
+            f_G = (q_Gmax - (q_Gmax - q_N375 * 0.375 / T) * e^(-20 * (s_u/T-0.173)^2)) / (q_N375 * 0.375 / T);
+          end if;
+
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+                coordinateSystem(preserveAspectRatio=false)));
+        end qN_TypeAandC;
       end Checking_q_TypesAandC;
 
       package Checking_q_TypeD
@@ -3735,34 +3818,60 @@ Added documentation.</li>
 
         model qG_TypeD
           "Calculating the limiting heat flux for panel heating Type D"
-
-          parameter Modelica.SIunits.Thickness s_u = 0.01 "thickness of cover above pipe in m";
-          parameter Modelica.SIunits.ThermalInsulance R_lambdaB = 0.1 "Thermal resistance of flooring in W/(m^2*K)";
-          parameter Modelica.SIunits.ThermalConductivity lambda_E = 1.2 "Thermal Conductivity of cover";
+          extends
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeD.q_TypeD;
+          replaceable parameter
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.ZoneDefinition
+            ZoneType=
+              AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.OccupancyZone()
+                 annotation (Dialog(group="Type"), choicesAllMatching=true);
 
         replaceable Modelica.SIunits.TemperatureDifference dT_H = 1;
 
-          parameter Modelica.SIunits.Temperature T_Fmax "maximum surface temperature";
-          parameter Modelica.SIunits.Temperature T_Room "Room temperature";
+          Modelica.SIunits.Temperature T_Fmax = ZoneType.T_Fmax "maximum surface temperature";
+          Modelica.SIunits.Temperature T_Room = ZoneType.T_Room "Room temperature";
 
           Real phi = (T_Fmax - T_Room / d_T0)^(1.1);
           Modelica.SIunits.TemperatureDifference d_T0 = 9;
           Real B_G = 100;
-          Modelica.SIunits.TemperatureDifference dTeta_H = T_Fmax - T_Room "maximum temperature difference between floor surface and room";
           Real n_G = 0;
 
-          Modelica.SIunits.HeatFlux q_G = LimitingCurve(phi = phi, B_G = B_G, dTeta_H = dTeta_H, n_G = n_G);
+          Modelica.SIunits.HeatFlux q_G = LimitingCurve(phi = phi, B_G = B_G, dT_H = dT_H, n_G = n_G);
 
-          Modelica.SIunits.TemperatureDifference dT_HG = phi * ( B_G / (Determine_q.B * Determine_q.product_ai))^(1/(1-n_G));
-          q_TypeD Determine_q(
-            s_u=s_u,
-            R_lambdaB=R_lambdaB,
-            lambda_E=lambda_E,
-            dT_H=dT_H)
-            annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
+          Modelica.SIunits.TemperatureDifference dT_HG = phi * ( B_G / (B * product_ai))^(1/(1-n_G));
+
+          Modelica.SIunits.HeatFlux q_Gmax = ZoneType.q_Gmax;
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
         end qG_TypeD;
+
+        model qN_TypeD
+          "Calculating the normative heat flux for panel heating Type D"
+          extends
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.Checking_q_TypeD.q_TypeD(
+              R_lambdaB=0);
+          replaceable parameter
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.ZoneDefinition
+            ZoneType=
+              AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.OccupancyZone()
+                 annotation (Dialog(group="Type"), choicesAllMatching=true);
+
+        replaceable Modelica.SIunits.TemperatureDifference dT_H = 1;
+
+          Modelica.SIunits.Temperature T_Fmax = 29 "maximum surface temperature";
+          Modelica.SIunits.Temperature T_Room = 20 "Room temperature";
+
+          Real phi = 1;
+          Modelica.SIunits.TemperatureDifference d_T0 = 9;
+          Real B_G = 100;
+          Real n_G = 0;
+
+          Modelica.SIunits.HeatFlux q_N = LimitingCurve(phi = phi, B_G = B_G, dT_H = dT_H, n_G = n_G);
+
+          Modelica.SIunits.TemperatureDifference dT_N = phi * ( B_G / (B * product_ai))^(1/(1-n_G));
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+                coordinateSystem(preserveAspectRatio=false)));
+        end qN_TypeD;
       end Checking_q_TypeD;
 
       function BasicCharacteristic
@@ -3789,17 +3898,23 @@ Added documentation.</li>
       function LimitingCurve
         "Maximum Heat Flux for panel heating following equation 18 p. 11 DIN 1264-4"
         input Real B_G;
-        input Modelica.SIunits.TemperatureDifference dTeta_H "maximum temperature difference between floor surface and room";
+        input Modelica.SIunits.TemperatureDifference dT_H "maximum temperature difference between floor surface and room";
         input Real phi;
         input Real n_G;
         output Modelica.SIunits.HeatFlux q_G;
 
       algorithm
-        q_G :=phi*B_G*(dTeta_H/phi)^n_G;
-
+        q_G :=phi*B_G*(dT_H/phi)^n_G;
 
       end LimitingCurve;
-    end Verification;
+
+      model HeatFlux_DIN1264
+        "Determination of maximum and normative heat flux according to DIN 1264"
+
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+              coordinateSystem(preserveAspectRatio=false)));
+      end HeatFlux_DIN1264;
+    end Determine_q;
 
      function logDT =
         AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.logDT;
@@ -3811,7 +3926,7 @@ Added documentation.</li>
 
        parameter Modelica.SIunits.Temperature T_Fmax;
        parameter Modelica.SIunits.Temperature T_Room;
-       parameter Modelica.SIunits.HeatFlux q_Gmax;
+       Modelica.SIunits.HeatFlux q_Gmax = 8.92 * (T_Fmax - T_Room)^1.1;
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
