@@ -21,7 +21,7 @@ model Admix "Admix circuit with three way valve and pump"
     final m_flow_nominal=m_flow_nominal,
     final energyDynamics=energyDynamics,
     Kv=Kv,
-    dpFixed_nominal={1000,1000},
+    dpFixed_nominal={10,10},
     final flowCharacteristics1=valveCharacteristic.a_ab,
     final flowCharacteristics3=valveCharacteristic.b_ab)
                                  annotation (Dialog(enable=true, group="Actuators"),

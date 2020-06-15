@@ -22,7 +22,7 @@ model Injection "Injection circuit with pump and three way valve"
     final energyDynamics=energyDynamics,
     y_start=0,
     Kv=Kv,
-    dpFixed_nominal={1000,1000},
+    dpFixed_nominal={10,10},
     flowCharacteristics1=valveCharacteristic.a_ab,
     flowCharacteristics3=valveCharacteristic.b_ab)
                                  annotation (Dialog(enable=true, group="Actuators"),
