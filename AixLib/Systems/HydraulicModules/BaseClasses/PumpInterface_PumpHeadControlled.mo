@@ -110,7 +110,7 @@ model PumpInterface_PumpHeadControlled
     T_start=T_start,
     checkValve=checkValve,
     V=V,
-    energyDynamics=energyDynamics,
+    final energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     massDynamics=massDynamics,
     calculatePower=calculatePower,
     calculateEfficiency=calculateEfficiency,
