@@ -79,7 +79,7 @@ public
     FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
 
-    Modelica.Blocks.Interfaces.RealOutput Energy[3](unit="J")
+    Modelica.Blocks.Interfaces.RealOutput Energy[3](each unit="J")
     "1=W_el 2=Q_th 3=E_fuel"
     annotation (Placement(transformation(extent={{92,8},{132,48}}),
         iconTransformation(
@@ -88,7 +88,7 @@ public
         origin={102,-48})));
     Modelica.Blocks.Continuous.Integrator integrator[3]
       annotation (Placement(transformation(extent={{54,16},{74,36}})));
-    Modelica.Blocks.Interfaces.RealOutput Capacity[3](unit="W")
+    Modelica.Blocks.Interfaces.RealOutput Capacity[3](each unit="W")
     "1=P_el 2=dotQ_th 3=dotE_fuel" annotation (Placement(transformation(
           extent={{92,40},{132,80}}), iconTransformation(
         extent={{-10,-10},{10,10}},
