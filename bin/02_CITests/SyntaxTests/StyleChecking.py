@@ -194,7 +194,7 @@ if  __name__ == '__main__':
 	check_test_group.add_argument('-s',"--single-package",metavar="AixLib.Package", help="Test only the Modelica package AixLib.Package")
 	check_test_group.add_argument("-p","--path", default=".", help = "Path where top-level package.mo of the library is located")
 	check_test_group.add_argument("-DS", "--DymolaVersion",default="2020", help="Version of Dymola(Give the number e.g. 2020")
-	check_test_group.add_argument("-CM", "--Changedmodels",default="Tests only models that were changed or added during the push", action="store_true")
+	check_test_group.add_argument("-CM", "--Changedmodels",default=False, action="store_true")
 	
 	# Parse the arguments
 	args = parser.parse_args()
