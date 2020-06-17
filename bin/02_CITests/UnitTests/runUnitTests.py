@@ -139,6 +139,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 				retVal = 0
 				print("Regression test was successful")
 			
+		
 		return retVal
 
 
