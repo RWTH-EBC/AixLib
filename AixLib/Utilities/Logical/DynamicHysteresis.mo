@@ -108,23 +108,23 @@ equation
         Line(points={{-49,-29},{-49,-49}}, color={192,192,192}),
         Rectangle(extent={{2,-49},{91,-92}}, lineColor={192,192,192}),
         Line(points={{41,-29},{41,-49}}, color={192,192,192})}),
-    Documentation(info="<html>
-<p>
-This block transforms a <b>Real</b> input signal into a <b>Boolean</b>
-output signal:
+    Documentation(info="<html><p>
+  This block transforms a <b>Real</b> input signal into a
+  <b>Boolean</b> output signal:
 </p>
 <ul>
-<li> When the output was <b>false</b> and the input becomes
-     <b>greater</b> than parameter <b>uHigh</b>, the output
-     switches to <b>true</b>.</li>
-<li> When the output was <b>true</b> and the input becomes
-     <b>less</b> than parameter <b>uLow</b>, the output
-     switches to <b>false</b>.</li>
+  <li>When the output was <b>false</b> and the input becomes
+  <b>greater</b> than parameter <b>uHigh</b>, the output switches to
+  <b>true</b>.
+  </li>
+  <li>When the output was <b>true</b> and the input becomes <b>less</b>
+  than parameter <b>uLow</b>, the output switches to <b>false</b>.
+  </li>
 </ul>
 <p>
-The start value of the output is defined via parameter
-<b>pre_y_start</b> (= value of pre(y) at initial time).
-The default value of this parameter is <b>false</b>.
+  The start value of the output is defined via parameter
+  <b>pre_y_start</b> (= value of pre(y) at initial time). The default
+  value of this parameter is <b>false</b>.
 </p>
 </html>"));
 end DynamicHysteresis;

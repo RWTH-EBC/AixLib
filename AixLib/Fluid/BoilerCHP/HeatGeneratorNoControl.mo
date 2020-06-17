@@ -53,20 +53,26 @@ equation
           {70,40},{110,40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-        Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The model uses the <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>
-in the most simple setup in order either test its functionalities or to use in
-cases where
-the controller is modelled outside the heat generator.
+        Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The model uses the <a href=
+  \"AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>
+  in the most simple setup in order either test its functionalities or
+  to use in cases where the controller is modelled outside the heat
+  generator.
 </p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First
-implementation</li>
+        revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end HeatGeneratorNoControl;

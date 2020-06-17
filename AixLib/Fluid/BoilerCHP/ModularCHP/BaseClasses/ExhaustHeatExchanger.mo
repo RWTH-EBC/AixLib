@@ -432,7 +432,6 @@ equation
   the convective heat flux is transferred to the capacity of the
   exhaust gas heat exchanger.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April, 2019&#160;</i> by Julian Matthes:<br/>

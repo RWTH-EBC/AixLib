@@ -53,69 +53,117 @@ partial model PartialEfficiency
                   smooth=Smooth.Bezier,
                   thickness=0.5)}),
               Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+    Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a base model for efficiency models that are required for
-various compressor models. It defines some basic inputs that are
-commonly used by efficiency models presented in
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
-AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency</a>, 
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
-AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency</a> and
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
-AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>.
-These inputs are summarised below:<br />
+  This is a base model for efficiency models that are required for
+  various compressor models. It defines some basic inputs that are
+  commonly used by efficiency models presented in <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
+  AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency</a>,
+  <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
+  AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency</a>
+  and <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
+  AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>.
+  These inputs are summarised below:<br/>
 </p>
-<table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\" 
+<table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
-<tr>
-<th>Type</th>
-<th>Name</th> 
-<th>Comment</th> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>epsRef</code></td> 
-<td>Ratio of the real and the ideal displacement volume</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>VDis</code></td> 
-<td>Displacement volume</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>piPre</code></td> 
-<td>Pressure ratio</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>rotSpe</code></td> 
-<td>Rotational speed</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>staInl</code></td> 
-<td>Thermodynamic state at compressor's inlet conditions</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>staOut</code></td> 
-<td>Thermodynamic state at compressor's out conditions</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>TAmb</code></td> 
-<td>Ambient temperature</td> 
-</tr> 
+  <tr>
+    <th>
+      Type
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Comment
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>epsRef</code>
+    </td>
+    <td>
+      Ratio of the real and the ideal displacement volume
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>VDis</code>
+    </td>
+    <td>
+      Displacement volume
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>piPre</code>
+    </td>
+    <td>
+      Pressure ratio
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>rotSpe</code>
+    </td>
+    <td>
+      Rotational speed
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>staInl</code>
+    </td>
+    <td>
+      Thermodynamic state at compressor's inlet conditions
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>staOut</code>
+    </td>
+    <td>
+      Thermodynamic state at compressor's out conditions
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>TAmb</code>
+    </td>
+    <td>
+      Ambient temperature
+    </td>
+  </tr>
 </table>
 </html>"));
 end PartialEfficiency;

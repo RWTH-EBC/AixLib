@@ -40,11 +40,14 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>May 20, 2018, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>May 20, 2018, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Pump container for the SpeedControlled_Nrpm pump.</p>
+<p>
+  Pump container for the SpeedControlled_Nrpm pump.
+</p>
 </html>"));
 end PumpInterface_SpeedControlledNrpm;
