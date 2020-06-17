@@ -49,11 +49,12 @@ model RegisterModule "AHU register module for heaters and coolers"
     redeclare final package Medium1 = Medium1,
     redeclare final package Medium2 = Medium2,
     tau1=5,
-    tau2=10,
+    tau2=2,
     energyDynamics=energyDynamics,
     final massDynamics=massDynamics,
     T1_start=T_start,
-    T2_start=T_start)
+    T2_start=T_start,
+    tau_C=10)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
             {20,68}})));
   AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus
