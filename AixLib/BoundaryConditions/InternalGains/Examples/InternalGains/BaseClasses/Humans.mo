@@ -27,9 +27,13 @@ equation
   connect(combiTimeTable.y[1], humanIntGains.uRel) annotation (Line(points={{-61,-16},{-40,-16},{-40,1},{-16,1}}, color={0,0,127}));
   connect(heatFlowSensorConv.port_a, humanIntGains.convHeat) annotation (Line(points={{38,19},{24,19},{24,8.8},{8.7,8.8}}, color={191,0,0}));
   connect(heatFlowSensorRad.port_a, humanIntGains.radHeat) annotation (Line(points={{18,-8},{18,-6.8},{8.7,-6.8}}, color={191,0,0}));
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li><i>March 30, 2020</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>: Summarize models to partial model. Make all models dependant from a relative input 0..1. Many refactorings.</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>March 30, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>:
+    Summarize models to partial model. Make all models dependant from a
+    relative input 0..1. Many refactorings.
+  </li>
 </ul>
 </html>"));
 end Humans;

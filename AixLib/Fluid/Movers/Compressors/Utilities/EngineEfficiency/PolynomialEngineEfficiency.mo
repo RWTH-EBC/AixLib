@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency;
+within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency;
 model PolynomialEngineEfficiency
   "Model describing engine efficiency based on polynomial approach"
   extends PartialEngineEfficiency;
@@ -121,97 +121,146 @@ equation
     sum(a[i]*p[i]^b[i] for i in 1:nT)^corFac[2])
     "Calculation procedure of generic polynomial";
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This model contains a calculation procedure for engine efficiency
-models (for more information, please check out 
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>). 
-The calculation procedures based on a polynomial approach are presented 
-below.
+  This model contains a calculation procedure for engine efficiency
+  models (for more information, please check out <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+  AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>).
+  The calculation procedures based on a polynomial approach are
+  presented below.
 </p>
-<h4>Implemented approaches</h4>
+<h4>
+  Implemented approaches
+</h4>
 <p>
-Actually, four polynomial approaches are implemented in this package.
-To add further calculation procedures, just add its name in
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">
-AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
-and expand the <code>if-structure</code>.<br />
+  Actually, four polynomial approaches are implemented in this package.
+  To add further calculation procedures, just add its name in <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
+  and expand the <code>if-structure</code>.<br/>
 </p>
-<table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\" 
+<table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
-<tr>
-<th>Reference</th>
-<th>Formula</th> 
-<th>Refrigerants</th> 
-<th>Validity <code>n<sub>compressor</sub></code></th> 
-<th>Validity <code>&Pi;<sub>pressure</sub></code></th> 
-</tr> 
-<tr>
-<td>JahningEtAl2000</td> 
-<td><code>&eta;<sub>eng</sub> = a1 + 
-a2*exp(p<sub>Inl</sub>)^b2</code></td> 
-<td>Generic model</td> 
-<td><code>Generic model</code></td> 
-<td><code>Generic model</code></td> 
-</tr> 
-<tr>
-<td>DurprezEtAl2007</td> 
-<td><code>&eta;<sub>eng</sub> = a1 + a2*&pi; + a3*&pi;^2 + 
-a4*&pi;^3 + a5*&pi;^4 + a6*&pi;^5 + a7*&pi;^6</code></td> 
-<td>Generic model</td> 
-<td><code>Generic model</code></td> 
-<td><code>Generic model</code></td> 
-</tr> 
-<tr>
-<td>KinarbEtAl2010</td> 
-<td><code>&eta;<sub>eng</sub> = a1 + a2*&pi; + 
-a3*&pi;^2</code></td> 
-<td>Generic model</td> 
-<td><code>Generic model</code></td> 
-<td><code>Generic model</code></td> 
-</tr> 
-<tr>
-<td>Engelpracht2017</td> 
-<td><code>&eta;<sub>eng</sub> = a1 + a2*&pi; + a3*&pi;^2 + a4*n*&pi; + 
-a5*n^2 + a6*&pi;^2*n + a7*&pi;*n^2 + a8*n^3 + a9*&pi;^2n^2 + a10*&pi;*&pi;^3 
-+ a11*n^4</code></td> 
-<td>Generic model</td> 
-<td><code>0 - 120</code></td> 
-<td><code>1 - 10</code></td> 
-</tr> 
+  <tr>
+    <th>
+      Reference
+    </th>
+    <th>
+      Formula
+    </th>
+    <th>
+      Refrigerants
+    </th>
+    <th>
+      Validity <code>n<sub>compressor</sub></code>
+    </th>
+    <th>
+      Validity <code>Π<sub>pressure</sub></code>
+    </th>
+  </tr>
+  <tr>
+    <td>
+      JahningEtAl2000
+    </td>
+    <td>
+      <code>η<sub>eng</sub> = a1 + a2*exp(p<sub>Inl</sub>)^b2</code>
+    </td>
+    <td>
+      Generic model
+    </td>
+    <td>
+      <code>Generic model</code>
+    </td>
+    <td>
+      <code>Generic model</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      DurprezEtAl2007
+    </td>
+    <td>
+      <code>η<sub>eng</sub> = a1 + a2*π + a3*π^2 + a4*π^3 + a5*π^4 +
+      a6*π^5 + a7*π^6</code>
+    </td>
+    <td>
+      Generic model
+    </td>
+    <td>
+      <code>Generic model</code>
+    </td>
+    <td>
+      <code>Generic model</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      KinarbEtAl2010
+    </td>
+    <td>
+      <code>η<sub>eng</sub> = a1 + a2*π + a3*π^2</code>
+    </td>
+    <td>
+      Generic model
+    </td>
+    <td>
+      <code>Generic model</code>
+    </td>
+    <td>
+      <code>Generic model</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Engelpracht2017
+    </td>
+    <td>
+      <code>η<sub>eng</sub> = a1 + a2*π + a3*π^2 + a4*n*π + a5*n^2 +
+      a6*π^2*n + a7*π*n^2 + a8*n^3 + a9*π^2n^2 + a10*π*π^3 +
+      a11*n^4</code>
+    </td>
+    <td>
+      Generic model
+    </td>
+    <td>
+      <code>0 - 120</code>
+    </td>
+    <td>
+      <code>1 - 10</code>
+    </td>
+  </tr>
 </table>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-I.D. Jähnig, D. Reindl and S.A. Klein, S. A. (2000): 
-<a href=\"https://www.researchgate.net/publication/288676460_Semi-empirical_method_for_representing_domestic_refrigeratorfreezer_compressor_calorimeter_test_data\">
-Semi-empirical method for representing domestic refrigerator/freezer 
-compressor calorimeter test data</a>.
+  I.D. Jähnig, D. Reindl and S.A. Klein, S. A. (2000): <a href=
+  \"https://www.researchgate.net/publication/288676460_Semi-empirical_method_for_representing_domestic_refrigeratorfreezer_compressor_calorimeter_test_data\">
+  Semi-empirical method for representing domestic refrigerator/freezer
+  compressor calorimeter test data</a>.
 </p>
 <p>
-M.-E Duprez, E. Dumont and M. Fr&egrave;re (2007): 
-<a href=\"http://www.sciencedirect.com/science/article/pii/S0140700706002477\">
-Modelling of reciprocating and scroll compressors</a>. In: <i>International 
-Journal of Refrigeration 30(5)</i>, S. 873&ndash;886
+  M.-E Duprez, E. Dumont and M. Frère (2007): <a href=
+  \"http://www.sciencedirect.com/science/article/pii/S0140700706002477\">Modelling
+  of reciprocating and scroll compressors</a>. In: <i>International
+  Journal of Refrigeration 30(5)</i>, S. 873–886
 </p>
 <p>
-E. Kinab, D. Marchio, P. Rivi&egrave;re and A. Zoughaib (2010): 
-<a href=\"http://www.sciencedirect.com/science/article/pii/S0378778810002239\">
-Reversible heat pump model for seasonal performance optimization</a>. In: 
-<i>Energy and Buildings 42(12)</i>, S. 2269&ndash;2280
+  E. Kinab, D. Marchio, P. Rivière and A. Zoughaib (2010): <a href=
+  \"http://www.sciencedirect.com/science/article/pii/S0378778810002239\">Reversible
+  heat pump model for seasonal performance optimization</a>. In:
+  <i>Energy and Buildings 42(12)</i>, S. 2269–2280
 </p>
 <p>
-M. Engelpracht (2017): Development of modular and scalable simulation
-models for heat pumps and chillers considering various refrigerants.
-<i>Master Thesis</i>
+  M. Engelpracht (2017): Development of modular and scalable simulation
+  models for heat pumps and chillers considering various refrigerants.
+  <i>Master Thesis</i>
 </p>
 </html>"));
 end PolynomialEngineEfficiency;

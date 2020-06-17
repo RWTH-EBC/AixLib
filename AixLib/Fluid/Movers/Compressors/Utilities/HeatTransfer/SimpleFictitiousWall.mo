@@ -77,24 +77,21 @@ equation
 
   /*It is assumed that the heat flow flows out of the system*/
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 28, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 28, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a model of a fictitious wall that describes the shell of the 
-compressor. It consists of four heat ports, i.e. for the inlet and 
-outlet of the compressor as well as for the ambient and compression 
-chamber. 
-It is assumed that the wall consists of a time invariante heat capacity;
-additionally, it is assumed that the thermal conductance for the 
-calculation of the heat flow between ambient and fictitious wall is
-also time invariante.
+  This is a model of a fictitious wall that describes the shell of the
+  compressor. It consists of four heat ports, i.e. for the inlet and
+  outlet of the compressor as well as for the ambient and compression
+  chamber. It is assumed that the wall consists of a time invariante
+  heat capacity; additionally, it is assumed that the thermal
+  conductance for the calculation of the heat flow between ambient and
+  fictitious wall is also time invariante.
 </p>
 </html>"), Icon(graphics={Rectangle(
           extent={{-80,20},{80,-20}},

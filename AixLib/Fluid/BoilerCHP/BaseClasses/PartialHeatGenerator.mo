@@ -118,28 +118,26 @@ equation
           lineColor={0,0,0},
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={170,170,255})}),
-    Documentation(info="<html>
-<p>
-Partial model to implement heat generator models with one heat exchanger volume.
+    Documentation(info="<html><p>
+  Partial model to implement heat generator models with one heat
+  exchanger volume.
 </p>
 <p>
-Classes that extend this model need to implement the controller which shoud also
-calculate
-the heat flow to the heat exchanger volume.
+  Classes that extend this model need to implement the controller which
+  shoud also calculate the heat flow to the heat exchanger volume.
 </p>
 <p>
-The volume of the heat exchanger as well as the pressure loss coefficient should
-be set
-for each heat generator separately.
+  The volume of the heat exchanger as well as the pressure loss
+  coefficient should be set for each heat generator separately.
 </p>
-</html>", revisions="<html>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li>
-October 11, 2016 by Pooyan Jahangiri:<br/>
-First implementation.
-</li>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>October 11, 2016 by Pooyan Jahangiri:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end PartialHeatGenerator;
