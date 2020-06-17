@@ -84,7 +84,6 @@ CHP")}),
   modulation factor (modFac) of 0 indicates that the machine is not in
   operation.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April, 2019&#160;</i> by Julian Matthes:<br/>

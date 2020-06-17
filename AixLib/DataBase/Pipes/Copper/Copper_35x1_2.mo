@@ -9,24 +9,31 @@ record Copper_35x1_2 "Copper 35x1.2"
     c=390);
   // Constant chemical values assumed
 
-  annotation (Documentation(revisions="<html>
-<ul>
-<li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-<li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>July 9, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>June 29, 2011&#160;</i> by Ana Constantin:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>",
-info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
+info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
 <p>
-Record for copper pipe
+  Record for copper pipe
 </p>
-
-
-
-<p>Source: </p>
+<p>
+  Source:
+</p>
 <ul>
-<li>DIN EN 1057:2010-06</li>
-<li>Table 3, Page 14</li>
+  <li>DIN EN 1057:2010-06
+  </li>
+  <li>Table 3, Page 14
+  </li>
 </ul>
 </html>"));
 end Copper_35x1_2;

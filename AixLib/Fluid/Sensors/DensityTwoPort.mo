@@ -5,7 +5,8 @@ model DensityTwoPort "Ideal two port density sensor"
   Modelica.Blocks.Interfaces.RealOutput d(final quantity="Density",
                                           final unit="kg/m3",
                                           min=0) "Density of the passing fluid"
-    annotation (Placement(transformation(
+   
+   annotation (Placement(transformation(
         origin={0,110},
         extent={{10,-10},{-10,10}},
         rotation=270)));

@@ -47,11 +47,16 @@ expandable connector FVUControlBus
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Definition of a standard bus that contains basic data points that appear facade ventilation units.</p>
-</html>", revisions="<html>
-<p>July 2017, by Marc Baranski:</p>
-<p>First implementation. </p>
+    Documentation(info="<html><p>
+  Definition of a standard bus that contains basic data points that
+  appear facade ventilation units.
+</p>
+<p>
+  July 2017, by Marc Baranski:
+</p>
+<p>
+  First implementation.
+</p>
 </html>"));
 
 
