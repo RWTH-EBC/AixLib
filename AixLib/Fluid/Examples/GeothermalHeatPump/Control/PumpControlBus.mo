@@ -17,14 +17,17 @@ expandable connector PumpControlBus
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>
-Definition of a control bus that includes all the pressure set points required
-for <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump\">
-AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump</a>.
+    Documentation(info="<html><p>
+  Definition of a control bus that includes all the pressure set points
+  required for <a href=
+  \"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump\">
+  AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump</a>.
 </p>
-</html>", revisions="<html>
-<p>March 31, 2017, by Marc Baranski:</p>
-<p>First implementation. </p>
+<p>
+  March 31, 2017, by Marc Baranski:
+</p>
+<p>
+  First implementation.
+</p>
 </html>"));
 end PumpControlBus;

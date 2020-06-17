@@ -154,11 +154,15 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  annotation (Documentation(info="<html>
-<p>This example compares the simulated behavior with measured data. The input filter of the valve is deactivated because the measured actual opening (includes opening delay already) is used.</p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  This example compares the simulated behavior with measured data. The
+  input filter of the valve is deactivated because the measured actual
+  opening (includes opening delay already) is used.
+</p>
 <ul>
-<li>November 4, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+  <li>November 4, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(

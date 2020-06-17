@@ -31,33 +31,43 @@ equation
   end if;
   y = {Topt - cat,Topt + cat,Topt} "min, max, opt";
 
-  annotation (Diagram(graphics), Documentation(info="<html>
-<p>u: </p>
+  annotation (Diagram(graphics), Documentation(info="<html><p>
+  u:
+</p>
 <ol>
-<li>ambient&nbsp;temperature&nbsp;and</li>
-<li>relative&nbsp;humidity</li>
+  <li>ambient&#160;temperature&#160;and
+  </li>
+  <li>relative&#160;humidity
+  </li>
 </ol>
-<p>y: </p>
+<p>
+  y:
+</p>
 <ol>
-<li>Tmin</li>
-<li>Tmax</li>
-<li>Topt </li>
+  <li>Tmin
+  </li>
+  <li>Tmax
+  </li>
+  <li>Topt
+  </li>
 </ol>
-</html>", revisions="<html>
 <ul>
-  <li><i>April, 2016&nbsp;</i>
-         by Peter Remmen:<br/>
-         Moved from Utilities to Controls</li>
+  <li>
+    <i>April, 2016&#160;</i> by Peter Remmen:<br/>
+    Moved from Utilities to Controls
+  </li>
 </ul>
 <ul>
-  <li><i>October, 2015&nbsp;</i>
-         by Moritz Lauster:<br/>
-         Adapted and moved to AixLib</li>
+  <li>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    Adapted and moved to AixLib
+  </li>
 </ul>
 <ul>
-  <li><i>May, 2008&nbsp;</i>
-         by Peter Matthes:<br/>
-         Implemented</li>
+  <li>
+    <i>May, 2008&#160;</i> by Peter Matthes:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end OptimalTempDeCarliHumidity;
