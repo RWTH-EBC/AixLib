@@ -69,14 +69,16 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
           0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
 
       valve(use_inputFilter=false),
-      pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x2(), length=
-            4.5),
-      pipe2(length=1.65),
+      pipe1(
+        T_start=283.15,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x2(),
+        length=4.5),
+      pipe2(length=1.55),
       pipe3(length=0.9),
-      pipe4(length=0.4),
+      pipe4(length=0.3),
       pipe5(length=2.95, fac=13),
       pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1_1(), length=
-            0.8),
+            0.5),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
         PumpInterface(pumpParam=
@@ -92,8 +94,7 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     dynamicHX(
       dp1_nominal(displayUnit="bar") = 138,
       dp2_nominal(displayUnit="bar") = 70600,
-      nNodes=2,
-      tau2=8,
+      nNodes=4,
       dT_nom=22.16,
       Q_nom=53400))
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));
@@ -102,7 +103,7 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-130,16},{-110,36}})));
-  Modelica.Blocks.Sources.Constant const(k=-2)
+  Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-172,20},{-152,40}})));
 equation
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)

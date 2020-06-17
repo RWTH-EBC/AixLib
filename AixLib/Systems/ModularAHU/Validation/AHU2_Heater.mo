@@ -68,14 +68,14 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
           b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0.0,0.02,0.05,0.08,
           0.27,0.6,0.95,1.0}, phi={0.0,0.001,0.002,0.01,0.3,0.9,0.97,1.0})),
       valve(use_inputFilter=false),
-      pipe1(length=3),
+      pipe1(length=2.8),
       pipe2(length=0.63, parameterPipe=
             AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
       pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
             1.85),
       pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
             0.4),
-      pipe5(length=2.8, fac=6),
+      pipe5(length=3.2, fac=6),
       pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(), length=
             0.82),
       redeclare
@@ -92,8 +92,8 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
     dynamicHX(
       dp1_nominal=33,
       dp2_nominal=4500 + 50500,
-      nNodes=1,
-      dT_nom=20.8,
+      nNodes=4,
+      dT_nom=40.1,
       Q_nom=22300))
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));
 
@@ -101,7 +101,7 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-130,16},{-110,36}})));
-  Modelica.Blocks.Sources.Constant const(k=1.2)
+  Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-172,20},{-152,40}})));
 equation
   connect(toKelvin.Celsius, combiTimeTable.y[2]) annotation (Line(points={{-80,-92},

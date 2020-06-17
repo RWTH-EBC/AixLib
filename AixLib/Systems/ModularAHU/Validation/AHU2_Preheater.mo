@@ -51,16 +51,15 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-78,-102},{-58,-82}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1
     annotation (Placement(transformation(extent={{-96,32},{-82,46}})));
-  Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
+  Modelica.Blocks.Math.Gain gain1(k=1.1439/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
     T_start=288.15,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare HydraulicModules.Admix hydraulicModule(
       pipeModel="PlugFlowPipe",
-      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
+      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x1_5(),
       parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
-      tau=15,
       length=1,
       Kv=10,
       valveCharacteristic=
@@ -73,11 +72,10 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
       valve(use_inputFilter=false),
       pipe1(length=1.53),
       pipe2(length=0.54),
-      pipe3(length=1.06, parameterPipe=
-            AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
+      pipe3(length=1.06),
       pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
             0.48),
-      pipe5(length=1.42, fac=3.5),
+      pipe5(length=1.44, fac=20),
       pipe6(length=0.52),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
@@ -86,15 +84,15 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
           calculatePower=true)),
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
-    m1_flow_nominal=3000/3600,
-    m2_flow_nominal=2.866/3600*1000,
+    m1_flow_nominal=3000/3600*1.2,
+    m2_flow_nominal=2866/3600,
     tau=90,
     T_amb=293.15,
     dynamicHX(
       dp1_nominal=66,
       dp2_nominal=6000 + 8000,
-      nNodes=2,
-      dT_nom=29.53,
+      nNodes=4,
+      dT_nom=43.9,
       Q_nom=57700))
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));
 
