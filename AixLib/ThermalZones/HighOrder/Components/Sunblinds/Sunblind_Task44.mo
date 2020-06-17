@@ -173,38 +173,79 @@ equation
           lineColor={0,127,0},
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
 <ul>
-<li>Models sunblind position according to IEA Task 44</li>
-<li>Normally used as replacable model in Walls.Wall of EBC Building Library</li>
+  <li>Models sunblind position according to IEA Task 44
+  </li>
+  <li>Normally used as replacable model in Walls.Wall of EBC Building
+  Library
+  </li>
 </ul>
-<p>Requires a variable Tamb to be able to calculate the running mean of ambient temperature. Should be supplied by inner Modelica.SIunits.Temperature Tamb, see Examples.Weather.sunblind_T44_test for an example how to implement inner data</p>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
-<p>According to IEA Task 44 sunblindes are lowerd partially based on horizontal global radiation, thus there is no dependance on the buildings orientation, sunblinds are lowered the same for every side of the building</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>Lower the sunblinds to 75 &#37;; if</p>
+<p>
+  Requires a variable Tamb to be able to calculate the running mean of
+  ambient temperature. Should be supplied by inner
+  Modelica.SIunits.Temperature Tamb, see
+  Examples.Weather.sunblind_T44_test for an example how to implement
+  inner data
+</p>
+<h4>
+  <span style=\"color:#008000\">Assumptions</span>
+</h4>
+<h4>
+  <span style=\"color:#008000\">Known Limitations</span>
+</h4>
+<p>
+  According to IEA Task 44 sunblindes are lowerd partially based on
+  horizontal global radiation, thus there is no dependance on the
+  buildings orientation, sunblinds are lowered the same for every side
+  of the building
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Lower the sunblinds to 75 %; if
+</p>
 <ul>
-<li>global horizontal radiation exceeds 300 W/m&sup2;</li>
-<li>Indoor temperature is &gt; 23,8 &deg;C</li>
-<li>running average over last 24 hours of ambient temperature is &gt; 12 &deg;C</li>
+  <li>global horizontal radiation exceeds 300 W/m²
+  </li>
+  <li>Indoor temperature is &gt; 23,8 °C
+  </li>
+  <li>running average over last 24 hours of ambient temperature is &gt;
+  12 °C
+  </li>
 </ul>
-<p><br/>Return to open windows if:</p>
+<p>
+  <br/>
+  Return to open windows if:
+</p>
 <ul>
-<li>global horizontal radiation is less than 200 W/m&sup2;</li>
-<li>Indoor temperature is &gt; 22,8 &deg;C</li>
+  <li>global horizontal radiation is less than 200 W/m²
+  </li>
+  <li>Indoor temperature is &gt; 22,8 °C
+  </li>
 </ul>
-<p><br/><b><font style=\"color: #008000; \">References</font></b></p>
+<p>
+  <br/>
+  <b><span style=\"color: #008000\">References</span></b>
+</p>
 <ul>
-<li>IEA Task 44 (http://task44.iea-shc.org/publications)</li>
+  <li>IEA Task 44 (http://task44.iea-shc.org/publications)
+  </li>
 </ul>
 </html>",
-        revisions="<html>
-<ul>
-<li>Implemented: Kristian Huchtemann</li>
-<li><i>2013-11-03:</i> Michael Adolph<br/>Adapted to work with Walls.Wall model of EBC Building Library</li>
+        revisions="<html><ul>
+  <li>Implemented: Kristian Huchtemann
+  </li>
+  <li>
+    <i>2013-11-03:</i> Michael Adolph<br/>
+    Adapted to work with Walls.Wall model of EBC Building Library
+  </li>
 </ul>
-<p>Generalisation of concept</p>
+<p>
+  Generalisation of concept
+</p>
 </html>"));
 end Sunblind_Task44;

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.Functions.Characteristics;
+within AixLib.DataBase.HeatPump.Functions.Characteristics;
 function CarnotFunction
   "Function to emulate the polynomal approach of the Carnot_y heat pump model"
   extends PartialBaseFct;
@@ -23,14 +23,18 @@ algorithm
   COP :=etaCarnot_nominal*etaPartLoad*COP_carnot;
   Char[1] :=Pel;
   Char[2] :=COP*Pel;
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>This function emulated the the Carnot model (<a href=\"modelica://AixLib.Fluid.Chillers.BaseClasses.Carnot\">AixLib.Fluid.Chillers.BaseClasses.Carnot</a>). See this description for more info on assumptions etc.</p>
+<p>
+  This function emulated the the Carnot model (<a href=
+  \"modelica://AixLib.Fluid.Chillers.BaseClasses.Carnot\">AixLib.Fluid.Chillers.BaseClasses.Carnot</a>).
+  See this description for more info on assumptions etc.
+</p>
 </html>"));
 end CarnotFunction;
