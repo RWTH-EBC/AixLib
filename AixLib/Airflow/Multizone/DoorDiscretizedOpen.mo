@@ -6,8 +6,6 @@ model DoorDiscretizedOpen
   parameter Real CD=0.65 "Discharge coefficient"
     annotation (Dialog(group="Orifice characteristics"));
 
-	
-	
 protected
   constant Real mFixed = 0.5 "Fixed value for flow coefficient";
   constant Real gamma(min=1) = 1.5

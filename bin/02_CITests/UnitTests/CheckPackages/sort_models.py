@@ -21,6 +21,7 @@ class git_models(object):
 		for i in Line:
 			if i.rfind(".mo")> -1:
 				#define modelica models
+				i = i.replace(os.sep,".")
 				model_number = i.rfind(self.package)
 				model_name = i[model_number:]
 				model_name = model_name.lstrip()

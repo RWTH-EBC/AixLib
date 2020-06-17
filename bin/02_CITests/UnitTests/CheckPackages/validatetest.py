@@ -446,6 +446,8 @@ class ValidateTest(object):
 			list_mo_models = git_models(".mo",self.Package, list_path)
 			model_list= list_mo_models.sort_mo_models()
 			ErrorList = []
+				
+				
 			for i in model_list:
 				result=dymola.checkModel(i,simulate=True)
 				if result == True:

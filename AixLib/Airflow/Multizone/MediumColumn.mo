@@ -1,11 +1,12 @@
 within AixLib.Airflow.Multizone;
 model MediumColumn
   "Vertical shaft with no friction and no storage of heat and mass"
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
-		
+
   parameter Modelica.SIunits.Length h(min=0) = 3 "Height of shaft";
   parameter AixLib.Airflow.Multizone.Types.densitySelection densitySelection
     "Select how to pick density" annotation (Evaluate=true);

@@ -43,13 +43,13 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                       graphics), Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
+  <font color=\"#008000\">Overview</font>
 </h4>
 <p>
   Model for heat transfer between buffer storage layers.
 </p>
 <h4>
-  <span style=\"color:#008000\">Concept</span>
+  <font color=\"#008000\">Concept</font>
 </h4>
 <p>
   Models conductance of water and buoyancy according to Viskanta et
@@ -58,7 +58,7 @@ equation
   expression is used for the transition of the buoyancy model.
 </p>
 <h4>
-  <span style=\"color:#008000\">Sources</span>
+  <font color=\"#008000\">Sources</font>
 </h4>
 <p>
   R. Viskanta, A. KaraIds: Interferometric observations of the

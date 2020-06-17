@@ -96,34 +96,49 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 	
 	if modified_models == True:
 		regression_models = func_list_models.list_regression_tests()
-		for l in regression_models:
-			print("Regression test for model: "+l) 
-			model_package = l[:l.rfind(".")]
-			ut.setSinglePackage(model_package)
+		
+		if len(regression_models) > 100:
+			if package is not None:
+				ut.setSinglePackage(package)
 			ut.setNumberOfThreads(n_pro)
 			ut.pedanticModelica(False)
 			ut.showGUI(show_gui)
-			# ut.get_test_example_coverage()
-			# Below are some option that may occassionally be used.
-			# These are currently not exposed as command line arguments.
-		#    ut.setNumberOfThreads(1)
-		#    ut.deleteTemporaryDirectories(False)
-		#    ut.useExistingResults(['/tmp/tmp-Buildings-0-fagmeZ'])
-
-		#    ut.writeOpenModelicaResultDictionary()
-			# Run the regression tests
-
 			retVal = ut.run()
-			if retVal == 1:
-				Errorlist.append(l)
-				print("Regression test for model "+l+ " was not successfull")
-				
-			# comment out this line for local usage
 			ut.get_test_example_coverage()
-		if len(Errorlist) > 0:
-			retVal = 1
-			print("Regression test for changed models failed")
-		
+			return retVal
+		else:
+			for l in regression_models:
+				print("Regression test for model: "+l) 
+				model_package = l[:l.rfind(".")]
+				ut.setSinglePackage(model_package)
+				ut.setNumberOfThreads(n_pro)
+				ut.pedanticModelica(False)
+				ut.showGUI(show_gui)
+				# ut.get_test_example_coverage()
+				# Below are some option that may occassionally be used.
+				# These are currently not exposed as command line arguments.
+			    # ut.setNumberOfThreads(1)
+			    # ut.deleteTemporaryDirectories(False)
+			    # ut.useExistingResults(['/tmp/tmp-Buildings-0-fagmeZ'])
+
+			    # ut.writeOpenModelicaResultDictionary()
+				# Run the regression tests
+
+				retVal = ut.run()
+				if retVal == 1:
+					Errorlist.append(l)
+					print("Regression test for model "+l+ " was not successfull")
+				if retVal == 0:
+					print("Regression test for model "+l "was successful")
+				# comment out this line for local usage
+				ut.get_test_example_coverage()
+			if len(Errorlist) > 0:
+				retVal = 1
+				print("Regression test for changed models failed")
+			else:
+				retVal = 0
+				print("Regression test was successful")
+			
 		return retVal
 
 
