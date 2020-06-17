@@ -5,14 +5,15 @@ import codecs
 
 class git_models(object):
 
-	def __init__(self, file_type,package):
+	def __init__(self, file_type,package,list_path):
 		self.file_type = file_type
 		self.package = package
+		self.list_path = list_path
 		
 	def sort_mo_models(self):
-		list_path = 'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt' 
+		#list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt' 
 		#print(list_path)
-		changed_models = codecs.open(list_path, "r", encoding='utf8')
+		changed_models = codecs.open(self.list_path, "r", encoding='utf8')
 		modelica_models = [] 
 		Lines =  changed_models.readlines()
 		Line= str(Lines)
@@ -34,12 +35,12 @@ class git_models(object):
 		if len(modelica_models) == 0:
 			print("No Models to check")
 			exit(0)
-		print(modelica_models)
 		return modelica_models
 
 if  __name__ == '__main__':
 	# Import git_model class
+	list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
 	from sort_models import git_models
-	list_mo_models = git_models(".mo","AixLib")
+	list_mo_models = git_models(".mo","AixLib",list_path)
 	list_mo_models.sort_mo_models()
 	

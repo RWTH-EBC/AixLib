@@ -17,6 +17,7 @@ Check_AixLib_changed_models:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - model=$(git diff --raw HEAD^1)
+        - echo $model
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
         - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib" -p AixLib/package.mo -CM
     artifacts:

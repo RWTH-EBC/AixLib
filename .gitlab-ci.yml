@@ -38,6 +38,9 @@ include:
     file:  'modelica-ci-tests/UnitTests/changed_simulate_model.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/UnitTests/changed_check_model.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'modelica-ci-tests/UnitTests/changed_regression_test.gitlab-ci.yml'
+
   
   
   
