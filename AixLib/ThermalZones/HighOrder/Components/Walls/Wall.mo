@@ -284,8 +284,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constFixShoRadPar[6].y, shortRadWall.Q_flow_ShoRadFroSur) annotation
-    (Line(points={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}),
+  connect(constFixShoRadPar[6].y, shortRadWall.Q_flow_ShoRadFroSur) annotation (
+     Line(points={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -319,7 +319,8 @@ equation
  <p><a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">AixLib.Building.Components.Examples.Walls.InsideWall</a> </p>
  </html>", revisions="<html>
  <ul>
-  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Mainly add wallType, rearrange components.</li>
+ <li><i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: Add short wave connector to pass wall and window parameters.</li> 
+ <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Mainly add wallType, rearrange components.</li>
  <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters on upper model level. This closes ticket <a href=\"https://github.com/RWTH-EBC/AixLib/issues/215\">issue 215</a></li>
  <li><i>August 22, 2014&nbsp;</i> by Ana Constantin:<br/>Corrected implementation of door also for outside walls. This closes ticket <a href=\"https://github.com/RWTH-EBC/AixLib/issues/13\">issue 13</a></li>
  <li><i>May 19, 2014&nbsp;</i> by Ana Constantin:<br/>Formatted documentation appropriately</li>

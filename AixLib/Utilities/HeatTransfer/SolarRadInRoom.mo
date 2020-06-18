@@ -2,16 +2,13 @@ within AixLib.Utilities.HeatTransfer;
 model SolarRadInRoom
   "Model to distribute short wave radiation transmitted through a window to all areas in the room using shape factors"
 
-  parameter Integer nWin=1 "Number of windows in room";
-  parameter Integer nWalls=1 "Number of walls in room";
-  parameter Integer nFloors=1 "Number of floors in room";
-  parameter Integer nCei=1 "Number of ceilings in room";
+  parameter Integer nWin=1
+    "Number of windows in room transmitting shortwave radiation"                           annotation(Dialog(connectorSizing=true));
+  parameter Integer nWalls=1 "Number of walls in room" annotation(Dialog(connectorSizing=true));
+  parameter Integer nFloors=1 "Number of floors in room" annotation(Dialog(connectorSizing=true));
+  parameter Integer nCei=1 "Number of ceilings in room" annotation(Dialog(connectorSizing=true));
   parameter Modelica.SIunits.Length floor_length=0 "Total length of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor" annotation(Dialog(enable=nFloors>1));
   parameter Modelica.SIunits.Height floor_height=0 "Total height of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor"  annotation(Dialog(enable=nFloors>1));
-
-  Modelica.SIunits.Length floor_length_int = if nFloors>1 then floor_length else floors[1].length "Total length of floors";
-  Modelica.SIunits.Height floor_height_int = if nFloors>1 then floor_height else floors[1].height "Total height of floors";
-
 
   Interfaces.ShortRadSurf win_in[nWin] "Windows input" annotation (Placement(
         transformation(extent={{-120,-10},{-100,10}}), iconTransformation(
@@ -26,12 +23,19 @@ model SolarRadInRoom
       Placement(transformation(extent={{100,-30},{120,-10}}),
                                                             iconTransformation(
           extent={{100,-30},{120,-10}})));
-  Interfaces.ShortRadSurf win_out[nWin] "Output to the ceiling(s)" annotation (
-     Placement(transformation(extent={{100,-70},{120,-50}}),
-                                                           iconTransformation(
-          extent={{100,-70},{120,-50}})));
+  Interfaces.ShortRadSurf win_out[nWin] "Output to the ceiling(s)"
+    annotation (Placement(transformation(extent={{100,-70},{120,-50}}),
+        iconTransformation(extent={{100,-70},{120,-50}})));
 
+  Real solar_frac_win_abs[nWin]=fill(solar_frac_win_abs_int/nWin, nWin)
+    "Solar fractions for windows, absorbed";
+  Real solar_frac_win_lost[nWin]=fill(solar_frac_win_lost_int/nWin, nWin)
+    "Solar fractions for windows, lost cause of transmitvity";
+  Real solar_frac_cei[nCei] = bounce_1_cei .+ bounce_2_floor_cei .+ bounce_3_rem_cei .+ bounce_R_rem_cei "Solar fractions for ceilings";
+  Real solar_frac_flo[nFloors] = fill(solar_frac_flo_int/nFloors, nFloors) "Solar fractions for floors";
+  Real solar_frac_wall[nWalls] = bounce_1_wall .+ bounce_2_floor_wall .+ bounce_3_rem_wall .+ bounce_R_rem_wall          "Solar fractions for walls";
 
+protected
   function sight_fac_parallel "Calculate sight factor based on B7-2 in ASHRAE Appendix for parallel areas"
     input Real x "Length of floor / ceiling";
     input Real y "Depth of floor / ceiling";
@@ -62,11 +66,8 @@ model SolarRadInRoom
       Y^2))*((Z*Z*((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(Z^2))));
   end sight_fac_orthogonal;
 
-  Real solar_frac_win_abs[nWin] = fill(solar_frac_win_abs_int/nWin, nWin) "Solar fractions for windows, absorbed";
-  Real solar_frac_win_lost[nWin] = fill(solar_frac_win_lost_int/nWin, nWin) "Solar fractions for windows, lost cause of transmitvity";
-  Real solar_frac_cei[nCei] = bounce_1_cei .+ bounce_2_floor_cei .+ bounce_3_rem_cei .+ bounce_R_rem_cei "Solar fractions for ceilings";
-  Real solar_frac_flo[nFloors] = fill(solar_frac_flo_int/nFloors, nFloors) "Solar fractions for floors";
-  Real solar_frac_wall[nWalls] = bounce_1_wall .+ bounce_2_floor_wall .+ bounce_3_rem_wall .+ bounce_R_rem_wall          "Solar fractions for walls";
+  Modelica.SIunits.Length floor_length_int = if nFloors>1 then floor_length else floors[1].length "Total length of floors";
+  Modelica.SIunits.Height floor_height_int = if nFloors>1 then floor_height else floors[1].height "Total height of floors";
 
   // Floors and windows have a special rule. As ASHRAE assumes one window and one floor,
   // possible different material properties have to be averaged in order for the approach to work.
@@ -135,7 +136,8 @@ model SolarRadInRoom
   Modelica.Blocks.Sources.RealExpression QRadWalls_out[nWalls](y={Q_flow_in * solar_frac_wall[n] for n in 1:nWalls});
   Modelica.Blocks.Sources.RealExpression QRadCei_out[nCei](y={Q_flow_in * solar_frac_cei[n] for n in 1:nCei});
   Modelica.Blocks.Sources.RealExpression QRadFloors_out[nFloors](y={Q_flow_in * solar_frac_flo[n] for n in 1:nFloors});
-  Modelica.Blocks.Sources.RealExpression QRadWin_out[nWin](y={Q_flow_in * solar_frac_win_abs[n] for n in 1:nWin});
+  Modelica.Blocks.Sources.RealExpression QRadWin_out[nWin](y={Q_flow_in*
+        solar_frac_win_abs[n] for n in 1:nWin});
 
 initial equation
   // Asssert energy balance matches
@@ -213,5 +215,38 @@ equation
         Line(
           points={{-12,-48},{-22,-60}},
           color={255,255,0},
-          thickness=0.5)}), Diagram(coordinateSystem(preserveAspectRatio=false)));
+          thickness=0.5)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p><br>This model distributes the incoming short wave radtion onto different areas of the room according to the approach in the ASHREA Standard, Annex B7 &quot;Detailed calculation of solar fractions&quot;. The ASHREA makes some assumptions to estimate the sight factors of each element. For more details on the assumptions, we refer to the ASHREA standard. In order to ease the usage of this model, we made additional assumptions. </p>
+<h4>Assumptions by ASHREA</h4>
+<ul>
+<li>First bounce: All shortwave radiation initially hits the floor</li>
+<li>Second bounce: Not absorbed radiation is diffusivly reflected by floor and distributed over all surfaces according to the view factors of each surface</li>
+<li>Third bounce: Remaining radiation is distributed over each surface in proportion to it&apos;s area-absorptance product</li>
+<li>Remaining bounces: Based on calculations from third bounce</li>
+</ul>
+<h4>Additional Assumptions</h4>
+<p>In order to ease the usage of this model, we added the following assumptions. You can read more about the reasons of these assumptions in the corresponding <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">issue 918</a>.</p>
+<ul>
+<li>In constrast to the ASHREA, we allow for different solar absorptance factors</li>
+<li>All floors act as one joined area. However, the heat flows are seperated based on areas etc. at the end according to ASHRAE</li>
+<li>All walls have the same heigh + ceiling and floor have (joined together) the same area. This is necessary in order to use the approximations of sight factors from the standard. This is checked via asserts</li>
+<li>We only calculate one view/sight factor, and that is from floor to ceiling. This assumes floor and ceiling are two parallel areas with the same total area</li>
+<li>All remaining radiation of the second bounce is distributed proportional to the areas of the surfaces:<br>sight_factor_floor_win = A_win / (A_win + A_walls) * (1 - sight_factor_floor_ceil)<br>sight_factor_floor_walls = A_walls / (A_win + A_walls) * (1 - sight_factor_floor_ceil)<br>sight_factor_floor_wall_i = A_wall_i / A_walls * sight_factor_floor_walls <br>sight_factor_floor_win_i = A_win_i / A_win * sight_factor_floor_walls </li>
+</ul>
+<p><br>Note that the last assumption would be valid for a quadratic room with no windows. Only for extremly long rooms this assumptions could be dangerous. However, a floor typically reflects only 10 &percnt; of the incoming radiation. Approx. 50 &percnt; of that go to the ceiling, the rest to the walls. Therefor, effects like correct window placement etc. on the temperatures of the walls will be of a small magnitude. </p>
+<h4>Parameterization</h4>
+<p>You have to connect the bus connector <a href=\"AixLib.Utilities.Interfaces.ShortRadSurf\">ShortRadSurf</a> of each surface (floor, wall, ceiling) of type <a href=\"AixLib.ThermalZones.HighOrder.Components.Walls.Wall\">wall</a> to the corresponding port. As the current implementation of type <a href=\"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140\">window</a> only supports one directional short wave radiation, the port win_out may be ignored. However, you can check how much radiation is lost to the ambient.</p>
+<p>If you model a room with multiple floor elements, you have to specify the parameters floor_length and floor_height. These scales are required to calculate the view factors in the second bounce.</p>
+<h4>Known Limitations</h4>
+<ul>
+<li>In the ASHREA, all surfaces shall have the same absorbtance. Our modelling approach enable differing values. To reproduce the exact values from the ASHREA, you&apos;d have to change the records from the wall, floors etc.</li>
+<li>This model works best for nearly quadratic rooms</li>
+<li>Windows in the floors or ceilings are not regarded</li>
+</ul>
+</html>", revisions="<html>
+ <ul>
+ <li><i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: Implemented.</li> 
+ </ul>
+</html>"));
 end SolarRadInRoom;

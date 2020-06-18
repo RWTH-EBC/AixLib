@@ -27,5 +27,12 @@ expandable connector ShortRadSurf
         fillColor={28,108,200},
         fillPattern=FillPattern.Solid,
           textString="%name%")}),                                Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>This connector holds variables used to calculate the short wave radiation in a room. As you may notice, some of the variables are actually parameters. We chose this approach to pass parameters from e.g. a wall model directly to the model which calculates the radiation exchange (e.g. <a href=\"AixLib.Utilities.HeatTransfer.SolarRadInRoom\">SolarRadInRoom</a>).</p>
+</html>", revisions="<html>
+ <ul>
+ <li><i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: Implemented.</li> 
+ </ul>
+</html>"));
 end ShortRadSurf;

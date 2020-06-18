@@ -206,7 +206,8 @@ equation
 </html>",
  revisions="<html>
  <ul>
-  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Add records for window panes.</li>
+ <li><i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: Add short wave connector to pass window parameters.</li> 
+ <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Add records for window panes.</li>
  <li><i>November 11, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>Removed parameters phi and eps_out. This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.</li>
  <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:<br/>Improved implementation of transmitted solar radiation</li>
  <li><i>February 24, 2014&nbsp;</i> by Reza Tavakoli:<br/>First implementation</li>

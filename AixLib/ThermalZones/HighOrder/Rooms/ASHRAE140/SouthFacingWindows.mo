@@ -153,7 +153,6 @@ public
       annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
 
   Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
-    nWin=1,
     nWalls=4,
     nFloors=1,
     nCei=1) annotation (Placement(transformation(extent={{-54,36},{-30,60}})));
