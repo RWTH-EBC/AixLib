@@ -6,7 +6,7 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
   package MediumAir = AixLib.Media.Air
     annotation (choicesAllMatching=true);
 
-  AixLib.Systems.ModularAHU.Validation.MeasuredData.AHU2_Cooler_StepResponse data "Measured data";
+  AixLib.Systems.ModularAHU.Validation.MeasuredData.AHU2_Cooler_RampValve data "Measured data";
   Fluid.Sources.Boundary_pT boundaryWaterSource(
     redeclare package Medium = MediumWater,
     use_T_in=true,
@@ -67,7 +67,6 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
           0.89,0.93,0.96,1}, phi={0,0.001,0.002,0.08,0.29,0.75,0.94,0.98,1}),
           b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,0.26,
           0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
-
       valve(use_inputFilter=false),
       pipe1(
         T_start=283.15,
@@ -103,7 +102,7 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-130,16},{-110,36}})));
-  Modelica.Blocks.Sources.Constant const(k=0)
+  Modelica.Blocks.Sources.Constant const(k=-0.5)
     annotation (Placement(transformation(extent={{-172,20},{-152,40}})));
 equation
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)
