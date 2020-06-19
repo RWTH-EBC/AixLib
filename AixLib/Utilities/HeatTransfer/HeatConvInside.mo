@@ -24,7 +24,7 @@ model HeatConvInside
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
-      Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
+      Dialog(descriptionLabel=true, enable=if calcMethod == 4 then false else true),
       choices(
       choice=1 "vertical",
       choice=2 "horizontal facing up",
