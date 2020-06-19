@@ -1,6 +1,8 @@
 ﻿within AixLib.Systems.Benchmark_fb;
 package Mode_based_ControlStrategy
   model Mode_based_Controller
+    Level.Bus_systems.ModeBasedControllerBus modeBasedControllerBus
+      annotation (Placement(transformation(extent={{56,-12},{84,12}})));
 
     AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation (
       Placement(visible = true, transformation(extent={{92,-10},{112,10}},     rotation = 0), iconTransformation(extent={{92,-10},
@@ -16,8 +18,6 @@ package Mode_based_ControlStrategy
       annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
     Level.AutomationLevel_V1 automationLevel_V1_1
       annotation (Placement(transformation(extent={{-60,-20},{-20,0}})));
-    Level.Bus_systems.ModeBasedControllerBus modeBasedControllerBus
-      annotation (Placement(transformation(extent={{24,-12},{52,12}})));
   equation
     connect(fieldLevel1.mainBus, mainBus) annotation (Line(
         points={{-36.2,-60},{100,-60},{100,0},{102,0}},
@@ -108,17 +108,17 @@ package Mode_based_ControlStrategy
 
     connect(modeBasedControllerBus, mainBus.ModeBasedControlStrategy) annotation (
        Line(
-        points={{38,0},{102,0}},
+        points={{70,0},{102,0}},
         color={255,204,51},
         thickness=0.5));
     connect(managementLevel_Temp_V2_1.managementLevelBus, modeBasedControllerBus.ManagementLevelBus)
       annotation (Line(
-        points={{-40.9091,40},{-40,40},{-40,28},{20,28},{20,0},{38,0}},
+        points={{-40.9091,40},{-40,40},{-40,28},{20,28},{20,0},{70,0}},
         color={255,204,51},
         thickness=0.5));
     connect(automationLevel_V1_1.automationLevelBus, modeBasedControllerBus.AutomationLevelBus)
       annotation (Line(
-        points={{-39.8,-20.0714},{-39.8,-32},{20,-32},{20,0},{38,0}},
+        points={{-39.8,-20.0714},{-39.8,-32},{20,-32},{20,0},{70,0}},
         color={255,204,51},
         thickness=0.5));
     annotation (
