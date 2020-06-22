@@ -26,9 +26,12 @@ model Window_ASHRAE140
 
 
   replaceable model correctionSolarGain =
-      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
+      BaseClasses.CorrectionSolarGain.NoCorG constrainedby
+    BaseClasses.CorrectionSolarGain.PartialCorG
     "Model for correction of solar gain factor" annotation (Dialog(
-        descriptionLabel=true), choicesAllMatching=true);
+       group="Window type",
+      enable=selectable,
+      descriptionLabel=true), choicesAllMatching=true);
 
   correctionSolarGain RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
             -30,72}})));
