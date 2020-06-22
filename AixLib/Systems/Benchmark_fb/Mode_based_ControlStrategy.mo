@@ -19,10 +19,6 @@ package Mode_based_ControlStrategy
     Level.AutomationLevel_V1 automationLevel_V1_1
       annotation (Placement(transformation(extent={{-60,-20},{-20,0}})));
   equation
-    connect(fieldLevel1.mainBus, mainBus) annotation (Line(
-        points={{-36.2,-60},{100,-60},{100,0},{102,0}},
-        color={255,204,51},
-        thickness=0.5));
     connect(mainBus.TRoom1Mea, managementLevel_Temp_V2_1.RoomTempMea[1])
       annotation (Line(
         points={{102.05,0.05},{100,0.05},{100,100},{-40.9091,100},{-40.9091,61.88}},
@@ -121,6 +117,21 @@ package Mode_based_ControlStrategy
         points={{-39.8,-20.0714},{-39.8,-32},{20,-32},{20,0},{70,0}},
         color={255,204,51},
         thickness=0.5));
+    connect(managementLevel_Temp_V2_1.managementLevelBus, automationLevel_V1_1.managementLevelBus)
+      annotation (Line(
+        points={{-40.9091,40},{-40,40},{-40,0}},
+        color={255,204,51},
+        thickness=0.5));
+    connect(automationLevel_V1_1.automationLevelBus, fieldLevel1.automationLevelBus)
+      annotation (Line(
+        points={{-39.8,-20.0714},{-39.8,-60},{-40,-60}},
+        color={255,204,51},
+        thickness=0.5));
+    connect(fieldLevel1.mainBus, mainBus) annotation (Line(
+        points={{-40,-80},{-40,-100},{-100,-100},{-100,100},{100,100},{100,2},{
+            102,2},{102,0}},
+        color={255,204,51},
+        thickness=0.5));
     annotation (
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
               fillPattern =                                                                                                                                              FillPattern.Solid,
@@ -143,15 +154,13 @@ Controller")}),
           Placement(
           visible=true,
           transformation(
-            origin={38,120},
+            origin={0,-120},
             extent={{-10,-10},{10,10}},
             rotation=0),
           iconTransformation(
-            origin={38,120},
+            origin={0,-120},
             extent={{-10,-10},{10,10}},
             rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanInput u[37] annotation (
-        Placement(visible = true, transformation(origin={-40,132},            extent = {{-14, -14}, {14, 14}}, rotation = -90), iconTransformation(origin={-40,132},            extent = {{-14, -14}, {14, 14}}, rotation = -90)));
       AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_GTFSystem
         controller_GTFSystem1 annotation (Placement(visible=true,
             transformation(
@@ -233,76 +242,17 @@ Controller")}),
         Placement(visible = true, transformation(origin={52,72},     extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Controller.Controller_CentralAHU controller_CentralAHU
         annotation (Placement(transformation(extent={{-90,20},{-70,40}})));
+      Bus_systems.AutomationLevelBus automationLevelBus
+        annotation (Placement(transformation(extent={{-10,110},{10,130}})));
+      Modelica.Blocks.Routing.BooleanPassThrough booleanPassThrough[37] annotation (
+         Placement(transformation(
+            extent={{-6,-6},{6,6}},
+            rotation=270,
+            origin={0,100})));
     equation
-      connect(controller_Tabs_OpenplanOffice.Cooling, u[37]) annotation (
-        Line(points={{-69.6,-118},{-40,-118},{-40,118.378}},
-                                                          color = {255, 0, 255}));
-      connect(controller_Tabs_OpenplanOffice.Heating, u[36]) annotation (
-        Line(points={{-69.4,-114},{-40,-114},{-40,119.135}},
-                                                          color = {255, 0, 255}));
-      connect(controller_Tabs_MultipersonOffice.Cooling, u[34]) annotation (
-        Line(points={{-69.6,-98},{-40,-98},{-40,120.649}},
-                                                        color = {255, 0, 255}));
-      connect(controller_Tabs_MultipersonOffice.Heating, u[33]) annotation (
-        Line(points={{-69.4,-94},{-40,-94},{-40,121.405}},
-                                                        color = {255, 0, 255}));
-      connect(controller_Tabs_ConferenceRoom.Cooling, u[31]) annotation (
-        Line(points={{-69.6,-78},{-40,-78},{-40,122.919}},
-                                                        color = {255, 0, 255}));
-      connect(controller_Tabs_ConferenceRoom.Heating, u[30]) annotation (
-        Line(points={{-69.4,-74},{-40,-74},{-40,123.676}},
-                                                        color = {255, 0, 255}));
-      connect(controller_Tabs_Canteen.Cooling, u[28]) annotation (
-        Line(points={{-69.6,-58},{-40,-58},{-40,125.189}},
-                                                        color = {255, 0, 255}));
-      connect(controller_Tabs_Canteen.Heating, u[27]) annotation (
-        Line(points={{-69.4,-54},{-40,-54},{-40,125.946}},
-                                                        color = {255, 0, 255}));
-      connect(u[25], controller_Tabs_Workshop.Cooling) annotation (
-        Line(points={{-40,127.459},{-40,-38},{-69.6,-38}},
-                                                        color = {255, 0, 255}));
-      connect(u[24], controller_Tabs_Workshop.Heating) annotation (
-        Line(points={{-40,128.216},{-40,-34},{-69.4,-34}},
-                                                        color = {255, 0, 255}));
-      connect(controller_VU_OpenplanOffice.Cooling, u[37]) annotation (
-        Line(points={{60.6,-118},{80,-118},{80,-120},{-40,-120},{-40,118.378}},
-                                                                             color = {255, 0, 255}));
-      connect(controller_VU_OpenplanOffice.Heating, u[36]) annotation (
-        Line(points={{60.6,-114},{80,-114},{80,-120},{-40,-120},{-40,119.135}},
-                                                                             color = {255, 0, 255}));
-      connect(controller_VU_MultipersonOffice.Cooling, u[34]) annotation (
-        Line(points={{60.6,-98},{80,-98},{80,-120},{-40,-120},{-40,120.649}},
-                                                                           color = {255, 0, 255}));
-      connect(controller_VU_MultipersonOffice.Heating, u[33]) annotation (
-        Line(points={{60.6,-94},{80,-94},{80,-120},{-40,-120},{-40,121.405}},
-                                                                           color = {255, 0, 255}));
-      connect(controller_VU_ConferenceRoom.Cooling, u[31]) annotation (
-        Line(points={{60.6,-78},{80,-78},{80,-120},{-40,-120},{-40,122.919}},
-                                                                           color = {255, 0, 255}));
-      connect(controller_VU_ConferenceRoom.Heating, u[30]) annotation (
-        Line(points={{60.6,-74},{80,-74},{80,-120},{-40,-120},{-40,123.676}},
-                                                                           color = {255, 0, 255}));
-      connect(controller_VU_Canteen.Cooling, u[28]) annotation (
-        Line(points={{60.6,-58},{80,-58},{80,-120},{-40,-120},{-40,125.189}},
-                                                                           color = {255, 0, 255}));
-      connect(controller_VU_Canteen.Heating, u[27]) annotation (
-        Line(points={{60.6,-54},{80,-54},{80,-120},{-40,-120},{-40,125.946}},
-                                                                           color = {255, 0, 255}));
-      connect(controller_VU_Workshop.Cooling, u[25]) annotation (
-        Line(points={{60.6,-38},{80,-38},{80,-120},{-40,-120},{-40,127.459}},
-                                                                           color = {255, 0, 255}));
-      connect(controller_VU_Workshop.Heating, u[24]) annotation (
-        Line(points={{60.6,-34},{80,-34},{80,-120},{-40,-120},{-40,128.216}},
-                                                                           color = {255, 0, 255}));
-      connect(u[2], controller_HTSSystem1.HTS_Heating_I) annotation (
-        Line(points={{-40,144.865},{-40,118},{-68.6,118}},
-                                                        color = {255, 0, 255}));
-      connect(u[3], controller_HTSSystem1.HTS_Heating_II) annotation (
-        Line(points={{-40,144.108},{-40,102},{-68.6,102}},
-                                                        color = {255, 0, 255}));
       connect(mainBus.htsBus, controller_HTSSystem1.highTempSystemBus1)
         annotation (Line(
-          points={{38.05,120.05},{38.05,120},{-20,120},{-20,110},{-70,110}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,110},{-70,110}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -310,7 +260,7 @@ Controller")}),
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.gtfBus, controller_GTFSystem1.gtfBus) annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,120},{-20,120},{-20,84},{-70,84}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,84},{-70,84}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -319,7 +269,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.swuBus, controller_SwitchingUnit1.switchingUnitBus1)
         annotation (Line(
-          points={{38.05,120.05},{38.05,120},{-20,120},{-20,70},{-70,70}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,70},{-70,70}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -328,8 +278,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.hpSystemBus, controller_HPSystem1.heatPumpSystemBus1)
         annotation (Line(
-          points={{38.05,120.05},{38.05,122},{38,122},{38,120},{-20,120},{-20,10},{-70,
-              10}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,10},{-70,10}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -338,7 +287,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.vu1Bus, controller_VU_Workshop.genericAHUBus1)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-30},{60,-30}},
+          points={{0.05,-119.95},{100,-119.95},{100,-30},{60,-30}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -347,7 +296,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.vu2Bus, controller_VU_Canteen.genericAHUBus1) annotation (
          Line(
-          points={{38.05,120.05},{100,120.05},{100,-52},{60,-52},{60,-50}},
+          points={{0.05,-119.95},{100,-119.95},{100,-52},{60,-52},{60,-50}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -356,7 +305,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Right));
       connect(mainBus.vu3Bus, controller_VU_ConferenceRoom.genericAHUBus1)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-70},{60,-70}},
+          points={{0.05,-119.95},{100,-119.95},{100,-70},{60,-70}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -365,7 +314,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Right));
       connect(mainBus.vu4Bus, controller_VU_MultipersonOffice.genericAHUBus1)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-90},{60,-90}},
+          points={{0.05,-119.95},{100,-119.95},{100,-90},{60,-90}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -374,7 +323,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.vu5Bus, controller_VU_OpenplanOffice.genericAHUBus1)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-110},{60,-110}},
+          points={{0.05,-119.95},{100,-119.95},{100,-110},{60,-110}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -383,7 +332,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Right));
       connect(mainBus.tabs1Bus, controller_Tabs_Workshop.tabsBus21) annotation (
          Line(
-          points={{38.05,120.05},{100,120.05},{100,-120},{-20,-120},{-20,-28},{-46,-28},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,-28},{-46,-28},
               {-46,-30},{-70,-30}},
           color={255,204,51},
           thickness=0.5), Text(
@@ -394,7 +343,7 @@ Controller")}),
 
       connect(mainBus.tabs2Bus, controller_Tabs_Canteen.tabsBus21) annotation (
           Line(
-          points={{38.05,120.05},{100,120.05},{100,-120},{-20,-120},{-20,-50},{-70,-50}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,-50},{-70,-50}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -404,7 +353,7 @@ Controller")}),
 
       connect(mainBus.tabs3Bus, controller_Tabs_ConferenceRoom.tabsBus21)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-120},{-20,-120},{-20,-70},{-70,-70}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,-70},{-70,-70}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -414,7 +363,7 @@ Controller")}),
 
       connect(mainBus.tabs4Bus, controller_Tabs_MultipersonOffice.tabsBus21)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-120},{-20,-120},{-20,-90},{-70,-90}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,-90},{-70,-90}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -424,8 +373,7 @@ Controller")}),
 
       connect(mainBus.tabs5Bus, controller_Tabs_OpenplanOffice.tabsBus21)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-120},{-20,-120},{-20,-110},{-70,
-              -110}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,-110},{-70,-110}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -434,8 +382,8 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
 
       connect(mainBus.hxBus, controller_HX.hxBus) annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,120},{-20,120},{-20,50},{-46,50},
-              {-46,50.1},{-68.9,50.1}},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,50},{-46,50},{
+              -46,50.1},{-68.9,50.1}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -445,7 +393,7 @@ Controller")}),
 
       connect(mainBus.TRoom1Mea, controller_VU_Workshop.TRoomMea) annotation (
           Line(
-          points={{38.05,120.05},{100,120.05},{100,-22},{60.6,-22}},
+          points={{0.05,-119.95},{100,-119.95},{100,-22},{60.6,-22}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -454,7 +402,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Right));
       connect(mainBus.TRoom2Mea, controller_VU_Canteen.TRoomMea) annotation (
           Line(
-          points={{38.05,120.05},{100,120.05},{100,-42},{60.6,-42}},
+          points={{0.05,-119.95},{100,-119.95},{100,-42},{60.6,-42}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -463,7 +411,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.TRoom3Mea, controller_VU_ConferenceRoom.TRoomMea)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-62},{60.6,-62}},
+          points={{0.05,-119.95},{100,-119.95},{100,-62},{60.6,-62}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -472,7 +420,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.TRoom4Mea, controller_VU_MultipersonOffice.TRoomMea)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-82},{60.6,-82}},
+          points={{0.05,-119.95},{100,-119.95},{100,-82},{60.6,-82}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -481,7 +429,7 @@ Controller")}),
           horizontalAlignment=TextAlignment.Left));
       connect(mainBus.TRoom5Mea, controller_VU_OpenplanOffice.TRoomMea)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,-102},{60.6,-102}},
+          points={{0.05,-119.95},{100,-119.95},{100,-102},{60.6,-102}},
           color={255,204,51},
           thickness=0.5), Text(
           string="%first",
@@ -490,87 +438,338 @@ Controller")}),
           horizontalAlignment=TextAlignment.Right));
       connect(mainBus.hpSystemBus.TTopHSMea, controller_HPSystem1.T_HotStorage)
         annotation (Line(
-          points={{38.05,120.05},{38.05,120},{-20,120},{-20,-10},{-88,-10},{-88,-0.8}},
+          points={{0.05,-119.95},{2,-119.95},{2,-120},{-20,-120},{-20,-10},{-88,-10},
+              {-88,-0.8}},
           color={255,204,51},
           thickness=0.5));
       connect(mainBus.hpSystemBus.TTopCSMea, controller_HPSystem1.T_ColdStorage)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,120},{-20,120},{-20,-10},{-76,-10},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,-10},{-76,-10},
               {-76,-1}},
           color={255,204,51},
           thickness=0.5));
       connect(mainBus.hpSystemBus.busHP.T_ret_co, controller_HPSystem1.T_Condensator)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,120},{-20,120},{-20,-10},{-84,-10},
+          points={{0.05,-119.95},{0,-119.95},{0,-120},{-20,-120},{-20,-10},{-84,-10},
               {-84,-0.8}},
           color={255,204,51},
           thickness=0.5));
       connect(mainBus.hpSystemBus.busHP.T_ret_ev, controller_HPSystem1.T_Evaporator)
         annotation (Line(
-          points={{38.05,120.05},{100,120.05},{100,120},{-20,120},{-20,-10},{-80,-10},
+          points={{0.05,-119.95},{-2,-119.95},{-2,-120},{-20,-120},{-20,-10},{-80,-10},
               {-80,-0.8}},
           color={255,204,51},
           thickness=0.5));
       connect(HP_iceFac.y, mainBus.hpSystemBus.busHP.iceFac) annotation (Line(
-            points={{61,10},{100,10},{100,120.05},{38.05,120.05}},
+            points={{61,10},{100,10},{100,-119.95},{0.05,-119.95}},
                                                                 color={0,0,127}));
       connect(HP_mode.y, mainBus.hpSystemBus.busHP.mode) annotation (Line(
-            points={{61,40},{100,40},{100,120.05},{38.05,120.05}},
+            points={{61,40},{100,40},{100,-119.95},{0.05,-119.95}},
                                                                 color={255,0,
               255}));
       connect(or2.y, mainBus.hpSystemBus.AirCoolerOnSet) annotation (Line(
-            points={{63,72},{100,72},{100,120},{38.05,120},{38.05,120.05}},
+            points={{63,72},{100,72},{100,-120},{0.05,-120},{0.05,-119.95}},
                                                                         color={
               255,0,255}));
       connect(HP_mode.y, or2.u2) annotation (Line(points={{61,40},{80,40},{80,56},{26,
               56},{26,64},{40,64}},         color={255,0,255}));
       connect(HP_mode.y, or2.u1) annotation (Line(points={{61,40},{82,40},{82,28},{18,
               28},{18,72},{40,72}},         color={255,0,255}));
-      connect(u[7], controller_GTFSystem1.GTF_On) annotation (Line(points={{-40,
-              141.081},{-40,96},{-69.2,96}},
-                                    color={255,0,255}));
-      connect(u[5], controller_HX.On) annotation (Line(points={{-40,142.595},{
-              -40,54},{-69.3,54},{-69.3,55.1}},
-                                        color={255,0,255}));
-      connect(u[13], controller_SwitchingUnit1.Heating_GTF) annotation (Line(points={{-40,
-              136.541},{-40,78},{-69.4,78}},      color={255,0,255}));
-      connect(u[14], controller_SwitchingUnit1.Heating_GTFandCon) annotation (Line(
-            points={{-40,135.784},{-40,74},{-69.4,74}}, color={255,0,255}));
-      connect(u[17], controller_SwitchingUnit1.Cooling_GTFandHP) annotation (Line(
-            points={{-40,133.514},{-40,60},{-69.4,60}}, color={255,0,255}));
-      connect(u[16], controller_SwitchingUnit1.Cooling_HP) annotation (Line(points={{-40,
-              134.27},{-40,64},{-69.4,64}},      color={255,0,255}));
-      connect(controller_SwitchingUnit1.Cooling_GTF, u[15]) annotation (Line(points={{-69.4,
-              68},{-40,68},{-40,135.027}},        color={255,0,255}));
-      connect(controller_CentralAHU.CentralAHU_Heating, u[19])
-        annotation (Line(points={{-69.6,38.5714},{-40,38.5714},{-40,132}},
-                                                               color={255,0,255}));
-      connect(controller_CentralAHU.CentralAHU_Heating_Preheating, u[20])
-        annotation (Line(points={{-70.2,35.7143},{-40,35.7143},{-40,131.243}},
-                                                                     color={255,0,255}));
-      connect(controller_CentralAHU.CentralAHU_Cooling, u[21]) annotation (Line(
-            points={{-70,30},{-70,28},{-40,28},{-40,130.486}}, color={255,0,255}));
-      connect(controller_CentralAHU.CentralAHU_Combi, u[22]) annotation (Line(
-            points={{-70,27.1429},{-40,27.1429},{-40,129.73}},
-                                                     color={255,0,255}));
-      connect(controller_HPSystem1.HP_Heating, u[9]) annotation (Line(points={{-69.4,
-              18},{-40,18},{-40,139.568}}, color={255,0,255}));
-      connect(controller_HPSystem1.HP_Cooling, u[10]) annotation (Line(points={{-69.4,2},
-              {-40,2},{-40,138.811}},    color={255,0,255}));
-      connect(u[11], controller_HPSystem1.HP_Combi) annotation (Line(points={{-40,
-              138.054},{-40,6},{-69.4,6}},
-                                  color={255,0,255}));
       connect(mainBus.ahuBus, controller_CentralAHU.genericAHUBus) annotation (
           Line(
-          points={{38.05,120.05},{-20,120.05},{-20,32},{-70,32},{-70,32.9286}},
+          points={{0.05,-119.95},{-20,-119.95},{-20,32},{-70,32},{-70,32.9286}},
           color={255,204,51},
           thickness=0.5));
 
+      connect(automationLevelBus.HTS_Off, booleanPassThrough[1].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(automationLevelBus.HTS_Heating_I, booleanPassThrough[2].u)
+        annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(automationLevelBus.HTS_Heating_II, booleanPassThrough[3].u)
+        annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(automationLevelBus.HX_Off, booleanPassThrough[4].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.HX_On, booleanPassThrough[5].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(automationLevelBus.GTF_Off, booleanPassThrough[6].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(automationLevelBus.GTF_On, booleanPassThrough[7].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(automationLevelBus.HP_Off, booleanPassThrough[8].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+           connect(automationLevelBus.HP_Heating, booleanPassThrough[9].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+           connect(automationLevelBus.HP_Cooling, booleanPassThrough[10].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+           connect(automationLevelBus.HP_Combination, booleanPassThrough[11].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+
+      connect(automationLevelBus.SU_Off, booleanPassThrough[12].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.SU_Heating_GTF, booleanPassThrough[13].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.SU_Heating_GTF_Con, booleanPassThrough[14].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.SU_Cooling_GTF, booleanPassThrough[15].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.SU_Cooling_HP, booleanPassThrough[16].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.SU_Cooling_GTF_HP, booleanPassThrough[17].u) annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(automationLevelBus.Central_AHU_Off, booleanPassThrough[18].u)
+        annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.Central_AHU_Heating, booleanPassThrough[19].u)
+        annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.Central_AHU_Heating_Preheating, booleanPassThrough[20].u)
+        annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.Central_AHU_Cooling, booleanPassThrough[21].u)
+        annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.Central_AHU_Combination, booleanPassThrough[22].u)
+        annotation (Line(
+          points={{0,120},{0,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(automationLevelBus.Workshop_Off, booleanPassThrough[23].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.Workshop_Heating, booleanPassThrough[24].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.Workshop_Cooling, booleanPassThrough[25].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+
+
+
+          connect(automationLevelBus.Canteen_Off, booleanPassThrough[26].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.Canteen_Heating, booleanPassThrough[27].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.Canteen_Cooling, booleanPassThrough[28].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+
+
+          connect(automationLevelBus.ConferenceRoom_Off, booleanPassThrough[29].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.ConferenceRoom_Heating, booleanPassThrough[30].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.ConferenceRoom_Cooling, booleanPassThrough[31].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+
+
+          connect(automationLevelBus.MultipersonOffice_Off, booleanPassThrough[32].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.MultipersonOffice_Heating, booleanPassThrough[33].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.MultipersonOffice_Cooling, booleanPassThrough[34].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+
+
+    connect(automationLevelBus.OpenplanOffice_Off, booleanPassThrough[35].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.OpenplanOffice_Heating, booleanPassThrough[36].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+          connect(automationLevelBus.OpenplanOffice_Cooling, booleanPassThrough[37].u)
+        annotation (Line(
+          points={{0,120},{0,107.2},{1.33227e-15,107.2}},
+          color={255,204,51},
+          thickness=0.5));
+
+
+
+      connect(booleanPassThrough[3].y, controller_Tabs_OpenplanOffice.Cooling)
+        annotation (Line(points={{0,93.4},{0,-118},{-69.6,-118}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[36].y, controller_Tabs_OpenplanOffice.Heating)
+        annotation (Line(points={{0,93.4},{0,-114},{-69.4,-114}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[34].y, controller_Tabs_MultipersonOffice.Cooling)
+        annotation (Line(points={{0,93.4},{0,-98},{-69.6,-98}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[33].y, controller_Tabs_MultipersonOffice.Heating)
+        annotation (Line(points={{0,93.4},{0,-94},{-69.4,-94}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[30].y, controller_Tabs_ConferenceRoom.Heating)
+        annotation (Line(points={{0,93.4},{0,-74},{-69.4,-74}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[31].y, controller_Tabs_ConferenceRoom.Cooling)
+        annotation (Line(points={{0,93.4},{0,-78},{-69.6,-78}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[27].y, controller_Tabs_Canteen.Heating)
+        annotation (Line(points={{0,93.4},{0,-54},{-69.4,-54}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[28].y, controller_Tabs_Canteen.Cooling)
+        annotation (Line(points={{0,93.4},{0,-58},{-69.6,-58}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[24].y, controller_Tabs_Workshop.Heating)
+        annotation (Line(points={{0,93.4},{0,-34},{-69.4,-34}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[25].y, controller_Tabs_Workshop.Cooling)
+        annotation (Line(points={{0,93.4},{0,-38},{-69.6,-38}}, color={255,0,
+              255}));
+      connect(booleanPassThrough[2].y, controller_HTSSystem1.HTS_Heating_I)
+        annotation (Line(points={{0,93.4},{0,80},{-20,80},{-20,118},{-68.6,118}},
+            color={255,0,255}));
+      connect(booleanPassThrough[3].y, controller_HTSSystem1.HTS_Heating_II)
+        annotation (Line(points={{0,93.4},{0,80},{-20,80},{-20,102},{-68.6,102}},
+            color={255,0,255}));
+      connect(booleanPassThrough[7].y, controller_GTFSystem1.GTF_On)
+        annotation (Line(points={{0,93.4},{0,80},{-20,80},{-20,96},{-69.2,96}},
+            color={255,0,255}));
+      connect(booleanPassThrough[5].y, controller_HX.On) annotation (Line(
+            points={{0,93.4},{0,55.1},{-69.3,55.1}}, color={255,0,255}));
+      connect(controller_SwitchingUnit1.Heating_GTF, booleanPassThrough[13].y)
+        annotation (Line(points={{-69.4,78},{0,78},{0,93.4}}, color={255,0,255}));
+      connect(controller_SwitchingUnit1.Heating_GTFandCon, booleanPassThrough[
+        14].y) annotation (Line(points={{-69.4,74},{0,74},{0,93.4}}, color={255,
+              0,255}));
+      connect(controller_SwitchingUnit1.Cooling_GTF, booleanPassThrough[15].y)
+        annotation (Line(points={{-69.4,68},{0,68},{0,93.4}}, color={255,0,255}));
+      connect(controller_SwitchingUnit1.Cooling_HP, booleanPassThrough[16].y)
+        annotation (Line(points={{-69.4,64},{0,64},{0,93.4}}, color={255,0,255}));
+      connect(controller_SwitchingUnit1.Cooling_GTFandHP, booleanPassThrough[17].y)
+        annotation (Line(points={{-69.4,60},{0,60},{0,93.4}}, color={255,0,255}));
+      connect(controller_CentralAHU.CentralAHU_Heating, booleanPassThrough[19].y)
+        annotation (Line(points={{-69.6,38.5714},{-69.6,38},{0,38},{0,93.4}},
+            color={255,0,255}));
+      connect(controller_CentralAHU.CentralAHU_Heating_Preheating,
+        booleanPassThrough[20].y) annotation (Line(points={{-69.6,35.7143},{
+              -69.6,36},{0,36},{0,93.4}}, color={255,0,255}));
+      connect(controller_CentralAHU.CentralAHU_Cooling, booleanPassThrough[21].y)
+        annotation (Line(points={{-69.6,29.8571},{-69.6,28},{0,28},{0,93.4}},
+            color={255,0,255}));
+      connect(controller_CentralAHU.CentralAHU_Combi, booleanPassThrough[22].y)
+        annotation (Line(points={{-69.4,25.7143},{-69.4,26},{0,26},{0,93.4}},
+            color={255,0,255}));
+      connect(controller_HPSystem1.HP_Heating, booleanPassThrough[9].y)
+        annotation (Line(points={{-69.4,18},{0,18},{0,93.4}}, color={255,0,255}));
+      connect(controller_HPSystem1.HP_Combi, booleanPassThrough[11].y)
+        annotation (Line(points={{-69.4,6},{0,6},{0,93.4},{-1.11022e-15,93.4}},
+            color={255,0,255}));
+      connect(controller_HPSystem1.HP_Cooling, booleanPassThrough[10].y)
+        annotation (Line(points={{-69.4,2},{0,2},{0,93.4}}, color={255,0,255}));
+      connect(booleanPassThrough[24].y, controller_VU_Workshop.Heating)
+        annotation (Line(points={{0,93.4},{4,93.4},{4,92},{0,92},{0,-8},{100,-8},
+              {100,-34},{60.6,-34}}, color={255,0,255}));
+      connect(booleanPassThrough[25].y, controller_VU_Workshop.Cooling)
+        annotation (Line(points={{0,93.4},{0,-8},{100,-8},{100,-38},{60.6,-38}},
+            color={255,0,255}));
+      connect(booleanPassThrough[27].y, controller_VU_Canteen.Heating)
+        annotation (Line(points={{0,93.4},{0,-8},{100,-8},{100,-54},{60.6,-54}},
+            color={255,0,255}));
+      connect(booleanPassThrough[28].y, controller_VU_Canteen.Cooling)
+        annotation (Line(points={{0,93.4},{4,93.4},{4,92},{0,92},{0,-8},{100,-8},
+              {100,-58},{60.6,-58}}, color={255,0,255}));
+      connect(booleanPassThrough[30].y, controller_VU_ConferenceRoom.Heating)
+        annotation (Line(points={{0,93.4},{0,-8},{100,-8},{100,-74},{60.6,-74}},
+            color={255,0,255}));
+      connect(booleanPassThrough[31].y, controller_VU_ConferenceRoom.Cooling)
+        annotation (Line(points={{-1.11022e-15,93.4},{2,93.4},{2,94},{0,94},{0,
+              -8},{100,-8},{100,-78},{60.6,-78}}, color={255,0,255}));
+      connect(booleanPassThrough[33].y, controller_VU_MultipersonOffice.Heating)
+        annotation (Line(points={{0,93.4},{0,-8},{100,-8},{100,-94},{60.6,-94}},
+            color={255,0,255}));
+      connect(booleanPassThrough[34].y, controller_VU_MultipersonOffice.Cooling)
+        annotation (Line(points={{0,93.4},{0,-8},{100,-8},{100,-98},{60.6,-98}},
+            color={255,0,255}));
+      connect(booleanPassThrough[36].y, controller_VU_OpenplanOffice.Heating)
+        annotation (Line(points={{0,93.4},{0,-8},{100,-8},{100,-114},{60.6,-114}},
+            color={255,0,255}));
+      connect(booleanPassThrough[3].y, controller_VU_OpenplanOffice.Cooling)
+        annotation (Line(points={{0,93.4},{0,-8},{100,-8},{100,-118},{60.6,-118}},
+            color={255,0,255}));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -120}, {100, 120}}), graphics={  Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                               FillPattern.Solid,
                 lineThickness =                                                                                                                                                                                                0.5, extent={{
-                  -200,120},{202,-120}}),                                                                                                                                                                                                        Text(origin={
+                  -120,120},{122,-122}}),                                                                                                                                                                                                        Text(origin={
                   -64.497,31.3324},                                                                                                                                                                                                        lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent={{
                   -129.503,54.6676},{262.497,-109.331}},                                                                                                                                                                                                        textString = "Field 
@@ -587,7 +786,7 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=Superior_Mode[1] or Superior_Mode[3])    annotation (Placement(
+        firingCon=Superior_Mode[1].u or Superior_Mode[3].u)    annotation (Placement(
             visible=true, transformation(
             origin={-167,67},
             extent={{-7,-7},{7,7}},
@@ -600,8 +799,8 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=(Superior_Mode[2] or Superior_Mode[4]) and TAirOutside >
-            283.15)                        annotation (Placement(visible=true,
+        firingCon=(Superior_Mode[2].u or Superior_Mode[4].u) and TAirOutside > 283.15)
+                                           annotation (Placement(visible=true,
             transformation(
             origin={-167,53},
             extent={{-7,-7},{7,7}},
@@ -610,7 +809,7 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=(Superior_Mode[2] or Superior_Mode[4]) and TAirOutside <=
+        firingCon=(Superior_Mode[2].u or Superior_Mode[4].u) and TAirOutside <=
             283.15)                         annotation (Placement(visible=true,
             transformation(
             origin={-167,39},
@@ -620,24 +819,24 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=Superior_Mode[1] or Superior_Mode[3])    annotation (Placement(
+        firingCon=Superior_Mode[1].u or Superior_Mode[3].u)    annotation (Placement(
             visible=true, transformation(
             origin={-167,25},
             extent={{-7,-7},{7,7}},
             rotation=180)));
       PNlib.Components.TD T14(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=(Superior_Mode[2] or Superior_Mode[4]) and TAirOutside <=
+        firingCon=(Superior_Mode[2].u or Superior_Mode[4].u) and TAirOutside <=
             283.15)                                                                                                             annotation (
         Placement(visible = true, transformation(origin={-141,45},    extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T15(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=(Superior_Mode[2] or Superior_Mode[4]) and TAirOutside >
+        firingCon=(Superior_Mode[2].u or Superior_Mode[4].u) and TAirOutside >
             283.15)                                                                                                          annotation (
         Placement(visible = true, transformation(origin={-155,45},    extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T16(
         delay=180,
-        firingCon=Superior_Mode[3],
+        firingCon=Superior_Mode[3].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-183,-127},
@@ -655,7 +854,7 @@ Controller")}),
             rotation=90)));
       PNlib.Components.TD T17(
         delay=180,
-        firingCon=Superior_Mode[4],
+        firingCon=Superior_Mode[4].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-183,-141},
@@ -663,7 +862,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T18(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-149,-153},
@@ -671,7 +870,7 @@ Controller")}),
             rotation=90)));
       PNlib.Components.TD T19(
         delay=180,
-        firingCon=Superior_Mode[4] or (Superior_Mode[2] and TAirOutside <=
+        firingCon=Superior_Mode[4].u or (Superior_Mode[2].u and TAirOutside <=
             283.15),
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -684,7 +883,7 @@ Controller")}),
         Placement(visible = true, transformation(origin={-140,-134}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
       PNlib.Components.TD T110(
         delay=180,
-        firingCon=Superior_Mode[2] and TAirOutside > 283.15,
+        firingCon=Superior_Mode[2].u and TAirOutside > 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-125,-141},
@@ -692,7 +891,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T111(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-125,-127},
@@ -702,7 +901,7 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=Superior_Mode[1])                       annotation (Placement(
+        firingCon=Superior_Mode[1].u)                       annotation (Placement(
             visible=true, transformation(
             origin={-157,-141},
             extent={{-7,-7},{7,7}},
@@ -715,7 +914,7 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=Superior_Mode[3] or HP_Heating.t > 0.5 or HP_Combi.t > 0.5)
+        firingCon=Superior_Mode[3].u or HP_Heating.t > 0.5 or HP_Combi.t > 0.5)
                                   annotation (Placement(visible=true,
             transformation(
             origin={-170,-12},
@@ -725,7 +924,7 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=Superior_Mode[1])                       annotation (Placement(
+        firingCon=Superior_Mode[1].u)                       annotation (Placement(
             visible=true, transformation(
             origin={-183,-13},
             extent={{-7,-7},{7,7}},
@@ -736,24 +935,13 @@ Controller")}),
         Placement(visible = true, transformation(origin={-178,-84},    extent = {{-6, -6}, {6, 6}}, rotation = 180)));
       PNlib.Components.TD T116(
         delay=180,
-        firingCon=Superior_Mode[1],               nIn = 1, nOut = 1) annotation (
+        firingCon=Superior_Mode[1].u,               nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin={-185,-67},    extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T117(
         delay=180,             firingCon = false, nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin={-171,-67},    extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.PD HX_Off(enablingType = PNlib.Types.EnablingType.Priority, maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, reStartTokens = 0, startTokens = 1) annotation (
         Placement(visible = true, transformation(origin={-178,-52},    extent = {{-6, -6}, {6, 6}}, rotation = 0)));
-      Modelica.Blocks.Interfaces.BooleanInput Superior_Mode[4] annotation (
-          Placement(
-          visible=true,
-          transformation(
-            origin={0,110},
-            extent={{-10,-10},{10,10}},
-            rotation=-90),
-          iconTransformation(
-            origin={0,110},
-            extent={{-10,-10},{10,10}},
-            rotation=-90)));
       Modelica.Blocks.Interfaces.RealInput TAirOutside
         "Outside Air Temperature"                                                annotation (
         Placement(visible = true, transformation(origin = {160, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {160, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
@@ -953,7 +1141,7 @@ Controller")}),
         Placement(visible = true, transformation(origin={-142,-168}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
       PNlib.Components.TD T146(
         delay=180,
-        firingCon=Superior_Mode[2] and TAirOutside > 283.15,
+        firingCon=Superior_Mode[2].u and TAirOutside > 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-91,-141},
@@ -961,7 +1149,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T147(
         delay=180,
-        firingCon=Superior_Mode[4] or (Superior_Mode[2] and TAirOutside <=
+        firingCon=Superior_Mode[4].u or (Superior_Mode[2].u and TAirOutside <=
             283.15),
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -970,7 +1158,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T112(
         delay=180,
-        firingCon=Superior_Mode[3],
+        firingCon=Superior_Mode[3].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-157,-127},
@@ -980,7 +1168,7 @@ Controller")}),
         Placement(visible = true, transformation(origin={-96,62},      extent = {{-6, -6}, {6, 6}}, rotation = 90)));
       PNlib.Components.TD T150(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-79,69},
@@ -988,35 +1176,35 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T151(
         delay=180,
-        firingCon=Superior_Mode[3] and T_GEO < 285.15,   nIn = 1, nOut = 1) annotation (
+        firingCon=Superior_Mode[3].u and T_GEO < 285.15,   nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin={-79,55},     extent = {{-7, -7}, {7, 7}}, rotation = 180)));
       PNlib.Components.TD T152(
         delay=180,                        nIn = 1, nOut = 1,
-        firingCon=Superior_Mode[3] and T_GEO < 285.15)       annotation (
+        firingCon=Superior_Mode[3].u and T_GEO < 285.15)       annotation (
         Placement(visible = true, transformation(origin={-89,49},     extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T153(
         delay=180,                        nIn = 1, nOut = 1,
-        firingCon=(Superior_Mode[3] and T_GEO >= 290.15) or Superior_Mode[4])
+        firingCon=(Superior_Mode[3].u and T_GEO >= 290.15) or Superior_Mode[4].u)
                                                              annotation (
         Placement(visible = true, transformation(origin={-103,49},     extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T154(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[4] or (Superior_Mode[3] and T_GEO >= 290.15))
+        firingCon=Superior_Mode[4].u or (Superior_Mode[3].u and T_GEO >= 290.15))
                                                   annotation (
         Placement(visible = true, transformation(origin={-89,21},     extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T155(
         delay=180,
-        firingCon=(Superior_Mode[3] and T_GEO >= 290.15) or Superior_Mode[4],
+        firingCon=(Superior_Mode[3].u and T_GEO >= 290.15) or Superior_Mode[4].u,
                                                          nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin={-79,27},     extent = {{-7, -7}, {7, 7}}, rotation = 180)));
       PNlib.Components.TD T156(
         delay=180,                        nIn = 1, nOut = 1,
-        firingCon=Superior_Mode[3] and T_GEO >= 285.15 and T_GEO < 290.15)
+        firingCon=Superior_Mode[3].u and T_GEO >= 285.15 and T_GEO < 290.15)
                                                              annotation (
         Placement(visible = true, transformation(origin={-103,21},     extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T157(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-79,41},
@@ -1028,24 +1216,24 @@ Controller")}),
         Placement(visible = true, transformation(origin={-96,34},      extent = {{-6, -6}, {6, 6}}, rotation = 90)));
       PNlib.Components.TD T158(
         delay=180,
-        firingCon=Superior_Mode[3] and T_GEO < 290.15 and T_GEO >= 285.15,
+        firingCon=Superior_Mode[3].u and T_GEO < 290.15 and T_GEO >= 285.15,
                                                          nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin={-79,-1},     extent = {{-7, -7}, {7, 7}}, rotation = 180)));
       PNlib.Components.TD T159(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[3] and T_GEO < 285.15)
+        firingCon=Superior_Mode[3].u and T_GEO < 285.15)
                                                   annotation (
         Placement(visible = true, transformation(origin={-113,13},     extent = {{-7, -7}, {7, 7}}, rotation = 180)));
       PNlib.Components.PD SU_Cooling_GTFandHP(maxTokens = 1, minTokens = 0, nIn = 3, nOut = 3, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin={-96,6},       extent = {{-6, -6}, {6, 6}}, rotation = 90)));
       PNlib.Components.TD T160(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[3] and T_GEO < 290.15 and T_GEO >= 285.15)
+        firingCon=Superior_Mode[3].u and T_GEO < 290.15 and T_GEO >= 285.15)
                                                   annotation (
         Placement(visible = true, transformation(origin={-113,-1},     extent = {{-7, -7}, {7, 7}}, rotation = 0)));
       PNlib.Components.TD T161(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-79,13},
@@ -1055,7 +1243,7 @@ Controller")}),
         Placement(visible = true, transformation(origin={-64,32},     extent = {{-6, -6}, {6, 6}}, rotation = 0)));
       PNlib.Components.TD T162(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[2] and T_CS > 285.15)
+        firingCon=Superior_Mode[2].u and T_CS > 285.15)
                                                   annotation (
         Placement(visible = true, transformation(origin={-27,35},     extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.PD SU_Heating_GTF(maxTokens = 1, minTokens = 0,
@@ -1064,12 +1252,12 @@ Controller")}),
         Placement(visible = true, transformation(origin={-34,48},     extent = {{-6, -6}, {6, 6}}, rotation = -90)));
       PNlib.Components.TD T164(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[2] and T_CS <= 285.15)
+        firingCon=Superior_Mode[2].u and T_CS <= 285.15)
                                                   annotation (
         Placement(visible = true, transformation(origin={-41,35},     extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T166(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-51,13},
@@ -1077,11 +1265,11 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T167(
         delay=180,
-        firingCon=Superior_Mode[2] and T_CS <= 285.15,   nIn = 1, nOut = 1) annotation (
+        firingCon=Superior_Mode[2].u and T_CS <= 285.15,   nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin={-51,27},     extent = {{-7, -7}, {7, 7}}, rotation = 0)));
       PNlib.Components.TD T168(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-51,41},
@@ -1089,7 +1277,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T169(                          nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[2] and T_CS > 285.15)                       annotation (
+        firingCon=Superior_Mode[2].u and T_CS > 285.15)                       annotation (
         Placement(visible = true, transformation(origin={-51,55},     extent = {{-7, -7}, {7, 7}}, rotation = 0)));
       PNlib.Components.PD SU_Heating_GTFandCON(maxTokens = 1, minTokens = 0,
         nIn=3,
@@ -1112,7 +1300,7 @@ Controller")}),
             origin={80,110})));
       PNlib.Components.TD T2(
         delay=180,
-        firingCon=(Superior_Mode[3] and T_GEO >= 290.15) or Superior_Mode[4],
+        firingCon=(Superior_Mode[3].u and T_GEO >= 290.15) or Superior_Mode[4].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-17,43},
@@ -1120,7 +1308,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T3(
         delay=180,
-        firingCon=Superior_Mode[2] and T_CS > 285.15,
+        firingCon=Superior_Mode[2].u and T_CS > 285.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-17,57},
@@ -1128,7 +1316,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T4(
         delay=180,
-        firingCon=Superior_Mode[2] and T_CS <= 285.15,
+        firingCon=Superior_Mode[2].u and T_CS <= 285.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-17,29},
@@ -1136,7 +1324,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T5(
         delay=180,
-        firingCon=(Superior_Mode[3] and T_GEO >= 290.15) or Superior_Mode[4],
+        firingCon=(Superior_Mode[3].u and T_GEO >= 290.15) or Superior_Mode[4].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-17,15},
@@ -1153,7 +1341,7 @@ Controller")}),
             rotation=90)));
       PNlib.Components.TD T25(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-90,-56},
@@ -1170,7 +1358,7 @@ Controller")}),
             rotation=-90)));
       PNlib.Components.TD T26(
         delay=180,
-        firingCon=Superior_Mode[3],
+        firingCon=Superior_Mode[3].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-90,-40},
@@ -1187,7 +1375,7 @@ Controller")}),
             rotation=-90)));
       PNlib.Components.TD T35(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-90,-94},
@@ -1195,7 +1383,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T36(
         delay=180,
-        firingCon=Superior_Mode[4],
+        firingCon=Superior_Mode[4].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-90,-78},
@@ -1203,7 +1391,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T41(
         delay=180,
-        firingCon=Superior_Mode[4],
+        firingCon=Superior_Mode[4].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-104,-66},
@@ -1211,7 +1399,7 @@ Controller")}),
             rotation=270)));
       PNlib.Components.TD T42(
         delay=180,
-        firingCon=Superior_Mode[3],
+        firingCon=Superior_Mode[3].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-122,-66},
@@ -1219,7 +1407,7 @@ Controller")}),
             rotation=90)));
       PNlib.Components.TD T6(
         delay=180,
-        firingCon=Superior_Mode[2] and TAirOutside < 283.15,
+        firingCon=Superior_Mode[2].u and TAirOutside < 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-52,-78},
@@ -1227,7 +1415,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T7(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-52,-94},
@@ -1253,7 +1441,7 @@ Controller")}),
             rotation=-90)));
       PNlib.Components.TD T8(
         delay=180,
-        firingCon=Superior_Mode[2] and TAirOutside < 283.15,
+        firingCon=Superior_Mode[2].u and TAirOutside < 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-24,-66},
@@ -1261,7 +1449,7 @@ Controller")}),
             rotation=270)));
       PNlib.Components.TD T9(
         delay=180,
-        firingCon=Superior_Mode[2] and TAirOutside >= 283.15,
+        firingCon=Superior_Mode[2].u and TAirOutside >= 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-40,-66},
@@ -1269,7 +1457,7 @@ Controller")}),
             rotation=90)));
       PNlib.Components.TD T23(
         delay=180,
-        firingCon=Superior_Mode[4],
+        firingCon=Superior_Mode[4].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-12,-94},
@@ -1277,7 +1465,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T24(
         delay=180,
-        firingCon=Superior_Mode[2] and TAirOutside < 283.15,
+        firingCon=Superior_Mode[2].u and TAirOutside < 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-12,-78},
@@ -1285,7 +1473,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T27(
         delay=180,
-        firingCon=Superior_Mode[2] and TAirOutside >= 283.15,
+        firingCon=Superior_Mode[2].u and TAirOutside >= 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-52,-40},
@@ -1293,7 +1481,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T28(
         delay=180,
-        firingCon=Superior_Mode[1],
+        firingCon=Superior_Mode[1].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-52,-56},
@@ -1301,7 +1489,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T29(
         delay=180,
-        firingCon=Superior_Mode[2] and TAirOutside >= 283.15,
+        firingCon=Superior_Mode[2].u and TAirOutside >= 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-12,-40},
@@ -1309,7 +1497,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T30(
         delay=180,
-        firingCon=Superior_Mode[4],
+        firingCon=Superior_Mode[4].u,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-12,-56},
@@ -1317,6 +1505,13 @@ Controller")}),
             rotation=0)));
       Bus_systems.AutomationLevelBus automationLevelBus
         annotation (Placement(transformation(extent={{-14,-196},{18,-166}})));
+      Bus_systems.ManagementLevelBus managementLevelBus
+        annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+      Modelica.Blocks.Routing.BooleanPassThrough Superior_Mode[4] annotation (
+          Placement(transformation(
+            extent={{-6,-6},{6,6}},
+            rotation=270,
+            origin={12,84})));
     equation
       connect(T156.outPlaces[1], SU_Cooling_GTFandHP.inTransition[2]) annotation (
         Line(points={{-103,17.64},{-104,17.64},{-104,0},{-96,0},{-96,-0.48}},            thickness = 0.5));
@@ -1937,6 +2132,34 @@ Controller")}),
 
 
 
+      connect(managementLevelBus.Off, Superior_Mode[1].u) annotation (Line(
+          points={{0,100},{12,100},{12,91.2}},
+          color={255,204,51},
+          thickness=0.5), Text(
+          string="%first",
+          index=-1,
+          extent={{-3,-6},{-3,-6}},
+          horizontalAlignment=TextAlignment.Right));
+      connect(managementLevelBus.Heating, Superior_Mode[2].u) annotation (Line(
+          points={{0,100},{12,100},{12,91.2}},
+          color={255,204,51},
+          thickness=0.5), Text(
+          string="%first",
+          index=-1,
+          extent={{-3,6},{-3,6}},
+          horizontalAlignment=TextAlignment.Right));
+      connect(managementLevelBus.Cooling, Superior_Mode[3].u) annotation (Line(
+          points={{0,100},{12,100},{12,91.2}},
+          color={255,204,51},
+          thickness=0.5), Text(
+          string="%first",
+          index=-1,
+          extent={{-3,6},{-3,6}},
+          horizontalAlignment=TextAlignment.Right));
+      connect(managementLevelBus.Combination, Superior_Mode[4].u) annotation (Line(
+          points={{0,100},{12,100},{12,91.2}},
+          color={255,204,51},
+          thickness=0.5));
                  annotation (
         uses(PNlib(version = "2.2"), Modelica(version = "3.2.3")),
         Diagram(graphics={  Text(origin={-161,91},    extent = {{-21, 5}, {13, -3}}, textString = "HTS_System"), Text(origin={
@@ -3680,7 +3903,7 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
             extent={{-12,-12},{12,12}},
             rotation=180),
           iconTransformation(
-            origin={98,40},
+            origin={104,40},
             extent={{-12,-12},{12,12}},
             rotation=180)));
       Modelica.Blocks.Interfaces.BooleanInput CentralAHU_Cooling annotation (
@@ -3691,7 +3914,7 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
             extent={{-12,-12},{12,12}},
             rotation=180),
           iconTransformation(
-            origin={100,-40},
+            origin={104,-42},
             extent={{-12,-12},{12,12}},
             rotation=180)));
       Modelica.Blocks.Interfaces.BooleanInput CentralAHU_Combi annotation (
@@ -3702,7 +3925,7 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
             extent={{-12,-12},{12,12}},
             rotation=180),
           iconTransformation(
-            origin={100,-80},
+            origin={106,-100},
             extent={{-12,-12},{12,12}},
             rotation=180)));
       Controls.Continuous.LimPID PID_Preheating(

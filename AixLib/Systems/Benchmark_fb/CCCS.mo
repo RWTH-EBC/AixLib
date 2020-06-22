@@ -106,8 +106,8 @@ package CCCS
     connect(investmentCostsComponents.y, CCCSBus.InvestmentCostsComponents)
       annotation (Line(points={{-59.4,-70},{-40,-70},{-40,-100},{100,-100},{100,
             0},{98,0}}, color={0,0,127}));
-    connect(InvestmentCosts.y, CCCSBus.InvestmentCosts) annotation (Line(points
-          ={{-7,-70},{40,-70},{40,-100},{100,-100},{100,0},{98,0}}, color={0,0,
+    connect(InvestmentCosts.y, CCCSBus.InvestmentCosts) annotation (Line(points=
+           {{-7,-70},{40,-70},{40,-100},{100,-100},{100,0},{98,0}}, color={0,0,
             127}));
     connect(product1.y, CCCSBus.OperationalCosts) annotation (Line(points={{31,
             40},{40,40},{40,100},{100,100},{100,0},{98,0}}, color={0,0,127}));
@@ -159,11 +159,13 @@ Components")}),
         Placement(transformation(extent={{-90,-18},{-74,-2}})));
       Modelica.Blocks.Routing.RealPassThrough HP_ThrottleCS_valveSet annotation (
         Placement(transformation(extent={{-90,12},{-74,28}})));
-      AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Pumps[36](each cost_component = 3000, each sim_time = simTime) annotation (
+      AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Pumps[36](each
+          cost_component=1164,                                                                                                                     each sim_time = simTime) annotation (
         Placement(visible = true, transformation(origin={100,50},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Math.MultiSum multiSum1(nu = 72) annotation (
         Placement(visible = true, transformation(origin={140,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Valves[36](each cost_component = 1000, each sim_time = simTime) annotation (
+      AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Valves[36](each
+          cost_component=77,                                                                                                                        each sim_time = simTime) annotation (
         Placement(visible = true, transformation(origin={102,-50},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Routing.RealPassThrough gtf_prim_rpmSet annotation (
         Placement(transformation(extent={{-46,58},{-32,72}})));
