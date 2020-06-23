@@ -7,16 +7,15 @@ model Cooler "Cooler register example"
     annotation (choicesAllMatching=true);
 
   RegisterModule registerModule(
+    T_start=297.15,
     redeclare HydraulicModules.ThrottlePump hydraulicModule(
-      dIns=0.01,
-      kIns=0.028,
-      d=0.032,
+      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
+      parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       length=1,
       Kv=6.3,
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-            redeclare
+        PumpInterface(pump(redeclare
             AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
             per))),
     redeclare package Medium2 = MediumWater,

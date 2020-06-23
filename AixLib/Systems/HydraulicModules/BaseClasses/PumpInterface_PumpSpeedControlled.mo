@@ -7,7 +7,8 @@ model PumpInterface_PumpSpeedControlled
 
   replaceable
     AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN
-    pumpController(pumpParam=pumpParam) constrainedby Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
+    pumpController(pumpParam=pumpParam) constrainedby
+    Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
     annotation (
     Dialog(enable=true, tab="Control Strategy"),
     Placement(transformation(extent={{-20,40},{20,80}})),
@@ -68,36 +69,14 @@ model PumpInterface_PumpSpeedControlled
       Default is to calculate it from Qstart and Nnom. If you change the value<br />
       make sure to also set Qstart to a suitable value.</html>"
     annotation (Dialog(tab="Initialization", group="Pressure"));
-  parameter Medium.AbsolutePressure p_a_start=physics.system.p_start "<html><br />
-  Start value for inlet pressure. Use it to set a defined absolute pressure<br />
-  in the circuit. For example system.p_start. Also use it to initialize<br />
-  upper level models properly. It will affect p_b_start.</html>"
-    annotation (Dialog(tab="Initialization", group="Pressure"));
-  parameter Medium.AbsolutePressure p_b_start=physics.p_b_start "<html><br />
-      Start value for outlet pressure. It depends on p_a_start and Hstart.<br />
-      It is deactivated for user input by default. Use it in an upper level model<br />
-      for proper initialization of other pressure states in that circuit.</html>"
-    annotation (Dialog(
-      tab="Initialization",
-      group="Pressure",
-      enable=false));
 
-  parameter Medium.Temperature T_start=physics.system.T_start
-    "Start value of temperature in PartialLumpedVolume of PumpPhysics"
-    annotation (Dialog(tab="Initialization"));
+
 
   // Assumptions
   parameter Boolean checkValve=false "= true to prevent reverse flow"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=physics.system.energyDynamics
-    "Formulation of energy balance" annotation (choicesAllMatching=true, Dialog(
-        tab="Assumptions", group="Dynamics"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=physics.system.massDynamics
-    "Formulation of mass balance" annotation (choicesAllMatching=true, Dialog(
-        tab="Assumptions", group="Dynamics"));
-
   // Power and Efficiency
   parameter Boolean calculatePower=false "calc. power consumption?"
     annotation (Dialog(tab="General", group="Power and Efficiency"));
@@ -114,26 +93,26 @@ model PumpInterface_PumpSpeedControlled
     Hnom=Hnom,
     redeclare package Medium = Medium,
     Qstart=Qstart,
-    p_a_start=p_a_start,
+    p_a_start=Medium.p_default,
     T_start=T_start,
     checkValve=checkValve,
     V=V,
-    energyDynamics=energyDynamics,
+    final energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     massDynamics=massDynamics,
     calculatePower=calculatePower,
     calculateEfficiency=calculateEfficiency,
     redeclare function efficiencyCharacteristic =
         Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency)
-    annotation (Placement(transformation(extent={{-30,-50},{30,10}})));
+    annotation (Placement(transformation(extent={{-30,-48},{30,12}})));
 
 equation
   connect(pumpController.pumpBus, physics.pumpBus) annotation (Line(
-      points={{0,40},{0,10}},
+      points={{0,40},{0,12}},
       color={255,204,51},
       thickness=0.5));
-  connect(physics.port_a, port_a) annotation (Line(points={{-30,-20},{-66,-20},{
+  connect(physics.port_a, port_a) annotation (Line(points={{-30,-18},{-66,-18},{
           -66,0},{-100,0}}, color={0,127,255}));
-  connect(physics.port_b, port_b) annotation (Line(points={{30,-20},{66,-20},{66,
+  connect(physics.port_b, port_b) annotation (Line(points={{30,-18},{66,-18},{66,
           0},{100,0}}, color={0,127,255}));
   connect(pumpController.pumpControllerBus, pumpBus) annotation (Line(
       points={{0,80},{0,100}},
