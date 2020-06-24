@@ -627,8 +627,8 @@ connect(heatTransfer.therm, layer.port);
   Buffer storage model with support for heating rod and two heating
   coils. Model with variable connection pairs for loading and unlouding
   cycles which are defined by the associated <u>storage layer
-  number</u> of the ports. Compared to the standard HeatStorage model, the 
-  position of the heating coils can also be defined in this model.
+  number</u> of the ports. Compared to the standard HeatStorage model,
+  the position of the heating coils can also be defined in this model.
 </p>
 <h4>
   <span style=\"color:#008000\">Concept</span>
@@ -654,7 +654,7 @@ connect(heatTransfer.therm, layer.port);
 </p>
 <p>
   <br/>
-  <b><font style=\"color: #008000;\">Example Results</font></b>
+  <b><span style=\"color: #008000\">Example Results</span></b>
 </p>
 <p>
   <a href=
@@ -662,18 +662,18 @@ connect(heatTransfer.therm, layer.port);
 </p>
 </html>",
 revisions="<html><ul>
-<li>
+  <li>
     <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
-</li>
-<li>
+  </li>
+  <li>
     <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
     Added documentation.
-</li>
-<li>
+  </li>
+  <li>
     <i>December 16, 2014</i> by Sebastian Stinner:<br/>
     Implemented.
-</li>
+  </li>
 </ul>
 </html>"));
 end HeatStorageVariablePorts;

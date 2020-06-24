@@ -133,8 +133,22 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  annotation (experiment(StopTime=10000, Interval=10), Documentation(info="<html>
-<p>This example can be used to test that <a href=\"modelica://AixLib.Controls.HeatPump.HPControllerOnOff\">AixLib.Controls.HeatPump.HPControllerOnOff</a> supplies all required signals as specified in <a href=\"modelica://AixLib.Controls.ControllerInterfaces.HeatPumpControlBus\">AixLib.Controls.ControllerInterfaces.HeatPumpControlBus</a>. The generated signals are visualized using the <a href=\"modelica://Modelica.Blocks.Interaction.Show\">Show</a> package. The temperature measurement is supplied by a sine block so that the reaction of the controller can be tested. </p>
-<p>The example also shows how to connect two models, typically a model of a physical component and a controller, via the bus connector. The temperatureMeasurements and the massFlowRateMeasurements are only connected for demonstration purposes and are not required by the controller. </p>
+  annotation (experiment(StopTime=10000, Interval=10), Documentation(info="<html><p>
+  This example can be used to test that <a href=
+  \"modelica://AixLib.Controls.HeatPump.HPControllerOnOff\">AixLib.Controls.HeatPump.HPControllerOnOff</a>
+  supplies all required signals as specified in <a href=
+  \"modelica://AixLib.Controls.ControllerInterfaces.HeatPumpControlBus\">AixLib.Controls.ControllerInterfaces.HeatPumpControlBus</a>.
+  The generated signals are visualized using the <a href=
+  \"modelica://Modelica.Blocks.Interaction.Show\">Show</a> package. The
+  temperature measurement is supplied by a sine block so that the
+  reaction of the controller can be tested.
+</p>
+<p>
+  The example also shows how to connect two models, typically a model
+  of a physical component and a controller, via the bus connector. The
+  temperatureMeasurements and the massFlowRateMeasurements are only
+  connected for demonstration purposes and are not required by the
+  controller.
+</p>
 </html>"));
 end HeatPumpController;

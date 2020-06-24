@@ -58,21 +58,45 @@ equation
          lineColor={0,0,0},
          pattern = LinePattern.None,
          fillPattern=FillPattern.Sphere,
-         fillColor={255,255,0})}),     Documentation(revisions="<html>
-<ul>
-<li><i>February 22, 2015&nbsp;</i> by Ana Constantin:<br/>Added the components of the total radiation</li>
-<li><i>December 4, 2014&nbsp;</i> by Ana Constantin:<br/>removed cardinality equation</li>
-<li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Renamed</li>
-<li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
-<li><i>October 23, 2006&nbsp;</i> by Peter Matthes:<br/>Implemented.</li>
+         fillColor={255,255,0})}),     Documentation(revisions="<html><ul>
+  <li>
+    <i>February 22, 2015&#160;</i> by Ana Constantin:<br/>
+    Added the components of the total radiation
+  </li>
+  <li>
+    <i>December 4, 2014&#160;</i> by Ana Constantin:<br/>
+    removed cardinality equation
+  </li>
+  <li>
+    <i>April 01, 2014</i> by Moritz Lauster:<br/>
+    Renamed
+  </li>
+  <li>
+    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>October 23, 2006&#160;</i> by Peter Matthes:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>",
-    info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The <b>PrescribedSolarRad</b> Model is a source model to represent a varying radiation source.</p>
-<h4><span style=\"color:#008000\">Assumption</span></h4>
-<p>If nothing is specified through the input port solar radiation of 0 W/m2 is assumed by default. </p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-
+    info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>PrescribedSolarRad</b> Model is a source model to represent a
+  varying radiation source.
+</p>
+<h4>
+  <span style=\"color:#008000\">Assumption</span>
+</h4>
+<p>
+  If nothing is specified through the input port solar radiation of 0
+  W/m2 is assumed by default.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
 </html>"));
 end PrescribedSolarRad;
