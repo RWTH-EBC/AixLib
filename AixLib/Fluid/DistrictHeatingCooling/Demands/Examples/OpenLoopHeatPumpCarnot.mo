@@ -117,24 +117,28 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=10000, Tolerance=1e-006, __Dymola_Algorithm="Cvode"),
-    Documentation(revisions="<html>
-<ul>
-<li>
-March 17, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>March 17, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
 <p>
-This is similar to the OpenLoopCooling example, but demonstrates a very simple pressure control. 
+  This is similar to the OpenLoopCooling example, but demonstrates a
+  very simple pressure control.
 </p>
 <p>
-This is an OpenLoop example of 
-<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp\">AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp</a> 
-which is a simple substation model using a fixed return temperature and the actual supply temperature to calculate the mass flow rate drawn from the network. 
+  This is an OpenLoop example of <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp</a>
+  which is a simple substation model using a fixed return temperature
+  and the actual supply temperature to calculate the mass flow rate
+  drawn from the network.
 </p>
 <p>
-This model uses an open loop design to prescribe the required flow rate.This model includes a heat pump model using the district heating network as its source.
+  This model uses an open loop design to prescribe the required flow
+  rate.This model includes a heat pump model using the district heating
+  network as its source.
 </p>
 </html>"));
 end OpenLoopHeatPumpCarnot;

@@ -19,27 +19,57 @@ equation
 port_b.p = if noEvent(port_a.m_flow>=0) then port_a.p - tubeLength*m*(port_a.m_flow)^n else  port_a.p + tubeLength*m*(port_b.m_flow)^n;
 
   annotation (
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Model for calculating the pressure drop.</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The pressure drop is calculated according to the following equation [1].</p>
-<p><img src=\"modelica://AixLib/Resources/Images/equations/equation-8xFaklFH.png\" alt=\"Delta_P = K*m_flow^2\"/></p>
-<p>In order to determine <i>K, </i>manufacturer data is used and : </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Fluid/ActiveWalls/PressureDrop.bmp\" alt=\"Pressure Drop\"/></p>
-<p>With the help onf the Matlab Curve Fit Toolbox a curve y = K*x^2 is fitted through several selected points.</p>
-<h4><span style=\"color:#008000\">Reference</span></h4>
-<p>Source:</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for calculating the pressure drop.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The pressure drop is calculated according to the following equation
+  [1].
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/equations/equation-8xFaklFH.png\"
+  alt=\"Delta_P = K*m_flow^2\">
+</p>
+<p>
+  In order to determine <i>K,</i> manufacturer data is used and :
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Fluid/ActiveWalls/PressureDrop.bmp\"
+  alt=\"Pressure Drop\">
+</p>
+<p>
+  With the help onf the Matlab Curve Fit Toolbox a curve y = K*x^2 is
+  fitted through several selected points.
+</p>
+<h4>
+  <span style=\"color:#008000\">Reference</span>
+</h4>
+<p>
+  Source:
+</p>
 <ul>
-<li>[1] Ross, Hans: &quot;Hydraulik der Wasserheizung&quot;, Oldenbourg Indunstrieverlag GmbH, 2002.</li>
+  <li>[1] Ross, Hans: \"Hydraulik der Wasserheizung\", Oldenbourg
+  Indunstrieverlag GmbH, 2002.
+  </li>
 </ul>
 </html>",
-  revisions="<html>
-<ul>
-<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>June 10, 2011&nbsp;</i> by Ana Constantin:<br/>
-Implemented.</li>
+  revisions="<html><ul>
+  <li>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>June 10, 2011&#160;</i> by Ana Constantin:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"),
     Diagram(graphics),

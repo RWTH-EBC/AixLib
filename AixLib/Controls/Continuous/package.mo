@@ -4,11 +4,9 @@ package Continuous "Package with models for discrete time controls"
 
 
 annotation (
-preferredView="info", Documentation(info="<html>
-This package contains component models for continuous time controls.
-For additional models, see also
-<a href=\"modelica://Modelica.Blocks.Continuous\">
-Modelica.Blocks.Discrete</a>.
+preferredView="info", Documentation(info="<html>This package contains component models for continuous time controls.
+For additional models, see also <a href=
+\"modelica://Modelica.Blocks.Continuous\">Modelica.Blocks.Discrete</a>.
 </html>"),
 Icon(graphics={Line(
           origin={0.061,4.184},

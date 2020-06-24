@@ -46,18 +46,26 @@ equation
     annotation (Line(points={{-79,4},{-79,4},{-62,4}}, color={0,0,127}));
   connect(const.y, heatGeneratorNoControll.Q_flow) annotation (Line(points={{-39,
           40},{-24,40},{-24,6},{-8,6}}, color={0,0,127}));
-  annotation (Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The simulation illustrates the functionality of a simple heat generator in
-<a href=\"AixLib.Fluid.BoilerCHP.HeatGeneratorNoControl\">AixLib.Fluid.BoilerCHP.HeatGeneratorNoControl</a>
-in order to test the functionality of the <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>. </p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The simulation illustrates the functionality of a simple heat
+  generator in <a href=
+  \"AixLib.Fluid.BoilerCHP.HeatGeneratorNoControl\">AixLib.Fluid.BoilerCHP.HeatGeneratorNoControl</a>
+  in order to test the functionality of the <a href=
+  \"AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First
-implementation</li>
+        revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"),
 experiment(StopTime=3600, Interval=1));

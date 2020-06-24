@@ -54,16 +54,36 @@ model testPumpPowerCalculation
   annotation (
     experiment(StopTime=5),
     __Dymola_Commands(file(ensureSimulated=true) = "Resources/Scripts/Dymola/DataBase/Pumps/ControlPump/Examples/testPumpPowerCalculation.mos"),
-    Documentation(info="<html>
-<p>simulate and plot script</p>
-<p>Use this test to check pump power calculation with the polynomial function and the cPQN coefficients from <a href=\"Zugabe.Zugabe_DB.Pump.PumpBaseRecord\">Zugabe.Zugabe_DB.Pump.PumpBaseRecord</a>.</p>
-<p>Be aware, that there is no power limitation implemented here. So the results show only the output of the pure polynomial function. In the pump model the power will be limited by the maxMinHeight curves.</p>
-<p>This test case makes use of nMin and nMax parameters of the pump record in the table for setting pump speed. Make sure that these values are set properly in the pump record or change the profile in the speed table.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  simulate and plot script
+</p>
+<p>
+  Use this test to check pump power calculation with the polynomial
+  function and the cPQN coefficients from <a href=
+  \"Zugabe.Zugabe_DB.Pump.PumpBaseRecord\">Zugabe.Zugabe_DB.Pump.PumpBaseRecord</a>.
+</p>
+<p>
+  Be aware, that there is no power limitation implemented here. So the
+  results show only the output of the pure polynomial function. In the
+  pump model the power will be limited by the maxMinHeight curves.
+</p>
+<p>
+  This test case makes use of nMin and nMax parameters of the pump
+  record in the table for setting pump speed. Make sure that these
+  values are set properly in the pump record or change the profile in
+  the speed table.
+</p>
 <ul>
-<li>2018-01-24 by Peter Matthes:<br />Highlights pumpParam parameter and adds graphic for pump power curve display in plot Script.</li>
-<li>2017-12-06 by Peter Matthes:<br />Adds hint for nMin and nMax in the documentation.</li>
-<li>2017-11-23 by Peter Matthes:<br />Implemented</li>
+  <li>2018-01-24 by Peter Matthes:<br/>
+    Highlights pumpParam parameter and adds graphic for pump power
+    curve display in plot Script.
+  </li>
+  <li>2017-12-06 by Peter Matthes:<br/>
+    Adds hint for nMin and nMax in the documentation.
+  </li>
+  <li>2017-11-23 by Peter Matthes:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"),
     Diagram(graphics={Text(
