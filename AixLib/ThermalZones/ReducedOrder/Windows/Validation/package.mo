@@ -5,15 +5,14 @@ package Validation "Collecion of validation models"
 
 
 
-  annotation (Documentation(info="<html><p>
-  This package contains models for validation of Windows models.
-  &lt;\\p&gt;
-</p>
+  annotation (Documentation(info="<html>
+<p>This package contains models for validation of Windows models. 
+<\\p>
+
 </html>",
-        revisions="<html><ul>
-  <li>July 13, 2016,&#160; by Stanley Risch:<br/>
-    Implemented.
-  </li>
+        revisions="<html>
+<ul>
+<li>July 13, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
 </ul>
 </html>"));
 end Validation;

@@ -12,7 +12,6 @@ class git_models(object):
 		
 	def sort_mo_models(self):
 		#list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt' 
-		#print(list_path)
 		changed_models = codecs.open(self.list_path, "r", encoding='utf8')
 		modelica_models = [] 
 		Lines =  changed_models.readlines()
@@ -22,26 +21,33 @@ class git_models(object):
 			if i.rfind(".mo")> -1:
 				#define modelica models
 				i = i.replace(os.sep,".")
+				i = i.replace("..",".")
 				model_number = i.rfind(self.package)
-				model_name = i[model_number:]
-				model_name = model_name.lstrip()
-				model_name = model_name.replace(os.sep,".")
-				model_name = model_name[:model_name.rfind(".mo")]
-				model_name = model_name.replace("..",".")
-				modelica_models.append(model_name)
-				continue
+				if model_number > -1:
+					model_name = i[model_number:]
+					model_name = model_name.lstrip()
+					model_name = model_name.replace(os.sep,".")
+					model_name = model_name[:model_name.rfind(".mo")]
+					model_name = model_name.replace("..",".")
+					modelica_models.append(model_name)
+					continue
+				else:
+					continue
 			else:
 				continue
 		changed_models.close()
 		if len(modelica_models) == 0:
 			print("No Models to check")
 			exit(0)
+		print(modelica_models)
 		return modelica_models
 
 if  __name__ == '__main__':
 	# Import git_model class
-	list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
+	#list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
+	list_path = 'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
+	
 	from sort_models import git_models
-	list_mo_models = git_models(".mo","AixLib",list_path)
+	list_mo_models = git_models(".mo","AixLib.Utilities",list_path)
 	list_mo_models.sort_mo_models()
 	

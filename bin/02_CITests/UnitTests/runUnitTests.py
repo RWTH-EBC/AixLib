@@ -129,7 +129,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 					Errorlist.append(l)
 					print("Regression test for model "+l+ " was not successfull")
 				if retVal == 0:
-					print("Regression test for model "+l "was successful")
+					print("Regression test for model "+l+ "was successful")
 				# comment out this line for local usage
 				ut.get_test_example_coverage()
 			if len(Errorlist) > 0:
