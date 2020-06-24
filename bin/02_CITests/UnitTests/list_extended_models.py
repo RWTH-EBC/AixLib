@@ -17,8 +17,10 @@ class Extended_model(object):
 	def list_regression_tests(self):
 		### List all models, that have changed before			
 		changed_model_list = Extended_model.list_changed_models(self)
+		#print(changed_model_list)
 		## List and compare all regression examples that have changed, but no changes in the used classes
 		regression_model_list = Extended_model.list_changed_examples(self,changed_model_list)
+		#print(regression_model_list)
 		models_test_regression = []
 		
 		if platform.system()  == "Windows":
@@ -44,7 +46,6 @@ class Extended_model(object):
 		sys.path.append(os.path.join(os.path.abspath('.'), "..", "..", "BuildingsPy"))
 	
 	
-		
 		if len(regression_model_list) == 0:
 			print("No modified regression models")
 			exit(0)
@@ -74,18 +75,20 @@ class Extended_model(object):
 		
 			### Modified regression examples 
 			for l in regression_model_list:
-				
+				print("Check model for regression test: "+l)
 				## Search for all used classes in the example
 				## Start CheckLibrary in ModelManagement
-				
+				print(l)
 				usedmodels = dymola.ExecuteCommand('ModelManagement.Structure.Instantiated.UsedModels("'+l+'");')
+				print("Benutze Modelle")
+				print(usedmodels)
 				#extendedmodels = dymola.ExecuteCommand('ModelManagement.Structure.AST.ExtendsInClass("'+l+'");')
 				regression_model = Extended_model.compare_change_used_models(self,usedmodels,l,changed_model_list)
 				if regression_model is None:
 					continue
 				elif len(regression_model) > 0:
 					models_test_regression.append(regression_model)
-			dymola.close()
+			#dymola.close()
 		
 		if len(models_test_regression) > 0: 
 			print("These models have been changed and a regression test is started")
@@ -129,8 +132,9 @@ class Extended_model(object):
 		for l in aixlib_used_model:
 			## loop for changed models
 			for i in model_list:
-				## if changed model is a used model in a example a new regression test is not impossible
+				## if changed model is a used model in a example a new regression test is not possible
 				if i == l:
+					print("***************************************")
 					print("\nThe used models "+ l+" in the example "+ regression_model +" have changed.\n You have to adapt your .mos file under AixLib\Resources\Scripts\Dymola with your changed classes.") 
 					ErrorCount = ErrorCount + 1
 					continue
@@ -138,8 +142,10 @@ class Extended_model(object):
 					continue
 			
 		if ErrorCount > 0:
+			print("***************************************")
 			print("Cannot perform a new regression test.\nA used class in the example was changed.\nEither a new reference file must be created or the modified used class must be reset to its original state.")
 		if ErrorCount == 0:
+			print("Start Regression test for model: " + regression_model)
 			return regression_model
 		
 	
@@ -156,7 +162,6 @@ class Extended_model(object):
 					mos_list.append(filepath)
 		### List all models, that have changed before			
 		#changedmodel = Extended_model.list_changed_models(self)
-		
 		mos_list_model = []
 		# list all .mos model in Aixlib form
 		for i in mos_list:
@@ -165,7 +170,7 @@ class Extended_model(object):
 				i = i.replace("Dymola","AixLib")
 				i = i.replace(os.sep,".")
 				mos_list_model.append(i)
-				
+		#print(mos_list_model)
 		regression_model_list = []
 		for l in mos_list_model:
 			for i in changed_model_list:
@@ -178,7 +183,9 @@ class Extended_model(object):
 	def list_changed_models(self):
 		list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
 	
-		list_mo_models = git_models(".mo","AixLib",list_path) 
+		#list_mo_models = git_models(".mo","AixLib",list_path) 
+		list_mo_models = git_models(".mo",self.package,list_path) 
+		
 		model_list = list_mo_models.sort_mo_models()
 		return model_list
 	

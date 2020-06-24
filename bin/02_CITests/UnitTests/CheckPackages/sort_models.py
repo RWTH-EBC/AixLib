@@ -20,9 +20,12 @@ class git_models(object):
 		for i in Line:
 			if i.rfind(".mo")> -1:
 				#define modelica models
+				i = i.replace("/",".")
 				i = i.replace(os.sep,".")
 				i = i.replace("..",".")
 				model_number = i.rfind(self.package)
+				if i.find(".package") > -1:
+					continue
 				if model_number > -1:
 					model_name = i[model_number:]
 					model_name = model_name.lstrip()
@@ -39,7 +42,7 @@ class git_models(object):
 		if len(modelica_models) == 0:
 			print("No Models to check")
 			exit(0)
-		print(modelica_models)
+		#print(modelica_models)
 		return modelica_models
 
 if  __name__ == '__main__':

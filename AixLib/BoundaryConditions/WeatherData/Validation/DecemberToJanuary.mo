@@ -1,4 +1,5 @@
 within AixLib.BoundaryConditions.WeatherData.Validation;
+
 model DecemberToJanuary
   "Validation model for a data reader that has data spanning only some hours in December to January"
   extends Modelica.Icons.Example;

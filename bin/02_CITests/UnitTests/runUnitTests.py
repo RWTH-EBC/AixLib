@@ -98,6 +98,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 		regression_models = func_list_models.list_regression_tests()
 		
 		if len(regression_models) > 100:
+			print("Over 100 changed models. Check all models in AixLib package "+package)
 			if package is not None:
 				ut.setSinglePackage(package)
 			ut.setNumberOfThreads(n_pro)
@@ -105,9 +106,11 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 			ut.showGUI(show_gui)
 			retVal = ut.run()
 			ut.get_test_example_coverage()
-			return retVal
+			#return retVal
 		else:
 			for l in regression_models:
+				if l.rfind("package"):
+					continue
 				print("Regression test for model: "+l) 
 				model_package = l[:l.rfind(".")]
 				ut.setSinglePackage(model_package)
