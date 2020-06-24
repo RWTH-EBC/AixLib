@@ -95,6 +95,7 @@ class Extended_model(object):
 			for l in models_test_regression:
 				print('Check Example "'+l+'"')
 		
+		
 		return models_test_regression
 	
 	#def set_package(self):
@@ -121,6 +122,8 @@ class Extended_model(object):
 			if i == "Integer":
 				continue
 			if i == "Boolean":
+				continue
+			if i == "String":
 				continue
 			### List all used models from aixlib library
 			if i == regression_model:
