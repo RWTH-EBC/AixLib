@@ -96,6 +96,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 	
 	if modified_models == True:
 		regression_models = func_list_models.list_regression_tests()
+		print("Number of changed regression examples: "+ str(len(regression_models)))
 		if len(regression_models) == 0:
 			print("No models to start a regression test")
 			retVal = 0
@@ -111,9 +112,10 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 			#return retVal
 		else:
 			for l in regression_models:
-				if l.rfind("package"):
+				if l.rfind("package")> -1:
+					print("packages")
 					continue
-				print("Regression test for model: "+l) 
+				#print("\n*****************************\nRegression test for model: "+l) 
 				model_package = l[:l.rfind(".")]
 				ut.setSinglePackage(model_package)
 				ut.setNumberOfThreads(n_pro)
@@ -139,12 +141,14 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 				ut.get_test_example_coverage()
 			if len(Errorlist) > 0:
 				retVal = 1
-				print("Regression test for changed models failed")
+				print("Regression test failed")
+				print("The following packages failed")
+				for l in Errorlist:
+					print("		Error: "+l)
 			else:
 				retVal = 0
 				print("Regression test was successful")
 			
-		
 		return retVal
 
 

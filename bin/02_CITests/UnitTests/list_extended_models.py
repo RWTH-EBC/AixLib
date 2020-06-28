@@ -14,6 +14,42 @@ class Extended_model(object):
 		self.library = library
 		self.DymolaVersion = DymolaVersion
 	
+	def __change_txt_files(self):
+		print("Changed referenced files")
+		
+	def __change_mos_script(self):
+		print("Changed mos scripts")
+		mos_list = []
+		package = self.package.replace("AixLib.","")
+		resource_file_path = "Resources"+os.sep+"Scripts"+os.sep+"Dymola"+os.sep+package 
+		## Search for all .mos examples
+		for subdir, dirs, files in os.walk(resource_file_path):
+			for file in files:
+				filepath = subdir + os.sep + file
+				if filepath.endswith(".mos"):
+					mos_list.append(filepath)
+		### List all models, that have changed before			
+		#changedmodel = Extended_model.list_changed_models(self)
+		mos_list_model = []
+		# list all .mos model in Aixlib form
+		for i in mos_list:
+			if i.find("Dymola")>-1:
+				i = (i[i.find("Dymola"):i.find(".mos")])
+				i = i.replace("Dymola","AixLib")
+				i = i.replace(os.sep,".")
+				mos_list_model.append(i)
+		#print(mos_list_model)
+		regression_model_list = []
+		for l in mos_list_model:
+			for i in changed_model_list:
+				if l == i:
+					regression_model_list.append(l)
+		
+		# Modified models are reproduced, which have also been stored as regression tests
+		return regression_model_list
+	
+	
+	
 	def list_regression_tests(self):
 		### List all models, that have changed before			
 		changed_model_list = Extended_model.list_changed_models(self)
@@ -75,25 +111,22 @@ class Extended_model(object):
 		
 			### Modified regression examples 
 			for l in regression_model_list:
-				print("Check model for regression test: "+l)
+				# print("Check model for regression test: "+l)
 				## Search for all used classes in the example
 				## Start CheckLibrary in ModelManagement
-				print(l)
 				usedmodels = dymola.ExecuteCommand('ModelManagement.Structure.Instantiated.UsedModels("'+l+'");')
-				print("Benutze Modelle")
-				print(usedmodels)
 				#extendedmodels = dymola.ExecuteCommand('ModelManagement.Structure.AST.ExtendsInClass("'+l+'");')
 				regression_model = Extended_model.compare_change_used_models(self,usedmodels,l,changed_model_list)
 				if regression_model is None:
 					continue
 				elif len(regression_model) > 0:
 					models_test_regression.append(regression_model)
-			#dymola.close()
+			dymola.close()
 		
 		if len(models_test_regression) > 0: 
 			print("These models have been changed and a regression test is started")
 			for l in models_test_regression:
-				print('Check Example "'+l+'"')
+				print('		Check Example: "'+l+'"')
 		
 		
 		return models_test_regression
@@ -131,24 +164,29 @@ class Extended_model(object):
 			else:
 				aixlib_used_model.append(i)
 		# loop for used classes
-		ErrorCount = 0
+		#ErrorCount = 0
+		list = []
 		for l in aixlib_used_model:
 			## loop for changed models
 			for i in model_list:
 				## if changed model is a used model in a example a new regression test is not possible
 				if i == l:
-					print("***************************************")
-					print("\nThe used models "+ l+" in the example "+ regression_model +" have changed.\n You have to adapt your .mos file under AixLib\Resources\Scripts\Dymola with your changed classes.") 
-					ErrorCount = ErrorCount + 1
+					#print("***************************************")
+					list.append(i)
+					#print("\nThe used models "+ l+" in the example "+ regression_model +" have changed.\n You have to adapt your .mos file under AixLib\Resources\Scripts\Dymola with your changed classes.") 
+					#ErrorCount = ErrorCount + 1
 					continue
 				else:
 					continue
 			
-		if ErrorCount > 0:
+		if len(list) > 0:
 			print("***************************************")
+			print("Model " + regression_model + " have the following used models, that have changed")
+			for z in list:
+				print("Used Model " + z)
 			print("Cannot perform a new regression test.\nA used class in the example was changed.\nEither a new reference file must be created or the modified used class must be reset to its original state.")
-		if ErrorCount == 0:
-			print("Start Regression test for model: " + regression_model)
+		if len(list) == 0:
+			#print("Start Regression test for model: " + regression_model)
 			return regression_model
 		
 	
