@@ -14,49 +14,166 @@ class Extended_model(object):
 		self.library = library
 		self.DymolaVersion = DymolaVersion
 	
-	def __change_txt_files(self):
-		print("Changed referenced files")
+	def _remove_duplicate(self):
+		reg_list = []
+		### Referencefiles
+		ref_file = Extended_model._change_txt_files(self)
+		### ChangedUsedModels
+		usedmodel = Extended_model._list_used_models(self)
+		### Mos Scripts
+		mos_files = Extended_model._change_mos_script(self)
+		### Changed Examples
+		reg_models = Extended_model.list_regression_tests(self)
+		### Create a final list
+		print("Changed reference txt files :")
+		for r in ref_file:
+			print(r)
+			reg_list.append(r)
+		print("Changed bottom level examples :")
+		for d in usedmodel:
+			print(d)
+			reg_list.append(d)
+		print("Changed mos files :")
+		for m in mos_files:
+			print(m)
+			reg_list.append(m)
+		print("Changed regression examples :")
+		for l in reg_models:
+			print(l)
+			reg_list.append(l)
 		
-	def __change_mos_script(self):
-		print("Changed mos scripts")
+		#print(reg_list)
+		regression_models = list(set(reg_list))
+		return regression_models
+	
+	
+	def _change_txt_files(self):
+		list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
+		list_mo_models = git_models(".txt",self.package,list_path) 
+		model_list = list_mo_models.sort_reference_txt()
+		return model_list
+		
+	def _change_mos_script(self):
+		list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
+		list_mo_models = git_models(".mos",self.package,list_path) 
+		model_list = list_mo_models.sort_mos_script()
+		
+		# Modified models are reproduced, which have also been stored as regression tests
+		return model_list
+	
+	
+	def _list_used_models(self):
+		#changed_model_list = Extended_model.list_changed_models(self)
+		changed_model_list = Extended_model.list_used_changed_models(self)
 		mos_list = []
+		if platform.system()  == "Windows":
+			_setEnvironmentVariables("PATH", os.path.join(os.path.abspath('.'), "Resources", "Library", "win32"))
+			sys.path.insert(0, os.path.join('C:\\',
+                            'Program Files',
+                            'Dymola '+ self.DymolaVersion,
+                            'Modelica',
+                            'Library',
+                            'python_interface',
+                            'dymola.egg'))
+			print("operating system Windows")
+		else:
+			print("operating system Linux")
+			_setEnvironmentVariables("LD_LIBRARY_PATH", os.path.join(os.path.abspath('.'), "Resources", "Library", "linux32") + ":" +
+								os.path.join(os.path.abspath('.'),"Resources","Library","linux64"))
+			sys.path.insert(0, os.path.join('opt',
+							'dymola-'+self.DymolaVersion+'-x86_64',
+							'Modelica',
+							'Library',
+							'python_interface',
+							'dymola.egg'))
+		sys.path.append(os.path.join(os.path.abspath('.'), "..", "..", "BuildingsPy"))
+	
+		DymolaVersion = self.DymolaVersion
+		from dymola.dymola_interface import DymolaInterface
+		from dymola.dymola_exception import DymolaException
+		if platform.system()  == "Windows":
+			dymola = DymolaInterface(showwindow=True)
+		else:
+			dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
+		
+		# Load AixLib
+		LibraryCheck = dymola.openModel(self.library)
+		if LibraryCheck == True:
+			print("Found AixLib Library")
+		elif LibraryCheck == False:
+			print("Library Path is wrong. Please Check Path of AixLib Library Path")
+			exit(1)
+		
+		# Load ModelManagement
+		if platform.system()  == "Windows":
+			dymola.ExecuteCommand('cd("C:\Program Files\Dymola '+self.DymolaVersion+'\Modelica\Library\ModelManagement 1.1.8\package.moe");')
+		else:
+			dymola.ExecuteCommand('cd("/opt/dymola-'+self.DymolaVersion+'-x86_64/Modelica/Library/ModelManagement 1.1.8/package.moe");')
 		package = self.package.replace("AixLib.","")
 		resource_file_path = "Resources"+os.sep+"Scripts"+os.sep+"Dymola"+os.sep+package 
-		## Search for all .mos examples
+		### Search for all .mos examples
+		
 		for subdir, dirs, files in os.walk(resource_file_path):
 			for file in files:
 				filepath = subdir + os.sep + file
 				if filepath.endswith(".mos"):
-					mos_list.append(filepath)
-		### List all models, that have changed before			
-		#changedmodel = Extended_model.list_changed_models(self)
-		mos_list_model = []
-		# list all .mos model in Aixlib form
-		for i in mos_list:
-			if i.find("Dymola")>-1:
-				i = (i[i.find("Dymola"):i.find(".mos")])
-				i = i.replace("Dymola","AixLib")
-				i = i.replace(os.sep,".")
-				mos_list_model.append(i)
-		#print(mos_list_model)
-		regression_model_list = []
-		for l in mos_list_model:
-			for i in changed_model_list:
-				if l == i:
-					regression_model_list.append(l)
+					example = filepath[filepath.find("Dymola"):]
+					example = example.replace("Dymola","AixLib")
+					example = example.replace(os.sep,".")
+					example = example.replace("..",".")
+					#example = example.replace(".mos",".mo")
+					example = example.replace(".mos","")
+					mos_list.append(example)
 		
-		# Modified models are reproduced, which have also been stored as regression tests
-		return regression_model_list
-	
+		#print(mos_list)
+		#print(changed_model_list)
+		test_regression_model = []
+		for mos in mos_list:
+			for z in changed_model_list:
+				if mos == z:
+					mos_list.remove(z)
+		for l in mos_list:
+			list = []
+			#print("Example : " +l)
+			usedmodels = dymola.ExecuteCommand('ModelManagement.Structure.Instantiated.UsedModels("'+l+'");')
+			for i in usedmodels:
+				lib = i.split(".")
+				if lib[0] == "Modelica":
+					continue
+				if i == l:
+					continue
+				if i == "Integer":
+					continue
+				if i == "Boolean":
+					continue
+				if i == "Real":
+					continue
+				if i == "String":
+					continue
+				else:
+					for z in changed_model_list:
+						if z == i:
+							list.append(l)
+							continue
+						else:
+							continue
+			if len(list) > 0:
+				test_regression_model.append(l)
+		dymola.close()
+		return test_regression_model
+		
+						
+						
+				
+			
 	
 	
 	def list_regression_tests(self):
 		### List all models, that have changed before			
 		changed_model_list = Extended_model.list_changed_models(self)
-		#print(changed_model_list)
-		## List and compare all regression examples that have changed, but no changes in the used classes
+		### List and compare all regression examples that have changed, but no changes in the used classes
 		regression_model_list = Extended_model.list_changed_examples(self,changed_model_list)
-		#print(regression_model_list)
+		
 		models_test_regression = []
 		
 		if platform.system()  == "Windows":
@@ -80,11 +197,11 @@ class Extended_model(object):
 							'python_interface',
 							'dymola.egg'))
 		sys.path.append(os.path.join(os.path.abspath('.'), "..", "..", "BuildingsPy"))
-	
+		
 	
 		if len(regression_model_list) == 0:
 			print("No modified regression models")
-			exit(0)
+			#exit(0)
 		else:
 			## Load AixLib Library
 			DymolaVersion = self.DymolaVersion
@@ -184,18 +301,23 @@ class Extended_model(object):
 			print("Model " + regression_model + " have the following used models, that have changed")
 			for z in list:
 				print("Used Model " + z)
-			print("Cannot perform a new regression test.\nA used class in the example was changed.\nEither a new reference file must be created or the modified used class must be reset to its original state.")
+			print("Cannot perform a new regression test.")
+			#print("nA used class in the example was changed.\nEither a new reference file must be created or the modified used class must be reset to its original state.")
 		if len(list) == 0:
 			#print("Start Regression test for model: " + regression_model)
 			return regression_model
 		
+	
+		
+	
 	
 	def list_changed_examples(self, changed_model_list):
 		
 		mos_list = []
 		package = self.package.replace("AixLib.","")
 		resource_file_path = "Resources"+os.sep+"Scripts"+os.sep+"Dymola"+os.sep+package 
-		## Search for all .mos examples
+		### Search for all .mos examples
+		
 		for subdir, dirs, files in os.walk(resource_file_path):
 			for file in files:
 				filepath = subdir + os.sep + file
@@ -221,6 +343,14 @@ class Extended_model(object):
 		# Modified models are reproduced, which have also been stored as regression tests
 		return regression_model_list
 		
+	def list_used_changed_models(self):
+		list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
+		pack = "AixLib"
+		list_mo_models = git_models(".mo",pack,list_path) 
+		model_list = list_mo_models.sort_mo_models()
+		return model_list
+	
+	
 	def list_changed_models(self):
 		list_path = ".."+os.sep+'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
 	
@@ -269,14 +399,17 @@ if  __name__ == '__main__':
 	args = parser.parse_args()
 	
 	from list_extended_models import Extended_model
-	
 	func_list_models = Extended_model(package = args.single_package,
 									  library = args.path,
 									  DymolaVersion = args.DymolaVersion)
 	
 	# Set path for python-dymola-interface: Operating System windows and linux
 	## List Regression models
-	func_list_models.list_regression_tests()
+	#func_list_models.list_regression_tests()
+	#func_list_models._list_used_models()
+	#func_list_models._change_mos_script()
+	#func_list_models._change_txt_files()
+	func_list_models._remove_duplicate()
 	#func_list_models.list_changed_examples()
 	#func_list_models.compare_change_used_models()
 	

@@ -1,4 +1,5 @@
 within AixLib.Airflow.Multizone.Examples;
+
 model ZonalFlow "Model with prescribed air exchange between two volumes"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Air;

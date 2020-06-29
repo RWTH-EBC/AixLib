@@ -95,11 +95,18 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 		return retVal
 	
 	if modified_models == True:
-		regression_models = func_list_models.list_regression_tests()
-		print("Number of changed regression examples: "+ str(len(regression_models)))
+		#regression_models = func_list_models.list_regression_tests()
+		regression_models = func_list_models._remove_duplicate()
+		
 		if len(regression_models) == 0:
 			print("No models to start a regression test")
 			retVal = 0
+		
+		if len(regression_models) > 0:
+			print("Number of changed regression examples: "+ str(len(regression_models)))
+			print("Check examples : ")
+			for l in regression_models:
+				print(l)
 		if len(regression_models) > 100:
 			print("Over 100 changed models. Check all models in AixLib package "+package)
 			if package is not None:
@@ -136,7 +143,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 					Errorlist.append(l)
 					print("Regression test for model "+l+ " was not successfull")
 				if retVal != 0:
-					print("Regression test for model "+l+ "was successful")
+					print("Regression test for model "+l+ " was successful")
 				# comment out this line for local usage
 				ut.get_test_example_coverage()
 			if len(Errorlist) > 0:

@@ -5,6 +5,7 @@ model ExampleSanFran
   Real T_min(start=300) "Keeps track of the minimum air temperature";
 
 
+  
   AixLib.BoundaryConditions.WeatherData.Bus    weaBus "Component to supply air
   temperature" annotation (Placement(
         transformation(extent={{-90,54},{-50,94}}), iconTransformation(extent={{
