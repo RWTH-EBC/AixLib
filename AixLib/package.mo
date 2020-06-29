@@ -1,14 +1,15 @@
 within ;
 package AixLib
+
   annotation (
   uses(
     Modelica(version="3.2.3"),
     Modelica_Synchronous(version="0.92.2"),
     NcDataReader2(version="2.5.0"),
     SDF(version="0.4.1"),
-    Modelica_DeviceDrivers(version="1.7.0"), PNlib(version = "2.2")),
+    Modelica_DeviceDrivers(version="1.7.0"), PNlib(version = "2.2"),
+    ModelicaServices(version="3.2.3")),
   version = "0.9.1",
-  
   conversion(from(
     version="0.3.2", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.3.2_to_0.4.mos",
     version="0.5.0", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.5.0_to_0.5.1.mos",

@@ -26,8 +26,8 @@ package CCCS
           origin={-70,-40},
           extent={{-10,-10},{10,10}},
           rotation=0)));
-    Benchmark.BaseClasses.MainBus mainBus annotation (
-      Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
+    Benchmark_old.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
     Components.InvestmentCostsComponents investmentCostsComponents(k_Investment=
          0)
       annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
@@ -145,8 +145,11 @@ Components")}),
       parameter Real simTime= 4838400;
       Modelica.Blocks.Interfaces.RealOutput y annotation (
         Placement(visible = true, transformation(origin={166,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin={166,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation (
-        Placement(visible = true, transformation(extent = {{-110, -4}, {-90, 16}}, rotation = 0), iconTransformation(extent = {{-110, -4}, {-90, 16}}, rotation = 0)));
+      AixLib.Systems.Benchmark_old.BaseClasses.MainBus mainBus annotation (
+          Placement(
+          visible=true,
+          transformation(extent={{-110,-4},{-90,16}}, rotation=0),
+          iconTransformation(extent={{-110,-4},{-90,16}}, rotation=0)));
       Modelica.Blocks.Routing.RealPassThrough HP_PumpHot_rpmSet annotation (
         Placement(transformation(extent={{-88,132},{-72,148}})));
       Modelica.Blocks.Routing.RealPassThrough HP_PumpCold_rpmSet annotation (
@@ -715,8 +718,8 @@ Strategy")}),
         Placement(visible = true, transformation(origin = {0, -66}, extent = {{-6, -6}, {6, 6}}, rotation = 270)));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.LRM_Temp lRM_Temp[5] annotation (
         Placement(visible = true, transformation(extent = {{-40, 60}, {-20, 80}}, rotation = 0)));
-      Benchmark.BaseClasses.MainBus mainBus annotation (
-        Placement(transformation(extent = {{-112, -10}, {-92, 10}})));
+      Benchmark_old.BaseClasses.MainBus mainBus
+        annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.LRM_VOC lrm_voc1[5] annotation (
         Placement(visible = true, transformation(origin = {0, 88}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.LRM_CO2 lrm_co21[5] annotation (
@@ -2051,7 +2054,8 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
 
       parameter Modelica.SIunits.Temperature Tset = 273.15+21 "Set Temperature of rooms for ISE calculation";
 
-      AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{-118,-18},{-80,18}}),
+      AixLib.Systems.Benchmark_old.BaseClasses.MainBus mainBus annotation (
+          Placement(transformation(extent={{-118,-18},{-80,18}}),
             iconTransformation(extent={{-18,-42},{16,-6}})));
       Modelica.Blocks.Continuous.Integrator integrator
         annotation (Placement(transformation(extent={{-10,90},{0,100}})));

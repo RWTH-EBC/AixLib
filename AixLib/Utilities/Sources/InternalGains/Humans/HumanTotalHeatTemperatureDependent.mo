@@ -31,8 +31,8 @@ protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
-  connect(to_degC.y, temperatureDependentMoistuerOutputSIA2024_1.T) annotation
-    (Line(points={{-71.5,51},{-71.5,52},{-68,52},{-68,76},{-62,76}}, color={0,0,
+  connect(to_degC.y, temperatureDependentMoistuerOutputSIA2024_1.T) annotation (
+     Line(points={{-71.5,51},{-71.5,52},{-68,52},{-68,76},{-62,76}}, color={0,0,
           127}));
   connect(temperatureDependentMoistuerOutputSIA2024_1.moistOutput,
     productMoistureOutput.u[1]) annotation (Line(points={{-39,76},{-36,76},{-36,

@@ -29,5 +29,18 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=259200));
+    experiment(StopTime=259200),
+    __Dymola_experimentSetupOutput(
+      states=false,
+      derivatives=false,
+      auxiliaries=false,
+      events=false),
+    __Dymola_experimentFlags(
+      Advanced(
+        EvaluateAlsoTop=true,
+        GenerateVariableDependencies=false,
+        OutputModelicaCode=false),
+      Evaluate=true,
+      OutputCPUtime=true,
+      OutputFlatModelica=false));
 end Benchmark1;

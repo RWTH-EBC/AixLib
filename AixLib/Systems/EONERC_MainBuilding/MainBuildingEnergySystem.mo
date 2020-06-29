@@ -13,8 +13,8 @@ model MainBuildingEnergySystem
         origin={80,-102})));
   HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium, T_amb=293.15)
     annotation (Placement(transformation(extent={{-58,-100},{52,-52}})));
-  SwitchingUnit switchingUnit(redeclare package Medium = Medium, m_flow_nominal=
-       5) annotation (Placement(transformation(extent={{32,22},{66,62}})));
+  SwitchingUnit switchingUnit(redeclare package Medium = Medium, m_flow_nominal
+      =5) annotation (Placement(transformation(extent={{32,22},{66,62}})));
   HeatExchangerSystem heatExchangerSystem(redeclare package Medium = Medium,
       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-146,-26},{-80,18}})));

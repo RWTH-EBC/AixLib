@@ -606,6 +606,10 @@ connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
 
+
+
+
+
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},

@@ -56,14 +56,6 @@ model CtrVentilationUnitBasic "Simple controller for Ventilation Unit"
   Modelica.Blocks.Sources.Constant ConstVflow1(final k=1)
     annotation (Placement(transformation(extent={{46,-42},{66,-22}})));
 equation
-  connect(Tset, ctrRh.Tset) annotation (Line(
-      points={{-120,0}, {-20, 0}, {-20, 6}, {-11, 6}, {-11, 10}, {-2, 10}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(Tset, ctrCo.Tset) annotation (Line(
-      points={{-120,0}, {-46, 0}, {-46, 34}, {-20, 34}, {-20, 50}, {-2, 50}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(ctrCo.registerBus, genericAHUBus.coolerBus) annotation (Line(
       points={{20.2,50},{100.05,50},{100.05,0.05}},
       color={255,204,51},
@@ -97,6 +89,14 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(Tset, ctrCo.Tset) annotation (Line(
+      points={{-120,0},{-28,0},{-28,50},{-2,50}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(Tset, ctrRh.Tset) annotation (Line(
+      points={{-120,0},{-28,0},{-28,10},{-2,10}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(PID_VflowSup.y, genericAHUBus.flapSupSet) annotation (Line(points={{
           21,-50},{100.05,-50},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",

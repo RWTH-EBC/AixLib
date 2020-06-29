@@ -8,6 +8,8 @@ model GeothermalFieldSimple "Geothermal probe"
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
 
+
+
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=
         T_ground)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},

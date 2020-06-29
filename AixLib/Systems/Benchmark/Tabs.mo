@@ -17,11 +17,14 @@ model Tabs "Concrete core activation"
     parameter SI.Density rho = 2100 "Density of activated concrete";
     parameter Real alpha = 10 "Heat transfer coefficient concrete to air";
 
+
+
   parameter Modelica.SIunits.Length length=100 "Pipe length";
   parameter Modelica.SIunits.Length dh=0.032
     "Hydraulic diameter (assuming a round cross section area)";
   parameter Real R=0.002
     "Thermal resistance per unit length from fluid to boundary temperature";
+
 
   Fluid.FixedResistances.PlugFlowPipe pipe(
     redeclare package Medium = Medium,

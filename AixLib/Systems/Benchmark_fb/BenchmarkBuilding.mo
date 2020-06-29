@@ -10,17 +10,17 @@ model BenchmarkBuilding "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={206,-60})));
-  AixLib.Systems.Benchmark.HeatpumpSystem heatpumpSystem(redeclare package
-      Medium =
-        MediumWater)
-    annotation (Placement(visible = true, transformation(extent = {{-44, -82}, {66, -36}}, rotation = 0)));
-  AixLib.Systems.EONERC_MainBuilding.SwitchingUnit switchingUnit(redeclare
-      package Medium =
-        MediumWater,
-                m_flow_nominal=2) annotation (Placement(visible = true, transformation(origin = {182, -4}, extent = {{20, -24}, {-20, 24}}, rotation = 0)));
-  EONERC_MainBuilding.HeatExchangerSystem heatExchangerSystem(redeclare package
-      Medium = MediumWater,
-                       m_flow_nominal=2)
+  AixLib.Systems.Benchmark_old.HeatpumpSystem heatpumpSystem(redeclare package
+      Medium = MediumWater) annotation (Placement(visible=true, transformation(
+          extent={{-44,-82},{66,-36}}, rotation=0)));
+  AixLib.Systems.EONERC_MainBuilding_old.SwitchingUnit switchingUnit(redeclare
+      package Medium = MediumWater, m_flow_nominal=2) annotation (Placement(
+        visible=true, transformation(
+        origin={182,-4},
+        extent={{20,-24},{-20,24}},
+        rotation=0)));
+  EONERC_MainBuilding_old.HeatExchangerSystem heatExchangerSystem(redeclare
+      package Medium = MediumWater, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-130,-40},{-60,8}})));
   Fluid.Sources.Boundary_pT          boundary1(
     redeclare package Medium = MediumWater,
@@ -32,36 +32,36 @@ model BenchmarkBuilding "Benchmark building model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{-20,-120},{0,-100}})));
-  Benchmark.HighTemperatureSystem highTemperatureSystem(
+  Benchmark_old.HighTemperatureSystem highTemperatureSystem(
     redeclare package Medium = MediumWater,
     m_flow_nominal=10,
     T_start=323.15)
     annotation (Placement(transformation(extent={{-188,-80},{-144,-34}})));
-  Benchmark.Tabs2 tabs4_1(
+  Benchmark_old.Tabs2 tabs4_1(
     redeclare package Medium = MediumWater,
     area=30*20,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{158,120},{198,160}})));
-  Benchmark.Tabs2 tabs4_3(
+  Benchmark_old.Tabs2 tabs4_3(
     redeclare package Medium = MediumWater,
     area=30*30,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{240,120},{280,160}})));
-  Benchmark.Tabs2 tabs4_4(
+  Benchmark_old.Tabs2 tabs4_4(
     redeclare package Medium = MediumWater,
     area=10*5,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{344,120},{384,160}})));
-  Benchmark.Tabs2 tabs4_5(
+  Benchmark_old.Tabs2 tabs4_5(
     redeclare package Medium = MediumWater,
     area=20*5,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{440,120},{480,160}})));
-  Benchmark.Tabs2 tabs4_2(
+  Benchmark_old.Tabs2 tabs4_2(
     redeclare package Medium = MediumWater,
     area=30*45,
     thickness=0.3,
@@ -72,7 +72,6 @@ model BenchmarkBuilding "Benchmark building model"
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
         Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
-
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -192,7 +191,6 @@ model BenchmarkBuilding "Benchmark building model"
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
         Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
-
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -208,7 +206,6 @@ model BenchmarkBuilding "Benchmark building model"
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
         Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_ConferenceRoom(),
-
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -224,7 +221,6 @@ model BenchmarkBuilding "Benchmark building model"
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
         Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
-
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -240,7 +236,6 @@ model BenchmarkBuilding "Benchmark building model"
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=
         Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice(),
-
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -251,7 +246,7 @@ model BenchmarkBuilding "Benchmark building model"
     nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{538,340},{568,370}})));
 
-  ModularAHU.GenericAHU                genericAHU(
+  ModularAHU_old.GenericAHU genericAHU(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
@@ -261,14 +256,14 @@ model BenchmarkBuilding "Benchmark building model"
     usePreheater=true,
     useHumidifierRet=false,
     useHumidifier=true,
-    perheater(redeclare HydraulicModules.Admix hydraulicModule(
+    perheater(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=1,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))), dynamicHX(
         dp1_nominal=50,
@@ -277,14 +272,14 @@ model BenchmarkBuilding "Benchmark building model"
         tau2=15,
         dT_nom=30,
         Q_nom=60000)),
-    cooler(redeclare HydraulicModules.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=1,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
         dynamicHX(
@@ -294,14 +289,14 @@ model BenchmarkBuilding "Benchmark building model"
         tau2=10,
         dT_nom=15,
         Q_nom=150000)),
-    heater(redeclare HydraulicModules.Admix hydraulicModule(
+    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=1,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))), dynamicHX(
         dp1_nominal=100,
@@ -339,34 +334,34 @@ model BenchmarkBuilding "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-140,274})));
-  ModularAHU.VentilationUnit ventilationUnit1(
+  ModularAHU_old.VentilationUnit ventilationUnit1(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules.Admix hydraulicModule(
+    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -374,34 +369,34 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{32,236},{70,276}})));
-  ModularAHU.VentilationUnit                ventilationUnit2(
+  ModularAHU_old.VentilationUnit ventilationUnit2(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules.Admix hydraulicModule(
+    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -409,34 +404,34 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{202,236},{240,276}})));
-  ModularAHU.VentilationUnit                ventilationUnit3(
+  ModularAHU_old.VentilationUnit ventilationUnit3(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules.Admix hydraulicModule(
+    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -444,34 +439,34 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{300,236},{338,276}})));
-  ModularAHU.VentilationUnit                ventilationUnit4(
+  ModularAHU_old.VentilationUnit ventilationUnit4(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules.Admix hydraulicModule(
+    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -479,34 +474,34 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{400,236},{438,276}})));
-  ModularAHU.VentilationUnit                ventilationUnit5(
+  ModularAHU_old.VentilationUnit ventilationUnit5(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules.Admix hydraulicModule(
+    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -514,14 +509,15 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{510,242},{548,282}})));
-  AixLib.Systems.EONERC_MainBuilding.GeothermalFieldSimple geothermalFieldSimple(
+  AixLib.Systems.EONERC_MainBuilding_old.GeothermalFieldSimple
+    geothermalFieldSimple(
     redeclare package Medium = MediumWater,
     m_flow_nominal=2,
-    T_amb=293.15)
-    annotation (Placement(visible = true, transformation(extent = {{132, -132}, {108, -100}}, rotation = 0)));
-  Benchmark.BaseClasses.MainBus mainBus annotation (Placement(transformation(
-          extent={{202,390},{248,448}}), iconTransformation(extent={{146,386},{
-            206,442}})));
+    T_amb=293.15) annotation (Placement(visible=true, transformation(extent={{
+            132,-132},{108,-100}}, rotation=0)));
+  Benchmark_old.BaseClasses.MainBus mainBus annotation (Placement(
+        transformation(extent={{202,390},{248,448}}), iconTransformation(extent
+          ={{146,386},{206,442}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi
     annotation (Placement(transformation(extent={{-182,260},{-162,280}})));
   Fluid.MixingVolumes.MixingVolume vol(

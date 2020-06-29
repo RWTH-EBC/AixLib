@@ -26,7 +26,12 @@ model CtrHTSSystem "Controller of high termperature system"
   parameter Real T_chp_set=333.15 "Set point temperature of chp";
 equation
 
-  connect(TChpSet.y, htsBus.TChpSet) annotation (Line(points = {{41, -50}, {100, -50}, {100, -36}, {100.09, -36}, {100.09, 1.085}}, color = {0, 0, 127}));
+  connect(TChpSet.y, htsBus.TChpSet) annotation (Line(points={{41,-50},{100,-50},
+          {100,-36},{100.09,-36},{100.09,1.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   connect(TBoilerSet_out.y, PIDBoiler.u_s) annotation (Line(points={{-79,20},{-42,
           20}},                         color={0,0,127}));
   connect(PIDBoiler.y, htsBus.uRelBoilerSet) annotation (Line(points={{-19,20},{

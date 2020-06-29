@@ -108,10 +108,6 @@ protected
     final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{64,-6},{76,6}})));
 equation
-  connect(pumpCHP.port_b2, pumpBoiler.port_b2) annotation (Line(points={{-28,60},
-{-28, 56}, {-14, 56}, {-14, 50}, {52, 50}, {52, 60}}, color={0,127,255}));
-  connect(pumpCHP.port_b2, HotWater.fluidportTop1) annotation (Line(points={{-28,60},
-{-28, 54}, {-34, 54}, {-34, 48}, {-5.6, 48}, {-5.6, 28.2}},         color={0,127,255}));
   connect(pumpCHP.port_b1, cHP.port_a)
     annotation (Line(points={{-52,100},{-52,120}},
                                                  color={0,127,255}));
@@ -126,6 +122,10 @@ equation
           {28,36},{-52,36},{-52,60}}, color={0,127,255}));
   connect(pumpCHP.port_a1, HotWater.fluidportBottom1) annotation (Line(points={{-52,60},
           {-52,-12.4},{-5.4,-12.4}},        color={0,127,255}));
+  connect(pumpCHP.port_b2, pumpBoiler.port_b2) annotation (Line(points={{-28,60},
+          {-28,54},{52,54},{52,60}}, color={0,127,255}));
+  connect(pumpCHP.port_b2, HotWater.fluidportTop1) annotation (Line(points={{-28,60},
+          {-28,54},{-5.6,54},{-5.6,28.2}},         color={0,127,255}));
   connect(HotWater.fluidportBottom2, senT_a.port_b) annotation (Line(points={{
           4.6,-12.2},{4.6,-20},{-68,-20}}, color={0,127,255}));
   connect(senT_a.port_a, port_a)

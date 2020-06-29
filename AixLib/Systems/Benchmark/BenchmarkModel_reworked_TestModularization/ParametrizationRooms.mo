@@ -1,0 +1,61 @@
+within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
+model ParametrizationRooms "Testing parametrization of high and reduced order rooms with parameters according to benchmark model"
+  ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows highOrderRoom [5](
+    Room_Length={30,30,5,5,30},
+    Room_Height={3,3,3,3,3},
+    Room_Width={20,30,10,20,50},
+    Win_Area={80,180,20,40,200},
+    each use_sunblind=true,
+    each ratioSunblind=0,
+    each solIrrThreshold=1000,
+    each solar_absorptance_OW=0.48,
+    each eps_out=25,
+    each TypOW=DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
+    each TypCE=DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf(),
+    each TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
+    each Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    each TOutAirLimit=1273.15)
+    annotation (Placement(transformation(extent={{-8,26},{12,46}})));
+  ThermalZones.ReducedOrder.RC.FourElements theZon [5]( redeclare package           Medium =
+        AixLib.Media.Air,
+    each hRad=5,
+    each nOrientations=2,
+    each hConvWin=1.3,
+    each gWin=1,
+    each ratioWinConRad=0.09,
+    each hConvExt=2.5,
+    each nExt=4,
+    each RExtRem=0,
+    each hConvInt=2.5,
+    each nInt=2,
+    each hConvFloor=2.5,
+    each nFloor=4,
+    each RFloorRem=0,
+    each hConvRoof=2.5,
+    each RRoofRem=0,
+    each nRoof=4,
+    AWin={{40,40},{90,90},{20,0},{40,0},{100,100}},
+    ATransparent={{32,32},{72,71},{16,0},{32,0},{80,72}},
+    RWin={0.01923,0.01282,0.03846,0.01923,0.01282},
+    AExt={{20,20},{30,30},{30,0},{60,0},{100,90}},
+    RExt={{0.05,2.857,0.48,0.0294},{0.05,2.857,0.48,0.0294},{0.05,2.857,0.48,0.0294},{0.05,2.857,0.48,0.0294},{0.05,2.857,0.48,0.0294}},
+    CExt={{1000,1030,1000,1000},{1000,1030,1000,1000},{1000,1030,1000,1000},{1000,1030,1000,1000},{1000,1030,1000,1000}},
+    RInt={{0.175,0.0294},{0.175,0.0294},{0.175,0.0294},{0.175,0.0294},{0.175,0.0294}},
+    CInt={{1000,1000},{1000,1000},{1000,1000},{1000,1000},{1000,1000}},
+    RFloor={{1.5,0.1087,1.1429,0.0429},{1.5,0.1087,1.1429,0.0429},{1.5,0.1087,1.1429,0.0429},{1.5,0.1087,1.1429,0.0429},{1.5,0.1087,1.1429,0.0429}},
+    CFloor={{8400,575000,4944,120000},{8400,575000,4944,120000},{8400,575000,4944,120000},{8400,575000,4944,120000},{8400,575000,4944,120000}},
+    RRoof={{0.4444,0.06957,0.02941,0.1},{0.4444,0.06957,0.02941,0.1},{0.4444,0.06957,0.02941,0.1},{0.4444,0.06957,0.02941,0.1},{0.4444,0.06957,0.02941,0.1}},
+    CRoof={{2472,368000,18000,1},{2472,368000,18000,1},{2472,368000,18000,1},{2472,368000,18000,1},{2472,368000,18000,1}},
+    AInt={180,90,60,90,90},
+    AFloor={600,900,50,100,1500},
+    ARoof={600,900,50,100,1500},
+    VAir={1800,2700,150,300,4050},
+    each indoorPortWin=false,
+    each indoorPortExtWalls=false,
+    each indoorPortIntWalls=false,
+    each indoorPortFloor=false,
+    each indoorPortRoof=false)
+    annotation (Placement(transformation(extent={{-22,-32},{26,4}})));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
+end ParametrizationRooms;

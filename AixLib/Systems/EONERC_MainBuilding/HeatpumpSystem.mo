@@ -265,6 +265,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         transformation(extent={{-14,46},{14,74}}), iconTransformation(extent={{
             -10,50},{10,70}})));
 
+
   Modelica.Blocks.Logical.Switch switch2
     annotation (Placement(transformation(extent={{42,-58},{54,-46}})));
   Modelica.Blocks.Sources.Constant const2(k=1800)

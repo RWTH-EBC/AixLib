@@ -44,7 +44,14 @@ model CtrTabs2 "Controller for concrete core activation"
   Modelica.Blocks.Sources.Constant constTflowSet2(final k=0.25) annotation (Placement(transformation(extent={{-56,-44},
             {-48,-36}})));
 equation
-  connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(points = {{3.4, 70.2}, {40, 70.2}, {40, 70}, {99.085, 70}, {99.085, 0.09}}, color = {255, 204, 51}, thickness = 0.5));
+  connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
+      points={{3.4,70.2},{40,70.2},{40,72},{99.085,72},{99.085,0.09}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   connect(ctrThrottleHot.Tact, tabsBus.pumpBus.TFwrdOutMea) annotation (Line(
         points={{-22,38},{-22,52},{99.085,52},{99.085,0.09}}, color={0,0,127}),
       Text(

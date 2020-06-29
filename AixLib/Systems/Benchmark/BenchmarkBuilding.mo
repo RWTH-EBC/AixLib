@@ -10,11 +10,14 @@ model BenchmarkBuilding "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={206,-60})));
-  AixLib.Systems.Benchmark.HeatpumpSystem heatpumpSystem(redeclare package Medium = MediumWater)
-    annotation (Placement(visible = true, transformation(extent = {{-44, -82}, {66, -36}}, rotation = 0)));
-  AixLib.Systems.EONERC_MainBuilding.SwitchingUnit switchingUnit(redeclare package Medium =
+  HeatpumpSystem heatpumpSystem(redeclare package Medium = MediumWater)
+    annotation (Placement(transformation(extent={{-40,-80},{70,-34}})));
+  EONERC_MainBuilding.SwitchingUnit switchingUnit(redeclare package Medium =
         MediumWater,
-                m_flow_nominal=2) annotation (Placement(visible = true, transformation(origin = {182, -4}, extent = {{20, -24}, {-20, 24}}, rotation = 0)));
+                m_flow_nominal=2) annotation (Placement(transformation(
+        extent={{20,-24},{-20,24}},
+        rotation=0,
+        origin={104,-56})));
   EONERC_MainBuilding.HeatExchangerSystem heatExchangerSystem(redeclare package
       Medium = MediumWater,
                        m_flow_nominal=2)
@@ -500,11 +503,11 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{510,242},{548,282}})));
-  AixLib.Systems.EONERC_MainBuilding.GeothermalFieldSimple geothermalFieldSimple(
+  EONERC_MainBuilding.GeothermalFieldSimple geothermalFieldSimple(
     redeclare package Medium = MediumWater,
     m_flow_nominal=2,
     T_amb=293.15)
-    annotation (Placement(visible = true, transformation(extent = {{132, -132}, {108, -100}}, rotation = 0)));
+    annotation (Placement(transformation(extent={{132,-120},{108,-88}})));
   BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{152,
             394},{198,452}}), iconTransformation(extent={{110,388},{170,444}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi
@@ -521,33 +524,20 @@ model BenchmarkBuilding "Benchmark building model"
     V=0.01,
     nPorts=12)
     annotation (Placement(transformation(extent={{130,100},{150,120}})));
+  Modelica.Blocks.Interfaces.RealOutput y annotation (Placement(transformation(
+        extent={{-21,-21},{21,21}},
+        rotation=90,
+        origin={-151,431})));
 equation
-  connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation(
-    Line(points = {{162, -12}, {147.5, -12}, {147.5, -18}, {147, -18}, {147, -22}, {86, -22}, {86, -68}, {132, -68}}, color = {0, 127, 255}));
-  connect(switchingUnit.port_b2, vol1.ports[1]) annotation(
-    Line(points = {{202, -12}, {136.333, -12}, {136.333, 100}}, color = {0, 127, 255}));
-  connect(switchingUnit.port_a1, vol.ports[1]) annotation(
-    Line(points = {{202, 12}, {202, 76}, {120.333, 76}}, color = {0, 127, 255}));
-  connect(bou.ports[1], switchingUnit.port_b2) annotation(
-    Line(points = {{196, -60}, {160, -60}, {160, -12}, {202, -12}}, color = {0, 127, 255}));
-  connect(switchingUnit.sWUBus, mainBus.swuBus) annotation(
-    Line(points = {{182, 16}, {182, -4}, {120, -4}, {120, 22}, {-218, 22}, {-218, 423.145}, {175.115, 423.145}}, color = {255, 204, 51}, thickness = 0.5));
-  connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation(
-    Line(points = {{130, -100}, {130, -105}, {190, -105}, {190, -108}, {230, -108}, {230, -32}, {190, -32}}, color = {0, 127, 255}));
-  connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation(
-    Line(points = {{110, -100}, {142, -100}, {142, -98}, {174, -98}, {174, -32}}, color = {0, 127, 255}));
-  connect(heatpumpSystem.port_a1, switchingUnit.port_b1) annotation(
-    Line(points = {{132, -59}, {78, -59}, {78, 12}, {162, 12}}, color = {0, 127, 255}));
-  connect(geothermalFieldSimple.twoCircuitBus, mainBus.gtfBus) annotation(
-    Line(points = {{132, -110}, {160, -110}, {160, -138}, {-218, -138}, {-218, 423.145}, {175.115, 423.145}}, color = {255, 204, 51}, thickness = 0.5));
-  connect(heatpumpSystem.heatPumpSystemBus, mainBus.hpSystemBus) annotation(
-    Line(points = {{11, -45}, {16, -45}, {16, 22}, {-218, 22}, {-218, 423.145}, {175.115, 423.145}}, color = {255, 204, 51}, thickness = 0.5));
-  connect(heatExchangerSystem.port_b3, heatpumpSystem.port_a2) annotation(
-    Line(points = {{-65, -39.52}, {-65, -68}, {-110, -68}}, color = {244, 125, 35}));
-  connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation(
-    Line(points = {{-110, -59}, {-75, -59}, {-75, -40}}, color = {244, 125, 35}));
-  connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation(
-    Line(points = {{0, -110}, {6.5, -110}, {6.5, -84}, {11, -84}}, color = {191, 0, 0}));
+  connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
+        points={{84,-60},{80,-60},{80,-59.5556},{70,-59.5556}},
+                                                              color={0,127,255}));
+  connect(heatpumpSystem.port_a1, switchingUnit.port_b1) annotation (Line(
+        points={{70,-49.3333},{78,-49.3333},{78,-36},{84,-36}},
+                                                    color={0,127,255}));
+  connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
+      Line(points={{0,-110},{14,-110},{14,-77.4444},{15,-77.4444}}, color={191,
+          0,0}));
   connect(highTemperatureSystem.port_b, heatExchangerSystem.port_a1)
     annotation (Line(points={{-144,-66.2},{-142,-66.2},{-142,-66},{-138,-66},{
           -138,-20.8},{-130,-20.8}}, color={238,46,47}));
@@ -627,6 +617,10 @@ equation
         color={191,0,0}));
   connect(thermalZone5.intGainsConv, tabs4_2.heatPort) annotation (Line(points={{568,
           347.5},{570,347.5},{570,161.818},{560,161.818}},       color={191,0,0}));
+  connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (Line(
+        points={{-40,-49.3333},{-75,-49.3333},{-75,-40}}, color={244,125,35}));
+  connect(heatExchangerSystem.port_b3, heatpumpSystem.port_a2) annotation (Line(
+        points={{-65,-39.52},{-65,-59.5556},{-40,-59.5556}}, color={244,125,35}));
   connect(boundaryOutsideAir.ports[1],genericAHU. port_a1)
     annotation (Line(points={{-130,250},{-120,250}},
                                                  color={0,127,255}));
@@ -724,6 +718,10 @@ equation
   connect(ventilationUnit5.port_a2,thermalZone5. ports[2]) annotation (Line(
         points={{548,274},{548,310},{548,344.2},{556.525,344.2}}, color={0,127,
           255}));
+  connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
+        points={{110,-88},{96,-88},{96,-80}},   color={0,127,255}));
+  connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
+        points={{130,-88},{130,-80},{112,-80}}, color={0,127,255}));
   connect(genericAHU.genericAHUBus, mainBus.ahuBus) annotation (Line(
       points={{-60,286.3},{-60,423.145},{175.115,423.145}},
       color={255,204,51},
@@ -876,6 +874,34 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(heatpumpSystem.heatPumpSystemBus, mainBus.hpSystemBus) annotation (
+      Line(
+      points={{15,-34},{16,-34},{16,22},{-218,22},{-218,423.145},{175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+
+  connect(switchingUnit.sWUBus, mainBus.swuBus) annotation (Line(
+      points={{104.2,-31.6},{104.2,-4},{120,-4},{120,22},{-218,22},{-218,
+          423.145},{175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(geothermalFieldSimple.twoCircuitBus, mainBus.gtfBus) annotation (Line(
+      points={{132.1,-98.1},{160,-98.1},{160,-138},{-218,-138},{-218,423.145},{175.115,
+          423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   connect(boundaryOutsideAir.T_in, x_pTphi.T) annotation (Line(points={{-152,
           246},{-194,246},{-194,264},{-190,264},{-190,270},{-184,270}}, color={
           0,0,127}));
@@ -897,6 +923,12 @@ equation
           270},{-158,270},{-158,254},{-152,254}}, color={0,0,127}));
   connect(boundaryOutsideAir.T_in, prescribedTemperature.T) annotation (Line(
         points={{-152,246},{-218,246},{-218,-110},{-22,-110}}, color={0,0,127}));
+  connect(bou.ports[1], switchingUnit.port_b2)
+    annotation (Line(points={{196,-60},{124,-60}}, color={0,127,255}));
+  connect(switchingUnit.port_a1, vol.ports[1]) annotation (Line(points={{124,-36},
+          {124,76},{120.333,76}},      color={0,127,255}));
+  connect(switchingUnit.port_b2, vol1.ports[1]) annotation (Line(points={{124,-60},
+          {136.333,-60},{136.333,100}},      color={0,127,255}));
   connect(vol1.ports[2], genericAHU.port_a4) annotation (Line(points={{137,100},
           {-60,100},{-60,220}}, color={0,127,255}));
   connect(vol1.ports[3], ventilationUnit1.port_a3) annotation (Line(points={{137.667,
@@ -942,6 +974,10 @@ equation
           127,76},{525.2,76},{525.2,242}}, color={0,127,255}));
   connect(vol.ports[12], tabs4_2.port_b2) annotation (Line(points={{127.667,76},
           {568,76},{568,120.364}}, color={0,127,255}));
+  connect(weaBus.TDryBul, y) annotation (Line(
+      points={{71,344},{-6,344},{-6,346},{-151,346},{-151,431}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},

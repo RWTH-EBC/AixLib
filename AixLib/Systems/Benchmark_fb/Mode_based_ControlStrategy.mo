@@ -4,9 +4,11 @@ package Mode_based_ControlStrategy
     Level.Bus_systems.ModeBasedControllerBus modeBasedControllerBus
       annotation (Placement(transformation(extent={{56,-12},{84,12}})));
 
-    AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation (
-      Placement(visible = true, transformation(extent={{92,-10},{112,10}},     rotation = 0), iconTransformation(extent={{92,-10},
-              {112,10}},                                                                                                                         rotation = 0)));
+    AixLib.Systems.Benchmark_old.BaseClasses.MainBus mainBus annotation (
+        Placement(
+        visible=true,
+        transformation(extent={{92,-10},{112,10}}, rotation=0),
+        iconTransformation(extent={{92,-10},{112,10}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealInput TAirOutside annotation (
       Placement(visible = true, transformation(origin={108,-80},  extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin={108,-80},  extent = {{-14, -14}, {14, 14}}, rotation = 180)));
     AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Level.FieldLevel fieldLevel1
@@ -150,7 +152,7 @@ Controller")}),
   package Level
     model FieldLevel "Auswahl der Aktoren basierend auf den ausgewählten Aktorsätzen"
 
-      AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation (
+      AixLib.Systems.Benchmark_old.BaseClasses.MainBus mainBus annotation (
           Placement(
           visible=true,
           transformation(
@@ -1840,7 +1842,7 @@ Controller")}),
               {1.77636e-15,-140.4}},
             color={255,127,0}));
       connect(GTF_On.pd_t, integerToBoolean1[7].u) annotation (Line(points={{-176,-36.36},
-              {-176,-42},{-200,-42},{-200,-180},{-40,-180},{-40,-128},{1.77636e-15,-128},
+              {-176,-38},{-202,-38},{-202,-180},{-40,-180},{-40,-128},{1.77636e-15,-128},
               {1.77636e-15,-140.4}},
             color={255,127,0}));
       connect(P1.pd_t, integerToBoolean1[25].u) annotation (Line(points={{28.48,54},
@@ -2043,7 +2045,7 @@ Controller")}),
       connect(integerToBoolean1[3].y, automationLevelBus.HTS_Heating_II)
         annotation (Line(points={{0,-158.8},{0,-170},{0,-181},{2,-181}}, color={255,
               0,255}));
-      connect(integerToBoolean1.y, automationLevelBus.HX_Off) annotation (Line(
+      connect(integerToBoolean1[4].y, automationLevelBus.HX_Off) annotation (Line(
             points={{0,-158.8},{0,-180},{2,-180},{2,-181}}, color={255,0,255}));
       connect(integerToBoolean1[5].y, automationLevelBus.HX_On) annotation (Line(
             points={{0,-158.8},{0,-170},{0,-181},{2,-181}}, color={255,0,255}));
@@ -2251,9 +2253,9 @@ Controller")}),
       PNlib.Components.TD Off_Cooling(nIn=1, nOut=1,
         delay=30,
         arcWeightIn={1},
-        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
-            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15)) annotation (Placement(
+        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] < 287.15 or RoomTempMea[2] < 294.15 or RoomTempMea[
+            3] < 294.15 or RoomTempMea[4] < 294.15 or RoomTempMea[5] < 294.15) and (RoomTempMea[1] > 289.15 or RoomTempMea[2] > 296.15 or RoomTempMea[
+            3] > 296.15 or RoomTempMea[4] > 296.15 or RoomTempMea[5] > 296.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
@@ -2262,8 +2264,8 @@ Controller")}),
       PNlib.Components.TD Cooling_Off(nIn=1, nOut=1,
         delay=30,
         arcWeightIn={1},
-        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
-            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15))
+        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] > 289.15 or RoomTempMea[2] > 296.15 or RoomTempMea[
+            3] > 296.15 or RoomTempMea[4] > 296.15 or RoomTempMea[5] > 296.15))
         annotation (Placement(transformation(extent={{-54,22},{-34,42}})));
       PNlib.Components.PD Heating(
         nIn=2,
@@ -2291,16 +2293,16 @@ Controller")}),
         delay=30,
         arcWeightIn={1},
         arcWeightOut={1},
-        firingCon=(RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and not
-                                                                                      (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
-            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15))
+        firingCon=(RoomTempMea[1] < 287.15 or RoomTempMea[2] < 294.15 or RoomTempMea[
+            3] < 294.15 or RoomTempMea[4] < 294.15 or RoomTempMea[5] < 294.15) and not
+                                                                                      (RoomTempMea[1] > 289.15 or RoomTempMea[2] > 296.15 or RoomTempMea[
+            3] > 296.15 or RoomTempMea[4] > 296.15 or RoomTempMea[5] > 296.15))
         annotation (Placement(transformation(extent={{34,62},{54,82}})));
       PNlib.Components.TD Heating_Off(nIn=1, nOut=1,
         delay=30,
         arcWeightIn={1},
-        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15)) annotation (Placement(
+        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] < 287.15 or RoomTempMea[2] < 294.15 or RoomTempMea[
+            3] < 294.15 or RoomTempMea[4] < 294.15 or RoomTempMea[5] < 294.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
@@ -2383,7 +2385,7 @@ Controller")}),
         annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
       Bus_systems.ManagementLevelBus managementLevelBus
         annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
-      Modelica.Blocks.Math.IntegerToBoolean integerToBoolean[4](threshold=0.5)
+      Modelica.Blocks.Math.IntegerToBoolean integerToBoolean[4](threshold=1)
         annotation (Placement(transformation(
             extent={{-8,-8},{8,8}},
             rotation=270,
@@ -2473,7 +2475,11 @@ Controller")}),
               textString="Management
 Level
 ")}),          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}})));
+                -100,-100},{100,100}})),
+        experiment(
+          StartTime=604800,
+          StopTime=1814400,
+          Interval=300));
     end ManagementLevel_Temp_V2;
 
     model ManagementLevel_Temp_Hum_V2
@@ -3032,8 +3038,17 @@ Humidity")}),     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-
         Dialog(enable = true, group = "CHP, Boiler and Pumps"));
       parameter Real rpm_pumps = 3000 "Setpoint rpm pumps" annotation (
         Dialog(enable = true, group = "CHP, Boiler and Pumps"));
-      AixLib.Systems.Benchmark.BaseClasses.HighTempSystemBus highTempSystemBus1 annotation (
-        Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      AixLib.Systems.Benchmark_old.BaseClasses.HighTempSystemBus
+        highTempSystemBus1 annotation (Placement(
+          visible=true,
+          transformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0),
+          iconTransformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
       Modelica.Blocks.Interfaces.BooleanInput HTS_Heating_I annotation (
         Placement(visible = true, transformation(origin={114,80},    extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin={114,80},    extent = {{-14, -14}, {14, 14}}, rotation = 180)));
       Modelica.Blocks.Interfaces.BooleanInput HTS_Heating_II annotation (
@@ -3103,8 +3118,17 @@ Humidity")}),     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-
       Modelica.Blocks.Sources.Constant rpm(k = rpmPump) annotation (
         Placement(visible = true, transformation(extent = {{0, -70}, {20, -50}}, rotation = 0)));
       parameter Real rpmPump(min = 0, unit = "1") = 2100 "Rpm of the pump";
-      AixLib.Systems.EONERC_MainBuilding.BaseClasses.TwoCircuitBus gtfBus annotation (
-        Placement(visible = true, transformation(origin = {100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      AixLib.Systems.EONERC_MainBuilding_old.BaseClasses.TwoCircuitBus gtfBus
+        annotation (Placement(
+          visible=true,
+          transformation(
+            origin={100,-60},
+            extent={{-10,-10},{10,10}},
+            rotation=0),
+          iconTransformation(
+            origin={100,-60},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
     equation
       connect(rpm.y, gtfBus.primBus.pumpBus.rpmSet) annotation (
         Line(points = {{21, -60}, {100, -60}, {100, -59.95}, {100.05, -59.95}}, color = {0, 0, 127}));
@@ -3148,8 +3172,17 @@ Humidity")}),     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-
             rotation=180)));
       Modelica.Blocks.Interfaces.BooleanInput HP_Cooling annotation (
         Placement(visible = true, transformation(origin = {106, -80}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {106, -80}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
-      AixLib.Systems.EONERC_MainBuilding.BaseClasses.HeatPumpSystemBus heatPumpSystemBus1 annotation (
-        Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      AixLib.Systems.EONERC_MainBuilding_old.BaseClasses.HeatPumpSystemBus
+        heatPumpSystemBus1 annotation (Placement(
+          visible=true,
+          transformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0),
+          iconTransformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
       Modelica.Blocks.Interfaces.BooleanInput HP_Combi annotation (
         Placement(visible = true, transformation(origin = {106, -40}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {106, -40}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
       Modelica.Blocks.Logical.Or or11 annotation (
@@ -3176,7 +3209,7 @@ Humidity")}),     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-
         annotation (Placement(transformation(extent={{-90,20},{-70,40}})));
       Modelica.Blocks.Math.BooleanToReal Throttle_ColdStorage
         annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
-      EONERC_MainBuilding.Controller.EonERCModeControl.CtrHP ctrHP
+      EONERC_MainBuilding_old.Controller.EonERCModeControl.CtrHP ctrHP
         annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
       Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
         annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
@@ -3253,8 +3286,17 @@ Humidity")}),     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-
 
     model Controller_SwitchingUnit
       parameter Real rpmPump;
-      AixLib.Systems.EONERC_MainBuilding.BaseClasses.SwitchingUnitBus switchingUnitBus1 annotation (
-        Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      AixLib.Systems.EONERC_MainBuilding_old.BaseClasses.SwitchingUnitBus
+        switchingUnitBus1 annotation (Placement(
+          visible=true,
+          transformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0),
+          iconTransformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
       Modelica.Blocks.Interfaces.BooleanInput Heating_GTF annotation (
         Placement(visible = true, transformation(origin = {106, 80}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {106, 80}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
       Modelica.Blocks.Interfaces.BooleanInput Heating_GTFandCon annotation (
@@ -3435,8 +3477,17 @@ Humidity")}),     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-
         Placement(visible = true, transformation(origin = {-52, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.BooleanInput Heating annotation (
         Placement(visible = true, transformation(origin = {106, -40}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {106, -40}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
-      ModularAHU.BaseClasses.GenericAHUBus genericAHUBus1 annotation (
-        Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      ModularAHU_old.BaseClasses.GenericAHUBus genericAHUBus1 annotation (
+          Placement(
+          visible=true,
+          transformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0),
+          iconTransformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
       Modelica.Blocks.Sources.Constant constRpmPump_hot(k = rpm_pump_hot) annotation (
         Placement(visible = true, transformation(origin = {90, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Logical.Switch switch1 annotation (
@@ -3589,8 +3640,16 @@ Humidity")}),     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-
         Placement(visible = true, transformation(origin = {-50, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Sources.Constant const4(k = 0.25) annotation (
         Placement(visible = true, transformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Benchmark.BaseClasses.TabsBus2 tabsBus21 annotation (
-        Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Benchmark_old.BaseClasses.TabsBus2 tabsBus21 annotation (Placement(
+          visible=true,
+          transformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0),
+          iconTransformation(
+            origin={100,0},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
       AixLib.Controls.Continuous.LimPID PID_Hot(Nd = 10, Ni = 0.9, Td = Td_Hot, Ti = Ti_Hot, initType = initType_Hot, k = k_Hot, reverseAction = reverseAction_Hot, strict = true, wd = 0, wp = 1, xd_start = xd_start_Hot, xi_start = xi_start_Hot, yMax = 1, yMin = 0, y_start = y_start_Hot) annotation (
         Placement(visible = true, transformation(origin = {-20, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       AixLib.Controls.Continuous.LimPID PID_Cold(Nd = 10, Ni = 0.9, Td = Td_Cold, Ti = Ti_Cold, initType = initType_Cold, k = k_Cold, reverseAction = reverseAction_Cold, strict = true, wd = 0, wp = 1, xd_start = xd_start_Cold, xi_start = xi_start_Cold, yMax = 1, yMin = 0, y_start = y_start_Cold) annotation (
@@ -3691,8 +3750,9 @@ Humidity")}),     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-
       Modelica.Blocks.Sources.Constant constRpmPump(final k=rpmPumpSec)
                                                                       annotation (Placement(transformation(extent={{-100,
                 -42},{-80,-22}})));
-      AixLib.Systems.EONERC_MainBuilding.BaseClasses.TwoCircuitBus hxBus annotation (Placement(transformation(extent={{84,-16},
-                {116,16}}),         iconTransformation(extent={{92,-20},{130,22}})));
+      AixLib.Systems.EONERC_MainBuilding_old.BaseClasses.TwoCircuitBus hxBus
+        annotation (Placement(transformation(extent={{84,-16},{116,16}}),
+            iconTransformation(extent={{92,-20},{130,22}})));
       Modelica.Blocks.Sources.Constant const( k=TflowSet)
         annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
       Modelica.Blocks.Interfaces.BooleanInput On annotation (Placement(
@@ -3841,9 +3901,9 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
 
 
 
-      AixLib.Systems.ModularAHU.BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
-              extent={{90,-10},{110,10}}), iconTransformation(extent={{84,-14},{116,
-                16}})));
+      AixLib.Systems.ModularAHU_old.BaseClasses.GenericAHUBus genericAHUBus
+        annotation (Placement(transformation(extent={{90,-10},{110,10}}),
+            iconTransformation(extent={{84,-14},{116,16}})));
       Modelica.Blocks.Sources.Constant TFrostProtection(final k=273.15 + 5) if
                                                                           not useExternalTset
         annotation (Placement(transformation(extent={{-92,70},{-72,90}})));

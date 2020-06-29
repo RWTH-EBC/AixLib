@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
 model PlugFlowULg "Validation against data from Université de Liège"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;

@@ -13,7 +13,6 @@ block CtrGTFSimple "Controller for geothermal field"
   BaseClasses.TwoCircuitBus gtfBus annotation (Placement(transformation(extent=
             {{80,-18},{120,18}}), iconTransformation(extent={{96,-18},{130,18}})));
 equation
-  connect(on, gtfBus.primBus.pumpBus.onSet) annotation (Line(points = {{-120, 0}, {-26, 0}, {-26, 0.09}, {100.1, 0.09}}, color = {255, 0, 255}));
   connect(booleanToReal.u, on) annotation (Line(points={{38,80},{-50,80},{-50,0},
           {-120,0}},                  color={255,0,255}));
   connect(booleanToReal.y, gtfBus.secBus.valveSet) annotation (Line(points={{61,
@@ -24,6 +23,12 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(rpm.y, gtfBus.primBus.pumpBus.rpmSet) annotation (Line(points={{21,
           -30},{100.1,-30},{100.1,0.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(on, gtfBus.primBus.pumpBus.onSet) annotation (Line(points={{
+          -120,0},{-12,0},{-12,0.09},{100.1,0.09}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
