@@ -181,9 +181,23 @@ equation
     annotation (Line(points={{2,-56},{18,-56},{20,-74}}, color={0,127,255}));
   connect(simpleValve.port_b, heatSink.ports[2])
     annotation (Line(points={{50,-64},{28,-64},{24,-74}}, color={0,127,255}));
-  annotation (Documentation(info="<html>
-<p>This model shows the usage of a Hydraulic Separator within a simple heating circuit. The primary circuit consists of a tank, a pump, a boiler (represented by a pipe with prescribed heat-flux), a pipe and some sensors. The secondary circuit consists of a pump, a static pipe, a valve and a radiator (represented by a pipe with heat-transfer to the outside). Between the two circuit lies the Hydraulic Separator. The example shows that the model of the Hydraulic Separator works in consistence with ones expactation. There is mixing of the fluids between bottom and top of the Hydraulic Separator depending on the mass flowrates in the circuits. If the mass-flows are the same and no mass is exchanged between top and bottom, there is still a small amount of heat transported via conduction. </p>
-</html>", revisions="<html>
-<p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>
+  annotation (Documentation(info="<html><p>
+  This model shows the usage of a Hydraulic Separator within a simple
+  heating circuit. The primary circuit consists of a tank, a pump, a
+  boiler (represented by a pipe with prescribed heat-flux), a pipe and
+  some sensors. The secondary circuit consists of a pump, a static
+  pipe, a valve and a radiator (represented by a pipe with
+  heat-transfer to the outside). Between the two circuit lies the
+  Hydraulic Separator. The example shows that the model of the
+  Hydraulic Separator works in consistence with ones expactation. There
+  is mixing of the fluids between bottom and top of the Hydraulic
+  Separator depending on the mass flowrates in the circuits. If the
+  mass-flows are the same and no mass is exchanged between top and
+  bottom, there is still a small amount of heat transported via
+  conduction.
+</p>
+<p>
+  26.11.2014, by <i>Roozbeh Sangi</i>: implemented
+</p>
 </html>"),    experiment(StopTime=20000));
 end HydraulicSeparator;

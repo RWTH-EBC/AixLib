@@ -273,24 +273,20 @@ equation
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<p>
-A simple substation model using a fixed return temperature and the actual supply temperature
-to calculate the mass flow rate drawn from the network. This model uses an open loop design
-to prescribe the required flow rate.
-
-This model includes a heat pump model using the district heating network as its source.
+    Documentation(info="<html><p>
+  A simple substation model using a fixed return temperature and the
+  actual supply temperature to calculate the mass flow rate drawn from
+  the network. This model uses an open loop design to prescribe the
+  required flow rate. This model includes a heat pump model using the
+  district heating network as its source.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-Novemver 22, 2019, by Nils Neuland:<br/>
-Revised variable names and documentation to follow guidelines.
-</li>
-<li>
-March 4, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+  <li>Novemver 22, 2019, by Nils Neuland:<br/>
+    Revised variable names and documentation to follow guidelines.
+  </li>
+  <li>March 4, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end HeatPumpCarnot;

@@ -44,7 +44,7 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                       graphics), Documentation(info="<html><h4>
-  <font color=\"#008000\">Overview</font>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Model for heat transfer between buffer storage layers. Models
@@ -52,7 +52,7 @@ equation
   individually
 </p>
 <h4>
-  <font color=\"#008000\">Sources</font>
+  <span style=\"color:#008000\">Sources</span>
 </h4>
 <p>
   Equations and parameters for calculating the buoyancy heatflow are

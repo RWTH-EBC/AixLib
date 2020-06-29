@@ -23,16 +23,16 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics),
-    Documentation(revisions="<html>
-<ul>
-<li>July 13, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+    Documentation(revisions="<html><ul>
+  <li>July 13, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>",
-      info="<html>
-This is an example for the
-<a href=\"Windows.BaseClasses.SkylineShadowing\">SkylineShadowing</a> model.
- It simulates two buildings which shade the window.
- One smaller building is on the east side and one bigger building on the west
-  side. Between the buildings there is a gap.<\\p>
+      info="<html>This is an example for the <a href=
+\"Windows.BaseClasses.SkylineShadowing\">SkylineShadowing</a> model. It
+simulates two buildings which shade the window. One smaller building is
+on the east side and one bigger building on the west side. Between the
+buildings there is a gap.&lt;\\p&gt;
 </html>"));
 end SkylineShadowingTest;
