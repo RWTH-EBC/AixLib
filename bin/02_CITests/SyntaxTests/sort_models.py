@@ -18,6 +18,8 @@ class git_models(object):
 		Line= str(Lines)
 		Line = Line.split(":")
 		for i in Line:
+			if i.rfind(".mos")>-1:
+				continue
 			if i.rfind(".mo")> -1:
 				#define modelica models
 				model_number = i.rfind(self.package)

@@ -3,7 +3,6 @@ model ThreeRoomsContam
   "Model with three rooms for the validation of the multizone air exchange models"
   extends Modelica.Icons.Example;
 
-  
   package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"});
 
   AixLib.Fluid.MixingVolumes.MixingVolume volEas(

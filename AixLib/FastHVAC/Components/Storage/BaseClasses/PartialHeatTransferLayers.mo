@@ -53,16 +53,16 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
+  <font color=\"#008000\">Overview</font>
 </h4>
 <p>
   Partial model for different heat transfer layer models.
 </p>
 <h4>
-  <span style=\"color:#008000\">Level of Development</span>
+  <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\">
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
 </p>
 </html>",
       revisions="<html><ul>

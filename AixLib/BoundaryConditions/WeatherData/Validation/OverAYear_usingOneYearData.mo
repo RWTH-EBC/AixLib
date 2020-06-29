@@ -1,5 +1,4 @@
 within AixLib.BoundaryConditions.WeatherData.Validation;
-
 model OverAYear_usingOneYearData
   "Validation model for a simulation extending with two months over one year but using data for only one year"
   extends Modelica.Icons.Example;

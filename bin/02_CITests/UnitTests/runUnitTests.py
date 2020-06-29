@@ -107,8 +107,8 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 			print("Check examples : ")
 			for l in regression_models:
 				print(l)
-		if len(regression_models) > 100:
-			print("Over 100 changed models. Check all models in AixLib package "+package)
+		if len(regression_models) > 10:
+			print("Over 10 changed models. Check all models in AixLib package "+package)
 			if package is not None:
 				ut.setSinglePackage(package)
 			ut.setNumberOfThreads(n_pro)

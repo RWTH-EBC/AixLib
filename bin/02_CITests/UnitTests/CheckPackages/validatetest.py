@@ -358,6 +358,9 @@ class ValidateTest(object):
 			list_path = 'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
 			list_mo_models = git_models(".mo",self.Package,list_path)
 			model_list = list_mo_models.sort_mo_models()
+			if len(model_list) == 0:
+				print("No changed models in Package :"+self.Package)
+				exit(0)
 			for i in model_list:
 				print("Check Model: "+i)
 				result=dymola.checkModel(i)
@@ -448,7 +451,9 @@ class ValidateTest(object):
 			model_list= list_mo_models.sort_mo_models()
 			ErrorList = []
 				
-				
+			if len(model_list) == 0:
+				print("No changed models in Package :"+self.Package)
+				exit(0)	
 			for i in model_list:
 				result=dymola.checkModel(i,simulate=True)
 				if result == True:

@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
 model ModularCHPIntegrated
   "Modular combined heat and power system model integrated into a heating circuit"
   import AixLib;
@@ -298,24 +298,11 @@ CHP"),  Rectangle(
           color={0,127,255},
           thickness=1)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html><p>
-  This model of a gas engine CHP plant is using the CHP power unit
-  <a href=
-  \"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a>
-  extended by a heat exchanger to the heating circuit. Also, a simple
-  controller model is added to simulate different operation conditions
-  by transferring an On-/Off-Signal and the modulation factor via the
-  bus port.
-</p>
-<h4>
-  Calibration and limitations:
-</h4>
-<p>
-  Model calibration and limitations can be found in <a href=
-  \"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a>
-</p>
+    Documentation(info="<html>
+<p>This model of a gas engine CHP plant is using the CHP power unit <a href=\"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a> extended by a heat exchanger to the heating circuit. Also, a simple controller model is added to simulate different operation conditions by transferring an On-/Off-Signal and the modulation factor via the bus port.</p>
+<h4>Calibration and limitations: </h4>
+<p>Model calibration and limitations can be found in <a href=\"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a> </p>
+</html>", revisions="<html>
 <ul>
   <li>
     <i>April, 2019&#160;</i> by Julian Matthes:<br/>

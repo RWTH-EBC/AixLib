@@ -631,34 +631,17 @@ equation
           textString="Win3",
           origin={-70,5},
           rotation=90,
-          visible=withWindow3)}), Documentation(revisions="<html><ul>
-  <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br/>
-    Added documentation
-  </li>
-  <li>
-    <i>July 8, 2011</i> by Ana Constantin:<br/>
-    Implemented
-  </li>
-</ul>
-</html>", info="<html>
-<h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  Model for a room with
-  2&#160;outer&#160;walls,&#160;1&#160;inner&#160;wall&#160;load,&#160;1&#160;inner&#160;wall&#160;simple,&#160;1&#160;floor&#160;towards&#160;lower&#160;floor,&#160;1&#160;ceiling&#160;towards&#160;attic,&#160;1&#160;roof&#160;towards&#160;outside.
-</p>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
-<p>
-  The following figure presents the room's layout:
-</p>
-<p>
-  <img src=
-  \"modelica://AixLib/Resources/Images/Building/HighOrder/OW2_1IWl_1IWs_1Pa_1At1Ro.png\"
-  alt=\"Room layout\">
-</p>
-</html>"));
+          visible=withWindow3)}), Documentation(revisions="<html>
+ <ul>
+ <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
+ <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
+ </ul>
+ </html>", info="<html>
+ <h4><span style=\"color:#008000\">Overview</span></h4>
+ <p>Model for a room with 2&nbsp;outer&nbsp;walls,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;load,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;lower&nbsp;floor,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;attic,&nbsp;1&nbsp;roof&nbsp;towards&nbsp;outside.</p>
+ <h4><span style=\"color:#008000\">Concept</span></h4>
+ <p>The following figure presents the room&apos;s layout:</p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/OW2_1IWl_1IWs_1Pa_1At1Ro.png\"
+    alt=\"Room layout\"/></p>
+ </html>"));
 end Ow2IwL1IwS1Lf1At1Ro1;

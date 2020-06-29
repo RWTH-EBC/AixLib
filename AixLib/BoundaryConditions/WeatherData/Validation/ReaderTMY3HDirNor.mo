@@ -1,5 +1,4 @@
 within AixLib.BoundaryConditions.WeatherData.Validation;
-
 model ReaderTMY3HDirNor
   "Test model for calculating the direct normal radiation"
   extends Modelica.Icons.Example;

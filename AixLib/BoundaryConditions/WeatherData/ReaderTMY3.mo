@@ -1,7 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData;
 block ReaderTMY3 "Reader for TMY3 weather data"
 
-
   parameter Boolean computeWetBulbTemperature = true
     "If true, then this model computes the wet bulb temperature"
     annotation(Evaluate=true);
