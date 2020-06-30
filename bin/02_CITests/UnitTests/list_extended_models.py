@@ -46,6 +46,14 @@ class Extended_model(object):
 		print("******************************")
 		#print(reg_list)
 		regression_models = list(set(reg_list))
+		
+		models = []
+		if len(regression_models) >0:
+			for l in regression_models:
+				model = l[:l.rfind(".")]
+				models.append(model)
+		testmodels = list(set(models))
+		regression_models = testmodels
 		return regression_models
 	
 	

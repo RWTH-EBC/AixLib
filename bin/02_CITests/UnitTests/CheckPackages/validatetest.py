@@ -11,6 +11,7 @@ import buildingspy.development.regressiontest as u
 from pathlib import Path
 from git import Repo
 from sort_models import git_models
+import time 
 
 class Git_Repository_Clone(object):
 	"""work with Repository in Git"""
@@ -312,13 +313,35 @@ class ValidateTest(object):
 		### Writes all information in the log file, not only the last entries
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
 		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+		lic_counter = 0
+		while dym_sta_lic_available == False:
+			print("No Dymola License is available")
+			dymola.close()
+			print("Check Dymola license after 60.0 seconds")
+			time.sleep(60.0)
+			### Sets the Dymola path to activate the GUI
+			if platform.system()  == "Windows":
+				dymola = DymolaInterface(showwindow=True)
+			else:
+				dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
+			dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+			lic_counter = lic_counter +1 	
+			if lic_counter > 5:
+				if dym_sta_lic_available == False:
+					print("There are currently no available Dymola licenses available. Please try again later.")
+					dymola.close()
+					exit(1)
+		print("Dymola License is available")
+		'''
 		if not dym_sta_lic_available:
 			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
 			print("No Dymola License is available")
 			dymola.close()
 			exit(1)
 		else:
-			print("Dymola License is available")
+			print("Dymola License is available")'''
+													
+		
 		
 		PackageCheck = dymola.openModel(self.Library)
 		if PackageCheck == True:
@@ -408,6 +431,27 @@ class ValidateTest(object):
 		### Writes all information in the log file, not only the last entries
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
 		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+		lic_counter = 0
+		while dym_sta_lic_available == False:
+			print("No Dymola License is available")
+			dymola.close()
+			print("Check Dymola license after 60.0 seconds")
+			time.sleep(60.0)
+			### Sets the Dymola path to activate the GUI
+			if platform.system()  == "Windows":
+				dymola = DymolaInterface(showwindow=True)
+			else:
+				dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
+			dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+			lic_counter = lic_counter +1 	
+			if lic_counter > 5:
+				if dym_sta_lic_available == False:
+					print("There are currently no available Dymola licenses available. Please try again later.")
+					dymola.close()
+					exit(1)
+		print("Dymola License is available")
+		
+		'''
 		if not dym_sta_lic_available:
 			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
 			print("No Dymola License is available")
@@ -415,7 +459,7 @@ class ValidateTest(object):
 			exit(1)
 		else:
 			print("Dymola License is available")
-	
+		'''
 		
 		PackageCheck = dymola.openModel(self.Library)
 		if PackageCheck == True:

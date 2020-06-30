@@ -103,7 +103,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 			retVal = 0
 		
 		if len(regression_models) > 0:
-			print("Number of changed regression examples: "+ str(len(regression_models)))
+			print("Number of checked packages: "+ str(len(regression_models)))
 			print("Check examples : ")
 			for l in regression_models:
 				print(l)
@@ -123,7 +123,8 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 					print("packages")
 					continue
 				#print("\n*****************************\nRegression test for model: "+l) 
-				model_package = l[:l.rfind(".")]
+				#model_package = l[:l.rfind(".")]
+				model_package = l
 				ut.setSinglePackage(model_package)
 				ut.setNumberOfThreads(n_pro)
 				ut.pedanticModelica(False)
