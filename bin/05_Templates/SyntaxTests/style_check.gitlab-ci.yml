@@ -22,7 +22,7 @@ Style_Check_AixLib:
         paths:
             - AixLib/AixLib_StyleCheckLog.html
             - AixLib/AixLib_StyleErrorLog.html
-        
+           
         expire_in: 7 day 
     allow_failure: true 
     
@@ -50,6 +50,8 @@ Style_Check_ChangedModel:
         paths:
             - AixLib/ChangedModels_StyleCheckLog.html
             - AixLib/ChangedModels_StyleErrorLog.html
+            - AixLib/AixLib_StyleCheckLog.html
+            - AixLib/AixLib_StyleErrorLog.html
             - bin/03_WhiteLists/changedmodels.txt
         expire_in: 7 day 
     allow_failure: true 

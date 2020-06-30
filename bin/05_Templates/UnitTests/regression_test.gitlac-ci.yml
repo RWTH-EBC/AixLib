@@ -11,7 +11,6 @@ Regression_overall_coverage:
         - docker
         
     before_script:
-        - printenv
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate python36
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
@@ -24,7 +23,7 @@ Regression_overall_coverage:
         when: on_failure
         paths:
             - AixLib/simulator-dymola.log
-
+        expire_in: 7 day 
     retry:
         max: 2
         when: runner_system_failure
@@ -50,6 +49,7 @@ Regressiontest_AixLib_Airflow:
         when: on_failure
         paths:
           - AixLib/simulator-dymola.log
+        expire_in: 7 day
     retry:
         max: 2
         when: runner_system_failure
@@ -74,6 +74,7 @@ Regressiontest_AixLib_BoundaryConditions:
         when: on_failure
         paths:
           - AixLib/simulator-dymola.log
+        expire_in: 7 day
     retry:
         max: 2
         when: runner_system_failure
@@ -99,6 +100,7 @@ Regressiontest_AixLib_Controls:
         when: on_failure
         paths:
           - AixLib/simulator-dymola.log
+        expire_in: 7 day
     retry:
         max: 2
         when: runner_system_failure       
@@ -165,6 +167,7 @@ Regressiontest_AixLib_Fluid:
         when: on_failure
         paths:
           - AixLib/simulator-dymola.log
+        expire_in: 7 day
     retry:
         max: 2
         when: runner_system_failure  
@@ -189,6 +192,7 @@ Regressiontest_AixLib_Media:
         when: on_failure
         paths:
           - AixLib/simulator-dymola.log
+        expire_in: 7 day
     retry:
         max: 2
         when: runner_system_failure  
@@ -213,6 +217,7 @@ Regressiontest_AixLib_Systems:
         when: on_failure
         paths:
           - AixLib/simulator-dymola.log
+        expire_in: 7 day
     retry:
         max: 2
         when: runner_system_failure          
@@ -237,6 +242,7 @@ Regressiontest_AixLib_ThermalZones:
         when: on_failure
         paths:
           - AixLib/simulator-dymola.log
+        expire_in: 7 day
     retry:
         max: 2
         when: runner_system_failure        

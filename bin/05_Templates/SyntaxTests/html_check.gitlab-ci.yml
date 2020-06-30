@@ -35,7 +35,7 @@ trigger_branch:
     artifacts:
         paths:
             - AixLib/HTML-logfile.txt
-        expire_in: 1 h 
+        expire_in: 7 day
     except:
         - external_pull_requests 
     only:
@@ -71,7 +71,7 @@ Check_HTML:
         when: on_failure
         paths:
             - AixLib/HTML-logfile.txt
-        expire_in: 1 h 
+        expire_in: 7 day
     
     only:
         variables:
@@ -104,7 +104,7 @@ Merge_Checks:
         when: on_failure
         paths:
             - AixLib/HTML-logfile.txt
-        expire_in: 1 h 
+        expire_in: 7 day 
     
     only:
         - external_pull_requests
@@ -185,7 +185,7 @@ HTML_Check:
         when: on_failure
         paths:
             - AixLib/HTML-logfile.txt
-        expire_in: 1 h 
+        expire_in: 7 day 
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/

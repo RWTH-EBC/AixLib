@@ -432,7 +432,7 @@ class ValidateTest(object):
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
 		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
 		lic_counter = 0
-		while dym_sta_lic_available == False:
+		'''while dym_sta_lic_available == False:
 			print("No Dymola License is available")
 			dymola.close()
 			print("Check Dymola license after 60.0 seconds")
@@ -449,7 +449,7 @@ class ValidateTest(object):
 					print("There are currently no available Dymola licenses available. Please try again later.")
 					dymola.close()
 					exit(1)
-		print("Dymola License is available")
+		print("Dymola License is available")'''
 		
 		'''
 		if not dym_sta_lic_available:
@@ -496,14 +496,14 @@ class ValidateTest(object):
 			examplelist= []
 			for e in model_list:
 				examples = e.split(".")
-				if examples[len(examples)-1] == "Examples" or examples[len(examples)-1] == "Validation":
+				if examples[len(examples)-2] == "Examples" or examples[len(examples)-2] == "Validation":
+					print(e)
 					examplelist.append(e)
 			
-			print(examplelist)
 			ErrorList = []
 				
 			if len(examplelist) == 0:
-				print("No changed examples in Package :"+self.Package)
+				print("No changed examples in Package: "+self.Package)
 				exit(0)	
 			for i in examplelist:
 				result=dymola.checkModel(i,simulate=True)
