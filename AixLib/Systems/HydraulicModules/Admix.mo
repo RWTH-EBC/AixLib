@@ -263,41 +263,18 @@ equation
           lineColor={135,135,135},
           textString="6")}),
     Diagram(coordinateSystem(extent={{-120,-120},{120,120}}, initialScale=0.1)),
-    Documentation(info="<html><p>
-  Admix circuit with a replaceable pump model for the distribution of
-  hot or cold water. All sensor and actor values are connected to the
-  hydraulic bus.
-</p>
-<h4>
-  Characteristics
-</h4>
-<p>
-  There is a connecting pipe between distributer and collector of
-  manifold so that the pressure difference between them becomes
-  insignificant. The main pump only works against the resistance in the
-  main circuit.
-</p>
-<p>
-  The mass flow in primary and secondary circuits stay constant.
-</p>
-<p>
-  The scondary circuits do not affect each other when switching
-  operational modes.
-</p>
+    Documentation(info="<html>
+<p>Admix circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>
+<h4>Characteristics</h4>
+<p>There is a connecting pipe between distributer and collector of manifold so that the pressure difference between them becomes insignificant. The main pump only works against the resistance in the main circuit.</p>
+<p>The mass flow in primary and secondary circuits stay constant.</p>
+<p>The scondary circuits do not affect each other when switching operational modes.</p>
+</html>", revisions="<html>
 <ul>
-  <li>August 09, 2018, by Alexander Kümpel:<br/>
-    Extension from base PartioalHydraulicModuls
-  </li>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
-    Transfer from ZUGABE to AixLib
-  </li>
-  <li>July 25, 2017 by Peter Matthes:<br/>
-    Renames sensors and introduces PT1 behavior for temperature
-    sensors. Adds sensors to icon.
-  </li>
-  <li>February 6, 2016, by Peter Matthes:<br/>
-    First implementation
-  </li>
+<li>August 09, 2018, by Alexander K&uuml;mpel:<br/>Extension from base PartioalHydraulicModuls</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
+<li>July 25, 2017 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
+<li>February 6, 2016, by Peter Matthes:<br/>First implementation</li>
 </ul>
 </html>"));
 end Admix;

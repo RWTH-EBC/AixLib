@@ -25,23 +25,25 @@ class Extended_model(object):
 		### Changed Examples
 		reg_models = Extended_model.list_regression_tests(self)
 		### Create a final list
+		print("******************************")
 		print("Changed reference txt files :")
 		for r in ref_file:
-			print(r)
+			print('			' +r)
 			reg_list.append(r)
 		print("Changed bottom level examples :")
 		for d in usedmodel:
-			print(d)
+			print('			' +d)
 			reg_list.append(d)
 		print("Changed mos files :")
 		for m in mos_files:
-			print(m)
+			print('			' +m)
 			reg_list.append(m)
 		print("Changed regression examples :")
 		for l in reg_models:
-			print(l)
+			print('			' +l)
 			reg_list.append(l)
 		
+		print("******************************")
 		#print(reg_list)
 		regression_models = list(set(reg_list))
 		return regression_models
