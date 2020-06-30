@@ -135,18 +135,16 @@ equation
     annotation (Line(points={{-29,-30},{-24,-30},{-20,-30},{-20,-0.1},
                 {0.1,-0.1}}, color={0,0,127}));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 24, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 24, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a validation model to test three compressors in parallel
-if at least one compressor is shut-down.
+  This is a validation model to test three compressors in parallel if
+  at least one compressor is shut-down.
 </p>
 </html>"),
 experiment(StopTime=1),

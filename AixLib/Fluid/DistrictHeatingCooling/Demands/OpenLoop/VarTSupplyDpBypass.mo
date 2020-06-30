@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
 model VarTSupplyDpBypass
   "Substation with variable dT for fixed return temperature"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
@@ -231,22 +231,19 @@ equation
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<p>
-A simple substation model using a fixed return temperature and the actual supply temperature
-to calculate the mass flow rate drawn from the network. This model uses an open loop design
-to prescribe the required flow rate.
+    Documentation(info="<html><p>
+  A simple substation model using a fixed return temperature and the
+  actual supply temperature to calculate the mass flow rate drawn from
+  the network. This model uses an open loop design to prescribe the
+  required flow rate.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-Novemver 22, 2019, by Nils Neuland:<br/>
-Revised variable names and documentation to follow guidelines.
-</li>
-<li>
-March 4, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+  <li>Novemver 22, 2019, by Nils Neuland:<br/>
+    Revised variable names and documentation to follow guidelines.
+  </li>
+  <li>March 4, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end VarTSupplyDpBypass;

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledTest
   "Testing the pump speed algorithm with the new \"one record\" pump model."
   extends Modelica.Icons.Example;
@@ -83,15 +83,37 @@ equation
           10},{48,-30},{-20,-30}}, color={0,127,255}));
   annotation (
     experiment(StopTime=600),
-    Documentation(revisions="<html>
-<ul>
-<li>2019-09-18 by Alexander Kümpel:<br />Renaming and restructuring.</li>
-<li>2018-05-08 by Peter Matthes:<br />* Updates plot script with a view of pump head calculation from &quot;headUnbound&quot; to the final &quot;head&quot;.<br />* Sets energy- and massDynamics parameters to it&apos;s default &quot;SteadyState&quot;.</li>
-<li>2018-03-01 by Peter Matthes:<br />Adjusted parameter settings. From pump model removed Nstart (became Nnom in pump model) and m_flow_start (should be used as output from pump rather than a setting). Changed setting of system.m_flow_start to become pump.m_flow_start.</li>
-<li>2018-02-01 by Peter Matthes<br />Switches pump off near end of simulation to check for handling of power and efficiency calculation. Improves plot script.</li>
-<li>2018-01-29 by Peter Matthes<br />Removes parameter useABCformulas changes pump class to PumpPhysicsNbound as the speed controll should be testet.</li>
-<li>2017-11-22 by Peter Matthes<br />Renaming to testPumpPhysicsNsetControl. Adds new plot script for the test.</li>
-<li>2017-11-21 by Peter Matthes<br />Implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>2019-09-18 by Alexander Kümpel:<br/>
+    Renaming and restructuring.
+  </li>
+  <li>2018-05-08 by Peter Matthes:<br/>
+    * Updates plot script with a view of pump head calculation from
+    \"headUnbound\" to the final \"head\".<br/>
+    * Sets energy- and massDynamics parameters to it's default
+    \"SteadyState\".
+  </li>
+  <li>2018-03-01 by Peter Matthes:<br/>
+    Adjusted parameter settings. From pump model removed Nstart (became
+    Nnom in pump model) and m_flow_start (should be used as output from
+    pump rather than a setting). Changed setting of system.m_flow_start
+    to become pump.m_flow_start.
+  </li>
+  <li>2018-02-01 by Peter Matthes<br/>
+    Switches pump off near end of simulation to check for handling of
+    power and efficiency calculation. Improves plot script.
+  </li>
+  <li>2018-01-29 by Peter Matthes<br/>
+    Removes parameter useABCformulas changes pump class to
+    PumpPhysicsNbound as the speed controll should be testet.
+  </li>
+  <li>2017-11-22 by Peter Matthes<br/>
+    Renaming to testPumpPhysicsNsetControl. Adds new plot script for
+    the test.
+  </li>
+  <li>2017-11-21 by Peter Matthes<br/>
+    Implemented
+  </li>
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=

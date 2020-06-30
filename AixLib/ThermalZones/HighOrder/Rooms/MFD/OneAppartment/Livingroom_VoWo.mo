@@ -257,17 +257,33 @@ equation
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-160, 90}, {-140, 28}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Line(points = {{44, 62}, {50, 68}}, color = {255, 255, 255}, thickness = 1), Line(points = {{44, 58}, {54, 68}}, color = {255, 255, 255}, thickness = 1), Line(points = {{48, 58}, {54, 64}}, color = {255, 255, 255}, thickness = 1), Text(extent = {{50, 78}, {100, 62}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   1, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "OW")}), Documentation(revisions = "<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the livingroom. </p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png\"
-    alt=\"Room layout\"/></p>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "OW")}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the livingroom.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png\"
+  alt=\"Room layout\">
+</p>
+</html>"));
 end Livingroom_VoWo;
