@@ -60,18 +60,17 @@ equation
     annotation (Line(points={{10,0},{34,0},{34,1.77636e-015},
                 {60,1.77636e-015}}, color={0,127,255}));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 30, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 30, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a simple validation model to test the one-directional 
-heat transfer. Therefore, an ambient temeprature is prediscribed 
-and an expansion vassel is located at the model's outlet.
+  This is a simple validation model to test the one-directional heat
+  transfer. Therefore, an ambient temeprature is prediscribed and an
+  expansion vassel is located at the model's outlet.
+</p>
 </html>"));
 end SimpleHeatTransfer;

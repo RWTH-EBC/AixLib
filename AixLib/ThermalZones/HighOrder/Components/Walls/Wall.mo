@@ -206,36 +206,91 @@ equation
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent = {{-16, 80}, {15, 20}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = outside and withWindow, lineColor = {255, 255, 255}), Line(points = {{-2, 80}, {-2, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 80}, {1, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 77}, {-2, 77}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 23}, {-2, 23}}, color = {0, 0, 0}, visible = outside and withWindow), Ellipse(extent = {{-16, -60}, {44, -120}}, lineColor = {0, 0, 0}, startAngle = 359, endAngle = 450, visible = withDoor), Rectangle(extent = {{-16, -60}, {15, -90}}, visible = withDoor, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{1, 50}, {-2, 50}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{15, 80}, {15, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, 80}, {-16, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, -60}, {-16, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{15, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -90}, {15, -60}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Flexible Model for Inside Walls and Outside Walls. </p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The<b> WallSimple</b> model models </p>
- <ul>
- <li>Conduction and convection for a wall (different on the inside surface depending on the surface orientation: vertical wall, floor or ceiling)</li>
- <li>Outside walls may have a window and/ or a door</li>
- <li>Inside walls may have a door</li>
- </ul>
- <p>This model uses a <a href=\"AixLib.Utilities.Interfaces.HeatStarComb\">HeatStarComb</a> Connector for an easier connection of temperature and radiance inputs.</p>
- <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
- <ul>
- <li>Outside walls are represented as complete walls</li>
- <li>Inside walls are modeled as a half of a wall, you need to connect a corresponding second half with the same values</li>
- <li>Door and window got a constant U-value</li>
- <li>No heat storage in doors or window </li>
- </ul>
- <p>Have a closer look at the used models to get more information about the assumptions. </p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">AixLib.Building.Components.Examples.Walls.InsideWall</a> </p>
- </html>", revisions="<html>
- <ul>
- <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters on upper model level. This closes ticket <a href=\"https://github.com/RWTH-EBC/AixLib/issues/215\">issue 215</a></li>
- <li><i>August 22, 2014&nbsp;</i> by Ana Constantin:<br/>Corrected implementation of door also for outside walls. This closes ticket <a href=\"https://github.com/RWTH-EBC/AixLib/issues/13\">issue 13</a></li>
- <li><i>May 19, 2014&nbsp;</i> by Ana Constantin:<br/>Formatted documentation appropriately</li>
- <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- <li><i>June 22, 2012&nbsp;</i> by Lukas Mencher:<br/>Outside wall may have a door now, icon adjusted</li>
- <li><i>Mai 24, 2012&nbsp;</i> by Ana Constantin:<br/>Added inside surface orientation</li>
- <li><i>April, 2012&nbsp;</i> by Mark Wesseling:<br/>Implemented.</li>
- </ul>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{1, 50}, {-2, 50}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{15, 80}, {15, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, 80}, {-16, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, -60}, {-16, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{15, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -90}, {15, -60}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Flexible Model for Inside Walls and Outside Walls.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The <b>WallSimple</b> model models
+</p>
+<ul>
+  <li>Conduction and convection for a wall (different on the inside
+  surface depending on the surface orientation: vertical wall, floor or
+  ceiling)
+  </li>
+  <li>Outside walls may have a window and/ or a door
+  </li>
+  <li>Inside walls may have a door
+  </li>
+</ul>
+<p>
+  This model uses a <a href=
+  \"AixLib.Utilities.Interfaces.HeatStarComb\">HeatStarComb</a> Connector
+  for an easier connection of temperature and radiance inputs.
+</p>
+<p>
+  <b><span style=\"color: #008000\">Assumptions</span></b>
+</p>
+<ul>
+  <li>Outside walls are represented as complete walls
+  </li>
+  <li>Inside walls are modeled as a half of a wall, you need to connect
+  a corresponding second half with the same values
+  </li>
+  <li>Door and window got a constant U-value
+  </li>
+  <li>No heat storage in doors or window
+  </li>
+</ul>
+<p>
+  Have a closer look at the used models to get more information about
+  the assumptions.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Building.Components.Examples.Walls.InsideWall\">AixLib.Building.Components.Examples.Walls.InsideWall</a>
+</p>
+<ul>
+  <li>
+    <i>October 12, 2016&#160;</i> by Tobias Blacha:<br/>
+    Algorithm for HeatConv_inside is now selectable via parameters on
+    upper model level. This closes ticket <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/215\">issue 215</a>
+  </li>
+  <li>
+    <i>August 22, 2014&#160;</i> by Ana Constantin:<br/>
+    Corrected implementation of door also for outside walls. This
+    closes ticket <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/13\">issue 13</a>
+  </li>
+  <li>
+    <i>May 19, 2014&#160;</i> by Ana Constantin:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>June 22, 2012&#160;</i> by Lukas Mencher:<br/>
+    Outside wall may have a door now, icon adjusted
+  </li>
+  <li>
+    <i>Mai 24, 2012&#160;</i> by Ana Constantin:<br/>
+    Added inside surface orientation
+  </li>
+  <li>
+    <i>April, 2012&#160;</i> by Mark Wesseling:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end Wall;

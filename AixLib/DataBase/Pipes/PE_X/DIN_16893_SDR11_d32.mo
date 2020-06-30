@@ -7,28 +7,54 @@ record DIN_16893_SDR11_d32 "PE-X Pipe, d_o=32mm, SDR11"
     lambda=0.38,
     c=2300);
 
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Record for PE-X pipe. </p>
-<h4><font color=\"#008000\">Concept</font></h4>
-<p>The pipe dimensions are according to standard DIN 16893.</p>
-<p>SDR is the diameter to wall thickness ratio. </p>
-<p>d is the diameter in mm.  </p>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Record is used with <a href=\"AixLib.Fluid.FixedResistances.Pipe\">AixLib.Fluid.FixedResistances.Pipe</a> </p>
-<p>Source: </p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Record for PE-X pipe.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The pipe dimensions are according to standard DIN 16893.
+</p>
+<p>
+  SDR is the diameter to wall thickness ratio.
+</p>
+<p>
+  d is the diameter in mm.
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Record is used with <a href=
+  \"AixLib.Fluid.FixedResistances.Pipe\">AixLib.Fluid.FixedResistances.Pipe</a>
+</p>
+<p>
+  Source:
+</p>
 <ul>
-<li>DIN 16983:2000-09</li>
+  <li>DIN 16983:2000-09
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>January 29, 2014&nbsp;</i> by Ana Constantin:<br/>
-Added to HVAC, formated and upgraded to current version of Dymola/Modelica</li>
-<li><i>March 13, 2012&nbsp;</i> by Tim Comanns (supervisor: Ana Constantin):<br/>
-Implemented.</li>
+      revisions="<html><ul>
+  <li>
+    <i>April 25, 2017</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>January 29, 2014&#160;</i> by Ana Constantin:<br/>
+    Added to HVAC, formated and upgraded to current version of
+    Dymola/Modelica
+  </li>
+  <li>
+    <i>March 13, 2012&#160;</i> by Tim Comanns (supervisor: Ana
+    Constantin):<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end DIN_16893_SDR11_d32;

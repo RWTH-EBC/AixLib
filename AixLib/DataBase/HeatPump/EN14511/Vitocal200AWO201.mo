@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.EN14511;
+within AixLib.DataBase.HeatPump.EN14511;
 record Vitocal200AWO201
   "Vitocal200AWO201"
   extends AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
@@ -11,14 +11,17 @@ record Vitocal200AWO201
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p><span style=\"font-family: Courier New; color: #006400;\">Data&nbsp;record&nbsp;for&nbsp;type&nbsp;AWO-M/AWO-M-E-AC&nbsp;201.A04, obtained from the technical guide in the UK.</span></p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  <span style=
+  \"font-family: Courier New; color: #006400;\">Data&#160;record&#160;for&#160;type&#160;AWO-M/AWO-M-E-AC&#160;201.A04,
+  obtained from the technical guide in the UK.</span>
+</p>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end Vitocal200AWO201;
