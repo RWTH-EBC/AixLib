@@ -8,13 +8,18 @@ record CHP_FMB_1500_GSMK "FMB-1500-GSMK : Guascor"
     maxTReturn=343.15,
     DPipe=0.2);
 
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Natural Gas CHP: Schmitt Enertec GmbH FMB-1500-GSMK </p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Natural Gas CHP: Schmitt Enertec GmbH FMB-1500-GSMK
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>July 4, 2013&nbsp;</i> by Ole Odendahl:<br/>Added reference</li>
+        revisions="<html><ul>
+  <li>
+    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added reference
+  </li>
 </ul>
 </html>"));
 end CHP_FMB_1500_GSMK;
