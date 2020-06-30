@@ -365,7 +365,7 @@ class ValidateTest(object):
 					print('\n Successful: '+i+'\n')
 					#continue
 				if result == False:
-					print("Second Check Test")
+					print("Second Check Test for model "+i)
 					result=dymola.checkModel(i)
 					if result == True:
 						print('\n Successful: '+i+'\n')
@@ -493,12 +493,19 @@ class ValidateTest(object):
 			list_path = 'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
 			list_mo_models = git_models(".mo",self.Package, list_path)
 			model_list= list_mo_models.sort_mo_models()
+			examplelist= []
+			for e in model_list:
+				examples = e.split(".")
+				if examples[len(examples)-1] == "Examples" or examples[len(examples)-1] == "Validation":
+					examplelist.append(e)
+			
+			print(examplelist)
 			ErrorList = []
 				
-			if len(model_list) == 0:
-				print("No changed models in Package :"+self.Package)
+			if len(examplelist) == 0:
+				print("No changed examples in Package :"+self.Package)
 				exit(0)	
-			for i in model_list:
+			for i in examplelist:
 				result=dymola.checkModel(i,simulate=True)
 				if result == True:
 					print('\n Successful: '+i+'\n')
