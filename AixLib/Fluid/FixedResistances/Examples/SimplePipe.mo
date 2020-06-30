@@ -66,30 +66,19 @@ equation
   connect(simplePipe.heatPorts, fixedTemp.port) annotation (Line(points={{0,5.2},
           {-4,5.2},{-4,38},{-20,38},{-20,50}}, color={127,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),  Documentation(info="<html><h4>
-  <span style=\"color: #008000\">Overview</span>
-</h4>
-<p>
-  Simple example to test the model SimplePipe. The inlet temperature
-  increases in a step after 100 seconds.
-</p>
-<h4>
-  <span style=\"color: #008000\">Concept</span>
-</h4>
-<p>
-  Plot:
-</p>
+            -100},{100,100}})),  Documentation(info="<html>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Simple example to test the model SimplePipe. The inlet temperature increases in a step after 100 seconds.</p>
+<h4><span style=\"color: #008000\">Concept</span></h4>
+<p>Plot:</p>
 <ul>
-  <li>x-axis: Time
-  </li>
-  <li>y-axis: Inlet and Outlet temperature
-  </li>
+<li>x-axis: Time</li>
+<li>y-axis: Inlet and Outlet temperature</li>
 </ul>
 </html>",
-    revisions="<html><ul>
-  <li>Mai 07, 2020, by Alexander Kümpel:<br/>
-    First implementation
-  </li>
+    revisions="<html>
+<ul>
+<li>Mai 07, 2020, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>"),
     experiment(Tolerance=1e-6,

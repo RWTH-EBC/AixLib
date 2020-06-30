@@ -429,83 +429,41 @@ equation
         color={0,0,127}));
   connect(simpleExternalShading.corrIrr, ROM.solRad) annotation (Line(points={{19.94,
           45.24},{24,45.24},{24,61},{37,61}}, color={0,0,127}));
-  annotation(Documentation(info="<html><p>
-  Comprehensive ready-to-use model for thermal zones, combining
-  caclulation core, handling of solar radiation and internal gains.
-  Core model is a <a href=
-  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>
-  model. Conditional removements of the core model are passed-through
-  and related models on thermal zone level are as well conditional. All
-  models for solar radiation are part of Annex60 library. Internal
-  gains are part of AixLib.
-</p>
-<h4>
-  Typical use and important parameters
-</h4>
-<p>
-  All parameters are collected in one <a href=
-  \"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
-  record. Further parameters for medium, initialization and dynamics
-  originate from <a href=
-  \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
-  A typical use case is a single thermal zone connected via heat ports
-  and fluid ports to a heating system. The thermal zone model serves as
-  boundary condition for the heating system and calculates the room's
-  reaction to external and internal heat sources. The model is used as
-  thermal zone core model in <a href=
-  \"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">
-  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a>
-</p>
-<p>
-  Dependent on the paramter <code>internalGainsMode</code> different
-  models for internal gains by humans will be used.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  For automatic generation of thermal zone and multizone models as well
-  as for datasets, see <a href=
-  \"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a>
-</p>
+  annotation(Documentation(info="<html>
+<p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
+<h4>Typical use and important parameters</h4>
+<p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
+<p>Dependent on the paramter <code>internalGainsMode</code> different models for internal gains by humans will be used.</p>
+<h4>References</h4>
+<p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 <ul>
-  <li>German Association of Engineers: Guideline VDI 6007-1, March
-  2012: Calculation of transient thermal response of rooms and
-  buildings - Modelling of rooms.
-  </li>
-  <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D.
-  (2014): Low order thermal network models for dynamic simulations of
-  buildings on city district scale. In: Building and Environment 73, p.
-  223–231. DOI: <a href=
-  \"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>.
-  </li>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
 </ul>
-<h4>
-  Examples
-</h4>
-<p>
-  See <a href=
-  \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>.
-</p>
-<ul>
-  <li>January 09, 2020, by David Jansen:<br/>
-    Integration of ideal heater and cooler into the thermal zone.
+<h4>Examples</h4>
+<p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>.</p>
+</html>",  revisions="<html>
+ <ul>
+  <li> January 09, 2020, by David Jansen:<br/>
+  Integration of ideal heater and cooler into the thermal zone. 
   </li>
-  <li>July 10, 2019, by David Jansen and Martin Kremer:<br/>
-    Integration of changeable internal gain models for humans.
+  <li> July 10, 2019, by David Jansen and Martin Kremer:<br/>
+  Integration of changeable internal gain models for humans.
   </li>
-  <li>March 01, 2019, by Niklas Huelsenbeck:<br/>
-    Integration of new Internal Gains models,
-    HumanSensibleHeatAreaSpecific and MachinesAreaSpecific
+  <li>
+  March 01, 2019, by Niklas Huelsenbeck:<br/>
+  Integration of new Internal Gains models, HumanSensibleHeatAreaSpecific and MachinesAreaSpecific
   </li>
-  <li>September 27, 2016, by Moritz Lauster:<br/>
-    Reimplementation based on Annex60 and MSL models.
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation based on Annex60 and MSL models.
   </li>
-  <li>March, 2012, by Moritz Lauster:<br/>
-    First implementation.
+  <li>
+  March, 2012, by Moritz Lauster:<br/>
+  First implementation.
   </li>
-</ul>
-</html>"),
+ </ul>
+ </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={
   Polygon(

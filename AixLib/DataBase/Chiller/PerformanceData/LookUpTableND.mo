@@ -280,6 +280,7 @@ equation
   electrical power and condenser depend on other inputs, such as
   ambient temperature.
 </p>
+</html>", revisions="<html>
 <ul>
   <li>
     <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>

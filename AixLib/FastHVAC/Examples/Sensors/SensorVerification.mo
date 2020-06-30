@@ -122,7 +122,7 @@ equation
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
-  Example of mass flow & temperature sensor. Compare to equivalent
+  Example of mass flow &amp; temperature sensor. Compare to equivalent
   Fluid-/HVAC- based models.
 </p>
 </html>",

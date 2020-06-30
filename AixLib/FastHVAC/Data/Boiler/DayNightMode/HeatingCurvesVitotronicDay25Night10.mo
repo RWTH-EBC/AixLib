@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Data.Boiler.DayNightMode;
+﻿within AixLib.FastHVAC.Data.Boiler.DayNightMode;
 record HeatingCurvesVitotronicDay25Night10
   "Heating Curves for Vitotronic Controller, TsetDay = 25°C, TsetNight = 10°C "
   extends HeatingCurvesDayNightBaseDataDefinition(
@@ -18,7 +18,7 @@ record HeatingCurvesVitotronicDay25Night10
         10,10,10,10,10,10,10,10; 20,10,10,10,10,10,10,10,10,10]);
 
   annotation (Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
+  <font color=\"#008000\">Overview</font>
 </h4>
 <p>
   Collection of Heating Curves for Viessmann Vitotronic Controller
@@ -30,13 +30,13 @@ record HeatingCurvesVitotronicDay25Night10
   </li>
 </ul>
 <h4>
-  <span style=\"color:#008000\">Level of Development</span>
+  <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars5.png/\" alt=\"\">
+  <img src=\"modelica://HVAC/Images/stars5.png/\" alt=\"\" />
 </p>
 <h4>
-  <span style=\"color:#008000\">References</span>
+  <font color=\"#008000\">References</font>
 </h4>
 <p>
   Record is used with <a href=

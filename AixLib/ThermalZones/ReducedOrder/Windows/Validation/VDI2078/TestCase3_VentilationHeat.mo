@@ -951,16 +951,13 @@ equation
   annotation (experiment(StartTime=0,StopTime=1638000),Icon(coordinateSystem(
   preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html><p>
-  This model simulates parts of VDI2078 test case 3. The solar
-  irradiation is treated as an input. To calculate the boundary
-  conditions <a href=\"AixLib.BoundaryConditions\">AixLib</a> models are
-  used.
-</p>
+    Documentation(info="<html>
+<p>This model simulates parts of VDI2078 test case 3. The solar irradiation is
+treated as an input. To calculate the boundary conditions
+<a href=\"AixLib.BoundaryConditions\">AixLib</a> models are used.</p>
+</html>", revisions="<html>
 <ul>
-  <li>July 17 2016,&#160; by Stanley Risch:<br/>
-    Implemented.
-  </li>
+<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
 </ul>
 </html>"));
 end TestCase3_VentilationHeat;
