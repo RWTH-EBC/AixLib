@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.CHP.ModularCHPEngineMedia;
+within AixLib.DataBase.CHP.ModularCHPEngineMedia;
 package CHPCoolantPropyleneGlycolWater
   "Package with model for propylene glycol - water with constant properties"
   extends Modelica.Media.Interfaces.PartialSimpleMedium(
@@ -196,7 +196,6 @@ protected
   (Secondary Refrigerants or Coolants, Heat Transfer Fluids) for
   Indirect Systems. Paris: IIR/IIF.
 </p>
-</html>",   revisions="<html>
 <ul>
   <li>May 2, 2018 by Massimo Cimmino:<br/>
     First implementation. This function is used by <a href=
@@ -231,7 +230,6 @@ protected
   (Secondary Refrigerants or Coolants, Heat Transfer Fluids) for
   Indirect Systems. Paris: IIR/IIF.
 </p>
-</html>",   revisions="<html>
 <ul>
   <li>May 2, 2018 by Massimo Cimmino:<br/>
     First implementation. This function is used by <a href=
@@ -275,7 +273,7 @@ protected
 <p>
   The polynomial has the form
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
+<p style=\"text-align:center;font-style:italic;\">
   f = a<sub>1</sub> (x-xm)<sup>0</sup>(y-ym)<sup>0</sup> +
   a<sub>2</sub> (x-xm)<sup>0</sup>(y-ym)<sup>1</sup> + ... +
   a<sub>ny[1]</sub> (x-xm)<sup>0</sup>(y-ym)<sup>ny[1]-1</sup> + ... +
@@ -291,7 +289,6 @@ protected
   (Secondary Refrigerants or Coolants, Heat Transfer Fluids) for
   Indirect Systems. Paris: IIR/IIF.
 </p>
-</html>",   revisions="<html>
 <ul>
   <li>March 16, 2018 by Massimo Cimmino:<br/>
     First implementation. This function is used models in <a href=
@@ -326,7 +323,6 @@ protected
   (Secondary Refrigerants or Coolants, Heat Transfer Fluids) for
   Indirect Systems. Paris: IIR/IIF.
 </p>
-</html>",   revisions="<html>
 <ul>
   <li>March 16, 2018 by Massimo Cimmino:<br/>
     First implementation. This function is used by <a href=
@@ -361,7 +357,6 @@ protected
   (Secondary Refrigerants or Coolants, Heat Transfer Fluids) for
   Indirect Systems. Paris: IIR/IIF.
 </p>
-</html>",   revisions="<html>
 <ul>
   <li>March 16, 2018 by Massimo Cimmino:<br/>
     First implementation. This function is used by <a href=
@@ -379,11 +374,11 @@ annotation(preferredView="info", Documentation(info="<html><p>
   mass fraction of propylene glycol within the mixture. The dependence
   of the four properties are shown on the figure below.
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <img src=
   \"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterProperties.png\"
   border=\"1\" alt=
-  \"Relative variation of specific heat capacity with temperature\"/>
+  \"Relative variation of specific heat capacity with temperature\">
 </p>
 <p>
   The accuracy of the thermophysical properties is dependent on the
@@ -394,11 +389,11 @@ annotation(preferredView="info", Documentation(info="<html><p>
   density, <i>1.5</i> % for specific heat capacity, <i>3.2</i> % for
   thermal conductivity and <i>250</i> % for dynamic viscosity.
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <img src=
   \"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError10degC.png\"
   border=\"1\" alt=
-  \"Relative variation of specific heat capacity with temperature\"/>
+  \"Relative variation of specific heat capacity with temperature\">
 </p>
 <p>
   The figure below shows the relative error of the the four properties
@@ -407,11 +402,11 @@ annotation(preferredView="info", Documentation(info="<html><p>
   density, <i>3.0</i> % for specific heat capacity, <i>6.2</i> % for
   thermal conductivity and <i>950</i> % for dynamic viscosity.
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <img src=
   \"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError20degC.png\"
   border=\"1\" alt=
-  \"Relative variation of specific heat capacity with temperature\"/>
+  \"Relative variation of specific heat capacity with temperature\">
 </p>
 <p>
   The enthalpy is computed using the convention that <i>h=0</i> if
@@ -443,7 +438,6 @@ annotation(preferredView="info", Documentation(info="<html><p>
   AixLib.Media.Antifreeze.PropyleneGlycolWater(property_T=293.15,
   X_a=0.40)</code>
 </p>
-</html>", revisions="<html>
 <ul>
   <li>March 16, 2018, by Massimo Cimmino:<br/>
     First implementation.

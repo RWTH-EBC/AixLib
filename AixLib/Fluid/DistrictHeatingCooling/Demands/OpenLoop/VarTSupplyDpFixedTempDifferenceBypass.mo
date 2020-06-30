@@ -205,18 +205,19 @@ equation
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<p>A simple substation model using a fixed temperature difference and the actual supply temperature to calculate the mass flow rate drawn from the network. This model uses an open loop design to prescribe the required flow rate. </p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  A simple substation model using a fixed temperature difference and
+  the actual supply temperature to calculate the mass flow rate drawn
+  from the network. This model uses an open loop design to prescribe
+  the required flow rate.
+</p>
 <ul>
-<li>
-Novemver 22, 2019, by Nils Neuland:<br/>
-Revised variable names and documentation to follow guidelines.
-</li>
-<li>
-October 23, 2018, by Tobias Blacha:<br/>
-First implementation.
-</li>
+  <li>Novemver 22, 2019, by Nils Neuland:<br/>
+    Revised variable names and documentation to follow guidelines.
+  </li>
+  <li>October 23, 2018, by Tobias Blacha:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-100,-20},{100,160}})));

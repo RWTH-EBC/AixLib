@@ -19,26 +19,48 @@ extends ActiveWallBaseDataDefinition(
       // k_top: Thir attribute in logDT is T_surface according to GLUECK,
       // Bauteilaktivierung 1999, equation 7.91
       // (for heat flow up) from page 41
-    annotation (Documentation(revisions="<html>
-<ul>
-<li><i>February 13, 2014&nbsp;</i> by Ana Constantin:<br/>
-Implemented.</li>
+    annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>February 13, 2014&#160;</i> by Ana Constantin:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>",
-      info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Record for celing heating system from Uponor Comfort panel HL.</p>
-<p>Defines heat exchange properties and storage capacity of the active part of the wall.</p>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Record is used with <a href=\"EBC.HVAC.Components.ActiveWalls.Panelheating_1D_Dis\">EBC.HVAC.Components.ActiveWalls.Panelheating_1D_Dis</a></p>
-<p>Source:</p>
+      info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Record for celing heating system from Uponor Comfort panel HL.
+</p>
+<p>
+  Defines heat exchange properties and storage capacity of the active
+  part of the wall.
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Record is used with <a href=
+  \"EBC.HVAC.Components.ActiveWalls.Panelheating_1D_Dis\">EBC.HVAC.Components.ActiveWalls.Panelheating_1D_Dis</a>
+</p>
+<p>
+  Source:
+</p>
 <ul>
-<li>Product: Comfort Panel HL</li>
-<li>Manufacturer: Uponor</li>
-<li>Borschure: Geb&auml;udetechnik / TECHNISCHER GESAMTKATALOG 2013/14 / Uponor Kassettendeckensystzem Comfort Panel HL</li>
-<li>c_top_ratio: guess value 99 %; goes towards the room</li>
-<li>C_Floorheating: guess value (it shouldn&apos;t be too small, but the storage is minimal)</li>
-<li>k_isolation: guess value according to the the PE-X material</li>
+  <li>Product: Comfort Panel HL
+  </li>
+  <li>Manufacturer: Uponor
+  </li>
+  <li>Borschure: Gebäudetechnik / TECHNISCHER GESAMTKATALOG 2013/14 /
+  Uponor Kassettendeckensystzem Comfort Panel HL
+  </li>
+  <li>c_top_ratio: guess value 99 %; goes towards the room
+  </li>
+  <li>C_Floorheating: guess value (it shouldn't be too small, but the
+  storage is minimal)
+  </li>
+  <li>k_isolation: guess value according to the the PE-X material
+  </li>
 </ul>
 </html>"));
 

@@ -14,7 +14,6 @@ connector EnthalpyPort_b "Outlet enthalpy connector non-Fluid models"
   This model defines a inlet enthalpy port used within the FastHVAC
   package
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April 25, 2017</i>, by Michael Mans:<br/>
