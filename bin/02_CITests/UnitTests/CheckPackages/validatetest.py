@@ -432,7 +432,7 @@ class ValidateTest(object):
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
 		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
 		lic_counter = 0
-		'''while dym_sta_lic_available == False:
+		while dym_sta_lic_available == False:
 			print("No Dymola License is available")
 			dymola.close()
 			print("Check Dymola license after 60.0 seconds")
@@ -449,7 +449,7 @@ class ValidateTest(object):
 					print("There are currently no available Dymola licenses available. Please try again later.")
 					dymola.close()
 					exit(1)
-		print("Dymola License is available")'''
+		print("Dymola License is available")
 		
 		'''
 		if not dym_sta_lic_available:
