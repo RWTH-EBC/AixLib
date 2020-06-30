@@ -111,16 +111,15 @@ equation
           points={{8,-48},{58,-48}},
           color={170,213,255},
           arrow={Arrow.None,Arrow.Filled})}),
-    Documentation(info="<html>
-      <p>This model sets the mass flow rate of the air flow through a facade 
-      ventilation unit based on the input value, which is the power share set 
-      point of the fan.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model sets the mass flow rate of the air flow through a facade
+  ventilation unit based on the input value, which is the power share
+  set point of the fan.
+</p>
 <ul>
-<li>
-July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
-First implementation.
-</li>
+  <li>July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end SetPower;

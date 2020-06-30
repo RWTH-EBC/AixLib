@@ -227,17 +227,26 @@ equation
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
-    Documentation(revisions="<html>
- <ul>
- <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>",
-         info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 600:</p>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>March 9, 2015</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>",
+         info="<html><p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 600:
+</p>
 <ul>
-<li>From 2300 hours to 0700 hours, heat = ON if temperature &lt; 10 degC</li>
-<li> From 0700 hours to 2300 hours, heat = ON if temperature &lt; 20 degC</li>
+  <li>From 2300 hours to 0700 hours, heat = ON if temperature &lt; 10
+  degC
+  </li>
+  <li>From 0700 hours to 2300 hours, heat = ON if temperature &lt; 20
+  degC
+  </li>
 </ul>
 </html>"));
 end Case640;

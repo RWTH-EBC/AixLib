@@ -20,29 +20,23 @@ equation
     delta/10);
   annotation (
     defaultComponentName="cheSkyCov",
-    Documentation(info="<html>
-<p>
-This component constrains the interpolated sky cover between <i>0</i> and <i>1</i>.
+    Documentation(info="<html><p>
+  This component constrains the interpolated sky cover between <i>0</i>
+  and <i>1</i>.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-January 4, 2015, by Michael Wetter:<br/>
-Removed wrong unit string for input signal.
-</li>
-<li>
-October 17, 2014, by Michael Wetter:<br/>
-Changed model as
-<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">
-AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>
-send a signal between <i>0</i> and <i>1</i>.
-Added <code>min</code> and <code>max</code>
-attributes.
-</li>
-<li>
-July 14, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
+  <li>January 4, 2015, by Michael Wetter:<br/>
+    Removed wrong unit string for input signal.
+  </li>
+  <li>October 17, 2014, by Michael Wetter:<br/>
+    Changed model as <a href=
+    \"modelica://AixLib.BoundaryConditions.WeatherData.ReaderTMY3\">AixLib.BoundaryConditions.WeatherData.ReaderTMY3</a>
+    send a signal between <i>0</i> and <i>1</i>. Added <code>min</code>
+    and <code>max</code> attributes.
+  </li>
+  <li>July 14, 2010, by Wangda Zuo:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,

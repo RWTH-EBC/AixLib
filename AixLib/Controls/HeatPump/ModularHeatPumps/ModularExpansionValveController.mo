@@ -83,27 +83,28 @@ equation
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
           textString="M",
-          textStyle={TextStyle.Bold})}), Documentation(info="<html>
-<p>
-This a controller block used for modular expansion valve models as presented in 
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves</a>. The 
-controller block consists of simple PID controllers for each expansion valve and
-no further control strategy is implemented.
-However, these PID controller are only initialised and activated if no
-external controller is provided (i.g. if <code>useExt = false</code>).
+          textStyle={TextStyle.Bold})}), Documentation(info="<html><p>
+  This a controller block used for modular expansion valve models as
+  presented in <a href=
+  \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves\">
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves</a>.
+  The controller block consists of simple PID controllers for each
+  expansion valve and no further control strategy is implemented.
+  However, these PID controller are only initialised and activated if
+  no external controller is provided (i.g. if <code>useExt =
+  false</code>).
 </p>
-<h4>Implementation</h4>
+<h4>
+  Implementation
+</h4>
 <p>
-If the controller block is implemented, appropriate values must be applied
-for all parameters describing the PID controller.
+  If the controller block is implemented, appropriate values must be
+  applied for all parameters describing the PID controller.
 </p>
-</html>", revisions="<html>
 <ul>
-  <li>
-  October 17, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>"));

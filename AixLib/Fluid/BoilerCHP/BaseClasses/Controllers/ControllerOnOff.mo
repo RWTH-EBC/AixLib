@@ -59,19 +59,27 @@ algorithm
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           textString="Controller")}),
-    Documentation(revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
-appropriately</li>
-<li><i>Mai 23, 2011&nbsp;</i>by Ana Constantin:<br/>Adapted from a model of
-Kristian Huchtemann.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>Mai 23, 2011&#160;</i>by Ana Constantin:<br/>
+    Adapted from a model of Kristian Huchtemann.
+  </li>
 </ul>
 </html>",
-info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Switches the boiler off if the flow temperature is too high.</p>
+info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Switches the boiler off if the flow temperature is too high.
+</p>
 </html>"),
     experiment);
 end ControllerOnOff;
