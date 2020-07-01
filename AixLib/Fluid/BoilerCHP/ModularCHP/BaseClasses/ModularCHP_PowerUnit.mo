@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model ModularCHP_PowerUnit "Model of modular CHP power unit"
   import AixLib;
 
@@ -401,6 +401,7 @@ CHP"),  Rectangle(
   Supercharged internal combustion engines and diesel engines cannot be
   completely mapped.
 </p>
+</html>", revisions="<html>
 <ul>
   <li>
     <i>April, 2019&#160;</i> by Julian Matthes:<br/>

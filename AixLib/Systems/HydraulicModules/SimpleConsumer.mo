@@ -172,28 +172,14 @@ equation
           fillPattern=FillPattern.Solid,
           textString="CONSUMER")}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html><p>
-  Model with a simple consumer. The consumed power depends either on
-  the temperature (T_fixed or T_input) and the convective coefficient
-  kA or the power is prescribed (Q_flow_input or _Q_flow_fixed). It is
-  possible to choose between these options with the parameter
-  \"functionality\".
-</p>
+    Documentation(info="<html>
+<p>Model with a simple consumer. The consumed power depends either on the temperature (T_fixed or T_input) and the convective coefficient kA or the power is prescribed (Q_flow_input or _Q_flow_fixed). It is possible to choose between these options with the parameter &quot;functionality&quot;.</p>
+</html>", revisions="<html>
 <ul>
-  <li>October 31, 2019, by Alexander Kümpel:<br/>
-    Add more options
-  </li>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
-    Transfer from ZUGABE to AixLib
-  </li>
-  <li>
-    <i>2016-03-06 &#160;</i> by Peter Matthes:<br/>
-    added documentation
-  </li>
-  <li>
-    <i>2016-02-17 &#160;</i> by Rohit Lad:<br/>
-    implemented simple consumers model
-  </li>
+<li>October 31, 2019, by Alexander K&uuml;mpel:<br/>Add more options</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
+<li><i>2016-03-06 &nbsp;</i> by Peter Matthes:<br/>added documentation</li>
+<li><i>2016-02-17 &nbsp;</i> by Rohit Lad:<br/>implemented simple consumers model</li>
 </ul>
 </html>"));
 end SimpleConsumer;
