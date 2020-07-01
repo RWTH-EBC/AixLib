@@ -84,15 +84,31 @@ partial model PumpController "Pump controller base class"
           origin={0,-33},
           rotation=360)}),
     Diagram(coordinateSystem(preserveAspectRatio=false, initialScale=0.1)),
-    Documentation(info="<html>
-<p>Partial pump controller with states. Currently the states only provide on and off mode. This can as well be replaced by the bolean onOff signal from the pumpControllerBus.</p>
+    Documentation(info="<html><p>
+  Partial pump controller with states. Currently the states only
+  provide on and off mode. This can as well be replaced by the bolean
+  onOff signal from the pumpControllerBus.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li>2018-01-26 by Peter Matthes:<br />Changes icon to white color to mark it as base class model.</li>
-<li>2018-01-10 by Peter Matthes:<br />Removes state graph controller parts from this partial model and transfers it to the controllers where they are needed. Not all controller will need this why we decided to remove it from here.</li>
-<li>2017-12-05 by Peter Matthes<br />Adds parameter pumpParam in oder der pre-configure it for the user. Otherwise the pumpBaseRecord will be used if the user does not explicitely redeclares the parameter. That will lead to strange results because some parameter will be calculated from the these pump data.</li>
-<li>2017-11-22 by Peter Matthes<br />Initial implementation. Derived from boiler controller.</li>
+        revisions="<html><ul>
+  <li>2018-01-26 by Peter Matthes:<br/>
+    Changes icon to white color to mark it as base class model.
+  </li>
+  <li>2018-01-10 by Peter Matthes:<br/>
+    Removes state graph controller parts from this partial model and
+    transfers it to the controllers where they are needed. Not all
+    controller will need this why we decided to remove it from here.
+  </li>
+  <li>2017-12-05 by Peter Matthes<br/>
+    Adds parameter pumpParam in oder der pre-configure it for the user.
+    Otherwise the pumpBaseRecord will be used if the user does not
+    explicitely redeclares the parameter. That will lead to strange
+    results because some parameter will be calculated from the these
+    pump data.
+  </li>
+  <li>2017-11-22 by Peter Matthes<br/>
+    Initial implementation. Derived from boiler controller.
+  </li>
 </ul>
 </html>"));
 end PumpController;

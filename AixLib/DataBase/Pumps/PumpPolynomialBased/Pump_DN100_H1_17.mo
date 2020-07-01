@@ -77,22 +77,57 @@ record Pump_DN100_H1_17 "Pump with head 1 to 17m and 136.48m^3/h volume flow"
           -1.79833e-03,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
 
-  annotation(preferredView="text", Documentation(revisions="<html>
-<ul>
-<li>2018-07-02 by Luca Vedda:<br/>Generated</li>
+  annotation(preferredView="text", Documentation(revisions="<html><ul>
+  <li>2018-07-02 by Luca Vedda:<br/>
+    Generated
+  </li>
 </ul>
 </html>", info="<html>
-<p>Pump for nominal pipe diameter of 100 mm, pump head range between 1 m and 17 m and maximum volume flow rate of 136.48 m&sup3;/h.</p>
-<h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN100_H1_17.png\" alt=\"Pump Characterisistcs\"/></p>
-<p>cHQN:</p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 3.71921e-06;</span></p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, -1.14576e-05, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">-5.96302e-04, 0.00000e+00, 0.00000e+00</span></p>
-<p>cPQN:</p>
-<p><span style=\"font-family: Courier New;\">-5.72417e+01, 3.87631e-01, -4.56731e-04, 4.16084e-07, -4.47479e-11;</span></p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 3.80500e-06, 0.00000e+00, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">0.00000e+00, 7.20835e-05, 0.00000e+00, 0.00000e+00, 0.00000e+00;</span></p>
-<p><span style=\"font-family: Courier New;\">-1.79833e-03, 0.00000e+00, 0.00000e+00, 0.00000e+00, 0.00000e+00</span></p>
+<p>
+  Pump for nominal pipe diameter of 100 mm, pump head range between 1 m
+  and 17 m and maximum volume flow rate of 136.48 m³/h.
+</p>
+<h4>
+  Measurement Data
+</h4>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN100_H1_17.png\"
+  alt=\"Pump Characterisistcs\">
+</p>
+<p>
+  cHQN:
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00,
+  3.71921e-06;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00, -1.14576e-05,
+  0.00000e+00;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">-5.96302e-04, 0.00000e+00,
+  0.00000e+00</span>
+</p>
+<p>
+  cPQN:
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">-5.72417e+01, 3.87631e-01,
+  -4.56731e-04, 4.16084e-07, -4.47479e-11;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00,
+  3.80500e-06, 0.00000e+00, 0.00000e+00;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">0.00000e+00, 7.20835e-05,
+  0.00000e+00, 0.00000e+00, 0.00000e+00;</span>
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">-1.79833e-03, 0.00000e+00,
+  0.00000e+00, 0.00000e+00, 0.00000e+00</span>
+</p>
 </html>"));
 end Pump_DN100_H1_17;

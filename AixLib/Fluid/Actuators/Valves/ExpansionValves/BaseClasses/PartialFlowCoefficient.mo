@@ -46,70 +46,122 @@ partial model PartialFlowCoefficient
           fillPattern=FillPattern.Solid,
           textString="C")}),
         Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  October 16, 2017, by Mirko Engelpracht, Christian Vering:<br />
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+    Documentation(revisions="<html><ul>
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a base model for flow coefficient models that are required for 
-expansion valves. It defines some basic inputs and outputs that are
-commonly used by flow coefficient models presented in
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient</a>.
-These inputs and outputs are summarised below:<br />
+  This is a base model for flow coefficient models that are required
+  for expansion valves. It defines some basic inputs and outputs that
+  are commonly used by flow coefficient models presented in <a href=
+  \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient\">
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient</a>.
+  These inputs and outputs are summarised below:<br/>
 </p>
-<table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\" 
+<table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
-<tr>
-<th>Type</th>
-<th>Name</th> 
-<th>Comment</th> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>AVal</code></td> 
-<td>Cross-sectional area of the expansion valve</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>dInlPip</code></td> 
-<td>Diameter of the pipe at valve's inlet</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>opening</code></td> 
-<td>Valve's degree of opening</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>staInl</code></td> 
-<td>Thermodynamic state at valve's inlet conditions</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>staOut</code></td> 
-<td>Thermodynamic state at valve's out conditions</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>pInl</code></td> 
-<td>Pressure at valve's inlet</td> 
-</tr> 
-<tr>
-<td><b>input</b></td> 
-<td><code>pOut</code></td> 
-<td>Pressure at valve's outlet</td> 
-</tr> 
-<tr>
-<td><b>output</b></td> 
-<td><code>C</code></td> 
-<td>Flow coefficient</td> 
-</tr> 
+  <tr>
+    <th>
+      Type
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Comment
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>AVal</code>
+    </td>
+    <td>
+      Cross-sectional area of the expansion valve
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>dInlPip</code>
+    </td>
+    <td>
+      Diameter of the pipe at valve's inlet
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>opening</code>
+    </td>
+    <td>
+      Valve's degree of opening
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>staInl</code>
+    </td>
+    <td>
+      Thermodynamic state at valve's inlet conditions
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>staOut</code>
+    </td>
+    <td>
+      Thermodynamic state at valve's out conditions
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>pInl</code>
+    </td>
+    <td>
+      Pressure at valve's inlet
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>input</b>
+    </td>
+    <td>
+      <code>pOut</code>
+    </td>
+    <td>
+      Pressure at valve's outlet
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>output</b>
+    </td>
+    <td>
+      <code>C</code>
+    </td>
+    <td>
+      Flow coefficient
+    </td>
+  </tr>
 </table>
 </html>"));
 end PartialFlowCoefficient;

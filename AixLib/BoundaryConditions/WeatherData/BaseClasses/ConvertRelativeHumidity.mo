@@ -12,22 +12,19 @@ equation
   relHumOut = relHumIn/100;
   annotation (
     defaultComponentName="conRelHum",
-    Documentation(info="<html>
-<p>
-This component converts the relative humidity from percentage to real.
-Input is the relative humidity in percentage, as this is the data
-format that is used in the Typical Meteorological Year weather data.
+    Documentation(info="<html><p>
+  This component converts the relative humidity from percentage to
+  real. Input is the relative humidity in percentage, as this is the
+  data format that is used in the Typical Meteorological Year weather
+  data.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-October 27, 2011, by Wangda Zuo:<br/>
-Separate the checking function to CheckRelativeHumidity.
-</li>
-<li>
-July 14, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
+  <li>October 27, 2011, by Wangda Zuo:<br/>
+    Separate the checking function to CheckRelativeHumidity.
+  </li>
+  <li>July 14, 2010, by Wangda Zuo:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
