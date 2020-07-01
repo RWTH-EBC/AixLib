@@ -69,7 +69,6 @@ class ValidateTest(object):
 			raise ValueError(
                 "Value of 'tool' of constructor 'Tester' must be 'dymola', 'omc' or 'jmodelica'. Received '{}'.".format(tool))
 		
-
 	def dym_check_lic(self):
 		from dymola.dymola_interface import DymolaInterface
 		from dymola.dymola_exception import DymolaException
