@@ -8,20 +8,31 @@ record Boiler_Vitodens300W_13kW
     Q_nom=16700,
     Q_min=3600,
     eta=[0.3,1.061; 1.0,0.954]);
-  annotation (Documentation(revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i> Mai 03, 2012&nbsp;</i> by Ana Constantin:<br/>implemented.</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>Mai 03, 2012&#160;</i> by Ana Constantin:<br/>
+    implemented.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Source:</p>
+<p>
+  Source:
+</p>
 <ul>
-<li>Product: Vitodens 300 W</li>
-<li>Manufacturer: Viessmann</li>
-<li>Broschure: Vitodens 300W; 5/2010</li>
-<li>Efficiency values from Energieberater</li>
-<li>Watervolume and pressure drop from Vitodens 200-F 11kW</li>
+  <li>Product: Vitodens 300 W
+  </li>
+  <li>Manufacturer: Viessmann
+  </li>
+  <li>Broschure: Vitodens 300W; 5/2010
+  </li>
+  <li>Efficiency values from Energieberater
+  </li>
+  <li>Watervolume and pressure drop from Vitodens 200-F 11kW
+  </li>
 </ul>
 </html>"));
 end Boiler_Vitodens300W_13kW;

@@ -107,29 +107,30 @@ equation
   connect(geothermalFieldControllerHeat.valveOpening2, valveHeatStorage.y)
     annotation (Line(points={{-83.04,-30.8},{-56,-30.8},{-56,-63},{-26.4,-63}},
         color={0,0,127}));
-  annotation (experiment(StopTime=86400, Interval=10), Documentation(revisions="<html>
-<ul>
-<li>
-May 19, 2017, by Marc Baranski:<br/>
-First implementation.
-</li>
+  annotation (experiment(StopTime=86400, Interval=10), Documentation(revisions="<html><ul>
+  <li>May 19, 2017, by Marc Baranski:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Simple stand-alone model of a combined heat and cold supply system.
-The geothermal heat pump can either transport heat </p>
+<p>
+  Simple stand-alone model of a combined heat and cold supply system.
+  The geothermal heat pump can either transport heat
+</p>
 <ul>
-<li>
-from the cold to the heat storage
-</li>
-<li>
-from the cold storage to the geothermal field (heat storage disconnected)
-</li>
-<li>
-from the geothermal field to the heat storage
-</li>
+  <li>from the cold to the heat storage
+  </li>
+  <li>from the cold storage to the geothermal field (heat storage
+  disconnected)
+  </li>
+  <li>from the geothermal field to the heat storage
+  </li>
 </ul>
-<p>In the flow line of the heating circuit a boiler is connected as a peak load device.
-Consumers are modeled as sinks are sources with a constant temperature.</p>
+<p>
+  In the flow line of the heating circuit a boiler is connected as a
+  peak load device. Consumers are modeled as sinks are sources with a
+  constant temperature.
+</p>
 </html>"),
     Diagram(coordinateSystem(extent={{-160,-120},{160,80}})),
     Icon(coordinateSystem(extent={{-160,-120},{160,80}})));

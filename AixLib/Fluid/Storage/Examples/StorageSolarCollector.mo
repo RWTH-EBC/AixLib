@@ -128,21 +128,29 @@ equation
       color={0,0,127}));
   connect(const1.y, add.u1) annotation (Line(points={{78.4,24},{85.6,24},{85.6,
           25.2}}, color={0,0,127}));
-  annotation (experiment(StopTime = 172800, Interval = 60),Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>This is a simple example of a storage and a solar collector.</p>
- </html>", revisions="<html>
- <ul>
- <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
- <li><i>April 2016&nbsp;</i>
-    by Peter Remmen:<br/>
-    Replace TempAndRad model</li>
- <li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
- <li><i>13.12.2013</i>
-       by Sebastian Stinner:<br/>
-      implemented</li>
- </ul>
- </html>"));
+  annotation (experiment(StopTime = 172800, Interval = 60),Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is a simple example of a storage and a solar collector.
+</p>
+<ul>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe
+  </li>
+  <li>
+    <i>April 2016&#160;</i> by Peter Remmen:<br/>
+    Replace TempAndRad model
+  </li>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>13.12.2013</i> by Sebastian Stinner:<br/>
+    implemented
+  </li>
+</ul>
+</html>"));
 end StorageSolarCollector;

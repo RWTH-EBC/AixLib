@@ -27,17 +27,29 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{16.5, 22.5}, {49.5, -12}}, lineColor = {255, 255, 0}, fillColor = {255, 255, 0},
             fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{28.5, 22.5}, {63, -10.5}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 255},
             fillPattern =                                                                                                   FillPattern.Solid,
-            lineThickness =                                                                                                   1)}), Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>
- Model for the switching between night and day operation modes based on the simulation time.
- </p>
- <h4><font color=\"#008000\">Example Results</font></h4>
- <p><a href=\"AixLib.Utilities.Examples.TimeUtilities_test\">AixLib.Utilities.Examples.TimeUtilities_test</a> </p>
- </html>", revisions = "<html>
- <ul>
- <li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- <li><i>Mai 20, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>"));
+            lineThickness =                                                                                                   1)}), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the switching between night and day operation modes based
+  on the simulation time.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Utilities.Examples.TimeUtilities_test\">AixLib.Utilities.Examples.TimeUtilities_test</a>
+</p>
+<ul>
+  <li>
+    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>Mai 20, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>"));
 end NightMode;

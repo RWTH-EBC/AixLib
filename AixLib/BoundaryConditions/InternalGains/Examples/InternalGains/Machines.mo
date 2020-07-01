@@ -28,33 +28,85 @@ equation
   annotation (experiment(StartTime = 0, StopTime = 86400, Tolerance=1e-6, Algorithm="dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/InternalGains/Examples/Machines.mos"
                       "Simulate and plot"),
-Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>This simulation is to check the functionality of the machine models described by the internal gains. </p>
-<h4><font color=\"#008000\">Concept</font></h4>
-<p>The simulation consists of the following models:</p>
-<table summary=\"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
-<td bgcolor=\"#dcdcdc\"><p>index</p></td>
-<td bgcolor=\"#dcdcdc\"><p>model</p></td>
-</tr>
-<tr>
-<td><p>1</p></td>
-<td><p><a href=\"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_simple\">Machines_simple</a></p></td>
-</tr>
-<tr>
-<td><p>2</p></td>
-<td><p><a href=\"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_DIN18599\">Machines_DIN18599</a></p></td>
-</tr>
-<tr>
-<td><p>3</p></td>
-<td><p><a href=\"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_Avar\">Machines_Avar</a></p></td>
-</tr>
+Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This simulation is to check the functionality of the machine models
+  described by the internal gains.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The simulation consists of the following models:
+</p>
+<table summary=\"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+  <tr>
+    <td bgcolor=\"#DCDCDC\">
+      <p>
+        index
+      </p>
+    </td>
+    <td bgcolor=\"#DCDCDC\">
+      <p>
+        model
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        1
+      </p>
+    </td>
+    <td>
+      <p>
+        <a href=
+        \"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_simple\">
+        Machines_simple</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        2
+      </p>
+    </td>
+    <td>
+      <p>
+        <a href=
+        \"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_DIN18599\">
+        Machines_DIN18599</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        3
+      </p>
+    </td>
+    <td>
+      <p>
+        <a href=
+        \"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_Avar\">
+        Machines_Avar</a>
+      </p>
+    </td>
+  </tr>
 </table>
-<p><br/>Heat flow values can be displayed via the provided output. </p>
+<p>
+  <br/>
+  Heat flow values can be displayed via the provided output.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>May 31, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented, added documentation and formatted appropriately</li>
+        revisions="<html><ul>
+  <li>
+    <i>May 31, 2013&#160;</i> by Ole Odendahl:<br/>
+    Implemented, added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
 end Machines;
