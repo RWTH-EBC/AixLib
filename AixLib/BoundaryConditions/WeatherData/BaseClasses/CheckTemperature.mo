@@ -26,26 +26,23 @@ equation
 
   annotation (
     defaultComponentName="cheTem",
-    Documentation(info="<html>
-<p>
-This component checks the value of temperature.
-If the temperature is outside <code>TMin</code> and <code>TMax</code>,
-the simulation will stop with an error.
+    Documentation(info="<html><p>
+  This component checks the value of temperature. If the temperature is
+  outside <code>TMin</code> and <code>TMax</code>, the simulation will
+  stop with an error.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-October 27, 2011, by Wangda Zuo:<br/>
-Delete the unit conversion part and name it from ConvertTemperature to CheckTemperature.
-</li>
-<li>
-March 23, 2011, by Michael Wetter:<br/>
-Set <code>displayUnit</code> argument for temperature output signal.
-</li>
-<li>
-July 08, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
+  <li>October 27, 2011, by Wangda Zuo:<br/>
+    Delete the unit conversion part and name it from ConvertTemperature
+    to CheckTemperature.
+  </li>
+  <li>March 23, 2011, by Michael Wetter:<br/>
+    Set <code>displayUnit</code> argument for temperature output
+    signal.
+  </li>
+  <li>July 08, 2010, by Wangda Zuo:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,

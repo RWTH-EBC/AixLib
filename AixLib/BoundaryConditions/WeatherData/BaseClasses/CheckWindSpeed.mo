@@ -20,16 +20,13 @@ equation
 
   annotation (
     defaultComponentName="cheWinSpe",
-    Documentation(info="<html>
-<p>
-This component ensures that the wind speed is non-negative.
+    Documentation(info="<html><p>
+  This component ensures that the wind speed is non-negative.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-July 14, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
+  <li>July 14, 2010, by Wangda Zuo:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,

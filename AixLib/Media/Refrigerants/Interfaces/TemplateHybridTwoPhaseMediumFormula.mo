@@ -391,62 +391,77 @@ partial package TemplateHybridTwoPhaseMediumFormula
   algorithm
 
   end surfaceTension;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  June 6, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 6, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>",
-        info="<html>
-<p>
-This package is a <b>template</b> for <b>new refrigerant</b> models using a
-hybrid approach based on the &quot;Fast_Propane&quot; model developed by
-Sangi et al. (for detailed information, please checkout
-<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula\">
-AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula
-</a>
-). For a new refrigerant model just make a copy of this package, remove the
-&quot;partial&quot; keyword from the package and provide the information that
-is requested in the comments of the Modelica code. The following
-<b>information is requested</b>:
+        info="<html><p>
+  This package is a <b>template</b> for <b>new refrigerant</b> models
+  using a hybrid approach based on the \"Fast_Propane\" model developed
+  by Sangi et al. (for detailed information, please checkout <a href=
+  \"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula\">
+  AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula</a>
+  ). For a new refrigerant model just make a copy of this package,
+  remove the \"partial\" keyword from the package and provide the
+  information that is requested in the comments of the Modelica code.
+  The following <b>information is requested</b>:
 </p>
 <ol>
-<li><u>Fluid constants:</u> Provide basic information of the refrigerant and
-add the reference.</li>
-<li><u>Basic information:</u> Provide basic information like the refrigerant
-name and its valid fluid limits in terms of different thermodynamic state
-properties.</li>
-<li><u>Base properties:</u> Provide information about the refrigerant&apos;s
-base properties like the relation between specific enthalpy, specific internal
-energy, pressure and density.</li>
-<li><u>Helmholtz EoS:</u> Provide the formulas of the Helmholtz equation
-of state.</li>
-<li><u>Saturation state properties:</u> Provide the formulas of the
-saturation properties.</li>
-<li><u>Further thermodynamic properties:</u> Provide formulas for further
-thermodynamic properties like the thermal conductivity or surface tension.</li>
-<li><u>Fitted state properties:</u> Provide the formulas of ther further
-state properties.</li>
+  <li>
+    <u>Fluid constants:</u> Provide basic information of the
+    refrigerant and add the reference.
+  </li>
+  <li>
+    <u>Basic information:</u> Provide basic information like the
+    refrigerant name and its valid fluid limits in terms of different
+    thermodynamic state properties.
+  </li>
+  <li>
+    <u>Base properties:</u> Provide information about the refrigerant's
+    base properties like the relation between specific enthalpy,
+    specific internal energy, pressure and density.
+  </li>
+  <li>
+    <u>Helmholtz EoS:</u> Provide the formulas of the Helmholtz
+    equation of state.
+  </li>
+  <li>
+    <u>Saturation state properties:</u> Provide the formulas of the
+    saturation properties.
+  </li>
+  <li>
+    <u>Further thermodynamic properties:</u> Provide formulas for
+    further thermodynamic properties like the thermal conductivity or
+    surface tension.
+  </li>
+  <li>
+    <u>Fitted state properties:</u> Provide the formulas of ther
+    further state properties.
+  </li>
 </ol>
 <p>
-A refrigerant package inherits from <b>PartialHybridTwoPhaseMediumFormula</b>
-and provides the equations for the refrigerant. Moreover, the
-PartialHybridTwoPhaseMedium package inherits from <b>PartialMedium</b> and,
-therefore, the details of this package are described in
-<a href=\"modelica://Modelica.Media.UsersGuide\">Modelica.Media.UsersGuide
-</a>.
+  A refrigerant package inherits from
+  <b>PartialHybridTwoPhaseMediumFormula</b> and provides the equations
+  for the refrigerant. Moreover, the PartialHybridTwoPhaseMedium
+  package inherits from <b>PartialMedium</b> and, therefore, the
+  details of this package are described in <a href=
+  \"modelica://Modelica.Media.UsersGuide\">Modelica.Media.UsersGuide</a>
+  .
 </p>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
-M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">
-A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic
-Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund,
-Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press
-(Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275
+  Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
+  Müller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A
+  Medium Model for the Refrigerant Propane for Fast and Accurate
+  Dynamic Simulations</a>. In: <i>The 10th International Modelica
+  Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping University
+  Electronic Press (Linköping Electronic Conference Proceedings), S.
+  1271–1275
 </p>
 </html>"));
 end TemplateHybridTwoPhaseMediumFormula;

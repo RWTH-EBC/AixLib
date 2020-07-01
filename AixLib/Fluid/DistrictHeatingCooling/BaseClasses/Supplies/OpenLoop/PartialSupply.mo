@@ -42,18 +42,16 @@ equation
           fillColor={255,128,0},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>
-This base class provides a common interface for supply node models that 
-represent the return flow back from the network but keep the loop within
-the supply model open.
+    Documentation(info="<html><p>
+  This base class provides a common interface for supply node models
+  that represent the return flow back from the network but keep the
+  loop within the supply model open.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-March 3, 2018, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>March 3, 2018, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end PartialSupply;

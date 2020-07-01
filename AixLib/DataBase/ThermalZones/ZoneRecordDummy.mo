@@ -85,10 +85,13 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     TThresholdHeater=Modelica.Constants.eps,
     TThresholdCooler=2*Modelica.Constants.eps,
     withIdealThresholds=false);
-  annotation (Documentation(revisions="<html>
-<ul>
-<li><i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
-<a href=\"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a> Implement dummy zone record to assign this record as default parameter value, where unavoidable. </li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>
+    Implement dummy zone record to assign this record as default
+    parameter value, where unavoidable.
+  </li>
 </ul>
 </html>"));
 end ZoneRecordDummy;

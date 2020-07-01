@@ -2,13 +2,10 @@ within AixLib.Utilities;
 package Math "Library with functions such as for smoothing"
   extends Modelica.Icons.Package;
 
-annotation (preferredView="info", Documentation(info="<html>
-<p>
-This package contains blocks and functions for commonly used
-mathematical operations.
-The classes in this package augment the classes
-<a href=\"modelica://Modelica.Blocks\">
-Modelica.Blocks</a>.
+annotation (preferredView="info", Documentation(info="<html><p>
+  This package contains blocks and functions for commonly used
+  mathematical operations. The classes in this package augment the
+  classes <a href=\"modelica://Modelica.Blocks\">Modelica.Blocks</a>.
 </p>
 </html>"),
 Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},

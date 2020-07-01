@@ -12,11 +12,16 @@ record AlphaInnotec_LW80MA "Alpha Innotec LW 80 M-A"
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,
-    Documentation(revisions="<html>
-<ul>
- <li><i>Oct 14, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Transferred to AixLib.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
+    Transferred to AixLib.
+  </li>
 </ul>
 </html>", info="<html>
-<p>According to manufacturer&apos;s data which was inter- and extrapolated linearly; EN14511 </p>
+<p>
+  According to manufacturer's data which was inter- and extrapolated
+  linearly; EN14511
+</p>
 </html>"));
 end AlphaInnotec_LW80MA;

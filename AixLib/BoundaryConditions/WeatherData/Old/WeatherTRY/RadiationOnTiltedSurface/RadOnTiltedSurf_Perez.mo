@@ -382,24 +382,62 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
           lineColor={0,0,0},
           origin={0,-6},
           rotation=360)}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The <b>RadOnTiltedSurf</b> model uses output data of the <b><a href=\"AixLib.Building.Components.Weather.BaseClasses.Sun\">Sun</a></b> model and weather data weather data (beam and diffuse radiance on a horizontal surface for TRY format, or beam normal and global horizontal for TMY format) to compute total and beam radiance on a tilted surface.</p>
-<p>Input: It needs information on the height, the tilt angle and the azimut angle of the surface, the latitude of the location and the ground reflection coefficient. </p>
-<p>Output: In addition to the calculation of the irradiance on tilted surfaces the model has some output variables that are needed from other in the SunIrradiation model embedded models. </p>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
-<p>Be aware that the calculation of the total solar radiation may cause problems at simulation times close to sunset and sunrise, because at this simulation times are probably the maxima of the difference between the calculated incedent-angle and the real angle of incedence at the real irradiation-time.</p>
-<p>Another limitation is the equation of the groundreflection approximation. It is only estmated on basis of the <b><a href=\"http://www.nrel.gov/midc/srrl_bms/\">NREL</a> </b>(US National Renewable Energy Laboratory; http://www.nrel.gov/midc/srrl_bms) data for the albedo of the year 2011 and should be revised.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>RadOnTiltedSurf</b> model uses output data of the <b><a href=
+  \"AixLib.Building.Components.Weather.BaseClasses.Sun\">Sun</a></b>
+  model and weather data weather data (beam and diffuse radiance on a
+  horizontal surface for TRY format, or beam normal and global
+  horizontal for TMY format) to compute total and beam radiance on a
+  tilted surface.
+</p>
+<p>
+  Input: It needs information on the height, the tilt angle and the
+  azimut angle of the surface, the latitude of the location and the
+  ground reflection coefficient.
+</p>
+<p>
+  Output: In addition to the calculation of the irradiance on tilted
+  surfaces the model has some output variables that are needed from
+  other in the SunIrradiation model embedded models.
+</p>
+<h4>
+  <span style=\"color:#008000\">Known Limitations</span>
+</h4>
+<p>
+  Be aware that the calculation of the total solar radiation may cause
+  problems at simulation times close to sunset and sunrise, because at
+  this simulation times are probably the maxima of the difference
+  between the calculated incedent-angle and the real angle of incedence
+  at the real irradiation-time.
+</p>
+<p>
+  Another limitation is the equation of the groundreflection
+  approximation. It is only estmated on basis of the <b><a href=
+  \"http://www.nrel.gov/midc/srrl_bms/\">NREL</a></b> (US National
+  Renewable Energy Laboratory; http://www.nrel.gov/midc/srrl_bms) data
+  for the albedo of the year 2011 and should be revised.
+</p>
 </html>",
-    revisions="<html>
-<ul>
-<li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Adapted solar inputs so it cand work with both TRY and TMY weather format</li>
-<li><i>April 15, 2012&nbsp;</i> by Jerome Feldhaus:<br/>Implemented new diffuse irradiation modell from Perez Irradiation on tilted Surfaces. </li>
-<li><i>March 14, 2005&nbsp;</i> by Timo Haase:<br/>Implemented. </li>
+    revisions="<html><ul>
+  <li>
+    <i>March 23, 2015&#160;</i> by Ana Constantin:<br/>
+    Adapted solar inputs so it cand work with both TRY and TMY weather
+    format
+  </li>
+  <li>
+    <i>April 15, 2012&#160;</i> by Jerome Feldhaus:<br/>
+    Implemented new diffuse irradiation modell from Perez Irradiation
+    on tilted Surfaces.
+  </li>
+  <li>
+    <i>March 14, 2005&#160;</i> by Timo Haase:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>",
     revisions="<html>
-
-
 </html>"));
 end RadOnTiltedSurf_Perez;

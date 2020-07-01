@@ -25,32 +25,32 @@ equation
     assert(false, "Invalid choice of calculation procedure");
   end if;
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a model of a simple expansion valve that is used, for example, 
-in close-loop systems like heat pumps or chillers. It inherits from
-PartialIsenthalpicExpansionValve which inherits from 
-PartialExpansionValve. Therefore, please checkout these sub-models for 
-further information of underlying modeling approaches and 
-parameterisation:
+  This is a model of a simple expansion valve that is used, for
+  example, in close-loop systems like heat pumps or chillers. It
+  inherits from PartialIsenthalpicExpansionValve which inherits from
+  PartialExpansionValve. Therefore, please checkout these sub-models
+  for further information of underlying modeling approaches and
+  parameterisation:
 </p>
 <ul>
-<li>
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialIsenthalpicExpansionValve\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialIsenthalpicExpansionValve</a>.
-</li>
-<li>
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>.
-</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialIsenthalpicExpansionValve\">
+    AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialIsenthalpicExpansionValve</a>.
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
+    AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>.
+  </li>
 </ul>
 </html>"));
 end IsenthalpicExpansionValve;
