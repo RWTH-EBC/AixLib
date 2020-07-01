@@ -4,14 +4,12 @@ package BaseClasses
 
 
 
-  annotation (Documentation(info="<html><p>
-  This package includes BaseClasses that are only used for validation
-  causes.
-</p>
+  annotation (Documentation(info="<html>
+<p> This package includes BaseClasses that are only used for validation causes.
+ </p>
+</html>", revisions="<html>
 <ul>
-  <li>July 17 2016,&#160; by Stanley Risch:<br/>
-    Implemented.
-  </li>
+<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
 </ul>
 </html>"));
 end BaseClasses;

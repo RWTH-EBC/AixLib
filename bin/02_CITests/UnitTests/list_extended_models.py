@@ -44,7 +44,6 @@ class Extended_model(object):
 			reg_list.append(l)
 		
 		print("******************************")
-		#print(reg_list)
 		regression_models = list(set(reg_list))
 		
 		models = []

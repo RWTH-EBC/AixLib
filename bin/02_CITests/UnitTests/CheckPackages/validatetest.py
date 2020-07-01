@@ -224,8 +224,8 @@ class ValidateTest(object):
 			for subelement in WhiteList:
 				if element == subelement:
 					WhiteListModel.append(element)
+		WhiteListModel = list(set(WhiteListModel))
 		for i in WhiteListModel:
-			
 			AixLibModels.remove(i)
 		return AixLibModels
 	

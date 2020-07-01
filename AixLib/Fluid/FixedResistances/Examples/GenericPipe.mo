@@ -66,30 +66,19 @@ equation
   connect(fixedTemp.port, genericPipe.heatPort)
     annotation (Line(points={{-20,50},{0,50},{0,10}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),  Documentation(info="<html><h4>
-  <span style=\"color: #008000\">Overview</span>
-</h4>
-<p>
-  Simple example to test the model GenericPipe. The inlet temperature
-  increases in a step after 300 seconds.
-</p>
-<h4>
-  <span style=\"color: #008000\">Concept</span>
-</h4>
-<p>
-  Plot:
-</p>
+            -100},{100,100}})),  Documentation(info="<html>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Simple example to test the model GenericPipe. The inlet temperature increases in a step after 300 seconds.</p>
+<h4><span style=\"color: #008000\">Concept</span></h4>
+<p>Plot:</p>
 <ul>
-  <li>x-axis: Time
-  </li>
-  <li>y-axis: Inlet and Outlet temperature
-  </li>
+<li>x-axis: Time</li>
+<li>y-axis: Inlet and Outlet temperature</li>
 </ul>
 </html>",
-    revisions="<html><ul>
-  <li>Mai 07, 2020, by Alexander Kümpel:<br/>
-    First implementation
-  </li>
+    revisions="<html>
+<ul>
+<li>Mai 07, 2020, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>"),
     experiment(Tolerance=1e-6,
