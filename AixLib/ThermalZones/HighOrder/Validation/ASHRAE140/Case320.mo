@@ -1,0 +1,19 @@
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+model Case320
+  extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270(
+                  TSet_Heater(k=20), Tset_Cooler(k=27));
+  annotation (Documentation(revisions="<html>
+ <ul>
+ <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
+ </ul>
+ </html>", info="<html>
+<p>As described in ASHRAE Standard 140.</p>
+<p>Difference to case 270: </p>
+<ul>
+<li> Heat = ON if temperature &lt; 20 degC</li>
+<li> Cool = ON if temperature &lt; 27 degC</li>
+</ul>
+</ul>
+</ul>
+</html>"));
+end Case320;
