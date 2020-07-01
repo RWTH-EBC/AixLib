@@ -30,6 +30,8 @@ Regression_changed_overall_coverage:
     retry:
         max: 2
         when: runner_system_failure
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -60,6 +62,8 @@ Regressiontest_changed_AixLib_Airflow:
     retry:
         max: 2
         when: runner_system_failure
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -89,6 +93,8 @@ Regressiontest_changed_AixLib_BoundaryConditions:
     retry:
         max: 2
         when: runner_system_failure
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -119,6 +125,8 @@ Regressiontest_changed_AixLib_Controls:
     retry:
         max: 2
         when: runner_system_failure       
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/  
@@ -190,6 +198,8 @@ Regressiontest_changed_AixLib_Fluid:
     retry:
         max: 2
         when: runner_system_failure  
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -219,6 +229,8 @@ Regressiontest_changed_AixLib_Media:
     retry:
         max: 2
         when: runner_system_failure  
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/     
@@ -248,6 +260,8 @@ Regressiontest_changed_AixLib_Systems:
     retry:
         max: 2
         when: runner_system_failure          
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -277,6 +291,8 @@ Regressiontest_changed_AixLib_ThermalZones:
     retry:
         max: 2
         when: runner_system_failure        
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/      

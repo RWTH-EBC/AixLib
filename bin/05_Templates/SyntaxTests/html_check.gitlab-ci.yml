@@ -186,6 +186,8 @@ HTML_Check:
         paths:
             - AixLib/HTML-logfile.txt
         expire_in: 7 day 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/

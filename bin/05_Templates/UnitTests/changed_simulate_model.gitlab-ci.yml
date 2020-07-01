@@ -27,6 +27,8 @@ Simulate_Airflow_Changed_model:
             - AixLib/AixLib.Airflow-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/   
@@ -53,6 +55,8 @@ Simulate_BoundaryConditions_Changed_model:
             - AixLib/AixLib.BoundaryConditions-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/   
@@ -79,6 +83,8 @@ Simulate_Controls_Changed_model:
             - AixLib/AixLib.Controls-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/   
@@ -105,6 +111,8 @@ Simulate_Electrical_Changed_model:
             - AixLib/AixLib.Electrical-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/ 
@@ -131,6 +139,8 @@ Simulate_FastHVAC_Changed_model:
             - AixLib/AixLib.FastHVAC-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/ 
@@ -157,6 +167,8 @@ Simulate_Fluid_Changed_model:
             - AixLib/AixLib.Fluid-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/ 
@@ -183,6 +195,8 @@ Simulate_Media_Changed_model:
             - AixLib/AixLib.Media-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -235,6 +249,8 @@ Simulate_ThermalZones_Changed_model:
             - AixLib/AixLib.ThermalZones-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/

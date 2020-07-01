@@ -27,6 +27,8 @@ Check_Airflow_changed_models:
             - AixLib/AixLib.Airflow-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -53,6 +55,8 @@ Check_BoundaryConditions_changed_models:
             - AixLib/AixLib.BoundaryConditions-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -81,6 +85,8 @@ Check_Controls_changed_models:
             - AixLib/AixLib.Controls-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -107,6 +113,8 @@ Check_Electrical_changed_models:
             - AixLib/AixLib.Electrical-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -135,6 +143,8 @@ Check_FastHVAC_changed_models:
             - AixLib/AixLib.FastHVAC-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -162,6 +172,8 @@ Check_Fluid_changed_models:
             - AixLib/AixLib.Fluid-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -188,6 +200,8 @@ Check_Media_changed_models:
             - AixLib/AixLib.Media-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -213,7 +227,9 @@ Check_Media_changed_models:
 #            - AixLib/AixLib.Systems-log.txt
 #            - AixLib/AixLib.Systems-Errorlog.txt
 #        expire_in: 7 day 
-#    allow_failure: true 
+#    allow_failure: true
+#    except:
+#        - external_pull_requests
 #    only:
 #        variables:
 #            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -240,6 +256,8 @@ Check_ThermalZones_changed_models:
             - AixLib/AixLib.ThermalZones-Errorlog.txt
         expire_in: 7 day 
     allow_failure: true 
+    except:
+        - external_pull_requests
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/

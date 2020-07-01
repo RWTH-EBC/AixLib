@@ -2,6 +2,7 @@ within AixLib.Fluid.Actuators.BaseClasses.Examples;
 model EqualPercentageDerivativeCheck
   extends Modelica.Icons.Example;
 
+  
  parameter Real R = 50 "Rangeability";
  parameter Real delta = 0.01 "Value where transition occurs";
  parameter Real l = 0.001 "Leakage";
