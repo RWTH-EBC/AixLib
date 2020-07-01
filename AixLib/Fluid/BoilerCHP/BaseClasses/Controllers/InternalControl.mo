@@ -150,28 +150,50 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           textString="%name")}),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Internal control of the boiler</p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>This model is a derivation of BoilerTaktTable.</p>
-<p>There is a differentiation made between primary and secondary energy
-consumption.</p>
-<p>The primary power output can be read at the output of <b>ControlerHeater.
-</b>It is then multiplied with an efficienca factor to calculate the the
-effective heat flow that heats up the fluid in the boiler<b>.</b></p>
-<p>There are two energy meters: one for the primary energy and one for the
-secondary. </p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Internal control of the boiler
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  This model is a derivation of BoilerTaktTable.
+</p>
+<p>
+  There is a differentiation made between primary and secondary energy
+  consumption.
+</p>
+<p>
+  The primary power output can be read at the output of
+  <b>ControlerHeater.</b> It is then multiplied with an efficienca
+  factor to calculate the the effective heat flow that heats up the
+  fluid in the boiler<b>.</b>
+</p>
+<p>
+  There are two energy meters: one for the primary energy and one for
+  the secondary.
+</p>
 </html>",
-revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
-appropriately</li>
-<li><i>July 12, 2011</i> by Ana Constantin:<br/>Implemented</li>
+revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib
+  </li>
+  <li>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>July 12, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end InternalControl;

@@ -21,12 +21,12 @@ equation
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-This model computes the solar declination angle for test case 1 and 3 of
-the VDI2078 in April.
-</html>", revisions="<html>
+    Documentation(info="<html>This model computes the solar declination angle for test case 1 and 3
+of the VDI2078 in April.
 <ul>
-<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+  <li>July 17 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end SolarDeclinationAngleVDI6007;

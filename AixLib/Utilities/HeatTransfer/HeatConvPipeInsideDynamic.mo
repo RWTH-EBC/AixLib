@@ -63,13 +63,21 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{20,80},{40,-80}},      lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {182, 182, 182},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{0,80},{20,-80}},      lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{-80,80},{80,-80}},      lineColor = {0, 0, 0})}),
-                                                                                                                                                  Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>This model represents the phenomenon of heat convection inside a pipe by a flowing medium.</p>
- <p>The heat transfer coefficient at the inside could be calculated by formular from VDI-Waermeatlas or a fixed value can be choosen.</p>
- </html>", revisions = "<html>
- <ul>
- <li><i>August 11, 2017;</i> by David Jansen:<br/></li>
- </ul>
- </html>"));
+                                                                                                                                                  Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This model represents the phenomenon of heat convection inside a pipe
+  by a flowing medium.
+</p>
+<p>
+  The heat transfer coefficient at the inside could be calculated by
+  formular from VDI-Waermeatlas or a fixed value can be choosen.
+</p>
+<ul>
+  <li>
+    <i>August 11, 2017;</i> by David Jansen:<br/>
+  </li>
+</ul>
+</html>"));
 end HeatConvPipeInsideDynamic;

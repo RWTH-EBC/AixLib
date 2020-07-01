@@ -130,12 +130,26 @@ Check whether variable allCond is always 1.")}),
       Tolerance=1e-06),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/Examples/AHU.mos"
         "Simulate and plot"),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Simulation to check the behaviour of the simple Air Handling Unit models. Various possibilities for inputs are provided. </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>Temperature inputs are in Kelvin and the water load fraction is in kg(Water)/kg(Dry Air). </p>
-<p>Occupation and Schedule is a percentage value between 0 and 1.</p>
-<p>The zone parameter is needed to automatically calculate the air flow rate based on the occupation and room area.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to check the behaviour of the simple Air Handling Unit
+  models. Various possibilities for inputs are provided.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Temperature inputs are in Kelvin and the water load fraction is in
+  kg(Water)/kg(Dry Air).
+</p>
+<p>
+  Occupation and Schedule is a percentage value between 0 and 1.
+</p>
+<p>
+  The zone parameter is needed to automatically calculate the air flow
+  rate based on the occupation and room area.
+</p>
 </html>"));
 end AHU;

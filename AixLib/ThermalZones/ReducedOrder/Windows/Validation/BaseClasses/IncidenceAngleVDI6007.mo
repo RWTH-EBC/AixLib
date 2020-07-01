@@ -34,21 +34,18 @@ equation
 
   annotation (
     defaultComponentName="incAng",
-    Documentation(info="<html>
-<p>
-This component computes the solar incidence angle on a tilted surface using the
- solar hour angle and the declination angle as input.
+    Documentation(info="<html><p>
+  This component computes the solar incidence angle on a tilted surface
+  using the solar hour angle and the declination angle as input.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-Dec 7, 2010, by Michael Wetter:<br/>
-Rewrote equation in explicit form to avoid nonlinear equations in room model.
-</li>
-<li>
-May 19, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
+  <li>Dec 7, 2010, by Michael Wetter:<br/>
+    Rewrote equation in explicit form to avoid nonlinear equations in
+    room model.
+  </li>
+  <li>May 19, 2010, by Wangda Zuo:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,

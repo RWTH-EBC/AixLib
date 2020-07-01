@@ -148,38 +148,56 @@ equation
   preserveAspectRatio=false,
   extent={{-100,-100},{100,100}},
   grid={2,2})),
-  Documentation(info="<html>
-  <p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a>
-  computes transmission correction factors for the g-factor and the translucence.
-  Transmission properties of transparent
-  elements are in general dependent on the solar incidence angle. To take this
-  dependency into account, correction factors can multiplied with the solar
-  radiation. These factors should not be mistaken as calculation of solar
-  radiation on tilted surfaces, calculation of g-value or consideration of
-  sunblinds, it is an additional step. The implemented calculations are
-  defined in the German Guideline VDI 6007 Part 3 (VDI, 2015). The given model
-  is only valid for double pane windows. The guideline describes also
-  calculations for single pane and triple pane windows.</p>
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
-  Calculation of transient thermal response of rooms and buildings -
-  modelling of solar radiation.</p>
-  </html>",
-  revisions="<html>
-<ul>
-<li>
-<p><i>February 24, 2014</i> by Reza Tavakoli: </p>
-<p>Implemented. </p>
-</li>
-<li>
-<p><i>September 12, 2015 </i>by Moritz Lauster: </p>
-<p>Adapted to Annex 60 requirements. </p>
-</li>
-<li>
-<p><i>May 25, 2016 </i>by Stanley Risch:</p>
-<p>Added the correction of the translucence factor according to VDI6007 Part 3
+  Documentation(info="<html><p>
+  <a href=
+  \"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a>
+  computes transmission correction factors for the g-factor and the
+  translucence. Transmission properties of transparent elements are in
+  general dependent on the solar incidence angle. To take this
+  dependency into account, correction factors can multiplied with the
+  solar radiation. These factors should not be mistaken as calculation
+  of solar radiation on tilted surfaces, calculation of g-value or
+  consideration of sunblinds, it is an additional step. The implemented
+  calculations are defined in the German Guideline VDI 6007 Part 3
+  (VDI, 2015). The given model is only valid for double pane windows.
+  The guideline describes also calculations for single pane and triple
+  pane windows.
 </p>
-</li>
+<h4>
+  References
+</h4>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  modelling of solar radiation.
+</p>
+</html>",
+  revisions="<html><ul>
+  <li>
+    <p>
+      <i>February 24, 2014</i> by Reza Tavakoli:
+    </p>
+    <p>
+      Implemented.
+    </p>
+  </li>
+  <li>
+    <p>
+      <i>September 12, 2015</i> by Moritz Lauster:
+    </p>
+    <p>
+      Adapted to Annex 60 requirements.
+    </p>
+  </li>
+  <li>
+    <p>
+      <i>May 25, 2016</i> by Stanley Risch:
+    </p>
+    <p>
+      Added the correction of the translucence factor according to
+      VDI6007 Part 3
+    </p>
+  </li>
 </ul>
 </html>"));
 end CorrectionGTaueDoublePane;

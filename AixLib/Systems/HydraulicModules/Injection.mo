@@ -422,17 +422,38 @@ equation
           lineColor={135,135,135},
           textString="3")}),
     Diagram(coordinateSystem(extent={{-120,-120},{120,120}}, initialScale=0.1)),
-    Documentation(info="<html>
-<p>Injection circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>
-<h4><span style=\"color: #008000\">Characteristics</span></h4>
-<p>When the valve is fully opened, the consumer module is plugged into the primary hydronic circuit whereas when the valve is fully closed, the consumer is isolated from the primary hydronic circuit</p>
-<p>This model uses a pipe model to include the heat loss and insulation effects</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  Injection circuit with a replaceable pump model for the distribution
+  of hot or cold water. All sensor and actor values are connected to
+  the hydraulic bus.
+</p>
+<h4>
+  <span style=\"color: #008000\">Characteristics</span>
+</h4>
+<p>
+  When the valve is fully opened, the consumer module is plugged into
+  the primary hydronic circuit whereas when the valve is fully closed,
+  the consumer is isolated from the primary hydronic circuit
+</p>
+<p>
+  This model uses a pipe model to include the heat loss and insulation
+  effects
+</p>
 <ul>
-<li>August 09, 2018, by Alexander K&uuml;mpel:<br/>Extension from base PartioalHydraulicModuls</li>
-<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
-<li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li><i>March,2016&nbsp;</i> by Rohit Lad:<br/>Implemented</li>
+  <li>August 09, 2018, by Alexander Kümpel:<br/>
+    Extension from base PartioalHydraulicModuls
+  </li>
+  <li>Mai 30, 2018, by Alexander Kümpel:<br/>
+    Transfer from ZUGABE to AixLib
+  </li>
+  <li>2017-07-25 by Peter Matthes:<br/>
+    Renames sensors and introduces PT1 behavior for temperature
+    sensors. Adds sensors to icon.
+  </li>
+  <li>
+    <i>March,2016&#160;</i> by Rohit Lad:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end Injection;

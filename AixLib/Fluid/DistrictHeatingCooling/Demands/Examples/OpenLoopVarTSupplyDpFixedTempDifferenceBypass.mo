@@ -120,19 +120,20 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
     coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=10000, Tolerance=1e-006, __Dymola_Algorithm="Cvode"),
-    Documentation(revisions="<html>
-<ul>
-<li>
-March 17, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>March 17, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
 <p>
-This is an OpenLoop example of 
-<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpBypass\">AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpBypass</a> 
-which is a simple substation model using a fixed return temperature and the actual supply temperature to calculate the mass flow rate drawn from the network. 
-This model uses an open loop design to prescribe the required flow rate.
+  This is an OpenLoop example of <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpBypass\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpBypass</a>
+  which is a simple substation model using a fixed return temperature
+  and the actual supply temperature to calculate the mass flow rate
+  drawn from the network. This model uses an open loop design to
+  prescribe the required flow rate.
 </p>
 </html>"));
 end OpenLoopVarTSupplyDpFixedTempDifferenceBypass;
