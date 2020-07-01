@@ -48,14 +48,23 @@ equation
       Interval=3600,
       __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput,
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Simulation to test the <a href=\"AixLib.Fluid.Solar.Electric.PVSystem\">PVsystem</a> model.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to test the <a href=
+  \"AixLib.Fluid.Solar.Electric.PVSystem\">PVsystem</a> model.
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated documentation.</li>
+      revisions="<html><ul>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/>
+    Formated documentation.
+  </li>
 </ul>
 </html>"));
 end ExamplePV;

@@ -569,16 +569,22 @@ equation
         Text(
           extent={{-62,-2},{-6,-16}},
           lineColor={0,0,0},
-          textString="Children2")}), Documentation(revisions="<html>
-
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
-
- </ul>
-
- </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the envelope of the upper floor.</p>
- </html>"));
+          textString="Children2")}), Documentation(revisions="<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 10, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the envelope of the upper floor.
+</p>
+</html>"));
 end UpperFloorBuildingEnvelope;

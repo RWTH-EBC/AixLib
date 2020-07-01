@@ -14,20 +14,29 @@ record PVBaseRecord
   parameter Modelica.SIunits.Area Area
     "Area of one Panel";
 
-  annotation (Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Base data definition for photovoltaics </p>
-<h4><span style=\"color: #008000\">References</span></h4>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <p>
-Record for record used with
-<a href=\"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">
-AixLib.Fluid.Solar.Electric.PVsystem</a>
+  Base data definition for photovoltaics
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  Record for record used with <a href=
+  \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>September 01, 2014&nbsp;</i> by Xian Wu:<br/>Added documentation and formatted appropriately</li>
+      revisions="<html><ul>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
 end PVBaseRecord;

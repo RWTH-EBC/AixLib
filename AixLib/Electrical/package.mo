@@ -3,13 +3,12 @@ package Electrical "This package contains models for electric components such as
   extends Modelica.Icons.Package;
 
   annotation (
-  Documentation(info="<html>
-<p>
-This library contains electrical components to build up analog and digital circuits,
-as well as machines to model electrical motors and generators,
-especially three phase induction machines such as an asynchronous motor.
+  Documentation(info="<html><p>
+  This library contains electrical components to build up analog and
+  digital circuits, as well as machines to model electrical motors and
+  generators, especially three phase induction machines such as an
+  asynchronous motor.
 </p>
-
 </html>"),
   Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100.0,-100.0},{100.0,100.0}}), graphics={
     Rectangle(

@@ -293,57 +293,60 @@ equation
     abs(state_pT.h)*100;
 
    annotation(experiment(StopTime=6400, Tolerance=1e-006),
-      Documentation(info="<html>
-<p>
-This example models checks the implementation of the<b> refrigerant&apos;s
-thermophysical properties</b> depending on the independent variables pressure
-and temperature. Therefore, the user has first to introduce some information
-about the refrigerant and afterwards the thermophysical properties are
-calculated. The following <b>refrigerant&apos;s information</b> is required:
+      Documentation(info="<html><p>
+  This example models checks the implementation of the <b>refrigerant's
+  thermophysical properties</b> depending on the independent variables
+  pressure and temperature. Therefore, the user has first to introduce
+  some information about the refrigerant and afterwards the
+  thermophysical properties are calculated. The following
+  <b>refrigerant's information</b> is required:
 </p>
 <ol>
-<li>The <i>refrigerant package</i> that shall be tested.
-</li>
-<li>The <i>way of calculating</i> the thermophysical properties. Therefore,
-the user can choose between either (wayOfCalc = true) a slowly raising
-pressure from p<sub>min</sub> to p<sub>max</sub> and a fast pulsating
-temperature from T<sub>min</sub> to T<sub>max</sub> or (wayOfCalc = false) a
-fast pulsating pressure from p<sub>min</sub> to p<sub>max</sub> and a slowly
-raising temperature from T<sub>min</sub> to T<sub>max</sub>. In both modes,
-the overall simulating time is set to 6400 s and, hence, the slowly raising
-property will reach its maximum value after 6400 s. The fast pulsating
-property will reach its maximum value after 80 s.
-</li>
-<li>The <i>refrigerant&apos;s fluid limits</i> that are determined by the
-fitting procedure.
-</li>
+  <li>The <i>refrigerant package</i> that shall be tested.
+  </li>
+  <li>The <i>way of calculating</i> the thermophysical properties.
+  Therefore, the user can choose between either (wayOfCalc = true) a
+  slowly raising pressure from p<sub>min</sub> to p<sub>max</sub> and a
+  fast pulsating temperature from T<sub>min</sub> to T<sub>max</sub> or
+  (wayOfCalc = false) a fast pulsating pressure from p<sub>min</sub> to
+  p<sub>max</sub> and a slowly raising temperature from T<sub>min</sub>
+  to T<sub>max</sub>. In both modes, the overall simulating time is set
+  to 6400 s and, hence, the slowly raising property will reach its
+  maximum value after 6400 s. The fast pulsating property will reach
+  its maximum value after 80 s.
+  </li>
+  <li>The <i>refrigerant's fluid limits</i> that are determined by the
+  fitting procedure.
+  </li>
 </ol>
 <p>
-The following <b>refrigerant&apos;s thermophysical properties</b> are
-calculated and checked:
+  The following <b>refrigerant's thermophysical properties</b> are
+  calculated and checked:
 </p>
 <ol>
-<li>Calculation of basic properties like the specific enthalpy or density
-using pressure and temperature.</li>
-<li>Calculation of saturation properties using both pressure and temperature.
-The results of both calculations are compared to each other.</li>
-<li>Calculation of the &quot;setState&quot;-functions and comparing the
-results to the &quot;setState_pT&quot;-results.</li>
-<li>Calculation of furhter properties like the thermal conductivity or
-isothermal compressbility.</li>
+  <li>Calculation of basic properties like the specific enthalpy or
+  density using pressure and temperature.
+  </li>
+  <li>Calculation of saturation properties using both pressure and
+  temperature. The results of both calculations are compared to each
+  other.
+  </li>
+  <li>Calculation of the \"setState\"-functions and comparing the results
+  to the \"setState_pT\"-results.
+  </li>
+  <li>Calculation of furhter properties like the thermal conductivity
+  or isothermal compressbility.
+  </li>
 </ol>
 <p>
-Additionally, the &quot;setState&quot;-functions&apos; <b>absolute and
-relative errors</b> compared to the &quot;setState_pT&quot;-results are
-calculated.
+  Additionally, the \"setState\"-functions' <b>absolute and relative
+  errors</b> compared to the \"setState_pT\"-results are calculated.
 </p>
 </html>",
-revisions="<html>
-<ul>
-  <li>
-  June 13, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+revisions="<html><ul>
+  <li>June 13, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>"));

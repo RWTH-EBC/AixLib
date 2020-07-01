@@ -72,18 +72,17 @@ equation
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/PlugFlowPipeEmbedded.mos"
                       "Simulate and plot"),
     experiment(StopTime=1000, Tolerance=1e-006),
-    Documentation(info="<html>
-<p>Basic test of model
-<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbedded\">
-AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbedded</a>.
-This test includes an inlet temperature step under a constant mass flow rate.
+    Documentation(info="<html><p>
+  Basic test of model <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbedded\">
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbedded</a>.
+  This test includes an inlet temperature step under a constant mass
+  flow rate.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-September 25, 2019 by Nils Neuland:<br/>
-First implementation
-</li>
+  <li>September 25, 2019 by Nils Neuland:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end PlugFlowPipeEmbedded;

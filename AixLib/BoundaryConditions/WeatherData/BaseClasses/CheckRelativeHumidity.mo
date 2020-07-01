@@ -20,16 +20,14 @@ equation
     delta/10);
   annotation (
     defaultComponentName="cheRelHum",
-    Documentation(info="<html>
-<p>
-This component constrains the value of relative humidity to a range of <i>[0, 1]</i>.
+    Documentation(info="<html><p>
+  This component constrains the value of relative humidity to a range
+  of <i>[0, 1]</i>.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-October 27, 2011, by Wangda Zuo:<br/>
-First implementation.
-</li>
+  <li>October 27, 2011, by Wangda Zuo:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
