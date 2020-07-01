@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Media;
+within AixLib.FastHVAC.Media;
 record WaterSimple
 extends AixLib.FastHVAC.Media.BaseClasses.MediumSimple(
     rho=999.7,
@@ -9,7 +9,6 @@ extends AixLib.FastHVAC.Media.BaseClasses.MediumSimple(
   This record declares parameters that are used by models within the
   FastHVAC Package.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April 25, 2017</i>, by Michael Mans:<br/>

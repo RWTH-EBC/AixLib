@@ -15,21 +15,33 @@ equation
   connect(doorSimple.port_b, Tinside.port) annotation(Line(points = {{10.2, 12}, {24, 12}, {24, 10}, {38, 10}}, color = {191, 0, 0}));
   connect(doorSimple.Star, Tinside1.port) annotation(Line(points = {{10.2, 21.6}, {20, 21.6}, {20, 42}, {38, 42}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(Toutside1.port, doorSimple.Star1) annotation(Line(points = {{-42, 36}, {-34, 36}, {-34, 21.6}, {-22.2, 21.6}}, color = {191, 0, 0}));
-  annotation (experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.Door\">Door</a> model.</p>
- <h4><font color=\"#008000\">Concept</font></h4>
- <p>Test case for calculation of U-value</p>
- <ul>
- <li>Area of component: 10 m2</li>
- <li>Temperature difference: 20 K</li>
- <li>Test time: 1 h</li>
- </ul>
- </html>", revisions = "<html>
- <ul>
-   <li><i>April 1, 2012&nbsp;</i>
-          by Ana Constantin and Corinna Leonhard:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+  annotation (experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to test the <a href=
+  \"AixLib.Building.Components.WindowsDoors.Door\">Door</a> model.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Test case for calculation of U-value
+</p>
+<ul>
+  <li>Area of component: 10 m2
+  </li>
+  <li>Temperature difference: 20 K
+  </li>
+  <li>Test time: 1 h
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>April 1, 2012&#160;</i> by Ana Constantin and Corinna
+    Leonhard:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end DoorSimple;
