@@ -317,8 +317,8 @@ class ValidateTest(object):
 		while dym_sta_lic_available == False:
 			print("No Dymola License is available")
 			dymola.close()
-			print("Check Dymola license after 60.0 seconds")
-			time.sleep(60.0)
+			print("Check Dymola license after 180.0 seconds")
+			time.sleep(180.0)
 			### Sets the Dymola path to activate the GUI
 			if platform.system()  == "Windows":
 				dymola = DymolaInterface(showwindow=True)
@@ -326,7 +326,7 @@ class ValidateTest(object):
 				dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
 			dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
 			lic_counter = lic_counter +1 	
-			if lic_counter > 5:
+			if lic_counter > 30:
 				if dym_sta_lic_available == False:
 					print("There are currently no available Dymola licenses available. Please try again later.")
 					dymola.close()
@@ -436,7 +436,7 @@ class ValidateTest(object):
 			print("No Dymola License is available")
 			dymola.close()
 			print("Check Dymola license after 60.0 seconds")
-			time.sleep(60.0)
+			time.sleep(180.0)
 			### Sets the Dymola path to activate the GUI
 			if platform.system()  == "Windows":
 				dymola = DymolaInterface(showwindow=True)
@@ -444,7 +444,7 @@ class ValidateTest(object):
 				dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
 			dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
 			lic_counter = lic_counter +1 	
-			if lic_counter > 5:
+			if lic_counter > 30:
 				if dym_sta_lic_available == False:
 					print("There are currently no available Dymola licenses available. Please try again later.")
 					dymola.close()
