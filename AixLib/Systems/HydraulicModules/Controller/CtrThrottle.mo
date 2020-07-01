@@ -103,12 +103,20 @@ equation
           textString="Control")}),
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
-    Documentation(revisions="<html>
-<ul>
-<li>January 22, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+    Documentation(revisions="<html><ul>
+  <li>January 22, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for Throttle and ThrottlePump circuit that is based on a PID controller. The controlled variable needs to be connected to Tact.</p>
-<p>If the valve is fully closed, the pump will switch off. The pump frequency is constant, if pump is on</p>
+<p>
+  Simple controller for Throttle and ThrottlePump circuit that is based
+  on a PID controller. The controlled variable needs to be connected to
+  Tact.
+</p>
+<p>
+  If the valve is fully closed, the pump will switch off. The pump
+  frequency is constant, if pump is on
+</p>
 </html>"));
 end CtrThrottle;

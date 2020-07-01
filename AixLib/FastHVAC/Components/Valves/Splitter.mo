@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.Valves;
+within AixLib.FastHVAC.Components.Valves;
 model Splitter
 
   /* *******************************************************************
@@ -47,7 +47,7 @@ equation
   <span style=\"color:#008000\">Level of Development</span>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\">
 </p>
 <h4>
   <span style=\"color:#008000\">Concept</span>

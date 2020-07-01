@@ -11,16 +11,22 @@ extends Modelica.Icons.Record;
   parameter SI.Temperature maxTReturn "Maximum return temperature";
   parameter SI.Length DPipe "Outlet pipe diameter";
 
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Base data record for combined heat and power generators (CHP). </p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Base data record for combined heat and power generators (CHP).
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>June 27, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
-formatted appropriately</li>
+        revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
 end CHPBaseDataDefinition;

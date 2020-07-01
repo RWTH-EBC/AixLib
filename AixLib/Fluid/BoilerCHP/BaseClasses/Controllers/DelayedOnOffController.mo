@@ -345,33 +345,54 @@ equation
         fillPattern=FillPattern.Solid,
         textString=
                "On/Off")}),
-    Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>This is model is the decision maker in the CHP model. According to different
-conditions and timings it decides if the CHP can be turned on or off.</p>
-<h4><font color=\"#008000\">Concept</font></h4>
-<p>The following control decisions are implemented:</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is model is the decision maker in the CHP model. According to
+  different conditions and timings it decides if the CHP can be turned
+  on or off.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following control decisions are implemented:
+</p>
 <ul>
-<li>Switch On when the flow temperature is lower than a setpoint.</li>
-<li>Switch Off when the CHP should work in a range lower than its minimum
-allowable capacity.</li>
-<li>Allow the CHP to be switched On only if it was Off for more than a certain
-amount of time (delay) or it was On beforehand.</li>
-<li>Allow the CHP to be switched Off only if it was On for more than a certain
-amount of time (delay) or it was Off beforehand. </li>
-<li>Emergency measures such as maximum allowable flow and return temperatures
-are implemented.</li>
+  <li>Switch On when the flow temperature is lower than a setpoint.
+  </li>
+  <li>Switch Off when the CHP should work in a range lower than its
+  minimum allowable capacity.
+  </li>
+  <li>Allow the CHP to be switched On only if it was Off for more than
+  a certain amount of time (delay) or it was On beforehand.
+  </li>
+  <li>Allow the CHP to be switched Off only if it was On for more than
+  a certain amount of time (delay) or it was Off beforehand.
+  </li>
+  <li>Emergency measures such as maximum allowable flow and return
+  temperatures are implemented.
+  </li>
 </ul>
 </html>",
-revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Variable names
-updated and merged with AixLib</li>
-<li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted
-documentation appropriately</li>
-<li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
+revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Variable names updated and merged with AixLib
+  </li>
+  <li>
+    <i>January 23, 2014&#160;</i> by Pooyan Jahangiri:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>January 31, 2011</i> by Pooyan Jahangiri:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end DelayedOnOffController;

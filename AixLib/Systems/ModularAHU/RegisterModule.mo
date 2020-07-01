@@ -376,12 +376,23 @@ equation
           thickness=1)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{100,
             120}})),
-    Documentation(info="<html>
-<p>The RegisterModule is a model for heating and cooling registers in air-handling units. It includes a simple heat exchanger and a replaceable hydraulic system (HydraulicModules) for the heat/cold supply with e.g. water. The Icon of the hydraulic circuit can be selected as well.</p>
-<p>In order to communicate sensor measurements and actuator signals, the registerBus is used. The air temperature sensor signal is multiplied with a first order element to simulate the dynamic behavior of the sensors.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  The RegisterModule is a model for heating and cooling registers in
+  air-handling units. It includes a simple heat exchanger and a
+  replaceable hydraulic system (HydraulicModules) for the heat/cold
+  supply with e.g. water. The Icon of the hydraulic circuit can be
+  selected as well.
+</p>
+<p>
+  In order to communicate sensor measurements and actuator signals, the
+  registerBus is used. The air temperature sensor signal is multiplied
+  with a first order element to simulate the dynamic behavior of the
+  sensors.
+</p>
 <ul>
-<li>Januar 09, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+  <li>Januar 09, 2019, by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end RegisterModule;

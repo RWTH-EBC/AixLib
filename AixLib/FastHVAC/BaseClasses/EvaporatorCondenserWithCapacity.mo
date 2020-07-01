@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.BaseClasses;
+within AixLib.FastHVAC.BaseClasses;
 model EvaporatorCondenserWithCapacity
   extends AixLib.FastHVAC.Interfaces.TwoPortHeatMassExchanger( workingFluid(m_fluid=m_fluid,
     medium=medium));
@@ -230,16 +230,22 @@ equation
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           visible=not is_con)}),
-  Documentation(info="<html>
-  <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>Evaporator/Condenser model adapted to FastHAVC library.<br/> 
-  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity\">AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity</a>. It includes heat losses to the environment. </p>
-  </html>",
+  Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Evaporator/Condenser model adapted to FastHAVC library.<br/>
+  This model is based on the Fluid model <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity\">
+  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity</a>.
+  It includes heat losses to the environment.
+</p>
+</html>",
   revisions="<html><ul>
-    <li>
+  <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
-    Moved into AixLib 
-    </li>
-  </ul>
-  </html>"));
+    Moved into AixLib
+  </li>
+</ul>
+</html>"));
 end EvaporatorCondenserWithCapacity;

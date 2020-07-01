@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.CHP.ModularCHPEngineData;
+within AixLib.DataBase.CHP.ModularCHPEngineData;
 record CHP_Vitoblock200_EM5_13 "Noch nicht möglich, da Brennwert-Nutzung(T_ExhPowUniOut=?<90°C) Ansonsten aktuell"
   extends AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord(
     SIEngine=true,

@@ -71,20 +71,41 @@ equation
   end for;
 
 annotation (
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This model computes the transmission correction factors for solar radiation through a double pane window depoending on the incidence angle, based on the VDI 6007_Part 3.</p>
-<p>The correction factors are calculated for the transmitted total and diffuse( cloudy sky) solar radiation, and the reflected radiation from the groung. </p>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
-<p>The model is directly paramtrized for a double pane window.</p>
-<h4><span style=\"color:#008000\">References</span></h4>
-<p>transmission correction factors (CORg) are calculated based on :</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This model computes the transmission correction factors for solar
+  radiation through a double pane window depoending on the incidence
+  angle, based on the VDI 6007_Part 3.
+</p>
+<p>
+  The correction factors are calculated for the transmitted total and
+  diffuse( cloudy sky) solar radiation, and the reflected radiation
+  from the groung.
+</p>
+<h4>
+  <span style=\"color:#008000\">Known Limitations</span>
+</h4>
+<p>
+  The model is directly paramtrized for a double pane window.
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  transmission correction factors (CORg) are calculated based on :
+</p>
 <ul>
-<li>VDI 6007_part3</li>
+  <li>VDI 6007_part3
+  </li>
 </ul>
 </html>",
-    revisions="<html>
-<p><i>February 24, 2014</i> by Reza Tavakoli:</p>
-<p>implemented </p>
+    revisions="<html><p>
+  <i>February 24, 2014</i> by Reza Tavakoli:
+</p>
+<p>
+  implemented
+</p>
 </html>"));
 end CorG_VDI6007;
