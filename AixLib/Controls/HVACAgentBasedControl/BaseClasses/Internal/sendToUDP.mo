@@ -16,13 +16,11 @@ algorithm
     pkg,
     dataSize);
   dummy2 := dummy;
-  annotation (Documentation(info="<html>The function was copied from the Modelica_DeviceDrivers library and
-changed to the degree that the variable \"port\" is no longer of the type
-Integer but Real instead.
+  annotation (Documentation(info="<html>
+The function was copied from the Modelica_DeviceDrivers library and changed to the degree that the variable \"port\" is no longer of the type Integer but Real instead.
+</html>", revisions="<html>
 <ul>
-  <li>November 2016: Adapted from Modelica_DeviceDrivers by Felix
-  Bünning
-  </li>
+<li>November 2016: Adapted from Modelica_DeviceDrivers by Felix B&uuml;nning</li>
 </ul>
 </html>"));
 end sendToUDP;

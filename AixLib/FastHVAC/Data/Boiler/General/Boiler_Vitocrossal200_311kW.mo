@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Data.Boiler.General;
+﻿within AixLib.FastHVAC.Data.Boiler.General;
 record Boiler_Vitocrossal200_311kW
   "Gas-fired condensing boiler Viessmann Vitocrossal200 311kW"
   extends BoilerTwoPointBaseDataDefinition(
@@ -24,13 +24,13 @@ record Boiler_Vitocrossal200_311kW
 </ul>
 </html>", info="<html>
 <h4>
-  <span style=\"color:#008000\">Level of Development</span>
+  <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars5.png\" alt=\"\">
+  <img src=\"modelica://HVAC/Images/stars5.png\" alt=\"\" />
 </p>
 <h4>
-  <span style=\"color:#008000\">Concept</span>
+  <font color=\"#008000\">Concept</font>
 </h4>
 <p>
   3 efficiencies are given in the TechDoc.
@@ -48,7 +48,7 @@ record Boiler_Vitocrossal200_311kW
   the average of the first two efficiencies was used.
 </p>
 <h4>
-  <span style=\"color:#008000\">References</span>
+  <font color=\"#008000\">References</font>
 </h4>
 <p>
   Record is used with <a href=
