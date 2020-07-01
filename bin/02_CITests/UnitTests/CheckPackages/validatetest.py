@@ -83,9 +83,7 @@ class ValidateTest(object):
 		else:
 			print("Dymola License is available")
 	
-	
-	
-	
+		
 	''' Write a new Whitelist with all models in IBPSA Library of those models who have not passed the Check Test'''
 	def _WriteWhiteList(self):
 		#_listAllModel
