@@ -292,8 +292,7 @@ class ValidateTest(object):
 						ModelList.append(model)
 		return ModelList
 		
-	
-	''' Check models and return a Error Log, if the check failed '''
+		''' Check models and return a Error Log, if the check failed '''
 	def _CheckModelAixLib(self):
 		from dymola.dymola_interface import DymolaInterface
 		from dymola.dymola_exception import DymolaException
