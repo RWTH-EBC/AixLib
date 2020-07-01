@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.SimpleCompressors.CompressionProcesses;
+within AixLib.Fluid.Movers.Compressors.SimpleCompressors.CompressionProcesses;
 model RotaryCompression
   "Model that describes the compression process of a rotary compressor"
   extends BaseClasses.PartialCompression;
@@ -52,50 +52,56 @@ equation
   //
   heatPort.Q_flow = Q_flow_ref-PEle;
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a model describing the compression process of a rolling piston 
-type rotary (i.e. rotary) compressor. The model is based on a grey-box 
-approach and, therefore, it inherits from 
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
-Consequently, the model uses three efficiencies that must be redefined
-by the User:
-</p> 
+  This is a model describing the compression process of a rolling
+  piston type rotary (i.e. rotary) compressor. The model is based on a
+  grey-box approach and, therefore, it inherits from <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+  AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
+  Consequently, the model uses three efficiencies that must be
+  redefined by the User:
+</p>
 <ul>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
-Overall engine efficiency</a></li>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
-Overall isentropic efficiency</a></li>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
-Overall volumetric efficiency</a></li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
+    Overall engine efficiency</a>
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
+    Overall isentropic efficiency</a>
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
+    Overall volumetric efficiency</a>
+  </li>
 </ul>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-In the following, some general references are given for information about
-the compression process:
+  In the following, some general references are given for information
+  about the compression process:
 </p>
 <p>
-W. Eifler, E. Schlücker, U. Spicher and G. Will (2009): 
-<a href=\"http://dx.doi.org/10.1007/978-3-8348-9302-4\">
-Küttner Kolbenmaschinen: Kolbenpumpen, Kolbenverdichter, Brennkraftmaschinen
-(in German)</a>. Publisher: <i>Vieweg + Teubner</i>
+  W. Eifler, E. Schlücker, U. Spicher and G. Will (2009): <a href=
+  \"http://dx.doi.org/10.1007/978-3-8348-9302-4\">Küttner
+  Kolbenmaschinen: Kolbenpumpen, Kolbenverdichter, Brennkraftmaschinen
+  (in German)</a>. Publisher: <i>Vieweg + Teubner</i>
 </p>
 <p>
-P.C. Hanlon (2011): 
-<a href=\"https://apvgn.pt/wp-content/uploads/compressor_handbook_hanlon.pdf\">
-Compressor Handbook</a>. Publisher: <i>McGraw-Hill</i>
+  P.C. Hanlon (2011): <a href=
+  \"https://apvgn.pt/wp-content/uploads/compressor_handbook_hanlon.pdf\">Compressor
+  Handbook</a>. Publisher: <i>McGraw-Hill</i>
 </p>
 </html>"), Icon(graphics={
         Ellipse(

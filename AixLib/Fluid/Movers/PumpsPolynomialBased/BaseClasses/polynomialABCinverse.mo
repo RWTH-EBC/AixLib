@@ -20,12 +20,25 @@ algorithm
   else
    x := -p2;
   end if;
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>2017-11-16 by Peter Matthes:<br />Implemented</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>2017-11-16 by Peter Matthes:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>This function is used in the Zugabe.Fluid.Movers.Pump model. It depends on the correct order of the coefficients in c and the respective assignment of y and z. For the computation of n = f(Q,H), for example z must be assigned H and y = Q in m3/h. The result will be the pump speed in revolutions/min.</p>
-<p>Be aware that the function will not check if the result is a positive number. Negative results have no sensible physical meaning in this case. There are two solutions of quadratic polynomial that can be calculated with the so-called p-q-formula. The function will take the larger value of the two soutions as a result.</p>
+<p>
+  This function is used in the Zugabe.Fluid.Movers.Pump model. It
+  depends on the correct order of the coefficients in c and the
+  respective assignment of y and z. For the computation of n = f(Q,H),
+  for example z must be assigned H and y = Q in m3/h. The result will
+  be the pump speed in revolutions/min.
+</p>
+<p>
+  Be aware that the function will not check if the result is a positive
+  number. Negative results have no sensible physical meaning in this
+  case. There are two solutions of quadratic polynomial that can be
+  calculated with the so-called p-q-formula. The function will take the
+  larger value of the two soutions as a result.
+</p>
 </html>"));
 end polynomialABCinverse;
