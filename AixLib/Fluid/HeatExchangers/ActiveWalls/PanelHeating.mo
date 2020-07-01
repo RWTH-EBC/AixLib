@@ -262,30 +262,63 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
           color={255,0,0},
           smooth=Smooth.None,
           arrow={Arrow.Filled,Arrow.None})}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Model for floor heating, with one pipe running through the whole floor.</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The assumption is made that there is one pipe that runs thorugh the whole floor. Which means that a discretisation of the floor heating is done, the discretisation elements will be connected in series: the flow temperature of one element is the return temperature of the element before.</p>
-<p>The pressure drop is calculated at the end for the whole length of the pipe.</p>
-<h4><span style=\"color:#008000\">Reference</span></h4>
-<p>Source:</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for floor heating, with one pipe running through the whole
+  floor.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The assumption is made that there is one pipe that runs thorugh the
+  whole floor. Which means that a discretisation of the floor heating
+  is done, the discretisation elements will be connected in series: the
+  flow temperature of one element is the return temperature of the
+  element before.
+</p>
+<p>
+  The pressure drop is calculated at the end for the whole length of
+  the pipe.
+</p>
+<h4>
+  <span style=\"color:#008000\">Reference</span>
+</h4>
+<p>
+  Source:
+</p>
 <ul>
-<li>Bernd Glueck, Bauteilaktivierung 1999, Page 41</li>
+  <li>Bernd Glueck, Bauteilaktivierung 1999, Page 41
+  </li>
 </ul>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a></p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a>
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>February 06, 2017&nbsp;</i> by Philipp Mehrfeld:<br/>
-Use kTop and kDown instead of k_insulation. Naming according to AixLib standards.</li>
-<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>
-Uses components from MSL</li>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
-Added documentation.</li>
+        revisions="<html><ul>
+  <li>
+    <i>February 06, 2017&#160;</i> by Philipp Mehrfeld:<br/>
+    Use kTop and kDown instead of k_insulation. Naming according to
+    AixLib standards.
+  </li>
+  <li>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>November 06, 2014&#160;</i> by Ana Constantin:<br/>
+    Added documentation.
+  </li>
 </ul>
 </html>"));
 end PanelHeating;
