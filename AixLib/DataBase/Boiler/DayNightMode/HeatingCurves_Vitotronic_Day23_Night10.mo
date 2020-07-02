@@ -17,27 +17,40 @@ record HeatingCurves_Vitotronic_Day23_Night10
         31.25,32.5; 5,15,16.5,18,19,20,20.5,21,22,23; 10,10,10,10,10,10,10,10,
         10,10; 15,10,10,10,10,10,10,10,10,10; 20,10,10,10,10,10,10,10,10,10]);
 
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Collection of Heating Curves for Viessmann Vitotronic Controller</p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Collection of Heating Curves for Viessmann Vitotronic Controller
+</p>
 <ul>
-<li>Set temperature day: 23&deg;C</li>
-<li>Set temperature night: 10&deg;C</li>
+  <li>Set temperature day: 23°C
+  </li>
+  <li>Set temperature night: 10°C
+  </li>
 </ul>
-<p>Source:</p>
+<p>
+  Source:
+</p>
 <ul>
-<li>Product: Vitotronic 200</li>
-<li>Manufacturer: Viessmann</li>
-<li>Broschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter,
-digitaler Kessel- und Heizkreisregelung; 7/2002</li>
+  <li>Product: Vitotronic 200
+  </li>
+  <li>Manufacturer: Viessmann
+  </li>
+  <li>Broschure: VITOTRONIC 200 - Heizungsanlage mit
+  witterungsgefuehrter, digitaler Kessel- und Heizkreisregelung; 7/2002
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
-formatted appropriately</li>
+      revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>July 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
 end HeatingCurves_Vitotronic_Day23_Night10;

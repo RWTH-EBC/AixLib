@@ -35,19 +35,17 @@ expandable connector ModularExpansionValveControlBus
     "Array of expansion valves' current manipulated variables (openings)"
     annotation(Dialog(tab="Expansion Valves",group="Manipulated signals"));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 25, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This connector is a base connector used for modular expansion valves and 
-contains typical variables that may be needed in the modular expansion 
-valve models.
+  This connector is a base connector used for modular expansion valves
+  and contains typical variables that may be needed in the modular
+  expansion valve models.
 </p>
 </html>"));
 end ModularExpansionValveControlBus;

@@ -1,0 +1,26 @@
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
+stages:
+    - CheckSettings
+   
+
+    
+Configuration_Check:
+    stage: CheckSettings
+    only:
+        - /^feature\/*/
+    services:
+        -  docker
+    before_script:
+        - sudo apt-get install jq -y
+    script:
+       - sudo chmod +x bin/06_Configfiles/showMergeRequest.sh
+       - git config --global user.email "${GITLAB_USER_EMAIL}"
+       - git config --global user.name  "${GITLAB_USER_NAME}" 
+       - bin/06_Configfiles/showMergeRequest.sh
+ 
+    
+    only:
+        variables:
+            - $CI_COMMIT_REF_NAME == $TARGET_BRANCH  
