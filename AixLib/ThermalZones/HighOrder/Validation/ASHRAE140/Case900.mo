@@ -3,7 +3,9 @@ model Case900
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
                                       Room(wallTypes(OW=
             AixLib.DataBase.Walls.ASHRAE140.OW_Case900(), groundPlate_upp_half=
-            AixLib.DataBase.Walls.ASHRAE140.FL_Case900())));
+            AixLib.DataBase.Walls.ASHRAE140.FL_Case900())),
+    ReferenceHeatingLoad(table=[900,1170,2041]),
+    ReferenceCoolingLoad(table=[900,-3415,-2132]));
   annotation (Documentation(info="<html>
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 600: </p>

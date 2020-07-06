@@ -5,7 +5,9 @@ model Case300
     TSet_Heater(k=19.9999),
     Source_InternalGains(k=0),
     AirExchangeRate(k=0),
-    Room(eps_out=0.1, absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09));
+    Room(eps_out=0.1, absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09),
+    ReferenceHeatingLoad(table=[300,4761,5964]),
+    ReferenceCoolingLoad(table=[300,-7100,-4302]));
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>

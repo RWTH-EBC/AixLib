@@ -1,7 +1,9 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case230
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220(
-                                      AirExchangeRate(k=0.822));
+                                      AirExchangeRate(k=0.822),
+    ReferenceHeatingLoad(table=[230,10376,12243]),
+    ReferenceCoolingLoad(table=[230,-1139,-454]));
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>

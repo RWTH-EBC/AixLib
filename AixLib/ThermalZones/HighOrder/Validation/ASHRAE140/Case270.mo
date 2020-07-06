@@ -17,7 +17,9 @@ model Case270
       outerWall_West(use_shortWaveRadIn=true),
       outerWall_North(use_shortWaveRadIn=true),
       outerWall_East(use_shortWaveRadIn=true),
-      floor(use_shortWaveRadIn=true)));
+      floor(use_shortWaveRadIn=true)),
+    ReferenceHeatingLoad(table=[270,4510,5920]),
+    ReferenceCoolingLoad(table=[270,-10350,-7528]));
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>

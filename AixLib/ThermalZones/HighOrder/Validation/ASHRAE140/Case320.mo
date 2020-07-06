@@ -1,7 +1,9 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case320
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270(
-                  TSet_Heater(k=20), Tset_Cooler(k=27));
+                  TSet_Heater(k=20), Tset_Cooler(k=27),
+    ReferenceHeatingLoad(table=[320,3859,5141]),
+    ReferenceCoolingLoad(table=[320,-7304,-5061]));
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>

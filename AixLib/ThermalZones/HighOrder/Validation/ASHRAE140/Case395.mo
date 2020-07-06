@@ -1,7 +1,10 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case395
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case400(
-                  Room(outerWall_South(withWindow=false)));
+    ReferenceHeatingLoad(
+      table=[395,4799,5835]),
+    Room(outerWall_South(withWindow=false)),
+    ReferenceCoolingLoad(table=[395,-16,0]));
   parameter Real coeff=Room.outerWall_South.solar_absorptance
     "Weight coefficient";
   annotation (Documentation(revisions="<html>

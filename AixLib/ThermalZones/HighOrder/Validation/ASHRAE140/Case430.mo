@@ -9,7 +9,9 @@ model Case430
       ceiling(solar_absorptance=0.6),
       outerWall_West(solar_absorptance=0.6),
       outerWall_North(solar_absorptance=0.6),
-      outerWall_East(solar_absorptance=0.6)));
+      outerWall_East(solar_absorptance=0.6)),
+    ReferenceCoolingLoad(table=[430,-875,-422]),
+    ReferenceHeatingLoad(table=[430,5429,7827]));
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>

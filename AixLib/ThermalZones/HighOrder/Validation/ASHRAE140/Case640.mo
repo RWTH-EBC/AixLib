@@ -201,6 +201,20 @@ model Case640
     table=SetTempProfile.Profile,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{27,-75},{14,-62}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoad(tableOnFile=false,
+      table=[640,-7811,-5952])
+    "AnnualCoolingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualCoolingLoad, {3}=upperLimit AnnualCoolingLoad"
+    annotation (Placement(transformation(extent={{29,141},{49,161}})));
+  BaseClasses.checkResultsAccordingToASHRAE
+    checkResultsAccordingToASHRAECooling(endTime=31536000)
+    annotation (Placement(transformation(extent={{90,140},{110,160}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoad(tableOnFile=false,
+      table=[640,2751,3803])
+    "AnnualHeatingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualHeatingLoad, {3}=upperLimit AnnualHeatingLoad"
+    annotation (Placement(transformation(extent={{30,103},{50,123}})));
+  BaseClasses.checkResultsAccordingToASHRAE
+    checkResultsAccordingToASHRAEHeating(endTime=31536000)
+    annotation (Placement(transformation(extent={{88,105},{108,125}})));
 equation
     //Connections for input solar model
   for i in 1:5 loop
@@ -324,6 +338,24 @@ equation
       Line(points={{121,-56},{118.5,-56},{118.5,-56},{121,-56}}, color={0,0,127}));
   connect(idealHeaterCooler.setPointHeat, Source_TsetHeat.y[1]) annotation (
       Line(points={{-3.8,-36.2},{-3.8,-68.5},{13.35,-68.5}}, color={0,0,127}));
+  connect(ReferenceCoolingLoad.y[1], checkResultsAccordingToASHRAECooling.lowerLimit)
+    annotation (Line(points={{50,151},{59,151},{59,157},{90,157},{90,157}},
+        color={0,0,127}));
+  connect(ReferenceCoolingLoad.y[2], checkResultsAccordingToASHRAECooling.upperLimit)
+    annotation (Line(points={{50,151},{70,151},{70,155},{90,155}}, color={0,0,
+          127}));
+  connect(ReferenceHeatingLoad.y[1], checkResultsAccordingToASHRAEHeating.lowerLimit)
+    annotation (Line(points={{51,113},{60,113},{60,122},{88,122}}, color={0,0,
+          127}));
+  connect(ReferenceHeatingLoad.y[2], checkResultsAccordingToASHRAEHeating.upperLimit)
+    annotation (Line(points={{51,113},{71,113},{71,120},{88,120}}, color={0,0,
+          127}));
+  connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeating.modelResults)
+    annotation (Line(points={{121,64},{121,97},{82,97},{82,108.6},{88,108.6}},
+        color={0,0,127}));
+  connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECooling.modelResults)
+    annotation (Line(points={{121,48},{124,48},{124,132},{78,132},{78,143.6},{
+          90,143.6}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,

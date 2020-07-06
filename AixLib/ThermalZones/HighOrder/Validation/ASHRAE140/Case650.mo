@@ -194,6 +194,13 @@ model Case650
     table=SetTempProfile.Profile,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-36,-71},{-23,-58}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoad(tableOnFile=false,
+      table=[650,-6545,-4816])
+    "AnnualCoolingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualCoolingLoad, {3}=upperLimit AnnualCoolingLoad"
+    annotation (Placement(transformation(extent={{32,133},{52,153}})));
+  BaseClasses.checkResultsAccordingToASHRAE
+    checkResultsAccordingToASHRAECooling(endTime=31536000)
+    annotation (Placement(transformation(extent={{93,132},{113,152}})));
 equation
     //Connections for input solar model
   for i in 1:5 loop
@@ -304,6 +311,15 @@ equation
           -6.1,70.7475},{-21,70.7475},{-21,-24.5},{-28.35,-24.5}}, color={0,0,127}));
   connect(idealHeaterCooler.setPointCool, Source_TsetCool.y[1]) annotation (
       Line(points={{-8.4,-36.2},{-8.4,-64.5},{-22.35,-64.5}}, color={0,0,127}));
+  connect(ReferenceCoolingLoad.y[1], checkResultsAccordingToASHRAECooling.lowerLimit)
+    annotation (Line(points={{53,143},{72.5,143},{72.5,149},{93,149}}, color={0,
+          0,127}));
+  connect(ReferenceCoolingLoad.y[2], checkResultsAccordingToASHRAECooling.upperLimit)
+    annotation (Line(points={{53,143},{73,143},{73,147},{93,147}}, color={0,0,
+          127}));
+  connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECooling.modelResults)
+    annotation (Line(points={{121,48},{124,48},{124,117},{83,117},{83,135.6},{
+          93,135.6}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,

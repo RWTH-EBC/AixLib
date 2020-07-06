@@ -15,7 +15,9 @@ model Case400
     floor(use_shortWaveRadIn=false)),
     TransmittedRad(y=0),
     Source_InternalGains(k=0),
-    AirExchangeRate(k=0));
+    AirExchangeRate(k=0),
+    ReferenceHeatingLoad(table=[400,6900,8770]),
+    ReferenceCoolingLoad(table=[400,-61,0]));
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
