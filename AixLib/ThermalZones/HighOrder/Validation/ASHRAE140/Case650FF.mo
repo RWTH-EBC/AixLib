@@ -169,6 +169,18 @@ model Case650FF
     annotation (Placement(transformation(extent={{90,49},{99,58}})));
   Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature "in degC"
     annotation (Placement(transformation(extent={{110,44},{130,64}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceUpperLimit(tableOnFile=false,
+      table=[650,63.2,68.2]) "FreeFloaringTemp according to ASHRAE140 "
+    annotation (Placement(transformation(extent={{54,106},{68,120}})));
+  BaseClasses.checkResultsAccordingToASHRAE checkResultsAccordingToASHRAE(
+      endTime(displayUnit="h") = 25027200) "maxTemp"
+    annotation (Placement(transformation(extent={{101,102},{114,114}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceLowerLimit(tableOnFile=false,
+      table=[600,-23,-21.6]) "FreeFloaringTemp according to ASHRAE140 "
+    annotation (Placement(transformation(extent={{54,129},{68,143}})));
+  BaseClasses.checkResultsAccordingToASHRAE checkResultsAccordingToASHRAE1(
+      endTime(displayUnit="h") = 284400) "minTemp"
+    annotation (Placement(transformation(extent={{101,125},{114,137}})));
 equation
     //Connections for input solar model
   for i in 1:5 loop
@@ -264,6 +276,24 @@ equation
           53.5},{89.1,53.5}}, color={0,0,127}));
   connect(to_degC.y, FreeFloatRoomTemperature) annotation (Line(points={{99.45,
           53.5},{106.225,53.5},{106.225,54},{120,54}}, color={0,0,127}));
+  connect(ReferenceUpperLimit.y[1], checkResultsAccordingToASHRAE.lowerLimit)
+    annotation (Line(points={{68.7,113},{85,113},{85,112.2},{101,112.2}}, color
+        ={0,0,127}));
+  connect(ReferenceUpperLimit.y[2], checkResultsAccordingToASHRAE.upperLimit)
+    annotation (Line(points={{68.7,113},{85,113},{85,111},{101,111}}, color={0,
+          0,127}));
+  connect(ReferenceLowerLimit.y[1], checkResultsAccordingToASHRAE1.lowerLimit)
+    annotation (Line(points={{68.7,136},{85,136},{85,135.2},{101,135.2}}, color
+        ={0,0,127}));
+  connect(ReferenceLowerLimit.y[2], checkResultsAccordingToASHRAE1.upperLimit)
+    annotation (Line(points={{68.7,136},{84,136},{84,134},{101,134}}, color={0,
+          0,127}));
+  connect(FreeFloatRoomTemperature, checkResultsAccordingToASHRAE.modelResults)
+    annotation (Line(points={{120,54},{126,54},{126,99},{88,99},{88,105},{101,
+          105},{101,104.16}}, color={0,0,127}));
+  connect(FreeFloatRoomTemperature, checkResultsAccordingToASHRAE1.modelResults)
+    annotation (Line(points={{120,54},{126,54},{126,121},{95,121},{95,127.16},{
+          101,127.16}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
