@@ -12,17 +12,89 @@ Advanced.Legend.Frame = false;
 Advanced.Legend.Transparent = true;
 Advanced.Legend.Location = 1;
 Advanced.FilesToKeep = 2;
-createPlot(id=1, position={7, 10, 584, 630}, y={"ctrlDpVarH.headControl.y", "ctrlDpVarH.pumpBus.head",
- "pump.Hnom", "pump.Hstart"}, range={0.0, 10.0, -0.1, 2.0}, grid=true, legendLocation=6, legendHorizontal=false, colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, patterns={LinePattern.Solid, LinePattern.Dash, LinePattern.Dot, LinePattern.DashDot}, thicknesses={0.25, 0.5, 0.25, 0.25}, timeUnit="min");
-createPlot(id=2, position={357, 31, 581, 591}, y={"pump.maxMinTable.y[1]", "pump.maxMinTable.y[2]", 
-"pump.head", "ctrlDpVarH.headControl.y"}, heading="Maximum / minimum pump head limits and current head", range={0.0, 10.0, -1.0, 7.0}, grid=true, legendLocation=4, legendHorizontal=false, colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, timeUnit="min");
-createPlot(id=2, position={357, 31, 581, 293}, y={"pump.Vflow_m3h.y"}, range={0.0, 10.0, -0.5, 2.5}, grid=true, legendLocation=4, legendHorizontal=false, subPlot=2, colors={{28,108,200}}, timeUnit="min");
-createPlot(id=3, position={634, 134, 584, 421}, x="pump.Vflow_m3h.y", y={"pump.head", "pump.headUnbound", "ctrlDpVarH.headControl.y"}, range={0.0, 2.4000000000000004, -0.2, 2.0}, grid=true, colors={{28,108,200}, {238,46,47}, {0,140,72}});
-createPlot(id=4, position={165, 8, 584, 734}, y={"pump.Vflow_m3h.y"}, range={0.0, 600.0, -1.0, 3.0}, grid=true, colors={{28,108,200}});
-createPlot(id=4, position={165, 8, 584, 143}, y={"pump.head"}, range={0.0, 600.0, -1.0, 2.0}, grid=true, subPlot=2, colors={{28,108,200}});
-createPlot(id=4, position={165, 8, 584, 142}, y={"pump.n"}, range={0.0, 600.0, -2000.0, 4000.0}, grid=true, subPlot=3, colors={{28,108,200}});
-createPlot(id=4, position={165, 8, 584, 143}, y={"pump.power"}, range={0.0, 600.0, -20.0, 40.0}, grid=true, subPlot=4, colors={{28,108,200}});
-createPlot(id=4, position={165, 8, 584, 143}, y={"pump.eta"}, range={0.0, 600.0, -0.5, 1.0}, grid=true, subPlot=5, colors={{28,108,200}});
+simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest", stopTime=1, method="Dassl", tolerance=1e-06, resultFile="PumpHdpVarControlTest");
+
+
+createPlot(id=1, 
+position={7, 10, 584, 630}, 
+y={"ctrlDpVarH.headControl.y", "ctrlDpVarH.pumpBus.head", "pump.Hnom", "pump.Hstart"}, 
+range={0.0, 10.0, -0.1, 2.0}, 
+grid=true, 
+legendLocation=6, 
+legendHorizontal=false, 
+colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, 
+patterns={LinePattern.Solid, LinePattern.Dash, LinePattern.Dot, LinePattern.DashDot}, 
+thicknesses={0.25, 0.5, 0.25, 0.25}, 
+timeUnit="min");
+
+createPlot(id=2, 
+position={357, 31, 581, 591}, 
+y={"pump.maxMinTable.y[1]", "pump.maxMinTable.y[2]", "pump.head", "ctrlDpVarH.headControl.y"}, 
+heading="Maximum / minimum pump head limits and current head", 
+range={0.0, 10.0, -1.0, 7.0}, 
+grid=true, 
+legendLocation=4, 
+legendHorizontal=false, 
+colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, 
+timeUnit="min");
+
+createPlot(id=2, 
+position={357, 31, 581, 293}, 
+y={"pump.Vflow_m3h.y"}, 
+range={0.0, 10.0, -0.5, 2.5}, 
+grid=true, 
+legendLocation=4, 
+legendHorizontal=false, 
+subPlot=2, 
+colors={{28,108,200}}, 
+timeUnit="min");
+
+createPlot(id=3, 
+position={634, 134, 584, 421}, 
+x="pump.Vflow_m3h.y", 
+y={"pump.head", "pump.headUnbound", "ctrlDpVarH.headControl.y"}, 
+range={0.0, 2.4000000000000004, -0.2, 2.0}, 
+grid=true, 
+colors={{28,108,200}, {238,46,47}, {0,140,72}});
+
+createPlot(id=4, 
+position={165, 8, 584, 734}, 
+y={"pump.Vflow_m3h.y"}, 
+range={0.0, 600.0, -1.0, 3.0}, 
+grid=true, 
+colors={{28,108,200}});
+
+createPlot(id=4,
+position={165, 8, 584, 143}, 
+y={"pump.head"}, 
+range={0.0, 600.0, -1.0, 2.0}, 
+grid=true, 
+subPlot=2, 
+colors={{28,108,200}});
+
+createPlot(id=4, 
+position={165, 8, 584, 142}, 
+y={"pump.n"}, 
+range={0.0, 600.0, -2000.0, 4000.0}, 
+grid=true, 
+subPlot=3, 
+colors={{28,108,200}});
+
+createPlot(id=4, 
+position={165, 8, 584, 143}, 
+y={"pump.power"}, 
+range={0.0, 600.0, -20.0, 40.0}, 
+grid=true, 
+subPlot=4, 
+colors={{28,108,200}});
+
+createPlot(id=4, 
+position={165, 8, 584, 143}, 
+y={"pump.eta"}, 
+range={0.0, 600.0, -0.5, 1.0}, 
+grid=true, 
+subPlot=5, 
+colors={{28,108,200}});
 
 // Non-standard flags
 Advanced.InvisibleConnections = true;

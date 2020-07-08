@@ -77,7 +77,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   annotation (
-      experiment(StopTime=600),
+      experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -133,7 +133,7 @@ equation
 </p>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpNdpVarControlTest.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpNdpVarControlTest.mos"
         "Simulate and plot"),
     Diagram(graphics={Text(
           extent={{-82,94},{80,66}},
