@@ -9,12 +9,12 @@ model ValidationPVSystem
         BaseClasses.IVCharacteristics5pAnalytical,
     redeclare model CellTemperature =
         BaseClasses.CellTemperatureMountingCloseToGround,
-    n_mod=1152,
-    til=0.34906585039887,
+    n_mod=312,
+    til=0.17453292519943,
     azi=0,
-    lat=0.68298049756117,
-    lon=-1.3476402739642,
-    alt=0.67,
+    lat=0.68304158408499,
+    lon=-1.3476664539029,
+    alt=0.08,
     timZon=-18000)
     "PV System according to measurements taken from https://pvdata.nist.gov/  "
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
@@ -27,10 +27,9 @@ model ValidationPVSystem
     annotation (Placement(transformation(extent={{4,-10},{24,10}})));
   Modelica.Blocks.Sources.CombiTimeTable NISTdata(
     tableOnFile=true,
-    tableName="Ground2016",
+    tableName="Roof2016",
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/NIST_onemin_Ground_2016.txt"),
-
+        "modelica://AixLib/Resources/weatherdata/NIST_onemin_Roof_2016.txt"),
     columns={3,5,2,4},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "The PVSystem model is validaded with measurement data from: https://pvdata.nist.gov/ "
@@ -79,9 +78,10 @@ equation
 3 - Global horizontal irradiance in W/m2
 4 - Ouput power in kW")}),
     experiment(
-      StartTime=14256000,
-      StopTime=14342400,
-      Interval=60),
+      StartTime=5011200,
+      StopTime=5097600,
+      Interval=60,
+      __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <p>The PVSystem model is validaded with empirical data from: <a href=\"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a> </p>
 <p>The date 14.06.2016 was chosen as an example for the PVSystem model.</p>

@@ -1,8 +1,10 @@
 PartialIVCharacteristics
 IVCharacteristics5pAnalytical
+IVCharacteristics5pNumerical
 PartialCellTemperature
 CellTemperatureOpenRack
 CellTemperatureMountingCloseToGround
 CellTemperatureMountingContactToGround
 Wsimple
 PVRadiationHorizontal
+
