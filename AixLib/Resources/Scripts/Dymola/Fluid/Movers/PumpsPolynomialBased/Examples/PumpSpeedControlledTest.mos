@@ -2,7 +2,7 @@
 // Plot commands
 removePlots(false);
 
-simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest", stopTime=1, method="Dassl", tolerance=1e-06, resultFile="PumpSpeedControlledTest");
+simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest", stopTime=600, method="Dassl", tolerance=1e-06, resultFile="PumpSpeedControlledTest");
 createPlot(id=1, 
 position={17, 10, 582, 611}, 
 y={"pump.pumpBus.rpm_Input", "pump.n", "pump.pumpParam.nMin", "pump.pumpParam.nMax"}, 

@@ -12,7 +12,7 @@ Advanced.Legend.Frame = false;
 Advanced.Legend.Transparent = true;
 Advanced.Legend.Location = 1;
 Advanced.FilesToKeep = 2;
-simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest", stopTime=1, method="Dassl", tolerance=1e-06, resultFile="PumpHdpVarControlTest");
+simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest", stopTime=600, method="Dassl", tolerance=1e-06, resultFile="PumpHdpVarControlTest");
 
 
 createPlot(id=1, 

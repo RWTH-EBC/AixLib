@@ -2,7 +2,7 @@
 // Plot commands
 removePlots(false);
 
-simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest", stopTime=1, method="Dassl", tolerance=1e-06, resultFile="PumpNdpVarControlTest");
+simulateModel("AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest", stopTime=600, method="Dassl", tolerance=1e-06, resultFile="PumpNdpVarControlTest");
 
 createPlot(id=1, 
 position={153, 60, 600, 583}, 
