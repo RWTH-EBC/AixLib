@@ -163,7 +163,7 @@ model Case600FF
     annotation (Placement(transformation(extent={{111,46},{131,66}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
     annotation (Placement(transformation(extent={{91,51},{100,60}})));
-  BaseClasses.checkResultsAccordingToASHRAE checkResultsAccordingToASHRAE(
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAE(
       endTime(displayUnit="h") = 25027200) "maxTemp"
     annotation (Placement(transformation(extent={{80,111},{93,123}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceTempUpperLimit(tableOnFile=
@@ -174,7 +174,7 @@ model Case600FF
         false, table=[600,-18.8,-15.6])
     "FreeFloaringTemp according to ASHRAE140 "
     annotation (Placement(transformation(extent={{33,138},{47,152}})));
-  BaseClasses.checkResultsAccordingToASHRAE checkResultsAccordingToASHRAE1(
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAE1(
       endTime(displayUnit="h") = 288000) "minTemp"
     annotation (Placement(transformation(extent={{80,133},{93,145}})));
 equation

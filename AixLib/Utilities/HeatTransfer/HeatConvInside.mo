@@ -10,21 +10,21 @@ model HeatConvInside
     choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "ASHRAE140-2017",
-      choice=4 "Custom hCon (constant)",
+      choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
       radioButtons=true),
     Evaluate=true);
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Custom convective heat transfer coefficient"
                                          annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 4 then true else false));
+        enable=if calcMethod == 3 then true else false));
 
   parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 1 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
-      Dialog(descriptionLabel=true, enable=if calcMethod == 4 then false else true),
+      Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
       choices(
       choice=1 "vertical",
       choice=2 "horizontal facing up",
@@ -89,10 +89,19 @@ equation
       hCon = 1.6*(posDiff^0.3);
     end if;
 
-    // ++++++++++++++++ASHRAE140-2017++++++++++++++++
-  // upward heat flow: hCon = 4.13, downward heat flow: hCon = 1, horizontal heat flow: hCon = 3.16
+
+    // ++++++++++++++++hCon_const++++++++++++++++
+
 
   elseif calcMethod == 3 then
+    hCon = hCon_const;
+
+
+
+    // ++++++++++++++++ASHRAE140-2017++++++++++++++++
+    // upward heat flow: hCon = 4.13, downward heat flow: hCon = 1, horizontal heat flow: hCon = 3.16
+   elseif calcMethod == 4 then
+
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
@@ -102,7 +111,7 @@ equation
         y2=1,
         x_small=dT_small);
 
-    // ceiling (horizontal facing down)
+      // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
@@ -110,17 +119,18 @@ equation
         y2=4.13,
         x_small=dT_small);
 
-    // vertical
+      // vertical
     else
       hCon = 3.16;
     end if;
 
-  // ++++++++++++++++hCon_const++++++++++++++++
   else
-    hCon = hCon_const;
+    hCon = Modelica.Constants.eps;
+    assert(0>1, "Choose another value for calcMethod. In component " + getInstanceName() + " the value is calcMethod = " + String(calcMethod) + ".", AssertionLevel.error);
+
   end if;
 
-  port_a.Q_flow =hCon*A*(port_a.T - port_b.T);
+  port_a.Q_flow = hCon*A*(port_a.T - port_b.T);
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
@@ -133,25 +143,25 @@ equation
         Rectangle(
           extent={{0,80},{20,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={156,156,156},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{20,80},{40,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={182,182,182},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{40,80},{60,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={207,207,207},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{60,80},{80,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={244,244,244},
           fillPattern=FillPattern.Solid),
         Rectangle(
@@ -162,28 +172,28 @@ equation
         Polygon(
           points={{80,80},{80,80},{60,40},{60,80},{80,80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           lineThickness=0.5,
           fillColor={157,166,208},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{60,80},{60,40},{40,0},{40,80},{60,80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           lineThickness=0.5,
           fillColor={102,110,139},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{40,80},{40,0},{20,-40},{20,80},{40,80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           lineThickness=0.5,
           fillColor={75,82,103},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{20,80},{20,-40},{0,-80},{0,80},{20,80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           lineThickness=0.5,
           fillColor={51,56,70},
           fillPattern=FillPattern.Solid),
@@ -211,7 +221,7 @@ equation
           points={{-54,36},{-54,-44}},
           color={0,0,255},
           thickness=0.5),
-        Rectangle(extent={{-80,80},{80,-80}},  lineColor={0,0,0})}),
+        Rectangle(extent={{-80,80},{80,-80}}, lineColor={0,0,0})}),
     Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>The <b>HeatConvInside</b> model represents the phenomenon of heat convection at inside surfaces of walls, with different choice for surface orientation. </p>
@@ -240,7 +250,7 @@ equation
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
 </html>
 
-",         revisions="<html>
+", revisions="<html>
 <ul>
 <li><i>May 30, 2019</i>  by Katharina Brinkmann / Philipp Mehrfeld:<br/>
 <a href=\"https://github.com/RWTH-EBC/AixLib/issues/711\">#711</a>:<br/>

@@ -205,14 +205,14 @@ model Case640
       table=[640,-7811,-5952])
     "AnnualCoolingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualCoolingLoad, {3}=upperLimit AnnualCoolingLoad"
     annotation (Placement(transformation(extent={{29,141},{49,161}})));
-  BaseClasses.checkResultsAccordingToASHRAE
+  BaseClasses.CheckResultsAccordingToASHRAE
     checkResultsAccordingToASHRAECooling(endTime=31536000)
     annotation (Placement(transformation(extent={{90,140},{110,160}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoad(tableOnFile=false,
       table=[640,2751,3803])
     "AnnualHeatingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualHeatingLoad, {3}=upperLimit AnnualHeatingLoad"
     annotation (Placement(transformation(extent={{30,103},{50,123}})));
-  BaseClasses.checkResultsAccordingToASHRAE
+  BaseClasses.CheckResultsAccordingToASHRAE
     checkResultsAccordingToASHRAEHeating(endTime=31536000)
     annotation (Placement(transformation(extent={{88,105},{108,125}})));
 equation

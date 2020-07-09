@@ -200,14 +200,14 @@ model Case600
   Modelica.Blocks.Math.Gain gain(k=1/1000) "Converts to kW"
     annotation (Placement(transformation(extent={{100,27},{107,34}})));
 
-  BaseClasses.checkResultsAccordingToASHRAE
+  BaseClasses.CheckResultsAccordingToASHRAE
     checkResultsAccordingToASHRAEHeating(endTime=31536000)
     annotation (Placement(transformation(extent={{102,102},{122,122}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoad(tableOnFile=false,
       table=[600,4296,5709])
     "AnnualHeatingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualHeatingLoad, {3}=upperLimit AnnualHeatingLoad"
     annotation (Placement(transformation(extent={{22,104},{42,124}})));
-  BaseClasses.checkResultsAccordingToASHRAE
+  BaseClasses.CheckResultsAccordingToASHRAE
     checkResultsAccordingToASHRAECooling(endTime=31536000)
     annotation (Placement(transformation(extent={{101,134},{121,154}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoad(tableOnFile=false,

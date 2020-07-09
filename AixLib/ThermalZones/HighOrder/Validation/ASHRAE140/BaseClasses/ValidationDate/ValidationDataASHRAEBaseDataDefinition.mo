@@ -1,5 +1,5 @@
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.Results;
-record ResultsASHRAEBaseDataDefinition
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.ValidationDate;
+record ValidationDataASHRAEBaseDataDefinition
    extends Modelica.Icons.Record;
     parameter Real[:, :] Results "First column case number";
 
@@ -10,4 +10,4 @@ record ResultsASHRAEBaseDataDefinition
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
  </ul>
  </html>"));
-end ResultsASHRAEBaseDataDefinition;
+end ValidationDataASHRAEBaseDataDefinition;

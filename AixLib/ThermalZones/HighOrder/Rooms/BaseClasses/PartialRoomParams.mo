@@ -32,12 +32,13 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "ASHRAE140-2017",
-      choice=4 "Custom hCon (constant)",
+      choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
       radioButtons=true));
+
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=2.5
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
-    annotation(Dialog(tab="Inner walls", group="Heat convection", enable=(calcMethodIn==4)));
+    annotation(Dialog(tab="Inner walls", group="Heat convection", enable=(calcMethodIn==3)));
 
   //// Outer / Exterior wall parameters
   //Window type

@@ -198,7 +198,7 @@ model Case650
       table=[650,-6545,-4816])
     "AnnualCoolingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualCoolingLoad, {3}=upperLimit AnnualCoolingLoad"
     annotation (Placement(transformation(extent={{32,133},{52,153}})));
-  BaseClasses.checkResultsAccordingToASHRAE
+  BaseClasses.CheckResultsAccordingToASHRAE
     checkResultsAccordingToASHRAECooling(endTime=31536000)
     annotation (Placement(transformation(extent={{93,132},{113,152}})));
 equation
