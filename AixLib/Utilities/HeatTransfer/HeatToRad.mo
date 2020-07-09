@@ -2,7 +2,6 @@ within AixLib.Utilities.HeatTransfer;
 model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16) "Initial temperature";
-  Modelica.SIunits.CoefficientOfHeatTransfer hrad "variable radiative heat transfer coefficient";
   parameter Boolean use_A_in = false
     "Get the area from the input connector"
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -52,7 +51,6 @@ equation
     A_in_internal =A;
   end if;
 
-  hrad= convPort.Q_flow/(A_in_internal*(convPort.T-radPort.T));
 
   connect(A_in, A_in_internal);
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                            Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{-100,100},{100,-100}},  lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
