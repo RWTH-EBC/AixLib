@@ -61,12 +61,14 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
       parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       length=1,
       Kv=10,
+      T_start=294.75,
       valveCharacteristic=
           AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=
           AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.07,0.12,0.45,0.65,
           0.89,0.93,0.96,1}, phi={0,0.001,0.002,0.08,0.29,0.75,0.94,0.98,1}),
           b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,0.26,
           0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
+
       valve(use_inputFilter=false),
       pipe1(
         T_start=283.15,
@@ -87,13 +89,14 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     redeclare package Medium2 = MediumWater,
     m1_flow_nominal=3000/3600,
     m2_flow_nominal=8832/3600,
-    T_start=315.15,
+    T_start=293.65,
     tau=90,
-    T_amb=293.15,
+    T_amb=296.65,
     dynamicHX(
       dp1_nominal(displayUnit="bar") = 138,
       dp2_nominal(displayUnit="bar") = 70600,
       nNodes=4,
+      T1_start=305.15,
       dT_nom=22.16,
       Q_nom=53400))
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));

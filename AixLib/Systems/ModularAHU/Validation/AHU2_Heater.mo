@@ -6,7 +6,7 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
   package MediumAir = AixLib.Media.Air
     annotation (choicesAllMatching=true);
 
-  AixLib.Systems.ModularAHU.Validation.MeasuredData.AHU2_Reheater_StepResponse data "Measured data";
+  AixLib.Systems.ModularAHU.Validation.MeasuredData.AHU2_Reheater_RampValve data "Measured data";
   Fluid.Sources.Boundary_pT boundaryWaterSource(
     redeclare package Medium = MediumWater,
     use_T_in=true,
@@ -54,6 +54,7 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
   Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
+    T_start=285.65,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare HydraulicModules.Admix hydraulicModule(
       pipeModel="PlugFlowPipe",
