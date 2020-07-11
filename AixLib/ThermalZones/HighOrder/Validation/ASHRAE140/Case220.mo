@@ -8,11 +8,11 @@ model Case220
       redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
       outerWall_South(windowSimple(redeclare model correctionSolarGain =
               Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoTransmittance)),
-
       solar_absorptance_OW=0.1),
-    Tset_Cooler(k=20.0001),
-    TSet_Heater(k=19.9999),
+    Tset_Cooler(k=20),
+    TSet_Heater(k=19.9),
     ReferenceCoolingLoad(table=[220,-835,-186]));
+
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>

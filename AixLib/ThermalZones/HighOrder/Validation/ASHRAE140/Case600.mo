@@ -43,56 +43,14 @@ model Case600
     recOrSep=false)
     annotation (Placement(transformation(extent={{-15,-65},{5,-45}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(
-    calcMethodIn=3,
+    wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases(),
+    calcMethodIn=4,
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
     calcMethodOut=2,
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-    outerWall_South(
-      calcMethodIn=3,
-      heatTransfer_Outside(calcMethod=2),
-      windowSimple(redeclare model correctionSolarGain =
-            Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140),
-      Wall(
-        surfaceOrientation=1,
-        calcMethod=3,
-        heatConv(calcMethod=3, surfaceOrientation=1))),
-    ceiling(
-      ISOrientation=3,
-      calcMethodIn=4,
-      heatTransfer_Outside(calcMethod=2),
-      Wall(
-        surfaceOrientation=3,
-        calcMethod=3,
-        heatConv(calcMethod=3, surfaceOrientation=3))),
-    outerWall_West(
-      calcMethodIn=3,
-      heatTransfer_Outside(calcMethod=2),
-      Wall(
-        surfaceOrientation=1,
-        calcMethod=3,
-        heatConv(calcMethod=3, surfaceOrientation=1))),
-    outerWall_North(
-      calcMethodIn=3,
-      heatTransfer_Outside(calcMethod=2),
-      Wall(
-        surfaceOrientation=1,
-        calcMethod=3,
-        heatConv(calcMethod=3, surfaceOrientation=1))),
-    outerWall_East(
-      calcMethodIn=3,
-      heatTransfer_Outside(calcMethod=2),
-      Wall(
-        surfaceOrientation=1,
-        calcMethod=3,
-        heatConv(calcMethod=3, surfaceOrientation=1))),
-    floor(
-      ISOrientation=2,
-      calcMethodIn=3,
-      Wall(
-        surfaceOrientation=2,
-        calcMethod=3,
-        heatConv(calcMethod=3, surfaceOrientation=2))),
-    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)                         annotation (Placement(transformation(extent={{-7,-6},
-            {35,35}})));
+
+    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
+    annotation (Placement(transformation(extent={{-7,-6},{35,35}})));
 
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{104,78},{117,90}})));
@@ -344,26 +302,25 @@ equation
       Line(points={{121,-56},{118.5,-56},{118.5,-56},{121,-56}}, color={0,0,127}));
   connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeating.modelResults)
     annotation (Line(points={{120,64},{130,64},{130,90},{-7,90},{-7,52},{-1,52},
-          {-1,50.775},{3.575,50.775}},
+          {-1,50.7},{5,50.7}},
                    color={0,0,127}));
   connect(ReferenceHeatingLoad.y[1], checkResultsAccordingToASHRAEHeating.lowerLimit)
-    annotation (Line(points={{-19.3,57},{-11,57},{-11,61},{-2,61},{-2,60.9},{
-          3.65,60.9}},                                              color={0,0,
+    annotation (Line(points={{-19.3,57},{-11,57},{-11,61},{-2,61},{-2,60.75},{5,
+          60.75}},                                                  color={0,0,
           127}));
   connect(ReferenceHeatingLoad.y[2], checkResultsAccordingToASHRAEHeating.upperLimit)
-    annotation (Line(points={{-19.3,57},{-15,57},{-15,56},{-9,56},{-9,57.75},{
-          3.65,57.75}},                                             color={0,0,
+    annotation (Line(points={{-19.3,57},{-15,57},{-15,56},{-9,56},{-9,59.25},{5,
+          59.25}},                                                  color={0,0,
           127}));
   connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECooling.modelResults)
-    annotation (Line(points={{121,48},{130,48},{130,90},{-2,90},{-2,72.775},{
-          3.575,72.775}},
+    annotation (Line(points={{121,48},{130,48},{130,90},{-2,90},{-2,72.7},{5,72.7}},
                        color={0,0,127}));
   connect(ReferenceCoolingLoad.y[1], checkResultsAccordingToASHRAECooling.lowerLimit)
-    annotation (Line(points={{-21.3,78},{-9,78},{-9,82.9},{3.65,82.9}},
+    annotation (Line(points={{-21.3,78},{-9,78},{-9,82.75},{5,82.75}},
                                                                     color={0,0,
           127}));
   connect(ReferenceCoolingLoad.y[2], checkResultsAccordingToASHRAECooling.upperLimit)
-    annotation (Line(points={{-21.3,78},{-7,78},{-7,79.75},{3.65,79.75}},
+    annotation (Line(points={{-21.3,78},{-7,78},{-7,81.25},{5,81.25}},
                                                                     color={0,0,
           127}));
   annotation (Diagram(coordinateSystem(
@@ -402,8 +359,7 @@ equation
      irradiance [W/m2]
 2 - global horizontal 
      radiance in [W/m2]
-",
-          fontSize=8),
+",        fontSize=8),
         Text(
           extent={{-148,-10},{-80,-18}},
           lineColor={0,0,255},
