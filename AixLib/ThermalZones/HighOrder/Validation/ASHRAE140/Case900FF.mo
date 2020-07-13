@@ -1,9 +1,9 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case900FF
   extends Case600FF(
+    wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),
     ReferenceTempMax(table=[900,41.8,44.8]),
-    ReferenceTempMin(table=[900,-6.4,-1.6]),
-    Room(wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases()));
+    ReferenceTempMin(table=[900,-6.4,-1.6]));
   annotation (Documentation(info="<html>
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 900: </p>

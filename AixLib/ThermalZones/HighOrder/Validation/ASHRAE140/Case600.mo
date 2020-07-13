@@ -43,13 +43,16 @@ model Case600
     recOrSep=false)
     annotation (Placement(transformation(extent={{-15,-65},{5,-45}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(
-    wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases(),
+    wallTypes=wallTypes,
     calcMethodIn=4,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
+    solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
-    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
-    annotation (Placement(transformation(extent={{-7,-6},{35,35}})));
+    absInnerWallSurf=absInnerWallSurf,
+    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable,
+    outerWall_South(windowSimple(redeclare model correctionSolarGain =
+            correctionSolarGain)))
+    annotation (Placement(transformation(extent={{-6,-6},{36,35}})));
 
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{104,78},{117,90}})));
@@ -70,13 +73,13 @@ model Case600
   Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
     "in kWh/m2"
     annotation (Placement(transformation(extent={{111,-97},{131,-77}})));
-  Modelica.Blocks.Sources.Constant AirExchangeRate(k=0.41)
+  Modelica.Blocks.Sources.Constant AirExchangeRate(final k=airExchange)
     annotation (Placement(transformation(extent={{-38,-56},{-25,-43}})));
-  Modelica.Blocks.Sources.Constant Source_InternalGains(k=200)
+  Modelica.Blocks.Sources.Constant Source_InternalGains(final k=internalGains)
     annotation (Placement(transformation(extent={{-146,-77},{-133,-64}})));
-  Modelica.Blocks.Sources.Constant Tset_Cooler(k=27)
+  Modelica.Blocks.Sources.Constant Tset_Cooler(final k=TsetCooler)
     annotation (Placement(transformation(extent={{-38,-82},{-27,-71}})));
-  Modelica.Blocks.Sources.Constant TSet_Heater(k=20)
+  Modelica.Blocks.Sources.Constant TSet_Heater(final k=TsetHeater)
     annotation (Placement(transformation(extent={{30,-81},{19,-70}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow Ground(Q_flow=0)
     "adiabatic boundary"
@@ -171,6 +174,16 @@ model Case600
       table=[600,-7964,-6137])
     "AnnualCoolingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualCoolingLoad, {3}=upperLimit AnnualCoolingLoad"
     annotation (Placement(transformation(extent={{-36,71},{-22,85}})));
+  parameter Real airExchange=0.41 "Constant Air Exchange Rate";
+  parameter Real TsetCooler=27 "Constant Set Temperature for Cooler";
+  parameter Real TsetHeater=20 "Constant Set Temperature for Heater";
+  parameter Real internalGains=200 "Constant Internal Gains";
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
+    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
+  parameter Real solar_absorptance_OW=0.6 "Solar absoptance outer walls ";
+  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
+      AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
+    "Types of walls (contains multiple records)";
 equation
     //Connections for input solar model
   for i in 1:5 loop
@@ -186,31 +199,30 @@ equation
       color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-75.4,75.6},{-61,75.6},{-61,76},{-47,76},{-47,26.8},{-9.1,26.8}},
+      points={{-75.4,75.6},{-61,75.6},{-61,76},{-47,76},{-47,26.8},{-8.1,26.8}},
       color={255,128,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
-      points={{-85.15,36.5},{-53,36.5},{-53,31},{-12,31},{-12,26},{-9.1,26},{
-          -9.1,20.65}},
+      points={{-85.15,36.5},{-53,36.5},{-53,31},{-12,31},{-12,26},{-8.1,26},{-8.1,
+          20.65}},
       color={0,0,127}));
   connect(Room.thermRoom,idealHeaterCooler.heatCoolRoom)  annotation (Line(
-      points={{11.06,14.5},{11.06,-19},{10,-19},{10,-59},{4,-59}},
+      points={{12.06,14.5},{12.06,-19},{10,-19},{10,-59},{4,-59}},
       color={191,0,0}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
-      points={{-78,-34},{-48,-34},{-48,-19},{7.28,-19},{7.28,-5.18}},
+      points={{-78,-34},{-48,-34},{-48,-19},{8.28,-19},{8.28,-5.18}},
       color={191,0,0}));
 
   connect(InternalGains_convective.port, Room.thermRoom) annotation (Line(
-      points={{-78,-58},{-48,-58},{-48,-19},{7,-19},{7,14.5},{11.06,14.5}},
+      points={{-78,-58},{-48,-58},{-48,-19},{7,-19},{7,14.5},{12.06,14.5}},
       color={191,0,0}));
   connect(InternalGains_radiative.port, Room.starRoom) annotation (Line(
-      points={{-77,-78},{-48,-78},{-48,-19},{18,-19},{18,-2},{17.36,-2},{17.36,
-          14.5}},
+      points={{-77,-78},{-48,-78},{-48,-19},{18,-19},{18,-2},{18.36,-2},{18.36,14.5}},
       color={191,0,0}));
-  connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-55,
-          51.5},{-47,51.5},{-47,35},{-27,35},{-27,34.59},{-7,34.59}},
+  connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-55,51.5},
+          {-47,51.5},{-47,35},{-27,35},{-27,34.59},{-6,34.59}},
                                               color={191,0,0}));
-  connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{-9.1,
+  connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{-8.1,
           28.7475},{-20,28.7475},{-20,-49.5},{-24.35,-49.5}}, color={0,0,127}));
   connect(HeatingPower.y, integrator1.u)
     annotation (Line(points={{65,64},{69.9,64}}, color={0,0,127}));

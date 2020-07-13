@@ -1,16 +1,15 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case220
-  extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
-    ReferenceHeatingLoad(table=[220,6944,8787]),
-    AirExchangeRate(k=0),
-    Source_InternalGains(k=0),
-    Room(
+  extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(Room(
       redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
       outerWall_South(windowSimple(redeclare model correctionSolarGain =
-              Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoTransmittance)),
-      solar_absorptance_OW=0.1),
-    Tset_Cooler(k=20),
-    TSet_Heater(k=19.9),
+              Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoTransmittance))),
+    solar_absorptance_OW=0.1,
+    internalGains=0,
+    TsetHeater=19.9,
+    TsetCooler=20,
+    airExchange=0,
+    ReferenceHeatingLoad(table=[220,6944,8787]),
     ReferenceCoolingLoad(table=[220,-835,-186]));
 
   annotation (Documentation(revisions="<html>

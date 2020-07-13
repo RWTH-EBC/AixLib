@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case440
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
-                  Room(absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs01),
+    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs01,
     ReferenceCoolingLoad(table=[440,-5204,-3967]),
     ReferenceHeatingLoad(table=[440,4449,5811]));
   annotation (Documentation(revisions="<html>

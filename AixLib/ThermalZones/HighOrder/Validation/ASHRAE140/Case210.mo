@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case210
-  extends Case220(Room(wallTypes=
-          AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases_eps01()),
+  extends Case220(
+    wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases_eps01(),
     ReferenceCoolingLoad(table=[210,-668,-162]),
     ReferenceHeatingLoad(table=[210,6456,6967]));
   annotation (Documentation(info="<html>

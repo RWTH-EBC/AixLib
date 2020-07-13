@@ -1,8 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case800
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430(
-                  Room(wallTypes=
-          AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases()),
+    wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),
     ReferenceHeatingLoad(table=[800,4868,7228]),
     ReferenceCoolingLoad(table=[800,-325,-55]));
   annotation (Documentation(revisions="<html>

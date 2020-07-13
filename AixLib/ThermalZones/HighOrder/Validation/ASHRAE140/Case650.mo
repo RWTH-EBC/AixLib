@@ -49,11 +49,12 @@ model Case650
     recOrSep=false)
     annotation (Placement(transformation(extent={{-16,-65},{4,-45}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(
-    wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases(),
+    wallTypes=wallTypes,
     calcMethodIn=4,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
+    solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
-    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
+    absInnerWallSurf=absInnerWallSurf,
     redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
     annotation (Placement(transformation(extent={{-7,-6},{35,35}})));
 
@@ -74,7 +75,7 @@ model Case650
   Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
     "in kWh/m2"
     annotation (Placement(transformation(extent={{111,-97},{131,-77}})));
-  Modelica.Blocks.Sources.Constant Source_InternalGains(k=200)
+  Modelica.Blocks.Sources.Constant Source_InternalGains(final k=internalGains)
     annotation (Placement(transformation(extent={{-146,-77},{-133,-64}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow Ground(Q_flow=0)
     "adiabatic boundary"
@@ -161,6 +162,13 @@ model Case650
     table=SetTempProfile.Profile,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-30,-82},{-17,-69}})));
+  parameter Real internalGains=200 "Constant Internal Gains";
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
+    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
+  parameter Real solar_absorptance_OW=0.6 "Solar absoptance outer walls ";
+  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
+      AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
+    "Types of walls (contains multiple records)";
 equation
     //Connections for input solar model
   for i in 1:5 loop
