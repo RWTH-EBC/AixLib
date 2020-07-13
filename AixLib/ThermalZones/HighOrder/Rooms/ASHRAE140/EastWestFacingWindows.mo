@@ -327,9 +327,15 @@ equation
           textString="width",
           origin={65,0},
           rotation=90)}), Documentation(revisions="<html>
+<ul>
+  <li><i>July 1, 2020 </i> by Konstantina Xanhtopoulou:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/896\">#896</a>: Mainly added solar distribution fractions, extended from PartialRoom.</li>
+ </ul>
  <ul>
  <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
- </html>", info="<html>
+ </html>
+
+
+",         info="<html>
 </html>"));
 end EastWestFacingWindows;
