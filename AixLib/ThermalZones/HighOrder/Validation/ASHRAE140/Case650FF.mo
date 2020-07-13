@@ -43,7 +43,6 @@ model Case650FF
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
     calcMethodOut=2,
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-
     redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
     annotation (Placement(transformation(extent={{-7,-6},{35,35}})));
 
@@ -236,29 +235,29 @@ equation
   connect(IncidentSolarRadiationHor, IncidentSolarRadiationHor) annotation (
       Line(points={{121,-56},{118.5,-56},{118.5,-56},{121,-56}}, color={0,0,127}));
   connect(ReferenceTempMin.y[1], checkResultsAccordingToASHRAECooling.lowerLimit)
-    annotation (Line(points={{-21.3,79},{-9,79},{-9,82.75},{5,82.75}}, color={0,
+    annotation (Line(points={{-21.3,79},{-9,79},{-9,83.5},{3.95,83.5}},color={0,
           0,127}));
   connect(ReferenceTempMin.y[2], checkResultsAccordingToASHRAECooling.upperLimit)
-    annotation (Line(points={{-21.3,79},{-8,79},{-8,81.25},{5,81.25}}, color={0,
+    annotation (Line(points={{-21.3,79},{-8,79},{-8,80.5},{3.95,80.5}},color={0,
           0,127}));
   connect(Room.AirExchangePort, AirExchangeRate.y[1]) annotation (Line(points={{
           -9.1,28.7475},{-20,28.7475},{-20,-47.5},{-25.35,-47.5}}, color={0,0,127}));
   connect(ReferenceTempMax.y[1], checkResultsAccordingToASHRAEHeating.lowerLimit)
-    annotation (Line(points={{-20.3,58},{-9,58},{-9,61.75},{4,61.75}}, color={0,
+    annotation (Line(points={{-20.3,58},{-9,58},{-9,62.5},{2.95,62.5}},color={0,
           0,127}));
   connect(ReferenceTempMax.y[2], checkResultsAccordingToASHRAEHeating.upperLimit)
-    annotation (Line(points={{-20.3,58},{-8,58},{-8,60.25},{4,60.25}}, color={0,
+    annotation (Line(points={{-20.3,58},{-8,58},{-8,59.5},{2.95,59.5}},color={0,
           0,127}));
   connect(RoomTemp.y, to_degC.u) annotation (Line(points={{63.9,54},{77,54},{77,
           54.5},{90.1,54.5}}, color={0,0,127}));
   connect(to_degC.y, FreeFloatRoomTemperature) annotation (Line(points={{100.45,
           54.5},{108.725,54.5},{108.725,55},{121,55}}, color={0,0,127}));
   connect(FreeFloatRoomTemperature, checkResultsAccordingToASHRAEHeating.modelResults)
-    annotation (Line(points={{121,55},{129,55},{129,90},{-15,90},{-15,51.7},{4,
-          51.7}}, color={0,0,127}));
+    annotation (Line(points={{121,55},{129,55},{129,90},{-15,90},{-15,52.15},{2.95,
+          52.15}},color={0,0,127}));
   connect(FreeFloatRoomTemperature, checkResultsAccordingToASHRAECooling.modelResults)
-    annotation (Line(points={{121,55},{129,55},{129,90},{-15,90},{-15,72.7},{5,
-          72.7}}, color={0,0,127}));
+    annotation (Line(points={{121,55},{129,55},{129,90},{-15,90},{-15,73.15},{3.95,
+          73.15}},color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
@@ -337,8 +336,8 @@ equation
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1})),
-    experiment(StopTime=3.1536e+007, Interval=3600),
-    __Dymola_experimentSetupOutput(events=false),
+    experiment(Tolerance=1e-6, StopTime=31536000),
+    __Dymola_experimentSetupOutput,
     Documentation(revisions="<html>
  <ul>
 <li>

@@ -48,7 +48,6 @@ model Case620
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
     calcMethodOut=2,
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-
     redeclare Components.Types.CoeffTableEastWestWindow partialCoeffTable)
     annotation (Placement(transformation(extent={{-7,-6},{35,35}})));
 
@@ -303,25 +302,25 @@ equation
       Line(points={{121,-56},{118.5,-56},{118.5,-56},{121,-56}}, color={0,0,127}));
   connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeating.modelResults)
     annotation (Line(points={{120,64},{130,64},{130,90},{-7,90},{-7,52},{-1,52},
-          {-1,50.7},{5,50.7}},
+          {-1,51.15},{3.95,51.15}},
                    color={0,0,127}));
   connect(ReferenceHeatingLoad.y[1], checkResultsAccordingToASHRAEHeating.lowerLimit)
-    annotation (Line(points={{-19.3,57},{-11,57},{-11,61},{-2,61},{-2,60.75},{5,
-          60.75}},                                                  color={0,0,
+    annotation (Line(points={{-19.3,57},{-11,57},{-11,61},{-2,61},{-2,61.5},{3.95,
+          61.5}},                                                   color={0,0,
           127}));
   connect(ReferenceHeatingLoad.y[2], checkResultsAccordingToASHRAEHeating.upperLimit)
-    annotation (Line(points={{-19.3,57},{-15,57},{-15,56},{-9,56},{-9,59.25},{5,
-          59.25}},                                                  color={0,0,
+    annotation (Line(points={{-19.3,57},{-15,57},{-15,56},{-9,56},{-9,58.5},{3.95,
+          58.5}},                                                   color={0,0,
           127}));
   connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECooling.modelResults)
-    annotation (Line(points={{121,48},{130,48},{130,90},{-2,90},{-2,72.7},{5,72.7}},
-                       color={0,0,127}));
+    annotation (Line(points={{121,48},{130,48},{130,90},{-2,90},{-2,73.15},{3.95,
+          73.15}},     color={0,0,127}));
   connect(ReferenceCoolingLoad.y[1], checkResultsAccordingToASHRAECooling.lowerLimit)
-    annotation (Line(points={{-21.3,78},{-9,78},{-9,82.75},{5,82.75}},
+    annotation (Line(points={{-21.3,78},{-9,78},{-9,83.5},{3.95,83.5}},
                                                                     color={0,0,
           127}));
   connect(ReferenceCoolingLoad.y[2], checkResultsAccordingToASHRAECooling.upperLimit)
-    annotation (Line(points={{-21.3,78},{-7,78},{-7,81.25},{5,81.25}},
+    annotation (Line(points={{-21.3,78},{-7,78},{-7,80.5},{3.95,80.5}},
                                                                     color={0,0,
           127}));
   annotation (Diagram(coordinateSystem(
@@ -402,8 +401,11 @@ equation
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1})),
-    experiment(StopTime=3.1536e+007, Interval=3600),
-    __Dymola_experimentSetupOutput(events=false),
+    experiment(
+      StopTime=31536000,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
+    __Dymola_experimentSetupOutput(events=true),
     Documentation(revisions="<html>
  <ul>
 <li>

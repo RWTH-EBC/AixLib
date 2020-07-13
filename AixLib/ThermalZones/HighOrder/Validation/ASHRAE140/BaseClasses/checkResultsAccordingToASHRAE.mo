@@ -1,26 +1,33 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses;
 block CheckResultsAccordingToASHRAE
   extends Modelica.Blocks.Icons.Block;
-  parameter Modelica.SIunits.Time endTime
-                                         "Simulation end time";
+  parameter Real endTime        "Simulation end time";
 
   Modelica.Blocks.Interfaces.RealInput upperLimit
                                                  "maximum Value"
-    annotation (Placement(transformation(extent={{-120,30},{-80,70}})));
+    annotation (Placement(transformation(extent={{-140,16},{-100,56}}),
+        iconTransformation(extent={{-128,26},{-100,54}})));
 
   Modelica.Blocks.Interfaces.RealInput modelResults
-    annotation (Placement(transformation(extent={{-120,-84},{-80,-44}})));
+    annotation (Placement(transformation(extent={{-140,-84},{-100,-44}}),
+        iconTransformation(extent={{-128,-72},{-100,-44}})));
   Modelica.Blocks.Interfaces.RealInput lowerLimit
                                                  "minimum Value"
-    annotation (Placement(transformation(extent={{-120,50},{-80,90}})));
+    annotation (Placement(transformation(extent={{-140,54},{-100,94}}),
+        iconTransformation(extent={{-128,66},{-100,94}})));
 
-  Modelica.Blocks.Interfaces.RealOutput y annotation (Placement(transformation(
-          extent={{100,20},{140,60}}), iconTransformation(extent={{100,42},{140,
-            82}})));
+  Modelica.Blocks.Interfaces.BooleanOutput satisfied annotation (Placement(transformation(
+          extent={{100,-20},{140,20}}),iconTransformation(extent={{100,-14},{128,
+            14}})));
+
+initial equation
+  satisfied = false;
 
 equation
-  y= if (time == endTime) and modelResults >= lowerLimit and modelResults <= upperLimit then modelResults
-      else 0;
+    when time >= endTime then
+      satisfied =  modelResults >= lowerLimit and modelResults <= upperLimit;
+    end when;
+
  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
