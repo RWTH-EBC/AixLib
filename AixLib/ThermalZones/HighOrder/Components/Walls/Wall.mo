@@ -70,14 +70,15 @@ model Wall
   // window parameters
   parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
-  replaceable model Window = WindowsDoors.WindowSimple constrainedby
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  replaceable model Window = WindowsDoors.WindowSimple constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
-  Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
+  Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType,
+    redeclare model correctionSolarGain = correctionSolarGain) if                   outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
+  replaceable model correctionSolarGain = WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG annotation (choicesAllMatching=true, Dialog(tab = "Window", enable = withWindow and outside));
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   parameter Real LimitSolIrr if withWindow and outside and withSunblind
@@ -173,6 +174,7 @@ model Wall
   parameter Modelica.SIunits.Emissivity eps_in=wallPar.eps
     "Longwave emission coefficient of the interior surface"
     annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
+
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
