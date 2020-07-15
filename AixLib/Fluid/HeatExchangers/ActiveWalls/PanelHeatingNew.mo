@@ -2610,48 +2610,35 @@ Added documentation.</li>
           extends Modelica.Fluid.Interfaces.PartialTwoPort;
           extends Fluid.Interfaces.LumpedVolumeDeclarations;
 
-      Modelica.SIunits.Temperature T_F = convRadComb_floor.rad.T "floor surface temperature";
+      Modelica.SIunits.Temperature T_F = heatport_floor.T "Floor surface temperature";
 
       parameter Modelica.SIunits.Distance T "Spacing between tubes" annotation (Dialog( group = "Panel Heating Pipe"));
-      final parameter Modelica.SIunits.Diameter d_i "Inner diameter of pipe" annotation (Dialog( group = "Panel Heating Pipe"));
+      parameter Modelica.SIunits.Diameter d_i "Inner diameter of pipe" annotation (Dialog( group = "Panel Heating Pipe"));
 
 
       final parameter Modelica.SIunits.Length L_Tube = A / T "Tube Length";
-      final parameter Modelica.SIunits.Volume VWater = vol.m_flow_nominal*tau/Medium.rho_default "Volume of Water in m^3";
+      final parameter Modelica.SIunits.Volume VWater = vol.m_flow_nominal * tau / rho_default "Volume of Water in m^3";
       final parameter Modelica.SIunits.Time tau = 60;
+      final parameter Modelica.SIunits.Density rho_default = vol.rho_default "Density of chosen Medium";
 
-      parameter Modelica.SIunits.Length floor_length "Floor Length from building model" annotation (Dialog( group = "Floor Parameter"));
-      parameter Modelica.SIunits.Length floor_width "Floor Width from building model" annotation (Dialog( group = "Floor Parameter"));
-      parameter DataBase.Walls.WallBaseDataDefinition FloorLayers "Floor Layers above panel heating from building model" annotation (Dialog( group = "Floor Parameter"));
-      parameter Modelica.SIunits.Length ceiling_length "Ceiling Length from building model" annotation (Dialog( group = "Floor Parameter"));
-      parameter Modelica.SIunits.Length ceiling_width "Ceiling Width from building model" annotation (Dialog( group = "Floor Parameter"));
-      parameter DataBase.Walls.WallBaseDataDefinition CeilingLayers "Ceiling Layers under panel heating from building model" annotation (Dialog( group = "Floor Parameter"));
-      final parameter Modelica.SIunits.Area A = floor_length * floor_width "Floor Area for Panel Heating";
+
+      parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
+      parameter Integer n_floor(min = 1) "Number of floor layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Modelica.SIunits.Thickness d_floor[n_floor] "Thickness of floor layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Modelica.SIunits.Density rho_floor[n_floor] "Density of floor layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Modelica.SIunits.ThermalConductivity lambda_floor[n_floor] "Thermal conductivity of floor layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Modelica.SIunits.SpecificHeatCapacity c_floor[n_floor] "Specific heat capacity of floor layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Integer n_ceiling(min = 1) "Number of ceiling layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Modelica.SIunits.Thickness d_ceiling[n_ceiling] "Thickness of ceiling layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Modelica.SIunits.Density rho_ceiling[n_ceiling] "Density of ceiling layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Modelica.SIunits.ThermalConductivity lambda_ceiling[n_ceiling] "Thermal conductivity of ceiling layers" annotation(Dialog(group = "Room Specifications"));
+      parameter Modelica.SIunits.SpecificHeatCapacity c_ceiling[n_ceiling] "Specific heat capacity of ceiling layers" annotation(Dialog(group = "Room Specifications"));
+      final parameter Modelica.SIunits.Temperature T0 = 273.15 + 20;
+
+      parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
 
       parameter Modelica.SIunits.MassFlowRate m_H;
 
-      ThermalZones.HighOrder.Components.Walls.Wall floor(
-        outside=false,
-        wall_height=floor_width,
-        WallType=FloorLayers,
-        wall_length=floor_length)                                annotation (
-          Placement(transformation(
-            extent={{-2,-12},{2,12}},
-            rotation=90,
-            origin={0,62})));
-      ThermalZones.HighOrder.Components.Walls.Wall ceiling(
-        outside=false,
-        WallType=CeilingLayers,
-        wall_length=ceiling_length,
-        wall_height=ceiling_width)
-                       annotation (Placement(transformation(
-            extent={{2,-12},{-2,12}},
-            rotation=90,
-            origin={0,-56})));
-      Utilities.Interfaces.ConvRadComb convRadComb_floor
-        annotation (Placement(transformation(extent={{-10,84},{10,104}})));
-      Utilities.Interfaces.ConvRadComb convRadComb_ceiling
-        annotation (Placement(transformation(extent={{-10,-104},{10,-84}})));
       MixingVolumes.MixingVolume vol(
         redeclare package Medium = Medium,
         energyDynamics=system.energyDynamics,
@@ -2659,25 +2646,79 @@ Added documentation.</li>
         nPorts=2,
         m_flow_nominal=m_H)
         annotation (Placement(transformation(extent={{0,0},{22,22}})));
+      ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer_Floor(
+        final A=A,
+        final n=n_floor,
+        final d=d_floor,
+        final rho=rho_floor,
+        final lambda=lambda_floor,
+        final c=c_floor) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={0,46})));
+      Utilities.HeatTransfer.HeatToRad twoStar_RadEx_floor(
+        rad(T(start=T0)),
+        conv(T(start=T0)),
+        A=A,
+        eps=eps) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={-30,70})));
+      Utilities.Interfaces.RadPort radport_floor
+        annotation (Placement(transformation(extent={{-40,90},{-20,110}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_floor
+        annotation (Placement(transformation(extent={{8,86},{28,106}}),
+            iconTransformation(extent={{8,86},{28,106}})));
+      ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer_Ceiling(
+        final A=A,
+        final n=n_ceiling,
+        final d=d_ceiling,
+        final rho=rho_ceiling,
+        final lambda=lambda_ceiling,
+        final c=c_ceiling) annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={0,-28})));
+      Utilities.HeatTransfer.HeatToRad twoStar_RadEx_ceiling(
+        rad(T(start=T0)),
+        conv(T(start=T0)),
+        A=A,
+        eps=eps) annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
+            rotation=90,
+            origin={-24,-58})));
+      Utilities.Interfaces.RadPort radport_ceiling
+        annotation (Placement(transformation(extent={{-34,-104},{-14,-84}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
+        annotation (Placement(transformation(extent={{10,-108},{30,-88}}),
+            iconTransformation(extent={{8,84},{28,104}})));
     equation
 
-      connect(floor.thermStarComb_inside, convRadComb_floor)
-        annotation (Line(points={{0,64},{0,94}}, color={191,0,0}));
-      connect(ceiling.thermStarComb_inside, convRadComb_ceiling)
-        annotation (Line(points={{0,-58},{0,-94},{0,-94}}, color={191,0,0}));
-      connect(vol.heatPort, floor.port_outside)
-        annotation (Line(points={{0,11},{0,59.9}}, color={191,0,0}));
-      connect(vol.heatPort, ceiling.port_outside)
-        annotation (Line(points={{0,11},{0,-53.9}}, color={191,0,0}));
       connect(port_a, vol.ports[1])
         annotation (Line(points={{-100,0},{8.8,0}}, color={0,127,255}));
       connect(vol.ports[2], port_b)
         annotation (Line(points={{13.2,0},{100,0}}, color={0,127,255}));
+      connect(vol.heatPort, simpleNLayer_Floor.port_a) annotation (Line(points={{0,11},
+              {0,36},{-4.44089e-16,36}}, color={191,0,0}));
+      connect(twoStar_RadEx_floor.conv, simpleNLayer_Floor.port_b) annotation (Line(
+            points={{-30,60.8},{-30,56},{6.66134e-16,56}}, color={191,0,0}));
+      connect(twoStar_RadEx_floor.rad, radport_floor)
+        annotation (Line(points={{-30,79.1},{-30,100}}, color={95,95,95}));
+      connect(simpleNLayer_Floor.port_b, heatport_floor) annotation (Line(points={{4.44089e-16,
+              56},{18,56},{18,96}}, color={191,0,0}));
+      connect(vol.heatPort, simpleNLayer_Ceiling.port_a)
+        annotation (Line(points={{0,11},{0,-18}}, color={191,0,0}));
+      connect(simpleNLayer_Ceiling.port_b, twoStar_RadEx_ceiling.conv)
+        annotation (Line(points={{0,-38},{-24,-38},{-24,-48.8}}, color={191,0,0}));
+      connect(twoStar_RadEx_ceiling.rad, radport_ceiling)
+        annotation (Line(points={{-24,-67.1},{-24,-94}}, color={95,95,95}));
+      connect(simpleNLayer_Ceiling.port_b, heatport_ceiling)
+        annotation (Line(points={{0,-38},{20,-38},{20,-98}}, color={191,0,0}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
     end PanelHeatingParameters;
 
-    model PanelHeating_Circuit
+    model PanelHeatingCircuit
       extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
          replaceable package Medium =
@@ -2835,19 +2876,17 @@ Added documentation.</li>
         dT_H=dT_Hi)
         annotation (Placement(transformation(extent={{-100,-60},{-54,-38}})));
 
-      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
-            Medium)
+      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium
+          = Medium)
         annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
-      Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package Medium =
+      Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package
+          Medium =
             Medium)
         annotation (Placement(transformation(extent={{42,-10},{62,10}})));
-
 
     equation
       assert(PipeLength > 120, "Pipe Length is too high, additional heating circuit needs to be used", AssertionLevel.warning);
       assert(T_Fm > T_Fmax, "Surface temperature too high", AssertionLevel.warning);
-
-
 
     //OUTER CONNECTIONS
 
@@ -2885,7 +2924,7 @@ Added documentation.</li>
         annotation (Line(points={{62,0},{100,0}}, color={0,127,255}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
-    end PanelHeating_Circuit;
+    end PanelHeatingCircuit;
 
     model PanelHeatingSystem
       replaceable package Medium =
@@ -2931,9 +2970,8 @@ Added documentation.</li>
         annotation (Placement(transformation(extent={{-148,18},{-128,38}})));
       Modelica.Blocks.Sources.RealExpression TFLow(y=T_Vdes)
         annotation (Placement(transformation(extent={{-148,0},{-128,20}})));
-      PanelHeating_Circuit panelHeating_Circuit[CircuitNo](redeclare package
-          Medium =
-            Medium)
+      PanelHeatingCircuit panelHeating_Circuit[CircuitNo](redeclare package
+          Medium = Medium)
         annotation (Placement(transformation(extent={{48,-20},{84,14}})));
       Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
             Medium)
