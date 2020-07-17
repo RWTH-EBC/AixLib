@@ -1,11 +1,11 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case400
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
+    redeclare model correctionSolarGain =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoTransmittance,
     solar_absorptance_OW=0.1,
     internalGains=0,
     airExchange=0,
-                 Room(outerWall_South( windowSimple(redeclare model correctionSolarGain =
-            Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoTransmittance))),
     ReferenceHeatingLoad(table=[400,6900,8770]),
     ReferenceCoolingLoad(table=[400,-61,0]));
   annotation (Documentation(revisions="<html>
