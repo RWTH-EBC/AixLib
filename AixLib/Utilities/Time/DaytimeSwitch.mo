@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Time;
+within AixLib.Utilities.Time;
 model DaytimeSwitch
   "Set the output to true if the given daytime stamp is equal to current daytime"
   parameter Boolean weekly=true
@@ -62,14 +62,19 @@ equation
         Line(
           points={{0,0},{-18,-32}},
           thickness=0.5,
-          color={238,46,47})}), Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+          color={238,46,47})}), Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Using <a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">AixLib.Utilities.Time.CalendarTime</a>, this model triggers a control if the current time is equal to a certain hour of the day and or day of the week.</p>
+<p>
+  Using <a href=
+  \"modelica://AixLib.Utilities.Time.CalendarTime\">AixLib.Utilities.Time.CalendarTime</a>,
+  this model triggers a control if the current time is equal to a
+  certain hour of the day and or day of the week.
+</p>
 </html>"));
 end DaytimeSwitch;

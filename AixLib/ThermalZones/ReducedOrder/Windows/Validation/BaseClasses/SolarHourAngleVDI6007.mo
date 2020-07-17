@@ -26,12 +26,12 @@ equation
   solHouAng=(12-woz)*2*Modelica.Constants.pi/24;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-This model computes the solar hour angle for test case 1 and 3 of VDI2078 in
-April.
-</html>", revisions="<html>
+    Documentation(info="<html>This model computes the solar hour angle for test case 1 and 3 of
+VDI2078 in April.
 <ul>
-<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+  <li>July 17 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end SolarHourAngleVDI6007;

@@ -53,22 +53,33 @@ equation
     annotation (Line(points={{-19,-30},{3,-30},{3,-9}}, color={255,0,255}));
   connect(TSet.y,combinedHeatPower. TSet) annotation (Line(points={{-19,30},{-14,
           30},{-14,-6},{-7,-6}}, color={0,0,127}));
-  annotation (Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.CHP\">AixLib.Fluid.BoilerCHP.CHP</a> in different conditions.
-Inlet and outlet temperature as well as the electrical and thermal power of the
-CHP can be observed.
-Change the inlet water temperature profile to see the reaction timing. </p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The simulation illustrates the behavior of <a href=
+  \"AixLib.Fluid.BoilerCHP.CHP\">AixLib.Fluid.BoilerCHP.CHP</a> in
+  different conditions. Inlet and outlet temperature as well as the
+  electrical and thermal power of the CHP can be observed. Change the
+  inlet water temperature profile to see the reaction timing.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib</li>
-<li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated
-documentation.</li>
-<li>by Pooyan Jahangiri:<br/>First implementation.</li>
+        revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib
+  </li>
+  <li>
+    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/>
+    Formated documentation.
+  </li>
+  <li>by Pooyan Jahangiri:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
 experiment(StopTime=35000, Interval=60));

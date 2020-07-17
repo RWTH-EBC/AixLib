@@ -89,21 +89,26 @@ equation
               "modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/Illumination.png")}),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>May 23, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+    Documentation(revisions="<html><ul>
+  <li>May 23, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>",
-      info="<html>
-This model calculates the activation and deactivation times of the illumination
- and gives it back as the Boolean \"Illumination\".
-It is based on VDI 6007 part 3. <br/>
-The total solar energy entering the room, which can be calculated by <a href=
-\"Windows.Window\">Window</a> or <a href=\"Windows.ShadedWindow\">
-ShadedWindow</a>, is compared to a limit value based on the parameters.
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI 6007-3
-  June 2015. Calculation of transient thermal response of rooms
-  and buildings - Modelling of solar radiation.</p>
+      info="<html>This model calculates the activation and deactivation times of the
+illumination and gives it back as the Boolean \"Illumination\". It is
+based on VDI 6007 part 3.<br/>
+The total solar energy entering the room, which can be calculated by
+<a href=\"Windows.Window\">Window</a> or <a href=
+\"Windows.ShadedWindow\">ShadedWindow</a>, is compared to a limit value
+based on the parameters.
+<h4>
+  References
+</h4>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  Modelling of solar radiation.
+</p>
 </html>"));
 end Illumination;

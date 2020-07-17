@@ -300,15 +300,32 @@ equation
           lineColor={135,135,135},
           textString="2")}),    Diagram(coordinateSystem(extent={{-120,-120},{120,
             120}}, initialScale=0.1)),
-    Documentation(info="<html>
-<p>Injection circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>
-<h4><span style=\"color: #008000\">Characteristics</span></h4>
-<p>When the valve is fully opened, the consumer module is plugged into the primary hydronic circuit (port_a1, port_b2) whereas when the valve is fully closed, the consumer is isolated from the primary hydronic circuit. The primary needs a supply pump or a pressure difference.</p>
-<p>This model uses a pipe model to include the heat loss and insulation effects</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  Injection circuit with a replaceable pump model for the distribution
+  of hot or cold water. All sensor and actor values are connected to
+  the hydraulic bus.
+</p>
+<h4>
+  <span style=\"color: #008000\">Characteristics</span>
+</h4>
+<p>
+  When the valve is fully opened, the consumer module is plugged into
+  the primary hydronic circuit (port_a1, port_b2) whereas when the
+  valve is fully closed, the consumer is isolated from the primary
+  hydronic circuit. The primary needs a supply pump or a pressure
+  difference.
+</p>
+<p>
+  This model uses a pipe model to include the heat loss and insulation
+  effects
+</p>
 <ul>
-<li>August 09, 2018, by Alexander K&uuml;mpel:<br/>Extension from base PartioalHydraulicModuls</li>
-<li>June 30, 2018, by Alexander K&uuml;mpel:<br/>First implementation</li>
+  <li>August 09, 2018, by Alexander Kümpel:<br/>
+    Extension from base PartioalHydraulicModuls
+  </li>
+  <li>June 30, 2018, by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end Injection2WayValve;

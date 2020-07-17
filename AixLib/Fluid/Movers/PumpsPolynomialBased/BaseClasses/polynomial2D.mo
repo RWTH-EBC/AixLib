@@ -17,10 +17,25 @@ algorithm
       end if;
     end for;
   end for;
-  annotation (Documentation(info="<html>
-<h4>History</h4>
-<p>In the original pump model the functions for pump pressure head, speed and electrical power consumption have been integrated directly as functions with hard coded coefficients. They were computed from volume flow rate, speed or pressure head. For example:</p>
-<p><img src=\"modelica://Zugabe/Resources/Images/equations/equation-dnpNDYbm.png\" alt=\"H = f(Q, n)=sum(c(i,j)*Q^i*n^j)\"/></p>
-<p>In the process of collecting all pump specific data into a single record the functions aproach has been discontinued. This generic function can now be used to compute the polynomial using two variables a and b and a matrix of coefficients c.</p>
+  annotation (Documentation(info="<html><h4>
+  History
+</h4>
+<p>
+  In the original pump model the functions for pump pressure head,
+  speed and electrical power consumption have been integrated directly
+  as functions with hard coded coefficients. They were computed from
+  volume flow rate, speed or pressure head. For example:
+</p>
+<p>
+  <img src=
+  \"modelica://Zugabe/Resources/Images/equations/equation-dnpNDYbm.png\"
+  alt=\"H = f(Q, n)=sum(c(i,j)*Q^i*n^j)\">
+</p>
+<p>
+  In the process of collecting all pump specific data into a single
+  record the functions aproach has been discontinued. This generic
+  function can now be used to compute the polynomial using two
+  variables a and b and a matrix of coefficients c.
+</p>
 </html>"));
 end polynomial2D;
