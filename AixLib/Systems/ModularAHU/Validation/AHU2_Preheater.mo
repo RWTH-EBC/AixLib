@@ -64,16 +64,18 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
       Kv=10,
       valveCharacteristic=
           AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=
-          AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.13,0.205,0.566,0.813,
-          0.88,0.91,0.95,1}, phi={0,0.001,0.002,0.176,0.60,0.75,0.97,0.98,1}),
-          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,0.25,0.52,
-          0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.022,0.53,0.96,0.98,0.99,1})),
+          AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.13,0.205,0.566,
+          0.813,0.88,0.91,0.95,1}, phi={0,0.001,0.002,0.176,0.60,0.75,0.97,0.98,
+          1}), b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,
+          0.25,0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.022,0.53,0.96,0.98,
+          0.99,1})),
       valve(use_inputFilter=false),
       pipe1(length=1.53),
       pipe2(length=0.54),
       pipe3(length=1.06),
-      pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=0.48),
-      pipe5(length=1.44, fac=20),
+      pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
+            0.48),
+      pipe5(length=1.44, fac=16),
       pipe6(length=0.52),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
@@ -89,7 +91,7 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
     dynamicHX(
       dp1_nominal=66,
       dp2_nominal=6000 + 8000,
-      nNodes=4,
+      nNodes=5,
       dT_nom=43.9,
       Q_nom=57700))
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));
