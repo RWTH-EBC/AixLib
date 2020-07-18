@@ -114,7 +114,7 @@ of short wave radiation
 in room model")}),                               Icon(coordinateSystem(extent={{-160,-100},{120,240}})),
   experiment(StopTime=86400, Interval=3600),
       __Dymola_experimentSetupOutput(events=false),
-      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/Examples/ASHREA140/CompareDynamicAndStaticSolarFrac_Case270.mos"
+      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/ASHREA140/CompareDynamicAndStaticSolarFrac_Case270.mos"
           "Simulate and plot"));
   end CompareDynamicAndStaticSolarFrac_Case270;
 end ASHREA140;
