@@ -217,7 +217,7 @@ equation
           color={255,255,0},
           thickness=0.5)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p><br>This model distributes the incoming short wave radtion onto different areas of the room according to the approach in the ASHREA Standard, Annex B7 &quot;Detailed calculation of solar fractions&quot;. The ASHREA makes some assumptions to estimate the sight factors of each element. For more details on the assumptions, we refer to the ASHREA standard. In order to ease the usage of this model, we made additional assumptions. </p>
+<p>This model distributes the incoming short wave radtion onto different areas of the room according to the approach in the ASHREA Standard, Annex B7 &quot;Detailed calculation of solar fractions&quot;. The ASHREA makes some assumptions to estimate the sight factors of each element. For more details on the assumptions, we refer to the ASHREA standard. In order to ease the usage of this model, we made additional assumptions. </p>
 <h4>Assumptions by ASHREA</h4>
 <ul>
 <li>First bounce: All shortwave radiation initially hits the floor</li>
@@ -240,9 +240,15 @@ equation
 <p>If you model a room with multiple floor elements, you have to specify the parameters floor_length and floor_height. These scales are required to calculate the view factors in the second bounce.</p>
 <h4>Known Limitations</h4>
 <ul>
-<li>In the ASHREA, all surfaces shall have the same absorbtance. Our modelling approach enable differing values. To reproduce the exact values from the ASHREA, you&apos;d have to change the records from the wall, floors etc.</li>
+<li>Although we implemented the exact same equations as in the ASHREA (besides out approach for the third bounce), the results of the model do NOT match the results provided in the tables of the Appendix in the ASHREA. This is due to the high fiew factor from floor to ceiling in the second bounce. We could not quantify how the results in the Appendix are obtained, as their solar fraction for the ceiling is too low. In order to use the ASHREA values from the tables instead of the dynamic calculation, you may use the option table_based_calc.</li>
+<li>In the ASHREA, all surfaces shall have the same absorbtance. Our modelling approach enable differing values. </li>
 <li>This model works best for nearly quadratic rooms</li>
 <li>Windows in the floors or ceilings are not regarded</li>
+</ul>
+<h4>Sources</h4>
+<ul>
+<li>ANSI/ASHREA Standard 140-2017</li>
+<li>Principles of Heat Transfer - Chapter 9.4 <a href=\"http://160592857366.free.fr/joe/ebooks/Mechanical%20Engineering%20Books%20Collection/HEAT%20TRANSFER/Ptinciples%20of%20Heat%20Transfer.pdf\">[Link]</a></li>
 </ul>
 </html>", revisions="<html>
  <ul>
