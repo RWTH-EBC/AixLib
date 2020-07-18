@@ -31,6 +31,9 @@ model EastWestFacingWindows "windows facing south and west"
 
     parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Win=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140()
       "choose a Window type" annotation(Dialog(group="Windows"),choicesAllMatching= true);
+    parameter Boolean shortWaveRad_method = true "Dynamic for holistic approach, static to obtain the same values as provided in tables of the ASHREA" annotation(Dialog(tab = "Short wave radiation", compact = true, descriptionLabel = false), choices(choice = true "Dynamic", choice = false "Static", radioButtons = true));
+    parameter Components.Types.selectorCoefficients abs=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09
+    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}" annotation(choicesAllMatching=true, Dialog(tab = "Short wave radiation", enable=not shortWaveRad_method));
 
 public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
@@ -163,10 +166,11 @@ public
 
 
   Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
-    method=false,                                      nWin=2, nWalls=4,
-    redeclare Components.Types.CoeffTableEastWestWindow staticCoeffTable(abs=
-          AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09))
+    final method=shortWaveRad_method,
+    nWin=2, nWalls=4,
+    redeclare Components.Types.CoeffTableEastWestWindow staticCoeffTable(final abs=abs))
     annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
+
 equation
     connect(floor.port_outside, Therm_ground) annotation (Line(
         points={{-32,-66.1003},{-32,-96}},
@@ -254,20 +258,20 @@ equation
       Line(points={{-51,45.5},{-52,45.5},{-52,58},{14,58},{14,74.2},{14.2,74.2}},
                                                         color={0,0,0}));
   connect(solarRadInRoom.win_in[2], outerWall_East.shortRadWin) annotation (
-      Line(points={{-51,46.5},{-52,46.5},{-52,58},{44,58},{44,-54},{38,-54},{38,
-          -64.2},{37.8,-64.2}},                                           color=
+      Line(points={{-51,46.5},{-52,46.5},{-52,58},{44,58},{44,-54},{38,-54},{38,-64.2},{37.8,-64.2}},
+                                                                          color=
          {0,0,0}));
-  connect(outerWall_East.shortRadWall, solarRadInRoom.walls[1]) annotation (
-      Line(points={{10.2,-64},{12,-64},{12,-54},{44,-54},{44,51.25},{-29,51.25}},
-        color={0,0,0}));
-  connect(outerWall_South.shortRadWall, solarRadInRoom.walls[2]) annotation (
-      Line(points={{-62,30.3333},{-58,30.3333},{-58,30},{-54,30},{-54,58},{-12,
-          58},{-12,51.75},{-29,51.75}}, color={0,0,0}));
-  connect(outerWall_West.shortRadWall, solarRadInRoom.walls[3]) annotation (
-      Line(points={{41.8,74},{42,74},{42,52.25},{-29,52.25}}, color={0,0,0}));
-  connect(outerWall_North.shortRadWall, solarRadInRoom.walls[4]) annotation (
-      Line(points={{60,30.3333},{54,30.3333},{54,30},{44,30},{44,52.75},{-29,
-          52.75}}, color={0,0,0}));
+  connect(outerWall_East.shortRadWall, solarRadInRoom.walls[1]) annotation (Line(points={{10.2,
+          -64},{12,-64},{12,-54},{44,-54},{44,51.25},{-29,51.25}},
+                                            color={0,0,0}));
+  connect(outerWall_South.shortRadWall, solarRadInRoom.walls[2]) annotation (Line(points={{-62,
+          30.3333},{-58,30.3333},{-58,30},{-54,30},{-54,58},{-12,58},{-12,51.75},
+          {-29,51.75}},                                                 color={0,0,0}));
+  connect(outerWall_West.shortRadWall, solarRadInRoom.walls[3])
+    annotation (Line(points={{41.8,74},{42,74},{42,52.25},{-29,52.25}}, color={0,0,0}));
+  connect(outerWall_North.shortRadWall, solarRadInRoom.walls[4]) annotation (Line(points={{60,
+          30.3333},{54,30.3333},{54,30},{44,30},{44,52.75},{-29,52.75}},
+                                                   color={0,0,0}));
     annotation ( Icon(coordinateSystem(extent={{-100,-100},
               {100,100}}, preserveAspectRatio=false),
                                         graphics={

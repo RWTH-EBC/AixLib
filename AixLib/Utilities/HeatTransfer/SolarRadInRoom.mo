@@ -156,7 +156,9 @@ initial equation
   // Check correct user input if multiple floors are selected
   assert(A_floor - floor_height_int*floor_length_int < Modelica.Constants.eps, "Total floor area mismatches area specified by user", AssertionLevel.error);
   // Check number of walls for static method
-  assert(not method and nWalls==4, "For static calcuation, the number of floor needs to be equal to 4.", AssertionLevel.error);
+  if not method then
+    assert(nWalls==4, "For static calcuation, the number of floor needs to be equal to 4.", AssertionLevel.error);
+  end if;
 equation
 
   for n in 1:nWalls loop
