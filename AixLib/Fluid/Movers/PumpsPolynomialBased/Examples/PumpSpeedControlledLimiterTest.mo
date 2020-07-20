@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledLimiterTest
   "Testing the pump speed algorithm with the new \"one record\" pump model that bounds speed instead of pump head."
   extends Modelica.Icons.Example;
@@ -80,7 +80,7 @@ equation
       index=2,
       extent={{6,3},{6,3}}));
   annotation (
-    experiment(Tolerance=1e-6,StopTime=200),
+    experiment(Tolerance=1e-4,StopTime=200),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.

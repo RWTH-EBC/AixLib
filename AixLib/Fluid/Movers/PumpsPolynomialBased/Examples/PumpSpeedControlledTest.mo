@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledTest
   "Testing the pump speed algorithm with the new \"one record\" pump model."
   extends Modelica.Icons.Example;
@@ -82,7 +82,7 @@ equation
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{48,
           10},{48,-30},{-20,-30}}, color={0,127,255}));
   annotation (
-    experiment(Tolerance=1e-6,StopTime=600),
+    experiment(Tolerance=1e-4,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.

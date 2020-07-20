@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpNdpVarControlTest
   "testing the pump dp-var algorithm with the new \"one record\" pump model with internal speed limitation (instead of pump head limitation)."
   extends Modelica.Icons.Example;
@@ -77,7 +77,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   annotation (
-      experiment(Tolerance=1e-6,StopTime=600),
+      experiment(Tolerance=1e-4,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
