@@ -24,7 +24,7 @@ model PumpNdpVarControlTest
     redeclare package Medium = Medium,
     m_flow_start=system.m_flow_start,
     m_flow_small=system.m_flow_small,
-    Kvs=4)
+    Kvs=6.3)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(

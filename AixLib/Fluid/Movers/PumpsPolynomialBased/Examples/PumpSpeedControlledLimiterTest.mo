@@ -5,9 +5,8 @@ model PumpSpeedControlledLimiterTest
   inner Modelica.Fluid.System system(
     p_ambient=300000,
     T_ambient=293.15,
-    m_flow_start=pump.m_flow_start,
     T_start=293.15,
-    m_flow_small=pump.m_flow_start*1e-2)
+    m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
@@ -34,10 +33,9 @@ model PumpSpeedControlledLimiterTest
                 annotation (Placement(transformation(extent={{46,30},{26,50}})));
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
-    Kvs=system.m_flow_nominal*3600/995/sqrt(system.g*pump.Hnom/1e5*1000),
+    Kvs=6.3,
     m_flow_start=system.m_flow_start,
-    m_flow_small=system.m_flow_small,
-    dp_start=pump.p_b_start - pump.p_a_start)
+    m_flow_small=system.m_flow_small)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableValvePosition(

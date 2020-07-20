@@ -3,6 +3,12 @@ model PumpSpeedControlled
   "Pump model with speed control, onOff-Switch and bounding of speed instead of pump delivery head."
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
+    // Energy and mass balance (defines Medium start properties)
+  extends Modelica.Fluid.Interfaces.PartialLumpedVolume(
+    final fluidVolume=V,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState);
+
 
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam= AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord() "pump parameter record"
     annotation (choicesAllMatching=true);
@@ -45,11 +51,7 @@ model PumpSpeedControlled
   parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
-  // Energy and mass balance (defines Medium start properties)
-  extends Modelica.Fluid.Interfaces.PartialLumpedVolume(
-    final fluidVolume=V,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState);
+
 
   // Power and Efficiency
   parameter Boolean calculatePower=false "calc. power consumption?" annotation (
@@ -113,8 +115,7 @@ public
   Modelica.Blocks.Sources.RealExpression Vflow_m3h(y(
       min=0,
       max=max(pumpParam.maxMinSpeedCurves[:, 1]),
-      nominal=Qnom)=
-      if noEvent(port_b.m_flow > 0) then 0 else m_flow/medium.d*3600)
+      nominal=Qnom)= m_flow/medium.d*3600)
     "conversion of mass flow rate to volume flow rate"
     annotation (Placement(transformation(extent={{-100,35},{-80,55}})));
   Modelica.Blocks.Tables.CombiTable1D maxMinTable(
