@@ -143,6 +143,17 @@ model Case600FF
   parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
       AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
     "Types of walls (contains multiple records)";
+parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win=
+      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140()
+    "Window parametrization";
+  replaceable model correctionSolarGain =
+      Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
+    constrainedby
+    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    "Model for correction of solar gain" annotation (
+      __Dymola_choicesAllMatching=true);
+  parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
+
 equation
     //Connections for input solar model
   for i in 1:5 loop
