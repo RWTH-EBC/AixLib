@@ -11,7 +11,8 @@ block PVModule5pNumericalPreCalc
  constant Real q( unit = "A.s")= 1.602176620924561e-19
    "Electron charge";
 
-connector PVModuleData = input AixLib.DataBase.SolarElectric.PVBaseRecordNew;
+connector PVModuleData = input
+      AixLib.DataBase.SolarElectric.PVBaseDataDefinition;                         //geändert
 
 PVModuleData data;
 

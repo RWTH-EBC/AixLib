@@ -1,4 +1,4 @@
-within AixLib.Electrical.PVSystem.BaseClasses;
+﻿within AixLib.Electrical.PVSystem.BaseClasses;
 model IVCharacteristics5pNumerical "Numerical 5-p model for determining the I-V characteristics of a PV array after (DeSoto et al.,2006)"
 
 extends PartialIVCharacteristics;
@@ -92,9 +92,9 @@ equation
 
    // Efficiency and Performance
 
-   eta= if radTil <= 0.01 then 0
+   eta= if noEvent(radTil <= 0.01) then 0
    else
-   P_mod/(radTil*A_pan);
+   P_mod/(radTil*A_pan);                  //geändert
 
    P_mod = V_mp*I_mp;
 
