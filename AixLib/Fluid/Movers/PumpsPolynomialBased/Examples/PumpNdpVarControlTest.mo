@@ -2,16 +2,11 @@
 model PumpNdpVarControlTest
   "testing the pump dp-var algorithm with the new \"one record\" pump model with internal speed limitation (instead of pump head limitation)."
   extends Modelica.Icons.Example;
-  inner Modelica.Fluid.System system(
-    allowFlowReversal=false,
-    p_ambient=300000,
-    T_ambient=293.15,
-    T_start=293.15)
-    annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpSpeedControlled                                                    pump(
+    m_flow_nominal=1,
     calculatePower=true,
     calculateEfficiency=true,
     redeclare package Medium = Medium,
@@ -22,8 +17,7 @@ model PumpNdpVarControlTest
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
-    m_flow_start=system.m_flow_start,
-    m_flow_small=system.m_flow_small,
+    m_flow_small=0.001,
     Kvs=6.3)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
@@ -35,7 +29,6 @@ model PumpNdpVarControlTest
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   AixLib.Fluid.Sources.Boundary_pT vessle(
     redeclare package Medium = Medium,
-    T=system.T_start,
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
