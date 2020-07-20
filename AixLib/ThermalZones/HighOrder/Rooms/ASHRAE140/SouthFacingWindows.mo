@@ -1,6 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140;
 model SouthFacingWindows "windows facing south"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
       redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls
       wallTypes(
       roof=DataBase.Walls.ASHRAE140.RO_Case600(),
@@ -47,7 +48,8 @@ public
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,
     calcMethodIn=calcMethodIn,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    redeclare final model Window = Components.WindowsDoors.Window_ASHRAE140,
+    redeclare final model correctionSolarGain = corrSolarGainWin,
     withDoor=false,
     wallPar=wallTypes.OW,
     T0=Tset,
@@ -64,7 +66,7 @@ public
     windowarea=Win_Area,
     wall_height=room_height,
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140())
+    final WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140())
     annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_West(
     use_shortWaveRadIn=true,
@@ -72,6 +74,10 @@ public
     wall_length=room_length,
     wall_height=room_height,
     solarDistribution=partialCoeffTable.coeffOWWest,
+    withWindow=false,
+    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    final WindowType=DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
+    redeclare final model correctionSolarGain = corrSolarGainWin,
     withDoor=false,
     T0=Tset,
     outside=true,
@@ -93,6 +99,10 @@ public
     wall_length=room_length,
     wall_height=room_height,
     solarDistribution=partialCoeffTable.coeffOWEast,
+    withWindow=false,
+    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    final WindowType=DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
+    redeclare final model correctionSolarGain = corrSolarGainWin,
     T0=Tset,
     outside=true,
     final withSunblind=use_sunblind,
@@ -112,6 +122,10 @@ public
     calcMethodIn=calcMethodIn,
     wall_height=room_height,
     solarDistribution=partialCoeffTable.coeffOWNorth,
+    withWindow=false,
+    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    final WindowType=DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
+    redeclare final model correctionSolarGain = corrSolarGainWin,
     U_door=5.25,
     door_height=1,
     door_width=2,
@@ -135,6 +149,10 @@ public
     wall_length=room_length,
     wall_height=room_width,
     solarDistribution=partialCoeffTable.coeffCeiling,
+    withWindow=false,
+    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    final WindowType=DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
+    redeclare final model correctionSolarGain = corrSolarGainWin,
     withDoor=false,
     T0=Tset,
     wallPar=wallTypes.roof,
@@ -155,6 +173,10 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_width,
+    withWindow=false,
+    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    final WindowType=DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
+    redeclare final model correctionSolarGain = corrSolarGainWin,
     withDoor=false,
     solarDistribution=partialCoeffTable.coeffFloor,
     T0=Tset,
@@ -186,45 +208,40 @@ public
       abs=absInnerWallSurf) annotation (Placement(transformation(extent={{76,78},
             {96,98}})), choicesAllMatching=true);
 
+
 equation
   connect(floor.port_outside, Therm_ground)
     annotation (Line(points={{-32,-66.1003},{-32,-96}}, color={191,0,0}));
-  connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-76.35,
-          33.3333},{-86,33.3333},{-86,28},{-112,28}},         color={0,0,127}));
-  connect(outerWall_East.WindSpeedPort, WindSpeedPort) annotation (Line(points={{8.4,
-          -72.2},{8.4,-80},{-86,-80},{-86,28},{-112,28}},      color={0,0,127}));
+  connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-76.35,33.3333},{-86,33.3333},{-86,28},{-112,28}},
+                                                              color={0,0,127}));
+  connect(outerWall_East.WindSpeedPort, WindSpeedPort) annotation (Line(points={{8.4,-72.2},{8.4,-80},{-86,-80},{-86,28},{-112,28}},
+                                                               color={0,0,127}));
   connect(ceiling.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-23.2,
           80.1},{-23.2,88},{-86,88},{-86,28},{-112,28}}, color={0,0,127}));
-  connect(outerWall_North.WindSpeedPort, WindSpeedPort) annotation (Line(points={{74.35,
-          33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{-112,28}},
+  connect(outerWall_North.WindSpeedPort, WindSpeedPort) annotation (Line(points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{-112,28}},
         color={0,0,127}));
 
   connect(outerWall_West.WindSpeedPort, WindSpeedPort) annotation (Line(points={
           {43.6,82.2},{43.6,88},{-86,88},{-86,28},{-112,28}}, color={0,0,127}));
 
   connect(outerWall_South.solarRadWinTrans, floor.solarRadWin) annotation (Line(
-        points={{-60.25,-16.6667},{-54,-16.6667},{-54,-56},{-40.8,-56},{-40.8,
-          -61.8}},
+        points={{-60.25,-16.6667},{-54,-16.6667},{-54,-56},{-40.8,-56},{-40.8,-61.8}},
         color={0,0,127}));
 
   connect(outerWall_South.solarRadWinTrans, outerWall_East.solarRadWin)
-    annotation (Line(points={{-60.25,-16.6667},{-54,-16.6667},{-54,-56},{8.4,
-          -56},{8.4,-63.6}},
+    annotation (Line(points={{-60.25,-16.6667},{-54,-16.6667},{-54,-56},{8.4,-56},{8.4,-63.6}},
                         color={0,0,127}));
 
   connect(outerWall_South.solarRadWinTrans, outerWall_South.solarRadWin)
-    annotation (Line(points={{-60.25,-16.6667},{-54,-16.6667},{-54,33.3333},{
-          -61.3,33.3333}},
+    annotation (Line(points={{-60.25,-16.6667},{-54,-16.6667},{-54,33.3333},{-61.3,33.3333}},
                      color={0,0,127}));
 
   connect(outerWall_South.solarRadWinTrans, ceiling.solarRadWin) annotation (
-      Line(points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{-23.2,60},{-23.2,
-          75.8}},
+      Line(points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{-23.2,60},{-23.2,75.8}},
         color={0,0,127}));
 
   connect(outerWall_North.solarRadWin, outerWall_South.solarRadWinTrans)
-    annotation (Line(points={{59.3,33.3333},{46,33.3333},{46,60},{-54,60},{-54,
-          -16.6667},{-60.25,-16.6667}},
+    annotation (Line(points={{59.3,33.3333},{46,33.3333},{46,60},{-54,60},{-54,-16.6667},{-60.25,-16.6667}},
                               color={0,0,127}));
   connect(SolarRadiationPort[3], outerWall_South.SolarRadiationPort)
     annotation (Line(points={{-110,60},{-86,60},{-86,40.6667},{-78.1,40.6667}},
@@ -236,24 +253,23 @@ equation
      Line(points={{48,83.2},{48,88},{-86,88},{-86,64},{-110,64}}, color={255,128,
           0}));
   connect(outerWall_North.SolarRadiationPort, SolarRadiationPort[1])
-    annotation (Line(points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{
-          -86,52},{-110,52}},
+    annotation (Line(points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,52}},
                           color={255,128,0}));
 
   connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (
      Line(points={{4,-73.2},{4,-80},{-86,-80},{-86,56},{-110,56}}, color={255,128,
           0}));
   connect(outerWall_South.solarRadWinTrans, outerWall_West.solarRadWin)
-    annotation (Line(points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{43.6,60},
-          {43.6,73.6}}, color={0,0,127}));
+    annotation (Line(points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{43.6,60},{43.6,73.6}},
+                        color={0,0,127}));
   connect(thermOutside, ceiling.port_outside) annotation (Line(points={{-100,100},
           {-66,100},{-66,88},{-32,88},{-32,80.1}}, color={191,0,0}));
   connect(thermOutside, outerWall_West.port_outside) annotation (Line(points={{-100,
           100},{-68,100},{-68,88},{26,88},{26,82.2}}, color={191,0,0}));
   connect(thermOutside, outerWall_North.port_outside) annotation (Line(points={{
           -100,100},{-68,100},{-68,88},{82,88},{82,4},{74.35,4}}, color={191,0,0}));
-  connect(thermOutside, outerWall_East.port_outside) annotation (Line(points={{-100,
-          100},{-68,100},{-68,88},{82,88},{82,-80},{26,-80},{26,-72.2}}, color={
+  connect(thermOutside, outerWall_East.port_outside) annotation (Line(points={{-100,100},{-68,100},{-68,88},{82,88},{82,-80},{26,-80},{26,-72.2}},
+                                                                         color={
           191,0,0}));
   connect(thermOutside, outerWall_South.port_outside) annotation (Line(points={{
           -100,100},{-66,100},{-66,88},{-86,88},{-86,4},{-76.35,4}}, color={191,
