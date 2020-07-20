@@ -6,7 +6,7 @@ model ValidationPVSystem
   PVSystem pVSystem(
     redeclare DataBase.SolarElectric.SharpNUU235F2 data,
     redeclare model IVCharacteristics =
-        BaseClasses.IVCharacteristics5pAnalytical,
+        BaseClasses.IVCharacteristics5pNumerical,
     redeclare model CellTemperature =
         BaseClasses.CellTemperatureMountingCloseToGround,
     n_mod=312,
@@ -78,8 +78,8 @@ equation
 3 - Global horizontal irradiance in W/m2
 4 - Ouput power in kW")}),
     experiment(
-      StartTime=5011200,
-      StopTime=5097600,
+      StartTime=28684800,
+      StopTime=28771200,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
