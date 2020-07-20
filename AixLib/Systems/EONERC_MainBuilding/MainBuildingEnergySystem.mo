@@ -58,7 +58,7 @@ model MainBuildingEnergySystem
     T_amb=298.15,
     dIns=0.01,
     kIns=0.028,
-    d=0.1,
+    d=0.08,
     pipe1(length=15),
     pipe2(length=1),
     pipe3(length=4),
@@ -76,7 +76,7 @@ model MainBuildingEnergySystem
     Td=0,
     Ti=150,
     k=0.05,
-    rpm_pump=2000,
+    rpm_pump=600,
     reverseAction=false)
     annotation (Placement(transformation(extent={{-202,62},{-188,76}})));
   HydraulicModules.SimpleConsumer consumerHTC(
@@ -84,12 +84,12 @@ model MainBuildingEnergySystem
     V=0.1,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
-    functionality="T_input",
+    functionality="Q_flow_input",
     T_start=293.15)
     annotation (Placement(transformation(extent={{-176,84},{-164,96}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
-    annotation (Placement(transformation(extent={{-40,-120},{-28,-108}})));
+    annotation (Placement(transformation(extent={{-18,-120},{-6,-108}})));
   HydraulicModules.SimpleConsumer consumerLTC(
     kA=50000,
     V=5,
@@ -113,8 +113,8 @@ model MainBuildingEnergySystem
     TflowSet=301.15,
     k=0.05,
     Td=0,
-    rpm_pump=2000)
-    annotation (Placement(transformation(extent={{-128,64},{-114,78}})));
+    rpm_pump=1500)
+    annotation (Placement(transformation(extent={{-124,62},{-110,76}})));
   HydraulicModules.Admix admixLTC(
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -169,19 +169,14 @@ model MainBuildingEnergySystem
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={10,70})));
-  Modelica.Blocks.Sources.Sine sine(
-    amplitude=5,
-    freqHz=1/(3600*24),
-    offset=273.15 + 60)
-    annotation (Placement(transformation(extent={{-192,92},{-182,102}})));
   HydraulicModules.Controller.CtrMix ctrMixCold1(
     useExternalTset=false,
     TflowSet=289.15,
     k=0.05,
     Td=0,
-    rpm_pump=2000,
+    rpm_pump=1600,
     reverseAction=true)
-    annotation (Placement(transformation(extent={{-24,62},{-8,80}})));
+    annotation (Placement(transformation(extent={{-24,60},{-8,78}})));
   GeothermalFieldSimple geothermalFieldSimple(
     redeclare package Medium = Medium,
     m_flow_nominal=10,
@@ -193,8 +188,8 @@ model MainBuildingEnergySystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(
         redeclare
-          Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
-
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
+          per,
         energyDynamics=admixCold2.energyDynamics,
         addPowerToMedium=false)),
     redeclare package Medium = Medium,
@@ -215,6 +210,7 @@ model MainBuildingEnergySystem
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={110,70})));
+
   HydraulicModules.SimpleConsumer consumerCold2(
     kA=1000,
     V=0.1,
@@ -225,27 +221,23 @@ model MainBuildingEnergySystem
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={110,92})));
-  Modelica.Blocks.Sources.Sine sine3(
-    amplitude=1000,
-    freqHz=1/(3600*24),
-    offset=9000)
-    annotation (Placement(transformation(extent={{86,94},{96,104}})));
   HydraulicModules.Controller.CtrMix ctrMixCold2(
     useExternalTset=false,
     TflowSet=285.15,
     k=0.05,
     Td=0,
-    rpm_pump=2000,
+    rpm_pump=1400,
     reverseAction=true)
     annotation (Placement(transformation(extent={{74,62},{90,80}})));
   BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{-56,
             104},{-26,134}}), iconTransformation(extent={{-30,110},{-10,130}})));
   Modelica.Blocks.Nonlinear.Limiter limiterCCAHot(uMax=0, uMin=-100000)
     annotation (Placement(transformation(extent={{-130,98},{-122,106}})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_AHU(y=(12000*2 + 3000 + 17*73)/
-        3600*1.2*1005*(Tair - 293.15)*0.2)
+  Modelica.Blocks.Sources.RealExpression Q_flow_AHU(y=-(-2*(Tair - 273.15) +
+        42.1)*1000)
     annotation (Placement(transformation(extent={{-150,84},{-134,100}})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_hot(y=4000*(Tair - 288.15))
+  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_hot(y=-(-1.7*(Tair - 273.15)
+         + 29.4)*1000)
     annotation (Placement(transformation(extent={{-150,94},{-134,110}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-116,92},{-108,100}})));
@@ -254,17 +246,18 @@ model MainBuildingEnergySystem
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={24,112})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_FVU_cold(y=(20*73)/3600*1.2*
-        1005*(Tair - 284.15)*0.8)
+  Modelica.Blocks.Sources.RealExpression Q_flow_FVU_cold(y=-(-1.2*(Tair -
+        273.15) + 11.6)*1000)
                     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
-        origin={38,112})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold(y=3000*(Tair - 293.15))
+        origin={42,112})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold(y=-(-2.42*(Tair -
+        273.15) + 52.6)*1000)
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
-        origin={38,102})));
+        origin={44,102})));
   Modelica.Blocks.Math.Add add1 annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
@@ -303,6 +296,22 @@ model MainBuildingEnergySystem
     nPorts=3) annotation (Placement(transformation(extent={{112,46},{120,54}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=weather.Temperature)
     annotation (Placement(transformation(extent={{-180,-150},{-160,-130}})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_AHU1(y=-(0.9*(Tair - 273.15) +
+        6)*1000)
+    annotation (Placement(transformation(extent={{-200,96},{-184,112}})));
+  Modelica.Blocks.Nonlinear.Limiter limiterAHU1(uMax=0, uMin=-100000)
+    annotation (Placement(transformation(extent={{-178,100},{-170,108}})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold1(y=-(-0.18*(Tair -
+        273.15) - 24.9)*1000)
+    annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=180,
+        origin={140,106})));
+  Modelica.Blocks.Nonlinear.Limiter limiterCCACold1(uMax=100000, uMin=0)
+    annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=180,
+        origin={118,106})));
 equation
   connect(heatpumpSystem.port_a2, heatExchangerSystem.port_b3) annotation (Line(
         points={{-58,-78.6667},{-86,-78.6667},{-86,-25.56},{-84.7143,-25.56}},
@@ -320,7 +329,7 @@ equation
   connect(admixHTC.port_a2, consumerHTC.port_b)
     annotation (Line(points={{-164,80},{-164,90}}, color={0,127,255}));
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
-      Line(points={{-28,-114},{-2,-114},{-2,-97.3333},{-3,-97.3333}}, color={
+      Line(points={{-6,-114},{-2,-114},{-2,-97.3333},{-3,-97.3333}},  color={
           191,0,0}));
   connect(boundary4.ports[1], heatpumpSystem.port_a2) annotation (Line(points={{-86,-94},
           {-86,-78.6667},{-58,-78.6667}},           color={0,127,255}));
@@ -341,11 +350,9 @@ equation
   connect(consumerCold1.port_b, admixCold1.port_a2)
     annotation (Line(points={{16,90},{16,80}}, color={0,127,255}));
   connect(ctrMixLTC.hydraulicBus, admixLTC.hydraulicBus) annotation (Line(
-      points={{-113.02,71.14},{-106.28,71.14},{-106.28,70},{-100,70}},
+      points={{-109.02,69.14},{-106.28,69.14},{-106.28,70},{-100,70}},
       color={255,204,51},
       thickness=0.5));
-  connect(sine.y, consumerHTC.T) annotation (Line(points={{-181.5,97},{-165.2,
-          97},{-165.2,96}}, color={0,0,127}));
   connect(boundary2.ports[1], heatpumpSystem.port_b1) annotation (Line(points={{80,-96},
           {80,-78.6667},{52,-78.6667}},          color={0,127,255}));
   connect(consumerCold2.port_a, admixCold2.port_b1)
@@ -361,7 +368,7 @@ equation
   connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
         points={{59.8333,16},{55.8,16},{55.8,22}}, color={0,127,255}));
   connect(ctrMixCold1.hydraulicBus, admixCold1.hydraulicBus) annotation (Line(
-      points={{-6.88,71.18},{-3.28,71.18},{-3.28,70},{0,70}},
+      points={{-6.88,69.18},{-3.28,69.18},{-3.28,70},{0,70}},
       color={255,204,51},
       thickness=0.5));
   connect(heatpumpSystem.heatPumpSystemBus, mainBus.hpSystemBus) annotation (
@@ -443,10 +450,8 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sine3.y, consumerCold2.Q_flow) annotation (Line(points={{96.5,99},{
-          101.25,99},{101.25,98},{106.4,98}}, color={0,0,127}));
   connect(Tair, prescribedTemperature.T) annotation (Line(points={{-128,-140},{
-          -108,-140},{-108,-144},{-54,-144},{-54,-114},{-41.2,-114}}, color={0,
+          -108,-140},{-108,-144},{-54,-144},{-54,-114},{-19.2,-114}}, color={0,
           0,127}));
   connect(add.y, consumerLTC.Q_flow)
     annotation (Line(points={{-107.6,96},{-93.6,96}}, color={0,0,127}));
@@ -459,7 +464,7 @@ equation
   connect(limiterCCAHot.y, add.u1) annotation (Line(points={{-121.6,102},{-118,
           102},{-118,98.4},{-116.8,98.4}}, color={0,0,127}));
   connect(Q_flow_FVU_cold.y, limiterFVUCold.u)
-    annotation (Line(points={{29.2,112},{28.8,112}}, color={0,0,127}));
+    annotation (Line(points={{33.2,112},{28.8,112}}, color={0,0,127}));
   connect(add1.y, consumerCold1.Q_flow)
     annotation (Line(points={{7.6,106},{6.4,106},{6.4,96}}, color={0,0,127}));
   connect(add1.u2, limiterFVUCold.y) annotation (Line(points={{16.8,108.4},{
@@ -467,7 +472,7 @@ equation
   connect(add1.u1, limiterCCACold.y) annotation (Line(points={{16.8,103.6},{18,
           103.6},{18,102},{19.6,102}}, color={0,0,127}));
   connect(Q_flow_CCA_cold.y, limiterCCACold.u)
-    annotation (Line(points={{29.2,102},{28.8,102}}, color={0,0,127}));
+    annotation (Line(points={{35.2,102},{28.8,102}}, color={0,0,127}));
   connect(boundary1.ports[1], highTemperatureSystem.port_b) annotation (Line(
         points={{-188,-34},{-176.4,-34},{-176.4,-46}}, color={0,127,255}));
   connect(highTemperatureSystem.port_a, vol1.ports[1]) annotation (Line(points={{-164.8,
@@ -497,6 +502,14 @@ equation
           46},{118,46},{118,-68},{52,-68}},         color={0,127,255}));
   connect(combiTimeTable.y[1], Tair)
     annotation (Line(points={{-159,-140},{-128,-140}}, color={0,0,127}));
+  connect(limiterCCACold1.y, consumerCold2.Q_flow) annotation (Line(points={{
+          113.6,106},{106.4,106},{106.4,98}}, color={0,0,127}));
+  connect(Q_flow_AHU1.y, limiterAHU1.u)
+    annotation (Line(points={{-183.2,104},{-178.8,104}}, color={0,0,127}));
+  connect(limiterCCACold1.u, Q_flow_CCA_cold1.y)
+    annotation (Line(points={{122.8,106},{131.2,106}}, color={0,0,127}));
+  connect(limiterAHU1.y, consumerHTC.Q_flow) annotation (Line(points={{-169.6,
+          104},{-166,104},{-166,96},{-173.6,96}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
           extent={{-200,120},{120,-120}},
