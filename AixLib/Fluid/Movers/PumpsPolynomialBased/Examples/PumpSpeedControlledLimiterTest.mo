@@ -1,13 +1,12 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledLimiterTest
   "Testing the pump speed algorithm with the new \"one record\" pump model that bounds speed instead of pump head."
   extends Modelica.Icons.Example;
   inner Modelica.Fluid.System system(
     p_ambient=300000,
     T_ambient=293.15,
-    m_flow_start=pump.m_flow_start,
     T_start=293.15,
-    m_flow_small=pump.m_flow_start*1e-2)
+    m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
@@ -34,10 +33,9 @@ model PumpSpeedControlledLimiterTest
                 annotation (Placement(transformation(extent={{46,30},{26,50}})));
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
-    Kvs=system.m_flow_nominal*3600/995/sqrt(system.g*pump.Hnom/1e5*1000),
+    Kvs=6.3,
     m_flow_start=system.m_flow_start,
-    m_flow_small=system.m_flow_small,
-    dp_start=pump.p_b_start - pump.p_a_start)
+    m_flow_small=system.m_flow_small)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableValvePosition(
@@ -80,7 +78,7 @@ equation
       index=2,
       extent={{6,3},{6,3}}));
   annotation (
-    experiment(StopTime=200),
+    experiment(Tolerance=1e-4,StopTime=200),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -117,7 +115,7 @@ equation
 </p>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledLimiterTest.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledLimiterTest.mos"
         "Simulate and plot"),
     Diagram(graphics={Text(
           extent={{-82,94},{80,66}},

@@ -96,7 +96,7 @@ class StyleCheck(object):
 				self.Changedmodels = False
 			else:
 				for l in model_list:
-					print("Check package or model "+ l)
+					#print("Check package or model "+ l)
 					path = self.Library.replace("package.mo", "")
 					dymola.ExecuteCommand('ModelManagement.Check.checkLibrary(false, false, false, true, "'+l+'", translationStructure=false);')
 					inputfile = path+l+"_StyleCheckLog.html"
@@ -147,7 +147,7 @@ class StyleCheck(object):
 			if len(line) == 0:
 				continue
 			else:
-				print("Error in model: \n \n"+line.lstrip())
+				#print("Error in model: \n \n"+line.lstrip())
 				ErrorCount = ErrorCount + 1 
 				ErrorLog.write(line)
 			

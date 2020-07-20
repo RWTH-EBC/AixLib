@@ -1,10 +1,9 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledTest
   "Testing the pump speed algorithm with the new \"one record\" pump model."
   extends Modelica.Icons.Example;
   inner Modelica.Fluid.System system(
     m_flow_small=pump.Qnom*995/3600*1e-2,
-    m_flow_start=pump.m_flow_start,
     p_ambient=300000,
     T_ambient=293.15,
     allowFlowReversal=true,
@@ -35,10 +34,9 @@ model PumpSpeedControlledTest
     annotation (Placement(transformation(extent={{46,30},{26,50}})));
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
-    Kvs=system.m_flow_nominal*3600/995/sqrt(system.g*pump.Hnom/1e5*1000),
+    Kvs=4,
     m_flow_start=system.m_flow_start,
-    m_flow_small=system.m_flow_small,
-    dp_start=pump.p_b_start - pump.p_a_start)
+    m_flow_small=system.m_flow_small)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
@@ -49,7 +47,6 @@ model PumpSpeedControlledTest
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   AixLib.Fluid.Sources.Boundary_pT vessle(
     redeclare package Medium = Medium,
-    p=system.p_start,
     T=system.T_start,
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -82,7 +79,7 @@ equation
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{48,
           10},{48,-30},{-20,-30}}, color={0,127,255}));
   annotation (
-    experiment(StopTime=600),
+    experiment(Tolerance=1e-4,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -117,7 +114,7 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledTest.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledTest.mos"
         "Simulate and plot"),
     Diagram(graphics={Text(
           extent={{-82,94},{80,66}},

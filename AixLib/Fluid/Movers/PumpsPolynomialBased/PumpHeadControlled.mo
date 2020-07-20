@@ -1,21 +1,21 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased;
 model PumpHeadControlled
   "Pump model with pump head control, an onOff-Switch and limitation of pump head."
 
-  // =====================
-  // Parameters
-  // =====================
-  // -----------------------
-  // Flow Characteristic
-  // -----------------------
+
+  extends Modelica.Fluid.Interfaces.PartialTwoPort;
+
+  // Energy and mass balance
+  extends Modelica.Fluid.Interfaces.PartialLumpedVolume(
+    final fluidVolume=V,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState);
+
+
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam=
       AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord() "pump parameter record"
     annotation (choicesAllMatching=true);
 
-  // -------------------------------------------
-  //    Parameter for nominal operating point
-  // (used for initializing external components)
-  // -------------------------------------------
   parameter Real Qnom(
     quantity="VolumeFlowRate",
     unit="m3/h",
@@ -34,73 +34,22 @@ model PumpHeadControlled
     N might be smaller than nMax for higher Q."
     annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
 
-  extends Modelica.Fluid.Interfaces.PartialTwoPort(
-    port_b_exposesState=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState
-         or massDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState,
-    port_a(p(start=p_a_start), m_flow(start=m_flow_start, min=if
-            allowFlowReversal and not checkValve then -Modelica.Constants.inf
-             else 0)),
-    port_b(p(start=p_b_start), m_flow(start=-m_flow_start, max=if
-            allowFlowReversal and not checkValve then +Modelica.Constants.inf
-             else 0)));
+
 
   // Parameters
   // Initialization
-  parameter Real Qstart(
-    quantity="VolumeFlowRate",
-    unit="m3/h",
-    displayUnit="m3/h")=Qnom "Volume flow rate in m³/h at start of simulation.
-  Default is design point (Qnom)."
-    annotation (Dialog(tab="Initialization", group="Volume flow"));
-  parameter Medium.MassFlowRate m_flow_start=Qstart*Medium.density_pTX(
-      p_a_start,
-      T_start,
-      X_start)/3600 "Start value of m_flow in port_a.m_flow
-      Used to initialize ports a and b and for initial checks of model.
-      Use it to conveniently initialize upper level models' start mass flow rate.
-      Default is to convert Qnom value. Disabled for user change by default."
-    annotation (Dialog(tab="Initialization", group="Volume flow", enable=false));
 
-  parameter Modelica.SIunits.Height Hstart=max(0,
-      AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
-      pumpParam.cHQN,
-      Qstart,
-      Nnom)) "
+
+  parameter Modelica.SIunits.Height Hstart=0.1 "
       Start value of pump head. Will be used to initialize criticalDamping block
       and pressure in ports a and b.
       Default is to calculate it from Qstart and Nnom.  If you change the value
       make sure to also set Qstart to a suitable value."
     annotation (Dialog(tab="Initialization", group="Pressure"));
-  parameter Medium.AbsolutePressure p_a_start=system.p_start "
-  Start value for inlet pressure. Use it to set a defined absolute pressure
-  in the circuit. For example system.p_start. Also use it to initialize
-  upper level models properly. It will affect p_b_start."
-    annotation (Dialog(tab="Initialization", group="Pressure"));
-  parameter Medium.AbsolutePressure p_b_start=p_a_start + Hstart*system.g*
-      Medium.density_pTX(
-      p_a_start,
-      T_start,
-      X_start) "
-      Start value for outlet pressure. It depends on p_a_start and Hstart.
-      It is deactivated for user input by default. Use it in an upper level model
-      for proper initialization of other pressure states in that circuit."
-      annotation (Dialog(
-      tab="Initialization",
-      group="Pressure",
-      enable=false));
 
   // Assumptions
-  parameter Boolean checkValve=false "= true to prevent reverse flow"
-    annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-
-  // Energy and mass balance
-  extends Modelica.Fluid.Interfaces.PartialLumpedVolume(
-    final fluidVolume=V,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    final p_start=p_b_start);
 
   // Power and Efficiency
   parameter Boolean calculatePower=false "calc. power consumption?" annotation (
@@ -112,7 +61,8 @@ model PumpHeadControlled
       enable=calculate_Power));
   replaceable function efficiencyCharacteristic =
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency
-    constrainedby AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
+    constrainedby
+    AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
     "eta = f(H, Q, P)" annotation (Dialog(
       tab="General",
       group="Power and Efficiency",
@@ -132,8 +82,7 @@ model PumpHeadControlled
     unit="1",
     min=0) "efficiency";
 
-  Modelica.Blocks.Sources.RealExpression Vflow_m3h(y=if noEvent(port_b.m_flow
-         > 0) then 0 else -port_b.m_flow/medium.d*3600)
+  Modelica.Blocks.Sources.RealExpression Vflow_m3h(y=-port_b.m_flow/medium.d*3600)
     "conversion of mass flow rate to volume flow rate"
     annotation (Placement(transformation(extent={{-100,35},{-80,55}})));
 
@@ -174,38 +123,7 @@ public
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=n)
     annotation (Placement(transformation(extent={{9,34},{29,54}})));
-initial equation
-  assert(
-    m_flow_start >= 0,
-    "Warning:
-    In a pump model 
-    parameter 'm_flow_start' (" + String(m_flow_start) + ") has a negative value.
-    But this pump model cannot produce a reverse flow. Consider changing the 
-    initialization setup.",
-    level=AssertionLevel.warning);
-  assert(
-    p_b_start >= p_a_start,
-    "Warning:
-    In a pump model  
-    parameter 'p_a_start' (" + String(p_a_start) + ") is bigger than 'p_b_start'
-    (" + String(p_b_start) + "). But this pump model can only produce a positive
-    pump head. Consider changing the initialization setup.",
-    level=AssertionLevel.warning);
-  assert(
-    if calculatePower then sum(abs({pumpParam.cHQN[3, 1],pumpParam.cHQN[2, 2],
-      pumpParam.cHQN[1, 3]})) <> 0 and (sum(abs(pumpParam.cHQN)) == sum(abs({
-      pumpParam.cHQN[3, 1],pumpParam.cHQN[2, 2],pumpParam.cHQN[1, 3]}))) else
-      true,
-    "Warning:
-    In a pump model 
-    parameter 'calculatePower' was set true but the corresponding coefficients
-    in pumpParam.cHQN ([3,1], [2,2] and [1,3]) seem all to be zero OR there are 
-    more than those 3 coefficients defined in cHQN. This pump model needs to 
-    calculate pump speed (n) using those 3 parameters. If they are zero OR there
-    are more than those three coefficients defined in cHQN then speed calculation
-    makes no sense and hence power calculation is rendered useless. Please
-    check the correstonding pump record.",
-    level=AssertionLevel.warning);
+
 equation
 
   // Energy balance
@@ -303,8 +221,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,
-          60},{-62,60},{-62,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},
+          {-62,60},{-62,100.597},{0.5975,100.597}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -470,19 +388,6 @@ equation
   referenceDataQHPN matrix to find the real Qmax value. A simple
   alternative for the given assumption could be to introduce a
   parameter Qmax in the pump record that contains the exact value.
-</p>
-<h5>
-  Nstart
-</h5>
-<p>
-  The start speed of the pump will be determined from interpolation in
-  the maxMinSpeedCurves table, providing the maximum speed possible at
-  a given volume flow rate:
-</p>
-<p>
-  <span style=\"font-family: Courier New;\">Nstart =</span> <span style=
-  \"color: #ff0000;\">Modelica.Math.Vectors.interpolate</span>(x=pumpParam.maxMinSpeedCurves[:,1],
-  y=pumpParam.maxMinSpeedCurves[:,2], xi=Qstart)
 </p>
 <h4>
   Assumption and limitations
