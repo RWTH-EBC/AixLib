@@ -6,7 +6,6 @@ model PumpNdpVarControlTest
     allowFlowReversal=false,
     p_ambient=300000,
     T_ambient=293.15,
-    m_flow_start=pump.m_flow_start,
     T_start=293.15)
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
 
@@ -25,8 +24,7 @@ model PumpNdpVarControlTest
     redeclare package Medium = Medium,
     m_flow_start=system.m_flow_start,
     m_flow_small=system.m_flow_small,
-    Kvs=system.m_flow_nominal*3600/995/sqrt(system.g*2*pump.Hnom/1e5*1000),
-    dp_start=pump.p_b_start - pump.p_a_start)
+    Kvs=4)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
@@ -37,7 +35,6 @@ model PumpNdpVarControlTest
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   AixLib.Fluid.Sources.Boundary_pT vessle(
     redeclare package Medium = Medium,
-    p=system.p_start,
     T=system.T_start,
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
