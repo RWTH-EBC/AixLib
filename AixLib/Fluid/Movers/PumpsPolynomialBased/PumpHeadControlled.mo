@@ -389,19 +389,6 @@ equation
   alternative for the given assumption could be to introduce a
   parameter Qmax in the pump record that contains the exact value.
 </p>
-<h5>
-  Nstart
-</h5>
-<p>
-  The start speed of the pump will be determined from interpolation in
-  the maxMinSpeedCurves table, providing the maximum speed possible at
-  a given volume flow rate:
-</p>
-<p>
-  <span style=\"font-family: Courier New;\">Nstart =</span> <span style=
-  \"color: #ff0000;\">Modelica.Math.Vectors.interpolate</span>(x=pumpParam.maxMinSpeedCurves[:,1],
-  y=pumpParam.maxMinSpeedCurves[:,2], xi=Qstart)
-</p>
 <h4>
   Assumption and limitations
 </h4>
