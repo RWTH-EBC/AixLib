@@ -41,6 +41,7 @@ model PumpInterface_PumpSpeedControlled
 
   Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled physics(
     final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
     final pumpParam=pumpParam,
     final Qnom=Qnom,
     final Nnom=Nnom,

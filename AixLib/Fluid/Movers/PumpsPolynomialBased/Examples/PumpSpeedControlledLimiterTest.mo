@@ -12,6 +12,7 @@ model PumpSpeedControlledLimiterTest
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpSpeedControlled pump(
+    m_flow_nominal=1,
     calculatePower=true,
     calculateEfficiency=true,
     redeclare function efficiencyCharacteristic =

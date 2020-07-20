@@ -13,6 +13,7 @@ model PumpSpeedControlledTest
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpSpeedControlled pump(
+    m_flow_nominal=1,
     pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4(),
     calculatePower=true,
     calculateEfficiency=true,
