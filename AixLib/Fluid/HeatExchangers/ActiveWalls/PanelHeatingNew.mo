@@ -2849,7 +2849,7 @@ Added documentation.</li>
             extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-24,-70})));
-      Utilities.Interfaces.RadPort radport_ceiling
+      Utilities.Interfaces.RadPort radport_ceiling if Ceiling
         annotation (Placement(transformation(extent={{-34,-104},{-14,-84}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
         annotation (Placement(transformation(extent={{14,-108},{34,-88}})));
@@ -3315,33 +3315,44 @@ Added documentation.</li>
       extends Modelica.Icons.ExamplesPackage;
       replaceable package Medium =
           Modelica.Media.Water.ConstantPropertyLiquidWater;
+      parameter Real n = panelHeatingSystem.CircuitNo;
 
       Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
         prescribedTemperature1
         annotation (Placement(transformation(extent={{86,36},{66,56}})));
-      Modelica.Blocks.Sources.Step TRoom_set(
+      Modelica.Blocks.Sources.Step TSurface(
         height=-6,
         offset=299.15,
         startTime=43200)
         annotation (Placement(transformation(extent={{118,36},{98,56}})));
       PanelHeatingSystem panelHeatingSystem
         annotation (Placement(transformation(extent={{-56,-8},{-36,12}})));
+      Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+        prescribedTemperature2
+        annotation (Placement(transformation(extent={{84,-52},{64,-32}})));
+      Modelica.Blocks.Sources.Step TCeiling(
+        height=-6,
+        offset=299.15,
+        startTime=43200)
+        annotation (Placement(transformation(extent={{122,-52},{102,-32}})));
     equation
 
 
-      connect(TRoom_set.y, prescribedTemperature1.T)
+      connect(TSurface.y, prescribedTemperature1.T)
         annotation (Line(points={{97,46},{88,46}}, color={0,0,127}));
       connect(prescribedTemperature1.port, panelHeatingSystem.heatport_floor[1])
-        annotation (Line(points={{66,46},{-43.6,46},{-43.6,11.6}}, color={191,0,
-              0}));
+        annotation (Line(points={{66,46},{-43.6,46},{-43.6,11.6}}, color={191,0,0}));
       connect(prescribedTemperature1.port, panelHeatingSystem.radport_floor[1])
         annotation (Line(points={{66,46},{-48.4,46},{-48.4,12}}, color={191,0,0}));
-      connect(prescribedTemperature1.port, panelHeatingSystem.heatport_ceiling[
-        1]) annotation (Line(points={{66,46},{66,-30},{-43.6,-30},{-43.6,-7.8}},
-            color={191,0,0}));
-      connect(prescribedTemperature1.port, panelHeatingSystem.radport_ceiling[1])
-        annotation (Line(points={{66,46},{66,-52},{-48.4,-52},{-48.4,-7.4}},
-            color={191,0,0}));
+      connect(prescribedTemperature2.T, TCeiling.y) annotation (Line(points={{86,-42},
+              {92,-42},{92,-44},{101,-44},{101,-42}}, color={0,0,127}));
+
+              for i in 1:n loop
+      connect(panelHeatingSystem.heatport_ceiling[i], prescribedTemperature2.port)
+        annotation (Line(points={{-43.6,-7.8},{-43.6,-42},{64,-42}}, color={191,0,0}));
+      connect(panelHeatingSystem.radport_ceiling[i], prescribedTemperature2.port)
+        annotation (Line(points={{-48.4,-7.4},{-48.4,-42},{64,-42}}, color={95,95,95}));
+              end for;
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(extent={{-72,100},{72,92}},lineColor={28,108,200}),
@@ -5658,9 +5669,6 @@ Added documentation.</li>
 
           import Modelica.Math.log;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.a_T
-            Determine_aT(R=R_lambdaB)
-            annotation (Placement(transformation(extent={{-100,60},{-60,80}})));
           AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.a_u
             Determine_au(T=T, R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,20},{-60,40}})));
@@ -5713,25 +5721,6 @@ Added documentation.</li>
             annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
         end K_H_TypeA;
-
-        block a_T "Defining a_T following table A.1 p.29 DIN 1264-2"
-          parameter Modelica.SIunits.ThermalInsulance R;
-
-          Modelica.Blocks.Tables.CombiTable1D Table_A1(table=[0,1.23; 0.05,1.188; 0.1,1.156;
-                0.15,1.134])
-            annotation (Placement(transformation(extent={{-20,-24},{28,24}})));
-          Modelica.Blocks.Interfaces.RealOutput a_T
-            annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-          Modelica.Blocks.Sources.RealExpression R_lambdaB(y=R)
-            annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-        equation
-          connect(Table_A1.y[1], a_T)
-            annotation (Line(points={{30.4,0},{100,0}}, color={0,0,127}));
-          connect(R_lambdaB.y, Table_A1.u[1])
-            annotation (Line(points={{-79,0},{-24.8,0}}, color={0,0,127}));
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-                coordinateSystem(preserveAspectRatio=false)));
-        end a_T;
 
         block a_u "Determine a_u following Table A.2 p. 29 DIN 1264-2"
 
@@ -5834,6 +5823,9 @@ Added documentation.</li>
             lambda_E=lambda_E0)
             annotation (Placement(transformation(extent={{40,-20},{80,0}})));
 
+          TablesEN1264.CombiTable1DParameter A1(table=[0.0,1.23; 0.1,1.156;
+                0.15,1.134], u=R_lambdaB) "table A.1 EN 1264-2 p. 29"
+            annotation (Placement(transformation(extent={{-100,60},{-72,88}})));
         equation
           if T <= 0.375 then
           q_G = LimitingCurve(phi = phi, B_G = B_G, dT_H = dT_H, n_G = n_G);
@@ -5859,10 +5851,10 @@ Added documentation.</li>
 
         block B_G "Determination for B_G following tables A.4a and A.4b"
 
-          parameter Modelica.SIunits.Thickness s_u= 0.1 "thickness of cover above pipe in m";
-          parameter Modelica.SIunits.Distance T=0.2 "spacing in m";
+          parameter Modelica.SIunits.Thickness s_u "thickness of cover above pipe in m";
+          parameter Modelica.SIunits.Distance T "spacing in m";
 
-          replaceable Modelica.SIunits.ThermalConductivity lambda_E = 1.2 "Thermal conductivity of floor screed";
+          parameter Modelica.SIunits.ThermalConductivity lambda_E "Thermal conductivity of floor screed";
 
           Modelica.Blocks.Sources.RealExpression Spacing(y=T)
             annotation (Placement(transformation(extent={{-100,4},{-80,24}})));
@@ -5870,7 +5862,7 @@ Added documentation.</li>
             annotation (Placement(transformation(extent={{-100,-14},{-80,6}})));
           Modelica.Blocks.Sources.RealExpression ThermalConductivity_cover(y=lambda_E)
             annotation (Placement(transformation(extent={{-100,-32},{-80,-12}})));
-          Modelica.Blocks.Math.Division division
+          Modelica.Blocks.Math.Division division2
             annotation (Placement(transformation(extent={{-54,-20},{-40,-6}})));
           Modelica.Blocks.Tables.CombiTable2D Table_A4a(table=[0.0,0.01,0.0208,0.0292,0.0375,
                 0.0458,0.0542,0.0625,0.0708,0.0792; 0.05,85,91.5,96.8,100,100,100,100,100,
@@ -5880,36 +5872,33 @@ Added documentation.</li>
                 62,67.5,75.3,81.6,86.1; 0.3,20.5,26.8,31.6,36.4,41.5,47.5,57.5,65.3,72.4;
                 0.375,11.5,13.7,15.5,18.2,21.5,27.5,40,49.1,58.3])
             annotation (Placement(transformation(extent={{40,20},{60,40}})));
-          Modelica.Blocks.Interfaces.RealOutput B_G
-            annotation (Placement(transformation(extent={{86,-10},{106,10}})));
           Modelica.Blocks.Math.Division division1
             annotation (Placement(transformation(extent={{-54,0},{-40,14}})));
-          Modelica.Blocks.Tables.CombiTable1D Table_A4b(table=[0.173,27.5; 0.2,40; 0.25,
-                57.5; 0.3,69.5; 0.35,78.2; 0.4,84.4; 0.45,88.3; 0.5,91.6; 0.55,94; 0.6,96.3;
-                0.65,98.6; 0.7,99.8; 0.75,100])
+          TablesEN1264.CombiTable1DParameter tableA4b(u=division1.y, table=[
+                0.173,27.5; 0.20,40; 0.25,57.5; 0.30,69.5; 0.35,78.2; 0.40,84.4;
+                0.45,88.3; 0.50,91.6; 0.55,94; 0.60,96.3; 0.65,98.6; 0.70,99.8;
+                0.75,100])
             annotation (Placement(transformation(extent={{40,-20},{60,0}})));
         equation
           if s_u/lambda_E > 0.0792 and s_u/T < 0.75 then
-            B_G = Table_A4b.y[1];
+            B_G = Table_A4b.y;
           elseif s_u/lambda_E > 0.0792 and s_u/T > 0.75 then
             B_G = 100;
           else
             B_G = Table_A4a.y;
           end if;
-          connect(Thickness_of_cover.y, division.u1) annotation (Line(points={{-79,-4},{
-                  -55.4,-4},{-55.4,-8.8}}, color={0,0,127}));
-          connect(ThermalConductivity_cover.y, division.u2) annotation (Line(points={{-79,
-                  -22},{-55.4,-22},{-55.4,-17.2}}, color={0,0,127}));
+          connect(Thickness_of_cover.y, division2.u1) annotation (Line(points={
+                  {-79,-4},{-55.4,-4},{-55.4,-8.8}}, color={0,0,127}));
+          connect(ThermalConductivity_cover.y, division2.u2) annotation (Line(
+                points={{-79,-22},{-55.4,-22},{-55.4,-17.2}}, color={0,0,127}));
           connect(Spacing.y, Table_A4a.u1) annotation (Line(points={{-79,14},{-68,14},{-68,
                   36},{38,36}}, color={0,0,127}));
           connect(Spacing.y, division1.u2) annotation (Line(points={{-79,14},{-74,14},{-74,
                   2},{-55.4,2},{-55.4,2.8}}, color={0,0,127}));
           connect(Thickness_of_cover.y, division1.u1) annotation (Line(points={{-79,-4},
                   {-76,-4},{-76,-2},{-68,-2},{-68,11.2},{-55.4,11.2}}, color={0,0,127}));
-          connect(division.y, Table_A4a.u2) annotation (Line(points={{-39.3,-13},{-32,-13},
-                  {-32,24},{38,24}}, color={0,0,127}));
-          connect(division1.y, Table_A4b.u[1]) annotation (Line(points={{-39.3,7},{-10,7},
-                  {-10,-10},{38,-10}}, color={0,0,127}));
+          connect(division2.y, Table_A4a.u2) annotation (Line(points={{-39.3,-13},
+                  {-32,-13},{-32,24},{38,24}}, color={0,0,127}));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
         end B_G;
@@ -5973,6 +5962,118 @@ Added documentation.</li>
                 coordinateSystem(preserveAspectRatio=false)));
         end n_G;
 
+        package TablesEN1264
+          "All tables used to calculation for panel heating type A in EN 1264"
+          block CombiTable1DParameter
+            "Table look-up in one dimension with one inputs and one output as parameters"
+
+          function getTableValue "Interpolate 1-dim. table defined by matrix"
+            extends Modelica.Icons.Function;
+            input Modelica.Blocks.Types.ExternalCombiTable1D tableID;
+            input Integer icol;
+            input Real u;
+            input Real tableAvailable
+              "Dummy input to ensure correct sorting of function calls";
+            output Real y;
+            external"C" y = ModelicaStandardTables_CombiTable1D_getValue(tableID, icol, u)
+              annotation (Library={"ModelicaStandardTables", "ModelicaMatIO", "zlib"});
+            annotation (derivative(noDerivative=tableAvailable) = getDerTableValue);
+          end getTableValue;
+
+          function getDerTableValue
+            "Derivative of interpolated 1-dim. table defined by matrix"
+            extends Modelica.Icons.Function;
+            input Modelica.Blocks.Types.ExternalCombiTable1D tableID;
+            input Integer icol;
+            input Real u;
+            input Real tableAvailable
+              "Dummy input to ensure correct sorting of function calls";
+            input Real der_u;
+            output Real der_y;
+            external"C" der_y = ModelicaStandardTables_CombiTable1D_getDerValue(tableID, icol, u, der_u)
+              annotation (Library={"ModelicaStandardTables", "ModelicaMatIO", "zlib"});
+          end getDerTableValue;
+
+            parameter Real table[:, :]
+              "Table matrix (grid = first column; e.g., table=[0,2])"
+              annotation (Dialog(group="Table data definition",enable=not tableOnFile));
+            final parameter Integer columns[:]=2:size(table, 2)
+              "Columns of table to be interpolated"
+              annotation (Dialog(group="Table data interpretation"));
+
+            final parameter Modelica.Blocks.Types.ExternalCombiTable1D tableID=
+                Modelica.Blocks.Types.ExternalCombiTable1D(
+                  "NoName",
+                  "NoName",
+                  table,
+                  columns,
+                  Modelica.Blocks.Types.Smoothness.LinearSegments) "External table object";
+
+            final parameter Integer n= 1;
+            parameter Real u;
+            final parameter Real y = getTableValue(tableID, n, u, 1.0);
+
+          equation
+
+            annotation ();
+          end CombiTable1DParameter;
+
+          block CombiTable2DParameter
+            "Table look-up in two dimensions with two inputs and one output as parameters"
+
+          function getTableValue "Interpolate 1-dim. table defined by matrix"
+            extends Modelica.Icons.Function;
+            input Modelica.Blocks.Types.ExternalCombiTable1D tableID;
+            input Integer icol;
+            input Real u;
+            input Real tableAvailable
+              "Dummy input to ensure correct sorting of function calls";
+            output Real y;
+            external"C" y = ModelicaStandardTables_CombiTable1D_getValue(tableID, icol, u)
+              annotation (Library={"ModelicaStandardTables", "ModelicaMatIO", "zlib"});
+            annotation (derivative(noDerivative=tableAvailable) = getDerTableValue);
+          end getTableValue;
+
+          function getDerTableValue
+            "Derivative of interpolated 1-dim. table defined by matrix"
+            extends Modelica.Icons.Function;
+            input Modelica.Blocks.Types.ExternalCombiTable1D tableID;
+            input Integer icol;
+            input Real u;
+            input Real tableAvailable
+              "Dummy input to ensure correct sorting of function calls";
+            input Real der_u;
+            output Real der_y;
+            external"C" der_y = ModelicaStandardTables_CombiTable1D_getDerValue(tableID, icol, u, der_u)
+              annotation (Library={"ModelicaStandardTables", "ModelicaMatIO", "zlib"});
+          end getDerTableValue;
+
+            parameter Real table[:, :]
+              "Table matrix (grid = first column; e.g., table=[0,2])"
+              annotation (Dialog(group="Table data definition",enable=not tableOnFile));
+            final parameter Integer columns[:]=2:size(table, 2)
+              "Columns of table to be interpolated"
+              annotation (Dialog(group="Table data interpretation"));
+
+            final parameter Modelica.Blocks.Types.ExternalCombiTable1D tableID=
+                Modelica.Blocks.Types.ExternalCombiTable1D(
+                  "NoName",
+                  "NoName",
+                  table,
+                  columns,
+                  Modelica.Blocks.Types.Smoothness.LinearSegments) "External table object";
+
+            final parameter Integer n= 1;
+            parameter Real u1;
+            parameter Real u2;
+            final parameter Real y = getTableValue(tableID, u1, u2, 1.0);
+
+
+          equation
+
+            annotation ();
+          end CombiTable2DParameter;
+        end TablesEN1264;
       end TablesAndParameters;
 
       function BasicCharacteristic
