@@ -5639,48 +5639,72 @@ Added documentation.</li>
           parameter Modelica.SIunits.VolumeFraction psi(start=0) "Volume Fraction of holding burls" annotation (Dialog(enable = withHoldingBurls));
           parameter Modelica.SIunits.ThermalConductivity lambda_W(start=0) "Thermal conductivity of holding burls" annotation (Dialog(enable = withHoldingBurls));
 
-           parameter Modelica.SIunits.Thickness s_u "thickness of floor screed";
+          parameter Modelica.SIunits.Thickness s_u "thickness of floor screed";
           parameter Modelica.SIunits.ThermalConductivity lambda_E0 "Thermal conductivity of floor screed";
           parameter Modelica.SIunits.ThermalConductivity lambda_E = (1 - psi) * lambda_E0 + psi * lambda_W "effective thermal Conductivity of screed" annotation(Dialog(enable = false));
           parameter Modelica.SIunits.ThermalInsulance R_lambdaB "Thermal resistance of flooring";
 
-          Modelica.SIunits.CoefficientOfHeatTransfer B( start = 6.7) "system dependent coefficient";
+          parameter Modelica.SIunits.CoefficientOfHeatTransfer B "system dependent coefficient";
           constant Modelica.SIunits.CoefficientOfHeatTransfer B_0 = 6.7 "system dependent coefficient for lambda_R0 = 0.35 W/(m.K) abd s_R0 = 0.002 m";
 
           constant Modelica.SIunits.CoefficientOfHeatTransfer alpha = 10.8;
           constant Modelica.SIunits.ThermalConductivity lambda_u0 = 1;
           constant Modelica.SIunits.Diameter s_u0 = 0.045;
           final parameter Real a_B = (1 / alpha + s_u0 / lambda_u0) / (1 / alpha + s_u0 / lambda_E + R_lambdaB);
-          Real a_T = Determine_aT.a_T;
-          Real a_u = Determine_au.a_u;
-          Real a_D = Determine_aD.a_D;
+          final parameter Real a_T = determine_aT.y;
+          final parameter Real a_u = determine_au.y;
+          final parameter Real a_D = determine_aD.y;
 
           final parameter Real m_T = 1 - T / 0.075;
           final parameter Real m_u = 100 * (0.045 - s_u);
           final parameter Real m_D = 250 * (D - 0.02);
 
-          Real product_ai "product of powers for parameters of floor heating";
-          Real product_ai375 "product of powers for T = 0.375";
+          final parameter Real product_ai = a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D) "product of powers for parameters of floor heating";
+          final parameter Real product_ai375 = a_B * a_T^(1-0.375/0.075) * determine_au375.y^(m_u) * determine_aD375.y^(m_D) "product of powers for T = 0.375";
 
-          Modelica.SIunits.Thickness s_uStar;
+          final parameter Modelica.SIunits.Thickness s_uStar = if T > 0.2 then (0.5 * T) else 0.1;
 
-          Modelica.SIunits.CoefficientOfHeatTransfer K_H;
-          Modelica.SIunits.CoefficientOfHeatTransfer K_HStar = B * a_B * a_T^(m_T) * a_u^(100*(0.045-s_uStar)) * a_D^(m_D);
+          final parameter Modelica.SIunits.CoefficientOfHeatTransfer K_H;
+          final parameter Modelica.SIunits.CoefficientOfHeatTransfer K_HStar = B * a_B * a_T^(m_T) * a_u^(100*(0.045-s_uStar)) * a_D^(m_D);
 
           import Modelica.Math.log;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.a_u
-            Determine_au(T=T, R=R_lambdaB)
-            annotation (Placement(transformation(extent={{-100,20},{-60,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.a_D
-            Determine_aD(T=T, R=R_lambdaB)
-            annotation (Placement(transformation(extent={{-100,-20},{-60,0}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.a_u
-            Determine_au375(R=R_lambdaB, T=0.375)
-            annotation (Placement(transformation(extent={{0,20},{40,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.a_D
-            Determine_aD375(R=R_lambdaB, T=0.375)
-            annotation (Placement(transformation(extent={{0,-20},{40,0}})));
+          TablesEN1264.CombiTable2DParameter determine_au(
+            table=[0.0,0,0.05,0.1,0.15; 0.05,1.069,1.056,1.043,1.037; 0.075,1.066,1.053,
+                1.041,1.035; 0.1,1.063,1.05,1.039,1.0335; 0.15,1.057,1.046,1.035,1.0305;
+                0.2,1.051,1.041,1.0315,1.0275; 0.225,1.048,1.038,1.0295,1.026; 0.3,1.0395,
+                1.031,1.024,1.021; 0.375,1.03,1.0221,1.0181,1.015],
+            u1=T,
+            u2=R_lambdaB) "Table A.2 according to EN 1264-2 p. 29"
+            annotation (Placement(transformation(extent={{-96,20},{-70,46}})));
+          TablesEN1264.CombiTable2DParameter determine_au375(
+            table=[0.0,0,0.05,0.1,0.15; 0.05,1.069,1.056,1.043,1.037; 0.075,1.066,1.053,
+                1.041,1.035; 0.1,1.063,1.05,1.039,1.0335; 0.15,1.057,1.046,1.035,1.0305;
+                0.2,1.051,1.041,1.0315,1.0275; 0.225,1.048,1.038,1.0295,1.026; 0.3,1.0395,
+                1.031,1.024,1.021; 0.375,1.03,1.0221,1.0181,1.015],
+            u2=R_lambdaB,
+            u1=0.375) "Table A.2 according to EN 1264-2 p. 29"
+            annotation (Placement(transformation(extent={{4,20},{30,46}})));
+          TablesEN1264.CombiTable2DParameter determine_aD(
+            table=[0.0,0,0.05,0.1,0.15; 0.05,1.013,1.013,1.012,1.011; 0.075,1.021,1.019,
+                1.016,1.014; 0.1,1.029,1.025,1.022,1.018; 0.15,1.04,1.034,1.029,1.024; 0.2,
+                1.046,1.04,1.035,1.03; 0.225,1.049,1.043,1.038,1.033; 0.3,1.053,1.049,1.044,
+                1.039; 0.375,1.056,1.051,1.046,1.042],
+            u1=T,
+            u2=R_lambdaB) "Table A.3 according to EN 1264-2 p. 30"
+            annotation (Placement(transformation(extent={{-96,-20},{-70,6}})));
+          TablesEN1264.CombiTable2DParameter determine_aD375(
+            table=[0.0,0,0.05,0.1,0.15; 0.05,1.013,1.013,1.012,1.011; 0.075,1.021,1.019,
+                1.016,1.014; 0.1,1.029,1.025,1.022,1.018; 0.15,1.04,1.034,1.029,1.024; 0.2,
+                1.046,1.04,1.035,1.03; 0.225,1.049,1.043,1.038,1.033; 0.3,1.053,1.049,1.044,
+                1.039; 0.375,1.056,1.051,1.046,1.042],
+            u2=R_lambdaB,
+            u1=0.375) "Table A.3 according to EN 1264-2 p. 30"
+            annotation (Placement(transformation(extent={{4,-20},{30,6}})));
+          TablesEN1264.CombiTable1DParameter determine_aT(table=[0,1.23; 0.05,1.188; 0.10,
+                1.156; 0.15,1.134], u=R_lambdaB)
+            "Table A.1 according to EN 1264-2 p. 29"
+            annotation (Placement(transformation(extent={{-94,60},{-70,84}})));
         equation
 
           if lambda_R == 0.35 and s_R == 0.002 then
@@ -5693,21 +5717,6 @@ Added documentation.</li>
            end if;
           end if;
 
-          assert(T >= 0.05 and T <= 0.375, "Pipe spacing for m_T should be between 0.05 and 0.375", AssertionLevel.warning);
-
-          assert(s_u >= 0.01, "thickness of screed too low, s_u => 0.010 for calculation of m_u", AssertionLevel.warning);
-
-          assert(D <= 0.08  and D >= 0.03, "Outer diameter should be between 0.008 <= D <= 0.030 for calculation of m_T", AssertionLevel.warning);
-
-          product_ai =  a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D);
-          product_ai375 =  a_B * a_T^(1-0.375/0.075) * Determine_au375.a_u^(m_u) * Determine_aD375.a_D^(m_D);
-
-           if T > 0.2 then
-            s_uStar = 0.5 * T;
-          else
-            s_uStar = 0.1;
-          end if;
-
            if s_u > s_uStar and s_u > 0.065 then
           K_H = 1 / ( (1 / K_HStar) + ((s_u - s_uStar) / lambda_E));
           else
@@ -5716,7 +5725,13 @@ Added documentation.</li>
           else
             K_H = B * product_ai;
           end if;
-        end if;
+           end if;
+
+          assert(T >= 0.05 and T <= 0.375, "Pipe spacing for m_T should be between 0.05 and 0.375", AssertionLevel.warning);
+
+          assert(s_u >= 0.01, "thickness of screed should be s_u => 0.010 for calculation of m_u", AssertionLevel.warning);
+
+          assert(D <= 0.08  and D >= 0.03, "Outer diameter should be 0.008 <= D <= 0.030 for calculation of m_T", AssertionLevel.warning);
 
             annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
@@ -5738,6 +5753,15 @@ Added documentation.</li>
             annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
           Modelica.Blocks.Interfaces.RealOutput a_u
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+          TablesEN1264.CombiTable2DParameter A2(
+            table=[0.0,0,0.05,0.1,0.15; 0.05,1.069,1.056,1.043,1.037; 0.075,
+                1.066,1.053,1.041,1.035; 0.1,1.063,1.05,1.039,1.0335; 0.15,
+                1.057,1.046,1.035,1.0305; 0.2,1.051,1.041,1.0315,1.0275; 0.225,
+                1.048,1.038,1.0295,1.026; 0.3,1.0395,1.031,1.024,1.021; 0.375,
+                1.03,1.0221,1.0181,1.015],
+            u1=T,
+            u2=R_lambdaB) "Table A.2 according to EN 1264-2 p. 29"
+            annotation (Placement(transformation(extent={{-8,42},{18,68}})));
         equation
           connect(Spacing.y, Table_A2.u1) annotation (Line(points={{-79,10},{-17.2,10},{
                   -17.2,9.6}}, color={0,0,127}));
@@ -6015,55 +6039,129 @@ Added documentation.</li>
 
           equation
 
-            annotation ();
+            annotation ( Icon(
+              coordinateSystem(preserveAspectRatio=true,
+                extent={{-100.0,-100.0},{100.0,100.0}}),
+                graphics={                Rectangle(
+                  extent={{-100,-100},{100,100}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+              Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
+              Line(points={{0.0,40.0},{0.0,-40.0}}),
+              Rectangle(fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{-60.0,20.0},{-30.0,40.0}}),
+              Rectangle(fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{-60.0,0.0},{-30.0,20.0}}),
+              Rectangle(fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{-60.0,-20.0},{-30.0,0.0}}),
+              Rectangle(fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{-60.0,-40.0},{-30.0,-20.0}}),
+                                                  Text(
+                  extent={{-150,150},{150,110}},
+                  textString="%name",
+                  lineColor={0,0,255})}),
+              Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+                      100,100}}), graphics={
+                  Rectangle(
+                    extent={{-60,60},{60,-60}},
+                    fillColor={235,235,235},
+                    fillPattern=FillPattern.Solid,
+                    lineColor={0,0,255}),
+                  Text(
+                    extent={{-100,100},{100,64}},
+                    textString="1 dimensional linear table interpolation",
+                    lineColor={0,0,255}),
+                  Line(points={{-54,40},{-54,-40},{54,-40},{54,40},{28,40},{28,-40},{-28,
+                        -40},{-28,40},{-54,40},{-54,20},{54,20},{54,0},{-54,0},{-54,-20},
+                        {54,-20},{54,-40},{-54,-40},{-54,40},{54,40},{54,-40}}, color={
+                        0,0,0}),
+                  Line(points={{0,40},{0,-40}}),
+                  Rectangle(
+                    extent={{-54,40},{-28,20}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Rectangle(
+                    extent={{-54,20},{-28,0}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Rectangle(
+                    extent={{-54,0},{-28,-20}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Rectangle(
+                    extent={{-54,-20},{-28,-40}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Text(
+                    extent={{-50,54},{-32,42}},
+                    textString="u[1]/[2]",
+                    lineColor={0,0,255}),
+                  Text(
+                    extent={{-24,54},{0,42}},
+                    textString="y[1]",
+                    lineColor={0,0,255}),
+                  Text(
+                    extent={{-2,-40},{30,-54}},
+                    textString="columns",
+                    lineColor={0,0,255}),
+                  Text(
+                    extent={{2,54},{26,42}},
+                    textString="y[2]",
+                    lineColor={0,0,255})}));
           end CombiTable1DParameter;
 
           block CombiTable2DParameter
             "Table look-up in two dimensions with two inputs and one output as parameters"
 
-          function getTableValue "Interpolate 1-dim. table defined by matrix"
-            extends Modelica.Icons.Function;
-            input Modelica.Blocks.Types.ExternalCombiTable1D tableID;
-            input Integer icol;
-            input Real u;
-            input Real tableAvailable
-              "Dummy input to ensure correct sorting of function calls";
-            output Real y;
-            external"C" y = ModelicaStandardTables_CombiTable1D_getValue(tableID, icol, u)
-              annotation (Library={"ModelicaStandardTables", "ModelicaMatIO", "zlib"});
-            annotation (derivative(noDerivative=tableAvailable) = getDerTableValue);
+
+          function getTableValue "Interpolate 2-dim. table defined by matrix"
+              extends Modelica.Icons.Function;
+              input Modelica.Blocks.Types.ExternalCombiTable2D tableID;
+              input Real u1;
+              input Real u2;
+              input Real tableAvailable
+                "Dummy input to ensure correct sorting of function calls";
+              output Real y;
+              external"C" y = ModelicaStandardTables_CombiTable2D_getValue(tableID, u1, u2)
+                annotation (Library={"ModelicaStandardTables", "ModelicaMatIO", "zlib"});
+              annotation (derivative(noDerivative=tableAvailable) = getDerTableValue);
           end getTableValue;
 
           function getDerTableValue
-            "Derivative of interpolated 1-dim. table defined by matrix"
-            extends Modelica.Icons.Function;
-            input Modelica.Blocks.Types.ExternalCombiTable1D tableID;
-            input Integer icol;
-            input Real u;
-            input Real tableAvailable
-              "Dummy input to ensure correct sorting of function calls";
-            input Real der_u;
-            output Real der_y;
-            external"C" der_y = ModelicaStandardTables_CombiTable1D_getDerValue(tableID, icol, u, der_u)
-              annotation (Library={"ModelicaStandardTables", "ModelicaMatIO", "zlib"});
+              "Derivative of interpolated 2-dim. table defined by matrix"
+              extends Modelica.Icons.Function;
+              input Modelica.Blocks.Types.ExternalCombiTable2D tableID;
+              input Real u1;
+              input Real u2;
+              input Real tableAvailable
+                "Dummy input to ensure correct sorting of function calls";
+              input Real der_u1;
+              input Real der_u2;
+              output Real der_y;
+              external"C" der_y = ModelicaStandardTables_CombiTable2D_getDerValue(tableID, u1, u2, der_u1, der_u2)
+                annotation (Library={"ModelicaStandardTables", "ModelicaMatIO", "zlib"});
           end getDerTableValue;
 
             parameter Real table[:, :]
-              "Table matrix (grid = first column; e.g., table=[0,2])"
-              annotation (Dialog(group="Table data definition",enable=not tableOnFile));
-            final parameter Integer columns[:]=2:size(table, 2)
-              "Columns of table to be interpolated"
-              annotation (Dialog(group="Table data interpretation"));
+               "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])"
+              annotation (Dialog(group="Table data definition"));
 
-            final parameter Modelica.Blocks.Types.ExternalCombiTable1D tableID=
-                Modelica.Blocks.Types.ExternalCombiTable1D(
+            final parameter Modelica.Blocks.Types.ExternalCombiTable2D tableID=
+                Modelica.Blocks.Types.ExternalCombiTable2D(
                   "NoName",
                   "NoName",
                   table,
-                  columns,
                   Modelica.Blocks.Types.Smoothness.LinearSegments) "External table object";
 
-            final parameter Integer n= 1;
             parameter Real u1;
             parameter Real u2;
             final parameter Real y = getTableValue(tableID, u1, u2, 1.0);
@@ -6071,7 +6169,104 @@ Added documentation.</li>
 
           equation
 
-            annotation ();
+            annotation (Icon(
+              coordinateSystem(preserveAspectRatio=true,
+                extent={{-100.0,-100.0},{100.0,100.0}}),
+                graphics={                Rectangle(
+                  extent={{-100,-100},{100,100}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+              Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
+              Line(points={{0.0,40.0},{0.0,-40.0}}),
+              Line(points={{-60.0,40.0},{-30.0,20.0}}),
+              Line(points={{-30.0,40.0},{-60.0,20.0}}),
+              Rectangle(origin={2.3077,-0.0},
+                fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{-62.3077,0.0},{-32.3077,20.0}}),
+              Rectangle(origin={2.3077,-0.0},
+                fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{-62.3077,-20.0},{-32.3077,0.0}}),
+              Rectangle(origin={2.3077,-0.0},
+                fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{-62.3077,-40.0},{-32.3077,-20.0}}),
+              Rectangle(fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{-30.0,20.0},{0.0,40.0}}),
+              Rectangle(fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{0.0,20.0},{30.0,40.0}}),
+              Rectangle(origin={-2.3077,-0.0},
+                fillColor={255,215,136},
+                fillPattern=FillPattern.Solid,
+                extent={{32.3077,20.0},{62.3077,40.0}}),
+                                                  Text(
+                  extent={{-150,150},{150,110}},
+                  textString="%name",
+                  lineColor={0,0,255})}),
+              Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+                      100,100}}), graphics={
+                  Rectangle(
+                    extent={{-60,60},{60,-60}},
+                    fillColor={235,235,235},
+                    fillPattern=FillPattern.Solid,
+                    lineColor={0,0,255}),
+                  Text(
+                    extent={{-100,100},{100,64}},
+                    textString="2 dimensional linear table interpolation",
+                    lineColor={0,0,255}),
+                  Line(points={{-54,40},{-54,-40},{54,-40},{54,40},{28,40},{28,-40},{-28,
+                        -40},{-28,40},{-54,40},{-54,20},{54,20},{54,0},{-54,0},{-54,-20},
+                        {54,-20},{54,-40},{-54,-40},{-54,40},{54,40},{54,-40}}, color={
+                        0,0,0}),
+                  Line(points={{0,40},{0,-40}}),
+                  Rectangle(
+                    extent={{-54,20},{-28,0}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Rectangle(
+                    extent={{-54,0},{-28,-20}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Rectangle(
+                    extent={{-54,-20},{-28,-40}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Rectangle(
+                    extent={{-28,40},{0,20}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Rectangle(
+                    extent={{0,40},{28,20}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Rectangle(
+                    extent={{28,40},{54,20}},
+                    lineColor={0,0,0},
+                    fillColor={255,255,0},
+                    fillPattern=FillPattern.Solid),
+                  Line(points={{-54,40},{-28,20}}),
+                  Line(points={{-28,40},{-54,20}}),
+                  Text(
+                    extent={{-54,-40},{-30,-56}},
+                    textString="u1",
+                    lineColor={0,0,255}),
+                  Text(
+                    extent={{28,58},{52,44}},
+                    textString="u2",
+                    lineColor={0,0,255}),
+                  Text(
+                    extent={{-2,12},{32,-22}},
+                    textString="y",
+                    lineColor={0,0,255})}));
           end CombiTable2DParameter;
         end TablesEN1264;
       end TablesAndParameters;
