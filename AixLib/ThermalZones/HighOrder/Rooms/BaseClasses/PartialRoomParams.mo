@@ -42,7 +42,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   //// Outer / Exterior wall parameters
   //Window type
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win "Window parametrization" annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
-  replaceable model corrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows"));
+  replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG corrSolarGainWin constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows"));
   // Solar absorptance
   parameter Real solar_absorptance_OW(min=0, max=1)=0.6 "Solar absoptance outer walls "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));

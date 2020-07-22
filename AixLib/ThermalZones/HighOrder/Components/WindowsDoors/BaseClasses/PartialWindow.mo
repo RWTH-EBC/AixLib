@@ -7,6 +7,17 @@ partial model PartialWindow "Partial model for windows"
   parameter Modelica.SIunits.Area windowarea "Total fenestration area";
   parameter Modelica.SIunits.Temperature T0= 293.15 "Initial temperature";
 
+  replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
+      "Window record / type"
+    annotation (Dialog(
+      group="Window type",
+      descriptionLabel=true), choicesAllMatching=true);
+
+  replaceable CorrectionSolarGain.PartialCorGParamOnly correctionSolarGain constrainedby CorrectionSolarGain.PartialCorGParamOnly(
+   final n=1,
+   final Uw=WindowType.Uw,
+   final g=WindowType.g) annotation (Placement(transformation(extent={{-50,50},{-30,70}})), choicesAllMatching=true);
+
   Utilities.Interfaces.SolarRad_in
                                  solarRad_in
 annotation (Placement(
@@ -30,6 +41,11 @@ annotation (Placement(
   Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans if use_solarRadWinTrans
     "Output signal connector"
     annotation (Placement(transformation(extent={{82,70},{102,90}}), visible=use_solarRadWinTrans));
+
+  Modelica.Blocks.Math.Gain Ag(final k(
+      unit="m2",
+      min=0.0) = (1 - WindowType.frameFraction)*windowarea)
+    annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                       graphics={

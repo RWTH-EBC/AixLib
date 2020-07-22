@@ -47,13 +47,12 @@ model Case600
     wallTypes=wallTypes,
     calcMethodIn=4,
     Type_Win=Type_Win,
+    final corrSolarGainWin=corrSolarGainWin,
     solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     Win_Area=Win_Area,
     absInnerWallSurf=absInnerWallSurf,
-    outerWall_South(windowSimple(redeclare model correctionSolarGain =
-            correctionSolarGain)))
-    annotation (Placement(transformation(extent={{-6,-6},{36,35}})));
+    outerWall_South(windowSimple(redeclare model correctionSolarGain = corrSolarGainWin))) annotation (Placement(transformation(extent={{-6,-6},{36,35}})));
 
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{104,78},{117,90}})));
@@ -188,11 +187,9 @@ model Case600
   parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win=
       AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140()
     "Window parametrization";
-  replaceable model correctionSolarGain =
-      Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
-    constrainedby
-    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-   "Model for correction of solar gain" annotation (__Dymola_choicesAllMatching=true);
+  replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140 corrSolarGainWin
+    constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
 equation

@@ -1,11 +1,10 @@
 within AixLib.DataBase.WindowsDoors.Simple;
-record WindowSimple_ASHRAE140 "Window according to standard ASHRAE 140"
+record WindowSimple_ASHRAE140 "ASHRAE 140 window"
 
 extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
     Uw=3,
-    g=0.789,
-    Emissivity=0.84,
-    frameFraction=0.00001);
+    frameFraction=0.00001,
+    g=0.9999);
   annotation (Documentation(revisions="<html>
 <ul>
 <li><i>September 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Added reference</li>

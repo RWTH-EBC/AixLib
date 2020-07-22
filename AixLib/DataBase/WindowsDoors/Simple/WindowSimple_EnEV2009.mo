@@ -1,6 +1,6 @@
 within AixLib.DataBase.WindowsDoors.Simple;
 record WindowSimple_EnEV2009 "Window according to EnEV 2009"
-  extends OWBaseDataDefinition_Simple(Uw = 1.3, g = 0.6, Emissivity = 0.9, frameFraction = 0.2);
+  extends OWBaseDataDefinition_Simple(Uw = 1.3, frameFraction = 0.2, g = 0.6);
   annotation(Documentation(revisions = "<html>
  <ul>
  <li><i>September 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Added reference</li>

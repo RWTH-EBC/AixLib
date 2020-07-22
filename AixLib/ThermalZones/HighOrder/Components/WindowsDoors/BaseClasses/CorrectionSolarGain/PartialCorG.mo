@@ -2,11 +2,8 @@ within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.Correct
 partial model PartialCorG
   "partial model for correction of the solar gain factor"
 
-   parameter Integer n = 1 "vector size for input and output";
-   parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 3
-    "Thermal transmission coefficient of whole window";
+  extends PartialCorGParamOnly;
 
-public
   Utilities.Interfaces.SolarRad_in SR_input[n] annotation (Placement(
         transformation(extent={{-122,-20},{-80,20}}),
         iconTransformation(
@@ -18,15 +15,7 @@ public
     annotation (Placement(transformation(extent={{80,-10},{100,10}}),
         iconTransformation(extent={{80,-10},{100,10}})));
   annotation ( Icon(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
-        Rectangle(
-          extent={{-80,80},{80,-80}},
-          lineColor={0,0,0},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-52,24},{62,-16}},
-          lineColor={0,0,0},
-          textString="%name")}),
+          preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Partial model for correction cofficient for transmitted solar radiation through a window.</p>
