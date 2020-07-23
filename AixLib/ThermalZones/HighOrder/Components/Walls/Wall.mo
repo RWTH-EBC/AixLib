@@ -70,14 +70,19 @@ model Wall
   // window parameters
   parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
-  replaceable model Window = WindowsDoors.WindowSimple constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
-    "Model for window"
-                     annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
-  Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if                   outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
-  parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
+  replaceable AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple windowModel if withWindow and outside
+   constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
+     final T0=T0,
+     final windowarea=windowarea,
+     final WindowType=WindowType,
+     final correctionSolarGain=correctionSolarGain)
+       "Model for window"
+                     annotation (Dialog(tab="Window",  enable=withWindow and outside),   choicesAllMatching=true,
+    Placement(transformation(extent={{-15,-48},{11,-22}})));
+  replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
-  replaceable model correctionSolarGain = WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab = "Window", enable = withWindow and outside));
+  replaceable WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorGParamOnly corrSolarGainWin constrainedby WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorGParamOnly "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab = "Window", enable = withWindow and outside));
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   parameter Real LimitSolIrr if withWindow and outside and withSunblind
@@ -220,26 +225,24 @@ equation
   // ****standard connections for outside wall with window***********
   //******************************************************************
   if outside and withWindow then
-    connect(windowSimple.radPort, heatStarToComb.portRad) annotation (Line(
+    connect(windowModel.radPort, heatStarToComb.portRad) annotation (Line(
         points={{9.7,-27.2},{48,-27.2},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
-    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6},{59,-6}},       color={191,0,0}));
-    connect(windowSimple.port_outside, port_outside) annotation(Line(points={{-13.7,-36.3},{-16,-36.3},{-16,-54},{-92,-54},{-92,4},{-98,4}},
-                                                                                                                                  color = {191, 0, 0}));
+    connect(windowModel.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6},{59,-6}}, color={191,0,0}));
+    connect(windowModel.port_outside, port_outside) annotation (Line(points={{-13.7,-36.3},{-16,-36.3},{-16,-54},{-92,-54},{-92,4},{-98,4}}, color={191,0,0}));
   end if;
   //******************************************************************
   // **** connections for outside wall with window without sunblind****
   //******************************************************************
   if outside and withWindow and not withSunblind then
-    connect(windowSimple.solarRad_in, SolarRadiationPort) annotation(Line(points={{-13.7,-27.2},{-16,-27.2},{-16,-16},{-80,-16},{-80,89},{-106,89}},
-                                                                                                                                          color = {255, 128, 0}));
+    connect(windowModel.solarRad_in, SolarRadiationPort) annotation (Line(points={{-13.7,-27.2},{-16,-27.2},{-16,-16},{-80,-16},{-80,89},{-106,89}}, color={255,128,0}));
   end if;
   //******************************************************************
   // **** connections for outside wall with window and sunblind****
   //******************************************************************
   if outside and withWindow and withSunblind then
-    connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation(Line(points={{-21.5625,-32.375},{-20,-32.375},{-20,-27.2},{-13.7,-27.2}},  color = {255, 128, 0}));
+    connect(Sunblind.Rad_Out[1], windowModel.solarRad_in) annotation (Line(points={{-21.5625,-32.375},{-20,-32.375},{-20,-27.2},{-13.7,-27.2}}, color={255,128,0}));
     connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-47.4375,-32.375},{-50,-32.375},{-50,-16},{-80,-16},{-80,89},{-106,89}},
                                                                                                                                    color = {255, 128, 0}));
   end if;
@@ -257,8 +260,8 @@ equation
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{35,80},{30,80},{30,48},{16.74,48},{16.74,35.78}}, color={191,0,0}));
 
 
-  connect(windowSimple.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{9.96,-24.6},{84,-24.6},{84,-60},{110,-60}}, color={0,0,127}));
-  connect(WindSpeedPort, windowSimple.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
+  connect(windowModel.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{9.96,-24.6},{84,-24.6},{84,-60},{110,-60}}, color={0,0,127}));
+  connect(WindSpeedPort, windowModel.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
 
 
     annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},

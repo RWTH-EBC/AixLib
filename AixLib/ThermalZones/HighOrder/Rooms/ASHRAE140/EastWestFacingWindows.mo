@@ -1,6 +1,8 @@
 within AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140;
 model EastWestFacingWindows "windows facing south and west"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(
+    redeclare Components.WindowsDoors.Window_ASHRAE140 windowModel,
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
       redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls
       wallTypes(
       roof=DataBase.Walls.ASHRAE140.RO_Case600(),
@@ -36,16 +38,13 @@ model EastWestFacingWindows "windows facing south and west"
   parameter Real eps_out=0.9 "emissivity of the outer surface"
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
 
-  parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Win=
-     AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140()
-    "choose a Window type"
-    annotation (Dialog(group="Windows"), choicesAllMatching=true);
-
 public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
     use_shortWaveRadIn=true,
     calcMethodIn=calcMethodIn,
-    redeclare final model correctionSolarGain = corrSolarGainWin,
+    final WindowType=Type_Win,
+    final windowModel=windowModel,
+    final corrSolarGainWin=corrSolarGainWin,
     withDoor=false,
     wallPar=wallTypes.OW,
     T0=Tset,
@@ -61,17 +60,16 @@ public
     windowarea=Win_Area,
     wall_height=room_height,
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
-    withWindow=false)
-    annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
+    withWindow=false) annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_West(
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_height,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    redeclare final model correctionSolarGain = corrSolarGainWin,
+    final WindowType=Type_Win,
+    final windowModel=windowModel,
+    final corrSolarGainWin=corrSolarGainWin,
     withDoor=false,
     T0=Tset,
     solarDistribution=partialCoeffTable.coeffOWWest,
@@ -85,7 +83,6 @@ public
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
     calcMethodOut=calcMethodOut,
     withWindow=true,
-    WindowType=Win,
     windowarea=Win_Area*0.5) annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
@@ -97,8 +94,9 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_height,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    redeclare final model correctionSolarGain = corrSolarGainWin,
+    final WindowType=Type_Win,
+    final windowModel=windowModel,
+    final corrSolarGainWin=corrSolarGainWin,
     T0=Tset,
     solarDistribution=partialCoeffTable.coeffOWEast,
     outside=true,
@@ -111,7 +109,6 @@ public
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
     calcMethodOut=calcMethodOut,
     withWindow=true,
-    WindowType=Win,
     windowarea=Win_Area*0.5) annotation (Placement(transformation(
         extent={{-4.00001,-24},{4.00001,24}},
         rotation=90,
@@ -121,7 +118,9 @@ public
     use_shortWaveRadIn=true,
     calcMethodIn=calcMethodIn,
     wall_height=room_height,
-    redeclare final model correctionSolarGain = corrSolarGainWin,
+    final WindowType=Type_Win,
+    final windowModel=windowModel,
+    final corrSolarGainWin=corrSolarGainWin,
     U_door=5.25,
     solarDistribution=partialCoeffTable.coeffOWNorth,
     door_height=1,
@@ -137,8 +136,7 @@ public
     wallPar=wallTypes.OW,
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    calcMethodOut=calcMethodOut)
-    annotation (Placement(transformation(extent={{74,-36},{60,44}})));
+    calcMethodOut=calcMethodOut) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
     use_shortWaveRadIn=true,
@@ -147,7 +145,9 @@ public
     wall_height=room_width,
     ISOrientation=3,
     solarDistribution=partialCoeffTable.coeffCeiling,
-    redeclare final model correctionSolarGain = corrSolarGainWin,
+    final WindowType=Type_Win,
+    final windowModel=windowModel,
+    final corrSolarGainWin=corrSolarGainWin,
     withDoor=false,
     T0=Tset,
     wallPar=wallTypes.roof,
@@ -168,7 +168,9 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_width,
-    redeclare final model correctionSolarGain = corrSolarGainWin,
+    final WindowType=Type_Win,
+    final windowModel=windowModel,
+    final corrSolarGainWin=corrSolarGainWin,
     withDoor=false,
     solarDistribution=partialCoeffTable.coeffFloor,
     T0=Tset,
