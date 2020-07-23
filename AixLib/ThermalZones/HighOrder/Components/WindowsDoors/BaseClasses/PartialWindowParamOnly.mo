@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses;
-partial model PartialWindowParamOnly
+model PartialWindowParamOnly
   "Partial model for windows, containing parameters only"
 
   parameter Boolean use_windSpeedPort = true "Enable wind speed input connector" annotation(Dialog(tab="Connector usage", group="Inputs"));

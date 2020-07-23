@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
-partial model PartialCorGParamOnly "Partial model containing parameters but no connectors for correction of the solar gain factor"
+model PartialCorGParamOnly "Partial model containing parameters but no connectors for correction of the solar gain factor"
 
    parameter Integer n = 1 "vector size for input and output";
    parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 3
