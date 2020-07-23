@@ -75,7 +75,7 @@ model Wall
      final T0=T0,
      final windowarea=windowarea,
      final WindowType=WindowType,
-     final correctionSolarGain=correctionSolarGain)
+     final correctionSolarGain=corrSolarGainWin)
        "Model for window"
                      annotation (Dialog(tab="Window",  enable=withWindow and outside),   choicesAllMatching=true,
     Placement(transformation(extent={{-15,-48},{11,-22}})));
