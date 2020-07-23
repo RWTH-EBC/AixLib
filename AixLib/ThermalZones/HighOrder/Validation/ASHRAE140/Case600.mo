@@ -51,8 +51,7 @@ model Case600
     solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     Win_Area=Win_Area,
-    absInnerWallSurf=absInnerWallSurf,
-    outerWall_South(windowSimple(redeclare model correctionSolarGain = corrSolarGainWin))) annotation (Placement(transformation(extent={{-6,-6},{36,35}})));
+    absInnerWallSurf=absInnerWallSurf) annotation (Placement(transformation(extent={{-6,-6},{36,35}})));
 
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{104,78},{117,90}})));
@@ -184,11 +183,11 @@ model Case600
   parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
       AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
     "Types of walls (contains multiple records)";
-  parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win=
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140()
+  replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win
+     constrainedby AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
     "Window parametrization";
   replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140 corrSolarGainWin
-    constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorGParamOnly
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";

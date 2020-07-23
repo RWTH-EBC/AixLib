@@ -44,7 +44,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
 
   replaceable AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindowParamOnly windowModel constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindowParamOnly annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win "Window parametrization" annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
-  replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG corrSolarGainWin constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows"));
+  replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorGParamOnly corrSolarGainWin constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorGParamOnly "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows"));
   // Solar absorptance
   parameter Real solar_absorptance_OW(min=0, max=1)=0.6 "Solar absoptance outer walls "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
