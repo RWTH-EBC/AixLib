@@ -29,7 +29,9 @@ model Room "Building1"
     wall_height=room_height,
     solar_absorptance=0.3,
     withWindow=false,
-    withDoor=false)
+    withDoor=true,
+    U_door=1.7,
+    door_height=15)
     annotation (Placement(transformation(extent={{-62,-42},{-48,44}})));
   Components.Walls.Wall wallSouth(
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
@@ -92,6 +94,25 @@ model Room "Building1"
     annotation (Placement(transformation(extent={{-120,48},{-100,68}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
     annotation (Placement(transformation(extent={{-36,-102},{-28,-94}})));
+  Components.DryAir.VarAirExchange
+    NaturalVentilation1(final V=room_V)
+    annotation (Placement(transformation(extent={{-30,4},{-18,16}})));
+  Modelica.Blocks.Interfaces.RealInput AirExchangePortRoom
+    "Air Exchange with Room " annotation (Placement(transformation(
+        extent={{-13,-13},{13,13}},
+        rotation=0,
+        origin={-112,-50}), iconTransformation(
+        extent={{-10,-9.5},{10,9.5}},
+        rotation=0,
+        origin={-110,-68.5})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoomNextDoor
+    annotation (Placement(transformation(extent={{-114,-106},{-94,-86}}),
+        iconTransformation(extent={{-114,-106},{-94,-86}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
+        2100000*2000)
+    annotation (Placement(transformation(extent={{30,16},{46,32}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor(R=1/
+        35000) annotation (Placement(transformation(extent={{34,-4},{48,10}})));
 equation
   connect(WindSpeedPort, wallWest.WindSpeedPort) annotation (Line(points={{-112,18},
           {-92,18},{-92,32},{-88,32},{-88,32.5333},{-62.35,32.5333}},     color=
@@ -152,6 +173,16 @@ equation
   connect(thermStar_Demux.portConvRadComb,floor. thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-8,-8},{-8,-50},{-42,-50},{-42,-62},{-32.5,
           -62},{-32.5,-70}}, color={191,0,0}));
+  connect(NaturalVentilation1.port_b, airload.port) annotation (Line(points={{
+          -18,10},{-16,10},{-16,-18},{10,-18}}, color={191,0,0}));
+  connect(AirExchangePortRoom, NaturalVentilation1.InPort1) annotation (Line(
+        points={{-112,-50},{-70,-50},{-70,7},{-30.6,7}}, color={0,0,127}));
+  connect(thermRoomNextDoor, NaturalVentilation1.port_a) annotation (Line(
+        points={{-104,-96},{-70,-96},{-70,10},{-30,10}}, color={191,0,0}));
+  connect(thermalResistor.port_a, heatCapacitor.port)
+    annotation (Line(points={{34,3},{34,16},{38,16}}, color={191,0,0}));
+  connect(thermalResistor.port_b, airload.port) annotation (Line(points={{48,3},
+          {48,-36},{10,-36},{10,-18}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={
         Rectangle(
