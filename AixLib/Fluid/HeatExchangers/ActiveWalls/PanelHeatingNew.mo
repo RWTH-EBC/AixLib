@@ -2508,10 +2508,11 @@ Moved into AixLib</li>
       final parameter Modelica.SIunits.CoefficientOfHeatTransfer
         kDown_nominal = floorHeatingType.k_down;
 
-      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
-            Medium)
+      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium
+          = Medium)
         annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
-      Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package Medium =
+      Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package
+          Medium =
             Medium)
         annotation (Placement(transformation(extent={{60,-36},{80,-16}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermDown annotation (
@@ -2761,12 +2762,10 @@ Added documentation.</li>
           import Modelica.Constants.pi;
 
       parameter Modelica.SIunits.Distance T "Spacing between tubes" annotation (Dialog( group = "Panel Heating Pipe"));
-      parameter Modelica.SIunits.Diameter d_i "Inner diameter of pipe" annotation (Dialog( group = "Panel Heating Pipe"));
-      parameter Modelica.SIunits.Diameter d_a "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating Pipe"));
       parameter Integer n_pipe( min = 1) annotation (Dialog( group = "Panel Heating Pipe"));
-      final parameter Modelica.SIunits.Area A_pipe[n_pipe] = fill((2 * pi * d_a/2 * (d_a + L_pipe)),n_pipe) "surface area of pipe";
       parameter Modelica.SIunits.Length L_pipe "Length of pipe" annotation (Dialog( group = "Panel Heating Pipe"));
-      parameter Modelica.SIunits.Thickness d_pipe[n_pipe] "Thickness of pipe layers" annotation(Dialog(group = "Panel Heating Pipe"));
+      parameter Modelica.SIunits.Thickness d_a[n_pipe] annotation(Dialog(group = "Panel Heating Pipe"));
+      parameter Modelica.SIunits.Thickness d_i[n_pipe] annotation(Dialog(group = "Panel Heating Pipe"));
       parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] "Thermal conductivity of pipe layers" annotation(Dialog(group = "Panel Heating Pipe"));
 
       parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
@@ -2854,8 +2853,12 @@ Added documentation.</li>
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
         annotation (Placement(transformation(extent={{14,-108},{34,-88}})));
 
-      Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatConda_pipe[n_pipe](G=
-           A_pipe .* lambda_pipe ./ d_pipe) annotation (Placement(transformation(
+      Utilities.HeatTransfer.CylindricHeatConduction            heatConda_pipe[n_pipe](
+        each length=L_pipe,
+        d_out=d_a,
+        lambda=lambda_pipe,
+        d_in=d_i,
+        each nParallel=1)                   annotation (Placement(transformation(
             extent={{9,-9},{-9,9}},
             rotation=0,
             origin={17,11})));
@@ -2885,16 +2888,17 @@ Added documentation.</li>
       connect(simpleNLayer_ceiling.port_b, heatport_ceiling) annotation (Line(
             points={{-4.44089e-16,-56},{24,-56},{24,-98}}, color={191,0,0}));
       connect(vol.heatPort, heatConda_pipe[1].port_a)
-        annotation (Line(points={{40,12},{26,12},{26,11}}, color={191,0,0}));
+        annotation (Line(points={{40,12},{17,12},{17,11.36}},
+                                                           color={191,0,0}));
       connect(heatConda_pipe[n_pipe].port_b, simpleNLayer_floor.port_a) annotation (Line(
-            points={{8,11},{0,11},{0,18},{-6.66134e-16,18},{-6.66134e-16,42}},
+            points={{17,18.92},{0,18.92},{0,18},{-6.66134e-16,18},{-6.66134e-16,42}},
             color={191,0,0}));
       connect(heatConda_pipe[n_pipe].port_b, simpleNLayer_ceiling.port_a) annotation (
-          Line(points={{8,11},{0,11},{0,2},{4.44089e-16,2},{4.44089e-16,-36}},
+          Line(points={{17,18.92},{0,18.92},{0,2},{4.44089e-16,2},{4.44089e-16,-36}},
             color={191,0,0}));
             for i in 1:(n_pipe-1) loop
       connect(heatConda_pipe[i].port_b, heatConda_pipe[i+1].port_a) annotation (Line(
-          points={{8,11},{8,26},{26,26},{26,11}},
+          points={{17,18.92},{17,11.36}},
           color={191,0,0},
           pattern=LinePattern.Dash));
             end for;
@@ -2940,10 +2944,11 @@ Added documentation.</li>
       final parameter Modelica.SIunits.Length L_pipe = A / T "Length of Panel Heating Pipe";
 
       replaceable parameter
-        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PipeMaterial_Definition
+        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PipeMaterialDefinition
         PipeMaterial=
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PE_RT() "Pipe Material"
-             annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PERTpipe()
+        "Pipe Material"
+        annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
       final parameter Modelica.SIunits.ThermalConductivity lambda_R = PipeMaterial.lambda "Thermal conductivity of pipe material";
       parameter Modelica.SIunits.Thickness s_R "thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
       parameter Modelica.SIunits.Diameter d_a "outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
@@ -2953,12 +2958,13 @@ Added documentation.</li>
 
       parameter Boolean withInsulating = true "false if pipe has no insulating" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
       replaceable parameter
-        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.InsulatingMaterial_Definition
+        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.InsulatingMaterialDefinition
         InsulatingMaterial=
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.PVC_withTrappedAir() "Insulating Material"
-             annotation (Dialog(group="Panel Heating", enable = withInsulating), choicesAllMatching=true);
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.PVCwithTrappedAir()
+        "Insulating Material" annotation (Dialog(group="Panel Heating", enable=
+              withInsulating), choicesAllMatching=true);
       final parameter Modelica.SIunits.ThermalConductivity lambda_M( min = 0) = InsulatingMaterial.lambda "Thermal Conductivity for insulating";
-      parameter Modelica.SIunits.Diameter D( min = d_a) "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating", enable = withInsulating));
+      parameter Modelica.SIunits.Diameter D( min = d_a)  "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating", enable = withInsulating));
       final parameter Modelica.SIunits.Density rho_M = 1 "Density of insulating material";
       final parameter Modelica.SIunits.SpecificHeatCapacity c_M = 1 "Specific Heat Capacity of insulating material";
 
@@ -2997,10 +3003,9 @@ Added documentation.</li>
       Modelica.SIunits.Temperature Temp_in[3] = {TFlow.T, TReturn.T, T_Room};
       parameter Modelica.SIunits.TemperatureDifference dT_Hi "Logarithmic Temperature Difference between heating medium and room" annotation(Dialog(group = "Room Specifications"));
 
-      Modelica.SIunits.HeatFlux q_G = EN_1264.q_G "critical heat flow";
-      Modelica.SIunits.HeatFlux q_max = EN_1264.q_max "maximum heat flow";
-      Modelica.SIunits.HeatFlux q_N = EN_1264.q_N "nominal heat flow";
-      Real K_H = EN_1264.K_H;
+      final parameter Modelica.SIunits.HeatFlux q_G = EN_1264.q_G "critical heat flow";
+      final parameter Modelica.SIunits.HeatFlux q_max = EN_1264.q_max "maximum heat flow";
+      final parameter Real K_H = EN_1264.K_H;
 
       Modelica.SIunits.Temperature T_Fm = sumT_Fm.y "arithmetic mean of floor surface temperature";
 
@@ -3008,7 +3013,6 @@ Added documentation.</li>
         panelHeatingElement[dis](
         each T=T,
         each m_H=m_H,
-        each d_i=d_i,
         each A=A/dis,
         each eps_floor=eps_floor,
         each eps_ceiling=eps_ceiling,
@@ -3025,11 +3029,11 @@ Added documentation.</li>
         each lambda_ceiling=lambda_ceiling,
         each c_ceiling=c_ceiling,
         redeclare each package Medium = Medium,
-        each d_a=d_a,
         each n_pipe=n_pipe,
         each L_pipe=L_pipe/dis,
-        each d_pipe=d_pipe,
-        each lambda_pipe=lambda_pipe)
+        each lambda_pipe=lambda_pipe,
+        each d_a={d_a,D},
+        each d_i={d_i,d_a})
         annotation (Placement(transformation(extent={{-20,-18},{20,18}})));
 
       Sensors.TemperatureTwoPort                TFlow(redeclare package Medium =
@@ -3052,7 +3056,7 @@ Added documentation.</li>
         annotation (Placement(transformation(extent={{-34,-104},{-14,-84}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
         annotation (Placement(transformation(extent={{14,-108},{34,-88}})));
-      EN1264.HeatFlux_EN1264_2 EN_1264(
+      EN1264.HeatFlux EN_1264(
         T=T,
         T_Fmax=T_Fmax,
         T_Room=T_Room,
@@ -3073,13 +3077,21 @@ Added documentation.</li>
         T_U=T_U,
         withInsulating=withInsulating,
         withHoldingBurls=withHoldingBurls,
-        dT_H=dT_Hi)
+        dT_H=dT_Hi,
+        q_Gmax=q_Gmax)
         annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
       SumT_F sumT_Fm(dis=dis)
         annotation (Placement(transformation(extent={{60,40},{80,60}})));
     equation
-      assert(L_pipe > 120, "Pipe Length is too high, additional heating circuit needs to be used", AssertionLevel.warning);
-      assert(T_Fm > T_Fmax, "Surface temperature too high", AssertionLevel.warning);
+     assert(L_pipe > 120, "Pipe Length is too high, additional heating circuit needs to be used", AssertionLevel.warning);
+
+     assert(T_Fm > T_Fmax, "Surface temperature too high", AssertionLevel.warning);
+
+     assert(T >= 0.05 and T <= 0.375, "Pipe spacing for m_T should be between 0.05 and 0.375", AssertionLevel.warning);
+
+     assert(s_u >= 0.01, "thickness of screed should be s_u => 0.010 for calculation of m_u", AssertionLevel.warning);
+
+     assert(D <= 0.08  and D >= 0.03, "Outer diameter should be 0.008 <= D <= 0.030 for calculation of m_T", AssertionLevel.warning);
 
     //OUTER CONNECTIONS
 
@@ -3131,7 +3143,7 @@ Added documentation.</li>
       replaceable package Medium =
           Modelica.Media.Interfaces.PartialMedium "Medium in the component";
 
-      parameter Integer CircuitNo(min=1) = 3 "Number of rooms heated with panel heating";
+      parameter Integer CircuitNo(min=1) = 1 "Number of rooms heated with panel heating";
       parameter Modelica.SIunits.Power Q_Nf "Calculated Heat Load for room with panel heating" annotation (Dialog(group="Room Specifications"));
       parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
       parameter Integer dis(min=1) = 3 "Number of discretisation layers within a room";
@@ -3157,10 +3169,10 @@ Added documentation.</li>
              annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
       parameter Modelica.SIunits.Distance T "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
       replaceable parameter
-        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PipeMaterial_Definition
+        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PipeMaterialDefinition
         PipeMaterial=
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PE_RT() "Pipe Material"
-             annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PERTpipe()
+             "Pipe Material" annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
       final parameter Modelica.SIunits.ThermalConductivity lambda_R = PipeMaterial.lambda "Thermal conductivity of pipe material";
       parameter Modelica.SIunits.Thickness s_R "thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
       parameter Modelica.SIunits.Diameter d_a "outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
@@ -3168,16 +3180,17 @@ Added documentation.</li>
 
       parameter Boolean withInsulating = true "false if pipe has no insulating" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
       replaceable parameter
-        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.InsulatingMaterial_Definition
+        AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.InsulatingMaterialDefinition
         InsulatingMaterial=
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.none() "Insulating Material"
-             annotation (Dialog(group="Panel Heating", enable = withInsulating), choicesAllMatching=true);
-      final parameter Modelica.SIunits.ThermalConductivity lambda_M( min = 0) = InsulatingMaterial.lambda "Thermal Conductivity for insulating";
-      parameter Modelica.SIunits.Diameter D( min = d_a) "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating"));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.PVCwithTrappedAir()
+             "Insulating Material" annotation (Dialog(group="Panel Heating", enable=
+             withInsulating), choicesAllMatching=true);
+      final parameter Modelica.SIunits.ThermalConductivity lambda_M = if withInsulating == true then InsulatingMaterial.lambda else 0 "Thermal Conductivity for insulating";
+      parameter Modelica.SIunits.Diameter D( min = d_a) = d_a "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating", enable = withInsulating));
 
       parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
-      parameter Modelica.SIunits.VolumeFraction psi( min = 0) "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
-      parameter Modelica.SIunits.ThermalConductivity lambda_W( min = 0) "Thermal conductivity of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
+      parameter Modelica.SIunits.VolumeFraction psi = 0 "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
+      parameter Modelica.SIunits.ThermalConductivity lambda_W = 0 "Thermal conductivity of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
 
       final parameter Modelica.SIunits.MassFlowRate m_ges = sum(panelHeating_Circuit.m_H);
       parameter Modelica.SIunits.Temperature TFLow_nom "System Flow Temperature";
@@ -3185,22 +3198,21 @@ Added documentation.</li>
       final parameter Modelica.SIunits.TemperatureDifference sigma_nom = TFLow_nom - TReturn_nom "Nominal Temperatur Spread of Panel Heating";
       final parameter Modelica.SIunits.HeatFlux q_max = max(panelHeating_Circuit.q_des);
       parameter Modelica.SIunits.TemperatureDifference sigma_des(max = 5) = 5  "Temperature Spread for room with highest heat load (max = 5)";
-      Modelica.SIunits.TemperatureDifference dT_Hdes = q_max / K_H[1];
-      Modelica.SIunits.TemperatureDifference dT_Vdes = dT_Hdes + sigma_des / 2 + sigma_des^(2) / (12 * dT_Hdes);
-      Modelica.SIunits.Temperature T_Vdes = dT_Vdes + T_Roomdes;
+      final parameter Modelica.SIunits.TemperatureDifference dT_Hdes = q_max / K_H[1];
+      final parameter Modelica.SIunits.TemperatureDifference dT_Vdes = dT_Hdes + sigma_des / 2 + sigma_des^(2) / (12 * dT_Hdes);
+      final parameter Modelica.SIunits.Temperature T_Vdes = dT_Vdes + T_Roomdes;
       final parameter Modelica.SIunits.Temperature T_Roomdes = panelHeating_Circuit[1].T_Room;
-      final parameter Modelica.SIunits.TemperatureDifference sigma_i[CircuitNo];
+      final parameter Modelica.SIunits.TemperatureDifference sigma_i[CircuitNo] = cat(1, {sigma_des}, {(3 * dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - dT_Hi[n])  / ( 3 * dT_Hi[n])) ^ (0.5) - 1)) for n in 2:CircuitNo});
 
-
-      Real K_H[CircuitNo] = {panelHeating_Circuit[r].K_H for r in 1:CircuitNo};
+      final parameter Real K_H[CircuitNo] = {panelHeating_Circuit[r].K_H for r in 1:CircuitNo};
       final parameter Real q_des[CircuitNo] = {panelHeating_Circuit[r].q_des for r in 1:CircuitNo};
-      Modelica.SIunits.TemperatureDifference dT_Hi[CircuitNo] = q_des ./ K_H;
+      final parameter Modelica.SIunits.TemperatureDifference dT_Hi[CircuitNo] = q_des ./ K_H;
 
 
       Distributor                                         distributor(
         redeclare package Medium = Medium,
         m_flow_nominal=m_ges,
-        n=3)
+        n=1)
         annotation (Placement(transformation(extent={{-42,-18},{-6,18}})));
       Sources.Boundary_pT                  boundary(redeclare package Medium =
             Medium, nPorts=1)
@@ -3246,8 +3258,8 @@ Added documentation.</li>
         each withHoldingBurls=withHoldingBurls,
         each psi=psi,
         each lambda_W=lambda_W,
-        dT_Hi=dT_Hi[CircuitNo],
-        sigma_i=sigma_i[CircuitNo])
+        sigma_i=sigma_i,
+        dT_Hi=dT_Hi)
         annotation (Placement(transformation(extent={{48,-18},{84,16}})));
       Sensors.TemperatureTwoPort                TFlow(redeclare package Medium =
             Medium, m_flow_nominal=m_ges)
@@ -3266,24 +3278,11 @@ Added documentation.</li>
       Utilities.Interfaces.RadPort radport_floor[CircuitNo]
         annotation (Placement(transformation(extent={{-34,90},{-14,110}})));
     equation
-      sigma_i[1] = sigma_des;
-      if CircuitNo > 1 then
-      for i in 2:CircuitNo loop
-        .sigma_i[i] = 3 * dT_Hi[i] * (( 1 + 4 * ( dT_Vdes - dT_Hi[i])  / ( 3 * dT_Hi[i])) ^ (0.5) - 1);
-        end for;
-       end if;
-
 
       connect(massFlow.y, m_flow_specification.m_flow_in) annotation (Line(points={{
               -127,28},{-124,28},{-124,30},{-108,30},{-108,28}}, color={0,0,127}));
       connect(flowTemperature.y, m_flow_specification.T_in) annotation (Line(points=
              {{-127,10},{-120,10},{-120,24},{-108,24}}, color={0,0,127}));
-      connect(panelHeating_Circuit.port_b, distributor.returnPorts[1:CircuitNo])
-        annotation (Line(points={{84,-1},{86,-1},{86,0},{96,0},{96,-50},{-24,-50},{-24,
-              -18.6}},      color={0,127,255}));
-      connect(distributor.flowPorts[1:CircuitNo],panelHeating_Circuit. port_a) annotation (
-          Line(points={{-24,18},{-26,18},{-26,42},{12,42},{12,-1},{48,-1}},   color=
-             {0,127,255}));
       connect(m_flow_specification.ports[1], TFlow.port_a)
         annotation (Line(points={{-86,20},{-76,20}}, color={0,127,255}));
       connect(TFlow.port_b, distributor.mainFlow) annotation (Line(points={{-58,20},
@@ -3294,7 +3293,6 @@ Added documentation.</li>
               -9},{-56,-9},{-56,-9},{-42,-9}}, color={0,127,255}));
 
               for i in 1:CircuitNo loop
-
       connect(panelHeating_Circuit[i].radport_ceiling, radport_ceiling[i])
         annotation (Line(points={{61.68,-16.98},{61.68,-68},{-24,-68},{-24,-94}},
             color={95,95,95}));
@@ -3309,50 +3307,75 @@ Added documentation.</li>
             color={191,0,0}));
     end for;
 
+      connect(distributor.flowPorts[1:CircuitNo], panelHeating_Circuit.port_a) annotation (
+          Line(points={{-24,18},{-22,18},{-22,34},{14,34},{14,-1},{48,-1}}, color={0,
+              127,255}));
+      connect(panelHeating_Circuit.port_b, distributor.returnPorts[1:CircuitNo])
+        annotation (Line(points={{84,-1},{96,-1},{96,-42},{-24,-42},{-24,-18.6}},
+            color={0,127,255}));
     end PanelHeatingSystem;
 
     model TestingParameters
-      extends Modelica.Icons.ExamplesPackage;
+      extends Modelica.Icons.Example;
       replaceable package Medium =
           Modelica.Media.Water.ConstantPropertyLiquidWater;
-      parameter Real n = panelHeatingSystem.CircuitNo;
+          final parameter Real n = panelHeatingSystem.CircuitNo;
 
       Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
         prescribedTemperature1
         annotation (Placement(transformation(extent={{86,36},{66,56}})));
       Modelica.Blocks.Sources.Step TSurface(
-        height=-6,
-        offset=299.15,
-        startTime=43200)
+        startTime=43200,
+        height=-4,
+        offset=302.15)
         annotation (Placement(transformation(extent={{118,36},{98,56}})));
-      PanelHeatingSystem panelHeatingSystem
+      PanelHeatingSystem panelHeatingSystem(
+        redeclare package Medium = Medium,
+        Q_Nf=500,
+        A=5,
+        dis=3,
+        redeclare ZoneSpecification.OccupancyZone ZoneType,
+        sigma_des=5,
+        d_floor={0.1,0.02},
+        lambda_floor={0.045,0.1},
+        c_floor={1301,1700},
+        d_ceiling={0.1,0.0125,0.015},
+        lambda_ceiling={0.045,0.25,0.51},
+        c_ceiling={1301,1000,1000},
+        T=0.1,
+        redeclare PipeMaterials.PEXpipe PipeMaterial,
+        withHoldingBurls=true,
+        CircuitNo=1,
+        redeclare Insulating_Materials.PVCwithTrappedAir InsulatingMaterial,
+        withInsulating=false,
+        s_R=0.005,
+        d_a=0.025,
+        rho_floor={194000,300000},
+        rho_ceiling={194000,800000,1200000},
+        TFLow_nom=313.15,
+        TReturn_nom=308.15)
         annotation (Placement(transformation(extent={{-56,-8},{-36,12}})));
       Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
         prescribedTemperature2
-        annotation (Placement(transformation(extent={{84,-52},{64,-32}})));
-      Modelica.Blocks.Sources.Step TCeiling(
-        height=-6,
-        offset=299.15,
-        startTime=43200)
-        annotation (Placement(transformation(extent={{122,-52},{102,-32}})));
+        annotation (Placement(transformation(extent={{78,-44},{58,-24}})));
+      Modelica.Blocks.Sources.Constant TCeiling(k=273.15 + 24)
+        annotation (Placement(transformation(extent={{120,-44},{100,-24}})));
     equation
-
-
       connect(TSurface.y, prescribedTemperature1.T)
         annotation (Line(points={{97,46},{88,46}}, color={0,0,127}));
-      connect(prescribedTemperature1.port, panelHeatingSystem.heatport_floor[1])
-        annotation (Line(points={{66,46},{-43.6,46},{-43.6,11.6}}, color={191,0,0}));
-      connect(prescribedTemperature1.port, panelHeatingSystem.radport_floor[1])
-        annotation (Line(points={{66,46},{-48.4,46},{-48.4,12}}, color={191,0,0}));
-      connect(prescribedTemperature2.T, TCeiling.y) annotation (Line(points={{86,-42},
-              {92,-42},{92,-44},{101,-44},{101,-42}}, color={0,0,127}));
 
-              for i in 1:n loop
+      connect(TCeiling.y, prescribedTemperature2.T)
+        annotation (Line(points={{99,-34},{80,-34}}, color={0,0,127}));
+         for i in 1:n loop
       connect(panelHeatingSystem.heatport_ceiling[i], prescribedTemperature2.port)
-        annotation (Line(points={{-43.6,-7.8},{-43.6,-42},{64,-42}}, color={191,0,0}));
+        annotation (Line(points={{-43.6,-7.8},{-43.6,-34},{58,-34}}, color={191,0,0}));
       connect(panelHeatingSystem.radport_ceiling[i], prescribedTemperature2.port)
-        annotation (Line(points={{-48.4,-7.4},{-48.4,-42},{64,-42}}, color={95,95,95}));
-              end for;
+        annotation (Line(points={{-48.4,-7.4},{-48.4,-34},{58,-34}}, color={95,95,95}));
+      connect(prescribedTemperature1.port, panelHeatingSystem.heatport_floor[i])
+        annotation (Line(points={{66,46},{-43.6,46},{-43.6,11.6}}, color={191,0,0}));
+      connect(prescribedTemperature1.port, panelHeatingSystem.radport_floor[i])
+        annotation (Line(points={{66,46},{-48.4,46},{-48.4,12}}, color={191,0,0}));
+         end for;
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(extent={{-72,100},{72,92}},lineColor={28,108,200}),
@@ -3458,54 +3481,54 @@ Added documentation.</li>
 
     package PipeMaterials
       "Determining the thermal conductivity for the used pipe material according to table A.13 p.38 DIN 1264-2"
-      record PipeMaterial_Definition
+      record PipeMaterialDefinition
         extends Modelica.Icons.Record;
 
        parameter Modelica.SIunits.ThermalConductivity lambda;
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
-      end PipeMaterial_Definition;
+      end PipeMaterialDefinition;
 
-      record PB_pipe
+      record PBpipe "Pipe Material PB"
         extends Modelica.Icons.Record;
-        extends PipeMaterials.PipeMaterial_Definition(
+        extends PipeMaterialDefinition(
           lambda=0.22);
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
-      end PB_pipe;
+      end PBpipe;
 
-      record PP_pipe
+      record PPpipe "Pipe Material PP"
         extends Modelica.Icons.Record;
-        extends PipeMaterials.PipeMaterial_Definition(
+        extends PipeMaterialDefinition(
           lambda=0.22);
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
-      end PP_pipe;
+      end PPpipe;
 
-      record PE_X_pipe
+      record PEXpipe "Pipe Material PE-X"
         extends Modelica.Icons.Record;
-        extends PipeMaterials.PipeMaterial_Definition(
+        extends PipeMaterialDefinition(
           lambda=0.35);
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
-      end PE_X_pipe;
+      end PEXpipe;
 
-      record PE_RT
+      record PERTpipe "Pipe-Material PE-RT"
         extends Modelica.Icons.Record;
-        extends PipeMaterials.PipeMaterial_Definition(
+        extends PipeMaterialDefinition(
           lambda=0.35);
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
-      end PE_RT;
+      end PERTpipe;
 
       record Steel
         extends Modelica.Icons.Record;
-        extends PipeMaterials.PipeMaterial_Definition(
+        extends PipeMaterialDefinition(
           lambda=52);
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
@@ -3514,7 +3537,7 @@ Added documentation.</li>
 
       record Copper
         extends Modelica.Icons.Record;
-        extends PipeMaterials.PipeMaterial_Definition(
+        extends PipeMaterialDefinition(
           lambda=390);
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
@@ -3524,34 +3547,34 @@ Added documentation.</li>
 
     package Insulating_Materials
       "Determining the thermal conductivity for the used material for the insulating according to table A.13 p.38 DIN 1264-2"
-      record InsulatingMaterial_Definition
+      record InsulatingMaterialDefinition
         extends Modelica.Icons.Record;
 
        parameter Modelica.SIunits.ThermalConductivity lambda;
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
-      end InsulatingMaterial_Definition;
+      end InsulatingMaterialDefinition;
 
-      record PVC_withTrappedAir
+      record PVCwithTrappedAir
         extends Modelica.Icons.Record;
-        extends InsulatingMaterial_Definition(lambda=0.15);
+        extends InsulatingMaterialDefinition( lambda=0.15);
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
-      end PVC_withTrappedAir;
+      end PVCwithTrappedAir;
 
-      record PVC_withoutAir
+      record PVCwithoutAir
         extends Modelica.Icons.Record;
-        extends InsulatingMaterial_Definition(lambda=0.2);
+        extends InsulatingMaterialDefinition( lambda=0.2);
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
-      end PVC_withoutAir;
+      end PVCwithoutAir;
 
     end Insulating_Materials;
 
-    package Determine_q
+    package DetermineQ
       package q_TypeA
         extends Modelica.Icons.UtilitiesPackage;
         model K_H_TypeA
@@ -3604,19 +3627,19 @@ Added documentation.</li>
 
           import Modelica.Math.log;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.a_T
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.a_T
             Determine_aT(R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.a_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.a_u
             Determine_au(T=T, R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.a_D
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.a_D
             Determine_aD(T=T, R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.a_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.a_u
             Determine_au375(R=R_lambdaB, T=0.375)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.a_D
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.a_D
             Determine_aD375(R=R_lambdaB, T=0.375)
             annotation (Placement(transformation(extent={{0,-20},{20,0}})));
         equation
@@ -3662,7 +3685,6 @@ Added documentation.</li>
 
         block a_T "Defining a_T following table A.1 p.29 DIN 1264-2"
           parameter Modelica.SIunits.ThermalInsulance R;
-
 
           Modelica.Blocks.Tables.CombiTable1D Table_A1(table=[0,1.23; 0.05,1.188; 0.1,1.156;
                 0.15,1.134])
@@ -3738,7 +3760,7 @@ Added documentation.</li>
           "Calculating the limiting heat flux for panel heating Types A and C"
           import Modelica.Constants.e;
           extends
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.K_H_TypeA;
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.K_H_TypeA;
 
           replaceable parameter Modelica.SIunits.Temperature T_Fmax =  29 + 273.15 "maximum surface temperature";
           replaceable parameter Modelica.SIunits.Temperature T_Room =  20 + 273.15 "Room temperature";
@@ -3755,26 +3777,25 @@ Added documentation.</li>
 
           Modelica.SIunits.TemperatureDifference dT_HG;
 
-
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.B_G
             Determine_BG(
             s_u=s_u,
             T=T,
             lambda_E=lambda_E0)
             annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.n_G
             Determine_nG(
             s_u=s_u,
             T=T,
             lambda_E=lambda_E0)
             annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.B_G
             Determine_BG375(
             s_u=s_u,
             T=0.375,
             lambda_E=lambda_E0)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.n_G
             Determine_nG375(
             s_u=s_u,
             T=0.375,
@@ -3924,7 +3945,7 @@ Added documentation.</li>
           "Calculating the normative heat flux for panel heating Types A and C"
           import Modelica.Constants.e;
           extends
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.K_H_TypeA(
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.K_H_TypeA(
               R_lambdaB=0);
 
           final parameter Modelica.SIunits.Temperature T_Fmax = 29 "maximum surface temperature";
@@ -3942,13 +3963,13 @@ Added documentation.</li>
 
           Modelica.SIunits.TemperatureDifference dT_N;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.B_G
             Determine_BG(
             s_u=s_u,
             T=T,
             lambda_E=lambda_E0)
             annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.n_G
             Determine_nG(
             s_u=s_u,
             T=T,
@@ -3969,13 +3990,13 @@ Added documentation.</li>
             psi=psi,
             lambda_W=lambda_W)
             annotation (Placement(transformation(extent={{0,60},{20,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.B_G
             Determine_BG375(
             s_u=s_u,
             T=0.375,
             lambda_E=lambda_E0)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeA.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeA.n_G
             Determine_nG375(
             s_u=s_u,
             T=0.375,
@@ -4057,13 +4078,13 @@ Added documentation.</li>
           import Modelica.Math.log;
           import Modelica.Blocks.Math.Sqrt;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.a_T
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.a_T
             Determine_aT(s_u=s_u, lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.a_K
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.a_K
             Determine_aK(T=T)
             annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.a_WL
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.a_WL
             Determine_aWL(
             T=T,
             D=D,
@@ -4072,7 +4093,7 @@ Added documentation.</li>
             s_u=s_u,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.a_WL
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.a_WL
             Determine_aWL0(
             T=T,
             D=D,
@@ -4081,7 +4102,7 @@ Added documentation.</li>
             lambda_E=lambda_E,
             s_WL=0) annotation (Placement(transformation(extent={{-100,-40},{-80,
                     -20}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.b_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.b_u
             Determine_bu(T=T) annotation (Placement(transformation(extent={{-100,
                     -80},{-80,-60}})));
         equation
@@ -4124,7 +4145,7 @@ Added documentation.</li>
         model qG_TypeB
           "Calculating the limiting heat flux for panel heating Type B"
           extends
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.q_TypeB;
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.q_TypeB;
 
           replaceable Modelica.SIunits.Temperature T_Fmax = 29 + 273.15  "maximum surface temperature";
           replaceable Modelica.SIunits.Temperature T_Room = 20 + 273.15 "Room temperature";
@@ -4144,7 +4165,7 @@ Added documentation.</li>
 
           replaceable Modelica.SIunits.HeatFlux q_Gmax = 100;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.B_G
             Determine_BG(
             T=T,
             D=D,
@@ -4153,7 +4174,7 @@ Added documentation.</li>
             s_u=s_u,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{0,60},{20,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.n_G
             Determine_nG(
             T=T,
             D=D,
@@ -4162,7 +4183,7 @@ Added documentation.</li>
             s_u=s_u,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.B_G
             Determine_BGL(
             T=T,
             D=D,
@@ -4171,7 +4192,7 @@ Added documentation.</li>
             s_u=s_u,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{40,60},{60,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.n_G
             Determine_nGL(
             T=T,
             D=D,
@@ -4196,7 +4217,7 @@ Added documentation.</li>
         model qN_TypeB
           "Calculating the normative heat flux for panel heating Type B for the condition that L = T"
           extends
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.q_TypeB(
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.q_TypeB(
             R_lambdaB=0,
             Determine_aT,
             Determine_aWL,
@@ -4215,7 +4236,7 @@ Added documentation.</li>
 
            Modelica.SIunits.HeatFlux q_Gmax = 100;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.B_G
             Determine_BG(
             T=T,
             D=D,
@@ -4224,7 +4245,7 @@ Added documentation.</li>
             s_u=s_u,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{0,60},{20,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.n_G
             Determine_nG(
             T=T,
             D=D,
@@ -4333,7 +4354,7 @@ Added documentation.</li>
           Modelica.Blocks.Tables.CombiTable1D TableKWL_Infinity(table=[0.05,1; 0.075,1.01;
                 0.1,1.02; 0.15,1.04; 0.2,1.06; 0.225,1.07; 0.3,1.09; 0.375,1.1; 0.45,1.1])
             annotation (Placement(transformation(extent={{-20,-110},{0,-90}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.b_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.b_u
             Determine_bu(T=T)
             annotation (Placement(transformation(extent={{-80,80},{-60,100}})));
         equation
@@ -4441,7 +4462,7 @@ Added documentation.</li>
             annotation (Placement(transformation(extent={{-12,-16},{18,14}})));
           Modelica.Blocks.Sources.RealExpression KWL(y=K_WL)
             annotation (Placement(transformation(extent={{-100,-2},{-80,18}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.b_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.b_u
             Determine_bu(T=T) annotation (Placement(transformation(extent={{-100,
                     80},{-80,100}})));
         equation
@@ -4493,7 +4514,7 @@ Added documentation.</li>
             annotation (Placement(transformation(extent={{-12,-16},{18,14}})));
           Modelica.Blocks.Sources.RealExpression KWL(y=K_WL)
             annotation (Placement(transformation(extent={{-100,-2},{-80,18}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeB.b_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeB.b_u
             Determine_bu(T=T) annotation (Placement(transformation(extent={{-100,
                     80},{-80,100}})));
         equation
@@ -4591,19 +4612,19 @@ Added documentation.</li>
 
           import Modelica.Math.log;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.a_T
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.a_T
             Determine_aT(R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.a_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.a_u
             Determine_au(T=T, R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.a_D
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.a_D
             Determine_aD(T=T, R=R_lambdaB)
             annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.a_u
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.a_u
             Determine_au375(R=R_lambdaB, T=0.375)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.a_D
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.a_D
             Determine_aD375(R=R_lambdaB, T=0.375)
             annotation (Placement(transformation(extent={{0,-20},{20,0}})));
         equation
@@ -4733,7 +4754,7 @@ Added documentation.</li>
           "Calculating the limiting heat flux for panel heating Types A and C"
           import Modelica.Constants.e;
           extends
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.q_TypeC;
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.q_TypeC;
 
           replaceable Modelica.SIunits.Temperature T_Fmax = 29 + 273.15  "maximum surface temperature";
           replaceable Modelica.SIunits.Temperature T_Room = 20 + 273.15 "Room temperature";
@@ -4750,13 +4771,13 @@ Added documentation.</li>
 
           Modelica.SIunits.TemperatureDifference dT_HG;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.B_G
             Determine_BG(
             s_u=s_u,
             T=T,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.n_G
             Determine_nG(
             s_u=s_u,
             T=T,
@@ -4774,13 +4795,13 @@ Added documentation.</li>
             dT_H=dT_H,
             T=0.375)
             annotation (Placement(transformation(extent={{0,60},{20,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.B_G
             Determine_BG375(
             s_u=s_u,
             lambda_E=lambda_E,
             T=0.375)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.n_G
             Determine_nG375(
             s_u=s_u,
             lambda_E=lambda_E,
@@ -4930,7 +4951,7 @@ Added documentation.</li>
           "Calculating the normative heat flux for panel heating Types A and C"
           import Modelica.Constants.e;
           extends
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.q_TypeC(
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.q_TypeC(
               R_lambdaB=0);
 
           Modelica.SIunits.Temperature T_Fmax = 29 "maximum surface temperature";
@@ -4948,13 +4969,13 @@ Added documentation.</li>
 
           Modelica.SIunits.TemperatureDifference dT_N;
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.B_G
             Determine_BG(
             s_u=s_u,
             T=T,
             lambda_E=lambda_E)
             annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.n_G
             Determine_nG(
             s_u=s_u,
             T=T,
@@ -4972,13 +4993,13 @@ Added documentation.</li>
             dT_H=dT_H,
             T=0.375)
             annotation (Placement(transformation(extent={{0,60},{20,80}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.B_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.B_G
             Determine_BG375(
             s_u=s_u,
             lambda_E=lambda_E,
             T=0.375)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeC.n_G
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeC.n_G
             Determine_nG375(
             s_u=s_u,
             lambda_E=lambda_E,
@@ -5056,7 +5077,7 @@ Added documentation.</li>
         model qG_TypeD
           "Calculating the limiting heat flux for panel heating Type D"
           extends
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeD.q_TypeD;
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeD.q_TypeD;
 
         replaceable Modelica.SIunits.TemperatureDifference dT_H = 1;
 
@@ -5080,7 +5101,7 @@ Added documentation.</li>
         model qN_TypeD
           "Calculating the normative heat flux for panel heating Type D"
           extends
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.q_TypeD.q_TypeD(
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.q_TypeD.q_TypeD(
               R_lambdaB=0);
 
         replaceable Modelica.SIunits.TemperatureDifference dT_H = 1;
@@ -5138,7 +5159,8 @@ Added documentation.</li>
       model HeatFlux_DIN1264_2
         "Upward and downward heat flux according to DIN 1264-2"
         extends
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Determine_q.UpwardHeatFlux_DIN1264(
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.UpwardHeatFlux_DIN1264
+          (
           qG_TypeA(
             lambda_R=lambda_R,
             T_Fmax=T_Fmax,
@@ -5390,10 +5412,10 @@ Added documentation.</li>
         final parameter Modelica.SIunits.Length PipeLength = A / T "Length of Panel Heating Pipe";
 
         replaceable parameter
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PipeMaterial_Definition
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PipeMaterialDefinition
           PipeMaterial=
-            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PE_RT()
-               annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
+            AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PERTpipe()
+          annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
         final parameter Modelica.SIunits.ThermalConductivity lambda_R = PipeMaterial.lambda "Thermal conductivity of pipe material";
         constant Modelica.SIunits.ThermalConductivity lambda_R0 = 0.35 "Thermal conductivity of pipe";
         parameter Modelica.SIunits.Thickness s_R = 0.002 "thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
@@ -5401,10 +5423,10 @@ Added documentation.</li>
         parameter Modelica.SIunits.Diameter d_a = 0.1 "outer diameter of pipe without insulating" annotation (Dialog( group = "Panel Heating"));
         final parameter Modelica.SIunits.Diameter d_M = D "Outer diameter of insulating";
         replaceable parameter
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.InsulatingMaterial_Definition
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.InsulatingMaterialDefinition
           InsulatingMaterial=
             AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.none()
-               annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
+          annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
         final parameter Modelica.SIunits.ThermalConductivity lambda_M = InsulatingMaterial.lambda "Thermal Conductivity for insulating";
 
         parameter Modelica.SIunits.VolumeFraction psi "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating"));
@@ -5483,10 +5505,12 @@ Added documentation.</li>
           each A=A/dis)
           annotation (Placement(transformation(extent={{-20,-18},{20,18}})));
 
-        Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
+        Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package
+            Medium =
               Medium)
           annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
-        Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package Medium =
+        Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package
+            Medium =
               Medium)
           annotation (Placement(transformation(extent={{42,-10},{62,10}})));
 
@@ -5499,7 +5523,7 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{-34,-104},{-14,-84}})));
         Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling[dis]
           annotation (Placement(transformation(extent={{14,-108},{34,-88}})));
-        EN1264.HeatFlux_EN1264_2 EN_1264
+        EN1264.HeatFlux EN_1264
           annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
       equation
         assert(PipeLength > 120, "Pipe Length is too high, additional heating circuit needs to be used", AssertionLevel.warning);
@@ -5613,7 +5637,7 @@ Added documentation.</li>
                 coordinateSystem(preserveAspectRatio=false)));
         end MasticAsphaltScreed;
       end Screed_Materials;
-    end Determine_q;
+    end DetermineQ;
 
     package EN1264
       "Calculation of parameters for dimensioning the panel heating for types A and C"
@@ -5621,139 +5645,68 @@ Added documentation.</li>
         "Package includes tables and parameters for panel heating Type A (EN 1264)"
         extends Modelica.Icons.UtilitiesPackage;
         model K_H_TypeA
-          "Merge of all functions to calculate K_H by typing in needed parameters for panel heating type A"
+         "Merge of all functions to calculate K_H by typing in needed parameters for panel heating type A"
 
-          parameter Modelica.SIunits.Distance T "Spacing between tubes";
-          parameter Modelica.SIunits.Diameter d_a "outer diameter of pipe";
-          parameter Modelica.SIunits.ThermalConductivity lambda_R "Coefficient of heat transfer of pipe material";
-          constant Modelica.SIunits.ThermalConductivity lambda_R0 = 0.35;
-          parameter Modelica.SIunits.Thickness s_R "thickness of pipe wall";
-          constant Modelica.SIunits.Thickness s_R0 = 0.002;
+         parameter Modelica.SIunits.Distance T "Spacing between tubes";
+         parameter Modelica.SIunits.Diameter d_a "outer diameter of pipe";
+         parameter Modelica.SIunits.ThermalConductivity lambda_R "Coefficient of heat transfer of pipe material";
+         constant Modelica.SIunits.ThermalConductivity lambda_R0 = 0.35;
+         parameter Modelica.SIunits.Thickness s_R "thickness of pipe wall";
+         constant Modelica.SIunits.Thickness s_R0 = 0.002;
 
-          parameter Boolean withInsulating = true "false if pipe has no insulating" annotation (choices(checkBox=true));
-          parameter Modelica.SIunits.Diameter D(min = d_a) "Outer diameter of pipe, including insulating" annotation (Dialog(enable = withInsulating));
-          final parameter Modelica.SIunits.Diameter d_M = D "Outer diameter of insulating in m";
-          parameter Modelica.SIunits.ThermalConductivity lambda_M(min=0)  "Thermal Conductivity for insulating" annotation (Dialog(enable = withInsulating));
+         parameter Boolean withInsulating = true "false if pipe has no insulating" annotation (choices(checkBox=true));
+         parameter Modelica.SIunits.Diameter D(min = d_a) "Outer diameter of pipe, including insulating" annotation (Dialog(enable = withInsulating));
+         final parameter Modelica.SIunits.Diameter d_M = D "Outer diameter of insulating in m";
+         parameter Modelica.SIunits.ThermalConductivity lambda_M(min=0)  "Thermal Conductivity for insulating" annotation (Dialog(enable = withInsulating));
 
-          parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (choices(checkBox=true));
-          parameter Modelica.SIunits.VolumeFraction psi(start=0) "Volume Fraction of holding burls" annotation (Dialog(enable = withHoldingBurls));
-          parameter Modelica.SIunits.ThermalConductivity lambda_W(start=0) "Thermal conductivity of holding burls" annotation (Dialog(enable = withHoldingBurls));
+         parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (choices(checkBox=true));
+         parameter Modelica.SIunits.VolumeFraction psi(start=0) "Volume Fraction of holding burls" annotation (Dialog(enable = withHoldingBurls));
+         parameter Modelica.SIunits.ThermalConductivity lambda_W(start=0) "Thermal conductivity of holding burls" annotation (Dialog(enable = withHoldingBurls));
 
-          parameter Modelica.SIunits.Thickness s_u "thickness of floor screed";
-          parameter Modelica.SIunits.ThermalConductivity lambda_E0 "Thermal conductivity of floor screed";
-          parameter Modelica.SIunits.ThermalConductivity lambda_E = (1 - psi) * lambda_E0 + psi * lambda_W "effective thermal Conductivity of screed" annotation(Dialog(enable = false));
-          parameter Modelica.SIunits.ThermalInsulance R_lambdaB "Thermal resistance of flooring";
+         parameter Modelica.SIunits.Thickness s_u "thickness of floor screed";
+         parameter Modelica.SIunits.ThermalConductivity lambda_E0 "Thermal conductivity of floor screed";
+         parameter Modelica.SIunits.ThermalConductivity lambda_E = (1 - psi) * lambda_E0 + psi * lambda_W "effective thermal Conductivity of screed" annotation(Dialog(enable = false));
+         parameter Modelica.SIunits.ThermalInsulance R_lambdaB "Thermal resistance of flooring";
 
-          parameter Modelica.SIunits.CoefficientOfHeatTransfer B "system dependent coefficient";
-          constant Modelica.SIunits.CoefficientOfHeatTransfer B_0 = 6.7 "system dependent coefficient for lambda_R0 = 0.35 W/(m.K) abd s_R0 = 0.002 m";
+         final parameter Modelica.SIunits.CoefficientOfHeatTransfer B = if lambda_R == 0.35 and s_R == 0.002 then
+           6.7
+         else
+          if D == d_a then
+           (1 / B_0 + 1.1 / Modelica.Constants.pi * product_ai * T * ( 1 / 2 * lambda_R * log(d_a / (d_a - 2 * s_R)) - 1 / 2 * lambda_R0 * log(d_a / (d_a - 2 * s_R0))))^(-1)
+           else
+           (1 / B_0 + 1.1 / Modelica.Constants.pi * product_ai * T * ( 1 / 2 * lambda_M * log(d_M / d_a) + 1 / 2 * lambda_R * log(d_a / (d_a - 2 * s_R)) - 1 / 2 * lambda_R0 * log(d_M / (d_M - 2 * s_R0))))^(-1)
+         "system dependent coefficient" annotation (Dialog(enable = false));
+         constant Modelica.SIunits.CoefficientOfHeatTransfer B_0 = 6.7 "system dependent coefficient for lambda_R0 = 0.35 W/(m.K) abd s_R0 = 0.002 m";
 
-          constant Modelica.SIunits.CoefficientOfHeatTransfer alpha = 10.8;
-          constant Modelica.SIunits.ThermalConductivity lambda_u0 = 1;
-          constant Modelica.SIunits.Diameter s_u0 = 0.045;
-          final parameter Real a_B = (1 / alpha + s_u0 / lambda_u0) / (1 / alpha + s_u0 / lambda_E + R_lambdaB);
-          final parameter Real a_T = determine_aT.y;
-          final parameter Real a_u = determine_au.y;
-          final parameter Real a_D = determine_aD.y;
+         constant Modelica.SIunits.CoefficientOfHeatTransfer alpha = 10.8;
+         constant Modelica.SIunits.ThermalConductivity lambda_u0 = 1;
+         constant Modelica.SIunits.Diameter s_u0 = 0.045;
+         final parameter Real a_B = (1 / alpha + s_u0 / lambda_u0) / (1 / alpha + s_u0 / lambda_E + R_lambdaB);
+         final parameter Real a_T = determine_aT.y;
+         final parameter Real a_u = determine_au.y;
+         final parameter Real a_D = determine_aD.y;
 
-          final parameter Real m_T = 1 - T / 0.075;
-          final parameter Real m_u = 100 * (0.045 - s_u);
-          final parameter Real m_D = 250 * (D - 0.02);
+         final parameter Real m_T = 1 - T / 0.075;
+         final parameter Real m_u = 100 * (0.045 - s_u);
+         final parameter Real m_D = 250 * (D - 0.02);
 
-          final parameter Real product_ai = a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D) "product of powers for parameters of floor heating";
-          final parameter Real product_ai375 = a_B * a_T^(1-0.375/0.075) * determine_au375.y^(m_u) * determine_aD375.y^(m_D) "product of powers for T = 0.375";
+         final parameter Real product_ai = a_B * a_T^(m_T) * a_u^(m_u) * a_D^(m_D) "product of powers for parameters of floor heating";
+         final parameter Real product_ai375 = a_B * a_T ^ (1 - 0.375 / 0.075) * determine_au375.y^(m_u) * determine_aD375.y^(m_D) "product of powers for T = 0.375";
 
-          final parameter Modelica.SIunits.Thickness s_uStar = if T > 0.2 then (0.5 * T) else 0.1;
+         final parameter Modelica.SIunits.Thickness s_uStar = if T > 0.2 then (0.5 * T) else 0.1;
 
-          final parameter Modelica.SIunits.CoefficientOfHeatTransfer K_H;
-          final parameter Modelica.SIunits.CoefficientOfHeatTransfer K_HStar = B * a_B * a_T^(m_T) * a_u^(100*(0.045-s_uStar)) * a_D^(m_D);
+         final parameter Modelica.SIunits.CoefficientOfHeatTransfer K_H = if s_u > s_uStar and s_u > 0.065 then
+         1 / ( (1 / K_HStar) + ((s_u - s_uStar) / lambda_E))
+         else
+         if T > 0.375 then
+         B * product_ai375 * 0.375 / T
+         else
+         B * product_ai;
+         final parameter Modelica.SIunits.CoefficientOfHeatTransfer K_HStar = B * a_B * a_T^(m_T) * a_u^(100*(0.045-s_uStar)) * a_D^(m_D);
 
-          import Modelica.Math.log;
+         import Modelica.Math.log;
 
-          TablesEN1264.CombiTable2DParameter determine_au(
-            table=[0.0,0,0.05,0.1,0.15; 0.05,1.069,1.056,1.043,1.037; 0.075,1.066,1.053,
-                1.041,1.035; 0.1,1.063,1.05,1.039,1.0335; 0.15,1.057,1.046,1.035,1.0305;
-                0.2,1.051,1.041,1.0315,1.0275; 0.225,1.048,1.038,1.0295,1.026; 0.3,1.0395,
-                1.031,1.024,1.021; 0.375,1.03,1.0221,1.0181,1.015],
-            u1=T,
-            u2=R_lambdaB) "Table A.2 according to EN 1264-2 p. 29"
-            annotation (Placement(transformation(extent={{-96,20},{-70,46}})));
-          TablesEN1264.CombiTable2DParameter determine_au375(
-            table=[0.0,0,0.05,0.1,0.15; 0.05,1.069,1.056,1.043,1.037; 0.075,1.066,1.053,
-                1.041,1.035; 0.1,1.063,1.05,1.039,1.0335; 0.15,1.057,1.046,1.035,1.0305;
-                0.2,1.051,1.041,1.0315,1.0275; 0.225,1.048,1.038,1.0295,1.026; 0.3,1.0395,
-                1.031,1.024,1.021; 0.375,1.03,1.0221,1.0181,1.015],
-            u2=R_lambdaB,
-            u1=0.375) "Table A.2 according to EN 1264-2 p. 29"
-            annotation (Placement(transformation(extent={{4,20},{30,46}})));
-          TablesEN1264.CombiTable2DParameter determine_aD(
-            table=[0.0,0,0.05,0.1,0.15; 0.05,1.013,1.013,1.012,1.011; 0.075,1.021,1.019,
-                1.016,1.014; 0.1,1.029,1.025,1.022,1.018; 0.15,1.04,1.034,1.029,1.024; 0.2,
-                1.046,1.04,1.035,1.03; 0.225,1.049,1.043,1.038,1.033; 0.3,1.053,1.049,1.044,
-                1.039; 0.375,1.056,1.051,1.046,1.042],
-            u1=T,
-            u2=R_lambdaB) "Table A.3 according to EN 1264-2 p. 30"
-            annotation (Placement(transformation(extent={{-96,-20},{-70,6}})));
-          TablesEN1264.CombiTable2DParameter determine_aD375(
-            table=[0.0,0,0.05,0.1,0.15; 0.05,1.013,1.013,1.012,1.011; 0.075,1.021,1.019,
-                1.016,1.014; 0.1,1.029,1.025,1.022,1.018; 0.15,1.04,1.034,1.029,1.024; 0.2,
-                1.046,1.04,1.035,1.03; 0.225,1.049,1.043,1.038,1.033; 0.3,1.053,1.049,1.044,
-                1.039; 0.375,1.056,1.051,1.046,1.042],
-            u2=R_lambdaB,
-            u1=0.375) "Table A.3 according to EN 1264-2 p. 30"
-            annotation (Placement(transformation(extent={{4,-20},{30,6}})));
-          TablesEN1264.CombiTable1DParameter determine_aT(table=[0,1.23; 0.05,1.188; 0.10,
-                1.156; 0.15,1.134], u=R_lambdaB)
-            "Table A.1 according to EN 1264-2 p. 29"
-            annotation (Placement(transformation(extent={{-94,60},{-70,84}})));
-        equation
-
-          if lambda_R == 0.35 and s_R == 0.002 then
-            B = 6.7;
-          else
-           if D == d_a then
-            1 / B = 1 / B_0 + 1.1 / Modelica.Constants.pi * product_ai * T * ( 1 / 2 * lambda_R * log(d_a / (d_a - 2 * s_R)) - 1 / 2 * lambda_R0 * log(d_a / (d_a - 2 * s_R0)));
-            else
-            1 / B = 1 / B_0 + 1.1 / Modelica.Constants.pi * product_ai * T * ( 1 / 2 * lambda_M * log(d_M / d_a) + 1 / 2 * lambda_R * log(d_a / (d_a - 2 * s_R)) - 1 / 2 * lambda_R0 * log(d_M / (d_M - 2 * s_R0)));
-           end if;
-          end if;
-
-           if s_u > s_uStar and s_u > 0.065 then
-          K_H = 1 / ( (1 / K_HStar) + ((s_u - s_uStar) / lambda_E));
-          else
-          if T > 0.375 then
-            K_H = B * product_ai375 * 0.375 / T;
-          else
-            K_H = B * product_ai;
-          end if;
-           end if;
-
-          assert(T >= 0.05 and T <= 0.375, "Pipe spacing for m_T should be between 0.05 and 0.375", AssertionLevel.warning);
-
-          assert(s_u >= 0.01, "thickness of screed should be s_u => 0.010 for calculation of m_u", AssertionLevel.warning);
-
-          assert(D <= 0.08  and D >= 0.03, "Outer diameter should be 0.008 <= D <= 0.030 for calculation of m_T", AssertionLevel.warning);
-
-            annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-                coordinateSystem(preserveAspectRatio=false)));
-        end K_H_TypeA;
-
-        block a_u "Determine a_u following Table A.2 p. 29 DIN 1264-2"
-
-          parameter Modelica.SIunits.Distance T;
-          parameter Modelica.SIunits.ThermalInsulance R;
-          Modelica.Blocks.Tables.CombiTable2D Table_A2(table=[0.0,0,0.05,0.1,0.15; 0.05,
-                1.069,1.056,1.043,1.037; 0.075,1.066,1.053,1.041,1.035; 0.1,1.063,1.05,1.039,
-                1.0335; 0.15,1.057,1.046,1.035,1.0305; 0.2,1.051,1.041,1.0315,1.0275; 0.225,
-                1.048,1.038,1.0295,1.026; 0.3,1.0395,1.031,1.024,1.021; 0.375,1.03,1.0221,
-                1.0181,1.015])
-            annotation (Placement(transformation(extent={{-14,-16},{18,16}})));
-          Modelica.Blocks.Sources.RealExpression Spacing(y=T)
-            annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
-          Modelica.Blocks.Sources.RealExpression R_lambdaB(y=R)
-            annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-          Modelica.Blocks.Interfaces.RealOutput a_u
-            annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-          TablesEN1264.CombiTable2DParameter A2(
+          Tables.CombiTable2DParameter determine_au(
             table=[0.0,0,0.05,0.1,0.15; 0.05,1.069,1.056,1.043,1.037; 0.075,
                 1.066,1.053,1.041,1.035; 0.1,1.063,1.05,1.039,1.0335; 0.15,
                 1.057,1.046,1.035,1.0305; 0.2,1.051,1.041,1.0315,1.0275; 0.225,
@@ -5761,44 +5714,41 @@ Added documentation.</li>
                 1.03,1.0221,1.0181,1.015],
             u1=T,
             u2=R_lambdaB) "Table A.2 according to EN 1264-2 p. 29"
-            annotation (Placement(transformation(extent={{-8,42},{18,68}})));
-        equation
-          connect(Spacing.y, Table_A2.u1) annotation (Line(points={{-79,10},{-17.2,10},{
-                  -17.2,9.6}}, color={0,0,127}));
-          connect(R_lambdaB.y, Table_A2.u2) annotation (Line(points={{-79,-10},{-17.2,-10},
-                  {-17.2,-9.6}}, color={0,0,127}));
-          connect(Table_A2.y, a_u)
-            annotation (Line(points={{19.6,0},{100,0}}, color={0,0,127}));
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-                coordinateSystem(preserveAspectRatio=false)));
-        end a_u;
-
-        block a_D "Determine a_D following Table A.3 p. 30 DIN 1264-2"
-
-          parameter Modelica.SIunits.Distance T;
-          parameter Modelica.SIunits.ThermalInsulance R;
-          Modelica.Blocks.Tables.CombiTable2D Table_A3(table=[0.0,0,0.05,0.1,
-                0.15; 0.05,1.013,1.013,1.012,1.011; 0.075,1.021,1.019,1.016,
-                1.014; 0.1,1.029,1.025,1.022,1.018; 0.15,1.04,1.034,1.029,1.024;
-                0.2,1.046,1.04,1.035,1.03; 0.225,1.049,1.043,1.038,1.033; 0.3,
-                1.053,1.049,1.044,1.039; 0.375,1.056,1.051,1.046,1.042])
-            annotation (Placement(transformation(extent={{-14,-16},{18,16}})));
-          Modelica.Blocks.Sources.RealExpression Spacing(y=T)
-            annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
-          Modelica.Blocks.Sources.RealExpression R_lambdaB(y=R)
-            annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-          Modelica.Blocks.Interfaces.RealOutput a_D
-            annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-        equation
-          connect(Spacing.y,Table_A3. u1) annotation (Line(points={{-79,10},{-17.2,10},{
-                  -17.2,9.6}}, color={0,0,127}));
-          connect(R_lambdaB.y,Table_A3. u2) annotation (Line(points={{-79,-10},{-17.2,-10},
-                  {-17.2,-9.6}}, color={0,0,127}));
-          connect(Table_A3.y,a_D)
-            annotation (Line(points={{19.6,0},{100,0}}, color={0,0,127}));
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-                coordinateSystem(preserveAspectRatio=false)));
-        end a_D;
+            annotation (Placement(transformation(extent={{-96,20},{-70,46}})));
+          Tables.CombiTable2DParameter determine_au375(
+            table=[0.0,0,0.05,0.1,0.15; 0.05,1.069,1.056,1.043,1.037; 0.075,
+                1.066,1.053,1.041,1.035; 0.1,1.063,1.05,1.039,1.0335; 0.15,
+                1.057,1.046,1.035,1.0305; 0.2,1.051,1.041,1.0315,1.0275; 0.225,
+                1.048,1.038,1.0295,1.026; 0.3,1.0395,1.031,1.024,1.021; 0.375,
+                1.03,1.0221,1.0181,1.015],
+            u2=R_lambdaB,
+            u1=0.375) "Table A.2 according to EN 1264-2 p. 29"
+            annotation (Placement(transformation(extent={{4,20},{30,46}})));
+          Tables.CombiTable2DParameter determine_aD(
+            table=[0.0,0,0.05,0.1,0.15; 0.05,1.013,1.013,1.012,1.011; 0.075,
+                1.021,1.019,1.016,1.014; 0.1,1.029,1.025,1.022,1.018; 0.15,1.04,
+                1.034,1.029,1.024; 0.2,1.046,1.04,1.035,1.03; 0.225,1.049,1.043,
+                1.038,1.033; 0.3,1.053,1.049,1.044,1.039; 0.375,1.056,1.051,
+                1.046,1.042],
+            u1=T,
+            u2=R_lambdaB) "Table A.3 according to EN 1264-2 p. 30"
+            annotation (Placement(transformation(extent={{-96,-20},{-70,6}})));
+          Tables.CombiTable2DParameter determine_aD375(
+            table=[0.0,0,0.05,0.1,0.15; 0.05,1.013,1.013,1.012,1.011; 0.075,
+                1.021,1.019,1.016,1.014; 0.1,1.029,1.025,1.022,1.018; 0.15,1.04,
+                1.034,1.029,1.024; 0.2,1.046,1.04,1.035,1.03; 0.225,1.049,1.043,
+                1.038,1.033; 0.3,1.053,1.049,1.044,1.039; 0.375,1.056,1.051,
+                1.046,1.042],
+            u2=R_lambdaB,
+            u1=0.375) "Table A.3 according to EN 1264-2 p. 30"
+            annotation (Placement(transformation(extent={{4,-20},{30,6}})));
+          Tables.CombiTable1DParameter determine_aT(table=[0,1.23; 0.05,1.188;
+                0.10,1.156; 0.15,1.134], u=R_lambdaB)
+            "Table A.1 according to EN 1264-2 p. 29"
+            annotation (Placement(transformation(extent={{-96,60},{-72,84}})));
+           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+               coordinateSystem(preserveAspectRatio=false)));
+        end K_H_TypeA;
 
         model qG_TypeA
           "Calculating the limiting heat flux for panel heating Types A and C"
@@ -5809,185 +5759,126 @@ Added documentation.</li>
           parameter Modelica.SIunits.Temperature T_Fmax "maximum surface temperature";
           parameter Modelica.SIunits.Temperature T_Room "Room temperature";
 
-          Real f_G;
+          final parameter Real f_G = if s_u/T <= 0.173 then 1 else (q_Gmax - (q_Gmax - q_G375 * 0.375 / T) * e^(-20 * (s_u / T - 0.173)^2)) / (q_G375 * 0.375 / T);
           final parameter Real phi = (T_Fmax - T_Room / d_T0)^(1.1);
           final parameter Modelica.SIunits.TemperatureDifference d_T0 = 9;
-          Real B_G = Determine_BG.B_G;
-          Real n_G = Determine_nG.n_G;
+          final parameter Real B_G = if s_u / lambda_E > 0.0792 and s_u / T < 0.75 then
+            tableA4b.y
+        else
+          if s_u / lambda_E > 0.0792 and s_u / T > 0.75 then
+            100
+          else
+            tableA4a.y;
+          final parameter Real B_G375 = if s_u / lambda_E > 0.0792 and s_u / T < 0.75 then
+            tableA4b375.y
+        else
+          if s_u / lambda_E > 0.0792 and s_u / T > 0.75 then
+            100
+          else
+            tableA4a375.y;
+          final parameter Real n_G = if s_u / lambda_E > 0.0792 and s_u / T < 0.75 then
+            tableA5b.y
+          else
+            if s_u / lambda_E > 0.0792 and s_u / T > 0.75 then
+            0
+          else
+            tableA5a.y;
+          final parameter Real n_G375 = if s_u / lambda_E > 0.0792 and s_u / T < 0.75 then
+            tableA5b375.y
+          else
+            if s_u / lambda_E > 0.0792 and s_u / T > 0.75 then
+            0
+          else
+            tableA5a375.y;
 
-          Modelica.SIunits.HeatFlux q_G;
-          Modelica.SIunits.HeatFlux q_G375 = LimitingCurve(phi = phi, B_G = Determine_BG375.B_G, dT_H = dT_H, n_G = Determine_nG375.n_G);
+          final parameter Modelica.SIunits.HeatFlux q_G = if T <= 0.375 then LimitingCurve(phi = phi, B_G = B_G, dT_H = dT_H, n_G = n_G) else q_G375 * 0.375 / T * f_G;
+          final parameter Modelica.SIunits.HeatFlux q_G375 = LimitingCurve(phi = phi, B_G = B_G375, dT_H = dT_H, n_G = n_G375);
           parameter Modelica.SIunits.HeatFlux q_Gmax "maximum possible heat flux";
 
-          Modelica.SIunits.TemperatureDifference dT_HG;
+          final parameter Modelica.SIunits.TemperatureDifference dT_HG = if T <= 0.375 then phi * ( B_G / (B * product_ai))^(1/(1-n_G)) else phi * ( B_G375 / (B * product_ai))^(1/(1-n_G));
           parameter Modelica.SIunits.TemperatureDifference dT_H "logarithmic temperature difference between heating medium and room";
 
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.B_G
-            Determine_BG(
-            s_u=s_u,
-            T=T,
-            lambda_E=lambda_E0)
-            annotation (Placement(transformation(extent={{-60,20},{-20,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.n_G
-            Determine_nG(
-            s_u=s_u,
-            T=T,
-            lambda_E=lambda_E0)
-            annotation (Placement(transformation(extent={{-60,-20},{-20,0}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.B_G
-            Determine_BG375(
-            s_u=s_u,
-            T=0.375,
-            lambda_E=lambda_E0)
-            annotation (Placement(transformation(extent={{40,20},{80,40}})));
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.n_G
-            Determine_nG375(
-            s_u=s_u,
-            T=0.375,
-            lambda_E=lambda_E0)
-            annotation (Placement(transformation(extent={{40,-20},{80,0}})));
+          Tables.CombiTable2DParameter tableA4a(
+            table=[0.0,0.01,0.0208,0.0292,0.0375,0.0458,0.0542,0.0625,0.0708,
+                0.0792; 0.05,85,91.5,96.8,100,100,100,100,100,100; 0.075,75.3,
+                83.5,89.9,96.3,99.5,100,100,100,100; 0.1,66,75.4,82.9,89.3,95.5,
+                98.8,100,100,100; 0.15,51,61.1,69.2,76.3,82.7,87.5,91.8,95.1,
+                97.8; 0.2,38.5,48.2,56.2,63.1,69.1,74.5,81.3,86.4,90; 0.225,33,
+                42.5,49.5,56.5,62,67.5,75.3,81.6,86.1; 0.3,20.5,26.8,31.6,36.4,
+                41.5,47.5,57.5,65.3,72.4; 0.375,11.5,13.7,15.5,18.2,21.5,27.5,
+                40,49.1,58.3],
+            u1=T,
+            u2=s_u/lambda_E) "Table A.4a according to EN 1264-2 p. 30"
+            annotation (Placement(transformation(extent={{-96,-60},{-70,-34}})));
 
-          TablesEN1264.CombiTable1DParameter A1(table=[0.0,1.23; 0.1,1.156;
-                0.15,1.134], u=R_lambdaB) "table A.1 EN 1264-2 p. 29"
-            annotation (Placement(transformation(extent={{-100,60},{-72,88}})));
-        equation
-          if T <= 0.375 then
-          q_G = LimitingCurve(phi = phi, B_G = B_G, dT_H = dT_H, n_G = n_G);
-          else
-            q_G = q_G375 * 0.375 / T * f_G;
-          end if;
+          Tables.CombiTable1DParameter tableA4b(table=[0.173,27.5; 0.20,40;
+                0.25,57.5; 0.30,69.5; 0.35,78.2; 0.40,84.4; 0.45,88.3; 0.50,
+                91.6; 0.55,94; 0.60,96.3; 0.65,98.6; 0.70,99.8; 0.75,100], u=
+                s_u/T) "Table A.4b according to EN 1264-2 p. 31" annotation (
+              Placement(transformation(extent={{-54,-60},{-28,-34}})));
+          Tables.CombiTable2DParameter tableA4a375(
+            table=[0.0,0.01,0.0208,0.0292,0.0375,0.0458,0.0542,0.0625,0.0708,
+                0.0792; 0.05,85,91.5,96.8,100,100,100,100,100,100; 0.075,75.3,
+                83.5,89.9,96.3,99.5,100,100,100,100; 0.1,66,75.4,82.9,89.3,95.5,
+                98.8,100,100,100; 0.15,51,61.1,69.2,76.3,82.7,87.5,91.8,95.1,
+                97.8; 0.2,38.5,48.2,56.2,63.1,69.1,74.5,81.3,86.4,90; 0.225,33,
+                42.5,49.5,56.5,62,67.5,75.3,81.6,86.1; 0.3,20.5,26.8,31.6,36.4,
+                41.5,47.5,57.5,65.3,72.4; 0.375,11.5,13.7,15.5,18.2,21.5,27.5,
+                40,49.1,58.3],
+            u2=s_u/lambda_E,
+            u1=0.375) "Table A.4a according to EN 1264-2 p. 30"
+            annotation (Placement(transformation(extent={{4,-60},{30,-34}})));
 
-          if T <= 0.375 then
-            dT_HG = phi * ( B_G / (B * product_ai))^(1/(1-n_G));
-          else
-            dT_HG = phi * ( Determine_BG375.B_G / (B * product_ai))^(1/(1-Determine_nG.n_G));
-          end if;
-
-          if s_u/T <= 0.173 then
-            f_G = 1;
-          else
-            f_G = (q_Gmax - (q_Gmax - q_G375 * 0.375 / T) * e^(-20 * (s_u/T-0.173)^2)) / (q_G375 * 0.375 / T);
-          end if;
-
+          Tables.CombiTable1DParameter tableA4b375(table=[0.173,27.5; 0.20,40;
+                0.25,57.5; 0.30,69.5; 0.35,78.2; 0.40,84.4; 0.45,88.3; 0.50,
+                91.6; 0.55,94; 0.60,96.3; 0.65,98.6; 0.70,99.8; 0.75,100], u=
+                s_u/0.375) "Table A.4b according to EN 1264-2 p. 31"
+            annotation (Placement(transformation(extent={{44,-60},{70,-34}})));
+          Tables.CombiTable2DParameter tableA5a(
+            table=[0.0,0.01,0.0208,0.0292,0.0375,0.0458,0.0542,0.0625,0.0708,
+                0.0792; 0.05,0.008,0.005,0.002,0,0,0,0,0,0; 0.075,0.024,0.021,
+                0.018,0.011,0.002,0,0,0,0; 0.1,0.046,0.043,0.041,0.033,0.014,
+                0.005,0,0,0; 0.15,0.088,0.085,0.082,0.076,0.055,0.038,0.024,
+                0.014,0.006; 0.2,0.131,0.13,0.129,0.123,0.105,0.083,0.057,0.04,
+                0.028; 0.225,0.155,0.154,0.153,0.146,0.13,0.11,0.077,0.056,
+                0.041; 0.2625,0.197,0.196,0.196,0.19,0.173,0.15,0.11,0.083,
+                0.062; 0.3,0.254,0.253,0.253,0.245,0.228,0.195,0.145,0.114,
+                0.086; 0.3375,0.322,0.321,0.321,0.31,0.293,0.26,0.187,0.148,
+                0.115; 0.375,0.422,0.421,0.421,0.405,0.385,0.325,0.23,0.183,
+                0.142],
+            u1=T,
+            u2=s_u/lambda_E) "Table A.5a according to EN 1264-2 p. 31"
+            annotation (Placement(transformation(extent={{-96,-96},{-70,-70}})));
+          Tables.CombiTable2DParameter tableA5a375(
+            table=[0.0,0.01,0.0208,0.0292,0.0375,0.0458,0.0542,0.0625,0.0708,
+                0.0792; 0.05,0.008,0.005,0.002,0,0,0,0,0,0; 0.075,0.024,0.021,
+                0.018,0.011,0.002,0,0,0,0; 0.1,0.046,0.043,0.041,0.033,0.014,
+                0.005,0,0,0; 0.15,0.088,0.085,0.082,0.076,0.055,0.038,0.024,
+                0.014,0.006; 0.2,0.131,0.13,0.129,0.123,0.105,0.083,0.057,0.04,
+                0.028; 0.225,0.155,0.154,0.153,0.146,0.13,0.11,0.077,0.056,
+                0.041; 0.2625,0.197,0.196,0.196,0.19,0.173,0.15,0.11,0.083,
+                0.062; 0.3,0.254,0.253,0.253,0.245,0.228,0.195,0.145,0.114,
+                0.086; 0.3375,0.322,0.321,0.321,0.31,0.293,0.26,0.187,0.148,
+                0.115; 0.375,0.422,0.421,0.421,0.405,0.385,0.325,0.23,0.183,
+                0.142],
+            u2=s_u/lambda_E,
+            u1=0.375) "Table A.5a according to EN 1264-2 p. 31"
+            annotation (Placement(transformation(extent={{4,-96},{30,-70}})));
+          Tables.CombiTable1DParameter tableA5b(table=[0.173,0.32; 0.2,0.23;
+                0.25,0.145; 0.3,0.097; 0.35,0.067; 0.4,0.048; 0.45,0.033; 0.5,
+                0.023; 0.55,0.015; 0.6,0.009; 0.65,0.005; 0.7,0.002; 0.75,0], u
+              =s_u/T) annotation (Placement(transformation(extent={{-54,-96},{-28,
+                    -70}})));
+          Tables.CombiTable1DParameter tableA5b375(table=[0.173,0.32; 0.2,0.23;
+                0.25,0.145; 0.3,0.097; 0.35,0.067; 0.4,0.048; 0.45,0.033; 0.5,
+                0.023; 0.55,0.015; 0.6,0.009; 0.65,0.005; 0.7,0.002; 0.75,0], u
+              =s_u/0.375)
+            annotation (Placement(transformation(extent={{44,-96},{70,-70}})));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
         end qG_TypeA;
 
-        block B_G "Determination for B_G following tables A.4a and A.4b"
-
-          parameter Modelica.SIunits.Thickness s_u "thickness of cover above pipe in m";
-          parameter Modelica.SIunits.Distance T "spacing in m";
-
-          parameter Modelica.SIunits.ThermalConductivity lambda_E "Thermal conductivity of floor screed";
-
-          Modelica.Blocks.Sources.RealExpression Spacing(y=T)
-            annotation (Placement(transformation(extent={{-100,4},{-80,24}})));
-          Modelica.Blocks.Sources.RealExpression Thickness_of_cover(y=s_u)
-            annotation (Placement(transformation(extent={{-100,-14},{-80,6}})));
-          Modelica.Blocks.Sources.RealExpression ThermalConductivity_cover(y=lambda_E)
-            annotation (Placement(transformation(extent={{-100,-32},{-80,-12}})));
-          Modelica.Blocks.Math.Division division2
-            annotation (Placement(transformation(extent={{-54,-20},{-40,-6}})));
-          Modelica.Blocks.Tables.CombiTable2D Table_A4a(table=[0.0,0.01,0.0208,0.0292,0.0375,
-                0.0458,0.0542,0.0625,0.0708,0.0792; 0.05,85,91.5,96.8,100,100,100,100,100,
-                100; 0.075,75.3,83.5,89.9,96.3,99.5,100,100,100,100; 0.1,66,75.4,82.9,89.3,
-                95.5,98.8,100,100,100; 0.15,51,61.1,69.2,76.3,82.7,87.5,91.8,95.1,97.8;
-                0.2,38.5,48.2,56.2,63.1,69.1,74.5,81.3,86.4,90; 0.225,33,42.5,49.5,56.5,
-                62,67.5,75.3,81.6,86.1; 0.3,20.5,26.8,31.6,36.4,41.5,47.5,57.5,65.3,72.4;
-                0.375,11.5,13.7,15.5,18.2,21.5,27.5,40,49.1,58.3])
-            annotation (Placement(transformation(extent={{40,20},{60,40}})));
-          Modelica.Blocks.Math.Division division1
-            annotation (Placement(transformation(extent={{-54,0},{-40,14}})));
-          TablesEN1264.CombiTable1DParameter tableA4b(u=division1.y, table=[
-                0.173,27.5; 0.20,40; 0.25,57.5; 0.30,69.5; 0.35,78.2; 0.40,84.4;
-                0.45,88.3; 0.50,91.6; 0.55,94; 0.60,96.3; 0.65,98.6; 0.70,99.8;
-                0.75,100])
-            annotation (Placement(transformation(extent={{40,-20},{60,0}})));
-        equation
-          if s_u/lambda_E > 0.0792 and s_u/T < 0.75 then
-            B_G = Table_A4b.y;
-          elseif s_u/lambda_E > 0.0792 and s_u/T > 0.75 then
-            B_G = 100;
-          else
-            B_G = Table_A4a.y;
-          end if;
-          connect(Thickness_of_cover.y, division2.u1) annotation (Line(points={
-                  {-79,-4},{-55.4,-4},{-55.4,-8.8}}, color={0,0,127}));
-          connect(ThermalConductivity_cover.y, division2.u2) annotation (Line(
-                points={{-79,-22},{-55.4,-22},{-55.4,-17.2}}, color={0,0,127}));
-          connect(Spacing.y, Table_A4a.u1) annotation (Line(points={{-79,14},{-68,14},{-68,
-                  36},{38,36}}, color={0,0,127}));
-          connect(Spacing.y, division1.u2) annotation (Line(points={{-79,14},{-74,14},{-74,
-                  2},{-55.4,2},{-55.4,2.8}}, color={0,0,127}));
-          connect(Thickness_of_cover.y, division1.u1) annotation (Line(points={{-79,-4},
-                  {-76,-4},{-76,-2},{-68,-2},{-68,11.2},{-55.4,11.2}}, color={0,0,127}));
-          connect(division2.y, Table_A4a.u2) annotation (Line(points={{-39.3,-13},
-                  {-32,-13},{-32,24},{38,24}}, color={0,0,127}));
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-                coordinateSystem(preserveAspectRatio=false)));
-        end B_G;
-
-        block n_G "Determination for n_G following tables A.5a and A.5b"
-
-          parameter Modelica.SIunits.Thickness s_u= 0.1 "thickness of cover above pipe in m";
-          parameter Modelica.SIunits.Distance T=0.2 "spacing in m";
-
-          replaceable Modelica.SIunits.ThermalConductivity lambda_E = 1.2 "Thermal conductivity of floor screed";
-
-          Modelica.Blocks.Sources.RealExpression Spacing(y=T)
-            annotation (Placement(transformation(extent={{-100,4},{-80,24}})));
-          Modelica.Blocks.Sources.RealExpression Thickness_of_cover(y=s_u)
-            annotation (Placement(transformation(extent={{-100,-14},{-80,6}})));
-          Modelica.Blocks.Sources.RealExpression ThermalConductivity_cover(y=lambda_E)
-            annotation (Placement(transformation(extent={{-100,-32},{-80,-12}})));
-          Modelica.Blocks.Math.Division division
-            annotation (Placement(transformation(extent={{-54,-20},{-40,-6}})));
-          Modelica.Blocks.Tables.CombiTable2D Table_A5a(table=[0.0,0.01,0.0208,0.0292,0.0375,
-                0.0458,0.0542,0.0625,0.0708,0.0792; 0.05,0.008,0.005,0.002,0,0,0,0,0,0;
-                0.075,0.024,0.021,0.018,0.011,0.002,0,0,0,0; 0.1,0.046,0.043,0.041,0.033,
-                0.014,0.005,0,0,0; 0.15,0.088,0.085,0.082,0.076,0.055,0.038,0.024,0.014,
-                0.006; 0.2,0.131,0.13,0.129,0.123,0.105,0.083,0.057,0.04,0.028; 0.225,0.155,
-                0.154,0.153,0.146,0.13,0.11,0.077,0.056,0.041; 0.2625,0.197,0.196,0.196,
-                0.19,0.173,0.15,0.11,0.083,0.062; 0.3,0.254,0.253,0.253,0.245,0.228,0.195,
-                0.145,0.114,0.086; 0.3375,0.322,0.321,0.321,0.31,0.293,0.26,0.187,0.148,
-                0.115; 0.375,0.422,0.421,0.421,0.405,0.385,0.325,0.23,0.183,0.142])
-            annotation (Placement(transformation(extent={{40,20},{60,40}})));
-          Modelica.Blocks.Interfaces.RealOutput n_G
-            annotation (Placement(transformation(extent={{86,-10},{106,10}})));
-          Modelica.Blocks.Math.Division division1
-            annotation (Placement(transformation(extent={{-54,0},{-40,14}})));
-          Modelica.Blocks.Tables.CombiTable1D Table_A5b(table=[0.173,0.32; 0.2,0.23; 0.25,
-                0.145; 0.3,0.097; 0.35,0.067; 0.4,0.048; 0.45,0.033; 0.5,0.023; 0.55,0.015;
-                0.6,0.009; 0.65,0.005; 0.7,0.002; 0.75,0])
-            annotation (Placement(transformation(extent={{40,-20},{60,0}})));
-        equation
-          if s_u/lambda_E > 0.0792 and s_u/T < 0.75 then
-            n_G =Table_A5b.y[1];
-          elseif s_u/lambda_E > 0.0792 and s_u/T > 0.75 then
-            n_G = 0;
-          else
-            n_G =Table_A5a.y;
-          end if;
-          connect(Thickness_of_cover.y, division.u1) annotation (Line(points={{-79,-4},{
-                  -55.4,-4},{-55.4,-8.8}}, color={0,0,127}));
-          connect(ThermalConductivity_cover.y, division.u2) annotation (Line(points={{-79,
-                  -22},{-55.4,-22},{-55.4,-17.2}}, color={0,0,127}));
-          connect(Spacing.y,Table_A5a. u1) annotation (Line(points={{-79,14},{-68,14},{-68,
-                  36},{38,36}}, color={0,0,127}));
-          connect(Spacing.y, division1.u2) annotation (Line(points={{-79,14},{-74,14},{-74,
-                  2},{-55.4,2},{-55.4,2.8}}, color={0,0,127}));
-          connect(Thickness_of_cover.y, division1.u1) annotation (Line(points={{-79,-4},
-                  {-76,-4},{-76,-2},{-68,-2},{-68,11.2},{-55.4,11.2}}, color={0,0,127}));
-          connect(division.y,Table_A5a. u2) annotation (Line(points={{-39.3,-13},{-32,-13},
-                  {-32,24},{38,24}}, color={0,0,127}));
-          connect(division1.y,Table_A5b. u[1]) annotation (Line(points={{-39.3,7},{-10,7},
-                  {-10,-10},{38,-10}}, color={0,0,127}));
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-                coordinateSystem(preserveAspectRatio=false)));
-        end n_G;
-
-        package TablesEN1264
-          "All tables used to calculation for panel heating type A in EN 1264"
+        package Tables "Basic tables for the calculation of parameters"
           block CombiTable1DParameter
             "Table look-up in one dimension with one inputs and one output as parameters"
 
@@ -6122,7 +6013,6 @@ Added documentation.</li>
           block CombiTable2DParameter
             "Table look-up in two dimensions with two inputs and one output as parameters"
 
-
           function getTableValue "Interpolate 2-dim. table defined by matrix"
               extends Modelica.Icons.Function;
               input Modelica.Blocks.Types.ExternalCombiTable2D tableID;
@@ -6165,7 +6055,6 @@ Added documentation.</li>
             parameter Real u1;
             parameter Real u2;
             final parameter Real y = getTableValue(tableID, u1, u2, 1.0);
-
 
           equation
 
@@ -6268,7 +6157,7 @@ Added documentation.</li>
                     textString="y",
                     lineColor={0,0,255})}));
           end CombiTable2DParameter;
-        end TablesEN1264;
+        end Tables;
       end TablesAndParameters;
 
       function BasicCharacteristic
@@ -6306,109 +6195,160 @@ Added documentation.</li>
 
       end LimitingCurve;
 
-      model HeatFlux_EN1264_2
-        "Upward and downward heat flux according to EN 1264-2"
+      model HeatFlux "Upward and downward heat flux according to EN 1264-2"
         extends
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.UpwardHeatFlux_EN1264(
-            Calculate_qG(withInsulating=true, withHoldingBurls=true));
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.EN1264.TablesAndParameters.qG_TypeA;
 
         parameter Modelica.SIunits.Thickness s_ins "Thickness of thermal insulation";
         parameter Modelica.SIunits.ThermalConductivity lambda_ins "Thermal conductivity of thermal insulation";
         final parameter Modelica.SIunits.ThermalInsulance R_lambdaIns = s_ins / lambda_ins "Thermal resistance of thermal insulation";
         parameter Modelica.SIunits.ThermalInsulance R_lambdaCeiling "Thermal resistance of ceiling";
         parameter Modelica.SIunits.ThermalInsulance R_lambdaPlaster "Thermal resistance of plaster";
-        constant Modelica.SIunits.ThermalInsulance R_alphaCeiling = 0.17 "Thermal resistance at the ceiling";
+        parameter Modelica.SIunits.ThermalInsulance R_alphaCeiling = 0.17 "Thermal resistance at the ceiling" annotation(Dialog(enable = false));
         final parameter Modelica.SIunits.ThermalConductivity lambda_u = lambda_E0 "Thermal conductivity of wall layers above panel heating without flooring (coverage)";
         parameter Modelica.SIunits.Temperature T_U "Temperature of room lying under panel heating";
-        constant Modelica.SIunits.CoefficientOfHeatTransfer alpha = 10.8;
+        parameter Modelica.SIunits.TemperatureDifference dT_H;
 
         final parameter Modelica.SIunits.ThermalInsulance R_U = R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster + R_alphaCeiling "Thermal resistance of wall layers under panel heating";
         final parameter Modelica.SIunits.ThermalInsulance R_O = 1 / alpha + R_lambdaB + s_u / lambda_u "Thermal resistance of wall layers above panel heating";
 
-        Modelica.SIunits.HeatFlux q_U = 1 / R_U * (R_O * q_max + T_Room - T_U)
+        final parameter Modelica.SIunits.HeatFlux q_max = K_H * dT_H;
+        final parameter Modelica.SIunits.HeatFlux q_U = 1 / R_U * (R_O * q_max + T_Room - T_U)
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
               coordinateSystem(preserveAspectRatio=false)));
 
-      end HeatFlux_EN1264_2;
-
-      model UpwardHeatFlux_EN1264
-        "Determination of maximum and normative heat flux according to EN 1264 for types A and C"
-
-        parameter Modelica.SIunits.Temperature T_Fmax "maximum surface temperature";
-        parameter Modelica.SIunits.Temperature T_Room "Room temperature";
-        parameter Modelica.SIunits.HeatFlux q_Gmax = BasicCharacteristic(T_Fm = T_Fmax, T_Room = T_Room) "Maximum possible heat flux" annotation(Dialog(enable=false));
-
-        parameter Modelica.SIunits.Distance T "Spacing between tubes";
-        parameter Modelica.SIunits.Diameter d_a "outer diameter of pipe";
-        parameter Modelica.SIunits.ThermalConductivity lambda_R "Coefficient of heat transfer of pipe material";
-        parameter Modelica.SIunits.Thickness s_R "thickness of pipe wall";
-
-        parameter Boolean withInsulating = true "false if pipe has no insulating" annotation (choices(checkBox=true));
-        parameter Modelica.SIunits.Diameter D(min = d_a) "Outer diameter of pipe, including insulating" annotation (Dialog(enable = withInsulating));
-        parameter Modelica.SIunits.ThermalConductivity lambda_M(min=0)  "Thermal Conductivity for insulating" annotation (Dialog(enable = withInsulating));
-
-        parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (choices(checkBox=true));
-        parameter Modelica.SIunits.VolumeFraction psi(start=0) "Volume Fraction of holding burls" annotation (Dialog(enable = withHoldingBurls));
-        parameter Modelica.SIunits.ThermalConductivity lambda_W(start=0) "Thermal conductivity of holding burls" annotation (Dialog(enable = withHoldingBurls));
-
-        parameter Modelica.SIunits.Thickness s_u "thickness of floor screed";
-        parameter Modelica.SIunits.ThermalConductivity lambda_E0 "Thermal conductivity of floor screed";
-        parameter Modelica.SIunits.ThermalConductivity lambda_E = (1 - psi) * lambda_E0 + psi * lambda_W "effective thermal Conductivity of screed" annotation(Dialog(enable = false));
-        parameter Modelica.SIunits.ThermalInsulance R_lambdaB "Thermal resistance of flooring";
-
-        parameter Modelica.SIunits.TemperatureDifference dT_H "Logarithmic Temperature Difference between heating medium and room";
-
-        Real K_H = Calculate_qG.K_H;
-
-        Modelica.SIunits.HeatFlux q_G = Calculate_qG.q_G;
-        Modelica.SIunits.HeatFlux q_N = Calculate_qN.q_G;
-        Modelica.SIunits.HeatFlux q_max = K_H * dT_H;
-
-        TablesAndParameters.qG_TypeA Calculate_qG(
-          T=T,
-          D=D,
-          d_a=d_a,
-          lambda_M=lambda_M,
-          s_u=s_u,
-          s_R=s_R,
-          R_lambdaB=R_lambdaB,
-          psi=psi,
-          lambda_W=lambda_W,
-          lambda_E0=lambda_E0,
-          T_Fmax=T_Fmax,
-          T_Room=T_Room,
-          q_Gmax=q_Gmax,
-          lambda_R=lambda_R,
-          dT_H=dT_H,
-          withInsulating=withInsulating,
-          withHoldingBurls=withHoldingBurls)
-                     annotation (Placement(transformation(extent={{20,60},{60,80}})));
-
-        TablesAndParameters.qG_TypeA Calculate_qN(
-          T=T,
-          D=D,
-          d_a=d_a,
-          lambda_M=lambda_M,
-          s_u=s_u,
-          lambda_R=lambda_R,
-          s_R=s_R,
-          R_lambdaB=0,
-          lambda_E0=lambda_E0,
-          psi=psi,
-          lambda_W=lambda_W,
-          q_Gmax=100,
-          dT_H=dT_H,
-          withInsulating=withInsulating,
-          withHoldingBurls=withHoldingBurls,
-          T_Fmax=302.15,
-          T_Room=293.15)
-          annotation (Placement(transformation(extent={{20,20},{60,40}})));
-      equation
-
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-              coordinateSystem(preserveAspectRatio=false)));
-      end UpwardHeatFlux_EN1264;
+      end HeatFlux;
 
     end EN1264;
+
+    model TestElement
+      extends Modelica.Icons.Example;
+      replaceable package Medium =
+          Modelica.Media.Interfaces.PartialMedium "Medium in the component";
+
+      AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PanelHeatingElement
+        panelHeatingElement(
+        T=0.1,
+        n_pipe=1,
+        L_pipe=1,
+        dis=1,
+        A=10,
+        n_floor=1,
+        d_floor={0.1},
+        lambda_floor={1.2},
+        c_floor={750},
+        Ceiling=false,
+        n_ceiling=1,
+        d_ceiling={0.2},
+        lambda_ceiling={1.5},
+        c_ceiling={1000},
+        lambda_pipe={1.2},
+        redeclare package Medium = AixLib.Media.Water,
+        m_H=15,
+        d_a={0.22},
+        d_i={0.2},
+        rho_floor={1500},
+        rho_ceiling={2000})
+        annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+      AixLib.Fluid.Sources.Boundary_pT     boundary(
+                    nPorts=1, redeclare package Medium = AixLib.Media.Water)
+        annotation (Placement(transformation(extent={{68,-10},{46,12}})));
+      AixLib.Fluid.Sources.MassFlowSource_T
+                               m_flow_specification(
+        nPorts=1,
+        use_m_flow_in=false,
+        use_T_in=false,
+        redeclare package Medium = AixLib.Media.Water,
+        m_flow=15,
+        T=313.15)
+        annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
+      Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+        prescribedTemperature1
+        annotation (Placement(transformation(extent={{56,50},{36,70}})));
+      Modelica.Blocks.Sources.Step TSurface(
+        height=-6,
+        offset=299.15,
+        startTime=43200)
+        annotation (Placement(transformation(extent={{94,50},{74,70}})));
+    equation
+      connect(panelHeatingElement.port_b, boundary.ports[1])
+        annotation (Line(points={{12,0},{46,0},{46,1}}, color={0,127,255}));
+      connect(m_flow_specification.ports[1], panelHeatingElement.port_a)
+        annotation (Line(points={{-58,0},{-8,0}}, color={0,127,255}));
+      connect(prescribedTemperature1.T, TSurface.y)
+        annotation (Line(points={{58,60},{73,60}}, color={0,0,127}));
+      connect(prescribedTemperature1.port, panelHeatingElement.heatport_floor)
+        annotation (Line(points={{36,60},{26,60},{26,54},{3.8,54},{3.8,9.6}}, color=
+             {191,0,0}));
+      connect(panelHeatingElement.radport_floor, prescribedTemperature1.port)
+        annotation (Line(points={{-1,10},{0,10},{0,60},{36,60}}, color={95,95,95}));
+      connect(prescribedTemperature1.port, panelHeatingElement.heatport_ceiling)
+        annotation (Line(points={{36,60},{36,-28},{4.4,-28},{4.4,-9.8}}, color={191,
+              0,0}));
+      annotation ();
+    end TestElement;
+
+    model TestCircuit
+      extends Modelica.Icons.Example;
+      replaceable package Medium =
+          Modelica.Media.Interfaces.PartialMedium "Medium in the component";
+
+      PanelHeatingCircuit
+        panelHeatingCircuit(
+        T=0.1,
+        dis=1,
+        A=10,
+        n_floor=1,
+        d_floor={0.1},
+        lambda_floor={1.2},
+        c_floor={750},
+        Ceiling=false,
+        n_ceiling=1,
+        d_ceiling={0.2},
+        lambda_ceiling={1.5},
+        c_ceiling={1000},
+        redeclare package Medium = AixLib.Media.Water,
+        d_a={0.22},
+        rho_floor={1500},
+        rho_ceiling={2000})
+        annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+      AixLib.Fluid.Sources.Boundary_pT     boundary(
+                    nPorts=1, redeclare package Medium = AixLib.Media.Water)
+        annotation (Placement(transformation(extent={{68,-10},{46,12}})));
+      AixLib.Fluid.Sources.MassFlowSource_T
+                               m_flow_specification(
+        nPorts=1,
+        use_m_flow_in=false,
+        use_T_in=false,
+        redeclare package Medium = AixLib.Media.Water,
+        m_flow=15,
+        T=313.15)
+        annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
+      Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+        prescribedTemperature1
+        annotation (Placement(transformation(extent={{56,50},{36,70}})));
+      Modelica.Blocks.Sources.Step TSurface(
+        height=-6,
+        offset=299.15,
+        startTime=43200)
+        annotation (Placement(transformation(extent={{94,50},{74,70}})));
+    equation
+      connect(panelHeatingCircuit.port_b, boundary.ports[1])
+        annotation (Line(points={{12,0},{46,0},{46,1}}, color={0,127,255}));
+      connect(m_flow_specification.ports[1],panelHeatingCircuit. port_a)
+        annotation (Line(points={{-58,0},{-8,0}}, color={0,127,255}));
+      connect(prescribedTemperature1.T, TSurface.y)
+        annotation (Line(points={{58,60},{73,60}}, color={0,0,127}));
+      connect(prescribedTemperature1.port,panelHeatingCircuit. heatport_floor)
+        annotation (Line(points={{36,60},{26,60},{26,54},{4.4,54},{4.4,9.6}}, color=
+             {191,0,0}));
+      connect(panelHeatingCircuit.radport_floor, prescribedTemperature1.port)
+        annotation (Line(points={{-0.4,10},{0,10},{0,60},{36,60}},
+                                                                 color={95,95,95}));
+      connect(prescribedTemperature1.port,panelHeatingCircuit. heatport_ceiling)
+        annotation (Line(points={{36,60},{36,-28},{4.4,-28},{4.4,-9.8}}, color={191,
+              0,0}));
+      annotation ();
+    end TestCircuit;
   end AddParameters;
 end PanelHeatingNew;
