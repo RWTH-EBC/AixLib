@@ -10,17 +10,18 @@ model BenchmarkBuilding "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={206,-60})));
-  AixLib.Systems.Benchmark_old.HeatpumpSystem heatpumpSystem(redeclare package
-      Medium = MediumWater) annotation (Placement(visible=true, transformation(
-          extent={{-44,-82},{66,-36}}, rotation=0)));
-  AixLib.Systems.EONERC_MainBuilding_old.SwitchingUnit switchingUnit(redeclare
-      package Medium = MediumWater, m_flow_nominal=2) annotation (Placement(
-        visible=true, transformation(
-        origin={182,-4},
+  Benchmark.HeatpumpSystem heatpumpSystem(redeclare package Medium =
+        MediumWater)
+    annotation (Placement(transformation(extent={{-40,-80},{70,-34}})));
+  EONERC_MainBuilding.SwitchingUnit switchingUnit(redeclare package Medium =
+        MediumWater,
+                m_flow_nominal=2) annotation (Placement(transformation(
         extent={{20,-24},{-20,24}},
-        rotation=0)));
-  EONERC_MainBuilding_old.HeatExchangerSystem heatExchangerSystem(redeclare
-      package Medium = MediumWater, m_flow_nominal=2)
+        rotation=0,
+        origin={104,-56})));
+  EONERC_MainBuilding.HeatExchangerSystem heatExchangerSystem(redeclare package
+      Medium = MediumWater,
+                       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-130,-40},{-60,8}})));
   Fluid.Sources.Boundary_pT          boundary1(
     redeclare package Medium = MediumWater,
@@ -32,36 +33,36 @@ model BenchmarkBuilding "Benchmark building model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{-20,-120},{0,-100}})));
-  Benchmark_old.HighTemperatureSystem highTemperatureSystem(
+  Benchmark.HighTemperatureSystem highTemperatureSystem(
     redeclare package Medium = MediumWater,
     m_flow_nominal=10,
     T_start=323.15)
     annotation (Placement(transformation(extent={{-188,-80},{-144,-34}})));
-  Benchmark_old.Tabs2 tabs4_1(
+  Benchmark.Tabs2 tabs4_1(
     redeclare package Medium = MediumWater,
     area=30*20,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{158,120},{198,160}})));
-  Benchmark_old.Tabs2 tabs4_3(
+  Benchmark.Tabs2 tabs4_3(
     redeclare package Medium = MediumWater,
     area=30*30,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{240,120},{280,160}})));
-  Benchmark_old.Tabs2 tabs4_4(
+  Benchmark.Tabs2 tabs4_4(
     redeclare package Medium = MediumWater,
     area=10*5,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{344,120},{384,160}})));
-  Benchmark_old.Tabs2 tabs4_5(
+  Benchmark.Tabs2 tabs4_5(
     redeclare package Medium = MediumWater,
     area=20*5,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{440,120},{480,160}})));
-  Benchmark_old.Tabs2 tabs4_2(
+  Benchmark.Tabs2 tabs4_2(
     redeclare package Medium = MediumWater,
     area=30*45,
     thickness=0.3,
@@ -70,8 +71,7 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=
-        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
+    zoneParam=Benchmark.BaseClasses.BenchmarkWorkshop(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -81,7 +81,6 @@ model BenchmarkBuilding "Benchmark building model"
     Cooler_on=false,
     nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{122,340},{154,368}})));
-
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -186,11 +185,10 @@ model BenchmarkBuilding "Benchmark building model"
     "Weather data bus"
     annotation (Placement(transformation(extent={{54,328},{88,360}}),
     iconTransformation(extent={{-150,388},{-130,408}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone2(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone2(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=
-        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
+    zoneParam=Benchmark.BaseClasses.BenchmarkCanteen(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -198,14 +196,13 @@ model BenchmarkBuilding "Benchmark building model"
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2) "Thermal zone"
+    nPorts=2)
+    "Thermal zone"
     annotation (Placement(transformation(extent={{240,340},{272,366}})));
-
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone3(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone3(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=
-        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_ConferenceRoom(),
+    zoneParam=Benchmark.BaseClasses.BenchmarkConferenceRoom(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -213,14 +210,13 @@ model BenchmarkBuilding "Benchmark building model"
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2) "Thermal zone"
+    nPorts=2)
+    "Thermal zone"
     annotation (Placement(transformation(extent={{346,338},{374,364}})));
-
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone4(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone4(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=
-        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
+    zoneParam=Benchmark.BaseClasses.BenchmarkSharedOffice(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -228,14 +224,13 @@ model BenchmarkBuilding "Benchmark building model"
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2) "Thermal zone"
+    nPorts=2)
+    "Thermal zone"
     annotation (Placement(transformation(extent={{444,338},{470,366}})));
-
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone5(
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone5(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=
-        Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice(),
+    zoneParam=Benchmark.BaseClasses.BenchmarkOpenPlanOffice(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -243,10 +238,10 @@ model BenchmarkBuilding "Benchmark building model"
     recOrSep=false,
     Heater_on=false,
     Cooler_on=false,
-    nPorts=2) "Thermal zone"
+    nPorts=2)
+    "Thermal zone"
     annotation (Placement(transformation(extent={{538,340},{568,370}})));
-
-  ModularAHU_old.GenericAHU genericAHU(
+  ModularAHU.GenericAHU                genericAHU(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
@@ -256,14 +251,14 @@ model BenchmarkBuilding "Benchmark building model"
     usePreheater=true,
     useHumidifierRet=false,
     useHumidifier=true,
-    perheater(redeclare HydraulicModules_old.Admix hydraulicModule(
+    perheater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=1,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))), dynamicHX(
         dp1_nominal=50,
@@ -272,14 +267,14 @@ model BenchmarkBuilding "Benchmark building model"
         tau2=15,
         dT_nom=30,
         Q_nom=60000)),
-    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=1,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
         dynamicHX(
@@ -289,14 +284,14 @@ model BenchmarkBuilding "Benchmark building model"
         tau2=10,
         dT_nom=15,
         Q_nom=150000)),
-    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
+    heater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=1,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))), dynamicHX(
         dp1_nominal=100,
@@ -334,34 +329,34 @@ model BenchmarkBuilding "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-140,274})));
-  ModularAHU_old.VentilationUnit ventilationUnit1(
+  ModularAHU.VentilationUnit ventilationUnit1(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
+    heater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -369,34 +364,34 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{32,236},{70,276}})));
-  ModularAHU_old.VentilationUnit ventilationUnit2(
+  ModularAHU.VentilationUnit                ventilationUnit2(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
+    heater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -404,34 +399,34 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{202,236},{240,276}})));
-  ModularAHU_old.VentilationUnit ventilationUnit3(
+  ModularAHU.VentilationUnit                ventilationUnit3(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
+    heater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -439,34 +434,34 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{300,236},{338,276}})));
-  ModularAHU_old.VentilationUnit ventilationUnit4(
+  ModularAHU.VentilationUnit                ventilationUnit4(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
+    heater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -474,34 +469,34 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{400,236},{438,276}})));
-  ModularAHU_old.VentilationUnit ventilationUnit5(
+  ModularAHU.VentilationUnit                ventilationUnit5(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules_old.Admix hydraulicModule(
+    cooler(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules_old.Admix hydraulicModule(
+    heater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
         length=0.5,
         Kv=6.3,
         redeclare
-          HydraulicModules_old.BaseClasses.PumpInterface_SpeedControlledNrpm
+          HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))), dynamicHX(
         dp1_nominal=10,
@@ -509,15 +504,14 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{510,242},{548,282}})));
-  AixLib.Systems.EONERC_MainBuilding_old.GeothermalFieldSimple
-    geothermalFieldSimple(
+  EONERC_MainBuilding.GeothermalFieldSimple geothermalFieldSimple(
     redeclare package Medium = MediumWater,
     m_flow_nominal=2,
-    T_amb=293.15) annotation (Placement(visible=true, transformation(extent={{
-            132,-132},{108,-100}}, rotation=0)));
-  Benchmark_old.BaseClasses.MainBus mainBus annotation (Placement(
-        transformation(extent={{202,390},{248,448}}), iconTransformation(extent
-          ={{146,386},{206,442}})));
+    T_amb=293.15)
+    annotation (Placement(transformation(extent={{132,-120},{108,-88}})));
+  Benchmark.BaseClasses.MainBus mainBus annotation (Placement(transformation(
+          extent={{152,394},{198,452}}), iconTransformation(extent={{110,388},{
+            170,444}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi
     annotation (Placement(transformation(extent={{-182,260},{-162,280}})));
   Fluid.MixingVolumes.MixingVolume vol(
@@ -532,46 +526,16 @@ model BenchmarkBuilding "Benchmark building model"
     V=0.01,
     nPorts=12)
     annotation (Placement(transformation(extent={{130,100},{150,120}})));
-  Modelica.Blocks.Interfaces.RealOutput y annotation (Placement(transformation(
-        extent={{-14,-14},{14,14}},
-        rotation=90,
-        origin={-164,434})));
-  CCCS.BaseClasses.EnergyCounter2 energyCounter2_1
-    annotation (Placement(transformation(extent={{478,-78},{538,-16}})));
 equation
-  connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (
-    Line(points={{162,-8},{147.5,-8},{147.5,-18},{147,-18},{147,-22},{86,-22},{
-          86,-61.5556},{66,-61.5556}},                                                                                color = {0, 127, 255}));
-  connect(switchingUnit.port_b2, vol1.ports[1]) annotation (
-    Line(points={{202,-8},{136.333,-8},{136.333,100}},          color = {0, 127, 255}));
-  connect(switchingUnit.port_a1, vol.ports[1]) annotation (
-    Line(points={{202,16},{202,76},{120.333,76}},        color = {0, 127, 255}));
-  connect(bou.ports[1], switchingUnit.port_b2) annotation (
-    Line(points={{196,-60},{160,-60},{160,-8},{202,-8}},            color = {0, 127, 255}));
-  connect(switchingUnit.sWUBus, mainBus.swuBus) annotation (
-    Line(points={{182.2,20.4},{182.2,-4},{120,-4},{120,22},{-218,22},{-218,
-          419.145},{225.115,419.145}},                                                                           color = {255, 204, 51}, thickness = 0.5));
-  connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (
-    Line(points={{130,-100},{130,-105},{190,-105},{190,-108},{230,-108},{230,
-          -28},{190,-28}},                                                                                   color = {0, 127, 255}));
-  connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (
-    Line(points={{110,-100},{142,-100},{142,-98},{174,-98},{174,-28}},            color = {0, 127, 255}));
-  connect(heatpumpSystem.port_a1, switchingUnit.port_b1) annotation (
-    Line(points={{66,-51.3333},{78,-51.3333},{78,16},{162,16}}, color = {0, 127, 255}));
-  connect(geothermalFieldSimple.twoCircuitBus, mainBus.gtfBus) annotation (
-    Line(points={{132.1,-110.1},{160,-110.1},{160,-138},{-218,-138},{-218,
-          419.145},{225.115,419.145}},                                                                        color = {255, 204, 51}, thickness = 0.5));
-  connect(heatpumpSystem.heatPumpSystemBus, mainBus.hpSystemBus) annotation (
-    Line(points={{11,-36},{16,-36},{16,22},{-218,22},{-218,419.145},{225.115,
-          419.145}},                                                                                 color = {255, 204, 51}, thickness = 0.5));
-  connect(heatExchangerSystem.port_b3, heatpumpSystem.port_a2) annotation (
-    Line(points={{-65,-39.52},{-65,-61.5556},{-44,-61.5556}},
-                                                            color = {244, 125, 35}));
-  connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (
-    Line(points={{-44,-51.3333},{-75,-51.3333},{-75,-40}},
-                                                         color = {244, 125, 35}));
+  connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
+        points={{84,-60},{80,-60},{80,-59.5556},{70,-59.5556}},
+                                                              color={0,127,255}));
+  connect(heatpumpSystem.port_a1, switchingUnit.port_b1) annotation (Line(
+        points={{70,-49.3333},{78,-49.3333},{78,-36},{84,-36}},
+                                                    color={0,127,255}));
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
-    Line(points={{0,-110},{6.5,-110},{6.5,-79.4444},{11,-79.4444}},color = {191, 0, 0}));
+      Line(points={{0,-110},{14,-110},{14,-77.4444},{15,-77.4444}}, color={191,
+          0,0}));
   connect(highTemperatureSystem.port_b, heatExchangerSystem.port_a1)
     annotation (Line(points={{-144,-66.2},{-142,-66.2},{-142,-66},{-138,-66},{
           -138,-20.8},{-130,-20.8}}, color={238,46,47}));
@@ -651,6 +615,10 @@ equation
         color={191,0,0}));
   connect(thermalZone5.intGainsConv, tabs4_2.heatPort) annotation (Line(points={{568,
           347.5},{570,347.5},{570,161.818},{560,161.818}},       color={191,0,0}));
+  connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (Line(
+        points={{-40,-49.3333},{-75,-49.3333},{-75,-40}}, color={244,125,35}));
+  connect(heatExchangerSystem.port_b3, heatpumpSystem.port_a2) annotation (Line(
+        points={{-65,-39.52},{-65,-59.5556},{-40,-59.5556}}, color={244,125,35}));
   connect(boundaryOutsideAir.ports[1],genericAHU. port_a1)
     annotation (Line(points={{-130,250},{-120,250}},
                                                  color={0,127,255}));
@@ -685,10 +653,10 @@ equation
   connect(ventilationUnit1.port_b4, genericAHU.port_b5) annotation (Line(points={{62.02,
           236},{60,236},{60,184},{-27.8182,184},{-27.8182,220}},        color={238,
           46,47}));
-  connect(genericAHU.port_a2,ventilationUnit2. port_b2) annotation (Line(points={{
-          0.545455,274},{102,274},{102,268},{202.38,268}},  color={0,127,255}));
-  connect(genericAHU.port_b1,ventilationUnit2. port_a1) annotation (Line(points={{
-          0.545455,250},{202,250},{202,256}},  color={0,127,255}));
+  connect(genericAHU.port_a2,ventilationUnit2. port_b2) annotation (Line(points=
+         {{0.545455,274},{102,274},{102,268},{202.38,268}}, color={0,127,255}));
+  connect(genericAHU.port_b1,ventilationUnit2. port_a1) annotation (Line(points=
+         {{0.545455,250},{202,250},{202,256}}, color={0,127,255}));
   connect(ventilationUnit2.port_a4, genericAHU.port_a5) annotation (Line(points={{224.8,
           236},{224,236},{224,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
           47}));
@@ -707,8 +675,8 @@ equation
         color={238,46,47}));
   connect(genericAHU.port_a2,ventilationUnit4. port_b2) annotation (Line(points=
          {{0.545455,274},{202,274},{202,268},{400.38,268}}, color={0,127,255}));
-  connect(genericAHU.port_b1,ventilationUnit4. port_a1) annotation (Line(points={{
-          0.545455,250},{400,250},{400,256}},  color={0,127,255}));
+  connect(genericAHU.port_b1,ventilationUnit4. port_a1) annotation (Line(points=
+         {{0.545455,250},{400,250},{400,256}}, color={0,127,255}));
   connect(ventilationUnit4.port_a4, genericAHU.port_a5) annotation (Line(points={{422.8,
           236},{424,236},{424,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
           47}));
@@ -717,8 +685,8 @@ equation
         color={238,46,47}));
   connect(genericAHU.port_a2,ventilationUnit5. port_b2)
     annotation (Line(points={{0.545455,274},{510.38,274}}, color={0,127,255}));
-  connect(genericAHU.port_b1,ventilationUnit5. port_a1) annotation (Line(points={{
-          0.545455,250},{510,250},{510,262}},  color={0,127,255}));
+  connect(genericAHU.port_b1,ventilationUnit5. port_a1) annotation (Line(points=
+         {{0.545455,250},{510,250},{510,262}}, color={0,127,255}));
   connect(ventilationUnit5.port_a4, genericAHU.port_a5) annotation (Line(points={{532.8,
           242},{532,242},{532,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
           47}));
@@ -748,8 +716,12 @@ equation
   connect(ventilationUnit5.port_a2,thermalZone5. ports[2]) annotation (Line(
         points={{548,274},{548,310},{548,344.2},{556.525,344.2}}, color={0,127,
           255}));
+  connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
+        points={{110,-88},{96,-88},{96,-80}},   color={0,127,255}));
+  connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
+        points={{130,-88},{130,-80},{112,-80}}, color={0,127,255}));
   connect(genericAHU.genericAHUBus, mainBus.ahuBus) annotation (Line(
-      points={{-60,286.3},{-60,419.145},{225.115,419.145}},
+      points={{-60,286.3},{-60,423.145},{175.115,423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -757,8 +729,8 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(ventilationUnit1.genericAHUBus, mainBus.vu1Bus) annotation (Line(
-      points={{51,280.2},{51,294},{-10,294},{-10,424},{82,424},{82,419.145},{
-          225.115,419.145}},
+      points={{51,280.2},{51,294},{-10,294},{-10,424},{82,424},{82,423.145},{175.115,
+          423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -766,8 +738,8 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(ventilationUnit2.genericAHUBus, mainBus.vu2Bus) annotation (Line(
-      points={{221,280.2},{221,288},{222,288},{222,294},{-10,294},{-10,419.145},
-          {225.115,419.145}},
+      points={{221,280.2},{221,288},{222,288},{222,294},{-10,294},{-10,423.145},
+          {175.115,423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -775,8 +747,8 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(ventilationUnit3.genericAHUBus, mainBus.vu3Bus) annotation (Line(
-      points={{319,280.2},{319,294},{-10,294},{-10,424},{82,424},{82,419.145},{
-          225.115,419.145}},
+      points={{319,280.2},{319,294},{-10,294},{-10,424},{82,424},{82,423.145},{175.115,
+          423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -784,7 +756,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(ventilationUnit4.genericAHUBus, mainBus.vu4Bus) annotation (Line(
-      points={{419,280.2},{419,294},{-10,294},{-10,419.145},{225.115,419.145}},
+      points={{419,280.2},{419,294},{-10,294},{-10,423.145},{175.115,423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -793,7 +765,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(ventilationUnit5.genericAHUBus, mainBus.vu5Bus) annotation (Line(
-      points={{529,286.2},{529,294},{-10,294},{-10,419.145},{225.115,419.145}},
+      points={{529,286.2},{529,294},{-10,294},{-10,423.145},{175.115,423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -802,8 +774,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs4_2.tabsBus, mainBus.tabs5Bus) annotation (Line(
-      points={{539.8,138.364},{539.8,166},{580,166},{580,419.145},{225.115,
-          419.145}},
+      points={{539.8,138.364},{539.8,166},{580,166},{580,423.145},{175.115,
+          423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -812,8 +784,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs4_5.tabsBus, mainBus.tabs4Bus) annotation (Line(
-      points={{439.8,138.364},{439.8,166},{580,166},{580,419.145},{225.115,
-          419.145}},
+      points={{439.8,138.364},{439.8,166},{580,166},{580,423.145},{175.115,
+          423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -822,8 +794,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs4_4.tabsBus, mainBus.tabs3Bus) annotation (Line(
-      points={{343.8,138.364},{343.8,166},{580,166},{580,419.145},{225.115,
-          419.145}},
+      points={{343.8,138.364},{343.8,166},{580,166},{580,423.145},{175.115,
+          423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -832,8 +804,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs4_3.tabsBus, mainBus.tabs2Bus) annotation (Line(
-      points={{239.8,138.364},{239.8,166},{580,166},{580,419.145},{225.115,
-          419.145}},
+      points={{239.8,138.364},{239.8,166},{580,166},{580,423.145},{175.115,
+          423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -842,8 +814,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs4_1.tabsBus, mainBus.tabs1Bus) annotation (Line(
-      points={{157.8,138.364},{120,138.364},{120,166},{580,166},{580,419.145},{
-          225.115,419.145}},
+      points={{157.8,138.364},{120,138.364},{120,166},{580,166},{580,423.145},{
+          175.115,423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -851,41 +823,41 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(thermalZone1.TAir, mainBus.TRoom1Mea) annotation (Line(points={{155.6,
-          362.4},{156,362.4},{156,419.145},{225.115,419.145}}, color={0,0,127}),
+          362.4},{156,362.4},{156,423.145},{175.115,423.145}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(thermalZone2.TAir, mainBus.TRoom2Mea) annotation (Line(points={{273.6,
-          360.8},{273.6,419.145},{225.115,419.145}}, color={0,0,127}), Text(
+          360.8},{273.6,423.145},{175.115,423.145}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(thermalZone3.TAir, mainBus.TRoom3Mea) annotation (Line(points={{375.4,
-          358.8},{388,358.8},{388,419.145},{225.115,419.145}}, color={0,0,127}),
+          358.8},{388,358.8},{388,423.145},{175.115,423.145}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(thermalZone4.TAir, mainBus.TRoom4Mea) annotation (Line(points={{471.3,
-          360.4},{471.3,419.145},{225.115,419.145}}, color={0,0,127}), Text(
+          360.4},{471.3,423.145},{175.115,423.145}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(thermalZone5.TAir, mainBus.TRoom5Mea) annotation (Line(points={{569.5,
-          364},{569.5,419.145},{225.115,419.145}}, color={0,0,127}), Text(
+          364},{569.5,423.145},{175.115,423.145}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(highTemperatureSystem.highTemperatureSystemBus, mainBus.htsBus)
     annotation (Line(
-      points={{-165.78,-34},{-165.78,-6},{-166,-6},{-166,22},{-218,22},{-218,
-          419.145},{225.115,419.145}},
+      points={{-165.78,-34},{-165.78,-6},{-166,-6},{-166,22},{-218,22},{-218,423.145},
+          {175.115,423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -893,13 +865,41 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(heatExchangerSystem.hxBus, mainBus.hxBus) annotation (Line(
-      points={{-98,8},{-98,22},{-218,22},{-218,419.145},{225.115,419.145}},
+      points={{-98,8},{-98,22},{-218,22},{-218,423.145},{175.115,423.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(heatpumpSystem.heatPumpSystemBus, mainBus.hpSystemBus) annotation (
+      Line(
+      points={{15,-34},{16,-34},{16,22},{-218,22},{-218,423.145},{175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+
+  connect(switchingUnit.sWUBus, mainBus.swuBus) annotation (Line(
+      points={{104.2,-31.6},{104.2,-4},{120,-4},{120,22},{-218,22},{-218,
+          423.145},{175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(geothermalFieldSimple.twoCircuitBus, mainBus.gtfBus) annotation (Line(
+      points={{132.1,-98.1},{160,-98.1},{160,-138},{-218,-138},{-218,423.145},{175.115,
+          423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   connect(boundaryOutsideAir.T_in, x_pTphi.T) annotation (Line(points={{-152,
           246},{-194,246},{-194,264},{-190,264},{-190,270},{-184,270}}, color={
           0,0,127}));
@@ -921,14 +921,20 @@ equation
           270},{-158,270},{-158,254},{-152,254}}, color={0,0,127}));
   connect(boundaryOutsideAir.T_in, prescribedTemperature.T) annotation (Line(
         points={{-152,246},{-218,246},{-218,-110},{-22,-110}}, color={0,0,127}));
+  connect(bou.ports[1], switchingUnit.port_b2)
+    annotation (Line(points={{196,-60},{124,-60}}, color={0,127,255}));
+  connect(switchingUnit.port_a1, vol.ports[1]) annotation (Line(points={{124,-36},
+          {124,76},{120.333,76}},      color={0,127,255}));
+  connect(switchingUnit.port_b2, vol1.ports[1]) annotation (Line(points={{124,-60},
+          {136.333,-60},{136.333,100}},      color={0,127,255}));
   connect(vol1.ports[2], genericAHU.port_a4) annotation (Line(points={{137,100},
           {-60,100},{-60,220}}, color={0,127,255}));
   connect(vol1.ports[3], ventilationUnit1.port_a3) annotation (Line(points={{137.667,
           100},{39.6,100},{39.6,236}},         color={0,127,255}));
   connect(vol1.ports[4], tabs4_1.port_a2) annotation (Line(points={{138.333,100},
           {170,100},{170,120}}, color={0,127,255}));
-  connect(vol1.ports[5], ventilationUnit2.port_a3) annotation (Line(points={{139,100},
-          {210,100},{210,112},{209.6,112},{209.6,236}},          color={0,127,
+  connect(vol1.ports[5], ventilationUnit2.port_a3) annotation (Line(points={{
+          139,100},{210,100},{210,112},{209.6,112},{209.6,236}}, color={0,127,
           255}));
   connect(vol1.ports[6], tabs4_3.port_a2) annotation (Line(points={{139.667,100},
           {252,100},{252,120}}, color={0,127,255}));
@@ -950,8 +956,8 @@ equation
           76},{47.2,76},{47.2,236}},         color={0,127,255}));
   connect(vol.ports[4], tabs4_1.port_b2) annotation (Line(points={{122.333,76},
           {186,76},{186,120.364}}, color={0,127,255}));
-  connect(vol.ports[5], ventilationUnit2.port_b3) annotation (Line(points={{123,76},
-          {217.2,76},{217.2,236}},     color={0,127,255}));
+  connect(vol.ports[5], ventilationUnit2.port_b3) annotation (Line(points={{123,
+          76},{217.2,76},{217.2,236}}, color={0,127,255}));
   connect(vol.ports[6], tabs4_3.port_b2) annotation (Line(points={{123.667,76},
           {268,76},{268,120.364}}, color={0,127,255}));
   connect(vol.ports[7], ventilationUnit3.port_b3) annotation (Line(points={{124.333,
@@ -966,15 +972,6 @@ equation
           127,76},{525.2,76},{525.2,242}}, color={0,127,255}));
   connect(vol.ports[12], tabs4_2.port_b2) annotation (Line(points={{127.667,76},
           {568,76},{568,120.364}}, color={0,127,255}));
-  connect(weaBus.TDryBul, y) annotation (Line(
-      points={{71,344},{-164,344},{-164,434}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(mainBus, energyCounter2_1.mainBus) annotation (Line(
-      points={{225,419},{582,419},{582,-80},{508,-80},{508,-54.44},{507.7,
-          -54.44}},
-      color={255,204,51},
-      thickness=0.5));
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},

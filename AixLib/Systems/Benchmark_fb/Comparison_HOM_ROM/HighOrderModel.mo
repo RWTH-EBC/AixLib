@@ -1,5 +1,5 @@
 within AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM;
-model HighOrderModel_MultipleRooms
+model HighOrderModel
   extends Modelica.Icons.Example;
   AixLib.BoundaryConditions.WeatherData.Bus
                                      weaBus
@@ -73,7 +73,7 @@ equation
       points={{-68,0},{0,0},{0,-40},{40,-40}},
       color={255,204,51},
       thickness=0.5));
-  annotation (                     experiment(StopTime=4838400, Interval=300),
+  annotation (                     experiment(StopTime=604800, Interval=300),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
                                    experiment(StopTime=4838400, Interval=1800),
@@ -81,5 +81,8 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
                                    experiment(StopTime=4838400, Interval=1800),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
-end HighOrderModel_MultipleRooms;
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>High order models of the rooms of the benchmark building</p>
+</html>"));
+end HighOrderModel;

@@ -34,7 +34,8 @@ model HighTemperatureSystem
     transferHeat=true,
     param=DataBase.CHP.CHPDataSimple.CHP_FMB_31_GSK(),
     final m_flow_nominal=m_flow_nominal,
-    TAmb=298.15)
+    TAmb=298.15,
+    delayTime=300)
     annotation (Placement(transformation(extent={{-52,108},{-28,132}})));
 
   HydraulicModules.Pump pumpCHP(

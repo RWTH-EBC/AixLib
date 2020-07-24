@@ -13,7 +13,8 @@ package CCCS
     Modelica.Blocks.Math.Add OverallCost annotation (
       Placement(visible = true, transformation(extent={{50,-10},{70,10}},      rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.PerformanceReductionCosts
-      performanceReductionCosts1( sim_time=simulation_time) annotation (Placement(visible=true,
+      performanceReductionCosts1(TSet=295.15,
+                                  sim_time=simulation_time) annotation (Placement(visible=true,
           transformation(
           origin={-70,20},
           extent={{-10,-10},{10,10}},
@@ -21,22 +22,36 @@ package CCCS
     Modelica.Blocks.Math.Add InvestmentCosts annotation (
       Placement(visible = true, transformation(origin={-18,-70},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.InvestmentCostsStrategy
-      investmentCostsStrategy1 annotation (Placement(visible=true,
+      investmentCostsStrategy1(KLOC=6.3)
+                               annotation (Placement(visible=true,
           transformation(
           origin={-70,-40},
           extent={{-10,-10},{10,10}},
           rotation=0)));
-    Benchmark_old.BaseClasses.MainBus mainBus
+   AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
     Components.InvestmentCostsComponents investmentCostsComponents(k_Investment=
          0)
       annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
-    AixLib.Systems.Benchmark_fb.CCCS.Components.EnergyCosts energyCosts1
+    AixLib.Systems.Benchmark_fb.CCCS.Components.EnergyCosts energyCosts1(
+      cFuel=0.0455/3600000,
+      cEl=0.222/3600000,
+      cDisCool=0,
+      cDisHeat=0,
+      cConDisHeat=0,
+      cConDisCool=0,
+      cConDisHeatFix=0,
+      cConDisCoolFix=0)
       annotation (Placement(visible=true, transformation(
           origin={-70,80},
           extent={{-10,-10},{10,10}},
           rotation=0)));
-    AixLib.Systems.Benchmark_fb.CCCS.Components.EmissionsCosts emissionsCosts1
+    AixLib.Systems.Benchmark_fb.CCCS.Components.EmissionsCosts emissionsCosts1(
+      eFuel=0.201/3600000,
+      eEl=0.474/3600000,
+      eDisHeat=0,
+      eDisCool=0,
+      cEm=0.0258)
       annotation (Placement(visible=true, transformation(
           origin={-70,52},
           extent={{-10,-10},{10,10}},
@@ -700,11 +715,9 @@ Strategy")}),
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Sources.Constant salary_per_annum(k=sal*sim_time/(365*24*
             3600))                                               annotation (
-        Placement(visible = true, transformation(origin = {90, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+        Placement(visible = true, transformation(origin={90,-22},   extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Sources.Constant productivity_factor(k = prodFac) annotation (
-        Placement(visible = true, transformation(origin = {90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-      Modelica.Blocks.Sources.Constant const1(k = 1 / (233 * 8 * 60)) annotation (
-        Placement(visible = true, transformation(origin = {90, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+        Placement(visible = true, transformation(origin={88,-60},  extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Continuous.Integrator integrator1[5](k = {1, 1, 1, 1, 1}, each use_reset = true) annotation (
         Placement(visible = true, transformation(origin = {0, -30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       parameter Real prodFac = 1.2 "productivity factor [-]";
@@ -714,11 +727,11 @@ Strategy")}),
       parameter Real sim_time;
       Modelica.Blocks.Sources.BooleanExpression booleanExpression[5](each y = true) annotation (
         Placement(visible = true, transformation(extent = {{-100, -50}, {-80, -30}}, rotation = 0)));
-      Modelica.Blocks.Math.MultiProduct multiProduct[5](each nu = 4) annotation (
+      Modelica.Blocks.Math.MultiProduct multiProduct[5](each nu=4)   annotation (
         Placement(visible = true, transformation(origin = {0, -66}, extent = {{-6, -6}, {6, 6}}, rotation = 270)));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.LRM_Temp lRM_Temp[5] annotation (
         Placement(visible = true, transformation(extent = {{-40, 60}, {-20, 80}}, rotation = 0)));
-      Benchmark_old.BaseClasses.MainBus mainBus
+     AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus
         annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.LRM_VOC lrm_voc1[5] annotation (
         Placement(visible = true, transformation(origin = {0, 88}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
@@ -726,6 +739,11 @@ Strategy")}),
         Placement(visible = true, transformation(origin = {30, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Math.MultiProduct multiProduct1[5](each nu = 3) annotation (
         Placement(visible = true, transformation(origin = {0, 28}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
+      Modelica.Blocks.Sources.Constant const1(k=1/(233*8*60)) annotation (Placement(
+            visible=true, transformation(
+            origin={90,12},
+            extent={{-10,-10},{10,10}},
+            rotation=180)));
     equation
       connect(booleanExpression[1].y, integrator1[1].reset) annotation (
         Line(points = {{-79, -40}, {-40.5, -40}, {-40.5, -36}, {-12, -36}}, color = {255, 0, 255}));
@@ -838,25 +856,15 @@ Strategy")}),
       connect(lrm_co21[2].y, feedback1[6].u2) annotation (
         Line(points = {{19.8, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
       connect(productivity_factor.y, multiProduct[5].u[3]) annotation (
-        Line(points = {{79, 0}, {60, 0}, {60, -60}, {-1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
       connect(productivity_factor.y, multiProduct[4].u[3]) annotation (
-        Line(points = {{79, 0}, {60, 0}, {60, -60}, {-1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
       connect(productivity_factor.y, multiProduct[3].u[3]) annotation (
-        Line(points = {{79, 0}, {60, 0}, {60, -60}, {-1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
       connect(productivity_factor.y, multiProduct[2].u[3]) annotation (
-        Line(points = {{79, 0}, {60, 0}, {60, -60}, {-1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
       connect(productivity_factor.y, multiProduct[1].u[3]) annotation (
-        Line(points = {{79, 0}, {60, 0}, {60, -60}, {-1.05, -60}}, color = {0, 0, 127}));
-      connect(const1.y, multiProduct[5].u[4]) annotation (
-        Line(points = {{79, -60}, {-3.15, -60}}, color = {0, 0, 127}));
-      connect(const1.y, multiProduct[4].u[4]) annotation (
-        Line(points = {{79, -60}, {-3.15, -60}}, color = {0, 0, 127}));
-      connect(const1.y, multiProduct[3].u[4]) annotation (
-        Line(points = {{79, -60}, {-3.15, -60}}, color = {0, 0, 127}));
-      connect(const1.y, multiProduct[2].u[4]) annotation (
-        Line(points = {{79, -60}, {-3.15, -60}}, color = {0, 0, 127}));
-      connect(const1.y, multiProduct[1].u[4]) annotation (
-        Line);
+        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
       connect(feedback2[1].y, integrator1[1].u) annotation (
         Line(points = {{-9, 0}, {-26, 0}, {-26, -18}, {0, -18}}, color = {0, 0, 127}));
       connect(feedback2[2].y, integrator1[2].u) annotation (
@@ -878,15 +886,15 @@ Strategy")}),
       connect(const.y, feedback2[5].u1) annotation (
         Line(points = {{79, 90}, {60, 90}, {60, 0}, {8, 0}}, color = {0, 0, 127}));
       connect(integrator1[1].y, multiProduct[1].u[1]) annotation (
-        Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {3.15, -60}}, color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
       connect(integrator1[2].y, multiProduct[2].u[1]) annotation (
-        Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {3.15, -60}}, color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
       connect(integrator1[3].y, multiProduct[3].u[1]) annotation (
-        Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {3.15, -60}}, color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
       connect(integrator1[4].y, multiProduct[4].u[1]) annotation (
-        Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {3.15, -60}}, color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
       connect(integrator1[5].y, multiProduct[5].u[1]) annotation (
-        Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {3.15, -60}}, color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
       connect(multiProduct[5].y, multiSum1.u[5]) annotation (
         Line(points = {{0, -73.02}, {0, -76}, {0, -80}, {-5.6, -80}}, color = {0, 0, 127}));
       connect(multiProduct[4].y, multiSum1.u[4]) annotation (
@@ -898,15 +906,15 @@ Strategy")}),
       connect(multiProduct[1].y, multiSum1.u[1]) annotation (
         Line(points = {{0, -73.02}, {0, -76}, {0, -80}, {5.6, -80}}, color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[5].u[2]) annotation (
-        Line(points = {{79, 50}, {60, 50}, {60, -60}, {1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[4].u[2]) annotation (
-        Line(points = {{79, 50}, {60, 50}, {60, -60}, {1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[3].u[2]) annotation (
-        Line(points = {{79, 50}, {60, 50}, {60, -60}, {1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[2].u[2]) annotation (
-        Line(points = {{79, 50}, {60, 50}, {60, -60}, {1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[1].u[2]) annotation (
-        Line(points = {{79, 50}, {60, 50}, {60, -60}, {1.05, -60}}, color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
       connect(multiSum1.y, PRC) annotation (
         Line(points = {{0, -101.7}, {-0.5, -101.7}, {-0.5, -100}, {60, -100}, {60, -80}, {110, -80}}, color = {0, 0, 127}));
       connect(Tset.y, lRM_Temp[5].Tset) annotation (
@@ -929,6 +937,16 @@ Strategy")}),
         Line(points = {{-101.95, 0.05}, {-70, 0.05}, {-70, 0}, {-50, 0}, {-50, 76.5}, {-40, 76.5}, {-40, 76.8}}, color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.TRoom5Mea, lRM_Temp[5].T) annotation (
         Line(points = {{-101.95, 0.05}, {-96, 0.05}, {-96, 0}, {-50, 0}, {-50, 76.5}, {-40, 76.5}, {-40, 76.8}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(const1.y, multiProduct[1].u[4]) annotation (Line(points={{79,12},{68,12},
+              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
+              connect(const1.y, multiProduct[2].u[4]) annotation (Line(points={{79,12},{68,12},
+              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
+              connect(const1.y, multiProduct[3].u[4]) annotation (Line(points={{79,12},{68,12},
+              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
+              connect(const1.y, multiProduct[4].u[4]) annotation (Line(points={{79,12},{68,12},
+              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
+              connect(const1.y, multiProduct[5].u[4]) annotation (Line(points={{79,12},{68,12},
+              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
       annotation (
         Line(points = {{79, -32}, {74, -32}, {74, -34}, {60, -34}, {60, -52}, {-2.4, -52}, {-2.4, -50}, {0.525, -50}}, color = {0, 0, 127}),
         Icon(coordinateSystem(initialScale = 0.1), graphics={  Text(lineColor = {0, 0, 255}, extent = {{-150, 110}, {150, 150}}, textString = ""), Text(extent = {{-100, 52}, {5, 92}}, textString = ""), Text(extent = {{-100, -92}, {5, -52}}, textString = ""), Rectangle(fillColor = {215, 215, 215},
@@ -2496,4 +2514,7 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
 </html>"));
     end CCCSBus;
   end BaseClasses;
+  annotation (Documentation(info="<html>
+<p>This package contains models according to the evaluation method &quot;Cost Coefficient for Control Strategies&quot;  as developed in the master thesis &quot;Simulation-based evaluation of control strategies using the example of the energy supply system of the experimental hall E.ON&quot; by M. Spelter</p>
+</html>"));
 end CCCS;

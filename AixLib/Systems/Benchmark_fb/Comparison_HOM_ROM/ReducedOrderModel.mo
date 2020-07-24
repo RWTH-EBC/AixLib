@@ -1,5 +1,5 @@
 within AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM;
-model ThermalZone_MultipleRooms
+model ReducedOrderModel
    extends Modelica.Icons.Example;
 
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
@@ -32,11 +32,11 @@ model ThermalZone_MultipleRooms
     iconTransformation(extent={{-70,-12},{-50,8}})));
   BaseClasses.BaseClasses_ThermalZone.thermalZone_Benchmark
     thermalZone_Benchmark[5](redeclare package Medium = Media.Air, zoneParam={
-        AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
-        AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
+       AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
+       AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
         AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_ConferenceRoom(),
-        AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
-        AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice()})
+       AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
+      AixLib.Systems.Benchmark_fb.Comparison_HOM_ROM.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice()})
     annotation (Placement(transformation(extent={{-36,-32},{40,32}})));
 equation
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -110,5 +110,8 @@ equation
     annotation (Line(points={{11,-16},{10,-16},{10,16.4}}, color={0,0,127}),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=4838400, Interval=300));
-end ThermalZone_MultipleRooms;
+    experiment(StopTime=86400, Interval=300),
+    Documentation(info="<html>
+<p>Reduced order models of the rooms of the benchmark building based on the model ThermalZone</p>
+</html>"));
+end ReducedOrderModel;
