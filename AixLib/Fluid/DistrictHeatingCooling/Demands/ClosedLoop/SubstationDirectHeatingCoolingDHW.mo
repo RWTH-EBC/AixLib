@@ -76,12 +76,12 @@ public
         iconTransformation(extent={{210,-10},{230,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
       redeclare package Medium2 = Medium,
-    dp1_nominal=dp_nominal,
-    dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
     show_T=true,
     etaCarnot_nominal=0.5,
-    QCon_flow_nominal=heatDemand_max)
+    QCon_flow_nominal=heatDemand_max,
+    dp1_nominal=0,
+    dp2_nominal=0)
     annotation (Placement(transformation(extent={{104,4},{84,-16}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-196,104},{-180,120}})));
@@ -107,8 +107,8 @@ public
         transformation(extent={{-290,92},{-250,132}}),
                                                     iconTransformation(extent={{-180,22},
             {-140,62}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
   Modelica.Blocks.Sources.Constant const4(k=T_supplyDHWSet)
     annotation (Placement(transformation(extent={{192,-150},{172,-130}})));
@@ -178,6 +178,10 @@ public
     annotation (Placement(transformation(extent={{-76,46},{-56,66}})));
   Modelica.Blocks.Sources.Constant const3(k=m_flow_nominal)
     annotation (Placement(transformation(extent={{-104,12},{-92,24}})));
+  Modelica.Blocks.Math.Max max3
+    annotation (Placement(transformation(extent={{20,68},{40,88}})));
+  Modelica.Blocks.Sources.Constant const6(k=0.1*m_flow_nominal)
+    annotation (Placement(transformation(extent={{26,114},{38,126}})));
 equation
 
   connect(port_a,vol. ports[1])
@@ -282,12 +286,16 @@ equation
           {134,-1},{142,-1},{142,0},{152,0}}, color={0,127,255}));
   connect(max1.y, mass_flow_heatExchangerHeating1.u1)
     annotation (Line(points={{-101,64},{-78,64}}, color={0,0,127}));
-  connect(mass_flow_heatExchangerHeating1.y, pumpHeating.m_flow_in) annotation
-    (Line(points={{-55,56},{-46,56},{-46,26},{-54,26},{-54,12}}, color={0,0,127}));
   connect(booleanStep.y, mass_flow_heatExchangerHeating1.u2) annotation (Line(
         points={{-105.4,38},{-92,38},{-92,56},{-78,56}}, color={255,0,255}));
-  connect(const3.y, mass_flow_heatExchangerHeating1.u3) annotation (Line(points
-        ={{-91.4,18},{-84,18},{-84,48},{-78,48}}, color={0,0,127}));
+  connect(const3.y, mass_flow_heatExchangerHeating1.u3) annotation (Line(points=
+         {{-91.4,18},{-84,18},{-84,48},{-78,48}}, color={0,0,127}));
+  connect(max3.u2, mass_flow_heatExchangerHeating1.y) annotation (Line(points={
+          {18,72},{-18,72},{-18,56},{-55,56}}, color={0,0,127}));
+  connect(const6.y, max3.u1) annotation (Line(points={{38.6,120},{68,120},{68,
+          100},{4,100},{4,84},{18,84}}, color={0,0,127}));
+  connect(max3.y, pumpHeating.m_flow_in) annotation (Line(points={{41,78},{64,
+          78},{64,36},{-54,36},{-54,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,
             -160},{220,160}}),
                          graphics={
