@@ -20,8 +20,8 @@ model PumpSpeedControlledTest
   Modelica.Blocks.Sources.BooleanPulse    PumpOn(period=600, width=500/600*100)
     annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
   Modelica.Blocks.Sources.Ramp rampPumpSpeed(
-    height=pump.pumpParam.nMax - pump.pumpParam.nMin,
-    offset=pump.pumpParam.nMin,
+    height=pump.pumpParam.nMax - pump.pumpParam.nMin + 200,
+    offset=pump.pumpParam.nMin - 100,
     duration(displayUnit="s") = 100,
     startTime(displayUnit="s") = 100)
     annotation (Placement(transformation(extent={{46,30},{26,50}})));
@@ -70,7 +70,7 @@ equation
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{48,
           10},{48,-30},{-20,-30}}, color={0,127,255}));
   annotation (
-    experiment(Tolerance=1e-4,StopTime=600),
+    experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.

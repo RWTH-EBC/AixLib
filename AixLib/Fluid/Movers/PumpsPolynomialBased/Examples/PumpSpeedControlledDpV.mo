@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
-model PumpSpeedControlledDpVTest
+model PumpSpeedControlledDpV
   "Testing the pump dp-var algorithm with the new \"one record\" pump model with internal speed limitation (instead of pump head limitation)."
   extends Modelica.Icons.Example;
 
@@ -36,9 +36,8 @@ model PumpSpeedControlledDpVTest
   Controls.CtrlDpVarN ctrlDpVarN(pumpParam=
         DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4())
     annotation (Placement(transformation(extent={{-10,26},{10,46}})));
-  BaseClasses.PumpBus pumpControllerBus1 annotation (Placement(transformation(
-          extent={{-10,50},{10,70}}), iconTransformation(extent={{-24,34},{-4,
-            54}})));
+  BaseClasses.PumpBus pumpBus annotation (Placement(transformation(extent={{-10,
+            50},{10,70}}), iconTransformation(extent={{-24,34},{-4,54}})));
 equation
   connect(rampValvePosition.y, simpleValve.opening)
     annotation (Line(points={{-21,-60},{-30,-60},{-30,-38}}, color={0,0,127}));
@@ -52,7 +51,7 @@ equation
       points={{0,20},{0,26}},
       color={255,204,51},
       thickness=0.5));
-  connect(ctrlDpVarN.pumpControllerBus, pumpControllerBus1) annotation (Line(
+  connect(ctrlDpVarN.pumpControllerBus, pumpBus) annotation (Line(
       points={{0,46},{0,60}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -60,14 +59,14 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(PumpOn.y, pumpControllerBus1.onSet) annotation (Line(points={{-59,50},
-          {-30,50},{-30,60.05},{0.05,60.05}}, color={255,0,255}), Text(
+  connect(PumpOn.y, pumpBus.onSet) annotation (Line(points={{-59,50},{-30,50},{
+          -30,60.05},{0.05,60.05}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   annotation (
-      experiment(Tolerance=1e-4,StopTime=600),
+      experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -122,7 +121,7 @@ equation
   pump speed might be bound to its limits only.
 </p>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpNdpVarControlTest.mos"
+    __Dymola_Commands(file(ensureSimulated=true) =
+        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledDpV.mos"
         "Simulate and plot"));
-end PumpSpeedControlledDpVTest;
+end PumpSpeedControlledDpV;

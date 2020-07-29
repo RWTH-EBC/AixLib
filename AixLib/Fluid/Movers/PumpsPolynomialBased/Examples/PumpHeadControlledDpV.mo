@@ -70,7 +70,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   annotation (
-      experiment(Tolerance=1e-4,StopTime=600),
+      experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -99,7 +99,7 @@ equation
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHdpVarControlTest.mos"
+    __Dymola_Commands(file(ensureSimulated=true) =
+        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlledDpV.mos"
         "Simulate and plot"));
 end PumpHeadControlledDpV;
