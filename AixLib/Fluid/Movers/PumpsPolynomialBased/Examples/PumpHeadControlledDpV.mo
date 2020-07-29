@@ -6,7 +6,7 @@ model PumpHeadControlledDpV
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpHeadControlled pump(
-    m_flow_nominal=1,
+    m_flow_nominal=m_flow_nominal,
     calculatePower=true,
     calculateEfficiency=true,
     redeclare package Medium = Medium,
@@ -21,7 +21,7 @@ model PumpHeadControlledDpV
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
     Kvs=6.3,
-    m_flow_small=0.001)
+    m_flow_small=1E-4*m_flow_nominal)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
@@ -42,6 +42,7 @@ model PumpHeadControlledDpV
   BaseClasses.PumpBus pumpControllerBus1
     annotation (Placement(transformation(extent={{-10,50},{10,70}}),
         iconTransformation(extent={{-34,38},{-14,58}})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
 equation
   connect(rampValvePosition.y, simpleValve.opening)
     annotation (Line(points={{-21,-60},{-30,-60},{-30,-38}}, color={0,0,127}));
@@ -99,7 +100,7 @@ equation
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true) =
+    __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlledDpV.mos"
         "Simulate and plot"));
 end PumpHeadControlledDpV;
