@@ -6,7 +6,7 @@ model PumpSpeedControlledTest
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpSpeedControlled pump(
-    m_flow_nominal=1,
+    m_flow_nominal=m_flow_nominal,
     pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4(),
     calculatePower=true,
     calculateEfficiency=true,
@@ -28,7 +28,7 @@ model PumpSpeedControlledTest
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
     Kvs=6.3,
-    m_flow_small=0.001)
+    m_flow_small=1E-4*m_flow_nominal)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
@@ -43,6 +43,7 @@ model PumpSpeedControlledTest
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-36,20})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
 equation
   connect(pumpBus, pump.pumpBus) annotation (Line(
       points={{0,40},{0,20}},
@@ -104,7 +105,7 @@ equation
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
+    __Dymola_Commands(file=
         "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledTest.mos"
         "Simulate and plot"));
 end PumpSpeedControlledTest;

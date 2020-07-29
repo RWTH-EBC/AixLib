@@ -6,7 +6,7 @@ model PumpSpeedControlledDpV
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpSpeedControlled                                                    pump(
-    m_flow_nominal=1,
+    m_flow_nominal=m_flow_nominal,
     calculatePower=true,
     calculateEfficiency=true,
     redeclare package Medium = Medium,
@@ -17,7 +17,7 @@ model PumpSpeedControlledDpV
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
-    m_flow_small=0.001,
+    m_flow_small=1E-4*m_flow_nominal,
     Kvs=6.3)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
@@ -38,6 +38,7 @@ model PumpSpeedControlledDpV
     annotation (Placement(transformation(extent={{-10,26},{10,46}})));
   BaseClasses.PumpBus pumpBus annotation (Placement(transformation(extent={{-10,
             50},{10,70}}), iconTransformation(extent={{-24,34},{-4,54}})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
 equation
   connect(rampValvePosition.y, simpleValve.opening)
     annotation (Line(points={{-21,-60},{-30,-60},{-30,-38}}, color={0,0,127}));
@@ -121,7 +122,7 @@ equation
   pump speed might be bound to its limits only.
 </p>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true) =
+    __Dymola_Commands(file=
         "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledDpV.mos"
         "Simulate and plot"));
 end PumpSpeedControlledDpV;
