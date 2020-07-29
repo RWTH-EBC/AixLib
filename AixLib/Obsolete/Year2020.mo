@@ -183,20 +183,59 @@ package Year2020
               extent={{-14,-12},{14,12}},
               rotation=270,
               origin={-72,-60})));
-        Fluid.Storage.BaseClasses.StorageCover                  top_cover(
-          D1=data.dTank)   annotation (Placement(transformation(
+      Fluid.Storage.BaseClasses.StorageCover top_cover(
+          final D1=data.dTank,
+          final sWall=data.sWall,
+          final sIns=data.sIns,
+          final lambdaWall=data.lambdaWall,
+          final lambdaIns=data.lambdaIns,
+          final hConIn=hConIn,
+          final hConOut=hConOut,
+          final TStartWall=T_start_wall,
+          final TStartIns=T_start_ins,
+          final rhoIns=data.rhoIns,
+          final cIns=data.cIns,
+          final rhoWall=data.rhoWall,
+          final cWall=data.cWall) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={2,70})));
         Fluid.Storage.BaseClasses.StorageMantle                  storage_mantle[n](
-          each height=data.hTank/n,
-          each D1=data.dTank)
-          annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-        Fluid.Storage.BaseClasses.StorageCover                  bottom_cover(
-          D1=data.dTank)   annotation (Placement(transformation(
+          each final lambdaWall=data.lambdaWall,
+          each final lambdaIns=data.lambdaIns,
+          each final TStartWall=T_start_wall,
+          each final TStartIns=T_start_ins,
+          each final rhoIns=data.rhoIns,
+          each final cIns=data.cIns,
+          each final rhoWall=data.rhoWall,
+          each final cWall=data.cWall,
+          each final height=data.hTank/n,
+          each final D1=data.dTank,
+          each final sWall=data.sWall,
+          each final sIns=data.sIns,
+          each final hConIn=hConIn,
+          each final hConOut=hConOut)
+          annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+        Fluid.Storage.BaseClasses.StorageCover bottom_cover(
+          final lambdaWall=data.lambdaWall,
+          final lambdaIns=data.lambdaIns,
+          final hConIn=hConIn,
+          final hConOut=hConOut,
+          final TStartWall=T_start_wall,
+          final TStartIns=T_start_ins,
+          final rhoIns=data.rhoIns,
+          final cIns=data.cIns,
+          final rhoWall=data.rhoWall,
+          final cWall=data.cWall,
+          final D1=data.dTank,
+          final sWall=data.sWall,
+          final sIns=data.sIns)
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
-              origin={0,-46})));
+              origin={0,-38})));
+
+
         HeatTransfer heatTransfer(final Medium=medium,final data=data,
           final n=n) annotation (Placement(
               transformation(extent={{-8,18},{12,38}}, rotation=0)));
