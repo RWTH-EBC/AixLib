@@ -1,6 +1,6 @@
 ﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
-model PumpNdpVarControlTest
-  "testing the pump dp-var algorithm with the new \"one record\" pump model with internal speed limitation (instead of pump head limitation)."
+model PumpSpeedControlledDpVTest
+  "Testing the pump dp-var algorithm with the new \"one record\" pump model with internal speed limitation (instead of pump head limitation)."
   extends Modelica.Icons.Example;
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
@@ -124,13 +124,5 @@ equation
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
         "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpNdpVarControlTest.mos"
-        "Simulate and plot"),
-    Diagram(graphics={Text(
-          extent={{-82,94},{80,66}},
-          lineColor={100,100,100},
-          horizontalAlignment=TextAlignment.Left,
-          textString="* Tests PumpN model (speed controlled pump with controller block)
-* Tests dp-var control (PumpN version, \"dynamic\" calculation)
-* Tests system pressure drop change (ramp)
-* Tests pump off-switch")}));
-end PumpNdpVarControlTest;
+        "Simulate and plot"));
+end PumpSpeedControlledDpVTest;

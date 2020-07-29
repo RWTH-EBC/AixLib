@@ -106,13 +106,5 @@ equation
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
         "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledTest.mos"
-        "Simulate and plot"),
-    Diagram(graphics={Text(
-          extent={{-82,94},{80,66}},
-          lineColor={100,100,100},
-          horizontalAlignment=TextAlignment.Left,
-          textString="* Tests PumpPhysicsN model (speed control)
-* Tests pump speed increase (ramp)
-* Tests pump off-switch
-* Tests system pressure drop change (ramp)")}));
+        "Simulate and plot"));
 end PumpSpeedControlledTest;

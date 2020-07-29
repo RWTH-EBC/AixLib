@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
-model PumpHdpVarControlTest
+model PumpHeadControlledDpV
   "testing the pump dp-var algorithm with the new \"one record\" pump model."
   extends Modelica.Icons.Example;
 
@@ -101,13 +101,5 @@ equation
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
         "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHdpVarControlTest.mos"
-        "Simulate and plot"),
-    Diagram(graphics={Text(
-          extent={{-82,94},{80,66}},
-          lineColor={100,100,100},
-          horizontalAlignment=TextAlignment.Left,
-          textString="* Tests PumpH model (head controlled pump with controller block)
-* Tests dp-var control (PumpH version, numerical values)
-* Tests system pressure drop change (ramp)
-* Tests pump off-switch")}));
-end PumpHdpVarControlTest;
+        "Simulate and plot"));
+end PumpHeadControlledDpV;
