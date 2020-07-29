@@ -389,7 +389,7 @@ connect(heatingRod, layer[n_HR].port);
       color={176,0,0},
       smooth=Smooth.None));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+    Diagram(obsolete = "Obsolete model - use AixLib.FastHVAC.Components.Storage.HeatStorageVariablePorts instead", coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=3.1536e+007, Interval=600),
     __Dymola_experimentSetupOutput(events=false),
