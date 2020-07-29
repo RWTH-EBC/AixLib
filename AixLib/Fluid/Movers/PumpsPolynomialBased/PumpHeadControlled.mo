@@ -60,7 +60,10 @@ model PumpHeadControlled
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
 
-  final parameter Modelica.SIunits.Density rho_default=1000 "Default medium density";
+  final parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default) "Default medium density";
 
   // Power and Efficiency
   parameter Boolean calculatePower=true "calc. power consumption?" annotation (
@@ -72,8 +75,7 @@ model PumpHeadControlled
       enable=calculate_Power));
   replaceable function efficiencyCharacteristic =
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency
-    constrainedby
-    AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
+    constrainedby AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
     "eta = f(H, Q, P)" annotation (Dialog(
       tab="General",
       group="Power and Efficiency",
@@ -212,23 +214,23 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,
-          76},{-66,93},{0.5975,93},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,76},{-66,93},{0.5975,93},{0.5975,100.597}},
+                                                      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{95,20},{96,20},{
-          96,90},{0.5975,90},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{95,20},{96,20},{96,90},{0.5975,90},{0.5975,100.597}},
+                                                color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},
-          {-62,60},{-62,100.597},{0.5975,100.597}},     color={0,0,127}), Text(
+  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},{-62,60},{-62,100.597},{0.5975,100.597}},
+                                                        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(onOff.u2, pumpBus.onSet) annotation (Line(points={{46,20},{38,20},{38,
-          100.597},{0.5975,100.597}}, color={255,0,255}), Text(
+  connect(onOff.u2, pumpBus.onSet) annotation (Line(points={{46,20},{38,20},{38,100.597},{0.5975,100.597}},
+                                      color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -244,14 +246,14 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
 
-  connect(variableLimiter.u, pumpBus.dpSet) annotation (Line(points={{-12,20},{
-          -19,20},{-19,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(variableLimiter.u, pumpBus.dpSet) annotation (Line(points={{-12,20},{-19,20},{-19,100.597},{0.5975,100.597}},
+                                                   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(realExpression.y, pumpBus.rpmMea) annotation (Line(points={{30,44},{
-          30,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(realExpression.y, pumpBus.rpmMea) annotation (Line(points={{30,44},{30,100.597},{0.5975,100.597}},
+                                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
