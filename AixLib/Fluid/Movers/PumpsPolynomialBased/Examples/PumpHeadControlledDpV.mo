@@ -100,7 +100,7 @@ equation
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
+    __Dymola_Commands(file=
         "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlledDpV.mos"
         "Simulate and plot"));
 end PumpHeadControlledDpV;
