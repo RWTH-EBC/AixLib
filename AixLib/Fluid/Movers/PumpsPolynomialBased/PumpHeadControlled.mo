@@ -85,7 +85,7 @@ model PumpHeadControlled
   Modelica.SIunits.Pressure dp_pump  "Pressure increase";
   Modelica.Blocks.Interfaces.RealOutput head(
     quantity="Length",
-    unit="m") = dp_pump/(rho_default*Modelica.Constants.g_n) "Pump head";
+    unit="m") "Pump head";
   Modelica.SIunits.AngularVelocity n "pump speed calculated from volume flow and head n=f(Q,H)";
   Modelica.Blocks.Interfaces.RealOutput power(quantity="Power", unit="W")
     "electical power";
@@ -167,7 +167,7 @@ equation
     annotation (Line(points={{-77,20},{-77,45},{-79,45}}, color={0,0,127}));
 
   head = onOff.y "safe head after limiting and other checks.";
-
+  dp_pump = head * rho_default * Modelica.Constants.g_n;
   //Calculate power and Efficiency
   if pumpBus.onSet and head >
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
