@@ -15,7 +15,7 @@ If you have any questions regarding **AixLib**, feel free to contact us at aixli
 ## Clone repository
 
 * To clone the repository for the first time run:  
-  ``git clone --recurse-submodules https://github.com/lbl-srg/BuildingsPy.git``
+  ``git clone --recurse-submodules https://github.com/RWTH-EBC/AixLib.git``
 * If you have already cloned the repository, run:  
   ``git submodule update --init --recursive``
 
