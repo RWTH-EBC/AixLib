@@ -1,9 +1,9 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model GenericPipe
   "Pipe model that includes several selectable pipe models"
 
   Utilities.HeatTransfer.HeatConv heatConv(hCon=hCon, final A=Modelica.Constants.pi
-        *parameterPipe.d_o*length)
+        *parameterPipe.d_o*length) if withConvection
     "Convection from insulation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -15,20 +15,26 @@ model GenericPipe
               choice="PlugFlowPipe"),Dialog(enable=true, group="Parameters"));
 
 
-  parameter Modelica.SIunits.Length length(min=0) "Pipe length";
-
-  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
-    "Initialization temperature at pipe inlet"
-    annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
-    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
   parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(group="Parameters"));
+
+  parameter Modelica.SIunits.Length length(min=0) "Pipe length";
+
+  parameter Boolean withInsulation=true "Pipe with or without insulation" annotation (Dialog(group="Heat Transfer"),choices(checkBox=true));
+
   parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition parameterIso=
-      AixLib.DataBase.Pipes.Insulation.Iso0pc() "Insulation Type"
-    annotation (choicesAllMatching=true, Dialog(group="Parameters"));
+      AixLib.DataBase.Pipes.Insulation.Iso50pc() "Insulation Type"
+    annotation (choicesAllMatching=true, Dialog(enable=withInsulation==true,group="Heat Transfer"));
+
+  parameter Boolean withConvection=true "convectional heat transfer" annotation (Dialog(group="Heat Transfer"),choices(checkBox=true));
+
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=4
+    "Convection heat transfer coeffient" annotation (choicesAllMatching=true, Dialog(enable=withConvection==true,group="Heat Transfer"));
+
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
 
   // Advanced
@@ -41,8 +47,6 @@ model GenericPipe
     "Average height of surface asperities (default: smooth steel pipe)"
                                                                        annotation (Dialog(tab="Advanced"));
   parameter Integer nNodes=3 "Spatial segmentation for SimplePipe" annotation (Dialog(tab="Advanced", enable=pipeModel=="SimplePipe"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=4
-    "Convection heat transfer coeffient" annotation (Dialog(tab="Advanced"));
 
 
   // Assumptions
@@ -53,7 +57,10 @@ model GenericPipe
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
-
+  // Initialization
+  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
+    "Initialization temperature at pipe inlet"
+    annotation (Dialog(tab="Initialization"));
 
   PlugFlowPipe plugFlowPipe(
     redeclare final package Medium = Medium,
@@ -106,10 +113,20 @@ model GenericPipe
     final lambda=parameterIso.lambda,
     final T0=T_start,
     final rho=parameterIso.d,
-    final nParallel=1)
+    final nParallel=1) if withInsulation
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughInsulation(final m=1) if
+       not withInsulation annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={-32,42})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughInsulation1(final m=1) if not
+    withConvection        annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={-32,68})));
 equation
   connect(simplePipe.heatPorts, thermalCollector.port_a) annotation (Line(
       points={{0,-14.8},{0,4},{-1.33227e-15,4}},
@@ -144,6 +161,24 @@ equation
 //          visible=pipeModel=="PlugFlowPipe",
   connect(Insulation.port_b, heatConv.port_b)
     annotation (Line(points={{0,48.8},{0,60}}, color={191,0,0}));
+  connect(plugFlowPipe.heatPort, thermalPassthroughInsulation.port_a[1])
+    annotation (Line(
+      points={{0,-50},{-32,-50},{-32,32}},
+      color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(thermalCollector.port_b, thermalPassthroughInsulation.port_a[1])
+    annotation (Line(
+      points={{1.33227e-15,24},{-32,24},{-32,32}},
+      color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(thermalPassthroughInsulation.port_b, thermalPassthroughInsulation1.port_a[
+    1]) annotation (Line(points={{-32,52},{-32,58}}, color={191,0,0}));
+  connect(thermalPassthroughInsulation1.port_b, heatPort)
+    annotation (Line(points={{-32,78},{-32,100},{0,100}}, color={191,0,0}));
+  connect(thermalPassthroughInsulation.port_b, heatConv.port_b) annotation (
+      Line(points={{-32,52},{0,52},{0,60},{-1.77636e-15,60}}, color={191,0,0}));
+  connect(Insulation.port_b, thermalPassthroughInsulation1.port_a[1])
+    annotation (Line(points={{0,48.8},{0,56},{-32,56},{-32,58}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,32},{100,-32}},
@@ -213,6 +248,7 @@ equation
   unphysical heat transfer (e.g. peaks that increase the temperature
   above or below the allowed range) for small volume flow rates.
 </p>
+</html>", revisions="<html>
 <ul>
   <li>Mai 14, 2020, by Alexander Kümpel:<br/>
     First implementation
