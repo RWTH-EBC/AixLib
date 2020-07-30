@@ -99,8 +99,7 @@ public
     unit="m",
     min=0,
     max=constHmax,
-    nominal=constHnom) = dp_pump/(rho_default*Modelica.Constants.g_n)
-    "Pump head";
+    nominal=constHnom) "Pump head";
   Modelica.Blocks.Interfaces.RealOutput n(
     nominal=Nnom,
     min=0,
@@ -207,7 +206,7 @@ equation
 
   // without damping: onOff.y
   head = criticalDamping.y "safe head after limiting and other checks.";
-
+  dp_pump = head  * rho_default * Modelica.Constants.g_n;
   //Calculate power and Efficiency
   if calculatePower then
     power =if n >= pumpParam.nMin*0.9 and pumpBus.onSet and Vflow_m3h.y >
