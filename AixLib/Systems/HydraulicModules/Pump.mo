@@ -86,24 +86,6 @@ equation
   connect(pipe3.heatPort, prescribedTemperature.port)
     annotation (Line(points={{0,-50},{0,-20},{32,-20}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
-        Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={175,175,175},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Dash),
-        Text(
-          extent={{-86,-68},{86,-94}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="Pump"),
-        Line(
-          points={{-90,60},{-84,60},{-84,60},{84,60},{84,60},{90,60}},
-          color={0,128,255},
-          thickness=0.5),
         Ellipse(
           extent={{-20,80},{20,40}},
           lineColor={135,135,135},
@@ -146,49 +128,12 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="T"),
-        Ellipse(
-          extent={{62,-38},{78,-54}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
         Text(
-          extent={{62,-38},{78,-54}},
-          lineColor={216,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="T"),
-        Line(points={{70,-54},{70,-60}}, color={0,0,0}),
-        Ellipse(
-          extent={{-78,-38},{-62,-54}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-78,-38},{-62,-54}},
-          lineColor={216,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="T"),
-        Line(points={{-70,-54},{-70,-60}}, color={0,0,0}),
-        Ellipse(
-          extent={{-78,82},{-62,66}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-78,82},{-62,66}},
-          lineColor={216,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="T"),
-        Line(points={{-70,66},{-70,60}},
-                                       color={0,0,0}),
-        Text(
-          extent={{-78,60},{-62,42}},
+          extent={{-56,60},{-40,42}},
           lineColor={135,135,135},
           textString="1"),
         Text(
-          extent={{40,62},{56,44}},
+          extent={{40,60},{56,42}},
           lineColor={135,135,135},
           textString="2"),
         Text(

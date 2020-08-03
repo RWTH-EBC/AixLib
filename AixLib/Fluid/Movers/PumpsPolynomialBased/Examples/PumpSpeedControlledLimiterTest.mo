@@ -61,9 +61,8 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(PumpOn.y, pumpBus.onOff_Input) annotation (Line(points={{-49,40},{-28,
-          40},{-28,40},{-14,40},{-14,40.05},{0.05,40.05}}, color={255,0,255}),
-      Text(
+  connect(PumpOn.y, pumpBus.onSet) annotation (Line(points={{-49,40},{-28,40},{
+          -28,40},{-14,40},{-14,40.05},{0.05,40.05}}, color={255,0,255}), Text(
       string="%second",
       index=2,
       extent={{6,3},{6,3}}));
@@ -75,8 +74,8 @@ equation
           10},{48,-30},{-20,-30}}, color={0,127,255}));
   connect(tableValvePosition.y[1], simpleValve.opening)
     annotation (Line(points={{-21,-62},{-30,-62},{-30,-38}}, color={0,0,127}));
-  connect(tablePumpSpeed.y[1], pumpBus.rpm_Input) annotation (Line(points={{25,
-          40},{12,40},{12,40.05},{0.05,40.05}}, color={0,0,127}), Text(
+  connect(tablePumpSpeed.y[1], pumpBus.rpmSet) annotation (Line(points={{25,40},
+          {12,40},{12,40.05},{0.05,40.05}}, color={0,0,127}), Text(
       string="%second",
       index=2,
       extent={{6,3},{6,3}}));

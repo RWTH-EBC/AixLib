@@ -24,7 +24,18 @@ partial model PartialMultizone "Partial model for multizone models"
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   replaceable model thermalZone =
-      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
+      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange (
+      each recOrSep=recOrSep,
+      each Heater_on=Heater_on,
+      each h_heater=h_heater,
+      each l_heater=l_heater,
+      each KR_heater=KR_heater,
+      each TN_heater=TN_heater,
+      each Cooler_on=Cooler_on,
+      each h_cooler=h_cooler,
+      each l_cooler=l_cooler,
+      each KR_cooler=KR_cooler,
+      each TN_cooler=TN_cooler)
     constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
     "Thermal zone model"
@@ -45,14 +56,14 @@ partial model PartialMultizone "Partial model for multizone models"
     displayUnit="degC") if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
-    iconTransformation(extent={{80,29},{100,48}})));
+        iconTransformation(extent={{80,19},{100,40}})));
   Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") if ASurTot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
-    iconTransformation(extent={{80,7},{100,26}})));
+        iconTransformation(extent={{80,0},{100,20}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
@@ -62,14 +73,15 @@ partial model PartialMultizone "Partial model for multizone models"
        ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
-    iconTransformation(extent={{-90,-80},{-70,-60}})));
+        iconTransformation(extent={{-90,-92},{-70,-72}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
        ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
-    iconTransformation(extent={{-90,-46},{-70,-26}})));
+        iconTransformation(extent={{-90,-60},{-70,-40}})));
   thermalZone zone[numZones](
     final zoneParam=zoneParam,
     redeclare each final model corG=corG,
+    each final internalGainsMode=internalGainsMode,
     each final nPorts=nPorts,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
@@ -84,7 +96,107 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(transformation(extent={{38,49},{
     80,90}})));
 
+  parameter Integer internalGainsMode
+    "Decides which internal gains model for persons is used";
+  parameter Boolean recOrSep=true "Use record or seperate parameters"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice =  false
+        "Seperate",choice = true "Record",radioButtons = true));
+  parameter Boolean Heater_on=true "Activates the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real KR_heater=1000 "Gain of the heating controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater=1
+    "Time constant of the heating controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Boolean Cooler_on=true "Activates the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real KR_cooler=1000 "Gain of the cooling controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler=1
+    "Time constant of the cooling controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+  Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) "Set point for heater - used only if zoneParam[i].HeaterOn is true"
+    annotation (Placement(transformation(
+    extent={{20,-20},{-20,20}},
+    rotation=270,
+    origin={-40,-100}), iconTransformation(
+    extent={{10,-10},{-10,10}},
+    rotation=270,
+    origin={-52,-110})));
+  Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) "Set point for cooler - used only if zoneParam[i].CoolerOn is true"
+    annotation (Placement(transformation(
+    extent={{20,-20},{-20,20}},
+    rotation=270,
+    origin={-80,-100}), iconTransformation(
+    extent={{10,-10},{-10,10}},
+    rotation=270,
+    origin={-74,-110})));
+  Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](final quantity="HeatFlowRate",
+      final unit="W")
+    "Power for heating"
+    annotation (
+    Placement(transformation(extent={{100,-56},{120,-36}}),
+    iconTransformation(extent={{80,-80},{100,-60}})));
+  Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](final quantity="HeatFlowRate",
+      final unit="W")
+    "Power for cooling"
+    annotation (
+    Placement(transformation(extent={{100,-70},{120,-50}}),iconTransformation(
+    extent={{80,-100},{100,-80}})));
 equation
+  // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
+  if not (ASurTot > 0 or VAir > 0) then
+    PHeater[:] = fill(0, numZones);
+    PCooler[:] = fill(0, numZones);
+  end if;
+  // if ideal heating and/or cooling is set by seperate values
+  if (ASurTot > 0 or VAir > 0) and not recOrSep then
+    if Heater_on then
+      connect(zone.PHeater, PHeater);
+    else
+      PHeater[:] = fill(0, numZones);
+    end if;
+    if Cooler_on then
+      connect(zone.PCooler, PCooler);
+    else
+      PCooler[:] = fill(0, numZones);
+    end if;
+  // if ideal heating or cooling is set by record
+  elseif (ASurTot > 0 or VAir > 0) and recOrSep then
+    for i in 1:numZones loop
+      if zoneParam[i].HeaterOn then
+        connect(zone[i].PHeater, PHeater[i]);
+      else
+        PHeater[i] = 0;
+      end if;
+      if zoneParam[i].CoolerOn then
+        connect(zone[i].PCooler, PCooler[i]);
+      else
+        PCooler[i] = 0;
+      end if;
+    end for;
+  end if;
+
+
+
+
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
         points={{76,-100},{76,50.64},{75.8,50.64}},
@@ -111,6 +223,12 @@ equation
           90,67.45},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}},
                                                                    color={191,0,
           0}));
+  connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-40,-100},{69.5,
+          -100},{69.5,51.05}},
+                         color={0,0,127}));
+  connect(TSetCool, zone.TSetCool) annotation (Line(points={{-80,-100},{64.88,
+          -100},{64.88,51.05}},
+                          color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),

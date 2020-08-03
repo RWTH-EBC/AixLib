@@ -54,8 +54,11 @@ record OPH_1_Office "Office zone of office building"
     wfWall={0.2,0.2,0.2,0.2,0.1},
     wfWin={0.25,0.25,0.25,0.25,0},
     wfGro=0.1,
-    internalGainsPeopleSpecific=3.5,
+    specificPeople=1/14,
+    activityDegree=1.2,
+    fixedHeatFlowRatePersons=70,
     ratioConvectiveHeatPeople=0.5,
+    internalGainsMoistureNoPeople=0.5,
     internalGainsMachinesSpecific=7.0,
     ratioConvectiveHeatMachines=0.6,
     lightingPowerSpecific=12.5,
@@ -81,7 +84,7 @@ record OPH_1_Office "Office zone of office building"
     CoolerOn=false,
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
-    withIdealThresholds=true);
+    withIdealThresholds=false);
   annotation (Documentation(revisions="<html>
  <ul>
   <li>

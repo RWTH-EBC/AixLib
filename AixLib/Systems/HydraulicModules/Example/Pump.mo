@@ -68,15 +68,16 @@ equation
     annotation (Line(points={{20,60},{28,60},{28,40}},     color={0,127,255}));
   connect(hydRes.port_a, Unmixed.port_b1)
     annotation (Line(points={{0,60},{-8,60},{-8,40}},    color={0,127,255}));
-  connect(RPM_ramp.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={
-          {-79,10},{-60,10},{-60,10.05},{-41.95,10.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(boundary.ports[1], Unmixed.port_a1)
     annotation (Line(points={{-8,-40},{-8,-20}}, color={0,127,255}));
   connect(boundary1.ports[1], Unmixed.port_b2)
     annotation (Line(points={{28,-40},{28,-20},{28,-20}}, color={0,127,255}));
+  connect(RPM_ramp.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{
+          -79,10},{-60,10},{-60,10.05},{-41.95,10.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
     annotation (Placement(transformation(extent={{80,80},{100,100}})),
               Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,

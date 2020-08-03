@@ -1,14 +1,13 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 model HeaterCoolerPI "heater and cooler with variable setpoints"
   extends AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCoolerPI;
-  parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
-  parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
   parameter Boolean staOrDyn = true "Static or dynamic activation of heater" annotation(choices(choice = true "Static", choice =  false "Dynamic",
                   radioButtons = true));
   Modelica.Blocks.Interfaces.RealInput setPointCool(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") annotation (
+    displayUnit="degC") if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep
+     and Cooler_on))    annotation (
       Placement(transformation(extent={{-120,-60},{-80,-20}}),
         iconTransformation(
         extent={{-20,-20},{20,20}},
@@ -17,7 +16,8 @@ model HeaterCoolerPI "heater and cooler with variable setpoints"
   Modelica.Blocks.Interfaces.RealInput setPointHeat(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") annotation (
+    displayUnit="degC") if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep
+     and Heater_on))    annotation (
       Placement(transformation(extent={{-120,20},{-80,60}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,

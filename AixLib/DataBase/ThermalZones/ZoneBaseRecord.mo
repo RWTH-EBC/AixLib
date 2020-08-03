@@ -1,4 +1,4 @@
-within AixLib.DataBase.ThermalZones;
+﻿within AixLib.DataBase.ThermalZones;
 record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
@@ -67,10 +67,15 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Weight factors of the windows";
   parameter Real wfGro
     "Weight factor of the ground";
-
-  parameter Real internalGainsPeopleSpecific "Heat Flux of people";
+  parameter Real specificPeople "people per squaremeter";
+  parameter Real activityDegree "acitivity degree of people in met";
+  parameter Modelica.SIunits.HeatFlowRate fixedHeatFlowRatePersons
+    "Area specific heatflowrate by persons in case of temperature independent 
+    calculation";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
+  parameter Real internalGainsMoistureNoPeople
+    "internal moisture production of plants, etc. except from people in g/(h m²)";
   parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
   parameter Real ratioConvectiveHeatMachines
     "Ratio of convective heat from overall heat output for machines";
@@ -120,6 +125,10 @@ record ZoneBaseRecord "Base record definition for zone records"
   <li>
   November 27, 2019, by David Jansen:<br/>
   Integrate threshold for heater and cooler.
+  </li>
+  <li>
+  July 10, 2019, by David Jansen:<br/>
+  Adds specificPeople (persons per squaremetre). Adds activityDegree.
   </li>
   <li>
   September 27, 2016, by Moritz Lauster:<br/>

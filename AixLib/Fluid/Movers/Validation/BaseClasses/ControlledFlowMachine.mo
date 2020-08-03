@@ -134,7 +134,7 @@ equation
       points={{-39,140},{-10,140},{-10,122}},
       color={0,0,127}));
   connect(masFloRat1.m_flow, fan2.m_flow_in) annotation (Line(
-      points={{70,71},{70,86},{42,86},{42,4},{-10,4},{-10,-8}},
+      points={{70,71},{70,86},{42,86},{42,4},{-10.2,4},{-10.2,-8}},
       color={0,0,127}));
   connect(relPre.p_rel, fan3.dp_in) annotation (Line(
       points={{-10,23},{-10,8},{-24,8},{-24,-40},{-10,-40},{-10,-48}},

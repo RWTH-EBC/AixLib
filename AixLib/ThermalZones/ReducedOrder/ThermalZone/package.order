@@ -1,3 +1,5 @@
 ThermalZone
-ThermalZoneEquipped
+ThermalZoneAirExchange
+ThermalZoneMoistAir
+ThermalZoneMoistAirExchange
 BaseClasses

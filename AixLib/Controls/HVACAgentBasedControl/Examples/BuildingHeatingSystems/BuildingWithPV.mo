@@ -170,21 +170,17 @@ model BuildingWithPV
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{-18,70},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{-18,70},
             {8,96}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{64,70},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{64,70},
             {90,96}})));
   BoundaryConditions.WeatherData.Bus        weaBus
     "Weather data bus"
     annotation (Placement(transformation(extent={{18,112},{52,144}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-92,60},
-            {-78,74}})));
-  Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent={{-92,82},
-            {-78,96}})));
   Modelica.Blocks.Sources.Constant internalGains[3](k={0,0,0})
     annotation (Placement(transformation(extent={{-92,36},{-78,50}})));
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance1(
@@ -332,14 +328,6 @@ equation
           38,20},{50,20},{50,68},{96,68},{96,76.5},{90,76.5}}, color={191,0,0}));
   connect(vol1.heatPort, thermalZone1.intGainsRad) annotation (Line(points={{38,
           20},{50,20},{50,68},{98,68},{98,81.7},{90,81.7}}, color={191,0,0}));
-  connect(thermalZone.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{-19.69,77.93},{-47.845,77.93},{-47.845,89},{-77.3,89}}, color=
-          {0,0,127}));
-  connect(thermalZone1.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{62.31,77.93},{20,77.93},{20,106},{-28,106},{-28,89},{-77.3,89}},
-        color={0,0,127}));
-  connect(infiltrationRate.y, thermalZone.ventRate) annotation (Line(points={{
-          -77.3,67},{-42,67},{-42,76},{-14.1,76},{-14.1,72.08}}, color={0,0,127}));
   connect(thermalZone.intGains, internalGains.y) annotation (Line(points={{5.4,
           72.08},{5.4,68},{-40,68},{-40,58},{-70,58},{-70,43},{-77.3,43}},
         color={0,0,127}));
@@ -361,9 +349,6 @@ equation
           {-102,-4},{-102,36},{-116,36},{-116,30}}, color={0,0,127}));
   connect(to_degC2.u, roomAgent1.T) annotation (Line(points={{-120,-36},{-108,
           -36},{-108,-28},{80,-28},{80,40},{108,40},{108,32}}, color={0,0,127}));
-  connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
-          {{67.9,72.08},{28,72.08},{28,64},{-42,64},{-42,68},{-42,68},{-42,76},
-          {-14.1,76},{-14.1,72.08}}, color={0,0,127}));
   connect(fan.port_b, hydraulicResistance1.port_a) annotation (Line(points={{72,
           -86},{72,-86},{72,-38},{-40,-38}}, color={0,127,255}));
   connect(hydraulicResistance1.port_b, hea.port_a) annotation (Line(points={{

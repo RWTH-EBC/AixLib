@@ -533,7 +533,6 @@ protected
             textString="SH")}));
   end StaticCondenser;
 
-
 equation
   // Connection of main components
   //
@@ -572,7 +571,6 @@ equation
   connect(PID.u_s, inpHeaCap.y)
     annotation (Line(points={{-92,30},{-96,30},{-96,8},{-60,8},{-60,-42},
                 {-69,-42}}, color={0,0,127}));
-
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
       Ellipse(

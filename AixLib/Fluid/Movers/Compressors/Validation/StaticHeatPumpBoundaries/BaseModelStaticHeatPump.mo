@@ -415,7 +415,6 @@ protected
     Modelica.SIunits.Temperature TRetFlo
       "Temperature return flow at heat capacity";
 
-
   equation
     // Connection of ports
     //
@@ -455,7 +454,6 @@ protected
 
     TInl = Medium.temperature_ph(p=pSat,h=hInl)
       "Temperature at condenser's inlet";
-
 
     annotation (Icon(graphics={
           Rectangle(
@@ -520,7 +518,6 @@ protected
             fillPattern=FillPattern.CrossDiag,
             textString="SH")}));
   end StaticCondenser;
-
 
 equation
   // Connection of main components

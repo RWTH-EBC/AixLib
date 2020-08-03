@@ -68,13 +68,8 @@ equation
           {-8,60},{0,60}},             color={0,127,255}));
   connect(ThrottlePump.port_a2, hydRes.port_b)
     annotation (Line(points={{28,40},{28,60},{20,60}},     color={0,127,255}));
-  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,40},
-          {-49.95,40},{-49.95,10.05}},    color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(valveOpening.y, hydraulicBus.valSet) annotation (Line(points={{-79,10},
-          {-64,10},{-64,10.05},{-49.95,10.05}}, color={0,0,127}), Text(
+  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-79,
+          10},{-64,10},{-64,10.05},{-49.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -82,6 +77,12 @@ equation
     annotation (Line(points={{-8,-20},{-8,-40},{-8,-40}}, color={0,127,255}));
   connect(ThrottlePump.port_b2, boundary1.ports[1])
     annotation (Line(points={{28,-20},{28,-40}}, color={0,127,255}));
+  connect(RPM.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{-79,40},
+          {-49.95,40},{-49.95,10.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),                                  Diagram(

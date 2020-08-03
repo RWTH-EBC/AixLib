@@ -202,8 +202,8 @@ equation
           {26,-100},{42,-100}}, color={0,0,127}));
   connect(heaWat.port_a, pump.port_b) annotation (Line(points={{44,-106},{40,-106},
           {40,-112},{40,-170},{60,-170}}, color={0,127,255}));
-  connect(const_dp.y, fan.dp_in) annotation (Line(points={{-31,160},{-22,160},{
-          -22,132},{-22,132}},                       color={0,0,127}));
+  connect(const_dp.y, fan.dp_in) annotation (Line(points={{-31,160},{-22,160},{-22,
+          132},{-22.2,132}},                         color={0,0,127}));
   connect(gaiWin.y, window.Q_flow) annotation (Line(points={{-39,-26},{-34,-26},
           {-30,-26},{-20,-26}}, color={0,0,127}));
   connect(gaiWin.u, weaBus.HGloHor) annotation (Line(points={{-62,-26},{-90,-26},

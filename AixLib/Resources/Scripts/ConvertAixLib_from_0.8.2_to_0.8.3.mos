@@ -1,0 +1,2794 @@
+// rename variables in pump bus
+// rename variables in hydraulic bus
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpControllerBus.rpm_Input",
+              "pumpControllerBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpControllerBus.rpm_Input",
+              "pumpControllerBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpControllerBus.rpm_Input",
+              "pumpControllerBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpControllerBus.rpm_Input",
+              "pumpControllerBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pump.pumpBus.rpm_Input",
+              "pump.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pump.pumpBus.rpm_Input",
+              "pump.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpBus.rpm_Input",
+              "ctrlDpVarH.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpControllerBus.rpm_Input",
+              "ctrlDpVarH.pumpControllerBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pump.pumpBus.rpm_Input",
+              "pump.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pumpControllerBus1.rpm_Input",
+              "pumpControllerBus1.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpBus.rpm_Input",
+              "ctrlDpVarN.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpControllerBus.rpm_Input",
+              "ctrlDpVarN.pumpControllerBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pump.pumpBus.rpm_Input",
+              "pump.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pumpControllerBus1.rpm_Input",
+              "pumpControllerBus1.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus",
+              "rpm_Input",
+              "rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "PumpInterface.pumpBus.rpm_Input",
+              "PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "PumpInterface.pumpBus.rpm_Input",
+              "PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "PumpInterface.pumpBus.rpm_Input",
+              "PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "PumpInterface.pumpBus.rpm_Input",
+              "PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "PumpInterface.pumpBus.rpm_Input",
+              "PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.PumpInterface.pumpBus.rpm_Input",
+              "Admix.PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.PumpInterface.pumpBus.rpm_Input",
+              "admix.PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.PumpInterface.pumpBus.rpm_Input",
+              "unmixed.PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.PumpInterface.pumpBus.rpm_Input",
+              "unmixedThrottle.PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.PumpInterface.pumpBus.rpm_Input",
+              "Injection.PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.PumpInterface.pumpBus.rpm_Input",
+              "Injection.PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.PumpInterface.pumpBus.rpm_Input",
+              "Unmixed.PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.PumpInterface.pumpBus.rpm_Input",
+              "ThrottlePump.PumpInterface.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "physics.pumpBus.rpm_Input",
+              "physics.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpBus.rpm_Input",
+              "pumpController.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpControllerBus.rpm_Input",
+              "pumpController.pumpControllerBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "physics.pumpBus.rpm_Input",
+              "physics.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpBus.rpm_Input",
+              "pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpBus.rpm_Input",
+              "pumpController.pumpBus.rpmSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpControllerBus.rpm_Input",
+              "pumpController.pumpControllerBus.rpmSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpControllerBus.rpm_Act",
+              "pumpControllerBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpControllerBus.rpm_Act",
+              "pumpControllerBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpControllerBus.rpm_Act",
+              "pumpControllerBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpControllerBus.rpm_Act",
+              "pumpControllerBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pump.pumpBus.rpm_Act",
+              "pump.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pump.pumpBus.rpm_Act",
+              "pump.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpBus.rpm_Act",
+              "ctrlDpVarH.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpControllerBus.rpm_Act",
+              "ctrlDpVarH.pumpControllerBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pump.pumpBus.rpm_Act",
+              "pump.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pumpControllerBus1.rpm_Act",
+              "pumpControllerBus1.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpBus.rpm_Act",
+              "ctrlDpVarN.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpControllerBus.rpm_Act",
+              "ctrlDpVarN.pumpControllerBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pump.pumpBus.rpm_Act",
+              "pump.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pumpControllerBus1.rpm_Act",
+              "pumpControllerBus1.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus",
+              "rpm_Act",
+              "rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "PumpInterface.pumpBus.rpm_Act",
+              "PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "PumpInterface.pumpBus.rpm_Act",
+              "PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "PumpInterface.pumpBus.rpm_Act",
+              "PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "PumpInterface.pumpBus.rpm_Act",
+              "PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "PumpInterface.pumpBus.rpm_Act",
+              "PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.PumpInterface.pumpBus.rpm_Act",
+              "Admix.PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.PumpInterface.pumpBus.rpm_Act",
+              "admix.PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.PumpInterface.pumpBus.rpm_Act",
+              "unmixed.PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.PumpInterface.pumpBus.rpm_Act",
+              "unmixedThrottle.PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.PumpInterface.pumpBus.rpm_Act",
+              "Injection.PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.PumpInterface.pumpBus.rpm_Act",
+              "Injection.PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.PumpInterface.pumpBus.rpm_Act",
+              "Unmixed.PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.PumpInterface.pumpBus.rpm_Act",
+              "ThrottlePump.PumpInterface.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "physics.pumpBus.rpm_Act",
+              "physics.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpBus.rpm_Act",
+              "pumpController.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpControllerBus.rpm_Act",
+              "pumpController.pumpControllerBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "physics.pumpBus.rpm_Act",
+              "physics.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpBus.rpm_Act",
+              "pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpBus.rpm_Act",
+              "pumpController.pumpBus.rpmMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpControllerBus.rpm_Act",
+              "pumpController.pumpControllerBus.rpmMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpControllerBus.power",
+              "pumpControllerBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpControllerBus.power",
+              "pumpControllerBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpControllerBus.power",
+              "pumpControllerBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpControllerBus.power",
+              "pumpControllerBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pump.pumpBus.power",
+              "pump.pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pump.pumpBus.power",
+              "pump.pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpBus.power",
+              "ctrlDpVarH.pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpControllerBus.power",
+              "ctrlDpVarH.pumpControllerBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pump.pumpBus.power",
+              "pump.pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pumpControllerBus1.power",
+              "pumpControllerBus1.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpBus.power",
+              "ctrlDpVarN.pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpControllerBus.power",
+              "ctrlDpVarN.pumpControllerBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pump.pumpBus.power",
+              "pump.pumpBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pumpControllerBus1.power",
+              "pumpControllerBus1.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus",
+              "power",
+              "PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "PumpInterface.pumpBus.power",
+              "PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "PumpInterface.pumpBus.power",
+              "PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "PumpInterface.pumpBus.power",
+              "PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "PumpInterface.pumpBus.power",
+              "PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "PumpInterface.pumpBus.power",
+              "PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.PumpInterface.pumpBus.power",
+              "Admix.PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.PumpInterface.pumpBus.power",
+              "admix.PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.PumpInterface.pumpBus.power",
+              "unmixed.PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.PumpInterface.pumpBus.power",
+              "unmixedThrottle.PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.PumpInterface.pumpBus.power",
+              "Injection.PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.PumpInterface.pumpBus.power",
+              "Injection.PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.PumpInterface.pumpBus.power",
+              "Unmixed.PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.PumpInterface.pumpBus.power",
+              "ThrottlePump.PumpInterface.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "physics.pumpBus.power",
+              "physics.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpBus.power",
+              "pumpController.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpControllerBus.power",
+              "pumpController.pumpControllerBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "physics.pumpBus.power",
+              "physics.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpBus.power",
+              "pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpBus.power",
+              "pumpController.pumpBus.PelMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpControllerBus.power",
+              "pumpController.pumpControllerBus.PelMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpControllerBus.head",
+              "pumpControllerBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpControllerBus.head",
+              "pumpControllerBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpControllerBus.head",
+              "pumpControllerBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpControllerBus.head",
+              "pumpControllerBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pump.pumpBus.head",
+              "pump.pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pump.pumpBus.head",
+              "pump.pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpBus.head",
+              "ctrlDpVarH.pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpControllerBus.head",
+              "ctrlDpVarH.pumpControllerBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pump.pumpBus.head",
+              "pump.pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pumpControllerBus1.head",
+              "pumpControllerBus1.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpBus.head",
+              "ctrlDpVarN.pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpControllerBus.head",
+              "ctrlDpVarN.pumpControllerBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pump.pumpBus.head",
+              "pump.pumpBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pumpControllerBus1.head",
+              "pumpControllerBus1.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus",
+              "head",
+              "dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "PumpInterface.pumpBus.head",
+              "PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "PumpInterface.pumpBus.head",
+              "PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "PumpInterface.pumpBus.head",
+              "PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "PumpInterface.pumpBus.head",
+              "PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "PumpInterface.pumpBus.head",
+              "PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.PumpInterface.pumpBus.head",
+              "Admix.PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.PumpInterface.pumpBus.head",
+              "admix.PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.PumpInterface.pumpBus.head",
+              "unmixed.PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.PumpInterface.pumpBus.head",
+              "unmixedThrottle.PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.PumpInterface.pumpBus.head",
+              "Injection.PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.PumpInterface.pumpBus.head",
+              "Injection.PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.PumpInterface.pumpBus.head",
+              "Unmixed.PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.PumpInterface.pumpBus.head",
+              "ThrottlePump.PumpInterface.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "physics.pumpBus.head",
+              "physics.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpBus.head",
+              "pumpController.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpControllerBus.head",
+              "pumpController.pumpControllerBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "physics.pumpBus.head",
+              "physics.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpBus.head",
+              "pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpBus.head",
+              "pumpController.pumpBus.dpMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpControllerBus.head",
+              "pumpController.pumpControllerBus.dpMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpControllerBus.efficiency",
+              "pumpControllerBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpControllerBus.efficiency",
+              "pumpControllerBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpControllerBus.efficiency",
+              "pumpControllerBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpControllerBus.efficiency",
+              "pumpControllerBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pump.pumpBus.efficiency",
+              "pump.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pump.pumpBus.efficiency",
+              "pump.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpBus.efficiency",
+              "ctrlDpVarH.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpControllerBus.efficiency",
+              "ctrlDpVarH.pumpControllerBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pump.pumpBus.efficiency",
+              "pump.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pumpControllerBus1.efficiency",
+              "pumpControllerBus1.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpBus.efficiency",
+              "ctrlDpVarN.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpControllerBus.efficiency",
+              "ctrlDpVarN.pumpControllerBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pump.pumpBus.efficiency",
+              "pump.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pumpControllerBus1.efficiency",
+              "pumpControllerBus1.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus",
+              "efficiency",
+              "efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "PumpInterface.pumpBus.efficiency",
+              "PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "PumpInterface.pumpBus.efficiency",
+              "PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "PumpInterface.pumpBus.efficiency",
+              "PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "PumpInterface.pumpBus.efficiency",
+              "PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "PumpInterface.pumpBus.efficiency",
+              "PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.PumpInterface.pumpBus.efficiency",
+              "Admix.PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.PumpInterface.pumpBus.efficiency",
+              "admix.PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.PumpInterface.pumpBus.efficiency",
+              "unmixed.PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.PumpInterface.pumpBus.efficiency",
+              "unmixedThrottle.PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.PumpInterface.pumpBus.efficiency",
+              "Injection.PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.PumpInterface.pumpBus.efficiency",
+              "Injection.PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.PumpInterface.pumpBus.efficiency",
+              "Unmixed.PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.PumpInterface.pumpBus.efficiency",
+              "ThrottlePump.PumpInterface.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "physics.pumpBus.efficiency",
+              "physics.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpBus.efficiency",
+              "pumpController.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpControllerBus.efficiency",
+              "pumpController.pumpControllerBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "physics.pumpBus.efficiency",
+              "physics.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpBus.efficiency",
+              "pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpBus.efficiency",
+              "pumpController.pumpBus.efficiencyMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpControllerBus.efficiency",
+              "pumpController.pumpControllerBus.efficiencyMea");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpControllerBus.dp_Input",
+              "pumpControllerBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpControllerBus.dp_Input",
+              "pumpControllerBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpControllerBus.dp_Input",
+              "pumpControllerBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpControllerBus.dp_Input",
+              "pumpControllerBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pump.pumpBus.dp_Input",
+              "pump.pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pump.pumpBus.dp_Input",
+              "pump.pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpBus.dp_Input",
+              "ctrlDpVarH.pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpControllerBus.dp_Input",
+              "ctrlDpVarH.pumpControllerBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pump.pumpBus.dp_Input",
+              "pump.pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pumpControllerBus1.dp_Input",
+              "pumpControllerBus1.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpBus.dp_Input",
+              "ctrlDpVarN.pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpControllerBus.dp_Input",
+              "ctrlDpVarN.pumpControllerBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pump.pumpBus.dp_Input",
+              "pump.pumpBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pumpControllerBus1.dp_Input",
+              "pumpControllerBus1.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus",
+              "dp_Input",
+              "dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "PumpInterface.pumpBus.dp_Input",
+              "PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "PumpInterface.pumpBus.dp_Input",
+              "PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "PumpInterface.pumpBus.dp_Input",
+              "PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "PumpInterface.pumpBus.dp_Input",
+              "PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "PumpInterface.pumpBus.dp_Input",
+              "PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.PumpInterface.pumpBus.dp_Input",
+              "Admix.PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.PumpInterface.pumpBus.dp_Input",
+              "admix.PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.PumpInterface.pumpBus.dp_Input",
+              "unmixed.PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.PumpInterface.pumpBus.dp_Input",
+              "unmixedThrottle.PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.PumpInterface.pumpBus.dp_Input",
+              "Injection.PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.PumpInterface.pumpBus.dp_Input",
+              "Injection.PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.PumpInterface.pumpBus.dp_Input",
+              "Unmixed.PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.PumpInterface.pumpBus.dp_Input",
+              "ThrottlePump.PumpInterface.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "physics.pumpBus.dp_Input",
+              "physics.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpBus.dp_Input",
+              "pumpController.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpControllerBus.dp_Input",
+              "pumpController.pumpControllerBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "physics.pumpBus.dp_Input",
+              "physics.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpBus.dp_Input",
+              "pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpBus.dp_Input",
+              "pumpController.pumpBus.dpSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpControllerBus.dp_Input",
+              "pumpController.pumpControllerBus.dpSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpControllerBus.MFI_Input",
+              "pumpControllerBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpControllerBus.MFI_Input",
+              "pumpControllerBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpControllerBus.MFI_Input",
+              "pumpControllerBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpControllerBus.MFI_Input",
+              "pumpControllerBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pump.pumpBus.MFI_Input",
+              "pump.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pump.pumpBus.MFI_Input",
+              "pump.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpBus.MFI_Input",
+              "ctrlDpVarH.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpControllerBus.MFI_Input",
+              "ctrlDpVarH.pumpControllerBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pump.pumpBus.MFI_Input",
+              "pump.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pumpControllerBus1.MFI_Input",
+              "pumpControllerBus1.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpBus.MFI_Input",
+              "ctrlDpVarN.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpControllerBus.MFI_Input",
+              "ctrlDpVarN.pumpControllerBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pump.pumpBus.MFI_Input",
+              "pump.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pumpControllerBus1.MFI_Input",
+              "pumpControllerBus1.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus",
+              "MFI_Input",
+              "mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "PumpInterface.pumpBus.MFI_Input",
+              "PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "PumpInterface.pumpBus.MFI_Input",
+              "PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "PumpInterface.pumpBus.MFI_Input",
+              "PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "PumpInterface.pumpBus.MFI_Input",
+              "PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "PumpInterface.pumpBus.MFI_Input",
+              "PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.PumpInterface.pumpBus.MFI_Input",
+              "Admix.PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.PumpInterface.pumpBus.MFI_Input",
+              "admix.PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.PumpInterface.pumpBus.MFI_Input",
+              "unmixed.PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.PumpInterface.pumpBus.MFI_Input",
+              "unmixedThrottle.PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.PumpInterface.pumpBus.MFI_Input",
+              "Injection.PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.PumpInterface.pumpBus.MFI_Input",
+              "Injection.PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.PumpInterface.pumpBus.MFI_Input",
+              "Unmixed.PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.PumpInterface.pumpBus.MFI_Input",
+              "ThrottlePump.PumpInterface.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "physics.pumpBus.MFI_Input",
+              "physics.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpBus.MFI_Input",
+              "pumpController.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpControllerBus.MFI_Input",
+              "pumpController.pumpControllerBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "physics.pumpBus.MFI_Input",
+              "physics.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpBus.MFI_Input",
+              "pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpBus.MFI_Input",
+              "pumpController.pumpBus.mFlowSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpControllerBus.MFI_Input",
+              "pumpController.pumpControllerBus.mFlowSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController",
+              "pumpControllerBus.onOff_Input",
+              "pumpControllerBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN",
+              "pumpControllerBus.onOff_Input",
+              "pumpControllerBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH",
+              "pumpControllerBus.onOff_Input",
+              "pumpControllerBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarN",
+              "pumpControllerBus.onOff_Input",
+              "pumpControllerBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pump.pumpBus.onOff_Input",
+              "pump.pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledTest",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pump.pumpBus.onOff_Input",
+              "pump.pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpSpeedControlledLimiterTest",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpBus.onOff_Input",
+              "ctrlDpVarH.pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "ctrlDpVarH.pumpControllerBus.onOff_Input",
+              "ctrlDpVarH.pumpControllerBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pump.pumpBus.onOff_Input",
+              "pump.pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpHdpVarControlTest",
+              "pumpControllerBus1.onOff_Input",
+              "pumpControllerBus1.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpBus.onOff_Input",
+              "ctrlDpVarN.pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "ctrlDpVarN.pumpControllerBus.onOff_Input",
+              "ctrlDpVarN.pumpControllerBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pump.pumpBus.onOff_Input",
+              "pump.pumpBus.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.Examples.PumpNdpVarControlTest",
+              "pumpControllerBus1.onOff_Input",
+              "pumpControllerBus1.onSet");
+convertElement(
+              "AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus",
+              "onOff_Input",
+              "onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "PumpInterface.pumpBus.onOff_Input",
+              "PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "PumpInterface.pumpBus.onOff_Input",
+              "PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "PumpInterface.pumpBus.onOff_Input",
+              "PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "PumpInterface.pumpBus.onOff_Input",
+              "PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "PumpInterface.pumpBus.onOff_Input",
+              "PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.PumpInterface.pumpBus.onOff_Input",
+              "Admix.PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.PumpInterface.pumpBus.onOff_Input",
+              "admix.PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.PumpInterface.pumpBus.onOff_Input",
+              "unmixed.PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.PumpInterface.pumpBus.onOff_Input",
+              "unmixedThrottle.PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.PumpInterface.pumpBus.onOff_Input",
+              "Injection.PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.PumpInterface.pumpBus.onOff_Input",
+              "Injection.PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.PumpInterface.pumpBus.onOff_Input",
+              "Unmixed.PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.PumpInterface.pumpBus.onOff_Input",
+              "ThrottlePump.PumpInterface.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "physics.pumpBus.onOff_Input",
+              "physics.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpBus.onOff_Input",
+              "pumpController.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled",
+              "pumpController.pumpControllerBus.onOff_Input",
+              "pumpController.pumpControllerBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "physics.pumpBus.onOff_Input",
+              "physics.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpBus.onOff_Input",
+              "pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpBus.onOff_Input",
+              "pumpController.pumpBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpHeadControlled",
+              "pumpController.pumpControllerBus.onOff_Input",
+              "pumpController.pumpControllerBus.onSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.valSet",
+              "Admix.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.valSet",
+              "admix.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.valSet",
+              "ctrMix.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.valSet",
+              "ctrUnmixedSimple.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.valSet",
+              "ctrUnmixedThrottle.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.valSet",
+              "unmixed.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.valSet",
+              "unmixedThrottle.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.valSet",
+              "Injection.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.valSet",
+              "Injection.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.valSet",
+              "Unmixed.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.valSet",
+              "Throttle.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.valSet",
+              "ThrottlePump.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "valSet",
+              "valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.valSetAct",
+              "Admix.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.valSetAct",
+              "admix.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.valSetAct",
+              "ctrMix.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.valSetAct",
+              "ctrUnmixedSimple.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.valSetAct",
+              "ctrUnmixedThrottle.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.valSetAct",
+              "unmixed.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.valSetAct",
+              "unmixedThrottle.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.valSetAct",
+              "Injection.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.valSetAct",
+              "Injection.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.valSetAct",
+              "Unmixed.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.valSetAct",
+              "Throttle.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.valSetAct",
+              "ThrottlePump.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "valSetAct",
+              "valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.valSet",
+              "Admix.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.valSet",
+              "admix.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.valSet",
+              "ctrMix.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.valSet",
+              "ctrUnmixedSimple.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.valSet",
+              "ctrUnmixedThrottle.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.valSet",
+              "unmixed.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.valSet",
+              "unmixedThrottle.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.valSet",
+              "Injection.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.valSet",
+              "Injection.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.valSet",
+              "Unmixed.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.valSet",
+              "Throttle.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.valSet",
+              "ThrottlePump.hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "valSet",
+              "valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.valSet",
+              "hydraulicBus.valveSet");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.valSetAct",
+              "Admix.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.valSetAct",
+              "admix.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.valSetAct",
+              "ctrMix.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.valSetAct",
+              "ctrUnmixedSimple.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.valSetAct",
+              "ctrUnmixedThrottle.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.valSetAct",
+              "unmixed.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.valSetAct",
+              "unmixedThrottle.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.valSetAct",
+              "Injection.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.valSetAct",
+              "Injection.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.valSetAct",
+              "Unmixed.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.valSetAct",
+              "Throttle.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.valSetAct",
+              "ThrottlePump.hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "valSetAct",
+              "valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.valSetAct",
+              "hydraulicBus.valveMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.TFwrd_in",
+              "Admix.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.TFwrd_in",
+              "admix.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.TFwrd_in",
+              "ctrMix.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.TFwrd_in",
+              "ctrUnmixedSimple.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.TFwrd_in",
+              "ctrUnmixedThrottle.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.TFwrd_in",
+              "unmixed.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.TFwrd_in",
+              "unmixedThrottle.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.TFwrd_in",
+              "Injection.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.TFwrd_in",
+              "Injection.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.TFwrd_in",
+              "Unmixed.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.TFwrd_in",
+              "Throttle.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.TFwrd_in",
+              "ThrottlePump.hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "TFwrd_in",
+              "TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.TFwrd_in",
+              "hydraulicBus.TFwrdInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.TFwrd_out",
+              "Admix.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.TFwrd_out",
+              "admix.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.TFwrd_out",
+              "ctrMix.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.TFwrd_out",
+              "ctrUnmixedSimple.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.TFwrd_out",
+              "ctrUnmixedThrottle.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.TFwrd_out",
+              "unmixed.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.TFwrd_out",
+              "unmixedThrottle.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.TFwrd_out",
+              "Injection.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.TFwrd_out",
+              "Injection.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.TFwrd_out",
+              "Unmixed.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.TFwrd_out",
+              "Throttle.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.TFwrd_out",
+              "ThrottlePump.hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "TFwrd_out",
+              "TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.TFwrd_out",
+              "hydraulicBus.TFwrdOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.TRtrn_in",
+              "Admix.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.TRtrn_in",
+              "admix.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.TRtrn_in",
+              "ctrMix.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.TRtrn_in",
+              "ctrUnmixedSimple.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.TRtrn_in",
+              "ctrUnmixedThrottle.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.TRtrn_in",
+              "unmixed.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.TRtrn_in",
+              "unmixedThrottle.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.TRtrn_in",
+              "Injection.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.TRtrn_in",
+              "Injection.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.TRtrn_in",
+              "Unmixed.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.TRtrn_in",
+              "Throttle.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.TRtrn_in",
+              "ThrottlePump.hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "TRtrn_in",
+              "TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.TRtrn_in",
+              "hydraulicBus.TRtrnInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.TRtrn_out",
+              "Admix.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.TRtrn_out",
+              "admix.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.TRtrn_out",
+              "ctrMix.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.TRtrn_out",
+              "ctrUnmixedSimple.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.TRtrn_out",
+              "ctrUnmixedThrottle.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.TRtrn_out",
+              "unmixed.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.TRtrn_out",
+              "unmixedThrottle.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.TRtrn_out",
+              "Injection.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.TRtrn_out",
+              "Injection.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.TRtrn_out",
+              "Unmixed.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.TRtrn_out",
+              "Throttle.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.TRtrn_out",
+              "ThrottlePump.hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "TRtrn_out",
+              "TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.TRtrn_out",
+              "hydraulicBus.TRtrnOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.VF_in",
+              "Admix.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.VF_in",
+              "admix.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.VF_in",
+              "ctrMix.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.VF_in",
+              "ctrUnmixedSimple.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.VF_in",
+              "ctrUnmixedThrottle.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.VF_in",
+              "unmixed.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.VF_in",
+              "unmixedThrottle.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.VF_in",
+              "Injection.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.VF_in",
+              "Injection.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.VF_in",
+              "Unmixed.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.VF_in",
+              "Throttle.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.VF_in",
+              "ThrottlePump.hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "VF_in",
+              "VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.VF_in",
+              "hydraulicBus.VFlowInMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.VF_out",
+              "Admix.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.VF_out",
+              "admix.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.VF_out",
+              "ctrMix.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.VF_out",
+              "ctrUnmixedSimple.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.VF_out",
+              "ctrUnmixedThrottle.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.VF_out",
+              "unmixed.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.VF_out",
+              "unmixedThrottle.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.VF_out",
+              "Injection.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.VF_out",
+              "Injection.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.VF_out",
+              "Unmixed.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.VF_out",
+              "Throttle.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.VF_out",
+              "ThrottlePump.hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "VF_out",
+              "VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.VF_out",
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.VflowOutMea",
+              "Admix.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.VflowOutMea",
+              "admix.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.VflowOutMea",
+              "ctrMix.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.VflowOutMea",
+              "ctrUnmixedSimple.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.VflowOutMea",
+              "ctrUnmixedThrottle.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.VflowOutMea",
+              "unmixed.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.VflowOutMea",
+              "unmixedThrottle.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.VflowOutMea",
+              "Injection.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.VflowOutMea",
+              "Injection.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.VflowOutMea",
+              "Unmixed.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.VflowOutMea",
+              "Throttle.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.VflowOutMea",
+              "ThrottlePump.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "VflowOutMea",
+              "VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea");			  

@@ -66,8 +66,8 @@ equation
     annotation (Line(points={{-8,-20},{-8,-40}}, color={0,127,255}));
   connect(Throttle.port_b2, boundary1.ports[1])
     annotation (Line(points={{28,-20},{28,-40}}, color={0,127,255}));
-  connect(valveOpening.y, hydraulicBus.valSet) annotation (Line(points={{-79,10},
-          {-41.95,10},{-41.95,10.05}}, color={0,0,127}), Text(
+  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-79,
+          10},{-41.95,10},{-41.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

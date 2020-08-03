@@ -311,14 +311,14 @@ equation
 
   //Calculate power and Efficiency
   if calculatePower then
-    power = if n >= pumpParam.nMin*0.9 and pumpBus.onOff_Input and Vflow_m3h.y
-       > Modelica.Constants.small then max(0,
+    power =if n >= pumpParam.nMin*0.9 and pumpBus.onSet and Vflow_m3h.y >
+      Modelica.Constants.small then max(0,
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
       pumpParam.cPQN,
       Vflow_m3h.y,
       n)) else 0 "computing power as long as n > 90% nMin";
     if calculateEfficiency then
-      eta = if n >= pumpParam.nMin*0.9 and pumpBus.onOff_Input and power >
+      eta =if n >= pumpParam.nMin*0.9 and pumpBus.onSet and power >
         AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
         pumpParam.cPQN,
         Modelica.Constants.small,
@@ -344,19 +344,19 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(pumpPower.y, pumpBus.power) annotation (Line(points={{-79,76},{-66,76},
-          {-66,93},{0.5975,93},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,
+          76},{-66,93},{0.5975,93},{0.5975,100.597}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpEfficiency.y, pumpBus.efficiency) annotation (Line(points={{-79,60},
-          {-62,60},{-62,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,
+          60},{-62,60},{-62,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(onOffHead.u2, pumpBus.onOff_Input) annotation (Line(points={{-8,-40},
-          {-43,-40},{-43,-16},{69,-16},{69,100.597},{0.5975,100.597}},color={255,
-          0,255}), Text(
+  connect(onOffHead.u2, pumpBus.onSet) annotation (Line(points={{-8,-40},{-43,-40},
+          {-43,-16},{69,-16},{69,100.597},{0.5975,100.597}}, color={255,0,255}),
+      Text(
       string="%second",
       index=3,
       extent={{6,3},{6,3}}));
@@ -364,7 +364,7 @@ equation
           -48},{-8,-48}}, color={0,0,127}));
   connect(deMultiplex2.y1[1], variableLimiter.limit1) annotation (Line(points={{
           -26,26},{-23,26},{-23,28},{-12,28}}, color={0,0,127}));
-  connect(variableLimiter.u, pumpBus.rpm_Input) annotation (Line(points={{-12,20},
+  connect(variableLimiter.u, pumpBus.rpmSet) annotation (Line(points={{-12,20},
           {-20,20},{-20,38},{0.5975,38},{0.5975,100.597}}, color={0,0,127}),
       Text(
       string="%second",
@@ -372,17 +372,16 @@ equation
       extent={{6,3},{6,3}}));
   connect(onOffHead.y, criticalDamping.u)
     annotation (Line(points={{15,-40},{21,-40}}, color={0,0,127}));
-  connect(pumpHead.y, pumpBus.head) annotation (Line(points={{68,-39},{81,-39},
-          {81,90},{0.5975,90},{0.5975,100.597}},color={0,0,127}), Text(
+  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{68,-39},{81,-39},
+          {81,90},{0.5975,90},{0.5975,100.597}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
 
   connect(variableLimiter.y, onOffn.u1) annotation (Line(points={{11,20},{12,20},
           {12,28},{17,28}}, color={0,0,127}));
-  connect(onOffn.u2, pumpBus.onOff_Input) annotation (Line(points={{17,20},{14,
-          20},{14,49},{36,49},{36,100.597},{0.5975,100.597}},
-                                                          color={255,0,255}),
+  connect(onOffn.u2, pumpBus.onSet) annotation (Line(points={{17,20},{14,20},{
+          14,49},{36,49},{36,100.597},{0.5975,100.597}}, color={255,0,255}),
       Text(
       string="%second",
       index=3,
@@ -390,8 +389,8 @@ equation
   connect(onOffn.y, n)
     annotation (Line(points={{40,20},{50,20}}, color={0,0,127}));
 
-  connect(n, pumpBus.rpm_Act) annotation (Line(points={{40,20},{43,20},{43,100.598},
-          {0.5975,100.598}}, color={0,0,127}), Text(
+  connect(n, pumpBus.rpmMea) annotation (Line(points={{40,20},{43,20},{43,
+          100.598},{0.5975,100.598}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{4,12},{4,12}}));
