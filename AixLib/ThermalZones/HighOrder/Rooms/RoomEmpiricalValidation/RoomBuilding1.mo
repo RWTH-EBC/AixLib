@@ -186,12 +186,12 @@ equation
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={
         Rectangle(
-          extent={{-100,92},{94,-92}},
+          extent={{-100,94},{94,-90}},
           lineColor={215,215,215},
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-86,76},{80,-80}},
+          extent={{-84,76},{82,-80}},
           lineColor={135,135,135},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),

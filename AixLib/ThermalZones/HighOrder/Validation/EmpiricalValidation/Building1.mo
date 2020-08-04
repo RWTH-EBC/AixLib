@@ -4,8 +4,8 @@ model Building1
   Rooms.RoomEmpiricalValidation.RoomBuilding1 room(
     TWalls_start=T0,
     roof(
-      redeclare model Window = Components.WindowsDoors.WindowSimple (WindowType
-            =AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(),
+      redeclare model Window = Components.WindowsDoors.WindowSimple (WindowType=
+             AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(),
             redeclare model correctionSolarGain =
               AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
               (WindowType=
@@ -21,7 +21,6 @@ model Building1
       T0=T0),
     floor(T0=T0),
     redeclare DataBase.Walls.Collections.EmpricalValidation.Building1 wallTypes,
-
     T0_air=283.15,
     calcMethodIn=3,
     solar_absorptance_OW=solar_absorptance_OW,
