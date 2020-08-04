@@ -1,5 +1,5 @@
 within AixLib.DataBase.Walls.EmpiricalValidation;
-record OW_W_TwinHouses
+record OW_W_TwinHouses "Outside Wall"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = 5 "Number of wall layers",
     d={0.01,0.08,0.03,0.3,0.01} "Thickness of wall layers, first=outside; last=inside",
@@ -10,5 +10,9 @@ record OW_W_TwinHouses
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">References</font></h4>
 <p>For ASHRAE 140 see Bibtexkey: ASHRAE-140-2007</p>
+</html>", revisions="<html>
+<ul>
+<li><i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>implemented</li>
+</ul>
 </html>"));
 end OW_W_TwinHouses;

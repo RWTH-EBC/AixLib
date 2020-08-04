@@ -1,5 +1,5 @@
 within AixLib.DataBase.Walls.EmpiricalValidation;
-record FL_Building1
+record FL_Building1 "Floor"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = 2 "Number of wall layers",
     d={0.5,0.3} "Thickness of wall layers",
@@ -9,6 +9,10 @@ record FL_Building1
     eps=0.95 "Emissivity of inner wall surface");
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">References</font></h4>
-<p>For ASHRAE 140 see Bibtexkey: ASHRAE-140-2007</p>
+<p>For Empirical Validation: Building 1</p>
+</html>", revisions="<html>
+<ul>
+<li><i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>implemented</li>
+</ul>
 </html>"));
 end FL_Building1;

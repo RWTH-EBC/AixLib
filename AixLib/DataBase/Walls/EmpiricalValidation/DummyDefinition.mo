@@ -8,5 +8,13 @@ record DummyDefinition
     c={1} "Specific heat capacity of wall layers",
     eps=1 "Emissivity of inner wall surface");
                                                         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+<li><i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>implemented</li>
+</ul>
+</html>", info="<html>
+<h4><font color=\"#008000\">References</font></h4>
+<p>Dummy Wall record/p>
+</html>"));
 end DummyDefinition;
