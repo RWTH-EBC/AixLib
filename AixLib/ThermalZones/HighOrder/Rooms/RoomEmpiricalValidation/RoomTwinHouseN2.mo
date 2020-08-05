@@ -19,9 +19,10 @@ model RoomTwinHouseN2 "N2"
 
   parameter Modelica.SIunits.Length room_length=10 "length"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=10 "height"
+  parameter Modelica.SIunits.Height room_height=2.6
+                                                   "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width=2.6 "width"
+  parameter Modelica.SIunits.Length room_width=10  "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   Components.Walls.Wall wallEast(redeclare
       DataBase.Walls.EmpiricalValidation.OW_E_TwinHouses wallPar,
@@ -30,7 +31,8 @@ model RoomTwinHouseN2 "N2"
     solar_absorptance=0.23,
     withWindow=true,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
-    windowarea=1.89)
+    windowarea=1.89,
+    T0=T0_air)
     annotation (Placement(transformation(extent={{60,-42},{48,30}})));
   Components.Walls.Wall wallSouth(redeclare
       DataBase.Walls.EmpiricalValidation.OW_S_N_TwinHouses wallPar,
@@ -39,11 +41,16 @@ model RoomTwinHouseN2 "N2"
     solar_absorptance=0.23,
     withWindow=true,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
-    windowarea=9.66)                                                annotation (
+    windowarea=9.66,
+    withSunblind=true,
+    Blinding=0,
+    LimitSolIrr=0,
+    TOutAirLimit=173.15,
+    T0=T0_air)                                                      annotation (
      Placement(transformation(
         extent={{-6,-35},{6,35}},
         rotation=90,
-        origin={6,-59})));
+        origin={4,-59})));
   Components.Walls.Wall wallNorth(redeclare
       DataBase.Walls.EmpiricalValidation.OW_S_N_TwinHouses wallPar,
     wall_length=10,
@@ -51,7 +58,8 @@ model RoomTwinHouseN2 "N2"
     solar_absorptance=0.23,
     withWindow=true,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
-    windowarea=1.89)                                                annotation (
+    windowarea=1.89,
+    T0=T0_air)                                                      annotation (
      Placement(transformation(
         extent={{6.00001,-35},{-6.00001,35}},
         rotation=90,
@@ -59,8 +67,8 @@ model RoomTwinHouseN2 "N2"
   Components.Walls.Wall Ceiling(outside=false,
     redeclare DataBase.Walls.EmpiricalValidation.CE_TwinHouses wallPar,
     wall_length=10,
-    wall_height=10,                            ISOrientation=3)
-                                               annotation (Placement(
+    wall_height=10,                            ISOrientation=3,
+    T0=T0_air)                                 annotation (Placement(
         transformation(
         extent={{3.00003,-16},{-3.00003,16}},
         rotation=90,
@@ -68,8 +76,8 @@ model RoomTwinHouseN2 "N2"
   Components.Walls.Wall Floor(outside=false,
     redeclare DataBase.Walls.EmpiricalValidation.FL_TwinHouses wallPar,
     wall_length=10,
-    wall_height=10,                          ISOrientation=2)
-                                             annotation (Placement(
+    wall_height=10,                          ISOrientation=2,
+    T0=T0_air)                               annotation (Placement(
         transformation(
         extent={{-2.5,-14.5},{2.5,14.5}},
         rotation=90,
@@ -106,13 +114,14 @@ model RoomTwinHouseN2 "N2"
     solar_absorptance=0.23,
     withWindow=true,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
-    windowarea=3.78)
-    annotation (Placement(transformation(extent={{-60,-42},{-48,28}})));
+    windowarea=3.78,
+    T0=T0_air)
+    annotation (Placement(transformation(extent={{-62,-42},{-50,28}})));
 equation
   connect(WindSpeedPort, wallWest.WindSpeedPort) annotation (Line(points={{-114,20},
-          {-68,20},{-68,18.6667},{-60.3,18.6667}},     color={0,0,127}));
+          {-68,20},{-68,18.6667},{-62.3,18.6667}},     color={0,0,127}));
   connect(WindSpeedPort, wallSouth.WindSpeedPort) annotation (Line(points={{-114,20},
-          {-68,20},{-68,-86},{-14,-86},{-14,-65.3},{-19.6667,-65.3}},
+          {-68,20},{-68,-86},{-14,-86},{-14,-65.3},{-21.6667,-65.3}},
         color={0,0,127}));
   connect(WindSpeedPort, wallEast.WindSpeedPort) annotation (Line(points={{-114,20},
           {-68,20},{-68,-86},{88,-86},{88,20},{60.3,20},{60.3,20.4}},     color=
@@ -121,16 +130,16 @@ equation
           {-68,20},{-68,-86},{88,-86},{88,72},{-14.6667,72},{-14.6667,62.3}},
                   color={0,0,127}));
   connect(thermOutside, wallWest.port_outside) annotation (Line(points={{-100,
-          100},{-68,100},{-68,-7},{-60.3,-7}}, color={191,0,0}));
+          100},{-68,100},{-68,-7},{-62.3,-7}}, color={191,0,0}));
   connect(thermOutside, wallSouth.port_outside) annotation (Line(points={{-100,
-          100},{-68,100},{-68,-86},{6,-86},{6,-65.3}}, color={191,0,0}));
+          100},{-68,100},{-68,-86},{4,-86},{4,-65.3}}, color={191,0,0}));
   connect(Floor.port_outside, Therm_ground) annotation (Line(points={{-44.5,
           -80.125},{-44.5,-92},{-32,-92},{-32,-98}}, color={191,0,0}));
   connect(wallWest.thermStarComb_inside, thermStar_Demux.portConvRadComb)
-    annotation (Line(points={{-48,-7},{-48,-10},{-46,-10},{-46,-46},{-7,-46},{
+    annotation (Line(points={{-50,-7},{-50,-10},{-46,-10},{-46,-46},{-7,-46},{
           -7,-8}},       color={191,0,0}));
   connect(wallSouth.thermStarComb_inside, thermStar_Demux.portConvRadComb)
-    annotation (Line(points={{6,-53},{6,-46},{-7,-46},{-7,-8}}, color={191,0,0}));
+    annotation (Line(points={{4,-53},{4,-46},{-7,-46},{-7,-8}}, color={191,0,0}));
   connect(wallEast.thermStarComb_inside, thermStar_Demux.portConvRadComb)
     annotation (Line(points={{48,-6},{40,-6},{40,-46},{-7,-46},{-7,-8}}, color=
           {191,0,0}));
@@ -144,16 +153,16 @@ equation
   connect(Therm_Ceiling1, Ceiling.port_outside) annotation (Line(points={{-36,98},
           {-42,98},{-42,82},{-46,82},{-46,74.15}},     color={191,0,0}));
   connect(SolarRadiationPort[1], wallNorth.SolarRadiationPort) annotation (Line(
-        points={{-110,48},{-68,48},{-68,-86},{88,-86},{88,72},{-16,72},{-16,
+        points={{-110,48},{-68,48},{-68,-86},{88,-86},{88,72},{-22,72},{-22,
           63.8},{-21.0833,63.8}}, color={255,128,0}));
   connect(SolarRadiationPort[2], wallEast.SolarRadiationPort) annotation (Line(
         points={{-110,52},{-68,52},{-68,-86},{88,-86},{88,27},{61.8,27}}, color=
          {255,128,0}));
   connect(SolarRadiationPort[3], wallSouth.SolarRadiationPort) annotation (Line(
-        points={{-110,56},{-68,56},{-68,-86},{-26.0833,-86},{-26.0833,-66.8}},
+        points={{-110,56},{-68,56},{-68,-86},{-28.0833,-86},{-28.0833,-66.8}},
         color={255,128,0}));
   connect(SolarRadiationPort[4], wallWest.SolarRadiationPort) annotation (Line(
-        points={{-110,60},{-68,60},{-68,26},{-66,26},{-66,25.0833},{-61.8,
+        points={{-110,60},{-68,60},{-68,26},{-66,26},{-66,25.0833},{-63.8,
           25.0833}}, color={255,128,0}));
   connect(AirExchangeSUA, NaturalVentilation2.InPort1) annotation (Line(points=
           {{-114,-32},{-70,-32},{-70,7},{-30.6,7}}, color={0,0,127}));
@@ -161,6 +170,14 @@ equation
           -52},{-68,-52},{-68,8},{-50,8},{-50,10},{-30,10}}, color={191,0,0}));
   connect(NaturalVentilation2.port_b, airload.port) annotation (Line(points={{
           -18,10},{-14,10},{-14,-18},{10,-18}}, color={191,0,0}));
+  connect(thermOutside, wallEast.port_outside) annotation (Line(points={{-100,
+          100},{-68,100},{-68,-86},{88,-86},{88,-6},{60.3,-6}}, color={191,0,0}));
+  connect(thermOutside, wallNorth.port_outside) annotation (Line(points={{-100,
+          100},{-68,100},{-68,-86},{88,-86},{88,72},{10,72},{10,68},{11,68},{11,
+          62.3}}, color={191,0,0}));
+  connect(Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-44.5,-75},{-44.5,-60},{-44,-60},{-44,-46},{-7,
+          -46},{-7,-8}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,94},{94,-90}},
