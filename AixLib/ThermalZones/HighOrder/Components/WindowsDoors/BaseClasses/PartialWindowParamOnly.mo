@@ -14,10 +14,13 @@ model PartialWindowParamOnly
       group="Window type",
       descriptionLabel=true), choicesAllMatching=true);
 
-  replaceable CorrectionSolarGain.PartialCorGParamOnly correctionSolarGain constrainedby CorrectionSolarGain.PartialCorGParamOnly(
+  replaceable model CorrSolGain = CorrectionSolarGain.PartialCorGParamOnly
+    constrainedby CorrectionSolarGain.PartialCorGParamOnly(
    final n=1,
    final Uw=WindowType.Uw,
-   final g=WindowType.g) annotation (Placement(transformation(extent={{-50,50},{-30,70}})), choicesAllMatching=true);
+   final g=WindowType.g) annotation (choicesAllMatching=true);
+
+ CorrSolGain corrSolGain annotation(Placement(transformation(extent={{-50,50},{-30,70}})));
 
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
