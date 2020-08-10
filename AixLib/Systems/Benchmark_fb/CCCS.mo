@@ -8,7 +8,7 @@ package CCCS
       Placement(visible = true, transformation(origin={20,40},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.RBF RBF(i = 0.05, t = 1) annotation (
       Placement(visible = true, transformation(origin={-20,80},    extent = {{-10, -10}, {10, 10}}, rotation=0)));
-    Modelica.Blocks.Math.MultiSum OperationalCosts(k={1,1,1},        nu=3)   annotation (
+    Modelica.Blocks.Math.MultiSum OperationalCosts(k={1,1,1,1},      nu=4)   annotation (
       Placement(visible = true, transformation(extent={{-26,34},{-14,46}},      rotation = 0)));
     Modelica.Blocks.Math.Add OverallCost annotation (
       Placement(visible = true, transformation(extent={{50,-10},{70,10}},      rotation = 0)));
@@ -22,7 +22,7 @@ package CCCS
     Modelica.Blocks.Math.Add InvestmentCosts annotation (
       Placement(visible = true, transformation(origin={-18,-70},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.InvestmentCostsStrategy
-      investmentCostsStrategy1(KLOC=6.3)
+      investmentCostsStrategy1(KLOC=6.3,simtime=simulation_time)
                                annotation (Placement(visible=true,
           transformation(
           origin={-70,-40},
@@ -31,7 +31,7 @@ package CCCS
    AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
     Components.InvestmentCostsComponents investmentCostsComponents(k_Investment=
-         0)
+         0, simtime=simulation_time)
       annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
     AixLib.Systems.Benchmark_fb.CCCS.Components.EnergyCosts energyCosts1(
       cFuel=0.0455/3600000,
@@ -58,13 +58,15 @@ package CCCS
           rotation=0)));
     BaseClasses.CCCSBus CCCSBus
       annotation (Placement(transformation(extent={{78,-18},{118,18}})));
+    Components.LifespanReductionCosts lifespanReductionCosts(simTime=simulation_time)
+      annotation (Placement(transformation(extent={{-82,-24},{-56,8}})));
   equation
     connect(energyCosts1.EnergyCost, OperationalCosts.u[1]) annotation (
-      Line(points={{-59,80},{-40,80},{-40,42.8},{-26,42.8}},                                  color = {0, 0, 127}));
+      Line(points={{-59,80},{-40,80},{-40,43.15},{-26,43.15}},                                color = {0, 0, 127}));
     connect(emissionsCosts1.Emission_Cost, OperationalCosts.u[3]) annotation (
-      Line(points={{-59,52},{-40,52},{-40,37.2},{-26,37.2}},            color = {0, 0, 127}));
+      Line(points={{-59,52},{-40,52},{-40,38.95},{-26,38.95}},          color = {0, 0, 127}));
     connect(performanceReductionCosts1.PRC, OperationalCosts.u[2]) annotation (
-      Line(points={{-59,12},{-40,12},{-40,40},{-26,40}},                color = {0, 0, 127}));
+      Line(points={{-59,12},{-40,12},{-40,41.05},{-26,41.05}},          color = {0, 0, 127}));
     connect(OperationalCosts.y, product1.u2) annotation (
       Line(points={{-12.98,40},{0,40},{0,34},{8,34}},
                                              color = {0, 0, 127}));
@@ -126,6 +128,12 @@ package CCCS
             127}));
     connect(product1.y, CCCSBus.OperationalCosts) annotation (Line(points={{31,
             40},{40,40},{40,100},{100,100},{100,0},{98,0}}, color={0,0,127}));
+    connect(lifespanReductionCosts.y, OperationalCosts.u[4]) annotation (Line(
+          points={{-55.4,-8},{-40,-8},{-40,38},{-26,38},{-26,36.85}}, color={0,0,127}));
+    connect(mainBus, lifespanReductionCosts.mainBus) annotation (Line(
+        points={{-100,0},{-100,-7.4},{-82,-7.4}},
+        color={255,204,51},
+        thickness=0.5));
     annotation (
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(fillColor = {215, 215, 215},
               fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
@@ -137,13 +145,24 @@ package CCCS
   package Components
     model InvestmentCostsComponents
       Modelica.Blocks.Sources.Constant InvestmentCostsComponents(k = k_Investment) "it is assumed that the control strategy only utilizes components which are already installed - if new components are required, respective costs have to be added" annotation (
-        Placement(visible = true, transformation(extent = {{-14, -10}, {6, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(extent={{-20,20},{0,40}},       rotation = 0)));
       parameter Real k_Investment = 0 "Investment Costs";
+      parameter Real simtime;
       Modelica.Blocks.Interfaces.RealOutput y annotation (
         Placement(transformation(extent = {{96, -10}, {116, 10}})));
+      Modelica.Blocks.Math.Product product
+        annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+      Modelica.Blocks.Sources.Constant const(k=simtime/(365*24*3600))
+        "it is assumed that the control strategy only utilizes components which are already installed - if new components are required, respective costs have to be added"
+        annotation (Placement(visible=true, transformation(extent={{-20,-40},{0,
+                -20}}, rotation=0)));
     equation
-      connect(InvestmentCostsComponents.y, y) annotation (
-        Line(points = {{7, 0}, {106, 0}}, color = {0, 0, 127}));
+      connect(product.y, y)
+        annotation (Line(points={{61,0},{106,0}}, color={0,0,127}));
+      connect(InvestmentCostsComponents.y, product.u1)
+        annotation (Line(points={{1,30},{20,30},{20,6},{38,6}}, color={0,0,127}));
+      connect(const.y, product.u2) annotation (Line(points={{1,-30},{20,-30},{
+              20,-6},{38,-6}}, color={0,0,127}));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor=
@@ -157,10 +176,10 @@ Components")}),
     end InvestmentCostsComponents;
 
     model LifespanReductionCosts
-      parameter Real simTime= 4838400;
+      parameter Real simTime;
       Modelica.Blocks.Interfaces.RealOutput y annotation (
         Placement(visible = true, transformation(origin={166,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin={166,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_old.BaseClasses.MainBus mainBus annotation (
+      AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation (
           Placement(
           visible=true,
           transformation(extent={{-110,-4},{-90,16}}, rotation=0),
@@ -672,18 +691,50 @@ Costs")}),
     model InvestmentCostsStrategy
       "calculating the investement costs to evaluate the performance of control strategies according to CCCS evaluation method"
       parameter Real G = 50000 "Average salary of employee per annum [€]";
-      Real E "effort to implement control strategy in months";
+
       parameter Real EAF = 1.00 "effort adjustment factor";
       parameter Real KLOC = 10 "approximate number of lines of code in thousands [-]";
-      Real K_Strat;
+      parameter Real simtime "simulation time in seconds";
+
       // costs for implementing control strategy
       Modelica.Blocks.Interfaces.RealOutput kStrat annotation (
         Placement(visible = true, transformation(origin = {102, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {102, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Blocks.Math.MultiProduct multiProduct(nu=3)
+        annotation (Placement(transformation(extent={{-16,22},{-4,34}})));
+      Modelica.Blocks.Sources.Constant const(k=2.8)
+        annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
+      Modelica.Blocks.Sources.Constant const2(k=1.2)
+        annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
+      Modelica.Blocks.Math.Power power(base=KLOC, useExp=false)
+        annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
+      Modelica.Blocks.Sources.Constant EffortAdjusmentFactor(k=EAF)
+        annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
+      Modelica.Blocks.Math.MultiProduct multiProduct1(nu=3)
+        annotation (Placement(transformation(extent={{62,-6},{74,6}})));
+      Modelica.Blocks.Sources.Constant salary_per_annum(k=50000)
+        annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+      Modelica.Blocks.Sources.Constant const3(k=1/12)
+        annotation (Placement(transformation(extent={{0,-80},{20,-60}})));
+      Modelica.Blocks.Sources.Constant const1(k=simtime/(365*24*3600))
+        annotation (Placement(transformation(extent={{0,60},{20,80}})));
     equation
-      E = 2.8 * KLOC ^ 1.2 * EAF;
-      //Investment costs for implementing control strategy
-      K_Strat = E * G / 12;
-      kStrat = K_Strat;
+
+      connect(const2.y, power.u)
+        annotation (Line(points={{-79,-10},{-62,-10}}, color={0,0,127}));
+      connect(power.y, multiProduct.u[1]) annotation (Line(points={{-39,-10},{-30,-10},
+              {-30,30.8},{-16,30.8}}, color={0,0,127}));
+      connect(const.y, multiProduct.u[2]) annotation (Line(points={{-79,70},{-68,70},
+              {-68,68},{-30,68},{-30,26},{-24,26},{-24,28},{-16,28}}, color={0,0,127}));
+      connect(EffortAdjusmentFactor.y, multiProduct.u[3]) annotation (Line(points={{
+              -79,30},{-48,30},{-48,25.2},{-16,25.2}}, color={0,0,127}));
+      connect(multiProduct1.y, kStrat)
+        annotation (Line(points={{75.02,0},{102,0}}, color={0,0,127}));
+      connect(salary_per_annum.y, multiProduct1.u[1]) annotation (Line(points={{21,-30},
+              {50,-30},{50,2.8},{62,2.8}}, color={0,0,127}));
+      connect(multiProduct.y, multiProduct1.u[2]) annotation (Line(points={{-2.98,28},
+              {50,28},{50,4.44089e-16},{62,4.44089e-16}}, color={0,0,127}));
+      connect(const3.y, multiProduct1.u[3]) annotation (Line(points={{21,-70},{50,-70},
+              {50,-2},{56,-2},{56,-2.8},{62,-2.8}}, color={0,0,127}));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor=
@@ -713,8 +764,8 @@ Strategy")}),
         Placement(visible = true, transformation(origin = {90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Math.Feedback feedback2[5] annotation (
         Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-      Modelica.Blocks.Sources.Constant salary_per_annum(k=sal*sim_time/(365*24*
-            3600))                                               annotation (
+      Modelica.Blocks.Sources.Constant salary_per_annum(k=sal/(365*24*3600))
+                                                                 annotation (
         Placement(visible = true, transformation(origin={90,-22},   extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Sources.Constant productivity_factor(k = prodFac) annotation (
         Placement(visible = true, transformation(origin={88,-60},  extent = {{-10, -10}, {10, 10}}, rotation = 180)));
@@ -727,7 +778,7 @@ Strategy")}),
       parameter Real sim_time;
       Modelica.Blocks.Sources.BooleanExpression booleanExpression[5](each y = true) annotation (
         Placement(visible = true, transformation(extent = {{-100, -50}, {-80, -30}}, rotation = 0)));
-      Modelica.Blocks.Math.MultiProduct multiProduct[5](each nu=4)   annotation (
+      Modelica.Blocks.Math.MultiProduct multiProduct[5](each nu=3)   annotation (
         Placement(visible = true, transformation(origin = {0, -66}, extent = {{-6, -6}, {6, 6}}, rotation = 270)));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.LRM_Temp lRM_Temp[5] annotation (
         Placement(visible = true, transformation(extent = {{-40, 60}, {-20, 80}}, rotation = 0)));
@@ -739,11 +790,6 @@ Strategy")}),
         Placement(visible = true, transformation(origin = {30, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Math.MultiProduct multiProduct1[5](each nu = 3) annotation (
         Placement(visible = true, transformation(origin = {0, 28}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
-      Modelica.Blocks.Sources.Constant const1(k=1/(233*8*60)) annotation (Placement(
-            visible=true, transformation(
-            origin={90,12},
-            extent={{-10,-10},{10,10}},
-            rotation=180)));
     equation
       connect(booleanExpression[1].y, integrator1[1].reset) annotation (
         Line(points = {{-79, -40}, {-40.5, -40}, {-40.5, -36}, {-12, -36}}, color = {255, 0, 255}));
@@ -856,15 +902,15 @@ Strategy")}),
       connect(lrm_co21[2].y, feedback1[6].u2) annotation (
         Line(points = {{19.8, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
       connect(productivity_factor.y, multiProduct[5].u[3]) annotation (
-        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
+        Line(points={{77,-60},{-2.8,-60}},                         color = {0, 0, 127}));
       connect(productivity_factor.y, multiProduct[4].u[3]) annotation (
-        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
+        Line(points={{77,-60},{-2.8,-60}},                         color = {0, 0, 127}));
       connect(productivity_factor.y, multiProduct[3].u[3]) annotation (
-        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
+        Line(points={{77,-60},{-2.8,-60}},                         color = {0, 0, 127}));
       connect(productivity_factor.y, multiProduct[2].u[3]) annotation (
-        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
+        Line(points={{77,-60},{-2.8,-60}},                         color = {0, 0, 127}));
       connect(productivity_factor.y, multiProduct[1].u[3]) annotation (
-        Line(points={{77,-60},{-1.05,-60}},                        color = {0, 0, 127}));
+        Line(points={{77,-60},{-2.8,-60}},                         color = {0, 0, 127}));
       connect(feedback2[1].y, integrator1[1].u) annotation (
         Line(points = {{-9, 0}, {-26, 0}, {-26, -18}, {0, -18}}, color = {0, 0, 127}));
       connect(feedback2[2].y, integrator1[2].u) annotation (
@@ -886,15 +932,15 @@ Strategy")}),
       connect(const.y, feedback2[5].u1) annotation (
         Line(points = {{79, 90}, {60, 90}, {60, 0}, {8, 0}}, color = {0, 0, 127}));
       connect(integrator1[1].y, multiProduct[1].u[1]) annotation (
-        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{2.8,-60}},             color = {0, 0, 127}));
       connect(integrator1[2].y, multiProduct[2].u[1]) annotation (
-        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{2.8,-60}},             color = {0, 0, 127}));
       connect(integrator1[3].y, multiProduct[3].u[1]) annotation (
-        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{2.8,-60}},             color = {0, 0, 127}));
       connect(integrator1[4].y, multiProduct[4].u[1]) annotation (
-        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{2.8,-60}},             color = {0, 0, 127}));
       connect(integrator1[5].y, multiProduct[5].u[1]) annotation (
-        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{3.15,-60}},            color = {0, 0, 127}));
+        Line(points={{0,-41},{0,-48},{-4,-48},{-4,-60},{2.8,-60}},             color = {0, 0, 127}));
       connect(multiProduct[5].y, multiSum1.u[5]) annotation (
         Line(points = {{0, -73.02}, {0, -76}, {0, -80}, {-5.6, -80}}, color = {0, 0, 127}));
       connect(multiProduct[4].y, multiSum1.u[4]) annotation (
@@ -906,15 +952,15 @@ Strategy")}),
       connect(multiProduct[1].y, multiSum1.u[1]) annotation (
         Line(points = {{0, -73.02}, {0, -76}, {0, -80}, {5.6, -80}}, color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[5].u[2]) annotation (
-        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.33227e-15,-60}}, color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[4].u[2]) annotation (
-        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.33227e-15,-60}}, color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[3].u[2]) annotation (
-        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.33227e-15,-60}}, color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[2].u[2]) annotation (
-        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.33227e-15,-60}}, color = {0, 0, 127}));
       connect(salary_per_annum.y, multiProduct[1].u[2]) annotation (
-        Line(points={{79,-22},{60,-22},{60,-60},{1.05,-60}},        color = {0, 0, 127}));
+        Line(points={{79,-22},{60,-22},{60,-60},{1.33227e-15,-60}}, color = {0, 0, 127}));
       connect(multiSum1.y, PRC) annotation (
         Line(points = {{0, -101.7}, {-0.5, -101.7}, {-0.5, -100}, {60, -100}, {60, -80}, {110, -80}}, color = {0, 0, 127}));
       connect(Tset.y, lRM_Temp[5].Tset) annotation (
@@ -937,16 +983,6 @@ Strategy")}),
         Line(points = {{-101.95, 0.05}, {-70, 0.05}, {-70, 0}, {-50, 0}, {-50, 76.5}, {-40, 76.5}, {-40, 76.8}}, color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.TRoom5Mea, lRM_Temp[5].T) annotation (
         Line(points = {{-101.95, 0.05}, {-96, 0.05}, {-96, 0}, {-50, 0}, {-50, 76.5}, {-40, 76.5}, {-40, 76.8}}, color = {255, 204, 51}, thickness = 0.5));
-      connect(const1.y, multiProduct[1].u[4]) annotation (Line(points={{79,12},{68,12},
-              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
-              connect(const1.y, multiProduct[2].u[4]) annotation (Line(points={{79,12},{68,12},
-              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
-              connect(const1.y, multiProduct[3].u[4]) annotation (Line(points={{79,12},{68,12},
-              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
-              connect(const1.y, multiProduct[4].u[4]) annotation (Line(points={{79,12},{68,12},
-              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
-              connect(const1.y, multiProduct[5].u[4]) annotation (Line(points={{79,12},{68,12},
-              {68,0},{-3.15,0},{-3.15,-60}}, color={0,0,127}));
       annotation (
         Line(points = {{79, -32}, {74, -32}, {74, -34}, {60, -34}, {60, -52}, {-2.4, -52}, {-2.4, -50}, {0.525, -50}}, color = {0, 0, 127}),
         Icon(coordinateSystem(initialScale = 0.1), graphics={  Text(lineColor = {0, 0, 255}, extent = {{-150, 110}, {150, 150}}, textString = ""), Text(extent = {{-100, 52}, {5, 92}}, textString = ""), Text(extent = {{-100, -92}, {5, -52}}, textString = ""), Rectangle(fillColor = {215, 215, 215},
@@ -1872,7 +1908,9 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
                 fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-64, 36}, {64, -28}}, textString = "LRM_Temp")}),
         Diagram(coordinateSystem(preserveAspectRatio = false)),
-        Documentation(info = "<html><head></head><body><h4>calculating costs as part of the operational costs of the CCCS evaluation mtheod caused by performance reduction due to devation of room temperature from setpoint</h4></body></html>"));
+        Documentation(info="<html>
+<h4>calculating costs as part of the operational costs of the CCCS evaluation method caused by performance reduction due to devation of room temperature from setpoint</h4>
+</html>"));
     end LRM_Temp;
 
     model LRM_VOC
