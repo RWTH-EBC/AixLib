@@ -70,20 +70,22 @@ model Wall
   // window parameters
   parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
-  replaceable AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple windowModel if withWindow and outside
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindowParamOnly
    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindowParamOnly(
      final T0=T0,
      final windowarea=windowarea,
-     final WindowType=WindowType,
-     final correctionSolarGain=corrSolarGainWin)
+     final WindowType=WindowType)
        "Model for window"
-                     annotation (Dialog(tab="Window",  enable=withWindow and outside),   choicesAllMatching=true,
-    Placement(transformation(extent={{-15,-48},{11,-22}})));
+                     annotation (Dialog(tab="Window",  enable=withWindow and outside),   choicesAllMatching=true);
+
+  WindowModel windowModel if withWindow and outside annotation(Placement(transformation(extent={{-15,-48},{11,-22}})));
+
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
-  replaceable WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG corrSolarGainWin if withWindow and outside
+  replaceable model CorrSolarGainWin = WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorGParamOnly
     constrainedby WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorGParamOnly "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab = "Window", enable = withWindow and outside));
+
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   parameter Real LimitSolIrr if withWindow and outside and withSunblind
