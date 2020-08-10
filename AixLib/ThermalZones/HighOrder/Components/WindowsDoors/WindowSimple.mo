@@ -1,7 +1,7 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model WindowSimple "Simple window with radiation and U-Value"
   extends BaseClasses.PartialWindow(
-    redeclare replaceable BaseClasses.CorrectionSolarGain.NoCorG correctionSolarGain,
+    redeclare replaceable model CorrSolGain = BaseClasses.CorrectionSolarGain.NoCorG,
     final use_solarRadWinTrans=false,
     final use_windSpeedPort=false);
 
@@ -15,9 +15,9 @@ equation
   connect(prescribedHeatFlow.port, radPort) annotation (Line(points={{48,60},{90,60}}, color={191,0,0}));
   connect(port_outside, HeatTrans.port_a) annotation (Line(points={{-90,-10},{-10,-10}}, color={191,0,0}));
   connect(HeatTrans.port_b, port_inside) annotation (Line(points={{10,-10},{90,-10}}, color={191,0,0}));
-  connect(solarRad_in, correctionSolarGain.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
   connect(Ag.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-3.4,60},{28,60}}, color={0,0,127}));
-  connect(correctionSolarGain.solarRadWinTrans[1], Ag.u) annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
+  connect(solarRad_in, corrSolGain.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
+  connect(corrSolGain.solarRadWinTrans[1], Ag.u) annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,

@@ -2,7 +2,7 @@
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
   extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
-    redeclare replaceable BaseClasses.CorrectionSolarGain.CorG_ASHRAE140 correctionSolarGain,
+    redeclare replaceable model CorrSolGain = BaseClasses.CorrectionSolarGain.CorG_ASHRAE140,
     final use_solarRadWinTrans=true,
     final use_windSpeedPort=true);
 
@@ -65,9 +65,9 @@ equation
       pattern=LinePattern.Solid));
   connect(pane2.port_b, twoStar_RadEx.convPort) annotation (Line(points={{38,-8},{42,-8},{42,32},{44,32}}, color={191,0,0}));
   connect(WindSpeedPort, heatConv_outside.WindSpeedPort) annotation (Line(points={{-99,-59},{-70,-59},{-70,-17},{-65,-17}}, color={0,0,127}));
-  connect(solarRad_in, correctionSolarGain.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
-  connect(correctionSolarGain.solarRadWinTrans[1], Ag.u) annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(points={{-3.4,60},{42,60},{42,80},{92,80}}, color={0,0,127}));
+  connect(solarRad_in, corrSolGain.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
+  connect(corrSolGain.solarRadWinTrans[1], Ag.u) annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,

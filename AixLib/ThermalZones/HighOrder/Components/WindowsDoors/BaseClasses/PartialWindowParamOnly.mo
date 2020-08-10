@@ -14,8 +14,8 @@ model PartialWindowParamOnly
       group="Window type",
       descriptionLabel=true), choicesAllMatching=true);
 
-  replaceable model CorrSolGain = CorrectionSolarGain.PartialCorGParamOnly
-    constrainedby CorrectionSolarGain.PartialCorGParamOnly(
+  replaceable model CorrSolGain = CorrectionSolarGain.PartialCorG
+    constrainedby CorrectionSolarGain.PartialCorG(
    final n=1,
    final Uw=WindowType.Uw,
    final g=WindowType.g) annotation (choicesAllMatching=true);
