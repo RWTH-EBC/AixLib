@@ -12,9 +12,8 @@ model Benchmark_fb
     annotation (Placement(transformation(extent={{20,32},{40,52}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  Mode_based_ControlStrategy.Mode_Based_Controller_StateGraph
-    mode_Based_Controller_StateGraph
-    annotation (Placement(transformation(extent={{-38,20},{-18,40}})));
+  Mode_based_ControlStrategy.Mode_based_Controller mode_based_Controller
+    annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
 equation
   connect(benchmarkBuilding.mainBus, mainBus) annotation (Line(
       points={{0,1.6},{0,60}},
@@ -32,8 +31,8 @@ equation
       points={{0,1.6},{0,36},{29.9,36},{29.9,39.6}},
       color={255,204,51},
       thickness=0.5));
-  connect(mode_Based_Controller_StateGraph.mainBus, mainBus) annotation (Line(
-      points={{-18,30},{0,30},{0,60}},
+  connect(mode_based_Controller.mainBus, mainBus) annotation (Line(
+      points={{-19.8,30},{0,30},{0,60}},
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
