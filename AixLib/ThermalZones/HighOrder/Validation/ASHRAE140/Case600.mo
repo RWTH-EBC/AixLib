@@ -47,7 +47,7 @@ model Case600
     wallTypes=wallTypes,
     calcMethodIn=4,
     Type_Win=Type_Win,
-    final corrSolarGainWin=corrSolarGainWin,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     Win_Area=Win_Area,
@@ -186,8 +186,8 @@ model Case600
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win
      constrainedby AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
     "Window parametrization";
-  replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140 corrSolarGainWin
-    constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorGParamOnly
+  replaceable model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
+    constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
