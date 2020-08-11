@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
 model NoCorG "No correction for solar gain factor"
-  extends CorrectionSolarGain.PartialCorG;
+  extends PartialCorG;
 
 
 equation

@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
 model NoTransmittance "Opaque window, no shortwave transmittance"
-  extends CorrectionSolarGain.PartialCorG;
+  extends PartialCorG;
 
    parameter Boolean selectable = true "Select window type" annotation (Dialog(group="Window type", descriptionLabel = true));
 
