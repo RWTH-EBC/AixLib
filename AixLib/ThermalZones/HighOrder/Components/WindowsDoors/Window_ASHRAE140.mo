@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
   extends
@@ -154,22 +154,41 @@ equation
       Line(
         points={{72,36},{72,-72},{10,-72},{10,36},{72,36}}),
       Rectangle(extent={{-80,80},{80,-80}}, lineColor={0,0,0})}),
-    Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>The <b>WindowSimple</b> model represents a window described by the thermal transmission coefficient and the coefficient of solar energy transmission( with correction factors). </p>
-<h4><font color=\"#008000\">Concept</font></h4>
-<p>Phenomena being simulated: </p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>WindowSimple</b> model represents a window described by the
+  thermal transmission coefficient and the coefficient of solar energy
+  transmission( with correction factors).
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Phenomena being simulated:
+</p>
 <ul>
-<li>Solar energy transmission through the glass</li>
-<li>Heat transmission through the whole window</li>
+  <li>Solar energy transmission through the glass
+  </li>
+  <li>Heat transmission through the whole window
+  </li>
 </ul>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Exemplary U-Values for windows from insulation standards</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Exemplary U-Values for windows from insulation standards
+</p>
 <ul>
-<li>WschV 1984: specified &quot;two panes&quot; assumed 2,5 W/m2K</li>
-<li>WschV 1995: 1,8 W/m2K</li>
-<li>EnEV 2002: 1,7 W/m2K</li>
-<li>EnEV 2009: 1,3 W/m2K</li>
+  <li>WschV 1984: specified \"two panes\" assumed 2,5 W/m2K
+  </li>
+  <li>WschV 1995: 1,8 W/m2K
+  </li>
+  <li>EnEV 2002: 1,7 W/m2K
+  </li>
+  <li>EnEV 2009: 1,3 W/m2K
+  </li>
 </ul>
 </html>",
  revisions="<html>

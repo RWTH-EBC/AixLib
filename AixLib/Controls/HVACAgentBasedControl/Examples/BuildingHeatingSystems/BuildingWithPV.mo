@@ -366,22 +366,51 @@ equation
       derivatives=false,
       inputs=false,
       auxiliaries=false),
-    Documentation(revisions="<html>
-<ul>
-<li>July 2017, by Roozbeh Sangi: Documentation and model modified</li>
-<li>November 2016, by Felix B&uuml;nning: Updated to use AixLib 0.3.2, included in HVACAgentBasedControl library</li>
-<li>February 2016, by Felix B&uuml;nning: Developed and implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>July 2017, by Roozbeh Sangi: Documentation and model modified
+  </li>
+  <li>November 2016, by Felix Bünning: Updated to use AixLib 0.3.2,
+  included in HVACAgentBasedControl library
+  </li>
+  <li>February 2016, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>", info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+<h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model is a an example to show agent-based control with the provided library for a simple heating system</li>
-<li>The system consists of two thermal zones, a boiler and a heating rod</li>
-<li>With the help of a flexible cost function, the system prefers the heating rod when electricity comes from a PV panel for free and the boiler in all other cases</li>
-<li>The agents used are two RoomAgents, two HeatProducerAgents, one Broker and one MessageNotification</li>
+  <li>This model is a an example to show agent-based control with the
+  provided library for a simple heating system
+  </li>
+  <li>The system consists of two thermal zones, a boiler and a heating
+  rod
+  </li>
+  <li>With the help of a flexible cost function, the system prefers the
+  heating rod when electricity comes from a PV panel for free and the
+  boiler in all other cases
+  </li>
+  <li>The agents used are two RoomAgents, two HeatProducerAgents, one
+  Broker and one MessageNotification
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The system has two heat sources, which are a boiler and a heating rod. The heating rod is connected to a PV system. During the times the PV panel is able to provide electricity, the cost function of the heating rod considers the electricity free. During all other times the boiler is more cost efficient than the heating rod and is selected for heat generation first.</p>
-<p>This model was used to present the HVACAgentBasedControl library in [Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic]. For detailed information please refer to this source. </p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The system has two heat sources, which are a boiler and a heating
+  rod. The heating rod is connected to a PV system. During the times
+  the PV panel is able to provide electricity, the cost function of the
+  heating rod considers the electricity free. During all other times
+  the boiler is more cost efficient than the heating rod and is
+  selected for heat generation first.
+</p>
+<p>
+  This model was used to present the HVACAgentBasedControl library in
+  [Roozbeh Sangi, Felix Bünning, Johannes Fütterer, Dirk Müller. A
+  Platform for the Agent-based Control of HVAC Systems. Modelica
+  Conference, 2017, Prague, Czech Republic]. For detailed information
+  please refer to this source.
+</p>
 </html>"));
 end BuildingWithPV;

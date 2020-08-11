@@ -41,49 +41,173 @@ equation
 <td><p>&gt; 5</p></td>
 </tr>
 </table>
-<p><br/><br/>Reference values for air shielding value e: </p>
-<table summary=\"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
-<td></td>
-<td><p align=\"center\"><h4>heated room without </h4><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
-<td><p align=\"center\"><h4>heated room with</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
-<td><p align=\"center\"><h4>heated room with more than</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
-</tr>
-<tr>
-<td><p>no shielding</p></td>
-<td><p>0</p></td>
-<td><p>0.03</p></td>
-<td><p>0.05</p></td>
-</tr>
-<tr>
-<td><p>moderate shielding</p></td>
-<td><p>0</p></td>
-<td><p>0.02</p></td>
-<td><p>0.03</p></td>
-</tr>
-<tr>
-<td><p>well shielded</p></td>
-<td><p>0</p></td>
-<td><p>0.01</p></td>
-<td><p>0.02</p></td>
-</tr>
+<p>
+  <br/>
+  <br/>
+  Reference values for air shielding value e:
+</p>
+<table summary=\"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\">
+  <tr>
+    <td></td>
+    <td>
+      <p style=\"text-align:center;\"></p>
+      <h4>
+        heated room without
+      </h4>
+      <p style=\"text-align:center;\">
+        facade with openings
+      </p>
+      <p style=\"text-align:center;\">
+        exposed to wind
+      </p>
+    </td>
+    <td>
+      <p style=\"text-align:center;\"></p>
+      <h4>
+        heated room with
+      </h4>
+      <p style=\"text-align:center;\">
+        one facade with openings
+      </p>
+      <p style=\"text-align:center;\">
+        exposed to wind
+      </p>
+    </td>
+    <td>
+      <p style=\"text-align:center;\"></p>
+      <h4>
+        heated room with more than
+      </h4>
+      <p style=\"text-align:center;\">
+        one facade with openings
+      </p>
+      <p style=\"text-align:center;\">
+        exposed to wind
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        no shielding
+      </p>
+    </td>
+    <td>
+      <p>
+        0
+      </p>
+    </td>
+    <td>
+      <p>
+        0.03
+      </p>
+    </td>
+    <td>
+      <p>
+        0.05
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        moderate shielding
+      </p>
+    </td>
+    <td>
+      <p>
+        0
+      </p>
+    </td>
+    <td>
+      <p>
+        0.02
+      </p>
+    </td>
+    <td>
+      <p>
+        0.03
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        well shielded
+      </p>
+    </td>
+    <td>
+      <p>
+        0
+      </p>
+    </td>
+    <td>
+      <p>
+        0.01
+      </p>
+    </td>
+    <td>
+      <p>
+        0.02
+      </p>
+    </td>
+  </tr>
 </table>
-<p><br/><br/>Reference values for height correction value &epsilon;: </p>
-<table summary=\"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
-<td><h4>Height of room</h4></td>
-<td><p align=\"center\"><br/><b>&epsilon;</b></p></td>
-</tr>
-<tr>
-<td><p>0 - 10 m</p></td>
-<td><p>1</p></td>
-</tr>
-<tr>
-<td><p>10 - 30 m</p></td>
-<td><p>1.2</p></td>
-</tr>
-<tr>
-<td><p>&gt; 30 m</p></td>
-<td><p>1.5</p></td>
-</tr>
+<p>
+  <br/>
+  <br/>
+  Reference values for height correction value ε:
+</p>
+<table summary=\"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\">
+  <tr>
+    <td>
+      <h4>
+        Height of room
+      </h4>
+    </td>
+    <td>
+      <p style=\"text-align:center;\">
+        <br/>
+        <b>ε</b>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        0 - 10 m
+      </p>
+    </td>
+    <td>
+      <p>
+        1
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        10 - 30 m
+      </p>
+    </td>
+    <td>
+      <p>
+        1.2
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        &gt; 30 m
+      </p>
+    </td>
+    <td>
+      <p>
+        1.5
+      </p>
+    </td>
+  </tr>
 </table>
 <p><br/><br/><b><font style=\"color: #008000; \">References</font></b> </p>
 <p>DIN EN 12831 </p>

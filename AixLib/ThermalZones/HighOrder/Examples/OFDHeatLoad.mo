@@ -154,10 +154,12 @@ Calculation example: Chapter 6.1.3.4"),
           extent={{-112,90},{-74,68}},
           lineColor={28,108,200},
           textString="DIN EN 12831 Beiblatt 1
-Table 1")}),
-    Documentation(revisions="<html>
-<ul>
-<li><i>August 1, 2017</i> by Philipp Mehrfeld:<br/>Implement example</li>
+Table 1")}), experiment(StopTime=25920000, Interval=3600),
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>August 1, 2017</i> by Philipp Mehrfeld:<br/>
+    Implement example
+  </li>
 </ul>
 </html>"));
 end OFDHeatLoad;
