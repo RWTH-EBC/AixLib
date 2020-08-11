@@ -6,7 +6,7 @@ record Default "Default ASHRAE140 double pane glazing"
     rho={2500} "Density of wall layers",
     lambda={1.06} "Thermal conductivity of wall layers",
     c={750} "Specific heat capacity of wall layers",
-    eps=0.5 "DUMMY FOR WINDOWS. Emissivity of inner wall surface");
+    eps=0.84 "Emissivity of surface to interior");
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>

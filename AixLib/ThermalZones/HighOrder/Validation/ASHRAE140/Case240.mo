@@ -1,7 +1,9 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case240
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220(
-                                      Source_InternalGains(k=200));
+    internalGains=200,
+    ReferenceHeatingLoad(table=[240,5649,7448]),
+    ReferenceCoolingLoad(table=[240,-1246,-415]));
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>

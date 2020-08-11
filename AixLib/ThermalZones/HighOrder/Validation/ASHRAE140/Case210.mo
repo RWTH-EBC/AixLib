@@ -1,9 +1,9 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case210
-  extends Case220(Room(wallTypes(
-        roof=DataBase.Walls.ASHRAE140.RO_Case600(eps=0.1),
-        OW=DataBase.Walls.ASHRAE140.OW_Case600(eps=0.1),
-        groundPlate_upp_half=DataBase.Walls.ASHRAE140.FL_Case600(eps=0.1))));
+  extends Case220(
+    wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases_eps01(),
+    ReferenceCoolingLoad(table=[210,-668,-162]),
+    ReferenceHeatingLoad(table=[210,6456,6967]));
   annotation (Documentation(info="<html>
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 220: </p>

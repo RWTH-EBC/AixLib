@@ -1,21 +1,12 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case400
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
-                 Room(
-      solar_absorptance_OW=0.1,
-    outerWall_South( windowSimple(redeclare model correctionSolarGain =
-            Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoTransmittance),
-      use_shortWaveRadIn=false,
-      use_shortWaveRadOut=false,
-      solar_absorptance=0.1),
-    ceiling(use_shortWaveRadIn=false, solar_absorptance=0.1),
-    outerWall_West(use_shortWaveRadIn=false, solar_absorptance=0.1),
-    outerWall_North(use_shortWaveRadIn=false, solar_absorptance=0.1),
-    outerWall_East(use_shortWaveRadIn=false, solar_absorptance=0.1),
-    floor(use_shortWaveRadIn=false)),
-    TransmittedRad(y=0),
-    Source_InternalGains(k=0),
-    AirExchangeRate(k=0));
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140_NoSWTrans windowParam,
+    solar_absorptance_OW=0.1,
+    internalGains=0,
+    airExchange=0,
+    ReferenceHeatingLoad(table=[400,6900,8770]),
+    ReferenceCoolingLoad(table=[400,-61,0]));
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>

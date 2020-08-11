@@ -31,8 +31,8 @@ model ConvNLayerClearanceStar
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "ASHRAE140-2017",
-      choice=4 "Custom hCon (constant)",
+      choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
       radioButtons=true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2 "Constant convective heat transfer coefficient"     annotation(Dialog(group="Convection",   enable=
           calcMethod == 1));
@@ -119,10 +119,12 @@ equation
  <p>There is one inner and one outer <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>-connector to simulate one-dimensional heat transfer through the wall and heat storage within the wall.</p>
  <p>The <b>ConvNLayerClearanceStar</b> model extends the basic concept by adding the functionality of approximated longwave radiation exchange. Simply connect all radiation exchanging surfaces via their <b><a href=\"Modelica://AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b>-connectors. </p>
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>HeatPort_a</code>, the last element represents the layer connected to <code>HeatPort_b</code>. </p>
- <h4><font color=\"#008000\">Example Results</font></h4>
+ <p></a><code>HeatPort_b1</code> is the connection for <code>absSolarRadWin</code> the transmitted radiation through a window, that is absorbed by a wall. </p> 
+<h4><font color=\"#008000\">Example Results</font></h4>
  <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a>  therefore also part of the corresponding examples <a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
  </html>", revisions="<html>
  <ul>
+  <li><i>July 1, 2020 </i> by Konstantina Xanthopoulou:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/898\">#898</a>:Added HeatPort to connect absSolarRadWin in Wall.</li>
   <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Mainly add wallType, propagate energyDynamics, change icon.</li>
 <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>

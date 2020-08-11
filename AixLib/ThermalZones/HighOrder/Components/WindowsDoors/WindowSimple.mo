@@ -1,50 +1,23 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model WindowSimple "Simple window with radiation and U-Value"
-  extends BaseClasses.PartialWindow(final use_solarRadWinTrans=false, final use_windSpeedPort=false);
+  extends BaseClasses.PartialWindow(
+    redeclare replaceable model CorrSolGain = BaseClasses.CorrectionSolarGain.CorGSimple,
+    final use_solarRadWinTrans=false,
+    final use_windSpeedPort=false);
 
-  parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType=
-     DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Window type"
-    annotation (Dialog(
-      group="Window type",
-      enable=selectable,
-      descriptionLabel=true), choicesAllMatching=true);
-  parameter Real frameFraction(
-    min=0.0,
-    max=1.0) = WindowType.frameFraction
-    "Frame fraction" annotation (Dialog(
-      group="Window type",
-      enable=not selectable,
-      descriptionLabel=true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = WindowType.Uw
-    "Thermal transmission coefficient of whole window"
-    annotation (Dialog(group="Window type", enable=not selectable));
 
-  replaceable model correctionSolarGain =
-      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
-    "Model for correction of solar gain factor" annotation (Dialog(
-        descriptionLabel=true), choicesAllMatching=true);
-  correctionSolarGain corG(
-    final Uw=Uw,
-    final n=1)
-    annotation (Placement(transformation(extent={{-50,50},{-30,70}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(
-    final G=windowarea*Uw)
+    final G=windowarea*WindowType.Uw)
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
-  Modelica.Blocks.Math.Gain Ag(final k(
-      unit="m2",
-      min=0.0) = (1 - frameFraction)*windowarea)
-    annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
-    annotation (Placement(transformation(extent={{2,50},{22,70}})));
+    annotation (Placement(transformation(extent={{28,50},{48,70}})));
 equation
-  connect(corG.solarRadWinTrans[1], Ag.u)
-    annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
-  connect(Ag.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-3.4,60},{2,60}}, color={0,0,127}));
-  connect(solarRad_in, corG.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
-  connect(prescribedHeatFlow.port, radPort) annotation (Line(points={{22,60},{90,60}}, color={191,0,0}));
+  connect(prescribedHeatFlow.port, radPort) annotation (Line(points={{48,60},{90,60}}, color={191,0,0}));
   connect(port_outside, HeatTrans.port_a) annotation (Line(points={{-90,-10},{-10,-10}}, color={191,0,0}));
   connect(HeatTrans.port_b, port_inside) annotation (Line(points={{10,-10},{90,-10}}, color={191,0,0}));
+  connect(Ag.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-3.4,60},{28,60}}, color={0,0,127}));
+  connect(solarRad_in, corrSolGain.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
+  connect(corrSolGain.solarRadWinTrans[1], Ag.u) annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,

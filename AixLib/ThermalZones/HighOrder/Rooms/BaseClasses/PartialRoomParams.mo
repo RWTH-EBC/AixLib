@@ -6,8 +6,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Modelica.SIunits.SpecificHeatCapacity cAir=1007 "Specific heat capacity of air" annotation (Dialog(group="Air volume of room"));
 
   replaceable parameter AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
-    wallTypes constrainedby
-    AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
+    wallTypes constrainedby AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
     "Types of walls (contains multiple records)"
     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
 
@@ -32,16 +31,23 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "ASHRAE140-2017",
-      choice=4 "Custom hCon (constant)",
+      choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
       radioButtons=true));
+
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=2.5
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
-    annotation(Dialog(tab="Inner walls", group="Heat convection", enable=(calcMethodIn==4)));
+    annotation(Dialog(tab="Inner walls", group="Heat convection", enable=(calcMethodIn==3)));
 
   //// Outer / Exterior wall parameters
   //Window type
+
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win "Window parametrization" annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+
   // Solar absorptance
   parameter Real solar_absorptance_OW(min=0, max=1)=0.6 "Solar absoptance outer walls "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
