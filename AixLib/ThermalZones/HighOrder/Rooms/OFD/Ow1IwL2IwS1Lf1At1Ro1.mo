@@ -61,8 +61,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withDoor=false,
     door_height=0,
     door_width=0,
-    final windowModel=windowModel,
-    final corrSolarGainWin=corrSolarGainWin)
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                      annotation (Placement(transformation(extent={{-60,-12},{-50,46}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inner_wall1(
     final energyDynamics=energyDynamicsWalls,
@@ -84,8 +84,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
     withDoor=false,
-    final windowModel=windowModel,
-    final corrSolarGainWin=corrSolarGainWin)
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={-14,58},
         extent={{-3.99997,-22},{3.99999,22}},
@@ -110,8 +110,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=room_height_long,
     withWindow=false,
     withDoor=false,
-    final windowModel=windowModel,
-    final corrSolarGainWin=corrSolarGainWin)
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={61,19},
         extent={{-3,-15},{3,15}},
@@ -136,8 +136,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
     withDoor=false,
-    final windowModel=windowModel,
-    final corrSolarGainWin=corrSolarGainWin)
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={20,-60},
         extent={{-4,-24},{4,24}},
@@ -163,8 +163,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withWindow=false,
     withDoor=false,
     ISOrientation=3,
-    final windowModel=windowModel,
-    final corrSolarGainWin=corrSolarGainWin)
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                      annotation (Placement(transformation(
         origin={28,60},
         extent={{1.99999,-10},{-1.99998,10}},
@@ -190,8 +190,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withWindow=false,
     withDoor=false,
     ISOrientation=2,
-    final windowModel=windowModel,
-    final corrSolarGainWin=corrSolarGainWin)      annotation (Placement(transformation(
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)      annotation (Placement(transformation(
         origin={-24,-60},
         extent={{-1.99999,-10},{1.99999,10}},
         rotation=90)));
@@ -215,8 +215,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=room_height_long,
     withWindow=false,
     withDoor=false,
-    final windowModel=windowModel,
-    final corrSolarGainWin=corrSolarGainWin)
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         origin={61,-20},
         extent={{-2.99998,-16},{2.99998,16}},
@@ -244,8 +244,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withWindow=withWindow3,
     windowarea=windowarea_RO,
     ISOrientation=1,
-    final windowModel=windowModel,
-    final corrSolarGainWin=corrSolarGainWin)
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                      annotation (Placement(transformation(
         origin={58,59},
         extent={{-2.99997,-16},{2.99999,16}},
