@@ -310,7 +310,6 @@ equation
   <a href=
   \"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a>
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>May 30, 2019</i> by Katharina Brinkmann / Philipp Mehrfeld:<br/>

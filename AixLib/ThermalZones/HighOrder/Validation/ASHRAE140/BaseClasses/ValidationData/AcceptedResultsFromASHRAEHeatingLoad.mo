@@ -11,20 +11,24 @@ record AcceptedResultsFromASHRAEHeatingLoad
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
- <ul>
- <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
-<p>AnnualHeatingLoads for all implemented Cases as described in ASHRAE Standard 140.</p>
-[CaseNumber,minAnnualHeatingLoad,maxAnnualHeatingLoad]</p>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    Implemented
+  </li>
 </ul>
-<p><b><span style=\"color: #008000;\">References</span></b> </p>
+</html>", info="<html>
+<p>
+  AnnualHeatingLoads for all implemented Cases as described in ASHRAE
+  Standard 140.
+</p>[CaseNumber,minAnnualHeatingLoad,maxAnnualHeatingLoad]
+<p>
+  <b><span style=\"color: #008000;\">References</span></b>
+</p>
 <ul>
-<li>ASHRAE140-2017 AccompanyingFiles\\Sec5-2AFiles\\Informative Materials\\RESULTS5-2A </li>
-</ul>
-</ul>
-</ul>
+  <li>ASHRAE140-2017 AccompanyingFiles\\Sec5-2AFiles\\Informative
+  Materials\\RESULTS5-2A
+  </li>
 </ul>
 </html>"));
 end AcceptedResultsFromASHRAEHeatingLoad;

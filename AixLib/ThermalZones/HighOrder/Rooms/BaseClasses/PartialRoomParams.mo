@@ -116,11 +116,10 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
 
     annotation (Dialog(tab="Infiltration acc. to EN 12831 (building airtightness"),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>January 9, 2020
-    by Philipp Mehrfeld:<br/>
-       Model added to the AixLib library.
+    Documentation(revisions="<html><ul>
+  <li>January 9, 2020 by Philipp Mehrfeld:<br/>
+    Model added to the AixLib library.
+  </li>
 </ul>
 </html>"));
 end PartialRoomParams;

@@ -9,11 +9,10 @@ record Default "Default ASHRAE140 double pane glazing"
     eps=0.84 "Emissivity of surface to interior");
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>January 9, 2020
-    by Philipp Mehrfeld:<br/>
-       Model added to the AixLib library.
+    Documentation(revisions="<html><ul>
+  <li>January 9, 2020 by Philipp Mehrfeld:<br/>
+    Model added to the AixLib library.
+  </li>
 </ul>
 </html>"));
 end Default;

@@ -4,17 +4,22 @@ model Case240
     internalGains=200,
     ReferenceHeatingLoad(table=[240,5649,7448]),
     ReferenceCoolingLoad(table=[240,-1246,-415]));
-  annotation (Documentation(revisions="<html>
- <ul>
- <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 220: </p>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 220:
+</p>
 <ul>
-<li> Internal Gains = 200 W</li>
-</ul>
-</ul>
+  <li>Internal Gains = 200 W
+  </li>
 </ul>
 </html>"));
 end Case240;

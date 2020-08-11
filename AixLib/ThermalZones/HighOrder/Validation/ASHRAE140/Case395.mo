@@ -5,17 +5,22 @@ model Case395
     airExchange=0,
     ReferenceHeatingLoad( table=[395,4799,5835]),
     ReferenceCoolingLoad(table=[395,-18,0]));
-  annotation (Documentation(revisions="<html>
- <ul>
- <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 400: </p>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 400:
+</p>
 <ul>
-<li> no window</li>
-</ul>
-</ul>
+  <li>no window
+  </li>
 </ul>
 </html>"));
 end Case395;
