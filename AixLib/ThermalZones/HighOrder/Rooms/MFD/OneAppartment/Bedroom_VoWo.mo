@@ -245,17 +245,33 @@ equation
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 100}, {-90, 80}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -50}, {-90, -70}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -140}, {-90, -160}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the bedroom.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bedroom.png\"
-    alt=\"Room layout\"/></p>
- </html>"));
+            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the bedroom.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bedroom.png\"
+  alt=\"Room layout\">
+</p>
+</html>"));
 end Bedroom_VoWo;

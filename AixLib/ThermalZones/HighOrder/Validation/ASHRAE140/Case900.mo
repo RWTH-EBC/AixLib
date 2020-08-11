@@ -8,7 +8,8 @@ model Case900
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 600: </p>
 <ul>
-<li>high mass exterior vertical walls and floor  </li>
+  <li>high mass exterior vertical walls and floor
+  </li>
 </ul>
 </html>", revisions="<html>
  <ul>

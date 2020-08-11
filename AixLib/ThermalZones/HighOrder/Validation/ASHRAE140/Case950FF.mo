@@ -9,7 +9,8 @@ model Case950FF
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 950: </p>
 <ul>
-<li>no cooling or heating equipment</li>
+  <li>no cooling or heating equipment
+  </li>
 </ul>
 </html>", revisions="<html>
  <ul>

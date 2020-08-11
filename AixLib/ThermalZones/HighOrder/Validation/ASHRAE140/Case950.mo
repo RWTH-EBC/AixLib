@@ -7,11 +7,17 @@ model Case950
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 900:</p>
 <ul>
-<li>From 1800 hours to 0700 hours, vent fan = ON</li>
-<li>From 0700 hours to 1800 hours, vent fan = OFF</li>
-<li>Heating = always OFF</li>
-<li>From 1800 hours to 0700 hours, cool = OFF</li>
-<li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27 degC; otherwise, cool = OFF</li>
+  <li>From 1800 hours to 0700 hours, vent fan = ON
+  </li>
+  <li>From 0700 hours to 1800 hours, vent fan = OFF
+  </li>
+  <li>Heating = always OFF
+  </li>
+  <li>From 1800 hours to 0700 hours, cool = OFF
+  </li>
+  <li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27
+  degC; otherwise, cool = OFF
+  </li>
 </ul>
 </html>", revisions="<html>
  <ul>

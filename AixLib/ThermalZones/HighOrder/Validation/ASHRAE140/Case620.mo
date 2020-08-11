@@ -438,7 +438,9 @@ equation
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 600: </p>
 <ul>
-<li>no windows on south side. two windows, one facing east, one facing west, each with a surface of 6m2.</li>
+  <li>no windows on south side. two windows, one facing east, one
+  facing west, each with a surface of 6m2.
+  </li>
 </ul>
 </html>"));
 end Case620;

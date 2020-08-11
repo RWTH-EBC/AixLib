@@ -360,7 +360,8 @@ equation
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 650: </p>
 <ul>
-<li>no cooling or heating equipment</li>
+  <li>no cooling or heating equipment
+  </li>
 </ul>
 </html>"));
 end Case600FF;

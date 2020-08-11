@@ -12,11 +12,16 @@ record Vitocal350BWH110 "Vitocal 350 BWH 110"
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,
-    Documentation(info="<html>
-<p>Data from manufacturer&apos;s data sheet (Viessmann). These exact curves are given in the data sheet for measurement procedure according to EN 255. </p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  Data from manufacturer's data sheet (Viessmann). These exact curves
+  are given in the data sheet for measurement procedure according to EN
+  255.
+</p>
 <ul>
- <li><i>Oct 14, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Transferred to AixLib.</li>
+  <li>
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
+    Transferred to AixLib.
+  </li>
 </ul>
 </html>"));
 end Vitocal350BWH110;

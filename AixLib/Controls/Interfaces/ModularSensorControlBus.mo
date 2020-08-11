@@ -112,52 +112,69 @@ expandable connector ModularSensorControlBus
     "Array of measured mass flow rates at sink-sided expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 25, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This connector is a base connector used for modular heat pumps and contains 
-typical variables that may be measured in the modular heat pump models.
+  This connector is a base connector used for modular heat pumps and
+  contains typical variables that may be measured in the modular heat
+  pump models.
 </p>
-<h4>Overview of sensors' positions</h4>
+<h4>
+  Overview of sensors' positions
+</h4>
 <p>
-Typically, a heat pump consists of four main components: A compressor, a
-condenser, an expansion valve and an evaporator. Furthermore, considering the 
-perspective of the refrigerant used in the heat pump, the evaporator is the 
-source and the condenser is the sink. Therefore, it is assumed that the heat 
-pump has six sensor positions:
+  Typically, a heat pump consists of four main components: A
+  compressor, a condenser, an expansion valve and an evaporator.
+  Furthermore, considering the perspective of the refrigerant used in
+  the heat pump, the evaporator is the source and the condenser is the
+  sink. Therefore, it is assumed that the heat pump has six sensor
+  positions:
 </p>
 <ol>
-<li>Compressor's outlet</li>
-<li>Condenser's outlet</li>
-<li>Expansion valve's outlet</li>
-<li>Evaporator's outlet</li>
-<li>Source's inlet and outlet</li>
-<li>Sink's inlet and outlet</li>
+  <li>Compressor's outlet
+  </li>
+  <li>Condenser's outlet
+  </li>
+  <li>Expansion valve's outlet
+  </li>
+  <li>Evaporator's outlet
+  </li>
+  <li>Source's inlet and outlet
+  </li>
+  <li>Sink's inlet and outlet
+  </li>
 </ol>
-<h4>Overview of variables</h4>
+<h4>
+  Overview of variables
+</h4>
 <p>
-Four different sensors are proposed at refrigerant's side:
+  Four different sensors are proposed at refrigerant's side:
 </p>
 <ol>
-<li>Absolute pressure</li>
-<li>Temperature</li>
-<li>Mass flow rate</li>
-<li>Quality</li>
+  <li>Absolute pressure
+  </li>
+  <li>Temperature
+  </li>
+  <li>Mass flow rate
+  </li>
+  <li>Quality
+  </li>
 </ol>
 <p>
-Three different sensors are proposed at source's and sink's sides:
+  Three different sensors are proposed at source's and sink's sides:
 </p>
 <ol>
-<li>Absolute pressure</li>
-<li>Temperature</li>
-<li>Mass flow rate</li>
+  <li>Absolute pressure
+  </li>
+  <li>Temperature
+  </li>
+  <li>Mass flow rate
+  </li>
 </ol>
 </html>"));
 end ModularSensorControlBus;

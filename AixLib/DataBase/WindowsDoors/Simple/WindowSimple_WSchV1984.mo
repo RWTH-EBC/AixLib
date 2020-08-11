@@ -13,7 +13,8 @@ record WindowSimple_WSchV1984 "Window according to WSchV1984"
 <p>Record is used in model <a href=\"Building.Components.WindowsDoors.WindowSimple\">Building.Components.WindowsDoors.WindowSimple</a> </p>
 <p>Source: </p>
 <ul>
-<li>For EnEV see Waermeschutzverordnung 1984. 1984 </li>
+  <li>For EnEV see Waermeschutzverordnung 1984. 1984
+  </li>
 </ul>
 </html>"));
 end WindowSimple_WSchV1984;

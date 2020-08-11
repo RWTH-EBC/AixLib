@@ -8,7 +8,8 @@ model Case900FF
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 900: </p>
 <ul>
-<li>no cooling or heating equipment</li>
+  <li>no cooling or heating equipment
+  </li>
 </ul>
 </html>", revisions="<html>
  <ul>

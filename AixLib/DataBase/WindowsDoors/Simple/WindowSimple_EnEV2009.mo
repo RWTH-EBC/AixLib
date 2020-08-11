@@ -14,7 +14,10 @@ record WindowSimple_EnEV2009 "Window according to EnEV 2009"
 <p>Record is used in model <a href=\"Building.Components.WindowsDoors.WindowSimple\">Building.Components.WindowsDoors.WindowSimple</a> </p>
 <p>Source: </p>
 <ul>
-<li>For EnEV see Bundesregierung (Veranst.): Verordnung ueber energiesparenden Waermeschutz und energiesparende Anlagentechnik bei Gebaeuden. Berlin, 2009 </li>
+  <li>For EnEV see Bundesregierung (Veranst.): Verordnung ueber
+  energiesparenden Waermeschutz und energiesparende Anlagentechnik bei
+  Gebaeuden. Berlin, 2009
+  </li>
 </ul>
 </html>"));
 end WindowSimple_EnEV2009;

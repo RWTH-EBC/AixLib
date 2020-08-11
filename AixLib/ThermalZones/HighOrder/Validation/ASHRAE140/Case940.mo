@@ -8,8 +8,12 @@ model Case940
 <p>As described in ASHRAE Standard 140.</p>
 <p>Difference to case 900:</p>
 <ul>
-<li>From 2300 hours to 0700 hours, heat = ON if temperature &lt; 10 degC</li>
-<li>From 0700 hours to 2300 hours, heat = ON if temperature &lt; 20 degC</li>
+  <li>From 2300 hours to 0700 hours, heat = ON if temperature &lt; 10
+  degC
+  </li>
+  <li>From 0700 hours to 2300 hours, heat = ON if temperature &lt; 20
+  degC
+  </li>
 </ul>
 </html>", revisions="<html>
  <ul>

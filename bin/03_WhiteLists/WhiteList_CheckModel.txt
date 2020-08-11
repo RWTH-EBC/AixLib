@@ -1,0 +1,30 @@
+Resources
+['IBPSA.Resources.src.fluid.heatpumps.calibration.Examples.SomeManufacturer_ABC060_70kW_4_0COP_R410A']
+
+Experimental
+[]
+
+ThermalZones
+['AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640',  'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650',  'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF',  'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF']
+
+Airflow
+[]
+
+BoundaryConditions
+[]
+
+Fluid
+['IBPSA.Fluid.Geothermal.Borefields.OneUTube', 'IBPSA.Fluid.Geothermal.Borefields.TwoUTubes', 'IBPSA.Fluid.Sensors.TemperatureWetBulbTwoPort', 'IBPSA.Fluid.Sensors.MassFractionTwoPort', 'IBPSA.Fluid.Sensors.SensibleEnthalpyFlowRate', 'IBPSA.Fluid.Sensors.RelativeHumidityTwoPort', 'IBPSA.Fluid.Sensors.LatentEnthalpyFlowRate', 'IBPSA.Fluid.Sensors.RelativeHumidity', 'IBPSA.Fluid.Humidifiers.SprayAirWasher_X', 'IBPSA.Fluid.Humidifiers.SteamHumidifier_X', 'IBPSA.Fluid.Sources.MassFlowSource_h', 'IBPSA.Fluid.Sources.TraceSubstancesFlowSource', 'IBPSA.Fluid.Sources.MassFlowSource_T', 'IBPSA.Fluid.Storage.StratifiedEnhancedInternalHex', 'IBPSA.Fluid.HeatPumps.Calibration.BaseClasses.PartialWaterToWater', 'IBPSA.Fluid.Movers.BaseClasses.FlowMachineInterface', 'AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPumps', 'AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase', 'AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase', 'AixLib.Fluid.Storage.BufferStorage', 'AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.StaticHeatPumpBoundaries.BaseModelStaticHeatPump', 'AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump', 'AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.StaticHeatPumpBoundaries.BaseModelStaticHeatPumps' ]
+
+Utilities
+['IBPSA.Utilities.Psychrometrics.TWetBul_TDryBulXi']
+
+Controls
+[]
+
+Media
+[]
+
+Obsolete
+[]
+

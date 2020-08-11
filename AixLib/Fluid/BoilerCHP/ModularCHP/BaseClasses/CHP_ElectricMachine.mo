@@ -229,7 +229,6 @@ else
   loss which corresponds to roughly 22% of the total losses according
   to Almeida (DOI: 10.1109/MIAS.2010.939427).
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April, 2019&#160;</i> by Julian Matthes:<br/>
