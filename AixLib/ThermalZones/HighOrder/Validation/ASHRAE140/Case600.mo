@@ -46,8 +46,8 @@ model Case600
   Rooms.ASHRAE140.SouthFacingWindows Room(
     wallTypes=wallTypes,
     calcMethodIn=4,
-    Type_Win=Type_Win,
-    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
+    Type_Win=windowParam,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     Win_Area=Win_Area,
@@ -183,9 +183,9 @@ model Case600
   parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
       AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
     "Types of walls (contains multiple records)";
-  replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win
-     constrainedby AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
-    "Window parametrization";
+  replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
+    constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
+    annotation (choicesAllMatching=true);
   replaceable model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
     constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);

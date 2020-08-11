@@ -1,5 +1,5 @@
 within AixLib.DataBase.WindowsDoors.Simple;
-record WindowSimple_ASHRAE140 "ASHRAE 140 window"
+record WindowSimple_ASHRAE140 "Window according to ASHRAE 140"
 
 extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
     Uw=3,
