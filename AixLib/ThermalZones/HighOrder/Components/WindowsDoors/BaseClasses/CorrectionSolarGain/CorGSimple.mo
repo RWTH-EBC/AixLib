@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
-model NoCorG "No correction for solar gain factor"
+model CorGSimple "Simple correction with factor g for shortwave solar transmittance"
   extends PartialCorG;
-
 
 equation
     for i in 1:n loop
@@ -12,4 +11,4 @@ equation
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Simple model with no correction of transmitted solar radiation depending on incidence angle.</p>
 </html>"));
-end NoCorG;
+end CorGSimple;

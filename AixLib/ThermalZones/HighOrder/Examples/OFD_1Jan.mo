@@ -39,8 +39,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))
     annotation (Placement(transformation(extent={{125,55},{77,87}})));
 
-  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
-    OFD(
+  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope OFD(
     redeclare DataBase.Walls.Collections.OFD.WSchV1995Heavy wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -48,12 +47,11 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     TWalls_start=292.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995 Type_Win,
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG,
+    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
-               withDynamicVentilation=true,
-    UValOutDoors=if TIR == 1 then 1.8 else 2.9)
-    annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
+    withDynamicVentilation=true,
+    UValOutDoors=if TIR == 1 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.GroundFloor
