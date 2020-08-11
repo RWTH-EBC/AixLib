@@ -2733,7 +2733,12 @@ Added documentation.</li>
 
       parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
 
-      final parameter Modelica.SIunits.Volume V_Water = vol.m_flow_nominal * tau / rho_default / dis "Water Volume in Tube";
+      parameter Integer calculateV annotation (Dialog(group="Calculation Method to determine Water Volume in Pipe",
+            descriptionLabel=true), choices(
+          choice=1 "Calculate with inner diameter",
+          choice=2 "Calculate with time constant",
+          radioButtons=true));
+      final parameter Modelica.SIunits.Volume V_Water = if calculateV == 1 then (pi / 4 * d_i[1]^(2) * L_pipe) else (vol.m_flow_nominal * tau / (rho_default * dis))  "Water Volume in Tube";
       final parameter Modelica.SIunits.Time tau = 60 "Time constant to heat up the medium";
 
       parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
@@ -2844,8 +2849,7 @@ Added documentation.</li>
             points={{-30,66.8},{-30,62},{4.44089e-16,62}}, color={191,0,0}));
       connect(twoStar_RadEx_floor.rad, radport_floor)
         annotation (Line(points={{-30,85.1},{-30,100}}, color={95,95,95}));
-      connect(simpleNLayer_floor.port_b, heatport_floor) annotation (Line(points={{
-              4.44089e-16,62},{18,62},{18,96}},
+      connect(simpleNLayer_floor.port_b, heatport_floor) annotation (Line(points={{4.44089e-16,62},{18,62},{18,96}},
                                     color={191,0,0}));
               if Ceiling then
       connect(simpleNLayer_ceiling.port_b, twoStar_RadEx_ceiling.conv)
@@ -2869,8 +2873,7 @@ Added documentation.</li>
         annotation (Line(points={{40,12},{17,12},{17,11.36}},
                                                            color={191,0,0}));
       connect(heatConda_pipe[n_pipe].port_b, simpleNLayer_floor.port_a) annotation (Line(
-            points={{17,18.92},{0,18.92},{0,18},{-6.66134e-16,18},{-6.66134e-16,
-              42}},
+            points={{17,18.92},{0,18.92},{0,18},{-6.66134e-16,18},{-6.66134e-16,42}},
             color={191,0,0}));
 
             for i in 1:(n_pipe-1) loop
@@ -2887,6 +2890,11 @@ Added documentation.</li>
       extends Fluid.Interfaces.PartialTwoPort;
 
       parameter Integer dis(min=1) "Number of Discreatisation Layers";
+      parameter Integer calculateV annotation (Dialog(group="Panel Heating",
+            descriptionLabel=true), choices(
+          choice=1 "Calculate water volume with inner diameter",
+          choice=2 "Calculate water volume with time constant",
+          radioButtons=true));
 
       parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
       parameter Modelica.SIunits.Temperature T_Flow "nominal flow temperature";
@@ -2906,7 +2914,6 @@ Added documentation.</li>
       parameter Modelica.SIunits.ThermalConductivity lambda_ceiling[n_ceiling] = {0,0,0} "Thermal conductivity of ceiling layers" annotation(Dialog(group = "Floor Layers", enable = Ceiling));
       parameter Modelica.SIunits.SpecificHeatCapacity c_ceiling[n_ceiling] = {0,0,0} "Specific heat capacity of ceiling layers" annotation(Dialog(group = "Floor Layers", enable = Ceiling));
       parameter Modelica.SIunits.Emissivity eps_ceiling = 0.95 "Emissivity of ceiling surface" annotation(Dialog(group = "Floor Layers", enable = Ceiling));
-      parameter Modelica.SIunits.Temperature T_U = Modelica.SIunits.Conversions.from_degC(20) "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
 
           replaceable parameter
         AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.ZoneSpecification.ZoneDefinition
@@ -2915,7 +2922,6 @@ Added documentation.</li>
              annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
       final parameter Modelica.SIunits.Temperature T_Fmax = ZoneType.T_Fmax;
       final parameter Modelica.SIunits.Temperature T_Room = ZoneType.T_Room;
-      final parameter Modelica.SIunits.HeatFlux q_Gmax = ZoneType.q_Gmax;
 
       parameter Modelica.SIunits.Distance T "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
       final parameter Modelica.SIunits.Length L_pipe = A / T "Length of Panel Heating Pipe";
@@ -2942,34 +2948,11 @@ Added documentation.</li>
       parameter Modelica.SIunits.Diameter D = d_a  "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating", enable = withInsulating));
       final parameter Modelica.SIunits.Diameter d_M = if withInsulating then D else 0;
 
-      parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
-      parameter Modelica.SIunits.VolumeFraction psi = 0 "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
-      parameter Modelica.SIunits.ThermalConductivity lambda_W = 0 "Thermal conductivity of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
-
       final parameter Integer n_pipe( min = 1) = if withInsulating then 2 else 1;
       final parameter Modelica.SIunits.Thickness d_pipe[n_pipe] = if withInsulating then {s_R, (D - d_a)} else {s_R} "Thickness of pipe layers";
       final parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] = if withInsulating then {lambda_R, lambda_M} else {lambda_R} "Thermal conductivity of pipe layer";
 
-      final parameter Modelica.SIunits.Thickness s_ins = if Ceiling then d_ceiling[1] else 0 "Thickness of thermal insulation";
-      final parameter Modelica.SIunits.ThermalConductivity lambda_ins = if Ceiling then lambda_ceiling[1] else 0 "Thermal conductivity of thermal insulation";
-      final parameter Modelica.SIunits.ThermalInsulance R_lambdaIns = if Ceiling then s_ins / lambda_ins else 0 "Thermal resistance of thermal insulation";
-
-      final parameter Modelica.SIunits.Thickness s_u = d_floor[1] "thickness of cover above pipe";
-      final parameter Modelica.SIunits.ThermalConductivity lambda_u = lambda_floor[1] "Thermal conductivity of wall layers above panel heating without flooring (coverage)";
-      final parameter Modelica.SIunits.ThermalConductivity lambda_E0 = lambda_u "Thermal conductivity of cover";
-
-      final parameter Modelica.SIunits.ThermalInsulance R_lambdaB = d_floor[2] / lambda_floor[2] "Thermal resistance of flooring";
-
-      final parameter Modelica.SIunits.ThermalInsulance R_lambdaCeiling = if Ceiling then d_ceiling[2] / lambda_ceiling[2] else 0 "Thermal resistance of ceiling";
-      final parameter Modelica.SIunits.ThermalInsulance R_lambdaPlaster = if Ceiling then d_ceiling[3] / lambda_ceiling[3] else 0 "Thermal resistance of plaster";
-
-      final parameter Modelica.SIunits.ThermalInsulance R_U = R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster + R_alphaCeiling "Thermal resistance of wall layers under panel heating";
-      final parameter Modelica.SIunits.ThermalInsulance R_O = 1 / Alpha + R_lambdaB + s_u / lambda_u "Thermal resistance of wall layers above panel heating";
-      constant Modelica.SIunits.CoefficientOfHeatTransfer Alpha = 10.8;
-      constant Modelica.SIunits.ThermalInsulance R_alphaCeiling = if Ceiling then 0.17 else 0 "Thermal resistance at the ceiling";
-
       final parameter Modelica.SIunits.TemperatureDifference sigma_i = T_Flow - T_Return "Temperature Spread for room (max = 5 for room with highest heat load)" annotation(Dialog(group = "Room Specifications"));
-      constant Modelica.SIunits.SpecificHeatCapacity C_W = 4190;
 
       parameter Modelica.SIunits.MassFlowRate m_H "nominal mass flow rate";
 
@@ -3001,7 +2984,8 @@ Added documentation.</li>
         each lambda_pipe=lambda_pipe,
         each T0=T_Room,
         each d_a=if withInsulating then {d_a,D} else {d_a},
-        each d_i=if withInsulating then {d_i,d_a} else {d_i})
+        each d_i=if withInsulating then {d_i,d_a} else {d_i},
+        each calculateV=calculateV)
         annotation (Placement(transformation(extent={{-20,-18},{20,18}})));
 
       Sensors.TemperatureTwoPort                TFlow(redeclare package Medium =
@@ -3039,11 +3023,6 @@ Added documentation.</li>
 
      assert(T_Fm.numberPort <= T_Fmax, "Surface temperature too high", AssertionLevel.warning);
 
-     assert(T >= 0.05 and T <= 0.375, "Pipe spacing for m_T should be between 0.05 and 0.375", AssertionLevel.warning);
-
-     assert(s_u >= 0.01, "thickness of screed should be s_u => 0.010 for calculation of m_u", AssertionLevel.warning);
-
-     assert(D >= 0.008  and D <= 0.03, "Outer diameter should be 0.008 <= D <= 0.030 for calculation of m_T", AssertionLevel.warning);
 
     //OUTER CONNECTIONS
 
@@ -3285,7 +3264,12 @@ Added documentation.</li>
       AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.TestModels.PartialModularPort_ab(nPorts = n, m_flow_nominal=m_H);
 
       parameter Integer dis(min=1) "Number of Discreatisation Layers";
-      parameter Integer n(min=1)  "number of circuits in one room";
+      final parameter Integer n(min=1) = integer(ceil(L_pipe / 120)) "number of circuits in one room";
+      parameter Integer calculateV annotation (Dialog(group="Panel Heating",
+            descriptionLabel=true), choices(
+          choice=1 "Calculate Water Volume with inner diameter",
+          choice=2 "Calculate Water Volume with time constant",
+          radioButtons=true));
 
       parameter Modelica.SIunits.Power Q_Nf "Calculated Heat Load for room with panel heating" annotation (Dialog(group="Room Specifications"));
       final parameter Modelica.SIunits.HeatFlux q_des = Q_Nf / A "set value for panel heating heat flux";
@@ -3301,6 +3285,7 @@ Added documentation.</li>
       parameter Modelica.SIunits.Thickness d_floor[n_floor] "Thickness of floor layers" annotation(Dialog(group = "Floor Layers"));
       parameter Modelica.SIunits.Density rho_floor[n_floor] "Density of floor layers" annotation(Dialog(group = "Floor Layers"));
       parameter Modelica.SIunits.ThermalConductivity lambda_floor[n_floor] "Thermal conductivity of floor layers" annotation(Dialog(group = "Floor Layers"));
+      final parameter Modelica.SIunits.ThermalConductivity lambda_HoldingBurls[n_floor] = {lambda_E,lambda_floor[2]};
       parameter Modelica.SIunits.SpecificHeatCapacity c_floor[n_floor] "Specific heat capacity of floor layers" annotation(Dialog(group = "Floor Layers"));
       parameter Modelica.SIunits.Emissivity eps_floor = 0.95 "Emissivity of floor surface" annotation(Dialog(group = "Floor Layers"));
 
@@ -3320,7 +3305,7 @@ Added documentation.</li>
          "Zone Type where panel heating is installed" annotation(Dialog(group= "Room Specifications", choicesAllMatching = true));
 
       parameter Modelica.SIunits.Distance T "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
-      final parameter Modelica.SIunits.Length L_pipe = A / ( n * T)  "Length of Panel Heating Pipe";
+      final parameter Modelica.SIunits.Length L_pipe = A / T "possible pipe length for given panel heating area";
 
       replaceable parameter
         AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PipeMaterialDefinition
@@ -3347,10 +3332,6 @@ Added documentation.</li>
       parameter Modelica.SIunits.VolumeFraction psi = 0 "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
       parameter Modelica.SIunits.ThermalConductivity lambda_W = 0 "Thermal conductivity of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
 
-      final parameter Integer n_pipe( min = 1) = if withInsulating then 2 else 1;
-      final parameter Modelica.SIunits.Thickness d_pipe[n_pipe] = if withInsulating then {s_R, (D - d_a)} else {s_R} "Thickness of pipe layers";
-      final parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] = if withInsulating then {lambda_R, lambda_M} else {lambda_R} "Thermal conductivity of pipe layer";
-
       final parameter Modelica.SIunits.Thickness s_ins = if Ceiling then d_ceiling[1] else 0 "Thickness of thermal insulation";
       final parameter Modelica.SIunits.ThermalConductivity lambda_ins = if Ceiling then lambda_ceiling[1] else 0 "Thermal conductivity of thermal insulation";
       final parameter Modelica.SIunits.ThermalInsulance R_lambdaIns = if Ceiling then s_ins / lambda_ins else 0 "Thermal resistance of thermal insulation";
@@ -3358,6 +3339,7 @@ Added documentation.</li>
       final parameter Modelica.SIunits.Thickness s_u = d_floor[1] "thickness of cover above pipe";
       final parameter Modelica.SIunits.ThermalConductivity lambda_u = lambda_floor[1] "Thermal conductivity of wall layers above panel heating without flooring (coverage)";
       final parameter Modelica.SIunits.ThermalConductivity lambda_E0 = lambda_u "Thermal conductivity of cover";
+      final parameter Modelica.SIunits.ThermalConductivity lambda_E = if psi >= 0.05 and psi < 0.15 then (1 - psi) * lambda_E0 + psi * lambda_W else lambda_E0 "effective thermal Conductivity of screed";
 
       final parameter Modelica.SIunits.ThermalInsulance R_lambdaB = d_floor[2] / lambda_floor[2] "Thermal resistance of flooring";
 
@@ -3387,10 +3369,7 @@ Added documentation.</li>
 
 
       PanelHeatingCircuit                roomCircuit[n](
-        each dis=dis,
-        each d_floor=d_floor,
         each rho_floor=rho_floor,
-        each lambda_floor=lambda_floor,
         each c_floor=c_floor,
         each eps_floor=eps_floor,
         each Ceiling=Ceiling,
@@ -3399,7 +3378,6 @@ Added documentation.</li>
         each lambda_ceiling=lambda_ceiling,
         each c_ceiling=c_ceiling,
         each eps_ceiling=eps_ceiling,
-        each T_U=T_U,
         each T=T,
         each PipeMaterial=PipeMaterial,
         each s_R=s_R,
@@ -3407,15 +3385,16 @@ Added documentation.</li>
         each withInsulating=withInsulating,
         each InsulatingMaterial=InsulatingMaterial,
         each D=D,
-        each withHoldingBurls=withHoldingBurls,
-        each psi=psi,
-        each lambda_W=lambda_W,
-        redeclare package Medium = Medium,
+        redeclare each package Medium = Medium,
         each T_Return=T_Return,
         each A=A/n,
         each T_Flow=T_Flow,
         each m_H=m_Circuit,
-        each ZoneType=ZoneType)
+        each ZoneType=ZoneType,
+        each dis=integer(dis),
+        each calculateV=calculateV,
+        each d_floor=d_floor,
+        each lambda_floor=if withHoldingBurls then lambda_HoldingBurls else lambda_floor)
                             annotation (Placement(transformation(extent={{-14,-14},{16,14}})));
       EN1264.HeatFlux EN_1264(
         T_U=T_U,
@@ -3451,7 +3430,7 @@ Added documentation.</li>
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
         annotation (Placement(transformation(extent={{16,-108},{36,-88}})));
     equation
-
+      assert(q_Gmax > q_G, "Panel Heating Parameters evaluate to a limiting heat flux that exceeds the maximum limiting heat flux according to the Zone Type",AssertionLevel.warning);
 
       for i in 1:n loop
         connect(roomCircuit[i].port_b, ports_b[i]) annotation (Line(points={{16,1.77636e-15},{58,1.77636e-15},{58,0},{100,0}},
@@ -6260,14 +6239,19 @@ Added documentation.</li>
           lambda_floor={{1.2,1.2},{1.2,1.2},{1.2,1.2}},
           c_floor={{750,1200},{750,1200},{750,1200}},
           eps_floor=fill(0.95, 3),
-          each Ceiling=fill(false, 3),
           each T_U=fill(20 + 273.15, 3),
           T=fill(0.1, 3),
           s_R=fill(0.005, 3),
           d_a=fill(0.022, 3),
+          each dis=3,
+          each Ceiling=fill(true, 3),
+          d_ceiling={{0.1,0.1,0.1},{0.1,0.1,0.1},{0.1,0.1,0.1}},
+          lambda_ceiling={{1,1,1},{1,1,1},{1,1,1}},
+          c_ceiling={{1000,1000,1000},{1000,1000,1000},{1000,1000,1000}},
+          eps_ceiling=fill(0.95, 3),
           each A=fill(20, 3),
-          dis={3},
-          rho_floor={{1500,1500},{1500,1500},{1500,1500}})
+          rho_floor={{1500,1500},{1500,1500},{1500,1500}},
+          rho_ceiling={{1000,1000,1000},{1000,1000,1000},{1000,1000,1000}})
                               annotation (Placement(transformation(extent={{-14,0},{6,20}})));
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
           prescribedTemperature1
@@ -6523,11 +6507,15 @@ Added documentation.</li>
                     "Propylene glycol water, 40% mass fraction")));
 
         parameter Integer RoomNo(min=1) = 3 "Number of rooms heated with panel heating";
+        final parameter Integer CircuitNo[RoomNo] = {panelHeatingRoom[i].n for i in 1:RoomNo} "Number of circuits in a certain room";
         parameter Modelica.SIunits.Power Q_Nf[RoomNo] "Calculated Heat Load for room with panel heating" annotation (Dialog(group="Room Specifications"));
         parameter Modelica.SIunits.Area A[RoomNo] "Floor Area" annotation(Dialog(group = "Room Specifications"));
-        final parameter Modelica.SIunits.Length L_pipe[RoomNo] = A ./ T "Needed Length of panel heating pipe";
-        final parameter Integer CircuitNo[RoomNo] = {integer(ceil(L_pipe[i] / 120)) for i in 1:RoomNo} "Number of heating circuits in a room";
         parameter Integer dis[RoomNo](min=1) = fill(3, RoomNo) "Number of discretisation layers within a room";
+        parameter Integer calculateV annotation (Dialog(group="Panel Heating",
+              descriptionLabel=true), choices(
+            choice=1 "Calculate Water Volume with inner diameter",
+            choice=2 "Calculate Water Volume with time constant",
+            radioButtons=true));
         final parameter Integer n_floor(min = 1) = 2 "Number of floor layers";
         parameter Modelica.SIunits.Thickness d_floor[RoomNo, n_floor] "Thickness of floor layers" annotation(Dialog(group = "Floor Layers"));
         parameter Modelica.SIunits.Density rho_floor[RoomNo, n_floor] "Density of floor layers" annotation(Dialog(group = "Floor Layers"));
@@ -6554,10 +6542,8 @@ Added documentation.</li>
           PipeMaterial=
             AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PipeMaterials.PERTpipe()
                "Pipe Material" annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
-        final parameter Modelica.SIunits.ThermalConductivity lambda_R = PipeMaterial.lambda "Thermal conductivity of pipe material";
         parameter Modelica.SIunits.Thickness s_R[RoomNo] "thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
         parameter Modelica.SIunits.Diameter d_a[RoomNo] "outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
-        final parameter Modelica.SIunits.Diameter d_i[RoomNo] = d_a .- s_R "inner diameter of pipe";
 
         parameter Boolean withInsulating = true "false if pipe has no insulating" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
         replaceable parameter
@@ -6566,7 +6552,6 @@ Added documentation.</li>
             AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.Insulating_Materials.PVCwithTrappedAir()
                "Insulating Material" annotation (Dialog(group="Panel Heating", enable=
                withInsulating), choicesAllMatching=true);
-        final parameter Modelica.SIunits.ThermalConductivity lambda_M = if withInsulating == true then InsulatingMaterial.lambda else 0 "Thermal Conductivity for insulating";
         parameter Modelica.SIunits.Diameter D[RoomNo]( min = d_a) = d_a "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating", enable = withInsulating));
 
         parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
@@ -6590,7 +6575,7 @@ Added documentation.</li>
         AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor distributor(
           redeclare package Medium = Medium,
           m_flow_nominal=m_ges,
-          n=RoomNo)
+          n=integer(sum(CircuitNo)))
           annotation (Placement(transformation(extent={{-42,-18},{-6,18}})));
         Sources.Boundary_pT boundary(
         redeclare package Medium = Medium,
@@ -6636,8 +6621,8 @@ Added documentation.</li>
           dT_Hi=dT_Hi,
           each T_Flow=T_Vdes,
           T_Return=T_Return,
-          n=CircuitNo,
-          each dis=integer(dis))
+          each dis=integer(dis),
+          each calculateV=calculateV)
                            annotation (Placement(transformation(extent={{48,-18},{84,16}})));
         Sensors.TemperatureTwoPort TFlow(
         redeclare package Medium = Medium,
@@ -6684,7 +6669,7 @@ Added documentation.</li>
             annotation (Line(points={{62.4,16},{52,16},{52,64},{-24,64},{-24,100}}, color={95,95,95}));
           connect(panelHeatingRoom[i].heatport_floor, heatport_floor[i])
             annotation (Line(points={{69.24,15.32},{69.24,76},{24,76},{24,96}}, color={191,0,0}));
-            for m in 1:CircuitNo loop
+            for m in 1:CircuitNo[i] loop
           connect(panelHeatingRoom[i].ports_b[m], distributor.returnPorts[i])
             annotation (Line(points={{84,-1},{96,-1},{96,-42},{-24,-42},{-24,-18.6}}, color={0,127,255}));
           connect(distributor.flowPorts[i], panelHeatingRoom[i].ports_a[m])
