@@ -40,7 +40,8 @@ model Case650FF
   Rooms.ASHRAE140.SouthFacingWindows Room(
     wallTypes=wallTypes,
     calcMethodIn=4,
-    redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
+    Type_Win=windowParam,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     absInnerWallSurf=absInnerWallSurf,
@@ -153,11 +154,9 @@ model Case650FF
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
-  replaceable model correctionSolarGain =
-      Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
+  replaceable model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
     constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-    "Model for correction of solar gain" annotation (
-      __Dymola_choicesAllMatching=true);
+    "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
 
 equation
@@ -175,12 +174,11 @@ equation
       color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-75.4,75.6},{-61,75.6},{-61,76},{-47,76},{-47,26.8},{-9.1,26.8}},
+      points={{-75.4,75.6},{-61,75.6},{-61,73},{-47,73},{-47,26.8},{-9.1,26.8}},
       color={255,128,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
-      points={{-85.15,36.5},{-53,36.5},{-53,31},{-12,31},{-12,26},{-9.1,26},{
-          -9.1,20.65}},
+      points={{-85.15,36.5},{-53,36.5},{-53,21},{-9.1,21},{-9.1,20.65}},
       color={0,0,127}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
       points={{-78,-34},{-48,-34},{-48,-19},{7.28,-19},{7.28,-5.18}},
@@ -287,7 +285,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Building physics"),
         Rectangle(
-          extent={{-47,90},{42,-19}},
+          extent={{-47,85},{42,-24}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),

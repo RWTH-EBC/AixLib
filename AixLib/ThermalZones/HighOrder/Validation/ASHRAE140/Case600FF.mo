@@ -36,7 +36,8 @@ model Case600FF
   Rooms.ASHRAE140.SouthFacingWindows Room(
     wallTypes=wallTypes,
     calcMethodIn=4,
-    redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
+    Type_Win=windowParam,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     absInnerWallSurf=absInnerWallSurf,
@@ -146,11 +147,9 @@ model Case600FF
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
-  replaceable model correctionSolarGain =
-      Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
+  replaceable model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
     constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-    "Model for correction of solar gain" annotation (
-      __Dymola_choicesAllMatching=true);
+    "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
 
 equation
@@ -172,8 +171,7 @@ equation
       color={255,128,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
-      points={{-85.15,36.5},{-53,36.5},{-53,31},{-12,31},{-12,26},{-9.1,26},{
-          -9.1,20.65}},
+      points={{-85.15,36.5},{-53,36.5},{-53,21},{-9.1,21},{-9.1,20.65}},
       color={0,0,127}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
       points={{-78,-34},{-48,-34},{-48,-19},{7.28,-19},{7.28,-5.18}},

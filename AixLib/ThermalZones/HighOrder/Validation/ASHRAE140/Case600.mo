@@ -51,7 +51,7 @@ model Case600
     solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     Win_Area=Win_Area,
-    absInnerWallSurf=absInnerWallSurf) annotation (Placement(transformation(extent={{-6,-6},{36,35}})));
+    absInnerWallSurf=absInnerWallSurf) annotation (Placement(transformation(extent={{-7,-6},{35,35}})));
 
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{104,78},{117,90}})));
@@ -206,31 +206,29 @@ equation
       color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-75.4,75.6},{-61,75.6},{-61,76},{-47,76},{-47,26.8},{-8.1,26.8}},
+      points={{-75.4,75.6},{-61,75.6},{-61,76},{-47,76},{-47,26.8},{-9.1,26.8}},
       color={255,128,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
-      points={{-85.15,36.5},{-53,36.5},{-53,31},{-12,31},{-12,26},{-8.1,26},{-8.1,
-          20.65}},
+      points={{-85.15,36.5},{-53,36.5},{-53,21},{-9,21},{-9.1,20.65}},
       color={0,0,127}));
   connect(Room.thermRoom,idealHeaterCooler.heatCoolRoom)  annotation (Line(
-      points={{12.06,14.5},{12.06,-19},{10,-19},{10,-59},{4,-59}},
+      points={{11.06,14.5},{11.06,-19},{10,-19},{10,-59},{4,-59}},
       color={191,0,0}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
-      points={{-78,-34},{-48,-34},{-48,-19},{8.28,-19},{8.28,-5.18}},
+      points={{-78,-34},{-48,-34},{-48,-19},{7.28,-19},{7.28,-5.18}},
       color={191,0,0}));
 
   connect(InternalGains_convective.port, Room.thermRoom) annotation (Line(
-      points={{-78,-58},{-48,-58},{-48,-19},{7,-19},{7,14.5},{12.06,14.5}},
+      points={{-78,-58},{-48,-58},{-48,-19},{7,-19},{7,14.5},{11.06,14.5}},
       color={191,0,0}));
   connect(InternalGains_radiative.port, Room.starRoom) annotation (Line(
-      points={{-77,-78},{-48,-78},{-48,-19},{18,-19},{18,-2},{18.36,-2},{18.36,14.5}},
+      points={{-77,-78},{-48,-78},{-48,-19},{18,-19},{18,-2},{17.36,-2},{17.36,14.5}},
       color={191,0,0}));
-  connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-55,51.5},
-          {-47,51.5},{-47,35},{-27,35},{-27,34.59},{-6,34.59}},
+  connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-55,51.5},{-47,51.5},{-47,35},{-27,35},{-27,34.59},{-7,34.59}},
                                               color={191,0,0}));
-  connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{-8.1,
-          28.7475},{-20,28.7475},{-20,-49.5},{-24.35,-49.5}}, color={0,0,127}));
+  connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{-9.1,28.7475},{-20,28.7475},{-20,-49.5},{-24.35,-49.5}},
+                                                              color={0,0,127}));
   connect(HeatingPower.y, integrator1.u)
     annotation (Line(points={{65,64},{69.9,64}}, color={0,0,127}));
   connect(integrator1.y, to_kWh.u)
