@@ -214,15 +214,28 @@ equation
 3-Corridor
 4-WC
 5-Kitchen",
-          horizontalAlignment=TextAlignment.Left)}),                                                                                                                                                                                                        Icon(coordinateSystem(preserveAspectRatio = true, extent={{-170,-100},{170,100}})),                               experiment(StopTime = 86400, Interval = 15, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Example for setting up a simulation for a one family dwelling.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Energy generation and delivery system consisting of boiler and pump.</p>
- <p>The example works for a day and shows how such a simulation can be set up. It is not guranteed that the model will work stable under sifferent conditions or for longer periods of time.</p>
- </html>", revisions = "<html>
- <ul>
- <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>"));
+          horizontalAlignment=TextAlignment.Left)}),                                                                                                                                                                                                        Icon(coordinateSystem(preserveAspectRatio = true, extent={{-170,-100},{170,100}})),                               experiment(StopTime = 86400, Interval = 15, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Example for setting up a simulation for a one family dwelling.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Energy generation and delivery system consisting of boiler and pump.
+</p>
+<p>
+  The example works for a day and shows how such a simulation can be
+  set up. It is not guranteed that the model will work stable under
+  sifferent conditions or for longer periods of time.
+</p>
+<ul>
+  <li>
+    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>"));
 end OFD_1Jan;

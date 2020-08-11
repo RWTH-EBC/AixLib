@@ -51,23 +51,39 @@ equation
         points={{-53,88},{-44,88},{-44,56.4},{-36.6,56.4}}, color={0,0,127}));
   connect(realExpression.y, wall_simple_new.solarRadWin) annotation (Line(
         points={{-53,88},{50,88},{50,58.4},{40.6,58.4}}, color={0,0,127}));
-  annotation (experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an <b>inside wall</b> application.</p>
- <h4><font color=\"#008000\">Concept</font></h4>
- <p>Test case for calculation of U-value</p>
- <ul>
- <li>Area of Wall: 10 m&sup2;</li>
- <li>Area of Door: 2 m&sup2;</li>
- <li>Temperature difference: 10 K</li>
- <li>Test time: 25 h</li>
- </ul>
- <p>The u-values are calculated via calculation moduls and may be displayed easily. </p>
- </html>", revisions = "<html>
- <ul>
-   <li><i>April, 2012&nbsp;</i>
-          by Mark Wesseling:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+  annotation (experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to test the <a href=
+  \"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an
+  <b>inside wall</b> application.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Test case for calculation of U-value
+</p>
+<ul>
+  <li>Area of Wall: 10 m²
+  </li>
+  <li>Area of Door: 2 m²
+  </li>
+  <li>Temperature difference: 10 K
+  </li>
+  <li>Test time: 25 h
+  </li>
+</ul>
+<p>
+  The u-values are calculated via calculation moduls and may be
+  displayed easily.
+</p>
+<ul>
+  <li>
+    <i>April, 2012&#160;</i> by Mark Wesseling:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end InsideWall;

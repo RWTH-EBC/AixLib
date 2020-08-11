@@ -29,16 +29,26 @@ package Types "Types"
                                              "Solar distribution fraction of the transmitted solar radiantion through the window on the OWSouth";
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
-      Documentation(info="<html>
-<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>.Partial model to select solar distribution fractions depending on:
+      Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  .Partial model to select solar distribution fractions depending on:
+</p>
 <ul>
-<li>Orientation of the window and interior surfaces </li>
-<li>The interior shortwave absorptance of the surface</li>
-<h4><span style=\"color: #008000\">References</span></h4>
-<ul>
-<li>ASHRAE140-2017 Informative Annex B7</li>
+  <li>Orientation of the window and interior surfaces
+  </li>
+  <li>The interior shortwave absorptance of the surface
+  </li>
+  <li style=\"list-style: none; display: inline\">
+    <h4>
+      <span style=\"color: #008000\">References</span>
+    </h4>
+    <ul>
+      <li>ASHRAE140-2017 Informative Annex B7
+      </li>
+    </ul>
+  </li>
 </ul>
 </html>", revisions=""));
 
@@ -73,15 +83,25 @@ package Types "Types"
     else 0.065)
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
 
-    annotation (Documentation(info="<html>
-<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>.Table of coefficients of solar distribution fractions on SouthFacingWindows, depending on:
+    annotation (Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  .Table of coefficients of solar distribution fractions on
+  SouthFacingWindows, depending on:
+</p>
 <ul>
-<li>Orientation of the window and interior surfaces </li>
-<h4><span style=\"color: #008000\">References</span></h4>
-<ul>
-<li>ASHRAE140-2017 Informative Annex B7</li>
+  <li>Orientation of the window and interior surfaces
+  </li>
+  <li style=\"list-style: none; display: inline\">
+    <h4>
+      <span style=\"color: #008000\">References</span>
+    </h4>
+    <ul>
+      <li>ASHRAE140-2017 Informative Annex B7
+      </li>
+    </ul>
+  </li>
 </ul>
 </html>"));
   end CoeffTableSouthWindow;
@@ -114,15 +134,25 @@ package Types "Types"
     else 0.065)
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
 
-    annotation (Documentation(info="<html>
-<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>.Table of coefficients of solar distribution fractions on EastWestFacingWindows, depending on:
+    annotation (Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  .Table of coefficients of solar distribution fractions on
+  EastWestFacingWindows, depending on:
+</p>
 <ul>
-<li>Orientation of the window and interior surfaces </li>
-<h4><span style=\"color: #008000\">References</span></h4>
-<ul>
-<li>ASHRAE140-2017 Informative Annex B7</li>
+  <li>Orientation of the window and interior surfaces
+  </li>
+  <li style=\"list-style: none; display: inline\">
+    <h4>
+      <span style=\"color: #008000\">References</span>
+    </h4>
+    <ul>
+      <li>ASHRAE140-2017 Informative Annex B7
+      </li>
+    </ul>
+  </li>
 </ul>
 </html>"));
   end CoeffTableEastWestWindow;

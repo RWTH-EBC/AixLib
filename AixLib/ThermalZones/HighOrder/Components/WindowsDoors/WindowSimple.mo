@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model WindowSimple "Simple window with radiation and U-Value"
   extends BaseClasses.PartialWindow(final use_solarRadWinTrans=false, final use_windSpeedPort=false);
 

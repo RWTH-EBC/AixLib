@@ -102,6 +102,6 @@ equation
 </h4>
 <p>
   Simple one layer wall for a radiator
-</p>l l
+</p>l l l l
 </html>"));
 end RadiatorWall;
