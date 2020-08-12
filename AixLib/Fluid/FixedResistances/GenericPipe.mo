@@ -2,13 +2,6 @@
 model GenericPipe
   "Pipe model that includes several selectable pipe models"
 
-  Utilities.HeatTransfer.HeatConv heatConv(
-    final hCon=hCon,
-    final A=Modelica.Constants.pi*parameterPipe.d_o*length) if withConvection
-    "Convection from insulation" annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={0,70})));
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
 
   parameter String pipeModel="SimplePipe" annotation(choices(
@@ -113,8 +106,15 @@ model GenericPipe
     final rho=parameterIso.d,
     final nParallel=1) if withInsulation
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
-    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+
+  Utilities.HeatTransfer.HeatConv heatConv(
+    final hCon=hCon,
+    final A=Modelica.Constants.pi*parameterPipe.d_o*length) if withConvection
+    "Convection from insulation" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={0,70})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughInsulation(final m=1) if
        not withInsulation annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -125,6 +125,10 @@ model GenericPipe
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,70})));
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat port at outside surface of pipe"
+    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+
 equation
   connect(simplePipe.heatPorts, thermalCollector.port_a) annotation (Line(
       points={{0,-14.8},{0,4},{-1.33227e-15,4}},
@@ -170,11 +174,11 @@ equation
       points={{1.33227e-15,24},{-32,24},{-32,32}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(thermalPassthroughInsulation.port_b, thermalPassthroughConvection.port_a[1][1]) annotation (Line(points={{-32,52},{-32,60}}, color={191,0,0}));
+  connect(thermalPassthroughInsulation.port_b, thermalPassthroughConvection.port_a[1]) annotation (Line(points={{-32,52},{-32,60}}, color={191,0,0}));
   connect(thermalPassthroughConvection.port_b, heatPort) annotation (Line(points={{-32,80},{-32,100},{0,100}}, color={191,0,0}));
   connect(thermalPassthroughInsulation.port_b, heatConv.port_b) annotation (
       Line(points={{-32,52},{0,52},{0,60},{-1.77636e-15,60}}, color={191,0,0}));
-  connect(Insulation.port_b, thermalPassthroughConvection.port_a[1][1]) annotation (Line(points={{0,48.8},{0,56},{-32,56},{-32,60}}, color={191,0,0}));
+  connect(Insulation.port_b, thermalPassthroughConvection.port_a[1]) annotation (Line(points={{0,48.8},{0,56},{-32,56},{-32,60}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,32},{100,-32}},
