@@ -1,0 +1,4 @@
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot");
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopHeatPumpCarnot", stopTime=100000, method="dassl", tolerance=1e-006, resultFile="OpenLoopHeatPumpCarnot");
+createPlot(id=1, y={"demand.senT_supply.T", "demand.senT_return.T"}, filename="OpenLoopHeatPumpCarnot.mat");
+createPlot(id=2, y={"demand.port_a.m_flow"}, filename="OpenLoopHeatPumpCarnot.mat");

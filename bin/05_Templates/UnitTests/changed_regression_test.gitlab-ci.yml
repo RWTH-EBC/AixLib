@@ -1,0 +1,298 @@
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
+stages:
+    - RegressionTest
+
+
+Regression_changed_overall_coverage:
+    stage: RegressionTest
+    services:
+        - docker
+        
+    before_script:
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py --coverage-only
+
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/simulator-dymola.log
+        expire_in: 7 day
+    retry:
+        max: 2
+        when: runner_system_failure
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+            
+Regressiontest_changed_AixLib_Airflow:
+    stage: RegressionTest
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - python -V               # Print out python version for debugging
+        - dir
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+    
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Airflow 
+    artifacts:
+        when: on_failure
+        paths:
+          - AixLib/simulator-dymola.log
+        expire_in: 7 day 
+    retry:
+        max: 2
+        when: runner_system_failure
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+Regressiontest_changed_AixLib_BoundaryConditions:
+    stage: RegressionTest
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - python -V               # Print out python version for debugging
+        - dir
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.BoundaryConditions 
+        
+    artifacts:
+        when: on_failure
+        paths:
+          - AixLib/simulator-dymola.log
+        expire_in: 7 day
+    retry:
+        max: 2
+        when: runner_system_failure
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+Regressiontest_changed_AixLib_Controls:
+    stage: RegressionTest
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - python -V               # Print out python version for debugging
+        - dir
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+    
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Controls 
+        
+    artifacts:
+        when: on_failure
+        paths:
+          - AixLib/simulator-dymola.log
+        expire_in: 7 day
+    retry:
+        max: 2
+        when: runner_system_failure       
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/  
+
+#Regressiontest_AixLib_Electrical:
+#      stage: RegressionTest
+#      services:
+#        -  docker
+#      before_script:
+#        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+#        - export PIP_CACHE_DIR="/opt/cache/pip"
+#        - source activate python36
+#        - python -V               # Print out python version for debugging
+#        - dir
+#        - export PYTHONIOENCODING=utf-8 # just in case
+#      script:
+#        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --single-package AixLib.Electrical --tool dymola
+#      artifacts:
+#        when: on_failure
+#        paths:
+#          - AixLib/simulator-dymola.log
+#      retry:
+#        max: 2
+#        when: runner_system_failure       
+
+#Regressiontest_AixLib_FastHVAC:
+#      stage: RegressionTest
+#      services:
+#        -  docker
+#      before_script:
+#        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+#        - export PIP_CACHE_DIR="/opt/cache/pip"
+#        - source activate python36
+#        - python -V               # Print out python version for debugging
+#        - dir
+#        - export PYTHONIOENCODING=utf-8 # just in case
+#      script:
+#        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --single-package AixLib.FastHVAC --tool dymola
+#      artifacts:
+#        when: on_failure
+#       paths:
+#          - AixLib/simulator-dymola.log
+#      retry:
+#        max: 2
+ #       when: runner_system_failure  
+
+Regressiontest_changed_AixLib_Fluid:
+    stage: RegressionTest
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - python -V               # Print out python version for debugging
+        - dir
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Fluid 
+     
+    artifacts:
+        when: on_failure
+        paths:
+          - AixLib/simulator-dymola.log
+        expire_in: 7 day
+    retry:
+        max: 2
+        when: runner_system_failure  
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+Regressiontest_changed_AixLib_Media:
+    stage: RegressionTest
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - python -V               # Print out python version for debugging
+        - dir
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Media 
+   
+    artifacts:
+        when: on_failure
+        paths:
+          - AixLib/simulator-dymola.log
+        expire_in: 7 day
+    retry:
+        max: 2
+        when: runner_system_failure  
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/     
+
+Regressiontest_changed_AixLib_Systems:
+    stage: RegressionTest
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - python -V               # Print out python version for debugging
+        - dir
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Systems 
+        
+    artifacts:
+        when: on_failure
+        paths:
+          - AixLib/simulator-dymola.log
+        expire_in: 7 day
+    retry:
+        max: 2
+        when: runner_system_failure          
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+Regressiontest_changed_AixLib_ThermalZones:
+    stage: RegressionTest
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - python -V               # Print out python version for debugging
+        - dir
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.ThermalZones 
+    
+    artifacts:
+        when: on_failure
+        paths:
+          - AixLib/simulator-dymola.log
+        expire_in: 7 day
+    retry:
+        max: 2
+        when: runner_system_failure        
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/      

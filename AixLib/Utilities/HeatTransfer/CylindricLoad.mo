@@ -1,5 +1,9 @@
 within AixLib.Utilities.HeatTransfer;
 class CylindricLoad "Model for a cylindric heat capacity"
+  // Assumptions
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   parameter Modelica.SIunits.Density rho=1600 "Density of material";
   parameter Modelica.SIunits.SpecificHeatCapacity c=1000
@@ -9,18 +13,28 @@ class CylindricLoad "Model for a cylindric heat capacity"
   parameter Modelica.SIunits.Length length(min=0) " Length of pipe";
   parameter Modelica.SIunits.Temperature T0=289.15 "initial temperature";
   parameter Integer nParallel = 1 "Number of identical parallel pipes";
-  Modelica.SIunits.Mass m "Mass of material";
+  final parameter Modelica.SIunits.Mass m = nParallel*rho*length*Modelica.Constants.pi*(d_out*d_out - d_in*d_in)/4 "Mass of material";
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port(T(start=T0))
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port
     annotation (Placement(transformation(extent={{-12,-18},{8,2}}, rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
+    final C=m*c,
+    final T(
+      stateSelect=StateSelect.always,
+      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
+      start=T0),
+    final der_T(
+      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
+      start=0)) if not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
+    annotation (Placement(transformation(extent={{-36,14},{34,84}})));
+
 equation
-  m = nParallel*rho*length*Modelica.Constants.pi*(d_out*d_out - d_in*d_in)/4;
-  der(port.T) = 1/m/c*port.Q_flow;
+  connect(heatCapacitor.port, port) annotation (Line(points={{-1,14},{10,14},{10,-8},{-2,-8}}, color={191,0,0}));
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
+        grid={2,2})),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
@@ -38,17 +52,34 @@ equation
       y=0.18,
       width=0.6,
       height=0.6),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Transferred to AixLib</li>
-<li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+    Documentation(revisions="<html><ul>
+  <li>January 24, 2020 by Philipp Mehrfeld:<br/>
+    <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a>
+    Switch to MSL capacity model and to Dynamics enumerator to control
+    init and energy conversion during simulation.
+  </li>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Transferred to AixLib
+  </li>
+  <li>
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
 </ul>
 </html>
-",  info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p> The <code>CylindricLoad</code> model represents a cylindric heat capacity, which
-is described by its area, density, thickness and material specific heat
-capacity. </p>
+",  info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <code>CylindricLoad</code> model represents a cylindric heat
+  capacity, which is described by its area, density, thickness and
+  material specific heat capacity.
+</p>
 </html>"));
 end CylindricLoad;

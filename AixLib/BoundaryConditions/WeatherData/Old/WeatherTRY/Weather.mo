@@ -21,8 +21,7 @@ model Weather "Complex weather model"
 
   replaceable model RadOnTiltedSurface =
       AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu
-    constrainedby
-    AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
+    constrainedby AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
     "Model for calculating radiation on tilted surfaces"                                                                            annotation(Dialog(group="Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching= true);
 
   parameter
@@ -207,40 +206,87 @@ equation
             horizontalAlignment =                                                                                                   TextAlignment.Right), Text(extent = {{10, -54}, {150, -66}}, lineColor = {0, 0, 255}, visible = Rel_hum, textString = "Rel. humidity",
             horizontalAlignment =                                                                                                   TextAlignment.Right), Text(extent = {{10, -84}, {150, -96}}, lineColor = {0, 0, 255}, visible = Sky_rad,
             horizontalAlignment =                                                                                                   TextAlignment.Right, textString = "Sky rad."), Text(extent = {{10, -114}, {150, -126}}, lineColor = {0, 0, 255}, visible = Ter_rad,
-            horizontalAlignment =                                                                                                   TextAlignment.Right, textString = "Terrest. rad.")}), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Supplies weather data using a TRY - data set. </p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Input: a TRY data set in an accepted Modelica format (.mat, .txt, with header). The structure should be exactly the one of a TRY, status: TRY 2011.</p>
- <p>Output: </p>
- <ul>
- <li>Total radiation on &quot;n&quot; oriented surfaces</li>
- <li>Cloud cover</li>
- <li>Wind direction</li>
- <li>Wind speed</li>
- <li>Air temperature</li>
- <li>Air pressure</li>
- <li>Mass fraction of water in dry air</li>
- <li>Relative humidity</li>
- <li>Long wave sky radiation on horizontal surface</li>
- <li>Long wave terrestrial radiation from horizontal surface</li>
- </ul>
- <p>The outputs can be supplied individually or in one vector, with the exception of total solar radiation, which are always supplied separately in a vector. </p>
- <h4><span style=\"color:#008000\">Known Limitations</span></h4>
- <p>Be aware that the calculation of the total solar radiation may cause problems at simulation times close to sunset and sunrise. In this case, change the cut-off angles. refer to model <a href=\"Modelica://AixLib.Building.Components.Weather.BaseClasses.RadOnTiltedSurf\">RadOnTiltedSurf.</a></p>
- <h4><span style=\"color:#008000\">References</span></h4>
- <p>DWD: TRYHandbuch.2011.DWD,2011</p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"Modelica://AixLib.Building.Components.Examples.Weather.WeatherModels\">Examples.Weather.WeatherModels</a> </p>
- </html>", revisions = "<html>
- <ul>
-   <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, Rewarded 5*****!</li>
-   <li><i>Mai 1, 2012&nbsp;</i>
-          by Moritz Lauster and Ana Constantin:<br/>
-          Improved beyond belief.</li>
-   <li><i>September 12, 2006&nbsp;</i>
-          by Timo Haase:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+            horizontalAlignment =                                                                                                   TextAlignment.Right, textString = "Terrest. rad.")}), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Supplies weather data using a TRY - data set.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Input: a TRY data set in an accepted Modelica format (.mat, .txt,
+  with header). The structure should be exactly the one of a TRY,
+  status: TRY 2011.
+</p>
+<p>
+  Output:
+</p>
+<ul>
+  <li>Total radiation on \"n\" oriented surfaces
+  </li>
+  <li>Cloud cover
+  </li>
+  <li>Wind direction
+  </li>
+  <li>Wind speed
+  </li>
+  <li>Air temperature
+  </li>
+  <li>Air pressure
+  </li>
+  <li>Mass fraction of water in dry air
+  </li>
+  <li>Relative humidity
+  </li>
+  <li>Long wave sky radiation on horizontal surface
+  </li>
+  <li>Long wave terrestrial radiation from horizontal surface
+  </li>
+</ul>
+<p>
+  The outputs can be supplied individually or in one vector, with the
+  exception of total solar radiation, which are always supplied
+  separately in a vector.
+</p>
+<h4>
+  <span style=\"color:#008000\">Known Limitations</span>
+</h4>
+<p>
+  Be aware that the calculation of the total solar radiation may cause
+  problems at simulation times close to sunset and sunrise. In this
+  case, change the cut-off angles. refer to model <a href=
+  \"Modelica://AixLib.Building.Components.Weather.BaseClasses.RadOnTiltedSurf\">
+  RadOnTiltedSurf.</a>
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  DWD: TRYHandbuch.2011.DWD,2011
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"Modelica://AixLib.Building.Components.Examples.Weather.WeatherModels\">
+  Examples.Weather.WeatherModels</a>
+</p>
+<ul>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately, Rewarded 5*****!
+  </li>
+  <li>
+    <i>Mai 1, 2012&#160;</i> by Moritz Lauster and Ana Constantin:<br/>
+    Improved beyond belief.
+  </li>
+  <li>
+    <i>September 12, 2006&#160;</i> by Timo Haase:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end Weather;

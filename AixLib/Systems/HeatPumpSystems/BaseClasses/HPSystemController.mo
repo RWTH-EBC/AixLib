@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both security and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -101,7 +101,7 @@ model HPSystemController
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Security Control", group="Operational Envelope"),choices(checkBox=true));
-  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition
     dataTable "Data Table of HP" annotation (choicesAllMatching=true, Dialog(
       tab="Security Control",
       group="Operational Envelope",
@@ -179,7 +179,7 @@ model HPSystemController
     final use_tableData=use_tableData,
     redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
-  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.calcCOP calcCOP(
+  AixLib.DataBase.HeatPump.PerformanceData.calcCOP calcCOP(
       final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
   Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
@@ -190,48 +190,45 @@ model HPSystemController
     annotation (Placement(transformation(extent={{20,34},{34,48}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}})));
-  Controls.Interfaces.ThermalMachineControlBus sigBusHP annotation (Placement(
-        transformation(extent={{-122,-70},{-92,-36}}), iconTransformation(
-          extent={{-110,-62},{-92,-36}})));
+  Controls.Interfaces.ThermalMachineControlBus
+                           sigBusHP
+    annotation (Placement(transformation(extent={{-116,-76},{-84,-42}}),
+        iconTransformation(extent={{-116,-78},{-82,-40}})));
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature of HP system"
     annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
         rotation=0,
         origin={-114,40})));
-  Modelica.Blocks.Interfaces.RealOutput nOut
-    annotation (Placement(transformation(extent={{-14,-14},{14,14}},
-        rotation=270,
-        origin={0,-114})));
-  Modelica.Blocks.Interfaces.BooleanOutput modeOut
-    annotation (Placement(transformation(extent={{-14,-14},{14,14}},
-        rotation=270,
-        origin={-40,-114})));
   Modelica.Blocks.Interfaces.RealOutput y_sin annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=90,
-        origin={80,-114})));
+        origin={60,-114}), iconTransformation(
+        extent={{14,-14},{-14,14}},
+        rotation=90,
+        origin={60,-114})));
   Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
                                                    "Relative power of second heat generator, from 0 to 1"
     annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
         rotation=-90,
-        origin={40,-114})));
+        origin={0,-114}), iconTransformation(
+        extent={{-14,-14},{14,14}},
+        rotation=-90,
+        origin={0,-114})));
   Modelica.Blocks.Interfaces.RealOutput y_sou
     annotation (Placement(transformation(extent={{14,-14},{-14,14}},
         rotation=90,
-        origin={-80,-114})));
+        origin={-60,-114}), iconTransformation(
+        extent={{14,-14},{-14,14}},
+        rotation=90,
+        origin={-60,-114})));
   Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
-  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.IcingBlock
+  AixLib.DataBase.HeatPump.PerformanceData.IcingBlock
     icingBlock(redeclare final function iceFunc =
-        DataBase.ThermalMachines.HeatPump.Functions.IcingFactor.BasicIcingApproach)
-    if use_deFro
+        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
+       use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
-  Modelica.Blocks.Interfaces.RealOutput iceFac_out
-    "Output value of icing factor" annotation (Placement(transformation(
-        extent={{14,-14},{-14,14}},
-        rotation=180,
-        origin={114,80})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro
     annotation (Placement(transformation(extent={{44,56},{60,72}})));
 
@@ -258,7 +255,7 @@ equation
           255},
       pattern=LinePattern.Dash));
   connect(sigBusHP,hPControls. sigBusHP) annotation (Line(
-      points={{-107,-53},{-80,-53},{-80,-7.6},{-68.38,-7.6}},
+      points={{-100,-59},{-80,-59},{-80,-7.6},{-68.38,-7.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -266,7 +263,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP,securityControl. sigBusHP) annotation (Line(
-      points={{-107,-53},{-14,-53},{-14,-9.8},{5.5,-9.8}},
+      points={{-100,-59},{-14,-59},{-14,-9.8},{5.5,-9.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -277,25 +274,15 @@ equation
           -80,14.8},{-71.8,14.8}},
                                color={0,0,127}));
   connect(y_sou, y_sou)
-    annotation (Line(points={{-80,-114},{-80,-114}}, color={0,0,127}));
-  connect(realPasThrSec.y, nOut) annotation (Line(
-      points={{34.7,41},{76,41},{76,-58},{1.77636e-15,-58},{1.77636e-15,-114}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(securityControl.nOut, nOut) annotation (Line(
-      points={{49.6667,8},{76,8},{76,-58},{1.77636e-15,-58},{1.77636e-15,-114}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(securityControl.modeOut, modeOut) annotation (Line(points={{49.6667,0},
-          {62,0},{62,-58},{-40,-58},{-40,-114}}, color={255,0,255},
-      pattern=LinePattern.Dash));
+    annotation (Line(points={{-60,-114},{-60,-114}}, color={0,0,127}));
   connect(hPControls.ySecHeaGen, ySecHeaGen) annotation (Line(points={{-49.76,
-          -16.8},{-49.76,-44},{40,-44},{40,-114}},
+          -16.8},{-49.76,-44},{1.77636e-15,-44},{1.77636e-15,-114}},
                                             color={0,0,127}));
-  connect(hPControls.y_sin, y_sin) annotation (Line(points={{-38.36,-16},{-38,-16},
-          {-38,-40},{80,-40},{80,-114}}, color={0,0,127}));
-  connect(hPControls.y_sou, y_sou) annotation (Line(points={{-61.16,-16},{-62,
-          -16},{-62,-58},{-80,-58},{-80,-114}},       color={0,0,127}));
+  connect(hPControls.y_sin, y_sin) annotation (Line(points={{-38.36,-16},{-38,
+          -16},{-38,-40},{60,-40},{60,-114}},
+                                         color={0,0,127}));
+  connect(hPControls.y_sou, y_sou) annotation (Line(points={{-61.16,-16},{-60,
+          -16},{-60,-114}},                           color={0,0,127}));
   connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-56,70},
           {-56,72},{-48,72},{-48,72.4},{-48.6,72.4}},
                                  color={0,0,127}));
@@ -304,7 +291,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP.Pel, multiSum.u[1]) annotation (Line(
-      points={{-106.925,-52.915},{-78,-52.915},{-78,70}},
+      points={{-99.92,-58.915},{-78,-58.915},{-78,70}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -312,22 +299,14 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(calcCOP.y_COP, sigBusHP.CoP) annotation (Line(points={{-18.7,78},{-14,
-          78},{-14,-52.915},{-106.925,-52.915}}, color={0,0,127}), Text(
+          78},{-14,-58.915},{-99.92,-58.915}},   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(icingBlock.iceFac, iceFac_out) annotation (Line(
-      points={{62.9,85},{76,85},{76,80},{114,80}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(const.y, iceFac_out) annotation (Line(
-      points={{60.8,64},{76,64},{76,80},{114,80}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(sigBusHP.T_oda, icingBlock.T_oda) annotation (Line(
-      points={{-106.925,-52.915},{-14,-52.915},{-14,74},{28,74},{28,90.4},{
-          43.28,90.4}},
+      points={{-99.92,-58.915},{-14,-58.915},{-14,74},{28,74},{28,90.4},{43.28,
+          90.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -335,8 +314,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.T_flow_ev, icingBlock.T_flow_ev) annotation (Line(
-      points={{-106.925,-52.915},{-14,-52.915},{-14,74},{28,74},{28,86.8},{
-          43.28,86.8}},
+      points={{-99.92,-58.915},{-14,-58.915},{-14,74},{28,74},{28,86.8},{43.28,
+          86.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -344,8 +323,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.T_ret_ev, icingBlock.T_ret_ev) annotation (Line(
-      points={{-106.925,-52.915},{-14,-52.915},{-14,74},{28,74},{28,83.2},{
-          43.28,83.2}},
+      points={{-99.92,-58.915},{-14,-58.915},{-14,74},{28,74},{28,83.2},{43.28,
+          83.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -353,8 +332,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.m_flow_ev, icingBlock.m_flow_ev) annotation (Line(
-      points={{-106.925,-52.915},{-14,-52.915},{-14,74},{28,74},{28,79.6},{
-          43.28,79.6}},
+      points={{-99.92,-58.915},{-14,-58.915},{-14,74},{28,74},{28,79.6},{43.28,
+          79.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -365,14 +344,10 @@ equation
       points={{-27.34,0},{-10,0},{-10,-32},{20.8,-32}},
       color={255,0,255},
       pattern=LinePattern.Dash));
-  connect(booleanPassThroughMode.y, modeOut) annotation (Line(
-      points={{34.6,-32},{62,-32},{62,-58},{-40,-58},{-40,-114}},
-      color={255,0,255},
-      pattern=LinePattern.Dash));
   connect(calcQHeat.Q_flow, calcCOP.QHeat) annotation (Line(points={{-63.2,90},
           {-56,90},{-56,83.6},{-48.6,83.6}}, color={0,0,127}));
   connect(sigBusHP.m_flow_co, calcQHeat.m_flow) annotation (Line(
-      points={{-106.925,-52.915},{-94,-52.915},{-94,94.8},{-81.6,94.8}},
+      points={{-99.92,-58.915},{-94,-58.915},{-94,94.8},{-81.6,94.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -380,7 +355,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.T_ret_co, calcQHeat.T_a) annotation (Line(
-      points={{-106.925,-52.915},{-94,-52.915},{-94,89.2},{-81.6,89.2}},
+      points={{-99.92,-58.915},{-94,-58.915},{-94,89.2},{-81.6,89.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -388,13 +363,61 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.T_flow_co, calcQHeat.T_b) annotation (Line(
-      points={{-106.925,-52.915},{-94,-52.915},{-94,84.4},{-81.6,84.4}},
+      points={{-99.92,-58.915},{-94,-58.915},{-94,84.4},{-81.6,84.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(securityControl.modeOut, sigBusHP.mode) annotation (Line(
+      points={{49.6667,0},{64,0},{64,-58.915},{-99.92,-58.915}},
+      color={255,0,255},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(booleanPassThroughMode.y, sigBusHP.mode) annotation (Line(
+      points={{34.6,-32},{64,-32},{64,-58.915},{-99.92,-58.915}},
+      color={255,0,255},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(securityControl.nOut,sigBusHP.n)  annotation (Line(
+      points={{49.6667,8},{90,8},{90,-58.915},{-99.92,-58.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(realPasThrSec.y,sigBusHP.n)  annotation (Line(
+      points={{34.7,41},{90,41},{90,-58.915},{-99.92,-58.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(icingBlock.iceFac, sigBusHP.iceFac) annotation (Line(
+      points={{62.9,85},{120,85},{120,-58.915},{-99.92,-58.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(const.y, sigBusHP.iceFac) annotation (Line(
+      points={{60.8,64},{120,64},{120,-58.915},{-99.92,-58.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -429,6 +452,10 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Icing Factor")}),
     Documentation(revisions="<html><ul>
+  <li>
+    <i>October 31, 2018&#160;</i> by Alexander Kümpel:<br/>
+    Connection between controller and heat pump only via bus connector
+  </li>
   <li>
     <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
     First implementation (see issue <a href=

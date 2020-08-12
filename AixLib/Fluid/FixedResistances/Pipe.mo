@@ -26,8 +26,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
 
    replaceable model FlowModel =
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow
-    constrainedby
-    Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
+    constrainedby Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
     "Wall friction, gravity, momentum flow"
       annotation(Dialog(group="Pressure loss"), choicesAllMatching=true);
 
@@ -51,8 +50,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     "= true to use the convective HeatTransfer model"                                                      annotation(Dialog(tab="Heat transfer"));
     replaceable model HeatTransferConvective =
       Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (alpha0 = alpha_i)
-    constrainedby
-    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
+    constrainedby Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
     "Wall heat transfer"
       annotation (Dialog(tab="Heat transfer",enable=use_HeatTransfer),choicesAllMatching=true);
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_i=1000 "Heat tranfer coefficient from fluid to pipe wall";
@@ -117,8 +115,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     useLumpedPressure=useLumpedPressure,
     useInnerPortProperties=useInnerPortProperties,
     redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer
-        (                                                                                                  alpha0=hCon_i))
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (                           alpha0=hCon_i))
     annotation (Placement(transformation(extent={{-20,-46},{0,-26}})));
 
     // Parameter Tab "Initialisation"
@@ -175,22 +172,22 @@ protected
         iconTransformation(extent={{-46,20},{40,38}})));
 
 public
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=
+        Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
        Heat_Loss_To_Ambient and not withInsulation and not isEmbedded "Convection from pipe wall"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={24,26})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*Insulation.d_out*
-        length/nNodes) if (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hCon=fill(hCon, nNodes), A=
+        Modelica.Constants.pi*Insulation.d_out*length/nNodes*nParallel) if
+                          (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,26})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps, nNodes),
-      A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
-                                     Heat_Loss_To_Ambient and not isEmbedded
-    "Radiation" annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
+                                     Heat_Loss_To_Ambient and not isEmbedded "Radiation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-58,28})));
@@ -253,8 +250,8 @@ equation
         connect(heatConv_withInsulation.port_a, heatPorts);
         connect(heatPorts,thermalCollector.port_a);
         connect(thermalCollector.port_b,heatPort_outside);
-        connect(Insulation.port_b, twoStar_RadEx.Therm);
-        connect(twoStar_RadEx.Star, heatPorts_Star);
+    connect(Insulation.port_b, twoStar_RadEx.conv);
+    connect(twoStar_RadEx.rad, heatPorts_Star);
         connect(heatPorts_Star, thermalCollector_Star.port_a);
         connect(thermalCollector_Star.port_b, Star);
 
@@ -265,8 +262,8 @@ equation
         connect(heatConv.port_a, heatPorts);
         connect(heatPorts,thermalCollector.port_a);
         connect(thermalCollector.port_b,heatPort_outside);
-        connect(PipeWall.port_b, twoStar_RadEx.Therm);
-        connect(twoStar_RadEx.Star, heatPorts_Star);
+    connect(PipeWall.port_b, twoStar_RadEx.conv);
+    connect(twoStar_RadEx.rad, heatPorts_Star);
         connect(heatPorts_Star, thermalCollector_Star.port_a);
         connect(thermalCollector_Star.port_b, Star);
 
@@ -305,32 +302,84 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,0,0},
           textString="%nNodes")}),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Dynamic Pipe with pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation. This model considers heat loss through radiation and convection if pipe is not embedded in wall. In case that the pipe is embedded in the wall, heat transfer between the pipe wall / insulation and the surrounding material is based on heat conduction.</p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>Dynamic pipe model with heat losses for various applications. It is possible to choose whether the pipe is embedded in a wall or not. In addition, no insulation can be selected, if used for example for CCA ( concrete core activation).</p>
-<p>The model already includes heat-transfer by convection and by radiation. Instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe, so the loss to ambient will be calculated within the pipe model.</p>
-<p>For each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature.</p>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss\">AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss</a></p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Dynamic Pipe with pipe wall and insulation wall which allows
+  discretisation of pipe wall and pipe insulation. This model considers
+  heat loss through radiation and convection if pipe is not embedded in
+  wall. In case that the pipe is embedded in the wall, heat transfer
+  between the pipe wall / insulation and the surrounding material is
+  based on heat conduction.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  Dynamic pipe model with heat losses for various applications. It is
+  possible to choose whether the pipe is embedded in a wall or not. In
+  addition, no insulation can be selected, if used for example for CCA
+  ( concrete core activation).
+</p>
+<p>
+  The model already includes heat-transfer by convection and by
+  radiation. Instead of modeling these phenomena outside the pipe, an
+  ambient temperature can be prescribed at the heat-port and the star
+  of the pipe, so the loss to ambient will be calculated within the
+  pipe model.
+</p>
+<p>
+  For each discretisation of the pipe, there is a connector to the
+  corresponding element of the discretized pipe wall. Each element of
+  the discretised pipe wall is connected to a corresponding element of
+  the discretized insulation wall. The heat-ports and stars of all
+  nodes are then collected to form two single ports, which can be
+  connected to an ambient temperature.
+</p>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss\">AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss</a>
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
-Parameter isEmbedded added and correction of connections for different applications</li>
-<li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>March 18, 2015 </i>by Roozbeh Sangi:<br/>
-Outputs for stored energy and temperature added</li>
-<li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br/>
-Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>
-<li><i>May 19, 2014&nbsp;</i> by Roozbeh Sangi:<br/>
-Added to the HVAC library</li>
-<li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br/>
-Formatted documentation appropriately</li>
-<li><i>August 3, 2011</i> by Ana Constantin:<br/>
-Implemented</li>
+        revisions="<html><ul>
+  <li>
+    <i>February 03, 2020</i> by Alexander Kümpel:<br/>
+    Multiplication with nParallel in heatConv
+  </li>
+  <li>
+    <i>April 25, 2017</i> by Tobias Blacha:<br/>
+    Parameter isEmbedded added and correction of connections for
+    different applications
+  </li>
+  <li>
+    <i>April 25, 2017</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>March 18, 2015</i> by Roozbeh Sangi:<br/>
+    Outputs for stored energy and temperature added
+  </li>
+  <li>
+    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Updated connectors to EBC Library 2.2, Updated documentation, Added
+    example
+  </li>
+  <li>
+    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Added to the HVAC library
+  </li>
+  <li>
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>August 3, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end Pipe;

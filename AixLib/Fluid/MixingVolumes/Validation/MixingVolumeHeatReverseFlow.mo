@@ -1,8 +1,7 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeHeatReverseFlow
   "Validation model for mixing volume with heat input and flow reversal"
-  extends
-    AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MixingVolumeReverseFlow(
+  extends AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MixingVolumeReverseFlow(
       gain(k=10));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeaDyn

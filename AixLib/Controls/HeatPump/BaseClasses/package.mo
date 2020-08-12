@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 package BaseClasses "Package with base classes for the HeatPump controller"
 
 annotation (Icon(graphics={
@@ -16,12 +16,12 @@ annotation (Icon(graphics={
           extent={{-30.0,-30.0},{30.0,30.0}},
           lineColor={128,128,128},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end BaseClasses;

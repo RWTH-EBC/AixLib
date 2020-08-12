@@ -1,4 +1,33 @@
-# Ignore Dymola output, log and temporary files (in alphabetical order)
+# Python #
+##########
+.metadata
+*.pyc
+*.bak
+.project
+.pydevproject
+
+
+# Windows Office #
+##################
+~$*
+
+
+# pip install #
+###############
+*.egg-info/
+*.egg/
+*.eggs
+dist
+*.pypirc
+
+
+# PyCharm #
+###########
+.idea/
+
+
+# Modelica / Dymola #
+#####################
 *.bak-mo
 *.mat
 *.mof
@@ -28,10 +57,16 @@ stat
 status
 stop
 success
-# Ignore files created by BuildingsPy
+
+
+# Ignore files created by BuildingsPy #
+#######################################
 *.py[cod]
 *simulator*.log
 *unitTests*.log
 *comparison*.log
-# Ignore files created by PyCharm
-.idea/
+
+#Ignore files create by HTML Check
+HTML-logfile.txt
+#Ignore Dymola License log
+Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt

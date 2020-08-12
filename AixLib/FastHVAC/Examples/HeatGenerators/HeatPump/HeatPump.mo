@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
+within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
 model HeatPump
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
@@ -27,11 +27,11 @@ model HeatPump
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
     redeclare model PerDataHea =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (dataTable=AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+         dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
-        AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
-         dataTable=AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
+         dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     Q_useNominal=0,
     use_autoCalc=false,
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
@@ -53,7 +53,7 @@ model HeatPump
         rotation=270,
         origin={36,38})));
   Modelica.Blocks.Sources.Constant iceFac(final k=1)
-    "Fixed value for icing factor"                   annotation (Placement(
+    "Fixed value for icing factor. 1 means no icing/frosting (full heat transfer in heat exchanger)"                   annotation (Placement(
         transformation(
         extent={{5,5},{-5,-5}},
         rotation=180,
@@ -186,23 +186,25 @@ equation
 ")}),
     experiment(StopTime=20000, Interval=60),
     __Dymola_experimentSetupOutput,
-  Documentation(info="<html>
-  <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>
-  Example Setup is based on fluid example of
-  <a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump\">
-  AixLib.Fluid.HeatPumps.Examples.HeatPump</a>
-  </p>
-  </html>",
+  Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Example Setup is based on fluid example of <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump\">AixLib.Fluid.HeatPumps.Examples.HeatPump</a>
+</p>
+</html>",
   revisions="<html><ul>
-    <li>
-    <i>May 22, 2019</i>  by Julian Matthes: <br/>
-    Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
-    </li>
-    <li>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
-    Moved into AixLib 
-    </li>
-  </ul>
-  </html>"));
+    Moved into AixLib
+  </li>
+</ul>
+</html>"));
 end HeatPump;
