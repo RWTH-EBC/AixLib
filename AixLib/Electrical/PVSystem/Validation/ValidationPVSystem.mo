@@ -6,7 +6,7 @@ model ValidationPVSystem
   PVSystem pVSystem(
     redeclare DataBase.SolarElectric.SharpNUU235F2 data,
     redeclare model IVCharacteristics =
-        BaseClasses.IVCharacteristics5pNumerical,
+        BaseClasses.IVCharacteristics5pAnalytical,
     redeclare model CellTemperature =
         BaseClasses.CellTemperatureMountingCloseToGround,
     n_mod=312,
