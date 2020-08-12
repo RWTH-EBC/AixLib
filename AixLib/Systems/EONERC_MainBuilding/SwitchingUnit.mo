@@ -20,6 +20,8 @@ model SwitchingUnit
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     Kv=160,
+    order=1,
+    init=Modelica.Blocks.Types.Init.SteadyState,
     dpFixed_nominal=1000)
             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -40,6 +42,8 @@ model SwitchingUnit
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     Kv=500,
+    order=1,
+    init=Modelica.Blocks.Types.Init.SteadyState,
     dpFixed_nominal=1000)
             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -51,6 +55,8 @@ model SwitchingUnit
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     Kv=160,
+    order=1,
+    init=Modelica.Blocks.Types.Init.SteadyState,
     dpFixed_nominal=1000)
             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -62,6 +68,8 @@ model SwitchingUnit
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     Kv=500,
+    order=1,
+    init=Modelica.Blocks.Types.Init.SteadyState,
     dpFixed_nominal=1000)
             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -73,6 +81,8 @@ model SwitchingUnit
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     Kv=500,
+    order=1,
+    init=Modelica.Blocks.Types.Init.SteadyState,
     dpFixed_nominal=1000)
             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -86,6 +96,8 @@ model SwitchingUnit
     redeclare package Medium = Medium,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     pump(redeclare
         AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
         addPowerToMedium=false))
@@ -99,6 +111,8 @@ model SwitchingUnit
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     Kv=500,
+    order=1,
+    init=Modelica.Blocks.Types.Init.SteadyState,
     dpFixed_nominal=1000)
             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

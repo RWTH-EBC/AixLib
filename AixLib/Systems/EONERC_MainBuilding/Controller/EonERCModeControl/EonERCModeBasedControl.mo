@@ -73,13 +73,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrHP.N_rel, bus.hpSystemBus.busHP.N) annotation (Line(points={{-38,66},
-          {100.07,66},{100.07,-0.935}},
-                            color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(ctrHP.T_HS, bus.hpSystemBus.TTopHSMea) annotation (Line(points={{-83.6,
           86},{-98,86},{-98,100},{100,100},{100,48},{100.07,48},{100.07,-0.935}},
                                                    color={0,0,127}), Text(
@@ -255,6 +248,12 @@ equation
           63.35,87},{66.6,87}}, color={255,0,255}));
   connect(flapHPCS.y, bus.hpSystemBus.busThrottleCS.valveSet) annotation (Line(
         points={{82.7,87},{100.07,87},{100.07,-0.935}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrHP.N_rel, bus.hpSystemBus.busHP.n) annotation (Line(points={{-38,
+          66},{100.07,66},{100.07,-0.935}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

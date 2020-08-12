@@ -22,13 +22,13 @@ model HighTemperatureSystem
             110,10},{130,30}})));
   HydraulicModules.Admix admix2(
     redeclare package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
+    parameterPipe=DataBase.Pipes.Copper.Copper_66_7x1_2(),
+    allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     T_amb=T_amb,
-    dIns=0.01,
-    kIns=0.02,
-    d=0.65,
     length=1,
     Kv=25,
     valve(order=1),
@@ -41,13 +41,13 @@ model HighTemperatureSystem
         origin={-20,3.55271e-15})));
   HydraulicModules.Admix admix1(
     redeclare package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
+    parameterPipe=DataBase.Pipes.Copper.Copper_66_7x1_2(),
+    allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     T_amb=T_amb,
-    dIns=0.01,
-    kIns=0.02,
-    d=0.65,
     length=1,
     Kv=25,
     valve(order=1),
@@ -60,15 +60,15 @@ model HighTemperatureSystem
         origin={60,3.55271e-15})));
   HydraulicModules.ThrottlePump throttlePump(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_42x1(),
     allowFlowReversal=allowFlowReversal,
     T_start=T_start,
     T_amb=T_amb,
     m_flow_nominal=m_flow_nominal,
-    dIns=0.01,
-    kIns=0.02,
-    d=0.4,
     length=3,
     Kv=25,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)),
@@ -79,7 +79,7 @@ model HighTemperatureSystem
         origin={-100,0})));
   Fluid.BoilerCHP.BoilerNoControl boiler2(
     redeclare package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
+    allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(Q_nom=120000,
@@ -87,7 +87,7 @@ model HighTemperatureSystem
     annotation (Placement(transformation(extent={{-8,-72},{-32,-48}})));
   Fluid.BoilerCHP.BoilerNoControl boiler1(
     redeclare package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
+    allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(Q_nom=120000,
@@ -95,7 +95,7 @@ model HighTemperatureSystem
     annotation (Placement(transformation(extent={{72,-72},{48,-48}})));
   Fluid.BoilerCHP.CHP cHP(
     redeclare package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
+    allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     param=DataBase.CHP.CHPDataSimple.CHP_Cleanergy_C9G(),
@@ -111,6 +111,9 @@ model HighTemperatureSystem
 
   Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
+    allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     V=0.1,
     nPorts=2) annotation (Placement(transformation(extent={{80,36},{100,56}})));
@@ -126,6 +129,10 @@ model HighTemperatureSystem
         extent={{-3,-3},{3,3}},
         rotation=180,
         origin={-125,-29})));
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,

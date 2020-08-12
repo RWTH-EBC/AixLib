@@ -11,15 +11,15 @@ model HeatExchangerSystem
   HydraulicModules.ThrottlePump
                         throttlePump(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
     allowFlowReversal=allowFlowReversal,
     T_amb=293.15,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    dIns=0.01,
-    kIns=0.03,
-    d=0.1,
     length=5,
     Kv=63,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per,
@@ -38,6 +38,8 @@ model HeatExchangerSystem
     dp2_nominal=48000,
     tau1=2,
     tau2=2,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T1_start=T_start,
     T2_start=T_start,
     redeclare Fluid.MixingVolumes.MixingVolume vol1,
@@ -50,15 +52,15 @@ model HeatExchangerSystem
         origin={-4,-1})));
   HydraulicModules.Admix admix(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_133x3(),
     allowFlowReversal=allowFlowReversal,
     T_amb=293.15,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    dIns=0.01,
-    kIns=0.02,
-    d=0.125,
     length=2,
     Kv=160,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     valve(order=1),
     pipe2(length=5),
     pipe3(length=10),
@@ -128,6 +130,10 @@ model HeatExchangerSystem
         origin={100,-52})));
   BaseClasses.TwoCircuitBus hxBus annotation (Placement(transformation(extent={
             {-32,86},{-6,114}}), iconTransformation(extent={{-22,90},{-2,110}})));
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 equation
   connect(throttlePump.port_b1, dynamicHX.port_a1) annotation (Line(points={{-60,-12},
           {-28,-12},{-28,20},{-17.2,20}},    color={0,127,255}));

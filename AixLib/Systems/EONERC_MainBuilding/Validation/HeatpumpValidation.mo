@@ -54,34 +54,32 @@ model HeatpumpValidation
     dpCon_nominal=44000,
     mFlow_conNominal=10,
     mFlow_evaNominal=10,
-    VCon=0.1,
+    VCon=0.176,
     use_conCap=false,
     use_evaCap=false,
     redeclare package Medium_con = Medium,
     redeclare package Medium_eva = Medium,
-    redeclare model PerDataMainHP =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (dataTable=
-            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201(
-            tableQdot_con=[0,12.5,15; 26.5,310000,318000; 44.2,251000,254000],
-            tableP_ele=[0,12.5,15; 26.5,51000,51000; 44.2,51000,51000]),
-          extrapolation=true),
-    redeclare model PerDataRevHP =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (dataTable=
-            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201(
-            tableQdot_con=[0,12.5,15; 26.5,310000,318000; 44.2,251000,254000],
-            tableP_ele=[0,12.5,15; 26.5,51000,51000; 44.2,51000,51000]),
-          extrapolation=true),
     use_refIne=true,
     transferHeat=true,
-    tauHeaTraEva(displayUnit="h") = 21600,
-    tauHeaTraCon(displayUnit="h") = 28800,
-    TAmbCon_nominal=298.15,
-    TAmbEva_nominal=298.15,
-    TCon_start=311.15,
-    TEva_start=284.15,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+    allowFlowReversalEva=true,
+    allowFlowReversalCon=true,
+    tauHeaTraEva(displayUnit="h") = 43200,
+    tauHeaTraCon(displayUnit="h") = 36000,
+    TAmbCon_nominal=303.15,
+    TAmbEva_nominal=303.15,
+    TCon_start=303.15,
+    TEva_start=298.15,
+    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare model PerDataMainHP =
+        DataBase.HeatPump.PerformanceData.LookUpTable2D (smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+          dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350AWI114(
+            tableQdot_con=[0,12.5,15; 26.5,310000,318000; 44.2,251000,254000],
+            tableP_ele=[0,12.5,15; 26.5,51000,51000; 44.2,51000,51000])),
+    redeclare model PerDataRevHP =
+        DataBase.Chiller.PerformanceData.LookUpTable2D (smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+          dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201(
+            tableQdot_con=[0,12.5,15; 26.5,310000,318000; 44.2,251000,254000],
+            tableP_ele=[0,12.5,15; 26.5,51000,51000; 44.2,51000,51000])))
                        annotation (Placement(transformation(
         extent={{-20,-24},{20,24}},
         rotation=90,
@@ -116,6 +114,12 @@ model HeatpumpValidation
     annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
+  Modelica.Blocks.Sources.Constant iceFac1(final k=0)
+                                                     annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={56,-78})));
 equation
   connect(boundary5.ports[1], heatPump.port_a1)
     annotation (Line(points={{-70,-20},{-20,-20}}, color={0,127,255}));
@@ -152,12 +156,6 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(division.y, sigBusHP.N) annotation (Line(points={{-19,-60},{-10,-60},{
-          -10,-59.91},{0.08,-59.91}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(combiTimeTable.y[5], toKelvin.Celsius) annotation (Line(points={{-79,70},
           {-68,70},{-68,39.2},{-100,39.2}}, color={0,0,127}));
   connect(combiTimeTable.y[7], boundary5.m_flow_in) annotation (Line(points={{-79,
@@ -168,6 +166,12 @@ equation
           70},{54,70},{54,48},{100,48},{100,12},{92,12}}, color={0,0,127}));
   connect(combiTimeTable.y[9], division.u1)
     annotation (Line(points={{-79,70},{-42,70},{-42,-54}}, color={0,0,127}));
+  connect(division.y, sigBusHP.n) annotation (Line(points={{-19,-60},{-10,-60},
+          {-10,-59.91},{0.08,-59.91}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated=
            true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpValidation.mos"

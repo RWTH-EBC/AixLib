@@ -13,12 +13,15 @@ model MainBuildingEnergySystem
         extent={{6,-6},{-6,6}},
         rotation=270,
         origin={80,-102})));
-  HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium, T_amb=293.15)
+  HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium,
+    T_amb=293.15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     annotation (Placement(transformation(extent={{-58,-100},{52,-52}})));
   SwitchingUnit switchingUnit(redeclare package Medium = Medium, m_flow_nominal=
        5) annotation (Placement(transformation(extent={{32,22},{66,62}})));
   HeatExchangerSystem heatExchangerSystem(redeclare package Medium = Medium,
-      m_flow_nominal=2)
+      m_flow_nominal=2,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     annotation (Placement(transformation(extent={{-146,-26},{-80,18}})));
   Fluid.Sources.Boundary_pT          boundary1(
     redeclare package Medium = Medium,
@@ -40,25 +43,24 @@ model MainBuildingEnergySystem
     redeclare package Medium = Medium,
     T_start=333.15,
     T_amb=293.15,
-    m_flow_nominal=2) annotation (Placement(transformation(
+    m_flow_nominal=2,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+                      annotation (Placement(transformation(
         extent={{-37,-29},{37,29}},
         rotation=90,
         origin={-159,-83})));
   HydraulicModules.Admix admixHTC(
+    parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(
         redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
           per,
-        energyDynamics=admixHTC.energyDynamics,
         addPowerToMedium=false)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.08,
     pipe1(length=15),
     pipe2(length=1),
     pipe3(length=4),
@@ -116,20 +118,17 @@ model MainBuildingEnergySystem
     rpm_pump=1500)
     annotation (Placement(transformation(extent={{-124,62},{-110,76}})));
   HydraulicModules.Admix admixLTC(
+    parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(
         redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
           per,
-        energyDynamics=admixLTC.energyDynamics,
         addPowerToMedium=false)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.1,
     pipe1(length=10),
     pipe2(length=1),
     pipe3(length=4),
@@ -143,20 +142,17 @@ model MainBuildingEnergySystem
         rotation=90,
         origin={-90,70})));
   HydraulicModules.Admix admixCold1(
+    parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(
         redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
           per,
-        energyDynamics=admixCold1.energyDynamics,
         addPowerToMedium=false)),
     redeclare package Medium = Medium,
     m_flow_nominal=5,
     T_amb=298.15,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.1,
     pipe1(length=5),
     pipe2(length=5),
     pipe3(length=4),
@@ -181,23 +177,21 @@ model MainBuildingEnergySystem
     redeclare package Medium = Medium,
     m_flow_nominal=10,
     T_start=285.15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_amb=288.15)
             annotation (Placement(transformation(extent={{36,-22},{62,16}})));
   HydraulicModules.Admix admixCold2(
+    parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(
         redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
           per,
-        energyDynamics=admixCold2.energyDynamics,
         addPowerToMedium=false)),
     redeclare package Medium = Medium,
     m_flow_nominal=5,
     T_amb=298.15,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.1,
     pipe1(length=5),
     pipe2(length=5),
     pipe3(length=4),
