@@ -2,8 +2,9 @@
 model GenericPipe
   "Pipe model that includes several selectable pipe models"
 
-  Utilities.HeatTransfer.HeatConv heatConv(hCon=hCon, final A=Modelica.Constants.pi
-        *parameterPipe.d_o*length) if withConvection
+  Utilities.HeatTransfer.HeatConv heatConv(
+    final hCon=hCon,
+    final A=Modelica.Constants.pi*parameterPipe.d_o*length) if withConvection
     "Convection from insulation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -13,8 +14,6 @@ model GenericPipe
   parameter String pipeModel="SimplePipe" annotation(choices(
               choice="SimplePipe",
               choice="PlugFlowPipe"),Dialog(enable=true, group="Parameters"));
-
-
 
   parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
@@ -36,7 +35,6 @@ model GenericPipe
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
-
   // Advanced
   parameter Real fac=1
     "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal" annotation (Dialog(tab="Advanced"));
@@ -47,7 +45,6 @@ model GenericPipe
     "Average height of surface asperities (default: smooth steel pipe)"
                                                                        annotation (Dialog(tab="Advanced"));
   parameter Integer nNodes=3 "Spatial segmentation for SimplePipe" annotation (Dialog(tab="Advanced", enable=pipeModel=="SimplePipe"));
-
 
   // Assumptions
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -80,11 +77,11 @@ model GenericPipe
     final fac=fac,          nPorts=1) if pipeModel == "PlugFlowPipe"
     annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
   SimplePipe simplePipe(
-    redeclare package Medium = Medium,
+    redeclare final package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
     final nNodes=nNodes,
     final dh=parameterPipe.d_i,
-                        withHeattransfer=true,
+    final withHeattransfer=true,
     final length=length,
     final fac=fac,
     final ReC=ReC,
@@ -98,14 +95,15 @@ model GenericPipe
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics) if pipeModel == "SimplePipe"
     annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=nNodes) if
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
+    final m=nNodes) if
        pipeModel == "SimplePipe"
                 annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,14})));
 
     Utilities.HeatTransfer.CylindricHeatTransfer Insulation(
-    energyDynamics=energyDynamics,
+    final energyDynamics=energyDynamics,
     final c=parameterIso.c,
     final d_out=parameterPipe.d_o*parameterIso.factor*2 + parameterPipe.d_o,
     final d_in=parameterPipe.d_o,
@@ -158,7 +156,6 @@ equation
       pattern=LinePattern.Dash));
   connect(heatConv.port_a, heatPort)
     annotation (Line(points={{0,80},{0,100}}, color={191,0,0}));
-//          visible=pipeModel=="PlugFlowPipe",
   connect(Insulation.port_b, heatConv.port_b)
     annotation (Line(points={{0,48.8},{0,60}}, color={191,0,0}));
   connect(plugFlowPipe.heatPort, thermalPassthroughInsulation.port_a[1])
