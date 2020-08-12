@@ -19,7 +19,31 @@ annotation(preferredView="info", Documentation(info="<html><p>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 , and also the solar collector models
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -27,11 +51,47 @@ in
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 <a href=\"AixLib.Fluid.SolarCollectors\">AixLib.Fluid.SolarCollectors</a>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 require a tilt of <i>0</i>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

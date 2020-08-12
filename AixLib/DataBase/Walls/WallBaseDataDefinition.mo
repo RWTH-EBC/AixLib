@@ -22,17 +22,40 @@ record WallBaseDataDefinition "Wall base data definition"
     annotation(Dialog(tab = "Wall", group = "Wall parameters"));
   annotation (
     defaultComponentPrefixes="parameter",
-    Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Wall BaseDataDefinition actually doesn&apos;t need predefined values and that is desirable to get errors thrown when using an unparameterised wall in a model. </p>
- <h4><font color=\"#008000\">Concept</font></h4>
- <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>port_a</code>(outside), the last element represents the layer connected to <code>port_b</code>(surface facing the room). </p>
- <h4><font color=\"#008000\">References</font></h4>
- <p>Base data definition for record to be used in model <a href=\"Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar\">Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar</a></p>
- </html>", revisions="<html>
- <ul>
-  <li><i>September 3, 2013</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-  <li><i>April 15, 2020</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a> Define n as length of vectors</li>
- </ul>
+    Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Wall BaseDataDefinition actually doesn't need predefined values and
+  that is desirable to get errors thrown when using an unparameterised
+  wall in a model.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  <b><span style=\"color: #ff0000\">Attention:</span></b> The first
+  element in each vector represents the layer connected to
+  <code>port_a</code>(outside), the last element represents the layer
+  connected to <code>port_b</code>(surface facing the room).
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Base data definition for record to be used in model <a href=
+  \"Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar\">Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar</a>
+</p>
+<ul>
+  <li>
+    <i>September 3, 2013</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>April 15, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>
+    Define n as length of vectors
+  </li>
+</ul>
 </html>"));
 end WallBaseDataDefinition;

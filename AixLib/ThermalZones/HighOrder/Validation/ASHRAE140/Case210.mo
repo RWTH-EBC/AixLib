@@ -4,17 +4,21 @@ model Case210
     wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases_eps01(),
     ReferenceCoolingLoad(table=[210,-668,-162]),
     ReferenceHeatingLoad(table=[210,6456,6967]));
-  annotation (Documentation(info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 220: </p>
+  annotation (Documentation(info="<html><p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 220:
+</p>
 <ul>
-<li> Infrared emittace of interior surface = 0.1</li>
+  <li>Infrared emittace of interior surface = 0.1
+  </li>
 </ul>
+<ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    Implemented
+  </li>
 </ul>
-</ul>
-</html>", revisions="<html>
- <ul>
- <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
- </ul>
- </html>"));
+</html>"));
 end Case210;

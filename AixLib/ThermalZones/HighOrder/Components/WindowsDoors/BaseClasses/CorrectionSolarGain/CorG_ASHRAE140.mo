@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
 model CorG_ASHRAE140
   "Correction of the solar gain factor according to ASHRAE 140"
   extends PartialCorG;
@@ -80,25 +80,37 @@ equation
 
   connect(realExpression.y, combiTable1Ds.u) annotation (Line(points={{-47,48},{
           -32,48},{-32,46},{-18,46}}, color={0,0,127}));
-  annotation (Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>This model computes the transmission correction factors for solar radiation through a double pane window depoending on the incidence angle, based on the ASHRAE140-2017.</p>
-<h4><span style=\"color: #008000\">Known Limitations</span></h4>
-<p>The model is directly paramtrized for a double pane window.</p>
-<h4><span style=\"color: #008000\">References</span></h4>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  This model computes the transmission correction factors for solar
+  radiation through a double pane window depoending on the incidence
+  angle, based on the ASHRAE140-2017.
+</p>
+<h4>
+  <span style=\"color: #008000\">Known Limitations</span>
+</h4>
+<p>
+  The model is directly paramtrized for a double pane window.
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
 <ul>
-<li>ASHRAE140-2017 Informative Annex B6</li>
-<li>Heating and Cooling of Buildings, Priciples and Practice of Energy Efficient Design (p.142)</li>
+  <li>ASHRAE140-2017 Informative Annex B6
+  </li>
+  <li>Heating and Cooling of Buildings, Priciples and Practice of
+  Energy Efficient Design (p.142)
+  </li>
 </ul>
-</html>", revisions="<html><body>
-<li>
-April 24, 2020, by Konstantina Xanthopoulou:<br/>
-First Implementation.
-</li>
-This is for
-<a href=\"https://github.com/RWTH-EBC/AixLib/issues/889\">#889</a>.
-</li>
-<li>
+<ul>
+  <li>April 24, 2020, by Konstantina Xanthopoulou:<br/>
+    First Implementation.
+  </li>
+  <li style=\"list-style: none\">This is for <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/889\">#889</a>.
+  </li>
 </ul>
 </html>"));
 end CorG_ASHRAE140;

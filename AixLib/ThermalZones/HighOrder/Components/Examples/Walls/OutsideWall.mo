@@ -46,22 +46,35 @@ equation
   connect(Solarradiation.y, varRad.I_dir[1]) annotation (Line(points={{77.1,79},{67.55,79},{67.55,75},{59,75}}, color={0,0,127}));
   connect(Solarradiation.y, varRad.I[1]) annotation (Line(points={{77.1,79},{68.55,79},{68.55,71.1},{58.9,71.1}}, color={0,0,127}));
   connect(outerWall.solarRadWinTrans, outerWall.solarRadWin) annotation (Line(points={{-31.5,-4.45},{-40,-4.45},{-40,66.8},{-30.6,66.8}}, color={0,0,127}));
-  annotation (experiment(StopTime = 36000, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an outside wall application.</p>
- <h4><font color=\"#008000\">Concept</font></h4>
- <p>Test case for calculation of U-value</p>
- <ul>
- <li>Area of Wall: 10 m2</li>
- <li>Area of Window: 2 m2</li>
- <li>Temperature difference: 10 K</li>
- <li>Test time: 10 h</li>
- </ul>
- </html>", revisions = "<html>
- <ul>
-   <li><i>April, 2012&nbsp;</i>
-          by Mark Wesseling:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+  annotation (experiment(StopTime = 36000, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to test the <a href=
+  \"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an
+  outside wall application.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Test case for calculation of U-value
+</p>
+<ul>
+  <li>Area of Wall: 10 m2
+  </li>
+  <li>Area of Window: 2 m2
+  </li>
+  <li>Temperature difference: 10 K
+  </li>
+  <li>Test time: 10 h
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>April, 2012&#160;</i> by Mark Wesseling:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end OutsideWall;

@@ -55,13 +55,40 @@ equation
   connect(A_in, A_in_internal);
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                            Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{-100,100},{100,-100}},  lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-78,80},{82,-80}},      lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "2*")}), Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>The model cobines the <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b> and the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connector. To model longwave radiation exchange of surfaces, just connect the <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b> connector to the heat port of a surface and connect the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connector to the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connectors of an unlimited number of corresponding surfaces. </p>
-<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
-<p>Since exact calculation of longwave radiation exchange inside a room demands for the computation of view factors, it may be very complex to achieve for non-rectangular room layouts. Therefore, an approximated calculation of radiation exchange basing on the proportions of the affected surfaces is an alternative. The underlying concept of this approach is known as the &quot;two star&quot; room model. </p>
-<p><b><span style=\"color: #008000;\">Limitations / Assumptions</span></b> </p>
-<p>According to [1]:</p>
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "2*")}), Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  The model cobines the <b><a href=
+  \"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>
+  and the <b><a href=
+  \"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connector. To
+  model longwave radiation exchange of surfaces, just connect the
+  <b><a href=
+  \"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>
+  connector to the heat port of a surface and connect the <b><a href=
+  \"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connector to
+  the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b>
+  connectors of an unlimited number of corresponding surfaces.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  Since exact calculation of longwave radiation exchange inside a room
+  demands for the computation of view factors, it may be very complex
+  to achieve for non-rectangular room layouts. Therefore, an
+  approximated calculation of radiation exchange basing on the
+  proportions of the affected surfaces is an alternative. The
+  underlying concept of this approach is known as the \"two star\" room
+  model.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Limitations / Assumptions</span></b>
+</p>
+<p>
+  According to [1]:
+</p>
 <ul>
   <li>Index 1 is the component at port <span style=
   \"font-family: Courier;\">conv</span>

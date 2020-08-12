@@ -4,17 +4,22 @@ model Case280
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs01,
     ReferenceHeatingLoad(table=[280,4675,6148]),
     ReferenceCoolingLoad(table=[280,-7114,-4873]));
-  annotation (Documentation(revisions="<html>
- <ul>
- <li><i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 270: </p>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 270:
+</p>
 <ul>
-<li> Solar absorptance on interior surface = 0.1</li>
-</ul>
-</ul>
+  <li>Solar absorptance on interior surface = 0.1
+  </li>
 </ul>
 </html>"));
 end Case280;

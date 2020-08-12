@@ -3,9 +3,12 @@ model Case950
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650(wallTypes=
         AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),
       ReferenceCoolingLoad(table=[950,-921,-387]));
-  annotation (Documentation(info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 900:</p>
+  annotation (Documentation(info="<html><p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 900:
+</p>
 <ul>
   <li>From 1800 hours to 0700 hours, vent fan = ON
   </li>
@@ -19,13 +22,14 @@ model Case950
   degC; otherwise, cool = OFF
   </li>
 </ul>
-</html>", revisions="<html>
- <ul>
-<li>
-  July 1, 2020, by Konstantina Xanthopoulou:<br/>
-  updated
+<ul>
+  <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
+    updated
   </li>
- <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>"));
+  <li>
+    <i>March 9, 2015</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>"));
 end Case950;
