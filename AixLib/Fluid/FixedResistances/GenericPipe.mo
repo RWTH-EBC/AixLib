@@ -120,11 +120,8 @@ model GenericPipe
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,42})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughInsulation1(final m=1) if not
-    withConvection        annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={-32,68})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1)
+                          annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=180)));
 equation
   connect(simplePipe.heatPorts, thermalCollector.port_a) annotation (Line(
       points={{0,-14.8},{0,4},{-1.33227e-15,4}},
@@ -168,14 +165,11 @@ equation
       points={{1.33227e-15,24},{-32,24},{-32,32}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(thermalPassthroughInsulation.port_b, thermalPassthroughInsulation1.port_a[
-    1]) annotation (Line(points={{-32,52},{-32,58}}, color={191,0,0}));
-  connect(thermalPassthroughInsulation1.port_b, heatPort)
-    annotation (Line(points={{-32,78},{-32,100},{0,100}}, color={191,0,0}));
+  connect(thermalPassthroughInsulation.port_b, thermalPassthroughConvection.port_a[1][1]) annotation (Line(points={{-32,52},{-32,22},{-32,-10},{0,-10}}, color={191,0,0}));
+  connect(thermalPassthroughConvection.port_b, heatPort) annotation (Line(points={{0,10},{0,100},{0,100}}, color={191,0,0}));
   connect(thermalPassthroughInsulation.port_b, heatConv.port_b) annotation (
       Line(points={{-32,52},{0,52},{0,60},{-1.77636e-15,60}}, color={191,0,0}));
-  connect(Insulation.port_b, thermalPassthroughInsulation1.port_a[1])
-    annotation (Line(points={{0,48.8},{0,56},{-32,56},{-32,58}}, color={191,0,0}));
+  connect(Insulation.port_b, thermalPassthroughConvection.port_a[1][1]) annotation (Line(points={{0,48.8},{0,56},{0,56},{0,-10}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,32},{100,-32}},
