@@ -101,18 +101,21 @@ annotation (
   </li>
 </ul>
 </html>",
-    revisions="<html>
-<ul>
-<li>
-April 24, 2020, by Konstantina Xanthopoulou:<br/>
-Removed parameter
-<code>g</code>.
-</li>
-This is for
-<a href=\"https://github.com/RWTH-EBC/AixLib/issues/899\">
-issue 899</a>.
-<li>
-<p><i>February 24, 2014</i> by Reza Tavakoli:</p>
-<p>implemented </p>
+    revisions="<html><ul>
+  <li>April 24, 2020, by Konstantina Xanthopoulou:<br/>
+    Removed parameter <code>g</code>.
+  </li>
+  <li style=\"list-style: none\">This is for <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/899\">issue 899</a>.
+  </li>
+  <li>
+    <p>
+      <i>February 24, 2014</i> by Reza Tavakoli:
+    </p>
+    <p>
+      implemented
+    </p>
+  </li>
+</ul>
 </html>"));
 end CorG_VDI6007;
