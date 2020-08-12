@@ -18,7 +18,7 @@ If you have any questions regarding **AixLib**, feel free to contact us at aixli
   ``git clone --recurse-submodules https://github.com/RWTH-EBC/AixLib.git``
 * If you have already cloned the repository, run:  
   ``git submodule update --init --recursive``
-
+* The default branch of AixLib is the ``development`` branch. This means that after cloning the repository, you always checked out the ``development`` branch.
 ## Release versions
 
 The latest version is always available on the [release page](https://github.com/RWTH-EBC/AixLib/releases) and defined in [AixLib's package.mo](https://github.com/RWTH-EBC/AixLib/blob/master/AixLib/package.mo).
