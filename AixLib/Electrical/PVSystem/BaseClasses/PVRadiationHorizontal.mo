@@ -132,10 +132,10 @@ model PVRadiationHorizontal "PV radiation and absorptance model - input: total i
   AixLib.BoundaryConditions.WeatherData.BaseClasses.EquationOfTime eqnTim
     "Block that computes the equation of time";
 
-  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.DeclinationSpencer decAng
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination decAng
     "Declination angle";
 
-  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngleDuffie incAng(
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle incAng(
    azi=azi,
    til=til,
    lat=lat) "Incidence angle";

@@ -1,4 +1,4 @@
-﻿within AixLib.BoundaryConditions.SolarGeometry;
+within AixLib.BoundaryConditions.SolarGeometry;
 package BaseClasses "Package with base classes for AixLib.BoundaryConditions.SolarGeometry"
   extends Modelica.Icons.BasesPackage;
 
