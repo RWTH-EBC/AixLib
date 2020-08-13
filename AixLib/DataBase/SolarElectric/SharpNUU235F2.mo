@@ -12,7 +12,7 @@ record SharpNUU235F2
    I_mp0=7.84,
    P_mp0=235,
    TCoeff_Isc=0.00053*I_sc0,
-   TCoeff_Voc=-0.00351*Voc0,
+   TCoeff_Voc=-0.00351*V_oc0,
    gamma_Pmp=-0.00485,
    T_NOCT=47.5+273.15);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(
