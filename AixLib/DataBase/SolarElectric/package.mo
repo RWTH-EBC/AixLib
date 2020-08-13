@@ -1,7 +1,6 @@
 within AixLib.DataBase;
 package SolarElectric
   record PVBaseDataDefinition "Basic record of a PV module"
-
    extends Modelica.Icons.Record;
 
    parameter Modelica.SIunits.Efficiency eta_0

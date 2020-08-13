@@ -1,13 +1,21 @@
 within AixLib.DataBase.SolarElectric;
-record AleoS24 "solarmodul AleoS24"
+record AleoS24185 "solarmodul AleoS24.185"
 
-  extends AixLib.DataBase.SolarElectric.PVBaseRecord(
-    Eta0=0.139,
-    TempCoeff=0.0034,
-    NoctTempCell=47+273.15,
-    NoctTemp=25+273.15,
-    NoctRadiation=1000,
-    Area=1.33155);
+  extends AixLib.DataBase.SolarElectric.PVBaseDataDefinition(
+   n_ser=48,
+   n_par=1,
+   A_cel=(0.156)*(0.156),
+   A_mod=0.990*1.345,
+   eta_0=0.139,
+   V_oc0=29.4,
+   I_sc0=8.31,
+   V_mp0=23.6,
+   I_mp0=7.85,
+   P_mp0=185,
+   TCoeff_Isc=0.0004*I_sc0,
+   TCoeff_Voc=-0.0034*V_oc0,
+   gamma_Pmp=-0.0046,
+   T_NOCT=47+273.15);
   annotation (Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>
 </h4>
@@ -33,4 +41,4 @@ record AleoS24 "solarmodul AleoS24"
   </li>
 </ul>
 </html>"));
-end AleoS24;
+end AleoS24185;
