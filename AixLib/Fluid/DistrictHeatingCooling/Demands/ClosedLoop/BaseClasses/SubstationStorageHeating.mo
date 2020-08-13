@@ -117,8 +117,7 @@ model SubstationStorageHeating
     annotation (Placement(transformation(extent={{120,520},{140,540}})));
   Modelica.Blocks.Math.Max max_deltaT_HE1
     annotation (Placement(transformation(extent={{232,202},{252,222}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=
-        288.15)
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=293.15)
     annotation (Placement(transformation(extent={{48,-68},{134,-154}})));
 equation
 

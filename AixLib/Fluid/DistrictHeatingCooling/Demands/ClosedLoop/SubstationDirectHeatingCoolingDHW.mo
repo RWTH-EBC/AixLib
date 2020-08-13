@@ -288,8 +288,8 @@ equation
     annotation (Line(points={{-101,64},{-78,64}}, color={0,0,127}));
   connect(booleanStep.y, mass_flow_heatExchangerHeating1.u2) annotation (Line(
         points={{-105.4,38},{-92,38},{-92,56},{-78,56}}, color={255,0,255}));
-  connect(const3.y, mass_flow_heatExchangerHeating1.u3) annotation (Line(points=
-         {{-91.4,18},{-84,18},{-84,48},{-78,48}}, color={0,0,127}));
+  connect(const3.y, mass_flow_heatExchangerHeating1.u3) annotation (Line(points={{-91.4,
+          18},{-84,18},{-84,48},{-78,48}},        color={0,0,127}));
   connect(max3.u2, mass_flow_heatExchangerHeating1.y) annotation (Line(points={
           {18,72},{-18,72},{-18,56},{-55,56}}, color={0,0,127}));
   connect(const6.y, max3.u1) annotation (Line(points={{38.6,120},{68,120},{68,
