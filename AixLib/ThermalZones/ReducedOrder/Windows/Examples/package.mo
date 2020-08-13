@@ -5,9 +5,10 @@ package Examples "Examples for the windows submodels"
 
 
 
-annotation (Documentation(revisions="<html>
-<ul>
-<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+annotation (Documentation(revisions="<html><ul>
+  <li>July 17 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end Examples;

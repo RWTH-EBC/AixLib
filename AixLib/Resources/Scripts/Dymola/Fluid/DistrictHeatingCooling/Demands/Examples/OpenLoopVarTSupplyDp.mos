@@ -1,0 +1,4 @@
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp");
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDp", stopTime=100000, method="dassl", tolerance=1e-006, resultFile="OpenLoopVarTSupplyDp");
+createPlot(id=1, y={"demand.senT_supply.T", "demand.senT_return.T"}, filename="OpenLoopVarTSupplyDp.mat");
+createPlot(id=3, y={"demand.port_a.m_flow"}, filename="OpenLoopVarTSupplyDp.mat");

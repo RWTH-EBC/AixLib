@@ -1,0 +1,6 @@
+dym_sta_lic_available = RequestOption("Standard");
+if not dym_sta_lic_available then
+  DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");
+  Modelica.Utilities.Streams.print("Log_NO_DYM_STANDARD_LIC_AVAILABLE");
+  
+end if;

@@ -198,15 +198,28 @@ equation
               -164,46},{-114,44}},                                                                                                                                                                     lineColor = {0, 0, 255}, textString = "1-Bedroom"), Text(extent={{
               -164,40},{-114,38}},                                                                                                                                                                                                        lineColor = {0, 0, 255}, textString = "2-Children1"), Text(extent={{
               -164,34},{-114,32}},                                                                                                                                                                                                        lineColor = {0, 0, 255}, textString = "3-Bath"), Text(extent={{
-              -164,28},{-114,26}},                                                                                                                                                                                                        lineColor = {0, 0, 255}, textString = "4-Children2")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-200, -100}, {200, 100}}, grid = {1, 1}), graphics), experiment(StopTime = 86400, Interval = 15, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Example for setting up a simulation for a one family dwelling.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Energy generation and delivery system consisting of boiler and pump.</p>
- <p>The example works for a day and shows how such a simulation can be set up. It is not guranteed that the model will work stable under sifferent conditions or for longer periods of time.</p>
- </html>", revisions = "<html>
- <ul>
- <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>"));
+              -164,28},{-114,26}},                                                                                                                                                                                                        lineColor = {0, 0, 255}, textString = "4-Children2")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-200, -100}, {200, 100}}, grid = {1, 1}), graphics), experiment(StopTime = 86400, Interval = 15, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Example for setting up a simulation for a one family dwelling.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Energy generation and delivery system consisting of boiler and pump.
+</p>
+<p>
+  The example works for a day and shows how such a simulation can be
+  set up. It is not guranteed that the model will work stable under
+  sifferent conditions or for longer periods of time.
+</p>
+<ul>
+  <li>
+    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>"));
 end OFD_1Jan;

@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 #######################################################
-# Script that runs all unit tests or, optionally,
-# only checks the html syntax or the validity of
-# the simulation parameters of the models
-#
+# Script that runs all unit tests 
 # To run the unit tests, this script
 # - creates temporary directories for each processor,
 # - copies the library directory into these
@@ -19,21 +16,37 @@
 # - exits with the message
 #    'Unit tests completed successfully.' or with
 #   an error message.
-#
 # If no errors occurred during the unit tests, then
 # this script returns 0. Otherwise, it returns a
 # non-zero exit value.
-#
-# MWetter@lbl.gov                            2011-02-23
-# TSNouidui@lbl.gov                          2017-04-11
-#######################################################
 
 
-def _validate_experiment_setup(path):
-    import buildingspy.development.validator as v
+def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
+    import buildingspy.development.regressiontest as u
 
-    val = v.Validator()
-    retVal = val.validateExperimentSetup(path)
+    ut = u.Tester(tool=tool)
+    ut.batchMode(batch)
+    ut.setLibraryRoot(path)
+    if package is not None:
+        ut.setSinglePackage(package)
+    ut.setNumberOfThreads(n_pro)
+    ut.pedanticModelica(True)
+    ut.showGUI(show_gui)
+    # Below are some option that may occassionally be used.
+    # These are currently not exposed as command line arguments.
+#    ut.setNumberOfThreads(1)
+#    ut.deleteTemporaryDirectories(False)
+#    ut.useExistingResults(['/tmp/tmp-Buildings-0-fagmeZ'])
+
+#    ut.writeOpenModelicaResultDictionary()
+    # Run the regression tests
+
+    retVal = ut.run()
+    return retVal
+
+
+
+# only checks the html syntax ::
 
 def _validate_html(path):
     import buildingspy.development.validator as v
@@ -52,6 +65,23 @@ def _validate_html(path):
     else:
         return 1
 
+
+
+
+
+
+#the  validity of the simulation parameters of the models
+
+ def _validate_experiment_setup(path):
+    import buildingspy.development.validator as v
+
+    val = v.Validator()
+    retVal = val.validateExperimentSetup(path)
+	
+
+
+# Base-Functions
+
 def _setEnvironmentVariables(var, value):
     ''' Add to the environment variable `var` the value `value`
     '''
@@ -64,55 +94,16 @@ def _setEnvironmentVariables(var, value):
             os.environ[var] = value + ":" + os.environ[var]
     else:
         os.environ[var] = value
-
-def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
-    import buildingspy.development.regressiontest as u
-
-    ut = u.Tester(tool=tool)
-    ut.batchMode(batch)
-    ut.setLibraryRoot(path)
-    if package is not None:
-        ut.setSinglePackage(package)
-    ut.setNumberOfThreads(n_pro)
-    ut.pedanticModelica(False)
-    ut.showGUI(show_gui)
-    # ut.get_test_example_coverage()
-    # Below are some option that may occassionally be used.
-    # These are currently not exposed as command line arguments.
-#    ut.setNumberOfThreads(1)
-#    ut.deleteTemporaryDirectories(False)
-#    ut.useExistingResults(['/tmp/tmp-Buildings-0-fagmeZ'])
-
-#    ut.writeOpenModelicaResultDictionary()
-    # Run the regression tests
-
-    retVal = ut.run()
-    # comment out this line for local usage
-    ut.get_test_example_coverage()
-    return retVal
-
-
-def _run_coverage_only(batch, tool, package, path, n_pro, show_gui):
-    import buildingspy.development.regressiontest as u
-
-    ut = u.Tester(tool=tool)
-    ut.batchMode(batch)
-    ut.setLibraryRoot(path)
-    if package is not None:
-        ut.setSinglePackage(package)
-    # ut.setNumberOfThreads(n_pro)
-    # ut.pedanticModelica(True)
-    # ut.showGUI(show_gui)
-    ut.get_test_example_coverage()
-    return 0
-
-
+		
+		
 def _runOpenModelicaUnitTests():
     import buildingspy.development.regressiontest as u
     ut = u.Tester()
     ut.batchMode(batch)
     ut.test_OpenModelica(cmpl=True, simulate=True,
                          packages=['Examples'], number=-1)
+	
+	
 
 if __name__ == '__main__':
     import multiprocessing
@@ -145,10 +136,6 @@ if __name__ == '__main__':
                         help='Maximum number of processors to be used')
     unit_test_group.add_argument("--show-gui",
                         help='Show the GUI of the simulator',
-                        action="store_true")
-
-    unit_test_group.add_argument("--coverage-only",
-                        help='Only run the coverage test',
                         action="store_true")
 
     html_group = parser.add_argument_group("arguments to check html syntax only")
@@ -196,16 +183,6 @@ if __name__ == '__main__':
     else:
         single_package = None
 
-    if args.coverage_only:
-        ret_val = _run_coverage_only(batch = args.batch,
-                           tool = args.tool,
-                           package = single_package,
-                           path = args.path,
-                           n_pro = args.number_of_processors,
-                           show_gui = args.show_gui)
-        exit(ret_val)
-
-
     retVal = _runUnitTests(batch = args.batch,
                            tool = args.tool,
                            package = single_package,
@@ -215,3 +192,6 @@ if __name__ == '__main__':
     exit(retVal)
 
 #   _runOpenModelicaUnitTests()
+
+
+
