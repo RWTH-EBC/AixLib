@@ -32,12 +32,12 @@ equation
                                   color={0,0,127}));
   connect(onOffController.y, andHeaLim.u1) annotation (Line(points={{-28.6,8},{
           24,8},{24,0},{36.8,0}}, color={255,0,255}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end InverterControlledHP;

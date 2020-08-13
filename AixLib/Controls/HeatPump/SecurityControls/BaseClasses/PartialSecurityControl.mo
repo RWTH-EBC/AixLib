@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Interfaces.RealInput nSet
     "Set value relative speed of compressor. Analog from 0 to 1"
@@ -101,15 +101,22 @@ equation
           fillPattern=FillPattern.None)}),
                                      Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-120,-100},{120,100}})),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Partial block for a security control. Based on the signals in the sigBusHP either the input signals are equal to the output signals or, if an error occurs, set to 0.</p>
-<p>The Output ERR informs about the number of errors in the specific security block.</p>
+<p>
+  Partial block for a security control. Based on the signals in the
+  sigBusHP either the input signals are equal to the output signals or,
+  if an error occurs, set to 0.
+</p>
+<p>
+  The Output ERR informs about the number of errors in the specific
+  security block.
+</p>
 </html>"));
 end PartialSecurityControl;
