@@ -13,6 +13,6 @@ record ShellSP70
    P_mp0=70,
    TCoeff_Isc=0.002,
    TCoeff_Voc=-0.076,
-   gamma_Pmp=-0.00045,
+   gamma_Pmp=-0.0045,
    T_NOCT=45+273.15);
 end ShellSP70;
