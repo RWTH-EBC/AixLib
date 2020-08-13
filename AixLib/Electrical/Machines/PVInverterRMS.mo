@@ -1,6 +1,5 @@
-within AixLib.Electrical.PVSystem.BaseClasses;
-model PVInverterRMS
-  "Inverter model including system management"
+within AixLib.Electrical.Machines;
+model PVInverterRMS "Inverter model including system management"
 
  parameter Modelica.SIunits.Power uMax2
   "Upper limits of input signals (MaxOutputPower)";
