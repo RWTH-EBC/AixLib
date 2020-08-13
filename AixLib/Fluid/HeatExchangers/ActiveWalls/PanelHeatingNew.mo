@@ -2471,8 +2471,8 @@ Moved into AixLib</li>
       final parameter Modelica.SIunits.CoefficientOfHeatTransfer
         kDown_nominal = floorHeatingType.k_down;
 
-      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium
-          = Medium)
+      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
+            Medium)
         annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
       Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package
           Medium =
@@ -5220,8 +5220,7 @@ Added documentation.</li>
       model HeatFlux_DIN1264_2
         "Upward and downward heat flux according to DIN 1264-2"
         extends
-          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.UpwardHeatFlux_DIN1264
-          (
+          AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.DetermineQ.UpwardHeatFlux_DIN1264(
           qG_TypeA(
             lambda_R=lambda_R,
             T_Fmax=T_Fmax,
@@ -6292,15 +6291,15 @@ Added documentation.</li>
 
       model TestRoom
         extends Modelica.Icons.Example;
+        final parameter Integer RoomNo = 3;
 
         AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeatingNew.AddParameters.PanelHeatingRoom
-                            panelHeatingRoom   [3](
+                            panelHeatingRoom   [RoomNo](
           each n_floor=2,
           redeclare package Medium = AixLib.Media.Water,
           each withHoldingBurls=false,
           each dis=5,
           each Q_Nf=500,
-          each A=10,
           each c_floor={750,1200},
           redeclare each ZoneSpecification.OccupancyZone ZoneType,
           each T=0.1,
@@ -6312,19 +6311,20 @@ Added documentation.</li>
           each withInsulating=false,
           each d_floor={0.1,0.15},
           each lambda_floor={1.2,1.2},
-          each n=2,
+          each calculateV=1,
+          each A=20,
           each T_Flow=313.15,
           each T_Return=308.15,
           each rho_floor={1500,1500},
           each T_U=293.15)  annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
         AixLib.Fluid.Sources.Boundary_pT     boundary(
-                                redeclare package Medium = AixLib.Media.Water, nPorts=3*2)
+                                redeclare package Medium = AixLib.Media.Water, nPorts=sum(panelHeatingRoom.n))
           annotation (Placement(transformation(extent={{68,-10},{46,12}})));
         AixLib.Fluid.Sources.MassFlowSource_T m_flow_specification(
           use_m_flow_in=false,
           use_T_in=false,
           redeclare package Medium = AixLib.Media.Water,
-          nPorts=3*2,
+          nPorts=sum(panelHeatingRoom.n),
           m_flow=sum(panelHeatingRoom.m_H),
           T=313.15) annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
@@ -6339,22 +6339,28 @@ Added documentation.</li>
       equation
         connect(prescribedTemperature1.T, TSurface.y)
           annotation (Line(points={{58,60},{73,60}}, color={0,0,127}));
-          for i in 1:3 loop
+          for i in 1:RoomNo loop
           connect(prescribedTemperature1.port, panelHeatingRoom[i].heatport_floor)
             annotation (Line(points={{36,60},{26,60},{26,54},{3.8,54},{3.8,9.6}}, color={191,0,0}));
           connect(panelHeatingRoom[i].radport_floor, prescribedTemperature1.port)
             annotation (Line(points={{0,10},{0,10},{0,60},{36,60}}, color={95,95,95}));
           connect(prescribedTemperature1.port, panelHeatingRoom[i].heatport_ceiling)
             annotation (Line(points={{36,60},{36,-28},{4.6,-28},{4.6,-9.8}}, color={191,0,0}));
-          connect(m_flow_specification.ports[i], panelHeatingRoom[i].ports_a[1])
-            annotation (Line(points={{-58,0},{-34,0},{-34,0},{-8,0}}, color={0,127,255}));
-          connect(panelHeatingRoom[i].ports_b[1], boundary.ports[i])
-            annotation (Line(points={{12,0},{30,0},{30,1},{46,1}}, color={0,127,255}));
-          connect(m_flow_specification.ports[3+i], panelHeatingRoom[i].ports_a[2])
-            annotation (Line(points={{-58,0},{-34,0},{-34,0},{-8,0}}, color={0,127,255}));
-          connect(panelHeatingRoom[i].ports_b[2], boundary.ports[3+i])
-            annotation (Line(points={{12,0},{30,0},{30,1},{46,1}}, color={0,127,255}));
           end for;
+            for m in 1:panelHeatingRoom[1].n loop
+              connect(m_flow_specification.ports[m], panelHeatingRoom[1].ports_a[m]);
+              connect( panelHeatingRoom[1].ports_b[m], boundary.ports[m]);
+            end for;
+
+            for i in 2:RoomNo loop
+              for u in 1:panelHeatingRoom[i].n loop
+          connect(m_flow_specification.ports[(sum(panelHeatingRoom[v].n for v in 1:(i-1)) + u)], panelHeatingRoom[i].ports_a[u])
+            annotation (Line(points={{-58,0},{-34,0},{-34,0},{-8,0}}, color={0,127,255}));
+          connect(panelHeatingRoom[i].ports_b[u], boundary.ports[(sum(panelHeatingRoom[v].n for v in 1:(i-1)) + u)])
+            annotation (Line(points={{12,0},{30,0},{30,1},{46,1}}, color={0,127,255}));
+            end for;
+          end for;
+
       end TestRoom;
 
       model TestCircuit
@@ -6480,12 +6486,12 @@ Added documentation.</li>
                 -2.4,-30},{46,-30},{46,-1.2}}, color={0,127,255}));
         connect(vol.heatPort, temperatureSensor.port) annotation (Line(points={
                 {-12,32},{-16,32},{-16,62},{28,62},{28,60}}, color={191,0,0}));
-        connect(vol1.heatPort, temperatureSensor1.port) annotation (Line(points
-              ={{-12,-18},{-14,-18},{-14,-62},{38,-62},{38,-54}}, color={191,0,
+        connect(vol1.heatPort, temperatureSensor1.port) annotation (Line(points=
+               {{-12,-18},{-14,-18},{-14,-62},{38,-62},{38,-54}}, color={191,0,
                 0}));
         connect(m_flow_specification.ports[1], res.port_a) annotation (Line(
-              points={{-58,2},{-56,2},{-56,4},{-48,4},{-48,13},{-40,13}}, color
-              ={0,127,255}));
+              points={{-58,2},{-56,2},{-56,4},{-48,4},{-48,13},{-40,13}}, color=
+               {0,127,255}));
         connect(res.port_b, vol.ports[2]) annotation (Line(points={{-22,13},{
                 -18,13},{-18,14},{2.4,14},{2.4,20}}, color={0,127,255}));
         connect(m_flow_specification.ports[2], res1.port_a) annotation (Line(

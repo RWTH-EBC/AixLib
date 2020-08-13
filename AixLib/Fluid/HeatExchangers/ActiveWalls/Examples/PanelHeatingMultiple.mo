@@ -54,6 +54,11 @@ model PanelHeatingMultiple
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-4,-90})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature FixedTemp3(T=296.15)
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-64,90})));
 equation
   connect(boundary.ports[1], distributor.mainFlow) annotation (Line(
       points={{-60,12},{-54,12},{-54,10.6667},{-32,10.6667}},
@@ -65,10 +70,6 @@ equation
       smooth=Smooth.None));
   connect(panelheating_1D_Dis2.thermConv, FixedTemp.port) annotation (Line(
       points={{71.96,47},{71.96,52},{50,52},{50,78},{-30,78},{-30,100}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(panelheating_1D_Dis1.thermConv, FixedTemp.port) annotation (Line(
-      points={{71.96,77},{50,77},{50,78},{-30,78},{-30,100}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(panelheating_1D_Dis3.thermConv, FixedTemp.port) annotation (Line(
@@ -186,6 +187,8 @@ equation
       Line(points={{84,-75},{96,-75},{96,-92},{20,-92},{20,-40},{-18.6667,-40},
           {-18.6667,-20.6667}},
                  color={0,127,255}));
+  connect(FixedTemp3.port, panelheating_1D_Dis1.thermConv)
+    annotation (Line(points={{-64,100},{-64,77},{71.96,77}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Documentation(info="<html>
 <p>A simple example to test the models <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Panelheating_1D_Dis\">panelheating_1D_Dis1</a> and <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Contributor\">contributor</a>.</p>
