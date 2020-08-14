@@ -27,7 +27,7 @@ model RoomBuilding1 "Building1"
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
     wall_length=room_width,
     wall_height=room_height,
-    solar_absorptance=0.3,
+    solar_absorptance=0.4,
     withWindow=false,
     withDoor=true,
     U_door=1.7,
@@ -37,7 +37,7 @@ model RoomBuilding1 "Building1"
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
     wall_length=room_length,
     wall_height=room_height,
-    solar_absorptance=0.3,
+    solar_absorptance=0.4,
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(
         extent={{-6,-39},{6,39}},
@@ -47,7 +47,7 @@ model RoomBuilding1 "Building1"
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
     wall_length=room_length,
     wall_height=room_height,
-    solar_absorptance=0.3,
+    solar_absorptance=0.4,
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(
         extent={{-6,-39},{6,39}},
@@ -57,7 +57,7 @@ model RoomBuilding1 "Building1"
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
     wall_length=room_width,
     wall_height=room_height,
-    solar_absorptance=0.3,
+    solar_absorptance=0.4,
     withWindow=false,
     withDoor=false)
     annotation (Placement(transformation(extent={{80,-40},{66,44}})));
@@ -65,7 +65,7 @@ model RoomBuilding1 "Building1"
     redeclare DataBase.Walls.EmpiricalValidation.RO_Building1 wallPar,
     wall_length=room_length,
     wall_height=room_width,
-    solar_absorptance=0.3,
+    solar_absorptance=0.4,
     ISOrientation=3,
     withWindow=true,
     WindowType=AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(

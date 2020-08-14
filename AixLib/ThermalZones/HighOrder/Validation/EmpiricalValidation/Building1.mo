@@ -96,7 +96,7 @@ model Building1
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC1
     annotation (Placement(transformation(extent={{148,70},{158,80}})));
 
-  parameter Real solar_absorptance_OW=0.3 "Solar absoptance outer walls ";
+  parameter Real solar_absorptance_OW=0.4 "Solar absoptance outer walls ";
   parameter Modelica.SIunits.Temperature T0=284.15 "Initial temperature";
 
   Modelica.Blocks.Sources.RealExpression Cool(y=idealHeaterCooler.coolingPower)
@@ -124,8 +124,8 @@ model Building1
     annotation (Placement(transformation(extent={{-40,-110},{-20,-90}})));
   Modelica.Blocks.Sources.CombiTimeTable Room(
     tableOnFile=false,
-    table=[0,0,0; 25200,0,0; 25200,0.25,16.5; 57600,0.25,16.5; 57600,0,0; 86400,
-        0,0],
+    table=[0,0,0; 25200,0,0; 25200,0.3,16.5; 57600,0.3,16.5; 57600,0,0; 86400,0,
+        0],
     columns={2},
     smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
