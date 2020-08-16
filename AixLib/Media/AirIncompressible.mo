@@ -391,13 +391,13 @@ algorithm
 "<html><p>
   This function computes the derivative of density with respect to
   temperature at constant pressure.
-</p>/html /html /html /html /html
+</p>/html /html /html /html /html /html /html
 </html>", revisions=
 "<html><ul>
   <li>December 18, 2013, by Michael Wetter:<br/>
     First implementation.
   </li>
-</ul>/html /html /html /html /html
+</ul>/html /html /html /html /html /html /html
 </html>"));
 end density_derT_p;
 
