@@ -72,6 +72,8 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     withAHU=false,
     minAHU=Modelica.Constants.eps,
     maxAHU=2*Modelica.Constants.eps,
+    shadingFactor=fill(1, nOrientations),
+    maxIrr=fill(0, nOrientations),
     hHeat=2*Modelica.Constants.eps,
     lHeat=Modelica.Constants.eps,
     KRHeat=Modelica.Constants.eps,
