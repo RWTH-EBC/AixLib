@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses;
-model PartialCase "This is the base class from which the base cases will extend."
+partial model PartialCase "This is the base class from which the base cases will extend."
   extends Modelica.Icons.Example;
 
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
