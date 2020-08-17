@@ -165,16 +165,12 @@ model Case620
   Modelica.Blocks.Math.Gain gain(k=1/1000) "Converts to kW"
     annotation (Placement(transformation(extent={{100,27},{107,34}})));
 
-  BaseClasses.CheckResultsAccordingToASHRAE
-    checkResultsAccordingToASHRAEHeating(endTime=31536000)
-    annotation (Placement(transformation(extent={{5,48},{20,63}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeating(checkTime=31536000) annotation (Placement(transformation(extent={{5,48},{20,63}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoad(tableOnFile=false, table=[
         600,4613,5944])
     "AnnualHeatingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualHeatingLoad, {3}=upperLimit AnnualHeatingLoad"
     annotation (Placement(transformation(extent={{-34,50},{-20,64}})));
-  BaseClasses.CheckResultsAccordingToASHRAE
-    checkResultsAccordingToASHRAECooling(endTime=31536000)
-    annotation (Placement(transformation(extent={{5,70},{20,85}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECooling(checkTime=31536000) annotation (Placement(transformation(extent={{5,70},{20,85}})));
   parameter Real airExchange=0.41 "Constant Air Exchange Rate";
   parameter Real TsetCooler=27 "Constant Set Temperature for Cooler";
   parameter Real TsetHeater=20 "Constant Set Temperature for Heater";
@@ -400,7 +396,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Outputs"),
         Rectangle(
-          extent={{-47,-19},{43,-112}},
+          extent={{-47,-19},{42,-112}},
           lineColor={0,0,127},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
@@ -434,8 +430,7 @@ equation
     Implemented
   </li>
 </ul>
-</html>",
-         info="<html><p>
+</html>",info="<html><p>
   As described in ASHRAE Standard 140.
 </p>
 <p>

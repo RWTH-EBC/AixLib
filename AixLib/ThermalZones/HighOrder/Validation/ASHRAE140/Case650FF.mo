@@ -118,9 +118,7 @@ model Case650FF
   Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
     annotation (Placement(transformation(extent={{111,-66},{131,-46}})));
 
-  BaseClasses.CheckResultsAccordingToASHRAE
-    checkResultsAccordingToASHRAECooling(endTime(displayUnit="h") = 284400)
-    annotation (Placement(transformation(extent={{5,70},{20,85}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECooling(checkTime(displayUnit="h") = 284400) annotation (Placement(transformation(extent={{5,70},{20,85}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceTempMin(tableOnFile=false,
       table=[600,-23,-21.6])
     "ReferenceTempMin according to ASHRAE140,  {2}=lowerLimit ReferenceTempMin, {3}=upperLimit ReferenceTempMin"
@@ -141,9 +139,7 @@ model Case650FF
       table=[600,63.2,68.2])
     "ReferenceTempMax according to ASHRAE140,  {2}=lowerLimit ReferenceTempMax, {3}=upperLimit ReferenceTempMax"
     annotation (Placement(transformation(extent={{-35,51},{-21,65}})));
-  BaseClasses.CheckResultsAccordingToASHRAE
-    checkResultsAccordingToASHRAEHeating(endTime(displayUnit="h") = 25027200)
-    annotation (Placement(transformation(extent={{4,49},{19,64}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeating(checkTime(displayUnit="h") = 25027200) annotation (Placement(transformation(extent={{4,49},{19,64}})));
   parameter Real internalGains=200 "Constant Internal Gains";
   parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
@@ -285,7 +281,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Building physics"),
         Rectangle(
-          extent={{-47,85},{42,-24}},
+          extent={{-47,90},{42,-19}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
@@ -332,7 +328,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Outputs"),
         Rectangle(
-          extent={{-47,-19},{43,-112}},
+          extent={{-47,-19},{42,-112}},
           lineColor={0,0,127},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
@@ -363,8 +359,7 @@ equation
     Implemented
   </li>
 </ul>
-</html>",
-         info="<html><p>
+</html>",info="<html><p>
   As described in ASHRAE Standard 140.
 </p>
 <p>

@@ -144,9 +144,7 @@ model Case650
   Modelica.Blocks.Math.Gain gain(k=1/1000) "Converts to kW"
     annotation (Placement(transformation(extent={{100,27},{107,34}})));
 
-  BaseClasses.CheckResultsAccordingToASHRAE
-    checkResultsAccordingToASHRAECooling(endTime=31536000)
-    annotation (Placement(transformation(extent={{5,70},{20,85}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECooling(checkTime=31536000) annotation (Placement(transformation(extent={{5,70},{20,85}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoad(tableOnFile=false, table=[
         600,-6545,-4816])
     "AnnualCoolingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualCoolingLoad, {3}=upperLimit AnnualCoolingLoad"
@@ -360,7 +358,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Outputs"),
         Rectangle(
-          extent={{-47,-19},{43,-112}},
+          extent={{-47,-19},{42,-112}},
           lineColor={0,0,127},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
@@ -391,8 +389,7 @@ equation
     Implemented
   </li>
 </ul>
-</html>",
-         info="<html><p>
+</html>",info="<html><p>
   As described in ASHRAE Standard 140.
 </p>
 <p>

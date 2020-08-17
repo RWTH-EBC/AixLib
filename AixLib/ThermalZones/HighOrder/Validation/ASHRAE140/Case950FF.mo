@@ -4,7 +4,7 @@ model Case950FF
     wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),
     ReferenceTempMax(table=[900,35.5,38.5]),
     ReferenceTempMin(table=[900,-20.2,-18.6]),
-    checkResultsAccordingToASHRAEHeating(endTime=21135600));
+    checkResultsAccordingToASHRAEHeating(checkTime=21135600));
   annotation (Documentation(info="<html><p>
   As described in ASHRAE Standard 140.
 </p>

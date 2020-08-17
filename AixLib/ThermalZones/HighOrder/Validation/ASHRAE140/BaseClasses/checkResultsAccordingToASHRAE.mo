@@ -1,10 +1,11 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses;
 block CheckResultsAccordingToASHRAE
   extends Modelica.Blocks.Icons.Block;
-  parameter Real endTime        "Simulation end time";
+
+  parameter Modelica.SIunits.Time checkTime "Simulation time when block should check if model results lies in limit range";
 
   Modelica.Blocks.Interfaces.RealInput upperLimit
-                                                 "maximum Value"
+                                                 "Maximum value"
     annotation (Placement(transformation(extent={{-140,16},{-100,56}}),
         iconTransformation(extent={{-128,26},{-100,54}})));
 
@@ -12,7 +13,7 @@ block CheckResultsAccordingToASHRAE
     annotation (Placement(transformation(extent={{-140,-84},{-100,-44}}),
         iconTransformation(extent={{-128,-72},{-100,-44}})));
   Modelica.Blocks.Interfaces.RealInput lowerLimit
-                                                 "minimum Value"
+                                                 "minimum value"
     annotation (Placement(transformation(extent={{-140,54},{-100,94}}),
         iconTransformation(extent={{-128,66},{-100,94}})));
 
@@ -24,13 +25,17 @@ initial equation
   satisfied = false;
 
 equation
-    when time >= endTime then
+  when time >= checkTime then
       satisfied =  modelResults >= lowerLimit and modelResults <= upperLimit;
     end when;
 
  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
+  <li>
+  <i>August 17, 2020</i> by Philipp Mehrfeld:<br/>
+  Refactor endTime to checkTime
+  </li>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented

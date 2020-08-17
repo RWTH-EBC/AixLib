@@ -159,16 +159,12 @@ model Case600
   Modelica.Blocks.Math.Gain gain(k=1/1000) "Converts to kW"
     annotation (Placement(transformation(extent={{100,27},{107,34}})));
 
-  BaseClasses.CheckResultsAccordingToASHRAE
-    checkResultsAccordingToASHRAEHeating(endTime=31536000)
-    annotation (Placement(transformation(extent={{5,48},{20,63}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeating(checkTime=31536000) annotation (Placement(transformation(extent={{5,48},{20,63}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoad(tableOnFile=false,
       table=[600,4296,5709])
     "AnnualHeatingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualHeatingLoad, {3}=upperLimit AnnualHeatingLoad"
     annotation (Placement(transformation(extent={{-34,50},{-20,64}})));
-  BaseClasses.CheckResultsAccordingToASHRAE
-    checkResultsAccordingToASHRAECooling(endTime=31536000)
-    annotation (Placement(transformation(extent={{5,70},{20,85}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECooling(checkTime=31536000) annotation (Placement(transformation(extent={{5,70},{20,85}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoad(tableOnFile=false,
       table=[600,-7964,-6137])
     "AnnualCoolingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualCoolingLoad, {3}=upperLimit AnnualCoolingLoad"
@@ -397,7 +393,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Outputs"),
         Rectangle(
-          extent={{-47,-19},{43,-112}},
+          extent={{-47,-19},{42,-112}},
           lineColor={0,0,127},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
