@@ -97,7 +97,7 @@ model RecircFlap "model for recirculating flap"
             {120,-40}}),        iconTransformation(extent={{100,-60},{120,-40}})));
   Modelica.Blocks.Interfaces.RealOutput X_airOutOda(
     final quantity = "MassFraction",
-    final unit = "kg/kg")
+    final unit = "1")
     "absolute humidity of outgoing mixed air" annotation (Placement(transformation(
           extent={{100,-30},{120,-10}}),
                                        iconTransformation(extent={{100,-30},{

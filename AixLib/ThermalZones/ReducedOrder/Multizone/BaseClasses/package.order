@@ -5,3 +5,5 @@ MoistSplitter
 PartialMultizone
 RelToAbsHum
 SumCondition
+InfiltrationToMassflow
+MassflowToInfiltration
