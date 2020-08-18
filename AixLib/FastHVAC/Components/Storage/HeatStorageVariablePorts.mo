@@ -161,7 +161,7 @@ public
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatingRod if use_heatingRod annotation (Placement(transformation(
           extent={{-110,90},{-90,110}}),iconTransformation(extent={{-70,70},{-50,
             90}})));
-  Modelica.Blocks.Interfaces.RealOutput T_layers[n](  unit="K") annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput T_layers[n](each unit="K") annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
