@@ -1736,32 +1736,30 @@ model TwinHouseN2
         "modelica://AixLib/Resources/weatherdata/TwinHouse.mat"),
     columns={5,6,7,8,9,10,11,12,13})
     annotation (Placement(transformation(extent={{104,32},{124,52}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp
+  Modelica.Blocks.Interfaces.RealOutput N2_living_AT_h67cm
     annotation (Placement(transformation(extent={{168,36},{188,56}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp1
+  Modelica.Blocks.Interfaces.RealOutput N2_living_AT_h125cm
     annotation (Placement(transformation(extent={{168,24},{188,44}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp2
+  Modelica.Blocks.Interfaces.RealOutput N2_living_AT_h187cm
     annotation (Placement(transformation(extent={{168,10},{188,30}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp3
+  Modelica.Blocks.Interfaces.RealOutput N2_corridor_AT
     annotation (Placement(transformation(extent={{168,-2},{188,18}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp4
+  Modelica.Blocks.Interfaces.RealOutput N2_bath_AT
     annotation (Placement(transformation(extent={{168,-14},{188,6}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp5
+  Modelica.Blocks.Interfaces.RealOutput N2_child_AT
     annotation (Placement(transformation(extent={{168,-28},{188,-8}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp6
+  Modelica.Blocks.Interfaces.RealOutput N2_kitchen_AT
     annotation (Placement(transformation(extent={{168,-42},{188,-22}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp7
+  Modelica.Blocks.Interfaces.RealOutput N2_doorway_AT
     annotation (Placement(transformation(extent={{168,-56},{188,-36}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp8
+  Modelica.Blocks.Interfaces.RealOutput N2_bedroom_AT
     annotation (Placement(transformation(extent={{168,-70},{188,-50}})));
-  Modelica.Blocks.Interfaces.RealOutput MeasuredTemp9
-    annotation (Placement(transformation(extent={{168,-82},{188,-62}})));
   Modelica.Blocks.Interfaces.RealOutput MeanMeasuredTemp
     annotation (Placement(transformation(extent={{168,-108},{188,-88}})));
-  Modelica.Blocks.Math.Sum sum2(nin=9)
+  Modelica.Blocks.Math.Sum sum2(nin=9, k={0.137307708,0.137307708,0.137307708,
+        0.066838046,0.084710491,0.136981271,0.091076019,0.071489778,0.136981271})
+    "RoomVolume/TotalVolume for each room"
     annotation (Placement(transformation(extent={{122,-108},{142,-88}})));
-  Modelica.Blocks.Math.Gain gain2(k=1/9)
-    annotation (Placement(transformation(extent={{150,-102},{160,-92}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC2
     annotation (Placement(transformation(extent={{144,84},{154,94}})));
 equation
@@ -1826,30 +1824,22 @@ equation
     annotation (Line(points={{7,-92},{70.8,-92},{70.8,-9}},  color={191,0,0}));
   connect(const.y, roomTwinHouseN2.AirExchangePort) annotation (Line(points={{
           -1.2,14},{24,14},{24,15.325},{33,15.325}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[1], MeasuredTemp) annotation (Line(points={{
-          125,42},{148,42},{148,46},{178,46}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[2], MeasuredTemp1) annotation (Line(points={{
-          125,42},{148,42},{148,34},{178,34}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[3], MeasuredTemp2) annotation (Line(points={{
-          125,42},{148,42},{148,20},{178,20}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[4], MeasuredTemp3) annotation (Line(points={{
+  connect(MeasuredTemperatures.y[1], N2_living_AT_h67cm) annotation (Line(
+        points={{125,42},{148,42},{148,46},{178,46}}, color={0,0,127}));
+  connect(MeasuredTemperatures.y[2], N2_living_AT_h125cm) annotation (Line(
+        points={{125,42},{148,42},{148,34},{178,34}}, color={0,0,127}));
+  connect(MeasuredTemperatures.y[3], N2_living_AT_h187cm) annotation (Line(
+        points={{125,42},{148,42},{148,20},{178,20}}, color={0,0,127}));
+  connect(MeasuredTemperatures.y[4], N2_corridor_AT) annotation (Line(points={{
           125,42},{148,42},{148,8},{178,8}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[5], MeasuredTemp4) annotation (Line(points={{
-          125,42},{148,42},{148,-4},{178,-4}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[6], MeasuredTemp5) annotation (Line(points={{
-          125,42},{148,42},{148,-18},{178,-18}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[7], MeasuredTemp6) annotation (Line(points={{
+  connect(MeasuredTemperatures.y[5], N2_bath_AT) annotation (Line(points={{125,
+          42},{148,42},{148,-4},{178,-4}}, color={0,0,127}));
+  connect(MeasuredTemperatures.y[6], N2_child_AT) annotation (Line(points={{125,
+          42},{148,42},{148,-18},{178,-18}}, color={0,0,127}));
+  connect(MeasuredTemperatures.y[7],N2_kitchen_AT)  annotation (Line(points={{
           125,42},{148,42},{148,-32},{178,-32}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[8], MeasuredTemp7) annotation (Line(points={{
+  connect(MeasuredTemperatures.y[8],N2_doorway_AT)  annotation (Line(points={{
           125,42},{148,42},{148,-46},{178,-46}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[8], MeasuredTemp8) annotation (Line(points={{
-          125,42},{148,42},{148,-60},{178,-60}}, color={0,0,127}));
-  connect(MeasuredTemperatures.y[9], MeasuredTemp9) annotation (Line(points={{
-          125,42},{148,42},{148,-72},{178,-72}}, color={0,0,127}));
-  connect(MeanMeasuredTemp, gain2.y) annotation (Line(points={{178,-98},{170,
-          -98},{170,-97},{160.5,-97}}, color={0,0,127}));
-  connect(gain2.u, sum2.y) annotation (Line(points={{149,-97},{148,-97},{148,
-          -98},{143,-98}}, color={0,0,127}));
   connect(MeasuredTemperatures.y, sum2.u) annotation (Line(points={{125,42},{
           130,42},{130,-64},{108,-64},{108,-100},{120,-100},{120,-98}}, color={
           0,0,127}));
@@ -1857,6 +1847,10 @@ equation
           89},{143,89}}, color={0,0,127}));
   connect(room_temperature, to_degC2.y) annotation (Line(points={{178,90},{164,
           90},{164,89},{154.5,89}}, color={0,0,127}));
+  connect(MeasuredTemperatures.y[9], N2_bedroom_AT) annotation (Line(points={{
+          125,42},{148,42},{148,-60},{178,-60}}, color={0,0,127}));
+  connect(sum2.y, MeanMeasuredTemp) annotation (Line(points={{143,-98},{158,-98},
+          {158,-98},{178,-98}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -160},{180,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-160},{180,
