@@ -1,5 +1,5 @@
 within AixLib.DataBase.SolarElectric;
-record ShellSP70
+record ShellSP70 "Shell SP70"
   extends AixLib.DataBase.SolarElectric.PVBaseDataDefinition(
    n_ser=36,
    n_par=1,
@@ -15,4 +15,8 @@ record ShellSP70
    TCoeff_Voc=-0.076,
    gamma_Pmp=-0.0045,
    T_NOCT=45+273.15);
+  annotation (Documentation(info="<html>
+<h4><span style=\"color: #008000\">References </span></h4>
+<p>Record for record used with AixLib.Fluid.Solar.Electric.PVsystem </p>
+</html>"));
 end ShellSP70;

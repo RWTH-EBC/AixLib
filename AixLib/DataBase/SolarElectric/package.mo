@@ -41,7 +41,7 @@ package SolarElectric
             preserveAspectRatio=false)));
   end PVBaseDataDefinition;
 
-  record QPlusBFRG41285
+  record QPlusBFRG41285 "Q.Plus BFR-G4.1 285"
    extends AixLib.DataBase.SolarElectric.PVBaseDataDefinition(
      n_ser=60,
      n_par=1,
@@ -57,5 +57,9 @@ package SolarElectric
      TCoeff_Voc=-0.0029*V_oc0,
      gamma_Pmp=-0.004,
      T_NOCT=45+273.15);
+    annotation (Documentation(info="<html>
+<h4><span style=\"color: #008000\">References </span></h4>
+<p>Record for record used with AixLib.Fluid.Solar.Electric.PVsystem </p>
+</html>"));
   end QPlusBFRG41285;
 end SolarElectric;
