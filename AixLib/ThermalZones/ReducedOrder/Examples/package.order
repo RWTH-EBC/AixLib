@@ -3,6 +3,7 @@ Multizone
 MultizoneEquipped
 MultizoneMoistAir
 MultizoneMoistAirEquipped
+MultizonePartlyCooled
 SimpleRoomFourElements
 SimpleRoomOneElement
 SimpleRoomThreeElements
@@ -11,4 +12,3 @@ ThermalZone
 ThermalZoneAirExchange
 ThermalZoneMoistAir
 ThermalZoneMoistAirExchange
-MultizonePartlyCooled
