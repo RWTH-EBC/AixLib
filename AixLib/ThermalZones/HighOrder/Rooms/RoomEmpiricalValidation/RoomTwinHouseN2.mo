@@ -30,6 +30,12 @@ model RoomTwinHouseN2 "N2"
     wall_height=2.6,
     solar_absorptance=0.23,
     withWindow=true,
+    redeclare model Window = Components.WindowsDoors.WindowSimple (WindowType=
+            AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
+          redeclare model correctionSolarGain =
+            AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
+            (WindowType=
+                AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses())),
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
     windowarea=1.89,
     T0=T0_air)
@@ -40,6 +46,12 @@ model RoomTwinHouseN2 "N2"
     wall_height=2.6,
     solar_absorptance=0.23,
     withWindow=true,
+    redeclare model Window = Components.WindowsDoors.WindowSimple (WindowType=
+            AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
+          redeclare model correctionSolarGain =
+            AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
+            (WindowType=
+                AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses())),
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
     windowarea=9.66,
     withSunblind=true,
@@ -57,6 +69,12 @@ model RoomTwinHouseN2 "N2"
     wall_height=2.6,
     solar_absorptance=0.23,
     withWindow=true,
+    redeclare model Window = Components.WindowsDoors.WindowSimple (WindowType=
+            AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
+          redeclare model correctionSolarGain =
+            AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
+            (WindowType=
+                AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses())),
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
     windowarea=1.89,
     T0=T0_air)                                                      annotation (
@@ -113,10 +131,19 @@ model RoomTwinHouseN2 "N2"
     wall_height=2.6,
     solar_absorptance=0.23,
     withWindow=true,
+    redeclare model Window = Components.WindowsDoors.WindowSimple (WindowType=
+            AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
+          redeclare model correctionSolarGain =
+            AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
+            (WindowType=
+                AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses())),
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses(),
     windowarea=3.78,
     T0=T0_air)
     annotation (Placement(transformation(extent={{-62,-42},{-50,28}})));
+  parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType=
+     AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses()
+    "Window type";
 equation
   connect(WindSpeedPort, wallWest.WindSpeedPort) annotation (Line(points={{-114,20},
           {-68,20},{-68,18.6667},{-62.3,18.6667}},     color={0,0,127}));

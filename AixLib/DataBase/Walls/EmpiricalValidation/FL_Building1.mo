@@ -1,5 +1,5 @@
 within AixLib.DataBase.Walls.EmpiricalValidation;
-record FL_Building1 "Floor"
+record FL_Building1 "Floor for Empirical Validation Building1"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = 2 "Number of wall layers",
     d={0.5,0.3} "Thickness of wall layers",
