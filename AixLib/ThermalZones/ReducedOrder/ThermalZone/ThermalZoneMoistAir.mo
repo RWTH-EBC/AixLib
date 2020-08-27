@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   extends ThermalZone(
     ROM(final use_moisture_balance=true));
@@ -8,7 +8,8 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
     zoneParam.VAir > 0
     annotation (Placement(transformation(extent={{16,-28},{28,-16}})));
   BoundaryConditions.InternalGains.Moisture.MoistureGains moistureGains(final roomArea=zoneParam.AZone, final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
-                                                                                                                                                                                    ATot > 0 "Internal moisture gains by plants, etc." annotation (Dialog(enable=true, tab="Moisture"), Placement(transformation(extent={{0,-56},{20,-36}})));
+                                                                                                                                                                                    ATot > 0 "Internal moisture gains by plants, etc." annotation (Dialog(enable=true, tab="Moisture"), Placement(transformation(extent={{0,-44},
+            {12,-32}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3
     annotation (Placement(transformation(extent={{0,-28},{8,-20}})));
   Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0 or zoneParam.VAir > 0
@@ -29,8 +30,8 @@ equation
     connect(noMoisturePerson.y,SumQLat_flow. u[1]) annotation (Line(points={{8.4,-24},
             {10,-24},{10,-19.9},{16,-19.9}},                      color={0,0,127}));
   end if;
-  connect(moistureGains.QLat_flow,SumQLat_flow. u[2]) annotation (Line(points={{21,-46},
-          {48,-46},{48,-34},{14,-34},{14,-24.1},{16,-24.1}},           color={0,
+  connect(moistureGains.QLat_flow,SumQLat_flow. u[2]) annotation (Line(points={{12.6,
+          -38},{14,-38},{14,-24.1},{16,-24.1}},                        color={0,
           0,127}));
   connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{29.02,-22},{34,
           -22},{34,34},{37,34}},    color={0,0,127}));
@@ -152,7 +153,7 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{28,-52},{42,-56}},
+          extent={{0,-44},{14,-48}},
           lineColor={0,0,255},
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
