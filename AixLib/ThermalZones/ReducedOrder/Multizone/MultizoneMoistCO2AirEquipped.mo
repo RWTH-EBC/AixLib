@@ -1,6 +1,6 @@
 ﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
-model MultizoneMoistAirEquipped
-  "Multizone model with ideal heater and cooler and AHU considering moisture balance"
+model MultizoneMoistCO2AirEquipped
+  "Multizone model with ideal heater and cooler and AHU considering moisture and co2 balance"
   extends
     AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(
       redeclare model thermalZone =
@@ -421,4 +421,4 @@ Cooling"),
   AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirEquipped</a>.
 </p>
 </html>"));
-end MultizoneMoistAirEquipped;
+end MultizoneMoistCO2AirEquipped;
