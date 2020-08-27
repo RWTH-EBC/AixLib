@@ -1,11 +1,11 @@
 within AixLib.BoundaryConditions.InternalGains.CO2;
 model CO2Balance "Calculation of CO2 concentration within a thermal zone"
-  parameter Modelica.SIunits.Area AreaZon "Zone area";
+  parameter Modelica.SIunits.Area areaZon "Zone area";
   parameter Real actDeg = 1.8 "Activity degree (Met units)";
   parameter Modelica.SIunits.Volume VZon "Zone volume";
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)";
-  parameter Modelica.SIunits.Area AreaBod=1.8
+  parameter Modelica.SIunits.Area areaBod=1.8
     "Body surface area source SIA 2024:2015";
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person in Met (1 Met = 58 W/m^2)";
@@ -58,9 +58,9 @@ equation
 
   // CO2 emissions of people in the zone
   metOnePerAct = metOnePerSit*actDeg;
-  VCO2OnePer_flow = ResQuo*metOnePerAct*AreaBod/CalEqu*TAir/273.15;
+  VCO2OnePer_flow = ResQuo*metOnePerAct*areaBod/CalEqu*TAir/273.15;
   mCO2OnePer_flow = VCO2OnePer_flow*rhoCO2;
-  numPeo = spePeo*AreaZon;
+  numPeo = spePeo*areaZon;
   mCO2Peo_flow = mCO2OnePer_flow*numPeo;
 
   // CO2 balance

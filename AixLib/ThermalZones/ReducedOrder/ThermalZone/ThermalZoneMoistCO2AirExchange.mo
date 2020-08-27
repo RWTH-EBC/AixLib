@@ -11,7 +11,7 @@ model ThermalZoneMoistCO2AirExchange
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
     annotation (Dialog(tab="CO2", enable=use_CO2_balance));
-  parameter Modelica.SIunits.Area AreaBod=1.8
+  parameter Modelica.SIunits.Area areaBod=1.8
     "Body surface area source SIA 2024:2015"
     annotation (Dialog(tab="CO2", enable=use_CO2_balance));
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
@@ -65,18 +65,18 @@ model ThermalZoneMoistCO2AirExchange
         transformation(extent={{-120,-90},{-80,-50}}), iconTransformation(
           extent={{-126,-80},{-100,-54}})));
   BoundaryConditions.InternalGains.CO2.CO2Balance cO2Balance(
-    AreaZon=zoneParam.AZone,
+    areaZon=zoneParam.AZone,
     actDeg=actDeg,
     VZon=zoneParam.VAir,
     XCO2_amb=XCO2_amb,
-    AreaBod=AreaBod,
-    metOnePerSit=metOnePerSit)
+    areaBod=areaBod,
+    metOnePerSit=metOnePerSit) if ATot > 0 or zoneParam.VAir > 0
     annotation (Placement(transformation(extent={{30,-56},{44,-42}})));
-  Modelica.Blocks.Interfaces.RealOutput CO2Con
+  Modelica.Blocks.Interfaces.RealOutput CO2Con if ATot > 0 or zoneParam.VAir > 0
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,-66},{120,-46}})));
 
-  Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1])
+  Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if ATot > 0 or zoneParam.VAir > 0
     "Mass fraction of co2 in ROM in kg_CO2/ kg_TotalAir"
     annotation (Placement(transformation(extent={{4,-60},{16,-46}})));
 protected
