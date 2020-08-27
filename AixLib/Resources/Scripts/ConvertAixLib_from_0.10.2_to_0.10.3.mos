@@ -1,0 +1,8 @@
+clear
+
+convertClear();
+
+convertClass("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirExchange",
+              "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange",
+              "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange");

@@ -1,19 +1,20 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZoneMoistAirExchange
+model ThermalZoneMoistCO2AirExchange
   "Illustrates the use of ThermalZoneMoistAirEquipped"
   extends Modelica.Icons.Example;
+  replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange thermalZone(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange
+    thermalZone(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-    each der_T(fixed=true)))),
+            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare package Medium = AixLib.Media.Air,
+    redeclare package Medium = Medium,
     T_start=293.15,
     zoneParam=
         DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     internalGainsMode=3,
-    recOrSep=true)
-    "Thermal zone"
+    recOrSep=true) "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -215,4 +216,4 @@ equation
   </li>
 </ul>
 </html>"));
-end ThermalZoneMoistAirExchange;
+end ThermalZoneMoistCO2AirExchange;

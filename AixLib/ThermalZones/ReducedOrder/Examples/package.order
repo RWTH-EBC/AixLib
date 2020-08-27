@@ -11,4 +11,4 @@ SimpleRoomTwoElements
 ThermalZone
 ThermalZoneAirExchange
 ThermalZoneMoistAir
-ThermalZoneMoistAirExchange
+ThermalZoneMoistCO2AirExchange

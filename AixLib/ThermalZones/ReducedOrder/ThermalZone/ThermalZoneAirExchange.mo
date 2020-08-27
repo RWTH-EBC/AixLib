@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneAirExchange
   "Thermal zone model with ventilation, infiltration and internal gains"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone;
