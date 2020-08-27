@@ -3,8 +3,7 @@ model ThermostaticValve
 
   replaceable function valveCharacteristic =
       Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.linear
-    constrainedby
-    Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.baseFun
+    constrainedby Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.baseFun
     "Inherent flow characteristic"
     annotation(choicesAllMatching=true);
 

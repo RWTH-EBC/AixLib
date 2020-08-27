@@ -1,8 +1,7 @@
 within AixLib.BoundaryConditions.SolarIrradiation;
 block DiffuseIsotropic
   "Diffuse solar irradiation on a tilted surface with an isotropic sky model"
-  extends
-    AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
+  extends AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
   parameter Real rho(min=0, max=1, final unit="1")=0.2 "Ground reflectance";
   parameter Boolean outSkyCon=false
     "Output contribution of diffuse irradiation from sky";

@@ -1,8 +1,7 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model TraceSubstanceConservationDynamicBalance
   "This test checks if trace substance mass flow rates are conserved when a dynamic balance is used"
-  extends
-    AixLib.Fluid.MixingVolumes.Validation.BaseClasses.TraceSubstanceConservation(
+  extends AixLib.Fluid.MixingVolumes.Validation.BaseClasses.TraceSubstanceConservation(
      vol(massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 

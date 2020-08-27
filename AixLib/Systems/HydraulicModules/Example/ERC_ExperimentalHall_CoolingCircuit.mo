@@ -60,6 +60,7 @@ model ERC_ExperimentalHall_CoolingCircuit
     reverseAction=true)
     annotation (Placement(transformation(extent={{-142,-2},{-116,24}})));
   Controller.CtrThrottle ctrUnmixedThrottle(
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
     reverseAction=true,
     Td=0,
     rpm_pump=3000,
@@ -76,13 +77,14 @@ model ERC_ExperimentalHall_CoolingCircuit
         rotation=90,
         origin={-106,-86})));
   AixLib.Systems.HydraulicModules.Pump unmixed(
-    redeclare AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per, energyDynamics=unmixed.energyDynamics)),
+    parameterPipe=DataBase.Pipes.Copper.Copper_35x1(),
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=T_amb,
-    dIns=0.02,
-    kIns=0.028,
-    d=0.032,
     pipe1(length=2),
     pipe2(length=2),
     pipe3(length=4),
@@ -92,13 +94,14 @@ model ERC_ExperimentalHall_CoolingCircuit
         rotation=90,
         origin={6,4})));
   AixLib.Systems.HydraulicModules.ThrottlePump unmixedThrottle(
-    redeclare AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per, energyDynamics=unmixedThrottle.energyDynamics)),
+    parameterPipe=DataBase.Pipes.Copper.Copper_42x1_2(),
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=T_amb,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
     pipe1(length=1),
     pipe2(length=1),
     pipe3(length=1),
@@ -110,20 +113,18 @@ model ERC_ExperimentalHall_CoolingCircuit
         rotation=90,
         origin={74,4})));
   AixLib.Systems.HydraulicModules.Admix admix(
-    redeclare AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per, energyDynamics=admix.energyDynamics)),
+    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=T_amb,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
     pipe1(length=1),
     pipe2(length=1),
     pipe3(length=4),
-    pipe4(
-      kIns=0.028,
-      length=5,
-      dIns=0.02),
+    pipe4(length=5),
     pipe5(length=1),
     pipe6(length=1),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -202,12 +203,17 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (Diagram(coordinateSystem(extent={{-180,-100},{100,100}})), Icon(
         coordinateSystem(extent={{-180,-100},{100,100}})),
-    Documentation(revisions="<html>
-<ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+    Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>This example demonstrates the use of the hydraulic modules and the controllers. The model represents a cooling circuit with different hydraulic circuits. </p>
+<p>
+  This example demonstrates the use of the hydraulic modules and the
+  controllers. The model represents a cooling circuit with different
+  hydraulic circuits.
+</p>
 </html>"),
     experiment(StopTime=3600));
 end ERC_ExperimentalHall_CoolingCircuit;

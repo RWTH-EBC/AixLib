@@ -1,6 +1,8 @@
 ActiveWalls
 Boiler
 CHP
+Chiller
+HeatPump
 Media
 Pipes
 Profiles
@@ -10,7 +12,6 @@ SolarElectric
 SolarThermal
 Storage
 Surfaces
-ThermalMachines
 ThermalZones
 Walls
 Weather

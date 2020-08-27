@@ -46,10 +46,8 @@ equation
   </ul>
   </html>",
   info="<html>
-  <p>This model is a variant of the calculations defined in
-  VDI 6007 Part 1. It adds a second equivalent air temperature for windows in
-  case heat transfer through windows and exterior walls is handled separately in
-  the Reduced Order Model. The sum of all weightfactors for windows should be
-  one as well as the sum for all wall elements.</p>
-  </html>"));
+<p>This model is a variant of the calculations defined in VDI 6007 Part 1. </p>
+<p>It adds a second equivalent air temperature for windows in case heat transfer through windows and exterior walls is handled separately in the Reduced Order Model. </p>
+<p>As there might be several walls and windows with different orientations and thus different equivalent temperatures, it is necessary to weight them. This is done by the impact by each wall and window on the internal room temperature. This impact is described by a weight-factor (<span style=\"font-family: Courier New;\">wf</span>), defined as U-value * area of the element / The sum U-value * area of all elements.The sum of all weightfactors for windows should be one as well as the sum for all wall elements.</p>
+</html>"));
 end VDI6007WithWindow;

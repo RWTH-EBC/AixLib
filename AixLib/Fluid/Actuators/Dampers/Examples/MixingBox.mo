@@ -16,18 +16,18 @@ model MixingBox
     dpExh_nominal=20,
     redeclare package Medium = Medium) "mixing box"
     annotation (Placement(transformation(extent={{14,-22},{34,-2}})));
-    AixLib.Fluid.Sources.Boundary_pT bouIn(             redeclare package
-      Medium = Medium, T=273.15 + 10,
+    AixLib.Fluid.Sources.Boundary_pT bouIn(             redeclare package Medium =
+               Medium, T=273.15 + 10,
     use_p_in=true,
     nPorts=2)                                             annotation (Placement(
         transformation(extent={{-60,2},{-40,22}})));
-    AixLib.Fluid.Sources.Boundary_pT bouSup(             redeclare package
-      Medium = Medium, T=273.15 + 26,
+    AixLib.Fluid.Sources.Boundary_pT bouSup(             redeclare package Medium =
+               Medium, T=273.15 + 26,
     use_p_in=true,
     nPorts=1)                                                                       annotation (Placement(
         transformation(extent={{68,-10},{48,10}})));
-    AixLib.Fluid.Sources.Boundary_pT bouRet(             redeclare package
-      Medium = Medium, T=273.15 + 20,
+    AixLib.Fluid.Sources.Boundary_pT bouRet(             redeclare package Medium =
+               Medium, T=273.15 + 20,
     use_p_in=true,
     nPorts=1)                                                         annotation (Placement(
         transformation(extent={{68,-90},{48,-70}})));

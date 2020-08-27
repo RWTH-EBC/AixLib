@@ -121,16 +121,15 @@ equation
   connect(THeaOut2.port_b, sin_2.ports[1])
     annotation (Line(points={{-28,0},{-38,0}}, color={0,127,255}));
   annotation(experiment(Tolerance=1e-6, StopTime=360),
-Documentation(info="<html>
-<p>
-This model tests
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.DynamicHX\">
-AixLib.Fluid.HeatExchangers.DynamicHX</a>
-for different inlet conditions.
+Documentation(info="<html><p>
+  This model tests <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.DynamicHX\">AixLib.Fluid.HeatExchangers.DynamicHX</a>
+  for different inlet conditions.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>December 12, 2018, by Alexander K&uuml;mpel:<br/>First implementation. </li>
+  <li>December 12, 2018, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end DynamicHX;

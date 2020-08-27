@@ -107,12 +107,19 @@ equation
           textString="Control")}),
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
-    Documentation(revisions="<html>
-<ul>
-<li>January 22, 2019, by Alexander K&uuml;mpel:<br/>External T_set added.</li>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+    Documentation(revisions="<html><ul>
+  <li>January 22, 2019, by Alexander Kümpel:<br/>
+    External T_set added.
+  </li>
+  <li>October 25, 2017, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for admix and injection circuit. The controlled variable is the outflow temperature T_fwrd_out and controlled by a PID controller. The pump is always on and has a constant frequency.</p>
+<p>
+  Simple controller for admix and injection circuit. The controlled
+  variable is the outflow temperature T_fwrd_out and controlled by a
+  PID controller. The pump is always on and has a constant frequency.
+</p>
 </html>"));
 end CtrMix;

@@ -2,8 +2,7 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses;
 model InternalHEXTwoUTube
   "Internal heat exchanger of a borehole for a double U-tube configuration. In loop 1, fluid 1 streams from a1 to b1 and comes back from a2 to b2. In loop 2: fluid 2 streams from a3 to b3 and comes back from a4 to b4."
 
-  extends
-    AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialInternalHEX;
+  extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialInternalHEX;
   extends AixLib.Fluid.Interfaces.EightPortHeatMassExchanger(
     redeclare final package Medium1 = Medium,
     redeclare final package Medium2 = Medium,

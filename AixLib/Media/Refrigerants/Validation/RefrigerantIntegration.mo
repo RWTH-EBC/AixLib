@@ -216,37 +216,37 @@ equation
     delta=delta,tau=tau);
   der(eoS.alpha_r_td_Sym) = der(eoS.alpha_r_td_Calc);
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  August 13, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>August 13, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This example models checks the implementation of the<b> refrigerant&apos;s
-main derivatives</b> wrt. to time. Therefore, the user has first to
-introduce some information about the refrigerant and afterwards the
-derivatives are calculated. The following <b>refrigerant&apos;s
-information</b> is required:
+  This example models checks the implementation of the <b>refrigerant's
+  main derivatives</b> wrt. to time. Therefore, the user has first to
+  introduce some information about the refrigerant and afterwards the
+  derivatives are calculated. The following <b>refrigerant's
+  information</b> is required:
 </p>
 <ol>
-<li>The <i>refrigerant package</i> that
-shall be tested.</li>
-<li>The <i>independent variables</i> (i.e. independents
-variables' alteration with time).</li>
+  <li>The <i>refrigerant package</i> that shall be tested.
+  </li>
+  <li>The <i>independent variables</i> (i.e. independents variables'
+  alteration with time).
+  </li>
 </ol>
 <p>
-The following <b>refrigerant&apos;s derivatives </b> are c
-alculated and checked:
+  The following <b>refrigerant's derivatives</b> are c alculated and
+  checked:
 </p>
 <ol>
-<li>Calculation of state variables depending on the independent
-state variables (e.g. pressure depending on density and temperature).</li>
-<li>Calculation of variables of the Helmholtz
-equation of state.</li>
+  <li>Calculation of state variables depending on the independent state
+  variables (e.g. pressure depending on density and temperature).
+  </li>
+  <li>Calculation of variables of the Helmholtz equation of state.
+  </li>
 </ol>
 </html>"));
 end RefrigerantIntegration;

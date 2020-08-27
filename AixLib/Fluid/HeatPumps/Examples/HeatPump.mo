@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.Examples;
+within AixLib.Fluid.HeatPumps.Examples;
 model HeatPump "Example for the reversible heat pump model."
  extends Modelica.Icons.Example;
 
@@ -18,9 +18,9 @@ model HeatPump "Example for the reversible heat pump model."
                                                                          nPorts=
        1, redeclare package Medium = Medium_sou)
           "Fixed boundary at the outlet of the source side"
-          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+          annotation (Placement(transformation(extent={{-11,11},{11,-11}},
         rotation=0,
-        origin={-86,40})));
+        origin={-81,3})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
     duration=500,
     startTime=500,
@@ -34,6 +34,7 @@ model HeatPump "Example for the reversible heat pump model."
         origin={2,-76})));
   AixLib.Fluid.HeatPumps.HeatPump heatPump(
     refIneFre_constant=1,
+    useBusConnectorOnly=true,
     CEva=100,
     GEvaOut=5,
     CCon=100,
@@ -47,13 +48,13 @@ model HeatPump "Example for the reversible heat pump model."
     use_refIne=false,
     use_rev=true,
     redeclare model PerDataMainHP =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (dataTable=
-            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+         dataTable=
+            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevHP =
-        AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
           smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
+           AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     VEva=0.04,
     use_evaCap=false,
     scalingFactor=1,
@@ -152,11 +153,12 @@ model HeatPump "Example for the reversible heat pump model."
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={88,-64})));
-  Modelica.Blocks.Sources.Constant iceFac(final k=1) annotation (Placement(
+  Modelica.Blocks.Sources.Constant iceFac(final k=1)
+    "Fixed value for icing factor. 1 means no icing/frosting (full heat transfer in heat exchanger)" annotation (Placement(
         transformation(
-        extent={{5,-5},{-5,5}},
+        extent={{8,8},{-8,-8}},
         rotation=180,
-        origin={-71,-3})));
+        origin={-66,38})));
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{24,48},{14,58}})));
   Modelica.Blocks.Logical.Hysteresis hysCooling(
@@ -164,6 +166,9 @@ model HeatPump "Example for the reversible heat pump model."
     uLow=273.15 + 15,
     uHigh=273.15 + 19)
     annotation (Placement(transformation(extent={{58,40},{48,50}})));
+  Controls.Interfaces.ThermalMachineControlBus sigBus1 annotation (Placement(
+        transformation(extent={{-34,22},{-4,56}}), iconTransformation(extent={{
+            -22,30},{-4,56}})));
 equation
 
 
@@ -178,7 +183,7 @@ equation
   connect(heatFlowRateCon.Q_flow, gain.y) annotation (Line(points={{86,12},{86,
           14},{92,14},{92,15.6}},   color={0,0,127}));
   connect(heatPump.port_b2, sourceSideFixedBoundary.ports[1]) annotation (Line(
-        points={{-12.5,3},{-62,3},{-62,40},{-76,40}}, color={0,127,255}));
+        points={{-12.5,3},{-70,3}},                   color={0,127,255}));
   connect(heatPump.port_b1, senTAct.port_a) annotation (Line(points={{16.5,-45},
           {30,-45},{30,-64},{44,-64}}, color={0,127,255}));
   connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,-18},{76,4},
@@ -193,13 +198,6 @@ equation
         points={{64,-64},{72,-64},{72,-64},{78,-64}}, color={0,127,255}));
   connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{64,-64},{66,
           -64},{66,-22},{76,-22}}, color={0,127,255}));
-  connect(booleanToReal.y, heatPump.nSet) annotation (Line(points={{7,23.5},{7,
-          6.84},{6.83333,6.84}},    color={0,0,127}));
-  connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-4,77.4},{
-          -4,6.84},{-2.83333,6.84}},           color={255,0,255}));
-  connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-65.5,-3},{
-          -47,-3},{-47,-2.76},{-30.8667,-2.76}},
-                                             color={0,0,127}));
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
         points={{-73,-80},{-66,-80},{-66,-66},{-56,-66}}, color={0,0,127},
         smooth=Smooth.None));
@@ -214,6 +212,32 @@ equation
           -4,66},{32,66},{32,53},{25,53}}, color={255,0,255}));
   connect(logicalSwitch.y, booleanToReal.u)
     annotation (Line(points={{13.5,53},{7,53},{7,35}}, color={255,0,255}));
+  connect(booleanStep.y, sigBus1.mode) annotation (Line(points={{-4,77.4},{-10,
+          77.4},{-10,39.085},{-18.925,39.085}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(iceFac.y, sigBus1.iceFac) annotation (Line(points={{-57.2,38},{-34,38},
+          {-34,39.085},{-18.925,39.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(booleanToReal.y,sigBus1.n)  annotation (Line(points={{7,23.5},{
+          -18.925,23.5},{-18.925,39.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus1, heatPump.sigBus) annotation (Line(
+      points={{-19,39},{-19,16},{-10,16},{-10,2.76},{-7.425,2.76}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(Tolerance=1e-6, StopTime=3600),

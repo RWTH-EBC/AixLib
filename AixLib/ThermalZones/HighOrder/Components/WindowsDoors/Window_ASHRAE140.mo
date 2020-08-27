@@ -1,8 +1,7 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
-  extends
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
+  extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
 //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Real windowarea=2 "Total fenestration area";
@@ -47,12 +46,11 @@ model Window_ASHRAE140
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
-    Therm(T(start=T0)),
-    Star(T(start=T0)),
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
+    rad(T(start=T0)),
+    conv(T(start=T0)),
     eps=WindowType.Emissivity,
-    A=windowarea)
-    annotation (Placement(transformation(extent={{36,22},{56,42}})));
+    A=windowarea) annotation (Placement(transformation(extent={{36,22},{56,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
     n=1,
     lambda={1.06},
@@ -78,9 +76,7 @@ equation
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
-  connect(twoStar_RadEx.Therm, pane2.port_b) annotation (Line(
-  points={{36.8,32},{36,32},{36,-8},{38,-8}},
-  color={191,0,0}));
+  connect(twoStar_RadEx.conv, pane2.port_b) annotation (Line(points={{36.8,32},{36,32},{36,-8},{38,-8}}, color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
       points={{8.6,60},{50,60},{50,80},{92,80}},
       color={0,0,127}));
@@ -99,7 +95,7 @@ equation
   connect(heatConv_inside.port_a, port_inside) annotation (Line(
       points={{68,-9},{78,-9},{78,-10},{90,-10}},
       color={191,0,0}));
-  connect(twoStar_RadEx.Star, Star) annotation (Line(
+  connect(twoStar_RadEx.rad, Star) annotation (Line(
       points={{55.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
@@ -166,29 +162,57 @@ equation
       Line(
         points={{72,36},{72,-72},{10,-72},{10,36},{72,36}}),
       Rectangle(extent={{-80,80},{80,-80}}, lineColor={0,0,0})}),
-    Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>The <b>WindowSimple</b> model represents a window described by the thermal transmission coefficient and the coefficient of solar energy transmission( with correction factors). </p>
-<h4><font color=\"#008000\">Concept</font></h4>
-<p>Phenomena being simulated: </p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>WindowSimple</b> model represents a window described by the
+  thermal transmission coefficient and the coefficient of solar energy
+  transmission( with correction factors).
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Phenomena being simulated:
+</p>
 <ul>
-<li>Solar energy transmission through the glass</li>
-<li>Heat transmission through the whole window</li>
+  <li>Solar energy transmission through the glass
+  </li>
+  <li>Heat transmission through the whole window
+  </li>
 </ul>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Exemplary U-Values for windows from insulation standards</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Exemplary U-Values for windows from insulation standards
+</p>
 <ul>
-<li>WschV 1984: specified &quot;two panes&quot; assumed 2,5 W/m2K</li>
-<li>WschV 1995: 1,8 W/m2K</li>
-<li>EnEV 2002: 1,7 W/m2K</li>
-<li>EnEV 2009: 1,3 W/m2K</li>
+  <li>WschV 1984: specified \"two panes\" assumed 2,5 W/m2K
+  </li>
+  <li>WschV 1995: 1,8 W/m2K
+  </li>
+  <li>EnEV 2002: 1,7 W/m2K
+  </li>
+  <li>EnEV 2009: 1,3 W/m2K
+  </li>
 </ul>
 </html>",
- revisions="<html>
- <ul>
- <li><i>November 11, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>Removed parameters phi and eps_out. This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.</li>
- <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:<br/>Improved implementation of transmitted solar radiation</li>
- <li><i>February 24, 2014&nbsp;</i> by Reza Tavakoli:<br/>First implementation</li>
+ revisions="<html><ul>
+  <li>
+    <i>November 11, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    Removed parameters phi and eps_out. This is for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.
+  </li>
+  <li>
+    <i>March 30, 2015&#160;</i> by Ana Constantin:<br/>
+    Improved implementation of transmitted solar radiation
+  </li>
+  <li>
+    <i>February 24, 2014&#160;</i> by Reza Tavakoli:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(

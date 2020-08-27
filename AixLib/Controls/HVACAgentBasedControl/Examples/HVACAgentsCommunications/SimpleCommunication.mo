@@ -156,60 +156,162 @@ Low Temp Circuit"),
           thickness=0.5)}),
     experiment(StopTime=500, Interval=100),
     __Dymola_experimentSetupOutput,
-    Documentation(revisions="<html>
-<ul>
-<li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
-<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
+    Documentation(revisions="<html><ul>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
+  <li>December 2016, by Roozbeh Sangi:<br/>
+    revised
+  </li>
 </ul>
 </html>",
-      info="<html>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b></p>
+      info="<html><p>
+  <b><span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b>
+</p>
 <ul>
-<li><span style=\"font-family: MS Shell Dlg 2;\">This model is a an example to show the function of the HVAC Agents presented in this library</span></li>
-<li><span style=\"font-family: MS Shell Dlg 2;\">It acts as a prove that implementing functioning multi-agent systems on the basis of the Modelica language environment is possible.</span></li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">This model is a an
+    example to show the function of the HVAC Agents presented in this
+    library</span>
+  </li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">It acts as a prove that
+    implementing functioning multi-agent systems on the basis of the
+    Modelica language environment is possible.</span>
+  </li>
 </ul>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">The model consists of a consumer agent, two brokers, one intermediate agent and three producer agents. The model represents a heating system in which two circuits are interconnected via an heat exchanger. There is no real physical system implemented. The model, however, shows the communication of the agents with each other (see the log below). For further details, please refer to the reference. </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. </span></p>
-<h4><span style=\"color: #008000\">References</span></h4>
+<p>
+  <b><span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b>
+</p>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\">The model consists of a
+  consumer agent, two brokers, one intermediate agent and three
+  producer agents. The model represents a heating system in which two
+  circuits are interconnected via an heat exchanger. There is no real
+  physical system implemented. The model, however, shows the
+  communication of the agents with each other (see the log below). For
+  further details, please refer to the reference.</span>
+</p>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\">The logic is implemented
+  with the help of the StateGraph library. Communication is realized
+  with the help of the DeviceDriver library and follows the language
+  standards for multi-agent-systems set by the FIPA to the highest
+  possible extend for Modelica models.</span>
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
 <ul>
-<li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
-<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
+  <li>Felix Bünning. Development of a Modelica-library for agent-based
+  control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen
+  University, Aachen, Germany.
+  </li>
+  <li>Roozbeh Sangi, Felix Bünning, Johannes Fütterer, Dirk Müller. A
+  Platform for the Agent-based Control of HVAC Systems. Modelica
+  Conference, 2017, Prague, Czech Republic.
+  </li>
+  <li>Felix Bünning, Roozbeh Sangi, Dirk Müller. A Modelica library for
+  agent-based control of building HVAC systems. Applied Energy,
+  193:52-59, 2017.
+  </li>
 </ul>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example Results</span></b></p>
+<p>
+  <b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example
+  Results</span></b>
+</p>
 <ul>
-<li>ConsumerAgent 10001 requests 5000 W of heat from Broker 20001.</li>
-<li>Broker 20001 collected the request of 5000 W of heat from Consumer 10001.</li>
-<li>Broker 20001 calls for proposal of 5000 W of heat from Producer 30001.</li>
-<li>IntermediateAgent 30001 got a call from bottom broker 20001 and passes it on to top broker 40001.</li>
-<li>Broker 40001 collected the request of 5000 W of heat from Consumer 30001.</li>
-<li>Broker 40001 calls for proposal of 5000 W of heat from Producer 40002.</li>
-<li>HeatProducerAgent 40002 proposes adjustment of 5000 W for a price of 7960.</li>
-<li>Broker 40001 collects proposal of 5000 W of heat for the price of 7960 from Producer 40002.</li>
-<li>Broker 40001 calls for proposal of 5000 W of heat from Producer 40003.</li>
-<li>HeatProducerAgent 40003 proposes adjustment of 5000 W for a price of 17960.</li>
-<li>Broker 40001 collects proposal of 5000 W of heat for the price of 17960 from Producer 40003.</li>
-<li>Broker 40001 calculates an average price of 1.592 per W of heat.</li>
-<li>Broker 40001 asks for a confirmation of 5000 W of heat for the total price of 7960 from Consumer 30001.</li>
-<li>IntermediateAgent 30001 got an information from top broker 40001 and passes it on as a proposal to bottom broker 20001 after adding own costs of 100.</li>
-<li>Broker 20001 collects proposal of 5000 W of heat for the price of 8060 from Producer 30001.</li>
-<li>Broker 20001 calls for proposal of 5000 W of heat from Producer 30002.</li>
-<li>HeatProducerAgent 30002 proposes adjustment of 1000 W for a price of 960.</li>
-<li>Broker 20001 collects proposal of 1000 W of heat for the price of 960 from Producer 30002.</li>
-<li>Broker 20001 calculates an average price of 1.4816 per W of heat.</li>
-<li>Broker 20001 asks for a confirmation of 5000 W of heat for the total price of 7408 from Consumer 10001.</li>
-<li>ConsumerAgent 10001 confirms the request of 5000 W of heat for a price of 7408.</li>
-<li>5000 W of heat were confirmed by consumers at broker 20001. Go on to final requests to producers.</li>
-<li>Broker 20001 accepts the proposal of 30001 and orders 4000 W of heat.</li>
-<li>IntermediateAgent 30001 got an accept proposal from 20001 and passes it on as a confirmation to top broker 40001.</li>
-<li>IntermediateAgent 30001 confirms the adjustment of 4000 W of heat.</li>
-<li>Broker 20001 accepts the proposal of 30002 and orders 1000 W of heat.</li>
-<li>4000 W of heat were confirmed by consumers at broker 40001. Go on to final requests to producers.</li>
-<li>Broker 40001 accepts the proposal of 40002 and orders 4000 W of heat.</li>
-<li>HeatProducerAgent 40002 confirms the adjustment of 4000 W of heat. The setpoint is now 7000W.</li>
-<li>HeatProducerAgent 30002 confirms the adjustment of 1000 W of heat. The setpoint is now 2000W.</li>
-<li>Broker 40001 rejects the proposal of 40003.</li>
+  <li>ConsumerAgent 10001 requests 5000 W of heat from Broker 20001.
+  </li>
+  <li>Broker 20001 collected the request of 5000 W of heat from
+  Consumer 10001.
+  </li>
+  <li>Broker 20001 calls for proposal of 5000 W of heat from Producer
+  30001.
+  </li>
+  <li>IntermediateAgent 30001 got a call from bottom broker 20001 and
+  passes it on to top broker 40001.
+  </li>
+  <li>Broker 40001 collected the request of 5000 W of heat from
+  Consumer 30001.
+  </li>
+  <li>Broker 40001 calls for proposal of 5000 W of heat from Producer
+  40002.
+  </li>
+  <li>HeatProducerAgent 40002 proposes adjustment of 5000 W for a price
+  of 7960.
+  </li>
+  <li>Broker 40001 collects proposal of 5000 W of heat for the price of
+  7960 from Producer 40002.
+  </li>
+  <li>Broker 40001 calls for proposal of 5000 W of heat from Producer
+  40003.
+  </li>
+  <li>HeatProducerAgent 40003 proposes adjustment of 5000 W for a price
+  of 17960.
+  </li>
+  <li>Broker 40001 collects proposal of 5000 W of heat for the price of
+  17960 from Producer 40003.
+  </li>
+  <li>Broker 40001 calculates an average price of 1.592 per W of heat.
+  </li>
+  <li>Broker 40001 asks for a confirmation of 5000 W of heat for the
+  total price of 7960 from Consumer 30001.
+  </li>
+  <li>IntermediateAgent 30001 got an information from top broker 40001
+  and passes it on as a proposal to bottom broker 20001 after adding
+  own costs of 100.
+  </li>
+  <li>Broker 20001 collects proposal of 5000 W of heat for the price of
+  8060 from Producer 30001.
+  </li>
+  <li>Broker 20001 calls for proposal of 5000 W of heat from Producer
+  30002.
+  </li>
+  <li>HeatProducerAgent 30002 proposes adjustment of 1000 W for a price
+  of 960.
+  </li>
+  <li>Broker 20001 collects proposal of 1000 W of heat for the price of
+  960 from Producer 30002.
+  </li>
+  <li>Broker 20001 calculates an average price of 1.4816 per W of heat.
+  </li>
+  <li>Broker 20001 asks for a confirmation of 5000 W of heat for the
+  total price of 7408 from Consumer 10001.
+  </li>
+  <li>ConsumerAgent 10001 confirms the request of 5000 W of heat for a
+  price of 7408.
+  </li>
+  <li>5000 W of heat were confirmed by consumers at broker 20001. Go on
+  to final requests to producers.
+  </li>
+  <li>Broker 20001 accepts the proposal of 30001 and orders 4000 W of
+  heat.
+  </li>
+  <li>IntermediateAgent 30001 got an accept proposal from 20001 and
+  passes it on as a confirmation to top broker 40001.
+  </li>
+  <li>IntermediateAgent 30001 confirms the adjustment of 4000 W of
+  heat.
+  </li>
+  <li>Broker 20001 accepts the proposal of 30002 and orders 1000 W of
+  heat.
+  </li>
+  <li>4000 W of heat were confirmed by consumers at broker 40001. Go on
+  to final requests to producers.
+  </li>
+  <li>Broker 40001 accepts the proposal of 40002 and orders 4000 W of
+  heat.
+  </li>
+  <li>HeatProducerAgent 40002 confirms the adjustment of 4000 W of
+  heat. The setpoint is now 7000W.
+  </li>
+  <li>HeatProducerAgent 30002 confirms the adjustment of 1000 W of
+  heat. The setpoint is now 2000W.
+  </li>
+  <li>Broker 40001 rejects the proposal of 40003.
+  </li>
 </ul>
 </html>"));
 end SimpleCommunication;

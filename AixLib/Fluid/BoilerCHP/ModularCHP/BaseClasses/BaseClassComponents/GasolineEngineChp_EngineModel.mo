@@ -1,23 +1,20 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
+within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 model GasolineEngineChp_EngineModel
   "Internal combustion engine model for CHP-applications."
   import AixLib;
 
   replaceable package Medium1 =
       DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
-                                                                constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                                                constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Fuel medium model used in the CHP plant" annotation(choicesAllMatching=true,
       Documentation(revisions="<html>
 </html>"));
   replaceable package Medium2 =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                            constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                                                            constrainedby DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
     "Air medium model used in the CHP plant" annotation(choicesAllMatching=true);
   replaceable package Medium3 =
-      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord

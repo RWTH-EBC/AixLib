@@ -52,15 +52,23 @@ equation
     annotation (Line(points={{-51,30},{-42,30}}, color={0,0,127}));
   connect(Gc2_Expression.y, convection2.Gc)
     annotation (Line(points={{47,-30},{40,-30}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-December 12, 2018, by Alexander K&uuml;mpel:<br/>
-First implementation, <a href=\"https://github.com/RWTH-EBC/AixLib/tree/issue661_SimpleDynamicHeatExchangerModel\">AixLib, issue 661</a>.
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>December 12, 2018, by Alexander Kümpel:<br/>
+    First implementation, <a href=
+    \"https://github.com/RWTH-EBC/AixLib/tree/issue661_SimpleDynamicHeatExchangerModel\">
+    AixLib, issue 661</a>.
+  </li>
 </ul>
 </html>", info="<html>
-<p>This is a simple dynamic heat exchanger with a heat capacity and convection. The heat exchanger is discretized in n elements and the volume elements are replaceable. </p>
-<p>The heat transfer and pressure losses are calculated by nominal values. Nevertheless, the heat transfer coefficient Gc can be overwritten.</p>
+<p>
+  This is a simple dynamic heat exchanger with a heat capacity and
+  convection. The heat exchanger is discretized in n elements and the
+  volume elements are replaceable.
+</p>
+<p>
+  The heat transfer and pressure losses are calculated by nominal
+  values. Nevertheless, the heat transfer coefficient Gc can be
+  overwritten.
+</p>
 </html>"));
 end DynamicHX;

@@ -72,6 +72,8 @@ record OPH_1_Office "Office zone of office building"
     withAHU=true,
     minAHU=0,
     maxAHU=12,
+    maxIrr = {100,100,100,100,0},
+    shadingFactor = {0.7,0.7,0.7,0.7,0},
     hHeat=167500,
     lHeat=0,
     KRHeat=1000,
@@ -85,26 +87,26 @@ record OPH_1_Office "Office zone of office building"
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
-  annotation (Documentation(revisions="<html>
- <ul>
-  <li>
-  November 27, 2019, by David Jansen:<br/>
-  Integrate threshold for heater and cooler.
+  annotation (Documentation(revisions="<html><ul>
+  <li>November 27, 2019, by David Jansen:<br/>
+    Integrate threshold for heater and cooler.
   </li>
-  <li>
-  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
-  Adapting nrPeople and nrPeopleMachines to area specific approach 
+  <li>February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+    Adapting nrPeople and nrPeopleMachines to area specific approach
   </li>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation.
+  <li>September 27, 2016, by Moritz Lauster:<br/>
+    Reimplementation.
   </li>
-  <li>
-  June, 2015, by Moritz Lauster:<br/>
-  Implemented.
+  <li>June, 2015, by Moritz Lauster:<br/>
+    Implemented.
   </li>
- </ul>
- </html>", info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</ul>
+</html>", info="<html>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\">Zone \"Office\" of an
+  example building according to an office building with passive house
+  standard. The building is divided in six zones, this is a typical
+  zoning for an office building.</span>
+</p>
 </html>"));
 end OPH_1_Office;

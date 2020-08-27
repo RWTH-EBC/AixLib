@@ -53,8 +53,7 @@ parameter HeatCapacityPerArea cDown;
     annotation (Placement(transformation(extent={{50,-36},{70,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConvWall
     annotation (Placement(transformation(extent={{-22,-110},{-2,-90}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=A, eps=eps) annotation (
-      Placement(transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(A=A, eps=eps) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));
@@ -107,8 +106,7 @@ equation
       points={{3.60822e-015,84},{3.60822e-015,92.5},{-2,92.5},{-2,100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(twoStar_RadEx.Star,starRad)
-                                     annotation (Line(
+  connect(twoStar_RadEx.rad, starRad) annotation (Line(
       points={{-30,83.1},{-30,102},{-28,102}},
       color={95,95,95},
       pattern=LinePattern.None,
@@ -117,7 +115,7 @@ equation
       points={{-12,-100},{-12,-100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panel_Segment1.port_b, twoStar_RadEx.Therm) annotation (Line(
+  connect(panel_Segment1.port_b, twoStar_RadEx.conv) annotation (Line(
       points={{-16.9,39.1},{-16.9,51.55},{-30,51.55},{-30,64.8}},
       color={191,0,0},
       smooth=Smooth.None));
@@ -200,18 +198,32 @@ equation
           arrow={Arrow.None,Arrow.Filled},
           origin={-22,-54},
           rotation=180)}),
-    Documentation(revisions="<html>
-<ul>
-<li><i>February 06, 2017&nbsp;</i> by Philipp Mehrfeld:<br/>
-Naming according to AixLib standards.</li>
-<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>Added documentation.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>February 06, 2017&#160;</i> by Philipp Mehrfeld:<br/>
+    Naming according to AixLib standards.
+  </li>
+  <li>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>November 06, 2014&#160;</i> by Ana Constantin:<br/>
+    Added documentation.
+  </li>
 </ul>
 </html>",
-      info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Model for a panel heating element, consisting of a water volume, heat conduction upwards and downwards through the wall layers, convection and radiation exchange at the room facing side.</p>
+      info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for a panel heating element, consisting of a water volume, heat
+  conduction upwards and downwards through the wall layers, convection
+  and radiation exchange at the room facing side.
+</p>
 </html>"));
 end PanelHeatingSegment;
