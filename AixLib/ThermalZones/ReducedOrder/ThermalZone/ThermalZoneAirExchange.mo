@@ -73,8 +73,8 @@ equation
       points={{-51,-62},{-37.6,-62},{-37.6,-45.2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,-113.333},{80,-113.333},{80,-78},{0,-78},{-70,-78},{-70,-68}},
-                                                                         color=
+  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
+          -113.333},{80,-113.333},{80,-78},{0,-78},{-70,-78},{-70,-68}}, color=
           {0,0,127}));
   connect(ventRate, addInfVen.u2) annotation (Line(points={{-40,-100},{-40,-76},
           {-30.4,-76},{-30.4,-45.2}}, color={0,0,127}));
