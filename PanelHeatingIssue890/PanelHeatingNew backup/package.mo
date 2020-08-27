@@ -142,10 +142,9 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={0,62})));
@@ -155,11 +154,9 @@ Added documentation.</li>
                 extent={{-82,30},{-62,50}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={0,-62})));
@@ -278,10 +275,9 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={0,62})));
@@ -291,11 +287,9 @@ Added documentation.</li>
                 extent={{-82,30},{-62,50}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={0,-62})));
@@ -413,10 +407,9 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{38,-10},{18,10}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={0,62})));
@@ -426,11 +419,9 @@ Added documentation.</li>
                 extent={{-82,30},{-62,50}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={0,-62})));
@@ -547,10 +538,9 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={0,62})));
@@ -560,11 +550,9 @@ Added documentation.</li>
                 extent={{-82,30},{-62,50}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={0,-62})));
@@ -1244,10 +1232,9 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{38,-10},{18,10}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={0,62})));
@@ -1257,11 +1244,9 @@ Added documentation.</li>
                 extent={{-82,30},{-62,50}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={0,-62})));
@@ -1387,20 +1372,17 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{38,-10},{18,10}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={0,62})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={0,-62})));
@@ -1433,19 +1415,17 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor1(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={-34,62})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor2(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={-68,62})));
@@ -1459,22 +1439,18 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{-50,-50},{-34,-32}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling1(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={-42,-60})));
 
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling2(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={-88,-60})));
@@ -1790,10 +1766,9 @@ Added documentation.</li>
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
           outside=false,
-          wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
           wall_length=5,
-          wall_height=5,
-          solarDistribution=0.038) annotation (Placement(transformation(
+          wall_height=5) annotation (Placement(transformation(
               extent={{-2,-12},{2,12}},
               rotation=90,
               origin={0,54})));
@@ -1801,9 +1776,8 @@ Added documentation.</li>
           outside=false,
           wall_length=5,
           wall_height=5,
-          wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
-          solarDistribution=0.038) annotation (Placement(transformation(
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers())
+          annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={0,-52})));
@@ -2027,12 +2001,9 @@ Added documentation.</li>
           package Medium =
                    Medium)
         annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
-      AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
-        outside=false,
-        wallPar=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
-        solarDistribution=0.038,
-        wall_height=2.0,
-        wall_length=2.0) annotation (Placement(transformation(
+      AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(outside=false,
+          WallType=AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers())
+        annotation (Placement(transformation(
             extent={{-2,-12},{2,12}},
             rotation=90,
             origin={0,62})));
@@ -2040,12 +2011,9 @@ Added documentation.</li>
           Placement(transformation(extent={{-82,-50},{-62,-30}}),
                                                                iconTransformation(
               extent={{-82,30},{-62,50}})));
-      AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor1(
-        outside=false,
-        wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-        solarDistribution=0.038,
-        wall_height=2.0,
-        wall_length=2.0) annotation (Placement(transformation(
+      AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor1(outside=false,
+          WallType=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers())
+        annotation (Placement(transformation(
             extent={{2,-12},{-2,12}},
             rotation=90,
             origin={0,-62})));
@@ -2818,24 +2786,22 @@ Added documentation.</li>
         nPorts=2,
         m_flow_nominal=m_flow_Circuit)
         annotation (Placement(transformation(extent={{40,0},{64,24}})));
-      AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
-        simpleNLayer_floor(
+      AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer_floor(
         final A=A,
+        final n=n_floor,
         final d=d_floor,
         final rho=rho_floor,
         final lambda=lambda_floor,
         final c=c_floor,
-        T_start=fill((T0), (n_floor)),
-        n=n_floor) annotation (Placement(transformation(
-            extent={{-7,-8},{7,8}},
+        T0=T0) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
             rotation=90,
-            origin={0,27})));
+            origin={0,52})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_floor
-        annotation (Placement(transformation(extent={{-8,34},{8,50}}),
-            iconTransformation(extent={{-10,32},{10,52}})));
+        annotation (Placement(transformation(extent={{-10,86},{10,106}}),
+            iconTransformation(extent={{-10,86},{10,106}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
-        annotation (Placement(transformation(extent={{-6,-48},{10,-32}}),
-            iconTransformation(extent={{-10,-52},{10,-32}})));
+        annotation (Placement(transformation(extent={{-10,-108},{10,-88}})));
 
       AixLib.Utilities.HeatTransfer.CylindricHeatConduction heatConda_pipe[n_pipe](
         d_out=d_a,
@@ -2844,17 +2810,17 @@ Added documentation.</li>
         each nParallel=1,
         each length=PipeLength)
                           annotation (Placement(transformation(
-            extent={{7,-7},{-7,7}},
+            extent={{9,-9},{-9,9}},
             rotation=0,
-            origin={19,9})));
+            origin={17,11})));
       AixLib.Fluid.FixedResistances.PressureDrop res(
         redeclare package Medium = Medium,
         dp_nominal=dp_nominal,
         m_flow_nominal=m_flow_Circuit)
-        annotation (Placement(transformation(extent={{-62,-8},{-46,8}})));
+        annotation (Placement(transformation(extent={{-54,-10},{-34,10}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=1) if not (
         Ceiling)
-        annotation (Placement(transformation(extent={{-28,-28},{-12,-12}})));
+        annotation (Placement(transformation(extent={{-32,-54},{-12,-34}})));
     protected
       parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
           T=Medium.T_default,
@@ -2865,77 +2831,55 @@ Added documentation.</li>
     equation
 
     public
-      AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
-        simpleNLayer_ceiling(
+      AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer_ceiling(
         final A=A,
+        final n=n_ceiling,
         final d=d_ceiling,
         final rho=rho_ceiling,
         final lambda=lambda_ceiling,
         final c=c_ceiling,
-        T_start=fill((T0), (n_ceiling)),
-        n=n_ceiling) if Ceiling annotation (Placement(transformation(
-            extent={{7,-8},{-7,8}},
+        T0=T0) if Ceiling annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
             rotation=90,
-            origin={0,-13})));
+            origin={0,-44})));
     equation
-      connect(simpleNLayer_floor.port_b, heatport_floor) annotation (Line(points={{
-              1.33227e-15,34},{0,34},{0,42}},
-                                    color={191,0,0}));
+      connect(simpleNLayer_floor.port_b, heatport_floor) annotation (Line(points={{4.44089e-16,
+              62},{0,62},{0,96}},   color={191,0,0}));
       connect(simpleNLayer_ceiling.port_b, heatport_ceiling) annotation (Line(
-            points={{-1.33227e-15,-20},{2,-20},{2,-40}},   color={191,0,0}));
+            points={{-6.66134e-16,-54},{0,-54},{0,-98}},   color={191,0,0}));
       connect(heatConda_pipe[n_pipe].port_b, simpleNLayer_ceiling.port_a) annotation (
-          Line(points={{19,15.16},{0,15.16},{0,2},{-4.44089e-16,2},{
-              -4.44089e-16,-6}},
+          Line(points={{17,18.92},{0,18.92},{0,2},{4.44089e-16,2},{4.44089e-16,-34}},
             color={191,0,0}));
       connect(vol.heatPort, heatConda_pipe[1].port_a)
-        annotation (Line(points={{40,12},{19,12},{19,9.28}},
+        annotation (Line(points={{40,12},{17,12},{17,11.36}},
                                                            color={191,0,0}));
       connect(heatConda_pipe[n_pipe].port_b, simpleNLayer_floor.port_a) annotation (Line(
-            points={{19,15.16},{0,15.16},{0,20},{4.44089e-16,20}},
+            points={{17,18.92},{0,18.92},{0,18},{-6.66134e-16,18},{-6.66134e-16,42}},
             color={191,0,0}));
 
             for i in 1:(n_pipe-1) loop
       connect(heatConda_pipe[i].port_b, heatConda_pipe[i+1].port_a) annotation (Line(
-          points={{19,15.16},{19,9.28}},
+          points={{17,18.92},{17,11.36}},
           color={191,0,0},
           pattern=LinePattern.Dash));
             end for;
       connect(port_a, res.port_a)
-        annotation (Line(points={{-100,0},{-62,0}}, color={0,127,255}));
-      connect(res.port_b, vol.ports[1]) annotation (Line(points={{-46,0},{-22,0},
-              {-22,8.88178e-16},{49.6,8.88178e-16}},
-                                                color={0,127,255}));
+        annotation (Line(points={{-100,0},{-54,0}}, color={0,127,255}));
+      connect(res.port_b, vol.ports[1]) annotation (Line(points={{-34,0},{-22,0},{-22,
+              8.88178e-16},{49.6,8.88178e-16}}, color={0,127,255}));
       connect(vol.ports[2], port_b)
         annotation (Line(points={{54.4,0},{100,0}}, color={0,127,255}));
       connect(thermalCollector.port_b, heatport_ceiling) annotation (Line(
-          points={{-20,-28},{-20,-40},{2,-40}},
+          points={{-22,-54},{-22,-98},{0,-98}},
           color={191,0,0},
           pattern=LinePattern.Dash));
       connect(heatConda_pipe[n_pipe].port_b, thermalCollector.port_a[1]) annotation (
           Line(
-          points={{19,15.16},{-20,15.16},{-20,-12}},
+          points={{17,18.92},{-22,18.92},{-22,-34}},
           color={191,0,0},
           pattern=LinePattern.Dash));
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-60},{100,60}}), graphics={
-            Rectangle(
-              extent={{-90,40},{88,-40}},
-              lineColor={0,0,0},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-100,40},{-80,-40}},
-              lineColor={0,0,0},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{78,40},{98,-40}},
-              lineColor={0,0,0},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash)}),                           Diagram(
-            coordinateSystem(preserveAspectRatio=false, extent={{-100,-60},{100,
-                60}})));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
     end PanelHeatingElement;
 
     model PanelHeatingCircuit "One Circuit in a Panel Heating System"
@@ -3039,7 +2983,7 @@ Added documentation.</li>
         each dis=integer(dis),
         each PipeLength=PipeLength / dis,
         each dp_nominal=dp_nominal/dis)
-        annotation (Placement(transformation(extent={{-14,-8},{14,8}})));
+        annotation (Placement(transformation(extent={{-20,-18},{20,18}})));
 
       AixLib.Fluid.Sensors.TemperatureTwoPort TFlow(
         redeclare package Medium = Medium,
@@ -3076,10 +3020,10 @@ Added documentation.</li>
      connect(port_a, TFlow.port_a)
         annotation (Line(points={{-100,0},{-86,0}}, color={0,127,255}));
         connect(TFlow.port_b, panelHeatingElement[1].port_a)
-        annotation (Line(points={{-66,0},{-14,0}}, color={0,127,255}));
+        annotation (Line(points={{-66,0},{-20,0}}, color={0,127,255}));
       connect(sumT_Fm.y, T_Fm.numberPort) annotation (Line(points={{80.2,50},{86.5,50}}, color={0,0,127}));
       connect(panelHeatingElement[dis].port_b, TReturn.port_a)
-        annotation (Line(points={{14,0},{42,0}}, color={0,127,255}));
+        annotation (Line(points={{20,0},{42,0}}, color={0,127,255}));
          connect(TReturn.port_b, port_b)
         annotation (Line(points={{62,0},{100,0}}, color={0,127,255}));
 
@@ -3087,14 +3031,11 @@ Added documentation.</li>
 
       for i in 1:dis loop
         connect(sumT_Fm.port_a[i], panelHeatingElement[i].heatport_floor)
-        annotation (Line(points={{60,50},{1.77636e-15,50},{1.77636e-15,5.6}},
-                                                                color={191,0,0}));
+        annotation (Line(points={{60,50},{0,50},{0,17.28}},     color={191,0,0}));
          connect(thermalCollector1.port_a[i], panelHeatingElement[i].heatport_floor)
-        annotation (Line(points={{0,60},{0,5.6},{1.77636e-15,5.6}},
-                                                    color={191,0,0}));
+        annotation (Line(points={{0,60},{0,17.28}}, color={191,0,0}));
         connect(panelHeatingElement[i].heatport_ceiling, thermalCollector2.port_a[i])
-        annotation (Line(points={{1.77636e-15,-5.6},{1.77636e-15,-36},{0,-36},{
-                0,-48}},                              color={191,0,0}));
+        annotation (Line(points={{0,-17.64},{0,-48}}, color={191,0,0}));
       end for;
 
         connect(thermalCollector1.port_b, heatport_floor)
@@ -3109,17 +3050,12 @@ Added documentation.</li>
         for i in 1:(dis-1) loop
           connect(panelHeatingElement[i].port_b, panelHeatingElement[i + 1].port_a)
             annotation (Line(
-              points={{14,0},{14,-14},{-14,-14},{-14,0}},
+              points={{20,0},{20,-12},{-20,-12},{-20,0}},
               color={0,127,255},
               pattern=LinePattern.Dash));
         end for;
       end if;
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-              Line(points={{-100,10},{-100,80},{-82,80},{-80,80},{-80,-80},{-60,
-                  -80},{-60,80},{-40,80},{-40,-80},{-20,-80},{-20,80},{0,80},{0,
-                  -78},{0,-80}}, color={238,46,47}), Line(points={{0,-80},{20,
-                  -80},{20,80},{40,80},{40,-80},{60,-80},{60,80},{80,80},{80,
-                  -80},{100,-80},{100,-10}}, color={28,108,200})}),  Diagram(
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
     end PanelHeatingCircuit;
 
@@ -3259,8 +3195,8 @@ Added documentation.</li>
         each Spacing=Spacing,
         each PipeLength=PipeLength/CircuitNo,
         each m_flow_Circuit=m_flow_Circuit)
-                            annotation (Placement(transformation(extent={{-12,-12},
-                {12,12}})));
+                            annotation (Placement(transformation(extent={{-18,-18},{
+                18,18}})));
       EN1264.HeatFlux EN_1264(
         T_U=T_U,
         d_a=d_a,
@@ -3303,11 +3239,11 @@ Added documentation.</li>
       // OUTER CONNECTIONS
 
        for i in 1:CircuitNo loop
-        connect(roomCircuit[i].port_b, ports_b[i]) annotation (Line(points={{12,0},{
+        connect(roomCircuit[i].port_b, ports_b[i]) annotation (Line(points={{18,0},{
                 100,0}},                                                                     color={0,127,255}));
 
         connect(ports_a[i], roomCircuit[i].port_a) annotation (Line(points={{-100,0},
-                {-12,0}},                                                                      color={0,127,255}));
+                {-18,0}},                                                                      color={0,127,255}));
        end for;
 
 
@@ -3315,10 +3251,10 @@ Added documentation.</li>
 
       for i in 1:CircuitNo loop
         connect(roomCircuit[i].heatport_ceiling, thermalCollector2.port_a[i])
-          annotation (Line(points={{0,-11.76},{0,-44}}, color={191,0,0}));
+          annotation (Line(points={{0,-17.64},{0,-44}}, color={191,0,0}));
 
         connect(thermalCollector1.port_a[i], roomCircuit[i].heatport_floor)
-        annotation (Line(points={{0,50},{0,11.52}},           color={191,0,0}));
+        annotation (Line(points={{0,50},{0,17.28},{0,17.28}}, color={191,0,0}));
 
         end for;
 
@@ -3334,75 +3270,7 @@ Added documentation.</li>
 
                                                                                                                                        annotation (Dialog(group="Panel Heating", enable=
              withInsulating), choicesAllMatching=true,
-                  Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-            Rectangle(
-              extent={{-100,100},{102,-100}},
-              lineColor={170,213,255},
-              fillColor={170,213,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{60,2},{74,-8}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{-60,40},{-40,40},{-34,20},{-66,20},{-60,40}},
-              lineColor={0,0,0},
-              fillColor={255,255,85},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-20,0},{-6,-10}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-50,20},{-50,-40}}, color={0,0,0}),
-            Line(points={{-60,-40},{-40,-40}}, color={0,0,0}),
-            Rectangle(
-              extent={{60,-4},{74,-40}},
-              lineColor={255,255,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-6,-14},{60,-40}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-6,14},{60,-2}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-6,6},{60,-14}},
-              lineColor={255,255,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-20,-6},{-6,-40}},
-              lineColor={255,255,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-6,6},{-6,-40}}, color={0,0,0}),
-            Line(points={{60,6},{60,-16}}, color={0,0,0}),
-            Line(points={{-6,-16},{60,-16}}, color={0,0,0}),
-            Line(points={{-20,-6},{-20,-40}}, color={0,0,0}),
-            Line(points={{74,-4},{74,-40}}, color={0,0,0}),
-            Line(points={{-20,-40},{74,-40}}, color={0,0,0}),
-            Rectangle(
-              extent={{12,0},{16,-4}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{24,0},{28,-4}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{36,0},{40,-4}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid)}),                      Diagram(coordinateSystem(preserveAspectRatio=false)));
+                  Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
     end PanelHeatingRoom;
 
     model PanelHeatingSystem
@@ -6707,8 +6575,5 @@ Added documentation.</li>
 
     end TestModels;
   end AddParameters;
-  annotation (uses(                          Modelica(version="3.2.2"), AixLib(
-          version="0.10.5")),
-    version="1",
-    conversion(from(version="", script="ConvertFromPanelHeatingNew_.mos")));
+  annotation (uses(AixLib(version="0.10.0"), Modelica(version="3.2.2")));
 end PanelHeatingNew;
