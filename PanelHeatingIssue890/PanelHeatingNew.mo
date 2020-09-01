@@ -156,7 +156,6 @@ Added documentation.</li>
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           wall_length=5,
           wall_height=5,
           solarDistribution=0.038) annotation (Placement(transformation(
@@ -292,7 +291,6 @@ Added documentation.</li>
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           wall_length=5,
           wall_height=5,
           solarDistribution=0.038) annotation (Placement(transformation(
@@ -427,7 +425,6 @@ Added documentation.</li>
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           wall_length=5,
           wall_height=5,
           solarDistribution=0.038) annotation (Placement(transformation(
@@ -561,7 +558,6 @@ Added documentation.</li>
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           wall_length=5,
           wall_height=5,
           solarDistribution=0.038) annotation (Placement(transformation(
@@ -1258,7 +1254,6 @@ Added documentation.</li>
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           wall_length=5,
           wall_height=5,
           solarDistribution=0.038) annotation (Placement(transformation(
@@ -1397,7 +1392,6 @@ Added documentation.</li>
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
           outside=false,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           wall_length=5,
           wall_height=5,
           solarDistribution=0.038) annotation (Placement(transformation(
@@ -1460,7 +1454,6 @@ Added documentation.</li>
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling1(
           outside=false,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           wall_length=5,
           wall_height=5,
           solarDistribution=0.038) annotation (Placement(transformation(
@@ -1471,7 +1464,6 @@ Added documentation.</li>
         AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling2(
           outside=false,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           wall_length=5,
           wall_height=5,
           solarDistribution=0.038) annotation (Placement(transformation(
@@ -1802,11 +1794,11 @@ Added documentation.</li>
           wall_length=5,
           wall_height=5,
           wallPar=AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers(),
-
           solarDistribution=0.038) annotation (Placement(transformation(
               extent={{2,-12},{-2,12}},
               rotation=90,
               origin={0,-52})));
+
         AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort convRadToCombPort1
           annotation (Placement(transformation(
               extent={{-7,-6},{7,6}},
@@ -2834,8 +2826,8 @@ Added documentation.</li>
         annotation (Placement(transformation(extent={{-8,34},{8,50}}),
             iconTransformation(extent={{-10,32},{10,52}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
-        annotation (Placement(transformation(extent={{-6,-48},{10,-32}}),
-            iconTransformation(extent={{-10,-52},{10,-32}})));
+        annotation (Placement(transformation(extent={{-8,-48},{8,-32}}),
+            iconTransformation(extent={{-12,-52},{8,-32}})));
 
       AixLib.Utilities.HeatTransfer.CylindricHeatConduction heatConda_pipe[n_pipe](
         d_out=d_a,
@@ -2882,7 +2874,7 @@ Added documentation.</li>
               1.33227e-15,34},{0,34},{0,42}},
                                     color={191,0,0}));
       connect(simpleNLayer_ceiling.port_b, heatport_ceiling) annotation (Line(
-            points={{-1.33227e-15,-20},{2,-20},{2,-40}},   color={191,0,0}));
+            points={{-1.33227e-15,-20},{0,-20},{0,-40}},   color={191,0,0}));
       connect(heatConda_pipe[n_pipe].port_b, simpleNLayer_ceiling.port_a) annotation (
           Line(points={{19,15.16},{0,15.16},{0,2},{-4.44089e-16,2},{
               -4.44089e-16,-6}},
@@ -2908,7 +2900,7 @@ Added documentation.</li>
       connect(vol.ports[2], port_b)
         annotation (Line(points={{54.4,0},{100,0}}, color={0,127,255}));
       connect(thermalCollector.port_b, heatport_ceiling) annotation (Line(
-          points={{-20,-28},{-20,-40},{2,-40}},
+          points={{-20,-28},{-20,-40},{0,-40}},
           color={191,0,0},
           pattern=LinePattern.Dash));
       connect(heatConda_pipe[n_pipe].port_b, thermalCollector.port_a[1]) annotation (
@@ -2916,26 +2908,32 @@ Added documentation.</li>
           points={{19,15.16},{-20,15.16},{-20,-12}},
           color={191,0,0},
           pattern=LinePattern.Dash));
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-60},{100,60}}), graphics={
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -40},{100,40}},
+            initialScale=0.1),        graphics={
             Rectangle(
-              extent={{-90,40},{88,-40}},
+              extent={{-100,40},{100,18}},
+              lineColor={135,135,135},
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Forward),
+            Rectangle(
+              extent={{-100,18},{100,-18}},
+              lineColor={135,135,135},
+              fillColor={135,135,135},
+              fillPattern=FillPattern.HorizontalCylinder),
+            Rectangle(
+              extent={{-100,14},{100,-14}},
               lineColor={0,0,0},
               fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-100,40},{-80,-40}},
+              fillPattern=FillPattern.HorizontalCylinder),
+            Rectangle(
+              extent={{-100,-18},{100,-40}},
               lineColor={0,0,0},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{78,40},{98,-40}},
-              lineColor={0,0,0},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash)}),                           Diagram(
-            coordinateSystem(preserveAspectRatio=false, extent={{-100,-60},{100,
-                60}})));
+              fillColor={135,135,135},
+              fillPattern=FillPattern.Backward)}),                   Diagram(
+            coordinateSystem(preserveAspectRatio=false, extent={{-100,-40},{100,
+                40}},
+            initialScale=0.1)));
     end PanelHeatingElement;
 
     model PanelHeatingCircuit "One Circuit in a Panel Heating System"
@@ -3012,6 +3010,31 @@ Added documentation.</li>
 
       parameter Modelica.SIunits.PressureDifference dp_nominal = 100 * PipeLength;
 
+      AixLib.Fluid.Sensors.TemperatureTwoPort TFlow(
+        redeclare package Medium = Medium,
+        m_flow_nominal=m_flow_Circuit,
+        allowFlowReversal=false,
+        T_start=T_Flow)
+        annotation (Placement(transformation(extent={{-78,-6},{-66,6}})));
+      AixLib.Fluid.Sensors.TemperatureTwoPort TReturn(
+        redeclare package Medium = Medium,
+        m_flow_nominal=m_flow_Circuit,
+        allowFlowReversal=false,
+        T_start=T_Return)
+        annotation (Placement(transformation(extent={{60,-6},{72,6}})));
+
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_floor
+        annotation (Placement(transformation(extent={{-10,32},{10,52}}),
+            iconTransformation(extent={{-10,30},{10,50}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
+        annotation (Placement(transformation(extent={{-10,-48},{10,-28}}),
+            iconTransformation(extent={{-10,-48},{10,-28}})));
+      SumT_F sumT_Fm(dis=integer(dis))
+        annotation (Placement(transformation(extent={{16,10},{28,22}})));
+      Modelica.Blocks.Interaction.Show.RealValue T_Fm "arithmetic mean of floor surface temperature"
+        annotation (Placement(transformation(extent={{38,10},{48,22}})));
+      Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector2(m=dis)
+        annotation (Placement(transformation(extent={{-6,-26},{6,-14}})));
       PanelHeatingNew.AddParameters.PanelHeatingElement panelHeatingElement[dis](
         each Spacing=Spacing,
         each m_flow_Circuit=m_flow_Circuit,
@@ -3039,34 +3062,9 @@ Added documentation.</li>
         each dis=integer(dis),
         each PipeLength=PipeLength / dis,
         each dp_nominal=dp_nominal/dis)
-        annotation (Placement(transformation(extent={{-14,-8},{14,8}})));
-
-      AixLib.Fluid.Sensors.TemperatureTwoPort TFlow(
-        redeclare package Medium = Medium,
-        m_flow_nominal=m_flow_Circuit,
-        allowFlowReversal=false,
-        T_start=T_Flow)
-        annotation (Placement(transformation(extent={{-86,-10},{-66,10}})));
-      AixLib.Fluid.Sensors.TemperatureTwoPort TReturn(
-        redeclare package Medium = Medium,
-        m_flow_nominal=m_flow_Circuit,
-        allowFlowReversal=false,
-        T_start=T_Return)
-        annotation (Placement(transformation(extent={{42,-10},{62,10}})));
-
-      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_floor
-        annotation (Placement(transformation(extent={{-10,86},{10,106}}),
-            iconTransformation(extent={{-10,86},{10,106}})));
-      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
-        annotation (Placement(transformation(extent={{-10,-108},{10,-88}})));
-      SumT_F sumT_Fm(dis=integer(dis))
-        annotation (Placement(transformation(extent={{60,40},{80,60}})));
-      Modelica.Blocks.Interaction.Show.RealValue T_Fm "arithmetic mean of floor surface temperature"
-        annotation (Placement(transformation(extent={{88,40},{108,60}})));
+        annotation (Placement(transformation(extent={{-10,-4},{10,4}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector1(m=dis)
-        annotation (Placement(transformation(extent={{-10,80},{10,60}})));
-      Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector2(m=dis)
-        annotation (Placement(transformation(extent={{-10,-68},{10,-48}})));
+        annotation (Placement(transformation(extent={{-6,34},{6,22}})));
     equation
      assert(PipeLength <= 120, "Pipe Length is too high, additional heating circuit needs to be used", AssertionLevel.warning);
 
@@ -3074,34 +3072,34 @@ Added documentation.</li>
 
     //OUTER CONNECTIONS
      connect(port_a, TFlow.port_a)
-        annotation (Line(points={{-100,0},{-86,0}}, color={0,127,255}));
+        annotation (Line(points={{-100,0},{-78,0}}, color={0,127,255}));
         connect(TFlow.port_b, panelHeatingElement[1].port_a)
-        annotation (Line(points={{-66,0},{-14,0}}, color={0,127,255}));
-      connect(sumT_Fm.y, T_Fm.numberPort) annotation (Line(points={{80.2,50},{86.5,50}}, color={0,0,127}));
+        annotation (Line(points={{-66,0},{-10,0}}, color={0,127,255}));
+      connect(sumT_Fm.y, T_Fm.numberPort) annotation (Line(points={{28.12,16},{
+              37.25,16}},                                                                color={0,0,127}));
       connect(panelHeatingElement[dis].port_b, TReturn.port_a)
-        annotation (Line(points={{14,0},{42,0}}, color={0,127,255}));
+        annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));
          connect(TReturn.port_b, port_b)
-        annotation (Line(points={{62,0},{100,0}}, color={0,127,255}));
+        annotation (Line(points={{72,0},{100,0}}, color={0,127,255}));
 
     // HEAT CONNECTIONS
 
       for i in 1:dis loop
         connect(sumT_Fm.port_a[i], panelHeatingElement[i].heatport_floor)
-        annotation (Line(points={{60,50},{1.77636e-15,50},{1.77636e-15,5.6}},
-                                                                color={191,0,0}));
+        annotation (Line(points={{16,16},{0,16},{0,4.2}},       color={191,0,0}));
          connect(thermalCollector1.port_a[i], panelHeatingElement[i].heatport_floor)
-        annotation (Line(points={{0,60},{0,5.6},{1.77636e-15,5.6}},
-                                                    color={191,0,0}));
+        annotation (Line(points={{0,22},{0,4.2}},   color={191,0,0}));
         connect(panelHeatingElement[i].heatport_ceiling, thermalCollector2.port_a[i])
-        annotation (Line(points={{1.77636e-15,-5.6},{1.77636e-15,-36},{0,-36},{
-                0,-48}},                              color={191,0,0}));
+        annotation (Line(points={{-0.2,-4.2},{-0.2,-10},{0,-10},{0,-14}},
+                                                      color={191,0,0}));
       end for;
 
         connect(thermalCollector1.port_b, heatport_floor)
-        annotation (Line(points={{0,80},{0,96}}, color={191,0,0}));
+        annotation (Line(points={{0,34},{0,42}}, color={191,0,0}));
 
       connect(thermalCollector2.port_b, heatport_ceiling)
-        annotation (Line(points={{0,-68},{0,-98}}, color={191,0,0}));
+        annotation (Line(points={{0,-26},{0,-32},{0,-38},{0,-38}},
+                                                   color={191,0,0}));
 
       //INNER CONNECTIONS
 
@@ -3109,18 +3107,142 @@ Added documentation.</li>
         for i in 1:(dis-1) loop
           connect(panelHeatingElement[i].port_b, panelHeatingElement[i + 1].port_a)
             annotation (Line(
-              points={{14,0},{14,-14},{-14,-14},{-14,0}},
+              points={{10,0},{10,-10},{-10,-10},{-10,0}},
               color={0,127,255},
               pattern=LinePattern.Dash));
         end for;
       end if;
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-              Line(points={{-100,10},{-100,80},{-82,80},{-80,80},{-80,-80},{-60,
-                  -80},{-60,80},{-40,80},{-40,-80},{-20,-80},{-20,80},{0,80},{0,
-                  -78},{0,-80}}, color={238,46,47}), Line(points={{0,-80},{20,
-                  -80},{20,80},{40,80},{40,-80},{60,-80},{60,80},{80,80},{80,
-                  -80},{100,-80},{100,-10}}, color={28,108,200})}),  Diagram(
-            coordinateSystem(preserveAspectRatio=false)));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false,
+            extent={{-100,-30},{100,35}},
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,36},{100,14}},
+              lineColor={200,200,200},
+              fillColor={170,255,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-100,14},{100,-30}},
+              lineColor={200,200,200},
+              fillColor={150,150,150},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-80,10},{-80,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(points={{-80,10},{-78,6},{-80,10},{-82,6}}, color={238,46,47}),
+            Ellipse(
+              extent={{-84,-2},{-76,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-68,-2},{-60,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-52,-2},{-44,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-36,-2},{-28,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-20,-2},{-12,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-4,-2},{4,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{12,-2},{20,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{28,-2},{36,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{44,-2},{52,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{60,-2},{68,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{76,-2},{84,-10}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-64,10},{-64,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-48,10},{-48,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-32,10},{-32,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-16,10},{-16,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,10},{0,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{16,10},{16,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{32,10},{32,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{48,10},{48,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{64,10},{64,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{80,10},{80,2}},
+              color={255,0,0},
+              smooth=Smooth.None),
+            Line(points={{-64,10},{-62,6},{-64,10},{-66,6}}, color={238,46,47}),
+
+            Line(points={{-48,10},{-46,6},{-48,10},{-50,6}}, color={238,46,47}),
+
+            Line(points={{-32,10},{-30,6},{-32,10},{-34,6}}, color={238,46,47}),
+
+            Line(points={{-16,10},{-14,6},{-16,10},{-18,6}}, color={238,46,47}),
+
+            Line(points={{0,10},{2,6},{0,10},{-2,6}}, color={238,46,47}),
+            Line(points={{16,10},{18,6},{16,10},{14,6}}, color={238,46,47}),
+            Line(points={{32,10},{34,6},{32,10},{30,6}}, color={238,46,47}),
+            Line(points={{48,10},{50,6},{48,10},{46,6}}, color={238,46,47}),
+            Line(points={{64,10},{66,6},{64,10},{62,6}}, color={238,46,47}),
+            Line(points={{80,10},{82,6},{80,10},{78,6}}, color={238,46,47})}),
+                                                                     Diagram(
+            coordinateSystem(preserveAspectRatio=false,
+            extent={{-100,-40},{100,40}},
+            initialScale=0.1)));
     end PanelHeatingCircuit;
 
     model PanelHeatingRoom
@@ -3230,7 +3352,7 @@ Added documentation.</li>
 
       parameter Modelica.SIunits.PressureDifference dp_nominal = 100 * PipeLength / CircuitNo;
 
-      PanelHeatingCircuit                roomCircuit[CircuitNo](
+      PanelHeatingCircuit panelHeatingCircuit[CircuitNo](
         each rho_floor=rho_floor,
         each c_floor=c_floor,
         each eps_floor=eps_floor,
@@ -3253,14 +3375,14 @@ Added documentation.</li>
         each ZoneType=ZoneType,
         each calculateVol=calculateVol,
         each d_floor=d_floor,
-        each lambda_floor=if withHoldingBurls then lambda_HoldingBurls else lambda_floor,
+        each lambda_floor=if withHoldingBurls then lambda_HoldingBurls else
+            lambda_floor,
         each dis=dis,
         each dp_nominal=dp_nominal,
         each Spacing=Spacing,
         each PipeLength=PipeLength/CircuitNo,
         each m_flow_Circuit=m_flow_Circuit)
-                            annotation (Placement(transformation(extent={{-12,-12},
-                {12,12}})));
+        annotation (Placement(transformation(extent={{-22,-6},{22,8}})));
       EN1264.HeatFlux EN_1264(
         T_U=T_U,
         d_a=d_a,
@@ -3303,22 +3425,24 @@ Added documentation.</li>
       // OUTER CONNECTIONS
 
        for i in 1:CircuitNo loop
-        connect(roomCircuit[i].port_b, ports_b[i]) annotation (Line(points={{12,0},{
-                100,0}},                                                                     color={0,127,255}));
+        connect(panelHeatingCircuit[i].port_b, ports_b[i]) annotation (Line(
+              points={{22,0.461538},{66,0.461538},{66,0},{100,0}}, color={0,127,
+                255}));
 
-        connect(ports_a[i], roomCircuit[i].port_a) annotation (Line(points={{-100,0},
-                {-12,0}},                                                                      color={0,127,255}));
+        connect(ports_a[i], panelHeatingCircuit[i].port_a) annotation (Line(
+              points={{-100,0},{-66,0},{-66,0.461538},{-22,0.461538}}, color={0,
+                127,255}));
        end for;
 
 
       // HEAT CONNECTIONS
 
+      connect(panelHeatingCircuit[i].heatport_ceiling, thermalCollector2.port_a[
+        i]) annotation (Line(points={{0,-7.72308},{0,-44}}, color={191,0,0}));
       for i in 1:CircuitNo loop
-        connect(roomCircuit[i].heatport_ceiling, thermalCollector2.port_a[i])
-          annotation (Line(points={{0,-11.76},{0,-44}}, color={191,0,0}));
 
-        connect(thermalCollector1.port_a[i], roomCircuit[i].heatport_floor)
-        annotation (Line(points={{0,50},{0,11.52}},           color={191,0,0}));
+        connect(thermalCollector1.port_a[i], panelHeatingCircuit[i].heatport_floor)
+          annotation (Line(points={{0,50},{0,9.07692}}, color={191,0,0}));
 
         end for;
 
@@ -3337,7 +3461,7 @@ Added documentation.</li>
                   Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(
               extent={{-100,100},{102,-100}},
-              lineColor={170,213,255},
+              lineColor={0,0,0},
               fillColor={170,213,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
@@ -3402,7 +3526,56 @@ Added documentation.</li>
               extent={{36,0},{40,-4}},
               lineColor={0,0,0},
               fillColor={0,0,0},
-              fillPattern=FillPattern.Solid)}),                      Diagram(coordinateSystem(preserveAspectRatio=false)));
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-100,-50},{102,-66}},
+              lineColor={162,29,33},
+              fillColor={162,29,33},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-90,-54},{-82,-62}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-66,-54},{-58,-62}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-42,-54},{-34,-62}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-18,-54},{-10,-62}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{6,-54},{14,-62}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{32,-54},{40,-62}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{56,-54},{64,-62}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{80,-54},{88,-62}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Line(points={{0,-70},{0,-84},{0,-86},{-4,-78},{0,-86},{4,-78}},
+                color={162,29,33}),
+            Line(points={{0,50},{0,74},{0,76},{-4,68},{0,76},{4,68}}, color={
+                  162,29,33})}),                                     Diagram(coordinateSystem(preserveAspectRatio=false)));
     end PanelHeatingRoom;
 
     model PanelHeatingSystem
@@ -3538,7 +3711,7 @@ Added documentation.</li>
         dis=dis,
         dp_nominal=dp_nominal,
         Spacing=Spacing)
-             annotation (Placement(transformation(extent={{48,-18},{84,16}})));
+             annotation (Placement(transformation(extent={{54,-14},{84,16}})));
       AixLib.Fluid.Sensors.TemperatureTwoPort TFlow(
         redeclare package Medium = Medium,
         m_flow_nominal=m_flow_total,
@@ -3550,7 +3723,8 @@ Added documentation.</li>
         T_start=min(T_Return))
         annotation (Placement(transformation(extent={{-60,-16},{-76,-2}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling[RoomNo]
-        annotation (Placement(transformation(extent={{-10,-108},{10,-88}})));
+        annotation (Placement(transformation(extent={{-10,-108},{10,-88}}),
+            iconTransformation(extent={{-10,-108},{10,-88}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_floor[RoomNo]
         annotation (Placement(transformation(extent={{-10,86},{10,106}}),
             iconTransformation(extent={{-10,86},{10,106}})));
@@ -3567,9 +3741,9 @@ Added documentation.</li>
 
        for i in 1:RoomNo loop
         connect(panelHeatingRoom[i].heatport_ceiling, heatport_ceiling[i])
-          annotation (Line(points={{66,-17.66},{66,-76},{0,-76},{0,-98}},                  color={191,0,0}));
+          annotation (Line(points={{69,-13.7},{69,-76},{0,-76},{0,-98}},                   color={191,0,0}));
         connect(panelHeatingRoom[i].heatport_floor, heatport_floor[i])
-          annotation (Line(points={{66,15.32},{66,76},{0,76},{0,96}},         color={191,0,0}));
+          annotation (Line(points={{69,15.4},{69,76},{0,76},{0,96}},          color={191,0,0}));
               end for;
 
       // FLUID CONNECTIONS
@@ -3588,9 +3762,9 @@ Added documentation.</li>
         for x in 2:RoomNo loop
           for u in 1:CircuitNo[x] loop
             connect(distributor.flowPorts[(sum(CircuitNo[v] for v in 1:(x-1))+ u)], panelHeatingRoom[x].ports_a[u])
-        annotation (Line(points={{-24,18},{-24,34},{-2,34},{-2,-1},{48,-1}}, color={0,127,255}));
+        annotation (Line(points={{-24,18},{-24,34},{-2,34},{-2,1},{54,1}},   color={0,127,255}));
         connect(panelHeatingRoom[x].ports_b[u], distributor.returnPorts[(sum(CircuitNo[v] for v in 1:(x-1)) + u)])
-          annotation (Line(points={{84,-1},{96,-1},{96,-42},{-24,-42},{-24,-18.6}}, color={0,127,255}));
+          annotation (Line(points={{84,1},{96,1},{96,-42},{-24,-42},{-24,-18.6}},   color={0,127,255}));
           end for;
               end for;
       end if;
@@ -3601,6 +3775,252 @@ Added documentation.</li>
                                           color={0,127,255}));
 
 
+      annotation (Icon(coordinateSystem(extent={{-160,-100},{100,100}}),
+            graphics={
+            Rectangle(
+              extent={{-160,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-46,36},{100,-30}},
+              lineColor={0,0,0},
+              fillColor={170,255,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-138,80},{-98,-80}},
+              lineColor={0,0,0},
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-126,66},{-110,50}},
+              lineColor={238,46,47},
+              fillColor={238,46,47},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-156,10},{-138,10},{-146,14},{-138,10},{-146,6}},
+                color={238,46,47}),
+            Line(points={{-138,-8},{-156,-8},{-148,-4},{-156,-8},{-148,-12}},
+                color={28,108,200}),
+            Rectangle(
+              extent={{-46,100},{100,36}},
+              lineColor={0,0,0},
+              fillColor={170,255,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-46,-30},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={170,255,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-46,48},{100,36}},
+              lineColor={0,0,0},
+              fillColor={162,29,33},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-46,-88},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={162,29,33},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-110,58},{-72,58},{-72,42},{-46,42}}, color={238,46,
+                  47}),
+            Line(points={{-46,38},{-72,38},{-72,34},{-110,34}}, color={28,108,
+                  200}),
+            Line(points={{-110,10},{-72,10},{-72,-24},{-46,-24}}, color={238,46,
+                  47}),
+            Line(points={{-46,-28},{-76,-28},{-76,-14},{-110,-14}}, color={28,
+                  108,200}),
+            Line(points={{-112,-38},{-78,-38},{-78,-94},{-46,-94}}, color={238,
+                  46,47}),
+            Line(points={{-46,-98},{-84,-98},{-84,-60},{-110,-60}}, color={28,
+                  108,200}),
+            Text(
+              extent={{4,78},{50,60}},
+              lineColor={0,0,0},
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              textString="1"),
+            Text(
+              extent={{2,18},{52,-2}},
+              lineColor={0,0,0},
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              textString="..."),
+            Text(
+              extent={{-12,-42},{66,-80}},
+              lineColor={0,0,0},
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              textString="RoomNo"),
+            Ellipse(
+              extent={{-42,46},{-34,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-126,42},{-110,26}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-126,18},{-110,2}},
+              lineColor={238,46,47},
+              fillColor={238,46,47},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-126,-6},{-110,-22}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-126,-30},{-110,-46}},
+              lineColor={238,46,47},
+              fillColor={238,46,47},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-126,-54},{-110,-70}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-149,-114},{151,-154}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Ellipse(
+              extent={{-26,46},{-18,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-10,46},{-2,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{6,46},{14,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{22,46},{30,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{38,46},{46,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{54,46},{62,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{70,46},{78,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{86,46},{94,38}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-46,-18},{100,-30}},
+              lineColor={0,0,0},
+              fillColor={162,29,33},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-42,-20},{-34,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-26,-20},{-18,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-10,-20},{-2,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{6,-20},{14,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{22,-20},{30,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{38,-20},{46,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{54,-20},{62,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{70,-20},{78,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{86,-20},{94,-28}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-42,-90},{-34,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-26,-90},{-18,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-10,-90},{-2,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{6,-90},{14,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{22,-90},{30,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{38,-90},{46,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{54,-90},{62,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{70,-90},{78,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{86,-90},{94,-98}},
+              lineColor={28,108,200},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(extent
+              ={{-160,-100},{100,100}})));
     end PanelHeatingSystem;
 
      function logDT =
@@ -6452,7 +6872,7 @@ Added documentation.</li>
           lambda_W=1.2,
           rho_floor={{1500,1500},{1500,1500},{1500,1500}},
           Spacing=fill(0.1, 3))
-          annotation (Placement(transformation(extent={{-14,0},{6,20}})));
+          annotation (Placement(transformation(extent={{-28,0},{24,40}})));
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureFloor
           annotation (Placement(transformation(extent={{56,50},{36,70}})));
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureCeiling
@@ -6473,14 +6893,15 @@ Added documentation.</li>
         for i in 1:panelHeatingSystem.RoomNo loop
 
           connect(prescribedTemperatureFloor.port, panelHeatingSystem.heatport_floor[
-            i]) annotation (Line(points={{36,60},{24,60},{24,54},{-1.6,54},{-1.6,
-                  19.6}}, color={191,0,0}));
+            i]) annotation (Line(points={{36,60},{24,60},{24,54},{4,54},{4,39.2}},
+                          color={191,0,0}));
           connect(panelHeatingSystem.radport_floor[i],
             prescribedTemperatureFloor.port) annotation (Line(points={{-6.4,20},
-                  {-8,20},{-8,60},{36,60}}, color={95,95,95}));
+                  {-10,20},{-10,38},{-12,38},{-12,60},{36,60}},
+                                            color={95,95,95}));
           connect(panelHeatingSystem.heatport_ceiling[i],
-            prescribedTemperatureCeiling.port) annotation (Line(points={{-1.6,
-                  0.2},{-1.6,-30},{36,-30}}, color={191,0,0}));
+            prescribedTemperatureCeiling.port) annotation (Line(points={{4,0.4},
+                  {4,-30},{36,-30}},         color={191,0,0}));
 
           if panelHeatingSystem.Ceiling[i] == true then
             connect(panelHeatingSystem.radport_ceiling[i],
