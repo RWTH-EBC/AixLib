@@ -5,13 +5,14 @@ model TwinHouseN2
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=303.15,
     TWalls_start=303.15,
+    calcMethodIn=1,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses Type_Win,
     solar_absorptance_OW=0.23,
     use_infiltEN12831=true,
-    n50=2.2,                                                    room_V=212,
+    n50=1.62,
+    room_V=212,
     room_height=2.6,
-    room_width=10,
-    wallSouth(withSunblind=true))
+    room_width=10)
     annotation (Placement(transformation(extent={{36,-44},{96,26}})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather(
     Latitude=47.874,
