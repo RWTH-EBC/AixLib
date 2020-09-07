@@ -424,8 +424,7 @@ equation
   </li>
 </ul>
 </html>",info="<html><p>
-  As described in ASHRAE Standard 140.
-</p>
+As described in ASHRAE Standard 140.
 <p>
   Difference to case 900:
 </p>
