@@ -1,0 +1,6 @@
+clear
+
+convertClear();
+
+convertModifiers("AixLib.FastHVAC.Components.Storage.HeatStorageVariablePorts", "tau=1000", "");
+convertModifiers("AixLib.FastHVAC.Components.Storage.StorageSimpleWall", "tau=1000", "");

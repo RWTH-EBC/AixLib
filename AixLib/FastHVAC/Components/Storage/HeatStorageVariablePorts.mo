@@ -30,8 +30,6 @@ public
   /* *******************************************************************
       HeatStorage Parameters
      ******************************************************************* */
-
-  parameter Real tau(min=0) = 1000 "Time constant for mixing";
   parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=1500 "Heat transfer coefficient at the inner wall";
