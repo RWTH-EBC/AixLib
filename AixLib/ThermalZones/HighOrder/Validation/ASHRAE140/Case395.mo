@@ -5,7 +5,13 @@ model Case395
     airExchange=0,
     ReferenceHeatingLoad( table=[395,4799,5835]),
     ReferenceCoolingLoad(table=[395,-18,0]));
-  annotation (Documentation(revisions="<html><ul>
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case395.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Documentation(revisions="<html><ul>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented

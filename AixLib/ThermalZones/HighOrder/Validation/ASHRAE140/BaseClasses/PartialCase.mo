@@ -99,7 +99,7 @@ partial model PartialCase "This is the base class from which the base cases will
   Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoad(tableOnFile=false,
       table=[600,4296,5709])
     "AnnualHeatingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualHeatingLoad, {3}=upperLimit AnnualHeatingLoad"
-    annotation (Placement(transformation(extent={{61,-87},{75,-73}})));
+    annotation (Placement(transformation(extent={{59,-87},{73,-73}})));
   BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECooling(checkTime=31536000) annotation (Placement(transformation(extent={{100,-67},{115,-52}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoad(tableOnFile=false,
       table=[600,-7964,-6137])
@@ -207,11 +207,11 @@ equation
     annotation (Line(points={{140,68},{130,68},{130,-36},{49,-36},{49,-90},{77,-90},{77,-85.85},{98.95,-85.85}},
                    color={0,0,127}));
   connect(ReferenceHeatingLoad.y[1], checkResultsAccordingToASHRAEHeating.lowerLimit)
-    annotation (Line(points={{75.7,-80},{84,-80},{84,-76},{93,-76},{93,-75.5},{98.95,-75.5}},
+    annotation (Line(points={{73.7,-80},{84,-80},{84,-76},{93,-76},{93,-75.5},{98.95,-75.5}},
                                                                     color={0,0,
           127}));
   connect(ReferenceHeatingLoad.y[2], checkResultsAccordingToASHRAEHeating.upperLimit)
-    annotation (Line(points={{75.7,-80},{80,-80},{80,-81},{86,-81},{86,-78.5},{98.95,-78.5}},
+    annotation (Line(points={{73.7,-80},{80,-80},{80,-81},{86,-81},{86,-78.5},{98.95,-78.5}},
                                                                     color={0,0,
           127}));
   connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECooling.modelResults)

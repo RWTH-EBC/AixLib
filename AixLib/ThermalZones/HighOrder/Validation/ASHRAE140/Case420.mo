@@ -4,7 +4,13 @@ model Case420
     internalGains=200,
     ReferenceCoolingLoad(table=[420,-189,-11]),
     ReferenceHeatingLoad(table=[420,7298,9151]));
-  annotation (Documentation(revisions="<html><ul>
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case420.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Documentation(revisions="<html><ul>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented

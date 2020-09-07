@@ -4,7 +4,13 @@ model Case210
     wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases_eps01(),
     ReferenceCoolingLoad(table=[210,-668,-162]),
     ReferenceHeatingLoad(table=[210,6456,6967]));
-  annotation (Documentation(info="<html><p>
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case210.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+        Documentation(info="<html><p>
   As described in ASHRAE Standard 140.
 </p>
 <p>

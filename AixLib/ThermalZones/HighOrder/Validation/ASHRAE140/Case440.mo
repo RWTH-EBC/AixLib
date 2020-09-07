@@ -4,7 +4,13 @@ model Case440
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs01,
     ReferenceCoolingLoad(table=[440,-5204,-3967]),
     ReferenceHeatingLoad(table=[440,4449,5811]));
-  annotation (Documentation(revisions="<html><ul>
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case440.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Documentation(revisions="<html><ul>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented

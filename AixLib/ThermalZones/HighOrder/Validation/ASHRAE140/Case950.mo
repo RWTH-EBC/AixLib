@@ -3,7 +3,13 @@ model Case950
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650(wallTypes=
         AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),
       ReferenceCoolingLoad(table=[950,-921,-387]));
-  annotation (Documentation(info="<html><p>
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case950.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Documentation(info="<html><p>
   As described in ASHRAE Standard 140.
 </p>
 <p>

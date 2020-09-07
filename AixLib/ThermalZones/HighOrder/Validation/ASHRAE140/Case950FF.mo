@@ -5,7 +5,13 @@ model Case950FF
     ReferenceTempMax(table=[900,35.5,38.5]),
     ReferenceTempMin(table=[900,-20.2,-18.6]),
     checkResultsAccordingToASHRAEHeating(checkTime=21135600));
-  annotation (Documentation(info="<html><p>
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case950FF.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Documentation(info="<html><p>
   As described in ASHRAE Standard 140.
 </p>
 <p>

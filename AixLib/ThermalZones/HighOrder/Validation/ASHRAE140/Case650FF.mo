@@ -270,7 +270,13 @@ equation
   connect(FreeFloatRoomTemperature, checkResultsAccordingToASHRAECooling.modelResults)
     annotation (Line(points={{121,55},{129,55},{129,90},{-15,90},{-15,73.15},{3.95,
           73.15}},color={0,0,127}));
-  annotation (Diagram(coordinateSystem(
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case650FF.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Diagram(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1}), graphics={
@@ -348,8 +354,6 @@ equation
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1})),
-    experiment(Tolerance=1e-6, StopTime=31536000),
-    __Dymola_experimentSetupOutput,
     Documentation(revisions="<html><ul>
   <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
     updated

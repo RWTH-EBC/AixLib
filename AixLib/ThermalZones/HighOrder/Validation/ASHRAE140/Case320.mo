@@ -5,7 +5,13 @@ model Case320
     TsetCooler=27,
     ReferenceHeatingLoad(table=[320,3859,5141]),
     ReferenceCoolingLoad(table=[320,-7304,-5061]));
-  annotation (Documentation(revisions="<html><ul>
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case320.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Documentation(revisions="<html><ul>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented

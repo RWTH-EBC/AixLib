@@ -334,7 +334,13 @@ equation
           127}));
   connect(Source_TsetHeat.y[1], idealHeaterCooler.setPointHeat) annotation (
       Line(points={{9.35,-75.5},{-2.8,-75.5},{-2.8,-62.2}}, color={0,0,127}));
-  annotation (Diagram(coordinateSystem(
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case640.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Diagram(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1}), graphics={
@@ -412,8 +418,6 @@ equation
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1})),
-    experiment(Tolerance=1e-6, StopTime=31536000),
-    __Dymola_experimentSetupOutput,
     Documentation(revisions="<html><ul>
   <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
     updated

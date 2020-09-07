@@ -335,7 +335,13 @@ equation
     annotation (Line(points={{-21.3,78},{-7,78},{-7,80.5},{3.95,80.5}},
                                                                     color={0,0,
           127}));
-  annotation (Diagram(coordinateSystem(
+  annotation (
+    experiment(StopTime=31539600, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case600.mos"
+        "Simulate and plot"),
+    __Dymola_experimentSetupOutput(events=true),
+Diagram(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1}), graphics={
@@ -413,11 +419,6 @@ equation
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1})),
-    experiment(StopTime=31539600, Tolerance=1e-06),
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/ASHRAE140/Case600.mos"
-        "Simulate and plot"),
-    __Dymola_experimentSetupOutput(events=true),
     Documentation(revisions="<html><ul>
   <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
     updated
