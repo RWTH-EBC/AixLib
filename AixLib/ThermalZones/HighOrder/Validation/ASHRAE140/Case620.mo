@@ -418,9 +418,7 @@ equation
         grid={1,1})),
     experiment(
       StopTime=31536000,
-      Tolerance=1e-06,
-      __Dymola_Algorithm="Dassl"),
-    __Dymola_experimentSetupOutput(events=true),
+      Tolerance=1e-06),
     Documentation(revisions="<html><ul>
   <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
     updated

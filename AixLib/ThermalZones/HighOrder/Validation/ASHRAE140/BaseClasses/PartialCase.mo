@@ -328,7 +328,7 @@ equation
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
         grid={1,1})),
-    experiment(Tolerance=1e-6, StopTime=31536000),
+    experiment(Tolerance=1e-6, StopTime=31539600),
     __Dymola_experimentSetupOutput(events=true),
     Documentation(revisions="<html><ul>
   <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
