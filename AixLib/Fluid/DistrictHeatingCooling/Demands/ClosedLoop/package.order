@@ -13,5 +13,8 @@ ValveControlledHeatPump
 ValveControlledHX
 ValveControlledHeatPumpFixDeltaT
 PumpControlledHeatPumpFixDeltaT
+PumpControlledwithHP_v4_ze_jonas
+PumpControlledwithHP_V4
+PumpControlledwithHP_v4_ze
 BaseClasses
 SubstationDirectCooling
