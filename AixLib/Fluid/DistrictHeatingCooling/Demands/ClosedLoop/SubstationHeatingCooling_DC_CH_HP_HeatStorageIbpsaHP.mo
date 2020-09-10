@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
-model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirctional low-temperature networks for buildings with 
+model SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHP "Substation model for bidirctional low-temperature networks for buildings with 
   heat pump, decentral heat storage, direct cooling and chiller."
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
@@ -21,7 +21,7 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
     parameter Modelica.SIunits.Temperature T_coolingSupplySet "Supply Temperature of buildings cooling system, limit value for direct cooling system";
     parameter Modelica.SIunits.TemperatureDifference deltaT_coolingSet "Set temperature difference for cooling on the building site";
 
-    parameter Modelica.SIunits.Volume VTan=heatDemand_max/(cp_default * rho * deltaT_heatingSet)*(3600) "Tank volume (default: discharge 1 h with max heat demand)";
+    parameter Modelica.SIunits.Volume VTan=heatDemand_max/(cp_default * rho * deltaT_heatingSet)*(2*3600) "Tank volume (default: discharge 1 h with max heat demand)";
     parameter Modelica.SIunits.Temperature T_storage_max "Max. Storage Temperatur for charging";
     parameter Modelica.SIunits.Temperature T_storage_min "Min. Storage Temperatur for discharging";
 
@@ -31,7 +31,7 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
 
   Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")
     "Supply temperatur of cooling circuit in the building" annotation (
-      Placement(transformation(extent={{698,200},{658,240}}),
+      Placement(transformation(extent={{696,218},{656,258}}),
         iconTransformation(extent={{-322,-216},{-260,-154}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit="W")
     "Input for cooling demand profile of substation" annotation (Placement(
@@ -43,23 +43,23 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
       Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
-        origin={680,134}),   iconTransformation(extent={{-324,-434},{-258,-368}})));
+        origin={680,94}),    iconTransformation(extent={{-324,-434},{-258,-368}})));
   Modelica.Blocks.Interfaces.RealInput FreeElectricity(unit="W")
     "Amount of available electricity in W"             annotation (Placement(
         transformation(
         extent={{20,20},{-20,-20}},
         rotation=180,
-        origin={-278,-360}), iconTransformation(extent={{720,-388},{660,-328}})));
+        origin={-282,-354}), iconTransformation(extent={{720,-388},{660,-328}})));
   Modelica.Blocks.Interfaces.RealInput deltaT_heatingGridSet(unit="K")
     "Set temperature difference for heating on the site of thermal network"
                                                           annotation (
       Placement(transformation(
         extent={{20,20},{-20,-20}},
         rotation=180,
-        origin={-280,-614}), iconTransformation(extent={{716,-20},{656,40}})));
+        origin={-280,-536}), iconTransformation(extent={{716,-20},{656,40}})));
   Modelica.Blocks.Interfaces.RealInput heatDemand(unit="W")
     "Input for heat demand profile of substation"
-    annotation (Placement(transformation(extent={{-300,-672},{-260,-632}}),
+    annotation (Placement(transformation(extent={{-296,-672},{-256,-632}}),
         iconTransformation(extent={{716,48},{660,104}})));
   BaseClasses.SubstationStorageHeating                                   substationStorageHeating(
     T_min(displayUnit="K") = T_storage_min,
@@ -70,13 +70,16 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
     VTan=VTan)
     annotation (Placement(transformation(extent={{238,-312},{326,-248}})));
 public
-  BaseClasses.heatPump_simple heatPump(
-    redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    eta_car=0.55,
-    Capacity=2*heatDemand_max,
-    T_max_storage=T_storage_max)
-    annotation (Placement(transformation(extent={{82,-176},{146,-110}})));
+  HeatPumps.Carnot_TCon       heatPump(
+    redeclare package Medium1 = Medium,
+    redeclare package Medium2 = Medium,
+    QCon_flow_nominal=heatDemand_max,
+    use_eta_Carnot_nominal=true,
+    etaCarnot_nominal=0.55,
+    dp1_nominal=dp_nominal,
+    dp2_nominal=dp_nominal,
+    QCon_flow_max=heatDemand_max)
+    annotation (Placement(transformation(extent={{146,-112},{82,-178}})));
   Chillers.Carnot_TEva              chi(
     redeclare package Medium1 = Medium,
     QEva_flow_nominal=coolingDemand_max,
@@ -102,7 +105,7 @@ public
     T_storage_max=T_storage_max,
     deltaT_heatingSet=deltaT_heatingSet,
     m_flow_nominal=m_flow_nominal,
-    capacity=heatPump.Capacity)
+    capacity=heatPump.QCon_flow_nominal)
     annotation (Placement(transformation(extent={{-12,-430},{70,-358}})));
   Sensors.MassFlowRate              senMasFlo_he_in(redeclare package Medium =
         Medium, allowFlowReversal=true)
@@ -156,19 +159,6 @@ public
     annotation (Placement(transformation(extent={{394,-668},{414,-648}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=3600)
     annotation (Placement(transformation(extent={{340,-668},{360,-648}})));
-  FixedResistances.Junction              jun_heatsink(
-    portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Entering,
-    portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Leaving,
-    portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
-    m_flow_nominal=max(m_flow_nominal_heating)*{1,1,1},
-    dp_nominal={0,dp_nominal,dp_nominal},
-    verifyFlowReversal=false,
-    T_start=328.15,
-    redeclare package Medium = Medium,
-    tau=10)
-    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
-        rotation=90,
-        origin={-106,-298})));
   Sensors.TemperatureTwoPort              senTem_Storage_top(
     m_flow_nominal=m_flow_nominal_heating,
     T_start(displayUnit="K") = Medium.T_default,
@@ -179,19 +169,6 @@ public
         deltaT_heatingSet)
     "Setelaving temperature of heat exchanger (return temperature of buildings heating system) "
     annotation (Placement(transformation(extent={{182,-270},{198,-254}})));
-  FixedResistances.Junction              jun_heatsink1(
-    portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Entering,
-    portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Leaving,
-    portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
-    m_flow_nominal=max(m_flow_nominal_heating)*{1,1,1},
-    dp_nominal={0,dp_nominal,dp_nominal},
-    verifyFlowReversal=false,
-    T_start=Medium.T_default,
-    redeclare package Medium = Medium,
-    tau=10)
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
-        rotation=90,
-        origin={574,-298})));
   Sources.Boundary_pT              sinkHeating(
     redeclare package Medium = Medium,
     use_T_in=false,
@@ -224,7 +201,7 @@ public
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     y_start=T_heatingSupplySet,
     f=1/60)
-    annotation (Placement(transformation(extent={{120,-210},{100,-190}})));
+    annotation (Placement(transformation(extent={{236,-210},{216,-190}})));
     Modelica.Blocks.Sources.RealExpression Temp_SupplyHeatingSet_HeatEx(y=
         T_heatingSupplySet)
     annotation (Placement(transformation(extent={{340,-226},{320,-206}})));
@@ -239,7 +216,7 @@ public
     redeclare package Medium = Medium,
     allowFlowReversal=true,
     tau=1)
-    annotation (Placement(transformation(extent={{12,-176},{-14,-148}})));
+    annotation (Placement(transformation(extent={{22,-176},{-4,-148}})));
   Sensors.MassFlowRate              senMasFlo_hp_in(redeclare package Medium =
         Medium, allowFlowReversal=true)
     annotation (Placement(transformation(extent={{452,-172},{432,-152}})));
@@ -491,6 +468,23 @@ public
         origin={136,-652})));
   Modelica.Blocks.Math.Gain gain(k=-1)
     annotation (Placement(transformation(extent={{44,-662},{64,-642}})));
+  Modelica.Blocks.MathBoolean.OnDelay onDelay(delayTime=60)
+    annotation (Placement(transformation(extent={{370,-206},{356,-192}})));
+  Delays.DelayFirstOrder              vol3(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    tau=60,
+    nPorts=3,
+    T_start=T_heatingSupplySet)
+             annotation (Placement(transformation(extent={{-82,-302},{-62,-282}})));
+  Delays.DelayFirstOrder              vol4(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    tau=60,
+    nPorts=3)
+             annotation (Placement(transformation(extent={{560,-300},{580,-280}})));
+  Modelica.Blocks.Continuous.CriticalDamping criticalDamping2(f=1/60)
+    annotation (Placement(transformation(extent={{206,246},{226,266}})));
 protected
   Modelica.Blocks.Sources.RealExpression heatPump_COP(y=heatPump.COP)
     annotation (Placement(transformation(extent={{-94,-398},{-74,-378}})));
@@ -503,7 +497,8 @@ protected
         substationStorageHeating.TBot.T) "Storage temperature at bottom layer"
     annotation (Placement(transformation(extent={{-94,-426},{-74,-406}})));
 protected
-  Modelica.Blocks.Sources.RealExpression heatPump_COP_char(y=heatPump.COP_charging)
+  Modelica.Blocks.Sources.RealExpression heatPump_COP_char(y=heatPump.etaCarnot_nominal
+        *((T_storage_max + 2)/((T_storage_max + 2) - (senTem_HP_out1.T - 2))))
     annotation (Placement(transformation(extent={{-94,-382},{-74,-362}})));
 protected
   Modelica.Blocks.Sources.RealExpression chiller_power(y=chi.P)
@@ -523,19 +518,19 @@ protected
     annotation (Placement(transformation(extent={{-168,90},{-188,110}})));
 protected
   Modelica.Blocks.Sources.RealExpression m_flow_gridPumpHeating(y=max(0, -
-        heatPump.prescribedHeatFlow1.Q_flow/(4180*deltaT_heatingGridSet)))
+        heatPump.QEva_flow/(4180*deltaT_heatingGridSet)))
     "Input of mass flow for heating grid pump"
     annotation (Placement(transformation(extent={{-80,-190},{-60,-170}})));
 equation
 
-  renewablePowerConsumptionSubstation = min(chi.P + heatPump.P_el, FreeElectricity);
+  renewablePowerConsumptionSubstation = min(chi.P + heatPump.P, FreeElectricity);
 
   //Power Consumptin Calculation
   connect(chi.P, sum.u[1]);
-  connect(heatPump.P_el, sum.u[2]);
+  connect(heatPump.P, sum.u[2]);
 
   connect(FreeElectricity,massFlowControllerHeating. P_renewable) annotation (
-     Line(points={{-278,-360},{-52,-360},{-52,-360.4},{-13.968,-360.4}},
+     Line(points={{-282,-354},{-52,-354},{-52,-360.4},{-13.968,-360.4}},
         color={0,0,127}));
   connect(heatPump_COP.y,massFlowControllerHeating. COP) annotation (Line(
         points={{-73,-388},{-64,-388},{-64,-373.6},{-13.558,-373.6}}, color={0,0,
@@ -544,14 +539,14 @@ equation
       Line(points={{-73,-430},{-50,-430},{-50,-395.385},{-13.722,-395.385}},
         color={0,0,127}));
   connect(heatDemand,massFlowControllerHeating. heat_Demand) annotation (Line(
-        points={{-280,-652},{-30,-652},{-30,-425.477},{-13.722,-425.477}},
+        points={{-276,-652},{-30,-652},{-30,-425.477},{-13.722,-425.477}},
         color={0,0,127}));
   connect(storage_T_Bot.y,massFlowControllerHeating. T_storageBottom)
     annotation (Line(points={{-73,-416},{-54,-416},{-54,-386.154},{-13.722,
           -386.154}},
         color={0,0,127}));
   connect(deltaT_heatingGridSet,massFlowControllerHeating. deltaT_grid)
-    annotation (Line(points={{-280,-614},{-36,-614},{-36,-417.354},{-13.558,
+    annotation (Line(points={{-280,-536},{-36,-536},{-36,-417.354},{-13.558,
           -417.354}}, color={0,0,127}));
   connect(heatPump_COP_char.y,massFlowControllerHeating. COP_charging)
     annotation (Line(points={{-73,-372},{-68,-372},{-68,-366.585},{-13.886,
@@ -585,10 +580,6 @@ equation
         color={0,127,255}));
   connect(senTem_HE_heat_out.port_a, pumpHeating.port_b) annotation (Line(
         points={{276,-594},{352,-594},{352,-594},{430,-594}}, color={0,127,255}));
-  connect(jun_heatsink.port_2, senMasFlo_he_in.port_b) annotation (Line(points={
-          {-106,-308},{-106,-594},{48,-594}}, color={0,127,255}));
-  connect(jun_heatsink.port_3, senTem_Storage_top.port_b)
-    annotation (Line(points={{-96,-298},{-30,-298}}, color={0,127,255}));
   connect(senTem_Storage_top.port_a, substationStorageHeating.port_a)
     annotation (Line(points={{4,-298},{122,-298},{122,-298.162},{238,-298.162}},
         color={0,127,255}));
@@ -596,12 +587,6 @@ equation
     annotation (Line(points={{198.8,-262},{218,-262},{218,-261.838},{234.975,
           -261.838}},
         color={0,0,127}));
-  connect(pumpHeating.port_a, jun_heatsink1.port_1) annotation (Line(points={{462,
-          -594},{574,-594},{574,-308}}, color={0,127,255}));
-  connect(sinkHeating.ports[1], jun_heatsink1.port_1) annotation (Line(points={{
-          616,-340},{574,-340},{574,-308}}, color={0,127,255}));
-  connect(pumpStorage.port_a, jun_heatsink1.port_3)
-    annotation (Line(points={{528,-298},{564,-298}}, color={0,127,255}));
   connect(senTem_Storage_bottom.port_a, pumpStorage.port_b)
     annotation (Line(points={{460,-298},{494,-298}}, color={0,127,255}));
   connect(senMasFlo_sinkStorage.port_b, senTem_Storage_bottom.port_b)
@@ -615,34 +600,17 @@ equation
         points={{319,-184},{308,-184},{308,-192},{296,-192}}, color={0,0,127}));
   connect(Temp_SupplyHeatingSet_HeatEx.y,switch1. u3) annotation (Line(points=
          {{319,-216},{306,-216},{306,-208},{296,-208}}, color={0,0,127}));
-  connect(massFlowControllerHeating.Charging, switch1.u2) annotation (Line(
-        points={{60.57,-367.138},{360,-367.138},{360,-200},{296,-200}}, color={255,
-          0,255}));
-  connect(criticalDamping.u, switch1.y) annotation (Line(points={{122,-200},{196,
-          -200},{196,-200},{273,-200}}, color={0,0,127}));
-  connect(criticalDamping.y, heatPump.T_set_outlet) annotation (Line(points={{99,
-          -200},{22,-200},{22,-110.66},{78.16,-110.66}}, color={0,0,127}));
   connect(massFlowControllerHeating.m_flow_storage, pumpStorage.m_flow_in)
     annotation (Line(points={{60.734,-397.231},{511,-397.231},{511,-319.6}},
         color={0,0,127}));
-  connect(senTem_HP_out.port_a, heatPump.port_b2) annotation (Line(points={{12,-162},
-          {44,-162},{44,-162.8},{82,-162.8}}, color={0,127,255}));
-  connect(jun_heatsink.port_1, senTem_HP_out.port_b) annotation (Line(points={{-106,
-          -288},{-106,-162},{-14,-162}}, color={0,127,255}));
-  connect(heatPump.port_a2, senMasFlo_hp_in.port_b) annotation (Line(points={{146,
-          -162.8},{288,-162.8},{288,-162},{432,-162}}, color={0,127,255}));
   connect(senMasFlo_hp_in.port_a, senTem_HP_in.port_b)
     annotation (Line(points={{452,-162},{496,-162}}, color={0,127,255}));
-  connect(senTem_HP_in.port_a, jun_heatsink1.port_2) annotation (Line(points={{516,
-          -162},{574,-162},{574,-288}}, color={0,127,255}));
   connect(senMasFlo_GridHeat.port_b, jun.port_1) annotation (Line(points={{-184,
           -60},{-176,-60},{-176,-60},{-166,-60}}, color={0,127,255}));
   connect(jun.port_2, senMasFlo_HeatPump.port_a) annotation (Line(points={{-146,
           -60},{-126,-60},{-126,-122},{-88,-122}}, color={0,127,255}));
   connect(senMasFlo_HeatPump.port_b, pumpHeatingGrid.port_a) annotation (Line(
         points={{-68,-122},{-62,-122},{-62,-123},{-54,-123}}, color={0,127,255}));
-  connect(pumpHeatingGrid.port_b, heatPump.port_a1) annotation (Line(points={{-24,
-          -123},{28,-123},{28,-123.2},{82,-123.2}}, color={0,127,255}));
   connect(jun.port_3, senTem_DC_in1.port_b) annotation (Line(points={{-156,-50},
           {-154,-50},{-154,-8},{-118,-8}}, color={0,127,255}));
   connect(senTem_DC_in1.port_a, jun_DC1.port_2) annotation (Line(points={{-98,-8},
@@ -659,8 +627,6 @@ equation
     annotation (Line(points={{580,-58},{596,-58}}, color={0,127,255}));
   connect(const1.y,add2. u2) annotation (Line(points={{277,222},{303.5,222},{
           303.5,232},{328,232}}, color={0,0,127}));
-  connect(senTem_DC_in2.T, add2.u1)
-    annotation (Line(points={{168,221},{168,244},{328,244}}, color={0,0,127}));
   connect(add2.y, massFlowControllerCooling.T_HE_Cooling_out) annotation (Line(
         points={{351,238},{596,238},{596,143.844},{558.72,143.844}}, color={0,0,
           127}));
@@ -670,12 +636,8 @@ equation
     annotation (Line(points={{-221,164},{-270,164}}, color={0,0,127}));
   connect(PEle1.y,P_max_HP)  annotation (Line(points={{-189,100},{-226,100},{-226,
           123},{-269,123}}, color={0,0,127}));
-  connect(heatPump.P_el, powerConsumptionHP) annotation (Line(points={{148.56,-110.66},
-          {188,-110.66},{188,-70},{-90,-70},{-90,230},{-268,230}}, color={0,0,127}));
   connect(chi.P, powerConsumptionChiller) annotation (Line(points={{82.8,50},{36,
           50},{36,62},{-120,62},{-120,206},{-270,206},{-270,204}}, color={0,0,127}));
-  connect(heatPump.port_b1, senTem_HP_out1.port_a) annotation (Line(points={{146,
-          -123.2},{178,-123.2},{178,-122},{212,-122}}, color={0,127,255}));
   connect(prescribedHeatFlow.port, vol2.heatPort)
     annotation (Line(points={{102,256},{102,218},{106,218}}, color={191,0,0}));
   connect(jun_DC2.port_1, senTem_HE_Cooling_out.port_b)
@@ -728,10 +690,10 @@ equation
         color={0,0,127}));
   connect(massFlowControllerCooling.deltaT_CoolingGridSet,
     deltaT_coolingGridSet) annotation (Line(points={{558.88,161.422},{622,
-          161.422},{622,134},{680,134}},
+          161.422},{622,94},{680,94}},
                                 color={0,0,127}));
   connect(massFlowControllerCooling.T_supplyCoolingSet, T_supplyCoolingSet)
-    annotation (Line(points={{558.56,134.356},{608,134.356},{608,220},{678,220}},
+    annotation (Line(points={{558.56,134.356},{608,134.356},{608,238},{676,238}},
         color={0,0,127}));
   connect(pumpCooling.m_flow_in, massFlowControllerCooling.m_chiller)
     annotation (Line(points={{234,6.8},{234,180},{473.76,180},{473.76,179.467}},
@@ -747,9 +709,47 @@ equation
   connect(prescribedHeatFlow1.port, heatExchanger_heating.heatPort) annotation (
      Line(points={{146,-652},{208,-652},{208,-604},{218,-604}}, color={191,0,0}));
   connect(heatDemand, gain.u)
-    annotation (Line(points={{-280,-652},{42,-652}}, color={0,0,127}));
+    annotation (Line(points={{-276,-652},{42,-652}}, color={0,0,127}));
   connect(gain.y, prescribedHeatFlow1.Q_flow)
     annotation (Line(points={{65,-652},{126,-652}}, color={0,0,127}));
+  connect(senTem_HP_out.port_a, heatPump.port_b1) annotation (Line(points={{22,-162},
+          {52,-162},{52,-164.8},{82,-164.8}}, color={0,127,255}));
+  connect(heatPump.port_a1, senMasFlo_hp_in.port_b) annotation (Line(points={{146,
+          -164.8},{216,-164.8},{216,-162},{432,-162}}, color={0,127,255}));
+  connect(heatPump.port_b2, senTem_HP_out1.port_a) annotation (Line(points={{146,
+          -125.2},{178,-125.2},{178,-122},{212,-122}}, color={0,127,255}));
+  connect(pumpHeatingGrid.port_b, heatPump.port_a2) annotation (Line(points={{-24,
+          -123},{29,-123},{29,-125.2},{82,-125.2}}, color={0,127,255}));
+  connect(heatPump.TSet, criticalDamping.y) annotation (Line(points={{152.4,-174.7},
+          {188,-174.7},{188,-200},{215,-200}}, color={0,0,127}));
+  connect(criticalDamping.u, switch1.y)
+    annotation (Line(points={{238,-200},{273,-200}}, color={0,0,127}));
+  connect(switch1.u2, onDelay.y) annotation (Line(points={{296,-200},{326,-200},
+          {326,-199},{354.6,-199}}, color={255,0,255}));
+  connect(massFlowControllerHeating.Charging, onDelay.u) annotation (Line(
+        points={{60.57,-367.138},{408,-367.138},{408,-199},{372.8,-199}}, color=
+         {255,0,255}));
+  connect(senTem_HP_out.port_b, vol3.ports[1]) annotation (Line(points={{-4,-162},
+          {-4,-302},{-74.6667,-302}}, color={0,127,255}));
+  connect(senTem_Storage_top.port_b, vol3.ports[2]) annotation (Line(points={{-30,
+          -298},{-52,-298},{-52,-302},{-72,-302}}, color={0,127,255}));
+  connect(vol3.ports[3], senMasFlo_he_in.port_b) annotation (Line(points={{
+          -69.3333,-302},{-76,-302},{-76,-598},{48,-598},{48,-594}},
+                                                            color={0,127,255}));
+  connect(pumpStorage.port_a, vol4.ports[1]) annotation (Line(points={{528,-298},
+          {550,-298},{550,-300},{567.333,-300}}, color={0,127,255}));
+  connect(pumpHeating.port_a, vol4.ports[2]) annotation (Line(points={{462,-594},
+          {570,-594},{570,-300}}, color={0,127,255}));
+  connect(senTem_HP_in.port_a, vol4.ports[3]) annotation (Line(points={{516,
+          -162},{542,-162},{542,-300},{572.667,-300}},
+                                                 color={0,127,255}));
+  connect(sinkHeating.ports[1], pumpHeating.port_a) annotation (Line(points={{616,
+          -340},{592,-340},{592,-308},{570,-308},{570,-320},{462,-594}}, color={
+          0,127,255}));
+  connect(senTem_DC_in2.T, criticalDamping2.u)
+    annotation (Line(points={{168,221},{168,256},{204,256}}, color={0,0,127}));
+  connect(criticalDamping2.y, add2.u1) annotation (Line(points={{227,256},{318,256},
+          {318,250},{328,250},{328,244}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,-720},
             {660,300}}), graphics={
         Rectangle(
@@ -795,4 +795,4 @@ The mass flows are calculated using the heating and cooling demands and the spec
 Implemented </li>
 </ul>
 </html>"));
-end SubstationHeatingCooling_DC_CH_HP_HeatStorage;
+end SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHP;

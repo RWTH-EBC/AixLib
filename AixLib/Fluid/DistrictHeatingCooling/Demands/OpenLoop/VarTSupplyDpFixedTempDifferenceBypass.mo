@@ -47,11 +47,11 @@ public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-132,120},{-92,160}}),
         iconTransformation(extent={{-132,120},{-92,160}})));
-  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
-  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={80,0})));
