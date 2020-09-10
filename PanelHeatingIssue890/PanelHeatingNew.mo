@@ -3636,7 +3636,7 @@ Added documentation.</li>
           PanelHeatingNew.AddParameters.Insulating_Materials.PVCwithTrappedAir()
         "Insulating Material" annotation (Dialog(group="Panel Heating", enable=
               withInsulating), choicesAllMatching=true);
-      parameter Modelica.SIunits.Diameter d[RoomNo]( min = d_a) = d_a "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating", enable = withInsulating));
+      parameter Modelica.SIunits.Diameter d[RoomNo](min = d_a) = d_a "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating", enable = withInsulating));
 
       parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
       parameter Modelica.SIunits.VolumeFraction psi = 0 "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
@@ -3754,11 +3754,11 @@ Added documentation.</li>
         for x in 2:RoomNo loop
           for u in 1:CircuitNo[x] loop
             connect(distributor.flowPorts[(sum(CircuitNo[v] for v in 1:(x-1))+ u)], panelHeatingRoom[x].ports_a[u])
-        annotation (Line(points={{-24,18},{-24,34},{-2,34},{-2,-0.857143},{56,
-                    -0.857143}},                                             color={0,127,255}));
+        annotation (Line(points={{-24,18},{-24,34},{-2,34},{-2,-0.857143},{56,-0.857143}},
+                                                                             color={0,127,255}));
         connect(panelHeatingRoom[x].ports_b[u], distributor.returnPorts[(sum(CircuitNo[v] for v in 1:(x-1)) + u)])
-          annotation (Line(points={{84,-0.857143},{96,-0.857143},{96,-42},{-24,
-                    -42},{-24,-18.6}},                                              color={0,127,255}));
+          annotation (Line(points={{84,-0.857143},{96,-0.857143},{96,-42},{-24,-42},
+                    {-24,-18.6}},                                                   color={0,127,255}));
           end for;
               end for;
       end if;
@@ -3769,8 +3769,7 @@ Added documentation.</li>
                                           color={0,127,255}));
 
 
-      annotation (Icon(coordinateSystem(extent={{-160,-60},{100,40}},
-              initialScale=0.1),
+      annotation (Icon(coordinateSystem(extent={{-160,-60},{100,40}}, initialScale=0.1),
             graphics={
             Rectangle(
               extent={{-160,30},{100,-50}},
@@ -3891,11 +3890,8 @@ Added documentation.</li>
             Line(points={{-150,-16},{-136,-16},{-126,-16},{-126,-26},{-100,-26}},
                 color={28,108,200}),
             Line(points={{-146,-30},{-122,-30},{-122,-20}}, color={238,46,47}),
-
             Line(points={{-150,-44},{-126,-44},{-126,-26}}, color={28,108,200}),
-
-            Line(points={{-148,24},{-134,24},{-122,24},{-122,-4}}, color={238,
-                  46,47}),
+            Line(points={{-148,24},{-134,24},{-122,24},{-122,-4}}, color={238,46,47}),
             Line(points={{-148,10},{-126,10},{-126,-16}}, color={28,108,200}),
             Text(
               extent={{-56,12},{62,-2}},
@@ -4181,6 +4177,18 @@ Moreover, appropriate values shall be assigned to the following parameters:
 </ul>
 </html>"));
     end PartialModularPort_ab;
+
+    record CeilingDummy
+      extends AixLib.DataBase.Walls.WallBaseDataDefinition(
+      n(min=1) = 3 "Number of wall layers",
+        d={0,0,0} "Thickness of wall layers",
+        rho={0,0,0} "Density of wall layers",
+        lambda={0,0,0} "Thermal conductivity of wall layers",
+        c={0,0,0} "Specific heat capacity of wall layers",
+        eps=0 "Emissivity of inner wall surface");
+                                                            annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
+    end CeilingDummy;
 
     package ZoneSpecification
       "Choice for panel heating in what kind of zone the pipes lie"
@@ -6882,26 +6890,19 @@ Added documentation.</li>
           redeclare ZoneSpecification.OccupancyZone ZoneType,
           redeclare PipeMaterials.PBpipe PipeMaterial,
           RoomNo=3,
-          each T_U=fill(20 + 273.15, 3),
           PipeThickness=fill(0.005, 3),
           d_a=fill(0.022, 3),
           dis=fill(4, 3),
           Q_Nf={500,200,300},
           each A={20,5,10},
-          each Ceiling=fill(true, 3),
-          withInsulating=true,
-          redeclare Insulating_Materials.PVCwithTrappedAir InsulatingMaterial,
-          d=fill(0.025, 3),
-          withHoldingBurls=true,
-          psi=0.1,
-          lambda_W=1.2,
           Spacing=fill(0.1, 3),
-          wallTypeCeiling=fill(
-              AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_L_loHalf(),
-              3),
           wallTypeFloor=fill(
               AixLib.DataBase.Walls.EnEV2002.Floor.FLpartition_EnEV2002_L_upHalf(),
-              3))
+              3),
+          withHoldingBurls=false,
+          withInsulating=false,
+          each Ceiling=fill(false, 3),
+          wallTypeCeiling=fill(CeilingDummy(), 3))
           annotation (Placement(transformation(extent={{-62,0},{-6,22}})));
 
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureFloor
