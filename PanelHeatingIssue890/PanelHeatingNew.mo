@@ -3007,11 +3007,11 @@ Added documentation.</li>
         annotation (Placement(transformation(extent={{60,-6},{72,6}})));
 
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_floor
-        annotation (Placement(transformation(extent={{-10,32},{10,52}}),
-            iconTransformation(extent={{-10,30},{10,50}})));
+        annotation (Placement(transformation(extent={{-10,34},{10,54}}),
+            iconTransformation(extent={{-8,30},{8,46}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
-        annotation (Placement(transformation(extent={{-10,-48},{10,-28}}),
-            iconTransformation(extent={{-10,-48},{10,-28}})));
+        annotation (Placement(transformation(extent={{-12,-56},{8,-36}}),
+            iconTransformation(extent={{-8,-52},{8,-36}})));
       SumT_F sumT_Fm(dis=integer(dis))
         annotation (Placement(transformation(extent={{16,10},{28,22}})));
       Modelica.Blocks.Interaction.Show.RealValue T_Fm "arithmetic mean of floor surface temperature"
@@ -3068,10 +3068,10 @@ Added documentation.</li>
       end for;
 
         connect(thermalCollector1.port_b, heatport_floor)
-        annotation (Line(points={{0,34},{0,42}}, color={191,0,0}));
+        annotation (Line(points={{0,34},{0,44}}, color={191,0,0}));
 
       connect(thermalCollector2.port_b, heatport_ceiling)
-        annotation (Line(points={{0,-26},{0,-32},{0,-38},{0,-38}},
+        annotation (Line(points={{0,-26},{0,-36},{0,-46},{-2,-46}},
                                                    color={191,0,0}));
 
       //INNER CONNECTIONS
@@ -3086,15 +3086,15 @@ Added documentation.</li>
         end for;
       end if;
       annotation (Icon(coordinateSystem(preserveAspectRatio=false,
-            extent={{-100,-30},{100,35}},
+            extent={{-100,-40},{100,40}},
             initialScale=0.1), graphics={
             Rectangle(
-              extent={{-100,36},{100,14}},
+              extent={{-100,40},{100,14}},
               lineColor={200,200,200},
               fillColor={170,255,255},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{-100,14},{100,-30}},
+              extent={{-100,14},{100,-40}},
               lineColor={200,200,200},
               fillColor={150,150,150},
               fillPattern=FillPattern.Solid),
@@ -3210,7 +3210,7 @@ Added documentation.</li>
             Line(points={{80,10},{82,6},{80,10},{78,6}}, color={238,46,47})}),
                                                                      Diagram(
             coordinateSystem(preserveAspectRatio=false,
-            extent={{-100,-40},{100,40}},
+            extent={{-100,-45},{100,45}},
             initialScale=0.1)));
     end PanelHeatingCircuit;
 
@@ -3336,7 +3336,7 @@ Added documentation.</li>
         each m_flow_Circuit=m_flow_Circuit,
         each wallTypeFloor=wallTypeFloor,
         each wallTypeCeiling=wallTypeCeiling)
-        annotation (Placement(transformation(extent={{-22,-6},{22,8}})));
+        annotation (Placement(transformation(extent={{-22,-8},{22,8}})));
       EN1264.HeatFlux EN_1264(
         T_U=T_U,
         d_a=d_a,
@@ -3363,16 +3363,17 @@ Added documentation.</li>
         T=Spacing)
                annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_floor
-        annotation (Placement(transformation(extent={{-10,86},{10,106}}),
-            iconTransformation(extent={{-10,86},{10,106}})));
+        annotation (Placement(transformation(extent={{-10,50},{10,70}}),
+            iconTransformation(extent={{-10,50},{10,70}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling
-        annotation (Placement(transformation(extent={{-10,-108},{10,-88}})));
+        annotation (Placement(transformation(extent={{-10,-90},{10,-70}}),
+            iconTransformation(extent={{-10,-90},{10,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector2(m=
             CircuitNo)
-        annotation (Placement(transformation(extent={{-10,-64},{10,-44}})));
+        annotation (Placement(transformation(extent={{-10,-58},{10,-38}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector1(m=
            CircuitNo)
-        annotation (Placement(transformation(extent={{-10,70},{10,50}})));
+        annotation (Placement(transformation(extent={{-10,40},{10,20}})));
     equation
       assert(q_Gmax > q_G, "Panel Heating Parameters evaluate to a limiting heat flux that exceeds the maximum limiting heat flux according to the Zone Type",AssertionLevel.warning);
 
@@ -3380,11 +3381,11 @@ Added documentation.</li>
 
        for i in 1:CircuitNo loop
         connect(panelHeatingCircuit[i].port_b, ports_b[i]) annotation (Line(
-              points={{22,0.461538},{66,0.461538},{66,0},{100,0}}, color={0,127,
+              points={{22,0},{100,0}},                             color={0,127,
                 255}));
 
         connect(ports_a[i], panelHeatingCircuit[i].port_a) annotation (Line(
-              points={{-100,0},{-66,0},{-66,0.461538},{-22,0.461538}}, color={0,
+              points={{-100,0},{-22,0}},                               color={0,
                 127,255}));
        end for;
 
@@ -3394,18 +3395,18 @@ Added documentation.</li>
 
       for i in 1:CircuitNo loop
         connect(panelHeatingCircuit[i].heatport_ceiling, thermalCollector2.port_a[
-        i]) annotation (Line(points={{0,-7.72308},{0,-44}}, color={191,0,0}));
+        i]) annotation (Line(points={{0,-8.8},{0,-38}},     color={191,0,0}));
 
         connect(thermalCollector1.port_a[i], panelHeatingCircuit[i].heatport_floor)
-          annotation (Line(points={{0,50},{0,9.07692}}, color={191,0,0}));
+          annotation (Line(points={{0,20},{0,7.6}},     color={191,0,0}));
 
         end for;
 
       connect(thermalCollector2.port_b, heatport_ceiling)
-        annotation (Line(points={{0,-64},{0,-98}}, color={191,0,0}));
+        annotation (Line(points={{0,-58},{0,-80}}, color={191,0,0}));
 
       connect(heatport_floor, thermalCollector1.port_b)
-        annotation (Line(points={{0,96},{0,70}}, color={191,0,0}));
+        annotation (Line(points={{0,60},{0,40}}, color={191,0,0}));
 
 
       // INNER CONNECTIONS
@@ -3413,124 +3414,162 @@ Added documentation.</li>
 
                                                                                                                                        annotation (Dialog(group="Panel Heating", enable=
              withInsulating), choicesAllMatching=true,
-                  Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+                  Icon(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-80},{100,60}}),                               graphics={
             Rectangle(
-              extent={{-100,100},{102,-100}},
+              extent={{-100,-62},{100,-70}},
               lineColor={0,0,0},
-              fillColor={170,213,255},
-              fillPattern=FillPattern.Solid),
+              fillColor={215,215,215},
+              fillPattern=FillPattern.CrossDiag),
             Ellipse(
-              extent={{60,2},{74,-8}},
+              extent={{268,2},{282,-8}},
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Polygon(
-              points={{-60,40},{-40,40},{-34,20},{-66,20},{-60,40}},
+              points={{148,40},{168,40},{174,20},{142,20},{148,40}},
               lineColor={0,0,0},
               fillColor={255,255,85},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-20,0},{-6,-10}},
+              extent={{188,0},{202,-10}},
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
-            Line(points={{-50,20},{-50,-40}}, color={0,0,0}),
-            Line(points={{-60,-40},{-40,-40}}, color={0,0,0}),
+            Line(points={{158,20},{158,-40}}, color={0,0,0}),
+            Line(points={{148,-40},{168,-40}}, color={0,0,0}),
             Rectangle(
-              extent={{60,-4},{74,-40}},
+              extent={{268,-4},{282,-40}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{-6,-14},{60,-40}},
+              extent={{202,-14},{268,-40}},
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-6,14},{60,-2}},
+              extent={{202,14},{268,-2}},
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{-6,6},{60,-14}},
+              extent={{202,6},{268,-14}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{-20,-6},{-6,-40}},
+              extent={{188,-6},{202,-40}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
-            Line(points={{-6,6},{-6,-40}}, color={0,0,0}),
-            Line(points={{60,6},{60,-16}}, color={0,0,0}),
-            Line(points={{-6,-16},{60,-16}}, color={0,0,0}),
-            Line(points={{-20,-6},{-20,-40}}, color={0,0,0}),
-            Line(points={{74,-4},{74,-40}}, color={0,0,0}),
-            Line(points={{-20,-40},{74,-40}}, color={0,0,0}),
+            Line(points={{202,6},{202,-40}},
+                                           color={0,0,0}),
+            Line(points={{268,6},{268,-16}},
+                                           color={0,0,0}),
+            Line(points={{202,-16},{268,-16}},
+                                             color={0,0,0}),
+            Line(points={{188,-6},{188,-40}}, color={0,0,0}),
+            Line(points={{282,-4},{282,-40}},
+                                            color={0,0,0}),
+            Line(points={{188,-40},{282,-40}},color={0,0,0}),
             Rectangle(
-              extent={{12,0},{16,-4}},
+              extent={{220,0},{224,-4}},
               lineColor={0,0,0},
               fillColor={0,0,0},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{24,0},{28,-4}},
+              extent={{232,0},{236,-4}},
               lineColor={0,0,0},
               fillColor={0,0,0},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{36,0},{40,-4}},
+              extent={{244,0},{248,-4}},
               lineColor={0,0,0},
               fillColor={0,0,0},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{-100,-50},{102,-66}},
-              lineColor={162,29,33},
-              fillColor={162,29,33},
-              fillPattern=FillPattern.Solid),
+              extent={{-100,42},{100,-10}},
+              lineColor={0,0,0},
+              fillColor={215,215,215},
+              fillPattern=FillPattern.Forward),
             Ellipse(
-              extent={{-90,-54},{-82,-62}},
-              lineColor={28,108,200},
+              extent={{-86,6},{-76,-4}},
+              lineColor={175,175,175},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-66,-54},{-58,-62}},
-              lineColor={28,108,200},
+              extent={{-66,6},{-56,-4}},
+              lineColor={175,175,175},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-42,-54},{-34,-62}},
-              lineColor={28,108,200},
+              extent={{-46,6},{-36,-4}},
+              lineColor={175,175,175},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-18,-54},{-10,-62}},
-              lineColor={28,108,200},
+              extent={{-26,6},{-16,-4}},
+              lineColor={175,175,175},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{6,-54},{14,-62}},
-              lineColor={28,108,200},
+              extent={{-6,6},{4,-4}},
+              lineColor={175,175,175},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{32,-54},{40,-62}},
-              lineColor={28,108,200},
+              extent={{14,6},{24,-4}},
+              lineColor={175,175,175},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{56,-54},{64,-62}},
-              lineColor={28,108,200},
+              extent={{34,6},{44,-4}},
+              lineColor={175,175,175},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{80,-54},{88,-62}},
-              lineColor={28,108,200},
+              extent={{54,6},{64,-4}},
+              lineColor={175,175,175},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
-            Line(points={{0,-70},{0,-84},{0,-86},{-4,-78},{0,-86},{4,-78}},
-                color={162,29,33}),
-            Line(points={{0,50},{0,74},{0,76},{-4,68},{0,76},{4,68}}, color={
-                  162,29,33})}),                                     Diagram(coordinateSystem(preserveAspectRatio=false)));
+            Ellipse(
+              extent={{74,6},{84,-4}},
+              lineColor={175,175,175},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-100,50},{100,42}},
+              lineColor={0,0,0},
+              fillColor={215,215,215},
+              fillPattern=FillPattern.CrossDiag),
+            Rectangle(
+              extent={{-100,-10},{100,-48}},
+              lineColor={0,0,0},
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Backward),
+            Rectangle(
+              extent={{-100,-48},{100,-62}},
+              lineColor={0,0,0},
+              fillColor={215,215,215},
+              fillPattern=FillPattern.Forward),
+            Text(
+              extent={{-78,32},{-54,22}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.Sphere,
+              fillColor={175,175,175},
+              textString="R_o"),
+            Line(points={{-48,50},{-52,46},{-52,28},{-56,26},{-52,24},{-52,8},{
+                  -48,4}}, color={0,0,0}),
+            Text(
+              extent={{-80,-34},{-56,-44}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.Sphere,
+              fillColor={175,175,175},
+              textString="R_u"),
+            Line(points={{-48,-2},{-52,-6},{-52,-38},{-56,-40},{-52,-42},{-52,
+                  -66},{-46,-70}}, color={0,0,0})}),                 Diagram(coordinateSystem(preserveAspectRatio=false, extent={
+                {-100,-80},{100,60}})));
     end PanelHeatingRoom;
 
     model PanelHeatingSystem
@@ -3649,7 +3688,7 @@ Added documentation.</li>
         each maxLength=maxLength,
         wallTypeFloor=wallTypeFloor,
         wallTypeCeiling=wallTypeCeiling)
-             annotation (Placement(transformation(extent={{54,-14},{84,16}})));
+             annotation (Placement(transformation(extent={{56,-10},{84,6}})));
       AixLib.Fluid.Sensors.TemperatureTwoPort TFlow(
         redeclare package Medium = Medium,
         m_flow_nominal=m_flow_total,
@@ -3661,11 +3700,11 @@ Added documentation.</li>
         T_start=min(T_Return))
         annotation (Placement(transformation(extent={{-60,-16},{-76,-2}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_ceiling[RoomNo]
-        annotation (Placement(transformation(extent={{-10,-108},{10,-88}}),
-            iconTransformation(extent={{-10,-108},{10,-88}})));
+        annotation (Placement(transformation(extent={{10,-70},{30,-50}}),
+            iconTransformation(extent={{10,-70},{30,-50}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_floor[RoomNo]
-        annotation (Placement(transformation(extent={{-10,86},{10,106}}),
-            iconTransformation(extent={{-10,86},{10,106}})));
+        annotation (Placement(transformation(extent={{10,30},{30,50}}),
+            iconTransformation(extent={{10,30},{30,50}})));
     equation
 
       // OUTER CONNECTIONS
@@ -3679,9 +3718,9 @@ Added documentation.</li>
 
        for i in 1:RoomNo loop
         connect(panelHeatingRoom[i].heatport_ceiling, heatport_ceiling[i])
-          annotation (Line(points={{69,-13.7},{69,-76},{0,-76},{0,-98}},                   color={191,0,0}));
+          annotation (Line(points={{70,-10},{70,-52},{20,-52},{20,-60}},                   color={191,0,0}));
         connect(panelHeatingRoom[i].heatport_floor, heatport_floor[i])
-          annotation (Line(points={{69,15.4},{69,76},{0,76},{0,96}},          color={191,0,0}));
+          annotation (Line(points={{70,6},{70,30},{20,30},{20,40}},           color={191,0,0}));
               end for;
 
       // FLUID CONNECTIONS
@@ -3700,9 +3739,11 @@ Added documentation.</li>
         for x in 2:RoomNo loop
           for u in 1:CircuitNo[x] loop
             connect(distributor.flowPorts[(sum(CircuitNo[v] for v in 1:(x-1))+ u)], panelHeatingRoom[x].ports_a[u])
-        annotation (Line(points={{-24,18},{-24,34},{-2,34},{-2,1},{54,1}},   color={0,127,255}));
+        annotation (Line(points={{-24,18},{-24,34},{-2,34},{-2,-0.857143},{56,
+                    -0.857143}},                                             color={0,127,255}));
         connect(panelHeatingRoom[x].ports_b[u], distributor.returnPorts[(sum(CircuitNo[v] for v in 1:(x-1)) + u)])
-          annotation (Line(points={{84,1},{96,1},{96,-42},{-24,-42},{-24,-18.6}},   color={0,127,255}));
+          annotation (Line(points={{84,-0.857143},{96,-0.857143},{96,-42},{-24,
+                    -42},{-24,-18.6}},                                              color={0,127,255}));
           end for;
               end for;
       end if;
@@ -3713,252 +3754,141 @@ Added documentation.</li>
                                           color={0,127,255}));
 
 
-      annotation (Icon(coordinateSystem(extent={{-160,-100},{100,100}}),
+      annotation (Icon(coordinateSystem(extent={{-160,-60},{100,40}},
+              initialScale=0.1),
             graphics={
             Rectangle(
-              extent={{-160,100},{100,-100}},
+              extent={{-160,30},{100,-50}},
               lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{-46,36},{100,-30}},
+              extent={{-100,22},{100,-26}},
               lineColor={0,0,0},
-              fillColor={170,255,255},
-              fillPattern=FillPattern.Solid),
+              fillColor={215,215,215},
+              fillPattern=FillPattern.Forward),
             Rectangle(
-              extent={{-138,80},{-98,-80}},
+              extent={{-160,30},{-136,-50}},
               lineColor={0,0,0},
               fillColor={175,175,175},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-126,66},{-110,50}},
-              lineColor={238,46,47},
-              fillColor={238,46,47},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-156,10},{-138,10},{-146,14},{-138,10},{-146,6}},
-                color={238,46,47}),
-            Line(points={{-138,-8},{-156,-8},{-148,-4},{-156,-8},{-148,-12}},
-                color={28,108,200}),
-            Rectangle(
-              extent={{-46,100},{100,36}},
-              lineColor={0,0,0},
-              fillColor={170,255,255},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-46,-30},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={170,255,255},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-46,48},{100,36}},
-              lineColor={0,0,0},
-              fillColor={162,29,33},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-46,-88},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={162,29,33},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-110,58},{-72,58},{-72,42},{-46,42}}, color={238,46,
-                  47}),
-            Line(points={{-46,38},{-72,38},{-72,34},{-110,34}}, color={28,108,
-                  200}),
-            Line(points={{-110,10},{-72,10},{-72,-24},{-46,-24}}, color={238,46,
-                  47}),
-            Line(points={{-46,-28},{-76,-28},{-76,-14},{-110,-14}}, color={28,
-                  108,200}),
-            Line(points={{-112,-38},{-78,-38},{-78,-94},{-46,-94}}, color={238,
-                  46,47}),
-            Line(points={{-46,-98},{-84,-98},{-84,-60},{-110,-60}}, color={28,
-                  108,200}),
-            Text(
-              extent={{4,78},{50,60}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              textString="1"),
-            Text(
-              extent={{2,18},{52,-2}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              textString="..."),
-            Text(
-              extent={{-12,-42},{66,-80}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid,
-              textString="RoomNo"),
-            Ellipse(
-              extent={{-42,46},{-34,38}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-126,42},{-110,26}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-126,18},{-110,2}},
+              extent={{-152,28},{-144,20}},
               lineColor={238,46,47},
               fillColor={238,46,47},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-126,-6},{-110,-22}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-126,-30},{-110,-46}},
-              lineColor={238,46,47},
-              fillColor={238,46,47},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-126,-54},{-110,-70}},
+              extent={{-152,14},{-144,6}},
               lineColor={28,108,200},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Text(
-              extent={{-149,-114},{151,-154}},
+              extent={{-181,-68},{119,-108}},
               lineColor={0,0,255},
               textString="%name"),
             Ellipse(
-              extent={{-26,46},{-18,38}},
+              extent={{-92,-16},{-82,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-152,0},{-144,-8}},
+              lineColor={238,46,47},
+              fillColor={238,46,47},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-152,-12},{-144,-20}},
               lineColor={28,108,200},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-10,46},{-2,38}},
+              extent={{-152,-40},{-144,-48}},
               lineColor={28,108,200},
               fillColor={28,108,200},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{6,46},{14,38}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{22,46},{30,38}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{38,46},{46,38}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{54,46},{62,38}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{70,46},{78,38}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{86,46},{94,38}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
+              extent={{-152,-26},{-144,-34}},
+              lineColor={238,46,47},
+              fillColor={238,46,47},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{-46,-18},{100,-30}},
+              extent={{-100,-44},{100,-50}},
               lineColor={0,0,0},
-              fillColor={162,29,33},
+              fillColor={215,215,215},
+              fillPattern=FillPattern.CrossDiag),
+            Rectangle(
+              extent={{-100,-38},{100,-44}},
+              lineColor={0,0,0},
+              fillColor={215,215,215},
+              fillPattern=FillPattern.Forward),
+            Rectangle(
+              extent={{-100,-26},{100,-38}},
+              lineColor={0,0,0},
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Backward),
+            Rectangle(
+              extent={{-100,30},{100,22}},
+              lineColor={0,0,0},
+              fillColor={215,215,215},
+              fillPattern=FillPattern.CrossDiag),
+            Ellipse(
+              extent={{-70,-16},{-60,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-42,-20},{-34,-28}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
+              extent={{-48,-16},{-38,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-26,-20},{-18,-28}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
+              extent={{-26,-16},{-16,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{-10,-20},{-2,-28}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
+              extent={{-4,-16},{6,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{6,-20},{14,-28}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
+              extent={{18,-16},{28,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{22,-20},{30,-28}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
+              extent={{40,-16},{50,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{38,-20},{46,-28}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
+              extent={{62,-16},{72,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
               fillPattern=FillPattern.Solid),
             Ellipse(
-              extent={{54,-20},{62,-28}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
+              extent={{84,-16},{94,-26}},
+              lineColor={200,200,200},
+              fillColor={0,128,255},
               fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{70,-20},{78,-28}},
-              lineColor={28,108,200},
+            Line(points={{-146,-4},{-132,-4},{-122,-4},{-122,-20},{-100,-20}},
+                color={255,0,0}),
+            Line(points={{-150,-16},{-136,-16},{-126,-16},{-126,-26},{-100,-26}},
+                color={28,108,200}),
+            Line(points={{-146,-30},{-122,-30},{-122,-20}}, color={238,46,47}),
+
+            Line(points={{-150,-44},{-126,-44},{-126,-26}}, color={28,108,200}),
+
+            Line(points={{-148,24},{-134,24},{-122,24},{-122,-4}}, color={238,
+                  46,47}),
+            Line(points={{-148,10},{-126,10},{-126,-16}}, color={28,108,200}),
+            Text(
+              extent={{-56,12},{62,-2}},
+              lineColor={0,0,0},
               fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{86,-20},{94,-28}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-42,-90},{-34,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-26,-90},{-18,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-10,-90},{-2,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{6,-90},{14,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{22,-90},{30,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{38,-90},{46,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{54,-90},{62,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{70,-90},{78,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{86,-90},{94,-98}},
-              lineColor={28,108,200},
-              fillColor={28,108,200},
-              fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(extent=
-               {{-160,-100},{100,100}})));
+              fillPattern=FillPattern.Solid,
+              textString="1 ... RoomNo")}),     Diagram(coordinateSystem(extent={{-160,
+                -60},{100,40}}, initialScale=0.1)));
     end PanelHeatingSystem;
 
      function logDT =
@@ -4001,7 +3931,6 @@ Added documentation.</li>
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(points={{-62,36},{4,36},{-30,36},{-30,-36}}, color={28,108,200}),
-
             Line(points={{-6,-56},{-6,-20},{12,-20},{-6,-20},{-6,-38},{4,-38}},
                 color={28,108,200}),
             Line(points={{14,-52},{14,-58}}, color={28,108,200}),
@@ -6823,7 +6752,7 @@ Added documentation.</li>
           wallTypeCeiling=fill(
               AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_L_loHalf(),
               3))
-          annotation (Placement(transformation(extent={{-16,0},{12,22}})));
+          annotation (Placement(transformation(extent={{-62,0},{-6,22}})));
 
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureFloor
           annotation (Placement(transformation(extent={{56,50},{36,70}})));
@@ -6845,11 +6774,13 @@ Added documentation.</li>
         for i in 1:panelHeatingSystem.RoomNo loop
 
           connect(prescribedTemperatureFloor.port, panelHeatingSystem.heatport_floor[
-            i]) annotation (Line(points={{36,60},{24,60},{24,54},{1.23077,54},{1.23077,
-                  21.56}},color={191,0,0}));
+            i]) annotation (Line(points={{36,60},{24,60},{24,54},{-23.2308,54},
+                  {-23.2308,22}},
+                          color={191,0,0}));
           connect(panelHeatingSystem.heatport_ceiling[i],
-            prescribedTemperatureCeiling.port) annotation (Line(points={{1.23077,0.22},
-                  {1.23077,-30},{36,-30}},   color={191,0,0}));
+            prescribedTemperatureCeiling.port) annotation (Line(points={{
+                  -23.2308,0},{-23.2308,-30},{36,-30}},
+                                             color={191,0,0}));
         end for;
 
       end TestSystem;
