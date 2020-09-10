@@ -2763,12 +2763,15 @@ Added documentation.</li>
           extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
           import Modelica.Constants.pi;
 
-      parameter Modelica.SIunits.Distance Spacing "Spacing between tubes" annotation (Dialog( group = "Panel Heating Pipe"));
-      parameter Integer n_pipe( min = 1) annotation (Dialog( group = "Panel Heating Pipe"));
-      parameter Modelica.SIunits.Length PipeLength "Length of pipe" annotation (Dialog( group = "Panel Heating Pipe"));
-      parameter Modelica.SIunits.Thickness d_a[n_pipe] annotation(Dialog(group = "Panel Heating Pipe"));
-      parameter Modelica.SIunits.Thickness d_i[n_pipe] annotation(Dialog(group = "Panel Heating Pipe"));
-      parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] "Thermal conductivity of pipe layers" annotation(Dialog(group = "Panel Heating Pipe"));
+      parameter Modelica.SIunits.Distance Spacing "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
+      parameter Integer n_pipe( min = 1) annotation (Dialog( group = "Panel Heating"));
+      parameter Modelica.SIunits.Length PipeLength "Length of pipe" annotation (Dialog( group = "Panel Heating"));
+      parameter Modelica.SIunits.Thickness d_a[n_pipe] annotation(Dialog(group = "Panel Heating"));
+      parameter Modelica.SIunits.Thickness d_i[n_pipe] annotation(Dialog(group = "Panel Heating"));
+      parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] "Thermal conductivity of pipe layers" annotation(Dialog(group = "Panel Heating"));
+      parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
+      parameter Modelica.SIunits.VolumeFraction psi = 0 "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
+      parameter Modelica.SIunits.ThermalConductivity lambda_W = 0 "Thermal conductivity of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
 
       parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
 
@@ -2806,11 +2809,14 @@ Added documentation.</li>
         nPorts=2,
         m_flow_nominal=m_flow_Circuit)
         annotation (Placement(transformation(extent={{40,0},{64,24}})));
-      AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
-        simpleNLayer_floor(
+      SimpleNLayerHoldingBurls
+        simpleNLayerHoldingBurls(
         final A=A,
         T_start=fill((T0), (n_floor)),
-        wallRec=wallTypeFloor)
+        wallRec=wallTypeFloor,
+        withHoldingBurls=withHoldingBurls,
+        psi=psi,
+        lambda_W=lambda_W)
                    annotation (Placement(transformation(
             extent={{-7,-8},{7,8}},
             rotation=90,
@@ -2860,9 +2866,8 @@ Added documentation.</li>
             rotation=90,
             origin={0,-13})));
     equation
-      connect(simpleNLayer_floor.port_b, heatport_floor) annotation (Line(points={{
-              1.33227e-15,34},{0,34},{0,42}},
-                                    color={191,0,0}));
+      connect(simpleNLayerHoldingBurls.port_b, heatport_floor) annotation (Line(
+            points={{1.33227e-15,34},{0,34},{0,42}}, color={191,0,0}));
       connect(simpleNLayer_ceiling.port_b, heatport_ceiling) annotation (Line(
             points={{-1.33227e-15,-20},{0,-20},{0,-40}},   color={191,0,0}));
       connect(heatConda_pipe[n_pipe].port_b, simpleNLayer_ceiling.port_a) annotation (
@@ -2872,8 +2877,8 @@ Added documentation.</li>
       connect(vol.heatPort, heatConda_pipe[1].port_a)
         annotation (Line(points={{40,12},{19,12},{19,9.28}},
                                                            color={191,0,0}));
-      connect(heatConda_pipe[n_pipe].port_b, simpleNLayer_floor.port_a) annotation (Line(
-            points={{19,15.16},{0,15.16},{0,20},{4.44089e-16,20}},
+      connect(heatConda_pipe[n_pipe].port_b, simpleNLayerHoldingBurls.port_a)
+        annotation (Line(points={{19,15.16},{0,15.16},{0,20},{4.44089e-16,20}},
             color={191,0,0}));
 
             for i in 1:(n_pipe-1) loop
@@ -2980,6 +2985,10 @@ Added documentation.</li>
       parameter Modelica.SIunits.Diameter d = d_a  "Outer diameter of pipe including insulating" annotation (Dialog( group = "Panel Heating", enable = withInsulating));
       final parameter Modelica.SIunits.Diameter d_M = if withInsulating then d else 0;
 
+        parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
+      parameter Modelica.SIunits.VolumeFraction psi = 0 "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
+      parameter Modelica.SIunits.ThermalConductivity lambda_W = 0 "Thermal conductivity of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
+
       final parameter Integer n_pipe( min = 1) = if withInsulating then 2 else 1;
       final parameter Modelica.SIunits.Thickness d_pipe[n_pipe] = if withInsulating then {PipeThickness, (d - d_a)} else {PipeThickness} "Thickness of pipe layers";
       final parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] = if withInsulating then {lambda_R, lambda_M} else {lambda_R} "Thermal conductivity of pipe layer";
@@ -3034,7 +3043,10 @@ Added documentation.</li>
         each PipeLength=PipeLength / dis,
         each dp_nominal=dp_nominal/dis,
         each wallTypeFloor=wallTypeFloor,
-        each wallTypeCeiling=wallTypeCeiling)
+        each wallTypeCeiling=wallTypeCeiling,
+        each withHoldingBurls=withHoldingBurls,
+        each psi=psi,
+        each lambda_W=lambda_W)
         annotation (Placement(transformation(extent={{-10,-4},{10,4}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector1(m=dis)
         annotation (Placement(transformation(extent={{-6,34},{6,22}})));
@@ -3335,7 +3347,10 @@ Added documentation.</li>
         each PipeLength=PipeLength/CircuitNo,
         each m_flow_Circuit=m_flow_Circuit,
         each wallTypeFloor=wallTypeFloor,
-        each wallTypeCeiling=wallTypeCeiling)
+        each wallTypeCeiling=wallTypeCeiling,
+        each withHoldingBurls=withHoldingBurls,
+        each psi=psi,
+        each lambda_W=lambda_W)
         annotation (Placement(transformation(extent={{-22,-8},{22,8}})));
       EN1264.HeatFlux EN_1264(
         T_U=T_U,
@@ -3414,8 +3429,8 @@ Added documentation.</li>
 
                                                                                                                                        annotation (Dialog(group="Panel Heating", enable=
              withInsulating), choicesAllMatching=true,
-                  Icon(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-80},{100,60}}),                               graphics={
+                  Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},
+                {100,60}}),                                         graphics={
             Rectangle(
               extent={{-100,-62},{100,-70}},
               lineColor={0,0,0},
@@ -3559,16 +3574,16 @@ Added documentation.</li>
               fillPattern=FillPattern.Sphere,
               fillColor={175,175,175},
               textString="R_o"),
-            Line(points={{-48,50},{-52,46},{-52,28},{-56,26},{-52,24},{-52,8},{
-                  -48,4}}, color={0,0,0}),
+            Line(points={{-48,50},{-52,46},{-52,28},{-56,26},{-52,24},{-52,8},{-48,4}},
+                color={0,0,0}),
             Text(
               extent={{-80,-34},{-56,-44}},
               lineColor={0,0,0},
               fillPattern=FillPattern.Sphere,
               fillColor={175,175,175},
               textString="R_u"),
-            Line(points={{-48,-2},{-52,-6},{-52,-38},{-56,-40},{-52,-42},{-52,
-                  -66},{-46,-70}}, color={0,0,0})}),                 Diagram(coordinateSystem(preserveAspectRatio=false, extent={
+            Line(points={{-48,-2},{-52,-6},{-52,-38},{-56,-40},{-52,-42},{-52,-66},{
+                  -46,-70}}, color={0,0,0})}),                       Diagram(coordinateSystem(preserveAspectRatio=false, extent={
                 {-100,-80},{100,60}})));
     end PanelHeatingRoom;
 
@@ -3937,6 +3952,140 @@ Added documentation.</li>
             Line(points={{24,-56},{24,-40},{38,-40},{38,-56},{38,-40},{52,-40},
                   {52,-56}}, color={28,108,200})}));
      end SumT_F;
+
+    model SimpleNLayerHoldingBurls "Wall consisting of n layers"
+      parameter Modelica.SIunits.Area A "Area" annotation(Dialog(group = "Geometry"));
+
+      replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+        wallRec constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
+        annotation (choicesAllMatching=true, Placement(transformation(extent={{48,-98},{68,-78}})));
+      parameter Modelica.SIunits.Temperature T_start[wallRec.n]=fill(Modelica.SIunits.Conversions.from_degC(16), wallRec.n) "Initial temperature"
+                                                                                                                   annotation(Dialog(group="Thermal"));
+      parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+        "Type of energy balance: dynamic (3 initialization options) or steady state"
+        annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
+      parameter Boolean withHoldingBurls = true "false if there are no holding burls for pipe" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
+      parameter Modelica.SIunits.VolumeFraction psi = 0 "Volume Fraction of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
+      parameter Modelica.SIunits.ThermalConductivity lambda_W = 0 "Thermal conductivity of holding burls" annotation (Dialog( group = "Panel Heating", enable = withHoldingBurls));
+      final parameter Modelica.SIunits.ThermalConductivity lambda_E0 = wallRec.lambda[1] "Thermal conductivity of screed";
+      final parameter Modelica.SIunits.ThermalConductivity lambda_E = if psi >= 0.05 and psi < 0.15 then (1 - psi) * lambda_E0 + psi * lambda_W else lambda_E0 "effective thermal Conductivity of screed" annotation(Dialog(enable = false));
+      final parameter Modelica.SIunits.ThermalConductivity lambda[wallRec.n] = if withHoldingBurls then cat(1, {lambda_E}, {wallRec.lambda[i] for i in 2:wallRec.n}) else wallRec.lambda;
+      // 1st port = port_a
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent={{-110,
+              -10},{-90,10}}),                                                                                                        iconTransformation(extent={{-110,
+              -10},{-90,10}})));
+      // n HeatConds
+      Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatCond_a[wallRec.n](G=A .*
+            lambda ./ (wallRec.d/2))                                                                                              "Heat conduction element (side a)" annotation(Placement(transformation(extent={{-52,-10},{-32,10}})));
+      // n Loads (port_a = 1, port_b = n)
+      Modelica.Thermal.HeatTransfer.Components.HeatCapacitor cap[wallRec.n](
+        final C=wallRec.c .* wallRec.rho .* A .* wallRec.d,
+        final T(
+          each stateSelect=StateSelect.always,
+          each fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
+          start=T_start),
+        final der_T(
+          each fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
+          each start=0)) if
+           not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
+        annotation (Placement(transformation(extent={{-10,-42},{10,-22}})));
+
+      // n HeatConds
+      Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatCond_b[wallRec.n](G=A .*
+            lambda ./ (wallRec.d/2))                                                                                              "Heat conduction element (side b)" annotation(Placement(transformation(extent={{30,-10},{50,10}})));
+
+      // nth port = port_b
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent={{90,-10},
+                {110,10}}),                                                                                                           iconTransformation(extent={{90,-10},
+                {110,10}})));
+
+    equation
+      // connecting inner elements HeatCondb[i]--Load[i]--HeatConda[i] to n groups
+      for i in 1:wallRec.n loop
+        connect(heatCond_a[i].port_b, cap[i].port) annotation (Line(
+            points={{-32,0},{-18,0},{-18,-42},{0,-42}},
+            color={191,0,0},
+            pattern=LinePattern.DashDotDot));
+        connect(cap[i].port, heatCond_b[i].port_a) annotation (Line(
+            points={{0,-42},{18,-42},{18,0},{30,0}},
+            color={191,0,0},
+            pattern=LinePattern.DashDotDot));
+        if energyDynamics==Modelica.Fluid.Types.Dynamics.SteadyState then
+            connect(heatCond_a[i].port_b, heatCond_b[i].port_a) annotation (Line(points={{-32,0},{-20,0},{-20,6},{20,6},{20,0},{30,0}}, color={191,0,0}, pattern=LinePattern.Dash));
+        end if;
+      end for;
+      // establishing n-1 connections of HeatCondb--Load--HeatConda groups
+      for i in 1:wallRec.n - 1 loop
+        connect(heatCond_b[i].port_b, heatCond_a[i + 1].port_a) annotation (Line(
+            points={{50,0},{58,0},{58,24},{-58,24},{-58,0},{-52,0}},
+            color={191,0,0},
+            pattern=LinePattern.DashDotDot));
+      end for;
+      // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--port_b
+      connect(heatCond_a[1].port_a, port_a) annotation (Line(
+          points={{-52,0},{-100,0}},
+          color={191,0,0},
+          pattern=LinePattern.DashDotDot));
+      connect(heatCond_b[wallRec.n].port_b, port_b) annotation (Line(
+          points={{50,0},{100,0}},
+          color={191,0,0},
+          pattern=LinePattern.DashDotDot));
+
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                                                  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{-80,80},{80,-80}},       lineColor = {0, 0, 0}), Rectangle(extent={{-32,80},{32,-80}},       lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
+                fillPattern =                                                                                                   FillPattern.Solid),                                                                           Rectangle(extent={{-48,80},{-32,-80}},       lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{-64,80},{-48,-80}},       lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{-80,80},{-64,-80}},       lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{64,80},{80,-80}},       lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{32,80},{48,-80}},       lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{48,80},{64,-80}},       lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
+                fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-80,40},{80,-40}},        lineColor={0,0,0},
+              textString="1..n"),                                                                                                                   Rectangle(extent={{-80,80},{80,-80}},       lineColor = {135, 135, 135})}),         Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>SimpleNLayer</b> model represents a simple wall, consisting of
+  n different layers.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  There is one inner and one outer <b><a href=
+  \"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>-connector
+  to simulate one-dimensional heat transfer through the wall and heat
+  storage within the wall.
+</p>
+<p>
+  <b><span style=\"color: #ff0000\">Attention:</span></b> The first
+  element in each vector represents the layer connected to
+  <code>HeatPort_a</code>, the last element represents the layer
+  connected to <code>HeatPort_b</code>.
+</p>
+</html>
+ ",     revisions="<html><ul>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/891\">#891</a>:
+    Add energyDynamics. Apply T_start as vector. <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Use only
+    records.
+  </li>
+  <li>
+    <i>Mai 19, 2014</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+  <li>
+    <i>May 02, 2013</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>March 14, 2005</i> by Timo Haase:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
+    end SimpleNLayerHoldingBurls;
 
     partial model PartialModularPort_ab
       "Base model for all modular models with multiple inlet and outlet ports"
@@ -6747,10 +6896,11 @@ Added documentation.</li>
           psi=0.1,
           lambda_W=1.2,
           Spacing=fill(0.1, 3),
-          wallTypeFloor=fill(
-              AixLib.DataBase.Walls.EnEV2002.Floor.FLpartition_EnEV2002_L_upHalf(), 3),
           wallTypeCeiling=fill(
               AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_L_loHalf(),
+              3),
+          wallTypeFloor=fill(
+              AixLib.DataBase.Walls.EnEV2002.Floor.FLpartition_EnEV2002_L_upHalf(),
               3))
           annotation (Placement(transformation(extent={{-62,0},{-6,22}})));
 
