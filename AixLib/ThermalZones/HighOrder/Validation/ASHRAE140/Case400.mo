@@ -1,6 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case400
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
+    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140_NoSWTrans windowParam,
     solar_absorptance_OW=0.1,
     internalGains=0,
