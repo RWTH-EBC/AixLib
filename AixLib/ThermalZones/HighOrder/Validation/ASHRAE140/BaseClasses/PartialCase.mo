@@ -14,9 +14,9 @@ partial model PartialCase "This is the base class from which the base cases will
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
     each GroundReflection= 0.2,
-    each Latitude= 39.76,
+    each Latitude=sun.Latitude,
     each h= 1609,
-    each WeatherFormat=2) "N,E,S,W, Horz"
+    each WeatherFormat=2) "N, E, S, W, Horz"
     annotation (Placement(transformation(extent={{-102,41},{-74,69}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
@@ -101,16 +101,10 @@ partial model PartialCase "This is the base class from which the base cases will
     "Converts to MWh"
     annotation (Placement(transformation(extent={{116,-4},{122,2}})));
 
-  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeating(checkTime=31536000) annotation (Placement(transformation(extent={{100,-89},{115,-74}})));
-  Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoad(tableOnFile=false,
-      table=[600,4296,5709])
-    "AnnualHeatingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualHeatingLoad, {3}=upperLimit AnnualHeatingLoad"
-    annotation (Placement(transformation(extent={{59,-87},{73,-73}})));
-  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECooling(checkTime=31536000) annotation (Placement(transformation(extent={{100,-67},{115,-52}})));
-  Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoad(tableOnFile=false,
-      table=[600,-7964,-6137])
-    "AnnualCoolingLoad according to ASHRAE140 at t=31536000s,  {2}=lowerLimit AnnualCoolingLoad, {3}=upperLimit AnnualCoolingLoad"
-    annotation (Placement(transformation(extent={{59,-66},{73,-52}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeatingOrTempMax(checkTime=31536000) annotation (Placement(transformation(extent={{99,-49},{114,-64}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoadOrTempMax(tableOnFile=false, table=[0.0,0.0,0.0]) "According to ASHRAE140: If annual heating load then at t=31536000s {2}=lower limit and {3}=upper limit, if maximal temperature then {2}=lower limit ReferenceTempMax and {3}=upper limit ReferenceTempMax" annotation (Placement(transformation(extent={{58,-62},{72,-48}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECoolingOrTempMin(checkTime=31536000) annotation (Placement(transformation(extent={{99,-70},{114,-85}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoadOrTempMin(tableOnFile=false, table=[0.0,0.0,0.0]) "According to ASHRAE140: If annual cooling load then at t=31536000s {2}=lower limit and {3}=upper limit, if minimal temperature then {2}=lower limit ReferenceTempMin and {3}=upper limit ReferenceTempMin" annotation (Placement(transformation(extent={{58,-84},{72,-70}})));
   parameter Real airExchange=0.41 "Constant Air Exchange Rate";
   parameter Real TsetCooler=27 "Constant Set Temperature for Cooler";
   parameter Real TsetHeater=20 "Constant Set Temperature for Heater";
@@ -189,28 +183,12 @@ equation
   connect(integrator2.y, to_kWhTransRad.u) annotation (Line(points={{85.5,-0.75},{91,-0.75},{91,-1}}, color={0,0,127}));
   connect(gainIntHea.y, TransmittedSolarRadiation_room) annotation (Line(points={{122.3,-1},{140,-1}},
                                                 color={0,0,127}));
-  connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeating.modelResults)
-    annotation (Line(points={{140,68},{130,68},{130,-36},{49,-36},{49,-90},{77,-90},{77,-85.85},{98.95,-85.85}},
-                   color={0,0,127}));
-  connect(ReferenceHeatingLoad.y[1], checkResultsAccordingToASHRAEHeating.lowerLimit)
-    annotation (Line(points={{73.7,-80},{84,-80},{84,-76},{93,-76},{93,-75.5},{98.95,-75.5}},
-                                                                    color={0,0,
-          127}));
-  connect(ReferenceHeatingLoad.y[2], checkResultsAccordingToASHRAEHeating.upperLimit)
-    annotation (Line(points={{73.7,-80},{80,-80},{80,-81},{86,-81},{86,-78.5},{98.95,-78.5}},
-                                                                    color={0,0,
-          127}));
-  connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECooling.modelResults)
-    annotation (Line(points={{140,52},{130,52},{130,-39},{52,-39},{52,-68},{76,-68},{76,-63.85},{98.95,-63.85}},
-                       color={0,0,127}));
-  connect(ReferenceCoolingLoad.y[1], checkResultsAccordingToASHRAECooling.lowerLimit)
-    annotation (Line(points={{73.7,-59},{86,-59},{86,-53.5},{98.95,-53.5}},
-                                                                    color={0,0,
-          127}));
-  connect(ReferenceCoolingLoad.y[2], checkResultsAccordingToASHRAECooling.upperLimit)
-    annotation (Line(points={{73.7,-59},{88,-59},{88,-56.5},{98.95,-56.5}},
-                                                                    color={0,0,
-          127}));
+  connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{140,68},{130,68},{130,-36},{91,-36},{91,-52.15},{97.95,-52.15}}, color={0,0,127}));
+  connect(ReferenceHeatingLoadOrTempMax.y[1], checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit) annotation (Line(points={{72.7,-55},{85,-55},{85,-62.5},{97.95,-62.5}}, color={0,0,127}));
+  connect(ReferenceHeatingLoadOrTempMax.y[2], checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit) annotation (Line(points={{72.7,-55},{86,-55},{86,-59.5},{97.95,-59.5}}, color={0,0,127}));
+  connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{140,52},{130,52},{130,-35},{52,-35},{52,-65},{76,-65},{76,-73.15},{97.95,-73.15}}, color={0,0,127}));
+  connect(ReferenceCoolingLoadOrTempMin.y[1], checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit) annotation (Line(points={{72.7,-77},{86,-77},{86,-83.5},{97.95,-83.5}}, color={0,0,127}));
+  connect(ReferenceCoolingLoadOrTempMin.y[2], checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit) annotation (Line(points={{72.7,-77},{87,-77},{87,-80.5},{97.95,-80.5}}, color={0,0,127}));
   connect(to_degCRoomConvTemp.y, FreeFloatRoomTemperature) annotation (Line(points={{102.5,36},{140,36}}, color={0,0,127}));
   connect(temperatureSensor.T, to_degCRoomConvTemp.u) annotation (Line(points={{84,36},{91,36}}, color={0,0,127}));
   connect(temperatureSensor1.T, to_degCRoomConvTemp1.u) annotation (Line(points={{84,18},{91,18}}, color={0,0,127}));
