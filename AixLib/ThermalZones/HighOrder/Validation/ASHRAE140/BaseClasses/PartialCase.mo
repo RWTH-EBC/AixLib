@@ -34,7 +34,7 @@ partial model PartialCase "This is the base class from which the base cases will
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
     annotation (Placement(transformation(extent={{-66,31},{-55,42}})));
-  Rooms.ASHRAE140.SouthFacingWindows Room(
+  replaceable model RoomModel = Rooms.ASHRAE140.SouthFacingWindows (
     wallTypes=wallTypes,
     calcMethodIn=4,
     Type_Win=windowParam,
@@ -42,14 +42,34 @@ partial model PartialCase "This is the base class from which the base cases will
     solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     Win_Area=Win_Area,
-    absInnerWallSurf=absInnerWallSurf) annotation (Placement(transformation(extent={{-26,9},{30,65}})));
+    absInnerWallSurf=absInnerWallSurf) annotation (
+      choices(
+        choice(redeclare model Room = Rooms.ASHRAE140.SouthFacingWindows (
+          wallTypes=wallTypes,
+          calcMethodIn=4,
+          Type_Win=windowParam,
+          redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+          solar_absorptance_OW=solar_absorptance_OW,
+          calcMethodOut=2,
+          Win_Area=Win_Area,
+          absInnerWallSurf=absInnerWallSurf)
+        "Room with south facing window"),
+        choice(redeclare model Room = Rooms.ASHRAE140.EathWestFacingWindows (
+          wallTypes=wallTypes,
+          calcMethodIn=4,
+          Type_Win=windowParam,
+          redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+          solar_absorptance_OW=solar_absorptance_OW,
+          calcMethodOut=2,
+          Win_Area=Win_Area,
+          absInnerWallSurf=absInnerWallSurf)
+        "Room with east and west facing window")));
+   RoomModel Room annotation(Placement(transformation(extent={{-27,8},{29,62}})));
 
   Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in kWh"
     annotation (Placement(transformation(extent={{130,58},{150,78}})));
   Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in kWh"
     annotation (Placement(transformation(extent={{130,42},{150,62}})));
-  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
-    annotation (Placement(transformation(extent={{130,25},{150,45}})));
   Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
     "in kWh/m2"
     annotation (Placement(transformation(extent={{130,-11},{150,9}})));
@@ -64,21 +84,10 @@ partial model PartialCase "This is the base class from which the base cases will
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_radiative
     annotation (Placement(transformation(extent={{-97,-97},{-77,-77}})));
-  Modelica.Blocks.Continuous.Integrator integrator1
-    annotation (Placement(transformation(extent={{72,62.5},{83,73.5}})));
-  Modelica.Blocks.Continuous.Integrator integrator
-    annotation (Placement(transformation(extent={{72,46.5},{83,57.5}})));
-  Modelica.Blocks.Sources.RealExpression HeatingPower(y=idealHeaterCooler.heatingPower)
-    annotation (Placement(transformation(extent={{45,58},{65,78}})));
-  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh
-    annotation (Placement(transformation(extent={{92,63},{102,73}})));
-  Modelica.Blocks.Sources.RealExpression CoolingPower(y=idealHeaterCooler.coolingPower)
-    annotation (Placement(transformation(extent={{45,41},{65,61}})));
-  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh1
-    annotation (Placement(transformation(extent={{92,47},{102,57}})));
-  Modelica.Blocks.Math.MultiSum multiSum(nu=2)
-    "Sum of heating and cooling power"
-    annotation (Placement(transformation(extent={{85,30},{95,40}})));
+  Modelica.Blocks.Continuous.Integrator integratorHeat annotation (Placement(transformation(extent={{72,62.5},{83,73.5}})));
+  Modelica.Blocks.Continuous.Integrator integratorCool annotation (Placement(transformation(extent={{72,46.5},{83,57.5}})));
+  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhHeat annotation (Placement(transformation(extent={{92,63},{102,73}})));
+  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhCool annotation (Placement(transformation(extent={{92,47},{102,57}})));
   Modelica.Blocks.Math.Gain convectiveInternalGains(k=0.4) "Convective part"
     annotation (Placement(transformation(extent={{-120,-72},{-110,-62}})));
   Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiative part"
@@ -87,13 +96,10 @@ partial model PartialCase "This is the base class from which the base cases will
     annotation (Placement(transformation(extent={{46,-10},{64,8}})));
   Modelica.Blocks.Continuous.Integrator integrator2
     annotation (Placement(transformation(extent={{75,-6},{85,4.5}})));
-  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh2
-    annotation (Placement(transformation(extent={{92,-6},{102,4}})));
+  Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhTransRad annotation (Placement(transformation(extent={{92,-6},{102,4}})));
   Modelica.Blocks.Math.Gain gainIntHea(k=1/(Room.Win_Area))
     "Converts to MWh"
     annotation (Placement(transformation(extent={{116,-4},{122,2}})));
-  Modelica.Blocks.Math.Gain gain(k=1/1000) "Converts to kW"
-    annotation (Placement(transformation(extent={{102,32},{108,38}})));
 
   BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeating(checkTime=31536000) annotation (Placement(transformation(extent={{100,-89},{115,-74}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoad(tableOnFile=false,
@@ -123,12 +129,13 @@ partial model PartialCase "This is the base class from which the base cases will
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
-  Modelica.Blocks.Sources.RealExpression RoomTemp(y=Room.airload.T)
-    annotation (Placement(transformation(extent={{46,6},{64,26}})));
-  Modelica.Blocks.Math.UnitConversions.To_degC to_degC
-    annotation (Placement(transformation(extent={{92,11},{102,21}})));
-  Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature "in degC"
-    annotation (Placement(transformation(extent={{130,6},{150,26}})));
+  Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
+  Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature
+    annotation (Placement(transformation(extent={{130,26},{150,46}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(extent={{72,30},{84,42}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1 annotation (Placement(transformation(extent={{72,12},{84,24}})));
+  Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp1 annotation (Placement(transformation(extent={{92,13},{102,23}})));
+  Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomRadTemperature annotation (Placement(transformation(extent={{130,8},{150,28}})));
 equation
     //Connections for input solar model
   for i in 1:5 loop
@@ -144,39 +151,27 @@ equation
       color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-75.4,60.6},{-61,60.6},{-61,61},{-51,61},{-51,53.8},{-28.8,53.8}},
+      points={{-75.4,60.6},{-61,60.6},{-61,61},{-51,61},{-51,51.2},{-29.8,51.2}},
       color={255,128,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
-      points={{-85.15,21.5},{-68,21.5},{-68,22},{-48,22},{-48,47},{-28.8,47},{-28.8,45.4}},
+      points={{-85.15,21.5},{-68,21.5},{-68,22},{-48,22},{-48,43},{-29.8,43},{-29.8,43.1}},
       color={0,0,127}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
-      points={{-78,-43},{-48,-43},{-48,-19},{-6.96,-19},{-6.96,10.12}},
+      points={{-78,-43},{-48,-43},{-48,-19},{-27,-19},{-27,8}},
       color={191,0,0}));
 
   connect(InternalGains_convective.port, Room.thermRoom) annotation (Line(
-      points={{-78,-67},{-48,-67},{-48,-19},{-2,-19},{-2,37},{-1.92,37}},
+      points={{-78,-67},{-48,-67},{-48,-19},{-2,-19},{-2,35},{-2.92,35}},
       color={191,0,0}));
   connect(InternalGains_radiative.port, Room.starRoom) annotation (Line(
-      points={{-77,-87},{-48,-87},{-48,-19},{6.48,-19},{6.48,37}},
+      points={{-77,-87},{-48,-87},{-48,-19},{5.48,-19},{5.48,35}},
       color={191,0,0}));
-  connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-55,36.5},{-49,36.5},{-49,64},{-27,64},{-27,64.44},{-26,64.44}},
+  connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-55,36.5},{-49,36.5},{-49,64},{-27,64},{-27,61.46}},
                                               color={191,0,0}));
-  connect(HeatingPower.y, integrator1.u)
-    annotation (Line(points={{66,68},{70.9,68}}, color={0,0,127}));
-  connect(integrator1.y, to_kWh.u)
-    annotation (Line(points={{83.55,68},{91,68}},   color={0,0,127}));
-  connect(to_kWh.y, AnnualHeatingLoad)
-    annotation (Line(points={{102.5,68},{140,68}},color={0,0,127}));
-  connect(integrator.u, CoolingPower.y)
-    annotation (Line(points={{70.9,52},{68,52},{68,51},{66,51}},
-                                                 color={0,0,127}));
-  connect(integrator.y, to_kWh1.u) annotation (Line(points={{83.55,52},{91,52}},
-                                 color={0,0,127}));
-  connect(HeatingPower.y, multiSum.u[1]) annotation (Line(points={{66,68},{66,36.75},{85,36.75}},
-                                      color={0,0,127}));
-  connect(PowerLoad, PowerLoad)
-    annotation (Line(points={{140,35},{140,35}}, color={0,0,127}));
+  connect(integratorHeat.y, to_kWhHeat.u) annotation (Line(points={{83.55,68},{91,68}}, color={0,0,127}));
+  connect(to_kWhHeat.y, AnnualHeatingLoad) annotation (Line(points={{102.5,68},{140,68}}, color={0,0,127}));
+  connect(integratorCool.y, to_kWhCool.u) annotation (Line(points={{83.55,52},{91,52}}, color={0,0,127}));
   connect(Source_InternalGains.y, convectiveInternalGains.u) annotation (Line(
         points={{-132.35,-79.5},{-128,-79.5},{-128,-67},{-121,-67}}, color={0,0,
           127}));
@@ -189,20 +184,11 @@ equation
     annotation (Line(points={{-109.5,-87},{-97,-87}}, color={0,0,127}));
   connect(TransmittedRad.y, integrator2.u) annotation (Line(points={{64.9,-1},{71,-1},{71,-0.75},{74,-0.75}},
                                               color={0,0,127}));
-  connect(CoolingPower.y, multiSum.u[2]) annotation (Line(points={{66,51},{67,51},{67,33.25},{85,33.25}},
-                                      color={0,0,127}));
-  connect(to_kWh2.y, gainIntHea.u) annotation (Line(points={{102.5,-1},{115.4,-1}},
-                                                              color={0,0,127}));
-  connect(to_kWh1.y, AnnualCoolingLoad) annotation (Line(points={{102.5,52},{140,52}},
-                                color={0,0,127}));
-  connect(integrator2.y, to_kWh2.u) annotation (Line(points={{85.5,-0.75},{91,-0.75},{91,-1}},
-                                      color={0,0,127}));
+  connect(to_kWhTransRad.y, gainIntHea.u) annotation (Line(points={{102.5,-1},{115.4,-1}}, color={0,0,127}));
+  connect(to_kWhCool.y, AnnualCoolingLoad) annotation (Line(points={{102.5,52},{140,52}}, color={0,0,127}));
+  connect(integrator2.y, to_kWhTransRad.u) annotation (Line(points={{85.5,-0.75},{91,-0.75},{91,-1}}, color={0,0,127}));
   connect(gainIntHea.y, TransmittedSolarRadiation_room) annotation (Line(points={{122.3,-1},{140,-1}},
                                                 color={0,0,127}));
-  connect(multiSum.y, gain.u) annotation (Line(points={{95.85,35},{101.4,35}},
-                              color={0,0,127}));
-  connect(gain.y, PowerLoad) annotation (Line(points={{108.3,35},{140,35}},
-                                        color={0,0,127}));
   connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeating.modelResults)
     annotation (Line(points={{140,68},{130,68},{130,-36},{49,-36},{49,-90},{77,-90},{77,-85.85},{98.95,-85.85}},
                    color={0,0,127}));
@@ -225,9 +211,12 @@ equation
     annotation (Line(points={{73.7,-59},{88,-59},{88,-56.5},{98.95,-56.5}},
                                                                     color={0,0,
           127}));
-  connect(RoomTemp.y,to_degC. u) annotation (Line(points={{64.9,16},{91,16}},
-                              color={0,0,127}));
-  connect(to_degC.y, FreeFloatRoomTemperature) annotation (Line(points={{102.5,16},{140,16}}, color={0,0,127}));
+  connect(to_degCRoomConvTemp.y, FreeFloatRoomTemperature) annotation (Line(points={{102.5,36},{140,36}}, color={0,0,127}));
+  connect(temperatureSensor.T, to_degCRoomConvTemp.u) annotation (Line(points={{84,36},{91,36}}, color={0,0,127}));
+  connect(temperatureSensor1.T, to_degCRoomConvTemp1.u) annotation (Line(points={{84,18},{91,18}}, color={0,0,127}));
+  connect(to_degCRoomConvTemp1.y, FreeFloatRoomRadTemperature) annotation (Line(points={{102.5,18},{140,18}}, color={0,0,127}));
+  connect(Room.thermRoom, temperatureSensor.port) annotation (Line(points={{-2.92,35},{-2.92,44},{67,44},{67,36},{72,36}}, color={191,0,0}));
+  connect(Room.starRoom, temperatureSensor1.port) annotation (Line(points={{5.48,35},{5.48,42},{65,42},{65,18},{72,18}}, color={0,0,0}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
