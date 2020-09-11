@@ -41,6 +41,8 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Neighbour(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWNeighbour,
     outside=false,
     final withSunblind=use_sunblind,
@@ -53,6 +55,8 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(extent={{-80,-24},{-68,54}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWCorridor,
     outside=false,
     final withSunblind=use_sunblind,
@@ -68,6 +72,8 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
         extent={{-4.99999,-31},{4.99998,31}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Children(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWChild,
     outside=false,
     final withSunblind=use_sunblind,
@@ -87,6 +93,8 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
     final V=room_V)
     annotation (Placement(transformation(extent={{-28,0},{-48,20}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     wall_length=4.645,
     wall_height=2.46,
     windowarea=3.99,
@@ -106,6 +114,8 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
         extent={{-13,-61.0001},{11,82.9999}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Bedroom(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWBedroom,
     outside=false,
     final withSunblind=use_sunblind,
@@ -121,6 +131,8 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
         extent={{-3.99999,-25},{3.99998,25}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_CE,
     outside=false,
     final withSunblind=use_sunblind,
@@ -138,6 +150,8 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
         extent={{-1.99998,-10},{1.99998,10}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_FL,
     outside=false,
     final withSunblind=use_sunblind,
@@ -180,6 +194,13 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-72,-112},{-46,-86}})));
+
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+
+  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
