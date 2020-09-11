@@ -4,6 +4,14 @@ block CheckResultsAccordingToASHRAE
 
   parameter Modelica.SIunits.Time checkTime "Simulation time when block should check if model results lies in limit range";
 
+  parameter String dispType = "None" "Letter displayed in icon" annotation (
+    Dialog(group="Graphical only"),
+    choices(
+      choice="Q Heat",
+      choice="Q Cool",
+      choice="T Max",
+      choice="T Min"));
+
   Modelica.Blocks.Interfaces.RealInput upperLimit
                                                  "Maximum value"
     annotation (Placement(transformation(extent={{-140,16},{-100,56}}),
@@ -29,7 +37,36 @@ equation
       satisfied =  modelResults >= lowerLimit and modelResults <= upperLimit;
     end when;
 
- annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+ annotation (Icon(coordinateSystem(preserveAspectRatio=false),
+   graphics={
+          Text(
+            extent={{-60,60},{60,-60}},
+            lineColor={191,0,0},
+            fillColor={170,213,255},
+            fillPattern=FillPattern.Solid,
+            textString="Q",
+            visible=dispType=="Q Heat"),
+          Text(
+            extent={{-60,60},{60,-60}},
+            lineColor={28,108,200},
+            fillColor={170,213,255},
+            fillPattern=FillPattern.Solid,
+            textString="Q",
+            visible=dispType=="Q Cool"),
+          Text(
+            extent={{-60,60},{60,-60}},
+            lineColor={191,0,0},
+            fillColor={170,213,255},
+            fillPattern=FillPattern.Solid,
+            textString="T",
+            visible=dispType=="T Max"),
+          Text(
+            extent={{-60,60},{60,-60}},
+            lineColor={28,108,200},
+            fillColor={170,213,255},
+            fillPattern=FillPattern.Solid,
+            textString="T",
+            visible=dispType=="T Min")}),                                    Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
   <li>
