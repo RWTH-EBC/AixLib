@@ -9,9 +9,11 @@ model ConvNLayerClearanceStar
   parameter Modelica.SIunits.Height h "Height" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Length l "Length" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Area clearance = 0 "Area of clearance" annotation(Dialog(group = "Geometry"));
-    replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+
+  parameter Boolean use_condLayers = true "Use conductive wall layers" annotation(Dialog(group = "Structure of wall layers"));
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
     wallType constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
-    "Type of wall" annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{48,-98},{68,-78}})));
+    "Type of wall" annotation(Dialog(group = "Structure of wall layers", enable=use_condLayers), choicesAllMatching = true, Placement(transformation(extent={{48,-98},{68,-78}})));
   final parameter Integer n(min = 1) = wallType.n
     "Number of layers" annotation(Dialog(group = "Structure of wall layers"));
   final parameter Modelica.SIunits.Thickness d[n] = wallType.d
@@ -75,21 +77,33 @@ model ConvNLayerClearanceStar
     final A=A,
     each final T_start=fill(T0, n),
     final wallRec=wallType,
-    final energyDynamics=energyDynamics)
+    final energyDynamics=energyDynamics) if use_condLayers
     annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b1
                                                              annotation (
       Placement(transformation(extent={{-10,88},{10,108}}), iconTransformation(
           extent={{-12,88},{8,108}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
+      final m=1) if not use_condLayers
+                 annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,-28})));
 protected
   parameter Modelica.SIunits.Area A = h * l - clearance;
 
 equation
   connect(port_a, simpleNLayer.port_a)
-    annotation (Line(points={{-100,0},{-14,0}}, color={191,0,0}));
+    annotation (Line(
+      points={{-100,0},{-14,0}},
+      color={191,0,0},
+      pattern=LinePattern.Dash));
   connect(simpleNLayer.port_b, heatConv.port_b)
-    annotation (Line(points={{12,0},{52,0}}, color={191,0,0}));
+    annotation (Line(
+      points={{12,0},{52,0}},
+      color={191,0,0},
+      pattern=LinePattern.Dash));
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--HeatConv1--port_b
   connect(heatConv.port_a, port_b) annotation(Line(points={{72,0},{100,0}},                             color = {200, 100, 0}));
   connect(twoStar_RadEx.radPort, radPort) annotation (Line(
@@ -98,8 +112,18 @@ equation
       pattern=LinePattern.Solid));
   // computing approximated longwave radiation exchange
 
-  connect(simpleNLayer.port_b, port_b1) annotation (Line(points={{12,0},{16,0},{16,40},{0,40},{0,98}}, color={191,0,0}));
-  connect(simpleNLayer.port_b, twoStar_RadEx.convPort) annotation (Line(points={{12,0},{20,0},{20,40},{54,40}}, color={191,0,0}));
+  connect(port_b1, heatConv.port_b) annotation (Line(points={{0,98},{0,26},{44,26},
+          {44,6.66134e-16},{52,6.66134e-16}}, color={191,0,0}));
+  connect(twoStar_RadEx.convPort, heatConv.port_b) annotation (Line(points={{54,
+          40},{46,40},{46,6.66134e-16},{52,6.66134e-16}}, color={191,0,0}));
+  connect(port_a, thermalCollector.port_a[1]) annotation (Line(
+      points={{-100,0},{-40,0},{-40,-28},{-10,-28}},
+      color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(thermalCollector.port_b, heatConv.port_b) annotation (Line(
+      points={{10,-28},{40,-28},{40,6.66134e-16},{52,6.66134e-16}},
+      color={191,0,0},
+      pattern=LinePattern.Dash));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                                                  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{24, 100}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-56, 100}, {0, -100}}, lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-64, 100}, {-56, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},

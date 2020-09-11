@@ -20,8 +20,9 @@ model Wall
   parameter Boolean use_shortWaveRadOut=false "Use input connector for shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
 
   // general wall parameters
+  parameter Boolean use_condLayers = true "Use conductive wall layers" annotation(Dialog(group = "Structure of wall layers"));
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
-    annotation(Dialog(group="Structure of wall layers"),   choicesAllMatching = true,
+    annotation(Dialog(group="Structure of wall layers", enable=use_condLayers),   choicesAllMatching = true,
     Placement(transformation(extent={{2,76},{22,96}})));
 
 
@@ -108,7 +109,9 @@ model Wall
     wallType=wallPar,
     surfaceOrientation=ISOrientation,
     calcMethod=calcMethodIn,
-    hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
+    hCon_const=hConIn_const,
+    final use_condLayers=use_condLayers)
+                             "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A=ANet) if                                    outside annotation(Placement(transformation(origin={-37.5,90.5},extent={{-10.5,-10.5},{10.5,10.5}})));
   AixLib.Utilities.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));

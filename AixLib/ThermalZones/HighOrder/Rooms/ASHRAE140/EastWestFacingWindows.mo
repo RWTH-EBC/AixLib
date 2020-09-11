@@ -51,7 +51,9 @@ public
     wall_height=room_height,
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
     WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
-    withWindow=false) annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
+    withWindow=false,
+    final use_condLayers=true)
+                      annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_West(
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,
@@ -72,7 +74,9 @@ public
     calcMethodOut=2,
     withWindow=true,
     WindowType=Win,
-    windowarea=Win_Area*0.5) annotation (Placement(transformation(
+    windowarea=Win_Area*0.5,
+    final use_condLayers=true)
+                             annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
         origin={26,78})));
@@ -95,7 +99,9 @@ public
     calcMethodOut=2,
     withWindow=true,
     WindowType=Win,
-    windowarea=Win_Area*0.5) annotation (Placement(transformation(
+    windowarea=Win_Area*0.5,
+    final use_condLayers=true)
+                             annotation (Placement(transformation(
         extent={{-4.00001,-24},{4.00001,24}},
         rotation=90,
         origin={26,-68})));
@@ -117,7 +123,9 @@ public
     wallPar=wallTypes.OW,
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    calcMethodOut=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
+    calcMethodOut=2,
+    final use_condLayers=true)
+                     annotation (Placement(transformation(extent={{74,-36},{60,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
     use_shortWaveRadIn=true,
     wall_length=room_length,
@@ -152,7 +160,9 @@ public
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    calcMethodOut=2) annotation (Placement(transformation(
+    calcMethodOut=2,
+    use_condLayers=not use_UFH)
+                     annotation (Placement(transformation(
         extent={{-2.00031,-12},{2.00003,12}},
         rotation=90,
         origin={-32,-64})));

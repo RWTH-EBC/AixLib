@@ -144,7 +144,9 @@ public
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    calcMethodOut=2) annotation (Placement(transformation(
+    calcMethodOut=2,
+    use_condLayers=not use_UFH)
+                     annotation (Placement(transformation(
         extent={{-2.00031,-12},{2.00003,12}},
         rotation=90,
         origin={-32,-64})));
