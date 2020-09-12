@@ -128,10 +128,10 @@ public
     nPorts=1)
     annotation (Placement(transformation(extent={{110,-48},{90,-28}})));
   Modelica.Blocks.Sources.RealExpression m_flow_return(y=m_flow_nominal)
-    annotation (Placement(transformation(extent={{176,-42},{138,-18}})));
+    annotation (Placement(transformation(extent={{176,-38},{138,-18}})));
   Modelica.Blocks.Sources.RealExpression T_room_r(y=T_room.y - heat_input/(4180
         *m_flow_nominal))
-    annotation (Placement(transformation(extent={{-4,-150},{112,-126}})));
+    annotation (Placement(transformation(extent={{18,-142},{110,-122}})));
   Utilities.Sensors.FuelCounter fuelCounter
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
@@ -152,10 +152,10 @@ public
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={130,-64})));
-  Modelica.Blocks.Sources.RealExpression T_dhw_r(y=T_dhw.y - (Cp_flow*dT_dhw)/(
-        4180*m_flow_nominal))
+  Modelica.Blocks.Sources.RealExpression T_dhw_r(y=T_dhw.y - dhw_input/(4180*
+        m_flow_nominal))
     "\"Return\" Temperature of the DHW should be the Network Tempearute of the drinkingwater network, if no HeatExchangers are installed in the shower f.e."
-    annotation (Placement(transformation(extent={{-18,-132},{112,-106}})));
+    annotation (Placement(transformation(extent={{14,-126},{112,-106}})));
   Modelica.Blocks.Logical.GreaterThreshold dhw(threshold=10)
     annotation (Placement(transformation(extent={{-50,-116},{-30,-96}})));
   Modelica.Blocks.Sources.TimeTable T_set_free_cooling(table=[0,273.15 + 35; 7.0e+06,
@@ -218,17 +218,11 @@ public
                                                  annotation (Placement(
         transformation(extent={{-304,-82},{-264,-42}}),   iconTransformation(
           extent={{232,76},{192,116}})));
-  Modelica.Blocks.Math.Gain Cp_flow(k=4180*0.001)
-    "Converts the Volumetric Flow input of dhw to a Heatcapacity flow. The Heatcapacity Flow can then be multiplied by the Temperature Difference of the DHW Cicle to compute the DHW Heatflow"
-    annotation (Placement(transformation(extent={{-88,-118},{-64,-94}})));
   Modelica.Blocks.Interfaces.RealInput dhw_input
     "Input for dhw demand profile of substation, as a Volumentic Flow in Liters (l/s)"
                                                  annotation (Placement(
         transformation(extent={{-304,-126},{-264,-86}}),  iconTransformation(
           extent={{232,76},{192,116}})));
-  Modelica.Blocks.Sources.RealExpression dT_dhw(y=40)
-    "Temperature by with the DHW has to be heated before entering Showers and Tabs. If no HeatExchanger Showers are used, shoud be somewhere around 40-50K"
-    annotation (Placement(transformation(extent={{42,-104},{68,-88}})));
 equation
 
   //Power Consumptin Calculation
@@ -246,8 +240,8 @@ equation
           -26},{28,0},{42,0}},color={0,127,255}));
   connect(prescribedHeatFlow1.port, vol2.heatPort) annotation (Line(points={{-82,14},
           {-76,14}},                           color={191,0,0}));
-  connect(m_flow_return.y, fromHouse.m_flow_in)
-    annotation (Line(points={{136.1,-30},{112,-30}}, color={0,0,127}));
+  connect(m_flow_return.y, fromHouse.m_flow_in) annotation (Line(points={{136.1,
+          -28},{124,-28},{124,-30},{112,-30}}, color={0,0,127}));
   connect(heaPum.QEva_flow, eva_HM.p)
     annotation (Line(points={{-11,-23},{2,-23},{2,0.4}}, color={0,0,127}));
   connect(heaPum.P, fuelCounter.fuel_in)
@@ -274,11 +268,11 @@ equation
           -74}}, color={255,0,255}));
   connect(dhw.y, switch2.u2) annotation (Line(points={{-29,-106},{130,-106},{
           130,-76}},                     color={255,0,255}));
-  connect(T_dhw_r.y, switch2.u1) annotation (Line(points={{118.5,-119},{116,
-          -119},{116,-76},{122,-76}},
+  connect(T_dhw_r.y, switch2.u1) annotation (Line(points={{116.9,-116},{116,
+          -116},{116,-76},{122,-76}},
                            color={0,0,127}));
-  connect(T_room_r.y, switch2.u3) annotation (Line(points={{117.8,-138},{142,
-          -138},{142,-76},{138,-76}},
+  connect(T_room_r.y, switch2.u3) annotation (Line(points={{114.6,-132},{142,
+          -132},{142,-76},{138,-76}},
                                color={0,0,127}));
   connect(port_a, senTem2.port_a)
     annotation (Line(points={{-260,0},{-242,0}}, color={0,127,255}));
@@ -318,12 +312,10 @@ equation
     annotation (Line(points={{52,11},{52,82},{40.8,82}}, color={0,0,127}));
   connect(PressureDrop.y, dpOut)
     annotation (Line(points={{123.3,68},{170,68}}, color={0,0,127}));
-  connect(dhw_input, Cp_flow.u)
-    annotation (Line(points={{-284,-106},{-90.4,-106}}, color={0,0,127}));
-  connect(Cp_flow.y, dhw.u)
-    annotation (Line(points={{-62.8,-106},{-52,-106}}, color={0,0,127}));
   connect(SummerMassFlow.y, MassFlowSwitch.u1) annotation (Line(points={{-227.4,
           76},{-227.4,46},{-194,46},{-194,34},{-174,34}}, color={0,0,127}));
+  connect(dhw_input, dhw.u)
+    annotation (Line(points={{-284,-106},{-52,-106}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-280,
             -140},{180,120}}),
