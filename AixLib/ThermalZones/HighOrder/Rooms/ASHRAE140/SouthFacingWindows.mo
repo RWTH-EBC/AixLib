@@ -32,9 +32,6 @@ model SouthFacingWindows "windows facing south"
       descriptionLabel=true,
       enable=withWindow1));
 
-  parameter Modelica.SIunits.Temperature T0_Air=295.15 "Air"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-
   parameter Real eps_out=0.9 "emissivity of the outer surface"
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
 
