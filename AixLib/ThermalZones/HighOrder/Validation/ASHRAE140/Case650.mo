@@ -50,6 +50,10 @@ model Case650
     annotation (Placement(transformation(extent={{-16,-65},{4,-45}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(
     wallTypes=wallTypes,
+    energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T0_air=294.15,
+    TWalls_start=289.15,
     calcMethodIn=4,
     Type_Win=windowParam,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -201,7 +205,7 @@ equation
       points={{11.06,14.5},{11.06,-19},{10,-19},{10,-59},{3,-59}},
       color={191,0,0}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
-      points={{-78,-34},{-48,-34},{-48,-19},{7.28,-19},{7.28,-5.18}},
+      points={{-78,-34},{-48,-34},{-48,-19},{-7,-19},{-7,-6}},
       color={191,0,0}));
 
   connect(InternalGains_convective.port, Room.thermRoom) annotation (Line(
