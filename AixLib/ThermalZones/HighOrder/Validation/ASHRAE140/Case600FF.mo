@@ -120,7 +120,7 @@ model Case600FF
   Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
     annotation (Placement(transformation(extent={{111,-66},{131,-46}})));
 
-  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeating(checkTime(displayUnit="h") = 25027200) annotation (Placement(transformation(extent={{5,48},{20,63}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeating(checkTime(displayUnit="h") = 25029000) annotation (Placement(transformation(extent={{5,48},{20,63}})));
   Modelica.Blocks.Sources.CombiTimeTable ReferenceTempMax(tableOnFile=false,
       table=[600,64.9,69.5])
     "ReferenceTempMax according to ASHRAE140,  {2}=lowerLimit ReferenceTempMax, {3}=upperLimit ReferenceTempMax"
