@@ -40,6 +40,7 @@ model EastWestFacingWindows "windows facing south and west"
 
 public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     calcMethodIn=calcMethodIn,
     final WindowType=Type_Win,
@@ -47,7 +48,7 @@ public
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
     wallPar=wallTypes.OW,
-    T0=Tset,
+    final T0=TWalls_start,
     solarDistribution=partialCoeffTable.coeffOWSouth,
     wall_length=room_width,
     solar_absorptance=solar_absorptance_OW,
@@ -65,6 +66,7 @@ public
         rotation=90,
         origin={18,-68})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_West(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,
     calcMethodIn=calcMethodIn,
@@ -74,7 +76,7 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
-    T0=Tset,
+    final T0=TWalls_start,
     solarDistribution=partialCoeffTable.coeffOWWest,
     outside=true,
     final withSunblind=use_sunblind,
@@ -92,6 +94,7 @@ public
         origin={-83,13})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_East(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,
     calcMethodIn=calcMethodIn,
@@ -100,7 +103,7 @@ public
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    T0=Tset,
+    final T0=TWalls_start,
     solarDistribution=partialCoeffTable.coeffOWEast,
     outside=true,
     final withSunblind=use_sunblind,
@@ -118,6 +121,7 @@ public
         origin={69,13})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_North(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     calcMethodIn=calcMethodIn,
     wall_height=room_height,
@@ -129,7 +133,7 @@ public
     door_height=1,
     door_width=2,
     withDoor=false,
-    T0=Tset,
+    final T0=TWalls_start,
     wall_length=room_width,
     outside=true,
     final withSunblind=use_sunblind,
@@ -145,6 +149,7 @@ public
         origin={18,69})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
@@ -155,7 +160,7 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
-    T0=Tset,
+    final T0=TWalls_start,
     wallPar=wallTypes.roof,
     outside=true,
     final withSunblind=use_sunblind,
@@ -170,6 +175,7 @@ public
         origin={-42,80})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
@@ -179,7 +185,7 @@ public
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
     solarDistribution=partialCoeffTable.coeffFloor,
-    T0=Tset,
+    final T0=TWalls_start,
     wallPar=wallTypes.groundPlate_upp_half,
     solar_absorptance=solar_absorptance_OW,
     outside=false,
