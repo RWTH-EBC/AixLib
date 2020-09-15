@@ -173,10 +173,10 @@ equation
 <h4>Examples </h4>
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange</a>. </p>
 <ul>
-<li>August 27, 2020, by Katharina Breuer:<br>Add co2 balance</li>
-<li>January 09, 2020, by David Jansen:<br>Integration of ideal heater and cooler into the thermal zone. </li>
-<li>July 10, 2019, by Martin Kremer:<br>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
-<li>April, 2019, by Martin Kremer:<br>First implementation. </li>
+<li>August 27, 2020, by Katharina Breuer:<br/>Add co2 balance</li>
+<li>January 09, 2020, by David Jansen:<br/>Integration of ideal heater and cooler into the thermal zone. </li>
+<li>July 10, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
+<li>April, 2019, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
