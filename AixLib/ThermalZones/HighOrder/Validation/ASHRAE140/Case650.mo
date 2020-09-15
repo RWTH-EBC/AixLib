@@ -26,13 +26,13 @@ model Case650
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-102,1},{-85,18}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_Weather(
     tableOnFile=true,
     tableName="Table",
     columns={4,5,6,7},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-103,28},{-86,45}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
