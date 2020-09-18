@@ -46,7 +46,7 @@ model Case620
     wallTypes=wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T0_air=295.15,
+    T0_air=294.15,
     TWalls_start=289.15,
     calcMethodIn=4,
     Type_Win=windowParam,
