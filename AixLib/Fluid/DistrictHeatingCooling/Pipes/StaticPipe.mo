@@ -115,6 +115,7 @@ model StaticPipe "Pipe model using spatialDistribution for temperature delay"
   Fluid.MixingVolumes.MixingVolume vol(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
+    allowFlowReversal=allowFlowReversal,
     final V=if rho_default > 500 then VEqu else VEqu/1000,
     final nPorts=nPorts + 1,
     final T_start=T_start_out,

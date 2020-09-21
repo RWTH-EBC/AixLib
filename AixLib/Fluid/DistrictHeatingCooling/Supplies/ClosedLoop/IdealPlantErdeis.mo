@@ -5,10 +5,26 @@ model IdealPlantErdeis
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
       annotation (choicesAllMatching = true);
+  parameter Boolean allowFlowReversal=false
+    "= true, reverese flow allowed";
 
-      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
       "Nominal pressure drop";
-      parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
+
+  parameter Modelica.SIunits.PressureDifference dp_heater = 30000;
+
+  parameter Modelica.SIunits.Pressure dpRes_nominal(displayUnit="Bar")=0.11
+    "Pressure difference of the resistance at nominal flow rate"
+    annotation(Dialog(group="Resistance"));
+
+  parameter Modelica.SIunits.Length dh(displayUnit="m")=sqrt(4*m_flow_nominal/rho_default/v_nominal/Modelica.Constants.pi)
+    "Hydraulic pipe diameter"
+    annotation(Dialog(group="Pipe"));
+
+  parameter Modelica.SIunits.Length length(displayUnit="m")
+    "Pipe length"
+    annotation(Dialog(group="Pipe"));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)
@@ -20,13 +36,15 @@ model IdealPlantErdeis
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
         Medium,
+        allowFlowReversal=allowFlowReversal,
     QMin_flow=0,use_X_wSet=false,
-    dp_nominal=dp_nominal,
+    dp_nominal=dp_heater,
     m_flow_nominal=m_flow_nominal,
     use_TSet=true)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
         Medium,
+        allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     tau=0)
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
@@ -39,6 +57,7 @@ model IdealPlantErdeis
         origin={30,70})));
   FixedResistances.PlugFlowPipe plugFlowPipe(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     dh=0.7,
     length=1700,
     m_flow_nominal=m_flow_nominal,
@@ -48,8 +67,9 @@ model IdealPlantErdeis
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   FixedResistances.PressureDrop res(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
-    dp_nominal(displayUnit="bar") = 11000)
+    dp_nominal(displayUnit="bar") = dpRes_nominal)
     annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
 equation
   connect(heater.port_b, senTem.port_a)

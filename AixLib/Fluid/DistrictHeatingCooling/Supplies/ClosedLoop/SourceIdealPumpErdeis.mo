@@ -1,88 +1,101 @@
-within AixLib.Fluid.DistrictHeatingCooling.Supplies.OpenLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
 model SourceIdealPumpErdeis
   "Simple supply node model with speed controled pump"
   extends
     AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Supplies.OpenLoop.PartialSupplyLessInputs(
-      senT_return(allowFlowReversal=true));
+      allowFlowReversal=true);
 
   parameter Modelica.SIunits.AbsolutePressure pReturn
     "Fixed return pressure";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 5 "Nominal mass flow rate";
 
+  parameter Modelica.SIunits.Velocity v_nominal = 1.5
+    "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
+    annotation(Dialog(group="Nominal condition"));
+
   parameter Modelica.SIunits.PressureDifference dp_heater = 30000;
 
   parameter Modelica.SIunits.PressureDifference dp_pump = 300000;
 
-  AixLib.Fluid.Sources.Boundary_pT source(          redeclare package Medium =
-        Medium,
-    use_T_in=true,
-    use_p_in=false,
-    p=pReturn,
-    nPorts=1)
-    "Ideal fluid source with prescribed temperature and pressure"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-70,40})));
+  parameter Modelica.SIunits.Pressure dpRes_nominal(displayUnit="Bar")=0.11
+    "Pressure difference of the resistance at nominal flow rate"
+    annotation(Dialog(group="Resistance"));
 
-  Sources.Boundary_pT                sink(
-    redeclare package Medium = Medium,
-    p=pReturn,
-    nPorts=1) "Ideal sink for return from the network" annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={2,0})));
+  parameter Modelica.SIunits.Length dh(displayUnit="m")=sqrt(4*m_flow_nominal/rho_default/v_nominal/Modelica.Constants.pi)
+    "Hydraulic pipe diameter"
+    annotation(Dialog(group="Pipe"));
+
+  parameter Modelica.SIunits.Length length(displayUnit="m")
+    "Pipe length"
+    annotation(Dialog(group="Pipe"));
+  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default)
+    "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
+    annotation (Dialog(group="Advanced"));
   Modelica.Blocks.Interfaces.RealOutput Q_flow
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
 
   Movers.FlowControlled_dp                 fan(        redeclare package Medium =
         Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    p_start=pReturn + 200000,
-    allowFlowReversal=false,
+    p_start=pReturn + 150000,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     m_flow_small=1E-4*abs(m_flow_nominal),
     redeclare Movers.Data.Generic per,
     init=Modelica.Blocks.Types.Init.InitialOutput,
     y_start=1,
     dp_start(displayUnit="bar") = 300000,
-    dp_nominal(displayUnit="bar") = 300000)
+    dp_nominal(displayUnit="bar") = 150000)
     annotation (Placement(transformation(extent={{6,90},{26,70}})));
   Modelica.Blocks.Interfaces.RealInput TIn "Prescribed boundary temperature"
     annotation (Placement(transformation(extent={{-124,40},{-84,80}})));
   AixLib.Fluid.Sensors.DensityTwoPort senDen(redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
       m_flow_nominal=1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={40,20})));
   AixLib.Fluid.HeatExchangers.Heater_T IdealHeater(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
-    dp_nominal(displayUnit="bar") = 0)
+    dp_nominal(displayUnit="bar") = dp_heater)
     annotation (Placement(transformation(extent={{30,70},{50,90}})));
   Modelica.Blocks.Interfaces.RealInput dpIn
                                            "Prescribed boundary temperature"
     annotation (Placement(transformation(extent={{-124,-60},{-84,-20}})));
   FixedResistances.PressureDrop res1(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
-    dp_nominal(displayUnit="bar") = 11000)
-    annotation (Placement(transformation(extent={{-58,10},{-38,30}})));
+    dp_nominal(displayUnit="bar") = dpRes_nominal)
+    annotation (Placement(transformation(extent={{-56,10},{-36,30}})));
   FixedResistances.PlugFlowPipe plugFlowPipe1(
     redeclare package Medium = Medium,
-    dh=0.7,
-    length=1700,
+    allowFlowReversal=allowFlowReversal,
+    dh=dh,
+    length=length,
     m_flow_nominal=m_flow_nominal,
     dIns=0.001,
     kIns=5,
     nPorts=1) annotation (Placement(transformation(extent={{-32,10},{-12,30}})));
+  Sources.Boundary_pT bou(
+    redeclare package Medium = Medium,
+    p=pReturn,
+    nPorts=2) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={4,-4})));
+
+
 equation
   Q_flow = (senT_supply.T - senT_return.T) * 4180 * senMasFlo.m_flow;
   connect(senDen.port_b, senT_supply.port_a)
     annotation (Line(points={{40,10},{40,0}}, color={0,127,255}));
-  connect(senT_return.T, source.T_in) annotation (Line(points={{-70,11},{-70,20},
-          {-92,20},{-92,44},{-82,44}}, color={0,0,127}));
   connect(senDen.port_a, IdealHeater.port_b) annotation (Line(points={{40,30},{40,
           60},{60,60},{60,80},{50,80}}, color={0,127,255}));
   connect(TIn, IdealHeater.TSet) annotation (Line(points={{-104,60},{-82,60},{-82,
@@ -91,21 +104,37 @@ equation
     annotation (Line(points={{26,80},{30,80}},  color={0,127,255}));
   connect(dpIn, fan.dp_in) annotation (Line(points={{-104,-40},{16,-40},{16,68}},
                                   color={0,0,127}));
-  connect(sink.ports[1], plugFlowPipe1.ports_b[1]) annotation (Line(points={{-8,
-          6.66134e-16},{-10,6.66134e-16},{-10,20},{-12,20}}, color={0,127,255}));
   connect(plugFlowPipe1.port_a, res1.port_b)
-    annotation (Line(points={{-32,20},{-38,20}}, color={0,127,255}));
-  connect(res1.port_a, senT_return.port_a)
-    annotation (Line(points={{-58,20},{-60,20},{-60,0}}, color={0,127,255}));
-  connect(source.ports[1], fan.port_a) annotation (Line(points={{-60,40},{-28,
-          40},{-28,80},{6,80}}, color={0,127,255}));
-    annotation (Placement(transformation(extent={{98,50},{118,70}})),
-              Icon(coordinateSystem(extent={{-100,-100},{120,100}}),
-                   graphics={Ellipse(
-          extent={{-78,40},{2,-40}},
+    annotation (Line(points={{-32,20},{-36,20}}, color={0,127,255}));
+  connect(plugFlowPipe1.ports_b[1], bou.ports[1]) annotation (Line(points={{-12,
+          20},{-4,20},{-4,6},{2,6}}, color={0,127,255}));
+  connect(bou.ports[2], fan.port_a)
+    annotation (Line(points={{6,6},{6,6},{6,80}}, color={0,127,255}));
+  connect(res1.port_a, senT_return.port_b) annotation (Line(points={{-56,20},{
+          -58,20},{-58,0},{-60,0}}, color={0,127,255}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-80,80},{80,0}},
+          lineColor={28,108,200},
+          fillColor={238,46,47},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-80,-80},{80,0}},
           lineColor={28,108,200},
           fillColor={28,108,200},
-          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={28,108,200},
+          fillColor={28,108,200},
+          fillPattern=FillPattern.None),
+              Ellipse(extent={{-58,60},{60,-60}},
+  lineColor = {0, 0, 0}, fillColor = {0, 127, 0},
+            fillPattern=FillPattern.Solid),
+            Polygon(points={{-30,46},{52,0},{-30,-44},{-30,46}},
+            lineColor = {0, 0, 0}, fillColor = {175, 175, 175},
+            fillPattern=FillPattern.Solid)}),                    Diagram(
+        coordinateSystem(preserveAspectRatio=false)), Documentation(revisions="<html>
 <ul>
 <li>
 March 3, 2018, by Marcus Fuchs:<br/>
