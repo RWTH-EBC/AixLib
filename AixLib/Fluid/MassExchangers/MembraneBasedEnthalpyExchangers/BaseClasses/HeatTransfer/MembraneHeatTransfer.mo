@@ -22,7 +22,7 @@ model MembraneHeatTransfer
   parameter Modelica.SIunits.SpecificHeatCapacity cpMem
     "mass weighted heat capacity of membrane";
 
-  parameter Modelica.SIunits.Mass massMem=
+  parameter Modelica.SIunits.Mass mMem=
     rhoMem*(lengthMem*widthMem*thicknessMem)*nParallel
     "mass of membrane"
     annotation (Dialog(enable=false));
@@ -44,7 +44,7 @@ model MembraneHeatTransfer
     "start value for temperature difference between heatPorts_a and heatPorst_b";
 
   // Mass
-  Modelica.SIunits.Mass[n] m=fill(massMem/n, n)
+  Modelica.SIunits.Mass[n] m=fill(mMem/n, n)
     "Distribution of wall mass";
 
   // Temperatures
