@@ -84,8 +84,8 @@ model IdealPlantRevHP
     annotation (Placement(transformation(extent={{-92,-92},{-72,-72}})));
   Modelica.Blocks.Sources.Constant sourceTemperature(k=273.15 + 15)
     annotation (Placement(transformation(extent={{-126,-18},{-106,2}})));
-  Sensors.TemperatureTwoPort senTem(m_flow_nominal=2, redeclare package Medium
-      = Medium)
+  Sensors.TemperatureTwoPort senTem(m_flow_nominal=2, redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-152,4},{-132,24}})));
   Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium,
       m_flow_nominal=2)
@@ -108,8 +108,8 @@ equation
 
   connect(T_setColdLine.y, idealPlantRevHP.T_heatingSet) annotation (Line(
         points={{-105,38},{-104,38},{-104,18.2},{-92.6,18.2}}, color={0,0,127}));
-  connect(T_setHotLine.y, idealPlantRevHP.T_coolingSet) annotation (Line(points
-        ={{-105,68},{-100,68},{-100,22},{-92.6,22}}, color={0,0,127}));
+  connect(T_setHotLine.y, idealPlantRevHP.T_coolingSet) annotation (Line(points=
+         {{-105,68},{-100,68},{-100,22},{-92.6,22}}, color={0,0,127}));
   connect(plugFlowPipe1.ports_b[1], substation2.port_a) annotation (Line(points={{18,16},
           {40.5882,16},{40.5882,-6}},         color={0,127,255}));
   connect(plugFlowPipe2.port_a, substation2.port_b) annotation (Line(points={{20,-44},

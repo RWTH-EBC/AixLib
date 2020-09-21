@@ -76,7 +76,9 @@ public
     annotation (Placement(transformation(extent={{10,-20},{-10,-40}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
-  Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet))
+  Modelica.Blocks.Sources.RealExpression
+                                   realExpression(y=(cp_default*(senTem1.T -
+        273.15 + 12)))
     annotation (Placement(transformation(extent={{-138,-104},{-126,-92}})));
   Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W")
   "Input for heat demand profile of substation"
@@ -120,7 +122,9 @@ public
             {-136,80}})));
   Modelica.Blocks.Math.Division division2
     annotation (Placement(transformation(extent={{48,100},{34,114}})));
-  Modelica.Blocks.Sources.Constant const1(k=(cp_default*deltaT_coolingGridSet))
+  Modelica.Blocks.Sources.RealExpression
+                                   realExpression1(y=(cp_default*(273.15 + 22
+         - senTem4.T)))
     annotation (Placement(transformation(extent={{78,84},{66,96}})));
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium =
                Medium)
@@ -155,6 +159,23 @@ public
   Modelica.Blocks.Interfaces.RealOutput P_el_HP( unit = "W")
     "Electrical power consumed by heat pump"
     annotation (Placement(transformation(extent={{216,-30},{236,-10}})));
+  Sensors.TemperatureTwoPort senTem4(redeclare package Medium = Medium,
+      m_flow_nominal=2)
+    annotation (Placement(transformation(extent={{88,14},{108,34}})));
+  Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=7200)
+    annotation (Placement(transformation(extent={{-136,70},{-124,82}})));
+    Modelica.Blocks.Logical.Switch mass_flow_heatExchangerHeating1
+    "calculation of mass flow through heat exchanger (heating)"
+    annotation (Placement(transformation(extent={{-94,84},{-74,104}})));
+  Modelica.Blocks.Sources.Constant const3(k=m_flow_nominal)
+    annotation (Placement(transformation(extent={{-122,50},{-110,62}})));
+  Modelica.Blocks.Sources.BooleanStep booleanStep1(startTime=7200)
+    annotation (Placement(transformation(extent={{-236,-124},{-224,-112}})));
+    Modelica.Blocks.Logical.Switch mass_flow_heatExchangerHeating2
+    "calculation of mass flow through heat exchanger (heating)"
+    annotation (Placement(transformation(extent={{-194,-110},{-174,-90}})));
+  Modelica.Blocks.Sources.Constant const1(k=m_flow_nominal)
+    annotation (Placement(transformation(extent={{-222,-144},{-210,-132}})));
 equation
 
 
@@ -172,10 +193,8 @@ equation
     annotation (Line(points={{-274,-60},{-136,-60}}, color={0,0,127}));
   connect(add1.y, division1.u1) annotation (Line(points={{-113,-66},{-106,-66},{
           -106,-65.2},{-97.6,-65.2}}, color={0,0,127}));
-  connect(const3.y, division1.u2) annotation (Line(points={{-125.4,-98},{-108,-98},
-          {-108,-74.8},{-97.6,-74.8}}, color={0,0,127}));
-  connect(division1.y, pumpHeating.m_flow_in) annotation (Line(points={{-79.2,-70},
-          {-70,-70},{-70,-36}}, color={0,0,127}));
+  connect(realExpression.y, division1.u2) annotation (Line(points={{-125.4,-98},
+          {-108,-98},{-108,-74.8},{-97.6,-74.8}}, color={0,0,127}));
   connect(heatDemand, division.u1) annotation (Line(points={{-274,-60},{-154,
           -60},{-154,-120},{132,-120},{132,-38},{105.4,-38},{105.4,-32.8}},
                                                                        color={0,
@@ -189,10 +208,8 @@ equation
           -84},{94,-84}}, color={0,0,127}));
   connect(add.y, sourceHeating.T_in) annotation (Line(points={{71,-78},{68,-78},
           {68,-50},{64,-50}}, color={0,0,127}));
-  connect(division2.u2, const1.y) annotation (Line(points={{49.4,102.8},{57.7,
-          102.8},{57.7,90},{65.4,90}}, color={0,0,127}));
-  connect(division2.y, pumpCooling.m_flow_in) annotation (Line(points={{33.3,
-          107},{32,107},{32,66},{38,66},{38,36}}, color={0,0,127}));
+  connect(division2.u2, realExpression1.y) annotation (Line(points={{49.4,102.8},
+          {57.7,102.8},{57.7,90},{65.4,90}}, color={0,0,127}));
   connect(vol.ports[2], senMasFlo_GridHeat.port_a) annotation (Line(points={{
           -230,4},{-230,0},{-206,0},{-206,0}}, color={0,127,255}));
   connect(senMasFlo_GridHeat.port_b, jun.port_1)
@@ -205,8 +222,6 @@ equation
           -136,0},{-118,0},{-118,-24},{-114,-24}}, color={0,127,255}));
   connect(senMasFlo_HeatPump.port_b, pumpHeating.port_a)
     annotation (Line(points={{-94,-24},{-80,-24}}, color={0,127,255}));
-  connect(senMasFlo.port_a, jun1.port_2) annotation (Line(points={{78,24},{100,24},
-          {100,0},{116,0}}, color={0,127,255}));
   connect(senMasFlo.port_b, pumpCooling.port_a)
     annotation (Line(points={{58,24},{48,24}}, color={0,127,255}));
   connect(port_a, port_a)
@@ -243,6 +258,31 @@ equation
           -86},{-44,-86},{-44,-84},{-54,-84},{-54,-104}}, color={0,127,255}));
   connect(heaPum.P,P_el_HP)  annotation (Line(points={{-11,-30},{-20,-30},{-20,-20},
           {226,-20}}, color={0,0,127}));
+  connect(senMasFlo.port_a, senTem4.port_a)
+    annotation (Line(points={{78,24},{88,24}}, color={0,127,255}));
+  connect(senTem4.port_b, jun1.port_2) annotation (Line(points={{108,24},{110,
+          24},{110,0},{116,0}}, color={0,127,255}));
+  connect(booleanStep.y,mass_flow_heatExchangerHeating1. u2) annotation (Line(
+        points={{-123.4,76},{-110,76},{-110,94},{-96,94}},
+                                                         color={255,0,255}));
+  connect(const3.y,mass_flow_heatExchangerHeating1. u3) annotation (Line(points={{-109.4,
+          56},{-102,56},{-102,86},{-96,86}},      color={0,0,127}));
+  connect(division2.y, mass_flow_heatExchangerHeating1.u1) annotation (Line(
+        points={{33.3,107},{-138,107},{-138,102},{-96,102}}, color={0,0,127}));
+  connect(booleanStep1.y, mass_flow_heatExchangerHeating2.u2) annotation (Line(
+        points={{-223.4,-118},{-210,-118},{-210,-100},{-196,-100}}, color={255,
+          0,255}));
+  connect(const1.y,mass_flow_heatExchangerHeating2. u3) annotation (Line(points={{-209.4,
+          -138},{-202,-138},{-202,-108},{-196,-108}},
+                                                  color={0,0,127}));
+  connect(division1.y, mass_flow_heatExchangerHeating2.u1) annotation (Line(
+        points={{-79.2,-70},{-68,-70},{-68,-40},{-224,-40},{-224,-92},{-196,-92}},
+        color={0,0,127}));
+  connect(mass_flow_heatExchangerHeating2.y, pumpHeating.m_flow_in) annotation
+    (Line(points={{-173,-100},{-128,-100},{-128,-98},{-70,-98},{-70,-36}},
+        color={0,0,127}));
+  connect(mass_flow_heatExchangerHeating1.y, pumpCooling.m_flow_in)
+    annotation (Line(points={{-73,94},{38,94},{38,36}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,
             -160},{220,160}}),
                          graphics={

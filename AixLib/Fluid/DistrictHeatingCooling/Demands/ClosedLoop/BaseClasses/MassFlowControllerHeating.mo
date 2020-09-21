@@ -72,7 +72,7 @@ model MassFlowControllerHeating
     annotation (Placement(transformation(extent={{232,-102},{252,-82}})));
     Modelica.Blocks.Logical.Greater greater
     annotation (Placement(transformation(extent={{312,84},{332,104}})));
-    Modelica.Blocks.Sources.Constant const(k=0)
+    Modelica.Blocks.Sources.Constant const(k=100)
     "Limit value for electrical power for storage charging"
     annotation (Placement(transformation(extent={{232,62},{252,82}})));
     Modelica.Blocks.Logical.Hysteresis hysteresis_charge(
