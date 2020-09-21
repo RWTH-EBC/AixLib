@@ -5,6 +5,7 @@ stages:
     - deleteBranch
     - SetSettings
     - CheckSettings
+    - Ref_Check
     - build
     - HTMLCheck
     - deploy
@@ -24,6 +25,8 @@ variables:
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/regression_ref_check.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'

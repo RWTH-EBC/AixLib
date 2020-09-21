@@ -1,0 +1,64 @@
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
+stages:
+    - Ref_Check
+    
+
+
+RegressionTest_Check_References:
+    stage: Ref_Check
+    services:
+        -  docker
+    before_script:
+        - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - ssh-keyscan github.com >> ~/.ssh/known_hosts
+        - ssh-agent -a /tmp/ssh_agent.sock > /dev/null
+        - echo "${GITHUB_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        - chmod 600 ~/.ssh/id_rsa
+        - git config --global user.name "${GITLAB_USER_NAME}" 
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
+        
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        
+        ## Push new Reference files to Branch
+        - mkdir public
+        - mkdir CorrectedVersion
+        - cd  CorrectedVersion
+        - git clone --single-branch --branch $TARGET_BRANCH git@github.com:${Github_Repository}.git
+        - cd ${CI_PROJECT_NAME}
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py --single-package AixLib  --tool dymola -n 2 --check-ref -p AixLib < ../bin/06_Configfiles/EOF
+        - if cat ../bin/06_Configfiles/exit.sh | grep "exit 1"; then 
+            model=$(git diff --raw HEAD^1);
+            echo $model;
+            echo $model >  ../bin/03_WhiteLists/changedmodels.txt;
+            cd .. && python  bin/02_CITests/CleanUpSkripts/deploy_artifacts.py;
+            message="Automatic push of the CI with new regression reference files. Pull the new Files before push. [skip ci]";
+            git add AixLib/Resources/ReferenceResults/Dymola;
+            git commit -m "$message";
+            git push git@github.com:${Github_Repository}.git;
+            rm bin/06_Configfiles/exit.sh;
+            mv Referencefiles/ ../../public/Referencefiles;
+            exit 1;
+          else
+            exit 0 ;
+          fi
+    artifacts:
+        when: on_failure
+        paths:
+            - public
+            
+        expire_in: 7 day 
+    
+   
+    only:
+        - external_pull_requests
+       
+
