@@ -82,6 +82,14 @@ model EnthalpyExchanger
     "Heat transfer areas"
     annotation(Dialog(enable=false,tab="calculated"));
 
+  //Advanced
+  parameter Boolean useConPer=true
+    "true, if permeabilty of membrane is assumed to be constant"
+    annotation(Dialog(tab="Advanced"));
+  parameter Real conPerMem(unit="mol/(m.s.Pa)")=9E5
+    "constant permeability of membrane if useConPer=true"
+    annotation(Dialog(tab="Advanced",enable=useConPer));
+
   //----------------------Housing----------------------------------------
   parameter Modelica.SIunits.SpecificHeatCapacity cpHou
     "mass weighted heat capacity of housing"
@@ -183,8 +191,8 @@ model EnthalpyExchanger
     final p_start=p_start,
     final dp_start=dp_start)
     annotation (Placement(transformation(extent={{-36,-28},{22,28}})));
-  Modelica.Blocks.Interfaces.RealInput perMem
-    "membrane permeability in Barrer"
+  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)") if
+       not useConPer "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
@@ -208,7 +216,15 @@ model EnthalpyExchanger
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-74,14})));
+
+protected
+  Modelica.Blocks.Interfaces.RealInput perMemInt(unit="mol/(m.s.Pa)");
+
 equation
+  if useConPer then
+    perMemInt = conPerMem;
+  end if;
+  connect(perMemInt, perMem);
   connect(airDuct1.heatPorts[n:-1:1], membrane.heatPorts_a[1:n]) annotation (
       Line(points={{-17.2,32},{-18,32},{-18,14},{-18.6,14}}, color={191,0,0}));
   connect(airDuct1.massPorts[n:-1:1], membrane.massPorts_a[1:n]) annotation (
@@ -231,8 +247,8 @@ equation
   connect(airDuct2.port_b, port_b2) annotation (Line(points={{-34,-60},{-100,-60}},
                                  color={0,127,255}));
   connect(heatCapacityHousing.port, airDuct1.heatPorts[1]) annotation (Line(
-        points={{-64,14},{-58,14},{-58,16},{-38,16},{-38,32},{-17.2,32}}, color
-        ={191,0,0}));
+        points={{-64,14},{-58,14},{-58,16},{-38,16},{-38,32},{-17.2,32}}, color=
+         {191,0,0}));
   connect(heatCapacityHousing.port, airDuct2.heatPorts[1]) annotation (Line(
         points={{-64,14},{-58,14},{-58,-32},{5.2,-32}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

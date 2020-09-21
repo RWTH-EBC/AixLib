@@ -58,8 +58,6 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-80,-50})));
-  Modelica.Blocks.Sources.Constant permeability(k=9E5)
-    annotation (Placement(transformation(extent={{-90,-6},{-78,6}})));
   Modelica.Blocks.Sources.Ramp p_in(
     height=-60,
     duration=600,
@@ -120,8 +118,6 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
     max(1E-6, senMasFraHotIn.X - senMasFraColIn.X))
     annotation (Placement(transformation(extent={{2,50},{22,70}})));
 equation
-  connect(permeability.y, enthalpyExchanger.perMem)
-    annotation (Line(points={{-77.4,0},{-28.6,0}}, color={0,0,127}));
   connect(p_in.y, souAirHot.p_in)
     annotation (Line(points={{-41,80},{-72,80},{-72,64}}, color={0,0,127}));
   connect(p_in.y, souAirCol.p_in) annotation (Line(points={{-41,80},{-100,80},{-100,

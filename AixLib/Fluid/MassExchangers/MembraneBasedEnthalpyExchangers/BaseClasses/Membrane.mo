@@ -26,6 +26,14 @@ model Membrane "model of membrane"
     "density of membrane"
     annotation(Dialog(tab="Membrane properties",group="Others"));
 
+  //Advanced
+  parameter Boolean useConPer=true
+    "true, if permeabilty of membrane is assumed to be constant"
+    annotation(Dialog(tab="Advanced"));
+  parameter Real conPerMem(unit="mol/(m.s.Pa)")=9E5
+    "constant permeability of membrane if useConPer=true"
+    annotation(Dialog(tab="Advanced",enable=useConPer));
+
   // Assumptions
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=
     Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -47,8 +55,8 @@ model Membrane "model of membrane"
     annotation(Dialog(tab="Initialization", group="Mass Transfer"));
 
   // Inputs
-  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)")
-    "membrane permeability in Barrer"
+  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)") if
+       not useConPer "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 
   // Heat and Mass Transfer models
@@ -74,7 +82,7 @@ model Membrane "model of membrane"
     lengthMem=lengthMem,
     widthMem=widthMem,
     rhoMem=rhoMem,
-    perMem=perMem,
+    perMem=perMemInt,
     nParallel=nParallel,
     p_start=p_start,
     dp_start=dp_start,
@@ -94,7 +102,14 @@ model Membrane "model of membrane"
         transformation(extent={{28,-92},{52,-68}}), iconTransformation(extent={{14,-76},
             {64,-24}})));
 
+protected
+  Modelica.Blocks.Interfaces.RealInput perMemInt(unit="mol/(m.s.Pa)");
+
 equation
+  if useConPer then
+    perMemInt = conPerMem;
+  end if;
+  connect(perMemInt, perMem);
   connect(heatPorts_a,heatTransfer.heatPorts_a);
   connect(heatPorts_b,heatTransfer.heatPorts_b);
 
