@@ -25,7 +25,7 @@ protected
 
   //============ variables =====================
 public
-  Modelica.SIunits.MassFraction w(min=0,max=w_0)
+  Modelica.SIunits.MassFraction w(min=0)
     "actual water uptake of adsorbent in kg/kg";
   Modelica.SIunits.MassFraction w_0(min=0)
     "maximum water uptake of adsorbent in kg/kg (material specific)";

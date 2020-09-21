@@ -8,15 +8,15 @@ partial model PartialDuctHeatTransfer
   parameter Modelica.SIunits.Length[n] heights "height of duct";
   parameter Modelica.SIunits.Length[n] widths "width of duct";
 
-  Real[n] aspectRatios "aspect ratio between duct height and width";
-  parameter Boolean UWT
-    "true if UWT (uniform wall temperature) boundary conditions";
+  Real[n] aspRats "aspect ratio between duct height and width";
+  parameter Boolean uniWalTem
+    "true if uniform wall temperature boundary conditions";
   parameter Boolean local
     "true if local nusslet number or false if average shall be calculated";
-  parameter Boolean rectangularDuct
+  parameter Boolean recDuct
     "true if rectangular duct is used for Sherwood number calculation, else flat gap is used.";
 
-  Modelica.SIunits.CoefficientOfHeatTransfer[n] alphas;
+  Modelica.SIunits.CoefficientOfHeatTransfer[n] hCons;
 
   // Variables
   Modelica.SIunits.ThermalConductivity[n] lambdas "thermal conductivity of medium";
@@ -25,8 +25,8 @@ partial model PartialDuctHeatTransfer
   Real[n] Prs "Prandtl number";
   Real[n] Res "Reynolds number";
   Real[n] Nus "Nusselt number";
-  Modelica.SIunits.Area[n] crossSections "cross section of duct";
-  Real[n] zsStern "dimensionless length";
+  Modelica.SIunits.Area[n] croSecs "cross section of duct";
+  Real[n] zSterns "dimensionless length";
 
 equation
 
@@ -36,25 +36,25 @@ equation
   Prs = Medium.prandtlNumber(states);
 
   for i in 1:n loop
-    crossSections[i] = heights[i]*(widths[i]/nWidth);
-    aspectRatios[i] = heights[i]/widths[i];
-    zsStern[i] = (sum(lengths)/sqrt(crossSections[i]))/max(0.001,Res[i]*Prs[i]);
-    if rectangularDuct then
+    croSecs[i] = heights[i]*(widths[i]/nWidth);
+    aspRats[i] = heights[i]/widths[i];
+    zSterns[i] = (sum(lengths)/sqrt(croSecs[i]))/max(0.001,Res[i]*Prs[i]);
+    if recDuct then
       Res[i] =
         Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
           rho=rhos[i],
           mu=mus[i],
           v=vs[i],
-          D=crossSections[i]);
+          D=croSecs[i]);
       Nus[i] = NusseltNumberMuzychka(
               Re=Res[i],
               Pr=Prs[i],
-              aspectRatio=aspectRatios[i],
-              zStern=zsStern[i],
-              UWT=UWT,
+              aspRat=aspRats[i],
+              zStern=zSterns[i],
+              uniWalTem=uniWalTem,
               local=local,
               gamma=0.1);
-      alphas[i] = (Nus[i]*lambdas[i])/sqrt(crossSections[i]);
+      hCons[i] = (Nus[i]*lambdas[i])/sqrt(croSecs[i]);
     else
       Res[i] =
         Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
@@ -67,7 +67,7 @@ equation
               Pr=Prs[i],
               length=lengths[i],
               dimension=2*heights[i]);
-      alphas[i] = (Nus[i]*lambdas[i])/(2*heights[i]);
+      hCons[i] = (Nus[i]*lambdas[i])/(2*heights[i]);
     end if;
   end for;
 

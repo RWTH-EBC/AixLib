@@ -6,7 +6,7 @@ model LocalDuctConvectiveHeatFlow
   parameter Real nParallel "number of parallel ducts";
 
 equation
-  Q_flows={alphas[i]*surfaceAreas[i]*(heatPorts[i].T - Ts[i])*nParallel for i in 1:n};
+  Q_flows={hCons[i]*surfaceAreas[i]*(heatPorts[i].T - Ts[i])*nParallel for i in 1:n};
 
 
   annotation (Documentation(info="<html>

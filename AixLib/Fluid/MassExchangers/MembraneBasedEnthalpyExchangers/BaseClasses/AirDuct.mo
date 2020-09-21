@@ -1,7 +1,7 @@
 within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses;
 model AirDuct "model of the air duct"
   extends Interfaces.PartialTwoPortInterface(
-    redeclare final package Medium = AixLib.Media.Air,
+    redeclare package Medium = AixLib.Media.Air,
     port_a(h_outflow(start=h_outflow_start)),
     port_b(h_outflow(start=h_outflow_start)));
 
@@ -28,13 +28,13 @@ model AirDuct "model of the air duct"
      annotation(Dialog(tab="Geometry"));
 
   // Heat and Mass transfer
-  parameter Boolean UWT
+  parameter Boolean uniWalTem
     "true if uniform wall temperature, else uniform wall heat flux"
      annotation(Dialog(tab="Heat and Mass transfer"));
   parameter Boolean local
     "true if local Nusselt/Sherwood number, else average"
      annotation(Dialog(tab="Heat and Mass transfer"));
-  parameter Boolean rectangularDuct
+  parameter Boolean recDuct
     "true if rectangular duct is used for Nusselt/Sherwood number calculation, else flat gap is used."
      annotation(Dialog(tab="Heat and Mass transfer"));
 
@@ -70,10 +70,10 @@ model AirDuct "model of the air duct"
   // Variables
   Modelica.SIunits.Length[nNodes] lengths = fill(lengthDuct/nNodes,nNodes)
     "length of segements in flow direction";
-  Modelica.SIunits.Area[nNodes] crossSections = fill(heightDuct*widthDuct,nNodes)
+  Modelica.SIunits.Area[nNodes] croSecs = fill(heightDuct*widthDuct,nNodes)
     "cross section of duct segments";
   Modelica.SIunits.Velocity[nNodes] vs={port_a.m_flow/Medium.density(states[i])
-    /crossSections[i] for i in 1:nNodes}/nParallel
+    /croSecs[i] for i in 1:nNodes}/nParallel
     "velocity in air duct segments";
   Modelica.SIunits.PartialPressure[nNodes] ps={vol[i].p*vol[i].X_w*(Ms[i]/
     M_steam) for i in 1:nNodes};
@@ -107,9 +107,9 @@ model AirDuct "model of the air duct"
     heights=fill(heightDuct,nNodes),
     widths=fill(widthDuct,nNodes),
     nParallel=nParallel,
-    UWT=UWT,
+    uniWalTem=uniWalTem,
     local=local,
-    rectangularDuct=rectangularDuct);
+    recDuct=recDuct);
 
   MassTransfer massTransfer(
     redeclare package Medium=Medium,
@@ -123,9 +123,9 @@ model AirDuct "model of the air duct"
     heights=fill(heightDuct,nNodes),
     widths=fill(widthDuct,nNodes),
     nParallel=nParallel,
-    UWT=UWT,
+    uniWalTem=uniWalTem,
     local=local,
-    rectangularDuct=rectangularDuct);
+    recDuct=recDuct);
 
 
   AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol[nNodes](

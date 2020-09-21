@@ -8,12 +8,12 @@ partial model PartialDuctMassTransfer
   parameter Modelica.SIunits.Length[n] heights "height of duct";
   parameter Modelica.SIunits.Length[n] widths "width of duct";
 
-  Real[n] aspectRatios "aspect ratio between duct height and width";
-  parameter Boolean UWT
-    "true if UWT (uniform wall temperature) boundary conditions";
+  Real[n] aspRats "aspect ratio between duct height and width";
+  parameter Boolean uniWalTem
+    "true if uniform wall temperature boundary conditions";
   parameter Boolean local
     "true if local Sherwood number or false if average shall be calculated";
-  parameter Boolean rectangularDuct
+  parameter Boolean recDuct
     "true if rectangular duct is used for Sherwood number calculation, else flat gap is used.";
 
   Real[n] betas;
@@ -25,8 +25,8 @@ partial model PartialDuctMassTransfer
   Real[n] Scs "Schmidt number";
   Real[n] Res "Reynolds number";
   Real[n] Shs "Shwerwood number";
-  Modelica.SIunits.Area[n] crossSections "cross section of duct";
-  Real[n] zsStern "dimensionless length";
+  Modelica.SIunits.Area[n] croSecs "cross section of duct";
+  Real[n] zSterns "dimensionless length";
 
 protected
   constant Modelica.SIunits.MolarMass M_air = 28.96;
@@ -45,8 +45,8 @@ equation
   lambdas = Medium.thermalConductivity(states);
 
   for i in 1:n loop
-    crossSections[i] = heights[i]*(widths[i]/nWidth);
-    aspectRatios[i] = heights[i]/widths[i];
+    croSecs[i] = heights[i]*(widths[i]/nWidth);
+    aspRats[i] = heights[i]/widths[i];
     omegas[i] = CollisionIntegral(
       T=Medium.temperature(states[i]));
     Ds[i] = DiffusionCoefficient(
@@ -58,23 +58,23 @@ equation
       sigma2=sigmaSteam,
       omega=omegas[i]);
     Scs[i] = mus[i]/(rhos[i]*Ds[i]);
-    zsStern[i] = (sum(lengths)/sqrt(crossSections[i]))/max(0.001,Res[i]*Scs[i]);
-    if rectangularDuct then
+    zSterns[i] = (sum(lengths)/sqrt(croSecs[i]))/max(0.001,Res[i]*Scs[i]);
+    if recDuct then
       Res[i] =
       Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
       rho=rhos[i],
       mu=mus[i],
       v=vs[i],
-      D=sqrt(crossSections[i]));
+      D=sqrt(croSecs[i]));
       Shs[i]=SherwoodNumberMuzychka(
         Re=Res[i],
         Sc=Scs[i],
-        aspectRatio=aspectRatios[i],
-        zStern=zsStern[i],
-        UWT=UWT,
+        aspRat=aspRats[i],
+        zStern=zSterns[i],
+        uniWalTem=uniWalTem,
         local=local,
         gamma=0.1);
-      betas[i] = (Shs[i]*rhos[i]*Ds[i])/sqrt(crossSections[i]);
+      betas[i] = (Shs[i]*rhos[i]*Ds[i])/sqrt(croSecs[i]);
     else
       Res[i] =
       Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(

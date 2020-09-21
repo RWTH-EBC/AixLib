@@ -3,9 +3,9 @@ function SherwoodNumberMuzychka
   "calculates sherwood number out of reynolds and prandtl number according to Muzychka et. al"
   input Real Re "Reynolds number";
   input Real Sc "Schmidt number";
-  input Real aspectRatio "aspect ratio between duct height and width";
+  input Real aspRat "aspect ratio between duct height and width";
   input Real zStern "dimensionless length";
-  input Boolean UWT "true if UWT (uniform wall temperature) boundary conditions";
+  input Boolean uniWalTem "true if uniform wall temperature boundary conditions";
   input Boolean local "true if local nusslet number or false if average shall be calculated";
   input Real gamma "shape parameter (rectangular duct: 0.1)";
 
@@ -25,7 +25,7 @@ algorithm
   m :=2.27 + 1.65*Sc^(1/3);
 
   // Defintion for boundary function
-  if UWT == true then
+  if uniWalTem == true then
     fSc := 0.564/(1+(1.644*Sc^(1/6))^(9/2))^(2/9);
     C1 := 3.24;
     C3 := 0.409;
@@ -44,10 +44,10 @@ algorithm
   end if;
 
   // Definition of product of reynolds and friciton factor
-  fRe := 12/(sqrt(aspectRatio) * (1+aspectRatio) * (1 - (192*aspectRatio)/(pi^5) * tanh(pi/(2*aspectRatio))));
+  fRe := 12/(sqrt(aspRat) * (1+aspRat) * (1 - (192*aspRat)/(pi^5) * tanh(pi/(2*aspRat))));
 
   //Calculation of Nusselt number
-  Sh := (((C4 * fSc)/sqrt(zStern))^m + ((C2 * C3 * (fRe/zStern)^(1/3))^5 + (C1 * (fRe/(8 * sqrt(pi)*aspectRatio^gamma)))^5)^(m/5))^(1/m);
+  Sh := (((C4 * fSc)/sqrt(zStern))^m + ((C2 * C3 * (fRe/zStern)^(1/3))^5 + (C1 * (fRe/(8 * sqrt(pi)*aspRat^gamma)))^5)^(m/5))^(1/m);
 
   annotation (Documentation(revisions="<html>
 <ul>

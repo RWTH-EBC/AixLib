@@ -8,16 +8,16 @@ model MembraneMassTransfer "model for mass transfer through membrane"
     "number of parallel air ducts";
 
   // Parameter
-  parameter Modelica.SIunits.Length lengthMembrane
+  parameter Modelica.SIunits.Length lengthMem
     "length of membrane in flow direction";
-  parameter Modelica.SIunits.Length widthMembrane
+  parameter Modelica.SIunits.Length widthMem
     "width of membrane";
-  parameter Modelica.SIunits.Length thicknessMembrane
+  parameter Modelica.SIunits.Length thicknessMem
     "thickness of membrane";
-  parameter Modelica.SIunits.Density rhoMembrane
+  parameter Modelica.SIunits.Density rhoMem
     "density of membrane";
-  parameter Modelica.SIunits.Area areaMembrane=
-    lengthMembrane*widthMembrane*nParallel
+  parameter Modelica.SIunits.Area areaMem=
+    lengthMem*widthMem*nParallel
     "surface area of membrane"
     annotation (Dialog(enable=false));
 
@@ -28,7 +28,7 @@ model MembraneMassTransfer "model for mass transfer through membrane"
     "start value for partial pressure difference between membrane's surfaces";
 
   // Inputs
-  input Real PMembrane(unit="mol/(m.s.Pa)") "membrane's permeability in Barrer";
+  input Real perMem(unit="mol/(m.s.Pa)") "membrane's permeability in Barrer";
 
 //   // partial pressures
 //   Modelica.SIunits.PartialPressure[n] p_b(each start=p_start+0.5*dp_start);
@@ -60,8 +60,8 @@ protected
 equation
   for i in 1:n loop
     0 = massPorts_a[i].m_flow + massPorts_b[i].m_flow;
-    massPorts_a[i].m_flow = (PMembrane * cCon * M_steam) *
-      (massPorts_a[i].p - massPorts_b[i].p) / thicknessMembrane * areaMembrane/n;
+    massPorts_a[i].m_flow = (perMem * cCon * M_steam) *
+      (massPorts_a[i].p - massPorts_b[i].p) / thicknessMem * areaMem/n;
 
 //     p_a[i] = massPorts_a[i].p * massPorts_a[i].X * (M_a[i]/M_steam);
 //     p_b[i] = massPorts_b[i].p * massPorts_b[i].X * (M_b[i]/M_steam);

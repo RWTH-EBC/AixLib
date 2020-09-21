@@ -7,22 +7,22 @@ model Membrane "model of membrane"
     "number of parallel membranes";
 
   // Parameters
-  parameter Modelica.SIunits.Length lengthMembrane
+  parameter Modelica.SIunits.Length lengthMem
     "length of membrane in flow direction"
     annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length widthMembrane
+  parameter Modelica.SIunits.Length widthMem
     "width of membrane"
     annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length thicknessMembrane
+  parameter Modelica.SIunits.Length thicknessMem
     "thickness of membrane"
     annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.SpecificHeatCapacity heatCapacityMembrane
+  parameter Modelica.SIunits.SpecificHeatCapacity cpMem
     "mass weighted heat capacity of membrane"
     annotation(Dialog(tab="Membrane properties",group="Heat Transfer"));
-  parameter Modelica.SIunits.ThermalConductivity lambdaMembrane
+  parameter Modelica.SIunits.ThermalConductivity lambdaMem
     "thermal conductivity of membrane"
     annotation(Dialog(tab="Membrane properties",group="Heat Transfer"));
-  parameter Modelica.SIunits.Density rhoMembrane
+  parameter Modelica.SIunits.Density rhoMem
     "density of membrane"
     annotation(Dialog(tab="Membrane properties",group="Others"));
 
@@ -47,7 +47,7 @@ model Membrane "model of membrane"
     annotation(Dialog(tab="Initialization", group="Mass Transfer"));
 
   // Inputs
-  Modelica.Blocks.Interfaces.RealInput PMembrane(unit="mol/(m.s.Pa)")
+  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)")
     "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 
@@ -58,23 +58,23 @@ model Membrane "model of membrane"
     "mass transfer model in membrane";
 
   HeatTransfer heatTransfer(
-    thicknessMembrane=thicknessMembrane,
-    lambdaMembrane=lambdaMembrane,
-    lengthMembrane=lengthMembrane,
-    widthMembrane=widthMembrane,
-    rhoMembrane=rhoMembrane,
-    heatCapacityMembrane=heatCapacityMembrane,
+    thicknessMem=thicknessMem,
+    lambdaMem=lambdaMem,
+    lengthMem=lengthMem,
+    widthMem=widthMem,
+    rhoMem=rhoMem,
+    cpMem=cpMem,
     nParallel=nParallel,
     T_start=T_start,
     dT_start=dT_start,
     n=nNodes);
 
   MassTransfer massTransfer(
-    thicknessMembrane=thicknessMembrane,
-    lengthMembrane=lengthMembrane,
-    widthMembrane=widthMembrane,
-    rhoMembrane=rhoMembrane,
-    PMembrane=PMembrane,
+    thicknessMem=thicknessMem,
+    lengthMem=lengthMem,
+    widthMem=widthMem,
+    rhoMem=rhoMem,
+    perMem=perMem,
     nParallel=nParallel,
     p_start=p_start,
     dp_start=dp_start,

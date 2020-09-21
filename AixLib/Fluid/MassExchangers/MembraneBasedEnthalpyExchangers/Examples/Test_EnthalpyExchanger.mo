@@ -2,23 +2,24 @@ within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Examples;
 model Test_EnthalpyExchanger "example test for enthalpy exchanger"
   extends Modelica.Icons.Example;
   EnthalpyExchanger enthalpyExchanger(
+    redeclare package Medium = Media.Air,
     n=3,
     nParallel=184,
     lengthDuct=0.34,
     heightDuct=0.0025,
     widthDuct=0.3,
-    UWT=true,
+    uniWalTem=true,
     local=false,
     nWidth=10,
-    rectangularDuct=false,
+    recDuct=false,
     m_flow_nominal=400/3600*1.18,
     dp_nominal(displayUnit="Pa") = 120,
-    thicknessMembrane=110E-6,
-    heatCapacityMembrane=1900,
-    lambdaMembrane=0.34,
-    rhoMembrane(displayUnit="kg/m3") = 920,
-    heatCapacityHousing=1900,
-    massHousing=2,
+    thicknessMem=110E-6,
+    cpMem=1900,
+    lambdaMem=0.34,
+    rhoMem(displayUnit="kg/m3") = 920,
+    cpHou=1900,
+    mHou=2,
     T_start_m=293.15,
     dT_start=10,
     p_start_m(displayUnit="Pa") = 2000,
@@ -119,7 +120,7 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
     max(1E-6, senMasFraHotIn.X - senMasFraColIn.X))
     annotation (Placement(transformation(extent={{2,50},{22,70}})));
 equation
-  connect(permeability.y, enthalpyExchanger.PMembrane)
+  connect(permeability.y, enthalpyExchanger.perMem)
     annotation (Line(points={{-77.4,0},{-28.6,0}}, color={0,0,127}));
   connect(p_in.y, souAirHot.p_in)
     annotation (Line(points={{-41,80},{-72,80},{-72,64}}, color={0,0,127}));

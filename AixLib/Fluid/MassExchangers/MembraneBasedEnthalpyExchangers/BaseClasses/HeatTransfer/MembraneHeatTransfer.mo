@@ -9,25 +9,25 @@ model MembraneHeatTransfer
     "number of parallel air ducts";
 
   // Parameters
-  parameter Modelica.SIunits.Length lengthMembrane
+  parameter Modelica.SIunits.Length lengthMem
     "length of membrane in flow direction";
-  parameter Modelica.SIunits.Length widthMembrane
+  parameter Modelica.SIunits.Length widthMem
     "width of membrane";
-  parameter Modelica.SIunits.Length thicknessMembrane
+  parameter Modelica.SIunits.Length thicknessMem
     "thickness of membrane";
-  parameter Modelica.SIunits.ThermalConductivity lambdaMembrane
+  parameter Modelica.SIunits.ThermalConductivity lambdaMem
     "thermal conductivity of membrane";
-  parameter Modelica.SIunits.Density rhoMembrane
+  parameter Modelica.SIunits.Density rhoMem
     "density of membrane";
-  parameter Modelica.SIunits.SpecificHeatCapacity heatCapacityMembrane
+  parameter Modelica.SIunits.SpecificHeatCapacity cpMem
     "mass weighted heat capacity of membrane";
 
-  parameter Modelica.SIunits.Mass massMembrane=
-    rhoMembrane*(lengthMembrane*widthMembrane*thicknessMembrane)*nParallel
+  parameter Modelica.SIunits.Mass massMem=
+    rhoMem*(lengthMem*widthMem*thicknessMem)*nParallel
     "mass of membrane"
     annotation (Dialog(enable=false));
-  parameter Modelica.SIunits.Area areaMembrane=
-    lengthMembrane*widthMembrane*nParallel
+  parameter Modelica.SIunits.Area areaMem=
+    lengthMem*widthMem*nParallel
     "surface area of membrane"
     annotation (Dialog(enable=false));
 
@@ -44,7 +44,7 @@ model MembraneHeatTransfer
     "start value for temperature difference between heatPorts_a and heatPorst_b";
 
   // Mass
-  Modelica.SIunits.Mass[n] m=fill(massMembrane/n, n)
+  Modelica.SIunits.Mass[n] m=fill(massMem/n, n)
     "Distribution of wall mass";
 
   // Temperatures
@@ -78,13 +78,13 @@ equation
     if energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState then
       0 = heatPorts_a[i].Q_flow + heatPorts_b[i].Q_flow;
     else
-      heatCapacityMembrane*m[i]*der(Ts[i]) =
+      cpMem*m[i]*der(Ts[i]) =
         heatPorts_a[i].Q_flow + heatPorts_b[i].Q_flow;
     end if;
-    heatPorts_a[i].Q_flow = lambdaMembrane / thicknessMembrane * (Ta[i]-Ts[i]) *
-      areaMembrane/n;
-    heatPorts_b[i].Q_flow = lambdaMembrane / thicknessMembrane * (Tb[i]-Ts[i]) *
-      areaMembrane/n;
+    heatPorts_a[i].Q_flow = lambdaMem / thicknessMem * (Ta[i]-Ts[i]) *
+      areaMem/n;
+    heatPorts_b[i].Q_flow = lambdaMem / thicknessMem * (Tb[i]-Ts[i]) *
+      areaMem/n;
   end for;
 
   Ta = heatPorts_a.T;

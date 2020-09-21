@@ -3,12 +3,10 @@ model EnthalpyExchanger
   "model for a parallel membrane enthalpy exchanger"
 
   // Medium in air ducts
-  package Medium = AixLib.Media.Air
-    "medium in the air ducts" annotation (Documentation(info="<html>
-<p>This model combines two <a href=\"AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.AirDuct\">AirDuctModels</a> with a <a href=\"AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Membrane\">MembraneModel</a> to form a model of a membrane-based counter-flow enthalpy exchanger. </p>
-<p>Heat and mass transfer are resolved locally by defining the paramter <span style=\"font-family: Courier New;\">n</span>. The higher the number of segments are, the better the accuracy, but also the higher the simulation time. Pleas note, that using a highly distributed air duct the Nusselt/ Sherwood number needs to be calculated locally (see parameters for heat and mass transfer). By using the parameter <span style=\"font-family: Courier New;\">nParallel</span> a parallel arrangement of several membrane and air ducts can be realized.</p>
-<p>Please note that the heat and mass transfer models implemented in this model only provide accurate transfer models for laminar flow, that is common for enthalpy exchangers.</p>
-</html>"));
+  replaceable package Medium = AixLib.Media.Air
+    "medium in the air ducts" annotation(choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.AirIncompressible "Moist air incompressible")));
 
   // General parameter
   parameter Integer n(min=2)
@@ -35,8 +33,8 @@ model EnthalpyExchanger
     annotation(Dialog(tab="AirDucts",group="Geometry"));
 
   // Heat and mass transfer parameters
-  parameter Boolean UWT
-    "true if UWT(uniform wall temperature) boundary conditions"
+  parameter Boolean uniWalTem
+    "true if uniform wall temperature boundary conditions"
     annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
   parameter Boolean local
     "true if heat and mass transfer are locally resolved"
@@ -44,7 +42,7 @@ model EnthalpyExchanger
   parameter Integer nWidth(min=1) = 1
     "number of segments in width direction"
     annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
-  parameter Boolean rectangularDuct
+  parameter Boolean recDuct
     "true if rectangular duct is used for Nusselt/Sherwood number calculation, else flat gap is used."
      annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
 
@@ -57,38 +55,38 @@ model EnthalpyExchanger
   //-----------------------Membrane-------------------------------------
 
   // Geometry
-  parameter Modelica.SIunits.Length lengthMembrane=lengthDuct
+  parameter Modelica.SIunits.Length lengthMem=lengthDuct
     "length of membranes in flow direction"
     annotation(Dialog(enable=false,tab="Membranes",group="Geometry"));
-  parameter Modelica.SIunits.Length widthMembrane=widthDuct
+  parameter Modelica.SIunits.Length widthMem=widthDuct
     "width of membranes"
     annotation(Dialog(enable=false,tab="Membranes",group="Geometry"));
-  parameter Modelica.SIunits.Length thicknessMembrane
+  parameter Modelica.SIunits.Length thicknessMem
     "thickness of membranes"
     annotation(Dialog(tab="Membranes",group="Geometry"));
-  parameter Modelica.SIunits.SpecificHeatCapacity heatCapacityMembrane
+  parameter Modelica.SIunits.SpecificHeatCapacity cpMem
     "mass weighted heat capacity of membrane"
     annotation(Dialog(tab="Membranes",group="Heat and mass transfer"));
 
   // Membrane properties
-  parameter Modelica.SIunits.ThermalConductivity lambdaMembrane
+  parameter Modelica.SIunits.ThermalConductivity lambdaMem
     "thermal conductivity of membrane"
     annotation(Dialog(tab="Membranes",group="Heat and mass transfer"));
-  parameter Modelica.SIunits.Density rhoMembrane
+  parameter Modelica.SIunits.Density rhoMem
     "density of membrane"
     annotation(Dialog(tab="Membranes",group="Others"));
 
   // calculated parameter
   parameter Modelica.SIunits.Area[n] surfaceAreas=
-    fill(lengthMembrane*widthMembrane/n,n)
+    fill(lengthMem*widthMem/n,n)
     "Heat transfer areas"
     annotation(Dialog(enable=false,tab="calculated"));
 
   //----------------------Housing----------------------------------------
-  parameter Modelica.SIunits.SpecificHeatCapacity heatCapacityHousing
+  parameter Modelica.SIunits.SpecificHeatCapacity cpHou
     "mass weighted heat capacity of housing"
     annotation(Dialog(tab="Housing",group="Heat and mass transfer"));
-  parameter Modelica.SIunits.Mass massHousing
+  parameter Modelica.SIunits.Mass mHou
     "mass of housing"
     annotation(Dialog(tab="Housing",group="Others"));
 
@@ -134,6 +132,7 @@ model EnthalpyExchanger
     annotation(Dialog(tab = "Initialization"));
 
   BaseClasses.AirDuct airDuct2(
+    redeclare final package Medium=Medium,
     final m_flow_nominal=m_flow_nominal,
     final dp_nominal=dp_nominal,
     final nNodes=n,
@@ -142,9 +141,9 @@ model EnthalpyExchanger
     final lengthDuct=lengthDuct,
     final widthDuct=widthDuct,
     final heightDuct=heightDuct,
-    final UWT=UWT,
+    final uniWalTem=uniWalTem,
     final local=local,
-    final rectangularDuct=rectangularDuct,
+    final recDuct=recDuct,
     final energyDynamics=energyDynamics,
     final p_start=p_start,
     final T_start=T_start,
@@ -152,6 +151,7 @@ model EnthalpyExchanger
     final C_start=C_start)
     annotation (Placement(transformation(extent={{22,-88},{-34,-32}})));
   BaseClasses.AirDuct airDuct1(
+    redeclare final package Medium=Medium,
     final m_flow_nominal=m_flow_nominal,
     final dp_nominal=dp_nominal,
     final nNodes=n,
@@ -160,9 +160,9 @@ model EnthalpyExchanger
     final lengthDuct=lengthDuct,
     final widthDuct=widthDuct,
     final heightDuct=heightDuct,
-    final UWT=UWT,
+    final uniWalTem=uniWalTem,
     final local=local,
-    final rectangularDuct=rectangularDuct,
+    final recDuct=recDuct,
     final energyDynamics=energyDynamics,
     final p_start=p_start,
     final T_start=T_start,
@@ -172,18 +172,18 @@ model EnthalpyExchanger
   BaseClasses.Membrane membrane(
     final nNodes=n,
     final nParallel=nParallel,
-    final lengthMembrane=lengthMembrane,
-    final widthMembrane=widthMembrane,
-    final thicknessMembrane=thicknessMembrane,
-    final heatCapacityMembrane=heatCapacityMembrane,
-    final lambdaMembrane=lambdaMembrane,
-    final rhoMembrane=rhoMembrane,
+    final lengthMem=lengthMem,
+    final widthMem=widthMem,
+    final thicknessMem=thicknessMem,
+    final cpMem=cpMem,
+    final lambdaMem=lambdaMem,
+    final rhoMem=rhoMem,
     final T_start=T_start_m,
     final dT_start=dT_start,
     final p_start=p_start,
     final dp_start=dp_start)
     annotation (Placement(transformation(extent={{-36,-28},{22,28}})));
-  Modelica.Blocks.Interfaces.RealInput PMembrane
+  Modelica.Blocks.Interfaces.RealInput perMem
     "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
@@ -203,6 +203,11 @@ model EnthalpyExchanger
     redeclare final package Medium=Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacityHousing(C=cpHou*
+        mHou) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-74,14})));
 equation
   connect(airDuct1.heatPorts[n:-1:1], membrane.heatPorts_a[1:n]) annotation (
       Line(points={{-17.2,32},{-18,32},{-18,14},{-18.6,14}}, color={191,0,0}));
@@ -214,7 +219,7 @@ equation
   connect(membrane.massPorts_b, airDuct2.massPorts) annotation (Line(points={{4.31,
           -14},{-4,-14},{-4,-32.28},{-17.48,-32.28}},               color={0,140,
           72}));
-  connect(PMembrane, membrane.PMembrane)
+  connect(perMem, membrane.perMem)
     annotation (Line(points={{-120,0},{-82,0},{-82,3.55271e-15},{-41.8,3.55271e-15}},
                                                 color={0,0,127}));
   connect(airDuct1.port_a, port_a1) annotation (Line(points={{-34,60},{-100,60}},
@@ -225,6 +230,11 @@ equation
                       color={0,127,255}));
   connect(airDuct2.port_b, port_b2) annotation (Line(points={{-34,-60},{-100,-60}},
                                  color={0,127,255}));
+  connect(heatCapacityHousing.port, airDuct1.heatPorts[1]) annotation (Line(
+        points={{-64,14},{-58,14},{-58,16},{-38,16},{-38,32},{-17.2,32}}, color
+        ={191,0,0}));
+  connect(heatCapacityHousing.port, airDuct2.heatPorts[1]) annotation (Line(
+        points={{-64,14},{-58,14},{-58,-32},{5.2,-32}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,20}},
