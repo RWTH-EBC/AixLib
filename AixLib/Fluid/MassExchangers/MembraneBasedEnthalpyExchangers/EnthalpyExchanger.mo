@@ -186,6 +186,8 @@ model EnthalpyExchanger
     final cpMem=cpMem,
     final lambdaMem=lambdaMem,
     final rhoMem=rhoMem,
+    final useConPer=useConPer,
+    final conPerMem=conPerMem,
     final T_start=T_start_m,
     final dT_start=dT_start,
     final p_start=p_start,
