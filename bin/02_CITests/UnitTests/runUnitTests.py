@@ -118,14 +118,16 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 			Ref_List.append(name)
 		Ref = list(set(Ref_List))
 		
-		
-		for z in WhiteList:
-			for i in Ref:
-				if  i.find(z) > -1:
-					print("Don´t Create Reference files for Package "+z+ ". This Package is on the WhiteList") 
-					
-					Ref.remove(i)
-		
+		Err_List = []
+		for z in Ref:
+			for i in WhiteList:
+				if  z.find(i) > -1:
+					print("Don´t Create Reference files for Package "+z+ " : This Package is on the WhiteList") 
+					Err_List.append(z)
+				else:
+					continue
+		for x in Err_List:
+			Ref.remove(x)
 		
 		if len(Ref) == 0:
 			print("All Reference files exists, except the Models on WhiteList.")
