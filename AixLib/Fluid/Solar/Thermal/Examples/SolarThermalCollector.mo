@@ -72,7 +72,7 @@ equation
   connect(hotSummerDay.y[2], solarThermal.Irradiation)
     annotation (Line(points={{-5,72},{10,72},{10,10}},   color={0,0,127}));
   annotation (
-    experiment(StopTime=82600, Interval=3600),
+    experiment(Tolerance=1e-6, StopTime=82600, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
     Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>

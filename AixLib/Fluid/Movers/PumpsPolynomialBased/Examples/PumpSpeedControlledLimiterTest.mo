@@ -80,7 +80,7 @@ equation
       index=2,
       extent={{6,3},{6,3}}));
   annotation (
-    experiment(StopTime=200),
+    experiment(StopTime=200,Tolerance=1e-6),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.

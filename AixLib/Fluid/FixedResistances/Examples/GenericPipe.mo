@@ -97,7 +97,7 @@ equation
     experiment(Tolerance=1e-6,
       StopTime=10800,
       Interval=60,
-      __Dymola_Algorithm="Lsodar"),
+      __Dymola_Algorithm="dassl"),
     experimentSetupOutput(events=false),
     __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/GenericPipe.mos"

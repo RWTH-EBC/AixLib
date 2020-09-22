@@ -82,7 +82,7 @@ equation
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{48,
           10},{48,-30},{-20,-30}}, color={0,127,255}));
   annotation (
-    experiment(StopTime=600),
+    experiment(StopTime=600,Tolerance=1e-6),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.

@@ -77,7 +77,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   annotation (
-      experiment(StopTime=600),
+      experiment(StopTime=600, Tolerance=1e-6),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
