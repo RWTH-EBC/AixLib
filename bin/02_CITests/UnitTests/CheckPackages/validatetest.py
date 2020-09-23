@@ -284,6 +284,7 @@ class ValidateTest(object):
 				filepath = subdir + os.sep + file
 				test = subdir.split(os.sep)
 				#print(filepath)
+				'''
 				if filepath.find("Examples") > -1  or filepath.find("Validation")> -1:
 					if filepath.endswith(".mo") and file != "package.mo":
 						model = filepath.replace(os.sep,".")
@@ -297,7 +298,7 @@ class ValidateTest(object):
 						model = filepath.replace(os.sep,".")
 						model = model[model.rfind("AixLib"):model.rfind(".mo")]
 						ModelList.append(model)
-				'''
+						continue
 		return ModelList
 		
 		''' Check models and return a Error Log, if the check failed '''
