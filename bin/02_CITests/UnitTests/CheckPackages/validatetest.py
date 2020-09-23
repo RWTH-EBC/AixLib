@@ -280,13 +280,24 @@ class ValidateTest(object):
 		ModelList = []
 		for subdir, dirs, files in os.walk(rootdir):
 			for file in files:
+				
 				filepath = subdir + os.sep + file
 				test = subdir.split(os.sep)
-				if test[len(test)-1] == "Examples" or test[len(test)-1] == "Validation":
+				#print(filepath)
+				if filepath.find("Examples") > -1  or filepath.find("Validation")> -1:
 					if filepath.endswith(".mo") and file != "package.mo":
 						model = filepath.replace(os.sep,".")
 						model = model[model.rfind("AixLib"):model.rfind(".mo")]
 						ModelList.append(model)
+						continue
+				'''
+				if test[len(test)-1] == "Examples" or test[len(test)-1] == "Validation":
+					#print((test))
+					if filepath.endswith(".mo") and file != "package.mo":
+						model = filepath.replace(os.sep,".")
+						model = model[model.rfind("AixLib"):model.rfind(".mo")]
+						ModelList.append(model)
+				'''
 		return ModelList
 		
 		''' Check models and return a Error Log, if the check failed '''
@@ -467,8 +478,9 @@ class ValidateTest(object):
 		ErrorList = []
 		if self.Changedmodels == False:	
 			ModelList = ValidateTest._listAllExamples(self)
+			
 			if len(ModelList) == 0:
-				print("Wrong Path")
+				print("Found no Examples")
 				exit(0)
 			for i in ModelList:
 				result=dymola.checkModel(i,simulate=True)
