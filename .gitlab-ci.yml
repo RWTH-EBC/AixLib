@@ -1,275 +1,46 @@
-test_overall_coverage:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
-  stage: test
-  services:
-    -  docker
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
 
-  before_script:
-    - printenv
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - export PYTHONIOENCODING=utf-8 # just in case
+stages:
+    - deleteBranch
+    - SetSettings
+    - CheckSettings
+    - build
+    - HTMLCheck
+    - deploy
+    - openMR
+    - post
+    - StyleCheck
+    - Check
+    - Simulate
+    - RegressionTest
+ 
+variables:
+    Praefix_Branch: "Correct_HTML_"
+    TARGET_BRANCH: $CI_COMMIT_REF_NAME
+    Newbranch: ${Praefix_Branch}${CI_COMMIT_REF_NAME}
+    Github_Repository : RWTH-EBC/AixLib
+    
+include:
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/SyntaxTests/style_check.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/check_model.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/regression_test.gitlac-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/simulate_model.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/changed_simulate_model.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/changed_check_model.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file: 'modelica-ci-tests/UnitTests/changed_regression_test.gitlab-ci.yml'
 
-  script:
-    - cd AixLib && python ../bin/runUnitTests.py --coverage-only
-
-  artifacts:
-    when: on_failure
-    paths:
-      - AixLib/simulator-dymola.log
-
-  retry:
-    max: 2
-    when: runner_system_failure
-
-test_dymola_Airflow:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-  stage: test
-  services:
-    -  docker
-
-  before_script:
-    - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - python -V               # Print out python version for debugging
-    - dir
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - export PYTHONIOENCODING=utf-8 # just in case
-
-  script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Airflow --tool dymola
-
-  artifacts:
-    when: on_failure
-    paths:
-      - AixLib/simulator-dymola.log
-
-  retry:
-    max: 2
-    when: runner_system_failure
-
-
-test_dymola_BoundaryConditions:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-  stage: test
-  services:
-    -  docker
-
-  before_script:
-    - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - python -V               # Print out python version for debugging
-    - dir
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - export PYTHONIOENCODING=UTF8 # just in case
-
-  script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.BoundaryConditions --tool dymola
-
-  artifacts:
-    when: on_failure
-    paths:
-      - AixLib/simulator-dymola.log
-
-  retry:
-    max: 2
-    when: runner_system_failure
-
-
-test_dymola_Controls:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-  stage: test
-  services:
-    -  docker
-
-  before_script:
-    - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - python -V               # Print out python version for debugging
-    - dir
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - export PYTHONIOENCODING=UTF8 # just in case
-
-  script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Controls --tool dymola
-
-  artifacts:
-    when: on_failure
-    paths:
-      - AixLib/simulator-dymola.log
-
-  retry:
-    max: 2
-    when: runner_system_failure
-
-
-# test_dymola_Electrical:
-#   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-#   stage: test
-#   services:
-#     -  docker
-
-#   before_script:
-#     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-#     - export PIP_CACHE_DIR="/opt/cache/pip"
-#     - source activate python27
-#     - python -V               # Print out python version for debugging
-#     - dir
-#     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-#     - export PYTHONIOENCODING=UTF8 # just in case
-
-#   script:
-#     - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Electrical --tool dymola
-
-#   artifacts:
-#     when: on_failure
-#     paths:
-#       - AixLib/simulator-dymola.log
-
-#   retry:
-#     max: 2
-#     when: runner_system_failure
-
-
-# test_dymola_FastHVAC:
-#   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-#   stage: test
-#   services:
-#     -  docker
-
-#   before_script:
-#     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-#     - export PIP_CACHE_DIR="/opt/cache/pip"
-#     - source activate python27
-#     - python -V               # Print out python version for debugging
-#     - dir
-#     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-#     - export PYTHONIOENCODING=UTF8 # just in case
-
-#   script:
-#     - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.FastHVAC --tool dymola
-
-#   artifacts:
-#     when: on_failure
-#     paths:
-#       - AixLib/simulator-dymola.log
-
-#   retry:
-#     max: 2
-#     when: runner_system_failure
-
-
-test_dymola_Fluid:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-  stage: test
-  timeout: 8h 0m
-  services:
-    -  docker
-
-  before_script:
-    - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - python -V               # Print out python version for debugging
-    - dir
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - export PYTHONIOENCODING=UTF8 # just in case
-
-  script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Fluid --tool dymola
-
-  artifacts:
-    when: on_failure
-    paths:
-      - AixLib/simulator-dymola.log
-
-  retry:
-    max: 2
-    when: runner_system_failure
-
-
-test_dymola_Media:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-  stage: test
-  services:
-    -  docker
-
-  before_script:
-    - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - python -V               # Print out python version for debugging
-    - dir
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - export PYTHONIOENCODING=UTF8 # just in case
-
-  script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Media --tool dymola
-
-  artifacts:
-    when: on_failure
-    paths:
-      - AixLib/simulator-dymola.log
-
-  retry:
-    max: 2
-    when: runner_system_failure
-
-
-test_dymola_Systems:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-  stage: test
-  services:
-    -  docker
-
-  before_script:
-    - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - python -V               # Print out python version for debugging
-    - dir
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - export PYTHONIOENCODING=UTF8 # just in case
-
-  script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Systems --tool dymola
-
-  artifacts:
-    when: on_failure
-    paths:
-      - AixLib/simulator-dymola.log
-
-  retry:
-    max: 2
-    when: runner_system_failure
-
-
-test_dymola_ThermalZones:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
-  stage: test
-  services:
-    -  docker
-  before_script:
-    - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - python -V               # Print out python version for debugging
-    - dir
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - export PYTHONIOENCODING=UTF8 # just in case
-
-  script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.ThermalZones --tool dymola
-
-  artifacts:
-    when: on_failure
-    paths:
-      - AixLib/simulator-dymola.log
-
-  retry:
-    max: 2
-    when: runner_system_failure
+  
+  
+  

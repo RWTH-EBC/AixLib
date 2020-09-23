@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses;
+within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle_HeatPump
   "Blackbox model of refrigerant cycle of a heat pump"
   extends AixLib.Fluid.BaseClasses.PartialInnerCycle;

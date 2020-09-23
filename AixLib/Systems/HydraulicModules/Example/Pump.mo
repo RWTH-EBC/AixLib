@@ -6,16 +6,14 @@ model Pump "Test for unmixed pump circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.Pump Unmixed(
+    pipeModel="PlugFlowPipe",
+    parameterPipe=DataBase.Pipes.Copper.Copper_35x1(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Unmixed.energyDynamics)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     pipe3(length=2),
@@ -84,10 +82,14 @@ equation
             -100},{120,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    experiment(StopTime=600),
-    Documentation(revisions="<html>
-<ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
+    experiment(StopTime=800),
+    Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Alexander Kümpel:<br/>
+    Transfer from ZUGABE to AixLib.
+  </li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_Commands(file(ensureSimulated=true)=
+        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Pump.mos"
+        "Simulate and plot"));
 end Pump;

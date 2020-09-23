@@ -1,3 +1,7 @@
 ClosedLoop
-OpenLoop
 NoReturn
+OpenLoop
+OpenLoopVarTSupplyDp
+OpenLoopVarTSupplyDpBypass
+OpenLoopHeatPumpCarnot
+OpenLoopVarTSupplyDpFixedTempDifferenceBypass
