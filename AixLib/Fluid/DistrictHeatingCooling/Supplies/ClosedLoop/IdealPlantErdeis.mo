@@ -1,13 +1,13 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
 model IdealPlantErdeis
   "Supply node model with ideal heater and cooler for heat and cold supply of bidirectional networks"
+  extends
+    AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Supplies.OpenLoop.PartialSupplyLessInputs(
+      allowFlowReversal=true);
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
       annotation (choicesAllMatching = true);
-  parameter Boolean allowFlowReversal=false
-    "= true, reverese flow allowed";
-
   parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
       "Nominal pressure drop";
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
@@ -18,6 +18,17 @@ model IdealPlantErdeis
     "Pressure difference of the resistance at nominal flow rate"
     annotation(Dialog(group="Resistance"));
 
+  parameter Modelica.SIunits.Velocity v_nominal = 1.5
+    "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
+    annotation(Dialog(group="Nominal condition"));
+
+  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default)
+    "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
+    annotation (Dialog(group="Advanced"));
+
   parameter Modelica.SIunits.Length dh(displayUnit="m")=sqrt(4*m_flow_nominal/rho_default/v_nominal/Modelica.Constants.pi)
     "Hydraulic pipe diameter"
     annotation(Dialog(group="Pipe"));
@@ -26,14 +37,6 @@ model IdealPlantErdeis
     "Pipe length"
     annotation(Dialog(group="Pipe"));
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Medium)
-    "Fluid connector for connecting the ideal plant to the cold line of the network"
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Medium)
-    "Fluid connector for connecting the ideal plant to the warm line of the network"
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
         Medium,
         allowFlowReversal=allowFlowReversal,
