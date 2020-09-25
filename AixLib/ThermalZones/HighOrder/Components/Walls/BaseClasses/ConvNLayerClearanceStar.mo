@@ -90,7 +90,6 @@ model ConvNLayerClearanceStar
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-28})));
-protected
   parameter Modelica.SIunits.Area A = h * l - clearance;
 
 equation

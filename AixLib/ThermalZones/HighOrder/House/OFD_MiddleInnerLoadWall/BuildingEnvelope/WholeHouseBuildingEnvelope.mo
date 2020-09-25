@@ -223,7 +223,9 @@ model WholeHouseBuildingEnvelope
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
         iconTransformation(extent={{-10,-110},{10,-90}})));
   Components.Walls.BaseClasses.SimpleNLayer groPlateLowPart[5](
-    final A={groundFloor_Building.Livingroom.floor.Wall.simpleNLayer.A,groundFloor_Building.Hobby.floor.Wall.simpleNLayer.A,groundFloor_Building.Corridor.floor.Wall.simpleNLayer.A,groundFloor_Building.WC_Storage.floor.Wall.simpleNLayer.A,groundFloor_Building.Kitchen.floor.Wall.simpleNLayer.A},
+    final A={groundFloor_Building.Livingroom.floor.Wall.A,groundFloor_Building.Hobby.floor.Wall.A,
+        groundFloor_Building.Corridor.floor.Wall.A,groundFloor_Building.WC_Storage.floor.Wall.A,
+        groundFloor_Building.Kitchen.floor.Wall.A},
     each final T_start=fill(TWalls_start, wallTypes.groundPlate_low_half.n),
     each final wallRec=wallTypes.groundPlate_low_half,
     each final energyDynamics=energyDynamicsWalls)    annotation (Placement(transformation(
