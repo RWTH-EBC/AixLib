@@ -196,11 +196,11 @@ equation
 </html>",
         revisions="<html><ul>
   <li>
-    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>November 28, 2014&#160;</i> by Xian Wu:<br/>
+    <i>November 28, 2014&#160;</i> by Xian Wu:<br />
     Added to the HVAC library.
   </li>
 </ul>

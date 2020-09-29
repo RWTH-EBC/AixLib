@@ -32,7 +32,7 @@ equation
   number of persons in the room.
 </p>
 <ul>
-  <li>July 10, 2019, by Martin Kremer:<br/>
+  <li>July 10, 2019, by Martin Kremer:<br />
     Implemented
   </li>
 </ul>

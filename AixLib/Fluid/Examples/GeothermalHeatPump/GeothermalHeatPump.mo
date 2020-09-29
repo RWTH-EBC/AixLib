@@ -108,7 +108,7 @@ equation
     annotation (Line(points={{-83.04,-30.8},{-56,-30.8},{-56,-63},{-26.4,-63}},
         color={0,0,127}));
   annotation (experiment(StopTime=86400, Interval=10), Documentation(revisions="<html><ul>
-  <li>May 19, 2017, by Marc Baranski:<br/>
+  <li>May 19, 2017, by Marc Baranski:<br />
     First implementation.
   </li>
 </ul>

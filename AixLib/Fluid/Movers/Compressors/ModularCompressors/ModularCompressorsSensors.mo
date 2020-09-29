@@ -87,7 +87,7 @@ equation
                 color={0,0,127}));
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+  <li>October 20, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -95,7 +95,7 @@ equation
 </html>", info="<html>
 <p>
   This is a model of modular compressors that are used, for example, in
-  close-loop systems like heat pumps or chillers.<br/>
+  close-loop systems like heat pumps or chillers.<br />
   It consists of <code>nCom</code> compressors in parallel and also
   <code>nCom</code> PID conrollers if no external controller is used.
   Additionally, four different sensors (i.e. absolute pressure,

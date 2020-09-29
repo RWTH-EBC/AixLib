@@ -442,11 +442,11 @@ equation
  4 - Bath
  5 - Kitchen")}), Documentation(revisions="<html><ul>
   <li>
-    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br />
     Replace pipe by MSL pipe
   </li>
   <li>
-    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    <i>June 19, 2014</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

@@ -51,7 +51,7 @@ equation
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>April 30, 2018, by Marcus Fuchs:<br/>
+  <li>April 30, 2018, by Marcus Fuchs:<br />
     Update documentation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/561\">issue 561</a>).
   </li>

@@ -221,7 +221,7 @@ equation
   derivative block from MSL.</span>
 </p>
 <ul>
-  <li>by Marc Baranski and Roozbeh Sangi:<br/>
+  <li>by Marc Baranski and Roozbeh Sangi:<br />
     implemented
   </li>
 </ul>

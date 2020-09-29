@@ -510,10 +510,10 @@ end if;
   chosen:
 </p>
 <ol>
-  <li>Polynom<br/>
+  <li>Polynom<br />
     a) depending on evaporator input temperature, condenser output
     temperature and variable speed (via conditional speed connector)
-    for capacity controlled heat pumps<br/>
+    for capacity controlled heat pumps<br />
     b) depending on evaporator input temperature, condenser output
     temperature and nominal speed for on/off-controlled heat pump
   </li>
@@ -563,15 +563,15 @@ end if;
 </html>",
       revisions="<html><ul>
   <li>
-    <i>March 27, 2013</i> by Kristian Huchtemann:<br/>
+    <i>March 27, 2013</i> by Kristian Huchtemann:<br />
     Added maximum condenser temperature implementation.
   </li>
   <li>
-    <i>December 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>December 10, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>April 23, 2013&#160;</i> by Kristian Huchtemann:<br/>
+    <i>April 23, 2013&#160;</i> by Kristian Huchtemann:<br />
     implemented
   </li>
 </ul>

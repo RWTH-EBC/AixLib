@@ -157,15 +157,15 @@ equation
 </p>
 <ul>
   <li>
-    <i>November 17, 2017&#160;</i> David Jansen:<br/>
+    <i>November 17, 2017&#160;</i> David Jansen:<br />
     Added heat convection inside pipe, moved into development
   </li>
   <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>January 27, 2015</i> by Konstantin Finkbeiner:<br/>
+    <i>January 27, 2015</i> by Konstantin Finkbeiner:<br />
     Implemented
   </li>
 </ul>

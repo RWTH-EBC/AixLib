@@ -184,15 +184,15 @@ equation
   \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>.
 </p>
 <ul>
-  <li>January 09, 2020, by David Jansen:<br/>
+  <li>January 09, 2020, by David Jansen:<br />
     Integration of ideal heater and cooler into the thermal zone.
   </li>
-  <li>July 10, 2019, by Martin Kremer:<br/>
+  <li>July 10, 2019, by Martin Kremer:<br />
     Adapting to new internalGains models. See <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue
     #690</a>.
   </li>
-  <li>April, 2019, by Martin Kremer:<br/>
+  <li>April, 2019, by Martin Kremer:<br />
     First implementation.
   </li>
 </ul>

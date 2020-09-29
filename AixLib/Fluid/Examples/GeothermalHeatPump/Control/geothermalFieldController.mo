@@ -155,10 +155,10 @@ equation
   AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump</a>.
 </p>
 <ul>
-  <li>May 24, 2017, by Alexander Kümpel:<br/>
+  <li>May 24, 2017, by Alexander Kümpel:<br />
     Delay improved.
   </li>
-  <li>May 19, 2017, by Marc Baranski:<br/>
+  <li>May 19, 2017, by Marc Baranski:<br />
     First implementation.
   </li>
 </ul>

@@ -571,7 +571,7 @@ equation
         fillPattern=FillPattern.Solid,
         rotation=45)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>December 16, 2017, by Mirko Engelpracht:<br/>
+  <li>December 16, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

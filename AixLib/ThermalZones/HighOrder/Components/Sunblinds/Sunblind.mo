@@ -191,16 +191,16 @@ equation
 </html>",
         revisions="<html><ul>
   <li>
-    <i>January 16, 2015&#160;</i> by Ana Constantin:<br/>
+    <i>January 16, 2015&#160;</i> by Ana Constantin:<br />
     Implemented as extending from PartialSunblind and using the new
     solar radiation connectors
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>January 2012,&#160;</i> by Moritz Lauster:<br/>
+    <i>January 2012,&#160;</i> by Moritz Lauster:<br />
     Implemented.
   </li>
 </ul>

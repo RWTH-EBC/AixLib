@@ -12,7 +12,7 @@ connector EnthalpyPort_a "Inlet enthalpy connector non-Fluid models"
 </p>
 <ul>
   <li>
-    <i>April 25, 2017</i>, by Michael Mans:<br/>
+    <i>April 25, 2017</i>, by Michael Mans:<br />
     Moved to AixLib
   </li>
 </ul>

@@ -270,11 +270,11 @@ equation
 </html>",
   revisions="<html><ul>
   <li>
-    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
+    <i>November 28, 2016&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>December 16, 2014&#160;</i> Konstantin Finkbeiner:<br/>
+    <i>December 16, 2014&#160;</i> Konstantin Finkbeiner:<br />
     Implemented
   </li>
 </ul>

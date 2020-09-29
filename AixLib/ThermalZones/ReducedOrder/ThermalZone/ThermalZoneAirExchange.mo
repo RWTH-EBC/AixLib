@@ -174,24 +174,24 @@ equation
   \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>.
 </p>
 <ul>
-  <li>January 09, 2020, by David Jansen:<br/>
+  <li>January 09, 2020, by David Jansen:<br />
     Integration of ideal heater and cooler into the thermal zone.
   </li>
-  <li>October 14, 2019 by David Jansen and Martin Kremer:<br/>
+  <li>October 14, 2019 by David Jansen and Martin Kremer:<br />
     Renaming ThermalZoneEquipped to ThermalZoneAirExchange to avoid
     misunderstanding.
   </li>
-  <li>July 10, 2019, by David Jansen and Martin Kremer:<br/>
+  <li>July 10, 2019, by David Jansen and Martin Kremer:<br />
     Integration of changeable internal gain models for humans.
   </li>
-  <li>March 01, 2019, by Niklas Huelsenbeck:<br/>
+  <li>March 01, 2019, by Niklas Huelsenbeck:<br />
     Changes due to integration of new Internal Gains models in
     ThermalZone.
   </li>
-  <li>September 27, 2016, by Moritz Lauster:<br/>
+  <li>September 27, 2016, by Moritz Lauster:<br />
     Reimplementation based on Annex60 and MSL models.
   </li>
-  <li>March, 2012, by Moritz Lauster:<br/>
+  <li>March, 2012, by Moritz Lauster:<br />
     First implementation.
   </li>
 </ul>

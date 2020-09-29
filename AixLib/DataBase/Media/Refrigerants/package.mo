@@ -179,7 +179,7 @@ package Refrigerants "Package that provides records describing properties of dif
   Hence, the base data definitions support just the hybrid approach.
 </p>
 <ul>
-  <li>June 9, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+  <li>June 9, 2017, by Mirko Engelpracht, Christian Vering:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>

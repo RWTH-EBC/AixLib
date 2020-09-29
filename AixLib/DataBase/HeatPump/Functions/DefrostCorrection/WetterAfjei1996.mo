@@ -28,7 +28,7 @@ f_CoPicing:=1-factor;
 </html>",
   revisions="<html><ul>
   <li>
-    <i>December 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>December 10, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
 </ul>

@@ -551,11 +551,11 @@ equation
           lineColor={0,0,0},
           textString="Kitchen")}), Documentation(revisions="<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    <i>April 18, 2014</i> by Ana Constantin:<br />
     Added documentation
   </li>
   <li>
-    <i>July 10, 2011</i> by Ana Constantin:<br/>
+    <i>July 10, 2011</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

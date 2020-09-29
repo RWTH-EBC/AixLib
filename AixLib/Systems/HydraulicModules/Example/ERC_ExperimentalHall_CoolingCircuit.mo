@@ -204,7 +204,7 @@ equation
   annotation (Diagram(coordinateSystem(extent={{-180,-100},{100,100}})), Icon(
         coordinateSystem(extent={{-180,-100},{100,100}})),
     Documentation(revisions="<html><ul>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
+  <li>October 25, 2017, by Alexander Kümpel:<br />
     First implementation.
   </li>
 </ul>

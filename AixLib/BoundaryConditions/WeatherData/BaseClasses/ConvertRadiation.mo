@@ -24,10 +24,10 @@ equation
   unit in Modelica.
 </p>
 <ul>
-  <li>October 27, 2011, by Wangda Zuo:<br/>
+  <li>October 27, 2011, by Wangda Zuo:<br />
     Add the unit conversion and delete the data validity check.
   </li>
-  <li>July 14, 2010, by Wangda Zuo:<br/>
+  <li>July 14, 2010, by Wangda Zuo:<br />
     First implementation.
   </li>
 </ul>

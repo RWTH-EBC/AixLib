@@ -51,7 +51,7 @@ equation
     annotation (Line(points={{42,52},{50,52},{50,32}}, color={191,0,0}));
   annotation (obsolete = "Obsolete model - use instead one of the models in AixLib.Utilities.Sources.InternalGains.Humans",
   Documentation(revisions="<html><ul>
-  <li>March, 2019, by Martin Kremer:<br/>
+  <li>March, 2019, by Martin Kremer:<br />
     First implementation.
   </li>
 </ul>

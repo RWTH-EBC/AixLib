@@ -83,37 +83,37 @@ equation
 </p>
 <ul>
   <li>
-    <i>January 7, 2018</i> by Peter Matthes:<br/>
-    Removes m_flow_nominal parameter.<br/>
-    Add Modelica.Fluid.System to example.<br/>
-    Set proper volume flow rate (3 l/min).<br/>
+    <i>January 7, 2018</i> by Peter Matthes:<br />
+    Removes m_flow_nominal parameter.<br />
+    Add Modelica.Fluid.System to example.<br />
+    Set proper volume flow rate (3 l/min).<br />
     Calculate source pressure depending on volume flow rate and pipe
-    pressure loss.<br/>
-    Set start values in most components.<br/>
+    pressure loss.<br />
+    Set start values in most components.<br />
     Add plot script and simulation command.
   </li>
   <li>
-    <i>October 25, 2017</i> by Philipp Mehrfeld:<br/>
+    <i>October 25, 2017</i> by Philipp Mehrfeld:<br />
     Use <a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a>
   </li>
   <li>
-    <i>December 15, 2016</i> by Moritz Lauster:<br/>
+    <i>December 15, 2016</i> by Moritz Lauster:<br />
     Moved
   </li>
   <li>
-    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br />
     Replace pipe
   </li>
   <li>
-    <i>April 2016&#160;</i> by Peter Remmen:<br/>
+    <i>April 2016&#160;</i> by Peter Remmen:<br />
     Replace TempAndRad model
   </li>
   <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br />
     Changed model to use Annex 60 base class
   </li>
   <li>
-    <i>November 2013&#160;</i> by Marcus Fuchs:<br/>
+    <i>November 2013&#160;</i> by Marcus Fuchs:<br />
     Implemented
   </li>
 </ul>

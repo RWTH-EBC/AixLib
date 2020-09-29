@@ -84,18 +84,18 @@ equation
 </html>",
         revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
     Merged with AixLib
   </li>
   <li>
-    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/>
+    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br />
     Formated documentation.
   </li>
-  <li>by Pooyan Jahangiri:<br/>
+  <li>by Pooyan Jahangiri:<br />
     First implementation.
   </li>
 </ul>

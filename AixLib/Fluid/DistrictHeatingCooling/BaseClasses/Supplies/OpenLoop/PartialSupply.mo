@@ -48,7 +48,7 @@ equation
   loop within the supply model open.
 </p>
 <ul>
-  <li>March 3, 2018, by Marcus Fuchs:<br/>
+  <li>March 3, 2018, by Marcus Fuchs:<br />
     First implementation for <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
   </li>

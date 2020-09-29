@@ -138,7 +138,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),
     Documentation(revisions="<html><ul>
-  <li>April, 2019, by Martin Kremer:<br/>
+  <li>April, 2019, by Martin Kremer:<br />
     First Implementation.
   </li>
 </ul>

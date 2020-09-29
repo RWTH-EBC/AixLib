@@ -19,18 +19,18 @@ equation
 </p>
 <ul>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>April 01, 2014</i> by Moritz Lauster:<br/>
+    <i>April 01, 2014</i> by Moritz Lauster:<br />
     Renamed
   </li>
   <li>
-    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
-  <li>by Mark Wesseling:<br/>
+  <li>by Mark Wesseling:<br />
     Implemented.
   </li>
 </ul>

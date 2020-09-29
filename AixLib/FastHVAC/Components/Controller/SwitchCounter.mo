@@ -23,10 +23,10 @@ algorithm
 <p>
   This model counts the number of times that the logical input <b>u</b>
   switches from 0 to 1 during the simulation time.
-</p><br/>
+</p><br />
 <ul>
   <li>
-    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
+    <i>November 28, 2016&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
 </ul>

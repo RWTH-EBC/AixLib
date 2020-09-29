@@ -34,10 +34,10 @@ equation
 </p>
 <ul>
   <li>
-    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
-  <li>by Peter Matthes:<br/>
+  <li>by Peter Matthes:<br />
     Implemented.
   </li>
 </ul>

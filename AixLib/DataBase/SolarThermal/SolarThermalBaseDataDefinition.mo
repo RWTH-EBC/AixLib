@@ -7,15 +7,15 @@ record SolarThermalBaseDataDefinition
   parameter Real c2(unit = "W/(m.m.K.K)") "Loss coefficient c2";
   annotation(Documentation(revisions="<html><ul>
   <li>
-    <i>October 25, 2016</i> by Philipp Mehrfeld:<br/>
+    <i>October 25, 2016</i> by Philipp Mehrfeld:<br />
     correct units
   </li>
   <li>
-    <i>April 2014</i>, Mark Wesseling:<br/>
+    <i>April 2014</i>, Mark Wesseling:<br />
     corrected Units
   </li>
   <li>
-    <i>October 2013</i>, Marcus Fuchs:<br/>
+    <i>October 2013</i>, Marcus Fuchs:<br />
     implemented
   </li>
 </ul>

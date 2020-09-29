@@ -47,15 +47,15 @@ equation
  when building a closed loop")}), experiment(StopTime = 86400, Interval = 60),
  Documentation(revisions="<html><ul>
   <li>
-    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br />
     Replace pipe and change medium
   </li>
   <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br />
     Changed model to use Annex 60 base class
   </li>
   <li>
-    <i>01.11.2013&#160;</i> by Ana Constantin:<br/>
+    <i>01.11.2013&#160;</i> by Ana Constantin:<br />
     implemented
   </li>
 </ul>
@@ -68,7 +68,7 @@ equation
   loop.
 </p>
 <p>
-  <br/>
+  <br />
   <b><span style=\"color: #008000\">Concept</span></b>
 </p>
 <p>

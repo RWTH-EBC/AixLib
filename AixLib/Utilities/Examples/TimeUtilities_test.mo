@@ -14,7 +14,7 @@ equation
   connect(boolNightMode, boolNightMode) annotation(Line(points = {{66, -20}, {66, -20}}, color = {255, 0, 255}));
   annotation(experiment(StopTime = 604800, Interval = 600), Documentation(revisions = "<html><ul>
   <li>
-    <i>April 25, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>April 25, 2013&#160;</i> by Ole Odendahl:<br />
     Implemented model, added documentation and formatted appropriately
   </li>
 </ul>

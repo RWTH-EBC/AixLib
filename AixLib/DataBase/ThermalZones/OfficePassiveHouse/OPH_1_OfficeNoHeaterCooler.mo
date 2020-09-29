@@ -88,16 +88,16 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
   annotation (Documentation(revisions="<html><ul>
-  <li>November 27, 2019, by David Jansen:<br/>
+  <li>November 27, 2019, by David Jansen:<br />
     Integrate threshold for heater and cooler.
   </li>
-  <li>February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+  <li>February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br />
     Adapting nrPeople and nrPeopleMachines to area specific approach
   </li>
-  <li>September 27, 2016, by Moritz Lauster:<br/>
+  <li>September 27, 2016, by Moritz Lauster:<br />
     Reimplementation.
   </li>
-  <li>June, 2015, by Moritz Lauster:<br/>
+  <li>June, 2015, by Moritz Lauster:<br />
     Implemented.
   </li>
 </ul>

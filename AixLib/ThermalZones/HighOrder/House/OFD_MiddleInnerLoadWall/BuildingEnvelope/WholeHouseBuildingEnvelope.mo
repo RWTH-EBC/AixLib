@@ -355,20 +355,20 @@ equation
 </p>
 <ul>
   <li>
-    <i>August 1, 2017</i> by Philipp Mehrfeld:<br/>
+    <i>August 1, 2017</i> by Philipp Mehrfeld:<br />
     Add heat-star-combi to connect heaters in a more clever way
   </li>
   <li>
-    <i>Mai 7, 2015</i> by Ana Constantin:<br/>
+    <i>Mai 7, 2015</i> by Ana Constantin:<br />
     Corrected connection of gabled vertical walls with solar radiation
     (E and W)
   </li>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    <i>April 18, 2014</i> by Ana Constantin:<br />
     Added documentation
   </li>
   <li>
-    <i>July 10, 2011</i> by Ana Constantin:<br/>
+    <i>July 10, 2011</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

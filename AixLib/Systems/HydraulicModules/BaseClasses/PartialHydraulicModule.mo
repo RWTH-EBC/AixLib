@@ -19,7 +19,7 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   parameter DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type and diameter (can be overwritten in each pipe)" annotation (choicesAllMatching=true, Dialog(group="Pipes"));
   parameter DataBase.Pipes.InsulationBaseDataDefinition parameterIso=
-      AixLib.DataBase.Pipes.Insulation.Iso0pc() "Insulation Type (can be overwritten in each pipe)" annotation (choicesAllMatching=true, Dialog(group="Pipes"));
+      AixLib.DataBase.Pipes.Insulation.Iso50pc() "Insulation Type (can be overwritten in each pipe)" annotation (choicesAllMatching=true, Dialog(group="Pipes"));
   parameter Real Kv "Kv value of valve (can be overwritten in the valve)"  annotation (Dialog(group="Actuators"));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
@@ -239,7 +239,7 @@ equation
   operational modes.
 </p>
 <ul>
-  <li>August, 2018, by Alexander Kümpel:<br/>
+  <li>August, 2018, by Alexander Kümpel:<br />
     First implementation
   </li>
 </ul>

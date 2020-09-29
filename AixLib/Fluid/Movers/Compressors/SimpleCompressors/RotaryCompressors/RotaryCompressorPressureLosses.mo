@@ -161,7 +161,7 @@ equation
           lineColor={0,0,0},
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
-  <li>October 27, 2017, by Mirko Engelpracht:<br/>
+  <li>October 27, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

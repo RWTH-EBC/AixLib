@@ -6,7 +6,7 @@ model Power_R134a_EEV_15 "Power - R134a - EEV - 1.5 mm"
     final b={-1.4347,3.6426});
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 16, 2017, by Mirko Engelpracht:<br/>
+  <li>October 16, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -14,7 +14,7 @@ model Power_R134a_EEV_15 "Power - R134a - EEV - 1.5 mm"
 </html>", info="<html>
 <p>
   This model contains a calculation procedure for flow coefficients
-  presented by Zhifang et al. (2008).<br/>
+  presented by Zhifang et al. (2008).<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

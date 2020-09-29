@@ -7,7 +7,7 @@ model Poly_R410a_EEV_18 "Polynomial - R410a - EEV - 1.8 mm"
     final pDifRat=0.84);
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 16, 2017, by Mirko Engelpracht:<br/>
+  <li>October 16, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -15,7 +15,7 @@ model Poly_R410a_EEV_18 "Polynomial - R410a - EEV - 1.8 mm"
 </html>", info="<html>
 <p>
   This model contains a calculation procedure for flow coefficients
-  presented by Li (2013).<br/>
+  presented by Li (2013).<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

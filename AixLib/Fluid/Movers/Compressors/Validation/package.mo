@@ -13,7 +13,7 @@ package Validation "Package that contains validations models to test compressors
   \"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors\">AixLib.Fluid.Movers.Compressors.ModularCompressors</a>.
 </p>
 <ul>
-  <li>October 24, 2017, by Mirko Engelpracht:<br/>
+  <li>October 24, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

@@ -31,10 +31,10 @@ equation
             -100},{100,100}})), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),
     Documentation(revisions="<html><ul>
-  <li>September 27, 2016, by Moritz Lauster:<br/>
+  <li>September 27, 2016, by Moritz Lauster:<br />
     Reimplementation based on Annex60 and AixLib models.
   </li>
-  <li>June 22, 2015, by Moritz Lauster:<br/>
+  <li>June 22, 2015, by Moritz Lauster:<br />
     First implementation.
   </li>
 </ul>

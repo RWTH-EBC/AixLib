@@ -217,7 +217,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    <i>June 19, 2014</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

@@ -27,12 +27,12 @@ record HeatPumpSystemParameters
     "Nominal thermal power at the evaporator of heat pump" annotation (Dialog(group="Design"));
   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>October 25, 2018&#160;</i> by Philipp Mehrfeld:<br/>
+    <i>October 25, 2018&#160;</i> by Philipp Mehrfeld:<br />
     Change QEva_nominal from protected to final (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/791\">#791</a>)
   </li>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>

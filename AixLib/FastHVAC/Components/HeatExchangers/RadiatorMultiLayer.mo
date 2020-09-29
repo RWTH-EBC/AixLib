@@ -536,12 +536,12 @@ equation
   </tr>
 </table>
 <p>
-  <br/>
+  <br />
   The Height H of the radiator is discretized in N single Layers, as
   shown in Figure 1
 </p>
 <p>
-  <br/>
+  <br />
   <img src=
   \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Schichtenmodell.png\"
   alt=\"Multilayer Model of radiator \">
@@ -556,7 +556,7 @@ equation
   <tr>
     <td>
       <p>
-        <br/>
+        <br />
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/DGL_HK.png\"
         alt=\"Equation for every layer\">
@@ -564,7 +564,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (1)
       </p>
     </td>
@@ -589,7 +589,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (2)
       </p>
     </td>
@@ -604,7 +604,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (3)
       </p>
     </td>
@@ -619,7 +619,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (4)
       </p>
     </td>
@@ -651,7 +651,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (5)
       </p>
     </td>
@@ -666,7 +666,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (6)
       </p>
     </td>
@@ -709,7 +709,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (7)
       </p>
     </td>
@@ -729,7 +729,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (8)
       </p>
     </td>
@@ -749,7 +749,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (9)
       </p>
     </td>
@@ -782,7 +782,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (10)
       </p>
     </td>
@@ -797,7 +797,7 @@ equation
     </td>
     <td>
       <p>
-        <br/>
+        <br />
         (11)
       </p>
     </td>
@@ -858,27 +858,27 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>February, 2 2018&#160;</i> David Jansen:<br/>
+    <i>February, 2 2018&#160;</i> David Jansen:<br />
     Formatted documentation
   </li>
   <li>
-    <i>April 13, 2017&#160;</i> Tobias Blacha:<br/>
+    <i>April 13, 2017&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>January 12, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
+    <i>January 12, 2015&#160;</i> by Konstantin Finkbeiner:<br />
     Addapted to FastHVAC.
   </li>
   <li>
-    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br />
     Output for logarithmic mean temperature added
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>Mai 1, 2011&#160;</i> by Ana Constantin:<br/>
+    <i>Mai 1, 2011&#160;</i> by Ana Constantin:<br />
     Addapted with a few changes from older model.
   </li>
 </ul>

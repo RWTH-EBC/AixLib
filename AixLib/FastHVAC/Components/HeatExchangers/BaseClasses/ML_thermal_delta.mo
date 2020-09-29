@@ -287,26 +287,25 @@ dT_R=Tout - Tair;
           smooth=Smooth.None)}),
     Documentation(revisions="<html><ul>
   <li>
-    <i>April 13, 2017&#160;</i> Tobias Blacha:<br/>
+    <i>April 13, 2017&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
+    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br />
     Derived from HVAC.
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>
 </html>
-", info=
-    "<html><h4>
+", info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Model of the multi layers of heat exchanger. From the water flow is
   the convective and radiative heat output calculated.
-</p>l l
+</p>
 </html>"));
 end ML_thermal_delta;

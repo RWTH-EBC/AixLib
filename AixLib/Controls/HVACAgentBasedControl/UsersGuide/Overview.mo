@@ -33,7 +33,7 @@ class Overview "Overview"
   www.eonerc.rwth-aachen.de/ebc
 </p>
 <p>
-  <br/>
+  <br />
   <span style=\"font-family: Arial,sans-serif;\">The HVAC Agent-based
   Control Library consists of the following main packages:</span>
 </p>
@@ -52,7 +52,7 @@ class Overview "Overview"
   </li>
 </ul>
 <ul>
-  <li>December 2016, by Roozbeh Sangi:<br/>
+  <li>December 2016, by Roozbeh Sangi:<br />
     implemented.
   </li>
 </ul>

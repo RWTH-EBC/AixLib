@@ -9,7 +9,7 @@ function polynomialABC
 algorithm
   z := c[1]*x*x + c[2]*x*y + c[3]*y*y;
   annotation (Documentation(revisions="<html><ul>
-  <li>2017-11-16 by Peter Matthes:<br/>
+  <li>2017-11-16 by Peter Matthes:<br />
     Implemented
   </li>
 </ul>

@@ -418,7 +418,7 @@ equation
   alt=\"Result of exergy meter example\">
 </p>
 <ul>
-  <li>by Marc Baranski and Roozbeh Sangi:<br/>
+  <li>by Marc Baranski and Roozbeh Sangi:<br />
     implemented
   </li>
 </ul>

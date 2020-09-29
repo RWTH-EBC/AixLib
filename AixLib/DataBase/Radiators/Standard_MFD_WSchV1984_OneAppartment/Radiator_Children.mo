@@ -49,11 +49,11 @@ record Radiator_Children
 </ul>
 <ul>
   <li>
-    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>November 15, 2011</i> by Ana Constantin:<br/>
+    <i>November 15, 2011</i> by Ana Constantin:<br />
     implemented
   </li>
 </ul>

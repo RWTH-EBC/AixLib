@@ -198,23 +198,61 @@ public
         extent={{-14,-12},{14,12}},
         rotation=270,
         origin={-72,-60})));
-  Fluid.Storage.BaseClasses.StorageCover                  top_cover(
-    D1=data.dTank)   annotation (Placement(transformation(
+  Fluid.Storage.BaseClasses.StorageCover top_cover(
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns,
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=T_start_wall,
+    final TStartIns=T_start_ins,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={2,70})));
   Fluid.Storage.BaseClasses.StorageMantle                  storage_mantle[n](
-    each height=data.hTank/n,
-    each D1=data.dTank)
+    each final lambdaWall=data.lambdaWall,
+    each final lambdaIns=data.lambdaIns,
+    each final TStartWall=T_start_wall,
+    each final TStartIns=T_start_ins,
+    each final rhoIns=data.rhoIns,
+    each final cIns=data.cIns,
+    each final rhoWall=data.rhoWall,
+    each final cWall=data.cWall,
+    each final height=data.hTank/n,
+    each final D1=data.dTank,
+    each final sWall=data.sWall,
+    each final sIns=data.sIns,
+    each final hConIn=hConIn,
+    each final hConOut=hConOut)
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-  Fluid.Storage.BaseClasses.StorageCover                  bottom_cover(
-    D1=data.dTank)   annotation (Placement(transformation(
+  Fluid.Storage.BaseClasses.StorageCover bottom_cover(
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=T_start_wall,
+    final TStartIns=T_start_ins,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-38})));
 
   replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction  constrainedby BaseClasses.PartialHeatTransferLayers
+     BaseClasses.HeatTransferOnlyConduction  constrainedby
+    BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
   HeatTransfer heatTransfer(final Medium=medium,final data=data,
@@ -653,7 +691,7 @@ connect(heatTransfer.therm, layer.port);
   and bottom).
 </p>
 <p>
-  <br/>
+  <br />
   <b><span style=\"color: #008000\">Example Results</span></b>
 </p>
 <p>
@@ -663,15 +701,15 @@ connect(heatTransfer.therm, layer.port);
 </html>",
 revisions="<html><ul>
   <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
+    <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br />
     Added documentation.
   </li>
   <li>
-    <i>December 16, 2014</i> by Sebastian Stinner:<br/>
+    <i>December 16, 2014</i> by Sebastian Stinner:<br />
     Implemented.
   </li>
 </ul>

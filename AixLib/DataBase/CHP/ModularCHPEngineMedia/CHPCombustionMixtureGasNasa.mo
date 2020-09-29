@@ -361,8 +361,8 @@ algorithm
   annotation (smoothOrder=2,
              Documentation(info="<html><p>
   Simplification of the kinetic theory (Chapman and Enskog theory)
-  approach neglecting the second-order effects.<br/>
-  <br/>
+  approach neglecting the second-order effects.<br />
+  <br />
   This equation has been extensively tested (Amdur and Mason, 1958;
   Bromley and Wilke, 1951; Cheung, 1958; Dahler, 1959; Gandhi and
   Saxena, 1964; Ranz and Brodowsky, 1962; Saxena and Gambhir, 1963a;
@@ -372,13 +372,13 @@ algorithm
   component, less satisfactory agreement was noted. Wilke's method
   predicted mixture viscosities that were larger than experimental for
   the H2-N2 system, but for H2-NH3, it underestimated the
-  viscosities.<br/>
+  viscosities.<br />
   Gururaja, et al. (1967) found that this method also overpredicted in
-  the H2-O2 case but was quite accurate for the H2-CO2 system.<br/>
+  the H2-O2 case but was quite accurate for the H2-CO2 system.<br />
   Wilke's approximation has proved reliable even for polar-polar gas
   mixtures of aliphatic alcohols (Reid and Belenyessy, 1960). The
   principal reservation appears to lie in those cases where
-  Mi&gt;&gt;Mj and etai&gt;&gt;etaj.<br/>
+  Mi&gt;&gt;Mj and etai&gt;&gt;etaj.<br />
 </p>
 </html>"));
 end gasMixtureViscosity;
@@ -709,7 +709,7 @@ end lowPressureThermalConductivity;
   ideal gases.
 </p>
 <p>
-  <b>Sources for model and literature:</b><br/>
+  <b>Sources for model and literature:</b><br />
   Original Data: Computer program for calculation of complex chemical
   equilibrium compositions and applications. Part 1: Analysis Document
   ID: 19950013764 N (95N20180) File Series: NASA Technical Reports
@@ -718,7 +718,7 @@ end lowPressureThermalConductivity;
   Research Center) Published: Oct 01, 1994.
 </p>
 <p>
-  <b>Known limits of validity:</b><br/>
+  <b>Known limits of validity:</b><br />
   The data is valid for temperatures between 200 K and 6000 K. A few of
   the data sets for monatomic gases have a discontinuous 1st derivative
   at 1000 K, but this never caused problems so far.

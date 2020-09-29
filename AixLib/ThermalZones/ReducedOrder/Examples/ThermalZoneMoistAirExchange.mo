@@ -210,7 +210,7 @@ equation
   but are not related to a specific building or measurement data.
 </p>
 <ul>
-  <li>April, 2019, by Martin Kremer:<br/>
+  <li>April, 2019, by Martin Kremer:<br />
     First Implementation.
   </li>
 </ul>

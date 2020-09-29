@@ -47,24 +47,24 @@ class UsersGuide "User's Guide"
   References
 </h4>
 <ul>
-  <li>VDI 6007-1:<br/>
+  <li>VDI 6007-1:<br />
     VDI. German Association of Engineers Guideline VDI 6007-3 June
     2015. Calculation of transient thermal response of rooms and
     buildings - Modelling of rooms.
   </li>
-  <li>VDI 6007-2:<br/>
+  <li>VDI 6007-2:<br />
     VDI. German Association of Engineers Guideline VDI 6007-2 March
     2012. Calculation of transient thermal response of rooms and
     buildings - Modelling of windows.
   </li>
-  <li>VDI 6007-3:<br/>
+  <li>VDI 6007-3:<br />
     VDI. German Association of Engineers Guideline VDI 6007-3 June
     2015. Calculation of transient thermal response of rooms and
     buildings - Modelling of solar radiation.
   </li>
 </ul>
 <ul>
-  <li>June 07, 2016,&#160; by Stanley Risch:<br/>
+  <li>June 07, 2016,&#160; by Stanley Risch:<br />
     Implemented.
   </li>
 </ul>

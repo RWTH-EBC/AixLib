@@ -46,7 +46,7 @@ style=\"border-collapse:collapse;\">
       <code>m_flow</code>
     </td>
     <td>
-      Mass flow rate <i>ṁ</i>.<br/>
+      Mass flow rate <i>ṁ</i>.<br />
       The convention is that <code>m_flow ≥ 0</code> if at this port,
       mass flows into the component.
     </td>
@@ -56,7 +56,7 @@ style=\"border-collapse:collapse;\">
       <code>p</code>
     </td>
     <td>
-      Absolute total pressure <i>p</i>.<br/>
+      Absolute total pressure <i>p</i>.<br />
       The absolute total pressure is the sum of the static pressure and
       the dynamic pressure. As the total pressure is used in the
       connector, components do not need to specify the area of the port
@@ -76,7 +76,7 @@ style=\"border-collapse:collapse;\">
     </td>
     <td>
       Specific enthalpy <i>h</i> of the outflowing fluid, i.e.,
-      assuming <i>ṁ &lt; 0.</i><br/>
+      assuming <i>ṁ &lt; 0.</i><br />
       The specific enthalpy in the fluid port always carries the value
       of the enthalpy that the medium would have if it was leaving the
       component. Users who need to access the actual enthalpy for the
@@ -90,7 +90,7 @@ style=\"border-collapse:collapse;\">
     </td>
     <td>
       Independent mixture mass fractions <i>m<sub>i</sub>/m</i> close
-      to the connection point, i.e., assuming <i>ṁ &lt; 0.</i><br/>
+      to the connection point, i.e., assuming <i>ṁ &lt; 0.</i><br />
       The independent mixture mass fraction in the fluid port always
       carries the value that the medium would have if it was leaving
       the component. Users who need to access the actual value for the
@@ -108,7 +108,7 @@ style=\"border-collapse:collapse;\">
     </td>
     <td>
       Trace substances <i>c<sub>i</sub>/m</i> close to the connection
-      point, i.e., assuming <i>ṁ &lt; 0.</i><br/>
+      point, i.e., assuming <i>ṁ &lt; 0.</i><br />
       The trace substances in the fluid port always carries the value
       that the medium would have if it was leaving the component. Users
       who need to access the actual value for the given flow direction
@@ -185,11 +185,11 @@ style=\"border-collapse:collapse;\">
       Parameter
     </th>
     <th>
-      Initialization problem<br/>
+      Initialization problem<br />
       If density depends on pressure
     </th>
     <th>
-      Initialization problem<br/>
+      Initialization problem<br />
       If density is independent of pressure
     </th>
     <th>
@@ -402,7 +402,7 @@ style=\"border-collapse:collapse;\">
   </tr>
   <tr>
     <td>
-      m_flow_nominal<br/>
+      m_flow_nominal<br />
       dp_nominal
     </td>
     <td>
@@ -418,13 +418,13 @@ style=\"border-collapse:collapse;\">
   </tr>
   <tr>
     <td>
-      m_flow_nominal<br/>
+      m_flow_nominal<br />
       m_flow_small
     </td>
     <td>
-      Sensors<br/>
-      Volumes<br/>
-      Heat exchangers<br/>
+      Sensors<br />
+      Volumes<br />
+      Heat exchangers<br />
       Chillers
     </td>
     <td>
@@ -445,13 +445,13 @@ style=\"border-collapse:collapse;\">
   </tr>
   <tr>
     <td>
-      tau<br/>
+      tau<br />
       m_flow_nominal
     </td>
     <td>
-      Sensors<br/>
-      Volumes<br/>
-      Heat exchangers<br/>
+      Sensors<br />
+      Volumes<br />
+      Heat exchangers<br />
       Chillers
     </td>
     <td>
@@ -463,7 +463,7 @@ style=\"border-collapse:collapse;\">
       the weight of heat exchangers. In addition, other effects such as
       transport delays in pipes and heat exchangers of a chiller are
       generally unknown and require detailed geometry that is typically
-      not available during the design stage.<br/>
+      not available during the design stage.<br />
       To circumvent this problem, many models take as a parameter the
       time constant <code>tau</code> and lump all its thermal mass into
       a fluid volume. The time constant <code>tau</code> can be

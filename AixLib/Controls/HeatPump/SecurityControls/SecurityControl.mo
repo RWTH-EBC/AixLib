@@ -69,8 +69,9 @@ block SecurityControl "Block including all security levels"
 
   DefrostControl defrostControl(
     final minIceFac=minIceFac,
-    use_chiller=use_chiller,
-    calcPel_deFro=calcPel_deFro) if use_deFro
+    final deltaIceFac=deltaIceFac,
+    final use_chiller=use_chiller,
+    final calcPel_deFro=calcPel_deFro) if use_deFro
     annotation (Placement(transformation(extent={{-112,-16},{-76,14}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrDef if not use_deFro
     "No 2. Layer"
@@ -199,7 +200,7 @@ equation
           {2,-50},{60,-50},{60,-110}}, color={255,127,0}));
   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>

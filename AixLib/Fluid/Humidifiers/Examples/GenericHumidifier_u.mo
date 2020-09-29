@@ -114,7 +114,7 @@ equation
   Thus, the temperature decreases in this case.
 </p>
 <ul>
-  <li>October 22, 2019, by Alexander Kümpel:<br/>
+  <li>October 22, 2019, by Alexander Kümpel:<br />
     First implementation.
   </li>
 </ul>

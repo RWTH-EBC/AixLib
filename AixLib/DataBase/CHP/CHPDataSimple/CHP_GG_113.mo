@@ -17,7 +17,7 @@ record CHP_GG_113 "GG 113 : Sokratherm"
 </html>",
         revisions="<html><ul>
   <li>
-    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br />
     Added reference
   </li>
 </ul>

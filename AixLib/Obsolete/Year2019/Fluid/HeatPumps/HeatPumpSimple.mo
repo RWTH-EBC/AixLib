@@ -146,14 +146,14 @@ equation
   \"AixLib.Fluid.HeatPumps.Examples.HeatPumpSimple\">AixLib.Fluid.HeatPumps.Examples.HeatPumpSimple</a>
 </p>
 <ul>
-  <li>May 15, 2017, by Christian Behm:<br/>
+  <li>May 15, 2017, by Christian Behm:<br />
     Added missing documentation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/373\">issue 373</a>).
   </li>
-  <li>November, 2014, by Marcus Fuchs:<br/>
+  <li>November, 2014, by Marcus Fuchs:<br />
     Changed model to use Annex 60 base class
   </li>
-  <li>November 25, 2013, by Kristian Huchtemann:<br/>
+  <li>November 25, 2013, by Kristian Huchtemann:<br />
     Implemented
   </li>
 </ul>

@@ -16,7 +16,7 @@ record CHP_GG_50 "GG 50 : Sokratherm"
 </html>",
         revisions="<html><ul>
   <li>
-    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br />
     Added reference
   </li>
 </ul>

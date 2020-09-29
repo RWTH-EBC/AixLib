@@ -72,16 +72,16 @@ equation
 </html>",
      revisions="<html><ul>
   <li>
-    <i>October 20, 2017</i> by Larissa Kühn:<br/>
+    <i>October 20, 2017</i> by Larissa Kühn:<br />
     Modification of Input to make the model compatible with diffent
     weather models
   </li>
   <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    <i>October 11, 2016</i> by Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>Februar 21, 2013</i> by Corinna Leonhardt:<br/>
+    <i>Februar 21, 2013</i> by Corinna Leonhardt:<br />
     Implemented
   </li>
 </ul>

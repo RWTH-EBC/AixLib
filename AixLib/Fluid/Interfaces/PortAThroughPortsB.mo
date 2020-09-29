@@ -54,7 +54,7 @@ equation
               -40},{110,-40},{110,40},{90,40}},
           color={0,0,0},
           thickness=1)}), Documentation(revisions="<html><ul>
-  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>

@@ -23,7 +23,7 @@ record OWBaseDataDefinition_Simple
 </p>
 <ul>
   <li>
-    <i>September 11, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>September 11, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>

@@ -80,33 +80,21 @@ annotation (Documentation(info="<html><p>
   by defining
 </p>
 <pre>
-
-
-
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT(
-
-
-
     T_nominal=273.15+100,
-
-
-
     p_nominal=5e5);
-
-
-
 </pre>
 <ul>
-  <li>September 20, 2016, by Michael Wetter:<br/>
+  <li>September 20, 2016, by Michael Wetter:<br />
     Reordered constants to conform with the order in
-    <code>package.order</code>.<br/>
+    <code>package.order</code>.<br />
     This is for <a href=
     \"https://github.com/ibpsa/modelica-ibpsa/issues/518\">issue 518</a>.
   </li>
-  <li>September 14, 2016, by Michael Wetter:<br/>
+  <li>September 14, 2016, by Michael Wetter:<br />
     Revised implementation.
   </li>
-  <li>September 8, 2016, by Marcus Fuchs:<br/>
+  <li>September 8, 2016, by Marcus Fuchs:<br />
     First implementation.
   </li>
 </ul>

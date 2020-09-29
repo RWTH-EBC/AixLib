@@ -78,7 +78,7 @@ record Pump_DN50_H10 "Pump with head 10m and 32.23m^3/h volume flow"
        "coefficients for P = f(Q,N)");
 
   annotation(preferredView="text", Documentation(revisions="<html><ul>
-  <li>2018-07-02 by Luca Vedda:<br/>
+  <li>2018-07-02 by Luca Vedda:<br />
     Generated
   </li>
 </ul>

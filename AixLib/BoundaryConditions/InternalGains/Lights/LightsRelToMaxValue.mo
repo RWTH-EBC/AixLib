@@ -44,22 +44,22 @@ equation
           textString="Max")}),
     Documentation(revisions="<html><ul>
   <li>
-    <i>March 30, 2020</i> by Philipp Mehrfeld:<br/>
+    <i>March 30, 2020</i> by Philipp Mehrfeld:<br />
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>:
     Summarize models to partial model. Make all models dependant from a
     relative input 0..1. Many refactorings.
   </li>
   <li>
-    <i>October 21, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>October 21, 2014&#160;</i> by Ana Constantin:<br />
     Added a lower positive limit to the surface area, so it will not
     lead to a division by zero
   </li>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>

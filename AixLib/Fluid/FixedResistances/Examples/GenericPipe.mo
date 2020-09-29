@@ -45,6 +45,8 @@ model GenericPipe
     redeclare package Medium = Medium,
     pipeModel="SimplePipe",
     length=10,
+    withInsulation=true,
+    withConvection=true,
     T_start=323.15,
     m_flow_nominal=0.3,
     parameterPipe=DataBase.Pipes.Copper.Copper_28x1(),
@@ -87,7 +89,7 @@ equation
 </ul>
 </html>",
     revisions="<html><ul>
-  <li>Mai 07, 2020, by Alexander Kümpel:<br/>
+  <li>Mai 07, 2020, by Alexander Kümpel:<br />
     First implementation
   </li>
 </ul>

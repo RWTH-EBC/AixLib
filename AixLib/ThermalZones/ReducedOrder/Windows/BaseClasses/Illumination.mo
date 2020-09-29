@@ -90,14 +90,14 @@ equation
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>May 23, 2016,&#160; by Stanley Risch:<br/>
+  <li>May 23, 2016,&#160; by Stanley Risch:<br />
     Implemented.
   </li>
 </ul>
 </html>",
       info="<html>This model calculates the activation and deactivation times of the
 illumination and gives it back as the Boolean \"Illumination\". It is
-based on VDI 6007 part 3.<br/>
+based on VDI 6007 part 3.<br />
 The total solar energy entering the room, which can be calculated by
 <a href=\"Windows.Window\">Window</a> or <a href=
 \"Windows.ShadedWindow\">ShadedWindow</a>, is compared to a limit value

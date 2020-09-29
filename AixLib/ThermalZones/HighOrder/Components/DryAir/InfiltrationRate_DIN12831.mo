@@ -105,8 +105,8 @@ equation
   </tr>
 </table>
 <p>
-  <br/>
-  <br/>
+  <br />
+  <br />
   Reference values for air shielding value e:
 </p>
 <table summary=\"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\">
@@ -217,8 +217,8 @@ equation
   </tr>
 </table>
 <p>
-  <br/>
-  <br/>
+  <br />
+  <br />
   Reference values for height correction value ε:
 </p>
 <table summary=\"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\">
@@ -230,7 +230,7 @@ equation
     </td>
     <td>
       <p style=\"text-align:center;\">
-        <br/>
+        <br />
         <b>ε</b>
       </p>
     </td>
@@ -273,8 +273,8 @@ equation
   </tr>
 </table>
 <p>
-  <br/>
-  <br/>
+  <br />
+  <br />
   <b><span style=\"color: #008000\">References</span></b>
 </p>
 <p>
@@ -289,15 +289,15 @@ equation
 </p>
 <ul>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>August 2, 2011&#160;</i> by Ana Constantin:<br/>
+    <i>August 2, 2011&#160;</i> by Ana Constantin:<br />
     Implemented after a model from Time Haase.
   </li>
 </ul>

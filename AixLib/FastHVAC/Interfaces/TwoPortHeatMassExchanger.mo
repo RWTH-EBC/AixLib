@@ -56,14 +56,14 @@ equation
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid)}),
    Documentation(info="<html><p>
-  This component transports one fluid stream.<br/>
+  This component transports one fluid stream.<br />
   It is based on the Fluid model <a href=
   \"modelica://AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger\">AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger</a>
   and was adapted to the FastHVAC library.
 </p>
 <ul>
   <li>
-    <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
+    <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br />
     Moved into AixLib
   </li>
 </ul>

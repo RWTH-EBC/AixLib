@@ -582,11 +582,11 @@ equation
         Line(points={{76,-20},{76,-24}}, color={0,0,0})}), Documentation(
         revisions="<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    <i>April 18, 2014</i> by Ana Constantin:<br />
     Added documentation
   </li>
   <li>
-    <i>July 8, 2011</i> by Ana Constantin:<br/>
+    <i>July 8, 2011</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

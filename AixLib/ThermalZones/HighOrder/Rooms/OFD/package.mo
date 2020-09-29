@@ -23,7 +23,7 @@ package OFD "One Family Dwelling"
   have a saddle roof. The layout of the two floors is the same.
 </p>
 <p>
-  <br/>
+  <br />
   The room model is realized by aggregating together all the components
   in a model, parameterizing on a room level and referencing the
   parameter on the component level. In this way the number of
@@ -40,11 +40,11 @@ package OFD "One Family Dwelling"
 </p>
 <ul>
   <li>
-    <i>April 14, 2014</i> by Ana Constantin:<br/>
+    <i>April 14, 2014</i> by Ana Constantin:<br />
     Added documentation
   </li>
   <li>
-    <i>July 7, 2011</i> by Ana Constantin:<br/>
+    <i>July 7, 2011</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

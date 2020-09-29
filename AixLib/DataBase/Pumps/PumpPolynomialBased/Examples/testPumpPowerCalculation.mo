@@ -74,14 +74,14 @@ model testPumpPowerCalculation
   the speed table.
 </p>
 <ul>
-  <li>2018-01-24 by Peter Matthes:<br/>
+  <li>2018-01-24 by Peter Matthes:<br />
     Highlights pumpParam parameter and adds graphic for pump power
     curve display in plot Script.
   </li>
-  <li>2017-12-06 by Peter Matthes:<br/>
+  <li>2017-12-06 by Peter Matthes:<br />
     Adds hint for nMin and nMax in the documentation.
   </li>
-  <li>2017-11-23 by Peter Matthes:<br/>
+  <li>2017-11-23 by Peter Matthes:<br />
     Implemented
   </li>
 </ul>

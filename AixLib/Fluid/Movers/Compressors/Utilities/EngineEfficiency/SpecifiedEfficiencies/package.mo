@@ -3,7 +3,7 @@ package SpecifiedEfficiencies "Package that engine efficiencies that are specifi
 extends Modelica.Icons.VariantsPackage;
 
 annotation (Documentation(revisions="<html><ul>
-  <li>December 01, 2017, by Mirko Engelpracht:<br/>
+  <li>December 01, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

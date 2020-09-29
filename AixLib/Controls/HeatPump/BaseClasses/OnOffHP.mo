@@ -1,5 +1,5 @@
 within AixLib.Controls.HeatPump.BaseClasses;
-model OnOffHP "Converts a desired temperature to a certain compressor speed"
+model OnOffHP "Controller gives full speed or stop signal depending on temperature hysteresis"
   extends AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=hys, pre_y_start=false) "Hysteresis controller for set temperature"
@@ -20,7 +20,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>

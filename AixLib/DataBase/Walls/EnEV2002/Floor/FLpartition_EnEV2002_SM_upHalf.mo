@@ -9,11 +9,11 @@ record FLpartition_EnEV2002_SM_upHalf
       "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html><ul>
   <li>
-    <i>September 5, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>September 5, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
   <li>
-    <i>Juni 1, 2011</i> by Ana Constantin:<br/>
+    <i>Juni 1, 2011</i> by Ana Constantin:<br />
     implemented
   </li>
 </ul>

@@ -31,15 +31,15 @@ equation
 </p>
 <ul>
   <li>
-    <i>April 1, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>April 1, 2014&#160;</i> by Ana Constantin:<br />
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br />
     Added basic documentation and formatted appropriately
   </li>
   <li>
-    <i>October 22, 2014&#160;</i> by Marcus Fuchs:<br/>
+    <i>October 22, 2014&#160;</i> by Marcus Fuchs:<br />
     Changed graphics section to be compliant with Modelica
     Specification
   </li>

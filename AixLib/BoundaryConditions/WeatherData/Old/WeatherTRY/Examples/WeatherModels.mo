@@ -27,12 +27,12 @@ equation
 </p>
 <ul>
   <li>
-    <i>May 28, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 28, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately, Added SkyTemp model to
     simulation.
   </li>
   <li>
-    <i>December 13, 2011&#160;</i> by Ana Constantin:<br/>
+    <i>December 13, 2011&#160;</i> by Ana Constantin:<br />
     Implemented.
   </li>
 </ul>

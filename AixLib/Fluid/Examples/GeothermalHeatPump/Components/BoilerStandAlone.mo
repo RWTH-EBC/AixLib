@@ -35,7 +35,7 @@ equation
   connect(chemicalEnergyFlowRateSource.y,chemicalEnergyFlowRate)  annotation (
       Line(points={{-39,-56},{0.5,-56},{0.5,-109.5}},     color={0,0,127}));
   annotation (Documentation(revisions="<html><ul>
-  <li>May 19, 2017, by Marc Baranski:<br/>
+  <li>May 19, 2017, by Marc Baranski:<br />
     First implementation.
   </li>
 </ul>

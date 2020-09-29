@@ -35,7 +35,7 @@ record CHP_mikro_ECO_POWER_1 "Vaillant mikro CHP ecoPOWER 1.0"
 </html>",
         revisions="<html><ul>
   <li>
-    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>

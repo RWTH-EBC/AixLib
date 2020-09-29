@@ -117,7 +117,7 @@ equation
   preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
   annotation (Documentation(revisions="<html><ul>
-  <li>June 30, 2016,&#160; by Stanley Risch:<br/>
+  <li>June 30, 2016,&#160; by Stanley Risch:<br />
     Implemented.
   </li>
 </ul>

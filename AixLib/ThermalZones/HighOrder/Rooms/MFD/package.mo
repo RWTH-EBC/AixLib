@@ -28,8 +28,8 @@ package MFD "Multiple Family Dweling"
   alt=\"MFD_FloorPlan_En\">
 </p>
 <p>
-  <br/>
-  <br/>
+  <br />
+  <br />
   <b><span style=\"color: #008000\">References</span></b>
 </p>
 <p>

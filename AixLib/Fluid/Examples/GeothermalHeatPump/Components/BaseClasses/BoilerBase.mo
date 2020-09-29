@@ -29,7 +29,7 @@ equation
   \"modelica://AixLib.Fluid.Examples.GeothermalHeatPump\">AixLib.Fluid.Examples.GeothermalHeatPump</a>.
 </p>
 <ul>
-  <li>May 19, 2017, by Marc Baranski:<br/>
+  <li>May 19, 2017, by Marc Baranski:<br />
     First implementation.
   </li>
 </ul>

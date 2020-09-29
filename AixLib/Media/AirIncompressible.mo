@@ -130,7 +130,7 @@ Documentation(info="<html><p>
 </p>
 </html>",
 revisions="<html><ul>
-  <li>December 19, 2013, by Michael Wetter:<br/>
+  <li>December 19, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -239,7 +239,7 @@ Documentation(info="<html><p>
 </p>
 </html>",
 revisions="<html><ul>
-  <li>December 18, 2013, by Michael Wetter:<br/>
+  <li>December 18, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -266,7 +266,7 @@ algorithm
 </p>
 </html>",
 revisions="<html><ul>
-  <li>December 18, 2013, by Michael Wetter:<br/>
+  <li>December 18, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -317,7 +317,7 @@ algorithm
 </p>
 <p style=\"text-align:center;font-style:italic;\">
   s<sub>s</sub> = c<sub>v</sub> ln(T/T<sub>0</sub>) + R
-  ln(v/v<sub>0</sub>)<br/>
+  ln(v/v<sub>0</sub>)<br />
   = c<sub>v</sub> ln(T/T<sub>0</sub>) + R ln(ρ<sub>0</sub>/ρ)
 </p>
 <p>
@@ -326,7 +326,7 @@ algorithm
 </p>
 <p style=\"text-align:center;font-style:italic;\">
   s<sub>s</sub> = c<sub>v</sub> ln(T/T<sub>0</sub>) + R
-  ln(T/T<sub>0</sub>)<br/>
+  ln(T/T<sub>0</sub>)<br />
   =c<sub>p</sub> ln(T/T<sub>0</sub>).
 </p>
 <p>
@@ -353,7 +353,7 @@ algorithm
   This function is only valid for a relative humidity below 100%.
 </p>
 <ul>
-  <li>November 27, 2013, by Michael Wetter:<br/>
+  <li>November 27, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -372,7 +372,7 @@ Documentation(info="<html><p>
 </p>
 </html>",
 revisions="<html><ul>
-  <li>December 18, 2013, by Michael Wetter:<br/>
+  <li>December 18, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -391,13 +391,13 @@ algorithm
 "<html><p>
   This function computes the derivative of density with respect to
   temperature at constant pressure.
-</p>/html /html /html
-</html>", revisions=
-"<html><ul>
-  <li>December 18, 2013, by Michael Wetter:<br/>
+</p>
+</html>",
+revisions="<html><ul>
+  <li>December 18, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
-</ul>/html /html /html
+</ul>
 </html>"));
 end density_derT_p;
 
@@ -416,7 +416,7 @@ annotation (
 </p>
 </html>",
 revisions="<html><ul>
-  <li>December 18, 2013, by Michael Wetter:<br/>
+  <li>December 18, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -550,7 +550,7 @@ Documentation(info="<html><p>
   for temperature.
 </p>
 <ul>
-  <li>November 27, 2013, by Michael Wetter:<br/>
+  <li>November 27, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -584,7 +584,7 @@ concentration. The pressure is input for compatibility with the medium
 models, but the specific enthalpy is independent of the pressure.
 </html>",
 revisions="<html><ul>
-  <li>April 30, 2015, by Filip Jorissen and Michael Wetter:<br/>
+  <li>April 30, 2015, by Filip Jorissen and Michael Wetter:<br />
     Added <code>Inline=true</code> for <a href=
     \"https://github.com/ibpsa/modelica-ibpsa/issues/227\">issue 227</a>.
   </li>
@@ -623,7 +623,7 @@ annotation (
 </p>
 </html>",
 revisions="<html><ul>
-  <li>December 18, 2013, by Michael Wetter:<br/>
+  <li>December 18, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -661,7 +661,7 @@ Documentation(info="<html><p>
 </p>
 </html>",
 revisions="<html><ul>
-  <li>December 18, 2013, by Michael Wetter:<br/>
+  <li>December 18, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -686,7 +686,7 @@ concentration. The pressure is input for compatibility with the medium
 models, but the temperature is independent of the pressure.
 </html>",
 revisions="<html><ul>
-  <li>April 30, 2015, by Filip Jorissen and Michael Wetter:<br/>
+  <li>April 30, 2015, by Filip Jorissen and Michael Wetter:<br />
     Added <code>Inline=true</code> for <a href=
     \"https://github.com/ibpsa/modelica-ibpsa/issues/227\">issue 227</a>.
   </li>
@@ -727,11 +727,11 @@ protected
   This data record contains the coefficients for perfect gases.
 </p>
 <ul>
-  <li>September 12, 2014, by Michael Wetter:<br/>
+  <li>September 12, 2014, by Michael Wetter:<br />
     Corrected the wrong location of the <code>preferredView</code> and
     the <code>revisions</code> annotation.
   </li>
-  <li>November 21, 2013, by Michael Wetter:<br/>
+  <li>November 21, 2013, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>
@@ -869,12 +869,12 @@ end der_specificHeatCapacityCv;
   where <i>p<sub>std</sub></i> is a constant reference density.
 </p>
 <p>
-  <br/>
+  <br />
   The medium model can be used for air duct simulations, where the
   pressures and temperatures are close to the reference values.
 </p>
 <p>
-  <br/>
+  <br />
   Note that models in this package implement the equation for the
   internal energy as
 </p>
@@ -907,7 +907,7 @@ end der_specificHeatCapacityCv;
   <i>T=0</i> °C and no water vapor is present.
 </p>
 <ul>
-  <li>January 09, 2020 by Alexander Kümpel:<br/>
+  <li>January 09, 2020 by Alexander Kümpel:<br />
     Copy from <a href=\"modelica://AixLib/Media/Air.mo\">Air</a> and
     density set constant
   </li>

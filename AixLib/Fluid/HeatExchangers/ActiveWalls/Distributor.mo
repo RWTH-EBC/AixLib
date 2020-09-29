@@ -132,16 +132,16 @@ equation
           textString="[n] return")}),
     Documentation(revisions="<html><ul>
   <li>
-    <i>January 11, 2019&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>January 11, 2019&#160;</i> by Fabian Wüllhorst:<br />
     Make model more dynamic (See <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/673\">#673</a>)
   </li>
   <li>
-    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>November 06, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>November 06, 2014&#160;</i> by Ana Constantin:<br />
     Added documentation.
   </li>
 </ul>

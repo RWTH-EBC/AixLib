@@ -423,17 +423,17 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
 </html>",
     revisions="<html><ul>
   <li>
-    <i>March 23, 2015&#160;</i> by Ana Constantin:<br/>
+    <i>March 23, 2015&#160;</i> by Ana Constantin:<br />
     Adapted solar inputs so it cand work with both TRY and TMY weather
     format
   </li>
   <li>
-    <i>April 15, 2012&#160;</i> by Jerome Feldhaus:<br/>
+    <i>April 15, 2012&#160;</i> by Jerome Feldhaus:<br />
     Implemented new diffuse irradiation modell from Perez Irradiation
     on tilted Surfaces.
   </li>
   <li>
-    <i>March 14, 2005&#160;</i> by Timo Haase:<br/>
+    <i>March 14, 2005&#160;</i> by Timo Haase:<br />
     Implemented.
   </li>
 </ul>

@@ -100,7 +100,7 @@ equation
                                                color={0,0,127}));
 
   annotation (experiment(StopTime=21168), Documentation(revisions="<html><ul>
-  <li>October 24, 2017, by Mirko Engelpracht:<br/>
+  <li>October 24, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

@@ -300,7 +300,7 @@ equation
   load device can be added here.
 </p>
 <ul>
-  <li>May 19, 2017, by Marc Baranski:<br/>
+  <li>May 19, 2017, by Marc Baranski:<br />
     First implementation.
   </li>
 </ul>

@@ -212,10 +212,10 @@ equation
   the required flow rate.
 </p>
 <ul>
-  <li>Novemver 22, 2019, by Nils Neuland:<br/>
+  <li>Novemver 22, 2019, by Nils Neuland:<br />
     Revised variable names and documentation to follow guidelines.
   </li>
-  <li>October 23, 2018, by Tobias Blacha:<br/>
+  <li>October 23, 2018, by Tobias Blacha:<br />
     First implementation.
   </li>
 </ul>

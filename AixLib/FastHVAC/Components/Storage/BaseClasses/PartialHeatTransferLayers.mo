@@ -67,11 +67,11 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
 </html>",
       revisions="<html><ul>
   <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>

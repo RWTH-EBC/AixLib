@@ -14,7 +14,7 @@ package DataBase "Package contains records for the models in the library."
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
-  <br/>
+  <br />
   This package contains records for the models in the library.
 </p>
 </html>"), preferedView = "diagram");

@@ -140,7 +140,7 @@ equation
       Interval=3600,
       __Dymola_Algorithm="Cvode"),
     Documentation(revisions="<html><ul>
-  <li>September 29, 2016, by Moritz Lauster:<br/>
+  <li>September 29, 2016, by Moritz Lauster:<br />
     Implemented.
   </li>
 </ul>

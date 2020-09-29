@@ -301,11 +301,11 @@ equation
   </li>
   <li>B. Glueck (default): The following equations are used to
   calculate the heat convection coefficient depending on the direction
-  of heat transfer (p. 26):<br/>
-    horizontal: <code>hCon = 1.6 * |port_b.T - port_a.T|^0.3</code><br/>
-    upwards: <code>hCon = 2 * |port_b.T - port_a.T|^0.31</code><br/>
+  of heat transfer (p. 26):<br />
+    horizontal: <code>hCon = 1.6 * |port_b.T - port_a.T|^0.3</code><br />
+    upwards: <code>hCon = 2 * |port_b.T - port_a.T|^0.31</code><br />
     downwards: <code>hCon = 0.54 * |port_b.T -
-    port_a.T|^0.31</code><br/>
+    port_a.T|^0.31</code><br />
     The smooth function is used in case of changing direction of heat
     transfer.
   </li>
@@ -357,41 +357,41 @@ equation
 </p>
 <ul>
   <li>
-    <i>May 30, 2019</i> by Katharina Brinkmann / Philipp Mehrfeld:<br/>
+    <i>May 30, 2019</i> by Katharina Brinkmann / Philipp Mehrfeld:<br />
     <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/711\">#711</a>:<br/>
-    - add smooth + noEvent functions<br/>
+    \"https://github.com/RWTH-EBC/AixLib/issues/711\">#711</a>:<br />
+    - add smooth + noEvent functions<br />
     - ISO approach now linearized when heat flow reverses (depending on
-    newly introduced <code>dT_small</code>)<br/>
+    newly introduced <code>dT_small</code>)<br />
     - Approach acc. to Glueck can change heat flow during
-    simulation.<br/>
+    simulation.<br />
     - Standard Calculation Method now \"Glueck\" due to faster simulation
     speed
   </li>
   <li>
-    <i>October 12, 2016&#160;</i> by Tobias Blacha:<br/>
+    <i>October 12, 2016&#160;</i> by Tobias Blacha:<br />
     Algorithm for HeatConv_inside is now selectable via parameters
   </li>
   <li>
-    <i>June 17, 2015&#160;</i> by Philipp Mehrfeld:<br/>
+    <i>June 17, 2015&#160;</i> by Philipp Mehrfeld:<br />
     Added EN ISO 6946 equations and corrected usage of constant
     hCon_const
   </li>
   <li>
-    <i>March 26, 2015&#160;</i> by Ana Constantin:<br/>
+    <i>March 26, 2015&#160;</i> by Ana Constantin:<br />
     Changed equations for differnet surface orientations according to
     newer work from Glück
   </li>
   <li>
-    <i>April 1, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>April 1, 2014&#160;</i> by Ana Constantin:<br />
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>April 10, 2013&#160;</i> by Ole Odendahl<br/>
+    <i>April 10, 2013&#160;</i> by Ole Odendahl<br />
     Formatted documentation according to standards
   </li>
   <li>
-    <i>December 15, 2005&#160;</i> by Peter Matthes:<br/>
+    <i>December 15, 2005&#160;</i> by Peter Matthes:<br />
     Implemented.
   </li>
 </ul>

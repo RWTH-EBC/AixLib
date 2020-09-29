@@ -44,7 +44,7 @@ algorithm
   of TAOCP.\"
 </p>
 <ul>
-  <li>2017-11-14 by Peter Matthes:<br/>
+  <li>2017-11-14 by Peter Matthes:<br />
     Implemented
   </li>
 </ul>

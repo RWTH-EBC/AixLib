@@ -33,15 +33,15 @@ equation
 </p>
 <ul>
   <li>
-    <i>October 11, 2016&#160;</i> by Philipp Mehrfeld:<br/>
+    <i>October 11, 2016&#160;</i> by Philipp Mehrfeld:<br />
     Removed two old models and combined to this one. Give input
     connector unit [W].
   </li>
   <li>
-    <i>October 15, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 15, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
-  <li>by Alexander Hoh:<br/>
+  <li>by Alexander Hoh:<br />
     implemented
   </li>
 </ul>

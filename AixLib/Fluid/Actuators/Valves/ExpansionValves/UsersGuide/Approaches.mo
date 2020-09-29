@@ -7,17 +7,17 @@ class Approaches
     extends Modelica.Icons.Information;
 
     annotation (Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht, Christian Vering:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>",
             info="<html><p>
-  A generic polynomial approach is presented below:<br/>
-  <br/>
-  <code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br/>
-  <br/>
+  A generic polynomial approach is presented below:<br />
+  <br />
+  <code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br />
+  <br />
   All flow coefficient models presented in this library are based on a
   literature review. Therefore, the variable <code>corFact</code>
   allows a correction of the flow coefficient if the general modelling
@@ -29,7 +29,7 @@ class Approaches
 </h4>
 <p>
   Calculation procedures presented in the litarture have some variables
-  in commen and these variables are presented below:<br/>
+  in commen and these variables are presented below:<br />
 </p>
 <table summary=\"Commen variables\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -140,7 +140,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices</a>
   and expand the <code>if-structure</code> defined in <a href=
   \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.PolynomialFlowCoefficient\">
-  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.PolynomialFlowCoefficient</a>.<br/>
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.PolynomialFlowCoefficient</a>.<br />
 </p>
 <table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -217,17 +217,17 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
     extends Modelica.Icons.Information;
 
     annotation (Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>",
             info="<html><p>
-  A generic power approach is presented below:<br/>
-  <br/>
-  <code>C = corFact * a * product(P[i]^b[i] for i in 1:nT)</code><br/>
-  <br/>
+  A generic power approach is presented below:<br />
+  <br />
+  <code>C = corFact * a * product(P[i]^b[i] for i in 1:nT)</code><br />
+  <br />
   All flow coefficient models presented in this library are based on a
   literature review. Therefore, the variable <code>corFact</code>
   allows a correction of the flow coefficient if the general modelling
@@ -239,7 +239,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 </h4>
 <p>
   Calculation procedures presented in the litarture have some variables
-  in commen and these variables are presented below:<br/>
+  in commen and these variables are presented below:<br />
 </p>
 <table summary=\"Commen variables\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -350,7 +350,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices</a>
   and expand the <code>if-structure</code> defined in <a href=
   \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.PolynomialFlowCoefficient\">
-  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.PolynomialFlowCoefficient</a>.<br/>
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.PolynomialFlowCoefficient</a>.<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -447,7 +447,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   end PowerApproach;
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -471,7 +471,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc\">
   AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc</a>.
   In the following, these modeling approaches are characterised
-  shortly:<br/>
+  shortly:<br />
 </p>
 <table summary=\"Modelling approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

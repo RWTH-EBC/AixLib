@@ -72,11 +72,11 @@ equation
     StartTime=0),
      Documentation(revisions="<html><ul>
   <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    <i>October 11, 2016</i> by Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>Februar 21, 2013</i> by Corinna Leonhardt:<br/>
+    <i>Februar 21, 2013</i> by Corinna Leonhardt:<br />
     Implemented
   </li>
 </ul>
@@ -88,7 +88,7 @@ equation
   The <b>PVinverterRMS</b> model represents a simple PV inverter.
 </p>
 <p>
-  <br/>
+  <br />
   <b><span style=\"color: #008000;\">Concept</span></b>
 </p>
 <p>

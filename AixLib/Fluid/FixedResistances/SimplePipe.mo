@@ -154,7 +154,7 @@ equation
           fillColor={95,95,95})}),          Diagram(coordinateSystem(
           preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>Mai 07, 2020, by Alexander Kümpel:<br/>
+  <li>Mai 07, 2020, by Alexander Kümpel:<br />
     First implementation
   </li>
 </ul>

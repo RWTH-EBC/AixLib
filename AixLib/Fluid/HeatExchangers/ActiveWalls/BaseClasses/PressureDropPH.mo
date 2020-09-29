@@ -63,11 +63,11 @@ port_b.p = if noEvent(port_a.m_flow>=0) then port_a.p - tubeLength*m*(port_a.m_f
 </html>",
   revisions="<html><ul>
   <li>
-    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>June 10, 2011&#160;</i> by Ana Constantin:<br/>
+    <i>June 10, 2011&#160;</i> by Ana Constantin:<br />
     Implemented.
   </li>
 </ul>

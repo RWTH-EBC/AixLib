@@ -346,7 +346,7 @@ Cooling"),
           fillPattern=FillPattern.Solid,
           textString="AHU")}),
     Documentation(revisions="<html><ul>
-  <li>April, 2019, by Martin Kremer:<br/>
+  <li>April, 2019, by Martin Kremer:<br />
     First implementation
   </li>
 </ul>

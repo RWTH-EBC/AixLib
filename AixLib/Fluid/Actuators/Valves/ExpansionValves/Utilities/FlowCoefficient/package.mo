@@ -20,7 +20,7 @@ package FlowCoefficient "Package that contains models describing different flow 
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
           textString="C")}), Documentation(revisions="<html><ul>
-  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -30,11 +30,11 @@ package FlowCoefficient "Package that contains models describing different flow 
   This package contains models describing calculations procedures of
   flow coefficients that are based on a literature review. However, in
   this package the flow coefficient is implemented in such a way that
-  it fulfills<br/>
-  <br/>
+  it fulfills<br />
+  <br />
   <code>ṁ = C*A<sub>valve</sub>*sqrt(2*ρ<sub>inlet</sub>*dp)</code>
-  .<br/>
-  <br/>
+  .<br />
+  <br />
   For more information, please checkout <a href=
   \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
   AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>.
@@ -44,7 +44,7 @@ package FlowCoefficient "Package that contains models describing different flow 
 </h4>
 <p>
   Calculation procedures presented in the litarture have some variables
-  in commen and these variables are presented below:<br/>
+  in commen and these variables are presented below:<br />
 </p>
 <table summary=\"Commen variables\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -154,20 +154,20 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   Polynomial approaches
 </h4>
 <p>
-  A generic polynomial approach is presented below:<br/>
-  <br/>
-  <code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br/>
-  <br/>
+  A generic polynomial approach is presented below:<br />
+  <br />
+  <code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br />
+  <br />
   Actually, two polynomial approaches are implemented in this package.
 </p>
 <h4>
   Power approaches
 </h4>
 <p>
-  A generic power approach is presented below:<br/>
-  <br/>
-  <code>C = corFact * a * product(P[i]^b[i] for i in 1:nT)</code><br/>
-  <br/>
+  A generic power approach is presented below:<br />
+  <br />
+  <code>C = corFact * a * product(P[i]^b[i] for i in 1:nT)</code><br />
+  <br />
   Actually, thee power approaches are implemented in this package.
 </p>
 <h4>

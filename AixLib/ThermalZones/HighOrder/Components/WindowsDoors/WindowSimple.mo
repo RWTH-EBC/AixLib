@@ -161,21 +161,21 @@ equation
 </p>
 <ul>
   <li>
-    <i>November 2, 2018Mai 19, 2014&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>November 2, 2018Mai 19, 2014&#160;</i> by Fabian Wüllhorst:<br />
     Remove redundand twoStar_radEx from model. This is for <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.
   </li>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
     <i>March 30, 2012&#160;</i> by Ana Constantin and Corinna
-    Leonhardt:<br/>
+    Leonhardt:<br />
     Implemented.
   </li>
 </ul>

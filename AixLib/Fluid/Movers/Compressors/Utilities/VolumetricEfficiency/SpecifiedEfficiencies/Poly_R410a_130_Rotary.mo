@@ -6,7 +6,7 @@ model Poly_R410a_130_Rotary "Rotary Compressor - R410a - 130 cm³ - Polynomial"
     final b={-0.165});
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 23, 2017, by Mirko Engelpracht:<br/>
+  <li>October 23, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -14,7 +14,7 @@ model Poly_R410a_130_Rotary "Rotary Compressor - R410a - 130 cm³ - Polynomial"
 </html>", info="<html>
 <p>
   This model contains a calculation procedure for the isentropic
-  efficiency presented by Körner (2017).<br/>
+  efficiency presented by Körner (2017).<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

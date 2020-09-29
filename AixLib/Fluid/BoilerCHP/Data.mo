@@ -13,7 +13,7 @@ package Data
 
       annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
   </li>
@@ -26,7 +26,7 @@ package Data
                                  lambda=44.5, rhoEngWall=7200, c=535);
       annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
   </li>
@@ -40,7 +40,7 @@ package Data
                                  lambda=36.2, rhoEngWall=7100, c=515);
       annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
   </li>
@@ -57,7 +57,7 @@ package Data
 
       annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
   </li>
@@ -66,7 +66,7 @@ package Data
     end EngineMaterial_CastAluminium;
     annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
   </li>

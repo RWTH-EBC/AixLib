@@ -39,18 +39,18 @@ equation
 </html>",
       revisions="<html><ul>
   <li>
-    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br />
     Add description and fix documentation
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br />
     Transferred to AixLib
   </li>
   <li>
-    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
-  <li>by Alexander Hoh:<br/>
+  <li>by Alexander Hoh:<br />
     implemented
   </li>
 </ul>

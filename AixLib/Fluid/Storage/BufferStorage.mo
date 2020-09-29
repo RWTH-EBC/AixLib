@@ -741,40 +741,40 @@ for i in 2:(n-1) loop
                  Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-80,-100},{80,100}})),
     Documentation(revisions="<html><ul>
-  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
+  <li>November 27, 2019, by Philipp Mehrfeld:<br />
     - <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a><br/>
+    \"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a><br />
     - Replace MSL pipe by <a href=
-    \"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br/>
+    \"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br />
 
     - Add energyDynamics and tidy up with heat transfer models.
   </li>
   <li>
-    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br />
     Add comments and fix documentation
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br />
     Added to AixLib
   </li>
   <li>
-    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br />
     Uses components from MSL
   </li>
   <li>
-    <i>December 10, 2013</i> by Kristian Huchtemann:<br/>
+    <i>December 10, 2013</i> by Kristian Huchtemann:<br />
     Added documentation of storage and new heat transfer models.
   </li>
   <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
   <li>
-    <i>February 19, 2013</i> by Sebastian Stinner:<br/>
+    <i>February 19, 2013</i> by Sebastian Stinner:<br />
     mistake in losses calculation corrected (thickness of \"wall\" and
     \"insulation\" was only considered once but has to be considered
     twice, additionally the components \"wall\" and \"insulation\" were
-    exchanged )<br/>
+    exchanged )<br />
     and mistake in bouyancy model \"Wetter\" corrected (bouyancy flows
     were flowing in the wrong direction)
   </li>

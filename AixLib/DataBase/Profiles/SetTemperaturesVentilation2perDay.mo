@@ -57,11 +57,11 @@ record SetTemperaturesVentilation2perDay
 </p>
 <ul>
   <li>
-    <i>August 30, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>August 30, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>July 3, 2012&#160;</i> by Ana Constantin:<br/>
+    <i>July 3, 2012&#160;</i> by Ana Constantin:<br />
     Implemented.
   </li>
 </ul>

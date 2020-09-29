@@ -61,7 +61,7 @@ record Pump_DN25_H1_8_V5
        "coefficients for P = f(Q,N)");
 
   annotation(preferredView="text", Documentation(revisions="<html><ul>
-  <li>2018-07-02 by Luca Vedda:<br/>
+  <li>2018-07-02 by Luca Vedda:<br />
     Generated
   </li>
 </ul>

@@ -8,7 +8,7 @@ model Poly_R22_20_Rotary "Rotary Compressor - R22 - 20.7 cm³ - Polynomial"
     final c={1.083,-0.077,0});
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 23, 2017, by Mirko Engelpracht:<br/>
+  <li>October 23, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -16,7 +16,7 @@ model Poly_R22_20_Rotary "Rotary Compressor - R22 - 20.7 cm³ - Polynomial"
 </html>", info="<html>
 <p>
   This model contains a calculation procedure for the isentropic
-  efficiency presented by Li (2013).<br/>
+  efficiency presented by Li (2013).<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

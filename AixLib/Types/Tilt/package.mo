@@ -15,27 +15,11 @@ annotation(preferredView="info", Documentation(info="<html><p>
   <code>AixLib.Types.Tilt.Floor</code>.
 </p>
 <p>
-  Note that a ceiling has a tilt of <i>0</i> <!-- @include_Buildings
-
-
-
-, and also the solar collector models
-
-
-
-in
-
-
-
-<a href=\"AixLib.Fluid.SolarCollectors\">AixLib.Fluid.SolarCollectors</a>
-
-
-
-require a tilt of <i>0</i>
-
-
-
--->
+  Note that a ceiling has a tilt of <i>0</i> 
+  <!-- @include_Buildings, and also the solar collector models in
+  <a href=\"AixLib.Fluid.SolarCollectors\">AixLib.Fluid.SolarCollectors</a>
+  require a tilt of <i>0</i>
+  -->
    if they are facing straight upwards. This is correct because the
   solar irradiation on a ceiling construction is on the other-side
   surface, which faces upwards toward the sky. Hence, a construction is
@@ -44,7 +28,7 @@ require a tilt of <i>0</i>
 </p>
 </html>",
   revisions="<html><ul>
-  <li>November 30, 2010, by Michael Wetter:<br/>
+  <li>November 30, 2010, by Michael Wetter:<br />
     First implementation.
   </li>
 </ul>

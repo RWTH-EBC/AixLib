@@ -108,10 +108,10 @@ equation
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
     Documentation(revisions="<html><ul>
-  <li>January 22, 2019, by Alexander Kümpel:<br/>
+  <li>January 22, 2019, by Alexander Kümpel:<br />
     External T_set added.
   </li>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
+  <li>October 25, 2017, by Alexander Kümpel:<br />
     First implementation.
   </li>
 </ul>

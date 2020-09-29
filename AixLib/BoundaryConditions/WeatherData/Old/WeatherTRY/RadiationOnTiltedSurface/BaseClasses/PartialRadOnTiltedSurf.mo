@@ -67,7 +67,7 @@ public
 </p>
 <ul>
   <li>
-    <i>March 23, 2015&#160;</i> by Ana Constantin:<br/>
+    <i>March 23, 2015&#160;</i> by Ana Constantin:<br />
     Implemented.
   </li>
 </ul>

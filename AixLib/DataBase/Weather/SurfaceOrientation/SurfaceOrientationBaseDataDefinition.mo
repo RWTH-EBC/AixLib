@@ -20,7 +20,7 @@ record SurfaceOrientationBaseDataDefinition
 </p>
 <ul>
   <li>
-    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br />
     Added basic documentation
   </li>
 </ul>

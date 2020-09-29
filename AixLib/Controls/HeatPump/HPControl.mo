@@ -4,7 +4,7 @@ model HPControl
   //General
   replaceable model TSetToNSet =
       AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
-    final use_secHeaGen=use_secHeaGen);
+    final use_secHeaGen=use_secHeaGen) annotation(choicesAllMatching=true);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
 //Heating Curve
@@ -202,7 +202,7 @@ equation
             100}})),
     Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>
