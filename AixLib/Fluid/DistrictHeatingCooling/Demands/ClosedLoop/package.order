@@ -15,3 +15,4 @@ ValveControlledHeatPumpFixDeltaT
 PumpControlledHeatPumpFixDeltaT
 BaseClasses
 SubstationDirectCooling
+SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHPCO2

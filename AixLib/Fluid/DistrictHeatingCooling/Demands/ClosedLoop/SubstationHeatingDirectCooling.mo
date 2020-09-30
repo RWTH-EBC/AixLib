@@ -278,8 +278,8 @@ equation
   connect(division1.y, mass_flow_heatExchangerHeating2.u1) annotation (Line(
         points={{-79.2,-70},{-68,-70},{-68,-40},{-224,-40},{-224,-92},{-196,-92}},
         color={0,0,127}));
-  connect(mass_flow_heatExchangerHeating2.y, pumpHeating.m_flow_in) annotation
-    (Line(points={{-173,-100},{-128,-100},{-128,-98},{-70,-98},{-70,-36}},
+  connect(mass_flow_heatExchangerHeating2.y, pumpHeating.m_flow_in) annotation (
+     Line(points={{-173,-100},{-128,-100},{-128,-98},{-70,-98},{-70,-36}},
         color={0,0,127}));
   connect(mass_flow_heatExchangerHeating1.y, pumpCooling.m_flow_in)
     annotation (Line(points={{-73,94},{38,94},{38,36}}, color={0,0,127}));
