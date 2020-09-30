@@ -2,8 +2,7 @@
 model PlugFlowPipeEmbedded
   "Embedded pipe model using spatialDistribution for temperature delay"
 
-  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true,
-  allowFlowReversal=true);
+  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -94,7 +93,7 @@ model PlugFlowPipeEmbedded
   parameter Modelica.SIunits.Length thickness_ground = 0.6 "thickness of soil layer for heat loss calulcation"
   annotation(Dialog(tab="Ground"));
 
-  parameter Modelica.SIunits.ThermalConductivity lambda_ground = 1.5
+  parameter Modelica.SIunits.ThermalConductivity lambda = 1.5
     "Heat conductivity of material/soil"
     annotation(Dialog(tab="Ground"));
 
@@ -109,7 +108,6 @@ model PlugFlowPipeEmbedded
 
   AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
   redeclare final package Medium = Medium,
-  allowFlowReversal = allowFlowReversal,
   final dh = dh,
   final v_nominal = v_nominal,
   final ReC = ReC,
@@ -136,7 +134,7 @@ model PlugFlowPipeEmbedded
   final d_in = dh + 2 * thickness,
   final d_out = d_in + thickness_ground / 3,
   final length = length,
-  final lambda = lambda_ground,
+  final lambda = lambda,
     T0=283.15)
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
 
@@ -146,7 +144,7 @@ model PlugFlowPipeEmbedded
   final d_in = dh + 2 * thickness + thickness_ground/3,
   final d_out = d_in + 2 * thickness_ground / 3,
   final length = length,
-  final lambda = lambda_ground,
+  final lambda = lambda,
     T0=283.15)
     annotation (Placement(transformation(extent={{-10,46},{10,66}})));
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer2(
@@ -155,7 +153,7 @@ model PlugFlowPipeEmbedded
   final d_in = dh + 2 * thickness + 2 * thickness_ground/3,
   final d_out = d_in + thickness_ground,
   final length = length,
-  final lambda = lambda_ground,
+  final lambda = lambda,
     T0=283.15)
     annotation (Placement(transformation(extent={{-10,72},{10,92}})));
 

@@ -8,8 +8,7 @@ model IdealPlantPump
 
       parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
       "Nominal pressure drop";
-      parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 2
-                                                                "Nominal mass flow rate";
+      parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)
@@ -62,13 +61,6 @@ model IdealPlantPump
   parameter Modelica.SIunits.PressureDifference dpPump_nominal=3e5 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per";
-
-  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
-      p=Medium.p_default,
-      T=Medium.T_default,
-      X=Medium.X_default)
-    "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
-    annotation (Dialog(group="Advanced"));
 equation
   connect(TIn, heater.TSet)
     annotation (Line(points={{-106,42},{12,42},{12,8}}, color={0,0,127}));

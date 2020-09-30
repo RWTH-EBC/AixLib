@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 partial model PartialHeatPumpSystem
   "Partial model containing the basic heat pump block and different control blocks(optional)"
     extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -386,7 +386,6 @@ partial model PartialHeatPumpSystem
     final tableUpp=tableUpp,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
-    final deltaIceFac=deltaIceFac,
     final use_chiller=use_chiller,
     final calcPel_deFro=calcPel_deFro,
     final use_antFre=use_antFre,

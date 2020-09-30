@@ -99,21 +99,21 @@ requirements, otherwise the model stops with an error:
 </p>
 <ul>
 <li>
-Their arrays
-<code>y</code> and <code>phi</code>
+The arrays in
+<code>flowCharacteristics.y</code> and <code>flowCharacteristics.phi</code>
 must be strictly monotonic increasing.
 </li>
 <li>
 The first value must satisfy
-<code>y[1]=0</code>, and
-<code>phi[1]</code> must be equal to the
+<code>flowCharacteristics.y[1]=0</code>, and
+<code>flowCharacteristics.phi[1]</code> must be equal to the
 leakage flow rate, which must be bigger than zero.
 Otherwise, a default value of <code>1E-8</code> is used.
 </li>
 <li>
 The last values must satisfy
-<code>y[end]=1</code> and
-<code>phi[end]=1</code>.
+<code>flowCharacteristics.y[end]=1</code> and
+<code>flowCharacteristics.phi[end]=1</code>.
 </li>
 </ul>
 <p>
@@ -164,16 +164,16 @@ First implementation.
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
-          origin={-56,-85},
+          origin={-70,83},
           lineColor={64,64,64},
           fillColor={255,215,136},
           fillPattern=FillPattern.Solid,
           extent={{-12,-11},{12,11}},
           radius=5.0),
         Line(
-          points={{-68,-90},{-44,-90}}),
+          points={{-70,94},{-70,72}}),
         Line(
-          points={{-56,-74},{-56,-96}}),
+          points={{-82,86},{-58,86}}),
         Line(
-          points={{-68,-82},{-44,-82}})}));
+          points={{-82,78},{-58,78}})}));
 end TwoWayTable;

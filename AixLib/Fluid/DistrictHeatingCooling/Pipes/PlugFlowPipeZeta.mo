@@ -1,11 +1,7 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PlugFlowPipeZeta
-  "Pipe model using spatialDistribution for temperature delay and conditional HydraulicResistance"
+  "Pipe model using spatialDistribution for temperature delay"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
-
-  parameter Boolean use_zeta=false
-    "= true HydraulicResistance is implemented, zeta value has to be given next"
-    annotation(Dialog(group="Additional pressurelosses"));
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -73,13 +69,11 @@ model PlugFlowPipeZeta
     "Thermal resistance per unit length from fluid to boundary temperature"
     annotation (Dialog(group="Thermal resistance"));
 
-  parameter Real fac= 1.0
-    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal"
-    annotation (Dialog(group="Additional pressurelosses", enable=not use_zeta));
+  parameter Real fac=1
+    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
 
   parameter Real sum_zetas=0
-    "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
-    annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
+    "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc.";
 
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
@@ -88,13 +82,11 @@ model PlugFlowPipeZeta
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
-  Modelica.SIunits.Velocity v_water;
-
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
-  AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore plugFlowCore(
+  AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore cor(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
@@ -108,13 +100,14 @@ model PlugFlowPipeZeta
     final m_flow_start=m_flow_start,
     final initDelay=initDelay,
     final from_dp=from_dp,
-    final fac=if not use_zeta then fac else 1.0,
+    final fac=fac,
     final ReC=ReC,
     final thickness=thickness,
     final roughness=roughness,
     final allowFlowReversal=allowFlowReversal,
     final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized) "Describing the pipe behavior"
+    final linearized=linearized)
+    "Describing the pipe behavior"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   // In the volume, below, we scale down V and use
@@ -171,35 +164,26 @@ public
     from_dp=from_dp,
     homotopyInitialization=homotopyInitialization,
     linearized=linearized,
-    m_flow_start=m_flow_start) if use_zeta
-    annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
+    m_flow_start=m_flow_start)
+    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 equation
-  //calculation of the flow velocity of water in the pipes
-  v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
-
   for i in 1:nPorts loop
     connect(vol.ports[i + 1], ports_b[i])
     annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
   end for;
-  connect(plugFlowCore.heatPort, heatPort)
+  connect(cor.heatPort, heatPort)
     annotation (Line(points={{0,10},{0,10},{0,100}}, color={191,0,0}));
 
-  connect(plugFlowCore.port_b, vol.ports[1])
+  connect(cor.port_b, vol.ports[1])
     annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
-  if use_zeta then
-  connect(hydraulicResistance.port_b, plugFlowCore.port_a)
-    annotation (Line(points={{-40,20},{-20,20},{-20,0},{-10,0}},
-                                               color={0,127,255}, pattern=LinePattern.Dash));
+
+  connect(hydraulicResistance.port_b, cor.port_a)
+    annotation (Line(points={{-40,0},{-10,0}}, color={0,127,255}));
   connect(hydraulicResistance.port_a, port_a)
-    annotation (Line(points={{-60,20},{-80,20},{-80,0},{-100,0}},
-                                                color={0,127,255}, pattern=LinePattern.Dash));
-  else
-  connect(port_a, plugFlowCore.port_a)
-    annotation (Line(points={{-100,0},{-80,0},{-80,-20},{-20,-20},{-20,0},{-10,0}},
-                                                color={0,127,255}));
-  end if;
-    annotation (Dialog(group="Additional pressurelosses"),
+    annotation (Line(points={{-60,0},{-100,0}}, color={0,127,255}));
+  annotation (
+    Line(points={{70,20},{72,20},{72,0},{100,0}}, color={0,127,255}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
@@ -240,108 +224,93 @@ equation
           lineColor={0,0,0},
           textString="L = %length
 d = %dh")}),
-    Documentation(revisions="<html><ul>
-  <li>September 25, 2019, by Nils Neuland:<br/>
-    Revised variable names and documentation to follow guidelines.
-    Corrected malformed hyperlinks.
-  </li>
-  <li>October 23, 2017, by Michael Wetter:<br/>
-    Revised variable names and documentation to follow guidelines.
-    Corrected malformed hyperlinks.
-  </li>
-  <li>July 4, 2016 by Bram van der Heijde:<br/>
-    Introduce pipVol.
-  </li>
-  <li>October 10, 2015 by Marcus Fuchs:<br/>
-    Copy Icon from KUL implementation and rename model. Replace
-    resistance and temperature delay by an adiabatic pipe.
-  </li>
-  <li>September, 2015 by Marcus Fuchs:<br/>
-    First implementation.
-  </li>
+    Documentation(revisions="<html>
+<ul>
+<li>
+October 23, 2017, by Michael Wetter:<br/>
+Revised variable names and documentation to follow guidelines.
+Corrected malformed hyperlinks.
+</li>
+<li>
+July 4, 2016 by Bram van der Heijde:<br/>
+Introduce <code>pipVol</code>.
+</li>
+<li>
+October 10, 2015 by Marcus Fuchs:<br/>
+Copy Icon from KUL implementation and rename model.
+Replace resistance and temperature delay by an adiabatic pipe.
+</li>
+<li>September, 2015 by Marcus Fuchs:<br/>
+First implementation.
+</li>
 </ul>
 </html>", info="<html>
 <p>
-  Pipe with heat loss using the time delay based heat losses and
-  transport of the fluid using a plug flow model, applicable for
-  simulation of long pipes such as in district heating and cooling
-  systems.
+Pipe with heat loss using the time delay based heat losses and transport
+of the fluid using a plug flow model, applicable for simulation of long
+pipes such as in district heating and cooling systems.</p>
+<p>
+This model takes into account transport delay along the pipe length idealized
+as a plug flow.
+The model also includes thermal inertia of the pipe wall.
+</p>
+<h4>Implementation</h4>
+<p>Heat losses are implemented by
+<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
+AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss</a>
+at each end of the pipe (see
+<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">
+AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>).
+Depending on the flow direction, the temperature difference due to heat losses
+is subtracted at the right fluid port.
 </p>
 <p>
-  This model takes into account transport delay along the pipe length
-  idealized as a plug flow. The model also includes thermal inertia of
-  the pipe wall. This model determines the pressure drop either through
-  a static factor or using the sum of zeta values.
-</p>
-<h4>
-  Implementation
-</h4>
-<p>
-  This model is based on <a href=
-  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>
-  and contains the spatialDistribution operator.
+The pressure drop is implemented using
+<a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">
+AixLib.Fluid.FixedResistances.HydraulicDiameter</a>.
 </p>
 <p>
-  The spatialDistribution operator is used for the temperature wave
-  propagation through the length of the pipe.
+The thermal capacity of the pipe wall is implemented as a mixing volume
+of the fluid in the pipe, of which the thermal capacity
+is equal to that of the pipe wall material.
+In addition, this mixing volume allows the hydraulic separation of subsequent pipes.
+Thanks to the vectorized implementation of the (design) outlet port,
+splits and junctions of pipes can be handled in a numerically efficient way.
+<br/>
+This mixing volume is not present in the
+<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">PlugFlowCore</a> model,
+which can be used in cases where mixing volumes at pipe junctions need to
+be added manually.
 </p>
-<p>
-  Heat losses are implemented by <a href=
-  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
-  AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss</a> at
-  each end of the pipe (see <a href=
-  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>).
-  Depending on the flow direction, the temperature difference due to
-  heat losses is subtracted at the right fluid port.
-</p>
-<p>
-  The pressure drop is implemented using <a href=
-  \"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">AixLib.Fluid.FixedResistances.HydraulicDiameter</a>.
-</p>
-<p>
-  The thermal capacity of the pipe wall is implemented as a mixing
-  volume of the fluid in the pipe, of which the thermal capacity is
-  equal to that of the pipe wall material. In addition, this mixing
-  volume allows the hydraulic separation of subsequent pipes. Thanks to
-  the vectorized implementation of the (design) outlet port, splits and
-  junctions of pipes can be handled in a numerically efficient way.
-</p>
-<p>
-  This mixing volume is not present in the <a href=
-  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">PlugFlowCore</a>
-  model, which can be used in cases where mixing volumes at pipe
-  junctions need to be added manually.
-</p>
-<p>
-  If Boolean use_zeta is set \"true\" <a href=
-  \"modelica://AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>
-  is used.
-</p>
-<p>
-  <a href=
-  \"modelica://AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>
-  takes into account additional pressure drops due to bends/valves/etc.
-  Therefore the sum of zeta values has to be given prior.
-</p>
-<p>
-  If Boolean use_zeta is set \"false\" the pressureloss is determine
-  through a static factor which has to given prior.
-</p>
-<h4>
-  Assumptions
-</h4>
+<h4>Assumptions</h4>
 <ul>
-  <li>Heat losses are for steady-state operation.
-  </li>
-  <li>The axial heat diffusion in the fluid, the pipe wall and the
-  ground are neglected.
-  </li>
-  <li>The boundary temperature is uniform.
-  </li>
-  <li>The thermal inertia of the pipe wall material is lumped on the
-  side of the pipe that is connected to <span style=
-  \"font-family: Courier New;\">ports_b</span>.
-  </li>
+<li>
+Heat losses are for steady-state operation.
+</li>
+<li>
+The axial heat diffusion in the fluid, the pipe wall and the ground are neglected.
+</li>
+<li>
+The boundary temperature is uniform.
+</li>
+<li>
+The thermal inertia of the pipe wall material is lumped on the side of the pipe
+that is connected to <code>ports_b</code>.
+</li>
 </ul>
+<h4>References</h4>
+<p>
+Full details on the model implementation and experimental validation can be found
+in:
+</p>
+<p>
+van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G., Sartor, K.,
+Basciotti, D., M&uuml;ller, D., Nytsch-Geusen, C., Wetter, M. and Helsen, L.
+(2017).<br/>
+Dynamic equation-based thermo-hydraulic pipe model for district heating and
+cooling systems.<br/>
+<i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
+<a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
+10.1016/j.enconman.2017.08.072</a>.</p>
 </html>"));
 end PlugFlowPipeZeta;

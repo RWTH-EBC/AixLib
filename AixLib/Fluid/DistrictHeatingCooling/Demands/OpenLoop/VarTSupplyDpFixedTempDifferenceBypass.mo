@@ -57,8 +57,8 @@ public
         origin={80,0})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-40,104},{-20,124}})));
-  Modelica.Blocks.Math.Division hea2MasFlo annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+  Modelica.Blocks.Math.Division heat2massFlow
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={20,120})));
   Sources.MassFlowSource_T              sink(
@@ -95,7 +95,7 @@ public
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-76,114})));
-  Modelica.Blocks.Math.Add temRet(k1=-1, k2=+1)
+  Modelica.Blocks.Math.Add Treturn(k1=-1, k2=+1)
     annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
   Utilities.Math.SmoothMax smoothMax(deltaX=0.001) annotation (Placement(
         transformation(
@@ -110,7 +110,6 @@ public
         m_flo_bypass)
     annotation (Placement(transformation(extent={{28,66},{48,86}})));
   MixingVolumes.MixingVolume vol(
-    energyDynamics=energyDynamics,
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=1,
@@ -124,8 +123,9 @@ equation
                                 color={0,127,255}));
   connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0}},
                           color={0,127,255}));
-  connect(Q_flow_input, hea2MasFlo.u1)
-    annotation (Line(points={{-112,140},{26,140},{26,132}}, color={0,0,127}));
+  connect(Q_flow_input, heat2massFlow.u1)
+    annotation (Line(points={{-112,140},{26,140},{26,132}},
+                                                       color={0,0,127}));
   connect(changeSign.y, sink.m_flow_in)
     annotation (Line(points={{-4,13},{-4,8},{-22,8}},    color={0,0,127}));
   connect(senT_supply.port_b, sink.ports[1])
@@ -133,18 +133,21 @@ equation
   connect(deltaT.y, gain.u)
     annotation (Line(points={{-65,114},{-42,114}},
                                                  color={0,0,127}));
-  connect(deltaT.y, temRet.u1) annotation (Line(points={{-65,114},{-58,114},{-58,
-          86},{-52,86}}, color={0,0,127}));
-  connect(senT_supply.T, temRet.u2) annotation (Line(points={{-68,11},{-70,11},
-          {-70,74},{-52,74}}, color={0,0,127}));
-  connect(gain.y, hea2MasFlo.u2) annotation (Line(points={{-19,114},{-12,114},{
-          -12,138},{14,138},{14,132}}, color={0,0,127}));
+  connect(deltaT.y, Treturn.u1) annotation (Line(points={{-65,114},{-58,114},{
+          -58,86},{-52,86}},
+                         color={0,0,127}));
+  connect(senT_supply.T, Treturn.u2) annotation (Line(points={{-68,11},{-70,11},
+          {-70,74},{-52,74}},      color={0,0,127}));
+  connect(gain.y, heat2massFlow.u2) annotation (Line(points={{-19,114},{-12,114},
+          {-12,138},{14,138},{14,132}},
+                                color={0,0,127}));
   connect(smoothMax.y, changeSign.u)
     annotation (Line(points={{-4,45},{-4,36}}, color={0,0,127}));
   connect(smoothMax.y, source.m_flow_in) annotation (Line(points={{-4,45},{-4,
           40},{16,40},{16,-8},{26,-8}},color={0,0,127}));
-  connect(smoothMax.u1, hea2MasFlo.y) annotation (Line(points={{2,68},{2,92},{
-          20,92},{20,109}}, color={0,0,127}));
+  connect(smoothMax.u1, heat2massFlow.y)
+    annotation (Line(points={{2,68},{2,92},{20,92},{20,109}},
+                                                            color={0,0,127}));
   connect(m_flo_min.y, smoothMax.u2)
     annotation (Line(points={{55,104},{-10,104},{-10,68}},
                                                       color={0,0,127}));
@@ -155,8 +158,9 @@ equation
   connect(senT_supply.T, switch1.u1) annotation (Line(points={{-68,11},{-54,11},
           {-54,64},{-18,64},{-18,90},{54,90},{54,84}},
                                                      color={0,0,127}));
-  connect(temRet.y, switch1.u3) annotation (Line(points={{-29,80},{12,80},{12,
-          54},{54,54},{54,68}}, color={0,0,127}));
+  connect(Treturn.y, switch1.u3) annotation (Line(points={{-29,80},{12,80},{12,
+          54},{54,54},{54,68}},
+                           color={0,0,127}));
   connect(switch1.y, source.T_in) annotation (Line(points={{77,76},{82,76},{82,
           28},{26,28},{26,-4}},
                               color={0,0,127}));
@@ -205,19 +209,14 @@ equation
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html><p>
-  A simple substation model using a fixed temperature difference and
-  the actual supply temperature to calculate the mass flow rate drawn
-  from the network. This model uses an open loop design to prescribe
-  the required flow rate.
-</p>
+    Documentation(info="<html>
+<p>A simple substation model using a fixed temperature difference and the actual supply temperature to calculate the mass flow rate drawn from the network. This model uses an open loop design to prescribe the required flow rate. </p>
+</html>", revisions="<html>
 <ul>
-  <li>Novemver 22, 2019, by Nils Neuland:<br/>
-    Revised variable names and documentation to follow guidelines.
-  </li>
-  <li>October 23, 2018, by Tobias Blacha:<br/>
-    First implementation.
-  </li>
+<li>
+October 23, 2018, by Tobias Blacha:<br/>
+First implementation.
+</li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-100,-20},{100,160}})));

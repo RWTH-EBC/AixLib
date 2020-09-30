@@ -6,13 +6,16 @@ model Admix "Test for admix circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.Admix Admix(
-    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
+          energyDynamics=Admix.energyDynamics)),
     redeclare package Medium = Medium,
-    m_flow_nominal=0.1,
+    m_flow_nominal=1,
+    dIns=0.01,
+    kIns=0.028,
+    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     Kv=10,
@@ -89,13 +92,9 @@ equation
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=800),
-    Documentation(revisions="<html><ul>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
-    Transfer from ZUGABE to AixLib.
-  </li>
+    Documentation(revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
 </ul>
-</html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Admix.mos"
-        "Simulate and plot"));
+</html>"));
 end Admix;
