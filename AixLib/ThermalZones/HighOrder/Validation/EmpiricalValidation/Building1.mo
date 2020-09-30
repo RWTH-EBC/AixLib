@@ -101,25 +101,25 @@ model Building1
   parameter Modelica.SIunits.Temperature T0=284.15 "Initial temperature";
 
   Modelica.Blocks.Sources.RealExpression Cool(y=idealHeaterCooler.coolingPower)
-    annotation (Placement(transformation(extent={{112,0},{126,16}})));
+    annotation (Placement(transformation(extent={{110,-24},{124,-8}})));
   Modelica.Blocks.Interfaces.RealOutput coolingPower
-    annotation (Placement(transformation(extent={{150,-2},{170,18}})));
+    annotation (Placement(transformation(extent={{148,-26},{168,-6}})));
   Modelica.Blocks.Sources.RealExpression Heat(y=idealHeaterCooler.heatingPower)
-    annotation (Placement(transformation(extent={{112,-32},{126,-16}})));
+    annotation (Placement(transformation(extent={{110,-56},{124,-40}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower
-    annotation (Placement(transformation(extent={{168,-34},{188,-14}})));
+    annotation (Placement(transformation(extent={{166,-58},{186,-38}})));
   Modelica.Blocks.Interfaces.RealOutput coolingEnergy
-    annotation (Placement(transformation(extent={{168,-18},{188,2}})));
+    annotation (Placement(transformation(extent={{166,-42},{186,-22}})));
   Modelica.Blocks.Interfaces.RealOutput HeatingEnergy
-    annotation (Placement(transformation(extent={{168,-50},{188,-30}})));
+    annotation (Placement(transformation(extent={{166,-74},{186,-54}})));
   Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh
-    annotation (Placement(transformation(extent={{152,-12},{162,-2}})));
+    annotation (Placement(transformation(extent={{150,-36},{160,-26}})));
   Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh1
-    annotation (Placement(transformation(extent={{152,-46},{162,-36}})));
+    annotation (Placement(transformation(extent={{150,-70},{160,-60}})));
   Modelica.Blocks.Continuous.Integrator integrator1
-    annotation (Placement(transformation(extent={{135,-11.5},{144,-2}})));
+    annotation (Placement(transformation(extent={{133,-35.5},{142,-26}})));
   Modelica.Blocks.Continuous.Integrator integrator2
-    annotation (Placement(transformation(extent={{137,-45.5},{146,-36}})));
+    annotation (Placement(transformation(extent={{135,-69.5},{144,-60}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{-40,-110},{-20,-90}})));
@@ -134,6 +134,13 @@ model Building1
   Modelica.Blocks.Sources.Constant Source_TsetC1(k=273.15 + 18)
     annotation (Placement(transformation(extent={{-68,-108},{-55,-95}})));
 
+  Modelica.Blocks.Sources.RealExpression MeanMeasuredTemp(y=RWD.y[1] + RWD.y[2]
+         + RWD.y[3])
+    annotation (Placement(transformation(extent={{112,4},{126,20}})));
+  Modelica.Blocks.Interfaces.RealOutput MeanMeasuredTemperature
+    annotation (Placement(transformation(extent={{168,2},{188,22}})));
+  Modelica.Blocks.Math.Gain gain(k=1/3)
+    annotation (Placement(transformation(extent={{142,6},{154,18}})));
 equation
   connect(weather.AirTemp, outsideTemp.T) annotation (Line(points={{-55,79},{
           -40,79},{-40,80.5},{-31.1,80.5}},
@@ -168,27 +175,31 @@ equation
   connect(outsideTemperature, to_degC1.y) annotation (Line(points={{178,76},{
           172,76},{172,75},{158.5,75}}, color={0,0,127}));
   connect(Cool.y, coolingPower)
-    annotation (Line(points={{126.7,8},{160,8}}, color={0,0,127}));
+    annotation (Line(points={{124.7,-16},{158,-16}},
+                                                 color={0,0,127}));
   connect(Heat.y, heatingPower)
-    annotation (Line(points={{126.7,-24},{178,-24}}, color={0,0,127}));
-  connect(coolingEnergy, to_kWh.y) annotation (Line(points={{178,-8},{172,-8},{
-          172,-7},{162.5,-7}}, color={0,0,127}));
-  connect(HeatingEnergy, to_kWh1.y) annotation (Line(points={{178,-40},{172,-40},
-          {172,-41},{162.5,-41}},
+    annotation (Line(points={{124.7,-48},{176,-48}}, color={0,0,127}));
+  connect(coolingEnergy, to_kWh.y) annotation (Line(points={{176,-32},{170,-32},
+          {170,-31},{160.5,-31}},
+                               color={0,0,127}));
+  connect(HeatingEnergy, to_kWh1.y) annotation (Line(points={{176,-64},{170,-64},
+          {170,-65},{160.5,-65}},
                              color={0,0,127}));
   connect(heatingPower, heatingPower)
-    annotation (Line(points={{178,-24},{178,-24}},
+    annotation (Line(points={{176,-48},{176,-48}},
                                                color={0,0,127}));
-  connect(heatingPower, integrator2.u) annotation (Line(points={{178,-24},{134,
-          -24},{134,-40.75},{136.1,-40.75}},
+  connect(heatingPower, integrator2.u) annotation (Line(points={{176,-48},{132,
+          -48},{132,-64.75},{134.1,-64.75}},
                                     color={0,0,127}));
-  connect(to_kWh1.u, integrator2.y) annotation (Line(points={{151,-41},{150,-41},
-          {150,-40.75},{146.45,-40.75}},
+  connect(to_kWh1.u, integrator2.y) annotation (Line(points={{149,-65},{148,-65},
+          {148,-64.75},{144.45,-64.75}},
                                     color={0,0,127}));
-  connect(coolingPower, integrator1.u) annotation (Line(points={{160,8},{134.1,
-          8},{134.1,-6.75}},  color={0,0,127}));
-  connect(integrator1.y, to_kWh.u) annotation (Line(points={{144.45,-6.75},{
-          150.225,-6.75},{150.225,-7},{151,-7}}, color={0,0,127}));
+  connect(coolingPower, integrator1.u) annotation (Line(points={{158,-16},{
+          132.1,-16},{132.1,-30.75}},
+                              color={0,0,127}));
+  connect(integrator1.y, to_kWh.u) annotation (Line(points={{142.45,-30.75},{
+          148.225,-30.75},{148.225,-31},{149,-31}},
+                                                 color={0,0,127}));
   connect(room.AirExchangePort, RWD.y[4]) annotation (Line(points={{-1.3,31.02},
           {-72,31.02},{-72,-50},{-75,-50},{-75,-48}}, color={0,0,127}));
   connect(Room.y[1], room.AirExchangePortRoom) annotation (Line(points={{-77,-78},
@@ -203,6 +214,10 @@ equation
     annotation (Line(points={{178,28},{178,28}}, color={0,0,127}));
   connect(roomTemperature, roomTemperature)
     annotation (Line(points={{178,92},{178,92}}, color={0,0,127}));
+  connect(MeanMeasuredTemp.y, gain.u)
+    annotation (Line(points={{126.7,12},{140.8,12}}, color={0,0,127}));
+  connect(gain.y, MeanMeasuredTemperature)
+    annotation (Line(points={{154.6,12},{178,12}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-120},{180,100}})),
     Icon(coordinateSystem(extent={{-100,-120},{180,100}})));
