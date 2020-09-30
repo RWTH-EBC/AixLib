@@ -65,11 +65,11 @@ public
                                    realExpression1(y=(cp_default*(273.15 + 22
          - senTem4.T)))
     annotation (Placement(transformation(extent={{104,84},{92,96}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{90,-10},{70,10}})));
