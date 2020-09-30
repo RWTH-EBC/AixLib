@@ -1,7 +1,7 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
-model StaticPipeFR
+model TwoPipe
   "Pipe model using spatialDistribution for temperature delay"
-  extends AixLib.Fluid.Interfaces.PartialFourPortVector(show_T=true);
+  extends AixLib.Fluid.Interfaces.PartialFourPortVector(show_T=true, nPorts=1);
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -79,35 +79,18 @@ model StaticPipeFR
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
+  parameter Boolean has_ground = false
+  "=true if a ground model around the pipe is used"
+  annotation (Dialog(group="Ground"));
+
+  parameter Modelica.SIunits.Length thickness_ground = 0.5
+  "thickness of ground if enabled"
+  annotation (Dialog(group="Ground", enable=has_ground));
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort1
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,84},{10,104}}),
         iconTransformation(extent={{-10,84},{10,104}})));
-
-  StaticPipe pipFlo(
-    redeclare final package Medium = Medium,
-    final dh=dh,
-    final v_nominal=v_nominal,
-    final length=length,
-    dIns=dIns,
-    kIns=kIns,
-    final R=R,
-    final m_flow_small=m_flow_small,
-    final m_flow_nominal=m_flow_nominal,
-    final T_start_in=T_start_in,
-    final T_start_out=T_start_out,
-    final m_flow_start=m_flow_start,
-    final initDelay=initDelay,
-    final from_dp=from_dp,
-    final fac=fac,
-    final ReC=ReC,
-    final thickness=thickness,
-    final roughness=roughness,
-    final allowFlowReversal=allowFlowReversal,
-    final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized,
-    nPorts=nPorts) "Describing the pipe behavior"
-    annotation (Placement(transformation(extent={{-10,50},{10,70}})));
 
   // In the volume, below, we scale down V and use
   // mSenFac. Otherwise, for air, we would get very large volumes
@@ -120,30 +103,34 @@ model StaticPipeFR
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,-84},{10,-104}}),
         iconTransformation(extent={{-10,-84},{10,-104}})));
-  StaticPipe pipRet(
-    redeclare final package Medium = Medium,
-    final dh=dh,
-    final v_nominal=v_nominal,
-    final length=length,
-    dIns=kIns,
-    kIns=dIns,
-    final R=R,
-    final m_flow_small=m_flow_small,
-    final m_flow_nominal=m_flow_nominal,
-    final T_start_in=T_start_in,
-    final T_start_out=T_start_out,
-    final m_flow_start=m_flow_start,
-    final initDelay=initDelay,
-    final from_dp=from_dp,
-    final fac=fac,
-    final ReC=ReC,
-    final thickness=thickness,
-    final roughness=roughness,
-    final allowFlowReversal=allowFlowReversal,
-    final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized,
-    nPorts=nPorts) "Describing the pipe behavior"
-    annotation (Placement(transformation(extent={{10,-50},{-10,-70}})));
+  PlugFlowPipeZeta plugFlowPipeZeta(redeclare package Medium = Medium,
+    length=length,
+    m_flow_nominal=m_flow_nominal,
+    dIns=dIns,
+    kIns=kIns,                                                         nPorts=1)
+    annotation (Placement(transformation(extent={{-10,-50},{10,-70}})));
+  replaceable StaticPipe staticPipe(
+    redeclare package Medium = Medium,
+    length=length,
+    m_flow_nominal=m_flow_nominal,
+    dIns=dIns,
+    kIns=kIns,
+    nPorts=nPorts,
+    rho=rho,
+    c=c,
+    thickness_ground=thickness_ground,
+    lambda_ground=lambda_ground) constrainedby Interfaces.PartialTwoPortVector(
+    redeclare package Medium = Medium,
+    length=length,
+    m_flow_nominal=m_flow_nominal,
+    dIns=dIns,
+    kIns=kIns,
+    nPorts=nPorts,
+    rho=rho,
+    c=c,
+    thickness_ground=thickness_ground,
+    lambda_ground=lambda_ground) annotation (Placement(transformation(extent={{10,
+            50},{-10,70}})), __Dymola_choicesAllMatching=true);
 protected
   parameter Modelica.SIunits.HeatCapacity CPip=
     length*((dh + 2*thickness)^2 - dh^2)*Modelica.Constants.pi/4*cPip*rhoPip "Heat capacity of pipe wall";
@@ -174,23 +161,45 @@ protected
 equation
   for i in 1:nPorts loop
   end for;
-  connect(pipFlo.heatPort, heatPort1)
-    annotation (Line(points={{0,70},{0,94}}, color={191,0,0}));
 
-  connect(port_a1, pipFlo.port_a)
-    annotation (Line(points={{-100,60},{-10,60}}, color={0,127,255}));
-  connect(pipFlo.ports_b, ports_b1)
-    annotation (Line(points={{10,60},{100,60}}, color={0,127,255}));
-  connect(pipRet.heatPort, heatPort2)
-    annotation (Line(points={{0,-70},{0,-70},{0,-94}}, color={191,0,0}));
-  connect(pipRet.port_a, port_a2)
+  connect(ports_b2[1], plugFlowPipeZeta.port_a)
+    annotation (Line(points={{-100,-60},{-10,-60}}, color={0,127,255}));
+  connect(plugFlowPipeZeta.ports_b[1], port_a2)
     annotation (Line(points={{10,-60},{100,-60}}, color={0,127,255}));
-  connect(pipRet.ports_b, ports_b2)
-    annotation (Line(points={{-10,-60},{-100,-60}}, color={0,127,255}));
+  connect(plugFlowPipeZeta.heatPort, heatPort2)
+    annotation (Line(points={{0,-70},{0,-94}}, color={191,0,0}));
+  connect(port_a1, staticPipe.ports_b[1])
+    annotation (Line(points={{-100,60},{-10,60}}, color={0,127,255}));
+  connect(staticPipe.port_a, ports_b1[1])
+    annotation (Line(points={{10,60},{100,60}}, color={0,127,255}));
+  connect(staticPipe.heatPort, heatPort1)
+    annotation (Line(points={{0,70},{0,94}}, color={191,0,0}));
   annotation (
     Line(points={{70,20},{72,20},{72,0},{100,0}}, color={0,127,255}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}})),
+            100,100}}), graphics={
+        Rectangle(
+          extent={{-80,80},{80,40}},
+          lineColor={0,0,0},
+          fillColor={165,165,165},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-80,-40},{80,-80}},
+          lineColor={0,0,0},
+          fillColor={165,165,165},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-70,80},{-24,62}},
+          lineColor={0,0,0},
+          fillColor={165,165,165},
+          fillPattern=FillPattern.None,
+          textString="pipeFlow"),
+        Text(
+          extent={{-70,-40},{-24,-58}},
+          lineColor={0,0,0},
+          fillColor={165,165,165},
+          fillPattern=FillPattern.None,
+          textString="pipeReturn")}),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
@@ -222,7 +231,12 @@ equation
           extent={{-100,-44},{100,-76}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={0,127,255})}),
+          fillColor={0,127,255}),
+        Rectangle(
+          extent={{-100,36},{100,-36}},
+          lineColor={28,108,200},
+          fillColor={165,165,165},
+          fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html>
 <ul>
 <li>
@@ -312,4 +326,4 @@ cooling systems.<br/>
 <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
 10.1016/j.enconman.2017.08.072</a>.</p>
 </html>"));
-end StaticPipeFR;
+end TwoPipe;

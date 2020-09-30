@@ -1,35 +1,29 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
 model IdealPlantHybrPumpErdeis
   "Supply node model with ideal heater and cooler for heat and cold supply of bidirectional networks"
-
+  extends
+    AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Supplies.OpenLoop.PartialSupplyLessInputs(
+      allowFlowReversal=true);
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
       parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
       "Nominal pressure drop";
+
+      parameter Modelica.SIunits.Pressure dpPump_nominal(displayUnit="Pa")=30000
+      "Nominal pressure drop";
+
       parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Medium)
-    "Fluid connector for connecting the ideal plant to the cold line of the network"
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Medium)
-    "Fluid connector for connecting the ideal plant to the warm line of the network"
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium
-      = Medium,
+  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
+        Medium,
     QMin_flow=0,use_X_wSet=false,
     dp_nominal=dp_nominal,
     m_flow_nominal=m_flow_nominal,
     use_TSet=true)
-    annotation (Placement(transformation(extent={{32,-10},{52,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
-        Medium,
-    m_flow_nominal=m_flow_nominal,
-    tau=0)
-    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+    annotation (Placement(transformation(extent={{40,70},{60,90}})));
+
   Modelica.Blocks.Interfaces.RealInput TIn(unit="K")
     "Minimum supply temperature of the hot line of the bidirectional low-temperature network"
     annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
@@ -44,13 +38,13 @@ model IdealPlantHybrPumpErdeis
     m_flow_nominal=m_flow_nominal,
     dIns=0.01,
     kIns=5,
-    nPorts=1)
-    annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+    nPorts=2)
+    annotation (Placement(transformation(extent={{6,70},{26,90}})));
   FixedResistances.PressureDrop res(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=35000)
-    annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
+    annotation (Placement(transformation(extent={{-18,70},{2,90}})));
   Movers.FlowControlled_dp fan(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
@@ -62,39 +56,83 @@ model IdealPlantHybrPumpErdeis
     y_start=1,
     dp_start=fan.dp_nominal,
     dp_nominal=dpPump_nominal)
-    annotation (Placement(transformation(extent={{-70,-14},{-50,-34}})));
-  Actuators.Valves.TwoWayPressureIndependent valve(
-    redeclare package Medium = Medium,
-    allowFlowReversal=true,
-    m_flow_nominal=m_flow_nominal,
-    dpValve_nominal=1.2e5,
-    y_start=pControl.y_start,
-    l2=1e-9,
-    l=0.05) "Control valve"
-    annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
+    annotation (Placement(transformation(extent={{-50,10},{-30,-10}})));
+  Sensors.RelativePressure senRelPre
+    annotation (Placement(transformation(extent={{-4,40},{16,60}})));
+  Modelica.Blocks.Interfaces.RealOutput dpOut
+    annotation (Placement(transformation(extent={{98,-70},{118,-50}})));
+  Sensors.RelativePressure senRelPre1
+    annotation (Placement(transformation(extent={{-24,14},{2,34}})));
+  Modelica.Blocks.Sources.Constant dpSet(k=dpPump_nominal)
+    "Set pressure difference for substation" annotation (Placement(
+        transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=180,
+        origin={24,-44})));
+  Modelica.Blocks.Logical.Switch switch1 annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-20,-30})));
+  Modelica.Blocks.Sources.Constant dpSet1(k=0)
+    "Set pressure difference for substation" annotation (Placement(
+        transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=90,
+        origin={-56,-60})));
+  Modelica.Blocks.Logical.LessThreshold    lessThreshold(   threshold=threshold)
+    annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=-90,
+        origin={-20,-64})));
+  parameter Real threshold=0 "Comparison with respect to threshold";
 equation
-  connect(heater.port_b, senTem.port_a)
-    annotation (Line(points={{52,0},{60,0}},   color={0,127,255}));
-  connect(TIn, heater.TSet) annotation (Line(points={{-106,42},{24,42},{24,8},{
-          30,8}},  color={0,0,127}));
-  connect(senTem.port_b, port_b)
-    annotation (Line(points={{80,0},{100,0}}, color={0,127,255}));
+  connect(TIn, heater.TSet) annotation (Line(points={{-106,42},{-44,42},{-44,88},
+          {38,88}},color={0,0,127}));
   connect(plugFlowPipe.ports_b[1], heater.port_a)
-    annotation (Line(points={{12,0},{32,0}}, color={0,127,255}));
-  connect(res.port_b, plugFlowPipe.port_a)
-    annotation (Line(points={{-24,0},{-8,0}},  color={0,127,255}));
+    annotation (Line(points={{26,78},{40,78},{40,80}},
+                                             color={0,127,255}));
   connect(fan.port_b, res.port_a)
-    annotation (Line(points={{-50,-24},{-50,0},{-44,0}}, color={0,127,255}));
-  connect(fan.port_b, valve.port_b)
-    annotation (Line(points={{-50,-24},{-50,0}}, color={0,127,255}));
-  connect(valve.port_b, res.port_a)
-    annotation (Line(points={{-50,0},{-44,0}}, color={0,127,255}));
-  connect(valve.port_a, port_a)
-    annotation (Line(points={{-70,0},{-100,0}}, color={0,127,255}));
-  connect(fan.port_a, valve.port_a)
-    annotation (Line(points={{-70,-24},{-70,0}}, color={0,127,255}));
-  connect(bou.ports[1], port_a) annotation (Line(points={{-86,-40},{-88,-40},{
-          -88,0},{-100,0}}, color={0,127,255}));
+    annotation (Line(points={{-30,0},{-30,80},{-18,80}}, color={0,127,255},
+      thickness=0.5));
+  connect(senRelPre.p_rel, dpOut) annotation (Line(points={{6,41},{6,-60},{108,-60}},
+                           color={0,0,127}));
+  connect(fan.port_a, senT_return.port_b) annotation (Line(points={{-50,0},{-60,
+          0}},                  color={0,127,255},
+      thickness=0.5));
+  connect(bou.ports[1], senT_return.port_a) annotation (Line(points={{-86,-40},{
+          -88,-40},{-88,0},{-80,0}}, color={0,127,255}));
+  connect(dpSet1.y, switch1.u1)
+    annotation (Line(points={{-56,-49},{-56,-42},{-28,-42}}, color={0,0,127}));
+  connect(senRelPre.p_rel, lessThreshold.u)
+    annotation (Line(points={{6,41},{6,-76},{-20,-76}}, color={0,0,127}));
+  connect(lessThreshold.y, switch1.u2)
+    annotation (Line(points={{-20,-53},{-20,-42}}, color={255,0,255}));
+  connect(heater.port_b, senT_supply.port_a) annotation (Line(
+      points={{60,80},{80,80},{80,40},{40,40},{40,0}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(senRelPre.port_a, res.port_a) annotation (Line(
+      points={{-4,50},{-30,50},{-30,80},{-18,80}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(senRelPre.port_b, heater.port_a) annotation (Line(
+      points={{16,50},{32,50},{32,80},{40,80}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(res.port_b, plugFlowPipe.port_a)
+    annotation (Line(points={{2,80},{6,80}}, color={0,127,255}));
+  connect(senRelPre1.port_b, plugFlowPipe.ports_b[2]) annotation (Line(
+      points={{2,24},{32,24},{32,82},{26,82}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(senRelPre1.port_a, senT_return.port_b) annotation (Line(
+      points={{-24,24},{-56,24},{-56,0},{-60,0}},
+      color={0,127,255},
+      thickness=0.5));
+  connect(switch1.y, fan.dp_in)
+    annotation (Line(points={{-20,-19},{-40,-19},{-40,-12}}, color={0,0,127}));
+  connect(dpSet.y, switch1.u3) annotation (Line(points={{13,-44},{0,-44},{0,-42},
+          {-12,-42}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-80,80},{80,0}},

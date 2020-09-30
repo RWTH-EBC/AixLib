@@ -45,12 +45,6 @@ model IdealPlantErdeis
     m_flow_nominal=m_flow_nominal,
     use_TSet=true)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
-        Medium,
-        allowFlowReversal=allowFlowReversal,
-    m_flow_nominal=m_flow_nominal,
-    tau=0)
-    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Interfaces.RealInput TIn(unit="K")
     "Minimum supply temperature of the hot line of the bidirectional low-temperature network"
     annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
@@ -66,29 +60,37 @@ model IdealPlantErdeis
     m_flow_nominal=m_flow_nominal,
     dIns=0.01,
     kIns=5,
-    nPorts=1)
-    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+    nPorts=2)
+    annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   FixedResistances.PressureDrop res(
     redeclare package Medium = Medium,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     dp_nominal(displayUnit="bar") = dpRes_nominal)
-    annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
+    annotation (Placement(transformation(extent={{-54,-10},{-34,10}})));
+  Sensors.RelativePressure senRelPre
+    annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
+  Modelica.Blocks.Interfaces.RealOutput dpOut
+    annotation (Placement(transformation(extent={{96,-70},{116,-50}})));
 equation
-  connect(heater.port_b, senTem.port_a)
-    annotation (Line(points={{20,0},{60,0}},   color={0,127,255}));
-  connect(TIn, heater.TSet) annotation (Line(points={{-106,42},{-18,42},{-18,8},
-          {-2,8}}, color={0,0,127}));
-  connect(bou.ports[1], senTem.port_a) annotation (Line(points={{30,60},{30,0},
-          {60,0}},              color={0,127,255}));
-  connect(senTem.port_b, port_b)
-    annotation (Line(points={{80,0},{100,0}}, color={0,127,255}));
-  connect(plugFlowPipe.ports_b[1], heater.port_a)
-    annotation (Line(points={{-20,0},{0,0}}, color={0,127,255}));
-  connect(port_a, res.port_a)
-    annotation (Line(points={{-100,0},{-76,0}}, color={0,127,255}));
-  connect(res.port_b, plugFlowPipe.port_a)
-    annotation (Line(points={{-56,0},{-40,0}}, color={0,127,255}));
+  connect(TIn, heater.TSet) annotation (Line(points={{-106,42},{-8,42},{-8,8},{
+          -2,8}},  color={0,0,127}));
+  connect(senRelPre.p_rel, dpOut) annotation (Line(points={{-30,-49},{4,-49},{4,
+          -60},{106,-60}}, color={0,0,127}));
+  connect(plugFlowPipe.port_a, res.port_b)
+    annotation (Line(points={{-28,0},{-34,0}}, color={0,127,255}));
+  connect(senT_return.port_b, res.port_a)
+    annotation (Line(points={{-60,0},{-54,0}}, color={0,127,255}));
+  connect(plugFlowPipe.ports_b[1], heater.port_a) annotation (Line(points={{-8,
+          -2},{-4,-2},{-4,0},{0,0}}, color={0,127,255}));
+  connect(plugFlowPipe.ports_b[2], senRelPre.port_b)
+    annotation (Line(points={{-8,2},{-8,-40},{-20,-40}}, color={0,127,255}));
+  connect(res.port_a, senRelPre.port_a)
+    annotation (Line(points={{-54,0},{-54,-40},{-40,-40}}, color={0,127,255}));
+  connect(heater.port_b, senT_supply.port_a)
+    annotation (Line(points={{20,0},{40,0}}, color={0,127,255}));
+  connect(bou.ports[1], senT_supply.port_a) annotation (Line(points={{30,60},{
+          32,60},{32,0},{40,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-80,80},{80,0}},

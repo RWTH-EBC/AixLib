@@ -1,10 +1,11 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.Examples;
-model IdealPlantPumpErdeis
+model IdealPlantHybrErdeis
    extends Modelica.Icons.ExamplesPackage;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
-  ClosedLoop.IdealPlantErdeis                                       idealPlantErdeis(
-    redeclare package Medium = Medium, m_flow_nominal=1,
-    length=1700)
+  ClosedLoop.IdealPlantHybrPumpErdeis                               idealPlantHybrPumpErdeis(
+    redeclare package Medium = Medium,
+    dpPump_nominal=6e4,                m_flow_nominal=1,
+    threshold=2500)
     annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
   Demands.ClosedLoop.PumpControlledHeatPumpFixDeltaT
     pumpControlledHeatPumpFixDeltaT(
@@ -85,7 +86,7 @@ model IdealPlantPumpErdeis
   Modelica.Blocks.Sources.Constant T_flow(k=273.15 + 20)
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
 equation
-  connect(idealPlantErdeis.port_b, plugFlowPipe.port_a)
+  connect(idealPlantHybrPumpErdeis.port_b, plugFlowPipe.port_a)
     annotation (Line(points={{-32,10},{-20,10}}, color={0,127,255}));
   connect(plugFlowPipe.ports_b[1], pumpControlledHeatPumpFixDeltaT.port_a)
     annotation (Line(points={{0,8},{24,8},{24,-10}}, color={0,127,255}));
@@ -99,14 +100,15 @@ equation
     annotation (Line(points={{24,-30},{24,-48},{0,-48}}, color={0,127,255}));
   connect(plugFlowPipe2.ports_b[1], plugFlowPipe3.port_a)
     annotation (Line(points={{40,-48},{0,-48}}, color={0,127,255}));
-  connect(plugFlowPipe3.ports_b[1], idealPlantErdeis.port_a) annotation (Line(
-        points={{-20,-48},{-92,-48},{-92,10},{-52,10}}, color={0,127,255}));
+  connect(plugFlowPipe3.ports_b[1], idealPlantHybrPumpErdeis.port_a)
+    annotation (Line(points={{-20,-48},{-92,-48},{-92,10},{-52,10}}, color={0,
+          127,255}));
   connect(sine.y, pumpControlledHeatPumpFixDeltaT.Q_flow_input)
     annotation (Line(points={{21,40},{32,40},{32,-9.2}}, color={0,0,127}));
   connect(sine1.y, pumpControlledHeatPumpFixDeltaT1.Q_flow_input)
     annotation (Line(points={{77,40},{88,40},{88,-9.2}}, color={0,0,127}));
-  connect(T_flow.y, idealPlantErdeis.TIn) annotation (Line(points={{-79,50},{-66,
-          50},{-66,14.2},{-52.6,14.2}}, color={0,0,127}));
+  connect(T_flow.y, idealPlantHybrPumpErdeis.TIn) annotation (Line(points={{-79,
+          50},{-66,50},{-66,14.2},{-52.6,14.2}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-160,-100},{100,100}})),
     Icon(coordinateSystem(extent={{-160,-100},{100,100}})),
@@ -122,4 +124,4 @@ Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 
 </li>
 </ul>
 </html>"));
-end IdealPlantPumpErdeis;
+end IdealPlantHybrErdeis;
