@@ -8,6 +8,7 @@ PartialEightPortInterface
 PartialFourPort
 PartialFourPortInterface
 PartialFourPortParallel
+PartialFourPortVector
 PartialModularPort_a
 PartialModularPort_ab
 PartialModularPort_b

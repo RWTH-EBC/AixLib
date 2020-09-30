@@ -54,20 +54,22 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
   Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare HydraulicModules.Admix hydraulicModule(
+      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
+      parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       tau=5,
-      dIns=0.01,
-      kIns=0.028,
-      d=0.032,
       length=1,
       Kv=10,
-      valve(use_inputFilter=false),
-      pipe1(dh=0.05, length=4.5),
+      valve(use_inputFilter=true, riseTime=1),
+      pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x2(), length=
+            4.5),
       pipe2(length=2.15),
-      pipe3(dh=0.032, length=1.7),
-      pipe4(dh=0.032, length=0.5),
+      pipe3(length=1.7),
+      pipe4(length=0.5),
       pipe5(length=2.95),
-      pipe6(dh=0.025, length=0.8),
+      pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1_1(), length=
+            0.8),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
         PumpInterface(pumpParam=
@@ -77,7 +79,7 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     redeclare package Medium2 = MediumWater,
     m1_flow_nominal=3000/3600,
     m2_flow_nominal=8832/3600,
-    T_start=296.15,
+    T_start=295.15,
     tau=60 + 30,
     T_amb=293.15,
     dynamicHX(
@@ -152,11 +154,15 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  annotation (Documentation(info="<html>
-<p>This example compares the simulated behavior with measured data. The input filter of the valve is deactivated because the measured actual opening (includes opening delay already) is used.</p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  This example compares the simulated behavior with measured data. The
+  input filter of the valve is deactivated because the measured actual
+  opening (includes opening delay already) is used.
+</p>
 <ul>
-<li>November 4, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+  <li>November 4, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(

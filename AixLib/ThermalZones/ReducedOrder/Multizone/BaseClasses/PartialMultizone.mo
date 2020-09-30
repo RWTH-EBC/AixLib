@@ -19,7 +19,8 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   replaceable model thermalZone =
@@ -35,7 +36,8 @@ partial model PartialMultizone "Partial model for multizone models"
       each l_cooler=l_cooler,
       each KR_cooler=KR_cooler,
       each TN_cooler=TN_cooler)
-    constrainedby AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
     "Thermal zone model"
     annotation(choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput intGains[3*numZones]
@@ -181,11 +183,13 @@ equation
     for i in 1:numZones loop
       if zoneParam[i].HeaterOn then
         connect(zone[i].PHeater, PHeater[i]);
+        connect(TSetHeat[i], zone[i].TSetHeat);
       else
         PHeater[i] = 0;
       end if;
       if zoneParam[i].CoolerOn then
         connect(zone[i].PCooler, PCooler[i]);
+        connect(TSetCool[i], zone[i].TSetCool);
       else
         PCooler[i] = 0;
       end if;
@@ -221,12 +225,6 @@ equation
           90,67.45},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}},
                                                                    color={191,0,
           0}));
-  connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-40,-100},{69.5,
-          -100},{69.5,51.05}},
-                         color={0,0,127}));
-  connect(TSetCool, zone.TSetCool) annotation (Line(points={{-80,-100},{64.88,
-          -100},{64.88,51.05}},
-                          color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
@@ -271,24 +269,44 @@ equation
           lineColor={95,95,95},
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation based on Annex60 and AixLib models.
+    Documentation(revisions="<html><ul>
+  <li>September 27, 2016, by Moritz Lauster:<br/>
+    Reimplementation based on Annex60 and AixLib models.
   </li>
-  <li>
-  June 22, 2015, by Moritz Lauster:<br/>
-  Changed building physics to AixLib.
+  <li>June 22, 2015, by Moritz Lauster:<br/>
+    Changed building physics to AixLib.
   </li>
-  <li>
-  April 25, 2014, by Ole Odendahl:<br/>
-  Implemented.
+  <li>April 25, 2014, by Ole Odendahl:<br/>
+    Implemented.
   </li>
 </ul>
 </html>", info="<html>
-<p>Partial for <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone</a> models. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
-<h4>Typical use and important parameters</h4>
-<p>The model needs parameters describing general properties of the building (indoor air volume, net floor area, overall surface area) and a vector with length of number of zones containing <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records to define zone properties. The user can redeclare the thermal zone model choosing from <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.</p>
+<p>
+  Partial for <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  models. It defines connectors and a replaceable vector of <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
+  models. Most connectors are conditional to allow conditional
+  modifications according to parameters or to pass-through conditional
+  removements in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
+  and subsequently in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.
+</p>
+<h4>
+  Typical use and important parameters
+</h4>
+<p>
+  The model needs parameters describing general properties of the
+  building (indoor air volume, net floor area, overall surface area)
+  and a vector with length of number of zones containing <a href=
+  \"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+  records to define zone properties. The user can redeclare the thermal
+  zone model choosing from <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
+  Further parameters for medium, initialization and dynamics originate
+  from <a href=
+  \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
+</p>
 </html>"));
 end PartialMultizone;

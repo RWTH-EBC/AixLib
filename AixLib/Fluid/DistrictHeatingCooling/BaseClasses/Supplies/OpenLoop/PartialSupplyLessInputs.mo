@@ -1,28 +1,34 @@
 within AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Supplies.OpenLoop;
 partial model PartialSupplyLessInputs
   "Base class for modeling supply nodes in DHC systems without return lines"
-  extends AixLib.Fluid.Interfaces.PartialTwoPort;
+  extends AixLib.Fluid.Interfaces.PartialTwoPort(
+    allowFlowReversal=true);
 
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model" annotation (choicesAllMatching=true);
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=1,
+        Medium,
+    allowFlowReversal=allowFlowReversal,
+                m_flow_nominal=1,
     tau=0)                        "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
-        Medium) "Mass flow rate sensor"
+        Medium, allowFlowReversal=allowFlowReversal)
+                "Mass flow rate sensor"
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senT_return(redeclare package Medium =
-        Medium, m_flow_nominal=1,
+        Medium,
+    allowFlowReversal=allowFlowReversal,
+                m_flow_nominal=1,
     tau=0)                        "Return temperature sensor"
-    annotation (Placement(transformation(extent={{-60,-10},{-80,10}})));
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 equation
   connect(senMasFlo.port_a, senT_supply.port_b)
     annotation (Line(points={{70,0},{60,0}}, color={0,127,255}));
   connect(senMasFlo.port_b, port_b)
     annotation (Line(points={{90,0},{100,0}}, color={0,127,255}));
-  connect(port_a, senT_return.port_b)
+  connect(port_a, senT_return.port_a)
     annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(

@@ -4,7 +4,7 @@ model ValveControlledHeatPumpFixDeltaT
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),
     final dp(start=0),
-    final allowFlowReversal=true,
+    allowFlowReversal=true,
     m_flow_nominal = (Q_flow_nominal*(1 - 1 / 3.5))/(cp_default * dTDesign));
 
   replaceable package MediumBuilding =
@@ -46,6 +46,9 @@ model ValveControlledHeatPumpFixDeltaT
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics"));
 
+  parameter Modelica.SIunits.Pressure dpValve_nominal(displayUnit="Pa")=0.74e4
+    "Pressure difference of the valve at nominal flow rate"
+    annotation(Dialog(group="Design parameter"));
 
 protected
   final parameter Medium.ThermodynamicState sta_default = Medium.setState_pTX(
@@ -63,12 +66,12 @@ public
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
   Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
         Medium,
-    allowFlowReversal=false,
+    allowFlowReversal=allowFlowReversal,
                 m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
         Medium,
-    allowFlowReversal=false,
+    allowFlowReversal=allowFlowReversal,
                 m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Sources.Constant delT(k=dTDesign)
@@ -78,9 +81,9 @@ public
         origin={90,50})));
   Actuators.Valves.TwoWayPressureIndependent valve(
     redeclare package Medium = Medium,
-    allowFlowReversal=true,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
-    dpValve_nominal=1.2e5,
+    dpValve_nominal=dpValve_nominal,
     y_start=pControl.y_start,
     l2=1e-9,
     l=0.05) "Control valve"
@@ -92,8 +95,8 @@ public
         origin={-20,-38})));
   HeatPumps.Carnot_TCon              heaPum(
     redeclare package Medium1 = MediumBuilding,
-    allowFlowReversal1=true,
-    allowFlowReversal2=false,
+    allowFlowReversal1=allowFlowReversal,
+    allowFlowReversal2=allowFlowReversal,
     dTEva_nominal=dTEva_nominal,
     dTCon_nominal=dTCon_nominal,
     COP_nominal=3.8,

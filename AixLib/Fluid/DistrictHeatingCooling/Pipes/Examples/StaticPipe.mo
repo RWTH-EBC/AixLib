@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples;
-model StaticPipe "Simple example of plug flow pipe"
+model StaticPipe "Simple example of StaticPipe"
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Water "Medium in the pipe" annotation (
       choicesAllMatching=true);
@@ -15,7 +15,7 @@ model StaticPipe "Simple example of plug flow pipe"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{82,-10},{62,10}})));
-  .AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe pip(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe pip(
     redeclare package Medium = Medium,
     nPorts=1,
     dh=0.1,
@@ -28,6 +28,7 @@ model StaticPipe "Simple example of plug flow pipe"
     initDelay=true,
     m_flow_start=1,
     rhoPip=8000,
+    use_zeta=true,
     T_start_in=323.15,
     T_start_out=323.15) "Pipe"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
@@ -65,19 +66,19 @@ equation
   connect(senTemIn.port_b, pip.port_a)
     annotation (Line(points={{-10,0},{0,0}}, color={0,127,255}));
   annotation (
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/PlugFlowPipe.mos"
-        "Simulate and Plot"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/StaticPipe.mos"
+                      "Simulate and plot"),
     experiment(StopTime=1000, Tolerance=1e-006),
-    Documentation(info="<html>
-<p>Basic test of model
-<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">
-AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.
-This test includes an inlet temperature step under a constant mass flow rate.
+    Documentation(info="<html><p>
+  Basic test of model <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe\">AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe</a>.
+  This test includes an inlet temperature step under a constant mass
+  flow rate.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>September 8, 2017 by Bram van der Heijde<br/>First implementation</li>
+  <li>September 25, 2019 by Nils Neuland:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end StaticPipe;

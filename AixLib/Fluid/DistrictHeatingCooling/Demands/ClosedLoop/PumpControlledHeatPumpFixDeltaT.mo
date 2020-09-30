@@ -4,7 +4,7 @@ model PumpControlledHeatPumpFixDeltaT
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),
     final dp(start=0),
-    final allowFlowReversal=true,
+    allowFlowReversal=true,
     m_flow_nominal = (Q_flow_nominal*(1 - 1 / 3.5))/(cp_default * dTDesign));
 
   replaceable package MediumBuilding =
@@ -46,6 +46,13 @@ model PumpControlledHeatPumpFixDeltaT
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics"));
 
+    // Control Parameters
+  parameter Real k=0.002 "Gain of controller";
+  parameter Modelica.SIunits.Time Ti=7 "Time constant of Integrator block";
+  parameter Real yMax=m_flow_nominal "Upper limit of output";
+  parameter Real yMin=0.01 "Lower limit of output";
+  parameter Real y_start=0.3 "Initial value of output";
+
 protected
   final parameter Medium.ThermodynamicState sta_default = Medium.setState_pTX(
     T=Medium.T_default,
@@ -62,12 +69,12 @@ public
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
   Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
         Medium,
-    allowFlowReversal=false,
+    allowFlowReversal=allowFlowReversal,
                 m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
         Medium,
-    allowFlowReversal=false,
+    allowFlowReversal=allowFlowReversal,
                 m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Sources.Constant delT(k=dTDesign)
@@ -82,8 +89,8 @@ public
         origin={-20,-38})));
   HeatPumps.Carnot_TCon              heaPum(
     redeclare package Medium1 = MediumBuilding,
-    allowFlowReversal1=true,
-    allowFlowReversal2=false,
+    allowFlowReversal1=allowFlowReversal,
+    allowFlowReversal2=allowFlowReversal,
     dTEva_nominal=dTEva_nominal,
     dTCon_nominal=dTCon_nominal,
     COP_nominal=3.8,
@@ -132,13 +139,13 @@ public
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
   Modelica.Blocks.Continuous.LimPID pControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.002,
-    Ti=7,
+    k=k,
+    Ti=Ti,
     Td=0.1,
-    yMax=2,
-    yMin=0.01,
+    yMax=yMax,
+    yMin=yMin,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
-    y_start=0.3)      "Pressure controller" annotation (Placement(transformation(
+    y_start=y_start)  "Pressure controller" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={4,42})));
@@ -177,6 +184,7 @@ public
     addPowerToMedium=false,
     use_inputFilter=false)
     annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
+
 equation
 
   dpOut = dp;
@@ -229,7 +237,8 @@ equation
     annotation (Line(points={{-60,0},{-48,0}}, color={0,127,255}));
   connect(pumpHeating.port_b, heaPum.port_a2)
     annotation (Line(points={{-28,0},{-12,0}}, color={0,127,255}));
-  connect(pControl.y, pumpHeating.m_flow_in) annotation (Line(points={{-7,42},{
+  connect(pControl.y, pumpHeating.
+  m_flow_in) annotation (Line(points={{-7,42},{
           -22,42},{-22,12},{-38,12}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),

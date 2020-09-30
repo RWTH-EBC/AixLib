@@ -62,13 +62,21 @@ equation
                               Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-58, 32}, {62, -20}}, lineColor = {175, 175, 175}, textString = "%name")}),
       Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview </span></h4>
-<p>This is a simple controller which sets a threshold for heating and cooling  based on the outside temperature. This should prevent heating in summer if the AHU lowers the temperature below set temperature of ideal heater and cooler and vice versa in winter.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  This is a simple controller which sets a threshold for heating and
+  cooling based on the outside temperature. This should prevent heating
+  in summer if the AHU lowers the temperature below set temperature of
+  ideal heater and cooler and vice versa in winter.
+</p>
 </html>",
-        revisions="<html>
- <ul>
- <li><i>November, 2019&nbsp;</i> by David Jansen:<br/>Initial integration</li>
- </ul>
- </html>"));
+        revisions="<html><ul>
+  <li>
+    <i>November, 2019&#160;</i> by David Jansen:<br/>
+    Initial integration
+  </li>
+</ul>
+</html>"));
 end HeaterCoolerController;

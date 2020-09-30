@@ -80,16 +80,16 @@ equation
           extent={{-100,140},{100,100}},
           lineColor={0,0,255},
           textString="%name")}),
-    Documentation(info="<html>
-<p>
-This is a copy of the PlugFlowTransportDelay modified to react directly on the current velocity. This gives a static behavior similar to quasi-static DHC models for comparison.
-Note that this is only included for some legacy testing. </p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This is a copy of the PlugFlowTransportDelay modified to react
+  directly on the current velocity. This gives a static behavior
+  similar to quasi-static DHC models for comparison. Note that this is
+  only included for some legacy testing.
+</p>
 <ul>
-<li>
-Dec 8, 2017 by Marcus Fuchs:<br/>
-Temporarily re-introducing the static pipe model
-</li>
+  <li>Dec 8, 2017 by Marcus Fuchs:<br/>
+    Temporarily re-introducing the static pipe model
+  </li>
 </ul>
 </html>"));
 end StaticTransportDelay;

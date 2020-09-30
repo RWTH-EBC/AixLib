@@ -440,15 +440,30 @@ equation
  2- Bedroom
  3 - Children
  4 - Bath
- 5 - Kitchen")}), Documentation(revisions="<html>
- <ul>
- <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe by MSL pipe</li>
- <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>The model is exemplarly build with components found in the HVAC package.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The model should be used as an example on how such a system can be built and connected to the building envelope.</p>
- </html>"));
+ 5 - Kitchen")}), Documentation(revisions="<html><ul>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe by MSL pipe
+  </li>
+  <li>
+    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The model is exemplarly build with components found in the HVAC
+  package.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The model should be used as an example on how such a system can be
+  built and connected to the building envelope.
+</p>
+</html>"));
 end Radiators;

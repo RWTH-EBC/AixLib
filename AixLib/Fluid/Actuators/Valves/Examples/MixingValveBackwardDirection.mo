@@ -79,13 +79,15 @@ equation
   connect(temperatureSensorMixed.port_a, boundary_ph.ports[1]) annotation (Line(
       points={{-76,0},{-86,0}},
       color={0,127,255}));
-  annotation (Documentation(info="<html>
-<p>
-This model shows the usage of a MixingValve against its design-direction. The results
-show that it is possible to use the MixingValve against its design-direction. The valve will
-then split the incoming flow into two fractions according to the opening of the valve.
+  annotation (Documentation(info="<html><p>
+  This model shows the usage of a MixingValve against its
+  design-direction. The results show that it is possible to use the
+  MixingValve against its design-direction. The valve will then split
+  the incoming flow into two fractions according to the opening of the
+  valve.
 </p>
-</html>", revisions="<html>
-<p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>
+<p>
+  26.11.2014, by <i>Roozbeh Sangi</i>: implemented
+</p>
 </html>"),    experiment(StopTime=1000));
 end MixingValveBackwardDirection;

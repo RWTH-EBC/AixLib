@@ -7,8 +7,11 @@ record FL_Case600 "Floor for Case 600"
     lambda={0.04,0.140} "Thermal conductivity of wall layers",
     c={0.0001,1200} "Specific heat capacity of wall layers",
     eps=0.9 "Emissivity of inner wall surface");
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">References</font></h4>
-<p>For ASHRAE 140 see Bibtexkey: ASHRAE-140-2007</p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  For ASHRAE 140 see Bibtexkey: ASHRAE-140-2007
+</p>
 </html>"));
 end FL_Case600;

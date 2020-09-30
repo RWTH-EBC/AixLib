@@ -24,10 +24,10 @@ model RegisterModule "AHU register module for heaters and coolers"
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
   parameter Modelica.SIunits.Time tauHeaTra=1200
-    "Time constant for heat transfer of temperature sensors" annotation(Dialog(tab="Advanced"));
+    "Time constant for heat transfer of temperature sensors in air chanal" annotation(Dialog(tab="Advanced"));
   replaceable AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
     final energyDynamics=energyDynamics,
     final T_amb=T_amb,
@@ -35,12 +35,12 @@ model RegisterModule "AHU register module for heaters and coolers"
     final m_flow_nominal=m2_flow_nominal,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal2,
-    final tauHeaTra=tauHeaTra) "Hydraulic module selection" annotation (
+    massDynamics=massDynamics) "Hydraulic module selection" annotation (
     Dialog(enable=true, group="Hydraulics"),
     Placement(transformation(
         extent={{-38,-38},{38,38}},
         rotation=90,
-        origin={0,-40})),
+        origin={2,-40})),
     __Dymola_choicesAllMatching=true);
   AixLib.Fluid.HeatExchangers.DynamicHX dynamicHX(final m1_flow_nominal=
         m1_flow_nominal, final m2_flow_nominal=m2_flow_nominal,
@@ -49,7 +49,8 @@ model RegisterModule "AHU register module for heaters and coolers"
     redeclare final package Medium1 = Medium1,
     redeclare final package Medium2 = Medium2,
     tau1=5,
-    final energyDynamics=energyDynamics,
+    tau2=10,
+    energyDynamics=energyDynamics,
     final massDynamics=massDynamics,
     T1_start=T_start,
     T2_start=T_start)
@@ -107,10 +108,10 @@ protected
         rotation=0,
         origin={-38,60})));
 equation
-  connect(hydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(points={{
-          -22.8,-2},{-22,-2},{-22,20},{20,20},{20,36}}, color={0,127,255}));
-  connect(hydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(points={{
-          22.8,-2},{18,-2},{18,6},{-20,6},{-20,36}}, color={0,127,255}));
+  connect(hydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(points={{-20.8,
+          -2},{-22,-2},{-22,20},{20,20},{20,36}},       color={0,127,255}));
+  connect(hydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(points={{24.8,-2},
+          {18,-2},{18,6},{-20,6},{-20,36}},          color={0,127,255}));
   connect(senT_airIn.T, PT1_airIn.u)
     annotation (Line(points={{-70,71},{-70,78}}, color={0,0,127}));
   connect(senT_airOut.T, PT1_airOut.u)
@@ -119,7 +120,7 @@ equation
           {60,60}},                   color={0,127,255}));
   connect(hydraulicModule.hydraulicBus, registerBus.hydraulicBus) annotation (
       Line(
-      points={{-38,-40},{-89.94,-40},{-89.94,-0.945}},
+      points={{-36,-40},{-89.94,-40},{-89.94,-0.945}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -144,9 +145,9 @@ equation
     annotation (Line(points={{-80,60},{-100,60}}, color={0,127,255}));
   connect(senT_airOut.port_b, port_b1)
     annotation (Line(points={{80,60},{100,60}}, color={0,127,255}));
-  connect(hydraulicModule.port_a1, port_a2) annotation (Line(points={{-22.8,-78},
+  connect(hydraulicModule.port_a1, port_a2) annotation (Line(points={{-20.8,-78},
           {-100,-78},{-100,-60}}, color={0,127,255}));
-  connect(hydraulicModule.port_b2, port_b2) annotation (Line(points={{22.8,-78},
+  connect(hydraulicModule.port_b2, port_b2) annotation (Line(points={{24.8,-78},
           {100,-78},{100,-60}}, color={0,127,255}));
   connect(VFSen_out.V_flow, registerBus.VFlowAirMea) annotation (Line(points={{-38,49},
           {-38,34},{-89.94,34},{-89.94,-0.945}},         color={0,0,127}), Text(
@@ -375,12 +376,23 @@ equation
           thickness=1)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{100,
             120}})),
-    Documentation(info="<html>
-<p>The RegisterModule is a model for heating and cooling registers in air-handling units. It includes a simple heat exchanger and a replaceable hydraulic system (HydraulicModules) for the heat/cold supply with e.g. water. The Icon of the hydraulic circuit can be selected as well.</p>
-<p>In order to communicate sensor measurements and actuator signals, the registerBus is used. The air temperature sensor signal is multiplied with a first order element to simulate the dynamic behavior of the sensors.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  The RegisterModule is a model for heating and cooling registers in
+  air-handling units. It includes a simple heat exchanger and a
+  replaceable hydraulic system (HydraulicModules) for the heat/cold
+  supply with e.g. water. The Icon of the hydraulic circuit can be
+  selected as well.
+</p>
+<p>
+  In order to communicate sensor measurements and actuator signals, the
+  registerBus is used. The air temperature sensor signal is multiplied
+  with a first order element to simulate the dynamic behavior of the
+  sensors.
+</p>
 <ul>
-<li>Januar 09, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+  <li>Januar 09, 2019, by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end RegisterModule;
