@@ -189,27 +189,37 @@ equation
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics),
-    Documentation(info="<html>
-<p>This model calculates the input of heat and visible light into the room due
-to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.
-  It considers  the correction values for non-vertical and non-parallel
-   radiation incidence.</p>
-<p>To calculate the solar irradiation and the solar geometry it uses the models
- of the
- <a href=\"AixLib.BoundaryConditions\">BoundaryConditions</a> package.</p>
-<p>An example on how this model should be used is
-  <a href=\"vdi6007.Examples.Window\">Window</a>.
-  To consider the additional heat input in case of ventilation
-   with the solar protection the
-    <a href=\"vdi6007.BaseClasses.VentilationHeat\">VentilationHeat</a>
-    model can be used.</p>
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI 6007-3
-  June 2015. Calculation of transient thermal response of rooms
-  and buildings - Modelling of solar radiation.</p>
+    Documentation(info="<html><p>
+  This model calculates the input of heat and visible light into the
+  room due to solar irradiation. Therefore it uses the calculations of
+  VDI 6007 part 3. It considers the correction values for non-vertical
+  and non-parallel radiation incidence.
+</p>
+<p>
+  To calculate the solar irradiation and the solar geometry it uses the
+  models of the <a href=
+  \"AixLib.BoundaryConditions\">BoundaryConditions</a> package.
+</p>
+<p>
+  An example on how this model should be used is <a href=
+  \"vdi6007.Examples.Window\">Window</a>. To consider the additional heat
+  input in case of ventilation with the solar protection the <a href=
+  \"vdi6007.BaseClasses.VentilationHeat\">VentilationHeat</a> model can
+  be used.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  Modelling of solar radiation.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li></ul>
+        revisions="<html><ul>
+  <li>June 30, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
+</ul>
 </html>"));
 end Window;

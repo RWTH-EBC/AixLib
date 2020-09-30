@@ -1,3 +1,4 @@
+GenericPipe
 CheckValve
 HydraulicDiameter
 HydraulicResistance
@@ -6,6 +7,7 @@ LosslessPipe
 Pipe
 PlugFlowPipe
 PressureDrop
+SimplePipe
 Examples
 Validation
 BaseClasses

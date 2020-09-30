@@ -11,6 +11,9 @@ model Weather "Complex weather model"
     "table name on file or in function usertab"                                     annotation(Dialog(group = "Properties of Weather Data"));
   parameter String fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt")
     "file where matrix is stored"                                                                                                     annotation(Dialog(group = "Properties of Weather Data", loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
+  parameter String formatTRY="TRY 2010/2011" "File format of test reference year (TRY)" annotation(choices(
+              choice="TRY 2010/2011",
+              choice="TRY 2015/2017"),Dialog(enable=true, group="Properties of Weather Data"));
   parameter Real offset[:] = {0} "offsets of output signals" annotation(Dialog(group = "Properties of Weather Data"));
   parameter Modelica.Blocks.Types.Smoothness smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments
     "Smoothness of table interpolation"                                                                                                     annotation(Dialog(group = "Properties of Weather Data"));
@@ -76,7 +79,12 @@ protected
     "Number of chosen output variables";
   parameter Integer[9] PosWV = BaseClasses.DeterminePositionsInWeatherVector(Cloud_cover, Wind_dir, Wind_speed, Air_temp, Air_press, Mass_frac, Rel_hum, Sky_rad, Ter_rad)
     "Positions Weather Vector";
-  parameter Integer columns[:] = {16, 15, 7, 8, 9, 10, 11, 12, 13, 18, 19};
+  /*
+  | 1: year / Modelica time | 2         | 3         | 4         | 5         | 6         | 7         | 8         | 9         | 10        | 11        | 12        | 13         | 14        | 15        | 16        | 17        | 18        | 19       | 20       |
+  | 2010/2011               | RG        | IS        | MM        | DD        | HH        | N         | WR        | WG        | t         | p         | x         | RF         | W         | B         | D         | IK        | A         | E        | IL       |
+  | 2015/2017               | RW        | HW        | MM        | DD        | HH        | t         | p         | WR        | WG        | N         | x         | RF         | B         | D         | A         | E         | IL        |          |          |
+  */
+  parameter Integer columns[:] = if formatTRY=="TRY 2015/2017" then {15, 14, 11, 9, 10, 7, 8, 12, 13, 16, 17} elseif formatTRY=="TRY 2010/2011" then {16, 15, 7, 8, 9, 10, 11, 12, 13, 18, 19} else fill(0, 11);
 initial equation
   assert(SOD.nSurfaces == size(SOD.name, 1), "name has to have the nSurfaces Elements (see Surface orientation data in the Weather Model)");
   assert(SOD.nSurfaces == size(SOD.Azimut, 1), "Azimut has to have the nSurfaces Elements (see Surface orientation data in the Weather Model)");
@@ -206,40 +214,87 @@ equation
             horizontalAlignment =                                                                                                   TextAlignment.Right), Text(extent = {{10, -54}, {150, -66}}, lineColor = {0, 0, 255}, visible = Rel_hum, textString = "Rel. humidity",
             horizontalAlignment =                                                                                                   TextAlignment.Right), Text(extent = {{10, -84}, {150, -96}}, lineColor = {0, 0, 255}, visible = Sky_rad,
             horizontalAlignment =                                                                                                   TextAlignment.Right, textString = "Sky rad."), Text(extent = {{10, -114}, {150, -126}}, lineColor = {0, 0, 255}, visible = Ter_rad,
-            horizontalAlignment =                                                                                                   TextAlignment.Right, textString = "Terrest. rad.")}), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Supplies weather data using a TRY - data set. </p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Input: a TRY data set in an accepted Modelica format (.mat, .txt, with header). The structure should be exactly the one of a TRY, status: TRY 2011.</p>
- <p>Output: </p>
- <ul>
- <li>Total radiation on &quot;n&quot; oriented surfaces</li>
- <li>Cloud cover</li>
- <li>Wind direction</li>
- <li>Wind speed</li>
- <li>Air temperature</li>
- <li>Air pressure</li>
- <li>Mass fraction of water in dry air</li>
- <li>Relative humidity</li>
- <li>Long wave sky radiation on horizontal surface</li>
- <li>Long wave terrestrial radiation from horizontal surface</li>
- </ul>
- <p>The outputs can be supplied individually or in one vector, with the exception of total solar radiation, which are always supplied separately in a vector. </p>
- <h4><span style=\"color:#008000\">Known Limitations</span></h4>
- <p>Be aware that the calculation of the total solar radiation may cause problems at simulation times close to sunset and sunrise. In this case, change the cut-off angles. refer to model <a href=\"Modelica://AixLib.Building.Components.Weather.BaseClasses.RadOnTiltedSurf\">RadOnTiltedSurf.</a></p>
- <h4><span style=\"color:#008000\">References</span></h4>
- <p>DWD: TRYHandbuch.2011.DWD,2011</p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"Modelica://AixLib.Building.Components.Examples.Weather.WeatherModels\">Examples.Weather.WeatherModels</a> </p>
- </html>", revisions = "<html>
- <ul>
-   <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, Rewarded 5*****!</li>
-   <li><i>Mai 1, 2012&nbsp;</i>
-          by Moritz Lauster and Ana Constantin:<br/>
-          Improved beyond belief.</li>
-   <li><i>September 12, 2006&nbsp;</i>
-          by Timo Haase:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+            horizontalAlignment =                                                                                                   TextAlignment.Right, textString = "Terrest. rad.")}), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Supplies weather data using a TRY - data set.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Input: a TRY data set in an accepted Modelica format (.mat, .txt,
+  with header). The structure should be exactly the one of a TRY,
+  status: TRY 2011.
+</p>
+<p>
+  Output:
+</p>
+<ul>
+  <li>Total radiation on \"n\" oriented surfaces
+  </li>
+  <li>Cloud cover
+  </li>
+  <li>Wind direction
+  </li>
+  <li>Wind speed
+  </li>
+  <li>Air temperature
+  </li>
+  <li>Air pressure
+  </li>
+  <li>Mass fraction of water in dry air
+  </li>
+  <li>Relative humidity
+  </li>
+  <li>Long wave sky radiation on horizontal surface
+  </li>
+  <li>Long wave terrestrial radiation from horizontal surface
+  </li>
+</ul>
+<p>
+  The outputs can be supplied individually or in one vector, with the
+  exception of total solar radiation, which are always supplied
+  separately in a vector.
+</p>
+<h4>
+  <span style=\"color:#008000\">Known Limitations</span>
+</h4>
+<p>
+  Be aware that the calculation of the total solar radiation may cause
+  problems at simulation times close to sunset and sunrise. In this
+  case, change the cut-off angles. refer to model <a href=
+  \"Modelica://AixLib.Building.Components.Weather.BaseClasses.RadOnTiltedSurf\">
+  RadOnTiltedSurf.</a>
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  DWD: TRYHandbuch.2011.DWD,2011
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"Modelica://AixLib.Building.Components.Examples.Weather.WeatherModels\">
+  Examples.Weather.WeatherModels</a>
+</p>
+<ul>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately, Rewarded 5*****!
+  </li>
+  <li>
+    <i>Mai 1, 2012&#160;</i> by Moritz Lauster and Ana Constantin:<br/>
+    Improved beyond belief.
+  </li>
+  <li>
+    <i>September 12, 2006&#160;</i> by Timo Haase:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end Weather;

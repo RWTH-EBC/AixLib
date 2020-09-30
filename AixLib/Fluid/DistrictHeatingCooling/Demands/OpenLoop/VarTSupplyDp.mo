@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
 model VarTSupplyDp
   "Substation with variable dT for fixed return temperature"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
@@ -58,15 +58,15 @@ public
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-50,40})));
-  Modelica.Blocks.Sources.Constant temperatureReturn(k=TReturn)
-    "Temperature of return line in °C"
-    annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+  Modelica.Blocks.Sources.Constant temRet(k=TReturn)
+    "Temperature of return line in °C" annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-90,46})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-26,54},{-6,74}})));
-  Modelica.Blocks.Math.Division heat2massFlow
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Modelica.Blocks.Math.Division hea2MasFlo annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-2})));
   Sources.MassFlowSource_T              sink(
@@ -109,7 +109,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={64,-2})));
-  Modelica.Blocks.Sources.Constant TReturnNominal(k=TReturn)
+  Modelica.Blocks.Sources.Constant temRet_nominal(k=TReturn)
     "Temperature of return line in °C" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
@@ -128,20 +128,20 @@ equation
           {-88,-60},{-74,-60}}, color={0,127,255}));
   connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0},{90,
           -60},{80,-60}}, color={0,127,255}));
-  connect(temperatureReturn.y, deltaT.u2)
+  connect(temRet.y, deltaT.u2)
     annotation (Line(points={{-79,46},{-62,46}}, color={0,0,127}));
-  connect(gain.y, heat2massFlow.u2)
-    annotation (Line(points={{-5,64},{-6,64},{-6,10}},  color={0,0,127}));
-  connect(Q_flow_input, heat2massFlow.u1)
+  connect(gain.y, hea2MasFlo.u2)
+    annotation (Line(points={{-5,64},{-6,64},{-6,10}}, color={0,0,127}));
+  connect(Q_flow_input, hea2MasFlo.u1)
     annotation (Line(points={{-108,80},{6,80},{6,10}}, color={0,0,127}));
   connect(source.ports[1], senT_return.port_a)
     annotation (Line(points={{52,-60},{60,-60}}, color={0,127,255}));
-  connect(heat2massFlow.y, changeSign.u) annotation (Line(points={{-1.9984e-015,
-          -13},{0,-13},{0,-24}}, color={0,0,127}));
+  connect(hea2MasFlo.y, changeSign.u) annotation (Line(points={{-1.9984e-015,-13},
+          {0,-13},{0,-24}}, color={0,0,127}));
   connect(changeSign.y, sink.m_flow_in)
     annotation (Line(points={{0,-47},{0,-52},{-18,-52}}, color={0,0,127}));
-  connect(heat2massFlow.y, source.m_flow_in) annotation (Line(points={{0,-13},{
-          0,-20},{20,-20},{20,-68},{30,-68}}, color={0,0,127}));
+  connect(hea2MasFlo.y, source.m_flow_in) annotation (Line(points={{0,-13},{0,-20},
+          {20,-20},{20,-68},{30,-68}}, color={0,0,127}));
   connect(senT_supply.port_b, sink.ports[1])
     annotation (Line(points={{-54,-60},{-40,-60}}, color={0,127,255}));
   connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-64,-49},{-64,-8},
@@ -154,7 +154,7 @@ equation
           -78,0},{-52,0}}, color={0,0,127}));
   connect(min.y, source.T_in) annotation (Line(points={{64,-13},{64,-42},{24,
           -42},{24,-64},{30,-64}}, color={0,0,127}));
-  connect(TReturnNominal.y, min.u1)
+  connect(temRet_nominal.y, min.u1)
     annotation (Line(points={{35,72},{70,72},{70,10}}, color={0,0,127}));
   connect(deltaT1.y, min.u2)
     annotation (Line(points={{47,22},{58,22},{58,10}}, color={0,0,127}));
@@ -203,18 +203,19 @@ equation
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<p>
-A simple substation model using a fixed return temperature and the actual supply temperature
-to calculate the mass flow rate drawn from the network. This model uses an open loop design
-to prescribe the required flow rate.
+    Documentation(info="<html><p>
+  A simple substation model using a fixed return temperature and the
+  actual supply temperature to calculate the mass flow rate drawn from
+  the network. This model uses an open loop design to prescribe the
+  required flow rate.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-March 4, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+  <li>Novemver 22, 2019, by Nils Neuland:<br/>
+    Revised variable names and documentation to follow guidelines.
+  </li>
+  <li>March 4, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end VarTSupplyDp;

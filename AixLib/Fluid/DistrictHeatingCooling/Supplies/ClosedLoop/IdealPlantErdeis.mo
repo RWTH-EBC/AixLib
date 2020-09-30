@@ -1,32 +1,53 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
 model IdealPlantErdeis
   "Supply node model with ideal heater and cooler for heat and cold supply of bidirectional networks"
+  extends
+    AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Supplies.OpenLoop.PartialSupplyLessInputs(
+      allowFlowReversal=true);
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
       annotation (choicesAllMatching = true);
-
-      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
       "Nominal pressure drop";
-      parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Medium)
-    "Fluid connector for connecting the ideal plant to the cold line of the network"
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Medium)
-    "Fluid connector for connecting the ideal plant to the warm line of the network"
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+  parameter Modelica.SIunits.PressureDifference dp_heater = 30000;
+
+  parameter Modelica.SIunits.Pressure dpRes_nominal(displayUnit="Bar")=0.11
+    "Pressure difference of the resistance at nominal flow rate"
+    annotation(Dialog(group="Resistance"));
+
+  parameter Modelica.SIunits.Velocity v_nominal = 1.5
+    "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
+    annotation(Dialog(group="Nominal condition"));
+
+  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default)
+    "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
+    annotation (Dialog(group="Advanced"));
+
+  parameter Modelica.SIunits.Length dh(displayUnit="m")=sqrt(4*m_flow_nominal/rho_default/v_nominal/Modelica.Constants.pi)
+    "Hydraulic pipe diameter"
+    annotation(Dialog(group="Pipe"));
+
+  parameter Modelica.SIunits.Length length(displayUnit="m")
+    "Pipe length"
+    annotation(Dialog(group="Pipe"));
+
   AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
         Medium,
+        allowFlowReversal=allowFlowReversal,
     QMin_flow=0,use_X_wSet=false,
-    dp_nominal=dp_nominal,
+    dp_nominal=dp_heater,
     m_flow_nominal=m_flow_nominal,
     use_TSet=true)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
         Medium,
+        allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     tau=0)
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
@@ -39,6 +60,7 @@ model IdealPlantErdeis
         origin={30,70})));
   FixedResistances.PlugFlowPipe plugFlowPipe(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     dh=0.7,
     length=1700,
     m_flow_nominal=m_flow_nominal,
@@ -48,8 +70,9 @@ model IdealPlantErdeis
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   FixedResistances.PressureDrop res(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
-    dp_nominal(displayUnit="bar") = 11000)
+    dp_nominal(displayUnit="bar") = dpRes_nominal)
     annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
 equation
   connect(heater.port_b, senTem.port_a)

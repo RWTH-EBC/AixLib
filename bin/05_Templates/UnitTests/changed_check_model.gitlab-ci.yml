@@ -1,0 +1,263 @@
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
+stages:
+    - Check
+    
+
+Check_Airflow_changed_models:
+    stage: Check
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Airflow" -p AixLib/package.mo -CM
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.Airflow-log.txt
+            - AixLib/AixLib.Airflow-Errorlog.txt
+        expire_in: 7 day 
+    allow_failure: true 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+                
+Check_BoundaryConditions_changed_models:
+    stage: Check
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.BoundaryConditions" -p AixLib/package.mo -CM
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.BoundaryConditions-log.txt
+            - AixLib/AixLib.BoundaryConditions-Errorlog.txt
+        expire_in: 7 day 
+    allow_failure: true 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+            
+            
+            
+Check_Controls_changed_models:
+    stage: Check
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Controls" -p AixLib/package.mo -CM
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.Controls-log.txt
+            - AixLib/AixLib.Controls-Errorlog.txt
+        expire_in: 7 day 
+    allow_failure: true 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+            
+Check_Electrical_changed_models:
+    stage: Check
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Electrical" -p AixLib/package.mo -CM
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.Electrical-log.txt
+            - AixLib/AixLib.Electrical-Errorlog.txt
+        expire_in: 7 day 
+    allow_failure: true 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+            
+            
+            
+Check_FastHVAC_changed_models:
+    stage: Check
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.FastHVAC" -p AixLib/package.mo -CM
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.FastHVAC-log.txt
+            - AixLib/AixLib.FastHVAC-Errorlog.txt
+        expire_in: 7 day 
+    allow_failure: true 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+            
+            
+Check_Fluid_changed_models:
+    stage: Check
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Fluid" -p AixLib/package.mo -CM
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.Fluid-log.txt
+            - AixLib/AixLib.Fluid-Errorlog.txt
+        expire_in: 7 day 
+    allow_failure: true 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+Check_Media_changed_models:
+    stage: Check
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Media" -p AixLib/package.mo -CM
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.Media-log.txt
+            - AixLib/AixLib.Media-Errorlog.txt
+        expire_in: 7 day 
+    allow_failure: true 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+#Check_Systems_changed_models:
+#    stage: Check
+#    services:
+#        -  docker
+#    before_script:
+#        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+#        - export PIP_CACHE_DIR="/opt/cache/pip"
+#        - source activate python36  
+#        - python -V               # Print out python version for debugging
+#        - export PYTHONIOENCODING=utf-8 # just in case
+#    script:
+#        - model=$(git diff --raw HEAD^1)
+#        - echo $model
+#        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+#        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Systems" -p AixLib/package.mo -CM
+#    artifacts:
+#        when: on_failure
+#        paths:
+#            - AixLib/AixLib.Systems-log.txt
+#            - AixLib/AixLib.Systems-Errorlog.txt
+#        expire_in: 7 day 
+#    allow_failure: true
+#    except:
+#        - external_pull_requests
+#    only:
+#        variables:
+#            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+Check_ThermalZones_changed_models:
+    stage: Check
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - model=$(git diff --raw HEAD^1)
+        - echo $model
+        - echo $model >  bin/03_WhiteLists/changedmodels.txt
+        - python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.ThermalZones" -p AixLib/package.mo -CM
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.ThermalZones-log.txt
+            - AixLib/AixLib.ThermalZones-Errorlog.txt
+        expire_in: 7 day 
+    allow_failure: true 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/

@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Interfaces;
+within AixLib.FastHVAC.Interfaces;
 model TwoPortHeatMassExchanger
   "Model transporting one enthalpy stream with storing mass or energy"
   parameter Modelica.Media.Interfaces.Types.Temperature T_start = workingFluid.T0;
@@ -55,17 +55,17 @@ equation
           pattern=LinePattern.None,
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid)}),
-   Documentation(info="<html>
-   <p>
-   This component transports one fluid stream.<br/>
-   It is based on the Fluid model <a href=\"modelica://AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger\">AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger</a> and was adapted to the FastHVAC library.
-  </p>
-  </html>", revisions="<html>
-  <ul>
+   Documentation(info="<html><p>
+  This component transports one fluid stream.<br/>
+  It is based on the Fluid model <a href=
+  \"modelica://AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger\">AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger</a>
+  and was adapted to the FastHVAC library.
+</p>
+<ul>
   <li>
-  <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
+    <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
     Moved into AixLib
   </li>
-  </ul>
-  </html>"));
+</ul>
+</html>"));
 end TwoPortHeatMassExchanger;

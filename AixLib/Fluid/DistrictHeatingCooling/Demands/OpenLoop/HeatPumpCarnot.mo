@@ -76,15 +76,15 @@ public
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-40,-10})));
-  Modelica.Blocks.Sources.Constant temperatureDropHP(k=dTDesign)
-    "Temperature drop over heat pump in K"
-    annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+  Modelica.Blocks.Sources.Constant dTheaPum(k=dTDesign)
+    "Temperature drop over heat pump in K" annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-90,50})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-32,40},{-12,60}})));
-  Modelica.Blocks.Math.Division heat2massFlow
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Modelica.Blocks.Math.Division hea2MasFlo annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=270,
         origin={24,32})));
   Sources.MassFlowSource_T              sink(
@@ -140,7 +140,7 @@ public
   Sources.Boundary_pT                sinkHeating(
                           redeclare package Medium = MediumBuilding, nPorts=1)
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
-  Modelica.Blocks.Math.Gain mFlowBuilding(k=1/(cp_default_building*dTBuilding))
+  Modelica.Blocks.Math.Gain masFloBuilding(k=1/(cp_default_building*dTBuilding))
     "Changes sign of prescribed flow for extraction from network" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -180,27 +180,27 @@ equation
           {-88,-10}},           color={0,127,255}));
   connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0},{90,
           -10}},          color={0,127,255}));
-  connect(gain.y, heat2massFlow.u2)
+  connect(gain.y, hea2MasFlo.u2)
     annotation (Line(points={{-11,50},{18,50},{18,44}}, color={0,0,127}));
   connect(source.ports[1], senT_return.port_a)
     annotation (Line(points={{80,-40},{90,-40},{90,-30}},
                                                  color={0,127,255}));
-  connect(heat2massFlow.y, changeSign.u) annotation (Line(points={{24,21},{24,12}},
-                                 color={0,0,127}));
+  connect(hea2MasFlo.y, changeSign.u)
+    annotation (Line(points={{24,21},{24,12}}, color={0,0,127}));
   connect(changeSign.y, sink.m_flow_in)
     annotation (Line(points={{24,-11},{24,-42},{22,-42}},color={0,0,127}));
-  connect(heat2massFlow.y, source.m_flow_in) annotation (Line(points={{24,21},{
-          24,16},{54,16},{54,-48},{58,-48}},  color={0,0,127}));
+  connect(hea2MasFlo.y, source.m_flow_in) annotation (Line(points={{24,21},{24,
+          16},{54,16},{54,-48},{58,-48}}, color={0,0,127}));
   connect(senT_supply.port_b, heaPum.port_a2) annotation (Line(points={{-88,-30},
           {-88,-50},{-50,-50}}, color={0,127,255}));
   connect(sink.ports[1], heaPum.port_b2)
     annotation (Line(points={{0,-50},{-30,-50}}, color={0,127,255}));
-  connect(Q_con.y, heat2massFlow.u1)
+  connect(Q_con.y, hea2MasFlo.u1)
     annotation (Line(points={{21,74},{30,74},{30,44}}, color={0,0,127}));
   connect(heaPum.P, Q_con.u2) annotation (Line(points={{-51,-56},{-70,-56},{-70,
           68},{-2,68}}, color={0,0,127}));
-  connect(mFlowBuilding.y, sourceHeating.m_flow_in) annotation (Line(points={{60,39},
-          {60,-20},{30,-20},{30,-72},{22,-72}},        color={0,0,127}));
+  connect(masFloBuilding.y, sourceHeating.m_flow_in) annotation (Line(points={{60,
+          39},{60,-20},{30,-20},{30,-72},{22,-72}}, color={0,0,127}));
   connect(temperatureSupplyBuilding.y, heaPum.TSet) annotation (Line(points={{
           59,-90},{-22,-90},{-22,-65},{-28,-65}}, color={0,0,127}));
   connect(sourceHeating.T_in, temperatureReturnBuilding.y)
@@ -214,17 +214,17 @@ equation
           -80},{-60,-80},{-60,-62},{-50,-62}}, color={0,127,255}));
   connect(heaPum.port_a1, sourceHeating.ports[1]) annotation (Line(points={{-30,
           -62},{-12,-62},{-12,-80},{0,-80}}, color={0,127,255}));
-  connect(temperatureDropHP.y, gain.u)
+  connect(dTheaPum.y, gain.u)
     annotation (Line(points={{-79,50},{-34,50}}, color={0,0,127}));
   connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-77,-20},{-58,-20},
           {-58,-16},{-52,-16}}, color={0,0,127}));
-  connect(temperatureDropHP.y, deltaT.u2) annotation (Line(points={{-79,50},{
-          -58,50},{-58,-4},{-52,-4}}, color={0,0,127}));
+  connect(dTheaPum.y, deltaT.u2) annotation (Line(points={{-79,50},{-58,50},{-58,
+          -4},{-52,-4}}, color={0,0,127}));
   connect(Q_flow_input, gainInput.u)
     annotation (Line(points={{-108,80},{-62,80}}, color={0,0,127}));
   connect(Q_con.u1, gainInput.y)
     annotation (Line(points={{-2,80},{-39,80}}, color={0,0,127}));
-  connect(gainInput.y, mFlowBuilding.u) annotation (Line(points={{-39,80},{-20,
+  connect(gainInput.y,masFloBuilding. u) annotation (Line(points={{-39,80},{-20,
           80},{-20,94},{60,94},{60,62}}, color={0,0,127}));
   connect(deltaT.y, max.u2) annotation (Line(points={{-29,-10},{-18,-10},{-18,
           -28},{-4,-28}}, color={0,0,127}));
@@ -273,20 +273,20 @@ equation
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<p>
-A simple substation model using a fixed return temperature and the actual supply temperature
-to calculate the mass flow rate drawn from the network. This model uses an open loop design
-to prescribe the required flow rate.
-
-This model includes a heat pump model using the district heating network as its source.
+    Documentation(info="<html><p>
+  A simple substation model using a fixed return temperature and the
+  actual supply temperature to calculate the mass flow rate drawn from
+  the network. This model uses an open loop design to prescribe the
+  required flow rate. This model includes a heat pump model using the
+  district heating network as its source.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-March 4, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+  <li>Novemver 22, 2019, by Nils Neuland:<br/>
+    Revised variable names and documentation to follow guidelines.
+  </li>
+  <li>March 4, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end HeatPumpCarnot;

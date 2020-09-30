@@ -93,22 +93,33 @@ equation
           -2},{80,-2},{80,78},{42,78}}, color={0,127,255}));
   connect(const.y, hea.TSet) annotation (Line(points={{57.7,67},{52,67},{52,86},
           {44,86}}, color={0,0,127}));
-  annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
-<h4><font color=\"#008000\">Overview</font></h4>
- <p>This is a simple example of a storage and a boiler.</p>
- </html>", revisions="<html>
+  annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is a simple example of a storage and a boiler.
+</p>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib and replaced boiler with idealHeater</li>
-<li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
-<li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
-<li><i>13.12.2013</i>
-    by Sebastian Stinner:<br/>
-    implemented</li>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib and replaced boiler with idealHeater
+  </li>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe
+  </li>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>13.12.2013</i> by Sebastian Stinner:<br/>
+    implemented
+  </li>
 </ul>
 </html>"));
 end StorageBoiler;
