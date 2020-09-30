@@ -1,10 +1,10 @@
-BaseClassesStatic
-StaticPipe
-TwoPipe
-StaticPipeZeta
+DHCPipe
 PlugFlowPipeEmbedded
 PlugFlowPipeEmbeddedDis
 PlugFlowPipeZeta
+StaticPipe
+StaticPipeZeta
+TwoPipe
 Examples
 BaseClasses
-DHCPipe
+BaseClassesStatic

@@ -116,8 +116,8 @@ model TwoPipe
     dIns=dIns,
     kIns=kIns,
     nPorts=nPorts,
-    rho=rho,
-    c=c,
+    rhoPip=rhoPip,
+    cPip=cPip,
     thickness_ground=thickness_ground,
     lambda_ground=lambda_ground) constrainedby Interfaces.PartialTwoPortVector(
     redeclare package Medium = Medium,
@@ -126,8 +126,8 @@ model TwoPipe
     dIns=dIns,
     kIns=kIns,
     nPorts=nPorts,
-    rho=rho,
-    c=c,
+    rhoPip=rhoPip,
+    cPip=cPip,
     thickness_ground=thickness_ground,
     lambda_ground=lambda_ground) annotation (Placement(transformation(extent={{10,
             50},{-10,70}})), __Dymola_choicesAllMatching=true);

@@ -114,29 +114,27 @@ model DHCPipe "Generic pipe model for DHC applications"
     final roughness=roughness,
     final allowFlowReversal=allowFlowReversal,
     final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized) constrainedby
-    AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore(
-      redeclare final package Medium = Medium,
-      final dh=dh,
-      final v_nominal=v_nominal,
-      final length=length,
-      final C=C,
-      final R=R,
-      final m_flow_small=m_flow_small,
-      final m_flow_nominal=m_flow_nominal,
-      final T_start_in=T_start_in,
-      final T_start_out=T_start_out,
-      final m_flow_start=m_flow_start,
-      final initDelay=initDelay,
-      final from_dp=from_dp,
-      final fac=if not use_zeta then fac else 1.0,
-      final ReC=ReC,
-      final thickness=thickness,
-      final roughness=roughness,
-      final allowFlowReversal=allowFlowReversal,
-      final homotopyInitialization=homotopyInitialization,
-      final linearized=linearized)
-                                 "Describing the pipe behavior"
+    final linearized=linearized) constrainedby Interfaces.PartialTwoPort(
+    redeclare package Medium = Medium,
+    dh=dh,
+    v_nominal=v_nominal,
+    length=length,
+    C=C,
+    R=R,
+    m_flow_small=m_flow_small,
+    m_flow_nominal=m_flow_nominal,
+    T_start_in=T_start_in,
+    T_start_out=T_start_out,
+    m_flow_start=m_flow_start,
+    initDelay=initDelay,
+    from_dp=from_dp,
+    fac=if not use_zeta then fac else 1.0,
+    ReC=ReC,
+    thickness=thickness,
+    roughness=roughness,
+    allowFlowReversal=allowFlowReversal,
+    homotopyInitialization=homotopyInitialization,
+    linearized=linearized)       "Describing the pipe behavior"
     annotation (
     choices(
       choice(redeclare AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore core
@@ -210,23 +208,23 @@ equation
     annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
   end for;
-  connect(plugFlowCore.heatPort, heatPort)
-    annotation (Line(points={{0,10},{0,10},{0,100}}, color={191,0,0}));
 
-  connect(plugFlowCore.port_b, vol.ports[1])
+  connect(core.port_b, vol.ports[1])
     annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
   if use_zeta then
-  connect(hydraulicResistance.port_b, plugFlowCore.port_a)
+  connect(hydraulicResistance.port_b, core.port_a)
     annotation (Line(points={{-40,20},{-20,20},{-20,0},{-10,0}},
                                                color={0,127,255}, pattern=LinePattern.Dash));
   connect(hydraulicResistance.port_a, port_a)
     annotation (Line(points={{-60,20},{-80,20},{-80,0},{-100,0}},
                                                 color={0,127,255}, pattern=LinePattern.Dash));
   else
-  connect(port_a, plugFlowCore.port_a)
+  connect(port_a, core.port_a)
     annotation (Line(points={{-100,0},{-80,0},{-80,-20},{-20,-20},{-20,0},{-10,0}},
                                                 color={0,127,255}));
   end if;
+  connect(core.heatPort, heatPort)
+    annotation (Line(points={{0,10},{0,100}}, color={191,0,0}));
     annotation (Dialog(group="Additional pressurelosses"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}})),

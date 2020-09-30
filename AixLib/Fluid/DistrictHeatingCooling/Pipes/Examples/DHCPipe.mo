@@ -3,9 +3,9 @@ model DHCPipe "Simple example of PlugFlowPipe"
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Water "Medium in the pipe" annotation (
       choicesAllMatching=true);
-  Modelica.Blocks.Sources.Ramp Tin(
-    height=20,
-    duration=0,
+  Modelica.Blocks.Sources.Pulse Tin(
+    amplitude=20,
+    period=20,
     offset=273.15 + 50,
     startTime=100) "Ramp pressure signal"
     annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
@@ -17,8 +17,7 @@ model DHCPipe "Simple example of PlugFlowPipe"
     annotation (Placement(transformation(extent={{82,-10},{62,10}})));
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip(
     redeclare package Medium = Medium,
-    redeclare BaseClassesStatic.StaticCore core "Static core",
-    redeclare FixedResistances.BaseClasses.StaticCore plugFlowCore,
+    redeclare FixedResistances.BaseClasses.PlugFlowCore core "PlugFlow core",
     nPorts=1,
     dh=0.1,
     length=100,
