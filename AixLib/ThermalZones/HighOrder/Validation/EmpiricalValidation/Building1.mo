@@ -13,12 +13,12 @@ model Building1
     Wind_dir=false,
     Wind_speed=true,
     Air_temp=true)
-    annotation (Placement(transformation(extent={{-86,66},{-56,86}})));
+    annotation (Placement(transformation(extent={{-90,78},{-60,98}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
-    annotation (Placement(transformation(extent={{-30,75},{-19,86}})));
-  Modelica.Blocks.Sources.CombiTimeTable RWD(
+    annotation (Placement(transformation(extent={{-38,85},{-27,96}})));
+  Modelica.Blocks.Sources.CombiTimeTable BuildingSpecifications(
     tableOnFile=true,
     tableName="Table",
     fileName=ModelicaServices.ExternalReferences.loadResource(
@@ -26,27 +26,27 @@ model Building1
     columns={2,3,4,5},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Air exchange due to windows in the roof area, {2} Temp in the Building (Top), {3} Temp in the Building (Center), {4} Temp in the Building (Bottom), {5} Air exchange due to windows in the roof"
-    annotation (Placement(transformation(extent={{-96,-58},{-76,-38}})));
+    annotation (Placement(transformation(extent={{-96,-22},{-78,-4}})));
   Modelica.Blocks.Interfaces.RealOutput roomTemperature
-    annotation (Placement(transformation(extent={{168,82},{188,102}})));
+    annotation (Placement(transformation(extent={{148,82},{168,102}})));
   Modelica.Blocks.Interfaces.RealOutput RoomTemperatureTop
-    annotation (Placement(transformation(extent={{168,50},{188,70}})));
+    annotation (Placement(transformation(extent={{148,50},{168,70}})));
   Modelica.Blocks.Interfaces.RealOutput outsideTemperature
-    annotation (Placement(transformation(extent={{168,66},{188,86}})));
+    annotation (Placement(transformation(extent={{148,66},{168,86}})));
   Modelica.Blocks.Interfaces.RealOutput RoomTemperatureBottom
-    annotation (Placement(transformation(extent={{168,18},{188,38}})));
+    annotation (Placement(transformation(extent={{148,18},{168,38}})));
   Modelica.Blocks.Interfaces.RealOutput RoomTemperatureCenter
-    annotation (Placement(transformation(extent={{168,34},{188,54}})));
+    annotation (Placement(transformation(extent={{148,34},{168,54}})));
   Modelica.Blocks.Sources.RealExpression roomTemp(y=room.airload.T)
-    annotation (Placement(transformation(extent={{112,82},{126,98}})));
+    annotation (Placement(transformation(extent={{92,82},{106,98}})));
   Modelica.Blocks.Sources.RealExpression ambientTemp(y=room.thermOutside.T)
-    annotation (Placement(transformation(extent={{112,66},{126,82}})));
-  Modelica.Blocks.Sources.RealExpression tempTop(y=RWD.y[1])
-    annotation (Placement(transformation(extent={{112,52},{126,68}})));
-  Modelica.Blocks.Sources.RealExpression tempCenter(y=RWD.y[2])
-    annotation (Placement(transformation(extent={{112,36},{126,52}})));
-  Modelica.Blocks.Sources.RealExpression tempBottom(y=RWD.y[3])
-    annotation (Placement(transformation(extent={{112,20},{126,36}})));
+    annotation (Placement(transformation(extent={{92,66},{106,82}})));
+  Modelica.Blocks.Sources.RealExpression tempTop(y=BuildingSpecifications.y[1])
+    annotation (Placement(transformation(extent={{92,52},{106,68}})));
+  Modelica.Blocks.Sources.RealExpression tempCenter(y=BuildingSpecifications.y[
+        2]) annotation (Placement(transformation(extent={{92,36},{106,52}})));
+  Modelica.Blocks.Sources.RealExpression tempBottom(y=BuildingSpecifications.y[
+        3]) annotation (Placement(transformation(extent={{92,20},{106,36}})));
 
   Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
@@ -56,41 +56,41 @@ model Building1
     l_cooler=-1e6,
     KR_cooler=1000,
     recOrSep=false)
-    annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
+    annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
   Modelica.Blocks.Sources.Constant Source_TsetC(k=273.15 + 25)
-    annotation (Placement(transformation(extent={{32,-88},{45,-75}})));
+    annotation (Placement(transformation(extent={{2,-88},{15,-75}})));
   Modelica.Blocks.Sources.Constant Source_TsetH(k=273.15 + 4)
-    annotation (Placement(transformation(extent={{110,-88},{97,-75}})));
+    annotation (Placement(transformation(extent={{80,-88},{67,-75}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
-    annotation (Placement(transformation(extent={{148,86},{158,96}})));
+    annotation (Placement(transformation(extent={{128,86},{138,96}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC1
-    annotation (Placement(transformation(extent={{148,70},{158,80}})));
+    annotation (Placement(transformation(extent={{128,70},{138,80}})));
 
   parameter Real solar_absorptance_OW=0.4 "Solar absoptance outer walls ";
 
   Modelica.Blocks.Sources.RealExpression Cool(y=idealHeaterCooler.coolingPower)
-    annotation (Placement(transformation(extent={{110,-24},{124,-8}})));
+    annotation (Placement(transformation(extent={{90,-24},{104,-8}})));
   Modelica.Blocks.Interfaces.RealOutput coolingPower
-    annotation (Placement(transformation(extent={{148,-26},{168,-6}})));
+    annotation (Placement(transformation(extent={{128,-26},{148,-6}})));
   Modelica.Blocks.Sources.RealExpression Heat(y=idealHeaterCooler.heatingPower)
-    annotation (Placement(transformation(extent={{110,-56},{124,-40}})));
+    annotation (Placement(transformation(extent={{90,-56},{104,-40}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower
-    annotation (Placement(transformation(extent={{166,-58},{186,-38}})));
+    annotation (Placement(transformation(extent={{146,-58},{166,-38}})));
   Modelica.Blocks.Interfaces.RealOutput coolingEnergy
-    annotation (Placement(transformation(extent={{166,-42},{186,-22}})));
+    annotation (Placement(transformation(extent={{146,-42},{166,-22}})));
   Modelica.Blocks.Interfaces.RealOutput HeatingEnergy
-    annotation (Placement(transformation(extent={{166,-74},{186,-54}})));
+    annotation (Placement(transformation(extent={{146,-74},{166,-54}})));
   Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh
-    annotation (Placement(transformation(extent={{150,-36},{160,-26}})));
+    annotation (Placement(transformation(extent={{130,-36},{140,-26}})));
   Modelica.Blocks.Math.UnitConversions.To_kWh to_kWh1
-    annotation (Placement(transformation(extent={{150,-70},{160,-60}})));
+    annotation (Placement(transformation(extent={{130,-70},{140,-60}})));
   Modelica.Blocks.Continuous.Integrator integrator1
-    annotation (Placement(transformation(extent={{133,-35.5},{142,-26}})));
+    annotation (Placement(transformation(extent={{113,-35.5},{122,-26}})));
   Modelica.Blocks.Continuous.Integrator integrator2
-    annotation (Placement(transformation(extent={{135,-69.5},{144,-60}})));
+    annotation (Placement(transformation(extent={{115,-69.5},{124,-60}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
-    annotation (Placement(transformation(extent={{-40,-110},{-20,-90}})));
+    annotation (Placement(transformation(extent={{-52,-84},{-40,-72}})));
   Modelica.Blocks.Sources.CombiTimeTable Room(
     tableOnFile=false,
     table=[0,0; 25200,0; 25200,0.25; 57600,0.25; 57600,0; 86400,0],
@@ -98,95 +98,130 @@ model Building1
     smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     "Air exchange due to open Door in the Room next to Building1, RoomTemp=16.5°C"
-    annotation (Placement(transformation(extent={{-98,-88},{-78,-68}})));
+    annotation (Placement(transformation(extent={{-96,-46},{-78,-28}})));
   Modelica.Blocks.Sources.Constant Source_TsetC1(k=273.15 + 18)
-    annotation (Placement(transformation(extent={{-68,-108},{-55,-95}})));
+    annotation (Placement(transformation(extent={{-94,-86},{-78,-70}})));
 
-  Modelica.Blocks.Sources.RealExpression MeanMeasuredTemp(y=RWD.y[1] + RWD.y[2]
-         + RWD.y[3])
-    annotation (Placement(transformation(extent={{112,4},{126,20}})));
+  Modelica.Blocks.Sources.RealExpression MeanMeasuredTemp(y=
+        BuildingSpecifications.y[1] + BuildingSpecifications.y[2] +
+        BuildingSpecifications.y[3])
+    annotation (Placement(transformation(extent={{92,4},{106,20}})));
   Modelica.Blocks.Interfaces.RealOutput MeanMeasuredTemperature
-    annotation (Placement(transformation(extent={{168,2},{188,22}})));
+    annotation (Placement(transformation(extent={{148,2},{168,22}})));
   Modelica.Blocks.Math.Gain gain(k=1/3)
-    annotation (Placement(transformation(extent={{142,6},{154,18}})));
+    annotation (Placement(transformation(extent={{122,6},{134,18}})));
 equation
-  connect(weather.AirTemp, outsideTemp.T) annotation (Line(points={{-55,79},{
-          -40,79},{-40,80.5},{-31.1,80.5}},
+  connect(weather.AirTemp, outsideTemp.T) annotation (Line(points={{-59,91},{
+          -40,91},{-40,90.5},{-39.1,90.5}},
                                         color={0,0,127}));
   connect(tempTop.y,RoomTemperatureTop)
-    annotation (Line(points={{126.7,60},{178,60}}, color={0,0,127}));
+    annotation (Line(points={{106.7,60},{158,60}}, color={0,0,127}));
   connect(tempCenter.y, RoomTemperatureCenter)
-    annotation (Line(points={{126.7,44},{178,44}}, color={0,0,127}));
+    annotation (Line(points={{106.7,44},{158,44}}, color={0,0,127}));
   connect(tempBottom.y, RoomTemperatureBottom)
-    annotation (Line(points={{126.7,28},{178,28}}, color={0,0,127}));
+    annotation (Line(points={{106.7,28},{158,28}}, color={0,0,127}));
 
-  connect(weather.WindSpeed, room.WindSpeedPort) annotation (Line(points={{-55,82},
-          {-46,82},{-46,4},{-1.3,4},{-1.3,16.8}},  color={0,0,127}));
+  connect(weather.WindSpeed, room.WindSpeedPort) annotation (Line(points={{-59,94},
+          {-46,94},{-46,16},{-1.3,16},{-1.3,16.8}},color={0,0,127}));
   connect(idealHeaterCooler.heatCoolRoom, room.thermRoom) annotation (Line(
-        points={{79,-64},{90,-64},{90,-54},{74,-54},{74,12},{30.38,12},{30.38,6}},
+        points={{49,-64},{60,-64},{60,14},{30.38,14},{30.38,6}},
         color={191,0,0}));
   connect(room.SolarRadiationPort, weather.SolarRadiation_OrientedSurfaces)
-    annotation (Line(points={{-1.3,26.88},{-78.8,26.88},{-78.8,65}},  color={255,
+    annotation (Line(points={{-1.3,26.88},{-82.8,26.88},{-82.8,77}},  color={255,
           128,0}));
   connect(Source_TsetC.y, idealHeaterCooler.setPointCool) annotation (Line(
-        points={{45.65,-81.5},{67.6,-81.5},{67.6,-67.2}}, color={0,0,127}));
+        points={{15.65,-81.5},{37.6,-81.5},{37.6,-67.2}}, color={0,0,127}));
   connect(Source_TsetH.y, idealHeaterCooler.setPointHeat) annotation (Line(
-        points={{96.35,-81.5},{72.2,-81.5},{72.2,-67.2}}, color={0,0,127}));
-  connect(outsideTemp.port, room.thermOutside) annotation (Line(points={{-19,
-          80.5},{2,80.5},{2,41.28}},     color={191,0,0}));
-  connect(roomTemp.y, to_degC.u) annotation (Line(points={{126.7,90},{130,90},{
-          130,91},{147,91}}, color={0,0,127}));
-  connect(roomTemperature, to_degC.y) annotation (Line(points={{178,92},{162,92},
-          {162,91},{158.5,91}}, color={0,0,127}));
-  connect(ambientTemp.y, to_degC1.u) annotation (Line(points={{126.7,74},{130,
-          74},{130,75},{147,75}}, color={0,0,127}));
-  connect(outsideTemperature, to_degC1.y) annotation (Line(points={{178,76},{
-          172,76},{172,75},{158.5,75}}, color={0,0,127}));
+        points={{66.35,-81.5},{42.2,-81.5},{42.2,-67.2}}, color={0,0,127}));
+  connect(outsideTemp.port, room.thermOutside) annotation (Line(points={{-27,
+          90.5},{2,90.5},{2,41.28}},     color={191,0,0}));
+  connect(roomTemp.y, to_degC.u) annotation (Line(points={{106.7,90},{110,90},{
+          110,91},{127,91}}, color={0,0,127}));
+  connect(roomTemperature, to_degC.y) annotation (Line(points={{158,92},{142,92},
+          {142,91},{138.5,91}}, color={0,0,127}));
+  connect(ambientTemp.y, to_degC1.u) annotation (Line(points={{106.7,74},{110,
+          74},{110,75},{127,75}}, color={0,0,127}));
+  connect(outsideTemperature, to_degC1.y) annotation (Line(points={{158,76},{
+          152,76},{152,75},{138.5,75}}, color={0,0,127}));
   connect(Cool.y, coolingPower)
-    annotation (Line(points={{124.7,-16},{158,-16}},
+    annotation (Line(points={{104.7,-16},{138,-16}},
                                                  color={0,0,127}));
   connect(Heat.y, heatingPower)
-    annotation (Line(points={{124.7,-48},{176,-48}}, color={0,0,127}));
-  connect(coolingEnergy, to_kWh.y) annotation (Line(points={{176,-32},{170,-32},
-          {170,-31},{160.5,-31}},
+    annotation (Line(points={{104.7,-48},{156,-48}}, color={0,0,127}));
+  connect(coolingEnergy, to_kWh.y) annotation (Line(points={{156,-32},{150,-32},
+          {150,-31},{140.5,-31}},
                                color={0,0,127}));
-  connect(HeatingEnergy, to_kWh1.y) annotation (Line(points={{176,-64},{170,-64},
-          {170,-65},{160.5,-65}},
+  connect(HeatingEnergy, to_kWh1.y) annotation (Line(points={{156,-64},{150,-64},
+          {150,-65},{140.5,-65}},
                              color={0,0,127}));
   connect(heatingPower, heatingPower)
-    annotation (Line(points={{176,-48},{176,-48}},
+    annotation (Line(points={{156,-48},{156,-48}},
                                                color={0,0,127}));
-  connect(heatingPower, integrator2.u) annotation (Line(points={{176,-48},{132,
-          -48},{132,-64.75},{134.1,-64.75}},
+  connect(heatingPower, integrator2.u) annotation (Line(points={{156,-48},{112,
+          -48},{112,-64.75},{114.1,-64.75}},
                                     color={0,0,127}));
-  connect(to_kWh1.u, integrator2.y) annotation (Line(points={{149,-65},{148,-65},
-          {148,-64.75},{144.45,-64.75}},
+  connect(to_kWh1.u, integrator2.y) annotation (Line(points={{129,-65},{128,-65},
+          {128,-64.75},{124.45,-64.75}},
                                     color={0,0,127}));
-  connect(coolingPower, integrator1.u) annotation (Line(points={{158,-16},{
-          132.1,-16},{132.1,-30.75}},
+  connect(coolingPower, integrator1.u) annotation (Line(points={{138,-16},{
+          112.1,-16},{112.1,-30.75}},
                               color={0,0,127}));
-  connect(integrator1.y, to_kWh.u) annotation (Line(points={{142.45,-30.75},{
-          148.225,-30.75},{148.225,-31},{149,-31}},
+  connect(integrator1.y, to_kWh.u) annotation (Line(points={{122.45,-30.75},{
+          128.225,-30.75},{128.225,-31},{129,-31}},
                                                  color={0,0,127}));
-  connect(room.AirExchangePort, RWD.y[4]) annotation (Line(points={{-1.3,31.02},
-          {-72,31.02},{-72,-50},{-75,-50},{-75,-48}}, color={0,0,127}));
-  connect(Room.y[1], room.AirExchangePortRoom) annotation (Line(points={{-77,-78},
-          {-56,-78},{-56,-18.66},{-1.3,-18.66}},      color={0,0,127}));
+  connect(room.AirExchangePort, BuildingSpecifications.y[4]) annotation (Line(
+        points={{-1.3,31.02},{-72,31.02},{-72,-13},{-77.1,-13}}, color={0,0,127}));
+  connect(Room.y[1], room.AirExchangePortRoom) annotation (Line(points={{-77.1,
+          -37},{-56,-37},{-56,-18.66},{-1.3,-18.66}}, color={0,0,127}));
   connect(prescribedTemperature.port, room.thermRoomNextDoor) annotation (Line(
-        points={{-20,-100},{-18,-100},{-18,-28.56},{0.68,-28.56}}, color={191,0,
+        points={{-40,-78},{-18,-78},{-18,-28.56},{0.68,-28.56}},   color={191,0,
           0}));
-  connect(Source_TsetC1.y, prescribedTemperature.T) annotation (Line(points={{
-          -54.35,-101.5},{-49.175,-101.5},{-49.175,-100},{-42,-100}}, color={0,
+  connect(Source_TsetC1.y, prescribedTemperature.T) annotation (Line(points={{-77.2,
+          -78},{-53.2,-78}},                                          color={0,
           0,127}));
   connect(RoomTemperatureBottom, RoomTemperatureBottom)
-    annotation (Line(points={{178,28},{178,28}}, color={0,0,127}));
+    annotation (Line(points={{158,28},{158,28}}, color={0,0,127}));
   connect(roomTemperature, roomTemperature)
-    annotation (Line(points={{178,92},{178,92}}, color={0,0,127}));
+    annotation (Line(points={{158,92},{158,92}}, color={0,0,127}));
   connect(MeanMeasuredTemp.y, gain.u)
-    annotation (Line(points={{126.7,12},{140.8,12}}, color={0,0,127}));
+    annotation (Line(points={{106.7,12},{120.8,12}}, color={0,0,127}));
   connect(gain.y, MeanMeasuredTemperature)
-    annotation (Line(points={{154.6,12},{178,12}}, color={0,0,127}));
+    annotation (Line(points={{134.6,12},{158,12}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"),
-    Diagram(coordinateSystem(extent={{-100,-120},{180,100}})),
-    Icon(coordinateSystem(extent={{-100,-120},{180,100}})));
+    Diagram(coordinateSystem(extent={{-100,-100},{160,100}})),
+    Icon(coordinateSystem(extent={{-100,-100},{160,100}})),
+    Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>Building 1 is part of the empirical validation:
+<ul><li>length = 72 m </li>
+<li>heigth = 72 m </li>
+<li>width = 22 m </li>
+<li>no windows, except for 60m² window area on the ceiling (smoke ventilation windows)</li></ul><br>
+
+Air exchange rates: 
+
+<ul><li>n50 = 0,1 1/h, due to air leakage</li>
+<li>n = 1 1/h, due to air exchange caused by open ventilation windows (opening schedule in Building specifications{5})</li>
+<li>n = 0.25 1/h, due to air exchange caused by open door to room next to building (schedule 7-16 o'clock) 1</li></ul><br>
+
+Building specifications give information about: 
+<ul><li>{2} measured room temperatur in the building: temperature sensor at the top</li> 
+<li>{3} measured room temperatur in the building: temperature sensor at the center </li>
+<li>{4} measured room temperatur in the building: temperature sensor at the bottom </li>
+<li>{5} air exchange due to windows (smoke ventilation windows) in the ceiling </li></ul><br>
+
+Assumptions:
+<ul><li>30% of the volume is constantly filled with goods and shelves</li> 
+<li>Internal capacity: 2100000 kg, specific heat capacity: 2000 J/kg</li></ul>
+
+ </p>
+</html>
+
+ 
+
+", revisions="<html>
+ <ul>
+ <li><i>October 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
+ </ul>
+ </html>"));
 end Building1;
