@@ -2,38 +2,7 @@
 model Building1
   import ModelicaServices;
     extends Modelica.Icons.Example;
-  Rooms.RoomEmpiricalValidation.RoomBuilding1 room(
-    TWalls_start=T0,
-    roof(
-      redeclare model Window = Components.WindowsDoors.WindowSimple (WindowType=
-             AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(),
-            redeclare model correctionSolarGain =
-              AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
-              (WindowType=
-                  AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
-                  Uw=1.5,
-                  g=0.8,
-                  frameFraction=0.1))),
-      WindowType=
-          AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
-          Uw=1.5,
-          g=0.8,
-          frameFraction=0.1),
-      T0=T0),
-    floor(T0=T0),
-    redeclare DataBase.Walls.Collections.EmpricalValidation.Building1 wallTypes,
-    T0_air=283.15,
-    calcMethodIn=3,
-    solar_absorptance_OW=solar_absorptance_OW,
-    calcMethodOut=1,
-    use_infiltEN12831=true,
-    n50=0.1,
-    eps=1.2,
-    wallWest(T0=T0),
-    wallNorth(T0=T0),
-    wallEast(T0=T0),
-    wallSouth(T0=T0),
-    heatCapacitor(T(start=T0)))
+  Rooms.RoomEmpiricalValidation.RoomBuilding1 room(T0_air=283.15, TWalls_start=283.15)
     annotation (Placement(transformation(extent={{2,-30},{68,42}})));
 
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather(
@@ -98,7 +67,6 @@ model Building1
     annotation (Placement(transformation(extent={{148,70},{158,80}})));
 
   parameter Real solar_absorptance_OW=0.4 "Solar absoptance outer walls ";
-  parameter Modelica.SIunits.Temperature T0=284.15 "Initial temperature";
 
   Modelica.Blocks.Sources.RealExpression Cool(y=idealHeaterCooler.coolingPower)
     annotation (Placement(transformation(extent={{110,-24},{124,-8}})));

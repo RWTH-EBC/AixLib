@@ -31,7 +31,8 @@ model RoomBuilding1 "Building1"
     withWindow=false,
     withDoor=true,
     U_door=1.7,
-    door_height=15)
+    door_height=15,
+    T0=TWalls_start)
     annotation (Placement(transformation(extent={{-62,-42},{-48,44}})));
   Components.Walls.Wall wallSouth(
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
@@ -39,7 +40,9 @@ model RoomBuilding1 "Building1"
     wall_height=room_height,
     solar_absorptance=0.4,
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    T0=TWalls_start)
+                    annotation (Placement(transformation(
         extent={{-6,-39},{6,39}},
         rotation=90,
         origin={24,-59})));
@@ -49,7 +52,9 @@ model RoomBuilding1 "Building1"
     wall_height=room_height,
     solar_absorptance=0.4,
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    T0=TWalls_start)
+                    annotation (Placement(transformation(
         extent={{-6,-39},{6,39}},
         rotation=270,
         origin={26,61})));
@@ -59,7 +64,8 @@ model RoomBuilding1 "Building1"
     wall_height=room_height,
     solar_absorptance=0.4,
     withWindow=false,
-    withDoor=false)
+    withDoor=false,
+    T0=TWalls_start)
     annotation (Placement(transformation(extent={{80,-40},{66,44}})));
   Components.Walls.Wall roof(
     redeclare DataBase.Walls.EmpiricalValidation.RO_Building1 wallPar,
@@ -68,10 +74,21 @@ model RoomBuilding1 "Building1"
     solar_absorptance=0.4,
     ISOrientation=3,
     withWindow=true,
+    redeclare model Window =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple (
+          WindowType=
+            AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(Uw=
+            1.5, frameFraction=0.1), redeclare model correctionSolarGain =
+            AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
+            (WindowType=
+                AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
+                Uw=1.5, frameFraction=0.1))),
     WindowType=AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
         Uw=1.5, frameFraction=0.1),
     windowarea=60,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    T0=TWalls_start)
+                    annotation (Placement(transformation(
         extent={{-2.5,-15.5},{2.5,15.5}},
         rotation=270,
         origin={-26.5,73.5})));
@@ -83,7 +100,9 @@ model RoomBuilding1 "Building1"
     solar_absorptance=0.3,
     ISOrientation=2,
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    T0=TWalls_start)
+                    annotation (Placement(transformation(
         extent={{-2.50001,-15.5},{2.5,15.5}},
         rotation=90,
         origin={-32.5,-72.5})));
@@ -109,7 +128,7 @@ model RoomBuilding1 "Building1"
     annotation (Placement(transformation(extent={{-114,-106},{-94,-86}}),
         iconTransformation(extent={{-114,-106},{-94,-86}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
-        2100000*2000)
+        2100000*2000, T(start=T0_air))
     annotation (Placement(transformation(extent={{30,16},{46,32}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor(R=1/
         35000) annotation (Placement(transformation(extent={{34,-4},{48,10}})));
