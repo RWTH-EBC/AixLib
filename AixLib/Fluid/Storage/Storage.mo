@@ -26,9 +26,14 @@ model Storage
                     port_b_consumer(redeclare package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, 82}, {10, 102}}), iconTransformation(extent = {{-10, 90}, {10, 110}})));
   Fluid.MixingVolumes.MixingVolume
-                     layer[n](each V = V / n, redeclare package Medium = Medium,
+                     layer[n](
+    energyDynamics=energyDynamics,
+    p_start=p_start,
+    T_start=T_start,
+    m_flow_small=m_flow_small_layer,
+                              each V = V / n, redeclare package Medium = Medium,
     each nPorts=2,
-    each m_flow_nominal=0.01)                      annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
+    each m_flow_nominal=m_flow_nominal_layer)      annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "connect to ambient temperature around the storage"                                                            annotation(Placement(transformation(extent = {{-116, -10}, {-96, 10}}), iconTransformation(extent = {{-90, -10}, {-70, 10}})));
   Modelica.Fluid.Interfaces.FluidPort_b
@@ -38,10 +43,15 @@ model Storage
                     port_a_heatGenerator(redeclare package Medium = Medium)
                                          annotation(Placement(transformation(extent = {{74, 78}, {94, 98}}), iconTransformation(extent = {{74, 78}, {94, 98}})));
   Fluid.MixingVolumes.MixingVolume
-                     layer_HE[n](each V = V_HE / n, redeclare package Medium =
+                     layer_HE[n](
+    energyDynamics=energyDynamics,
+    p_start=p_start,
+    T_start=T_start,
+    m_flow_small=m_flow_small_layerHE,
+                                 each V = V_HE / n, redeclare package Medium =
         Medium,
     each nPorts=2,
-    each m_flow_nominal=0.01)                            annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
+    each m_flow_nominal=m_flow_nominal_HE)               annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer_HE[n](each G = k_HE * A_HE / n) annotation(Placement(transformation(extent = {{32, -10}, {52, 10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer[n](G = cat(1, {G_top_bottom}, array(G_middle for k in 2:n - 1), {G_top_bottom})) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
   BaseClasses.Bouyancy bouyancy[n - 1](
@@ -63,6 +73,28 @@ model Storage
     each dx=dx,
     each kappa=kappa) annotation (Placement(transformation(extent={{-10,-10},{
             10,10}}, origin={-28,0})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_layer=0.01
+    "Nominal mass flow rate in layers";
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_HE=0.01
+    "Nominal mass flow rate of heat exchanger layers";
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state";
+  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
+    "Start value of temperature";
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
+    "Start value of pressure";
+  parameter Modelica.Media.Interfaces.Types.MassFraction X_start[Medium.nX]=
+      Medium.X_default "Start value of mass fractions m_i/m";
+  parameter Modelica.Media.Interfaces.Types.ExtraProperty C_start[Medium.nC]=
+      fill(0, Medium.nC) "Start value of trace substances";
+  parameter Modelica.Media.Interfaces.Types.ExtraProperty C_nominal[Medium.nC]=
+      fill(1E-2, Medium.nC)
+    "Nominal value of trace substances. (Set to typical order of magnitude.)";
+  parameter Modelica.SIunits.MassFlowRate m_flow_small_layer=1E-4*abs(m_flow_nominal_layer)
+    "Small mass flow rate for regularization of zero flow";
+   parameter Modelica.SIunits.MassFlowRate m_flow_small_layerHE=1E-4*abs(m_flow_nominal_HE)
+    "Small mass flow rate for regularization of zero flow";
+
 protected
   parameter Modelica.SIunits.Volume V = A * h;
   parameter Modelica.SIunits.Area A = Modelica.Constants.pi * d ^ 2 / 4;
