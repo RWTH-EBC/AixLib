@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps;
+within AixLib.Fluid.HeatPumps;
 model Carnot_TCon_RE_Jonas
   "reversible HeatPump, build on the Model from Xiyuan \"Carnot_TCon_RE\""
  extends AixLib.Fluid.HeatPumps.BaseClasses.Carnot1(
@@ -56,30 +56,26 @@ model Carnot_TCon_RE_Jonas
     "Condenser leaving water temperature"
     annotation (Placement(transformation(extent={{-140,70},{-100,110}})));
 
-  Modelica.Blocks.Logical.LessThreshold modi(threshold=273.15 + 11)
-    "when TSet is lower than 11°C, the Heatpump goes into cooling mode"
-    annotation (Placement(transformation(extent={{-74,24},{-54,44}})));
-
 // QEva_flow_nominal = -  QCon_flow_nominal*(COP_nominal-1)/COP_nominal;
 
   Modelica.Blocks.Sources.RealExpression P_el_cooling(y=abs(min(con.Q_flow, 0)/
-        COP)) annotation (Placement(transformation(extent={{100,10},{52,30}})));
-  Modelica.Blocks.Interfaces.BooleanOutput is_cooling
-    annotation (Placement(transformation(extent={{-46,24},{-26,44}})));
+        COP)) annotation (Placement(transformation(extent={{106,2},{52,22}})));
+  Modelica.Blocks.Interfaces.BooleanInput  is_cooling
+    annotation (Placement(transformation(extent={{-120,12},{-100,32}})));
   Modelica.Blocks.Logical.Switch Q_con annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={2,-10})));
   Modelica.Blocks.Sources.RealExpression Q_con_cooling(y=min(con.Q_flow, 0))
-    annotation (Placement(transformation(extent={{-98,-12},{-56,8}})));
+    annotation (Placement(transformation(extent={{-78,-12},{-36,8}})));
   Modelica.Blocks.Sources.RealExpression Q_con_heating(y=max(con.Q_flow, 0))
-    annotation (Placement(transformation(extent={{-98,-28},{-56,-8}})));
+    annotation (Placement(transformation(extent={{-78,-28},{-36,-8}})));
   Modelica.Blocks.Logical.Switch P_el annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={42,-8})));
   Modelica.Blocks.Sources.RealExpression P_el_heating(y=max(con.Q_flow, 0)/COP)
-    annotation (Placement(transformation(extent={{-16,12},{26,30}})));
+    annotation (Placement(transformation(extent={{-22,2},{22,20}})));
 protected
   Modelica.Blocks.Math.Add Q_flow_internal(final k1=-1, k2=+1)
     "Heat removed by evaporator" annotation (Placement(transformation(
@@ -92,38 +88,31 @@ initial equation
 //  assert(QEva_flow_nominal< 0, "Parameter QCon_flow_nominal must be negative.");
 
 equation
-  connect(TSet, modi.u) annotation (Line(points={{-120,90},{-80,90},{-80,34},{
-          -76,34}},
-        color={0,0,127}));
   connect(TSet, con.TSet) annotation (Line(points={{-120,90},{-80,90},{-80,68},
           {-12,68}},color={0,0,127}));
-  connect(modi.y, is_cooling) annotation (Line(points={{-53,34},{-36,34}},
-                color={255,0,255}));
   connect(Q_flow_internal.y, eva.u)
-    annotation (Line(points={{36,-49},{36,-53.8},{12,-53.8}},
-                                                         color={0,0,127}));
+    annotation (Line(points={{36,-49},{36,-54},{12,-54}},color={0,0,127}));
   connect(Q_con.y, Q_flow_internal.u1)
     annotation (Line(points={{13,-10},{30,-10},{30,-26}}, color={0,0,127}));
-  connect(is_cooling, Q_con.u2) annotation (Line(points={{-36,34},{-28,34},{-28,
-          -10},{-10,-10}}, color={255,0,255}));
+  connect(is_cooling, Q_con.u2) annotation (Line(points={{-110,22},{-28,22},{
+          -28,-10},{-10,-10}},
+                           color={255,0,255}));
   connect(Q_con_cooling.y, Q_con.u1)
-    annotation (Line(points={{-53.9,-2},{-10,-2}}, color={0,0,127}));
+    annotation (Line(points={{-33.9,-2},{-10,-2}}, color={0,0,127}));
   connect(Q_con_heating.y, Q_con.u3)
-    annotation (Line(points={{-53.9,-18},{-10,-18}}, color={0,0,127}));
+    annotation (Line(points={{-33.9,-18},{-10,-18}}, color={0,0,127}));
   connect(is_cooling, P_el.u2)
-    annotation (Line(points={{-36,34},{42,34},{42,1.6}}, color={255,0,255}));
+    annotation (Line(points={{-110,22},{42,22},{42,1.6}},color={255,0,255}));
   connect(P_el.y, Q_flow_internal.u2)
     annotation (Line(points={{42,-16.8},{42,-26}}, color={0,0,127}));
-  connect(P_el_cooling.y, P_el.u1) annotation (Line(points={{49.6,20},{48,20},{
+  connect(P_el_cooling.y, P_el.u1) annotation (Line(points={{49.3,12},{48,12},{
           48,2},{48.4,2},{48.4,1.6}}, color={0,0,127}));
-  connect(P_el_heating.y, P_el.u3) annotation (Line(points={{28.1,21},{36,21},{
+  connect(P_el_heating.y, P_el.u3) annotation (Line(points={{24.2,11},{36,11},{
           36,2},{35.6,2},{35.6,1.6}}, color={0,0,127}));
   connect(P_el.y, P) annotation (Line(points={{42,-16.8},{42,-22},{72,-22},{72,
           0},{110,0}}, color={0,0,127}));
-  connect(con.Q_flow, QCon_flow) annotation (Line(points={{11,68},{56,68},{56,
-          90},{110,90}}, color={0,0,127}));
-  connect(eva.Q_flow, QEva_flow) annotation (Line(points={{-11,-54},{-30,-54},{
-          -30,-90},{110,-90}}, color={0,0,127}));
+  connect(P, P) annotation (Line(points={{110,0},{107,0},{107,0},{110,0}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
             {100,100}}),
             graphics={

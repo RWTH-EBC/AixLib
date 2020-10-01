@@ -104,8 +104,8 @@ public
     Q_cooling_nominal=-15000,
     TEva_nominal=283.15)
     annotation (Placement(transformation(extent={{16,4},{-4,-16}})));
-  Sources.Boundary_pT toHouse(redeclare package Medium = MediumBuilding, nPorts
-      =1) annotation (Placement(transformation(extent={{-98,-52},{-78,-32}})));
+  Sources.Boundary_pT toHouse(redeclare package Medium = MediumBuilding, nPorts=
+       1) annotation (Placement(transformation(extent={{-98,-52},{-78,-32}})));
   Sources.MassFlowSource_T fromHouse(
     redeclare package Medium =MediumBuilding,
     use_m_flow_in=true,

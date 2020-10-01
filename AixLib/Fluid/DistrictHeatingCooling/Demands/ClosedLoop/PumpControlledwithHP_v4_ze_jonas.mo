@@ -48,12 +48,12 @@ public
   Modelica.Blocks.Interfaces.RealInput dhw_input
     "Input for dhw demand profile of substation in Watt. Values are positive or 0."
                                                  annotation (Placement(
-        transformation(extent={{-374,-126},{-334,-86}}),  iconTransformation(
+        transformation(extent={{-374,-162},{-334,-122}}), iconTransformation(
           extent={{232,76},{192,116}})));
   Modelica.Blocks.Interfaces.RealInput cold_input
     "Input for cooling demand profile of substation in W. Values are positive or zero."
                                                  annotation (Placement(
-        transformation(extent={{-370,70},{-330,110}}),    iconTransformation(
+        transformation(extent={{-374,70},{-334,110}}),    iconTransformation(
           extent={{232,76},{192,116}})));
 
   Delays.DelayFirstOrder del1(
@@ -127,7 +127,7 @@ public
         origin={44,-78})));
   Modelica.Blocks.Logical.GreaterThreshold dhw_now(threshold=10)
     "if theres a DHW demand, the boolean is set to true"
-    annotation (Placement(transformation(extent={{-296,-116},{-276,-96}})));
+    annotation (Placement(transformation(extent={{-296,-152},{-276,-132}})));
   Modelica.Blocks.Sources.TimeTable T_set_free_cooling(table=[0,273.15 + 35; 7.0e+06,
         273.15 + 35; 7.0e+06,273.15 + 35; 1.2e+07,273.15 + 35; 1.2e+07,273.15 +
         50; 2.2e+07,273.15 + 50; 2.2e+07,273.15 + 35; 2.7e+07,273.15 + 35; 2.7e+07,
@@ -143,9 +143,10 @@ public
         7.0e+06,273.15 + 35; 7.0e+06,273.15 + 35; 1.2e+07,273.15 + 35; 1.2e+07,
         273.15 + 10; 2.2e+07,273.15 + 10; 2.2e+07,273.15 + 35; 2.7e+07,273.15
          + 35; 2.7e+07,273.15 + 35; 3.1536e+07,273.15 + 35])
+    "If active cooling is used, the HP goes into cooling mode for the time of the year specified in the table."
     annotation (Placement(transformation(extent={{-252,-44},{-222,-14}})));
   Modelica.Blocks.Logical.Switch T_room_supply
-    "Supply Temperature needed in the radiators."
+    "Supply Temperature needed in the radiators. These Temperatures also define if the HP is in heating or cooling mode!"
                                                annotation (Placement(
         transformation(
         extent={{-13,-13},{13,13}},
@@ -208,21 +209,21 @@ public
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-208,-132})));
+        origin={-208,-168})));
   Modelica.Blocks.Sources.RealExpression m_flow_nom1(y=m_flow_nominal)
     "mas flow on secondary side is not important, only used for computing the dT of the secondary network. Therefore, we can just use m_flow_nominal of the primary circuit."
-    annotation (Placement(transformation(extent={{-334,-170},{-288,-146}})));
+    annotation (Placement(transformation(extent={{-334,-206},{-288,-182}})));
   Modelica.Blocks.Math.Gain cp_dT1(k=cp_default)
-    annotation (Placement(transformation(extent={{-268,-168},{-248,-148}})));
+    annotation (Placement(transformation(extent={{-268,-204},{-248,-184}})));
   Modelica.Blocks.Math.Add T_dhw_return(k1=-1)
-    annotation (Placement(transformation(extent={{-96,-116},{-76,-136}})));
+    annotation (Placement(transformation(extent={{-96,-152},{-76,-172}})));
   Modelica.Blocks.Math.Division dT_Room
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-208,-166})));
+        origin={-208,-202})));
   Modelica.Blocks.Math.Add T_room_return(k1=-1)
-    annotation (Placement(transformation(extent={{-96,-148},{-74,-170}})));
+    annotation (Placement(transformation(extent={{-96,-184},{-74,-206}})));
   Sensors.TemperatureTwoPort senTem_return(
     redeclare package Medium = Medium,
     allowFlowReversal=false,
@@ -254,10 +255,10 @@ equation
           -39.2},{38.4,-39.2}}, color={0,0,127}));
   connect(T_HP_supply.y, heaPum.TSet) annotation (Line(points={{-27,-20.9},{-27,
           -15},{-40,-15}}, color={0,0,127}));
-  connect(dhw_now.y,T_HP_supply. u2) annotation (Line(points={{-275,-106},{-27,-106},
-          {-27,-46.2}},       color={255,0,255}));
-  connect(dhw_now.y, T_hp_return.u2) annotation (Line(points={{-275,-106},{44,-106},
-          {44,-90}},       color={255,0,255}));
+  connect(dhw_now.y,T_HP_supply. u2) annotation (Line(points={{-275,-142},{-27,
+          -142},{-27,-46.2}}, color={255,0,255}));
+  connect(dhw_now.y, T_hp_return.u2) annotation (Line(points={{-275,-142},{44,
+          -142},{44,-90}}, color={255,0,255}));
   connect(DirectCooling.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-138.1,
           73},{-140,73},{-140,42}},                   color={0,0,127}));
   connect(senTem_supply.T, no_free_cool.u) annotation (Line(points={{-294,-15.4},
@@ -291,7 +292,7 @@ equation
   connect(heaPum.P, P_el) annotation (Line(points={{-63,-6},{-76,-6},{-76,62},{108,
           62}},                     color={0,0,127}));
   connect(dhw_input, dhw_now.u)
-    annotation (Line(points={{-354,-106},{-298,-106}}, color={0,0,127}));
+    annotation (Line(points={{-354,-142},{-298,-142}}, color={0,0,127}));
   connect(heaPum.port_b1, HP_Supply.ports[1]) annotation (Line(points={{-62,-12},
           {-70,-12},{-70,-28},{-124,-28}}, color={0,127,255}));
   connect(HP_Return.ports[1], heaPum.port_a1) annotation (Line(points={{12,-44},
@@ -300,29 +301,29 @@ equation
     annotation (Line(points={{-276.8,44},{-262,44}}, color={0,0,127}));
   connect(T_HP_supply.u1, T_DHW_supply.y) annotation (Line(points={{-18.2,-46.2},
           {-18.2,-82},{-134.8,-82}}, color={0,0,127}));
-  connect(dhw_input, dT_DHW.u1) annotation (Line(points={{-354,-106},{-308,-106},
-          {-308,-126},{-220,-126}}, color={0,0,127}));
+  connect(dhw_input, dT_DHW.u1) annotation (Line(points={{-354,-142},{-308,-142},
+          {-308,-162},{-220,-162}}, color={0,0,127}));
   connect(m_flow_nom1.y, cp_dT1.u)
-    annotation (Line(points={{-285.7,-158},{-270,-158}}, color={0,0,127}));
-  connect(cp_dT1.y, dT_DHW.u2) annotation (Line(points={{-247,-158},{-238,-158},
-          {-238,-138},{-220,-138}}, color={0,0,127}));
+    annotation (Line(points={{-285.7,-194},{-270,-194}}, color={0,0,127}));
+  connect(cp_dT1.y, dT_DHW.u2) annotation (Line(points={{-247,-194},{-238,-194},
+          {-238,-174},{-220,-174}}, color={0,0,127}));
   connect(T_DHW_supply.y, T_dhw_return.u2) annotation (Line(points={{-134.8,-82},
-          {-104,-82},{-104,-120},{-98,-120}}, color={0,0,127}));
+          {-104,-82},{-104,-156},{-98,-156}}, color={0,0,127}));
   connect(dT_DHW.y, T_dhw_return.u1)
-    annotation (Line(points={{-197,-132},{-98,-132}},  color={0,0,127}));
+    annotation (Line(points={{-197,-168},{-98,-168}},  color={0,0,127}));
   connect(T_dhw_return.y, T_hp_return.u1)
-    annotation (Line(points={{-75,-126},{36,-126},{36,-90}}, color={0,0,127}));
-  connect(cp_dT1.y,dT_Room. u2) annotation (Line(points={{-247,-158},{-238,-158},
-          {-238,-172},{-220,-172}}, color={0,0,127}));
+    annotation (Line(points={{-75,-162},{36,-162},{36,-90}}, color={0,0,127}));
+  connect(cp_dT1.y,dT_Room. u2) annotation (Line(points={{-247,-194},{-238,-194},
+          {-238,-208},{-220,-208}}, color={0,0,127}));
   connect(heat_input,dT_Room. u1) annotation (Line(points={{-354,38},{-328,38},
-          {-328,-134},{-230,-134},{-230,-160},{-220,-160}}, color={0,0,127}));
+          {-328,-170},{-230,-170},{-230,-196},{-220,-196}}, color={0,0,127}));
   connect(T_room_supply.y, T_room_return.u2) annotation (Line(points={{-164.7,
-          -53},{-114,-53},{-114,-152.4},{-98.2,-152.4}}, color={0,0,127}));
-  connect(dT_Room.y,T_room_return. u1) annotation (Line(points={{-197,-166},{
-          -146,-166},{-146,-165.6},{-98.2,-165.6}},
+          -53},{-114,-53},{-114,-188.4},{-98.2,-188.4}}, color={0,0,127}));
+  connect(dT_Room.y,T_room_return. u1) annotation (Line(points={{-197,-202},{
+          -146,-202},{-146,-201.6},{-98.2,-201.6}},
                                                color={0,0,127}));
-  connect(T_room_return.y, T_hp_return.u3) annotation (Line(points={{-72.9,-159},
-          {52,-159},{52,-90}}, color={0,0,127}));
+  connect(T_room_return.y, T_hp_return.u3) annotation (Line(points={{-72.9,-195},
+          {52,-195},{52,-90}}, color={0,0,127}));
   connect(val.port_b, HX.ports[1])
     annotation (Line(points={{-182,0},{-156,0}}, color={0,127,255}));
   connect(HX.ports[2], senTem_afterFreeCool.port_a)
@@ -345,16 +346,16 @@ equation
   connect(sub_P_HP.y, m_flow.u1)
     annotation (Line(points={{-237.2,82},{-230,82}}, color={0,0,127}));
   connect(cold_input, maxDemand1.u1)
-    annotation (Line(points={{-350,90},{-322,90}}, color={0,0,127}));
+    annotation (Line(points={{-354,90},{-322,90}}, color={0,0,127}));
   connect(heat_input, maxDemand1.u2) annotation (Line(points={{-354,38},{-328,
           38},{-328,78},{-322,78}}, color={0,0,127}));
-  connect(dhw_input, maxDemand.u2) annotation (Line(points={{-354,-106},{-318,
-          -106},{-318,72},{-292,72}}, color={0,0,127}));
+  connect(dhw_input, maxDemand.u2) annotation (Line(points={{-354,-142},{-318,
+          -142},{-318,72},{-292,72}}, color={0,0,127}));
   connect(maxDemand1.y, maxDemand.u1)
     annotation (Line(points={{-299,84},{-292,84}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
-              Icon(coordinateSystem(preserveAspectRatio=false, extent={{-340,
-            -180},{100,100}}),
+              Icon(coordinateSystem(preserveAspectRatio=false, extent={{-360,
+            -220},{100,100}}),
                          graphics={
         Rectangle(
           extent={{-260,160},{220,-180}},
@@ -386,7 +387,7 @@ equation
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-340,-180},{100,
+        coordinateSystem(preserveAspectRatio=false, extent={{-360,-220},{100,
             100}})),
     Documentation(revisions="<html>
 <ul>
