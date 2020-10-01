@@ -47,7 +47,7 @@ model Storage
     energyDynamics=energyDynamics,
     p_start=p_start,
     T_start=T_start,
-    m_flow_small=m_flow_small_layerHE,
+    m_flow_small=m_flow_small_layer_HE,
                                  each V = V_HE / n, redeclare package Medium =
         Medium,
     each nPorts=2,
@@ -77,23 +77,21 @@ model Storage
     "Nominal mass flow rate in layers";
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal_HE=0.01
     "Nominal mass flow rate of heat exchanger layers";
+
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state";
+
+  //Initialization parameters
   parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
-    "Start value of temperature";
+    "Start value of temperature" annotation(Dialog(tab="Initialization"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
-    "Start value of pressure";
-  parameter Modelica.Media.Interfaces.Types.MassFraction X_start[Medium.nX]=
-      Medium.X_default "Start value of mass fractions m_i/m";
-  parameter Modelica.Media.Interfaces.Types.ExtraProperty C_start[Medium.nC]=
-      fill(0, Medium.nC) "Start value of trace substances";
-  parameter Modelica.Media.Interfaces.Types.ExtraProperty C_nominal[Medium.nC]=
-      fill(1E-2, Medium.nC)
-    "Nominal value of trace substances. (Set to typical order of magnitude.)";
+    "Start value of pressure" annotation(Dialog(tab="Initialization"));
+
+  //Mass flow rates to regulate zero flow
   parameter Modelica.SIunits.MassFlowRate m_flow_small_layer=1E-4*abs(m_flow_nominal_layer)
-    "Small mass flow rate for regularization of zero flow";
-   parameter Modelica.SIunits.MassFlowRate m_flow_small_layerHE=1E-4*abs(m_flow_nominal_HE)
-    "Small mass flow rate for regularization of zero flow";
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+   parameter Modelica.SIunits.MassFlowRate m_flow_small_layer_HE=1E-4*abs(m_flow_nominal_HE)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
 
 protected
   parameter Modelica.SIunits.Volume V = A * h;
