@@ -1,7 +1,22 @@
 ﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
-model MultizoneMoistAir "Multizone model with humidity balance"
+model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
   extends Multizone(redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange);
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange,
+      zone(
+      actDeg=actDeg,
+      XCO2_amb=XCO2_amb,
+      areaBod=areaBod,
+      metOnePerSit=metOnePerSit));
+
+  // co2 parameters
+  parameter Real actDeg=1.8 "Activity degree (Met units)";
+  parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
+    "Massfraction of CO2 in atmosphere (equals 403ppm)";
+  parameter Modelica.SIunits.Area areaBod=1.8
+    "Body surface area source SIA 2024:2015";
+  parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
+    "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]";
+
   Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or
     VAir > 0 "Ventilation and infiltration humidity"
      annotation (Placement(
@@ -85,4 +100,4 @@ equation
   </li>
 </ul>
 </html>"));
-end MultizoneMoistAir;
+end MultizoneMoistAirCO2;
