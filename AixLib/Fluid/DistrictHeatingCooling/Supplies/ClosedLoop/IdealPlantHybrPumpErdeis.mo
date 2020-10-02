@@ -8,18 +8,39 @@ model IdealPlantHybrPumpErdeis
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
       "Nominal pressure drop";
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
 
-      parameter Modelica.SIunits.Pressure dpPump_nominal(displayUnit="Pa")=30000
-      "Nominal pressure drop";
+  parameter Modelica.SIunits.PressureDifference dp_heater = 30000;
 
-      parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
+  parameter Modelica.SIunits.Pressure dpRes_nominal(displayUnit="Bar")=0.11
+    "Pressure difference of the resistance at nominal flow rate"
+    annotation(Dialog(group="Resistance"));
 
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
-        Medium,
+  parameter Modelica.SIunits.Velocity v_nominal = 1.5
+    "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
+    annotation(Dialog(group="Nominal condition"));
+
+  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default)
+    "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
+    annotation (Dialog(group="Advanced"));
+
+  parameter Modelica.SIunits.Length dh(displayUnit="m")=sqrt(4*m_flow_nominal/rho_default/v_nominal/Modelica.Constants.pi)
+    "Hydraulic pipe diameter"
+    annotation(Dialog(group="Pipe"));
+
+  parameter Modelica.SIunits.Length length(displayUnit="m")
+    "Pipe length"
+    annotation(Dialog(group="Pipe"));
+
+  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium
+      = Medium,
     QMin_flow=0,use_X_wSet=false,
-    dp_nominal=dp_nominal,
+    dp_nominal=dp_heater,
     m_flow_nominal=m_flow_nominal,
     use_TSet=true)
     annotation (Placement(transformation(extent={{40,70},{60,90}})));
@@ -33,7 +54,7 @@ model IdealPlantHybrPumpErdeis
         origin={-86,-50})));
   FixedResistances.PlugFlowPipe plugFlowPipe(
     redeclare package Medium = Medium,
-    dh=0.1,
+    dh=0.7,
     length=1700,
     m_flow_nominal=m_flow_nominal,
     dIns=0.01,
@@ -43,7 +64,7 @@ model IdealPlantHybrPumpErdeis
   FixedResistances.PressureDrop res(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
-    dp_nominal=35000)
+    dp_nominal=dpRes_nominal)
     annotation (Placement(transformation(extent={{-18,70},{2,90}})));
   Movers.FlowControlled_dp fan(
     redeclare package Medium = Medium,
