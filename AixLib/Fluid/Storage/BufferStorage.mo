@@ -303,7 +303,7 @@ model BufferStorage
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
     allowFlowReversal=true,
-    final m_flow_nominal=mHC1_flow_nominal,
+    final m_flow_nominal=mHC2_flow_nominal,
     TStart=TStart) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
