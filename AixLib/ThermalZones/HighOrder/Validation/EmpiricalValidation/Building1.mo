@@ -102,11 +102,11 @@ model Building1
   Modelica.Blocks.Sources.Constant Source_TsetC1(k=273.15 + 18)
     annotation (Placement(transformation(extent={{-94,-86},{-78,-70}})));
 
-  Modelica.Blocks.Sources.RealExpression MeanMeasuredTemp(y=
+  Modelica.Blocks.Sources.RealExpression MeasuredTemperatures(y=
         BuildingSpecifications.y[1] + BuildingSpecifications.y[2] +
         BuildingSpecifications.y[3])
     annotation (Placement(transformation(extent={{92,4},{106,20}})));
-  Modelica.Blocks.Interfaces.RealOutput MeanMeasuredTemperature
+  Modelica.Blocks.Interfaces.RealOutput MeanMeasuredTemp
     annotation (Placement(transformation(extent={{148,2},{168,22}})));
   Modelica.Blocks.Math.Gain gain(k=1/3)
     annotation (Placement(transformation(extent={{122,6},{134,18}})));
@@ -183,9 +183,9 @@ equation
     annotation (Line(points={{158,28},{158,28}}, color={0,0,127}));
   connect(roomTemperature, roomTemperature)
     annotation (Line(points={{158,92},{158,92}}, color={0,0,127}));
-  connect(MeanMeasuredTemp.y, gain.u)
+  connect(MeasuredTemperatures.y, gain.u)
     annotation (Line(points={{106.7,12},{120.8,12}}, color={0,0,127}));
-  connect(gain.y, MeanMeasuredTemperature)
+  connect(gain.y, MeanMeasuredTemp)
     annotation (Line(points={{134.6,12},{158,12}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-100},{160,100}})),
