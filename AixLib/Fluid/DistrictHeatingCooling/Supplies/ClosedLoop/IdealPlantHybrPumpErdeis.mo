@@ -18,6 +18,10 @@ model IdealPlantHybrPumpErdeis
     "Pressure difference of the resistance at nominal flow rate"
     annotation(Dialog(group="Resistance"));
 
+      parameter Modelica.SIunits.Pressure dpPump_nominal(displayUnit="Bar")=0.11
+    "Pressure difference of the pump at nominal flow rate"
+    annotation ();
+
   parameter Modelica.SIunits.Velocity v_nominal = 1.5
     "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
     annotation(Dialog(group="Nominal condition"));
@@ -37,8 +41,8 @@ model IdealPlantHybrPumpErdeis
     "Pipe length"
     annotation(Dialog(group="Pipe"));
 
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium
-      = Medium,
+  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
+        Medium,
     QMin_flow=0,use_X_wSet=false,
     dp_nominal=dp_heater,
     m_flow_nominal=m_flow_nominal,
