@@ -21,7 +21,7 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHPCO2 "Substation model 
     parameter Modelica.SIunits.Temperature T_coolingSupplySet "Supply Temperature of buildings cooling system, limit value for direct cooling system";
     parameter Modelica.SIunits.TemperatureDifference deltaT_coolingSet "Set temperature difference for cooling on the building site";
 
-    parameter Modelica.SIunits.Volume VTan=heatDemand_max/(cp_default * rho * deltaT_heatingSet)*(2*3600) "Tank volume (default: discharge 1 h with max heat demand)";
+    parameter Modelica.SIunits.Volume VTan=heatDemand_max/(cp_default * rho * deltaT_heatingSet)*(3*3600) "Tank volume (default: discharge 1 h with max heat demand)";
     parameter Modelica.SIunits.Temperature T_storage_max "Max. Storage Temperatur for charging";
     parameter Modelica.SIunits.Temperature T_storage_min "Min. Storage Temperatur for discharging";
 
