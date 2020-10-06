@@ -90,7 +90,7 @@ model ConvNLayerClearanceStar
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-28})));
-  parameter Modelica.SIunits.Area A = h * l - clearance;
+  parameter Modelica.SIunits.Area A = h * l - clearance annotation(Dialog(enable = false));
 
 equation
   connect(port_a, simpleNLayer.port_a)
