@@ -220,8 +220,12 @@ Assumptions:
  
 
 ", revisions="<html>
- <ul>
- <li><i>October 1, 2020</i> by Konstantina Xanthopoulou:<br/>Implemented</li>
- </ul>
- </html>"));
+<li>October 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    First Implementation.
+  </li>
+  <li style=\"list-style: none\">This is for <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/967\">#967</a>.
+  </li>
+</ul>
+</html>"));
 end Building1;

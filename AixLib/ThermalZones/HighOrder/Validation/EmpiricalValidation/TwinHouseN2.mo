@@ -55,12 +55,12 @@ model TwinHouseN2
     annotation (Placement(transformation(extent={{-62,32},{-48,46}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC1
     annotation (Placement(transformation(extent={{144,66},{154,76}})));
-  Modelica.Blocks.Sources.CombiTimeTable Heat(
+  Modelica.Blocks.Sources.CombiTimeTable HeatInput(
     tableOnFile=true,
     tableName="TwinHouse",
     fileName=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/TwinHouse.mat"),
-    columns={20,21,22,23,24,25,26})
+    columns={20,21,22,23,24,25,26}) "Heat input for every room"
     annotation (Placement(transformation(extent={{-94,-100},{-74,-80}})));
   Modelica.Blocks.Math.Sum sum1(nin=7)
     annotation (Placement(transformation(extent={{-64,-100},{-44,-80}})));
@@ -69,7 +69,7 @@ model TwinHouseN2
     tableName="TwinHouse",
     fileName=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/TwinHouse.mat"),
-    columns={31})
+    columns={31}) "Ventilation rate caused by mechanical ventilation system"
     annotation (Placement(transformation(extent={{-96,-12},{-80,4}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature Temp3
     annotation (Placement(transformation(extent={{-46,-39},{-35,-28}})));
@@ -84,7 +84,7 @@ model TwinHouseN2
     tableName="TwinHouse",
     fileName=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/TwinHouse.mat"),
-    columns={29})
+    columns={29}) "Temperature for mechanical ventilation rate"
     annotation (Placement(transformation(extent={{-96,-40},{-80,-24}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC annotation(Placement(transformation(extent={{-14,34},
             {-4,44}})));
@@ -108,6 +108,7 @@ model TwinHouseN2
     fileName=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/TwinHouse.mat"),
     columns={5,6,7,8,9,10,11,12,13})
+    "Measured temperatures for every roo, on the ground floor"
     annotation (Placement(transformation(extent={{104,32},{124,52}})));
   Modelica.Blocks.Interfaces.RealOutput N2_living_AT_h67cm
     annotation (Placement(transformation(extent={{168,36},{188,56}})));
@@ -161,7 +162,7 @@ equation
   connect(gain.y, roomTwinHouseN2.AirExchangeSUA) annotation (Line(points={{-47.5,
           -3},{-26,-3},{-26,-22},{33,-22},{33,-20.375}},
         color={0,0,127}));
-  connect(Heat.y, sum1.u)
+  connect(HeatInput.y, sum1.u)
     annotation (Line(points={{-73,-90},{-66,-90}}, color={0,0,127}));
   connect(add.y, gain1.u)
     annotation (Line(points={{-47.3,39},{-35,39}}, color={0,0,127}));
@@ -228,5 +229,39 @@ equation
             -160},{180,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-160},{180,
             100}})),
-    experiment(StopTime=3546000, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=3546000, __Dymola_Algorithm="Dassl"),
+    Documentation(info="<html>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Twin House N2 is part of the empirical validation: 
+<br>The Frauenhofer Institute for Building Physics (IBP) created two identical full scale buildings in Holzkirchen Germany in the course of reproducing building energy performances based on measurement data.</br>
+<br> The Twin House N2 was implemented as part of the IEA EBC Annex 58.</br>
+</p><p>Air exchange rates: </p>
+<ul>
+<li>n50 = 1.62 1/h due to air leakage</li>
+<li>n = 120 m3/h caused by mechanical ventilation system</li>
+</ul>
+<p><br>Building specifications give information about experimental schedule (temperatures are maintained through specified heat inputs in every room): </p>
+<ul>
+<li>Day 1-7: Initialization: constant 30&deg;C in each room </li>
+<li>Day 8-14: Constant 30&deg;C in each room </li>
+<li>Day 15-28:ROLBS sequence in living roomand no other heat inputs </li>
+<li>Day 29-35: Re-initialization constant 25&deg;C in each room</li>
+<li>Day 36-42: Free-float temperatures</li>
+</ul>
+<p><b><span style=\"color: #008000;\">Known Limitations</span> </b></p><p>The experiment takes place on the ground floor of Twin House N2. Measured temperatures within the cellar and attic are used as boundary conditions for the ground floor. </p>
+<p><b><span style=\"color: #008000;\">References</span> </b></p>
+<ul>
+<li>Empirical Whole Model Validation, Modelling Specification Test Case Twin_House_1, IEA ECB Annex 58, Validation of Building Energy Simulation ToolsSubtask 4 Version 6 </li>
+<li>IEA ECB Annex 58 </li>
+</ul>
+</html>",
+   revisions="<html>
+<li>October 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    First Implementation.
+  </li>
+  <li style=\"list-style: none\">This is for <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/967\">#967</a>.
+  </li>
+</ul>
+</html>"));
 end TwinHouseN2;
