@@ -63,7 +63,6 @@ model RoomTwinHouseN2 "N2"
             AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
             (WindowType=
                 AixLib.DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses())),
-
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses2(),
     windowarea=9.66,
     withSunblind=true,
@@ -75,6 +74,7 @@ model RoomTwinHouseN2 "N2"
         extent={{-6,-35},{6,35}},
         rotation=90,
         origin={4,-59})));
+
   Components.Walls.Wall wallNorth(
     use_shortWaveRadIn=true,
     solarDistribution=0.167,
@@ -290,8 +290,8 @@ equation
   connect(multiSum.y, Ceiling.solarRadWin) annotation (Line(points={{20.98,-34},
           {16,-34},{16,-46},{-46,-46},{-46,54},{-57.7333,54},{-57.7333,67.7}},
         color={0,0,127}));
-  connect(IW.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation
-    (Line(points={{34,24},{40,24},{40,-46},{-7,-46},{-7,-8}}, color={191,0,0}));
+  connect(IW.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (
+     Line(points={{34,24},{40,24},{40,-46},{-7,-46},{-7,-8}}, color={191,0,0}));
   connect(IW.port_outside, airload.port) annotation (Line(points={{29.9,24},{22,
           24},{22,-18},{10,-18}}, color={191,0,0}));
   connect(IW1.port_outside, airload.port) annotation (Line(points={{33.9,8},{22,
