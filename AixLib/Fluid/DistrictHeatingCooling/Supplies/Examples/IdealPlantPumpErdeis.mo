@@ -4,6 +4,7 @@ model IdealPlantPumpErdeis
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   ClosedLoop.IdealPlantErdeis                                       idealPlantErdeis(
     redeclare package Medium = Medium, m_flow_nominal=1,
+    dpRes_nominal=11000,
     length=1700)
     annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
   Demands.ClosedLoop.PumpControlledHeatPumpFixDeltaT
