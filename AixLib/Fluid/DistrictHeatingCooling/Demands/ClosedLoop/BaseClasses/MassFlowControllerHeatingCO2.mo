@@ -66,14 +66,15 @@ model MassFlowControllerHeatingCO2
         iconTransformation(extent={{762,118},{808,164}})));
     Modelica.Blocks.Logical.And charging "Requirements for storage charging"
     annotation (Placement(transformation(extent={{432,60},{452,80}})));
-    Modelica.Blocks.Logical.Hysteresis hysteresis_discharge(uLow=T_storage_min + 0.1, uHigh=
-        T_storage_max - 0.2)
+    Modelica.Blocks.Logical.Hysteresis hysteresis_discharge(uLow=T_storage_min,
+      uHigh=T_storage_min + 0.5)
                          "Temperature requirements for storage discharging"
     annotation (Placement(transformation(extent={{232,-102},{252,-82}})));
     Modelica.Blocks.Logical.Hysteresis hysteresis_charge(
-    uLow=T_storage_max - 2,
-    uHigh=T_storage_max - 0.5,
-    pre_y_start=true) "Temperature requirements for storage charging"
+    pre_y_start=true,
+    uLow=T_storage_max - 1,
+    uHigh=T_storage_max - 0.1)
+                      "Temperature requirements for storage charging"
     annotation (Placement(transformation(extent={{232,12},{252,32}})));
     Modelica.Blocks.Logical.And discharging "Requirements for storage discharging"
     annotation (Placement(transformation(extent={{424,-134},{444,-114}})));
