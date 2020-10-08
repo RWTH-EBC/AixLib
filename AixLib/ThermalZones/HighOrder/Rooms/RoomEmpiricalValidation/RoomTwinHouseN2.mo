@@ -138,8 +138,8 @@ model RoomTwinHouseN2 "N2"
         iconTransformation(extent={{-40,94},{-32,102}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort[5] "N,E,S,W,Hor"
     annotation (Placement(transformation(extent={{-120,46},{-100,66}})));
-  Components.DryAir.VarAirExchange
-    NaturalVentilation2(final V=room_V)
+  Components.DryAir.VarAirExchange Ventilation(final V=room_V)
+    "Air exchange with specified temperature"
     annotation (Placement(transformation(extent={{-30,4},{-18,16}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangeSUA annotation (Placement(
         transformation(
@@ -247,12 +247,12 @@ equation
   connect(SolarRadiationPort[4], wallWest.SolarRadiationPort) annotation (Line(
         points={{-110,60},{-68,60},{-68,26},{-66,26},{-66,25.0833},{-63.8,
           25.0833}}, color={255,128,0}));
-  connect(AirExchangeSUA, NaturalVentilation2.InPort1) annotation (Line(points=
-          {{-114,-32},{-70,-32},{-70,7},{-30.6,7}}, color={0,0,127}));
-  connect(thermSUA, NaturalVentilation2.port_a) annotation (Line(points={{-106,
-          -52},{-68,-52},{-68,8},{-50,8},{-50,10},{-30,10}}, color={191,0,0}));
-  connect(NaturalVentilation2.port_b, airload.port) annotation (Line(points={{
-          -18,10},{-14,10},{-14,-18},{10,-18}}, color={191,0,0}));
+  connect(AirExchangeSUA, Ventilation.InPort1) annotation (Line(points={{-114,-32},
+          {-70,-32},{-70,7},{-30.6,7}}, color={0,0,127}));
+  connect(thermSUA, Ventilation.port_a) annotation (Line(points={{-106,-52},{-68,
+          -52},{-68,8},{-50,8},{-50,10},{-30,10}}, color={191,0,0}));
+  connect(Ventilation.port_b, airload.port) annotation (Line(points={{-18,10},{
+          -14,10},{-14,-18},{10,-18}}, color={191,0,0}));
   connect(thermOutside, wallEast.port_outside) annotation (Line(points={{-100,
           100},{-68,100},{-68,-86},{88,-86},{88,-6},{60.3,-6}}, color={191,0,0}));
   connect(thermOutside, wallNorth.port_outside) annotation (Line(points={{-100,

@@ -113,8 +113,8 @@ model RoomBuilding1 "Building1"
     annotation (Placement(transformation(extent={{-120,48},{-100,68}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
     annotation (Placement(transformation(extent={{-36,-102},{-28,-94}})));
-  Components.DryAir.VarAirExchange
-    NaturalVentilation1(final V=room_V)
+  Components.DryAir.VarAirExchange Ventilation(final V=room_V)
+    "Air exchange with specified temperature"
     annotation (Placement(transformation(extent={{-30,4},{-18,16}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePortRoom
     "Air Exchange with Room " annotation (Placement(transformation(
@@ -192,12 +192,12 @@ equation
   connect(thermStar_Demux.portConvRadComb,floor. thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-8,-8},{-8,-50},{-42,-50},{-42,-62},{-32.5,
           -62},{-32.5,-70}}, color={191,0,0}));
-  connect(NaturalVentilation1.port_b, airload.port) annotation (Line(points={{
-          -18,10},{-16,10},{-16,-18},{10,-18}}, color={191,0,0}));
-  connect(AirExchangePortRoom, NaturalVentilation1.InPort1) annotation (Line(
-        points={{-112,-50},{-70,-50},{-70,7},{-30.6,7}}, color={0,0,127}));
-  connect(thermRoomNextDoor, NaturalVentilation1.port_a) annotation (Line(
-        points={{-104,-96},{-70,-96},{-70,10},{-30,10}}, color={191,0,0}));
+  connect(Ventilation.port_b, airload.port) annotation (Line(points={{-18,10},{
+          -16,10},{-16,-18},{10,-18}}, color={191,0,0}));
+  connect(AirExchangePortRoom, Ventilation.InPort1) annotation (Line(points={{-112,
+          -50},{-70,-50},{-70,7},{-30.6,7}}, color={0,0,127}));
+  connect(thermRoomNextDoor, Ventilation.port_a) annotation (Line(points={{-104,
+          -96},{-70,-96},{-70,10},{-30,10}}, color={191,0,0}));
   connect(thermalResistor.port_a, heatCapacitor.port)
     annotation (Line(points={{34,3},{34,16},{38,16}}, color={191,0,0}));
   connect(thermalResistor.port_b, airload.port) annotation (Line(points={{48,3},

@@ -233,6 +233,9 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Twin House N2 is part of the empirical validation: 
+<p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/TwinHouse_GroundFloor.png\"
+    alt=\"Room layout\"/></p>
+
 <br>The Frauenhofer Institute for Building Physics (IBP) created two identical full scale buildings in Holzkirchen Germany in the course of reproducing building energy performances based on measurement data.</br>
 <br> The Twin House N2 was implemented as part of the IEA EBC Annex 58.</br>
 </p><p>Air exchange rates: </p>
@@ -254,7 +257,16 @@ equation
 <li>Empirical Whole Model Validation, Modelling Specification Test Case Twin_House_1, IEA ECB Annex 58, Validation of Building Energy Simulation ToolsSubtask 4 Version 6 </li>
 <li>IEA ECB Annex 58 </li>
 </ul>
-</html>",
+</html>
+
+<html>
+ <h4><span style=\"color:#008000\">Overview</span></h4>
+ <p>Model for the bathroom.</p>
+ <h4><span style=\"color:#008000\">Concept</span></h4>
+ <p>The following figure presents the room&apos;s layout:</p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bath.png\"
+    alt=\"Room layout\"/></p>
+ </html>",
    revisions="<html>
 <li>October 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     First Implementation.
