@@ -37,7 +37,8 @@ model ClosedLoopSubstationHeatingDirectCooling
     substationHeatingDirectCooling(
     heatDemand_max=4000,
     deltaT_heatingSet(displayUnit="K") = 10,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=2,
     T_heatingGridSet=295.15,
     T_coolingGridSet=285.15,
