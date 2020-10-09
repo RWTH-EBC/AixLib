@@ -109,14 +109,14 @@ model SubstationHeatingDirectCooling "Substation model for bidirctional low-temp
                                    realExpression1(y=(cp_default*(
         T_heatingGridSet - senTem4.T)))
     annotation (Placement(transformation(extent={{132,44},{120,56}})));
-  Sensors.MassFlowRate              senMasFlo_GridHeat(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_GridHeat(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-186,-10},{-166,10}})));
-  Sensors.MassFlowRate              senMasFlo_GridCool(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_GridCool(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{172,-10},{192,10}})));
-  Sensors.MassFlowRate              senMasFlo_HeatPump(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_HeatPump(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-94,-34},{-74,-14}})));
   Sensors.MassFlowRate              senMasFlo(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{98,14},{78,34}})));
