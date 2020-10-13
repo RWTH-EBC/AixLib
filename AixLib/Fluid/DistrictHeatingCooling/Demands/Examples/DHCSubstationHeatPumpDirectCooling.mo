@@ -34,7 +34,7 @@ model DHCSubstationHeatPumpDirectCooling
         7200,0; 7200,3000; 10800,4000; 14400,4000; 14400,2500; 18000,2500])
     annotation (Placement(transformation(extent={{58,36},{38,56}})));
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling
-    substationHeatingDirectCooling(
+    DHCsubstationHeatingDirectCooling(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
 
     m_flow_nominal=2,
@@ -54,14 +54,14 @@ equation
     annotation (Line(points={{-66,8},{-66,14},{-48,14}}, color={0,127,255}));
   connect(T_coldLine.y, coldLine.T_in)
     annotation (Line(points={{59,82},{80,82},{80,54}}, color={0,0,127}));
-  connect(substationHeatingDirectCooling.port_b, senTem1.port_a) annotation (
-      Line(points={{30,14},{42,14}},                 color={0,127,255}));
-  connect(senTem.port_b, substationHeatingDirectCooling.port_a)
-    annotation (Line(points={{-28,14},{-18,14}},          color={0,127,255}));
-  connect(coolingDemand.y, substationHeatingDirectCooling.coolingDemand)
-    annotation (Line(points={{-29,46},{-26,46},{-26,20},{-19.8,20}},color={0,0,
+  connect(DHCsubstationHeatingDirectCooling.port_b, senTem1.port_a)
+    annotation (Line(points={{30,14},{42,14}}, color={0,127,255}));
+  connect(senTem.port_b, DHCsubstationHeatingDirectCooling.port_a)
+    annotation (Line(points={{-28,14},{-18,14}}, color={0,127,255}));
+  connect(coolingDemand.y, DHCsubstationHeatingDirectCooling.cooDem)
+    annotation (Line(points={{-29,46},{-26,46},{-26,20},{-19.8,20}}, color={0,0,
           127}));
-  connect(substationHeatingDirectCooling.heatDemand, heatDemand.y) annotation (
+  connect(DHCsubstationHeatingDirectCooling.heaDem, heatDemand.y) annotation (
       Line(points={{29.4,22.8},{34,22.8},{34,46},{37,46}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
