@@ -1,4 +1,4 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
 function NusseltNumberStephan
   "calculates nusselt number out of reynolds and prandtl number according to Stephan, K."
 

@@ -16,6 +16,9 @@ model Membrane "model of membrane"
   parameter Modelica.SIunits.Length thicknessMem
     "thickness of membrane"
     annotation(Dialog(tab="Geometry"));
+  parameter Boolean couFloArr=true
+    "true: counter-flow arrangement; false: quasi-counter-flow arrangement"
+     annotation(Dialog(tab="Geometry"));
   parameter Modelica.SIunits.SpecificHeatCapacity cpMem
     "mass weighted heat capacity of membrane"
     annotation(Dialog(tab="Membrane properties",group="Heat Transfer"));
@@ -58,11 +61,15 @@ model Membrane "model of membrane"
   Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)") if
        not useConPer "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+  Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouSens if not couFloArr
+    "coefficient for heat transfer reduction due to cross-flow portion";
+  Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouLats if not couFloArr
+    "coefficient for mass transfer reduction due to cross-flow portion";
 
   // Heat and Mass Transfer models
-  replaceable model HeatTransfer=BaseClasses.HeatTransfer.MembraneHeatTransfer
+  model HeatTransfer=BaseClasses.HeatTransfer.MembraneHeatTransfer
     "heat transfer model in membrane";
-  replaceable model MassTransfer=BaseClasses.MassTransfer.MembraneMassTransfer
+  model MassTransfer=BaseClasses.MassTransfer.MembraneMassTransfer
     "mass transfer model in membrane";
 
   HeatTransfer heatTransfer(
@@ -75,7 +82,8 @@ model Membrane "model of membrane"
     nParallel=nParallel,
     T_start=T_start,
     dT_start=dT_start,
-    n=nNodes);
+    n=nNodes,
+    coeCroCous=coeCroCouSenInts);
 
   MassTransfer massTransfer(
     thicknessMem=thicknessMem,
@@ -86,7 +94,8 @@ model Membrane "model of membrane"
     nParallel=nParallel,
     p_start=p_start,
     dp_start=dp_start,
-    n=nNodes);
+    n=nNodes,
+    coeCroCous=coeCroCouLatInts);
 
   // Ports
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPorts_a[nNodes]
@@ -105,11 +114,24 @@ model Membrane "model of membrane"
 protected
   Modelica.Blocks.Interfaces.RealInput perMemInt(unit="mol/(m.s.Pa)");
 
+  Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouSenInts
+    "coefficient for heat transfer reduction due to cross-flow portion";
+  Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouLatInts
+    "coefficient for heat transfer reduction due to cross-flow portion";
+
 equation
   if useConPer then
     perMemInt = conPerMem;
   end if;
+  if couFloArr then
+    coeCroCouSenInts = fill(1,nNodes);
+    coeCroCouLatInts = fill(1,nNodes);
+  end if;
+  connect(coeCroCouSens,coeCroCouSenInts);
+  connect(coeCroCouLats,coeCroCouLatInts);
+
   connect(perMemInt, perMem);
+
   connect(heatPorts_a,heatTransfer.heatPorts_a);
   connect(heatPorts_b,heatTransfer.heatPorts_b);
 

@@ -52,5 +52,12 @@ the boundary temperatures <code>heatPorts[n].T</code>, and the heat flow rates <
 <ul>
 <li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
-</html>"));
+</html>"),
+         Icon(graphics={             Rectangle(
+            extent={{-80,60},{80,-60}},
+            pattern=LinePattern.None,
+            fillColor={255,0,0},
+            fillPattern=FillPattern.HorizontalCylinder), Text(
+            extent={{-40,22},{38,-18}},
+            textString="%name")}));
 end PartialHeatTransfer;

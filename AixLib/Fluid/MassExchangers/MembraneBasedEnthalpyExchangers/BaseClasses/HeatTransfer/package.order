@@ -3,6 +3,5 @@ PartialFlowHeatTransfer
 PartialDuctHeatTransfer
 LocalDuctConvectiveHeatFlow
 MembraneHeatTransfer
-NusseltNumberMuzychka
-NusseltNumberStephan
 AdsorptionEnthalpy
+CrossFlowReduction

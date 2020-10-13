@@ -1,13 +1,17 @@
 within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
 model LocalDuctConvectiveMassFlow
-  "heat transfer model for locally resolved rectangular ducts"
+  "mass transfer model for locally resolved rectangular ducts in quasi-counter 
+  flow arrangement"
   extends PartialDuctMassTransfer;
 
   parameter Real nParallel "number of parallel ducts";
 
+  input Real[n] coeCroCous
+    "coefficient for mass transfer reduction due to cross-flow portion";
+
 equation
-  m_flows={betas[i]*surfaceAreas[i]*(massPorts[i].p - ps[i])*nParallel
-    for i in 1:n};
+  m_flows={kCons[i]*coeCroCous[i]*surfaceAreas[i]*(massPorts[i].p - ps[i])
+    *nParallel for i in 1:n};
 
   annotation (Documentation(info="<html>
 <p>This mass transfer model calculates the convective mass flow for local distribution using the function convectiveMassTransferCoefficient. The mass flow is calculated as follows.</p>

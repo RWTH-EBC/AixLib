@@ -1,4 +1,4 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
 function SherwoodNumberStephan
   "calculates sherwood number out of reynolds and schmidt number according to Stephan, K."
 

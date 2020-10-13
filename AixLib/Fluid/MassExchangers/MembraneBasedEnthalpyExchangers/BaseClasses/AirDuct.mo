@@ -26,6 +26,9 @@ model AirDuct "model of the air duct"
   parameter Modelica.SIunits.Length heightDuct
     "height of duct"
      annotation(Dialog(tab="Geometry"));
+  parameter Boolean couFloArr=true
+    "true: counter-flow arrangement; false: quasi-counter-flow arrangement"
+     annotation(Dialog(tab="Geometry"));
 
   // Heat and Mass transfer
   parameter Boolean uniWalTem
@@ -35,7 +38,8 @@ model AirDuct "model of the air duct"
     "true if local Nusselt/Sherwood number, else average"
      annotation(Dialog(tab="Heat and Mass transfer"));
   parameter Boolean recDuct
-    "true if rectangular duct is used for Nusselt/Sherwood number calculation, else flat gap is used."
+    "true if rectangular duct is used for Nusselt/Sherwood number calculation, 
+    else flat gap is used."
      annotation(Dialog(tab="Heat and Mass transfer"));
 
   // Advanced
@@ -68,7 +72,8 @@ model AirDuct "model of the air duct"
     annotation (Dialog(tab="Initialization", enable=Medium.nC > 0));
 
   // Variables
-  Modelica.SIunits.Length[nNodes] lengths = fill(lengthDuct/nNodes,nNodes)
+  Modelica.SIunits.Length[nNodes] lengths=
+    {i*(lengthDuct/((nNodes+1)*nNodes/2)) for i in 1:nNodes}
     "length of segements in flow direction";
   Modelica.SIunits.Area[nNodes] croSecs = fill(heightDuct*widthDuct,nNodes)
     "cross section of duct segments";
@@ -85,16 +90,19 @@ model AirDuct "model of the air duct"
     vol[i].T,
     vol[i].Xi) for i in 1:nNodes};
 
-  // variables
   Modelica.SIunits.SpecificEnthalpy dhAds=adsorptionEnthalpy.dhAds
     "adsorption enthalpy";
 
-  // Heat and mass transfer models
-  replaceable model HeatTransfer =
-    BaseClasses.HeatTransfer.LocalDuctConvectiveHeatFlow;
+  // Inputs
+  Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouSens if not couFloArr
+    "coefficient for heat transfer reduction due to cross-flow portion";
+  Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouLats if not couFloArr
+    "coefficient for mass transfer reduction due to cross-flow portion";
 
-  replaceable model MassTransfer =
-    BaseClasses.MassTransfer.LocalDuctConvectiveMassFlow;
+  // Heat and mass transfer models
+  model HeatTransfer = BaseClasses.HeatTransfer.LocalDuctConvectiveHeatFlow;
+
+  model MassTransfer = BaseClasses.MassTransfer.LocalDuctConvectiveMassFlow;
 
   HeatTransfer heatTransfer(
     redeclare package Medium=Medium,
@@ -109,7 +117,8 @@ model AirDuct "model of the air duct"
     nParallel=nParallel,
     uniWalTem=uniWalTem,
     local=local,
-    recDuct=recDuct);
+    recDuct=recDuct,
+    coeCroCous=coeCroCouSenInts);
 
   MassTransfer massTransfer(
     redeclare package Medium=Medium,
@@ -125,7 +134,8 @@ model AirDuct "model of the air duct"
     nParallel=nParallel,
     uniWalTem=uniWalTem,
     local=local,
-    recDuct=recDuct);
+    recDuct=recDuct,
+    coeCroCous=coeCroCouLatInts);
 
 
   AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol[nNodes](
@@ -164,8 +174,8 @@ model AirDuct "model of the air duct"
   Utilities.MassTransfer.MassPort massPorts[nNodes]
     annotation (Placement(transformation(extent={{28,88},{52,112}}),
         iconTransformation(extent={{14,72},{68,126}})));
-  Modelica.Blocks.Sources.RealExpression Q_flow[nNodes](
-    y=heatTransfer.heatPorts.Q_flow-massTransfer.massPorts.m_flow*dhAds)
+  Modelica.Blocks.Sources.RealExpression Q_flow[nNodes](y=heatTransfer.heatPorts.Q_flow
+         - massTransfer.massPorts.m_flow*dhAds)
      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,origin={-86,-60})));
   Modelica.Blocks.Sources.RealExpression mWat_flow[nNodes](
@@ -187,9 +197,10 @@ protected
   constant Modelica.SIunits.MolarMass M_steam = 0.01802 "Molar mass of steam";
   constant Modelica.SIunits.MolarMass M_air = 0.028949 "Molar mass of dry air";
 
-  replaceable function SherwoodNumber =
-    BaseClasses.MassTransfer.SherwoodNumberStephan
-    "Sherwood number function";
+  Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouSenInts
+    "coefficient for heat transfer reduction due to cross-flow portion";
+  Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouLatInts
+    "coefficient for heat transfer reduction due to cross-flow portion";
 
   BaseClasses.HeatTransfer.AdsorptionEnthalpy
     adsorptionEnthalpy(
@@ -209,6 +220,13 @@ protected
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
 
 equation
+  if couFloArr then
+    coeCroCouSenInts = fill(1,nNodes);
+    coeCroCouLatInts = fill(1,nNodes);
+  end if;
+  connect(coeCroCouSens,coeCroCouSenInts);
+  connect(coeCroCouLats,coeCroCouLatInts);
+
   connect(heatPorts, heatTransfer.heatPorts);
   connect(massPorts, massTransfer.massPorts);
   connect(port_a, preDro.port_a) annotation (Line(
@@ -237,7 +255,9 @@ equation
         Rectangle(
           extent={{-100,90},{100,-100}},
           lineColor={0,0,0},
-          pattern=LinePattern.Dash),
+          pattern=LinePattern.Dash,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Line(
           points={{-100,90},{-100,100}},
           color={0,0,0},

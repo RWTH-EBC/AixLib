@@ -1,6 +1,5 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
-function CollisionIntegral
-  "calculates collision integral for water in air"
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
+function CollisionIntegral "calculates collision integral for water in air"
 
   input Modelica.SIunits.Temperature T;
 

@@ -43,6 +43,10 @@ model MembraneHeatTransfer
   parameter Modelica.SIunits.TemperatureDifference dT_start
     "start value for temperature difference between heatPorts_a and heatPorst_b";
 
+  // Inputs
+  input Real[n] coeCroCous
+    "coefficient for heat transfer reduction due to cross-flow portion";
+
   // Mass
   Modelica.SIunits.Mass[n] m=fill(mMem/n, n)
     "Distribution of wall mass";
@@ -81,16 +85,23 @@ equation
       cpMem*m[i]*der(Ts[i]) =
         heatPorts_a[i].Q_flow + heatPorts_b[i].Q_flow;
     end if;
-    heatPorts_a[i].Q_flow = lambdaMem / thicknessMem * (Ta[i]-Ts[i]) *
-      areaMem/n;
-    heatPorts_b[i].Q_flow = lambdaMem / thicknessMem * (Tb[i]-Ts[i]) *
-      areaMem/n;
+    heatPorts_a[i].Q_flow = lambdaMem / thicknessMem * coeCroCous[i] *
+      (Ta[i]-Ts[i]) * areaMem/n;
+    heatPorts_b[i].Q_flow = lambdaMem / thicknessMem * coeCroCous[i] *
+      (Tb[i]-Ts[i]) * areaMem/n;
   end for;
 
   Ta = heatPorts_a.T;
   Tb = heatPorts_b.T;
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+                                     Rectangle(
+            extent={{-80,60},{80,-60}},
+            pattern=LinePattern.None,
+            fillColor={255,0,0},
+            fillPattern=FillPattern.HorizontalCylinder), Text(
+            extent={{-40,22},{38,-18}},
+            textString="%name")}),                               Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>This heat transfer model calculates the locally resolved heat flow through a thin membrane using the thermal conductivity <i>&lambda;<sub>Membrane</sub> </i>and the membrane thickness <i>&delta;<sub>Membrane</sub> </i>.</p>

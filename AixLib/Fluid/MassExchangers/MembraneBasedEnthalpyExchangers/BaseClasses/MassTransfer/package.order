@@ -3,7 +3,4 @@ PartialFlowMassTransfer
 PartialDuctMassTransfer
 LocalDuctConvectiveMassFlow
 MembraneMassTransfer
-SherwoodNumberMuzychka
-SherwoodNumberStephan
-CollisionIntegral
-DiffusionCoefficient
+CrossFlowReduction

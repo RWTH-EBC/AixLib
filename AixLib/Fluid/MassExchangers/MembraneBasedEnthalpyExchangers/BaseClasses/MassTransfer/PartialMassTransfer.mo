@@ -30,7 +30,8 @@ partial model PartialMassTransfer
   // Heat ports
   AixLib.Utilities.MassTransfer.MassPort[n] massPorts
     "Heat port to component boundary" annotation (Placement(transformation(
-          extent={{-10,60},{10,80}}), iconTransformation(extent={{-10,60},{10,80}})));
+          extent={{-14,56},{14,84}}), iconTransformation(extent={{-16,54},{16,
+            86}})));
 
   // Variables
   input Modelica.SIunits.PartialPressure[n] ps "partial pressure at states";
@@ -50,5 +51,12 @@ the boundary mass fractions <code>massPorts[n].X</code>, and the mass flow rates
 <ul>
 <li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
-</html>"));
+</html>"), Icon(graphics={           Rectangle(
+            extent={{-80,60},{80,-60}},
+            pattern=LinePattern.None,
+            fillColor={0,140,72},
+            fillPattern=FillPattern.HorizontalCylinder,
+          lineColor={0,0,0}),                            Text(
+            extent={{-40,22},{38,-18}},
+            textString="%name")}));
 end PartialMassTransfer;

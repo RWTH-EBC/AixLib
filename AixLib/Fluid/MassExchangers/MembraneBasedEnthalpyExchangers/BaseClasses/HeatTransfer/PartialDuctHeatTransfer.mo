@@ -45,15 +45,15 @@ equation
           rho=rhos[i],
           mu=mus[i],
           v=vs[i],
-          D=croSecs[i]);
-      Nus[i] = NusseltNumberMuzychka(
-              Re=Res[i],
-              Pr=Prs[i],
-              aspRat=aspRats[i],
-              zStern=zSterns[i],
-              uniWalTem=uniWalTem,
-              local=local,
-              gamma=0.1);
+          D=2*croSecs[i]);
+      Nus[i] =Functions.NusseltNumberMuzychka(
+        Re=Res[i],
+        Pr=Prs[i],
+        aspRat=aspRats[i],
+        zStern=zSterns[i],
+        uniWalTem=uniWalTem,
+        local=local,
+        gamma=0.1);
       hCons[i] = (Nus[i]*lambdas[i])/sqrt(croSecs[i]);
     else
       Res[i] =
@@ -62,11 +62,11 @@ equation
           mu=mus[i],
           v=vs[i],
           D=2*heights[i]);
-      Nus[i] = NusseltNumberStephan(
-              Re=Res[i],
-              Pr=Prs[i],
-              length=lengths[i],
-              dimension=2*heights[i]);
+      Nus[i] =Functions.NusseltNumberStephan(
+        Re=Res[i],
+        Pr=Prs[i],
+        length=lengths[i],
+        dimension=2*heights[i]);
       hCons[i] = (Nus[i]*lambdas[i])/(2*heights[i]);
     end if;
   end for;

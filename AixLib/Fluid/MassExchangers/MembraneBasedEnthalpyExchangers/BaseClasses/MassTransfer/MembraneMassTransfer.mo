@@ -1,5 +1,6 @@
 ﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
-model MembraneMassTransfer "model for mass transfer through membrane"
+model MembraneMassTransfer "model for mass transfer through membrane in 
+  quasi-counter flow arrangement"
 
   // General Parameter
   parameter Integer n = 2
@@ -30,12 +31,8 @@ model MembraneMassTransfer "model for mass transfer through membrane"
   // Inputs
   input Real perMem(unit="mol/(m.s.Pa)") "membrane's permeability in Barrer";
 
-//   // partial pressures
-//   Modelica.SIunits.PartialPressure[n] p_b(each start=p_start+0.5*dp_start);
-//   Modelica.SIunits.PartialPressure[n] p_a(each start=p_start-0.5*dp_start);
-//
-//   Modelica.SIunits.MolarMass[n] M_a "molar mass of moist air at side a";
-//   Modelica.SIunits.MolarMass[n] M_b "molar mass of moist air at side b";
+  input Real[n] coeCroCous
+    "coefficient for mass transfer reduction due to cross-flow portion";
 
   // Ports
   Utilities.MassTransfer.MassPort[n] massPorts_a
@@ -60,17 +57,19 @@ protected
 equation
   for i in 1:n loop
     0 = massPorts_a[i].m_flow + massPorts_b[i].m_flow;
-    massPorts_a[i].m_flow = (perMem * cCon * M_steam) *
+    massPorts_a[i].m_flow = (perMem * cCon * M_steam) * coeCroCous[i] *
       (massPorts_a[i].p - massPorts_b[i].p) / thicknessMem * areaMem/n;
-
-//     p_a[i] = massPorts_a[i].p * massPorts_a[i].X * (M_a[i]/M_steam);
-//     p_b[i] = massPorts_b[i].p * massPorts_b[i].X * (M_b[i]/M_steam);
-
-//     M_a[i] = 1/(massPorts_a[i].X / M_steam + (1 - massPorts_a[i].X) / M_air);
-//     M_b[i] = 1/(massPorts_b[i].X / M_steam + (1 - massPorts_b[i].X) / M_air);
   end for;
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+                                     Rectangle(
+            extent={{-80,60},{80,-60}},
+            pattern=LinePattern.None,
+            fillColor={0,140,72},
+            fillPattern=FillPattern.HorizontalCylinder,
+          lineColor={0,0,0}),                            Text(
+            extent={{-40,22},{38,-18}},
+            textString="%name")}),                               Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>This model calculates the locally distributed mass transfer through a thin membrane. The model is based on the Solution-Diffusion model. It uses the permeability to describe the process of sorption, diffusion and desorption of the water vapour. For detailed information see [1].</p>

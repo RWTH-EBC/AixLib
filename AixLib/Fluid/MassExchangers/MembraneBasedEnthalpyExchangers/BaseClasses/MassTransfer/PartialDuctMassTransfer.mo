@@ -16,7 +16,7 @@ partial model PartialDuctMassTransfer
   parameter Boolean recDuct
     "true if rectangular duct is used for Sherwood number calculation, else flat gap is used.";
 
-  Real[n] betas;
+  Real[n] kCons;
 
   // Variables
   Modelica.SIunits.ThermalConductivity[n] lambdas "thermal conductivity of medium";
@@ -47,13 +47,12 @@ equation
   for i in 1:n loop
     croSecs[i] = heights[i]*(widths[i]/nWidth);
     aspRats[i] = heights[i]/widths[i];
-    omegas[i] = CollisionIntegral(
-      T=Medium.temperature(states[i]));
-    Ds[i] = DiffusionCoefficient(
+    omegas[i] =Functions.CollisionIntegral(T=Medium.temperature(states[i]));
+    Ds[i] =Functions.DiffusionCoefficient(
       M_1=M_air,
       M_2=M_steam,
       T=Medium.temperature(states[i]),
-      p = 1,
+      p=1,
       sigma1=sigmaAir,
       sigma2=sigmaSteam,
       omega=omegas[i]);
@@ -66,7 +65,7 @@ equation
       mu=mus[i],
       v=vs[i],
       D=sqrt(croSecs[i]));
-      Shs[i]=SherwoodNumberMuzychka(
+      Shs[i]=Functions.SherwoodNumberMuzychka(
         Re=Res[i],
         Sc=Scs[i],
         aspRat=aspRats[i],
@@ -74,7 +73,7 @@ equation
         uniWalTem=uniWalTem,
         local=local,
         gamma=0.1);
-      betas[i] = (Shs[i]*rhos[i]*Ds[i])/sqrt(croSecs[i]);
+      kCons[i] = (Shs[i]*rhos[i]*Ds[i])/sqrt(croSecs[i]);
     else
       Res[i] =
       Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
@@ -82,12 +81,12 @@ equation
         mu=mus[i],
         v=vs[i],
         D=2*heights[i]);
-      Shs[i]=SherwoodNumberStephan(
+      Shs[i]=Functions.SherwoodNumberStephan(
         Re=Res[i],
         Sc=Scs[i],
         length=lengths[i],
         dimension=2*heights[i]);
-      betas[i] = (Shs[i]*rhos[i]*Ds[i])/(2*heights[i]);
+      kCons[i] = (Shs[i]*rhos[i]*Ds[i])/(2*heights[i]);
     end if;
   end for;
 
