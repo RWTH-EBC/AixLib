@@ -96,14 +96,6 @@ model EnthalpyExchanger
     "constant permeability of membrane if useConPer=true"
     annotation(Dialog(tab="Advanced",enable=useConPer));
 
-  //----------------------Housing----------------------------------------
-  parameter Modelica.SIunits.SpecificHeatCapacity cpHou
-    "mass weighted heat capacity of housing"
-    annotation(Dialog(tab="Housing",group="Heat and mass transfer"));
-  parameter Modelica.SIunits.Mass mHou
-    "mass of housing"
-    annotation(Dialog(tab="Housing",group="Others"));
-
   // Initialization
   parameter Modelica.SIunits.MassFlowRate m_flow_start = m_flow_nominal
     "Start value for mass flow rate"
