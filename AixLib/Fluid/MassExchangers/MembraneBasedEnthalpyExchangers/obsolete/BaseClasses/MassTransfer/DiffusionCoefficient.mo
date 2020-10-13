@@ -33,15 +33,19 @@ algorithm
 
   D_12 := 1.8583E-7 * T^(3/2)/(p*Omega_12) * (1/M_1 + 1/M_2)^(1/2);
 
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-August 21, 2018, by Martin Kremer:<br/>
-First implementation.
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>This function calculates the diffusion coefficient of water vapour into air using the collision integral.</p>
-<p align=\"center\"><i>D = 1.8583 &middot; 10<sup> -7</sup> T<sup> 1.5</sup> &frasl; (p &Omega; ) (1/M<sub>air</sub> + 1/M<sub>steam</sub> )<sup> 0.5</sup> </i></p>
+<p>
+  This function calculates the diffusion coefficient of water vapour
+  into air using the collision integral.
+</p>
+<p style=\"text-align:center;\">
+  <i>D = 1.8583 · 10 <sup>-7</sup> T <sup>1.5</sup> ⁄ (p Ω )
+  (1/M<sub>air</sub> + 1/M<sub>steam</sub> ) <sup>0.5</sup></i>
+</p>
 </html>"));
 end DiffusionCoefficient;

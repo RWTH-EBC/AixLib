@@ -177,15 +177,32 @@ equation
 
   annotation (
     preferredView="info",
-    Documentation(info="<html>
-<p>This model provides the definition of the air duct in a parallel membrane enthalpy exchanger. It is based on the <a href=\"modelica://MembraneBasedEnthalpyExchanger_KoesterAVT/CrossCounterFlow/DistributedVolumes/Interfaces/PartialTwoPortFlowMassExchange.mo\">PartialTwoPortMassExchange</a> model.</p>
-<p>The geometry of the air duct is defined in this model. Moreover the flow model, such as the convective heat and mass transfer in the air duct are part of this model.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model provides the definition of the air duct in a parallel
+  membrane enthalpy exchanger. It is based on the <a href=
+  \"modelica://MembraneBasedEnthalpyExchanger_KoesterAVT/CrossCounterFlow/DistributedVolumes/Interfaces/PartialTwoPortFlowMassExchange.mo\">
+  PartialTwoPortMassExchange</a> model.
+</p>
+<p>
+  The geometry of the air duct is defined in this model. Moreover the
+  flow model, such as the convective heat and mass transfer in the air
+  duct are part of this model.
+</p>
 <ul>
-<li>April 23, 2019, by Martin Kremer:<br>Changing mean state definition for heat transfer calculation for n > 2. </li>
-<li>November 23, 2018, by Martin Kremer:<br>Changing adsorption enthalpy dhAds from parameter to input for usage of adsorption enthalpy model.</li>
-<li>September 4, 2018, by Martin Kremer:<br>Adding cross-flow coefficient for reduced heat and mass transfer.</li>
-<li>August 21, 2018, by Martin Kremer:<br>First Implementation</li>
+  <li>April 23, 2019, by Martin Kremer:<br/>
+    Changing mean state definition for heat transfer calculation for n
+    &gt; 2.
+  </li>
+  <li>November 23, 2018, by Martin Kremer:<br/>
+    Changing adsorption enthalpy dhAds from parameter to input for
+    usage of adsorption enthalpy model.
+  </li>
+  <li>September 4, 2018, by Martin Kremer:<br/>
+    Adding cross-flow coefficient for reduced heat and mass transfer.
+  </li>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First Implementation
+  </li>
 </ul>
 </html>"),
     Icon(graphics={

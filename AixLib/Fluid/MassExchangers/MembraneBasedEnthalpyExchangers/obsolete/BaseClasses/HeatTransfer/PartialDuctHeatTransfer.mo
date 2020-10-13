@@ -58,16 +58,41 @@ equation
     alphas[i] = (Nus[i] * lambdas[i])/sqrt(crossSections[i]);
   end for;
 
-  annotation (Documentation(info="<html>
-<p>This model calculates the convective heat transfer coefficient <i>&alpha;</i> using the nusselt number correlation for rectangular air ducts by Muzychka and Yovanovich [1] (see function NusseltNumberMuzychka).</p>
-<p>The air density, dynamic viscosity, thermal conductivity and Prandtl number are calculated as state variables. The Reynolds number is calculated using the density, dynmaic viscosity, flow velocity and the duct&apos;s cross section as characteristic length. The cross section is calculated using the duct&apos;s height and width.</p>
-<p>The convective heat transfer coefficient is calculated as follows.</p>
-<p align=\"center\"><i>&alpha; = (Nu &lambda; ) &frasl; &radic;A<sub>cross-section</sub> </i></p>
-<p><br><br><br><br>[1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004</p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  This model calculates the convective heat transfer coefficient
+  <i>α</i> using the nusselt number correlation for rectangular air
+  ducts by Muzychka and Yovanovich [1] (see function
+  NusseltNumberMuzychka).
+</p>
+<p>
+  The air density, dynamic viscosity, thermal conductivity and Prandtl
+  number are calculated as state variables. The Reynolds number is
+  calculated using the density, dynmaic viscosity, flow velocity and
+  the duct's cross section as characteristic length. The cross section
+  is calculated using the duct's height and width.
+</p>
+<p>
+  The convective heat transfer coefficient is calculated as follows.
+</p>
+<p style=\"text-align:center;\">
+  <i>α = (Nu λ ) ⁄ √A<sub>cross-section</sub></i>
+</p>
+<p>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  [1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced
+  Convection Heat Transfer in the Combined Entry Region of Non-Circular
+  Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004
+</p>
 <ul>
-<li>April 23, 2019, by Martin Kremer:<br>Changes function to model.</li>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation.</li>
+  <li>April 23, 2019, by Martin Kremer:<br/>
+    Changes function to model.
+  </li>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"), Icon(graphics={           Rectangle(
             extent={{-80,60},{80,-60}},

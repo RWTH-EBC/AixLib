@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
 model CrossFlowReduction
   "model that calculates reduction factor for heat transfer in quasi-counter flow arrangement"
 
@@ -48,14 +48,29 @@ equation
             extent={{-40,22},{38,-18}},
             textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=
            false)),
-    Documentation(info="<html>
-<p>This model calculates a reduction factor for a cross-counter-flow arrangement. The calculation is based on the Efficiency-NTU-Method.</p>
-<p>The number of transfer units <i>NTU</i> is calculated with the total heat transfer coeeficient <i>h<sub>tot</sub></i>, the surface area <i>A</i> and the minimum heat capacity flow consiting of the mass flow rate <i>ṁ</i> and the specific heat capacitiy <i>c<sub>p</sub></i>.</p>
-<p align=\"center\"><i>NTU = (h<sub>tot</sub> A) &frasl; (ṁ c<sub>p</sub>)<sub>min</sub> </i></p>
-<p>Using the number of transfer units and the cross-flow portion of the whole transfer area the coeefficient for the heat transfer reduction is calculated.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model calculates a reduction factor for a cross-counter-flow
+  arrangement. The calculation is based on the Efficiency-NTU-Method.
+</p>
+<p>
+  The number of transfer units <i>NTU</i> is calculated with the total
+  heat transfer coeeficient <i>h<sub>tot</sub></i>, the surface area
+  <i>A</i> and the minimum heat capacity flow consiting of the mass
+  flow rate <i>ṁ</i> and the specific heat capacitiy
+  <i>c<sub>p</sub></i>.
+</p>
+<p style=\"text-align:center;\">
+  <i>NTU = (h<sub>tot</sub> A) ⁄ (ṁ c<sub>p</sub>)<sub>min</sub></i>
+</p>
+<p>
+  Using the number of transfer units and the cross-flow portion of the
+  whole transfer area the coeefficient for the heat transfer reduction
+  is calculated.
+</p>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end CrossFlowReduction;

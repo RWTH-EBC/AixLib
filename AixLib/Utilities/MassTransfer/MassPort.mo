@@ -26,11 +26,12 @@ connector MassPort "connector for mass transfer"
           fillPattern=FillPattern.None,
           textString="%name",
           textStyle={TextStyle.Bold})}),
-    Documentation(info="<html>
-Connector for mass transfer of one component of a multicomponent mixture.
-</html>", revisions="<html>
+    Documentation(info="<html>Connector for mass transfer of one component of a multicomponent
+mixture.
 <ul>
-<li>November 15, 2019, by Martin Kremer:<br/>First implementation.</li>
+  <li>November 15, 2019, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end MassPort;

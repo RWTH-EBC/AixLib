@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
 model MembraneHeatTransfer
   "model for heat transfer through a membrane"
 
@@ -103,18 +103,43 @@ equation
             extent={{-40,22},{38,-18}},
             textString="%name")}),                               Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This heat transfer model calculates the locally resolved heat flow through a thin membrane using the thermal conductivity <i>&lambda;<sub>Membrane</sub> </i>and the membrane thickness <i>&delta;<sub>Membrane</sub> </i>.</p>
-<p align=\"center\"><i>heatPorts_a[i].Q̇ = (&lambda;<sub>Membrane</sub> &frasl; &delta;<sub>Membrane</sub> ) (A<sub>Membrane</sub> &frasl; n ) (heatPorts_a[i].T - T<sub>Membrane</sub>[i] ) </i></p>
-<p>Analogue for the second surface of the membrane:</p>
-<p align=\"center\"><i>heatPorts_b[i].Q̇ = (&lambda;<sub>Membrane</sub> &frasl; &delta;<sub>Membrane</sub> ) (A<sub>Membrane</sub> &frasl; n ) (heatPorts_b[i].T - T<sub>Membrane</sub>[i] ) </i></p>
-<p>If the energy dynamics are set to &quot;Steady State&quot; the membrane will not stroe any heat:</p>
-<p align=\"center\"><i>0 = heatPorts_b[i].Q̇ + heatPorts_a[i].Q̇ </i></p>
-<p>Otherwise the mebrane temperature will change with time.</p>
-<p align=\"center\"><i>m<sub>Membrane</sub>[i] c<sub>p,Membrane</sub> dT<sub>Membrane</sub>[i] = heatPorts_a[i].Q̇ + heatPorts_b[i].Q̇ </i></p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This heat transfer model calculates the locally resolved heat flow
+  through a thin membrane using the thermal conductivity
+  <i>λ<sub>Membrane</sub></i> and the membrane thickness
+  <i>δ<sub>Membrane</sub></i> .
+</p>
+<p style=\"text-align:center;\">
+  <i>heatPorts_a[i].Q̇ = (λ<sub>Membrane</sub> ⁄ δ<sub>Membrane</sub> )
+  (A<sub>Membrane</sub> ⁄ n ) (heatPorts_a[i].T -
+  T<sub>Membrane</sub>[i] )</i>
+</p>
+<p>
+  Analogue for the second surface of the membrane:
+</p>
+<p style=\"text-align:center;\">
+  <i>heatPorts_b[i].Q̇ = (λ<sub>Membrane</sub> ⁄ δ<sub>Membrane</sub> )
+  (A<sub>Membrane</sub> ⁄ n ) (heatPorts_b[i].T -
+  T<sub>Membrane</sub>[i] )</i>
+</p>
+<p>
+  If the energy dynamics are set to \"Steady State\" the membrane will
+  not stroe any heat:
+</p>
+<p style=\"text-align:center;\">
+  <i>0 = heatPorts_b[i].Q̇ + heatPorts_a[i].Q̇</i>
+</p>
+<p>
+  Otherwise the mebrane temperature will change with time.
+</p>
+<p style=\"text-align:center;\">
+  <i>m<sub>Membrane</sub>[i] c<sub>p,Membrane</sub>
+  dT<sub>Membrane</sub>[i] = heatPorts_a[i].Q̇ + heatPorts_b[i].Q̇</i>
+</p>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end MembraneHeatTransfer;

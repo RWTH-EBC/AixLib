@@ -80,20 +80,55 @@ equation
     betas[i] =  (Shs[i] * rhos[i] * Ds[i])/sqrt(crossSections[i]);
   end for;
 
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>April 23, 2019, by Martin Kremer:<br>Changes function to model.</li>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation.</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>April 23, 2019, by Martin Kremer:<br/>
+    Changes function to model.
+  </li>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model calculates the convective heat transfer coefficient <i>&alpha;</i> using the nusselt number correlation for rectangular air ducts by Muzychka and Yovanovich [1] and the analogy between heat and mass transfer (see function SherwoodNumberMuzychka).</p>
-<p align=\"center\"><i>Sh = Nu , Sc = Pr</i></p>
-<p>The air density, dynamic viscosity and thermal conductivity are calculated as state variables. The Schmidt number is calculated using the dynamic viscosity, density and the diffusion coefficient of water vapour into air. The Reynolds number is calculated using the density, dynamic viscosity, flow velocity and the duct&apos;s cross section as characteristic length. The cross section is calculated using the duct&apos;s height and width.</p>
-<p align=\"center\"><i>Sc = &mu; &frasl; (&rho; D ) </i></p>
-<p>The convective heat transfer coefficient is calculated as follows.</p>
-<p align=\"center\"><i>&beta; = (Sh &rho; D ) &frasl; &radic;A<sub>cross-section</sub> </i></p>
-<p><br>The diffusion coefficient of water vapour into air <i>D</i> is calculated using the function DiffusionCoefficient.</p>
-<p><br><br><br>[1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004</p>
+<p>
+  This model calculates the convective heat transfer coefficient
+  <i>α</i> using the nusselt number correlation for rectangular air
+  ducts by Muzychka and Yovanovich [1] and the analogy between heat and
+  mass transfer (see function SherwoodNumberMuzychka).
+</p>
+<p style=\"text-align:center;\">
+  <i>Sh = Nu , Sc = Pr</i>
+</p>
+<p>
+  The air density, dynamic viscosity and thermal conductivity are
+  calculated as state variables. The Schmidt number is calculated using
+  the dynamic viscosity, density and the diffusion coefficient of water
+  vapour into air. The Reynolds number is calculated using the density,
+  dynamic viscosity, flow velocity and the duct's cross section as
+  characteristic length. The cross section is calculated using the
+  duct's height and width.
+</p>
+<p style=\"text-align:center;\">
+  <i>Sc = μ ⁄ (ρ D )</i>
+</p>
+<p>
+  The convective heat transfer coefficient is calculated as follows.
+</p>
+<p style=\"text-align:center;\">
+  <i>β = (Sh ρ D ) ⁄ √A<sub>cross-section</sub></i>
+</p>
+<p>
+  <br/>
+  The diffusion coefficient of water vapour into air <i>D</i> is
+  calculated using the function DiffusionCoefficient.
+</p>
+<p>
+  <br/>
+  <br/>
+  <br/>
+  [1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced
+  Convection Heat Transfer in the Combined Entry Region of Non-Circular
+  Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004
+</p>
 </html>"), Icon(graphics={           Rectangle(
             extent={{-80,60},{80,-60}},
             pattern=LinePattern.None,

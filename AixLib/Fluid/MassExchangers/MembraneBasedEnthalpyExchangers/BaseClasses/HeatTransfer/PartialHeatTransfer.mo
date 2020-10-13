@@ -36,21 +36,30 @@ partial model PartialHeatTransfer
   Modelica.SIunits.Temperature[n] Ts = Medium.temperature(states) "Temperature at states";
 equation
   Q_flows =heatPorts.Q_flow;
-  annotation (Documentation(info="<html>
-<p>
-This component is a common interface for heat transfer models. The heat flow rates <code>Q_flows[n]</code> through the boundaries of n flow segments
-are obtained as function of the thermodynamic <code>states</code> of the flow segments for a given fluid <code>Medium</code>,
-the <code>surfaceAreas[n]</code> and the boundary temperatures <code>heatPorts[n].T</code>.
+  annotation (Documentation(info="<html><p>
+  This component is a common interface for heat transfer models. The
+  heat flow rates <code>Q_flows[n]</code> through the boundaries of n
+  flow segments are obtained as function of the thermodynamic
+  <code>states</code> of the flow segments for a given fluid
+  <code>Medium</code>, the <code>surfaceAreas[n]</code> and the
+  boundary temperatures <code>heatPorts[n].T</code>.
 </p>
 <p>
-The heat loss coefficient <code>k</code> can be used to model a thermal isolation between <code>heatPorts.T</code> and <code>T_ambient</code>.</p>
-<p>
-An extending model implementing this interface needs to define one equation: the relation between the predefined fluid temperatures <code>Ts[n]</code>,
-the boundary temperatures <code>heatPorts[n].T</code>, and the heat flow rates <code>Q_flows[n]</code>.
+  The heat loss coefficient <code>k</code> can be used to model a
+  thermal isolation between <code>heatPorts.T</code> and
+  <code>T_ambient</code>.
 </p>
-</html>", revisions="<html>
+<p>
+  An extending model implementing this interface needs to define one
+  equation: the relation between the predefined fluid temperatures
+  <code>Ts[n]</code>, the boundary temperatures
+  <code>heatPorts[n].T</code>, and the heat flow rates
+  <code>Q_flows[n]</code>.
+</p>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
          Icon(graphics={             Rectangle(

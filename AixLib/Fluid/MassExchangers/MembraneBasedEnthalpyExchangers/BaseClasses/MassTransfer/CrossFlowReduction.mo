@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
 model CrossFlowReduction
   "model that calculates reduction factor for mass transfer in quasi-counter flow arrangement"
 
@@ -52,14 +52,27 @@ equation
             extent={{-40,22},{38,-18}},
             textString="%name")}), Diagram(coordinateSystem(preserveAspectRatio=
            false)),
-    Documentation(info="<html>
-<p>This model calculates a reduction factor for a cross-counter-flow arrangement. The calculation is based on the Efficiency-NTU-Method.</p>
-<p>The number of transfer units <i>NTU</i> is calculated with the total mass transfer coeeficient <i>k<sub>tot</sub></i>, the surface area <i>A</i> and the minimum mass flow rate <i>ṁ</i>.</p>
-<p align=\"center\"><i>NTU = (k<sub>tot</sub> A) &frasl; ṁ<sub>min</sub> </i></p>
-<p>Using the number of transfer units and the cross-flow portion of the whole transfer area the coeefficient for the mass transfer reduction is calculated.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model calculates a reduction factor for a cross-counter-flow
+  arrangement. The calculation is based on the Efficiency-NTU-Method.
+</p>
+<p>
+  The number of transfer units <i>NTU</i> is calculated with the total
+  mass transfer coeeficient <i>k<sub>tot</sub></i>, the surface area
+  <i>A</i> and the minimum mass flow rate <i>ṁ</i>.
+</p>
+<p style=\"text-align:center;\">
+  <i>NTU = (k<sub>tot</sub> A) ⁄ ṁ<sub>min</sub></i>
+</p>
+<p>
+  Using the number of transfer units and the cross-flow portion of the
+  whole transfer area the coeefficient for the mass transfer reduction
+  is calculated.
+</p>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end CrossFlowReduction;

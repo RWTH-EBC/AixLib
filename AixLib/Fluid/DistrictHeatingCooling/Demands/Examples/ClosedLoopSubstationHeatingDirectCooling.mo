@@ -69,13 +69,13 @@ equation
       StopTime=86400,
       Interval=60,
       Tolerance=1e-007),
-    Documentation(info="<html>
-<p>
+    Documentation(info="<html><p>
   This is an ClosedLoop example of <a href=
   \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingDirectCooling\">
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingDirectCooling</a>
-  which is a simple substation model using for fixed return temperatures and actual supply 
-  temperatures to calculate the mass flow rates for heating and cooling.
+  which is a simple substation model using for fixed return
+  temperatures and actual supply temperatures to calculate the mass
+  flow rates for heating and cooling.
 </p>
 </html>"));
 end ClosedLoopSubstationHeatingDirectCooling;

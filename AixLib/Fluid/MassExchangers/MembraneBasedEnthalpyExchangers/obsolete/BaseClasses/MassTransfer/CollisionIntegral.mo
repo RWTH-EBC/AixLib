@@ -39,12 +39,10 @@ algorithm
     MembraneBasedEnthalpyExchanger.CrossCounterFlow.LumpedVolumes.BaseClasses.Functions.Interpolation(
     x=eps_internal, y_1=interp);
 
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-August 21, 2018, by Martin Kremer:<br/>
-First implementation.
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>August 21, 2018, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end CollisionIntegral;
