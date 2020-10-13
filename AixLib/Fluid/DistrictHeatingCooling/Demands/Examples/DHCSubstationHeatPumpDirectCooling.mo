@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples;
-model ClosedLoopSubstationHeatingDirectCooling
+model DHCSubstationHeatPumpDirectCooling
   import AixLib;
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
@@ -33,16 +33,16 @@ model ClosedLoopSubstationHeatingDirectCooling
   Modelica.Blocks.Sources.TimeTable heatDemand(table=[0,2000; 3600,2000; 3600,0;
         7200,0; 7200,3000; 10800,4000; 14400,4000; 14400,2500; 18000,2500])
     annotation (Placement(transformation(extent={{58,36},{38,56}})));
-  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingDirectCooling
+  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling
     substationHeatingDirectCooling(
-    heatDemand_max=4000,
-    deltaT_heatingSet(displayUnit="K") = 10,
-    redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     m_flow_nominal=2,
-    T_heatingGridSet=295.15,
-    T_coolingGridSet=285.15,
-    T_supplyHeatingSet=318.15)
+    heaDem_max=4000,
+    deltaT_heaSecSet=283.15,
+    T_heaSecSet=328.15,
+    T_heaPriSet=295.15,
+    T_cooPriSet=285.15)
     annotation (Placement(transformation(extent={{-18,-2},{30,30}})));
 
 equation
@@ -78,4 +78,4 @@ equation
   temperatures to calculate the mass flow rates for heating and cooling.
 </p>
 </html>"));
-end ClosedLoopSubstationHeatingDirectCooling;
+end DHCSubstationHeatPumpDirectCooling;
