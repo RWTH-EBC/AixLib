@@ -31,6 +31,11 @@ model EnthalpyExchanger
   parameter Modelica.SIunits.Length widthDuct
     "width of ducts"
     annotation(Dialog(tab="AirDucts",group="Geometry"));
+  parameter Boolean couFloArr=true
+    "true: counter-flow arrangement; false: quasi-counter-flow arrangement"
+     annotation(Dialog(tab="AirDucts",group="Geometry"));
+  parameter Real aspRatCroToTot=0 "cross flow portion in exchanger"
+     annotation(Dialog(tab="AirDucts",group="Geometry",enable=not couFloArr));
 
   // Heat and mass transfer parameters
   parameter Boolean uniWalTem
@@ -43,7 +48,8 @@ model EnthalpyExchanger
     "number of segments in width direction"
     annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
   parameter Boolean recDuct
-    "true if rectangular duct is used for Nusselt/Sherwood number calculation, else flat gap is used."
+    "true if rectangular duct is used for Nusselt/Sherwood number calculation, 
+    else flat gap is used."
      annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
 
   // pressure losses
@@ -156,7 +162,8 @@ model EnthalpyExchanger
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
-    final C_start=C_start)
+    final C_start=C_start,
+    final couFloArr=couFloArr)
     annotation (Placement(transformation(extent={{22,-88},{-34,-32}})));
   BaseClasses.AirDuct airDuct1(
     redeclare final package Medium=Medium,
@@ -175,7 +182,8 @@ model EnthalpyExchanger
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
-    final C_start=C_start)
+    final C_start=C_start,
+    final couFloArr=couFloArr)
     annotation (Placement(transformation(extent={{-34,88},{22,32}})));
   BaseClasses.Membrane membrane(
     final nNodes=n,
@@ -191,12 +199,18 @@ model EnthalpyExchanger
     final T_start=T_start_m,
     final dT_start=dT_start,
     final p_start=p_start,
-    final dp_start=dp_start)
+    final dp_start=dp_start,
+    final couFloArr=couFloArr)
     annotation (Placement(transformation(extent={{-36,-28},{22,28}})));
+
   Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)") if
        not useConPer "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
+//   Modelica.Blocks.Interfaces.RealInput[n] coeCroCouSens if not couFloArr
+//     "coefficient for heat transfer reduction due to cross-flow portion";
+//   Modelica.Blocks.Interfaces.RealInput[n] coeCroCouLats if not couFloArr
+//     "coefficient for mass transfer reduction due to cross-flow portion";
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     redeclare final package Medium=Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
@@ -213,20 +227,56 @@ model EnthalpyExchanger
     redeclare final package Medium=Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacityHousing(C=cpHou*
-        mHou) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-74,14})));
+  //Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacityHousing(
+  //  C=cpHou*mHou) annotation (Placement(transformation(
+  //      extent={{-10,-10},{10,10}},
+  //      rotation=90,
+  //      origin={-74,14})));
 
 protected
   Modelica.Blocks.Interfaces.RealInput perMemInt(unit="mol/(m.s.Pa)");
+
+  BaseClasses.HeatTransfer.CrossFlowReduction heaRedFac(
+    final n=n,
+    final nParallel=nParallel,
+    final m_flow1=airDuct1.port_a.m_flow,
+    final m_flow2=airDuct2.port_a.m_flow,
+    final lambdaMem=lambdaMem,
+    final surfaceAreas=surfaceAreas,
+    final thicknessMem=thicknessMem,
+    final hCons1=airDuct1.heatTransfer.hCons,
+    final hCons2=airDuct2.heatTransfer.hCons,
+    final aspRatCroToTot=aspRatCroToTot,
+    final cp1=Medium.specificHeatCapacityCp(airDuct1.states[1]),
+    final cp2=Medium.specificHeatCapacityCp(airDuct2.states[1])) if
+         not couFloArr;
+  BaseClasses.MassTransfer.CrossFlowReduction masRedFac(
+    final n=n,
+    final nParallel=nParallel,
+    final m_flow1=airDuct1.port_a.m_flow,
+    final m_flow2=airDuct2.port_a.m_flow,
+    final surfaceAreas=surfaceAreas,
+    final thicknessMem=thicknessMem,
+    final kCons1=airDuct1.massTransfer.kCons,
+    final kCons2=airDuct2.massTransfer.kCons,
+    final aspRatCroToTot=aspRatCroToTot) if
+         not couFloArr;
 
 equation
   if useConPer then
     perMemInt = conPerMem;
   end if;
   connect(perMemInt, perMem);
+
+  connect(heaRedFac.coeCroCous, airDuct1.coeCroCouSens);
+  connect(heaRedFac.coeCroCous, airDuct2.coeCroCouSens);
+  connect(heaRedFac.coeCroCous, membrane.coeCroCouSens);
+  connect(masRedFac.coeCroCous, airDuct1.coeCroCouLats);
+  connect(masRedFac.coeCroCous, airDuct2.coeCroCouLats);
+  connect(masRedFac.coeCroCous, membrane.coeCroCouLats);
+
+  connect(perMemInt, masRedFac.perMem);
+
   connect(airDuct1.heatPorts[n:-1:1], membrane.heatPorts_a[1:n]) annotation (
       Line(points={{-17.2,32},{-18,32},{-18,14},{-18.6,14}}, color={191,0,0}));
   connect(airDuct1.massPorts[n:-1:1], membrane.massPorts_a[1:n]) annotation (
@@ -248,11 +298,10 @@ equation
                       color={0,127,255}));
   connect(airDuct2.port_b, port_b2) annotation (Line(points={{-34,-60},{-100,-60}},
                                  color={0,127,255}));
-  connect(heatCapacityHousing.port, airDuct1.heatPorts[1]) annotation (Line(
-        points={{-64,14},{-58,14},{-58,16},{-38,16},{-38,32},{-17.2,32}}, color=
-         {191,0,0}));
-  connect(heatCapacityHousing.port, airDuct2.heatPorts[1]) annotation (Line(
-        points={{-64,14},{-58,14},{-58,-32},{5.2,-32}}, color={191,0,0}));
+  //connect(heatCapacityHousing.port, airDuct2.heatPorts[n]) annotation (Line(
+  //      points={{-64,14},{-58,14},{-58,-32},{5.2,-32}}, color={191,0,0}));
+  //connect(heatCapacityHousing.port, airDuct1.heatPorts[n]) annotation (Line(
+  //      points={{-64,14},{-48,14},{-48,32},{-17.2,32}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,20}},
@@ -284,10 +333,15 @@ equation
 <li>Heat and mass transfer are resolved locally by defining the paramter <span style=\"font-family: Courier New;\">n</span>. <br>The higher the number of segments are, the better the accuracy, but also the higher the simulation time.<br>Please note, that using a highly distributed air duct the Nusselt/ Sherwood number needs to be calculated locally (see parameters for heat and mass transfer).</li>
 <li>By using the parameter <span style=\"font-family: Courier New;\">nParallel</span> a parallel arrangement of several membrane and air ducts can be realized.</li>
 <li>The air ducts in membrane-based enthalpy exchangers are normally divided in width by webs that provide mechanical stability.<br>This subdivision influences the heat and mass transfer. This is represented by the parameter <span style=\"font-family: Courier New;\">nWidth</span>. If this effect should be neglected set <span style=\"font-family: Courier New;\">nWidth</span> to one.</li>
+<li>Two correlations are implemented to describe the convective heat and mass transfer. By setting the parameter <span style=\"font-family: Courier New;\">recDuct</span> to <i>false</i> a correlation for a flat gap according to Stephan [1] is used. Else a correlation for rectangular Ducts according to Muzychka et. Al. [2] is used. </li> 
 <li>The membrane model summarizes the complete membrane structure consisting of the thin membrane layer and the supportive layer as producers normally declare the overall thickness.<br>Therefore, reasonable values for the parameter <span style=\"font-family: Courier New;\">thicknessMembrane</span> lie in between 10 to 300 &mu;m. </li>
-<li>The permeability describes the water transport through the membrane. It is given in the unit <i>Barrer</i>. Values in the order of <i>1E5</i> till <i>1E8</i> are reasonable.</li>
+<li>The permeability describes the water transport through the membrane. It is given in the unit <i>Barrer</i>. Values in the order of <i>1E5</i> till <i>1E8</i> are reasonable. You can choose between a constant pemerability (default) or a variable permeability which can be set from outside.</li>
+<li>The enthalpy exchanger is modelled for a counter-flow arrangement. By setting the parameter <span style=\"font-family: Courier New;\">couFloArr</span> to <i>false</i> the cross-flow portion will be calculated by a heat and mass flow reduction based on the Efficiency-NTU-Method (see Publications).</li> 
 </ul>
 <h4>References</h4>
+<p>[1]: Stephan, K.: Waermeuebergang und Druckabfall bei nicht ausgebildeter Laminarstroemung in Rohren und ebenen Spalten. Chemie-Ing.-Techn. Vol. 31, no. 12, 1959 pp. 773-778</p>
+<p>[2]: Muzychka, Y. S.; Yovanovich, M. M. : Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts ; Transactions of the ASME; Vol. 126; February 2004</p>
+<h4>Publications</h4>
 <ul>
 <li>Kremer, M.; Mathis, P.; Mueller, D. (2019): Moisture Recovery - A Dynamic Modelling Approach. E3S Web Conf., Volume 111, p.01099. DOI: <a href=\"https://doi.org/10.1051/e3sconf/201911101099\">10.1051/e3sconf</a>.</li>
 </ul>
@@ -295,6 +349,7 @@ equation
 <p>Please note, that the heat and mass transfer models implemented in this model only provide accurate transfer models for laminar flow, which is common for enthalpy exchangers.</p>
 </html>", revisions="<html>
 <ul>
+<li>October 13, 2020 by Martin Kremer:<br/>Deleting heat capacitor for housing due to errors in heat transfer caused by heat capacitor.</li>
 <li>April 23, 2019, by Martin Kremer:<br/>Adding heat capacitor for the housing of the enthalpy exchangers.</li>
 <li>January 16, 2019, by Martin Kremer:<br/>Redeclaring sub model parameters as final. Enabling air duct models for changes on top level.</li>
 <li>November 23, 2018, by Martin Kremer:<br/>Adding model for adsorption enthalpy. Adding humidity sensor needed for adsoprtion model.</li>
