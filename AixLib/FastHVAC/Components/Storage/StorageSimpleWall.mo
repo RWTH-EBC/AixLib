@@ -26,8 +26,6 @@ public
   /* *******************************************************************
       HeatStorage Parameters
      ******************************************************************* */
-
-  parameter Real tau(min=0) = 1000 "Time constant for mixing";
   parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=1500 "Heat transfer coefficient at the inner wall";
@@ -635,7 +633,7 @@ connect(heatTransfer.therm, layer.port);
   <span style=\"color:#008000\">Level of Development</span>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\">
 </p>
 <h4>
   <span style=\"color:#008000\">Concept</span>

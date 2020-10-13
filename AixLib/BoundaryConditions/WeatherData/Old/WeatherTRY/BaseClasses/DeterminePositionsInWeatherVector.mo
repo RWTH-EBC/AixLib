@@ -53,12 +53,20 @@ algorithm
     PosWV[9] := m;
     m := m + 1;
   end if;
-  annotation(Documentation(revisions = "<html>
- <ul>
- <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, added variable descriptions</li>
- </ul>
- </html>", info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Determines the position of the given input(s) in the weather vector of the <a href=\"Building.Components.Weather.Weather\">weather</a> model. </p>
- </html>"));
+  annotation(Documentation(revisions = "<html><ul>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately, added variable descriptions
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Determines the position of the given input(s) in the weather vector
+  of the <a href=\"Building.Components.Weather.Weather\">weather</a>
+  model.
+</p>
+</html>"));
 end DeterminePositionsInWeatherVector;

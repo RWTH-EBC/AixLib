@@ -1,0 +1,5 @@
+ClosedLoopSubstationHeatingDirectCooling
+OpenLoopVarTSupplyDp
+OpenLoopVarTSupplyDpBypass
+OpenLoopHeatPumpCarnot
+OpenLoopVarTSupplyDpFixedTempDifferenceBypass

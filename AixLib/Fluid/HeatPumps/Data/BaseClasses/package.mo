@@ -6,7 +6,6 @@ package BaseClasses "Base classes for package Data"
   Documentation(info="<html>This package contains the common parameters that are used to specify
 the heat pump models in <a href=
 \"AixLib.Fluid.HeatPumps\">AixLib.Fluid.HeatPumps</a>.
-</html>", revisions="<html>
 <ul>
   <li>December 6, 2016, by Massimo Cimmino:<br/>
     First implementation.

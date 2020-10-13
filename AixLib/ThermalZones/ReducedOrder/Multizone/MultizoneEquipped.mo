@@ -1,8 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
-  extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
   parameter Boolean heatAHU
     "Status of heating of AHU"
@@ -292,33 +291,79 @@ equation
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
           textString="AHU")}),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation based on Annex60 and AixLib models.
+    Documentation(revisions="<html><ul>
+  <li>September 27, 2016, by Moritz Lauster:<br/>
+    Reimplementation based on Annex60 and AixLib models.
   </li>
-  <li>
-  February 26, 2016, by Moritz Lauster:<br/>
-  Fixed bug in share of
-  AHU volume flow.
+  <li>February 26, 2016, by Moritz Lauster:<br/>
+    Fixed bug in share of AHU volume flow.
   </li>
-  <li>
-  April 25, 2015, by Ole Odendahl:<br/>
-  Implemented.
+  <li>April 25, 2015, by Ole Odendahl:<br/>
+    Implemented.
   </li>
 </ul>
 </html>", info="<html>
-<p>This is a ready-to-use multizone model with a variable number of thermal zones. It adds heater/cooler devices and an air handling unit to <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
-<h4>Typical use and important parameters</h4>
-<p>The model needs parameters describing general properties of the building (indoor air volume, net floor area, overall surface area) and a vector with length of number of zones containing <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records to define zone properties and heater/cooler properties. An additional tab allows configuring the air handling unit. The air handling unit facilitates heating, cooling, humidification, dehumidification and heat recovery modes. The user can redeclare the thermal zone model choosing from <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a simulation of a multizone building for district simulations. The multizone model calculates heat load and indoor air profiles. </p>
-<h4>References</h4>
-<p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
+<p>
+  This is a ready-to-use multizone model with a variable number of
+  thermal zones. It adds heater/cooler devices and an air handling unit
+  to <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>.
+  It defines connectors and a replaceable vector of <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
+  models. Most connectors are conditional to allow conditional
+  modifications according to parameters or to pass-through conditional
+  removements in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
+  and subsequently in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.
+</p>
+<h4>
+  Typical use and important parameters
+</h4>
+<p>
+  The model needs parameters describing general properties of the
+  building (indoor air volume, net floor area, overall surface area)
+  and a vector with length of number of zones containing <a href=
+  \"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+  records to define zone properties and heater/cooler properties. An
+  additional tab allows configuring the air handling unit. The air
+  handling unit facilitates heating, cooling, humidification,
+  dehumidification and heat recovery modes. The user can redeclare the
+  thermal zone model choosing from <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
+  Further parameters for medium, initialization and dynamics originate
+  from <a href=
+  \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
+  A typical use case is a simulation of a multizone building for
+  district simulations. The multizone model calculates heat load and
+  indoor air profiles.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  For automatic generation of thermal zone and multizone models as well
+  as for datasets, see <a href=
+  \"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a>
+</p>
 <ul>
-<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
-<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
+  <li>German Association of Engineers: Guideline VDI 6007-1, March
+  2012: Calculation of transient thermal response of rooms and
+  buildings - Modelling of rooms.
+  </li>
+  <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D.
+  (2014): Low order thermal network models for dynamic simulations of
+  buildings on city district scale. In: Building and Environment 73, p.
+  223–231. DOI: <a href=
+  \"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>.
+  </li>
 </ul>
-<h4>Examples</h4>
-<p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>.</p>
+<h4>
+  Examples
+</h4>
+<p>
+  See <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>.
+</p>
 </html>"));
 end MultizoneEquipped;

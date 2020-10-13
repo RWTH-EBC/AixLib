@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 block TimeControl
   "Counts seconds a device is turned on and returns true if the time is inside given boundaries"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
@@ -46,15 +46,20 @@ equation
           points={{0,0},{40,0}},
           thickness=0.5)}),                                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>When the input is true, a timer thats counting seconds until it is false again. As long as the counted time is smaller than a given minimal time, the block yields false.</p>
-<p>This block is used to check the mimimal run- or loctime of a device.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  When the input is true, a timer thats counting seconds until it is
+  false again. As long as the counted time is smaller than a given
+  minimal time, the block yields false.
+</p>
+<p>
+  This block is used to check the mimimal run- or loctime of a device.
+</p>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end TimeControl;

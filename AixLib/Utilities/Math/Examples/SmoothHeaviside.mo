@@ -1,11 +1,14 @@
 within AixLib.Utilities.Math.Examples;
 model SmoothHeaviside "Test model for smoothHeavisidefunction "
   extends Modelica.Icons.Example;
-  Modelica.Blocks.Sources.Ramp x1(duration=1,
+  Modelica.Blocks.Sources.Ramp x1(
+    duration=1,
     height=2,
     offset=-1)
+    "Ramp input signal"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   AixLib.Utilities.Math.SmoothHeaviside smoothHeaviside(delta=0.1)
+  "Smooth approximation to Heaviside function"
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
 equation
   connect(x1.y, smoothHeaviside.u) annotation (Line(

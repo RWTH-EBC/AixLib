@@ -27,8 +27,8 @@ model SensorVerification
   Modelica.Blocks.Sources.Constant m_flow1(
                                           k=2)
     annotation (Placement(transformation(extent={{-98,-30},{-78,-10}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort TemperatureFluid(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Sensors.TemperatureTwoPort TemperatureFluid(redeclare package Medium =
+               Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{42,-48},{62,-28}})));
   Modelica.Fluid.Sensors.MassFlowRate massFlowFluid(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
@@ -122,7 +122,7 @@ equation
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
-  Example of mass flow &amp; temperature sensor. Compare to equivalent
+  Example of mass flow & temperature sensor. Compare to equivalent
   Fluid-/HVAC- based models.
 </p>
 </html>",

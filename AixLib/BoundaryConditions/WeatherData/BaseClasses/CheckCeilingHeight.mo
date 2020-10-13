@@ -19,16 +19,14 @@ equation
 
   annotation (
     defaultComponentName="cheCeiHei",
-    Documentation(info="<html>
-<p>
-This component ensures that the ceiling height is at least <i>0</i> meters.
+    Documentation(info="<html><p>
+  This component ensures that the ceiling height is at least <i>0</i>
+  meters.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-July 14, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
+  <li>July 14, 2010, by Wangda Zuo:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,

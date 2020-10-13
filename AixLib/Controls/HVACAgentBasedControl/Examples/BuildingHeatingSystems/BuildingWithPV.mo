@@ -170,21 +170,17 @@ model BuildingWithPV
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{-18,70},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{-18,70},
             {8,96}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{64,70},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{64,70},
             {90,96}})));
   BoundaryConditions.WeatherData.Bus        weaBus
     "Weather data bus"
     annotation (Placement(transformation(extent={{18,112},{52,144}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-92,60},
-            {-78,74}})));
-  Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent={{-92,82},
-            {-78,96}})));
   Modelica.Blocks.Sources.Constant internalGains[3](k={0,0,0})
     annotation (Placement(transformation(extent={{-92,36},{-78,50}})));
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance1(
@@ -332,14 +328,6 @@ equation
           38,20},{50,20},{50,68},{96,68},{96,76.5},{90,76.5}}, color={191,0,0}));
   connect(vol1.heatPort, thermalZone1.intGainsRad) annotation (Line(points={{38,
           20},{50,20},{50,68},{98,68},{98,81.7},{90,81.7}}, color={191,0,0}));
-  connect(thermalZone.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{-19.69,77.93},{-47.845,77.93},{-47.845,89},{-77.3,89}}, color=
-          {0,0,127}));
-  connect(thermalZone1.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{62.31,77.93},{20,77.93},{20,106},{-28,106},{-28,89},{-77.3,89}},
-        color={0,0,127}));
-  connect(infiltrationRate.y, thermalZone.ventRate) annotation (Line(points={{
-          -77.3,67},{-42,67},{-42,76},{-14.1,76},{-14.1,72.08}}, color={0,0,127}));
   connect(thermalZone.intGains, internalGains.y) annotation (Line(points={{5.4,
           72.08},{5.4,68},{-40,68},{-40,58},{-70,58},{-70,43},{-77.3,43}},
         color={0,0,127}));
@@ -361,9 +349,6 @@ equation
           {-102,-4},{-102,36},{-116,36},{-116,30}}, color={0,0,127}));
   connect(to_degC2.u, roomAgent1.T) annotation (Line(points={{-120,-36},{-108,
           -36},{-108,-28},{80,-28},{80,40},{108,40},{108,32}}, color={0,0,127}));
-  connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
-          {{67.9,72.08},{28,72.08},{28,64},{-42,64},{-42,68},{-42,68},{-42,76},
-          {-14.1,76},{-14.1,72.08}}, color={0,0,127}));
   connect(fan.port_b, hydraulicResistance1.port_a) annotation (Line(points={{72,
           -86},{72,-86},{72,-38},{-40,-38}}, color={0,127,255}));
   connect(hydraulicResistance1.port_b, hea.port_a) annotation (Line(points={{
@@ -381,22 +366,51 @@ equation
       derivatives=false,
       inputs=false,
       auxiliaries=false),
-    Documentation(revisions="<html>
-<ul>
-<li>July 2017, by Roozbeh Sangi: Documentation and model modified</li>
-<li>November 2016, by Felix B&uuml;nning: Updated to use AixLib 0.3.2, included in HVACAgentBasedControl library</li>
-<li>February 2016, by Felix B&uuml;nning: Developed and implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>July 2017, by Roozbeh Sangi: Documentation and model modified
+  </li>
+  <li>November 2016, by Felix Bünning: Updated to use AixLib 0.3.2,
+  included in HVACAgentBasedControl library
+  </li>
+  <li>February 2016, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>", info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+<h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model is a an example to show agent-based control with the provided library for a simple heating system</li>
-<li>The system consists of two thermal zones, a boiler and a heating rod</li>
-<li>With the help of a flexible cost function, the system prefers the heating rod when electricity comes from a PV panel for free and the boiler in all other cases</li>
-<li>The agents used are two RoomAgents, two HeatProducerAgents, one Broker and one MessageNotification</li>
+  <li>This model is a an example to show agent-based control with the
+  provided library for a simple heating system
+  </li>
+  <li>The system consists of two thermal zones, a boiler and a heating
+  rod
+  </li>
+  <li>With the help of a flexible cost function, the system prefers the
+  heating rod when electricity comes from a PV panel for free and the
+  boiler in all other cases
+  </li>
+  <li>The agents used are two RoomAgents, two HeatProducerAgents, one
+  Broker and one MessageNotification
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The system has two heat sources, which are a boiler and a heating rod. The heating rod is connected to a PV system. During the times the PV panel is able to provide electricity, the cost function of the heating rod considers the electricity free. During all other times the boiler is more cost efficient than the heating rod and is selected for heat generation first.</p>
-<p>This model was used to present the HVACAgentBasedControl library in [Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic]. For detailed information please refer to this source. </p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The system has two heat sources, which are a boiler and a heating
+  rod. The heating rod is connected to a PV system. During the times
+  the PV panel is able to provide electricity, the cost function of the
+  heating rod considers the electricity free. During all other times
+  the boiler is more cost efficient than the heating rod and is
+  selected for heat generation first.
+</p>
+<p>
+  This model was used to present the HVACAgentBasedControl library in
+  [Roozbeh Sangi, Felix Bünning, Johannes Fütterer, Dirk Müller. A
+  Platform for the Agent-based Control of HVAC Systems. Modelica
+  Conference, 2017, Prague, Czech Republic]. For detailed information
+  please refer to this source.
+</p>
 </html>"));
 end BuildingWithPV;

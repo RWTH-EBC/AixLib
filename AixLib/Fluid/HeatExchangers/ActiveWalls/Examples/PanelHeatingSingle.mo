@@ -41,8 +41,8 @@ model PanelHeatingSingle
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={72,64})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort temperature(redeclare package
-      Medium = Medium)
+  Modelica.Fluid.Sensors.TemperatureTwoPort temperature(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{40,8},{60,28}})));
   Modelica.Blocks.Sources.Step     const(
     height=-6,
@@ -136,13 +136,20 @@ equation
       Interval=60,
       __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput(events=false),
-    Documentation(info="<html>
-<p>A simple test for <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Panel_Dis1D\">AixLib.Fluid.HeatExchangers.ActiveWalls.Panel_Dis1D</a> </p>
-<p>Notice how the cahnge in flow temperature, amrking the change between heating and cooling mode is sudden, in order to prevent the mode from getting stuck.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  A simple test for <a href=
+  \"AixLib.Fluid.HeatExchangers.ActiveWalls.Panel_Dis1D\">AixLib.Fluid.HeatExchangers.ActiveWalls.Panel_Dis1D</a>
+</p>
+<p>
+  Notice how the cahnge in flow temperature, amrking the change between
+  heating and cooling mode is sudden, in order to prevent the mode from
+  getting stuck.
+</p>
 <ul>
-<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
+  <li>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
 </ul>
 </html>"));
 end PanelHeatingSingle;

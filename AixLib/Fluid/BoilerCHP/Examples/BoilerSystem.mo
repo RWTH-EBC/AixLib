@@ -70,23 +70,34 @@ equation
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}})),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a> during a day.
-Flow temperature of the boiler can be compared to the heating curve produced by
-the internal controler of the boiler.
-Change the inlet water temperature, heat curve or day and night mode to see the
-reaction. </p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The simulation illustrates the behavior of <a href=
+  \"AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
+  during a day. Flow temperature of the boiler can be compared to the
+  heating curve produced by the internal controler of the boiler.
+  Change the inlet water temperature, heat curve or day and night mode
+  to see the reaction.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
- AixLib</li>
-<li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated
-documentation.</li>
-<li>by Pooyan Jahangiri:<br/>First implementation.</li>
+        revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib
+  </li>
+  <li>
+    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/>
+    Formated documentation.
+  </li>
+  <li>by Pooyan Jahangiri:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(

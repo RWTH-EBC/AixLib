@@ -134,10 +134,10 @@ model FlowControlled_dpSystem
     m_flow_nominal=m_flow_nominal/2) "Duct pressure drop"
     annotation (Placement(transformation(extent={{0,30},{20,50}})));
 equation
-  connect(y.y, floConDp.dp_in) annotation (Line(points={{-99,90},{-70,90},{-70,
+  connect(y.y, floConDp.dp_in) annotation (Line(points={{-99,90},{-70.2,90},{-70.2,
           72}}, color={0,0,127}));
   connect(y.y, floConDpSystem.dp_in) annotation (Line(points={{-99,90},{-90,90},
-          {-90,20},{-70,20},{-70,-68},{-70,-68}},
+          {-90,20},{-70,20},{-70,-68},{-70.2,-68}},
                                            color={0,0,127}));
   connect(zone2.ports[1], sin.ports[1])
     annotation (Line(points={{88,40},{100,40},{100,3}},    color={0,127,255}));

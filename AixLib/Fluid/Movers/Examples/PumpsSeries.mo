@@ -47,7 +47,7 @@ model PumpsSeries "Two flow machines in series"
     nPorts=1) annotation (Placement(transformation(extent={{156,50},{136,70}})));
 equation
   connect(const1.y, floMac1.y) annotation (Line(
-      points={{-19,90},{-10,90},{-10,72}},
+      points={{-19,90},{-10.2,90},{-10.2,72}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(floMac1.port_b, floMac2.port_a) annotation (Line(

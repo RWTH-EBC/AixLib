@@ -2,8 +2,7 @@ within AixLib.FastHVAC.Components.Storage.BaseClasses;
 model HeatTransferDirectedHeatTransfer
 
 //  import BufferStorage = BufferStorage2;
-  extends
-    AixLib.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers;
+  extends AixLib.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers;
   Modelica.SIunits.HeatFlowRate[n-1] Q_flow
     "Heat flow rate from layer i+1 to i due to heat conduction";
   //Modelica.Thermal.HeatTransfer.TemperatureSensor[n] temperatureSensor
@@ -54,7 +53,7 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                       graphics), Documentation(info="<html><h4>
-  <font color=\"#008000\">Overview</font>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Model for heat transfer between buffer storage layers. Models
@@ -62,7 +61,7 @@ equation
   individually
 </p>
 <h4>
-  <font color=\"#008000\">Sources</font>
+  <span style=\"color:#008000\">Sources</span>
 </h4>
 <p>
   Total massflow by buoyancy is calculated by a fixed time Tau, a fixed
