@@ -78,7 +78,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(groundTemperatureKusuda.port_a, temperatureSensor.port) annotation (
+  connect(groundTemperatureKusuda.port, temperatureSensor.port) annotation (
       Line(points={{59.4,-55},{70,-55},{70,-50},{74,-50}}, color={191,0,0}));
   connect(temperatureSensor.T, T_ground) annotation (Line(points={{94,-50},{108,
           -50}},                     color={0,0,127}));
