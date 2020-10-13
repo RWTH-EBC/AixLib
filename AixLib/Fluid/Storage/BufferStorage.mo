@@ -310,10 +310,10 @@ model BufferStorage
         rotation=270,
         origin={-56,-39})));
 
-  parameter SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
-  parameter SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC1_flow_nominal)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+  parameter SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil1));
+  parameter SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil2));
   parameter SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
     "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
 initial equation
