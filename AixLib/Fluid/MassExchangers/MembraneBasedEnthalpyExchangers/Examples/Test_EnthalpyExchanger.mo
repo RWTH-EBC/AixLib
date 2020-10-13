@@ -20,8 +20,6 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
     cpMem=1900,
     lambdaMem=0.34,
     rhoMem(displayUnit="kg/m3") = 920,
-    cpHou=1900,
-    mHou=2,
     T_start_m=293.15,
     dT_start=10,
     p_start_m(displayUnit="Pa") = 2000,
