@@ -8,6 +8,8 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
     lengthDuct=0.34,
     heightDuct=0.0025,
     widthDuct=0.3,
+    couFloArr=false,
+    aspRatCroToTot=0.1,
     uniWalTem=true,
     local=false,
     nWidth=10,
