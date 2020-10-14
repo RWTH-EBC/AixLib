@@ -2,3 +2,5 @@ DynamicHysteresis
 SmoothSwitch
 TripleAnd
 HPReversibleControlLogicHeatColdDHWDirectCooling
+HPReversibleControlLogicHeatColdDHWDirectCoolingV2
+HPReversibleControlLogicHeatColdDHW

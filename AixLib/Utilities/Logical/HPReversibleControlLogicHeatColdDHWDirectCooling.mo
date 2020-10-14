@@ -54,8 +54,8 @@ model HPReversibleControlLogicHeatColdDHWDirectCooling
             28},{-36,52}}), iconTransformation(extent={{-60,20},{-20,60}})));
   Modelica.Blocks.Interfaces.BooleanOutput hp_off
     "hp is off -> supply temp set to return temp" annotation (Placement(
-        transformation(extent={{-60,-52},{-36,-28}}), iconTransformation(extent
-          ={{-60,-60},{-20,-20}})));
+        transformation(extent={{-60,-52},{-36,-28}}), iconTransformation(extent=
+           {{-60,-60},{-20,-20}})));
   Modelica.Blocks.Interfaces.BooleanOutput dhw_now "true if dhw demand atm"
     annotation (Placement(transformation(extent={{-60,-122},{-36,-98}}),
         iconTransformation(extent={{-60,-140},{-20,-100}})));
