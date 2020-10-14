@@ -34,7 +34,8 @@ package AixLib
     version="0.9.4", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.9.4_to_0.10.0.mos",
     version="0.10.0", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.0_to_0.10.1.mos",
     version="0.10.1", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.1_to_0.10.2.mos",
-    version="0.10.2", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.2_to_0.10.3.mos")),
+    version="0.10.2", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.2_to_0.10.3.mos",
+    version="0.10.3", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.3_to_0.10.4.mos")),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed
   for research and teaching purposes. It aims at dynamic simulations of
