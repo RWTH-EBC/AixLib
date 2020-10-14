@@ -2,9 +2,7 @@ DHCSupplyHeaterCoolerStorage
 ControllerTFlexibilityElectricHeating
 SourceIdealElectricityFlexibility
 IdealPlant
-IdealPlantWithStorage
 IdealPlantRevHP
 IdealPlantPump
 IdealPlantPumpErdeis
 IdealPlantHybrErdeis
-

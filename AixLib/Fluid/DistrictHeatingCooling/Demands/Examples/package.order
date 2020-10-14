@@ -2,7 +2,6 @@ DHCSubstationHeatPumpDirectCooling
 ClosedLoop
 NoReturn
 OpenLoop
-ClosedLoopSubstationHeatingDirectCooling
 OpenLoopVarTSupplyDp
 OpenLoopVarTSupplyDpBypass
 OpenLoopHeatPumpCarnot

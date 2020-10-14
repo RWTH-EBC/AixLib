@@ -1,6 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.Examples;
 model IdealPlantHybrErdeis
-   extends Modelica.Icons.ExamplesPackage;
+   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   ClosedLoop.IdealPlantHybrPumpErdeis                               idealPlantHybrPumpErdeis(
     redeclare package Medium = Medium,
