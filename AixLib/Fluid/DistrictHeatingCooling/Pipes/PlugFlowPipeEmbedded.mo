@@ -105,7 +105,10 @@ model PlugFlowPipeEmbedded
   final parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature"
   annotation(Dialog(tab="Ground"));
 
-  Modelica.SIunits.Velocity v_water;
+  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
+
+  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
 
   Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
   Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
@@ -192,7 +195,11 @@ protected
 
 equation
  //calculation of the flow velocity of water in the pipes
- v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+ v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+
+ //calculation of heat losses and heat gains of pipe
+ der(Q_los) = min(0,plugFlowPipeZeta.heatPort.Q_flow);
+ der(Q_gai) = max(0,plugFlowPipeZeta.heatPort.Q_flow);
 
  //calculation of heat losses and heat gains of pipe
  der(Q_los) = min(0,plugFlowPipe.heatPort.Q_flow);
