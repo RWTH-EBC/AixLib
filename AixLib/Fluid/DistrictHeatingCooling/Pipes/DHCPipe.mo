@@ -89,6 +89,9 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   Modelica.SIunits.Velocity v_water;
 
+  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
@@ -202,6 +205,10 @@ public
 equation
   //calculation of the flow velocity of water in the pipes
   v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+
+  //calculation of heat losses and heat gains of pipe
+  der(Q_los) = min(0,core.heatPort.Q_flow);
+  der(Q_gai) = max(0,core.heatPort.Q_flow);
 
   for i in 1:nPorts loop
     connect(vol.ports[i + 1], ports_b[i])
