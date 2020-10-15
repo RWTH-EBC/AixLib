@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PlugFlowPipeEmbedded
   "Embedded pipe model using spatialDistribution for temperature delay"
 
@@ -117,7 +117,10 @@ model PlugFlowPipeEmbedded
   final parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature"
   annotation(Dialog(tab="Soil"));
 
-  Modelica.SIunits.Velocity v_water;
+  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
+
+  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
 
   AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta plugFlowPipeZeta(
     redeclare final package Medium = Medium,
@@ -203,7 +206,11 @@ protected
 
 equation
  //calculation of the flow velocity of water in the pipes
- v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+ v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+
+ //calculation of heat losses and heat gains of pipe
+ der(Q_los) = min(0,plugFlowPipeZeta.heatPort.Q_flow);
+ der(Q_gai) = max(0,plugFlowPipeZeta.heatPort.Q_flow);
 
   connect(plugFlowPipeZeta.heatPort, cylindricHeatTransfer_1.port_a)
     annotation (Line(points={{0,10},{0,30}}, color={191,0,0}));
