@@ -1,8 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
-model StaticPipe
-  "Static Pipe model using conditional HydraulicResistance"
+model DHCPipe "Generic pipe model for DHC applications"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
-  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
   parameter Boolean use_zeta=false
     "= true HydraulicResistance is implemented, zeta value has to be given next"
@@ -74,13 +72,13 @@ model StaticPipe
     "Thermal resistance per unit length from fluid to boundary temperature"
     annotation (Dialog(group="Thermal resistance"));
 
-  parameter Real fac=1
+  parameter Real fac= 1.0
     "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal"
-    annotation(Dialog(group="Additional pressurelosses", enable=not use_zeta));
+    annotation (Dialog(group="Additional pressurelosses", enable=not use_zeta));
 
   parameter Real sum_zetas=0
     "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
-    annotation(Dialog(group="Additional pressurelosses", enable=use_zeta));
+    annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
 
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
@@ -89,14 +87,17 @@ model StaticPipe
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
-  Modelica.SIunits.Velocity v_water;
+  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
 
+  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore staticCore(
+  replaceable
+  AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore core(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
@@ -110,14 +111,40 @@ model StaticPipe
     final m_flow_start=m_flow_start,
     final initDelay=initDelay,
     final from_dp=from_dp,
-    final fac=fac,
+    final fac=if not use_zeta then fac else 1.0,
     final ReC=ReC,
     final thickness=thickness,
     final roughness=roughness,
     final allowFlowReversal=allowFlowReversal,
     final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized) "Describing the pipe behavior"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    final linearized=linearized) constrainedby Interfaces.PartialTwoPort(
+    redeclare package Medium = Medium,
+    dh=dh,
+    v_nominal=v_nominal,
+    length=length,
+    C=C,
+    R=R,
+    m_flow_small=m_flow_small,
+    m_flow_nominal=m_flow_nominal,
+    T_start_in=T_start_in,
+    T_start_out=T_start_out,
+    m_flow_start=m_flow_start,
+    initDelay=initDelay,
+    from_dp=from_dp,
+    fac=if not use_zeta then fac else 1.0,
+    ReC=ReC,
+    thickness=thickness,
+    roughness=roughness,
+    allowFlowReversal=allowFlowReversal,
+    homotopyInitialization=homotopyInitialization,
+    linearized=linearized)       "Describing the pipe behavior"
+    annotation (
+    choices(
+      choice(redeclare AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore core
+             "Static core"),
+      choice(redeclare AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore core
+             "PlugFlow core")),
+             Placement(transformation(extent={{-10,-10},{10,10}})));
 
   // In the volume, below, we scale down V and use
   // mSenFac. Otherwise, for air, we would get very large volumes
@@ -177,32 +204,35 @@ public
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
 equation
   //calculation of the flow velocity of water in the pipes
- v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+  v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+
+  //calculation of heat losses and heat gains of pipe
+  der(Q_los) = min(0,core.heatPort.Q_flow);
+  der(Q_gai) = max(0,core.heatPort.Q_flow);
 
   for i in 1:nPorts loop
     connect(vol.ports[i + 1], ports_b[i])
     annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
   end for;
-  connect(staticCore.heatPort, heatPort)
-    annotation (Line(points={{0,10},{0,10},{0,100}}, color={191,0,0}));
 
-  connect(staticCore.port_b, vol.ports[1])
+  connect(core.port_b, vol.ports[1])
     annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
-  //Connect hydraulicResistance
   if use_zeta then
-  connect(hydraulicResistance.port_b, staticCore.port_a)
+  connect(hydraulicResistance.port_b, core.port_a)
     annotation (Line(points={{-40,20},{-20,20},{-20,0},{-10,0}},
                                                color={0,127,255}, pattern=LinePattern.Dash));
   connect(hydraulicResistance.port_a, port_a)
-   annotation (Line(points={{-60,20},{-80,20},{-80,0},{-100,0}},
-                                    color={0,127,255}, pattern=LinePattern.Dash));
+    annotation (Line(points={{-60,20},{-80,20},{-80,0},{-100,0}},
+                                                color={0,127,255}, pattern=LinePattern.Dash));
   else
-  connect(port_a, staticCore.port_a)
-   annotation (Line(points={{-100,0},{-80,0},{
-          -80,-20},{-20,-20},{-20,0},{-10,0}}, color={0,127,255}));
+  connect(port_a, core.port_a)
+    annotation (Line(points={{-100,0},{-80,0},{-80,-20},{-20,-20},{-20,0},{-10,0}},
+                                                color={0,127,255}));
   end if;
-  annotation (
+  connect(core.heatPort, heatPort)
+    annotation (Line(points={{0,10},{0,100}}, color={191,0,0}));
+    annotation (Dialog(group="Additional pressurelosses"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
@@ -248,24 +278,45 @@ d = %dh")}),
     Revised variable names and documentation to follow guidelines.
     Corrected malformed hyperlinks.
   </li>
+  <li>October 23, 2017, by Michael Wetter:<br/>
+    Revised variable names and documentation to follow guidelines.
+    Corrected malformed hyperlinks.
+  </li>
+  <li>July 4, 2016 by Bram van der Heijde:<br/>
+    Introduce pipVol.
+  </li>
+  <li>October 10, 2015 by Marcus Fuchs:<br/>
+    Copy Icon from KUL implementation and rename model. Replace
+    resistance and temperature delay by an adiabatic pipe.
+  </li>
+  <li>September, 2015 by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
 <p>
-  Pipe with heat loss using the time delay based heat losses for the
-  transport delay of the fluid. This model determines the pressure drop
-  either through a static factor or using the sum of zeta values.
+  Pipe with heat loss using the time delay based heat losses and
+  transport of the fluid using a plug flow model, applicable for
+  simulation of long pipes such as in district heating and cooling
+  systems.
 </p>
 <p>
-  This Pipe model is applicable for simulation of long pipes such as in
-  district heating and cooling systems.
+  This model takes into account transport delay along the pipe length
+  idealized as a plug flow. The model also includes thermal inertia of
+  the pipe wall. This model determines the pressure drop either through
+  a static factor or using the sum of zeta values.
 </p>
 <h4>
   Implementation
 </h4>
 <p>
   This model is based on <a href=
-  \"modelica://AixLib.Fluid.DistrictHeatingCooling.BaseClassesStatic.StaticCore\">
-  AixLib.Fluid.DistrictHeatingCooling.BaseClassesStatic.StaticCore</a>.
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>
+  and contains the spatialDistribution operator.
+</p>
+<p>
+  The spatialDistribution operator is used for the temperature wave
+  propagation through the length of the pipe.
 </p>
 <p>
   Heat losses are implemented by <a href=
@@ -290,9 +341,9 @@ d = %dh")}),
 </p>
 <p>
   This mixing volume is not present in the <a href=
-  \"modelica://AixLib.Fluid.DistrictHeatingCooling.BaseClassesStatic.StaticCore\">
-  StaticCore</a> model, which can be used in cases where mixing volumes
-  at pipe junctions need to be added manually.
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">PlugFlowCore</a>
+  model, which can be used in cases where mixing volumes at pipe
+  junctions need to be added manually.
 </p>
 <p>
   If Boolean use_zeta is set \"true\" <a href=
@@ -326,4 +377,4 @@ d = %dh")}),
   </li>
 </ul>
 </html>"));
-end StaticPipe;
+end DHCPipe;
