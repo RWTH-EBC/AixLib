@@ -122,7 +122,7 @@ model PlugFlowPipeEmbedded
   Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
   Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
 
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta plugFlowPipeZeta(
+  DHCPipe                                                    dHCPipe(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
@@ -209,10 +209,10 @@ equation
  v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
  //calculation of heat losses and heat gains of pipe
- der(Q_los) = min(0,plugFlowPipeZeta.heatPort.Q_flow);
- der(Q_gai) = max(0,plugFlowPipeZeta.heatPort.Q_flow);
+ Q_los =dHCPipe.Q_los;
+ Q_gai =dHCPipe.Q_gai;
 
-  connect(plugFlowPipeZeta.heatPort, cylindricHeatTransfer_1.port_a)
+  connect(dHCPipe.heatPort, cylindricHeatTransfer_1.port_a)
     annotation (Line(points={{0,10},{0,30}}, color={191,0,0}));
   connect(cylindricHeatTransfer_1.port_b, cylindricHeatTransfer_2.port_a)
     annotation (Line(points={{0,38.8},{0,56}}, color={191,0,0}));
@@ -220,10 +220,10 @@ equation
     annotation (Line(points={{0,64.8},{0,82}}, color={191,0,0}));
   connect(cylindricHeatTransfer_3.port_b, heatPort)
     annotation (Line(points={{0,90.8},{0,104}}, color={191,0,0}));
-  connect(port_a, plugFlowPipeZeta.port_a)
+  connect(port_a, dHCPipe.port_a)
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));
-  connect(plugFlowPipeZeta.ports_b, ports_b) annotation (Line(points={{10,0},{56,
-          0},{56,0},{100,0}}, color={0,127,255}));
+  connect(dHCPipe.ports_b, ports_b) annotation (Line(points={{10,0},{56,0},{56,0},
+          {100,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,32},{100,-48}},
