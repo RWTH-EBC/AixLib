@@ -1,11 +1,12 @@
 DHCPipe
-PlugFlowPipeEmbedded
-PlugFlowPipeEmbeddedDis
-PlugFlowPipeZeta
 StaticPipe
+PlugFlowPipeEmbedded
+PlugFlowPipeZeta
+Examples
+BaseClassesStatic
+PlugFlowPipeEmbeddedDis
 StaticPipeZeta
 TwoPipe
-Examples
+PlugFlowPipeNoIns
 BaseClasses
 BaseClassesStatic
-PlugFlowPipeNoIns

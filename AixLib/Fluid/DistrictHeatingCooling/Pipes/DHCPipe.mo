@@ -87,7 +87,8 @@ model DHCPipe "Generic pipe model for DHC applications"
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
-  Modelica.SIunits.Velocity v_water;
+
+  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
 
   Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
   Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
@@ -204,7 +205,7 @@ public
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
 equation
   //calculation of the flow velocity of water in the pipes
-  v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+  v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
   //calculation of heat losses and heat gains of pipe
   der(Q_los) = min(0,core.heatPort.Q_flow);

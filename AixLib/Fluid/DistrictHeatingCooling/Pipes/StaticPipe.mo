@@ -2,6 +2,7 @@ within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model StaticPipe
   "Static Pipe model using conditional HydraulicResistance"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
   parameter Boolean use_zeta=false
     "= true HydraulicResistance is implemented, zeta value has to be given next"
