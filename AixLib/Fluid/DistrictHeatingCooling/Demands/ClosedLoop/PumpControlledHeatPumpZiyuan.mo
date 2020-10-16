@@ -1,6 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
-model PumpControlledwithHP_V4 "Substation model for  low-temperature networks for buildings with 
-  heat pump and chiller"
+model PumpControlledHeatPumpZiyuan
+  "Substation model for low-temperature networks for buildings with reversible heatpump and direct cooling, impplemented by Ziyuan"
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
@@ -350,4 +350,4 @@ Implemented </li>
 </html>", info="<html>
 <p>Substation model for bidirctional low-temperature networks for buildings with heat pump and chiller. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application. The mass flows are controlled equation-based. The mass flows are calculated using the heating and cooling demands and the specified temperature differences between flow and return (network side).</p>
 </html>"));
-end PumpControlledwithHP_V4;
+end PumpControlledHeatPumpZiyuan;
