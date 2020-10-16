@@ -54,22 +54,22 @@ equation
           extent={{-46,-32},{-6,-92}},
           lineColor={28,108,200},
           fillColor={175,175,175},
-          fillPattern=FillPattern.Solid)}), Documentation(info="<html>
-<p> This model implements a very simple demand node representation with only an
-ideal flow sink discharging a prescribed heat flow rate from the DHC system's
-supply network. The <code>prescribedQ</code> parameter specifies the heat flow 
-rate to be extracted from the network into the ideal sink depending on the design
-temperature difference over the heat exchanger of the substation. </p>
-</html>", revisions="<html>
+          fillPattern=FillPattern.Solid)}), Documentation(info="<html><p>
+  This model implements a very simple demand node representation with
+  only an ideal flow sink discharging a prescribed heat flow rate from
+  the DHC system's supply network. The <code>prescribedQ</code>
+  parameter specifies the heat flow rate to be extracted from the
+  network into the ideal sink depending on the design temperature
+  difference over the heat exchanger of the substation.
+</p>
 <ul>
-<li>
-January 29, 2018, by Marcus Fuchs:<br/>
-Add parameter <code>isHeating</code>.
-</li>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>January 29, 2018, by Marcus Fuchs:<br/>
+    Add parameter <code>isHeating</code>.
+  </li>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end IdealSinkHeatInput;

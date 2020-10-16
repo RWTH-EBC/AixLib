@@ -322,12 +322,10 @@ equation
             {400,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-180,-280},{400,100}})),
     experiment(StopTime=10000, __Dymola_Algorithm="Cvode"),
-    Documentation(revisions="<html>
-<ul>
-<li>
-March 17, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>March 17, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
 A small cooling network with 2 supplies.

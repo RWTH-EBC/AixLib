@@ -55,20 +55,27 @@ equation
   annotation (experiment(
       StopTime=864000,
       Interval=3600,
-      Tolerance=1e-005),                Documentation(revisions="<html>
-<ul>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+      Tolerance=1e-005),                Documentation(revisions="<html><ul>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>", info="<html>
-<p>This example demonstrates that the <a
-href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough\">AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough</a>
-model does not affect the fluid flow, but only serves as a placeholder with direct throughflow.</p>
-<p>The simulation results show that the mass flow sensor and the static temperature sensor monitor
-the same values as the input set-values of the sources. Only for a mass flow rate of 0 does the 
-static temperature sensor show a deviation from the set temperature entering the substation model.
-For comparison, a dynamic temperature sensor is also included in this model.</p>
+<p>
+  This example demonstrates that the <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough</a>
+  model does not affect the fluid flow, but only serves as a
+  placeholder with direct throughflow.
+</p>
+<p>
+  The simulation results show that the mass flow sensor and the static
+  temperature sensor monitor the same values as the input set-values of
+  the sources. Only for a mass flow rate of 0 does the static
+  temperature sensor show a deviation from the set temperature entering
+  the substation model. For comparison, a dynamic temperature sensor is
+  also included in this model.
+</p>
 </html>"));
 end SubstationHeating;

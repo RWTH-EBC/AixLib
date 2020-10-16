@@ -216,35 +216,55 @@ equation
           -56},{20,-80},{18,-80}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>One of the largest drawbacks of the reference network in <a
-href=\"AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation\">
-AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation</a> is
-that the source [Larock et al., 2000] does not specify any pipe lengths and
-diameters. This example approximates a similar network with comparable flows and
-pressures using the <a href=\"AixLib.Fluid.FixedResistances.HydraulicDiameter\">
-AixLib.Fluid.FixedResistances.HydraulicDiameter</a> model to represent the
-pipes.</p>
-<h4>Assumptions and limitations</h4>
-<p>While this model is far from perfect, it may be helpful as a starting point for developing new DHC component models. </p>
-<h4>Validation</h4>
-<p>Like in in <a
-href=\"AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation\">
-AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation</a>,
-the outputs compare the relative deviations between the calculated pressures at
-the demand nodes B1, B2, and B3 with the reference results given in Larock et
-al. [2000]. The results show deviations below 0.4 percent. </p>
-<h4>References</h4>
-<ul>
-<li><a href=\"https://www.crcpress.com/Hydraulics-of-Pipeline-Systems/Larock-Jeppson-Watters/p/book/9780849318061\">Larock, Bruce E., Roland W. Jeppson, and Gary Z. Watters. <i>Hydraulics of pipeline systems</i>. Boca Raton, FL: CRC Press, 2000.</a></li>
-<li>AixLib issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">#402</a></li>
-</ul>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  One of the largest drawbacks of the reference network in <a href=
+  \"AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation\">
+  AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation</a>
+  is that the source [Larock et al., 2000] does not specify any pipe
+  lengths and diameters. This example approximates a similar network
+  with comparable flows and pressures using the <a href=
+  \"AixLib.Fluid.FixedResistances.HydraulicDiameter\">AixLib.Fluid.FixedResistances.HydraulicDiameter</a>
+  model to represent the pipes.
+</p>
+<h4>
+  Assumptions and limitations
+</h4>
+<p>
+  While this model is far from perfect, it may be helpful as a starting
+  point for developing new DHC component models.
+</p>
+<h4>
+  Validation
+</h4>
+<p>
+  Like in in <a href=
+  \"AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation\">
+  AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation</a>,
+  the outputs compare the relative deviations between the calculated
+  pressures at the demand nodes B1, B2, and B3 with the reference
+  results given in Larock et al. [2000]. The results show deviations
+  below 0.4 percent.
+</p>
+<h4>
+  References
+</h4>
 <ul>
   <li>
-  May 26, 2017, by Marcus Fuchs:<br/>
-  Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 402</a>.
- </li>
+    <a href=
+    \"https://www.crcpress.com/Hydraulics-of-Pipeline-Systems/Larock-Jeppson-Watters/p/book/9780849318061\">
+    Larock, Bruce E., Roland W. Jeppson, and Gary Z. Watters.
+    <i>Hydraulics of pipeline systems</i>. Boca Raton, FL: CRC Press,
+    2000.</a>
+  </li>
+  <li>AixLib issue <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/402\">#402</a>
+  </li>
+</ul>
+<ul>
+  <li>May 26, 2017, by Marcus Fuchs:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 402</a>.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=25200, Interval=900));

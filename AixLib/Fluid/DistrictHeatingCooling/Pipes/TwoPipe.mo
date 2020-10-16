@@ -237,93 +237,93 @@ equation
           lineColor={28,108,200},
           fillColor={165,165,165},
           fillPattern=FillPattern.Solid)}),
-    Documentation(revisions="<html>
-<ul>
-<li>
-October 23, 2017, by Michael Wetter:<br/>
-Revised variable names and documentation to follow guidelines.
-Corrected malformed hyperlinks.
-</li>
-<li>
-July 4, 2016 by Bram van der Heijde:<br/>
-Introduce <code>pipVol</code>.
-</li>
-<li>
-October 10, 2015 by Marcus Fuchs:<br/>
-Copy Icon from KUL implementation and rename model.
-Replace resistance and temperature delay by an adiabatic pipe.
-</li>
-<li>September, 2015 by Marcus Fuchs:<br/>
-First implementation.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>October 23, 2017, by Michael Wetter:<br/>
+    Revised variable names and documentation to follow guidelines.
+    Corrected malformed hyperlinks.
+  </li>
+  <li>July 4, 2016 by Bram van der Heijde:<br/>
+    Introduce <code>pipVol</code>.
+  </li>
+  <li>October 10, 2015 by Marcus Fuchs:<br/>
+    Copy Icon from KUL implementation and rename model. Replace
+    resistance and temperature delay by an adiabatic pipe.
+  </li>
+  <li>September, 2015 by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
 <p>
-Pipe with heat loss using the time delay based heat losses and transport
-of the fluid using a plug flow model, applicable for simulation of long
-pipes such as in district heating and cooling systems.</p>
-<p>
-This model takes into account transport delay along the pipe length idealized
-as a plug flow.
-The model also includes thermal inertia of the pipe wall.
-</p>
-<h4>Implementation</h4>
-<p>Heat losses are implemented by
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
-AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss</a>
-at each end of the pipe (see
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">
-AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>).
-Depending on the flow direction, the temperature difference due to heat losses
-is subtracted at the right fluid port.
+  Pipe with heat loss using the time delay based heat losses and
+  transport of the fluid using a plug flow model, applicable for
+  simulation of long pipes such as in district heating and cooling
+  systems.
 </p>
 <p>
-The pressure drop is implemented using
-<a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">
-AixLib.Fluid.FixedResistances.HydraulicDiameter</a>.
+  This model takes into account transport delay along the pipe length
+  idealized as a plug flow. The model also includes thermal inertia of
+  the pipe wall.
+</p>
+<h4>
+  Implementation
+</h4>
+<p>
+  Heat losses are implemented by <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
+  AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss</a> at
+  each end of the pipe (see <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>).
+  Depending on the flow direction, the temperature difference due to
+  heat losses is subtracted at the right fluid port.
 </p>
 <p>
-The thermal capacity of the pipe wall is implemented as a mixing volume
-of the fluid in the pipe, of which the thermal capacity
-is equal to that of the pipe wall material.
-In addition, this mixing volume allows the hydraulic separation of subsequent pipes.
-Thanks to the vectorized implementation of the (design) outlet port,
-splits and junctions of pipes can be handled in a numerically efficient way.
-<br/>
-This mixing volume is not present in the
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">PlugFlowCore</a> model,
-which can be used in cases where mixing volumes at pipe junctions need to
-be added manually.
+  The pressure drop is implemented using <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">AixLib.Fluid.FixedResistances.HydraulicDiameter</a>.
 </p>
-<h4>Assumptions</h4>
+<p>
+  The thermal capacity of the pipe wall is implemented as a mixing
+  volume of the fluid in the pipe, of which the thermal capacity is
+  equal to that of the pipe wall material. In addition, this mixing
+  volume allows the hydraulic separation of subsequent pipes. Thanks to
+  the vectorized implementation of the (design) outlet port, splits and
+  junctions of pipes can be handled in a numerically efficient way.<br/>
+  This mixing volume is not present in the <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">PlugFlowCore</a>
+  model, which can be used in cases where mixing volumes at pipe
+  junctions need to be added manually.
+</p>
+<h4>
+  Assumptions
+</h4>
 <ul>
-<li>
-Heat losses are for steady-state operation.
-</li>
-<li>
-The axial heat diffusion in the fluid, the pipe wall and the ground are neglected.
-</li>
-<li>
-The boundary temperature is uniform.
-</li>
-<li>
-The thermal inertia of the pipe wall material is lumped on the side of the pipe
-that is connected to <code>ports_b</code>.
-</li>
+  <li>Heat losses are for steady-state operation.
+  </li>
+  <li>The axial heat diffusion in the fluid, the pipe wall and the
+  ground are neglected.
+  </li>
+  <li>The boundary temperature is uniform.
+  </li>
+  <li>The thermal inertia of the pipe wall material is lumped on the
+  side of the pipe that is connected to <code>ports_b</code>.
+  </li>
 </ul>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-Full details on the model implementation and experimental validation can be found
-in:
+  Full details on the model implementation and experimental validation
+  can be found in:
 </p>
 <p>
-van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G., Sartor, K.,
-Basciotti, D., M&uuml;ller, D., Nytsch-Geusen, C., Wetter, M. and Helsen, L.
-(2017).<br/>
-Dynamic equation-based thermo-hydraulic pipe model for district heating and
-cooling systems.<br/>
-<i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
-<a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
-10.1016/j.enconman.2017.08.072</a>.</p>
+  van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G.,
+  Sartor, K., Basciotti, D., Müller, D., Nytsch-Geusen, C., Wetter, M.
+  and Helsen, L. (2017).<br/>
+  Dynamic equation-based thermo-hydraulic pipe model for district
+  heating and cooling systems.<br/>
+  <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
+  <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
+  10.1016/j.enconman.2017.08.072</a>.
+</p>
 </html>"));
 end TwoPipe;

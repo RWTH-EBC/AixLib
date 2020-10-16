@@ -25,15 +25,15 @@ equation
     Q_in_internal = prescribedQ;
   end if;
 
-  annotation (Documentation(info="<html>
-<p>A base class for modeling the heat transfer component within 
-DHC substations.</p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  A base class for modeling the heat transfer component within DHC
+  substations.
+</p>
 <ul>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end PartialHeatTransfer;

@@ -150,26 +150,22 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/Carnot_TCon.mos"
         "Simulate and plot"),
     Documentation(
-info="<html>
-<p>
-Example that simulates a chiller whose efficiency is scaled based on the
-Carnot cycle.
-The chiller takes as an input the evaporator leaving water temperature.
-The condenser mass flow rate is computed in such a way that it has
-a temperature difference equal to <code>dTEva_nominal</code>.
+info="<html><p>
+  Example that simulates a chiller whose efficiency is scaled based on
+  the Carnot cycle. The chiller takes as an input the evaporator
+  leaving water temperature. The condenser mass flow rate is computed
+  in such a way that it has a temperature difference equal to
+  <code>dTEva_nominal</code>.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 25, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
+revisions="<html><ul>
+  <li>May 2, 2019, by Jianjun Hu:<br/>
+    Replaced fluid source. This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1072\">#1072</a>.
+  </li>
+  <li>November 25, 2015, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end Carnot_TCon_RE;

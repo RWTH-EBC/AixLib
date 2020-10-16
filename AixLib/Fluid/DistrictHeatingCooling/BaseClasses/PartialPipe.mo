@@ -27,18 +27,16 @@ partial model PartialPipe
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>
-This base class provides an interface for pipe models. It can be used
-to wrap around different pipe model implementations with representation of
-the thermal losses through the pipe wall.
+    Documentation(info="<html><p>
+  This base class provides an interface for pipe models. It can be used
+  to wrap around different pipe model implementations with
+  representation of the thermal losses through the pipe wall.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-Jun 21, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>Jun 21, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end PartialPipe;

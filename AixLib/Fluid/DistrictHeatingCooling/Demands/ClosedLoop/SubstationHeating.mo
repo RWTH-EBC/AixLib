@@ -200,16 +200,24 @@ equation
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{160,
             120}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>April 15, 2020</i> ,by Tobias Blacha:<br/>
-Add documentaion </li>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
-Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>April 15, 2020</i> ,by Tobias Blacha:<br/>
+    Add documentaion
+  </li>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirectional low-temperature networks with heat pump and fixed temperature difference (parameter) on network side. 
-This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>.
-The supply temperature of buildings heating system must be set be using the input T_supplyHeatingSet. </p>
+<p>
+  Substation model for bidirectional low-temperature networks with heat
+  pump and fixed temperature difference (parameter) on network side.
+  This model uses the heat pump <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>.
+  The supply temperature of buildings heating system must be set be
+  using the input T_supplyHeatingSet.
+</p>
 </html>"));
 end SubstationHeating;

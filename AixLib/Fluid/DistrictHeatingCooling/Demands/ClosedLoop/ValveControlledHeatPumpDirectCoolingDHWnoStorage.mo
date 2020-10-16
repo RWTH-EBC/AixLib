@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model ValveControlledHeatPumpDirectCoolingDHWnoStorage
   "Substation model for low-temperature networks for buildings with reversible heat pump that also supplies dhw"
 
@@ -491,11 +491,21 @@ equation
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-440,-260},{140,
             120}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br>Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirctional low-temperature networks for buildings with heat pump and chiller. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application. The mass flows are controlled equation-based. The mass flows are calculated using the heating and cooling demands and the specified temperature differences between flow and return (network side).</p>
+<p>
+  Substation model for bidirctional low-temperature networks for
+  buildings with heat pump and chiller. In the case of simultaneous
+  cooling and heating demands, the return flows are used as supply
+  flows for the other application. The mass flows are controlled
+  equation-based. The mass flows are calculated using the heating and
+  cooling demands and the specified temperature differences between
+  flow and return (network side).
+</p>
 </html>"));
 end ValveControlledHeatPumpDirectCoolingDHWnoStorage;

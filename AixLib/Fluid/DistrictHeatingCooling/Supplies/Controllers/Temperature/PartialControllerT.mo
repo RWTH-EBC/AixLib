@@ -15,14 +15,15 @@ partial model PartialControllerT "Base class for temperature controller"
           textString="Temperature
 Controller")}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This is a base class defining the interface for different temperature controllers in DHC supply nodes</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This is a base class defining the interface for different temperature
+  controllers in DHC supply nodes
+</p>
 <ul>
-<li>
-July 17, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>July 17, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end PartialControllerT;

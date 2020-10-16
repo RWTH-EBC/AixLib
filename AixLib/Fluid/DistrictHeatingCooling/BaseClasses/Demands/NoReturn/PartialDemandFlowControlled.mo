@@ -66,17 +66,16 @@ equation
           fillColor={28,108,200},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>
-May 27, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+    Documentation(revisions="<html><ul>
+  <li>May 27, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>", info="<html>
 <p>
-This base class provides a common interface for demand node models that do not
-represent the return flow back into the network.
+  This base class provides a common interface for demand node models
+  that do not represent the return flow back into the network.
 </p>
 </html>"));
 end PartialDemandFlowControlled;
