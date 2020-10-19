@@ -9,7 +9,7 @@ model DHCSubstationHeatPumpChiller
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
     "Nominal pressure drop";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = max((heaDem_max/(cp_default*deltaT_heaSecSet)),-cooDem_max/(cp_default*deltaT_cooSecSet))
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = max(max((heaDem_max/(cp_default*deltaT_heaSecSet)),-cooDem_max/(cp_default*deltaT_cooSecSet)),0.0001)
     "Nominal mass flow rate based on max. demand and set temperature difference";
 
     parameter Modelica.SIunits.HeatFlowRate heaDem_max
