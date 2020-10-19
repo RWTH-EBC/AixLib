@@ -205,15 +205,22 @@ equation
           fillColor={28,108,200},
           fillPattern=FillPattern.None)}),                       Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li><i>November 15, 2019</i> ,by Tobias Blacha:<br/>
-Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 15, 2019</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-This model represents the supply node of a bidirectional network with a reversible heat pump for heat and cold supply. 
-The reversible heat pump was created by combining the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a> and the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a> . 
-The operation mode of the reversible heat pump depends on the flow direction. In the case that port_b is the outlet, heating operation takes place. In the case that port_a is the outlet, cooling operation takes place.
-
+This model represents the supply node of a bidirectional network with a
+reversible heat pump for heat and cold supply. The reversible heat pump
+was created by combining the heat pump <a href=
+\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>
+and the chiller <a href=
+\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>
+. The operation mode of the reversible heat pump depends on the flow
+direction. In the case that port_b is the outlet, heating operation
+takes place. In the case that port_a is the outlet, cooling operation
+takes place.
 </html>"));
 end IdealPlantRevHP;

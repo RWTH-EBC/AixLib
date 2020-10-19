@@ -77,15 +77,21 @@ equation
       StopTime=864000,
       Interval=60,
       Tolerance=1e-07),
-    Documentation(revisions="<html>
-<ul>
-<li><i>April 15, 2020</i> ,by Tobias Blacha:<br/>
-Add documentaion </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>April 15, 2020</i> ,by Tobias Blacha:<br/>
+    Add documentaion
+  </li>
 </ul>
 </html>", info="<html>
-<p>This example shows a simple example of a closed loop substation with heat pump and chiller (variable temperature difference on network and building sides)
-<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT\">AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT</a>. 
-It illustrates the settings needed in the demand model to work in a bidirectional
-low-temperature network.<p>
+<p>
+  This example shows a simple example of a closed loop substation with
+  heat pump and chiller (variable temperature difference on network and
+  building sides) <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT</a>.
+  It illustrates the settings needed in the demand model to work in a
+  bidirectional low-temperature network.
+</p>
 </html>"));
 end SubstationHeatingCooling_DC_CH_HP_HeatStorage;

@@ -37,18 +37,19 @@ equation
           extent={{-8,40},{72,-40}},
           lineColor={28,108,200},
           fillColor={28,108,200},
-          fillPattern=FillPattern.Solid)}), Documentation(info="<html>
-<p> This model implements a very simple demand node representation with only an
-ideal flow sink discharging a prescribed mass flow rate from the DHC system's
-supply network. Note that the <code>prescribed_m_flow</code> parameter should be
-given as a positive value, specifying the mass flow rate to be extracted from
-the network into the ideal sink. </p>
-</html>", revisions="<html>
+          fillPattern=FillPattern.Solid)}), Documentation(info="<html><p>
+  This model implements a very simple demand node representation with
+  only an ideal flow sink discharging a prescribed mass flow rate from
+  the DHC system's supply network. Note that the
+  <code>prescribed_m_flow</code> parameter should be given as a
+  positive value, specifying the mass flow rate to be extracted from
+  the network into the ideal sink.
+</p>
 <ul>
-<li>
-June 18, 2017, by Marcus Fuchs:<br/>
-First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
-</li>
+  <li>June 18, 2017, by Marcus Fuchs:<br/>
+    First implementation for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+  </li>
 </ul>
 </html>"));
 end IdealSinkConstFlow;

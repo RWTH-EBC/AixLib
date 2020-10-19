@@ -277,22 +277,19 @@ equation
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<p>
-A simple substation model using a fixed return temperature and the actual supply temperature
-to calculate the mass flow rate drawn from the network. This model uses a linear control
-valve to set the mass flow rate.
-
-Please consider that this model is still in an early testing stage. The behavior is not 
-verified. It seems that behavior may be problematic for low demands. In such cases, the
-actual mass flow rate differs significantly from the set value.
+    Documentation(info="<html><p>
+  A simple substation model using a fixed return temperature and the
+  actual supply temperature to calculate the mass flow rate drawn from
+  the network. This model uses a linear control valve to set the mass
+  flow rate. Please consider that this model is still in an early
+  testing stage. The behavior is not verified. It seems that behavior
+  may be problematic for low demands. In such cases, the actual mass
+  flow rate differs significantly from the set value.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-March 3, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+  <li>March 3, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end ValveControlledHeatPumpFixDeltaT;

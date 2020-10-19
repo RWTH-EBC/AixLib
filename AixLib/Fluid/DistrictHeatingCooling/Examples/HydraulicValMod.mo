@@ -93,23 +93,34 @@ equation
     annotation (Line(points={{0,-60},{12,-60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This example recreates the <a
-href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidationPipes\">AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidationPipes</a>
-reference network using the <a
-href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.BaseClasses\">AixLib.Fluid.DistrictHeatingCooling.BaseClasses</a>.
-Both implementation yield the same results.</p>
-<h4>References</h4>
-<ul>
-<li><a href=\"https://www.crcpress.com/Hydraulics-of-Pipeline-Systems/Larock-Jeppson-Watters/p/book/9780849318061\">Larock, Bruce E., Roland W. Jeppson, and Gary Z. Watters. <i>Hydraulics of pipeline systems</i>. Boca Raton, FL: CRC Press, 2000.</a></li>
-<li>AixLib issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">#402</a></li>
-</ul>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This example recreates the <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidationPipes\">
+  AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidationPipes</a>
+  reference network using the <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.BaseClasses\">AixLib.Fluid.DistrictHeatingCooling.BaseClasses</a>.
+  Both implementation yield the same results.
+</p>
+<h4>
+  References
+</h4>
 <ul>
   <li>
-  May 27, 2017, by Marcus Fuchs:<br/>
-  Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 402</a>.
- </li>
+    <a href=
+    \"https://www.crcpress.com/Hydraulics-of-Pipeline-Systems/Larock-Jeppson-Watters/p/book/9780849318061\">
+    Larock, Bruce E., Roland W. Jeppson, and Gary Z. Watters.
+    <i>Hydraulics of pipeline systems</i>. Boca Raton, FL: CRC Press,
+    2000.</a>
+  </li>
+  <li>AixLib issue <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/402\">#402</a>
+  </li>
+</ul>
+<ul>
+  <li>May 27, 2017, by Marcus Fuchs:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 402</a>.
+  </li>
 </ul>
 </html>"));
 end HydraulicValMod;

@@ -95,16 +95,13 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=10000, __Dymola_Algorithm="Cvode"),
-    Documentation(info="<html>
-This example shows a simple open loop network with 1 supply and 1 demand node. 
-It illustrates the settings needed in the demand model to work in a cooling 
-network setup
-</html>", revisions="<html>
+    Documentation(info="<html>This example shows a simple open loop network with 1 supply and 1
+demand node. It illustrates the settings needed in the demand model to
+work in a cooling network setup
 <ul>
-<li>
-March 17, 2018, by Marcus Fuchs:<br/>
-First implementation.
-</li>
+  <li>March 17, 2018, by Marcus Fuchs:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end OpenLoopCooling;

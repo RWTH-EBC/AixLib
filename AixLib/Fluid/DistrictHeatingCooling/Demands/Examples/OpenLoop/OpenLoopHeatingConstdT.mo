@@ -97,14 +97,16 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=172800, Interval=60),
-    Documentation(revisions="<html>
-<ul>
-<li>
-October 23, 2018, by Tobias Blacha:<br/>
-First implementation.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>October 23, 2018, by Tobias Blacha:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Simple example of a heating network with electric heating element for flexible use of renewable electricity. The substation model with fixed temperature difference is used here.</p>
+<p>
+  Simple example of a heating network with electric heating element for
+  flexible use of renewable electricity. The substation model with
+  fixed temperature difference is used here.
+</p>
 </html>"));
 end OpenLoopHeatingConstdT;
