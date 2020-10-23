@@ -9,7 +9,7 @@ model CtrHighTemperatureSystem
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{40,40},{60,60}})));
   Modelica.Blocks.Sources.Constant TChpSet(final k=T_chp_set)
-    annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
+    annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
   Controls.Continuous.LimPID PIDadmix1(
     final yMax=1,
     final yMin=0,
@@ -53,12 +53,21 @@ model CtrHighTemperatureSystem
   Modelica.Blocks.Sources.Constant TBoilerSet_out(final k=T_set)
     annotation (Placement(transformation(extent={{-102,-20},{-82,0}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant1
-    annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
+    annotation (Placement(transformation(extent={{-80,-100},{-60,-80}})));
   Modelica.Blocks.Sources.Constant One(k=1)
     annotation (Placement(transformation(extent={{62,-100},{82,-80}})));
   parameter Real T_set_in=273.15 + 50 "Admixed temperature of boiler inflow ";
   parameter Real T_set=273.15 + 80 "Set point temperature of boiler";
   parameter Real T_chp_set=333.15 "Set point temperature of chp";
+  Controls.Continuous.LimPID PIDBoiler3(
+    final yMax=1,
+    final yMin=0,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+    k=0.01,
+    Ti=60,
+    Td=0,
+    final reverseAction=false) annotation (Dialog(enable=true, group="PID Controllers"),
+      Placement(transformation(extent={{20,-100},{40,-80}})));
 equation
   connect(rpmPumps.y, highTemperatureSystemBus.admixBus1.pumpBus.rpmSet)
     annotation (Line(points={{61,90},{100.09,90},{100.09,1.085}},color={0,0,127}),
@@ -103,14 +112,6 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
 
-  connect(TChpSet.y, highTemperatureSystemBus.TChpSet) annotation (Line(points={{41,-90},
-          {50,-90},{50,-78},{100,-78},{100,-40},{100.09,-40},{100.09,1.085}},
-                                                                  color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(TBoiler1Set_in.y, PIDadmix1.u_s) annotation (Line(points={{-79,90},{
           -42,90}},                        color={0,0,127}));
   connect(PIDadmix1.y, highTemperatureSystemBus.admixBus1.valveSet) annotation (
@@ -176,8 +177,8 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(booleanConstant1.y, highTemperatureSystemBus.onOffChpSet)
-    annotation (Line(points={{1,-90},{8,-90},{8,-70},{100.09,-70},{100.09,1.085}},
-                   color={255,0,255}), Text(
+    annotation (Line(points={{-59,-90},{-48,-90},{-48,-70},{100.09,-70},{100.09,
+          1.085}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -188,6 +189,21 @@ equation
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(TChpSet.y, PIDBoiler3.u_s)
+    annotation (Line(points={{1,-90},{18,-90}}, color={0,0,127}));
+  connect(PIDBoiler3.y, highTemperatureSystemBus.uRelChpSet) annotation (Line(
+        points={{41,-90},{100.09,-90},{100.09,1.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PIDBoiler3.u_m, highTemperatureSystemBus.throttlePumpBus.TRtrnInMea)
+    annotation (Line(points={{30,-102},{30,-120},{100.09,-120},{100.09,1.085}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                          Line(

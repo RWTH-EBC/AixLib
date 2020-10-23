@@ -93,13 +93,14 @@ model HighTemperatureSystem
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(Q_nom=120000,
         Q_min=40000))
     annotation (Placement(transformation(extent={{72,-72},{48,-48}})));
-  Fluid.BoilerCHP.CHP cHP(
+  Fluid.BoilerCHP.CHPNoControl
+                      cHPNoControl(
     redeclare package Medium = Medium,
     allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     param=DataBase.CHP.CHPDataSimple.CHP_Cleanergy_C9G(),
-    minCapacity=0.3)
+    minCapacity=0)
     annotation (Placement(transformation(extent={{-88,-72},{-112,-48}})));
   BaseClasses.HighTempSystemBus hTCBus annotation (Placement(transformation(
           extent={{-18,82},{18,116}}), iconTransformation(extent={{-14,84},{16,
@@ -107,7 +108,7 @@ model HighTemperatureSystem
 
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=
         T_amb)
-    annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
+    annotation (Placement(transformation(extent={{-58,-72},{-46,-60}})));
 
   Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
@@ -117,15 +118,15 @@ model HighTemperatureSystem
     m_flow_nominal=m_flow_nominal,
     V=0.1,
     nPorts=2) annotation (Placement(transformation(extent={{80,36},{100,56}})));
-  Modelica.Blocks.Math.Gain kWToW1(k=1000) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain kWToW1(k=1)    annotation (Placement(transformation(
         extent={{-3,-3},{3,3}},
         rotation=180,
         origin={-125,-45})));
-  Modelica.Blocks.Math.Gain kWToW2(k=1000) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain kWToW2(k=1)    annotation (Placement(transformation(
         extent={{-3,-3},{3,3}},
         rotation=180,
         origin={-125,-37})));
-  Modelica.Blocks.Math.Gain kWToW3(k=1000) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain kWToW3(k=1)    annotation (Placement(transformation(
         extent={{-3,-3},{3,3}},
         rotation=180,
         origin={-125,-29})));
@@ -133,6 +134,10 @@ model HighTemperatureSystem
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=T_amb)
+    annotation (Placement(transformation(extent={{26,-72},{38,-60}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature2(T=T_amb)
+    annotation (Placement(transformation(extent={{-132,-72},{-120,-60}})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,
@@ -159,10 +164,10 @@ equation
     annotation (Line(points={{-8,-60},{-8,-20}}, color={0,127,255}));
   connect(boiler2.port_b, admix2.port_a2)
     annotation (Line(points={{-32,-60},{-32,-20}}, color={0,127,255}));
-  connect(throttlePump.port_b1, cHP.port_a)
+  connect(throttlePump.port_b1, cHPNoControl.port_a)
     annotation (Line(points={{-88,-20},{-88,-60}}, color={0,127,255}));
-  connect(cHP.port_b, throttlePump.port_a2) annotation (Line(points={{-112,-60},
-          {-112,-20}},                                  color={0,127,255}));
+  connect(cHPNoControl.port_b, throttlePump.port_a2)
+    annotation (Line(points={{-112,-60},{-112,-20}}, color={0,127,255}));
   connect(admix1.hydraulicBus, hTCBus.admixBus1) annotation (Line(
       points={{80,0},{154,0},{154,99.085},{0.09,99.085}},
       color={255,204,51},
@@ -207,28 +212,15 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(boiler2.fuelPower, hTCBus.fuelPowerBoiler2Mea) annotation (Line(
-        points={{-28.64,-46.8},{-46,-46.8},{-46,-96},{-138,-96},{-138,99.085},{0.09,
-          99.085}}, color={0,0,127}), Text(
+        points={{-28.64,-46.8},{-70,-46.8},{-70,-84},{-138,-84},{-138,99.085},{
+          0.09,99.085}},
+                    color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cHP.TSet, hTCBus.TChpSet) annotation (Line(points={{-91.6,-67.2},{-84,
-          -67.2},{-84,-88},{-138,-88},{-138,99.085},{0.09,99.085}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(cHP.on, hTCBus.onOffChpSet) annotation (Line(points={{-103.6,-70.8},{-103.6,
-          -76},{-138,-76},{-138,100},{0.09,100},{0.09,99.085}}, color={255,0,255}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(fixedTemperature.port, boiler2.T_amb) annotation (Line(points={{20,-90},
-          {0,-90},{0,-66},{-28.16,-66}}, color={191,0,0}));
+  connect(fixedTemperature.port, boiler2.T_amb) annotation (Line(points={{-46,-66},
+          {-28.16,-66}},                 color={191,0,0}));
   connect(senT_a.T, hTCBus.T_out) annotation (Line(points={{106,66.6},{106,99.085},
           {0.09,99.085}}, color={0,0,127}), Text(
       string="%second",
@@ -257,24 +249,22 @@ equation
     annotation (Line(points={{100,60},{-32,60},{-32,20}}, color={0,127,255}));
   connect(senT_a.port_a, throttlePump.port_b2) annotation (Line(points={{100,60},
           {-112,60},{-112,20}}, color={0,127,255}));
-  connect(fixedTemperature.port, boiler1.T_amb) annotation (Line(points={{20,
-          -90},{32,-90},{32,-88},{48,-88},{48,-66},{51.84,-66}}, color={191,0,0}));
   connect(senT_b.port_b, vol.ports[1]) annotation (Line(points={{100,20},{94,20},
           {94,36},{88,36}}, color={0,127,255}));
   connect(vol.ports[2], senT_a.port_a) annotation (Line(points={{92,36},{96,36},
           {96,60},{100,60}}, color={0,127,255}));
-  connect(cHP.fuelInput, kWToW1.u) annotation (Line(points={{-102.4,-49.2},{
-          -102.4,-45},{-121.4,-45}}, color={0,0,127}));
-  connect(cHP.thermalPower, kWToW2.u) annotation (Line(points={{-97.6,-49.2},{
-          -97.6,-37},{-121.4,-37}}, color={0,0,127}));
+  connect(cHPNoControl.fuelInput, kWToW1.u) annotation (Line(points={{-102.4,-49.2},
+          {-102.4,-45},{-121.4,-45}}, color={0,0,127}));
+  connect(cHPNoControl.thermalPower, kWToW2.u) annotation (Line(points={{-97.6,
+          -49.2},{-97.6,-37},{-121.4,-37}}, color={0,0,127}));
   connect(kWToW2.y, hTCBus.thermalPowerChpMea) annotation (Line(points={{-128.3,
           -37},{-138,-37},{-138,99.085},{0.09,99.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cHP.electricalPower, kWToW3.u) annotation (Line(points={{-94,-49.2},{
-          -94,-29},{-121.4,-29}}, color={0,0,127}));
+  connect(cHPNoControl.electricalPower, kWToW3.u) annotation (Line(points={{-94,
+          -49.2},{-94,-29},{-121.4,-29}}, color={0,0,127}));
   connect(kWToW3.y, hTCBus.electricalPowerChpMea) annotation (Line(points={{
           -128.3,-29},{-138,-29},{-138,99.085},{0.09,99.085}}, color={0,0,127}),
       Text(
@@ -288,6 +278,17 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(cHPNoControl.u_rel, hTCBus.uRelChpSet) annotation (Line(points={{-91.6,
+          -67.2},{-82,-67.2},{-82,-84},{-138,-84},{-138,99.085},{0.09,99.085}},
+                    color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(fixedTemperature1.port, boiler1.T_amb)
+    annotation (Line(points={{38,-66},{51.84,-66}}, color={191,0,0}));
+  connect(fixedTemperature2.port, cHPNoControl.T_amb)
+    annotation (Line(points={{-120,-66},{-108.16,-66}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {120,100}}), graphics={
         Rectangle(
