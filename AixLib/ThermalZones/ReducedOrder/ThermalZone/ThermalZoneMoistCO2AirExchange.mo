@@ -1,9 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistCO2AirExchange
   "Thermal zone model considering moisture and co2 balance with ventilation, infiltration and internal gains"
-  extends ThermalZoneMoistAir(SumQLat_flow(nu=3), ROM(final use_C_flow=true, redeclare
-        package Medium =
-          AixLib.Media.Air (                                                                                            extraPropertiesNames={"C_flow"})));
+  extends ThermalZoneMoistAir(SumQLat_flow(nu=3));
 
   // CO2 parameters
   parameter Real actDeg=1.8 "Activity degree (Met units)"
@@ -70,13 +68,16 @@ model ThermalZoneMoistCO2AirExchange
     VZon=zoneParam.VAir,
     XCO2_amb=XCO2_amb,
     areaBod=areaBod,
-    metOnePerSit=metOnePerSit) if ATot > 0 or zoneParam.VAir > 0
+    metOnePerSit=metOnePerSit) if (ATot > 0 or zoneParam.VAir > 0) and
+    use_C_flow
     annotation (Placement(transformation(extent={{30,-56},{44,-42}})));
-  Modelica.Blocks.Interfaces.RealOutput CO2Con if ATot > 0 or zoneParam.VAir > 0
+  Modelica.Blocks.Interfaces.RealOutput CO2Con if (ATot > 0 or zoneParam.VAir
+     > 0) and use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,-66},{120,-46}})));
 
-  Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if ATot > 0 or zoneParam.VAir > 0
+  Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if (ATot >
+    0 or zoneParam.VAir > 0) and use_C_flow
     "Mass fraction of co2 in ROM in kg_CO2/ kg_TotalAir"
     annotation (Placement(transformation(extent={{4,-60},{16,-46}})));
 protected
@@ -152,12 +153,12 @@ equation
                                                                  color={0,0,127}));
   connect(cO2Balance.TAir, TAir) annotation (Line(points={{37,-42},{70,-42},{70,
           56},{110,56}}, color={0,0,127}));
-  connect(cO2Balance.mCO2_flow, ROM.C_flow[1]) annotation (Line(points={{44.7,-44.8},
-          {44.7,5.6},{37,5.6},{37,56}}, color={0,0,127}));
   connect(cO2Balance.CO2Con, CO2Con) annotation (Line(points={{44.7,-53.2},{56,-53.2},
           {56,-56},{110,-56}}, color={0,0,127}));
   connect(cO2Balance.XCO2, XCO2.y) annotation (Line(points={{30,-50.4},{30,-53},
           {16.6,-53}}, color={0,0,127}));
+  connect(ROM.C_flow[1], cO2Balance.mCO2_flow) annotation (Line(points={{37,56},
+          {34,56},{34,-6},{50,-6},{50,-44.8},{44.7,-44.8}}, color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib. </p>

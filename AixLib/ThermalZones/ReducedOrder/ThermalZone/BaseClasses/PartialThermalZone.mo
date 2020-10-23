@@ -8,6 +8,9 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance"
+    annotation (Dialog(tab="Advanced"));
   Modelica.Blocks.Interfaces.RealInput intGains[3]
     "Input profiles for internal gains persons, machines, light"
     annotation (
@@ -53,7 +56,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     annotation (Placement(transformation(extent={{94,8},{114,28}}),
                             iconTransformation(extent={{90,-20},{110,0}})));
   RC.FourElements ROM(
-    redeclare package Medium = Medium,
+    redeclare final package Medium = Medium,
     final nPorts=nPorts,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,
