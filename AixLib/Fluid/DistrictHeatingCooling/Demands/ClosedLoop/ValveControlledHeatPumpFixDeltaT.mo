@@ -92,7 +92,7 @@ public
         MediumBuilding, nPorts=1)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-20,-38})));
+        origin={-20,-34})));
   HeatPumps.Carnot_TCon              heaPum(
     redeclare package Medium1 = MediumBuilding,
     allowFlowReversal1=allowFlowReversal,
@@ -158,14 +158,14 @@ public
   Modelica.Blocks.Math.Add add(k1=-1)
     annotation (Placement(transformation(extent={{64,22},{44,42}})));
   Modelica.Blocks.Sources.Constant T_HeaPumpOff(k=-20)
-    annotation (Placement(transformation(extent={{-38,-72},{-30,-64}})));
+    annotation (Placement(transformation(extent={{-78,-74},{-70,-66}})));
   Utilities.Logical.SmoothSwitch switch1 annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=-90,
         origin={-8,-66})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=Q_flow_input >
         500.0)
-    annotation (Placement(transformation(extent={{-46,-96},{-26,-76}})));
+    annotation (Placement(transformation(extent={{-62,-96},{-26,-76}})));
   Utilities.Logical.SmoothSwitch switch2 annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=-90,
@@ -181,7 +181,7 @@ public
     "Temperature difference condenser outlet-inlet";
   Modelica.Blocks.Sources.RealExpression realExpression(y=0.5/(
         cp_default_building*dTBuilding))
-    annotation (Placement(transformation(extent={{-50,-110},{-30,-90}})));
+    annotation (Placement(transformation(extent={{-90,-112},{-28,-90}})));
 equation
 
   dpOut = dp;
@@ -192,8 +192,8 @@ equation
                           color={0,127,255}));
   connect(senT_supply.port_b, valve.port_a)
     annotation (Line(points={{-60,0},{-48,0}},     color={0,127,255}));
-  connect(sinkHeating.ports[1], heaPum.port_b1) annotation (Line(points={{-20,-28},
-          {-21,-28},{-21,-12},{-12,-12}}, color={0,127,255}));
+  connect(sinkHeating.ports[1], heaPum.port_b1) annotation (Line(points={{-20,-24},
+          {-21,-24},{-21,-12},{-12,-12}}, color={0,127,255}));
   connect(sourceHeating.ports[1], heaPum.port_a1)
     annotation (Line(points={{20,-30},{20,-12},{8,-12}}, color={0,127,255}));
   connect(deltaTBuilding.y, temperatureReturnBuilding.u2)
@@ -217,15 +217,15 @@ equation
   connect(delT.y, add.u1) annotation (Line(points={{79,50},{72,50},{72,38},{66,
           38}}, color={0,0,127}));
   connect(switch1.u3, T_HeaPumpOff.y) annotation (Line(points={{-14.4,-75.6},{
-          -14.4,-68},{-29.6,-68}},
+          -14.4,-70},{-69.6,-70}},
                             color={0,0,127}));
-  connect(booleanExpression.y, switch1.u2) annotation (Line(points={{-25,-86},{
-          -8,-86},{-8,-75.6}},
+  connect(booleanExpression.y, switch1.u2) annotation (Line(points={{-24.2,-86},
+          {-8,-86},{-8,-75.6}},
                             color={255,0,255}));
   connect(mFlowBuilding.y, switch2.u1) annotation (Line(points={{-45,80},{36,80},
           {36,-99.6},{26.4,-99.6}}, color={0,0,127}));
-  connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-25,-86},{
-          -8,-86},{-8,-99.6},{20,-99.6}}, color={255,0,255}));
+  connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-24.2,-86},
+          {-8,-86},{-8,-99.6},{20,-99.6}},color={255,0,255}));
   connect(switch2.y, sourceHeating.m_flow_in) annotation (Line(points={{20,
           -81.2},{28,-81.2},{28,-52}}, color={0,0,127}));
   connect(temperatureSupplyBuilding.y, switch1.u1) annotation (Line(points={{71,
@@ -234,8 +234,9 @@ equation
           {2,-15},{10,-15}}, color={0,0,127}));
   connect(temperatureReturnBuilding.y, sourceHeating.T_in) annotation (Line(
         points={{37,-74},{24,-74},{24,-52}},          color={0,0,127}));
-  connect(realExpression.y, switch2.u3) annotation (Line(points={{-29,-100},{-8,
-          -100},{-8,-99.6},{13.6,-99.6}}, color={0,0,127}));
+  connect(realExpression.y, switch2.u3) annotation (Line(points={{-24.9,-101},{
+          -8,-101},{-8,-99.6},{13.6,-99.6}},
+                                          color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={

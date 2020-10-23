@@ -37,7 +37,7 @@ model IdealPlantRevHP
     annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal)
-    annotation (Placement(transformation(extent={{48,-10},{68,10}})));
+    annotation (Placement(transformation(extent={{66,-10},{86,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
       redeclare package Medium2 = Medium,
     QCon_flow_nominal=Q_flow_nominal_HP,
@@ -54,11 +54,11 @@ model IdealPlantRevHP
     QEva_flow_min=Q_flow_nominal_CH,
     QEva_flow_nominal=Q_flow_nominal_CH,
     etaCarnot_nominal=0.3)
-    annotation (Placement(transformation(extent={{6,-4},{26,16}})));
+    annotation (Placement(transformation(extent={{38,-4},{58,16}})));
   Modelica.Blocks.Sources.RealExpression Input_HP(y=T_HpIn)
-    annotation (Placement(transformation(extent={{-78,12},{-58,32}})));
+    annotation (Placement(transformation(extent={{-84,14},{-64,34}})));
   Modelica.Blocks.Sources.RealExpression Input_CH(y=T_ChIn)
-    annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
+    annotation (Placement(transformation(extent={{-36,26},{-16,46}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceHeating(
     use_m_flow_in=true,
     redeclare package Medium = Medium,
@@ -73,7 +73,7 @@ model IdealPlantRevHP
   AixLib.Fluid.Sources.Boundary_pT sinkCooling(
     redeclare package Medium = Medium,
     nPorts=1,
-    T=288.15) annotation (Placement(transformation(extent={{56,50},{36,70}})));
+    T=288.15) annotation (Placement(transformation(extent={{92,24},{72,44}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceCooling(
     use_m_flow_in=true,
     redeclare package Medium = Medium,
@@ -122,13 +122,13 @@ public
     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
-        origin={-8,-10})));
+        origin={2,-14})));
   Sensors.TemperatureTwoPort senTem2(redeclare package Medium = Medium,
       m_flow_nominal=2)
-    annotation (Placement(transformation(extent={{-34,-6},{-14,14}})));
+    annotation (Placement(transformation(extent={{-26,-10},{-6,10}})));
   Sensors.TemperatureTwoPort senTem3(redeclare package Medium = Medium,
       m_flow_nominal=2)
-    annotation (Placement(transformation(extent={{0,40},{20,60}})));
+    annotation (Placement(transformation(extent={{8,-10},{28,10}})));
 equation
 
   // Control of the operations mode by flow direction
@@ -152,23 +152,25 @@ equation
   connect(port_a, senTem.port_a)
     annotation (Line(points={{-100,0},{-86,0}}, color={0,127,255}));
   connect(senTem1.port_b, port_b)
-    annotation (Line(points={{68,0},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{86,0},{100,0}}, color={0,127,255}));
   connect(senTem.port_b, heaPum.port_a1)
     annotation (Line(points={{-66,0},{-58,0}}, color={0,127,255}));
   connect(chi.port_a2, senTem1.port_a)
-    annotation (Line(points={{26,0},{48,0}}, color={0,127,255}));
-  connect(Input_HP.y, heaPum.TSet) annotation (Line(points={{-57,22},{-52,22},{-52,
-          3},{-60,3}}, color={0,0,127}));
-  connect(Input_CH.y, chi.TSet) annotation (Line(points={{-9,20},{-4,20},{-4,15},
-          {4,15}}, color={0,0,127}));
+    annotation (Line(points={{58,0},{66,0}}, color={0,127,255}));
+  connect(Input_HP.y, heaPum.TSet) annotation (Line(points={{-63,24},{-52,24},{
+          -52,3},{-60,3}},
+                       color={0,0,127}));
+  connect(Input_CH.y, chi.TSet) annotation (Line(points={{-15,36},{-4,36},{-4,
+          15},{36,15}},
+                   color={0,0,127}));
   connect(sinkHeating.ports[1], heaPum.port_b2) annotation (Line(points={{-58,-40},
           {-50,-40},{-50,-12},{-58,-12}}, color={0,127,255}));
   connect(heaPum.port_a2, sourceHeating.ports[1]) annotation (Line(points={{-38,-12},
           {-18,-12},{-18,-40},{-10,-40}},      color={0,127,255}));
   connect(sourceCooling.ports[1], chi.port_a1) annotation (Line(points={{-12,60},
-          {-2,60},{-2,12},{6,12}}, color={0,127,255}));
-  connect(chi.port_b1, sinkCooling.ports[1]) annotation (Line(points={{26,12},{
-          30,12},{30,60},{36,60}}, color={0,127,255}));
+          {-2,60},{-2,12},{38,12}},color={0,127,255}));
+  connect(chi.port_b1, sinkCooling.ports[1]) annotation (Line(points={{58,12},{
+          58,34},{72,34}},         color={0,127,255}));
   connect(MassFlow_HeatSink.y, sourceCooling.m_flow_in) annotation (Line(points={{-51,76},
           {-44,76},{-44,68},{-34,68}},          color={0,0,127}));
   connect(sourceHeating.m_flow_in, MassFlow_HeatSource.y) annotation (Line(
@@ -179,15 +181,14 @@ equation
         points={{12,-36},{20,-36},{20,-44},{25,-44}}, color={0,0,127}));
   connect(InletTemperature_ColdSource.y, sourceCooling.T_in) annotation (Line(
         points={{-51,58},{-44,58},{-44,64},{-34,64}}, color={0,0,127}));
-  connect(heaPum.port_b1, senTem2.port_a) annotation (Line(points={{-38,0},{-36,
-          0},{-36,4},{-34,4}}, color={0,127,255}));
-  connect(senTem3.port_b, chi.port_b2) annotation (Line(points={{20,50},{14,50},
-          {14,0},{6,0}}, color={0,127,255}));
-  connect(senTem2.port_b, senTem3.port_a) annotation (Line(points={{-14,4},{-8,
-          4},{-8,50},{0,50}},
+  connect(heaPum.port_b1, senTem2.port_a) annotation (Line(points={{-38,0},{-26,
+          0}},                 color={0,127,255}));
+  connect(senTem3.port_b, chi.port_b2) annotation (Line(points={{28,0},{38,0}},
+                         color={0,127,255}));
+  connect(senTem2.port_b, senTem3.port_a) annotation (Line(points={{-6,0},{8,0}},
                             color={0,127,255}));
   connect(bou.ports[1], senTem3.port_a)
-    annotation (Line(points={{-8,-6},{-8,50},{0,50}},  color={0,127,255}));
+    annotation (Line(points={{2,-10},{2,0},{8,0}},     color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-80,80},{80,0}},

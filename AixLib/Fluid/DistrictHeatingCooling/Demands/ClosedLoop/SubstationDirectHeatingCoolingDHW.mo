@@ -163,7 +163,7 @@ public
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-152,-62},{-172,-42}})));
   Modelica.Blocks.Sources.Constant const5(k=T_returnSpaceHeatingSet)
-    annotation (Placement(transformation(extent={{-142,-78},{-154,-66}})));
+    annotation (Placement(transformation(extent={{-144,-76},{-154,-66}})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-186,-62},{-206,-42}})));
   Sensors.TemperatureTwoPort senTemOut(
@@ -181,7 +181,7 @@ public
   Modelica.Blocks.Math.Max max3
     annotation (Placement(transformation(extent={{20,68},{40,88}})));
   Modelica.Blocks.Sources.Constant const6(k=0.1*m_flow_nominal)
-    annotation (Placement(transformation(extent={{26,114},{38,126}})));
+    annotation (Placement(transformation(extent={{10,112},{42,144}})));
 equation
 
   connect(port_a,vol. ports[1])
@@ -272,14 +272,16 @@ equation
           -1},{-138,-1}}, color={0,127,255}));
   connect(senTemIn.port_b, pumpHeating.port_a) annotation (Line(points={{-118,-1},
           {-102,-1},{-102,0},{-64,0}}, color={0,127,255}));
-  connect(senTemIn.T, feedback.u1) annotation (Line(points={{-128,11.1},{-128,18},
-          {-142,18},{-142,-52},{-154,-52}}, color={0,0,127}));
+  connect(senTemIn.T, feedback.u1) annotation (Line(points={{-128,11.1},{-128,
+          18},{-142,18},{-142,-52},{-154,-52}},
+                                            color={0,0,127}));
   connect(gain.u, feedback.y)
     annotation (Line(points={{-184,-52},{-171,-52}}, color={0,0,127}));
   connect(gain.y, division1.u2) annotation (Line(points={{-207,-52},{-248,-52},{
           -248,108},{-197.6,108},{-197.6,107.2}}, color={0,0,127}));
-  connect(const5.y, feedback.u2) annotation (Line(points={{-154.6,-72},{-162,-72},
-          {-162,-60}}, color={0,0,127}));
+  connect(const5.y, feedback.u2) annotation (Line(points={{-154.5,-71},{-162,
+          -71},{-162,-60}},
+                       color={0,0,127}));
   connect(heaPum.port_b2, senTemOut.port_a) annotation (Line(points={{104,0},{110,
           0},{110,-1},{114,-1}}, color={0,127,255}));
   connect(senTemOut.port_b, senMasFlo_GridCool.port_a) annotation (Line(points={
@@ -292,7 +294,7 @@ equation
           18},{-84,18},{-84,48},{-78,48}},        color={0,0,127}));
   connect(max3.u2, mass_flow_heatExchangerHeating1.y) annotation (Line(points={
           {18,72},{-18,72},{-18,56},{-55,56}}, color={0,0,127}));
-  connect(const6.y, max3.u1) annotation (Line(points={{38.6,120},{68,120},{68,
+  connect(const6.y, max3.u1) annotation (Line(points={{43.6,128},{68,128},{68,
           100},{4,100},{4,84},{18,84}}, color={0,0,127}));
   connect(max3.y, pumpHeating.m_flow_in) annotation (Line(points={{41,78},{64,
           78},{64,36},{-54,36},{-54,12}}, color={0,0,127}));
