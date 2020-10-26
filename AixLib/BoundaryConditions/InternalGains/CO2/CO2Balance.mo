@@ -10,24 +10,28 @@ model CO2Balance "Calculation of CO2 concentration within a thermal zone"
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person in Met (1 Met = 58 W/m^2)";
 
-  Modelica.Blocks.Interfaces.RealInput XCO2
-    "Massfraction of CO2 in room in kgCO2/kgTotalAir"
+  Modelica.Blocks.Interfaces.RealInput XCO2(final quantity="MassFraction",
+      final unit="kg/kg") "Massfraction of CO2 in room in kgCO2/kgTotalAir"
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}})));
-  Modelica.Blocks.Interfaces.RealInput airExc
-    "Total ventilation and infiltration rate in 1/h"
+  Modelica.Blocks.Interfaces.RealInput airExc(final quantity="VolumeFlowRate",
+      final unit="1/h") "Total ventilation and infiltration rate in 1/h"
     annotation (Placement(transformation(extent={{-120,10},{-80,50}})));
-  Modelica.Blocks.Interfaces.RealOutput mCO2_flow
-    "Incoming and outgoing CO2 massflow in kg/s"
+  Modelica.Blocks.Interfaces.RealOutput mCO2_flow(final quantity="MassFlowRate",
+      final unit="kg/s") "Incoming and outgoing CO2 massflow in kg/s"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
-  Modelica.Blocks.Interfaces.RealInput TAir "Air temperature of thermal zone"
-    annotation (Placement(transformation(extent={{-20,-20},{20,20}},
+  Modelica.Blocks.Interfaces.RealInput TAir(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Air temperature of thermal zone" annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={0,100})));
   Modelica.Blocks.Interfaces.RealInput spePeo
-    "specific number of people in the thermal zone"
-    annotation (Placement(transformation(extent={{-120,60},{-80,100}}),
-        iconTransformation(extent={{-120,60},{-80,100}})));
-  Modelica.Blocks.Interfaces.RealOutput CO2Con
+    "specific number of people in the thermal zone" annotation (Placement(
+        transformation(extent={{-120,60},{-80,100}}), iconTransformation(extent=
+           {{-120,60},{-80,100}})));
+  Modelica.Blocks.Interfaces.RealOutput CO2Con(min=0, max=1000000)
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
 
