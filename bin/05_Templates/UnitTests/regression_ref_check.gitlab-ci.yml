@@ -20,21 +20,20 @@ RegressionTest_Check_References:
         - chmod 600 ~/.ssh/id_rsa
         - git config --global user.name "${GITLAB_USER_NAME}" 
         - git config --global user.email "${GITLAB_USER_EMAIL}"
-        
+        - chmod +x bin/06_Configfiles/EOF.sh
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate python36  
         - python -V               # Print out python version for debugging
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        
         ## Push new Reference files to Branch
         - mkdir public
         - mkdir CorrectedVersion
         - cd  CorrectedVersion
         - git clone --single-branch --branch $TARGET_BRANCH git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py --single-package AixLib  --tool dymola -n 2 --check-ref -p AixLib < ../bin/06_Configfiles/EOF
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py --single-package AixLib  --tool dymola -n 2 --check-ref -p AixLib < ../bin/06_Configfiles/EOF.sh
         - if cat ../bin/06_Configfiles/exit.sh | grep "exit 1"; then 
             model=$(git diff --raw HEAD^1);
             echo $model;
