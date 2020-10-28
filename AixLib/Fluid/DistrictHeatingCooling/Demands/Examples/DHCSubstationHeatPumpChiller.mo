@@ -78,8 +78,8 @@ equation
     Documentation(info="<html>
 <p>
   This is an ClosedLoop example of <a href=
-  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingDirectCooling\">
-  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingDirectCooling</a>
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.DHCSubstationHeatPumpChiller\">
+  AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.DHCSubstationHeatPumpChiller</a>
   which is a simple substation model using for fixed return temperatures and actual supply 
   temperatures to calculate the mass flow rates for heating and cooling.
 </p>
