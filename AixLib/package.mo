@@ -7,7 +7,7 @@ package AixLib
     NcDataReader2(version="2.5.0"),
     SDF(version="0.4.1"),
     Modelica_DeviceDrivers(version="1.7.0")),
-  version = "0.10.5",
+    version = "0.10.5",
   conversion(from(
     version="0.3.2", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.3.2_to_0.4.mos",
     version="0.5.0", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.5.0_to_0.5.1.mos",
@@ -35,8 +35,8 @@ package AixLib
     version="0.10.0", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.0_to_0.10.1.mos",
     version="0.10.1", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.1_to_0.10.2.mos",
     version="0.10.2", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.2_to_0.10.3.mos",
-    version="0.10.3", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.3_to_0.10.4.mos",
-    version="0.10.4", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.4_to_0.10.5.mos")),
+	version="0.10.3", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.3_to_0.10.4.mos",
+	version="0.10.4", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.3_to_0.10.5.mos")),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed
   for research and teaching purposes. It aims at dynamic simulations of
