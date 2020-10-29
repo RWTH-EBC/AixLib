@@ -172,7 +172,7 @@ model MainBuildingEnergySystem
     Td=0,
     rpm_pump=1600,
     reverseAction=true)
-    annotation (Placement(transformation(extent={{-24,60},{-8,78}})));
+    annotation (Placement(transformation(extent={{-24,64},{-10,78}})));
   GeothermalFieldSimple geothermalFieldSimple(
     redeclare package Medium = Medium,
     m_flow_nominal=10,
@@ -222,7 +222,7 @@ model MainBuildingEnergySystem
     Td=0,
     rpm_pump=1400,
     reverseAction=true)
-    annotation (Placement(transformation(extent={{74,62},{90,80}})));
+    annotation (Placement(transformation(extent={{78,64},{90,78}})));
   BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{-56,
             104},{-26,134}}), iconTransformation(extent={{-30,110},{-10,130}})));
   Modelica.Blocks.Nonlinear.Limiter limiterCCAHot(uMax=0, uMin=-100000)
@@ -257,7 +257,7 @@ model MainBuildingEnergySystem
         rotation=180,
         origin={12,106})));
   Modelica.Blocks.Interfaces.RealOutput Tair
-    annotation (Placement(transformation(extent={{-138,-150},{-118,-130}})));
+    annotation (Placement(transformation(extent={{-64,-140},{-44,-120}})));
 
   Modelica.Blocks.Nonlinear.Limiter limiterAHU(uMax=0, uMin=-100000)
     annotation (Placement(transformation(extent={{-130,88},{-122,96}})));
@@ -289,7 +289,7 @@ model MainBuildingEnergySystem
     V=0.01,
     nPorts=3) annotation (Placement(transformation(extent={{112,46},{120,54}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=weather.Temperature)
-    annotation (Placement(transformation(extent={{-180,-150},{-160,-130}})));
+    annotation (Placement(transformation(extent={{-100,-140},{-80,-120}})));
   Modelica.Blocks.Sources.RealExpression Q_flow_AHU1(y=-(0.9*(Tair - 273.15) +
         6)*1000)
     annotation (Placement(transformation(extent={{-200,96},{-184,112}})));
@@ -306,6 +306,9 @@ model MainBuildingEnergySystem
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={118,106})));
+  Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=0)
+    "Ice Protection"
+    annotation (Placement(transformation(extent={{-36,-120},{-24,-108}})));
 equation
   connect(heatpumpSystem.port_a2, heatExchangerSystem.port_b3) annotation (Line(
         points={{-58,-78.6667},{-86,-78.6667},{-86,-25.56},{-84.7143,-25.56}},
@@ -354,7 +357,7 @@ equation
   connect(consumerCold2.port_b, admixCold2.port_a2)
     annotation (Line(points={{116,92},{116,80}}, color={0,127,255}));
   connect(ctrMixCold2.hydraulicBus, admixCold2.hydraulicBus) annotation (Line(
-      points={{91.12,71.18},{94.72,71.18},{94.72,70},{100,70}},
+      points={{90.84,71.14},{94.72,71.14},{94.72,70},{100,70}},
       color={255,204,51},
       thickness=0.5));
   connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
@@ -362,7 +365,7 @@ equation
   connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
         points={{59.8333,16},{55.8,16},{55.8,22}}, color={0,127,255}));
   connect(ctrMixCold1.hydraulicBus, admixCold1.hydraulicBus) annotation (Line(
-      points={{-6.88,69.18},{-3.28,69.18},{-3.28,70},{0,70}},
+      points={{-9.02,71.14},{-3.28,71.14},{-3.28,70},{0,70}},
       color={255,204,51},
       thickness=0.5));
   connect(heatpumpSystem.heatPumpSystemBus, mainBus.hpSystemBus) annotation (
@@ -444,9 +447,6 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(Tair, prescribedTemperature.T) annotation (Line(points={{-128,-140},{
-          -108,-140},{-108,-144},{-54,-144},{-54,-114},{-19.2,-114}}, color={0,
-          0,127}));
   connect(add.y, consumerLTC.Q_flow)
     annotation (Line(points={{-107.6,96},{-93.6,96}}, color={0,0,127}));
   connect(Q_flow_CCA_hot.y, limiterCCAHot.u)
@@ -495,7 +495,7 @@ equation
   connect(vol3.ports[3], heatpumpSystem.port_a1) annotation (Line(points={{117.067,
           46},{118,46},{118,-68},{52,-68}},         color={0,127,255}));
   connect(combiTimeTable.y[1], Tair)
-    annotation (Line(points={{-159,-140},{-128,-140}}, color={0,0,127}));
+    annotation (Line(points={{-79,-130},{-54,-130}},   color={0,0,127}));
   connect(limiterCCACold1.y, consumerCold2.Q_flow) annotation (Line(points={{
           113.6,106},{106.4,106},{106.4,98}}, color={0,0,127}));
   connect(Q_flow_AHU1.y, limiterAHU1.u)
@@ -504,6 +504,10 @@ equation
     annotation (Line(points={{122.8,106},{131.2,106}}, color={0,0,127}));
   connect(limiterAHU1.y, consumerHTC.Q_flow) annotation (Line(points={{-169.6,
           104},{-166,104},{-166,96},{-173.6,96}}, color={0,0,127}));
+  connect(Tair, temperatureLimiter.u) annotation (Line(points={{-54,-130},{-50,
+          -130},{-50,-114},{-37.2,-114}}, color={0,0,127}));
+  connect(temperatureLimiter.y, prescribedTemperature.T)
+    annotation (Line(points={{-23.4,-114},{-19.2,-114}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
           extent={{-200,120},{120,-120}},
@@ -516,7 +520,7 @@ equation
           pattern=LinePattern.Dash,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="E.ON ERC Main building energy system")}),
+          textString="E.ON ERC main building energy system")}),
     experiment(
       StopTime=432000,
       Tolerance=0.001,
