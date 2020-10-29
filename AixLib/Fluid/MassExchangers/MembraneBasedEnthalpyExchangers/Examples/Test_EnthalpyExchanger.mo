@@ -159,5 +159,15 @@ equation
     annotation (Line(points={{23,80},{38.5,80}}, color={0,0,127}));
   connect(latEff.y, realValue1.numberPort)
     annotation (Line(points={{23,60},{38.5,60}}, color={0,0,127}));
-  annotation (experiment(StopTime=7200, Interval=1));
+  annotation (experiment(StopTime=7200, Interval=1, method="dassl",tolerance=1E-6),
+    __Dymola_Comands(file=
+      "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Examples/Test_EnthalpyExchanger.mos"
+        "Simulate and plot"),
+    Documentation(info="<html>
+This example shows the functionality of the membrane-based enthalpy exchanger. Two characteristic values for enthalpy exchangers, the latent and sensible efficiency, are calculated.
+</html>", revisions="<html>
+<ul>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
+</ul>
+</html>"));
 end Test_EnthalpyExchanger;

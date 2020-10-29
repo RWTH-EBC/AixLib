@@ -276,5 +276,16 @@ equation
           -110,66},{-110,64},{-78,64}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-160,-100},{160,100}})), Icon(
         coordinateSystem(extent={{-160,-100},{160,100}})),
-    experiment(StopTime=29600, Interval=1));
+    experiment(StopTime=29600, Interval=1, method="dassl",tolerance=1E-6),
+    __Dymola_Comands(file=
+      "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Validation/StaticValidation.mos"
+        "Simulate and plot"),
+    Documentation(info="<html>
+<p>This test case shows the comparison between static measurement results and the simulation results.</p>
+<p>Measurements were carried out on a membrane-based enthalpy exchanger used in domestic ventilation units by Zehnder Systems at the Institute for Energy Efficient Building and Indoor Climate, RWTH Aachen University.</p>
+</html>", revisions="<html>
+<ul>
+<li>October 13, 2020, by Martin Kremer:<br/>First implementation. </li>
+</ul>
+</html>"));
 end StaticValidation;
