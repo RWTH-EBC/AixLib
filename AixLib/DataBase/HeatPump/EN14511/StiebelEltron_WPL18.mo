@@ -12,11 +12,15 @@ record StiebelEltron_WPL18 "Stiebel Eltron WPL 18"
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,
-    Documentation(revisions="<html>
-<ul>
- <li><i>Oct 14, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Transferred to AixLib.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
+    Transferred to AixLib.
+  </li>
 </ul>
 </html>", info="<html>
-<p>According to data from WPZ Buchs, Swiss; EN14511</p>
+<p>
+  According to data from WPZ Buchs, Swiss; EN14511
+</p>
 </html>"));
 end StiebelEltron_WPL18;

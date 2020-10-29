@@ -30,8 +30,6 @@ public
   /* *******************************************************************
       HeatStorage Parameters
      ******************************************************************* */
-
-  parameter Real tau(min=0) = 1000 "Time constant for mixing";
   parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=1500 "Heat transfer coefficient at the inner wall";
@@ -198,23 +196,61 @@ public
         extent={{-14,-12},{14,12}},
         rotation=270,
         origin={-72,-60})));
-  Fluid.Storage.BaseClasses.StorageCover                  top_cover(
-    D1=data.dTank)   annotation (Placement(transformation(
+  Fluid.Storage.BaseClasses.StorageCover top_cover(
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns,
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=T_start_wall,
+    final TStartIns=T_start_ins,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={2,70})));
   Fluid.Storage.BaseClasses.StorageMantle                  storage_mantle[n](
-    each height=data.hTank/n,
-    each D1=data.dTank)
+    each final lambdaWall=data.lambdaWall,
+    each final lambdaIns=data.lambdaIns,
+    each final TStartWall=T_start_wall,
+    each final TStartIns=T_start_ins,
+    each final rhoIns=data.rhoIns,
+    each final cIns=data.cIns,
+    each final rhoWall=data.rhoWall,
+    each final cWall=data.cWall,
+    each final height=data.hTank/n,
+    each final D1=data.dTank,
+    each final sWall=data.sWall,
+    each final sIns=data.sIns,
+    each final hConIn=hConIn,
+    each final hConOut=hConOut)
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-  Fluid.Storage.BaseClasses.StorageCover                  bottom_cover(
-    D1=data.dTank)   annotation (Placement(transformation(
+  Fluid.Storage.BaseClasses.StorageCover bottom_cover(
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=T_start_wall,
+    final TStartIns=T_start_ins,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-38})));
 
   replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction  constrainedby BaseClasses.PartialHeatTransferLayers
+     BaseClasses.HeatTransferOnlyConduction  constrainedby
+    BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
   HeatTransfer heatTransfer(final Medium=medium,final data=data,
@@ -627,8 +663,8 @@ connect(heatTransfer.therm, layer.port);
   Buffer storage model with support for heating rod and two heating
   coils. Model with variable connection pairs for loading and unlouding
   cycles which are defined by the associated <u>storage layer
-  number</u> of the ports. Compared to the standard HeatStorage model, the 
-  position of the heating coils can also be defined in this model.
+  number</u> of the ports. Compared to the standard HeatStorage model,
+  the position of the heating coils can also be defined in this model.
 </p>
 <h4>
   <span style=\"color:#008000\">Concept</span>
@@ -654,7 +690,7 @@ connect(heatTransfer.therm, layer.port);
 </p>
 <p>
   <br/>
-  <b><font style=\"color: #008000;\">Example Results</font></b>
+  <b><span style=\"color: #008000\">Example Results</span></b>
 </p>
 <p>
   <a href=
@@ -662,18 +698,18 @@ connect(heatTransfer.therm, layer.port);
 </p>
 </html>",
 revisions="<html><ul>
-<li>
+  <li>
     <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
-</li>
-<li>
+  </li>
+  <li>
     <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
     Added documentation.
-</li>
-<li>
+  </li>
+  <li>
     <i>December 16, 2014</i> by Sebastian Stinner:<br/>
     Implemented.
-</li>
+  </li>
 </ul>
 </html>"));
 end HeatStorageVariablePorts;

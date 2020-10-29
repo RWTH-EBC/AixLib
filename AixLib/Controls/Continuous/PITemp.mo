@@ -43,23 +43,33 @@ equation
           -60,-34},{-80,-34},{-80,26},{-56,26}}, color={0,0,127}));
   connect(setPoint, switch1.u3)
     annotation (Line(points={{-80,90},{-80,10},{-56,10}}, color={0,0,127}));
-  annotation (Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>
- Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &quot;on&quot; it will controll the thermal port temperature to the target value (soll). If set to &quot;off&quot; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time.
- </p>
- </html>", revisions = "<html>
- <ul>
-   <li><i>April, 2016&nbsp;</i>
-          by Peter Remmen:<br/>
-          Moved from Utilities to Controls</li>
- </ul>
- <ul>
- <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-   <li>
-          by Peter Matthes:<br/>
-          implemented</li>
- </ul>
- </html> "), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
+  annotation (Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Based on a model by Alexander Hoh with some modifications and the
+  Modelica-Standard PI controller. If set to \"on\" it will controll the
+  thermal port temperature to the target value (soll). If set to \"off\"
+  the controller error will become zero and therefore the current
+  output level of the PI controller will remain constant. When this
+  switching occurs the TriggeredTrapezoid will level the current
+  controller output down to zero in a selectable period of time.
+</p>
+<ul>
+  <li>
+    <i>April, 2016&#160;</i> by Peter Remmen:<br/>
+    Moved from Utilities to Controls
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>by Peter Matthes:<br/>
+    implemented
+  </li>
+</ul>
+</html> "), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-58, 32}, {62, -20}}, lineColor = {175, 175, 175}, textString = "%name")}));
 end PITemp;

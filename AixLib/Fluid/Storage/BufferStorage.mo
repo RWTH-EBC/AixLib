@@ -36,7 +36,8 @@ model BufferStorage
 
   parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
+  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby
+    DataBase.Storage.BufferStorageBaseDataDefinition                                                                                         "Data record for Storage"
   annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
@@ -126,17 +127,20 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,-80})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package
+                                                                                Medium =
                 Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
+      package                                                                    Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
+      package                                                                      Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -161,6 +165,8 @@ model BufferStorage
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
+    m_flow_small=m_flow_small,
+    allowFlowReversal=allowFlowReversal_layers,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
     final T_start=fill(TStart,n),
@@ -277,12 +283,13 @@ model BufferStorage
         origin={6,-44})));
 
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil1(
+    m_flow_small=m_flow_small_HC1,
     disHC=disHC1,
     hConHC=hConHC1,
     redeclare package Medium = MediumHC1,
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
-    allowFlowReversal=true,
+    allowFlowReversal=allowFlowReversal_HC1,
     final m_flow_nominal=mHC1_flow_nominal,
     TStart=TStart) if useHeatingCoil1
     annotation (Placement(transformation(
@@ -290,19 +297,35 @@ model BufferStorage
         rotation=270,
         origin={-58,29})));
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil2(
+    m_flow_small=m_flow_small_HC2,
     disHC=disHC2,
     lengthHC=data.lengthHC2,
     hConHC=hConHC2,
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
-    allowFlowReversal=true,
-    final m_flow_nominal=mHC1_flow_nominal,
+    allowFlowReversal=allowFlowReversal_HC2,
+    final m_flow_nominal=mHC2_flow_nominal,
     TStart=TStart) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-56,-39})));
 
+  parameter SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil1));
+  parameter SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil2));
+  parameter SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+  parameter Boolean allowFlowReversal_layers=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal. Used only if model has two ports."
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC1=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC2=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
 initial equation
    assert(data.hHC1Up<=data.hTank and data.hHC1Up>=0.0 and
      data.hHC1Low<=data.hTank and data.hHC1Low>=0.0,
@@ -740,64 +763,123 @@ for i in 2:(n-1) loop
           thickness=2)}),
                  Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-80,-100},{80,100}})),
-    Documentation(revisions="<html>
-<ul>
-<li>November 27, 2019, by Philipp Mehrfeld:<br/>
-- <a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a> <br/>
-- Replace MSL pipe by <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br/>
-- Add energyDynamics and tidy up with heat transfer models.
-</li>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>December 10, 2013</i> by Kristian Huchtemann:<br/>Added documentation of storage and new heat transfer models.</li>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-<li><i>February 19, 2013 </i>by Sebastian Stinner: <br/>mistake in losses calculation corrected (thickness of &quot;wall&quot; and &quot;insulation&quot; was only considered once but has to be considered twice, additionally the components &quot;wall&quot; and &quot;insulation&quot; were exchanged )<br/>and mistake in bouyancy model &quot;Wetter&quot; corrected (bouyancy flows were flowing in the wrong direction)</li>
+    Documentation(revisions="<html><ul>
+  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
+    - <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a><br/>
+    - Replace MSL pipe by <a href=
+    \"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br/>
+
+    - Add energyDynamics and tidy up with heat transfer models.
+  </li>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Added to AixLib
+  </li>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>December 10, 2013</i> by Kristian Huchtemann:<br/>
+    Added documentation of storage and new heat transfer models.
+  </li>
+  <li>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
+  <li>
+    <i>February 19, 2013</i> by Sebastian Stinner:<br/>
+    mistake in losses calculation corrected (thickness of \"wall\" and
+    \"insulation\" was only considered once but has to be considered
+    twice, additionally the components \"wall\" and \"insulation\" were
+    exchanged )<br/>
+    and mistake in bouyancy model \"Wetter\" corrected (bouyancy flows
+    were flowing in the wrong direction)
+  </li>
 </ul>
 </html>",
-        info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Buffer Storage Model with support for heating rod and two heating coils. </p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>It represents a buffer storage stratified into n layers where 1 represents
-the bottom layer and n represents the top layer. The layers are connected to
-each other allowing heat and fluid transfer.The heat transfer between the layers
-can be selected to model the conductance between the layers or different models
-that additionally represent the buoyancy:</p>
-<p><b>HeatTransferOnlyConduction</b>: Model for heat transfer between buffer
-storage layers. Models conductance of water. An effective heat conductivity is
-therefore calculated. Used in BufferStorage model.</p>
-<p><b>HeatTransferLambdaSimple: </b>Model for heat transfer between buffer
-storage layers. Models conductance of water and additional effective
-conductivity (in case the above layer is colder than the lower layer). Used in
-BufferStorage model.</p>
-<p><b>HeatTransferLambdaEff: </b>Model for heat transfer between buffer storage
-layers. Models conductance of water and buoyancy according to Viskanta et al.,
-1997. An effective heat conductivity is therefore calculated. Used in
-BufferStorage model.</p>
-<p><b>HeatTransferLambdaEffSmooth: </b>Same as HeatTransfer_lambda_eff. In
-addition, the <i>smooth()</i> expression is used for the transition of the
-buoyancy model.</p>
-<p><b>HeatTransferLambdaEffTanh: </b>Same as HeatTransfer_lambda_eff. In
-addition, a tanh function is used for the transition of the buoyancy model
-(VariableTransition model). Attention: the initial value of the FullTransition
-model is 0.5. This may lead to a mixture of the storage at the beginning of the
-simulation.</p>
-<p><b>HeatTransferBuoyancyWetter: </b>Model for heat transfer between buffer
-storage layers. Models buoyancy according to
-Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings library, cf.
-https://simulationresearch.lbl.gov/modelica. No conduction is implemented apart
-from when buoyancy occurs.</p> <p>The geometrical data for the storage is read
-by records in the DataBase package. The model also includes heat losses over the
-storage walls (wall, top and bottom). No pressure losses are included. Thus
-external pressure loss models are required for the use of the model. </p>
-<h4><span style=\"color: #008000\">Sources</span></h4>
+        info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Buffer Storage Model with support for heating rod and two heating
+  coils.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  It represents a buffer storage stratified into n layers where 1
+  represents the bottom layer and n represents the top layer. The
+  layers are connected to each other allowing heat and fluid
+  transfer.The heat transfer between the layers can be selected to
+  model the conductance between the layers or different models that
+  additionally represent the buoyancy:
+</p>
+<p>
+  <b>HeatTransferOnlyConduction</b>: Model for heat transfer between
+  buffer storage layers. Models conductance of water. An effective heat
+  conductivity is therefore calculated. Used in BufferStorage model.
+</p>
+<p>
+  <b>HeatTransferLambdaSimple:</b> Model for heat transfer between
+  buffer storage layers. Models conductance of water and additional
+  effective conductivity (in case the above layer is colder than the
+  lower layer). Used in BufferStorage model.
+</p>
+<p>
+  <b>HeatTransferLambdaEff:</b> Model for heat transfer between buffer
+  storage layers. Models conductance of water and buoyancy according to
+  Viskanta et al., 1997. An effective heat conductivity is therefore
+  calculated. Used in BufferStorage model.
+</p>
+<p>
+  <b>HeatTransferLambdaEffSmooth:</b> Same as HeatTransfer_lambda_eff.
+  In addition, the <i>smooth()</i> expression is used for the
+  transition of the buoyancy model.
+</p>
+<p>
+  <b>HeatTransferLambdaEffTanh:</b> Same as HeatTransfer_lambda_eff. In
+  addition, a tanh function is used for the transition of the buoyancy
+  model (VariableTransition model). Attention: the initial value of the
+  FullTransition model is 0.5. This may lead to a mixture of the
+  storage at the beginning of the simulation.
+</p>
+<p>
+  <b>HeatTransferBuoyancyWetter:</b> Model for heat transfer between
+  buffer storage layers. Models buoyancy according to
+  Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings
+  library, cf. https://simulationresearch.lbl.gov/modelica. No
+  conduction is implemented apart from when buoyancy occurs.
+</p>
+<p>
+  The geometrical data for the storage is read by records in the
+  DataBase package. The model also includes heat losses over the
+  storage walls (wall, top and bottom). No pressure losses are
+  included. Thus external pressure loss models are required for the use
+  of the model.
+</p>
+<h4>
+  <span style=\"color: #008000\">Sources</span>
+</h4>
 <ul>
-<li>R. Viskanta, A. KaraIds: Interferometric observations of the temperature
-structure in water cooled or heated from above. <i>Advances in Water
-Resources,</i> volume 1, 1977, pages 57-69. Bibtex-Key [R.VISKANTA1977]</li>
+  <li>R. Viskanta, A. KaraIds: Interferometric observations of the
+  temperature structure in water cooled or heated from above.
+  <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69.
+  Bibtex-Key [R.VISKANTA1977]
+  </li>
 </ul>
-<h4><span style=\"color: #008000;\">Example Results</span></h4>
-<p><a href=\"AixLib.Fluid.Storage.Examples.BufferStorageCharging\">AixLib.Fluid.Storage.Examples.BufferStorageCharging</a></p>
+<h4>
+  <span style=\"color: #008000;\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Fluid.Storage.Examples.BufferStorageCharging\">AixLib.Fluid.Storage.Examples.BufferStorageCharging</a>
+</p>
 </html>"));
 end BufferStorage;
