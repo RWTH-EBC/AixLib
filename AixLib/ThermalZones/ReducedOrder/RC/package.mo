@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder;
+﻿within AixLib.ThermalZones.ReducedOrder;
 package RC "Package with reduced order thermal zones based on VDI 6007 Part 1"
   extends Modelica.Icons.VariantsPackage;
 
