@@ -386,6 +386,7 @@ partial model PartialHeatPumpSystem
     final tableUpp=tableUpp,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
+    final deltaIceFac=deltaIceFac,
     final use_chiller=use_chiller,
     final calcPel_deFro=calcPel_deFro,
     final use_antFre=use_antFre,

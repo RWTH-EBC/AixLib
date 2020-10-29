@@ -1,0 +1,17 @@
+clear
+
+convertClear();
+
+convertClass("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirExchange",
+              "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange");
+convertClass("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAir",
+              "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2");
+convertClass("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirEquipped",
+              "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped");
+
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange",
+              "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange");
+convertClass("AixLib.ThermalZones.ReducedOrder.MultiZone.MultiZoneMoistAir",
+              "AixLib.ThermalZones.ReducedOrder.MultiZone.MultiZoneMoistAirCO2");
+convertClass("AixLib.ThermalZones.ReducedOrder.MultiZone.MultiZoneMoistAirEquipped",
+              "AixLib.ThermalZones.ReducedOrder.MultiZone.MultiZoneMoistAirCO2Equipped");
