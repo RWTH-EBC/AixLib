@@ -4,6 +4,9 @@ model CtrAHUBasic "Simple controller for AHU"
   parameter Modelica.SIunits.Temperature TFlowSet=289.15
     "Flow temperature set point of consumer"
     annotation (Dialog(enable=useExternalTset == false));
+  parameter Real TFrostProtect=273.15 + 5
+    "Temperature set point of preheater for frost protection";
+
   parameter Boolean useExternalTset=false
     "If True, set temperature can be given externally";
   parameter Modelica.SIunits.VolumeFlowRate VFlowSet=3000/3600
@@ -30,7 +33,7 @@ model CtrAHUBasic "Simple controller for AHU"
             16}})));
   CtrRegBasic ctrPh(final useExternalTset=true, Td=0,
     final initType=initType)                          annotation (dialog(enable=
-         True), Placement(transformation(extent={{0,80},{20,100}})));
+         True), Placement(transformation(extent={{0,70},{20,90}})));
   CtrRegBasic ctrCo(
     final useExternalTset=true,
     Td=0,
@@ -42,17 +45,17 @@ model CtrAHUBasic "Simple controller for AHU"
     final useExternalTMea=true,
     Td=0,
     final initType=initType)
-          annotation (dialog(enable=True), Placement(transformation(extent={{0,0},
-            {20,20}})));
+          annotation (dialog(enable=True), Placement(transformation(extent={{-2,10},
+            {18,30}})));
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TFlowSet) if not useExternalTset
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
           extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Sources.Constant TFrostProtection(final k=273.15 + 5) if
+  Modelica.Blocks.Sources.Constant TFrostProtection(final k=TFrostProtect) if
                                                                       not useExternalTset
-    annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
+    annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
   Controls.Continuous.LimPID PID_VflowSup(
     final yMax=dpMax,
     final yMin=0,
@@ -91,9 +94,10 @@ model CtrAHUBasic "Simple controller for AHU"
         origin={66,-36})));
 
 
+
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
-      points={{20.2,90},{54,90},{54,88},{100.05,88},{100.05,0.05}},
+      points={{20.2,80},{100.05,80},{100.05,0.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -109,7 +113,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrRh.registerBus, genericAHUBus.heaterBus) annotation (Line(
-      points={{20.2,10},{100.05,10},{100.05,0.05}},
+      points={{18.2,20},{100.05,20},{100.05,0.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -121,11 +125,11 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(constTflowSet.y, ctrRh.Tset) annotation (Line(
-      points={{-79,50},{-28,50},{-28,10},{-2,10}},
+      points={{-79,50},{-28,50},{-28,20},{-4,20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(TFrostProtection.y, ctrPh.Tset)
-    annotation (Line(points={{-39,90},{-2,90}}, color={0,0,127}));
+    annotation (Line(points={{-39,80},{-2,80}}, color={0,0,127}));
   connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-50},{-2,
           -50}},                    color={0,0,127}));
   connect(PID_VflowSup.u_m, genericAHUBus.heaterBus.VFlowAirMea) annotation (
@@ -141,7 +145,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(Tset, ctrRh.Tset) annotation (Line(
-      points={{-120,0},{-28,0},{-28,10},{-2,10}},
+      points={{-120,0},{-28,0},{-28,20},{-4,20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ConstWRG.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{52.6,
@@ -199,8 +203,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrRh.TMea, genericAHUBus.TSupAirMea) annotation (Line(points={{10,-2},
-          {10,-6},{100.05,-6},{100.05,0.05}},         color={0,0,127}), Text(
+  connect(ctrRh.TMea, genericAHUBus.TSupAirMea) annotation (Line(points={{8,8},{8,
+          -6},{100.05,-6},{100.05,0.05}},             color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

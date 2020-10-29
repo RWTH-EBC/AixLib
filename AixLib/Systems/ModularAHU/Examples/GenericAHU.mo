@@ -4,6 +4,7 @@ model GenericAHU "Example of generic ahu model"
   AixLib.Systems.ModularAHU.GenericAHU genericAHU(
     redeclare package Medium1 = Media.Air,
     redeclare package Medium2 = Media.Water,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_amb=293.15,
     m1_flow_nominal=3000/3600*1.2,
     m2_flow_nominal=0.5,
@@ -138,7 +139,9 @@ model GenericAHU "Example of generic ahu model"
   Controller.CtrAHUBasic ctrAHUBasic(
     TFlowSet=293.15,
     useTwoFanCtr=true,
-    VFlowSet=3000/3600,                               ctrRh(k=0.01))
+    VFlowSet=3000/3600,
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
+                                                      ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
