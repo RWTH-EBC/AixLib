@@ -11,7 +11,7 @@ model ControlerHumidifier "controler for humidifier"
     annotation (Placement(transformation(extent={{-140,-90},{-100,-50}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi(use_p_in=false) if use_PhiSet
-    annotation (Placement(transformation(extent={{-60,-44},{-40,-24}})));
+    annotation (Placement(visible=(use_PhiSet==true),transformation(extent={{-60,-44},{-40,-24}})));
   Modelica.Blocks.Interfaces.RealInput Tset if use_PhiSet
     "set value for temperature at cooler outlet"
     annotation (Placement(transformation(extent={{-140,30},{-100,70}}),
@@ -25,16 +25,16 @@ equation
 
   if use_PhiSet then
     connect(x_pTphi.phi,X_intern);
+    connect(Tset, x_pTphi.T) annotation (Line(visible=(use_PhiSet==true),points={{-120,50},{-74,50},{-74,-34},
+          {-62,-34}}, color={0,0,127}));
+    connect(PhiSet, x_pTphi.phi) annotation (Line(visible=(use_PhiSet==true),points={{-120,-70},{-74,-70},{-74,
+          -40},{-62,-40}}, color={0,0,127}));
   else
     connect(Xset, X_intern);
   end if;
 
   connect(X_intern, XHumSet);
 
-  connect(Tset, x_pTphi.T) annotation (Line(points={{-120,50},{-74,50},{-74,-34},
-          {-62,-34}}, color={0,0,127}));
-  connect(PhiSet, x_pTphi.phi) annotation (Line(points={{-120,-70},{-74,-70},{-74,
-          -40},{-62,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ControlerHumidifier;
