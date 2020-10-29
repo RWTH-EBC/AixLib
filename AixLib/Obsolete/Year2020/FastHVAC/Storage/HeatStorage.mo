@@ -1,9 +1,9 @@
-within AixLib.FastHVAC.Components.Storage;
+within AixLib.Obsolete.Year2020.FastHVAC.Storage;
 model HeatStorage "Simple model of a heat storage"
   /* *******************************************************************
       Medium
      ******************************************************************* */
-
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
@@ -90,29 +90,27 @@ model HeatStorage "Simple model of a heat storage"
         origin={-30,50})));
 
 public
-  FastHVAC.Interfaces.EnthalpyPort_a LoadingCycle_In annotation (Placement(
-        transformation(extent={{-30,90},{-10,110}}), iconTransformation(extent={
-            {-30,90},{-10,110}})));
-  FastHVAC.Interfaces.EnthalpyPort_b LoadingCycle_Out annotation (Placement(
-        transformation(extent={{-30,-110},{-10,-90}}), iconTransformation(
-          extent={{-30,-110},{-10,-90}})));
-  FastHVAC.Interfaces.EnthalpyPort_b UnloadingCycle_Out annotation (Placement(
-        transformation(extent={{10,90},{30,110}}), iconTransformation(extent={{10,
-            90},{30,110}})));
-  FastHVAC.Interfaces.EnthalpyPort_a UnloadingCycle_In annotation (Placement(
-        transformation(extent={{10,-110},{30,-90}}), iconTransformation(extent={
-            {10,-110},{30,-90}})));
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_a LoadingCycle_In annotation (
+      Placement(transformation(extent={{-30,90},{-10,110}}), iconTransformation(
+          extent={{-30,90},{-10,110}})));
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_b LoadingCycle_Out annotation (
+      Placement(transformation(extent={{-30,-110},{-10,-90}}),
+        iconTransformation(extent={{-30,-110},{-10,-90}})));
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_b UnloadingCycle_Out annotation (
+      Placement(transformation(extent={{10,90},{30,110}}), iconTransformation(
+          extent={{10,90},{30,110}})));
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_a UnloadingCycle_In annotation (
+      Placement(transformation(extent={{10,-110},{30,-90}}), iconTransformation(
+          extent={{10,-110},{30,-90}})));
 
-
-
-  FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n]
-    annotation (Placement(transformation(
+  AixLib.FastHVAC.BaseClasses.EnergyBalance energyBalance_load[n] annotation (
+      Placement(transformation(
         extent={{-20,-19},{20,19}},
         rotation=270,
         origin={-41,0})));
 
-  FastHVAC.BaseClasses.EnergyBalance   energyBalance_unload[n]
-    annotation (Placement(transformation(
+  AixLib.FastHVAC.BaseClasses.EnergyBalance energyBalance_unload[n] annotation (
+     Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=270,
         origin={42,0})));
@@ -121,20 +119,20 @@ public
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow dummy_load[2](each Q_flow=0)
                                                                     annotation (Placement(transformation(extent={{98,44},{118,64}})));
 
-  FastHVAC.Interfaces.EnthalpyPort_a port_HC1_in if use_heatingCoil1
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_a port_HC1_in if use_heatingCoil1
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,70},{-90,90}}),
         iconTransformation(extent={{-88,52},{-72,68}})));
-  FastHVAC.Interfaces.EnthalpyPort_b port_HC1_out if use_heatingCoil1
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_b port_HC1_out if use_heatingCoil1
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}}),
         iconTransformation(extent={{-90,12},{-74,28}})));
 
-  FastHVAC.Interfaces.EnthalpyPort_a port_HC2_in if use_heatingCoil2
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_a port_HC2_in if use_heatingCoil2
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}}),
         iconTransformation(extent={{-90,-26},{-76,-12}})));
-  FastHVAC.Interfaces.EnthalpyPort_b port_HC2_out if use_heatingCoil2
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_b port_HC2_out if use_heatingCoil2
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}}),
         iconTransformation(extent={{-90,-66},{-76,-52}})));
@@ -179,26 +177,66 @@ public
         extent={{-14,-12},{14,12}},
         rotation=270,
         origin={-72,-60})));
-  Fluid.Storage.BaseClasses.StorageCover                  top_cover(
-    D1=data.dTank)   annotation (Placement(transformation(
+Fluid.Storage.BaseClasses.StorageCover top_cover(
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns,
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=T_start_wall,
+    final TStartIns=T_start_ins,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={2,70})));
   Fluid.Storage.BaseClasses.StorageMantle                  storage_mantle[n](
-    each height=data.hTank/n,
-    each D1=data.dTank)
-    annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-  Fluid.Storage.BaseClasses.StorageCover                  bottom_cover(
-    D1=data.dTank)   annotation (Placement(transformation(
+    each final lambdaWall=data.lambdaWall,
+    each final lambdaIns=data.lambdaIns,
+    each final TStartWall=T_start_wall,
+    each final TStartIns=T_start_ins,
+    each final rhoIns=data.rhoIns,
+    each final cIns=data.cIns,
+    each final rhoWall=data.rhoWall,
+    each final cWall=data.cWall,
+    each final height=data.hTank/n,
+    each final D1=data.dTank,
+    each final sWall=data.sWall,
+    each final sIns=data.sIns,
+    each final hConIn=hConIn,
+    each final hConOut=hConOut)
+    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+  Fluid.Storage.BaseClasses.StorageCover bottom_cover(
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=T_start_wall,
+    final TStartIns=T_start_ins,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={0,-46})));
+        origin={0,-38})));
+
   HeatTransfer heatTransfer(final Medium=medium,final data=data,
     final n=n) annotation (Placement(
         transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
   replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction  constrainedby BaseClasses.PartialHeatTransferLayers
+     AixLib.FastHVAC.Components.Storage.BaseClasses.HeatTransferOnlyConduction
+    constrainedby
+    AixLib.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
 protected
@@ -351,7 +389,7 @@ connect(heatingRod, layer[n_HR].port);
       color={176,0,0},
       smooth=Smooth.None));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+    Diagram(obsolete = "Obsolete model - use AixLib.FastHVAC.Components.Storage.HeatStorageVariablePorts instead", coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=3.1536e+007, Interval=600),
     __Dymola_experimentSetupOutput(events=false),
