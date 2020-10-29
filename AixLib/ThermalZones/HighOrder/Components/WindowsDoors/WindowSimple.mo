@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model WindowSimple "Window with radiation and U-Value"
   parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature";
@@ -26,8 +26,7 @@ model WindowSimple "Window with radiation and U-Value"
     annotation (Dialog(group="Window type", enable=not selectable));
 
   replaceable model correctionSolarGain =
-      BaseClasses.CorrectionSolarGain.NoCorG constrainedby
-    BaseClasses.CorrectionSolarGain.PartialCorG
+      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
     "Model for correction of solar gain factor" annotation (Dialog(
         descriptionLabel=true), choicesAllMatching=true);
   Utilities.Interfaces.SolarRad_in solarRad_in
