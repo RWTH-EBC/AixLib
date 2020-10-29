@@ -83,7 +83,8 @@ model Membrane "model of membrane"
     T_start=T_start,
     dT_start=dT_start,
     n=nNodes,
-    coeCroCous=coeCroCouSenInts);
+    coeCroCous=coeCroCouSenInts,
+    energyDynamics=energyDynamics);
 
   MassTransfer massTransfer(
     thicknessMem=thicknessMem,

@@ -43,6 +43,7 @@ model DynamicValidation
     redeclare package Medium = Media.Air,
     n=n,
     nParallel=nParallel,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     lengthDuct=lengthDuct,
     heightDuct=heightDuct,
     widthDuct=widthDuct,
@@ -160,7 +161,8 @@ model DynamicValidation
     tableOnFile=true,
     columns={2,3,4},
     tableName="Result",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Fluid/MembraneBasedEnthalpyExchanger/DynamicValidationResults.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/Fluid/MembraneBasedEnthalpyExchanger/DynamicValidationResult.txt"),
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Modelica.Blocks.Interaction.Show.RealValue T_Sup_exp
@@ -187,6 +189,7 @@ model DynamicValidation
     annotation (Placement(transformation(extent={{-70,-22},{-50,-2}})));
   Movers.FlowControlled_dp fan(
     redeclare package Medium = Media.Air,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flow_nominal=m_flow_nominal,
     addPowerToMedium=false,
     dp_start=120,
@@ -199,6 +202,7 @@ model DynamicValidation
     yMax=160) annotation (Placement(transformation(extent={{96,12},{76,32}})));
   Movers.FlowControlled_dp fan1(
     redeclare package Medium = Media.Air,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flow_nominal=m_flow_nominal,
     addPowerToMedium=false,
     dp_start=120,

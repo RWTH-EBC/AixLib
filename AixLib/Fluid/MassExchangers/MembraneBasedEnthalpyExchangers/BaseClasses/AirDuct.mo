@@ -2,8 +2,8 @@ within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses;
 model AirDuct "model of the air duct"
   extends Interfaces.PartialTwoPortInterface(
     redeclare package Medium = AixLib.Media.Air,
-    port_a(h_outflow(start=h_outflow_start)),
-    port_b(h_outflow(start=h_outflow_start)));
+    port_a(h_outflow(start=h_outflow_start),p(start=p_a_start)),
+    port_b(h_outflow(start=h_outflow_start),p(start=p_b_start)));
 
   extends AixLib.Fluid.Interfaces.TwoPortFlowResistanceParameters(
     final computeFlowResistance=true);
@@ -56,6 +56,12 @@ model AirDuct "model of the air duct"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   // Initialization
+  parameter Medium.AbsolutePressure p_a_start=Medium.p_default
+      "Start value of pressure at port a"
+    annotation(Dialog(tab = "Initialization"));
+  parameter Medium.AbsolutePressure p_b_start=p_a_start
+      "Start value of pressure at port b"
+    annotation(Dialog(tab = "Initialization"));
   parameter Medium.AbsolutePressure p_start = Medium.p_default
     "Start value of pressure"
     annotation(Dialog(tab = "Initialization"));

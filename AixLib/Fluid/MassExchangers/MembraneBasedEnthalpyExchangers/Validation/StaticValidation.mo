@@ -33,6 +33,7 @@ model StaticValidation
     redeclare package Medium = Media.Air,
     n=n,
     nParallel=nParallel,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     lengthDuct=lengthDuct,
     heightDuct=heightDuct,
     widthDuct=widthDuct,
@@ -176,6 +177,7 @@ model StaticValidation
     annotation (Placement(transformation(extent={{-70,-22},{-50,-2}})));
   Movers.FlowControlled_dp fan(
     redeclare package Medium = Media.Air,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flow_nominal=m_flow_nominal,
     addPowerToMedium=false,
     dp_start=120,
@@ -188,6 +190,7 @@ model StaticValidation
     yMax=160) annotation (Placement(transformation(extent={{96,12},{76,32}})));
   Movers.FlowControlled_dp fan1(
     redeclare package Medium = Media.Air,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flow_nominal=m_flow_nominal,
     addPowerToMedium=false,
     dp_start=120,

@@ -3,23 +3,28 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
   extends Modelica.Icons.Example;
   EnthalpyExchanger enthalpyExchanger(
     redeclare package Medium = Media.Air,
-    n=3,
+    n=15,
     nParallel=184,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     lengthDuct=0.34,
     heightDuct=0.0025,
     widthDuct=0.3,
     couFloArr=false,
     aspRatCroToTot=0.1,
     uniWalTem=true,
-    local=false,
-    nWidth=10,
-    recDuct=false,
+    local=true,
+    nWidth=30,
+    recDuct=true,
     m_flow_nominal=400/3600*1.18,
     dp_nominal(displayUnit="Pa") = 120,
     thicknessMem=110E-6,
     cpMem=1900,
     lambdaMem=0.34,
     rhoMem(displayUnit="kg/m3") = 920,
+    p_a1_start=souAirHot.p,
+    p_b1_start=sinAirHot.p,
+    p_a2_start=souAirCol.p,
+    p_b2_start=sinAirCol.p,
     T_start_m=293.15,
     dT_start=10,
     p_start_m(displayUnit="Pa") = 2000,
@@ -36,7 +41,7 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
         origin={-80,52})));
   Sources.Boundary_pT sinAirHot(
     redeclare package Medium = Media.Air,
-    p(displayUnit="Pa") = 100000,
+    p(displayUnit="Pa"),
     nPorts=1) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
@@ -53,7 +58,7 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
         origin={80,-50})));
   Sources.Boundary_pT sinAirCol(
     redeclare package Medium = Media.Air,
-    p(displayUnit="Pa") = 100000,
+    p(displayUnit="Pa"),
     nPorts=1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -61,7 +66,7 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
   Modelica.Blocks.Sources.Ramp p_in(
     height=-60,
     duration=600,
-    offset=100120,
+    offset=101440,
     startTime=3600)
     annotation (Placement(transformation(extent={{-20,70},{-40,90}})));
   Modelica.Blocks.Sources.Sine sine(

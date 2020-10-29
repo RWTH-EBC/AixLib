@@ -100,14 +100,20 @@ model EnthalpyExchanger
   parameter Modelica.SIunits.MassFlowRate m_flow_start = m_flow_nominal
     "Start value for mass flow rate"
      annotation(Evaluate=true, Dialog(tab = "Initialization"));
-  parameter Medium.AbsolutePressure p_a_start=Medium.p_default
-      "Start value of pressure at port a"
+  parameter Medium.AbsolutePressure p_a1_start=Medium.p_default
+      "Start value of pressure at port a1"
     annotation(Dialog(tab = "Initialization"));
-  parameter Medium.AbsolutePressure p_b_start=p_a_start
-      "Start value of pressure at port b"
+  parameter Medium.AbsolutePressure p_b1_start=p_a1_start
+      "Start value of pressure at port b1"
+    annotation(Dialog(tab = "Initialization"));
+  parameter Medium.AbsolutePressure p_a2_start=Medium.p_default
+      "Start value of pressure at port a2"
+    annotation(Dialog(tab = "Initialization"));
+  parameter Medium.AbsolutePressure p_b2_start=p_a2_start
+      "Start value of pressure at port b2"
     annotation(Dialog(tab = "Initialization"));
   final parameter Medium.AbsolutePressure[n] ps_start=if n > 1 then linspace(
-        p_a_start, p_b_start, n) else {(p_a_start + p_b_start)/2}
+        p_a1_start, p_b1_start, n) else {(p_a1_start + p_b1_start)/2}
       "Start value of pressure";
 
   parameter Medium.Temperature T_start=Medium.T_default
@@ -155,7 +161,9 @@ model EnthalpyExchanger
     final T_start=T_start,
     final X_start=X_start,
     final C_start=C_start,
-    final couFloArr=couFloArr)
+    final couFloArr=couFloArr,
+    final p_a_start=p_a2_start,
+    final p_b_start=p_b2_start)
     annotation (Placement(transformation(extent={{22,-88},{-34,-32}})));
   BaseClasses.AirDuct airDuct1(
     redeclare final package Medium=Medium,
@@ -175,7 +183,9 @@ model EnthalpyExchanger
     final T_start=T_start,
     final X_start=X_start,
     final C_start=C_start,
-    final couFloArr=couFloArr)
+    final couFloArr=couFloArr,
+    final p_a_start=p_a1_start,
+    final p_b_start=p_b1_start)
     annotation (Placement(transformation(extent={{-34,88},{22,32}})));
   BaseClasses.Membrane membrane(
     final nNodes=n,
@@ -192,7 +202,8 @@ model EnthalpyExchanger
     final dT_start=dT_start,
     final p_start=p_start,
     final dp_start=dp_start,
-    final couFloArr=couFloArr)
+    final couFloArr=couFloArr,
+    final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{-36,-28},{22,28}})));
 
   Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)") if
