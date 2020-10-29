@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.BaseClasses;
+﻿within AixLib.Controls.HeatPump.BaseClasses;
 model InverterControlledHP "Converter model for an inverter / speed controlled HP modulating between 0 and 1"
   extends PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";
@@ -34,7 +34,7 @@ equation
           24,8},{24,0},{36.8,0}}, color={255,0,255}));
   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br />
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>

@@ -19,7 +19,7 @@ algorithm
 </html>",
     revisions="<html><ul>
   <li>
-    <i>June 21, 2015&#160;</i> by Kristian Huchtemann:<br />
+    <i>June 21, 2015&#160;</i> by Kristian Huchtemann:<br/>
     implemented
   </li>
 </ul>

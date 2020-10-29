@@ -20,7 +20,8 @@ model BufferStorage
     upToDownHC1=false,
     upToDownHC2=false,
     useHeatingRod=false,
-    redeclare model HeatTransfer = AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
+    redeclare model HeatTransfer =
+        AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
     TStart=303.15) annotation (Placement(transformation(extent={{0,0},{-20,24}})));
@@ -93,12 +94,12 @@ equation
   mass flow with a higher temperature than the initial temperature.
 </p>
 <ul>
-  <li>November 27, 2019, by Philipp Mehrfeld:<br />
+  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a>:
     Add one heating coil to example.
   </li>
   <li>
-    <i>October 11,2016</i> by Sebastian Stinner:<br />
+    <i>October 11,2016</i> by Sebastian Stinner:<br/>
     implemented
   </li>
 </ul>

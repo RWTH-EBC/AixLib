@@ -11,7 +11,7 @@ record Ochsner_GMLW_19 "Ochsner GMLW 19"
     Icon,
     Documentation(revisions="<html><ul>
   <li>
-    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br />
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
     Transferred to AixLib.
   </li>
 </ul>

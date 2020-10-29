@@ -17,11 +17,11 @@ record Boiler_Vitocrossal200_311kW
            1.0, (0.857+0.952)/2]);
     annotation (preferredView="text",Documentation(revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>September 28, 2013&#160;</i>by Peter Matthes:<br />
+    <i>September 28, 2013&#160;</i>by Peter Matthes:<br/>
     implemented.
   </li>
 </ul>

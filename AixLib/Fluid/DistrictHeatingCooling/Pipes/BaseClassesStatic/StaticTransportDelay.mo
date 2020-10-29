@@ -87,7 +87,7 @@ equation
   only included for some legacy testing.
 </p>
 <ul>
-  <li>Dec 8, 2017 by Marcus Fuchs:<br />
+  <li>Dec 8, 2017 by Marcus Fuchs:<br/>
     Temporarily re-introducing the static pipe model
   </li>
 </ul>

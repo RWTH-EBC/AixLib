@@ -136,31 +136,31 @@ equation
 </html>",
         revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
     Merged with AixLib
   </li>
   <li>
-    <i>January 09, 2006&#160;</i> by Peter Matthes:<br />
+    <i>January 09, 2006&#160;</i> by Peter Matthes:<br/>
     V0.1: Initial configuration.
   </li>
   <li>
-    <i>December 4, 2014&#160;</i> by Ana Constantin:<br />
+    <i>December 4, 2014&#160;</i> by Ana Constantin:<br/>
     Removed cardinality equations for boolean inputs
   </li>
   <li>
-    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br />
+    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br/>
     Output for heat flow added.
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>April 20, 2012&#160;</i> by Ana Constantin:<br />
+    <i>April 20, 2012&#160;</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

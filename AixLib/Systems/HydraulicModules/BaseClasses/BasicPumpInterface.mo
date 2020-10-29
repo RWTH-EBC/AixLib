@@ -49,7 +49,7 @@ partial model BasicPumpInterface "Pump interface for different pump types"
           fillColor={220,220,220})}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>May 20, 2018, by Alexander Kümpel:<br />
+  <li>May 20, 2018, by Alexander Kümpel:<br/>
     First implementation.
   </li>
 </ul>

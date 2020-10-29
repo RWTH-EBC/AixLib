@@ -111,7 +111,7 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   annotation (Dialog(group="Density_pT"));
 
   annotation (Documentation(revisions="<html><ul>
-  <li>June 9, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>June 9, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
@@ -129,7 +129,7 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   Sangi et al. used the <b>following fitting approaches</b>, which are
   also implemented within <a href=
   \"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
-  AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:<br />
+  AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:<br/>
 </p>
 <table summary=\"Formulas for calculating thermodynamic properties\"
 cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\" style=

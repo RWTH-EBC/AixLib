@@ -54,7 +54,7 @@ partial model PartialEfficiency
                   thickness=0.5)}),
               Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>October 20, 2017, by Mirko Engelpracht:<br />
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -72,7 +72,7 @@ partial model PartialEfficiency
   and <a href=
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
   AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>.
-  These inputs are summarised below:<br />
+  These inputs are summarised below:<br/>
 </p>
 <table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

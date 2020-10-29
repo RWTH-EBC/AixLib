@@ -82,7 +82,7 @@ equation
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>May 23, 2016,&#160; by Stanley Risch:<br />
+  <li>May 23, 2016,&#160; by Stanley Risch:<br/>
     Implemented.
   </li>
 </ul>

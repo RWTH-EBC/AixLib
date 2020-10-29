@@ -98,20 +98,20 @@ equation
 </html>",
     revisions="<html><ul>
   <li>
-    <i>April 25, 2017 &#160;</i> by Tobias Blacha:<br />
+    <i>April 25, 2017 &#160;</i> by Tobias Blacha:<br/>
     Moved into AixLib
   </li>
   <li>
-    <i>November 26, 2014 &#160;</i> by Roozbeh Sangi:<br />
+    <i>November 26, 2014 &#160;</i> by Roozbeh Sangi:<br/>
     Used for other model: Changed used pipe from DynamicPipeEBC1 to
     DynamicPipeEBCAggregated_Ambient_Loss
   </li>
   <li>
-    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br />
+    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/>
     Formated documentation.
   </li>
   <li>
-    <i>April 11, 2011</i> by Ana Constantin:<br />
+    <i>April 11, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

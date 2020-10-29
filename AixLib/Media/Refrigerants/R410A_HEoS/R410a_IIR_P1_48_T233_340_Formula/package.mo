@@ -1256,7 +1256,7 @@ protected
   end surfaceTension;
 
   annotation (Documentation(revisions="<html><ul>
-  <li>June 20, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>June 20, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
@@ -1282,7 +1282,7 @@ protected
 </h4>
 <p>
   The implemented coefficients are fitted to external data by
-  Engelpracht and are valid within the following range:<br />
+  Engelpracht and are valid within the following range:<br/>
 </p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
 border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">

@@ -16,7 +16,7 @@ record NibeFighter1140_15 "Nibe Fighter 1140-15"
 </p>
 <ul>
   <li>
-    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br />
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
     Transferred to AixLib.
   </li>
 </ul>

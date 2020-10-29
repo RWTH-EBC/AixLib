@@ -57,16 +57,16 @@ equation
 </p>
 <ul>
   <li>
-    <i>April, 2016&#160;</i> by Peter Remmen:<br />
+    <i>April, 2016&#160;</i> by Peter Remmen:<br/>
     Moved from Utilities to Controls
   </li>
 </ul>
 <ul>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
-  <li>by Peter Matthes:<br />
+  <li>by Peter Matthes:<br/>
     implemented
   </li>
 </ul>

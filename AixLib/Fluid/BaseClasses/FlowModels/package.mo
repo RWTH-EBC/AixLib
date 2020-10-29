@@ -47,7 +47,7 @@ annotation (Documentation(info="<html><p>
   <code>_der</code> and <code>_der2</code>.
 </p>
 <ul>
-  <li>April 10, 2009 by Michael Wetter:<br />
+  <li>April 10, 2009 by Michael Wetter:<br/>
     First implementation.
   </li>
 </ul>

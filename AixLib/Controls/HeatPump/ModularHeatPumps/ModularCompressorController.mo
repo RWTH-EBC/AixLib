@@ -68,7 +68,7 @@ equation
                   points={{18,-32},{-14,-38}},
                   color={0,0,0},
                   thickness=0.5)}), Documentation(revisions="<html><ul>
-  <li>October 29, 2017, by Mirko Engelpracht:<br />
+  <li>October 29, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

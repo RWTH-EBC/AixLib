@@ -151,7 +151,7 @@ equation
                 {0.1,-0.1}}, color={0,0,127}));
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 20, 2017, by Mirko Engelpracht:<br />
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

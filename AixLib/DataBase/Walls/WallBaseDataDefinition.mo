@@ -37,7 +37,7 @@ record WallBaseDataDefinition "Wall base data definition"
 </p>
 <ul>
   <li>
-    <i>September 3, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>September 3, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
 </ul>

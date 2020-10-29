@@ -48,7 +48,7 @@ algorithm
 </p>
 <ul>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately, added descriptions for
     variables
   </li>

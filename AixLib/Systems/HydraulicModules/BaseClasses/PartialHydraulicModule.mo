@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.BaseClasses;
+﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 partial model PartialHydraulicModule "Base class for hydraulic module."
   extends AixLib.Fluid.Interfaces.PartialFourPort(
     redeclare package Medium1 = Medium,
@@ -239,7 +239,7 @@ equation
   operational modes.
 </p>
 <ul>
-  <li>August, 2018, by Alexander Kümpel:<br />
+  <li>August, 2018, by Alexander Kümpel:<br/>
     First implementation
   </li>
 </ul>

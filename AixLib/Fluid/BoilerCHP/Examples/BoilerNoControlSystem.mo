@@ -77,7 +77,7 @@ equation
 </html>",
         revisions="<html><ul>
   <li>
-    <i>September 20, 2019&#160;</i> by Alexander Kümpel:<br />
+    <i>September 20, 2019&#160;</i> by Alexander Kümpel:<br/>
     First implementation
   </li>
 </ul>

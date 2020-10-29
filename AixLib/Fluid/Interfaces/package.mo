@@ -53,7 +53,7 @@ style=\"border-collapse:collapse;\">
         by the fluid. For most components, this can be set to a
         parameter. However, for components such as expansion vessels,
         the fluid volume can change in time.
-      </p>The model has the following input connectors:<br />
+      </p>The model has the following input connectors:<br/>
       <ul>
         <li>
           <code>Q_flow</code>, which is the sensible plus latent heat
@@ -80,7 +80,7 @@ style=\"border-collapse:collapse;\">
       <p>
         This is a basic model for steady-state conservation equations
         for mass and energy of a component with two fluid ports.
-      </p>The model has the following input connectors:<br />
+      </p>The model has the following input connectors:<br/>
       <ul>
         <li>
           <code>Q_flow</code>, which is the sensible plus latent heat

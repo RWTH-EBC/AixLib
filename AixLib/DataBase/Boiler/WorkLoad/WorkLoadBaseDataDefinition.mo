@@ -12,15 +12,15 @@ record WorkLoadBaseDataDefinition "Efficiency depending on workload"
 </p>
 <ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
     Merged with AixLib
   </li>
   <li>
-    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
 </ul>

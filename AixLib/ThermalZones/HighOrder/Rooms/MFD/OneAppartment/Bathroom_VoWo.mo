@@ -243,11 +243,11 @@ equation
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 100}, {-90, 80}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>August 16, 2011</i> by Ana Constantin:<br />
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

@@ -136,19 +136,19 @@ equation
 </p>
 <ul>
   <li>
-    <i>October 11, 2016</i> by Marcus Fuchs:<br />
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
     Replace pipe
   </li>
   <li>
-    <i>April 2016&#160;</i> by Peter Remmen:<br />
+    <i>April 2016&#160;</i> by Peter Remmen:<br/>
     Replace TempAndRad model
   </li>
   <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br />
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class
   </li>
   <li>
-    <i>13.12.2013</i> by Sebastian Stinner:<br />
+    <i>13.12.2013</i> by Sebastian Stinner:<br/>
     implemented
   </li>
 </ul>

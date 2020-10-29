@@ -8,6 +8,9 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance"
+    annotation (Dialog(tab="Advanced"));
   Modelica.Blocks.Interfaces.RealInput intGains[3]
     "Input profiles for internal gains persons, machines, light"
     annotation (
@@ -166,10 +169,10 @@ equation
   \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
 </p>
 <ul>
-  <li>September 27, 2016, by Moritz Lauster:<br />
+  <li>September 27, 2016, by Moritz Lauster:<br/>
     Reimplementation based on Annex60 and MSL models.
   </li>
-  <li>March, 2012, by Moritz Lauster:<br />
+  <li>March, 2012, by Moritz Lauster:<br/>
     First implementation.
   </li>
 </ul>

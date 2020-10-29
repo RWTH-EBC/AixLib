@@ -100,20 +100,20 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Zeta=%zeta")}), Documentation(revisions="<html><ul>
   <li>
-    <i>April 27, 2017&#160;</i> by Philipp Mehrfeld:<br />
+    <i>April 27, 2017&#160;</i> by Philipp Mehrfeld:<br/>
     Model acc. to IBPSA conventions. Take into account homotopyInit.,
     linearization, from_dp.
   </li>
   <li>
-    <i>April 2016&#160;</i> by Peter Matthes:<br />
+    <i>April 2016&#160;</i> by Peter Matthes:<br/>
     Improved formulation of flow equation according to issue #232.
   </li>
   <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br />
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class
   </li>
   <li>
-    <i>November 1, 2013&#160;</i> by Ana Constantin:<br />
+    <i>November 1, 2013&#160;</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>
@@ -143,7 +143,7 @@ equation
   = 8*ζ/(π^2*D^4*ρ) * m_flow*|m_flow|
 </p>
 <p>
-  <br />
+  <br/>
   Since this a simplified approach to calculate/generate a pressure
   drop, there exist no distinction between laminar and turbulent flow
   regarding ζ-values.

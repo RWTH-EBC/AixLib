@@ -18,7 +18,7 @@ record Boiler_Vitocrossal200_311kW
                                   annotation (preferredView="text",
               Documentation(revisions="<html><ul>
   <li>
-    <i>September 28, 2013&#160;</i> by Peter Matthes:<br />
+    <i>September 28, 2013&#160;</i> by Peter Matthes:<br/>
     implemented.
   </li>
 </ul>

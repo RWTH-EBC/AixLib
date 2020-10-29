@@ -1,10 +1,12 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model MultizoneMoistAirEquipped
-  "Illustrates the use of MultizoneMoistAirEquipped"
+model MultizoneMoistAirCO2Equipped
+  "Illustrates the use of MultizoneMoistAirCO2Equipped"
   import AixLib;
   extends Modelica.Icons.Example;
+  replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2Equipped
+    multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     VAir=33500,
@@ -30,11 +32,10 @@ model MultizoneMoistAirEquipped
     effHRSAHU_disabled=0.2,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
-    redeclare package Medium = AixLib.Media.Air,
+    redeclare package Medium = Medium,
     T_start=293.15,
     dpAHU_sup=80000000,
-    dpAHU_eta=80000000)
-    "Multizone"
+    dpAHU_eta=80000000) "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -137,10 +138,10 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    Documentation(revisions="<html><ul>
-  <li>April, 2019, by Martin Kremer:<br />
-    First Implementation.
-  </li>
+    Documentation(revisions="<html>
+<ul>
+<li>August 27, 2020, by Katharina Breuer:<br>Add co2 balance</li>
+<li>April, 2019, by Martin Kremer:<br>First Implementation. </li>
 </ul>
 </html>", info="<html>
 <p>
@@ -154,4 +155,4 @@ equation
   or measurement data.
 </p>
 </html>"));
-end MultizoneMoistAirEquipped;
+end MultizoneMoistAirCO2Equipped;

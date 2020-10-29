@@ -7,7 +7,7 @@ package BaseClasses "Base classes for package Data"
 the heat pump models in <a href=
 \"AixLib.Fluid.HeatPumps\">AixLib.Fluid.HeatPumps</a>.
 <ul>
-  <li>December 6, 2016, by Massimo Cimmino:<br />
+  <li>December 6, 2016, by Massimo Cimmino:<br/>
     First implementation.
   </li>
 </ul>

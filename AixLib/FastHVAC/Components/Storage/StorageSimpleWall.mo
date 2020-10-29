@@ -26,8 +26,6 @@ public
   /* *******************************************************************
       HeatStorage Parameters
      ******************************************************************* */
-
-  parameter Real tau(min=0) = 1000 "Time constant for mixing";
   parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=1500 "Heat transfer coefficient at the inner wall";
@@ -187,7 +185,8 @@ HeatTransfer heatTransfer(final Medium=medium,final data=data,
             {10,10}},  rotation=0)));
 
  replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction constrainedby BaseClasses.PartialHeatTransferLayers
+     BaseClasses.HeatTransferOnlyConduction constrainedby
+    BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 protected
   parameter Real k_zyl(final unit="W/K") = 2*Modelica.Constants.pi*data.hTank/n/(1/(hConIn*data.dTank/2) + 1/data.lambdaIns*log((data.dTank
@@ -661,15 +660,15 @@ connect(heatTransfer.therm, layer.port);
 </html>",
 revisions="<html><ul>
   <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br />
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
   </li>
   <li>
-    <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br />
+    <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
     Added documentation.
   </li>
   <li>
-    <i>December 16, 2014</i> by Sebastian Stinner:<br />
+    <i>December 16, 2014</i> by Sebastian Stinner:<br/>
     Implemented.
   </li>
 </ul>

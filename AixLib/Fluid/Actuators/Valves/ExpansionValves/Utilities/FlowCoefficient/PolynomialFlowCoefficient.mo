@@ -130,7 +130,7 @@ equation
     "Calculation procedure of general polynomial";
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -152,7 +152,7 @@ equation
   To add further calculation procedures, just add its name in <a href=
   \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices\">
   AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices</a>
-  and expand the <code>if-structure</code>.<br />
+  and expand the <code>if-structure</code>.<br/>
 </p>
 <table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

@@ -400,7 +400,7 @@ equation
     Documentation(revisions="<html><ul>
   <li>
     <i>Septmeber, 2014&#160;</i> by by Roozbeh Sangi and Marc
-    Baranski:<br />
+    Baranski:<br/>
     Model implemented
   </li>
 </ul>

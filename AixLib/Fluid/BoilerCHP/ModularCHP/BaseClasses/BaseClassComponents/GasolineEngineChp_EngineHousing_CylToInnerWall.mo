@@ -87,7 +87,7 @@ to engine"),
           textString="Q_Cyl",
           fontSize=20)}), Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2019&#160;</i> by Julian Matthes:<br />
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
   </li>

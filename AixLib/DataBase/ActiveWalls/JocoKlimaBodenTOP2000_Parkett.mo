@@ -21,7 +21,7 @@ extends ActiveWallBaseDataDefinition(
       // (for heat flow up) from page 41
 annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>September 20, 2013&#160;</i> by Mark Wesseling:<br />
+    <i>September 20, 2013&#160;</i> by Mark Wesseling:<br/>
     Implemented.
   </li>
 </ul>

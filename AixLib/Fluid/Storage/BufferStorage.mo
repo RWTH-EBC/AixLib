@@ -36,7 +36,8 @@ model BufferStorage
 
   parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
+  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby
+    DataBase.Storage.BufferStorageBaseDataDefinition                                                                                         "Data record for Storage"
   annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
@@ -126,17 +127,20 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,-80})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package
+                                                                                Medium =
                 Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
+      package                                                                    Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
+      package                                                                      Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -161,6 +165,8 @@ model BufferStorage
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
+    m_flow_small=m_flow_small,
+    allowFlowReversal=allowFlowReversal_layers,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
     final T_start=fill(TStart,n),
@@ -277,12 +283,13 @@ model BufferStorage
         origin={6,-44})));
 
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil1(
+    m_flow_small=m_flow_small_HC1,
     disHC=disHC1,
     hConHC=hConHC1,
     redeclare package Medium = MediumHC1,
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
-    allowFlowReversal=true,
+    allowFlowReversal=allowFlowReversal_HC1,
     final m_flow_nominal=mHC1_flow_nominal,
     TStart=TStart) if useHeatingCoil1
     annotation (Placement(transformation(
@@ -290,19 +297,35 @@ model BufferStorage
         rotation=270,
         origin={-58,29})));
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil2(
+    m_flow_small=m_flow_small_HC2,
     disHC=disHC2,
     lengthHC=data.lengthHC2,
     hConHC=hConHC2,
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
-    allowFlowReversal=true,
-    final m_flow_nominal=mHC1_flow_nominal,
+    allowFlowReversal=allowFlowReversal_HC2,
+    final m_flow_nominal=mHC2_flow_nominal,
     TStart=TStart) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-56,-39})));
 
+  parameter SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil1));
+  parameter SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil2));
+  parameter SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+  parameter Boolean allowFlowReversal_layers=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal. Used only if model has two ports."
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC1=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC2=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
 initial equation
    assert(data.hHC1Up<=data.hTank and data.hHC1Up>=0.0 and
      data.hHC1Low<=data.hTank and data.hHC1Low>=0.0,
@@ -741,40 +764,40 @@ for i in 2:(n-1) loop
                  Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-80,-100},{80,100}})),
     Documentation(revisions="<html><ul>
-  <li>November 27, 2019, by Philipp Mehrfeld:<br />
+  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
     - <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a><br />
+    \"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a><br/>
     - Replace MSL pipe by <a href=
-    \"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br />
+    \"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br/>
 
     - Add energyDynamics and tidy up with heat transfer models.
   </li>
   <li>
-    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br />
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
     Add comments and fix documentation
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br />
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
     Added to AixLib
   </li>
   <li>
-    <i>March 25, 2015&#160;</i> by Ana Constantin:<br />
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL
   </li>
   <li>
-    <i>December 10, 2013</i> by Kristian Huchtemann:<br />
+    <i>December 10, 2013</i> by Kristian Huchtemann:<br/>
     Added documentation of storage and new heat transfer models.
   </li>
   <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
   <li>
-    <i>February 19, 2013</i> by Sebastian Stinner:<br />
+    <i>February 19, 2013</i> by Sebastian Stinner:<br/>
     mistake in losses calculation corrected (thickness of \"wall\" and
     \"insulation\" was only considered once but has to be considered
     twice, additionally the components \"wall\" and \"insulation\" were
-    exchanged )<br />
+    exchanged )<br/>
     and mistake in bouyancy model \"Wetter\" corrected (bouyancy flows
     were flowing in the wrong direction)
   </li>

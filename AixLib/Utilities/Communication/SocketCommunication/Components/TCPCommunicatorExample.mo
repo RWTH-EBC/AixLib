@@ -49,17 +49,17 @@ algorithm
 
 annotation(Documentation(revisions="<html><ul>
   <li>
-    <i>August 25, 2018&#160;</i> by Thomas Beutlich:<br />
+    <i>August 25, 2018&#160;</i> by Thomas Beutlich:<br/>
     Utilize TCPIPSocketClient_ functions from Modelica_DeviceDrivers
     library. This is for:<a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a>
   </li>
   <li>
-    <i>June 01, 2013&#160;</i> by Georg Ferdinand Schneider:<br />
+    <i>June 01, 2013&#160;</i> by Georg Ferdinand Schneider:<br/>
     Implemented
   </li>
   <li>
-    <i>September 03, 2013&#160;</i> by Georg Ferdinand Schneider:<br />
+    <i>September 03, 2013&#160;</i> by Georg Ferdinand Schneider:<br/>
     Revised and updated
   </li>
 </ul>

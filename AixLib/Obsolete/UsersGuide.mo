@@ -20,10 +20,10 @@ class UsersGuide "User's Guide"
   </li>
 </ol>
 <ul>
-  <li>March 24, 2020, by Philipp Mehrfeld:<br />
+  <li>March 24, 2020, by Philipp Mehrfeld:<br/>
     Moved to this new UsersGuide.
   </li>
-  <li>November 27, 2019, by Philipp Mehrfeld:<br />
+  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
     Add How To.
   </li>
 </ul>

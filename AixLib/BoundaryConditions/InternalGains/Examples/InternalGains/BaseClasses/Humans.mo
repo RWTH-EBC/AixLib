@@ -29,7 +29,7 @@ equation
   connect(heatFlowSensorRad.port_a, humanIntGains.radHeat) annotation (Line(points={{18,-8},{18,-6.8},{8.7,-6.8}}, color={191,0,0}));
   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>March 30, 2020</i> by Philipp Mehrfeld:<br />
+    <i>March 30, 2020</i> by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>:
     Summarize models to partial model. Make all models dependant from a
     relative input 0..1. Many refactorings.

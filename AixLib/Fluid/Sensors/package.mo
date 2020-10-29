@@ -23,11 +23,11 @@ Documentation(info="<html><p>
     </ul>
   </li>
   <li>
-    <i>4 Dec 2008</i> by Michael Wetter<br />
+    <i>4 Dec 2008</i> by Michael Wetter<br/>
     included sensors for trace substance
   </li>
   <li>
-    <i>31 Oct 2007</i> by Carsten Heinrich<br />
+    <i>31 Oct 2007</i> by Carsten Heinrich<br/>
     updated sensor models, included one and two port sensors for
     thermodynamic state variables
   </li>

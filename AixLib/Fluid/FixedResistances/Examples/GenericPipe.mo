@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.Examples;
+﻿within AixLib.Fluid.FixedResistances.Examples;
 model GenericPipe
 
   extends Modelica.Icons.Example;
@@ -89,7 +89,7 @@ equation
 </ul>
 </html>",
     revisions="<html><ul>
-  <li>Mai 07, 2020, by Alexander Kümpel:<br />
+  <li>Mai 07, 2020, by Alexander Kümpel:<br/>
     First implementation
   </li>
 </ul>

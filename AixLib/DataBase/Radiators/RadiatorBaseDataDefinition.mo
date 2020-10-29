@@ -50,11 +50,11 @@ parameter Modelica.SIunits.Density DensitySteel=7900
 </html>",
         revisions="<html><ul>
   <li>
-    <i>April, 2016&#160;</i> by Peter Remmen:<br />
+    <i>April, 2016&#160;</i> by Peter Remmen:<br/>
     Moved from SVN to AixLib
   </li>
   <li>
-    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
 </ul>

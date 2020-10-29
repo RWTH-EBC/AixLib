@@ -288,36 +288,36 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>November 17, 2017&#160;</i> David Jansen:<br />
+    <i>November 17, 2017&#160;</i> David Jansen:<br/>
     Reduced pipe models to two versions and moved to development
   </li>
   <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br />
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
   </li>
   <li>
-    <i>January 27, 2015</i> by Konstantin Finkbeiner:<br />
+    <i>January 27, 2015</i> by Konstantin Finkbeiner:<br/>
     Addapted to FastHVAC
   </li>
   <li>
-    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br />
+    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
     Updated connectors to EBC Library 2.2, Updated documentation, Added
     example
   </li>
   <li>
-    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br />
+    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br/>
     Added to the HVAC library
   </li>
   <li>
-    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>August 9, 2011</i> by Ana Constantin:<br />
+    <i>August 9, 2011</i> by Ana Constantin:<br/>
     Introduced the possibility of neglecting the insulation wall
   </li>
   <li>
-    <i>April 11, 2011</i> by Ana Constantin:<br />
+    <i>April 11, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

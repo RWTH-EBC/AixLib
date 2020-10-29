@@ -24,7 +24,7 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics),
     Documentation(revisions="<html><ul>
-  <li>July 13, 2016,&#160; by Stanley Risch:<br />
+  <li>July 13, 2016,&#160; by Stanley Risch:<br/>
     Implemented.
   </li>
 </ul>

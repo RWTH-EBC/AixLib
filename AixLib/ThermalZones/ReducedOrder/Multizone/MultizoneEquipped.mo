@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
   extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
@@ -292,13 +292,13 @@ equation
           fillPattern=FillPattern.Solid,
           textString="AHU")}),
     Documentation(revisions="<html><ul>
-  <li>September 27, 2016, by Moritz Lauster:<br />
+  <li>September 27, 2016, by Moritz Lauster:<br/>
     Reimplementation based on Annex60 and AixLib models.
   </li>
-  <li>February 26, 2016, by Moritz Lauster:<br />
+  <li>February 26, 2016, by Moritz Lauster:<br/>
     Fixed bug in share of AHU volume flow.
   </li>
-  <li>April 25, 2015, by Ole Odendahl:<br />
+  <li>April 25, 2015, by Ole Odendahl:<br/>
     Implemented.
   </li>
 </ul>

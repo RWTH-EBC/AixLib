@@ -144,7 +144,7 @@ Calculation example: Chapter 6.1.3.4"),
 Table 1")}), experiment(StopTime=25920000, Interval=3600),
     Documentation(revisions="<html><ul>
   <li>
-    <i>August 1, 2017</i> by Philipp Mehrfeld:<br />
+    <i>August 1, 2017</i> by Philipp Mehrfeld:<br/>
     Implement example
   </li>
 </ul>

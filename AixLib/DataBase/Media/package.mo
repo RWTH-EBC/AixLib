@@ -41,7 +41,7 @@ package Media "Package that provides records describing media properties"
   implemented just for refrigerant media by now.
 </p>
 <ul>
-  <li>June 9, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>June 9, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>

@@ -629,15 +629,15 @@ equation
         Line(points={{-46,60},{-46,30}}, color={255,255,255})}), Documentation(
         revisions="<html><ul>
   <li>
-    <i>Mai 7, 2015</i> by Ana Constantin:<br />
+    <i>Mai 7, 2015</i> by Ana Constantin:<br/>
     Grount temperature depends on TRY
   </li>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>July 7, 2011</i> by Ana Constantin:<br />
+    <i>July 7, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

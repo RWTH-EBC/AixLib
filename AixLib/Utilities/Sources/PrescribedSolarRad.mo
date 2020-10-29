@@ -60,23 +60,23 @@ equation
          fillPattern=FillPattern.Sphere,
          fillColor={255,255,0})}),     Documentation(revisions="<html><ul>
   <li>
-    <i>February 22, 2015&#160;</i> by Ana Constantin:<br />
+    <i>February 22, 2015&#160;</i> by Ana Constantin:<br/>
     Added the components of the total radiation
   </li>
   <li>
-    <i>December 4, 2014&#160;</i> by Ana Constantin:<br />
+    <i>December 4, 2014&#160;</i> by Ana Constantin:<br/>
     removed cardinality equation
   </li>
   <li>
-    <i>April 01, 2014</i> by Moritz Lauster:<br />
+    <i>April 01, 2014</i> by Moritz Lauster:<br/>
     Renamed
   </li>
   <li>
-    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>October 23, 2006&#160;</i> by Peter Matthes:<br />
+    <i>October 23, 2006&#160;</i> by Peter Matthes:<br/>
     Implemented.
   </li>
 </ul>

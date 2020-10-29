@@ -194,7 +194,7 @@ cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\">
   </tr>
 </table>
 <p>
-  <br />
+  <br/>
   Assuming a default size for a unit of 2 m2 we get pressure losses for
   a module as in the following table (vfr=0.79 gpm):
 </p>
@@ -253,47 +253,47 @@ cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\">
   </tr>
 </table>
 <p>
-  <br />
+  <br/>
   The pressureloss factor should therefore be around 2500 Pa /
   (2*2.5e-5 m3/s)^2 = 1e12.
 </p>
 <ul>
   <li>
-    <i>Febraury 7, 2018&#160;</i> by Peter Matthes:<br />
+    <i>Febraury 7, 2018&#160;</i> by Peter Matthes:<br/>
     Rename \"gain\" block into \"convertRelHeatFlow2absHeatFlow\" to make
-    clearer what it does.<br />
+    clearer what it does.<br/>
     Remove redundant
-    <code>connect(solarThermalEfficiency.Q_flow,&#160;convertRelHeatFlow2absHeatFlow.u)</code><br />
+    <code>connect(solarThermalEfficiency.Q_flow,&#160;convertRelHeatFlow2absHeatFlow.u)</code><br/>
 
     Change default pressure drop coefficient from 1e6 to 2500 Pa /
-    (2*2.5e-5 m3/s)^2 = 1e12 Pa.s2/m6.<br />
-    Change default collector area to 2 m2.<br />
+    (2*2.5e-5 m3/s)^2 = 1e12 Pa.s2/m6.<br/>
+    Change default collector area to 2 m2.<br/>
     Extend documentation with some default parameters from
-    references.<br />
+    references.<br/>
     Grid-align the RealInputs.
   </li>
   <li>
-    <i>Febraury 1, 2018&#160;</i> by Philipp Mehrfeld:<br />
+    <i>Febraury 1, 2018&#160;</i> by Philipp Mehrfeld:<br/>
     Delete max block as it is now implemented in the efficiency model
   </li>
   <li>
-    <i>October 25, 2017</i> by Philipp Mehrfeld:<br />
+    <i>October 25, 2017</i> by Philipp Mehrfeld:<br/>
     Extend now from <a href=
     \"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">
-    AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.<br />
-    Use mean temperature.<br />
+    AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.<br/>
+    Use mean temperature.<br/>
     Limiter moved in equation section of efficiency model.
   </li>
   <li>
-    <i>December 15, 2016</i> by Moritz Lauster:<br />
+    <i>December 15, 2016</i> by Moritz Lauster:<br/>
     Moved
   </li>
   <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br />
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class
   </li>
   <li>
-    <i>November 19, 2013&#160;</i> by Marcus Fuchs:<br />
+    <i>November 19, 2013&#160;</i> by Marcus Fuchs:<br/>
     Implemented
   </li>
 </ul>

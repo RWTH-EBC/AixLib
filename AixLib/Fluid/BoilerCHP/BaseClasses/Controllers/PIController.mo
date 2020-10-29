@@ -144,19 +144,19 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
     Variable names updated and merged with AixLib
   </li>
   <li>
-    <i>January 23, 2014&#160;</i> by Pooyan Jahangiri:<br />
+    <i>January 23, 2014&#160;</i> by Pooyan Jahangiri:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>January 31, 2011</i> by Pooyan Jahangiri:<br />
+    <i>January 31, 2011</i> by Pooyan Jahangiri:<br/>
     Implemented
   </li>
 </ul>

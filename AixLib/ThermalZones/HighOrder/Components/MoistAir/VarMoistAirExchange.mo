@@ -38,11 +38,11 @@ equation
   alt=\"h^(-1)\">) as input value.
 </p>
 <ul>
-  <li>July, 2019, by Martin Kremer:<br />
+  <li>July, 2019, by Martin Kremer:<br/>
     Adding latent heat output of moisture, since ventilation moisture
     is already gaseous.
   </li>
-  <li>April, 2019, by Martin Kremer:<br />
+  <li>April, 2019, by Martin Kremer:<br/>
     First Implementation.
   </li>
 </ul>

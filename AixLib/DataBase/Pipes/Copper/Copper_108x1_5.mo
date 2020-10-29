@@ -11,11 +11,11 @@ record Copper_108x1_5 "Copper 108x1_5"
 
   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>July 9, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>July 9, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>June 29, 2011&#160;</i> by Ana Constantin:<br />
+    <i>June 29, 2011&#160;</i> by Ana Constantin:<br/>
     Implemented.
   </li>
 </ul>

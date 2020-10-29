@@ -9,7 +9,7 @@ record Boiler_Virtual_1kW "Boiler virtual 1kW"
     eta=[0.3,0.93; 1.0,0.93]);
                                   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>July 6, 2006&#160;</i> by Ana Constantin:<br />
+    <i>July 6, 2006&#160;</i> by Ana Constantin:<br/>
     implemented.
   </li>
 </ul>

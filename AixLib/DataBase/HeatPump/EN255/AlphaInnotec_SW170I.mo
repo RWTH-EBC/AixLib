@@ -14,7 +14,7 @@ record AlphaInnotec_SW170I "Alpha Innotec SW 170 I"
 </p>
 <ul>
   <li>
-    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br />
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
     Transferred to AixLib.
   </li>
 </ul>

@@ -90,21 +90,21 @@ equation
 </p>
 <ul>
   <li>
-    <i>Oktober 14, 2019&#160;</i> by Martin Kremer:<br />
+    <i>Oktober 14, 2019&#160;</i> by Martin Kremer:<br/>
     Adapted to latest changes in IPBSA providing latent heat output at
     37 degree Celsius
   </li>
   <li>
-    <i>July 18, 2019&#160;</i> by Martin Kremer:<br />
+    <i>July 18, 2019&#160;</i> by Martin Kremer:<br/>
     Revision of latent heat output due to influence on room
     temperature.
   </li>
   <li>
-    <i>July 10, 2019&#160;</i> by Martin Kremer:<br />
+    <i>July 10, 2019&#160;</i> by Martin Kremer:<br/>
     Revised due to changes on human model
   </li>
   <li>
-    <i>March, 2019&#160;</i> by Martin Kremer:<br />
+    <i>March, 2019&#160;</i> by Martin Kremer:<br/>
     First implementation on issue #695.
   </li>
 </ul>

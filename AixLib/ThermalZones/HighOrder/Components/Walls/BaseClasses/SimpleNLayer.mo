@@ -85,15 +85,15 @@ equation
 </html>
  ", revisions = "<html><ul>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>March 14, 2005&#160;</i> by Timo Haase:<br />
+    <i>March 14, 2005&#160;</i> by Timo Haase:<br/>
     Implemented.
   </li>
 </ul>

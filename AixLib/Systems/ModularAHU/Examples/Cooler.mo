@@ -93,7 +93,7 @@ equation
   point temperature and controls the outflow air temperature.
 </p>
 <ul>
-  <li>August 30, 2019, by Alexander Kümpel:<br />
+  <li>August 30, 2019, by Alexander Kümpel:<br/>
     First implementation.
   </li>
 </ul>

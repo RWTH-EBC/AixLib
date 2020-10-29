@@ -32,15 +32,15 @@ equation
   stop with an error.
 </p>
 <ul>
-  <li>October 27, 2011, by Wangda Zuo:<br />
+  <li>October 27, 2011, by Wangda Zuo:<br/>
     Delete the unit conversion part and name it from ConvertTemperature
     to CheckTemperature.
   </li>
-  <li>March 23, 2011, by Michael Wetter:<br />
+  <li>March 23, 2011, by Michael Wetter:<br/>
     Set <code>displayUnit</code> argument for temperature output
     signal.
   </li>
-  <li>July 08, 2010, by Wangda Zuo:<br />
+  <li>July 08, 2010, by Wangda Zuo:<br/>
     First implementation.
   </li>
 </ul>

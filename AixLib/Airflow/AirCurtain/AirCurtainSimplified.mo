@@ -95,7 +95,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>Novmeber, 2018&#160;</i> by Michael Mans:<br />
+    <i>Novmeber, 2018&#160;</i> by Michael Mans:<br/>
     Model implemented
   </li>
 </ul>

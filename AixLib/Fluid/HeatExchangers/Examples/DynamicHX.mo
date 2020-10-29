@@ -127,7 +127,7 @@ Documentation(info="<html><p>
   for different inlet conditions.
 </p>
 <ul>
-  <li>December 12, 2018, by Alexander Kümpel:<br />
+  <li>December 12, 2018, by Alexander Kümpel:<br/>
     First implementation.
   </li>
 </ul>

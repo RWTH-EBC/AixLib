@@ -2361,7 +2361,7 @@ partial package PartialHybridTwoPhaseMediumFormula
                LateInline=true);
   end specificEnthalpy_ps_der;
   annotation (Documentation(revisions="<html><ul>
-  <li>June 6, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>June 6, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
@@ -2442,7 +2442,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   two independent state properties are expresses as fitted formulas.
   The fitted formulas' approaches implemented in this package are
   developed by Sangi et al. within their \"Fast_Propane\" model and given
-  below:<br />
+  below:<br/>
 </p>
 <table summary=\"Formulas for calculating saturation properties\"
 cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\" style=
@@ -2710,7 +2710,7 @@ cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\" style=
   supercooled region to two-phase region) and, therefore, to avoid
   discontinuities as far as possible, Sangi et al. implemented
   functions for a smooth transition between the regions. An example
-  (i.e. specificEnthalpy_ps) of these functions is given below:<br />
+  (i.e. specificEnthalpy_ps) of these functions is given below:<br/>
 </p>
 <table summary=
 \"Calculation procedures to avoid numerical instability at phase change\"

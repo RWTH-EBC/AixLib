@@ -49,7 +49,7 @@ package Types "Package with type definitions"
   </tr>
 </table>
 <ul>
-  <li>September 29, 2016, by Michael Wetter:<br />
+  <li>September 29, 2016, by Michael Wetter:<br/>
     First implementation.
   </li>
 </ul>
@@ -59,7 +59,7 @@ annotation (preferredView="info", Documentation(info="<html><p>
   This package contains type definitions.
 </p>
 <ul>
-  <li>November 30 2010, by Michael Wetter:<br />
+  <li>November 30 2010, by Michael Wetter:<br/>
     First implementation.
   </li>
 </ul>

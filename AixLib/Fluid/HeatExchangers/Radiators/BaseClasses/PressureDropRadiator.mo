@@ -58,15 +58,15 @@ equation
 </html>",
   revisions="<html><ul>
   <li>
-    <i>October, 2016&#160;</i> by Peter Remmen:<br />
+    <i>October, 2016&#160;</i> by Peter Remmen:<br/>
     Transfer to AixLib.
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>June 10, 2011&#160;</i> by Ana Constantin:<br />
+    <i>June 10, 2011&#160;</i> by Ana Constantin:<br/>
     Implemented.
   </li>
 </ul>

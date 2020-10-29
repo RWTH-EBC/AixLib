@@ -117,7 +117,7 @@ equation
   set point of the fan.
 </p>
 <ul>
-  <li>July, 2017 by Marc Baranski and Roozbeh Sangi:<br />
+  <li>July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
     First implementation.
   </li>
 </ul>

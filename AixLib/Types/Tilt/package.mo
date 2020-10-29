@@ -28,7 +28,7 @@ annotation(preferredView="info", Documentation(info="<html><p>
 </p>
 </html>",
   revisions="<html><ul>
-  <li>November 30, 2010, by Michael Wetter:<br />
+  <li>November 30, 2010, by Michael Wetter:<br/>
     First implementation.
   </li>
 </ul>

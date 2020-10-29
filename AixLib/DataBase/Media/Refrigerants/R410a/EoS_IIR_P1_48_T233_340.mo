@@ -34,7 +34,7 @@ record EoS_IIR_P1_48_T233_340
     f_ResG6={0},
     f_ResG7={0});
   annotation (Documentation(revisions="<html><ul>
-  <li>June 14, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>June 14, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
@@ -59,7 +59,7 @@ record EoS_IIR_P1_48_T233_340
 </h4>
 <p>
   The provided coefficients are fitted to external data by Engelpracht
-  and are valid within the following range:<br />
+  and are valid within the following range:<br/>
 </p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
 border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">

@@ -1,9 +1,11 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model MultizoneMoistAir "Illustrates the use of MultizoneMoistAir"
+model MultizoneMoistAirCO2
+  "Illustrates the use of MultizoneMoistAirCO2"
   import AixLib;
   extends Modelica.Icons.Example;
+  replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAir multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2 multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     VAir=33500,
@@ -18,9 +20,8 @@ model MultizoneMoistAir "Illustrates the use of MultizoneMoistAir"
     internalGainsMode=3,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
-    redeclare package Medium = AixLib.Media.Air,
-    T_start=293.15)
-    "Multizone"
+    redeclare package Medium = Medium,
+    T_start=293.15) "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -159,7 +160,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),
     Documentation(revisions="<html><ul>
-  <li>April, 2019, by Martin Kremer:<br />
+  <li>April, 2019, by Martin Kremer:<br/>
     First Implementation.
   </li>
 </ul>
@@ -175,4 +176,4 @@ equation
   or measurement data.
 </p>
 </html>"));
-end MultizoneMoistAir;
+end MultizoneMoistAirCO2;

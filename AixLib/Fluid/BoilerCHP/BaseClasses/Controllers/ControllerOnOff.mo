@@ -61,15 +61,15 @@ algorithm
           textString="Controller")}),
     Documentation(revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>Mai 23, 2011&#160;</i>by Ana Constantin:<br />
+    <i>Mai 23, 2011&#160;</i>by Ana Constantin:<br/>
     Adapted from a model of Kristian Huchtemann.
   </li>
 </ul>

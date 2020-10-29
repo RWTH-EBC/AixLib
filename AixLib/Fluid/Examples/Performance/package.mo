@@ -10,9 +10,9 @@ annotation (Documentation(info="<html><p>
   References
 </h4>
 <ul>
-  <li>Filip Jorissen, Michael Wetter and Lieve Helsen.<br />
+  <li>Filip Jorissen, Michael Wetter and Lieve Helsen.<br/>
     Simulation speed analysis and improvements of Modelica models for
-    building energy simulation.<br />
+    building energy simulation.<br/>
     Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
   </li>
 </ul>

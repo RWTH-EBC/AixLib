@@ -68,14 +68,14 @@ equation
 </p>
 <ul>
   <li>
-    <i>October, 2015&#160;</i> by Moritz Lauster:<br />
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
     Adapted to Annex60 and restructuring, combined V1 and V2 as well as
     seperate parameter and record from EBC Libs
   </li>
 </ul>
 <ul>
   <li>
-    <i>June, 2014&#160;</i> by Moritz Lauster:<br />
+    <i>June, 2014&#160;</i> by Moritz Lauster:<br/>
     Added some basic documentation
   </li>
 </ul>

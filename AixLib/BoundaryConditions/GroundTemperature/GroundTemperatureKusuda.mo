@@ -1,4 +1,4 @@
-within AixLib.BoundaryConditions.GroundTemperature;
+﻿within AixLib.BoundaryConditions.GroundTemperature;
 model GroundTemperatureKusuda "Model for undisturbed ground temperature"
 
   parameter Modelica.SIunits.Temperature T_mean "Average air temperature over the year";
@@ -11,16 +11,16 @@ model GroundTemperatureKusuda "Model for undisturbed ground temperature"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature "Transfers computed ground temperature to heat port"
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a "Heat port for ground" annotation (
-      Placement(transformation(extent={{84,-60},{104,-40}}), iconTransformation(
-          extent={{84,-60},{104,-40}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port
+    "Heat port for ground"                                                          annotation (Placement(
+        transformation(extent={{84,-60},{104,-40}})));
 
 equation
 
   prescribedTemperature.T =  (T_mean)-(T_amp)*(exp(-D*sqrt(Modelica.Constants.pi/(365*alpha)))*cos(2*Modelica.Constants.pi/365*(time/(3600*24)-t_shift-D/2*sqrt(Modelica.Constants.pi/(365*alpha)))));
 
-  connect(prescribedTemperature.port, port_a) annotation (Line(points={{0,-10},{28,-10},{58,-10},{58,-50},
-          {94,-50}},                           color={191,0,0}));
+  connect(prescribedTemperature.port, port) annotation (Line(points={{0,-10},{
+          28,-10},{58,-10},{58,-50},{94,-50}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
           points={{-100,20},{-46,14},{-10,20},{24,16},{60,18},{78,12},{100,20},{
@@ -51,7 +51,7 @@ equation
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>April 30, 2018, by Marcus Fuchs:<br />
+  <li>April 30, 2018, by Marcus Fuchs:<br/>
     Update documentation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/561\">issue 561</a>).
   </li>

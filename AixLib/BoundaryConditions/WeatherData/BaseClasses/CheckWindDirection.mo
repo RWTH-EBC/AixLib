@@ -29,10 +29,10 @@ equation
   <i>0</i> and <i>360</i> degree.
 </p>
 <ul>
-  <li>October 27, 2011, by Wangda Zuo:<br />
+  <li>October 27, 2011, by Wangda Zuo:<br/>
     Delete the unit conversion part since it will be done outside.
   </li>
-  <li>July 14, 2010, by Wangda Zuo:<br />
+  <li>July 14, 2010, by Wangda Zuo:<br/>
     First implementation.
   </li>
 </ul>
