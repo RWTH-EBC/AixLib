@@ -20,10 +20,10 @@ model Storage
   parameter Modelica.SIunits.RelativePressureCoefficient beta = 350e-6 annotation(Dialog(group = "Bouyancy"));
   parameter Real kappa = 0.4 annotation(Dialog(group = "Bouyancy"));
   Modelica.Fluid.Interfaces.FluidPort_a
-                    port_a_consumer(redeclare package Medium = Medium)
+                    port_a_consumer(redeclare final package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, -108}, {10, -88}}), iconTransformation(extent = {{-10, -110}, {10, -90}})));
   Modelica.Fluid.Interfaces.FluidPort_b
-                    port_b_consumer(redeclare package Medium = Medium)
+                    port_b_consumer(redeclare final package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, 82}, {10, 102}}), iconTransformation(extent = {{-10, 90}, {10, 110}})));
   Fluid.MixingVolumes.MixingVolume
                      layer[n](
@@ -54,26 +54,26 @@ model Storage
     each final nPorts=2,
     each final m_flow_nominal=m_flow_nominal_HE)               annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer_HE[n](each G = k_HE * A_HE / n) annotation(Placement(transformation(extent = {{32, -10}, {52, 10}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer[n](G = cat(1, {G_top_bottom}, array(G_middle for k in 2:n - 1), {G_top_bottom})) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer_HE[n](each final G = k_HE * A_HE / n) annotation(Placement(transformation(extent = {{32, -10}, {52, 10}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer[n](final G = cat(1, {G_top_bottom}, array(G_middle for k in 2:n - 1), {G_top_bottom})) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
   BaseClasses.Bouyancy bouyancy[n - 1](
-    each rho=Medium.density(Medium.setState_phX(
+    each final rho=Medium.density(Medium.setState_phX(
         port_a_consumer.p,
         inStream(port_a_consumer.h_outflow),
         inStream(port_a_consumer.Xi_outflow))),
-    each lambda=Medium.thermalConductivity(Medium.setState_phX(
+    each final lambda=Medium.thermalConductivity(Medium.setState_phX(
         port_a_consumer.p,
         inStream(port_a_consumer.h_outflow),
         inStream(port_a_consumer.Xi_outflow))),
-    each g=Modelica.Constants.g_n,
-    each cp=Medium.specificHeatCapacityCp(Medium.setState_phX(
+    each final g=Modelica.Constants.g_n,
+    each final cp=Medium.specificHeatCapacityCp(Medium.setState_phX(
         port_a_consumer.p,
         inStream(port_a_consumer.h_outflow),
         inStream(port_a_consumer.Xi_outflow))),
-    each A=A,
-    each beta=beta,
-    each dx=dx,
-    each kappa=kappa) annotation (Placement(transformation(extent={{-10,-10},{
+    each final A=A,
+    each final beta=beta,
+    each final dx=dx,
+    each final kappa=kappa) annotation (Placement(transformation(extent={{-10,-10},{
             10,10}}, origin={-28,0})));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal_layer
     "Nominal mass flow rate in layers";
