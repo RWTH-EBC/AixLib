@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.HeatTransfer;
+within AixLib.Utilities.HeatTransfer;
 model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
   parameter Boolean use_A_in = false

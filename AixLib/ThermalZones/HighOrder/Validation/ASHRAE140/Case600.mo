@@ -262,7 +262,6 @@ equation
   </li>
 </ul>
 </html>",info="<html><p>
-  As described in ASHRAE Standard 140.
-</p>
+As described in ASHRAE Standard 140.
 </html>"));
 end Case600;

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.WSchV1995.IW;
+within AixLib.DataBase.Walls.WSchV1995.IW;
 record IWsimple_WSchV1995_S_half
   "Inner wall simple after WSchV1995, for building of type S (schwer), only half"
   extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.0575, 0.015}

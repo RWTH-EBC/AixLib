@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems;
+within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=false,

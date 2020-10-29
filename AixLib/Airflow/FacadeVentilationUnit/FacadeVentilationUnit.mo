@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.FacadeVentilationUnit;
+within AixLib.Airflow.FacadeVentilationUnit;
 model FacadeVentilationUnit
   "Facade Ventilation Unit (FVU) equipped with a recuperator"
 

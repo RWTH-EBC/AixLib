@@ -326,12 +326,27 @@ equation
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-160},{240,
             160}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 08, 2020,by</i> Tobias Blacha:<br>Move to development</li>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br>Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 08, 2020,by</i> Tobias Blacha:<br/>
+    Move to development
+  </li>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirectional low-temperature networks for buildings with heat pump and direct cooling. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application for energy balancing. This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>. The mass flows are controlled equation-based and calculated using the heating and cooling demands and the specified temperatures of the warm and cold line of the network.</p>
+<p>
+  Substation model for bidirectional low-temperature networks for
+  buildings with heat pump and direct cooling. In the case of
+  simultaneous cooling and heating demands, the return flows are used
+  as supply flows for the other application for energy balancing. This
+  model uses the heat pump <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>.
+  The mass flows are controlled equation-based and calculated using the
+  heating and cooling demands and the specified temperatures of the
+  warm and cold line of the network.
+</p>
 </html>"));
 end DHCSubstationHeatPumpDirectCooling;

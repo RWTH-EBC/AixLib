@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model SimpleConsumer "Simple Consumer"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
   import SI=Modelica.SIunits;
@@ -149,7 +149,6 @@ equation
   possible to choose between these options with the parameter
   \"functionality\".
 </p>
-</html>", revisions="<html>
 <ul>
   <li>August 31, 2020, by Alexander Kümpel:<br/>
     Remove pipes

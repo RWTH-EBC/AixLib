@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
+within AixLib.Controls.HVACAgentBasedControl.Agents;
 model RoomAgent
   extends BaseClasses.PartialAgent(
     name=10001,

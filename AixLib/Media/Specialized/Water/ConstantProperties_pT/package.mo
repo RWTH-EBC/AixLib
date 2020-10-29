@@ -80,9 +80,21 @@ annotation (Documentation(info="<html><p>
   by defining
 </p>
 <pre>
+
+
+
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT(
+
+
+
     T_nominal=273.15+100,
+
+
+
     p_nominal=5e5);
+
+
+
 </pre>
 <ul>
   <li>September 20, 2016, by Michael Wetter:<br/>
