@@ -109,8 +109,7 @@ model HydraulicSeparator
     offset=0.2)
     annotation (Placement(transformation(extent={{48,-42},{68,-22}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureMixedBottom(redeclare
-      package                                                                    Medium =
+                                        temperatureMixedBottom(redeclare package Medium =
                        Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-8,-26},{-28,-6}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort

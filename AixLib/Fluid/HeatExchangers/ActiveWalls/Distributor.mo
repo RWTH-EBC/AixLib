@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls;
+within AixLib.Fluid.HeatExchangers.ActiveWalls;
 model Distributor "Heating circuit distributor for underfloor heating systems"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
@@ -58,8 +58,7 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     each final C_nominal=C_nominal,
     final allowFlowReversal=allowFlowReversal) annotation (Placement(
         transformation(extent={{-10,-20},{10,0}}, rotation=0)));
-  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final
-      package                                                                      Medium =
+  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final package Medium =
                        Medium) annotation (Placement(
       visible=true,
       transformation(
@@ -70,8 +69,7 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
         origin={0,60},
         extent={{-6,-24},{6,24}},
         rotation=90)));
-  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final
-      package                                                                        Medium =
+  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final package Medium =
                        Medium) annotation (Placement(
       visible=true,
       transformation(

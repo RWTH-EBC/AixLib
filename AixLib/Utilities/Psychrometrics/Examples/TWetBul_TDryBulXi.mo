@@ -10,8 +10,7 @@ model TWetBul_TDryBulXi
     duration=1,
     offset=273.15 + 30) "Dry bulb temperature"
                  annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-  AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBul(         redeclare
-      package                                                                         Medium =
+  AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBul(         redeclare package Medium =
                        Medium) "Model for wet bulb temperature"
     annotation (Placement(transformation(extent={{0,20},{20,40}})));
   Modelica.Blocks.Sources.Constant p(k=101325) "Pressure"
@@ -22,8 +21,7 @@ model TWetBul_TDryBulXi
     height=(0.0133 - 0.0175),
     offset=0.0175) "Humidity concentration"
                  annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-  AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBulApp(redeclare package
-                                                                                Medium =
+  AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBulApp(redeclare package Medium =
                        Medium, approximateWetBulb=true)
     "Model for wet bulb temperature"
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));

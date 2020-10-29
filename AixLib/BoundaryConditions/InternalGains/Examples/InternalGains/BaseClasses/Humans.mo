@@ -14,8 +14,7 @@ partial model Humans "Base class with bounday conditions for humans' examples"
   Modelica.Blocks.Math.MultiSum sumQ_flows(nu=2) annotation (Placement(transformation(extent={{34,-70},{46,-58}})));
   Modelica.Blocks.Interfaces.RealOutput HeatOut(final quantity="Power", final unit="W")
                                                 annotation(Placement(transformation(extent={{90,-74},{110,-54}}), iconTransformation(extent={{80,-80},{100,-60}})));
-  replaceable AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman humanIntGains(roomArea=20) constrainedby
-    AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman(                                                                                                                           roomArea=20) annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-16,-12},{10,14}})));
+  replaceable AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman humanIntGains(roomArea=20) constrainedby AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses.PartialHuman(roomArea=20) annotation (__Dymola_choicesAllMatching=true, Placement(transformation(extent={{-16,-12},{10,14}})));
 equation
   connect(sine.y,varTempRoom. T) annotation(Line(points={{-82.6,24},{-92,24},{-92,52},{-86,52}},          color = {0, 0, 127}));
   connect(heatFlowSensorConv.port_b,fixedTemp. port) annotation (Line(points={{52,19},{56,19},{56,14},{60,14}}, color={191,0,0}));

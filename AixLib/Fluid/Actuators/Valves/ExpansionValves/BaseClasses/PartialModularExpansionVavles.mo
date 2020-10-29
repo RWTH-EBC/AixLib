@@ -86,8 +86,7 @@ partial model PartialModularExpansionVavles
   //
   replaceable model ModularController =
     Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController
-    constrainedby
-    Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
+    constrainedby Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
     "Model of the modular controller"
     annotation (choicesAllMatching=true,
                 Dialog(tab="Controller", group="General"));

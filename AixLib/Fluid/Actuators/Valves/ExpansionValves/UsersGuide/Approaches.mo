@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.UsersGuide;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.UsersGuide;
 class Approaches
   "Approaches implemented in the library"
   extends Modelica.Icons.Information;
@@ -12,7 +12,8 @@ class Approaches
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
-</html>",   info="<html><p>
+</html>",
+            info="<html><p>
   A generic polynomial approach is presented below:<br/>
   <br/>
   <code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br/>
@@ -221,7 +222,8 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
-</html>",   info="<html><p>
+</html>",
+            info="<html><p>
   A generic power approach is presented below:<br/>
   <br/>
   <code>C = corFact * a * product(P[i]^b[i] for i in 1:nT)</code><br/>

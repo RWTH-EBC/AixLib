@@ -1,4 +1,4 @@
-﻿within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
+within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
 model TemperatureDependentMoistureOutputSIA2024
   "Model for temperature dependent moisture output based on formulas of SIA 2024"
 

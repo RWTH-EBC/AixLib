@@ -22,8 +22,7 @@ model MixingValveBackwardDirection
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-6,-10},{-26,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureSensorMixed(redeclare
-      package                                                                    Medium =
+                                        temperatureSensorMixed(redeclare package Medium =
                        Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
   AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorMixed(redeclare package Medium =

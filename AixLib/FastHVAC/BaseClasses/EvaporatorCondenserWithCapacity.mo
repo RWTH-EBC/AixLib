@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.BaseClasses;
+within AixLib.FastHVAC.BaseClasses;
 model EvaporatorCondenserWithCapacity
   extends AixLib.FastHVAC.Interfaces.TwoPortHeatMassExchanger( workingFluid(m_fluid=m_fluid,
     medium=medium));

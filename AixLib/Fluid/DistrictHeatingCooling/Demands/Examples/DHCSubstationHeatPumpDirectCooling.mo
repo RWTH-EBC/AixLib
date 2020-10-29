@@ -36,6 +36,7 @@ model DHCSubstationHeatPumpDirectCooling
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling
     DHCsubstationHeatingDirectCooling(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     m_flow_nominal=2,
     heaDem_max=4000,
     deltaT_heaSecSet=283.15,

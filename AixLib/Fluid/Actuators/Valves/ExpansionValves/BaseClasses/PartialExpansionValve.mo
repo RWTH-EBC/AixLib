@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
 partial model PartialExpansionValve
   "Base model for all expansion valve models"
 
@@ -44,8 +44,7 @@ partial model PartialExpansionValve
   //
   replaceable model FlowCoefficient =
     Utilities.FlowCoefficient.SpecifiedFlowCoefficients.ConstantFlowCoefficient
-                                                      constrainedby
-    PartialFlowCoefficient
+                                                      constrainedby PartialFlowCoefficient
     "Model that describes the calculation of the flow coefficient"
     annotation(choicesAllMatching=true,
                Dialog(

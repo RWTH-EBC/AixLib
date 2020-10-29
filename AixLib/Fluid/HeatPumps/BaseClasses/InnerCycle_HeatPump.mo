@@ -1,20 +1,18 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses;
+within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle_HeatPump
   "Blackbox model of refrigerant cycle of a heat pump"
   extends AixLib.Fluid.BaseClasses.PartialInnerCycle;
 
   replaceable model PerDataMainHP =
       AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
-    constrainedby
-    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData(
+    constrainedby AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
     "Replaceable model for performance data of a heat pump in main operation mode"
     annotation (choicesAllMatching=true);
 
   replaceable model PerDataRevHP =
       AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
-    constrainedby
-    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
+    constrainedby AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
     "Replaceable model for performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);

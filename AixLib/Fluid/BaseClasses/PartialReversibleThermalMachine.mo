@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BaseClasses;
+within AixLib.Fluid.BaseClasses;
 partial model PartialReversibleThermalMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -19,8 +19,8 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
-    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
+  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
+                                                "Blackbox model of refrigerant cycle of a thermal machine"
     annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,

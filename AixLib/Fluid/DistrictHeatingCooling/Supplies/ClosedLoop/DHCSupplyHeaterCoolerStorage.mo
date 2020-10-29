@@ -37,8 +37,8 @@ model DHCSupplyHeaterCoolerStorage
     m_flow_nominal=m_flow_nominal)
     "Ideal heater (only in operation if mass flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{42,-10},{62,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_cooOut(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_cooOut(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal)
     "Outlet temperature of ideal cooler if mass flow direcetion is from port_b to port_a"
     annotation (Placement(transformation(extent={{-92,-10},{-112,10}})));
   Modelica.Blocks.Interfaces.RealInput T_cooSet(unit="K")
@@ -57,15 +57,15 @@ model DHCSupplyHeaterCoolerStorage
     nSeg=3,
     VTan=V_Tank)
               annotation (Placement(transformation(extent={{0,-10},{-20,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_heaOut(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_heaOut(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal)
     "Outlet temperature of ideal heater if mass flow direcetion is from port_a to port_b"
     annotation (Placement(transformation(extent={{90,-10},{70,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_stoHea(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_stoHea(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{26,-10},{6,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_stoCoo(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_stoCoo(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-30,-10},{-50,10}})));
   Modelica.Blocks.Math.Min min "Set temperature of ideal heater"
     annotation (Placement(transformation(extent={{-44,28},{-56,40}})));

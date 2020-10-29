@@ -260,8 +260,8 @@ equation
     annotation (Line(points={{-141.4,-64},{-130,-64}}, color={0,0,127}));
   connect(senT_heaPumInSec.port_b, heaPum.port_a1) annotation (Line(points={{70,-85},
           {68,-85},{68,-84},{66,-84},{66,-36},{58,-36}},      color={0,127,255},
-      thickness=0.5));
 
+      thickness=0.5));
   connect(senT_heaPumInSec.port_a, souHeaSec.ports[1])
     annotation (Line(points={{90,-85},{106,-85}}, color={0,127,255},
       thickness=0.5));

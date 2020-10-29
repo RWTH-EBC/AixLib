@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
+within AixLib.Controls.HeatPump.SecurityControls;
 block SecurityControl "Block including all security levels"
   extends BaseClasses.PartialSecurityControl;
 

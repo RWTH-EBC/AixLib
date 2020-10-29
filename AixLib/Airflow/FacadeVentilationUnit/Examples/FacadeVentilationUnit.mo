@@ -11,8 +11,7 @@ model FacadeVentilationUnit
       maxExFanPower=0.6)
     "Comprehensive rule-based controller for the facade ventilation unit"
     annotation (Placement(transformation(extent={{-46,-30},{-6,10}})));
-  AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit FVU(redeclare
-      package                                                                      Air =
+  AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit FVU(redeclare package Air =
                     Medium1, redeclare package Water = Medium2)
     "The facade ventilation unit to be tested in this example"
     annotation (Placement(transformation(extent={{70,-56},{106,-36}})));
@@ -83,8 +82,7 @@ model FacadeVentilationUnit
   Modelica.Blocks.Sources.Constant coolingWaterTemperature(k=273.15 + 17)
     "Provides a test value of the cooling water temperatiure"
     annotation (Placement(transformation(extent={{84,74},{104,94}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort supplyAirTemperature(redeclare
-      package                                                                    Medium =
+  AixLib.Fluid.Sensors.TemperatureTwoPort supplyAirTemperature(redeclare package Medium =
                        Medium1, m_flow_nominal=0.1)
     "Measures the supply air temperature"
     annotation (Placement(transformation(extent={{120,-54},{140,-34}})));
