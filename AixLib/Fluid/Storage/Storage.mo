@@ -81,7 +81,7 @@ model Storage
     "Nominal mass flow rate of heat exchanger layers";
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state";
+    "Type of energy balance: dynamic (3 initialization options) or steady state in layers and layers_HE";
 
   //Initialization parameters
   parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
