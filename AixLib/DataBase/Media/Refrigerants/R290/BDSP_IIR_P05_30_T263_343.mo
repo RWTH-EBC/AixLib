@@ -1,4 +1,4 @@
-within AixLib.DataBase.Media.Refrigerants.R290;
+﻿within AixLib.DataBase.Media.Refrigerants.R290;
 record BDSP_IIR_P05_30_T263_343
   "Record with fitting coefficients taken from the Fast_Propane model"
 

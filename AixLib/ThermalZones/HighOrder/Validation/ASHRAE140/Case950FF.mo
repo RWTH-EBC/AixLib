@@ -200,8 +200,7 @@ equation
     Implemented
   </li>
 </ul>
-</html>",
-         info="<html><p>
+</html>",info="<html><p>
   As described in ASHRAE Standard 140.
 </p>
 <p>

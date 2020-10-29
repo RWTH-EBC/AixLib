@@ -1,4 +1,4 @@
-within AixLib.BoundaryConditions.InternalGains.Moisture;
+﻿within AixLib.BoundaryConditions.InternalGains.Moisture;
 model MoistureGains
   "Model for moisture gains that are produced by plants, cooking, etc."
 

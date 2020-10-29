@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
+﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookSellerAgent
   extends BaseClasses.PartialAgent;
   Real[:,2] bookList( start= [3551551677.0,30; 3551551679.0,20; 3551551616.0, 20]);

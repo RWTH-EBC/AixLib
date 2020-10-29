@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased;
 model PumpSpeedControlled
   "Pump model with speed control, onOff-Switch and bounding of speed instead of pump delivery head."
 
@@ -114,7 +114,8 @@ model PumpSpeedControlled
       enable=calculate_Power));
   replaceable function efficiencyCharacteristic =
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency
-    constrainedby AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
+    constrainedby
+    AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
     "eta = f(H, Q, P)" annotation (Dialog(
       tab="General",
       group="Power and Efficiency",

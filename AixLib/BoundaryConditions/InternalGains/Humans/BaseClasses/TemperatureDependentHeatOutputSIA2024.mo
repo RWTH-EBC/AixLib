@@ -1,4 +1,4 @@
-within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
+﻿within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
 model TemperatureDependentHeatOutputSIA2024
   "Model for temperature dependent heat output based on formulas of SIA 2024"
 

@@ -14,7 +14,8 @@ model Chiller "Example for the reversible chiller model."
     nPorts=1) "Ideal mass flow source at the inlet of the sink side"
     annotation (Placement(transformation(extent={{-54,-58},{-34,-38}})));
 
-  Sources.Boundary_pT                sinkSideFixedBoundary(          redeclare package Medium =
+  Sources.Boundary_pT                sinkSideFixedBoundary(          redeclare
+      package                                                                          Medium =
                        Medium_sin, nPorts=1)
     "Fixed boundary at the outlet of the sink side" annotation (Placement(
         transformation(

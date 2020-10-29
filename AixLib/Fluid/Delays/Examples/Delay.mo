@@ -34,7 +34,8 @@ model Delay
     dp_nominal=5,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{26,-4},{46,16}})));
-  AixLib.Fluid.Delays.DelayFirstOrder del(         m_flow_nominal=5, redeclare package Medium =
+  AixLib.Fluid.Delays.DelayFirstOrder del(         m_flow_nominal=5, redeclare
+      package                                                                          Medium =
                        Medium,
     nPorts=2,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
