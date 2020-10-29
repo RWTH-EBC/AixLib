@@ -20,23 +20,29 @@ model CtrAHUBasic "Simple controller for AHU"
     annotation (dialog(group="Fan Controller"));
   parameter Real y_start=0 "Initial value of output"
     annotation (dialog(group="Fan Controller"));
+      parameter Modelica.Blocks.Types.InitPID initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
+    "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)" annotation (dialog(group="Initialization"));
 
 
 
   BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
           extent={{90,-10},{110,10}}), iconTransformation(extent={{84,-14},{116,
             16}})));
-  CtrRegBasic ctrPh(final useExternalTset=true, Td=0) annotation (dialog(enable=
+  CtrRegBasic ctrPh(final useExternalTset=true, Td=0,
+    final initType=initType)                          annotation (dialog(enable=
          True), Placement(transformation(extent={{0,80},{20,100}})));
   CtrRegBasic ctrCo(
     final useExternalTset=true,
     Td=0,
+    final initType=initType,
     final reverseAction=true) annotation (dialog(enable=True), Placement(
         transformation(extent={{0,40},{20,60}})));
   CtrRegBasic ctrRh(
     final useExternalTset=true,
     final useExternalTMea=true,
-    Td=0) annotation (dialog(enable=True), Placement(transformation(extent={{0,0},
+    Td=0,
+    final initType=initType)
+          annotation (dialog(enable=True), Placement(transformation(extent={{0,0},
             {20,20}})));
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TFlowSet) if not useExternalTset
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
@@ -54,7 +60,7 @@ model CtrAHUBasic "Simple controller for AHU"
     final k=k,
     final Ti=Ti,
     final Td=0,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    final initType=initType,
     y_start=y_start,
     final reverseAction=false,
     final reset=AixLib.Types.Reset.Disabled)
@@ -66,13 +72,13 @@ model CtrAHUBasic "Simple controller for AHU"
     final k=k,
     final Ti=Ti,
     final Td=0,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    final initType=initType,
     y_start=y_start,
     final reverseAction=false,
     final reset=AixLib.Types.Reset.Disabled) if useTwoFanCtr
-    annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
+    annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
   Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet)
-    annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
+    annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 
   Modelica.Blocks.Sources.Constant ConstWRG(final k=0)
     annotation (Placement(transformation(extent={{40,-32},{52,-20}})));
@@ -83,6 +89,7 @@ model CtrAHUBasic "Simple controller for AHU"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={66,-36})));
+
 
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
@@ -119,10 +126,11 @@ equation
       pattern=LinePattern.Dash));
   connect(TFrostProtection.y, ctrPh.Tset)
     annotation (Line(points={{-39,90},{-2,90}}, color={0,0,127}));
-  connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-70},{-30,
-          -70},{-30,-50},{-2,-50}}, color={0,0,127}));
+  connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-50},{-2,
+          -50}},                    color={0,0,127}));
   connect(PID_VflowSup.u_m, genericAHUBus.heaterBus.VFlowAirMea) annotation (
-      Line(points={{10,-62},{10,-98},{100.05,-98},{100.05,0.05}}, color={0,0,
+      Line(points={{10,-62},{10,-72},{100,-72},{100,-36},{100.05,-36},{100.05,0.05}},
+                                                                  color={0,0,
           127}), Text(
       string="%second",
       index=1,
@@ -168,8 +176,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ConstVflow.y, PID_VflowRet.u_s) annotation (Line(points={{-59,-70},{-42,
-          -70},{-42,-90},{-22,-90}}, color={0,0,127}));
+  connect(ConstVflow.y, PID_VflowRet.u_s) annotation (Line(points={{-59,-50},{-42,
+          -50},{-42,-80},{-22,-80}}, color={0,0,127}));
   connect(PID_VflowSup.y, genericAHUBus.dpFanSupSet) annotation (Line(points={{
           21,-50},{100,-50},{100,-34},{100.05,-34},{100.05,0.05}}, color={0,0,
           127}), Text(
@@ -178,14 +186,15 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(PID_VflowRet.u_m, genericAHUBus.V_flow_RetAirMea) annotation (Line(
-        points={{-10,-102},{-10,-112},{100.05,-112},{100.05,0.05}}, color={0,0,
+        points={{-10,-92},{100,-92},{100,-50},{100.05,-50},{100.05,0.05}},
+                                                                    color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID_VflowRet.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{
-          1,-90},{100.05,-90},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(PID_VflowRet.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{1,-80},
+          {100.05,-80},{100.05,0.05}},        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
