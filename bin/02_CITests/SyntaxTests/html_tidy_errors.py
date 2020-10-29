@@ -98,18 +98,24 @@ class HTML_Tidy(object):
 					self, htmlList=htmlList, substitutions_dict={'\\"': '"'})
 				
 				
-				print('\n' + "----" + moFulNam + "----")
-				print("\n-------- HTML Code --------")
-				print(f"\n{HTML_Tidy.number_print_List(self, htmlList)}")
+				
 				document_corr, errors = HTML_Tidy.htmlCorrection(self, htmlStr)
 				docCorrStr = HTML_Tidy.number_print_List(
 					self, document_corr.split('\n'), sep='\n')
-				print("\n-------- Corrected Code --------")
-				print(f"\n{docCorrStr}")
-				print("\n-------- Errors --------")
-				print(f"\n{errors}")
 				
-
+				ErrWhite = "Warning: The summary attribute on the <table> element is obsolete in HTML5"
+				if len(errors) > 0 and errors.find(ErrWhite) == 0:
+					print('\n' + "----" + moFulNam + "----")
+					print("\n-------- HTML Code --------")
+					print(f"\n{HTML_Tidy.number_print_List(self, htmlList)}")
+					print("\n-------- Corrected Code --------")
+					print(f"\n{docCorrStr}")
+					print("\n-------- Errors --------")
+					print(f"\n{errors}")
+					continue
+				else:
+					continue
+			
 		if self.log:
 			File = HTML_Tidy._return_logfile(self, errMsg)
 			print("##########################################################")
@@ -308,7 +314,7 @@ class HTML_Tidy(object):
 			var = 1
 			return (var)
 		else:
-			print("HTML Check was succsessful!")
+			print("HTML Check was successful!")
 			Exit.write("#!/bin/bash"+"\n"+"\n"+"exit 0")
 			Exit.close()
 			var = 0
