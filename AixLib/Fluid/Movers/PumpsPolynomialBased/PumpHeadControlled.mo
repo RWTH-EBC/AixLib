@@ -3,13 +3,8 @@ model PumpHeadControlled
   "Pump model with pump head control, an onOff-Switch and limitation of pump head."
 
 
-  extends Modelica.Fluid.Interfaces.PartialTwoPort;
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
-  // Energy and mass balance
-  extends Modelica.Fluid.Interfaces.PartialLumpedVolume(
-    final fluidVolume=V,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState);
 
 
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam=
@@ -33,26 +28,45 @@ model PumpHeadControlled
     Note that N is defined only on [nMin, nMax]. Due to power limitation
     N might be smaller than nMax for higher Q."
     annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
+  parameter Modelica.SIunits.Height Hnom=
+      AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
+      pumpParam.cHQN,
+      Qnom,
+      Nnom) "Nominal pump head in m (water).
+      Will by default be calculated automatically from Qnom and Nnom.
+      If you change the value make sure to also set a feasible Qnom."
+    annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
 
 
-
-  // Parameters
+ // Parameters
   // Initialization
-
-
-  parameter Modelica.SIunits.Height Hstart=0.1 "
-      Start value of pump head. Will be used to initialize criticalDamping block
-      and pressure in ports a and b.
-      Default is to calculate it from Qstart and Nnom.  If you change the value
-      make sure to also set Qstart to a suitable value."
+  parameter Modelica.SIunits.Height Hstart=Hnom "
+      Start value of pump head. Will be used to initialize criticalDamping."
     annotation (Dialog(tab="Initialization", group="Pressure"));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
+    "Start value of pressure" annotation (Dialog(tab="Initialization", group="Pressure"));
+  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
+    "Start value of temperature" annotation (Dialog(tab="Initialization", group="Temperature"));
+
+  // Dynamics
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
+    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   // Assumptions
   parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
+
+  final parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default) "Default medium density";
+
   // Power and Efficiency
-  parameter Boolean calculatePower=false "calc. power consumption?" annotation (
+  parameter Boolean calculatePower=true "calc. power consumption?" annotation (
      Dialog(tab="General", group="Power and Efficiency"));
   parameter Boolean calculateEfficiency=false
     "calc. efficency? (eta = f(H, Q, P))" annotation (Dialog(
@@ -61,19 +75,17 @@ model PumpHeadControlled
       enable=calculate_Power));
   replaceable function efficiencyCharacteristic =
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency
-    constrainedby
-    AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
+    constrainedby AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
     "eta = f(H, Q, P)" annotation (Dialog(
       tab="General",
       group="Power and Efficiency",
       enable=calculate_Efficiency), choicesAllMatching=true);
 
   // Variables
-  Modelica.SIunits.Pressure dp_pump=port_b.p - port_a.p "Pressure increase";
+  Modelica.SIunits.Pressure dp_pump  "Pressure increase";
   Modelica.Blocks.Interfaces.RealOutput head(
     quantity="Length",
-    unit="m") = dp_pump/(medium.d*system.g) "Pump head";
-  Modelica.SIunits.MassFlowRate m_flow=port_a.m_flow "Mass flow rate (total)";
+    unit="m") "Pump head";
   Modelica.SIunits.AngularVelocity n "pump speed calculated from volume flow and head n=f(Q,H)";
   Modelica.Blocks.Interfaces.RealOutput power(quantity="Power", unit="W")
     "electical power";
@@ -82,7 +94,7 @@ model PumpHeadControlled
     unit="1",
     min=0) "efficiency";
 
-  Modelica.Blocks.Sources.RealExpression Vflow_m3h(y=-port_b.m_flow/medium.d*3600)
+  Modelica.Blocks.Sources.RealExpression Vflow_m3h(y=m_flow/rho_default*3600)
     "conversion of mass flow rate to volume flow rate"
     annotation (Placement(transformation(extent={{-100,35},{-80,55}})));
 
@@ -117,6 +129,9 @@ protected
     annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
   Modelica.Blocks.Sources.Constant off(k=0)
     annotation (Placement(transformation(extent={{23,7},{33,17}})));
+  Modelica.Blocks.Sources.RealExpression pressure_difference(y=-dp_pump)
+    "implements a connectable object that can be cuppled with pumpBus."
+    annotation (Placement(transformation(extent={{-71,-76},{-51,-56}})));
 public
   Modelica.Blocks.Logical.Switch onOff
     annotation (Placement(transformation(extent={{48,10},{68,30}})));
@@ -124,38 +139,26 @@ public
   Modelica.Blocks.Sources.RealExpression realExpression(y=n)
     annotation (Placement(transformation(extent={{9,34},{29,54}})));
 
+  AixLib.Fluid.Movers.BaseClasses.IdealSource idealSource(
+    redeclare package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_small=1E-4*abs(m_flow_nominal),
+    final control_m_flow=false)
+    annotation (Placement(transformation(extent={{-31,-90},{-11,-70}})));
+  MixingVolumes.MixingVolume vol(
+    redeclare package Medium = Medium,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
+    p_start=p_start,
+    T_start=T_start,
+    m_flow_nominal=m_flow_nominal,
+    m_flow_small=1E-4*abs(m_flow_nominal),
+    allowFlowReversal=allowFlowReversal,
+    final V=V,
+    nPorts=2) annotation (Placement(transformation(extent={{23,-80},{43,-60}})));
 equation
 
-  // Energy balance
-  Hb_flow = port_a.m_flow*actualStream(port_a.h_outflow) + port_b.m_flow*
-    actualStream(port_b.h_outflow);
 
-  // Ports
-  port_a.h_outflow = medium.h;
-  port_b.h_outflow = medium.h;
-  port_b.p = medium.p
-    "outlet pressure is equal to medium pressure, which includes Wb_flow";
-
-  // Mass balance
-  mb_flow = port_a.m_flow + port_b.m_flow;
-
-  mbXi_flow = port_a.m_flow*actualStream(port_a.Xi_outflow) + port_b.m_flow*
-    actualStream(port_b.Xi_outflow);
-  port_a.Xi_outflow = medium.Xi;
-  port_b.Xi_outflow = medium.Xi;
-
-  mbC_flow = port_a.m_flow*actualStream(port_a.C_outflow) + port_b.m_flow*
-    actualStream(port_b.C_outflow);
-  port_a.C_outflow = C;
-  port_b.C_outflow = C;
-
-  // Not yet implemented
-  Wb_flow = 0;
-  Qb_flow = 0;
-  // Will most certainly remain zero for all models
-
-  //Calculate Vflow_m3h
-  // Physical limitations of the pumps
   connect(maxMinTable.u[1], Vflow_m3h.y)
     "for the interpolation of the max curve"
     annotation (Line(points={{-77,20},{-77,45},{-79,45}}, color={0,0,127}));
@@ -164,7 +167,7 @@ equation
     annotation (Line(points={{-77,20},{-77,45},{-79,45}}, color={0,0,127}));
 
   head = onOff.y "safe head after limiting and other checks.";
-
+  dp_pump = head * rho_default * Modelica.Constants.g_n;
   //Calculate power and Efficiency
   if pumpBus.onSet and head >
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
@@ -195,7 +198,7 @@ equation
       Vflow_m3h.y,
       head,
       power,
-      medium.d) else 0;
+      rho_default) else 0;
   else
     n = 0;
     power = 0;
@@ -211,23 +214,23 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,
-          76},{-66,93},{0.5975,93},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,76},{-66,93},{0.5975,93},{0.5975,100.597}},
+                                                      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{95,20},{96,20},{
-          96,90},{0.5975,90},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{95,20},{96,20},{96,90},{0.5975,90},{0.5975,100.597}},
+                                                color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},
-          {-62,60},{-62,100.597},{0.5975,100.597}},     color={0,0,127}), Text(
+  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},{-62,60},{-62,100.597},{0.5975,100.597}},
+                                                        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(onOff.u2, pumpBus.onSet) annotation (Line(points={{46,20},{38,20},{38,
-          100.597},{0.5975,100.597}}, color={255,0,255}), Text(
+  connect(onOff.u2, pumpBus.onSet) annotation (Line(points={{46,20},{38,20},{38,100.597},{0.5975,100.597}},
+                                      color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -237,29 +240,32 @@ equation
          {{-26,26},{-14,26},{-14,28},{-12,28}}, color={0,0,127}));
   connect(variableLimiter.y, onOff.u1) annotation (Line(points={{11,20},{15,20},
           {15,28},{46,28}}, color={0,0,127}));
-  connect(maxMinTable.y, pumpBus.maxMinHead) annotation (Line(points={{-54,20},
-          {-52,20},{-52,39},{0.5,39},{0.5,100.5}}, color={0,0,127}), Text(
-      string="%second",
-      index=3,
-      extent={{6,3},{6,3}}));
   connect(Vflow_m3h.y, pumpBus.vFRcur_m3h) annotation (Line(points={{-79,45},{-56,
           45},{-56,85},{0.5,85},{0.5,100.5}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
 
-  connect(variableLimiter.u, pumpBus.dpSet) annotation (Line(points={{-12,20},{
-          -19,20},{-19,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(variableLimiter.u, pumpBus.dpSet) annotation (Line(points={{-12,20},{-19,20},{-19,100.597},{0.5975,100.597}},
+                                                   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(realExpression.y, pumpBus.rpmMea) annotation (Line(points={{30,44},{
-          30,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
+  connect(realExpression.y, pumpBus.rpmMea) annotation (Line(points={{30,44},{30,100.597},{0.5975,100.597}},
+                                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(pressure_difference.y,idealSource. dp_in)
+    annotation (Line(points={{-50,-66},{-15,-66},{-15,-72}}, color={0,0,127}));
+  connect(idealSource.port_a, port_a) annotation (Line(points={{-31,-80},{-81,-80},
+          {-81,0},{-100,0}}, color={0,127,255}));
+  connect(idealSource.port_b,vol. ports[1])
+    annotation (Line(points={{-11,-80},{31,-80}}, color={0,127,255}));
+  connect(vol.ports[2], port_b)
+    annotation (Line(points={{35,-80},{100,-80},{100,0}}, color={0,127,255}));
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=true,

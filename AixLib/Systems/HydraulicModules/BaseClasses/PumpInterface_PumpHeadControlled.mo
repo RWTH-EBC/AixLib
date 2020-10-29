@@ -3,40 +3,8 @@ model PumpInterface_PumpHeadControlled
   "Head controlled polynomial based pump with controller"
   extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;
 
-  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam
+  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam = AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord()
     "pump parameter record" annotation (choicesAllMatching=true);
-
-  replaceable
-    AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH
-    pumpController(
-    final pumpParam=pumpParam,
-    final Qnom=Qnom,
-    final Hnom=Hnom)                    constrainedby
-    Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
-    annotation (
-    Dialog(enable=true, tab="Control Strategy"),
-    Placement(transformation(extent={{-20,40},{20,80}})),
-    __Dymola_choicesAllMatching=true);
-
-  parameter Real Qnom(
-    quantity="VolumeFlowRate",
-    unit="m3/h",
-    displayUnit="m3/h") = 0.67*max(pumpParam.maxMinSpeedCurves[:, 1]) "Nominal volume flow rate in m³/h (~0.67*Qmax)." annotation (Dialog(
-        tab="Nominal Conditions", group="Design point for dp_var control"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm Nnom=
-      Modelica.Math.Vectors.interpolate(
-      x=pumpParam.maxMinSpeedCurves[:, 1],
-      y=pumpParam.maxMinSpeedCurves[:, 2],
-      xi=Qnom) "
-Pump speed in design point (Qnom,Hnom)." annotation (Dialog(tab="Nominal Conditions",
-        group="Design point for dp_var control"));
-  parameter Modelica.SIunits.Height Hnom=
-      AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
-      pumpParam.cHQN,
-      Qnom,
-      Nnom) "Nominal pump head in m (water)."
-    annotation (Dialog(tab="Nominal Conditions", group=
-          "Design point for dp_var control"));
 
 
   parameter Medium.AbsolutePressure p_start=Medium.p_default "Start value for pressure."
@@ -47,7 +15,7 @@ Pump speed in design point (Qnom,Hnom)." annotation (Dialog(tab="Nominal Conditi
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
   // Power and Efficiency
-  parameter Boolean calculatePower=false "calc. power consumption?"
+  parameter Boolean calculatePower=true "calc. power consumption?"
     annotation (Dialog(tab="General", group="Power and Efficiency"));
   parameter Boolean calculateEfficiency=false
     "calc. efficency? (eta = f(H, Q, P))" annotation (Dialog(
@@ -57,9 +25,8 @@ Pump speed in design point (Qnom,Hnom)." annotation (Dialog(tab="Nominal Conditi
 
   Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled physics(
     final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
     final pumpParam=pumpParam,
-    Qnom=Qnom,
-    Nnom=Nnom,
     redeclare final package Medium = Medium,
     final p_start=p_start,
     final T_start=T_start,
@@ -70,19 +37,15 @@ Pump speed in design point (Qnom,Hnom)." annotation (Dialog(tab="Nominal Conditi
     final calculateEfficiency=calculateEfficiency,
     redeclare final function efficiencyCharacteristic =
         Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency)
-    annotation (Placement(transformation(extent={{-30,-50},{30,10}})));
+    annotation (Placement(transformation(extent={{-30,-30},{30,30}})));
 
 equation
-  connect(pumpController.pumpBus, physics.pumpBus) annotation (Line(
-      points={{0,40},{0,10}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(physics.port_a, port_a) annotation (Line(points={{-30,-20},{-66,-20},{
-          -66,0},{-100,0}}, color={0,127,255}));
-  connect(physics.port_b, port_b) annotation (Line(points={{30,-20},{66,-20},{66,
-          0},{100,0}}, color={0,127,255}));
-  connect(pumpController.pumpControllerBus, pumpBus) annotation (Line(
-      points={{0,80},{0,89},{0,89},{0,100}},
+  connect(physics.port_a, port_a) annotation (Line(points={{-30,0},{-100,0}},
+                            color={0,127,255}));
+  connect(physics.port_b, port_b) annotation (Line(points={{30,0},{100,0}},
+                       color={0,127,255}));
+  connect(physics.pumpBus, pumpBus) annotation (Line(
+      points={{0,30},{0,65},{0,65},{0,100}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

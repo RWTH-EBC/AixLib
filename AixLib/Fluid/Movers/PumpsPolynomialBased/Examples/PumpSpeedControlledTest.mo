@@ -2,24 +2,17 @@
 model PumpSpeedControlledTest
   "Testing the pump speed algorithm with the new \"one record\" pump model."
   extends Modelica.Icons.Example;
-  inner Modelica.Fluid.System system(
-    m_flow_small=pump.Qnom*995/3600*1e-2,
-    p_ambient=300000,
-    T_ambient=293.15,
-    allowFlowReversal=true,
-    T_start=293.15)
-    annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpSpeedControlled pump(
+    m_flow_nominal=m_flow_nominal,
     pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4(),
     calculatePower=true,
     calculateEfficiency=true,
     redeclare function efficiencyCharacteristic =
         AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency,
-    redeclare package Medium = Medium,
-    T_start=system.T_start)
+    redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus pumpBus
@@ -27,16 +20,15 @@ model PumpSpeedControlledTest
   Modelica.Blocks.Sources.BooleanPulse    PumpOn(period=600, width=500/600*100)
     annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
   Modelica.Blocks.Sources.Ramp rampPumpSpeed(
-    height=pump.pumpParam.nMax - pump.pumpParam.nMin,
-    offset=pump.pumpParam.nMin,
+    height=pump.pumpParam.nMax - pump.pumpParam.nMin + 200,
+    offset=pump.pumpParam.nMin - 100,
     duration(displayUnit="s") = 100,
     startTime(displayUnit="s") = 100)
     annotation (Placement(transformation(extent={{46,30},{26,50}})));
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
-    Kvs=4,
-    m_flow_start=system.m_flow_start,
-    m_flow_small=system.m_flow_small)
+    Kvs=6.3,
+    m_flow_small=1E-4*m_flow_nominal)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
@@ -47,11 +39,11 @@ model PumpSpeedControlledTest
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   AixLib.Fluid.Sources.Boundary_pT vessle(
     redeclare package Medium = Medium,
-    T=system.T_start,
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-36,20})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
 equation
   connect(pumpBus, pump.pumpBus) annotation (Line(
       points={{0,40},{0,20}},
@@ -79,7 +71,7 @@ equation
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{48,
           10},{48,-30},{-20,-30}}, color={0,127,255}));
   annotation (
-    experiment(Tolerance=1e-4,StopTime=600),
+    experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -113,15 +105,7 @@ equation
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
+    __Dymola_Commands(file=
         "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledTest.mos"
-        "Simulate and plot"),
-    Diagram(graphics={Text(
-          extent={{-82,94},{80,66}},
-          lineColor={100,100,100},
-          horizontalAlignment=TextAlignment.Left,
-          textString="* Tests PumpPhysicsN model (speed control)
-* Tests pump speed increase (ramp)
-* Tests pump off-switch
-* Tests system pressure drop change (ramp)")}));
+        "Simulate and plot"));
 end PumpSpeedControlledTest;

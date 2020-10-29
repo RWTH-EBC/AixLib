@@ -2,27 +2,9 @@
 model PumpInterface_PumpSpeedControlled
   "Speed controlled polynomial based pump with controller"
   extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;
-  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam
+  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam=AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord()
     "pump parameter record" annotation (choicesAllMatching=true);
 
-  parameter Real Qnom(
-    quantity="VolumeFlowRate",
-    unit="m3/h",
-    displayUnit="m3/h") = 0.67*max(pumpParam.maxMinSpeedCurves[:, 1]) "Nominal volume flow rate in m³/h (~0.67*Qmax)." annotation (Dialog(
-        tab="Nominal Conditions", group="Design point for dp_var control"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm Nnom=
-      Modelica.Math.Vectors.interpolate(
-      x=pumpParam.maxMinSpeedCurves[:, 1],
-      y=pumpParam.maxMinSpeedCurves[:, 2],
-      xi=Qnom) "Pump speed in design point (Qnom,Hnom)." annotation (Dialog(tab=
-          "Nominal Conditions", group="Design point for dp_var control"));
-  parameter Modelica.SIunits.Height Hnom=
-      AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
-      pumpParam.cHQN,
-      Qnom,
-      Nnom) "Nominal pump head in m (water).Will by default be calculated automatically from Qnom and Nnom."
-    annotation (Dialog(tab="Nominal Conditions", group=
-          "Design point for dp_var control"));
 
   parameter Medium.AbsolutePressure p_start=Medium.p_default "Start value for pressure."
     annotation (Dialog(tab="Initialization", group="Pressure"));
@@ -41,10 +23,8 @@ model PumpInterface_PumpSpeedControlled
 
   Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled physics(
     final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
     final pumpParam=pumpParam,
-    final Qnom=Qnom,
-    final Nnom=Nnom,
-    final Hnom=Hnom,
     redeclare final package Medium = Medium,
     final p_start=p_start,
     final T_start=T_start,
