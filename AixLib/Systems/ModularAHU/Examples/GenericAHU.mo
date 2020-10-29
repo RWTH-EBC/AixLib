@@ -11,11 +11,8 @@ model GenericAHU "Example of generic ahu model"
     usePreheater=true,
     useHumidifierRet=true,
     useHumidifier=true,
-    perheater(redeclare AixLib.Systems.HydraulicModules.Admix
-        hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+    perheater(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
         redeclare
@@ -29,11 +26,8 @@ model GenericAHU "Example of generic ahu model"
         tau2=15,
         dT_nom=30,
         Q_nom=30000)),
-    cooler(redeclare AixLib.Systems.HydraulicModules.Admix
-        hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+    cooler(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
         redeclare
@@ -47,11 +41,8 @@ model GenericAHU "Example of generic ahu model"
         tau2=10,
         dT_nom=30,
         Q_nom=50000)),
-    heater(redeclare AixLib.Systems.HydraulicModules.Admix
-        hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+    heater(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
         redeclare
