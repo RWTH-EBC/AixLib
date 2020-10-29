@@ -1,19 +1,22 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZoneMoistAirExchange
+model ThermalZoneMoistCO2AirExchange
   "Illustrates the use of ThermalZoneMoistAirEquipped"
   extends Modelica.Icons.Example;
+  replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange thermalZone(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange
+    thermalZone(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-    each der_T(fixed=true)))),
+            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare package Medium = AixLib.Media.Air,
+    redeclare package Medium = Medium,
     T_start=293.15,
     zoneParam=
         DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     internalGainsMode=3,
-    recOrSep=true)
-    "Thermal zone"
+    recOrSep=true,
+    use_C_flow=use_C_flow)
+                   "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -136,13 +139,14 @@ model ThermalZoneMoistAirExchange
   Modelica.Blocks.Math.Gain gain1(k=0.5)
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
-
   Utilities.Psychrometrics.X_pW humRat
     "absolute humidity exchanged by ventilation rate"
     annotation (Placement(transformation(extent={{-44,-30},{-24,-10}})));
   Utilities.Psychrometrics.pW_TDewPoi pWat
     "partial pressure of water vapour in outdoor air"
     annotation (Placement(transformation(extent={{-86,-34},{-66,-14}})));
+  parameter Boolean use_C_flow=true
+    "Set to true to enable input connector for trace substance";
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,0},{-10,0}},
@@ -199,20 +203,11 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
           3.1536e+007, Interval=3600),
-    Documentation(info="<html><p>
-  This example illustrates the use of <a href=
-  \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped\">
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped</a>.
-  Parameter set for thermal zone is for an office zone of an office
-  building build as passive house. All boundary conditions are generic
-  to show how to apply different kinds of boundary conditions. The
-  results should show a typical profile for indoor air temperatures,
-  but are not related to a specific building or measurement data.
-</p>
+    Documentation(info="<html>
+<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data. </p>
 <ul>
-  <li>April, 2019, by Martin Kremer:<br/>
-    First Implementation.
-  </li>
+<li>August 27, 2020, by Katharina Breuer:<br>Add co2 balance</li>
+<li>April, 2019, by Martin Kremer:<br>First Implementation. </li>
 </ul>
 </html>"));
-end ThermalZoneMoistAirExchange;
+end ThermalZoneMoistCO2AirExchange;

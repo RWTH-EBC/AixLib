@@ -1,5 +1,5 @@
-within AixLib.Controls.HeatPump.BaseClasses;
-model OnOffHP "Converts a desired temperature to a certain compressor speed"
+﻿within AixLib.Controls.HeatPump.BaseClasses;
+model OnOffHP "Controller gives full speed or stop signal depending on temperature hysteresis"
   extends AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=hys, pre_y_start=false) "Hysteresis controller for set temperature"

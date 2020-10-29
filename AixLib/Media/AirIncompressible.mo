@@ -1,4 +1,4 @@
-within AixLib.Media;
+﻿within AixLib.Media;
 package AirIncompressible
   "Package with incopressible moist air model for air duct simulations"
   extends Modelica.Media.Interfaces.PartialCondensingGases(
@@ -391,13 +391,13 @@ algorithm
 "<html><p>
   This function computes the derivative of density with respect to
   temperature at constant pressure.
-</p>/html /html /html
-</html>", revisions=
-"<html><ul>
+</p>
+</html>",
+revisions="<html><ul>
   <li>December 18, 2013, by Michael Wetter:<br/>
     First implementation.
   </li>
-</ul>/html /html /html
+</ul>
 </html>"));
 end density_derT_p;
 
