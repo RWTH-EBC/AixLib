@@ -4,9 +4,9 @@ input Real x         "Independent variable";
   input Real y_1[:,2] "Interpolation data";
   output Real y        "Dependent variable";
 protected
-  Integer i;
+  Integer i "iteration counter";
   Integer n = size(y_1,1) "Number of interpolation points";
-  Real p;
+  Real p "linear gradient of interpolation";
 
 algorithm
 
