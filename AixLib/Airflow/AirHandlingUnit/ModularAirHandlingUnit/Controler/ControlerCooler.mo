@@ -11,14 +11,14 @@ model ControlerCooler
         iconTransformation(extent={{-120,50},{-100,70}})));
   Modelica.Blocks.Interfaces.RealInput Xset if dehumidifying and not use_PhiSet
     "set value for absolute humidity at cooler outlet"
-    annotation (Placement(transformation(extent={{-140,-30},{-100,10}}),
+    annotation (Placement(visible=(dehumidifying==true and use_PhiSet==false),transformation(extent={{-140,-30},{-100,10}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
   Modelica.Blocks.Interfaces.RealInput PhiSet if dehumidifying and use_PhiSet
     "set value for relative humidity at ahu outlet"
-    annotation (Placement(transformation(extent={{-140,-90},{-100,-50}}),
+    annotation (Placement(visible=(dehumidifying==true and use_PhiSet==true),transformation(extent={{-140,-90},{-100,-50}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi(use_p_in=false) if use_PhiSet
-    annotation (Placement(transformation(extent={{-60,-44},{-40,-24}})));
+  Utilities.Psychrometrics.X_pTphi x_pTphi(use_p_in=false) if dehumidifying and use_PhiSet
+    annotation (Placement(visible=(dehumidifying and use_PhiSet==true),transformation(extent={{-60,-44},{-40,-24}})));
   Utilities.Psychrometrics.TDewPoi_pW dewPoi
     annotation (Placement(transformation(extent={{-38,8},{-28,18}})));
   Utilities.Psychrometrics.pW_X pWat(use_p_in=false)
@@ -39,7 +39,7 @@ model ControlerCooler
     annotation (Placement(transformation(extent={{100,30},{120,50}})));
   Modelica.Blocks.Interfaces.RealOutput XCooSet if dehumidifying
     "set value for humidity control of cooler"
-    annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
+    annotation (Placement(visible=(dehumidifying==true),transformation(extent={{100,-50},{120,-30}})));
 protected
   Modelica.Blocks.Interfaces.RealInput X_intern "internal mass fraction";
 equation
@@ -49,6 +49,10 @@ equation
   else
     if use_PhiSet then
       connect(X_intern,x_pTphi.X[1]);
+      connect(Tset, x_pTphi.T) annotation (Line(visible=(dehumidifying==true and use_PhiSet==true),points={{-120,50},{-76,50},{-76,-34},
+          {-62,-34}}, color={0,0,127}));
+      connect(PhiSet, x_pTphi.phi) annotation (Line(visible=(dehumidifying==true and use_PhiSet==true),points={{-120,-70},{-76,-70},{-76,
+          -40},{-62,-40}},                     color={0,0,127}));
     else
       connect(X_intern,Xset);
     end if;
@@ -58,10 +62,6 @@ equation
 
   connect(X_intern, pWat.X_w);
 
-  connect(Tset, x_pTphi.T) annotation (Line(points={{-120,50},{-76,50},{-76,-34},
-          {-62,-34}}, color={0,0,127}));
-  connect(PhiSet, x_pTphi.phi) annotation (Line(points={{-120,-70},{-76,-70},{-76,
-          -40},{-62,-40}},                     color={0,0,127}));
   connect(pWat.p_w, dewPoi.p_w) annotation (Line(points={{-47.5,13},{-42.75,13},
           {-42.75,13},{-38.5,13}}, color={0,0,127}));
 
