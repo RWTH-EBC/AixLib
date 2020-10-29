@@ -27,31 +27,32 @@ model Storage
                                     annotation(Placement(transformation(extent = {{-10, 82}, {10, 102}}), iconTransformation(extent = {{-10, 90}, {10, 110}})));
   Fluid.MixingVolumes.MixingVolume
                      layer[n](
-    energyDynamics=energyDynamics,
-    p_start=p_start,
-    T_start=T_start,
-    m_flow_small=m_flow_small_layer,
-                              each V = V / n, redeclare package Medium = Medium,
-    each nPorts=2,
-    each m_flow_nominal=m_flow_nominal_layer)      annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
+    final energyDynamics=energyDynamics,
+    final p_start=p_start,
+    final T_start=T_start,
+    final m_flow_small=m_flow_small_layer,
+    each final V = V / n,
+    redeclare final package Medium = Medium,
+    each final nPorts=2,
+    each final m_flow_nominal=m_flow_nominal_layer)      annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "connect to ambient temperature around the storage"                                                            annotation(Placement(transformation(extent = {{-116, -10}, {-96, 10}}), iconTransformation(extent = {{-90, -10}, {-70, 10}})));
   Modelica.Fluid.Interfaces.FluidPort_b
-                    port_b_heatGenerator(redeclare package Medium = Medium)
+                    port_b_heatGenerator(redeclare final package Medium = Medium)
                                          annotation(Placement(transformation(extent = {{74, -98}, {94, -78}}), iconTransformation(extent = {{74, -90}, {94, -70}})));
   Modelica.Fluid.Interfaces.FluidPort_a
-                    port_a_heatGenerator(redeclare package Medium = Medium)
+                    port_a_heatGenerator(redeclare final package Medium = Medium)
                                          annotation(Placement(transformation(extent = {{74, 78}, {94, 98}}), iconTransformation(extent = {{74, 78}, {94, 98}})));
   Fluid.MixingVolumes.MixingVolume
                      layer_HE[n](
-    energyDynamics=energyDynamics,
-    p_start=p_start,
-    T_start=T_start,
-    m_flow_small=m_flow_small_layer_HE,
-                                 each V = V_HE / n, redeclare package Medium =
-        Medium,
-    each nPorts=2,
-    each m_flow_nominal=m_flow_nominal_HE)               annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
+    final energyDynamics=energyDynamics,
+    final p_start=p_start,
+    final T_start=T_start,
+    final m_flow_small=m_flow_small_layer_HE,
+    each final V = V_HE / n,
+    redeclare final package Medium = Medium,
+    each final nPorts=2,
+    each final m_flow_nominal=m_flow_nominal_HE)               annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer_HE[n](each G = k_HE * A_HE / n) annotation(Placement(transformation(extent = {{32, -10}, {52, 10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer[n](G = cat(1, {G_top_bottom}, array(G_middle for k in 2:n - 1), {G_top_bottom})) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
   BaseClasses.Bouyancy bouyancy[n - 1](
