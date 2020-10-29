@@ -276,7 +276,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_outside annotation (
       Placement(transformation(extent={{30,-118},{50,-98}}), iconTransformation(
           extent={{-8,-118},{8,-102}})));
-  Modelica.Blocks.Sources.Constant zero(k=100)
+  Modelica.Blocks.Sources.Constant zero(k=0)
     annotation (Placement(transformation(extent={{24,-84},{32,-76}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{42,-80},{54,-68}})));
