@@ -68,11 +68,12 @@ model PVSystem
   "Effective index of refraction of the cell cover (glass = 1.526)" annotation(Dialog(enable=
           use_ParametersGlaz, tab="Glazing"));
 
-  IVCharacteristics iVCharacteristics(n_mod=n_mod, data=data)
+  IVCharacteristics iVCharacteristics(final n_mod=n_mod,
+  final data=data)
     "Model for determining the I-V characteristics of a PV array" annotation (
       Placement(transformation(extent={{10,-42},{30,-22}}, rotation=0)));
 
-  CellTemperature cellTemperature(data=data)
+  CellTemperature cellTemperature(final data=data)
     "Model for determining the cell temperature of a PV array" annotation (
       Placement(transformation(extent={{-40,56},{-20,76}}, rotation=0)));
 
@@ -89,9 +90,9 @@ model PVSystem
    final azi = azi,
    final groRef = groRef,
    final timZon = timZon,
-    glaExtCoe=glaExtCoe,
-    glaThi=glaThi,
-    refInd=refInd)
+   final glaExtCoe=glaExtCoe,
+   final glaThi=glaThi,
+   final refInd=refInd)
    "Radiation and absorptance model for PV simulations"
     annotation (Placement(transformation(extent={{-84,-30},{-64,-10}})));
 
