@@ -24,7 +24,7 @@ protected
 equation
 
   if use_PhiSet then
-    connect(x_pTphi.phi,X_intern);
+    connect(x_pTphi.X[1],X_intern);
     connect(Tset, x_pTphi.T) annotation (Line(visible=(use_PhiSet==true),points={{-120,50},{-74,50},{-74,-34},
           {-62,-34}}, color={0,0,127}));
     connect(PhiSet, x_pTphi.phi) annotation (Line(visible=(use_PhiSet==true),points={{-120,-70},{-74,-70},{-74,
