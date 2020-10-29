@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistCO2AirExchange
   "Thermal zone model considering moisture and co2 balance with ventilation, infiltration and internal gains"
-  extends ThermalZoneMoistAir(SumQLat_flow(nu=3));
+  extends ThermalZoneMoistAir(SumQLat_flow(nu=3), ROM(final use_C_flow=use_C_flow));
 
   // CO2 parameters
   parameter Real actDeg=1.8 "Activity degree (Met units)"
@@ -72,8 +72,7 @@ model ThermalZoneMoistCO2AirExchange
     use_C_flow
     annotation (Placement(transformation(extent={{30,-56},{44,-42}})));
   Modelica.Blocks.Interfaces.RealOutput CO2Con if (ATot > 0 or zoneParam.VAir
-     > 0) and use_C_flow
-    "CO2 concentration in the thermal zone in ppm"
+     > 0) and use_C_flow "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,-66},{120,-46}})));
 
   Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if (ATot >
