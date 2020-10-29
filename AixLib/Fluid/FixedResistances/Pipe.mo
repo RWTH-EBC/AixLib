@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
   extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;
@@ -58,7 +58,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
   parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition parameterIso=
-      AixLib.DataBase.Pipes.Insulation.Iso0pc() "Insulation Type"
+      AixLib.DataBase.Pipes.Insulation.Iso50pc() "Insulation Type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=8 "Heat transfer coefficient to ambient"
