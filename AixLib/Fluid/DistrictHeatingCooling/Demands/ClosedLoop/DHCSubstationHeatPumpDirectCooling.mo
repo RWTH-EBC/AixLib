@@ -144,11 +144,11 @@ model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-
   Sensors.TemperatureTwoPort senT_dirCooInPri(redeclare package Medium = Medium,
       m_flow_nominal=m_flow_nominal)
     "Inlet temperature of ideal heat exchanger for direct cooling on primary side"
-    annotation (Placement(transformation(extent={{108,14},{128,34}})));
+    annotation (Placement(transformation(extent={{128,14},{108,34}})));
   Sensors.TemperatureTwoPort senT_dirCooOutPri(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal)
     "Outlet temperature of ideal heat exchanger for direct cooling on primary side"
-    annotation (Placement(transformation(extent={{-78,14},{-58,34}})));
+    annotation (Placement(transformation(extent={{-58,14},{-78,34}})));
   Modelica.Blocks.Sources.RealExpression
                                    realExpression2(y=heaPum.P)
     annotation (Placement(transformation(extent={{-154,-70},{-142,-58}})));
@@ -241,27 +241,18 @@ equation
   connect(senT_heaPumOutSec.port_b, sinHeaSec.ports[1]) annotation (Line(points=
          {{-22,-82},{-34,-82},{-34,-102}}, color={0,127,255},
       thickness=0.5));
-  connect(senT_dirCooInPri.port_b, jun1.port_2) annotation (Line(points={{128,
-          24},{130,24},{130,0},{136,0}}, color={0,127,255},
-      thickness=1));
   connect(division2.y, pumCoo.m_flow_in)
     annotation (Line(points={{87.3,59},{58,59},{58,36}}, color={0,0,127}));
   connect(division1.y, pumHeaPri.m_flow_in) annotation (Line(points={{-73.2,-62},
           {-50,-62},{-50,-36}}, color={0,0,127}));
-  connect(senT_dirCooOutPri.port_b, dirCoo.ports[2])
-    annotation (Line(points={{-58,24},{8,24}}, color={0,127,255},
-      thickness=1));
-  connect(jun.port_3, senT_dirCooOutPri.port_a) annotation (Line(points={{-126,
-          10},{-128,10},{-128,24},{-78,24}}, color={0,127,255},
-      thickness=1));
   connect(souHeaSec.T_in, T_heaPumInSec.y) annotation (Line(points={{130.2,-80.6},
           {136,-80.6},{136,-90},{153.3,-90},{153.3,-93}}, color={0,0,127}));
   connect(realExpression2.y,add1. u2)
     annotation (Line(points={{-141.4,-64},{-130,-64}}, color={0,0,127}));
   connect(senT_heaPumInSec.port_b, heaPum.port_a1) annotation (Line(points={{70,-85},
           {68,-85},{68,-84},{66,-84},{66,-36},{58,-36}},      color={0,127,255},
-
       thickness=0.5));
+
   connect(senT_heaPumInSec.port_a, souHeaSec.ports[1])
     annotation (Line(points={{90,-85},{106,-85}}, color={0,127,255},
       thickness=0.5));
@@ -275,11 +266,24 @@ equation
   connect(jun.port_2, pumHeaPri.port_a) annotation (Line(points={{-116,0},{-96,
           0},{-96,-24},{-60,-24}}, color={0,127,255},
       thickness=1));
-  connect(pumCoo.port_a, senT_dirCooInPri.port_a)
-    annotation (Line(points={{68,24},{108,24}}, color={0,127,255},
-      thickness=1));
   connect(jun1.port_1, vol1.ports[2])
     annotation (Line(points={{156,0},{220,0},{220,8}}, color={0,127,255},
+      thickness=1));
+  connect(senT_dirCooOutPri.port_a, dirCoo.ports[2]) annotation (Line(
+      points={{-58,24},{8,24}},
+      color={0,127,255},
+      thickness=1));
+  connect(senT_dirCooOutPri.port_b, jun.port_3) annotation (Line(
+      points={{-78,24},{-126,24},{-126,10}},
+      color={0,127,255},
+      thickness=1));
+  connect(pumCoo.port_a, senT_dirCooInPri.port_b) annotation (Line(
+      points={{68,24},{108,24}},
+      color={0,127,255},
+      thickness=1));
+  connect(senT_dirCooInPri.port_a, jun1.port_2) annotation (Line(
+      points={{128,24},{136,24},{136,0}},
+      color={0,127,255},
       thickness=1));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,
             -160},{240,160}}),
