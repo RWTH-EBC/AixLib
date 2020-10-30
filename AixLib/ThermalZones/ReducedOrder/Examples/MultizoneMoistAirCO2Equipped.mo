@@ -138,10 +138,13 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    Documentation(revisions="<html>
-<ul>
-<li>August 27, 2020, by Katharina Breuer:<br>Add co2 balance</li>
-<li>April, 2019, by Martin Kremer:<br>First Implementation. </li>
+    Documentation(revisions="<html><ul>
+  <li>August 27, 2020, by Katharina Breuer:<br/>
+    Add co2 balance
+  </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+    First Implementation.
+  </li>
 </ul>
 </html>", info="<html>
 <p>

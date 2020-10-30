@@ -163,45 +163,117 @@ equation
         Line(points={{-60,-20},{46,-20}}, color={0,0,0}),
         Line(points={{-64,-40},{42,-40}}, color={0,0,0}),
         Line(points={{-70,-60},{36,-60}}, color={0,0,0})}),
-                               Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Model that determines the DC performance of a PV array. </p>
-<h4>Concept</h4>
-<p>Model consists of a model determining the IV Characteristic, a model to calculate the cell temperature and a model to calculate the irradiance and absorption ratio for the PV module.</p>
-<h4>1. IV Characteristic: </h4>
-<p>Model for determining the I-V characteristics of a PV array based on Batzelis et al., De Soto et al. and Boyd.</p>
-<h4>2. Cell Temperature calculation:</h4>
-<p>Two cell temperature models are implemented and should be chosen depending on the module&apos;s topology:</p>
-<p>CellTemperatureOpenRack: </p>
-<p>Module is installed on open rack based on Duffie et al.. Here, the resulting cell temperature is usually lower compared to the cell temperature model <i>CellTemperatureMountingCloseToGround </i>resulting in higher efficiencies. </p>
-<p>CellTemperatureMountingCloseToGround: </p>
-<p>Module is installed close to ground (e.g. on roof) based on King et al.</p>
-<p>CellTemperatureMountingContactToGround:</p>
-<p>Module is installed in contact to ground (e.g. integrated in roof) based on King et al.</p>
-<p>If line losses are not known, the model CellTemperatureMountingCloseToGround can be used for a more conservative estimation of PV DC power output. This is due to the fact that line losses are not included in the calculation process.</p>
-<h4>Known limitations</h4>
+                               Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Model that determines the DC performance of a PV array.
+</p>
+<h4>
+  Concept
+</h4>
+<p>
+  Model consists of a model determining the IV Characteristic, a model
+  to calculate the cell temperature and a model to calculate the
+  irradiance and absorption ratio for the PV module.
+</p>
+<h4>
+  1. IV Characteristic:
+</h4>
+<p>
+  Model for determining the I-V characteristics of a PV array based on
+  Batzelis et al., De Soto et al. and Boyd.
+</p>
+<h4>
+  2. Cell Temperature calculation:
+</h4>
+<p>
+  Two cell temperature models are implemented and should be chosen
+  depending on the module's topology:
+</p>
+<p>
+  CellTemperatureOpenRack:
+</p>
+<p>
+  Module is installed on open rack based on Duffie et al.. Here, the
+  resulting cell temperature is usually lower compared to the cell
+  temperature model <i>CellTemperatureMountingCloseToGround</i>
+  resulting in higher efficiencies.
+</p>
+<p>
+  CellTemperatureMountingCloseToGround:
+</p>
+<p>
+  Module is installed close to ground (e.g. on roof) based on King et
+  al.
+</p>
+<p>
+  CellTemperatureMountingContactToGround:
+</p>
+<p>
+  Module is installed in contact to ground (e.g. integrated in roof)
+  based on King et al.
+</p>
+<p>
+  If line losses are not known, the model
+  CellTemperatureMountingCloseToGround can be used for a more
+  conservative estimation of PV DC power output. This is due to the
+  fact that line losses are not included in the calculation process.
+</p>
+<h4>
+  Known limitations
+</h4>
 <ul>
-<li>Model does not include line losses and decreasing panel efficiency due to shading! This leads to the fact that model usually overestimates real DC power.</li>
-<li>Some parameter combinations result in high peaks for variables such as V_mp, I_mp and T_c. The output power is therefore limited to the reasonable values 0 and P_mp0*1.05, with 5 &percnt; being a common tolerance for power at MPP.</li>
+  <li>Model does not include line losses and decreasing panel
+  efficiency due to shading! This leads to the fact that model usually
+  overestimates real DC power.
+  </li>
+  <li>Some parameter combinations result in high peaks for variables
+  such as V_mp, I_mp and T_c. The output power is therefore limited to
+  the reasonable values 0 and P_mp0*1.05, with 5 &amp;percnt; being a
+  common tolerance for power at MPP.
+  </li>
 </ul>
-<h4>References</h4>
-<p>A Method for the analytical extraction of the Single-Diode PV model parameters. by Batzelis, Efstratios I. ; Papathanassiou, Stavros A.</p>
-<p>Improvement and validation of a model for photovoltaic array performance. by De Soto, W. ; Klein, S. A. ; Beckman, W. A.</p>
-<p>Performance Data from the NIST Photovoltaic Arrays and Weather Station. by Boyd, M.</p>
-<p>SANDIA REPORT SAND 2004-3535 Unlimited Release Printed December 2004 Photovoltaic Array Performance Model. (2005). by King, D. L. et al. </p>
-<p>Solar engineering of thermal processes. by Duffie, John A. ; Beckman, W. A. </p>
-</html>", revisions="<html>
+<h4>
+  References
+</h4>
+<p>
+  A Method for the analytical extraction of the Single-Diode PV model
+  parameters. by Batzelis, Efstratios I. ; Papathanassiou, Stavros A.
+</p>
+<p>
+  Improvement and validation of a model for photovoltaic array
+  performance. by De Soto, W. ; Klein, S. A. ; Beckman, W. A.
+</p>
+<p>
+  Performance Data from the NIST Photovoltaic Arrays and Weather
+  Station. by Boyd, M.
+</p>
+<p>
+  SANDIA REPORT SAND 2004-3535 Unlimited Release Printed December 2004
+  Photovoltaic Array Performance Model. (2005). by King, D. L. et al.
+</p>
+<p>
+  Solar engineering of thermal processes. by Duffie, John A. ; Beckman,
+  W. A.
+</p>
 <ul>
-  <li><i>April 15, 2020&nbsp;</i>
-    by Laura Maier:<br/>
-    Finalization of the model (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/767\">issue 767</a>).</li>
-  <li><i>April, 2020&nbsp;</i>
-    by Arnold F&uuml;tterer:<br/>
-    General changes to align the model with AixLib standards (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/767\">issue 767</a>).</li>
-  <li><i>August, 2019&nbsp;</i>
-    by Michael Kratz:<br/>
-    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/767\">issue 767</a>).</li>
-
+  <li>
+    <i>April 15, 2020&#160;</i> by Laura Maier:<br/>
+    Finalization of the model (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/767\">issue 767</a>).
+  </li>
+  <li>
+    <i>April, 2020&#160;</i> by Arnold Fütterer:<br/>
+    General changes to align the model with AixLib standards (see
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/767\">issue
+    767</a>).
+  </li>
+  <li>
+    <i>August, 2019&#160;</i> by Michael Kratz:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/767\">issue 767</a>).
+  </li>
 </ul>
 </html>"));
 end PVSystem;

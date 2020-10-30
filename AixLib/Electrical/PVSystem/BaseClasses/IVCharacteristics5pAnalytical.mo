@@ -138,14 +138,40 @@ equation
    annotation (
    Icon(
     coordinateSystem(extent={{-100,-100},{100,100}})),
-     Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p><br>Analytical 5-p model for determining the I-V characteristics of a PV array (Batzelis et al.,2016) with temp. dependency of the 5 parameters after (DeSoto et al.,2006). The final output of this model is the DC performance of the PV array.</p>
-<p><br>Validated with experimental data from NIST (Boyd, 2017).</p>
-<p>Module calibration is based on manufactory data.</p>
-<p><br><h4><span style=\"color: #008000\">References</span></h4></p>
-<p>A Method for the analytical extraction of the Single-Diode PV model parameters. by Batzelis, Efstratios I. ; Papathanassiou, Stavros A.</p>
-<p>Improvement and validation of a model for photovoltaic array performance. by De Soto, W. ; Klein, S. A. ; Beckman, W. A.</p>
-<p>Performance Data from the NIST Photovoltaic Arrays and Weather Station. by Boyd, M.: </p>
+     Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  <br/>
+  Analytical 5-p model for determining the I-V characteristics of a PV
+  array (Batzelis et al.,2016) with temp. dependency of the 5
+  parameters after (DeSoto et al.,2006). The final output of this model
+  is the DC performance of the PV array.
+</p>
+<p>
+  <br/>
+  Validated with experimental data from NIST (Boyd, 2017).
+</p>
+<p>
+  Module calibration is based on manufactory data.
+</p>
+<p>
+  <br/>
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  A Method for the analytical extraction of the Single-Diode PV model
+  parameters. by Batzelis, Efstratios I. ; Papathanassiou, Stavros A.
+</p>
+<p>
+  Improvement and validation of a model for photovoltaic array
+  performance. by De Soto, W. ; Klein, S. A. ; Beckman, W. A.
+</p>
+<p>
+  Performance Data from the NIST Photovoltaic Arrays and Weather
+  Station. by Boyd, M.:
+</p>
 </html>"));
 end IVCharacteristics5pAnalytical;

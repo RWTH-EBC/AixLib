@@ -17,8 +17,17 @@ annotation(preferredView="info", Documentation(info="<html><p>
 <p>
   Note that a ceiling has a tilt of <i>0</i> 
   <!-- @include_Buildings, and also the solar collector models in
+
+
+
   <a href=\"AixLib.Fluid.SolarCollectors\">AixLib.Fluid.SolarCollectors</a>
+
+
+
   require a tilt of <i>0</i>
+
+
+
   -->
    if they are facing straight upwards. This is correct because the
   solar irradiation on a ceiling construction is on the other-side

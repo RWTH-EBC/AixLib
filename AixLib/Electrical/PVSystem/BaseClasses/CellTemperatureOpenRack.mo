@@ -13,13 +13,24 @@ equation
  (T_a);
 
  annotation (
-  Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Model for determining the cell temperature of a PV module mounted on an open rack under operating conditions and under consideration of the wind velocity.</p>
-<p><br/>
-<h4><span style=\"color: #008000\">References</span></h4>
-<p><q>Solar engineering of thermal processes.</q> by Duffie, John A. ; Beckman, W. A.</p>
-</ul>
+  Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Model for determining the cell temperature of a PV module mounted on
+  an open rack under operating conditions and under consideration of
+  the wind velocity.
+</p>
+<p>
+  <br/>
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  <q>Solar engineering of thermal processes.</q> by Duffie, John A. ;
+  Beckman, W. A.
+</p>
 </html>
 "));
 end CellTemperatureOpenRack;

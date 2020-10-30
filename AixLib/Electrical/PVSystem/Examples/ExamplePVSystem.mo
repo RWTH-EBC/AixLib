@@ -45,8 +45,12 @@ equation
       points={{-80,0},{-34,0},{-34,0.72},{-10.16,0.72}},
       color={255,204,51},
       thickness=0.5));
-  annotation (experiment(StopTime=31536000, Interval=900), Documentation(info="<html>
-<p>Simulation to test the <a href=\"AixLib.Electrical.PVSystem.PVSystem\">PVSystem</a> model.</p>
-<p>A cold TRY in Berlin is used as an example for the weather data.</p>
+  annotation (experiment(StopTime=31536000, Interval=900), Documentation(info="<html><p>
+  Simulation to test the <a href=
+  \"AixLib.Electrical.PVSystem.PVSystem\">PVSystem</a> model.
+</p>
+<p>
+  A cold TRY in Berlin is used as an example for the weather data.
+</p>
 </html>"));
 end ExamplePVSystem;
