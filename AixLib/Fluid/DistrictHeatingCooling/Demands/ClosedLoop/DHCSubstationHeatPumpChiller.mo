@@ -2,9 +2,16 @@ within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model DHCSubstationHeatPumpChiller
   "Substation model for bidirctional low-temperature networks for buildings with  heat pump and chiller"
 
-    replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model for water"
-      annotation (choicesAllMatching = true);
+  replaceable package Medium =
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (
+              property_T=293.15,
+              X_a=0.40)
+              "Propylene glycol water, 40% mass fraction")));
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
     "Nominal pressure drop";
@@ -301,16 +308,16 @@ equation
     annotation (Line(points={{-2,21},{2,21},{2,9},{9.3,9}}, color={0,0,127}));
   connect(realExpression6.y, souCoo.T_in) annotation (Line(points={{-93.4,58},{
           -68,58}},               color={0,0,127}));
-  connect(heaPum.P, add1.u2) annotation (Line(points={{-11,-30},{-54,-30},{-54,
-          -100},{-184,-100},{-184,-72},{-136,-72}}, color={0,0,127}));
+  connect(heaPum.P, add1.u2) annotation (Line(points={{-11,-30},{-54,-30},{-54,-100},
+          {-184,-100},{-184,-72},{-136,-72}}, color={0,0,127}));
   connect(chi.P, add2.u2) annotation (Line(points={{-25,30},{-116,30},{-116,136},
           {128,136},{128,72},{96,72}}, color={0,0,127}));
-  connect(heaDem, division.u1) annotation (Line(points={{-274,-60},{-214,-60},{
-          -214,-104},{150,-104},{150,-32.8},{105.4,-32.8}}, color={0,0,127}));
-  connect(chi.P, P_el_chi) annotation (Line(points={{-25,30},{-116,30},{-116,
-          136},{-270,136}}, color={0,0,127}));
-  connect(heaPum.P, P_el_heaPum) annotation (Line(points={{-11,-30},{-54,-30},{
-          -54,-100},{-184,-100},{-184,110},{-270,110}}, color={0,0,127}));
+  connect(heaDem, division.u1) annotation (Line(points={{-274,-60},{-214,-60},{-214,
+          -104},{150,-104},{150,-32.8},{105.4,-32.8}}, color={0,0,127}));
+  connect(chi.P, P_el_chi) annotation (Line(points={{-25,30},{-116,30},{-116,136},
+          {-270,136}}, color={0,0,127}));
+  connect(heaPum.P, P_el_heaPum) annotation (Line(points={{-11,-30},{-54,-30},{-54,
+          -100},{-184,-100},{-184,110},{-270,110}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},
             {220,160}}), graphics={
         Rectangle(

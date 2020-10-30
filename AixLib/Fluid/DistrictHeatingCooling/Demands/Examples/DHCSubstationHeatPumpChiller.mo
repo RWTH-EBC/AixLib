@@ -35,7 +35,7 @@ model DHCSubstationHeatPumpChiller
     annotation (Placement(transformation(extent={{58,36},{38,56}})));
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.DHCSubstationHeatPumpChiller
     DHCsubstationHeatingDirectCooling(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium = Medium,
     m_flow_nominal=2,
     heaDem_max=4000,
     cooDem_max=-2500,

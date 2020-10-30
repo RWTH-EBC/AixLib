@@ -2,9 +2,16 @@ within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-temperature networks for buildings with 
   heat pump and direct cooling."
 
-      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model for water"
-      annotation (choicesAllMatching = true);
+  replaceable package Medium =
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (
+              property_T=293.15,
+              X_a=0.40)
+              "Propylene glycol water, 40% mass fraction")));
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
     "Nominal pressure drop";
@@ -213,8 +220,8 @@ equation
           63.2},{103.4,63.2}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, dirCoo.heatPort)
     annotation (Line(points={{-22,50},{-22,34},{-4,34}}, color={191,0,0}));
-  connect(prescribedHeatFlow.Q_flow, cooDem) annotation (Line(points={{-22,70},
-          {-22,88},{176,88},{176,64},{248,64}}, color={0,0,127}));
+  connect(prescribedHeatFlow.Q_flow, cooDem) annotation (Line(points={{-22,70},{
+          -22,88},{176,88},{176,64},{248,64}},  color={0,0,127}));
   connect(pumHeaPri.port_b, senT_heaPumInPri.port_a)
     annotation (Line(points={{-40,-24},{-26,-24}}, color={0,127,255},
       thickness=1));
@@ -271,14 +278,12 @@ equation
       points={{128,24},{136,24},{136,0}},
       color={0,127,255},
       thickness=1));
-  connect(heaPum.P, add1.u2) annotation (Line(points={{37,-30},{6,-30},{6,-66},
-          {-68,-66},{-68,-100},{-152,-100},{-152,-64},{-130,-64}}, color={0,0,
-          127}));
-  connect(heaDem, m_flow_heaSec.u1) annotation (Line(points={{-254,-52},{-210,
-          -52},{-210,-116},{208,-116},{208,-60.8},{169.4,-60.8}}, color={0,0,
-          127}));
-  connect(heaPum.P, P_el_heaPum) annotation (Line(points={{37,-30},{6,-30},{6,
-          -52},{246,-52}}, color={0,0,127}));
+  connect(heaPum.P, add1.u2) annotation (Line(points={{37,-30},{6,-30},{6,-66},{
+          -68,-66},{-68,-100},{-152,-100},{-152,-64},{-130,-64}}, color={0,0,127}));
+  connect(heaDem, m_flow_heaSec.u1) annotation (Line(points={{-254,-52},{-210,-52},
+          {-210,-116},{208,-116},{208,-60.8},{169.4,-60.8}}, color={0,0,127}));
+  connect(heaPum.P, P_el_heaPum) annotation (Line(points={{37,-30},{6,-30},{6,-52},
+          {246,-52}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,
             -160},{240,160}}),
                          graphics={
