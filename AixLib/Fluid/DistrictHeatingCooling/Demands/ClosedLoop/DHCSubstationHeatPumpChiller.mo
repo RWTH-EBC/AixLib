@@ -178,24 +178,9 @@ public
     annotation (Placement(transformation(extent={{-220,74},{-240,94}})));
   Modelica.Blocks.Sources.Constant T_heaPumSet(k=T_heaSecSet)
     annotation (Placement(transformation(extent={{40,-78},{26,-64}})));
-  Modelica.Blocks.Sources.RealExpression
-                                   realExpression2(y=heaPum.P)
-    annotation (Placement(transformation(extent={{-176,-78},{-164,-66}})));
-  Modelica.Blocks.Sources.RealExpression
-                                   realExpression1(y=heaDem)
-    annotation (Placement(transformation(extent={{138,-38},{126,-26}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=cp_default*
         deltaT_heaPriSet)
     annotation (Placement(transformation(extent={{-128,-96},{-116,-84}})));
-  Modelica.Blocks.Sources.RealExpression
-                                   realExpression3(y=heaPum.P)
-    annotation (Placement(transformation(extent={{-228,104},{-240,116}})));
-  Modelica.Blocks.Sources.RealExpression
-                                   realExpression4(y=chi.P)
-    annotation (Placement(transformation(extent={{-228,130},{-240,142}})));
-  Modelica.Blocks.Sources.RealExpression
-                                   realExpression5(y=chi.P)
-    annotation (Placement(transformation(extent={{130,66},{118,78}})));
   Modelica.Blocks.Sources.Constant const3(k=cp_default*deltaT_cooPriSet)
     annotation (Placement(transformation(extent={{94,48},{80,62}})));
   Modelica.Blocks.Sources.Constant T_chiSet(k=T_cooSecSet)
@@ -303,20 +288,10 @@ equation
           -50},{80,-65},{87.3,-65}}, color={0,0,127}));
   connect(heaPum.TSet, T_heaPumSet.y) annotation (Line(points={{12,-39},{20,-39},
           {20,-71},{25.3,-71}}, color={0,0,127}));
-  connect(realExpression2.y, add1.u2)
-    annotation (Line(points={{-163.4,-72},{-136,-72}}, color={0,0,127}));
-  connect(division.u1, realExpression1.y) annotation (Line(points={{105.4,-32.8},
-          {124.7,-32.8},{124.7,-32},{125.4,-32}}, color={0,0,127}));
   connect(realExpression.y, division1.u2) annotation (Line(points={{-115.4,-90},
           {-108,-90},{-108,-74.8},{-97.6,-74.8}}, color={0,0,127}));
-  connect(P_el_heaPum, realExpression3.y)
-    annotation (Line(points={{-270,110},{-240.6,110}}, color={0,0,127}));
-  connect(P_el_chi, realExpression4.y)
-    annotation (Line(points={{-270,136},{-240.6,136}}, color={0,0,127}));
   connect(add2.u1, cooDem) annotation (Line(points={{96,84},{182,84},{182,62},{228,
           62}}, color={0,0,127}));
-  connect(add2.u2, realExpression5.y)
-    annotation (Line(points={{96,72},{117.4,72}}, color={0,0,127}));
   connect(division2.u2, const3.y) annotation (Line(points={{61.4,68.8},{66,68.8},
           {66,55},{79.3,55}}, color={0,0,127}));
   connect(division3.u1, cooDem) annotation (Line(points={{-56.6,111.2},{122,
@@ -326,6 +301,16 @@ equation
     annotation (Line(points={{-2,21},{2,21},{2,9},{9.3,9}}, color={0,0,127}));
   connect(realExpression6.y, souCoo.T_in) annotation (Line(points={{-93.4,58},{
           -68,58}},               color={0,0,127}));
+  connect(heaPum.P, add1.u2) annotation (Line(points={{-11,-30},{-54,-30},{-54,
+          -100},{-184,-100},{-184,-72},{-136,-72}}, color={0,0,127}));
+  connect(chi.P, add2.u2) annotation (Line(points={{-25,30},{-116,30},{-116,136},
+          {128,136},{128,72},{96,72}}, color={0,0,127}));
+  connect(heaDem, division.u1) annotation (Line(points={{-274,-60},{-214,-60},{
+          -214,-104},{150,-104},{150,-32.8},{105.4,-32.8}}, color={0,0,127}));
+  connect(chi.P, P_el_chi) annotation (Line(points={{-25,30},{-116,30},{-116,
+          136},{-270,136}}, color={0,0,127}));
+  connect(heaPum.P, P_el_heaPum) annotation (Line(points={{-11,-30},{-54,-30},{
+          -54,-100},{-184,-100},{-184,110},{-270,110}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},
             {220,160}}), graphics={
         Rectangle(
