@@ -112,12 +112,11 @@ equation
       StopTime=172800,
       Interval=60,
       Tolerance=1e-05),
-    Documentation(revisions="<html>
-<ul>
-<li>
-October 23, 2018, by Tobias Blacha:<br/>
-Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>October 23, 2018, by Tobias Blacha:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
+  </li>
 </ul>
 </html>"),
     __Dymola_experimentSetupOutput(equidistant=false));
