@@ -50,6 +50,8 @@ equation
   if not use_A_in then
     A_in_internal =A;
   end if;
+
+
   connect(A_in, A_in_internal);
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                            Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{-100,100},{100,-100}},  lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-78,80},{82,-80}},      lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},

@@ -31,7 +31,8 @@ model ConvNLayerClearanceStar
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant hCon (constant)",
+      choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
       radioButtons=true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2 "Constant convective heat transfer coefficient"     annotation(Dialog(group="Convection",   enable=
           calcMethod == 1));
@@ -140,6 +141,11 @@ equation
   <code>HeatPort_a</code>, the last element represents the layer
   connected to <code>HeatPort_b</code>.
 </p>
+<p>
+  <code>HeatPort_b1</code> is the connection for
+  <code>absSolarRadWin</code> the transmitted radiation through a
+  window, that is absorbed by a wall.
+</p>
 <h4>
   <span style=\"color:#008000\">Example Results</span>
 </h4>
@@ -152,6 +158,12 @@ equation
   \"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>.
 </p>
 <ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/898\">#898</a>:Added
+    HeatPort to connect absSolarRadWin in Wall.
+  </li>
   <li>
     <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
