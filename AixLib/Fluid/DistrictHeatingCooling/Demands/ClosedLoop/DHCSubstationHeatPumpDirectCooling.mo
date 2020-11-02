@@ -41,19 +41,25 @@ model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-
     "Set temperature of primary side (cold line of grid)"
     annotation (Dialog(tab = "General", group = "Grid"));
 
+    parameter Modelica.SIunits.Time tau_1 = 60
+    annotation (Dialog(tab = "Dynamics", group = "Grid"));
 
+    parameter Modelica.SIunits.Time tau_2 = 60
+    annotation (Dialog(tab = "Dynamics", group = "Building System"));
 
 
   Delays.DelayFirstOrder              vol(
+    tau=tau_1,
     nPorts=2,
     redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    tau=60)  annotation (Placement(transformation(extent={{-222,4},{-202,24}})));
+    m_flow_nominal=m_flow_nominal)
+             annotation (Placement(transformation(extent={{-222,4},{-202,24}})));
   Delays.DelayFirstOrder              vol1(
+    tau=tau_1,
     nPorts=2,
     redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    tau=60)  annotation (Placement(transformation(extent={{208,8},{228,28}})));
+    m_flow_nominal=m_flow_nominal)
+             annotation (Placement(transformation(extent={{208,8},{228,28}})));
   Movers.FlowControlled_m_flow pumHeaPri(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
