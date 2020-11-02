@@ -6,6 +6,7 @@ model MultizoneMoistAirCO2Equipped
       redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange,
       zone(
+      use_C_flow=use_C_flow,
       actDeg=actDeg,
       XCO2_amb=XCO2_amb,
       areaBod=areaBod,
@@ -19,6 +20,8 @@ model MultizoneMoistAirCO2Equipped
     "Body surface area source SIA 2024:2015";
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]";
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance";
 
   parameter Boolean heatAHU
     "Status of heating of AHU"
@@ -132,7 +135,6 @@ model MultizoneMoistAirCO2Equipped
     "Absolute humidity in thermal zone"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,40},{100,60}})));
-
 protected
   BaseClasses.MoistSplitter moistSplitter(
     nOut=1,

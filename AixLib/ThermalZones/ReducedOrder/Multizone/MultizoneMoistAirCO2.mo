@@ -3,6 +3,7 @@ model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
   extends Multizone(redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange,
       zone(
+      use_C_flow=use_C_flow,
       actDeg=actDeg,
       XCO2_amb=XCO2_amb,
       areaBod=areaBod,
@@ -16,6 +17,8 @@ model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
     "Body surface area source SIA 2024:2015";
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]";
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance";
 
   Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or
     VAir > 0 "Ventilation and infiltration humidity"
@@ -31,6 +34,7 @@ model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
     VAir > 0 "Humidity output"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,42},{100,62}})));
+
 equation
   connect(zone.ventHum, ventHum) annotation (Line(points={{35.27,55.765},{10,
           55.765},{10,56},{-18,56},{-18,36},{-100,36}},             color={0,0,
