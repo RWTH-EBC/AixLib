@@ -198,9 +198,8 @@ equation
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(thermStar_Demux.portConv, thermRoom) annotation (Line(points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}}, color={191,0,0}));
-    connect(varAirExchange.InPort1, AER) annotation (Line(
-        points={{-81,-62.4},{-111,-62.4},{-111,-51}},
-        color={0,0,127}));
+  connect(varAirExchange.ventRate, AER) annotation (Line(points={{-81,-62.4},{-111,
+          -62.4},{-111,-51}}, color={0,0,127}));
     connect(outerWall_South.port_outside, Therm_outside) annotation (Line(
         points={{-76.35,4},{-86,4},{-86,97},{-105,97}},
         color={191,0,0}));

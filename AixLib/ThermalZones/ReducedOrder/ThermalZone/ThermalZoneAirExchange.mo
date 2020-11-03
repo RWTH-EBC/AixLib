@@ -91,7 +91,7 @@ equation
     annotation (Line(points={{-26,-18},{-26,-18},{-22,-18}}, color={191,0,0}));
   connect(mixedTemp.mixedTemperatureOut, preTemVen.T)
     annotation (Line(points={{-46,-18},{-39.2,-18}}, color={0,0,127}));
-  connect(addInfVen.y, airExc.InPort1) annotation (Line(points={{-34,-31.4},{-34,
+  connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-34,-31.4},{-34,
           -31.4},{-34,-28},{-24,-28},{-24,-23.12},{-21.2,-23.12}}, color={0,0,
           127}));
   connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-18},{
