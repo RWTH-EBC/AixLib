@@ -123,14 +123,24 @@ equation
           fillPattern=FillPattern.None)}),                       Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{100,
             100}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 08, 2020</i> ,by Tobias Blacha:<br/>
-Moved to development </li>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
-Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 08, 2020</i> ,by Tobias Blacha:<br />
+    Moved to development
+  </li>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br />
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model represents the supply node of a bidirectional network with ideal heater and ideal cooler and storage tank. The tank is integrated into the network directly. The operation mode of the supply systems depends on the flow direction. In the case that port_b is the outlet, heating operation takes place. In the case that port_a is the outlet, cooling operation takes place. </p>
+<p>
+  This model represents the supply node of a bidirectional network with
+  ideal heater and ideal cooler and storage tank. The tank is
+  integrated into the network directly. The operation mode of the
+  supply systems depends on the flow direction. In the case that port_b
+  is the outlet, heating operation takes place. In the case that port_a
+  is the outlet, cooling operation takes place.
+</p>
 </html>"));
 end DHCSupplyHeaterCoolerStorage;

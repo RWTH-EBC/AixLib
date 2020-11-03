@@ -72,11 +72,11 @@ equation
   alternating input values, for example customized sine values.
 </p>
 <ul>
-  <li>September 25, 2015 by Marcus Fuchs:<br/>
+  <li>September 25, 2015 by Marcus Fuchs:<br />
     Fixed unknown variable problem for <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/115\">#115</a>
   </li>
-  <li>April 16, 2013, by Ole Odendahl:<br/>
+  <li>April 16, 2013, by Ole Odendahl:<br />
     Implemented, added documentation and formatted appropriately
   </li>
 </ul>

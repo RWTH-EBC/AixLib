@@ -44,7 +44,7 @@ algorithm
   calculation, brought a solution.
 </p>
 <ul>
-  <li>2017-11-17 by Peter Matthes<br/>
+  <li>2017-11-17 by Peter Matthes<br />
     Implemented. Changed equation block into an algorithm block.
     Otherwise y could end up staying at limit2 all the time even though
     u would be higher than limit2 (and smaller than limit1).

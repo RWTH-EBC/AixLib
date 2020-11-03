@@ -48,7 +48,7 @@ annotation (Documentation(info="<html><p>
   </li>
 </ul>
 <ul>
-  <li>June 10, 2017, by Mirko Engelpracht:<br/>
+  <li>June 10, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>

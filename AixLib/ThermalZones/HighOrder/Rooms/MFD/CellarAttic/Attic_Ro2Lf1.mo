@@ -163,11 +163,11 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Win2", visible = withWindow2), Text(extent = {{-44, -14}, {74, -26}}, lineColor = {0, 0, 0}, fillColor = {255, 170, 170},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "width"), Line(points = {{-44, -20}, {-44, -24}}, color = {0, 0, 0}), Line(points = {{-44, -20}, {-20, -20}}, color = {0, 0, 0}), Line(points = {{48, -20}, {76, -20}}, color = {0, 0, 0}), Line(points = {{76, -20}, {76, -24}}, color = {0, 0, 0}), Line(points = {{-37, -37}, {37, 37}}, color = {0, 0, 0}, origin = {57, 21}, rotation = 90), Line(points = {{3, -3}, {-3, 3}}, color = {0, 0, 0}, origin = {93, -17}, rotation = 90), Text(extent = {{-28, 5}, {28, -5}}, lineColor = {0, 0, 0}, origin = {44, 47}, textString = "wRO2"), Line(points = {{3, -3}, {-3, 3}}, color = {0, 0, 0}, origin = {19, 57}, rotation = 90), Line(points = {{16, 54}, {10, 60}}, color = {0, 0, 0}), Line(points = {{-62, -16}, {12, 58}}, color = {0, 0, 0}), Text(extent = {{-40, 52}, {16, 42}}, lineColor = {0, 0, 0}, textString = "wRO1"), Line(points = {{-58, -20}, {-64, -14}}, color = {0, 0, 0})}), Documentation(revisions = "<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    <i>April 18, 2014</i> by Ana Constantin:<br />
     Added documentation
   </li>
   <li>
-    <i>August 17, 2011</i> by Ana Constantin:<br/>
+    <i>August 17, 2011</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

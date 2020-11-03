@@ -20,11 +20,11 @@ extends Modelica.Icons.Record;
 </html>",
         revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>

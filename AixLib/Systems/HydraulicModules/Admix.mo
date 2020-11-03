@@ -285,17 +285,17 @@ equation
   operational modes.
 </p>
 <ul>
-  <li>August 09, 2018, by Alexander Kümpel:<br/>
+  <li>August 09, 2018, by Alexander Kümpel:<br />
     Extension from base PartioalHydraulicModuls
   </li>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
+  <li>October 25, 2017, by Alexander Kümpel:<br />
     Transfer from ZUGABE to AixLib
   </li>
-  <li>July 25, 2017 by Peter Matthes:<br/>
+  <li>July 25, 2017 by Peter Matthes:<br />
     Renames sensors and introduces PT1 behavior for temperature
     sensors. Adds sensors to icon.
   </li>
-  <li>February 6, 2016, by Peter Matthes:<br/>
+  <li>February 6, 2016, by Peter Matthes:<br />
     First implementation
   </li>
 </ul>

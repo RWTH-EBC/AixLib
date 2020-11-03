@@ -94,18 +94,18 @@ equation
 </html>",
       revisions="<html><ul>
   <li>
-    <i>April 01, 2014</i> by Moritz Lauster:<br/>
+    <i>April 01, 2014</i> by Moritz Lauster:<br />
     Renamed
   </li>
   <li>
-    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>November, 2011&#160;</i> by Peter Matthes:<br/>
+    <i>November, 2011&#160;</i> by Peter Matthes:<br />
     Model rewritten to work with MSL 3.2.
   </li>
-  <li>by Alexander Hoh:<br/>
+  <li>by Alexander Hoh:<br />
     Implemented.
   </li>
 </ul>

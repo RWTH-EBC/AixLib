@@ -135,11 +135,15 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    Documentation(info="<html>
-<p>This example is based on <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>. This example shows the variant of a multi-zone building with some zones where cooling is activated and others where it is not.</p>
+    Documentation(info="<html><p>
+  This example is based on <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>.
+  This example shows the variant of a multi-zone building with some
+  zones where cooling is activated and others where it is not.
+</p>
 </html>", revisions="<html>
 <ul>
-  <li>August 21, 2020, by Marcus Fuchs:<br/>
+  <li>August 21, 2020, by Marcus Fuchs:<br />
     Implemented.
   </li>
 </ul>

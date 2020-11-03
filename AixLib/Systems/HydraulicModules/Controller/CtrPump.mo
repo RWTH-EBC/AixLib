@@ -44,7 +44,7 @@ equation
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
     Documentation(revisions="<html><ul>
-  <li>October 25, by Alexander Kümpel:<br/>
+  <li>October 25, by Alexander Kümpel:<br />
     First implementation.
   </li>
 </ul>

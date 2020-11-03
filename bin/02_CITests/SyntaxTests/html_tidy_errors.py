@@ -699,7 +699,8 @@ class HTML_Tidy(object):
 		for subdir, dirs, files in os.walk(rootdir):
 			for file in files:
 				filepath = subdir + os.sep + file
-				if filepath.endswith(".mo") and file != "package.mo":
+				if filepath.endswith(".mo"):
+				#if filepath.endswith(".mo") and file != "package.mo":
 					model = filepath
 					model = model.replace(os.sep, ".")
 					model = model[model.rfind("IBPSA"):model.rfind(".mo")]

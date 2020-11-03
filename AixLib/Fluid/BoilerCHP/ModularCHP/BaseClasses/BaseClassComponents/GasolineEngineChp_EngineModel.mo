@@ -254,7 +254,7 @@ for i in 1:size(n_ComExh, 1) loop
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
   </li>
@@ -282,11 +282,11 @@ for i in 1:size(n_ComExh, 1) loop
   applicability of the model.
 </p>
 <p>
-  <br/>
+  <br />
   <b><span style=\"color: #005500;\">Assumptions</span></b>
 </p>
 <p>
-  <br/>
+  <br />
   Assumptions made and resulting limitations of the internal combustion
   engine model:
 </p>
@@ -321,7 +321,7 @@ for i in 1:size(n_ComExh, 1) loop
   (slight consideration due to stored rated performance data)
 </p>
 <p>
-  <br/>
+  <br />
   Air ratio or residual oxygen in the exhaust gas is known to estimate
   the combustion process. So this is a necessary assumption for the
   calculation of material flows (mass flows, composition of the exhaust

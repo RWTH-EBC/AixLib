@@ -165,15 +165,15 @@ layers) towards the flow direction at the heater side.
 </html>",
     revisions="<html><ul>
   <li>
-    <i>April 13, 2017&#160;</i> Tobias Blacha:<br/>
+    <i>April 13, 2017&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>January 12, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
+    <i>January 12, 2015&#160;</i> by Konstantin Finkbeiner:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>December 16, 2014&#160;</i> by Sebastian Stinner:<br/>
+    <i>December 16, 2014&#160;</i> by Sebastian Stinner:<br />
     Implemented
   </li>
 </ul>

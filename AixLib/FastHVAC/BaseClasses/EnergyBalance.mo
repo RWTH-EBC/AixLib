@@ -50,8 +50,8 @@ equation
 </ul>
 <ul>
   <li>
-    <br/>
-    April 25, 2017, by Michael Mans:<br/>
+    <br />
+    April 25, 2017, by Michael Mans:<br />
     Moved to AixLib
   </li>
 </ul>

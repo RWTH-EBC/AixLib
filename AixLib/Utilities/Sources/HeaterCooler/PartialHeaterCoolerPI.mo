@@ -94,17 +94,17 @@ equation
 </p>
 <ul>
   <li>
-    <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
+    <i>March 20, 2020 by Philipp Mehrfeld:</i><br />
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>
     Assign dummy record as default parameter for zoneParam.
   </li>
   <li>
-    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br />
     Adapted to Annex60 and restructuring, implementing new
     functionalities
   </li>
   <li>
-    <i>June, 2014&#160;</i> by Moritz Lauster:<br/>
+    <i>June, 2014&#160;</i> by Moritz Lauster:<br />
     Added some basic documentation
   </li>
 </ul>

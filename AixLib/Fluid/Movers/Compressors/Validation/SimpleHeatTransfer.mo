@@ -61,7 +61,7 @@ equation
                 {60,1.77636e-015}}, color={0,127,255}));
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 30, 2017, by Mirko Engelpracht:<br/>
+  <li>October 30, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

@@ -114,11 +114,11 @@ equation
 </p>
 </html>",
       revisions="<html><ul>
-  <li>May 19, 2017, by Mirko Engelpracht:<br/>
+  <li>May 19, 2017, by Mirko Engelpracht:<br />
     Added missing documentation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/391\">issue 391</a>).
   </li>
-  <li>December 10, 2013, by Ole Odendahl:<br/>
+  <li>December 10, 2013, by Ole Odendahl:<br />
     Formatted documentation appropriately.
   </li>
 </ul>

@@ -18,7 +18,7 @@ class Requirements "Requirements"
 <ul>
   <li>November 2016, by Felix Bünning: Developed and implemented
   </li>
-  <li>December 2016, by Roozbeh Sangi:<br/>
+  <li>December 2016, by Roozbeh Sangi:<br />
     revised
   </li>
 </ul>

@@ -15,11 +15,11 @@ record OW_EnEV2009_L
   // c={1000,1700,1337,1000,1000} "Specific heat capacity of wall layers",
   annotation(Documentation(revisions = "<html><ul>
   <li>
-    <i>September 5, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>September 5, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
   <li>
-    <i>Juni 1, 2011</i> by Ana Constantin:<br/>
+    <i>Juni 1, 2011</i> by Ana Constantin:<br />
     implemented
   </li>
 </ul>

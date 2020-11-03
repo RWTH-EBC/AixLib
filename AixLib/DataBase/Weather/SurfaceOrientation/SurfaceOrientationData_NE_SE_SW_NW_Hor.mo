@@ -119,9 +119,9 @@ record SurfaceOrientationData_NE_SE_SW_NW_Hor
   </tr>
 </table>
 <p>
-  <br/>
-  <br/>
-  <br/>
+  <br />
+  <br />
+  <br />
 </p>
 <h4>
   <span style=\"color:#008000\">References</span>
@@ -132,7 +132,7 @@ record SurfaceOrientationData_NE_SE_SW_NW_Hor
 </p>
 <ul>
   <li>
-    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br />
     Added basic documentation
   </li>
 </ul>

@@ -17,7 +17,7 @@ algorithm
 </p>
 </html>",
         revisions="<html><ul>
-  <li>June 07, 2016,&#160; by Stanley Risch:<br/>
+  <li>June 07, 2016,&#160; by Stanley Risch:<br />
     Implemented.
   </li>
 </ul>

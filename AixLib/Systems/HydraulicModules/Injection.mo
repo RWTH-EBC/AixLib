@@ -440,18 +440,18 @@ equation
   effects
 </p>
 <ul>
-  <li>August 09, 2018, by Alexander Kümpel:<br/>
+  <li>August 09, 2018, by Alexander Kümpel:<br />
     Extension from base PartioalHydraulicModuls
   </li>
-  <li>Mai 30, 2018, by Alexander Kümpel:<br/>
+  <li>Mai 30, 2018, by Alexander Kümpel:<br />
     Transfer from ZUGABE to AixLib
   </li>
-  <li>2017-07-25 by Peter Matthes:<br/>
+  <li>2017-07-25 by Peter Matthes:<br />
     Renames sensors and introduces PT1 behavior for temperature
     sensors. Adds sensors to icon.
   </li>
   <li>
-    <i>March,2016&#160;</i> by Rohit Lad:<br/>
+    <i>March,2016&#160;</i> by Rohit Lad:<br />
     Implemented
   </li>
 </ul>

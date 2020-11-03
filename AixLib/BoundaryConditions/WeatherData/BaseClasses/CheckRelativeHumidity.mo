@@ -25,7 +25,7 @@ equation
   of <i>[0, 1]</i>.
 </p>
 <ul>
-  <li>October 27, 2011, by Wangda Zuo:<br/>
+  <li>October 27, 2011, by Wangda Zuo:<br />
     First implementation.
   </li>
 </ul>

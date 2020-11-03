@@ -55,18 +55,18 @@ equation
     Documentation(info="<html><p>
   WorkingFluid is based on the models
   <code>FastHVAC.BaseClasses.EnergyBalance</code> and <a href=
-  \"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.<br/>
+  \"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.<br />
 
   The heat transfer through the heatPort is ideal. It is used for
   FastHVAC fluid energy balances.
 </p>
 <ul>
   <li>
-    <i>April 25, 2017</i>, by Michael Mans:<br/>
+    <i>April 25, 2017</i>, by Michael Mans:<br />
     Moved to AixLib
   </li>
   <li>
-    <i>February 16, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
+    <i>February 16, 2015&#160;</i> by Konstantin Finkbeiner:<br />
     Implemented
   </li>
 </ul>

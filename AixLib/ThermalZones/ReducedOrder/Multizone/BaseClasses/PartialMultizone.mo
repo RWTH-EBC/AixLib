@@ -270,13 +270,13 @@ equation
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html><ul>
-  <li>September 27, 2016, by Moritz Lauster:<br/>
+  <li>September 27, 2016, by Moritz Lauster:<br />
     Reimplementation based on Annex60 and AixLib models.
   </li>
-  <li>June 22, 2015, by Moritz Lauster:<br/>
+  <li>June 22, 2015, by Moritz Lauster:<br />
     Changed building physics to AixLib.
   </li>
-  <li>April 25, 2014, by Ole Odendahl:<br/>
+  <li>April 25, 2014, by Ole Odendahl:<br />
     Implemented.
   </li>
 </ul>

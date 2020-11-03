@@ -29,7 +29,7 @@ annotation (Icon(coordinateSystem(preserveAspectRatio=false),
                   smooth=Smooth.Bezier,
                   thickness=0.5)}),
 Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -39,10 +39,10 @@ Documentation(revisions="<html><ul>
   This package contains models describing calculations procedures of
   engine efficiencies that are based on a literature review. However,
   in this library the engine efficiency is implemented in such a way
-  that it fulfills<br/>
-  <br/>
-  <code>η<sub>eng</sub> = Q̇<sub>ref</sub> / P<sub>el</sub></code>.<br/>
-  <br/>
+  that it fulfills<br />
+  <br />
+  <code>η<sub>eng</sub> = Q̇<sub>ref</sub> / P<sub>el</sub></code>.<br />
+  <br />
   For more information, please checkout <a href=
   \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
   AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
@@ -52,7 +52,7 @@ Documentation(revisions="<html><ul>
 </h4>
 <p>
   Calculation procedures presented in the litarture have some variables
-  in commen and these variables are presented below:<br/>
+  in commen and these variables are presented below:<br />
 </p>
 <table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -130,22 +130,22 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   Polynomial approaches
 </h4>
 <p>
-  A generic polynomial approach is presented below:<br/>
-  <br/>
+  A generic polynomial approach is presented below:<br />
+  <br />
   <code>η<sub>eng</sub> = corFact * sum(a[i]*P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
+  1:nT)</code><br />
+  <br />
   Actually, four polynomial approaches are implemented in this package.
 </p>
 <h4>
   Power approaches
 </h4>
 <p>
-  A generic power approach is presented below:<br/>
-  <br/>
+  A generic power approach is presented below:<br />
+  <br />
   <code>η<sub>eng</sub> = corFact * a * product(P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
+  1:nT)</code><br />
+  <br />
   Actually, one power approache is implemented in this package.
 </p>
 <h4>

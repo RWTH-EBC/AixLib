@@ -110,7 +110,7 @@ equation
  4 - WC/Storage
  5 - Kitchen")}), Documentation(revisions = "<html><ul>
   <li>
-    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    <i>June 19, 2014</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

@@ -4,7 +4,7 @@ package Examples "Packages with example models for testing refrigerent models"
 
 
 annotation (Documentation(revisions="<html><ul>
-  <li>June 12, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+  <li>June 12, 2017, by Mirko Engelpracht, Christian Vering:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>

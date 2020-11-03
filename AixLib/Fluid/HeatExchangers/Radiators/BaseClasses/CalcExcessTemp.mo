@@ -27,11 +27,11 @@ class CalcExcessTemp
 </html>",
       revisions="<html><ul>
   <li>
-    <i>October, 2016&#160;</i> by Peter Remmen:<br/>
+    <i>October, 2016&#160;</i> by Peter Remmen:<br />
     Transfer to AixLib.
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>

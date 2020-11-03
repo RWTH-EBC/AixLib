@@ -493,7 +493,7 @@ equation
           textString="Heater")}),
     Icon(coordinateSystem(extent={{-140,-100},{160,160}})),
     Documentation(revisions="<html><ul>
-  <li>March 17, 2017, by Moritz Lauster:<br/>
+  <li>March 17, 2017, by Moritz Lauster:<br />
     Implemented.
   </li>
 </ul>

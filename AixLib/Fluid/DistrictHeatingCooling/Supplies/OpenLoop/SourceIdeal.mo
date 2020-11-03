@@ -47,7 +47,7 @@ equation
           lineColor={28,108,200},
           fillColor={28,108,200},
           fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
-  <li>March 3, 2018, by Marcus Fuchs:<br/>
+  <li>March 3, 2018, by Marcus Fuchs:<br />
     Implemented for <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
   </li>

@@ -149,7 +149,7 @@ expandable connector CHPControlBus
     annotation (Dialog(tab="Operation point", group="CHP Unit"));
 
   annotation (Documentation(revisions="<html><ul>
-  <li>January, 2019, by Julian Matthes:<br/>
+  <li>January, 2019, by Julian Matthes:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">issue
     6</a><u><span style=\"color: #0000ff;\">67</span></u>).

@@ -46,7 +46,7 @@ annotation (Documentation(info="<html><h4>
 </html>",
       revisions="<html><ul>
   <li>
-    <i>January 24, 2013</i> by Peter Matthes:<br/>
+    <i>January 24, 2013</i> by Peter Matthes:<br />
     implemented
   </li>
 </ul>

@@ -160,7 +160,7 @@ equation
   opening (includes opening delay already) is used.
 </p>
 <ul>
-  <li>November 4, 2019, by Alexander Kümpel:<br/>
+  <li>November 4, 2019, by Alexander Kümpel:<br />
     First implementation.
   </li>
 </ul>

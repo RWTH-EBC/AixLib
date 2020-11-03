@@ -170,11 +170,11 @@ equation
 </p>
 </html>",
       revisions="<html><ul>
-  <li>May 19, 2017, by Mirko Engelpracht:<br/>
+  <li>May 19, 2017, by Mirko Engelpracht:<br />
     Added missing documentation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/391\">issue 391</a>).
   </li>
-  <li>October 17, 2016, by Philipp Mehrfeld:<br/>
+  <li>October 17, 2016, by Philipp Mehrfeld:<br />
     Implemented especially for comparison to simple heat pump model.
   </li>
 </ul>

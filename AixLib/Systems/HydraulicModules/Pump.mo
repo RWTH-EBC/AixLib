@@ -138,17 +138,17 @@ equation
           textString="3")}),Diagram(coordinateSystem(extent={{-120,-120},{120,120}},
           initialScale=0.1)),
     Documentation(revisions="<html><ul>
-  <li>August 09, 2018, by Alexander Kümpel:<br/>
+  <li>August 09, 2018, by Alexander Kümpel:<br />
     Extension from base PartioalHydraulicModuls
   </li>
-  <li>Mai 30, 2018, by Alexander Kümpel:<br/>
+  <li>Mai 30, 2018, by Alexander Kümpel:<br />
     Transfer from ZUGABE to AixLib
   </li>
-  <li>2017-07-25 by Peter Matthes:<br/>
+  <li>2017-07-25 by Peter Matthes:<br />
     Renames sensors and introduces PT1 behavior for temperature
     sensors. Adds sensors to icon.
   </li>
-  <li>2017-06 by Alexander Kümpel:<br/>
+  <li>2017-06 by Alexander Kümpel:<br />
     Implemented
   </li>
 </ul>

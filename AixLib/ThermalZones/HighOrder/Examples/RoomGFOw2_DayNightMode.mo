@@ -123,19 +123,19 @@ equation
 </p>
 <ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
     Merged with AixLib and replaced boiler with idealHeater
   </li>
   <li>
-    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br />
     Replace pipe by hydraulic resistance
   </li>
   <li>
-    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    <i>June 19, 2014</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

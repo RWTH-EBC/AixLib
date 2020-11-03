@@ -97,7 +97,7 @@ model Chiller
             -120},{100,120}})),
     Documentation(revisions="<html><ul>
   <li>
-    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>

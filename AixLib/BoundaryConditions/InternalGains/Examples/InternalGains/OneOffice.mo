@@ -37,11 +37,11 @@ equation
 </p>
 <ul>
   <li>
-    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>August 12, 2011</i> by Ana Constantin:<br/>
+    <i>August 12, 2011</i> by Ana Constantin:<br />
     implemented
   </li>
 </ul>

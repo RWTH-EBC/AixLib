@@ -18,7 +18,7 @@ annotation (Icon(graphics={
           points={{18,78},{64,-48}},
           color={0,0,0},
           thickness=0.5)}), Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

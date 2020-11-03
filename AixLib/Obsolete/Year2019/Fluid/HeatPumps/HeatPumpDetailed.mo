@@ -496,10 +496,10 @@ equation
   chosen:
 </p>
 <ol>
-  <li>Polynom<br/>
+  <li>Polynom<br />
     a) depending on evaporator input temperature, condenser output
     temperature and variable speed (via conditional speed connector)
-    for capacity controlled heat pumps<br/>
+    for capacity controlled heat pumps<br />
     b) depending on evaporator input temperature, condenser output
     temperature and nominal speed for on/off-controlled heat pump
   </li>
@@ -611,20 +611,20 @@ equation
 </p>
 <ul>
   <li>
-    <i>June 23, 2015&#160;</i> by Kristian Huchtemann:<br/>
+    <i>June 23, 2015&#160;</i> by Kristian Huchtemann:<br />
     formatted for use in AixLib
   </li>
   <li>
-    <i>December 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>December 10, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>March 27, 2013&#160;</i> by Kristian Huchtemann:<br/>
+    <i>March 27, 2013&#160;</i> by Kristian Huchtemann:<br />
     Corrected connection of evaporator inlet and outlet temperature
     connectors. Added maximum condenser temperature implementation.
   </li>
   <li>
-    <i>January 09, 2006&#160;</i> by Peter Matthes:<br/>
+    <i>January 09, 2006&#160;</i> by Peter Matthes:<br />
     V0.1: Initial configuration.
   </li>
 </ul>

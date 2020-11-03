@@ -572,13 +572,13 @@ connect(pumSou.port_a, port_a2) annotation (Line(
           extent={{-100,-100},{100,180}})),
     Documentation(revisions="<html><ul>
   <li>
-    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    <i>May 22, 2019</i> by Julian Matthes:<br />
     Rebuild due to the introducion of the thermal machine partial model
     (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br />
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>

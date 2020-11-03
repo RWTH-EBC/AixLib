@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model SimpleConsumer "Simple Consumer"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
   import SI=Modelica.SIunits;
@@ -151,21 +151,21 @@ equation
 </p>
 </html>", revisions="<html>
 <ul>
-  <li>August 31, 2020, by Alexander Kümpel:<br/>
+  <li>August 31, 2020, by Alexander Kümpel:<br />
     Remove pipes
   </li>
-  <li>October 31, 2019, by Alexander Kümpel:<br/>
+  <li>October 31, 2019, by Alexander Kümpel:<br />
     Add more options
   </li>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
+  <li>October 25, 2017, by Alexander Kümpel:<br />
     Transfer from ZUGABE to AixLib
   </li>
   <li>
-    <i>2016-03-06 &#160;</i> by Peter Matthes:<br/>
+    <i>2016-03-06 &#160;</i> by Peter Matthes:<br />
     added documentation
   </li>
   <li>
-    <i>2016-02-17 &#160;</i> by Rohit Lad:<br/>
+    <i>2016-02-17 &#160;</i> by Rohit Lad:<br />
     implemented simple consumers model
   </li>
 </ul>

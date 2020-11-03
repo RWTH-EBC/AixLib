@@ -510,30 +510,30 @@ equation
   comparative model validation or empirical validation.
 </p>
 <ul>
-  <li>2019-09-18 by Alexander Kümpel:<br/>
+  <li>2019-09-18 by Alexander Kümpel:<br />
     Renaming, restructuring and bug fixes.
   </li>
-  <li>2018-03-01 by Peter Matthes:<br/>
+  <li>2018-03-01 by Peter Matthes:<br />
     Improved parameter setup of pump model. Ordering in GUI, disabled
     some parameters that should be used not as input but rather as
     outputs (m_flow_start, p_a_start and p_b_start) and much more
     description in the parameter doc strings to help the user make
     better decisions.
   </li>
-  <li>2018-02-01 by Peter Matthes:<br/>
+  <li>2018-02-01 by Peter Matthes:<br />
     * When pump is turned off the model will also turn pump speed (n)
     off as well. Be aware that the pump speed will only be calculated
-    when calculatePower==true.<br/>
+    when calculatePower==true.<br />
     * n has been converted into a RealOutput instead of a normal
-    Real.<br/>
-    * The pump speed n is mapped onto the bus as \"rpm_Act\".<br/>
+    Real.<br />
+    * The pump speed n is mapped onto the bus as \"rpm_Act\".<br />
     * RealOutput v_dot_m3h has been changed into a formula block with
     the signal now being Vflow_m3h.y. This change improves model
     checking, as the former RealOutput had not defining connection but
     rather an attached equation. Dymola was not able to correctly
     reckognize this and threw a warning. This would have reduced the
     ability to debug the code as futher checks by Dymola would be
-    avoided at that point.<br/>
+    avoided at that point.<br />
     * Fixes calculation of power and efficiency. As power values near
     zero were possible, eta could get insanely high values. power and
     eta are now limited to more sensible values. However, there is no
@@ -541,15 +541,15 @@ equation
     that behaviour would be needed try implementing a transition
     function.
   </li>
-  <li>2018-01-30 by Peter Matthes:<br/>
+  <li>2018-01-30 by Peter Matthes:<br />
     * Renamed delivery head controlled pump model (blue) from Pump into
     PumpH as well as PumpPhysics into PumpPhysicsH. \"H\" stands for pump
-    delivery head.<br/>
+    delivery head.<br />
     * Moved efficiencyCharacteristic package directly into BaseClasses.
     This is due to moving the older pump model and depencencies into
     the Deprecated folder.
   </li>
-  <li>2018-01-29 by Peter Matthes:<br/>
+  <li>2018-01-29 by Peter Matthes:<br />
     * Removes parameter useABCcurves as that is the default to
     calculate speed and is only needed in the blue pump (PumpH) to
     calculate power from speed and volume flow. Currently there is no
@@ -557,60 +557,60 @@ equation
     . This can only be done with the quadratic ABC formula. Therefore,
     an assert statement has been implemented instead to give a warning
     when you want to compute power but you use more that the ABC
-    coefficients in cHQN.<br/>
+    coefficients in cHQN.<br />
     * Removes parameter Nnom and replaces it with Nstart. As discussed
     with Wilo Nnom is not very useful and it can be replaced with a
     start value. The default value has been lowered to a medium speed
     to avoid collision with the speed/power limitation. For most pumps
     the maximum speed is limited for increasing volume flows to avoid
-    excess power consumption.<br/>
+    excess power consumption.<br />
     * Increases Qnom from 0.5*Qmax to 0.67*Qmax as this would be a more
     realistic value.
   </li>
-  <li>2018-01-26 by Peter Matthes:<br/>
+  <li>2018-01-26 by Peter Matthes:<br />
     * Changes parameter name n_start into Nstart to be
     compatible/exchangeable with the speed controlled pump (red
-    pump).<br/>
-    * Removes unused code and remarks from the model.<br/>
+    pump).<br />
+    * Removes unused code and remarks from the model.<br />
     * Adds start parameters to the model and updates parameter
-    equations (for Qnom for example).<br/>
+    equations (for Qnom for example).<br />
     * Removes old headUnbound calculation via function of Q and N. Now
     sets bus.dp_Input directly.
   </li>
-  <li>2017-12-01 by Peter Matthes:<br/>
+  <li>2017-12-01 by Peter Matthes:<br />
     Changed pump due to removed parameters pumpParam.cABCeq and .cNQH.
   </li>
-  <li>2017-11-22 by Peter Matthes:<br/>
-    Prepares new pump model for external controller<br/>
+  <li>2017-11-22 by Peter Matthes:<br />
+    Prepares new pump model for external controller<br />
     * Adds pumpBus connections for volume flow rate (vFRcur_m3h) and
-    maximum/minimum pump head (maxMinHead).<br/>
-    * Adds graphical annotations for v_dot_m3_h and headUnbound<br/>
+    maximum/minimum pump head (maxMinHead).<br />
+    * Adds graphical annotations for v_dot_m3_h and headUnbound<br />
     * Changes pump icon color to light blue to make a distinction to
-    the other pumps.<br/>
+    the other pumps.<br />
     * Fixes documentation.
   </li>
-  <li>2017-11-21 by Peter Matthes:<br/>
+  <li>2017-11-21 by Peter Matthes:<br />
     Adds parameters n_start, Qnom and Hnom with defaults. Changes text
     in Icon view.
   </li>
-  <li>2017-11-16 by Peter Matthes:<br/>
+  <li>2017-11-16 by Peter Matthes:<br />
     Updated assertion for pumpParam.cABCeq and adds a second for
-    pumpParam.cHQN and pumpParam.cNQH.<br/>
+    pumpParam.cHQN and pumpParam.cNQH.<br />
     * Removes all control strategies except n_set and
-    fullFieldTable.<br/>
-    * Removes pumpControlBlockDay component.<br/>
-    * Adds instead (of pumpControlBlockDay.Head_calc).<br/>
-    * Removes all unused parameters in pump model.<br/>
-    * Adds new parameter useABCformulas.<br/>
-    * Adds new equations for headUnbound and pump speed and power.<br/>
-    * n_set becomes default control algorithm.<br/>
+    fullFieldTable.<br />
+    * Removes pumpControlBlockDay component.<br />
+    * Adds instead (of pumpControlBlockDay.Head_calc).<br />
+    * Removes all unused parameters in pump model.<br />
+    * Adds new parameter useABCformulas.<br />
+    * Adds new equations for headUnbound and pump speed and power.<br />
+    * n_set becomes default control algorithm.<br />
     * Changes start pressure of pump volume from p_b_start to
-    p_a_start.<br/>
+    p_a_start.<br />
     (We normally know what the minimum pressure point before the
-    pump<br/>
+    pump<br />
     should be.)
   </li>
-  <li>2017-11-13 by Peter Matthes:<br/>
+  <li>2017-11-13 by Peter Matthes:<br />
     Implemented. Non functional yet.
   </li>
 </ul>

@@ -162,7 +162,7 @@ protected
 </p>
 </html>",
   revisions="<html><ul>
-  <li>May 2, 2018 by Massimo Cimmino:<br/>
+  <li>May 2, 2018 by Massimo Cimmino:<br />
     First implementation. This function is used by <a href=
     \"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
   </li>
@@ -197,7 +197,7 @@ protected
   Indirect Systems. Paris: IIR/IIF.
 </p>
 <ul>
-  <li>May 2, 2018 by Massimo Cimmino:<br/>
+  <li>May 2, 2018 by Massimo Cimmino:<br />
     First implementation. This function is used by <a href=
     \"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
   </li>
@@ -231,7 +231,7 @@ protected
   Indirect Systems. Paris: IIR/IIF.
 </p>
 <ul>
-  <li>May 2, 2018 by Massimo Cimmino:<br/>
+  <li>May 2, 2018 by Massimo Cimmino:<br />
     First implementation. This function is used by <a href=
     \"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
   </li>
@@ -290,7 +290,7 @@ protected
   Indirect Systems. Paris: IIR/IIF.
 </p>
 <ul>
-  <li>March 16, 2018 by Massimo Cimmino:<br/>
+  <li>March 16, 2018 by Massimo Cimmino:<br />
     First implementation. This function is used models in <a href=
     \"modelica://AixLib.Media.Antifreeze\">AixLib.Media.Antifreeze</a>.
   </li>
@@ -324,7 +324,7 @@ protected
   Indirect Systems. Paris: IIR/IIF.
 </p>
 <ul>
-  <li>March 16, 2018 by Massimo Cimmino:<br/>
+  <li>March 16, 2018 by Massimo Cimmino:<br />
     First implementation. This function is used by <a href=
     \"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
   </li>
@@ -358,7 +358,7 @@ protected
   Indirect Systems. Paris: IIR/IIF.
 </p>
 <ul>
-  <li>March 16, 2018 by Massimo Cimmino:<br/>
+  <li>March 16, 2018 by Massimo Cimmino:<br />
     First implementation. This function is used by <a href=
     \"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
   </li>
@@ -439,7 +439,7 @@ annotation(preferredView="info", Documentation(info="<html><p>
   X_a=0.40)</code>
 </p>
 <ul>
-  <li>March 16, 2018, by Massimo Cimmino:<br/>
+  <li>March 16, 2018, by Massimo Cimmino:<br />
     First implementation.
   </li>
 </ul>

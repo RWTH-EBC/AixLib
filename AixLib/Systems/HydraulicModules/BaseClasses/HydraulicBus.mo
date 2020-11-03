@@ -21,13 +21,13 @@ expandable connector HydraulicBus "Data bus for hydraulic circuits"
   exchange within a particular module type.
 </p>
 <ul>
-  <li>January 09, 2020, by Alexander Kümpel:<br/>
+  <li>January 09, 2020, by Alexander Kümpel:<br />
     Variables renamed.
   </li>
-  <li>October 25, 2017, by Alexander Kümpel:<br/>
+  <li>October 25, 2017, by Alexander Kümpel:<br />
     Adaption for hydraulic modules in AixLib.
   </li>
-  <li>February 6, 2016, by Peter Matthes:<br/>
+  <li>February 6, 2016, by Peter Matthes:<br />
     First implementation.
   </li>
 </ul>

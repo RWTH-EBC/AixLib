@@ -10,11 +10,11 @@ record Boiler_Vitodens300W_13kW
     eta=[0.3,1.061; 1.0,0.954]);
   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>Mai 03, 2012&#160;</i> by Ana Constantin:<br/>
+    <i>Mai 03, 2012&#160;</i> by Ana Constantin:<br />
     implemented.
   </li>
 </ul>

@@ -133,7 +133,7 @@ equation
 </p>
 </html>
 ",        revisions="<html><ul>
-  <li>by Marc Baranski and Roozbeh Sangi:<br/>
+  <li>by Marc Baranski and Roozbeh Sangi:<br />
     implemented
   </li>
 </ul>

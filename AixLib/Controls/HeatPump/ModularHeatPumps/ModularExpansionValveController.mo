@@ -102,7 +102,7 @@ equation
   applied for all parameters describing the PID controller.
 </p>
 <ul>
-  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>

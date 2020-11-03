@@ -9,7 +9,7 @@ algorithm
         (0.116 - 0.112)/(0.7 - 0.3)*phi + (0.112 - 1e-4*30)};
   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br />
     Adapted and moved to AixLib
   </li>
 </ul>

@@ -147,7 +147,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br />
     Moved into AixLib
   </li>
 </ul>

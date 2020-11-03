@@ -24,11 +24,11 @@ record AleoS24 "solarmodul AleoS24"
 </html>",
       revisions="<html><ul>
   <li>
-    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    <i>October 11, 2016</i> by Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>September 01, 2014&#160;</i> by Xian Wu:<br/>
+    <i>September 01, 2014&#160;</i> by Xian Wu:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>

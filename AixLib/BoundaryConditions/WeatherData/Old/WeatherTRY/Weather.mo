@@ -284,15 +284,15 @@ equation
 </p>
 <ul>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately, Rewarded 5*****!
   </li>
   <li>
-    <i>Mai 1, 2012&#160;</i> by Moritz Lauster and Ana Constantin:<br/>
+    <i>Mai 1, 2012&#160;</i> by Moritz Lauster and Ana Constantin:<br />
     Improved beyond belief.
   </li>
   <li>
-    <i>September 12, 2006&#160;</i> by Timo Haase:<br/>
+    <i>September 12, 2006&#160;</i> by Timo Haase:<br />
     Implemented.
   </li>
 </ul>

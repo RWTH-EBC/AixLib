@@ -9,15 +9,15 @@ package WindowsDoors "Windows and doors definition package"
     <b>Main Author:</b>
   </dt>
   <dd>
-    Peter Matthes<br/>
-    RWTH Aachen University<br/>
-    E.ON Energy Research Center<br/>
+    Peter Matthes<br />
+    RWTH Aachen University<br />
+    E.ON Energy Research Center<br />
     EBC | Institute for Energy Efficient Buildings and Indoor
-    Climate<br/>
-    Mathieustraße 6<br/>
-    52074 Aachen<br/>
+    Climate<br />
+    Mathieustraße 6<br />
+    52074 Aachen<br />
     e-mail: <a href=
-    \"mailto:pmatthes@eonerc.rwth-aachen.de\">pmatthes@eonerc.rwth-aachen.de</a><br/>
+    \"mailto:pmatthes@eonerc.rwth-aachen.de\">pmatthes@eonerc.rwth-aachen.de</a><br />
   </dd>
 </dl>
 </html>"));

@@ -287,15 +287,15 @@ dT_R=Tout - Tair;
           smooth=Smooth.None)}),
     Documentation(revisions="<html><ul>
   <li>
-    <i>April 13, 2017&#160;</i> Tobias Blacha:<br/>
+    <i>April 13, 2017&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
+    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br />
     Derived from HVAC.
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
 </ul>

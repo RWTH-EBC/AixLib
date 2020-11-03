@@ -675,11 +675,11 @@ equation
         Line(points={{58,-62},{58,-68}}, color={255,255,255})}), Documentation(
         revisions="<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    <i>April 18, 2014</i> by Ana Constantin:<br />
     Added documentation
   </li>
   <li>
-    <i>July 8, 2011</i> by Ana Constantin:<br/>
+    <i>July 8, 2011</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

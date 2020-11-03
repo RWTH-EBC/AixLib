@@ -107,19 +107,19 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
     Merged with AixLib
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>October 12, 2011</i> by Ana Constantin:<br/>
+    <i>October 12, 2011</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

@@ -82,22 +82,22 @@ equation
 </p>
 <ul>
   <li>
-    <i>April 25, 2017</i> by Peter Remmen:<br/>
+    <i>April 25, 2017</i> by Peter Remmen:<br />
     Move Example from <code>Fluid.HeatExchangers.Examples</code> to
     <code>Fluid.Examples</code>
   </li>
 </ul>
 <ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
     Merged with AixLib and replaced boiler with idealHeater
   </li>
   <li>
-    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br />
     Replace pipe
   </li>
 </ul>

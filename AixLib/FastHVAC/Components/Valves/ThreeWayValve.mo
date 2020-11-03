@@ -86,11 +86,11 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>April 13, 2017&#160;</i> Tobias Blacha:<br/>
+    <i>April 13, 2017&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>February 22, 2014&#160;</i> by Markus Schumacher:<br/>
+    <i>February 22, 2014&#160;</i> by Markus Schumacher:<br />
     Implemented.
   </li>
 </ul>

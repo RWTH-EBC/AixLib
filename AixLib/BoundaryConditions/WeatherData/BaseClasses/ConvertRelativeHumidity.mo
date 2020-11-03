@@ -19,10 +19,10 @@ equation
   data.
 </p>
 <ul>
-  <li>October 27, 2011, by Wangda Zuo:<br/>
+  <li>October 27, 2011, by Wangda Zuo:<br />
     Separate the checking function to CheckRelativeHumidity.
   </li>
-  <li>July 14, 2010, by Wangda Zuo:<br/>
+  <li>July 14, 2010, by Wangda Zuo:<br />
     First implementation.
   </li>
 </ul>

@@ -325,26 +325,26 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
     Merged with AixLib
   </li>
   <li>
-    <i>January 09, 2006&#160;</i> by Peter Matthes:<br/>
+    <i>January 09, 2006&#160;</i> by Peter Matthes:<br />
     V0.1: Initial configuration.
   </li>
   <li>
-    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br />
     Output for source Temperature added.
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
-  <li>by Pooyan Jahangiri:<br/>
+  <li>by Pooyan Jahangiri:<br />
     First implementation.
   </li>
 </ul>

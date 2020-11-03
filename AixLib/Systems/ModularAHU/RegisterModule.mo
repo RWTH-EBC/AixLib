@@ -390,7 +390,7 @@ equation
   sensors.
 </p>
 <ul>
-  <li>Januar 09, 2019, by Alexander Kümpel:<br/>
+  <li>Januar 09, 2019, by Alexander Kümpel:<br />
     First implementation
   </li>
 </ul>

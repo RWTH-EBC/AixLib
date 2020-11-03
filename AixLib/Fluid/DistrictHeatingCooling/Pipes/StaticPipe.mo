@@ -243,7 +243,7 @@ equation
           textString="L = %length
 d = %dh")}),
     Documentation(revisions="<html><ul>
-  <li>September 25, 2019, by Nils Neuland:<br/>
+  <li>September 25, 2019, by Nils Neuland:<br />
     Revised variable names and documentation to follow guidelines.
     Corrected malformed hyperlinks.
   </li>

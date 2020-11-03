@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances;
+within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
   extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;
@@ -347,37 +347,37 @@ equation
 </html>",
         revisions="<html><ul>
   <li>
-    <i>February 03, 2020</i> by Alexander Kümpel:<br/>
+    <i>February 03, 2020</i> by Alexander Kümpel:<br />
     Multiplication with nParallel in heatConv
   </li>
   <li>
-    <i>April 25, 2017</i> by Tobias Blacha:<br/>
+    <i>April 25, 2017</i> by Tobias Blacha:<br />
     Parameter isEmbedded added and correction of connections for
     different applications
   </li>
   <li>
-    <i>April 25, 2017</i> by Tobias Blacha:<br/>
+    <i>April 25, 2017</i> by Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>March 18, 2015</i> by Roozbeh Sangi:<br/>
+    <i>March 18, 2015</i> by Roozbeh Sangi:<br />
     Outputs for stored energy and temperature added
   </li>
   <li>
-    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br />
     Updated connectors to EBC Library 2.2, Updated documentation, Added
     example
   </li>
   <li>
-    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br />
     Added to the HVAC library
   </li>
   <li>
-    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>August 3, 2011</i> by Ana Constantin:<br/>
+    <i>August 3, 2011</i> by Ana Constantin:<br />
     Implemented
   </li>
 </ul>

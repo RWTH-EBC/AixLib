@@ -42,16 +42,16 @@ equation
   annotation (Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(revisions = "<html><ul>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
     Formatted documentation appropriately
   </li>
   <li>
-    <i>October 16, 2011&#160;</i> by Ana Constantin:<br/>
-    implemented<br/>
+    <i>October 16, 2011&#160;</i> by Ana Constantin:<br />
+    implemented<br />
   </li>
 </ul>
 </html>", info = "<html>

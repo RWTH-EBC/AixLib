@@ -53,7 +53,7 @@ equation
   heatPort.Q_flow = Q_flow_ref-PEle;
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+  <li>October 20, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

@@ -7,7 +7,7 @@ package IdealHeaters
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
-  <br/>
+  <br />
   Package for models with ideal heaters
 </p>
 <h4>

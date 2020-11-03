@@ -503,7 +503,7 @@ equation
   correct / complete data about the pump.</b>
 </p>
 <p>
-  <br/>
+  <br />
   See the examples under package \"Examples\".
 </p>
 <h4>
@@ -568,44 +568,44 @@ equation
 </p>
 </html>",
 revisions="<html><ul>
-  <li>2019-09-18 by Alexander Kümpel:<br/>
+  <li>2019-09-18 by Alexander Kümpel:<br />
     Renaming, restructuring and bug fixes.
   </li>
-  <li>2018-05-08 by Peter Matthes:<br/>
+  <li>2018-05-08 by Peter Matthes:<br />
     Changes initialization of criticalDamping to
     Types.Init.InitialOutput. \"Noinit\" could lead to always zero
     output.
   </li>
-  <li>2018-03-12 by Peter Matthes:<br/>
-    * Adds start values for m_flow and Vflow_m3h.<br/>
+  <li>2018-03-12 by Peter Matthes:<br />
+    * Adds start values for m_flow and Vflow_m3h.<br />
     * Removes assignment \"Vflow_m3h(y=if noEvent(port_b.m_flow &gt; 0)
-    then 0 else -port_b.m_flow/medium.d*3600)\".<br/>
+    then 0 else -port_b.m_flow/medium.d*3600)\".<br />
     * Comments out an assert statement for positive mass flow as that
     will provoke events when pump gets turned off and lead to stalled
-    simulations.<br/>
+    simulations.<br />
     * Adds min and max attribbutes to dp_pump, head, headUnbound,
     criticalDamping.y and m_flow and Vflow_m3h should help to avoid
     negative pump delivery head or mass flow.
   </li>
-  <li>2018-03-01 by Peter Matthes:<br/>
+  <li>2018-03-01 by Peter Matthes:<br />
     Improved parameter setup of pump model. Ordering in GUI, disabled
     some parameters that should be used not as input but rather as
     outputs (m_flow_start, p_a_start and p_b_start) and much more
     description in the parameter doc strings to help the user make
     better decisions.
   </li>
-  <li>2018-02-01 by Peter Matthes:<br/>
+  <li>2018-02-01 by Peter Matthes:<br />
     * When pump is turned off the model will also turn pump speed (n)
     off as well. So far the pump speed stayed at the lower limit given
-    by the variableLimiter.<br/>
-    * The pump speed n is mapped onto the bus as \"rpm_Act\".<br/>
+    by the variableLimiter.<br />
+    * The pump speed n is mapped onto the bus as \"rpm_Act\".<br />
     * RealOutput v_dot_m3h has been changed into a formula block with
     the signal now being Vflow_m3h.y. This change improves model
     checking, as the former RealOutput had not defining connection but
     rather an attached equation. Dymola was not able to correctly
     reckognize this and threw a warning. This would have reduced the
     ability to debug the code as futher checks by Dymola would be
-    avoided at that point.<br/>
+    avoided at that point.<br />
     * Fixes calculation of power and efficiency. As power values near
     zero were possible, eta could get insanely high values. power and
     eta are now limited to more sensible values. However, there is no
@@ -613,15 +613,15 @@ revisions="<html><ul>
     that behaviour would be needed try implementing a transition
     function.
   </li>
-  <li>2018-01-30 by Peter Matthes:<br/>
+  <li>2018-01-30 by Peter Matthes:<br />
     * Renamed speed controlled pump model (red) from PumpNbound into
     PumpN as well as PumpPhysicsNbound into PumpPhysicsN. \"N\" stands
-    for pump speed.<br/>
+    for pump speed.<br />
     * Moved efficiencyCharacteristic package directly into BaseClasses.
     This is due to moving the older pump model and depencencies into
     the Deprecated folder.
   </li>
-  <li>2018-01-29 by Peter Matthes:<br/>
+  <li>2018-01-29 by Peter Matthes:<br />
     * Removes parameter useABCcurves as that is the default to
     calculate speed and is only needed in the blue pump (PumpH) to
     calculate power from speed and volume flow. Currently there is no
@@ -629,54 +629,54 @@ revisions="<html><ul>
     . This can only be done with the quadratic ABC formula. Therefore,
     an assert statement has been implemented instead to give a warning
     when you want to compute power but you use more that the ABC
-    coefficients in cHQN.<br/>
+    coefficients in cHQN.<br />
     * Removes parameter Nnom and replaces it with Nstart. As discussed
     with Wilo Nnom is not very useful and it can be replaced with a
     start value. The default value has been lowered to a medium speed
     to avoid collision with the speed/power limitation. For most pumps
     the maximum speed is limited for increasing volume flows to avoid
-    excess power consumption.<br/>
+    excess power consumption.<br />
     * Increases Qnom from 0.5*Qmax to 0.67*Qmax as this would be a more
     realistic value.
   </li>
-  <li>2018-01-26 by Peter Matthes:<br/>
+  <li>2018-01-26 by Peter Matthes:<br />
     Changes Nnom from 80 % to 100 % of Nmax.
   </li>
-  <li>2018-01-16 by Peter Matthes:<br/>
+  <li>2018-01-16 by Peter Matthes:<br />
     Fixes power and efficiency calculation by using truth value \"
     <span style=
     \"font-family: Courier New;\">n&#160;&gt;=&#160;pumpParam.nMin*0.9<span style=\"color: #0000ff;\">&#160;and&#160;</span></span>
     pumpBus.onOff_Input\" instead of \"head &gt; 0.0\".
   </li>
-  <li>2018-01-15 by Peter Matthes:<br/>
+  <li>2018-01-15 by Peter Matthes:<br />
     Changes minimum mass flow rate in ports to +/- <span style=
     \"font-family: Courier New;\">1.5*<span style=
     \"color: #ff0000;\">max</span></span> (pumpParam.maxMinSpeedCurves[:,
     1]) in order to reduce search space.
   </li>
-  <li>2017-12-13 by Peter Matthes:<br/>
+  <li>2017-12-13 by Peter Matthes:<br />
     Adds assertions to check for unset pump record and improves the
     checks for cHQN matrix.
   </li>
-  <li>2017-12-12 by Peter Matthes:<br/>
+  <li>2017-12-12 by Peter Matthes:<br />
     * Changed Qnom from 1 m³/h to \" <span style=
     \"font-family: Courier New;\">0.5*<span style=
     \"color: #ff0000;\">max</span></span>
-    (pumpParam.maxMinSpeedCurves[:,1])\".<br/>
+    (pumpParam.maxMinSpeedCurves[:,1])\".<br />
     * Changed parameter name <span style=
     \"font-family: Courier New;\"><i>n_start</i> to <i>Nnom</i> as it was
-    only used to determin <i>Hnom</i></span>.<br/>
+    only used to determin <i>Hnom</i></span>.<br />
     * Changed m_flow_start value from 1 to \"Qnom* <span style=
     \"color: #ff0000;\">Medium.density_pTX</span> (p_b_start, T_start,
-    X_start)/3600\".<br/>
+    X_start)/3600\".<br />
     * Changed p_b_start from system.p_start to \"p_a_start +
     Hnom*system.g_n* <span style=
     \"font-family: Courier New; color: #ff0000;\">Medium.density_pTX</span>
     (p_b_start, T_start, X_start)\" and changed p_start in medium state
-    to p_b_start.<br/>
+    to p_b_start.<br />
     * Added assertions to check initialization parameters.
   </li>
-  <li>2017-12-01 by Peter Matthes:<br/>
+  <li>2017-12-01 by Peter Matthes:<br />
     Implemented.
   </li>
 </ul>

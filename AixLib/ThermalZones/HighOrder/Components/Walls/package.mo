@@ -11,14 +11,14 @@ package Walls "Wall models"
     <b>Main Author:</b>
   </dt>
   <dd>
-    Timo Haase<br/>
-    Technische Universtität Berlin<br/>
-    Hermann-Rietschel-Institut<br/>
-    Marchstr. 4<br/>
-    D-10587 Berlin<br/>
+    Timo Haase<br />
+    Technische Universtität Berlin<br />
+    Hermann-Rietschel-Institut<br />
+    Marchstr. 4<br />
+    D-10587 Berlin<br />
     e-mail: <a href=
-    \"mailto:timo.haase@tu-berlin.de\">timo.haase@tu-berlin.de</a><br/>
+    \"mailto:timo.haase@tu-berlin.de\">timo.haase@tu-berlin.de</a><br />
   </dd>
-</dl><br/>
+</dl><br />
 </html>"));
 end Walls;

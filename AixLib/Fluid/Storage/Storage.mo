@@ -141,7 +141,7 @@ equation
   </li>
 </ul>
 <p>
-  <br/>
+  <br />
   <b><span style=\"color: #008000\">Example Results</span></b>
 </p>
 <p>
@@ -154,11 +154,11 @@ equation
 </p>
 <ul>
   <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br />
     Changed model to use Annex 60 base class
   </li>
   <li>
-    <i>13.12.2013</i> by Sebastian Stinner:<br/>
+    <i>13.12.2013</i> by Sebastian Stinner:<br />
     implemented
   </li>
 </ul>

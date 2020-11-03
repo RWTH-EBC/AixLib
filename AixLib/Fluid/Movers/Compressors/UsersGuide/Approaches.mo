@@ -7,7 +7,7 @@ class Approaches
     extends Modelica.Icons.Information;
 
     annotation (Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -16,16 +16,16 @@ class Approaches
 <p>
   Generally, two kinds of calculation approaches can be identified: A
   polynomial and a power approach. A generic polynomial approach is
-  presented below:<br/>
-  <br/>
+  presented below:<br />
+  <br />
   <code>η<sub>eng</sub> = corFact * sum(a[i]*P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
-  A generic power approach is presented below:<br/>
-  <br/>
+  1:nT)</code><br />
+  <br />
+  A generic power approach is presented below:<br />
+  <br />
   <code>η<sub>eng</sub> = corFact * a * product(P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
+  1:nT)</code><br />
+  <br />
   All engine efficiency models presented in this library are based on a
   literature review. Therefore, the variable <code>corFact</code>
   allows a correction of the engine efficiency if the general modelling
@@ -39,7 +39,7 @@ class Approaches
 </h4>
 <p>
   Calculation procedures presented in the litarture have some variables
-  in commen and these variables are presented below:<br/>
+  in commen and these variables are presented below:<br />
 </p>
 <table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -141,7 +141,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
   and expand the <code>if-structure</code> defined in <a href=
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.PolynomialEngineEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.PolynomialEngineEfficiency</a>.<br/>
+  AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.PolynomialEngineEfficiency</a>.<br />
 </p>
 <table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -243,7 +243,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
   and expand the <code>if-structure</code> defined in <a href=
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.PowerEngineEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.PowerEngineEfficiency</a>.<br/>
+  AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.PowerEngineEfficiency</a>.<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -291,7 +291,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
     extends Modelica.Icons.Information;
 
     annotation (Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -300,16 +300,16 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <p>
   Generally, two kinds of calculation approaches can be identified: A
   polynomial and a power approach. A generic polynomial approach is
-  presented below:<br/>
-  <br/>
+  presented below:<br />
+  <br />
   <code>η<sub>vol</sub> = corFact * sum(a[i]*P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
-  A generic power approach is presented below:<br/>
-  <br/>
+  1:nT)</code><br />
+  <br />
+  A generic power approach is presented below:<br />
+  <br />
   <code>η<sub>vol</sub> = corFact * a * product(P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
+  1:nT)</code><br />
+  <br />
   All volumetric efficiency models presented in this library are based
   on a literature review. Therefore, the variable <code>corFact</code>
   allows a correction of the volumetric efficiency if the general
@@ -321,7 +321,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 </h4>
 <p>
   Calculation procedures presented in the litarture have some variables
-  in commen and these variables are presented below:<br/>
+  in commen and these variables are presented below:<br />
 </p>
 <table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -423,7 +423,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
   and expand the <code>if-structure</code> defined in <a href=
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.PolynomialVolumetricEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.PolynomialVolumetricEfficiency</a>.<br/>
+  AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.PolynomialVolumetricEfficiency</a>.<br />
 </p>
 <table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -613,7 +613,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
   and expand the <code>if-structure</code> defined in <a href=
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.PowerVolumetricEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.PowerVolumetricEfficiency</a>.<br/>
+  AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.PowerVolumetricEfficiency</a>.<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -660,7 +660,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
     extends Modelica.Icons.Information;
 
     annotation (Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -669,16 +669,16 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <p>
   Generally, two kinds of calculation approaches can be identified: A
   polynomial and a power approach. A generic polynomial approach is
-  presented below:<br/>
-  <br/>
+  presented below:<br />
+  <br />
   <code>η<sub>ise</sub> = corFact * sum(a[i]*P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
-  A generic power approach is presented below:<br/>
-  <br/>
+  1:nT)</code><br />
+  <br />
+  A generic power approach is presented below:<br />
+  <br />
   <code>η<sub>ise</sub> = corFact * a * product(P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
+  1:nT)</code><br />
+  <br />
   All isentropic efficiency models presented in this library are based
   on a literature review. Therefore, the variable <code>corFact</code>
   allows a correction of the isentropic efficiency if the general
@@ -691,7 +691,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 </h4>
 <p>
   Calculation procedures presented in the litarture have some variables
-  in commen and these variables are presented below:<br/>
+  in commen and these variables are presented below:<br />
 </p>
 <table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -794,7 +794,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
   and expand the <code>if-structure</code> defined in <a href=
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.PolynomialIsentropicEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.PolynomialIsentropicEfficiency</a>.<br/>
+  AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.PolynomialIsentropicEfficiency</a>.<br />
 </p>
 <table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -876,7 +876,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
   and expand the <code>if-structure</code> defined in <a href=
   \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.PowerIsentropicEfficiency\">
-  AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.PowerIsentropicEfficiency</a>.<br/>
+  AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.PowerIsentropicEfficiency</a>.<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -921,7 +921,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
   end IsentropicEfficiency;
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 19, 2017, by Mirko Engelpracht:<br/>
+  <li>October 19, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -942,7 +942,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <p>
   Actually, three different efficiency models are suggested and the
   modelling approaches of these efficiencies are shortly characterised
-  below:<br/>
+  below:<br />
 </p>
 <table summary=\"Efficiencies\" border=\"1\" cellspacing=\"0\" cellpadding=
 \"2\" style=\"border-collapse:collapse;\">

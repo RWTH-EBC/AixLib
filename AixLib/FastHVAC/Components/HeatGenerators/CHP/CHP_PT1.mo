@@ -333,7 +333,7 @@ equation
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
-  <br/>
+  <br />
   Simple model for a electricity driven CHP. using record
 </p>
 <h4>
@@ -367,11 +367,11 @@ equation
 </html>",
   revisions="<html><ul>
   <li>
-    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
+    <i>November 28, 2016&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>February 09, 2015&#160;</i> Konstantin Finkbeiner:<br/>
+    <i>February 09, 2015&#160;</i> Konstantin Finkbeiner:<br />
     Implemented
   </li>
 </ul>

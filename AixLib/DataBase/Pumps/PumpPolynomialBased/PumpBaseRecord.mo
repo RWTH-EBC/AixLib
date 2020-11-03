@@ -187,14 +187,14 @@ record PumpBaseRecord "Definition of pump data"
   H= a*n^2+b*Q*n+c*Q^2\"
 </p>
 <p>
-  <br/>
+  <br />
   Using the c[i,j]-matrix this would become:
 </p>
 <p>
   H= c(0,2)*n^2+c(1,1)*Q*n+c(2,0)*Q^2
 </p>
 <p>
-  <br/>
+  <br />
   Therefore, the ABC-Formula emerges as a special case out of the
   general formulation. In order to implement the latter formula
   directly to speed up the computation and also allow to switch between
@@ -230,44 +230,44 @@ record PumpBaseRecord "Definition of pump data"
   n_2 = -b*Q/(2*a)-sqrt((b*Q/(2*a))^2 +(H-c*Q^2)/a)
 </p>
 <ul>
-  <li>2018-05-08 by Peter Matthes:<br/>
+  <li>2018-05-08 by Peter Matthes:<br />
     Adds AixLib info template for records to the already existing
     documentation. Has to be finished.
   </li>
-  <li>2018-02-15 by Peter Matthes:<br/>
+  <li>2018-02-15 by Peter Matthes:<br />
     Deletes 'zero' rows from maxMinSpeedCurves and maxMinHeight tables.
     Reformats tables.
   </li>
-  <li>2017-12-01 by Peter Matthes:<br/>
+  <li>2017-12-01 by Peter Matthes:<br />
     * Adds parameter pumpManufacturerString to separate model type and
-    manufacturer information.<br/>
+    manufacturer information.<br />
     * Removes parameter cABCeq as that is included in cHQN already (if
-    computed correctly).<br/>
+    computed correctly).<br />
     * Removes parameter cNQH as that is not necessary any more for the
     n_set algorithm (new pump model). For the old pump model the we can
     use the ABC coefficients and compute the inverse via
-    p-q-formula.<br/>
+    p-q-formula.<br />
     * Removes last column (H from ABC-formula) in referenceDataQHPN.
   </li>
-  <li>2017-11-30 by Peter Matthes:<br/>
+  <li>2017-11-30 by Peter Matthes:<br />
     Adds new parameter maxMinSpeedCurves for control of pump speed
     instead of pump head.
   </li>
-  <li>2017-11-23 by Peter Matthes:<br/>
+  <li>2017-11-23 by Peter Matthes:<br />
     Updates documentation for table formatting and cPQN coefficient
     order.
   </li>
-  <li>2017-11-21 by Peter Matthes:<br/>
+  <li>2017-11-21 by Peter Matthes:<br />
     Removed the full field table parameters HQnTable and PQnTable.
     Instead reference data from measurements will be stored in matrix
     referenceDataQHPN.
   </li>
-  <li>2017-11-16 by Peter Matthes:<br/>
+  <li>2017-11-16 by Peter Matthes:<br />
     Changed name of cHQNabc to cABCeq and deleted cNQHabc parameter.
     Updated documentation. Added nMin and nMax parameter. Adds default
     for maxMinHeight parameter
   </li>
-  <li>2017-11-13 by Peter Matthes:<br/>
+  <li>2017-11-13 by Peter Matthes:<br />
     Implemented
   </li>
 </ul>

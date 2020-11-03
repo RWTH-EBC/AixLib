@@ -234,7 +234,7 @@ equation
   <span style=\"color: #008000\">Overview</span>
 </h4>
 <p>
-  Evaporator/Condenser model adapted to FastHAVC library.<br/>
+  Evaporator/Condenser model adapted to FastHAVC library.<br />
   This model is based on the Fluid model <a href=
   \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity\">
   AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity</a>.
@@ -243,7 +243,7 @@ equation
 </html>",
   revisions="<html><ul>
   <li>
-    <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
+    <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br />
     Moved into AixLib
   </li>
 </ul>

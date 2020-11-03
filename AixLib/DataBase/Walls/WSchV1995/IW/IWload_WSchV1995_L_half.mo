@@ -17,11 +17,11 @@ record IWload_WSchV1995_L_half
   */
   annotation(Documentation(revisions = "<html><ul>
   <li>
-    <i>September 5, 2013&#160;</i> by Ole Odendahl:<br/>
+    <i>September 5, 2013&#160;</i> by Ole Odendahl:<br />
     Added documentation and formatted appropriately
   </li>
   <li>
-    <i>August 15, 2011</i> by Ana Constantin:<br/>
+    <i>August 15, 2011</i> by Ana Constantin:<br />
     implemented
   </li>
 </ul>

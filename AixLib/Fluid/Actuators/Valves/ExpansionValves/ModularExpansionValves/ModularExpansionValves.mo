@@ -12,7 +12,7 @@ equation
   end for;
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -20,7 +20,7 @@ equation
 </html>", info="<html>
 <p>
   This is a model of modular expansion valves that are used, for
-  example, in close-loop systems like heat pumps or chillers.<br/>
+  example, in close-loop systems like heat pumps or chillers.<br />
   It consists of <code>nVal</code> expansion valves in parallel and
   also <code>nVal</code> PID conrollers if no external controller is
   used.

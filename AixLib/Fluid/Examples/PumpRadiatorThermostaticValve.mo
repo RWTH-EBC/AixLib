@@ -85,14 +85,14 @@ equation
 </p>
 <ul>
   <li>
-    <i>April 25, 2017</i> by Peter Remmen:<br/>
+    <i>April 25, 2017</i> by Peter Remmen:<br />
     Move Example from <code>Fluid.HeatExchangers.Examples</code> to
     <code>Fluid.Examples</code>
   </li>
 </ul>
 <ul>
   <li>
-    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br />
     Replace pipe
   </li>
 </ul>

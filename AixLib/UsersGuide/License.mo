@@ -65,7 +65,7 @@ class License "License"
   third party code that uses the following license:
 </p>
 <p>
-  Copyright (c) 2011 The NetBSD Foundation, Inc.<br/>
+  Copyright (c) 2011 The NetBSD Foundation, Inc.<br />
   All rights reserved.
 </p>
 <p>

@@ -39,7 +39,7 @@ record Pump_DN50 "Pump with head 1 to 12m and 43m^3/h volume flow"
       "coefficients for P = f(Q,N)");
 
   annotation(preferredView="text", Documentation(revisions="<html><ul>
-  <li>2018-09-24 by Luca Vedda:<br/>
+  <li>2018-09-24 by Luca Vedda:<br />
     Implemented
   </li>
 </ul>

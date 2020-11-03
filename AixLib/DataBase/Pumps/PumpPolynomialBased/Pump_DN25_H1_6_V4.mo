@@ -53,7 +53,7 @@ record Pump_DN25_H1_6_V4 "Pump with head 1 to 6m and 4.25m^3/h volume flow"
           -2.25479e-01,  0.00000e+00,  0.00000e+00,  0.00000e+00,  0.00000e+00]
        "coefficients for P = f(Q,N)");
   annotation(preferredView="text", Documentation(revisions="<html><ul>
-  <li>2018-07-02 by Luca Vedda:<br/>
+  <li>2018-07-02 by Luca Vedda:<br />
     Generated
   </li>
 </ul>

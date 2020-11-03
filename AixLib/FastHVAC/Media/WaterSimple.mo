@@ -11,11 +11,11 @@ extends AixLib.FastHVAC.Media.BaseClasses.MediumSimple(
 </p>
 <ul>
   <li>
-    <i>April 25, 2017</i>, by Michael Mans:<br/>
+    <i>April 25, 2017</i>, by Michael Mans:<br />
     Moved to AixLib.
   </li>
   <li>
-    <i>August 11, 2017</i>, by David Jansen:<br/>
+    <i>August 11, 2017</i>, by David Jansen:<br />
     corrected data and inserted dynamic viscosity.
   </li>
 </ul>

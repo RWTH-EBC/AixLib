@@ -660,15 +660,15 @@ connect(heatTransfer.therm, layer.port);
 </html>",
 revisions="<html><ul>
   <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br />
     Moved into AixLib
   </li>
   <li>
-    <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
+    <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br />
     Added documentation.
   </li>
   <li>
-    <i>December 16, 2014</i> by Sebastian Stinner:<br/>
+    <i>December 16, 2014</i> by Sebastian Stinner:<br />
     Implemented.
   </li>
 </ul>

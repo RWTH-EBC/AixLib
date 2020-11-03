@@ -121,12 +121,12 @@ equation
 </p>
 <ul>
   <li>
-    <i>October 28, 2015&#160;</i> by Moritz Lauster:<br/>
+    <i>October 28, 2015&#160;</i> by Moritz Lauster:<br />
     Moved to AixLib and renaming. Changed equations and simplified
     model. All unit conversions now need to be handled beforehand
   </li>
   <li>
-    <i>February 6, 2014&#160;</i> by Ole Odendahl:<br/>
+    <i>February 6, 2014&#160;</i> by Ole Odendahl:<br />
     Model created and tested
   </li>
 </ul>

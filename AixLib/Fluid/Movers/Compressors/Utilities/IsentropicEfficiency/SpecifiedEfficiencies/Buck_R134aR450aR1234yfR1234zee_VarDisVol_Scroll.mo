@@ -9,7 +9,7 @@ model Buck_R134aR450aR1234yfR1234zee_VarDisVol_Scroll
     final b={0.0753,0.2183,0.0015,0.0972});
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 23, 2017, by Mirko Engelpracht:<br/>
+  <li>October 23, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -17,7 +17,7 @@ model Buck_R134aR450aR1234yfR1234zee_VarDisVol_Scroll
 </html>", info="<html>
 <p>
   This model contains a calculation procedure for the isentropic
-  efficiency presented by Mendoza-Miranda et al. (2016).<br/>
+  efficiency presented by Mendoza-Miranda et al. (2016).<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

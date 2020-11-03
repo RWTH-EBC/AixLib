@@ -15,7 +15,7 @@ equation
 </p>
 </html>",
 revisions="<html><ul>
-  <li>July 14, 2010, by Wangda Zuo:<br/>
+  <li>July 14, 2010, by Wangda Zuo:<br />
     First implementation.
   </li>
 </ul>

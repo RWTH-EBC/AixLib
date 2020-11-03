@@ -164,29 +164,29 @@ equation
   the pump's design point. Normally, H0 = 0.5 * Hnom.
 </p>
 <ul>
-  <li>2019-09-18 by Alexander Kümpel:<br/>
+  <li>2019-09-18 by Alexander Kümpel:<br />
     Renaming and bug fixes.
   </li>
-  <li>2018-03-01 by Peter Matthes:<br/>
+  <li>2018-03-01 by Peter Matthes:<br />
     Simplified doc string to \"'dp variable' for PumpN\".
   </li>
-  <li>2018-02-05 by Peter Matthes:<br/>
+  <li>2018-02-05 by Peter Matthes:<br />
     Adds pass through for rpm_Act signal. Some controllers need the
     current speed signal for anti-windup.
   </li>
-  <li>2018-01-26 by Peter Matthes:<br/>
+  <li>2018-01-26 by Peter Matthes:<br />
     * Changes parameter name n_start into Nstart to be
     compatible/exchangeable with the speed controlled (red pump) and
-    the head controlled pump (blue pump).<br/>
+    the head controlled pump (blue pump).<br />
     * Changes icon to reflect relationship with red pump (speed
     control).
   </li>
-  <li>2018-01-10 by Peter Matthes:<br/>
+  <li>2018-01-10 by Peter Matthes:<br />
     Adds state graph controller parts as taken from the BaseClass. Not
     all controllers need the state graph why we decided to remove it
     from the BaseClass.
   </li>
-  <li>2017-12-05 by Peter Matthes:<br/>
+  <li>2017-12-05 by Peter Matthes:<br />
     Initial implementation.
   </li>
 </ul>

@@ -8,7 +8,7 @@ model Generic_VarRef_VarDisVol_RotaryScroll
     final b={1,1,1,1});
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 23, 2017, by Mirko Engelpracht:<br/>
+  <li>October 23, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -18,7 +18,7 @@ model Generic_VarRef_VarDisVol_RotaryScroll
   This model contains a calculation procedure for the isentropic
   efficiency presented by Engelpracht (2017). However, this approach is
   just fitted to various experimental data obtained by a literature
-  review and, therefore, to use with caution.<br/>
+  review and, therefore, to use with caution.<br />
 </p>
 <table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

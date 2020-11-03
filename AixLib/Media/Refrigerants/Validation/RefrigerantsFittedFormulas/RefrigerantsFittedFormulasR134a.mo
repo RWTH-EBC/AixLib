@@ -321,7 +321,7 @@ equation
   medium package).
 </p>
 <ul>
-  <li>August 13, 2017, by Mirko Engelpracht:<br/>
+  <li>August 13, 2017, by Mirko Engelpracht:<br />
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>

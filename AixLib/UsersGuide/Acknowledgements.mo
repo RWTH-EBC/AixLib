@@ -66,7 +66,7 @@ class Acknowledgements "Acknowledgements"
   </li>
 </ul>
 <p>
-  <br/>
+  <br />
   Parts of AixLib have been developed within public projects and with
   financial support by BMWi (German Federal Ministry for Economic
   Affairs and Energy).

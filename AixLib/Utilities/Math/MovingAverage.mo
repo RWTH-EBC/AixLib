@@ -26,7 +26,7 @@ equation
           textString="%name")}),
     Documentation(revisions="<html><ul>
   <li>
-    <i>02.06.2014</i> , by Kristian Huchtemann:<br/>
+    <i>02.06.2014</i> , by Kristian Huchtemann:<br />
     implemented
   </li>
 </ul>

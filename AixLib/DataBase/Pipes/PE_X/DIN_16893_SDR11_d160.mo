@@ -42,7 +42,7 @@ record DIN_16893_SDR11_d160 "PE-X Pipe, d_o=160mm, SDR11"
 </html>",
       revisions="<html><ul>
   <li>
-    <i>July 16, 2020;</i> by Phillip Stoffel <br/>
+    <i>July 16, 2020;</i> by Phillip Stoffel<br />
     Implemented.
   </li>
 </ul>
