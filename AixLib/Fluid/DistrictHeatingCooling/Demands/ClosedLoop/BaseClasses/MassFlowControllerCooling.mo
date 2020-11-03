@@ -109,18 +109,6 @@ model MassFlowControllerCooling
         origin={154,100})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=10, uMin=0.01)
     annotation (Placement(transformation(extent={{350,-98},{370,-78}})));
-    Modelica.Blocks.Interfaces.RealInput T_HP_in "Heat Demand Building"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=0,
-        origin={-122,-480}), iconTransformation(extent={{-21,-21},{21,21}},
-          origin={-117,-321})));
-    Modelica.Blocks.Interfaces.RealInput T_HP_in1 "Heat Demand Building"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=0,
-        origin={-122,-480}), iconTransformation(extent={{-21,-21},{21,21}},
-          origin={-117,-321})));
   Modelica.Blocks.Continuous.CriticalDamping criticalDamping(f=1/60)
     annotation (Placement(transformation(extent={{-78,-92},{-58,-72}})));
   Modelica.Blocks.Math.Max max

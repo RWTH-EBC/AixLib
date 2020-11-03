@@ -36,9 +36,8 @@ model SubstationStorageHeating
     VTan=VTan,
     nSeg=nSeg,
     T_start=T_min,
-    tau=1,
-    dIns=0.2)            annotation (Placement(transformation(extent={{40,-32},{
-            108,36}})));
+    dIns=0.2)            annotation (Placement(transformation(extent={{42,-34},
+            {110,34}})));
 
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo_coldside(redeclare package Medium =
         Medium, allowFlowReversal=true)
@@ -125,27 +124,27 @@ equation
     annotation (Line(points={{300,0},{284,0},{284,0},{266,0}},
                                                color={0,127,255}));
   connect(TTop.port, tan.heaPorVol[1])
-    annotation (Line(points={{70,316},{70,2},{74,2}},   color={191,0,0}));
+    annotation (Line(points={{70,316},{70,0},{76,0}},   color={191,0,0}));
   connect(TMidTop.port, tan.heaPorVol[2])
-    annotation (Line(points={{74,270},{74,2}},          color={191,0,0}));
+    annotation (Line(points={{74,270},{74,0},{76,0}},   color={191,0,0}));
   connect(TMid.port, tan.heaPorVol[3])
-    annotation (Line(points={{68,208},{68,2},{74,2}},   color={191,0,0}));
+    annotation (Line(points={{68,208},{68,0},{76,0}},   color={191,0,0}));
   connect(TMidBot.port, tan.heaPorVol[4]) annotation (Line(points={{72,132},{86,
-          132},{86,2},{74,2}}, color={191,0,0}));
+          132},{86,0},{76,0}}, color={191,0,0}));
   connect(TBot.port, tan.heaPorVol[5]) annotation (Line(points={{70,82},{64,82},
-          {64,78},{74,78},{74,2}}, color={191,0,0}));
+          {64,78},{76,78},{76,0}}, color={191,0,0}));
   connect(senMasFlo_heatside.port_a, port_a)
     annotation (Line(points={{-288,0},{-340,0}}, color={0,127,255}));
   connect(senMasFlo_coldside.port_a, tan.port_b) annotation (Line(points={{246,0},
-          {178,0},{178,2},{108,2}}, color={0,127,255}));
+          {110,0}},                 color={0,127,255}));
   connect(sum2.y, gain.u)
     annotation (Line(points={{-86.6,400},{-58,400}}, color={0,0,127}));
   connect(deltaTSet10.y, max_deltaT_HE.u2) annotation (Line(points={{141,478},{
           198.5,478},{198.5,496},{198,496}}, color={0,0,127}));
   connect(deltaTSet11.y, SOC_Wh) annotation (Line(points={{233,160},{280,160},{
           280,109},{325,109}}, color={0,0,127}));
-  connect(senMasFlo_heatside.port_b, tan.port_a) annotation (Line(points={{-268,
-          0},{-114,0},{-114,2},{40,2}}, color={0,127,255}));
+  connect(senMasFlo_heatside.port_b, tan.port_a) annotation (Line(points={{-268,0},
+          {42,0}},                      color={0,127,255}));
   connect(gain.y, T_storage_average) annotation (Line(points={{-35,400},{136,
           400},{136,390},{322,390}}, color={0,0,127}));
   connect(gain1.u, add3.y)
@@ -174,12 +173,12 @@ equation
           {38,400},{136,400},{136,390},{322,390}}, color={0,0,127}));
   connect(max_deltaT_HE.y, Q_max_dis) annotation (Line(points={{221,502},{262,
           502},{262,504},{314,504}}, color={0,0,127}));
-  connect(tan.heaPorSid, fixedTemperature.port) annotation (Line(points={{93.04,
-          2},{114,2},{114,-111},{134,-111}}, color={191,0,0}));
-  connect(tan.heaPorBot, fixedTemperature.port) annotation (Line(points={{80.8,
-          -23.16},{80.8,-66.58},{134,-66.58},{134,-111}}, color={191,0,0}));
-  connect(tan.heaPorTop, fixedTemperature.port) annotation (Line(points={{80.8,
-          27.16},{80.8,-41.42},{134,-41.42},{134,-111}}, color={191,0,0}));
+  connect(tan.heaPorSid, fixedTemperature.port) annotation (Line(points={{95.04,0},
+          {114,0},{114,-111},{134,-111}},    color={191,0,0}));
+  connect(tan.heaPorBot, fixedTemperature.port) annotation (Line(points={{82.8,
+          -25.16},{82.8,-66.58},{134,-66.58},{134,-111}}, color={191,0,0}));
+  connect(tan.heaPorTop, fixedTemperature.port) annotation (Line(points={{82.8,
+          25.16},{82.8,-41.42},{134,-41.42},{134,-111}}, color={191,0,0}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-340,-160},
             {300,580}}),         graphics={ Text(
             extent={{-150,76},{-24,58}},

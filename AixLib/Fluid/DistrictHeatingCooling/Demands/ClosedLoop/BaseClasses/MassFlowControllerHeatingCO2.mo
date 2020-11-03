@@ -80,12 +80,6 @@ model MassFlowControllerHeatingCO2
     annotation (Placement(transformation(extent={{424,-134},{444,-114}})));
     Modelica.Blocks.MathBoolean.Not not1
     annotation (Placement(transformation(extent={{350,42},{358,50}})));
-    Modelica.Blocks.Interfaces.RealInput T_HP_in "Heat pump flow temperature"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=0,
-        origin={-122,-480}), iconTransformation(extent={{-21,-21},{21,21}},
-          origin={-117,-321})));
     Modelica.Blocks.Interfaces.RealInput m_flow_heatExchanger
     "Mass flow rate through heat exchanger" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
