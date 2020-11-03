@@ -102,9 +102,11 @@ class HTML_Tidy(object):
 				document_corr, errors = HTML_Tidy.htmlCorrection(self, htmlStr)
 				docCorrStr = HTML_Tidy.number_print_List(
 					self, document_corr.split('\n'), sep='\n')
+				#print(errors)
 				
 				ErrWhite = "Warning: The summary attribute on the <table> element is obsolete in HTML5"
-				if len(errors) > 0 and errors.find(ErrWhite) == 0:
+				#print(errors.find(ErrWhite))
+				if len(errors) > 0 and errors.find(ErrWhite) == -1:
 					print('\n' + "----" + moFulNam + "----")
 					print("\n-------- HTML Code --------")
 					print(f"\n{HTML_Tidy.number_print_List(self, htmlList)}")
