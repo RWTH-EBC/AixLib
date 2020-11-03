@@ -1651,8 +1651,6 @@ IBPSA.Fluid.Storage.Validation.StratifiedNonUniformInitial.mo
 
 IBPSA.Media.Air.mo
 
-IBPSA.Media.Steam.mo
-
 IBPSA.Media.Water.mo
 
 IBPSA.Media.Antifreeze.PropyleneGlycolWater.mo
@@ -1676,14 +1674,6 @@ IBPSA.Media.Examples.PropyleneGlycolWaterDerivativeCheck.mo
 IBPSA.Media.Examples.PropyleneGlycolWaterProperties.mo
 
 IBPSA.Media.Examples.PropyleneGlycolWaterTemperatureEnthalpyInversion.mo
-
-IBPSA.Media.Examples.SteamDerivativeCheck.mo
-
-IBPSA.Media.Examples.SteamProperties.mo
-
-IBPSA.Media.Examples.SteamSaturatedProperties.mo
-
-IBPSA.Media.Examples.SteamTemperatureEnthalpyInversion.mo
 
 IBPSA.Media.Examples.WaterDerivativeCheck.mo
 
