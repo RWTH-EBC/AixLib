@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.OFD;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow2IwL1IwS1Gr1Uf1
   "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
 
@@ -497,8 +497,8 @@ equation
           -35.8}},                                                                                                                                   color={191,0,0}));
   connect(outside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-56,10},{-40,10},{-40,-40},{-18.7,-40},
           {-18.7,-35.8}},                                                                                                                                       color={191,0,0}));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation (Line(points={
-          {-20,100},{-20,70},{-80,70},{-80,-40.4},{-69,-40.4}}, color={0,0,127}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points
+        ={{-20,100},{-20,70},{-80,70},{-80,-40.4},{-69,-40.4}}, color={0,0,127}));
   connect(thermOutside, NaturalVentilation.port_a) annotation (Line(points={{-90,
           90},{-80,90},{-80,-34},{-70,-34}}, color={191,0,0}));
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-50,
@@ -627,21 +627,96 @@ equation
           textString="D1"),
         Line(points={{-60,46},{-30,46}}, color={255,255,255}),
         Line(points={{-46,60},{-46,30}}, color={255,255,255})}), Documentation(
-        revisions="<html>
- <ul>
- <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Grount temperature depends on TRY</li>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 7, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for a room with 2&nbsp;outer&nbsp;walls,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;load,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;ground,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;upper&nbsp;floor.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/2OW_1IWl_1IWs_1Gr_Pa.png\"
-    alt=\"Room layout\"/></p>
-<p><b><span style=\"color: #008000;\">Ground temperature</span></b> </p>
-<p>The ground temperature can be coupled to any desired prescriped temperature. Anyway, suitable ground temperatures depending on locations in Germany are listed as &Theta;'_m,e in the comprehensive table 1 in &quot;Beiblatt 1&quot; in the norm DIN EN 12831.</p>
-<p>Or a ground temperature can be chosen according to a TRY region, which is listed below: if ...</p><p>TRY_Region == 1 then 282.15 K</p><p>TRY_Region == 2 then 281.55 K</p><p>TRY_Region == 3 then 281.65 K</p><p>TRY_Region == 4 then 282.65 K</p><p>TRY_Region == 5 then 281.25 K</p><p>TRY_Region == 6 then 279.95 K</p><p>TRY_Region == 7 then 281.95 K</p><p>TRY_Region == 8 then 279.95 K</p><p>TRY_Region == 9 then 281.05 K</p><p>TRY_Region == 10 then 276.15 K</p><p>TRY_Region == 11 then 279.45 K</p><p>TRY_Region == 12 then 283.35 K</p><p>TRY_Region == 13 then 281.05 K</p><p>TRY_Region == 14 then 281.05 K</p><p>TRY_Region == 15 then 279.95 K </p>
+        revisions="<html><ul>
+  <li>
+    <i>Mai 7, 2015</i> by Ana Constantin:<br/>
+    Grount temperature depends on TRY
+  </li>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 7, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for a room with
+  2&#160;outer&#160;walls,&#160;1&#160;inner&#160;wall&#160;load,&#160;1&#160;inner&#160;wall&#160;simple,&#160;1&#160;floor&#160;towards&#160;ground,&#160;1&#160;ceiling&#160;towards&#160;upper&#160;floor.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/2OW_1IWl_1IWs_1Gr_Pa.png\"
+  alt=\"Room layout\">
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Ground temperature</span></b>
+</p>
+<p>
+  The ground temperature can be coupled to any desired prescriped
+  temperature. Anyway, suitable ground temperatures depending on
+  locations in Germany are listed as Θ'_m,e in the comprehensive table
+  1 in \"Beiblatt 1\" in the norm DIN EN 12831.
+</p>
+<p>
+  Or a ground temperature can be chosen according to a TRY region,
+  which is listed below: if ...
+</p>
+<p>
+  TRY_Region == 1 then 282.15 K
+</p>
+<p>
+  TRY_Region == 2 then 281.55 K
+</p>
+<p>
+  TRY_Region == 3 then 281.65 K
+</p>
+<p>
+  TRY_Region == 4 then 282.65 K
+</p>
+<p>
+  TRY_Region == 5 then 281.25 K
+</p>
+<p>
+  TRY_Region == 6 then 279.95 K
+</p>
+<p>
+  TRY_Region == 7 then 281.95 K
+</p>
+<p>
+  TRY_Region == 8 then 279.95 K
+</p>
+<p>
+  TRY_Region == 9 then 281.05 K
+</p>
+<p>
+  TRY_Region == 10 then 276.15 K
+</p>
+<p>
+  TRY_Region == 11 then 279.45 K
+</p>
+<p>
+  TRY_Region == 12 then 283.35 K
+</p>
+<p>
+  TRY_Region == 13 then 281.05 K
+</p>
+<p>
+  TRY_Region == 14 then 281.05 K
+</p>
+<p>
+  TRY_Region == 15 then 279.95 K
+</p>
 </html>"));
 end Ow2IwL1IwS1Gr1Uf1;

@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model WholeHouseBuildingEnvelope
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
@@ -233,7 +233,7 @@ equation
     annotation (Line(points={{24.4,-39.4},{36,-39.4},{36,-38}}, color={191,0,0}));
   connect(upperFloor_Building.thermCorridor, varAirExchange.port_a) annotation (
      Line(points={{22.3,-24.6},{36,-24.6},{36,-26}}, color={191,0,0}));
-  connect(AirExchangeCorridor_Source.y, varAirExchange.InPort1) annotation (
+  connect(AirExchangeCorridor_Source.y, varAirExchange.ventRate) annotation (
       Line(points={{26.2,-32},{28,-32},{28,-24},{32.16,-24},{32.16,-26.6}},
         color={0,0,127}));
   connect(groundFloor_Building.AirExchangePort[1:4], AirExchangePort[1:4])
@@ -289,20 +289,88 @@ equation
         points={{90,-90},{60,-90},{60,62.4},{22.3,62.4}}, color={255,128,0}));
   annotation (Icon(graphics={Bitmap(extent={{-78,74},{72,-68}}, fileName=
               "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}),
-      Documentation(info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the envelope of the whole one family dwelling.</p>
-<p><b><span style=\"color: #008000;\">Ground temperature</span></b> </p>
-<p>The ground temperature can be coupled to any desired prescriped temperature. Anyway, suitable ground temperatures depending on locations in Germany are listed as &Theta;'_m,e in the comprehensive table 1 in &quot;Beiblatt 1&quot; in the norm DIN EN 12831.</p>
-<p>Or a ground temperature can be chosen according to a TRY region, which is listed below: if ...</p><p>TRY_Region == 1 then 282.15 K</p><p>TRY_Region == 2 then 281.55 K</p><p>TRY_Region == 3 then 281.65 K</p><p>TRY_Region == 4 then 282.65 K</p><p>TRY_Region == 5 then 281.25 K</p><p>TRY_Region == 6 then 279.95 K</p><p>TRY_Region == 7 then 281.95 K</p><p>TRY_Region == 8 then 279.95 K</p><p>TRY_Region == 9 then 281.05 K</p><p>TRY_Region == 10 then 276.15 K</p><p>TRY_Region == 11 then 279.45 K</p><p>TRY_Region == 12 then 283.35 K</p><p>TRY_Region == 13 then 281.05 K</p><p>TRY_Region == 14 then 281.05 K</p><p>TRY_Region == 15 then 279.95 K </p>
-</html>",  revisions="<html>
-
- <ul>
- <li><i>August 1, 2017</i> by Philipp Mehrfeld:<br/>Add heat-star-combi to connect heaters in a more clever way</li>
- <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Corrected connection of gabled vertical walls with solar radiation (E and W)</li>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
-
- </html>"));
+      Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the envelope of the whole one family dwelling.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Ground temperature</span></b>
+</p>
+<p>
+  The ground temperature can be coupled to any desired prescriped
+  temperature. Anyway, suitable ground temperatures depending on
+  locations in Germany are listed as Θ'_m,e in the comprehensive table
+  1 in \"Beiblatt 1\" in the norm DIN EN 12831.
+</p>
+<p>
+  Or a ground temperature can be chosen according to a TRY region,
+  which is listed below: if ...
+</p>
+<p>
+  TRY_Region == 1 then 282.15 K
+</p>
+<p>
+  TRY_Region == 2 then 281.55 K
+</p>
+<p>
+  TRY_Region == 3 then 281.65 K
+</p>
+<p>
+  TRY_Region == 4 then 282.65 K
+</p>
+<p>
+  TRY_Region == 5 then 281.25 K
+</p>
+<p>
+  TRY_Region == 6 then 279.95 K
+</p>
+<p>
+  TRY_Region == 7 then 281.95 K
+</p>
+<p>
+  TRY_Region == 8 then 279.95 K
+</p>
+<p>
+  TRY_Region == 9 then 281.05 K
+</p>
+<p>
+  TRY_Region == 10 then 276.15 K
+</p>
+<p>
+  TRY_Region == 11 then 279.45 K
+</p>
+<p>
+  TRY_Region == 12 then 283.35 K
+</p>
+<p>
+  TRY_Region == 13 then 281.05 K
+</p>
+<p>
+  TRY_Region == 14 then 281.05 K
+</p>
+<p>
+  TRY_Region == 15 then 279.95 K
+</p>
+<ul>
+  <li>
+    <i>August 1, 2017</i> by Philipp Mehrfeld:<br/>
+    Add heat-star-combi to connect heaters in a more clever way
+  </li>
+  <li>
+    <i>Mai 7, 2015</i> by Ana Constantin:<br/>
+    Corrected connection of gabled vertical walls with solar radiation
+    (E and W)
+  </li>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 10, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>"));
 end WholeHouseBuildingEnvelope;

@@ -486,8 +486,8 @@ equation
           {-31.3,-19.8}},                                                                                                                                    color={191,0,0}));
   connect(roof1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-41,54},{-41,40},{60,40},{60,-28},{-31.3,
           -28},{-31.3,-19.8}},                                                                                                                                 color={191,0,0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation (Line(points=
-          {{-63,19.6},{-80,19.6},{-80,17},{-100,17}}, color={0,0,127}));
+  connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points
+        ={{-63,19.6},{-80,19.6},{-80,17},{-100,17}}, color={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{-64,
           26},{-80,26},{-80,90},{-90,90}}, color={191,0,0}));
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-44,
@@ -580,18 +580,42 @@ equation
           textString="wRO2"),
         Line(points={{-44,-20},{-44,-24}}, color={0,0,0}),
         Line(points={{76,-20},{76,-24}}, color={0,0,0})}), Documentation(
-        revisions="<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for an attic&nbsp;with&nbsp;2&nbsp;saddle&nbsp;roofs&nbsp;and&nbsp;a&nbsp;floor&nbsp;toward&nbsp;5&nbsp;rooms&nbsp;on&nbsp;the&nbsp;lower&nbsp;floor,&nbsp;with&nbsp;all&nbsp;other&nbsp;walls&nbsp;towards&nbsp;the&nbsp;outside.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/Attic_2Ro_5Rooms.png\"
-    alt=\"Room layout\"/></p>
- <p>We also tested a model where the attic has just one floor, over the whole building and each room connects to this component through the ceiling. However the model didn&apos;t lead to the expected lower simulation times, on the contrary. This model is also more correct, as it is not realistic to think that every layer of the attic&apos;s floor has a single temperature.</p>
- </html>"));
+        revisions="<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 8, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for an
+  attic&#160;with&#160;2&#160;saddle&#160;roofs&#160;and&#160;a&#160;floor&#160;toward&#160;5&#160;rooms&#160;on&#160;the&#160;lower&#160;floor,&#160;with&#160;all&#160;other&#160;walls&#160;towards&#160;the&#160;outside.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/Attic_2Ro_5Rooms.png\"
+  alt=\"Room layout\">
+</p>
+<p>
+  We also tested a model where the attic has just one floor, over the
+  whole building and each room connects to this component through the
+  ceiling. However the model didn't lead to the expected lower
+  simulation times, on the contrary. This model is also more correct,
+  as it is not realistic to think that every layer of the attic's floor
+  has a single temperature.
+</p>
+</html>"));
 end Attic_Ro2Lf5;

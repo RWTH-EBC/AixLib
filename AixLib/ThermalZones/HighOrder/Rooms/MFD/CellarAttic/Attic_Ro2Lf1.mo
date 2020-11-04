@@ -154,22 +154,37 @@ equation
   connect(roof2.port_outside, thermOutside) annotation(Line(points={{50,68.25},{50,80},{-90,80},{-90,90}},          color = {191, 0, 0}));
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-70, -46}, {-80, -46}, {-80, 90}, {-90, 90}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-50, -46}, {-28, -46}, {-28, -28}, {-10, -28}, {-10, -12}, {1, -12}}, color = {191, 0, 0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-69, -52.4}, {-80, -52.4}, {-80, 25}, {-100, 25}}, color = {0, 0, 127}));
+  connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points
+        ={{-69,-52.4},{-80,-52.4},{-80,25},{-100,25}}, color={0,0,127}));
   annotation(Icon(graphics={  Polygon(points = {{-58, -20}, {16, 54}, {90, -20}, {76, -20}, {16, 40}, {-44, -20}, {-58, -20}}, lineColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid, fillColor = {175, 175, 175}), Polygon(points = {{-24, 0}, {6, 30}, {-8, 30}, {-38, 0}, {-24, 0}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow1), Text(extent = {{-36, 10}, {12, 22}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Win1", visible = withWindow1), Polygon(points = {{26, 30}, {56, 0}, {70, 0}, {40, 30}, {26, 30}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow2), Text(extent = {{22, 10}, {70, 22}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Win2", visible = withWindow2), Text(extent = {{-44, -14}, {74, -26}}, lineColor = {0, 0, 0}, fillColor = {255, 170, 170},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "width"), Line(points = {{-44, -20}, {-44, -24}}, color = {0, 0, 0}), Line(points = {{-44, -20}, {-20, -20}}, color = {0, 0, 0}), Line(points = {{48, -20}, {76, -20}}, color = {0, 0, 0}), Line(points = {{76, -20}, {76, -24}}, color = {0, 0, 0}), Line(points = {{-37, -37}, {37, 37}}, color = {0, 0, 0}, origin = {57, 21}, rotation = 90), Line(points = {{3, -3}, {-3, 3}}, color = {0, 0, 0}, origin = {93, -17}, rotation = 90), Text(extent = {{-28, 5}, {28, -5}}, lineColor = {0, 0, 0}, origin = {44, 47}, textString = "wRO2"), Line(points = {{3, -3}, {-3, 3}}, color = {0, 0, 0}, origin = {19, 57}, rotation = 90), Line(points = {{16, 54}, {10, 60}}, color = {0, 0, 0}), Line(points = {{-62, -16}, {12, 58}}, color = {0, 0, 0}), Text(extent = {{-40, 52}, {16, 42}}, lineColor = {0, 0, 0}, textString = "wRO1"), Line(points = {{-58, -20}, {-64, -14}}, color = {0, 0, 0})}), Documentation(revisions = "<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>August 17, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for an attic for the whole building.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The model can extended, if one wants to consider each of the ceilings belongig to the lower rooms individually.</p>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "width"), Line(points = {{-44, -20}, {-44, -24}}, color = {0, 0, 0}), Line(points = {{-44, -20}, {-20, -20}}, color = {0, 0, 0}), Line(points = {{48, -20}, {76, -20}}, color = {0, 0, 0}), Line(points = {{76, -20}, {76, -24}}, color = {0, 0, 0}), Line(points = {{-37, -37}, {37, 37}}, color = {0, 0, 0}, origin = {57, 21}, rotation = 90), Line(points = {{3, -3}, {-3, 3}}, color = {0, 0, 0}, origin = {93, -17}, rotation = 90), Text(extent = {{-28, 5}, {28, -5}}, lineColor = {0, 0, 0}, origin = {44, 47}, textString = "wRO2"), Line(points = {{3, -3}, {-3, 3}}, color = {0, 0, 0}, origin = {19, 57}, rotation = 90), Line(points = {{16, 54}, {10, 60}}, color = {0, 0, 0}), Line(points = {{-62, -16}, {12, 58}}, color = {0, 0, 0}), Text(extent = {{-40, 52}, {16, 42}}, lineColor = {0, 0, 0}, textString = "wRO1"), Line(points = {{-58, -20}, {-64, -14}}, color = {0, 0, 0})}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>August 17, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for an attic for the whole building.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The model can extended, if one wants to consider each of the ceilings
+  belongig to the lower rooms individually.
+</p>
+</html>"));
 end Attic_Ro2Lf1;

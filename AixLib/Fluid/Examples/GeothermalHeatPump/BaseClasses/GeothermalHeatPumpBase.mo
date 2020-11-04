@@ -28,8 +28,7 @@ partial model GeothermalHeatPumpBase
     annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
 
     replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
-      redeclare package Medium = Medium)                                       constrainedby
-    AixLib.Fluid.Interfaces.PartialTwoPort
+      redeclare package Medium = Medium)                                       constrainedby AixLib.Fluid.Interfaces.PartialTwoPort
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
 
   Storage.Storage coldStorage(
@@ -294,16 +293,16 @@ equation
       derivatives=false,
       inputs=false,
       auxiliaries=false),
-    Documentation(info="<html>
-<p>Base class of an example demonstrating the use of a heat pump connected to
-two storages and a geothermal source. A replaceable model is connected in the
-flow line of the heating circuit. A peak load device can be added here. </p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  Base class of an example demonstrating the use of a heat pump
+  connected to two storages and a geothermal source. A replaceable
+  model is connected in the flow line of the heating circuit. A peak
+  load device can be added here.
+</p>
 <ul>
-<li>
-May 19, 2017, by Marc Baranski:<br/>
-First implementation.
-</li>
+  <li>May 19, 2017, by Marc Baranski:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end GeothermalHeatPumpBase;

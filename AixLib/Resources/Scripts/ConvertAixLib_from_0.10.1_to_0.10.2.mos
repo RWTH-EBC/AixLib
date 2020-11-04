@@ -1,0 +1,5 @@
+clear
+
+convertClear();
+
+convertClass("AixLib.FastHVAC.Components.Storage.HeatStorage", "AixLib.Obsolete.Year2020.FastHVAC.Storage.HeatStorage");

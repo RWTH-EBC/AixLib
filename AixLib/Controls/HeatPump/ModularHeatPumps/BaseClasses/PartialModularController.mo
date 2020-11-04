@@ -203,43 +203,43 @@ partial model PartialModularController
           textString="%name")}),
         Diagram(
           coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-
-  October 17, 2017, by Mirko Engelpracht:<br/>
-
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+    Documentation(revisions="<html><ul>
+  <li>October 17, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a base model used by all modular controller models. It defines basic 
-inputs, outputs, parameters and sub-models.
-The main inputs and outputs are the modular heat pump control bus 
-<a href=\"modelica://AixLib.Controls.Interfaces.ModularHeatPumpControlBus\">
-AixLib.Controls.Interfaces.ModularHeatPumpControlBus</a>, the manipulated
-signals passed to the controlled components and the current manipulated 
-signals. The main sub-model is a PID controller presented in 
-<a href=\"modelica://AixLib.Controls.Continuous.LimPID\">
-AixLib.Controls.Continuous.LimPID</a> that is initialised if no external
-controller is used. Furthermore, all parameters with respect to the PID
-controller are propagated because the modular controller shall be used
-in an architectural modeling approach.
+  This is a base model used by all modular controller models. It
+  defines basic inputs, outputs, parameters and sub-models. The main
+  inputs and outputs are the modular heat pump control bus <a href=
+  \"modelica://AixLib.Controls.Interfaces.ModularHeatPumpControlBus\">AixLib.Controls.Interfaces.ModularHeatPumpControlBus</a>,
+  the manipulated signals passed to the controlled components and the
+  current manipulated signals. The main sub-model is a PID controller
+  presented in <a href=
+  \"modelica://AixLib.Controls.Continuous.LimPID\">AixLib.Controls.Continuous.LimPID</a>
+  that is initialised if no external controller is used. Furthermore,
+  all parameters with respect to the PID controller are propagated
+  because the modular controller shall be used in an architectural
+  modeling approach.
 </p>
-<h4>Equations needed for completion</h4>
+<h4>
+  Equations needed for completion
+</h4>
 <p>
-For completion of a modular controller extending from this base class, 
-it is necessary to provide an internal control strategy. This strategy
-may differ from component to component. Therefore, the User must define
-two things:
+  For completion of a modular controller extending from this base
+  class, it is necessary to provide an internal control strategy. This
+  strategy may differ from component to component. Therefore, the User
+  must define two things:
 </p>
 <ul>
-<li>Connect <code>useExtBlo</code> with the appropriate data bus 
-connector if required.</li>
-<li>Connect <code>setVal</code> with internal or external manipulated 
-signal depending on <code>useExtBlo</code>.</li>
+  <li>Connect <code>useExtBlo</code> with the appropriate data bus
+  connector if required.
+  </li>
+  <li>Connect <code>setVal</code> with internal or external manipulated
+  signal depending on <code>useExtBlo</code>.
+  </li>
 </ul>
 </html>"));
 end PartialModularController;

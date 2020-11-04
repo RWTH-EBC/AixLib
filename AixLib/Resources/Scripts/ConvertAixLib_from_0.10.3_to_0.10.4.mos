@@ -1,0 +1,16 @@
+clear
+
+convertClear();
+
+convertElement(
+    "AixLib.BoundaryConditions.GroundTemperature.GroundTemperatureKusuda",
+    "port_a",
+    "port");
+convertElement(
+    "AixLib.BoundaryConditions.GroundTemperature.Examples.ExampleAachen",
+    "groundTemperatureAachen.port_a",
+    "groundTemperatureAachen.port");
+convertElement(
+    "AixLib.BoundaryConditions.GroundTemperature.Examples.ExampleSanFran",
+    "groundTemperatureKusuda.port_a",
+    "groundTemperatureKusuda.port");

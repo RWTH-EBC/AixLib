@@ -8,17 +8,15 @@ model SimpleExternalShading
   Modelica.Blocks.Logical.Switch switchShading[nOrientations]
     "Switches external shading."
     annotation (Placement(transformation(extent={{-12,-8},{8,12}})));
-  Modelica.Blocks.Logical.Greater greater[nOrientations]
+  Modelica.Blocks.Logical.GreaterThreshold greaterShadingThreshold[
+    nOrientations](final threshold=maxIrrs)
     "If irradiation is greater then threshold (u2) shading is applied."
-    annotation (Placement(transformation(extent={{-48,-8},{-28,12}})));
-  Modelica.Blocks.Sources.Constant thresholdShading[nOrientations](k=maxIrrs)
-    "Irradiation threshold at that shading is applied."
-    annotation (Placement(transformation(extent={{-86,-26},{-74,-14}})));
+    annotation (Placement(transformation(extent={{-60,-8},{-40,12}})));
   Modelica.Blocks.Sources.Constant noShading[nOrientations](each k=1)
-    "Constant zero for that no shading is applied."
-    annotation (Placement(transformation(extent={{-40,-28},{-28,-16}})));
+    "Constant 1 for that no shading is applied. (Blinds fully opened)"
+    annotation (Placement(transformation(extent={{-40,-32},{-28,-20}})));
   Modelica.Blocks.Sources.Constant gValueShading[nOrientations](k=gValues)
-    "Factor to that the solar irradiation of the window is reduced by external shading (0 means no shading - 1 means no solar gains)."
+    "Factor to that the solar irradiation of the window is reduced by external shading (1 means no shading - 0 means no solar gains)."
     annotation (Placement(transformation(extent={{-40,24},{-28,36}})));
   Modelica.Blocks.Math.Product product[nOrientations]
     annotation (Placement(transformation(extent={{34,-2},{54,18}})));
@@ -41,28 +39,23 @@ model SimpleExternalShading
     "Constant zero for that no shading is applied."
     annotation (Placement(transformation(extent={{30,-22},{42,-10}})));
 equation
-  connect(greater.y, switchShading.u2)
-    annotation (Line(points={{-27,2},{-14,2}}, color={255,0,255}));
-  connect(thresholdShading.y, greater.u2) annotation (Line(points={{-73.4,-20},{-64,
-          -20},{-64,-6},{-50,-6}}, color={0,0,127}));
-  connect(noShading.y, switchShading.u3) annotation (Line(points={{-27.4,-22},{-22,
-          -22},{-22,-6},{-14,-6}}, color={0,0,127}));
+  connect(greaterShadingThreshold.y, switchShading.u2)
+    annotation (Line(points={{-39,2},{-14,2}}, color={255,0,255}));
+  connect(noShading.y, switchShading.u3) annotation (Line(points={{-27.4,-26},{
+          -22,-26},{-22,-6},{-14,-6}},
+                                   color={0,0,127}));
   connect(gValueShading.y, switchShading.u1) annotation (Line(points={{-27.4,30},
           {-22,30},{-22,10},{-14,10}}, color={0,0,127}));
   connect(switchShading.y, product.u2)
     annotation (Line(points={{9,2},{32,2}}, color={0,0,127}));
   connect(product.y, corrIrr)
     annotation (Line(points={{55,8},{98,8}}, color={0,0,127}));
-  connect(greater.u1, solRadTot)
-    annotation (Line(points={{-50,2},{-102,2}}, color={0,0,127}));
   connect(product.u1, solRadWin) annotation (Line(points={{32,14},{28,14},{28,16},{20,16},
           {20,64},{-104,64}}, color={0,0,127}));
-  connect(noShading1.y, add.u1) annotation (Line(points={{42.6,-16},{50,-16},{50,
-          -38},{60,-38}}, color={0,0,127}));
-  connect(switchShading.y, add.u2) annotation (Line(points={{9,2},{32,2},{32,-50},
-          {60,-50}}, color={0,0,127}));
-  connect(add.y, shadingFactor) annotation (Line(points={{83,-44},{90,-44},{90,-80},
-          {102,-80}}, color={0,0,127}));
+  connect(switchShading.y, shadingFactor) annotation (Line(points={{9,2},{20,2},
+          {20,-80},{102,-80}},                   color={0,0,127}));
+  connect(solRadTot, greaterShadingThreshold.u)
+    annotation (Line(points={{-102,2},{-62,2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end SimpleExternalShading;

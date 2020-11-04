@@ -39,41 +39,105 @@ equation
   connect(TempOutsideDaycurve.port, infiltrationRate_DIN12831.port_a) annotation(Line(points = {{-70, 50}, {-50, 50}, {-50, 22}, {-12, 22}}, color = {191, 0, 0}));
   connect(TempInside.port, infiltrationRate_DIN12831.port_b) annotation(Line(points = {{70, 50}, {40, 50}, {40, 22}, {8, 22}}, color = {191, 0, 0}));
   connect(sine.y, TempOutsideDaycurve.T) annotation(Line(points = {{-86.6, 26}, {-92, 26}, {-92, 50}}, color = {0, 0, 127}));
-  connect(sine1.y, varAirExchange.InPort1) annotation(Line(points = {{-23.5, 37}, {-17.75, 37}, {-17.75, 41.6}, {-11, 41.6}}, color = {0, 0, 127}));
+  connect(sine1.y, varAirExchange.ventRate) annotation (Line(points={{-23.5,37},
+          {-17.75,37},{-17.75,41.6},{-11,41.6}}, color={0,0,127}));
   connect(TempOutsideDaycurve.port, dynamicVentilation.port_outside) annotation(Line(points = {{-70, 50}, {-50, 50}, {-50, -5}, {-11.6, -5}}, color = {191, 0, 0}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{12, 90}, {20, 82}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{12, 60}, {20, 52}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{12, 32}, {20, 24}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{12, 6}, {20, -2}}, lineColor = {0, 0, 255}, textString = "4")}), experiment(StopTime = 86400, Interval = 15, Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(revisions = "<html>
- <ul>
-   <li><i>May 14, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented remaining DryAir models, adjusted existing model, documentated</li>
-   <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-   <li><i>October 16, 2011&nbsp;</i>
-          by Ana Constantin:<br/>implemented DynamicVentilation</li>
- </ul>
- </html>", info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>This simulation tests the functionality of the dry air models. Default simulation parameters are provided. </p>
- <h4><font color=\"#008000\">Concept</font></h4>
- <p>The simulation consists of the following models:</p>
- <table summary=\"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
- <td bgcolor=\"#dcdcdc\"><p>index</p></td>
- <td bgcolor=\"#dcdcdc\"><p>model</p></td>
- </tr>
- <tr>
- <td><p>1</p></td>
- <td><p><a href=\"Building.Components.DryAir.Airload\">Airload</a></p></td>
- </tr>
- <tr>
- <td><p>2</p></td>
- <td><p><a href=\"Building.Components.DryAir.VarAirExchange\">VarAirExchange</a></p></td>
- </tr>
- <tr>
- <td><p>3</p></td>
- <td><p><a href=\"Building.Components.DryAir.InfiltrationRate_DIN12831\">InfiltrationRate_DIN12831</a></p></td>
- </tr>
- <tr>
- <td><p>4</p></td>
- <td><p><a href=\"Building.Components.DryAir.DynamicVentilation\">DynamicVentilation</a></p></td>
- </tr>
- </table>
- <p>Outputs can easily be displayed via the provided outputs.</p>
- </html>"));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{12, 90}, {20, 82}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{12, 60}, {20, 52}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{12, 32}, {20, 24}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{12, 6}, {20, -2}}, lineColor = {0, 0, 255}, textString = "4")}), experiment(StopTime = 86400, Interval = 15, Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(revisions = "<html><ul>
+  <li>
+    <i>May 14, 2013&#160;</i> by Ole Odendahl:<br/>
+    Implemented remaining DryAir models, adjusted existing model,
+    documentated
+  </li>
+  <li>
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>October 16, 2011&#160;</i> by Ana Constantin:<br/>
+    implemented DynamicVentilation
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This simulation tests the functionality of the dry air models.
+  Default simulation parameters are provided.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The simulation consists of the following models:
+</p>
+<table summary=\"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+  <tr>
+    <td bgcolor=\"#DCDCDC\">
+      <p>
+        index
+      </p>
+    </td>
+    <td bgcolor=\"#DCDCDC\">
+      <p>
+        model
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        1
+      </p>
+    </td>
+    <td>
+      <p>
+        <a href=\"Building.Components.DryAir.Airload\">Airload</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        2
+      </p>
+    </td>
+    <td>
+      <p>
+        <a href=
+        \"Building.Components.DryAir.VarAirExchange\">VarAirExchange</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        3
+      </p>
+    </td>
+    <td>
+      <p>
+        <a href=
+        \"Building.Components.DryAir.InfiltrationRate_DIN12831\">InfiltrationRate_DIN12831</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        4
+      </p>
+    </td>
+    <td>
+      <p>
+        <a href=
+        \"Building.Components.DryAir.DynamicVentilation\">DynamicVentilation</a>
+      </p>
+    </td>
+  </tr>
+</table>
+<p>
+  Outputs can easily be displayed via the provided outputs.
+</p>
+</html>"));
 end DryAir_test;

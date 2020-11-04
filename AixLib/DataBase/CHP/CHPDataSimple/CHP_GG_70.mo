@@ -8,13 +8,18 @@ record CHP_GG_70 "GG 70 : Sokratherm"
     maxTReturn=343.15,
     DPipe=0.1);
 
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Sokratherm BHKW GG 70 </p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Sokratherm BHKW GG 70
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>August 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Added reference</li>
+        revisions="<html><ul>
+  <li>
+    <i>August 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added reference
+  </li>
 </ul>
 </html>"));
 end CHP_GG_70;

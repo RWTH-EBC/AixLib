@@ -78,8 +78,7 @@ model Case600
     KR_heater=1000,
     l_cooler=-1e6,
     KR_cooler=1000,
-    recOrSep=false,
-    zoneParam=DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())
+    recOrSep=false)
     annotation (Placement(transformation(extent={{6,-34},{26,-14}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow Ground(Q_flow=0)
     "adiabatic boundary"
@@ -256,12 +255,15 @@ equation
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
-    Documentation(revisions="<html>
- <ul>
- <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>",
-         info="<html>
-<p>As described in ASHRAE Standard 140.</p>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>March 9, 2015</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>",
+         info="<html><p>
+  As described in ASHRAE Standard 140.
+</p>
 </html>"));
 end Case600;

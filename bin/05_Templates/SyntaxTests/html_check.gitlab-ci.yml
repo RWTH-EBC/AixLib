@@ -1,0 +1,294 @@
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
+stages:
+    - deleteBranch
+    - build
+    - HTMLCheck
+    - deploy
+    - openMR
+    - post
+
+    
+trigger_branch:
+    stage: build
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-view --log  --align --font
+        
+    after_script:
+        - git config --global user.name "${GITLAB_USER_NAME}" 
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
+        - if cat bin/06_Configfiles/exit.sh | grep "exit 1"; then 
+            echo "Test was not successful!"
+            exit 1;
+          else 
+            exit 0; 
+          fi
+    artifacts:
+        paths:
+            - AixLib/HTML-logfile.txt
+        expire_in: 7 day
+    except:
+        - external_pull_requests 
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
+            
+            
+
+            
+Check_HTML:
+    stage: HTMLCheck
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+        - git config --global user.name "${GITLAB_USER_NAME}" 
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
+        
+    script:
+        - python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-view --log  --align --font
+        - if cat bin/06_Configfiles/exit.sh | grep "exit 1"; then 
+            echo "Second test was not successful!"
+            echo "Read HTML - logfile!"
+            exit 1;
+          else 
+            exit 0; 
+          fi
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/HTML-logfile.txt
+        expire_in: 7 day
+    
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code again/
+
+            
+Merge_Checks:
+    stage: HTMLCheck
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+        - git config --global user.name "${GITLAB_USER_NAME}" 
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
+
+    script:
+        - python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-view --log  --align --font
+        - if cat bin/06_Configfiles/exit.sh | grep "exit 1"; then 
+            echo "HTML Check was not successfully"
+            echo "Read HTML - logfile!"
+            exit 1;
+          else 
+            exit 0; 
+          fi
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/HTML-logfile.txt
+        expire_in: 7 day 
+    
+    only:
+        - external_pull_requests
+            
+            
+#pages:
+#    stage: deploy
+#   
+#    dependencies: 
+#        - trigger_branch
+#    before_script:
+#        - apt-get update -y
+#        - apt-get install zip unzip -y
+#    script:
+        # export
+        # set +e
+        # curl --fail --header "PRIVATE-TOKEN:$GL_TOKEN" $CI_PAGES_URL/content.zip -o content.zip
+        # if [ -e "content.zip" ]; then unzip "content.zip"; rm "content.zip"; fi
+        # set -e
+        # Add/update content
+        # mkdir -p .public/$CI_COMMIT_REF_NAME
+        # cp -r public/* .public
+        # Zip the content and publish the zip again
+        # zip -r "content.zip" "public"
+        # mv "content.zip" "public/"
+#        - mkdir .public
+#        - cp -r public/* .public
+#        - cp -r index.html .public
+#        - mv .public public
+#   artifacts:
+#        paths:
+#            - public
+#    only:
+#        variables:
+#            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
+
+        
+        
+HTML_Check:
+    stage: HTMLCheck
+    services:
+        -  docker
+    before_script:
+        - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - ssh-keyscan github.com >> ~/.ssh/known_hosts
+        - ssh-agent -a /tmp/ssh_agent.sock > /dev/null
+        - echo "${GITHUB_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        - chmod 600 ~/.ssh/id_rsa
+        - git config --global user.name "${GITLAB_USER_NAME}" 
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+
+    script:
+        - python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-view --log  --align --font
+        - if cat bin/06_Configfiles/exit.sh | grep "exit 1"; then 
+            mkdir CorrectedVersion;
+            cd  CorrectedVersion;
+            git clone --single-branch --branch $TARGET_BRANCH git@github.com:${Github_Repository}.git;
+            cd ${CI_PROJECT_NAME};
+            python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-overwrite --align --font --log;
+            git checkout -B $Newbranch;
+            message="Correct HTML Code";
+            git add . ;
+            echo $message;
+            git commit -m "$message" ;
+            git push git@github.com:${Github_Repository}.git;
+            rm bin/06_Configfiles/exit.sh;
+            exit 1;
+          else 
+            exit 0; 
+          fi
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/HTML-logfile.txt
+        expire_in: 7 day 
+    except:
+        - external_pull_requests
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+            
+#mrpost:
+#    stage: post
+#    before_script:
+#        - apt-get update -y
+#        - apt-get install jq -y
+#        - pip install anybadge
+#    script:
+#        - anybadge -l HTML-logfile -v 2.22. -f HTML-logfile.svg 2=red 4=orange 8=yellow 10=green
+#        - newline=$' \n '
+#        - msg1=$'## This is a CI-Post \n '
+#        - msg2="Correct **HTML-Code** on your branch **$CI_COMMIT_REF_NAME**. "
+#        - msg3=" Do a merge request to push  your corrected **HTML code** on branch **$CI_MERGE_REQUEST_TARGET_BRANCH_NAME**   "
+#        - msg4=" To merge your corrected HTML code press the **Resolve WIP status** button and merge your **$CI_COMMIT_REF_NAME** into  **$CI_MERGE_REQUEST_TARGET_BRANCH_NAME**. "
+#        - msg5=" The branch **$CI_COMMIT_REF_NAME** will be deleted. " 
+#        - msg6=" After merge request **pull** your Repository in Github. " 
+#        - msg=$msg1$msg2$newline$msg3$newline$msg4$newline$msg5$newline$msg6
+#        - curl --request GET --header "PRIVATE-TOKEN:$GL_TOKEN" https://git.rwth-aachen.de/api/v4/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes | tee notes.json
+#        - mapfile -t ids < <(jq '.[].id' notes.json)
+#        - mapfile -t bodys < <(jq '.[].body' notes.json)
+#        - len=${#ids[@]}
+#        - for i in $(seq 0 $len); do if [[ ${bodys[i]} == *"This is a CI-Post"* ]]; then id=${ids[i]}; break; fi; done
+#        - if [ -z ${id+x} ]; then curl -d "body=$msg" --request POST --header "PRIVATE-TOKEN:$GL_TOKEN" https://git.rwth-aachen.de/api/v4/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes?body=note; else curl -d "body=$msg" --request PUT --header "PRIVATE-TOKEN:$GL_TOKEN" https://git.rwth-aachen.de/api/v4/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes/$id/?body=note; fi
+#        - curl -d "body=$msg" --request PUT --header "PRIVATE-TOKEN:$GL_TOKEN" https://git.rwth-aachen.de/api/v4/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes/$id/?body=note
+        
+#    only:
+#        - merge_requests
+
+
+#Open_Merge_Request:
+#    stage: openMR
+#    only:
+#        - /^feature\/*/
+#    services:
+#        -  docker
+#    before_script:
+#        - sudo apt-get install jq -y
+#    script:
+#       - Newbranch=${Newbranch#${Praefix_Branch}}
+#       - TARGET_BRANCH=${TARGET_BRANCH#${Praefix_Branch}}
+#       - sudo chmod +x bin/06_Configfiles/autoMergeRequest.sh
+#       - git config --global user.email "${GITLAB_USER_EMAIL}"
+#       - git config --global user.name  "${GITLAB_USER_NAME}" 
+#       - bin/06_Configfiles/autoMergeRequest.sh
+#    only:
+#        variables:
+#            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
+#            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code again/
+            
+
+Open_Pull_Request:
+    stage: openMR
+    only:
+        - /^feature\/*/
+    services:
+        -  docker
+    before_script:
+        - sudo apt-get install jq -y
+        - pip install requests
+        - git config --global user.name "${GITLAB_USER_NAME}" 
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
+  
+    script:
+       - Newbranch=${Newbranch#${Praefix_Branch}}
+       - TARGET_BRANCH=${TARGET_BRANCH#${Praefix_Branch}}
+       - python bin/02_CITests/SyntaxTests/api_github.py --GITHUB-REPOSITORY ${Github_Repository} --Working-Branch ${TARGET_BRANCH} --Correct-Branch ${Newbranch} --GITHUB-TOKEN ${GITHUB_API_TOKEN}
+       # Username=$(python bin/02_CITests/SyntaxTests/api_github.py --GITHUB-REPOSITORY ${Github_Repository} --Working-Branch ${TARGET_BRANCH} --Correct-Branch ${Newbranch} --GITHUB-TOKEN ${GITHUB_API_TOKEN})
+       # GitHub_Username=${Username}
+       # sudo chmod +x bin/06_Configfiles/autoPullRequest.sh
+       # bin/06_Configfiles/autoPullRequest.sh
+      
+    except:
+        - external_pull_requests 
+    
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
+            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code again/
+            
+    
+Delte_merge_Branches:
+    stage: deleteBranch
+    only:
+        - /^feature\/*/
+    services:
+        -  docker
+    before_script:
+        - sudo apt-get install jq -y
+    script:
+       # Newbranch=${Newbranch#${Praefix_Branch}}
+       # TARGET_BRANCH=${TARGET_BRANCH#${Praefix_Branch}}
+       - sudo chmod +x bin/06_Configfiles/delete_merged_branches.sh
+       - git config --global user.email "${GITLAB_USER_EMAIL}"
+       - git config --global user.name  "${GITLAB_USER_NAME}" 
+       - bin/06_Configfiles/delete_merged_branches.sh
+    
+    
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /^Merge pull request/

@@ -22,8 +22,7 @@ model SprayAirWasher_X
   replaceable AixLib.Fluid.Humidifiers.SprayAirWasher_X hum(
     mWatMax_flow=mWat_flow_nominal,
     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
-      constrainedby
-    AixLib.Fluid.HeatExchangers.BaseClasses.PartialPrescribedOutlet(
+      constrainedby AixLib.Fluid.HeatExchangers.BaseClasses.PartialPrescribedOutlet(
         redeclare package Medium = Medium,
         m_flow_nominal=m_flow_nominal,
         dp_nominal=6000,

@@ -41,41 +41,42 @@ expandable connector ModularHeatPumpControlBus
     final nConSen=nCon)
     "Bus that contains all relevant connections for modular sensors";
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 25, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This connector is a base connector used for modular heat pumps and contains 
-typical variables that may be measured in the modular heat pump models. 
-Therefore, this connector contains three further connectors that are 
-presented below:
+  This connector is a base connector used for modular heat pumps and
+  contains typical variables that may be measured in the modular heat
+  pump models. Therefore, this connector contains three further
+  connectors that are presented below:
 </p>
 <ol>
-<li>
-<a href=\"modelica://AixLib.Controls.Interfaces.ModularExpansionValveControlBus\">
-Modular expansion valves bus</a>: This connector contains variables that
-may be needed for modular expansion valves.
-</li>
-<li>
-<a href=\"modelica://AixLib.Controls.Interfaces.ModularCompressorControlBus\">
-Modular compressors bus</a>: This connector contains variables that
-may be needed for modular compressors.
-</li>
-<li>
-<a href=\"modelica://AixLib.Controls.Interfaces.ModularSensorControlBus\">
-Modular sensors bus</a>: This connector contains variables that
-may be needed for modular sensors.
-</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Controls.Interfaces.ModularExpansionValveControlBus\">
+    Modular expansion valves bus</a>: This connector contains variables
+    that may be needed for modular expansion valves.
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Controls.Interfaces.ModularCompressorControlBus\">
+    Modular compressors bus</a>: This connector contains variables that
+    may be needed for modular compressors.
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Controls.Interfaces.ModularSensorControlBus\">Modular
+    sensors bus</a>: This connector contains variables that may be
+    needed for modular sensors.
+  </li>
 </ol>
 <p>
-Additionally, the heat pump mode as well as the number of components (e.g.
-expansion valves or compressors) can be selected.
+  Additionally, the heat pump mode as well as the number of components
+  (e.g. expansion valves or compressors) can be selected.
 </p>
 </html>"));
 end ModularHeatPumpControlBus;

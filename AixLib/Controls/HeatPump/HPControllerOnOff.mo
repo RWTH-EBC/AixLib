@@ -27,7 +27,7 @@ model HPControllerOnOff
     annotation (Placement(transformation(extent={{-115,-55},{-85,-25}})));
 equation
 
-  connect(N.y, heatPumpControlBus.N) annotation (Line(points={{9,40},{40,40},{40,
+  connect(N.y,heatPumpControlBus.n)  annotation (Line(points={{9,40},{40,40},{40,
           0.3525},{99.6475,0.3525}},
                                    color={0,0,127}), Text(
       string="%second",
@@ -47,11 +47,19 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  annotation (Documentation(info="<html>
-<p>This model represents a simple controller for a heat pump. It is based on the <a href=\"modelica://Modelica.Blocks.Logical.OnOffController\">Modelica.Blocks.Logical.OnOffController</a> 
-but includes further constant sources so that the <a href=\"modelica://AixLib.Controls.Interfaces.HeatPumpControlBus\">AixLib.Controls.Interfaces.HeatPumpControlBus</a> can be used.</p>
-</html>", revisions="<html>
-<p>March 31, 2017, by Marc Baranski:</p>
-<p>First implementation. </p>
+  annotation (Documentation(info="<html><p>
+  This model represents a simple controller for a heat pump. It is
+  based on the <a href=
+  \"modelica://Modelica.Blocks.Logical.OnOffController\">Modelica.Blocks.Logical.OnOffController</a>
+  but includes further constant sources so that the <a href=
+  \"modelica://AixLib.Controls.Interfaces.HeatPumpControlBus\">AixLib.Controls.Interfaces.HeatPumpControlBus</a>
+  can be used.
+</p>
+<p>
+  March 31, 2017, by Marc Baranski:
+</p>
+<p>
+  First implementation.
+</p>
 </html>"));
 end HPControllerOnOff;

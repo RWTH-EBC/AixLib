@@ -1,18 +1,22 @@
 ﻿within AixLib.Controls.HeatPump.BaseClasses;
-model InverterControlledHP "Converter model for a inverter controlled HP"
+model InverterControlledHP "Converter model for an inverter / speed controlled HP modulating between 0 and 1"
   extends PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=hys,
       pre_y_start=false)                                                                    "Hysteresis controller for set temperature"
     annotation (Placement(transformation(extent={{-58,-6},{-30,22}})));
-  Modelica.Blocks.Continuous.LimPID InverterControl(           controllerType=
-        Modelica.Blocks.Types.SimpleController.PI,
-    final k=0.1,
-    Ti=30,
-    yMax=1,
-    yMin=0)
+  Modelica.Blocks.Continuous.LimPID InverterControl(
+    final controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    final k=k,
+    final Ti=Ti,
+    final yMax=1,
+    final yMin=0)
     "PI-Control for a inverter controlled HP"
     annotation (Placement(transformation(extent={{14,38},{34,58}})));
+  parameter Real k=0.1 "Gain of controller"
+    annotation (Dialog(group="PI Values"));
+  parameter Modelica.SIunits.Time Ti=30 "Time constant of Integrator block"
+    annotation (Dialog(group="PI Values"));
 equation
   connect(TSet, onOffController.reference) annotation (Line(points={{-116,60},{
           -77.5,60},{-77.5,16.4},{-60.8,16.4}},
@@ -28,12 +32,12 @@ equation
                                   color={0,0,127}));
   connect(onOffController.y, andHeaLim.u1) annotation (Line(points={{-28.6,8},{
           24,8},{24,0},{36.8,0}}, color={255,0,255}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end InverterControlledHP;
