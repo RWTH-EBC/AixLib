@@ -12,7 +12,7 @@ model MassFlowControllerHeatingCO2
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate";
     parameter Modelica.SIunits.Power capacity = 100000 "Capacity of heat pump (max. heating power)";
-    parameter Modelica.SIunits.Duration charging_duration = 7200 "Duration of charging prozess in s";
+    parameter Modelica.SIunits.Duration charging_duration = 10800 "Duration of charging prozess in s";
 
     parameter Modelica.SIunits.Volume V_Storage = 2 "Volume of heat storage";
 
@@ -66,13 +66,14 @@ model MassFlowControllerHeatingCO2
         iconTransformation(extent={{762,118},{808,164}})));
     Modelica.Blocks.Logical.And charging "Requirements for storage charging"
     annotation (Placement(transformation(extent={{432,60},{452,80}})));
-    Modelica.Blocks.Logical.Hysteresis hysteresis_discharge(uLow=T_storage_min,
-      uHigh=T_storage_min + 0.5)
+    Modelica.Blocks.Logical.Hysteresis hysteresis_discharge(uLow=T_storage_min
+         + 0.1,
+             uHigh=T_storage_max - 0.1)
                          "Temperature requirements for storage discharging"
     annotation (Placement(transformation(extent={{232,-102},{252,-82}})));
     Modelica.Blocks.Logical.Hysteresis hysteresis_charge(
     pre_y_start=true,
-    uLow=T_storage_max - 1,
+    uLow=T_storage_min + 0.1,
     uHigh=T_storage_max - 0.1)
                       "Temperature requirements for storage charging"
     annotation (Placement(transformation(extent={{232,12},{252,32}})));
@@ -108,7 +109,7 @@ equation
 
   //charging
   if charging.y then
-   m_flow_storage = -max(V_Storage * rho / charging_duration, (capacity-heat_Demand)/(cp_default*deltaT_he));
+   m_flow_storage = -min(V_Storage * rho / charging_duration, (capacity-heat_Demand)/(cp_default*deltaT_he));
    Q_demandHP =heat_Demand - m_flow_storage*cp_default*deltaT_he;
    Charging = true;
 

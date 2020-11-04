@@ -6,6 +6,9 @@ model SubstationStorageHeating
   final parameter Modelica.SIunits.Density rho = 1000 "Density of Water";
   final parameter Real cp_default = 4180 "Cp-value of Water";
 
+  parameter Modelica.SIunits.Temperature T_supplyHeatingSet;
+  parameter Modelica.SIunits.TemperatureDifference deltaT_heatingSet;
+
   //parameter Modelica.SIunits.Temperature T_out_HE = 273.15 + 45 "Constant HE outlet temperature";
   parameter Modelica.SIunits.Temperature T_min = 273.15 + 55 "Minimal temperature for heating supply";
   parameter Modelica.SIunits.Temperature T_max = 273.15 + 65 "Maximal temperature for heating supply";
@@ -103,8 +106,9 @@ model SubstationStorageHeating
         /5)*(T_max - TMid.T) + (tan.VTan/5)*(T_max - TMidBot.T) + (tan.VTan/5)*(
         T_max - TBot.T)))
     annotation (Placement(transformation(extent={{212,150},{232,170}})));
-    Modelica.Blocks.Sources.RealExpression deltaTSet12(y=(T_storage_average -
-        T_min)/(T_max - T_min))
+    Modelica.Blocks.Sources.RealExpression deltaTSet12(y=(T_storage_average - (
+        T_supplyHeatingSet - deltaT_heatingSet))/(T_max - (T_supplyHeatingSet
+         - deltaT_heatingSet)))
     annotation (Placement(transformation(extent={{170,198},{190,218}})));
     Modelica.Blocks.Sources.RealExpression deltaTSet7(y=0)
     annotation (Placement(transformation(extent={{164,172},{184,192}})));
@@ -173,12 +177,6 @@ equation
           {38,400},{136,400},{136,390},{322,390}}, color={0,0,127}));
   connect(max_deltaT_HE.y, Q_max_dis) annotation (Line(points={{221,502},{262,
           502},{262,504},{314,504}}, color={0,0,127}));
-  connect(tan.heaPorSid, fixedTemperature.port) annotation (Line(points={{95.04,0},
-          {114,0},{114,-111},{134,-111}},    color={191,0,0}));
-  connect(tan.heaPorBot, fixedTemperature.port) annotation (Line(points={{82.8,
-          -25.16},{82.8,-66.58},{134,-66.58},{134,-111}}, color={191,0,0}));
-  connect(tan.heaPorTop, fixedTemperature.port) annotation (Line(points={{82.8,
-          25.16},{82.8,-41.42},{134,-41.42},{134,-111}}, color={191,0,0}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-340,-160},
             {300,580}}),         graphics={ Text(
             extent={{-150,76},{-24,58}},

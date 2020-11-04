@@ -65,11 +65,13 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHPCO2 "Substation model 
     annotation (Placement(transformation(extent={{-296,-672},{-256,-632}}),
         iconTransformation(extent={{716,48},{660,104}})));
   BaseClasses.SubstationStorageHeating                                   substationStorageHeating(
+    T_supplyHeatingSet=T_heatingSupplySet,
+    deltaT_heatingSet=deltaT_heatingSet,
     T_min(displayUnit="K") = T_storage_min,
     T_max(displayUnit="K") = T_storage_max,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal_heating,
-    T_start(displayUnit="degC") = T_storage_min,
+    T_start(displayUnit="degC") = T_heatingSupplySet,
     VTan=VTan)
     annotation (Placement(transformation(extent={{238,-312},{326,-248}})));
 public
@@ -231,8 +233,8 @@ public
     m_flow_nominal=m_flow_nominal,
     allowFlowReversal=true)
     annotation (Placement(transformation(extent={{-54,-106},{-24,-140}})));
-  Sensors.MassFlowRate              senMasFlo_HeatPump(redeclare package Medium
-      = Medium, allowFlowReversal=true)
+  Sensors.MassFlowRate              senMasFlo_HeatPump(redeclare package Medium =
+        Medium, allowFlowReversal=true)
     annotation (Placement(transformation(extent={{-88,-132},{-68,-112}})));
   Delays.DelayFirstOrder              vol(
     redeclare package Medium = Medium,
@@ -249,8 +251,8 @@ public
     m_flow_nominal=m_flow_nominal*{1,1,1},
     verifyFlowReversal=false)
     annotation (Placement(transformation(extent={{-166,-50},{-146,-70}})));
-  Sensors.MassFlowRate              senMasFlo_GridHeat(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_GridHeat(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-204,-70},{-184,-50}})));
   Sensors.TemperatureTwoPort              senTem_DC_in1(
     redeclare package Medium = Medium,
@@ -293,8 +295,8 @@ public
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal)
              annotation (Placement(transformation(extent={{632,-50},{652,-30}})));
-  Sensors.MassFlowRate              senMasFlo_GridCool(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_GridCool(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{596,-68},{616,-48}})));
   FixedResistances.Junction              jun1(
     redeclare package Medium = Medium,
@@ -330,8 +332,8 @@ public
         extent={{10,10},{-10,-10}},
         rotation=0,
         origin={388,-10})));
-  Sensors.MassFlowRate              senMasFlo_chiller(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_chiller(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{322,-20},{302,0}})));
   Movers.FlowControlled_m_flow              PumpCoolingDirect(
     redeclare package Medium = Medium,
@@ -474,7 +476,8 @@ protected
     annotation (Placement(transformation(extent={{-94,-440},{-74,-420}})));
 protected
   Modelica.Blocks.Sources.RealExpression storage_T_Bot(y=
-        substationStorageHeating.TBot.T) "Storage temperature at bottom layer"
+        substationStorageHeating.T_storage_average)
+                                         "Storage temperature at bottom layer"
     annotation (Placement(transformation(extent={{-94,-426},{-74,-406}})));
 protected
   Modelica.Blocks.Sources.RealExpression heatPump_COP_char(y=heatPump.etaCarnot_nominal
