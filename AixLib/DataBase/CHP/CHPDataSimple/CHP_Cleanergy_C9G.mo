@@ -225,8 +225,8 @@ record CHP_Cleanergy_C9G
   </tr>
 </table>
 <p>
-  <br />
-  <br />
+  <br/>
+  <br/>
   <b>The CHP engine is not designed for continuous operation at more
   than 80% load (7.2 kW).</b> Continuous use at higher load than 80%
   decreases the time between services.
@@ -246,7 +246,7 @@ record CHP_Cleanergy_C9G
 </html>",
         revisions="<html><ul>
   <li>
-    <i>January 24, 2013</i> by Peter Matthes:<br />
+    <i>January 24, 2013</i> by Peter Matthes:<br/>
     implemented
   </li>
 </ul>

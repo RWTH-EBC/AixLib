@@ -113,10 +113,10 @@ equation
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
     Documentation(revisions="<html><ul>
-  <li>August 1, 2019, by Alexander Kümpel:<br />
+  <li>August 1, 2019, by Alexander Kümpel:<br/>
     Improvement.
   </li>
-  <li>October 18, 2018, by Alexander Kümpel:<br />
+  <li>October 18, 2018, by Alexander Kümpel:<br/>
     First implementation.
   </li>
 </ul>

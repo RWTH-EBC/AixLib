@@ -21,7 +21,7 @@ record Ventilation_caseX50 "infiltration with/without the ventilation fan "
 </p>
 <ul>
   <li>
-    <i>March 26, 2015&#160;</i> by Ana Constantin:<br />
+    <i>March 26, 2015&#160;</i> by Ana Constantin:<br/>
     Implemented.
   </li>
 </ul>

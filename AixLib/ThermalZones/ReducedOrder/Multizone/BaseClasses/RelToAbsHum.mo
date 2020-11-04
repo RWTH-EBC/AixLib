@@ -29,7 +29,7 @@ equation
     Modelica.SIunits.Conversions.to_degC(TDryBul)/(237.3 +
     Modelica.SIunits.Conversions.to_degC(TDryBul)))*relHum;
   annotation (Documentation(revisions="<html><ul>
-  <li>September 27, 2016 by Moritz Lauster:<br />
+  <li>September 27, 2016 by Moritz Lauster:<br/>
     First Implementation.
   </li>
 </ul>

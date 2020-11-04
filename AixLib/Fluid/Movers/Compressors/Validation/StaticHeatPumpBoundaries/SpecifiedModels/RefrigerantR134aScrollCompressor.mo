@@ -45,7 +45,7 @@ protected
   end IsentropicEfficiency;
 
   annotation (experiment(StopTime=46.9999), Documentation(revisions="<html><ul>
-  <li>December 16, 2017, by Mirko Engelpracht:<br />
+  <li>December 16, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -57,8 +57,8 @@ protected
   BaseModelStaticBoundaries</a>. Therefore, an experimental data set is
   used presented by Cuevas and Lebrun. The authors investigate a
   scroll-compressor using R134a as refrigerant and varying the inlet
-  and outlet conditions as well as the rotational speed.<br />
-  <br />
+  and outlet conditions as well as the rotational speed.<br/>
+  <br/>
   Moreover, fitted formulas are used for the three efficiencies of the
   compressor in order to improve the quality of the mass flow rate and
   power consumption calculated by the model.

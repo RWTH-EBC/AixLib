@@ -21,7 +21,7 @@ algorithm
    x := -p2;
   end if;
   annotation (Documentation(revisions="<html><ul>
-  <li>2017-11-16 by Peter Matthes:<br />
+  <li>2017-11-16 by Peter Matthes:<br/>
     Implemented
   </li>
 </ul>

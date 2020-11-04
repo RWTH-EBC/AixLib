@@ -26,7 +26,7 @@ protected
    constant Modelica.SIunits.SpecificEnergy h_fg=
     Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
-   QLat_flow = InPort1 * V * rho * (HumIn-HumOut) / 3600 * h_fg;
+   QLat_flow =ventRate*V*rho*(HumIn - HumOut)/hToS*h_fg;
   annotation (Documentation(info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
@@ -38,11 +38,11 @@ equation
   alt=\"h^(-1)\">) as input value.
 </p>
 <ul>
-  <li>July, 2019, by Martin Kremer:<br />
+  <li>July, 2019, by Martin Kremer:<br/>
     Adding latent heat output of moisture, since ventilation moisture
     is already gaseous.
   </li>
-  <li>April, 2019, by Martin Kremer:<br />
+  <li>April, 2019, by Martin Kremer:<br/>
     First Implementation.
   </li>
 </ul>

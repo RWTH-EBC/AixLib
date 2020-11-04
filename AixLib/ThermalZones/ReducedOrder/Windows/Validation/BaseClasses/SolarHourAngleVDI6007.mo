@@ -29,7 +29,7 @@ equation
     Documentation(info="<html>This model computes the solar hour angle for test case 1 and 3 of
 VDI2078 in April.
 <ul>
-  <li>July 17 2016,&#160; by Stanley Risch:<br />
+  <li>July 17 2016,&#160; by Stanley Risch:<br/>
     Implemented.
   </li>
 </ul>

@@ -26,10 +26,10 @@ equation
   the interpolation.
 </p>
 <ul>
-  <li>January 7, 2016, by Michael Wetter:<br />
+  <li>January 7, 2016, by Michael Wetter:<br/>
     Updated comment.
   </li>
-  <li>October 27, 2011, by Wangda Zuo:<br />
+  <li>October 27, 2011, by Wangda Zuo:<br/>
     First implementation.
   </li>
 </ul>

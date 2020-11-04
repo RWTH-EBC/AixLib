@@ -132,10 +132,10 @@ equation
 </p>
 <ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
   </li>
-  <li>October 11, 2016 by Pooyan Jahangiri:<br />
+  <li>October 11, 2016 by Pooyan Jahangiri:<br/>
     First implementation.
   </li>
 </ul>

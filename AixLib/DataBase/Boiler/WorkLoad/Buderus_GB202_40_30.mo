@@ -21,7 +21,7 @@ operatingRange={0.2,1});
 </html>",
       revisions="<html><ul>
   <li>
-    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately, reference added
   </li>
 </ul>

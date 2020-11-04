@@ -121,7 +121,7 @@ equation
     coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=10000, Tolerance=1e-006, __Dymola_Algorithm="Cvode"),
     Documentation(revisions="<html><ul>
-  <li>March 17, 2018, by Marcus Fuchs:<br />
+  <li>March 17, 2018, by Marcus Fuchs:<br/>
     First implementation.
   </li>
 </ul>

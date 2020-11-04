@@ -269,7 +269,7 @@ equation
   \"modelica://Modelica.Fluid.Valves.BaseClasses.PartialValve\">PartialValve</a>.
 </p>
 <p>
-  <br />
+  <br/>
   <b><span style=\"color: #008000\">References</span></b>
 </p>
 <p>
@@ -279,7 +279,7 @@ equation
 <p>
   <a href=
   \"http://www.armstronginternational.com/files/products/lynnwood/pdf/installation/IOM-442_CPAC0012.pdf\">
-  http://www.armstronginternational.com/files/products/lynnwood/pdf/installation/IOM-442_CPAC0012.pdf</a><br />
+  http://www.armstronginternational.com/files/products/lynnwood/pdf/installation/IOM-442_CPAC0012.pdf</a><br/>
 
   <a href=
   \"http://www.herzvalves.com/www/downloads/DS_4037_Three_Way_Valve.pdf\">
@@ -293,14 +293,14 @@ equation
 </p>
 <p>
   <a href=
-  \"MixingValves.AixLib.Examples.MixingValveForwardDirection\">MixingValves.AixLib.Examples.MixingValveForwardDirection</a><br />
+  \"MixingValves.AixLib.Examples.MixingValveForwardDirection\">MixingValves.AixLib.Examples.MixingValveForwardDirection</a><br/>
 
   <a href=
   \"MixingValves.AixLib.Examples.MixingValveBackwardDirection\">MixingValves.AixLib.Examples.MixingValveBackwardDirection</a>
 </p>
 <ul>
   <li>
-    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br />
+    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
     Implemented
   </li>
 </ul>

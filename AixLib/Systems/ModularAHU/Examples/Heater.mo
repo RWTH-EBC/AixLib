@@ -87,7 +87,7 @@ equation
   air temperature to 20°C.
 </p>
 <ul>
-  <li>August 30, 2019, by Alexander Kümpel:<br />
+  <li>August 30, 2019, by Alexander Kümpel:<br/>
     First implementation.
   </li>
 </ul>

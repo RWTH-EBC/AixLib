@@ -4,7 +4,7 @@ package Walls "Database for different types of walls"
 
 
   annotation(Documentation(info = "<html><p>
-  <br />
+  <br/>
   Selectable wall types for easy setup of room configurations.
 </p>
 </html>"));

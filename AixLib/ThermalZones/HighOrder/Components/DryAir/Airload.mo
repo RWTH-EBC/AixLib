@@ -18,11 +18,11 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, 16}, {30, -50}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Air")}), Documentation(revisions = "<html><ul>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
 </ul>

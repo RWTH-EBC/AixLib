@@ -43,7 +43,7 @@ equation
   annotation (
     Documentation(revisions="<html><ul>
   <li>
-    <pre>2017-11-23 by Peter Matthes<br />Implemented.</pre>
+    <pre>2017-11-23 by Peter Matthes<br/>Implemented.</pre>
   </li>
 </ul>
 </html>", info="<html>

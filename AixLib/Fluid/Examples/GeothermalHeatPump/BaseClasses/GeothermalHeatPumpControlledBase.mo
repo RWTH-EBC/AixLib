@@ -67,7 +67,7 @@ equation
   controllers.
 </p>
 <ul>
-  <li>May 19, 2017, by Marc Baranski:<br />
+  <li>May 19, 2017, by Marc Baranski:<br/>
     First implementation.
   </li>
 </ul>

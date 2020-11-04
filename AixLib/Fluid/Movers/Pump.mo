@@ -43,11 +43,11 @@ equation
             lineColor = {0, 0, 0}, fillColor = {175, 175, 175},
             fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
   <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br />
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class
   </li>
   <li>
-    <i>01.11.2013&#160;</i> by Ana Constantin:<br />
+    <i>01.11.2013&#160;</i> by Ana Constantin:<br/>
     implemented
   </li>
 </ul>
@@ -74,7 +74,7 @@ equation
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   <b><span style=\"color: #008000\">Example Results</span></b>
 </p>
 <p>

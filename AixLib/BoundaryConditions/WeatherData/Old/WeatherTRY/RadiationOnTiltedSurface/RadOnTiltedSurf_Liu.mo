@@ -196,16 +196,16 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
 </html>",
     revisions="<html><ul>
   <li>
-    <i>March 23, 2015&#160;</i> by Ana Constantin:<br />
+    <i>March 23, 2015&#160;</i> by Ana Constantin:<br/>
     Adapted solar inputs so it cand work with both TRY and TMY weather
     format
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>March 14, 2005&#160;</i> by Timo Haase:<br />
+    <i>March 14, 2005&#160;</i> by Timo Haase:<br/>
     Implemented.
   </li>
 </ul>

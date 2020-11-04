@@ -25,7 +25,7 @@ record WorkLoadBaseDataDefinition "Efficiency depending on workload"
 </p>
 <ul>
   <li>
-    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
 </ul>

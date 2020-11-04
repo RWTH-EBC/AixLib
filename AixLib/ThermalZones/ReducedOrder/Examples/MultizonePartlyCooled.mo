@@ -143,7 +143,7 @@ equation
 </p>
 </html>", revisions="<html>
 <ul>
-  <li>August 21, 2020, by Marcus Fuchs:<br />
+  <li>August 21, 2020, by Marcus Fuchs:<br/>
     Implemented.
   </li>
 </ul>

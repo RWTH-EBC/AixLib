@@ -9,7 +9,7 @@ model Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary
     final b={-0.2678,-0.0106,0.7195});
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 23, 2017, by Mirko Engelpracht:<br />
+  <li>October 23, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -17,7 +17,7 @@ model Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary
 </html>", info="<html>
 <p>
   This model contains a calculation procedure for the isentropic
-  efficiency presented by Mendoza-Miranda et al. (2016).<br />
+  efficiency presented by Mendoza-Miranda et al. (2016).<br/>
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

@@ -169,7 +169,7 @@ equation
     Documentation(revisions="<html><ul>
   <li>
     <i><span style=\"font-family: MS Shell Dlg 2;\">February,
-    2016&#160;</span></i> by Philipp Mehrfeld:<br />
+    2016&#160;</span></i> by Philipp Mehrfeld:<br/>
     Model implemented
   </li>
 </ul>

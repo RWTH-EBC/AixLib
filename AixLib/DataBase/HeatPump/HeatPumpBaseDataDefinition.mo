@@ -53,11 +53,11 @@ defined as parameters.
 </html>",
         revisions="<html><ul>
   <li>
-    <i>MAy 7, 2020</i> by Philipp Mehrfeld:<br />
+    <i>MAy 7, 2020</i> by Philipp Mehrfeld:<br/>
     Add description of how to calculate m_flows
   </li>
   <li>
-    <i>December 10, 2013</i> by Ole Odendahl:<br />
+    <i>December 10, 2013</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
 </ul>

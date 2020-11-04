@@ -92,34 +92,34 @@ equation
   the pump's design point. Normally, H0 = 0.5 * Hnom.
 </p>
 <ul>
-  <li>2019-09-18 by Alexander Kümpel:<br />
+  <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and bug fixes.
   </li>
-  <li>2018-03-01 by Peter Matthes:<br />
+  <li>2018-03-01 by Peter Matthes:<br/>
     Simplified doc string to \"'dp variable' for PumpH\".
   </li>
-  <li>2018-01-26 by Peter Matthes:<br />
+  <li>2018-01-26 by Peter Matthes:<br/>
     * Changes parameter name n_start into Nstart to be
     compatible/exchangeable with the speed controlled (red pump) and
-    the head controlled pump (blue pump).<br />
+    the head controlled pump (blue pump).<br/>
     * Changes icon color to blue to reflect relationship with blue pump
-    (pressure head control).<br />
+    (pressure head control).<br/>
     * Removes PID-controller as this new model should set pump pressure
     directly. The dp_var algorithm will also allow dp_const when
     H0=Hnom.
   </li>
-  <li>2018-01-10 by Peter Matthes:<br />
+  <li>2018-01-10 by Peter Matthes:<br/>
     Adds state graph controller parts as taken from the BaseClass. Not
     all controllers need the state graph why we decided to remove it
     from the BaseClass.
   </li>
-  <li>2017-12-05 by Peter Matthes:<br />
+  <li>2017-12-05 by Peter Matthes:<br/>
     Changes calculation of Qnom (taken from pump dataset) and Hnom (now
     uses full cHQN matrix. cABCeq has been removed.) Removes pumpParam
     from the model as that is now defined in the base class
     PumpStateController.
   </li>
-  <li>2017-11-22 by Peter Matthes:<br />
+  <li>2017-11-22 by Peter Matthes:<br/>
     Initial implementation.
   </li>
 </ul>

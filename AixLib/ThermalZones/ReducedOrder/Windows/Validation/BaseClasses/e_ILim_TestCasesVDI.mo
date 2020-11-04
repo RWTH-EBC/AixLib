@@ -30,7 +30,7 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>July 17 2017,&#160; by Stanley Risch:<br />
+  <li>July 17 2017,&#160; by Stanley Risch:<br/>
     Implemented.
   </li>
 </ul>

@@ -514,8 +514,8 @@ equation
           -35.8}},                                                                                                                                   color={191,0,0}));
   connect(infiltrationRate.port_b, airload.port) annotation (Line(points={{-56,46},
           {-40,46},{-40,-40},{-6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation (Line(points={
-          {-69,-38.4},{-80,-38.4},{-80,70},{-20,70},{-20,100}}, color={0,0,127}));
+  connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points
+        ={{-69,-38.4},{-80,-38.4},{-80,70},{-20,70},{-20,100}}, color={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{-70,
           -32},{-80,-32},{-80,90},{-90,90}}, color={191,0,0}));
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-50,
@@ -633,11 +633,11 @@ equation
           rotation=90,
           visible=withWindow3)}), Documentation(revisions="<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>July 8, 2011</i> by Ana Constantin:<br />
+    <i>July 8, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

@@ -181,7 +181,7 @@ equation
   but are not related to a specific building or measurement data.
 </p>
 <ul>
-  <li>September 29, 2016, by Moritz Lauster:<br />
+  <li>September 29, 2016, by Moritz Lauster:<br/>
     Implemented.
   </li>
 </ul>

@@ -228,7 +228,8 @@ equation
           33.8,-32},{33.8,-12.7}},                                                                                                                                color={191,0,0}));
   connect(thermStar_Demux.portConv, ThermRoom) annotation (Line(points={{13.9,-19.1},{13.9,-20},{-20,-20},{-20,14},{-2,14}}, color={191,0,0}));
   connect(airload.port, infiltrationRate.port_b) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, -71}, {-46, -71}}, color = {191, 0, 0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-70.7, -107.32}, {-86, -107.32}, {-86, 70}, {-160, 70}}, color = {0, 0, 127}));
+  connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points
+        ={{-70.7,-107.32},{-86,-107.32},{-86,70},{-160,70}}, color={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-72, -99}, {-86, -99}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
   connect(airload.port, ThermRoom) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, 14}, {-2, 14}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-46, -99}, {-20, -99}, {-20, 8}, {-29, 8}}, color = {191, 0, 0}));
@@ -259,11 +260,11 @@ equation
             lineThickness =                                                                                                   1, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "OW")}), Documentation(revisions = "<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>August 16, 2011</i> by Ana Constantin:<br />
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

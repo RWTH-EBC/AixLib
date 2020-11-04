@@ -97,7 +97,7 @@ equation
  3 - Bath
  4 - Children2")}), Documentation(revisions = "<html><ul>
   <li>
-    <i>June 19, 2014</i> by Ana Constantin:<br />
+    <i>June 19, 2014</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

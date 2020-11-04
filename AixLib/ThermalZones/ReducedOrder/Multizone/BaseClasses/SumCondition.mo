@@ -53,16 +53,16 @@ algorithm
   </li>
 </ol>
 <ul>
-  <li>September 27, 2016, by Moritz Lauster:<br />
+  <li>September 27, 2016, by Moritz Lauster:<br/>
     Moved to fit to new Annex60 structure.
   </li>
-  <li>February 26, 2016, by Moritz Lauster:<br />
+  <li>February 26, 2016, by Moritz Lauster:<br/>
     Added share of volume for each zone as output.
   </li>
-  <li>October 30, 2015, by Moritz Lauster:<br />
+  <li>October 30, 2015, by Moritz Lauster:<br/>
     Moved and adapted to AixLib.
   </li>
-  <li>March 7, 2014, by Ole Odendahl:<br />
+  <li>March 7, 2014, by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
 </ul>

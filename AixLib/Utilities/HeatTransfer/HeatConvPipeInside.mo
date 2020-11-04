@@ -75,7 +75,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>August 11, 2017;</i> by David Jansen:<br />
+    <i>August 11, 2017;</i> by David Jansen:<br/>
   </li>
 </ul>
 </html>"));

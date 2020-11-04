@@ -46,25 +46,25 @@ equation
   connect(uRel, gainSurfaces.u) annotation (Line(points={{-100,0},{-80,0},{-80,-60},{-61.2,-60}}, color={0,0,127}));
   annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>March 26, 202020&#160;</i> by Philipp Mehrfeld:<br />
+    <i>March 26, 202020&#160;</i> by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>
     refactor input schedule and other components.
   </li>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>April 30, 2012</i> by Peter Matthes:<br />
+    <i>April 30, 2012</i> by Peter Matthes:<br/>
     implemented partial model for heat sources to work with Ana's
     models.
   </li>
   <li>
-    <i>August 10, 2011</i> by Ana Constantin:<br />
+    <i>August 10, 2011</i> by Ana Constantin:<br/>
     implemented
   </li>
 </ul>

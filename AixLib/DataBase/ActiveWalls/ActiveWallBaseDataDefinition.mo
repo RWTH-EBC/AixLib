@@ -16,12 +16,12 @@ parameter Real PressureDropCoefficient;
 
 annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>February 14, 2014&#160;</i> by Ana Constantin:<br />
+    <i>February 14, 2014&#160;</i> by Ana Constantin:<br/>
     Changed name of heat capacity per are to C_Activated Element, to be
     able to use it for both heating and cooling.
   </li>
   <li>
-    <i>September 20, 2013&#160;</i> by Mark Wesseling:<br />
+    <i>September 20, 2013&#160;</i> by Mark Wesseling:<br/>
     Implemented.
   </li>
 </ul>

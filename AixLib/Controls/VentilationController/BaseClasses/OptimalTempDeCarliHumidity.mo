@@ -53,19 +53,19 @@ equation
 </ol>
 <ul>
   <li>
-    <i>April, 2016&#160;</i> by Peter Remmen:<br />
+    <i>April, 2016&#160;</i> by Peter Remmen:<br/>
     Moved from Utilities to Controls
   </li>
 </ul>
 <ul>
   <li>
-    <i>October, 2015&#160;</i> by Moritz Lauster:<br />
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
     Adapted and moved to AixLib
   </li>
 </ul>
 <ul>
   <li>
-    <i>May, 2008&#160;</i> by Peter Matthes:<br />
+    <i>May, 2008&#160;</i> by Peter Matthes:<br/>
     Implemented
   </li>
 </ul>

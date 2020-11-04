@@ -452,7 +452,7 @@ class HTML_Tidy(object):
 			body += line + '\n'
 		body = body.replace('\\"', '"')'''
 		
-		substitutions_dict: dict = {'"': '\\"', '<br>': '<br />', '<br/>': '<br />'}
+		substitutions_dict: dict = {'"': '\\"', '<br>': '<br/>', '<br/>': '<br/>'}
 		htmlList = htmlCode
 		
 		
@@ -496,7 +496,7 @@ class HTML_Tidy(object):
 		
 		return document_corr, errors
 
-	def htmlCorrection(self, htmlStr: str, substitutions_dict: dict = {'"': '\\"', '<br>': '<br />', '<br/>': '<br />'}) -> (str, str):
+	def htmlCorrection(self, htmlStr: str, substitutions_dict: dict = {'"': '\\"', '<br>': '<br/>', '<br/>': '<br/>'}) -> (str, str):
 		"""Returns cleaned html code and found errors
 
 		Calls tidylib which will produce a clean version of the html code

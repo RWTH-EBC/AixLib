@@ -259,7 +259,7 @@ Documentation(info="<html><p>
 </p>
 </html>",
 revisions="<html><ul>
-  <li>October 22, 2019, by Alexander Kümpel:<br />
+  <li>October 22, 2019, by Alexander Kümpel:<br/>
     First implementation.
   </li>
 </ul>

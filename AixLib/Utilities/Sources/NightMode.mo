@@ -43,11 +43,11 @@ equation
 </p>
 <ul>
   <li>
-    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>Mai 20, 2011</i> by Ana Constantin:<br />
+    <i>Mai 20, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

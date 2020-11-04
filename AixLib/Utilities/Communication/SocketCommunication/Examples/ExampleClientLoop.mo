@@ -68,17 +68,17 @@ equation
             -100},{100,100}}), graphics),
 Documentation(revisions="<html><ul>
   <li>
-    <i>August 25, 2018&#160;</i> by Thomas Beutlich:<br />
+    <i>August 25, 2018&#160;</i> by Thomas Beutlich:<br/>
     Changed data type of port from String to Integer. This is
     for:<a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a>
   </li>
   <li>
-    <i>September 03, 2013&#160;</i> by Georg Ferdinand Schneider:<br />
+    <i>September 03, 2013&#160;</i> by Georg Ferdinand Schneider:<br/>
     Revised documented
   </li>
   <li>
-    <i>June 01, 2013&#160;</i> by Georg Ferdinand Schneider:<br />
+    <i>June 01, 2013&#160;</i> by Georg Ferdinand Schneider:<br/>
     Implemented
   </li>
 </ul>

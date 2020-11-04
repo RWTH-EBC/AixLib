@@ -199,7 +199,7 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(revisions="<html><ul>
   <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br />
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
   </li>
 </ul>

@@ -77,7 +77,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>July 10, 2019&#160;</i> by Martin Kremer:<br />
+    <i>July 10, 2019&#160;</i> by Martin Kremer:<br/>
     Implemented
   </li>
 </ul>

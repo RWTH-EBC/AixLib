@@ -39,11 +39,11 @@ equation
   using the solar hour angle and the declination angle as input.
 </p>
 <ul>
-  <li>Dec 7, 2010, by Michael Wetter:<br />
+  <li>Dec 7, 2010, by Michael Wetter:<br/>
     Rewrote equation in explicit form to avoid nonlinear equations in
     room model.
   </li>
-  <li>May 19, 2010, by Wangda Zuo:<br />
+  <li>May 19, 2010, by Wangda Zuo:<br/>
     First implementation.
   </li>
 </ul>

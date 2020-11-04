@@ -137,8 +137,8 @@ record SurfaceOrientationData_N_E_S_W_RoofN_Roof_S
   </tr>
 </table>
 <p>
-  <br />
-  <br />
+  <br/>
+  <br/>
 </p>
 <h4>
   <span style=\"color:#008000\">References</span>
@@ -149,7 +149,7 @@ record SurfaceOrientationData_N_E_S_W_RoofN_Roof_S
 </p>
 <ul>
   <li>
-    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
     Added basic documentation
   </li>
 </ul>

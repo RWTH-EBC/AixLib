@@ -526,12 +526,12 @@ equation
   </tr>
 </table>
 <p>
-  <br />
+  <br/>
   The Height H of the radiator is discretized in N single Layers, as
   shown in Figure 1
 </p>
 <p>
-  <br />
+  <br/>
   <img src=
   \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Schichtenmodell.png\"
   alt=\"Multilayer Model of radiator \">
@@ -547,7 +547,7 @@ equation
   <tr>
     <td>
       <p>
-        <br />
+        <br/>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/DGL_HK.png\"
         alt=\"Equation for every layer\">
@@ -555,7 +555,7 @@ equation
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (1)
       </p>
     </td>
@@ -566,7 +566,7 @@ equation
   </tr>
 </table>
 <p>
-  <br />
+  <br/>
   The total heat emission consists of a convective and a radiative
   part.
 </p>
@@ -582,7 +582,7 @@ cellpadding=\"2\" border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (2)
       </p>
     </td>
@@ -597,7 +597,7 @@ cellpadding=\"2\" border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (3)
       </p>
     </td>
@@ -612,7 +612,7 @@ cellpadding=\"2\" border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (4)
       </p>
     </td>
@@ -623,7 +623,7 @@ cellpadding=\"2\" border=\"1\">
   </tr>
 </table>
 <p>
-  <br />
+  <br/>
   The convective heat emission is proportional to <img src=
   \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/deltaT.png\"
   alt=\"delta T\">&#160;. The radiative heat emission is proportional to
@@ -644,7 +644,7 @@ border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (5)
       </p>
     </td>
@@ -659,7 +659,7 @@ border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (6)
       </p>
     </td>
@@ -670,7 +670,7 @@ border=\"1\">
   </tr>
 </table>
 <p>
-  <br />
+  <br/>
   The heat emission of the radiator depends on the heater excess
   temperature. In the model it is possible to choose between:
 </p>
@@ -704,7 +704,7 @@ cellpadding=\"2\" border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (7)
       </p>
     </td>
@@ -724,7 +724,7 @@ cellpadding=\"2\" border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (8)
       </p>
     </td>
@@ -744,7 +744,7 @@ cellpadding=\"2\" border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (9)
       </p>
     </td>
@@ -778,7 +778,7 @@ border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (10)
       </p>
     </td>
@@ -793,7 +793,7 @@ border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (11)
       </p>
     </td>
@@ -830,7 +830,7 @@ border=\"1\">
     </td>
     <td>
       <p>
-        <br />
+        <br/>
         (12)
       </p>
     </td>
@@ -866,32 +866,32 @@ border=\"1\">
 </html>",
 revisions="<html><ul>
   <li>
-    <i>January 09, 2006&#160;</i> by Peter Matthes:<br />
+    <i>January 09, 2006&#160;</i> by Peter Matthes:<br/>
     V0.1: Initial configuration.
   </li>
   <li>
-    <i>January 09, 2006&#160;</i> by Peter Matthes:<br />
+    <i>January 09, 2006&#160;</i> by Peter Matthes:<br/>
     V0.1: Initial configuration.
   </li>
   <li>
-    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br />
+    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br/>
     Output for logarithmic mean temperature added
   </li>
   <li>
-    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>Mai 1, 2011&#160;</i> by Ana Constantin:<br />
+    <i>Mai 1, 2011&#160;</i> by Ana Constantin:<br/>
     Addapted with a few changes from older model.
   </li>
   <li>
-    <i>October, 2016&#160;</i> by Peter Remmen:<br />
+    <i>October, 2016&#160;</i> by Peter Remmen:<br/>
     Transfer to AixLib. Delete EnergyMeter and additional output
     T_source
   </li>
   <li>
-    <i>July 10, 2019&#160;</i> by Katharina Brinkmann:<br />
+    <i>July 10, 2019&#160;</i> by Katharina Brinkmann:<br/>
     Changed temperature unit according to #734
   </li>
 </ul>

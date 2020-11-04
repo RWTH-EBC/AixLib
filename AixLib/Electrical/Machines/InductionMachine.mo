@@ -215,11 +215,11 @@ else
   - power factor if available (default=0.8)
 </p>
 <p>
-  <br />
+  <br/>
   Additional Information:
 </p>
 <p>
-  <br />
+  <br/>
   - Electric power calculation as a generator from mechanical input
   speed can be further approached by small changes to the speed.
 </p>
@@ -230,7 +230,7 @@ else
 </p>
 </html>",
         revisions="<html><ul>
-  <li>January, 2019, by Julian Matthes:<br />
+  <li>January, 2019, by Julian Matthes:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">issue
     6</a><u><span style=\"color: #0000ff;\">67</span></u>).

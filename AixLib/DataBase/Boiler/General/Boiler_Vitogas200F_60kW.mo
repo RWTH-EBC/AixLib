@@ -9,11 +9,11 @@ record Boiler_Vitogas200F_60kW "Gas-fired boiler Viessmann Vitogas200-F 60kW"
     eta=[0.3,0.93; 1.0,0.93]);
     annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>June 23, 2006&#160;</i> by Ana Constantin:<br />
+    <i>June 23, 2006&#160;</i> by Ana Constantin:<br/>
     implemented
   </li>
 </ul>

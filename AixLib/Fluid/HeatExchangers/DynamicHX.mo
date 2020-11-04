@@ -53,7 +53,7 @@ equation
   connect(Gc2_Expression.y, convection2.Gc)
     annotation (Line(points={{47,-30},{40,-30}}, color={0,0,127}));
   annotation (Documentation(revisions="<html><ul>
-  <li>December 12, 2018, by Alexander Kümpel:<br />
+  <li>December 12, 2018, by Alexander Kümpel:<br/>
     First implementation, <a href=
     \"https://github.com/RWTH-EBC/AixLib/tree/issue661_SimpleDynamicHeatExchangerModel\">
     AixLib, issue 661</a>.

@@ -371,7 +371,7 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},{220,160}})),
     Documentation(revisions="<html><ul>
   <li>
-    <i>October 19, 2020</i> ,by Tobias Blacha:<br />
+    <i>October 19, 2020</i> ,by Tobias Blacha:<br/>
     Implemented
   </li>
 </ul>

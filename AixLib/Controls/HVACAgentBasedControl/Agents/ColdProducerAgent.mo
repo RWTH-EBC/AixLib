@@ -771,7 +771,7 @@ equation
 </ul>
 </html>",
       revisions="<html><ul>
-  <li>December 2016, by Roozbeh Sangi:<br />
+  <li>December 2016, by Roozbeh Sangi:<br/>
     revised
   </li>
   <li>December 2016, by Felix Bünning: Changed some variables to

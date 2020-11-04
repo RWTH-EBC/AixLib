@@ -128,7 +128,7 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br />
+    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
     Implemented
   </li>
 </ul>

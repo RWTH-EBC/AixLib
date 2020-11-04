@@ -140,7 +140,7 @@ equation
   sensor is ideal, i.e., it does not influence the fluid.
 </p>
 <ul>
-  <li>by Marc Baranski and Roozbeh Sangi:<br />
+  <li>by Marc Baranski and Roozbeh Sangi:<br/>
     implemented
   </li>
 </ul>

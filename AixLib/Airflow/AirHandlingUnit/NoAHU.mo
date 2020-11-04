@@ -38,7 +38,7 @@ equation
           textString="(All outputs = 0)")}),
     Documentation(revisions="<html><ul>
   <li>
-    <i>February, 2016&#160;</i> by Philipp Mehrfeld:<br />
+    <i>February, 2016&#160;</i> by Philipp Mehrfeld:<br/>
     Model implemented
   </li>
 </ul>

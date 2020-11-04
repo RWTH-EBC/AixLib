@@ -41,7 +41,7 @@ connector SolarRad_in
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   which can be needed by certain models, but is not neccesarry for all
   models. As this connector replaces the old connector, please make
   sure to write the appropriate equations for all the connector's
@@ -49,19 +49,19 @@ connector SolarRad_in
 </p>
 <ul>
   <li>
-    <i>February 22, 2015&#160;</i> by Ana Constantin:<br />
+    <i>February 22, 2015&#160;</i> by Ana Constantin:<br/>
     Added the components of the total radiation
   </li>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>April 01, 2014</i> by Moritz Lauster:<br />
+    <i>April 01, 2014</i> by Moritz Lauster:<br/>
     Renamed
   </li>
   <li>
-    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
 </ul>

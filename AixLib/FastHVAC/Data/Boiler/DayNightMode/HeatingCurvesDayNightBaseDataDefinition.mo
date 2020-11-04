@@ -33,11 +33,11 @@ annotation (Documentation(info="<html><h4>
 </html>",
     revisions="<html><ul>
   <li>
-    <i>July 2, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>July 2, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>Mai 23, 2011</i> by Ana Constantin:<br />
+    <i>Mai 23, 2011</i> by Ana Constantin:<br/>
     implemented
   </li>
 </ul>

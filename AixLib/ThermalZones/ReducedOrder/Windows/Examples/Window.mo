@@ -49,7 +49,7 @@ equation
 </p>
 </html>",
       revisions="<html><ul>
-  <li>July 13, 2016,&#160; by Stanley Risch:<br />
+  <li>July 13, 2016,&#160; by Stanley Risch:<br/>
     Implemented.
   </li>
 </ul>

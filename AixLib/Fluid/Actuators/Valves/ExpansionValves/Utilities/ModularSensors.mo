@@ -164,7 +164,7 @@ equation
           fillPattern=FillPattern.Solid,
           extent={{-7.0,-7.0},{7.0,7.0}})}),
                                  Documentation(revisions="<html><ul>
-  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -173,7 +173,7 @@ equation
 <p>
   This is a model of modular sensors that is used, for example, for
   components of modular heat pumps like modular expansion valves or
-  modular compressors.<br />
+  modular compressors.<br/>
   It consists of four types of sensors that are introduced as vectors
   and that are mainly used in heat pumps:
 </p>

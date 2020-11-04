@@ -29,7 +29,8 @@ equation
           74},{-22,45},{-20,45}}, color={0,0,127}));
   connect(Source_Tdiff.y, multiSum.u[1]) annotation(Line(points = {{-59, 56}, {-50, 56}, {-50, 76.1}, {-40, 76.1}}, color = {0, 0, 127}));
   connect(pITemp.y, Inverter.u) annotation(Line(points = {{-3, 36}, {6.8, 36}}, color = {0, 0, 127}));
-  connect(Inverter.y, varAirExchange.InPort1) annotation(Line(points = {{20.6, 36}, {24, 36}, {24, -15.68}, {37.3, -15.68}}, color = {0, 0, 127}));
+  connect(Inverter.y, varAirExchange.ventRate) annotation (Line(points={{20.6,
+          36},{24,36},{24,-15.68},{37.3,-15.68}}, color={0,0,127}));
   connect(Input_Tset.y, multiSum.u[2]) annotation(Line(points = {{-59, 90}, {-54, 90}, {-54, 88}, {-50, 88}, {-50, 71.9}, {-40, 71.9}}, color = {0, 0, 127}));
   connect(Sensor_Tinside.port, port_inside) annotation(Line(points = {{24, -80}, {94, -80}, {94, -10}}, color = {191, 0, 0}));
   connect(Higher_HeatingLimit.y, Colder_and_HeatingLimit.u1) annotation(Line(points = {{-59, 30}, {-52, 30}, {-52, 35}, {-47.4, 35}}, color = {255, 0, 255}));
@@ -42,16 +43,16 @@ equation
   annotation (Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(revisions = "<html><ul>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>October 16, 2011&#160;</i> by Ana Constantin:<br />
-    implemented<br />
+    <i>October 16, 2011&#160;</i> by Ana Constantin:<br/>
+    implemented<br/>
   </li>
 </ul>
 </html>", info = "<html>

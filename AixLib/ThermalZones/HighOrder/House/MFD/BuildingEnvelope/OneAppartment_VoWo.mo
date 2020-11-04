@@ -169,11 +169,11 @@ equation
 </p>
 <ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>August 16, 2011</i> by Ana Constantin:<br />
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

@@ -20,7 +20,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>May 31, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 31, 2013&#160;</i> by Ole Odendahl:<br/>
     Implemented, added documentation and formatted appropriately
   </li>
 </ul>

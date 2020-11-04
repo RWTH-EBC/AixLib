@@ -105,11 +105,11 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>April 15, 2017&#160;</i> by Tobias Blacha:<br />
+    <i>April 15, 2017&#160;</i> by Tobias Blacha:<br/>
     Moved into AixLib
   </li>
   <li>
-    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br />
+    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
     Implemented
   </li>
 </ul>

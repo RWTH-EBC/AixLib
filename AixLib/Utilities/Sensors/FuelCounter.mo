@@ -15,15 +15,15 @@ equation
 </p>
 <ul>
   <li>
-    <i>December 15, 2016</i> by Moritz Lauster:<br />
+    <i>December 15, 2016</i> by Moritz Lauster:<br/>
     Moved
   </li>
   <li>
-    <i>09.10.2013&#160;</i> by Marcus Fuchs:<br />
+    <i>09.10.2013&#160;</i> by Marcus Fuchs:<br/>
     corrected error in equation
   </li>
   <li>
-    <i>07.10.2013&#160;</i> by Marcus Fuchs:<br />
+    <i>07.10.2013&#160;</i> by Marcus Fuchs:<br/>
     implemented
   </li>
 </ul>

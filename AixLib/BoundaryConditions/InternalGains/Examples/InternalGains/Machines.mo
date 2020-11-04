@@ -98,13 +98,13 @@ Documentation(info="<html><h4>
   </tr>
 </table>
 <p>
-  <br />
+  <br/>
   Heat flow values can be displayed via the provided output.
 </p>
 </html>",
         revisions="<html><ul>
   <li>
-    <i>May 31, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 31, 2013&#160;</i> by Ole Odendahl:<br/>
     Implemented, added documentation and formatted appropriately
   </li>
 </ul>

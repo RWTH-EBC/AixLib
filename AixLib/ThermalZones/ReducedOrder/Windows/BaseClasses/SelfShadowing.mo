@@ -193,7 +193,7 @@ equation
   Modelling of solar radiation.
 </p>
 <ul>
-  <li>May 23, 2016,&#160; by Stanley Risch:<br />
+  <li>May 23, 2016,&#160; by Stanley Risch:<br/>
     Implemented.
   </li>
 </ul>

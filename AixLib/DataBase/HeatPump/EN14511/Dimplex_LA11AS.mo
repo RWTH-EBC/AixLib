@@ -11,7 +11,7 @@ record Dimplex_LA11AS "Dimplex LA 11 AS"
     Icon,
     Documentation(revisions="<html><ul>
   <li>
-    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br />
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
     Transferred to AixLib.
   </li>
 </ul>

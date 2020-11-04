@@ -1468,7 +1468,7 @@ equation
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   Figure 1 [5, appendix D]
 </p>
 <p>
@@ -1477,7 +1477,7 @@ equation
   alt=\"schema of AHU\">
 </p>
 <p>
-  <br />
+  <br/>
   <b><span style=\"color: #008000;\">References</span></b>
 </p>
 <ul>
@@ -1523,18 +1523,18 @@ equation
 </p>
 <ul>
   <li>
-    <i>February, 2016&#160;</i> by Philipp Mehrfeld:<br />
+    <i>February, 2016&#160;</i> by Philipp Mehrfeld:<br/>
     Added previous() functions in source code as decisions for state
     machines and calculations in state machines did not use values of
     the same time step.
   </li>
   <li>
-    <i>June 17, 2015&#160;</i> by Philipp Mehrfeld:<br />
+    <i>June 17, 2015&#160;</i> by Philipp Mehrfeld:<br/>
     Changes in Inputs, transition conditions, BPF_DeHu, etc. Added
     functionality for mode selection.
   </li>
   <li>
-    <i>Septmeber, 2014&#160;</i> by Philipp Mehrfeld:<br />
+    <i>Septmeber, 2014&#160;</i> by Philipp Mehrfeld:<br/>
     Model implemented
   </li>
 </ul>

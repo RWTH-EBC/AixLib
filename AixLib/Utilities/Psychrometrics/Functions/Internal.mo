@@ -14,12 +14,12 @@ info="<html><p>
 </p>
 </html>",
 revisions="<html><ul>
-  <li>August 10, 2011, by Michael Wetter:<br />
+  <li>August 10, 2011, by Michael Wetter:<br/>
     Changed function to extend from
     <code>Modelica.Media.Common.OneNonLinearEquation</code> instead of
     <code>AixLib.Utilities.Math.BaseClasses.OneNonLinearEquation</code>.
   </li>
-  <li>February 17, 2010, by Michael Wetter:<br />
+  <li>February 17, 2010, by Michael Wetter:<br/>
     First implementation.
   </li>
 </ul>

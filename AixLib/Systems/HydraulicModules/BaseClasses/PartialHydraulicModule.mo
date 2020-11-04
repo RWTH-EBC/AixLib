@@ -239,7 +239,7 @@ equation
   operational modes.
 </p>
 <ul>
-  <li>August, 2018, by Alexander Kümpel:<br />
+  <li>August, 2018, by Alexander Kümpel:<br/>
     First implementation
   </li>
 </ul>

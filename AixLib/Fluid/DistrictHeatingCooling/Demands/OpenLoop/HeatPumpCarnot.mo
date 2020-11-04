@@ -281,10 +281,10 @@ equation
   district heating network as its source.
 </p>
 <ul>
-  <li>Novemver 22, 2019, by Nils Neuland:<br />
+  <li>Novemver 22, 2019, by Nils Neuland:<br/>
     Revised variable names and documentation to follow guidelines.
   </li>
-  <li>March 4, 2018, by Marcus Fuchs:<br />
+  <li>March 4, 2018, by Marcus Fuchs:<br/>
     First implementation.
   </li>
 </ul>

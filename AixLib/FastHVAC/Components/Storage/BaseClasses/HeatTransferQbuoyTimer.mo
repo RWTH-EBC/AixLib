@@ -104,12 +104,12 @@ end when;
 </html>",
    revisions="<html><ul>
   <li>
-    <i>October 19, 2017&#160;</i> David Jansen:<br />
+    <i>October 19, 2017&#160;</i> David Jansen:<br/>
     Added informations and commentations to source code and changed
     names according to AixLib regulations
   </li>
   <li>
-    <i>March , 2017&#160;</i> Christian Grozescu :<br />
+    <i>March , 2017&#160;</i> Christian Grozescu :<br/>
     Developed model
   </li>
 </ul>

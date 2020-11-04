@@ -233,7 +233,7 @@ equation
     annotation (Line(points={{24.4,-39.4},{36,-39.4},{36,-38}}, color={191,0,0}));
   connect(upperFloor_Building.thermCorridor, varAirExchange.port_a) annotation (
      Line(points={{22.3,-24.6},{36,-24.6},{36,-26}}, color={191,0,0}));
-  connect(AirExchangeCorridor_Source.y, varAirExchange.InPort1) annotation (
+  connect(AirExchangeCorridor_Source.y, varAirExchange.ventRate) annotation (
       Line(points={{26.2,-32},{28,-32},{28,-24},{32.16,-24},{32.16,-26.6}},
         color={0,0,127}));
   connect(groundFloor_Building.AirExchangePort[1:4], AirExchangePort[1:4])
@@ -355,20 +355,20 @@ equation
 </p>
 <ul>
   <li>
-    <i>August 1, 2017</i> by Philipp Mehrfeld:<br />
+    <i>August 1, 2017</i> by Philipp Mehrfeld:<br/>
     Add heat-star-combi to connect heaters in a more clever way
   </li>
   <li>
-    <i>Mai 7, 2015</i> by Ana Constantin:<br />
+    <i>Mai 7, 2015</i> by Ana Constantin:<br/>
     Corrected connection of gabled vertical walls with solar radiation
     (E and W)
   </li>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>July 10, 2011</i> by Ana Constantin:<br />
+    <i>July 10, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>
