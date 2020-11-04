@@ -32,12 +32,6 @@ model SimpleExternalShading
   Modelica.Blocks.Interfaces.RealOutput shadingFactor[nOrientations]
                                  "Shading factors with external shading."
     annotation (Placement(transformation(extent={{92,-90},{112,-70}})));
-  Modelica.Blocks.Math.Add add[nOrientations](k1=-1)
-    annotation (Placement(transformation(extent={{62,-54},{82,-34}})));
-  Modelica.Blocks.Sources.Constant noShading1
-                                            [nOrientations](each k=1)
-    "Constant zero for that no shading is applied."
-    annotation (Placement(transformation(extent={{30,-22},{42,-10}})));
 equation
   connect(greaterShadingThreshold.y, switchShading.u2)
     annotation (Line(points={{-39,2},{-14,2}}, color={255,0,255}));
