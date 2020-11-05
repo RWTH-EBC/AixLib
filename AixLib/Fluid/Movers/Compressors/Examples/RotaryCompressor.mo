@@ -87,7 +87,7 @@ equation
     annotation (Line(points={{-60,-50},{-20,-50},{-20,-10}}, color={191,0,0}));
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 20, 2017, by Mirko Engelpracht:<br />
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

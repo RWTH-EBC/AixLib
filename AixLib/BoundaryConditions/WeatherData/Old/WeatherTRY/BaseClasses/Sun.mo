@@ -130,17 +130,17 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
 </html>",
     revisions="<html><ul>
   <li>
-    <i>December 20, 2012&#160;</i> by Jerome Feldhaus:<br />
+    <i>December 20, 2012&#160;</i> by Jerome Feldhaus:<br/>
     new Output variable OutHourAngleSun and renaming from Sun to
     SunAltitude.
   </li>
   <li>
-    <i>September 29, 2006&#160;</i> by Peter Matthes:<br />
+    <i>September 29, 2006&#160;</i> by Peter Matthes:<br/>
     Included ArgACOS variable to protect acos function from arguments
     &gt; 1. Added protection for some variables.
   </li>
   <li>
-    <i>March 14, 2005&#160;</i> by Timo Haase:<br />
+    <i>March 14, 2005&#160;</i> by Timo Haase:<br/>
     Implemented.
   </li>
 </ul>

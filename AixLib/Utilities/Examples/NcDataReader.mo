@@ -42,7 +42,7 @@ model NcDataReader
 </p>
 <ul>
   <li>
-    <i>Feburary 1, 2017</i> by Fabian Wuellhorst:<br />
+    <i>Feburary 1, 2017</i> by Fabian Wuellhorst:<br/>
     Implemented.
   </li>
 </ul>

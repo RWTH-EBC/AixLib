@@ -61,7 +61,7 @@ equation
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   The fluid source uses the real input to set the flow mass rate and
   the temperature of the fluid. The specific heat capacity of the
   medium is referred to the record SimpleMedium. The specific enthalpy
@@ -77,11 +77,11 @@ equation
 </html>",
 revisions="<html><ul>
   <li>
-    <i>April 25, 2017&#160;</i> by Tobias Blacha:<br />
+    <i>April 25, 2017&#160;</i> by Tobias Blacha:<br/>
     Moved into AixLib
   </li>
   <li>
-    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br />
+    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
     Implemented
   </li>
 </ul>

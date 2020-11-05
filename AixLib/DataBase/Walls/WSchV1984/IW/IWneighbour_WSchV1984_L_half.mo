@@ -16,11 +16,11 @@ record IWneighbour_WSchV1984_L_half
   //    eps=0.95 "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html><ul>
   <li>
-    <i>September 5, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>September 5, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
   <li>
-    <i>August 15, 2011</i> by Ana Constantin:<br />
+    <i>August 15, 2011</i> by Ana Constantin:<br/>
     implemented
   </li>
 </ul>

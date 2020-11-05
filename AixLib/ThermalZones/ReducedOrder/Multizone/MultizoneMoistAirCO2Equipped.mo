@@ -362,10 +362,10 @@ Cooling"),
           fillPattern=FillPattern.Solid,
           textString="AHU")}),
     Documentation(revisions="<html><ul>
-  <li>August 27, 2020, by Katharina Breuer:<br />
+  <li>August 27, 2020, by Katharina Breuer:<br/>
     Add co2 balance
   </li>
-  <li>April, 2019, by Martin Kremer:<br />
+  <li>April, 2019, by Martin Kremer:<br/>
     First implementation
   </li>
 </ul>

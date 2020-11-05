@@ -52,12 +52,12 @@ equation
 </p>
 <ul>
   <li>
-    <i>March 30, 2020</i> by Philipp Mehrfeld:<br />
+    <i>March 30, 2020</i> by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>:
     Summarize models to partial model. Make all models dependant from a
     relative input 0..1. Many refactorings.
   </li>
-  <li>July 10, 2019, by Martin Kremer:<br />
+  <li>July 10, 2019, by Martin Kremer:<br/>
     Implemented based on old human model
   </li>
 </ul>

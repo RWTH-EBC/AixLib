@@ -131,29 +131,29 @@ equation
 </p>
 <ul>
   <li>
-    <i>March 01, 2019&#160;</i> by Niklas Huelsenbeck:<br />
+    <i>March 01, 2019&#160;</i> by Niklas Huelsenbeck:<br/>
     Duplicated HumanSensibleHeat_VDI2078 Class and adapted it to a heat
     flux input value instead of a total number of persons
   </li>
   <li>
-    <i>March 23, 2015&#160;</i> by Ana Constantin:<br />
+    <i>March 23, 2015&#160;</i> by Ana Constantin:<br/>
     Set minimal surface to surface of one person
   </li>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>April 10, 2014&#160;</i> by Ana Constantin:<br />
+    <i>April 10, 2014&#160;</i> by Ana Constantin:<br/>
     Added a lower positive limit to the surface area, so it won't lead
     to a division by zero
   </li>
   <li>
-    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>August 10, 2011</i> by Ana Constantin:<br />
+    <i>August 10, 2011</i> by Ana Constantin:<br/>
     implemented
   </li>
 </ul>

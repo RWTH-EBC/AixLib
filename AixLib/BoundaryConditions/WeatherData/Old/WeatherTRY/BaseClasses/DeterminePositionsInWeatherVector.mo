@@ -55,7 +55,7 @@ algorithm
   end if;
   annotation(Documentation(revisions = "<html><ul>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately, added variable descriptions
   </li>
 </ul>

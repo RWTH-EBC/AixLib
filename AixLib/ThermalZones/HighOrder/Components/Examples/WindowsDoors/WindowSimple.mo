@@ -55,7 +55,7 @@ equation
 <ul>
   <li>
     <i>April 1, 2012&#160;</i> by Ana Constantin and Corinna
-    Leonhard:<br />
+    Leonhard:<br/>
     Implemented.
   </li>
 </ul>

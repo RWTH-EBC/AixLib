@@ -16,7 +16,7 @@ record CHP_FMB_31_GSK "FMB-31-GSK : Schmitt Enertec"
 </html>",
         revisions="<html><ul>
   <li>
-    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br/>
     Added reference
   </li>
 </ul>

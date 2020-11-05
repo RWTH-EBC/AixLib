@@ -68,10 +68,10 @@ extends Modelica.Icons.Package;
   </li>
 </ul>
 <ul>
-  <li>2019-09-18 by Alexander Kümpel:<br />
+  <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
   </li>
-  <li>2018-05-14 by Peter Matthes:<br />
+  <li>2018-05-14 by Peter Matthes:<br/>
     Transfered package from internal \"Zugabe\" library into AixLib.
   </li>
 </ul>

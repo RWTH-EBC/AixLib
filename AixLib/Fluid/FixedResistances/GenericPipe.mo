@@ -250,11 +250,11 @@ equation
 </p>
 </html>", revisions="<html>
 <ul>
-  <li>August 12, 2020, by Alexander Kümpel:<br />
+  <li>August 12, 2020, by Alexander Kümpel:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/910\">#910</a>
     Make insulation and heat convection optional
   </li>
-  <li>Mai 14, 2020, by Alexander Kümpel:<br />
+  <li>Mai 14, 2020, by Alexander Kümpel:<br/>
     First implementation
   </li>
 </ul>

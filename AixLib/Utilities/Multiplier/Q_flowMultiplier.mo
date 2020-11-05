@@ -58,14 +58,14 @@ Therm1.Q_flow*f=-Therm2.Q_flow;
 </html>",
       revisions="<html><ul>
   <li>
-    <i>April 01, 2014</i> by Moritz Lauster:<br />
+    <i>April 01, 2014</i> by Moritz Lauster:<br/>
     Renamed
   </li>
   <li>
-    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
-  <li>by Alexander Hoh:<br />
+  <li>by Alexander Hoh:<br/>
     Implemented.
   </li>
 </ul>

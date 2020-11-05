@@ -24,11 +24,11 @@ record Iso100pc "100% Insulation (thickness insulation = 1 x d_o)"
 </html>",
       revisions="<html><ul>
   <li>
-    <i>April 25, 2017</i> by Tobias Blacha:<br />
+    <i>April 25, 2017</i> by Tobias Blacha:<br/>
     Moved into AixLib
   </li>
   <li>
-    <i>July 9, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>July 9, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
 </ul>

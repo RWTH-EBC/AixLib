@@ -44,7 +44,7 @@ package HighOrder "Standard house models"
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   We call these house models standard for the following reasons:
 </p>
 <ul>

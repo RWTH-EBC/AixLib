@@ -19,7 +19,7 @@ record Vitocal350BWH110 "Vitocal 350 BWH 110"
 </p>
 <ul>
   <li>
-    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br />
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
     Transferred to AixLib.
   </li>
 </ul>

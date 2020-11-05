@@ -17,7 +17,7 @@ record CHP_FMB_2500_GSMK "FMB-2500-GSMK : Cummins"
 </html>",
         revisions="<html><ul>
   <li>
-    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br/>
     Added reference
   </li>
 </ul>

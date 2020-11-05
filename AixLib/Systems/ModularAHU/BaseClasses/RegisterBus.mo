@@ -18,7 +18,7 @@ expandable connector RegisterBus "Data bus for modular ahu registers"
   HydraulicBus</a>.
 </p>
 <ul>
-  <li>January 23, 2018, by Alexander Kümpel:<br />
+  <li>January 23, 2018, by Alexander Kümpel:<br/>
     First implementation.
   </li>
 </ul>

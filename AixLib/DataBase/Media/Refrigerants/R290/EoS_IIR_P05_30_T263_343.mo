@@ -34,7 +34,7 @@ record EoS_IIR_P05_30_T263_343
     f_ResG7={0.684,0.829,1.419,0.817,1.5,1.426,1.093});
 
   annotation (Documentation(revisions="<html><ul>
-  <li>June 10, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>June 10, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
@@ -58,7 +58,7 @@ record EoS_IIR_P05_30_T263_343
 </h4>
 <p>
   The provided coefficients are fitted to external data by Sangi et al.
-  and are valid within the following range:<br />
+  and are valid within the following range:<br/>
 </p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
 border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">

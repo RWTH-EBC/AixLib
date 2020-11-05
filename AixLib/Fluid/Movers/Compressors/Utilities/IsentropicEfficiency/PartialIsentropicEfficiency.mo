@@ -9,7 +9,7 @@ partial model PartialIsentropicEfficiency
     "Overall isentropic efficiency";
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 20, 2017, by Mirko Engelpracht:<br />
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -19,7 +19,7 @@ partial model PartialIsentropicEfficiency
   This is a base model for overall isentropic efficiency models that
   are required for various compressor models. It defines some basic
   inputs and outputs that are commonly used by efficiency models and
-  these inputs and outputs are summarised below:<br />
+  these inputs and outputs are summarised below:<br/>
 </p>
 <table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

@@ -22,11 +22,11 @@ equation
             lineColor = {0, 0, 0})}),
 Documentation(revisions="<html><ul>
   <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br />
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class
   </li>
   <li>
-    <i>November 13, 2013&#160;</i> by Ana Constantin:<br />
+    <i>November 13, 2013&#160;</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

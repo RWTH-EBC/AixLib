@@ -276,7 +276,7 @@ equation
   to be set by the user.
 </p>
 <p>
-  <br />
+  <br/>
   <b><span style=\"color: #008000\">References</span></b>
 </p>
 <p>
@@ -287,11 +287,11 @@ equation
 </html>",
         revisions="<html><ul>
   <li>
-    <i>October 11, 2016&#160;</i> by Marcus Fuchs:<br />
+    <i>October 11, 2016&#160;</i> by Marcus Fuchs:<br/>
     Transferred alternative version
   </li>
   <li>
-    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br />
+    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
     implemented
   </li>
 </ul>

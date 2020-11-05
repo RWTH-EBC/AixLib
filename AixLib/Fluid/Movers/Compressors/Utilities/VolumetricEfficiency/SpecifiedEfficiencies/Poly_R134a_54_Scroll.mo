@@ -9,7 +9,7 @@ model Poly_R134a_54_Scroll
     final c={1.047,-0.051,0});
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 23, 2017, by Mirko Engelpracht:<br />
+  <li>October 23, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -17,7 +17,7 @@ model Poly_R134a_54_Scroll
 </html>", info="<html>
 <p>
   This model contains a calculation procedure for the isentropic
-  efficiency presented by Li (2013).<br />
+  efficiency presented by Li (2013).<br/>
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

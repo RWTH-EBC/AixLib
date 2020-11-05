@@ -78,7 +78,7 @@ equation
   /*It is assumed that the heat flow flows out of the system*/
 
   annotation (Documentation(revisions="<html><ul>
-  <li>October 28, 2017, by Mirko Engelpracht:<br />
+  <li>October 28, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>

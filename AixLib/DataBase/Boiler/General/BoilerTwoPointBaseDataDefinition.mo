@@ -24,19 +24,19 @@ record BoilerTwoPointBaseDataDefinition
 </p>
 <ul>
   <li>
-    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br />
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br />
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
     Merged with AixLib
   </li>
   <li>
-    <i>June 19, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>June 19, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately, renamed model
   </li>
   <li>
-    <i>June 23, 2006&#160;</i>by Ana Constantin:<br />
+    <i>June 23, 2006&#160;</i>by Ana Constantin:<br/>
     expanded.
   </li>
 </ul>

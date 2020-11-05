@@ -77,7 +77,7 @@ equation
   rate.
 </p>
 <ul>
-  <li>September 25, 2019 by Nils Neuland:<br />
+  <li>September 25, 2019 by Nils Neuland:<br/>
     First implementation
   </li>
 </ul>

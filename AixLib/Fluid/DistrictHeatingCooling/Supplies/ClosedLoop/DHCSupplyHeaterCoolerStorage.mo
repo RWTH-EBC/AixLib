@@ -125,11 +125,11 @@ equation
             100}})),
     Documentation(revisions="<html><ul>
   <li>
-    <i>October 08, 2020</i> ,by Tobias Blacha:<br />
+    <i>October 08, 2020</i> ,by Tobias Blacha:<br/>
     Moved to development
   </li>
   <li>
-    <i>August 09, 2018</i> ,by Tobias Blacha:<br />
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
     Implemented
   </li>
 </ul>

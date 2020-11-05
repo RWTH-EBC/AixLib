@@ -77,10 +77,10 @@ class Gettingstarted "Getting started"
   alt=\"Example system\">
 </p>
 <ul>
-  <li>December 2016, by Roozbeh Sangi:<br />
+  <li>December 2016, by Roozbeh Sangi:<br/>
     Revised.
   </li>
-  <li>November 2016, by Felix Bünning:<br />
+  <li>November 2016, by Felix Bünning:<br/>
     Original implementation
   </li>
 </ul>

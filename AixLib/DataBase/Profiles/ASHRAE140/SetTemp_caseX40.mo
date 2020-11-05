@@ -21,7 +21,7 @@ record SetTemp_caseX40 "Max. and Min. set room temperatures for heating"
 </p>
 <ul>
   <li>
-    <i>March 26, 2015&#160;</i> by Ana Constantin:<br />
+    <i>March 26, 2015&#160;</i> by Ana Constantin:<br/>
     Implemented.
   </li>
 </ul>

@@ -87,7 +87,7 @@ equation
             100}})),
     experiment(StopTime=600),
     Documentation(revisions="<html><ul>
-  <li>October 25, 2017, by Alexander Kümpel:<br />
+  <li>October 25, 2017, by Alexander Kümpel:<br/>
     Transfer from ZUGABE to AixLib.
   </li>
 </ul>

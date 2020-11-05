@@ -134,7 +134,7 @@ equation
           lineColor={28,108,200},
           textString="Provide dummy signals"), Rectangle(extent={{10,90},{90,70}},
             lineColor={28,108,200})}), Documentation(revisions="<html><ul>
-  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>October 17, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>

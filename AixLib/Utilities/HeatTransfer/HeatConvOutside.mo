@@ -80,7 +80,7 @@ equation
   D+Ev+Fv^2</code></i> , where <i><code>h</code></i> <b>(hCon)</b> and
   <i><b><code>v</code></b></i> are as above and the coefficients <i><b>
     <code>D, E, F</code></b></i> depend on the surface of the outer
-    wall.<br />
+    wall.<br/>
     <b><span style=\"color: #ff0000;\">Attention:</span></b> This is a
     combined coefficient for convective and radiative heat exchange.
   </li>
@@ -110,20 +110,20 @@ equation
 </p>
 <ul>
   <li>
-    <i>November 16, 2016&#160;</i> by Ana Constantin:<br />
+    <i>November 16, 2016&#160;</i> by Ana Constantin:<br/>
     Conditioned input WindSpeedPort and introduced protected input
     WindSpeed_internal
   </li>
 </ul>
 <ul>
   <li>
-    <i>April 1, 2014&#160;</i> by Ana Constantin:<br />
+    <i>April 1, 2014&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL and respects the naming conventions
   </li>
 </ul>
 <ul>
   <li>
-    <i>March 30, 2012&#160;</i> by Ana Constantin:<br />
+    <i>March 30, 2012&#160;</i> by Ana Constantin:<br/>
     Implemented.
   </li>
 </ul>

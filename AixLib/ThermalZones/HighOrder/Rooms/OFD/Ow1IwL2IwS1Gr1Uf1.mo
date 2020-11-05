@@ -461,8 +461,8 @@ equation
   connect(SolarRadiationPort_OW1, outside_wall1.SolarRadiationPort) annotation (
      Line(points={{-99.5,60},{-80,60},{-80,39.6667},{-65.5,39.6667}}, color={
           255,128,0}));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation (Line(points=
-          {{-100,-19.5},{-80,-19.5},{-80,-30.4},{-67,-30.4}}, color={0,0,127}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points
+        ={{-100,-19.5},{-80,-19.5},{-80,-30.4},{-67,-30.4}}, color={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{-68,
           -24},{-80,-24},{-80,90},{-90,90}}, color={191,0,0}));
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-48,
@@ -587,15 +587,15 @@ equation
         Line(points={{58,26},{58,18}}, color={255,255,255})}), Documentation(
         revisions="<html><ul>
   <li>
-    <i>Mai 7, 2015</i> by Ana Constantin:<br />
+    <i>Mai 7, 2015</i> by Ana Constantin:<br/>
     Grount temperature depends on TRY
   </li>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>July 7, 2011</i> by Ana Constantin:<br />
+    <i>July 7, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

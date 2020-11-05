@@ -86,7 +86,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>The model considers additional heat input in the event of window
 ventilation and simultaneously closed external solar protection based
-on VDI 6007 part 3.<br />
+on VDI 6007 part 3.<br/>
 The closed external solar protection absorbs solar irradiation which is
 brought into the room by convection.
 <h4>
@@ -98,7 +98,7 @@ brought into the room by convection.
   Modelling of solar radiation.
 </p>
 <ul>
-  <li>May 5, 2016,&#160; by Stanley Risch:<br />
+  <li>May 5, 2016,&#160; by Stanley Risch:<br/>
     Implemented.
   </li>
 </ul>

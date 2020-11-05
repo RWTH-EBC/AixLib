@@ -37,11 +37,11 @@ algorithm
 </html>",
         revisions="<html><ul>
   <li>
-    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>July, 2007&#160;</i> by Peter Matthes:<br />
+    <i>July, 2007&#160;</i> by Peter Matthes:<br/>
     Implemented.
   </li>
 </ul>

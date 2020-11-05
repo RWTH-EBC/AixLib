@@ -74,7 +74,7 @@ equation
   including the NOC
 </p>
 <p>
-  <br />
+  <br/>
   <b><span style=\"color: #008000;\">Assumptions</span></b>
 </p>
 <p>
@@ -107,7 +107,7 @@ equation
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   Source of literature for the calculation of the pv cell efficiency:
 </p>
 <p>
@@ -123,7 +123,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>October 20, 2017</i> ,by Larissa Kuehn:<br />
+    <i>October 20, 2017</i> ,by Larissa Kuehn:<br/>
     First implementation
   </li>
 </ul>

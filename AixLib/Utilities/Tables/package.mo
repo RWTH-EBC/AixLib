@@ -35,7 +35,7 @@ annotation (Icon(coordinateSystem(extent={{-80,-80},{80,80}}), graphics={
           80}})),
   Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br />
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
   </li>

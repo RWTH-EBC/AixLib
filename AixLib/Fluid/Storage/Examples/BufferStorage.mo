@@ -94,12 +94,12 @@ equation
   mass flow with a higher temperature than the initial temperature.
 </p>
 <ul>
-  <li>November 27, 2019, by Philipp Mehrfeld:<br />
+  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a>:
     Add one heating coil to example.
   </li>
   <li>
-    <i>October 11,2016</i> by Sebastian Stinner:<br />
+    <i>October 11,2016</i> by Sebastian Stinner:<br/>
     implemented
   </li>
 </ul>

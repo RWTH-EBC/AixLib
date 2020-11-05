@@ -19,7 +19,7 @@ info="<html><p>
 </p>
 </html>",
 revisions="<html><ul>
-  <li>July 7, 2014, by Michael Wetter:<br />
+  <li>July 7, 2014, by Michael Wetter:<br/>
     Changed the type of the input <code>flowRegime</code> from
     <code>AixLib.Fluid.Types.HeatExchangerFlowRegime</code> to
     <code>Integer</code>.
@@ -36,7 +36,7 @@ revisions="<html><ul>
       </li>
     </ul>
   </li>
-  <li>February 16, 2010, by Michael Wetter:<br />
+  <li>February 16, 2010, by Michael Wetter:<br/>
     First implementation.
   </li>
 </ul>

@@ -216,7 +216,7 @@ equation
   annotation (
     Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2019&#160;</i> by Julian Matthes:<br />
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
   </li>
@@ -226,7 +226,7 @@ equation
   <span style=\"color: #008000\">Overview</span>
 </h4>
 <p>
-  <br />
+  <br/>
   The model of the motor housing uses a build-up scheme as a two-layer
   wall with thermal transitions to a circulating cooling medium.
   Assumptions were made to simplify the thermal simulation.
@@ -276,7 +276,7 @@ equation
   figure.
 </p>
 <p style=\"text-align:center;\">
-  <br />
+  <br/>
   <span style=\"font-size: 12pt;\"><img src=
   \"modelica://AixLib/Resources/Images/Fluid/BoilerCHP/CylinderWallTemperature.png\"
   width=\"550\" height=\"375\" alt=\"\"></span>

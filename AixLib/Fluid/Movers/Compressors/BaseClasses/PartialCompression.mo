@@ -393,7 +393,7 @@ equation
                   thickness=0.5)}),
                 Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>October 20, 2017, by Mirko Engelpracht:<br />
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
@@ -456,7 +456,7 @@ equation
 <p>
   Actually, three different efficiency models are suggested and the
   modelling approaches of these efficiencies are shortly characterised
-  below:<br />
+  below:<br/>
 </p>
 <table summary=\"Efficiencies\" border=\"1\" cellspacing=\"0\" cellpadding=
 \"2\" style=\"border-collapse:collapse;\">

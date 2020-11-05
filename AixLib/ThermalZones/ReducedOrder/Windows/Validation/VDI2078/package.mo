@@ -11,7 +11,7 @@ package VDI2078
   tested.
 </p>
 <ul>
-  <li>July 17 2016,&#160; by Stanley Risch:<br />
+  <li>July 17 2016,&#160; by Stanley Risch:<br/>
     Implemented.
   </li>
 </ul>

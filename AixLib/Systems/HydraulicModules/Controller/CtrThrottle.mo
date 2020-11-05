@@ -104,7 +104,7 @@ equation
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
     Documentation(revisions="<html><ul>
-  <li>January 22, 2019, by Alexander Kümpel:<br />
+  <li>January 22, 2019, by Alexander Kümpel:<br/>
     First implementation.
   </li>
 </ul>

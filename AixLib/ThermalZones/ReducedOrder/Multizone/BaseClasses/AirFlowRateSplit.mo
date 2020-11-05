@@ -107,13 +107,13 @@ equation
   \"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
 </p>
 <ul>
-  <li>September 27, 2016, by Moritz Lauster:<br />
+  <li>September 27, 2016, by Moritz Lauster:<br/>
     Moved to fit to new Annex60 structure.
   </li>
-  <li>October 30, 2015, by Moritz Lauster:<br />
+  <li>October 30, 2015, by Moritz Lauster:<br/>
     Moved and adapted to AixLib. Some renaming and adding units.
   </li>
-  <li>March 3, 2015, by Ole Odendahl:<br />
+  <li>March 3, 2015, by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
 </ul>

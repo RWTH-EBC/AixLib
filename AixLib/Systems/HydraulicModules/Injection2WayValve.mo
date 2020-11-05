@@ -319,10 +319,10 @@ equation
   effects
 </p>
 <ul>
-  <li>August 09, 2018, by Alexander Kümpel:<br />
+  <li>August 09, 2018, by Alexander Kümpel:<br/>
     Extension from base PartioalHydraulicModuls
   </li>
-  <li>June 30, 2018, by Alexander Kümpel:<br />
+  <li>June 30, 2018, by Alexander Kümpel:<br/>
     First implementation
   </li>
 </ul>

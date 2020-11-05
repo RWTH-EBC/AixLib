@@ -19,7 +19,7 @@ model RefrigerantsFittedFormulasR290
 
   annotation (experiment(StopTime=6400, Tolerance=1e-006),
 Documentation(revisions="<html><ul>
-  <li>August 13, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>August 13, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>

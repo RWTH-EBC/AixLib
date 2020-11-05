@@ -218,7 +218,7 @@ equation
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   Return to open windows if:
 </p>
 <ul>
@@ -228,7 +228,7 @@ equation
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   <b><span style=\"color: #008000\">References</span></b>
 </p>
 <ul>
@@ -240,7 +240,7 @@ equation
   <li>Implemented: Kristian Huchtemann
   </li>
   <li>
-    <i>2013-11-03:</i> Michael Adolph<br />
+    <i>2013-11-03:</i> Michael Adolph<br/>
     Adapted to work with Walls.Wall model of EBC Building Library
   </li>
 </ul>

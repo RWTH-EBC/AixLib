@@ -103,7 +103,7 @@ equation
   \"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>.
 </p>
 <p>
-  <br />
+  <br/>
   Change parameter <code>HR.from_dp</code> to <code>false</code> and
   the simulation time will increase by about 25 %.
 </p>
@@ -118,11 +118,11 @@ equation
 </p>
 <ul>
   <li>
-    <i>April 27, 2017&#160;</i> by Philipp Mehrfeld:<br />
+    <i>April 27, 2017&#160;</i> by Philipp Mehrfeld:<br/>
     Test incl. reversal mass flow.
   </li>
   <li>
-    <i>April 2016&#160;</i> by Peter Matthes:<br />
+    <i>April 2016&#160;</i> by Peter Matthes:<br/>
     Example after improved formulation of flow equation according to
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/232\">issue
     #232</a>.

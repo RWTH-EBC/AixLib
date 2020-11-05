@@ -23,10 +23,10 @@ expandable connector PumpBus "Standard data bus with pump information"
   Definition of a standard pump bus for use with the Zugabe library.
 </p>
 <ul>
-  <li>2020-01-09, by Alexander Kümpel:<br />
+  <li>2020-01-09, by Alexander Kümpel:<br/>
     Variable names changed.
   </li>
-  <li>2017-02-06, by Peter Matthes:<br />
+  <li>2017-02-06, by Peter Matthes:<br/>
     First implementation.
   </li>
 </ul>

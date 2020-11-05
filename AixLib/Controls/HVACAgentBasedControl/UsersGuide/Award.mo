@@ -8,13 +8,13 @@ class Award "Award"
   Prague, Czech Republic, May 15–17, 2017
 </p>
 <p>
-  <br />
+  <br/>
   .<img src=
   \"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Award.jpg\"
   alt=\"Award\">
 </p>
 <ul>
-  <li>May 2017, by Roozbeh Sangi:<br />
+  <li>May 2017, by Roozbeh Sangi:<br/>
     implemented.
   </li>
 </ul>

@@ -228,7 +228,7 @@ equation
     revisions="<html><ul>
   <li>October 2015, by Felix Bünning: Developed and implemented
   </li>
-  <li>December 2016, by Roozbeh Sangi:<br />
+  <li>December 2016, by Roozbeh Sangi:<br/>
     revised
   </li>
 </ul>

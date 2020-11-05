@@ -240,7 +240,7 @@ package R290_IIR_P05_30_T263_343_Record
     sigma := 1e-3*55.817*(1-sat.Tsat/369.85)^1.266;
   end surfaceTension;
   annotation (Documentation(revisions="<html><ul>
-  <li>June 12, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>June 12, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
@@ -265,7 +265,7 @@ package R290_IIR_P05_30_T263_343_Record
 </h4>
 <p>
   The implemented coefficients are fitted to external data by Sangi et
-  al. and are valid within the following range:<br />
+  al. and are valid within the following range:<br/>
 </p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
 border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">

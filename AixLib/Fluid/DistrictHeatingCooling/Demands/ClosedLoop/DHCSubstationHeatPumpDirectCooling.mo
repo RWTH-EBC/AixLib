@@ -328,11 +328,11 @@ equation
             160}})),
     Documentation(revisions="<html><ul>
   <li>
-    <i>October 08, 2020,by</i> Tobias Blacha:<br />
+    <i>October 08, 2020,by</i> Tobias Blacha:<br/>
     Move to development
   </li>
   <li>
-    <i>August 09, 2018</i> ,by Tobias Blacha:<br />
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
     Implemented
   </li>
 </ul>

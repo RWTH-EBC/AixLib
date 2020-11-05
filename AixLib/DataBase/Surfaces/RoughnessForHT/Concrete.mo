@@ -30,11 +30,11 @@ record Concrete
 </ul>
 <ul>
   <li>
-    <i>August 30, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>August 30, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
   <li>
-    <i>March 21, 2012&#160;</i> by Ana Constantin:<br />
+    <i>March 21, 2012&#160;</i> by Ana Constantin:<br/>
     Implemented.
   </li>
 </ul>

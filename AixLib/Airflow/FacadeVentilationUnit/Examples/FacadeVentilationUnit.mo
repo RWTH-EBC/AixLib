@@ -190,7 +190,7 @@ equation
             200,100}})),
     experiment(StopTime=86400),
     Documentation(revisions="<html><ul>
-  <li>July, 2017 by Marc Baranski and Roozbeh Sangi:<br />
+  <li>July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
     First implementation.
   </li>
 </ul>

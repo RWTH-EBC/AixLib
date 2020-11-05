@@ -21,11 +21,11 @@ equation
       color={0,0,127}));
   annotation (Documentation(revisions = "<html><ul>
   <li>
-    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>October 14, 2012&#160;</i> by Ana Constantin:<br />
+    <i>October 14, 2012&#160;</i> by Ana Constantin:<br/>
     Implemented.
   </li>
 </ul>

@@ -36,11 +36,11 @@ record BoilerTwoPointBaseDataDefinition
 </p>
 <ul>
   <li>
-    <i>June 19, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>June 19, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately, renamed model
   </li>
   <li>
-    <i>June 23, 2006&#160;</i> by Ana Constantin:<br />
+    <i>June 23, 2006&#160;</i> by Ana Constantin:<br/>
     expanded.
   </li>
 </ul>

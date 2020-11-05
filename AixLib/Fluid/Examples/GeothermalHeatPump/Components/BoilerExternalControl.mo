@@ -30,7 +30,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   annotation (Documentation(revisions="<html><ul>
-  <li>May 19, 2017, by Marc Baranski:<br />
+  <li>May 19, 2017, by Marc Baranski:<br/>
     First implementation.
   </li>
 </ul>

@@ -46,19 +46,19 @@ equation
 </html>",
    revisions="<html><ul>
   <li>
-    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br />
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
     Add comments and fix documentation
   </li>
   <li>
-    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br />
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
     Added to AixLib
   </li>
   <li>
-    <i>December 10, 2013</i> by Kristian Huchtemann:<br />
+    <i>December 10, 2013</i> by Kristian Huchtemann:<br/>
     New implementation in source code. Documentation.
   </li>
   <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
     Added documentation and formatted appropriately
   </li>
 </ul>

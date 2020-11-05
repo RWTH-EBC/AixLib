@@ -42,7 +42,7 @@ equation
   this Gist</a>.
 </p>
 <ul>
-  <li>April 30, 2018, by Marcus Fuchs:<br />
+  <li>April 30, 2018, by Marcus Fuchs:<br/>
     First implementation as part of <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/561\">issue 561</a>.
   </li>

@@ -490,8 +490,8 @@ equation
       pattern=LinePattern.Solid));
   connect(thermRoom, thermStar_Demux.portConv) annotation (Line(points={{-20,20},{-20,3},{-25.1,3},{-25.1,-15.9}}, color={191,0,0}));
   connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-25.1,-15.9},{-25.1,-12},{1,-12}}, color={191,0,0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation (Line(points=
-          {{-67,-34.4},{-80,-34.4},{-80,-9},{-100,-9}}, color={0,0,127}));
+  connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points
+        ={{-67,-34.4},{-80,-34.4},{-80,-9},{-100,-9}}, color={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{-68,
           -28},{-80,-28},{-80,90},{-90,90}}, color={191,0,0}));
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-48,
@@ -599,11 +599,11 @@ equation
         Line(points={{58,12},{58,2}}, color={255,255,255})}), Documentation(
         revisions="<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>July 8, 2011</i> by Ana Constantin:<br />
+    <i>July 8, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

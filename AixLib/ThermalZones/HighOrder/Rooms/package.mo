@@ -45,14 +45,14 @@ package Rooms
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   All outer walls are whole walls connected to the room air and the
   ambient, while inner walls are half walls, each half belonging to one
   of the rooms which share the wall. Airflow among rooms is not
   explicitly considered.
 </p>
 <p>
-  <br />
+  <br/>
   We chose to parameterize according to the following criteria:
 </p>
 <ul>
@@ -70,7 +70,7 @@ package Rooms
   ground, last or an arbitrary upper floor.
 </p>
 <p>
-  <br />
+  <br/>
   We wanted to make the library easy to use and extend by future users
   and developers. To this purpose we put extra effort in creating easy
   to understand icons and graphical interfaces for parameter input.

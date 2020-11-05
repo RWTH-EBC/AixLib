@@ -55,13 +55,13 @@ equation
           -18},{110,-18},{110,5}}, color={0,0,127}));
   annotation (Diagram(graphics), Documentation(revisions="<html><ul>
   <li>
-    <i>April, 2016&#160;</i> by Peter Remmen:<br />
+    <i>April, 2016&#160;</i> by Peter Remmen:<br/>
     Moved from Utilities to Controls
   </li>
 </ul>
 <ul>
   <li>
-    <i>October, 2015&#160;</i> by Moritz Lauster:<br />
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
     Adapted and moved to AixLib
   </li>
 </ul>

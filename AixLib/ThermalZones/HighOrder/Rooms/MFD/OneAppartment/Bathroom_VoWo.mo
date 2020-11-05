@@ -218,7 +218,9 @@ equation
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-11,-18},{-36,-18},{-36,-57.9},{-5.1,-57.9}}, color={191,0,0}));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation(Line(points = {{-102, 20}, {-80, 20}, {-80, 60}, {4, 60}, {4, 72.68}, {17.4, 72.68}}, color = {0, 0, 127}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points
+        ={{-102,20},{-80,20},{-80,60},{4,60},{4,72.68},{17.4,72.68}}, color={0,
+          0,127}));
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points = {{-100, 90}, {-80, 90}, {-80, 60}, {4, 60}, {4, 81}, {16, 81}}, color = {191, 0, 0}));
   connect(airload.port, NaturalVentilation.port_b) annotation(Line(points = {{-11, -18}, {-36, -18}, {-36, 16}, {94, 16}, {94, 60}, {48, 60}, {48, 81}, {44, 81}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{8, -116.55}, {8, -140}, {-80, -140}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
@@ -243,11 +245,11 @@ equation
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 100}, {-90, 80}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html><ul>
   <li>
-    <i>April 18, 2014</i> by Ana Constantin:<br />
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
     Added documentation
   </li>
   <li>
-    <i>August 16, 2011</i> by Ana Constantin:<br />
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
     Implemented
   </li>
 </ul>

@@ -196,7 +196,7 @@ equation
   based on the part load rate and the inflow water temperature.
 </p>
 <p>
-  <br />
+  <br/>
   Assumptions for predefined parameter values (based on <i><a href=
   \"http://www.viessmann.com/web/netherlands/nl_tdis.nsf/39085ab6c8b4f206c1257195003fd054/8A84BA9E240BA23DC12575210055DB56/$file/5811_009-DE_Simplex-PS.pdf\">
   Vissmann data cheat</a></i>):
@@ -212,7 +212,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>September 19, 2019&#160;</i> by Alexander Kümpel:<br />
+    <i>September 19, 2019&#160;</i> by Alexander Kümpel:<br/>
     First implementation
   </li>
 </ul>

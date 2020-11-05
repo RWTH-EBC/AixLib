@@ -5,10 +5,13 @@ model VarAirExchange "Heat flow caused by air exchange"
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1000
     "Specific heat capacity of air";
   parameter Modelica.SIunits.Density rho = 1.25 "Air density";
-  Modelica.Blocks.Interfaces.RealInput InPort1 annotation(Placement(transformation(extent = {{-100, -54}, {-80, -74}})));
-
+  Modelica.Blocks.Interfaces.RealInput ventRate(unit="1/h")
+                                               annotation (Placement(
+        transformation(extent={{-100,-54},{-80,-74}})));
+protected
+  constant Real hToS(unit="s/h")=3600 "conversion factor from hours to seconds";
 equation
-  port_a.Q_flow = InPort1 * V * c * rho * (port_a.T - port_b.T) / 3600;
+  port_a.Q_flow =ventRate*V*c*rho*(port_a.T - port_b.T)/hToS;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{60, -58}, {30, -72}, {-22, -68}, {-16, -60}, {-68, -52}, {-30, -80}, {-24, -74}, {46, -74}, {60, -58}}, lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, 16}, {30, -50}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
@@ -33,11 +36,11 @@ equation
 </p>
 <ul>
   <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br />
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
     Uses components from MSL and respects the naming conventions
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
 </ul>

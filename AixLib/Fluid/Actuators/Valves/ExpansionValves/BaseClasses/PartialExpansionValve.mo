@@ -239,7 +239,7 @@ equation
         Diagram(
           coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br />
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -295,7 +295,7 @@ equation
   \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc\">
   AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc</a>.
   In the following, these modeling approaches are characterised
-  shortly:<br />
+  shortly:<br/>
 </p>
 <table summary=\"Modelling approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">

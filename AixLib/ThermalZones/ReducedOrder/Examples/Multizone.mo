@@ -145,7 +145,7 @@ equation
   or measurement data.
 </p>
 <ul>
-  <li>September 29, 2016, by Moritz Lauster:<br />
+  <li>September 29, 2016, by Moritz Lauster:<br/>
     Implemented.
   </li>
 </ul>

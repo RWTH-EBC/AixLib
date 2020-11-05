@@ -37,7 +37,7 @@ equation
   input ports.
 </p>
 <ul>
-  <li>April, 2019, by Martin Kremer:<br />
+  <li>April, 2019, by Martin Kremer:<br/>
     First Implementation.
   </li>
 </ul>

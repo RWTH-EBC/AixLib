@@ -42,17 +42,17 @@ record DIN_16893_SDR11_d50 "PE-X Pipe, d_o=50mm, SDR11"
 </html>",
       revisions="<html><ul>
   <li>
-    <i>April 25, 2017</i> by Tobias Blacha:<br />
+    <i>April 25, 2017</i> by Tobias Blacha:<br/>
     Moved into AixLib
   </li>
   <li>
-    <i>January 29, 2014&#160;</i> by Ana Constantin:<br />
+    <i>January 29, 2014&#160;</i> by Ana Constantin:<br/>
     Added to HVAC, formated and upgraded to current version of
     Dymola/Modelica
   </li>
   <li>
     <i>March 13, 2012&#160;</i> by Tim Comanns (supervisor: Ana
-    Constantin):<br />
+    Constantin):<br/>
     Implemented.
   </li>
 </ul>

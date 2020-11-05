@@ -43,7 +43,7 @@ equation
   including the NOC
 </p>
 <p>
-  <br />
+  <br/>
   <b><span style=\"color: #008000;\">Assumptions</span></b>
 </p>
 <p>
@@ -76,7 +76,7 @@ equation
   </li>
 </ul>
 <p>
-  <br />
+  <br/>
   Source of literature for the calculation of the pv cell efficiency:
 </p>
 <p>
@@ -93,15 +93,15 @@ equation
 </html>",revisions="
 <html><ul>
   <li>
-    <i>October 20, 2017</i> ,by Larissa Kuehn:<br />
+    <i>October 20, 2017</i> ,by Larissa Kuehn:<br/>
     Implementation of PartialPVSystem.
   </li>
   <li>
-    <i>October 11, 2016</i> ,by Tobias Blacha:<br />
+    <i>October 11, 2016</i> ,by Tobias Blacha:<br/>
     Moved into AixLib
   </li>
   <li>
-    <i>Februar 21, 2013</i> ,by Corinna Leonhardt:<br />
+    <i>Februar 21, 2013</i> ,by Corinna Leonhardt:<br/>
     Implemented
   </li>
 </ul>

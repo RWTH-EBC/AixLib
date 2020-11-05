@@ -288,18 +288,18 @@ equation
 <p>
   van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G.,
   Sartor, K., Basciotti, D., Müller, D., Nytsch-Geusen, C., Wetter, M.
-  and Helsen, L. (2017).<br />
+  and Helsen, L. (2017).<br/>
   Dynamic equation-based thermo-hydraulic pipe model for district
-  heating and cooling systems.<br />
+  heating and cooling systems.<br/>
   <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
   <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
   10.1016/j.enconman.2017.08.072</a>.
 </p>
 <ul>
-  <li>November 21, 2019, by Nils Neuland:<br />
+  <li>November 21, 2019, by Nils Neuland:<br/>
     Model is now using PlugFlowPipe model from DistrictHeatingCooling
   </li>
-  <li>July, 2018 by Tobias Blacha:<br />
+  <li>July, 2018 by Tobias Blacha:<br/>
     First implementation.
   </li>
 </ul>

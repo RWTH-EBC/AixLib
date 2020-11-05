@@ -241,22 +241,22 @@ equation
           textString="L = %length
 d = %dh")}),
     Documentation(revisions="<html><ul>
-  <li>September 25, 2019, by Nils Neuland:<br />
+  <li>September 25, 2019, by Nils Neuland:<br/>
     Revised variable names and documentation to follow guidelines.
     Corrected malformed hyperlinks.
   </li>
-  <li>October 23, 2017, by Michael Wetter:<br />
+  <li>October 23, 2017, by Michael Wetter:<br/>
     Revised variable names and documentation to follow guidelines.
     Corrected malformed hyperlinks.
   </li>
-  <li>July 4, 2016 by Bram van der Heijde:<br />
+  <li>July 4, 2016 by Bram van der Heijde:<br/>
     Introduce pipVol.
   </li>
-  <li>October 10, 2015 by Marcus Fuchs:<br />
+  <li>October 10, 2015 by Marcus Fuchs:<br/>
     Copy Icon from KUL implementation and rename model. Replace
     resistance and temperature delay by an adiabatic pipe.
   </li>
-  <li>September, 2015 by Marcus Fuchs:<br />
+  <li>September, 2015 by Marcus Fuchs:<br/>
     First implementation.
   </li>
 </ul>

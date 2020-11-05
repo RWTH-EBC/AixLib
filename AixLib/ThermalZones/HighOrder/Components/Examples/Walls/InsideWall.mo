@@ -71,7 +71,7 @@ equation
 </p>
 <ul>
   <li>
-    <i>April, 2012&#160;</i> by Mark Wesseling:<br />
+    <i>April, 2012&#160;</i> by Mark Wesseling:<br/>
     Implemented.
   </li>
 </ul>

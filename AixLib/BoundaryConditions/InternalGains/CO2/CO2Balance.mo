@@ -139,7 +139,7 @@ equation
 </p>
 </html>", revisions="<html>
 <ul>
-  <li>August 27, 2020, by Katharina Breuer:<br />
+  <li>August 27, 2020, by Katharina Breuer:<br/>
     First implementation
   </li>
 </ul>

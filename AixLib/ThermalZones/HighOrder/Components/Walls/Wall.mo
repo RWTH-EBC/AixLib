@@ -260,35 +260,35 @@ equation
 </p>
 <ul>
   <li>
-    <i>October 12, 2016&#160;</i> by Tobias Blacha:<br />
+    <i>October 12, 2016&#160;</i> by Tobias Blacha:<br/>
     Algorithm for HeatConv_inside is now selectable via parameters on
     upper model level. This closes ticket <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/215\">issue 215</a>
   </li>
   <li>
-    <i>August 22, 2014&#160;</i> by Ana Constantin:<br />
+    <i>August 22, 2014&#160;</i> by Ana Constantin:<br/>
     Corrected implementation of door also for outside walls. This
     closes ticket <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/13\">issue 13</a>
   </li>
   <li>
-    <i>May 19, 2014&#160;</i> by Ana Constantin:<br />
+    <i>May 19, 2014&#160;</i> by Ana Constantin:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br />
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
     Formatted documentation appropriately
   </li>
   <li>
-    <i>June 22, 2012&#160;</i> by Lukas Mencher:<br />
+    <i>June 22, 2012&#160;</i> by Lukas Mencher:<br/>
     Outside wall may have a door now, icon adjusted
   </li>
   <li>
-    <i>Mai 24, 2012&#160;</i> by Ana Constantin:<br />
+    <i>Mai 24, 2012&#160;</i> by Ana Constantin:<br/>
     Added inside surface orientation
   </li>
   <li>
-    <i>April, 2012&#160;</i> by Mark Wesseling:<br />
+    <i>April, 2012&#160;</i> by Mark Wesseling:<br/>
     Implemented.
   </li>
 </ul>
