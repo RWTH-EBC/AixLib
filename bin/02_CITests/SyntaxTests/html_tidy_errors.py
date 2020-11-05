@@ -78,8 +78,6 @@ class HTML_Tidy(object):
 			err = results[1]
 			
 			#htmlCode = results[2]
-			#print("htmlCode")
-			#print(htmlCode)
 			if err is not "":
 			# write error to error message
 				errMsg.append("[-- %s ]\n%s" % (moFulNam, err))
@@ -87,8 +85,6 @@ class HTML_Tidy(object):
 				HTML_Tidy._backup_old_files(
 					self, moFulNam, document_corr, file_counter)
 			if self.correct_overwrite:
-				#print(moFulNam)
-				#print(document_corr)
 				HTML_Tidy._correct_overwrite(self, moFulNam, document_corr)
 				continue
 				
@@ -102,10 +98,8 @@ class HTML_Tidy(object):
 				document_corr, errors = HTML_Tidy.htmlCorrection(self, htmlStr)
 				docCorrStr = HTML_Tidy.number_print_List(
 					self, document_corr.split('\n'), sep='\n')
-				#print(errors)
 				
 				ErrWhite = "Warning: The summary attribute on the <table> element is obsolete in HTML5"
-				#print(errors.find(ErrWhite))
 				if len(errors) > 0 and errors.find(ErrWhite) == -1:
 					print('\n' + "----" + moFulNam + "----")
 					print("\n-------- HTML Code --------")
@@ -344,8 +338,8 @@ class HTML_Tidy(object):
 		code = list()
 		# print the html Code in list form
 		htmlCode = list()
-		#print(lines)
-		#
+		
+		
 		errors = list()
 		
 		for i in range(nLin):
@@ -366,8 +360,6 @@ class HTML_Tidy(object):
 					else:
 						idxC = -1
 					if idxC > -1:
-						print("LINES*************************************")
-						print(lines)
 						htmlCode.append(lines[i][idxO + 6:idxC]+'\n')
 						code.append(HTML_Tidy._htmlCorrection(self, htmlCode)[0])
 						errors.append(HTML_Tidy._htmlCorrection(self, htmlCode)[1])
