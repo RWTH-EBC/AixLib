@@ -1,8 +1,52 @@
-#!/bin/sh
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
 
 
-if [ -z "Create new file?" ]; then
-  echo "y"
-  else echo "n"
-fi
+
+
+
+
+
+
+
 

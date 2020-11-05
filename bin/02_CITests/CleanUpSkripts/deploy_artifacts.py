@@ -35,7 +35,7 @@ def sort_mo_models():
 					continue
 		changed_models.close()
 		
-		print(modelica_models)
+		#print(modelica_models)
 		return modelica_models
 
 	
@@ -44,7 +44,7 @@ def copy_txt(reffile):
 	for i in reffile:
 		refName = i.split(os.sep)
 		refName = refName[len(refName)-1]
-		print(refName)
+		#print(refName)
 		shutil.copy(i, 'Referencefiles'+os.sep+refName)
 	
 if  __name__ == '__main__':
