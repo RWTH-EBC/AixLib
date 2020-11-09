@@ -38,7 +38,7 @@ model SubstationStorageHeating
     hTan=3,
     VTan=VTan,
     nSeg=nSeg,
-    T_start=T_min,
+    T_start=T_start,
     dIns=0.2)            annotation (Placement(transformation(extent={{42,-34},
             {110,34}})));
 

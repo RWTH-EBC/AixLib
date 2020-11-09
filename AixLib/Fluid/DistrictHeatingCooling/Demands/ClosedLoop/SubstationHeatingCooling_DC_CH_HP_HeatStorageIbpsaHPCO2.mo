@@ -33,8 +33,8 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHPCO2 "Substation model 
     annotation (Dialog(tab = "General", group = "Storage Tank"));
     parameter Modelica.SIunits.Temperature T_storage_max "Max. Storage Temperatur for charging"
     annotation (Dialog(tab = "General", group = "Storage Tank"));
-    parameter Modelica.SIunits.Temperature T_storage_min "Min. Storage Temperatur for discharging"
-    annotation (Dialog(tab = "General", group = "Storage Tank"));
+    final parameter Modelica.SIunits.Temperature T_storage_min= T_heatingSupplySet - 0.5 "Min. Storage Temperatur for discharging";
+    //annotation (Dialog(tab = "General", group = "Storage Tank"));
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
@@ -71,7 +71,7 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHPCO2 "Substation model 
     T_max(displayUnit="K") = T_storage_max,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal_heating,
-    T_start(displayUnit="degC") = T_heatingSupplySet,
+    T_start(displayUnit="degC") = T_heatingSupplySet - deltaT_heatingSet,
     VTan=VTan)
     annotation (Placement(transformation(extent={{238,-312},{326,-248}})));
 public
