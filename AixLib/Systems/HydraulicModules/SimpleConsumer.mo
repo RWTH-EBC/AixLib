@@ -16,6 +16,7 @@ model SimpleConsumer "Simple Consumer"
     "Nominal mass flow rate";
   parameter SI.Temperature T_start=293.15
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
+  parameter SI.TemperatureDifference deltaTConsumerNominal "Nominal temperature difference between flow and return in consumer";
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
               choice="T_input",
@@ -89,6 +90,15 @@ model SimpleConsumer "Simple Consumer"
         origin={-60,120}), iconTransformation(extent={{-20,-20},{20,20}},
         rotation=270,
         origin={-60,100})));
+  Fluid.Movers.FlowControlled_m_flow pump(
+    redeclare package Medium = Medium,
+    T_start=T_start,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal)
+    annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
+  Modelica.Blocks.Sources.RealExpression realExpression3(y=-Q_flow/(4186*
+        deltaTConsumerNominal))
+    annotation (Placement(transformation(extent={{-92,18},{-72,38}})));
 equation
   connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
           {10,40},{34,40}},               color={191,0,0},
@@ -118,10 +128,14 @@ equation
   connect(prescribedHeatFlow.port, heatCapacitor.port)
     annotation (Line(points={{-62,48},{-62,40},{34,40}}, color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(port_a, volume.ports[1])
-    annotation (Line(points={{-100,0},{2,0}}, color={0,127,255}));
-  connect(volume.ports[2], port_b)
-    annotation (Line(points={{-2,0},{100,0}}, color={0,127,255}));
+  connect(volume.ports[1], port_b)
+    annotation (Line(points={{2,0},{100,0}},  color={0,127,255}));
+  connect(port_a, pump.port_a)
+    annotation (Line(points={{-100,0},{-66,0}}, color={0,127,255}));
+  connect(volume.ports[2], pump.port_b)
+    annotation (Line(points={{-2,0},{-46,0}}, color={0,127,255}));
+  connect(realExpression3.y, pump.m_flow_in)
+    annotation (Line(points={{-71,28},{-56,28},{-56,12}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
