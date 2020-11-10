@@ -164,7 +164,8 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 			
 			
 		Exit.write("#!/bin/bash"+"\n"+"\n"+"exit 1")
-		Exit.close()	
+		Exit.close()
+		print("Check the new reference results")
 	if len(mos_list) == 0:
 		print("All Reference files exists.")
 		Exit.write("#!/bin/bash"+"\n"+"\n"+"exit 0")
