@@ -38,10 +38,6 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHPCO2 "Substation model 
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
-  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")
-    "Supply temperatur of cooling circuit in the building" annotation (
-      Placement(transformation(extent={{696,218},{656,258}}),
-        iconTransformation(extent={{-322,-216},{-260,-154}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit="W")
     "Input for cooling demand profile of substation" annotation (Placement(
         transformation(extent={{700,158},{660,198}}),
@@ -59,11 +55,11 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorageIbpsaHPCO2 "Substation model 
       Placement(transformation(
         extent={{20,20},{-20,-20}},
         rotation=180,
-        origin={-280,-536}), iconTransformation(extent={{716,-20},{656,40}})));
+        origin={-280,-536}), iconTransformation(extent={{716,-16},{660,40}})));
   Modelica.Blocks.Interfaces.RealInput heatDemand(unit="W")
     "Input for heat demand profile of substation"
     annotation (Placement(transformation(extent={{-296,-672},{-256,-632}}),
-        iconTransformation(extent={{716,48},{660,104}})));
+        iconTransformation(extent={{716,76},{660,132}})));
   BaseClasses.SubstationStorageHeating                                   substationStorageHeating(
     T_supplyHeatingSet=T_heatingSupplySet,
     deltaT_heatingSet=deltaT_heatingSet,
@@ -239,21 +235,9 @@ public
   Delays.DelayFirstOrder              vol(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
-    nPorts=2)
+    nPorts=3)
              annotation (Placement(transformation(extent={{-238,-52},{-218,
             -32}})));
-  FixedResistances.Junction              jun(
-    redeclare package Medium = Medium,
-    dp_nominal={0,dp_nominal,dp_nominal},
-    portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
-    portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
-    portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering,
-    m_flow_nominal=m_flow_nominal*{1,1,1},
-    verifyFlowReversal=false)
-    annotation (Placement(transformation(extent={{-166,-50},{-146,-70}})));
-  Sensors.MassFlowRate              senMasFlo_GridHeat(redeclare package Medium =
-        Medium)
-    annotation (Placement(transformation(extent={{-204,-70},{-184,-50}})));
   Sensors.TemperatureTwoPort              senTem_DC_in1(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal_cooling,
@@ -291,22 +275,10 @@ public
     annotation (Placement(transformation(extent={{654,-68},{674,-48}}),
         iconTransformation(extent={{654,-68},{674,-48}})));
   Delays.DelayFirstOrder              vol1(
-    nPorts=2,
+    nPorts=3,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal)
              annotation (Placement(transformation(extent={{632,-50},{652,-30}})));
-  Sensors.MassFlowRate              senMasFlo_GridCool(redeclare package Medium =
-        Medium)
-    annotation (Placement(transformation(extent={{596,-68},{616,-48}})));
-  FixedResistances.Junction              jun1(
-    redeclare package Medium = Medium,
-    dp_nominal={0,dp_nominal,dp_nominal},
-    portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
-    portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
-    portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering,
-    m_flow_nominal=m_flow_nominal*{1,1,1},
-    verifyFlowReversal=false)
-    annotation (Placement(transformation(extent={{580,-68},{560,-48}})));
   Sensors.TemperatureTwoPort              senTem_DC_in(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal_cooling,
@@ -464,9 +436,11 @@ public
   Modelica.Blocks.Continuous.CriticalDamping criticalDamping2(f=1/60)
     annotation (Placement(transformation(extent={{206,246},{226,266}})));
   Modelica.Blocks.Interfaces.BooleanInput charging
-    annotation (Placement(transformation(extent={{-304,-384},{-246,-326}})));
+    annotation (Placement(transformation(extent={{-318,-584},{-260,-526}}),
+        iconTransformation(extent={{-318,-584},{-260,-526}})));
   Modelica.Blocks.Interfaces.BooleanInput discharging
-    annotation (Placement(transformation(extent={{-308,-462},{-244,-398}})));
+    annotation (Placement(transformation(extent={{-322,-672},{-258,-608}}),
+        iconTransformation(extent={{-320,-676},{-262,-618}})));
 protected
   Modelica.Blocks.Sources.RealExpression heatPump_COP(y=heatPump.COP)
     annotation (Placement(transformation(extent={{-94,-398},{-74,-378}})));
@@ -504,6 +478,14 @@ public
   Modelica.Blocks.Interfaces.RealOutput SOC(unit="W") annotation (Placement(
         transformation(extent={{-260,20},{-280,40}}), iconTransformation(extent=
            {{-260,222},{-294,256}})));
+  Modelica.Blocks.Sources.Constant setTempCooling(k=T_coolingSupplySet)
+    annotation (Placement(transformation(extent={{606,120},{590,136}})));
+  Sensors.TemperatureTwoPort              senTem_HP_out2(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    allowFlowReversal=false,
+    T_start(displayUnit="K"))
+    annotation (Placement(transformation(extent={{12,-132},{42,-112}})));
 equation
 
   //renewablePowerConsumptionSubstation = min(chi.P + heatPump.P, FreeElectricity);
@@ -590,26 +572,16 @@ equation
         color={0,0,127}));
   connect(senMasFlo_hp_in.port_a, senTem_HP_in.port_b)
     annotation (Line(points={{452,-162},{496,-162}}, color={0,127,255}));
-  connect(senMasFlo_GridHeat.port_b, jun.port_1) annotation (Line(points={{-184,
-          -60},{-176,-60},{-176,-60},{-166,-60}}, color={0,127,255}));
-  connect(jun.port_2, senMasFlo_HeatPump.port_a) annotation (Line(points={{-146,
-          -60},{-126,-60},{-126,-122},{-88,-122}}, color={0,127,255}));
   connect(senMasFlo_HeatPump.port_b, pumpHeatingGrid.port_a) annotation (Line(
         points={{-68,-122},{-62,-122},{-62,-123},{-54,-123}}, color={0,127,255}));
-  connect(jun.port_3, senTem_DC_in1.port_b) annotation (Line(points={{-156,-50},
-          {-154,-50},{-154,-8},{-118,-8}}, color={0,127,255}));
   connect(senTem_DC_in1.port_a, jun_DC1.port_2) annotation (Line(points={{-98,-8},
           {-74,-8},{-74,-8},{-48,-8}}, color={0,127,255}));
-  connect(port_a, vol.ports[1]) annotation (Line(points={{-258,-60},{-230,-60},{
-          -230,-52}}, color={0,127,255}));
-  connect(senMasFlo_GridHeat.port_a, vol.ports[2]) annotation (Line(points={{-204,
-          -60},{-226,-60},{-226,-52}}, color={0,127,255}));
-  connect(vol1.ports[1], port_b) annotation (Line(points={{640,-50},{640,-58},{664,
-          -58}}, color={0,127,255}));
-  connect(senMasFlo_GridCool.port_b, vol1.ports[2]) annotation (Line(points={{616,
-          -58},{644,-58},{644,-50}}, color={0,127,255}));
-  connect(jun1.port_1, senMasFlo_GridCool.port_a)
-    annotation (Line(points={{580,-58},{596,-58}}, color={0,127,255}));
+  connect(port_a, vol.ports[1]) annotation (Line(points={{-258,-60},{-230.667,
+          -60},{-230.667,-52}},
+                      color={0,127,255}));
+  connect(vol1.ports[1], port_b) annotation (Line(points={{639.333,-50},{
+          639.333,-58},{664,-58}},
+                 color={0,127,255}));
   connect(const1.y,add2. u2) annotation (Line(points={{277,222},{303.5,222},{
           303.5,232},{328,232}}, color={0,0,127}));
   connect(add2.y, massFlowControllerCooling.T_HE_Cooling_out) annotation (Line(
@@ -663,10 +635,6 @@ equation
           78},{386,78},{386,0},{388,0}}, color={0,127,255}));
   connect(jun_DC.port_1, senTem_DC_in.port_b)
     annotation (Line(points={{398,-10},{446,-10}}, color={0,127,255}));
-  connect(senTem_DC_in.port_a, jun1.port_2) annotation (Line(points={{466,-10},{
-          530,-10},{530,-58},{560,-58}}, color={0,127,255}));
-  connect(senTem_HP_out1.port_b, jun1.port_3) annotation (Line(points={{242,-122},
-          {570,-122},{570,-68}}, color={0,127,255}));
   connect(senTem_DC_in.T, massFlowControllerCooling.T_Grid_in) annotation (Line(
         points={{456,1},{456,40},{578,40},{578,153.022},{558.56,153.022}},
         color={0,0,127}));
@@ -677,9 +645,6 @@ equation
     deltaT_coolingGridSet) annotation (Line(points={{558.88,161.422},{622,
           161.422},{622,94},{680,94}},
                                 color={0,0,127}));
-  connect(massFlowControllerCooling.T_supplyCoolingSet, T_supplyCoolingSet)
-    annotation (Line(points={{558.56,134.356},{608,134.356},{608,238},{676,238}},
-        color={0,0,127}));
   connect(pumpCooling.m_flow_in, massFlowControllerCooling.m_chiller)
     annotation (Line(points={{234,6.8},{234,180},{473.76,180},{473.76,179.467}},
         color={0,0,127}));
@@ -703,8 +668,6 @@ equation
           -164.8},{216,-164.8},{216,-162},{432,-162}}, color={0,127,255}));
   connect(heatPump.port_b2, senTem_HP_out1.port_a) annotation (Line(points={{146,
           -125.2},{178,-125.2},{178,-122},{212,-122}}, color={0,127,255}));
-  connect(pumpHeatingGrid.port_b, heatPump.port_a2) annotation (Line(points={{-24,
-          -123},{29,-123},{29,-125.2},{82,-125.2}}, color={0,127,255}));
   connect(switch1.u2, onDelay.y) annotation (Line(points={{296,-200},{326,-200},
           {326,-199},{354.6,-199}}, color={255,0,255}));
   connect(massFlowControllerHeatingCO2_1.Charging, onDelay.u) annotation (Line(
@@ -728,10 +691,10 @@ equation
   connect(criticalDamping2.y, add2.u1) annotation (Line(points={{227,256},{318,256},
           {318,250},{328,250},{328,244}}, color={0,0,127}));
   connect(charging, massFlowControllerHeatingCO2_1.chargingIn) annotation (Line(
-        points={{-275,-355},{-210,-355},{-210,-350.708},{-12.082,-350.708}},
+        points={{-289,-555},{-210,-555},{-210,-350.708},{-12.082,-350.708}},
         color={255,0,255}));
   connect(discharging, massFlowControllerHeatingCO2_1.dischargingIn)
-    annotation (Line(points={{-276,-430},{-200,-430},{-200,-357.631},{-12.164,
+    annotation (Line(points={{-290,-640},{-200,-640},{-200,-357.631},{-12.164,
           -357.631}},
         color={255,0,255}));
   connect(sinkHeating.ports[1], pumpHeating.port_a) annotation (Line(points={{
@@ -740,6 +703,22 @@ equation
           214,-174.7},{214,-200},{273,-200}}, color={0,0,127}));
   connect(heatPump.P, powerConsumptionHP) annotation (Line(points={{78.8,-145},
           {-170,-145},{-170,230},{-268,230}}, color={0,0,127}));
+  connect(massFlowControllerCooling.T_supplyCoolingSet, setTempCooling.y)
+    annotation (Line(points={{558.56,134.356},{570,134.356},{570,128},{589.2,
+          128}}, color={0,0,127}));
+  connect(vol.ports[2], senMasFlo_HeatPump.port_a) annotation (Line(points={{
+          -228,-52},{-226,-52},{-226,-62},{-124,-62},{-124,-122},{-88,-122}},
+        color={0,127,255}));
+  connect(senTem_DC_in1.port_b, vol.ports[3]) annotation (Line(points={{-118,-8},
+          {-120,-8},{-120,-52},{-225.333,-52}}, color={0,127,255}));
+  connect(senTem_DC_in.port_a, vol1.ports[2]) annotation (Line(points={{466,-10},
+          {530,-10},{530,-50},{642,-50}}, color={0,127,255}));
+  connect(senTem_HP_out1.port_b, vol1.ports[3]) annotation (Line(points={{242,
+          -122},{644.667,-122},{644.667,-50}}, color={0,127,255}));
+  connect(pumpHeatingGrid.port_b, senTem_HP_out2.port_a) annotation (Line(
+        points={{-24,-123},{-7,-123},{-7,-122},{12,-122}}, color={0,127,255}));
+  connect(senTem_HP_out2.port_b, heatPump.port_a2) annotation (Line(points={{42,
+          -122},{62,-122},{62,-125.2},{82,-125.2}}, color={0,127,255}));
     annotation (Placement(transformation(extent={{-260,280},{-280,300}}),
         iconTransformation(extent={{-260,184},{-294,218}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,-720},
