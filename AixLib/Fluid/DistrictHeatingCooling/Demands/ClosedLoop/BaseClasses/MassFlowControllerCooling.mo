@@ -107,20 +107,6 @@ model MassFlowControllerCooling
         extent={{-4,-10},{4,10}},
         rotation=0,
         origin={154,100})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=10, uMin=0.01)
-    annotation (Placement(transformation(extent={{350,-98},{370,-78}})));
-    Modelica.Blocks.Interfaces.RealInput T_HP_in "Heat Demand Building"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=0,
-        origin={-122,-480}), iconTransformation(extent={{-21,-21},{21,21}},
-          origin={-117,-321})));
-    Modelica.Blocks.Interfaces.RealInput T_HP_in1 "Heat Demand Building"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=0,
-        origin={-122,-480}), iconTransformation(extent={{-21,-21},{21,21}},
-          origin={-117,-321})));
   Modelica.Blocks.Continuous.CriticalDamping criticalDamping(f=1/60)
     annotation (Placement(transformation(extent={{-78,-92},{-58,-72}})));
   Modelica.Blocks.Math.Max max
@@ -175,10 +161,6 @@ equation
             {409.5,-145},{417,-145}}, color={0,0,127}));
   connect(T_HE_Cooling_out, add6.u1) annotation (Line(points={{-120,-134},{-66,
           -134},{-66,-138},{-12,-138}}, color={0,0,127}));
-  connect(limiter.y, m_dc)
-    annotation (Line(points={{371,-88},{418,-88}}, color={0,0,127}));
-  connect(switch2.y, limiter.u)
-    annotation (Line(points={{323,-88},{348,-88}}, color={0,0,127}));
   connect(T_Grid_in, criticalDamping.u)
     annotation (Line(points={{-120,-82},{-80,-82}}, color={0,0,127}));
   connect(switch3.y, max.u2) annotation (Line(points={{323,-146},{336,-146},{
@@ -209,6 +191,8 @@ equation
           -134},{283.2,-154},{300,-154}}, color={0,0,127}));
   connect(hysteresis.y, switch2.u2) annotation (Line(points={{-3,-82},{100,-82},
           {100,-88},{300,-88}}, color={255,0,255}));
+  connect(switch2.y, m_dc)
+    annotation (Line(points={{323,-88},{418,-88}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -240},{400,120}}),   graphics={ Text(
             extent={{-70,6},{56,-12}},
