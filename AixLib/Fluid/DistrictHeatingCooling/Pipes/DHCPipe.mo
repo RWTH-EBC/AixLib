@@ -95,7 +95,7 @@ model DHCPipe "Generic pipe model for DHC applications"
   //"ERDWÄRMEKOLLEKTOR" zur wärmetechnischen Beurteilung von Wärmequellen,
   //Wärmesenken und Wärme-/Kältespeichern" by Bernd Glück
 
-  parameter Modelica.SIunits.Density rho = 1630 "Density of material/soil"
+  parameter Modelica.SIunits.Density rhoSoi = 1630 "Density of material/soil"
   annotation(Dialog(tab="Soil", enable=use_soil));
 
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1046
@@ -195,7 +195,7 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra1(
     final energyDynamics=energyDynamics,
-    final rho=rho,
+    final rho=rhoSoi,
     final c=c,
     final d_in=dh + 2*thickness,
     final d_out=d_in + thickness_ground/3,
@@ -206,7 +206,7 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra2(
     final energyDynamics=energyDynamics,
-    final rho=rho,
+    final rho=rhoSoi,
     final c=c,
     final d_in=dh + 2*thickness + thickness_ground/3,
     final d_out=d_in + 2*thickness_ground/3,
@@ -216,7 +216,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     annotation (Placement(transformation(extent={{-10,46},{10,66}})));
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra3(
     final energyDynamics=energyDynamics,
-    final rho=rho,
+    final rho=rhoSoi,
     final c=c,
     final d_in=dh + 2*thickness + 2*thickness_ground/3,
     final d_out=d_in + thickness_ground,
@@ -396,10 +396,10 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  Pipe with heat loss using the time delay based heat losses and
+  Pipe with heat loss using the wether the time delay based heat losses and
   transport of the fluid using a plug flow model, applicable for
   simulation of long pipes such as in district heating and cooling
-  systems.
+  systems, or the more staty-state based approach with the static core.
 </p>
 <p>
   This model takes into account transport delay along the pipe length
