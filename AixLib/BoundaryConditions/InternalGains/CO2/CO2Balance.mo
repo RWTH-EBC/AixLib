@@ -111,24 +111,37 @@ equation
           fillPattern=FillPattern.Sphere,
           fillColor={255,255,255},
           textString="CO2")}), Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model assumes co2 as an ideal gas to calculate the density of co2:</p>
-<p>rho_CO2 = p_Air * w_CO2 * M_Air / (R * T_Air)</p>
-<p>The delivered volume flow rate results to: </p>
-<p>V&#775;_CO2 = RQ * M * A_Body / CE * T_Air/ 273.15 K</p>
-<p>The zone is assumed to be occupied by men to determine the amount of CO2 emitted. For a different occupancy the default values must be replaced.</p>
+    Documentation(info="<html><p>
+  This model assumes co2 as an ideal gas to calculate the density of
+  co2:
+</p>
+<p>
+  rho_CO2 = p_Air * w_CO2 * M_Air / (R * T_Air)
+</p>
+<p>
+  The delivered volume flow rate results to:
+</p>
+<p>
+  V̇_CO2 = RQ * M * A_Body / CE * T_Air/ 273.15 K
+</p>
+<p>
+  The zone is assumed to be occupied by men to determine the amount of
+  CO2 emitted. For a different occupancy the default values must be
+  replaced.
+</p>
 <h4>
   Examples
 </h4>
 <p>
   See <a href=
-  \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange</a>.
+  \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange\">
+  AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange</a>.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>August 27, 2020, by Katharina Breuer:<br>
-First implementation
-</li>
+  <li>August 27, 2020, by Katharina Breuer:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end CO2Balance;

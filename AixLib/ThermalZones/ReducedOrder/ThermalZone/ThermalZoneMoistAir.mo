@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   extends ThermalZone(
     ROM(final use_moisture_balance=true));
