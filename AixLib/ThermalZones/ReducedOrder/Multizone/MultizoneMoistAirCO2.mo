@@ -17,7 +17,7 @@ model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
     "Body surface area source SIA 2024:2015";
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]";
-  parameter Boolean use_C_flow=true
+  parameter Boolean use_C_flow=false
     "Set to true to enable input connector for trace substance";
 
   Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or
@@ -35,7 +35,7 @@ model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,42},{100,62}})));
 
-  Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)]
+  Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,30},{120,50}})));
 equation
