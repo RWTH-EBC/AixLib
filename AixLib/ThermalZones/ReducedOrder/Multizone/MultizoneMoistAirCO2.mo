@@ -17,7 +17,7 @@ model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
     "Body surface area source SIA 2024:2015";
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]";
-  parameter Boolean use_C_flow=false
+  parameter Boolean use_C_flow=true
     "Set to true to enable input connector for trace substance";
 
   Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or
@@ -35,12 +35,17 @@ model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,42},{100,62}})));
 
+  Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)]
+    "CO2 concentration in the thermal zone in ppm"
+    annotation (Placement(transformation(extent={{100,30},{120,50}})));
 equation
   connect(zone.ventHum, ventHum) annotation (Line(points={{35.27,55.765},{10,
           55.765},{10,56},{-18,56},{-18,36},{-100,36}},             color={0,0,
           127}));
   connect(zone.X_w, X_w) annotation (Line(points={{82.1,72.78},{94,72.78},{94,94},
           {110,94}}, color={0,0,127}));
+  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,58.02},{82.1,40},
+          {110,40}}, color={0,0,127}));
   annotation (Documentation(info="<html><p>
   This model enhances the existing multi-zone model considering
   moisture balance in the zone. Moisture is considered in internal
