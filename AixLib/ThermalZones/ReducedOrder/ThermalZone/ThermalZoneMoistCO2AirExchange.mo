@@ -1,10 +1,10 @@
-﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistCO2AirExchange
   "Thermal zone model considering moisture and co2 balance with ventilation, infiltration and internal gains"
   extends ThermalZoneMoistAir(SumQLat_flow(nu=3), ROM(final use_C_flow=use_C_flow));
 
   // CO2 parameters
-  parameter Real actDeg=zoneParam.activityDegree "Activity degree (Met units)"
+  parameter Real actDeg=1.8 "Activity degree (Met units)"
     annotation (Dialog(tab="CO2", enable=use_CO2_balance));
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
