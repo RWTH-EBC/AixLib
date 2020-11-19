@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
+within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
   extends Multizone(redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange,

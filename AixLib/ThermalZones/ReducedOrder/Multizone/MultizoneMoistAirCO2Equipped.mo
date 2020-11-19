@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
+within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneMoistAirCO2Equipped
   "Multizone model with ideal heater and cooler and AHU considering moisture and co2 balance"
   extends
@@ -368,10 +368,13 @@ Cooling"),
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
           textString="AHU")}),
-    Documentation(revisions="<html>
-<ul>
-<li>August 27, 2020, by Katharina Breuer:<br/>Add co2 balance</li>
-<li>April, 2019, by Martin Kremer:<br/>First implementation </li>
+    Documentation(revisions="<html><ul>
+  <li>August 27, 2020, by Katharina Breuer:<br/>
+    Add co2 balance
+  </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+    First implementation
+  </li>
 </ul>
 </html>", info="<html>
 <p>

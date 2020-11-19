@@ -203,11 +203,23 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
           3.1536e+007, Interval=3600),
-    Documentation(info="<html>
-<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data. </p>
+    Documentation(info="<html><p>
+  This example illustrates the use of <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped\">
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped</a>.
+  Parameter set for thermal zone is for an office zone of an office
+  building build as passive house. All boundary conditions are generic
+  to show how to apply different kinds of boundary conditions. The
+  results should show a typical profile for indoor air temperatures,
+  but are not related to a specific building or measurement data.
+</p>
 <ul>
-<li>August 27, 2020, by Katharina Breuer:<br>Add co2 balance</li>
-<li>April, 2019, by Martin Kremer:<br>First Implementation. </li>
+  <li>August 27, 2020, by Katharina Breuer:<br/>
+    Add co2 balance
+  </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+    First Implementation.
+  </li>
 </ul>
 </html>"));
 end ThermalZoneMoistCO2AirExchange;
