@@ -3,9 +3,9 @@ model ComparisonThermalZoneMoistAndDryAir
   "Illustrates the difference between ThermalZone and ThermalZoneMoistAir"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir thermalZoneMoistAir(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZoneMoistAir(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-    each der_T(fixed=true)))),
+            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
     internalGainsMode=3,
@@ -142,7 +142,7 @@ model ComparisonThermalZoneMoistAndDryAir
     annotation (Placement(transformation(extent={{-12,-98},{-32,-78}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-    each der_T(fixed=true)))),
+            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
     internalGainsMode=1,
@@ -277,9 +277,11 @@ equation
   connect(internalGains.y, thermalZoneMoistAir.intGains)
     annotation (Line(points={{0.7,-64},{8,-64},{8,-20.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZoneMoistAir.intGainsRad)
-    annotation (Line(points={{26,-12},{10,-12},{10,-13}}, color={191,0,0}));
+    annotation (Line(points={{26,-12},{10.2,-12},{10.2,-8.6}},
+                                                          color={191,0,0}));
   connect(prescribedHeatFlow1.port, thermalZoneMoistAir.intGainsConv)
-    annotation (Line(points={{26,-30},{18,-30},{18,-17},{10,-17}}, color={191,0,
+    annotation (Line(points={{26,-30},{18,-30},{18,-11.6},{10.2,-11.6}},
+                                                                   color={191,0,
           0}));
   connect(gain1.y, prescribedHeatFlow1.Q_flow)
     annotation (Line(points={{53.4,-30},{46,-30}},          color={0,0,127}));
@@ -299,9 +301,11 @@ equation
   connect(internalGains1.y, thermalZone.intGains)
     annotation (Line(points={{-1.3,32},{6,32},{6,75.6}}, color={0,0,127}));
   connect(prescribedHeatFlow2.port, thermalZone.intGainsRad)
-    annotation (Line(points={{24,84},{8,84},{8,83}}, color={191,0,0}));
+    annotation (Line(points={{24,84},{8.2,84},{8.2,87.4}},
+                                                     color={191,0,0}));
   connect(prescribedHeatFlow3.port, thermalZone.intGainsConv) annotation (Line(
-        points={{24,66},{16,66},{16,79},{8,79}}, color={191,0,0}));
+        points={{24,66},{16,66},{16,84.4},{8.2,84.4}},
+                                                 color={191,0,0}));
   connect(gain3.y,prescribedHeatFlow3. Q_flow)
     annotation (Line(points={{51.4,66},{44,66}},            color={0,0,127}));
   connect(gain2.y, prescribedHeatFlow2.Q_flow)
