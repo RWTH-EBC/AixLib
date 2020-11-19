@@ -64,9 +64,9 @@ model ThermalZoneMoistCO2AirExchange
     areaZon=zoneParam.AZone,
     actDeg=zoneParam.activityDegree,
     VZon=zoneParam.VAir,
-    XCO2_amb=XCO2_amb,
-    areaBod=areaBod,
-    metOnePerSit=metOnePerSit,
+    final XCO2_amb=XCO2_amb,
+    final areaBod=areaBod,
+    final metOnePerSit=metOnePerSit,
     spePeo=zoneParam.specificPeople) if
                                   (ATot > 0 or zoneParam.VAir > 0) and
     use_C_flow
