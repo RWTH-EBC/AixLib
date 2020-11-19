@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneMoistAirCO2Equipped
   "Multizone model with ideal heater and cooler and AHU considering moisture and co2 balance"
   extends
@@ -7,13 +7,11 @@ model MultizoneMoistAirCO2Equipped
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange,
       zone(
       use_C_flow=use_C_flow,
-      actDeg=actDeg,
       XCO2_amb=XCO2_amb,
       areaBod=areaBod,
       metOnePerSit=metOnePerSit));
 
   // co2 parameters
-  parameter Real actDeg=1.8 "Activity degree (Met units)";
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)";
   parameter Modelica.SIunits.Area areaBod=1.8
