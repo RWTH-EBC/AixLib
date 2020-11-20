@@ -163,9 +163,9 @@ protected
     annotation (Placement(transformation(extent={{-72,22},{-60,34}})));
 
   BaseClasses.MoistSplitter moistSplitter(
-    nOut=1,
-    nIn=numZones,
-    splitFactor=zoneFactor) if (ASurTot > 0 or VAir > 0) and use_moisture_balance
+    final nOut=1,
+    final nIn=numZones,
+    final splitFactor=zoneFactor) if (ASurTot > 0 or VAir > 0) and use_moisture_balance
     "Sums up a vector[numZones] of identical humidities to an average humidity"
     annotation (Placement(transformation(extent={{-68,76},{-48,96}})));
   BaseClasses.AbsToRelHum absToRelHum if     (ASurTot > 0 or VAir > 0) and use_moisture_balance

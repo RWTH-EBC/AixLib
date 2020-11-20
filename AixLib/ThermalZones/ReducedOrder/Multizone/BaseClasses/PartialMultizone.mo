@@ -23,8 +23,6 @@ partial model PartialMultizone "Partial model for multizone models"
   parameter Boolean use_C_flow=false
     "Set to true to enable input connector for trace substance"
     annotation (Dialog(tab="CO2"));
-  parameter Real actDeg=1.8 "Activity degree (Met units)"
-    annotation (Dialog(tab="CO2", enable=use_C_flow));
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
@@ -97,7 +95,6 @@ partial model PartialMultizone "Partial model for multizone models"
     each use_C_flow=use_C_flow,
     each use_moisture_balance=use_moisture_balance,
     each use_AirExchange=use_AirExchange,
-    each actDeg=actDeg,
     each XCO2_amb=XCO2_amb,
     each areaBod=areaBod,
     each metOnePerSit=metOnePerSit,

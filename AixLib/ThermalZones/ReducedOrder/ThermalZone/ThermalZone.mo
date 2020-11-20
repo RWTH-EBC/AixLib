@@ -41,8 +41,6 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
 
   // CO2 parameters
-  parameter Real actDeg=1.8 "Activity degree (Met units)"
-    annotation (Dialog(tab="CO2", enable=use_C_flow));
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
@@ -230,16 +228,6 @@ model ThermalZone "Thermal zone containing moisture balance"
        (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange and not use_moisture_balance
     "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-12},{-6,4}})));
-  //redeclare BoundaryConditions.InternalGains.Machines.MachinesAreaSpecific machinesSenHea(
-  //  final ratioConv=zoneParam.ratioConvectiveHeatMachines,
-  //  final intGainsMachinesRoomAreaSpecific=zoneParam.internalGainsMachinesSpecific,
-  //  final roomArea=zoneParam.AZone) if ATot > 0 and use_AirExchange "Internal gains from machines" annotation (Placement(transformation(extent={{56,-56},
-  //          {76,-37}})));
-  //redeclare BoundaryConditions.InternalGains.Lights.LightsAreaSpecific lights(
-  //  final ratioConv=zoneParam.ratioConvectiveHeatLighting,
-  //  final lightingPowerRoomAreaSpecific=zoneParam.lightingPowerSpecific,
-  //  final roomArea=zoneParam.AZone) if ATot > 0 and use_AirExchange "Internal gains from light" annotation (Placement(transformation(extent={{56,-78},
-  //          {76,-59}})));
 
   Modelica.Blocks.Interfaces.RealInput ventTemp(
     final quantity="ThermodynamicTemperature",
@@ -295,11 +283,11 @@ model ThermalZone "Thermal zone containing moisture balance"
   // CO2
   BoundaryConditions.InternalGains.CO2.CO2Balance cO2Balance(
     areaZon=zoneParam.AZone,
-    actDeg=actDeg,
+    actDeg=zoneParam.activityDegree,
     VZon=zoneParam.VAir,
-    XCO2_amb=XCO2_amb,
-    areaBod=areaBod,
-    metOnePerSit=metOnePerSit) if (ATot > 0 or zoneParam.VAir > 0) and
+    final XCO2_amb=XCO2_amb,
+    final areaBod=areaBod,
+    final metOnePerSit=metOnePerSit) if (ATot > 0 or zoneParam.VAir > 0) and
     use_C_flow
     annotation (Placement(transformation(extent={{20,-74},{34,-60}})));
   Modelica.Blocks.Interfaces.RealOutput CO2Con if (ATot > 0 or zoneParam.VAir
