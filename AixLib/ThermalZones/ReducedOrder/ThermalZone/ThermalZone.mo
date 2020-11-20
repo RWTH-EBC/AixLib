@@ -251,8 +251,11 @@ model ThermalZone "Thermal zone containing moisture balance"
         origin={-96,-42})));
 
   // Moisture
-  Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=3) if (ATot > 0 or
+  Modelica.Blocks.Math.MultiSum SumQLat1_flow(nu=2) if (ATot > 0 or
     zoneParam.VAir > 0) and use_moisture_balance
+    annotation (Placement(transformation(extent={{-40,-68},{-28,-56}})));
+  Modelica.Blocks.Math.MultiSum SumQLat2_flow(nu=3) if (ATot > 0 or
+    zoneParam.VAir > 0) and use_moisture_balance and use_AirExchange
     annotation (Placement(transformation(extent={{-40,-68},{-28,-56}})));
   BoundaryConditions.InternalGains.Moisture.MoistureGains moistureGains(
     final roomArea=zoneParam.AZone,
@@ -266,8 +269,9 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation (Placement(transformation(extent={{-58,-66},{-50,-58}})));
   Modelica.Blocks.Interfaces.RealOutput X_w if
        (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
-    "Humidity output" annotation (Placement(transformation(extent={{100,-50},{120,
-            -30}}), iconTransformation(extent={{100,-50},{120,-30}})));
+    "Humidity output" annotation (Placement(transformation(extent={{100,-80},{
+            120,-60}}),
+                    iconTransformation(extent={{100,-80},{120,-60}})));
   Modelica.Blocks.Interfaces.RealInput ventHum(
     final quantity="MassFraction",
     final unit="kg/kg",
@@ -292,7 +296,8 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation (Placement(transformation(extent={{20,-74},{34,-60}})));
   Modelica.Blocks.Interfaces.RealOutput CO2Con if (ATot > 0 or zoneParam.VAir
      > 0) and use_C_flow "CO2 concentration in the thermal zone in ppm"
-    annotation (Placement(transformation(extent={{100,-66},{120,-46}})));
+    annotation (Placement(transformation(extent={{100,-100},{120,-80}}),
+        iconTransformation(extent={{100,-100},{120,-80}})));
 
   Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if (ATot >
     0 or zoneParam.VAir > 0) and use_C_flow
@@ -620,22 +625,31 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   if internalGainsMode == 3 then
-    connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{75.6,
-            -16},{92,-16},{92,-4},{8,-4},{8,-54},{-42,-54},{-42,-59.2},{-40,
-            -59.2}},
-        color={0,0,127}));
+    connect(humanTotHeaDependent.QLat_flow, SumQLat1_flow.u[1]) annotation (
+        Line(points={{75.6,-16},{92,-16},{92,-4},{8,-4},{8,-54},{-42,-54},{-42,-59.9},
+            {-40,-59.9}}, color={0,0,127}));
+    connect(humanTotHeaDependent.QLat_flow, SumQLat2_flow.u[1]) annotation (
+        Line(points={{75.6,-16},{92,-16},{92,-4},{8,-4},{8,-54},{-42,-54},{-42,-59.2},
+            {-40,-59.2}}, color={0,0,127}));
   else
-    connect(noMoisturePerson.y,SumQLat_flow. u[1]) annotation (Line(points={{-49.6,
-            -62},{-40,-62},{-40,-59.2}},                          color={0,0,127}));
+    connect(noMoisturePerson.y, SumQLat1_flow.u[1]) annotation (Line(points={{-49.6,
+            -62},{-40,-62},{-40,-59.9}}, color={0,0,127}));
+    connect(noMoisturePerson.y, SumQLat2_flow.u[1]) annotation (Line(points={{-49.6,
+            -62},{-40,-62},{-40,-59.2}}, color={0,0,127}));
   end if;
-  connect(moistureGains.QLat_flow, SumQLat_flow.u[2]) annotation (Line(points={{-59.5,
-          -73},{-52,-73},{-52,-74},{-46,-74},{-46,-62},{-40,-62}},
-        color={0,0,127}));
-  connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{-26.98,-62},{
-          2,-62},{2,4},{32,4},{32,62},{37,62}},
-                                    color={0,0,127}));
-  connect(humVolAirROM.y, X_w) annotation (Line(points={{-59.5,-50},{4,-50},{4,-6},
-          {96,-6},{96,-40},{110,-40}}, color={0,0,127}));
+  connect(moistureGains.QLat_flow, SumQLat1_flow.u[2]) annotation (Line(points={{-59.5,
+          -73},{-52,-73},{-52,-74},{-46,-74},{-46,-64.1},{-40,-64.1}},    color=
+         {0,0,127}));
+  connect(moistureGains.QLat_flow, SumQLat2_flow.u[2]) annotation (Line(points={
+          {-59.5,-73},{-52,-73},{-52,-74},{-46,-74},{-46,-62},{-40,-62}}, color=
+         {0,0,127}));
+  connect(SumQLat1_flow.y, ROM.QLat_flow) annotation (Line(points={{-26.98,-62},
+          {2,-62},{2,4},{32,4},{32,62},{37,62}}, color={0,0,127}));
+  connect(SumQLat2_flow.y, ROM.QLat_flow) annotation (Line(points={{-26.98,-62},
+          {2,-62},{2,4},{32,4},{32,62},{37,62}}, color={0,0,127}));
+  connect(humVolAirROM.y, X_w) annotation (Line(points={{-59.5,-50},{4,-50},{4,
+          -6},{96,-6},{96,-70},{110,-70}},
+                                       color={0,0,127}));
   connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-27.4,-28},{
           -24,-28},{-24,-40},{12,-40},{12,-64.9},{20,-64.9}},
                                                             color={0,0,127}));
@@ -644,8 +658,9 @@ equation
   connect(cO2Balance.TAir, TAir) annotation (Line(points={{27,-60},{26,-60},{26,
           0},{96,0},{96,80},{110,80}},
                          color={0,0,127}));
-  connect(cO2Balance.CO2Con, CO2Con) annotation (Line(points={{34.7,-71.2},{56,-71.2},
-          {56,-56},{110,-56}}, color={0,0,127}));
+  connect(cO2Balance.CO2Con, CO2Con) annotation (Line(points={{34.7,-71.2},{40,
+          -71.2},{40,-82},{94,-82},{94,-90},{110,-90}},
+                               color={0,0,127}));
   connect(cO2Balance.XCO2, XCO2.y) annotation (Line(points={{20,-68.4},{20,-67},
           {10.9,-67}}, color={0,0,127}));
   connect(ROM.C_flow[1], cO2Balance.mCO2_flow) annotation (Line(points={{37,84},
@@ -659,7 +674,7 @@ equation
           {-44,-88},{-108,-88}}, color={0,0,127}));
   connect(airExcMoi.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-4},
           {58,-4},{58,78},{86,78}}, color={191,0,0}));
-  connect(airExcMoi.QLat_flow, SumQLat_flow.u[3]) annotation (Line(points={{
+  connect(airExcMoi.QLat_flow, SumQLat2_flow.u[3]) annotation (Line(points={{
           -5.68,-8.96},{-6,-8.96},{-6,-40},{-42,-40},{-42,-64.8},{-40,-64.8}},
         color={0,0,127}));
   connect(humVolAirROM.y, airExcMoi.HumOut) annotation (Line(points={{-59.5,-50},

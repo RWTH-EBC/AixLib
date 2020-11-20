@@ -4,6 +4,7 @@ model ComparisonThermalZoneMoistAndDryAir
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZoneMoistAir(
+    use_moisture_balance=true,
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -271,7 +272,7 @@ model ComparisonThermalZoneMoistAndDryAir
     annotation (Placement(transformation(extent={{34,4},{14,24}})));
 equation
   connect(weaDat.weaBus, thermalZoneMoistAir.weaBus) annotation (Line(
-      points={{-78,-8},{-34,-8},{-34,-12},{-10,-12}},
+      points={{-78,-8},{-34,-8},{-34,-6},{-10,-6}},
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y, thermalZoneMoistAir.intGains)
@@ -319,7 +320,7 @@ equation
   connect(thermalZone.ports[2], sinAir1.ports[1]) annotation (Line(points={{0.35,
           76.8},{0.35,44},{-40,44},{-40,14},{14,14}},     color={0,127,255}));
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-78,-8},{-76,-8},{-76,84},{-12,84}},
+      points={{-78,-8},{-76,-8},{-76,90},{-12,90}},
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
