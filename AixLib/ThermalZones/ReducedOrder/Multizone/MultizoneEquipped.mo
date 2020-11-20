@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
+within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
   extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
@@ -287,8 +287,9 @@ equation
   connect(airFlowRateSplit.airFlowIn, AirHandlingUnit.Vflow_out) annotation (
       Line(points={{44,20.8},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,31}},
         color={0,0,127}));
-  connect(zone.X_w, X_w) annotation (Line(points={{82.1,61.3},{94,61.3},{94,40},
-          {110,40}}, color={0,0,127}));
+  connect(zone.X_w, X_w) annotation (Line(points={{82.1,55.15},{94,55.15},{94,
+          40},{110,40}},
+                     color={0,0,127}));
   connect(minTemp.y, absToRelHum.TDryBul) annotation (Line(points={{19.5,-28},{-100,
           -28},{-100,72},{-42,72},{-42,78.2},{-37,78.2}}, color={0,0,127}));
   connect(AirHandlingUnit.T_supplyAirOut, relToAbsHum1.TDryBul) annotation (
@@ -299,8 +300,9 @@ equation
   connect(replicatorHumidityVentilation.y, zone.ventHum) annotation (Line(
         points={{65,42.5},{65,44},{30,44},{30,54.945},{39.05,54.945}}, color={0,
           0,127}));
-  connect(zone.X_w, moistSplitter.portIn) annotation (Line(points={{82.1,61.3},{
-          94,61.3},{94,100},{-76,100},{-76,86},{-68,86}}, color={0,0,127}));
+  connect(zone.X_w, moistSplitter.portIn) annotation (Line(points={{82.1,55.15},
+          {94,55.15},{94,100},{-76,100},{-76,86},{-68,86}},
+                                                          color={0,0,127}));
   connect(moistSplitter.portOut[1], absToRelHum.absHum) annotation (Line(points=
          {{-48,86},{-44,86},{-44,83.6},{-37,83.6}}, color={0,0,127}));
   connect(AirHandlingUnit.phi_supply, relToAbsHum1.relHum) annotation (Line(
@@ -309,8 +311,8 @@ equation
   connect(absToRelHum.relHum, AirHandlingUnit.phi_extractAir) annotation (Line(
         points={{-25,81},{10,81},{10,44},{18,44},{18,29.5},{12.4,29.5}}, color={
           0,0,127}));
-  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,58.02},{82.1,20},{
-          110,20}}, color={0,0,127}));
+  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,51.05},{82.1,20},
+          {110,20}},color={0,0,127}));
   if not use_moisture_balance then
   connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)
     annotation (Line(points={{12.4,12.25},{20,12.25},{20,29.5},{12.4,29.5}},
@@ -348,67 +350,17 @@ equation
   </li>
 </ul>
 </html>", info="<html>
-<p>
-  This is a ready-to-use multizone model with a variable number of
-  thermal zones. It adds heater/cooler devices and an air handling unit
-  to <a href=
-  \"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>.
-  It defines connectors and a replaceable vector of <a href=
-  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
-  models. Most connectors are conditional to allow conditional
-  modifications according to parameters or to pass-through conditional
-  removements in <a href=
-  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
-  and subsequently in <a href=
-  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.
-</p>
-<h4>
-  Typical use and important parameters
-</h4>
-<p>
-  The model needs parameters describing general properties of the
-  building (indoor air volume, net floor area, overall surface area)
-  and a vector with length of number of zones containing <a href=
-  \"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
-  records to define zone properties and heater/cooler properties. An
-  additional tab allows configuring the air handling unit. The air
-  handling unit facilitates heating, cooling, humidification,
-  dehumidification and heat recovery modes. The user can redeclare the
-  thermal zone model choosing from <a href=
-  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
-  Further parameters for medium, initialization and dynamics originate
-  from <a href=
-  \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
-  A typical use case is a simulation of a multizone building for
-  district simulations. The multizone model calculates heat load and
-  indoor air profiles.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  For automatic generation of thermal zone and multizone models as well
-  as for datasets, see <a href=
-  \"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a>
-</p>
+<p>This is a ready-to-use multizone model with a variable number of thermal zones. It adds heater/cooler devices and an air handling unit to <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
+<p>Moisture and CO2 balances are conditional submodels which can be activated by setting use_moisture_balance or use_C_flow true.</p>
+<h4>Typical use and important parameters </h4>
+<p>The model needs parameters describing general properties of the building (indoor air volume, net floor area, overall surface area) and a vector with length of number of zones containing <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records to define zone properties and heater/cooler properties. An additional tab allows configuring the air handling unit. The air handling unit facilitates heating, cooling, humidification, dehumidification and heat recovery modes. The user can redeclare the thermal zone model choosing from <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a simulation of a multizone building for district simulations. The multizone model calculates heat load and indoor air profiles. </p>
+<h4>References </h4>
+<p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a> </p>
 <ul>
-  <li>German Association of Engineers: Guideline VDI 6007-1, March
-  2012: Calculation of transient thermal response of rooms and
-  buildings - Modelling of rooms.
-  </li>
-  <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D.
-  (2014): Low order thermal network models for dynamic simulations of
-  buildings on city district scale. In: Building and Environment 73, p.
-  223–231. DOI: <a href=
-  \"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>.
-  </li>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
 </ul>
-<h4>
-  Examples
-</h4>
-<p>
-  See <a href=
-  \"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>.
-</p>
+<h4>Examples </h4>
+<p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>. </p>
 </html>"));
 end MultizoneEquipped;
