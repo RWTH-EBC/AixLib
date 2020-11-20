@@ -57,13 +57,13 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),
-    Documentation(revisions="<html><ul>
-  <li>September 27, 2016, by Moritz Lauster:<br/>
-    Reimplementation based on Annex60 and AixLib models.
-  </li>
-  <li>June 22, 2015, by Moritz Lauster:<br/>
-    First implementation.
-  </li>
+    Documentation(revisions="<html>
+<ul>
+<li>November 20, 2020, by Katharina Breuer:<br>Combine thermal zone models</li>
+<li>August 27, 2020, by Katharina Breuer:<br>Add co2 balance </li>
+<li>April, 2019, by Martin Kremer:<br>Add moisture balance</li>
+<li>September 27, 2016, by Moritz Lauster:<br>Reimplementation based on Annex60 and AixLib models. </li>
+<li>June 22, 2015, by Moritz Lauster:<br>First implementation. </li>
 </ul>
 </html>",
         info="<html>

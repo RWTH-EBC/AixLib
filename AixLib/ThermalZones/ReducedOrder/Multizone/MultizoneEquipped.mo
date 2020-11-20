@@ -338,16 +338,14 @@ equation
           lineColor={0,0,255},
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
-          textString="AHU")}), Documentation(revisions="<html><ul>
-  <li>September 27, 2016, by Moritz Lauster:<br/>
-    Reimplementation based on Annex60 and AixLib models.
-  </li>
-  <li>February 26, 2016, by Moritz Lauster:<br/>
-    Fixed bug in share of AHU volume flow.
-  </li>
-  <li>April 25, 2015, by Ole Odendahl:<br/>
-    Implemented.
-  </li>
+          textString="AHU")}), Documentation(revisions="<html>
+<ul>
+<li>November 20, 2020, by Katharina Breuer:<br>Combine thermal zone models</li>
+<li>August 27, 2020, by Katharina Breuer:<br>Add co2 balance </li>
+<li>April, 2019, by Martin Kremer:<br>Add moisture balance</li>
+<li>September 27, 2016, by Moritz Lauster:<br>Reimplementation based on Annex60 and AixLib models. </li>
+<li>February 26, 2016, by Moritz Lauster:<br>Fixed bug in share of AHU volume flow. </li>
+<li>April 25, 2015, by Ole Odendahl:<br>Implemented. </li>
 </ul>
 </html>", info="<html>
 <p>This is a ready-to-use multizone model with a variable number of thermal zones. It adds heater/cooler devices and an air handling unit to <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
