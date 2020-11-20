@@ -21,6 +21,7 @@ model MultizoneMoistAirCO2Equipped
     use_C_flow=true,
     use_moisture_balance=true,
     internalGainsMode=3,
+    use_C_flow=true,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,
