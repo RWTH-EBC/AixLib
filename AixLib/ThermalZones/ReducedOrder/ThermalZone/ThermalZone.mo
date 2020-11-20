@@ -252,7 +252,7 @@ model ThermalZone "Thermal zone containing moisture balance"
 
   // Moisture
   Modelica.Blocks.Math.MultiSum SumQLat1_flow(nu=2) if (ATot > 0 or
-    zoneParam.VAir > 0) and use_moisture_balance
+    zoneParam.VAir > 0) and use_moisture_balance and not use_AirExchange
     annotation (Placement(transformation(extent={{-40,-68},{-28,-56}})));
   Modelica.Blocks.Math.MultiSum SumQLat2_flow(nu=3) if (ATot > 0 or
     zoneParam.VAir > 0) and use_moisture_balance and use_AirExchange
@@ -653,8 +653,8 @@ equation
   connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-27.4,-28},{
           -24,-28},{-24,-40},{12,-40},{12,-64.9},{20,-64.9}},
                                                             color={0,0,127}));
-  connect(cO2Balance.spePeo, intGains[1]) annotation (Line(points={{20,-61.4},{
-          20,-50},{46,-50},{46,-113.333},{80,-113.333}},         color={0,0,127}));
+  connect(cO2Balance.uRel, intGains[1]) annotation (Line(points={{20,-61.4},{20,
+          -50},{46,-50},{46,-113.333},{80,-113.333}},            color={0,0,127}));
   connect(cO2Balance.TAir, TAir) annotation (Line(points={{27,-60},{26,-60},{26,
           0},{96,0},{96,80},{110,80}},
                          color={0,0,127}));
