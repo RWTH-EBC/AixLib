@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneMoistAirCO2Equipped
   "Multizone model with ideal heater and cooler and AHU considering moisture and co2 balance"
   extends
@@ -6,19 +6,20 @@ model MultizoneMoistAirCO2Equipped
       redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange,
       zone(
-      actDeg=actDeg,
+      use_C_flow=use_C_flow,
       XCO2_amb=XCO2_amb,
       areaBod=areaBod,
       metOnePerSit=metOnePerSit));
 
   // co2 parameters
-  parameter Real actDeg=1.8 "Activity degree (Met units)";
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)";
   parameter Modelica.SIunits.Area areaBod=1.8
     "Body surface area source SIA 2024:2015";
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]";
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance";
 
   parameter Boolean heatAHU
     "Status of heating of AHU"
@@ -132,7 +133,9 @@ model MultizoneMoistAirCO2Equipped
     "Absolute humidity in thermal zone"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,40},{100,60}})));
-
+  Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
+    "CO2 concentration in the thermal zone in ppm"
+    annotation (Placement(transformation(extent={{100,30},{120,50}})));
 protected
   BaseClasses.MoistSplitter moistSplitter(
     nOut=1,
@@ -332,6 +335,8 @@ equation
   connect(absToRelHum.relHum, AirHandlingUnit.phi_extractAir) annotation (Line(
         points={{-25,81},{10,81},{10,44},{18,44},{18,29.5},{12.4,29.5}}, color={
           0,0,127}));
+  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,58.02},{110,58.02},
+          {110,40}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),

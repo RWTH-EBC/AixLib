@@ -19,6 +19,7 @@ model MultizoneMoistAirCO2Equipped
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
     internalGainsMode=3,
+    use_C_flow=true,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,

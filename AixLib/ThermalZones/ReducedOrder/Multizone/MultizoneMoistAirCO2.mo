@@ -1,21 +1,22 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
   extends Multizone(redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange,
       zone(
-      actDeg=actDeg,
+      use_C_flow=use_C_flow,
       XCO2_amb=XCO2_amb,
       areaBod=areaBod,
       metOnePerSit=metOnePerSit));
 
   // co2 parameters
-  parameter Real actDeg=1.8 "Activity degree (Met units)";
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)";
   parameter Modelica.SIunits.Area areaBod=1.8
     "Body surface area source SIA 2024:2015";
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]";
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance";
 
   Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or
     VAir > 0 "Ventilation and infiltration humidity"
@@ -31,12 +32,18 @@ model MultizoneMoistAirCO2 "Multizone model with humidity and co2 balance"
     VAir > 0 "Humidity output"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,42},{100,62}})));
+
+  Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
+    "CO2 concentration in the thermal zone in ppm"
+    annotation (Placement(transformation(extent={{100,30},{120,50}})));
 equation
   connect(zone.ventHum, ventHum) annotation (Line(points={{35.27,55.765},{10,
           55.765},{10,56},{-18,56},{-18,36},{-100,36}},             color={0,0,
           127}));
   connect(zone.X_w, X_w) annotation (Line(points={{82.1,72.78},{94,72.78},{94,94},
           {110,94}}, color={0,0,127}));
+  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,58.02},{82.1,40},
+          {110,40}}, color={0,0,127}));
   annotation (Documentation(info="<html><p>
   This model enhances the existing multi-zone model considering
   moisture balance in the zone. Moisture is considered in internal

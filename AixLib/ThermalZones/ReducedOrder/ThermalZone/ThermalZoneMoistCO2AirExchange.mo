@@ -1,11 +1,9 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistCO2AirExchange
   "Thermal zone model considering moisture and co2 balance with ventilation, infiltration and internal gains"
-  extends ThermalZoneMoistAir(SumQLat_flow(nu=3));
+  extends ThermalZoneMoistAir(SumQLat_flow(nu=3), ROM(final use_C_flow=use_C_flow));
 
   // CO2 parameters
-  parameter Real actDeg=1.8 "Activity degree (Met units)"
-    annotation (Dialog(tab="CO2", enable=use_CO2_balance));
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
     annotation (Dialog(tab="CO2", enable=use_CO2_balance));
@@ -64,16 +62,17 @@ model ThermalZoneMoistCO2AirExchange
           extent={{-126,-80},{-100,-54}})));
   BoundaryConditions.InternalGains.CO2.CO2Balance cO2Balance(
     areaZon=zoneParam.AZone,
-    actDeg=actDeg,
+    actDeg=zoneParam.activityDegree,
     VZon=zoneParam.VAir,
-    XCO2_amb=XCO2_amb,
-    areaBod=areaBod,
-    metOnePerSit=metOnePerSit) if (ATot > 0 or zoneParam.VAir > 0) and
+    final XCO2_amb=XCO2_amb,
+    final areaBod=areaBod,
+    final metOnePerSit=metOnePerSit,
+    spePeo=zoneParam.specificPeople) if
+                                  (ATot > 0 or zoneParam.VAir > 0) and
     use_C_flow
-    annotation (Placement(transformation(extent={{30,-56},{44,-42}})));
+    annotation (Placement(transformation(extent={{32,-56},{46,-42}})));
   Modelica.Blocks.Interfaces.RealOutput CO2Con if (ATot > 0 or zoneParam.VAir
-     > 0) and use_C_flow
-    "CO2 concentration in the thermal zone in ppm"
+     > 0) and use_C_flow "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,-66},{120,-46}})));
 
   Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if (ATot >
@@ -147,18 +146,17 @@ equation
   connect(humVolAirROM.y, airExc.HumOut) annotation (Line(points={{10.5,-14},{
           0.75,-14},{0.75,-13.84},{-6.8,-13.84}}, color={0,0,127}));
   connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-34,-31.4},{
-          -24,-31.4},{-24,-48},{2,-48},{2,-46.9},{30,-46.9}}, color={0,0,127}));
-  connect(cO2Balance.spePeo, intGains[1]) annotation (Line(points={{30,-43.4},{
-          26,-43.4},{26,-60},{50,-60},{50,-113.333},{80,-113.333}},
-                                                                 color={0,0,127}));
-  connect(cO2Balance.TAir, TAir) annotation (Line(points={{37,-42},{70,-42},{70,
+          -24,-31.4},{-24,-48},{2,-48},{2,-46.9},{32,-46.9}}, color={0,0,127}));
+  connect(cO2Balance.uRel, intGains[1]) annotation (Line(points={{32,-43.4},{26,
+          -43.4},{26,-60},{50,-60},{50,-113.333},{80,-113.333}}, color={0,0,127}));
+  connect(cO2Balance.TAir, TAir) annotation (Line(points={{39,-42},{70,-42},{70,
           56},{110,56}}, color={0,0,127}));
-  connect(cO2Balance.CO2Con, CO2Con) annotation (Line(points={{44.7,-53.2},{56,-53.2},
+  connect(cO2Balance.CO2Con, CO2Con) annotation (Line(points={{46.7,-53.2},{56,-53.2},
           {56,-56},{110,-56}}, color={0,0,127}));
-  connect(cO2Balance.XCO2, XCO2.y) annotation (Line(points={{30,-50.4},{30,-53},
+  connect(cO2Balance.XCO2, XCO2.y) annotation (Line(points={{32,-50.4},{32,-53},
           {16.6,-53}}, color={0,0,127}));
   connect(ROM.C_flow[1], cO2Balance.mCO2_flow) annotation (Line(points={{37,56},
-          {34,56},{34,-6},{50,-6},{50,-44.8},{44.7,-44.8}}, color={0,0,127}));
+          {34,56},{34,-6},{50,-6},{50,-44.8},{46.7,-44.8}}, color={0,0,127}));
   annotation(Documentation(info="<html><p>
   This model enhances the existing thermal zone model considering
   moisture balance in the zone. Moisture is considered in internal
