@@ -23,9 +23,7 @@ model MultizoneMoistAirCO2
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
     redeclare package Medium = Medium,
-    T_start=293.15,
-    use_C_flow=true)
-                    "Multizone"
+    T_start=293.15) "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
