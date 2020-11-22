@@ -57,6 +57,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
                             iconTransformation(extent={{90,-20},{110,0}})));
   RC.FourElements ROM(
     redeclare final package Medium = Medium,
+    use_C_flow=use_C_flow,
     final nPorts=nPorts,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,

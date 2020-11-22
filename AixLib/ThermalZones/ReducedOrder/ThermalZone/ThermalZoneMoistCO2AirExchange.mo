@@ -1,11 +1,9 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistCO2AirExchange
   "Thermal zone model considering moisture and co2 balance with ventilation, infiltration and internal gains"
-  extends ThermalZoneMoistAir(SumQLat_flow(nu=3));
+  extends ThermalZoneMoistAir(SumQLat_flow(nu=3), ROM(final use_C_flow=use_C_flow));
 
   // CO2 parameters
-  parameter Real actDeg=1.8 "Activity degree (Met units)"
-    annotation (Dialog(tab="CO2", enable=use_CO2_balance));
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
     annotation (Dialog(tab="CO2", enable=use_CO2_balance));
@@ -64,16 +62,17 @@ model ThermalZoneMoistCO2AirExchange
           extent={{-126,-80},{-100,-54}})));
   BoundaryConditions.InternalGains.CO2.CO2Balance cO2Balance(
     areaZon=zoneParam.AZone,
-    actDeg=actDeg,
+    actDeg=zoneParam.activityDegree,
     VZon=zoneParam.VAir,
-    XCO2_amb=XCO2_amb,
-    areaBod=areaBod,
-    metOnePerSit=metOnePerSit) if (ATot > 0 or zoneParam.VAir > 0) and
+    final XCO2_amb=XCO2_amb,
+    final areaBod=areaBod,
+    final metOnePerSit=metOnePerSit,
+    spePeo=zoneParam.specificPeople) if
+                                  (ATot > 0 or zoneParam.VAir > 0) and
     use_C_flow
-    annotation (Placement(transformation(extent={{30,-56},{44,-42}})));
+    annotation (Placement(transformation(extent={{32,-56},{46,-42}})));
   Modelica.Blocks.Interfaces.RealOutput CO2Con if (ATot > 0 or zoneParam.VAir
-     > 0) and use_C_flow
-    "CO2 concentration in the thermal zone in ppm"
+     > 0) and use_C_flow "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,-66},{120,-46}})));
 
   Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if (ATot >
@@ -147,37 +146,101 @@ equation
   connect(humVolAirROM.y, airExc.HumOut) annotation (Line(points={{10.5,-14},{
           0.75,-14},{0.75,-13.84},{-6.8,-13.84}}, color={0,0,127}));
   connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-34,-31.4},{
-          -24,-31.4},{-24,-48},{2,-48},{2,-46.9},{30,-46.9}}, color={0,0,127}));
-  connect(cO2Balance.spePeo, intGains[1]) annotation (Line(points={{30,-43.4},{
-          26,-43.4},{26,-60},{50,-60},{50,-113.333},{80,-113.333}},
-                                                                 color={0,0,127}));
-  connect(cO2Balance.TAir, TAir) annotation (Line(points={{37,-42},{70,-42},{70,
+          -24,-31.4},{-24,-48},{2,-48},{2,-46.9},{32,-46.9}}, color={0,0,127}));
+  connect(cO2Balance.uRel, intGains[1]) annotation (Line(points={{32,-43.4},{26,
+          -43.4},{26,-60},{50,-60},{50,-113.333},{80,-113.333}}, color={0,0,127}));
+  connect(cO2Balance.TAir, TAir) annotation (Line(points={{39,-42},{70,-42},{70,
           56},{110,56}}, color={0,0,127}));
-  connect(cO2Balance.CO2Con, CO2Con) annotation (Line(points={{44.7,-53.2},{56,-53.2},
+  connect(cO2Balance.CO2Con, CO2Con) annotation (Line(points={{46.7,-53.2},{56,-53.2},
           {56,-56},{110,-56}}, color={0,0,127}));
-  connect(cO2Balance.XCO2, XCO2.y) annotation (Line(points={{30,-50.4},{30,-53},
+  connect(cO2Balance.XCO2, XCO2.y) annotation (Line(points={{32,-50.4},{32,-53},
           {16.6,-53}}, color={0,0,127}));
   connect(ROM.C_flow[1], cO2Balance.mCO2_flow) annotation (Line(points={{37,56},
-          {34,56},{34,-6},{50,-6},{50,-44.8},{44.7,-44.8}}, color={0,0,127}));
-  annotation(Documentation(info="<html>
-<p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
-<p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib. </p>
-<h4>Typical use and important parameters </h4>
-<p><b>Important!</b>: This model has to be combined with a zoneRecord that sets the parameter <i>internalGainsMode</i> to 3. Otherwise no moisture gain from persons will be considered. </p>
-<p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone including infiltration and vnetilation connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a> </p>
-<h4>References </h4>
-<p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a> </p>
+          {34,56},{34,-6},{50,-6},{50,-44.8},{46.7,-44.8}}, color={0,0,127}));
+  annotation(Documentation(info="<html><p>
+  This model enhances the existing thermal zone model considering
+  moisture balance in the zone. Moisture is considered in internal
+  gains.
+</p>
+<p>
+  Comprehensive ready-to-use model for thermal zones, combining
+  caclulation core, handling of solar radiation, internal gains and in
+  addition to <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>
+  models for infiltration and natural ventilation. Core model is a
+  <a href=
+  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>
+  model. Conditional removements of the core model are passed-through
+  and related models on thermal zone level are as well conditional. All
+  models for solar radiation are part of Annex60 library. Internal
+  gains are part of AixLib.
+</p>
+<h4>
+  Typical use and important parameters
+</h4>
+<p>
+  <b>Important!</b>: This model has to be combined with a zoneRecord
+  that sets the parameter <i>internalGainsMode</i> to 3. Otherwise no
+  moisture gain from persons will be considered.
+</p>
+<p>
+  All parameters are collected in one <a href=
+  \"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+  record. Further parameters for medium, initialization and dynamics
+  originate from <a href=
+  \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
+  A typical use case is a single thermal zone including infiltration
+  and vnetilation connected via heat ports and fluid ports to a heating
+  system. The thermal zone model serves as boundary condition for the
+  heating system and calculates the room's reaction to external and
+  internal heat sources. The model is used as thermal zone core model
+  in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">
+  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a>
+</p>
+<h4>
+  References
+</h4>
+<p>
+  For automatic generation of thermal zone and multizone models as well
+  as for datasets, see <a href=
+  \"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a>
+</p>
 <ul>
-<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
-<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
+  <li>German Association of Engineers: Guideline VDI 6007-1, March
+  2012: Calculation of transient thermal response of rooms and
+  buildings - Modelling of rooms.
+  </li>
+  <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D.
+  (2014): Low order thermal network models for dynamic simulations of
+  buildings on city district scale. In: Building and Environment 73, p.
+  223–231. DOI: <a href=
+  \"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>.
+  </li>
 </ul>
-<h4>Examples </h4>
-<p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange</a>. </p>
+<h4>
+  Examples
+</h4>
+<p>
+  See <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange\">
+  AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange</a>.
+</p>
 <ul>
-<li>August 27, 2020, by Katharina Breuer:<br/>Add co2 balance</li>
-<li>January 09, 2020, by David Jansen:<br/>Integration of ideal heater and cooler into the thermal zone. </li>
-<li>July 10, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
-<li>April, 2019, by Martin Kremer:<br/>First implementation. </li>
+  <li>August 27, 2020, by Katharina Breuer:<br/>
+    Add co2 balance
+  </li>
+  <li>January 09, 2020, by David Jansen:<br/>
+    Integration of ideal heater and cooler into the thermal zone.
+  </li>
+  <li>July 10, 2019, by Martin Kremer:<br/>
+    Adapting to new internalGains models. See <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue
+    #690</a>.
+  </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
