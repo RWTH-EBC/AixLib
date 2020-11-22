@@ -71,6 +71,10 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 	import buildingspy.development.regressiontest as u
 	ref_check = Reg_Reference(package = args.single_package,
 									  library = args.path)
+	
+	CRED = '\033[91m'
+	CEND = '\033[0m'
+	green = "\033[0;32m"	
 	mos_list = ref_check.compare_ref_mos()
 		
 	ut = u.Tester(tool=tool)
@@ -111,7 +115,7 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 	
 	if mos_list is not None:
 		for z in mos_list:
-			print("No Reference result for Model " +z)
+			print(CRED+"No Reference result for Model "+CEND +z)
 		
 		for i in mos_list:
 			name = i
@@ -123,7 +127,7 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 		for z in Ref:
 			for i in WhiteList:
 				if  z.find(i) > -1:
-					print("Don´t Create Reference results for Package "+z+ " : This Package is on the WhiteList") 
+					print(green+"Don´t Create Reference results for Package "+CEND+z+ green+" : This Package is on the WhiteList"+CEND) 
 					Err_List.append(z)
 				else:
 					continue
@@ -135,7 +139,12 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 			Exit.write("#!/bin/bash"+"\n"+"\n"+"exit 0")
 			Exit.close()
 			exit(0)
-			
+		
+		print(green+"Create reference results for following Examples:"+CEND)
+		for x in Ref:
+			print('		'+x)
+			 
+		
 		for i in Ref:
 			
 			'''if i.find("DataBase")> -1:
@@ -148,7 +157,7 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 				continue
 			if i.find("Utilities") > -1:
 				continue'''			
-			print("Generate new Reference File for "+i)
+			print(green+"Generate new Reference File for "+CEND+i)
 			#name = i.replace("_",".")
 			#name = name[:name.rfind(".")]
 			ut.setSinglePackage(i)
@@ -157,9 +166,6 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 			ut.showGUI(False)
 			#ut.showGUI(self.show_gui)
 			retVal = ut.run()
-			#retVal = ut._checkReferencePoints("y")
-			# Create new file? - y
-			# accept new file and update reference files? - n
 			continue
 			
 			
@@ -301,6 +307,7 @@ if __name__ == '__main__':
 	import argparse
 	import os
 	import sys
+	import time
 	
 	# Configure the argument parser
 	parser = argparse.ArgumentParser(description='Run the unit tests or the html validation only.')
@@ -404,7 +411,7 @@ if __name__ == '__main__':
 
 	
 	
-	if args.coverage_only:
+	elif args.coverage_only:
 		ret_val = _run_coverage_only(batch = args.batch,
                            tool = args.tool,
                            package = single_package,
@@ -412,15 +419,57 @@ if __name__ == '__main__':
                            n_pro = args.number_of_processors,
                            show_gui = args.show_gui)
 		exit(ret_val)
-
-
-	retVal = _runUnitTests(batch = args.batch,
-                           tool = args.tool,
-                           package = single_package,
-                           path = args.path,
-                           n_pro = args.number_of_processors,
-                           show_gui = args.show_gui,
-						   modified_models = args.modified_models)
-	exit(retVal)
-
-#   _runOpenModelicaUnitTests()
+	else:
+		from dymola.dymola_interface import DymolaInterface
+		from dymola.dymola_exception import DymolaException
+		
+		dymola = None
+		try:
+			
+			print("1: Starting Dymola instance")
+			if platform.system()  == "Windows":
+				dymola = DymolaInterface()
+			else:
+				dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
+				
+			### Writes all information in the log file, not only the last entries
+			dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
+			dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+			lic_counter = 0
+			
+			CRED = '\033[91m'
+			CEND = '\033[0m'
+			while dym_sta_lic_available == False:
+				print(CRED+"No Dymola License is available"+CEND)
+				dymola.close()
+				print("Check Dymola license after 60.0 seconds")
+				time.sleep(180.0)
+				### Sets the Dymola path to activate the GUI
+				if platform.system()  == "Windows":
+					dymola = DymolaInterface()
+				else:
+					dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
+				dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+				lic_counter = lic_counter +1 	
+				if lic_counter > 30:
+					if dym_sta_lic_available == False:
+						print("There are currently no available Dymola licenses available. Please try again later.")
+						dymola.close()
+						exit(1)
+			print(("2: Using Dymola port " + str(dymola._portnumber)))
+			print("Dymola License is available")
+			retVal = _runUnitTests(batch = args.batch,
+								   tool = args.tool,
+								   package = single_package,
+								   path = args.path,
+								   n_pro = args.number_of_processors,
+								   show_gui = args.show_gui,
+								   modified_models = args.modified_models)
+			exit(retVal)
+		except DymolaException as ex:
+			print(("2: Error: " + str(ex)))
+		finally:
+			if dymola is not None:
+				dymola.close()
+				dymola = None
+			#   _runOpenModelicaUnitTests()

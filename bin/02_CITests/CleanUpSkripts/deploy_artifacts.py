@@ -45,13 +45,20 @@ def copy_txt(reffile):
 		refName = i.split(os.sep)
 		refName = refName[len(refName)-1]
 		#print(refName)
-		shutil.copy(i, 'Referencefiles'+os.sep+refName)
-	
+		try:
+			shutil.copy(i, 'Referencefiles'+os.sep+refName)
+		except ValueError:
+			print("Cant find Referencefiles"+os.sep+refName)
+			continue
+			
 if  __name__ == '__main__':
-	'''parser = argparse.ArgumentParser(description='Run the unit tests or the html validation only.')
-	unit_test_group = parser.add_argument_group("arguments to run unit tests")
-	unit_test_group.add_argument("-p", "--path",
-                        default = ".",
-                        help="Path where top-level package.mo of the library is located")'''
-	reffile = sort_mo_models()
-	copy_txt(reffile)
+	try:
+		'''parser = argparse.ArgumentParser(description='Run the unit tests or the html validation only.')
+		unit_test_group = parser.add_argument_group("arguments to run unit tests")
+		unit_test_group.add_argument("-p", "--path",
+							default = ".",
+							help="Path where top-level package.mo of the library is located")'''
+		reffile = sort_mo_models()
+		copy_txt(reffile)
+	except ValueError:
+		print("Can´t find file!")

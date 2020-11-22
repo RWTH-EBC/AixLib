@@ -25,13 +25,17 @@ class Reg_Reference(object):
 		for subdir, dirs, files in os.walk(resource_file_path):
 				for file in files:
 					filepath = subdir + os.sep + file
-					if filepath.endswith(".mos"):
-						mos_script = filepath[filepath.find("Dymola"):]
-						mos_script = mos_script.replace("Dymola",self.library)
-						mos_script = mos_script.replace(os.sep, ".")
-						mos_script = mos_script.replace(".mos", "")
-						mos_list.append(mos_script)
-		#print(mos_list)
+					f = open(filepath, "r")
+					str = f.read()
+					if str.find("simulateModel") > -1: 
+						if filepath.endswith(".mos"):
+							mos_script = filepath[filepath.find("Dymola"):]
+							mos_script = mos_script.replace("Dymola",self.library)
+							mos_script = mos_script.replace(os.sep, ".")
+							mos_script = mos_script.replace(".mos", "")
+							mos_list.append(mos_script)
+					f.close()
+		print(mos_list)
 		return mos_list
 	
 	def _check_ref(self):

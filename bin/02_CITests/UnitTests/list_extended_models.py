@@ -5,7 +5,7 @@ import sys
 from CheckPackages.sort_models import git_models
 import glob
 import fnmatch
-
+import time
 
 class Extended_model(object):
 
@@ -49,7 +49,14 @@ class Extended_model(object):
 		models = []
 		if len(regression_models) >0:
 			for l in regression_models:
-				model = l[:l.rfind(".")]
+				#model = l[:l.rfind(".")]
+				Num_Example = l.rfind("Examples")
+				Num_Validation = l.rfind("Validation")
+				if Num_Example > Num_Validation:
+					model = l[:Num_Example]
+				else:
+					model = l[:Num_Validation]
+				#model = l[:l.rfind("Validation")]
 				models.append(model)
 		testmodels = list(set(models))
 		regression_models = testmodels
