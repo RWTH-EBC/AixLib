@@ -12,7 +12,9 @@ def sort_mo_models():
 		modelica_models = [] 
 		Lines =  changed_models.readlines()
 		Line= str(Lines)
-		Line = Line.split(":")
+		
+		if Line.find(":") > -1 :
+			Line = Line.split(":")
 		for i in Line:
 			if i.rfind(".mos")>-1:
 				continue
@@ -34,7 +36,7 @@ def sort_mo_models():
 				else:
 					continue
 		changed_models.close()
-		
+	
 		#print(modelica_models)
 		return modelica_models
 

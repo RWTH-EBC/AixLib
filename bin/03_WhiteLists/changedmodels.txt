@@ -24,4 +24,4 @@
  :100644 100644 Resources\ReferenceResults\Dymola\AixLib_Fluid_FixedResistances_Examples_GenericPipe.txt
  :100644 100644 Resources\ReferenceResults\Dymola\AixLib_ThermalZones_ReducedOrder_Validation_RoomWithoutLatentGain.txt
  :100644 100644 Resources\ReferenceResults\Dymola\AixLib_ThermalZones_ReducedOrder_Validation_VDI6007_TestCase1.txt
- :100644 100644 Resources\ReferenceResults\Dymola\AixLib_ThermalZones_ReducedOrder_Validation_VDI6007_TestCase2.txt
+ Resources\ReferenceResults\Dymola\AixLib_ThermalZones_ReducedOrder_Validation_VDI6007_TestCase2.txt
