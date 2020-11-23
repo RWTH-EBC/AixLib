@@ -440,7 +440,7 @@ class ValidateTest(object):
 						print('\n'+green+ 'Successful: '+CEND+i+'\n')
 					if result == False:
 						print("Check for Model "+i+CRED+" failed!"+CEND)
-						print("Second Check Test for model "+i))
+						print("Second Check Test for model "+i)
 						result=dymola.checkModel(i,simulate=True)
 						if result == True:
 							print('\n'+green+ 'Successful: '+CEND+i+'\n')
