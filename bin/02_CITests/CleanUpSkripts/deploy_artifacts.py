@@ -39,6 +39,7 @@ def sort_mo_models():
 		return modelica_models
 
 	
+	
 def copy_txt(reffile):
 	os.mkdir('Referencefiles')
 	for i in reffile:
@@ -47,7 +48,7 @@ def copy_txt(reffile):
 		#print(refName)
 		try:
 			shutil.copy(i, 'Referencefiles'+os.sep+refName)
-		except ValueError:
+		except FileNotFoundError:
 			print("Cant find Referencefiles"+os.sep+refName)
 			continue
 			
@@ -60,5 +61,5 @@ if  __name__ == '__main__':
 							help="Path where top-level package.mo of the library is located")'''
 		reffile = sort_mo_models()
 		copy_txt(reffile)
-	except ValueError:
+	except FileNotFoundError:
 		print("Can´t find file!")

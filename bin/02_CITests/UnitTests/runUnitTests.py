@@ -135,7 +135,7 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 			Ref.remove(x)
 		
 		if len(Ref) == 0:
-			print("All Reference files exists, except the Models on WhiteList.")
+			print(green+"All Reference files exists, except the Models on WhiteList."+CEND)
 			Exit.write("#!/bin/bash"+"\n"+"\n"+"exit 0")
 			Exit.close()
 			exit(0)

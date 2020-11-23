@@ -18,7 +18,9 @@ class Reg_Reference(object):
 		Name = Name.replace(".",os.sep)
 		resource_file_path = "Resources"+os.sep+"Scripts"+os.sep+"Dymola"+os.sep+Name
 		#resource_file_path = "Resources"+os.sep+"Scripts"+os.sep+"Dymola"
-		
+		CRED = '\033[91m'
+		CEND = '\033[0m'
+		green = "\033[0;32m"
 		mos_list = []
 		wmos_list = []
 		
@@ -36,7 +38,7 @@ class Reg_Reference(object):
 							mos_list.append(mos_script)
 					if str.find("simulateModel") == -1: 
 						if filepath.endswith(".mos"):
-							print("\nThis mos script is not suitable for regression testing: "+filepath+"\n")
+							print("\n"+CRED+"This mos script is not suitable for regression testing: "+CEND+filepath+"\n")
 							
 							'''
 							mos_script = filepath[filepath.find("Dymola"):]

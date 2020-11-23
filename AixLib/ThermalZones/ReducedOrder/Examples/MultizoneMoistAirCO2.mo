@@ -5,7 +5,7 @@ model MultizoneMoistAirCO2
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2 multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.Multizone multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     VAir=33500,
@@ -17,13 +17,13 @@ model MultizoneMoistAirCO2
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    use_C_flow=true,
+    use_moisture_balance=true,
     internalGainsMode=3,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
     redeclare package Medium = Medium,
-    T_start=293.15,
-    use_C_flow=true)
-                    "Multizone"
+    T_start=293.15) "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,

@@ -5,7 +5,7 @@ model MultizoneMoistAirCO2Equipped
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2Equipped
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped
     multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -18,8 +18,9 @@ model MultizoneMoistAirCO2Equipped
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
-    internalGainsMode=3,
     use_C_flow=true,
+    use_moisture_balance=true,
+    internalGainsMode=3,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,
