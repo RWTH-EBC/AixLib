@@ -188,7 +188,10 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 	ut.batchMode(batch)
 	ut.setLibraryRoot(path)
 	Errorlist = []
-	 
+	green = "\033[0;32m"
+	CRED = '\033[91m'
+	CEND = '\033[0m'
+			 
 	
 	
 	if modified_models == False:
@@ -261,20 +264,20 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 				retVal = ut.run()
 				if retVal == 1:
 					Errorlist.append(l)
-					print("Regression test for model "+l+ " was not successfull")
+					print(CRED+"Regression test for model "+l+ " was not successfull"+CEND)
 				if retVal != 0:
-					print("Regression test for model "+l+ " was successful")
+					print(green+"Regression test for model "+l+ " was successful"+CEND)
 				# comment out this line for local usage
 				ut.get_test_example_coverage()
 			if len(Errorlist) > 0:
 				retVal = 1
-				print("Regression test failed")
-				print("The following packages failed")
+				print(CRED+"Regression test failed"+CEND)
+				print("The following packages "+CRED+"failed"+CEND)
 				for l in Errorlist:
-					print("		Error: "+l)
+					print(CRED+"		Error: "+CEND+l)
 			else:
 				retVal = 0
-				print("Regression test was successful")
+				print(green+"Regression test was successful"+CEND)
 			
 		return retVal
 
@@ -385,6 +388,8 @@ if __name__ == '__main__':
 									  library = "package.mo",
 									  DymolaVersion = args.DymolaVersion)
 	
+	
+	
 	if args.validate_html_only:
         # Validate the html syntax only, and then exit
 		ret_val = _validate_html(args.path)
@@ -437,6 +442,7 @@ if __name__ == '__main__':
 			dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
 			lic_counter = 0
 			
+			green = "\033[0;32m"
 			CRED = '\033[91m'
 			CEND = '\033[0m'
 			while dym_sta_lic_available == False:
@@ -453,11 +459,11 @@ if __name__ == '__main__':
 				lic_counter = lic_counter +1 	
 				if lic_counter > 30:
 					if dym_sta_lic_available == False:
-						print("There are currently no available Dymola licenses available. Please try again later.")
+						print(CRED+"There are currently no available Dymola licenses available. Please try again later."+CEND)
 						dymola.close()
 						exit(1)
 			print(("2: Using Dymola port " + str(dymola._portnumber)))
-			print("Dymola License is available")
+			print(green+"Dymola License is available"+CEND)
 			retVal = _runUnitTests(batch = args.batch,
 								   tool = args.tool,
 								   package = single_package,
