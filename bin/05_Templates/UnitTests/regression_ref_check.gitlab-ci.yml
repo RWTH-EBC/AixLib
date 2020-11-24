@@ -39,8 +39,7 @@ RegressionTest_Check_References:
         - if cat bin/06_Configfiles/exit.sh | grep "exit 1"; then 
             rm -r AixLib/funnel_comp ;
             pushmodel=$(git ls-files --others --exclude-standard);
-            model=$(git diff --raw HEAD^1);
-            echo $pushmodel;
+            model=$(git diff --raw --diff-filter=AMT);
             echo $model >  bin/03_WhiteLists/changedmodels.txt;
             python  bin/02_CITests/CleanUpSkripts/deploy_artifacts.py;
             message="Automatic push of CI with new regression reference files. Please pull the new files before push again.";
@@ -48,7 +47,12 @@ RegressionTest_Check_References:
             git commit -m "$message";
             git push git@github.com:${Github_Repository}.git;
             rm bin/06_Configfiles/exit.sh;
+            cp $pushmodel Referencefiles;
             mv Referencefiles/ ../../public/Referencefiles;
+            RED='\033[0;31m';
+            GREEN='\033[0;32m';
+            NC='\033[0m';
+            echo -e "${GREEN}New reference files were pushed to this branch. The job was successfully and the newly added files are tested in another commit${NC}.";
             exit 1;
           else
             exit 0 ;
@@ -63,3 +67,5 @@ RegressionTest_Check_References:
    
     only:
         - external_pull_requests
+ 
+
