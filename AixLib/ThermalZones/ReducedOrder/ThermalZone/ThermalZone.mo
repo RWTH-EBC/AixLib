@@ -289,6 +289,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     areaZon=zoneParam.AZone,
     actDeg=zoneParam.activityDegree,
     VZon=zoneParam.VAir,
+    spePeo=zoneParam.specificPeople,
     final XCO2_amb=XCO2_amb,
     final areaBod=areaBod,
     final metOnePerSit=metOnePerSit) if (ATot > 0 or zoneParam.VAir > 0) and

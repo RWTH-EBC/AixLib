@@ -5,8 +5,7 @@ import sys
 from CheckPackages.sort_models import git_models
 import glob
 import fnmatch
-import time
-
+import time 
 
 class Extended_model(object):
 
