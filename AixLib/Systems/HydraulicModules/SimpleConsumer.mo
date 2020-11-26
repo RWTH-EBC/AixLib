@@ -94,7 +94,8 @@ model SimpleConsumer "Simple Consumer"
     redeclare package Medium = Medium,
     T_start=T_start,
     allowFlowReversal=allowFlowReversal,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_nominal=m_flow_nominal,
+    addPowerToMedium=false)
     annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
   Modelica.Blocks.Sources.RealExpression realExpression3(y=-Q_flow/(4186*
         deltaTConsumerNominal))
