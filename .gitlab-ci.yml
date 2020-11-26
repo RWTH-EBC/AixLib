@@ -5,6 +5,7 @@ stages:
     - deleteBranch
     - SetSettings
     - CheckSettings
+    - Ref_Check
     - build
     - HTMLCheck
     - deploy
@@ -20,10 +21,13 @@ variables:
     TARGET_BRANCH: $CI_COMMIT_REF_NAME
     Newbranch: ${Praefix_Branch}${CI_COMMIT_REF_NAME}
     Github_Repository : RWTH-EBC/AixLib
-    
+  
+
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/regression_ref_check.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
@@ -40,7 +44,6 @@ include:
     file:  'modelica-ci-tests/UnitTests/changed_check_model.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'modelica-ci-tests/UnitTests/changed_regression_test.gitlab-ci.yml'
-
   
   
   
