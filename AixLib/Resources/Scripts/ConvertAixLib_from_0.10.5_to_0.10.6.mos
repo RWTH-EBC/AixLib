@@ -1,0 +1,624 @@
+﻿clear
+
+convertClear();
+
+convertElement(
+    "AixLib.ThermalZones.HighOrder.Components.DryAir.DynamicVentilation",
+    "varAirExchange.InPort1",
+    "varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange",
+    "InPort1",
+    "ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.Components.MoistAir.VarMoistAirExchange",
+    "InPort1",
+    "ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.Components.Examples.DryAir.DryAir_test",
+    "dynamicVentilation.varAirExchange.InPort1",
+    "dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.Components.Examples.DryAir.DryAir_test",
+    "varAirExchange.InPort1",
+    "varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators",
+    "Appartment.Bathroom.NaturalVentilation.InPort1",
+    "Appartment.Bathroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators",
+    "Appartment.Bedroom.NaturalVentilation.InPort1",
+    "Appartment.Bedroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators",
+    "Appartment.Children.NaturalVentilation.InPort1",
+    "Appartment.Children.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators",
+    "Appartment.Kitchen.NaturalVentilation.InPort1",
+    "Appartment.Kitchen.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators",
+    "Appartment.Livingroom.NaturalVentilation.InPort1",
+    "Appartment.Livingroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope.OneAppartment_VoWo",
+    "Bathroom.NaturalVentilation.InPort1",
+    "Bathroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope.OneAppartment_VoWo",
+    "Bedroom.NaturalVentilation.InPort1",
+    "Bedroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope.OneAppartment_VoWo",
+    "Children.NaturalVentilation.InPort1",
+    "Children.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope.OneAppartment_VoWo",
+    "Kitchen.NaturalVentilation.InPort1",
+    "Kitchen.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope.OneAppartment_VoWo",
+    "Livingroom.NaturalVentilation.InPort1",
+    "Livingroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "Corridor.NaturalVentilation.InPort1",
+    "Corridor.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "Corridor.dynamicVentilation.varAirExchange.InPort1",
+    "Corridor.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "Hobby.NaturalVentilation.InPort1",
+    "Hobby.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "Hobby.dynamicVentilation.varAirExchange.InPort1",
+    "Hobby.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "Kitchen.NaturalVentilation.InPort1",
+    "Kitchen.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "Kitchen.dynamicVentilation.varAirExchange.InPort1",
+    "Kitchen.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "Livingroom.NaturalVentilation.InPort1",
+    "Livingroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "Livingroom.dynamicVentilation.varAirExchange.InPort1",
+    "Livingroom.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "WC_Storage.NaturalVentilation.InPort1",
+    "WC_Storage.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope",
+    "WC_Storage.dynamicVentilation.varAirExchange.InPort1",
+    "WC_Storage.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Bath.NaturalVentilation.InPort1",
+    "Bath.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Bath.dynamicVentilation.varAirExchange.InPort1",
+    "Bath.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Bedroom.NaturalVentilation.InPort1",
+    "Bedroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Bedroom.dynamicVentilation.varAirExchange.InPort1",
+    "Bedroom.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Children1.NaturalVentilation.InPort1",
+    "Children1.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Children1.dynamicVentilation.varAirExchange.InPort1",
+    "Children1.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Children2.NaturalVentilation.InPort1",
+    "Children2.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Children2.dynamicVentilation.varAirExchange.InPort1",
+    "Children2.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Corridor.NaturalVentilation.InPort1",
+    "Corridor.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope",
+    "Corridor.dynamicVentilation.varAirExchange.InPort1",
+    "Corridor.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "attic_2Ro_5Rooms.NaturalVentilation.InPort1",
+    "attic_2Ro_5Rooms.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.Corridor.NaturalVentilation.InPort1",
+    "groundFloor_Building.Corridor.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.Corridor.dynamicVentilation.varAirExchange.InPort1",
+    "groundFloor_Building.Corridor.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.Hobby.NaturalVentilation.InPort1",
+    "groundFloor_Building.Hobby.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.Hobby.dynamicVentilation.varAirExchange.InPort1",
+    "groundFloor_Building.Hobby.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.Kitchen.NaturalVentilation.InPort1",
+    "groundFloor_Building.Kitchen.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.Kitchen.dynamicVentilation.varAirExchange.InPort1",
+    "groundFloor_Building.Kitchen.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.Livingroom.NaturalVentilation.InPort1",
+    "groundFloor_Building.Livingroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.Livingroom.dynamicVentilation.varAirExchange.InPort1",
+    "groundFloor_Building.Livingroom.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.WC_Storage.NaturalVentilation.InPort1",
+    "groundFloor_Building.WC_Storage.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "groundFloor_Building.WC_Storage.dynamicVentilation.varAirExchange.InPort1",
+    "groundFloor_Building.WC_Storage.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "upperFloor_Building.Bath.NaturalVentilation.InPort1",
+    "upperFloor_Building.Bath.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "upperFloor_Building.Bath.dynamicVentilation.varAirExchange.InPort1",
+    "upperFloor_Building.Bath.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "upperFloor_Building.Bedroom.NaturalVentilation.InPort1",
+    "upperFloor_Building.Bedroom.NaturalVentilation.ventRate");
+convertElement(
+    "AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+    "upperFloor_Building.Bedroom.dynamicVentilation.varAirExchange.InPort1",
+    "upperFloor_Building.Bedroom.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+	"upperFloor_Building.Children1.NaturalVentilation.InPort1",
+	"upperFloor_Building.Children1.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+	"upperFloor_Building.Children1.dynamicVentilation.varAirExchange.InPort1",
+	"upperFloor_Building.Children1.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+	"upperFloor_Building.Children2.NaturalVentilation.InPort1",
+	"upperFloor_Building.Children2.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+	"upperFloor_Building.Children2.dynamicVentilation.varAirExchange.InPort1",
+	"upperFloor_Building.Children2.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+	"upperFloor_Building.Corridor.NaturalVentilation.InPort1",
+	"upperFloor_Building.Corridor.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+	"upperFloor_Building.Corridor.dynamicVentilation.varAirExchange.InPort1",
+	"upperFloor_Building.Corridor.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope",
+	"varAirExchange.InPort1",
+	"varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.EastWestFacingWindows",
+	"varAirExchange.InPort1",
+	"varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows",
+	"varAirExchange.InPort1",
+	"varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Attic_Ro2Lf1",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bathroom_VoWo",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bedroom_VoWo",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Children_VoWo",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Kitchen_VoWo",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Livingroom_VoWo",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Gr1Uf1",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Gr1Uf1",
+	"dynamicVentilation.varAirExchange.InPort1",
+	"dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1",
+	"dynamicVentilation.varAirExchange.InPort1",
+	"dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1",
+	"dynamicVentilation.varAirExchange.InPort1",
+	"dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1",
+	"dynamicVentilation.varAirExchange.InPort1",
+	"dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Gr1Uf1",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Gr1Uf1",
+	"dynamicVentilation.varAirExchange.InPort1",
+	"dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1",
+	"NaturalVentilation.InPort1",
+	"NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1",
+	"dynamicVentilation.varAirExchange.InPort1",
+	"dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.Appartment_VoWo",
+	"VoWoWSchV1984.Appartment.Bathroom.NaturalVentilation.InPort1",
+	"VoWoWSchV1984.Appartment.Bathroom.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.Appartment_VoWo",
+	"VoWoWSchV1984.Appartment.Bedroom.NaturalVentilation.InPort1",
+	"VoWoWSchV1984.Appartment.Bedroom.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.Appartment_VoWo",
+	"VoWoWSchV1984.Appartment.Children.NaturalVentilation.InPort1",
+	"VoWoWSchV1984.Appartment.Children.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.Appartment_VoWo",
+	"VoWoWSchV1984.Appartment.Kitchen.NaturalVentilation.InPort1",
+	"VoWoWSchV1984.Appartment.Kitchen.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.Appartment_VoWo",
+	"VoWoWSchV1984.Appartment.Livingroom.NaturalVentilation.InPort1",
+	"VoWoWSchV1984.Appartment.Livingroom.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.attic_2Ro_5Rooms.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Corridor.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Hobby.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.Livingroom.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Bath.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Bath.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Bath.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Bath.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Bedroom.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Children1.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Children1.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Children1.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Children1.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Children2.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Children2.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Children2.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Children2.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.NaturalVentilation.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.dynamicVentilation.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.upperFloor_Building.Corridor.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad",
+	"wholeHouseBuildingEnvelope.varAirExchange.InPort1",
+	"wholeHouseBuildingEnvelope.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.attic_2Ro_5Rooms.NaturalVentilation.InPort1",
+	"OFD.attic_2Ro_5Rooms.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.Corridor.NaturalVentilation.InPort1",
+	"OFD.groundFloor_Building.Corridor.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.Corridor.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.groundFloor_Building.Corridor.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.Hobby.NaturalVentilation.InPort1",
+	"OFD.groundFloor_Building.Hobby.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.Hobby.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.groundFloor_Building.Hobby.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.Kitchen.NaturalVentilation.InPort1",
+	"OFD.groundFloor_Building.Kitchen.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.Kitchen.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.groundFloor_Building.Kitchen.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.Livingroom.NaturalVentilation.InPort1",
+	"OFD.groundFloor_Building.Livingroom.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.Livingroom.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.groundFloor_Building.Livingroom.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.WC_Storage.NaturalVentilation.InPort1",
+	"OFD.groundFloor_Building.WC_Storage.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.groundFloor_Building.WC_Storage.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.groundFloor_Building.WC_Storage.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Bath.NaturalVentilation.InPort1",
+	"OFD.upperFloor_Building.Bath.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Bath.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.upperFloor_Building.Bath.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Bedroom.NaturalVentilation.InPort1",
+	"OFD.upperFloor_Building.Bedroom.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Bedroom.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.upperFloor_Building.Bedroom.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Children1.NaturalVentilation.InPort1",
+	"OFD.upperFloor_Building.Children1.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Children1.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.upperFloor_Building.Children1.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Children2.NaturalVentilation.InPort1",
+	"OFD.upperFloor_Building.Children2.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Children2.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.upperFloor_Building.Children2.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Corridor.NaturalVentilation.InPort1",
+	"OFD.upperFloor_Building.Corridor.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.upperFloor_Building.Corridor.dynamicVentilation.varAirExchange.InPort1",
+	"OFD.upperFloor_Building.Corridor.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan",
+	"OFD.varAirExchange.InPort1",
+	"OFD.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode",
+	"room_GF_2OW.NaturalVentilation.InPort1",
+	"room_GF_2OW.NaturalVentilation.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode",
+	"room_GF_2OW.dynamicVentilation.varAirExchange.InPort1",
+	"room_GF_2OW.dynamicVentilation.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF",
+	"Room.varAirExchange.InPort1",
+	"Room.varAirExchange.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone",
+	"zone.airExc.InPort1",
+	"zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped",
+	"zone.airExc.InPort1",
+	"zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2",
+	"zone.airExc.InPort1",
+	"zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2Equipped",
+	"zone.airExc.InPort1",
+	"zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone",
+	"zone.airExc.InPort1",
+	"zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange",
+	"airExc.InPort1",
+	"airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange",
+	"airExc.InPort1",
+	"airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Examples.Multizone",
+	"multizone.zone.airExc.InPort1",
+	"multizone.zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped",
+	"multizone.zone.airExc.InPort1",
+	"multizone.zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2",
+	"multizone.zone.airExc.InPort1",
+	"multizone.zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped",
+	"multizone.zone.airExc.InPort1",
+	"multizone.zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Examples.MultizonePartlyCooled",
+	"multizone.zone.airExc.InPort1",
+	"multizone.zone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneAirExchange",
+	"thermalZone.airExc.InPort1",
+	"thermalZone.airExc.ventRate");
+convertElement(
+	"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange",
+	"thermalZone.airExc.InPort1",
+	"thermalZone.airExc.ventRate");

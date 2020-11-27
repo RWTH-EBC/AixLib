@@ -223,7 +223,9 @@ equation
           1.3,-36},{1.3,-31.8}},                                                                                                                                    color={191,0,0}));
   connect(Wall_Livingroom.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-66,-10},{-50,-10},{-50,-36},{1.3,-36},{1.3,-31.8}},   color={191,0,0}));
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points = {{-60, 98}, {-80, 98}, {-80, -68}, {-50, -68}, {-50, -81}, {-44, -81}}, color = {191, 0, 0}));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation(Line(points = {{-104, 40}, {-80, 40}, {-80, -68}, {-50, -68}, {-50, -89.32}, {-42.6, -89.32}}, color = {0, 0, 127}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points
+        ={{-104,40},{-80,40},{-80,-68},{-50,-68},{-50,-89.32},{-42.6,-89.32}},
+        color={0,0,127}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-16, -81}, {0, -81}, {0, -36}, {-32, -36}, {-32, 24}, {-39, 24}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-12, 60.45}, {-12, 98}, {-60, 98}}, color = {191, 0, 0}));
   connect(thermOutside, thermOutside) annotation(Line(points = {{-60, 98}, {-86, 98}, {-86, 98}, {-60, 98}}, color = {191, 0, 0}));

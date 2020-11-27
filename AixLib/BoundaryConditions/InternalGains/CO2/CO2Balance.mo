@@ -9,6 +9,9 @@ model CO2Balance "Calculation of CO2 concentration within a thermal zone"
     "Body surface area source SIA 2024:2015";
   parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person in Met (1 Met = 58 W/m^2)";
+  parameter Real spePeo(unit="1/(m.m)") = 0.05
+    "Specific persons per square metre room area";
+
 
   Modelica.Blocks.Interfaces.RealInput XCO2(final quantity="MassFraction",
       final unit="kg/kg") "Massfraction of CO2 in room in kgCO2/kgTotalAir"
@@ -27,8 +30,8 @@ model CO2Balance "Calculation of CO2 concentration within a thermal zone"
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={0,100})));
-  Modelica.Blocks.Interfaces.RealInput spePeo
-    "specific number of people in the thermal zone" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput uRel
+    "relative number of people related to max. value" annotation (Placement(
         transformation(extent={{-120,60},{-80,100}}), iconTransformation(extent=
            {{-120,60},{-80,100}})));
   Modelica.Blocks.Interfaces.RealOutput CO2Con(min=0, max=1000000)
@@ -58,13 +61,13 @@ protected
 equation
 
   // ideal gas equation
-  rhoCO2 = MolAir*pAir*XCO2/(Modelica.Constants.R*TAir);
+  rhoCO2 = MolCO2*pAir/(Modelica.Constants.R*TAir);
 
   // CO2 emissions of people in the zone
   metOnePerAct = metOnePerSit*actDeg;
   VCO2OnePer_flow = ResQuo*metOnePerAct*areaBod/CalEqu*TAir/273.15;
   mCO2OnePer_flow = VCO2OnePer_flow*rhoCO2;
-  numPeo = spePeo*areaZon;
+  numPeo = spePeo*areaZon*uRel;
   mCO2Peo_flow = mCO2OnePer_flow*numPeo;
 
   // CO2 balance

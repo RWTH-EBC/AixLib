@@ -141,6 +141,7 @@ equation
   This example shows the variant of a multi-zone building with some
   zones where cooling is activated and others where it is not.
 </p>
+</html>", revisions="<html>
 <ul>
   <li>August 21, 2020, by Marcus Fuchs:<br/>
     Implemented.

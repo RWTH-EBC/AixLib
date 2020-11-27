@@ -23,11 +23,14 @@ Check_AixLib_Airflow:
             - AixLib/AixLib.Airflow-log.txt
             - AixLib/AixLib.Airflow-Errorlog.txt
         expire_in: 7 day 
-    allow_failure: true 
+    
     only:
         - external_pull_requests
-
-
+        
+    retry:
+        max: 2
+        when: runner_system_failure  
+   
 
 
 Check_AixLib_BoundaryConditions:
@@ -49,10 +52,15 @@ Check_AixLib_BoundaryConditions:
             - AixLib/AixLib.BoundaryConditions-log.txt
             - AixLib/AixLib.BoundaryConditions-Errorlog.txt
         expire_in: 7 day 
-    allow_failure: true 
+    
     only:
         - external_pull_requests
-            
+        
+    retry:
+        max: 2
+        when: runner_system_failure  
+   
+ 
 Check_AixLib_Controls:
     stage: Check
     services:
@@ -71,10 +79,15 @@ Check_AixLib_Controls:
             - AixLib/AixLib.Controls-log.txt
             - AixLib/AixLib.Controls-Errorlog.txt
         expire_in: 7 day 
-    allow_failure: true 
+     
     only:
         - external_pull_requests
-
+        
+    retry:
+        max: 2
+        when: runner_system_failure  
+   
+        
 Check_AixLib_Electrical:
     stage: Check
     services:
@@ -93,10 +106,15 @@ Check_AixLib_Electrical:
             - AixLib/AixLib.Electrical-log.txt
             - AixLib/AixLib.Electrical-Errorlog.txt
         expire_in: 7 day 
-    allow_failure: true 
+    
     only:
         - external_pull_requests
-            
+        
+    retry:
+        max: 2
+        when: runner_system_failure  
+   
+ 
 Check_AixLib_FastHVAC:
     stage: Check
     services:
@@ -115,10 +133,15 @@ Check_AixLib_FastHVAC:
             - AixLib/AixLib.FastHVAC-log.txt
             - AixLib/AixLib.FastHVAC-Errorlog.txt
         expire_in: 7 day 
-    allow_failure: true 
+     
     only:
         - external_pull_requests
-
+        
+    retry:
+        max: 2
+        when: runner_system_failure  
+    
+    
 Check_AixLib_Fluid:
     stage: Check
     services:
@@ -137,10 +160,14 @@ Check_AixLib_Fluid:
             - AixLib/AixLib.Fluid-log.txt
             - AixLib/AixLib.Fluid-Errorlog.txt
         expire_in: 7 day 
-    allow_failure: true 
+     
     only:
         - external_pull_requests
-
+        
+    retry:
+        max: 2
+        when: runner_system_failure  
+    
 Check_AixLib_Media:
     stage: Check
     services:
@@ -159,10 +186,14 @@ Check_AixLib_Media:
             - AixLib/AixLib.Media-log.txt
             - AixLib/AixLib.Media-Errorlog.txt
         expire_in: 7 day 
-    allow_failure: true 
+     
     only:
         - external_pull_requests
-
+        
+    retry:
+        max: 2
+        when: runner_system_failure  
+    
         
         
 #Check_AixLib_Systems:
@@ -206,7 +237,12 @@ Check_AixLib_ThermalZones:
             - AixLib/AixLib.ThermalZones-log.txt
             - AixLib/AixLib.ThermalZones-Errorlog.txt
         expire_in: 7 day 
-    allow_failure: true 
+     
     only:
         - external_pull_requests
- 
+        
+    retry:
+        max: 2
+        when: runner_system_failure  
+   
+     
