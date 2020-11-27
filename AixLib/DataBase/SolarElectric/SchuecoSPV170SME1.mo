@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.SolarElectric;
+within AixLib.DataBase.SolarElectric;
 record SchuecoSPV170SME1 "Schüco SPV 170 SME-1"
 
   extends AixLib.DataBase.SolarElectric.PVBaseDataDefinition(
@@ -18,8 +18,11 @@ record SchuecoSPV170SME1 "Schüco SPV 170 SME-1"
    T_NOCT=45+273.15);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">References </span></h4>
-<p>Record for record used with AixLib.Fluid.Solar.Electric.PVsystem </p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  Record for record used with AixLib.Fluid.Solar.Electric.PVsystem
+</p>
 </html>"));
 end SchuecoSPV170SME1;

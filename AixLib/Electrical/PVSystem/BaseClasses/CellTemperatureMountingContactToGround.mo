@@ -12,10 +12,22 @@ equation
  else
  (T_a);
 
-  annotation (Documentation(info="<html>
-<h4>Overview</h4>
-<p>Model for determining the cell temperature of a PV module mounted with the module backside in contact with the ground, under operating conditions and under consideration of the wind velocity. E.g. roof integrated PV modules.</p>
-<p><br><b>References</b></p>
-<p>SANDIA REPORT SAND 2004-3535 Unlimited Release Printed December 2004 Photovoltaic Array Performance Model. (2005). by King, D. L. et al. </p>
+  annotation (Documentation(info="<html><h4>
+  Overview
+</h4>
+<p>
+  Model for determining the cell temperature of a PV module mounted
+  with the module backside in contact with the ground, under operating
+  conditions and under consideration of the wind velocity. E.g. roof
+  integrated PV modules.
+</p>
+<p>
+  <br/>
+  <b>References</b>
+</p>
+<p>
+  SANDIA REPORT SAND 2004-3535 Unlimited Release Printed December 2004
+  Photovoltaic Array Performance Model. (2005). by King, D. L. et al.
+</p>
 </html>"));
 end CellTemperatureMountingContactToGround;

@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.Validation;
+within AixLib.Electrical.PVSystem.Validation;
 model ValidationPVSystem
   "Validation with empirical data from NIST for the date of 14.06.2016"
   extends Modelica.Icons.Example;
@@ -82,9 +82,15 @@ equation
       StopTime=28771200,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
-    Documentation(info="<html>
-<p>The PVSystem model is validaded with empirical data from: <a href=\"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a> </p>
-<p>The date 14.06.2016 was chosen as an example for the PVSystem model.</p>
-<p>The PV mounting is an open rack system based on the ground.</p>
+    Documentation(info="<html><p>
+  The PVSystem model is validaded with empirical data from: <a href=
+  \"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a>
+</p>
+<p>
+  The date 14.06.2016 was chosen as an example for the PVSystem model.
+</p>
+<p>
+  The PV mounting is an open rack system based on the ground.
+</p>
 </html>"));
 end ValidationPVSystem;

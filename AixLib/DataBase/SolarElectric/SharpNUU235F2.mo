@@ -17,8 +17,11 @@ record SharpNUU235F2 "Sharp NU-U235F2"
    T_NOCT=47.5+273.15);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(
           preserveAspectRatio=false)),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">References </span></h4>
-<p>Record for record used with AixLib.Fluid.Solar.Electric.PVsystem </p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  Record for record used with AixLib.Fluid.Solar.Electric.PVsystem
+</p>
 </html>"));
 end SharpNUU235F2;

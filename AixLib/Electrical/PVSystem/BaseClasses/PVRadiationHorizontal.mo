@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.BaseClasses;
+within AixLib.Electrical.PVSystem.BaseClasses;
 model PVRadiationHorizontal "PV radiation and absorptance model - input: total irradiance on horizontal plane"
 
  parameter Real lat(final quantity = "Angle",
@@ -286,14 +286,27 @@ equation
 
   annotation (Icon(graphics={   Bitmap(extent={{-90,-90},{90,90}}, fileName=
               "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/IncidenceAngle.png")}),
-              Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Model for determining Irradiance and absorptance ratio for PV modules - input: total irradiance on horizontal plane.</p>
-<p><br/>
-<h4><span style=\"color: #008000\">References</span></h4>
-<p><q>Solar engineering of thermal processes.</q> by Duffie, John A. ; Beckman, W. A.</p>
-<p><q>Regenerative Energiesysteme: Technologie ; Berechnung ; Simulation</q> by Quaschning, Volker:</p>
-</ul>
+              Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Model for determining Irradiance and absorptance ratio for PV modules
+  - input: total irradiance on horizontal plane.
+</p>
+<p>
+  <br/>
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  <q>Solar engineering of thermal processes.</q> by Duffie, John A. ;
+  Beckman, W. A.
+</p>
+<p>
+  <q>Regenerative Energiesysteme: Technologie ; Berechnung ;
+  Simulation</q> by Quaschning, Volker:
+</p>
 </html>
 "));
 end PVRadiationHorizontal;
