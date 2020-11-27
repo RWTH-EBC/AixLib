@@ -29,6 +29,7 @@ Regression_overall_coverage:
         when: runner_system_failure
     only:
         - external_pull_requests
+        
             
 Regressiontest_AixLib_Airflow:
     stage: RegressionTest
@@ -55,7 +56,7 @@ Regressiontest_AixLib_Airflow:
         when: runner_system_failure
     only:
         - external_pull_requests
-
+        
 Regressiontest_AixLib_BoundaryConditions:
     stage: RegressionTest
     services:
@@ -80,6 +81,7 @@ Regressiontest_AixLib_BoundaryConditions:
         when: runner_system_failure
     only:
         - external_pull_requests
+        
 
 Regressiontest_AixLib_Controls:
     stage: RegressionTest
@@ -106,6 +108,7 @@ Regressiontest_AixLib_Controls:
         when: runner_system_failure       
     only:
         - external_pull_requests   
+        
 
 #Regressiontest_AixLib_Electrical:
 #      stage: RegressionTest
@@ -173,6 +176,7 @@ Regressiontest_AixLib_Fluid:
         when: runner_system_failure  
     only:
         - external_pull_requests
+        
 
 Regressiontest_AixLib_Media:
     stage: RegressionTest
@@ -197,7 +201,8 @@ Regressiontest_AixLib_Media:
         max: 2
         when: runner_system_failure  
     only:
-        - external_pull_requests     
+        - external_pull_requests  
+        
 
 Regressiontest_AixLib_Systems:
     stage: RegressionTest
@@ -223,6 +228,7 @@ Regressiontest_AixLib_Systems:
         when: runner_system_failure          
     only:
         - external_pull_requests
+        
 
 Regressiontest_AixLib_ThermalZones:
     stage: RegressionTest
@@ -247,4 +253,6 @@ Regressiontest_AixLib_ThermalZones:
         max: 2
         when: runner_system_failure        
     only:
-        - external_pull_requests       
+        - external_pull_requests 
+         
+          

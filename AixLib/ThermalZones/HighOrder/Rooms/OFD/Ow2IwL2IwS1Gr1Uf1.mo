@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.OFD;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow2IwL2IwS1Gr1Uf1
   "2 outer walls, 2 inner walls load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
 
@@ -523,8 +523,8 @@ equation
           -18.7,-40},{-18.7,-35.8}},                                                                                                                               color={191,0,0}));
   connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{-68,
           -32},{-80,-32},{-80,90},{-90,90}}, color={191,0,0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation (Line(points={
-          {-67,-38.4},{-80,-38.4},{-80,74},{-20,74},{-20,100}}, color={0,0,127}));
+  connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points
+        ={{-67,-38.4},{-80,-38.4},{-80,74},{-20,74},{-20,100}}, color={0,0,127}));
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-48,
           -32},{-40,-32},{-40,-40},{-6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
   connect(thermInsideWall1b, thermInsideWall1b) annotation (Line(points={{90,-10},
