@@ -165,6 +165,7 @@ model BufferStorage
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
+    allowFlowReversal=allowFlowReversal_layers,
     m_flow_small=m_flow_small,
     allowFlowReversal=allowFlowReversal_layers,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
