@@ -4,8 +4,7 @@ model SimpleConsumer "Simple Consumer"
   import SI=Modelica.SIunits;
 
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
-  parameter SI.Temperature T_fixed = 293.15
-                                           "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
+  parameter SI.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
   parameter SI.HeatCapacity capacity=1 "Capacity of the material";
   parameter SI.Volume V=0.001 "Volume of water";
   parameter SI.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
@@ -14,7 +13,7 @@ model SimpleConsumer "Simple Consumer"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
-  parameter SI.Temperature T_start=293.15
+  parameter SI.Temperature T_start
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter SI.TemperatureDifference deltaTConsumerNominal "Nominal temperature difference between flow and return in consumer";
   parameter String functionality "Choose between different functionalities" annotation (choices(
@@ -90,16 +89,68 @@ model SimpleConsumer "Simple Consumer"
         origin={-60,120}), iconTransformation(extent={{-20,-20},{20,20}},
         rotation=270,
         origin={-60,100})));
-  Fluid.Movers.FlowControlled_m_flow pump(
+  Fluid.Movers.SpeedControlled_y     pump(
     redeclare package Medium = Medium,
     T_start=T_start,
     allowFlowReversal=allowFlowReversal,
-    m_flow_nominal=m_flow_nominal,
+    redeclare Fluid.Movers.Data.Generic per(pressure(V_flow={0,m_flow_nominal/
+            1000,m_flow_nominal/500}, dp={dp_nominalPumpConsumer/0.8,
+            dp_nominalPumpConsumer,0}), motorCooledByFluid=false),
     addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
+    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+
+
+
   Modelica.Blocks.Sources.RealExpression realExpression3(y=-Q_flow/(4186*
         deltaTConsumerNominal))
-    annotation (Placement(transformation(extent={{-92,18},{-72,38}})));
+    annotation (Placement(transformation(extent={{-228,16},{-208,36}})));
+  parameter SI.PressureDifference dp_nominalPumpConsumer=if pump.rho_default < 500
+       then 500 else 10000
+    "Nominal pressure raise, used for default pressure curve if not specified in record per";
+  Modelica.Blocks.Continuous.LimPID PIPump(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=k_ControlConsumerPump,
+    Ti=Ti_ControlConsumerPump,
+    yMax=1,
+    yMin=0,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    y_start=1) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=180,
+        origin={-80,32})));
+  Fluid.Sensors.TemperatureTwoPort senTemReturn(
+    redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
+    T_start=T_start - deltaTConsumerNominal)
+                    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={50,0})));
+  Modelica.Blocks.Math.Add add(k1=-1)
+    annotation (Placement(transformation(extent={{-136,22},{-116,42}})));
+  Fluid.Sensors.TemperatureTwoPort senTemFlow(
+    redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
+    T_start=T_start)
+                    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-62,0})));
+  Modelica.Blocks.Sources.Constant const(k=deltaTConsumerNominal)
+    annotation (Placement(transformation(extent={{-178,40},{-158,60}})));
+  parameter Real k_ControlConsumerPump "Gain of controller";
+  parameter SI.Time Ti_ControlConsumerPump
+    "Time constant of Integrator block";
+  Modelica.Blocks.Interfaces.RealInput T_flowSet annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={0,120}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={0,100})));
 equation
   connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
           {10,40},{34,40}},               color={191,0,0},
@@ -129,14 +180,26 @@ equation
   connect(prescribedHeatFlow.port, heatCapacitor.port)
     annotation (Line(points={{-62,48},{-62,40},{34,40}}, color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(volume.ports[1], port_b)
-    annotation (Line(points={{2,0},{100,0}},  color={0,127,255}));
-  connect(port_a, pump.port_a)
-    annotation (Line(points={{-100,0},{-66,0}}, color={0,127,255}));
-  connect(volume.ports[2], pump.port_b)
-    annotation (Line(points={{-2,0},{-46,0}}, color={0,127,255}));
-  connect(realExpression3.y, pump.m_flow_in)
-    annotation (Line(points={{-71,28},{-56,28},{-56,12}}, color={0,0,127}));
+  connect(volume.ports[1], pump.port_b)
+    annotation (Line(points={{2,0},{-20,0}},  color={0,127,255}));
+  connect(senTemReturn.T, PIPump.u_m) annotation (Line(points={{50,11},{24,11},
+          {24,44},{-80,44}}, color={0,0,127}));
+  connect(volume.ports[2], senTemReturn.port_a)
+    annotation (Line(points={{-2,0},{40,0}}, color={0,127,255}));
+  connect(port_b, senTemReturn.port_b)
+    annotation (Line(points={{100,0},{60,0}}, color={0,127,255}));
+  connect(port_a, senTemFlow.port_a)
+    annotation (Line(points={{-100,0},{-72,0}}, color={0,127,255}));
+  connect(pump.port_a, senTemFlow.port_b) annotation (Line(points={{-40,0},{-52,
+          0}},                 color={0,127,255}));
+  connect(PIPump.u_s, add.y)
+    annotation (Line(points={{-92,32},{-115,32}}, color={0,0,127}));
+  connect(add.u1, const.y) annotation (Line(points={{-138,38},{-148,38},{-148,50},
+          {-157,50}}, color={0,0,127}));
+  connect(PIPump.y, pump.y)
+    annotation (Line(points={{-69,32},{-30,32},{-30,12}}, color={0,0,127}));
+  connect(T_flowSet, add.u2) annotation (Line(points={{0,120},{0,80},{-184,80},
+          {-184,26},{-138,26}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
