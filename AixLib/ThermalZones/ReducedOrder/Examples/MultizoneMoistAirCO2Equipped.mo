@@ -5,7 +5,7 @@ model MultizoneMoistAirCO2Equipped
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2Equipped
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped
     multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -18,6 +18,8 @@ model MultizoneMoistAirCO2Equipped
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    use_C_flow=true,
+    use_moisture_balance=true,
     internalGainsMode=3,
     heatAHU=true,
     coolAHU=true,
@@ -138,10 +140,13 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    Documentation(revisions="<html>
-<ul>
-<li>August 27, 2020, by Katharina Breuer:<br>Add co2 balance</li>
-<li>April, 2019, by Martin Kremer:<br>First Implementation. </li>
+    Documentation(revisions="<html><ul>
+  <li>August 27, 2020, by Katharina Breuer:<br/>
+    Add co2 balance
+  </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+    First Implementation.
+  </li>
 </ul>
 </html>", info="<html>
 <p>
