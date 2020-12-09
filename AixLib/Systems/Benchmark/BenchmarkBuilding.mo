@@ -43,25 +43,25 @@ model BenchmarkBuilding "Benchmark building model"
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{158,120},{198,160}})));
-  Tabs2 tabs4_3(
+  Tabs2 tabs4_2(
     redeclare package Medium = MediumWater,
     area=30*30,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{240,120},{280,160}})));
-  Tabs2 tabs4_4(
+  Tabs2 tabs4_3(
     redeclare package Medium = MediumWater,
     area=10*5,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{344,120},{384,160}})));
-  Tabs2 tabs4_5(
+  Tabs2 tabs4_4(
     redeclare package Medium = MediumWater,
     area=20*5,
     thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{440,120},{480,160}})));
-  Tabs2 tabs4_2(
+  Tabs2 tabs4_5(
     redeclare package Medium = MediumWater,
     area=30*45,
     thickness=0.3,
@@ -543,26 +543,26 @@ equation
   connect(boundary1.ports[1], highTemperatureSystem.port_a) annotation (Line(
         points={{-196,-66},{-196,-66.2},{-188,-66.2}},            color={0,127,
           255}));
-  connect(heatExchangerSystem.port_a3, tabs4_2.port_b1) annotation (Line(points={{-65,8},
+  connect(heatExchangerSystem.port_a3,tabs4_5. port_b1) annotation (Line(points={{-65,8},
           {-64,8},{-64,40},{576,40},{576,120.364}},         color={244,125,35}));
-  connect(heatExchangerSystem.port_b2, tabs4_2.port_a1) annotation (Line(points=
+  connect(heatExchangerSystem.port_b2,tabs4_5. port_a1) annotation (Line(points=
          {{-75,8},{-75,60},{544,60},{544,120}}, color={244,125,35}));
-  connect(tabs4_1.port_a1, tabs4_2.port_a1) annotation (Line(points={{162,120},
+  connect(tabs4_1.port_a1,tabs4_5. port_a1) annotation (Line(points={{162,120},
           {162,60},{544,60},{544,120}}, color={244,125,35}));
-  connect(tabs4_3.port_a1, tabs4_2.port_a1) annotation (Line(points={{244,120},
+  connect(tabs4_2.port_a1,tabs4_5. port_a1) annotation (Line(points={{244,120},
           {244,60},{544,60},{544,120}}, color={244,125,35}));
-  connect(tabs4_4.port_a1, tabs4_2.port_a1) annotation (Line(points={{348,120},
+  connect(tabs4_3.port_a1,tabs4_5. port_a1) annotation (Line(points={{348,120},
           {348,60},{544,60},{544,120}}, color={244,125,35}));
-  connect(tabs4_5.port_a1, tabs4_2.port_a1) annotation (Line(points={{444,120},
+  connect(tabs4_4.port_a1,tabs4_5. port_a1) annotation (Line(points={{444,120},
           {444,60},{544,60},{544,120}}, color={244,125,35}));
-  connect(tabs4_1.port_b1, tabs4_2.port_b1) annotation (Line(points={{194,
+  connect(tabs4_1.port_b1,tabs4_5. port_b1) annotation (Line(points={{194,
           120.364},{194,40},{576,40},{576,120.364}}, color={244,125,35}));
-  connect(tabs4_3.port_b1, tabs4_2.port_b1) annotation (Line(points={{276,
+  connect(tabs4_2.port_b1,tabs4_5. port_b1) annotation (Line(points={{276,
           120.364},{276,40},{576,40},{576,120.364}}, color={244,125,35}));
-  connect(tabs4_4.port_b1, tabs4_2.port_b1) annotation (Line(points={{380,
-          120.364},{370,120.364},{370,40},{576,40},{576,120.364}}, color={244,
+  connect(tabs4_3.port_b1,tabs4_5. port_b1) annotation (Line(points={{380,
+          120.364},{380,38},{576,38},{576,120.364}},               color={244,
           125,35}));
-  connect(tabs4_5.port_b1, tabs4_2.port_b1) annotation (Line(points={{476,
+  connect(tabs4_4.port_b1,tabs4_5. port_b1) annotation (Line(points={{476,
           120.364},{476,40},{576,40},{576,120.364}}, color={244,125,35}));
   connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
       points={{60,378},{98,378},{98,354},{122,354}},
@@ -603,15 +603,15 @@ equation
       thickness=0.5));
   connect(internalGains.y,thermalZone5. intGains) annotation (Line(points={{102.7,
           328},{565,328},{565,342.4}},       color={0,0,127}));
-  connect(thermalZone2.intGainsConv, tabs4_3.heatPort) annotation (Line(points={{272,
+  connect(thermalZone2.intGainsConv,tabs4_2. heatPort) annotation (Line(points={{272,
           346.5},{270,346.5},{270,161.818},{260,161.818}},       color={191,0,0}));
-  connect(thermalZone3.intGainsConv, tabs4_4.heatPort) annotation (Line(points={{374,
+  connect(thermalZone3.intGainsConv,tabs4_3. heatPort) annotation (Line(points={{374,
           344.5},{378,344.5},{378,326},{364,326},{364,161.818}},       color={
           191,0,0}));
-  connect(thermalZone4.intGainsConv, tabs4_5.heatPort) annotation (Line(points={{470,345},
+  connect(thermalZone4.intGainsConv,tabs4_4. heatPort) annotation (Line(points={{470,345},
           {468,345},{468,342},{472,342},{472,161.818},{460,161.818}},
         color={191,0,0}));
-  connect(thermalZone5.intGainsConv, tabs4_2.heatPort) annotation (Line(points={{568,
+  connect(thermalZone5.intGainsConv,tabs4_5. heatPort) annotation (Line(points={{568,
           347.5},{570,347.5},{570,161.818},{560,161.818}},       color={191,0,0}));
   connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (Line(
         points={{-40,-49.3333},{-75,-49.3333},{-75,-40}}, color={244,125,35}));
@@ -771,7 +771,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
 
-  connect(tabs4_2.tabsBus, mainBus.tabs5Bus) annotation (Line(
+  connect(tabs4_5.tabsBus, mainBus.tabs5Bus) annotation (Line(
       points={{539.8,138.364},{539.8,166},{580,166},{580,423.145},{175.115,
           423.145}},
       color={255,204,51},
@@ -781,7 +781,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
 
-  connect(tabs4_5.tabsBus, mainBus.tabs4Bus) annotation (Line(
+  connect(tabs4_4.tabsBus, mainBus.tabs4Bus) annotation (Line(
       points={{439.8,138.364},{439.8,166},{580,166},{580,423.145},{175.115,
           423.145}},
       color={255,204,51},
@@ -791,7 +791,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
 
-  connect(tabs4_4.tabsBus, mainBus.tabs3Bus) annotation (Line(
+  connect(tabs4_3.tabsBus, mainBus.tabs3Bus) annotation (Line(
       points={{343.8,138.364},{343.8,166},{580,166},{580,423.145},{175.115,
           423.145}},
       color={255,204,51},
@@ -801,7 +801,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
 
-  connect(tabs4_3.tabsBus, mainBus.tabs2Bus) annotation (Line(
+  connect(tabs4_2.tabsBus, mainBus.tabs2Bus) annotation (Line(
       points={{239.8,138.364},{239.8,166},{580,166},{580,423.145},{175.115,
           423.145}},
       color={255,204,51},
@@ -934,19 +934,19 @@ equation
   connect(vol1.ports[5], ventilationUnit2.port_a3) annotation (Line(points={{
           139,100},{210,100},{210,112},{209.6,112},{209.6,236}}, color={0,127,
           255}));
-  connect(vol1.ports[6], tabs4_3.port_a2) annotation (Line(points={{139.667,100},
+  connect(vol1.ports[6],tabs4_2. port_a2) annotation (Line(points={{139.667,100},
           {252,100},{252,120}}, color={0,127,255}));
   connect(vol1.ports[7], ventilationUnit3.port_a3) annotation (Line(points={{140.333,
           100},{307.6,100},{307.6,236}},         color={0,127,255}));
-  connect(vol1.ports[8], tabs4_4.port_a2) annotation (Line(points={{141,100},{
+  connect(vol1.ports[8],tabs4_3. port_a2) annotation (Line(points={{141,100},{
           356,100},{356,120}}, color={0,127,255}));
   connect(vol1.ports[9], ventilationUnit4.port_a3) annotation (Line(points={{141.667,
           100},{407.6,100},{407.6,236}},         color={0,127,255}));
-  connect(vol1.ports[10], tabs4_5.port_a2) annotation (Line(points={{142.333,
+  connect(vol1.ports[10],tabs4_4. port_a2) annotation (Line(points={{142.333,
           100},{452,100},{452,120}}, color={0,127,255}));
   connect(vol1.ports[11], ventilationUnit5.port_a3) annotation (Line(points={{
           143,100},{517.6,100},{517.6,242}}, color={0,127,255}));
-  connect(vol1.ports[12], tabs4_2.port_a2) annotation (Line(points={{143.667,
+  connect(vol1.ports[12],tabs4_5. port_a2) annotation (Line(points={{143.667,
           100},{552,100},{552,120}}, color={0,127,255}));
   connect(vol.ports[2], genericAHU.port_b4) annotation (Line(points={{121,76},{
           -49.0909,76},{-49.0909,220}}, color={0,127,255}));
@@ -954,22 +954,22 @@ equation
           76},{47.2,76},{47.2,236}},         color={0,127,255}));
   connect(vol.ports[4], tabs4_1.port_b2) annotation (Line(points={{122.333,76},
           {186,76},{186,120.364}}, color={0,127,255}));
-  connect(vol.ports[5], ventilationUnit2.port_b3) annotation (Line(points={{123,
-          76},{217.2,76},{217.2,236}}, color={0,127,255}));
-  connect(vol.ports[6], tabs4_3.port_b2) annotation (Line(points={{123.667,76},
+  connect(vol.ports[5], ventilationUnit2.port_b3) annotation (Line(points={{123,76},
+          {217.2,76},{217.2,236}},     color={0,127,255}));
+  connect(vol.ports[6],tabs4_2. port_b2) annotation (Line(points={{123.667,76},
           {268,76},{268,120.364}}, color={0,127,255}));
   connect(vol.ports[7], ventilationUnit3.port_b3) annotation (Line(points={{124.333,
           76},{315.2,76},{315.2,236}},         color={0,127,255}));
-  connect(vol.ports[8], tabs4_4.port_b1) annotation (Line(points={{125,76},{380,
-          76},{380,120.364}}, color={0,127,255}));
-  connect(vol.ports[9], ventilationUnit4.port_b3) annotation (Line(points={{125.667,
-          76},{415.2,76},{415.2,236}},         color={0,127,255}));
-  connect(vol.ports[10], tabs4_5.port_b2) annotation (Line(points={{126.333,76},
+  connect(vol.ports[8], ventilationUnit4.port_b3) annotation (Line(points={{125,76},
+          {415.2,76},{415.2,236}},             color={0,127,255}));
+  connect(vol.ports[9],tabs4_4.  port_b2) annotation (Line(points={{125.667,76},
           {468,76},{468,120.364}}, color={0,127,255}));
-  connect(vol.ports[11], ventilationUnit5.port_b3) annotation (Line(points={{
-          127,76},{525.2,76},{525.2,242}}, color={0,127,255}));
-  connect(vol.ports[12], tabs4_2.port_b2) annotation (Line(points={{127.667,76},
-          {568,76},{568,120.364}}, color={0,127,255}));
+  connect(vol.ports[10], ventilationUnit5.port_b3) annotation (Line(points={{126.333,
+          76},{525.2,76},{525.2,242}},     color={0,127,255}));
+  connect(vol.ports[11],tabs4_5. port_b2) annotation (Line(points={{127,76},{
+          568,76},{568,120.364}},  color={0,127,255}));
+  connect(tabs4_3.port_b2, vol.ports[12]) annotation (Line(points={{372,120.364},
+          {372,76},{127.667,76}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},
