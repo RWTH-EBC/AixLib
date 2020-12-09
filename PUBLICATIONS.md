@@ -60,7 +60,9 @@ Mans, Michael; Blacha, Tobias; Remmen, Peter; Müller, Dirk; Modelica Conference
 
 
 ## Fast HVAC <a name="fasthvac"></a>
-```enter publications here```
+
+#### FastHVAC : A Library for Fast Composition and Simulation of Building Energy Systems
+Stinner, S., Schumacher, M., Finkbeiner, K., Streblow, R., & Müller, D. (2015). In: Proceedings of the International Modelica Conference, Versailles, France, September 21-23, pp. 921-927, DOI: [DOI: 10.3384/ecp15118921](http://dx.doi.org/10.3384/ecp15118921)
 
 
 ## Building Automation Systems <a name="bas"></a>
