@@ -16,18 +16,25 @@ model CtrVentilationUnitTsetRoom
       parameter Modelica.SIunits.Temperature TRoomSet=295.15
     "Flow temperature set point of room"
     annotation (Dialog(enable=useExternalTset == false));
+  parameter Boolean useExternalTset=false
+    "If True, set temperature can be given externally";
   parameter Real k=0.2 "Gain of controller";
   parameter Modelica.SIunits.Time Ti=300 "Time constant of Integrator block";
   parameter Real yMax=298.15 "Upper limit of output";
   parameter Real yMin=289.15 "Lower limit of output";
-  Modelica.Blocks.Sources.Constant constTflowSet(final k=TRoomSet)
+  Modelica.Blocks.Sources.Constant constTflowSet(final k=TRoomSet) if not
+    useExternalTset
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Blocks.Interfaces.RealInput T_act
     "Connector of measurement input signal" annotation (Placement(
-        transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
+        transformation(extent={{-140,-60},{-100,-20}}),iconTransformation(
           extent={{-140,-20},{-100,20}})));
   parameter Modelica.SIunits.VolumeFlowRate VFlowSet=1000/3600
     "Set value of volume flow [m^3/s]";
+  Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
+    "Connector of second Real input signal" annotation (Placement(
+        transformation(extent={{-140,0},{-100,40}}),   iconTransformation(
+          extent={{-140,-20},{-100,20}})));
 equation
   connect(ctrVentilationUnitBasic.genericAHUBus, genericAHUBus) annotation (
       Line(
@@ -41,9 +48,14 @@ equation
   connect(PID.y, ctrVentilationUnitBasic.Tset)
     annotation (Line(points={{1,0},{38,0}}, color={0,0,127}));
   connect(constTflowSet.y, PID.u_s)
-    annotation (Line(points={{-39,0},{-22,0}}, color={0,0,127}));
+    annotation (Line(points={{-39,0},{-22,0}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(PID.u_m, T_act) annotation (Line(points={{-10,-12},{-10,-38},{-92,-38},
-          {-92,0},{-120,0}}, color={0,0,127}));
+          {-92,-40},{-120,-40}},
+                             color={0,0,127}));
+  connect(Tset, PID.u_s)
+    annotation (Line(points={{-120,20},{-22,20},{-22,0}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},
