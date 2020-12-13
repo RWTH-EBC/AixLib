@@ -28,13 +28,13 @@ model CtrVentilationUnitTsetRoom
   Modelica.Blocks.Interfaces.RealInput T_act
     "Connector of measurement input signal" annotation (Placement(
         transformation(extent={{-140,-60},{-100,-20}}),iconTransformation(
-          extent={{-140,-20},{-100,20}})));
+          extent={{-140,-60},{-100,-20}})));
   parameter Modelica.SIunits.VolumeFlowRate VFlowSet=1000/3600
     "Set value of volume flow [m^3/s]";
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-140,0},{-100,40}}),   iconTransformation(
-          extent={{-140,-20},{-100,20}})));
+          extent={{-140,20},{-100,60}})));
 equation
   connect(ctrVentilationUnitBasic.genericAHUBus, genericAHUBus) annotation (
       Line(
