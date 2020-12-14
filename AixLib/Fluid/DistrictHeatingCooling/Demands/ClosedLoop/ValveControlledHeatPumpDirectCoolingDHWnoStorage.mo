@@ -411,27 +411,27 @@ equation
           -420,40},{-420,-62.25},{-344.444,-62.25}},
                                            color={0,0,127}));
   connect(HP_control.direct_cooling,DirectCooling. u2) annotation (Line(points={{
-          -294.222,-39.75},{-222,-39.75},{-222,-26},{-140,-26},{-140,72},{-110,
+          -295.556,-39.75},{-222,-39.75},{-222,-26},{-140,-26},{-140,72},{-110,
           72}},                                      color={255,0,255}));
   connect(heaPum.is_cooling,HP_control. hp_cooling_mode) annotation (Line(
-        points={{-11,-8.2},{-3.5,-8.2},{-3.5,-47.25},{-294.222,-47.25}},
+        points={{-11,-8.2},{-3.5,-8.2},{-3.5,-47.25},{-295.556,-47.25}},
                                                                color={255,0,255}));
-  connect(HP_control.hp_off,sup_is_ret. u2) annotation (Line(points={{-294.222,
+  connect(HP_control.hp_off,sup_is_ret. u2) annotation (Line(points={{-295.556,
           -54.75},{16,-54.75},{16,-48.2},{17,-48.2}},
                                            color={255,0,255}));
   connect(HP_control.dhw_now,T_HP_supply. u2) annotation (Line(points={{
-          -294.222,-62.25},{-40,-62.25},{-40,-118},{8,-118},{8,-102.2},{9,
+          -295.556,-62.25},{-40,-62.25},{-40,-118},{8,-118},{8,-102.2},{9,
           -102.2}},                                                  color={255,
           0,255}));
   connect(HP_control.dhw_now,T_hp_return. u2) annotation (Line(points={{
-          -294.222,-62.25},{-40,-62.25},{-40,-118},{90,-118},{90,-108.2},{89,
+          -295.556,-62.25},{-40,-62.25},{-40,-118},{90,-118},{90,-108.2},{89,
           -108.2}},                                                     color={
           255,0,255}));
   connect(HP_control.hp_cooling_mode,T_room_supply. u2) annotation (Line(points={{
-          -294.222,-47.25},{-234,-47.25},{-234,-110},{-122,-110}},
+          -295.556,-47.25},{-234,-47.25},{-234,-110},{-122,-110}},
                                                           color={255,0,255}));
   connect(HP_control.hp_cooling_mode,T_room_return. u2) annotation (Line(points={{
-          -294.222,-47.25},{-26,-47.25},{-26,-160},{-18.4,-160}},  color={255,0,
+          -295.556,-47.25},{-26,-47.25},{-26,-160},{-18.4,-160}},  color={255,0,
           255}));
   connect(T_cold_return.y,T_room_return. u1) annotation (Line(points={{-39,-134},
           {-32,-134},{-32,-150.4},{-18.4,-150.4}}, color={0,0,127}));
@@ -447,7 +447,7 @@ equation
           -324,86},{-312,86}}, color={0,0,127}));
   connect(m_hc_dhw.y,sub_P_HP. u1) annotation (Line(points={{-289,78},{-264,78},
           {-264,77.6},{-257.8,77.6}}, color={0,0,127}));
-  connect(HP_control.dhw_now,m_hc_dhw. u2) annotation (Line(points={{-294.222,
+  connect(HP_control.dhw_now,m_hc_dhw. u2) annotation (Line(points={{-295.556,
           -62.25},{-252,-62.25},{-252,12},{-326,12},{-326,78},{-312,78}}, color=
          {255,0,255}));
   connect(cold_input,m_hc. u1) annotation (Line(points={{-460,100},{-410,100},{
@@ -455,7 +455,7 @@ equation
   connect(heat_input,m_hc. u3) annotation (Line(points={{-460,70},{-426,70},{
           -426,80},{-354,80}}, color={0,0,127}));
   connect(HP_control.hp_cooling_mode,m_hc. u2) annotation (Line(points={{
-          -294.222,-47.25},{-258,-47.25},{-258,6},{-362,6},{-362,88},{-354,88}},
+          -295.556,-47.25},{-258,-47.25},{-258,6},{-362,6},{-362,88},{-354,88}},
         color={255,0,255}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-440,

@@ -14,7 +14,7 @@ model ValveControlledHXPIcontrol
     displayUnit="K")
     "Design temperature difference for the substation's heat exchanger";
 
-  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=50000
     "Pressure difference at nominal flow rate"
     annotation(Dialog(group="Design parameter"));
 
@@ -43,12 +43,12 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
-  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-74,-70},{-54,-50}})));
-  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
-    annotation (Placement(transformation(extent={{54,-70},{74,-50}})));
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+    annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
   Actuators.Valves.TwoWayPressureIndependent valve(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
@@ -66,7 +66,7 @@ public
                      annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=90,
-        origin={56,50})));
+        origin={50,-30})));
   Modelica.Blocks.Continuous.LimPID pControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.002,
@@ -84,7 +84,7 @@ public
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-70,50})));
-  Modelica.Blocks.Math.Add add(k1=-1)
+  Modelica.Blocks.Math.Add return_set(k1=-1)
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   Modelica.Blocks.Math.Gain gain(k=-1)
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
@@ -100,21 +100,23 @@ equation
   connect(senT_supply.port_b, valve.port_a)
     annotation (Line(points={{-54,-60},{-10,-60}}, color={0,127,255}));
   connect(prescribedHeatFlow.port,vol1. heatPort)
-    annotation (Line(points={{56,40},{56,-50},{40,-50}},color={191,0,0}));
-  connect(senT_supply.T, add.u2)
+    annotation (Line(points={{50,-40},{50,-50},{40,-50}},
+                                                        color={191,0,0}));
+  connect(senT_supply.T, return_set.u2)
     annotation (Line(points={{-64,-49},{-64,24},{-42,24}}, color={0,0,127}));
-  connect(delT.y, add.u1) annotation (Line(points={{-59,50},{-50,50},{-50,36},{-42,
-          36}}, color={0,0,127}));
-  connect(add.y, pControl.u_s) annotation (Line(points={{-19,30},{2.22045e-15,30},
-          {2.22045e-15,2}}, color={0,0,127}));
+  connect(delT.y, return_set.u1) annotation (Line(points={{-59,50},{-50,50},{-50,
+          36},{-42,36}}, color={0,0,127}));
+  connect(return_set.y, pControl.u_s) annotation (Line(points={{-19,30},{
+          2.22045e-15,30},{2.22045e-15,2}}, color={0,0,127}));
   connect(pControl.y, valve.y) annotation (Line(points={{-1.9984e-15,-21},{-1.9984e-15,
           -48},{0,-48}}, color={0,0,127}));
   connect(senT_return.T, pControl.u_m)
-    annotation (Line(points={{64,-49},{64,-10},{12,-10}}, color={0,0,127}));
+    annotation (Line(points={{70,-49},{70,-10},{12,-10}}, color={0,0,127}));
   connect(Q_flow_input, gain.u)
     annotation (Line(points={{-108,80},{-62,80}},color={0,0,127}));
   connect(gain.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-39,80},{56,80},{56,60}},color={0,0,127}));
+    annotation (Line(points={{-39,80},{50,80},{50,-20}},
+                                                       color={0,0,127}));
   connect(Pressure_Drop.y,dpOut)
     annotation (Line(points={{95.7,80},{110,80}},  color={0,0,127}));
   connect(dpOut, dpOut)
@@ -122,8 +124,8 @@ equation
   connect(valve.port_b, vol1.ports[1])
     annotation (Line(points={{10,-60},{32,-60}}, color={0,127,255}));
   connect(vol1.ports[2], senT_return.port_a)
-    annotation (Line(points={{28,-60},{54,-60}}, color={0,127,255}));
-  connect(senT_return.port_b, port_b) annotation (Line(points={{74,-60},{88,-60},
+    annotation (Line(points={{28,-60},{60,-60}}, color={0,127,255}));
+  connect(senT_return.port_b, port_b) annotation (Line(points={{80,-60},{88,-60},
           {88,0},{100,0}}, color={0,127,255}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),

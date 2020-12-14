@@ -49,19 +49,19 @@ model HPReversibleControlLogicHeatColdDHWDirectCoolingV2
           extent={{-480,80},{-440,40}})));
   Modelica.Blocks.Interfaces.BooleanOutput hp_cooling_mode
     "hp is in cooling mode" annotation (Placement(transformation(extent={{-260,8},
-            {-236,32}}),    iconTransformation(extent={{-254,0},{-214,40}})));
+            {-236,32}}),    iconTransformation(extent={{-260,0},{-220,40}})));
   Modelica.Blocks.Interfaces.BooleanOutput hp_off
     "hp is off -> supply temp set to return temp" annotation (Placement(
-        transformation(extent={{-260,-32},{-236,-8}}),iconTransformation(extent={{-254,
-            -40},{-214,0}})));
+        transformation(extent={{-260,-32},{-236,-8}}),iconTransformation(extent={{-260,
+            -40},{-220,0}})));
   Modelica.Blocks.Interfaces.BooleanOutput dhw_now "true if dhw demand atm"
     annotation (Placement(transformation(extent={{-260,-72},{-236,-48}}),
-        iconTransformation(extent={{-254,-80},{-214,-40}})));
+        iconTransformation(extent={{-260,-80},{-220,-40}})));
   Modelica.Blocks.Interfaces.BooleanOutput direct_cooling
     "cold demand can be directly supplied by the network pipe"
                             annotation (Placement(transformation(extent={{-260,48},
             {-236,72}}),
-                       iconTransformation(extent={{-254,40},{-214,80}})));
+                       iconTransformation(extent={{-260,40},{-220,80}})));
   Modelica.Blocks.Logical.Greater more_c
     annotation (Placement(transformation(extent={{-420,-10},{-400,10}})));
   TripleAnd nothing

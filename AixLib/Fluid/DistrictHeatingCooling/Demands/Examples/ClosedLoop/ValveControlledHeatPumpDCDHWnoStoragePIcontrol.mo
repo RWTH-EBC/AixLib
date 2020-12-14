@@ -98,8 +98,8 @@ model ValveControlledHeatPumpDCDHWnoStoragePIcontrol
 equation
   connect(pipeSupply.ports_b[1], House_PIcontrolled.port_a) annotation (Line(
         points={{50,20},{50,-26.3158},{32,-26.3158}}, color={0,127,255}));
-  connect(House_PIcontrolled.port_b, pipeReturn.port_a) annotation (Line(points
-        ={{-0.110345,-26.3158},{-32,-26.3158},{-32,-4}}, color={0,127,255}));
+  connect(House_PIcontrolled.port_b, pipeReturn.port_a) annotation (Line(points={{0,
+          -26.3158},{-32,-26.3158},{-32,-4}},            color={0,127,255}));
   connect(TGroundSet.y,TGround. T)
     annotation (Line(points={{-81,-48},{-86,-48},{-86,-10},{-82,-10}},
                                                    color={0,0,127}));
@@ -111,13 +111,13 @@ equation
   connect(dpSet.y,pControl. u_s)
     annotation (Line(points={{-59,40},{-22,40}},color={0,0,127}));
   connect(House_PIcontrolled.dpOut, pControl.u_m) annotation (Line(points={{
-          -0.551724,-23.1579},{-10,-23.1579},{-10,28}}, color={0,0,127}));
-  connect(heat_demand.y, House_PIcontrolled.heat_input) annotation (Line(points
-        ={{77,50},{66,50},{66,-20},{33.1034,-20}}, color={0,0,127}));
-  connect(dhw_demand.y, House_PIcontrolled.dhw_input) annotation (Line(points={
-          {77,10},{68,10},{68,-24.5263},{33.1034,-24.5263}}, color={0,0,127}));
-  connect(cold_demand.y, House_PIcontrolled.cold_input) annotation (Line(points
-        ={{77,-30},{72,-30},{72,-22.1053},{33.1034,-22.1053}}, color={0,0,127}));
+          -0.592593,-23.1579},{-10,-23.1579},{-10,28}}, color={0,0,127}));
+  connect(heat_demand.y, House_PIcontrolled.heat_input) annotation (Line(points={{77,50},
+          {66,50},{66,-20},{33.1852,-20}},         color={0,0,127}));
+  connect(dhw_demand.y, House_PIcontrolled.dhw_input) annotation (Line(points={{77,10},
+          {68,10},{68,-24.5263},{33.1852,-24.5263}},         color={0,0,127}));
+  connect(cold_demand.y, House_PIcontrolled.cold_input) annotation (Line(points={{77,-30},
+          {72,-30},{72,-22.1053},{33.1852,-22.1053}},          color={0,0,127}));
   connect(pipeReturn.ports_b[1], sourceIdeal.port_a)
     annotation (Line(points={{-32,16},{-32,60},{20,60}}, color={0,127,255}));
   connect(pControl.y, sourceIdeal.dpIn) annotation (Line(points={{1,40},{10,40},
@@ -130,8 +130,5 @@ equation
             -100},{100,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    experiment(
-      StopTime=86400,
-      Interval=60,
-      Tolerance=1e-007));
+    experiment(StopTime=86400, Interval=60));
 end ValveControlledHeatPumpDCDHWnoStoragePIcontrol;

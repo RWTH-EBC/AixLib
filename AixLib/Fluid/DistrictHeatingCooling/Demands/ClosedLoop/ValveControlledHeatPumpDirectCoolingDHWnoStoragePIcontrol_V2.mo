@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
-model ValveControlledHeatPumpDirectCoolingDHWnoStoragePIcontrol2PIs
+model ValveControlledHeatPumpDirectCoolingDHWnoStoragePIcontrol_V2
   "Substation model for low-temperature networks for buildings with reversible heat pump that also supplies dhw"
 
       replaceable package Medium =
@@ -81,7 +81,7 @@ public
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={-106,58})));
+        origin={-102,72})));
   HeatPumps.Carnot_TCon_RE_Jonas
                            heaPum(
     redeclare package Medium2 = Medium,
@@ -139,7 +139,7 @@ public
     l2=1e-9,
     l=0.05)
     "y is the Position of the Valve. Should be between 0 (closed) and 1 (open)"
-    annotation (Placement(transformation(extent={{-222,-10},{-202,10}})));
+    annotation (Placement(transformation(extent={{-238,-48},{-218,-28}})));
   Modelica.Blocks.Sources.Constant T_DHW_supply(k=T_dhw_supply)
     "Temperature of the DHW that comes out of showers, sinks etc. Is used to compute the return Temperature"
     annotation (Placement(transformation(
@@ -196,7 +196,7 @@ public
         transformation(
         extent={{9,-10},{-9,10}},
         rotation=0,
-        origin={-127,56})));
+        origin={-125,70})));
   Modelica.Blocks.Logical.Switch sup_is_ret
     "wenn HP aus sein soll, ist T supply gleich T return (dT =0, keine Temperaturerhöhung)"
     annotation (Placement(transformation(
@@ -204,7 +204,7 @@ public
         rotation=90,
         origin={17,-39})));
   Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-182,-10},{-162,10}})));
+    annotation (Placement(transformation(extent={{-196,-48},{-176,-28}})));
   Modelica.Blocks.Math.Division dT_cold annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -233,18 +233,18 @@ public
         transformation(
         extent={{9,9},{-9,-9}},
         rotation=180,
-        origin={-337,17})));
+        origin={-339,53})));
   Modelica.Blocks.Logical.Or            ret_hot
     "more heat added to the pipe than taken out" annotation (Placement(
         transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
-        origin={-264,54})));
+        origin={-250,54})));
   Modelica.Blocks.Math.Add heat_ret(k1=-1)
-    annotation (Placement(transformation(extent={{-274,96},{-254,76}})));
+    annotation (Placement(transformation(extent={{-260,98},{-240,78}})));
   Modelica.Blocks.Math.Add cold_ret(k1=+1)
     "desired return temperature of the network pipe in cooling mode"
-    annotation (Placement(transformation(extent={{-274,18},{-254,38}})));
+    annotation (Placement(transformation(extent={{-260,16},{-240,36}})));
   Modelica.Blocks.Continuous.LimPID pControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.002,
@@ -252,11 +252,11 @@ public
     Td=0.1,
     yMax=1,
     yMin=0.1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,
     y_start=0.3)      "Pressure controller" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
-        rotation=180,
-        origin={-230,30})));
+        rotation=90,
+        origin={-162,34})));
   Modelica.Blocks.Logical.Less hx_bigger_hp
     "the heat added to the network by the heat exchanger is vbigger than the heat taken from the nwtowkr by the condensor"
     annotation (Placement(transformation(
@@ -268,36 +268,23 @@ public
         transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
-        origin={-300,72})));
-  Modelica.Blocks.Logical.Switch pi_set1 "return Temp of the Network"
-    annotation (Placement(transformation(
-        extent={{-12,12},{12,-12}},
-        rotation=0,
-        origin={-184,68})));
-  Modelica.Blocks.Continuous.LimPID pControl1(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.002,
-    Ti=7,
-    Td=0.1,
-    yMax=1,
-    yMin=0.1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
-    y_start=0.3)      "Pressure controller" annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
-        origin={-230,84})));
+        origin={-296,72})));
+  Modelica.Blocks.Sources.RealExpression open(y=1)
+    annotation (Placement(transformation(extent={{-234,0},{-218,20}})));
+  Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=7200)
+    annotation (Placement(transformation(extent={{-210,18},{-192,36}})));
     Modelica.Blocks.Logical.Switch mass_flow_heatExchangerHeating1
     "calculation of mass flow through heat exchanger (heating)"
-    annotation (Placement(transformation(extent={{9,-9},{-9,9}},
+    annotation (Placement(transformation(extent={{9,9},{-9,-9}},
         rotation=0,
-        origin={-189,31})));
-  Modelica.Blocks.Sources.RealExpression open(y=1)
-    annotation (Placement(transformation(extent={{-152,10},{-168,30}})));
-  Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=7200)
-    annotation (Placement(transformation(extent={{-184,84},{-172,96}})));
+        origin={-199,-5})));
+  Utilities.Logical.SmoothSwitch switch1 annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=180,
+        origin={-210,68})));
 equation
   connect(prescribedHeatFlow.port,HX. heatPort)
-    annotation (Line(points={{-106,48},{-106,10},{-124,10}},
+    annotation (Line(points={{-102,62},{-102,10},{-124,10}},
                                                  color={191,0,0}));
   connect(m_flow_nom.y,HP_Return. m_flow_in) annotation (Line(points={{75.7,-59},
           {92,-59},{92,-26.4},{76.4,-26.4}}, color={0,0,127}));
@@ -307,7 +294,8 @@ equation
   connect(Pressure_Drop.y,dpOut)
     annotation (Line(points={{53.2,60},{110,60}},  color={0,0,127}));
   connect(senTem_supply.port_b,val. port_a) annotation (Line(points={{-378,
-          -1.77636e-15},{-248,-1.77636e-15},{-248,0},{-222,0}}, color={0,127,
+          -1.77636e-15},{-248,-1.77636e-15},{-248,-38},{-238,-38}},
+                                                                color={0,127,
           255}));
   connect(heaPum.P,P_el)  annotation (Line(points={{-59,-6},{-70,-6},{-70,100},
           {110,100}},               color={0,0,127}));
@@ -359,11 +347,11 @@ equation
   connect(T_room_supply.y,T_heat_return. u2) annotation (Line(points={{-125,
           -112},{-90,-112},{-90,-230},{-60,-230}},                    color={0,0,127}));
   connect(DirectCooling.y,prescribedHeatFlow. Q_flow)
-    annotation (Line(points={{-113,92},{-106,92},{-106,68}}, color={0,0,127}));
+    annotation (Line(points={{-113,92},{-102,92},{-102,82}}, color={0,0,127}));
   connect(cold_input,DirectCooling. u1) annotation (Line(points={{-460,100},{
           -136,100}},                                        color={0,0,127}));
-  connect(Zero.y,DirectCooling. u3) annotation (Line(points={{-136.9,56},{-142,
-          56},{-142,84},{-136,84}},
+  connect(Zero.y,DirectCooling. u3) annotation (Line(points={{-134.9,70},{-142,
+          70},{-142,84},{-136,84}},
                                color={0,0,127}));
   connect(senTem_return.port_a,heaPum. port_b2)
     annotation (Line(points={{10,1.77636e-15},{6,1.77636e-15},{6,0},{-38,0}},
@@ -377,9 +365,11 @@ equation
   connect(sup_is_ret.y,heaPum. TSet) annotation (Line(points={{17,-26.9},{16,
           -26.9},{16,-15},{-36,-15}}, color={0,0,127}));
   connect(val.port_b,senMasFlo. port_a)
-    annotation (Line(points={{-202,0},{-182,0}}, color={0,127,255}));
+    annotation (Line(points={{-218,-38},{-196,-38}},
+                                                 color={0,127,255}));
   connect(senMasFlo.port_b,HX. ports[2])
-    annotation (Line(points={{-162,0},{-136,0}}, color={0,127,255}));
+    annotation (Line(points={{-176,-38},{-154,-38},{-154,0},{-136,0}},
+                                                 color={0,127,255}));
   connect(cp_dT1.y,dT_cold. u2) annotation (Line(points={{-277,-184},{-234,-184},
           {-234,-212},{-222,-212}}, color={0,0,127}));
   connect(cold_input,dT_cold. u1) annotation (Line(points={{-460,100},{-410,100},
@@ -428,54 +418,52 @@ equation
           {-32,-236},{-32,-235.6},{-18.4,-235.6}}, color={0,0,127}));
   connect(Threshold_dc.y,HP_control. threshhold) annotation (Line(points={{-359.8,
           -36},{-368,-36},{-368,-48.25}},            color={0,0,127}));
-  connect(deltaT_Network.y,heat_ret. u1) annotation (Line(points={{-327.1,17},{
-          -282,17},{-282,80},{-276,80}},
+  connect(deltaT_Network.y,heat_ret. u1) annotation (Line(points={{-329.1,53},{
+          -276,53},{-276,82},{-262,82}},
+                                    color={0,0,127}));
+  connect(deltaT_Network.y,cold_ret. u2) annotation (Line(points={{-329.1,53},{
+          -276,53},{-276,20},{-262,20}},
                                     color={0,0,127}));
   connect(senTem_return.T,pControl. u_m) annotation (Line(points={{24,15.4},{24,
-          46},{-230,46},{-230,42}},                   color={0,0,127}));
+          34},{-150,34}},                             color={0,0,127}));
   connect(senTem_supply.T,heat_ret. u2) annotation (Line(points={{-392,-15.4},{
-          -392,-26},{-360,-26},{-360,92},{-276,92}}, color={0,0,127}));
+          -392,-26},{-360,-26},{-360,94},{-262,94}}, color={0,0,127}));
   connect(senTem_supply.T,cold_ret. u1) annotation (Line(points={{-392,-15.4},{
-          -392,-26},{-360,-26},{-360,34},{-276,34}}, color={0,0,127}));
+          -392,-26},{-360,-26},{-360,32},{-262,32}}, color={0,0,127}));
   connect(dpOut,dpOut)
     annotation (Line(points={{110,60},{110,60}}, color={0,0,127}));
-  connect(ret_hot.u2,HP_control. hp_cooling_mode) annotation (Line(points={{-276,46},
-          {-298,46},{-298,-63.25},{-327.556,-63.25}},
+  connect(ret_hot.u2,HP_control. hp_cooling_mode) annotation (Line(points={{-262,46},
+          {-268,46},{-268,-63.25},{-327.556,-63.25}},
                     color={255,0,255}));
-  connect(heaPum.QEva_flow, hx_bigger_hp.u1) annotation (Line(points={{-59,3},{
+  connect(heaPum.QEva_flow,hx_bigger_hp. u1) annotation (Line(points={{-59,3},{
           -59,114},{-400,114},{-400,72},{-390,72}}, color={0,0,127}));
-  connect(cold_input, hx_bigger_hp.u2) annotation (Line(points={{-460,100},{
+  connect(cold_input,hx_bigger_hp. u2) annotation (Line(points={{-460,100},{
           -410,100},{-410,64},{-390,64}}, color={0,0,127}));
-  connect(hx_bigger_hp.y, dc_and_cold.u1)
-    annotation (Line(points={{-367,72},{-312,72}}, color={255,0,255}));
-  connect(dc_and_cold.y, ret_hot.u1) annotation (Line(points={{-289,72},{-286,
-          72},{-286,54},{-276,54}}, color={255,0,255}));
-  connect(DirectCooling.u2, HP_control.direct_cooling) annotation (Line(points=
-          {{-136,92},{-148,92},{-148,-55.75},{-327.556,-55.75}}, color={255,0,
+  connect(hx_bigger_hp.y,dc_and_cold. u1)
+    annotation (Line(points={{-367,72},{-308,72}}, color={255,0,255}));
+  connect(dc_and_cold.y,ret_hot. u1) annotation (Line(points={{-285,72},{-268,
+          72},{-268,54},{-262,54}}, color={255,0,255}));
+  connect(DirectCooling.u2,HP_control. direct_cooling) annotation (Line(points={{-136,92},
+          {-146,92},{-146,-55.75},{-327.556,-55.75}},            color={255,0,
           255}));
-  connect(dc_and_cold.u2, HP_control.direct_cooling) annotation (Line(points={{
-          -312,64},{-318,64},{-318,-55.75},{-327.556,-55.75}}, color={255,0,255}));
-  connect(deltaT_Network.y, cold_ret.u2) annotation (Line(points={{-327.1,17},{
-          -282,17},{-282,22},{-276,22}}, color={0,0,127}));
-  connect(cold_ret.y, pControl.u_s) annotation (Line(points={{-253,28},{-247.5,
-          28},{-247.5,30},{-242,30}}, color={0,0,127}));
-  connect(heat_ret.y, pControl1.u_s) annotation (Line(points={{-253,86},{-248,
-          86},{-248,84},{-242,84}}, color={0,0,127}));
-  connect(senTem_return.T, pControl1.u_m) annotation (Line(points={{24,15.4},{
-          24,46},{-230,46},{-230,72}}, color={0,0,127}));
-  connect(pControl.y, pi_set1.u1) annotation (Line(points={{-219,30},{-210,30},
-          {-210,58.4},{-198.4,58.4}}, color={0,0,127}));
-  connect(ret_hot.y, pi_set1.u2) annotation (Line(points={{-253,54},{-226,54},{
-          -226,68},{-198.4,68}}, color={255,0,255}));
-  connect(pControl1.y, pi_set1.u3) annotation (Line(points={{-219,84},{-210,84},
-          {-210,77.6},{-198.4,77.6}}, color={0,0,127}));
-  connect(pi_set1.y, mass_flow_heatExchangerHeating1.u1) annotation (Line(
-        points={{-170.8,68},{-166,68},{-166,38.2},{-178.2,38.2}}, color={0,0,
-          127}));
-  connect(mass_flow_heatExchangerHeating1.u3, open.y) annotation (Line(points={
-          {-178.2,23.8},{-172.1,23.8},{-172.1,20},{-168.8,20}}, color={0,0,127}));
-  connect(booleanStep.y, mass_flow_heatExchangerHeating1.u2) annotation (Line(
-        points={{-171.4,90},{-158,90},{-158,31},{-178.2,31}}, color={255,0,255}));
+  connect(dc_and_cold.u2,HP_control. direct_cooling) annotation (Line(points={{-308,64},
+          {-316,64},{-316,-55.75},{-327.556,-55.75}},          color={255,0,255}));
+  connect(mass_flow_heatExchangerHeating1.u3,open. y) annotation (Line(points={{-188.2,
+          2.2},{-182.1,2.2},{-182.1,10},{-217.2,10}},           color={0,0,127}));
+  connect(booleanStep.y,mass_flow_heatExchangerHeating1. u2) annotation (Line(
+        points={{-191.1,27},{-178,27},{-178,-5},{-188.2,-5}}, color={255,0,255}));
+  connect(mass_flow_heatExchangerHeating1.y,val. y) annotation (Line(points={{
+          -208.9,-5},{-228,-5},{-228,-26}}, color={0,0,127}));
+  connect(pControl.y,mass_flow_heatExchangerHeating1. u1) annotation (Line(
+        points={{-162,23},{-162,-12.2},{-188.2,-12.2}}, color={0,0,127}));
+  connect(ret_hot.y, switch1.u2) annotation (Line(points={{-239,54},{-230.5,54},
+          {-230.5,68},{-222,68}}, color={255,0,255}));
+  connect(cold_ret.y, switch1.u1) annotation (Line(points={{-239,26},{-239,41},
+          {-222,41},{-222,60}}, color={0,0,127}));
+  connect(heat_ret.y, switch1.u3) annotation (Line(points={{-239,88},{-228,88},
+          {-228,76},{-222,76}}, color={0,0,127}));
+  connect(switch1.y, pControl.u_s)
+    annotation (Line(points={{-199,68},{-162,68},{-162,46}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-440,
             -260},{100,120}}),
@@ -522,4 +510,4 @@ equation
 </html>", info="<html>
 <p>Substation model for bidirctional low-temperature networks for buildings with heat pump and chiller. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application. The mass flows are controlled equation-based. The mass flows are calculated using the heating and cooling demands and the specified temperature differences between flow and return (network side).</p>
 </html>"));
-end ValveControlledHeatPumpDirectCoolingDHWnoStoragePIcontrol2PIs;
+end ValveControlledHeatPumpDirectCoolingDHWnoStoragePIcontrol_V2;
