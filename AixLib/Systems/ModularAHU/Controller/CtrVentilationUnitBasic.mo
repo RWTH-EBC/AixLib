@@ -6,9 +6,11 @@ model CtrVentilationUnitBasic "Simple controller for Ventilation Unit"
     annotation (Dialog(enable=useExternalTset == false));
   parameter Boolean useExternalTset=false
     "If True, set temperature can be given externally";
+      parameter Boolean useExternalVset=false
+    "If True, set volume flow can be given externally";
   parameter Modelica.SIunits.VolumeFlowRate VFlowSet=1000/3600
     "Set value of volume flow [m^3/s]"
-    annotation (dialog(group="Fan Controller"));
+    annotation (dialog(group="Fan Controller", enable=useExternalVset == false));
   parameter Real k=0.01 "Gain of controller"
     annotation (dialog(group="Fan Controller"));
   parameter Modelica.SIunits.Time Ti=60 "Time constant of Integrator block"
@@ -50,11 +52,14 @@ model CtrVentilationUnitBasic "Simple controller for Ventilation Unit"
     final reverseAction=false,
     final reset=AixLib.Types.Reset.Disabled)
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
-  Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet)
-    annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
+  Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet) if not
+    useExternalVset
+    annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
 
-  Modelica.Blocks.Sources.Constant ConstVflow1(final k=1)
-    annotation (Placement(transformation(extent={{46,-42},{66,-22}})));
+  Modelica.Blocks.Interfaces.RealInput VFlow if useExternalVset
+    "Connector of second Real input signal" annotation (Placement(
+        transformation(extent={{-140,-80},{-100,-40}}),iconTransformation(
+          extent={{-140,-80},{-100,-40}})));
 equation
   connect(ctrCo.registerBus, genericAHUBus.coolerBus) annotation (Line(
       points={{20.2,50},{100.05,50},{100.05,0.05}},
@@ -80,8 +85,9 @@ equation
       points={{-79,50},{-28,50},{-28,10},{-2,10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-50},{-2,-50}},
-                                    color={0,0,127}));
+  connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-30},{-30,
+          -30},{-30,-50},{-2,-50}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(PID_VflowSup.u_m, genericAHUBus.heaterBus.VFlowAirMea) annotation (
       Line(points={{10,-62},{10,-98},{100.05,-98},{100.05,0.05}}, color={0,0,
           127}), Text(
@@ -103,6 +109,10 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(VFlow, PID_VflowSup.u_s) annotation (Line(
+      points={{-120,-60},{-2,-60},{-2,-50}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},
