@@ -101,9 +101,6 @@ model SimpleConsumer "Simple Consumer"
 
 
 
-  Modelica.Blocks.Sources.RealExpression realExpression3(y=-Q_flow/(4186*
-        deltaTConsumerNominal))
-    annotation (Placement(transformation(extent={{-228,16},{-208,36}})));
   parameter SI.PressureDifference dp_nominalPumpConsumer=if pump.rho_default < 500
        then 500 else 10000
     "Nominal pressure raise, used for default pressure curve if not specified in record per";
