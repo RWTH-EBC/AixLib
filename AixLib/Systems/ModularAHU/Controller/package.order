@@ -2,3 +2,5 @@ CtrRegBasic
 CtrAHUBasic
 CtrVentilationUnitBasic
 CtrVentilationUnitTsetRoom
+CtrRegVSet
+CtrVentilationUnitVflowSet

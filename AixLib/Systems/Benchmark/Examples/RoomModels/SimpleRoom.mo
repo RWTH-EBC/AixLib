@@ -245,7 +245,7 @@ equation
           8.88178e-16},{40,8.88178e-16},{40,25.68},{51,25.68}},
                                               color={0,0,127}));
   connect(tabs4_1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,
-        -18.1818},{46,-18.1818},{46,33.5},{56,33.5}},                     color=
+          -18.1818},{46,-18.1818},{46,33.5},{56,33.5}},                   color=
          {191,0,0}));
   connect(ventilationUnit1.port_b1, thermalZone1.ports[1]) annotation (Line(
         points={{-33.54,13},{25.125,13},{25.125,28.44}},
@@ -283,13 +283,13 @@ equation
   connect(bouWaterhot1.ports[1], ventilationUnit1.port_b4) annotation (Line(
         points={{-20,-76},{-50,-76},{-50,-12},{-43.66,-12}}, color={0,127,255}));
   connect(bouWaterhot1.ports[2], tabs4_1.port_b1) annotation (Line(points={{-16,-76},
-        {56,-76},{56,-59.6364}},        color={0,127,255}));
+          {56,-76},{56,-59.6364}},      color={0,127,255}));
   connect(tabs4_1.port_a1, bouWaterhot.ports[2]) annotation (Line(points={{24,
           -60},{-52,-60},{-52,-82}}, color={0,127,255}));
   connect(bouWatercold.ports[1], tabs4_1.port_a2) annotation (Line(points={{-8,
           -116},{2,-116},{2,-102},{32,-102},{32,-60}}, color={0,127,255}));
   connect(bouWatercold1.ports[1], tabs4_1.port_b2) annotation (Line(points={{22,-116},
-        {48,-116},{48,-59.6364}},         color={0,127,255}));
+          {48,-116},{48,-59.6364}},       color={0,127,255}));
   connect(bouWatercold.ports[2], ventilationUnit1.port_a3) annotation (Line(
         points={{-4,-116},{-72,-116},{-72,-12},{-70.8,-12}}, color={0,127,255}));
   connect(bouWatercold1.ports[2], ventilationUnit1.port_b3) annotation (Line(
