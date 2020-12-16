@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Controller;
+﻿within AixLib.Systems.ModularAHU.Controller;
 model CtrVentilationUnitVflowSet
   "Simple controller for Ventilation Unit"
 
@@ -40,16 +40,26 @@ model CtrVentilationUnitVflowSet
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-114,-70},{-88,-44}}), iconTransformation(
           extent={{-128,-84},{-88,-44}})));
-  CtrRegVSet ctrRegVSet(useExternalVset=true)
-    annotation (Placement(transformation(extent={{-22,38},{-2,58}})));
-  CtrRegVSet ctrRegVSet1(useExternalVset=true)
-    annotation (Placement(transformation(extent={{-22,-4},{-2,16}})));
   Modelica.Blocks.Interfaces.RealInput VsetCooler
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-118,70},{-86,102}})));
   Modelica.Blocks.Interfaces.RealInput VsetHeater
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-116,-10},{-86,20}})));
+  Modelica.Blocks.Math.Gain toCubicMetersPerSec(k=0.001)
+    "Converts Inputs from l/s to m³/s"
+    annotation (Placement(transformation(extent={{-56,38},{-36,58}})));
+  Modelica.Blocks.Math.Gain toCubicMetersPerSec1(k=0.001)
+    "Converts Inputs from l/s to m³/s"
+    annotation (Placement(transformation(extent={{-56,-4},{-36,16}})));
+  CtrRegBasicVflow ctrRegBasicVflow(
+    useExternalVset=true,
+    useExternalVMea=true,
+    Td=0) annotation (Placement(transformation(extent={{12,38},{32,58}})));
+  CtrRegBasicVflow ctrRegBasicVflow1(
+    useExternalVset=true,
+    useExternalVMea=true,
+    Td=0) annotation (Placement(transformation(extent={{12,-4},{32,16}})));
 equation
   connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-30},{-30,
           -30},{-30,-50},{-2,-50}}, color={0,0,127},
@@ -71,26 +81,46 @@ equation
       points={{-101,-57},{-2,-57},{-2,-50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(ctrRegVSet.registerBus, genericAHUBus.coolerBus) annotation (Line(
-      points={{-1.8,48},{98,48},{98,16},{100.05,16},{100.05,0.05}},
+  connect(toCubicMetersPerSec.u, VsetCooler) annotation (Line(points={{-58,48},
+          {-62,48},{-62,86},{-102,86}}, color={0,0,127}));
+  connect(toCubicMetersPerSec1.u, VsetHeater) annotation (Line(points={{-58,6},
+          {-66,6},{-66,5},{-101,5}}, color={0,0,127}));
+  connect(ctrRegBasicVflow.Vset, toCubicMetersPerSec.y)
+    annotation (Line(points={{10,48},{-35,48}}, color={0,0,127}));
+  connect(ctrRegBasicVflow1.Vset, toCubicMetersPerSec1.y)
+    annotation (Line(points={{10,6},{-35,6}}, color={0,0,127}));
+  connect(ctrRegBasicVflow.registerBus, genericAHUBus.coolerBus) annotation (
+      Line(
+      points={{32.2,48},{66,48},{66,0.05},{100.05,0.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrRegVSet1.registerBus, genericAHUBus.heaterBus) annotation (Line(
-      points={{-1.8,6},{50,6},{50,0.05},{100.05,0.05}},
+  connect(ctrRegBasicVflow1.registerBus, genericAHUBus.heaterBus) annotation (
+      Line(
+      points={{32.2,6},{66,6},{66,0.05},{100.05,0.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrRegVSet.Vset, VsetCooler) annotation (Line(points={{-24,48},{-62,48},
-          {-62,86},{-102,86}}, color={0,0,127}));
-  connect(ctrRegVSet1.Vset, VsetHeater) annotation (Line(points={{-24,6},{-66,6},
-          {-66,5},{-101,5}}, color={0,0,127}));
+  connect(ctrRegBasicVflow.VMea, genericAHUBus.coolerBus.hydraulicBus.VFlowInMea)
+    annotation (Line(points={{22,36},{62,36},{62,0.05},{100.05,0.05}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrRegBasicVflow1.VMea, genericAHUBus.heaterBus.hydraulicBus.VFlowInMea)
+    annotation (Line(points={{22,-6},{60,-6},{60,0.05},{100.05,0.05}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},

@@ -1,7 +1,6 @@
-within AixLib.Systems.Benchmark.Controller;
+﻿within AixLib.Systems.Benchmark.Controller;
 model CtrTabsVSet "Controller for concrete core activation"
-  parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.SIunits.Temperature TflowSet = 293.15 "Flow temperature set point of consumer";
+
   parameter Real k(min=0, unit="1") = 0.03 "Gain of controller";
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=60
     "Time constant of Integrator block";
@@ -23,19 +22,30 @@ model CtrTabsVSet "Controller for concrete core activation"
 
   BaseClasses.TabsBus2 tabsBus annotation (Placement(transformation(extent={{82,
             -18},{116,18}}), iconTransformation(extent={{88,-14},{112,14}})));
-  HydraulicModules.Controller.CtrThrottle ctrThrottleHot(useExternalTset=true)
-    annotation (Placement(transformation(extent={{-20,22},{0,42}})));
-  HydraulicModules.Controller.CtrThrottle ctrThrottleCold(useExternalTset=true,
-      reverseAction=true)
-    annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
   HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=2500)
     annotation (Placement(transformation(extent={{-18,60},{2,80}})));
   Modelica.Blocks.Interfaces.RealInput vFlowHotSet
     "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-116,14},{-90,40}})));
+    annotation (Placement(transformation(extent={{-114,30},{-92,52}})));
   Modelica.Blocks.Interfaces.RealInput vFlowColdSet
     "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-120,-56},{-80,-16}})));
+    annotation (Placement(transformation(extent={{-114,-52},{-92,-30}})));
+  Modelica.Blocks.Math.Gain toCubicMetersPerSec(k=0.001)
+    "Converts Inputs from l/s to m³/s"
+    annotation (Placement(transformation(extent={{-68,16},{-48,36}})));
+  Modelica.Blocks.Math.Gain toCubicMetersPerSec1(k=0.001)
+    "Converts Inputs from l/s to m³/s"
+    annotation (Placement(transformation(extent={{-68,-46},{-48,-26}})));
+  HydraulicModules.Controller.CtrThrottleVflowCtr ctrThrottleVflowCtr(
+    useExternalVset=true,
+    k=1500,
+    Ti=130,
+    Td=0) annotation (Placement(transformation(extent={{-16,-40},{4,-20}})));
+  HydraulicModules.Controller.CtrThrottleVflowCtr ctrThrottleVflowCtr1(
+    useExternalVset=true,
+    k=1500,
+    Ti=130,
+    Td=0) annotation (Placement(transformation(extent={{-18,24},{2,44}})));
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
       points={{3.4,70.2},{40,70.2},{40,72},{99.085,72},{99.085,0.09}},
@@ -45,41 +55,46 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleCold.hydraulicBus, tabsBus.coldThrottleBus) annotation (
-      Line(
-      points={{3.4,-29.8},{99.085,-29.8},{99.085,0.09}},
+  connect(vFlowHotSet, toCubicMetersPerSec.u) annotation (Line(points={{-103,41},
+          {-86.5,41},{-86.5,26},{-70,26}}, color={0,0,127}));
+  connect(toCubicMetersPerSec1.u, vFlowColdSet) annotation (Line(points={{-70,
+          -36},{-82,-36},{-82,-41},{-103,-41}}, color={0,0,127}));
+  connect(ctrThrottleVflowCtr1.hydraulicBus, tabsBus.hotThrottleBus)
+    annotation (Line(
+      points={{3.4,34.2},{98.7,34.2},{98.7,0.09},{99.085,0.09}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleHot.hydraulicBus, tabsBus.hotThrottleBus) annotation (Line(
-      points={{1.4,32.2},{99.085,32.2},{99.085,0.09}},
+  connect(ctrThrottleVflowCtr.hydraulicBus, tabsBus.coldThrottleBus)
+    annotation (Line(
+      points={{5.4,-29.8},{97.7,-29.8},{97.7,0.09},{99.085,0.09}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleHot.Tact, tabsBus.hotThrottleBus.VFlowOutMea) annotation (
-      Line(points={{-22,38},{-36,38},{-36,54},{72,54},{72,0.09},{99.085,0.09}},
+  connect(toCubicMetersPerSec.y, ctrThrottleVflowCtr1.Vset) annotation (Line(
+        points={{-47,26},{-34,26},{-34,28},{-20,28}}, color={0,0,127}));
+  connect(toCubicMetersPerSec1.y, ctrThrottleVflowCtr.Vset) annotation (Line(
+        points={{-47,-36},{-32,-36},{-32,-36},{-18,-36}}, color={0,0,127}));
+  connect(ctrThrottleVflowCtr1.Vact, tabsBus.hotThrottleBus.VFlowOutMea)
+    annotation (Line(points={{-20,40},{-32,40},{-32,52},{99.085,52},{99.085,
+          0.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrThrottleVflowCtr.Vact, tabsBus.coldThrottleBus.VFlowOutMea)
+    annotation (Line(points={{-18,-24},{-34,-24},{-34,0.09},{99.085,0.09}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleCold.Tact, tabsBus.coldThrottleBus.VFlowOutMea)
-    annotation (Line(points={{-20,-24},{-32,-24},{-32,0.09},{99.085,0.09}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleHot.Tset, vFlowHotSet) annotation (Line(points={{-22,26},{
-          -62,26},{-62,27},{-103,27}}, color={0,0,127}));
-  connect(ctrThrottleCold.Tset, vFlowColdSet)
-    annotation (Line(points={{-20,-36},{-100,-36}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-80,20},{66,-20}},
