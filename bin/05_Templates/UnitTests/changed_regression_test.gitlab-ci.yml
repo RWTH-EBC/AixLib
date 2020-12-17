@@ -10,22 +10,16 @@ stages:
 
 Regression_changed_overall_coverage:
     stage: RegressionTest
-    services:
-        - docker
-        
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-        
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate python36
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
-
     script:
-        - model=$(git diff --raw --diff-filter=AMT)
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py --coverage-only
-
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py --coverage-only -DS ${DymolaVersion}
     artifacts:
         when: on_failure
         paths:
@@ -36,7 +30,6 @@ Regression_changed_overall_coverage:
         when: runner_system_failure
     except:
         - external_pull_requests
-        
     only:
         variables:
             - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
@@ -49,8 +42,6 @@ Regression_changed_overall_coverage:
             
 Regressiontest_changed_AixLib_Airflow:
     stage: RegressionTest
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
@@ -59,11 +50,10 @@ Regressiontest_changed_AixLib_Airflow:
         - dir
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
-    
     script:
-        - model=$(git diff --raw --diff-filter=AMT)
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Airflow 
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Airflow  -DS ${DymolaVersion}
     artifacts:
         when: on_failure
         paths:
@@ -84,8 +74,6 @@ Regressiontest_changed_AixLib_Airflow:
             
 Regressiontest_changed_AixLib_BoundaryConditions:
     stage: RegressionTest
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
@@ -95,10 +83,9 @@ Regressiontest_changed_AixLib_BoundaryConditions:
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - model=$(git diff --raw --diff-filter=AMT)
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.BoundaryConditions 
-        
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.BoundaryConditions  -DS ${DymolaVersion}
     artifacts:
         when: on_failure
         paths:
@@ -120,8 +107,6 @@ Regressiontest_changed_AixLib_BoundaryConditions:
             
 Regressiontest_changed_AixLib_Controls:
     stage: RegressionTest
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
@@ -130,12 +115,10 @@ Regressiontest_changed_AixLib_Controls:
         - dir
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
-    
     script:
-        - model=$(git diff --raw --diff-filter=AMT)
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Controls 
-        
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Controls  -DS ${DymolaVersion}
     artifacts:
         when: on_failure
         paths:
@@ -166,7 +149,7 @@ Regressiontest_changed_AixLib_Controls:
 #        - dir
 #        - export PYTHONIOENCODING=utf-8 # just in case
 #      script:
-#        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --single-package AixLib.Electrical --tool dymola
+#        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --single-package AixLib.Electrical --tool dymola -DS ${DymolaVersion}
 #      artifacts:
 #        when: on_failure
 #        paths:
@@ -187,7 +170,7 @@ Regressiontest_changed_AixLib_Controls:
 #        - dir
 #        - export PYTHONIOENCODING=utf-8 # just in case
 #      script:
-#        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --single-package AixLib.FastHVAC --tool dymola
+#        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --single-package AixLib.FastHVAC --tool dymola -DS ${DymolaVersion}
 #      artifacts:
 #        when: on_failure
 #       paths:
@@ -198,8 +181,6 @@ Regressiontest_changed_AixLib_Controls:
 
 Regressiontest_changed_AixLib_Fluid:
     stage: RegressionTest
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
@@ -209,10 +190,9 @@ Regressiontest_changed_AixLib_Fluid:
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - model=$(git diff --raw --diff-filter=AMT)
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Fluid 
-     
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Fluid  -DS ${DymolaVersion}
     artifacts:
         when: on_failure
         paths:
@@ -233,8 +213,6 @@ Regressiontest_changed_AixLib_Fluid:
 
 Regressiontest_changed_AixLib_Media:
     stage: RegressionTest
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
@@ -244,10 +222,9 @@ Regressiontest_changed_AixLib_Media:
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - model=$(git diff --raw --diff-filter=AMT)
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Media 
-   
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Media  -DS ${DymolaVersion}
     artifacts:
         when: on_failure
         paths:
@@ -268,8 +245,6 @@ Regressiontest_changed_AixLib_Media:
 
 Regressiontest_changed_AixLib_Systems:
     stage: RegressionTest
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
@@ -279,10 +254,9 @@ Regressiontest_changed_AixLib_Systems:
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - model=$(git diff --raw --diff-filter=AMT)
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Systems 
-        
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.Systems  -DS ${DymolaVersion}
     artifacts:
         when: on_failure
         paths:
@@ -303,8 +277,6 @@ Regressiontest_changed_AixLib_Systems:
 
 Regressiontest_changed_AixLib_ThermalZones:
     stage: RegressionTest
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
@@ -314,10 +286,9 @@ Regressiontest_changed_AixLib_ThermalZones:
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - model=$(git diff --raw --diff-filter=AMT)
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.ThermalZones 
-    
+        - cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --batch --tool dymola --modified-models -s AixLib.ThermalZones  -DS ${DymolaVersion}
     artifacts:
         when: on_failure
         paths:
