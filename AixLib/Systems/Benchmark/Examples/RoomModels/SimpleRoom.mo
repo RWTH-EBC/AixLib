@@ -263,7 +263,7 @@ equation
   connect(bou1.ports[1], ventilationUnit1.port_b2) annotation (Line(points={{
           -94,29},{-94,28},{-79.54,28}}, color={0,127,255}));
   connect(tabs4_1.tabsBus, bus.tabs1Bus) annotation (Line(
-      points={{19.8,-41.6364},{-2,-41.6364},{-2,108.11},{-1.91,108.11}},
+      points={{19.8,-41.6364},{2,-41.6364},{2,108.11},{-1.91,108.11}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

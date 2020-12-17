@@ -8,13 +8,13 @@ model SimpleRoomWithControl
 
   AixLib.Systems.ModularAHU.Controller.CtrVentilationUnitTsetRoom
                                                 ctrVentilationUnitTsetRoom(
-    TRoomSet=295.65,
+    TRoomSet=303.15,
     k=0.3,
     Ti=200,
     VFlowSet=3*1800/3600)
     annotation (Placement(transformation(extent={{-98,100},{-78,120}})));
   AixLib.Systems.Benchmark.Controller.CtrTabs2
-           ctrTabs2_1(useExternalTset=false, TflowSet=295.15)
+           ctrTabs2_1(useExternalTset=false, TflowSet=303.15)
     annotation (Placement(transformation(extent={{-98,120},{-78,140}})));
 equation
   connect(ctrVentilationUnitTsetRoom.genericAHUBus, bus.vu1Bus) annotation (

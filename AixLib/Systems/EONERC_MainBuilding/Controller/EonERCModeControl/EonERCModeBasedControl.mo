@@ -246,8 +246,8 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(ctrHP.T_con, bus.hpSystemBus.busHP.T_ret_co) annotation (Line(points=
-          {{-83.6,76},{-100,76},{-100,100},{100.07,100},{100.07,-0.935}}, color
-        ={0,0,127}), Text(
+          {{-83.6,76},{-100,76},{-100,100},{100.07,100},{100.07,-0.935}}, color=
+         {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

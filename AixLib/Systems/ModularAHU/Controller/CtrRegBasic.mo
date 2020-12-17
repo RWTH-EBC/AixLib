@@ -41,11 +41,12 @@ block CtrRegBasic "Controller for heating and cooling registers"
     final reverseAction=reverseAction,
     final reset=AixLib.Types.Reset.Disabled)
             annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
-  Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{-14,-18},
+            {6,2}})));
 
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
-    annotation (Placement(transformation(extent={{60,20},{80,40}})));
+    annotation (Placement(transformation(extent={{24,20},{44,40}})));
   BaseClasses.RegisterBus registerBus annotation (Placement(transformation(
           extent={{74,-26},{128,26}}), iconTransformation(extent={{88,-14},{116,
             14}})));
@@ -70,7 +71,7 @@ equation
 
   if useExternalTMea==false then
   connect(PID.u_m, registerBus.TAirOutMea) annotation (Line(points={{0,-62},{0,
-            -80},{102,-80},{102,0.13},{101.135,0.13}},        color={0,0,127}),
+            -80},{104,-80},{104,0.13},{101.135,0.13}},        color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -82,14 +83,14 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(booleanConstant.y, registerBus.hydraulicBus.pumpBus.onSet)
-    annotation (Line(points={{81,30},{101.135,30},{101.135,0.13}}, color={255,0,
+    annotation (Line(points={{45,30},{101.135,30},{101.135,0.13}}, color={255,0,
           255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constRpmPump.y, registerBus.hydraulicBus.pumpBus.rpmSet) annotation (
-      Line(points={{41,0},{68,0},{68,0.13},{101.135,0.13}}, color={0,0,127}),
+      Line(points={{7,-8},{68,-8},{68,0.13},{101.135,0.13}},color={0,0,127}),
       Text(
       string="%second",
       index=1,
