@@ -33,7 +33,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
                   annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=0,
-        origin={-60,0})));
+        origin={-58,0})));
 
   HydraulicModules.Pump pump_cold(
     redeclare package Medium = Medium,
@@ -382,9 +382,9 @@ equation
                                                                  color={191,0,
           0}));
   connect(throttle_HS.port_a1, pump_hot.port_b2)
-    annotation (Line(points={{-100,12},{-80,12}}, color={0,127,255}));
+    annotation (Line(points={{-100,12},{-78,12}}, color={0,127,255}));
   connect(throttle_HS.port_b2, pump_hot.port_a1)
-    annotation (Line(points={{-100,-12},{-80,-12}}, color={0,127,255}));
+    annotation (Line(points={{-100,-12},{-78,-12}}, color={0,127,255}));
   connect(throttle_HS.port_a2, heatStorage.fluidportBottom1) annotation (Line(
         points={{-140,-12},{-146,-12},{-146,-20},{-161.95,-20},{-161.95,-16.3}},
         color={0,127,255}));
@@ -402,9 +402,9 @@ equation
                                                         color={0,127,255}));
   connect(throttle_freecool.port_b2, throttle_CS.port_b2) annotation (Line(
         points={{160,-88},{184,-88},{184,-12},{180,-12}}, color={0,127,255}));
-  connect(pump_hot.port_b1, heatPump.port_a1) annotation (Line(points={{-40,-12},
+  connect(pump_hot.port_b1, heatPump.port_a1) annotation (Line(points={{-38,-12},
           {-26,-12},{-26,-18},{-11,-18}}, color={0,127,255}));
-  connect(pump_hot.port_a2, heatPump.port_b1) annotation (Line(points={{-40,12},
+  connect(pump_hot.port_a2, heatPump.port_b1) annotation (Line(points={{-38,12},
           {-25,12},{-25,18},{-11,18}}, color={0,127,255}));
   connect(heatPump.port_b2, pump_cold.port_a2) annotation (Line(points={{11,-18},
           {40,-18},{40,-12}},                   color={0,127,255}));
@@ -422,9 +422,9 @@ equation
       Line(points={{-40,-112},{-30,-112},{-30,-98}},
                                                    color={0,127,255}));
   connect(throttle_recool.port_a1, pump_hot.port_b2) annotation (Line(points={{-80,
-          -112},{-94,-112},{-94,12},{-80,12}},     color={0,127,255}));
+          -112},{-94,-112},{-94,12},{-78,12}},     color={0,127,255}));
   connect(throttle_recool.port_b2, pump_hot.port_a1) annotation (Line(points={{-80,-88},
-          {-86,-88},{-86,-12},{-80,-12}},          color={0,127,255}));
+          {-86,-88},{-86,-12},{-78,-12}},          color={0,127,255}));
   connect(convection.fluid, T_outside)
     annotation (Line(points={{20,-108},{40,-108}},
                                                  color={191,0,0}));
@@ -453,7 +453,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(pump_hot.hydraulicBus, heatPumpSystemBus.busPumpHot) annotation (Line(
-      points={{-60,-20},{-62,-20},{-62,60.07},{0.07,60.07}},
+      points={{-58,-20},{-62,-20},{-62,60.07},{0.07,60.07}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
