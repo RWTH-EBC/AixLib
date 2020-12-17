@@ -79,28 +79,79 @@ equation
           fillPattern=FillPattern.None,
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model calculates the adsorption enthalpy of water vapour for an microporous absorbent. It is based on the Dubinin-Astakhov equation for sorption. All equations are taken from [1].</p>
-<p>The actual water uptake <i>w</i> of the absorbent is calculated as follows.</p>
-<p align=\"center\"><i>w = w<sub>0</sub> exp[-F(-T ln(&phi;))<sup>n</sup>] </i></p>
-<p>Here <i>F</i> and <i>n</i> are material specific adsorption characteristic constants. The temperature <i>T</i> and the relative humidty <i>&phi; </i>are inputs of the model. The maximum water uptake <i>w<sub>0</i></sub> is calculated as following:</p>
-<p align=\"center\"><i>w<sub>0</sub> = &rho;(T) v<sub>0</sub> </i></p>
-<p>The specific micropore volume of the adsobent <i>v<sub>0</i></sub> has to be set as an parameter. The density of water is calculated by the following term.</p>
-<p align=\"center\"><i>&rho;(T) = 1 &frasl; (A T + B&frasl;T) </i></p>
-<p><i>A</i> and <i>B</i> are constants with <i>A = 1.8105&sdot;10<sup>-6</sup> m<sup>3</sup> kg<sup>-1</sup> K<sup>-1</i></sup> and <i>B = 138.08&sdot;10<sup>-3</sup> m<sup>3</sup> kg<sup>-1</sup> K </i>. </p>
-<p>With the specific vaporization enthalpy of water <i>&Delta;h<sub>v</i></sub> and the gas constant of water vapour <i>R<sub>g</i></sub> the specific adsorption enthalpy can be calculated by the following equation.</p>
-<p align=\"center\"><i>&Delta;h<sub>ads</sub> = &Delta;h<sub>v</sub> + R<sub>g</sub> T[-1 &frasl;F ln(w &frasl;w<sub>0</sub>)]<sup>1 &frasl;n</sup> [1 &frasl;T + 1 &frasl;(n w0 ln(w &frasl;w<sub>0</sub>) (&part;w<sub>0</sub> &frasl;&part;T)] </i></p>
-<h4>Known Limitations</h4>
+    Documentation(info="<html><p>
+  This model calculates the adsorption enthalpy of water vapour for an
+  microporous absorbent. It is based on the Dubinin-Astakhov equation
+  for sorption. All equations are taken from [1].
+</p>
+<p>
+  The actual water uptake <i>w</i> of the absorbent is calculated as
+  follows.
+</p>
+<p style=\"text-align:center;\">
+  <i>w = w<sub>0</sub> exp[-F(-T ln(φ))<sup>n</sup>]</i>
+</p>
+<p>
+  Here <i>F</i> and <i>n</i> are material specific adsorption
+  characteristic constants. The temperature <i>T</i> and the relative
+  humidty <i>φ</i> are inputs of the model. The maximum water uptake
+  <i>w<sub>0</sub></i> is calculated as following:
+</p>
+<p style=\"text-align:center;\">
+  <i>w<sub>0</sub> = ρ(T) v<sub>0</sub></i>
+</p>
+<p>
+  The specific micropore volume of the adsobent <i>v<sub>0</sub></i>
+  has to be set as an parameter. The density of water is calculated by
+  the following term.
+</p>
+<p style=\"text-align:center;\">
+  <i>ρ(T) = 1 ⁄ (A T + B⁄T)</i>
+</p>
+<p>
+  <i>A</i> and <i>B</i> are constants with <i>A =
+  1.8105⋅10<sup>-6</sup> m<sup>3</sup> kg<sup>-1</sup>
+  K<sup>-1</sup></i> and <i>B = 138.08⋅10<sup>-3</sup> m<sup>3</sup>
+  kg<sup>-1</sup> K</i> .
+</p>
+<p>
+  With the specific vaporization enthalpy of water
+  <i>Δh<sub>v</sub></i> and the gas constant of water vapour
+  <i>R<sub>g</sub></i> the specific adsorption enthalpy can be
+  calculated by the following equation.
+</p>
+<p style=\"text-align:center;\">
+  <i>Δh<sub>ads</sub> = Δh<sub>v</sub> + R<sub>g</sub> T[-1 ⁄F ln(w
+  ⁄w<sub>0</sub>)]<sup>1 ⁄n</sup> [1 ⁄T + 1 ⁄(n w0 ln(w ⁄w<sub>0</sub>)
+  (∂w<sub>0</sub> ⁄∂T)]</i>
+</p>
+<h4>
+  Known Limitations
+</h4>
 <ul>
-<li>Calculated adsorption enthalpy for high relative humidities is not reliable (increases up to very high values, as the ln-function aproximates zero).</li>
-<li>Not solvable for complete dry air as the ln(0) is not defined</li>
+  <li>Calculated adsorption enthalpy for high relative humidities is
+  not reliable (increases up to very high values, as the ln-function
+  aproximates zero).
+  </li>
+  <li>Not solvable for complete dry air as the ln(0) is not defined
+  </li>
 </ul>
-<h4>References</h4>
-<p>[1]: Min,J.; Wang,L.: <i>Coupled heat and mass transfer during moisture exchange across a mebrane.</i> Journal of Membrane Science. 430 (2013). pp.150-157</p>
+<h4>
+  References
+</h4>
+<p>
+  [1]: Min,J.; Wang,L.: <i>Coupled heat and mass transfer during
+  moisture exchange across a mebrane.</i> Journal of Membrane Science.
+  430 (2013). pp.150-157
+</p>
 </html>", revisions="<html>
 <ul>
-<li>November 23, 2018, by Martin Kremer:<br/>Changed RealInputs to inputs to use the model inside other models</li>
-<li>November 22, 2018, by Martin Kremer:<br/>First Implementation</li>
+  <li>November 23, 2018, by Martin Kremer:<br/>
+    Changed RealInputs to inputs to use the model inside other models
+  </li>
+  <li>November 22, 2018, by Martin Kremer:<br/>
+    First Implementation
+  </li>
 </ul>
 </html>"));
 end AdsorptionEnthalpy;

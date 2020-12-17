@@ -33,17 +33,19 @@ equation
           lineColor={0,140,72},
           fillColor={0,140,72},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<p>
-This model represents a variable partial pressure boundary condition.
-The partial pressure in [Pa] is given as input signal <strong>p</strong>
-to the model. The effect is that an instance of this model acts as
-an infinite reservoir able to absorb or generate as much mass
-as required to keep the partial pressure at the specified value.
+    Documentation(info="<html><p>
+  This model represents a variable partial pressure boundary condition.
+  The partial pressure in [Pa] is given as input signal
+  <strong>p</strong> to the model. The effect is that an instance of
+  this model acts as an infinite reservoir able to absorb or generate
+  as much mass as required to keep the partial pressure at the
+  specified value.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November 20, 2019, by Martin Kremer:<br/>First Implementation.</li>
+  <li>November 20, 2019, by Martin Kremer:<br/>
+    First Implementation.
+  </li>
 </ul>
 </html>"),
        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{

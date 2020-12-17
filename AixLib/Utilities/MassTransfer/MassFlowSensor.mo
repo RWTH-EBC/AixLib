@@ -34,18 +34,20 @@ equation
           extent={{-150,125},{150,85}},
           textString="%name",
           lineColor={0,0,255})}),
-    Documentation(info="<html>
-<p>
-This model is capable of monitoring the mass flow rate flowing through
-this component. The sensed value of mass flow rate is the amount that
-passes through this sensor while keeping the partial pressure drop across the
-sensor zero.  This is an ideal model so it does not absorb any mass
-and it has no direct effect on the mass transfer response of a system it is included in.
-The output signal is positive, if the mass flows from port_a to port_b.
+    Documentation(info="<html><p>
+  This model is capable of monitoring the mass flow rate flowing
+  through this component. The sensed value of mass flow rate is the
+  amount that passes through this sensor while keeping the partial
+  pressure drop across the sensor zero. This is an ideal model so it
+  does not absorb any mass and it has no direct effect on the mass
+  transfer response of a system it is included in. The output signal is
+  positive, if the mass flows from port_a to port_b.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November 20, 2019, by Martin Kremer:<br/>First Implementation.</li>
+  <li>November 20, 2019, by Martin Kremer:<br/>
+    First Implementation.
+  </li>
 </ul>
 </html>"));
 end MassFlowSensor;
