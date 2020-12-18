@@ -4,8 +4,15 @@ model IdealPlantHybrErdeis
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   ClosedLoop.IdealPlantHybrPumpErdeis                               idealPlantHybrPumpErdeis(
     redeclare package Medium = Medium,
+    dpRes_nominal=11000,
     dpPump_nominal=6e4,                m_flow_nominal=1,
-    threshold=2500)
+    length=1700,
+    threshold=2500,
+    k=0.002,
+    Ti=20,
+    yMax=6e4,
+    yMin=0,
+    y_start=0)
     annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
   Demands.ClosedLoop.PumpControlledHeatPumpFixDeltaT
     pumpControlledHeatPumpFixDeltaT(
@@ -113,8 +120,8 @@ equation
     Diagram(coordinateSystem(extent={{-160,-100},{100,100}})),
     Icon(coordinateSystem(extent={{-160,-100},{100,100}})),
     experiment(
-      StopTime=172800,
-      Interval=60,
+      StopTime=31536000,
+      Interval=900,
       __Dymola_Algorithm="Cvode"),
     Documentation(revisions="<html>
 <ul>

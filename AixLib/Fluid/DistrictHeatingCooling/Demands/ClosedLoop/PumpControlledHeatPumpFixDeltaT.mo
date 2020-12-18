@@ -28,7 +28,7 @@ model PumpControlledHeatPumpFixDeltaT
   parameter Modelica.SIunits.TemperatureDifference dTDesign(
     displayUnit="K")
     "Design temperature difference for the heat pump on its district heating side";
-
+protected
   parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
     "Pressure difference at nominal flow rate"
     annotation(Dialog(group="Design parameter"));
@@ -67,6 +67,7 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
+protected
   Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
         Medium,
     allowFlowReversal=allowFlowReversal,
@@ -77,6 +78,7 @@ public
     allowFlowReversal=allowFlowReversal,
                 m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+protected
   Modelica.Blocks.Sources.Constant delT(k=dTDesign)
     "Temperature difference of substation" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -87,6 +89,7 @@ public
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-20,-38})));
+protected
   HeatPumps.Carnot_TCon              heaPum(
     redeclare package Medium1 = MediumBuilding,
     allowFlowReversal1=allowFlowReversal,
@@ -98,12 +101,13 @@ public
     TEva_nominal=277.65,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
-    use_eta_Carnot_nominal=false,
-    etaCarnot_nominal=0.3,
+    use_eta_Carnot_nominal=true,
+    etaCarnot_nominal=0.45,
     show_T=true,
     redeclare package Medium2 = Medium,
     QCon_flow_nominal=Q_flow_nominal)
     annotation (Placement(transformation(extent={{8,4},{-12,-16}})));
+protected
   Sources.MassFlowSource_T              sourceHeating(
     use_m_flow_in=true,
     redeclare package Medium = MediumBuilding,
@@ -134,9 +138,11 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-56,80})));
+public
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
+protected
   Modelica.Blocks.Continuous.LimPID pControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=k,
@@ -151,31 +157,56 @@ public
         origin={4,42})));
   Modelica.Blocks.Math.Add add(k1=-1)
     annotation (Placement(transformation(extent={{64,22},{44,42}})));
+protected
   Modelica.Blocks.Sources.Constant T_HeaPumpOff(k=-20)
     annotation (Placement(transformation(extent={{-38,-72},{-30,-64}})));
+protected
   Utilities.Logical.SmoothSwitch switch1 annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=-90,
         origin={-8,-66})));
+protected
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=Q_flow_input >
         500.0)
     annotation (Placement(transformation(extent={{-46,-96},{-26,-76}})));
+protected
   Utilities.Logical.SmoothSwitch switch2 annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=-90,
         origin={20,-90})));
+public
   Modelica.Blocks.Interfaces.RealOutput COP = if heaPum.P > 0.0
     then heaPum.COP
  else
      0.0
     annotation (Placement(transformation(extent={{98,84},{118,104}})));
+  Modelica.Blocks.Interfaces.RealOutput QCon_flow = if heaPum.QCon_flow > 0.0
+    then heaPum.QCon_flow
+ else
+     0.0
+    annotation (Placement(transformation(extent={{98,84},{118,104}})));
+  Modelica.Blocks.Interfaces.RealOutput QEva_flow = if heaPum.QEva_flow < 0.0
+    then heaPum.QEva_flow
+ else
+     0.0
+    annotation (Placement(transformation(extent={{98,84},{118,104}})));
+  Modelica.Blocks.Interfaces.RealOutput P_pum = pumpHeating.P
+    annotation (Placement(transformation(extent={{98,84},{118,104}})));
+  Modelica.Blocks.Interfaces.RealOutput T_supply = senT_supply.T
+    annotation (Placement(transformation(extent={{98,84},{118,104}})));
+  Modelica.Blocks.Interfaces.RealOutput T_return = senT_return.T
+    annotation (Placement(transformation(extent={{98,84},{118,104}})));
+  Modelica.Blocks.Interfaces.RealOutput P_heapum = heaPum.P
+    annotation (Placement(transformation(extent={{98,84},{118,104}})));
   parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-10
     "Temperature difference evaporator outlet-inlet";
   parameter Modelica.SIunits.TemperatureDifference dTCon_nominal=10
     "Temperature difference condenser outlet-inlet";
+protected
   Modelica.Blocks.Sources.RealExpression realExpression(y=0.5/(
         cp_default_building*dTBuilding))
     annotation (Placement(transformation(extent={{-50,-110},{-30,-90}})));
+protected
   Movers.FlowControlled_m_flow              pumpHeating(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,

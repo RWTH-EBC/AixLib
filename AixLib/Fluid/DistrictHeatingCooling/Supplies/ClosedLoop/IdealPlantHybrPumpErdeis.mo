@@ -88,28 +88,47 @@ model IdealPlantHybrPumpErdeis
     annotation (Placement(transformation(extent={{98,-70},{118,-50}})));
   Sensors.RelativePressure senRelPre1
     annotation (Placement(transformation(extent={{-24,14},{2,34}})));
-  Modelica.Blocks.Sources.Constant dpSet(k=dpPump_nominal)
-    "Set pressure difference for substation" annotation (Placement(
-        transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
-        origin={24,-44})));
   Modelica.Blocks.Logical.Switch switch1 annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-20,-30})));
+        origin={-20,-32})));
   Modelica.Blocks.Sources.Constant dpSet1(k=0)
     "Set pressure difference for substation" annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
-        rotation=90,
-        origin={-56,-60})));
-  Modelica.Blocks.Logical.LessThreshold    lessThreshold(   threshold=threshold)
-    annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=-90,
-        origin={-20,-64})));
+        rotation=0,
+        origin={-56,-54})));
   parameter Real threshold=0 "Comparison with respect to threshold";
+  Modelica.Blocks.Sources.BooleanPulse booleanPulse(
+    width=50,
+    period(displayUnit="d") = 31536000,
+    startTime(displayUnit="d") = 7776000)
+    annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
+  Modelica.Blocks.Continuous.LimPID pControl(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=k,
+    Ti=Ti,
+    Td=0.1,
+    yMax=yMax,
+    yMin=yMin,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    y_start=y_start)  "Pressure controller" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={16,-64})));
+  Modelica.Blocks.Sources.Constant dpSet2(k=0)
+    "Set pressure difference for substation" annotation (Placement(
+        transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=0,
+        origin={52,-84})));
+  parameter Real k=k "Gain of controller";
+  parameter Modelica.SIunits.Time Ti=Ti "Time constant of Integrator block";
+  parameter Real yMax=yMax "Upper limit of output";
+  parameter Real yMin=yMin "Lower limit of output";
+  parameter Real y_start=y_start "Initial value of output";
+  Modelica.Blocks.Math.Gain gain(k=-1)
+    annotation (Placement(transformation(extent={{36,-44},{28,-36}})));
 equation
   connect(TIn, heater.TSet) annotation (Line(points={{-106,42},{-44,42},{-44,88},
           {38,88}},color={0,0,127}));
@@ -119,19 +138,11 @@ equation
   connect(fan.port_b, res.port_a)
     annotation (Line(points={{-30,0},{-30,80},{-18,80}}, color={0,127,255},
       thickness=0.5));
-  connect(senRelPre.p_rel, dpOut) annotation (Line(points={{6,41},{6,-60},{108,-60}},
-                           color={0,0,127}));
   connect(fan.port_a, senT_return.port_b) annotation (Line(points={{-50,0},{-60,
           0}},                  color={0,127,255},
       thickness=0.5));
   connect(bou.ports[1], senT_return.port_a) annotation (Line(points={{-86,-40},{
           -88,-40},{-88,0},{-80,0}}, color={0,127,255}));
-  connect(dpSet1.y, switch1.u1)
-    annotation (Line(points={{-56,-49},{-56,-42},{-28,-42}}, color={0,0,127}));
-  connect(senRelPre.p_rel, lessThreshold.u)
-    annotation (Line(points={{6,41},{6,-76},{-20,-76}}, color={0,0,127}));
-  connect(lessThreshold.y, switch1.u2)
-    annotation (Line(points={{-20,-53},{-20,-42}}, color={255,0,255}));
   connect(heater.port_b, senT_supply.port_a) annotation (Line(
       points={{60,80},{80,80},{80,40},{40,40},{40,0}},
       color={0,127,255},
@@ -155,9 +166,21 @@ equation
       color={0,127,255},
       thickness=0.5));
   connect(switch1.y, fan.dp_in)
-    annotation (Line(points={{-20,-19},{-40,-19},{-40,-12}}, color={0,0,127}));
-  connect(dpSet.y, switch1.u3) annotation (Line(points={{13,-44},{0,-44},{0,-42},
-          {-12,-42}}, color={0,0,127}));
+    annotation (Line(points={{-20,-21},{-40,-21},{-40,-12}}, color={0,0,127}));
+  connect(senRelPre1.p_rel, dpOut) annotation (Line(points={{-11,15},{45.5,15},
+          {45.5,-60},{108,-60}}, color={0,0,127}));
+  connect(booleanPulse.y, switch1.u2) annotation (Line(points={{-79,-90},{-20,
+          -90},{-20,-44}}, color={255,0,255}));
+  connect(senRelPre1.p_rel, gain.u) annotation (Line(points={{-11,15},{-11,-7.5},
+          {36.8,-7.5},{36.8,-40}}, color={0,0,127}));
+  connect(dpSet1.y, switch1.u1)
+    annotation (Line(points={{-45,-54},{-28,-54},{-28,-44}}, color={0,0,127}));
+  connect(gain.y, pControl.u_m)
+    annotation (Line(points={{27.6,-40},{16,-40},{16,-52}}, color={0,0,127}));
+  connect(pControl.y, switch1.u3)
+    annotation (Line(points={{5,-64},{-12,-64},{-12,-44}}, color={0,0,127}));
+  connect(dpSet2.y, pControl.u_s) annotation (Line(points={{41,-84},{36,-84},{
+          36,-64},{28,-64}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-80,80},{80,0}},
