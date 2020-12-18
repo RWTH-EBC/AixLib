@@ -59,7 +59,7 @@ model HeatPumpSystemVolumeFlowControlled "Validation of HeatpumpSystem"
         rotation=0,
         origin={-70,-70})));
   Controller.HeatPumpSystemVolumeFlowControl heatPumpSystemVolumeFlowControl
-    annotation (Placement(transformation(extent={{-28,66},{-8,98}})));
+    annotation (Placement(transformation(extent={{-24,66},{-4,98}})));
   Modelica.Blocks.Sources.Constant const(k=30)
     annotation (Placement(transformation(extent={{-78,86},{-64,100}})));
   Modelica.Blocks.Sources.Constant const1(k=5)
@@ -72,14 +72,12 @@ model HeatPumpSystemVolumeFlowControlled "Validation of HeatpumpSystem"
     annotation (Placement(transformation(extent={{-132,44},{-118,58}})));
   Modelica.Blocks.Sources.Constant const5(k=15)
     annotation (Placement(transformation(extent={{122,-20},{136,-6}})));
-  Modelica.Blocks.Sources.Constant const6(k=0)
+  Modelica.Blocks.Sources.Constant const6(k=4)
     annotation (Placement(transformation(extent={{-58,48},{-44,62}})));
   Modelica.Blocks.Sources.Constant const7(k=20)
     annotation (Placement(transformation(extent={{74,50},{88,64}})));
-  Modelica.Blocks.Sources.Constant const8(k=1)
-    annotation (Placement(transformation(extent={{8,62},{22,76}})));
-  BaseClasses.HeatPumpSystemBus heatPumpSystemBus1
-    annotation (Placement(transformation(extent={{2,36},{22,56}})));
+  Modelica.Blocks.Sources.Constant const8(k=100)
+    annotation (Placement(transformation(extent={{-42,34},{-28,48}})));
 equation
   connect(boundary5.ports[1], heatpumpSystem.port_a2) annotation (Line(points={
           {-90,-20},{-80,-20},{-80,-9.77778}}, color={0,127,255}));
@@ -100,20 +98,21 @@ equation
     annotation (Line(points={{-61.2,-70},{-42,-70}}, color={0,0,127}));
   connect(heatPumpSystemVolumeFlowControl.heatPumpSystemBus1, heatpumpSystem.heatPumpSystemBus)
     annotation (Line(
-      points={{-8,82.1},{0,82.1},{0,28}},
+      points={{-4,82.1},{0,82.1},{0,28}},
       color={255,204,51},
       thickness=0.5));
   connect(const.y, heatPumpSystemVolumeFlowControl.pElHP) annotation (Line(
-        points={{-63.3,93},{-46.65,93},{-46.65,93.1},{-27.9,93.1}}, color={0,0,
+        points={{-63.3,93},{-46.65,93},{-46.65,97},{-24.8,97}},     color={0,0,
           127}));
   connect(const1.y, heatPumpSystemVolumeFlowControl.vSetHS) annotation (Line(
-        points={{-73.3,61},{-60.65,61},{-60.65,89},{-28,89}}, color={0,0,127}));
-  connect(heatPumpSystemVolumeFlowControl.vSetCS,
-    heatPumpSystemVolumeFlowControl.vSetHS) annotation (Line(points={{-28,78.2},
-          {-48,76},{-48,75},{-46.65,75},{-46.65,89},{-28,89}}, color={0,0,127}));
+        points={{-73.3,61},{-60.65,61},{-60.65,91},{-24.9,91}},
+                                                              color={0,0,127}));
+  connect(heatPumpSystemVolumeFlowControl.vSetCold,
+    heatPumpSystemVolumeFlowControl.vSetHS) annotation (Line(points={{-24.9,79},
+          {-48,79},{-48,75},{-46.65,75},{-46.65,91},{-24.9,91}}, color={0,0,127}));
   connect(heatPumpSystemVolumeFlowControl.vSetRecool,
-    heatPumpSystemVolumeFlowControl.vSetHS) annotation (Line(points={{-28,75.4},
-          {-38,75.4},{-38,78},{-58,78},{-58,75},{-46.65,75},{-46.65,89},{-28,89}},
+    heatPumpSystemVolumeFlowControl.vSetHS) annotation (Line(points={{-24.9,73},
+          {-38,73},{-38,78},{-58,78},{-58,75},{-46.65,75},{-46.65,91},{-24.9,91}},
         color={0,0,127}));
   connect(const2.y, toKelvin2.Celsius) annotation (Line(points={{-95.3,-69},{
           -87.65,-69},{-87.65,-70},{-79.6,-70}}, color={0,0,127}));
@@ -124,25 +123,12 @@ equation
   connect(const5.y, boundary3.m_flow_in) annotation (Line(points={{136.7,-13},{
           136.7,-1.5},{112,-1.5},{112,12}}, color={0,0,127}));
   connect(const6.y, heatPumpSystemVolumeFlowControl.vSetFreeCool) annotation (
-      Line(points={{-43.3,55},{-43.3,62.5},{-28,62.5},{-28,71}}, color={0,0,127}));
+      Line(points={{-43.3,55},{-43.3,62.5},{-24.9,62.5},{-24.9,67}},
+                                                                 color={0,0,127}));
   connect(const7.y, toKelvin1.Celsius) annotation (Line(points={{88.7,57},{
           107.35,57},{107.35,37.2},{126,37.2}}, color={0,0,127}));
-  connect(heatpumpSystem.heatPumpSystemBus, heatPumpSystemBus1) annotation (
-      Line(
-      points={{0,28},{4,28},{4,44},{12,44},{12,46}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(const8.y, heatPumpSystemBus1.busThrottleCS.valveSet) annotation (Line(
-        points={{22.7,69},{22.7,57.5},{12.05,57.5},{12.05,46.05}}, color={0,0,
-          127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
+  connect(const8.y, heatPumpSystemVolumeFlowControl.vSetCS) annotation (Line(
+        points={{-27.3,41},{-27.3,66},{-24.8,66},{-24.8,85}}, color={0,0,127}));
   annotation (experiment(StopTime=23400), __Dymola_Commands(file(
           ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpSystemValidation.mos"
