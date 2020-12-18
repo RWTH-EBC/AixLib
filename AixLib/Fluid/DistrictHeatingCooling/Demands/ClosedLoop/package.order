@@ -1,8 +1,9 @@
+DHCSubstationHeatPumpDirectCooling
+DHCSubstationHeatPumpChiller
 SubstationCooling
 SubstationHeating
 SubstationHeatingCoolingFixDeltaT
 SubstationHeatingCoolingVarDeltaT
-SubstationHeatingDirectCooling
 SubstationDirectCooling
 SubstationDirectHeatingDirectCooling
 SubstationDirectHeatingCoolingDHW
@@ -24,4 +25,3 @@ PumpControlledwithHP_V4_jonas_new_control
 PumpControlledwithHP_v4_ze_jonas_new_cooling_control
 PumpControlledwithHP_v4_ze_jonas_new_cooling_control_V2
 BaseClasses
-

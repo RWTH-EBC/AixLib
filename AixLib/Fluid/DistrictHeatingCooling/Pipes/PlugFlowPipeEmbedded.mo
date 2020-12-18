@@ -2,8 +2,15 @@
 model PlugFlowPipeEmbedded
   "Embedded pipe model using spatialDistribution for temperature delay"
 
-  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true,
-  allowFlowReversal=true);
+  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics", group="Equations"));
+
+  parameter Boolean use_zeta=false
+    "= true HydraulicResistance is implemented, zeta value has to be given next"
+    annotation(Dialog(group="Additional pressurelosses"));
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -72,7 +79,12 @@ model PlugFlowPipeEmbedded
     annotation (Dialog(group="Thermal resistance"));
 
   parameter Real fac=1
-    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
+    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal"
+    annotation (Dialog(group="Additional pressurelosses", enable=not use_zeta));
+
+  parameter Real sum_zetas=0
+    "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
+    annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
 
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
@@ -86,43 +98,48 @@ model PlugFlowPipeEmbedded
   //Wärmesenken und Wärme-/Kältespeichern" by Bernd Glück
 
   parameter Modelica.SIunits.Density rho = 1630 "Density of material/soil"
-  annotation(Dialog(tab="Ground"));
+  annotation(Dialog(tab="Soil"));
 
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1046
     "Specific heat capacity of material/soil"
-    annotation(Dialog(tab="Ground"));
+    annotation(Dialog(tab="Soil"));
   parameter Modelica.SIunits.Length thickness_ground = 0.6 "thickness of soil layer for heat loss calulcation"
-  annotation(Dialog(tab="Ground"));
+  annotation(Dialog(tab="Soil"));
 
-  parameter Modelica.SIunits.ThermalConductivity lambda_ground = 1.5
+  parameter Modelica.SIunits.ThermalConductivity lambda = 1.5
     "Heat conductivity of material/soil"
-    annotation(Dialog(tab="Ground"));
+    annotation(Dialog(tab="Soil"));
 
   final parameter Modelica.SIunits.Length d_in = dh + 2 * thickness "Inner diameter of pipe"
-  annotation(Dialog(tab="Ground"));
+  annotation(Dialog(tab="Soil"));
   final parameter Integer nParallel = 1 "Number of identical parallel pipes"
-  annotation(Dialog(tab="Ground"));
+  annotation(Dialog(tab="Soil"));
   final parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature"
-  annotation(Dialog(tab="Ground"));
+  annotation(Dialog(tab="Soil"));
 
-  Modelica.SIunits.Velocity v_water;
+  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
 
-  AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
-  redeclare final package Medium = Medium,
-  allowFlowReversal = allowFlowReversal,
-  final dh = dh,
-  final v_nominal = v_nominal,
-  final ReC = ReC,
-  final roughness = roughness,
-  final length = length,
-  final m_flow_nominal = m_flow_nominal,
-  final dIns = dIns,
-  final kIns = kIns,
-  final cPip = cPip,
-  final rhoPip = rhoPip,
-  final thickness = thickness,
-  final R = R,
-    nPorts=nPorts)
+  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
+
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta plugFlowPipeZeta(
+    redeclare final package Medium = Medium,
+    final dh=dh,
+    final v_nominal=v_nominal,
+    final ReC=ReC,
+    final roughness=roughness,
+    final length=length,
+    final m_flow_nominal=m_flow_nominal,
+    final dIns=dIns,
+    final kIns=kIns,
+    final cPip=cPip,
+    final rhoPip=rhoPip,
+    final thickness=thickness,
+    final R=R,
+    final fac=fac,
+    final sum_zetas=sum_zetas,
+    nPorts=nPorts,
+    final use_zeta=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
@@ -130,34 +147,35 @@ model PlugFlowPipeEmbedded
     annotation (Placement(transformation(extent={{-10,94},{10,114}}),
         iconTransformation(extent={{-10,94},{10,114}})));
 
-  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer(
-  final rho = rho,
-  final c = c,
-  final d_in = dh + 2 * thickness,
-  final d_out = d_in + thickness_ground / 3,
-  final length = length,
-  final lambda = lambda_ground,
-    T0=283.15)
-    annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_1(
+    final energyDynamics=energyDynamics,
+    final rho=rho,
+    final c=c,
+    final d_in=dh + 2*thickness,
+    final d_out=d_in + thickness_ground/3,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) annotation (Placement(transformation(extent={{-10,20},{10,40}})));
 
-  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer1(
-  final rho = rho,
-  final c = c,
-  final d_in = dh + 2 * thickness + thickness_ground/3,
-  final d_out = d_in + 2 * thickness_ground / 3,
-  final length = length,
-  final lambda = lambda_ground,
-    T0=283.15)
-    annotation (Placement(transformation(extent={{-10,46},{10,66}})));
-  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer2(
-  final rho = rho,
-  final c = c,
-  final d_in = dh + 2 * thickness + 2 * thickness_ground/3,
-  final d_out = d_in + thickness_ground,
-  final length = length,
-  final lambda = lambda_ground,
-    T0=283.15)
-    annotation (Placement(transformation(extent={{-10,72},{10,92}})));
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_2(
+    final energyDynamics=energyDynamics,
+    final rho=rho,
+    final c=c,
+    final d_in=dh + 2*thickness + thickness_ground/3,
+    final d_out=d_in + 2*thickness_ground/3,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) annotation (Placement(transformation(extent={{-10,46},{10,66}})));
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_3(
+    final energyDynamics=energyDynamics,
+    final rho=rho,
+    final c=c,
+    final d_in=dh + 2*thickness + 2*thickness_ground/3,
+    final d_out=d_in + thickness_ground,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) annotation (Placement(transformation(extent={{-10,72},{10,92}})));
+
 
 protected
   parameter Modelica.SIunits.HeatCapacity CPip=
@@ -188,20 +206,24 @@ protected
 
 equation
  //calculation of the flow velocity of water in the pipes
- v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+ v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
-  connect(plugFlowPipe.heatPort, cylindricHeatTransfer.port_a)
+ //calculation of heat losses and heat gains of pipe
+ der(Q_los) = min(0,plugFlowPipeZeta.heatPort.Q_flow);
+ der(Q_gai) = max(0,plugFlowPipeZeta.heatPort.Q_flow);
+
+  connect(plugFlowPipeZeta.heatPort, cylindricHeatTransfer_1.port_a)
     annotation (Line(points={{0,10},{0,30}}, color={191,0,0}));
-  connect(cylindricHeatTransfer.port_b, cylindricHeatTransfer1.port_a)
+  connect(cylindricHeatTransfer_1.port_b, cylindricHeatTransfer_2.port_a)
     annotation (Line(points={{0,38.8},{0,56}}, color={191,0,0}));
-  connect(cylindricHeatTransfer1.port_b, cylindricHeatTransfer2.port_a)
+  connect(cylindricHeatTransfer_2.port_b,cylindricHeatTransfer_3. port_a)
     annotation (Line(points={{0,64.8},{0,82}}, color={191,0,0}));
-  connect(cylindricHeatTransfer2.port_b, heatPort)
+  connect(cylindricHeatTransfer_3.port_b, heatPort)
     annotation (Line(points={{0,90.8},{0,104}}, color={191,0,0}));
-  connect(port_a, plugFlowPipe.port_a)
+  connect(port_a, plugFlowPipeZeta.port_a)
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));
-  connect(plugFlowPipe.ports_b, ports_b) annotation (Line(points={{10,0},{56,0},
-          {56,0},{100,0}}, color={0,127,255}));
+  connect(plugFlowPipeZeta.ports_b, ports_b) annotation (Line(points={{10,0},{56,
+          0},{56,0},{100,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,32},{100,-48}},
@@ -244,28 +266,49 @@ equation
           fillColor={162,29,33},
           fillPattern=FillPattern.Forward)}), Diagram(coordinateSystem(
           preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model represents an extension of <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a> by modelling the thermal capacity of the surrounding soil. For the description of the cylindric heat transfer within the surrounding soil <a href=\"modelica://AixLib.Utilities.HeatTransfer.CylindricHeatTransfer\">AixLib.Utilities.HeatTransfer.CylindricHeatTransfer</a> is used. The considered layer thickness of the surrounding soil is set as a parameter and divided into three capacities. For the heat transfer calculation within the material/soil, the density, the specific heat capacity, the thickness of the considered soil layer and the thermal conductivity of the material are used. </p>
-<p>The default values for the soil are for sandy soil with clay content and based on: &quot;Simulationsmodell Erdw&auml;rmekollektor zur w&auml;rmetechnischen Beurteilung von W&auml;rmequellen, W&auml;rmesenken und W&auml;rme-/K&auml;ltespeicher&quot; by Berd Gl&uuml;ck </p>
-<h4>References</h4>
-<p>
-Full details on the model implementation and experimental validation can be found
-in:
+    Documentation(info="<html><p>
+  This model represents an extension of <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipe\">AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipe</a>
+  by modelling the thermal capacity of the surrounding soil. For the
+  description of the cylindric heat transfer within the surrounding
+  soil <a href=
+  \"modelica://AixLib.Utilities.HeatTransfer.CylindricHeatTransfer\">AixLib.Utilities.HeatTransfer.CylindricHeatTransfer</a>
+  is used. The considered layer thickness of the surrounding soil is
+  set as a parameter and divided into three capacities. For the heat
+  transfer calculation within the material/soil, the density, the
+  specific heat capacity, the thickness of the considered soil layer
+  and the thermal conductivity of the material are used.
 </p>
 <p>
-van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G., Sartor, K.,
-Basciotti, D., M&uuml;ller, D., Nytsch-Geusen, C., Wetter, M. and Helsen, L.
-(2017).<br/>
-Dynamic equation-based thermo-hydraulic pipe model for district heating and
-cooling systems.<br/>
-<i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
-<a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
-10.1016/j.enconman.2017.08.072</a>.</p>
-</html>", revisions="<html>
+  The default values for the soil are for sandy soil with clay content
+  and based on: \"Simulationsmodell Erdwärmekollektor zur
+  wärmetechnischen Beurteilung von Wärmequellen, Wärmesenken und
+  Wärme-/Kältespeicher\" by Berd Glück
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Full details on the model implementation and experimental validation
+  can be found in:
+</p>
+<p>
+  van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G.,
+  Sartor, K., Basciotti, D., Müller, D., Nytsch-Geusen, C., Wetter, M.
+  and Helsen, L. (2017).<br/>
+  Dynamic equation-based thermo-hydraulic pipe model for district
+  heating and cooling systems.<br/>
+  <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
+  <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
+  10.1016/j.enconman.2017.08.072</a>.
+</p>
 <ul>
-<li>July, 2018 by Tobias Blacha:<br/>
-First implementation.
-</li>
+  <li>November 21, 2019, by Nils Neuland:<br/>
+    Model is now using PlugFlowPipe model from DistrictHeatingCooling
+  </li>
+  <li>July, 2018 by Tobias Blacha:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end PlugFlowPipeEmbedded;

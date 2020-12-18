@@ -1,10 +1,14 @@
-within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCPipe "Generic pipe model for DHC applications"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
   parameter Boolean use_zeta=false
     "= true HydraulicResistance is implemented, zeta value has to be given next"
     annotation(Dialog(group="Additional pressurelosses"));
+
+  parameter Boolean use_soil=false
+    "= true 3 cylindric heat transfers are implemented, representing the soil around the pipe, otherwise direct heat throughzeta value has to be given next"
+    annotation(Dialog(group="Soil"));
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -87,14 +91,45 @@ model DHCPipe "Generic pipe model for DHC applications"
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
-  Modelica.SIunits.Velocity v_water;
+  //Ground/Soil: values for sandy soil with clay content based on "SIMULATIONSMODELL
+  //"ERDWÄRMEKOLLEKTOR" zur wärmetechnischen Beurteilung von Wärmequellen,
+  //Wärmesenken und Wärme-/Kältespeichern" by Bernd Glück
+
+  parameter Modelica.SIunits.Density rho = 1630 "Density of material/soil"
+  annotation(Dialog(tab="Soil", enable=use_soil));
+
+  parameter Modelica.SIunits.SpecificHeatCapacity c = 1046
+    "Specific heat capacity of material/soil"
+    annotation(Dialog(tab="Soil", enable=use_soil));
+  parameter Modelica.SIunits.Length thickness_ground = 0.6 "thickness of soil layer for heat loss calulcation"
+  annotation(Dialog(tab="Soil", enable=use_soil));
+
+  parameter Modelica.SIunits.ThermalConductivity lambda = 1.5
+    "Heat conductivity of material/soil"
+    annotation(Dialog(tab="Soil", enable=use_soil));
+
+  final parameter Modelica.SIunits.Length d_in = dh + 2 * thickness "Inner diameter of pipe"
+  annotation(Dialog(tab="Soil", enable=use_soil));
+  final parameter Integer nParallel = 1 "Number of identical parallel pipes"
+  annotation(Dialog(tab="Soil",enable=use_soil));
+
+  final parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature"
+  annotation(Dialog(tab="Soil"));
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics", group="Equations"));
+
+  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
+
+  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
-  replaceable
-  AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore core(
+  replaceable AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore pipCor(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
@@ -134,14 +169,12 @@ model DHCPipe "Generic pipe model for DHC applications"
     roughness=roughness,
     allowFlowReversal=allowFlowReversal,
     homotopyInitialization=homotopyInitialization,
-    linearized=linearized)       "Describing the pipe behavior"
-    annotation (
-    choices(
-      choice(redeclare AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore core
-             "Static core"),
-      choice(redeclare AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore core
-             "PlugFlow core")),
-             Placement(transformation(extent={{-10,-10},{10,10}})));
+    linearized=linearized) "Describing the pipe behavior" annotation (choices(
+        choice(redeclare
+          AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore
+          pipCor "Static core"), choice(redeclare
+          AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore pipCor
+          "PlugFlow core")), Placement(transformation(extent={{-10,-10},{10,10}})));
 
   // In the volume, below, we scale down V and use
   // mSenFac. Otherwise, for air, we would get very large volumes
@@ -159,6 +192,39 @@ model DHCPipe "Generic pipe model for DHC applications"
     final mSenFac = if rho_default > 500 then 1 else 10)
     "Control volume connected to ports_b. Represents equivalent pipe wall thermal capacity."
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
+
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra1(
+    final energyDynamics=energyDynamics,
+    final rho=rho,
+    final c=c,
+    final d_in=dh + 2*thickness,
+    final d_out=d_in + thickness_ground/3,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) if use_soil
+    annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra2(
+    final energyDynamics=energyDynamics,
+    final rho=rho,
+    final c=c,
+    final d_in=dh + 2*thickness + thickness_ground/3,
+    final d_out=d_in + 2*thickness_ground/3,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) if use_soil
+    annotation (Placement(transformation(extent={{-10,46},{10,66}})));
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra3(
+    final energyDynamics=energyDynamics,
+    final rho=rho,
+    final c=c,
+    final d_in=dh + 2*thickness + 2*thickness_ground/3,
+    final d_out=d_in + thickness_ground,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) if use_soil
+    annotation (Placement(transformation(extent={{-10,72},{10,92}})));
+
 
 protected
   parameter Modelica.SIunits.HeatCapacity CPip=
@@ -188,7 +254,7 @@ protected
     annotation (Dialog(group="Advanced"));
 
 public
-  FixedResistances.HydraulicResistance hydraulicResistance(
+  FixedResistances.HydraulicResistance hydRes(
     diameter=dh,
     m_flow_nominal=m_flow_nominal,
     redeclare package Medium = Medium,
@@ -199,9 +265,22 @@ public
     linearized=linearized,
     m_flow_start=m_flow_start) if use_zeta
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1) if
+       not use_soil "Thermal pass through if there is no soil activated"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={-16,54})));
+  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium) if
+                                                    not use_zeta
+    annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
 equation
   //calculation of the flow velocity of water in the pipes
-  v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+  v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+
+  //calculation of heat losses and heat gains of pipe
+  der(Q_los) =min(0, pipCor.heatPort.Q_flow);
+  der(Q_gai) =max(0, pipCor.heatPort.Q_flow);
 
   for i in 1:nPorts loop
     connect(vol.ports[i + 1], ports_b[i])
@@ -209,23 +288,46 @@ equation
         color={0,127,255}));
   end for;
 
-  connect(core.port_b, vol.ports[1])
+  connect(pipCor.port_b, vol.ports[1])
     annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
-  if use_zeta then
-  connect(hydraulicResistance.port_b, core.port_a)
-    annotation (Line(points={{-40,20},{-20,20},{-20,0},{-10,0}},
-                                               color={0,127,255}, pattern=LinePattern.Dash));
-  connect(hydraulicResistance.port_a, port_a)
-    annotation (Line(points={{-60,20},{-80,20},{-80,0},{-100,0}},
-                                                color={0,127,255}, pattern=LinePattern.Dash));
-  else
-  connect(port_a, core.port_a)
-    annotation (Line(points={{-100,0},{-80,0},{-80,-20},{-20,-20},{-20,0},{-10,0}},
-                                                color={0,127,255}));
-  end if;
-  connect(core.heatPort, heatPort)
-    annotation (Line(points={{0,10},{0,100}}, color={191,0,0}));
-    annotation (Dialog(group="Additional pressurelosses"),
+  connect(pipCor.heatPort, cylHeaTra1.port_a)
+    annotation (Line(points={{0,10},{0,30}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(cylHeaTra1.port_b, cylHeaTra2.port_a)
+    annotation (Line(points={{0,38.8},{0,56}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(cylHeaTra2.port_b, cylHeaTra3.port_a)
+    annotation (Line(points={{0,64.8},{0,82}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(cylHeaTra3.port_b, heatPort)
+    annotation (Line(points={{0,90.8},{0,90.8},{0,100}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(pipCor.heatPort, thePasThr.port_a[1]) annotation (Line(points={{0,10},
+          {0,20},{-16,20},{-16,44}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(thePasThr.port_b, heatPort) annotation (Line(points={{-16,64},{-16,94},
+          {0,94},{0,100}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(port_a, hydRes.port_a) annotation (Line(
+      points={{-100,0},{-80,0},{-80,20},{-60,20}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  connect(hydRes.port_b, pipCor.port_a) annotation (Line(
+      points={{-40,20},{-20,20},{-20,0},{-10,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  connect(port_a, port_a)
+    annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
+  connect(port_a, pasThrMed.port_a) annotation (Line(
+      points={{-100,0},{-80,0},{-80,-20},{-60,-20}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  connect(pasThrMed.port_b, pipCor.port_a) annotation (Line(
+      points={{-40,-20},{-20,-20},{-20,0},{-10,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+    annotation (
+    Dialog(group="Additional pressurelosses"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
@@ -250,6 +352,23 @@ equation
           lineColor={175,175,175},
           fillColor={255,255,255},
           fillPattern=FillPattern.Backward),
+        Rectangle(
+          extent={{-30,30},{28,-30}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={215,202,187}),
+        Rectangle(
+          extent={{-100,80},{100,50}},
+          lineColor={28,108,200},
+          fillColor={162,29,33},
+          fillPattern=FillPattern.Forward,
+          visible=use_soil),
+        Rectangle(
+          extent={{-100,-50},{100,-80}},
+          lineColor={28,108,200},
+          fillColor={162,29,33},
+          fillPattern=FillPattern.Forward,
+          visible=use_soil),
         Polygon(
           points={{0,90},{40,62},{20,62},{20,38},{-20,38},{-20,62},{-40,62},{0,
               90}},
@@ -257,33 +376,22 @@ equation
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-30,30},{28,-30}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={215,202,187}),
+          extent={{-82,40},{78,-40}},
+          lineColor={0,0,255},
+          fillColor={255,255,0},
+          fillPattern=FillPattern.Solid,
+          radius=45,
+          visible=use_zeta),
         Text(
-          extent={{-100,-72},{100,-88}},
-          lineColor={0,0,0},
-          textString="L = %length
-d = %dh")}),
+          extent={{74,42},{-74,-40}},
+          lineColor={0,0,255},
+          fillColor={255,255,0},
+          fillPattern=FillPattern.Solid,
+          textString="Zeta=%sum_zetas",
+          visible=use_zeta)}),
     Documentation(revisions="<html><ul>
-  <li>September 25, 2019, by Nils Neuland:<br/>
-    Revised variable names and documentation to follow guidelines.
-    Corrected malformed hyperlinks.
-  </li>
-  <li>October 23, 2017, by Michael Wetter:<br/>
-    Revised variable names and documentation to follow guidelines.
-    Corrected malformed hyperlinks.
-  </li>
-  <li>July 4, 2016 by Bram van der Heijde:<br/>
-    Introduce pipVol.
-  </li>
-  <li>October 10, 2015 by Marcus Fuchs:<br/>
-    Copy Icon from KUL implementation and rename model. Replace
-    resistance and temperature delay by an adiabatic pipe.
-  </li>
-  <li>September, 2015 by Marcus Fuchs:<br/>
-    First implementation.
+    <li>November 12, 2020, by Michael Mans:<br/>
+    First implementation
   </li>
 </ul>
 </html>", info="<html>

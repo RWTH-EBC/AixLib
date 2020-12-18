@@ -106,6 +106,9 @@ model PlugFlowPipeEmbeddedDis
 
   Modelica.SIunits.Velocity v_water;
 
+  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
+
   AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
   redeclare final package Medium = Medium,
   final dh = dh,
@@ -173,6 +176,10 @@ protected
 equation
   //connections of soil layers
   connect(plugFlowPipe.heatPort, cylindricHeatTransfer[1].port_a);
+
+   //calculation of heat losses and heat gains of pipe
+  der(Q_los) = min(0,plugFlowPipe.heatPort.Q_flow);
+  der(Q_gai) = max(0,plugFlowPipe.heatPort.Q_flow);
 
  // cylindricHeatTransfer[1].d_in = d_in;
  // cylindricHeatTransfer[1].d_out =  d_in + (d_out - d_in)/dis;

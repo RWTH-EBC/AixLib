@@ -1,6 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.Examples;
 model ControllerTFlexibilityElectricHeating
-   extends Modelica.Icons.ExamplesPackage;
+   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   AixLib.Fluid.DistrictHeatingCooling.Supplies.Controllers.Temperature.ControllerTFlexibilityElectricHeating
     controllerTFlexibilityElectricHeating(T_maxNetwork=373.15)
