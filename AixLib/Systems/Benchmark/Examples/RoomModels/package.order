@@ -2,3 +2,4 @@ SimpleRoom
 SimpleRoomWithControl
 SimpleRoomWithSetPointControl
 SimpleRoomVolFlowCtrl
+SimpleRoomVolFlowCtrl_no_Weather

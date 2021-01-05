@@ -27,13 +27,6 @@ model HeatPumpSystemVolumeFlowControl
     Td=0,
     rpm_pump=rpmH)
           annotation (Placement(transformation(extent={{2,86},{22,106}})));
-  HydraulicModules.Controller.CtrThrottleVflowCtr ctrThrottleVflowCtr1(
-    useExternalVset=true,
-    k=100,
-    Ti=30,
-    Td=0,
-    rpm_pump=rpmC)
-    annotation (Placement(transformation(extent={{2,-34},{22,-14}})));
   Modelica.Blocks.Logical.Or or1
     annotation (Placement(transformation(extent={{70,-122},{84,-108}})));
   HydraulicModules.Controller.CtrThrottleVflowCtr ctrThrottleVflowCtr2(
@@ -100,6 +93,13 @@ model HeatPumpSystemVolumeFlowControl
   Modelica.Blocks.Math.Gain toCubicMetersPerSec5(k=0.001)
     "Converts Inputs from l/s to m³/s"
     annotation (Placement(transformation(extent={{-46,84},{-34,96}})));
+  HydraulicModules.Controller.CtrPumpVflowCtr ctrPumpVflowCtr(
+    useExternalVset=true,
+    k=150000,
+    Ti=30,
+    Td=0,
+    rpm_pump=rpmC)
+    annotation (Placement(transformation(extent={{4,-34},{24,-14}})));
 equation
   connect(rpmPumpHot.y, heatPumpSystemBus1.busPumpHot.pumpBus.rpmSet)
     annotation (Line(points={{42.7,147},{164.05,147},{164.05,50.05}},
@@ -180,8 +180,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleVflowCtr1.Vset, toCubicMetersPerSec1.y)
-    annotation (Line(points={{0,-30},{-33.4,-30}},   color={0,0,127}));
   connect(toCubicMetersPerSec1.u, vSetCold)
     annotation (Line(points={{-47.2,-30},{-106,-30}}, color={0,0,127}));
   connect(ctrThrottleVflowCtr2.Vset, toCubicMetersPerSec2.y)
@@ -228,33 +226,16 @@ equation
   connect(greaterThreshold4.u, vSetRecool) annotation (Line(points={{61,117},{
           61,114},{-88,114},{-88,-90},{-106,-90}},
                                          color={0,0,127}));
-  connect(ctrThrottleVflowCtr1.Vact, heatPumpSystemBus1.busPumpCold.VFlowInMea)
-    annotation (Line(points={{0,-18},{-10,-18},{-10,-8},{164,-8},{164,50.05},{
-          164.05,50.05}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleVflowCtr1.hydraulicBus, heatPumpSystemBus1.busPumpCold)
-    annotation (Line(
-      points={{23.4,-23.8},{163.7,-23.8},{163.7,50.05},{164.05,50.05}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(ctrThrottleVflowCtr4.hydraulicBus, heatPumpSystemBus1.busThrottleCS)
     annotation (Line(
       points={{23.4,36.2},{94,36.2},{94,36},{164,36},{164,50.05},{164.05,50.05}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+
   connect(ctrThrottleVflowCtr4.Vact, heatPumpSystemBus1.busThrottleCS.VFlowInMea)
     annotation (Line(points={{0,42},{-8,42},{-8,50},{162,50},{162,50.05},{
           164.05,50.05}}, color={0,0,127}), Text(
@@ -263,8 +244,8 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(greaterThreshold3.u, vSetFreeCool) annotation (Line(points={{36.6,
-          -123},{-26,-123},{-26,-122},{-68,-122},{-68,-150},{-106,-150}}, color
-        ={0,0,127}));
+          -123},{-26,-123},{-26,-122},{-68,-122},{-68,-150},{-106,-150}}, color=
+         {0,0,127}));
   connect(vSetRecool, greaterThreshold2.u) annotation (Line(points={{-106,-90},
           {-62,-90},{-62,-103},{36.6,-103}}, color={0,0,127}));
   connect(ctrThrottleVflowCtr4.Vset, toCubicMetersPerSec4.y)
@@ -277,6 +258,24 @@ equation
     annotation (Line(points={{-33.4,90},{0,90}}, color={0,0,127}));
   connect(greaterThreshold5.u, vSetHS) annotation (Line(points={{61,131},{-74,
           131},{-74,90},{-106,90}}, color={0,0,127}));
+  connect(ctrPumpVflowCtr.Vset, toCubicMetersPerSec1.y)
+    annotation (Line(points={{2,-30},{-33.4,-30}}, color={0,0,127}));
+  connect(ctrPumpVflowCtr.hydraulicBus, heatPumpSystemBus1.busPumpCold)
+    annotation (Line(
+      points={{25.4,-23.8},{163.7,-23.8},{163.7,50.05},{164.05,50.05}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrPumpVflowCtr.Vact, heatPumpSystemBus1.busPumpCold.VFlowInMea)
+    annotation (Line(points={{2,-18},{-8,-18},{-8,0},{164,0},{164,50.05},{
+          164.05,50.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -160},{100,160}}),                                  graphics={
           Rectangle(

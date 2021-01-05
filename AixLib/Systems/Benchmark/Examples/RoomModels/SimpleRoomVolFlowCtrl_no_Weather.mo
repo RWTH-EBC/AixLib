@@ -1,5 +1,5 @@
 within AixLib.Systems.Benchmark.Examples.RoomModels;
-model SimpleRoomVolFlowCtrl
+model SimpleRoomVolFlowCtrl_no_Weather
     extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
@@ -299,4 +299,4 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=36000, __Dymola_Algorithm="Dassl"));
-end SimpleRoomVolFlowCtrl;
+end SimpleRoomVolFlowCtrl_no_Weather;

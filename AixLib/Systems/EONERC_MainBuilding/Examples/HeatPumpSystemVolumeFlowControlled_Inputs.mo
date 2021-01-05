@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples;
-model HeatPumpSystemVolumeFlowControlled "Validation of HeatpumpSystem"
+model HeatPumpSystemVolumeFlowControlled_Inputs "Validation of HeatpumpSystem"
   extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
@@ -45,7 +45,7 @@ model HeatPumpSystemVolumeFlowControlled "Validation of HeatpumpSystem"
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=270,
-        origin={-126,-14})));
+        origin={-128,-28})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1 annotation (
       Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -60,31 +60,44 @@ model HeatPumpSystemVolumeFlowControlled "Validation of HeatpumpSystem"
         origin={-70,-70})));
   Controller.HeatPumpSystemVolumeFlowControl heatPumpSystemVolumeFlowControl
     annotation (Placement(transformation(extent={{-24,66},{-4,98}})));
-  Modelica.Blocks.Sources.Constant const(k=30)
-    annotation (Placement(transformation(extent={{-92,88},{-78,102}})));
-  Modelica.Blocks.Sources.Constant const1(k=5)
-    annotation (Placement(transformation(extent={{-88,54},{-74,68}})));
-  Modelica.Blocks.Sources.Constant const2(k=20)
-    annotation (Placement(transformation(extent={{-110,-76},{-96,-62}})));
-  Modelica.Blocks.Sources.Constant const3(k=20)
-    annotation (Placement(transformation(extent={{-146,10},{-132,24}})));
-  Modelica.Blocks.Sources.Constant const4(k=5)
-    annotation (Placement(transformation(extent={{-132,44},{-118,58}})));
-  Modelica.Blocks.Sources.Constant const5(k=15)
-    annotation (Placement(transformation(extent={{122,-20},{136,-6}})));
-  Modelica.Blocks.Sources.Constant const6(k=0)
-    annotation (Placement(transformation(extent={{-58,48},{-44,62}})));
-  Modelica.Blocks.Sources.Constant const7(k=20)
-    annotation (Placement(transformation(extent={{74,50},{88,64}})));
-  Modelica.Blocks.Sources.Constant const8(k=10)
-    annotation (Placement(transformation(extent={{-106,66},{-92,80}})));
+  Modelica.Blocks.Sources.Constant const8(k=100)
+    annotation (Placement(transformation(extent={{-54,80},{-46,88}})));
+  Modelica.Blocks.Interfaces.RealInput pElHP "Connector of Real input signal 1"
+    annotation (Placement(transformation(extent={{-110,96},{-92,114}}),
+        iconTransformation(extent={{-110,96},{-92,114}})));
+  Modelica.Blocks.Interfaces.RealInput vSetHS
+    "Connector of second Real input signal" annotation (Placement(
+        transformation(extent={{-110,80},{-90,100}}), iconTransformation(extent
+          ={{-110,80},{-90,100}})));
+  Modelica.Blocks.Interfaces.RealInput vSetCold
+    "Connector of second Real input signal" annotation (Placement(
+        transformation(extent={{-110,52},{-92,70}}), iconTransformation(extent=
+            {{-110,52},{-92,70}})));
+  Modelica.Blocks.Interfaces.RealInput vSetRecool
+    "Connector of second Real input signal" annotation (Placement(
+        transformation(extent={{-110,68},{-92,86}}), iconTransformation(extent=
+            {{-110,68},{-92,86}})));
+  Modelica.Blocks.Interfaces.RealInput vSetFreeCool
+    "Connector of second Real input signal" annotation (Placement(
+        transformation(extent={{-108,40},{-92,56}}), iconTransformation(extent=
+            {{-108,40},{-92,56}})));
+  Modelica.Blocks.Interfaces.RealInput tHotIn
+    annotation (Placement(transformation(extent={{-180,-34},{-140,6}})));
+  Modelica.Blocks.Interfaces.RealInput mHotIn "Prescribed mass flow rate"
+    annotation (Placement(transformation(extent={{-180,-4},{-140,36}})));
+  Modelica.Blocks.Interfaces.RealInput tColdIn
+    annotation (Placement(transformation(extent={{164,40},{124,80}})));
+  Modelica.Blocks.Interfaces.RealInput mColdIn "Prescribed mass flow rate"
+    annotation (Placement(transformation(extent={{176,-14},{136,26}})));
+  Modelica.Blocks.Interfaces.RealInput tAmb
+    annotation (Placement(transformation(extent={{-180,-90},{-140,-50}})));
 equation
   connect(boundary5.ports[1], heatpumpSystem.port_a2) annotation (Line(points={
           {-90,-20},{-80,-20},{-80,-9.77778}}, color={0,127,255}));
   connect(boundary.ports[1], heatpumpSystem.port_b2) annotation (Line(points={{
           -90,20},{-80,20},{-80,5.33333}}, color={0,127,255}));
   connect(toKelvin.Kelvin, boundary5.T_in)
-    annotation (Line(points={{-126,-20.6},{-116,-20.6},{-116,-16},{-112,-16}},
+    annotation (Line(points={{-128,-34.6},{-116,-34.6},{-116,-16},{-112,-16}},
                                                        color={0,0,127}));
   connect(toKelvin1.Kelvin, boundary3.T_in) annotation (Line(points={{126,23.4},
           {126,16},{112,16}},          color={0,0,127}));
@@ -101,35 +114,30 @@ equation
       points={{-4,82.1},{0,82.1},{0,28}},
       color={255,204,51},
       thickness=0.5));
-  connect(const.y, heatPumpSystemVolumeFlowControl.pElHP) annotation (Line(
-        points={{-77.3,95},{-46.65,95},{-46.65,97},{-24.8,97}},     color={0,0,
-          127}));
-  connect(const2.y, toKelvin2.Celsius) annotation (Line(points={{-95.3,-69},{
-          -87.65,-69},{-87.65,-70},{-79.6,-70}}, color={0,0,127}));
-  connect(const3.y, toKelvin.Celsius) annotation (Line(points={{-131.3,17},{
-          -131.3,6.5},{-126,6.5},{-126,-6.8}}, color={0,0,127}));
-  connect(const4.y, boundary5.m_flow_in) annotation (Line(points={{-117.3,51},{
-          -117.3,19.5},{-112,19.5},{-112,-12}}, color={0,0,127}));
-  connect(const5.y, boundary3.m_flow_in) annotation (Line(points={{136.7,-13},{
-          136.7,-1.5},{112,-1.5},{112,12}}, color={0,0,127}));
-  connect(const7.y, toKelvin1.Celsius) annotation (Line(points={{88.7,57},{
-          107.35,57},{107.35,37.2},{126,37.2}}, color={0,0,127}));
+  connect(heatPumpSystemVolumeFlowControl.pElHP, pElHP) annotation (Line(points
+        ={{-24.8,97},{-90,97},{-90,105},{-101,105}}, color={0,0,127}));
+  connect(heatPumpSystemVolumeFlowControl.vSetHS, vSetHS) annotation (Line(
+        points={{-24.9,91},{-86,91},{-86,90},{-100,90}}, color={0,0,127}));
+  connect(heatPumpSystemVolumeFlowControl.vSetCold, vSetCold) annotation (Line(
+        points={{-24.9,79},{-38.45,79},{-38.45,61},{-101,61}}, color={0,0,127}));
+  connect(heatPumpSystemVolumeFlowControl.vSetRecool, vSetRecool) annotation (
+      Line(points={{-24.9,73},{-62,73},{-62,77},{-101,77}}, color={0,0,127}));
+  connect(heatPumpSystemVolumeFlowControl.vSetFreeCool, vSetFreeCool)
+    annotation (Line(points={{-24.9,67},{-24.9,48},{-100,48}}, color={0,0,127}));
   connect(const8.y, heatPumpSystemVolumeFlowControl.vSetCS) annotation (Line(
-        points={{-91.3,73},{-58.65,73},{-58.65,85},{-24.8,85}}, color={0,0,127}));
-  connect(heatPumpSystemVolumeFlowControl.vSetHS,
-    heatPumpSystemVolumeFlowControl.vSetCS) annotation (Line(points={{-24.9,91},
-          {-56,86},{-56,85},{-24.8,85}}, color={0,0,127}));
-  connect(heatPumpSystemVolumeFlowControl.vSetCold,
-    heatPumpSystemVolumeFlowControl.vSetCS) annotation (Line(points={{-24.9,79},
-          {-60,80},{-58.65,80},{-58.65,85},{-24.8,85}}, color={0,0,127}));
-  connect(const6.y, heatPumpSystemVolumeFlowControl.vSetRecool) annotation (
-      Line(points={{-43.3,55},{-34.65,55},{-34.65,73},{-24.9,73}}, color={0,0,
-          127}));
-  connect(heatPumpSystemVolumeFlowControl.vSetFreeCool,
-    heatPumpSystemVolumeFlowControl.vSetRecool) annotation (Line(points={{-24.9,
-          67},{-34,56},{-34.65,56},{-34.65,73},{-24.9,73}}, color={0,0,127}));
+        points={{-45.6,84},{-36,84},{-36,85},{-24.8,85}}, color={0,0,127}));
+  connect(toKelvin.Celsius, tHotIn) annotation (Line(points={{-128,-20.8},{-144,
+          -20.8},{-144,-14},{-160,-14}}, color={0,0,127}));
+  connect(boundary5.m_flow_in, mHotIn) annotation (Line(points={{-112,-12},{
+          -138,-12},{-138,18},{-160,18},{-160,16}}, color={0,0,127}));
+  connect(toKelvin1.Celsius, tColdIn)
+    annotation (Line(points={{126,37.2},{126,60},{144,60}}, color={0,0,127}));
+  connect(boundary3.m_flow_in, mColdIn) annotation (Line(points={{112,12},{128,
+          12},{128,8},{156,8},{156,6}}, color={0,0,127}));
+  connect(toKelvin2.Celsius, tAmb)
+    annotation (Line(points={{-79.6,-70},{-160,-70}}, color={0,0,127}));
   annotation (experiment(StopTime=23400), __Dymola_Commands(file(
           ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpSystemValidation.mos"
         "Simulate and plot"));
-end HeatPumpSystemVolumeFlowControlled;
+end HeatPumpSystemVolumeFlowControlled_Inputs;
