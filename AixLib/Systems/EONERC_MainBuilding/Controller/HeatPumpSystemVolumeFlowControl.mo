@@ -95,7 +95,7 @@ model HeatPumpSystemVolumeFlowControl
     annotation (Placement(transformation(extent={{-46,84},{-34,96}})));
   HydraulicModules.Controller.CtrPumpVflowCtr ctrPumpVflowCtr(
     useExternalVset=true,
-    k=150000,
+    k=300000,
     Ti=30,
     Td=0,
     rpm_pump=rpmC)
