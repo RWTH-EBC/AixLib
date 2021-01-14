@@ -3,3 +3,5 @@ SimpleRoomWithControl
 SimpleRoomWithSetPointControl
 SimpleRoomVolFlowCtrl
 SimpleRoomVolFlowCtrl_no_Weather
+SimpleRoomVolFlowCtrl_no_int_gains
+SimpleRoomVolFlowCtrl_no_ahu_cca
