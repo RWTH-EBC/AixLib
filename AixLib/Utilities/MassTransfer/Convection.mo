@@ -56,51 +56,19 @@ equation
         Text(
           extent={{22,124},{92,98}},
           textString="Gc")}),
-    Documentation(info="<html><p>
-  This is a model of linear mass convection, e.g., the mass transfer
-  between a plate and the surrounding air. It may be used for
-  complicated solid geometries and fluid flow over the solid by
-  determining the convective mass transfer coefficient Gc by
-  measurements. The basic constitutive equation for convection is
-</p>
-<p>
-  <span style=\"font-family: Courier New;\">m_flow = Gc*(solid.p -
-  fluid.p);</span>
-</p>
-<p>
-  <span style=\"font-family: Courier New;\">m_flow: Mass flow rate from
-  connector 'solid' (e.g., a plate)</span>
-</p>
-<p>
-  <span style=\"font-family: Courier New;\">to connector 'fluid' (e.g.,
-  the surrounding air)</span>
-</p>
-<p>
-  Gc = G.signal[1] is an input signal to the component, since Gc is
-  nearly never constant in practice. For example, Gc may be a function
-  of the speed of a cooling fan. For simple situations, Gc may be
-  <i>calculated</i> according to
-</p>
-<p>
-  <span style=\"font-family: Courier New;\">Gc = A*h</span>
-</p>
-<p>
-  <span style=\"font-family: Courier New;\">A: Convection area (e.g.,
-  perimeter*length of a box)</span>
-</p>
-<p>
-  <span style=\"font-family: Courier New;\">h: mass transfer
-  coefficient</span>
-</p>
-<p>
-  where the mass transfer coefficient h is calculated from properties
-  of the fluid flowing over the solid.
-</p>
+    Documentation(info="<html>
+<p>This is a model of linear mass convection, e.g., the mass transfer between a plate and the surrounding air. It may be used for complicated solid geometries and fluid flow over the solid by determining the convective mass transfer coefficient Gc by measurements. The basic constitutive equation for convection is </p>
+<p><span style=\"font-family: Courier New;\">   m_flow = Gc*(solid.p - fluid.p);</span></p>
+<p><span style=\"font-family: Courier New;\">   m_flow: Mass flow rate from connector &apos;solid&apos; (e.g., a plate)</span></p>
+<p><span style=\"font-family: Courier New;\">      to connector &apos;fluid&apos; (e.g., the surrounding air)</span></p>
+<p>Gc = G.signal[1] is an input signal to the component, since Gc is nearly never constant in practice. For example, Gc may be a function of the speed of a cooling fan. For simple situations, Gc may be <i>calculated</i> according to </p>
+<p><span style=\"font-family: Courier New;\">   Gc = A*h</span></p>
+<p><span style=\"font-family: Courier New;\">   A: Convection area (e.g., perimeter*length of a box)</span></p>
+<p><span style=\"font-family: Courier New;\">   h: mass transfer coefficient</span></p>
+<p>where the mass transfer coefficient h is calculated from properties of the fluid flowing over the solid.</p>
 </html>", revisions="<html>
 <ul>
-  <li>November 20, 2019, by Martin Kremer:<br/>
-    First Implementation.
-  </li>
+<li>November 20, 2019, by Martin Kremer:<br/>First Implementation.</li>
 </ul>
 </html>"),
        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},

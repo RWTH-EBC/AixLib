@@ -271,26 +271,13 @@ equation
         Line(
           points={{100,90},{100,100}},
           color={0,0,0},
-          pattern=LinePattern.Dash)}), Documentation(info="<html><p>
-  This model provides the definition of the air duct in a parallel
-  membrane enthalpy exchanger. It is based on the <a href=
-  \"AixLib.Fluid.Interfaces.PartialTwoPortInterface\">PartialTwoPortInterface</a>
-  model.
-</p>
-<p>
-  This model defines the geometry of the air duct, as well as the
-  convective heat and mass transfer processes in the air duct. The
-  model can be discretized in flow direction using finite volumes.
-</p>
+          pattern=LinePattern.Dash)}), Documentation(info="<html>
+<p>This model provides the definition of the air duct in a parallel membrane enthalpy exchanger. It is based on the <a href=\"AixLib.Fluid.Interfaces.PartialTwoPortInterface\">PartialTwoPortInterface</a> model.</p>
+<p>This model defines the geometry of the air duct, as well as the convective heat and mass transfer processes in the air duct. The model can be discretized in flow direction using finite volumes.</p>
 </html>", revisions="<html>
 <ul>
-  <li>November 23, 2018, by Martin Kremer:<br/>
-    Changing adsorption enthalpy dhAds from parameter to input for
-    usage of adsorption enthalpy model.
-  </li>
-  <li>August 21, 2018, by Martin Kremer:<br/>
-    First Implementation
-  </li>
+<li>November 23, 2018, by Martin Kremer:<br/>Changing adsorption enthalpy dhAds from parameter to input for usage of adsorption enthalpy model.</li>
+<li>August 21, 2018, by Martin Kremer:<br/>First Implementation</li>
 </ul>
 </html>"));
 end AirDuct;

@@ -295,21 +295,12 @@ equation
     __Dymola_Comands(file=
       "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Validation/DynamicValidation.mos"
         "Simulate and plot"),
-    Documentation(info="<html><p>
-  This test case shows the comparison between measurement results for a
-  load change and the simulation results.
-</p>
-<p>
-  Measurements were carried out on a membrane-based enthalpy exchanger
-  used in domestic ventilation units by Zehnder Systems at the
-  Institute for Energy Efficient Building and Indoor Climate, RWTH
-  Aachen University.
-</p>
+    Documentation(info="<html>
+<p>This test case shows the comparison between measurement results for a load change and the simulation results.</p>
+<p>Measurements were carried out on a membrane-based enthalpy exchanger used in domestic ventilation units by Zehnder Systems at the Institute for Energy Efficient Building and Indoor Climate, RWTH Aachen University.</p>
 </html>", revisions="<html>
 <ul>
-  <li>October 13, 2020, by Martin Kremer:<br/>
-    First implementation.
-  </li>
+<li>October 13, 2020, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end DynamicValidation;

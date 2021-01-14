@@ -18,7 +18,7 @@ This documentation describes the tools that Gitlab owns, such as
  
 
 
-Currently the Aixlib is located on a Github repository (https://github.com/RWTH-EBC/AixLib")
+Currently the Aixlib is located on a Github repository (https://github.com/RWTH-EBC/AixLib)
 CI services are executed via TravisCI, but unlike Gitlab it does not have its own docker registry and the CI 
 services are outsourced to the Travis network, so the Git and CI services are currently 
 operated over two different networks. With the integrated CI services on Gitlab, these can be reduced to servers. 

@@ -19,14 +19,11 @@ algorithm
   p := (x-y_1[i,1])/(y_1[i+1,1]-y_1[i,1]);
   y := p*y_1[i+1,2]+(1-p)*y_1[i,2];
 
-  annotation (Documentation(info="<html><p>
-  This function interpolates values linearly between two fulcrums.
-</p>
+  annotation (Documentation(info="<html>
+<p>This function interpolates values linearly between two fulcrums.</p>
 </html>", revisions="<html>
 <ul>
-  <li>November 13, 2019, by Martin Kremer:<br/>
-    First implementation.
-  </li>
+  <li>November 13, 2019, by Martin Kremer:<br/>First implementation.</li>
 </ul>
 </html>"));
 end linearInterpolation;
