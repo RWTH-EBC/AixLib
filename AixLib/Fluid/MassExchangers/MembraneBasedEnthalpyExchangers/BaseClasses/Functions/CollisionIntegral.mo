@@ -38,13 +38,22 @@ algorithm
   Omega_D := AixLib.Utilities.Math.Functions.linearInterpolation(
     x=epsInternal, y_1=interp);
 
-  annotation (Documentation(info="<html>
-<p>This funtions interpolates the collision integral of a water vapour/ air mixture for the lennard-jones potentials of air and water vapour, which are the inputs of the function.</p>
-<p align=\"center\"><i>&epsilon;<sub>12</sub> = &radic;(&epsilon;<sub>air</sub> &epsilon;<sub>steam</sub>)</i></p>
-<p align=\"center\"><i>&Omega; = f(k<sub>B</sub> T &frasl; &epsilon;<sub>12</sub>)</i></p>
+  annotation (Documentation(info="<html><p>
+  This funtions interpolates the collision integral of a water vapour/
+  air mixture for the lennard-jones potentials of air and water vapour,
+  which are the inputs of the function.
+</p>
+<p style=\"text-align:center;\">
+  <i>ε<sub>12</sub> = √(ε<sub>air</sub> ε<sub>steam</sub>)</i>
+</p>
+<p style=\"text-align:center;\">
+  <i>Ω = f(k<sub>B</sub> T ⁄ ε<sub>12</sub>)</i>
+</p>
 </html>", revisions="<html>
 <ul>
-<li>June 15, 2018, by Martin Kremer:<br/>First Implementation</li>
+  <li>June 15, 2018, by Martin Kremer:<br/>
+    First Implementation
+  </li>
 </ul>
 </html>"));
 end CollisionIntegral;
