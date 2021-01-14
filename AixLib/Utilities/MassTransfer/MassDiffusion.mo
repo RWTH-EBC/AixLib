@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.MassTransfer;
+within AixLib.Utilities.MassTransfer;
 model MassDiffusion
   "Lumped element transporting mass without storing it"
 
@@ -56,31 +56,33 @@ equation
         Text(
           extent={{-100,40},{100,20}},
           textString="dT = port_a.T - port_b.T")}),
-    Documentation(info="<html>
-<p>
-This is a model for transport of mass without storing it;
-It may be used for complicated geometries where
-the mass diffusion Gd
-is determined by measurements and is assumed to be constant
-over the range of operations. If the component consists mainly of
-one type of material and a regular geometry, it may be calculated,
-e.g., with one of the following equations:
+    Documentation(info="<html><p>
+  This is a model for transport of mass without storing it; It may be
+  used for complicated geometries where the mass diffusion Gd is
+  determined by measurements and is assumed to be constant over the
+  range of operations. If the component consists mainly of one type of
+  material and a regular geometry, it may be calculated, e.g., with one
+  of the following equations:
 </p>
 <ul>
-<li><p>
-    Diffusion for a <strong>box</strong> geometry under the assumption
-    that mass flows along the box length:</p>
+  <li>
+    <p>
+      Diffusion for a <strong>box</strong> geometry under the
+      assumption that mass flows along the box length:
+    </p>
     <pre>
     Gd = D*A/L
     D: Diffusifity (material constant)
     A: Area of box
     L: Length of box
     </pre>
-    </li>
-<li><p>
-    Diffusion for a <strong>cylindrical</strong> geometry under the assumption
-    that heat flows from the inside to the outside radius
-    of the cylinder:</p>
+  </li>
+  <li>
+    <p>
+      Diffusion for a <strong>cylindrical</strong> geometry under the
+      assumption that heat flows from the inside to the outside radius
+      of the cylinder:
+    </p>
     <pre>
     Gd = 2*pi*D*L/log(r_out/r_in)
     pi   : Modelica.Constants.pi
@@ -90,11 +92,13 @@ e.g., with one of the following equations:
     r_out: Outer radius of cylinder
     r_in : Inner radius of cylinder
     </pre>
-    </li>
+  </li>
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>November 20, 2019, by Martin Kremer:<br/>First Implementation.</li>
+  <li>November 20, 2019, by Martin Kremer:<br/>
+    First Implementation.
+  </li>
 </ul>
 </html>"));
 end MassDiffusion;
