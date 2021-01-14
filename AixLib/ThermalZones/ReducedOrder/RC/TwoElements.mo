@@ -33,6 +33,20 @@ model TwoElements
     final T_start=T_start) if AInt > 0 "RC-element for interior walls"
     annotation (Placement(transformation(extent={{182,-50},{202,-28}})));
 
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a BtAW "Q_HK_BT_AW"
+    annotation (Placement(transformation(extent={{-90,-190},{-70,-170}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a strAW "Q_HK_str_AW"
+    annotation (Placement(transformation(extent={{-70,-190},{-50,-170}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a FoAW "Q_HK_FO_AW"
+    annotation (Placement(transformation(extent={{-50,-190},{-30,-170}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a kon "Q_HK_kon"
+    annotation (Placement(transformation(extent={{-30,-190},{-10,-170}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a strIW "Q_HK_str_IW"
+    annotation (Placement(transformation(extent={{-10,-190},{10,-170}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a FoIW "Q_HK_FO_IW"
+    annotation (Placement(transformation(extent={{10,-190},{30,-170}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a BtIW "Q_HK_BT_IW"
+    annotation (Placement(transformation(extent={{30,-190},{50,-170}})));
 protected
   Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0)) if
                                                                      AInt > 0
@@ -106,11 +120,30 @@ equation
     annotation (Line(points={{138,-55.5},{138,-50},{138,-50}},
                                                          color={0,0,127}));
   connect(intWallRC.port_a, intWallIndoorSurface)
-    annotation (Line(points={{182,-40},{168,-40},{168,-82},{-120,-82},{-120,-180}},
+    annotation (Line(points={{182,-40},{168,-40},{168,-80},{-120,-80},{-120,
+          -180}},
     color={191,0,0}));
   connect(convIntWall.fluid, senTAir.port)
     annotation (Line(points={{128,-40},{66,-40},{66,0},{80,0}},
     color={191,0,0}));
+  connect(BtAW, extWallRC.port_a1) annotation (Line(points={{-80,-180},{-80,-6},
+          {-168,-6},{-168,-28}}, color={12,217,8}));
+  connect(intWallRC.port_a1, BtIW) annotation (Line(points={{192,-28},{192,-14},
+          {78,-14},{78,-70},{40,-70},{40,-180}}, color={9,191,6}));
+  connect(strAW, convExtWall.solid) annotation (Line(points={{-60,-180},{-60,
+          -136},{-134,-136},{-134,-40},{-114,-40}}, color={12,191,0}));
+  connect(strAW, convWin.solid) annotation (Line(points={{-60,-180},{-60,-90},{
+          -72,-90},{-72,4},{-124,4},{-124,40},{-116,40}}, color={28,191,0}));
+  connect(strAW, FoAW) annotation (Line(points={{-60,-180},{-60,-158},{-40,-158},
+          {-40,-180}}, color={191,0,0}));
+  connect(FoAW, FoAW)
+    annotation (Line(points={{-40,-180},{-40,-180}}, color={191,0,0}));
+  connect(convExtWall.fluid, kon) annotation (Line(points={{-94,-40},{-20,-40},
+          {-20,-180}}, color={12,191,0}));
+  connect(convIntWall.solid, FoIW) annotation (Line(points={{148,-40},{154,-40},
+          {154,-70},{182,-70},{182,-130},{20,-130},{20,-180}}, color={0,191,22}));
+  connect(strIW, FoIW) annotation (Line(points={{0,-180},{0,-148},{20,-148},{20,
+          -180}}, color={0,191,22}));
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}}), graphics={
   Polygon(
