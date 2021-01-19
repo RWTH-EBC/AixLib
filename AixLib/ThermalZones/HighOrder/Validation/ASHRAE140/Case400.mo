@@ -1,13 +1,15 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case400
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
-    redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140_NoSWTrans windowParam,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140_NoSWTrans
+      windowParam,
     solar_absorptance_OW=0.1,
     internalGains=0,
     airExchange=0,
-    ReferenceHeatingLoad(table=[400,6900,8770]),
-    ReferenceCoolingLoad(table=[400,-61,0]));
+    ReferenceHeatingLoadOrTempMax(table=[400,6900,8770]),
+    ReferenceCoolingLoadOrTempMin(table=[400,-61,0]));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

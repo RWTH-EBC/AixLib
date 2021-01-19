@@ -2,8 +2,8 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case410
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case400(
     airExchange=0.41,
-    ReferenceCoolingLoad(table=[410,-84,0]),
-    ReferenceHeatingLoad(table=[410,8596,10506]));
+    ReferenceHeatingLoadOrTempMax(table=[410,8596,10506]),
+    ReferenceCoolingLoadOrTempMin(table=[410,-84,0]));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

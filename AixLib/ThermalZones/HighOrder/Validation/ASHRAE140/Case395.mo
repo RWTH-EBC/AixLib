@@ -3,8 +3,8 @@ model Case395
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case400(
     Win_Area=0.001,
     airExchange=0,
-    ReferenceHeatingLoad( table=[395,4799,5835]),
-    ReferenceCoolingLoad(table=[395,-18,0]));
+    ReferenceHeatingLoadOrTempMax(table=[395,4799,5835]),
+    ReferenceCoolingLoadOrTempMin(table=[395,-18,0]));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=
