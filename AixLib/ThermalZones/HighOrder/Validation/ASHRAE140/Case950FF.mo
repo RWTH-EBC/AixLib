@@ -2,9 +2,9 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case950FF
   extends Case650FF(
     wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),
-    ReferenceTempMax(table=[900,35.5,38.5]),
-    ReferenceTempMin(table=[900,-20.2,-18.6]),
-    checkResultsAccordingToASHRAEHeating(checkTime=21135600));
+    ReferenceHeatingLoadOrTempMax(table=[950,35.5,38.5]),
+    ReferenceCoolingLoadOrTempMin(table=[950,-20.2,-18.6]),
+    checkResultsAccordingToASHRAEHeatingOrTempMax(checkTime=21135600));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

@@ -123,11 +123,19 @@ partial model PartialCase "This is the base class from which the base cases will
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
-  replaceable model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
-    constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+  replaceable model CorrSolarGainWin =
+      Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
+    constrainedby
+    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
+  parameter Boolean useAnnualHeatingOrCoolingLoad = true
+    "Checking results according to ASHRAE140: 'true' if the used results are referring to Annual Heating or Cooling Loads;
+
+    'false' if the used results are referring to Min/Max Temperatures
+    ";
+
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
   Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature
     annotation (Placement(transformation(extent={{130,26},{150,46}})));
@@ -188,10 +196,14 @@ equation
   connect(integrator2.y, to_kWhTransRad.u) annotation (Line(points={{85.5,-0.75},{91,-0.75},{91,-1}}, color={0,0,127}));
   connect(gainIntHea.y, TransmittedSolarRadiation_room) annotation (Line(points={{122.3,-1},{140,-1}},
                                                 color={0,0,127}));
-  connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{140,68},{130,68},{130,-36},{91,-36},{91,-52.15},{97.95,-52.15}}, color={0,0,127}));
+  if useAnnualHeatingOrCoolingLoad then
+    connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{140,68},{130,68},{130,-36},{91,-36},{91,-52.15},{97.95,-52.15}}, color={0,0,127}));
+  end if;
   connect(ReferenceHeatingLoadOrTempMax.y[1], checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit) annotation (Line(points={{72.7,-55},{85,-55},{85,-62.5},{97.95,-62.5}}, color={0,0,127}));
   connect(ReferenceHeatingLoadOrTempMax.y[2], checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit) annotation (Line(points={{72.7,-55},{86,-55},{86,-59.5},{97.95,-59.5}}, color={0,0,127}));
-  connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{140,52},{130,52},{130,-35},{52,-35},{52,-65},{76,-65},{76,-73.15},{97.95,-73.15}}, color={0,0,127}));
+  if useAnnualHeatingOrCoolingLoad then
+    connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{140,52},{130,52},{130,-35},{52,-35},{52,-65},{76,-65},{76,-73.15},{97.95,-73.15}}, color={0,0,127}));
+  end if;
   connect(ReferenceCoolingLoadOrTempMin.y[1], checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit) annotation (Line(points={{72.7,-77},{86,-77},{86,-83.5},{97.95,-83.5}}, color={0,0,127}));
   connect(ReferenceCoolingLoadOrTempMin.y[2], checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit) annotation (Line(points={{72.7,-77},{87,-77},{87,-80.5},{97.95,-80.5}}, color={0,0,127}));
   connect(to_degCRoomConvTemp.y, FreeFloatRoomTemperature) annotation (Line(points={{102.5,36},{140,36}}, color={0,0,127}));
@@ -200,6 +212,18 @@ equation
   connect(to_degCRoomConvTemp1.y, FreeFloatRoomRadTemperature) annotation (Line(points={{102.5,18},{140,18}}, color={0,0,127}));
   connect(Room.thermRoom, temperatureSensor.port) annotation (Line(points={{-2.92,35},{-2.92,44},{67,44},{67,36},{72,36}}, color={191,0,0}));
   connect(Room.starRoom, temperatureSensor1.port) annotation (Line(points={{5.48,35},{5.48,42},{65,42},{65,18},{72,18}}, color={0,0,0}));
+  if not useAnnualHeatingOrCoolingLoad then
+    connect(FreeFloatRoomTemperature,
+    checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (
+      Line(points={{140,36},{130,36},{130,-36},{91,-36},{91,-52.15},{97.95,-52.15}},
+        color={0,0,127}));
+  end if;
+  if not useAnnualHeatingOrCoolingLoad then
+    connect(FreeFloatRoomTemperature,
+    checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (
+      Line(points={{140,36},{130,36},{130,-35},{52,-35},{52,-65},{76,-65},{76,-73.15},
+          {97.95,-73.15}}, color={0,0,127}));
+  end if;
   annotation (Diagram(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
@@ -257,7 +281,7 @@ equation
 4- Cloud Cover",
           fontSize=8),
         Rectangle(
-          extent={{42,-19},{130,-110}},
+          extent={{41,-19},{129,-110}},
           lineColor={0,0,0},
           fillColor={255,250,228},
           fillPattern=FillPattern.Solid),
