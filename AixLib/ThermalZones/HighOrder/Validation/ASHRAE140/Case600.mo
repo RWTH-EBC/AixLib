@@ -98,6 +98,39 @@ Diagram(coordinateSystem(
   </li>
 </ul>
 </html>",info="<html><p>
-As described in ASHRAE Standard 140.
+Input Specifications of <b>Case 600</b> as described in ASHRAE Standard 140: </p>
+<ul>
+  <li>Low mass building
+
+  </li>
+<li>12 m2 south-facing window area
+  </li>
+<li>Air exchange rate: 0.41
+
+  </li>
+<li>Thermostat control:<br/> Heat = ON IF Temp &lt; 20°C otherwise Heat=OFF<br/> Cool = ON IF Temp &gt; 27°C otherwise Cool = OFF
+  </li>
+<li>Internal gains: 200 W
+  </li>
+<li>Solar absorptance:<br/>
+exterior: 0.6<br/>
+interior: 0.6
+  </li>
+<li>Infrared emittance:<br/>
+exterior: 0.9<br/>
+interior: 0.9
+  </li>
+ 
+</ul>
+<p>
+ All following ASHRAE140 test cases are based on Case600.</p>
+<h4>
+References</h4>
+<ul>
+  <li>ASHRAE140-2017
+  </li>
+ 
+</ul>
+
 </html>"));
 end Case600;

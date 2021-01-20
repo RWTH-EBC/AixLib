@@ -22,13 +22,13 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 270</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 220:
 </p>
 <ul>
-  <li>Window according to ASHRAE
+  <li>regular windows
   </li>
   <li>Solar absorptance on exterior surface = 0.1
   </li>

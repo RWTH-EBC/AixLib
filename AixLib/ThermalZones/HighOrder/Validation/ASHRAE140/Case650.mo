@@ -93,22 +93,23 @@ Diagram(coordinateSystem(
   </li>
 </ul>
 </html>",info="<html><p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 650</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 600:
 </p>
 <ul>
-  <li>From 1800 hours to 0700 hours, vent fan = ON
+<li>Air exchange rate: 10.8
   </li>
-  <li>From 0700 hours to 1800 hours, vent fan = OFF
+  <li>18-7 h: Vent fan = ON
+  </li>
+  <li>7-18 h: Vent fan = OFF
   </li>
   <li>Heating = always OFF
   </li>
-  <li>From 1800 hours to 0700 hours, cool = OFF
+  <li>18-7 h: Cool = OFF
   </li>
-  <li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27
-  degC; otherwise, cool = OFF
+  <li>7-18 h: Cool =ON IF Temp &lt; 27°C, otherwise Cool=OFF
   </li>
 </ul>
 </html>"));

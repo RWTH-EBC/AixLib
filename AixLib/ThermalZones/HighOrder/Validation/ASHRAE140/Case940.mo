@@ -11,26 +11,19 @@ model Case940
         "Simulate and plot"),
     __Dymola_experimentSetupOutput(events=true),
 Documentation(info="<html><p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 940</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 900:
 </p>
 <ul>
-  <li>From 2300 hours to 0700 hours, heat = ON if temperature &lt; 10
-  degC
+
+  <li>23-7 h: Heat = ON IF Temp &lt; 10°C
   </li>
-  <li>From 0700 hours to 2300 hours, heat = ON if temperature &lt; 20
-  degC
+  <li>7-23 h: Heat = ON IF Temp &lt; 20°C
   </li>
-</ul>
-<ul>
-  <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
-    updated
-  </li>
-  <li>
-    <i>March 9, 2015</i> by Ana Constantin:<br/>
-    Implemented
+<li>Cool = ON IF Temp &gt; 27°C
+
   </li>
 </ul>
 </html>", revisions="<html><ul>

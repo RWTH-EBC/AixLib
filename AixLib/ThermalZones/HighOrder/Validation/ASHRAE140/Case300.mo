@@ -26,7 +26,7 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 300</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 270:

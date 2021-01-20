@@ -19,15 +19,15 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 320</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 270:
 </p>
 <ul>
-  <li>Heat = ON if temperature &lt; 20 degC
+  <li>Heat = ON if temperature &lt; 20°C
   </li>
-  <li>Cool = ON if temperature &lt; 27 degC
+  <li>Cool = ON if temperature &lt; 27°C
   </li>
 </ul>
 </html>"));

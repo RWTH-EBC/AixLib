@@ -11,31 +11,23 @@ model Case950
         "Simulate and plot"),
     __Dymola_experimentSetupOutput(events=true),
 Documentation(info="<html><p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 950</b> as described in ASHRAE Standard 140:
 </p>
 <p>
-  Difference to case 900:
+  Difference to case 600:
 </p>
 <ul>
-  <li>From 1800 hours to 0700 hours, vent fan = ON
+<li>Air exchange rate: 10.8
   </li>
-  <li>From 0700 hours to 1800 hours, vent fan = OFF
+  <li>18-7 h: Vent fan = ON
+  </li>
+  <li>7-18 h: Vent fan = OFF
   </li>
   <li>Heating = always OFF
   </li>
-  <li>From 1800 hours to 0700 hours, cool = OFF
+  <li>18-7 h: Cool = OFF
   </li>
-  <li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27
-  degC; otherwise, cool = OFF
-  </li>
-</ul>
-<ul>
-  <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
-    updated
-  </li>
-  <li>
-    <i>March 9, 2015</i> by Ana Constantin:<br/>
-    Implemented
+  <li>7-18 h: Cool =ON IF Temp &lt; 27°C, otherwise Cool=OFF
   </li>
 </ul>
 </html>", revisions="<html><ul>

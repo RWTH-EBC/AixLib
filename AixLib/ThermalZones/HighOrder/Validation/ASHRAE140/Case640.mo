@@ -96,17 +96,18 @@ Diagram(coordinateSystem(
   </li>
 </ul>
 </html>",info="<html><p>
-  As described in ASHRAE Standard 140.
-</p>
+ Input Specifications of <b>Case 640</b> as described in ASHRAE Standard 140:
 <p>
-  Difference to case 900:
+  Difference to case 600:
 </p>
 <ul>
-  <li>From 2300 hours to 0700 hours, heat = ON if temperature &lt; 10
-  degC
+
+  <li>23-7 h: Heat = ON IF Temp &lt; 10°C
   </li>
-  <li>From 0700 hours to 2300 hours, heat = ON if temperature &lt; 20
-  degC
+  <li>7-23 h: Heat = ON IF Temp &lt; 20°C
+  </li>
+<li>Cool = ON IF Temp &gt; 27°C
+
   </li>
 </ul>
 </html>"));

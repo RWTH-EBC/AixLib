@@ -12,22 +12,13 @@ model Case950FF
         "Simulate and plot"),
     __Dymola_experimentSetupOutput(events=true),
 Documentation(info="<html><p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 950FF</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 950:
 </p>
 <ul>
   <li>no cooling or heating equipment
-  </li>
-</ul>
-<ul>
-  <li>July 1, 2020, by Konstantina Xanthopoulou:<br/>
-    updated
-  </li>
-  <li>
-    <i>March 9, 2015</i> by Ana Constantin:<br/>
-    Implemented
   </li>
 </ul>
 </html>", revisions="<html><ul>

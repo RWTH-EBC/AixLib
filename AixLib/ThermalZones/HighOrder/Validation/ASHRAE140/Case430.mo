@@ -18,7 +18,7 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 430</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 420:
@@ -27,6 +27,14 @@ Documentation(revisions="<html><ul>
   <li>Solar absorptance on exterior surface = 0.6
   </li>
 </ul>
+<h4>
+Limitations</h4>
+<p>
+The simulated annual cooling load of <b>Case 430</b> cannot meet the statistical acceptance ranges given by ASHRAE140 (01.01.2021).<br/>
+However, cases that do not perform according to the reference values should not be considered erroneous. They shall be used as
+indication for debugging purposes instead.
+</p>
+
 </html>
 "));
 end Case430;

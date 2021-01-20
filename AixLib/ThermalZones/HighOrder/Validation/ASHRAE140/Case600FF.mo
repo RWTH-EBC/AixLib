@@ -66,10 +66,10 @@ Diagram(coordinateSystem(
   </li>
 </ul>
 </html>",info="<html><p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 600FF</b> as described in ASHRAE Standard 140:
 </p>
 <p>
-  Difference to case 650:
+  Difference to case 600:
 </p>
 <ul>
   <li>no cooling or heating equipment
