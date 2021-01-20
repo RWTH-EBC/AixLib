@@ -3,7 +3,9 @@ model Case600
   extends
     AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
       ReferenceCoolingLoadOrTempMin(table=[600,-7964,-6137]),
-      ReferenceHeatingLoadOrTempMax(table=[600,4296,5709]));
+      ReferenceHeatingLoadOrTempMax(table=[600,4296,5709]),
+    checkResultsAccordingToASHRAEHeatingOrTempMax(dispType="Q Heat"),
+    checkResultsAccordingToASHRAECoolingOrTempMin(dispType="Q Cool"));
 
   Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
@@ -15,8 +17,6 @@ model Case600
     recOrSep=false)
     annotation (Placement(transformation(extent={{-15,-65},{5,-45}})));
 
-  Utilities.Sources.HourOfDay hourOfDay
-    annotation (Placement(transformation(extent={{104,78},{117,90}})));
   Modelica.Blocks.Sources.Constant AirExchangeRate(final k=airExchange)
     annotation (Placement(transformation(extent={{-38,-56},{-25,-43}})));
   Modelica.Blocks.Sources.Constant Tset_Cooler(final k=TsetCooler)
@@ -83,13 +83,7 @@ equation
 Diagram(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
-        grid={1,1}), graphics={
-        Text(
-          extent={{-56,-2},{12,-10}},
-          lineColor={0,0,255},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
-          textString="Building physics")}),
+        grid={1,1})),
                   Icon(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
