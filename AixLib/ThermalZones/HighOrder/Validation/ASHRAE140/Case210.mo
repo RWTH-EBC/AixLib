@@ -27,5 +27,11 @@ model Case210
     Implemented
   </li>
 </ul>
+</html>", revisions="<html><ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    Implemented
+  </li>
+</ul>
 </html>"));
 end Case210;
