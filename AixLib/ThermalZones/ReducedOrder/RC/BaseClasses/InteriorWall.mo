@@ -20,6 +20,9 @@ model InteriorWall "Interior wall consisting of variable number of RC elements"
     final C=CInt, each T(start=T_start)) "vector of capacitors"
     annotation (Placement(transformation(extent={{-10,-12},{10,-32}})));
 
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a1
+    "tabs interior port"
+    annotation (Placement(transformation(extent={{-10,110},{10,130}})));
 protected
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermResInt[n](
     final R=RInt) "vector of resistors connecting port and capacitors"
@@ -41,6 +44,8 @@ equation
   connect(port_a,thermResInt[1].port_a) annotation (Line(points={{-100,0},{-80,0},
           {-80,0},{-60,0}},  color={191,0,0}));
 
+  connect(port_a1, thermCapInt[1].port)
+    annotation (Line(points={{0,120},{0,-12}}, color={191,0,0}));
  annotation(defaultComponentName = "intWalRC",Diagram(coordinateSystem(
   preserveAspectRatio=false,   extent={{-100,-100},{100,120}})),
   Documentation(info="<html>

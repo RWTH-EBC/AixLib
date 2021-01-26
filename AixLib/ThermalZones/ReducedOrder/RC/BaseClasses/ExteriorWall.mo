@@ -27,6 +27,9 @@ model ExteriorWall "Exterior wall consisting of variable number of RC elements"
     final C=CExt, each T(start=T_start)) "vector of thermal capacitors"
     annotation (Placement(transformation(extent={{-10,-12},{10,-32}})));
 
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a1
+    "tabs exterior port"
+    annotation (Placement(transformation(extent={{-10,110},{10,130}})));
 protected
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermResExt[n](
     final R=RExt)
@@ -59,6 +62,8 @@ equation
 
   connect(thermResExtRem.port_b, port_b)
     annotation (Line(points={{60,0},{100,0}}, color={191,0,0}));
+  connect(port_a1, thermCapExt[1].port)
+    annotation (Line(points={{0,120},{0,-12}}, color={191,0,0}));
   annotation(defaultComponentName = "extWalRC",
   Diagram(coordinateSystem(preserveAspectRatio = false, extent=
   {{-100, -100}, {100, 120}})),           Documentation(info="<html>
