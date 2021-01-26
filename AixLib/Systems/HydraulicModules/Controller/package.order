@@ -3,3 +3,4 @@ CtrPump
 CtrThrottle
 CtrThrottleVflowCtr
 CtrPumpVflowCtr
+CtrThrottleValveCtr

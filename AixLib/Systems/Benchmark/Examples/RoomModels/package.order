@@ -5,3 +5,5 @@ SimpleRoomVolFlowCtrl
 SimpleRoomVolFlowCtrl_no_Weather
 SimpleRoomVolFlowCtrl_no_int_gains
 SimpleRoomVolFlowCtrl_no_ahu_cca
+SimpleRoomVolFlowCtrl_valve_Set
+SimpleRoomVolFlowCtrl_vhu_SP_cca_VF

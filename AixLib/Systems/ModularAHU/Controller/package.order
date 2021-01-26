@@ -4,3 +4,5 @@ CtrVentilationUnitBasic
 CtrVentilationUnitTsetRoom
 CtrVentilationUnitVflowSet
 CtrRegBasicVflow
+CtrRegBasicValve
+CtrVentilationUnitValveSet

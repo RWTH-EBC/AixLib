@@ -1,5 +1,5 @@
 ﻿within AixLib.Systems.HydraulicModules.Controller;
-block CtrThrottleVflowCtr "Controller for unmixed circuit with valve"
+block CtrThrottleValveCtr "Controller for unmixed circuit with valve"
   //Boolean choice;
 
   parameter Boolean useExternalVset = false "If True, set temperature can be given externally";
@@ -22,26 +22,9 @@ block CtrThrottleVflowCtr "Controller for unmixed circuit with valve"
     annotation(Dialog(group="PID"));
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
-  Modelica.Blocks.Interfaces.RealInput Vact
+  Modelica.Blocks.Interfaces.RealInput valveSet
     "Connector of measurement input signal"
-    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput Vset if useExternalVset
-    "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-  Modelica.Blocks.Sources.Constant constVflowSet(final k=VflowSet) if not useExternalVset annotation (Placement(transformation(extent={{-100,-30},{-80,-10}})));
-  AixLib.Controls.Continuous.LimPID PID(
-    final yMax=1,
-    final yMin=0,
-    final controllerType=Modelica.Blocks.Types.SimpleController.PID,
-    final k=k,
-    final Ti=Ti,
-    final Td=Td,
-    final initType=initType,
-    final xi_start=xi_start,
-    final xd_start=xd_start,
-    final y_start=y_start,
-    final reverseAction=reverseAction)
-            annotation (Placement(transformation(extent={{-16,-40},{4,-60}})));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
   Modelica.Blocks.Logical.GreaterThreshold
@@ -54,24 +37,7 @@ public
     annotation (Placement(transformation(extent={{76,-24},{124,24}}),
         iconTransformation(extent={{90,-22},{138,26}})));
 equation
-    connect(PID.u_s,Vset)  annotation (Line(
-      points={{-18,-50},{-67.1,-50},{-67.1,-60},{-120,-60}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-    connect(constVflowSet.y, PID.u_s) annotation (Line(
-      points={{-79,-20},{-68,-20},{-68,-50},{-18,-50}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
 
-  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{5,-50},{48,
-          -50},{48,0.12},{100.12,0.12}},  color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(PID.u_m,Vact)
-    annotation (Line(points={{-6,-38},{-8,-38},{-8,60},{-120,60}}, color={0,0,127}));
-  connect(PID.y,pumpSwitchOff. u)
-    annotation (Line(points={{5,-50},{4,-50},{4,40},{14.4,40}}, color={0,0,127}));
   connect(constRpmPump.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
           {41,0},{100.12,0},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
@@ -84,6 +50,16 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(hydraulicBus.valveSet, valveSet) annotation (Line(
+      points={{100.12,0.12},{-20,0.12},{-20,0},{-120,0}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(pumpSwitchOff.u, valveSet) annotation (Line(points={{14.4,40},{-24,40},
+          {-24,0},{-120,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
@@ -111,4 +87,4 @@ equation
 <p>Simple controller for Throttle and ThrottlePump circuit that is based on a PID controller. The controlled variable needs to be connected to Tact.</p>
 <p>If the valve is fully closed, the pump will switch off. The pump frequency is constant, if pump is on</p>
 </html>"));
-end CtrThrottleVflowCtr;
+end CtrThrottleValveCtr;
