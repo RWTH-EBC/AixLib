@@ -159,5 +159,8 @@ equation
   indoor air temperatures, but are not related to a specific building
   or measurement data.
 </p>
-</html>"));
+</html>"),
+__Dymola_Commands(file=
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mos"
+        "Simulate and plot"));
 end MultizoneMoistAirCO2Equipped;
