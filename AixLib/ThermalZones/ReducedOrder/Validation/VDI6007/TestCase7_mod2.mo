@@ -21,8 +21,8 @@ model TestCase7_mod2 "VDI 6007 Test Case 7 model"
     CInt={14836354.6282},
     VAir=0,
     nOrientations=1,
-    AWin={1},
-    ATransparent={1},
+    AWin={5},
+    ATransparent={0},
     AExt={10.5},
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
@@ -145,7 +145,7 @@ model TestCase7_mod2 "VDI 6007 Test Case 7 model"
   Modelica.Blocks.Math.Gain tabsExtGainHeaCoo(k=0)
     "Gain for heating and cooling controller"
     annotation (Placement(transformation(extent={{8,-36},{20,-24}})));
-  Modelica.Blocks.Math.Gain fhkExtGainHeaCoo(k=1)
+  Modelica.Blocks.Math.Gain fhkExtGainHeaCoo(k=0.4)
     "Gain for heating and cooling controller"
     annotation (Placement(transformation(extent={{8,-62},{20,-50}})));
   Modelica.Blocks.Math.Gain fhkIntGainHeaCoo(k=0)
@@ -154,7 +154,7 @@ model TestCase7_mod2 "VDI 6007 Test Case 7 model"
   Modelica.Blocks.Math.Gain hkConvGainHeaCoo(k=0)
     "Gain for heating and cooling controller"
     annotation (Placement(transformation(extent={{28,-74},{40,-62}})));
-  Modelica.Blocks.Math.Gain hkRadGainHeaCoo(k=0)
+  Modelica.Blocks.Math.Gain hkRadGainHeaCoo(k=0.6)
     "Gain for heating and cooling controller"
     annotation (Placement(transformation(extent={{28,-52},{40,-40}})));
   Modelica.Blocks.Math.Gain hkRadIntGainHeaCoo(k=0)
@@ -163,7 +163,7 @@ model TestCase7_mod2 "VDI 6007 Test Case 7 model"
   Modelica.Blocks.Math.Gain tabsIntGainHeaCoo(k=0)
     "Gain for heating and cooling controller"
     annotation (Placement(transformation(extent={{8,-104},{20,-92}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow hkRadExtHeaCoo(alpha=0)
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow hkRadExtHeaCoo
     "Ideal heater/cooler with limit"
     annotation (Placement(transformation(extent={{56,-56},{76,-36}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow hkConvHeaCoo
@@ -175,7 +175,7 @@ model TestCase7_mod2 "VDI 6007 Test Case 7 model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow tabsIntHeaCoo
     "Ideal heater/cooler with limit"
     annotation (Placement(transformation(extent={{66,-104},{86,-84}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow fhkExtHeaCoo(alpha=0)
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow fhkExtHeaCoo
     "Ideal heater/cooler with limit"
     annotation (Placement(transformation(extent={{94,-66},{114,-46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow fhkIntHeaCoo
@@ -201,7 +201,8 @@ equation
     Line(points={{68,88},{114,88},{114,24},{92,24}},
     color={191,0,0}));
   connect(const.y, thermalZoneTwoElements.solRad[1])
-    annotation (Line(points={{18.5,31},{43,31}},            color={0,0,127}));
+    annotation (Line(points={{18.5,31},{30,31},{30,31},{43,31}},
+                                                            color={0,0,127}));
   connect(gainHeaCoo.y,heaCoo. Q_flow) annotation (Line(points={{36.6,68},{60,
           68}},                    color={0,0,127}));
   connect(conHeaCoo.y,gainHeaCoo. u)
@@ -266,15 +267,15 @@ equation
           {93,32}}, color={0,0,127}));
   connect(tabsExtHeaCoo.port, thermalZoneTwoElements.tabsExtWalls)
     annotation (Line(points={{76,-32},{86.8,-32},{86.8,-2}}, color={191,0,0}));
-  connect(hkRadExtHeaCoo.port, thermalZoneTwoElements.HKradExtWalls)
+  connect(hkRadExtHeaCoo.port, thermalZoneTwoElements.hkRadExtWalls)
     annotation (Line(points={{76,-46},{90,-46},{90,-2},{92,-2}}, color={191,0,0}));
-  connect(fhkExtHeaCoo.port, thermalZoneTwoElements.FHKExtWalls) annotation (
+  connect(fhkExtHeaCoo.port, thermalZoneTwoElements.fhkExtWalls) annotation (
       Line(points={{114,-56},{116,-56},{116,0.6},{92,0.6}}, color={191,0,0}));
-  connect(hkConvHeaCoo.port, thermalZoneTwoElements.HKConv) annotation (Line(
+  connect(hkConvHeaCoo.port, thermalZoneTwoElements.hkConv) annotation (Line(
         points={{76,-64},{90,-64},{90,3},{92,3}}, color={191,0,0}));
-  connect(fhkIntHeaCoo.port, thermalZoneTwoElements.FHKIntWalls) annotation (
+  connect(fhkIntHeaCoo.port, thermalZoneTwoElements.fhkIntWalls) annotation (
       Line(points={{114,-74},{120,-74},{120,5.4},{92,5.4}}, color={191,0,0}));
-  connect(hkRadIntHeaCoo.port, thermalZoneTwoElements.HKradIntWalls)
+  connect(hkRadIntHeaCoo.port, thermalZoneTwoElements.hkRadIntWalls)
     annotation (Line(points={{86,-80},{90,-80},{90,7.8},{92,7.8}}, color={191,0,
           0}));
   connect(tabsIntHeaCoo.port, thermalZoneTwoElements.tabsIntWalls) annotation (

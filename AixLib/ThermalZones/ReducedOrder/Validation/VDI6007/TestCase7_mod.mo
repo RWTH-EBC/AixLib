@@ -163,17 +163,17 @@ equation
   connect(tabsExt_fixedHeatFlow.port, thermalZoneTwoElements.tabsExtWalls)
     annotation (Line(points={{-30,-24},{86.8,-24},{86.8,-2}},
                                                           color={191,0,0}));
-  connect(HKradExt_fixedHeatFlow.port, thermalZoneTwoElements.HKradExtWalls)
+  connect(HKradExt_fixedHeatFlow.port,thermalZoneTwoElements.hkRadExtWalls)
     annotation (Line(points={{-30,-40},{92,-40},{92,-2}}, color={191,0,0}));
-  connect(FHKExt_fixedHeatFlow.port, thermalZoneTwoElements.FHKExtWalls)
+  connect(FHKExt_fixedHeatFlow.port,thermalZoneTwoElements.fhkExtWalls)
     annotation (Line(points={{-56,-32},{94,-32},{94,0.6},{92,0.6}}, color={191,
           0,0}));
-  connect(HKConv_fixedHeatFlow.port, thermalZoneTwoElements.HKConv) annotation (
+  connect(HKConv_fixedHeatFlow.port,thermalZoneTwoElements.hkConv)  annotation (
      Line(points={{-56,-48},{96,-48},{96,3},{92,3}}, color={191,0,0}));
-  connect(FHKInt_fixedHeatFlow.port, thermalZoneTwoElements.FHKIntWalls)
+  connect(FHKInt_fixedHeatFlow.port,thermalZoneTwoElements.fhkIntWalls)
     annotation (Line(points={{-56,-64},{98,-64},{98,5.4},{92,5.4}}, color={191,
           0,0}));
-  connect(HKradInt_fixedHeatFlow.port, thermalZoneTwoElements.HKradIntWalls)
+  connect(HKradInt_fixedHeatFlow.port,thermalZoneTwoElements.hkRadIntWalls)
     annotation (Line(points={{-30,-56},{100,-56},{100,7.8},{92,7.8}}, color={
           191,0,0}));
   connect(tabsInt_fixedHeatFlow.port, thermalZoneTwoElements.tabsIntWalls)

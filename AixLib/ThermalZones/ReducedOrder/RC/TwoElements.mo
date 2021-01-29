@@ -33,39 +33,55 @@ model TwoElements
     final T_start=T_start) if AInt > 0 "RC-element for interior walls"
     annotation (Placement(transformation(extent={{182,-50},{202,-28}})));
 
+  // Integration of VDI 6007-1 panel heating and tabs into Two Element
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabsExtWalls if ATotExt
      > 0 "Q_HK_BT_AW"
     annotation (Placement(transformation(extent={{178,-190},{198,-170}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HKradExtWalls if ATot > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRadExtWalls if ATot > 0
     "Q_HK_str_AW"
     annotation (Placement(transformation(extent={{230,-190},{250,-170}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a FHKExtWalls if ATot > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkExtWalls if ATot > 0
     "Q_HK_FO_AW"
     annotation (Placement(transformation(extent={{230,-164},{250,-144}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HKConv if ATot > 0 or
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkConv if ATot > 0 or
     VAir > 0 "Q_HK_kon"
     annotation (Placement(transformation(extent={{230,-140},{250,-120}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HKradIntWalls if AInt > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRadIntWalls if AInt > 0
     "Q_HK_str_IW"
     annotation (Placement(transformation(extent={{230,-92},{250,-72}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a FHKIntWalls if AInt > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkIntWalls if AInt > 0
     "Q_HK_FO_IW"
     annotation (Placement(transformation(extent={{230,-116},{250,-96}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabsIntWalls if AInt > 0
     "Q_HK_BT_IW"
     annotation (Placement(transformation(extent={{230,-30},{250,-10}})));
+
+  // Implementation of thermal splitter for external walls and windows
+
+  parameter Modelica.SIunits.Area[:] AArrayExtWin = {ATotExt, ATotWin}
+    "List of external wall and window surface areas";
+  parameter Integer dimensionExtWin = sum({if A>0 then 1 else 0 for A in AArrayExtWin})
+    "Number of non-zero wall surface areas";
+  parameter Real splitFactorExtWin[dimensionExtWin, 1]=
+    BaseClasses.splitFacVal(dimensionExtWin, 1, AArrayExtWin, fill(0, 1), fill(0, 1))
+    "Share of each wall surface area that is non-zero";
+
   BaseClasses.ThermSplitter thermSplitterFhkExtWallsWin(
-    final splitFactor=splitFactor,
-    final nOut=dimension,
-    final nIn=1) if ATot > 0 "Splits incoming heat flow from panel heating into separate flows for each wall element,
+    final splitFactor=splitFactorExtWin,
+    final nOut=dimensionExtWin,
+    final nIn=1) if ATot > 0
+    "Splits incoming heat flow from panel heating into separate flows for each wall element,
     weighted by their area"
-    annotation (Placement(transformation(extent={{224,-164},{204,-144}})));
+    annotation (Placement(transformation(extent={{226,-164},{206,-144}})));
   BaseClasses.ThermSplitter thermSplitterHkRadExtWallsWin(
-    final splitFactor=splitFactor,
-    final nOut=dimension,
-    final nIn=1) if ATot > 0 "Splits incoming heat flow from radiative heating/cooling into separate flows for each wall element,
+    final splitFactor=splitFactorExtWin,
+    final nOut=dimensionExtWin,
+    final nIn=1) if ATot > 0
+    "Splits incoming heat flow from radiative heating/cooling into separate flows for each wall element,
     weighted by their area"
     annotation (Placement(transformation(extent={{226,-190},{206,-170}})));
+
 protected
   Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0)) if
                                                                      AInt > 0
@@ -148,44 +164,37 @@ equation
   connect(tabsExtWalls, extWallRC.port_a1) annotation (Line(points={{188,-180},{
           188,-170},{-106,-170},{-106,-76},{-138,-76},{-138,-28},{-168,-28}},
         color={191,0,0}));
-  connect(HKConv, senTAir.port) annotation (Line(points={{240,-130},{114,-130},{
+  connect(hkConv, senTAir.port) annotation (Line(points={{240,-130},{114,-130},{
           114,-22},{66,-22},{66,0},{80,0}},  color={191,0,0}));
-  connect(HKradIntWalls, intWallRC.port_a) annotation (Line(points={{240,-82},{
+  connect(hkRadIntWalls, intWallRC.port_a) annotation (Line(points={{240,-82},{
           178,-82},{178,-40},{182,-40}}, color={191,0,0}));
-  connect(FHKIntWalls, intWallRC.port_a) annotation (Line(points={{240,-106},{
+  connect(fhkIntWalls, intWallRC.port_a) annotation (Line(points={{240,-106},{
           178,-106},{178,-40},{182,-40}}, color={191,0,0}));
   connect(tabsIntWalls, intWallRC.port_a1) annotation (Line(points={{240,-20},{
           240,-22},{192,-22},{192,-28}}, color={191,0,0}));
   connect(tabsExtWalls, tabsExtWalls) annotation (Line(points={{188,-180},{188,-180}},
                                   color={191,0,0}));
-  connect(FHKExtWalls, thermSplitterFhkExtWallsWin.portIn[1])
-    annotation (Line(points={{240,-154},{224,-154}}, color={191,0,0}));
-  connect(HKradExtWalls, thermSplitterHkRadExtWallsWin.portIn[1])
-    annotation (Line(points={{240,-180},{226,-180}}, color={191,0,0}));
+  connect(fhkExtWalls, thermSplitterFhkExtWallsWin.portIn[1]) annotation (Line(points={{240,-154},{226,-154}}, color={191,0,0}));
+  connect(hkRadExtWalls, thermSplitterHkRadExtWallsWin.portIn[1]) annotation (Line(points={{240,-180},{226,-180}}, color={191,0,0}));
   if ATotExt > 0 and ATotWin > 0 then
-    connect(thermSplitterFhkExtWallsWin.portOut[1], convExtWall.solid)
-    annotation (Line(points={{204,-154},{16,-154},{16,-40},{-114,-40}}, color={191,
+    connect(thermSplitterFhkExtWallsWin.portOut[1], convExtWall.solid) annotation (Line(points={{206,
+            -154},{-76,-154},{-76,-40},{-114,-40}},                                                                                        color={191,
           0,0}));
     connect(thermSplitterFhkExtWallsWin.portOut[2], convWin.solid) annotation (
-      Line(points={{204,-154},{14,-154},{14,40},{-116,40}}, color={191,0,0}));
-
-    connect(thermSplitterHkRadExtWallsWin.portOut[1], convExtWall.solid)
-    annotation (Line(points={{206,-180},{46,-180},{46,-40},{-114,-40}}, color={191,
+      Line(points={{206,-154},{-46,-154},{-46,40},{-116,40}},
+                                                            color={191,0,0}));
+    connect(thermSplitterHkRadExtWallsWin.portOut[1], convExtWall.solid)  annotation (Line(points={{206,
+            -180},{206,-162},{-76,-162},{-76,-40},{-114,-40}},                                                                                color={191,
           0,0}));
     connect(thermSplitterHkRadExtWallsWin.portOut[2], convWin.solid) annotation (
-      Line(points={{206,-180},{46,-180},{46,40},{-116,40}}, color={191,0,0}));
+      Line(points={{206,-180},{206,-162},{-46,-162},{-46,40},{-116,40}},
+                                                            color={191,0,0}));
   elseif not ATotExt > 0 and ATotWin > 0 then
-    connect(thermSplitterFhkExtWallsWin.portOut[1], convWin.solid) annotation (
-      Line(points={{204,-154},{14,-154},{14,40},{-116,40}}, color={191,0,0}));
-    connect(thermSplitterHkRadExtWallsWin.portOut[1], convWin.solid) annotation (
-      Line(points={{206,-180},{46,-180},{46,40},{-116,40}}, color={191,0,0}));
+    connect(thermSplitterFhkExtWallsWin.portOut[1], convWin.solid);
+    connect(thermSplitterHkRadExtWallsWin.portOut[1], convWin.solid);
   elseif ATotExt > 0 and not ATotWin > 0 then
-    connect(thermSplitterFhkExtWallsWin.portOut[1], convExtWall.solid)
-    annotation (Line(points={{204,-154},{16,-154},{16,-40},{-114,-40}}, color={191,
-          0,0}));
-    connect(thermSplitterHkRadExtWallsWin.portOut[1], convExtWall.solid)
-    annotation (Line(points={{206,-180},{46,-180},{46,-40},{-114,-40}}, color={191,
-          0,0}));
+    connect(thermSplitterFhkExtWallsWin.portOut[1], convExtWall.solid);
+    connect(thermSplitterHkRadExtWallsWin.portOut[1], convExtWall.solid);
   end if;
 
    annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
