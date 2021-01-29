@@ -21,6 +21,9 @@ model SimpleConsumer "Simple Consumer"
               choice="T_input",
               choice="Q_flow_fixed",
               choice="Q_flow_input"),Dialog(enable=true));
+  parameter Integer demandType=1 "Choose between heating and cooling functionality" annotation (choices(
+              choice=1 "use as heating consumer",
+              choice=-1 "use as cooling consumer"),Dialog(enable=true));
 
   Fluid.MixingVolumes.MixingVolume volume(
     final V=V,
@@ -73,8 +76,8 @@ model SimpleConsumer "Simple Consumer"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow if
     functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-62,58})));
+        rotation=0,
+        origin={-12,40})));
   Modelica.Blocks.Sources.RealExpression realExpression2(y=Q_flow_fixed) if
     functionality == "Q_flow_fixed"                           annotation (
       Placement(transformation(
@@ -82,6 +85,7 @@ model SimpleConsumer "Simple Consumer"
         rotation=0,
         origin={-90,80})));
   Modelica.Blocks.Interfaces.RealInput Q_flow if functionality == "Q_flow_input"
+    "Consumed heat flow, positive for heating or cooling"
                                               annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
@@ -97,7 +101,7 @@ model SimpleConsumer "Simple Consumer"
             1000,m_flow_nominal/500}, dp={dp_nominalPumpConsumer/0.8,
             dp_nominalPumpConsumer,0}), motorCooledByFluid=false),
     addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+    annotation (Placement(transformation(extent={{-40,10},{-20,-10}})));
 
 
 
@@ -112,19 +116,19 @@ model SimpleConsumer "Simple Consumer"
     yMin=0,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=1) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{10,10},{-10,-10}},
         rotation=180,
-        origin={-80,32})));
+        origin={-50,-40})));
   Fluid.Sensors.TemperatureTwoPort senTemReturn(
     redeclare package Medium = Medium,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start - deltaTConsumerNominal)
                     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,10},{10,-10}},
         rotation=0,
         origin={50,0})));
-  Modelica.Blocks.Math.Add add(k1=-1)
+  Modelica.Blocks.Math.Add add(k1=-demandType)
     annotation (Placement(transformation(extent={{-136,22},{-116,42}})));
   Fluid.Sensors.TemperatureTwoPort senTemFlow(
     redeclare package Medium = Medium,
@@ -148,6 +152,17 @@ model SimpleConsumer "Simple Consumer"
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={0,100})));
+  Modelica.Blocks.Math.Gain gain2(k=demandType)
+    "Used to reverse direction of operation of controller"
+    annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
+  Modelica.Blocks.Math.Gain gain(k=demandType)
+    "Used to reverse direction of operation of controller"
+    annotation (Placement(transformation(extent={{20,-70},{0,-50}})));
+  Modelica.Blocks.Math.Gain gain1(k=-demandType) if functionality == "Q_flow_input"
+     or functionality == "Q_flow_fixed"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-42,40})));
 equation
   connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
           {10,40},{34,40}},               color={191,0,0},
@@ -166,21 +181,11 @@ equation
   connect(prescribedTemperature.T, T)
     annotation (Line(points={{52,80},{60,80},{60,120}}, color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(prescribedHeatFlow.Q_flow, realExpression2.y)
-    annotation (Line(points={{-62,68},{-62,80},{-79,80}},
-                                                 color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(prescribedHeatFlow.Q_flow, Q_flow)
-    annotation (Line(points={{-62,68},{-62,94},{-60,94},{-60,120}},
-                                                           color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(prescribedHeatFlow.port, heatCapacitor.port)
-    annotation (Line(points={{-62,48},{-62,40},{34,40}}, color={191,0,0},
+    annotation (Line(points={{-2,40},{34,40}},           color={191,0,0},
       pattern=LinePattern.Dash));
   connect(volume.ports[1], pump.port_b)
     annotation (Line(points={{2,0},{-20,0}},  color={0,127,255}));
-  connect(senTemReturn.T, PIPump.u_m) annotation (Line(points={{50,11},{24,11},
-          {24,44},{-80,44}}, color={0,0,127}));
   connect(volume.ports[2], senTemReturn.port_a)
     annotation (Line(points={{-2,0},{40,0}}, color={0,127,255}));
   connect(port_b, senTemReturn.port_b)
@@ -189,14 +194,33 @@ equation
     annotation (Line(points={{-100,0},{-72,0}}, color={0,127,255}));
   connect(pump.port_a, senTemFlow.port_b) annotation (Line(points={{-40,0},{-52,
           0}},                 color={0,127,255}));
-  connect(PIPump.u_s, add.y)
-    annotation (Line(points={{-92,32},{-115,32}}, color={0,0,127}));
   connect(add.u1, const.y) annotation (Line(points={{-138,38},{-148,38},{-148,50},
           {-157,50}}, color={0,0,127}));
   connect(PIPump.y, pump.y)
-    annotation (Line(points={{-69,32},{-30,32},{-30,12}}, color={0,0,127}));
+    annotation (Line(points={{-39,-40},{-30,-40},{-30,-12}},
+                                                          color={0,0,127}));
   connect(T_flowSet, add.u2) annotation (Line(points={{0,120},{0,80},{-184,80},
           {-184,26},{-138,26}}, color={0,0,127}));
+  connect(PIPump.u_s, gain2.y)
+    annotation (Line(points={{-62,-40},{-79,-40}}, color={0,0,127}));
+  connect(gain2.u, add.y) annotation (Line(points={{-102,-40},{-104,-40},{-104,32},
+          {-115,32}}, color={0,0,127}));
+  connect(senTemReturn.T, gain.u)
+    annotation (Line(points={{50,-11},{50,-60},{22,-60}}, color={0,0,127}));
+  connect(gain.y, PIPump.u_m)
+    annotation (Line(points={{-1,-60},{-50,-60},{-50,-52}}, color={0,0,127}));
+  connect(Q_flow, gain1.u) annotation (Line(
+      points={{-60,120},{-60,40},{-54,40}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(realExpression2.y, gain1.u) annotation (Line(
+      points={{-79,80},{-60,80},{-60,40},{-54,40}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(gain1.y, prescribedHeatFlow.Q_flow) annotation (Line(
+      points={{-31,40},{-22,40}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
