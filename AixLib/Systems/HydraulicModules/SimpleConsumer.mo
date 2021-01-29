@@ -15,7 +15,6 @@ model SimpleConsumer "Simple Consumer"
     "Nominal mass flow rate";
   parameter SI.Temperature T_start
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
-  parameter SI.TemperatureDifference deltaTConsumerNominal "Nominal temperature difference between flow and return in consumer";
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
               choice="T_input",
@@ -123,13 +122,11 @@ model SimpleConsumer "Simple Consumer"
     redeclare package Medium = Medium,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
-    T_start=T_start - deltaTConsumerNominal)
+    T_start=T_start)
                     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={50,0})));
-  Modelica.Blocks.Math.Add add(k1=-demandType)
-    annotation (Placement(transformation(extent={{-136,22},{-116,42}})));
   Fluid.Sensors.TemperatureTwoPort senTemFlow(
     redeclare package Medium = Medium,
     allowFlowReversal=allowFlowReversal,
@@ -139,12 +136,10 @@ model SimpleConsumer "Simple Consumer"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-62,0})));
-  Modelica.Blocks.Sources.Constant const(k=deltaTConsumerNominal)
-    annotation (Placement(transformation(extent={{-178,40},{-158,60}})));
   parameter Real k_ControlConsumerPump "Gain of controller";
   parameter SI.Time Ti_ControlConsumerPump
     "Time constant of Integrator block";
-  Modelica.Blocks.Interfaces.RealInput T_flowSet annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput T_returnSet annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
@@ -194,17 +189,11 @@ equation
     annotation (Line(points={{-100,0},{-72,0}}, color={0,127,255}));
   connect(pump.port_a, senTemFlow.port_b) annotation (Line(points={{-40,0},{-52,
           0}},                 color={0,127,255}));
-  connect(add.u1, const.y) annotation (Line(points={{-138,38},{-148,38},{-148,50},
-          {-157,50}}, color={0,0,127}));
   connect(PIPump.y, pump.y)
     annotation (Line(points={{-39,-40},{-30,-40},{-30,-12}},
                                                           color={0,0,127}));
-  connect(T_flowSet, add.u2) annotation (Line(points={{0,120},{0,80},{-184,80},
-          {-184,26},{-138,26}}, color={0,0,127}));
   connect(PIPump.u_s, gain2.y)
     annotation (Line(points={{-62,-40},{-79,-40}}, color={0,0,127}));
-  connect(gain2.u, add.y) annotation (Line(points={{-102,-40},{-104,-40},{-104,32},
-          {-115,32}}, color={0,0,127}));
   connect(senTemReturn.T, gain.u)
     annotation (Line(points={{50,-11},{50,-60},{22,-60}}, color={0,0,127}));
   connect(gain.y, PIPump.u_m)
@@ -221,6 +210,8 @@ equation
       points={{-31,40},{-22,40}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+  connect(gain2.u, T_returnSet) annotation (Line(points={{-102,-40},{-120,-40},
+          {-120,90},{0,90},{0,120}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
