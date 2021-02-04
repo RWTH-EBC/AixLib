@@ -3,8 +3,7 @@ model Test_SensibleCooler
   AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SensibleCooler cooler(
     redeclare model PartialPressureDrop =
         AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDrop
-        (b=3),
-      use_constant_heatTransferCoefficient=false)
+        (b=3), use_constant_heatTransferCoefficient=true)
     annotation (Placement(transformation(extent={{-12,-14},{8,6}})));
   Modelica.Blocks.Sources.Ramp m_airIn(
     height=1000/3600*1.18,
@@ -25,6 +24,7 @@ model Test_SensibleCooler
   AixLib.Fluid.HeatExchangers.HeaterCooler_u hea(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=2000/3600*1.18,
+    show_T=true,
     dp_nominal=0,
     Q_flow_nominal=-5000)
     annotation (Placement(transformation(extent={{-12,56},{8,76}})));

@@ -43,6 +43,7 @@ model Test_Heater2
   AixLib.Fluid.HeatExchangers.Heater_T hea(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=2000/3600*1.18,
+    show_T=true,
     dp_nominal=0)
     annotation (Placement(transformation(extent={{10,58},{30,78}})));
 equation

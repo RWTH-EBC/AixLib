@@ -1,11 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SteamHumidifier;
 model Test_SteamHumidifier2
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet preOut(
-    redeclare package Medium = AixLib.Media.Air,
-    m_flow_nominal=2000/3600*1.18,
-    dp_nominal=0,
-    use_TSet=true)
-    annotation (Placement(transformation(extent={{40,34},{60,54}})));
   Modelica.Blocks.Sources.Ramp m_airIn_equation(
     height=0,
     duration=600,
@@ -16,18 +10,17 @@ model Test_SteamHumidifier2
     annotation (Placement(transformation(extent={{38,-74},{18,-54}})));
   Modelica.Blocks.Sources.Ramp X_set(
     height=0.003,
-    duration(displayUnit="d") = 864000,
+    duration(displayUnit="s") = 600,
     offset=0.012,
-    startTime(displayUnit="d") = 13824000)
+    startTime(displayUnit="s") = 3600)
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
     redeclare package Medium = AixLib.Media.Air,
     use_m_flow_in=true,
     use_T_in=true,
     X={0.01,1 - 0.01},
-    nPorts=1,
-    use_Xi_in=true)
-              annotation (Placement(transformation(extent={{-12,34},{8,54}})));
+    use_Xi_in=true,
+    nPorts=1) annotation (Placement(transformation(extent={{-12,34},{8,54}})));
   AixLib.Fluid.Sources.Boundary_pT bou(redeclare package Medium =
         AixLib.Media.Air, nPorts=1)
     annotation (Placement(transformation(extent={{80,78},{100,100}})));
@@ -42,76 +35,48 @@ model Test_SteamHumidifier2
       redeclare model PartialPressureDrop =
         AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
     annotation (Placement(transformation(extent={{-24,-30},{-4,-10}})));
-  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    computeWetBulbTemperature=false,
-    filNam=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
-    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation)
-    annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
 
-  AixLib.Utilities.Psychrometrics.X_pTphi x_pTphi
-    annotation (Placement(transformation(extent={{-76,-100},{-56,-80}})));
-  AixLib.BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
-        transformation(extent={{-94,-82},{-54,-42}}),
-                                                    iconTransformation(extent={{-220,20},
-            {-200,40}})));
+  Fluid.Humidifiers.SteamHumidifier_X hum(
+    redeclare package Medium = Media.Air,
+    m_flow_nominal=2000/3600*1.18,
+    show_T=true,
+    dp_nominal=0)
+    annotation (Placement(transformation(extent={{26,34},{46,54}})));
+  Modelica.Blocks.Sources.Constant X_in(k=0.003)
+    annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
+  Modelica.Blocks.Sources.Ramp T_airIn(
+    height=10,
+    duration=600,
+    offset=283.15,
+    startTime=2400)
+    annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
 equation
-  connect(boundary.ports[1], preOut.port_a)
-    annotation (Line(points={{8,44},{40,44}},  color={0,127,255}));
-  connect(preOut.X_wSet, X_set.y) annotation (Line(points={{38,48},{32,48},{32,90},
-          {-39,90}},     color={0,0,127}));
   connect(T_airOut_fluid.port_b, X_airOut_fluid.port_a)
     annotation (Line(points={{84,44},{92,44}},   color={0,127,255}));
-  connect(preOut.port_b, T_airOut_fluid.port_a)
-    annotation (Line(points={{60,44},{64,44}},          color={0,127,255}));
   connect(m_airIn_equation.y, steamHumidifier.m_flow_airIn) annotation (Line(
         points={{-79,10},{-52,10},{-52,-12},{-25,-12}}, color={0,0,127}));
   connect(steamHumidifier.T_steamIn, T_steam.y) annotation (Line(points={{-17,
           -29.4},{-17,-64},{17,-64}}, color={0,0,127}));
-  connect(steamHumidifier.T_airOut, preOut.TSet) annotation (Line(points={{-3,-15},
-          {12,-15},{12,64},{30,64},{30,52},{38,52}},      color={0,0,127}));
   connect(m_airIn_equation.y, boundary.m_flow_in) annotation (Line(points={{-79,10},
           {-52,10},{-52,52},{-14,52}},    color={0,0,127}));
-  connect(weaDat.weaBus,weaBus)  annotation (Line(
-      points={{-80,-30},{-74,-30},{-74,-62}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.pAtm,x_pTphi. p_in) annotation (Line(
-      points={{-74,-62},{-92,-62},{-92,-84},{-78,-84}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.TDryBul,x_pTphi. T) annotation (Line(
-      points={{-74,-62},{-92,-62},{-92,-90},{-78,-90}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.relHum,x_pTphi. phi) annotation (Line(
-      points={{-74,-62},{-92,-62},{-92,-96},{-78,-96}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.TDryBul, steamHumidifier.T_airIn) annotation (Line(
-      points={{-74,-62},{-56,-62},{-56,-15},{-25,-15}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(weaBus.TDryBul, boundary.T_in) annotation (Line(
-      points={{-74,-62},{-60,-62},{-60,48},{-14,48}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(x_pTphi.X[1], steamHumidifier.X_airIn) annotation (Line(points={{-55,
-          -90},{-50,-90},{-50,-18},{-25,-18}}, color={0,0,127}));
-  connect(x_pTphi.X[1], boundary.Xi_in[1]) annotation (Line(points={{-55,-90},{-50,
-          -90},{-50,40},{-14,40}}, color={0,0,127}));
   connect(X_airOut_fluid.port_b, bou.ports[1]) annotation (Line(points={{112,44},
           {120,44},{120,89},{100,89}}, color={0,127,255}));
-  connect(X_set.y, steamHumidifier.X_set) annotation (Line(points={{-39,90},{-36,
-          90},{-36,10},{-14,10},{-14,-9}}, color={0,0,127}));
+  connect(X_set.y, steamHumidifier.X_set) annotation (Line(points={{-39,90},{
+          -26,90},{-26,-9.8},{-14,-9.8}},  color={0,0,127}));
+  connect(hum.port_b, T_airOut_fluid.port_a)
+    annotation (Line(points={{46,44},{64,44}}, color={0,127,255}));
+  connect(boundary.ports[1], hum.port_a)
+    annotation (Line(points={{8,44},{26,44}}, color={0,127,255}));
+  connect(X_set.y, hum.X_w) annotation (Line(points={{-39,90},{18,90},{18,50},{
+          24,50}}, color={0,0,127}));
+  connect(T_airIn.y, boundary.T_in) annotation (Line(points={{-79,-30},{-42,-30},
+          {-42,48},{-14,48}}, color={0,0,127}));
+  connect(T_airIn.y, steamHumidifier.T_airIn) annotation (Line(points={{-79,-30},
+          {-42,-30},{-42,-15},{-25,-15}}, color={0,0,127}));
+  connect(X_in.y, boundary.Xi_in[1]) annotation (Line(points={{-79,-70},{-42,
+          -70},{-42,40},{-14,40}}, color={0,0,127}));
+  connect(X_in.y, steamHumidifier.X_airIn) annotation (Line(points={{-79,-70},{
+          -42,-70},{-42,-18},{-25,-18}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, Interval=1799.99712),
    Documentation(info="<html>
 <p>

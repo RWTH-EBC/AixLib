@@ -43,6 +43,7 @@ model Test_SensibleCooler2
   AixLib.Fluid.HeatExchangers.SensibleCooler_T coo(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=2000/3600*1.18,
+    show_T=true,
     dp_nominal=0)
     annotation (Placement(transformation(extent={{12,58},{32,78}})));
 equation

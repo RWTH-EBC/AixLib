@@ -14,7 +14,7 @@ model Test_PlateHeatExchangerFixed
     annotation (Placement(transformation(extent={{100,-100},{80,-80}})));
   Modelica.Blocks.Sources.Constant T_EtaIn(k=293.15)
     annotation (Placement(transformation(extent={{100,-40},{80,-20}})));
-  Modelica.Blocks.Sources.Constant const(k=5000)
+  Modelica.Blocks.Sources.Constant const(k=383.15)
     annotation (Placement(transformation(extent={{60,0},{40,20}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
     redeclare package Medium = AixLib.Media.Air,
@@ -53,18 +53,15 @@ model Test_PlateHeatExchangerFixed
     dp2_nominal=0,
     eps=0.85)
     annotation (Placement(transformation(extent={{-14,62},{6,82}})));
-  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    computeWetBulbTemperature=false,
-    filNam=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
-    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation)
-    annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
 
-  AixLib.Utilities.Psychrometrics.X_pTphi x_pTphi
-    annotation (Placement(transformation(extent={{-76,-100},{-56,-80}})));
-  AixLib.BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
-        transformation(extent={{-94,-82},{-54,-42}}),
-                                                    iconTransformation(extent={{-220,20},
-            {-200,40}})));
+  Modelica.Blocks.Sources.Constant X_in(k=0.003)
+    annotation (Placement(transformation(extent={{-100,-88},{-80,-68}})));
+  Modelica.Blocks.Sources.Ramp T_airIn(
+    height=10,
+    duration=600,
+    offset=283.15,
+    startTime=2400)
+    annotation (Placement(transformation(extent={{-100,-48},{-80,-28}})));
 equation
   connect(m_flow.y, plateHeatExchanger.m_flow_airInOda) annotation (Line(points={{-79,0},
           {-52,0},{-52,-34},{-9,-34}},             color={0,0,127}));
@@ -73,7 +70,7 @@ equation
   connect(T_EtaIn.y, plateHeatExchanger.T_airInEta) annotation (Line(points={{79,
           -30},{70,-30},{70,-37},{13,-37}}, color={0,0,127}));
   connect(const.y, plateHeatExchanger.T_set)
-    annotation (Line(points={{39,10},{2,10},{2,-31}}, color={0,0,127}));
+    annotation (Line(points={{39,10},{2,10},{2,-32}}, color={0,0,127}));
   connect(plateHeatExchanger.m_flow_airInEta, m_flow.y) annotation (Line(points={{13,-34},
           {32,-34},{32,-14},{70,-14},{70,26},{-40,26},{-40,0},{-79,0}},
         color={0,0,127}));
@@ -89,51 +86,26 @@ equation
           {18,78},{18,90},{38,90}}, color={0,127,255}));
   connect(hex.port_a1, boundary.ports[1]) annotation (Line(points={{-14,78},{-34,
           78},{-34,84},{-60,84}}, color={0,127,255}));
-  connect(weaDat.weaBus,weaBus)  annotation (Line(
-      points={{-80,-30},{-74,-30},{-74,-62}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.pAtm,x_pTphi. p_in) annotation (Line(
-      points={{-74,-62},{-92,-62},{-92,-84},{-78,-84}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.TDryBul,x_pTphi. T) annotation (Line(
-      points={{-74,-62},{-92,-62},{-92,-90},{-78,-90}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.relHum,x_pTphi. phi) annotation (Line(
-      points={{-74,-62},{-92,-62},{-92,-96},{-78,-96}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.TDryBul, plateHeatExchanger.T_airInOda) annotation (Line(
-      points={{-74,-62},{-40,-62},{-40,-37},{-9,-37}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(x_pTphi.X[1], plateHeatExchanger.X_airInOda) annotation (Line(points={{-55,-90},
-          {-16,-90},{-16,-40},{-9,-40}},            color={0,0,127}));
   connect(X_EtaIn.y, boundary1.Xi_in[1]) annotation (Line(points={{79,-90},{60,-90},
           {60,-14},{94,-14},{94,54},{88,54}}, color={0,0,127}));
   connect(m_flow.y, boundary1.m_flow_in) annotation (Line(points={{-79,0},{-40,0},
           {-40,26},{94,26},{94,66},{88,66}}, color={0,0,127}));
   connect(T_EtaIn.y, boundary1.T_in) annotation (Line(points={{79,-30},{70,-30},
           {70,-14},{94,-14},{94,62},{88,62}}, color={0,0,127}));
-  connect(x_pTphi.X[1], boundary.Xi_in[1]) annotation (Line(points={{-55,-90},{-40,
-          -90},{-40,24},{-94,24},{-94,80},{-82,80}}, color={0,0,127}));
-  connect(weaBus.TDryBul, boundary.T_in) annotation (Line(
-      points={{-74,-62},{-60,-62},{-60,24},{-96,24},{-96,88},{-82,88}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(boundary.m_flow_in, m_flow.y) annotation (Line(points={{-82,92},{-100,
           92},{-100,20},{-70,20},{-70,0},{-79,0}}, color={0,0,127}));
-  annotation (experiment(StopTime=31536000, Interval=1800),
+  connect(T_airIn.y, boundary.T_in) annotation (Line(points={{-79,-38},{-70,-38},
+          {-70,20},{-100,20},{-100,88},{-82,88}}, color={0,0,127}));
+  connect(X_in.y, boundary.Xi_in[1]) annotation (Line(points={{-79,-78},{-70,
+          -78},{-70,20},{-100,20},{-100,80},{-82,80}}, color={0,0,127}));
+  connect(X_in.y, plateHeatExchanger.X_airInOda) annotation (Line(points={{-79,
+          -78},{-70,-78},{-70,-40},{-9,-40}}, color={0,0,127}));
+  connect(T_airIn.y, plateHeatExchanger.T_airInOda) annotation (Line(points={{
+          -79,-38},{-44,-38},{-44,-37},{-9,-37}}, color={0,0,127}));
+  annotation (experiment(
+      StopTime=8000,
+      __Dymola_NumberOfIntervals=8000,
+      __Dymola_Algorithm="Dassl"),
    Documentation(info="<html>
 <p>
 There are two incoming airflows flowing through <a href=\"modelica://SimpleAHU.Components.PlateHeatExchangerFixedEfficiency\">

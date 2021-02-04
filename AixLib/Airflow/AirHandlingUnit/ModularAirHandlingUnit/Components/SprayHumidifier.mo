@@ -26,6 +26,9 @@ model SprayHumidifier "Idealized model of a spray humidifier"
 
   Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
+
+  Modelica.Blocks.Interfaces.RealOutput mWat "mass flow rate water"
+    annotation (Placement(transformation(extent={{100,-64},{120,-44}})));
 protected
   Real WLN "water to air ratio";
 equation
@@ -42,6 +45,7 @@ equation
   else
   m_wat_flow_intern = m_flow_airIn / (1+X_airIn) * (X_intern-X_airIn);
   end if;
+  mWat = m_wat_flow_intern;
 
   // energy balance
   m_flow_airIn * h_airIn + m_wat_flow_intern * eta_B * h_watIn - m_flow_airOut * h_airOut = 0;

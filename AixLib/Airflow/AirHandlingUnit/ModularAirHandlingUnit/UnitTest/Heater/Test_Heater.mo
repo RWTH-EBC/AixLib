@@ -25,6 +25,7 @@ model Test_Heater
   AixLib.Fluid.HeatExchangers.HeaterCooler_u hea(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=2000/3600*1.18,
+    show_T=true,
     dp_nominal=0,
     Q_flow_nominal=5000)
     annotation (Placement(transformation(extent={{-12,56},{8,76}})));

@@ -134,9 +134,9 @@ protected
   Modelica.Blocks.Interfaces.RealInput T_intern "internal temperature";
   Modelica.Blocks.Interfaces.RealInput X_intern "internal mass fraction";
   parameter Real Q_in=0 "dummy heat flow rate, if use_T_set = false";
-  Modelica.Blocks.Math.Min min_T
+  Modelica.Blocks.Math.Min min_T if use_T_set
     annotation (Placement(transformation(extent={{-48,68},{-36,80}})));
-  Modelica.Blocks.Math.Min min_X
+  Modelica.Blocks.Math.Min min_X if use_X_set
     annotation (Placement(transformation(extent={{20,68},{32,80}})));
 equation
 
