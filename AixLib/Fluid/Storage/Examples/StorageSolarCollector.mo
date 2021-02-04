@@ -18,7 +18,10 @@ model StorageSolarCollector
     k_HE=1500,
     d=1.5,
     h=2.5,
-    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
+    redeclare package Medium = Medium,
+    m_flow_nominal_layer=solarThermal.m_flow_nominal,
+    m_flow_nominal_HE=solarThermal.m_flow_nominal)
+                                       annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-60,14},
             {-40,34}})));
   AixLib.Fluid.Movers.Pump

@@ -16,7 +16,7 @@ model ExampleAachen "Ground temperature at the site of EBC"
     "Output to show ground temperature"
     annotation (Placement(transformation(extent={{96,-10},{116,10}})));
 equation
-  connect(groundTemperatureAachen.port_a, temperatureSensor.port) annotation (
+  connect(groundTemperatureAachen.port, temperatureSensor.port) annotation (
       Line(points={{9.4,-5},{16.7,-5},{16.7,0},{24,0}}, color={191,0,0}));
   connect(temperatureSensor.T, T_ground)
     annotation (Line(points={{44,0},{106,0}}, color={0,0,127}));

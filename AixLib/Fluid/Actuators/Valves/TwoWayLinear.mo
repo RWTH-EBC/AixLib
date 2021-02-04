@@ -1,6 +1,6 @@
 within AixLib.Fluid.Actuators.Valves;
 model TwoWayLinear "Two way valve with linear flow characteristics"
-  extends BaseClasses.PartialTwoWayValveKv(phi=max(0, l + y_actual*(1 - l)));
+  extends BaseClasses.PartialTwoWayValveKv(phi=max(0.1*l, l + y_actual*(1 - l)));
 
 initial equation
   // Since the flow model AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow computes

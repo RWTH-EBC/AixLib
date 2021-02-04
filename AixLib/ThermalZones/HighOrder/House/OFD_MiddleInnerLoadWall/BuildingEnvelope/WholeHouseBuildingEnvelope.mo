@@ -233,7 +233,7 @@ equation
     annotation (Line(points={{24.4,-39.4},{36,-39.4},{36,-38}}, color={191,0,0}));
   connect(upperFloor_Building.thermCorridor, varAirExchange.port_a) annotation (
      Line(points={{22.3,-24.6},{36,-24.6},{36,-26}}, color={191,0,0}));
-  connect(AirExchangeCorridor_Source.y, varAirExchange.InPort1) annotation (
+  connect(AirExchangeCorridor_Source.y, varAirExchange.ventRate) annotation (
       Line(points={{26.2,-32},{28,-32},{28,-24},{32.16,-24},{32.16,-26.6}},
         color={0,0,127}));
   connect(groundFloor_Building.AirExchangePort[1:4], AirExchangePort[1:4])
