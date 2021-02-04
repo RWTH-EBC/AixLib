@@ -1,4 +1,4 @@
-within AixLib.Utilities.HeatTransfer;
+﻿within AixLib.Utilities.HeatTransfer;
 model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
   parameter Boolean use_A_in = false
@@ -12,7 +12,8 @@ model HeatToRad "Adaptor for approximative longwave radiation exchange with vari
         origin={0,90},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  AixLib.Utilities.Interfaces.RadPort rad "Heat port for longwave radiative heat flow" annotation (Placement(transformation(extent={{81,-10},{101,10}})));
+  AixLib.Utilities.Interfaces.RadPort rad
+    "Heat port for longwave radiative heat flow"                                       annotation (Placement(transformation(extent={{81,-10},{101,10}})));
 protected
   Modelica.Blocks.Interfaces.RealInput A_in_internal(final unit="m2")
     "Needed to connect to conditional connector";

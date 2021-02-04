@@ -1,0 +1,2 @@
+convertClass("AixLib.FastHVAC", "AixLib.Obsolete.YearIndependent.FastHVAC");
+convertClass("AixLib.Utilities.HeatTransfer.HeatConvPipeInside", "AixLib.Obsolete.YearIndependent.Utilities.HeatTransfer.HeatConvPipeInside");
