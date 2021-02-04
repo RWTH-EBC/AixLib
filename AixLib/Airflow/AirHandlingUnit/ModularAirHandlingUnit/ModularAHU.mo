@@ -16,12 +16,29 @@ model ModularAHU "model of a modular air handling unit"
     annotation(Dialog(group="Cooling",enable=cooling or dehumidifying));
   constant Modelica.SIunits.Density rho = 1.2 "constant density of air";
 
-  parameter Modelica.SIunits.PressureDifference dp_sup = 800
-    "pressure increase of supply air fan"
-    annotation(Dialog(tab="fans"));
-  parameter Modelica.SIunits.PressureDifference dp_eta = 800
-    "pressure increase of exhaust air fan"
-    annotation(Dialog(tab="fans"));
+  // Efficiency of HRS
+  parameter Real efficiencyHRS_enabled(
+    min=0,
+    max=1) = 0.8 "efficiency of HRS in the AHU modes when HRS is enabled"
+    annotation (Dialog(group="Settings AHU Value", enable=HRS));
+  parameter Real efficiencyHRS_disabled(
+    min=0,
+    max=1) = 0.2
+    "taking a little heat transfer into account although HRS is disabled 
+    (in case that a HRS is physically installed in the AHU)"
+    annotation (Dialog(group="Settings AHU Value", enable=heatReecovery));
+  // assumed increase in ventilator pressure
+  parameter Modelica.SIunits.Pressure dp_sup=800
+    "pressure difference over supply fan"
+    annotation (Dialog(tab="Fans", group="Constant Assumptions"));
+  parameter Modelica.SIunits.Pressure dp_eta=800
+    "pressure difference over extract fan"
+    annotation (Dialog(tab="Fans", group="Constant Assumptions"));
+  // assumed efficiencies of the ventilators
+  parameter Modelica.SIunits.Efficiency eta_sup=0.7 "efficiency of supply fan"
+    annotation (Dialog(tab="Fans", group="Constant Assumptions"));
+  parameter Modelica.SIunits.Efficiency eta_eta=0.7 "efficiency of extract fan"
+    annotation (Dialog(tab="Fans", group="Constant Assumptions"));
 
   Modelica.Blocks.Interfaces.RealInput VflowOda(unit="m3/s") "m3/s"
                                                 annotation (Placement(
@@ -34,13 +51,17 @@ model ModularAHU "model of a modular air handling unit"
     "kg of water/kg of dry air" annotation (Placement(transformation(extent={{-174,
             -14},{-146,14}}), iconTransformation(extent={{-168,16},{-160,24}})));
   Components.PlateHeatExchangerFixedEfficiency
-    plateHeatExchangerFixedEfficiency(redeclare model PartialPressureDrop =
+    plateHeatExchangerFixedEfficiency(
+    rho_air=rho,
+    epsEnabled=efficiencyHRS_enabled,
+    epsDisabled=efficiencyHRS_disabled,
+                                      redeclare model PartialPressureDrop =
         Components.PressureDrop.PressureDropSimple) if
                                          heatRecovery
     annotation (Placement(transformation(extent={{-94,2},{-74,22}})));
-  Components.FanSimple fanSimple
+  Components.FanSimple fanSimple(rho_air=rho, eta=eta_sup)
     annotation (Placement(transformation(extent={{-38,-58},{-18,-38}})));
-  Components.FanSimple fanSimple1
+  Components.FanSimple fanSimple1(rho_air=rho, eta=eta_eta)
     annotation (Placement(transformation(extent={{-20,48},{-40,68}})));
   Modelica.Blocks.Math.Gain gain(k=rho)
     annotation (Placement(transformation(extent={{-140,74},{-128,86}})));
@@ -370,6 +391,15 @@ equation
           {-16,-68},{-56.4,-68},{-56.4,-72.8}}, color={0,0,127}));
   connect(fanSimple1.PelFan, add.u2) annotation (Line(points={{-41,50},{-63.6,50},
           {-63.6,-72.8}}, color={0,0,127}));
+  connect(fanSimple1.m_flow_airOut, plateHeatExchangerFixedEfficiency.m_flow_airInEta)
+    annotation (Line(points={{-41,66},{-66,66},{-66,20},{-73,20}}, color={0,0,
+          127}));
+  connect(fanSimple1.T_airOut, plateHeatExchangerFixedEfficiency.T_airInEta)
+    annotation (Line(points={{-41,63},{-66,63},{-66,17},{-73,17}}, color={0,0,
+          127}));
+  connect(fanSimple1.X_airOut, plateHeatExchangerFixedEfficiency.X_airInEta)
+    annotation (Line(points={{-41,60},{-66,60},{-66,14},{-73,14}}, color={0,0,
+          127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));
