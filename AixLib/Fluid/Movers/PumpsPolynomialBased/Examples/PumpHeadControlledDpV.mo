@@ -1,18 +1,12 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
-model PumpHdpVarControlTest
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+model PumpHeadControlledDpV
   "testing the pump dp-var algorithm with the new \"one record\" pump model."
   extends Modelica.Icons.Example;
-  inner Modelica.Fluid.System system(m_flow_start=1,
-    allowFlowReversal=false,
-    p_ambient=300000,
-    T_ambient=293.15,
-    T_start=293.15,
-    m_flow_small=pump.Qnom*995/3600*1e-2)
-    annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpHeadControlled pump(
+    m_flow_nominal=m_flow_nominal,
     calculatePower=true,
     calculateEfficiency=true,
     redeclare package Medium = Medium,
@@ -27,8 +21,7 @@ model PumpHdpVarControlTest
   AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
     Kvs=6.3,
-    m_flow_start=system.m_flow_start,
-    m_flow_small=system.m_flow_small)
+    m_flow_small=1E-4*m_flow_nominal)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
@@ -39,8 +32,6 @@ model PumpHdpVarControlTest
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   AixLib.Fluid.Sources.Boundary_pT vessle(
     redeclare package Medium = Medium,
-    p=system.p_start,
-    T=system.T_start,
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -51,6 +42,7 @@ model PumpHdpVarControlTest
   BaseClasses.PumpBus pumpControllerBus1
     annotation (Placement(transformation(extent={{-10,50},{10,70}}),
         iconTransformation(extent={{-34,38},{-14,58}})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
 equation
   connect(rampValvePosition.y, simpleValve.opening)
     annotation (Line(points={{-21,-60},{-30,-60},{-30,-38}}, color={0,0,127}));
@@ -79,7 +71,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   annotation (
-      experiment(StopTime=600),
+      experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -108,15 +100,7 @@ equation
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHdpVarControlTest.mos"
-        "Simulate and plot"),
-    Diagram(graphics={Text(
-          extent={{-82,94},{80,66}},
-          lineColor={100,100,100},
-          horizontalAlignment=TextAlignment.Left,
-          textString="* Tests PumpH model (head controlled pump with controller block)
-* Tests dp-var control (PumpH version, numerical values)
-* Tests system pressure drop change (ramp)
-* Tests pump off-switch")}));
-end PumpHdpVarControlTest;
+    __Dymola_Commands(file=
+        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlledDpV.mos"
+        "Simulate and plot"));
+end PumpHeadControlledDpV;
