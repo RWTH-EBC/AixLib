@@ -4,9 +4,9 @@ model Test_SprayHumidifier
     sprayHumidifier(simplify_m_wat_flow=false,
       redeclare model PartialPressureDrop =
         AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple,
-
     k=500000)
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
+
   Modelica.Blocks.Sources.Ramp m_airIn_equation(
     height=0,
     duration=600,

@@ -44,7 +44,8 @@ model ExampleAHU2 "Model of an examplary air handling unit"
 
   Components.PlateHeatExchangerFixedEfficiency
     plateHeatExchangerFixedEfficiency(cp_air=cp_air, cp_steam=cp_steam,
-    epsilon=efficiencyHRS,
+    epsEnabled=efficiencyHRS,
+    epsDisabled=0,
     redeclare model PartialPressureDrop =
         Components.PressureDrop.PressureDropSimple (a=0.5, b=1.8))
     annotation (Placement(transformation(extent={{-72,0},{-52,20}})));
@@ -209,16 +210,6 @@ model ExampleAHU2 "Model of an examplary air handling unit"
   Components.SprayHumidifier sprayHumidifier(use_X_set=true, redeclare model
       PartialPressureDrop = Components.PressureDrop.PressureDropSimple)
     annotation (Placement(transformation(extent={{32,-12},{52,8}})));
-  Components.FlowControlled_dp supVentilator_dp(m_flow_nominal=100*1.2,
-      redeclare Fluid.Movers.Data.Generic per(hydraulicEfficiency(eta={1}),
-        motorEfficiency(eta={0.7})))
-    "supply air ventilator"
-    annotation (Placement(transformation(extent={{104,-12},{124,8}})));
-  Components.FlowControlled_dp etaVentilator_dp(m_flow_nominal=100*1.2,
-      redeclare Fluid.Movers.Data.Generic per(hydraulicEfficiency(eta={1}),
-        motorEfficiency(eta={0.7})))
-    "extracted air ventilator"
-    annotation (Placement(transformation(extent={{122,26},{102,46}})));
   Modelica.Blocks.Interfaces.RealInput dp_supVent "Prescribed pressure rise"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -261,6 +252,10 @@ model ExampleAHU2 "Model of an examplary air handling unit"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-76,-100})));
+  Components.FanSimple fanSimple
+    annotation (Placement(transformation(extent={{118,18},{98,38}})));
+  Components.FanSimple fanSimple1
+    annotation (Placement(transformation(extent={{106,6},{126,-14}})));
 equation
   if use_T_set then
     connect(preheater.T_set, T_set_preheater) annotation (Line(points={{-24,8},
@@ -327,44 +322,9 @@ equation
   connect(sprayHumidifier.T_watIn, T_waterIn) annotation (Line(points={{39,
           -11.4},{39,-76},{68,-76},{68,-110}},
                                         color={0,0,127}));
-  connect(reheater.m_flow_airOut, supVentilator_dp.m_flow_in) annotation (Line(
-        points={{85,6},{94,6},{94,-2},{102.6,-2}}, color={0,0,127}));
-  connect(reheater.T_airOut, supVentilator_dp.T_airIn) annotation (Line(points=
-          {{85,3},{92,3},{92,-6},{102.6,-6}}, color={0,0,127}));
-  connect(reheater.X_airOut, supVentilator_dp.X_airIn) annotation (Line(points=
-          {{85,0},{90,0},{90,-10},{102.6,-10}}, color={0,0,127}));
-  connect(supVentilator_dp.m_flow_out, m_flow_airOutSup) annotation (Line(
-        points={{125,-2},{152,-2},{152,-20},{190,-20}}, color={0,0,127}));
-  connect(supVentilator_dp.T_airOut, T_airOutSup) annotation (Line(points={{125,
-          -6},{148,-6},{148,-50},{190,-50}}, color={0,0,127}));
-  connect(supVentilator_dp.X_airOut, X_airOutSup) annotation (Line(points={{125,
-          -10},{144,-10},{144,-80},{190,-80}}, color={0,0,127}));
-  connect(m_flow_airInEta, etaVentilator_dp.m_flow_in) annotation (Line(points=
-          {{200,80},{140,80},{140,36},{123.4,36}}, color={0,0,127}));
-  connect(T_airInEta, etaVentilator_dp.T_airIn) annotation (Line(points={{200,
-          50},{146,50},{146,32},{123.4,32}}, color={0,0,127}));
-  connect(X_airInEta, etaVentilator_dp.X_airIn) annotation (Line(points={{200,
-          20},{146,20},{146,28},{123.4,28}}, color={0,0,127}));
-  connect(etaVentilator_dp.m_flow_out, plateHeatExchangerFixedEfficiency.m_flow_airInEta)
-    annotation (Line(points={{101,36},{-44,36},{-44,18},{-51,18}}, color={0,0,
-          127}));
-  connect(etaVentilator_dp.T_airOut, plateHeatExchangerFixedEfficiency.T_airInEta)
-    annotation (Line(points={{101,32},{-42,32},{-42,14},{-51,14},{-51,15}},
-        color={0,0,127}));
-  connect(etaVentilator_dp.X_airOut, plateHeatExchangerFixedEfficiency.X_airInEta)
-    annotation (Line(points={{101,28},{-40,28},{-40,12},{-51,12}}, color={0,0,
-          127}));
   connect(plateHeatExchangerFixedEfficiency.T_airOutEta, T_airOutEha)
     annotation (Line(points={{-73,5},{-96,5},{-96,-50},{-190,-50}}, color={0,0,
           127}));
-  connect(supVentilator_dp.dp_in, dp_supVent) annotation (Line(points={{102.6,2},
-          {98,2},{98,-84},{168,-84},{168,-110}}, color={0,0,127}));
-  connect(etaVentilator_dp.dp_in, dp_etaVent)
-    annotation (Line(points={{123.4,40},{130,40},{130,100}}, color={0,0,127}));
-  connect(etaVentilator_dp.P, Pel_eta)
-    annotation (Line(points={{101,40},{80,40},{80,110}}, color={0,0,127}));
-  connect(supVentilator_dp.P, Pel_sup)
-    annotation (Line(points={{125,2},{190,2}}, color={0,0,127}));
   connect(sprayHumidifier.X_set, X_set_Humidifier) annotation (Line(points={{42,8.2},
           {42,18},{26,18},{26,-80},{40,-80},{40,-110}},    color={0,0,127}));
   connect(cooler.X_set, X_set_cooler) annotation (Line(points={{16,8},{16,42},{-40,
@@ -372,6 +332,41 @@ equation
   connect(cooler.T_coolingSurf, T_coolingSurf1) annotation (Line(points={{5.1,
           -11.9},{5.1,-46},{6,-46},{6,-80},{-66,-80},{-66,-110}}, color={0,0,
           127}));
+  connect(fanSimple.m_flow_airOut, plateHeatExchangerFixedEfficiency.m_flow_airInEta)
+    annotation (Line(points={{97,36},{-30,36},{-30,18},{-51,18}}, color={0,0,
+          127}));
+  connect(fanSimple.T_airOut, plateHeatExchangerFixedEfficiency.T_airInEta)
+    annotation (Line(points={{97,33},{-28,33},{-28,15},{-51,15}}, color={0,0,
+          127}));
+  connect(fanSimple.X_airOut, plateHeatExchangerFixedEfficiency.X_airInEta)
+    annotation (Line(points={{97,30},{-26,30},{-26,12},{-51,12}}, color={0,0,
+          127}));
+  connect(X_airInEta, fanSimple.X_airIn) annotation (Line(points={{200,20},{160,
+          20},{160,30},{119,30}}, color={0,0,127}));
+  connect(T_airInEta, fanSimple.T_airIn) annotation (Line(points={{200,50},{160,
+          50},{160,33},{119,33}}, color={0,0,127}));
+  connect(m_flow_airInEta, fanSimple.m_flow_airIn) annotation (Line(points={{
+          200,80},{156,80},{156,36},{119,36}}, color={0,0,127}));
+  connect(dp_etaVent, fanSimple.dpIn) annotation (Line(points={{130,100},{130,
+          46},{108,46},{108,39}}, color={0,0,127}));
+  connect(fanSimple.PelFan, Pel_eta)
+    annotation (Line(points={{97,20},{80,20},{80,110}}, color={0,0,127}));
+  connect(reheater.m_flow_airOut, fanSimple1.m_flow_airIn) annotation (Line(
+        points={{85,6},{94,6},{94,-12},{105,-12}}, color={0,0,127}));
+  connect(reheater.T_airOut, fanSimple1.T_airIn) annotation (Line(points={{85,3},
+          {94.5,3},{94.5,-9},{105,-9}}, color={0,0,127}));
+  connect(reheater.X_airOut, fanSimple1.X_airIn) annotation (Line(points={{85,0},
+          {96,0},{96,-6},{105,-6}}, color={0,0,127}));
+  connect(fanSimple1.T_airOut, T_airOutSup) annotation (Line(points={{127,-9},{
+          154,-9},{154,-50},{190,-50}}, color={0,0,127}));
+  connect(fanSimple1.m_flow_airOut, m_flow_airOutSup) annotation (Line(points={
+          {127,-12},{156,-12},{156,-20},{190,-20}}, color={0,0,127}));
+  connect(fanSimple1.X_airOut, X_airOutSup) annotation (Line(points={{127,-6},{
+          150,-6},{150,-80},{190,-80}}, color={0,0,127}));
+  connect(dp_supVent, fanSimple1.dpIn) annotation (Line(points={{168,-110},{168,
+          -84},{116,-84},{116,-15}}, color={0,0,127}));
+  connect(fanSimple1.PelFan, Pel_sup) annotation (Line(points={{127,4},{156,4},
+          {156,2},{190,2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-180,
             -100},{180,100}}), graphics={
         Bitmap(
