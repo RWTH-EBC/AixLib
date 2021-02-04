@@ -7,5 +7,6 @@ PlateHeatExchanger
 PlateHeatExchangerFixedEfficiency
 FanSimple
 RecircFlap
+PassThrough
 BaseClasses
 PressureDrop
