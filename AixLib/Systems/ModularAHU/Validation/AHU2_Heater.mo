@@ -50,7 +50,9 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
     annotation (Placement(transformation(extent={{-78,-102},{-58,-82}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1
-    annotation (Placement(transformation(extent={{-96,32},{-82,46}})));
+    annotation (Placement(transformation(extent={{-7,-7},{7,7}},
+        rotation=270,
+        origin={-91,55})));
   Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
@@ -98,14 +100,14 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
   BaseClasses.RegisterBus registerBus1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
   Modelica.Blocks.Math.Add add
-    annotation (Placement(transformation(extent={{-130,16},{-110,36}})));
+    annotation (Placement(transformation(extent={{-90,34},{-78,46}})));
   Modelica.Blocks.Sources.Constant const(k=1)
-    annotation (Placement(transformation(extent={{-172,20},{-152,40}})));
+    annotation (Placement(transformation(extent={{-104,32},{-96,40}})));
 equation
   connect(toKelvin.Celsius, combiTimeTable.y[2]) annotation (Line(points={{-80,-92},
           {-106,-92},{-106,70},{-58,70},{-58,90},{-79,90}}, color={0,0,127}));
-  connect(toKelvin1.Celsius, combiTimeTable.y[5]) annotation (Line(points={{-97.4,
-          39},{-97.4,54},{-58,54},{-58,90},{-79,90}}, color={0,0,127}));
+  connect(toKelvin1.Celsius, combiTimeTable.y[5]) annotation (Line(points={{-91,
+          63.4},{-91,70},{-58,70},{-58,90},{-79,90}}, color={0,0,127}));
   connect(gain1.y, boundaryAirSource.m_flow_in) annotation (Line(points={{-85.6,
           24},{-82,24},{-82,32},{-72,32}}, color={0,0,127}));
   connect(gain1.u, combiTimeTable.y[7]) annotation (Line(points={{-94.8,24},{-106,
@@ -142,14 +144,15 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(boundaryWaterSource.ports[1], registerModule.port_a2) annotation (
       Line(points={{-20,-70},{-22,-70},{-22,0.461538}}, color={0,127,255}));
-  connect(const.y, add.u2) annotation (Line(points={{-151,30},{-142,30},{-142,
-          20},{-132,20}}, color={0,0,127}));
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)
     annotation (Line(points={{-57,-92},{-16,-92}}, color={0,0,127}));
-  connect(toKelvin1.Kelvin, add.u1) annotation (Line(points={{-81.3,39},{
-          -106.65,39},{-106.65,32},{-132,32}}, color={0,0,127}));
-  connect(add.y, boundaryAirSource.T_in) annotation (Line(points={{-109,26},{
-          -90,26},{-90,36},{-72,36}}, color={0,0,127}));
+  connect(toKelvin1.Kelvin,add. u1) annotation (Line(points={{-91,47.3},{-92,
+          47.3},{-92,50},{-91.2,50},{-91.2,43.6}},
+                          color={0,0,127}));
+  connect(add.y, boundaryAirSource.T_in) annotation (Line(points={{-77.4,40},{
+          -72,40},{-72,36}},          color={0,0,127}));
+  connect(const.y, add.u2) annotation (Line(points={{-95.6,36},{-94,36},{-94,
+          36.4},{-91.2,36.4}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>This example compares the simulated behavior with measured data. The input filter of the valve is deactivated because the measured actual opening (includes opening delay already) is used.</p>
 </html>", revisions="<html>

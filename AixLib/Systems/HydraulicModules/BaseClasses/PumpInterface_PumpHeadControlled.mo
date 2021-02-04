@@ -31,7 +31,7 @@ model PumpInterface_PumpHeadControlled
     final p_start=p_start,
     final T_start=T_start,
     final V=V,
-    final energyDynamics=energyDynamics,
+    final energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     final massDynamics=massDynamics,
     final calculatePower=calculatePower,
     final calculateEfficiency=calculateEfficiency,
