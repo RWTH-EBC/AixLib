@@ -120,8 +120,8 @@ model GenericPipe
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,42})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1)
-                          annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1) if
+        not withConvection annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,70})));
