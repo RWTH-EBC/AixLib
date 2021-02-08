@@ -81,7 +81,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     annotation (Dialog(group="Additional pressurelosses", enable=not use_zeta));
 
   parameter Real sum_zetas=0
-    "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
+    "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc. if use_zeta"
     annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
 
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
@@ -93,7 +93,7 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   //Ground/Soil: values for sandy soil with clay content based on "SIMULATIONSMODELL
   //"ERDWÄRMEKOLLEKTOR" zur wärmetechnischen Beurteilung von Wärmequellen,
-  //Wärmesenken und Wärme-/Kältespeichern" by Bernd Glück
+  //Wärmesenken und Wärme-/Kältespeichern" by Bernd Glück --> move to docu
 
   parameter Modelica.SIunits.Density rhoSoi = 1630 "Density of material/soil"
   annotation(Dialog(tab="Soil", enable=use_soil));
@@ -110,8 +110,6 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   final parameter Modelica.SIunits.Length d_in = dh + 2 * thickness "Inner diameter of pipe"
   annotation(Dialog(tab="Soil", enable=use_soil));
-  final parameter Integer nParallel = 1 "Number of identical parallel pipes"
-  annotation(Dialog(tab="Soil",enable=use_soil));
 
   final parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature"
   annotation(Dialog(tab="Soil"));
@@ -119,11 +117,6 @@ model DHCPipe "Generic pipe model for DHC applications"
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Equations"));
-
-  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
-
-  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
-  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
@@ -252,6 +245,11 @@ protected
       X=Medium.X_default)
     "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
     annotation (Dialog(group="Advanced"));
+
+  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
+
+  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
 
 public
   FixedResistances.HydraulicResistance hydRes(
@@ -396,6 +394,11 @@ equation
 </ul>
 </html>", info="<html>
 <p>
+  This pipe aims to enable the representation of all one pipe district heating 
+  and cooling pipe applications for dynamic simulation of district heating and 
+  cooling grids.
+</p>
+<p>
   Pipe with heat loss using the wether the time delay based heat losses and
   transport of the fluid using a plug flow model, applicable for
   simulation of long pipes such as in district heating and cooling
@@ -407,13 +410,21 @@ equation
   the pipe wall. This model determines the pressure drop either through
   a static factor or using the sum of zeta values.
 </p>
+<p>
+  In addition this model is able to represent a very simplified ground around 
+  the pipe. With 3 capacities and the possibility to define the soil properties, 
+  this enables the user of this pipe model to account for heat losses in a more 
+  accurate way.
+</p>
 <h4>
   Implementation
 </h4>
 <p>
   This model is based on <a href=
   \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>
-  and contains the spatialDistribution operator.
+  or on <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore\">AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore</a>
+  .
 </p>
 <p>
   The spatialDistribution operator is used for the temperature wave
@@ -460,6 +471,10 @@ equation
 <p>
   If Boolean use_zeta is set \"false\" the pressureloss is determine
   through a static factor which has to given prior.
+</p>
+<p>
+  The Soil model is represented by three capacities which can be parameterized
+  in the Soil Tab of the model.
 </p>
 <h4>
   Assumptions
