@@ -262,9 +262,9 @@ equation
           {{40.6,-90},{52,-90},{52,-80},{66,-80}}, color={0,0,127}));
   connect(tabsIntGainHeaCoo.y, tabsIntHeaCoo.Q_flow) annotation (Line(points={{
           20.6,-98},{42,-98},{42,-94},{66,-94}}, color={0,0,127}));
-  connect(conHeaCoo1.u_m, thermalZoneTwoElements.TAir) annotation (Line(points=
-          {{-36,-49.6},{-30,-49.6},{-30,-50},{-20,-50},{-20,40},{94,40},{94,32},
-          {93,32}}, color={0,0,127}));
+  connect(conHeaCoo1.u_m, thermalZoneTwoElements.TAir) annotation (Line(points={{-36,
+          -49.6},{-28,-49.6},{-28,-50},{-18,-50},{-18,40},{96,40},{96,32},{93,
+          32}},     color={0,0,127}));
   connect(tabsExtHeaCoo.port, thermalZoneTwoElements.tabsExtWalls)
     annotation (Line(points={{76,-32},{86.8,-32},{86.8,-2}}, color={191,0,0}));
   connect(hkRadExtHeaCoo.port, thermalZoneTwoElements.hkRadExtWalls)
@@ -325,7 +325,7 @@ equation
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-100},{120,100}}), graphics={
           Rectangle(
-          extent={{-100,-20},{120,-104}},
+          extent={{-100,-18},{120,-102}},
           lineColor={28,108,200},
           fillColor={225,225,225},
           fillPattern=FillPattern.Solid)}),
