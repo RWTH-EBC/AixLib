@@ -8,3 +8,5 @@ CtrGTFSimple
 CtrHXsimple
 EonERCModeControl
 HeatPumpSystemVolumeFlowControl
+CtrHXmflow
+CtrGTFSimpleFlowCtrl

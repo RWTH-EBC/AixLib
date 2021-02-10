@@ -61,6 +61,14 @@ model SimpleRoomVolFlowCtrl_no_ahu_cca
     use_T_in=false,
     nPorts=1)
     annotation (Placement(transformation(extent={{-70,32},{-56,46}})));
+  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
+    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+
+    computeWetBulbTemperature=false,
+    filNam=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-126,52},{-106,72}})));
 equation
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
       points={{-59,70},{6,70},{6,45}},
@@ -92,6 +100,14 @@ equation
           -86,-2},{-102,-2}}, color={0,0,127}));
   connect(bou1.ports[1], thermalZone1.ports[2]) annotation (Line(points={{-56,
           39},{-18,39},{-18,28.44},{36.875,28.44}}, color={0,127,255}));
+  connect(weaDat.weaBus, weaBus) annotation (Line(
+      points={{-106,62},{-84,62},{-84,70},{-59,70}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),

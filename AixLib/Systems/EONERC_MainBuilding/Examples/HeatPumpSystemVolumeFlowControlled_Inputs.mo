@@ -67,8 +67,8 @@ model HeatPumpSystemVolumeFlowControlled_Inputs "Validation of HeatpumpSystem"
         iconTransformation(extent={{-110,96},{-92,114}})));
   Modelica.Blocks.Interfaces.RealInput vSetHS
     "Connector of second Real input signal" annotation (Placement(
-        transformation(extent={{-110,80},{-90,100}}), iconTransformation(extent
-          ={{-110,80},{-90,100}})));
+        transformation(extent={{-110,80},{-90,100}}), iconTransformation(extent=
+           {{-110,80},{-90,100}})));
   Modelica.Blocks.Interfaces.RealInput vSetCold
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-110,52},{-92,70}}), iconTransformation(extent=
@@ -114,8 +114,8 @@ equation
       points={{-4,82.1},{0,82.1},{0,28}},
       color={255,204,51},
       thickness=0.5));
-  connect(heatPumpSystemVolumeFlowControl.pElHP, pElHP) annotation (Line(points
-        ={{-24.8,97},{-90,97},{-90,105},{-101,105}}, color={0,0,127}));
+  connect(heatPumpSystemVolumeFlowControl.pElHP, pElHP) annotation (Line(points=
+         {{-24.8,97},{-90,97},{-90,105},{-101,105}}, color={0,0,127}));
   connect(heatPumpSystemVolumeFlowControl.vSetHS, vSetHS) annotation (Line(
         points={{-24.9,91},{-86,91},{-86,90},{-100,90}}, color={0,0,127}));
   connect(heatPumpSystemVolumeFlowControl.vSetCold, vSetCold) annotation (Line(

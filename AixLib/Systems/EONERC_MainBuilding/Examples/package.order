@@ -5,3 +5,6 @@ HeatExchanger
 GeothermalFieldSimple
 HeatPumpSystemVolumeFlowControlled
 HeatPumpSystemVolumeFlowControlled_Inputs
+HeatExchanger_FlowControlled
+GeothermalFieldSimpleFlowControl
+simple_consumer

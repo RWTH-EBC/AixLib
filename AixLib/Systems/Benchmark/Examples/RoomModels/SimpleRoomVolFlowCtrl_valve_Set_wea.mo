@@ -1,5 +1,5 @@
 within AixLib.Systems.Benchmark.Examples.RoomModels;
-model SimpleRoomVolFlowCtrl_vhu_SP_cca_VF
+model SimpleRoomVolFlowCtrl_valve_Set_wea
     extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
@@ -116,9 +116,6 @@ model SimpleRoomVolFlowCtrl_vhu_SP_cca_VF
         origin={50,-126})));
   Modelica.Blocks.Interfaces.RealOutput TAirRoom "Indoor air temperature"
     annotation (Placement(transformation(extent={{86,50},{106,70}})));
-  Controller.CtrTabsVSet ctrTabsVSet(ctrThrottleVflowCtr1(Ti=30),
-      ctrThrottleVflowCtr(Ti=30))
-    annotation (Placement(transformation(extent={{-106,138},{-86,158}})));
   Fluid.Sources.Boundary_pT        bouWaterhot2(
     redeclare package Medium = MediumWater,
     use_T_in=false,
@@ -127,10 +124,16 @@ model SimpleRoomVolFlowCtrl_vhu_SP_cca_VF
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-74,-108})));
-  Modelica.Blocks.Interfaces.RealInput vFlowTabsHotSet
+  Modelica.Blocks.Interfaces.RealInput valveTabsHotSet
     "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-168,132},{-128,172}})));
-  Modelica.Blocks.Interfaces.RealInput vFlowTabsColdSet
+    annotation (Placement(transformation(extent={{-168,148},{-128,188}})));
+  Modelica.Blocks.Interfaces.RealInput valveTabsColdSet
+    "Connector of second Real input signal"
+    annotation (Placement(transformation(extent={{-168,120},{-128,160}})));
+  Modelica.Blocks.Interfaces.RealInput valveAHUCoolerSet
+    "Connector of second Real input signal"
+    annotation (Placement(transformation(extent={{-168,106},{-128,146}})));
+  Modelica.Blocks.Interfaces.RealInput valveHeaterSet
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-168,94},{-128,134}})));
   Modelica.Blocks.Interfaces.RealInput internal_gain_1 annotation (Placement(
@@ -142,17 +145,11 @@ model SimpleRoomVolFlowCtrl_vhu_SP_cca_VF
   Modelica.Blocks.Interfaces.RealInput internal_gain_3 annotation (Placement(
         transformation(extent={{-118,-72},{-98,-52}}), iconTransformation(
           extent={{-118,-42},{-98,-22}})));
-  Modelica.Blocks.Interfaces.RealInput TsetFvu
-    "Connector of second Real input signal" annotation (Placement(
-        transformation(extent={{-168,60},{-128,100}}), iconTransformation(
-          extent={{-158,82},{-118,122}})));
-  ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic(
-    useExternalTset=true,
-    useExternalVset=false,
-    k=0.3,
-    Ti=200,
-    VFlowSet=3*1800/3600)
-    annotation (Placement(transformation(extent={{-108,104},{-88,124}})));
+  Controller.CtrTabsValveSet ctrTabsValveSet
+    annotation (Placement(transformation(extent={{-106,152},{-86,172}})));
+  ModularAHU.Controller.CtrVentilationUnitValveSet ctrVentilationUnitValveSet
+    annotation (Placement(transformation(extent={{-104,112},{-84,132}})));
+
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
 
@@ -160,7 +157,7 @@ model SimpleRoomVolFlowCtrl_vhu_SP_cca_VF
     filNam=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
-    annotation (Placement(transformation(extent={{-112,54},{-92,74}})));
+    annotation (Placement(transformation(extent={{-144,64},{-124,84}})));
 equation
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
       points={{-59,70},{6,70},{6,45}},
@@ -203,33 +200,39 @@ equation
           127,255}));
   connect(thermalZone1.TAir, TAirRoom)
     annotation (Line(points={{58.5,58.8},{96,58.8},{96,60}}, color={0,0,127}));
-  connect(ctrTabsVSet.tabsBus, tabs4_1.tabsBus) annotation (Line(
-      points={{-86,148},{-12,148},{-12,-41.6364},{19.8,-41.6364}},
-      color={255,204,51},
-      thickness=0.5));
   connect(bouWatercold.ports[2], ventilationUnit1.port_a4) annotation (Line(
         points={{-4,-116},{-54,-116},{-54,-12},{-52.4,-12}}, color={0,127,255}));
   connect(bouWaterhot2.ports[1], ventilationUnit1.port_a3) annotation (Line(
         points={{-74,-98},{-72,-98},{-72,-12},{-70.8,-12}}, color={0,127,255}));
-  connect(ctrTabsVSet.vFlowHotSet, vFlowTabsHotSet) annotation (Line(points={{
-          -106.3,152.1},{-128,152.1},{-128,152},{-148,152}}, color={0,0,127}));
-  connect(ctrTabsVSet.vFlowColdSet, vFlowTabsColdSet) annotation (Line(points={{-106.3,
-          143.9},{-148,143.9},{-148,114}},         color={0,0,127}));
   connect(internal_gain_1, thermalZone1.intGains[1]) annotation (Line(points={{
           -108,-32},{-28,-32},{-28,23.84},{51,23.84}}, color={0,0,127}));
   connect(internal_gain_2, thermalZone1.intGains[2]) annotation (Line(points={{
           -108,-48},{-28,-48},{-28,25.68},{51,25.68}}, color={0,0,127}));
   connect(internal_gain_3, thermalZone1.intGains[3]) annotation (Line(points={{
           -108,-62},{-30,-62},{-30,27.52},{51,27.52}}, color={0,0,127}));
-  connect(ctrVentilationUnitBasic.genericAHUBus, ventilationUnit1.genericAHUBus)
-    annotation (Line(
-      points={{-88,114.1},{-72,114.1},{-72,43.25},{-57,43.25}},
+  connect(ctrTabsValveSet.tabsBus, tabs4_1.tabsBus) annotation (Line(
+      points={{-86,162},{-14,162},{-14,-41.6364},{19.8,-41.6364}},
       color={255,204,51},
       thickness=0.5));
-  connect(TsetFvu, ctrVentilationUnitBasic.Tset) annotation (Line(points={{-148,
-          80},{-129,80},{-129,114},{-110,114}}, color={0,0,127}));
+  connect(ctrTabsValveSet.valveHotSet, valveTabsHotSet) annotation (Line(points=
+         {{-106.3,166.1},{-118.15,166.1},{-118.15,168},{-148,168}}, color={0,0,
+          127}));
+  connect(ctrTabsValveSet.valveColdSet, valveTabsColdSet) annotation (Line(
+        points={{-106.3,157.9},{-119.15,157.9},{-119.15,140},{-148,140}}, color=
+         {0,0,127}));
+  connect(ctrVentilationUnitValveSet.genericAHUBus, ventilationUnit1.genericAHUBus)
+    annotation (Line(
+      points={{-84,122.1},{-70,122.1},{-70,43.25},{-57,43.25}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(ctrVentilationUnitValveSet.VsetCooler, valveAHUCoolerSet) annotation (
+     Line(points={{-104.2,130.6},{-117.1,130.6},{-117.1,126},{-148,126}}, color=
+         {0,0,127}));
+  connect(ctrVentilationUnitValveSet.VsetHeater, valveHeaterSet) annotation (
+      Line(points={{-104.1,122.5},{-119.05,122.5},{-119.05,114},{-148,114}},
+        color={0,0,127}));
   connect(weaDat.weaBus, weaBus) annotation (Line(
-      points={{-92,64},{-76,64},{-76,70},{-59,70}},
+      points={{-124,74},{-92,74},{-92,70},{-59,70}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -240,4 +243,4 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=36000, __Dymola_Algorithm="Dassl"));
-end SimpleRoomVolFlowCtrl_vhu_SP_cca_VF;
+end SimpleRoomVolFlowCtrl_valve_Set_wea;

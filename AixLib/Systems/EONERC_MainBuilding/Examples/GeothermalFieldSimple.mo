@@ -30,7 +30,8 @@ model GeothermalFieldSimple
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
 equation
   connect(ctrGTFSimple.on, booleanPulse.y)
-    annotation (Line(points={{-62,-30},{-79,-30}}, color={255,0,255}));
+    annotation (Line(points={{-61,-30.2},{-70,-30.2},{-70,-30},{-79,-30}},
+                                                   color={255,0,255}));
   connect(gtf.port_b, boundary1.ports[1]) annotation (Line(points={{16.6667,-2},
           {16.6667,30},{22,30}},       color={0,127,255}));
   connect(gtf.port_a, boundary.ports[1]) annotation (Line(points={{-16.6667,-2},
