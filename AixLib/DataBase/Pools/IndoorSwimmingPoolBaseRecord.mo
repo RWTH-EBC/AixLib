@@ -1,0 +1,29 @@
+﻿within AixLib.DataBase.Pools;
+record IndoorSwimmingPoolBaseRecord
+  extends Modelica.Icons.Record;
+
+
+  parameter String name "Name of Pool";
+  parameter String poolType "Type of Pool";
+
+  parameter Modelica.SIunits.Length d_pool "Depth of Swimming Pool";
+  parameter Modelica.SIunits.Area A_pool "Surface Area of Swimming Pool";
+  parameter Modelica.SIunits.Length u_pool "Circumference of Swimming Pool";
+
+  parameter Modelica.SIunits.Temperature T_pool "Temperature of pool";
+
+  parameter Boolean NextToSoil "Does the pool border to soil?";
+  parameter Boolean PoolCover "Is the pool covered during non-opening hours?";
+
+  parameter Real k "Belastungsfaktor";
+  parameter Real N "Nennbelastung";
+  parameter Real beta_inUse "Wasserübergangskoeffizient in use";
+  parameter Real beta_nonUse "Wasserübergangskoeffizient non-use";
+
+  parameter Modelica.SIunits.Velocity v_Filter "Velocity of Filtering";
+  parameter Modelica.SIunits.VolumeFlowRate Q_hygenic "Hygenic motivated Volume Flow Rate";
+  parameter Modelica.SIunits.VolumeFlowRate Q_hydraulic "Hydraulic motivated Volume Flow Rate";
+
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
+end IndoorSwimmingPoolBaseRecord;
