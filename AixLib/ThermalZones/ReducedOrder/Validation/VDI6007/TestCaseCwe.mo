@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Validation.VDI6007;
-model TestCaseCwe "Test Case for TABS Integration #1064"
+model TestCaseCwe "Test Case for TABS Integration #1064, Parameters for thermalZoneTwoElements based on TestCase5"
   extends Modelica.Icons.Example;
   RC.TwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
@@ -8,7 +8,7 @@ model TestCaseCwe "Test Case for TABS Integration #1064"
     gWin=1,
     nExt=1,
     nInt=1,
-    ratioWinConRad=0,
+    ratioWinConRad=0.09,
     AInt=75.5,
     hConInt=2.24,
     RWin=0.00000001,
@@ -20,15 +20,14 @@ model TestCaseCwe "Test Case for TABS Integration #1064"
     CInt={14836354.6282},
     VAir=0,
     nOrientations=1,
-    AWin={5},
-    ATransparent={0},
+    AWin={0},
+    ATransparent={7},
     AExt={10.5},
-    extWallRC(thermCapExt(each der_T(fixed=true))),
-    intWallRC(thermCapInt(each der_T(fixed=true))),
-    T_start=295.15)
+    extWallRC(thermCapExt(each T(fixed=true))),
+    intWallRC(thermCapInt(each T(fixed=true))),
+    T_start=283.15)
     "Thermal zone"
     annotation (Placement(transformation(extent={{28,40},{76,76}})));
-    // ,nPorts=1)
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature preTem(T=283.15)
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-8,48},{4,60}})));
@@ -60,10 +59,10 @@ model TestCaseCwe "Test Case for TABS Integration #1064"
   Modelica.Blocks.Math.Gain hkConvGainHeaCoo(k=0.5)
     "Gain for heating and cooling controller"
     annotation (Placement(transformation(extent={{-6,-96},{6,-84}})));
-  Modelica.Blocks.Math.Gain hkRadExtGainHeaCoo(k=0.25)
+  Modelica.Blocks.Math.Gain hkRadExtGainHeaCoo(k=0.061)
     "Gain for heating and cooling controller"
     annotation (Placement(transformation(extent={{-6,-60},{6,-48}})));
-  Modelica.Blocks.Math.Gain hkRadIntGainHeaCoo(k=0.25)
+  Modelica.Blocks.Math.Gain hkRadIntGainHeaCoo(k=0.439)
     "Gain for heating and cooling controller"
     annotation (Placement(transformation(extent={{-6,-78},{6,-66}})));
   Modelica.Blocks.Math.Gain tabsIntGainHeaCoo(k=1)
@@ -87,23 +86,19 @@ model TestCaseCwe "Test Case for TABS Integration #1064"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow fhkIntHeaCoo
     "Ideal heater/cooler with limit"
     annotation (Placement(transformation(extent={{42,-42},{62,-22}})));
-  Modelica.Blocks.Sources.CombiTimeTable setTemp1(
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    columns={2},
-    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-    table=[0,20; 3600,20; 7200,20; 10800,20; 14400,20; 18000,20; 21600,20; 21600.1,
-        20; 28800,20; 32400,20; 36000,20; 39600,20; 43200,20; 46800,20; 50400,20;
-        54000,20; 57600,20; 61200,20; 64800,20; 64800.1,20; 72000,20; 75600,20;
-        79200,20; 82800,20; 86400,20])
+  Modelica.Blocks.Sources.Step           setTemp1(
+    height=10,
+    offset=10,
+    startTime=2*86400)
     "Set temperature for ideal heater/cooler"
-    annotation (Placement(transformation(extent={{-98,-30},{-82,-14}})));
+    annotation (Placement(transformation(extent={{-118,-4},{-102,12}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC1
     "Convert set temperature from degC to Kelvin"
     annotation (Placement(transformation(extent={{-76,-28},{-64,-16}})));
   Controls.Continuous.LimPID conHeaCoo1(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
-    yMin=-1,
+    yMin=0,
     k=18,
     Ti=2300)
     "Heating and cooling controller"
@@ -120,7 +115,7 @@ model TestCaseCwe "Test Case for TABS Integration #1064"
   Controls.Continuous.LimPID conHeaCoo2(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
-    yMin=-1,
+    yMin=0,
     k=0.1,
     Ti=4)
     "Heating and cooling controller"
@@ -131,7 +126,7 @@ model TestCaseCwe "Test Case for TABS Integration #1064"
   Controls.Continuous.LimPID conHeaCoo3(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
-    yMin=-1,
+    yMin=0,
     k=0.1,
     Ti=4)
     "Heating and cooling controller"
@@ -147,6 +142,32 @@ model TestCaseCwe "Test Case for TABS Integration #1064"
     annotation (Placement(transformation(extent={{100,50},{90,60}})));
   Modelica.Blocks.Interaction.Show.RealValue TempOp
     annotation (Placement(transformation(extent={{40,86},{20,106}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{-96,-28},{-84,-16}})));
+  Modelica.Blocks.Sources.BooleanStep booleanStepTwoWeeks(startTime=864000,
+      startValue=true)
+    annotation (Placement(transformation(extent={{-118,-28},{-106,-16}})));
+  Modelica.Blocks.Sources.Pulse pulseNachtabsenkung(
+    amplitude=5,
+    width=41.67,
+    period=86400,
+    offset=15,
+    startTime=28800)
+    annotation (Placement(transformation(extent={{-118,-58},{-102,-42}})));
+  Modelica.Blocks.Interaction.Show.RealValue hkGesamt
+    annotation (Placement(transformation(extent={{30,-70},{36,-58}})));
+  Modelica.Blocks.Math.Add3 add3Hk
+    annotation (Placement(transformation(extent={{14,-70},{26,-58}})));
+  Modelica.Blocks.Math.Add add2Tabs
+    annotation (Placement(transformation(extent={{12,6},{24,18}})));
+  Modelica.Blocks.Interaction.Show.RealValue tabsGesamt
+    annotation (Placement(transformation(extent={{32,6},{38,18}})));
+  Modelica.Blocks.Math.Add add2Fhk annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={18,-24})));
+  Modelica.Blocks.Interaction.Show.RealValue fhkGesamt
+    annotation (Placement(transformation(extent={{32,-30},{38,-18}})));
 equation
   connect(theConWall.fluid,preTem. port)
     annotation (Line(points={{10,55},{8,55},{8,54},{4,54}},color={191,0,0}));
@@ -187,8 +208,6 @@ equation
       Line(points={{62,-32},{88,-32},{88,47.4},{76,47.4}},  color={191,0,0}));
   connect(fhkExtHeaCoo.port,thermalZoneTwoElements. fhkExtWalls) annotation (
       Line(points={{62,-14},{86,-14},{86,42.6},{76,42.6}},  color={191,0,0}));
-  connect(setTemp1.y[1],from_degC1. u)
-    annotation (Line(points={{-81.2,-22},{-77.2,-22}}, color={0,0,127}));
   connect(from_degC1.y, conHeaCoo1.u_s) annotation (Line(points={{-63.4,-22},{-60,
           -22},{-60,12},{-55.6,12}}, color={0,0,127}));
   connect(conHeaCoo1.y, powerTabs.u)
@@ -235,7 +254,37 @@ equation
     annotation (Line(points={{90,55},{86,55},{86,62},{76,62}}, color={191,0,0}));
   connect(TempOp.numberPort, gainTempOp.y) annotation (Line(points={{41.5,96},{54,
           96},{54,91},{67.5,91}}, color={0,0,127}));
-  annotation (Diagram(graphics={
+  connect(switch1.y, from_degC1.u)
+    annotation (Line(points={{-83.4,-22},{-77.2,-22}}, color={0,0,127}));
+  connect(booleanStepTwoWeeks.y, switch1.u2)
+    annotation (Line(points={{-105.4,-22},{-97.2,-22}}, color={255,0,255}));
+  connect(setTemp1.y, switch1.u1) annotation (Line(points={{-101.2,4},{-100,4},{
+          -100,-17.2},{-97.2,-17.2}}, color={0,0,127}));
+  connect(pulseNachtabsenkung.y, switch1.u3) annotation (Line(points={{-101.2,-50},
+          {-100,-50},{-100,-26.8},{-97.2,-26.8}}, color={0,0,127}));
+  connect(hkRadExtGainHeaCoo.y, add3Hk.u1) annotation (Line(points={{6.6,-54},{8,
+          -54},{8,-59.2},{12.8,-59.2}}, color={0,0,127}));
+  connect(hkRadIntGainHeaCoo.y, add3Hk.u2) annotation (Line(points={{6.6,-72},{8,
+          -72},{8,-66},{10,-66},{10,-64},{12.8,-64}}, color={0,0,127}));
+  connect(hkConvGainHeaCoo.y, add3Hk.u3) annotation (Line(points={{6.6,-90},{10,
+          -90},{10,-68.8},{12.8,-68.8}}, color={0,0,127}));
+  connect(add3Hk.y, hkGesamt.numberPort)
+    annotation (Line(points={{26.6,-64},{29.55,-64}}, color={0,0,127}));
+  connect(tabsExtGainHeaCoo.y, add2Tabs.u1) annotation (Line(points={{6.6,22},{10,
+          22},{10,15.6},{10.8,15.6}}, color={0,0,127}));
+  connect(tabsIntGainHeaCoo.y, add2Tabs.u2) annotation (Line(points={{6.6,4},{
+          10,4},{10,8.4},{10.8,8.4}},
+                                   color={0,0,127}));
+  connect(add2Tabs.y, tabsGesamt.numberPort)
+    annotation (Line(points={{24.6,12},{31.55,12}}, color={0,0,127}));
+  connect(add2Fhk.y, fhkGesamt.numberPort)
+    annotation (Line(points={{24.6,-24},{31.55,-24}}, color={0,0,127}));
+  connect(add2Fhk.u2, fhkIntGainHeaCoo.y) annotation (Line(points={{10.8,-27.6},
+          {10.8,-28.8},{6.6,-28.8},{6.6,-32}}, color={0,0,127}));
+  connect(add2Fhk.u1, fhkExtGainHeaCoo.y) annotation (Line(points={{10.8,-20.4},
+          {10.8,-20},{6.6,-20},{6.6,-14}}, color={0,0,127}));
+  annotation (Diagram(coordinateSystem(extent={{-120,-100},{120,100}}),
+                      graphics={
   Rectangle(
     extent={{62,100},{100,78}},
     lineColor={0,0,255},
@@ -289,5 +338,6 @@ equation
           textString="Rest HK")}), experiment(
       StopTime=2592000,
       Interval=900,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"),
+    Icon(coordinateSystem(extent={{-120,-100},{120,100}})));
 end TestCaseCwe;
