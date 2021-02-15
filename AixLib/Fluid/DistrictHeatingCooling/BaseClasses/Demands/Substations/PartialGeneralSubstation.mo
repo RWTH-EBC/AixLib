@@ -16,6 +16,15 @@ partial model PartialGeneralSubstation
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation(Dialog(tab="Assumptions"), Evaluate=true);
 
+  Interfaces.PassThroughMedium passThroughMedium2
+    annotation (Placement(transformation(extent={{-40,-70},{-60,-50}})));
+  Interfaces.PassThroughMedium passThroughMedium1 annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=90,
+        origin={56,-30})));
+  Interfaces.PassThroughMedium passThroughMedium
+    annotation (Placement(transformation(extent={{-40,-10},{-60,10}})));
 protected
   Modelica.Fluid.Interfaces.FluidPort_a port_a(
     redeclare final package Medium = Medium,
@@ -30,6 +39,80 @@ protected
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,-70},{-110,-50}})));
 
+protected
+  Modelica.Fluid.Interfaces.FluidPort_a port_a1(
+    redeclare final package Medium = Medium,
+    m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
+    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-24,-4},{-16,4}}),
+        iconTransformation(extent={{-24,-4},{-16,4}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b1(
+    redeclare final package Medium = Medium,
+    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
+    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-76,-4},{-84,4}}),
+        iconTransformation(extent={{-76,-4},{-84,4}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b2(
+    redeclare final package Medium = Medium,
+    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
+    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}}),
+        iconTransformation(extent={{-76,-4},{-84,4}})));
+protected
+  Modelica.Fluid.Interfaces.FluidPort_a port_a2(
+    redeclare final package Medium = Medium,
+    m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
+    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-4,-64},{4,-56}}),
+        iconTransformation(extent={{-24,-4},{-16,4}})));
+protected
+  Modelica.Fluid.Interfaces.FluidPort_a port_a3(
+    redeclare final package Medium = Medium,
+    m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
+    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-84,-64},{-76,-56}}),
+        iconTransformation(extent={{-24,-4},{-16,4}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b3(
+    redeclare final package Medium = Medium,
+    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
+    h_outflow(start=Medium.h_default, nominal=Medium.h_default))
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-16,-64},{-24,-56}}),
+        iconTransformation(extent={{-76,-4},{-84,4}})));
+equation
+  connect(port_a, port_b1) annotation (Line(
+      points={{-100,0},{-80,0}},
+      color={0,127,255},
+      thickness=1));
+  connect(port_a1, port_b2) annotation (Line(
+      points={{-20,0},{0,0}},
+      color={0,127,255},
+      thickness=1));
+  connect(port_a2, port_b3) annotation (Line(
+      points={{0,-60},{-20,-60}},
+      color={0,127,255},
+      thickness=1));
+  connect(port_a3, port_b) annotation (Line(
+      points={{-80,-60},{-100,-60}},
+      color={0,127,255},
+      thickness=1));
+  connect(port_b3, passThroughMedium2.port_a)
+    annotation (Line(points={{-20,-60},{-40,-60}}, color={0,127,255}));
+  connect(passThroughMedium2.port_b, port_a3)
+    annotation (Line(points={{-60,-60},{-80,-60}}, color={0,127,255}));
+  connect(port_b2, passThroughMedium1.port_a)
+    annotation (Line(points={{0,0},{56,0},{56,-20}}, color={0,127,255}));
+  connect(passThroughMedium1.port_b, port_a2)
+    annotation (Line(points={{56,-40},{56,-60},{0,-60}}, color={0,127,255}));
+  connect(port_b1, passThroughMedium.port_b)
+    annotation (Line(points={{-80,0},{-60,0}}, color={0,127,255}));
+  connect(passThroughMedium.port_a, port_a1) annotation (Line(points={{-40,0},{
+          -32,0},{-32,0},{-20,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -48,29 +131,29 @@ protected
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
-          extent={{-40,40},{40,-20}},
+          extent={{-80,20},{-20,-80}},
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-12,42},{14,30}},
+          extent={{-62,-24},{-36,-36}},
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Flow Control"),
         Rectangle(
-          extent={{-80,-20},{80,-100}},
+          extent={{0,40},{100,-100}},
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-10,-22},{16,-34}},
+          extent={{74,40},{100,28}},
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="HVAC"),
         Rectangle(
-          extent={{-100,100},{100,50}},
+          extent={{-100,100},{100,40}},
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
@@ -79,27 +162,7 @@ protected
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="Inputs"),
-        Line(
-          points={{-98,0},{-40,0}},
-          color={0,0,255},
-          thickness=1),
-        Line(
-          points={{-98,-60},{-80,-60}},
-          color={0,0,255},
-          thickness=1),
-        Line(
-          points={{40,0},{92,0}},
-          color={0,0,255},
-          thickness=1),
-        Line(
-          points={{92,0},{92,-60}},
-          color={0,0,255},
-          thickness=1),
-        Line(
-          points={{80,-60},{92,-60}},
-          color={0,0,255},
-          thickness=1)}),
+          textString="Inputs")}),
     Documentation(revisions="<html>
 <ul>
 <li>
