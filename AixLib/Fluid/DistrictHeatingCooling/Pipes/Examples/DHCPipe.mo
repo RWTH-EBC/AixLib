@@ -248,9 +248,9 @@ equation
   connect(senTemIn3.port_b, pip3.port_a)
     annotation (Line(points={{-20,-70},{-10,-70}}, color={0,127,255}));
   annotation (
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/PlugFlowPipeZeta.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/DHCPipe.mos"
                       "Simulate and plot"),
-    experiment(StopTime=1000, Tolerance=1e-006),
+    experiment(StopTime=3600, Tolerance=1e-006),
     Documentation(info="<html><p>
   Basic test of model <a href=
   \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe\">

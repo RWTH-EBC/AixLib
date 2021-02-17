@@ -202,7 +202,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     final rho=rho_soi,
     final c=c,
     final d_in=dh + 2*thickness + thickness_soi/3,
-    final d_out=d_in + 2*thickness_ground/3,
+    final d_out=d_in + 2*thickness_soi/3,
     final length=length,
     final lambda=lambda,
     T0=283.15) if use_soil
@@ -212,7 +212,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     final rho=rho_soi,
     final c=c,
     final d_in=dh + 2*thickness + 2*thickness_soi/3,
-    final d_out=d_in + thickness_ground,
+    final d_out=d_in + thickness_soi,
     final length=length,
     final lambda=lambda,
     T0=283.15) if use_soil
