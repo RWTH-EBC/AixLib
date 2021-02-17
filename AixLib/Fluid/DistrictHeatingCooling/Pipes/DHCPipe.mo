@@ -95,13 +95,13 @@ model DHCPipe "Generic pipe model for DHC applications"
   //"ERDWÄRMEKOLLEKTOR" zur wärmetechnischen Beurteilung von Wärmequellen,
   //Wärmesenken und Wärme-/Kältespeichern" by Bernd Glück --> move to docu
 
-  parameter Modelica.SIunits.Density rhoSoi = 1630 "Density of material/soil"
+  parameter Modelica.SIunits.Density rho_soi = 1630 "Density of material/soil"
   annotation(Dialog(tab="Soil", enable=use_soil));
 
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1046
     "Specific heat capacity of material/soil"
     annotation(Dialog(tab="Soil", enable=use_soil));
-  parameter Modelica.SIunits.Length thickness_ground = 0.6 "thickness of soil layer for heat loss calulcation"
+  parameter Modelica.SIunits.Length thickness_soi = 0.6 "thickness of soil layer for heat loss calulcation"
   annotation(Dialog(tab="Soil", enable=use_soil));
 
   parameter Modelica.SIunits.ThermalConductivity lambda = 1.5
@@ -188,10 +188,10 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra1(
     final energyDynamics=energyDynamics,
-    final rho=rhoSoi,
+    final rho=rho_soi,
     final c=c,
     final d_in=dh + 2*thickness,
-    final d_out=d_in + thickness_ground/3,
+    final d_out=d_in + thickness_soi/3,
     final length=length,
     final lambda=lambda,
     T0=283.15) if use_soil
@@ -199,9 +199,9 @@ model DHCPipe "Generic pipe model for DHC applications"
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra2(
     final energyDynamics=energyDynamics,
-    final rho=rhoSoi,
+    final rho=rho_soi,
     final c=c,
-    final d_in=dh + 2*thickness + thickness_ground/3,
+    final d_in=dh + 2*thickness + thickness_soi/3,
     final d_out=d_in + 2*thickness_ground/3,
     final length=length,
     final lambda=lambda,
@@ -209,9 +209,9 @@ model DHCPipe "Generic pipe model for DHC applications"
     annotation (Placement(transformation(extent={{-10,46},{10,66}})));
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra3(
     final energyDynamics=energyDynamics,
-    final rho=rhoSoi,
+    final rho=rho_soi,
     final c=c,
-    final d_in=dh + 2*thickness + 2*thickness_ground/3,
+    final d_in=dh + 2*thickness + 2*thickness_soi/3,
     final d_out=d_in + thickness_ground,
     final length=length,
     final lambda=lambda,
@@ -411,7 +411,7 @@ equation
   a static factor or using the sum of zeta values.
 </p>
 <p>
-  In addition this model is able to represent a very simplified ground around 
+  In addition this model is able to represent a very simplified soil around 
   the pipe. With 3 capacities and the possibility to define the soil properties, 
   this enables the user of this pipe model to account for heat losses in a more 
   accurate way.
