@@ -23,7 +23,16 @@ model SimpleConsumer "Simple Consumer"
   parameter Integer demandType=1 "Choose between heating and cooling functionality" annotation (choices(
               choice=1 "use as heating consumer",
               choice=-1 "use as cooling consumer"),Dialog(enable=true));
-
+  parameter SI.PressureDifference dp_nominalPumpConsumer=if pump.rho_default < 500
+       then 500 else 10000
+    "Nominal pressure raise, used for default pressure curve if not specified in record per";
+  parameter Real k_ControlConsumerPump "Gain of controller";
+  parameter SI.Time Ti_ControlConsumerPump
+    "Time constant of Integrator block";
+  parameter Modelica.SIunits.TemperatureDifference dT_maxNominalReturn = 5 "maximum undercooling/overheating based on nominal return temperature";
+  parameter Boolean show_T=false
+    "= true, if actual temperature at port is computed";
+  Modelica.SIunits.HeatFlowRate Q_flow_max;
   Fluid.MixingVolumes.MixingVolume volume(
     final V=V,
     final T_start=T_start,
@@ -96,23 +105,19 @@ model SimpleConsumer "Simple Consumer"
     redeclare package Medium = Medium,
     T_start=T_start,
     allowFlowReversal=allowFlowReversal,
+    show_T=show_T,
     redeclare Fluid.Movers.Data.Generic per(pressure(V_flow={0,m_flow_nominal/
             1000,m_flow_nominal/500}, dp={dp_nominalPumpConsumer/0.8,
             dp_nominalPumpConsumer,0}), motorCooledByFluid=false),
     addPowerToMedium=false)
     annotation (Placement(transformation(extent={{-40,10},{-20,-10}})));
 
-
-
-  parameter SI.PressureDifference dp_nominalPumpConsumer=if pump.rho_default < 500
-       then 500 else 10000
-    "Nominal pressure raise, used for default pressure curve if not specified in record per";
   Modelica.Blocks.Continuous.LimPID PIPump(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=k_ControlConsumerPump,
     Ti=Ti_ControlConsumerPump,
     yMax=1,
-    yMin=0,
+    yMin=0.15,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=1) annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
@@ -135,10 +140,8 @@ model SimpleConsumer "Simple Consumer"
                     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-62,0})));
-  parameter Real k_ControlConsumerPump "Gain of controller";
-  parameter SI.Time Ti_ControlConsumerPump
-    "Time constant of Integrator block";
+        origin={-80,0})));
+
   Modelica.Blocks.Interfaces.RealInput T_returnSet annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
@@ -157,8 +160,28 @@ model SimpleConsumer "Simple Consumer"
      or functionality == "Q_flow_fixed"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-42,40})));
+        origin={-38,40})));
+
+  Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter
+    annotation (Placement(transformation(extent={{-84,32},{-68,48}})));
+  Modelica.Blocks.Sources.RealExpression ExpressionQ_flow_min(y=0)
+    annotation (Placement(transformation(extent={{-124,20},{-104,40}})));
+  Modelica.Blocks.Sources.RealExpression ExpressionQ_flow_max(y=Q_flow_max)
+    annotation (Placement(transformation(extent={{-124,36},{-104,56}})));
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium)
+    annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_flowReal if
+                                                 functionality == "Q_flow_input"
+    "Consumed real heat flow, positive for heating or cooling" annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={118,46}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={120,52})));
 equation
+  Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (senTemFlow.T - (T_returnSet - dT_maxNominalReturn)));
   connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
           {10,40},{34,40}},               color={191,0,0},
       pattern=LinePattern.Dash));
@@ -186,9 +209,7 @@ equation
   connect(port_b, senTemReturn.port_b)
     annotation (Line(points={{100,0},{60,0}}, color={0,127,255}));
   connect(port_a, senTemFlow.port_a)
-    annotation (Line(points={{-100,0},{-72,0}}, color={0,127,255}));
-  connect(pump.port_a, senTemFlow.port_b) annotation (Line(points={{-40,0},{-52,
-          0}},                 color={0,127,255}));
+    annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
   connect(PIPump.y, pump.y)
     annotation (Line(points={{-39,-40},{-30,-40},{-30,-12}},
                                                           color={0,0,127}));
@@ -198,20 +219,30 @@ equation
     annotation (Line(points={{50,-11},{50,-60},{22,-60}}, color={0,0,127}));
   connect(gain.y, PIPump.u_m)
     annotation (Line(points={{-1,-60},{-50,-60},{-50,-52}}, color={0,0,127}));
-  connect(Q_flow, gain1.u) annotation (Line(
-      points={{-60,120},{-60,40},{-54,40}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(realExpression2.y, gain1.u) annotation (Line(
-      points={{-79,80},{-60,80},{-60,40},{-54,40}},
+      points={{-79,80},{-60,80},{-60,40},{-50,40}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(gain1.y, prescribedHeatFlow.Q_flow) annotation (Line(
-      points={{-31,40},{-22,40}},
+      points={{-27,40},{-22,40}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(gain2.u, T_returnSet) annotation (Line(points={{-102,-40},{-120,-40},
           {-120,90},{0,90},{0,120}}, color={0,0,127}));
+  connect(senMasFlo.port_a, senTemFlow.port_b)
+    annotation (Line(points={{-66,0},{-70,0}}, color={0,127,255}));
+  connect(senMasFlo.port_b, pump.port_a)
+    annotation (Line(points={{-46,0},{-40,0}}, color={0,127,255}));
+  connect(variableLimiter.y, gain1.u)
+    annotation (Line(points={{-67.2,40},{-50,40}}, color={0,0,127}));
+  connect(Q_flow, variableLimiter.u) annotation (Line(points={{-60,120},{-60,60},
+          {-98,60},{-98,40},{-85.6,40}}, color={0,0,127}));
+  connect(ExpressionQ_flow_max.y, variableLimiter.limit1) annotation (Line(
+        points={{-103,46},{-94,46},{-94,46.4},{-85.6,46.4}}, color={0,0,127}));
+  connect(ExpressionQ_flow_min.y, variableLimiter.limit2) annotation (Line(
+        points={{-103,30},{-94,30},{-94,33.6},{-85.6,33.6}}, color={0,0,127}));
+  connect(variableLimiter.y, Q_flowReal) annotation (Line(points={{-67.2,40},{
+          -58,40},{-58,46},{118,46}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
