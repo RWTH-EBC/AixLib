@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples;
-model simple_consumer
+model simple_consumer_Q
   extends Modelica.Icons.Example;
       package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
   HydraulicModules.SimpleConsumer consumerCold1(
@@ -37,31 +37,6 @@ model simple_consumer
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-12,10})));
-  Modelica.Blocks.Nonlinear.Limiter limiterFVUCold(uMax=100000, uMin=0)
-    annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=180,
-        origin={2,74})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_FVU_cold(y=(20*73)/3600*1.2*1005
-        *(Tair - 284.15)*0.8)
-                    annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
-        rotation=180,
-        origin={16,74})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_CCA_cold(y=3000*(Tair - 293.15))
-    annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
-        rotation=180,
-        origin={16,64})));
-  Modelica.Blocks.Math.Add add1 annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=180,
-        origin={-10,68})));
-  Modelica.Blocks.Nonlinear.Limiter limiterCCACold(uMax=100000, uMin=0)
-    annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=180,
-        origin={2,64})));
   Fluid.Sources.Boundary_pT          boundary1(
     redeclare package Medium = Medium,
     T=283.15,
@@ -77,15 +52,13 @@ model simple_consumer
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-38,-34})));
-  Modelica.Blocks.Interfaces.RealOutput Tair "Connector of Real output signal"
-    annotation (Placement(transformation(extent={{-48,52},{-28,72}})));
   HydraulicModules.Controller.CtrMixVflowConstValve ctrMixVflowConstValve(
       k_pump=100, Td_pump=0)
     annotation (Placement(transformation(extent={{-54,-2},{-34,18}})));
   Modelica.Blocks.Interfaces.RealInput mflowset
     "Connector of setpoint input signal"
     annotation (Placement(transformation(extent={{-124,-32},{-84,8}})));
-  Modelica.Blocks.Interfaces.RealInput T_amb
+  Modelica.Blocks.Interfaces.RealInput Q_load
     "Connector of setpoint input signal"
     annotation (Placement(transformation(extent={{-126,42},{-86,82}})));
   Fluid.Sensors.TemperatureTwoPort senTem(
@@ -106,17 +79,6 @@ equation
   connect(admixCold1.port_b1,consumerCold1. port_a)
     annotation (Line(points={{-18,20},{-18,54},{-20,54}},
                                              color={0,127,255}));
-  connect(Q_flow_FVU_cold.y,limiterFVUCold. u)
-    annotation (Line(points={{7.2,74},{6.8,74}},     color={0,0,127}));
-  connect(add1.y,consumerCold1. Q_flow)
-    annotation (Line(points={{-14.4,68},{-17.6,68},{-17.6,60}},
-                                                            color={0,0,127}));
-  connect(add1.u2,limiterFVUCold. y) annotation (Line(points={{-5.2,70.4},{-5.2,
-          72.2},{-2.4,72.2},{-2.4,74}},         color={0,0,127}));
-  connect(add1.u1,limiterCCACold. y) annotation (Line(points={{-5.2,65.6},{-4,
-          65.6},{-4,64},{-2.4,64}},    color={0,0,127}));
-  connect(Q_flow_CCA_cold.y,limiterCCACold. u)
-    annotation (Line(points={{7.2,64},{6.8,64}},     color={0,0,127}));
   connect(boundary.ports[1], admixCold1.port_a1)
     annotation (Line(points={{-28,-34},{-18,-34},{-18,0}}, color={0,127,255}));
   connect(boundary1.ports[1], admixCold1.port_b2) annotation (Line(points={{
@@ -129,8 +91,6 @@ equation
       thickness=0.5));
   connect(ctrMixVflowConstValve.Mflowset, mflowset) annotation (Line(points={{-56,
           13.8},{-58,13.8},{-58,-12},{-104,-12}},     color={0,0,127}));
-  connect(T_amb, Tair)
-    annotation (Line(points={{-106,62},{-38,62}}, color={0,0,127}));
   connect(consumerCold1.port_b, senTem.port_a)
     annotation (Line(points={{-8,54},{-8,50},{-6,50},{-6,44}},
                                                color={0,127,255}));
@@ -140,8 +100,10 @@ equation
     annotation (Line(points={{5,34},{34,34},{34,0},{108,0}}, color={0,0,127}));
   connect(boundary.T_in, T_in) annotation (Line(points={{-50,-38},{-76,-38},{
           -76,-70},{-104,-70}}, color={0,0,127}));
+  connect(Q_load, consumerCold1.Q_flow) annotation (Line(points={{-106,62},{-62,
+          62},{-62,60},{-17.6,60}}, color={0,0,127}));
   annotation (experiment(
       StopTime=300000,
       Interval=60,
       __Dymola_Algorithm="Dassl"));
-end simple_consumer;
+end simple_consumer_Q;

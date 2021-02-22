@@ -116,7 +116,8 @@ equation
           -17.8},{-8,-17.8},{-8,-70},{0,-70}},
                                             color={255,127,0}));
   connect(modeStateSelector.useGTF, ctrGTFSimple.on) annotation (Line(points={{-9.8,
-          -9.4},{-4,-9.4},{-4,-90},{-2,-90}}, color={255,0,255}));
+          -9.4},{-4,-9.4},{-4,-90.2},{-1,-90.2}},
+                                              color={255,0,255}));
   connect(modeStateSelector.useHP, ctrHP.allowOperation) annotation (Line(
         points={{-9.8,15.8},{14,15.8},{14,132},{-60,132},{-60,90}},       color=
          {255,0,255}));

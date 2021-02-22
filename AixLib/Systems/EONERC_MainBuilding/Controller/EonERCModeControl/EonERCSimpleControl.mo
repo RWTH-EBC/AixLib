@@ -195,7 +195,8 @@ equation
   connect(booleanConstant2.y, flapFreeCooler.u) annotation (Line(points={{10.4,
           74},{22,74},{22,28},{44.4,28}}, color={255,0,255}));
   connect(booleanConstant1.y, ctrGTFSimple.on) annotation (Line(points={{-53.6,
-          20},{-32,20},{-32,-90},{-2,-90}}, color={255,0,255}));
+          20},{-32,20},{-32,-90.2},{-1,-90.2}},
+                                            color={255,0,255}));
   connect(integerExpression.y, ctrSWU.mode) annotation (Line(points={{-57,-60},
           {-36,-60},{-36,-58},{-10,-58},{-10,-70},{0,-70}}, color={255,127,0}));
   connect(gcOn.u2, flapFreeCooler.u) annotation (Line(points={{44.6,-0.6},{12,

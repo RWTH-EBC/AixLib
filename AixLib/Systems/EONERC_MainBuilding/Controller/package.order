@@ -10,3 +10,4 @@ EonERCModeControl
 HeatPumpSystemVolumeFlowControl
 CtrHXmflow
 CtrGTFSimpleFlowCtrl
+EON_ERC_FlowControl

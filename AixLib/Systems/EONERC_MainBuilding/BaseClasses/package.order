@@ -5,3 +5,4 @@ TwoCircuitBus
 MainBus
 EvaluationBus
 EnergyCounter
+HeatpumpAndConsumerControllerBus
