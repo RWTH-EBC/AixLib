@@ -6,9 +6,9 @@ package BaseClasses "Base classes for Swimming Pool Models"
     parameter Modelica.SIunits.Area A "Area of pool";
 
       //Cover specs
-    parameter Modelica.SIunits.ThermalConductance R_poolCover= lambda_poolCover *A/t_poolCover "Thermal resistance of the pool cover";
-    parameter Modelica.SIunits.ThermalConductivity lambda_poolCover "Thermal Conductivity of the pool cover";
-    parameter Modelica.SIunits.Length t_poolCover "Thickness of the pool cover";
+   // parameter Modelica.SIunits.ThermalConductance R_poolCover= lambda_poolCover *A/t_poolCover "Thermal resistance of the pool cover";
+   //parameter Modelica.SIunits.ThermalConductivity lambda_poolCover "Thermal Conductivity of the pool cover";
+   // parameter Modelica.SIunits.Length t_poolCover "Thickness of the pool cover";
     constant Modelica.SIunits.CoefficientOfHeatTransfer alpha_Air "Coefficient of heat transfer between the water surface and the room air";
 
 
@@ -750,13 +750,32 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
     replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium in the component";
 
-    parameter Real zeta;
-    parameter Modelica.SIunits.Length d_pipe;
+    parameter Modelica.SIunits.Pressure pumpHead "Nominal pressure difference pump and resistance";
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal;
 
-    Modelica.Blocks.Interfaces.RealOutput P( final quantity = "Energy", final unit= "W")
+    Modelica.Blocks.Interfaces.RealOutput P( final quantity = "Power", final unit= "W")
       "Output eletric energy needed for pump operation"
       annotation (Placement(transformation(extent={{96,36},{116,56}})));
+    Movers.FlowControlled_dp fan(replaceable package Medium = Medium, m_flow_nominal=m_flow_nominal, dp_nominal=
+          pumpHead)
+      annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+    FixedResistances.PressureDrop res( replaceable package Medium =Medium, m_flow_nominal=m_flow_nominal, dp_nominal=
+          pumpHead)
+      annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+    Modelica.Blocks.Interfaces.RealInput dp_in "fixed dp"
+      annotation (Placement(transformation(extent={{-126,18},{-86,58}}),
+          iconTransformation(extent={{-110,34},{-86,58}})));
+  equation
+    connect(port_a, fan.port_a) annotation (Line(points={{-100,0},{-88,0},{-88,-2},
+            {-60,-2},{-60,0}}, color={0,127,255}));
+    connect(fan.port_b, res.port_a)
+      annotation (Line(points={{-40,0},{20,0}}, color={0,127,255}));
+    connect(res.port_b, port_b) annotation (Line(points={{40,0},{62,0},{62,-4},{100,
+            -4},{100,0}}, color={0,127,255}));
+    connect(dp_in, fan.dp_in)
+      annotation (Line(points={{-106,38},{-50,38},{-50,12}}, color={0,0,127}));
+    connect(fan.P, P) annotation (Line(points={{-39,9},{-28,9},{-28,46},{106,46}},
+          color={0,0,127}));
     annotation (Icon(graphics={Ellipse(
             extent={{-60,60},{60,-60}},
             lineColor={0,0,0},
