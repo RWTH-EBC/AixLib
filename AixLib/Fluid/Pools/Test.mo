@@ -31,7 +31,7 @@ Movers.BaseClasses.IdealSource prescribed_m_flow_toPool(
     control_dp=false) annotation (Placement(transformation(
       extent={{-8,-8},{8,8}},
       rotation=0,
-      origin={-2,0})));
+      origin={-24,-2})));
   Modelica.Blocks.Sources.Pulse pulse(
     amplitude=5,
     period=30,
@@ -41,7 +41,7 @@ Movers.BaseClasses.IdealSource prescribed_m_flow_toPool(
     m_flow_nominal=10,
     addPowerToMedium=false,
     dp_nominal=170000)
-    annotation (Placement(transformation(extent={{22,22},{42,42}})));
+    annotation (Placement(transformation(extent={{-4,-10},{16,10}})));
   Modelica.Blocks.Sources.Constant
                                P1(k=170000)
                         "Ramp pressure signal"
@@ -49,16 +49,16 @@ Movers.BaseClasses.IdealSource prescribed_m_flow_toPool(
 equation
   connect(res.port_b,sin. ports[1])
     annotation (Line(points={{48,0},{48,2},{62,2}},    color={0,127,255}));
-  connect(pulse.y, prescribed_m_flow_toPool.m_flow_in) annotation (Line(points=
-          {{9,72},{26,72},{26,40},{-6.8,40},{-6.8,6.4}}, color={0,0,127}));
-  connect(P1.y, fan.dp_in) annotation (Line(points={{-41,52},{-34,52},{-34,44},
-          {32,44}}, color={0,0,127}));
+  connect(pulse.y, prescribed_m_flow_toPool.m_flow_in) annotation (Line(points={{9,72},{
+          26,72},{26,40},{-28.8,40},{-28.8,4.4}},        color={0,0,127}));
+  connect(P1.y, fan.dp_in) annotation (Line(points={{-41,52},{-34,52},{-34,12},
+          {6,12}},  color={0,0,127}));
   connect(sou.ports[1], prescribed_m_flow_toPool.port_a) annotation (Line(
-        points={{-44,0},{-30,0},{-30,-2},{-10,-2},{-10,0}}, color={0,127,255}));
+        points={{-44,0},{-30,0},{-30,-2},{-32,-2}},         color={0,127,255}));
   connect(prescribed_m_flow_toPool.port_b, fan.port_a)
-    annotation (Line(points={{6,0},{8,0},{8,32},{22,32}}, color={0,127,255}));
-  connect(fan.port_b, res.port_a) annotation (Line(points={{42,32},{42,16},{28,
-          16},{28,0}}, color={0,127,255}));
+    annotation (Line(points={{-16,-2},{-4,-2},{-4,0}},    color={0,127,255}));
+  connect(fan.port_b, res.port_a) annotation (Line(points={{16,0},{28,0}},
+                       color={0,127,255}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),

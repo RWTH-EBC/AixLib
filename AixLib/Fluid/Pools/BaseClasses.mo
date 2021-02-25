@@ -751,31 +751,61 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
       Modelica.Media.Interfaces.PartialMedium "Medium in the component";
 
     parameter Modelica.SIunits.Pressure pumpHead "Nominal pressure difference pump and resistance";
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal;
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min= 0.0001);
+
 
     Modelica.Blocks.Interfaces.RealOutput P( final quantity = "Power", final unit= "W")
       "Output eletric energy needed for pump operation"
       annotation (Placement(transformation(extent={{96,36},{116,56}})));
-    Movers.FlowControlled_dp fan(replaceable package Medium = Medium, m_flow_nominal=m_flow_nominal, dp_nominal=
-          pumpHead)
+    Movers.FlowControlled_m_flow CirculationPump(
+      redeclare replaceable package Medium = Medium,
+      m_flow_nominal=m_flow_nominal,
+      redeclare Movers.Data.Generic per(
+        pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, dp={
+              pumpHead/0.7,pumpHead,0}),
+        hydraulicEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
+            eta={0.75,0.8,0.75}),
+        motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
+            eta={0.9,0.9,0.9})),
+      addPowerToMedium=false,
+      dp_nominal=pumpHead)
       annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-    FixedResistances.PressureDrop res( replaceable package Medium =Medium, m_flow_nominal=m_flow_nominal, dp_nominal=
-          pumpHead)
+    FixedResistances.PressureDrop res(
+      redeclare replaceable package Medium = Medium,
+      allowFlowReversal=false,
+      m_flow_nominal=m_flow_nominal,
+      show_T=false,
+      dp_nominal= pumpHead)
       annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-    Modelica.Blocks.Interfaces.RealInput dp_in "fixed dp"
-      annotation (Placement(transformation(extent={{-126,18},{-86,58}}),
-          iconTransformation(extent={{-110,34},{-86,58}})));
+    Modelica.Blocks.Interfaces.RealInput m_flow_pump annotation (Placement(
+          transformation(extent={{-128,44},{-88,84}}), iconTransformation(extent={{-112,60},
+              {-88,84}})));
+    Sensors.MassFlowRate senMasFlo( redeclare replaceable package Medium = Medium)
+      annotation (Placement(transformation(extent={{20,22},{40,42}})));
+    Modelica.Blocks.Continuous.LimPID PID(
+      k=0.1,
+      Ti=5,
+      yMax=m_flow_nominal/0.9,
+      yMin=0) annotation (Placement(transformation(extent={{-54,54},{-34,74}})));
   equation
-    connect(port_a, fan.port_a) annotation (Line(points={{-100,0},{-88,0},{-88,-2},
-            {-60,-2},{-60,0}}, color={0,127,255}));
-    connect(fan.port_b, res.port_a)
+    connect(port_a, CirculationPump.port_a) annotation (Line(points={{-100,0},{-88,
+            0},{-88,-2},{-60,-2},{-60,0}}, color={0,127,255}));
+    connect(CirculationPump.port_b, res.port_a)
       annotation (Line(points={{-40,0},{20,0}}, color={0,127,255}));
     connect(res.port_b, port_b) annotation (Line(points={{40,0},{62,0},{62,-4},{100,
             -4},{100,0}}, color={0,127,255}));
-    connect(dp_in, fan.dp_in)
-      annotation (Line(points={{-106,38},{-50,38},{-50,12}}, color={0,0,127}));
-    connect(fan.P, P) annotation (Line(points={{-39,9},{-28,9},{-28,46},{106,46}},
-          color={0,0,127}));
+    connect(CirculationPump.P, P) annotation (Line(points={{-39,9},{-28,9},{-28,46},
+            {106,46}}, color={0,0,127}));
+    connect(senMasFlo.port_a, res.port_a)
+      annotation (Line(points={{20,32},{20,0}}, color={0,127,255}));
+    connect(senMasFlo.port_b, res.port_b)
+      annotation (Line(points={{40,32},{40,0}}, color={0,127,255}));
+    connect(PID.u_m, senMasFlo.m_flow) annotation (Line(points={{-44,52},{8,52},{8,
+            43},{30,43}}, color={0,0,127}));
+    connect(PID.u_s, m_flow_pump)
+      annotation (Line(points={{-56,64},{-108,64}}, color={0,0,127}));
+    connect(PID.y, CirculationPump.m_flow_in) annotation (Line(points={{-33,64},{-33,
+            41},{-50,41},{-50,12}}, color={0,0,127}));
     annotation (Icon(graphics={Ellipse(
             extent={{-60,60},{60,-60}},
             lineColor={0,0,0},
@@ -784,14 +814,4 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
               color={0,0,0})}));
   end PumpAndPressureDrop;
 
-  package Water30degC "Simple Liquid with Water at 30degC"
-    extends AixLib.Media.Water(
-    cp_const=4180,
-    d_const=995.65,
-    eta_const=0.79722e-3,
-    lambda_const=0.61439,
-    T0=273.15,
-    MM_const=0.018015268);
-
-  end Water30degC;
 end BaseClasses;

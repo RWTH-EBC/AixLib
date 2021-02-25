@@ -1,7 +1,7 @@
 within AixLib.Fluid.Pools;
 model IndoorSwimmingPool
 
-  package Medium = AixLib.Fluid.Pools.BaseClasses.Water30degC;
+  package Medium = AixLib.Media.Water;
 
   // ***********************Defined by Record*****************
 
@@ -22,6 +22,9 @@ model IndoorSwimmingPool
   parameter Boolean WaterRecycling "Recycled water used for refilling pool water?";
   parameter Real x_recycling "Percentage of fill water which comes from the recycling unit";
   parameter Boolean NextToSoil "Pool bedded into the soil? (or does it abut a room?)";
+
+  parameter Modelica.SIunits.MassFlowRate m_flow_people "Waterexchange due to people in the pool";
+  parameter Modelica.SIunits.MassFlowRate m_flow_ff "Water exchanged due to filter flushes";
 
     //Pool Wall
   parameter Integer nExt(min=1) "Number of RC-elements of exterior walls"
@@ -72,9 +75,10 @@ model IndoorSwimmingPool
   Modelica.SIunits.MassFlowRate m_flow_toPool;
   Modelica.SIunits.MassFlowRate m_flow_freshWater;
   Modelica.SIunits.MassFlowRate m_flow_recycledWater;
+  Modelica.SIunits.MassFlowRate m_flow_sewer;
 
   MixingVolumes.MixingVolume Watertreatment(
-    redeclare package Medium = AixLib.Fluid.Pools.BaseClasses.Water30degC,
+    redeclare package Medium = Medium,
     T_start=T_pool,
     m_flow_nominal=m_flow_start,
     V=V_storage,
@@ -84,31 +88,24 @@ model IndoorSwimmingPool
     T_start=T_pool,
     m_flow_nominal=m_flow_start,
     V=V_pool,
-    nPorts=3) annotation (Placement(transformation(extent={{-2,4},{18,24}})));
-  Modelica.Fluid.Interfaces.FluidPort_a freshWater(redeclare package Medium =
-        AixLib.Fluid.Pools.BaseClasses.Water30degC)
-    annotation (Placement(transformation(extent={{-110,-104},{-90,-84}})));
-  Modelica.Fluid.Interfaces.FluidPort_a recycledWater(redeclare package Medium =
-        AixLib.Fluid.Pools.BaseClasses.Water30degC)
-    annotation (Placement(transformation(extent={{-110,-86},{-90,-66}})));
-  Modelica.Fluid.Interfaces.FluidPort_b sewer(redeclare package Medium =
-        AixLib.Fluid.Pools.BaseClasses.Water30degC)
-    annotation (Placement(transformation(extent={{90,-64},{110,-44}})));
-  Modelica.Fluid.Interfaces.FluidPort_b MEvap(redeclare package Medium =
-        AixLib.Fluid.Pools.BaseClasses.Water30degC)
-    annotation (Placement(transformation(extent={{90,2},{110,22}})));
+    nPorts=4) annotation (Placement(transformation(extent={{-2,4},{18,24}})));
+  Sources.Boundary_pT                   freshWater(redeclare package Medium =
+        Medium,
+    T=283.15,
+    nPorts=1)
+    annotation (Placement(transformation(extent={{-94,-98},{-82,-86}})));
+  Sources.Boundary_pT                   recycledWater(redeclare package Medium
+      = Medium,
+    T=298.15,
+    nPorts=1)
+    annotation (Placement(transformation(extent={{-94,-80},{-82,-68}})));
+  Sources.Boundary_pT                   sewer(redeclare package Medium =
+        Medium,
+    nPorts=2)
+    annotation (Placement(transformation(extent={{88,-70},{76,-58}})));
 
-  Movers.BaseClasses.IdealSource mFlow_toPool(redeclare package Medium =
-        AixLib.Fluid.Pools.BaseClasses.Water30degC,
-    m_flow_small=0.00000000001,
-    control_m_flow=true,
-    control_dp=false) annotation (Placement(transformation(
-        extent={{6,-6},{-6,6}},
-        rotation=180,
-        origin={34,-56})));
-
-  Movers.BaseClasses.IdealSource mFlow_recycledWater(redeclare package Medium =
-        AixLib.Fluid.Pools.BaseClasses.Water30degC,
+  Movers.BaseClasses.IdealSource mFlow_recycledWater(redeclare package Medium
+      = Medium,
     m_flow_small=0.00000000001,
     control_m_flow=true,
     control_dp=false) annotation (Placement(transformation(
@@ -117,36 +114,36 @@ model IndoorSwimmingPool
         origin={-40,-76})));
 
   Movers.BaseClasses.IdealSource mFlow_freshWater(redeclare package Medium =
-        AixLib.Fluid.Pools.BaseClasses.Water30degC,
+        Medium,
     m_flow_small=0.00000000001,
     control_m_flow=true,
     control_dp=false) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
-        origin={-42,-94})));
+        origin={-40,-94})));
 
   Movers.BaseClasses.IdealSource mFlow_Evap(redeclare package Medium =
-        AixLib.Fluid.Pools.BaseClasses.Water30degC,
+        Medium,
     m_flow_small=0.00000000001,
     control_m_flow=true,
     control_dp=false)
-    annotation (Placement(transformation(extent={{46,0},{56,10}})));
+    annotation (Placement(transformation(extent={{62,4},{72,14}})));
 
   Modelica.Blocks.Sources.RealExpression mFlowRecycledWater(final y=
         m_flow_recycledWater) "Prescribed MassFlow"
-    annotation (Placement(transformation(extent={{-62,-72},{-48,-60}})));
+    annotation (Placement(transformation(extent={{-64,-72},{-50,-60}})));
 
   Modelica.Blocks.Sources.RealExpression mFlowFreshWater(final y=m_flow_freshWater)
     "Prescribed Mass flow"
-    annotation (Placement(transformation(extent={{-72,-94},{-58,-82}})));
+    annotation (Placement(transformation(extent={{-64,-94},{-50,-82}})));
 
   Modelica.Blocks.Sources.RealExpression mFlowToPool(final y=m_flow_toPool)
     "Prescribed mass flow"
-    annotation (Placement(transformation(extent={{12,-80},{26,-68}})));
+    annotation (Placement(transformation(extent={{12,-30},{26,-18}})));
 
   Modelica.Blocks.Sources.RealExpression mFlowEvap(final y=m_flow_evap)
     "Prescribed mass flow"
-    annotation (Placement(transformation(extent={{32,10},{46,22}})));
+    annotation (Placement(transformation(extent={{44,16},{58,28}})));
 
   Modelica.Blocks.Math.Gain gain(final k=h_evap)
     annotation (Placement(transformation(extent={{-22,28},{-30,36}})));
@@ -186,7 +183,7 @@ model IndoorSwimmingPool
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=-90,
-        origin={-80,-24})));
+        origin={-80,-14})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvPoolSurface
     "Air Temperature in Zone"
     annotation (Placement(transformation(extent={{-22,88},{2,112}})));
@@ -247,26 +244,50 @@ model IndoorSwimmingPool
         extent={{-7,7},{7,-7}},
         rotation=90,
         origin={29,41})));
-  Modelica.Blocks.Interfaces.RealOutput Q_Lat_mEvap
+  Modelica.Blocks.Interfaces.RealOutput Q_Lat_mEvap( final quantity="HeatFlowRate", final unit = "W")
     "Latent heat of evaporation rate from swimming pool to surrounding air"
-    annotation (Placement(transformation(extent={{98,-18},{118,2}})));
+    annotation (Placement(transformation(extent={{98,-14},{118,6}})));
   BaseClasses.PumpAndPressureDrop pumpAndPressureDrop( final replaceable
       package Medium =
                Medium,final m_flow_nominal=m_flow_start, final pumpHead = pumpHead) annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=90,
-        origin={42,-22})));
+        origin={42,-18})));
 
-  Modelica.Blocks.Sources.Constant dp_pump(k=pumpHead)
-    "Input for circulation pump"
-    annotation (Placement(transformation(extent={{20,-38},{30,-28}})));
   Modelica.Blocks.Interfaces.RealOutput P_pump(final quantity="Power", final
       unit="W") "Output eletric energy needed for pump operation"
-    annotation (Placement(transformation(extent={{98,-36},{118,-16}})));
-  Modelica.Blocks.Interfaces.RealOutput Q_pool
+    annotation (Placement(transformation(extent={{98,-26},{118,-6}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_pool( final quantity="HeatFlowRate", final unit = "W")
     "Heat needed to compensate losses"
-    annotation (Placement(transformation(extent={{96,-92},{116,-72}})));
+    annotation (Placement(transformation(extent={{98,-40},{118,-20}})));
+  Movers.BaseClasses.IdealSource mFlow_recycledWater1(
+    redeclare package Medium = Medium,
+    m_flow_small=0.00000000001,
+    control_m_flow=true,
+    control_dp=false) annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={54,-64})));
+  Modelica.Blocks.Sources.RealExpression mFlowSewer(final y=m_flow_sewer)
+    "Prescribed MassFlow"
+    annotation (Placement(transformation(extent={{52,-52},{66,-40}})));
+  Sources.Boundary_pT                pressureBoundary(
+    redeclare package Medium = Medium,
+    p=200000,
+    nPorts=1) annotation (Placement(transformation(extent={{38,6},{30,14}})));
+  Modelica.Blocks.Interfaces.RealOutput MFlowFreshWater(final quantity=
+        "MassFlowRate", final unit="kg/s")
+    "Fresh water to compensate waste water and evaporation losses"
+    annotation (Placement(transformation(extent={{96,-96},{116,-76}})));
+  Modelica.Blocks.Interfaces.RealOutput MFlowRecycledWater(final quantity=
+        "MassFlowRate", final unit="kg/s")
+    "Recycled Water to compensate waste water and evaporation losses"
+    annotation (Placement(transformation(extent={{96,-88},{116,-68}})));
+  Modelica.Blocks.Interfaces.RealOutput MFlowWasteWater(final quantity=
+        "MassFlowRate", final unit="kg/s")
+    "Waste wate due to filter flusehs and visitors"
+    annotation (Placement(transformation(extent={{96,-80},{116,-60}})));
 equation
 
  if inUse.y or not PartialLoad then
@@ -279,54 +300,48 @@ equation
         psat_T_Air)*A_pool;
  end if;
 
-  0= m_flow_freshWater + (1-x_recycling)*(sewer.m_flow + m_flow_evap);
-  0= m_flow_recycledWater + x_recycling *(sewer.m_flow + m_flow_evap);
+ if m_flow_people > m_flow_ff then
+   m_flow_sewer=m_flow_people;
+ else
+   m_flow_sewer=m_flow_ff;
+ end if;
 
-  connect(Watertreatment.ports[1], sewer) annotation (Line(points={{0.8,-64},{4,
-          -64},{4,-66},{58,-66},{58,-56},{100,-56},{100,-54}},
-                                            color={0,127,255}));
-  connect(PoolWater.ports[1], Watertreatment.ports[2]) annotation (Line(points={{5.33333,
-          4},{-8,4},{-8,-64},{2.4,-64}},  color={0,127,255}));
+  m_flow_freshWater = (1-x_recycling)*(m_flow_sewer + m_flow_evap);
+  m_flow_recycledWater = x_recycling *(m_flow_sewer + m_flow_evap);
+
+  connect(PoolWater.ports[1], Watertreatment.ports[1]) annotation (Line(points={{5,4},{
+          -8,4},{-8,-64},{0.8,-64}},      color={0,127,255}));
   connect(mFlowRecycledWater.y, mFlow_recycledWater.m_flow_in) annotation (Line(
-        points={{-47.3,-66},{-43.6,-66},{-43.6,-71.2}}, color={0,0,127}));
+        points={{-49.3,-66},{-43.6,-66},{-43.6,-71.2}}, color={0,0,127}));
   connect(mFlowFreshWater.y, mFlow_freshWater.m_flow_in) annotation (Line(
-        points={{-57.3,-88},{-45.6,-88},{-45.6,-89.2}}, color={0,0,127}));
-  connect(mFlowToPool.y, mFlow_toPool.m_flow_in)
-    annotation (Line(points={{26.7,-74},{30.4,-74},{30.4,-60.8}},
-                                                   color={0,0,127}));
-  connect(mFlowEvap.y, mFlow_Evap.m_flow_in) annotation (Line(points={{46.7,16},
-          {46.7,10},{48,10},{48,9}}, color={0,0,127}));
+        points={{-49.3,-88},{-43.6,-88},{-43.6,-89.2}}, color={0,0,127}));
+  connect(mFlowEvap.y, mFlow_Evap.m_flow_in) annotation (Line(points={{58.7,22},
+          {64,22},{64,13}},          color={0,0,127}));
   connect(PoolWater.ports[2], mFlow_Evap.port_a)
-    annotation (Line(points={{8,4},{46,4},{46,5}}, color={0,127,255}));
-  connect(recycledWater, mFlow_recycledWater.port_a)
-    annotation (Line(points={{-100,-76},{-46,-76}}, color={0,127,255}));
-  connect(mFlow_recycledWater.port_b, Watertreatment.ports[3]) annotation (Line(
-        points={{-34,-76},{4,-76},{4,-64}},                     color={0,127,255}));
-  connect(Watertreatment.ports[4], mFlow_toPool.port_a) annotation (Line(points={{5.6,-64},
-          {22,-64},{22,-56},{28,-56}},                    color={0,127,255}));
-  connect(freshWater, mFlow_freshWater.port_a) annotation (Line(points={{-100,
-          -94},{-48,-94}},                color={0,127,255}));
-  connect(mFlow_freshWater.port_b, Watertreatment.ports[5]) annotation (Line(
-        points={{-36,-94},{7.2,-94},{7.2,-64}},                     color={0,127,
+    annotation (Line(points={{7,4},{62,4},{62,9}}, color={0,127,255}));
+  connect(mFlow_recycledWater.port_b, Watertreatment.ports[2]) annotation (Line(
+        points={{-34,-76},{2.4,-76},{2.4,-64}},                 color={0,127,255}));
+  connect(mFlow_freshWater.port_b, Watertreatment.ports[3]) annotation (Line(
+        points={{-34,-94},{4,-94},{4,-64}},                         color={0,127,
           255}));
   connect(X_w,absToRelHum. absHum) annotation (Line(points={{73,105},{60,105},
         {60,87},{61.6,87}},
                           color={0,0,127}));
   connect(TAir,absToRelHum. TDryBul)
     annotation (Line(points={{43,105},{56.2,105},{56.2,87}}, color={0,0,127}));
-  connect(mFlow_Evap.port_b, MEvap) annotation (Line(points={{56,5},{72,5},{72,
-          4},{100,4},{100,12}},
-                             color={0,127,255}));
-  connect(mFlowEvap.y, gain.u) annotation (Line(points={{46.7,16},{54,16},{54,32},
-          {-21.2,32}}, color={0,0,127}));
+  connect(mFlowEvap.y, gain.u) annotation (Line(points={{58.7,22},{64,22},{64,
+          32},{-21.2,32}},
+                       color={0,0,127}));
   connect(PoolWater.QEvap_in, gain1.y) annotation (Line(points={{-2.6,10.2},{-10,
           10.2},{-10,6},{-15.6,6}},   color={0,0,127}));
   connect(gain.y, gain1.u) annotation (Line(points={{-30.4,32},{-34,32},{-34,6},
           {-24.8,6}},  color={0,0,127}));
-  connect(multiSum.y,prescribedHeatFlow. Q_flow) annotation (Line(points={{-80,-31.02},
-          {-80,-42},{-66,-42}}, color={0,0,127}));
-  connect(multiSum.u[1], gain.y) annotation (Line(points={{-76.85,-18},{-76.85,-12},
-          {-38,-12},{-38,32},{-30.4,32}}, color={0,0,127}));
+  connect(multiSum.y,prescribedHeatFlow. Q_flow) annotation (Line(points={{-80,
+          -21.02},{-80,-42},{-66,-42}},
+                                color={0,0,127}));
+  connect(multiSum.u[1], gain.y) annotation (Line(points={{-76.85,-8},{-78,-8},
+          {-78,-4},{-38,-4},{-38,32},{-30.4,32}},
+                                          color={0,0,127}));
   connect(heatTransferWaterSurface.heatport_noCover, PoolWater.heatPort)
     annotation (Line(points={{-13,52},{-14,52},{-14,14},{-2,14}}, color={191,0,0}));
   connect(ConvPoolSurface, QFlow_Conv_Sensor.port_b) annotation (Line(points={{
@@ -335,7 +350,7 @@ equation
     annotation (Line(points={{-13.18,66.4667},{-13,66.4667},{-13,72}}, color={191,
           0,0}));
   connect(QFlow_Conv_Sensor.Q_flow, multiSum.u[2]) annotation (Line(points={{-20,79},
-          {-28,79},{-28,44},{-78.95,44},{-78.95,-18}},   color={0,0,127}));
+          {-28,79},{-28,44},{-78.95,44},{-78.95,-8}},    color={0,0,127}));
   connect(TRad,prescribedTemperature. T) annotation (Line(points={{-55,105},{-55,
           94.5},{-55,94.5},{-55,83}}, color={0,0,127}));
   connect(prescribedTemperature.port,bodyRadiation. port_b)
@@ -344,8 +359,8 @@ equation
     annotation (Line(points={{-53,36},{-55,36},{-55,48}}, color={191,0,0}));
   connect(QFlow_Rad_Sensor.port_a, PoolWater.heatPort) annotation (Line(points={
           {-53,22},{-54,22},{-54,14},{-2,14}}, color={191,0,0}));
-  connect(QFlow_Rad_Sensor.Q_flow, multiSum.u[3]) annotation (Line(points={{-60,
-          29},{-72,29},{-72,26},{-82.1,26},{-82.1,-18},{-81.05,-18}}, color={0,0,
+  connect(QFlow_Rad_Sensor.Q_flow, multiSum.u[3]) annotation (Line(points={{-60,29},
+          {-72,29},{-72,24},{-78,24},{-78,-8},{-81.05,-8}},           color={0,0,
           127}));
   connect(prescribedHeatFlow.port, Watertreatment.heatPort) annotation (Line(
         points={{-46,-42},{-36,-42},{-36,-52},{-6,-52},{-6,-54}}, color={191,0,0}));
@@ -356,27 +371,55 @@ equation
           0}));
   connect(PoolWater.heatPort, QFlow_Cond_Sensor.port_a) annotation (Line(points=
          {{-2,14},{-14,14},{-14,34},{29,34}}, color={191,0,0}));
-  connect(QFlow_Cond_Sensor.Q_flow, multiSum.u[4]) annotation (Line(points={{22,
-          41},{4,41},{4,40},{-84,40},{-84,-14},{-83.15,-14},{-83.15,-18}},
+  connect(QFlow_Cond_Sensor.Q_flow, multiSum.u[4]) annotation (Line(points={{22,41},
+          {4,41},{4,42},{-78,42},{-78,-8},{-83.15,-8}},
         color={0,0,127}));
-  connect(gain.y, Q_Lat_mEvap) annotation (Line(points={{-30.4,32},{-36,32},{
-          -36,-8},{108,-8}},
+  connect(gain.y, Q_Lat_mEvap) annotation (Line(points={{-30.4,32},{-38,32},{
+          -38,-4},{108,-4}},
                            color={0,0,127}));
-  connect(mFlow_toPool.port_b, pumpAndPressureDrop.port_a) annotation (Line(
-        points={{40,-56},{42,-56},{42,-30}},          color={0,127,255}));
   connect(pumpAndPressureDrop.port_b, PoolWater.ports[3]) annotation (Line(
-        points={{42,-14},{42,-4},{10.6667,-4},{10.6667,4}},      color={0,127,255}));
-  connect(dp_pump.y, pumpAndPressureDrop.dp_in) annotation (Line(points={{30.5,
-          -33},{38.32,-33},{38.32,-29.84}},
-                                    color={0,0,127}));
-  connect(pumpAndPressureDrop.P, P_pump) annotation (Line(points={{38.32,-13.52},
-          {72,-13.52},{72,-26},{108,-26}}, color={0,0,127}));
-  connect(multiSum.y, Q_pool) annotation (Line(points={{-80,-31.02},{-80,-82},{
-          106,-82}}, color={0,0,127}));
+        points={{42,-10},{42,-4},{9,-4},{9,4}},                  color={0,127,255}));
+  connect(pumpAndPressureDrop.P, P_pump) annotation (Line(points={{38.32,-9.52},
+          {72,-9.52},{72,-16},{108,-16}},  color={0,0,127}));
+  connect(multiSum.y, Q_pool) annotation (Line(points={{-80,-21.02},{-80,-30},{
+          108,-30}}, color={0,0,127}));
+  connect(recycledWater.ports[1], mFlow_recycledWater.port_a) annotation (Line(
+        points={{-82,-74},{-68,-74},{-68,-76},{-46,-76}},           color={0,127,
+          255}));
+  connect(freshWater.ports[1], mFlow_freshWater.port_a) annotation (Line(points={{-82,-92},
+          {-64,-92},{-64,-94},{-46,-94}},           color={0,127,255}));
+  connect(Q_pool, Q_pool)
+    annotation (Line(points={{108,-30},{108,-30}}, color={0,0,127}));
+  connect(Watertreatment.ports[4], mFlow_recycledWater1.port_a)
+    annotation (Line(points={{5.6,-64},{48,-64}}, color={0,127,255}));
+  connect(mFlow_recycledWater1.port_b, sewer.ports[1])
+    annotation (Line(points={{60,-64},{68,-64},{68,-62.8},{76,-62.8}},
+                                                 color={0,127,255}));
+  connect(mFlowSewer.y, mFlow_recycledWater1.m_flow_in) annotation (Line(points=
+         {{66.7,-46},{68,-46},{68,-59.2},{50.4,-59.2}}, color={0,0,127}));
+  connect(pressureBoundary.ports[1], PoolWater.ports[4]) annotation (Line(
+        points={{30,10},{20,10},{20,6},{11,6},{11,4}}, color={0,127,255}));
+  connect(Watertreatment.ports[5], pumpAndPressureDrop.port_a) annotation (Line(
+        points={{7.2,-64},{24,-64},{24,-50},{42,-50},{42,-26}}, color={0,127,
+          255}));
+  connect(mFlowToPool.y, pumpAndPressureDrop.m_flow_pump) annotation (Line(
+        points={{26.7,-24},{32,-24},{32,-26},{36.24,-26}},       color={0,0,127}));
+  connect(mFlow_Evap.port_b, sewer.ports[2])
+    annotation (Line(points={{72,9},{72,8},{74,8},{74,-64},{76,-64},{76,-65.2}},
+                                                 color={0,127,255}));
+  connect(MFlowRecycledWater, mFlowRecycledWater.y) annotation (Line(points={{
+          106,-78},{30,-78},{30,-66},{-49.3,-66}}, color={0,0,127}));
+  connect(mFlowFreshWater.y, MFlowFreshWater) annotation (Line(points={{-49.3,
+          -88},{28,-88},{28,-86},{106,-86}}, color={0,0,127}));
+  connect(mFlowSewer.y, MFlowWasteWater) annotation (Line(points={{66.7,-46},{
+          80,-46},{80,-48},{92,-48},{92,-70},{106,-70}}, color={0,0,127}));
+  connect(Q_Lat_mEvap, Q_Lat_mEvap)
+    annotation (Line(points={{108,-4},{108,-4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Line(
-            points={{-72,30}}, color={255,255,170}), Bitmap(extent={{-82,-100},
-              {98,100}}, fileName=
-              "modelica://AixLib/Fluid/Pools/icon_schwimmbecken.jpg")}),
+            points={{-72,30}}, color={255,255,170}), Bitmap(extent={{-102,-104},
+              {100,98}}, fileName=
+              "modelica://AixLib/Fluid/Pools/icon_schwimmbecken.jpg"),
+        Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0})}),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end IndoorSwimmingPool;
