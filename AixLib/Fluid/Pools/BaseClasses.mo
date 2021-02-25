@@ -82,7 +82,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
     "Heat transfer due to conduction through pool walls"
     constant Modelica.SIunits.CoefficientOfHeatTransfer alpha_W "Coefficient of heat transfer between the water and the pool walls";
     parameter Modelica.SIunits.Temperature T_nextDoor "Temperature of room bordering the pool walls";
-    parameter Boolean NextToSoil;
+    parameter Boolean nextToSoil;
 
     parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls"
       annotation(Dialog(group="Exterior walls"));
@@ -116,7 +116,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
     Modelica.Blocks.Sources.Constant TNextDoor(k=T_nextDoor)
       "Temperature of the room beneath the pool"
       annotation (Placement(transformation(extent={{74,-28},{66,-20}})));
-    Modelica.Blocks.Sources.BooleanConstant booleanNextToSoil(k=NextToSoil)
+    Modelica.Blocks.Sources.BooleanConstant booleanNextToSoil(k=nextToSoil)
       "Soil or room under the Swimming Pool"
       annotation (Placement(transformation(extent={{64,-6},{52,6}})));
     Modelica.Blocks.Sources.Constant Constant_alpha_W(k=alpha_W)
@@ -800,7 +800,7 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
       annotation (Line(points={{20,32},{20,0}}, color={0,127,255}));
     connect(senMasFlo.port_b, res.port_b)
       annotation (Line(points={{40,32},{40,0}}, color={0,127,255}));
-    connect(PID.u_m, senMasFlo.m_flow) annotation (Line(points={{-44,52},{8,52},{8,
+    connect(PID.u_m, senMasFlo.m_flow) annotation (Line(points={{-44,52},{-44,
             43},{30,43}}, color={0,0,127}));
     connect(PID.u_s, m_flow_pump)
       annotation (Line(points={{-56,64},{-108,64}}, color={0,0,127}));

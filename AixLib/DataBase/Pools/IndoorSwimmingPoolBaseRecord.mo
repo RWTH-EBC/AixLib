@@ -13,12 +13,12 @@ record IndoorSwimmingPoolBaseRecord
   parameter Real beta_inUse "Water transfer coefficient during opening hours";
   parameter Real beta_nonUse "Water transfer coefficient during non opening hours";
 
-  parameter Boolean PartialLoad  "Partial load operation implemented for the non opening hours?";
+  parameter Boolean partialLoad  "Partial load operation implemented for the non opening hours?";
   parameter Real x_partialLoad "In case of partial load: percentage of mass flow rate of opening hours, which is active during non-opening hours";
   parameter Boolean poolCover "Pool cover installed for non opening hours?";
-  parameter Boolean WaterRecycling "Recycled water used for refilling pool water?";
+  parameter Boolean waterRecycling "Recycled water used for refilling pool water?";
   parameter Real x_recycling "Percentage of fill water which comes from the recycling unit";
-  parameter Boolean NextToSoil "Pool bedded into the soil? (or does it abut a room?)";
+  parameter Boolean nextToSoil "Pool bedded into the soil? (or does it abut a room?)";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_people "Waterexchange due to people in the pool";
   parameter Modelica.SIunits.MassFlowRate m_flow_ff "Water exchanged due to filter flushes";
