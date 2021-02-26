@@ -120,8 +120,8 @@ model GenericPipe
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,42})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1)
-                          annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1) if
+        not withConvection annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,70})));
@@ -249,11 +249,14 @@ equation
   above or below the allowed range) for small volume flow rates.
 </p>
 </html>", revisions="<html>
- <ul>
-  <li>August 12, 2020, by Alexander K&uuml;mpel:<br>
-   <a href=\"https://github.com/RWTH-EBC/AixLib/issues/910\">#910</a> Make insulation and heat convection optional </li>
-  <li>Mai 14, 2020, by Alexander K&uuml;mpel:<br>
-   First implementation </li>
- </ul>
+<ul>
+  <li>August 12, 2020, by Alexander Kümpel:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/910\">#910</a>
+    Make insulation and heat convection optional
+  </li>
+  <li>Mai 14, 2020, by Alexander Kümpel:<br/>
+    First implementation
+  </li>
+</ul>
 </html>"));
 end GenericPipe;
