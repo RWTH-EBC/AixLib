@@ -134,8 +134,6 @@ partial model PartialCase "This is the base class from which the base cases will
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
-  parameter Boolean useAnnualHeatingOrCoolingLoad = true
-    "Checking results according to ASHRAE140: 'true' if the used results are referring to Annual Heating or Cooling Loads; 'false' if the used results are referring to Min/Max Temperatures";
 
   parameter Real tableHeatOrTempMax[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
   parameter Real tableCoolOrTempMin[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
@@ -215,13 +213,6 @@ equation
   connect(integrator2.y, to_kWhTransRad.u) annotation (Line(points={{85.5,-0.75},{91,-0.75},{91,-1}}, color={0,0,127}));
   connect(gainIntHea.y, TransmittedSolarRadiation_room) annotation (Line(points={{122.3,-1},{140,-1}},
                                                 color={0,0,127}));
-  if useAnnualHeatingOrCoolingLoad then
-    connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{140,68},{130,68},{130,-36},{91,-36},{91,-52.15},{97.95,-52.15}}, color={0,0,127}));
-    connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{140,52},{130,52},{130,-35},{52,-35},{52,-65},{76,-65},{76,-73.15},{97.95,-73.15}}, color={0,0,127}));
-  else
-    connect(FreeFloatRoomTemperature, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{140,36},{130,36},{130,-36},{91,-36},{91,-52.15},{97.95,-52.15}}, color={0,0,127}));
-    connect(FreeFloatRoomTemperature, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{140,36},{130,36},{130,-35},{52,-35},{52,-65},{76,-65},{76,-73.15},{97.95,-73.15}}, color={0,0,127}));
-  end if;
   connect(ReferenceHeatingLoadOrTempMax.y[1], checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit) annotation (Line(points={{72.7,-55},{85,-55},{85,-62.5},{97.95,-62.5}}, color={0,0,127}));
   connect(ReferenceHeatingLoadOrTempMax.y[2], checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit) annotation (Line(points={{72.7,-55},{86,-55},{86,-59.5},{97.95,-59.5}}, color={0,0,127}));
   connect(ReferenceCoolingLoadOrTempMin.y[1], checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit) annotation (Line(points={{72.7,-77},{86,-77},{86,-83.5},{97.95,-83.5}}, color={0,0,127}));

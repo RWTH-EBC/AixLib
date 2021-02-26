@@ -52,9 +52,7 @@ model Case650
   Modelica.Blocks.Sources.RealExpression HeatingPower(y=0)
     annotation (Placement(transformation(extent={{43,58},{63,78}})));
 equation
-    //Connections for input solar model
-  for i in 1:5 loop
-  end for;
+
 
   connect(Source_TsetCool.y[1], idealHeaterCooler.setPointCool) annotation (
       Line(points={{-16.35,-75.5},{-16.35,-76},{-8.4,-76},{-8.4,-62.2}}, color={
@@ -69,6 +67,8 @@ equation
   connect(idealHeaterCooler.heatCoolRoom, Room.thermRoom) annotation (Line(
         points={{3,-59},{21,-59},{21,-19},{-2,-19},{-2,35},{-2.92,35}}, color={
           191,0,0}));
+  connect(to_kWhHeat.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,68},{112,68},{112,-39},{94,-39},{94,-52.15},{97.95,-52.15}}, color={0,0,127}));
+  connect(to_kWhCool.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,52},{111,52},{111,-37},{93,-37},{93,-73.15},{97.95,-73.15}}, color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

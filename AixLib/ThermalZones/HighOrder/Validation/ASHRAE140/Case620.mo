@@ -58,9 +58,6 @@ model Case620
     annotation (choicesAllMatching=true);
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
 equation
-    //Connections for input solar model
-  for i in 1:5 loop
-  end for;
 
   connect(Tset_Cooler.y, from_degC.u)
     annotation (Line(points={{-26.45,-76.5},{-21.1,-76.5}},
@@ -81,6 +78,8 @@ equation
     annotation (Line(points={{64,68},{70.9,68}}, color={0,0,127}));
   connect(CoolingPower.y, integratorCool.u)
     annotation (Line(points={{64,52},{70.9,52}}, color={0,0,127}));
+  connect(to_kWhHeat.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,68},{112,68},{112,-39},{94,-39},{94,-52.15},{97.95,-52.15}}, color={0,0,127}));
+  connect(to_kWhCool.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,52},{111,52},{111,-37},{93,-37},{93,-73.15},{97.95,-73.15}}, color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

@@ -30,9 +30,6 @@ model Case600FF
   Modelica.Blocks.Sources.RealExpression CoolingPower(y=0)
     annotation (Placement(transformation(extent={{43,42},{63,62}})));
 equation
-    //Connections for input solar model
-  for i in 1:5 loop
-  end for;
 
   connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{
           -29.8,53.765},{-47,53.765},{-47,-37},{-17,-37},{-17,-49.5},{-24.35,
@@ -41,6 +38,8 @@ equation
     annotation (Line(points={{64,68},{70.9,68}}, color={0,0,127}));
   connect(CoolingPower.y, integratorCool.u) annotation (Line(points={{64,52},{
           68,52},{68,52},{70.9,52}}, color={0,0,127}));
+  connect(to_degCRoomConvTemp.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,36},{112,36},{112,-39},{92,-39},{92,-52.15},{97.95,-52.15}}, color={0,0,127}));
+  connect(to_degCRoomConvTemp.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,36},{111,36},{111,-38},{91,-38},{91,-73.15},{97.95,-73.15}}, color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=
