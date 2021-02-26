@@ -106,10 +106,14 @@ partial model PartialCase "This is the base class from which the base cases will
     "Converts to MWh"
     annotation (Placement(transformation(extent={{116,-4},{122,2}})));
 
-  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeatingOrTempMax(checkTime=31536000) annotation (Placement(transformation(extent={{99,-49},{114,-64}})));
-  Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoadOrTempMax(tableOnFile=false, table=[0.0,0.0,0.0]) "According to ASHRAE140: If annual heating load then at t=31536000s {2}=lower limit and {3}=upper limit, if maximal temperature then {2}=lower limit ReferenceTempMax and {3}=upper limit ReferenceTempMax" annotation (Placement(transformation(extent={{58,-62},{72,-48}})));
-  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECoolingOrTempMin(checkTime=31536000) annotation (Placement(transformation(extent={{99,-70},{114,-85}})));
-  Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoadOrTempMin(tableOnFile=false, table=[0.0,0.0,0.0]) "According to ASHRAE140: If annual cooling load then at t=31536000s {2}=lower limit and {3}=upper limit, if minimal temperature then {2}=lower limit ReferenceTempMin and {3}=upper limit ReferenceTempMin" annotation (Placement(transformation(extent={{58,-84},{72,-70}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeatingOrTempMax(final checkTime=checkTimeHeatOrTempMax, final dispType=dispTypeHeatOrTempMax)
+                                                                                                              annotation (Placement(transformation(extent={{99,-49},{114,-64}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoadOrTempMax(tableOnFile=false, final table=tableHeatOrTempMax)
+                                                                                                               "According to ASHRAE140: If annual heating load then at t=31536000s {2}=lower limit and {3}=upper limit, if maximal temperature then {2}=lower limit ReferenceTempMax and {3}=upper limit ReferenceTempMax" annotation (Placement(transformation(extent={{58,-62},{72,-48}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECoolingOrTempMin(final checkTime=checkTimeCoolOrTempMin, final dispType=dispTypeCoolOrTempMin)
+                                                                                                              annotation (Placement(transformation(extent={{99,-70},{114,-85}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoadOrTempMin(tableOnFile=false, final table=tableCoolOrTempMin)
+                                                                                                               "According to ASHRAE140: If annual cooling load then at t=31536000s {2}=lower limit and {3}=upper limit, if minimal temperature then {2}=lower limit ReferenceTempMin and {3}=upper limit ReferenceTempMin" annotation (Placement(transformation(extent={{58,-84},{72,-70}})));
   parameter Real airExchange=0.41 "Constant Air Exchange Rate";
   parameter Real TsetCooler=27 "Constant Set Temperature for Cooler";
   parameter Real TsetHeater=20 "Constant Set Temperature for Heater";
@@ -125,16 +129,30 @@ partial model PartialCase "This is the base class from which the base cases will
     annotation (choicesAllMatching=true);
   replaceable model CorrSolarGainWin =
       Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
-    constrainedby
-    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
   parameter Boolean useAnnualHeatingOrCoolingLoad = true
-    "Checking results according to ASHRAE140: 'true' if the used results are referring to Annual Heating or Cooling Loads;
+    "Checking results according to ASHRAE140: 'true' if the used results are referring to Annual Heating or Cooling Loads; 'false' if the used results are referring to Min/Max Temperatures";
 
-    'false' if the used results are referring to Min/Max Temperatures
-    ";
+  parameter Real tableHeatOrTempMax[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
+  parameter Real tableCoolOrTempMin[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
+  parameter String dispTypeHeatOrTempMax="None" "Letter displayed in icon of results checker" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"),
+    choices(
+      choice="Q Heat",
+      choice="Q Cool",
+      choice="T Max",
+      choice="T Min"));
+  parameter String dispTypeCoolOrTempMin="None" "Letter displayed in icon of results checker" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"),
+    choices(
+      choice="Q Heat",
+      choice="Q Cool",
+      choice="T Max",
+      choice="T Min"));
+  parameter Modelica.SIunits.Time checkTimeHeatOrTempMax=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
+  parameter Modelica.SIunits.Time checkTimeCoolOrTempMin=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
+
 
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
   Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature
