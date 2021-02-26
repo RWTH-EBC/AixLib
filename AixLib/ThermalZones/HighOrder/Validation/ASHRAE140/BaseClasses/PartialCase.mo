@@ -97,8 +97,6 @@ partial model PartialCase "This is the base class from which the base cases will
     annotation (Placement(transformation(extent={{-120,-72},{-110,-62}})));
   Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiative part"
     annotation (Placement(transformation(extent={{-120,-92},{-110,-82}})));
-  Modelica.Blocks.Sources.RealExpression TransmittedRad(y=Room.outerWall_South.solarRadWinTrans)
-    annotation (Placement(transformation(extent={{46,-10},{64,8}})));
   Modelica.Blocks.Continuous.Integrator integrator2
     annotation (Placement(transformation(extent={{75,-6},{85,4.5}})));
   Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhTransRad annotation (Placement(transformation(extent={{92,-6},{102,4}})));
@@ -206,8 +204,6 @@ equation
           127}));
   connect(radiativeInternalGains.y, InternalGains_radiative.Q_flow)
     annotation (Line(points={{-109.5,-87},{-97,-87}}, color={0,0,127}));
-  connect(TransmittedRad.y, integrator2.u) annotation (Line(points={{64.9,-1},{71,-1},{71,-0.75},{74,-0.75}},
-                                              color={0,0,127}));
   connect(to_kWhTransRad.y, gainIntHea.u) annotation (Line(points={{102.5,-1},{115.4,-1}}, color={0,0,127}));
   connect(to_kWhCool.y, AnnualCoolingLoad) annotation (Line(points={{102.5,52},{140,52}}, color={0,0,127}));
   connect(integrator2.y, to_kWhTransRad.u) annotation (Line(points={{85.5,-0.75},{91,-0.75},{91,-1}}, color={0,0,127}));

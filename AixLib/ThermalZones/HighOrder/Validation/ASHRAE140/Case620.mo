@@ -12,8 +12,7 @@ model Case620
         solar_absorptance_OW=solar_absorptance_OW,
         calcMethodOut=2,
         Win_Area=Win_Area,
-        absInnerWallSurf=absInnerWallSurf),
-    TransmittedRad(y=Room.outerWall_East.solarRadWinTrans + Room.outerWall_West.solarRadWinTrans));
+        absInnerWallSurf=absInnerWallSurf));
 
   Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
@@ -57,6 +56,8 @@ model Case620
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
+  Modelica.Blocks.Sources.RealExpression TransmittedRad(y=Room.outerWall_East.solarRadWinTrans + Room.outerWall_West.solarRadWinTrans)
+    annotation (Placement(transformation(extent={{43,-10},{61,8}})));
 equation
 
   connect(Tset_Cooler.y, from_degC.u)
@@ -80,6 +81,8 @@ equation
     annotation (Line(points={{64,52},{70.9,52}}, color={0,0,127}));
   connect(to_kWhHeat.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,68},{112,68},{112,-39},{94,-39},{94,-52.15},{97.95,-52.15}}, color={0,0,127}));
   connect(to_kWhCool.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,52},{111,52},{111,-37},{93,-37},{93,-73.15},{97.95,-73.15}}, color={0,0,127}));
+  connect(TransmittedRad.y, integrator2.u) annotation (Line(points={{61.9,-1},{68,-1},{68,-0.75},{74,-0.75}},
+                                              color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=
