@@ -1,13 +1,12 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case650FF
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
-    checkResultsAccordingToASHRAEHeatingOrCooling=false,
-    checkResultsAccordingToASHRAEHeatingOrTempMax(checkTime=25027200, dispType=
-          "T Max"),
-    checkResultsAccordingToASHRAECoolingOrTempMin(checkTime=284400, dispType=
-          "T Min"),
-    ReferenceCoolingLoadOrTempMin(table=[650,-23,-21.6]),
-    ReferenceHeatingLoadOrTempMax(table=[650,63.2,68.2]));
+    checkTimeCoolOrTempMin=284400,
+    checkTimeHeatOrTempMax=25027200,
+    dispTypeCoolOrTempMin="T Min",
+    dispTypeHeatOrTempMax="T Max",
+    tableCoolOrTempMin=[650,-23,-21.6],
+    tableHeatOrTempMax=[650,63.2,68.2]);
 
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX50();
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition AERProfile = AixLib.DataBase.Profiles.ASHRAE140.Ventilation_caseX50();

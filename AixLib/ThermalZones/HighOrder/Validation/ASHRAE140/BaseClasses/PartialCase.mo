@@ -123,7 +123,8 @@ partial model PartialCase "This is the base class from which the base cases will
   parameter Real solar_absorptance_OW=0.6 "Solar absoptance outer walls ";
   parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
       AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
-    "Types of walls (contains multiple records)";
+    "Types of walls (contains multiple records)"
+    annotation (choicesAllMatching=true);
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
@@ -299,7 +300,7 @@ equation
 4- Cloud Cover",
           fontSize=8),
         Rectangle(
-          extent={{41,-19},{129,-110}},
+          extent={{42,-19},{130,-110}},
           lineColor={0,0,0},
           fillColor={255,250,228},
           fillPattern=FillPattern.Solid),

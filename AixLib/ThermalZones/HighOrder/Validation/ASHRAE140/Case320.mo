@@ -1,10 +1,10 @@
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case320
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270(
     TsetHeater=20,
     TsetCooler=27,
-    ReferenceHeatingLoadOrTempMax(table=[320,3859,5141]),
-    ReferenceCoolingLoadOrTempMin(table=[320,-7304,-5061]));
+    tableCoolOrTempMin=[320,-7304,-5061],
+    tableHeatOrTempMax=[320,3859,5141]);
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

@@ -2,13 +2,12 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case600FF
   extends
     AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
-    checkResultsAccordingToASHRAEHeatingOrCooling=false,
-    ReferenceHeatingLoadOrTempMax(table=[600,64.9,69.5]),
-    ReferenceCoolingLoadOrTempMin(table=[600,-18.8,-15.6]),
-    checkResultsAccordingToASHRAEHeatingOrTempMax(checkTime=25029000, dispType=
-          "T Max"),
-    checkResultsAccordingToASHRAECoolingOrTempMin(checkTime=288000, dispType=
-          "T Min"));
+    checkTimeCoolOrTempMin=288000,
+    checkTimeHeatOrTempMax=25029000,
+    dispTypeCoolOrTempMin="T Min",
+    dispTypeHeatOrTempMax="T Max",
+    tableCoolOrTempMin=[600,-18.8,-15.6],
+    tableHeatOrTempMax=[600,64.9,69.5]);
 
   Modelica.Blocks.Sources.Constant AirExchangeRate(final k=airExchange)
     annotation (Placement(transformation(extent={{-38,-56},{-25,-43}})));

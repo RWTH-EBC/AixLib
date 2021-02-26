@@ -1,11 +1,11 @@
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case640
   extends
     AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
-      ReferenceHeatingLoadOrTempMax(table=[640,2751,3803]),
-      ReferenceCoolingLoadOrTempMin(table=[640,-7811,-5952]),
-    checkResultsAccordingToASHRAEHeatingOrTempMax(dispType="Q Heat"),
-    checkResultsAccordingToASHRAECoolingOrTempMin(dispType="Q Cool"));
+    dispTypeCoolOrTempMin="Q Cool",
+    dispTypeHeatOrTempMax="Q Heat",
+    tableCoolOrTempMin=[640,-7811,-5952],
+    tableHeatOrTempMax=[640,2751,3803]);
 
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX40();
 

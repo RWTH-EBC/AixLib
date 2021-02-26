@@ -1,6 +1,10 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case620
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
+    dispTypeCoolOrTempMin="Q Cool",
+    dispTypeHeatOrTempMax="Q Heat",
+    tableCoolOrTempMin=[620,-5004,-3417],
+    tableHeatOrTempMax=[620,4613,5944],
     redeclare model RoomModel = Rooms.ASHRAE140.EastWestFacingWindows (
         wallTypes=wallTypes,
         calcMethodIn=4,
@@ -9,11 +13,7 @@ model Case620
         calcMethodOut=2,
         Win_Area=Win_Area,
         absInnerWallSurf=absInnerWallSurf),
-      ReferenceHeatingLoadOrTempMax(table=[620,4613,5944]),
-      ReferenceCoolingLoadOrTempMin(table=[620,-5004,-3417]),
-    TransmittedRad(y=Room.outerWall_East.solarRadWinTrans + Room.outerWall_West.solarRadWinTrans),
-    checkResultsAccordingToASHRAEHeatingOrTempMax(dispType="Q Heat"),
-    checkResultsAccordingToASHRAECoolingOrTempMin(dispType="Q Cool"));
+    TransmittedRad(y=Room.outerWall_East.solarRadWinTrans + Room.outerWall_West.solarRadWinTrans));
 
   Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,

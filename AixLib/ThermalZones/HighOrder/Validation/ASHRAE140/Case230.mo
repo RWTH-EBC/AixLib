@@ -2,8 +2,8 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case230
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220(
     airExchange=0.822,
-    ReferenceHeatingLoadOrTempMax(table=[230,10376,12243]),
-    ReferenceCoolingLoadOrTempMin(table=[230,-1139,-454]));
+    tableCoolOrTempMin=[230,-1139,-454],
+    tableHeatOrTempMax=[230,10376,12243]);
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

@@ -2,9 +2,8 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case810
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900(
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs01,
-
-    ReferenceHeatingLoadOrTempMax(table=[810,1839,3004]),
-    ReferenceCoolingLoadOrTempMin(table=[810,-1711,-1052]));
+    tableCoolOrTempMin=[810,-1711,-1052],
+    tableHeatOrTempMax=[810,1839,3004]);
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

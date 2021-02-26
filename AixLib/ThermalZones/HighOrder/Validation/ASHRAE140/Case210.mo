@@ -2,9 +2,9 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case210
   extends Case220(
     wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases_eps01(),
+    tableCoolOrTempMin=[210,-668,-162],
+    tableHeatOrTempMax=[210,6456,6967]);
 
-    ReferenceHeatingLoadOrTempMax(table=[210,6456,6967]),
-    ReferenceCoolingLoadOrTempMin(table=[210,-668,-162]));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

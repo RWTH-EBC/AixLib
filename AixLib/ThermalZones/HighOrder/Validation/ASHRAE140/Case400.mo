@@ -8,8 +8,8 @@ model Case400
     solar_absorptance_OW=0.1,
     internalGains=0,
     airExchange=0,
-    ReferenceHeatingLoadOrTempMax(table=[400,6900,8770]),
-    ReferenceCoolingLoadOrTempMin(table=[400,-61,0]));
+    tableCoolOrTempMin=[400,-61,0],
+    tableHeatOrTempMax=[400,6900,8770]);
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=
