@@ -119,15 +119,13 @@ partial model PartialCase "This is the base class from which the base cases will
   parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
   parameter Real solar_absorptance_OW=0.6 "Solar absoptance outer walls ";
-  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
-      AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
+  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes = AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
     "Types of walls (contains multiple records)"
     annotation (choicesAllMatching=true);
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
-  replaceable model CorrSolarGainWin =
-      Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
+  replaceable model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
     constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
@@ -150,10 +148,8 @@ partial model PartialCase "This is the base class from which the base cases will
   parameter Modelica.SIunits.Time checkTimeHeatOrTempMax=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
   parameter Modelica.SIunits.Time checkTimeCoolOrTempMin=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
 
-
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
-  Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature
-    annotation (Placement(transformation(extent={{130,26},{150,46}})));
+  Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature annotation (Placement(transformation(extent={{130,26},{150,46}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(extent={{72,30},{84,42}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1 annotation (Placement(transformation(extent={{72,12},{84,24}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp1 annotation (Placement(transformation(extent={{92,13},{102,23}})));
