@@ -3,7 +3,7 @@ model TwoWayPressureIndependent "Model of a pressure-independent two way valve"
   extends AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve(
             final linearized = false,
             from_dp=true,
-            phi=max(0, l + y_actual*(1 - l)));
+            phi=max(0.1*l, l + y_actual*(1 - l)));
 
   parameter Real l2(min=1e-10) = 0.01
     "Gain for mass flow increase if pressure is above nominal pressure"

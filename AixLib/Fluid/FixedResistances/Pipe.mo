@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances;
+within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
   extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;

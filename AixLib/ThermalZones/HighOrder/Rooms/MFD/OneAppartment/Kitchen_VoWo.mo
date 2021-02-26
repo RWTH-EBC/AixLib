@@ -243,16 +243,22 @@ equation
       points={{-20,-45},{-12,-45},{-12,-38},{6,-38}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-26,-16},{-40,-16},{-40,-20},{-12,-20},{-12,-35},{-20,-35}},     color={191,0,0}));
-  connect(Wall_Bath1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-62,-31},{-52,-31},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Corridor2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-64,11},{-52,11},{-52,-40},{-40,-40},{-40,-40}},     color={191,0,0}));
-  connect(Wall_Corridor1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-3,22},{-3,10},{-52,10},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Bath2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-46,-72},{-46,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(outsideWall.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{5,-92},{5,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{38,-29},{28,-29},{28,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{80,-98.0002},{80,-86},{28,-86},{28,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{80,-74},{80,-86},{28,-86},{28,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points={{-3.2,78},{-12,78},{-12,60},{-80,60},{-80,76},{-110,76}},                    color = {0, 0, 127}));
+  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-35,-8},{-40,-8},{-40,-20},{-12,-20},{-12,-34.9},{-19.9,-34.9}}, color={191,0,0}));
+  connect(Wall_Bath1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-62,-31},{-52,-31},{-52,-41.3},{-39.8,-41.3}}, color={191,0,0}));
+  connect(Wall_Corridor2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-64,11},{-52,11},{-52,-40},{-39.8,-40},{-39.8,-41.3}},
+                                                                                                                                                               color={191,0,0}));
+  connect(Wall_Corridor1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-3,22},{-3,10},{-52,10},{-52,-41.3},{-39.8,-41.3}}, color={191,0,0}));
+  connect(Wall_Bath2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-46,-72},{-46,-60},{-52,-60},{-52,
+          -41.3},{-39.8,-41.3}},                                                                                                                               color={191,0,0}));
+  connect(outsideWall.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{5,-92},{5,-60},{-52,-60},{-52,-41.3},{-39.8,-41.3}}, color={191,0,0}));
+  connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{38,-29},{28,-29},{28,-60},{-52,-60},{-52,-41.3},{-39.8,-41.3}}, color={191,0,0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{80,-98.0002},{80,-86},{28,-86},{28,
+          -60},{-52,-60},{-52,-41.3},{-39.8,-41.3}},                                                                                                                                color={191,0,0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{80,-74},{80,-86},{28,-86},{28,-60},
+          {-52,-60},{-52,-41.3},{-39.8,-41.3}},                                                                                                                                  color={191,0,0}));
+  connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points
+        ={{-0.8,76.32},{-12,76.32},{-12,60},{-80,60},{-80,76},{-110,76}}, color
+        ={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-2, 84}, {-12, 84}, {-12, 60}, {-98, 60}, {-98, 90}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{22,84},{24,84},{24,60},{-56,60},{-56,10},{-40,10},{-40,-16},{-26,-16}},                color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{5, -106.35}, {5, -120}, {-80, -120}, {-80, 60}, {-98, 60}, {-98, 90}}, color = {191, 0, 0}));

@@ -1,63 +1,11 @@
-clear
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone");
+convertClass("AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2", "AixLib.ThermalZones.ReducedOrder.Multizone.Multizone");
+convertClass("AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2Equipped", "AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped");
 
-convertClear();
-
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.Wall",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar",
-"Therm",
-"port_a");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door",
-"Therm",
-"port_a");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140",
-"Therm",
-"port_a");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar",
-"dummyTherm",
-"dummyport_a");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar",
-"HeatConv1",
-"heatConv");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140",
-"HeatConv1",
-"heatConv");
-
-convertElement("AixLib.Utilities.HeatTransfer.HeatToRad", "port_a", "convPort");
-convertElement("AixLib.Utilities.HeatTransfer.HeatToRad", "conv", "convPort");
-
-convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", fill("",0), {"solarDistribution=0.038", "wall_length=2.0", "wall_height=2.0"});
-
-convertClass("AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140", "AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140");
+convertModifiers("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange", fill("",0),{"use_AirExchange=true"});
+convertModifiers("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir", fill("",0),{"use_moisture_balance=true"});
+convertModifiers("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange", fill("",0),{"use_AirExchange=true", "use_moisture_balance=true", "use_C_flow=true"});
+convertModifiers("AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2", fill("",0),{"use_moisture_balance=true", "use_C_flow=true"});
+convertModifiers("AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirCO2Equipped", fill("",0),{"use_moisture_balance=true", "use_C_flow=true"});

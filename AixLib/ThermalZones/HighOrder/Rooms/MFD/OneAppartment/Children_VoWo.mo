@@ -248,8 +248,10 @@ equation
   connect(Wall_Livingroom.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-66,-10},{-50,-10},{-50,-36},{-6.66134e-16,-36},{-6.66134e-16,-32}},
                                                                                                                                                                   color={191,0,0}));
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points = {{-60, 98}, {-80, 98}, {-80, -68}, {-50, -68}, {-50, -81}, {-44, -81}}, color = {191, 0, 0}));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation(Line(points={{-104,40},{-80,40},{-80,-68},{-50,-68},{-50,-87.5},{-45.4,-87.5}},                color = {0, 0, 127}));
-  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{-16,-81},{0,-81},{0,-36},{-32,-36},{-32,16},{-48,16}},              color = {191, 0, 0}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points
+        ={{-104,40},{-80,40},{-80,-68},{-50,-68},{-50,-89.32},{-42.6,-89.32}},
+        color={0,0,127}));
+  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-16, -81}, {0, -81}, {0, -36}, {-32, -36}, {-32, 24}, {-39, 24}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-12, 60.45}, {-12, 98}, {-60, 98}}, color = {191, 0, 0}));
   connect(thermOutside, thermOutside) annotation(Line(points = {{-60, 98}, {-86, 98}, {-86, 98}, {-60, 98}}, color = {191, 0, 0}));
   annotation(DDiagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-54, 68}, {116, -108}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
