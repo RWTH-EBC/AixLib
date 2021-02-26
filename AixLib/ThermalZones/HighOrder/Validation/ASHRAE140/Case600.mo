@@ -1,11 +1,11 @@
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case600
   extends
     AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
-      ReferenceCoolingLoadOrTempMin(table=[600,-7964,-6137]),
-      ReferenceHeatingLoadOrTempMax(table=[600,4296,5709]),
-    checkResultsAccordingToASHRAEHeatingOrTempMax(dispType="Q Heat"),
-    checkResultsAccordingToASHRAECoolingOrTempMin(dispType="Q Cool"));
+    dispTypeCoolOrTempMin="Q Cool",
+    dispTypeHeatOrTempMax="Q Heat",
+    tableCoolOrTempMin=[600,-7964,-6137],
+    tableHeatOrTempMax=[600,4296,5709]);
 
   Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
