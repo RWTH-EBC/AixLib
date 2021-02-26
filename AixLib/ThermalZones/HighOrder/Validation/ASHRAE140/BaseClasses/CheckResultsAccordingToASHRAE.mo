@@ -70,8 +70,8 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
   <li>
-  <i>August 17, 2020</i> by Philipp Mehrfeld:<br/>
-  Refactor endTime to checkTime
+    <i>August 17, 2020</i> by Philipp Mehrfeld:<br/>
+    Refactor endTime to checkTime
   </li>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>

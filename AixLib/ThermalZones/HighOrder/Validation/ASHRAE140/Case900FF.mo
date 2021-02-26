@@ -11,16 +11,18 @@ model Case900FF
         "Simulate and plot"),
     __Dymola_experimentSetupOutput(events=true),
 Documentation(info="<html><p>
- Input Specifications of <b>Case 900FF</b> as described in ASHRAE Standard 140:
+  Input Specifications of <b>Case 900FF</b> as described in ASHRAE
+  Standard 140:
 </p>
 <p>
-  Difference to case 900:</p>
+  Difference to case 900:
+</p>
 <ul>
-  <li>no cooling or heating equipment</li>
+  <li>no cooling or heating equipment
+  </li>
 </ul>
-
-
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented
