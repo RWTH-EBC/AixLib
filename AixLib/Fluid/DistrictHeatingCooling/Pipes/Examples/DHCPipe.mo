@@ -17,6 +17,7 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     annotation (Placement(transformation(extent={{72,40},{52,60}})));
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip(
     redeclare package Medium = Medium,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare BaseClassesStatic.StaticCore pipCor "Static core",
     nPorts=1,
     dh=0.1,
@@ -67,6 +68,7 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
     annotation (Placement(transformation(extent={{72,0},{52,20}})));
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip1(
     redeclare package Medium = Medium,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
     nPorts=1,
     dh=0.1,
@@ -114,6 +116,7 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip2(
     redeclare package Medium = Medium,
     use_soil=true,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
     nPorts=1,
     dh=0.1,
@@ -161,6 +164,7 @@ model DHCPipe "Simple example of DHCPipe and its four different modes"
   AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe          pip3(
     redeclare package Medium = Medium,
     sum_zetas=2.5,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare FixedResistances.BaseClasses.PlugFlowCore pipCor "PlugFlow core",
     nPorts=1,
     dh=0.1,

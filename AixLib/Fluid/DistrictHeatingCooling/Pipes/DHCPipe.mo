@@ -248,8 +248,8 @@ protected
 
   Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
 
-  Modelica.SIunits.Heat Q_los "Integrated heat loss of the pipe";
-  Modelica.SIunits.Heat Q_gai "Integrated heat gain of the pipe";
+  Modelica.SIunits.Heat Q_los(start=0.0, fixed=true) "Integrated heat loss of the pipe";
+  Modelica.SIunits.Heat Q_gai(start=0.0, fixed=true) "Integrated heat gain of the pipe";
 
 public
   FixedResistances.HydraulicResistance hydRes(
@@ -277,8 +277,8 @@ equation
   v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
   //calculation of heat losses and heat gains of pipe
-  der(Q_los) =min(0, pipCor.heatPort.Q_flow);
-  der(Q_gai) =max(0, pipCor.heatPort.Q_flow);
+  der(Q_los) = min(0, pipCor.heatPort.Q_flow);
+  der(Q_gai) = max(0, pipCor.heatPort.Q_flow);
 
   for i in 1:nPorts loop
     connect(vol.ports[i + 1], ports_b[i])
