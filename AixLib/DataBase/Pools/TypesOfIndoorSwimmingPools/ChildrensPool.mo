@@ -2,20 +2,23 @@ within AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools;
 record ChildrensPool
   "Pool which is mainly used by children for slpashing"
   extends IndoorSwimmingPoolBaseRecord(
-  name="Playpool for children",
-  poolType="Kleinkinderbecken",
   d_pool=0.4,
   A_pool=80,
-  u_pool=36,
+  V_storage=30,
   T_pool=305.15,
-  NextToSoil=false,
-  PoolCover=false,
-  k=0.5,
-  N=80,
+  nextToSoil=false,
+  poolCover=false,
   beta_inUse=40,
   beta_nonUse=7,
-  v_Filter=50,
-  Q_hygenic=0.04444,
-  Q_hydraulic=0.01);
+  Q=0.04444,
+  waterRecycling=false,
+  x_recycling=0,
+  m_flow_sewer=0.005,
+  partialLoad=true,
+  x_partialLoad=0.23,
+  nExt=1,
+  RExt={1.4142107968e-05},
+  RExtRem=0.000380773816236,
+  CExt={492976267.489});
 
 end ChildrensPool;

@@ -6,8 +6,6 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.Volume V_storage "Usable Volume of water storage";
   parameter Modelica.SIunits.Area A_pool "Area of water surface of swimming pool";
   parameter Modelica.SIunits.Length d_pool "Depth of swimming pool";
-  parameter Real openAt = 7 "Swimming hall opens at, 7 am default value";
-  parameter Real openingHours = 16/24 "Open for x/24 hours";
   parameter Modelica.SIunits.VolumeFlowRate Q(min= 0.0001) "Volume Flow Rate";
 
   parameter Real beta_inUse "Water transfer coefficient during opening hours";
@@ -20,8 +18,7 @@ record IndoorSwimmingPoolBaseRecord
   parameter Real x_recycling "Percentage of fill water which comes from the recycling unit";
   parameter Boolean nextToSoil "Pool bedded into the soil? (or does it abut a room?)";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_people "Waterexchange due to people in the pool";
-  parameter Modelica.SIunits.MassFlowRate m_flow_ff "Water exchanged due to filter flushes";
+  parameter Modelica.SIunits.MassFlowRate m_flow_sewer "Waterexchange due to people in the pool";
 
     //Pool Wall
   parameter Integer nExt(min=1) "Number of RC-elements of exterior walls"

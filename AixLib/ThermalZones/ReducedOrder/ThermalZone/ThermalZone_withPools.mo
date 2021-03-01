@@ -399,16 +399,14 @@ public
 
    parameter Boolean swimmingPools= false "Are swimming pools in this zone?" annotation (Dialog(tab="Moisture", group="Swimming Pools"));
 
-   parameter Integer numPools( min=1)
+   parameter Integer numPools( min=0)
    "Number of Swimming Pools" annotation (Dialog(tab="Moisture", group="Swimming Pools", enable = swimmingPools));
 
    parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools]
-   "Setup for Swimming Pools" annotation (Dialog(tab="Moisture", group="Swimming Pools", enable = swimmingPools));
+   "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = swimmingPools));
 
-
-
-  Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools] if (ATot > 0) and swimmingPools
-    annotation (Placement(transformation(extent={{-70,-86},{-54,-72}})));
+  Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](final poolParam=poolParam) if
+       (ATot > 0) and swimmingPools annotation (Placement(transformation(extent={{-70,-86},{-54,-72}})));
 
   Modelica.Blocks.Interfaces.RealOutput PPoolPump(final quantity="Power",
       final unit="W") if swimmingPools "Power for Pumps" annotation (Placement(
@@ -420,9 +418,6 @@ public
     "Heat demands of all pools in zone to heat pool water" annotation (
       Placement(transformation(extent={{100,-60},{120,-40}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
- //********************************
- //HERE END SWIMMING POOLCHANGES
- //********************************
 
 
   Modelica.Blocks.Math.MultiSum SumPoolWasteWater(           nu=1) if
@@ -458,6 +453,20 @@ public
   Modelica.Blocks.Math.MultiSum SumPoolLatHeatEvap(nu=1) if
     swimmingPools "Sum up recycled water demands of all swimming pools"
     annotation (Placement(transformation(extent={{-36,-78},{-26,-68}})));
+
+//********************************
+ //HERE END SWIMMING POOLCHANGES
+ //********************************
+
+
+  Modelica.Blocks.Interfaces.RealInput openingHours[numPools]
+    "Input profiles for opening hours" annotation (Placement(transformation(
+        extent={{-13,-13},{13,13}},
+        rotation=90,
+        origin={49,-99}), iconTransformation(
+        extent={{-12,-12},{12,12}},
+        rotation=90,
+        origin={52,-84})));
 equation
  if swimmingPools and (ATot > 0) then
 
@@ -493,6 +502,9 @@ equation
       connect(indoorSwimmingPool[i].QEvap, SumPoolLatHeatEvap.u) annotation (Line(points={{-53.36,
               -79.28},{-50,-79.28},{-50,-78},{-48,-78},{-48,-73},{-36,-73}},
                                                            color={0,0,127}));
+      connect(indoorSwimmingPool[i].openingHours, openingHours) annotation (
+          Line(points={{-70.4,-72.91},{-78,-72.91},{-78,-96},{-14,-96},{-14,-99},
+              {49,-99}}, color={0,0,127}));
     end for;
     connect(SumPoolWasteWater.y, MFlowWasteWater) annotation (Line(points={{-25.15,-81},
             {39.425,-81},{39.425,-58},{110,-58}}, color={0,0,127}));
@@ -764,16 +776,18 @@ equation
           -63},{-46,-63},{-46,-62},{-40,-62}},                            color=
          {0,0,127}));
   connect(SumQLat1_flow.y, ROM.QLat_flow) annotation (Line(points={{-26.98,-62},
-          {2,-62},{2,4},{32,4},{32,62},{37,62}}, color={0,0,127}));
+          {2,-62},{2,4},{32,4},{32,59.8},{38,59.8}},
+                                                 color={0,0,127}));
   connect(SumQLat2_flow.y, ROM.QLat_flow) annotation (Line(points={{-26.98,-62},
-          {2,-62},{2,4},{32,4},{32,62},{37,62}}, color={0,0,127}));
+          {2,-62},{2,4},{32,4},{32,59.8},{38,59.8}},
+                                                 color={0,0,127}));
   connect(humVolAirROM.y, X_w) annotation (Line(points={{-59.5,-50},{4,-50},{4,-6},
           {96,-6},{96,-86},{112,-86}}, color={0,0,127}));
   connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-27.4,-28},{
           -24,-28},{-24,-40},{12,-40},{12,-64.9},{20,-64.9}},
                                                             color={0,0,127}));
   connect(cO2Balance.uRel, intGains[1]) annotation (Line(points={{20,-61.4},{20,
-          -50},{46,-50},{46,-113.333},{80,-113.333}},            color={0,0,127}));
+          -50},{80,-50},{80,-113.333}},                          color={0,0,127}));
   connect(cO2Balance.TAir, TAir) annotation (Line(points={{27,-60},{26,-60},{26,
           0},{96,0},{96,80},{110,80}},
                          color={0,0,127}));

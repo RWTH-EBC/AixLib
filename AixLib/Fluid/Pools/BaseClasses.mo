@@ -814,4 +814,60 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
               color={0,0,0})}));
   end PumpAndPressureDrop;
 
+  model toH_fg "Convert from Kelvin to kJ/kg"
+
+      parameter Integer nu( min=0)=0  "Number of input connections"
+      annotation (Dialog(connectorSizing=true), HideResult=true);
+  Modelica.Blocks.Interfaces.RealVectorInput u[nu]
+    annotation (Placement(transformation(extent={{-122,-22},{-82,18}})));
+    Modelica.Blocks.Interfaces.RealVectorOutput y[nu]( final unit="J/kg")
+    annotation (Placement(transformation(extent={{82,-22},{122,18}})));
+  equation
+    y = AixLib.Media.Air.enthalpyOfCondensingGas(u);
+
+  annotation (Icon(graphics={
+        Line(
+          points={{-72,0},{78,0}},
+          color={238,46,47},
+          thickness=0.5),
+        Line(
+          points={{78,0},{58,12},{78,0},{60,-12}},
+          color={238,46,47},
+          thickness=0.5),
+        Rectangle(
+          extent={{-100,100},{98,-100}},
+          lineColor={0,0,0},
+          lineThickness=0.5)}));
+  end toH_fg;
+
+  block DivisionMI2MO "Division of multiple values"
+   extends Modelica.Blocks.Interfaces.MI2MO;
+
+  equation
+    for i in 1:n loop
+      y[i]= u1[i]/u2[i];
+    end for;
+
+     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+                                  Rectangle(
+          extent={{-100,-100},{100,100}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-150,150},{150,110}},
+          textString="%name",
+          lineColor={0,0,255}),
+          Line(points={{50,0},{100,0}}, color={0,0,127}),
+          Line(points={{-30,0},{30,0}}),
+          Ellipse(fillPattern=FillPattern.Solid, extent={{-5,20},{5,30}}),
+          Ellipse(fillPattern=FillPattern.Solid, extent={{-5,-30},{5,-20}}),
+          Ellipse(lineColor={0,0,127}, extent={{-50,-50},{50,50}}),
+          Line(points={{-100,60},{-66,60},{-40,30}}, color={0,0,127}),
+          Line(points={{-100,-60},{0,-60},{0,-50}}, color={0,0,127}),
+          Text(
+            extent={{-60,94},{90,54}},
+            lineColor={128,128,128},
+            textString="u1 / u2")}),                                Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end DivisionMI2MO;
 end BaseClasses;
