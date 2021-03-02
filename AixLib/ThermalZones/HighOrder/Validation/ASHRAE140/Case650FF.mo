@@ -72,8 +72,8 @@ Diagram(coordinateSystem(
   </li>
 </ul>
 </html>",info="<html><p>
- Input Specifications of <b>Case 650FF</b> as described in ASHRAE Standard 140:
-</p>
+Input Specifications of <b>Case 650FF</b> as described in ASHRAE
+Standard 140:
 <p>
   Difference to case 650:
 </p>

@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case650
   extends
     AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
@@ -97,13 +97,13 @@ Diagram(coordinateSystem(
   </li>
 </ul>
 </html>",info="<html><p>
- Input Specifications of <b>Case 650</b> as described in ASHRAE Standard 140:
-</p>
+Input Specifications of <b>Case 650</b> as described in ASHRAE Standard
+140:
 <p>
   Difference to case 600:
 </p>
 <ul>
-<li>Air exchange rate: 10.8
+  <li>Air exchange rate: 10.8
   </li>
   <li>18-7 h: Vent fan = ON
   </li>

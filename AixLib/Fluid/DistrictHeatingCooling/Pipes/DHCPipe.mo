@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCPipe "Generic pipe model for DHC applications"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
@@ -388,19 +388,19 @@ equation
           textString="Zeta=%sum_zetas",
           visible=use_zeta)}),
     Documentation(revisions="<html><ul>
-    <li>November 12, 2020, by Michael Mans:<br/>
+  <li>November 12, 2020, by Michael Mans:<br/>
     First implementation
   </li>
 </ul>
 </html>", info="<html>
 <p>
-  This pipe aims to enable the representation of all one pipe district heating 
-  and cooling pipe applications for dynamic simulation of district heating and 
-  cooling grids.
+  This pipe aims to enable the representation of all one pipe district
+  heating and cooling pipe applications for dynamic simulation of
+  district heating and cooling grids.
 </p>
 <p>
-  Pipe with heat loss using the wether the time delay based heat losses and
-  transport of the fluid using a plug flow model, applicable for
+  Pipe with heat loss using the wether the time delay based heat losses
+  and transport of the fluid using a plug flow model, applicable for
   simulation of long pipes such as in district heating and cooling
   systems, or the more staty-state based approach with the static core.
 </p>
@@ -411,10 +411,10 @@ equation
   a static factor or using the sum of zeta values.
 </p>
 <p>
-  In addition this model is able to represent a very simplified soil around 
-  the pipe. With 3 capacities and the possibility to define the soil properties, 
-  this enables the user of this pipe model to account for heat losses in a more 
-  accurate way.
+  In addition this model is able to represent a very simplified soil
+  around the pipe. With 3 capacities and the possibility to define the
+  soil properties, this enables the user of this pipe model to account
+  for heat losses in a more accurate way.
 </p>
 <h4>
   Implementation
@@ -423,7 +423,8 @@ equation
   This model is based on <a href=
   \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>
   or on <a href=
-  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore\">AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore</a>
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore\">
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore</a>
   .
 </p>
 <p>
@@ -473,8 +474,8 @@ equation
   through a static factor which has to given prior.
 </p>
 <p>
-  The Soil model is represented by three capacities which can be parameterized
-  in the Soil Tab of the model.
+  The Soil model is represented by three capacities which can be
+  parameterized in the Soil Tab of the model.
 </p>
 <h4>
   Assumptions

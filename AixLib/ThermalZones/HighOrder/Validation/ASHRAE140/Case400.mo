@@ -24,7 +24,8 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
- Input Specifications of <b>Case 400</b> as described in ASHRAE Standard 140:
+  Input Specifications of <b>Case 400</b> as described in ASHRAE
+  Standard 140:
 </p>
 <p>
   Difference to case 600:

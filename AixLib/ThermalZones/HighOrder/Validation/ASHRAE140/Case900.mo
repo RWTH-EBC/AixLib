@@ -11,7 +11,8 @@ model Case900
         "Simulate and plot"),
     __Dymola_experimentSetupOutput(events=true),
 Documentation(info="<html><p>
- Input Specifications of <b>Case 900</b> as described in ASHRAE Standard 140:
+  Input Specifications of <b>Case 900</b> as described in ASHRAE
+  Standard 140:
 </p>
 <p>
   Difference to case 600:
@@ -20,8 +21,8 @@ Documentation(info="<html><p>
   <li>high mass exterior vertical walls and floor
   </li>
 </ul>
-
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented
