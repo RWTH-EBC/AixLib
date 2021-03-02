@@ -34,6 +34,8 @@ model SimpleConsumer "Simple Consumer"
     "= true, if actual temperature at port is computed";
   Modelica.SIunits.HeatFlowRate Q_flow_max;
   Fluid.MixingVolumes.MixingVolume volume(
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     final V=V,
     final T_start=T_start,
     final allowFlowReversal=allowFlowReversal,
@@ -103,13 +105,16 @@ model SimpleConsumer "Simple Consumer"
         origin={-60,100})));
   Fluid.Movers.SpeedControlled_y     pump(
     redeclare package Medium = Medium,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T_start=T_start,
     allowFlowReversal=allowFlowReversal,
     show_T=show_T,
     redeclare Fluid.Movers.Data.Generic per(pressure(V_flow={0,m_flow_nominal/
             1000,m_flow_nominal/500}, dp={dp_nominalPumpConsumer/0.8,
             dp_nominalPumpConsumer,0}), motorCooledByFluid=false),
-    addPowerToMedium=false)
+    addPowerToMedium=false,
+    y_start=0.5)
     annotation (Placement(transformation(extent={{-40,10},{-20,-10}})));
 
   Modelica.Blocks.Continuous.LimPID PIPump(
@@ -119,7 +124,8 @@ model SimpleConsumer "Simple Consumer"
     yMax=1,
     yMin=0.15,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
-    y_start=1) annotation (Placement(transformation(
+    y_start=0.5)
+               annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-50,-40})));
@@ -180,8 +186,17 @@ model SimpleConsumer "Simple Consumer"
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={120,52})));
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state";
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=volume.energyDynamics
+    "Type of mass balance: dynamic (3 initialization options) or steady state";
 equation
-  Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (senTemFlow.T - (T_returnSet - dT_maxNominalReturn)));
+  if demandType==1 then
+    Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (senTemFlow.T - (T_returnSet - dT_maxNominalReturn)));
+  else
+    Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (T_returnSet + dT_maxNominalReturn - senTemFlow.T));
+  end if;
+
   connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
           {10,40},{34,40}},               color={191,0,0},
       pattern=LinePattern.Dash));
