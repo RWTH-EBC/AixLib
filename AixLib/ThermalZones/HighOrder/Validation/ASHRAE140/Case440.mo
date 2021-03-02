@@ -2,8 +2,9 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case440
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs01,
-    ReferenceCoolingLoad(table=[440,-5204,-3967]),
-    ReferenceHeatingLoad(table=[440,4449,5811]));
+    tableCoolOrTempMin=[440,-5204,-3967],
+    tableHeatOrTempMax=[440,4449,5811]);
+
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=
@@ -18,7 +19,7 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 430</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 600:

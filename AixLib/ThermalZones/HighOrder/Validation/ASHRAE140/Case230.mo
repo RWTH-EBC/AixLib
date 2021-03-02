@@ -2,8 +2,8 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case230
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case220(
     airExchange=0.822,
-    ReferenceHeatingLoad(table=[230,10376,12243]),
-    ReferenceCoolingLoad(table=[230,-1139,-454]));
+    tableCoolOrTempMin=[230,-1139,-454],
+    tableHeatOrTempMax=[230,10376,12243]);
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=
@@ -18,7 +18,7 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 230</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 220:

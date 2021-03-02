@@ -2,8 +2,8 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case800
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case430(
     wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),
-    ReferenceHeatingLoad(table=[800,4868,7228]),
-    ReferenceCoolingLoad(table=[800,-325,-55]));
+    tableCoolOrTempMin=[800,-325,-55],
+    tableHeatOrTempMax=[800,4868,7228]);
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=
@@ -18,7 +18,7 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
-  As described in ASHRAE Standard 140.
+ Input Specifications of <b>Case 800</b> as described in ASHRAE Standard 140:
 </p>
 <p>
   Difference to case 430:

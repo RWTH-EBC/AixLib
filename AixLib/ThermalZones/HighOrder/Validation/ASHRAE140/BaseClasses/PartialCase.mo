@@ -97,8 +97,6 @@ partial model PartialCase "This is the base class from which the base cases will
     annotation (Placement(transformation(extent={{-120,-72},{-110,-62}})));
   Modelica.Blocks.Math.Gain radiativeInternalGains(k=0.6) "Radiative part"
     annotation (Placement(transformation(extent={{-120,-92},{-110,-82}})));
-  Modelica.Blocks.Sources.RealExpression TransmittedRad(y=Room.outerWall_South.solarRadWinTrans)
-    annotation (Placement(transformation(extent={{46,-10},{64,8}})));
   Modelica.Blocks.Continuous.Integrator integrator2
     annotation (Placement(transformation(extent={{75,-6},{85,4.5}})));
   Modelica.Blocks.Math.UnitConversions.To_kWh to_kWhTransRad annotation (Placement(transformation(extent={{92,-6},{102,4}})));
@@ -106,10 +104,14 @@ partial model PartialCase "This is the base class from which the base cases will
     "Converts to MWh"
     annotation (Placement(transformation(extent={{116,-4},{122,2}})));
 
-  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeatingOrTempMax(checkTime=31536000) annotation (Placement(transformation(extent={{99,-49},{114,-64}})));
-  Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoadOrTempMax(tableOnFile=false, table=[0.0,0.0,0.0]) "According to ASHRAE140: If annual heating load then at t=31536000s {2}=lower limit and {3}=upper limit, if maximal temperature then {2}=lower limit ReferenceTempMax and {3}=upper limit ReferenceTempMax" annotation (Placement(transformation(extent={{58,-62},{72,-48}})));
-  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECoolingOrTempMin(checkTime=31536000) annotation (Placement(transformation(extent={{99,-70},{114,-85}})));
-  Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoadOrTempMin(tableOnFile=false, table=[0.0,0.0,0.0]) "According to ASHRAE140: If annual cooling load then at t=31536000s {2}=lower limit and {3}=upper limit, if minimal temperature then {2}=lower limit ReferenceTempMin and {3}=upper limit ReferenceTempMin" annotation (Placement(transformation(extent={{58,-84},{72,-70}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAEHeatingOrTempMax(final checkTime=checkTimeHeatOrTempMax, final dispType=dispTypeHeatOrTempMax)
+                                                                                                              annotation (Placement(transformation(extent={{99,-49},{114,-64}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceHeatingLoadOrTempMax(tableOnFile=false, final table=tableHeatOrTempMax)
+                                                                                                               "According to ASHRAE140: If annual heating load then at t=31536000s {2}=lower limit and {3}=upper limit, if maximal temperature then {2}=lower limit ReferenceTempMax and {3}=upper limit ReferenceTempMax" annotation (Placement(transformation(extent={{58,-62},{72,-48}})));
+  BaseClasses.CheckResultsAccordingToASHRAE checkResultsAccordingToASHRAECoolingOrTempMin(final checkTime=checkTimeCoolOrTempMin, final dispType=dispTypeCoolOrTempMin)
+                                                                                                              annotation (Placement(transformation(extent={{99,-70},{114,-85}})));
+  Modelica.Blocks.Sources.CombiTimeTable ReferenceCoolingLoadOrTempMin(tableOnFile=false, final table=tableCoolOrTempMin)
+                                                                                                               "According to ASHRAE140: If annual cooling load then at t=31536000s {2}=lower limit and {3}=upper limit, if minimal temperature then {2}=lower limit ReferenceTempMin and {3}=upper limit ReferenceTempMin" annotation (Placement(transformation(extent={{58,-84},{72,-70}})));
   parameter Real airExchange=0.41 "Constant Air Exchange Rate";
   parameter Real TsetCooler=27 "Constant Set Temperature for Cooler";
   parameter Real TsetHeater=20 "Constant Set Temperature for Heater";
@@ -117,9 +119,9 @@ partial model PartialCase "This is the base class from which the base cases will
   parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
   parameter Real solar_absorptance_OW=0.6 "Solar absoptance outer walls ";
-  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
-      AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
-    "Types of walls (contains multiple records)";
+  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes = AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
+    "Types of walls (contains multiple records)"
+    annotation (choicesAllMatching=true);
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
@@ -128,9 +130,26 @@ partial model PartialCase "This is the base class from which the base cases will
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
+
+  parameter Real tableHeatOrTempMax[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
+  parameter Real tableCoolOrTempMin[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
+  parameter String dispTypeHeatOrTempMax="None" "Letter displayed in icon of results checker" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"),
+    choices(
+      choice="Q Heat",
+      choice="Q Cool",
+      choice="T Max",
+      choice="T Min"));
+  parameter String dispTypeCoolOrTempMin="None" "Letter displayed in icon of results checker" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"),
+    choices(
+      choice="Q Heat",
+      choice="Q Cool",
+      choice="T Max",
+      choice="T Min"));
+  parameter Modelica.SIunits.Time checkTimeHeatOrTempMax=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
+  parameter Modelica.SIunits.Time checkTimeCoolOrTempMin=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
+
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
-  Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature
-    annotation (Placement(transformation(extent={{130,26},{150,46}})));
+  Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature annotation (Placement(transformation(extent={{130,26},{150,46}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(extent={{72,30},{84,42}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1 annotation (Placement(transformation(extent={{72,12},{84,24}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp1 annotation (Placement(transformation(extent={{92,13},{102,23}})));
@@ -181,17 +200,13 @@ equation
           127}));
   connect(radiativeInternalGains.y, InternalGains_radiative.Q_flow)
     annotation (Line(points={{-109.5,-87},{-97,-87}}, color={0,0,127}));
-  connect(TransmittedRad.y, integrator2.u) annotation (Line(points={{64.9,-1},{71,-1},{71,-0.75},{74,-0.75}},
-                                              color={0,0,127}));
   connect(to_kWhTransRad.y, gainIntHea.u) annotation (Line(points={{102.5,-1},{115.4,-1}}, color={0,0,127}));
   connect(to_kWhCool.y, AnnualCoolingLoad) annotation (Line(points={{102.5,52},{140,52}}, color={0,0,127}));
   connect(integrator2.y, to_kWhTransRad.u) annotation (Line(points={{85.5,-0.75},{91,-0.75},{91,-1}}, color={0,0,127}));
   connect(gainIntHea.y, TransmittedSolarRadiation_room) annotation (Line(points={{122.3,-1},{140,-1}},
                                                 color={0,0,127}));
-  connect(AnnualHeatingLoad, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{140,68},{130,68},{130,-36},{91,-36},{91,-52.15},{97.95,-52.15}}, color={0,0,127}));
   connect(ReferenceHeatingLoadOrTempMax.y[1], checkResultsAccordingToASHRAEHeatingOrTempMax.lowerLimit) annotation (Line(points={{72.7,-55},{85,-55},{85,-62.5},{97.95,-62.5}}, color={0,0,127}));
   connect(ReferenceHeatingLoadOrTempMax.y[2], checkResultsAccordingToASHRAEHeatingOrTempMax.upperLimit) annotation (Line(points={{72.7,-55},{86,-55},{86,-59.5},{97.95,-59.5}}, color={0,0,127}));
-  connect(AnnualCoolingLoad, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{140,52},{130,52},{130,-35},{52,-35},{52,-65},{76,-65},{76,-73.15},{97.95,-73.15}}, color={0,0,127}));
   connect(ReferenceCoolingLoadOrTempMin.y[1], checkResultsAccordingToASHRAECoolingOrTempMin.lowerLimit) annotation (Line(points={{72.7,-77},{86,-77},{86,-83.5},{97.95,-83.5}}, color={0,0,127}));
   connect(ReferenceCoolingLoadOrTempMin.y[2], checkResultsAccordingToASHRAECoolingOrTempMin.upperLimit) annotation (Line(points={{72.7,-77},{87,-77},{87,-80.5},{97.95,-80.5}}, color={0,0,127}));
   connect(to_degCRoomConvTemp.y, FreeFloatRoomTemperature) annotation (Line(points={{102.5,36},{140,36}}, color={0,0,127}));
@@ -200,6 +215,7 @@ equation
   connect(to_degCRoomConvTemp1.y, FreeFloatRoomRadTemperature) annotation (Line(points={{102.5,18},{140,18}}, color={0,0,127}));
   connect(Room.thermRoom, temperatureSensor.port) annotation (Line(points={{-2.92,35},{-2.92,44},{67,44},{67,36},{72,36}}, color={191,0,0}));
   connect(Room.starRoom, temperatureSensor1.port) annotation (Line(points={{5.48,35},{5.48,42},{65,42},{65,18},{72,18}}, color={0,0,0}));
+
   annotation (Diagram(coordinateSystem(
         extent={{-150,-110},{130,90}},
         preserveAspectRatio=false,
