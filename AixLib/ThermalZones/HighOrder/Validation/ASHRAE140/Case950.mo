@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case950
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650(
     wallTypes=AixLib.DataBase.Walls.Collections.ASHRAE140.HighMassCases(),
@@ -11,13 +11,14 @@ model Case950
         "Simulate and plot"),
     __Dymola_experimentSetupOutput(events=true),
 Documentation(info="<html><p>
- Input Specifications of <b>Case 950</b> as described in ASHRAE Standard 140:
+  Input Specifications of <b>Case 950</b> as described in ASHRAE
+  Standard 140:
 </p>
 <p>
   Difference to case 600:
 </p>
 <ul>
-<li>Air exchange rate: 10.8
+  <li>Air exchange rate: 10.8
   </li>
   <li>18-7 h: Vent fan = ON
   </li>
@@ -31,6 +32,7 @@ Documentation(info="<html><p>
   </li>
 </ul>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented

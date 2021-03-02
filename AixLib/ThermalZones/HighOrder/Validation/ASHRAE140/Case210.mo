@@ -12,7 +12,8 @@ model Case210
         "Simulate and plot"),
     __Dymola_experimentSetupOutput(events=true),
         Documentation(info="<html><p>
- Input Specifications of <b>Case 210</b> as described in ASHRAE Standard 140:
+  Input Specifications of <b>Case 210</b> as described in ASHRAE
+  Standard 140:
 </p>
 <p>
   Difference to case 220:
@@ -22,6 +23,7 @@ model Case210
   </li>
 </ul>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     Implemented

@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case320
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case270(
     TsetHeater=20,
@@ -19,7 +19,8 @@ Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
- Input Specifications of <b>Case 320</b> as described in ASHRAE Standard 140:
+  Input Specifications of <b>Case 320</b> as described in ASHRAE
+  Standard 140:
 </p>
 <p>
   Difference to case 270:

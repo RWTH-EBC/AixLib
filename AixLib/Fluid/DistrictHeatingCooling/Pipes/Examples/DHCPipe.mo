@@ -257,13 +257,13 @@ equation
     experiment(StopTime=3600, Tolerance=1e-006),
     Documentation(info="<html><p>
   Basic test of model <a href=
-  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe\">
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe</a>. This
-  test includes an inlet temperature step under a constant mass flow
-  rate. All four possible applications of the DHC pipe model are shown as examples.
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe\">AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe</a>.
+  This test includes an inlet temperature step under a constant mass
+  flow rate. All four possible applications of the DHC pipe model are
+  shown as examples.
 </p>
 <ul>
-   <li>November 12, 2020, by Michael Mans:<br/>
+  <li>November 12, 2020, by Michael Mans:<br/>
     First implementation
   </li>
 </ul>

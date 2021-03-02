@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case640
   extends
     AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
@@ -100,18 +100,17 @@ Diagram(coordinateSystem(
   </li>
 </ul>
 </html>",info="<html><p>
- Input Specifications of <b>Case 640</b> as described in ASHRAE Standard 140:
+Input Specifications of <b>Case 640</b> as described in ASHRAE Standard
+140:
 <p>
   Difference to case 600:
 </p>
 <ul>
-
   <li>23-7 h: Heat = ON IF Temp &lt; 10°C
   </li>
   <li>7-23 h: Heat = ON IF Temp &lt; 20°C
   </li>
-<li>Cool = ON IF Temp &gt; 27°C
-
+  <li>Cool = ON IF Temp &gt; 27°C
   </li>
 </ul>
 </html>"));
