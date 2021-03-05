@@ -42,6 +42,8 @@ model Children_VoWo "Children room from the VoWo appartment"
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Livingroom(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWLivingroom,
     outside=false,
     final withSunblind=use_sunblind,
@@ -54,6 +56,8 @@ model Children_VoWo "Children room from the VoWo appartment"
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(extent={{-76,-40},{-66,20}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWCorridor,
     outside=false,
     final withSunblind=use_sunblind,
@@ -69,6 +73,8 @@ model Children_VoWo "Children room from the VoWo appartment"
         extent={{-3,-21.6},{5,26.4}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Neighbour(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWNeighbour,
     outside=false,
     final withSunblind=use_sunblind,
@@ -89,6 +95,8 @@ model Children_VoWo "Children room from the VoWo appartment"
     annotation (Placement(transformation(extent={{-38,16},{-58,36}})));
   Utilities.Interfaces.SolarRad_in Strahlung_SE annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-82, 110}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-30, 110})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     wall_length=3.38,
     wall_height=2.46,
     windowarea=1.84,
@@ -107,6 +115,8 @@ model Children_VoWo "Children room from the VoWo appartment"
         extent={{-9,-54},{9,54}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Staircase(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWStraicase,
     outside=false,
     final withSunblind=use_sunblind,
@@ -122,6 +132,8 @@ model Children_VoWo "Children room from the VoWo appartment"
         extent={{-3,-21.0435},{5,22.9565}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_CE,
     outside=false,
     final withSunblind=use_sunblind,
@@ -138,6 +150,8 @@ model Children_VoWo "Children room from the VoWo appartment"
         extent={{-1.99998,-10},{1.99998,10}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_FL,
     outside=false,
     final withSunblind=use_sunblind,
@@ -179,6 +193,13 @@ model Children_VoWo "Children room from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-44,-94},{-16,-68}})));
+
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+
+  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
@@ -227,8 +248,10 @@ equation
   connect(Wall_Livingroom.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-66,-10},{-50,-10},{-50,-36},{-6.66134e-16,-36},{-6.66134e-16,-32}},
                                                                                                                                                                   color={191,0,0}));
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points = {{-60, 98}, {-80, 98}, {-80, -68}, {-50, -68}, {-50, -81}, {-44, -81}}, color = {191, 0, 0}));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation(Line(points={{-104,40},{-80,40},{-80,-68},{-50,-68},{-50,-87.5},{-45.4,-87.5}},                color = {0, 0, 127}));
-  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{-16,-81},{0,-81},{0,-36},{-32,-36},{-32,16},{-48,16}},              color = {191, 0, 0}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points
+        ={{-104,40},{-80,40},{-80,-68},{-50,-68},{-50,-89.32},{-42.6,-89.32}},
+        color={0,0,127}));
+  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-16, -81}, {0, -81}, {0, -36}, {-32, -36}, {-32, 24}, {-39, 24}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-12, 60.45}, {-12, 98}, {-60, 98}}, color = {191, 0, 0}));
   connect(thermOutside, thermOutside) annotation(Line(points = {{-60, 98}, {-86, 98}, {-86, 98}, {-60, 98}}, color = {191, 0, 0}));
   annotation(DDiagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-54, 68}, {116, -108}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
@@ -251,17 +274,33 @@ equation
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -10}, {-90, -30}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 82}, {-90, 28}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -132}, {-90, -152}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for a second bedroom: the childrens&apos; room. </p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Children.png\"
-    alt=\"Room layout\"/></p>
- </html>"));
+            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for a second bedroom: the childrens' room.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Children.png\"
+  alt=\"Room layout\">
+</p>
+</html>"));
 end Children_VoWo;

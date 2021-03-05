@@ -26,15 +26,26 @@ protected
    constant Modelica.SIunits.SpecificEnergy h_fg=
     Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
-   QLat_flow = InPort1 * V * rho * (HumIn-HumOut) / 3600 * h_fg;
-  annotation (Documentation(info="<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>The <b>VarMoistAirExchange</b> model describes heat and moisture transfer by air exchange (e.g. due to opening a window). It needs the air exchange rate (in <img src=\"modelica://AixLib/Resources/Images/Building/Components/DryAir/VarAirExchange/equation-fHlz87wz.png\" alt=\"h^(-1)\"/>) as input value. </p>
- </html>", revisions="<html>
- <ul>
- <li>July, 2019, by Martin Kremer:<br/>Adding latent heat output of moisture, since ventilation moisture is already gaseous.</li>
- <li>April, 2019, by Martin Kremer:<br/>First Implementation.</li>
- </ul>
+   QLat_flow =ventRate*V*rho*(HumIn - HumOut)/hToS*h_fg;
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>VarMoistAirExchange</b> model describes heat and moisture
+  transfer by air exchange (e.g. due to opening a window). It needs the
+  air exchange rate (in <img src=
+  \"modelica://AixLib/Resources/Images/Building/Components/DryAir/VarAirExchange/equation-fHlz87wz.png\"
+  alt=\"h^(-1)\">) as input value.
+</p>
+<ul>
+  <li>July, 2019, by Martin Kremer:<br/>
+    Adding latent heat output of moisture, since ventilation moisture
+    is already gaseous.
+  </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+    First Implementation.
+  </li>
+</ul>
 </html>"),
     Diagram(graphics={                                                                                                            Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{60, -58}, {30, -72}, {-22, -68}, {-16, -60}, {-68, -52}, {-30, -80}, {-24, -74}, {46, -74}, {60, -58}}, lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},

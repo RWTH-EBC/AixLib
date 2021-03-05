@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
+within AixLib.Controls.HeatPump.SecurityControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
   extends BaseClasses.PartialSecurityControl;
@@ -61,14 +61,18 @@ equation
           {42,-56},{-21,-56},{-21,-63}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(extent={{-120,-100},{120,100}})), Icon(
         coordinateSystem(extent={{-120,-100},{120,100}})),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Model for checking if the given condenser return temperature and evaporator inlet temperature are in the given boundaries. If not, the heat pump will switch off.</p>
+<p>
+  Model for checking if the given condenser return temperature and
+  evaporator inlet temperature are in the given boundaries. If not, the
+  heat pump will switch off.
+</p>
 </html>"));
 end OperationalEnvelope;

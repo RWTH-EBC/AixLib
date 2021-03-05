@@ -11,6 +11,9 @@ model RoomGFOw2_DayNightMode
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     TWalls_start=290.15,
+    redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002 Type_Win,
+    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=3,                                withDoor1 = false, withDoor2 = false, withWindow1 = true, solar_absorptance_OW = 0.6, room_length = 5.87, room_width = 3.84, room_height = 2.6, windowarea_OW1 = 8.4, withWindow2 = true, windowarea_OW2 = 1.73,
     T0_air=294.15)                                                                                                                                                                                                        annotation(Placement(transformation(extent = {{16, 8}, {52, 44}})));
@@ -110,20 +113,40 @@ equation
   connect(adiabaticWalls[4].port, room_GF_2OW.ground) annotation (Line(points={{80,44},{72,44},{72,6},{32.92,6},{32.92,9.08}}, color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics={  Text(extent={{-82,-92},{90,-98}},       lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
- ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Example for setting up a simulation for a room.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Energy generation and delivery system consisting of boiler and pump.</p>
- <p>The example works for a day and shows how such a simulation can be set up. It is not guranteed that the model will work stable under sifferent conditions or for longer periods of time.</p>
- </html>", revisions="<html>
+ ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Example for setting up a simulation for a room.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Energy generation and delivery system consisting of boiler and pump.
+</p>
+<p>
+  The example works for a day and shows how such a simulation can be
+  set up. It is not guranteed that the model will work stable under
+  sifferent conditions or for longer periods of time.
+</p>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib and replaced boiler with idealHeater</li>
-<li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe by hydraulic resistance</li>
-<li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib and replaced boiler with idealHeater
+  </li>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe by hydraulic resistance
+  </li>
+  <li>
+    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end RoomGFOw2_DayNightMode;

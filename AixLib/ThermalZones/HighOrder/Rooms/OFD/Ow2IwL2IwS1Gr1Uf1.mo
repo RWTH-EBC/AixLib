@@ -112,7 +112,10 @@ model Ow2IwL2IwS1Gr1Uf1
     withWindow=withWindow1,
     withDoor=withDoor1,
     U_door=U_door_OD1,
-    eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-58,-14},{-48,44}})));
+    eps_door=eps_door_OD1,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                           annotation (Placement(transformation(extent={{-58,-14},{-48,44}})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
     final energyDynamics=energyDynamicsWalls,
@@ -137,7 +140,10 @@ model Ow2IwL2IwS1Gr1Uf1
     withWindow=withWindow2,
     withDoor=withDoor2,
     U_door=U_door_OD2,
-    eps_door=eps_door_OD2) annotation (Placement(transformation(
+    eps_door=eps_door_OD2,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                           annotation (Placement(transformation(
         origin={23,59},
         extent={{-4.99998,-27},{5.00001,27}},
         rotation=270)));
@@ -160,7 +166,10 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_length - room_lengthb,
     wall_height=room_height,
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={61,24},
         extent={{-2.99999,-16},{2.99999,16}},
         rotation=180)));
@@ -183,7 +192,10 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={22,-60},
         extent={{-4.00002,-26},{4.00001,26}},
         rotation=90)));
@@ -207,7 +219,10 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_height=room_width,
     withWindow=false,
     withDoor=false,
-    ISOrientation=3) annotation (Placement(transformation(
+    ISOrientation=3,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                     annotation (Placement(transformation(
         origin={-30,61},
         extent={{2.99997,-16},{-3.00002,16}},
         rotation=90)));
@@ -231,7 +246,10 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_height=room_width,
     withWindow=false,
     withDoor=false,
-    ISOrientation=2) annotation (Placement(transformation(
+    ISOrientation=2,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                     annotation (Placement(transformation(
         origin={-27,-60},
         extent={{-2.00002,-11},{2.00001,11}},
         rotation=90)));
@@ -254,7 +272,10 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_lengthb,
     wall_height=room_height,
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={61,-15},
         extent={{-3,-15},{3,15}},
         rotation=180)));
@@ -438,22 +459,104 @@ equation
         Line(points={{38,46},{68,46}}, color={255,255,255}),
         Line(points={{60,24},{60,16}}, color={255,255,255}),
         Line(points={{60,-64},{60,-68}}, color={255,255,255})}), Documentation(
-        revisions="<html>
- <ul>
-  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly. Extend from new partial room model. Delete TIR and TMC. Tidy up.</li>
- <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Grount temperature depends on TRY</li>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 7, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for a room with 2&nbsp;outer&nbsp;walls,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;load towards two different rooms but with the same orientation,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;ground,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;upper&nbsp;floor.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/2OW_2IWl_1IWs_1Gr_Pa.png\"
-    alt=\"Room layout\"/></p>
-<p><b><span style=\"color: #008000;\">Ground temperature</span></b> </p>
-<p>The ground temperature can be coupled to any desired prescriped temperature. Anyway, suitable ground temperatures depending on locations in Germany are listed as &Theta;'_m,e in the comprehensive table 1 in &quot;Beiblatt 1&quot; in the norm DIN EN 12831.</p>
-<p>Or a ground temperature can be chosen according to a TRY region, which is listed below: if ...</p><p>TRY_Region == 1 then 282.15 K</p><p>TRY_Region == 2 then 281.55 K</p><p>TRY_Region == 3 then 281.65 K</p><p>TRY_Region == 4 then 282.65 K</p><p>TRY_Region == 5 then 281.25 K</p><p>TRY_Region == 6 then 279.95 K</p><p>TRY_Region == 7 then 281.95 K</p><p>TRY_Region == 8 then 279.95 K</p><p>TRY_Region == 9 then 281.05 K</p><p>TRY_Region == 10 then 276.15 K</p><p>TRY_Region == 11 then 279.45 K</p><p>TRY_Region == 12 then 283.35 K</p><p>TRY_Region == 13 then 281.05 K</p><p>TRY_Region == 14 then 281.05 K</p><p>TRY_Region == 15 then 279.95 K </p>
+        revisions="<html><ul>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
+    Propagate all parameters correctly. Extend from new partial room
+    model. Delete TIR and TMC. Tidy up.
+  </li>
+  <li>
+    <i>Mai 7, 2015</i> by Ana Constantin:<br/>
+    Grount temperature depends on TRY
+  </li>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 7, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for a room with
+  2&#160;outer&#160;walls,&#160;2&#160;inner&#160;walls&#160;load
+  towards two different rooms but with the same
+  orientation,&#160;1&#160;inner&#160;wall&#160;simple,&#160;1&#160;floor&#160;towards&#160;ground,&#160;1&#160;ceiling&#160;towards&#160;upper&#160;floor.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/2OW_2IWl_1IWs_1Gr_Pa.png\"
+  alt=\"Room layout\">
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Ground temperature</span></b>
+</p>
+<p>
+  The ground temperature can be coupled to any desired prescriped
+  temperature. Anyway, suitable ground temperatures depending on
+  locations in Germany are listed as Θ'_m,e in the comprehensive table
+  1 in \"Beiblatt 1\" in the norm DIN EN 12831.
+</p>
+<p>
+  Or a ground temperature can be chosen according to a TRY region,
+  which is listed below: if ...
+</p>
+<p>
+  TRY_Region == 1 then 282.15 K
+</p>
+<p>
+  TRY_Region == 2 then 281.55 K
+</p>
+<p>
+  TRY_Region == 3 then 281.65 K
+</p>
+<p>
+  TRY_Region == 4 then 282.65 K
+</p>
+<p>
+  TRY_Region == 5 then 281.25 K
+</p>
+<p>
+  TRY_Region == 6 then 279.95 K
+</p>
+<p>
+  TRY_Region == 7 then 281.95 K
+</p>
+<p>
+  TRY_Region == 8 then 279.95 K
+</p>
+<p>
+  TRY_Region == 9 then 281.05 K
+</p>
+<p>
+  TRY_Region == 10 then 276.15 K
+</p>
+<p>
+  TRY_Region == 11 then 279.45 K
+</p>
+<p>
+  TRY_Region == 12 then 283.35 K
+</p>
+<p>
+  TRY_Region == 13 then 281.05 K
+</p>
+<p>
+  TRY_Region == 14 then 281.05 K
+</p>
+<p>
+  TRY_Region == 15 then 279.95 K
+</p>
 </html>"));
 end Ow2IwL2IwS1Gr1Uf1;

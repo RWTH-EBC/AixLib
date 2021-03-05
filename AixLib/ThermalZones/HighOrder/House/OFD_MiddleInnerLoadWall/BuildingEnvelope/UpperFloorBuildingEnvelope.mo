@@ -117,10 +117,12 @@ model UpperFloorBuildingEnvelope
     final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
-    calcMethodIn=calcMethodIn,
+    final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethodOut=calcMethodOut,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -147,11 +149,11 @@ model UpperFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset_Bedroom,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final Tset=Tset_Bedroom,
     final T0_air=T0_air) annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Children1(
     final denAir=denAir,
@@ -160,10 +162,12 @@ model UpperFloorBuildingEnvelope
     final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
-    calcMethodIn=calcMethodIn,
+    final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethodOut=calcMethodOut,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -187,11 +191,11 @@ model UpperFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset_Children1,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final Tset=Tset_Children1,
     final T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
     final U_door_OD2=UValOutDoors) annotation (Placement(transformation(extent={{82,28},{44,76}})));
@@ -202,10 +206,12 @@ model UpperFloorBuildingEnvelope
     final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
-    calcMethodIn=calcMethodIn,
+    final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethodOut=calcMethodOut,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -230,11 +236,11 @@ model UpperFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset_Bath,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final Tset=Tset_Bath,
     final T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
     final U_door_OD2=UValOutDoors) annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
@@ -245,10 +251,12 @@ model UpperFloorBuildingEnvelope
     final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
-    calcMethodIn=calcMethodIn,
+    final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethodOut=calcMethodOut,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -275,11 +283,11 @@ model UpperFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset_Children2,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final Tset=Tset_Children2,
     final T0_air=T0_air) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1 Corridor(
     final denAir=denAir,
@@ -288,10 +296,12 @@ model UpperFloorBuildingEnvelope
     final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
-    calcMethodIn=calcMethodIn,
+    final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethodOut=calcMethodOut,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -500,17 +510,28 @@ equation
         Text(
           extent={{-62,-2},{-6,-16}},
           lineColor={0,0,0},
-          textString="Children2")}), Documentation(revisions="<html>
-
- <ul>
-  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly (not geometry). Vectorize thermal ports. Delete TIR and TMC.</li>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
-
- </ul>
-
- </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the envelope of the upper floor.</p>
- </html>"));
+          textString="Children2")}), Documentation(revisions="<html><ul>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
+    Propagate all parameters correctly (not geometry). Vectorize
+    thermal ports. Delete TIR and TMC.
+  </li>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 10, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the envelope of the upper floor.
+</p>
+</html>"));
 end UpperFloorBuildingEnvelope;

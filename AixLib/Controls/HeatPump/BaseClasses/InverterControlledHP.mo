@@ -1,5 +1,5 @@
-﻿within AixLib.Controls.HeatPump.BaseClasses;
-model InverterControlledHP "Converter model for a inverter controlled HP"
+within AixLib.Controls.HeatPump.BaseClasses;
+model InverterControlledHP "Converter model for an inverter / speed controlled HP modulating between 0 and 1"
   extends PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=hys,
@@ -32,12 +32,12 @@ equation
                                   color={0,0,127}));
   connect(onOffController.y, andHeaLim.u1) annotation (Line(points={{-28.6,8},{
           24,8},{24,0},{36.8,0}}, color={255,0,255}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end InverterControlledHP;

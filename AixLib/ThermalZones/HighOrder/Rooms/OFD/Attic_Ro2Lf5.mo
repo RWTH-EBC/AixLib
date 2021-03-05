@@ -129,7 +129,10 @@ model Attic_Ro2Lf5
     windowarea=windowarea_RO1,
     wall_length=length,
     wall_height=roof_width1,
-    ISOrientation=1) annotation (Placement(transformation(
+    ISOrientation=1,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                     annotation (Placement(transformation(
         extent={{-5.00001,-29},{5.00001,29}},
         rotation=270,
         origin={-41,59})));
@@ -155,7 +158,10 @@ model Attic_Ro2Lf5
     withWindow=withWindow2,
     windowarea=windowarea_RO2,
     wall_length=length,
-    ISOrientation=1) annotation (Placement(transformation(
+    ISOrientation=1,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                     annotation (Placement(transformation(
         origin={47,59},
         extent={{-5,-27},{5,27}},
         rotation=270)));
@@ -178,7 +184,10 @@ model Attic_Ro2Lf5
     wall_height=room2_width,
     withWindow=false,
     ISOrientation=2,
-    outside=false)  annotation (Placement(transformation(
+    outside=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={-29,-44},
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
@@ -201,7 +210,10 @@ model Attic_Ro2Lf5
     wall_height=room1_width,
     withWindow=false,
     ISOrientation=2,
-    outside=false)  annotation (Placement(transformation(
+    outside=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={-60,-44},
         extent={{-2,-12},{2,12}},
         rotation=90)));
@@ -225,7 +237,10 @@ model Attic_Ro2Lf5
     wall_height=room3_width,
     withWindow=false,
     ISOrientation=2,
-    outside=false)  annotation (Placement(transformation(
+    outside=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={3,-44},
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
@@ -248,7 +263,10 @@ model Attic_Ro2Lf5
     wall_height=room4_width,
     withWindow=false,
     ISOrientation=2,
-    outside=false)  annotation (Placement(transformation(
+    outside=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={35,-44},
         extent={{-1.99998,-13},{1.99999,13}},
         rotation=90)));
@@ -271,7 +289,10 @@ model Attic_Ro2Lf5
     wall_height=room5_width,
     withWindow=false,
     ISOrientation=2,
-    outside=false)  annotation (Placement(transformation(
+    outside=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={69,-44},
         extent={{-1.99998,-13},{1.99998,13}},
         rotation=90)));
@@ -297,7 +318,9 @@ model Attic_Ro2Lf5
     ISOrientation=1,
     wall_length=sqrt(VerticalWall_Area),
     wall_height=sqrt(VerticalWall_Area),
-    withWindow=false)
+    withWindow=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                annotation (Placement(transformation(extent={{-4,-21},{4,21}}, origin={-77,-22})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall OW2(
     final energyDynamics=energyDynamicsWalls,
@@ -321,7 +344,9 @@ model Attic_Ro2Lf5
     ISOrientation=1,
     wall_length=sqrt(VerticalWall_Area),
     wall_height=sqrt(VerticalWall_Area),
-    withWindow=false)
+    withWindow=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                annotation (Placement(transformation(
         extent={{-4,21},{4,-21}},
         rotation=180,
@@ -489,20 +514,49 @@ equation
           textString="wRO2"),
         Line(points={{-82,-60},{-82,-68}}, color={0,0,0}),
         Line(points={{82,-60},{82,-68}}, color={0,0,0})}), Documentation(
-        revisions="<html>
- <ul>
-  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly. Extend from new partial room model. Delete TIR and TMC. Tidy up.</li>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for an attic&nbsp;with&nbsp;2&nbsp;saddle&nbsp;roofs&nbsp;and&nbsp;a&nbsp;floor&nbsp;toward&nbsp;5&nbsp;rooms&nbsp;on&nbsp;the&nbsp;lower&nbsp;floor,&nbsp;with&nbsp;all&nbsp;other&nbsp;walls&nbsp;towards&nbsp;the&nbsp;outside.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/Attic_2Ro_5Rooms.png\"
-    alt=\"Room layout\"/></p>
- <p>We also tested a model where the attic has just one floor, over the whole building and each room connects to this component through the ceiling. However the model didn&apos;t lead to the expected lower simulation times, on the contrary. This model is also more correct, as it is not realistic to think that every layer of the attic&apos;s floor has a single temperature.</p>
- </html>"),
+        revisions="<html><ul>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
+    Propagate all parameters correctly. Extend from new partial room
+    model. Delete TIR and TMC. Tidy up.
+  </li>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 8, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for an
+  attic&#160;with&#160;2&#160;saddle&#160;roofs&#160;and&#160;a&#160;floor&#160;toward&#160;5&#160;rooms&#160;on&#160;the&#160;lower&#160;floor,&#160;with&#160;all&#160;other&#160;walls&#160;towards&#160;the&#160;outside.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/Attic_2Ro_5Rooms.png\"
+  alt=\"Room layout\">
+</p>
+<p>
+  We also tested a model where the attic has just one floor, over the
+  whole building and each room connects to this component through the
+  ceiling. However the model didn't lead to the expected lower
+  simulation times, on the contrary. This model is also more correct,
+  as it is not realistic to think that every layer of the attic's floor
+  has a single temperature.
+</p>
+</html>"),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
 end Attic_Ro2Lf5;

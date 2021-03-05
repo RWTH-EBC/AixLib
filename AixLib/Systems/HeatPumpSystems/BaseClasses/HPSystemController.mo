@@ -6,7 +6,7 @@ model HPSystemController
 
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
-    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
+    constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
 
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
@@ -82,7 +82,7 @@ model HPSystemController
     "Minimum lock time of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_minLocTime), Evaluate=false);
-  parameter Boolean use_runPerHou
+  parameter Boolean use_runPerHou=false
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
   parameter Integer maxRunPerHou=3
@@ -155,6 +155,7 @@ model HPSystemController
     pre_n_start=pre_n_start,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
+    final deltaIceFac=deltaIceFac,
     final use_chiller=use_chiller,
     final calcPel_deFro=calcPel_deFro,
     final use_antFre=use_antFre,
@@ -222,7 +223,7 @@ model HPSystemController
         extent={{14,-14},{-14,14}},
         rotation=90,
         origin={-60,-114})));
-  Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
+  Modelica.Blocks.Math.MultiSum multiSum(k=fill(1, if not use_chiller and use_deFro then 2 else 1), nu=if not use_chiller and use_deFro then 2 else 1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
   AixLib.DataBase.HeatPump.PerformanceData.IcingBlock
     icingBlock(redeclare final function iceFunc =
@@ -286,7 +287,7 @@ equation
   connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-56,70},
           {-56,72},{-48,72},{-48,72.4},{-48.6,72.4}},
                                  color={0,0,127}));
-  connect(securityControl.Pel_deFro, multiSum.u[1]) annotation (Line(
+  connect(securityControl.Pel_deFro, multiSum.u[2]) annotation (Line(
       points={{49.6667,20},{54,20},{54,26},{-80,26},{-80,70},{-78,70}},
       color={0,0,127},
       pattern=LinePattern.Dash));
@@ -451,10 +452,16 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           textString="Icing Factor")}),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 31, 2018&nbsp;</i> by Alexander K&uuml;mpel: <br/>Connection between controller and heat pump only via bus connector </li>
-<li><i>November 26, 2018&nbsp;</i> by Fabian W&uuml;llhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>) </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 31, 2018&#160;</i> by Alexander Kümpel:<br/>
+    Connection between controller and heat pump only via bus connector
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
 <p>

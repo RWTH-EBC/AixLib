@@ -40,6 +40,8 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor1(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWCorridor,
     outside=false,
     final withSunblind=use_sunblind,
@@ -55,6 +57,8 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
         extent={{-8,-51},{8,51}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Bath1(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWBath,
     outside=false,
     final withSunblind=use_sunblind,
@@ -67,6 +71,8 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(extent={{-68,-50},{-62,-12}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Staircase(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWStraicase,
     outside=false,
     final withSunblind=use_sunblind,
@@ -86,6 +92,8 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
     final V=room_V)
     annotation (Placement(transformation(extent={{-36,-16},{-16,4}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Bath2(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWBath,
     outside=false,
     final withSunblind=use_sunblind,
@@ -101,6 +109,8 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
         extent={{-2.99998,-16},{2.99998,16}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     wall_length=1.8,
     wall_height=2.46,
     windowarea=0.75,
@@ -118,6 +128,8 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
         extent={{-7,-45},{7,45}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor2(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWCorridor,
     outside=false,
     final withSunblind=use_sunblind,
@@ -130,6 +142,8 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(extent={{-68,-2},{-64,24}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_CE,
     outside=false,
     final withSunblind=use_sunblind,
@@ -146,6 +160,8 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
         extent={{-1.99998,-10},{1.99998,10}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_FL,
     outside=false,
     final withSunblind=use_sunblind,
@@ -186,6 +202,13 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-2,72},{22,96}})));
+
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+
+  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
@@ -220,16 +243,22 @@ equation
       points={{-20,-45},{-12,-45},{-12,-38},{6,-38}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-26,-16},{-40,-16},{-40,-20},{-12,-20},{-12,-35},{-20,-35}},     color={191,0,0}));
-  connect(Wall_Bath1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-62,-31},{-52,-31},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Corridor2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-64,11},{-52,11},{-52,-40},{-40,-40},{-40,-40}},     color={191,0,0}));
-  connect(Wall_Corridor1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-3,22},{-3,10},{-52,10},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Bath2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-46,-72},{-46,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(outsideWall.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{5,-92},{5,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{38,-29},{28,-29},{28,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{80,-98.0002},{80,-86},{28,-86},{28,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{80,-74},{80,-86},{28,-86},{28,-60},{-52,-60},{-52,-40},{-40,-40}},       color={191,0,0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points={{-3.2,78},{-12,78},{-12,60},{-80,60},{-80,76},{-110,76}},                    color = {0, 0, 127}));
+  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-35,-8},{-40,-8},{-40,-20},{-12,-20},{-12,-34.9},{-19.9,-34.9}}, color={191,0,0}));
+  connect(Wall_Bath1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-62,-31},{-52,-31},{-52,-41.3},{-39.8,-41.3}}, color={191,0,0}));
+  connect(Wall_Corridor2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-64,11},{-52,11},{-52,-40},{-39.8,-40},{-39.8,-41.3}},
+                                                                                                                                                               color={191,0,0}));
+  connect(Wall_Corridor1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-3,22},{-3,10},{-52,10},{-52,-41.3},{-39.8,-41.3}}, color={191,0,0}));
+  connect(Wall_Bath2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-46,-72},{-46,-60},{-52,-60},{-52,
+          -41.3},{-39.8,-41.3}},                                                                                                                               color={191,0,0}));
+  connect(outsideWall.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{5,-92},{5,-60},{-52,-60},{-52,-41.3},{-39.8,-41.3}}, color={191,0,0}));
+  connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{38,-29},{28,-29},{28,-60},{-52,-60},{-52,-41.3},{-39.8,-41.3}}, color={191,0,0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{80,-98.0002},{80,-86},{28,-86},{28,
+          -60},{-52,-60},{-52,-41.3},{-39.8,-41.3}},                                                                                                                                color={191,0,0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{80,-74},{80,-86},{28,-86},{28,-60},
+          {-52,-60},{-52,-41.3},{-39.8,-41.3}},                                                                                                                                  color={191,0,0}));
+  connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points
+        ={{-0.8,76.32},{-12,76.32},{-12,60},{-80,60},{-80,76},{-110,76}}, color
+        ={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-2, 84}, {-12, 84}, {-12, 60}, {-98, 60}, {-98, 90}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{22,84},{24,84},{24,60},{-56,60},{-56,10},{-40,10},{-40,-16},{-26,-16}},                color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{5, -106.35}, {5, -120}, {-80, -120}, {-80, 60}, {-98, 60}, {-98, 90}}, color = {191, 0, 0}));
@@ -253,17 +282,33 @@ equation
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 0}, {-90, -20}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-108, 72}, {-88, 18}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-108, 100}, {-88, 80}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the kitchen.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Kitchen.png\"
-    alt=\"Room layout\"/></p>
- </html>"));
+            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the kitchen.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Kitchen.png\"
+  alt=\"Room layout\">
+</p>
+</html>"));
 end Kitchen_VoWo;

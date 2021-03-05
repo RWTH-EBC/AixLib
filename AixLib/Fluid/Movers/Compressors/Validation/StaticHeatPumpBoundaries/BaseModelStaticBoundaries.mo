@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries;
+within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries;
 model BaseModelStaticBoundaries
   "Base model to test compressors using static boundaries"
 
@@ -220,57 +220,70 @@ Mass Flow Rate",
           extent={{-100,100},{0,0}},
           lineColor={0,0,0},
           lineThickness=0.5)}),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  December 16, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+    Documentation(revisions="<html><ul>
+  <li>December 16, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This model prescribes static inlet and outlet conditions of the
-compressor. Furhtermore, it prescribes the rotational speed. 
-The model is used to validate the compressor model in general
-as well as to identify efficiencies that describes the compressor's
-behaiviour in a suitable way. Therefore, both calculated mass
-flow rate and calculated power consumption are compared with
-the corresponding experimental data.
+  This model prescribes static inlet and outlet conditions of the
+  compressor. Furhtermore, it prescribes the rotational speed. The
+  model is used to validate the compressor model in general as well as
+  to identify efficiencies that describes the compressor's behaiviour
+  in a suitable way. Therefore, both calculated mass flow rate and
+  calculated power consumption are compared with the corresponding
+  experimental data.
 </p>
-<h4>Required information</h4>
+<h4>
+  Required information
+</h4>
 <p>
-The User needs to define the following information in order to
-complete the model:
-</p>
-<ol>
-<li>Basic definitions of the compressor. For example, the
-displacement volume.</li>
-<li>Calculation approaches of the three efficiencies of the
-compressor.</li>
-<li>Static boundaries of the compressor obtained, for example,
-by experimental data.</li>
-</ol>
-<p>
-To add static boundary conditions, a combi time table is included
-within the model. The columns are defined as follows:
+  The User needs to define the following information in order to
+  complete the model:
 </p>
 <ol>
-<li>Time steps (0,1,2,3,...).</li>
-<li>Rotational speed in <code>Hz</code>.</li>
-<li>Pressure at inlet in <code>bar</code>.</li>
-<li>Temperature at inlet in <code>&#176;C</code>.</li>
-<li>Pressure at outlet in <code>bar</code>.</li>
-<li>Temperature at outlet in <code>&#176;C</code>.</li>
-<li>Power consumption in <code>kW</code>.</li>
-<li>Mass flow rate in <code>kg/s</code>.</li>
+  <li>Basic definitions of the compressor. For example, the
+  displacement volume.
+  </li>
+  <li>Calculation approaches of the three efficiencies of the
+  compressor.
+  </li>
+  <li>Static boundaries of the compressor obtained, for example, by
+  experimental data.
+  </li>
 </ol>
-<h4>References</h4>
 <p>
-C. Cuevas und J. Lebrun. (2009): 
-<a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2008.03.016\">
-Testing and modelling of a variable speed scroll compressor.</a>. 
-In: <i>Applied Thermal Engineering</i>, 29(2):469–478
+  To add static boundary conditions, a combi time table is included
+  within the model. The columns are defined as follows:
+</p>
+<ol>
+  <li>Time steps (0,1,2,3,...).
+  </li>
+  <li>Rotational speed in <code>Hz</code>.
+  </li>
+  <li>Pressure at inlet in <code>bar</code>.
+  </li>
+  <li>Temperature at inlet in <code>°C</code>.
+  </li>
+  <li>Pressure at outlet in <code>bar</code>.
+  </li>
+  <li>Temperature at outlet in <code>°C</code>.
+  </li>
+  <li>Power consumption in <code>kW</code>.
+  </li>
+  <li>Mass flow rate in <code>kg/s</code>.
+  </li>
+</ol>
+<h4>
+  References
+</h4>
+<p>
+  C. Cuevas und J. Lebrun. (2009): <a href=
+  \"http://dx.doi.org/10.1016/j.applthermaleng.2008.03.016\">Testing and
+  modelling of a variable speed scroll compressor.</a>. In: <i>Applied
+  Thermal Engineering</i>, 29(2):469–478
 </p>
 </html>"),
     experiment(StopTime=47.9999));

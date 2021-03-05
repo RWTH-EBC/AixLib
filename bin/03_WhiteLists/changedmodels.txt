@@ -1,0 +1,27 @@
+ :100644 100644 06469f32e 9baefc105 M AixLib/Airflow/AirCurtain/AirCurtainSimplified.mo 
+ :100644 100644 9014949a4 cc946d63b M AixLib/Airflow/AirHandlingUnit/AHU.mo 
+ :100644 100644 51e73fa58 c600f9934 M AixLib/Airflow/AirHandlingUnit/BaseClasses/PartialAHU.mo 
+ :100644 100644 30cec9c28 7c121b53e M AixLib/Airflow/AirHandlingUnit/Examples/AHU.mo 
+ :100644 100644 2a280b7b4 bfff18003 M AixLib/Airflow/AirHandlingUnit/NoAHU.mo 
+ :100644 100644 8315fe457 9a8fdf162 M AixLib/Airflow/FacadeVentilationUnit/BaseClasses/SetPower.mo 
+ :100644 100644 49859a1c6 a83768b53 M AixLib/Airflow/FacadeVentilationUnit/DataBase/FVUBaseRecord.mo 
+ :100644 100644 cc4d1b908 50a1964d4 M AixLib/Airflow/FacadeVentilationUnit/Examples/FacadeVentilationUnit.mo 
+ :100644 100644 fcf27bbd7 ccb76a711 M AixLib/Airflow/FacadeVentilationUnit/FacadeVentilationUnit.mo 
+ :100644 100644 80dca66e1 bf33ab20b M AixLib/Airflow/FacadeVentilationUnit/package.mo 
+ :100644 100644 f9d3c88c5 4cacfb0dc M AixLib/Airflow/Multizone/BaseClasses/Examples/package.mo 
+ :100644 100644 3980681de 58839c42e M AixLib/Airflow/Multizone/BaseClasses/package.mo 
+ :100644 100644 4a4683784 c07304a5f M AixLib/Airflow/Multizone/Examples/package.mo 
+ :100644 100644 1836bcfd0 de0cc1fef M AixLib/Airflow/Multizone/Types/package.mo 
+ :100644 100644 60b5df503 abbf18abf M AixLib/Airflow/Multizone/Validation/package.mo 
+ :100644 100644 b658f58cf 9dc407801 M AixLib/Airflow/Multizone/package.mo 
+ :100644 100644 719641016 1bdb792ef M AixLib/Airflow/Multizone/Examples/ChimneyShaftNoVolume.mo 
+ :100644 100644 719641016 1bdb792ef M AixLib/Airflow/Multizone/Examples/ChimneyShaftWithVolume.mo 
+ :100644 100644 719641016 1bdb792ef M AixLib/Airflow/Multizone/Examples/ClosedDoors.mo 
+ :100644 100644 719641016 1bdb792ef M AixLib/Airflow/Multizone/Examples/CO2TransportStep.mo 
+ :100644 100644 AixLib/Airflow/Multizone/Examples/NaturalVentilation.mo
+ :100644 100644 Resources\ReferenceResults\Dymola\AixLib_Airflow_AirHandlingUnit_Examples_AHU.txt 
+ :100644 100644 Resources\ReferenceResults\Dymola\AixLib_AirFlow_AirHandlingUnit_Examples_AHU.txt 
+ :100644 100644 Resources\ReferenceResults\Dymola\AixLib_Fluid_FixedResistances_Examples_GenericPipe.txt
+ :100644 100644 Resources\ReferenceResults\Dymola\AixLib_ThermalZones_ReducedOrder_Validation_RoomWithoutLatentGain.txt
+ :100644 100644 Resources\ReferenceResults\Dymola\AixLib_ThermalZones_ReducedOrder_Validation_VDI6007_TestCase1.txt
+ Resources\ReferenceResults\Dymola\AixLib_ThermalZones_ReducedOrder_Validation_VDI6007_TestCase2.txt

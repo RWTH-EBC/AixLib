@@ -77,20 +77,30 @@ equation
           arrow={Arrow.None,Arrow.Filled},
           origin={2,-33},
           rotation=180)}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Model for heat conduction using elements from the MSL.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for heat conduction using elements from the MSL.
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>February 06, 2017&nbsp;</i> by Philipp Mehrfeld:<br/>
-Naming according to AixLib standards.</li>
-<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>
-Uses components from MSL</li>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
-Added documentation.</li>
+      revisions="<html><ul>
+  <li>
+    <i>February 06, 2017&#160;</i> by Philipp Mehrfeld:<br/>
+    Naming according to AixLib standards.
+  </li>
+  <li>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>November 06, 2014&#160;</i> by Ana Constantin:<br/>
+    Added documentation.
+  </li>
 </ul>
 </html>"));
 end HeatConductionSegment;

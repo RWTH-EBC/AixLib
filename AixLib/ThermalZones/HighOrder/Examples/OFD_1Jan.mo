@@ -39,19 +39,19 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))
     annotation (Placement(transformation(extent={{125,55},{77,87}})));
 
-  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
-    OFD(
+  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope OFD(
     redeclare DataBase.Walls.Collections.OFD.WSchV1995Heavy wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=292.15,
+    redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995 Type_Win,
+    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
-               withDynamicVentilation=true,
-    UValOutDoors=if TIR == 1 then 1.8 else 2.9)
-    annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
+    withDynamicVentilation=true,
+    UValOutDoors=if TIR == 1 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.GroundFloor
@@ -214,15 +214,28 @@ equation
 3-Corridor
 4-WC
 5-Kitchen",
-          horizontalAlignment=TextAlignment.Left)}),                                                                                                                                                                                                        Icon(coordinateSystem(preserveAspectRatio = true, extent={{-170,-100},{170,100}})),                               experiment(StopTime = 86400, Interval = 15, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Example for setting up a simulation for a one family dwelling.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Energy generation and delivery system consisting of boiler and pump.</p>
- <p>The example works for a day and shows how such a simulation can be set up. It is not guranteed that the model will work stable under sifferent conditions or for longer periods of time.</p>
- </html>", revisions = "<html>
- <ul>
- <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>"));
+          horizontalAlignment=TextAlignment.Left)}),                                                                                                                                                                                                        Icon(coordinateSystem(preserveAspectRatio = true, extent={{-170,-100},{170,100}})),                               experiment(StopTime = 86400, Interval = 15, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Example for setting up a simulation for a one family dwelling.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Energy generation and delivery system consisting of boiler and pump.
+</p>
+<p>
+  The example works for a day and shows how such a simulation can be
+  set up. It is not guranteed that the model will work stable under
+  sifferent conditions or for longer periods of time.
+</p>
+<ul>
+  <li>
+    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>"));
 end OFD_1Jan;
