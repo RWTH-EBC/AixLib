@@ -398,12 +398,12 @@ public
  // CHANGES FOR SWIMMING POOL:
  //***************************************
 
-   parameter Boolean swimmingPools=true   "Are swimming pools in this zone?" annotation (Dialog(tab="Moisture", group="Swimming Pools"));
+   parameter Boolean swimmingPools=zoneParam.swimmingPools  "Are swimming pools in this zone?" annotation (Dialog(tab="Moisture", group="Swimming Pools"));
 
-   parameter Integer numPools( min=1)
+   parameter Integer numPools( min=1)=zoneParam.numPools
    "Number of Swimming Pools" annotation (Dialog(tab="Moisture", group="Swimming Pools", enable = swimmingPools));
 
-   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]
+   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]= zoneParam.poolParam[:]
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = swimmingPools));
 
   Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](final poolParam=poolParam) if
@@ -411,49 +411,52 @@ public
             {-52,-72}})));
 
   Modelica.Blocks.Interfaces.RealOutput PPoolPump(final quantity="Power",
-      final unit="W") if swimmingPools "Power for Pumps" annotation (Placement(
+      final unit="W") if swimmingPools and ATot > 0 "Power for Pumps" annotation (Placement(
         transformation(extent={{100,-50},{120,-30}}), iconTransformation(extent=
            {{100,-50},{120,-30}})));
 
   Modelica.Blocks.Interfaces.RealOutput QHeatPools(final quantity="HeatFlowRate",
-      final unit="W") if swimmingPools
+      final unit="W") if swimmingPools and ATot > 0
     "Heat demands of all pools in zone to heat pool water" annotation (
       Placement(transformation(extent={{100,-60},{120,-40}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
 
 
   Modelica.Blocks.Math.MultiSum SumPoolWasteWater(nu=numPools) if
-    swimmingPools "Sum up generated waste water of all swimming pools"
+    swimmingPools and ATot > 0 "Sum up generated waste water of all swimming pools"
     annotation (Placement(transformation(extent={{-36,-86},{-26,-76}})));
-  Modelica.Blocks.Math.MultiSum SumPoolPPump(nu=numPools) if swimmingPools
+  Modelica.Blocks.Math.MultiSum SumPoolPPump(nu=numPools) if swimmingPools and ATot > 0
     "Sum up electriical energy consumption of the circulation pump of all swimming pools"
     annotation (Placement(transformation(extent={{-36,-86},{-26,-76}})));
-  Modelica.Blocks.Math.MultiSum SumPoolQHeat(nu=numPools) if swimmingPools
+  Modelica.Blocks.Math.MultiSum SumPoolQHeat(nu=numPools) if swimmingPools and ATot > 0
     "Sum up heat demands of all swimming pools"
     annotation (Placement(transformation(extent={{-36,-86},{-26,-76}})));
   Modelica.Blocks.Math.MultiSum SumPoolFreshWater(nu=numPools) if
-    swimmingPools "Sum up fresh water demands of all swimming pools"
+    swimmingPools and ATot > 0 "Sum up fresh water demands of all swimming pools"
     annotation (Placement(transformation(extent={{-36,-86},{-26,-76}})));
   Modelica.Blocks.Math.MultiSum SumPoolRecycledWater(nu=numPools) if
-    swimmingPools "Sum up recycled water demands of all swimming pools"
+    swimmingPools and ATot > 0
+                  "Sum up recycled water demands of all swimming pools"
     annotation (Placement(transformation(extent={{-36,-86},{-26,-76}})));
   Modelica.Blocks.Interfaces.RealOutput MFlowWasteWater(final quantity="MassFlowRate",
       final unit="kg/s") if
-                         swimmingPools "Waste water of all swimming pools" annotation (
+                         swimmingPools and  ATot > 0
+                                                    "Waste water of all swimming pools" annotation (
       Placement(transformation(extent={{100,-68},{120,-48}}), iconTransformation(
           extent={{100,-50},{120,-30}})));
   Modelica.Blocks.Interfaces.RealOutput MFlowRecycledWater(final quantity="MassFlowRate",
       final unit="kg/s") if
-                         swimmingPools "Recycled water consumption of all pools"
+                         swimmingPools and ATot > 0
+                                                   "Recycled water consumption of all pools"
     annotation (Placement(transformation(extent={{100,-76},{120,-56}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
   Modelica.Blocks.Interfaces.RealOutput MFlowFreshWater(final quantity="MassFlowRate",
       final unit="kg/s") if
-                         swimmingPools "Fresh water consumption of all swimming pools"
+                         swimmingPools and ATot > 0 "Fresh water consumption of all swimming pools"
     annotation (Placement(transformation(extent={{100,-82},{120,-62}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
   Modelica.Blocks.Math.MultiSum SumPoolLatHeatEvap(nu=1) if
-    swimmingPools "Sum up recycled water demands of all swimming pools"
+    swimmingPools and ATot > 0 "Sum up recycled water demands of all swimming pools"
     annotation (Placement(transformation(extent={{-36,-78},{-26,-68}})));
 
 //********************************
@@ -785,12 +788,18 @@ equation
   connect(moistureGains.QLat_flow, SumQLat2_flow.u[1]) annotation (Line(points={{-59.5,
           -63},{-46,-63},{-46,-62},{-40,-62}},                            color=
          {0,0,127}));
-  connect(SumQLat1_flow.y, ROM.QLat_flow[1]) annotation (Line(points={{-26.98,-62},
-          {2,-62},{2,4},{32,4},{32,59.6},{37,59.6}},
-                                                 color={0,0,127}));
+
+  if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_AirExchange then
+
   connect(SumQLat2_flow.y, ROM.QLat_flow[1]) annotation (Line(points={{-26.98,-62},
           {2,-62},{2,4},{32,4},{32,59.6},{37,59.6}},
                                                  color={0,0,127}));
+  end if;
+   if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and not use_AirExchange then
+     connect(SumQLat1_flow.y, ROM.QLat_flow[1]) annotation (Line(points={{-26.98,-62},
+          {2,-62},{2,4},{32,4},{32,59.6},{37,59.6}},
+                                                 color={0,0,127}));
+   end if;
   connect(humVolAirROM.y, X_w) annotation (Line(points={{-59.5,-50},{4,-50},{4,-6},
           {96,-6},{96,-86},{112,-86}}, color={0,0,127}));
   connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-27.4,-28},{
