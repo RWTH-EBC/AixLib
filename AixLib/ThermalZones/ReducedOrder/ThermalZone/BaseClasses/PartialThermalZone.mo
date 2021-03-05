@@ -2,8 +2,11 @@ within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
 partial model PartialThermalZone "Partial model for thermal zone models"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
+
   parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);
+
+
   parameter Integer nPorts=0
     "Number of fluid ports"
     annotation(Evaluate=true,
@@ -105,6 +108,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final C_nominal=C_nominal,
     final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
             {86,92}})));
+
+    //final nu= if swimmingPools then numPools+1 else numPools,
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +

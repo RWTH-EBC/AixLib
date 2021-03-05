@@ -83,7 +83,7 @@ model PartialMultizoneSwimmingPool "Partial multizone model, instead of ThermalZ
 
   //********************Beginn Pool
 
-  parameter Boolean swimmingPools        "Swimming pools in this zone? " annotation (Dialog(tab="Moisture", group="Swimming Pools"));
+  parameter Boolean swimmingPools  "Swimming pools in this building? " annotation (Dialog(tab="Moisture", group="Swimming Pools"));
 
 
   ThermalZone.ThermalZone_withPools zone[numZones](
@@ -145,7 +145,7 @@ model PartialMultizoneSwimmingPool "Partial multizone model, instead of ThermalZ
            {{80,-80},{100,-60}})));
 
 
-  Modelica.Blocks.Interfaces.RealInput openingHours[numZones]
+  Modelica.Blocks.Interfaces.RealInput openingHours
     "Input opening hours of swimming hall" annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=-90,

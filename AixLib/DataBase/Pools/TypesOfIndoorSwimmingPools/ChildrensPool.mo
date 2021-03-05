@@ -16,9 +16,9 @@ record ChildrensPool
   m_flow_sewer=0.005,
   partialLoad=true,
   x_partialLoad=0.23,
-  nExt=1,
-  RExt={1.4142107968e-05},
-  RExtRem=0.000380773816236,
-  CExt={492976267.489});
+  nPool=1,
+  RPool={1.4142107968e-05},
+  RPoolRem=0.000380773816236,
+  CPool={492976267.489});
 
 end ChildrensPool;

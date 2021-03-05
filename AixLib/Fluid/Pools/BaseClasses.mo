@@ -103,7 +103,8 @@ package BaseClasses "Base classes for Swimming Pool Models"
       final RExt=RExt,
       final RExtRem=RExtRem,
       final CExt=CExt,
-      final n=nExt)
+      final n=nExt,
+      T_start=T_nextDoor)
       "Surounding Walls of Swimming Pool"
       annotation (Placement(transformation(extent={{-20,-6},{-6,8}})));
     Modelica.Blocks.Logical.Switch switch1 "Neighbouring Soil or different rooms"
@@ -750,15 +751,18 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
     replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium in the component";
 
-    parameter Modelica.SIunits.Pressure pumpHead "Nominal pressure difference pump and resistance";
+    parameter Modelica.SIunits.Pressure pumpHead( min=0.001) "Nominal pressure difference pump and resistance";
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min= 0.0001);
-
+    parameter Modelica.SIunits.Pressure p_start;
+    parameter Modelica.SIunits.Temperature T_water;
 
     Modelica.Blocks.Interfaces.RealOutput P( final quantity = "Power", final unit= "W")
       "Output eletric energy needed for pump operation"
       annotation (Placement(transformation(extent={{96,36},{116,56}})));
     Movers.FlowControlled_m_flow CirculationPump(
       redeclare replaceable package Medium = Medium,
+      p_start=p_start,
+      T_start=T_water,
       m_flow_nominal=m_flow_nominal,
       redeclare Movers.Data.Generic per(
         pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, dp={
@@ -768,7 +772,8 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
         motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
             eta={0.9,0.9,0.9})),
       addPowerToMedium=false,
-      dp_nominal=pumpHead)
+      dp_nominal=pumpHead,
+      m_flow_start=m_flow_nominal)
       annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
     FixedResistances.PressureDrop res(
       redeclare replaceable package Medium = Medium,
@@ -818,9 +823,9 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
 
       parameter Integer nu( min=0)=0  "Number of input connections"
       annotation (Dialog(connectorSizing=true), HideResult=true);
-  Modelica.Blocks.Interfaces.RealVectorInput u[nu]
+  Modelica.Blocks.Interfaces.RealInput       u[nu]
     annotation (Placement(transformation(extent={{-122,-22},{-82,18}})));
-    Modelica.Blocks.Interfaces.RealVectorOutput y[nu]( final unit="J/kg")
+    Modelica.Blocks.Interfaces.RealOutput       y[nu]( final unit="J/kg")
     annotation (Placement(transformation(extent={{82,-22},{122,18}})));
   equation
     y = AixLib.Media.Air.enthalpyOfCondensingGas(u);
