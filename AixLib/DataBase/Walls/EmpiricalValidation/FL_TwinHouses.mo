@@ -10,7 +10,10 @@ record FL_TwinHouses "Floor for Empirical Validation TwinHouses Holzkirchen"
   annotation (Documentation(info="<html>
 </html>", revisions="<html>
 <ul>
-<li><i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>implemented</li>
+  <li>
+    <i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>
+    implemented
+  </li>
 </ul>
 </html>"));
 end FL_TwinHouses;

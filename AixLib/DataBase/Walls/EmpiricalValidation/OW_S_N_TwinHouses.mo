@@ -10,7 +10,10 @@ record OW_S_N_TwinHouses "Outside Wall South/North for Empirical Validation Twin
   annotation (Documentation(info="<html>
 </html>", revisions="<html>
 <ul>
-<li><i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>implemented</li>
+  <li>
+    <i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>
+    implemented
+  </li>
 </ul>
 </html>"));
 end OW_S_N_TwinHouses;
