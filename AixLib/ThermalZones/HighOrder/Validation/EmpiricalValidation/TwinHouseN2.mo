@@ -35,13 +35,13 @@ model TwinHouseN2
     fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.mat"),
     columns={4})
     annotation (Placement(transformation(extent={{-20,-160},{0,-140}})));
-  Modelica.Blocks.Interfaces.RealOutput room_temperature
+  Modelica.Blocks.Interfaces.RealOutput roomTemp
     annotation (Placement(transformation(extent={{168,80},{188,100}})));
-  Modelica.Blocks.Interfaces.RealOutput ambient_temperature
+  Modelica.Blocks.Interfaces.RealOutput ambientTemp
     annotation (Placement(transformation(extent={{168,62},{188,82}})));
   Modelica.Blocks.Sources.RealExpression room(y=roomTwinHouseN2.airload.T)
     annotation (Placement(transformation(extent={{114,82},{130,100}})));
-  Modelica.Blocks.Sources.RealExpression ambient_temp(y=roomTwinHouseN2.thermOutside.T)
+  Modelica.Blocks.Sources.RealExpression ambTemp(y=roomTwinHouseN2.thermOutside.T)
     annotation (Placement(transformation(extent={{114,62},{130,80}})));
   Modelica.Blocks.Sources.CombiTimeTable TempAttic(
     tableOnFile=true,
@@ -122,7 +122,7 @@ model TwinHouseN2
     annotation (Placement(transformation(extent={{168,-56},{188,-36}})));
   Modelica.Blocks.Interfaces.RealOutput N2_bedroom_AT
     annotation (Placement(transformation(extent={{168,-70},{188,-50}})));
-  Modelica.Blocks.Interfaces.RealOutput MeanMeasuredTemp
+  Modelica.Blocks.Interfaces.RealOutput meanMeasuredTemp
     annotation (Placement(transformation(extent={{168,-108},{188,-88}})));
   Modelica.Blocks.Math.Sum sum2(nin=9, k={0.137307708,0.137307708,0.137307708,
         0.066838046,0.084710491,0.136981271,0.091076019,0.071489778,0.136981271})
@@ -141,11 +141,8 @@ equation
           43.2},{-63.4,43.2}},color={0,0,127}));
   connect(TempAttic.y[2], add.u2) annotation (Line(points={{-75,36},{-68,36},{-68,
           34.8},{-63.4,34.8}},color={0,0,127}));
-  connect(to_degC1.u, ambient_temp.y)
-    annotation (Line(points={{143,71},{130.8,71}},
-                                                 color={0,0,127}));
-  connect(to_degC1.y, ambient_temperature) annotation (Line(points={{154.5,71},
-          {164.25,71},{164.25,72},{178,72}},color={0,0,127}));
+  connect(to_degC1.u, ambTemp.y) annotation (Line(points={{143,71},{130.8,71}}, color={0,0,127}));
+  connect(to_degC1.y, ambientTemp) annotation (Line(points={{154.5,71},{164.25,71},{164.25,72},{178,72}}, color={0,0,127}));
   connect(roomTwinHouseN2.SolarRadiationPort, weather.SolarRadiation_OrientedSurfaces)
     annotation (Line(points={{33,10.6},{34,10.6},{34,8},{28,8},{28,60},{-82.8,
           60},{-82.8,73}}, color={255,128,0}));
@@ -211,19 +208,20 @@ equation
           0,0,127}));
   connect(room.y, to_degC2.u) annotation (Line(points={{130.8,91},{134,91},{134,
           89},{143,89}}, color={0,0,127}));
-  connect(room_temperature, to_degC2.y) annotation (Line(points={{178,90},{164,
-          90},{164,89},{154.5,89}}, color={0,0,127}));
+  connect(roomTemp, to_degC2.y) annotation (Line(points={{178,90},{164,90},{164,89},{154.5,89}}, color={0,0,127}));
   connect(MeasuredTemperatures.y[9], N2_bedroom_AT) annotation (Line(points={{
           125,42},{148,42},{148,-60},{178,-60}}, color={0,0,127}));
-  connect(sum2.y, MeanMeasuredTemp) annotation (Line(points={{143,-98},{158,-98},
-          {158,-98},{178,-98}}, color={0,0,127}));
+  connect(sum2.y, meanMeasuredTemp) annotation (Line(points={{143,-98},{158,-98},{158,-98},{178,-98}}, color={0,0,127}));
   connect(VentilationRate.y[1], gain.u) annotation (Line(points={{-79.2,-4},{
           -70,-4},{-70,-3},{-59,-3}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+  annotation (experiment(StopTime=3546000, Tolerance=1e-06),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.mos"
+        "Simulate and plot"),
+  Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -160},{180,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-160},{180,
             100}})),
-    experiment(StopTime=3546000, __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Twin House N2 is part of the empirical validation: 
