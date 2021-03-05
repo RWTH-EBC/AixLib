@@ -11,7 +11,10 @@ record IW_TwinHouses
   annotation (Documentation(info="<html>
 </html>", revisions="<html>
 <ul>
-<li><i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>implemented</li>
+  <li>
+    <i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>
+    implemented
+  </li>
 </ul>
 </html>"));
 end IW_TwinHouses;

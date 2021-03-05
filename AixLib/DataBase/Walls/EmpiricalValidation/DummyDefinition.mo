@@ -9,12 +9,18 @@ record DummyDefinition
     eps=1 "Emissivity of inner wall surface");
                                                         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li><i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>
+    implemented
+  </li>
 </ul>
 </html>", info="<html>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Dummy Wall record/p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Dummy Wall record/p&gt;
+</p>
 </html>"));
 end DummyDefinition;

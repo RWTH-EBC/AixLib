@@ -241,10 +241,13 @@ equation
           fillPattern=FillPattern.Solid,
           textString="width",
           origin={65,0},
-          rotation=90)}), Documentation(revisions="<html>
- <ul>
- <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
+          rotation=90)}), Documentation(revisions="<html><ul>
+  <li>
+    <i>March 9, 2015</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+
 </html>"));
 end RoomBuilding1;

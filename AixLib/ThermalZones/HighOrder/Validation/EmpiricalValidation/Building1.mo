@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
+within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model Building1
   import ModelicaServices;
     extends Modelica.Icons.Example;
@@ -182,37 +182,71 @@ equation
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-100},{160,100}})),
     Icon(coordinateSystem(extent={{-100,-100},{160,100}})),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Building 1 is part of an empirical validation according to an internal monitoring study with permission to use data anonymized. <br>
-Specifications are:</p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Building 1 is part of an empirical validation according to an
+  internal monitoring study with permission to use data anonymized.<br/>
+  Specifications are:
+</p>
 <ul>
-<li>length = 72 m </li>
-<li>heigth = 22 m </li>
-<li>width = 22 m </li>
-<li>no windows, except for 60m&sup2; window area on the ceiling (smoke ventilation windows)</li>
+  <li>length = 72 m
+  </li>
+  <li>heigth = 22 m
+  </li>
+  <li>width = 22 m
+  </li>
+  <li>no windows, except for 60m² window area on the ceiling (smoke
+  ventilation windows)
+  </li>
 </ul>
-<p><br>Air exchange rates: </p>
+<p>
+  <br/>
+  Air exchange rates:
+</p>
 <ul>
-<li>n50 = 0.1 1/h, due to air leakage</li>
-<li>n = 1 1/h, due to air exchange caused by open ventilation windows (opening schedule in Building specifications{5})</li>
-<li>n = 0.25 1/h, due to air exchange caused by open door to room next to building 1 (schedule 7 am - 4 pm)</li>
+  <li>n50 = 0.1 1/h, due to air leakage
+  </li>
+  <li>n = 1 1/h, due to air exchange caused by open ventilation windows
+  (opening schedule in Building specifications{5})
+  </li>
+  <li>n = 0.25 1/h, due to air exchange caused by open door to room
+  next to building 1 (schedule 7 am - 4 pm)
+  </li>
 </ul>
-<p><br>Building specifications give information about: </p>
+<p>
+  <br/>
+  Building specifications give information about:
+</p>
 <ul>
-<li>{2} measured room temperatur in the building: temperature sensor at the top </li>
-<li>{3} measured room temperatur in the building: temperature sensor at the center </li>
-<li>{4} measured room temperatur in the building: temperature sensor at the bottom </li>
-<li>{5} air exchange due to windows (smoke ventilation windows) in the ceiling </li>
+  <li>{2} measured room temperatur in the building: temperature sensor
+  at the top
+  </li>
+  <li>{3} measured room temperatur in the building: temperature sensor
+  at the center
+  </li>
+  <li>{4} measured room temperatur in the building: temperature sensor
+  at the bottom
+  </li>
+  <li>{5} air exchange due to windows (smoke ventilation windows) in
+  the ceiling
+  </li>
 </ul>
-<p><br>Assumptions: </p>
+<p>
+  <br/>
+  Assumptions:
+</p>
 <ul>
-<li>30 &percnt; of the volume is constantly filled with goods and shelves </li>
-<li>Internal capacity: 2100000 kg, specific heat capacity: 2000 J/kg </li>
+  <li>30 &amp;percnt; of the volume is constantly filled with goods and
+  shelves
+  </li>
+  <li>Internal capacity: 2100000 kg, specific heat capacity: 2000 J/kg
+  </li>
 </ul>
 </html>",
-   revisions="<html>
-<li>October 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+   revisions="<html><ul>
+  <li>October 1, 2020 by Konstantina Xanthopoulou:<br/>
     First Implementation.
   </li>
   <li style=\"list-style: none\">This is for <a href=

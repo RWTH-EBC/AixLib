@@ -222,45 +222,90 @@ equation
             -160},{180,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-160},{180,
             100}})),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Twin House N2 is part of the empirical validation: 
-<p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/TwinHouse_GroundFloor.png\"
-    alt=\"Room layout\"/></p>
-
-<br>The Frauenhofer Institute for Building Physics (IBP) created two identical full scale buildings in Holzkirchen Germany in the course of reproducing building energy performances based on measurement data.</br>
-<br> The Twin House N2 was implemented as part of the IEA EBC Annex 58.</br>
-</p><p>Air exchange rates: </p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Twin House N2 is part of the empirical validation:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/TwinHouse_GroundFloor.png\"
+  alt=\"Room layout\">
+</p><br/>
+The Frauenhofer Institute for Building Physics (IBP) created two
+identical full scale buildings in Holzkirchen Germany in the course of
+reproducing building energy performances based on measurement data.<br/>
+<br/>
+The Twin House N2 was implemented as part of the IEA EBC Annex 58.<br/>
+<p>
+  Air exchange rates:
+</p>
 <ul>
-<li>n50 = 1.62 1/h due to air leakage</li>
-<li>n = 120 m3/h caused by mechanical ventilation system</li>
+  <li>n50 = 1.62 1/h due to air leakage
+  </li>
+  <li>n = 120 m3/h caused by mechanical ventilation system
+  </li>
 </ul>
-<p><br>Building specifications give information about experimental schedule (temperatures are maintained through specified heat inputs in every room): </p>
+<p>
+  <br/>
+  Building specifications give information about experimental schedule
+  (temperatures are maintained through specified heat inputs in every
+  room):
+</p>
 <ul>
-<li>Day 1-7: Initialization: constant 30&deg;C in each room </li>
-<li>Day 8-14: Constant 30&deg;C in each room </li>
-<li>Day 15-28:ROLBS sequence in living roomand no other heat inputs </li>
-<li>Day 29-35: Re-initialization constant 25&deg;C in each room</li>
-<li>Day 36-42: Free-float temperatures</li>
+  <li>Day 1-7: Initialization: constant 30°C in each room
+  </li>
+  <li>Day 8-14: Constant 30°C in each room
+  </li>
+  <li>Day 15-28:ROLBS sequence in living roomand no other heat inputs
+  </li>
+  <li>Day 29-35: Re-initialization constant 25°C in each room
+  </li>
+  <li>Day 36-42: Free-float temperatures
+  </li>
 </ul>
-<p><b><span style=\"color: #008000;\">Known Limitations</span> </b></p><p>The experiment takes place on the ground floor of Twin House N2. Measured temperatures within the cellar and attic are used as boundary conditions for the ground floor. </p>
-<p><b><span style=\"color: #008000;\">References</span> </b></p>
+<p>
+  <b><span style=\"color: #008000;\">Known Limitations</span></b>
+</p>
+<p>
+  The experiment takes place on the ground floor of Twin House N2.
+  Measured temperatures within the cellar and attic are used as
+  boundary conditions for the ground floor.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">References</span></b>
+</p>
 <ul>
-<li>Empirical Whole Model Validation, Modelling Specification Test Case Twin_House_1, IEA ECB Annex 58, Validation of Building Energy Simulation ToolsSubtask 4 Version 6 </li>
-<li>IEA ECB Annex 58 </li>
+  <li>Empirical Whole Model Validation, Modelling Specification Test
+  Case Twin_House_1, IEA ECB Annex 58, Validation of Building Energy
+  Simulation ToolsSubtask 4 Version 6
+  </li>
+  <li>IEA ECB Annex 58
+  </li>
 </ul>
 </html>
 
-<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the bathroom.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bath.png\"
-    alt=\"Room layout\"/></p>
- </html>",
-   revisions="<html>
-<li>October 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the bathroom.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bath.png\"
+  alt=\"Room layout\">
+</p>
+</html>",
+   revisions="<html><ul>
+  <li>October 1, 2020 by Konstantina Xanthopoulou:<br/>
     First Implementation.
   </li>
   <li style=\"list-style: none\">This is for <a href=

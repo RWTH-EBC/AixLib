@@ -10,7 +10,10 @@ record OW_W_TwinHouses "Outside Wall West for Empirical Validation TwinHouses Ho
   annotation (Documentation(info="<html>
 </html>", revisions="<html>
 <ul>
-<li><i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>implemented</li>
+  <li>
+    <i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>
+    implemented
+  </li>
 </ul>
 </html>"));
 end OW_W_TwinHouses;
