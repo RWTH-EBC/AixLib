@@ -1,8 +1,13 @@
-within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
+﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model Building1
   import ModelicaServices;
     extends Modelica.Icons.Example;
-  Rooms.RoomEmpiricalValidation.RoomBuilding1 room(T0_air=283.15, TWalls_start=283.15)
+  Rooms.RoomEmpiricalValidation.RoomBuilding1 room(
+    T0_air=283.15,
+    TWalls_start=283.15,
+    redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_Building1 Type_Win,
+    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple)
     annotation (Placement(transformation(extent={{2,-30},{68,42}})));
 
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather(

@@ -1,11 +1,9 @@
 within AixLib.DataBase.WindowsDoors.Simple;
-record WindowSimple_TwinHouses2 "Window according to Twin Houses 2"
+record WindowSimple_Building1 "Window for empirical validation with Building1"
 
 extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
-    Uw=1.2,
-    g=0.62,
-    Emissivity=0.837,
-    frameFraction=0.25);
+    Uw=1.5,
+    frameFraction=0.1);
   annotation (Documentation(revisions="<html><ul>
   <li>
     <i>August 4, 2020</i> by Konstantina Xanthopoulou:<br/>
@@ -31,4 +29,4 @@ extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
   </li>
 </ul>
 </html>"));
-end WindowSimple_TwinHouses2;
+end WindowSimple_Building1;

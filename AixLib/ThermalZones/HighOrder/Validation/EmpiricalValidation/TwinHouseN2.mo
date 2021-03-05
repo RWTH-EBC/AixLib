@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
+﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model TwinHouseN2
    extends Modelica.Icons.Example;
   Rooms.RoomEmpiricalValidation.RoomTwinHouseN2 roomTwinHouseN2(
@@ -6,7 +6,9 @@ model TwinHouseN2
     T0_air=303.15,
     TWalls_start=303.15,
     calcMethodIn=1,
+    redeclare model WindowModel = Components.WindowsDoors.Window_ASHRAE140,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses Type_Win,
+    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     solar_absorptance_OW=0.23,
     use_infiltEN12831=true,
     n50=1.62,

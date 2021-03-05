@@ -5,7 +5,6 @@ record WindowSimple_TwinHouses
 extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
     Uw=1.2,
     g=0.62,
-    Emissivity=0.837,
     frameFraction=0.3);
   annotation (Documentation(revisions="<html><ul>
   <li>

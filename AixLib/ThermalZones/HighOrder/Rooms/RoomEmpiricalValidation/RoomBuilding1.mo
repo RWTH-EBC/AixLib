@@ -32,7 +32,9 @@ model RoomBuilding1 "Building1"
     withDoor=true,
     U_door=1.7,
     door_height=15,
-    T0=TWalls_start)
+    T0=TWalls_start,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
     annotation (Placement(transformation(extent={{-62,-42},{-48,44}})));
   Components.Walls.Wall wallSouth(
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
@@ -41,7 +43,9 @@ model RoomBuilding1 "Building1"
     solar_absorptance=0.4,
     withWindow=false,
     withDoor=false,
-    T0=TWalls_start)
+    T0=TWalls_start,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         extent={{-6,-39},{6,39}},
         rotation=90,
@@ -53,7 +57,9 @@ model RoomBuilding1 "Building1"
     solar_absorptance=0.4,
     withWindow=false,
     withDoor=false,
-    T0=TWalls_start)
+    T0=TWalls_start,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         extent={{-6,-39},{6,39}},
         rotation=270,
@@ -65,7 +71,9 @@ model RoomBuilding1 "Building1"
     solar_absorptance=0.4,
     withWindow=false,
     withDoor=false,
-    T0=TWalls_start)
+    T0=TWalls_start,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
     annotation (Placement(transformation(extent={{80,-40},{66,44}})));
   Components.Walls.Wall roof(
     redeclare DataBase.Walls.EmpiricalValidation.RO_Building1 wallPar,
@@ -74,17 +82,9 @@ model RoomBuilding1 "Building1"
     solar_absorptance=0.4,
     ISOrientation=3,
     withWindow=true,
-    redeclare model Window =
-        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple (
-          WindowType=
-            AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(Uw=
-            1.5, frameFraction=0.1), redeclare model correctionSolarGain =
-            AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
-            (WindowType=
-                AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
-                Uw=1.5, frameFraction=0.1))),
-    WindowType=AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
-        Uw=1.5, frameFraction=0.1),
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
+    final WindowType=Type_Win,
     windowarea=60,
     withDoor=false,
     T0=TWalls_start)
@@ -101,7 +101,9 @@ model RoomBuilding1 "Building1"
     ISOrientation=2,
     withWindow=false,
     withDoor=false,
-    T0=TWalls_start)
+    T0=TWalls_start,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
                     annotation (Placement(transformation(
         extent={{-2.50001,-15.5},{2.5,15.5}},
         rotation=90,
@@ -133,11 +135,11 @@ model RoomBuilding1 "Building1"
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor(R=1/
         35000) annotation (Placement(transformation(extent={{34,-4},{48,10}})));
 equation
-  connect(WindSpeedPort, wallWest.WindSpeedPort) annotation (Line(points={{-112,18},
-          {-92,18},{-92,32},{-88,32},{-88,32.5333},{-62.35,32.5333}},     color=
+  connect(WindSpeedPort, wallWest.WindSpeedPort) annotation (Line(points={{-112,18},{-92,18},{-92,32},{-88,32},{-88,32.5333},{-62.35,32.5333}},
+                                                                          color=
          {0,0,127}));
-  connect(WindSpeedPort, roof.WindSpeedPort) annotation (Line(points={{-112,18},
-          {-92,18},{-92,86},{-15.1333,86},{-15.1333,76.125}}, color={0,0,127}));
+  connect(WindSpeedPort, roof.WindSpeedPort) annotation (Line(points={{-112,18},{-92,18},{-92,86},{-15.1333,86},{-15.1333,76.125}},
+                                                              color={0,0,127}));
   connect(WindSpeedPort, wallNorth.WindSpeedPort) annotation (Line(points={{-112,
           18},{-92,18},{-92,86},{54.6,86},{54.6,67.3}}, color={0,0,127}));
   connect(WindSpeedPort, wallSouth.WindSpeedPort) annotation (Line(points={{-112,
@@ -151,8 +153,7 @@ equation
           {-92,100},{-92,-82},{24,-82},{24,-65.3}}, color={191,0,0}));
   connect(thermOutside, wallWest.port_outside) annotation (Line(points={{-100,100},
           {-92,100},{-92,1},{-62.35,1}}, color={191,0,0}));
-  connect(floor.port_outside, Therm_ground) annotation (Line(points={{-32.5,
-          -75.125},{-32.5,-86.5625},{-32,-86.5625},{-32,-98}},
+  connect(floor.port_outside, Therm_ground) annotation (Line(points={{-32.5,-75.125},{-32.5,-86.5625},{-32,-86.5625},{-32,-98}},
                                                       color={191,0,0}));
   connect(thermOutside, roof.port_outside) annotation (Line(points={{-100,100},
           {-92,100},{-92,86},{-26.5,86},{-26.5,76.125}}, color={191,0,0}));
@@ -194,8 +195,8 @@ equation
           -62},{-32.5,-70}}, color={191,0,0}));
   connect(Ventilation.port_b, airload.port) annotation (Line(points={{-18,10},{
           -16,10},{-16,-18},{10,-18}}, color={191,0,0}));
-  connect(AirExchangePortRoom, Ventilation.InPort1) annotation (Line(points={{-112,
-          -50},{-70,-50},{-70,7},{-30.6,7}}, color={0,0,127}));
+  connect(AirExchangePortRoom, Ventilation.ventRate) annotation (Line(points={{-112,-50},{-70,-50},{-70,6.16},{-29.4,6.16}},
+                                             color={0,0,127}));
   connect(thermRoomNextDoor, Ventilation.port_a) annotation (Line(points={{-104,
           -96},{-70,-96},{-70,10},{-30,10}}, color={191,0,0}));
   connect(thermalResistor.port_a, heatCapacitor.port)
