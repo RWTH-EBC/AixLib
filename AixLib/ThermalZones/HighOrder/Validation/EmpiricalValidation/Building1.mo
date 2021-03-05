@@ -8,8 +8,8 @@ model Building1
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather(
     Latitude=52.37,
     Longitude=8.44,
-    fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/TRY2010_03_Building1.txt"),
+    tableName="weather",
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TRY2010_03_Building1.txt"),
     Wind_dir=false,
     Wind_speed=true,
     Air_temp=true)
@@ -21,8 +21,7 @@ model Building1
   Modelica.Blocks.Sources.CombiTimeTable BuildingSpecifications(
     tableOnFile=true,
     tableName="Table",
-    fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/Building1.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/Building1.mat"),
     columns={2,3,4,5},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Air exchange due to windows in the roof area, {2} Temp in the Building (Top), {3} Temp in the Building (Center), {4} Temp in the Building (Bottom), {5} Air exchange due to windows in the roof"
