@@ -191,35 +191,35 @@ equation
     Diagram(coordinateSystem(extent={{-100,-100},{160,100}})),
     Icon(coordinateSystem(extent={{-100,-100},{160,100}})),
     Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Building 1 is part of the empirical validation:
-<ul><li>length = 72 m </li>
-<li>heigth = 72 m </li>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Building 1 is part of an empirical validation according to an internal monitoring study with permission to use data anonymized. <br>
+Specifications are:</p>
+<ul>
+<li>length = 72 m </li>
+<li>heigth = 22 m </li>
 <li>width = 22 m </li>
-<li>no windows, except for 60m² window area on the ceiling (smoke ventilation windows)</li></ul><br>
-
-Air exchange rates: 
-
-<ul><li>n50 = 0,1 1/h, due to air leakage</li>
+<li>no windows, except for 60m&sup2; window area on the ceiling (smoke ventilation windows)</li>
+</ul>
+<p><br>Air exchange rates: </p>
+<ul>
+<li>n50 = 0.1 1/h, due to air leakage</li>
 <li>n = 1 1/h, due to air exchange caused by open ventilation windows (opening schedule in Building specifications{5})</li>
-<li>n = 0.25 1/h, due to air exchange caused by open door to room next to building (schedule 7-16 o'clock) 1</li></ul><br>
-
-Building specifications give information about: 
-<ul><li>{2} measured room temperatur in the building: temperature sensor at the top</li> 
+<li>n = 0.25 1/h, due to air exchange caused by open door to room next to building 1 (schedule 7 am - 4 pm)</li>
+</ul>
+<p><br>Building specifications give information about: </p>
+<ul>
+<li>{2} measured room temperatur in the building: temperature sensor at the top </li>
 <li>{3} measured room temperatur in the building: temperature sensor at the center </li>
 <li>{4} measured room temperatur in the building: temperature sensor at the bottom </li>
-<li>{5} air exchange due to windows (smoke ventilation windows) in the ceiling </li></ul><br>
-
-Assumptions:
-<ul><li>30% of the volume is constantly filled with goods and shelves</li> 
-<li>Internal capacity: 2100000 kg, specific heat capacity: 2000 J/kg</li></ul>
-
- </p>
-</html>
-
- 
-
-", revisions="<html>
+<li>{5} air exchange due to windows (smoke ventilation windows) in the ceiling </li>
+</ul>
+<p><br>Assumptions: </p>
+<ul>
+<li>30 &percnt; of the volume is constantly filled with goods and shelves </li>
+<li>Internal capacity: 2100000 kg, specific heat capacity: 2000 J/kg </li>
+</ul>
+</html>",
+   revisions="<html>
 <li>October 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     First Implementation.
   </li>
