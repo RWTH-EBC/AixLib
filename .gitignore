@@ -30,6 +30,7 @@ dist
 #####################
 *.bak-mo
 *.mat
+!AixLib/Resources/**/*.mat
 *.mof
 buildlog.txt
 diagnostics.txt
