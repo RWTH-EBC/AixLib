@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.ThermalZones;
+within AixLib.DataBase.ThermalZones;
 record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
