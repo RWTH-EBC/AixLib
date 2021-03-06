@@ -27,9 +27,10 @@ equation
   connect(const1.y, indoorSwimmingPool.TSoil)
     annotation (Line(points={{41,66},{40,66},{40,15.4},{36.17,15.4}}, color={0,0,127}));
   connect(sine.y, indoorSwimmingPool.X_w)
-    annotation (Line(points={{-9,86},{8,86},{8,29.4},{25.63,29.4}}, color={0,0,127}));
+    annotation (Line(points={{-9,86},{26,86},{26,29.4},{25.63,29.4}},
+                                                                    color={0,0,127}));
   connect(const2.y, indoorSwimmingPool.TAir)
-    annotation (Line(points={{3,54},{-66,54},{-66,29.4},{16.33,29.4}}, color={0,0,127}));
+    annotation (Line(points={{3,54},{18,54},{18,29.4},{16.33,29.4}},   color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(
           preserveAspectRatio=false)),
     experiment(StopTime=200));

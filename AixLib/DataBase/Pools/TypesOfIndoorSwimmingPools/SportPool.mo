@@ -21,6 +21,5 @@ record SportPool "Pool which is mainly used for sport swimmers"
   RPoolRem=0.000380773816236,
   CPool={492976267.489});
 
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+
 end SportPool;

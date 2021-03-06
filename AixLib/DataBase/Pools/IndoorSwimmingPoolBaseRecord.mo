@@ -41,6 +41,5 @@ record IndoorSwimmingPoolBaseRecord
     "Vector of heat capacities, from port_a to port_b"
     annotation (Dialog(group="Thermal mass"));
 
- annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+
 end IndoorSwimmingPoolBaseRecord;

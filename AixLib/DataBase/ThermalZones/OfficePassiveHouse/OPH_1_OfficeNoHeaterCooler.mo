@@ -25,7 +25,7 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     nInt=1,
     RInt={1.13047235829e-05},
     CInt={1402628013.98},
-    AFloor=0,
+    AFloor=10,
     hConFloor=0,
     nFloor=1,
     RFloor={0.001},
@@ -63,7 +63,7 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     ratioConvectiveHeatMachines=0.6,
     lightingPowerSpecific=12.5,
     ratioConvectiveHeatLighting=0.6,
-    useConstantACHrate=false,
+    useConstantACHrate=true,
     baseACH=0.2,
     maxUserACH=1,
     maxOverheatingACH={3.0,2.0},
@@ -83,10 +83,16 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     lCool=-1,
     KRCool=1000,
     TNCool=1,
-    CoolerOn=false,
+    CoolerOn=true,
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
-    withIdealThresholds=false);
+    withIdealThresholds=false,
+    swimmingPools=true,
+    numPools=2,
+    poolParam= {AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(),AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.ChildrensPool()});
+
+
+
   annotation (Documentation(revisions="<html><ul>
   <li>November 27, 2019, by David Jansen:<br/>
     Integrate threshold for heater and cooler.

@@ -63,6 +63,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     annotation (Placement(transformation(extent={{94,30},{114,50}}),
                             iconTransformation(extent={{92,24},{112,44}})));
   RC.FourElements ROM(
+    final nu = if zoneParam.swimmingPools then zoneParam.numPools+1 else zoneParam.numPools,
     redeclare final package Medium = Medium,
     final use_moisture_balance=use_moisture_balance,
     final use_C_flow=use_C_flow,
