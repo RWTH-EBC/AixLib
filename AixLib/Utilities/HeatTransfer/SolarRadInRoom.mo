@@ -10,8 +10,8 @@ model SolarRadInRoom
   parameter Integer nWalls=4 "Number of walls in room - For static calculation, the only option is nWalls=4! The order is: East, South, West, North" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
   parameter Integer nFloors=1 "Number of floors in room" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
   parameter Integer nCei=1 "Number of ceilings in room" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
-  parameter Modelica.SIunits.Length floor_length=0 "Total length of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor" annotation(Dialog(group="Dynamic Calculation", enable=nFloors > 1 and use_dynamicMethod));
-  parameter Modelica.SIunits.Height floor_height=0 "Total height of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor"  annotation(Dialog(group="Dynamic Calculation", enable=nFloors > 1 and use_dynamicMethod));
+  parameter Modelica.SIunits.Length floor_length=0 "Total length of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor" annotation(Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and use_dynamicMethod));
+  parameter Modelica.SIunits.Length floor_width=0 "Total width of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor"   annotation(Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and use_dynamicMethod));
 
   replaceable parameter
     ThermalZones.HighOrder.Components.Types.PartialCoeffTable staticCoeffTable
@@ -76,7 +76,7 @@ protected
   end sight_fac_orthogonal;
 
   Modelica.SIunits.Length floor_length_int = if nFloors>1 then floor_length else floors[1].length "Total length of floors";
-  Modelica.SIunits.Height floor_height_int = if nFloors>1 then floor_height else floors[1].height "Total height of floors";
+  Modelica.SIunits.Height floor_height_int=if nFloors > 1 then floor_width else floors[1].height "Total height of floors";
 
   // Floors and windows have a special rule. As ASHRAE assumes one window and one floor,
   // possible different material properties have to be averaged in order for the approach to work.
