@@ -212,12 +212,12 @@ public
   Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
     final method=shortWaveRad_method,
     nWin=2, nWalls=4,
-    redeclare Components.Types.CoeffTableEastWestWindow staticCoeffTable(final abs=abs))
+    final staticCoeffTable=partialCoeffTable)
     annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
 
 equation
   connect(floor.port_outside, Therm_ground)
-    annotation (Line(points={{-42,-70.1003},{-42,-100},{-100,-100}},
+    annotation (Line(points={{-42,-70.1003},{-42,-96},{-32,-96}},
                                                         color={191,0,0}));
   connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-7.66667,-73.25},{-8,-73.25},{-8,-82},{-94,-82},{-94,28},{-112,28}},
                                                               color={0,0,127}));
@@ -299,30 +299,26 @@ equation
   connect(thermStar_Demux.portConvRadComb, ceiling.thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{44,-56},{44,50},{-42,50},{-42,78}},
                      color={191,0,0}));
-  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-29,48},
-          {-24,48},{-24,58},{-54,58},{-54,-56},{-40,-56},{-40,-60},{-39.9,-60},
-          {-39.9,-62}},
+  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-29,48},{-24,48},{-24,58},{-54,58},{-54,-56},{-40,-56},{-40,-60},{-49.9,-60},{-49.9,-66}},
                    color={0,0,0}));
   connect(solarRadInRoom.ceilings[1], ceiling.shortRadWall) annotation (Line(
-        points={{-29,44},{-24,44},{-24,60},{-24.1,60},{-24.1,76}},       color=
+        points={{-29,44},{-24,44},{-24,60},{-34.1,60},{-34.1,78}},       color=
           {0,0,0}));
   connect(solarRadInRoom.win_in[1], outerWall_West.shortRadWin) annotation (
-      Line(points={{-51,45.5},{-52,45.5},{-52,58},{14,58},{14,74.2},{14.2,74.2}},
+      Line(points={{-51,45.5},{-52,45.5},{-52,58},{14,58},{14,-0.275},{-78.25,-0.275}},
                                                         color={0,0,0}));
   connect(solarRadInRoom.win_in[2], outerWall_East.shortRadWin) annotation (
-      Line(points={{-51,46.5},{-52,46.5},{-52,58},{44,58},{44,-54},{38,-54},{38,-64.2},{37.8,-64.2}},
+      Line(points={{-51,46.5},{-52,46.5},{-52,58},{44,58},{44,-54},{38,-54},{38,26.275},{64.25,26.275}},
                                                                           color=
          {0,0,0}));
-  connect(outerWall_East.shortRadWall, solarRadInRoom.walls[1]) annotation (Line(points={{10.2,
-          -64},{12,-64},{12,-54},{44,-54},{44,51.25},{-29,51.25}},
+  connect(outerWall_East.shortRadWall, solarRadInRoom.walls[1]) annotation (Line(points={{64,-4.775},{12,-4.775},{12,-54},{44,-54},{44,51.25},{-29,51.25}},
                                             color={0,0,0}));
-  connect(outerWall_South.shortRadWall, solarRadInRoom.walls[2]) annotation (Line(points={{-62,
-          30.3333},{-58,30.3333},{-58,30},{-54,30},{-54,58},{-12,58},{-12,51.75},
-          {-29,51.75}},                                                 color={0,0,0}));
+  connect(outerWall_South.shortRadWall, solarRadInRoom.walls[2]) annotation (Line(points={{-5.04167,-63},{-58,-63},{-58,30},{-54,30},{-54,58},{-12,58},{-12,51.75},{-29,51.75}},
+                                                                        color={0,0,0}));
   connect(outerWall_West.shortRadWall, solarRadInRoom.walls[3])
-    annotation (Line(points={{41.8,74},{42,74},{42,52.25},{-29,52.25}}, color={0,0,0}));
-  connect(outerWall_North.shortRadWall, solarRadInRoom.walls[4]) annotation (Line(points={{60,
-          30.3333},{54,30.3333},{54,30},{44,30},{44,52.75},{-29,52.75}},
+    annotation (Line(points={{-78,30.775},{42,30.775},{42,52.25},{-29,52.25}},
+                                                                        color={0,0,0}));
+  connect(outerWall_North.shortRadWall, solarRadInRoom.walls[4]) annotation (Line(points={{-1.75,64},{54,64},{54,30},{44,30},{44,52.75},{-29,52.75}},
                                                    color={0,0,0}));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={

@@ -14,6 +14,7 @@ model SolarRadInRoom
 
   replaceable parameter
     ThermalZones.HighOrder.Components.Types.PartialCoeffTable staticCoeffTable
+    constrainedby Components.Types.PartialCoeffTable
     "Record holding the values to reproduce the tables"
     annotation (Dialog(group="Static Calculation", enable=not method), choicesAllMatching=true,
     Placement(transformation(extent={{-10,78},{10,98}})));
