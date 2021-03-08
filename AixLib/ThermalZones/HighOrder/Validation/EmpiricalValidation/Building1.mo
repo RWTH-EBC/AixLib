@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
+within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model Building1
   import ModelicaServices;
     extends Modelica.Icons.Example;

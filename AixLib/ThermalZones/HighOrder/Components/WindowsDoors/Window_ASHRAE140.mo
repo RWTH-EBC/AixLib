@@ -198,10 +198,10 @@ equation
 </html>",
  revisions="<html><ul>
   <li>
-    <i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/>
-    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: 
+    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
     Add short wave connector to pass window parameters.
-  </li> 
+  </li>
   <li>
     <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
