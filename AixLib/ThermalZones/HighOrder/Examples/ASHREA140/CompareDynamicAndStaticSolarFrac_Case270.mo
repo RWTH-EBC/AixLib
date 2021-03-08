@@ -25,6 +25,8 @@ model CompareDynamicAndStaticSolarFrac_Case270 "Based on Case270 from validation
     "ambient temperature"
     annotation (Placement(transformation(extent={{-2,205},{9,216}})));
   Rooms.ASHRAE140.SouthFacingWindows Room_dyn(
+    energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare model WindowModel = Components.WindowsDoors.Window_ASHRAE140,
     redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140,
     solar_absorptance_OW=0.1,
