@@ -218,7 +218,7 @@ model EastWestFacingWindows "windows facing south and west"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,-110})));
-  Modelica.Blocks.Math.MultiSum multiSum annotation (Placement(transformation(
+  Modelica.Blocks.Math.MultiSum multiSum(nu=2) annotation (Placement(transformation(
         extent={{2,-2},{-2,2}},
         rotation=90,
         origin={48,-96})));
@@ -319,8 +319,10 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(shortRadSurf[1].Q_flow_ShoRadFroSur, multiSum.u[1]) annotation (Line(points={{60.01,-93.995},{54,-93.995},{54,-92},{48,-92},{48,-94}}, color={0,0,0}));
-  connect(shortRadSurf[2].Q_flow_ShoRadFroSur, multiSum.u[2]) annotation (Line(points={{60.01,-93.985},{54,-93.985},{54,-92},{48,-92},{48,-94}}, color={0,0,0}));
+  connect(shortRadSurf[1].Q_flow_ShoRadFroSur, multiSum.u[1]) annotation (Line(points={{60.01,-93.995},{54,-93.995},{54,-92},{47.3,-92},{47.3,-94}},
+                                                                                                                                                 color={0,0,0}));
+  connect(shortRadSurf[2].Q_flow_ShoRadFroSur, multiSum.u[2]) annotation (Line(points={{60.01,-93.985},{54,-93.985},{54,-92},{48.7,-92},{48.7,-94}},
+                                                                                                                                                 color={0,0,0}));
   connect(multiSum.y, transShoWaveRadWin) annotation (Line(points={{48,-98.34},{48,-100},{54,-100},{54,-98},{60,-98},{60,-110}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={
