@@ -7,10 +7,13 @@ model InsideWall
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside3(T = 283.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-84, 22})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall wall_simple_new(
     outside=false,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half wallPar,
     wall_length=5,
     wall_height=2,
     withWindow=false,
+    redeclare model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
+    redeclare model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     withDoor=true,
     T0=289.15,
     withSunblind=false,
@@ -19,10 +22,13 @@ model InsideWall
     TOutAirLimit=273.15 + 17) annotation (Placement(transformation(extent={{28,-4},{40,68}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall wall_simple1_new(
     outside=false,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half wallPar,
     wall_length=5,
     wall_height=2,
     withWindow=false,
+    redeclare model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
+    redeclare model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     withDoor=true,
     T0=287.15,
     withSunblind=false,
