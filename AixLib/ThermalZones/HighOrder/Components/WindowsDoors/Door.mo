@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Door "Simple door"
   parameter Modelica.SIunits.Area door_area = 2 "Total door area" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer U = 1.8
