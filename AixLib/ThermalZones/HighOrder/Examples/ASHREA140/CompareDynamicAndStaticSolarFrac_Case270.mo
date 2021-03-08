@@ -97,7 +97,10 @@ equation
     annotation (Line(points={{-30.35,139.5},{-26.175,139.5},{-26.175,140},{-23,140}}, color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room_dyn.SolarRadiationPort) annotation (Line(points={{-75.4,60.6},{-54,60.6},{-54,222},{22,222},{22,212},{56.9,212},{56.9,213.8}},
                                                                            color={255,128,0}));
-  annotation (Diagram(coordinateSystem(extent={{-160,-100},{120,240}}), graphics={
+  annotation (experiment(StopTime=86400, Tolerance=1e-06),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/ASHREA140/CompareDynamicAndStaticSolarFrac_Case270.mos"
+        "Simulate and plot"),
+    Diagram(coordinateSystem(extent={{-160,-100},{120,240}}), graphics={
         Rectangle(
           extent={{-150,238},{114,94}},
           lineColor={0,0,255},
@@ -110,9 +113,5 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Dynamic calculation 
 of short wave radiation 
-in room model")}),                             Icon(coordinateSystem(extent={{-160,-100},{120,240}})),
-experiment(StopTime=86400, Interval=3600),
-    __Dymola_experimentSetupOutput(events=false),
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/ASHREA140/CompareDynamicAndStaticSolarFrac_Case270.mos"
-        "Simulate and plot"));
+in room model")}),                             Icon(coordinateSystem(extent={{-160,-100},{120,240}})));
 end CompareDynamicAndStaticSolarFrac_Case270;
