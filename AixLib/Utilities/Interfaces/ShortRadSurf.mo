@@ -16,10 +16,9 @@ expandable connector ShortRadSurf
   Real g "Transmissivity of inner surface"   annotation(HideResult=false);
   Real solar_absorptance "Absorptivity of inner surface, equal to eps or 1-rho-tau"
                                                                   annotation(HideResult=false);
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={                                                                       Polygon(points = {{-13, 86}, {13, 86}, {13, 12}, {77, 34}, {85, 6}, {22, -14}, {62, -72}, {37, -88}, {0, -28}, {-35, -88}, {-60, -72}, {-22, -14}, {-85, 6}, {-77, 34}, {-13, 12}, {-13, 86}}, lineColor={0,0,0},
+  annotation (Icon(                                             graphics={                                                                       Polygon(points = {{-13, 86}, {13, 86}, {13, 12}, {77, 34}, {85, 6}, {22, -14}, {62, -72}, {37, -88}, {0, -28}, {-35, -88}, {-60, -72}, {-22, -14}, {-85, 6}, {-77, 34}, {-13, 12}, {-13, 86}}, lineColor={0,0,0},
                                                                                                                                                                                                         fillColor={255,255,170},
-            fillPattern=FillPattern.Solid)}),                    Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+            fillPattern=FillPattern.Solid)}),
     Documentation(info="<html><p>
   This connector holds variables used to calculate the short wave
   radiation in a room. As you may notice, some of the variables are
