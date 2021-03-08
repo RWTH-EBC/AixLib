@@ -12,28 +12,17 @@ model Case650FF
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX50();
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition AERProfile = AixLib.DataBase.Profiles.ASHRAE140.Ventilation_caseX50();
 
+  Modelica.Blocks.Sources.RealExpression HeatingPower(y=0)
+    annotation (Placement(transformation(extent={{43,58},{63,78}})));
+  Modelica.Blocks.Sources.RealExpression CoolingPower(y=0)
+    annotation (Placement(transformation(extent={{43,42},{63,62}})));
   Modelica.Blocks.Sources.CombiTimeTable AirExchangeRate(
     columns={2},
     tableOnFile=false,
     table=AERProfile.Profile,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-39,-54},{-26,-41}})));
-  parameter Real internalGains=200 "Constant Internal Gains";
-  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
-    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
-  parameter Real solar_absorptance_OW=0.6 "Solar absoptance outer walls ";
-  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
-      AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
-    "Types of walls (contains multiple records)";
-  replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
-    constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
-    annotation (choicesAllMatching=true);
-  parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
 
-  Modelica.Blocks.Sources.RealExpression HeatingPower(y=0)
-    annotation (Placement(transformation(extent={{43,58},{63,78}})));
-  Modelica.Blocks.Sources.RealExpression CoolingPower(y=0)
-    annotation (Placement(transformation(extent={{43,42},{63,62}})));
 equation
 
   connect(Room.AirExchangePort, AirExchangeRate.y[1]) annotation (Line(points={

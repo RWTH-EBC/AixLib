@@ -23,9 +23,10 @@ model Case650
     recOrSep=false)
     annotation (Placement(transformation(extent={{-16,-65},{4,-45}})));
 
+  Modelica.Blocks.Sources.RealExpression HeatingPower(y=0)
+    annotation (Placement(transformation(extent={{43,58},{63,78}})));
   Modelica.Blocks.Sources.RealExpression CoolingPower(y=idealHeaterCooler.coolingPower)
     annotation (Placement(transformation(extent={{43,42},{63,62}})));
-
   Modelica.Blocks.Sources.CombiTimeTable AirExchangeRate(
     columns={2},
     tableOnFile=false,
@@ -38,20 +39,7 @@ model Case650
     table=SetTempProfile.Profile,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-30,-82},{-17,-69}})));
-  parameter Real internalGains=200 "Constant Internal Gains";
-  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
-    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
-  parameter Real solar_absorptance_OW=0.6 "Solar absoptance outer walls ";
-  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
-      AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
-    "Types of walls (contains multiple records)";
-  replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
-    constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
-    annotation (choicesAllMatching=true);
-  parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
 
-  Modelica.Blocks.Sources.RealExpression HeatingPower(y=0)
-    annotation (Placement(transformation(extent={{43,58},{63,78}})));
 equation
 
 
