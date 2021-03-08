@@ -263,45 +263,19 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constFixShoRadPar[1].y, shortRadWall.g) annotation (Line(points={{
-          90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+          90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}));
   connect(constFixShoRadPar[2].y, shortRadWall.solar_absorptance) annotation (
       Line(points={{90.5,93},{104,93},{104,88},{105.065,88},{105.065,79.065}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+        color={0,0,127}));
   connect(constFixShoRadPar[3].y, shortRadWall.solar_reflectance) annotation (
       Line(points={{90.5,93},{104,93},{104,86},{105.065,86},{105.065,79.065}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+        color={0,0,127}));
   connect(constFixShoRadPar[4].y, shortRadWall.length) annotation (Line(points=
-          {{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+          {{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}));
   connect(constFixShoRadPar[5].y, shortRadWall.height) annotation (Line(points=
-          {{90.5,93},{104,93},{104,79.065},{105.065,79.065}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+          {{90.5,93},{104,93},{104,79.065},{105.065,79.065}}, color={0,0,127}));
   connect(constFixShoRadPar[6].y, shortRadWall.Q_flow_ShoRadFroSur) annotation (
-     Line(points={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+     Line(points={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(
           extent={{-20,120},{20,-120}},
           fillColor={215,215,215},
@@ -313,8 +287,8 @@ equation
               -53},{-1,-53}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = outside and withWindow), Line(points={{2,
               -107},{-1,-107}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = outside and withWindow), Ellipse(extent={{
               -20,86},{40,26}},                                                                                                                                                                                                        lineColor=
-              {0,0,0},                                                                                                                                                                                                        startAngle
-            =360,                                                                                                                                                                                                        endAngle=
+              {0,0,0},                                                                                                                                                                                                        startAngle=
+             360,                                                                                                                                                                                                        endAngle=
               450,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),                                                                                                                                                                                                        Rectangle(extent={{
