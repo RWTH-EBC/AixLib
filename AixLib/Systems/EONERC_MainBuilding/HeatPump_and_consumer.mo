@@ -112,7 +112,7 @@ model HeatPump_and_consumer "Energy system of E.ON ERC main building"
         origin={110,70})));
   HydraulicModules.SimpleConsumer consumerCold2(
     kA=1000,
-    V=0.1,
+    V=2,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
     functionality="Q_flow_input",
@@ -120,11 +120,6 @@ model HeatPump_and_consumer "Energy system of E.ON ERC main building"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={110,92})));
-  Modelica.Blocks.Sources.Sine sine3(
-    amplitude=1000,
-    freqHz=1/(3600*24),
-    offset=9000)
-    annotation (Placement(transformation(extent={{86,92},{96,102}})));
   BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{-56,
             104},{-26,134}}), iconTransformation(extent={{-30,110},{-10,130}})));
   Modelica.Blocks.Nonlinear.Limiter limiterCCAHot(uMax=0, uMin=-100000)
@@ -177,6 +172,8 @@ model HeatPump_and_consumer "Energy system of E.ON ERC main building"
   Modelica.Blocks.Interfaces.RealInput Tair annotation (Placement(
         transformation(extent={{-212,-12},{-188,12}}), iconTransformation(
           extent={{-212,-12},{-188,12}})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_Servers(y=20000)
+    annotation (Placement(transformation(extent={{86,94},{102,110}})));
 equation
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
       Line(points={{-28,-114},{-2,-114},{-2,-97.3333},{-3,-97.3333}}, color={
@@ -231,8 +228,6 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sine3.y, consumerCold2.Q_flow) annotation (Line(points={{96.5,97},{
-          101.25,97},{101.25,98},{106.4,98}}, color={0,0,127}));
   connect(add.y, consumerLTC.Q_flow)
     annotation (Line(points={{-107.6,96},{-93.6,96}}, color={0,0,127}));
   connect(Q_flow_CCA_hot.y, limiterCCAHot.u)
@@ -274,6 +269,8 @@ equation
           60},{6,28},{105.067,28}}, color={0,127,255}));
   connect(prescribedTemperature.T, Tair) annotation (Line(points={{-41.2,-114},
           {-120,-114},{-120,0},{-200,0}}, color={0,0,127}));
+  connect(Q_flow_Servers.y, consumerCold2.Q_flow) annotation (Line(points={{
+          102.8,102},{106,102},{106,98},{106.4,98}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
           extent={{-200,120},{120,-120}},

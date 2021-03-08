@@ -16,7 +16,7 @@ model EONERC_HP_and_consumer "Energy system of main building with controller"
   BaseClasses.MainBus bus
     annotation (Placement(transformation(extent={{-4,22},{16,42}})));
   HeatPump_and_consumer heatPump_and_consumer
-    annotation (Placement(transformation(extent={{-60,-102},{58,-14}})));
+    annotation (Placement(transformation(extent={{-62,-102},{56,-14}})));
   BaseClasses.HeatpumpAndConsumerControllerBus heatpumpAndConsumerControllerBus
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
 equation
@@ -56,7 +56,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(heatPump_and_consumer.mainBus, bus) annotation (Line(
-      points={{6.375,-14},{6.375,8},{6,8},{6,32}},
+      points={{4.375,-14},{4.375,8},{6,8},{6,32}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -72,32 +72,8 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(heatPumpSystemVolumeFlowControl1.vSetHS,
-    heatpumpAndConsumerControllerBus.mfSetHpCon) annotation (Line(points={{
-          -51.89,129.063},{-51.89,128.531},{-99.95,128.531},{-99.95,0.05}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(heatPumpSystemVolumeFlowControl1.vSetCS,
-    heatpumpAndConsumerControllerBus.mfSetHpEva) annotation (Line(points={{
-          -51.68,119.688},{-51.68,119.844},{-99.95,119.844},{-99.95,0.05}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(heatPumpSystemVolumeFlowControl1.vSetCold,
-    heatpumpAndConsumerControllerBus.mfSetCsIn) annotation (Line(points={{
-          -51.89,110.313},{-51.89,110.156},{-99.95,110.156},{-99.95,0.05}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(heatPumpSystemVolumeFlowControl1.vSetRecool,
-    heatpumpAndConsumerControllerBus.mfSetReCool) annotation (Line(points={{
-          -51.89,100.938},{-51.89,100.469},{-99.95,100.469},{-99.95,0.05}},
+    heatpumpAndConsumerControllerBus.mfSetHpCon) annotation (Line(points={{-51.89,
+          129.063},{-51.89,128.531},{-99.95,128.531},{-99.95,0.05}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -133,11 +109,35 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(heatPump_and_consumer.Tair, heatpumpAndConsumerControllerBus.tAmb)
-    annotation (Line(points={{-60,-58},{-99.95,-58},{-99.95,0.05}}, color={0,0,
+    annotation (Line(points={{-62,-58},{-99.95,-58},{-99.95,0.05}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatPumpSystemVolumeFlowControl1.vSetCS,
+    heatpumpAndConsumerControllerBus.mfSetCsIn) annotation (Line(points={{-51.68,
+          119.688},{-51.68,118.844},{-99.95,118.844},{-99.95,0.05}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatPumpSystemVolumeFlowControl1.vSetCold,
+    heatpumpAndConsumerControllerBus.mfSetHpEva) annotation (Line(points={{-51.89,
+          110.313},{-51.89,111.156},{-99.95,111.156},{-99.95,0.05}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatPumpSystemVolumeFlowControl1.vSetRecool,
+    heatpumpAndConsumerControllerBus.mfSetReCool) annotation (Line(points={{-51.89,
+          100.938},{-51.89,100.469},{-99.95,100.469},{-99.95,0.05}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   annotation (experiment(
       StopTime=21000,

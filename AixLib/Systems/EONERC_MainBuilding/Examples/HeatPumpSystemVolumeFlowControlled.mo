@@ -76,7 +76,7 @@ model HeatPumpSystemVolumeFlowControlled "Validation of HeatpumpSystem"
     annotation (Placement(transformation(extent={{-58,48},{-44,62}})));
   Modelica.Blocks.Sources.Constant const7(k=20)
     annotation (Placement(transformation(extent={{74,50},{88,64}})));
-  Modelica.Blocks.Sources.Constant const8(k=10)
+  Modelica.Blocks.Sources.Constant const8(k=5)
     annotation (Placement(transformation(extent={{-106,66},{-92,80}})));
 equation
   connect(boundary5.ports[1], heatpumpSystem.port_a2) annotation (Line(points={
