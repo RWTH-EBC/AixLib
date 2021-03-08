@@ -45,7 +45,9 @@ model Wall
           calcMethodOut == 2 and outside),                                                                                                                                                                                                        choicesAllMatching = true);
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1
         "vertical wall",                                                                                                    choice = 2 "floor", choice = 3 "ceiling", radioButtons = true));
-  parameter Integer calcMethodIn=1 "Calculation method of convective heat transfer coefficient at inside surface" annotation (Dialog(
+  parameter Integer calcMethodIn=1
+    "Calculation method of convective heat transfer coefficient at inside surface"
+    annotation (Dialog(
       tab="Surface Parameters",
       group="Inside surface",
       compact=true,
@@ -53,7 +55,9 @@ model Wall
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
       choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
       radioButtons=true));
+
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=2.5
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
                                                                                  annotation(Dialog(tab="Surface Parameters",   group=
@@ -62,14 +66,23 @@ model Wall
   // window parameters
   parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
-  replaceable model Window = WindowsDoors.WindowSimple constrainedby
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
-    "Model for window"
-                     annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
-  Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
-  parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+   constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
+     redeclare final model CorrSolGain=CorrSolarGainWin,
+     final T0=T0,
+     final windowarea=windowarea,
+     final WindowType=WindowType)
+       "Model for window"
+                     annotation (Dialog(tab="Window",  enable=withWindow and outside),   choicesAllMatching=true);
+
+  WindowModel windowModel if withWindow and outside annotation(Placement(transformation(extent={{-15,-48},{11,-22}})));
+
+  replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
+  replaceable model CorrSolarGainWin = WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab = "Window", enable = withWindow and outside));
+
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   parameter Real LimitSolIrr if withWindow and outside and withSunblind
@@ -204,26 +217,24 @@ equation
   // ****standard connections for outside wall with window***********
   //******************************************************************
   if outside and withWindow then
-    connect(windowSimple.radPort, heatStarToComb.portRad) annotation (Line(
+    connect(windowModel.radPort, heatStarToComb.portRad) annotation (Line(
         points={{9.7,-27.2},{48,-27.2},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
-    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6},{59,-6}},       color={191,0,0}));
-    connect(windowSimple.port_outside, port_outside) annotation(Line(points={{-13.7,-36.3},{-16,-36.3},{-16,-54},{-92,-54},{-92,4},{-98,4}},
-                                                                                                                                  color = {191, 0, 0}));
+    connect(windowModel.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6},{59,-6}}, color={191,0,0}));
+    connect(windowModel.port_outside, port_outside) annotation (Line(points={{-13.7,-36.3},{-16,-36.3},{-16,-54},{-92,-54},{-92,4},{-98,4}}, color={191,0,0}));
   end if;
   //******************************************************************
   // **** connections for outside wall with window without sunblind****
   //******************************************************************
   if outside and withWindow and not withSunblind then
-    connect(windowSimple.solarRad_in, SolarRadiationPort) annotation(Line(points={{-13.7,-27.2},{-16,-27.2},{-16,-16},{-80,-16},{-80,89},{-106,89}},
-                                                                                                                                          color = {255, 128, 0}));
+    connect(windowModel.solarRad_in, SolarRadiationPort) annotation (Line(points={{-13.7,-27.2},{-16,-27.2},{-16,-16},{-80,-16},{-80,89},{-106,89}}, color={255,128,0}));
   end if;
   //******************************************************************
   // **** connections for outside wall with window and sunblind****
   //******************************************************************
   if outside and withWindow and withSunblind then
-    connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation(Line(points={{-21.5625,-32.375},{-20,-32.375},{-20,-27.2},{-13.7,-27.2}},  color = {255, 128, 0}));
+    connect(Sunblind.Rad_Out[1], windowModel.solarRad_in) annotation (Line(points={{-21.5625,-32.375},{-20,-32.375},{-20,-27.2},{-13.7,-27.2}}, color={255,128,0}));
     connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-47.4375,-32.375},{-50,-32.375},{-50,-16},{-80,-16},{-80,89},{-106,89}},
                                                                                                                                    color = {255, 128, 0}));
   end if;
@@ -235,7 +246,8 @@ equation
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{35,80},{30,80},{30,48},{16.74,48},{16.74,35.78}}, color={191,0,0}));
 
 
-  connect(WindSpeedPort, windowSimple.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
+  connect(windowModel.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{9.96,-24.6},{84,-24.6},{84,-60},{110,-60}}, color={0,0,127}));
+  connect(WindSpeedPort, windowModel.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
 
 
   connect(shortRadWin, windowSimple.shortRadWin) annotation (Line(points={{104,-59},
@@ -296,38 +308,112 @@ equation
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent = {{-16, 80}, {15, 20}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = outside and withWindow, lineColor = {255, 255, 255}), Line(points = {{-2, 80}, {-2, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 80}, {1, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 77}, {-2, 77}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 23}, {-2, 23}}, color = {0, 0, 0}, visible = outside and withWindow), Ellipse(extent = {{-16, -60}, {44, -120}}, lineColor = {0, 0, 0}, startAngle = 359, endAngle = 450, visible = withDoor), Rectangle(extent = {{-16, -60}, {15, -90}}, visible = withDoor, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{1, 50}, {-2, 50}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{15, 80}, {15, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, 80}, {-16, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, -60}, {-16, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{15, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -90}, {15, -60}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Flexible Model for Inside Walls and Outside Walls. </p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The<b> WallSimple</b> model models </p>
- <ul>
- <li>Conduction and convection for a wall (different on the inside surface depending on the surface orientation: vertical wall, floor or ceiling)</li>
- <li>Outside walls may have a window and/ or a door</li>
- <li>Inside walls may have a door</li>
- </ul>
- <p>This model uses a <a href=\"AixLib.Utilities.Interfaces.HeatStarComb\">HeatStarComb</a> Connector for an easier connection of temperature and radiance inputs.</p>
- <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
- <ul>
- <li>Outside walls are represented as complete walls</li>
- <li>Inside walls are modeled as a half of a wall, you need to connect a corresponding second half with the same values</li>
- <li>Door and window got a constant U-value</li>
- <li>No heat storage in doors or window </li>
- </ul>
- <p>Have a closer look at the used models to get more information about the assumptions. </p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">AixLib.Building.Components.Examples.Walls.InsideWall</a> </p>
- </html>", revisions="<html>
- <ul>
- <li><i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: Add short wave connector to pass wall and window parameters.</li> 
- <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Mainly add wallType, rearrange components.</li>
- <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters on upper model level. This closes ticket <a href=\"https://github.com/RWTH-EBC/AixLib/issues/215\">issue 215</a></li>
- <li><i>August 22, 2014&nbsp;</i> by Ana Constantin:<br/>Corrected implementation of door also for outside walls. This closes ticket <a href=\"https://github.com/RWTH-EBC/AixLib/issues/13\">issue 13</a></li>
- <li><i>May 19, 2014&nbsp;</i> by Ana Constantin:<br/>Formatted documentation appropriately</li>
- <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- <li><i>June 22, 2012&nbsp;</i> by Lukas Mencher:<br/>Outside wall may have a door now, icon adjusted</li>
- <li><i>Mai 24, 2012&nbsp;</i> by Ana Constantin:<br/>Added inside surface orientation</li>
- <li><i>April, 2012&nbsp;</i> by Mark Wesseling:<br/>Implemented.</li>
- </ul>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{1, 50}, {-2, 50}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{15, 80}, {15, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, 80}, {-16, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, -60}, {-16, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{15, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -90}, {15, -60}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Flexible Model for Inside Walls and Outside Walls.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The <b>WallSimple</b> model models
+</p>
+<ul>
+  <li>Conduction and convection for a wall (different on the inside
+  surface depending on the surface orientation: vertical wall, floor or
+  ceiling)
+  </li>
+  <li>Outside walls may have a window and/ or a door
+  </li>
+  <li>Inside walls may have a door
+  </li>
+</ul>
+<p>
+  This model uses a <a href=
+  \"AixLib.Utilities.Interfaces.HeatStarComb\">HeatStarComb</a> Connector
+  for an easier connection of temperature and radiance inputs.
+</p>
+<p>
+  <b><span style=\"color: #008000\">Assumptions</span></b>
+</p>
+<ul>
+  <li>Outside walls are represented as complete walls
+  </li>
+  <li>Inside walls are modeled as a half of a wall, you need to connect
+  a corresponding second half with the same values
+  </li>
+  <li>Door and window got a constant U-value
+  </li>
+  <li>No heat storage in doors or window
+  </li>
+</ul>
+<p>
+  Have a closer look at the used models to get more information about
+  the assumptions.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Building.Components.Examples.Walls.InsideWall\">AixLib.Building.Components.Examples.Walls.InsideWall</a>
+</p>
+<ul>
+<li><i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: Add short wave connector to pass wall and window parameters.</li>
+  <li>
+    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
+    <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: 
+    Add short wave connector to pass wall and window parameters.
+  </li>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/898\">#898</a>:Added
+    HeatPort to connect absSolarRadWin properly,<br/>
+    <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/882\">#882</a>:Rearranged
+    components to only use one wall model.
+  </li>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
+    Mainly add wallType, rearrange components.
+  </li>
+  <li>
+    <i>October 12, 2016&#160;</i> by Tobias Blacha:<br/>
+    Algorithm for HeatConv_inside is now selectable via parameters on
+    upper model level. This closes ticket <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/215\">issue 215</a>
+  </li>
+  <li>
+    <i>August 22, 2014&#160;</i> by Ana Constantin:<br/>
+    Corrected implementation of door also for outside walls. This
+    closes ticket <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/13\">issue 13</a>
+  </li>
+  <li>
+    <i>May 19, 2014&#160;</i> by Ana Constantin:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>June 22, 2012&#160;</i> by Lukas Mencher:<br/>
+    Outside wall may have a door now, icon adjusted
+  </li>
+  <li>
+    <i>Mai 24, 2012&#160;</i> by Ana Constantin:<br/>
+    Added inside surface orientation
+  </li>
+  <li>
+    <i>April, 2012&#160;</i> by Mark Wesseling:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end Wall;

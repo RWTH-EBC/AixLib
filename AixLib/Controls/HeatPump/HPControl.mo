@@ -1,10 +1,10 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
   replaceable model TSetToNSet =
       AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
-    final use_secHeaGen=use_secHeaGen);
+    final use_secHeaGen=use_secHeaGen) annotation(choicesAllMatching=true);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
 //Heating Curve
@@ -200,16 +200,31 @@ equation
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Model of a heat pump controller, setting a compressor signal and heat pump mode based on a given input temperarute. A heating curve is used to determine the supply temperature. This TSet is later converted to a signal nSet based on the acutal temperature in the system. Futhermore, a legionella protection for DHW-Simulation is implemented.</p>
-<p>Using the control bus, more complex control strategies can easily be adapted.</p>
-<p>Looking at the <a href=\"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a>, the task of the control block is also to control the pumps or fans and second heat generator if necessary.</p>
+<p>
+  Model of a heat pump controller, setting a compressor signal and heat
+  pump mode based on a given input temperarute. A heating curve is used
+  to determine the supply temperature. This TSet is later converted to
+  a signal nSet based on the acutal temperature in the system.
+  Futhermore, a legionella protection for DHW-Simulation is
+  implemented.
+</p>
+<p>
+  Using the control bus, more complex control strategies can easily be
+  adapted.
+</p>
+<p>
+  Looking at the <a href=
+  \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a>,
+  the task of the control block is also to control the pumps or fans
+  and second heat generator if necessary.
+</p>
 </html>"));
 end HPControl;

@@ -300,9 +300,8 @@ dT_R=Tout - Tair;
   </li>
 </ul>
 </html>
-", info=
-    "<html><h4>
-  <font color=\"#008000\">Overview</font>
+", info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Model of the multi layers of heat exchanger. From the water flow is

@@ -84,14 +84,14 @@ equation
       points={{-30,-32},{-72,-32},{-72,100},{-100,100}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation (Line(points={{-112,80},{-70,80},{-70,-20},{-50,-20},{-50,-21},{-30.6,-21}}, color={0,0,127}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points={{-112,80},{-70,80},{-70,-20},{-50,-20},{-50,-21.84},{-29.4,-21.84}},
+                                                                                                                                                color={0,0,127}));
     annotation (Dialog(tab="Infiltration acc. to EN 12831 (building airtightness"),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>January 9, 2020
-    by Philipp Mehrfeld:<br/>
-       Model added to the AixLib library.
+    Documentation(revisions="<html><ul>
+  <li>January 9, 2020 by Philipp Mehrfeld:<br/>
+    Model added to the AixLib library.
+  </li>
 </ul>
 </html>"));
 end PartialRoom;

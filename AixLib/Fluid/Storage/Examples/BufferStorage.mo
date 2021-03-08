@@ -20,7 +20,8 @@ model BufferStorage
     upToDownHC1=false,
     upToDownHC2=false,
     useHeatingRod=false,
-    redeclare model HeatTransfer = AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
+    redeclare model HeatTransfer =
+        AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
     TStart=303.15) annotation (Placement(transformation(extent={{0,0},{-20,24}})));
@@ -85,17 +86,22 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(Tolerance=1e-6, StopTime=86400, Interval=60),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/BufferStorage.mos" "Simulate and plot"),
-    Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>This is a simple example of a buffer storage that is charged with a mass flow with a higher temperature than the initial temperature.</p>
-</html>",  revisions="<html>
- <ul>
-<li>November 27, 2019, by Philipp Mehrfeld:<br/>
-<a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a>: Add one heating coil to example.
-</li>
- <li><i>October 11,2016</i>
-       by Sebastian Stinner:<br/>
-      implemented</li>
- </ul>
- </html>"));
+    Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  This is a simple example of a buffer storage that is charged with a
+  mass flow with a higher temperature than the initial temperature.
+</p>
+<ul>
+  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a>:
+    Add one heating coil to example.
+  </li>
+  <li>
+    <i>October 11,2016</i> by Sebastian Stinner:<br/>
+    implemented
+  </li>
+</ul>
+</html>"));
 end BufferStorage;

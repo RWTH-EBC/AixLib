@@ -54,18 +54,19 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
   Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare HydraulicModules.Admix hydraulicModule(
+      parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_22x1(),
+      parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       tau=5,
-      dIns=0.01,
-      kIns=0.028,
-      d=0.025,
       length=1,
       Kv=10,
       valve(use_inputFilter=false),
       pipe1(length=1.53),
       pipe2(length=0.54),
       pipe3(length=1.06),
-      pipe4(dh=0.032, length=0.48),
+      pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
+            0.48),
       pipe5(length=1.42),
       pipe6(length=0.52),
       redeclare
@@ -152,11 +153,15 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  annotation (Documentation(info="<html>
-<p>This example compares the simulated behavior with measured data. The input filter of the valve is deactivated because the measured actual opening (includes opening delay already) is used.</p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  This example compares the simulated behavior with measured data. The
+  input filter of the valve is deactivated because the measured actual
+  opening (includes opening delay already) is used.
+</p>
 <ul>
-<li>November 4, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+  <li>November 4, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(

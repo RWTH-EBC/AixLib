@@ -40,6 +40,8 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_Corridor,
     outside=false,
     final withSunblind=use_sunblind,
@@ -55,6 +57,8 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
         extent={{-7,-39},{7,39}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Bedroom(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWBedroom,
     outside=false,
     final withSunblind=use_sunblind,
@@ -67,6 +71,8 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(extent={{-60,-76},{-46,8}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Kitchen1(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWKitchen,
     outside=false,
     final withSunblind=use_sunblind,
@@ -86,6 +92,8 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
     final V=room_V)
     annotation (Placement(transformation(extent={{-12,-26},{8,-6}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Kitchen2(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_IWKitchen,
     outside=false,
     final withSunblind=use_sunblind,
@@ -101,6 +109,8 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
         extent={{-3,-15},{3,15}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     wall_height=2.46,
     windowarea=0.75,
     wall_length=1.75,
@@ -118,6 +128,8 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
         extent={{-11,-66},{11,66}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_CE,
     outside=false,
     final withSunblind=use_sunblind,
@@ -134,6 +146,8 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
         extent={{-1.99998,-10},{1.99998,10}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     T0=T0_FL,
     outside=false,
     final withSunblind=use_sunblind,
@@ -174,6 +188,13 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{16,68},{44,94}})));
+
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+
+  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
@@ -216,8 +237,10 @@ equation
       points={{5,-58},{5,-44},{20,-44}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-2,-26},{-36,-26},{-36,-58},{-5,-58}},        color={191,0,0}));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation(Line(points={{-102,20},{-80,20},{-80,60},{4,60},{4,74.5},{14.6,74.5}},                color = {0, 0, 127}));
+  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-11,-18},{-36,-18},{-36,-57.9},{-5.1,-57.9}}, color={191,0,0}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points
+        ={{-102,20},{-80,20},{-80,60},{4,60},{4,72.68},{17.4,72.68}}, color={0,
+          0,127}));
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points = {{-100, 90}, {-80, 90}, {-80, 60}, {4, 60}, {4, 81}, {16, 81}}, color = {191, 0, 0}));
   connect(airload.port, NaturalVentilation.port_b) annotation(Line(points={{-2,-26},{-36,-26},{-36,16},{94,16},{94,60},{48,60},{48,81},{44,81}},                   color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{8, -116.55}, {8, -140}, {-80, -140}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
@@ -240,17 +263,33 @@ equation
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 0}, {-90, -20}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 68}, {-90, 12}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 100}, {-90, 80}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the bathroom.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bath.png\"
-    alt=\"Room layout\"/></p>
- </html>"));
+            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the bathroom.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bath.png\"
+  alt=\"Room layout\">
+</p>
+</html>"));
 end Bathroom_VoWo;

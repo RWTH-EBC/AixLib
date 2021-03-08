@@ -102,12 +102,14 @@ model GroundFloorBuildingEnvelope
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
-    energyDynamicsWalls=energyDynamicsWalls,
+    final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -132,11 +134,11 @@ model GroundFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset_Livingroom,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final Tset=Tset_Livingroom,
     final T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
@@ -144,12 +146,14 @@ model GroundFloorBuildingEnvelope
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
-    energyDynamicsWalls=energyDynamicsWalls,
+    final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -172,11 +176,11 @@ model GroundFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset_Hobby,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final Tset=Tset_Hobby,
     final T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{84,28},{46,76}})));
@@ -184,12 +188,14 @@ model GroundFloorBuildingEnvelope
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
-    energyDynamicsWalls=energyDynamicsWalls,
+    final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -214,11 +220,11 @@ model GroundFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset_WC,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final Tset=Tset_WC,
     final T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{82,-36},{44,-84}})));
@@ -226,9 +232,11 @@ model GroundFloorBuildingEnvelope
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
-    energyDynamicsWalls=energyDynamicsWalls,
+    final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
@@ -256,11 +264,11 @@ model GroundFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset_Kitchen,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final Tset=Tset_Kitchen,
     final T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
@@ -268,12 +276,14 @@ model GroundFloorBuildingEnvelope
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
-    energyDynamicsWalls=energyDynamicsWalls,
+    final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -281,7 +291,7 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    withDynamicVentilation=withDynamicVentilation,
+    final withDynamicVentilation=withDynamicVentilation,
     final HeatingLimit=HeatingLimit,
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
@@ -478,17 +488,86 @@ equation
         Text(
           extent={{-50,-10},{-6,-24}},
           lineColor={0,0,0},
-          textString="Kitchen")}), Documentation(revisions="<html>
- <ul>
-  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly (not geometry). Vectorize thermal ports. Delete TIR and TMC.</li>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the envelope of the ground floor.</p>
-<p><b><span style=\"color: #008000;\">Ground temperature</span></b> </p>
-<p>The ground temperature can be coupled to any desired prescriped temperature. Anyway, suitable ground temperatures depending on locations in Germany are listed as &Theta;'_m,e in the comprehensive table 1 in &quot;Beiblatt 1&quot; in the norm DIN EN 12831.</p>
-<p>Or a ground temperature can be chosen according to a TRY region, which is listed below: if ...</p><p>TRY_Region == 1 then 282.15 K</p><p>TRY_Region == 2 then 281.55 K</p><p>TRY_Region == 3 then 281.65 K</p><p>TRY_Region == 4 then 282.65 K</p><p>TRY_Region == 5 then 281.25 K</p><p>TRY_Region == 6 then 279.95 K</p><p>TRY_Region == 7 then 281.95 K</p><p>TRY_Region == 8 then 279.95 K</p><p>TRY_Region == 9 then 281.05 K</p><p>TRY_Region == 10 then 276.15 K</p><p>TRY_Region == 11 then 279.45 K</p><p>TRY_Region == 12 then 283.35 K</p><p>TRY_Region == 13 then 281.05 K</p><p>TRY_Region == 14 then 281.05 K</p><p>TRY_Region == 15 then 279.95 K </p>
- </html>"));
+          textString="Kitchen")}), Documentation(revisions="<html><ul>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
+    Propagate all parameters correctly (not geometry). Vectorize
+    thermal ports. Delete TIR and TMC.
+  </li>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 10, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the envelope of the ground floor.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Ground temperature</span></b>
+</p>
+<p>
+  The ground temperature can be coupled to any desired prescriped
+  temperature. Anyway, suitable ground temperatures depending on
+  locations in Germany are listed as Θ'_m,e in the comprehensive table
+  1 in \"Beiblatt 1\" in the norm DIN EN 12831.
+</p>
+<p>
+  Or a ground temperature can be chosen according to a TRY region,
+  which is listed below: if ...
+</p>
+<p>
+  TRY_Region == 1 then 282.15 K
+</p>
+<p>
+  TRY_Region == 2 then 281.55 K
+</p>
+<p>
+  TRY_Region == 3 then 281.65 K
+</p>
+<p>
+  TRY_Region == 4 then 282.65 K
+</p>
+<p>
+  TRY_Region == 5 then 281.25 K
+</p>
+<p>
+  TRY_Region == 6 then 279.95 K
+</p>
+<p>
+  TRY_Region == 7 then 281.95 K
+</p>
+<p>
+  TRY_Region == 8 then 279.95 K
+</p>
+<p>
+  TRY_Region == 9 then 281.05 K
+</p>
+<p>
+  TRY_Region == 10 then 276.15 K
+</p>
+<p>
+  TRY_Region == 11 then 279.45 K
+</p>
+<p>
+  TRY_Region == 12 then 283.35 K
+</p>
+<p>
+  TRY_Region == 13 then 281.05 K
+</p>
+<p>
+  TRY_Region == 14 then 281.05 K
+</p>
+<p>
+  TRY_Region == 15 then 279.95 K
+</p>
+</html>"));
 end GroundFloorBuildingEnvelope;

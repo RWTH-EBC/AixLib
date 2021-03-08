@@ -11,7 +11,10 @@ record BaseDataMultiInnerWalls
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition roofRoomUpFloor
     "Wall type for roof in attic (not upper floor)"
     annotation (Dialog(group="Wall data"), choicesAllMatching=true);
-  annotation (Documentation(info="<html>
-<p>BaseDataMultiWalls in which 3 additional walls are added. This corresponds to the structure of AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.</p>
+  annotation (Documentation(info="<html><p>
+  BaseDataMultiWalls in which 3 additional walls are added. This
+  corresponds to the structure of
+  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope.
+</p>
 </html>"));
 end BaseDataMultiInnerWalls;

@@ -71,30 +71,51 @@ equation
   end for;
 
 annotation (
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This model computes the transmission correction factors for solar radiation through a double pane window depoending on the incidence angle, based on the VDI 6007_Part 3.</p>
-<p>The correction factors are calculated for the transmitted total and diffuse( cloudy sky) solar radiation, and the reflected radiation from the groung. </p>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
-<p>The model is directly paramtrized for a double pane window.</p>
-<h4><span style=\"color:#008000\">References</span></h4>
-<p>transmission correction factors (CORg) are calculated based on :</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This model computes the transmission correction factors for solar
+  radiation through a double pane window depoending on the incidence
+  angle, based on the VDI 6007_Part 3.
+</p>
+<p>
+  The correction factors are calculated for the transmitted total and
+  diffuse( cloudy sky) solar radiation, and the reflected radiation
+  from the groung.
+</p>
+<h4>
+  <span style=\"color:#008000\">Known Limitations</span>
+</h4>
+<p>
+  The model is directly paramtrized for a double pane window.
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  transmission correction factors (CORg) are calculated based on :
+</p>
 <ul>
-<li>VDI 6007_part3</li>
+  <li>VDI 6007_part3
+  </li>
 </ul>
 </html>",
-    revisions="<html>
-<ul>
-<li>
-April 24, 2020, by Konstantina Xanthopoulou:<br/>
-Removed parameter
-<code>g</code>.
-</li>
-This is for
-<a href=\"https://github.com/RWTH-EBC/AixLib/issues/899\">
-issue 899</a>.
-<li>
-<p><i>February 24, 2014</i> by Reza Tavakoli:</p>
-<p>implemented </p>
+    revisions="<html><ul>
+  <li>April 24, 2020, by Konstantina Xanthopoulou:<br/>
+    Removed parameter <code>g</code>.
+  </li>
+  <li style=\"list-style: none\">This is for <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/899\">issue 899</a>.
+  </li>
+  <li>
+    <p>
+      <i>February 24, 2014</i> by Reza Tavakoli:
+    </p>
+    <p>
+      implemented
+    </p>
+  </li>
+</ul>
 </html>"));
 end CorG_VDI6007;

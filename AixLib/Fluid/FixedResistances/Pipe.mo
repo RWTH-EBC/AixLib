@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances;
+within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
   extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;
@@ -58,7 +58,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
   parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition parameterIso=
-      AixLib.DataBase.Pipes.Insulation.Iso0pc() "Insulation Type"
+      AixLib.DataBase.Pipes.Insulation.Iso50pc() "Insulation Type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=8 "Heat transfer coefficient to ambient"
@@ -302,34 +302,84 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,0,0},
           textString="%nNodes")}),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Dynamic Pipe with pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation. This model considers heat loss through radiation and convection if pipe is not embedded in wall. In case that the pipe is embedded in the wall, heat transfer between the pipe wall / insulation and the surrounding material is based on heat conduction.</p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>Dynamic pipe model with heat losses for various applications. It is possible to choose whether the pipe is embedded in a wall or not. In addition, no insulation can be selected, if used for example for CCA ( concrete core activation).</p>
-<p>The model already includes heat-transfer by convection and by radiation. Instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe, so the loss to ambient will be calculated within the pipe model.</p>
-<p>For each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature.</p>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss\">AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss</a></p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Dynamic Pipe with pipe wall and insulation wall which allows
+  discretisation of pipe wall and pipe insulation. This model considers
+  heat loss through radiation and convection if pipe is not embedded in
+  wall. In case that the pipe is embedded in the wall, heat transfer
+  between the pipe wall / insulation and the surrounding material is
+  based on heat conduction.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  Dynamic pipe model with heat losses for various applications. It is
+  possible to choose whether the pipe is embedded in a wall or not. In
+  addition, no insulation can be selected, if used for example for CCA
+  ( concrete core activation).
+</p>
+<p>
+  The model already includes heat-transfer by convection and by
+  radiation. Instead of modeling these phenomena outside the pipe, an
+  ambient temperature can be prescribed at the heat-port and the star
+  of the pipe, so the loss to ambient will be calculated within the
+  pipe model.
+</p>
+<p>
+  For each discretisation of the pipe, there is a connector to the
+  corresponding element of the discretized pipe wall. Each element of
+  the discretised pipe wall is connected to a corresponding element of
+  the discretized insulation wall. The heat-ports and stars of all
+  nodes are then collected to form two single ports, which can be
+  connected to an ambient temperature.
+</p>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss\">AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss</a>
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>February 03, 2020 </i>by Alexander Kümpel:<br/>
-Multiplication with nParallel in heatConv</li>
-<li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
-Parameter isEmbedded added and correction of connections for different applications</li>
-<li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>March 18, 2015 </i>by Roozbeh Sangi:<br/>
-Outputs for stored energy and temperature added</li>
-<li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br/>
-Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>
-<li><i>May 19, 2014&nbsp;</i> by Roozbeh Sangi:<br/>
-Added to the HVAC library</li>
-<li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br/>
-Formatted documentation appropriately</li>
-<li><i>August 3, 2011</i> by Ana Constantin:<br/>
-Implemented</li>
+        revisions="<html><ul>
+  <li>
+    <i>February 03, 2020</i> by Alexander Kümpel:<br/>
+    Multiplication with nParallel in heatConv
+  </li>
+  <li>
+    <i>April 25, 2017</i> by Tobias Blacha:<br/>
+    Parameter isEmbedded added and correction of connections for
+    different applications
+  </li>
+  <li>
+    <i>April 25, 2017</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>March 18, 2015</i> by Roozbeh Sangi:<br/>
+    Outputs for stored energy and temperature added
+  </li>
+  <li>
+    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Updated connectors to EBC Library 2.2, Updated documentation, Added
+    example
+  </li>
+  <li>
+    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Added to the HVAC library
+  </li>
+  <li>
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>August 3, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end Pipe;

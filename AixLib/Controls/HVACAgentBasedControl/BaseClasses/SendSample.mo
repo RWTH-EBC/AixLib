@@ -75,18 +75,28 @@ equation
           color={0,0,0},
           thickness=0.5)}),                                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000;\">Overview</span></h4>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000;\">Overview</span>
+</h4>
 <ul>
-<li>This model creates a burst of Boolean singals (on-off-on-off) at a rising edge on the input</li>
-<li>It is used by the PartialAgent when \"usePoke=true\" is selected</li>
+  <li>This model creates a burst of Boolean singals (on-off-on-off) at
+  a rising edge on the input
+  </li>
+  <li>It is used by the PartialAgent when \"usePoke=true\" is selected
+  </li>
 </ul>
-<h4><span style=\"color: #008000;\">Concept</span></h4>
-<p>The model simulates a trigger, which is only active for a certain period of time, thus not creating events throughout the whole simulation time.</p>
+<h4>
+  <span style=\"color: #008000;\">Concept</span>
+</h4>
+<p>
+  The model simulates a trigger, which is only active for a certain
+  period of time, thus not creating events throughout the whole
+  simulation time.
+</p>
 </html>",
-    revisions="<html>
-<ul>
-<li>November 2016: Developed and implemented by Felix B&uuml;nning</li>
+    revisions="<html><ul>
+  <li>November 2016: Developed and implemented by Felix Bünning
+  </li>
 </ul>
 </html>"));
 end SendSample;

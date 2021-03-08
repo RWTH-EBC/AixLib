@@ -3,61 +3,14 @@ clear
 convertClear();
 
 convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.Wall",
-"Star",
-"radPort");
+    "AixLib.BoundaryConditions.GroundTemperature.GroundTemperatureKusuda",
+    "port_a",
+    "port");
 convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140",
-"Star",
-"radPort");
+    "AixLib.BoundaryConditions.GroundTemperature.Examples.ExampleAachen",
+    "groundTemperatureAachen.port_a",
+    "groundTemperatureAachen.port");
 convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple",
-"Star",
-"radPort");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar",
-"Therm",
-"port_a");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door",
-"Therm",
-"port_a");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140",
-"Therm",
-"port_a");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar",
-"dummyTherm",
-"dummyport_a");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar",
-"HeatConv1",
-"heatConv");
-convertElement(
-"AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140",
-"HeatConv1",
-"heatConv");
-
-convertElement("AixLib.Utilities.HeatTransfer.HeatToRad", "port_a", "convPort");
-convertElement("AixLib.Utilities.HeatTransfer.HeatToRad", "conv", "convPort");
-
-convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", fill("",0), {"solarDistribution=0.038", "wall_length=2.0", "wall_height=2.0"});
-
-convertClass("AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140", "AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140");
+    "AixLib.BoundaryConditions.GroundTemperature.Examples.ExampleSanFran",
+    "groundTemperatureKusuda.port_a",
+    "groundTemperatureKusuda.port");

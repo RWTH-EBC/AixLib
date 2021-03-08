@@ -60,7 +60,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     windowarea=0,
     withDoor=false,
     door_height=0,
-    door_width=0)    annotation (Placement(transformation(extent={{-60,-12},{-50,46}})));
+    door_width=0,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                     annotation (Placement(transformation(extent={{-60,-12},{-50,46}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inner_wall1(
     final energyDynamics=energyDynamicsWalls,
     final calcMethodOut=calcMethodOut,
@@ -80,7 +83,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_width_long,
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={-14,58},
         extent={{-3.99997,-22},{3.99999,22}},
         rotation=270)));
@@ -103,7 +109,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_length - room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={61,19},
         extent={{-3,-15},{3,15}},
         rotation=180)));
@@ -126,7 +135,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_width_long,
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={20,-60},
         extent={{-4,-24},{4,24}},
         rotation=90)));
@@ -150,7 +162,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=room_width_short,
     withWindow=false,
     withDoor=false,
-    ISOrientation=3) annotation (Placement(transformation(
+    ISOrientation=3,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                     annotation (Placement(transformation(
         origin={28,60},
         extent={{1.99999,-10},{-1.99998,10}},
         rotation=90)));
@@ -174,7 +189,9 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=room_width_long,
     withWindow=false,
     withDoor=false,
-    ISOrientation=2)                              annotation (Placement(transformation(
+    ISOrientation=2,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)      annotation (Placement(transformation(
         origin={-24,-60},
         extent={{-1.99999,-10},{1.99999,10}},
         rotation=90)));
@@ -197,7 +214,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                    annotation (Placement(transformation(
         origin={61,-20},
         extent={{-2.99998,-16},{2.99998,16}},
         rotation=180)));
@@ -223,7 +243,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=roof_width,
     withWindow=withWindow3,
     windowarea=windowarea_RO,
-    ISOrientation=1) annotation (Placement(transformation(
+    ISOrientation=1,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin)
+                     annotation (Placement(transformation(
         origin={58,59},
         extent={{-2.99997,-16},{2.99999,16}},
         rotation=270)));
@@ -363,18 +386,40 @@ equation
           textString="length_b"),
         Line(points={{58,-58},{58,-68}}, color={255,255,255}),
         Line(points={{58,12},{58,2}}, color={255,255,255})}), Documentation(
-        revisions="<html>
- <ul>
-  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly. Extend from new partial room model. Delete TIR and TMC. Tidy up.</li>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for a room with 1&nbsp;outer&nbsp;wall,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;load,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;lower&nbsp;floor,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;attic,&nbsp;1&nbsp;roof&nbsp;towards&nbsp;outside.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/OW1_2IWl_2IWs_1Pa_1At1Ro.png\"
-    alt=\"Room layout\"/></p>
- </html>"));
+        revisions="<html><ul>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
+    Propagate all parameters correctly. Extend from new partial room
+    model. Delete TIR and TMC. Tidy up.
+  </li>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 8, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for a room with
+  1&#160;outer&#160;wall,&#160;2&#160;inner&#160;walls&#160;load,&#160;2&#160;inner&#160;walls&#160;simple,&#160;1&#160;floor&#160;towards&#160;lower&#160;floor,&#160;1&#160;ceiling&#160;towards&#160;attic,&#160;1&#160;roof&#160;towards&#160;outside.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following figure presents the room's layout:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Building/HighOrder/OW1_2IWl_2IWs_1Pa_1At1Ro.png\"
+  alt=\"Room layout\">
+</p>
+</html>"));
 end Ow1IwL2IwS1Lf1At1Ro1;

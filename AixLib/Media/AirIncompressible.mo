@@ -1,4 +1,4 @@
-﻿within AixLib.Media;
+within AixLib.Media;
 package AirIncompressible
   "Package with incopressible moist air model for air duct simulations"
   extends Modelica.Media.Interfaces.PartialCondensingGases(
@@ -230,7 +230,7 @@ Documentation(info="<html><p>
   pressure, which is zero for this medium. The isobaric expansion
   coefficient at constant pressure is
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
+<p style=\"text-align:center;font-style:italic;\">
   β<sub>p</sub> = - 1 ⁄ v &#160; (∂ v ⁄ ∂ T)<sub>p</sub> = 0,
 </p>
 <p>
@@ -257,7 +257,7 @@ algorithm
   This function returns the isothermal compressibility coefficient. The
   isothermal compressibility is
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
+<p style=\"text-align:center;font-style:italic;\">
   κ<sub>T</sub> = -1 ⁄ v &#160; (∂ v ⁄ ∂ p)<sub>T</sub> = -1 ⁄ p,
 </p>
 <p>
@@ -303,7 +303,7 @@ algorithm
 <p>
   The specific entropy of the mixture is obtained from
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
+<p style=\"text-align:center;font-style:italic;\">
   s = s<sub>s</sub> + s<sub>m</sub>,
 </p>
 <p>
@@ -315,7 +315,7 @@ algorithm
 <p>
   The entropy change due to change in state is obtained from
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
+<p style=\"text-align:center;font-style:italic;\">
   s<sub>s</sub> = c<sub>v</sub> ln(T/T<sub>0</sub>) + R
   ln(v/v<sub>0</sub>)<br/>
   = c<sub>v</sub> ln(T/T<sub>0</sub>) + R ln(ρ<sub>0</sub>/ρ)
@@ -324,7 +324,7 @@ algorithm
   If we assume <i>ρ = p<sub>0</sub>/(R T)</i>, and because
   <i>c<sub>p</sub> = c<sub>v</sub> + R</i>, we can write
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
+<p style=\"text-align:center;font-style:italic;\">
   s<sub>s</sub> = c<sub>v</sub> ln(T/T<sub>0</sub>) + R
   ln(T/T<sub>0</sub>)<br/>
   =c<sub>p</sub> ln(T/T<sub>0</sub>).
@@ -333,7 +333,7 @@ algorithm
   Next, the entropy of mixing is obtained from a reversible isothermal
   expansion process. Hence,
 </p>
-<p align=\"center\" style=\"font-style:italic;\">
+<p style=\"text-align:center;font-style:italic;\">
   s<sub>m</sub> = -R ∑<sub>i</sub>( X<sub>i</sub> ⁄ M<sub>i</sub>
   ln(Y<sub>i</sub> p/p<sub>0</sub>)),
 </p>
@@ -352,7 +352,6 @@ algorithm
 <p>
   This function is only valid for a relative humidity below 100%.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>November 27, 2013, by Michael Wetter:<br/>
     First implementation.
@@ -392,13 +391,13 @@ algorithm
 "<html><p>
   This function computes the derivative of density with respect to
   temperature at constant pressure.
-</p>/html
-</html>", revisions=
-"<html><ul>
+</p>
+</html>",
+revisions="<html><ul>
   <li>December 18, 2013, by Michael Wetter:<br/>
     First implementation.
   </li>
-</ul>/html
+</ul>
 </html>"));
 end density_derT_p;
 
@@ -550,7 +549,6 @@ Documentation(info="<html><p>
   \"modelica://AixLib.Media.Air.specificEntropy\">AixLib.Media.Air.specificEntropy</a>
   for temperature.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>November 27, 2013, by Michael Wetter:<br/>
     First implementation.
@@ -728,7 +726,6 @@ protected
       Documentation(info="<html><p>
   This data record contains the coefficients for perfect gases.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>September 12, 2014, by Michael Wetter:<br/>
     Corrected the wrong location of the <code>preferredView</code> and
@@ -865,7 +862,7 @@ end der_specificHeatCapacityCv;
 <p>
   This medium uses the gas law
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>ρ = ρ<sub>stp</sub>,</i>
 </p>
 <p>
@@ -881,7 +878,7 @@ end der_specificHeatCapacityCv;
   Note that models in this package implement the equation for the
   internal energy as
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>u = h - p<sub>stp</sub> ⁄ ρ<sub>stp</sub>,</i>
 </p>
 <p>
@@ -891,13 +888,13 @@ end der_specificHeatCapacityCv;
   and temperature. The reason for this implementation is that in
   general,
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>h = u + p v,</i>
 </p>
 <p>
   from which follows that
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>u = h - p v = h - p ⁄ ρ = h - p<sub>stp</sub> ⁄
   ρ<sub>std</sub>,</i>
 </p>
@@ -909,7 +906,6 @@ end der_specificHeatCapacityCv;
   The enthalpy is computed using the convention that <i>h=0</i> if
   <i>T=0</i> °C and no water vapor is present.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>January 09, 2020 by Alexander Kümpel:<br/>
     Copy from <a href=\"modelica://AixLib/Media/Air.mo\">Air</a> and

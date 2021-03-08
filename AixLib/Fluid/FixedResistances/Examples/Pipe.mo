@@ -76,26 +76,44 @@ equation
   connect(fixedTemp.port, dynamicPipeEBCAggregated_Ambient_Loss_UC.heatPort_outside)
     annotation (Line(points={{-30,30},{-2.4,30},{-2.4,5.6}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),  Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Simple example to test the model for DynamicPipeEBCAggregated_Ambient_Loss </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>Plot:</p>
+            -100},{100,100}})),  Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simple example to test the model for
+  DynamicPipeEBCAggregated_Ambient_Loss
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Plot:
+</p>
 <ul>
-<li>x-axis: Time</li>
-<li>y-axis: temperatureBefore; temperatureAfter</li>
+  <li>x-axis: Time
+  </li>
+  <li>y-axis: temperatureBefore; temperatureAfter
+  </li>
 </ul>
 </html>",
-    revisions="<html>
-<ul>
-<li><i>April 25, 2017 &nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>November 26, 2014 &nbsp;</i> by Roozbeh Sangi:<br/>
-Used for other model: Changed used pipe from DynamicPipeEBC1 to DynamicPipeEBCAggregated_Ambient_Loss</li>
-<li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>
-Formated documentation.</li>
-<li><i>April 11, 2011</i> by Ana Constantin:<br/>
-Implemented</li>
+    revisions="<html><ul>
+  <li>
+    <i>April 25, 2017 &#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>November 26, 2014 &#160;</i> by Roozbeh Sangi:<br/>
+    Used for other model: Changed used pipe from DynamicPipeEBC1 to
+    DynamicPipeEBCAggregated_Ambient_Loss
+  </li>
+  <li>
+    <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/>
+    Formated documentation.
+  </li>
+  <li>
+    <i>April 11, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"),
     experiment(

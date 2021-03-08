@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
   parameter Real nConv=100
@@ -279,7 +279,6 @@ equation
   electrical power and condenser depend on other inputs, such as
   ambient temperature.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>

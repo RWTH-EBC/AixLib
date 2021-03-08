@@ -30,6 +30,7 @@ dist
 #####################
 *.bak-mo
 *.mat
+!AixLib/Resources/**/*.mat
 *.mof
 buildlog.txt
 diagnostics.txt
@@ -66,3 +67,8 @@ success
 *unitTests*.log
 *comparison*.log
 funnel_comp
+
+#Ignore files create by HTML Check
+HTML-logfile.txt
+#Ignore Dymola License log
+Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt

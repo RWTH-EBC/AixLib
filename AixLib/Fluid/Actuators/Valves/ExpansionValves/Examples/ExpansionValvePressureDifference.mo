@@ -73,21 +73,20 @@ equation
   connect(linearValve.port_b,sink. ports[1])
     annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a simple example model to test expansion valves presented in
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves</a>. 
-Therefore, both the valve's inlet and outlet conditions are prescribed
-in terms of pressure and temperature.
+  This is a simple example model to test expansion valves presented in
+  <a href=
+  \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves\">
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves</a>.
+  Therefore, both the valve's inlet and outlet conditions are
+  prescribed in terms of pressure and temperature.
 </p>
 </html>"));
 end ExpansionValvePressureDifference;

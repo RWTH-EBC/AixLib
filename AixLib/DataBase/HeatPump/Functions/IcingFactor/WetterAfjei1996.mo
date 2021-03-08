@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.Functions.IcingFactor;
+within AixLib.DataBase.HeatPump.Functions.IcingFactor;
 function WetterAfjei1996
   "Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996"
   extends AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct;
@@ -21,15 +21,16 @@ else
   factor:=gauss_curve;
 end if;
 iceFac:=1-factor;
-  annotation (Documentation(info="<html>
-<p>Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996.</p>
+  annotation (Documentation(info="<html><p>
+  Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996.
+</p>
 </html>",
-  revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end WetterAfjei1996;

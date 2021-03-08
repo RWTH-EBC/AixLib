@@ -53,6 +53,8 @@ model WholeHouseBuildingEnvelope
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final solar_absorptance_OW=solar_absorptance_OW,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
@@ -87,6 +89,8 @@ model WholeHouseBuildingEnvelope
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final solar_absorptance_OW=solar_absorptance_OW,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
@@ -122,6 +126,8 @@ model WholeHouseBuildingEnvelope
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final solar_absorptance_OW=solar_absorptance_OW,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
@@ -276,12 +282,12 @@ equation
                                                                 color={191,0,0}));
   connect(upperFloor_Building.thermCorridor, varAirExchange.port_a) annotation (
      Line(points={{24.3,-14.3},{39,-14.3},{39,-16}}, color={191,0,0}));
-  connect(groundFloor_Building.AirExchangePort[1:5], AirExchangePort[1:5])
-    annotation (Line(points={{-23,-47.84},{-74,-47.84},{-74,53.4545},{-114,53.4545}},
+  connect(AirExchangeCorridor_Source.y, varAirExchange.ventRate) annotation (
+      Line(points={{49.7,-13},{28,-13},{28,-24},{42.2,-24},{42.2,-16.5}},
         color={0,0,127}));
-  connect(upperFloor_Building.AirExchangePort[1:5], AirExchangePort[6:10])
-    annotation (Line(points={{-27.45,11.23},{-74,11.23},{-74,66.1818},{-114,66.1818}},
-        color={0,0,127}));
+  connect(upperFloor_Building.AirExchangePort[1:5], AirExchangePort[6:10]) annotation (Line(points={{-27.45,11.23},{-74,11.23},{-74,66.1818},{-114,66.1818}}, color={0,0,127}));
+  connect(AirExchangePort[1:5], groundFloor_Building.AirExchangePort[1:5]) annotation (Line(points={{-114,53.4545},{-76,53.4545},{-76,-47.84},{-23,-47.84}},
+                                                                                                                                                           color={0,0,127}));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO1, SolarRadiationPort_RoofS)
     annotation (Line(points={{-11,80.1},{-11,90},{60,90},{60,58},{106,58}},
                 color={255,128,0}));
@@ -306,7 +312,7 @@ equation
                                                                                                                                                   color={191,0,0}));
   connect(attic_2Ro_5Rooms.thermRoom5, upperFloor_Building.thermCeiling_Children2) annotation (Line(points={{17.6,45.9},{14.87,45.9},{14.87,36.07}},
                                                                                                                                                  color={191,0,0}));
-  connect(AirExchangeCorridor_Source.y, varAirExchange.InPort1) annotation (Line(points={{49.7,-13},{41.5,-13},{41.5,-15.5}}, color={0,0,127}));
+
   connect(heatingToRooms[1:5], groundFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,-21.8182},{-90,-21.8182},{-90,-22},{-78,-22},{-78,-46},{0,-46},{0,-48.08}},
                                                                                                                                                        color={191,0,0}));
   connect(heatingToRooms[6:10], upperFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,-12.7273},{-76,-12.7273},{-76,-6},{-1,-6},{-1,12.84}},
@@ -328,6 +334,7 @@ equation
   connect(groundFloor_Building.thermCeiling_Corridor, groFloUp[3]) annotation (Line(points={{-2.2,-23.84},{-2.2,-20},{-44,-20},{-44,6},{-100,6}}, color={191,0,0}));
   connect(groundFloor_Building.thermCeiling_WCStorage, groFloUp[4]) annotation (Line(points={{5.8,-23.84},{5.8,-20},{-44,-20},{-44,10},{-100,10}}, color={191,0,0}));
   connect(groundFloor_Building.thermCeiling_Kitchen, groFloUp[5]) annotation (Line(points={{14.2,-23.84},{14.2,-20},{-44,-20},{-44,14},{-100,14}}, color={191,0,0}));
+
   annotation (Icon(graphics={Rectangle(
           extent={{100,100},{-100,-100}},
           lineColor={0,0,0},
@@ -336,21 +343,94 @@ equation
                              Bitmap(extent={{-98,100},{98,-100}},
                                                                 fileName=
               "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}),
-      Documentation(info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the envelope of the whole one family dwelling.</p>
-<p><b><span style=\"color: #008000;\">Ground temperature</span></b> </p>
-<p>The ground temperature can be coupled to any desired prescriped temperature. Anyway, suitable ground temperatures depending on locations in Germany are listed as &Theta;'_m,e in the comprehensive table 1 in &quot;Beiblatt 1&quot; in the norm DIN EN 12831.</p>
-<p>Or a ground temperature can be chosen according to a TRY region, which is listed below: if ...</p><p>TRY_Region == 1 then 282.15 K</p><p>TRY_Region == 2 then 281.55 K</p><p>TRY_Region == 3 then 281.65 K</p><p>TRY_Region == 4 then 282.65 K</p><p>TRY_Region == 5 then 281.25 K</p><p>TRY_Region == 6 then 279.95 K</p><p>TRY_Region == 7 then 281.95 K</p><p>TRY_Region == 8 then 279.95 K</p><p>TRY_Region == 9 then 281.05 K</p><p>TRY_Region == 10 then 276.15 K</p><p>TRY_Region == 11 then 279.45 K</p><p>TRY_Region == 12 then 283.35 K</p><p>TRY_Region == 13 then 281.05 K</p><p>TRY_Region == 14 then 281.05 K</p><p>TRY_Region == 15 then 279.95 K </p>
-</html>",  revisions="<html>
-
- <ul>
-  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly (not geometry). Vectorize thermal ports. Delete TIR and TMC.</li>
- <li><i>August 1, 2017</i> by Philipp Mehrfeld:<br/>Add heat-star-combi to connect heaters in a more clever way</li>
- <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Corrected connection of gabled vertical walls with solar radiation (E and W)</li>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
-
- </html>"));
+      Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the envelope of the whole one family dwelling.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Ground temperature</span></b>
+</p>
+<p>
+  The ground temperature can be coupled to any desired prescriped
+  temperature. Anyway, suitable ground temperatures depending on
+  locations in Germany are listed as Θ'_m,e in the comprehensive table
+  1 in \"Beiblatt 1\" in the norm DIN EN 12831.
+</p>
+<p>
+  Or a ground temperature can be chosen according to a TRY region,
+  which is listed below: if ...
+</p>
+<p>
+  TRY_Region == 1 then 282.15 K
+</p>
+<p>
+  TRY_Region == 2 then 281.55 K
+</p>
+<p>
+  TRY_Region == 3 then 281.65 K
+</p>
+<p>
+  TRY_Region == 4 then 282.65 K
+</p>
+<p>
+  TRY_Region == 5 then 281.25 K
+</p>
+<p>
+  TRY_Region == 6 then 279.95 K
+</p>
+<p>
+  TRY_Region == 7 then 281.95 K
+</p>
+<p>
+  TRY_Region == 8 then 279.95 K
+</p>
+<p>
+  TRY_Region == 9 then 281.05 K
+</p>
+<p>
+  TRY_Region == 10 then 276.15 K
+</p>
+<p>
+  TRY_Region == 11 then 279.45 K
+</p>
+<p>
+  TRY_Region == 12 then 283.35 K
+</p>
+<p>
+  TRY_Region == 13 then 281.05 K
+</p>
+<p>
+  TRY_Region == 14 then 281.05 K
+</p>
+<p>
+  TRY_Region == 15 then 279.95 K
+</p>
+<ul>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
+    Propagate all parameters correctly (not geometry). Vectorize
+    thermal ports. Delete TIR and TMC.
+  </li>
+  <li>
+    <i>August 1, 2017</i> by Philipp Mehrfeld:<br/>
+    Add heat-star-combi to connect heaters in a more clever way
+  </li>
+  <li>
+    <i>Mai 7, 2015</i> by Ana Constantin:<br/>
+    Corrected connection of gabled vertical walls with solar radiation
+    (E and W)
+  </li>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>July 10, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>"));
 end WholeHouseBuildingEnvelope;
