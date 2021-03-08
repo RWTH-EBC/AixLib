@@ -42,7 +42,7 @@ model EastWestFacingWindows "windows facing south and west"
   replaceable parameter Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions
     constrainedby Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
     "Tables of solar distribution fractions"
-    annotation (Dialog(tab = "Short wave radiation"), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
+    annotation (Dialog(tab = "Short wave radiation", enable=not use_dynamicShortWaveRadMethod), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
     final energyDynamics=energyDynamicsWalls,
