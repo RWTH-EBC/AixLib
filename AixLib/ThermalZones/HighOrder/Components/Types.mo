@@ -9,7 +9,7 @@ package Types "Types"
       abs09
           "0.9 solar absorption coefficient")
      "Interior solar absorptance of wall surface";
-  partial record PartialCoeffTable "Partial model to choose solar distribution fractions "
+  record PartialCoeffTable "Partial model to choose solar distribution fractions "
 
     extends Modelica.Icons.Record;
 
