@@ -1,11 +1,12 @@
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case600
   extends
     AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
     dispTypeCoolOrTempMin="Q Cool",
     dispTypeHeatOrTempMax="Q Heat",
     tableCoolOrTempMin=[600,-7964,-6137],
-    tableHeatOrTempMax=[600,4296,5709]);
+    tableHeatOrTempMax=[600,4296,5709],
+    Room(redeclare Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions));
 
   Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
@@ -50,8 +51,6 @@ model Case600
     annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
-  Modelica.Blocks.Sources.RealExpression TransmittedRad(y=Room.outerWall_South.solarRadWinTrans)
-    annotation (Placement(transformation(extent={{43,-10},{61,8}})));
 equation
 
 
@@ -76,8 +75,7 @@ equation
           191,0,0}));
   connect(to_kWhHeat.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,68},{112,68},{112,-39},{94,-39},{94,-52.15},{97.95,-52.15}}, color={0,0,127}));
   connect(to_kWhCool.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,52},{111,52},{111,-37},{93,-37},{93,-73.15},{97.95,-73.15}}, color={0,0,127}));
-  connect(TransmittedRad.y, integrator2.u) annotation (Line(points={{61.9,-1},{68,-1},{68,-0.75},{74,-0.75}},
-                                              color={0,0,127}));
+  connect(Room.transShoWaveRadWin, integrator2.u) annotation (Line(points={{17.8,5.3},{17.8,-0.75},{74,-0.75}}, color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

@@ -39,7 +39,7 @@ model SouthFacingWindows "windows facing south"
   parameter Boolean use_dynamicShortWaveRadMethod = true "True = dynamic as holistic approach, false = static approach to obtain the same values as provided in tables of the ASHREA"
     annotation(Dialog(tab = "Short wave radiation"));
 
-  replaceable parameter Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions
+  replaceable parameter AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable coeffTableSolDistrFractions
     constrainedby AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
     "Tables of solar distribution fractions"
     annotation (Dialog(tab = "Short wave radiation"), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
@@ -201,6 +201,12 @@ model SouthFacingWindows "windows facing south"
     nFloors=1,
     nCei=1,
     final staticCoeffTable=coeffTableSolDistrFractions) annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
+  Modelica.Blocks.Interfaces.RealOutput transShoWaveRadWin(final quantity="Power", final unit="W") annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={60,-110})));
+protected
+  Utilities.Interfaces.ShortRadSurf shortRadSurf annotation (Placement(transformation(extent={{58,-96},{62,-92}}), iconTransformation(extent={{58,-96},{62,-92}})));
 equation
   connect(floor.port_outside, Therm_ground)
     annotation (Line(points={{-38,-72.1003},{-38,-100},{-100,-100}},
@@ -283,6 +289,12 @@ equation
                                                                         color={0,0,0}));
   connect(outerWall_North.shortRadWall, solarRadInRoom.walls[4])
     annotation (Line(points={{3.25,65},{40,65},{40,52.75},{-29,52.75}},         color={0,0,0}));
+  connect(outerWall_South.shortRadWin, shortRadSurf) annotation (Line(points={{35.75,-65.25},{35.75,-60},{60,-60},{60,-94}}, color={0,0,0}));
+  connect(shortRadSurf.Q_flow_ShoRadFroSur, transShoWaveRadWin) annotation (Line(points={{60.01,-93.99},{60.01,-106},{60,-106},{60,-110}}, color={0,0,0}), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={
         Rectangle(
