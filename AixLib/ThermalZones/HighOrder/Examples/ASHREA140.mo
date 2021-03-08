@@ -2,10 +2,9 @@ within AixLib.ThermalZones.HighOrder.Examples;
 package ASHREA140 "Package with examples for the models based on ASHREA 140"
   extends Modelica.Icons.ExamplesPackage;
   model CompareDynamicAndStaticSolarFrac_Case270 "Based on Case270 from validation package"
-    extends Validation.ASHRAE140.Case220(Room(
-        solar_absorptance_OW=0.1,
-        shortWaveRad_method=false,
-        abs=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09,
+    extends Validation.ASHRAE140.Case220(absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09,
+                                         Room(
+        use_dynamicShortWaveRadMethod=false,
         outerWall_South(use_shortWaveRadIn=true, use_shortWaveRadOut=true),
         ceiling(use_shortWaveRadIn=true, use_shortWaveRadOut=false),
         outerWall_West(use_shortWaveRadIn=true),
@@ -28,7 +27,10 @@ package ASHREA140 "Package with examples for the models based on ASHREA 140"
       "ambient temperature"
       annotation (Placement(transformation(extent={{-2,205},{9,216}})));
     Rooms.ASHRAE140.SouthFacingWindows Room_dyn(
+      redeclare model WindowModel = Components.WindowsDoors.Window_ASHRAE140,
+      redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140,
       solar_absorptance_OW=0.1,
+      redeclare Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions,
       outerWall_South(
         use_shortWaveRadIn=true,
         use_shortWaveRadOut=true,
@@ -82,7 +84,7 @@ package ASHREA140 "Package with examples for the models based on ASHREA 140"
     connect(Room_dyn.thermRoom, idealHeaterCooler_dyn.heatCoolRoom)
       annotation (Line(points={{77.06,201.5},{77.06,157},{106,157},{106,136},{93,136}}, color={191,0,0}));
     connect(Ground_dyn.port, Room_dyn.Therm_ground)
-      annotation (Line(points={{13,174},{73.28,174},{73.28,181.82}}, color={191,0,0}));
+      annotation (Line(points={{13,174},{59,174},{59,181}},          color={191,0,0}));
     connect(Source_InternalGains_radiative_dyn.y, InternalGains_radiative_dyn.Q_flow)
       annotation (Line(points={{-31.4,112},{-24,112}}, color={0,0,127}));
     connect(InternalGains_convective_dyn.port, Room_dyn.thermRoom) annotation (Line(points={{-3,140},{18,140},{18,160},{76,
@@ -91,13 +93,12 @@ package ASHREA140 "Package with examples for the models based on ASHREA 140"
             {92,180},{83.36,180},{83.36,201.5}}, color={191,0,0}));
     connect(outsideTemp_dyn.port, Room_dyn.thermOutside)
       annotation (Line(points={{9,210.5},{31,210.5},{31,221.59},{59,221.59}}, color={191,0,0}));
-    connect(Room_dyn.AirExchangePort, AirExchangeRate_dyn.y) annotation (Line(points={{56.9,
-            215.748},{52,215.748},{52,216},{46,216},{46,120.5},{41.65,120.5}},
+    connect(Room_dyn.AirExchangePort, AirExchangeRate_dyn.y) annotation (Line(points={{56.9,215.748},{52,215.748},{52,216},{46,216},{46,120.5},{41.65,120.5}},
                                                 color={0,0,127}));
     connect(Source_InternalGains_convective_dyn.y, InternalGains_convective_dyn.Q_flow)
       annotation (Line(points={{-30.35,139.5},{-26.175,139.5},{-26.175,140},{-23,140}}, color={0,0,127}));
-    connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room_dyn.SolarRadiationPort) annotation (Line(points={{-75.4,75.6},
-            {-54,75.6},{-54,222},{22,222},{22,212},{56.9,212},{56.9,213.8}}, color={255,128,0}));
+    connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room_dyn.SolarRadiationPort) annotation (Line(points={{-75.4,60.6},{-54,60.6},{-54,222},{22,222},{22,212},{56.9,212},{56.9,213.8}},
+                                                                             color={255,128,0}));
     annotation (Diagram(coordinateSystem(extent={{-160,-100},{120,240}}), graphics={
           Rectangle(
             extent={{-150,238},{114,94}},
