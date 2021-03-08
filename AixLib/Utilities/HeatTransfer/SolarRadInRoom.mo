@@ -227,43 +227,136 @@ equation
           points={{-12,-48},{-22,-60}},
           color={255,255,0},
           thickness=0.5)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model distributes the incoming short wave radtion onto different areas of the room according to the approach in the ASHREA Standard, Annex B7 &quot;Detailed calculation of solar fractions&quot;. The ASHREA makes some assumptions to estimate the sight factors of each element. For more details on the assumptions, we refer to the ASHREA standard. In order to ease the usage of this model, we made additional assumptions. </p>
-<h4>Assumptions by ASHREA</h4>
+    Documentation(info="<html><p>
+  This model distributes the incoming short wave radtion onto different
+  areas of the room according to the approach in the ASHREA Standard,
+  Annex B7 \"Detailed calculation of solar fractions\". The ASHREA makes
+  some assumptions to estimate the sight factors of each element. For
+  more details on the assumptions, we refer to the ASHREA standard. In
+  order to ease the usage of this model, we made additional
+  assumptions.
+</p>
+<h4>
+  Assumptions by ASHREA
+</h4>
 <ul>
-<li>First bounce: All shortwave radiation initially hits the floor</li>
-<li>Second bounce: Not absorbed radiation is diffusivly reflected by floor and distributed over all surfaces according to the view factors of each surface</li>
-<li>Third bounce: Remaining radiation is distributed over each surface in proportion to it&apos;s area-absorptance product</li>
-<li>Remaining bounces: Based on calculations from third bounce</li>
+  <li>First bounce: All shortwave radiation initially hits the floor
+  </li>
+  <li>Second bounce: Not absorbed radiation is diffusivly reflected by
+  floor and distributed over all surfaces according to the view factors
+  of each surface
+  </li>
+  <li>Third bounce: Remaining radiation is distributed over each
+  surface in proportion to it's area-absorptance product
+  </li>
+  <li>Remaining bounces: Based on calculations from third bounce
+  </li>
 </ul>
-<h4>Additional Assumptions</h4>
-<p>In order to ease the usage of this model, we added the following assumptions. You can read more about the reasons of these assumptions in the corresponding <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">issue 918</a>.</p>
+<h4>
+  Additional Assumptions
+</h4>
+<p>
+  In order to ease the usage of this model, we added the following
+  assumptions. You can read more about the reasons of these assumptions
+  in the corresponding <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/918\">issue 918</a>.
+</p>
 <ul>
-<li>In constrast to the ASHREA, we allow for different solar absorptance factors</li>
-<li>All floors act as one joined area. However, the heat flows are seperated based on areas etc. at the end according to ASHRAE</li>
-<li>All walls have the same heigh + ceiling and floor have (joined together) the same area. This is necessary in order to use the approximations of sight factors from the standard. This is checked via asserts</li>
-<li>We only calculate one view/sight factor, and that is from floor to ceiling. This assumes floor and ceiling are two parallel areas with the same total area</li>
-<li>All remaining radiation of the second bounce is distributed proportional to the areas of the surfaces:<br>sight_factor_floor_win = A_win / (A_win + A_walls) * (1 - sight_factor_floor_ceil)<br>sight_factor_floor_walls = A_walls / (A_win + A_walls) * (1 - sight_factor_floor_ceil)<br>sight_factor_floor_wall_i = A_wall_i / A_walls * sight_factor_floor_walls <br>sight_factor_floor_win_i = A_win_i / A_win * sight_factor_floor_walls </li>
+  <li>In constrast to the ASHREA, we allow for different solar
+  absorptance factors
+  </li>
+  <li>All floors act as one joined area. However, the heat flows are
+  seperated based on areas etc. at the end according to ASHRAE
+  </li>
+  <li>All walls have the same heigh + ceiling and floor have (joined
+  together) the same area. This is necessary in order to use the
+  approximations of sight factors from the standard. This is checked
+  via asserts
+  </li>
+  <li>We only calculate one view/sight factor, and that is from floor
+  to ceiling. This assumes floor and ceiling are two parallel areas
+  with the same total area
+  </li>
+  <li>All remaining radiation of the second bounce is distributed
+  proportional to the areas of the surfaces:<br/>
+    sight_factor_floor_win = A_win / (A_win + A_walls) * (1 -
+    sight_factor_floor_ceil)<br/>
+    sight_factor_floor_walls = A_walls / (A_win + A_walls) * (1 -
+    sight_factor_floor_ceil)<br/>
+    sight_factor_floor_wall_i = A_wall_i / A_walls *
+    sight_factor_floor_walls<br/>
+    sight_factor_floor_win_i = A_win_i / A_win *
+    sight_factor_floor_walls
+  </li>
 </ul>
-<p><br>Note that the last assumption would be valid for a quadratic room with no windows. Only for extremly long rooms this assumptions could be dangerous. However, a floor typically reflects only 10 &percnt; of the incoming radiation. Approx. 50 &percnt; of that go to the ceiling, the rest to the walls. Therefor, effects like correct window placement etc. on the temperatures of the walls will be of a small magnitude. </p>
-<h4>Parameterization</h4>
-<p>You have to connect the bus connector <a href=\"AixLib.Utilities.Interfaces.ShortRadSurf\">ShortRadSurf</a> of each surface (floor, wall, ceiling) of type <a href=\"AixLib.ThermalZones.HighOrder.Components.Walls.Wall\">wall</a> to the corresponding port. As the current implementation of type <a href=\"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140\">window</a> only supports one directional short wave radiation, the port win_out may be ignored. However, you can check how much radiation is lost to the ambient.</p>
-<p>If you model a room with multiple floor elements, you have to specify the parameters floor_length and floor_height. These scales are required to calculate the view factors in the second bounce.</p>
-<h4>Known Limitations</h4>
+<p>
+  <br/>
+  Note that the last assumption would be valid for a quadratic room
+  with no windows. Only for extremly long rooms this assumptions could
+  be dangerous. However, a floor typically reflects only 10
+  &amp;percnt; of the incoming radiation. Approx. 50 &amp;percnt; of
+  that go to the ceiling, the rest to the walls. Therefor, effects like
+  correct window placement etc. on the temperatures of the walls will
+  be of a small magnitude.
+</p>
+<h4>
+  Parameterization
+</h4>
+<p>
+  You have to connect the bus connector <a href=
+  \"AixLib.Utilities.Interfaces.ShortRadSurf\">ShortRadSurf</a> of each
+  surface (floor, wall, ceiling) of type <a href=
+  \"AixLib.ThermalZones.HighOrder.Components.Walls.Wall\">wall</a> to the
+  corresponding port. As the current implementation of type <a href=
+  \"AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140\">
+  window</a> only supports one directional short wave radiation, the
+  port win_out may be ignored. However, you can check how much
+  radiation is lost to the ambient.
+</p>
+<p>
+  If you model a room with multiple floor elements, you have to specify
+  the parameters floor_length and floor_height. These scales are
+  required to calculate the view factors in the second bounce.
+</p>
+<h4>
+  Known Limitations
+</h4>
 <ul>
-<li>Although we implemented the exact same equations as in the ASHREA (besides out approach for the third bounce), the results of the model do NOT match the results provided in the tables of the Appendix in the ASHREA. This is due to the high fiew factor from floor to ceiling in the second bounce. We could not quantify how the results in the Appendix are obtained, as their solar fraction for the ceiling is too low. In order to use the ASHREA values from the tables instead of the dynamic calculation, you may use the option table_based_calc.</li>
-<li>In the ASHREA, all surfaces shall have the same absorbtance. Our modelling approach enable differing values. </li>
-<li>This model works best for nearly quadratic rooms</li>
-<li>Windows in the floors or ceilings are not regarded</li>
+  <li>Although we implemented the exact same equations as in the ASHREA
+  (besides out approach for the third bounce), the results of the model
+  do NOT match the results provided in the tables of the Appendix in
+  the ASHREA. This is due to the high fiew factor from floor to ceiling
+  in the second bounce. We could not quantify how the results in the
+  Appendix are obtained, as their solar fraction for the ceiling is too
+  low. In order to use the ASHREA values from the tables instead of the
+  dynamic calculation, you may use the option table_based_calc.
+  </li>
+  <li>In the ASHREA, all surfaces shall have the same absorbtance. Our
+  modelling approach enable differing values.
+  </li>
+  <li>This model works best for nearly quadratic rooms
+  </li>
+  <li>Windows in the floors or ceilings are not regarded
+  </li>
 </ul>
-<h4>Sources</h4>
+<h4>
+  Sources
+</h4>
 <ul>
-<li>ANSI/ASHREA Standard 140-2017</li>
-<li>Principles of Heat Transfer - Chapter 9.4 <a href=\"http://160592857366.free.fr/joe/ebooks/Mechanical%20Engineering%20Books%20Collection/HEAT%20TRANSFER/Ptinciples%20of%20Heat%20Transfer.pdf\">[Link]</a></li>
+  <li>ANSI/ASHREA Standard 140-2017
+  </li>
+  <li>Principles of Heat Transfer - Chapter 9.4 <a href=
+  \"http://160592857366.free.fr/joe/ebooks/Mechanical%20Engineering%20Books%20Collection/HEAT%20TRANSFER/Ptinciples%20of%20Heat%20Transfer.pdf\">
+    [Link]</a>
+  </li>
 </ul>
 </html>", revisions="<html>
- <ul>
- <li><i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: Implemented.</li> 
- </ul>
+<ul>
+  <li>
+    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
+    Implemented.
+  </li>
+</ul>
 </html>"));
 end SolarRadInRoom;

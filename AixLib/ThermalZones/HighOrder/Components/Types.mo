@@ -173,9 +173,13 @@ package Types "Types"
     </ul>
   </li>
 </ul>
-<h4>Known Limitations</h4>
+<h4>
+  Known Limitations
+</h4>
 <ul>
-<li>For alpha=0.1, no values are listed in the ASHREA. The values based on the SouthWindow case are used instead.</li>
+  <li>For alpha=0.1, no values are listed in the ASHREA. The values
+  based on the SouthWindow case are used instead.
+  </li>
 </ul>
 </html>"));
   end CoeffTableEastWestWindow;
