@@ -93,7 +93,7 @@ model Wall
     "Temperature at which sunblind closes (see also LimitSolIrr)"
     annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   // door parameters
-  parameter Boolean withDoor = false "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));
+  parameter Boolean withDoor=false   "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer U_door = 1.8
     "Thermal transmission coefficient of door"                                                                 annotation(Dialog(tab = "Door", enable = withDoor));
   parameter Modelica.SIunits.Emissivity eps_door = 0.9
@@ -104,7 +104,7 @@ model Wall
   final parameter Modelica.SIunits.Area clearance = if not outside and withDoor then door_height * door_width else if outside and withDoor and withWindow then windowarea + door_height * door_width else if outside and withWindow then windowarea else if outside and withDoor then door_height * door_width else 0
     "Wall clearance";
   // Initial temperature
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
+  parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature"                                                                                      annotation(Dialog(tab = "Initialization"));
   // COMPONENT PART
   BaseClasses.ConvNLayerClearanceStar Wall(
@@ -246,11 +246,10 @@ equation
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{35,80},{30,80},{30,48},{16.74,48},{16.74,35.78}}, color={191,0,0}));
 
 
-  connect(windowModel.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{9.96,-24.6},{84,-24.6},{84,-60},{110,-60}}, color={0,0,127}));
   connect(WindSpeedPort, windowModel.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
 
 
-  connect(shortRadWin, windowSimple.shortRadWin) annotation (Line(points={{104,-59},
+  connect(shortRadWin, windowModel.shortRadWin) annotation (Line(points={{104,-59},
           {60,-59},{60,-23.56},{9.7,-23.56}},      color={0,0,0}), Text(
       string="%first",
       index=-1,
@@ -303,12 +302,28 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-    annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent = {{-16, 80}, {15, 20}}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, visible = outside and withWindow, lineColor = {255, 255, 255}), Line(points = {{-2, 80}, {-2, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 80}, {1, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 77}, {-2, 77}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 23}, {-2, 23}}, color = {0, 0, 0}, visible = outside and withWindow), Ellipse(extent = {{-16, -60}, {44, -120}}, lineColor = {0, 0, 0}, startAngle = 359, endAngle = 450, visible = withDoor), Rectangle(extent = {{-16, -60}, {15, -90}}, visible = withDoor, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{1, 50}, {-2, 50}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{15, 80}, {15, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, 80}, {-16, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, -60}, {-16, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{15, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -90}, {15, -60}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html><h4>
+    annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(
+          extent={{-20,120},{20,-120}},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Backward,
+          pattern=LinePattern.None,
+          lineColor={0,0,0}),                                                                                                                      Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent={{-20,-50},{20,-110}},   fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, visible = outside and withWindow, lineColor = {255, 255, 255}), Line(points={{-1,-50},{-1,-110}},   color = {0, 0, 0}, visible = outside and withWindow), Line(points={{2,-50},{2,-110}},   color = {0, 0, 0}, visible = outside and withWindow), Line(points={{2,
+              -53},{-1,-53}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = outside and withWindow), Line(points={{2,
+              -107},{-1,-107}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = outside and withWindow), Ellipse(extent={{
+              -20,86},{40,26}},                                                                                                                                                                                                        lineColor=
+              {0,0,0},                                                                                                                                                                                                        startAngle
+            =360,                                                                                                                                                                                                        endAngle=
+              450,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),                                                                                                                                                                                                        Rectangle(extent={{
+              -21,56},{10,26}},                                                                                                                                                                                                        visible = withDoor, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Line(points={{2,-80},{-1,-80}},    color = {0, 0, 0}, visible = outside and withWindow), Line(points={{20,-50},{20,-110}},   color = {0, 0, 0}, visible = outside and withWindow), Line(points={{-20,-50},{-20,-110}},   color = {0, 0, 0}, visible = outside and withWindow), Line(points={{
+              -21,56},{-21,26}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = withDoor), Line(points={{
+              10,56},{10,26}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = withDoor), Line(points={{
+              -21,26},{10,56}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = withDoor), Line(points={{
+              -21,56},{10,26}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
