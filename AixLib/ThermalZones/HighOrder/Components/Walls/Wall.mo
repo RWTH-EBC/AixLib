@@ -276,28 +276,81 @@ equation
           {{90.5,93},{104,93},{104,79.065},{105.065,79.065}}, color={0,0,127}));
   connect(constFixShoRadPar[6].y, shortRadWall.Q_flow_ShoRadFroSur) annotation (
      Line(points={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}));
-    annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(
+    annotation (Icon(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-20,-120},{20,120}},
+        grid={1,1}), graphics={
+        Rectangle(
           extent={{-20,120},{20,-120}},
           fillColor={215,215,215},
           fillPattern=FillPattern.Backward,
           pattern=LinePattern.None,
-          lineColor={0,0,0}),                                                                                                                      Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent={{-20,-50},{20,-110}},   fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, visible = outside and withWindow, lineColor = {255, 255, 255}), Line(points={{-1,-50},{-1,-110}},   color = {0, 0, 0}, visible = outside and withWindow), Line(points={{2,-50},{2,-110}},   color = {0, 0, 0}, visible = outside and withWindow), Line(points={{2,
-              -53},{-1,-53}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = outside and withWindow), Line(points={{2,
-              -107},{-1,-107}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = outside and withWindow), Ellipse(extent={{
-              -20,86},{40,26}},                                                                                                                                                                                                        lineColor=
-              {0,0,0},                                                                                                                                                                                                        startAngle=
-             360,                                                                                                                                                                                                        endAngle=
-              450,
+          lineColor={0,0,0}),
+        Rectangle(
+          extent={{-20,-50},{20,-110}},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),                                                                                                                                                                                                        Rectangle(extent={{
-              -21,56},{10,26}},                                                                                                                                                                                                        visible = withDoor, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Line(points={{2,-80},{-1,-80}},    color = {0, 0, 0}, visible = outside and withWindow), Line(points={{20,-50},{20,-110}},   color = {0, 0, 0}, visible = outside and withWindow), Line(points={{-20,-50},{-20,-110}},   color = {0, 0, 0}, visible = outside and withWindow), Line(points={{
-              -21,56},{-21,26}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = withDoor), Line(points={{
-              10,56},{10,26}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = withDoor), Line(points={{
-              -21,26},{10,56}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = withDoor), Line(points={{
-              -21,56},{10,26}},                                                                                                                                                                                                        color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html><h4>
+          fillPattern=FillPattern.Solid,
+          visible=outside and withWindow,
+          lineColor={255,255,255}),
+        Line(
+          points={{-1,-50},{-1,-110}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{2,-50},{2,-110}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{2,-53},{-1,-53}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{2,-107},{-1,-107}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Ellipse(
+          extent={{-20,86},{40,26}},
+          lineColor={0,0,0},
+          startAngle=360,
+          endAngle=450,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          visible=withDoor),
+        Rectangle(
+          extent={{-21,56},{10,26}},
+          visible=withDoor,
+          lineColor={255,255,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{2,-80},{-1,-80}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{20,-50},{20,-110}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{-20,-50},{-20,-110}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{-21,56},{-21,26}},
+          color={0,0,0},
+          visible=withDoor),
+        Line(
+          points={{10,56},{10,26}},
+          color={0,0,0},
+          visible=withDoor),
+        Line(
+          points={{-21,26},{10,56}},
+          color={0,0,0},
+          visible=withDoor),
+        Line(
+          points={{-21,56},{10,26}},
+          color={0,0,0},
+          visible=withDoor)}),
+  Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
