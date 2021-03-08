@@ -6,10 +6,10 @@ model SolarRadInRoom
     annotation(Dialog(group="Methods"));
 
   parameter Integer nWin=1
-    "Number of windows in room transmitting shortwave radiation"                           annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
-  parameter Integer nWalls=4 "Number of walls in room - For static calculation, the only option is nWalls=4! The order is: East, South, West, North" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
-  parameter Integer nFloors=1 "Number of floors in room" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
-  parameter Integer nCei=1 "Number of ceilings in room" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
+    "Number of windows in room transmitting shortwave radiation"                           annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
+  parameter Integer nWalls=4 "Number of walls in room - For static calculation, the only option is nWalls=4! The order is: East, South, West, North" annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
+  parameter Integer nFloors=1 "Number of floors in room" annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
+  parameter Integer nCei=1 "Number of ceilings in room" annotation(Dialog(group="Static Calculation", connectorSizing=use_dynamicMethod, enable=not use_dynamicMethod));
   parameter Modelica.SIunits.Length floor_length=0 "Total length of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor" annotation(Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and use_dynamicMethod));
   parameter Modelica.SIunits.Length floor_width=0 "Total width of floors (not levels). Multiple floor parts are modeled as one area. For this equivelant area, you have to specify the length and width of the total floor"   annotation(Dialog(group="Dynamic Calculation", enable=nFloors >= 1 and use_dynamicMethod));
 
