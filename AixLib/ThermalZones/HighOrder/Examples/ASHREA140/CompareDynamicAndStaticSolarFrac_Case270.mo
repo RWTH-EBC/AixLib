@@ -13,7 +13,7 @@ model CompareDynamicAndStaticSolarFrac_Case270 "Based on Case270 from validation
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/CHANGEweatherdata/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-46,164},{-26,184}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_Weather_dyn(
     tableOnFile=true,
