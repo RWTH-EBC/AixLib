@@ -19,7 +19,7 @@ model CompareDynamicAndStaticSolarFrac_Case270 "Based on Case270 from validation
     tableOnFile=true,
     tableName="Table",
     columns={4,5,6,7},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/CHANGEweatherdata/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-46,194},{-26,214}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp_dyn
     "ambient temperature"
