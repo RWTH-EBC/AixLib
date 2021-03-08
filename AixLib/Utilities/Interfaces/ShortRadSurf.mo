@@ -16,17 +16,9 @@ expandable connector ShortRadSurf
   Real g "Transmissivity of inner surface"   annotation(HideResult=false);
   Real solar_absorptance "Absorptivity of inner surface, equal to eps or 1-rho-tau"
                                                                   annotation(HideResult=false);
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={                                                                       Polygon(points = {{-13, 86}, {13, 86}, {13, 12}, {77, 34}, {85, 6}, {22, -14}, {62, -72}, {37, -88}, {0, -28}, {-35, -88}, {-60, -72}, {-22, -14}, {-85, 6}, {-77, 34}, {-13, 12}, {-13, 86}}, lineColor=
-              {0,0,0},                                                                                                                                                                                                        fillColor=
-              {0,255,0},
-            fillPattern=FillPattern.Solid),
-      Text(
-        extent={{-100,18},{100,-20}},
-        lineColor={0,0,0},
-        pattern=LinePattern.None,
-        fillColor={28,108,200},
-        fillPattern=FillPattern.Solid,
-          textString="%name%")}),                                Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={                                                                       Polygon(points = {{-13, 86}, {13, 86}, {13, 12}, {77, 34}, {85, 6}, {22, -14}, {62, -72}, {37, -88}, {0, -28}, {-35, -88}, {-60, -72}, {-22, -14}, {-85, 6}, {-77, 34}, {-13, 12}, {-13, 86}}, lineColor={0,0,0},
+                                                                                                                                                                                                        fillColor={255,255,170},
+            fillPattern=FillPattern.Solid)}),                    Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html><p>
   This connector holds variables used to calculate the short wave
