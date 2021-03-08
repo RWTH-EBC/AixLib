@@ -361,11 +361,14 @@ equation
   \"AixLib.Building.Components.Examples.Walls.InsideWall\">AixLib.Building.Components.Examples.Walls.InsideWall</a>
 </p>
 <ul>
-<li><i>June, 18, 2020 </i> by Fabian Wuellhorst:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: Add short wave connector to pass wall and window parameters.</li>
   <li>
     <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
-    <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>: 
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
+    Add short wave connector to pass wall and window parameters.
+  </li>
+  <li>
+    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
     Add short wave connector to pass wall and window parameters.
   </li>
   <li>
