@@ -12,8 +12,8 @@ model Wall
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
-  parameter Boolean use_shortWaveRadIn=false "Use input connector for shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
-  parameter Boolean use_shortWaveRadOut=false "Use input connector for shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Boolean use_shortWaveRadIn=false "Use bus connector for incoming shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Boolean use_shortWaveRadOut=false "Use bus connector for outgoing shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
 
   // general wall parameters
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
