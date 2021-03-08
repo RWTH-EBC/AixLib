@@ -32,10 +32,19 @@ model SouthFacingWindows "windows facing south"
       descriptionLabel=true,
       enable=withWindow1));
 
-  parameter Real eps_out=0.9 "emissivity of the outer surface"
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
+    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}"
+    annotation (Dialog(tab = "Short wave radiation"));
 
-public
+  parameter Boolean use_dynamicShortWaveRadMethod = true "True = dynamic as holistic approach, false = static approach to obtain the same values as provided in tables of the ASHREA"
+    annotation(Dialog(tab = "Short wave radiation"));
+
+  replaceable parameter Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions
+    constrainedby Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+    "Tables of solar distribution fractions"
+    annotation (Dialog(tab = "Short wave radiation"), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
+
+
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -185,23 +194,13 @@ public
   Utilities.Interfaces.SolarRad_in SolarRadiationPort[5] "N,E,S,W,Hor"
     annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
 
-  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
-    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
-
-  replaceable parameter Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions
-    constrainedby Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
-    "Tables of solar distribution fractions"
-    annotation (choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
-
-
   Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
-    final method=shortWaveRad_method,
+    final use_dynamicMethod=use_dynamicShortWaveRadMethod,
     nWin=1,
     nWalls=4,
     nFloors=1,
     nCei=1,
-    final staticCoeffTable=coeffTableSolDistrFractions)
-            annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
+    final staticCoeffTable=coeffTableSolDistrFractions) annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
 equation
   connect(floor.port_outside, Therm_ground)
     annotation (Line(points={{-38,-72.1003},{-38,-100},{-100,-100}},

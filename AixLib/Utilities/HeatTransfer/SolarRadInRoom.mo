@@ -2,21 +2,23 @@ within AixLib.Utilities.HeatTransfer;
 model SolarRadInRoom
   "Model to distribute short wave radiation transmitted through a window to all areas in the room using shape factors"
 
-  parameter Boolean method = true "Dynamic for holistic approach, static to obtain the same values as provided in tables of the ASHREA" annotation(Dialog(group = "Methods", compact = true, descriptionLabel = false), choices(choice = true "Dynamic", choice = false "Static", radioButtons = true));
+  parameter Boolean use_dynamicMethod=true "True = dynamic as holistic approach, false = static approach to obtain the same values as provided in tables of the ASHREA"
+    annotation(Dialog(group="Methods"));
 
   parameter Integer nWin=1
-    "Number of windows in room transmitting shortwave radiation"                           annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not method));
-  parameter Integer nWalls=4 "Number of walls in room - For static calculation, the only option is nWalls=4! The order is: East, South, West, North" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not method));
-  parameter Integer nFloors=1 "Number of floors in room" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not method));
-  parameter Integer nCei=1 "Number of ceilings in room" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not method));
-  parameter Modelica.SIunits.Length floor_length=0 "Total length of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor" annotation(Dialog(group="Dynamic Calculation", enable=nFloors>1 and method));
-  parameter Modelica.SIunits.Height floor_height=0 "Total height of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor"  annotation(Dialog(group="Dynamic Calculation", enable=nFloors>1 and method));
+    "Number of windows in room transmitting shortwave radiation"                           annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
+  parameter Integer nWalls=4 "Number of walls in room - For static calculation, the only option is nWalls=4! The order is: East, South, West, North" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
+  parameter Integer nFloors=1 "Number of floors in room" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
+  parameter Integer nCei=1 "Number of ceilings in room" annotation(Dialog(group="Static Calculation", connectorSizing=method, enable=not use_dynamicMethod));
+  parameter Modelica.SIunits.Length floor_length=0 "Total length of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor" annotation(Dialog(group="Dynamic Calculation", enable=nFloors > 1 and use_dynamicMethod));
+  parameter Modelica.SIunits.Height floor_height=0 "Total height of floors. Multiple floors are modelled as one area. For this equivelant area, you have to specify the length and height of the total floor"  annotation(Dialog(group="Dynamic Calculation", enable=nFloors > 1 and use_dynamicMethod));
 
   replaceable parameter
     ThermalZones.HighOrder.Components.Types.PartialCoeffTable staticCoeffTable
     constrainedby AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable
     "Record holding the values to reproduce the tables"
-    annotation (Dialog(group="Static Calculation", enable=not method), choicesAllMatching=true,
+    annotation (Dialog(group="Static Calculation", enable=not use_dynamicMethod),
+                                                                       choicesAllMatching=true,
     Placement(transformation(extent={{-10,78},{10,98}})));
 
   Interfaces.ShortRadSurf win_in[nWin] "Windows input" annotation (Placement(
@@ -36,13 +38,11 @@ model SolarRadInRoom
     annotation (Placement(transformation(extent={{100,-70},{120,-50}}),
         iconTransformation(extent={{100,-70},{120,-50}})));
 
-  Real solar_frac_win_abs[nWin]=if method then fill(solar_frac_win_abs_int/nWin, nWin) else fill(staticCoeffTable.coeffWinAbs/nWin, nWin)
-    "Solar fractions for windows, absorbed";
-  Real solar_frac_win_lost[nWin]=if method then fill(solar_frac_win_lost_int/nWin, nWin) else fill(staticCoeffTable.coeffWinLost/nWin, nWin)
-    "Solar fractions for windows, lost cause of transmitvity";
-  Real solar_frac_cei[nCei] = if method then bounce_1_cei .+ bounce_2_floor_cei .+ bounce_3_rem_cei .+ bounce_R_rem_cei else fill(staticCoeffTable.coeffCeiling/nCei, nCei) "Solar fractions for ceilings";
-  Real solar_frac_flo[nFloors] = if method then fill(solar_frac_flo_int/nFloors, nFloors) else fill(staticCoeffTable.coeffFloor/nFloors, nFloors) "Solar fractions for floors";
-  Real solar_frac_wall[nWalls] = if method then bounce_1_wall .+ bounce_2_floor_wall .+ bounce_3_rem_wall .+ bounce_R_rem_wall else {staticCoeffTable.coeffOWEast,staticCoeffTable.coeffOWSouth, staticCoeffTable.coeffOWWest, staticCoeffTable.coeffOWNorth} "Solar fractions for walls";
+  Real solar_frac_win_abs[nWin]=if use_dynamicMethod then fill(solar_frac_win_abs_int/nWin, nWin) else fill(staticCoeffTable.coeffWinAbs/nWin, nWin) "Solar fractions for windows, absorbed";
+  Real solar_frac_win_lost[nWin]=if use_dynamicMethod then fill(solar_frac_win_lost_int/nWin, nWin) else fill(staticCoeffTable.coeffWinLost/nWin, nWin) "Solar fractions for windows, lost cause of transmitvity";
+  Real solar_frac_cei[nCei]=if use_dynamicMethod then bounce_1_cei .+ bounce_2_floor_cei .+ bounce_3_rem_cei .+ bounce_R_rem_cei else fill(staticCoeffTable.coeffCeiling/nCei, nCei) "Solar fractions for ceilings";
+  Real solar_frac_flo[nFloors]=if use_dynamicMethod then fill(solar_frac_flo_int/nFloors, nFloors) else fill(staticCoeffTable.coeffFloor/nFloors, nFloors) "Solar fractions for floors";
+  Real solar_frac_wall[nWalls]=if use_dynamicMethod then bounce_1_wall .+ bounce_2_floor_wall .+ bounce_3_rem_wall .+ bounce_R_rem_wall else {staticCoeffTable.coeffOWEast,staticCoeffTable.coeffOWSouth,staticCoeffTable.coeffOWWest,staticCoeffTable.coeffOWNorth} "Solar fractions for walls";
 
 protected
   function sight_fac_parallel "Calculate sight factor based on B7-2 in ASHRAE Appendix for parallel areas"
@@ -157,7 +157,7 @@ initial equation
   // Check correct user input if multiple floors are selected
   assert(A_floor - floor_height_int*floor_length_int < Modelica.Constants.eps, "Total floor area mismatches area specified by user", AssertionLevel.error);
   // Check number of walls for static method
-  if not method then
+  if not use_dynamicMethod then
     assert(nWalls==4, "For static calcuation, the number of floor needs to be equal to 4.", AssertionLevel.error);
   end if;
 equation

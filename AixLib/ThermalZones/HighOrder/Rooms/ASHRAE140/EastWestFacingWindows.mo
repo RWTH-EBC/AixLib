@@ -32,8 +32,17 @@ model EastWestFacingWindows "windows facing south and west"
       descriptionLabel=true,
       enable=withWindow1));
 
-  parameter Real eps_out=0.9 "emissivity of the outer surface"
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
+    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}"
+    annotation (Dialog(tab = "Short wave radiation"));
+
+  parameter Boolean use_dynamicShortWaveRadMethod = true "True = dynamic as holistic approach, false = static approach to obtain the same values as provided in tables of the ASHREA"
+    annotation(Dialog(tab = "Short wave radiation"));
+
+  replaceable parameter Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions
+    constrainedby Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+    "Tables of solar distribution fractions"
+    annotation (Dialog(tab = "Short wave radiation"), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
 
 public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
@@ -197,16 +206,9 @@ public
     Utilities.Interfaces.SolarRad_in   SolarRadiationPort[5] "N,E,S,W,Hor"
       annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
 
-  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
-    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
-
-  replaceable parameter Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions
-    constrainedby Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
-    "Tables of solar distribution fractions"
-    annotation (choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
 
   Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
-    final method=shortWaveRad_method,
+    final use_dynamicMethod=use_dynamicShortWaveRadMethod,
     nWin=2,
     nWalls=4,
     nFloors=1,
@@ -246,27 +248,7 @@ equation
   connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (
      Line(points={{75.5,-11.75},{75.5,-12},{82,-12},{82,-84},{-96,-84},{-96,56},{-110,56}},
                                                                    color={255,128,0}));
-  connect(multiSum.y, outerWall_West.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-54,46},{-54,32},{-77.5,32},{-77.5,32.8}},
-                                                      color={0,0,127}));
-  connect(multiSum.y, ceiling.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-22,46},{-22,77.8},{-33.2,77.8}},
-                                                            color={0,0,127}));
-  connect(multiSum.y, outerWall_South.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-54,46},{-54,-56},{-8,-56},{-8,-62.5},{-7.66667,-62.5}},
-                                                                       color={0,
-          0,127}));
-  connect(multiSum.y, floor.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-54,46},{-54,-56},{-50.8,-56},{-50.8,-65.8}},
-                                                                     color={0,0,
-          127}));
-  connect(multiSum.y, outerWall_East.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{42,46},{42,-6},{63.5,-6},{63.5,-6.8}},
-        color={0,0,127}));
-  connect(multiSum.y, outerWall_North.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-4,46},{-4,63.5}},
-                                                                    color={0,0,127}));
 
-  connect(outerWall_West.solarRadWinTrans, multiSum.u[1]) annotation (Line(
-        points={{-76.75,-0.95},{-76.75,0},{-64,0},{-64,52},{46,52},{46,33.9},{40,33.9}},
-                                                                  color={0,0,127}));
-  connect(outerWall_East.solarRadWinTrans, multiSum.u[2]) annotation (Line(
-        points={{62.75,26.95},{62.75,26},{46,26},{46,38.1},{40,38.1}},
-        color={0,0,127}));
   connect(thermOutside, ceiling.port_outside) annotation (Line(points={{-100,100},{-68,100},{-68,88},{-42,88},{-42,82.1}},
                                                    color={191,0,0}));
   connect(thermOutside, outerWall_West.port_outside) annotation (Line(points={{-100,100},{-68,100},{-68,88},{-92,88},{-92,12},{-88.25,12},{-88.25,13}},
