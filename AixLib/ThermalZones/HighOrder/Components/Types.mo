@@ -58,7 +58,8 @@ package Types "Types"
   end PartialCoeffTable;
 
   record CoeffTableSouthWindow
-                             "Table of coefficients of solar Distribution fractions in SouthFacingWindows"
+    "Table of coefficients of solar Distribution fractions in SouthFacingWindows"
+
     extends PartialCoeffTable(
       final coeffFloor(min=0, max=1)=
     if abs==selectorCoefficients.abs06 then 0.642
@@ -118,6 +119,7 @@ package Types "Types"
   end CoeffTableSouthWindow;
 
   record CoeffTableEastWestWindow
+    "Table of coefficients of solar Distribution fractions in EastWestFacingWindows"
     extends PartialCoeffTable(
       final coeffFloor(min=0, max=1)=
     if abs==selectorCoefficients.abs06 then 0.642
