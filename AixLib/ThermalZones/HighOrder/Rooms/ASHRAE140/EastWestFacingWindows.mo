@@ -46,7 +46,6 @@ public
     withDoor=false,
     wallPar=wallTypes.OW,
     final T0=TWalls_start,
-    solarDistribution=partialCoeffTable.coeffOWSouth,
     wall_length=room_width,
     solar_absorptance=solar_absorptance_OW,
     calcMethodOut=calcMethodOut,
@@ -74,7 +73,6 @@ public
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
     final T0=TWalls_start,
-    solarDistribution=partialCoeffTable.coeffOWWest,
     outside=true,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -101,7 +99,6 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final T0=TWalls_start,
-    solarDistribution=partialCoeffTable.coeffOWEast,
     outside=true,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -151,7 +148,6 @@ public
     wall_length=room_length,
     wall_height=room_width,
     ISOrientation=3,
-    solarDistribution=partialCoeffTable.coeffCeiling,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -180,7 +176,6 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
-    solarDistribution=partialCoeffTable.coeffFloor,
     final T0=TWalls_start,
     wallPar=wallTypes.groundPlate_upp_half,
     solar_absorptance=solar_absorptance_OW,
@@ -205,15 +200,18 @@ public
   parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
 
-  replaceable parameter Components.Types.CoeffTableEastWestWindow
-    partialCoeffTable constrainedby Components.Types.PartialCoeffTable(final
-      abs=absInnerWallSurf) annotation (Placement(transformation(extent={{78,78},
-            {98,98}})), choicesAllMatching=true);
+  replaceable parameter Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions
+    constrainedby Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+    "Tables of solar distribution fractions"
+    annotation (choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
+
   Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
     final method=shortWaveRad_method,
-    nWin=2, nWalls=4,
-    final staticCoeffTable=partialCoeffTable)
-    annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
+    nWin=2,
+    nWalls=4,
+    nFloors=1,
+    nCei=1,
+    final staticCoeffTable=coeffTableSolDistrFractions) annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
 
 equation
   connect(floor.port_outside, Therm_ground)

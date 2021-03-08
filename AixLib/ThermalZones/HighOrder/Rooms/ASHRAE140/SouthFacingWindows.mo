@@ -47,7 +47,6 @@ public
     withDoor=false,
     wallPar=wallTypes.OW,
     final T0=TWalls_start,
-    solarDistribution=partialCoeffTable.coeffOWSouth,
     wall_length=room_width,
     solar_absorptance=solar_absorptance_OW,
     calcMethodOut=calcMethodOut,
@@ -69,7 +68,6 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWWest,
     withWindow=false,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -93,7 +91,6 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWEast,
     withWindow=false,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -114,7 +111,6 @@ public
     use_shortWaveRadIn=true,
     calcMethodIn=calcMethodIn,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWNorth,
     withWindow=false,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -143,7 +139,6 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_width,
-    solarDistribution=partialCoeffTable.coeffCeiling,
     withWindow=false,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -171,7 +166,6 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
-    solarDistribution=partialCoeffTable.coeffFloor,
     final T0=TWalls_start,
     wallPar=wallTypes.groundPlate_upp_half,
     solar_absorptance=solar_absorptance_OW,
@@ -194,18 +188,19 @@ public
   parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
 
-  replaceable parameter Components.Types.CoeffTableSouthWindow
-    partialCoeffTable constrainedby Components.Types.PartialCoeffTable(final
-      abs=absInnerWallSurf) annotation (Placement(transformation(extent={{76,78},
-            {96,98}})), choicesAllMatching=true);
+  replaceable parameter Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions
+    constrainedby Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+    "Tables of solar distribution fractions"
+    annotation (choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
 
 
   Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
     final method=shortWaveRad_method,
+    nWin=1,
     nWalls=4,
     nFloors=1,
     nCei=1,
-    redeclare Components.Types.CoeffTableSouthWindow staticCoeffTable(final abs=abs))
+    final staticCoeffTable=coeffTableSolDistrFractions)
             annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
 equation
   connect(floor.port_outside, Therm_ground)
@@ -291,24 +286,22 @@ equation
         color={191,0,0}));
   connect(outerWall_South.solarRadWinTrans, outerWall_South.solarRadWin) annotation (Line(points={{36.5,-63.75},{36.5,-54},{-1,-54},{-1,-64.5}}, color={0,0,127}));
     connect(outerWall_South.shortRadWin, solarRadInRoom.win_in[1]) annotation (
-      Line(points={{-62.35,-15.6667},{-60,-15.6667},{-60,-16},{-54,-16},{-54,46},
-          {-51,46}},                                    color={0,0,0}));
+      Line(points={{35.75,-65.25},{-60,-65.25},{-60,-16},{-54,-16},{-54,46},{-51,46}},
+                                                        color={0,0,0}));
   connect(solarRadInRoom.ceilings[1], ceiling.shortRadWall) annotation (Line(
-        points={{-29,44},{-24,44},{-24,68},{-24.1,68},{-24.1,76}},
+        points={{-29,44},{-24,44},{-24,68},{-26.1,68},{-26.1,72}},
         color={0,0,0}));
-  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-29,48},
-          {40,48},{40,-52},{-40,-52},{-40,-62},{-39.9,-62}},
+  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-29,48},{40,48},{40,-52},{-40,-52},{-40,-68},{-45.9,-68}},
         color={0,0,0}));
-  connect(outerWall_East.shortRadWall, solarRadInRoom.walls[1]) annotation (Line(points={{10.2,
-          -64},{10.2,-58},{10,-58},{10,-52},{40,-52},{40,52},{-30,52},{-30,
-          51.25},{-29,51.25}},                                              color={0,0,0}));
-  connect(outerWall_South.shortRadWall, solarRadInRoom.walls[2]) annotation (Line(points={{-62,
-          30.3333},{-54,30.3333},{-54,58},{-26,58},{-26,51.75},{-29,51.75}},
+  connect(outerWall_East.shortRadWall, solarRadInRoom.walls[1]) annotation (Line(points={{60,-18.775},{60,-58},{10,-58},{10,-52},{40,-52},{40,52},{-30,52},{-30,51.25},{-29,51.25}},
+                                                                            color={0,0,0}));
+  connect(outerWall_South.shortRadWall, solarRadInRoom.walls[2]) annotation (Line(points={{1.25,-65},{-54,-65},{-54,58},{-26,58},{-26,51.75},{-29,51.75}},
                                                       color={0,0,0}));
   connect(outerWall_West.shortRadWall, solarRadInRoom.walls[3])
-    annotation (Line(points={{41.8,74},{42,74},{42,52.25},{-29,52.25}}, color={0,0,0}));
+    annotation (Line(points={{-77.0001,19.4333},{42,19.4333},{42,52.25},{-29,52.25}},
+                                                                        color={0,0,0}));
   connect(outerWall_North.shortRadWall, solarRadInRoom.walls[4])
-    annotation (Line(points={{60,30.3333},{40,30.3333},{40,52.75},{-29,52.75}}, color={0,0,0}));
+    annotation (Line(points={{3.25,65},{40,65},{40,52.75},{-29,52.75}},         color={0,0,0}));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={
         Rectangle(
