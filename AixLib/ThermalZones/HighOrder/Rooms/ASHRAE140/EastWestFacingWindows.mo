@@ -44,7 +44,6 @@ model EastWestFacingWindows "windows facing south and west"
     "Tables of solar distribution fractions"
     annotation (Dialog(tab = "Short wave radiation"), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
 
-public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
