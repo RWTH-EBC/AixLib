@@ -2,7 +2,6 @@ within AixLib.ThermalZones.HighOrder.Examples.ASHREA140;
 model CompareDynamicAndStaticSolarFrac_Case270 "Based on Case270 from validation package"
   extends Validation.ASHRAE140.Case220(absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09,
                                        Room(
-      use_dynamicShortWaveRadMethod=false,
       outerWall_South(use_shortWaveRadIn=true, use_shortWaveRadOut=true),
       ceiling(use_shortWaveRadIn=true, use_shortWaveRadOut=false),
       outerWall_West(use_shortWaveRadIn=true),
