@@ -69,7 +69,8 @@ partial model PartialCase "This is the base class from which the base cases will
     final solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
     final Win_Area=Win_Area,
-    final absInnerWallSurf=absInnerWallSurf)
+    final absInnerWallSurf=absInnerWallSurf,
+    final use_dynamicShortWaveRadMethod=false)
                   annotation(Placement(transformation(extent={{-27,8},{29,62}})));
 
   Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in kWh"
