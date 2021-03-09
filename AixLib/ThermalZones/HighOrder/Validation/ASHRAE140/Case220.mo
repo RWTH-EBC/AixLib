@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case220
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
     redeclare model CorrSolarGainWin =
@@ -46,7 +46,7 @@ Documentation(revisions="<html><ul>
   </li>
   <li>Solar absorptance on exterior surface = 0.6
   </li>
-  <li>Solar absorptance on exterior surface = -
+  <li>Solar absorptance on interior surface = -
   </li>
 </ul>
 </html>"));

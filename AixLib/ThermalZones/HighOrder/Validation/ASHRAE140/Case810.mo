@@ -25,9 +25,7 @@ Documentation(revisions="<html><ul>
   Difference to case 900:
 </p>
 <ul>
-  <li>Solar absorptance on exterior surface = 0.6
-  </li>
-  <li>Solar absorptance on exterior surface = 0.1
+  <li>Solar absorptance on interior surface = 0.1
   </li>
 </ul>
 </html>"));

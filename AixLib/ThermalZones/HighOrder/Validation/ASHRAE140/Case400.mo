@@ -39,7 +39,7 @@ Documentation(revisions="<html><ul>
   </li>
   <li>Solar absorptance on exterior surface = 0.1
   </li>
-  <li>Solar absorptance on exterior surface = -
+  <li>Solar absorptance on interior surface = -
   </li>
 </ul>
 </html>"));

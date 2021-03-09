@@ -30,8 +30,6 @@ Documentation(revisions="<html><ul>
 <ul>
   <li>regular windows
   </li>
-  <li>Solar absorptance on exterior surface = 0.1
-  </li>
   <li>Solar absorptance on exterior surface = 0.9
   </li>
 </ul>
