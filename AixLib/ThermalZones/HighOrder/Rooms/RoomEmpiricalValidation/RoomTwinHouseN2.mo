@@ -25,6 +25,7 @@ model RoomTwinHouseN2 "N2"
   parameter Modelica.SIunits.Length room_width=10  "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   Components.Walls.Wall wallEast(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,    redeclare
       DataBase.Walls.EmpiricalValidation.OW_E_TwinHouses wallPar,
@@ -41,6 +42,7 @@ model RoomTwinHouseN2 "N2"
     T0=TWalls_start)
     annotation (Placement(transformation(extent={{60,-42},{48,30}})));
   Components.Walls.Wall wallSouth(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,
     redeclare DataBase.Walls.EmpiricalValidation.OW_S_N_TwinHouses wallPar,
@@ -65,6 +67,7 @@ model RoomTwinHouseN2 "N2"
         origin={4,-59})));
 
   Components.Walls.Wall wallWest(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,    redeclare
       DataBase.Walls.EmpiricalValidation.OW_W_TwinHouses wallPar,
@@ -81,6 +84,7 @@ model RoomTwinHouseN2 "N2"
     T0=TWalls_start)
     annotation (Placement(transformation(extent={{-64,-42},{-52,30}})));
   Components.Walls.Wall wallNorth(
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,     redeclare
       DataBase.Walls.EmpiricalValidation.OW_S_N_TwinHouses wallPar,
@@ -102,6 +106,7 @@ model RoomTwinHouseN2 "N2"
         rotation=90,
         origin={11,56})));
   Components.Walls.Wall Ceiling(outside=false,
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     redeclare DataBase.Walls.EmpiricalValidation.CE_TwinHouses wallPar,
     wall_length=10,
@@ -117,6 +122,7 @@ model RoomTwinHouseN2 "N2"
         rotation=90,
         origin={-46,71})));
   Components.Walls.Wall Floor(outside=false,
+    final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     redeclare DataBase.Walls.EmpiricalValidation.FL_TwinHouses wallPar,
     wall_length=10,
@@ -159,6 +165,7 @@ model RoomTwinHouseN2 "N2"
 
   Components.Walls.Wall IW(
     outside=false,
+    final energyDynamics=energyDynamicsWalls,
     redeclare DataBase.Walls.EmpiricalValidation.IW_TwinHouses wallPar,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -171,6 +178,7 @@ model RoomTwinHouseN2 "N2"
     annotation (Placement(transformation(extent={{30,12},{34,36}})));
   Components.Walls.Wall IW1(
     outside=false,
+    final energyDynamics=energyDynamicsWalls,
     redeclare DataBase.Walls.EmpiricalValidation.IW_LightMass_TwinHouses wallPar,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
