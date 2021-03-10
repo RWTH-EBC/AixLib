@@ -6,7 +6,8 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Modelica.SIunits.SpecificHeatCapacity cAir=1007 "Specific heat capacity of air" annotation (Dialog(group="Air volume of room"));
 
   replaceable parameter AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
-    wallTypes constrainedby AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
+    wallTypes constrainedby
+    AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
     "Types of walls (contains multiple records)"
     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
 

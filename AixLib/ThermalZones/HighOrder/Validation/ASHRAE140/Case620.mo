@@ -12,7 +12,8 @@ model Case620
         solar_absorptance_OW=solar_absorptance_OW,
         calcMethodOut=2,
         Win_Area=Win_Area,
-        absInnerWallSurf=absInnerWallSurf));
+        absInnerWallSurf=absInnerWallSurf),
+    Room(redeclare Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions));
 
   Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
@@ -42,22 +43,7 @@ model Case620
         rotation=180,
         origin={6.5,-75.5})));
 
-  parameter Real airExchange=0.41 "Constant Air Exchange Rate";
-  parameter Real TsetCooler=27 "Constant Set Temperature for Cooler";
-  parameter Real TsetHeater=20 "Constant Set Temperature for Heater";
-  parameter Real internalGains=200 "Constant Internal Gains";
-  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
-    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
-  parameter Real solar_absorptance_OW=0.6 "Solar absoptance outer walls ";
-  parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes=
-      AixLib.DataBase.Walls.Collections.ASHRAE140.LightMassCases()
-    "Types of walls (contains multiple records)";
-  replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
-    constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
-    annotation (choicesAllMatching=true);
-  parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
-  Modelica.Blocks.Sources.RealExpression TransmittedRad(y=Room.outerWall_East.solarRadWinTrans + Room.outerWall_West.solarRadWinTrans)
-    annotation (Placement(transformation(extent={{43,-10},{61,8}})));
+
 equation
 
   connect(Tset_Cooler.y, from_degC.u)
@@ -81,8 +67,7 @@ equation
     annotation (Line(points={{64,52},{70.9,52}}, color={0,0,127}));
   connect(to_kWhHeat.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,68},{112,68},{112,-39},{94,-39},{94,-52.15},{97.95,-52.15}}, color={0,0,127}));
   connect(to_kWhCool.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,52},{111,52},{111,-37},{93,-37},{93,-73.15},{97.95,-73.15}}, color={0,0,127}));
-  connect(TransmittedRad.y, integrator2.u) annotation (Line(points={{61.9,-1},{68,-1},{68,-0.75},{74,-0.75}},
-                                              color={0,0,127}));
+  connect(Room.transShoWaveRadWin, integrator2.u) annotation (Line(points={{17.8,5.3},{17.8,-0.75},{74,-0.75}}, color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

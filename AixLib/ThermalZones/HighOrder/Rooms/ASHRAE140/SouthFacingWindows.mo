@@ -32,10 +32,19 @@ model SouthFacingWindows "windows facing south"
       descriptionLabel=true,
       enable=withWindow1));
 
-  parameter Real eps_out=0.9 "emissivity of the outer surface"
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
+    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}"
+    annotation (Dialog(tab = "Short wave radiation"));
 
-public
+  parameter Boolean use_dynamicShortWaveRadMethod = true "True = dynamic as holistic approach, false = static approach to obtain the same values as provided in tables of the ASHREA"
+    annotation(Dialog(tab = "Short wave radiation"));
+
+  replaceable parameter AixLib.ThermalZones.HighOrder.Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions
+    constrainedby AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+    "Tables of solar distribution fractions"
+    annotation (Dialog(tab = "Short wave radiation", enable=not use_dynamicShortWaveRadMethod), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
+
+
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -47,7 +56,6 @@ public
     withDoor=false,
     wallPar=wallTypes.OW,
     final T0=TWalls_start,
-    solarDistribution=partialCoeffTable.coeffOWSouth,
     wall_length=room_width,
     solar_absorptance=solar_absorptance_OW,
     calcMethodOut=calcMethodOut,
@@ -69,7 +77,6 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWWest,
     withWindow=false,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -93,7 +100,6 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWEast,
     withWindow=false,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -114,7 +120,6 @@ public
     use_shortWaveRadIn=true,
     calcMethodIn=calcMethodIn,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWNorth,
     withWindow=false,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -143,7 +148,6 @@ public
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_width,
-    solarDistribution=partialCoeffTable.coeffCeiling,
     withWindow=false,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -171,7 +175,6 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
-    solarDistribution=partialCoeffTable.coeffFloor,
     final T0=TWalls_start,
     wallPar=wallTypes.groundPlate_upp_half,
     solar_absorptance=solar_absorptance_OW,
@@ -191,15 +194,19 @@ public
   Utilities.Interfaces.SolarRad_in SolarRadiationPort[5] "N,E,S,W,Hor"
     annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
 
-  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
-    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
-
-  replaceable parameter Components.Types.CoeffTableSouthWindow
-    partialCoeffTable constrainedby Components.Types.PartialCoeffTable(final
-      abs=absInnerWallSurf) annotation (Placement(transformation(extent={{76,78},
-            {96,98}})), choicesAllMatching=true);
-
-
+  Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
+    final use_dynamicMethod=use_dynamicShortWaveRadMethod,
+    nWin=1,
+    nWalls=4,
+    nFloors=1,
+    nCei=1,
+    final staticCoeffTable=coeffTableSolDistrFractions) annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
+  Modelica.Blocks.Interfaces.RealOutput transShoWaveRadWin(final quantity="Power", final unit="W") annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={60,-110})));
+protected
+  Utilities.Interfaces.ShortRadSurf shortRadSurf annotation (Placement(transformation(extent={{58,-96},{62,-92}}), iconTransformation(extent={{58,-96},{62,-92}})));
 equation
   connect(floor.port_outside, Therm_ground)
     annotation (Line(points={{-38,-72.1003},{-38,-100},{-100,-100}},
@@ -216,21 +223,7 @@ equation
   connect(outerWall_West.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-87.25,21.5333},{-87.25,22},{-94,22},{-94,28},{-112,28}},
                                                               color={0,0,127}));
 
-  connect(outerWall_South.solarRadWinTrans, floor.solarRadWin) annotation (Line(
-        points={{36.5,-63.75},{36,-63.75},{36,-54},{-48,-54},{-48,-56},{-46.8,-56},{-46.8,-67.8}},
-        color={0,0,127}));
 
-  connect(outerWall_South.solarRadWinTrans, outerWall_East.solarRadWin)
-    annotation (Line(points={{36.5,-63.75},{36,-63.75},{36,-54},{50,-54},{50,-20.8},{59.5,-20.8}},
-                        color={0,0,127}));
-
-  connect(outerWall_South.solarRadWinTrans, ceiling.solarRadWin) annotation (
-      Line(points={{36.5,-63.75},{36,-63.75},{36,-54},{-52,-54},{-52,50},{-25.2,50},{-25.2,71.8}},
-        color={0,0,127}));
-
-  connect(outerWall_North.solarRadWin, outerWall_South.solarRadWinTrans)
-    annotation (Line(points={{1,64.5},{0,64.5},{0,50},{-52,50},{-52,-54},{36,-54},{36,-63.75},{36.5,-63.75}},
-                              color={0,0,127}));
   connect(SolarRadiationPort[3], outerWall_South.SolarRadiationPort)
     annotation (Line(points={{-110,60},{-98,60},{-98,-88},{-6,-88},{-6,-76.5},{-6.5,-76.5}},
         color={255,128,0}));
@@ -249,9 +242,6 @@ equation
      Line(points={{71.5,-25.75},{71.5,-26},{82,-26},{82,-88},{-98,-88},{-98,56},{-110,56}},
                                                                    color={255,128,
           0}));
-  connect(outerWall_South.solarRadWinTrans, outerWall_West.solarRadWin)
-    annotation (Line(points={{36.5,-63.75},{36,-63.75},{36,-54},{-52,-54},{-52,22},{-76.5001,22},{-76.5001,21.5333}},
-                        color={0,0,127}));
   connect(thermOutside, ceiling.port_outside) annotation (Line(points={{-100,100},{-66,100},{-66,88},{-34,88},{-34,76.1}},
                                                    color={191,0,0}));
   connect(thermOutside, outerWall_West.port_outside) annotation (Line(points={{-100,100},{-68,100},{-68,88},{-96,88},{-96,0},{-87.25,0},{-87.25,1}},
@@ -282,7 +272,29 @@ equation
   connect(thermStar_Demux.portConvRadComb, outerWall_South.thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{20,-56},{20,-65},{21,-65}},
         color={191,0,0}));
-  connect(outerWall_South.solarRadWinTrans, outerWall_South.solarRadWin) annotation (Line(points={{36.5,-63.75},{36.5,-54},{-1,-54},{-1,-64.5}}, color={0,0,127}));
+    connect(outerWall_South.shortRadWin, solarRadInRoom.win_in[1]) annotation (
+      Line(points={{35.75,-65.25},{-60,-65.25},{-60,-16},{-54,-16},{-54,46},{-51,46}},
+                                                        color={0,0,0}));
+  connect(solarRadInRoom.ceilings[1], ceiling.shortRadWall) annotation (Line(
+        points={{-29,44},{-24,44},{-24,68},{-26.1,68},{-26.1,72}},
+        color={0,0,0}));
+  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-29,48},{40,48},{40,-52},{-40,-52},{-40,-68},{-45.9,-68}},
+        color={0,0,0}));
+  connect(outerWall_East.shortRadWall, solarRadInRoom.walls[1]) annotation (Line(points={{60,-18.775},{60,-20},{42,-20},{42,50},{-28,50},{-28,51.25},{-29,51.25}},
+                                                                            color={0,0,0}));
+  connect(outerWall_South.shortRadWall, solarRadInRoom.walls[2]) annotation (Line(points={{1.25,-65},{-56,-65},{-56,66},{-28,66},{-28,51.75},{-29,51.75}},
+                                                      color={0,0,0}));
+  connect(outerWall_West.shortRadWall, solarRadInRoom.walls[3])
+    annotation (Line(points={{-77.0001,19.4333},{42,19.4333},{42,52.25},{-29,52.25}},
+                                                                        color={0,0,0}));
+  connect(outerWall_North.shortRadWall, solarRadInRoom.walls[4])
+    annotation (Line(points={{3.25,65},{40,65},{40,52.75},{-29,52.75}},         color={0,0,0}));
+  connect(outerWall_South.shortRadWin, shortRadSurf) annotation (Line(points={{35.75,-65.25},{35.75,-60},{60,-60},{60,-94}}, color={0,0,0}));
+  connect(shortRadSurf.Q_flow_ShoRadFroSur, transShoWaveRadWin) annotation (Line(points={{60.01,-93.99},{60.01,-106},{60,-106},{60,-110}}, color={0,0,0}), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={
         Rectangle(

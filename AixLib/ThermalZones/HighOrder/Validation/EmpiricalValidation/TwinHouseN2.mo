@@ -2,6 +2,7 @@
 model TwinHouseN2
    extends Modelica.Icons.Example;
   Rooms.RoomEmpiricalValidation.RoomTwinHouseN2 roomTwinHouseN2(
+    energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=303.15,
     TWalls_start=303.15,

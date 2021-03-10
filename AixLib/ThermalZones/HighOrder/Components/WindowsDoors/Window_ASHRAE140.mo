@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
   extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
@@ -40,6 +40,11 @@ model Window_ASHRAE140
     final A=windowarea,
     final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{18,-18},{38,2}})));
+  Modelica.Blocks.Sources.Constant constFixShoRadPar[6](k={WindowType.g,1 -
+        WindowType.g,0,sqrt(windowarea),sqrt(windowarea),0}) if
+    use_solarRadWinTrans
+    "Parameteres used for the short radiaton models. See connections to check which array corresponds to which parameter"
+    annotation (Placement(transformation(extent={{68,96},{78,106}})));
 equation
   connect(heatConv_outside.port_b, pane1.port_a) annotation (Line(
   points={{-46,-10},{-46,-8},{-38,-8}},
@@ -65,9 +70,26 @@ equation
       pattern=LinePattern.Solid));
   connect(pane2.port_b, twoStar_RadEx.convPort) annotation (Line(points={{38,-8},{42,-8},{42,32},{44,32}}, color={191,0,0}));
   connect(WindSpeedPort, heatConv_outside.WindSpeedPort) annotation (Line(points={{-99,-59},{-70,-59},{-70,-17},{-65,-17}}, color={0,0,127}));
-  connect(Ag.y, solarRadWinTrans) annotation (Line(points={{-3.4,60},{42,60},{42,80},{90,80}}, color={0,0,127}));
   connect(solarRad_in, corrSolGain.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
   connect(corrSolGain.solarRadWinTrans[1], Ag.u) annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
+  connect(Ag.y, shortRadWin.Q_flow_ShoRadFroSur) annotation (Line(points={{-3.4,60},{50,60},{50,88.05},{90.05,88.05}},
+                                                 color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constFixShoRadPar[1].y, shortRadWin.g) annotation (Line(points={{78.5,
+          101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[2].y, shortRadWin.solar_absorptance) annotation (
+      Line(points={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[3].y, shortRadWin.solar_reflectance) annotation (
+      Line(points={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[4].y, shortRadWin.length) annotation (Line(points={
+          {78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[5].y, shortRadWin.height) annotation (Line(points={
+          {78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[6].y, shortRadWin.Q_flow_ShoRadOnSur) annotation (
+      Line(points={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
@@ -166,6 +188,11 @@ equation
 </ul>
 </html>",
  revisions="<html><ul>
+  <li>
+    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
+    Add short wave connector to pass window parameters.
+  </li>
   <li>
     <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:

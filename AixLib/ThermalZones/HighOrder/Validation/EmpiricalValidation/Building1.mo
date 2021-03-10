@@ -3,6 +3,7 @@ model Building1
   import ModelicaServices;
     extends Modelica.Icons.Example;
   Rooms.RoomEmpiricalValidation.RoomBuilding1 room(
+    energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=283.15,
     TWalls_start=283.15,

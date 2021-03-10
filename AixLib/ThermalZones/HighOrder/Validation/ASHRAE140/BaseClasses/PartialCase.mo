@@ -34,6 +34,7 @@ partial model PartialCase "This is the base class from which the base cases will
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
     annotation (Placement(transformation(extent={{-66,31},{-55,42}})));
+
   replaceable model RoomModel = Rooms.ASHRAE140.SouthFacingWindows  annotation (
       choices(
         choice(redeclare model Room = Rooms.ASHRAE140.SouthFacingWindows (
@@ -61,14 +62,15 @@ partial model PartialCase "This is the base class from which the base cases will
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=289.15,
-    wallTypes=wallTypes,
+    final wallTypes=wallTypes,
     calcMethodIn=4,
-    Type_Win=windowParam,
+    final Type_Win=windowParam,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
-    solar_absorptance_OW=solar_absorptance_OW,
+    final solar_absorptance_OW=solar_absorptance_OW,
     calcMethodOut=2,
-    Win_Area=Win_Area,
-    absInnerWallSurf=absInnerWallSurf)
+    final Win_Area=Win_Area,
+    final absInnerWallSurf=absInnerWallSurf,
+    final use_dynamicShortWaveRadMethod=false)
                   annotation(Placement(transformation(extent={{-27,8},{29,62}})));
 
   Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in kWh"

@@ -12,12 +12,8 @@ model Wall
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
-  parameter Boolean use_shortWaveRadIn=false "Use input connector for shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
-  parameter Real solarDistribution(min=0.0, max=1.0) if use_shortWaveRadIn "Solar distribution fraction of the transmitted radiation through the window on the surface" annotation (Dialog(
-      tab="Surface Parameters",
-      group="Inside surface",
-      enable=use_shortWaveRadIn));
-  parameter Boolean use_shortWaveRadOut=false "Use input connector for shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Boolean use_shortWaveRadIn=false "Use bus connector for incoming shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Boolean use_shortWaveRadOut=false "Use bus connector for outgoing shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
 
   // general wall parameters
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
@@ -97,7 +93,7 @@ model Wall
     "Temperature at which sunblind closes (see also LimitSolIrr)"
     annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   // door parameters
-  parameter Boolean withDoor = false "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));
+  parameter Boolean withDoor=false   "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer U_door = 1.8
     "Thermal transmission coefficient of door"                                                                 annotation(Dialog(tab = "Door", enable = withDoor));
   parameter Modelica.SIunits.Emissivity eps_door = 0.9
@@ -108,7 +104,7 @@ model Wall
   final parameter Modelica.SIunits.Area clearance = if not outside and withDoor then door_height * door_width else if outside and withDoor and withWindow then windowarea + door_height * door_width else if outside and withWindow then windowarea else if outside and withDoor then door_height * door_width else 0
     "Wall clearance";
   // Initial temperature
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
+  parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature"                                                                                      annotation(Dialog(tab = "Initialization"));
   // COMPONENT PART
   BaseClasses.ConvNLayerClearanceStar Wall(
@@ -154,35 +150,27 @@ model Wall
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor if outside and withWindow and withSunblind
     "Outdoor air (dry bulb) temperature sensor"
     annotation (Placement(transformation(extent={{-70,-44},{-62,-36}})));
-  Modelica.Blocks.Math.Gain solarDistrFraction(k=solarDistribution) if      use_shortWaveRadIn
-    "interior solar distribution factors" annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=180,
-        origin={68,80})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow absSolarRadWin if use_shortWaveRadIn
     "absorbed solar radiation through window" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={45,80})));
-  Modelica.Blocks.Interfaces.RealInput solarRadWin(final quantity="Power", final unit="W") if                       use_shortWaveRadIn
-    "solar raditaion through window" annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={101,80}),
-                       iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={22,88})));
   final parameter Modelica.SIunits.Area ANet=wall_height*wall_length - clearance "Net area of wall (without windows and doors)";
-  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans(final quantity="Power", final unit="W") if                       withWindow and use_shortWaveRadOut
-    "Output signal connector"
-    annotation (Placement(transformation(extent={{100,-70},{120,-50}}),
-        iconTransformation(extent={{15,-72},{35,-52}})));
   parameter Modelica.SIunits.Emissivity eps_in=wallPar.eps
     "Longwave emission coefficient of the interior surface"
     annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
-
+  Utilities.Interfaces.ShortRadSurf shortRadWall if use_shortWaveRadIn
+    annotation (Placement(transformation(extent={{92,66},{118,92}}),
+        iconTransformation(extent={{7,66},{33,92}})));
+  Utilities.Interfaces.ShortRadSurf shortRadWin if withWindow and
+    use_shortWaveRadOut annotation (Placement(transformation(extent={{91,-72},{
+            117,-46}}),iconTransformation(extent={{6,-72},{32,-46}})));
+  Modelica.Blocks.Sources.Constant constFixShoRadPar[6](k={0,wallPar.eps,1 -
+        wallPar.eps,wall_length,wall_height,0}) if
+    use_shortWaveRadIn
+    "Parameteres used for the short radiaton models. See connections to check which array corresponds to which parameter"
+    annotation (Placement(transformation(extent={{80,88},{90,98}})));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
@@ -255,25 +243,114 @@ equation
                                                       color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},{-90,4},{-90,-40},{-70,-40}},
                                         color={191,0,0}));
-  connect(solarRadWin,solarDistrFraction. u) annotation (Line(
-      points={{101,80},{75.2,80}},
-      color={0,0,127}));
-  connect(solarDistrFraction.y,absSolarRadWin. Q_flow) annotation (Line(
-      points={{61.4,80},{55,80}},
-      color={0,0,127}));
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{35,80},{30,80},{30,48},{16.74,48},{16.74,35.78}}, color={191,0,0}));
 
 
-  connect(windowModel.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{9.96,-24.6},{84,-24.6},{84,-60},{110,-60}}, color={0,0,127}));
   connect(WindSpeedPort, windowModel.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
 
 
-    annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent = {{-16, 80}, {15, 20}}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, visible = outside and withWindow, lineColor = {255, 255, 255}), Line(points = {{-2, 80}, {-2, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 80}, {1, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 77}, {-2, 77}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 23}, {-2, 23}}, color = {0, 0, 0}, visible = outside and withWindow), Ellipse(extent = {{-16, -60}, {44, -120}}, lineColor = {0, 0, 0}, startAngle = 359, endAngle = 450, visible = withDoor), Rectangle(extent = {{-16, -60}, {15, -90}}, visible = withDoor, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{1, 50}, {-2, 50}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{15, 80}, {15, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, 80}, {-16, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, -60}, {-16, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{15, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -90}, {15, -60}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html><h4>
+  connect(shortRadWin, windowModel.shortRadWin) annotation (Line(points={{104,-59},
+          {60,-59},{60,-23.56},{9.7,-23.56}},      color={0,0,0}), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(shortRadWall.Q_flow_ShoRadOnSur, absSolarRadWin.Q_flow) annotation (
+      Line(points={{105.065,79.065},{79.5,79.065},{79.5,80},{55,80}}, color={0,
+          0,0}), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constFixShoRadPar[1].y, shortRadWall.g) annotation (Line(points={{
+          90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}));
+  connect(constFixShoRadPar[2].y, shortRadWall.solar_absorptance) annotation (
+      Line(points={{90.5,93},{104,93},{104,88},{105.065,88},{105.065,79.065}},
+        color={0,0,127}));
+  connect(constFixShoRadPar[3].y, shortRadWall.solar_reflectance) annotation (
+      Line(points={{90.5,93},{104,93},{104,86},{105.065,86},{105.065,79.065}},
+        color={0,0,127}));
+  connect(constFixShoRadPar[4].y, shortRadWall.length) annotation (Line(points=
+          {{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}));
+  connect(constFixShoRadPar[5].y, shortRadWall.height) annotation (Line(points=
+          {{90.5,93},{104,93},{104,79.065},{105.065,79.065}}, color={0,0,127}));
+  connect(constFixShoRadPar[6].y, shortRadWall.Q_flow_ShoRadFroSur) annotation (
+     Line(points={{90.5,93},{105.065,93},{105.065,79.065}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-20,-120},{20,120}},
+        grid={1,1}), graphics={
+        Rectangle(
+          extent={{-20,120},{20,-120}},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Backward,
+          pattern=LinePattern.None,
+          lineColor={0,0,0}),
+        Rectangle(
+          extent={{-20,-50},{20,-110}},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          visible=outside and withWindow,
+          lineColor={255,255,255}),
+        Line(
+          points={{-1,-50},{-1,-110}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{2,-50},{2,-110}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{2,-53},{-1,-53}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{2,-107},{-1,-107}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Ellipse(
+          extent={{-20,86},{40,26}},
+          lineColor={0,0,0},
+          startAngle=360,
+          endAngle=450,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          visible=withDoor),
+        Rectangle(
+          extent={{-21,56},{10,26}},
+          visible=withDoor,
+          lineColor={255,255,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{2,-80},{-1,-80}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{20,-50},{20,-110}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{-20,-50},{-20,-110}},
+          color={0,0,0},
+          visible=outside and withWindow),
+        Line(
+          points={{-21,56},{-21,26}},
+          color={0,0,0},
+          visible=withDoor),
+        Line(
+          points={{10,56},{10,26}},
+          color={0,0,0},
+          visible=withDoor),
+        Line(
+          points={{-21,26},{10,56}},
+          color={0,0,0},
+          visible=withDoor),
+        Line(
+          points={{-21,56},{10,26}},
+          color={0,0,0},
+          visible=withDoor)}),
+  Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
@@ -326,6 +403,16 @@ equation
   \"AixLib.Building.Components.Examples.Walls.InsideWall\">AixLib.Building.Components.Examples.Walls.InsideWall</a>
 </p>
 <ul>
+  <li>
+    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
+    Add short wave connector to pass wall and window parameters.
+  </li>
+  <li>
+    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
+    Add short wave connector to pass wall and window parameters.
+  </li>
   <li>
     <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
     <a href=

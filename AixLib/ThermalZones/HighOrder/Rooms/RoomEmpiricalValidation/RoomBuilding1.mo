@@ -24,6 +24,7 @@ model RoomBuilding1 "Building1"
   parameter Modelica.SIunits.Length room_width=22 "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   Components.Walls.Wall wallWest(
+    final energyDynamics=energyDynamicsWalls,
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
     wall_length=room_width,
     wall_height=room_height,
@@ -37,6 +38,7 @@ model RoomBuilding1 "Building1"
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
     annotation (Placement(transformation(extent={{-62,-42},{-48,44}})));
   Components.Walls.Wall wallSouth(
+    final energyDynamics=energyDynamicsWalls,
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
     wall_length=room_length,
     wall_height=room_height,
@@ -51,6 +53,7 @@ model RoomBuilding1 "Building1"
         rotation=90,
         origin={24,-59})));
   Components.Walls.Wall wallNorth(
+    final energyDynamics=energyDynamicsWalls,
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
     wall_length=room_length,
     wall_height=room_height,
@@ -65,6 +68,7 @@ model RoomBuilding1 "Building1"
         rotation=270,
         origin={26,61})));
   Components.Walls.Wall wallEast(
+    final energyDynamics=energyDynamicsWalls,
     redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
     wall_length=room_width,
     wall_height=room_height,
@@ -76,6 +80,7 @@ model RoomBuilding1 "Building1"
     redeclare final model CorrSolarGainWin = CorrSolarGainWin)
     annotation (Placement(transformation(extent={{80,-40},{66,44}})));
   Components.Walls.Wall roof(
+    final energyDynamics=energyDynamicsWalls,
     redeclare DataBase.Walls.EmpiricalValidation.RO_Building1 wallPar,
     wall_length=room_length,
     wall_height=room_width,
@@ -94,6 +99,7 @@ model RoomBuilding1 "Building1"
         origin={-26.5,73.5})));
   Components.Walls.Wall floor(
     outside=false,
+    final energyDynamics=energyDynamicsWalls,
     redeclare DataBase.Walls.EmpiricalValidation.FL_Building1 wallPar,
     wall_length=room_length,
     wall_height=room_width,
@@ -129,9 +135,13 @@ model RoomBuilding1 "Building1"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoomNextDoor
     annotation (Placement(transformation(extent={{-114,-106},{-94,-86}}),
         iconTransformation(extent={{-114,-106},{-94,-86}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
-        2100000*2000, T(start=T0_air))
-    annotation (Placement(transformation(extent={{30,16},{46,32}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor interiorThermCap(
+    C=2100000*2000,
+    final T(
+      stateSelect=StateSelect.always,
+      fixed=(initDynamicsAir == Modelica.Fluid.Types.Dynamics.FixedInitial),
+      start=T0_air),
+    final der_T(fixed=(initDynamicsAir == Modelica.Fluid.Types.Dynamics.SteadyStateInitial), start=0)) "Thermal capacity inside the room" annotation (Placement(transformation(extent={{30,16},{46,32}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor(R=1/
         35000) annotation (Placement(transformation(extent={{34,-4},{48,10}})));
 equation
@@ -199,8 +209,7 @@ equation
                                              color={0,0,127}));
   connect(thermRoomNextDoor, Ventilation.port_a) annotation (Line(points={{-104,
           -96},{-70,-96},{-70,10},{-30,10}}, color={191,0,0}));
-  connect(thermalResistor.port_a, heatCapacitor.port)
-    annotation (Line(points={{34,3},{34,16},{38,16}}, color={191,0,0}));
+  connect(thermalResistor.port_a, interiorThermCap.port) annotation (Line(points={{34,3},{34,16},{38,16}}, color={191,0,0}));
   connect(thermalResistor.port_b, airload.port) annotation (Line(points={{48,3},
           {48,-36},{10,-36},{10,-18}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},

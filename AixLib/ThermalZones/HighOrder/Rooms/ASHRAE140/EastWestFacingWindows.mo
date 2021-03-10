@@ -32,10 +32,18 @@ model EastWestFacingWindows "windows facing south and west"
       descriptionLabel=true,
       enable=withWindow1));
 
-  parameter Real eps_out=0.9 "emissivity of the outer surface"
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
+    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}"
+    annotation (Dialog(tab = "Short wave radiation"));
 
-public
+  parameter Boolean use_dynamicShortWaveRadMethod = true "True = dynamic as holistic approach, false = static approach to obtain the same values as provided in tables of the ASHREA"
+    annotation(Dialog(tab = "Short wave radiation"));
+
+  replaceable parameter Components.Types.CoeffTableEastWestWindow coeffTableSolDistrFractions
+    constrainedby Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+    "Tables of solar distribution fractions"
+    annotation (Dialog(tab = "Short wave radiation", enable=not use_dynamicShortWaveRadMethod), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
+
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -46,7 +54,6 @@ public
     withDoor=false,
     wallPar=wallTypes.OW,
     final T0=TWalls_start,
-    solarDistribution=partialCoeffTable.coeffOWSouth,
     wall_length=room_width,
     solar_absorptance=solar_absorptance_OW,
     calcMethodOut=calcMethodOut,
@@ -74,7 +81,6 @@ public
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
     final T0=TWalls_start,
-    solarDistribution=partialCoeffTable.coeffOWWest,
     outside=true,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -101,7 +107,6 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final T0=TWalls_start,
-    solarDistribution=partialCoeffTable.coeffOWEast,
     outside=true,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -126,7 +131,6 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     U_door=5.25,
-    solarDistribution=partialCoeffTable.coeffOWNorth,
     door_height=1,
     door_width=2,
     withDoor=false,
@@ -152,7 +156,6 @@ public
     wall_length=room_length,
     wall_height=room_width,
     ISOrientation=3,
-    solarDistribution=partialCoeffTable.coeffCeiling,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -181,7 +184,6 @@ public
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     withDoor=false,
-    solarDistribution=partialCoeffTable.coeffFloor,
     final T0=TWalls_start,
     wallPar=wallTypes.groundPlate_upp_half,
     solar_absorptance=solar_absorptance_OW,
@@ -195,31 +197,36 @@ public
         rotation=90,
         origin={-42,-68})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
-    annotation (Placement(transformation(extent={{-104,-104},{-96,-96}}), iconTransformation(extent={{-108,-108},{-92,-92}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation (Placement(
-        transformation(extent={{-120,20},{-104,36}}), iconTransformation(extent=
-           {{-120,20},{-100,40}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort[5] "N,E,S,W,Hor"
-    annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
-  Modelica.Blocks.Math.MultiSum multiSum(nu=2) annotation (Placement(
-        transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=180,
-        origin={34,36})));
-
-  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
-    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
-
-  replaceable parameter Components.Types.CoeffTableEastWestWindow
-    partialCoeffTable constrainedby Components.Types.PartialCoeffTable(final
-      abs=absInnerWallSurf) annotation (Placement(transformation(extent={{78,78},
-            {98,98}})), choicesAllMatching=true);
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
+      annotation (Placement(transformation(extent={{-36,-100},{-28,-92}})));
+    Modelica.Blocks.Interfaces.RealInput WindSpeedPort
+      annotation (Placement(transformation(extent={{-120,20},{-104,36}}),
+          iconTransformation(extent={{-120,20},{-100,40}})));
+    Utilities.Interfaces.SolarRad_in   SolarRadiationPort[5] "N,E,S,W,Hor"
+      annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
 
 
+  Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
+    final use_dynamicMethod=use_dynamicShortWaveRadMethod,
+    nWin=2,
+    nWalls=4,
+    nFloors=1,
+    nCei=1,
+    final staticCoeffTable=coeffTableSolDistrFractions) annotation (Placement(transformation(extent={{-50,36},{-30,56}})));
+
+  Modelica.Blocks.Interfaces.RealOutput transShoWaveRadWin(final quantity="Power", final unit="W") annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={60,-110})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=2) annotation (Placement(transformation(
+        extent={{2,-2},{-2,2}},
+        rotation=90,
+        origin={48,-96})));
+protected
+  Utilities.Interfaces.ShortRadSurf shortRadSurf[2] annotation (Placement(transformation(extent={{58,-96},{62,-92}}), iconTransformation(extent={{58,-96},{62,-92}})));
 equation
   connect(floor.port_outside, Therm_ground)
-    annotation (Line(points={{-42,-70.1003},{-42,-100},{-100,-100}},
+    annotation (Line(points={{-42,-70.1003},{-42,-96},{-32,-96}},
                                                         color={191,0,0}));
   connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-7.66667,-73.25},{-8,-73.25},{-8,-82},{-94,-82},{-94,28},{-112,28}},
                                                               color={0,0,127}));
@@ -250,27 +257,7 @@ equation
   connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (
      Line(points={{75.5,-11.75},{75.5,-12},{82,-12},{82,-84},{-96,-84},{-96,56},{-110,56}},
                                                                    color={255,128,0}));
-  connect(multiSum.y, outerWall_West.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-54,46},{-54,32},{-77.5,32},{-77.5,32.8}},
-                                                      color={0,0,127}));
-  connect(multiSum.y, ceiling.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-22,46},{-22,77.8},{-33.2,77.8}},
-                                                            color={0,0,127}));
-  connect(multiSum.y, outerWall_South.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-54,46},{-54,-56},{-8,-56},{-8,-62.5},{-7.66667,-62.5}},
-                                                                       color={0,
-          0,127}));
-  connect(multiSum.y, floor.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-54,46},{-54,-56},{-50.8,-56},{-50.8,-65.8}},
-                                                                     color={0,0,
-          127}));
-  connect(multiSum.y, outerWall_East.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{42,46},{42,-6},{63.5,-6},{63.5,-6.8}},
-        color={0,0,127}));
-  connect(multiSum.y, outerWall_North.solarRadWin) annotation (Line(points={{26.98,36},{22,36},{22,46},{-4,46},{-4,63.5}},
-                                                                    color={0,0,127}));
 
-  connect(outerWall_West.solarRadWinTrans, multiSum.u[1]) annotation (Line(
-        points={{-76.75,-0.95},{-76.75,0},{-64,0},{-64,52},{46,52},{46,33.9},{40,33.9}},
-                                                                  color={0,0,127}));
-  connect(outerWall_East.solarRadWinTrans, multiSum.u[2]) annotation (Line(
-        points={{62.75,26.95},{62.75,26},{46,26},{46,38.1},{40,38.1}},
-        color={0,0,127}));
   connect(thermOutside, ceiling.port_outside) annotation (Line(points={{-100,100},{-68,100},{-68,88},{-42,88},{-42,82.1}},
                                                    color={191,0,0}));
   connect(thermOutside, outerWall_West.port_outside) annotation (Line(points={{-100,100},{-68,100},{-68,88},{-92,88},{-92,12},{-88.25,12},{-88.25,13}},
@@ -301,6 +288,42 @@ equation
   connect(thermStar_Demux.portConvRadComb, ceiling.thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{44,-56},{44,50},{-42,50},{-42,78}},
                      color={191,0,0}));
+  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-29,48},{-24,48},{-24,58},{-54,58},{-54,-56},{-40,-56},{-40,-60},{-49.9,-60},{-49.9,-66}},
+                   color={0,0,0}));
+  connect(solarRadInRoom.ceilings[1], ceiling.shortRadWall) annotation (Line(
+        points={{-29,44},{-24,44},{-24,60},{-34.1,60},{-34.1,78}},       color=
+          {0,0,0}));
+  connect(solarRadInRoom.win_in[1], outerWall_West.shortRadWin) annotation (
+      Line(points={{-51,45.5},{-52,45.5},{-52,58},{14,58},{14,-0.275},{-78.25,-0.275}},
+                                                        color={0,0,0}));
+  connect(solarRadInRoom.win_in[2], outerWall_East.shortRadWin) annotation (
+      Line(points={{-51,46.5},{-52,46.5},{-52,58},{44,58},{44,26.275},{64.25,26.275}},
+                                                                          color=
+         {0,0,0}));
+  connect(outerWall_East.shortRadWall, solarRadInRoom.walls[1]) annotation (Line(points={{64,-4.775},{12,-4.775},{12,-54},{44,-54},{44,51.25},{-29,51.25}},
+                                            color={0,0,0}));
+  connect(outerWall_South.shortRadWall, solarRadInRoom.walls[2]) annotation (Line(points={{-5.04167,-63},{-58,-63},{-58,30},{-54,30},{-54,58},{-12,58},{-12,51.75},{-29,51.75}},
+                                                                        color={0,0,0}));
+  connect(outerWall_West.shortRadWall, solarRadInRoom.walls[3])
+    annotation (Line(points={{-78,30.775},{42,30.775},{42,52.25},{-29,52.25}},
+                                                                        color={0,0,0}));
+  connect(outerWall_North.shortRadWall, solarRadInRoom.walls[4]) annotation (Line(points={{-1.75,64},{54,64},{54,30},{44,30},{44,52.75},{-29,52.75}},
+                                                   color={0,0,0}));
+  connect(outerWall_West.shortRadWin, shortRadSurf[1]) annotation (Line(points={{-78.25,-0.275},{-78.25,0},{-76,0},{-76,-88},{60,-88},{60,-95}}, color={0,0,0}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(outerWall_East.shortRadWin, shortRadSurf[2]) annotation (Line(points={{64.25,26.275},{60,26.275},{60,-93}}, color={0,0,0}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(shortRadSurf[1].Q_flow_ShoRadFroSur, multiSum.u[1]) annotation (Line(points={{60.01,-93.995},{54,-93.995},{54,-92},{47.3,-92},{47.3,-94}},
+                                                                                                                                                 color={0,0,0}));
+  connect(shortRadSurf[2].Q_flow_ShoRadFroSur, multiSum.u[2]) annotation (Line(points={{60.01,-93.985},{54,-93.985},{54,-92},{48.7,-92},{48.7,-94}},
+                                                                                                                                                 color={0,0,0}));
+  connect(multiSum.y, transShoWaveRadWin) annotation (Line(points={{48,-98.34},{48,-100},{54,-100},{54,-98},{60,-98},{60,-110}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false), graphics={
         Rectangle(
