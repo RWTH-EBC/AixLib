@@ -10,8 +10,8 @@ record IndoorSwimmingPoolBaseRecord
                                                   "Depth of swimming pool";
   parameter Modelica.SIunits.VolumeFlowRate Q(min= 0.001) "Volume Flow Rate";
 
-  parameter Real beta_inUse( min=28) "Water transfer coefficient during opening hours";
-  parameter Real beta_nonUse( min=0.7)
+  parameter Real beta_inUse( final unit="m/s") "Water transfer coefficient during opening hours";
+  parameter Real beta_nonUse( final unit= "m/s")
                                       "Water transfer coefficient during non opening hours";
 
   parameter Boolean partialLoad=false  "Partial load operation implemented for the non opening hours?";

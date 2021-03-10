@@ -10,7 +10,9 @@ model ThermalZone "Illustrates the use of ThermalZone"
             each der_T(fixed=true)))),
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     T_start=293.15,
-    internalGainsMode=1) "Thermal zone"
+    internalGainsMode=1,
+    use_AirExchange=false)
+                         "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -183,8 +185,8 @@ equation
   connect(thermalZone_withPools.TSetCool, tableTSetCool.y[1]) annotation (Line(
         points={{-9.6,4},{-9.6,-39.4},{55.2,-39.4},{55.2,-82}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
-          3.1536e+007, Interval=3600),
+        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=172800,
+        Interval=3600),
     Documentation(revisions="<html><ul>
   <li>September 29, 2016, by Moritz Lauster:<br/>
     Implemented.
