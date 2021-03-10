@@ -1,4 +1,4 @@
-within AixLib.Fluid.Pools;
+﻿within AixLib.Fluid.Pools;
 package BaseClasses "Base classes for Swimming Pool Models"
   model HeatTransferWaterSurface
     "Model for heattransfer at the water surface"
@@ -721,8 +721,6 @@ end if;
     extends AixLib.Fluid.Interfaces.PartialTwoPort
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
-    replaceable package Medium =
-      Modelica.Media.Interfaces.PartialMedium "Medium in the component";
 
     parameter Modelica.SIunits.Pressure pumpHead( min=0.001) "Nominal pressure difference pump and resistance";
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min= 0.0001);
@@ -733,9 +731,11 @@ end if;
       "Output eletric energy needed for pump operation"
       annotation (Placement(transformation(extent={{96,36},{116,56}})));
     Movers.FlowControlled_m_flow CirculationPump(
-      redeclare replaceable package Medium = Medium,
+      redeclare package Medium = Medium,
+      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
       p_start=p_start,
       T_start=T_water,
+      allowFlowReversal=false,
       m_flow_nominal=m_flow_nominal,
       redeclare Movers.Data.Generic per(
         pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, dp={
@@ -744,12 +744,15 @@ end if;
             eta={0.75,0.8,0.75}),
         motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
             eta={0.9,0.9,0.9})),
+      inputType=AixLib.Fluid.Types.InputType.Continuous,
       addPowerToMedium=false,
+      nominalValuesDefineDefaultPressureCurve=true,
+      use_inputFilter=false,
       dp_nominal=pumpHead,
       m_flow_start=m_flow_nominal)
       annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
     FixedResistances.PressureDrop res(
-      redeclare replaceable package Medium = Medium,
+      redeclare package  Medium = Medium,
       allowFlowReversal=false,
       m_flow_nominal=m_flow_nominal,
       show_T=false,
@@ -758,7 +761,7 @@ end if;
     Modelica.Blocks.Interfaces.RealInput m_flow_pump annotation (Placement(
           transformation(extent={{-128,44},{-88,84}}), iconTransformation(extent={{-112,60},
               {-88,84}})));
-    Sensors.MassFlowRate senMasFlo( redeclare replaceable package Medium = Medium)
+    Sensors.MassFlowRate senMasFlo( redeclare package  Medium = Medium)
       annotation (Placement(transformation(extent={{20,22},{40,42}})));
     Modelica.Blocks.Continuous.LimPID PID(
       k=0.1,

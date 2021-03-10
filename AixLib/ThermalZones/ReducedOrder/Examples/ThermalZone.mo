@@ -133,8 +133,7 @@ model ThermalZone "Illustrates the use of ThermalZone"
     tableName="OpeningHours",
     columns=2:16,
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))
-                                                                                                                                            "Boundary condition: Opening Hours of swiming pools"
+        "modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))                                                        "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-64,-52},{-48,-36}})));
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
     tableOnFile=true,
@@ -142,20 +141,20 @@ model ThermalZone "Illustrates the use of ThermalZone"
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://Output_Schwimmbad_Modell/Hallenbad/TsetHeat_Hallenbad.txt"),
-
     columns=2:16)
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
+
     Modelica.Blocks.Sources.CombiTimeTable tableTSetCool(
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://Output_Schwimmbad_Modell/Hallenbad/TsetCool_Hallenbad.txt"),
-
     columns=2:16)
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
+
 equation
   connect(weaDat.weaBus, thermalZone_withPools.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,6},{-10,6}},

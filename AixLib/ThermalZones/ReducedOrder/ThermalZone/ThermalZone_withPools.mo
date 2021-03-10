@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone_withPools
   "Thermal zone containing moisture balance and swimmin pools"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(use_moisture_balance=true);

@@ -39,13 +39,13 @@ model IndoorSwimmingPool
     "Specific gas constant for steam";
 
   // Flow variables
-  Modelica.SIunits.MassFlowRate m_flow_evap
+  Modelica.SIunits.MassFlowRate m_flow_evap( start= 0.001)
                                            "Evaporation mass flow at pool surface";
-  Modelica.SIunits.MassFlowRate m_flow_toPool( min=0.001)
+  Modelica.SIunits.MassFlowRate m_flow_toPool( start=m_flow_start)
                                              "Water supply of pool";
-  Modelica.SIunits.MassFlowRate m_flow_freshWater( min=0.001)
+  Modelica.SIunits.MassFlowRate m_flow_freshWater( start=0.001)
                                                  "Mass flow rate of fresh water";
-  Modelica.SIunits.MassFlowRate m_flow_recycledWater
+  Modelica.SIunits.MassFlowRate m_flow_recycledWater( start=m_flow_recycledStart)
                                                     "Mass flow rate of recycled water";
 
 
@@ -86,6 +86,7 @@ model IndoorSwimmingPool
               Medium =
         Medium,
     m_flow_small=0.00000000001,
+    show_V_flow=false,
     control_m_flow=true,
     control_dp=false)
     "Set mass flow rate to present water losses due to evaporation"
@@ -255,7 +256,7 @@ model IndoorSwimmingPool
   Modelica.Blocks.Interfaces.RealOutput QEvap(final quantity="HeatFlowRate", final
       unit="W") "Heat needed to compensate losses"
     annotation (Placement(transformation(extent={{98,-14},{118,6}})));
-  BaseClasses.PumpAndPressureDrop pumpAndPressureDropRecycledWater(
+  BaseClasses.PumpAndPressureDrop pumpPressureDropRecycledWater(
     redeclare package Medium = Medium,
     pumpHead=pumpHead,
     m_flow_nominal=m_flow_recycledStart,
@@ -263,7 +264,7 @@ model IndoorSwimmingPool
     T_water=poolParam.T_pool - 5)
     "Pump to set the right mass flow rate for recycled water consumption"
     annotation (Placement(transformation(extent={{-50,-82},{-36,-68}})));
-  BaseClasses.PumpAndPressureDrop pumpAndPressureDropFreshWater(
+  BaseClasses.PumpAndPressureDrop pumpPressureDropFreshWater(
     redeclare package Medium = Medium,
     pumpHead=pumpHead,
     m_flow_nominal=(1 - poolParam.x_recycling)*poolParam.m_flow_sewer,
@@ -389,26 +390,26 @@ end if;
         color={0,0,127}));
 
 
-    connect(mFlowRecycledWater.y, pumpAndPressureDropRecycledWater.m_flow_pump)
+  connect(mFlowRecycledWater.y, pumpPressureDropRecycledWater.m_flow_pump)
     annotation (Line(points={{-57.3,-60},{-48.65,-60},{-48.65,-69.96},{-50,-69.96}},
         color={0,0,127}));
-    connect(recycledWater.ports[1], pumpAndPressureDropRecycledWater.port_a)
+  connect(recycledWater.ports[1], pumpPressureDropRecycledWater.port_a)
     annotation (Line(points={{-82,-74},{-66,-74},{-66,-75},{-50,-75}}, color={0,
           127,255}));
-    connect(pumpAndPressureDropRecycledWater.port_b, Watertreatment.ports[4])     annotation (Line(points={{-36,-75},{-14,-75},{-14,-64},{5.6,-64}}, color={0,
+  connect(pumpPressureDropRecycledWater.port_b, Watertreatment.ports[4])
+    annotation (Line(points={{-36,-75},{-14,-75},{-14,-64},{5.6,-64}}, color={0,
           127,255}));
     connect(MFlowRecycledWater, mFlowRecycledWater.y) annotation (Line(points={{106,-78},
           {30,-78},{30,-60},{-57.3,-60}}, color={0,0,127}));
 
-  connect(mFlowFreshWater.y, pumpAndPressureDropFreshWater.m_flow_pump)
+  connect(mFlowFreshWater.y, pumpPressureDropFreshWater.m_flow_pump)
     annotation (Line(points={{-55.3,-84},{-50.65,-84},{-50.65,-89.4},{-46,-89.4}},
         color={0,0,127}));
   connect(mFlowFreshWater.y, MFlowFreshWater) annotation (Line(points={{-55.3,-84},
           {24,-84},{24,-86},{106,-86}}, color={0,0,127}));
-  connect(freshWater.ports[1], pumpAndPressureDropFreshWater.port_a)
-    annotation (Line(points={{-82,-92},{-64,-92},{-64,-93},{-46,-93}}, color={0,
-          127,255}));
-  connect(pumpAndPressureDropFreshWater.port_b, Watertreatment.ports[5])
+  connect(freshWater.ports[1], pumpPressureDropFreshWater.port_a) annotation (
+      Line(points={{-82,-92},{-64,-92},{-64,-93},{-46,-93}}, color={0,127,255}));
+  connect(pumpPressureDropFreshWater.port_b, Watertreatment.ports[5])
     annotation (Line(points={{-36,-93},{-18,-93},{-18,-94},{2,-94},{2,-64},{7.2,
           -64}}, color={0,127,255}));
   connect(openingHours, inUse.u) annotation (Line(points={{-105,87},{-100,87},{-100,

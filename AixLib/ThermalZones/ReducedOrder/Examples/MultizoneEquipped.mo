@@ -11,7 +11,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     ASurTot=12744.27,
     numZones=1,
     zoneParam=
-        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+        {AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler()},
+    swimmingPools=true,
     internalGainsMode=1,
     heatAHU=true,
     coolAHU=true,
@@ -99,6 +100,13 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     "Set point for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
+  Modelica.Blocks.Sources.CombiTimeTable tableOpeningHours(
+    tableOnFile=true,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="OpeningHours",
+    columns=2:16,
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))  "Boundary condition: Opening Hours of swiming pools"
+    annotation (Placement(transformation(extent={{-52,-32},{-36,-16}})));
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -130,6 +138,8 @@ equation
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
   connect(const.y, multizone.TSetCool) annotation (Line(points={{55.2,-82},{
           34.6,-82},{34.6,-9}}, color={0,0,127}));
+  connect(tableOpeningHours.y[2], multizone.openingHours) annotation (Line(
+        points={{-35.2,-24},{4,-24},{4,-9},{45.6,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(
