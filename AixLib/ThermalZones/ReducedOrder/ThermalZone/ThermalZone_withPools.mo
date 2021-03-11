@@ -1,7 +1,8 @@
 ﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone_withPools
   "Thermal zone containing moisture balance and swimmin pools"
-  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(use_moisture_balance=true);
+  extends
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(      use_moisture_balance=true);
 
   replaceable model corG =
       SolarGain.CorrectionGDoublePane
@@ -327,8 +328,8 @@ protected
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={48,36})));
-  Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) if
-    zoneParam.AFloor > 0
+  Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) if zoneParam.AFloor
+     > 0 or zoneParam.swimmingPools
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={39,22})));
@@ -400,15 +401,14 @@ public
 
    parameter Boolean swimmingPools=zoneParam.swimmingPools  "Are swimming pools in this zone?" annotation (Dialog(tab="Moisture", group="Swimming Pools"));
 
-   parameter Integer numPools( min=1)=zoneParam.numPools
+   final parameter Integer numPools(min=1)=zoneParam.numPools
    "Number of Swimming Pools" annotation (Dialog(tab="Moisture", group="Swimming Pools", enable = swimmingPools));
 
-   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]= zoneParam.poolParam[:]
+   final parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]= zoneParam.poolParam[:]
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = swimmingPools));
 
   Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](final poolParam=poolParam) if (ATot
-     > 0 or zoneParam.AFloor > 0) and swimmingPools
-                                    annotation (Placement(transformation(extent={{-68,-86},
+     > 0) and swimmingPools         annotation (Placement(transformation(extent={{-68,-86},
             {-52,-72}})));
 
   Modelica.Blocks.Interfaces.RealOutput PPoolPump(final quantity="Power",
@@ -474,7 +474,7 @@ public
         rotation=90,
         origin={52,-84})));
 equation
- if swimmingPools and (ATot > 0 or zoneParam.AFloor>0) then
+ if swimmingPools and (ATot > 0) then
 
     for i in 1:numPools loop
       connect(TRad, indoorSwimmingPool[i].TRad) annotation (Line(points={{110,60},

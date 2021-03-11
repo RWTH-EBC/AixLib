@@ -762,7 +762,7 @@ end if;
           transformation(extent={{-128,44},{-88,84}}), iconTransformation(extent={{-112,60},
               {-88,84}})));
     Sensors.MassFlowRate senMasFlo( redeclare package  Medium = Medium)
-      annotation (Placement(transformation(extent={{20,22},{40,42}})));
+      annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
     Modelica.Blocks.Continuous.LimPID PID(
       k=0.1,
       Ti=5,
@@ -771,22 +771,21 @@ end if;
   equation
     connect(port_a, CirculationPump.port_a) annotation (Line(points={{-100,0},{-88,
             0},{-88,-2},{-60,-2},{-60,0}}, color={0,127,255}));
-    connect(CirculationPump.port_b, res.port_a)
-      annotation (Line(points={{-40,0},{20,0}}, color={0,127,255}));
     connect(res.port_b, port_b) annotation (Line(points={{40,0},{62,0},{62,-4},{100,
             -4},{100,0}}, color={0,127,255}));
     connect(CirculationPump.P, P) annotation (Line(points={{-39,9},{-28,9},{-28,46},
             {106,46}}, color={0,0,127}));
-    connect(senMasFlo.port_a, res.port_a)
-      annotation (Line(points={{20,32},{20,0}}, color={0,127,255}));
-    connect(senMasFlo.port_b, res.port_b)
-      annotation (Line(points={{40,32},{40,0}}, color={0,127,255}));
     connect(PID.u_m, senMasFlo.m_flow) annotation (Line(points={{-44,52},{-44,
-            43},{30,43}}, color={0,0,127}));
+            38},{2,38},{2,11}},
+                          color={0,0,127}));
     connect(PID.u_s, m_flow_pump)
       annotation (Line(points={{-56,64},{-108,64}}, color={0,0,127}));
     connect(PID.y, CirculationPump.m_flow_in) annotation (Line(points={{-33,64},{-33,
             41},{-50,41},{-50,12}}, color={0,0,127}));
+    connect(CirculationPump.port_b, senMasFlo.port_a)
+      annotation (Line(points={{-40,0},{-8,0}}, color={0,127,255}));
+    connect(senMasFlo.port_b, res.port_a)
+      annotation (Line(points={{12,0},{20,0}}, color={0,127,255}));
     annotation (Icon(graphics={Ellipse(
             extent={{-60,60},{60,-60}},
             lineColor={0,0,0},

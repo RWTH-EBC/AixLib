@@ -688,11 +688,9 @@ package Pools "Models to describe Swimming Pools"
       "Output Pool Temperature" annotation (
         Placement(transformation(extent={{98,76},{118,
               96}})));
-    Modelica.Blocks.Sources.RealExpression getTpool(final y=
-          poolParam.T_pool)
+    Modelica.Blocks.Sources.Constant       getTpool(k=poolParam.T_pool)
       "Prescribed mass flow for intake of fresh water into the pool-watertreatment cycle"
-      annotation (Placement(transformation(extent={{
-              74,68},{88,80}})));
+      annotation (Placement(transformation(extent={{74,70},{80,76}})));
     HeatExchangers.PrescribedOutlet preQPool(
       redeclare package Medium = Medium,
       allowFlowReversal=false,
@@ -705,16 +703,27 @@ package Pools "Models to describe Swimming Pools"
           extent={{-10,-10},{10,10}},
           rotation=0,
           origin={38,-20})));
+    Modelica.Blocks.Sources.Constant const(k=poolParam.T_pool)
+      annotation (Placement(transformation(extent={{-26,-28},{-6,-8}})));
   equation
 
    if inUse.y or not poolParam.partialLoad then
        m_flow_toPool = poolParam.Q*Medium.d_const;
-       m_flow_evap = (poolParam.beta_inUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
+
+       if (psat_T_pool - phi *psat_T_Air <0) then
+         m_flow_evap=0.0001;
+       else
+         m_flow_evap = (poolParam.beta_inUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
          psat_T_Air)*poolParam.A_pool;
+       end if;
    else
        m_flow_toPool= poolParam.Q*poolParam.x_partialLoad*Medium.d_const;
-       m_flow_evap = (poolParam.beta_nonUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
+       if (psat_T_pool - phi *psat_T_Air <0) then
+         m_flow_evap=0.0001;
+       else
+         m_flow_evap = (poolParam.beta_nonUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
           psat_T_Air)*poolParam.A_pool;
+       end if;
    end if;
 
   if poolParam.waterRecycling then
@@ -807,7 +816,7 @@ package Pools "Models to describe Swimming Pools"
     connect(openingHours, inUse.u) annotation (Line(points={{-105,87},{-100,87},{-100,
             86},{-81.2,86}}, color={0,0,127}));
     connect(getTpool.y, TPool) annotation (Line(
-          points={{88.7,74},{96,74},{96,86},{108,86}},
+          points={{80.3,73},{96,73},{96,86},{108,86}},
           color={0,0,127}));
     connect(heatTransferWaterSurface.heatPort_b, ConvPoolSurface) annotation (
         Line(points={{-13.18,66.4667},{-13.18,83.2334},{-10,83.2334},{-10,100}},
@@ -823,8 +832,9 @@ package Pools "Models to describe Swimming Pools"
             -20},{28,-28},{26,-28},{26,-36}}, color={0,127,255}));
     connect(preQPool.Q_flow, QPool) annotation (Line(points={{49,-12},{64,-12},{64,
             -30},{108,-30}}, color={0,0,127}));
-  connect(getTpool.y, preQPool.TSet) annotation (Line(points={{88.7,74},{88.7,
-          30},{26,30},{26,-12}}, color={0,0,127}));
+    connect(getTpool.y, preQPool.TSet) annotation (Line(points={{80.3,73},{88,
+          73},{88,-8},{26,-8},{26,-12}},
+                                       color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Line(
               points={{-72,30}}, color={255,255,170}), Bitmap(extent={{-102,-104},{100,98}},
                            fileName=

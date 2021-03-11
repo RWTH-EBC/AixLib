@@ -9,9 +9,10 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     VAir=33500,
     ABuilding=8375,
     ASurTot=12744.27,
-    numZones=1,
-    zoneParam=
-        {AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler()},
+    numZones=numZones,
+    zoneParam={
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler()},
+
     swimmingPools=true,
     internalGainsMode=1,
     heatAHU=true,
@@ -45,10 +46,10 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     tableName="Internals",
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"),
-    columns=2:16)
+    columns=2:(1 + 3*numZones))
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[5]
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[numZones]
     "Radiative heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
   Modelica.Blocks.Sources.Sine sine(
@@ -57,7 +58,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     offset=500)
     "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[5]
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[numZones]
     "Convective heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{-14,-86},{6,-66}})));
   Modelica.Blocks.Math.Gain gain(k=0.5)
@@ -66,13 +67,13 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   Modelica.Blocks.Math.Gain gain1(k=0.5)
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{-56,-82},{-44,-70}})));
-  Modelica.Blocks.Routing.Replicator replicator(nout=5)
+  Modelica.Blocks.Routing.Replicator replicator(nout=numZones)
     "Replicates sinusoidal excitation for numZones" annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-30,-54})));
-  Modelica.Blocks.Routing.Replicator replicator1(nout=5)
+  Modelica.Blocks.Routing.Replicator replicator1(nout=numZones)
     "Replicates sinusoidal excitation for numZones" annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
@@ -93,10 +94,10 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"),
-    columns=2:6)
+    columns=2:(1 + numZones))
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0)
+  Modelica.Blocks.Sources.Constant const[numZones](each k=0)
     "Set point for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
@@ -107,6 +108,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     columns=2:16,
     fileName=ModelicaServices.ExternalReferences.loadResource("modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))  "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-52,-32},{-36,-16}})));
+  parameter Integer numZones=1 "Number of zones";
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},

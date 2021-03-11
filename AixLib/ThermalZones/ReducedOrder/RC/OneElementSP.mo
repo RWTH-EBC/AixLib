@@ -223,6 +223,11 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
     ATot > 0
     "Input of QLat of different moisture sources in the zone"
     annotation (Placement(transformation(extent={{-266,-160},{-234,-128}})));
+
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
+    use_moisture_balance and ATot >0
+    "Converter for latent heat flow rate"
+    annotation (Placement(transformation(extent={{-194,-126},{-174,-106}})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
@@ -293,10 +298,7 @@ protected
     "Sums up solar radiation from different directions"
     annotation (Placement(transformation(extent={{-186,118},{-174,130}})));
 
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
-    use_moisture_balance and ATot >0
-    "Converter for latent heat flow rate"
-    annotation (Placement(transformation(extent={{-202,-130},{-182,-110}})));
+
 equation
   connect(volAir.ports, ports)
     annotation (Line(
@@ -435,9 +437,6 @@ equation
   connect(sumSolRad.y, convHeatSol.Q_flow)
     annotation (Line(points={{-173.4,124},{-166,124}}, color={0,0,127}));
 
-  connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-182,
-          -120},{-166,-120},{-166,-82},{-32,-82},{-32,-16},{-20,-16}}, color={191,
-          0,0}));
   connect(volMoiAir.C_flow, C_flow) annotation (Line(points={{-22,-22},{-52,-22},
           {-52,90},{-260,90}}, color={0,0,127}));
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
@@ -458,7 +457,10 @@ equation
   connect(SumMflow.y, volMoiAir.mWat_flow) annotation (Line(points={{-169.4,-94},{-136.49,-94},
           {-136.49,-8},{-22,-8}},               color={0,0,127}));
   connect(SumQLat.y, conQLat_flow.Q_flow)
-    annotation (Line(points={{-211.4,-120},{-202,-120}},  color={0,0,127}));
+    annotation (Line(points={{-211.4,-120},{-206,-120},{-206,-116},{-194,-116}},
+                                                          color={0,0,127}));
+  connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-174,
+          -116},{-44,-116},{-44,-16},{-20,-16}}, color={191,0,0}));
     annotation (Dialog(connectorSizing=true), HideResult=true,
               defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},

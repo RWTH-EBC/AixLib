@@ -5,11 +5,12 @@ model ThermalZone "Illustrates the use of ThermalZone"
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone_withPools thermalZone_withPools(
     zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    T_start=293.15,
+    redeclare package Medium = Media.Air,
+    swimmingPools=true,
+    T_start=303.15,
     internalGainsMode=1,
     use_AirExchange=false)
                          "Thermal zone"
@@ -141,8 +142,8 @@ model ThermalZone "Illustrates the use of ThermalZone"
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://Output_Schwimmbad_Modell/Hallenbad/TsetHeat_Hallenbad.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://Output_Schwimmbad_Modell/Hallenbad/Hallenbad_34grad.txt"),
     columns=2:16)
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
@@ -151,8 +152,8 @@ model ThermalZone "Illustrates the use of ThermalZone"
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://Output_Schwimmbad_Modell/Hallenbad/TsetCool_Hallenbad.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://Output_Schwimmbad_Modell/Hallenbad/Hallenbad_34grad.txt"),
     columns=2:16)
       "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
@@ -181,7 +182,8 @@ equation
     annotation (Line(points={{-47.2,-44},{-20,-44},{-20,-8.4},{5.2,-8.4}},
         color={0,0,127}));
   connect(thermalZone_withPools.TSetHeat, tableTSet.y[1]) annotation (Line(
-        points={{-9.6,1.2},{23.2,1.2},{23.2,-58},{55.2,-58}}, color={0,0,127}));
+        points={{-9.6,1.2},{-16,1.2},{-16,2},{-22,2},{-22,-58},{55.2,-58}},
+                                                              color={0,0,127}));
   connect(thermalZone_withPools.TSetCool, tableTSetCool.y[1]) annotation (Line(
         points={{-9.6,4},{-9.6,-39.4},{55.2,-39.4},{55.2,-82}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

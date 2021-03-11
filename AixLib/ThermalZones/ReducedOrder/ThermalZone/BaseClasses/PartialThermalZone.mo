@@ -110,7 +110,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
             {86,92}})));
 
-    //final nu= if swimmingPools then numPools+1 else numPools,
+
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +

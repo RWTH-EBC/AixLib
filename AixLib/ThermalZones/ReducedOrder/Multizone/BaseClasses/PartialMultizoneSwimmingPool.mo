@@ -83,8 +83,7 @@ model PartialMultizoneSwimmingPool "Partial multizone model, instead of ThermalZ
 
   //********************Beginn Pool
 
-  parameter Boolean swimmingPools  "Swimming pools in this building? " annotation (Dialog(tab="Moisture", group="Swimming Pools"));
-
+  parameter Boolean swimmingPools=false  "Are swimming pools in this zone?" annotation (Dialog(tab="Moisture", group="Swimming Pools"));
 
   ThermalZone.ThermalZone_withPools zone[numZones](
     each Heater_on=Heater_on,
