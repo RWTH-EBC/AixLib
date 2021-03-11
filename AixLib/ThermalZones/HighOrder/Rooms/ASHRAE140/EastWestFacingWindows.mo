@@ -47,6 +47,8 @@ model EastWestFacingWindows "windows facing south and west"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     calcMethodIn=calcMethodIn,
     final WindowType=Type_Win,
     redeclare final model WindowModel = WindowModel,
@@ -73,6 +75,8 @@ model EastWestFacingWindows "windows facing south and west"
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_height,
@@ -100,6 +104,8 @@ model EastWestFacingWindows "windows facing south and west"
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
     use_shortWaveRadOut=true,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_height,
@@ -125,6 +131,8 @@ model EastWestFacingWindows "windows facing south and west"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_North(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     calcMethodIn=calcMethodIn,
     wall_height=room_height,
     final WindowType=Type_Win,
@@ -152,6 +160,8 @@ model EastWestFacingWindows "windows facing south and west"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_width,
@@ -177,6 +187,8 @@ model EastWestFacingWindows "windows facing south and west"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     calcMethodIn=calcMethodIn,
     wall_length=room_length,
     wall_height=room_width,

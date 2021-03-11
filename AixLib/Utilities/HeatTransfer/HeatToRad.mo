@@ -1,20 +1,20 @@
-within AixLib.Utilities.HeatTransfer;
+﻿within AixLib.Utilities.HeatTransfer;
 model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16) "Initial temperature";
+  parameter Modelica.SIunits.Temperature T_ref=Modelica.SIunits.Conversions.from_degC(16) "Reference temperature for optional linearization" annotation (Dialog(enable=radCalcMethod == 4));
   parameter Boolean use_A_in = false
     "Get the area from the input connector"
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Modelica.SIunits.Area A=-1 "Fixed value of prescribed area"
                                    annotation (Dialog(enable=not use_A_in));
-                                   parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
+  parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
     Evaluate=true,
     Dialog(group = "Radiation exchange equation", compact=true),
     choices(
       choice=1 "No approx",
-      choice=2 "Linear approx wall temp",
-      choice=3 "Linear approx rad temp",
-      choice=4 "Linear approx T0",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
       radioButtons=true));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort
     "Heat port for convective or conductive heat flow"
@@ -45,7 +45,7 @@ equation
   elseif radCalcMethod == 3 then
     convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*radPort.T*radPort.T*radPort.T*(convPort.T - radPort.T);
   else
-    convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*T0*T0*T0*(convPort.T - radPort.T);
+    convPort.Q_flow =Modelica.Constants.sigma*eps*A_in_internal*4*T_ref*T_ref*T_ref*(convPort.T - radPort.T);
   end if;
   if not use_A_in then
     A_in_internal =A;

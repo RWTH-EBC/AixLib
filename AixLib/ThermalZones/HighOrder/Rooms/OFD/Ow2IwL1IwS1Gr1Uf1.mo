@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.OFD;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow2IwL1IwS1Gr1Uf1
   "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
 
@@ -92,6 +92,8 @@ model Ow2IwL1IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -118,6 +120,8 @@ model Ow2IwL1IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -148,6 +152,8 @@ model Ow2IwL1IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -174,6 +180,8 @@ model Ow2IwL1IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -200,6 +208,8 @@ model Ow2IwL1IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -227,6 +237,8 @@ model Ow2IwL1IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,

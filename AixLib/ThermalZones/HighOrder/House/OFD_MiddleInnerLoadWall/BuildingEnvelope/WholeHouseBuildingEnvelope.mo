@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model WholeHouseBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(    redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
@@ -52,6 +52,8 @@ model WholeHouseBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final Type_Win=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -88,6 +90,8 @@ model WholeHouseBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final Type_Win=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -125,6 +129,8 @@ model WholeHouseBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final Type_Win=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,

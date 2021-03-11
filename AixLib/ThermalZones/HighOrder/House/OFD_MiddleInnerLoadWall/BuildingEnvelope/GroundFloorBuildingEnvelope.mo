@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model GroundFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
@@ -107,6 +107,8 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final Type_Win=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -151,6 +153,8 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final Type_Win=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -193,6 +197,8 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final Type_Win=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
@@ -235,6 +241,8 @@ model GroundFloorBuildingEnvelope
     final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodIn=calcMethodIn,
@@ -281,6 +289,8 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final Type_Win=Type_Win,
     redeclare final model WindowModel = WindowModel,
     redeclare final model CorrSolarGainWin = CorrSolarGainWin,

@@ -6,8 +6,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Modelica.SIunits.SpecificHeatCapacity cAir=1007 "Specific heat capacity of air" annotation (Dialog(group="Air volume of room"));
 
   replaceable parameter AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
-    wallTypes constrainedby
-    AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
+    wallTypes constrainedby AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
     "Types of walls (contains multiple records)"
     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
 
@@ -39,6 +38,19 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=2.5
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
     annotation(Dialog(tab="Inner walls", group="Heat convection", enable=(calcMethodIn==3)));
+
+  parameter Integer radLongCalcMethod=1 "Calculation method for longwave radiation heat transfer"
+    annotation (
+    Evaluate=true,
+    Dialog(tab="Inner walls", group="Longwave radiation",   compact=true),
+    choices(
+      choice=1 "No approx",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
+      radioButtons=true));
+  parameter Modelica.SIunits.Temperature T_ref=Modelica.SIunits.Conversions.from_degC(16) "Reference temperature for optional linearization of longwave radiation"
+    annotation (Dialog(tab="Inner walls", group = "Longwave radiation", enable=radLongCalcMethod == 4));
 
   //// Outer / Exterior wall parameters
   //Window type

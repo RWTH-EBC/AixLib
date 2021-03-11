@@ -3,20 +3,35 @@ model Door "Simple door"
   parameter Modelica.SIunits.Area door_area = 2 "Total door area" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer U = 1.8
     "Thermal transmission coefficient"                                                            annotation(Dialog(group = "Properties"));
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature"                                                                                      annotation(Dialog(group = "Properties"));
-  parameter Modelica.SIunits.Emissivity eps = 0.9 "Emissivity of door material" annotation(Dialog(group = "Properties"));
+  parameter Modelica.SIunits.Emissivity eps = 0.9 "Emissivity of door material" annotation(Dialog(group = "Radiation"));
+
+  parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
+    Evaluate=true,
+    Dialog(group = "Radiation", compact=true),
+    choices(
+      choice=1 "No approx",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
+      radioButtons=true));
+  parameter Modelica.SIunits.Temperature T_ref=Modelica.SIunits.Conversions.from_degC(16) "Reference temperature for optional linearization" annotation (Dialog(group = "Radiation", enable=radCalcMethod == 4));
+
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{80, -10}, {100, 10}})));
   Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
-    A=door_area,
-    eps=eps) annotation (Placement(transformation(extent={{30,50},{50,70}})));
+    final A=door_area,
+    final radCalcMethod=radCalcMethod,
+    final T_ref=T_ref,
+    final eps=eps) annotation (Placement(transformation(extent={{30,50},{50,70}})));
   Utilities.Interfaces.RadPort
                             radPort annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(G = door_area * U) annotation(Placement(transformation(extent={{-10,-10},{10,10}})));
   Utilities.HeatTransfer.HeatToRad twoStar_RadEx1(
-    A=door_area,
-    eps=eps) annotation (Placement(transformation(extent={{-32,50},{-52,70}})));
+    final A=door_area,
+    final radCalcMethod=radCalcMethod,
+    final T_ref=T_ref,
+    final eps=eps) annotation (Placement(transformation(extent={{-32,50},{-52,70}})));
   Utilities.Interfaces.RadPort
                             radPort1 annotation(Placement(transformation(extent = {{-100, 50}, {-80, 70}})));
 equation

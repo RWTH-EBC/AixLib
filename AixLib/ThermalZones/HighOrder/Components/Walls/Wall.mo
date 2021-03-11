@@ -12,9 +12,6 @@ model Wall
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
-  parameter Boolean use_shortWaveRadIn=false "Use bus connector for incoming shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
-  parameter Boolean use_shortWaveRadOut=false "Use bus connector for outgoing shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
-
   // general wall parameters
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
     annotation(Dialog(group="Structure of wall layers"),   choicesAllMatching = true,
@@ -45,6 +42,23 @@ model Wall
           calcMethodOut == 2 and outside),                                                                                                                                                                                                        choicesAllMatching = true);
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1
         "vertical wall",                                                                                                    choice = 2 "floor", choice = 3 "ceiling", radioButtons = true));
+
+
+  parameter Boolean use_shortWaveRadIn=false "Use bus connector for incoming shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Boolean use_shortWaveRadOut=false "Use bus connector for outgoing shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Integer radLongCalcMethod=1 "Calculation method for longwave radiation heat transfer"
+    annotation (
+    Evaluate=true,
+    Dialog(tab="Surface Parameters", group="Inside surface",   compact=true),
+    choices(
+      choice=1 "No approx",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
+      radioButtons=true));
+  parameter Modelica.SIunits.Temperature T_ref=Modelica.SIunits.Conversions.from_degC(16) "Reference temperature for optional linearization of longwave radiation"
+    annotation (Dialog(tab="Surface Parameters", group = "Inside surface", enable=radLongCalcMethod == 4));
+
   parameter Integer calcMethodIn=1
     "Calculation method of convective heat transfer coefficient at inside surface"
     annotation (Dialog(
@@ -106,18 +120,20 @@ model Wall
   // Initial temperature
   parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature"                                                                                      annotation(Dialog(tab = "Initialization"));
+
   // COMPONENT PART
   BaseClasses.ConvNLayerClearanceStar Wall(
     final energyDynamics=energyDynamics,
-    h=wall_height,
-    l=wall_length,
-    T0=T0,
-    clearance=clearance,
-    eps=eps_in,
-    wallType=wallPar,
-    surfaceOrientation=ISOrientation,
-    calcMethod=calcMethodIn,
-    hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
+    final h=wall_height,
+    final l=wall_length,
+    final T0=T0,
+    final clearance=clearance,
+    final wallType=wallPar,
+    final surfaceOrientation=ISOrientation,
+    final calcMethod=calcMethodIn,
+    final hCon_const=hConIn_const,
+    final radCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref) "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A=ANet) if                                    outside annotation(Placement(transformation(origin={-37.5,90.5},extent={{-10.5,-10.5},{10.5,10.5}})));
   AixLib.Utilities.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
@@ -131,11 +147,11 @@ model Wall
                          outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-46,-47},{-23,-21}})));
   WindowsDoors.Door Door(
-    T0=T0,
-    door_area=door_height*door_width,
-    eps=eps_door,
-    U=if outside then U_door else U_door*2) if withDoor
-    annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
+    final door_area=door_height*door_width,
+    final eps=eps_door,
+    U=if outside then U_door else U_door*2,
+    final radCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref) if withDoor annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
 
   AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
@@ -157,9 +173,7 @@ model Wall
         rotation=180,
         origin={45,80})));
   final parameter Modelica.SIunits.Area ANet=wall_height*wall_length - clearance "Net area of wall (without windows and doors)";
-  parameter Modelica.SIunits.Emissivity eps_in=wallPar.eps
-    "Longwave emission coefficient of the interior surface"
-    annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
+
   Utilities.Interfaces.ShortRadSurf shortRadWall if use_shortWaveRadIn
     annotation (Placement(transformation(extent={{92,66},{118,92}}),
         iconTransformation(extent={{7,66},{33,92}})));
