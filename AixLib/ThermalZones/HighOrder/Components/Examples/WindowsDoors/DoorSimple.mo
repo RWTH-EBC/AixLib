@@ -1,10 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Components.Examples.WindowsDoors;
 model DoorSimple
   extends Modelica.Icons.Example;
-  ThermalZones.HighOrder.Components.WindowsDoors.Door doorSimple(
-    eps=1,
-    door_area=10,
-    T0=293.15) annotation (Placement(transformation(extent={{-24,-4},{12,28}})));
+  ThermalZones.HighOrder.Components.WindowsDoors.Door doorSimple(eps=1, door_area=10) annotation (Placement(transformation(extent={{-24,-4},{12,28}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Toutside(T = 273.15) annotation(Placement(transformation(extent = {{-62, 0}, {-42, 20}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside(T = 293.15) annotation(Placement(transformation(extent = {{58, 0}, {38, 20}})));
   Modelica.Blocks.Sources.RealExpression UValue(y = doorSimple.port_b.Q_flow / (doorSimple.port_b.T - doorSimple.port_a.T) / doorSimple.door_area) annotation(Placement(transformation(extent = {{-20, -46}, {0, -26}})));
