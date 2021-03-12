@@ -486,6 +486,30 @@ public
     allowFlowReversal=false,
     T_start(displayUnit="K"))
     annotation (Placement(transformation(extent={{12,-132},{42,-112}})));
+  Modelica.Blocks.Interfaces.RealOutput T_StorageBot annotation (Placement(
+        transformation(extent={{654,-188},{694,-148}}), iconTransformation(
+          extent={{654,-188},{694,-148}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=
+        substationStorageHeating.TBot.T)
+    annotation (Placement(transformation(extent={{598,-178},{618,-158}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=
+        substationStorageHeating.TTop.T)
+    annotation (Placement(transformation(extent={{598,-222},{618,-202}})));
+  Modelica.Blocks.Interfaces.RealOutput T_StorageTop annotation (Placement(
+        transformation(extent={{654,-232},{694,-192}}), iconTransformation(
+          extent={{654,-188},{694,-148}})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=
+        substationStorageHeating.T_storage_average)
+    annotation (Placement(transformation(extent={{596,-264},{616,-244}})));
+  Modelica.Blocks.Interfaces.RealOutput T_StorageAve annotation (Placement(
+        transformation(extent={{652,-274},{692,-234}}), iconTransformation(
+          extent={{654,-188},{694,-148}})));
+  Modelica.Blocks.Interfaces.RealOutput m_flowStorage annotation (Placement(
+        transformation(extent={{656,-462},{696,-422}}), iconTransformation(
+          extent={{654,-188},{694,-148}})));
+  Modelica.Blocks.Sources.RealExpression realExpression3(y=
+        substationStorageHeating.port_a.m_flow)
+    annotation (Placement(transformation(extent={{602,-452},{622,-432}})));
 equation
 
   //renewablePowerConsumptionSubstation = min(chi.P + heatPump.P, FreeElectricity);
@@ -719,6 +743,14 @@ equation
         points={{-24,-123},{-7,-123},{-7,-122},{12,-122}}, color={0,127,255}));
   connect(senTem_HP_out2.port_b, heatPump.port_a2) annotation (Line(points={{42,
           -122},{62,-122},{62,-125.2},{82,-125.2}}, color={0,127,255}));
+  connect(realExpression.y, T_StorageBot) annotation (Line(points={{619,-168},{
+          640,-168},{640,-168},{674,-168}}, color={0,0,127}));
+  connect(realExpression1.y, T_StorageTop)
+    annotation (Line(points={{619,-212},{674,-212}}, color={0,0,127}));
+  connect(realExpression2.y, T_StorageAve)
+    annotation (Line(points={{617,-254},{672,-254}}, color={0,0,127}));
+  connect(realExpression3.y, m_flowStorage)
+    annotation (Line(points={{623,-442},{676,-442}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{-260,280},{-280,300}}),
         iconTransformation(extent={{-260,184},{-294,218}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,-720},
