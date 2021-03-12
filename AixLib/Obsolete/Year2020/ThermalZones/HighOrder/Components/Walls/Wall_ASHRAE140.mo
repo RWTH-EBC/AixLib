@@ -141,7 +141,6 @@ public
     annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
   AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door Door(
-    T0=T0,
     door_area=door_height*door_width,
     U=U_door*2,
     eps=eps_door) if withDoor annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
