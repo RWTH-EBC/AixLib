@@ -1,7 +1,7 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
   "Multizone model"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizoneSwimmingPool;
 
 
 
@@ -50,10 +50,11 @@ equation
           66.22},{38.84,66.22}},              color={0,0,127}));
   connect(zone.ventHum, ventHum) annotation (Line(points={{39.05,54.945},{-28.475,
           54.945},{-28.475,40},{-100,40}}, color={0,0,127}));
-  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,51.05},{82.1,40},
+  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.52,48.59},{82.52,40},
           {82,40},{82,20},{110,20}},color={0,0,127}));
   connect(zone.X_w, X_w)
-    annotation (Line(points={{82.1,55.15},{82.1,0},{110,0}},color={0,0,127}));
+    annotation (Line(points={{82.52,51.87},{82.52,0},{110,0}},
+                                                            color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),

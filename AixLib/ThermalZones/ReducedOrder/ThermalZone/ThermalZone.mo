@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
   extends
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;

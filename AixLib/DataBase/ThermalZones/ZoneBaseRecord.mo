@@ -1,4 +1,4 @@
-within AixLib.DataBase.ThermalZones;
+﻿within AixLib.DataBase.ThermalZones;
 record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
@@ -121,7 +121,7 @@ record ZoneBaseRecord "Base record definition for zone records"
         be used";
 
   // Add for Pools
-   parameter Boolean swimmingPools=false;
+   parameter Boolean use_swimmingPools=false;
    parameter Integer numPools( min=1);
    replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]
                                                                                          annotation (choicesAllMatching=false);

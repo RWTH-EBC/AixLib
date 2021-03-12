@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
-model PartialMultizoneSwimmingPool "Partial multizone model, instead of ThermalZone use ThermalZone_withPools"
+partial model PartialMultizoneSwimmingPool "Partial model for multizone models with Swimming Pools"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter Integer buildingID
@@ -36,6 +36,8 @@ model PartialMultizoneSwimmingPool "Partial multizone model, instead of ThermalZ
     "If true, input connector QLat_flow is enabled and room air computes moisture balance"
     annotation (Dialog(tab="Moisture"));
 
+  parameter Boolean use_swimmingPools_MZ=false "If true, output connectors for water and energy demands of pools in zones are activated";
+
   replaceable model corG = SolarGain.CorrectionGDoublePane
     constrainedby
     AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
@@ -52,40 +54,35 @@ model PartialMultizoneSwimmingPool "Partial multizone model, instead of ThermalZ
     extent={{-10,-10},{10,10}},
     rotation=90,
     origin={60,-110})));
-  Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)](
+  Modelica.Blocks.Interfaces.RealOutput TAir[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
-    annotation (Placement(transformation(extent={{100,85},{120,105}}),
+    annotation (Placement(transformation(extent={{100,71},{120,91}}),
         iconTransformation(extent={{80,19},{100,40}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)](
+  Modelica.Blocks.Interfaces.RealOutput TRad[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") if ASurTot > 0
     "Mean indoor radiation temperature"
-    annotation (Placement(transformation(extent={{100,73},{120,93}}),
+    annotation (Placement(transformation(extent={{100,49},{120,69}}),
         iconTransformation(extent={{80,0},{100,20}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if
-       ASurTot > 0 or VAir > 0
-    "Convective internal gains"
-    annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[numZones] if
+       ASurTot > 0 or VAir > 0 "Convective internal gains" annotation (
+      Placement(transformation(extent={{-110,-80},{-90,-60}}),
         iconTransformation(extent={{-90,-92},{-70,-72}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
-       ASurTot > 0 "Radiative internal gains"
-    annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
-        iconTransformation(extent={{-90,-60},{-70,-40}})));
-
-  //********************Beginn Pool
-
-  parameter Boolean swimmingPools=false  "Are swimming pools in this zone?" annotation (Dialog(tab="Moisture", group="Swimming Pools"));
-
-  ThermalZone.ThermalZone_withPools zone[numZones](
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[numZones] if
+       ASurTot > 0 "Radiative internal gains" annotation (Placement(
+        transformation(extent={{-110,-30},{-90,-50}}), iconTransformation(
+          extent={{-90,-60},{-70,-40}})));
+  ThermalZone.ThermalZone_withPools  zone[numZones](
+    each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each h_heater=h_heater,
     each l_heater=l_heater,
@@ -116,42 +113,6 @@ model PartialMultizoneSwimmingPool "Partial multizone model, instead of ThermalZ
     each final mSenFac=mSenFac,
     redeclare each final package Medium = Medium) "Thermal zone model"
     annotation (Placement(transformation(extent={{38,49},{80,90}})));
-
-  Modelica.Blocks.Interfaces.RealOutput QHeatPools[numZones](
-    final quantity="HeatFlowRate",
-    final unit="W",
-    displayUnit="W") if swimmingPools "Heat demands of alls pools in each zone"
-    annotation (Placement(transformation(extent={{100,57},{120,77}}),
-        iconTransformation(extent={{80,0},{100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput PPoolPump[numZones](final quantity=
-        "Power", final unit="W") if swimmingPools
-    "Power for circulation pumps " annotation (Placement(transformation(extent=
-            {{100,42},{120,62}}), iconTransformation(extent={{80,-80},{100,-60}})));
-  Modelica.Blocks.Interfaces.RealOutput MFlowFreshWater[numZones](final
-      quantity="MassFlowRate", final unit="kg/s") if swimmingPools
-    "Consumption of fresh water of all pools in each zone" annotation (
-      Placement(transformation(extent={{100,-100},{120,-80}}),
-        iconTransformation(extent={{80,-80},{100,-60}})));
-  Modelica.Blocks.Interfaces.RealOutput MFlowRecycledWater[numZones](final
-      quantity="MassFlowRate", final unit="kg/s") if swimmingPools
-    "Consumption of recycled water of all pools in each zone" annotation (
-      Placement(transformation(extent={{100,-96},{120,-76}}),
-        iconTransformation(extent={{80,-80},{100,-60}})));
-  Modelica.Blocks.Interfaces.RealOutput MFlowWasteWater[numZones](final
-      quantity="MassFlowRate", final unit="kg/s") if swimmingPools
-    "Waste water generated by all pools in each zone" annotation (Placement(
-        transformation(extent={{100,-92},{120,-72}}), iconTransformation(extent=
-           {{80,-80},{100,-60}})));
-
-
-  Modelica.Blocks.Interfaces.RealInput openingHours
-    "Input opening hours of swimming hall" annotation (Placement(transformation(
-        extent={{20,-20},{-20,20}},
-        rotation=-90,
-        origin={50,-100}), iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={36,-110})));
 
   parameter Integer internalGainsMode
     "Decides which internal gains model for persons is used";
@@ -206,19 +167,51 @@ model PartialMultizoneSwimmingPool "Partial multizone model, instead of ThermalZ
     rotation=270,
     origin={-74,-110})));
   Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](final quantity="HeatFlowRate",
-      final unit="W") "Power for heating"
+      final unit="W")
+    "Power for heating"
     annotation (
-    Placement(transformation(extent={{100,-50},{120,-30}}),
+    Placement(transformation(extent={{100,-56},{120,-36}}),
     iconTransformation(extent={{80,-80},{100,-60}})));
   Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](final quantity="HeatFlowRate",
       final unit="W")
     "Power for cooling"
     annotation (
-    Placement(transformation(extent={{100,-62},{120,-42}}),iconTransformation(
+    Placement(transformation(extent={{100,-70},{120,-50}}),iconTransformation(
     extent={{80,-100},{100,-80}})));
-
-
-
+  Modelica.Blocks.Interfaces.RealInput openingHours
+    "Input for openingHours, only used for swimming pool models" annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={48,-100}), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={36,-110})));
+  Modelica.Blocks.Interfaces.RealOutput QHeatPools[numZones]( final quantity="HeatFlowRate",
+      final unit="W") if
+    use_swimmingPools_MZ
+    "Output of heat demand of all swimming pools of one zone"
+    annotation (Placement(transformation(extent={{100,-86},{120,-66}})));
+  Modelica.Blocks.Interfaces.RealOutput PPumpPools[numZones](final quantity="Power",
+      final unit="W") if
+    use_swimmingPools_MZ
+    "Output of electricity demand of all swimming pool pumps of one zone"
+    annotation (Placement(transformation(extent={{100,-100},{120,-80}})));
+  Modelica.Blocks.Interfaces.RealOutput MFlowFW[numZones](final quantity="MassFlowRate",
+      final unit="kg/s") if
+    use_swimmingPools_MZ
+    "Output sum of fresh water demands all pools in each zone"
+    annotation (Placement(transformation(extent={{100,-94},{120,-74}})));
+  Modelica.Blocks.Interfaces.RealOutput MFlowWW[numZones](final quantity="MassFlowRate",
+      final unit="kg/s") if
+    use_swimmingPools_MZ
+    "Output sum of waste water demands all pools in each zone"
+    annotation (Placement(transformation(extent={{100,-104},{120,-84}})));
+  Modelica.Blocks.Interfaces.RealOutput MFlowRW[numZones](final quantity="MassFlowRate",
+      final unit="kg/s") if
+    use_swimmingPools_MZ
+    "Output sum of recycled water demands all pools in each zone"
+    annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
   if not (ASurTot > 0 or VAir > 0) then
@@ -272,33 +265,35 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-    connect(zone[i].openingHours, openingHours) annotation (Line(
-        points={{69.92,52.28},{69.92,-10},{70,-10},{70,-100},{50,-100}},
-        color={0,0,127},
-        smooth=Smooth.None));
+    connect(openingHours, zone[1].openingHours) annotation (Line(points={{48,-100},
+            {48,-82},{69.92,-82},{69.92,52.28}},
+                                              color={0,0,127}));
   end for;
   connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80.42,70.32},
           {86,70.32},{86,-78},{66,-78},{-100,-78},{-100,-70}},
                                          color={191,0,0}));
-  connect(zone.TRad, TRad) annotation (Line(points={{82.1,81.8},{94,81.8},{94,
-          83},{110,83}},         color={0,0,127}));
-  connect(zone.TAir, TAir) annotation (Line(points={{82.1,85.9},{98,85.9},{98,
-          95},{110,95}}, color={0,0,127}));
+  connect(zone.TRad, TRad) annotation (Line(points={{82.1,81.8},{94,81.8},{94,60},
+          {94,59},{110,59}},     color={0,0,127}));
+  connect(zone.TAir, TAir) annotation (Line(points={{82.1,85.9},{98,85.9},{98,81},
+          {110,81}},     color={0,0,127}));
   connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80.42,76.47},
           {90,76.47},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}},
                                                                    color={191,0,
           0}));
-  connect(zone.QHeatPools, QHeatPools) annotation (Line(points={{82.1,61.3},{
-          93.05,61.3},{93.05,67},{110,67}}, color={0,0,127}));
-  connect(zone.PPoolPump, PPoolPump) annotation (Line(points={{82.1,61.3},{82.1,
-          52},{110,52}}, color={0,0,127}));
-  connect(zone.MFlowFreshWater, MFlowFreshWater) annotation (Line(points={{82.1,
-          61.3},{82.1,-90},{110,-90}}, color={0,0,127}));
-  connect(zone.MFlowRecycledWater, MFlowRecycledWater) annotation (Line(points=
-          {{82.1,61.3},{82.1,28},{82,28},{82,-86},{110,-86}}, color={0,0,127}));
-  connect(zone.MFlowWasteWater, MFlowWasteWater) annotation (Line(points={{82.1,
-          61.3},{82.1,-82},{110,-82}}, color={0,0,127}));
-  annotation (
+
+  if use_swimmingPools_MZ then
+    connect(zone.PPoolPump, PPumpPools) annotation (Line(points={{82.1,61.3},{82.1,
+          -16},{82,-16},{82,-92},{110,-92},{110,-90}}, color={0,0,127}));
+    connect(zone.QHeatPools, QHeatPools) annotation (Line(points={{82.1,61.3},{82.1,
+          -16},{82,-16},{82,-94},{110,-94},{110,-76}}, color={0,0,127}));
+    connect(zone.MFlowWasteWater, MFlowWW) annotation (Line(points={{82.1,61.3},{82.1,
+          -93.35},{110,-93.35},{110,-94}}, color={0,0,127}));
+    connect(zone.MFlowFreshWater, MFlowFW) annotation (Line(points={{82.1,61.3},{82.1,
+          -12},{82,-12},{82,-84},{110,-84}}, color={0,0,127}));
+    connect(zone.MFlowRecycledWater, MFlowRW) annotation (Line(points={{82.1,61.3},
+          {82.1,-78.35},{110,-78.35},{110,-80}}, color={0,0,127}));
+   end if;
+   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

@@ -711,7 +711,7 @@ package Pools "Models to describe Swimming Pools"
        m_flow_toPool = poolParam.Q*Medium.d_const;
 
        if (psat_T_pool - phi *psat_T_Air <0) then
-         m_flow_evap=0.0001;
+         m_flow_evap=0;
        else
          m_flow_evap = (poolParam.beta_inUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
          psat_T_Air)*poolParam.A_pool;
@@ -719,7 +719,7 @@ package Pools "Models to describe Swimming Pools"
    else
        m_flow_toPool= poolParam.Q*poolParam.x_partialLoad*Medium.d_const;
        if (psat_T_pool - phi *psat_T_Air <0) then
-         m_flow_evap=0.0001;
+         m_flow_evap=0;
        else
          m_flow_evap = (poolParam.beta_nonUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
           psat_T_Air)*poolParam.A_pool;

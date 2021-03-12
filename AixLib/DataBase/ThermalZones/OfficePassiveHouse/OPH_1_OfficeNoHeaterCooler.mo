@@ -87,9 +87,9 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false,
-    swimmingPools=true,
-    numPools=2,
-    poolParam= {AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(),AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.ChildrensPool()});
+    use_swimmingPools=true,
+    numPools=1,
+    poolParam= {AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool()});
 
 
 

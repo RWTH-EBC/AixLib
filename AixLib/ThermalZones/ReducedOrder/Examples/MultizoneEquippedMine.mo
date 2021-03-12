@@ -1,9 +1,10 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
+model MultizoneEquippedMine "Illustrates the use of MultizoneEquipped"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquippedTest
+                                                               multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     VAir=33500,
@@ -34,7 +35,6 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     dpAHU_eta=80000000)
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
-
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -102,6 +102,23 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     fileName=ModelicaServices.ExternalReferences.loadResource("modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))  "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-76,-26},{-60,-10}})));
   parameter Integer numZones=1 "Number of zones";
+  Modelica.Blocks.Sources.Constant const1[numZones](each k=0.2)
+    "Infiltration rate"
+    annotation (Placement(transformation(extent={{-36,-38},{-26,-28}})));
+  Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(nout=
+        numZones)
+    "Replicates dry bulb air temperature for numZones"
+    annotation (Placement(transformation(
+    extent={{-5,-5},{5,5}},
+    rotation=0,
+    origin={-15,-5})));
+  AixLib.BoundaryConditions.WeatherData.Bus weaBus
+    "Weather data bus"
+    annotation (Placement(transformation(extent={{-66,-2},{-32,30}}),
+    iconTransformation(extent={{-70,-12},{-50,8}})));
+  Modelica.Blocks.Sources.Constant const2[numZones](each k=0.2)
+    "Infiltration rate"
+    annotation (Placement(transformation(extent={{-4,18},{6,28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableAHU(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -110,7 +127,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/AHU_Input_6Zone_SIA_4Columns.txt"))
     "Boundary conditions for air handling unit"
-    annotation (Placement(transformation(extent={{-72,-4},{-56,12}})));
+    annotation (Placement(transformation(extent={{-22,64},{-6,80}})));
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -140,8 +157,27 @@ equation
         points={{6,-54},{6,-29},{34,-29},{34,-6.2}}, color={191,0,0}));
   connect(prescribedHeatFlow1.port, multizone.intGainsRad) annotation (Line(
         points={{6,-76},{20,-76},{20,-3},{34,-3}}, color={191,0,0}));
-  connect(tableAHU.y, multizone.AHU) annotation (Line(points={{-55.2,4},{-12,4},
-          {-12,2},{33,2}}, color={0,0,127}));
+  connect(weaBus.TDryBul,replicatorTemperatureVentilation. u) annotation (Line(
+      points={{-49,14},{-44,14},{-44,-12},{-21,-12},{-21,-5}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(weaDat.weaBus, weaBus) annotation (Line(
+      points={{-62,40},{-56,40},{-56,14},{-49,14}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(multizone.ventHum, const2.y) annotation (Line(points={{33,4.4},{20.5,
+          4.4},{20.5,23},{6.5,23}}, color={0,0,127}));
+  connect(multizone.ventTemp, replicatorTemperatureVentilation.y) annotation (
+      Line(points={{33,2},{12,2},{12,-5},{-9.5,-5}}, color={0,0,127}));
+  connect(const1.y, multizone.ventRate) annotation (Line(points={{-25.5,-33},{
+          3.25,-33},{3.25,-0.6},{33,-0.6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(
@@ -164,4 +200,4 @@ equation
   or measurement data.
 </p>
 </html>"));
-end MultizoneEquipped;
+end MultizoneEquippedMine;
