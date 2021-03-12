@@ -6,7 +6,7 @@ createPlot(
  autoerase = true,
  autoreplot = true);
 createPlot(subPlot=2, 
- y = {"Q_flowConvToRoom", "Q_flowRadToRoom"},
+ y = {"Q_flowToRoomConv", "Q_flowToRoomRad"},
  autoscale = true,
  autoerase = true,
  autoreplot = true);

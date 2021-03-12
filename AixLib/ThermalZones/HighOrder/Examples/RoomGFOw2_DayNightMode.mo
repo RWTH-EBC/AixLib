@@ -92,7 +92,7 @@ model RoomGFOw2_DayNightMode
   Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{80,-20},{92,-32}})));
   Modelica.Blocks.Interfaces.RealOutput TRoom(unit="K", displayUnit="degC")
     "Absolute temperature as output signal"                                           annotation(Placement(transformation(extent={{100,20},{120,40}}), iconTransformation(extent={{100,20},{120,40}})));
-  Modelica.Blocks.Interfaces.RealOutput Q_flowConvToRoom(unit="W") "Convective heat flow from radiator to room" annotation (Placement(transformation(extent={{100,-20},{120,0}}), iconTransformation(extent={{100,-20},{120,0}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_flowToRoomConv(unit="W") "Convective heat flow from radiator to room" annotation (Placement(transformation(extent={{100,-20},{120,0}}), iconTransformation(extent={{100,-20},{120,0}})));
   Modelica.Blocks.Interfaces.RealOutput Q_flowToRoomRad(unit="W") "Radiant heat flow from radiator to room" annotation (Placement(transformation(extent={{100,0},{120,20}}), iconTransformation(extent={{100,0},{120,20}})));
   Modelica.Blocks.Interfaces.RealOutput m_flowHC(unit="kg/s") "Mass flow rate in heating circuit (HC)" annotation (Placement(transformation(extent={{100,-40},{120,-20}}), iconTransformation(extent={{100,-40},{120,-20}})));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.5*max(Pump.m_flowsPump) "Nominal mass flow rate";
@@ -146,7 +146,7 @@ equation
   connect(heatFlowSenConv.port_b, room_GF_2OW.thermRoom) annotation (Line(points={{58,-4},{58,20},{32,20},{32,26},{31.48,26}}, color={191,0,0}));
   connect(radiator_ML_delta.RadiativeHeat, heatFlowSenRad.port_a) annotation (Line(points={{68,-24},{68,-8}}, color={0,0,0}));
   connect(heatFlowSenRad.port_b, room_GF_2OW.starRoom) annotation (Line(points={{68,4},{68,26},{36.88,26}}, color={191,0,0}));
-  connect(heatFlowSenConv.Q_flow, Q_flowConvToRoom) annotation (Line(points={{64,-10},{86,-10},{86,-10},{110,-10}}, color={0,0,127}));
+  connect(heatFlowSenConv.Q_flow,Q_flowToRoomConv)  annotation (Line(points={{64,-10},{86,-10},{86,-10},{110,-10}}, color={0,0,127}));
   connect(heatFlowSenRad.Q_flow, Q_flowToRoomRad) annotation (Line(points={{74,-2},{90,-2},{90,10},{110,10}}, color={0,0,127}));
   connect(controlPIThermostat.y, heatValve_new.y) annotation (Line(points={{10.5,-13},{20,-13},{20,-10},{32,-10},{32,-14}}, color={0,0,127}));
   connect(Tset.y, controlPIThermostat.u_s) annotation (Line(points={{-7.5,-1},{-4,-1},{-4,-13},{-1,-13}},color={0,0,127}));
