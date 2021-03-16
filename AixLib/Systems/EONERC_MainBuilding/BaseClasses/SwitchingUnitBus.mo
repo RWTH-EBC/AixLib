@@ -15,7 +15,7 @@ expandable connector SwitchingUnitBus "Data bus for switching unit system"
   Real K3valSetAct(min=0, max=1) "Actual valve opening 0..1";
   Real K4valSet(min=0, max=1) "Valve opening 0..1";
   Real K4valSetAct(min=0, max=1) "Actual valve opening 0..1";
-
+  SI.MassFlowRate  mFlowHxGtf  "Volume flow hot side of heatpump system";
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

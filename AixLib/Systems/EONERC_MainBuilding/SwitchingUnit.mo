@@ -27,11 +27,11 @@ model SwitchingUnit
         origin={-20,-60})));
 
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare final package Medium =
-        Medium) annotation (Placement(transformation(rotation=0, extent={{30,-170},
+  Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare final package Medium
+      = Medium) annotation (Placement(transformation(rotation=0, extent={{30,-170},
             {50,-150}}), iconTransformation(extent={{30,-170},{50,-150}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare final package Medium =
-        Medium) annotation (Placement(transformation(rotation=0, extent={{-50,-170},
+  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare final package Medium
+      = Medium) annotation (Placement(transformation(rotation=0, extent={{-50,-170},
             {-30,-150}}), iconTransformation(extent={{-50,-170},{-30,-150}})));
 
   Fluid.Actuators.Valves.TwoWayLinear              K2(
@@ -91,7 +91,7 @@ model SwitchingUnit
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=90,
-        origin={50,-128})));
+        origin={60,-116})));
   Fluid.Actuators.Valves.TwoWayLinear              K1(
     redeclare package Medium = Medium,
     allowFlowReversal=allowFlowReversal,
@@ -103,6 +103,11 @@ model SwitchingUnit
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={22,60})));
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium)
+    annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=-90,
+        origin={40,-138})));
 equation
   connect(port_b2, Y3.port_a)
     annotation (Line(points={{-100,-60},{-30,-60}}, color={0,127,255}));
@@ -110,8 +115,6 @@ equation
     annotation (Line(points={{-10,-60},{100,-60}}, color={0,127,255}));
   connect(K4.port_b, port_b1)
     annotation (Line(points={{60,-80},{60,60},{100,60}}, color={0,127,255}));
-  connect(port_a3, Y2.port_a) annotation (Line(points={{40,-160},{40,-124},{-80,
-          -124},{-80,-100}}, color={0,127,255}));
   connect(port_b3, K3.port_a) annotation (Line(points={{-40,-160},{-40,-140},{-4.44089e-16,
           -140},{-4.44089e-16,-100}}, color={0,127,255}));
   connect(K2.port_a, port_b3)
@@ -183,12 +186,10 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(K4.port_a, pumpInterface_SpeedControlledNrpm.port_b) annotation (Line(
-        points={{60,-100},{50,-100},{50,-118}}, color={0,127,255}));
-  connect(pumpInterface_SpeedControlledNrpm.port_a, port_a3) annotation (Line(
-        points={{50,-138},{50,-160},{40,-160}}, color={0,127,255}));
+        points={{60,-100},{60,-106}},           color={0,127,255}));
   connect(pumpInterface_SpeedControlledNrpm.pumpBus, sWUBus.pumpBus)
     annotation (Line(
-      points={{60,-128},{64,-128},{64,-124},{74,-124},{74,80.1},{0.1,80.1}},
+      points={{70,-116},{74,-116},{74,80.1},{0.1,80.1}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -213,6 +214,19 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(senMasFlo.m_flow, sWUBus.mFlowHxGtf) annotation (Line(points={{51,
+          -138},{74,-138},{74,80.1},{0.1,80.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senMasFlo.port_a, port_a3)
+    annotation (Line(points={{40,-148},{40,-160}}, color={0,127,255}));
+  connect(senMasFlo.port_b, pumpInterface_SpeedControlledNrpm.port_a)
+    annotation (Line(points={{40,-128},{50,-128},{50,-126},{60,-126}}, color={0,
+          127,255}));
+  connect(senMasFlo.port_b, Y2.port_a) annotation (Line(points={{40,-128},{-80,
+          -128},{-80,-100}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(extent={{-100,-160},{100,80}},
           preserveAspectRatio=false)),           Icon(coordinateSystem(extent={{-100,
             -160},{100,80}}), graphics={

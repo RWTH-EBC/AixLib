@@ -7,8 +7,8 @@ block CtrMixVflowConstValve
 
   parameter Real constValveSet(min=0,max=1, unit="1") = 1 "Set Point Valve";
 
-    parameter Real k_pump(min=0, unit="1") = 0.025 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti_pump(min=Modelica.Constants.small)=130
+    parameter Real k_pump(min=0, unit="1") = 1000 "Gain of controller";
+  parameter Modelica.SIunits.Time Ti_pump(min=Modelica.Constants.small)=60
     "Time constant of Integrator block";
   parameter Modelica.SIunits.Time Td_pump(min=0)= 4 "Time constant of Derivative block";
   parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
