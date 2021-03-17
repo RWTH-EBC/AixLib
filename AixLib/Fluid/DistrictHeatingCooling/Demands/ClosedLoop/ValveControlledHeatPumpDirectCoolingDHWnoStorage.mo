@@ -82,8 +82,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-140,32})));
-  HeatPumps.Carnot_TCon_RE_Jonas
-                           heaPum(
+  HeatPumps.Carnot_TCon_Reversible heaPum(
     redeclare package Medium2 = Medium,
     redeclare package Medium1 = MediumBuilding,
     show_T=true,
@@ -398,28 +397,38 @@ equation
           {-34,-270},{-34,-259.6},{-18.4,-259.6}}, color={0,0,127}));
   connect(T_heat_return.y, T_room_return.u1) annotation (Line(points={{-49,-238},
           {-34,-238},{-34,-240.4},{-18.4,-240.4}}, color={0,0,127}));
-  connect(senTem_supply.T, HP_control.supply_Temp) annotation (Line(points={{
-          -378,-15.4},{-378,-50},{-368,-50}}, color={0,0,127}));
+  connect(senTem_supply.T, HP_control.supply_Temp) annotation (Line(points={{-378,
+          -15.4},{-378,-51.5},{-370.222,-51.5}},
+                                              color={0,0,127}));
   connect(cold_input, HP_control.cold_input) annotation (Line(points={{-460,100},
-          {-410,100},{-410,-58},{-368,-58}}, color={0,0,127}));
+          {-410,100},{-410,-58.5},{-370.222,-58.5}},
+                                             color={0,0,127}));
   connect(heat_input, HP_control.heat_input) annotation (Line(points={{-460,70},
-          {-428,70},{-428,-66},{-368,-66}}, color={0,0,127}));
+          {-428,70},{-428,-65.5},{-370.222,-65.5}},
+                                            color={0,0,127}));
   connect(dhw_input, HP_control.dhw_input) annotation (Line(points={{-460,40},{
-          -420,40},{-420,-74},{-368,-74}}, color={0,0,127}));
-  connect(HP_control.direct_cooling, DirectCooling.u2) annotation (Line(points=
-          {{-326,-50},{-94,-50},{-94,68},{-108,68}}, color={255,0,255}));
+          -420,40},{-420,-72.5},{-370.222,-72.5}},
+                                           color={0,0,127}));
+  connect(HP_control.direct_cooling, DirectCooling.u2) annotation (Line(points={{
+          -323.778,-51.5},{-94,-51.5},{-94,68},{-108,68}},
+                                                     color={255,0,255}));
   connect(heaPum.is_cooling, HP_control.hp_cooling_mode) annotation (Line(
-        points={{-11,-8.2},{-3.5,-8.2},{-3.5,-58},{-326,-58}}, color={255,0,255}));
-  connect(HP_control.hp_off, sup_is_ret.u2) annotation (Line(points={{-326,-66},
-          {16,-66},{16,-52.2},{17,-52.2}}, color={255,0,255}));
-  connect(HP_control.dhw_now, T_HP_supply.u2) annotation (Line(points={{-326,
-          -74},{-40,-74},{-40,-118},{8,-118},{8,-102.2},{9,-102.2}}, color={255,
+        points={{-11,-8.2},{-3.5,-8.2},{-3.5,-58.5},{-323.778,-58.5}},
+                                                               color={255,0,255}));
+  connect(HP_control.hp_off, sup_is_ret.u2) annotation (Line(points={{-323.778,
+          -65.5},{16,-65.5},{16,-52.2},{17,-52.2}},
+                                           color={255,0,255}));
+  connect(HP_control.dhw_now, T_HP_supply.u2) annotation (Line(points={{
+          -323.778,-72.5},{-40,-72.5},{-40,-118},{8,-118},{8,-102.2},{9,-102.2}},
+                                                                     color={255,
           0,255}));
-  connect(HP_control.dhw_now, T_hp_return.u2) annotation (Line(points={{-326,
-          -74},{-40,-74},{-40,-118},{90,-118},{90,-108.2},{91,-108.2}}, color={
+  connect(HP_control.dhw_now, T_hp_return.u2) annotation (Line(points={{
+          -323.778,-72.5},{-40,-72.5},{-40,-118},{90,-118},{90,-108.2},{91,
+          -108.2}},                                                     color={
           255,0,255}));
-  connect(HP_control.hp_cooling_mode, T_room_supply.u2) annotation (Line(points
-        ={{-326,-58},{-226,-58},{-226,-128},{-124,-128}}, color={255,0,255}));
+  connect(HP_control.hp_cooling_mode, T_room_supply.u2) annotation (Line(points={{
+          -323.778,-58.5},{-226,-58.5},{-226,-128},{-124,-128}},
+                                                          color={255,0,255}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-440,
             -280},{140,120}}),

@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatPumps;
-model Carnot_TCon_RE_Jonas
-  "reversible HeatPump, build on the Model from Xiyuan \"Carnot_TCon_RE\""
+model Carnot_TCon_Reversible
+  "reversible HeatPump, inspired by the Model from Xiyuan Chen \"Carnot_TCon_RE\""
  extends AixLib.Fluid.HeatPumps.BaseClasses.Carnot1(
     COP_is_for_cooling =  is_cooling,
     QEva_flow_nominal= if COP_is_for_cooling then Q_cooling_nominal else -  QCon_flow_nominal*(COP_nominal-1)/COP_nominal,
@@ -206,27 +206,9 @@ AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>.
 revisions="<html>
 <ul>
 <li>
-January 3, 2017, by Michael Wetter:<br/>
-Removed parameters
-<code>effInpEva</code> and <code>effInpCon</code>
-and updated documentation.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
-issue 497</a>.
-</li>
-<li>
-August 8, 2016, by Michael Wetter:<br/>
-Changed default temperature to compute COP to be the leaving temperature as
-use of the entering temperature can violate the 2nd law if the temperature
-lift is small.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
-Annex 60, issue 497</a>.
-</li>
-<li>
-November 25, 2015 by Michael Wetter:<br/>
-First implementation.
+Oktober, 2020, by Jonas Grossmann:<br/>
+First Implementation
 </li>
 </ul>
 </html>"));
-end Carnot_TCon_RE_Jonas;
+end Carnot_TCon_Reversible;

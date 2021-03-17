@@ -1,6 +1,5 @@
 Carnot_TCon
-Carnot_TCon_RE
-Carnot_TCon_RE_Jonas
+Carnot_TCon_Reversible
 Carnot_y
 HeatPump
 ReciprocatingWaterToWater
@@ -11,4 +10,3 @@ Data
 Examples
 Validation
 BaseClasses
-
