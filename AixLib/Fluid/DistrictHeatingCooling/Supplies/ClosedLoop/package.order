@@ -6,3 +6,5 @@ IdealPlantErdeis
 IdealPlantHybrPumpErdeis
 SourceIdealPumpErdeis
 IdealPlantErdeisFMU
+IdealPlantPumpRevHPsingleModel
+IdealPlantPumpHPandCC
