@@ -172,7 +172,7 @@ model HeatPump_and_consumer "Energy system of E.ON ERC main building"
   Modelica.Blocks.Interfaces.RealInput Tair annotation (Placement(
         transformation(extent={{-212,-12},{-188,12}}), iconTransformation(
           extent={{-212,-12},{-188,12}})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_Servers(y=20000)
+  Modelica.Blocks.Sources.RealExpression Q_flow_Servers(y=50000)
     annotation (Placement(transformation(extent={{86,94},{102,110}})));
 equation
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (

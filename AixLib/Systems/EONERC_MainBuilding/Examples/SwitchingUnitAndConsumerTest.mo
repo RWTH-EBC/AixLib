@@ -104,7 +104,7 @@ model SwitchingUnitAndConsumerTest
     annotation (Placement(transformation(extent={{-98,72},{-78,92}})));
   Modelica.Blocks.Sources.IntegerConstant integerConstant(k=2)
     annotation (Placement(transformation(extent={{-100,6},{-80,26}})));
-  Modelica.Blocks.Sources.Constant const1(k=2)
+  Modelica.Blocks.Sources.Constant const1(k=3)
     annotation (Placement(transformation(extent={{-98,42},{-78,62}})));
 equation
   connect(boundary2.ports[1], switchingUnit.port_b1)

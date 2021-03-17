@@ -6,3 +6,4 @@ MainBus
 EvaluationBus
 EnergyCounter
 HeatpumpAndConsumerControllerBus
+SimpleERCBus

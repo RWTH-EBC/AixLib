@@ -159,24 +159,7 @@ model MainBuildingEnergySystem_simple "Energy system of E.ON ERC main building"
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={12,106})));
-  Modelica.Blocks.Interfaces.RealOutput Tair
-    annotation (Placement(transformation(extent={{-138,-150},{-118,-130}})));
-  Modelica.Blocks.Sources.Sine sine1(
-    amplitude=5,
-    freqHz=1/(3600*24),
-    offset=273.15 + 15)
-    annotation (Placement(transformation(extent={{-186,-140},{-176,-130}})));
-  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
-    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
-    computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
-    "Weather data reader"
-    annotation (Placement(transformation(extent={{-216,-142},{-196,-122}})));
 
-  BoundaryConditions.WeatherData.Bus weaBus1
-             "Weather data bus"
-    annotation (Placement(transformation(extent={{-170,-140},{-150,-120}})));
   Modelica.Blocks.Nonlinear.Limiter limiterAHU(uMax=0, uMin=-100000)
     annotation (Placement(transformation(extent={{-130,88},{-122,96}})));
   Modelica.Blocks.Nonlinear.Limiter limiterCCACold(uMax=100000, uMin=0)
@@ -196,6 +179,9 @@ model MainBuildingEnergySystem_simple "Energy system of E.ON ERC main building"
     nPorts=3) annotation (Placement(transformation(extent={{112,46},{120,54}})));
   Modelica.Blocks.Sources.RealExpression Q_flow_Servers(y=20000)
     annotation (Placement(transformation(extent={{84,94},{100,110}})));
+  Modelica.Blocks.Interfaces.RealInput Tair annotation (Placement(
+        transformation(extent={{-212,-12},{-188,12}}), iconTransformation(
+          extent={{-212,-12},{-188,12}})));
 equation
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
       Line(points={{-28,-114},{-2,-114},{-2,-97.3333},{-3,-97.3333}}, color={
@@ -274,23 +260,6 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(Tair, prescribedTemperature.T) annotation (Line(points={{-128,-140},{
-          -108,-140},{-108,-144},{-54,-144},{-54,-114},{-41.2,-114}}, color={0,
-          0,127}));
-  connect(weaDat.weaBus, weaBus1) annotation (Line(
-      points={{-196,-132},{-180,-132},{-180,-130},{-160,-130}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(Tair, weaBus1.TDryBul) annotation (Line(points={{-128,-140},{-144,
-          -140},{-144,-130},{-160,-130}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(add.y, consumerLTC.Q_flow)
     annotation (Line(points={{-107.6,96},{-93.6,96}}, color={0,0,127}));
   connect(Q_flow_CCA_hot.y, limiterCCAHot.u)
@@ -332,6 +301,8 @@ equation
     annotation (Line(points={{-84,-90},{-84,60}}, color={0,127,255}));
   connect(Q_flow_Servers.y, consumerCold2.Q_flow) annotation (Line(points={{
           100.8,102},{106.4,102},{106.4,98}}, color={0,0,127}));
+  connect(Tair, prescribedTemperature.T) annotation (Line(points={{-200,0},{
+          -176,0},{-176,-114},{-41.2,-114}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
           extent={{-200,120},{120,-120}},

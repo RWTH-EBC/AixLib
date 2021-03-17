@@ -1,17 +1,21 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples;
 model EONERC_HP_and_consumer "Energy system of main building with controller"
   extends Modelica.Icons.Example;
-  HydraulicModules.Controller.CtrMixVflowConstValve ctrMixVflowConstValve2(k_pump=
-        100, Td_pump=0)
+  HydraulicModules.Controller.CtrMixVflowConstValve ctrMixVflowConstValve2(
+    k_pump=1000,
+    Ti_pump=30,
+             Td_pump=0)
     annotation (Placement(transformation(extent={{-52,8},{-34,28}})));
   Controller.HeatPumpSystemVolumeFlowControl
                                   heatPumpSystemVolumeFlowControl1
     annotation (Placement(transformation(extent={{-50,90},{-8,140}})));
   HydraulicModules.Controller.CtrMixVflowConstValve ctrMixVflowConstValve1(k_pump=
-        100, Ti_pump=130)
+        1000, Ti_pump=30)
     annotation (Placement(transformation(extent={{-52,34},{-34,54}})));
-  HydraulicModules.Controller.CtrMixVflowConstValve ctrMixVflowConstValve3(k_pump=
-        100, Td_pump=0)
+  HydraulicModules.Controller.CtrMixVflowConstValve ctrMixVflowConstValve3(
+    k_pump=1000,
+    Ti_pump=30,
+             Td_pump=0)
     annotation (Placement(transformation(extent={{-52,60},{-34,80}})));
   BaseClasses.MainBus bus
     annotation (Placement(transformation(extent={{-4,22},{16,42}})));
