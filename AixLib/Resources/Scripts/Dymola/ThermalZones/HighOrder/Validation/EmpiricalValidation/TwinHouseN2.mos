@@ -1,0 +1,7 @@
+removePlots();
+simulateModel("AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.TwinHouseN2", startTime=0, stopTime=3546000, outputInterval=1800, tolerance=1e-6, method="dassl", resultFile="TwinHouseN2");
+createPlot(id=1, subPlot=1,
+ y = {"meanMeasuredTemp", "roomTemp"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);

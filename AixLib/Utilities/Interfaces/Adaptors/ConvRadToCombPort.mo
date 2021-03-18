@@ -1,16 +1,16 @@
 within AixLib.Utilities.Interfaces.Adaptors;
 model ConvRadToCombPort
   AixLib.Utilities.Interfaces.ConvRadComb portConvRadComb
-    annotation (Placement(transformation(extent={{-120,-10},{-76,36}})));
+    annotation (Placement(transformation(extent={{-120,-20},{-80,20}}), iconTransformation(extent={{-120,-20},{-80,20}})));
   AixLib.Utilities.Interfaces.RadPort portRad
-    annotation (Placement(transformation(extent={{84,38},{124,78}})));
+    annotation (Placement(transformation(extent={{80,30},{120,70}}), iconTransformation(extent={{80,30},{120,70}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a portConv
-    annotation (Placement(transformation(extent={{84,-68},{118,-34}})));
+    annotation (Placement(transformation(extent={{80,-70},{120,-30}}), iconTransformation(extent={{80,-70},{120,-30}})));
 equation
   connect(portConvRadComb.rad, portRad);
   connect(portConvRadComb.conv, portConv);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -80}, {100, 80}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -80}, {100, 80}}), graphics={  Polygon(points = {{-76, 0}, {86, -72}, {86, 70}, {-76, 0}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(info = "<html><h4>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -80}, {100, 80}})),           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -80}, {100, 80}}), graphics={  Polygon(points={{-80,0},{80,-70},{80,70},{-80,0}},          lineColor={0,0,0},       fillColor={0,0,0},
+            fillPattern=FillPattern.Solid)}),                                                                                                     Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
