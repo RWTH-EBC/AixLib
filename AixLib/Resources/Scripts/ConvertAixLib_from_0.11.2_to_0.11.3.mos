@@ -6,8 +6,8 @@ convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Attic_Ro2Lf1",
 convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Cellar", "AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Cellar");
 convertElement("AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams", "calcMethod", "calcMethodOut");
 convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", "calcMethod", "calcMethodOut");
-convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", "solarDistribution",  fill("",0));
-convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows", "absInnerWallSurf",  fill("",0));
-convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows", "absInnerWallSurf",  fill("",0));
-convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.EastWestFacingWindows", "partialCoeffTable",  fill("",0));
-convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.EastWestFacingWindows", "partialCoeffTable",  fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", {"solarDistribution"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows", {"absInnerWallSurf"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows", {"absInnerWallSurf"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.EastWestFacingWindows", {"partialCoeffTable"}, fill("",0));
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140.EastWestFacingWindows", {"partialCoeffTable"}, fill("",0));
