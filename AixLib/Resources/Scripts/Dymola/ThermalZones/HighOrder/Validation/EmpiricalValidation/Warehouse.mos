@@ -1,5 +1,5 @@
 removePlots();
-simulateModel("AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Building1", startTime=0, stopTime=31536000, outputInterval=1800, tolerance=1e-6, method="dassl", resultFile="Building1");
+simulateModel("AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation.Warehouse", startTime=0, stopTime=31536000, outputInterval=1800, tolerance=1e-6, method="dassl", resultFile="Warehouse");
 createPlot(id=1, subPlot=1,
  y = {"meanMeasuredTemp", "roomTemp"},
  autoscale = true,

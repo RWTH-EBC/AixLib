@@ -16,7 +16,7 @@ model Warehouse
     Latitude=52.37,
     Longitude=8.44,
     tableName="weather",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TRY2010_03_Building1.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TRY2010_03_Warehouse.txt"),
     Wind_dir=false,
     Wind_speed=true,
     Air_temp=true)
@@ -28,7 +28,7 @@ model Warehouse
   Modelica.Blocks.Sources.CombiTimeTable BuildingSpecifications(
     tableOnFile=true,
     tableName="Table",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/Building1.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/Warehouse.mat"),
     columns={2,3,4,5},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Air exchange due to windows in the roof area, {2} Temp in the Building (Top), {3} Temp in the Building (Center), {4} Temp in the Building (Bottom), {5} Air exchange due to windows in the roof"
@@ -103,7 +103,7 @@ model Warehouse
     columns={2},
     smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
-    "Air exchange due to open Door in the Room next to Building1, RoomTemp=16.5°C"
+    "Air exchange due to open door in the room next to Warehouse main room, RoomTemp = 16.5 degC"
     annotation (Placement(transformation(extent={{-96,-46},{-78,-28}})));
   Modelica.Blocks.Sources.Constant Source_TsetC1(k=273.15 + 18)
     annotation (Placement(transformation(extent={{-94,-86},{-78,-70}})));
@@ -185,7 +185,7 @@ equation
   connect(gain.y, meanMeasuredTemp) annotation (Line(points={{134.6,12},{158,12}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, Tolerance=1e-06),
     __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/EmpiricalValidation/Building1.mos"
+          "Resources/Scripts/Dymola/ThermalZones/HighOrder/Validation/EmpiricalValidation/Warehouse.mos"
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-100},{160,100}})),
     Icon(coordinateSystem(extent={{-100,-100},{160,100}})),
