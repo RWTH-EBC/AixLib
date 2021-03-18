@@ -11,9 +11,14 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     ASurTot=12744.27,
     numZones=numZones,
     zoneParam={
-        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle()},
+        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Eingangsbereich(),
+        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Umkleiden(),
+        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_DuschenundSanitrrume(),
+        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
+        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Aufsichtsraum(),
+        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Technikraum()},
     use_moisture_balance=true,
-    internalGainsMode=1,
+    internalGainsMode=3,
     use_swimmingPools_MZ=true,
     heatAHU=true,
     coolAHU=true,
@@ -46,8 +51,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="Internals",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://Output_Schwimmbad_Modell/Hallenbad/InternalGains_Hallenbad.txt"),
     columns=2:(1 + 3*numZones))
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
@@ -85,11 +90,11 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://Output_Schwimmbad_Modell/Hallenbad/TsetHeat_Hallenbad.txt"),
     columns=2:(1 + numZones))
     "Set points for heater"
-    annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
+    annotation (Placement(transformation(extent={{72,-64},{56,-48}})));
   Modelica.Blocks.Sources.Constant const[numZones](each k=0)
     "Set point for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
@@ -98,10 +103,10 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="OpeningHours",
-    columns=2:16,
+    columns=2:(1 + numZones),
     fileName=ModelicaServices.ExternalReferences.loadResource("modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))  "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-76,-26},{-60,-10}})));
-  parameter Integer numZones=1 "Number of zones";
+  parameter Integer numZones=6 "Number of zones";
   Modelica.Blocks.Sources.CombiTimeTable tableAHU(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -130,22 +135,22 @@ equation
     annotation (Line(points={{-23.4,-76},{-14,-76}}, color={0,0,127}));
   connect(replicator.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-23.4,
           -54},{-18.7,-54},{-14,-54}}, color={0,0,127}));
-  connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},
-          {36.8,-58},{36.8,-9}}, color={0,0,127}));
+  connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-56},
+          {36.8,-56},{36.8,-9}}, color={0,0,127}));
   connect(const.y, multizone.TSetCool) annotation (Line(points={{55.2,-82},{
           34.6,-82},{34.6,-9}}, color={0,0,127}));
-  connect(tableOpeningHours.y[2], multizone.openingHours) annotation (Line(
-        points={{-59.2,-18},{6,-18},{6,-9},{45.6,-9}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, multizone.intGainsConv) annotation (Line(
         points={{6,-54},{6,-29},{34,-29},{34,-6.2}}, color={191,0,0}));
   connect(prescribedHeatFlow1.port, multizone.intGainsRad) annotation (Line(
         points={{6,-76},{20,-76},{20,-3},{34,-3}}, color={191,0,0}));
   connect(tableAHU.y, multizone.AHU) annotation (Line(points={{-55.2,4},{-12,4},
           {-12,2},{33,2}}, color={0,0,127}));
+  connect(tableOpeningHours.y, multizone.openingHours) annotation (Line(points=
+          {{-59.2,-18},{-6,-18},{-6,-9},{45.6,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(
-      StopTime=31536000,
+      StopTime=31536,
       Interval=3600,
       __Dymola_Algorithm="Cvode"),
     Documentation(revisions="<html><ul>

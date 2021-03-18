@@ -12,9 +12,9 @@ package BaseClasses "Base classes for Swimming Pool Models"
     constant Modelica.SIunits.CoefficientOfHeatTransfer alpha_Air "Coefficient of heat transfer between the water surface and the room air";
 
 
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_noCover
-      "Heatport if there isn't a cover during non-opening hours"
-      annotation (Placement(transformation(extent={{-10,-70},{10,-50}}),
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_a
+      "Heatport if there isn't a cover during non-opening hours" annotation (
+        Placement(transformation(extent={{-10,-70},{10,-50}}),
           iconTransformation(extent={{-10,-70},{10,-50}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort_b
       "Connect to TRoom"
@@ -35,9 +35,8 @@ package BaseClasses "Base classes for Swimming Pool Models"
 
     connect(CoefficientOfHeatTransferAir.y, WaterAir.Gc) annotation (Line(points={{43,8},{
             10,8}},                              color={0,0,127}));
-    connect(WaterAir.solid, heatport_noCover) annotation (Line(points={{
-            -6.66134e-16,-2},{0,-2},{0,-60}},
-                                     color={191,0,0}));
+    connect(WaterAir.solid, heatport_a) annotation (Line(points={{-6.66134e-16,
+            -2},{0,-2},{0,-60}}, color={191,0,0}));
     connect(WaterAir.fluid, heatPort_b) annotation (Line(points={{4.44089e-16,
             18},{-2,18},{-2,64}},      color={191,0,0}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -80,76 +79,130 @@ package BaseClasses "Base classes for Swimming Pool Models"
 
   model HeatTransferConduction
     "Heat transfer due to conduction through pool walls"
-    constant Modelica.SIunits.CoefficientOfHeatTransfer alpha_W "Coefficient of heat transfer between the water and the pool walls";
-    parameter Modelica.SIunits.Temperature T_nextDoor "Temperature of room bordering the pool walls";
-    parameter Boolean nextToSoil;
 
-    parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls"
+    parameter Modelica.SIunits.Temperature T_start "Temperature of room bordering the pool walls";
+
+    // Exterior Pool Wall - with earth contact - only vertical
+    parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls with earth contact"
       annotation(Dialog(group="Exterior walls"));
     parameter Modelica.SIunits.ThermalResistance RExt[nExt](
-      each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b"
-      annotation(Dialog(group="Thermal mass"));
-    parameter Modelica.SIunits.ThermalResistance RExtRem(
-      min=Modelica.Constants.small) "Resistance of remaining resistor RExtRem between capacitor n and port_b"
-       annotation(Dialog(group="Thermal mass"));
-    parameter Modelica.SIunits.HeatCapacity CExt[nExt](
-      each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b"
-      annotation(Dialog(group="Thermal mass"));
+      each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b exterior wall with earth contact" annotation(Dialog(group="Exterior walls"));
 
-    Modelica.Thermal.HeatTransfer.Components.Convection Convection
-      "Convection between Water and pool wall/ground"
-      annotation (Placement(transformation(extent={{-32,-6},{-46,8}})));
+    parameter Modelica.SIunits.ThermalResistance RExtRem(
+      min=Modelica.Constants.small) "Resistance of remaining resistor RExtRem between capacitor n and port_b, exterior wall with earth contact"
+       annotation(Dialog(group="Exterior walls"));
+    parameter Modelica.SIunits.HeatCapacity CExt[nExt](
+      each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, exterior wall with earth contact"
+      annotation(Dialog(group="Exterior walls"));
+    parameter Modelica.SIunits.Area AExt "Area of exterior pool wall with earth contact" annotation(Dialog(group="Exterior walls"));
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt "Coefficient of heat transfer between the water and exterior pool walls" annotation(Dialog(group="Exterior walls"));
+
+    // Interior Pool Walls - vertical and horizontal combined
+    parameter Integer nInt(min=1) "Number of RC elements of interior walls" annotation(Dialog(group="Interior walls"));
+    parameter Modelica.SIunits.ThermalResistance RInt[nInt](
+      each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b, interior wall" annotation(Dialog(group="Interior walls"));
+    parameter Modelica.SIunits.HeatCapacity CInt[nInt](
+      each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, interior wall" annotation(Dialog(group="Interior walls"));
+    parameter Modelica.SIunits.Area AInt "Area of interior pool walls " annotation(Dialog(group="Interior walls"));
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt "Coefficient of heat transfer between the water and interior pool walls" annotation(Dialog(group="Interior walls"));
+
+    // Pool Floor with earth contact
+    parameter Integer nFloor(min = 1) "Number of RC-elements of pool floor with earth contact"
+      annotation(Dialog(group="Pool floor"));
+    parameter Modelica.SIunits.ThermalResistance RFloor [nFloor](
+      each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b, pool floor with earth contact" annotation(Dialog(group="Pool floor"));
+
+    parameter Modelica.SIunits.ThermalResistance RFloorRem(
+      min=Modelica.Constants.small) "Resistance of remaining resistor RFloorRem between capacitor n and port_b, pool floor with earth contact"
+       annotation(Dialog(group="Pool floor"));
+    parameter Modelica.SIunits.HeatCapacity CFloor[nFloor](
+      each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, pool floor, pool floor with earth contact"
+      annotation(Dialog(group="Pool floor"));
+    parameter Modelica.SIunits.Area AFloor "Area of pool floor with earth contact" annotation(Dialog(group="Pool floor"));
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConFloor "Coefficient of heat transfer between the water and pool floor" annotation(Dialog(group="Pool floor"));
+
+    Modelica.Thermal.HeatTransfer.Components.Convection convExt if AExt > 0
+      "Convection between Water and pool wall"
+      annotation (Placement(transformation(extent={{-28,30},{-42,44}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall extWalRC(
       final RExt=RExt,
       final RExtRem=RExtRem,
       final CExt=CExt,
       final n=nExt,
-      T_start=T_nextDoor)
-      "Surounding Walls of Swimming Pool"
-      annotation (Placement(transformation(extent={{-20,-6},{-6,8}})));
-    Modelica.Blocks.Logical.Switch switch1 "Neighbouring Soil or different rooms"
-      annotation (Placement(transformation(extent={{34,-6},{22,6}})));
+      T_start=T_start) if AExt > 0 "Pool walls with earth contact"
+      annotation (Placement(transformation(extent={{-2,32},{12,46}})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-      prescribedTemperature1 annotation (Placement(transformation(
+      prescribedTemperature1 if AFloor > 0 or AExt > 0
+      "Generate Heat Flow for earth contact"
+                             annotation (Placement(transformation(
           extent={{-6,-6},{6,6}},
           rotation=180,
-          origin={8,-8.88178e-16})));
-    Modelica.Blocks.Sources.Constant TNextDoor(k=T_nextDoor)
-      "Temperature of the room beneath the pool"
-      annotation (Placement(transformation(extent={{74,-28},{66,-20}})));
-    Modelica.Blocks.Sources.BooleanConstant booleanNextToSoil(k=nextToSoil)
-      "Soil or room under the Swimming Pool"
-      annotation (Placement(transformation(extent={{64,-6},{52,6}})));
-    Modelica.Blocks.Sources.Constant Constant_alpha_W(k=alpha_W)
-      "heat transfer coefficient between wall and water"
-      annotation (Placement(transformation(extent={{-20,36},{-30,46}})));
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_a
+          origin={36,-2})));
+
+    Modelica.Blocks.Sources.Constant const_hConExt(k=hConExt) if AExt > 0
+      "heat transfer coefficient between vertikal pool wall and water"
+      annotation (Placement(transformation(extent={{-18,60},{-28,70}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_a if AExt > 0
+       or AInt > 0 or AFloor > 0
       "Inlet for heattransfer"
       annotation (Placement(transformation(extent={{-110,-8},{-90,12}})));
-    Modelica.Blocks.Interfaces.RealInput TSoil "Temperature of Soil"
+    Modelica.Blocks.Interfaces.RealInput TSoil if AFloor > 0 or AExt > 0
+                                               "Temperature of Soil"
       annotation (Placement(transformation(extent={{126,16},{86,56}})));
+    ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall floorRC(
+      final RExt=RFloor,
+      final RExtRem=RFloorRem,
+      final CExt=CFloor,
+      final n=nFloor,
+      T_start=T_start) if AFloor > 0 "Floor of Swimming Poolwith earth contact"
+      annotation (Placement(transformation(extent={{-2,-30},{12,-16}})));
+    ThermalZones.ReducedOrder.RC.BaseClasses.InteriorWall intWalRC(
+      final n=nInt,
+      final RInt=RInt,
+      final CInt=CInt,
+      final T_start=T_start) if AInt > 0
+      "RC element representing interior pool walls, horizontal and vertical"
+      annotation (Placement(transformation(extent={{-2,-82},{12,-66}})));
+    Modelica.Thermal.HeatTransfer.Components.Convection convFloor if AFloor > 0
+      "Convection between Water and pool floor"
+      annotation (Placement(transformation(extent={{-28,-28},{-42,-14}})));
+    Modelica.Blocks.Sources.Constant const_hConFloor(k=hConFloor) if AFloor > 0
+      "Heat transfer coefficient between pool floor and water"
+      annotation (Placement(transformation(extent={{-22,2},{-32,12}})));
+    Modelica.Thermal.HeatTransfer.Components.Convection convInt if AInt > 0
+      "Convection between water and interior pool walls"
+      annotation (Placement(transformation(extent={{-28,-82},{-42,-68}})));
+    Modelica.Blocks.Sources.Constant const_hConInt(k=hConInt) if AInt > 0
+      "Heat transfer coefficient between interior pool wall and water"
+      annotation (Placement(transformation(extent={{-24,-52},{-34,-42}})));
   equation
-    connect(extWalRC.port_a,Convection. solid)
-      annotation (Line(points={{-20,0.363636},{-20,1},{-32,1}},
-                                                              color={191,0,0}));
-    connect(extWalRC.port_b,prescribedTemperature1. port) annotation (Line(points={{-6,
-            0.363636},{2,0.363636},{2,-2.22045e-16}},
-                                                color={191,0,0}));
-    connect(switch1.u1, TSoil) annotation (Line(points={{35.2,4.8},{35.2,36},{106,
-            36}}, color={0,0,127}));
-    connect(TNextDoor.y,switch1. u3)
-      annotation (Line(points={{65.6,-24},{35.2,-24},{35.2,-4.8}},
-                                                               color={0,0,127}));
-    connect(switch1.y,prescribedTemperature1. T) annotation (Line(points={{21.4,0},
-            {22,0},{22,-1.77636e-15},{15.2,-1.77636e-15}},
-                                      color={0,0,127}));
-    connect(booleanNextToSoil.y,switch1. u2) annotation (Line(points={{51.4,0},{35.2,
-            0}},                    color={255,0,255}));
-    connect(Constant_alpha_W.y,Convection. Gc)
-      annotation (Line(points={{-30.5,41},{-39,41},{-39,8}},
-                                                           color={0,0,127}));
-    connect(Convection.fluid,heatport_a)  annotation (Line(points={{-46,1},{-64,1},
+    connect(extWalRC.port_a, convExt.solid)
+      annotation (Line(points={{-2,38.3636},{-2,37},{-28,37}}, color={191,0,0}));
+    connect(extWalRC.port_b,prescribedTemperature1. port) annotation (Line(points={{12,
+            38.3636},{30,38.3636},{30,-2}},     color={191,0,0}));
+    connect(const_hConExt.y, convExt.Gc)
+      annotation (Line(points={{-28.5,65},{-35,65},{-35,44}}, color={0,0,127}));
+    connect(convExt.fluid, heatport_a) annotation (Line(points={{-42,37},{-64,37},
             {-64,2},{-100,2}}, color={191,0,0}));
+    connect(prescribedTemperature1.port, floorRC.port_b) annotation (Line(points={{30,-2},
+            {30,-24},{12,-24},{12,-23.6364}},                               color=
+           {191,0,0}));
+    connect(prescribedTemperature1.T, TSoil) annotation (Line(points={{43.2,-2},{62,
+            -2},{62,36},{106,36}},color={0,0,127}));
+    connect(const_hConFloor.y, convFloor.Gc)
+      annotation (Line(points={{-32.5,7},{-35,7},{-35,-14}}, color={0,0,127}));
+    connect(convFloor.solid, floorRC.port_a) annotation (Line(points={{-28,-21},
+            {-24,-21},{-24,-23.6364},{-2,-23.6364}},
+                                                color={191,0,0}));
+    connect(const_hConInt.y, convInt.Gc) annotation (Line(points={{-34.5,-47},{-35,
+            -47},{-35,-68}}, color={0,0,127}));
+    connect(convInt.solid, intWalRC.port_a) annotation (Line(points={{-28,-75},
+            {-25,-75},{-25,-74.7273},{-2,-74.7273}},
+                                                color={191,0,0}));
+    connect(convInt.fluid, heatport_a) annotation (Line(points={{-42,-75},{-70,-75},
+            {-70,2},{-100,2}}, color={191,0,0}));
+    connect(convFloor.fluid, heatport_a) annotation (Line(points={{-42,-21},{-68,-21},
+            {-68,2},{-100,2}}, color={191,0,0}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
             extent={{-80,58},{28,-26}},
