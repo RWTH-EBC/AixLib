@@ -1,14 +1,14 @@
 ﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
-model Building1
+model Warehouse
   import ModelicaServices;
     extends Modelica.Icons.Example;
-  Rooms.RoomEmpiricalValidation.RoomBuilding1 room(
+  Rooms.RoomEmpiricalValidation.RoomWarehouse room(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=283.15,
     TWalls_start=283.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
-    redeclare DataBase.WindowsDoors.Simple.WindowSimple_Building1 Type_Win,
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_Warehouse Type_Win,
     redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple)
     annotation (Placement(transformation(extent={{2,-30},{68,42}})));
 
@@ -261,4 +261,4 @@ equation
   </li>
 </ul>
 </html>"));
-end Building1;
+end Warehouse;

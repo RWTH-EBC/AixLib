@@ -1,5 +1,5 @@
 within AixLib.DataBase.Walls.EmpiricalValidation;
-record RO_Building1 "Roof for Empirical Validation Building1"
+record RO_Warehouse "Roof for Empirical Validation of Warehouse example"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = 3 "Number of wall layers",
     d={0.001,0.1,0.001} "Thickness of wall layers",
@@ -21,4 +21,4 @@ record RO_Building1 "Roof for Empirical Validation Building1"
   </li>
 </ul>
 </html>"));
-end RO_Building1;
+end RO_Warehouse;

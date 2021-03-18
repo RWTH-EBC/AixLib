@@ -1,5 +1,5 @@
 within AixLib.DataBase.WindowsDoors.Simple;
-record WindowSimple_Building1 "Window for empirical validation with Building1"
+record WindowSimple_Warehouse "Window for empirical validation of Warehouse example"
 
 extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
     Uw=1.5,
@@ -29,4 +29,4 @@ extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
   </li>
 </ul>
 </html>"));
-end WindowSimple_Building1;
+end WindowSimple_Warehouse;

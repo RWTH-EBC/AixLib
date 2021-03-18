@@ -1,17 +1,17 @@
 within AixLib.ThermalZones.HighOrder.Rooms.RoomEmpiricalValidation;
-model RoomBuilding1 "Building1"
+model RoomWarehouse "Room model of Warehouse for Empirical validation"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(
     redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes(
-      OW=AixLib.DataBase.Walls.EmpiricalValidation.OW_Building1(),
+      OW=AixLib.DataBase.Walls.EmpiricalValidation.OW_Warehouse(),
     IW_vert_half_a=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
     IW_vert_half_b=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
     IW_hori_upp_half=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
     IW_hori_low_half=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
     IW_hori_att_upp_half=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
     IW_hori_att_low_half=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
-    groundPlate_upp_half=AixLib.DataBase.Walls.EmpiricalValidation.FL_Building1(),
+    groundPlate_upp_half=AixLib.DataBase.Walls.EmpiricalValidation.FL_Warehouse(),
     groundPlate_low_half=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
-    roof=AixLib.DataBase.Walls.EmpiricalValidation.RO_Building1(),
+    roof=AixLib.DataBase.Walls.EmpiricalValidation.RO_Warehouse(),
     IW2_vert_half_a=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
     IW2_vert_half_b=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
     roofRoomUpFloor=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition()),
@@ -25,7 +25,7 @@ model RoomBuilding1 "Building1"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   Components.Walls.Wall wallWest(
     final energyDynamics=energyDynamicsWalls,
-    redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
+    redeclare DataBase.Walls.EmpiricalValidation.OW_Warehouse wallPar,
     wall_length=room_width,
     wall_height=room_height,
     solar_absorptance=0.4,
@@ -41,7 +41,7 @@ model RoomBuilding1 "Building1"
     annotation (Placement(transformation(extent={{-62,-42},{-48,44}})));
   Components.Walls.Wall wallSouth(
     final energyDynamics=energyDynamicsWalls,
-    redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
+    redeclare DataBase.Walls.EmpiricalValidation.OW_Warehouse wallPar,
     wall_length=room_length,
     wall_height=room_height,
     solar_absorptance=0.4,
@@ -58,7 +58,7 @@ model RoomBuilding1 "Building1"
         origin={24,-59})));
   Components.Walls.Wall wallNorth(
     final energyDynamics=energyDynamicsWalls,
-    redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
+    redeclare DataBase.Walls.EmpiricalValidation.OW_Warehouse wallPar,
     wall_length=room_length,
     wall_height=room_height,
     solar_absorptance=0.4,
@@ -75,7 +75,7 @@ model RoomBuilding1 "Building1"
         origin={26,61})));
   Components.Walls.Wall wallEast(
     final energyDynamics=energyDynamicsWalls,
-    redeclare DataBase.Walls.EmpiricalValidation.OW_Building1 wallPar,
+    redeclare DataBase.Walls.EmpiricalValidation.OW_Warehouse wallPar,
     wall_length=room_width,
     wall_height=room_height,
     solar_absorptance=0.4,
@@ -89,7 +89,7 @@ model RoomBuilding1 "Building1"
     annotation (Placement(transformation(extent={{80,-40},{66,44}})));
   Components.Walls.Wall roof(
     final energyDynamics=energyDynamicsWalls,
-    redeclare DataBase.Walls.EmpiricalValidation.RO_Building1 wallPar,
+    redeclare DataBase.Walls.EmpiricalValidation.RO_Warehouse wallPar,
     wall_length=room_length,
     wall_height=room_width,
     solar_absorptance=0.4,
@@ -110,7 +110,7 @@ model RoomBuilding1 "Building1"
   Components.Walls.Wall floor(
     outside=false,
     final energyDynamics=energyDynamicsWalls,
-    redeclare DataBase.Walls.EmpiricalValidation.FL_Building1 wallPar,
+    redeclare DataBase.Walls.EmpiricalValidation.FL_Warehouse wallPar,
     wall_length=room_length,
     wall_height=room_width,
     solar_absorptance=0.3,
@@ -272,4 +272,4 @@ equation
 </html>", info="<html>
 
 </html>"));
-end RoomBuilding1;
+end RoomWarehouse;
