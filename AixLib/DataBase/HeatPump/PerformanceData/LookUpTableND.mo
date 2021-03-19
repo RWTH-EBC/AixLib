@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
   parameter Real nConv=100
@@ -37,38 +37,33 @@ model LookUpTableND "N-dimensional table with data for heat pump"
   Modelica.Blocks.Math.Gain nConGain(final k=nConv)
     "Convert relative speed n to an absolute value for interpolation in sdf tables"
     annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
+        extent={{-4,-4},{4,4}},
         rotation=-90,
-        origin={0,84})));
+        origin={-22,68})));
  Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
-    annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
-            {6,6}},
+    annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-4,-4},
+            {4,4}},
         rotation=-90,
-        origin={46,60})));
+        origin={-2,68})));
   Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
-        -76,50], Placement(transformation(extent={{-6,-6},{6,6}},
+        -76,50], Placement(transformation(extent={{-3,-3},{3,3}},
         rotation=-90,
-        origin={-40,62})));
-  Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
-                    "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{-6,-6},
-            {6,6}},
-        rotation=-90,
-        origin={80,-82})));
+        origin={15,69})));
   Utilities.Logical.SmoothSwitch switchPel
     "If HP is off, no heat will be exchanged"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
-        origin={50,-60})));
+        origin={46,-32})));
   Utilities.Logical.SmoothSwitch switchQCon
     "If HP is off, no heat will be exchanged"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
-        origin={-50,-56})));
+        origin={-56,-32})));
   Modelica.Blocks.Sources.Constant constZero(final k=0)
     "Power if HP is turned off"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
-        origin={-4,-18})));
+        origin={-6,-10})));
   SDF.NDTable nDTableQCon(
     final nin=3,
     final readFromFile=true,
@@ -98,9 +93,9 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     final n1=1,
     final n2=1,
     final n3=1) "Concat all inputs into an array"
-    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
         rotation=-90,
-        origin={-2,40})));
+        origin={-3,43})));
 
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
         Modelica.Constants.eps) annotation (Placement(transformation(
@@ -109,14 +104,14 @@ model LookUpTableND "N-dimensional table with data for heat pump"
         origin={-72,62})));
   Modelica.Blocks.Math.Product scalingFacTimesQCon annotation (Placement(
         transformation(
-        extent={{-5,-5},{5,5}},
+        extent={{-4,-4},{4,4}},
         rotation=-90,
-        origin={-41,-11})));
+        origin={-44,-8})));
   Modelica.Blocks.Math.Product scalingFacTimesPel annotation (Placement(
         transformation(
-        extent={{-5,-5},{5,5}},
+        extent={{-4,-4},{4,4}},
         rotation=-90,
-        origin={47,-13})));
+        origin={48,-10})));
 protected
   Modelica.Blocks.Sources.Constant realCorr(final k=scalingFactor)
     "Calculates correction of table output based on scaling factor"
@@ -125,35 +120,26 @@ protected
         rotation=270,
         origin={-3,15})));
 equation
-  connect(feedbackHeatFlowEvaporator.y, QEva)
-    annotation (Line(points={{80,-87.4},{80,-110}},
-                                                color={0,0,127}));
-  connect(switchPel.y, Pel) annotation (Line(points={{50,-71},{50,-82},{0,-82},
-          {0,-110}},
-               color={0,0,127}));
-  connect(switchQCon.y, QCon) annotation (Line(points={{-50,-67},{-50,-74},{
-          -80,-74},{-80,-110}},
-                      color={0,0,127}));
 
-  connect(constZero.y, switchQCon.u3) annotation (Line(points={{-4,-24.6},{-4,
-          -24},{-4,-24},{-4,-28},{-4,-30},{-58,-30},{-58,-42},{-58,-42},{-58,
-          -44},{-58,-44}},     color={0,0,127}));
-  connect(constZero.y, switchPel.u3) annotation (Line(points={{-4,-24.6},{-4,
-          -30},{42,-30},{42,-48}},
+  connect(constZero.y, switchQCon.u3) annotation (Line(points={{-6,-16.6},{-6,
+          -20},{-60,-20},{-60,-24.8},{-60.8,-24.8}},
+                               color={0,0,127}));
+  connect(constZero.y, switchPel.u3) annotation (Line(points={{-6,-16.6},{-6,
+          -20},{41.2,-20},{41.2,-24.8}},
                           color={0,0,127}));
-  connect(multiplex3_1.y, nDTableQCon.u) annotation (Line(points={{-2,31.2},{-2,
-          30.4},{-46,30.4}},              color={0,0,127}));
-  connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-2,31.2},{-2,
-          28.4},{50,28.4}},                  color={0,0,127}));
+  connect(multiplex3_1.y, nDTableQCon.u) annotation (Line(points={{-3,37.5},{-3,
+          36},{-46,36},{-46,30.4}},       color={0,0,127}));
+  connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-3,37.5},{-2,
+          37.5},{-2,36},{50,36},{50,28.4}},  color={0,0,127}));
   connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
-      points={{1.075,104.07},{46,104.07},{46,67.2}},
+      points={{1.075,104.07},{-2,104.07},{-2,72.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
-      points={{1.075,104.07},{-40,104.07},{-40,69.2}},
+      points={{1.075,104.07},{15,104.07},{15,72.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -168,40 +154,51 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{-72,55.4},
-          {-72,-20},{-50,-20},{-50,-44}}, color={255,0,255}));
+          {-72,-22},{-56,-22},{-56,-24.8}},
+                                          color={255,0,255}));
   connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,55.4},
-          {-72,-20},{50,-20},{50,-48}}, color={255,0,255}));
+          {-72,-22},{46,-22},{46,-24.8}},
+                                        color={255,0,255}));
   connect(sigBus.n, nConGain.u) annotation (Line(
-      points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,93.6}},
+      points={{1.075,104.07},{-22,104.07},{-22,72.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(nConGain.y, multiplex3_1.u3[1]) annotation (Line(points={{
-          -1.55431e-15,75.2},{-6,75.2},{-6,49.6},{-7.6,49.6}}, color={0,0,127}));
-  connect(t_Co_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,55.4},{
-          -40,52},{3.6,52},{3.6,49.6}}, color={0,0,127}));
-  connect(t_Ev_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,53.4},{46,
-          48},{-2,48},{-2,49.6}},
-                                color={0,0,127}));
-  connect(switchPel.y, feedbackHeatFlowEvaporator.u2)
-    annotation (Line(points={{50,-71},{50,-82},{75.2,-82}}, color={0,0,127}));
-  connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{-50,-67},
-          {-50,-74},{80,-74},{80,-77.2}},            color={0,0,127}));
+  connect(nConGain.y, multiplex3_1.u3[1]) annotation (Line(points={{-22,63.6},{
+          -22,56},{-8,56},{-8,49},{-6.5,49}},                  color={0,0,127}));
+  connect(t_Co_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{15,65.7},{15,
+          56},{0.5,56},{0.5,49}},       color={0,0,127}));
+  connect(t_Ev_in.y, multiplex3_1.u2[1]) annotation (Line(points={{-2,63.6},{-2,
+          49},{-3,49}},         color={0,0,127}));
   connect(realCorr.y, scalingFacTimesQCon.u1) annotation (Line(points={{-3,9.5},
-          {-3,0},{-38,0},{-38,-5}}, color={0,0,127}));
-  connect(nDTableQCon.y, scalingFacTimesQCon.u2) annotation (Line(points={{-46,
-          2.8},{-46,2},{-44,2},{-44,-5}}, color={0,0,127}));
-  connect(scalingFacTimesQCon.y, switchQCon.u1) annotation (Line(points={{-41,
-          -16.5},{-41,-30.25},{-42,-30.25},{-42,-44}}, color={0,0,127}));
+          {-3,0},{-41.6,0},{-41.6,-3.2}},
+                                    color={0,0,127}));
+  connect(nDTableQCon.y, scalingFacTimesQCon.u2) annotation (Line(points={{-46,2.8},
+          {-46,-3.2},{-46.4,-3.2}},       color={0,0,127}));
+  connect(scalingFacTimesQCon.y, switchQCon.u1) annotation (Line(points={{-44,
+          -12.4},{-44,-18},{-51.2,-18},{-51.2,-24.8}}, color={0,0,127}));
   connect(realCorr.y, scalingFacTimesPel.u2) annotation (Line(points={{-3,9.5},
-          {-3,0},{44,0},{44,-7}}, color={0,0,127}));
+          {-3,0},{45.6,0},{45.6,-5.2}},
+                                  color={0,0,127}));
   connect(nDTablePel.y, scalingFacTimesPel.u1)
-    annotation (Line(points={{50,0.8},{50,-7}}, color={0,0,127}));
-  connect(scalingFacTimesPel.y, switchPel.u1) annotation (Line(points={{47,
-          -18.5},{60,-18.5},{60,-48},{58,-48}}, color={0,0,127}));
+    annotation (Line(points={{50,0.8},{50,-5.2},{50.4,-5.2}},
+                                                color={0,0,127}));
+  connect(scalingFacTimesPel.y, switchPel.u1) annotation (Line(points={{48,
+          -14.4},{48,-20},{50,-20},{50,-24},{50.8,-24},{50.8,-24.8}},
+                                                color={0,0,127}));
+  connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{46,-38.6},{46,
+          -50},{76.4,-50},{76.4,-60.8}}, color={0,0,127}));
+  connect(switchPel.y, Pel) annotation (Line(points={{46,-38.6},{46,-64},{0,-64},
+          {0,-110}}, color={0,0,127}));
+  connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points=
+          {{-56,-38.6},{-72,-38.6},{-72,-28},{-76,-28},{-76,-33.2}}, color={0,0,
+          127}));
+  connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
+          {46,-38.6},{46,-50},{-66,-50},{-66,-26},{-90,-26},{-90,-38},{-80.8,
+          -38}}, color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),

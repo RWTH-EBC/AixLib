@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 package BaseClasses "Package with partial classes of Performance Data"
   partial model PartialPerformanceData
     "Model with a replaceable for different methods of data aggregation"
@@ -26,8 +26,42 @@ package BaseClasses "Package with partial classes of Performance Data"
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={80,-110})));
+    Modelica.Blocks.Math.Add calcRedQCon
+      "Based on redcued heat flow to the evaporator, the heat flow to the condenser is also reduced"
+      annotation (Placement(transformation(
+          extent={{-6,-6},{6,6}},
+          rotation=270,
+          origin={80,-68})));
+    Modelica.Blocks.Math.Product proRedQEva
+      "Based on the icing factor, the heat flow to the evaporator is reduced"
+      annotation (Placement(transformation(
+          extent={{-6,6},{6,-6}},
+          rotation=270,
+          origin={-80,-60})));
   protected
     parameter Real scalingFactor=1 "Scaling factor of heat pump";
+    Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
+      "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{-6,-6},
+              {6,6}},
+          rotation=270,
+          origin={-76,-38})));
+  equation
+    connect(proRedQEva.u1, sigBus.iceFac) annotation (Line(points={{-83.6,-52.8},
+            {-83.6,-48},{-96,-48},{-96,94},{1.075,94},{1.075,104.07}}, color={0,
+            0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{-3,6},{-3,6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(proRedQEva.y, QEva) annotation (Line(points={{-80,-66.6},{-80,-84},
+            {80,-84},{80,-110}}, color={0,0,127}));
+    connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{-80,-66.6},
+            {-80,-70},{-66,-70},{-66,-54},{83.6,-54},{83.6,-60.8}}, color={0,0,
+            127}));
+    connect(calcRedQCon.y, QCon) annotation (Line(points={{80,-74.6},{80,-78},{
+            -62,-78},{-62,-90},{-80,-90},{-80,-110}}, color={0,0,127}));
+    connect(proRedQEva.u2, feedbackHeatFlowEvaporator.y) annotation (Line(
+          points={{-76.4,-52.8},{-76,-52.8},{-76,-43.4}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                   Rectangle(
           extent={{-100,-100},{100,100}},
