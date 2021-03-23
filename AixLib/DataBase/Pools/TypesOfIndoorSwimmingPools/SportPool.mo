@@ -7,7 +7,6 @@ record SportPool "Pool which is mainly used for sport swimmers"
   V_storage=150,
   T_pool=301.15,
   beta_inUse=28/3600,
-  beta_nonUse=7/3600,
   Q=0.1319,
   Q_night=0.02314,
   use_partialLoad = true,

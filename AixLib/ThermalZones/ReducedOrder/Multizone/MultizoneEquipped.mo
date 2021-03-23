@@ -69,7 +69,7 @@ model MultizoneEquipped
     annotation (Placement(transformation(
     extent={{20,20},{-20,-20}},
     rotation=180,
-    origin={-100,-16}), iconTransformation(
+    origin={-152,-6}),  iconTransformation(
     extent={{10,-10},{-10,10}},
     rotation=180,
     origin={-90,0})));
@@ -104,7 +104,8 @@ model MultizoneEquipped
     final dp_sup=dpAHU_sup,
     final dp_eta=dpAHU_eta,
     final eta_sup=effFanAHU_sup,
-    final eta_eta=effFanAHU_eta) if
+    final eta_eta=effFanAHU_eta,
+    phi_sup(fixed=true, start=0.4)) if
        ASurTot > 0 or VAir > 0
     "Air Handling Unit"
     annotation (
@@ -113,6 +114,15 @@ model MultizoneEquipped
   Modelica.Blocks.Interfaces.RealOutput CO2Con[numZones] if use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
+  Modelica.Blocks.Interfaces.RealInput wavePool[numZones]
+    "Input for wave pool profile, only used for swimming pool models"
+    annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={20,-100}), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={12,-110})));
 protected
   parameter Real zoneFactor[numZones,1](fixed=false)
     "Calculated zone factors";
@@ -221,7 +231,8 @@ equation
   end for;
 
   connect(AHU[1], AirHandlingUnit.T_supplyAir) annotation (Line(
-      points={{-100,-31},{-100,-14},{-86,-14},{-86,2},{24,2},{24,19.75},{12.4,19.75}},
+      points={{-167,-6},{-167,-14},{-86,-14},{-86,2},{24,2},{24,19.75},{12.4,
+          19.75}},
       color={0,0,127},
       smooth=Smooth.None));
 
@@ -229,18 +240,14 @@ equation
       points={{-58.8,28},{-58,28},{-58,21.25},{-50.6,21.25}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(AHU[4], airFlowRate.profile) annotation (Line(
-      points={{-100,-1},{-100,-16},{-86,-16},{-86,30},{-73.2,30},{-73.2,30.4}},
-      color={0,0,127},
-      smooth=Smooth.None));
 
   connect(AHU[2], AirHandlingUnit.phi_supplyAir[1]) annotation (Line(
-      points={{-100,-21},{-100,-16},{-86,-16},{-86,2},{24,2},{24,16},{12.4,16},{
+      points={{-157,-6},{-157,-16},{-86,-16},{-86,2},{24,2},{24,16},{12.4,16},{
           12.4,16.75}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[3], AirHandlingUnit.phi_supplyAir[2]) annotation (Line(
-      points={{-100,-11},{-100,-16},{-86,-16},{-86,2},{24,2},{24,16},{12.4,16},{
+      points={{-147,-6},{-147,-16},{-86,-16},{-86,2},{24,2},{24,16},{12.4,16},{
           12.4,15.25}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -258,9 +265,6 @@ equation
           -28},{16,-28},{16,-16},{26,-16},{26,33.25},{12.4,33.25}}, color={0,0,127}));
   connect(zone.ventRate, airFlowRateSplit.airFlowOut) annotation (Line(points={{
           38.84,60.89},{44,60.89},{44,38},{44,38},{44,35.2}}, color={0,0,127}));
-  connect(AHU[4], airFlowRateSplit.profile) annotation (Line(points={{-100,-1},{
-          -100,-1},{-100,-18},{-86,-18},{-86,2},{40,2},{40,10},{40.4,10},{40.4,20.8}},
-        color={0,0,127}));
   connect(AirHandlingUnit.T_supplyAirOut, replicatorTemperatureVentilation.u)
     annotation (Line(points={{12.4,23.5},{23,23.5},{23,47}}, color={0,0,127}));
   connect(AirHandlingUnit.T_outdoorAir, weaBus.TDryBul) annotation (Line(points=
@@ -319,6 +323,12 @@ equation
         color={0,0,127}));
   end if;
 
+  connect(wavePool, zone.wavePool) annotation (Line(points={{20,-100},{42,-100},
+          {42,52.28},{46.82,52.28}}, color={0,0,127}));
+  connect(AHU[4], airFlowRate.profile) annotation (Line(points={{-137,-6},{-112,
+          -6},{-112,30.4},{-73.2,30.4}}, color={0,0,127}));
+  connect(AHU[4], airFlowRateSplit.profile) annotation (Line(points={{-137,-6},
+          {-56,-6},{-56,20.8},{40.4,20.8}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Text(

@@ -7,7 +7,6 @@ record ChildrensPool
   V_storage=25.43,
   T_pool=303.15,
   beta_inUse=40/3600,
-  beta_nonUse=7/3600,
   Q=0.0325,
   Q_night=0.01258,
   use_waterRecycling=false,

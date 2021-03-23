@@ -11,9 +11,9 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.VolumeFlowRate Q(min= 0.001) "Volume Flow Rate";
 
   parameter Real beta_inUse( final unit="m/s") "Water transfer coefficient during opening hours";
-  parameter Real beta_nonUse( final unit= "m/s")
-                                      "Water transfer coefficient during non opening hours";
 
+
+  parameter Boolean use_poolCover=false "Pool covered during non opening hours";
   parameter Boolean use_partialLoad=false  "Partial load operation implemented for the non opening hours?";
   parameter Modelica.SIunits.VolumeFlowRate Q_night( min=0) "In case of partial load: mass flow rate during non-opening hours";
   parameter Boolean use_waterRecycling= false
@@ -23,6 +23,11 @@ record IndoorSwimmingPoolBaseRecord
 
   parameter Modelica.SIunits.MassFlowRate m_flow_out( min=0.0001)
                                                               "Waterexchange due to people in the pool";
+
+ // Wave mode
+  parameter Boolean use_wavePool=false "Is there a wave machine installed?";
+  parameter Modelica.SIunits.Length h_wave=0 "Height of generatedwave";
+  parameter Modelica.SIunits.Length w_wave=0 "Width of generated wave/ width of wave machine outlet";
 
  // Exterior Pool Wall - with earth contact - only vertical
   parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls with earth contact";
@@ -54,9 +59,6 @@ record IndoorSwimmingPoolBaseRecord
     each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, pool floor, pool floor with earth contact";
   parameter Modelica.SIunits.Area AFloor "Area of pool floor with earth contact";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConFloor "Coefficient of heat transfer between the water and pool floor";
-
-
-
 
 
 

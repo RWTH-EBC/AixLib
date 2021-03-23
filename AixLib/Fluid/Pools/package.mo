@@ -455,8 +455,12 @@ package Pools "Models to describe Swimming Pools"
 
     Real phi(start=0)  "Relative humidty";
 
-    // Fixed Constants
 
+    // Fixed parameters and constants
+
+    final parameter Real beta_nonUse( final unit= "m/s")=7/3600 "Water transfer coefficient during non opening hours";
+    final parameter Real beta_cover( final unit= "m/s")=0.7/3600 "Water transfer coefficient during non opening hours";
+    final parameter Real beta_wavePool( final unit= "m/s")=50/3600 "Water transfer coefficient during non opening hours";
     final parameter Modelica.SIunits.Pressure pumpHead = 170000
       "Expected average flow resistance of watertreatment cycle";
     final parameter Real epsilon = 0.9*0.95
@@ -636,8 +640,8 @@ package Pools "Models to describe Swimming Pools"
           rotation=90,
           origin={26,-44})));
 
-    Modelica.Blocks.Interfaces.RealOutput PPump(final quantity="Power", final unit="W")
-      "Output eletric energy needed for pump operation"
+    Modelica.Blocks.Interfaces.RealOutput PPool(final quantity="Power", final unit="W")
+      "Output eletric energy needed for pool operation"
       annotation (Placement(transformation(extent={{98,-26},{118,-6}})));
     Modelica.Blocks.Interfaces.RealOutput QPool(final quantity="HeatFlowRate", final
         unit="W") "Heat needed to compensate losses"
@@ -689,7 +693,7 @@ package Pools "Models to describe Swimming Pools"
       T_water=poolParam.T_pool)
       "Pump to set the right mass flow rate for fresh water consumption"
       annotation (Placement(transformation(extent={{-46,-98},{-36,-88}})));
-    Modelica.Blocks.Math.RealToBoolean inUse(threshold=0.5)
+    Modelica.Blocks.Math.RealToBoolean inUse(threshold=1)
       "If input = 1, then inUse =true, else pool not in use"
       annotation (Placement(transformation(extent={{-80,80},{-68,92}})));
     Modelica.Blocks.Interfaces.RealInput openingHours
@@ -714,35 +718,64 @@ package Pools "Models to describe Swimming Pools"
           extent={{-10,-10},{10,10}},
           rotation=0,
           origin={38,-20})));
+    Modelica.Blocks.Math.RealToBoolean lunchBreak(threshold=0.5)
+      "If input = 0.5, then lunchBreak =true, not in use and  without cover, even if cover is installed during night"
+      annotation (Placement(transformation(extent={{-80,60},{-68,72}})));
+    Modelica.Blocks.Interfaces.RealInput wavePool "Input profil wavePool "
+      annotation (Placement(transformation(extent={{-118,32},{-92,58}})));
+    BaseClasses.waveMachine waveMachine(h_wave=poolParam.h_wave, w_wave=poolParam.w_wave)
+                      "Power consumption of wave machine"
+      annotation (Placement(transformation(extent={{-84,18},{-64,38}})));
+    Modelica.Blocks.Math.MultiSum sumP(nu=2) if poolParam.use_wavePool
+      "Sum of power consumption of all components"
+      annotation (Placement(transformation(extent={{-4,-24},{8,-12}})));
   equation
     phi=absToRelHum.relHum;
-   if inUse.y or not poolParam.use_partialLoad then
-       m_flow_toPool = poolParam.Q*Medium.d_const;
 
-       if (psat_T_pool - phi*
-          psat_T_Air)<0 then
-         m_flow_evap=0.00001;
-       else
-         m_flow_evap = (poolParam.beta_inUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
-         psat_T_Air)*poolParam.A_pool;
-       end if;
-   else
+     if inUse.y or not poolParam.use_partialLoad then
+       m_flow_toPool = poolParam.Q*Medium.d_const;
+     else
        m_flow_toPool= poolParam.Q_night*Medium.d_const;
-       if (psat_T_pool - phi*
-          psat_T_Air)<0 then
-         m_flow_evap=0.00001;
+     end if;
+
+
+     if (psat_T_pool - phi* psat_T_Air)<0 then
+         m_flow_evap=0.0;
+     else
+
+       if inUse.y then
+         if poolParam.use_wavePool then
+           if waveMachine.use_wavePool then
+             m_flow_evap = (beta_wavePool)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
+             psat_T_Air)*poolParam.A_pool;
+           else
+             m_flow_evap = (poolParam.beta_inUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
+             psat_T_Air)*poolParam.A_pool;
+           end if;
+         else
+           m_flow_evap = (poolParam.beta_inUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
+             psat_T_Air)*poolParam.A_pool;
+         end if;
        else
-         m_flow_evap = (poolParam.beta_nonUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
+        if not poolParam.use_poolCover or lunchBreak.y then
+         m_flow_evap = (beta_nonUse)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
           psat_T_Air)*poolParam.A_pool;
+         else
+         m_flow_evap = (beta_cover)/(R_D*0.5*(poolParam.T_pool + TAir))*(psat_T_pool - phi*
+          psat_T_Air)*poolParam.A_pool;
+        end if;
        end if;
-   end if;
+     end if;
+
+
+
 
   if poolParam.use_waterRecycling then
     m_flow_freshWater = (1-poolParam.x_recycling)*(poolParam.m_flow_out + m_flow_evap);
     m_flow_recycledWater = poolParam.x_recycling *(poolParam.m_flow_out + m_flow_evap);
   else
     m_flow_freshWater= poolParam.m_flow_out+m_flow_evap;
-    m_flow_recycledWater=0.0001;
+    m_flow_recycledWater=0.0;
   end if;
     connect(PoolWater.ports[1], Watertreatment.ports[1]) annotation (Line(points={{5,6},{0,
             6},{0,-4},{-40,-4},{-40,-52},{-30,-52},{-30,-54},{-21.2,-54}},
@@ -772,9 +805,7 @@ package Pools "Models to describe Swimming Pools"
     connect(TSoil, heatTransferConduction.TSoil) annotation (Line(points={{107,55},
             {90,55},{90,55.6},{72.6,55.6}}, color={0,0,127}));
       end if;
-    connect(circulationPump.P, PPump) annotation (Line(points={{22.32,-35.52},{72,
-            -35.52},{72,-16},{108,-16}},
-                                 color={0,0,127}));
+
     connect(QPool, QPool)
       annotation (Line(points={{108,-30},{108,-30}}, color={0,0,127}));
     connect(Watertreatment.ports[2], mFlow_out.port_a) annotation (Line(points={{-19.6,
@@ -846,6 +877,26 @@ package Pools "Models to describe Swimming Pools"
     connect(getTpool.y, preQPool.TSet) annotation (Line(points={{80.3,73},{88,
           73},{88,-8},{26,-8},{26,-12}},
                                        color={0,0,127}));
+    connect(openingHours, lunchBreak.u) annotation (Line(points={{-105,87},{-93.5,
+            87},{-93.5,66},{-81.2,66}}, color={0,0,127}));
+    connect(wavePool, waveMachine.wavePool) annotation (Line(points={{-105,45},{-94.5,
+            45},{-94.5,32},{-84.8,32}}, color={0,0,127}));
+
+    if poolParam.use_wavePool then
+      connect(circulationPump.P, sumP.u[1]) annotation (Line(points={{22.32,-35.52},{
+            -8,-35.52},{-8,-15.9},{-4,-15.9}}, color={0,0,127}));
+      connect(waveMachine.PWaveMachine, sumP.u[2]) annotation (Line(points={{-63.4,
+              28},{-58,28},{-58,-20},{-32,-20},{-32,-20.1},{-4,-20.1}},
+                                              color={0,0,127}));
+      connect(sumP.y, PPool) annotation (Line(points={{9.02,-18},{58,-18},{58,-16},{108,
+            -16}}, color={0,0,127}));
+    else
+      connect(circulationPump.P,PPool)  annotation (Line(points={{22.32,-35.52},{72,
+            -35.52},{72,-16},{108,-16}},
+                                 color={0,0,127}));
+    end if;
+
+
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Line(
               points={{-72,30}}, color={255,255,170}), Bitmap(extent={{-102,-104},{100,98}},
                            fileName=

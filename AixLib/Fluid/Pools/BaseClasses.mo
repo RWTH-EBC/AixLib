@@ -20,7 +20,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
       "Connect to TRoom"
       annotation (Placement(transformation(extent={{-12,54},{8,74}}),
           iconTransformation(extent={{-12,54},{8,74}})));
-    Modelica.Blocks.Sources.Constant CoefficientOfHeatTransferAir(k=alpha_Air)
+    Modelica.Blocks.Sources.Constant CoefficientOfHeatTransferAir(k=alpha_Air*A)
       "Coefficient of heat transfer between water surface and room air"
       annotation (Placement(transformation(
           extent={{10,-10},{-10,10}},
@@ -30,15 +30,15 @@ package BaseClasses "Base classes for Swimming Pool Models"
       "Convection at the watersurface" annotation (Placement(transformation(
           extent={{-10,10},{10,-10}},
           rotation=90,
-          origin={0,8})));
+          origin={-2,8})));
   equation
 
     connect(CoefficientOfHeatTransferAir.y, WaterAir.Gc) annotation (Line(points={{43,8},{
-            10,8}},                              color={0,0,127}));
-    connect(WaterAir.solid, heatport_a) annotation (Line(points={{-6.66134e-16,
-            -2},{0,-2},{0,-60}}, color={191,0,0}));
-    connect(WaterAir.fluid, heatPort_b) annotation (Line(points={{4.44089e-16,
-            18},{-2,18},{-2,64}},      color={191,0,0}));
+            8,8}},                               color={0,0,127}));
+    connect(WaterAir.solid, heatport_a) annotation (Line(points={{-2,-2},{0,-2},
+            {0,-60}},            color={191,0,0}));
+    connect(WaterAir.fluid, heatPort_b) annotation (Line(points={{-2,18},{-2,64}},
+                                       color={191,0,0}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
               -60},{100,60}}), graphics={
           Rectangle(
@@ -820,7 +820,7 @@ end if;
       k=0.1,
       Ti=5,
       yMax=m_flow_nominal/0.9,
-      yMin=0) annotation (Placement(transformation(extent={{-54,54},{-34,74}})));
+      yMin=0) annotation (Placement(transformation(extent={{-56,52},{-36,72}})));
   equation
     connect(port_a, CirculationPump.port_a) annotation (Line(points={{-100,0},{-88,
             0},{-88,-2},{-60,-2},{-60,0}}, color={0,127,255}));
@@ -828,13 +828,15 @@ end if;
             -4},{100,0}}, color={0,127,255}));
     connect(CirculationPump.P, P) annotation (Line(points={{-39,9},{-28,9},{-28,46},
             {106,46}}, color={0,0,127}));
-    connect(PID.u_m, senMasFlo.m_flow) annotation (Line(points={{-44,52},{-44,
+    connect(PID.u_m, senMasFlo.m_flow) annotation (Line(points={{-46,50},{-46,
             38},{2,38},{2,11}},
                           color={0,0,127}));
     connect(PID.u_s, m_flow_pump)
-      annotation (Line(points={{-56,64},{-108,64}}, color={0,0,127}));
-    connect(PID.y, CirculationPump.m_flow_in) annotation (Line(points={{-33,64},{-33,
-            41},{-50,41},{-50,12}}, color={0,0,127}));
+      annotation (Line(points={{-58,62},{-84,62},{-84,64},{-108,64}},
+                                                    color={0,0,127}));
+    connect(PID.y, CirculationPump.m_flow_in) annotation (Line(points={{-35,62},
+            {-35,41},{-50,41},{-50,12}},
+                                    color={0,0,127}));
     connect(CirculationPump.port_b, senMasFlo.port_a)
       annotation (Line(points={{-40,0},{-8,0}}, color={0,127,255}));
     connect(senMasFlo.port_b, res.port_a)
@@ -903,4 +905,115 @@ end if;
             textString="u1 / u2")}),                                Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end DivisionMI2MO;
+
+  model waveMachine "Simple Model to calculate energy demands of a wave machine"
+
+    parameter Modelica.SIunits.Length h_wave "Height of generated wave";
+    parameter Modelica.SIunits.Length w_wave "Width of wave machine outlet/of generated wave";
+
+    Modelica.Blocks.Math.RealToBoolean useWavePool(threshold=1)
+      "If input = 1, then true, else no waves generated"
+      annotation (Placement(transformation(extent={{-10,26},{8,44}})));
+    Modelica.Blocks.Tables.CombiTable1D p_wave(
+      y(
+      unit = "W/m"),
+      tableOnFile=false,
+      table=[0.7,3500; 0.9,6000; 1.3,12000],
+      extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
+      "Estimate consumed power per width to generate wave of a certain heigth; "
+      annotation (Placement(transformation(extent={{-42,-12},{-16,14}})));
+    Modelica.Blocks.Sources.RealExpression get_h_wave(y=h_wave)
+      "Get height of generated wave"
+      annotation (Placement(transformation(extent={{-84,-8},{-64,12}})));
+    Modelica.Blocks.Interfaces.RealInput wavePool "Input profil of wave machine"
+      annotation (Placement(transformation(extent={{-128,20},{-88,60}})));
+    Modelica.Blocks.Interfaces.BooleanOutput use_wavePool
+      "Is the wave pool in use?"
+      annotation (Placement(transformation(extent={{96,30},{116,50}})));
+    Modelica.Blocks.Interfaces.RealOutput PWaveMachine( final unit="W", final quantity="Power")
+      "Power consumption of wave machine"
+      annotation (Placement(transformation(extent={{96,-10},{116,10}})));
+    Modelica.Blocks.Math.Gain multiply(k=w_wave) "Multply by width of wave"
+      annotation (Placement(transformation(extent={{0,-8},{20,12}})));
+    Modelica.Blocks.Sources.Constant const(k=0) "no output if wave machine is off"
+      annotation (Placement(transformation(extent={{6,-48},{26,-28}})));
+    Modelica.Blocks.Logical.Switch switchWaveMachine
+      annotation (Placement(transformation(extent={{66,8},{86,28}})));
+  equation
+    connect(get_h_wave.y, p_wave.u[1]) annotation (Line(points={{-63,2},{-50,2},{-50,
+            1},{-44.6,1}}, color={0,0,127}));
+    connect(multiply.u, p_wave.y[1]) annotation (Line(points={{-2,2},{-12,2},{-12,1},
+            {-14.7,1}}, color={0,0,127}));
+    connect(wavePool, useWavePool.u) annotation (Line(points={{-108,40},{-60,40},{-60,
+            35},{-11.8,35}}, color={0,0,127}));
+    connect(useWavePool.y, use_wavePool) annotation (Line(points={{8.9,35},{54.45,35},
+            {54.45,40},{106,40}}, color={255,0,255}));
+    connect(switchWaveMachine.y, PWaveMachine) annotation (Line(points={{87,18},{87,
+            10},{88,10},{88,0},{106,0}}, color={0,0,127}));
+    connect(useWavePool.y, switchWaveMachine.u2) annotation (Line(points={{8.9,35},
+            {35.45,35},{35.45,18},{64,18}}, color={255,0,255}));
+    connect(multiply.y, switchWaveMachine.u1)
+      annotation (Line(points={{21,2},{42,2},{42,26},{64,26}}, color={0,0,127}));
+    connect(const.y, switchWaveMachine.u3) annotation (Line(points={{27,-38},{52,-38},
+            {52,10},{64,10}}, color={0,0,127}));
+    connect(PWaveMachine, PWaveMachine) annotation (Line(
+        points={{106,0},{101,0},{101,0},{106,0}},
+        color={0,0,127},
+        smooth=Smooth.Bezier));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+          Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
+          Line(
+            points={{-98,0},{-52,62},{-2,-24},{50,60},{100,-2}},
+            color={28,108,200},
+            smooth=Smooth.Bezier,
+            thickness=1),
+          Line(
+            points={{-98,-18},{-52,44},{-2,-42},{50,42},{98,-20}},
+            color={28,108,200},
+            smooth=Smooth.Bezier,
+            thickness=1),
+          Line(
+            points={{-98,-36},{-52,26},{-2,-60},{50,24},{96,-36}},
+            color={28,108,200},
+            smooth=Smooth.Bezier,
+            thickness=1)}),                                        Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end waveMachine;
+
+  model AHUcontrol "Simple on/off controller for AHU"
+
+
+
+    Modelica.Blocks.Interfaces.RealOutput AHUProfile
+      annotation (Placement(transformation(extent={{94,-10},{114,10}})));
+    Modelica.Blocks.Interfaces.RealInput relHum "relative humidity "
+      annotation (Placement(transformation(extent={{-124,42},{-84,82}})));
+    Modelica.Blocks.Interfaces.RealInput relHumSet
+      "Set point relative humidity"
+      annotation (Placement(transformation(extent={{-130,-44},{-90,-4}})));
+    Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=0.01,
+        pre_y_start=false)
+      annotation (Placement(transformation(extent={{-22,14},{-2,34}})));
+    Modelica.Blocks.Logical.Switch switch1
+      annotation (Placement(transformation(extent={{34,14},{54,34}})));
+    Modelica.Blocks.Sources.Constant const(k=0)
+      annotation (Placement(transformation(extent={{0,44},{20,64}})));
+    Modelica.Blocks.Sources.Constant const1(k=1)
+      annotation (Placement(transformation(extent={{-2,-28},{18,-8}})));
+  equation
+    connect(relHum, onOffController.u) annotation (Line(points={{-104,62},{-66,
+            62},{-66,18},{-24,18}}, color={0,0,127}));
+    connect(onOffController.y, switch1.u2)
+      annotation (Line(points={{-1,24},{32,24}}, color={255,0,255}));
+    connect(const1.y, switch1.u3) annotation (Line(points={{19,-18},{24,-18},{
+            24,16},{32,16}}, color={0,0,127}));
+    connect(const.y, switch1.u1) annotation (Line(points={{21,54},{26,54},{26,
+            32},{32,32}}, color={0,0,127}));
+    connect(relHumSet, onOffController.reference) annotation (Line(points={{
+            -110,-24},{-38,-24},{-38,30},{-24,30}}, color={0,0,127}));
+    connect(switch1.y, AHUProfile) annotation (Line(points={{55,24},{76,24},{76,
+            0},{104,0}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end AHUcontrol;
 end BaseClasses;
