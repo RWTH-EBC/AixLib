@@ -1,8 +1,7 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
 model VCLibMap
   "Multi-dimensional performance map encompasing choices of fluid and flowsheet based on steady state calculations using the Vapor Compression Library"
-  extends BaseClasses.PartialPerformanceData(final scalingFactor=
-        QCon_flow_nominal/Q_flowTableNom);
+  extends BaseClasses.PartialPerformanceData;
   // Parameters Heat pump operation
   parameter Modelica.SIunits.Power QCon_flow_nominal=5000
     "Nominal heating power of heat pump"                                                 annotation(Dialog(group=
@@ -24,6 +23,8 @@ model VCLibMap
   parameter String tableName_QConNominal="Q_flow_con_nominal" "String identifier in sdf table for QConNominal" annotation (Dialog(tab="SDF File", group="Variable names"));
   parameter String tableName_mFlowEvaNominal="m_flow_eva" "String identifier in sdf table for mFlow_evaNominal" annotation (Dialog(tab="SDF File", group="Variable names"));
   parameter String tableName_mFlowConNominal="m_flow_con" "String identifier in sdf table for mFlow_conNominal" annotation (Dialog(tab="SDF File", group="Variable names"));
+  parameter Modelica.SIunits.Power Q_flowTableNom = SDF.Functions.readDatasetDouble(fileref, dataset_QflowNom, "W")
+  "Nominal heat flow in map. Doesn't need to be changed."  annotation(Dialog(tab="SDF File", group="Variable names"));
   parameter Real minCOP=0.1
     "Minimal possible COP value. Used to avoid division by zero error. Should never occur anyways if performance map is correctly created"
     annotation (Dialog(tab="Advanced"));
@@ -112,7 +113,7 @@ protected
       fileref,
       dataset_mFlowEvaNominal,
       "kg/s") "Nominal mass flow rate";
-  parameter Modelica.SIunits.Power Q_flowTableNom = SDF.Functions.readDatasetDouble(fileref, dataset_QflowNom, "W") "Nominal heat flow in map";
+
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal=
       SDF.Functions.readDatasetDouble(
       fileref,
