@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SecurityControls;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   parameter Real minIceFac "Minimal value above which no defrost is necessary";
@@ -91,7 +91,7 @@ equation
           20}}, color={0,0,127}));
   connect(nSet, swiErr.u1) annotation (Line(points={{-116,20},{56,20}},
                color={0,0,127}));
-  connect(sigBusHP.iceFac, iceFacGreMinHea.u) annotation (Line(
+  connect(sigBusHP.iceFacMea, iceFacGreMinHea.u) annotation (Line(
       points={{-105.93,-61.93},{-68,-61.93},{-68,-78},{-40.6,-78}},
       color={255,204,51},
       thickness=0.5,
@@ -119,7 +119,7 @@ equation
       points={{-8,72},{-8,58.6},{-12,58.6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(sigBusHP.iceFac, iceFacGreMinChi.u) annotation (Line(
+  connect(sigBusHP.iceFacMea, iceFacGreMinChi.u) annotation (Line(
       points={{-105.93,-61.93},{-68,-61.93},{-68,-46},{-40.6,-46}},
       color={255,204,51},
       thickness=0.5,

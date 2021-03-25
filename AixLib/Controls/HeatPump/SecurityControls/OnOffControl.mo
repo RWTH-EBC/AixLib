@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SecurityControls;
 model OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
   parameter Boolean use_minRunTime
@@ -20,10 +20,6 @@ model OnOffControl
                                   nSetGreaterZero(final threshold=Modelica.Constants.eps)
                                                   "True if device is set on"
     annotation (Placement(transformation(extent={{-110,56},{-94,72}})));
-  Modelica.Blocks.Logical.GreaterThreshold
-                                  nIsGreaterZero(final threshold=Modelica.Constants.eps)
-    "True if the device is still on"
-    annotation (Placement(transformation(extent={{-108,-50},{-92,-34}})));
   Modelica.Blocks.Logical.And andRun
     annotation (Placement(transformation(extent={{18,72},{30,84}})));
   Modelica.Blocks.Logical.Pre pre1(final pre_u_start=pre_n_start)
@@ -82,9 +78,6 @@ model OnOffControl
   Modelica.Blocks.Logical.And andLocOff
     annotation (Placement(transformation(extent={{52,-78},{64,-66}})));
 equation
-  connect(pre1.u,nIsGreaterZero. y)
-    annotation (Line(points={{-85.2,-42},{-91.2,-42}},
-                                                     color={255,0,255}));
   connect(pre1.y, runPerHouBoundary.u) annotation (Line(points={{-71.4,-42},{-71.4,
           -70},{-42,-70}},         color={255,0,255}));
   connect(pre1.y, notIsOn.u) annotation (Line(points={{-71.4,-42},{-71.4,-28},{-72,
@@ -155,15 +148,7 @@ equation
           {-56,-96},{22,-96},{22,-84},{26.8,-84}}, color={255,0,255}));
   connect(notIsOn.y, andIsOff.u2) annotation (Line(points={{-57.6,-18},{-56,-18},
           {-56,33.2},{14.8,33.2}}, color={255,0,255}));
-  connect(sigBusHP.n,nIsGreaterZero. u) annotation (Line(
-      points={{-134.915,-68.925},{-134.915,-42},{-109.6,-42}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.n, swinOutnSet.u3) annotation (Line(
+  connect(sigBusHP.nSet, swinOutnSet.u3) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-104},{78,-104},{78,-8},{88,-8}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -175,6 +160,12 @@ equation
       points={{-19.3,-37},{6,-37},{6,-60},{26.8,-60}},
       color={255,0,255},
       pattern=LinePattern.Dash));
+  connect(pre1.u, sigBusHP.onOffMea) annotation (Line(points={{-85.2,-42},{-134.915,
+          -42},{-134.915,-68.925}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Documentation(info="<html><p>
   Checks if the nSet value is legal by checking if the device can
   either be turned on or off, depending on which state it was in.

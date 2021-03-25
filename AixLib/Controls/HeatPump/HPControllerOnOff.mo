@@ -8,8 +8,6 @@ model HPControllerOnOff
 
   Modelica.Blocks.Sources.BooleanConstant mode "Dummy signal for unit mode, true: heat pump, false: chiller"
     annotation (Placement(transformation(extent={{-12,-50},{8,-30}})));
-  Modelica.Blocks.Sources.Constant N(k=0) "Dummy signal for rotational speed of compressor"
-    annotation (Placement(transformation(extent={{-12,30},{8,50}})));
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=bandwidth,
       pre_y_start=pre_y_start) "Generates the on/off signal depending on the temperature inputs"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -25,28 +23,30 @@ model HPControllerOnOff
     displayUnit="degC",
     min=0) "Temperature set point"
     annotation (Placement(transformation(extent={{-115,-55},{-85,-25}})));
+  Modelica.Blocks.Math.BooleanToReal
+                                   N1(final realTrue=1, final realFalse=0)
+                                          "Dummy signal for rotational speed of compressor"
+    annotation (Placement(transformation(extent={{22,-10},{42,10}})));
 equation
 
-  connect(N.y,heatPumpControlBus.n)  annotation (Line(points={{9,40},{40,40},{40,
-          0.3525},{99.6475,0.3525}},
-                                   color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(T_meas, onOffController.reference) annotation (Line(points={{-100,40},
           {-40,40},{-40,6},{-12,6}}, color={0,0,127}));
   connect(T_set, onOffController.u) annotation (Line(points={{-100,-40},{-40,-40},
           {-40,-6},{-12,-6}}, color={0,0,127}));
-  connect(mode.y, heatPumpControlBus.mode) annotation (Line(points={{9,-40},{24,
-          -40},{40,-40},{40,0.3525},{99.6475,0.3525}}, color={255,0,255}), Text(
+  connect(mode.y, heatPumpControlBus.modeSet) annotation (Line(points={{9,-40},
+          {60,-40},{60,0.3525},{99.6475,0.3525}}, color={255,0,255}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
-  connect(onOffController.y, heatPumpControlBus.onOff) annotation (Line(points=
-          {{11,0},{99.6475,0},{99.6475,0.3525}}, color={255,0,255}), Text(
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(onOffController.y, N1.u)
+    annotation (Line(points={{11,0},{20,0}}, color={255,0,255}));
+  connect(N1.y, heatPumpControlBus.nSet) annotation (Line(points={{43,0},{72,0},
+          {72,0.3525},{99.6475,0.3525}}, color={0,0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Documentation(info="<html><p>
   This model represents a simple controller for a heat pump. It is
   based on the <a href=
