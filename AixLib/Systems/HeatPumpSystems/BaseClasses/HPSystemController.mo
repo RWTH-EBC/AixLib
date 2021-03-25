@@ -239,6 +239,11 @@ model HPSystemController
 
   parameter Modelica.SIunits.SpecificHeatCapacity cp_con=4180
     "specific heat capacity of condenser medium";
+  Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
+      Placement(transformation(
+        extent={{-7,7},{7,-7}},
+        rotation=180,
+        origin={-79,-83})));
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
           {-92,1.77636e-15},{-92,2.8},{-71.8,2.8}},
@@ -415,6 +420,18 @@ equation
       points={{60.8,64},{120,64},{120,-58.915},{-99.92,-58.915}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constTAmb.y, sigBusHP.TConAmbMea) annotation (Line(points={{-86.7,-83},
+          {-99.92,-83},{-99.92,-58.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(T_oda, sigBusHP.TEvaAmbMea) annotation (Line(points={{-114,0},{-99.92,
+          0},{-99.92,-58.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
