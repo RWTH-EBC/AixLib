@@ -1,4 +1,4 @@
-within AixLib.Fluid.BaseClasses;
+﻿within AixLib.Fluid.BaseClasses;
 partial model PartialReversibleThermalMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -19,8 +19,8 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
-                                                "Blackbox model of refrigerant cycle of a thermal machine"
+  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
+    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
     annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
@@ -286,14 +286,14 @@ partial model PartialReversibleThermalMachine
     use_evaCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
-        rotation=180,
-        origin={68,-108})));
+        rotation=0,
+        origin={-32,-110})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
     use_conCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
-        rotation=180,
-        origin={68,110})));
+        rotation=0,
+        origin={-52,114})));
 
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
@@ -303,13 +303,13 @@ partial model PartialReversibleThermalMachine
         iconTransformation(extent={{-108,-52},{-90,-26}})));
 
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
-      displayUnit="degC") if use_evaCap
+      displayUnit="degC") if use_evaCap and not useBusConnectorOnly
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=0,
         origin={110,-100})));
   Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final
-      displayUnit="degC") if use_conCap
+      displayUnit="degC") if use_conCap and not useBusConnectorOnly
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
@@ -395,6 +395,12 @@ partial model PartialReversibleThermalMachine
 
   //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
 
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
+        Modelica.Constants.eps) if                                  not use_refIne
+    "Use default nSet value" annotation (Placement(transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=180,
+        origin={-66,-28})));
 protected
   parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
   parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
@@ -508,19 +514,19 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(T_amb_con, varTempOutCon.T) annotation (Line(
-      points={{110,100},{84,100},{84,110},{77.6,110}},
+      points={{110,100},{80,100},{80,126},{-76,126},{-76,114},{-61.6,114}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(varTempOutCon.port, con.port_out) annotation (Line(
-      points={{60,110},{0,110}},
+      points={{-44,114},{0,114},{0,110}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(T_amb_eva, varTempOutEva.T) annotation (Line(
-      points={{110,-100},{94,-100},{94,-108},{77.6,-108}},
+      points={{110,-100},{80,-100},{80,-120},{-48,-120},{-48,-110},{-41.6,-110}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(eva.port_out, varTempOutEva.port) annotation (Line(
-      points={{0,-102},{0,-108},{60,-108}},
+      points={{0,-102},{0,-110},{-24,-110}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60},{-100,
@@ -559,6 +565,34 @@ equation
                                                color={0,127,255}));
   connect(port_b1, senT_b1.port_b) annotation (Line(points={{100,60},{72,60},{72,
           92},{48,92}}, color={0,127,255}));
+  connect(greaterThreshold.y, sigBus.onOff) annotation (Line(points={{-59.4,-28},
+          {-56,-28},{-56,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(varTempOutCon.T, sigBus.T_amb_con) annotation (Line(
+      points={{-61.6,114},{-76,114},{-76,-42.915},{-104.925,-42.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(varTempOutEva.T, sigBus.T_amb_eva) annotation (Line(
+      points={{-41.6,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(greaterThreshold.u, sigBus.n) annotation (Line(points={{-73.2,-28},{
+          -76,-28},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},
