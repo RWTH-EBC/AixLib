@@ -46,8 +46,9 @@ package BaseClasses "Package with partial classes of Performance Data"
           rotation=270,
           origin={-76,-38})));
   equation
-    connect(proRedQEva.u1, sigBus.iceFac) annotation (Line(points={{-83.6,-52.8},
-            {-83.6,-48},{-96,-48},{-96,94},{1.075,94},{1.075,104.07}}, color={0,
+    connect(proRedQEva.u1, sigBus.iceFacMea) annotation (Line(points={{-83.6,
+            -52.8},{-83.6,-48},{-96,-48},{-96,94},{1.075,94},{1.075,104.07}},
+                                                                       color={0,
             0,127}), Text(
         string="%second",
         index=1,

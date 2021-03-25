@@ -590,8 +590,8 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(greaterThreshold.u, sigBus.n) annotation (Line(points={{-73.2,-28},{-76,
-          -28},{-76,-43},{-105,-43}},                 color={0,0,127}), Text(
+  connect(greaterThreshold.u, sigBus.nSet) annotation (Line(points={{-73.2,-28},
+          {-76,-28},{-76,-42.915},{-104.925,-42.915}},color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
