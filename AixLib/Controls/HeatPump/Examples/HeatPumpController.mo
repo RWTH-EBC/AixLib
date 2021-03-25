@@ -61,44 +61,44 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(heatPumpControlBus.n, showN.numberPort) annotation (Line(
+  connect(heatPumpControlBus.nSet, showN.numberPort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,70},{58.5,70}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(temperatureMeasurements[1].y, heatPumpControlBus.T_flow_ev)
-    annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
-          -0.05}}, color={0,0,127}), Text(
+  connect(temperatureMeasurements[1].y, heatPumpControlBus.TEvaInMea)
+    annotation (Line(points={{34.9,4.21885e-15},{0.05,4.21885e-15},{0.05,-0.05}},
+                   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(temperatureMeasurements[2].y, heatPumpControlBus.T_flow_co)
-    annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
-          -0.05}}, color={0,0,127}), Text(
+  connect(temperatureMeasurements[2].y, heatPumpControlBus.TConInMea)
+    annotation (Line(points={{34.9,4.21885e-15},{0.05,4.21885e-15},{0.05,-0.05}},
+                   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(temperatureMeasurements[3].y, heatPumpControlBus.T_ret_ev)
-    annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
-          -0.05}}, color={0,0,127}), Text(
+  connect(temperatureMeasurements[3].y, heatPumpControlBus.TEvaOutMea)
+    annotation (Line(points={{34.9,4.21885e-15},{0.05,4.21885e-15},{0.05,-0.05}},
+                   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(temperatureMeasurements[4].y, heatPumpControlBus.T_ret_co)
-    annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
-          -0.05}}, color={0,0,127}), Text(
+  connect(temperatureMeasurements[4].y, heatPumpControlBus.TConOutMea)
+    annotation (Line(points={{34.9,4.21885e-15},{0.05,4.21885e-15},{0.05,-0.05}},
+                   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(massFlowRateMeasurements[1].y, heatPumpControlBus.m_flow_ev)
+  connect(massFlowRateMeasurements[1].y, heatPumpControlBus.m_flowEvaMea)
     annotation (Line(points={{34.9,-20},{20,-20},{20,-0.05},{0.05,-0.05}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(massFlowRateMeasurements[2].y, heatPumpControlBus.m_flow_co)
+  connect(massFlowRateMeasurements[2].y, heatPumpControlBus.m_flowConMea)
     annotation (Line(points={{34.9,-20},{20,-20},{20,-0.05},{0.05,-0.05}},
         color={0,0,127}), Text(
       string="%second",
@@ -112,21 +112,21 @@ equation
           -66,30},{-66,80},{-63,80}}, color={0,0,127}));
   connect(T_meas.y, output_T_meas) annotation (Line(points={{-79,30},{-74,30},{
           -74,-60},{100,-60}}, color={0,0,127}));
-  connect(heatPumpControlBus.mode, showMode.activePort) annotation (Line(
+  connect(heatPumpControlBus.modeSet, showMode.activePort) annotation (Line(
       points={{0.05,-0.05},{10,-0.05},{20,-0.05},{20,28},{64.5,28}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatPumpControlBus.onOff, showOnOff.activePort) annotation (Line(
+  connect(heatPumpControlBus.onOffMea, showOnOff.activePort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,50},{64.5,50}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatPumpControlBus.onOff, output_on) annotation (Line(
+  connect(heatPumpControlBus.onOffMea, output_on) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,-80},{100,-80}},
       color={255,204,51},
       thickness=0.5), Text(
