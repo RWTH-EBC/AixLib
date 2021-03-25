@@ -4,8 +4,30 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
   extends Modelica.Icons.Example;
 
   extends AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
-  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone PeakLoadDevice(redeclare package Medium =
-                         Medium));
+  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone PeakLoadDevice(redeclare
+        package                                                                                                   Medium =
+                         Medium), heatPump(
+      redeclare package Medium_con = Medium,
+      redeclare package Medium_eva = Medium,
+      use_rev=false,
+      mFlow_conNominal=0.5,
+      VCon=0.005,
+      dpCon_nominal=0,
+      use_conCap=false,
+      CCon=0,
+      GConOut=0,
+      GConIns=0,
+      mFlow_evaNominal=0.5,
+      VEva=0.005,
+      dpEva_nominal=0,
+      use_evaCap=false,
+      CEva=0,
+      GEvaOut=0,
+      GEvaIns=0,
+      redeclare model PerDataMainHP =
+          DataBase.HeatPump.PerformanceData.PolynomalApproach (redeclare
+            function PolyData =
+              AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade)));
 
   Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium,
       nPorts=1) annotation (Placement(transformation(
