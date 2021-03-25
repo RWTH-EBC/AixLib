@@ -1,7 +1,8 @@
 ﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model PolynomalApproach
   "Calculating heat pump data based on a polynomal approach"
-  extends AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends
+    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
   replaceable function PolyData =
       AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
@@ -36,11 +37,12 @@ model PolynomalApproach
 protected
   Real Char[2];
 equation
-  Char =PolyData(sigBus.n,
-      sigBus.T_ret_co,
-      sigBus.T_flow_ev,
-      sigBus.m_flow_co,
-      sigBus.m_flow_ev);
+  Char =PolyData(
+    sigBus.nSet,
+    sigBus.TConOutMea,
+    sigBus.TEvaInMea,
+    sigBus.m_flowConMea,
+    sigBus.m_flowEvaMea);
   connect(switchQCon.u3, constZero.y) annotation (Line(points={{-64.8,-4.8},{-64,
           -4.8},{-64,2},{-24,2},{-24,5.3},{-23,5.3}}, color={0,0,127}));
   connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{-60,
@@ -57,14 +59,16 @@ equation
     annotation (Line(points={{46.8,-4.8},{46,-4.8},{46,39}}, color={0,0,127}));
   connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
           {42,-18.6},{42,-22},{-88,-22},{-88,-38},{-80.8,-38}}, color={0,0,127}));
-  connect(switchPel.u2, sigBus.onOff) annotation (Line(points={{42,-4.8},{42,14},
-          {0,14},{0,84},{1.075,84},{1.075,104.07}}, color={255,0,255}), Text(
+  connect(switchPel.u2, sigBus.onOffMea) annotation (Line(points={{42,-4.8},{42,
+          14},{0,14},{0,84},{1.075,84},{1.075,104.07}}, color={255,0,255}),
+      Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switchQCon.u2, sigBus.onOff) annotation (Line(points={{-60,-4.8},{-58,
-          -4.8},{-58,28},{1.075,28},{1.075,104.07}}, color={255,0,255}), Text(
+  connect(switchQCon.u2, sigBus.onOffMea) annotation (Line(points={{-60,-4.8},{
+          -58,-4.8},{-58,28},{1.075,28},{1.075,104.07}}, color={255,0,255}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

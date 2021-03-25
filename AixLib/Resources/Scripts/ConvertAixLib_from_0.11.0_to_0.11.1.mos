@@ -1,0 +1,19 @@
+﻿clear
+
+convertClear();
+
+// Change naming in AixLib.Controls.Interfaces.ThermalMachineControlBus
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"n"}, {"nSet"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"mode"}, {"modeSet"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_flow_ev"}, {"TEvaInMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_flow_co"}, {"TConInMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_ret_co"}, {"TConOutMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_ret_ev"}, {"TEvaOutMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"Pel"}, {"PelMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"m_flow_ev"}, {""});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"m_flow_co"}, {""});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"CoP"}, {"CoPMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_oda"}, {"TOdaMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_amb_eva"}, {"TEvaAmbMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_amb_con"}, {"TConAmbMea"});
+convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"iceFac"}, {"iceFacMea"});

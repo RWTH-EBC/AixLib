@@ -76,21 +76,21 @@ protected
 equation
   if printAsserts then
     assert(
-        minSou + 273.15 < sigBus.T_flow_ev,
+        minSou + 273.15 <sigBus.TEvaInMea,
         "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results",
         level=AssertionLevel.warning);
     assert(
-        maxSou + 273.15 > sigBus.T_flow_ev,
+        maxSou + 273.15 >sigBus.TEvaInMea,
         "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results",
         level=AssertionLevel.warning);
     assert(
-        minSup + 273.15 < sigBus.T_ret_co,
-        "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results",
-        level=AssertionLevel.warning);
+      minSup + 273.15 < sigBus.TConOutMea,
+      "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results",
+      level=AssertionLevel.warning);
     assert(
-        maxSup + 273.15 > sigBus.T_ret_co,
-        "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results",
-        level=AssertionLevel.warning);
+      maxSup + 273.15 > sigBus.TConOutMea,
+      "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results",
+      level=AssertionLevel.warning);
   else
   end if;
   connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{52,65.4},{52,
@@ -102,14 +102,14 @@ equation
   connect(t_Co_ou.y, Qdot_ConTable.u1) annotation (Line(points={{-54,69.4},{-54,
           60},{52,60},{52,50.8},{54.4,50.8}},
                                   color={0,0,127}));
-  connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
+  connect(sigBus.TConOutMea, t_Co_ou.u) annotation (Line(
       points={{1.075,104.07},{-54,104.07},{-54,83.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
+  connect(sigBus.TEvaInMea, t_Ev_in.u) annotation (Line(
       points={{1.075,104.07},{2,104.07},{2,104},{52,104},{52,79.2}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -126,7 +126,7 @@ equation
           -80},{0,-110}},          color={0,0,127}));
   connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-15,39.7},{-15,
           31.4},{-15.2,31.4}}, color={0,0,127}));
-  connect(sigBus.n, nTimesSF.u1) annotation (Line(
+  connect(sigBus.nSet, nTimesSF.u1) annotation (Line(
       points={{1.075,104.07},{-2,104.07},{-2,31.4},{-6.8,31.4}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -140,11 +140,11 @@ equation
           8},{36.4,8},{36.4,-2.8}}, color={0,0,127}));
   connect(nTimesPel.y, calcRedQCon.u2) annotation (Line(points={{-47,-10.7},{
           -47,-22},{76.4,-22},{76.4,-60.8}}, color={0,0,127}));
-  connect(nTimesPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
-          {-47,-10.7},{-47,-22},{-94,-22},{-94,-38},{-88.8,-38}}, color={0,0,
+  connect(nTimesPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={{-47,
+          -10.7},{-47,-22},{-94,-22},{-94,-38},{-80.8,-38}},      color={0,0,
           127}));
-  connect(nTimesQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points=
-          {{40,-16.6},{40,-28},{-84,-28},{-84,-33.2}}, color={0,0,127}));
+  connect(nTimesQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{40,
+          -16.6},{40,-28},{-76,-28},{-76,-33.2}},      color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),

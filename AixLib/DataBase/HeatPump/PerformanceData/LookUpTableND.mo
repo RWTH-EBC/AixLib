@@ -1,6 +1,7 @@
 ﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
-  extends AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends
+    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
   parameter Real nConv=100
     "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
   parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -126,21 +127,21 @@ equation
           36},{-46,36},{-46,30.4}},       color={0,0,127}));
   connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-3,37.5},{-2,
           37.5},{-2,36},{50,36},{50,28.4}},  color={0,0,127}));
-  connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
+  connect(sigBus.TEvaInMea, t_Ev_in.u) annotation (Line(
       points={{1.075,104.07},{-2,104.07},{-2,72.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
+  connect(sigBus.TConOutMea, t_Co_ou.u) annotation (Line(
       points={{1.075,104.07},{15,104.07},{15,72.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus.n, nConGain.u) annotation (Line(
+  connect(sigBus.nSet, nConGain.u) annotation (Line(
       points={{1.075,104.07},{-22,104.07},{-22,72.8}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -180,15 +181,15 @@ equation
   connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
           {46,-38.6},{46,-50},{-66,-50},{-66,-26},{-90,-26},{-90,-38},{-80.8,
           -38}}, color={0,0,127}));
-  connect(switchQCon.u2, sigBus.onOff) annotation (Line(points={{-56,-24.8},{
-          -56,-18},{78,-18},{78,92},{1.075,92},{1.075,104.07}}, color={255,0,
+  connect(switchQCon.u2, sigBus.onOffMea) annotation (Line(points={{-56,-24.8},
+          {-56,-18},{78,-18},{78,92},{1.075,92},{1.075,104.07}}, color={255,0,
           255}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switchPel.u2, sigBus.onOff) annotation (Line(points={{46,-24.8},{46,
-          -16},{78,-16},{78,94},{1.075,94},{1.075,104.07}}, color={255,0,255}),
+  connect(switchPel.u2, sigBus.onOffMea) annotation (Line(points={{46,-24.8},{
+          46,-16},{78,-16},{78,94},{1.075,94},{1.075,104.07}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,
