@@ -1,4 +1,4 @@
-within AixLib.Fluid.BaseClasses;
+﻿within AixLib.Fluid.BaseClasses;
 partial model PartialInnerCycle
   "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
 
@@ -48,7 +48,7 @@ partial model PartialInnerCycle
 
 equation
   assert(
-    use_rev or (use_rev == false and sigBus.mode == true),
+    use_rev or (use_rev == false and sigBus.modeSet == true),
     "Can't turn to reversible operation mode on irreversible thermal machine",
     level=AssertionLevel.error);
 
@@ -57,7 +57,7 @@ equation
   connect(switchPel.y, Pel) annotation (Line(points={{-2.22045e-15,-91},{
           -2.22045e-15,-110.5},{0.5,-110.5}},
                                  color={0,0,127}));
-  connect(sigBus.mode, switchPel.u2) annotation (Line(
+  connect(sigBus.modeSet,  switchPel.u2) annotation (Line(
       points={{0.09,102.08},{0.09,-68},{2.22045e-15,-68}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -67,11 +67,11 @@ equation
 
   connect(switchQCon.y, QCon) annotation (Line(points={{91,-12},{94,-12},{94,0},
           {110,0}}, color={0,0,127}));
-  connect(sigBus.mode, switchQEva.u2) annotation (Line(
+  connect(sigBus.modeSet, switchQEva.u2) annotation (Line(
       points={{0.09,102.08},{-64,102.08},{-64,-14},{-68,-14}},
       color={255,204,51},
       thickness=0.5));
-  connect(sigBus.mode, switchQCon.u2) annotation (Line(
+  connect(sigBus.modeSet, switchQCon.u2) annotation (Line(
       points={{0.09,102.08},{64,102.08},{64,-12},{68,-12}},
       color={255,204,51},
       thickness=0.5));

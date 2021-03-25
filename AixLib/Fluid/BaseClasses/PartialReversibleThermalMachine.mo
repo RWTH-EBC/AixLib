@@ -426,40 +426,42 @@ equation
   "Given nominal power (Q_useNominal) for auto-calculation of evaporator and condenser data is outside the range of data sheets considered. Please control the auto-calculated volumes!",
   level = AssertionLevel.warning);
 
-  connect(senT_a1.T, sigBus.T_flow_co) annotation (Line(points={{-34,79},{-34,
+  connect(senT_a1.T, sigBus.TConInMea) annotation (Line(points={{-34,79},{-34,
           40},{-76,40},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBus.T_ret_co) annotation (Line(points={{38,81},{38,-36},
-          {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(senT_b1.T, sigBus.TConOutMea) annotation (Line(points={{38,81},{38,
+          -36},{-52,-36},{-52,-42.915},{-104.925,-42.915}},
+                                                       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBus.T_flow_ev) annotation (Line(points={{38,-75},{38,-36},
-          {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(senT_a2.T, sigBus.TEvaInMea) annotation (Line(points={{38,-75},{38,
+          -36},{-52,-36},{-52,-42.915},{-104.925,-42.915}},
+                                                       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBus.T_ret_ev) annotation (Line(points={{-52,-75},{-52,
+  connect(senT_b2.T, sigBus.TEvaOutMea) annotation (Line(points={{-52,-75},{-52,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(mFlow_eva.m_flow, sigBus.m_flow_ev) annotation (Line(points={{72,-49},
-          {72,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}),
+          {72,-36},{-52,-36},{-52,-43},{-105,-43}},             color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_con.m_flow, sigBus.m_flow_co) annotation (Line(points={{-76,
-          49},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(mFlow_con.m_flow, sigBus.m_flow_co) annotation (Line(points={{-76,49},
+          {-76,-43},{-105,-43}},                 color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
@@ -488,27 +490,31 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(innerCycle.Pel, sigBus.Pel) annotation (Line(points={{28.73,-0.865},{38,
-          -0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,
+  connect(innerCycle.Pel, sigBus.PelMea) annotation (Line(points={{28.73,-0.865},
+          {38,-0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}},
+                                                                        color={0,
           0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
 
-  connect(modeSet, sigBus.mode) annotation (Line(points={{-116,-20},{-76,-20},{-76,
-          -42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+  connect(modeSet, sigBus.modeSet) annotation (Line(points={{-116,-20},{-76,-20},
+          {-76,-42.915},{-104.925,-42.915}},
+                                        color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(nSet,sigBus.n)  annotation (Line(points={{-116,20},{-76,20},{-76,-42.915},
-          {-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(nSet,sigBus.nSet)  annotation (Line(points={{-116,20},{-76,20},{-76,
+          -42.915},{-104.925,-42.915}},
+                               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(iceFac_in, sigBus.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
-          {-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(iceFac_in, sigBus.iceFacMea) annotation (Line(points={{-76,-136},{-76,
+          -42.915},{-104.925,-42.915}},
+                               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -565,13 +571,14 @@ equation
                                                color={0,127,255}));
   connect(port_b1, senT_b1.port_b) annotation (Line(points={{100,60},{72,60},{72,
           92},{48,92}}, color={0,127,255}));
-  connect(greaterThreshold.y, sigBus.onOff) annotation (Line(points={{-59.4,-28},
-          {-56,-28},{-56,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+  connect(greaterThreshold.y, sigBus.onOffMea) annotation (Line(points={{-59.4,
+          -28},{-56,-28},{-56,-42.915},{-104.925,-42.915}},
+                                                       color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(varTempOutCon.T, sigBus.T_amb_con) annotation (Line(
+  connect(varTempOutCon.T, sigBus.TConAmbMea) annotation (Line(
       points={{-61.6,114},{-76,114},{-76,-42.915},{-104.925,-42.915}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
@@ -579,7 +586,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(varTempOutEva.T, sigBus.T_amb_eva) annotation (Line(
+  connect(varTempOutEva.T, sigBus.TEvaAmbMea) annotation (Line(
       points={{-41.6,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
@@ -587,8 +594,8 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(greaterThreshold.u, sigBus.n) annotation (Line(points={{-73.2,-28},{
-          -76,-28},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(greaterThreshold.u, sigBus.n) annotation (Line(points={{-73.2,-28},{-76,
+          -28},{-76,-43},{-105,-43}},                 color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
