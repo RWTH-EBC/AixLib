@@ -38,11 +38,6 @@ model VCLibMap
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-46,-14})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
-        Modelica.Constants.eps) annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=270,
-        origin={84,64})));
   Modelica.Blocks.Sources.Constant constZero(final k=0)
                                              annotation (Placement(
         transformation(
@@ -132,10 +127,6 @@ protected
   parameter String dataset_mFlowEvaNominal="/" + flowsheet + "/" + refrigerant + "/"
        + tableName_mFlowEvaNominal;
 equation
-  connect(greaterThreshold.y,switchPel. u2) annotation (Line(points={{84,57.4},{
-          84,0},{44,0},{44,-6.8}},      color={255,0,255}));
-  connect(greaterThreshold.y,switchQCon. u2) annotation (Line(points={{84,57.4},
-          {84,0},{-46,0},{-46,-6.8}},   color={255,0,255}));
   connect(constZero.y,switchPel. u3) annotation (Line(points={{-4.44089e-16,5.6},
           {-4.44089e-16,-2},{39.2,-2},{39.2,-6.8}},
                         color={0,0,127}));
@@ -143,12 +134,6 @@ equation
           {80,-46},{80,-60.8},{76.4,-60.8}}, color={0,0,127}));
   connect(switchPel.y, Pel) annotation (Line(points={{44,-20.6},{44,-46},{0,-46},
           {0,-110}}, color={0,0,127}));
-  connect(greaterThreshold.u, sigBus.n) annotation (Line(points={{84,71.2},{84,94},
-          {1.075,94},{1.075,104.07}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{-46,
           -20.6},{-46,-22},{-76,-22},{-76,-33.2}},      color={0,0,127}));
   connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={{44,
@@ -192,6 +177,19 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(multiplex3_1.u3[1], sigBus.T_flow_ev) annotation (Line(points={{-4.2,85.2},
           {-4.2,88},{-14,88},{-14,104.07},{1.075,104.07}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(switchPel.u2, sigBus.onOff) annotation (Line(points={{44,-6.8},{44,0},
+          {88,0},{88,94},{1.075,94},{1.075,104.07}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(switchQCon.u2, sigBus.onOff) annotation (Line(points={{-46,-6.8},{-46,
+          0},{88,0},{88,94},{0,94},{0,104.07},{1.075,104.07}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,

@@ -97,11 +97,6 @@ model LookUpTableND "N-dimensional table with data for heat pump"
         rotation=-90,
         origin={-3,43})));
 
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
-        Modelica.Constants.eps) annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=270,
-        origin={-72,62})));
   Modelica.Blocks.Math.Product scalingFacTimesQCon annotation (Placement(
         transformation(
         extent={{-4,-4},{4,4}},
@@ -145,20 +140,6 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus.n, greaterThreshold.u) annotation (Line(
-      points={{1.075,104.07},{-72,104.07},{-72,69.2}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{-72,55.4},
-          {-72,-22},{-56,-22},{-56,-24.8}},
-                                          color={255,0,255}));
-  connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,55.4},
-          {-72,-22},{46,-22},{46,-24.8}},
-                                        color={255,0,255}));
   connect(sigBus.n, nConGain.u) annotation (Line(
       points={{1.075,104.07},{-22,104.07},{-22,72.8}},
       color={255,204,51},
@@ -199,6 +180,20 @@ equation
   connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
           {46,-38.6},{46,-50},{-66,-50},{-66,-26},{-90,-26},{-90,-38},{-80.8,
           -38}}, color={0,0,127}));
+  connect(switchQCon.u2, sigBus.onOff) annotation (Line(points={{-56,-24.8},{
+          -56,-18},{78,-18},{78,92},{1.075,92},{1.075,104.07}}, color={255,0,
+          255}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(switchPel.u2, sigBus.onOff) annotation (Line(points={{46,-24.8},{46,
+          -16},{78,-16},{78,94},{1.075,94},{1.075,104.07}}, color={255,0,255}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),

@@ -27,11 +27,6 @@ model PolynomalApproach
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-60,-12})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
-        Modelica.Constants.eps) annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=270,
-        origin={12,52})));
   Modelica.Blocks.Sources.Constant constZero(final k=0)
                                              annotation (Placement(
         transformation(
@@ -46,16 +41,12 @@ equation
       sigBus.T_flow_ev,
       sigBus.m_flow_co,
       sigBus.m_flow_ev);
-  connect(greaterThreshold.y,switchPel. u2) annotation (Line(points={{12,45.4},{
-          12,28},{42,28},{42,-4.8}},    color={255,0,255}));
   connect(switchQCon.u3, constZero.y) annotation (Line(points={{-64.8,-4.8},{-64,
           -4.8},{-64,2},{-24,2},{-24,5.3},{-23,5.3}}, color={0,0,127}));
   connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{-60,
           -18.6},{-60,-26},{-76,-26},{-76,-33.2}},      color={0,0,127}));
   connect(switchQCon.u1, internal_QCon.y) annotation (Line(points={{-55.2,-4.8},
           {-54,-4.8},{-54,37}}, color={0,0,127}));
-  connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{12,45.4},
-          {12,28},{-60,28},{-60,-4.8}}, color={255,0,255}));
   connect(constZero.y, switchPel.u3) annotation (Line(points={{-23,5.3},{-23,-4.8},
           {37.2,-4.8}}, color={0,0,127}));
   connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{42,-18.6},{42,-48},
@@ -64,14 +55,20 @@ equation
           {0,-110}}, color={0,0,127}));
   connect(switchPel.u1, internal_Pel.y)
     annotation (Line(points={{46.8,-4.8},{46,-4.8},{46,39}}, color={0,0,127}));
-  connect(greaterThreshold.u, sigBus.n) annotation (Line(points={{12,59.2},{12,70},
-          {1.075,70},{1.075,104.07}}, color={0,0,127}), Text(
+  connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
+          {42,-18.6},{42,-22},{-88,-22},{-88,-38},{-80.8,-38}}, color={0,0,127}));
+  connect(switchPel.u2, sigBus.onOff) annotation (Line(points={{42,-4.8},{42,14},
+          {0,14},{0,84},{1.075,84},{1.075,104.07}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
-          {42,-18.6},{42,-22},{-88,-22},{-88,-38},{-80.8,-38}}, color={0,0,127}));
+  connect(switchQCon.u2, sigBus.onOff) annotation (Line(points={{-60,-4.8},{-58,
+          -4.8},{-58,28},{1.075,28},{1.075,104.07}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(graphics={
         Text(
           lineColor={0,0,255},
