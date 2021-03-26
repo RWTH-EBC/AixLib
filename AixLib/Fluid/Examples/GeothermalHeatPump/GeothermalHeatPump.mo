@@ -79,7 +79,7 @@ equation
   connect(pressureDifference.y, pumpColdConsumer.dp_in) annotation (Line(points={{147.4,6},
           {147.4,6},{65,6},{65,-11.6}},              color={0,0,127}));
   connect(pressureDifference.y, pumpHeatConsumer.dp_in) annotation (Line(points={{147.4,6},
-          {147.4,6},{56,6},{56,-36},{65,-36},{65,-41.6}},              color={0,
+          {56,6},{56,-36},{65,-36},{65,-41.6}},                        color={0,
           0,127}));
   connect(resistanceColdConsumerReturn.port_a,coldConsumerReturn. ports[1])
     annotation (Line(points={{94,32},{114,32},{148,32}},
@@ -112,11 +112,11 @@ equation
     annotation (Line(points={{112.77,-56.54},{112.77,-118},{-26,-118},{-26,-100},
           {-71.5,-100},{-71.5,-119.5}}, color={0,0,127}));
   connect(getTStorageLower.y,geothermalFieldControllerCold. temperature)
-    annotation (Line(points={{-139,52},{-122,52},{-108,52},{-108,36},{-100,36}},
+    annotation (Line(points={{-139,52},{-108,52},{-108,36},{-100,36}},
         color={0,0,127}));
   connect(geothermalFieldControllerCold.valveOpening1, valveColdStorage.y)
-    annotation (Line(points={{-83.04,40.8},{-82,40.8},{-82,40},{-82,52},{-82,54},
-          {-52,54},{-52,46.4}}, color={0,0,127}));
+    annotation (Line(points={{-83.04,40.8},{-82,40.8},{-82,54},{-52,54},{-52,
+          46.4}},               color={0,0,127}));
   connect(geothermalFieldControllerCold.valveOpening2, valveHeatSource.y)
     annotation (Line(points={{-83.04,31.2},{-82,31.2},{-82,1},{-68.4,1}}, color=
          {0,0,127}));
@@ -129,6 +129,9 @@ equation
   connect(geothermalFieldControllerHeat.valveOpening2, valveHeatStorage.y)
     annotation (Line(points={{-83.04,-30.8},{-56,-30.8},{-56,-63},{-26.4,-63}},
         color={0,0,127}));
+  connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{
+          -18,-57},{-18,-8.00001},{-16.5,-8.00001},{-16.5,-8.00002}}, color={0,
+          127,255}));
   annotation (experiment(StopTime=86400, Interval=10), Documentation(revisions="<html><ul>
   <li>May 19, 2017, by Marc Baranski:<br/>
     First implementation.
