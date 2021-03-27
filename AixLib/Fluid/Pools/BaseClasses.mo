@@ -983,36 +983,61 @@ end if;
   model AHUcontrol "Simple on/off controller for AHU"
 
 
+    parameter Real phi_sup_min= 0.4
+                                   "Desired minimal relative humidity of ventilation supply air";
+    parameter Real phi_sup_max= 0.64
+                                    "Desired maximal relative humidity of ventilation supply air";
+    parameter Modelica.SIunits.Temperature T_desired "Desired Air Temperature in K";
+    parameter Real phi_set= 0.54 "Desired relative humidy Air";
 
-    Modelica.Blocks.Interfaces.RealOutput AHUProfile
+    parameter Real y_Max= 1 "Max. factor of set Ventilation Flow Rate";
+
+    Modelica.Blocks.Interfaces.RealOutput AHUProfile[4]
       annotation (Placement(transformation(extent={{94,-10},{114,10}})));
-    Modelica.Blocks.Interfaces.RealInput relHum "relative humidity "
-      annotation (Placement(transformation(extent={{-124,42},{-84,82}})));
-    Modelica.Blocks.Interfaces.RealInput relHumSet
-      "Set point relative humidity"
-      annotation (Placement(transformation(extent={{-130,-44},{-90,-4}})));
-    Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=0.01,
-        pre_y_start=false)
-      annotation (Placement(transformation(extent={{-22,14},{-2,34}})));
-    Modelica.Blocks.Logical.Switch switch1
-      annotation (Placement(transformation(extent={{34,14},{54,34}})));
-    Modelica.Blocks.Sources.Constant const(k=0)
-      annotation (Placement(transformation(extent={{0,44},{20,64}})));
-    Modelica.Blocks.Sources.Constant const1(k=1)
-      annotation (Placement(transformation(extent={{-2,-28},{18,-8}})));
+    Modelica.Blocks.Interfaces.RealInput X_w "Abs humidity "
+      annotation (Placement(transformation(extent={{-122,-4},{-82,36}})));
+    Controls.Continuous.LimPID conPID(
+      controllerType=Modelica.Blocks.Types.SimpleController.PI,
+      k=0.5,
+      Ti=60,
+      yMax=0,
+      yMin=-y_Max) annotation (Placement(transformation(extent={{-50,18},{-30,38}})));
+    Modelica.Blocks.Math.Gain gain(k=-1)
+      annotation (Placement(transformation(extent={{8,20},{28,40}})));
+    Modelica.Blocks.Sources.Constant setPhi(k=phi_set)
+      annotation (Placement(transformation(extent={{-78,50},{-58,70}})));
+    Modelica.Blocks.Sources.Constant minPhi(k=phi_sup_min)
+      annotation (Placement(transformation(extent={{-6,-12},{6,0}})));
+    Modelica.Blocks.Sources.Constant maxPhi(k=phi_sup_max)
+      annotation (Placement(transformation(extent={{-6,-32},{6,-20}})));
+    Modelica.Blocks.Sources.Constant desiredT(k=T_desired)
+      annotation (Placement(transformation(extent={{-4,-52},{6,-42}})));
+    Modelica.Blocks.Interfaces.RealInput T_Air "Air Temperature"
+      annotation (Placement(transformation(extent={{-122,-36},{-82,4}})));
+    ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum
+      annotation (Placement(transformation(extent={{-62,-22},{-42,-2}})));
+    Modelica.Blocks.Sources.Constant refAhu(k=1)
+      annotation (Placement(transformation(extent={{-4,-82},{8,-70}})));
   equation
-    connect(relHum, onOffController.u) annotation (Line(points={{-104,62},{-66,
-            62},{-66,18},{-24,18}}, color={0,0,127}));
-    connect(onOffController.y, switch1.u2)
-      annotation (Line(points={{-1,24},{32,24}}, color={255,0,255}));
-    connect(const1.y, switch1.u3) annotation (Line(points={{19,-18},{24,-18},{
-            24,16},{32,16}}, color={0,0,127}));
-    connect(const.y, switch1.u1) annotation (Line(points={{21,54},{26,54},{26,
-            32},{32,32}}, color={0,0,127}));
-    connect(relHumSet, onOffController.reference) annotation (Line(points={{
-            -110,-24},{-38,-24},{-38,30},{-24,30}}, color={0,0,127}));
-    connect(switch1.y, AHUProfile) annotation (Line(points={{55,24},{76,24},{76,
-            0},{104,0}}, color={0,0,127}));
+    connect(conPID.y, gain.u)
+      annotation (Line(points={{-29,28},{4,28},{4,30},{6,30}},
+                                                  color={0,0,127}));
+    connect(conPID.u_s, setPhi.y) annotation (Line(points={{-52,28},{-54,28},{-54,
+            60},{-57,60}}, color={0,0,127}));
+    connect(minPhi.y, AHUProfile[2]) annotation (Line(points={{6.6,-6},{54,-6},{54,
+            -2.5},{104,-2.5}}, color={0,0,127}));
+    connect(maxPhi.y, AHUProfile[3]) annotation (Line(points={{6.6,-26},{56,-26},{
+            56,2.5},{104,2.5}}, color={0,0,127}));
+    connect(desiredT.y, AHUProfile[1]) annotation (Line(points={{6.5,-47},{54,-47},
+            {54,-7.5},{104,-7.5}}, color={0,0,127}));
+    connect(X_w, absToRelHum.absHum) annotation (Line(points={{-102,16},{-83,16},{
+            -83,-6.8},{-64,-6.8}}, color={0,0,127}));
+    connect(T_Air, absToRelHum.TDryBul) annotation (Line(points={{-102,-16},{-84,-16},
+            {-84,-17.6},{-64,-17.6}}, color={0,0,127}));
+    connect(absToRelHum.relHum, conPID.u_m)
+      annotation (Line(points={{-40,-12},{-40,16}}, color={0,0,127}));
+    connect(refAhu.y, AHUProfile[4]) annotation (Line(points={{8.6,-76},{54,-76},
+            {54,7.5},{104,7.5}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end AHUcontrol;

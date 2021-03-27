@@ -1,7 +1,8 @@
 ﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizoneSwimmingPool;
+  extends
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizoneSwimmingPool;
 
   parameter Boolean heatAHU
     "Status of heating of AHU"
@@ -69,7 +70,7 @@ model MultizoneEquipped
     annotation (Placement(transformation(
     extent={{20,20},{-20,-20}},
     rotation=180,
-    origin={-152,-6}),  iconTransformation(
+    origin={-114,-2}),  iconTransformation(
     extent={{10,-10},{-10,10}},
     rotation=180,
     origin={-90,0})));
@@ -123,6 +124,11 @@ model MultizoneEquipped
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={12,-110})));
+  Modelica.Blocks.Interfaces.RealOutput X_w[numZones] if (ASurTot > 0 or VAir > 0) and use_moisture_balance
+    "Absolute humidity in thermal zone"
+    annotation (Placement(transformation(extent={{100,32},{120,52}}),
+        iconTransformation(extent={{80,40},{100,60}})));
+
 protected
   parameter Real zoneFactor[numZones,1](fixed=false)
     "Calculated zone factors";
@@ -193,10 +199,6 @@ protected
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={65,37})));
-  Modelica.Blocks.Interfaces.RealOutput X_w[numZones] if (ASurTot > 0 or VAir > 0) and use_moisture_balance
-    "Absolute humidity in thermal zone"
-    annotation (Placement(transformation(extent={{100,30},{120,50}}),
-        iconTransformation(extent={{80,40},{100,60}})));
 
 initial algorithm
   for i in 1:numZones loop
@@ -231,8 +233,7 @@ equation
   end for;
 
   connect(AHU[1], AirHandlingUnit.T_supplyAir) annotation (Line(
-      points={{-167,-6},{-167,-14},{-86,-14},{-86,2},{24,2},{24,19.75},{12.4,
-          19.75}},
+      points={{-129,-2},{-88,-2},{-88,2},{24,2},{24,19.75},{12.4,19.75}},
       color={0,0,127},
       smooth=Smooth.None));
 
@@ -242,13 +243,11 @@ equation
       smooth=Smooth.None));
 
   connect(AHU[2], AirHandlingUnit.phi_supplyAir[1]) annotation (Line(
-      points={{-157,-6},{-157,-16},{-86,-16},{-86,2},{24,2},{24,16},{12.4,16},{
-          12.4,16.75}},
+      points={{-119,-2},{-86,-2},{-86,2},{24,2},{24,16},{12.4,16},{12.4,16.75}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[3], AirHandlingUnit.phi_supplyAir[2]) annotation (Line(
-      points={{-147,-6},{-147,-16},{-86,-16},{-86,2},{24,2},{24,16},{12.4,16},{
-          12.4,15.25}},
+      points={{-109,-2},{-84,-2},{-84,2},{24,2},{24,16},{12.4,16},{12.4,15.25}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AirHandlingUnit.Pel, Pel) annotation (Line(points={{0.15,11.875},{0.15,
@@ -291,9 +290,8 @@ equation
   connect(airFlowRateSplit.airFlowIn, AirHandlingUnit.Vflow_out) annotation (
       Line(points={{44,20.8},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,31}},
         color={0,0,127}));
-  connect(zone.X_w, X_w) annotation (Line(points={{82.52,51.87},{94,51.87},{94,
-          40},{110,40}},
-                     color={0,0,127}));
+  connect(zone.X_w, X_w) annotation (Line(points={{82.52,51.87},{94,51.87},{94,42},
+          {110,42}}, color={0,0,127}));
   connect(minTemp.y, absToRelHum.TDryBul) annotation (Line(points={{19.5,-28},{-100,
           -28},{-100,72},{-42,72},{-42,78.2},{-37,78.2}}, color={0,0,127}));
   connect(AirHandlingUnit.T_supplyAirOut, relToAbsHum1.TDryBul) annotation (
@@ -325,10 +323,10 @@ equation
 
   connect(wavePool, zone.wavePool) annotation (Line(points={{20,-100},{42,-100},
           {42,52.28},{46.82,52.28}}, color={0,0,127}));
-  connect(AHU[4], airFlowRate.profile) annotation (Line(points={{-137,-6},{-112,
-          -6},{-112,30.4},{-73.2,30.4}}, color={0,0,127}));
-  connect(AHU[4], airFlowRateSplit.profile) annotation (Line(points={{-137,-6},
-          {-56,-6},{-56,20.8},{40.4,20.8}}, color={0,0,127}));
+  connect(AHU[4], airFlowRate.profile) annotation (Line(points={{-99,-2},{-114,-2},
+          {-114,30.4},{-73.2,30.4}},     color={0,0,127}));
+  connect(AHU[4], airFlowRateSplit.profile) annotation (Line(points={{-99,-2},{-56,
+          -2},{-56,20.8},{40.4,20.8}},     color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Text(
@@ -435,5 +433,9 @@ equation
   See <a href=
   \"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>.
 </p>
-</html>"));
+</html>"),
+    experiment(
+      StopTime=31536000,
+      Interval=300,
+      __Dymola_Algorithm="Cvode"));
 end MultizoneEquipped;

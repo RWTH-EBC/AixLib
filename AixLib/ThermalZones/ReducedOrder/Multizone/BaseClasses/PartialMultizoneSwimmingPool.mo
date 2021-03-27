@@ -192,23 +192,28 @@ partial model PartialMultizoneSwimmingPool "Partial model for multizone models w
   Modelica.Blocks.Interfaces.RealOutput QHeatPools[numZones]( final quantity="HeatFlowRate",
       final unit="W")
     "Output of heat demand of all swimming pools of one zone"
-    annotation (Placement(transformation(extent={{100,-86},{120,-66}})));
+    annotation (Placement(transformation(extent={{100,-86},{120,-66}}),
+        iconTransformation(extent={{100,-100},{120,-80}})));
   Modelica.Blocks.Interfaces.RealOutput PPumpPools[numZones](final quantity="Power",
       final unit="W")
     "Output of electricity demand of all swimming pool pumps of one zone"
-    annotation (Placement(transformation(extent={{100,-100},{120,-80}})));
+    annotation (Placement(transformation(extent={{100,-100},{120,-80}}),
+        iconTransformation(extent={{100,-90},{120,-70}})));
   Modelica.Blocks.Interfaces.RealOutput MFlowFW[numZones](final quantity="MassFlowRate",
       final unit="kg/s")
     "Output sum of fresh water demands all pools in each zone"
-    annotation (Placement(transformation(extent={{100,-94},{120,-74}})));
+    annotation (Placement(transformation(extent={{100,-94},{120,-74}}),
+        iconTransformation(extent={{100,-82},{120,-62}})));
   Modelica.Blocks.Interfaces.RealOutput MFlowWW[numZones](final quantity="MassFlowRate",
       final unit="kg/s")
     "Output sum of waste water demands all pools in each zone"
-    annotation (Placement(transformation(extent={{100,-104},{120,-84}})));
+    annotation (Placement(transformation(extent={{100,-104},{120,-84}}),
+        iconTransformation(extent={{100,-72},{120,-52}})));
   Modelica.Blocks.Interfaces.RealOutput MFlowRW[numZones](final quantity="MassFlowRate",
       final unit="kg/s")
     "Output sum of recycled water demands all pools in each zone"
-    annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
+    annotation (Placement(transformation(extent={{100,-90},{120,-70}}),
+        iconTransformation(extent={{100,-62},{120,-42}})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
   if not (ASurTot > 0 or VAir > 0) then

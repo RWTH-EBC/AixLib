@@ -501,13 +501,13 @@ package Pools "Models to describe Swimming Pools"
               18,26}})));
     Sources.Boundary_pT                   freshWater(redeclare package Medium =
           Medium,
-      T=283.15,
+    T=288.15,
       nPorts=1)
                "Source for fresh water"
       annotation (Placement(transformation(extent={{-94,-98},{-82,-86}})));
     Sources.Boundary_pT                   recycledWater(redeclare package Medium =
           Medium,
-      T=poolParam.T_pool - 5,
+    T=poolParam.T_pool - 3,
       nPorts=1) "Source for recycled water"
       annotation (Placement(transformation(extent={{-94,-80},{-82,-68}})));
     Sources.Boundary_pT Sink(redeclare package Medium = Medium, nPorts=2)
@@ -725,7 +725,7 @@ package Pools "Models to describe Swimming Pools"
       annotation (Placement(transformation(extent={{-118,32},{-92,58}})));
     BaseClasses.waveMachine waveMachine(h_wave=poolParam.h_wave, w_wave=poolParam.w_wave)
                       "Power consumption of wave machine"
-      annotation (Placement(transformation(extent={{-84,18},{-64,38}})));
+      annotation (Placement(transformation(extent={{-84,16},{-64,36}})));
     Modelica.Blocks.Math.MultiSum sumP(nu=2) if poolParam.use_wavePool
       "Sum of power consumption of all components"
       annotation (Placement(transformation(extent={{-4,-24},{8,-12}})));
@@ -879,17 +879,19 @@ package Pools "Models to describe Swimming Pools"
                                        color={0,0,127}));
     connect(openingHours, lunchBreak.u) annotation (Line(points={{-105,87},{-93.5,
             87},{-93.5,66},{-81.2,66}}, color={0,0,127}));
-    connect(wavePool, waveMachine.wavePool) annotation (Line(points={{-105,45},{-94.5,
-            45},{-94.5,32},{-84.8,32}}, color={0,0,127}));
+    connect(wavePool, waveMachine.wavePool) annotation (Line(points={{-105,45},
+          {-94.5,45},{-94.5,30},{-84.8,30}},
+                                        color={0,0,127}));
 
     if poolParam.use_wavePool then
       connect(circulationPump.P, sumP.u[1]) annotation (Line(points={{22.32,-35.52},{
             -8,-35.52},{-8,-15.9},{-4,-15.9}}, color={0,0,127}));
       connect(waveMachine.PWaveMachine, sumP.u[2]) annotation (Line(points={{-63.4,
-              28},{-58,28},{-58,-20},{-32,-20},{-32,-20.1},{-4,-20.1}},
+            26},{-58,26},{-58,-20},{-32,-20},{-32,-20.1},{-4,-20.1}},
                                               color={0,0,127}));
-      connect(sumP.y, PPool) annotation (Line(points={{9.02,-18},{58,-18},{58,-16},{108,
-            -16}}, color={0,0,127}));
+      connect(sumP.y, PPool) annotation (Line(points={{9.02,-18},{22,-18},{22,
+            -30},{56,-30},{56,-16},{108,-16}},
+                   color={0,0,127}));
     else
       connect(circulationPump.P,PPool)  annotation (Line(points={{22.32,-35.52},{72,
             -35.52},{72,-16},{108,-16}},
