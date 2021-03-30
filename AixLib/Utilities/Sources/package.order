@@ -2,5 +2,6 @@ BaseParameters
 HourOfDay
 NcDataReader
 NightMode
-PrescribedSolarRad
 HeaterCooler
+PrescribedSolarRad
+HeaterCoolerVDI6007AC1
