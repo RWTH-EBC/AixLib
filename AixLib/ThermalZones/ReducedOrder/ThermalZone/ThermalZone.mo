@@ -609,8 +609,8 @@ equation
   connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-27.4,-28},{
           -24,-28},{-24,-10},{-21.2,-10},{-21.2,-9.12}},           color={0,0,
           127}));
-  connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-4},{44,
-          -4},{44,-2},{92,-2},{92,78},{86,78}},color={191,0,0}));
+  connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-4},{92,
+          -4},{92,78},{86,78}},                color={191,0,0}));
   connect(weaBus.TDryBul, mixedTemp.temperature_flow2) annotation (Line(
       points={{-100,34},{-86,34},{-86,10},{-78,10},{-78,-6.8},{-65.6,-6.8}},
       color={255,204,51},

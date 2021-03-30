@@ -35,26 +35,32 @@ model TwoElements
 
   // Integration of VDI 6007-1 panel heating and tabs into Two Element
 
+  parameter Boolean corePortExtWalls = false
+    "Additional heat port at core of exterior walls"
+    annotation(Dialog(group="Exterior walls"),choices(checkBox = true));
+  parameter Boolean corePortIntWalls = false
+    "Additional heat port at core of interior walls"
+    annotation(Dialog(group="Interior walls"),choices(checkBox = true));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabsExtWalls if ATotExt
-     > 0 "Q_HK_BT_AW"
+     > 0 "Q_HK_BT_AW, Auxiliary port at core of exterior walls"
     annotation (Placement(transformation(extent={{178,-190},{198,-170}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRadExtWalls if ATot > 0
-    "Q_HK_str_AW"
+    "Q_HK_str_AW, Auxiliary port at indoor surface of exterior walls"
     annotation (Placement(transformation(extent={{230,-190},{250,-170}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkExtWalls if ATot > 0
-    "Q_HK_FO_AW"
+    "Q_HK_FO_AW, Auxiliary port at indoor surface of exterior walls"
     annotation (Placement(transformation(extent={{230,-164},{250,-144}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkConv if ATot > 0 or
-    VAir > 0 "Q_HK_kon"
+    VAir > 0 "Q_HK_kon, Auxiliary port at indoor air volume"
     annotation (Placement(transformation(extent={{230,-140},{250,-120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRadIntWalls if AInt > 0
-    "Q_HK_str_IW"
+    "Q_HK_str_IW, Auxiliary port at indoor surface of interior walls"
     annotation (Placement(transformation(extent={{230,-92},{250,-72}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkIntWalls if AInt > 0
-    "Q_HK_FO_IW"
+    "Q_HK_FO_IW, Auxiliary port at indoor surface of interior walls"
     annotation (Placement(transformation(extent={{230,-116},{250,-96}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabsIntWalls if AInt > 0
-    "Q_HK_BT_IW"
+    "Q_HK_BT_IW, Auxiliary port at core of interior walls"
     annotation (Placement(transformation(extent={{230,-30},{250,-10}})));
 
   // Implementation of thermal splitter for external walls and windows
