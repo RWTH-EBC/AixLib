@@ -2,26 +2,64 @@
 model HeaterCoolerWithTabs6007C1
 
 // Heiz- und Kühlsystemparameter
-  parameter Modelica.SIunits.Power powerHeatPanel = 0 annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Modelica.SIunits.Power powerHeatRem = 0 annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Modelica.SIunits.Power powerCoolPanel = 0 annotation(Dialog(tab = "Cooler", group = "Cooling"));
-  parameter Modelica.SIunits.Power powerCoolRem = 0 annotation(Dialog(tab = "Cooler", group = "Cooling"));
-  parameter Real shareHeatTabsExt(min=0, max=1) annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Real shareHeatTabsInt(min=0, max=1) annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Real shareHeatPanelExt(min=0, max=1) annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Real shareHeatPanelInt(min=0, max=1) annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Real shareHeatRadExt(min=0, max=1) annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Real shareHeatRadInt(min=0, max=1) annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Real shareHeatConv(min=0, max=1) annotation(Dialog(tab = "Heater", group = "Heating"));
-  parameter Real shareCoolTabsExt(min=0, max=1) annotation(Dialog(tab = "Cooler", group = "Cooling"));
-  parameter Real shareCoolTabsInt(min=0, max=1) annotation(Dialog(tab = "Cooler", group = "Cooling"));
-  parameter Real shareCoolPanelExt(min=0, max=1) annotation(Dialog(tab = "Cooler", group = "Cooling"));
-  parameter Real shareCoolPanelInt(min=0, max=1) annotation(Dialog(tab = "Cooler", group = "Cooling"));
-  parameter Real shareCoolRadExt(min=0, max=1) annotation(Dialog(tab = "Cooler", group = "Cooling"));
-  parameter Real shareCoolRadInt(min=0, max=1) annotation(Dialog(tab = "Cooler", group = "Cooling"));
-  parameter Real shareCoolConv(min=0, max=1) annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Modelica.SIunits.Power p_heater_Panel = 0
+  "Limited power for panel heating" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Modelica.SIunits.Power p_heater_Rem = 0
+  "Limited power for radiative and convective heating system" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Modelica.SIunits.Power p_cooler_Panel = 0
+  "Limited power for panel cooling" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Modelica.SIunits.Power p_cooler_Rem = 0
+  "Limited power for radiative and convective cooling system" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Real share_Heater_TabsExt(min=0, max=1) = 0
+    "contribution from a system installed in the core of one or several exterior building components to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Real share_Heater_TabsInt(min=0, max=1) = 0
+    "contribution from a system installed in the core of one or several interior building components to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Real share_Heater_PanelExt(min=0, max=1) = 0
+    "contribution from any heated surfaces of one or several exterior building components to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Real share_Heater_PanelInt(min=0, max=1) = 0
+    "contribution from any heated surfaces of one or several interior building components to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Real share_Heater_RadExt(min=0, max=1) = 0
+    "radiant contribution of one or several exterior building components to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Real share_Heater_RadInt(min=0, max=1) = 0
+    "radiant contribution of one or several interior building components to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Real share_Heater_Conv(min=0, max=1) = 0
+    "convective contribution to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
+  parameter Real share_Cooler_TabsExt(min=0, max=1) = 0
+    "contribution from a system installed in the core of one or several exterior building components to cooling load" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Real share_Cooler_TabsInt(min=0, max=1) = 0
+    "contribution from a system installed in the core of one or several interior building components to cooling load" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Real share_Cooler_PanelExt(min=0, max=1) = 0
+    "contribution from any cooled surfaces of one or several exterior building components to cooling load" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Real share_Cooler_PanelInt(min=0, max=1) = 0
+    "contribution from any cooled surfaces of one or several interior building components to cooling load" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Real share_Cooler_RadExt(min=0, max=1) = 0
+    "radiant contribution of one or several exterior building components to cooling load" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Real share_Cooler_RadInt(min=0, max=1) = 0
+    "radiant contribution of one or several interior building components to cooling load" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+  parameter Real share_Cooler_Conv(min=0, max=1) = 0
+    "convective contribution to cooling load" annotation(Dialog(tab = "Cooler", group = "Cooling"));
 
-// von HeaterCoolerPI übernommen, nicht sicher was es macht
+// von PartialHeaterCoolerPI übernommen
+  parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
+  parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
+  parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real KR_heater_Panel = 0.1 "Gain of the panel heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater_Panel = 4 "Time constant of the panel heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real KR_heater_Rem = 0.1 "Gain of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater_Rem = 4 "Time constant of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real h_cooler = 0 "Upper limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real l_cooler = 0 "Lower limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real KR_cooler_Panel = 0.1 "Gain of the panel cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler_Panel = 4 "Time constant of the panel cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real KR_cooler_Rem = 0.1 "Gain of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler_Rem = 4 "Time constant of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Boolean recOrSep = false "Use record or seperate parameters" annotation(choices(choice =  false
+        "Seperate",choice = true "Record",radioButtons = true));
+  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam = AixLib.DataBase.ThermalZones.ZoneRecordDummy()
+    "Zone definition" annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
+
+// übernommen aus HeaterCoolerPI
   parameter Boolean staOrDyn = true "Static or dynamic activation of heater" annotation(choices(choice = true "Static", choice =  false "Dynamic",
                   radioButtons = true));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionHeater(y=if not
@@ -30,28 +68,6 @@ model HeaterCoolerWithTabs6007C1
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionCooler(y=if not
         recOrSep then Cooler_on else zoneParam.CoolerOn) if staOrDyn annotation (Placement(transformation(extent={{-132,
             -38},{-112,-22}})));
-
-// von PartialHeaterCoolerPI übernommen, nicht sicher was es macht
-  parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
-  parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
-  parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real KR_heater_Panel = 0.1 "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_heater_Panel = 4 "Time constant of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real KR_heater_Rem = 0.1 "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_heater_Rem = 4 "Time constant of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real h_cooler = 0 "Upper limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Real l_cooler = 0 "Lower limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Real KR_cooler_Panel = 0.1 "Gain of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_cooler_Panel = 4 "Time constant of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Real KR_cooler_Rem = 0.1 "Gain of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_cooler_Rem = 4 "Time constant of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Boolean recOrSep = false "Use record or seperate parameters" annotation(choices(choice =  false
-        "Seperate",choice = true "Record",radioButtons = true));
-  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam = AixLib.DataBase.ThermalZones.ZoneRecordDummy()
-    "Zone definition" annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
-
-// übernommen aus HeaterCoolerPI
   Modelica.Blocks.Interfaces.RealInput setPointCool(
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -72,13 +88,13 @@ model HeaterCoolerWithTabs6007C1
         rotation=90,
         origin={22,-72})));
   Modelica.Blocks.Interfaces.BooleanInput heaterActive if not staOrDyn
-    "Switches Controler on and off" annotation (Placement(transformation(extent={{-180,0},
+    "Switches Controller on and off" annotation (Placement(transformation(extent={{-180,0},
             {-140,40}}),
         iconTransformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={68,-72})));
   Modelica.Blocks.Interfaces.BooleanInput coolerActive if not staOrDyn
-    "Switches Controler on and off" annotation (Placement(transformation(extent={{-180,
+    "Switches Controller on and off" annotation (Placement(transformation(extent={{-180,
             -40},{-140,0}}),      iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -95,13 +111,13 @@ model HeaterCoolerWithTabs6007C1
         iconTransformation(extent={{80,-26},{120,14}})));
 
 // operative Temperatur
-  TOpe tOpe "Operative Temperature" annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  TOpe tOpe "Calculates the operative temperature as mean of air and radiative temperature from thermal zone" annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-136,68})));
-  Modelica.Blocks.Interfaces.RealInput TAir "Indoor air temperature from Thermal Zone" annotation (Placement(transformation(extent={{20,-20},{-20,20}},
+  Modelica.Blocks.Interfaces.RealInput TAir "Indoor air temperature from thermal zone" annotation (Placement(transformation(extent={{20,-20},{-20,20}},
         rotation=90,
         origin={-150,100})));
-  Modelica.Blocks.Interfaces.RealInput TRad "Mean indoor radiation temperature from Thermal Zone" annotation (Placement(transformation(extent={{20,-20},{-20,20}},
+  Modelica.Blocks.Interfaces.RealInput TRad "Mean indoor radiation temperature from thermal zone" annotation (Placement(transformation(extent={{20,-20},{-20,20}},
         rotation=90,
         origin={-120,100})));
 
@@ -204,126 +220,128 @@ model HeaterCoolerWithTabs6007C1
         origin={80,-64.5})));
 
   PITempOpe pITempHeatPanel(
-    p=powerHeatPanel,
+    p=if not recOrSep then p_heater_Panel else zoneParam.powerHeatPanel,
     rangeSwitch=false,
     h=if not recOrSep then h_heater else zoneParam.hHeat,
     l=if not recOrSep then l_heater else zoneParam.lHeat,
-    KR=if not recOrSep then KR_heater_Panel else zoneParam.KRHeat,
-    TN=if not recOrSep then TN_heater_Panel else zoneParam.TNHeat) if
+    KR=if not recOrSep then KR_heater_Panel else zoneParam.KRHeatPanel,
+    TN=if not recOrSep then TN_heater_Panel else zoneParam.TNHeatPanel) if
                                                                 ((recOrSep and
     zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+    "PI controller for panel heating"
     annotation (Placement(transformation(extent={{2,6},{18,22}})));
   PITempOpe pITempHeatRem(
-    p=powerHeatRem,
+    p=if not recOrSep then p_heater_Rem else zoneParam.powerHeatRem,
     rangeSwitch=false,
     h=if not recOrSep then h_heater else zoneParam.hHeat,
     l=if not recOrSep then l_heater else zoneParam.lHeat,
-    KR=if not recOrSep then KR_heater_Rem else zoneParam.KRHeat,
-    TN=if not recOrSep then TN_heater_Rem else zoneParam.TNHeat) if
+    KR=if not recOrSep then KR_heater_Rem else zoneParam.KRHeatRem,
+    TN=if not recOrSep then TN_heater_Rem else zoneParam.TNHeatRem) if
                                                                 ((recOrSep and
     zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+    "PI controller for radiative and convective heating system"
     annotation (Placement(transformation(extent={{52,6},{68,22}})));
   PITempOpe pITempCoolPanel(
-    p=powerCoolPanel,
+    p=if not recOrSep then p_cooler_Panel else zoneParam.powerCoolPanel,
     rangeSwitch=false,
     h=if not recOrSep then h_cooler else zoneParam.hCool,
     l=if not recOrSep then l_cooler else zoneParam.lCool,
-    KR=if not recOrSep then KR_cooler_Panel else zoneParam.KRCool,
-    TN=if not recOrSep then TN_cooler_Panel else zoneParam.TNCool) if
+    KR=if not recOrSep then KR_cooler_Panel else zoneParam.KRCoolPanel,
+    TN=if not recOrSep then TN_cooler_Panel else zoneParam.TNCoolPanel) if
                                                                 ((recOrSep and
     zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
-    "PI control for cooler"
+    "PI controller for panel cooling"
     annotation (Placement(transformation(extent={{2,-6},{18,-22}})));
   PITempOpe pITempCoolRem(
-    p=powerCoolRem,
+    p=if not recOrSep then p_cooler_Rem else zoneParam.powerCoolRem,
     rangeSwitch=false,
     h=if not recOrSep then h_cooler else zoneParam.hCool,
     l=if not recOrSep then l_cooler else zoneParam.lCool,
-    KR=if not recOrSep then KR_cooler_Rem else zoneParam.KRCool,
-    TN=if not recOrSep then TN_cooler_Rem else zoneParam.TNCool) if
+    KR=if not recOrSep then KR_cooler_Rem else zoneParam.KRCoolRem,
+    TN=if not recOrSep then TN_cooler_Rem else zoneParam.TNCoolRem) if
                                                                 ((recOrSep and
     zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
-    "PI control for cooler"
+    "PI controller for radiative and convective cooling system"
     annotation (Placement(transformation(extent={{52,-6},{68,-22}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolTabsExt
-    "Heat port to thermal zone" annotation (Placement(transformation(extent={{-50,86},{-30,106}})));
+    "Heat port to thermal zone" annotation (Placement(transformation(extent={{-50,86},{-30,106}}),iconTransformation(extent={{-90,86},{-70,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolTabsInt
-    "Heat port to thermal zone" annotation (Placement(transformation(extent={{-30,86},{-10,106}})));
+    "Heat port to thermal zone" annotation (Placement(transformation(extent={{-30,86},{-10,106}}),iconTransformation(extent={{-65,86},{-45,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolPanelExt
-    "Heat port to thermal zone" annotation (Placement(transformation(extent={{-10,86},{10,106}})));
+    "Heat port to thermal zone" annotation (Placement(transformation(extent={{-10,86},{10,106}}),iconTransformation(extent={{-40,86},{-20,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolPanelInt
-    "Heat port to thermal zone" annotation (Placement(transformation(extent={{10,86},{30,106}})));
+    "Heat port to thermal zone" annotation (Placement(transformation(extent={{10,86},{30,106}}),iconTransformation(extent={{-15,86},{5,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolRadExt
-    "Heat port to thermal zone" annotation (Placement(transformation(extent={{30,86},{50,106}})));
+    "Heat port to thermal zone" annotation (Placement(transformation(extent={{30,86},{50,106}}),iconTransformation(extent={{10,86},{30,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolRadInt
-    "Heat port to thermal zone" annotation (Placement(transformation(extent={{50,86},{70,106}})));
+    "Heat port to thermal zone" annotation (Placement(transformation(extent={{50,86},{70,106}}),iconTransformation(extent={{35,86},{55,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolConv
-    "Heat port to thermal zone" annotation (Placement(transformation(extent={{70,86},{90,106}})));
+    "Heat port to thermal zone" annotation (Placement(transformation(extent={{70,86},{90,106}}),iconTransformation(extent={{60,86},{80,106}})));
 
  // Anteile der Wärmeströme
-  Modelica.Blocks.Math.Gain gainHTabsExt(k=shareHeatTabsExt) annotation (
+  Modelica.Blocks.Math.Gain gainHTabsExt(k=if not recOrSep then share_Heater_TabsExt else zoneParam.shareHeatTabsExt) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={-40,44})));
-  Modelica.Blocks.Math.Gain gainHTabsInt(k=shareHeatTabsInt) annotation (
+  Modelica.Blocks.Math.Gain gainHTabsInt(k=if not recOrSep then share_Heater_TabsInt else zoneParam.shareHeatTabsInt) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={-20,44})));
-  Modelica.Blocks.Math.Gain gainHPanelExt(k=shareHeatPanelExt) annotation (
+  Modelica.Blocks.Math.Gain gainHPanelExt(k=if not recOrSep then share_Heater_PanelExt else zoneParam.shareHeatPanelExt) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={0,44})));
-  Modelica.Blocks.Math.Gain gainHPanelInt(k=shareHeatPanelInt) annotation (
+  Modelica.Blocks.Math.Gain gainHPanelInt(k=if not recOrSep then share_Heater_PanelInt else zoneParam.shareHeatPanelInt) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={20,44})));
-  Modelica.Blocks.Math.Gain gainHRadExt(k=shareHeatRadExt) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain gainHRadExt(k=if not recOrSep then share_Heater_RadExt else zoneParam.shareHeatRadExt) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={40,44})));
-  Modelica.Blocks.Math.Gain gainHRadInt(k=shareHeatRadInt) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain gainHRadInt(k=if not recOrSep then share_Heater_RadInt else zoneParam.shareHeatRadInt) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={60,44})));
-  Modelica.Blocks.Math.Gain gainHConv(k=shareHeatConv) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain gainHConv(k=if not recOrSep then share_Heater_Conv else zoneParam.shareHeatConv) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={80,44})));
-  Modelica.Blocks.Math.Gain gainCTabsExt(k=shareCoolTabsExt) annotation (
+  Modelica.Blocks.Math.Gain gainCTabsExt(k=if not recOrSep then share_Cooler_TabsExt else zoneParam.shareCoolTabsExt) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={-40,-42})));
-  Modelica.Blocks.Math.Gain gainCTabsInt(k=shareCoolTabsInt) annotation (
+  Modelica.Blocks.Math.Gain gainCTabsInt(k=if not recOrSep then share_Cooler_TabsInt else zoneParam.shareCoolTabsInt) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={-20,-42})));
-  Modelica.Blocks.Math.Gain gainCPanelExt(k=shareCoolPanelExt) annotation (
+  Modelica.Blocks.Math.Gain gainCPanelExt(k=if not recOrSep then share_Cooler_PanelExt else zoneParam.shareCoolPanelExt) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={0,-42})));
-  Modelica.Blocks.Math.Gain gainCPanelInt(k=shareCoolPanelInt) annotation (
+  Modelica.Blocks.Math.Gain gainCPanelInt(k=if not recOrSep then share_Cooler_PanelInt else zoneParam.shareCoolPanelInt) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={20,-42})));
-  Modelica.Blocks.Math.Gain gainCRadExt(k=shareCoolRadExt) annotation (
+  Modelica.Blocks.Math.Gain gainCRadExt(k=if not recOrSep then share_Cooler_RadExt else zoneParam.shareCoolRadExt) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={40,-42})));
-  Modelica.Blocks.Math.Gain gainCRadInt(k=shareCoolRadInt) annotation (
+  Modelica.Blocks.Math.Gain gainCRadInt(k=if not recOrSep then share_Cooler_RadInt else zoneParam.shareCoolRadInt) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={60,-42})));
-  Modelica.Blocks.Math.Gain gainCConv(k=shareCoolConv) annotation (Placement(
+  Modelica.Blocks.Math.Gain gainCConv(k=if not recOrSep then share_Cooler_Conv else zoneParam.shareCoolConv) annotation (Placement(
         transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
@@ -338,12 +356,14 @@ model HeaterCoolerWithTabs6007C1
         transformation(
         extent={{20,-20},{-20,20}},
         rotation=90,
-        origin={-90,100})));
+        origin={-90,100}),iconTransformation(extent={{-180,
+            0},{-140,40}})));
   Modelica.Blocks.Interfaces.RealInput tabsCoolingPower annotation (Placement(
         transformation(
         extent={{20,-20},{-20,20}},
         rotation=90,
-        origin={-64,100})));
+        origin={-64,100}),iconTransformation(extent={{-180,
+            -40},{-140,0}})));
 equation
 
   connect(TAir, tOpe.TAir) annotation (Line(points={{-150,100},{-150,78},{-139.2,
@@ -488,7 +508,22 @@ equation
           -90,32},{-40,32},{-40,39.2}}, color={0,0,127}));
   connect(tabsHeatingPower, gainHTabsInt.u) annotation (Line(points={{-90,100},{
           -90,32},{-20,32},{-20,39.2}}, color={0,0,127}));
-annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
+annotation (Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+This is a heater and/or cooler implemented after VDI 6007 Blatt 1 Anhang C1: Differenzierte Berücksichtigung von Flächenheiz- und
+Flächenkühlsystemen beim 2-Kapazitäten-Modell.
+   
+</p>
+<h4>References </h4>
+<p>
+</p>
+</html>",revisions="<html>
+<ul>
+<li>March, 2021, by Christian Wenzel:<br>First implementation.</li>
+</ul>
+</html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}}),
                    graphics={  Rectangle(extent={{-94,-30},{80,-50}},    lineColor = {135, 135, 135}, fillColor = {135, 135, 135},
             fillPattern =                                                                                                   FillPattern.Solid),                                                                                                    Line(points={{
