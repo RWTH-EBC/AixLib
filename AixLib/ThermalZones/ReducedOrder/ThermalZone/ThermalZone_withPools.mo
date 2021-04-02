@@ -482,16 +482,16 @@ equation
  if use_swimmingPools and (ATot > 0) then
 
     for i in 1:numPools loop
-      connect(TRad, indoorSwimmingPool[i].TRad) annotation (Line(points={{110,60},
-              {88,60},{88,22},{-65.76,22},{-65.76,-71.58}},
-                                               color={0,0,127}));
       connect(humVolAirROM.y, indoorSwimmingPool[i].X_w) annotation (Line(points={{-59.5,
               -50},{-58,-50},{-58,-71.65},{-54.16,-71.65}},
                                                         color={0,0,127}));
       connect(TSoil.y, indoorSwimmingPool[i].TSoil) annotation (Line(points={{43.4,22},
               {44,22},{44,-75.15},{-51.44,-75.15}}, color={0,0,127}));
-      connect(ROM.intGainsConv, indoorSwimmingPool[i].ConvPoolSurface) annotation (Line(points={{86,78},{10,78},{10,-72},{-60.8,-72}}, color={
+      connect(ROM.intGainsConv,indoorSwimmingPool[i].convPoolSurface)  annotation (Line(points={{86,78},{10,78},{10,-72},{-60.8,-72}}, color={
               191,0,0}));
+      connect(indoorSwimmingPool[i].radPoolSurface, ROM.intGainsRad)
+        annotation (Line(points={{-65.44,-71.72},{-65.44,5.21},{86,5.21},{86,82}},
+            color={95,95,95}));
       connect(indoorSwimmingPool[i].TAir, TAir) annotation (Line(points={{-56.56,
               -71.65},{-58,-71.65},{-58,-50},{0,-50},{0,80},{110,80}},
                                            color={0,0,127}));
@@ -500,15 +500,15 @@ equation
                                                                color={0,0,127}));
       connect(indoorSwimmingPool[i].QPool, SumPoolQHeat.u[i]) annotation (Line(points={{-51.36,
               -81.1},{-51.36,-82},{-36,-82},{-36,-81}}, color={0,0,127}));
-      connect(indoorSwimmingPool[i].MFlowWasteWater, SumPoolWasteWater.u[i]) annotation (
-        Line(points={{-51.52,-83.9},{-46.76,-83.9},{-46.76,-81},{-36,-81}},       color=
-           {0,0,127}));
-      connect(indoorSwimmingPool[i].MFlowFreshWater, SumPoolFreshWater.u[i]) annotation (Line(
-          points={{-51.52,-85.02},{-46,-85.02},{-46,-81},{-36,-81}},       color={0,0,127}));
-      connect(indoorSwimmingPool[i].MFlowRecycledWater, SumPoolRecycledWater.u[i]) annotation (
-      Line(points={{-51.52,-84.46},{-54,-84.46},{-54,-84},{-46,-84},{-46,-80},{
-              -36,-80},{-36,-81}},                                              color=
-         {0,0,127}));
+      connect(indoorSwimmingPool[i].MFlowRW, SumPoolWasteWater.u[i])
+        annotation (Line(points={{-51.52,-84.46},{-46.76,-84.46},{-46.76,-81},{
+              -36,-81}}, color={0,0,127}));
+      connect(indoorSwimmingPool[i].MFlowFW, SumPoolFreshWater.u[i])
+        annotation (Line(points={{-51.52,-85.02},{-46,-85.02},{-46,-81},{-36,-81}},
+            color={0,0,127}));
+      connect(indoorSwimmingPool[i].MFlowRW, SumPoolRecycledWater.u[i])
+        annotation (Line(points={{-51.52,-84.46},{-54,-84.46},{-54,-84},{-46,-84},
+              {-46,-80},{-36,-80},{-36,-81}}, color={0,0,127}));
       connect(indoorSwimmingPool[i].QEvap, SumPoolLatHeatEvap.u[i]) annotation (Line(points={{-51.36,
               -79.28},{-50,-79.28},{-50,-78},{-48,-78},{-48,-73},{-36,-73}},
                                                            color={0,0,127}));
@@ -848,6 +848,7 @@ end if;
   connect(moistureGains.TMoistureSource, ROM.T[1]) annotation (Line(points={{-59.7,-60.8},{
           -59.7,-52},{-60,-52},{-60,-42},{32,-42},{32,64},{37.2,64},{37.2,64.4}},
                                                   color={0,0,127}));
+
 
 
 

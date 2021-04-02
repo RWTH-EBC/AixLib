@@ -22,8 +22,8 @@ model Example
 equation
   connect(indoorSwimmingPool.openingHours, tableOpeningHours.y[1])
     annotation (Line(points={{-29.55,24.36},{-42,24.36},{-42,24},{-55.2,24}}, color={0,0,127}));
-  connect(const.y, indoorSwimmingPool.TRad)
-    annotation (Line(points={{-41,72},{-41,51},{-19.32,51},{-19.32,29.68}}, color={0,0,127}));
+  connect(const.y, indoorSwimmingPool.radPoolSurface) annotation (Line(points={
+          {-41,72},{-41,51},{-19.32,51},{-19.32,29.68}}, color={0,0,127}));
   connect(const1.y, indoorSwimmingPool.TSoil)
     annotation (Line(points={{41,66},{40,66},{40,15.4},{36.17,15.4}}, color={0,0,127}));
   connect(const3.y, indoorSwimmingPool.X_w) annotation (Line(points={{-9,86},{

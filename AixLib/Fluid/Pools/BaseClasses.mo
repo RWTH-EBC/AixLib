@@ -141,7 +141,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
 
     Modelica.Blocks.Sources.Constant const_hConExt(k=hConExt) if AExt > 0
       "heat transfer coefficient between vertikal pool wall and water"
-      annotation (Placement(transformation(extent={{-18,60},{-28,70}})));
+      annotation (Placement(transformation(extent={{-20,52},{-30,62}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_a if AExt > 0
        or AInt > 0 or AFloor > 0
       "Inlet for heattransfer"
@@ -181,7 +181,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
     connect(extWalRC.port_b,prescribedTemperature1. port) annotation (Line(points={{12,
             38.3636},{30,38.3636},{30,-2}},     color={191,0,0}));
     connect(const_hConExt.y, convExt.Gc)
-      annotation (Line(points={{-28.5,65},{-35,65},{-35,44}}, color={0,0,127}));
+      annotation (Line(points={{-30.5,57},{-35,57},{-35,44}}, color={0,0,127}));
     connect(convExt.fluid, heatport_a) annotation (Line(points={{-42,37},{-64,37},
             {-64,2},{-100,2}}, color={191,0,0}));
     connect(prescribedTemperature1.port, floorRC.port_b) annotation (Line(points={{30,-2},
@@ -269,6 +269,15 @@ package BaseClasses "Base classes for Swimming Pool Models"
         redeclare each package Medium = Medium) "Fluid inlets and outlets"
       annotation (Placement(transformation(extent={{-40,-10},{40,10}},
         origin={0,-100})));
+     parameter Boolean use_C_flow = false
+      "Set to true to enable input connector for trace substance"
+      annotation(Evaluate=true, Dialog(tab="Advanced"));
+
+    Modelica.Blocks.Interfaces.RealInput[Medium.nC] C_flow if use_C_flow
+      "Trace substance mass flow rate added to the medium"
+      annotation (Placement(transformation(extent={{-140,-90},{-100,-50}}),
+          iconTransformation(extent={{-140,-80},{-100,-40}})));
+
 
     Medium.Temperature T = Medium.temperature_phX(p=p, h=hOut_internal, X=cat(1,Xi,{1-sum(Xi)}))
       "Temperature of the fluid";
@@ -287,9 +296,10 @@ package BaseClasses "Base classes for Swimming Pool Models"
       "Trace substance mass of the component";
 
     Modelica.Blocks.Interfaces.RealInput QEvap_in "Input for evaporation Energy"
-      annotation (Placement(transformation(extent={{-126,-58},{-86,-18}})));
+      annotation (Placement(transformation(extent={{-140,-52},{-100,-12}}),
+          iconTransformation(extent={{-126,-58},{-86,-18}})));
     Modelica.Blocks.Math.Add add
-      annotation (Placement(transformation(extent={{-62,-42},{-42,-22}})));
+      annotation (Placement(transformation(extent={{-54,-48},{-34,-28}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(
         T(start=T_start)) "Heat port for heat exchange with the control volume"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
@@ -301,7 +311,8 @@ package BaseClasses "Base classes for Swimming Pool Models"
       final m_flow_nominal = m_flow_nominal,
       final allowFlowReversal = allowFlowReversal,
       final m_flow_small = m_flow_small,
-      final prescribedHeatFlowRate=prescribedHeatFlowRate) if
+      final prescribedHeatFlowRate=prescribedHeatFlowRate,
+      final use_C_flow = use_C_flow) if
            useSteadyStateTwoPort "Model for steady-state balance if nPorts=2"
           annotation (Placement(transformation(extent={{20,0},{40,20}})));
     AixLib.Fluid.Interfaces.ConservationEquation dynBal(
@@ -318,7 +329,8 @@ package BaseClasses "Base classes for Swimming Pool Models"
       final initialize_p = initialize_p,
       m(start=V*rho_start),
       nPorts=nPorts,
-      final mSenFac=mSenFac) if
+      final mSenFac=mSenFac,
+      final use_C_flow = use_C_flow) if
            not useSteadyStateTwoPort "Model for dynamic energy balance"
       annotation (Placement(transformation(extent={{60,0},{80,20}})));
 
@@ -418,14 +430,19 @@ package BaseClasses "Base classes for Swimming Pool Models"
     connect(heatPort, heaFloSen.port_a)
       annotation (Line(points={{-100,0},{-90,0}}, color={191,0,0}));
     connect(QEvap_in, add.u2)
-      annotation (Line(points={{-106,-38},{-64,-38}}, color={0,0,127}));
-    connect(heaFloSen.Q_flow, add.u1) annotation (Line(points={{-80,-10},{-80,-22},
-            {-64,-22},{-64,-26}}, color={0,0,127}));
-    connect(add.y, steBal.Q_flow) annotation (Line(points={{-41,-32},{-4,-32},{-4,
-            18},{18,18}}, color={0,0,127}));
-    connect(add.y, dynBal.Q_flow) annotation (Line(points={{-41,-32},{-4,-32},{-4,
-            26},{58,26},{58,16}}, color={0,0,127}));
-    annotation (
+      annotation (Line(points={{-120,-32},{-84,-32},{-84,-44},{-56,-44}},
+                                                      color={0,0,127}));
+    connect(heaFloSen.Q_flow, add.u1) annotation (Line(points={{-80,-10},{-80,-32},{-56,-32}},
+                                  color={0,0,127}));
+    connect(add.y, steBal.Q_flow) annotation (Line(points={{-33,-38},{-4,-38},{-4,18},{18,
+            18}},         color={0,0,127}));
+    connect(add.y, dynBal.Q_flow) annotation (Line(points={{-33,-38},{-4,-38},{-4,26},{58,
+            26},{58,16}},         color={0,0,127}));
+    connect(C_flow, steBal.C_flow) annotation (Line(points={{-120,-70},{12,-70},
+            {12,6},{18,6}},          color={0,0,127}));
+    connect(C_flow, dynBal.C_flow) annotation (Line(points={{-120,-70},{52,-70},
+            {52,6},{58,6}},          color={0,0,127}));
+     annotation (
   defaultComponentName="vol",
   Documentation(info="<html><p>
   This is a partial model of an instantaneously mixed volume. It is
@@ -793,8 +810,8 @@ end if;
       redeclare Movers.Data.Generic per(
         pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, dp={
               pumpHead/0.7,pumpHead,0}),
-        hydraulicEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
-            eta={0.75,0.8,0.75}),
+        hydraulicEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/
+              0.7}, eta={0.70,0.8,0.70}),
         motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
             eta={0.9,0.9,0.9})),
       inputType=AixLib.Fluid.Types.InputType.Continuous,
@@ -811,12 +828,12 @@ end if;
       show_T=false,
       dp_nominal= pumpHead)
       annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-    Modelica.Blocks.Interfaces.RealInput m_flow_pump annotation (Placement(
-          transformation(extent={{-128,44},{-88,84}}), iconTransformation(extent={{-112,60},
-              {-88,84}})));
+    Modelica.Blocks.Interfaces.RealInput setMFlow annotation (Placement(
+          transformation(extent={{-128,44},{-88,84}}), iconTransformation(
+            extent={{-112,60},{-88,84}})));
     Sensors.MassFlowRate senMasFlo( redeclare package  Medium = Medium)
       annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
-    Modelica.Blocks.Continuous.LimPID PID(
+    Controls.Continuous.LimPID PI(
       k=0.1,
       Ti=5,
       yMax=m_flow_nominal/0.9,
@@ -828,15 +845,12 @@ end if;
             -4},{100,0}}, color={0,127,255}));
     connect(CirculationPump.P, P) annotation (Line(points={{-39,9},{-28,9},{-28,46},
             {106,46}}, color={0,0,127}));
-    connect(PID.u_m, senMasFlo.m_flow) annotation (Line(points={{-46,50},{-46,
-            38},{2,38},{2,11}},
-                          color={0,0,127}));
-    connect(PID.u_s, m_flow_pump)
-      annotation (Line(points={{-58,62},{-84,62},{-84,64},{-108,64}},
-                                                    color={0,0,127}));
-    connect(PID.y, CirculationPump.m_flow_in) annotation (Line(points={{-35,62},
-            {-35,41},{-50,41},{-50,12}},
-                                    color={0,0,127}));
+    connect(PI.u_m, senMasFlo.m_flow) annotation (Line(points={{-46,50},{-46,38},
+            {2,38},{2,11}}, color={0,0,127}));
+    connect(PI.u_s, setMFlow) annotation (Line(points={{-58,62},{-84,62},{-84,
+            64},{-108,64}}, color={0,0,127}));
+    connect(PI.y, CirculationPump.m_flow_in) annotation (Line(points={{-35,62},
+            {-35,41},{-50,41},{-50,12}}, color={0,0,127}));
     connect(CirculationPump.port_b, senMasFlo.port_a)
       annotation (Line(points={{-40,0},{-8,0}}, color={0,127,255}));
     connect(senMasFlo.port_b, res.port_a)
