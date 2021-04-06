@@ -118,6 +118,42 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
+
+  parameter Real KRHeatTABS;
+  parameter Real TNHeatTABS;
+  parameter Real powerHeatTABS;
+  parameter Real KRCoolTABS;
+  parameter Real TNCoolTABS;
+  parameter Real powerCoolTABS;
+  parameter Real KRHeatPanel;
+  parameter Real TNHeatPanel;
+  parameter Real powerHeatPanel;
+  parameter Real KRCoolPanel;
+  parameter Real TNCoolPanel;
+  parameter Real powerCoolPanel;
+  parameter Real KRHeatRem;
+  parameter Real TNHeatRem;
+  parameter Real powerHeatRem;
+  parameter Real KRHeatVent;
+  parameter Real TNHeatVent;
+  parameter Real powerHeatVent;
+  parameter Real KRCoolVent;
+  parameter Real TNCoolVent;
+  parameter Real powerCoolVent;
+  parameter Real shareHeatTabsExt;
+  parameter Real shareHeatTabsInt;
+  parameter Real shareHeatPanelExt;
+  parameter Real shareHeatPanelInt;
+  parameter Real shareHeatRadExt;
+  parameter Real shareHeatRadInt;
+  parameter Real shareHeatConv;
+  parameter Real shareCoolTabsExt;
+  parameter Real shareCoolTabsInt;
+  parameter Real shareCoolPanelExt;
+  parameter Real shareCoolPanelInt;
+  parameter Real shareCoolRadExt;
+  parameter Real shareCoolRadInt;
+  parameter Real shareCoolConv);
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.

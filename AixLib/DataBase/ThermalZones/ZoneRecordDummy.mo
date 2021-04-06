@@ -84,7 +84,46 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     CoolerOn=false,
     TThresholdHeater=Modelica.Constants.eps,
     TThresholdCooler=2*Modelica.Constants.eps,
-    withIdealThresholds=false);
+    withIdealThresholds=false
+
+    KRHeatTABS=Modelica.Constants.eps;
+    TNHeatTABS=Modelica.Constants.eps;
+    powerHeatTABS=Modelica.Constants.eps;
+    KRCoolTABS=Modelica.Constants.eps;
+    TNCoolTABS=Modelica.Constants.eps;
+    powerCoolTABS=Modelica.Constants.eps;
+    KRHeatPanel=Modelica.Constants.eps;
+    TNHeatPanel=Modelica.Constants.eps;
+    powerHeatPanel=Modelica.Constants.eps;
+    KRCoolPanel=Modelica.Constants.eps;
+    TNCoolPanel=Modelica.Constants.eps;
+    powerCoolPanel=Modelica.Constants.eps;
+    KRHeatRem=Modelica.Constants.eps;
+    TNHeatRem=Modelica.Constants.eps;
+    powerHeatRem=Modelica.Constants.eps;
+    KRHeatVent=Modelica.Constants.eps;
+    TNHeatVent=Modelica.Constants.eps;
+    powerHeatVent=Modelica.Constants.eps;
+    KRCoolVent=Modelica.Constants.eps;
+    TNCoolVent=Modelica.Constants.eps;
+    powerCoolVent=Modelica.Constants.eps;
+    shareHeatTabsExt=Modelica.Constants.eps;
+    shareHeatTabsInt=Modelica.Constants.eps;
+    shareHeatPanelExt=Modelica.Constants.eps;
+    shareHeatPanelInt=Modelica.Constants.eps;
+    shareHeatRadExt=Modelica.Constants.eps;
+    shareHeatRadInt=Modelica.Constants.eps;
+    shareHeatConv=Modelica.Constants.eps;
+    shareCoolTabsExt=Modelica.Constants.eps;
+    shareCoolTabsInt=Modelica.Constants.eps;
+    shareCoolPanelExt=Modelica.Constants.eps;
+    shareCoolPanelInt=Modelica.Constants.eps;
+    shareCoolRadExt=Modelica.Constants.eps;
+    shareCoolRadInt=Modelica.Constants.eps;
+    shareCoolConv=Modelica.Constants.eps
+
+
+    );
   annotation (Documentation(revisions="<html><ul>
   <li>
     <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
