@@ -93,8 +93,9 @@ equation
           12},{58,12}}, color={0,0,127}));
   connect(off.y, switchCooler.u3) annotation (Line(points={{20.7,1},{44,1},{44,
           -28},{58,-28}}, color={0,0,127}));
-  connect(heatingPower.y, switchHeater.u1) annotation (Line(points={{20.7,45},{43.5,
-          45},{43.5,28},{58,28}}, color={0,0,127}));
+  connect(heatingPower.y, switchHeater.u1) annotation (Line(points={{20.7,45},{
+          43.5,45},{43.5,28},{58,28}},
+                                  color={0,0,127}));
   connect(coolingPower.y, switchCooler.u1) annotation (Line(points={{20.7,-39},{36,
           -39},{36,-12},{58,-12}}, color={0,0,127}));
   connect(less.y, heaterActive.activePort) annotation (Line(points={{-31,20},{-19.5,
