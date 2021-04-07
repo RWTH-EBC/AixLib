@@ -32,12 +32,6 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
   parameter Real KR_heater_Rem = 0.1 "Gain of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Rem = 4 "Time constant of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
 
-  //DELETE
-  parameter Modelica.SIunits.Power p_heater_Panel = 0
-  "Limited power for panel heating" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
-  parameter Modelica.SIunits.Power p_heater_Rem = 0
-  "Limited power for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
-
   parameter Real share_Heater_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
   parameter Real share_Heater_TabsInt(min=0, max=1) = 0
@@ -66,12 +60,6 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
   parameter Modelica.SIunits.Time TN_cooler_Panel = 4 "Time constant of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Real KR_cooler_Rem = 0.1 "Gain of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler_Rem = 4 "Time constant of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
-
-  // DELETE
-  parameter Modelica.SIunits.Power p_cooler_Panel = 0
-  "Limited power for panel cooling" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
-  parameter Modelica.SIunits.Power p_cooler_Rem = 0
-  "Limited power for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
 
   parameter Real share_Cooler_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
