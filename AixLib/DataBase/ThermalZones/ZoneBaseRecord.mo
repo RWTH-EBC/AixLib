@@ -122,11 +122,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Threshold temperature below TABS heating is used";
   parameter Modelica.SIunits.Temperature TThresholdCoolerTabs
     "Threshold temperature above TABS cooling is used";
-  parameter Real KRHeatTabs;
-  parameter Modelica.SIunits.Time TNHeatTabs;
   parameter Real powerHeatTabs;
-  parameter Real KRCoolTabs;
-  parameter Modelica.SIunits.Time TNCoolTabs;
   parameter Real powerCoolTabs;
   parameter Real hHeatPanel;
   parameter Real lHeatPanel;
@@ -148,12 +144,6 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real KRCoolRem;
   parameter Modelica.SIunits.Time TNCoolRem;
   parameter Real powerCoolRem;
-  parameter Real KRHeatVent;
-  parameter Modelica.SIunits.Time TNHeatVent;
-  parameter Real powerHeatVent;
-  parameter Real KRCoolVent;
-  parameter Modelica.SIunits.Time TNCoolVent;
-  parameter Real powerCoolVent;
   parameter Real shareHeatTabsExt;
   parameter Real shareHeatTabsInt;
   parameter Real shareHeatPanelExt;
