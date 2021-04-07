@@ -232,8 +232,7 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     annotation (Placement(transformation(extent={{66,26},{84,38}})));
   Utilities.Sources.HeaterCoolerVDI6007AC1.tabsHeaterCoolerController
     tabsHeaterCoolerController(
-    zoneParam=zoneParam) if zoneParam.withIdealThresholds
-    annotation (Placement(transformation(extent={{76,10},{90,24}})));
+    zoneParam=zoneParam, recOrSep=recOrSep)  annotation (Placement(transformation(extent={{76,10},{90,24}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(zoneParam=
        zoneParam) if zoneParam.withIdealThresholds
     annotation (Placement(transformation(extent={{-7,-7},{7,7}},
