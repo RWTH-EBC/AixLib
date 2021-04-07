@@ -19,18 +19,25 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
         "Seperate",choice = true "Record",radioButtons = true));
   parameter Boolean Heater_on=true "Activates the heater"
     annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Real h_heater=0 "Upper limit controller output of the heater"
+  parameter Real h_heater_Panel=0 "Upper limit controller output of the heater"
     annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Real l_heater=0 "Lower limit controller output of the heater"
+  parameter Real l_heater_Panel=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater_Rem=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater_Rem=0 "Lower limit controller output of the heater"
     annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real KR_heater_Panel = 0.1 "Gain of the panel heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Panel = 4 "Time constant of the panel heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Real KR_heater_Rem = 0.1 "Gain of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Rem = 4 "Time constant of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+
+  //DELETE
   parameter Modelica.SIunits.Power p_heater_Panel = 0
   "Limited power for panel heating" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
   parameter Modelica.SIunits.Power p_heater_Rem = 0
   "Limited power for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
+
   parameter Real share_Heater_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
   parameter Real share_Heater_TabsInt(min=0, max=1) = 0
@@ -47,18 +54,25 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     "convective contribution to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
   parameter Boolean Cooler_on=true "Activates the cooler"
     annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Real h_cooler=0 "Upper limit controller output of the cooler"
+  parameter Real h_cooler_Panel=0 "Upper limit controller output of the cooler"
     annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Real l_cooler=0 "Lower limit controller output of the cooler"
+  parameter Real l_cooler_Panel=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler_Rem=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler_Rem=0 "Lower limit controller output of the cooler"
     annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real KR_cooler_Panel = 0.1 "Gain of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler_Panel = 4 "Time constant of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Real KR_cooler_Rem = 0.1 "Gain of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler_Rem = 4 "Time constant of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+
+  // DELETE
   parameter Modelica.SIunits.Power p_cooler_Panel = 0
   "Limited power for panel cooling" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
   parameter Modelica.SIunits.Power p_cooler_Rem = 0
   "Limited power for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
+
   parameter Real share_Cooler_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
   parameter Real share_Cooler_TabsInt(min=0, max=1) = 0
@@ -178,14 +192,14 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,82},{-68,98}})));
   Utilities.Sources.HeaterCoolerVDI6007AC1.HeaterCoolerWithTabs6007C1 heaterCoolerWithTabs6007C1(
-    each h_heater=h_heater,
-    each l_heater=l_heater,
+    each h_heater_Panel=h_heater_Panel,
+    each l_heater_Panel=l_heater_Panel,
+    each h_heater_Rem=h_heater_Rem,
+    each l_heater_Rem=l_heater_Rem,
     each KR_heater_Panel=KR_heater_Panel,
     each TN_heater_Panel=TN_heater_Panel,
     each KR_heater_Rem=KR_heater_Rem,
     each TN_heater_Rem=TN_heater_Rem,
-    each p_heater_Panel=p_heater_Panel,
-    each p_heater_Rem=p_heater_Rem,
     each share_Heater_TabsExt=share_Heater_TabsExt,
     each share_Heater_TabsInt=share_Heater_TabsInt,
     each share_Heater_PanelExt=share_Heater_PanelExt,
@@ -193,14 +207,14 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     each share_Heater_RadExt=share_Heater_RadExt,
     each share_Heater_RadInt=share_Heater_RadInt,
     each share_Heater_Conv=share_Heater_Conv,
-    each h_cooler=h_cooler,
-    each l_cooler=l_cooler,
+    each h_cooler_Panel=h_cooler_Panel,
+    each l_cooler_Panel=l_cooler_Panel,
+    each h_cooler_Rem=h_cooler_Rem,
+    each l_cooler_Rem=l_cooler_Rem,
     each KR_cooler_Panel=KR_cooler_Panel,
     each TN_cooler_Panel=TN_cooler_Panel,
     each KR_cooler_Rem=KR_cooler_Rem,
     each TN_cooler_Rem=TN_cooler_Rem,
-    each p_cooler_Panel=p_cooler_Panel,
-    each p_cooler_Rem=p_cooler_Rem,
     each share_Cooler_TabsExt=share_Cooler_TabsExt,
     each share_Cooler_TabsInt=share_Cooler_TabsInt,
     each share_Cooler_PanelExt=share_Cooler_PanelExt,

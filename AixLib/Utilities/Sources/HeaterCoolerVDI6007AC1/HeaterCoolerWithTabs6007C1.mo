@@ -1,7 +1,7 @@
 ﻿within AixLib.Utilities.Sources.HeaterCoolerVDI6007AC1;
 model HeaterCoolerWithTabs6007C1
 
-// Heiz- und Kühlsystemparameter
+// DELETE
   parameter Modelica.SIunits.Power p_heater_Panel = 0
   "Limited power for panel heating" annotation(Dialog(tab = "Heater", group = "Heating"));
   parameter Modelica.SIunits.Power p_heater_Rem = 0
@@ -10,6 +10,8 @@ model HeaterCoolerWithTabs6007C1
   "Limited power for panel cooling" annotation(Dialog(tab = "Cooler", group = "Cooling"));
   parameter Modelica.SIunits.Power p_cooler_Rem = 0
   "Limited power for radiative and convective cooling system" annotation(Dialog(tab = "Cooler", group = "Cooling"));
+
+// Heiz- und Kühlsystemparameter
   parameter Real share_Heater_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
   parameter Real share_Heater_TabsInt(min=0, max=1) = 0
@@ -42,14 +44,18 @@ model HeaterCoolerWithTabs6007C1
 // von PartialHeaterCoolerPI übernommen
   parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
   parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
-  parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real h_heater_Panel = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real l_heater_Panel = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real h_heater_Rem = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real l_heater_Rem = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real KR_heater_Panel = 0.1 "Gain of the panel heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Panel = 4 "Time constant of the panel heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real KR_heater_Rem = 0.1 "Gain of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Rem = 4 "Time constant of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real h_cooler = 0 "Upper limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Real l_cooler = 0 "Lower limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real h_cooler_Panel = 0 "Upper limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real l_cooler_Panel = 0 "Lower limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real h_cooler_Rem = 0 "Upper limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real l_cooler_Rem = 0 "Lower limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Real KR_cooler_Panel = 0.1 "Gain of the panel cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler_Panel = 4 "Time constant of the panel cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Real KR_cooler_Rem = 0.1 "Gain of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
@@ -222,30 +228,32 @@ model HeaterCoolerWithTabs6007C1
   PITempOpe pITempHeatPanel(
     p=if not recOrSep then p_heater_Panel else zoneParam.powerHeatPanel,
     rangeSwitch=false,
-    h=if not recOrSep then h_heater else zoneParam.hHeat,
-    l=if not recOrSep then l_heater else zoneParam.lHeat,
+    h=if not recOrSep then h_heater_Panel else zoneParam.hHeatPanel,
+    l=if not recOrSep then l_heater_Panel else zoneParam.lHeatPanel,
     KR=if not recOrSep then KR_heater_Panel else zoneParam.KRHeatPanel,
     TN=if not recOrSep then TN_heater_Panel else zoneParam.TNHeatPanel) if
                                                                 ((recOrSep and
     zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "PI controller for panel heating"
     annotation (Placement(transformation(extent={{2,6},{18,22}})));
+    //DELETE
   PITempOpe pITempHeatRem(
     p=if not recOrSep then p_heater_Rem else zoneParam.powerHeatRem,
     rangeSwitch=false,
-    h=if not recOrSep then h_heater else zoneParam.hHeat,
-    l=if not recOrSep then l_heater else zoneParam.lHeat,
+    h=if not recOrSep then h_heater_Rem else zoneParam.hHeatRem,
+    l=if not recOrSep then l_heater_Rem else zoneParam.lHeatRem,
     KR=if not recOrSep then KR_heater_Rem else zoneParam.KRHeatRem,
     TN=if not recOrSep then TN_heater_Rem else zoneParam.TNHeatRem) if
                                                                 ((recOrSep and
     zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "PI controller for radiative and convective heating system"
     annotation (Placement(transformation(extent={{52,6},{68,22}})));
+    //DELETE
   PITempOpe pITempCoolPanel(
     p=if not recOrSep then p_cooler_Panel else zoneParam.powerCoolPanel,
     rangeSwitch=false,
-    h=if not recOrSep then h_cooler else zoneParam.hCool,
-    l=if not recOrSep then l_cooler else zoneParam.lCool,
+    h=if not recOrSep then h_cooler_Panel else zoneParam.hCoolPanel,
+    l=if not recOrSep then l_cooler_Panel else zoneParam.lCoolPanel,
     KR=if not recOrSep then KR_cooler_Panel else zoneParam.KRCoolPanel,
     TN=if not recOrSep then TN_cooler_Panel else zoneParam.TNCoolPanel) if
                                                                 ((recOrSep and
@@ -255,14 +263,15 @@ model HeaterCoolerWithTabs6007C1
   PITempOpe pITempCoolRem(
     p=if not recOrSep then p_cooler_Rem else zoneParam.powerCoolRem,
     rangeSwitch=false,
-    h=if not recOrSep then h_cooler else zoneParam.hCool,
-    l=if not recOrSep then l_cooler else zoneParam.lCool,
+    h=if not recOrSep then h_cooler_Rem else zoneParam.hCoolRem,
+    l=if not recOrSep then l_cooler_Rem else zoneParam.lCoolRem,
     KR=if not recOrSep then KR_cooler_Rem else zoneParam.KRCoolRem,
     TN=if not recOrSep then TN_cooler_Rem else zoneParam.TNCoolRem) if
                                                                 ((recOrSep and
     zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "PI controller for radiative and convective cooling system"
     annotation (Placement(transformation(extent={{52,-6},{68,-22}})));
+    //DELETE
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolTabsExt
     "Heat port to thermal zone" annotation (Placement(transformation(extent={{-50,86},{-30,106}}),iconTransformation(extent={{-90,86},{-70,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolTabsInt
