@@ -122,42 +122,54 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Threshold temperature below TABS heating is used";
   parameter Modelica.SIunits.Temperature TThresholdCoolerTabs
     "Threshold temperature above TABS cooling is used";
-  parameter Real powerHeatTabs;
-  parameter Real powerCoolTabs;
-  parameter Real hHeatPanel;
-  parameter Real lHeatPanel;
-  parameter Real KRHeatPanel;
-  parameter Modelica.SIunits.Time TNHeatPanel;
-  parameter Real powerHeatPanel;
-  parameter Real hCoolPanel;
-  parameter Real lCoolPanel;
-  parameter Real KRCoolPanel;
-  parameter Modelica.SIunits.Time TNCoolPanel;
-  parameter Real powerCoolPanel;
-  parameter Real hHeatRem;
-  parameter Real lHeatRem;
-  parameter Real KRHeatRem;
-  parameter Modelica.SIunits.Time TNHeatRem;
-  parameter Real powerHeatRem;
-  parameter Real hCoolRem;
-  parameter Real lCoolRem;
-  parameter Real KRCoolRem;
-  parameter Modelica.SIunits.Time TNCoolRem;
-  parameter Real powerCoolRem;
-  parameter Real shareHeatTabsExt;
-  parameter Real shareHeatTabsInt;
-  parameter Real shareHeatPanelExt;
-  parameter Real shareHeatPanelInt;
-  parameter Real shareHeatRadExt;
-  parameter Real shareHeatRadInt;
-  parameter Real shareHeatConv;
-  parameter Real shareCoolTabsExt;
-  parameter Real shareCoolTabsInt;
-  parameter Real shareCoolPanelExt;
-  parameter Real shareCoolPanelInt;
-  parameter Real shareCoolRadExt;
-  parameter Real shareCoolRadInt;
-  parameter Real shareCoolConv;
+  parameter Real powerHeatTabs "Limited power for TABS Heating";
+  parameter Real powerCoolTabs "Limited power for TABS Cooling";
+  parameter Real hHeatPanel "Upper limit panel controller output";
+  parameter Real lHeatPanel "Lower limit panel controller output";
+  parameter Real KRHeatPanel "Gain of the panel controller";
+  parameter Modelica.SIunits.Time TNHeatPanel
+    "Time constant of the panel controller";
+  parameter Real hCoolPanel "Upper limit panel controller output";
+  parameter Real lCoolPanel "Lower limit panel controller output";
+  parameter Real KRCoolPanel "Gain of the panel controller";
+  parameter Modelica.SIunits.Time TNCoolPanel
+    "Time constant of the panel controller";
+  parameter Real hHeatRem "Upper limit radiative and convective controller output";
+  parameter Real lHeatRem "Lower limit radiative and convective controller output";
+  parameter Real KRHeatRem "Gain of the radiative and convective controller";
+  parameter Modelica.SIunits.Time TNHeatRem
+     "Time constant of the radiative and convective controller";
+  parameter Real hCoolRem "Upper limit radiative and convective controller output";
+  parameter Real lCoolRem "Lower limit radiative and convective controller output";
+  parameter Real KRCoolRem "Gain of the radiative and convective controller";
+  parameter Modelica.SIunits.Time TNCoolRem
+    "Time constant of the radiative and convective controller";
+  parameter Real shareHeatTabsExt "Contribution from a system installed in the 
+    core of one or several exterior building components to heating load";
+  parameter Real shareHeatTabsInt "Contribution from a system installed in the 
+    core of one or several interior building components to heating load";
+  parameter Real shareHeatPanelExt "Contribution from any heated surfaces of 
+    one or several exterior building components to heating load";
+  parameter Real shareHeatPanelInt "Contribution from any heated surfaces of 
+    one or several interior building components to heating load";
+  parameter Real shareHeatRadExt "Radiant contribution of one or several 
+    exterior building components to heating load";
+  parameter Real shareHeatRadInt "Radiant contribution of one or several 
+    interior building components to heating load";
+  parameter Real shareHeatConv "Convective contribution to heating load";
+  parameter Real shareCoolTabsExt "Contribution from a system installed in the 
+    core of one or several exterior building components to cooling load";
+  parameter Real shareCoolTabsInt "Contribution from a system installed in the 
+    core of one or several interior building components to cooling load";
+  parameter Real shareCoolPanelExt "Contribution from any cooled surfaces of 
+    one or several exterior building components to cooling load";
+  parameter Real shareCoolPanelInt "Contribution from any cooled surfaces of 
+    one or several interior building components to cooling load";
+  parameter Real shareCoolRadExt "Radiant contribution of one or several 
+    exterior building components to cooling load";
+  parameter Real shareCoolRadInt "Radiant contribution of one or several 
+    interior building components to cooling load";
+  parameter Real shareCoolConv "Convective contribution to cooling load";
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
