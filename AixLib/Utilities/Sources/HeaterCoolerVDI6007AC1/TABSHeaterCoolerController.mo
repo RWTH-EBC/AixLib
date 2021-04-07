@@ -47,10 +47,12 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
     annotation (Placement(transformation(extent={{60,-30},{80,-10}})));
   Modelica.Blocks.Sources.Constant off(k=0)
     annotation (Placement(transformation(extent={{6,-6},{20,8}})));
-  Modelica.Blocks.Sources.Constant heatingPower(k=if not recOrSep then power_Heater_Tabs else zoneParam.heatingPowerTabs)
+  Modelica.Blocks.Sources.Constant heatingPower(k=if not recOrSep then
+        power_Heater_Tabs else zoneParam.powerHeatTabs)
     "Fixed available heating power of TABS"
     annotation (Placement(transformation(extent={{6,38},{20,52}})));
-  Modelica.Blocks.Sources.Constant coolingPower(k=if not recOrSep then power_Cooler_Tabs else zoneParam.coolingPowerTabs)
+  Modelica.Blocks.Sources.Constant coolingPower(k=if not recOrSep then
+        power_Cooler_Tabs else zoneParam.powerCoolTabs)
     "Fixed available cooling power of TABS"
     annotation (Placement(transformation(extent={{6,-46},{20,-32}})));
   Modelica.Blocks.Interfaces.RealOutput tabsHeatingPower "Power for heating"
