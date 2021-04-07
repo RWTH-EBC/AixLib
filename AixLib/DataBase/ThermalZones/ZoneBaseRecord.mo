@@ -1,4 +1,4 @@
-within AixLib.DataBase.ThermalZones;
+﻿within AixLib.DataBase.ThermalZones;
 record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
@@ -118,22 +118,36 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
-
-  parameter Real KRHeatTABS;
-  parameter Real TNHeatTABS;
-  parameter Real powerHeatTABS;
-  parameter Real KRCoolTABS;
-  parameter Real TNCoolTABS;
-  parameter Real powerCoolTABS;
+  parameter Modelica.SIunits.Temperature TThresholdHeaterTabs
+    "Threshold temperature below TABS heating is used";
+  parameter Modelica.SIunits.Temperature TThresholdCoolerTabs
+    "Threshold temperature above TABS cooling is used";
+  parameter Real KRHeatTabs;
+  parameter Real TNHeatTabs;
+  parameter Real powerHeatTabs;
+  parameter Real KRCoolTabs;
+  parameter Real TNCoolTabs;
+  parameter Real powerCoolTabs;
+  parameter Real hHeatPanel;
+  parameter Real lHeatPanel;
   parameter Real KRHeatPanel;
   parameter Real TNHeatPanel;
   parameter Real powerHeatPanel;
+  parameter Real hCoolPanel;
+  parameter Real lCoolPanel;
   parameter Real KRCoolPanel;
   parameter Real TNCoolPanel;
   parameter Real powerCoolPanel;
+  parameter Real hHeatRem;
+  parameter Real lHeatRem;
   parameter Real KRHeatRem;
   parameter Real TNHeatRem;
   parameter Real powerHeatRem;
+  parameter Real hCoolRem;
+  parameter Real lCoolRem;
+  parameter Real KRCoolRem;
+  parameter Real TNCoolRem;
+  parameter Real powerCoolRem;
   parameter Real KRHeatVent;
   parameter Real TNHeatVent;
   parameter Real powerHeatVent;
@@ -153,7 +167,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real shareCoolPanelInt;
   parameter Real shareCoolRadExt;
   parameter Real shareCoolRadInt;
-  parameter Real shareCoolConv);
+  parameter Real shareCoolConv;
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
