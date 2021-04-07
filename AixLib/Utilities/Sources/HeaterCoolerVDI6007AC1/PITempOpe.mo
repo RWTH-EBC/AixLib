@@ -33,8 +33,6 @@ model PITempOpe "PI controller"
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-60,-100})));
-  Modelica.Blocks.Math.Gain power(k = p)
-    annotation (Placement(transformation(extent={{58,-8},{74,8}})));
 equation
   connect(onOff, switch2.u2) annotation(Line(points={{-100,-60},{-78,-60},{-78,-18},
           {-26,-18},{-26,0},{16,0}},                                                                                                                color = {255, 0, 255}));
@@ -59,10 +57,8 @@ equation
     annotation (Line(points={{-60,-100},{-60,-48},{-72,-48},{-72,26},{-66,26}},
                                                             color={0,0,127}));
   connect(y, y) annotation (Line(points={{100,0},{100,0}}, color={0,0,127}));
-  connect(switch2.y, power.u)
-    annotation (Line(points={{39,0},{56.4,0}}, color={0,0,127}));
-  connect(power.y, y)
-    annotation (Line(points={{74.8,0},{100,0}}, color={0,0,127}));
+  connect(switch2.y, y)
+    annotation (Line(points={{39,0},{100,0}}, color={0,0,127}));
   annotation (Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
