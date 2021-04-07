@@ -244,8 +244,7 @@ model HeaterCoolerWithTabs6007C1
     l=if not recOrSep then l_heater_Rem else zoneParam.lHeatRem,
     KR=if not recOrSep then KR_heater_Rem else zoneParam.KRHeatRem,
     TN=if not recOrSep then TN_heater_Rem else zoneParam.TNHeatRem) if
-                                                                ((recOrSep and
-    zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+      ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "PI controller for radiative and convective heating system"
     annotation (Placement(transformation(extent={{52,6},{68,22}})));
     //DELETE
@@ -288,76 +287,90 @@ model HeaterCoolerWithTabs6007C1
     "Heat port to thermal zone" annotation (Placement(transformation(extent={{70,86},{90,106}}),iconTransformation(extent={{60,86},{80,106}})));
 
  // Anteile der Wärmeströme
-  Modelica.Blocks.Math.Gain gainHTabsExt(k=if not recOrSep then share_Heater_TabsExt else zoneParam.shareHeatTabsExt) annotation (
+  Modelica.Blocks.Math.Gain gainHTabsExt(k=if not recOrSep then share_Heater_TabsExt else zoneParam.shareHeatTabsExt) if
+       ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={-40,44})));
-  Modelica.Blocks.Math.Gain gainHTabsInt(k=if not recOrSep then share_Heater_TabsInt else zoneParam.shareHeatTabsInt) annotation (
+  Modelica.Blocks.Math.Gain gainHTabsInt(k=if not recOrSep then share_Heater_TabsInt else zoneParam.shareHeatTabsInt) if
+       ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={-20,44})));
-  Modelica.Blocks.Math.Gain gainHPanelExt(k=if not recOrSep then share_Heater_PanelExt else zoneParam.shareHeatPanelExt) annotation (
+  Modelica.Blocks.Math.Gain gainHPanelExt(k=if not recOrSep then share_Heater_PanelExt else zoneParam.shareHeatPanelExt) if
+       ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={0,44})));
-  Modelica.Blocks.Math.Gain gainHPanelInt(k=if not recOrSep then share_Heater_PanelInt else zoneParam.shareHeatPanelInt) annotation (
+  Modelica.Blocks.Math.Gain gainHPanelInt(k=if not recOrSep then share_Heater_PanelInt else zoneParam.shareHeatPanelInt) if
+       ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={20,44})));
-  Modelica.Blocks.Math.Gain gainHRadExt(k=if not recOrSep then share_Heater_RadExt else zoneParam.shareHeatRadExt) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain gainHRadExt(k=if not recOrSep then share_Heater_RadExt else zoneParam.shareHeatRadExt) if
+       ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={40,44})));
-  Modelica.Blocks.Math.Gain gainHRadInt(k=if not recOrSep then share_Heater_RadInt else zoneParam.shareHeatRadInt) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain gainHRadInt(k=if not recOrSep then share_Heater_RadInt else zoneParam.shareHeatRadInt) if
+       ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={60,44})));
-  Modelica.Blocks.Math.Gain gainHConv(k=if not recOrSep then share_Heater_Conv else zoneParam.shareHeatConv) annotation (Placement(transformation(
+  Modelica.Blocks.Math.Gain gainHConv(k=if not recOrSep then share_Heater_Conv else zoneParam.shareHeatConv) if
+       ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={80,44})));
-  Modelica.Blocks.Math.Gain gainCTabsExt(k=if not recOrSep then share_Cooler_TabsExt else zoneParam.shareCoolTabsExt) annotation (
+  Modelica.Blocks.Math.Gain gainCTabsExt(k=if not recOrSep then share_Cooler_TabsExt else zoneParam.shareCoolTabsExt) if
+       ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={-40,-42})));
-  Modelica.Blocks.Math.Gain gainCTabsInt(k=if not recOrSep then share_Cooler_TabsInt else zoneParam.shareCoolTabsInt) annotation (
+  Modelica.Blocks.Math.Gain gainCTabsInt(k=if not recOrSep then share_Cooler_TabsInt else zoneParam.shareCoolTabsInt) if
+       ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={-20,-42})));
-  Modelica.Blocks.Math.Gain gainCPanelExt(k=if not recOrSep then share_Cooler_PanelExt else zoneParam.shareCoolPanelExt) annotation (
+  Modelica.Blocks.Math.Gain gainCPanelExt(k=if not recOrSep then share_Cooler_PanelExt else zoneParam.shareCoolPanelExt) if
+       ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={0,-42})));
-  Modelica.Blocks.Math.Gain gainCPanelInt(k=if not recOrSep then share_Cooler_PanelInt else zoneParam.shareCoolPanelInt) annotation (
+  Modelica.Blocks.Math.Gain gainCPanelInt(k=if not recOrSep then share_Cooler_PanelInt else zoneParam.shareCoolPanelInt) if
+       ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={20,-42})));
-  Modelica.Blocks.Math.Gain gainCRadExt(k=if not recOrSep then share_Cooler_RadExt else zoneParam.shareCoolRadExt) annotation (
+  Modelica.Blocks.Math.Gain gainCRadExt(k=if not recOrSep then share_Cooler_RadExt else zoneParam.shareCoolRadExt) if
+       ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={40,-42})));
-  Modelica.Blocks.Math.Gain gainCRadInt(k=if not recOrSep then share_Cooler_RadInt else zoneParam.shareCoolRadInt) annotation (
+  Modelica.Blocks.Math.Gain gainCRadInt(k=if not recOrSep then share_Cooler_RadInt else zoneParam.shareCoolRadInt) if
+       ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (
       Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={60,-42})));
-  Modelica.Blocks.Math.Gain gainCConv(k=if not recOrSep then share_Cooler_Conv else zoneParam.shareCoolConv) annotation (Placement(
+  Modelica.Blocks.Math.Gain gainCConv(k=if not recOrSep then share_Cooler_Conv else zoneParam.shareCoolConv) if
+       ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (Placement(
         transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
         origin={80,-42})));
 
-  Modelica.Blocks.Math.Sum sumHeating(nin=3) annotation (Placement(transformation(extent={{122,24},{134,36}})));
-  Modelica.Blocks.Math.Sum sumCooling(nin=3) annotation (Placement(transformation(extent={{122,-36},{134,-24}})));
+  Modelica.Blocks.Math.Sum sumHeating(nin=2) annotation (Placement(transformation(extent={{122,24},{134,36}})));
+  Modelica.Blocks.Math.Sum sumCooling(nin=2) annotation (Placement(transformation(extent={{122,-36},{134,-24}})));
 
   // TABS Controller
 
@@ -491,20 +504,20 @@ equation
   connect(pITempCoolRem.y, gainCConv.u) annotation (Line(points={{68,-14},{80,-14},{80,-37.2}}, color={0,0,127}));
 
   connect(pITempHeatPanel.y, sumHeating.u[2]) annotation (Line(
-      points={{18,14},{112,14},{112,30},{120.8,30}},
+      points={{18,14},{112,14},{112,30.6},{120.8,30.6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(pITempHeatRem.y, sumHeating.u[3]) annotation (Line(
-      points={{68,14},{112,14},{112,30.8},{120.8,30.8}},
+  connect(pITempHeatRem.y, sumHeating.u[1]) annotation (Line(
+      points={{68,14},{112,14},{112,29.4},{120.8,29.4}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sumHeating.y, heatingPower) annotation (Line(points={{134.6,30},{160,30}}, color={0,0,127}));
   connect(pITempCoolPanel.y, sumCooling.u[2]) annotation (Line(
-      points={{18,-14},{112,-14},{112,-30},{120.8,-30}},
+      points={{18,-14},{112,-14},{112,-29.4},{120.8,-29.4}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(pITempCoolRem.y, sumCooling.u[3]) annotation (Line(
-      points={{68,-14},{112,-14},{112,-29.2},{120.8,-29.2}},
+  connect(pITempCoolRem.y, sumCooling.u[1]) annotation (Line(
+      points={{68,-14},{112,-14},{112,-30.6},{120.8,-30.6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sumCooling.y, coolingPower)
