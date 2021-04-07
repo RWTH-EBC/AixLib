@@ -369,8 +369,10 @@ model HeaterCoolerWithTabs6007C1
         rotation=90,
         origin={80,-42})));
 
-  Modelica.Blocks.Math.Sum sumHeating(nin=2) annotation (Placement(transformation(extent={{122,24},{134,36}})));
-  Modelica.Blocks.Math.Sum sumCooling(nin=2) annotation (Placement(transformation(extent={{122,-36},{134,-24}})));
+  Modelica.Blocks.Math.Sum sumHeating(nin=2) if
+       ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on)) annotation (Placement(transformation(extent={{122,24},{134,36}})));
+  Modelica.Blocks.Math.Sum sumCooling(nin=2) if
+       ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on)) annotation (Placement(transformation(extent={{122,-36},{134,-24}})));
 
   // TABS Controller
 
