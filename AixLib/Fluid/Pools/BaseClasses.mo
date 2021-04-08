@@ -123,86 +123,91 @@ package BaseClasses "Base classes for Swimming Pool Models"
 
     Modelica.Thermal.HeatTransfer.Components.Convection convExt if AExt > 0
       "Convection between Water and pool wall"
-      annotation (Placement(transformation(extent={{-28,30},{-42,44}})));
+      annotation (Placement(transformation(extent={{-26,24},{-42,40}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall extWalRC(
       final RExt=RExt,
       final RExtRem=RExtRem,
       final CExt=CExt,
       final n=nExt,
       T_start=T_start) if AExt > 0 "Pool walls with earth contact"
-      annotation (Placement(transformation(extent={{-2,32},{12,46}})));
+      annotation (Placement(transformation(extent={{0,26},{18,42}})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
       prescribedTemperature1 if AFloor > 0 or AExt > 0
       "Generate Heat Flow for earth contact"
                              annotation (Placement(transformation(
           extent={{-6,-6},{6,6}},
           rotation=180,
-          origin={36,-2})));
+          origin={48,18})));
 
     Modelica.Blocks.Sources.Constant const_hConExt(k=hConExt) if AExt > 0
       "heat transfer coefficient between vertikal pool wall and water"
-      annotation (Placement(transformation(extent={{-20,52},{-30,62}})));
+      annotation (Placement(transformation(extent={{-8,40},{-24,56}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_a if AExt > 0
        or AInt > 0 or AFloor > 0
       "Inlet for heattransfer"
       annotation (Placement(transformation(extent={{-110,-8},{-90,12}})));
     Modelica.Blocks.Interfaces.RealInput TSoil if AFloor > 0 or AExt > 0
                                                "Temperature of Soil"
-      annotation (Placement(transformation(extent={{126,16},{86,56}})));
+      annotation (Placement(transformation(extent={{126,-2},{86,38}}),
+          iconTransformation(extent={{126,16},{86,56}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall floorRC(
       final RExt=RFloor,
       final RExtRem=RFloorRem,
       final CExt=CFloor,
       final n=nFloor,
       T_start=T_start) if AFloor > 0 "Floor of Swimming Poolwith earth contact"
-      annotation (Placement(transformation(extent={{-2,-30},{12,-16}})));
+      annotation (Placement(transformation(extent={{0,-16},{18,0}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.InteriorWall intWalRC(
       final n=nInt,
       final RInt=RInt,
       final CInt=CInt,
       final T_start=T_start) if AInt > 0
       "RC element representing interior pool walls, horizontal and vertical"
-      annotation (Placement(transformation(extent={{-2,-82},{12,-66}})));
+      annotation (Placement(transformation(extent={{0,-58},{16,-40}})));
     Modelica.Thermal.HeatTransfer.Components.Convection convFloor if AFloor > 0
       "Convection between Water and pool floor"
-      annotation (Placement(transformation(extent={{-28,-28},{-42,-14}})));
+      annotation (Placement(transformation(extent={{-24,-20},{-42,-2}})));
     Modelica.Blocks.Sources.Constant const_hConFloor(k=hConFloor) if AFloor > 0
       "Heat transfer coefficient between pool floor and water"
-      annotation (Placement(transformation(extent={{-22,2},{-32,12}})));
+      annotation (Placement(transformation(extent={{-4,0},{-20,16}})));
     Modelica.Thermal.HeatTransfer.Components.Convection convInt if AInt > 0
       "Convection between water and interior pool walls"
-      annotation (Placement(transformation(extent={{-28,-82},{-42,-68}})));
+      annotation (Placement(transformation(extent={{-24,-58},{-42,-40}})));
     Modelica.Blocks.Sources.Constant const_hConInt(k=hConInt) if AInt > 0
       "Heat transfer coefficient between interior pool wall and water"
-      annotation (Placement(transformation(extent={{-24,-52},{-34,-42}})));
+      annotation (Placement(transformation(extent={{-6,-44},{-22,-28}})));
   equation
     connect(extWalRC.port_a, convExt.solid)
-      annotation (Line(points={{-2,38.3636},{-2,37},{-28,37}}, color={191,0,0}));
-    connect(extWalRC.port_b,prescribedTemperature1. port) annotation (Line(points={{12,
-            38.3636},{30,38.3636},{30,-2}},     color={191,0,0}));
+      annotation (Line(points={{0,33.2727},{0,32},{-26,32}},   color={191,0,0}));
+    connect(extWalRC.port_b,prescribedTemperature1. port) annotation (Line(points={{18,
+            33.2727},{38,33.2727},{38,18},{42,18}},
+                                                color={191,0,0}));
     connect(const_hConExt.y, convExt.Gc)
-      annotation (Line(points={{-30.5,57},{-35,57},{-35,44}}, color={0,0,127}));
-    connect(convExt.fluid, heatport_a) annotation (Line(points={{-42,37},{-64,37},
-            {-64,2},{-100,2}}, color={191,0,0}));
-    connect(prescribedTemperature1.port, floorRC.port_b) annotation (Line(points={{30,-2},
-            {30,-24},{12,-24},{12,-23.6364}},                               color=
+      annotation (Line(points={{-24.8,48},{-34,48},{-34,40}}, color={0,0,127}));
+    connect(convExt.fluid, heatport_a) annotation (Line(points={{-42,32},{-68,
+            32},{-68,2},{-100,2}},
+                               color={191,0,0}));
+    connect(prescribedTemperature1.port, floorRC.port_b) annotation (Line(points={{42,18},
+            {38,18},{38,-10},{18,-10},{18,-8.72727}},                       color=
            {191,0,0}));
-    connect(prescribedTemperature1.T, TSoil) annotation (Line(points={{43.2,-2},{62,
-            -2},{62,36},{106,36}},color={0,0,127}));
+    connect(prescribedTemperature1.T, TSoil) annotation (Line(points={{55.2,18},
+            {106,18}},            color={0,0,127}));
     connect(const_hConFloor.y, convFloor.Gc)
-      annotation (Line(points={{-32.5,7},{-35,7},{-35,-14}}, color={0,0,127}));
-    connect(convFloor.solid, floorRC.port_a) annotation (Line(points={{-28,-21},
-            {-24,-21},{-24,-23.6364},{-2,-23.6364}},
+      annotation (Line(points={{-20.8,8},{-33,8},{-33,-2}},  color={0,0,127}));
+    connect(convFloor.solid, floorRC.port_a) annotation (Line(points={{-24,-11},
+            {-24,-8.72727},{0,-8.72727}},       color={191,0,0}));
+    connect(const_hConInt.y, convInt.Gc) annotation (Line(points={{-22.8,-36},{
+            -32,-36},{-32,-40},{-33,-40}},
+                             color={0,0,127}));
+    connect(convInt.solid, intWalRC.port_a) annotation (Line(points={{-24,-49},
+            {-23,-49},{-23,-49.8182},{0,-49.8182}},
                                                 color={191,0,0}));
-    connect(const_hConInt.y, convInt.Gc) annotation (Line(points={{-34.5,-47},{-35,
-            -47},{-35,-68}}, color={0,0,127}));
-    connect(convInt.solid, intWalRC.port_a) annotation (Line(points={{-28,-75},
-            {-25,-75},{-25,-74.7273},{-2,-74.7273}},
-                                                color={191,0,0}));
-    connect(convInt.fluid, heatport_a) annotation (Line(points={{-42,-75},{-70,-75},
-            {-70,2},{-100,2}}, color={191,0,0}));
-    connect(convFloor.fluid, heatport_a) annotation (Line(points={{-42,-21},{-68,-21},
-            {-68,2},{-100,2}}, color={191,0,0}));
+    connect(convInt.fluid, heatport_a) annotation (Line(points={{-42,-49},{-68,
+            -49},{-68,2},{-100,2}},
+                               color={191,0,0}));
+    connect(convFloor.fluid, heatport_a) annotation (Line(points={{-42,-11},{
+            -68,-11},{-68,2},{-100,2}},
+                               color={191,0,0}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
             extent={{-80,58},{28,-26}},
@@ -834,6 +839,7 @@ end if;
     Sensors.MassFlowRate senMasFlo( redeclare package  Medium = Medium)
       annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
     Controls.Continuous.LimPID PI(
+      controllerType=Modelica.Blocks.Types.SimpleController.PI,
       k=0.1,
       Ti=5,
       yMax=m_flow_nominal/0.9,
@@ -928,11 +934,10 @@ end if;
     Modelica.Blocks.Math.RealToBoolean useWavePool(threshold=1)
       "If input = 1, then true, else no waves generated"
       annotation (Placement(transformation(extent={{-10,26},{8,44}})));
-    Modelica.Blocks.Tables.CombiTable1D p_wave(
-      y(
-      unit = "W/m"),
+    Modelica.Blocks.Tables.CombiTable1D tablePWave(
+      y(unit="W/m"),
       tableOnFile=false,
-      table=[0.7,3500; 0.9,6000; 1.3,12000],
+      table=[0,0; 0.7,3500; 0.9,6000; 1.3,12000],
       extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
       "Estimate consumed power per width to generate wave of a certain heigth; "
       annotation (Placement(transformation(extent={{-42,-12},{-16,14}})));
@@ -954,10 +959,10 @@ end if;
     Modelica.Blocks.Logical.Switch switchWaveMachine
       annotation (Placement(transformation(extent={{66,8},{86,28}})));
   equation
-    connect(get_h_wave.y, p_wave.u[1]) annotation (Line(points={{-63,2},{-50,2},{-50,
-            1},{-44.6,1}}, color={0,0,127}));
-    connect(multiply.u, p_wave.y[1]) annotation (Line(points={{-2,2},{-12,2},{-12,1},
-            {-14.7,1}}, color={0,0,127}));
+    connect(get_h_wave.y, tablePWave.u[1]) annotation (Line(points={{-63,2},{-50,
+            2},{-50,1},{-44.6,1}}, color={0,0,127}));
+    connect(multiply.u, tablePWave.y[1]) annotation (Line(points={{-2,2},{-12,2},
+            {-12,1},{-14.7,1}}, color={0,0,127}));
     connect(wavePool, useWavePool.u) annotation (Line(points={{-108,40},{-60,40},{-60,
             35},{-11.8,35}}, color={0,0,127}));
     connect(useWavePool.y, use_wavePool) annotation (Line(points={{8.9,35},{54.45,35},
@@ -1030,8 +1035,6 @@ end if;
       annotation (Placement(transformation(extent={{-122,-36},{-82,4}})));
     ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum
       annotation (Placement(transformation(extent={{-62,-22},{-42,-2}})));
-    Modelica.Blocks.Sources.Constant refAhu(k=1)
-      annotation (Placement(transformation(extent={{-4,-82},{8,-70}})));
   equation
     connect(conPID.y, gain.u)
       annotation (Line(points={{-29,28},{4,28},{4,30},{6,30}},
@@ -1050,8 +1053,8 @@ end if;
             {-84,-17.6},{-64,-17.6}}, color={0,0,127}));
     connect(absToRelHum.relHum, conPID.u_m)
       annotation (Line(points={{-40,-12},{-40,16}}, color={0,0,127}));
-    connect(refAhu.y, AHUProfile[4]) annotation (Line(points={{8.6,-76},{54,-76},
-            {54,7.5},{104,7.5}}, color={0,0,127}));
+    connect(gain.y, AHUProfile[4]) annotation (Line(points={{29,30},{62,30},{62,
+            7.5},{104,7.5}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end AHUcontrol;

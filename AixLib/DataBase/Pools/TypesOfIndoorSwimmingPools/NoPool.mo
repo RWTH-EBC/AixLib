@@ -1,7 +1,7 @@
 within AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools;
 record NoPool
   "This Record is a place holder for zones without pools, to avoid error messages"
-  extends IndoorSwimmingPoolBaseRecord(d_pool=0.001,
+  extends IndoorSwimmingPoolBaseRecord(V_pool=0.001,
   A_pool=0.001,
   V_storage=0.01,
   T_pool=273.15,

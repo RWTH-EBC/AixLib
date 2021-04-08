@@ -407,9 +407,10 @@ public
    final parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]= zoneParam.poolParam[:]
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = use_swimmingPools));
 
-  Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](final poolParam=poolParam) if (ATot
-     > 0) and use_swimmingPools         annotation (Placement(transformation(extent={{-68,-86},
-            {-52,-72}})));
+  Fluid.Pools.IndoorSwimmingPool3 indoorSwimmingPool[numPools](final poolParam=
+       poolParam) if                                                                        (ATot
+     > 0) and use_swimmingPools
+    annotation (Placement(transformation(extent={{-68,-86},{-52,-72}})));
 
   Modelica.Blocks.Interfaces.RealOutput PPoolPump(final quantity="Power",
       final unit="W") if use_swimmingPools and  ATot > 0 "Power for Pumps" annotation (Placement(
@@ -515,8 +516,8 @@ equation
       connect(indoorSwimmingPool[i].openingHours, openingHours) annotation (
           Line(points={{-68.4,-72.91},{-78,-72.91},{-78,-96},{-14,-96},{-14,-99},
               {49,-99}}, color={0,0,127}));
-      connect(wavePool, indoorSwimmingPool[i].wavePool) annotation (Line(points=
-             {{33,-99},{-74,-99},{-74,-75.85},{-68.4,-75.85}}, color={0,0,127}));
+      connect(wavePool, indoorSwimmingPool[i].wavePool) annotation (Line(points={{33,-99},
+              {-74,-99},{-74,-75.15},{-68.4,-75.15}},          color={0,0,127}));
       connect(indoorSwimmingPool[i].TPool, ROM.T[i+1]) annotation (Line(points={{-51.36,-72.98},
               {-51.36,-58},{-54,-58},{-54,-42},{30,-42},{30,64},{37.2,64},{37.2,64.4}},
                                         color={0,0,
