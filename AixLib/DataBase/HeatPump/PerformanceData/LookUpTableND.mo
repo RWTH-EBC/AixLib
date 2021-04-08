@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
   parameter Real nConv=100
@@ -117,6 +117,25 @@ model LookUpTableND "N-dimensional table with data for heat pump"
         extent={{-5,-5},{5,5}},
         rotation=-90,
         origin={47,-13})));
+  Modelica.Blocks.Math.Min min1
+    annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=270,
+        origin={61,-33})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=622000) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-86,-8})));
+  Modelica.Blocks.Math.Min min2
+    annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=270,
+        origin={-71,-31})));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=300000)
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={84,0})));
 protected
   Modelica.Blocks.Sources.Constant realCorr(final k=scalingFactor)
     "Calculates correction of table output based on scaling factor"
@@ -194,14 +213,18 @@ equation
           {-3,0},{-38,0},{-38,-5}}, color={0,0,127}));
   connect(nDTableQCon.y, scalingFacTimesQCon.u2) annotation (Line(points={{-46,
           2.8},{-46,2},{-44,2},{-44,-5}}, color={0,0,127}));
-  connect(scalingFacTimesQCon.y, switchQCon.u1) annotation (Line(points={{-41,
-          -16.5},{-41,-30.25},{-42,-30.25},{-42,-44}}, color={0,0,127}));
   connect(realCorr.y, scalingFacTimesPel.u2) annotation (Line(points={{-3,9.5},
           {-3,0},{44,0},{44,-7}}, color={0,0,127}));
   connect(nDTablePel.y, scalingFacTimesPel.u1)
     annotation (Line(points={{50,0.8},{50,-7}}, color={0,0,127}));
-  connect(scalingFacTimesPel.y, switchPel.u1) annotation (Line(points={{47,
-          -18.5},{60,-18.5},{60,-48},{58,-48}}, color={0,0,127}));
+  connect(scalingFacTimesPel.y, min1.u2)
+    annotation (Line(points={{47,-18.5},{52.5,-18.5},{52.5,-27},{58,-27}}, color={0,0,127}));
+  connect(min1.y, switchPel.u1)
+    annotation (Line(points={{61,-38.5},{61,-43.25},{58,-43.25},{58,-48}}, color={0,0,127}));
+  connect(scalingFacTimesQCon.y, min2.u1) annotation (Line(points={{-41,-16.5},{-41,-25},{-68,-25}}, color={0,0,127}));
+  connect(realExpression.y, min2.u2) annotation (Line(points={{-86,-19},{-86,-25},{-74,-25}}, color={0,0,127}));
+  connect(min2.y, switchQCon.u1) annotation (Line(points={{-71,-36.5},{-42,-36.5},{-42,-44}}, color={0,0,127}));
+  connect(realExpression1.y, min1.u1) annotation (Line(points={{84,-11},{84,-27},{64,-27}}, color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),
