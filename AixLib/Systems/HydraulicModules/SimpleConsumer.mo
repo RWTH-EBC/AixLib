@@ -45,12 +45,6 @@ model SimpleConsumer "Simple Consumer"
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={0,10})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
-                          T(start=T_start, fixed=true), C=capacity)
-    annotation (Placement(transformation(
-        origin={44,40},
-        extent={{-10,10},{10,-10}},
-        rotation=90)));
   Modelica.Thermal.HeatTransfer.Components.Convection convection if
     functionality == "T_input" or functionality == "T_fixed"
     annotation (Placement(transformation(
@@ -122,7 +116,7 @@ model SimpleConsumer "Simple Consumer"
     k=k_ControlConsumerPump,
     Ti=Ti_ControlConsumerPump,
     yMax=1,
-    yMin=0.15,
+    yMin=0.05,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=0.5)
                annotation (Placement(transformation(
@@ -197,11 +191,6 @@ equation
     Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (T_returnSet + dT_maxNominalReturn - senTemFlow.T));
   end if;
 
-  connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
-          {10,40},{34,40}},               color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(heatCapacitor.port,convection. solid) annotation (Line(points={{34,40},
-          {10,40},{10,60}},              color={191,0,0}));
   connect(convection.fluid,prescribedTemperature. port)
     annotation (Line(points={{10,80},{30,80}},   color={191,0,0},
       pattern=LinePattern.Dash));
@@ -213,9 +202,6 @@ equation
       pattern=LinePattern.Dash));
   connect(prescribedTemperature.T, T)
     annotation (Line(points={{52,80},{60,80},{60,120}}, color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(prescribedHeatFlow.port, heatCapacitor.port)
-    annotation (Line(points={{-2,40},{34,40}},           color={191,0,0},
       pattern=LinePattern.Dash));
   connect(volume.ports[1], pump.port_b)
     annotation (Line(points={{2,0},{-20,0}},  color={0,127,255}));
@@ -258,6 +244,8 @@ equation
         points={{-103,30},{-94,30},{-94,33.6},{-85.6,33.6}}, color={0,0,127}));
   connect(variableLimiter.y, Q_flowReal) annotation (Line(points={{-67.2,40},{
           -58,40},{-58,46},{118,46}}, color={0,0,127}));
+  connect(prescribedHeatFlow.port, volume.heatPort)
+    annotation (Line(points={{-2,40},{18,40},{18,10},{10,10}}, color={191,0,0}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
