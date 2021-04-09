@@ -407,8 +407,8 @@ public
    final parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]= zoneParam.poolParam[:]
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = use_swimmingPools));
 
-  Fluid.Pools.IndoorSwimmingPool3 indoorSwimmingPool[numPools](final poolParam=
-       poolParam) if                                                                        (ATot
+  Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](final poolParam=
+        poolParam) if                                                                       (ATot
      > 0) and use_swimmingPools
     annotation (Placement(transformation(extent={{-68,-86},{-52,-72}})));
 

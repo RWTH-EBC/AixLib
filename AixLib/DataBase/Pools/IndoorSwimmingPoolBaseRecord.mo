@@ -7,8 +7,8 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.Volume V_pool "Usable Volume of pool water";
   parameter Modelica.SIunits.Area A_pool( min=0)
                                                 "Area of water surface of swimming pool";
-  //parameter Modelica.SIunits.Length d_pool( min=0)
-   //                                               "Depth of swimming pool";
+  parameter Modelica.SIunits.Length d_pool( min=0)
+                                             "Depth of swimming pool";
   parameter Modelica.SIunits.VolumeFlowRate Q(min= 0.001) "Volume Flow Rate";
 
   parameter Real beta_inUse( final unit="m/s") "Water transfer coefficient during opening hours";

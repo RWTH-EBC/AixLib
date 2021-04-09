@@ -1,6 +1,6 @@
 within AixLib.Fluid.Pools;
 model Example
-  IndoorSwimmingPool indoorSwimmingPool(poolParam=
+  IndoorSwimmingPool_preQ indoorSwimmingPool(poolParam=
         DataBase.Pools.TypesOfIndoorSwimmingPools.ChildrensPool())
     annotation (Placement(transformation(extent={{-28,-28},{34,28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableOpeningHours(
