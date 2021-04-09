@@ -6,13 +6,10 @@ model PITempOpe "PI controller"
         origin={-80,90},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  parameter Boolean powerLimitOrUnlimited = false "true if power limited or false if only temperature set point is used" annotation(choices(choice =  false
-        "Unlimited",choice = true "System has a limited power output",radioButtons = true));
-  parameter Real h = 1 "upper limit controller output" annotation(Dialog(group = "Control"));
+    parameter Real h = 1 "upper limit controller output" annotation(Dialog(group = "Control"));
   parameter Real l = 0 "lower limit of controller output" annotation(Dialog(group = "Control"));
   parameter Real KR = 1 "Gain" annotation(Dialog(group = "Control"));
   parameter Modelica.SIunits.Time TN = 1 "Time Constant (T>0 required)" annotation(Dialog(group = "Control"));
-  parameter Real p = 0 "Power" annotation(Dialog(group = "Control"));
   Modelica.Blocks.Interfaces.RealOutput y annotation(Placement(transformation(extent={{90,-10},
             {110,10}}),                                                                                         iconTransformation(extent={{90,-10},
             {110,10}})));
