@@ -2,7 +2,7 @@
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
   extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizoneSwimmingPool;
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizoneSP;
 
   parameter Boolean heatAHU
     "Status of heating of AHU"

@@ -199,15 +199,15 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
     "Trace substance mass flow rate added to the thermal zone"
     annotation (Placement(transformation(extent={{-280,70},{-240,110}}), iconTransformation(extent={{-260,90},{-240,110}})));
 
-  Modelica.Blocks.Math.Sum      SumQLat(final nin=nu) if  use_moisture_balance and
+  Modelica.Blocks.Math.Sum      sumQLat(final nin=nu) if  use_moisture_balance and
     ATot > 0                                   "Sum of all QLat intakes"
     annotation (Placement(transformation(extent={{-224,-126},{-212,-114}})));
   Fluid.Pools.BaseClasses.toH_fg toH_fg(nu=nu) if use_moisture_balance and ATot > 0
     "Calculation of specific evaporation enthalpy of the different QLat sources"
     annotation (Placement(transformation(extent={{-222,-102},{-210,-90}})));
 
-  Modelica.Blocks.Math.Sum      SumMflow(nin=nu) if use_moisture_balance and
-    ATot > 0                                    "Sum of different m flow"
+  Modelica.Blocks.Math.Sum sumM_flow(nin=nu) if     use_moisture_balance and
+    ATot > 0 "Sum of different m flow"
     annotation (Placement(transformation(extent={{-182,-100},{-170,-88}})));
   Fluid.Pools.BaseClasses.DivisionMI2MO
                             divisionMI2MO(n=nu) if use_moisture_balance and
@@ -220,14 +220,12 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
     annotation (Placement(transformation(extent={{-264,-112},{-232,-80}})));
   Modelica.Blocks.Interfaces.RealInput QLat_flow[nu](final unit="W", final
       quantity="HeatFlowRate") if use_moisture_balance and
-    ATot > 0
-    "Input of QLat of different moisture sources in the zone"
+    ATot > 0 "Input of QLat of different moisture sources in the zone"
     annotation (Placement(transformation(extent={{-266,-160},{-234,-128}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
-    use_moisture_balance and ATot >0
-    "Converter for latent heat flow rate"
-    annotation (Placement(transformation(extent={{-194,-126},{-174,-106}})));
+    use_moisture_balance and ATot >0 "Converter for latent heat flow rate"
+    annotation (Placement(transformation(extent={{-192,-126},{-172,-106}})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
@@ -410,12 +408,12 @@ equation
     annotation (Line(points={{100,0},{108,0},{108,160},{250,160}},
     color={0,0,127}));
   connect(convWin.solid, windowIndoorSurface)
-    annotation (Line(points={{-116,40},{-130,40},{-130,-10},{-212,-10},{-212,
-    -146},{-200,-146},{-200,-180}},
+    annotation (Line(points={{-116,40},{-130,40},{-130,-166},{-200,-166},{-200,
+          -180}},
     color={191,0,0}));
   connect(convExtWall.solid, extWallIndoorSurface)
-    annotation (Line(points={{-114,-40},{-134,-40},{-152,-40},{-152,-58},{-208,
-    -58},{-208,-140},{-160,-140},{-160,-180}},
+    annotation (Line(points={{-114,-40},{-152,-40},{-152,-58},{-142,-58},{-142,
+          -162},{-160,-162},{-160,-180}},
     color={191,0,0}));
   connect(senTRad.port, thermSplitterIntGains.portIn[1])
     annotation (
@@ -441,25 +439,23 @@ equation
           {-52,90},{-260,90}}, color={0,0,127}));
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
           90},{-260,90}}, color={0,0,127}));
-  connect(QLat_flow, SumQLat.u) annotation (Line(points={{-250,-144},{-225.2,-144},{-225.2,
-          -120}},             color={0,0,127}));
-  connect(divisionMI2MO.y, SumMflow.u)
-    annotation (Line(points={{-187.5,-94},{-183.2,-94}},
-                                                       color={0,0,127}));
+  connect(QLat_flow, sumQLat.u) annotation (Line(points={{-250,-144},{-225.2,-144},
+          {-225.2,-120}}, color={0,0,127}));
+  connect(divisionMI2MO.y, sumM_flow.u)
+    annotation (Line(points={{-187.5,-94},{-183.2,-94}}, color={0,0,127}));
   connect(T, toH_fg.u) annotation (Line(points={{-248,-96},{-226,-96},{-226,-96.12},{-222.12,
           -96.12}},                  color={0,0,127}));
   connect(toH_fg.y, divisionMI2MO.u2) annotation (Line(points={{-209.88,-96.12},{-204,-96.12},{-204,
           -96},{-202,-96},{-202,-97.6},{-199,-97.6}},                     color=
          {0,0,127}));
-  connect(QLat_flow, divisionMI2MO.u1) annotation (Line(points={{-250,-144},
-          {-230,-144},{-230,-86},{-214,-86},{-214,-90.4},{-199,-90.4}}, color={0,
-          0,127}));
-  connect(SumMflow.y, volMoiAir.mWat_flow) annotation (Line(points={{-169.4,-94},{-136.49,-94},
-          {-136.49,-8},{-22,-8}},               color={0,0,127}));
-  connect(SumQLat.y, conQLat_flow.Q_flow)
-    annotation (Line(points={{-211.4,-120},{-206,-120},{-206,-116},{-194,-116}},
-                                                          color={0,0,127}));
-  connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-174,
+  connect(QLat_flow, divisionMI2MO.u1) annotation (Line(points={{-250,-144},{
+          -230,-144},{-230,-86},{-208,-86},{-208,-90},{-204,-90},{-204,-90.4},{
+          -199,-90.4}}, color={0,0,127}));
+  connect(sumM_flow.y, volMoiAir.mWat_flow) annotation (Line(points={{-169.4,-94},
+          {-136.49,-94},{-136.49,-8},{-22,-8}}, color={0,0,127}));
+  connect(sumQLat.y, conQLat_flow.Q_flow) annotation (Line(points={{-211.4,-120},
+          {-206,-120},{-206,-116},{-192,-116}}, color={0,0,127}));
+  connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-172,
           -116},{-44,-116},{-44,-16},{-20,-16}}, color={191,0,0}));
     annotation (Dialog(connectorSizing=true), HideResult=true,
               defaultComponentName="theZon",Diagram(coordinateSystem(
