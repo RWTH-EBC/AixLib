@@ -1,8 +1,7 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model TraceSubstanceConservationSteadyState
   "This test checks if trace substance mass flow rates are conserved when steady state"
-  extends
-    AixLib.Fluid.MixingVolumes.Validation.BaseClasses.TraceSubstanceConservation(
+  extends AixLib.Fluid.MixingVolumes.Validation.BaseClasses.TraceSubstanceConservation(
      sou(X={0,1}));
   Modelica.Blocks.Math.Add cheEquTra2(k2=-1)
     "Check for equality of trace substances"

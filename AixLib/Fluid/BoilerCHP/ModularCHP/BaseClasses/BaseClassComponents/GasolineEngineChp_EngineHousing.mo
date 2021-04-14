@@ -1,11 +1,10 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
+within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 class GasolineEngineChp_EngineHousing
   "Engine housing as a simple two layer wall."
 
   replaceable package Medium3 =
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
-                                                           constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                                           constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   parameter Modelica.SIunits.Thickness dInn=0.005
@@ -276,11 +275,11 @@ equation
   using a bisector in the temperature profile as shown in the following
   figure.
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <br/>
   <span style=\"font-size: 12pt;\"><img src=
   \"modelica://AixLib/Resources/Images/Fluid/BoilerCHP/CylinderWallTemperature.png\"
-  width=\"550\" height=\"375\" alt=\"\" /></span>
+  width=\"550\" height=\"375\" alt=\"\"></span>
 </p>
 </html>"),
          Icon(coordinateSystem(extent={{-100,-100},{100,100}}),

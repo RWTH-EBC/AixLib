@@ -10,19 +10,19 @@ record ideal "Free workload range and fixed efficiency"
 </ul>
 </html>",
       info="<html><h4>
-  <font color=\"#008000\">Overview</font>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Free workload range (0-1) with fixed efficiency of 100%
 </p>
 <h4>
-  <font color=\"#008000\">Level of Development</font>
+  <span style=\"color:#008000\">Level of Development</span>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\" />
+  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\">
 </p>
 <h4>
-  <font color=\"#008000\">References</font>
+  <span style=\"color:#008000\">References</span>
 </h4>
 <p>
   Record is currently not used in any model.

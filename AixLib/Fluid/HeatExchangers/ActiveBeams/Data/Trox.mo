@@ -36,8 +36,6 @@ First implementation.
 Performance data for Trox active beam for cooling mode.
 </p>
 </html>"));
-
-
   record DID632A_nozzleH_length6ft_heating =
       AixLib.Fluid.HeatExchangers.ActiveBeams.Data.Generic (
       dT(
@@ -74,8 +72,6 @@ First implementation.
 Performance data for Trox active beam for heating mode.
 </p>
 </html>"));
-
-
 annotation (Documentation(revisions="", info="<html>
 <p>
 Package with performance data for active beams from Trox.

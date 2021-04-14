@@ -82,36 +82,51 @@ equation
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/CompareFixedResistances.mos"
         "Simulate and plot"),
     __Dymola_experimentSetupOutput,
-    Documentation(info="<html>
-    <p>Compares the mass flow rate of the two pressure loss models 
-    <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> 
-    and <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. 
-    For small pressure differences (up to 800 Pa) the flow rate of 
-    HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. 
-    The difference is lower than 0.1 kg/s.</p>
-    <p>The parameters of the two models are chosen in a way to achieve the same pressure drop. 
-    Results visualize the equation handling near zero.
-    Furthermore, the parameter <code>HR.zeta</code> includes the denominator 8 due to the 
-    calculation of <span style=\" font-family:'Courier New,courier'; color:#0000ff;\">final 
-    </span><span style=\" font-family:'Courier New,courier';\">dp_nominal=8*zeta*...</span>
-    in the model 
-    <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>.</p>
-    <p><br/>
-    Change parameter<code> HR.from_dp </code>to<code> false </code>and the 
-    simulation time will increase by about 25 &#37;. </p>
-    <p>Choosing this parameter depending whether you are using a mass flow source 
-    or a pressure source might improve the stability of the simulation. </p>
-    <p>Using a mass flow source and<code> HR.from_dp = false </code>shows similiar 
-    simulation speed as with  <code>HR.from_dp = true</code>.</p>
-</html>", revisions="<html>
-  <ul>
-  <li><i>April 27, 2017&nbsp;</i>
-     by Philipp Mehrfeld:<br/>
-     Test incl. reversal mass flow.</li>
-  <li><i>April 2016&nbsp;</i>
-     by Peter Matthes:<br/>
-     Example after improved formulation of flow equation according to 
-     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/232\">issue #232</a>.</li>
-  </ul>
- </html>"));
+    Documentation(info="<html><p>
+  Compares the mass flow rate of the two pressure loss models <a href=
+  \"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>
+  and <a href=
+  \"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>.
+  For small pressure differences (up to 800 Pa) the flow rate of
+  HydraulicResistance will be larger than the flow rate of
+  FixedResistanceDpM. The difference is lower than 0.1 kg/s.
+</p>
+<p>
+  The parameters of the two models are chosen in a way to achieve the
+  same pressure drop. Results visualize the equation handling near
+  zero. Furthermore, the parameter <code>HR.zeta</code> includes the
+  denominator 8 due to the calculation of <span style=
+  \"font-family:'Courier New,courier'; color:#0000ff;\">final</span>
+  <span style=
+  \"font-family:'Courier New,courier';\">dp_nominal=8*zeta*...</span> in
+  the model <a href=
+  \"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>.
+</p>
+<p>
+  <br/>
+  Change parameter <code>HR.from_dp</code> to <code>false</code> and
+  the simulation time will increase by about 25 %.
+</p>
+<p>
+  Choosing this parameter depending whether you are using a mass flow
+  source or a pressure source might improve the stability of the
+  simulation.
+</p>
+<p>
+  Using a mass flow source and <code>HR.from_dp = false</code> shows
+  similiar simulation speed as with <code>HR.from_dp = true</code>.
+</p>
+<ul>
+  <li>
+    <i>April 27, 2017&#160;</i> by Philipp Mehrfeld:<br/>
+    Test incl. reversal mass flow.
+  </li>
+  <li>
+    <i>April 2016&#160;</i> by Peter Matthes:<br/>
+    Example after improved formulation of flow equation according to
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/232\">issue
+    #232</a>.
+  </li>
+</ul>
+</html>"));
 end CompareFixedResistances;

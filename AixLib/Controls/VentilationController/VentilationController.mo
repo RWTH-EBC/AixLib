@@ -2,7 +2,7 @@ within AixLib.Controls.VentilationController;
 model VentilationController
   "transforms occupation and temperature into air exchange rate"
   parameter Boolean useConstantOutput=false
-    "always provide constant ACH (=baseACH)?";
+    "provide constant ACH(=baseACH), false = no user induced infiltration (window opening)";
   parameter Real baseACH=0.2 "baseline air changes per hour"   annotation (Dialog(enable=true));
   parameter Real maxUserACH=1.0 "additional ACH value for max. user activity"   annotation (Dialog(enable=not
                                                                                                 (useConstantOutput)));
@@ -16,7 +16,7 @@ model VentilationController
     "reduction factor of userACH for cold weather." annotation (Dialog(enable=not
                                                                                  (useConstantOutput)));
 
-  Real userACH "additional ACH value for max. user activity";
+  Real userACH "additional ACH value for max. user window opening activity";
   Real dToh "relative overheating";
   Real overheatingACH "additional ACH value when overheating appears";
   Real dTamb "relative summer (0: winter, 1: summer)";
@@ -74,7 +74,7 @@ equation
       maxOverheatingACH[1]) else 0;
 
     dTamb = (dEMA.y[2] - maxSummerACH[2])/(maxSummerACH[3] - maxSummerACH[2])
-      "determin when transition period occurs";
+      "determine when transition period occurs";
     dTmin = (dEMA.y[2] - winterReduction[2])/(winterReduction[3] -
       winterReduction[2]);
     redFac = if dTmin > 0 then min(dTmin*(1 - winterReduction[1]), 1 -
@@ -90,16 +90,16 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(dEMA.y[2], optimalTemp.u[1]) annotation (Line(
-      points={{-39,0.5},{-34.75,0.5},{-34.75,-0.5},{-2,-0.5},{-2,-1}},
+      points={{-39,0},{-34.75,0},{-34.75,-0.5},{-2,-0.5},{-2,0}},
       color={0,0,127},
       smooth=Smooth.None));
 
   connect(dEMA.y[2], Tamb_mean) annotation (Line(
-      points={{-39,0.5},{-16,0.5},{-16,-60},{90,-60}},
+      points={{-39,0},{-16,0},{-16,-60},{90,-60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(optimalTemp.y[3], Top) annotation (Line(
-      points={{21,0.666667},{40,0.666667},{40,60},{90,60}},
+      points={{21,0},{40,0},{40,60},{90,60}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
@@ -141,29 +141,40 @@ equation
           extent={{-4,84},{94,40}},
           lineColor={0,0,255},
           textString="Top")}),
-    Documentation(info="<html>
-<p>Ventilation is determined from 4 effects:</p>
+    Documentation(info="<html><p>
+  Ventilation is determined from 4 effects:
+</p>
 <ol>
-<li>People acitivity: according to the occupancy profile more ventilation will happen, when more people are at home (active).</li>
-<li>Outside temperature: less ventilation at low temperatures and vice versa (people leave windows open in summer).</li>
-<li>Inside temperature: the higher the inside temperature, the more ventilation will occure (people preventing overheating).</li>
-<li>Leakage: due to leakage through cracks or openings there will be a constant air exchange.</li>
+  <li>People acitivity: according to the occupancy profile more
+  ventilation will happen, when more people are at home (active).
+  </li>
+  <li>Outside temperature: less ventilation at low temperatures and
+  vice versa (people leave windows open in summer).
+  </li>
+  <li>Inside temperature: the higher the inside temperature, the more
+  ventilation will occure (people preventing overheating).
+  </li>
+  <li>Leakage: due to leakage through cracks or openings there will be
+  a constant air exchange.
+  </li>
 </ol>
-</html>", revisions="<html>
 <ul>
-  <li><i>April, 2016&nbsp;</i>
-         by Peter Remmen:<br/>
-         Moved from Utilities to Controls</li>
+  <li>
+    <i>April, 2016&#160;</i> by Peter Remmen:<br/>
+    Moved from Utilities to Controls
+  </li>
 </ul>
 <ul>
-  <li><i>October, 2015&nbsp;</i>
-         by Moritz Lauster:<br/>
-         Adapted and moved to AixLib</li>
+  <li>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    Adapted and moved to AixLib
+  </li>
 </ul>
 <ul>
-  <li><i>May, 2008&nbsp;</i>
-         by Peter Matthes:<br/>
-         Implemented</li>
+  <li>
+    <i>May, 2008&#160;</i> by Peter Matthes:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end VentilationController;

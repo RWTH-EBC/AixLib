@@ -69,9 +69,7 @@ model ML_thermal_delta "Multi layers of heat exchanger"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-52,48})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(eps=1, A=(s_eff*dotQ_nomLayer)
-        /((delta_nom)*Modelica.Constants.sigma*eps)) annotation (Placement(
-        transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(eps=1, A=(s_eff*dotQ_nomLayer)/((delta_nom)*Modelica.Constants.sigma*eps)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={32,46})));
@@ -115,8 +113,8 @@ Trad=Radiative.T;
 dT_V=Tin - Tair;
 dT_R=Tout - Tair;
 
-  connect(twoStar_RadEx.Star, Radiative) annotation (Line(
-      points={{32,55.1},{36,55.1},{36,80},{46,80}},
+  connect(twoStar_RadEx.radPort, Radiative) annotation (Line(
+      points={{32,56.1},{36,56.1},{36,80},{46,80}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
@@ -146,8 +144,8 @@ dT_R=Tout - Tair;
       points={{-13,19.34},{-52,19.34},{-52,39}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(radiatorWall.port_b, twoStar_RadEx.Therm) annotation (Line(
-      points={{-13,19.34},{32,19.34},{32,36.8}},
+  connect(radiatorWall.port_b, twoStar_RadEx.convPort) annotation (Line(
+      points={{-13,19.34},{32,19.34},{32,36}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(heatConv_Radiator.port_b, Convective) annotation (Line(
@@ -302,9 +300,8 @@ dT_R=Tout - Tair;
   </li>
 </ul>
 </html>
-", info=
-    "<html><h4>
-  <font color=\"#008000\">Overview</font>
+", info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Model of the multi layers of heat exchanger. From the water flow is
