@@ -39,17 +39,12 @@ model HighTemperatureSystem
 
   HydraulicModules.Pump pumpCHP(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
     allowFlowReversal=allowFlowReversal,
     T_amb=298.15,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.32,
     length=1,
-    redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)),
     pipe3(length=2)) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -57,13 +52,11 @@ model HighTemperatureSystem
 
   HydraulicModules.Pump pumpBoiler(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
     allowFlowReversal=allowFlowReversal,
     T_amb=298.15,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.32,
     length=1,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
@@ -73,6 +66,8 @@ model HighTemperatureSystem
         rotation=90,
         origin={40,80})));
   Fluid.Storage.BufferStorage HotWater(
+    m1_flow_nominal=m_flow_nominal,
+    m2_flow_nominal=m_flow_nominal,
     useHeatingCoil1=false,
     useHeatingRod=false,
     n=5,
