@@ -565,7 +565,7 @@ equation
   connect(tabs4_4.port_b1,tabs4_5. port_b1) annotation (Line(points={{476,
           120.364},{476,40},{576,40},{576,120.364}}, color={244,125,35}));
   connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
-      points={{60,378},{98,378},{98,354},{122,354}},
+      points={{60,378},{98,378},{98,362.4},{122,362.4}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -578,41 +578,42 @@ equation
   connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{102.7,
           328},{150.8,328},{150.8,342.24}}, color={0,0,127}));
   connect(tabs4_1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{178,
-          161.818},{162,161.818},{162,347},{154,347}},       color={191,0,0}));
+          161.818},{162,161.818},{162,354.56},{154.32,354.56}},
+                                                             color={191,0,0}));
   connect(weaDat.weaBus,thermalZone2. weaBus) annotation (Line(
-      points={{60,378},{216,378},{216,353},{240,353}},
+      points={{60,378},{216,378},{216,360.8},{240,360.8}},
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y,thermalZone2. intGains) annotation (Line(points={{102.7,
           328},{268.8,328},{268.8,342.08}},  color={0,0,127}));
   connect(weaDat.weaBus,thermalZone3. weaBus) annotation (Line(
-      points={{60,378},{322,378},{322,351},{346,351}},
+      points={{60,378},{322,378},{322,358.8},{346,358.8}},
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y,thermalZone3. intGains) annotation (Line(points={{102.7,
           328},{371.2,328},{371.2,340.08}},  color={0,0,127}));
   connect(weaDat.weaBus,thermalZone4. weaBus) annotation (Line(
-      points={{60,378},{420,378},{420,352},{444,352}},
+      points={{60,378},{420,378},{420,360.4},{444,360.4}},
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y,thermalZone4. intGains) annotation (Line(points={{102.7,
           328},{467.4,328},{467.4,340.24}},  color={0,0,127}));
   connect(weaDat.weaBus,thermalZone5. weaBus) annotation (Line(
-      points={{60,378},{514,378},{514,355},{538,355}},
+      points={{60,378},{514,378},{514,364},{538,364}},
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y,thermalZone5. intGains) annotation (Line(points={{102.7,
           328},{565,328},{565,342.4}},       color={0,0,127}));
-  connect(thermalZone2.intGainsConv,tabs4_2. heatPort) annotation (Line(points={{272,
-          346.5},{270,346.5},{270,161.818},{260,161.818}},       color={191,0,0}));
-  connect(thermalZone3.intGainsConv,tabs4_3. heatPort) annotation (Line(points={{374,
-          344.5},{378,344.5},{378,326},{364,326},{364,161.818}},       color={
+  connect(thermalZone2.intGainsConv,tabs4_2. heatPort) annotation (Line(points={{272.32,
+          353.52},{270,353.52},{270,161.818},{260,161.818}},     color={191,0,0}));
+  connect(thermalZone3.intGainsConv,tabs4_3. heatPort) annotation (Line(points={{374.28,
+          351.52},{378,351.52},{378,326},{364,326},{364,161.818}},     color={
           191,0,0}));
-  connect(thermalZone4.intGainsConv,tabs4_4. heatPort) annotation (Line(points={{470,345},
-          {468,345},{468,342},{472,342},{472,161.818},{460,161.818}},
+  connect(thermalZone4.intGainsConv,tabs4_4. heatPort) annotation (Line(points={{470.26,
+          352.56},{468,352.56},{468,342},{472,342},{472,161.818},{460,161.818}},
         color={191,0,0}));
-  connect(thermalZone5.intGainsConv,tabs4_5. heatPort) annotation (Line(points={{568,
-          347.5},{570,347.5},{570,161.818},{560,161.818}},       color={191,0,0}));
+  connect(thermalZone5.intGainsConv,tabs4_5. heatPort) annotation (Line(points={{568.3,
+          355.6},{570,355.6},{570,161.818},{560,161.818}},       color={191,0,0}));
   connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (Line(
         points={{-40,-49.3333},{-75,-49.3333},{-75,-40}}, color={244,125,35}));
   connect(heatExchangerSystem.port_b3, heatpumpSystem.port_a2) annotation (Line(
@@ -821,33 +822,33 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(thermalZone1.TAir, mainBus.TRoom1Mea) annotation (Line(points={{155.6,
-          362.4},{156,362.4},{156,423.145},{175.115,423.145}}, color={0,0,127}),
+          365.2},{156,365.2},{156,423.145},{175.115,423.145}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(thermalZone2.TAir, mainBus.TRoom2Mea) annotation (Line(points={{273.6,
-          360.8},{273.6,423.145},{175.115,423.145}}, color={0,0,127}), Text(
+          363.4},{273.6,423.145},{175.115,423.145}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(thermalZone3.TAir, mainBus.TRoom3Mea) annotation (Line(points={{375.4,
-          358.8},{388,358.8},{388,423.145},{175.115,423.145}}, color={0,0,127}),
+          361.4},{388,361.4},{388,423.145},{175.115,423.145}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(thermalZone4.TAir, mainBus.TRoom4Mea) annotation (Line(points={{471.3,
-          360.4},{471.3,423.145},{175.115,423.145}}, color={0,0,127}), Text(
+          363.2},{471.3,423.145},{175.115,423.145}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(thermalZone5.TAir, mainBus.TRoom5Mea) annotation (Line(points={{569.5,
-          364},{569.5,423.145},{175.115,423.145}}, color={0,0,127}), Text(
+          367},{569.5,423.145},{175.115,423.145}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
