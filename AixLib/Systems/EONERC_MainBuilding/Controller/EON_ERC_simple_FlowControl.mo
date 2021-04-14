@@ -121,21 +121,21 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(ctrMixVflowConstValve3.Mflowset, simpleERCBus.mfSetLTC) annotation (
-      Line(points={{-15.8,31.8},{-99.9,31.8},{-99.9,0.05},{-99.95,0.05}}, color
-        ={0,0,127}), Text(
+      Line(points={{-15.8,31.8},{-99.9,31.8},{-99.9,0.05},{-99.95,0.05}}, color=
+         {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ctrMixVflowConstValve1.Mflowset, simpleERCBus.mfSetCold1) annotation
-    (Line(points={{-15.8,3.8},{-100.9,3.8},{-100.9,0.05},{-99.95,0.05}}, color=
+  connect(ctrMixVflowConstValve1.Mflowset, simpleERCBus.mfSetCold1) annotation (
+     Line(points={{-15.8,3.8},{-100.9,3.8},{-100.9,0.05},{-99.95,0.05}}, color=
           {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ctrMixVflowConstValve2.Mflowset, simpleERCBus.mfSetCold2) annotation
-    (Line(points={{-15.8,-20.2},{-99.9,-20.2},{-99.9,0.05},{-99.95,0.05}},
+  connect(ctrMixVflowConstValve2.Mflowset, simpleERCBus.mfSetCold2) annotation (
+     Line(points={{-15.8,-20.2},{-99.9,-20.2},{-99.9,0.05},{-99.95,0.05}},
         color={0,0,127}), Text(
       string="%second",
       index=1,

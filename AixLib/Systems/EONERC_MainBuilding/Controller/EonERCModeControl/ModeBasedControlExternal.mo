@@ -121,8 +121,8 @@ equation
           -13.8,17.8},{14,17.8},{14,112},{-60,112},{-60,90}}, color={255,0,255}));
   connect(modeExternal.reCoolingGC, flapRecooler.u) annotation (Line(points={{
           -13.8,9.4},{26,9.4},{26,48},{44.4,48}}, color={255,0,255}));
-  connect(modeExternal.freeCoolingGC, flapFreeCooler.u) annotation (Line(points
-        ={{-13.8,1},{30,1},{30,28},{44.4,28}}, color={255,0,255}));
+  connect(modeExternal.freeCoolingGC, flapFreeCooler.u) annotation (Line(points=
+         {{-13.8,1},{30,1},{30,28},{44.4,28}}, color={255,0,255}));
   connect(flapFreeCooler.y, bus.hpSystemBus.busThrottleFreecool.valveSet)
     annotation (Line(points={{62.8,28},{100,28},{100,24},{100.07,24},{100.07,-0.935}},
         color={0,0,127}), Text(

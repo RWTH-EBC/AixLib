@@ -220,15 +220,15 @@ equation
   connect(bouWatercold.ports[2], ventilationUnit1.port_a3) annotation (Line(
         points={{-4,-116},{-72,-116},{-72,-12},{-70.8,-12}}, color={0,127,255}));
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
-      points={{-59,70},{-26,70},{-26,57},{6,57}},
+      points={{-59,70},{-26,70},{-26,70.8},{6,70.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{58.5,70.8},{
-          73.25,70.8},{73.25,70},{104,70}}, color={0,0,127}));
+  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{58.5,75.4},{
+          73.25,75.4},{73.25,70},{104,70}}, color={0,0,127}));
   connect(thermalZone1.intGains[1], internal_gain_1) annotation (Line(points={{
           51,35.84},{-9.5,35.84},{-9.5,-32},{-108,-32}}, color={0,0,127}));
   connect(thermalZone1.intGains[2], internal_gain_2) annotation (Line(points={{
@@ -241,7 +241,7 @@ equation
   connect(ventilationUnit1.port_a2, thermalZone1.ports[2]) annotation (Line(
         points={{-34,28},{24,28},{24,40.44},{36.875,40.44}}, color={0,127,255}));
   connect(tabs4_1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,
-          -18.1818},{56,-18.1818},{56,45.5}},      color={191,0,0}));
+          -18.1818},{56.5,-18.1818},{56.5,57.92}}, color={191,0,0}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),

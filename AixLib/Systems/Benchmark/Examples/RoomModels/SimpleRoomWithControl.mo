@@ -35,6 +35,6 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(thermalZone1.TAir, ctrVentilationUnitTsetRoom.T_act) annotation (Line(
-        points={{58.5,58.8},{58.5,144},{-100,144},{-100,110}}, color={0,0,127}));
+        points={{58.5,63.4},{58.5,144},{-100,144},{-100,110}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, Interval=3600));
 end SimpleRoomWithControl;

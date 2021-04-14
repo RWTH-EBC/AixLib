@@ -234,7 +234,7 @@ model SimpleRoom
     annotation (Placement(transformation(extent={{72,-62},{92,-42}})));
 equation
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
-      points={{-59,70},{6,70},{6,45}},
+      points={{-59,70},{6,70},{6,58.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -245,7 +245,7 @@ equation
           8.88178e-16},{40,8.88178e-16},{40,25.68},{51,25.68}},
                                               color={0,0,127}));
   connect(tabs4_1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,
-          -18.1818},{46,-18.1818},{46,33.5},{56,33.5}},                   color=
+          -18.1818},{46,-18.1818},{46,45.92},{56.5,45.92}},               color=
          {191,0,0}));
   connect(ventilationUnit1.port_b1, thermalZone1.ports[1]) annotation (Line(
         points={{-33.54,13},{25.125,13},{25.125,28.44}},
@@ -295,7 +295,7 @@ equation
   connect(bouWatercold1.ports[2], ventilationUnit1.port_b3) annotation (Line(
         points={{26,-116},{26,-112},{-66,-112},{-66,-12},{-61.6,-12}}, color={0,
           127,255}));
-  connect(thermalZone1.TAir, bus.TRoom1Mea) annotation (Line(points={{58.5,58.8},
+  connect(thermalZone1.TAir, bus.TRoom1Mea) annotation (Line(points={{58.5,63.4},
           {58.5,112},{-1.91,112},{-1.91,108.11}}, color={0,0,127}), Text(
       string="%second",
       index=1,

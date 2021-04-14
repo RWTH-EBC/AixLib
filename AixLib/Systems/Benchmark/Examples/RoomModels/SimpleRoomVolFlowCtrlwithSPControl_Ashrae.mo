@@ -301,11 +301,11 @@ equation
   connect(internalGains.y, thermalZone1.intGains)
     annotation (Line(points={{22.7,-6},{49,-6},{49,31.68}}, color={0,0,127}));
   connect(tabs4_1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{42,
-          -18.1818},{42,9.9091},{54,9.9091},{54,39.5}},      color={191,0,0}));
-  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{56.5,64.8},{
-          71.25,64.8},{71.25,64},{102,64}},color={0,0,127}));
+          -18.1818},{42,9.9091},{54.5,9.9091},{54.5,51.92}}, color={191,0,0}));
+  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{56.5,69.4},{
+          71.25,69.4},{71.25,64},{102,64}},color={0,0,127}));
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
-      points={{-59,70},{-27.5,70},{-27.5,51},{4,51}},
+      points={{-59,70},{-27.5,70},{-27.5,64.8},{4,64.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

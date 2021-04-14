@@ -29,11 +29,11 @@ model SwitchingUnit
         origin={-20,-60})));
 
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare final package Medium
-      = Medium) annotation (Placement(transformation(rotation=0, extent={{30,-170},
+  Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare final package Medium =
+        Medium) annotation (Placement(transformation(rotation=0, extent={{30,-170},
             {50,-150}}), iconTransformation(extent={{30,-170},{50,-150}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare final package Medium
-      = Medium) annotation (Placement(transformation(rotation=0, extent={{-50,-170},
+  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare final package Medium =
+        Medium) annotation (Placement(transformation(rotation=0, extent={{-50,-170},
             {-30,-150}}), iconTransformation(extent={{-50,-170},{-30,-150}})));
 
   Fluid.Actuators.Valves.TwoWayLinear              K2(
