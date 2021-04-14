@@ -31,17 +31,17 @@ model CtrTabs2 "Controller for concrete core activation"
   HydraulicModules.Controller.CtrThrottle ctrThrottleHot(useExternalTset=true)
     annotation (Placement(transformation(extent={{-20,22},{0,42}})));
   HydraulicModules.Controller.CtrThrottle ctrThrottleCold(useExternalTset=true,
-      reverseAction=true)
+      reverseAction=false)
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
   HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=2500)
     annotation (Placement(transformation(extent={{-18,60},{2,80}})));
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{-48,20},{-38,30}})));
-  Modelica.Blocks.Sources.Constant constTflowSet1(final k=0.25)  annotation (Placement(transformation(extent={{-62,18},
+  Modelica.Blocks.Sources.Constant constTflowSet1(final k=0.15)  annotation (Placement(transformation(extent={{-62,18},
             {-54,26}})));
   Modelica.Blocks.Math.Add add1(k2=+1)
     annotation (Placement(transformation(extent={{-42,-42},{-32,-32}})));
-  Modelica.Blocks.Sources.Constant constTflowSet2(final k=0.25) annotation (Placement(transformation(extent={{-56,-44},
+  Modelica.Blocks.Sources.Constant constTflowSet2(final k=0.15) annotation (Placement(transformation(extent={{-56,-44},
             {-48,-36}})));
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(

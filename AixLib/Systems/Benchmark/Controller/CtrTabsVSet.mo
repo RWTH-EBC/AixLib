@@ -40,12 +40,16 @@ model CtrTabsVSet "Controller for concrete core activation"
     useExternalVset=true,
     k=1500,
     Ti=130,
-    Td=0) annotation (Placement(transformation(extent={{-16,-40},{4,-20}})));
+    Td=0,
+    rpm_pump=3580)
+          annotation (Placement(transformation(extent={{-16,-40},{4,-20}})));
   HydraulicModules.Controller.CtrThrottleVflowCtr ctrThrottleVflowCtr1(
     useExternalVset=true,
     k=1500,
     Ti=130,
-    Td=0) annotation (Placement(transformation(extent={{-18,24},{2,44}})));
+    Td=0,
+    rpm_pump=3580)
+          annotation (Placement(transformation(extent={{-18,24},{2,44}})));
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
       points={{3.4,70.2},{40,70.2},{40,72},{99.085,72},{99.085,0.09}},

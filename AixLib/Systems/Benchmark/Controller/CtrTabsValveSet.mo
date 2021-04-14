@@ -30,9 +30,11 @@ model CtrTabsValveSet "Controller for concrete core activation"
   Modelica.Blocks.Interfaces.RealInput valveColdSet
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-114,-52},{-92,-30}})));
-  HydraulicModules.Controller.CtrThrottleValveCtr ctrThrottleValveCtr
+  HydraulicModules.Controller.CtrThrottleValveCtr ctrThrottleValveCtr(rpm_pump=
+        rpm_pump)
     annotation (Placement(transformation(extent={{-18,30},{2,50}})));
-  HydraulicModules.Controller.CtrThrottleValveCtr ctrThrottleValveCtr1
+  HydraulicModules.Controller.CtrThrottleValveCtr ctrThrottleValveCtr1(rpm_pump=
+        rpm_pump)
     annotation (Placement(transformation(extent={{-18,-52},{2,-32}})));
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
@@ -43,8 +45,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleValveCtr.hydraulicBus, tabsBus.hotThrottleBus) annotation
-    (Line(
+  connect(ctrThrottleValveCtr.hydraulicBus, tabsBus.hotThrottleBus) annotation (
+     Line(
       points={{3.4,40.2},{37.7,40.2},{37.7,0.09},{99.085,0.09}},
       color={255,204,51},
       thickness=0.5), Text(

@@ -401,7 +401,7 @@ equation
         points={{160,-112},{190,-112},{190,12},{180,12}},
                                                         color={0,127,255}));
   connect(throttle_freecool.port_b2, throttle_CS.port_b2) annotation (Line(
-        points={{160,-88},{184,-88},{184,-12},{180,-12}}, color={0,127,255}));
+        points={{160,-88},{138,-88},{138,-12},{180,-12}}, color={0,127,255}));
   connect(pump_hot.port_b1, heatPump.port_a1) annotation (Line(points={{-38,-12},
           {-26,-12},{-26,-18},{-11,-18}}, color={0,127,255}));
   connect(pump_hot.port_a2, heatPump.port_b1) annotation (Line(points={{-38,12},
@@ -478,25 +478,7 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(throttle_freecool.hydraulicBus, heatPumpSystemBus.busThrottleFreecool)
-    annotation (Line(
-      points={{140,-120},{226,-120},{226,60.07},{0.07,60.07}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
 
-  connect(throttle_recool.hydraulicBus, heatPumpSystemBus.busThrottleRecool)
-    annotation (Line(
-      points={{-60,-120},{-226,-120},{-226,60.07},{0.07,60.07}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(heatPump.sigBus, heatPumpSystemBus.busHP) annotation (Line(
       points={{7.15,-17.82},{7.15,-16.91},{0.07,-16.91},{0.07,60.07}},
       color={255,204,51},
@@ -634,6 +616,24 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(heatPumpSystemBus.busThrottleRecool, throttle_recool.hydraulicBus)
+    annotation (Line(
+      points={{0.07,60.07},{0.07,62},{-60,62},{-60,-120}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatPumpSystemBus.busThrottleFreecool, throttle_freecool.hydraulicBus)
+    annotation (Line(
+      points={{0.07,60.07},{72,60.07},{72,-120},{140,-120}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -120},{220,60}}), graphics={
         Rectangle(

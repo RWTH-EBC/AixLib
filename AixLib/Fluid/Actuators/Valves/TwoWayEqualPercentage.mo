@@ -2,7 +2,7 @@ within AixLib.Fluid.Actuators.Valves;
 model TwoWayEqualPercentage
   "Two way valve with equal percentage flow characteristics"
   extends BaseClasses.PartialTwoWayValveKv(
-    phi=max(0, if homotopyInitialization then
+    phi=max(0.1*l, if homotopyInitialization then
         homotopy(actual=AixLib.Fluid.Actuators.BaseClasses.equalPercentage(
         y_actual,
         R,

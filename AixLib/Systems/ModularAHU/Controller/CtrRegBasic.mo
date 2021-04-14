@@ -45,8 +45,6 @@ block CtrRegBasic "Controller for heating and cooling registers"
             {6,2}})));
 
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant
-    annotation (Placement(transformation(extent={{24,20},{44,40}})));
   BaseClasses.RegisterBus registerBus annotation (Placement(transformation(
           extent={{74,-26},{128,26}}), iconTransformation(extent={{88,-14},{116,
             14}})));
@@ -58,6 +56,9 @@ block CtrRegBasic "Controller for heating and cooling registers"
           extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-120})));
+  Modelica.Blocks.Logical.GreaterThreshold
+                                        pumpSwitchOff(final threshold=0)
+    annotation (Placement(transformation(extent={{44,24},{60,40}})));
 equation
 
     connect(PID.u_s, Tset) annotation (Line(
@@ -82,13 +83,6 @@ equation
       points={{0,-62},{0,-120}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(booleanConstant.y, registerBus.hydraulicBus.pumpBus.onSet)
-    annotation (Line(points={{45,30},{101.135,30},{101.135,0.13}}, color={255,0,
-          255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(constRpmPump.y, registerBus.hydraulicBus.pumpBus.rpmSet) annotation (
       Line(points={{7,-8},{68,-8},{68,0.13},{101.135,0.13}},color={0,0,127}),
       Text(
@@ -102,6 +96,15 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(pumpSwitchOff.y, registerBus.hydraulicBus.pumpBus.onSet) annotation (
+      Line(points={{60.8,32},{80,32},{80,0.13},{101.135,0.13}}, color={255,0,
+          255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PID.y, pumpSwitchOff.u) annotation (Line(points={{11,-50},{32,-50},{
+          32,32},{42.4,32}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-90,20},{56,-20}},

@@ -91,6 +91,8 @@ model HeatPumpSystemVolumeFlowControlled_Inputs "Validation of HeatpumpSystem"
     annotation (Placement(transformation(extent={{176,-14},{136,26}})));
   Modelica.Blocks.Interfaces.RealInput tAmb
     annotation (Placement(transformation(extent={{-180,-90},{-140,-50}})));
+  BaseClasses.HeatPumpSystemBus bus
+    annotation (Placement(transformation(extent={{18,72},{38,92}})));
 equation
   connect(boundary5.ports[1], heatpumpSystem.port_a2) annotation (Line(points={
           {-90,-20},{-80,-20},{-80,-9.77778}}, color={0,127,255}));
@@ -136,6 +138,14 @@ equation
           12},{128,8},{156,8},{156,6}}, color={0,0,127}));
   connect(toKelvin2.Celsius, tAmb)
     annotation (Line(points={{-79.6,-70},{-160,-70}}, color={0,0,127}));
+  connect(heatpumpSystem.heatPumpSystemBus, bus) annotation (Line(
+      points={{0,28},{0,82},{28,82}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (experiment(StopTime=23400), __Dymola_Commands(file(
           ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpSystemValidation.mos"

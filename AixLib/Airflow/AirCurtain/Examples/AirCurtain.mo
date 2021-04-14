@@ -9,7 +9,7 @@ model AirCurtain
     PAirCur=50000,
     TBou=287.15)
     annotation (Placement(transformation(extent={{-14,-12},{20,20}})));
-  ThermalZones.HighOrder.Components.DryAir.Airload airload
+  Systems.ThermalZones.HighOrder.Components.DryAir.Airload airload
     annotation (Placement(transformation(extent={{62,-8},{82,12}})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
