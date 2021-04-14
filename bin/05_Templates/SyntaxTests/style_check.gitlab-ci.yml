@@ -6,8 +6,6 @@ stages:
     
 Style_Check_AixLib:
     stage: StyleCheck
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
@@ -15,7 +13,7 @@ Style_Check_AixLib:
         - python -V               # Print out python version for debugging
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/02_CITests/SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo
+        - python bin/02_CITests/SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -DS ${DymolaVersion}
     
     artifacts:
         when: on_failure
@@ -28,22 +26,33 @@ Style_Check_AixLib:
     
     only:
         - external_pull_requests
-
+    except:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/ 
+            
 Style_Check_ChangedModel:
     stage: StyleCheck
-    services:
-        -  docker
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate python36  
         - python -V               # Print out python version for debugging
         - export PYTHONIOENCODING=utf-8 # just in case
+    only:
+        changes:
+            - AixLib/**/*
+            
+        variables:
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        
+    except:
+        - external_pull_requests
+    
+    
     script:
-        - model=$(git diff --raw HEAD^1)
-        - echo $model
+        - model=$(git diff --raw --diff-filter=AMT HEAD^1)
         - echo $model >  bin/03_WhiteLists/changedmodels.txt
-        - python bin/02_CITests/SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -CM
+        - python bin/02_CITests/SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -CM -DS ${DymolaVersion}
     
     artifacts:
         when: on_failure
@@ -56,10 +65,6 @@ Style_Check_ChangedModel:
         expire_in: 7 day 
     allow_failure: true 
     
-    except:
-        - external_pull_requests
-    only:
-        variables:
-                - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+  
                 
      

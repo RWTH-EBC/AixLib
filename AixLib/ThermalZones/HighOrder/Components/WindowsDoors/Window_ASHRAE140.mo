@@ -1,88 +1,57 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
-  extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
+  extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
+    redeclare replaceable model CorrSolGain = BaseClasses.CorrectionSolarGain.CorG_ASHRAE140,
+    final use_solarRadWinTrans=true,
+    final use_windSpeedPort=true);
 
-//  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
-  parameter Real windowarea=2 "Total fenestration area";
-    parameter Modelica.SIunits.Temperature T0= 293.15 "Initial temperature";
-  parameter Boolean selectable = true "Select window type" annotation (Dialog(group="Window type", descriptionLabel = true));
-  parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType=
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Window type"
-    annotation (Dialog(
-      group="Window type",
-      enable=selectable,
-      descriptionLabel=true), choicesAllMatching=true);
-  parameter Real frameFraction(max=1.0) = if selectable then WindowType.frameFraction else 0.2
-    "Frame fraction"                                                                                            annotation (Dialog(group="Window type", enable = not selectable, descriptionLabel = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw=if selectable then WindowType.Uw else 1.50
-    "Thermal transmission coefficient of whole window"                                                                                                 annotation (Dialog(group="Window type", enable = not selectable));
+  replaceable parameter AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default
+    winPaneRec constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition "Record containing parameters of window pane(s)"
+    annotation (choicesAllMatching=true, Placement(transformation(extent={{-8,82},{8,98}})));
 
-  parameter Real g= if selectable then WindowType.g else 0.60
-    "Coefficient of solar energy transmission"                                                            annotation (Dialog(group="Window type", enable = not selectable));
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
-  BaseClasses.CorrectionSolarGain.CorG_VDI6007
-    RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
-            -30,72}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
       Placement(transformation(extent={{-10,-20},{10,0}})));
   Utilities.HeatTransfer.HeatConvOutside heatConv_outside(
-    A=windowarea,
+    final A=windowarea,
     calcMethod=2,
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass()) annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
   Utilities.HeatTransfer.HeatConvInside heatConv_inside(
     calcMethod=2,
     hCon_const=2,
-    A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
+    final A=windowarea)
+                  annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1(
-    n=1,
-    lambda={1.06},
-    c={750},
-    d={0.003175},
-    rho={2500},
-    A=windowarea,
-    T0=T0) annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort
-annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
-    iconTransformation(extent={{-100,-60},{-80,-40}})));
-  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
-    rad(T(start=T0)),
-    conv(T(start=T0)),
-    eps=WindowType.Emissivity,
-    A=windowarea) annotation (Placement(transformation(extent={{36,22},{56,42}})));
+    final wallRec=winPaneRec,
+    final T_start=fill(T0, winPaneRec.n),
+    final energyDynamics=energyDynamics,
+    final A=windowarea)
+           annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(final eps=winPaneRec.eps, final A=windowarea)
+    annotation (Placement(transformation(extent={{44,22},{64,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
-    n=1,
-    lambda={1.06},
-    c={750},
-    d={0.003175},
-    rho={2500},
-    T0=T0,
-    A=windowarea)
+    final wallRec=winPaneRec,
+    final T_start=fill(T0, winPaneRec.n),
+    final A=windowarea,
+    final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{18,-18},{38,2}})));
-  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
-    "multiplication with area and solar gain factor"
-    annotation (Placement(transformation(extent={{-4,54},{8,66}})));
-  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans
-    "Output signal connector"
-    annotation (Placement(transformation(extent={{82,70},{102,90}})));
+  Modelica.Blocks.Sources.Constant constFixShoRadPar[6](k={WindowType.g,1 -
+        WindowType.g,0,sqrt(windowarea),sqrt(windowarea),0}) if
+    use_solarRadWinTrans
+    "Parameteres used for the short radiaton models. See connections to check which array corresponds to which parameter"
+    annotation (Placement(transformation(extent={{68,96},{78,106}})));
 equation
-  connect(heatConv_outside.WindSpeedPort, WindSpeedPort) annotation (Line(
-  points={{-65.2,-17.2},{-80,-17.2},{-80,-59},{-99,-59}},
-  color={0,0,127}));
   connect(heatConv_outside.port_b, pane1.port_a) annotation (Line(
   points={{-46,-10},{-46,-8},{-38,-8}},
   color={191,0,0}));
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
-  connect(twoStar_RadEx.conv, pane2.port_b) annotation (Line(points={{36.8,32},{36,32},{36,-8},{38,-8}}, color={191,0,0}));
-  connect(Ag.y, solarRadWinTrans) annotation (Line(
-      points={{8.6,60},{50,60},{50,80},{92,80}},
-      color={0,0,127}));
-  connect(RadCondAdapt.solarRadWinTrans[1], Ag.u) annotation (Line(
-      points={{-31.1,60},{-5.2,60}},
-      color={0,0,127}));
   connect(pane1.port_b, AirGap.port_a) annotation (Line(
       points={{-18,-8},{-15.5,-8},{-15.5,-10},{-10,-10}},
       color={191,0,0}));
@@ -95,13 +64,32 @@ equation
   connect(heatConv_inside.port_a, port_inside) annotation (Line(
       points={{68,-9},{78,-9},{78,-10},{90,-10}},
       color={191,0,0}));
-  connect(twoStar_RadEx.rad, Star) annotation (Line(
-      points={{55.1,32},{80,32},{80,60},{90,60}},
+  connect(twoStar_RadEx.radPort, radPort) annotation (Line(
+      points={{64.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(solarRad_in, RadCondAdapt.SR_input[1]) annotation (Line(
-      points={{-90,60},{-72,60},{-72,59.88},{-51.78,59.88}},
-      color={255,128,0}));
+  connect(pane2.port_b, twoStar_RadEx.convPort) annotation (Line(points={{38,-8},{42,-8},{42,32},{44,32}}, color={191,0,0}));
+  connect(WindSpeedPort, heatConv_outside.WindSpeedPort) annotation (Line(points={{-99,-59},{-70,-59},{-70,-17},{-65,-17}}, color={0,0,127}));
+  connect(solarRad_in, corrSolGain.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
+  connect(corrSolGain.solarRadWinTrans[1], Ag.u) annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
+  connect(Ag.y, shortRadWin.Q_flow_ShoRadFroSur) annotation (Line(points={{-3.4,60},{50,60},{50,88.05},{90.05,88.05}},
+                                                 color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constFixShoRadPar[1].y, shortRadWin.g) annotation (Line(points={{78.5,
+          101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[2].y, shortRadWin.solar_absorptance) annotation (
+      Line(points={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[3].y, shortRadWin.solar_reflectance) annotation (
+      Line(points={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[4].y, shortRadWin.length) annotation (Line(points={
+          {78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[5].y, shortRadWin.height) annotation (Line(points={
+          {78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
+  connect(constFixShoRadPar[6].y, shortRadWin.Q_flow_ShoRadOnSur) annotation (
+      Line(points={{78.5,101},{90.05,101},{90.05,88.05}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
@@ -200,6 +188,16 @@ equation
 </ul>
 </html>",
  revisions="<html><ul>
+  <li>
+    <i>June, 18, 2020</i> by Fabian Wuellhorst:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/918\">#918</a>:
+    Add short wave connector to pass window parameters.
+  </li>
+  <li>
+    <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:
+    Add records for window panes.
+  </li>
   <li>
     <i>November 11, 2018&#160;</i> by Fabian Wüllhorst:<br/>
     Removed parameters phi and eps_out. This is for <a href=

@@ -11,6 +11,9 @@ model Weather "Complex weather model"
     "table name on file or in function usertab"                                     annotation(Dialog(group = "Properties of Weather Data"));
   parameter String fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt")
     "file where matrix is stored"                                                                                                     annotation(Dialog(group = "Properties of Weather Data", loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
+  parameter String formatTRY="TRY 2010/2011" "File format of test reference year (TRY)" annotation(choices(
+              choice="TRY 2010/2011",
+              choice="TRY 2015/2017"),Dialog(enable=true, group="Properties of Weather Data"));
   parameter Real offset[:] = {0} "offsets of output signals" annotation(Dialog(group = "Properties of Weather Data"));
   parameter Modelica.Blocks.Types.Smoothness smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments
     "Smoothness of table interpolation"                                                                                                     annotation(Dialog(group = "Properties of Weather Data"));
@@ -76,7 +79,12 @@ protected
     "Number of chosen output variables";
   parameter Integer[9] PosWV = BaseClasses.DeterminePositionsInWeatherVector(Cloud_cover, Wind_dir, Wind_speed, Air_temp, Air_press, Mass_frac, Rel_hum, Sky_rad, Ter_rad)
     "Positions Weather Vector";
-  parameter Integer columns[:] = {16, 15, 7, 8, 9, 10, 11, 12, 13, 18, 19};
+  /*
+  | 1: year / Modelica time | 2         | 3         | 4         | 5         | 6         | 7         | 8         | 9         | 10        | 11        | 12        | 13         | 14        | 15        | 16        | 17        | 18        | 19       | 20       |
+  | 2010/2011               | RG        | IS        | MM        | DD        | HH        | N         | WR        | WG        | t         | p         | x         | RF         | W         | B         | D         | IK        | A         | E        | IL       |
+  | 2015/2017               | RW        | HW        | MM        | DD        | HH        | t         | p         | WR        | WG        | N         | x         | RF         | B         | D         | A         | E         | IL        |          |          |
+  */
+  parameter Integer columns[:] = if formatTRY=="TRY 2015/2017" then {15, 14, 11, 9, 10, 7, 8, 12, 13, 16, 17} elseif formatTRY=="TRY 2010/2011" then {16, 15, 7, 8, 9, 10, 11, 12, 13, 18, 19} else fill(0, 11);
 initial equation
   assert(SOD.nSurfaces == size(SOD.name, 1), "name has to have the nSurfaces Elements (see Surface orientation data in the Weather Model)");
   assert(SOD.nSurfaces == size(SOD.Azimut, 1), "Azimut has to have the nSurfaces Elements (see Surface orientation data in the Weather Model)");

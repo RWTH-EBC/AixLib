@@ -29,5 +29,6 @@ smoothMin
 spliceFunction
 splineDerivatives
 trapezoidalIntegration
+linearInterpolation
 Examples
 BaseClasses
