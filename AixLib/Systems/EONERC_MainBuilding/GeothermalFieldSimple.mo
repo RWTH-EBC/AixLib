@@ -18,33 +18,32 @@ model GeothermalFieldSimple "Geothermal probe"
 
   HydraulicModules.Throttle throttle(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_133x3(),
     energyDynamics=energyDynamics,
     allowFlowReversal=allowFlowReversal,
     final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     tauHeaTra=1800,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.125,
     length=5,
     final Kv=160,
+    massDynamics=massDynamics,
+    valve(order=1),
     pipe3(length=10))                annotation (Placement(transformation(
         extent={{-30,30},{30,-30}},
         rotation=270,
         origin={2,-50})));
   HydraulicModules.Pump pump(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_159x3(),
     energyDynamics=energyDynamics,
     allowFlowReversal=allowFlowReversal,
     final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     tauHeaTra=1800,
-    dIns=0.028,
-    kIns=0.01,
-    d=0.125,
     length=40,
+    massDynamics=massDynamics,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per(
@@ -66,6 +65,7 @@ model GeothermalFieldSimple "Geothermal probe"
     tau1=5,
     tau2=5,
     energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T1_start=T_start,
     T2_start=T_start,
     redeclare Fluid.MixingVolumes.MixingVolume vol1,
@@ -77,10 +77,12 @@ model GeothermalFieldSimple "Geothermal probe"
         rotation=0,
         origin={0,-117})));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
+    "Type of energy balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Modelica.SIunits.Temperature T_amb "Ambient temperature";
   Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T_start=T_start,
     final m_flow_nominal=m_flow_nominal,
     final V=V,
@@ -133,6 +135,8 @@ model GeothermalFieldSimple "Geothermal probe"
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor2(final G=
         G_groundNear)
            annotation (Placement(transformation(extent={{44,-280},{64,-260}})));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 equation
 
   connect(dynamicHX.port_b1, pump.port_a2) annotation (Line(points={{-21,-130.2},

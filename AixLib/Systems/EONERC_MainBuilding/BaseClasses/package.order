@@ -7,3 +7,4 @@ EvaluationBus
 EnergyCounter
 HeatpumpAndConsumerControllerBus
 SimpleERCBus
+WeatherAC

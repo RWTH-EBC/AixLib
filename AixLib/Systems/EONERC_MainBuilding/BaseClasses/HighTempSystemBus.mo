@@ -8,6 +8,7 @@ expandable connector HighTempSystemBus
   HydraulicModules.BaseClasses.HydraulicBus throttlePumpBus "Hydraulic circuit of chp";
   Real uRelBoiler1Set "Set value for relative power of boiler 1 [0..1]";
   Real uRelBoiler2Set "Set value for relative power of boiler 2 [0..1]";
+  Real uRelChpSet "Set value for relative power of chp [0..1]";
   Real fuelPowerBoiler1Mea "Fuel consumption of boiler 1 [0..1]";
   Real fuelPowerBoiler2Mea "Fuel consumption of boiler 2 [0..1]";
   Real TChpSet "Set temperature for chp";

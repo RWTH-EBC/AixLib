@@ -3,3 +3,5 @@ CtrHP
 CtrHeatingCoolingMode
 modeStateSelector
 EonERCSimpleControl
+modeExternal
+ModeBasedControlExternal

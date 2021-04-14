@@ -40,7 +40,8 @@ model HeatPumpSystemValidation "Validation of HeatpumpSystem"
         origin={100,20})));
   HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium,
     T_start_hot=311.15,
-    T_start_cold=284.15)
+    T_start_cold=284.15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     annotation (Placement(transformation(extent={{-80,-40},{80,28}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},

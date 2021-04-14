@@ -1,31 +1,9 @@
 within AixLib.Systems.EONERC_MainBuilding.Controller.EonERCModeControl;
-model modeStateSelector "Selects sub modes for heating and cooling"
-  Modelica.Blocks.Interfaces.RealInput T_HS[2]
-    "Connector of Real input signals" annotation (Placement(transformation(
-          extent={{-140,40},{-100,80}}), iconTransformation(extent={{-136,42},{-100,
-            78}})));
-  Modelica.Blocks.Interfaces.RealInput T_CS[2]
-    "Connector of Real input signals" annotation (Placement(transformation(
-          extent={{-140,-80},{-100,-40}}), iconTransformation(extent={{-136,-78},
-            {-100,-42}})));
+model modeExternal "Selects sub modes for heating and cooling"
 
   Modelica.Blocks.Interfaces.IntegerOutput modeSWU annotation (Placement(
         transformation(extent={{100,-90},{120,-70}}),iconTransformation(extent={{100,-90},
             {120,-70}})));
-  Modelica.Blocks.Interfaces.RealInput T_air "Connector of Real input signals"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={-40,-120}), iconTransformation(extent={{-18,-18},{18,18}},
-        rotation=90,
-        origin={40,-118})));
-  Modelica.Blocks.Interfaces.RealInput T_geo "Connector of Real input signals"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={40,-120}), iconTransformation(extent={{-18,-18},{18,18}},
-        rotation=90,
-        origin={-40,-118})));
   Modelica.Blocks.Interfaces.BooleanOutput useHP
     "Connector of Boolean output signal" annotation (Placement(transformation(
           extent={{100,70},{120,90}}), iconTransformation(extent={{100,70},{120,
@@ -53,17 +31,6 @@ model modeStateSelector "Selects sub modes for heating and cooling"
         rotation=90,
         origin={0,110})));
 
-  Real dT_HS "Energy change of heat storage";
-  Real dT_CS "Energy change of cold storage";
-  Boolean heatingModeInt "Internal variable for heating mode";
-  Modelica.Blocks.Interfaces.BooleanInput hpOn
-    "Connector of Boolean input signal" annotation (Placement(transformation(
-          extent={{-140,-20},{-100,20}}), iconTransformation(extent={{-136,-18},
-            {-100,18}})));
-  Modelica.Blocks.Continuous.Integrator int_HS(use_reset = true);
-  Modelica.Blocks.Continuous.Integrator int_CS(use_reset = true);
-  Modelica.StateGraph.InitialStepWithSignal demandEstimation(nOut=1)
-    annotation (Placement(transformation(extent={{-90,-8},{-74,8}})));
   Modelica.StateGraph.Transition tran(enableTimer=true, waitTime=
         waitTimeEstimation)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
@@ -103,32 +70,21 @@ model modeStateSelector "Selects sub modes for heating and cooling"
     annotation (Placement(transformation(extent={{10,-60},{22,-48}})));
   Modelica.StateGraph.StepWithSignal mode8 "To reset integrator"
     annotation (Placement(transformation(extent={{36,-60},{48,-48}})));
-  Modelica.Blocks.Sources.BooleanExpression hpOnly(y=heatingModeInt and T_CS[1] >
-        273.15 + 12)
+  Modelica.Blocks.Sources.BooleanExpression hpOnly(y=mode == 1)
                annotation (Placement(transformation(extent={{-14,68},{6,86}})));
-  Modelica.Blocks.Sources.BooleanExpression HPandGTF(y=heatingModeInt and T_CS[1] <
-        273.15 + 12)
+  Modelica.Blocks.Sources.BooleanExpression HPandGTF(y=mode == 2)
     annotation (Placement(transformation(extent={{-14,48},{6,66}})));
-  Modelica.Blocks.Sources.BooleanExpression GC_only(y=not heatingModeInt and
-        T_air < 10 + 273.15 and T_air > 273.15)
+  Modelica.Blocks.Sources.BooleanExpression GC_only(y=mode == 3)
     annotation (Placement(transformation(extent={{-14,28},{6,46}})));
-  Modelica.Blocks.Sources.BooleanExpression GTF_only(y=not heatingModeInt and
-        T_geo < 12 + 273.15)
+  Modelica.Blocks.Sources.BooleanExpression GTF_only(y=mode == 4)
     annotation (Placement(transformation(extent={{-14,8},{6,26}})));
-  Modelica.Blocks.Sources.BooleanExpression GTF_and_HP(y=not heatingModeInt
-         and T_geo < 17 + 273.15 and T_geo > 12 + 273.15 and 0.5*(T_HS[1] +
-        T_HS[2]) < 273.15 + 33)
+  Modelica.Blocks.Sources.BooleanExpression GTF_and_HP(y=mode == 5)
     annotation (Placement(transformation(extent={{-14,-12},{6,6}})));
-  Modelica.Blocks.Sources.BooleanExpression GTF_HP_ReCooler(y=not
-        heatingModeInt and T_geo > 12 + 273.15 and T_geo < 17 + 273.15 and 0.5*(
-        T_HS[1] + T_HS[2]) > 273.15 + 33 and T_air > 274)
+  Modelica.Blocks.Sources.BooleanExpression GTF_HP_ReCooler(y=mode == 6)
     annotation (Placement(transformation(extent={{-14,-32},{6,-14}})));
-  Modelica.Blocks.Sources.BooleanExpression HP(y=not heatingModeInt and T_geo >
-        17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) < 273.15 + 33)
+  Modelica.Blocks.Sources.BooleanExpression HP(y=mode == 7)
     annotation (Placement(transformation(extent={{-14,-52},{6,-34}})));
-  Modelica.Blocks.Sources.BooleanExpression HP_reCooler(y=not heatingModeInt
-         and T_geo > 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) > 273.15 + 33 and
-        T_air > 274.15)
+  Modelica.Blocks.Sources.BooleanExpression HP_reCooler(y=mode == 8)
     annotation (Placement(transformation(extent={{-14,-72},{6,-54}})));
   Modelica.StateGraph.Transition tran9(enableTimer=true, waitTime=
         timeModeActive)
@@ -160,36 +116,12 @@ model modeStateSelector "Selects sub modes for heating and cooling"
     "Wait time for demand estaimation";
   parameter Modelica.SIunits.Time timeModeActive=1800
     "Time before mode estimation in which one mode is active";
+  Modelica.StateGraph.Step step1
+    annotation (Placement(transformation(extent={{-86,-8},{-70,8}})));
+  Modelica.Blocks.Interfaces.IntegerInput mode "1-8" annotation (Placement(
+        transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
+          extent={{-140,-20},{-100,20}})));
 equation
-//determine heating or cooling mode
-
-  dT_HS = 0.5*der(T_HS[1] + T_HS[2])*4000;
-  dT_CS = 0.5*der(T_CS[1] + T_CS[2])*5000;
-
-  if hpOn then
-    int_HS.u = 0;
-    int_CS.u = 0;
-  else
-    int_HS.u = abs(dT_HS);
-    int_CS.u = abs(dT_CS);
-  end if;
-
-  //reset integrator after
-  if demandEstimation.active then
-                                // or mode2.active or mode3.active or mode4.active or mode5.active or mode6.active or mode7.active or mode8.active then
-    int_HS.reset = true;
-    int_CS.reset = true;
-  else
-    int_HS.reset = false;
-    int_CS.reset = false;
-  end if;
-
-  if int_HS.y < int_CS.y and 0.5*(T_HS[1] + T_HS[2])>273.15+29 then
-    heatingModeInt = false;
-  else
-    heatingModeInt = true;
-  end if;
-
 
 //heating modes
   //HP only
@@ -264,14 +196,6 @@ equation
     useGTF = false;
     heatingMode = false;
     case = 8;
-  elseif demandEstimation.active then
-    modeSWU = 4;
-    useHP = false;
-    freeCoolingGC = false;
-    reCoolingGC = false;
-    useGTF = false;
-    heatingMode = false;
-    case = 0;
   else
     modeSWU = 4;
     useHP = true;
@@ -364,15 +288,14 @@ equation
           {60,-34},{60,-62.5},{65.08,-62.5}}, color={0,0,0}));
   connect(tran16.outPort, alternative.join[8]) annotation (Line(points={{56.9,-54},
           {60,-54},{60,-87.5},{65.08,-87.5}}, color={0,0,0}));
-  connect(demandEstimation.outPort[1], tran.inPort)
-    annotation (Line(points={{-73.6,0},{-65.2,0}}, color={0,0,0}));
   connect(tran.outPort, step.inPort[1])
     annotation (Line(points={{-60.8,0},{-52.8,0}}, color={0,0,0}));
   connect(step.outPort[1], alternative.inPort)
     annotation (Line(points={{-35.6,0},{-29.56,0}}, color={0,0,0}));
-  connect(alternative.outPort, demandEstimation.inPort[1]) annotation (Line(
-        points={{77.04,0},{80,0},{80,118},{-92,118},{-92,0},{-90.8,0}}, color={0,
-          0,0}));
+  connect(tran.inPort, step1.outPort[1])
+    annotation (Line(points={{-65.2,0},{-69.6,0}}, color={0,0,0}));
+  connect(step1.inPort[1], alternative.outPort) annotation (Line(points={{-86.8,
+          0},{-86,0},{-86,104},{86,104},{86,0},{77.04,0}}, color={0,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
@@ -398,4 +321,4 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="Outputs calculated in text code")}));
-end modeStateSelector;
+end modeExternal;
