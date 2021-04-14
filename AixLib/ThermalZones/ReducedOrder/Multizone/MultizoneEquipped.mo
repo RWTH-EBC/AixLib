@@ -318,15 +318,6 @@ equation
     annotation (Line(points={{12.4,12.25},{20,12.25},{20,29.5},{12.4,29.5}},
         color={0,0,127}));
   end if;
-
-  connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-40,-100},{-40,-14},
-          {38.84,-14},{38.84,71.96}}, color={0,0,127}));
-  connect(TSetCool, zone.TSetCool) annotation (Line(points={{-80,-100},{-80,-11},
-          {38.84,-11},{38.84,77.7}}, color={0,0,127}));
-  connect(zone.PCooler, PCooler) annotation (Line(points={{82.1,61.3},{82.1,
-          0.65},{110,0.65},{110,-60}}, color={0,0,127}));
-  connect(zone.PHeater, PHeater) annotation (Line(points={{82.1,65.4},{82.1,
-          10.7},{110,10.7},{110,-46}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Text(
@@ -368,5 +359,9 @@ equation
 </ul>
 <h4>Examples </h4>
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>. </p>
-</html>"));
+</html>"),
+    experiment(
+      StopTime=31536000,
+      Interval=900,
+      __Dymola_Algorithm="Dassl"));
 end MultizoneEquipped;
