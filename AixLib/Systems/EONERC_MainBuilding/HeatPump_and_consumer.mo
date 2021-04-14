@@ -263,10 +263,11 @@ equation
           -78.6667},{-58,-78},{-84,-78},{-84,60}},     color={0,127,255}));
   connect(boundary4.ports[1], admixLTC.port_b2)
     annotation (Line(points={{-84,-90},{-84,60}}, color={0,127,255}));
-  connect(admixCold1.port_b2, vol3.ports[3]) annotation (Line(points={{16,60},{
-          16,46},{117.067,46}}, color={0,127,255}));
-  connect(admixCold1.port_a1, vol2.ports[3]) annotation (Line(points={{4,60},{6,
-          60},{6,28},{105.067,28}}, color={0,127,255}));
+  connect(admixCold1.port_b2, vol3.ports[3]) annotation (Line(points={{16,60},
+          {16,46},{117.067,46}},color={0,127,255}));
+  connect(admixCold1.port_a1, vol2.ports[3]) annotation (Line(points={{4,60},{
+          6,60},{6,28},{105.067,28}},
+                                    color={0,127,255}));
   connect(prescribedTemperature.T, Tair) annotation (Line(points={{-41.2,-114},
           {-120,-114},{-120,0},{-200,0}}, color={0,0,127}));
   connect(Q_flow_Servers.y, consumerCold2.Q_flow) annotation (Line(points={{

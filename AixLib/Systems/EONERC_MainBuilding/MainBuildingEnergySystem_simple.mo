@@ -286,8 +286,8 @@ equation
           {102,28},{102,40},{66,40},{66,38.6667}},     color={0,127,255}));
   connect(vol2.ports[3], admixCold2.port_a1) annotation (Line(points={{105.067,
           28},{105.067,44},{104,44},{104,60}}, color={0,127,255}));
-  connect(switchingUnit.port_b1, vol3.ports[1]) annotation (Line(points={{66,
-          58.6667},{72,58.6667},{72,58},{80,58},{80,46},{114.933,46}}, color={0,
+  connect(switchingUnit.port_b1, vol3.ports[1]) annotation (Line(points={{66,58.6667},
+          {72,58.6667},{72,58},{80,58},{80,46},{114.933,46}},          color={0,
           127,255}));
   connect(vol3.ports[2], admixCold2.port_b2)
     annotation (Line(points={{116,46},{116,60},{116,60}}, color={0,127,255}));

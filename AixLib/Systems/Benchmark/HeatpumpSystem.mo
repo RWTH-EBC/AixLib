@@ -5,11 +5,11 @@ model HeatpumpSystem "Heatpump system for cold and hot water generation"
             AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
             per))),
     heatPump(redeclare model PerDataMainHP =
-          AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-          (dataTable=BaseClasses.HeatpumpBenchmarkSystem()), redeclare model
-        PerDataRevHP =
-          AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-          (dataTable=BaseClasses.HeatpumpBenchmarkSystem())),
+         AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+           dataTable=BaseClasses.HeatpumpBenchmarkSystem()), redeclare model
+       PerDataRevHP =
+          AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+           dataTable=BaseClasses.HeatpumpBenchmarkSystem())),
     heatStorage(data=DataBase.Storage.Generic_22000l()),
     coldStorage(data=DataBase.Storage.Generic_46000l()));
 
