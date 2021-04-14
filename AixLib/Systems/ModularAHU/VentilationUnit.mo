@@ -63,17 +63,17 @@ replaceable package Medium2 =
         Medium2)
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-30,-110},{-10,-90}}),
-        iconTransformation(extent={{-30,-110},{-10,-90}})));
+        iconTransformation(extent={{-36,-110},{-16,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a4(redeclare package Medium =
         Medium2)
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{10,-110},{30,-90}}),
-        iconTransformation(extent={{10,-110},{30,-90}})));
+        iconTransformation(extent={{4,-110},{24,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b4(redeclare package Medium =
         Medium2)
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{50,-110},{70,-90}}),
-        iconTransformation(extent={{48,-110},{68,-90}})));
+        iconTransformation(extent={{38,-110},{58,-90}})));
   Fluid.Actuators.Dampers.Exponential flapSup(
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
@@ -260,6 +260,22 @@ equation
           lineColor={0,0,0},
           lineThickness=0.5,
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}),                      Diagram(
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-60,-36},{-60,-90}},
+          color={28,108,200},
+          thickness=0.5),
+        Line(
+          points={{-26,-36},{-26,-90}},
+          color={28,108,200},
+          thickness=0.5),
+        Line(
+          points={{48,-36},{48,-90}},
+          color={28,108,200},
+          thickness=0.5),
+        Line(
+          points={{14,-36},{14,-90}},
+          color={28,108,200},
+          thickness=0.5)}),                                      Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end VentilationUnit;

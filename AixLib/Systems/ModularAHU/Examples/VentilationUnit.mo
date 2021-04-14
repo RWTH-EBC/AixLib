@@ -42,34 +42,27 @@ model VentilationUnit "Example of the ventilation unit"
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare AixLib.Systems.HydraulicModules.Admix
-        partialHydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
-        length=0.5,
+    cooler(
+      redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+        length=1,
         Kv=6.3,
-        redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+redeclare AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
-        dynamicHX(
+      dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare AixLib.Systems.HydraulicModules.Admix
-        partialHydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+    heater(
+      redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
         length=0.5,
         Kv=6.3,
         redeclare
           AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
-        dynamicHX(
+      dynamicHX(
         dp1_nominal=10,
         dp2_nominal=1000,
         dT_nom=10,
@@ -88,12 +81,12 @@ model VentilationUnit "Example of the ventilation unit"
 equation
   connect(ventilationUnit.port_a3, SourceCooler.ports[1])
     annotation (Line(points={{-5.6,-6},{-6,-6},{-6,-44}}, color={0,127,255}));
-  connect(ventilationUnit.port_b3, SinkSink.ports[1]) annotation (Line(points={
-          {6.8,-6},{8,-6},{8,-54},{14,-54}}, color={0,127,255}));
+  connect(ventilationUnit.port_b3, SinkSink.ports[1]) annotation (Line(points={{4.94,-6},
+          {8,-6},{8,-54},{14,-54}},          color={0,127,255}));
   connect(SourceHeater.ports[1],ventilationUnit.port_a4)
-    annotation (Line(points={{20,-34},{20,-6},{19.2,-6}}, color={0,127,255}));
+    annotation (Line(points={{20,-34},{20,-6},{17.34,-6}},color={0,127,255}));
   connect(ventilationUnit.port_b4, SinkHeater.ports[1])
-    annotation (Line(points={{30.98,-6},{42,-6},{42,-34}}, color={0,127,255}));
+    annotation (Line(points={{27.88,-6},{42,-6},{42,-34}}, color={0,127,255}));
   connect(boundaryOutsideAir.ports[1], ventilationUnit.port_a1) annotation (
       Line(points={{-70,16},{-44,16},{-44,24},{-18,24}}, color={0,127,255}));
   connect(boundaryExhAir.ports[1], ventilationUnit.port_b2) annotation (Line(

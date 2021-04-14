@@ -1,3 +1,4 @@
 within AixLib.Systems;
-package Benchmark
+package Benchmark "Package for Benchmark model"
+extends Modelica.Icons.VariantsPackage;
 end Benchmark;
