@@ -18,7 +18,8 @@ model IndoorSwimmingPool
 
   final parameter Modelica.SIunits.SpecificEnergy h_evap = AixLib.Media.Air.enthalpyOfCondensingGas(poolParam.T_pool)
                                                                                                                      "Evaporation enthalpy";
-   Modelica.SIunits.Pressure psat_T_pool=
+
+  Modelica.SIunits.Pressure psat_T_pool=
       Modelica.Media.Air.ReferenceMoistAir.Utilities.Water95_Utilities.psat(
       poolWater.T)     "Saturation pressure at pool temperature";
   Modelica.SIunits.Pressure psat_T_Air=
@@ -27,6 +28,9 @@ model IndoorSwimmingPool
            "Saturation pressure at air temperature of the zone";
   Modelica.SIunits.HeatFlowRate Q_pool(start=0)
                                                "Heat demand of swimming pool";
+  Modelica.SIunits.HeatFlowRate Q_sum(start=0) "Heat demand of swimming pool";
+  Modelica.SIunits.HeatFlowRate Q_FW(start=0)  "Heat demand to bring fresh water to pool temp";
+  Modelica.SIunits.HeatFlowRate Q_RW(start=0)  "Heat demand to bring fresh water to pool temp";
   Real phi(start=0)  "Relative humidty";
 
   // Fixed parameters and constants
@@ -322,12 +326,7 @@ Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlowEvapLoss
         rotation=90,
         origin={24,-12})));
 equation
-  Q_pool = hEvapGain.y
-          + heatTransferConduction.heatport_a.Q_flow
-          + radWaterSurface.Q_flow
-          + convWaterSurface.Q_flow
-          + m_flow_recycledWater*Medium.cp_const*(poolParam.T_pool-souRW.T)
-          + m_flow_freshWater*Medium.cp_const*(poolParam.T_pool-souFW.T);
+
 
   phi=absToRelHum.relHum;
 
@@ -364,6 +363,7 @@ equation
      end if;
    end if;
 
+   Q_FW = m_flow_freshWater*Medium.cp_const*(poolParam.T_pool-souFW.T);
 if poolParam.use_waterRecycling then
 
     connect(poolWater.ports[1], watertreatmentWR.ports[1]) annotation (Line(
@@ -379,6 +379,16 @@ if poolParam.use_waterRecycling then
   m_flow_freshWater = (1-poolParam.x_recycling)*(poolParam.m_flow_out + m_flow_evap);
   m_flow_recycledWater = poolParam.x_recycling *(poolParam.m_flow_out + m_flow_evap);
 
+  Q_sum = hEvapGain.y
+          + heatTransferConduction.heatport_a.Q_flow
+          + radWaterSurface.Q_flow
+          + convWaterSurface.Q_flow
+          + m_flow_recycledWater*Medium.cp_const*3
+          + m_flow_freshWater*Medium.cp_const*(poolParam.T_pool-souFW.T);
+
+
+  Q_RW = m_flow_recycledWater*Medium.cp_const*3;
+
 else
     connect(poolWater.ports[1], watertreatment.ports[1]) annotation (Line(
           points={{-5,6},{-40,6},{-40,-54},{-21,-54}}, color={0,127,255}));
@@ -390,7 +400,19 @@ else
             -36,-94},{-14,-94},{-14,-54},{-15,-54}}, color={0,127,255}));
   m_flow_freshWater= poolParam.m_flow_out+m_flow_evap;
   m_flow_recycledWater=0.0;
+  Q_sum = hEvapGain.y
+          + heatTransferConduction.heatport_a.Q_flow
+          + radWaterSurface.Q_flow
+          + convWaterSurface.Q_flow
+          + m_flow_freshWater*Medium.cp_const*(poolParam.T_pool-souFW.T);
+ Q_RW=0;
 end if;
+
+  if Q_sum<0 then
+    Q_pool =0;
+  else
+    Q_pool = Q_sum;
+  end if;
 
   connect(getMFlowEvap.y, mFlowEvap.m_flow_in)
     annotation (Line(points={{56.7,18},{61.6,18},{61.6,9.2}},

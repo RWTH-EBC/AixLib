@@ -45,7 +45,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
     parameter Modelica.SIunits.Area AFloor "Area of pool floor with earth contact" annotation(Dialog(group="Pool floor"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer hConFloor "Coefficient of heat transfer between the water and pool floor" annotation(Dialog(group="Pool floor"));
 
-    Modelica.Thermal.HeatTransfer.Components.Convection convExt if AExt > 0
+    Modelica.Thermal.HeatTransfer.Components.Convection convExt if AExt > 0.01
       "Convection between Water and pool wall"
       annotation (Placement(transformation(extent={{-26,24},{-42,40}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall extWalRC(
@@ -53,24 +53,25 @@ package BaseClasses "Base classes for Swimming Pool Models"
       final RExtRem=RExtRem,
       final CExt=CExt,
       final n=nExt,
-      T_start=T_start) if AExt > 0 "Pool walls with earth contact"
+      T_start=T_start) if AExt > 0.01
+                                   "Pool walls with earth contact"
       annotation (Placement(transformation(extent={{0,26},{18,42}})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-      prescribedTemperature1 if AFloor > 0 or AExt > 0
+      prescribedTemperature1 if AFloor > 0.01 or AExt > 0.01
       "Generate Heat Flow for earth contact"
                              annotation (Placement(transformation(
           extent={{-6,-6},{6,6}},
           rotation=180,
           origin={48,18})));
 
-    Modelica.Blocks.Sources.Constant const_hConExt(k=hConExt) if AExt > 0
+    Modelica.Blocks.Sources.Constant const_hConExt(k=hConExt) if AExt > 0.01
       "heat transfer coefficient between vertikal pool wall and water"
       annotation (Placement(transformation(extent={{-8,40},{-24,56}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_a if AExt > 0
        or AInt > 0 or AFloor > 0
       "Inlet for heattransfer"
       annotation (Placement(transformation(extent={{-110,-8},{-90,12}})));
-    Modelica.Blocks.Interfaces.RealInput TSoil if AFloor > 0 or AExt > 0
+    Modelica.Blocks.Interfaces.RealInput TSoil if AFloor > 0.01 or AExt > 0.01
                                                "Temperature of Soil"
       annotation (Placement(transformation(extent={{126,-2},{86,38}}),
           iconTransformation(extent={{126,16},{86,56}})));
@@ -79,25 +80,28 @@ package BaseClasses "Base classes for Swimming Pool Models"
       final RExtRem=RFloorRem,
       final CExt=CFloor,
       final n=nFloor,
-      T_start=T_start) if AFloor > 0 "Floor of Swimming Poolwith earth contact"
+      T_start=T_start) if AFloor > 0.01
+                                     "Floor of Swimming Poolwith earth contact"
       annotation (Placement(transformation(extent={{0,-16},{18,0}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.InteriorWall intWalRC(
       final n=nInt,
       final RInt=RInt,
       final CInt=CInt,
-      final T_start=T_start) if AInt > 0
+      final T_start=T_start) if AInt > 0.01
       "RC element representing interior pool walls, horizontal and vertical"
       annotation (Placement(transformation(extent={{0,-58},{16,-40}})));
-    Modelica.Thermal.HeatTransfer.Components.Convection convFloor if AFloor > 0
+    Modelica.Thermal.HeatTransfer.Components.Convection convFloor if AFloor >
+      0.01
       "Convection between Water and pool floor"
       annotation (Placement(transformation(extent={{-24,-20},{-42,-2}})));
-    Modelica.Blocks.Sources.Constant const_hConFloor(k=hConFloor) if AFloor > 0
+    Modelica.Blocks.Sources.Constant const_hConFloor(k=hConFloor) if AFloor >
+      0.01
       "Heat transfer coefficient between pool floor and water"
       annotation (Placement(transformation(extent={{-4,0},{-20,16}})));
-    Modelica.Thermal.HeatTransfer.Components.Convection convInt if AInt > 0
+    Modelica.Thermal.HeatTransfer.Components.Convection convInt if AInt > 0.01
       "Convection between water and interior pool walls"
       annotation (Placement(transformation(extent={{-24,-58},{-42,-40}})));
-    Modelica.Blocks.Sources.Constant const_hConInt(k=hConInt) if AInt > 0
+    Modelica.Blocks.Sources.Constant const_hConInt(k=hConInt) if AInt > 0.01
       "Heat transfer coefficient between interior pool wall and water"
       annotation (Placement(transformation(extent={{-6,-44},{-22,-28}})));
   equation
@@ -372,6 +376,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
   end waveMachine;
 
   model AHUcontrol "Simple on/off controller for AHU"
+    import ModelicaServices;
 
 
     parameter Real phi_sup_min= 0.4
@@ -383,20 +388,19 @@ package BaseClasses "Base classes for Swimming Pool Models"
 
     parameter Real y_Max= 1 "Max. factor of set Ventilation Flow Rate";
 
+
     Modelica.Blocks.Interfaces.RealOutput AHUProfile[4]
       annotation (Placement(transformation(extent={{94,-10},{114,10}})));
     Modelica.Blocks.Interfaces.RealInput X_w "Abs humidity "
       annotation (Placement(transformation(extent={{-122,-4},{-82,36}})));
     Controls.Continuous.LimPID conPID(
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
-      k=0.5,
-      Ti=60,
-      yMax=0,
+      k=0.05,
+      Ti=5,
+      yMax=-0.0,
       yMin=-y_Max) annotation (Placement(transformation(extent={{-50,18},{-30,38}})));
     Modelica.Blocks.Math.Gain gain(k=-1)
       annotation (Placement(transformation(extent={{8,20},{28,40}})));
-    Modelica.Blocks.Sources.Constant setPhi(k=phi_set)
-      annotation (Placement(transformation(extent={{-78,50},{-58,70}})));
     Modelica.Blocks.Sources.Constant minPhi(k=phi_sup_min)
       annotation (Placement(transformation(extent={{-6,-12},{6,0}})));
     Modelica.Blocks.Sources.Constant maxPhi(k=phi_sup_max)
@@ -405,28 +409,37 @@ package BaseClasses "Base classes for Swimming Pool Models"
       annotation (Placement(transformation(extent={{-4,-52},{6,-42}})));
     Modelica.Blocks.Interfaces.RealInput T_Air "Air Temperature"
       annotation (Placement(transformation(extent={{-122,-36},{-82,4}})));
+    Modelica.Blocks.Sources.CombiTimeTable tableAHU(
+      tableOnFile=true,
+      extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+      tableName="AHU",
+      columns=2:2,
+      fileName=ModelicaServices.ExternalReferences.loadResource("modelica://Output_Schwimmbad_Modell/Hallenbad/AHU_Hallenbad_064.txt"))
+      "Boundary condition: Opening Hours of swiming pools"
+      annotation (Placement(transformation(extent={{-90,52},{-74,68}})));
     ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum
-      annotation (Placement(transformation(extent={{-62,-22},{-42,-2}})));
+      annotation (Placement(transformation(extent={{-76,-14},{-56,6}})));
   equation
+
     connect(conPID.y, gain.u)
       annotation (Line(points={{-29,28},{4,28},{4,30},{6,30}},
                                                   color={0,0,127}));
-    connect(conPID.u_s, setPhi.y) annotation (Line(points={{-52,28},{-54,28},{-54,
-            60},{-57,60}}, color={0,0,127}));
     connect(minPhi.y, AHUProfile[2]) annotation (Line(points={{6.6,-6},{54,-6},{54,
             -2.5},{104,-2.5}}, color={0,0,127}));
     connect(maxPhi.y, AHUProfile[3]) annotation (Line(points={{6.6,-26},{56,-26},{
             56,2.5},{104,2.5}}, color={0,0,127}));
     connect(desiredT.y, AHUProfile[1]) annotation (Line(points={{6.5,-47},{54,-47},
             {54,-7.5},{104,-7.5}}, color={0,0,127}));
-    connect(X_w, absToRelHum.absHum) annotation (Line(points={{-102,16},{-83,16},{
-            -83,-6.8},{-64,-6.8}}, color={0,0,127}));
-    connect(T_Air, absToRelHum.TDryBul) annotation (Line(points={{-102,-16},{-84,-16},
-            {-84,-17.6},{-64,-17.6}}, color={0,0,127}));
-    connect(absToRelHum.relHum, conPID.u_m)
-      annotation (Line(points={{-40,-12},{-40,16}}, color={0,0,127}));
     connect(gain.y, AHUProfile[4]) annotation (Line(points={{29,30},{62,30},{62,
             7.5},{104,7.5}}, color={0,0,127}));
+    connect(tableAHU.y[1], conPID.u_s) annotation (Line(points={{-73.2,60},{-62,60},
+            {-62,28},{-52,28}}, color={0,0,127}));
+    connect(X_w, absToRelHum.absHum) annotation (Line(points={{-102,16},{-92,16},{
+            -92,1.2},{-78,1.2}}, color={0,0,127}));
+    connect(T_Air, absToRelHum.TDryBul) annotation (Line(points={{-102,-16},{-92,-16},
+            {-92,-9.6},{-78,-9.6}}, color={0,0,127}));
+    connect(absToRelHum.relHum, conPID.u_m)
+      annotation (Line(points={{-54,-4},{-40,-4},{-40,16}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end AHUcontrol;

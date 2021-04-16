@@ -3,6 +3,7 @@ record NoPool
   "This Record is a place holder for zones without pools, to avoid error messages"
   extends IndoorSwimmingPoolBaseRecord(V_pool=0.001,
   A_pool=0.001,
+  d_pool=0.0,
   V_storage=0.01,
   T_pool=273.15,
   beta_inUse=28/3600,
