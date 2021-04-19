@@ -30,7 +30,6 @@ model IndoorSwimmingPool
                                                "Heat demand of swimming pool";
   Modelica.SIunits.HeatFlowRate Q_sum(start=0) "Heat demand of swimming pool";
   Modelica.SIunits.HeatFlowRate Q_FW(start=0)  "Heat demand to bring fresh water to pool temp";
-  Modelica.SIunits.HeatFlowRate Q_RW(start=0)  "Heat demand to bring fresh water to pool temp";
   Real phi(start=0)  "Relative humidty";
 
   // Fixed parameters and constants
@@ -92,7 +91,7 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{-94,-100},{-82,-88}})));
   Sources.Boundary_pT souRW(
     redeclare package Medium = Medium,
-    T=poolParam.T_pool - 3,
+    T=poolParam.T_pool,
     nPorts=1) if poolParam.use_waterRecycling
               "Source for recycled water"
     annotation (Placement(transformation(extent={{-94,-72},{-82,-60}})));
@@ -315,12 +314,15 @@ Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlowEvapLoss
     annotation (Placement(transformation(extent={{80,6},{94,18}})));
   Modelica.Blocks.Sources.RealExpression getQPool(final y=Q_pool)
     "Prescribed mass flow for intake of recycled water into the pool-watertreatment cycle"
-    annotation (Placement(transformation(extent={{-6,-18},{8,-6}})));
+    annotation (Placement(transformation(extent={{-6,-34},{8,-22}})));
   BaseClasses.idealHeatExchanger idealHeatExchanger(
     redeclare package Medium = Medium,
     allowFlowReversal=false,
     m_flow_nominal=m_flow_start,
-    dp_nominal=0) "Return Lost Heat to Watercycle" annotation (Placement(
+    dp_nominal=0,
+    uLow=poolParam.T_pool,
+    uHigh=poolParam.T_pool + 0.2)
+                  "Return Lost Heat to Watercycle" annotation (Placement(
         transformation(
         extent={{-6,-8},{6,8}},
         rotation=90,
@@ -363,9 +365,8 @@ equation
      end if;
    end if;
 
-   Q_FW = m_flow_freshWater*Medium.cp_const*(poolParam.T_pool-souFW.T);
-if poolParam.use_waterRecycling then
 
+  if poolParam.use_waterRecycling then
     connect(poolWater.ports[1], watertreatmentWR.ports[1]) annotation (Line(
           points={{-5,6},{-40,6},{-40,-54},{-21.2,-54}}, color={0,127,255}));
     connect(watertreatmentWR.ports[2], mFlowWW.port_a) annotation (Line(points=
@@ -376,20 +377,9 @@ if poolParam.use_waterRecycling then
             {{-36,-94},{-14,-94},{-14,-54},{-16.4,-54}}, color={0,127,255}));
     connect(mFlowRW.port_b, watertreatmentWR.ports[5]) annotation (Line(points=
             {{-36,-70},{-14,-70},{-14,-54},{-14.8,-54}}, color={0,127,255}));
-  m_flow_freshWater = (1-poolParam.x_recycling)*(poolParam.m_flow_out + m_flow_evap);
-  m_flow_recycledWater = poolParam.x_recycling *(poolParam.m_flow_out + m_flow_evap);
-
-  Q_sum = hEvapGain.y
-          + heatTransferConduction.heatport_a.Q_flow
-          + radWaterSurface.Q_flow
-          + convWaterSurface.Q_flow
-          + m_flow_recycledWater*Medium.cp_const*3
-          + m_flow_freshWater*Medium.cp_const*(poolParam.T_pool-souFW.T);
-
-
-  Q_RW = m_flow_recycledWater*Medium.cp_const*3;
-
-else
+    m_flow_freshWater = (1-poolParam.x_recycling)*(poolParam.m_flow_out + m_flow_evap);
+    m_flow_recycledWater = poolParam.x_recycling *(poolParam.m_flow_out + m_flow_evap);
+  else
     connect(poolWater.ports[1], watertreatment.ports[1]) annotation (Line(
           points={{-5,6},{-40,6},{-40,-54},{-21,-54}}, color={0,127,255}));
     connect(watertreatment.ports[2], mFlowWW.port_a) annotation (Line(points={{
@@ -398,21 +388,27 @@ else
             {-17,-54},{24,-54},{24,-52}}, color={0,127,255}));
     connect(mFlowFW.port_b, watertreatment.ports[4]) annotation (Line(points={{
             -36,-94},{-14,-94},{-14,-54},{-15,-54}}, color={0,127,255}));
-  m_flow_freshWater= poolParam.m_flow_out+m_flow_evap;
-  m_flow_recycledWater=0.0;
+    m_flow_freshWater= poolParam.m_flow_out+m_flow_evap;
+    m_flow_recycledWater=0.0;
+  end if;
+
+  Q_FW = m_flow_freshWater*Medium.cp_const*(poolParam.T_pool-souFW.T);
   Q_sum = hEvapGain.y
           + heatTransferConduction.heatport_a.Q_flow
           + radWaterSurface.Q_flow
           + convWaterSurface.Q_flow
-          + m_flow_freshWater*Medium.cp_const*(poolParam.T_pool-souFW.T);
- Q_RW=0;
-end if;
+          + Q_FW;
 
-  if Q_sum<0 then
-    Q_pool =0;
-  else
-    Q_pool = Q_sum;
-  end if;
+
+
+    if Q_sum<0 then
+       Q_pool =0;
+    else
+
+
+       Q_pool = Q_sum;
+
+    end if;
 
   connect(getMFlowEvap.y, mFlowEvap.m_flow_in)
     annotation (Line(points={{56.7,18},{61.6,18},{61.6,9.2}},
@@ -517,14 +513,16 @@ connect(convWaterSurface.fluid, convPoolSurface)
   connect(poolWater.heatPort, heatTransferConduction.heatport_a) annotation (
       Line(points={{-12,16},{-14,16},{-14,54.16},{30,54.16}}, color={191,0,0}));
   connect(getQPool.y, QPool)
-    annotation (Line(points={{8.7,-12},{12,-12},{12,-28},{110,-28}},
-                                                     color={0,0,127}));
+    annotation (Line(points={{8.7,-28},{110,-28}},   color={0,0,127}));
   connect(circPump.port_b, idealHeatExchanger.port_a)
     annotation (Line(points={{24,-36},{24,-18}}, color={0,127,255}));
   connect(idealHeatExchanger.port_b, poolWater.ports[4])
     annotation (Line(points={{24,-6},{24,6},{1,6}}, color={0,127,255}));
-  connect(getQPool.y, idealHeatExchanger.setQFlow)
-    annotation (Line(points={{8.7,-12},{16.96,-12}}, color={0,0,127}));
+  connect(getQPool.y, idealHeatExchanger.setQFlow) annotation (Line(points={{
+          8.7,-28},{12,-28},{12,-12},{16.96,-12}}, color={0,0,127}));
+  connect(getTPool.y, idealHeatExchanger.TPool) annotation (Line(points={{94.7,
+          12},{96,12},{96,-4},{30,-4},{30,-6},{29.76,-6},{29.76,-6.48}}, color=
+          {0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Line(
             points={{-72,30}}, color={255,255,170}), Bitmap(extent={{-102,-104},{100,98}},
                          fileName=

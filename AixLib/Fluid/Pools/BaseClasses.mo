@@ -395,10 +395,11 @@ package BaseClasses "Base classes for Swimming Pool Models"
       annotation (Placement(transformation(extent={{-122,-4},{-82,36}})));
     Controls.Continuous.LimPID conPID(
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
-      k=0.05,
-      Ti=5,
+      k=0.015,
+      Ti=8.5,
       yMax=-0.0,
-      yMin=-y_Max) annotation (Placement(transformation(extent={{-50,18},{-30,38}})));
+      yMin=-y_Max) annotation (Placement(transformation(extent={{-50,18},{-30,
+              38}})));
     Modelica.Blocks.Math.Gain gain(k=-1)
       annotation (Placement(transformation(extent={{8,20},{28,40}})));
     Modelica.Blocks.Sources.Constant minPhi(k=phi_sup_min)
@@ -414,7 +415,8 @@ package BaseClasses "Base classes for Swimming Pool Models"
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       tableName="AHU",
       columns=2:2,
-      fileName=ModelicaServices.ExternalReferences.loadResource("modelica://Output_Schwimmbad_Modell/Hallenbad/AHU_Hallenbad_064.txt"))
+      fileName=ModelicaServices.ExternalReferences.loadResource(
+          "modelica://Output_Schwimmbad_Modell/Hallenbad/AHU_Hallenbad_saettigung.txt"))
       "Boundary condition: Opening Hours of swiming pools"
       annotation (Placement(transformation(extent={{-90,52},{-74,68}})));
     ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum
@@ -422,7 +424,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
   equation
 
     connect(conPID.y, gain.u)
-      annotation (Line(points={{-29,28},{4,28},{4,30},{6,30}},
+      annotation (Line(points={{-29,28},{-12,28},{-12,30},{6,30}},
                                                   color={0,0,127}));
     connect(minPhi.y, AHUProfile[2]) annotation (Line(points={{6.6,-6},{54,-6},{54,
             -2.5},{104,-2.5}}, color={0,0,127}));
@@ -432,8 +434,9 @@ package BaseClasses "Base classes for Swimming Pool Models"
             {54,-7.5},{104,-7.5}}, color={0,0,127}));
     connect(gain.y, AHUProfile[4]) annotation (Line(points={{29,30},{62,30},{62,
             7.5},{104,7.5}}, color={0,0,127}));
-    connect(tableAHU.y[1], conPID.u_s) annotation (Line(points={{-73.2,60},{-62,60},
-            {-62,28},{-52,28}}, color={0,0,127}));
+    connect(tableAHU.y[1], conPID.u_s) annotation (Line(points={{-73.2,60},{-62,
+            60},{-62,28},{-52,28}},
+                                color={0,0,127}));
     connect(X_w, absToRelHum.absHum) annotation (Line(points={{-102,16},{-92,16},{
             -92,1.2},{-78,1.2}}, color={0,0,127}));
     connect(T_Air, absToRelHum.TDryBul) annotation (Line(points={{-102,-16},{-92,-16},
@@ -445,29 +448,59 @@ package BaseClasses "Base classes for Swimming Pool Models"
   end AHUcontrol;
 
   model idealHeatExchanger "Basic Heatexchanger"
-    extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(dp_nominal=0,
+    extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(tau=1,dp_nominal=0,
       redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
       final prescribedHeatFlowRate=true));
+
+     parameter Real uLow(start=0) "if y=true and u<=uLow, switch to y=false";
+    parameter Real uHigh(start=1) "if y=false and u>=uHigh, switch to y=true";
 
     Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlow
       annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=0,
-          origin={-20,38})));
+          origin={-18,38})));
     Modelica.Blocks.Interfaces.RealInput setQFlow
       "Set Heatflow added to Medium" annotation (Placement(transformation(
           extent={{-20,-20},{20,20}},
           rotation=0,
-          origin={-108,40}), iconTransformation(
+          origin={-106,34}), iconTransformation(
           extent={{-20,-20},{20,20}},
           rotation=-90,
           origin={0,88})));
+    Modelica.Blocks.Logical.Hysteresis hysteresis(uLow=uLow, uHigh=uHigh)
+      annotation (Placement(transformation(extent={{-82,62},{-70,74}})));
+    Modelica.Blocks.Logical.Switch switch1
+      annotation (Placement(transformation(extent={{-52,32},{-38,46}})));
+    Modelica.Blocks.Sources.Constant getHeatCoefConv1(k=0)
+    "Coefficient of heat transfer between water surface and room air"
+    annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=0,
+        origin={-72,88})));
+    Modelica.Blocks.Interfaces.RealInput TPool
+      "Set Heatflow added to Medium" annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=0,
+          origin={-106,68}), iconTransformation(
+          extent={{20,-20},{-20,20}},
+          rotation=0,
+          origin={92,-72})));
   equation
-    connect(setQFlow, preHeatFlow.Q_flow) annotation (Line(points={{-108,40},{
-            -104,40},{-104,38},{-30,38}}, color={0,0,127}));
     connect(preHeatFlow.port, vol.heatPort)
-      annotation (Line(points={{-10,38},{-10,-10},{-9,-10}}, color={191,0,0}));
+      annotation (Line(points={{-8,38},{-8,-10},{-9,-10}},   color={191,0,0}));
+    connect(getHeatCoefConv1.y, switch1.u1) annotation (Line(points={{-67.6,88},{-58,
+            88},{-58,44.6},{-53.4,44.6}}, color={0,0,127}));
+    connect(setQFlow, switch1.u3) annotation (Line(points={{-106,34},{-77,34},{-77,
+            33.4},{-53.4,33.4}}, color={0,0,127}));
+    connect(switch1.y, preHeatFlow.Q_flow) annotation (Line(points={{-37.3,39},{-37.3,
+            38},{-28,38}}, color={0,0,127}));
+    connect(hysteresis.y, switch1.u2) annotation (Line(points={{-69.4,68},{-62,68},
+            {-62,39},{-53.4,39}}, color={255,0,255}));
+    connect(hysteresis.u, TPool)
+      annotation (Line(points={{-83.2,68},{-106,68}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end idealHeatExchanger;
+
 end BaseClasses;
