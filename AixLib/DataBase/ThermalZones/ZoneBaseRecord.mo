@@ -118,6 +118,11 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
+  parameter Boolean heating "Heating is available";
+  parameter Boolean cooling "Cooling is available";
+  parameter Boolean tabs "TABS is available";
+  parameter Boolean floor "Panel Heating/Cooling is available";
+  parameter Boolean radiator "Radiator Heating is available";
   parameter Modelica.SIunits.Temperature TThresholdHeaterTabs
     "Threshold temperature below TABS heating is used";
   parameter Modelica.SIunits.Temperature TThresholdCoolerTabs
