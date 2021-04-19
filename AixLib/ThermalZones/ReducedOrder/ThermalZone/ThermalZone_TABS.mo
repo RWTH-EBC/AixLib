@@ -81,6 +81,15 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
   parameter Real share_Cooler_Conv(min=0, max=1) = 1
     "convective contribution to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
 
+  parameter Real power_Heater_Tabs = 0
+    "Fixed available heating power of TABS"  annotation (Dialog(tab= "HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real power_Cooler_Tabs = 0
+    "Fixed available cooling power of TABS"  annotation (Dialog(tab= "HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real TThreshold_Heat_Tabs = 273.15 + 14
+    "Threshold temperature below which heating is activated"  annotation (Dialog(tab= "HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real TThreshold_Cool_Tabs = 273.15 + 16
+    "Threshold temperature above which cooling is activated"  annotation (Dialog(tab= "HeaterCooler", group="Cooler", enable=not recOrSep));
+
   // CO2 parameters
   parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
@@ -230,6 +239,10 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     annotation (Placement(transformation(extent={{66,26},{84,38}})));
   Utilities.Sources.HeaterCoolerVDI6007AC1.tabsHeaterCoolerController
     tabsHeaterCoolerController(
+    each power_Heater_Tabs=power_Heater_Tabs,
+    each power_Cooler_Tabs=power_Cooler_Tabs,
+    each TThreshold_Heat_Tabs=TThreshold_Heat_Tabs,
+    each TThreshold_Cool_Tabs=TThreshold_Cool_Tabs,
     zoneParam=zoneParam, recOrSep=recOrSep) if ((recOrSep and zoneParam.tabs) or (not recOrSep and tabs_on))  annotation (Placement(transformation(extent={{76,10},{90,24}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(zoneParam=
        zoneParam) if zoneParam.withIdealThresholds

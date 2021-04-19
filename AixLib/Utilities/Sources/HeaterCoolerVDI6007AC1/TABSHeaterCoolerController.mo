@@ -4,9 +4,9 @@ model tabsHeaterCoolerController
     "Zone definition";
   parameter Modelica.SIunits.Time timeAverage = 24*3600
     "Time span used to calculate the average ambient air temperature";
-  parameter Modelica.SIunits.Power power_Heater_Tabs = 0
+  parameter Real power_Heater_Tabs = 0
     "Fixed available heating power of TABS"  annotation (Dialog(tab="Heater", enable=not recOrSep));
-  parameter Modelica.SIunits.Power power_Cooler_Tabs = 0
+  parameter Real power_Cooler_Tabs = 0
     "Fixed available cooling power of TABS"  annotation (Dialog(tab="Cooler", enable=not recOrSep));
   parameter Real TThreshold_Heat_Tabs = 273.15 + 14
     "Threshold temperature below which heating is activated"  annotation (Dialog(tab="Heater", enable=not recOrSep));
