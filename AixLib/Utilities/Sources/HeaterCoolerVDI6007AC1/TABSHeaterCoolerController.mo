@@ -8,9 +8,9 @@ model tabsHeaterCoolerController
     "Fixed available heating power of TABS"  annotation (Dialog(tab="Heater", enable=not recOrSep));
   parameter Modelica.SIunits.Power power_Cooler_Tabs = 0
     "Fixed available cooling power of TABS"  annotation (Dialog(tab="Cooler", enable=not recOrSep));
-  parameter Real TThreshold_Heat_Tabs = 0
+  parameter Real TThreshold_Heat_Tabs = 273.15 + 14
     "Threshold temperature below which heating is activated"  annotation (Dialog(tab="Heater", enable=not recOrSep));
-  parameter Real TThreshold_Cool_Tabs = 0
+  parameter Real TThreshold_Cool_Tabs = 273.15 + 16
     "Threshold temperature above which cooling is activated"  annotation (Dialog(tab="Cooler", enable=not recOrSep));
   parameter Boolean recOrSep = false "Use record if true or seperate parameters if false" annotation(choices(choice =  false
         "Seperate",choice = true "Record",radioButtons = true));

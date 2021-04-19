@@ -2,11 +2,11 @@
 model HeaterCoolerWithTabs6007C1
 
 // Heiz- und Kühlsystemparameter
-  parameter Boolean heating_on = true "true if heating is activated";
-  parameter Boolean cooling_on = true "true if cooling is activated";
-  parameter Boolean tabs_on = false "true if tabs is available";
-  parameter Boolean floor_on = false "true if panel heating/cooling is available";
-  parameter Boolean radiator_on = true "true if radiator heating or convective h/c is available";
+  parameter Boolean heating_on = true "Activates heating" annotation(Dialog(tab = "HeaterCooler"));
+  parameter Boolean cooling_on = true "Activates cooling" annotation(Dialog(tab = "HeaterCooler"));
+  parameter Boolean tabs_on = false "TABS is available" annotation(Dialog(tab = "HeaterCooler"));
+  parameter Boolean floor_on = false "Panel heating/cooling is available" annotation(Dialog(tab = "HeaterCooler"));
+  parameter Boolean radiator_on = true "Radiator heating or Convective heating/cooling is available" annotation(Dialog(tab = "HeaterCooler"));
   parameter Real share_Heater_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to heating load" annotation(Dialog(tab = "Heater", group = "Heating"));
   parameter Real share_Heater_TabsInt(min=0, max=1) = 0
