@@ -19,7 +19,7 @@ class GET_API_GITHUB(object):
 		print(text)
 
 	def get_GitHub_Username(self):
-		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/branches/"+self.Working_Branch
+		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/branches/"+self.Correct_Branch
 		print(url)
 		payload = {}
 		headers= {}
@@ -51,7 +51,7 @@ class PULL_REQUEST_GITHUB(object):
 	def post_pull_request(self):
 		
 		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/pulls"
-		payload = '{\n    \"title\": \"IBPSA Merge '+self.Working_Branch+'\",\n    \"body\": \""Please pull this branch IBPSA_Merge to your local repository. **Open the AixLib library in dymola and check whether errors may have occurred.** If you need to change bugs or changes to the models of the AixLib, push the changes with the Commit **fix errors manually**. If the tests in the CI have passed successfully, merge the branch IBPSA_Merge to development branch.  **Delete** the Branch ' +self.Correct_Branch+ '\",\n    \"head\": \"'+self.OWNER+':'+self.Correct_Branch+'\",\n    \"base\": \"'+self.Working_Branch+'\"\n  \n}'
+		payload = '{\n    \"title\": \"IBPSA Merge '+self.Working_Branch+'\",\n    \"body\": \"Please pull this branch IBPSA_Merge to your local repository. **Open the AixLib library in dymola and check whether errors may have occurred.** If you need to change bugs or changes to the models of the AixLib, push the changes with the Commit **fix errors manually**. If the tests in the CI have passed successfully, merge the branch IBPSA_Merge to development branch.  **Delete** the Branch ' +self.Correct_Branch+ '\",\n    \"head\": \"'+self.OWNER+':'+self.Correct_Branch+'\",\n    \"base\": \"'+self.Working_Branch+'\"\n  \n}'
 		headers = {
 			'Authorization': 'Bearer '+self.GITHUB_TOKEN,
 			'Content-Type': 'application/json'
