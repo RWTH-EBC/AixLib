@@ -1,5 +1,5 @@
-Resources
-['IBPSA.Resources.src.fluid.heatpumps.calibration.Examples.SomeManufacturer_ABC060_70kW_4_0COP_R410A']
+
+ConvertAixLib_from_0.11.0_to_0.12.0
 
 Experimental
 []
@@ -7,14 +7,14 @@ Experimental
 ThermalZones
 []
 
-Airflow
-[]
-
-BoundaryConditions
+Media
 []
 
 Fluid
-['IBPSA.Fluid.Geothermal.Borefields.OneUTube', 'IBPSA.Fluid.Geothermal.Borefields.TwoUTubes', 'IBPSA.Fluid.Sensors.TemperatureWetBulbTwoPort', 'IBPSA.Fluid.Sensors.MassFractionTwoPort', 'IBPSA.Fluid.Sensors.SensibleEnthalpyFlowRate', 'IBPSA.Fluid.Sensors.RelativeHumidityTwoPort', 'IBPSA.Fluid.Sensors.LatentEnthalpyFlowRate', 'IBPSA.Fluid.Sensors.RelativeHumidity', 'IBPSA.Fluid.Humidifiers.SprayAirWasher_X', 'IBPSA.Fluid.Humidifiers.SteamHumidifier_X', 'IBPSA.Fluid.Sources.MassFlowSource_h', 'IBPSA.Fluid.Sources.TraceSubstancesFlowSource', 'IBPSA.Fluid.Sources.MassFlowSource_T', 'IBPSA.Fluid.Storage.StratifiedEnhancedInternalHex', 'IBPSA.Fluid.HeatPumps.Calibration.BaseClasses.PartialWaterToWater', 'IBPSA.Fluid.Movers.BaseClasses.FlowMachineInterface', 'AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPumps', 'AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase', 'AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase', 'AixLib.Fluid.Storage.BufferStorage', 'AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.StaticHeatPumpBoundaries.BaseModelStaticHeatPump', 'AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump', 'AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.StaticHeatPumpBoundaries.BaseModelStaticHeatPumps' ]
+['IBPSA.Fluid.Movers.BaseClasses.FlowMachineInterface', 'IBPSA.Fluid.Geothermal.Borefields.OneUTube', 'IBPSA.Fluid.Geothermal.Borefields.TwoUTubes', 'IBPSA.Fluid.Sensors.RelativeHumidity', 'IBPSA.Fluid.Sensors.MassFractionTwoPort', 'IBPSA.Fluid.Sensors.LatentEnthalpyFlowRate', 'IBPSA.Fluid.Sensors.RelativeHumidityTwoPort', 'IBPSA.Fluid.Sensors.TemperatureWetBulbTwoPort', 'IBPSA.Fluid.Sensors.SensibleEnthalpyFlowRate', 'IBPSA.Fluid.Sources.TraceSubstancesFlowSource', 'IBPSA.Fluid.Sources.MassFlowSource_h', 'IBPSA.Fluid.Sources.MassFlowSource_T', 'IBPSA.Fluid.Humidifiers.SprayAirWasher_X', 'IBPSA.Fluid.Humidifiers.SteamHumidifier_X', 'IBPSA.Fluid.Storage.StratifiedEnhancedInternalHex', 'IBPSA.Fluid.HeatPumps.Calibration.BaseClasses.PartialWaterToWater']
+
+Obsolete
+[]
 
 Utilities
 ['IBPSA.Utilities.Psychrometrics.TWetBul_TDryBulXi']
@@ -22,9 +22,12 @@ Utilities
 Controls
 []
 
-Media
+BoundaryConditions
 []
 
-Obsolete
+Airflow
 []
+
+Resources
+['IBPSA.Resources.src.fluid.heatpumps.calibration.Examples.SomeManufacturer_ABC060_70kW_4_0COP_R410A']
 

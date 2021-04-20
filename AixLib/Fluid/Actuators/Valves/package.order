@@ -4,6 +4,7 @@ ThermostaticValve
 ThreeWayEqualPercentageLinear
 ThreeWayLinear
 ThreeWayTable
+TwoWayButterfly
 TwoWayEqualPercentage
 TwoWayLinear
 TwoWayPolynomial
