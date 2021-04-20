@@ -153,10 +153,10 @@ def add_conv_to_package(aixlib_mos,aixlib_dir):
 	counter = 0
 	number = aixlib_mos[aixlib_mos.find("_to_")+4:aixlib_mos.find(".mos")]
 	#print(number)
-	
+	#ConvertAixLib_from_0.11.0_to_0.12.0.mos")),
+	aixlib_mos = aixlib_mos[aixlib_mos.find("ConvertAixLib"):]
 	for line in file:
-		#print("1")
-		#print(line)
+		
 		if line.find("conversion(from(") > -1:
 			list.append(line)
 			counter = 1
@@ -165,6 +165,7 @@ def add_conv_to_package(aixlib_mos,aixlib_dir):
 			ent = line.replace('.mos")),','.mos",')
 			list.append(ent)
 			version = '    version="'+number+'", script="modelica://'+aixlib_dir.replace(os.sep,"/")+'/' +aixlib_mos +'")),\n'
+			print(version)
 			list.append(version)
 			counter = 0
 			continue
