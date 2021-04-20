@@ -29,8 +29,8 @@ variables:
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/deploy/IBPSA_Merge.gitlab-ci.yml'
+  - project: 'SvenHinrichs/GitLabCI'
+    file:  'bin/05_Templates/deploy/IBPSA_Merge.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/UnitTests/regression_ref_check.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
