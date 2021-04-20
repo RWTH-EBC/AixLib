@@ -4,7 +4,7 @@ model MultizonePostProcessing
      "Indoor air volume of building";
   parameter Integer numZones(min=1)
     "Number of zones";
-  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[:]
+  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
   Modelica.Blocks.Math.Sum PHeaterSum(nin=numZones)
     "Power consumed for heating with ideal heaters"
@@ -22,32 +22,33 @@ model MultizonePostProcessing
     "Average temperature of all zones"
     annotation (Placement(transformation(extent={{60,76},{74,90}})));
 
-  Modelica.Blocks.Interfaces.RealInput TAir[numZones]
+  Modelica.Blocks.Interfaces.RealInput TAir[numZones](final quantity="Temperature",
+      final unit="K")
     "Air temperature of each zone" annotation (Placement(transformation(extent=
             {{-122,70},{-82,110}}), iconTransformation(extent={{-122,70},{-82,
             110}})));
-  Modelica.Blocks.Interfaces.RealInput PCooler[numZones]
+  Modelica.Blocks.Interfaces.RealInput PCooler[numZones](final quantity="HeatFlowRate",
+      final unit="W")
     "Power consumed for cooling with ideal coolers by each zone" annotation (
       Placement(transformation(extent={{-122,-14},{-82,26}}),
         iconTransformation(extent={{-122,-14},{-82,26}})));
-  Modelica.Blocks.Interfaces.RealInput PHeater[numZones]
+  Modelica.Blocks.Interfaces.RealInput PHeater[numZones](final quantity="HeatFlowRate",
+      final unit="W")
     "Power consumed for heating ling with ideal heaters by each zone"
     annotation (Placement(transformation(extent={{-122,28},{-82,68}}),
         iconTransformation(extent={{-122,28},{-82,68}})));
   Modelica.Blocks.Interfaces.RealInput PelAHU(final quantity="Power", final
-      unit="W") if     ASurTot > 0 or VAir > 0 "Electrical power of AHU"
+      unit="W") "Electrical power of AHU"
     annotation (Placement(transformation(extent={{-122,-20},{-82,20}}),
         iconTransformation(extent={{-122,-52},{-86,-16}})));
   Modelica.Blocks.Interfaces.RealInput  PHeatAHU(final quantity="HeatFlowRate",
-      final unit="W") if
-                       ASurTot > 0 or VAir > 0
+      final unit="W")
     "Thermal power of AHU for heating"
     annotation (
     Placement(transformation(extent={{-122,-56},{-82,-16}}),
     iconTransformation(extent={{-122,-90},{-86,-54}})));
   Modelica.Blocks.Interfaces.RealInput  PCoolAHU(final quantity="HeatFlowRate",
-      final unit="W") if
-                       ASurTot > 0 or VAir > 0
+      final unit="W")
     "Thermal power of AHU for cooling"
     annotation (
     Placement(transformation(extent={{-122,-84},{-84,-46}}),
