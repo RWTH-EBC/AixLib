@@ -1,6 +1,6 @@
 ﻿within AixLib.Systems.HydraulicModules.Controller;
-block CtrPumpVFlow
-  "Volume Flow Set Point Controller for variable Speed pumps"
+block CtrThrottleVFlow
+  "Volume Flow Set Point Controller for Throttles"
          Modelica.Blocks.Interfaces.RealInput vFlowAct
     "Connector of measurement input signal" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent=
@@ -16,8 +16,8 @@ public
         iconTransformation(extent={{90,-22},{138,26}})));
           parameter Boolean useExternalVset = false "If True, set Volume Flow can be given externally";
   parameter Modelica.SIunits.VolumeFlowRate vFlowSetCon = 0.01 "Volume Flow in m³/s set point of consumer";
-  parameter Real k(min=0, unit="1") = 100 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=30
+  parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
+  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
   parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
   parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
@@ -36,7 +36,7 @@ public
     annotation(Dialog(group="PID"));
   Modelica.Blocks.Sources.Constant constVflowSet(final k=vFlowSetCon) if not useExternalVset annotation (Placement(transformation(extent={{-100,-30},{-80,-10}})));
   AixLib.Controls.Continuous.LimPID PID(
-    final yMax=rpm_pump,
+    final yMax=1,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PID,
     final k=k,
@@ -52,7 +52,7 @@ public
   Modelica.Blocks.Logical.GreaterThreshold
                                         pumpSwitchOff(final threshold=0)
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  Modelica.Blocks.Sources.Constant constValvSet(final k=1) if         not useExternalVset
+  Modelica.Blocks.Sources.Constant constPumpSet(final k=rpm_pump) if  not useExternalVset
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 equation
 
@@ -75,15 +75,14 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{1,-50},
-          {100,-50},{100,0.12},{100.12,0.12}},
-                                             color={0,0,127}), Text(
+  connect(constPumpSet.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
+          {41,0},{70,0},{70,0.12},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constValvSet.y, hydraulicBus.valveSet) annotation (Line(points={{41,0},{
-          48,0},{48,0.12},{100.12,0.12}},  color={0,0,127}), Text(
+  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{1,-50},{100,-50},
+          {100,0.12},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -155,7 +154,7 @@ equation
   vFlowAct.
 </p>
 <p>
-The controller adjusts the pump speed to archive the specified volume flow
+The controller adjusts the valve to archive the specified volume flow
 </p>
 </html>"));
-end CtrPumpVFlow;
+end CtrThrottleVFlow;
