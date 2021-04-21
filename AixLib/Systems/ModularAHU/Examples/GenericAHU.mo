@@ -138,6 +138,7 @@ model GenericAHU "Example of generic ahu model"
         origin={48,-40})));
   Controller.CtrAHUBasic ctrAHUBasic(
     TFlowSet=293.15,
+    usePreheater=false,
     useTwoFanCtr=true,
     VFlowSet=3000/3600,
     initType=Modelica.Blocks.Types.InitPID.InitialState,

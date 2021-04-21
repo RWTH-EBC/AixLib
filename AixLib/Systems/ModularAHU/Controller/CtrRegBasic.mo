@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Controller;
+﻿within AixLib.Systems.ModularAHU.Controller;
 block CtrRegBasic "Controller for heating and cooling registers"
   //Boolean choice;
 
@@ -39,14 +39,16 @@ block CtrRegBasic "Controller for heating and cooling registers"
     final xd_start=xd_start,
     final y_start=y_start,
     final reverseAction=reverseAction,
-    final reset=AixLib.Types.Reset.Disabled)
+    final reset=AixLib.Types.Reset.Disabled) "PID controller for valve opening"
             annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
-  Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump)
+    "Constant pump speed"                                         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-  Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant
+  Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset
+    "Constant internal flow temperature setoint, if not external"                         annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant "Pump is always on"
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
-  BaseClasses.RegisterBus registerBus annotation (Placement(transformation(
+  BaseClasses.RegisterBus registerBus "Connector bus for register module" annotation (Placement(transformation(
           extent={{74,-26},{128,26}}), iconTransformation(extent={{88,-14},{116,
             14}})));
   Modelica.Blocks.Interfaces.RealInput TMea if useExternalTMea
