@@ -264,6 +264,19 @@ class ValidateTest(object):
 			AixLibModels.remove(i)
 		return AixLibModels
 	
+	def _CompareWhiteSimulateList(self):
+		SimulateList = ValidateTest._listAllExamples(self)
+		WhiteList = ValidateTest._IgnoreWhiteList(self)
+		WhiteListModel = []
+		for element in SimulateList:
+			for subelement in WhiteList:
+				if element == subelement:
+					WhiteListModel.append(element)
+		WhiteListModel = list(set(WhiteListModel))
+		for i in WhiteListModel:
+			SimulateList.remove(i)
+		return SimulateList
+		
 	''' Return a List with all models from the Whitelist '''
 	def _IgnoreWhiteList(self):
 		#Package = "AixLib.Fluid.Actuators"
@@ -400,8 +413,6 @@ class ValidateTest(object):
 						continue
 					if result == False:
 						print("Check for Model "+i+CRED+" failed!"+CEND+'\n')
-						#Log = dymola.getLastError()
-						#print(Log)
 						print("Second Check Test for model "+i)
 						result=dymola.checkModel(i)
 						if result == True:
@@ -411,7 +422,9 @@ class ValidateTest(object):
 						if result == False:
 							print('\n' +CRED+' Error: '+CEND+i+'\n')
 							ErrorList.append(i)
-							
+							Log = dymola.getLastError()
+							print(Log)
+						
 							
 				
 			
@@ -450,7 +463,7 @@ class ValidateTest(object):
 		
 			ErrorList = []
 			if self.Changedmodels == False:	
-				ModelList = ValidateTest._listAllExamples(self)
+				ModelList = ValidateTest._CompareWhiteSimulateList(self)
 				if len(ModelList) == 0:
 					print(CRED+"Error: "+CEND+"Found no Examples")
 					exit(0)
@@ -463,8 +476,6 @@ class ValidateTest(object):
 						
 					if result == False:
 						print("Check for Model "+i+CRED+" failed!"+CEND+'\n')
-						#Log = dymola.getLastError()
-						#print(Log)
 						print("Second Check Test for model "+i)
 						result=dymola.checkModel(i,simulate=True)
 						if result == True:
@@ -473,7 +484,12 @@ class ValidateTest(object):
 						if result == False:
 							print('\n '+CRED+'Error: '+CEND+i+'\n')
 							ErrorList.append(i)
-								
+							Log = dymola.getLastError()
+							print(Log)
+				IBPSA_Model = str(ValidateTest._IgnoreWhiteList(self))
+				print("\n"+"\n")
+				if len(IBPSA_Model) > 0:
+					print("Don´t Check these Models "+IBPSA_Model)			
 						
 			if self.Changedmodels == True:
 				list_path = 'bin'+os.sep+'03_WhiteLists'+os.sep+'changedmodels.txt'
@@ -497,8 +513,6 @@ class ValidateTest(object):
 					if result == False:
 						print("Check for Model "+i+CRED+" failed!"+CEND+'\n')
 						
-						#Log = dymola.getLastError()
-						#print(Log)
 						print("Second Check Test for model "+i)
 						result=dymola.checkModel(i,simulate=True)
 						if result == True:
@@ -506,6 +520,8 @@ class ValidateTest(object):
 						if result == False:
 							print('\n' +CRED+' Error: '+CEND+i+'\n')
 							ErrorList.append(i)
+							Log = dymola.getLastError()
+							print(Log)
 							
 			dymola.savelog(self.Package+"-log.txt")
 			dymola.close()
@@ -736,6 +752,7 @@ if  __name__ == '__main__':
 					exit(1)
 		print(("2: Using Dymola port " + str(dymola._portnumber)))
 		print(green+"Dymola License is available"+CEND)
+		
 		
 		
 		from validatetest import  ValidateTest
