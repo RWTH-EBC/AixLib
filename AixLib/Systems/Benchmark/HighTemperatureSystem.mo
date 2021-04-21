@@ -45,6 +45,9 @@ model HighTemperatureSystem
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     length=1,
+    redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)),
     pipe3(length=2)) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,

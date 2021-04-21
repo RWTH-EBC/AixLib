@@ -14,9 +14,7 @@ model SimpleRoom
     m1_flow_nominal=2,
     m2_flow_nominal=1,
     cooler(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -29,9 +27,7 @@ model SimpleRoom
         dT_nom=4,
         Q_nom=10000)),
     heater(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -55,7 +51,7 @@ model SimpleRoom
                                                     thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.Systems.Benchmark.BaseClasses.BenchmarkCanteen(),
+    zoneParam=BaseClasses.BenchmarkCanteen(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -279,9 +275,9 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(bouWaterhot.ports[1], ventilationUnit1.port_a4) annotation (Line(
-        points={{-56,-82},{-56,-12},{-52.4,-12}}, color={0,127,255}));
+        points={{-56,-82},{-56,-12},{-53.78,-12}},color={0,127,255}));
   connect(bouWaterhot1.ports[1], ventilationUnit1.port_b4) annotation (Line(
-        points={{-20,-76},{-50,-76},{-50,-12},{-43.66,-12}}, color={0,127,255}));
+        points={{-20,-76},{-50,-76},{-50,-12},{-45.96,-12}}, color={0,127,255}));
   connect(bouWaterhot1.ports[2], tabs4_1.port_b1) annotation (Line(points={{-16,-76},
           {56,-76},{56,-59.6364}},      color={0,127,255}));
   connect(tabs4_1.port_a1, bouWaterhot.ports[2]) annotation (Line(points={{24,
@@ -293,7 +289,7 @@ equation
   connect(bouWatercold.ports[2], ventilationUnit1.port_a3) annotation (Line(
         points={{-4,-116},{-72,-116},{-72,-12},{-70.8,-12}}, color={0,127,255}));
   connect(bouWatercold1.ports[2], ventilationUnit1.port_b3) annotation (Line(
-        points={{26,-116},{26,-112},{-66,-112},{-66,-12},{-61.6,-12}}, color={0,
+        points={{26,-116},{26,-112},{-66,-112},{-66,-12},{-62.98,-12}},color={0,
           127,255}));
   connect(thermalZone1.TAir, bus.TRoom1Mea) annotation (Line(points={{58.5,63.4},
           {58.5,112},{-1.91,112},{-1.91,108.11}}, color={0,0,127}), Text(

@@ -11,7 +11,7 @@ record BenchmarkCanteen "Canteen zone of  benchmark building"
     ATransparent={40,40},
     hConWin=12,
     RWin=1/(1.3*80),
-    gWin=0.25,
+    gWin=0.5,
     UWin=1.3,
     ratioWinConRad=0.09,
     AExt={20,20},
@@ -72,6 +72,8 @@ record BenchmarkCanteen "Canteen zone of  benchmark building"
     withAHU=false,
     minAHU=0,
     maxAHU=12,
+    maxIrr = {100,100},
+    shadingFactor = {0.7,0.7},
     hHeat=167500,
     lHeat=0,
     KRHeat=1000,
@@ -84,7 +86,8 @@ record BenchmarkCanteen "Canteen zone of  benchmark building"
     CoolerOn=false,
         TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
-    withIdealThresholds=false);                     //not area specific: W_per_person/area => input will be number of persons
+    withIdealThresholds=false);
+                                                    //not area specific: W_per_person/area => input will be number of persons
   annotation (Documentation(revisions="<html>
  <ul>
   <li>

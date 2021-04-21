@@ -251,9 +251,7 @@ model BenchmarkBuilding "Benchmark building model"
     useHumidifierRet=false,
     useHumidifier=true,
     perheater(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
         redeclare
@@ -267,9 +265,7 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=30,
         Q_nom=60000)),
     cooler(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
         redeclare
@@ -284,9 +280,7 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=15,
         Q_nom=150000)),
     heater(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
         redeclare
@@ -335,9 +329,7 @@ model BenchmarkBuilding "Benchmark building model"
     m1_flow_nominal=1,
     m2_flow_nominal=1,
     cooler(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -349,9 +341,7 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=10000)),
     heater(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -370,9 +360,7 @@ model BenchmarkBuilding "Benchmark building model"
     m1_flow_nominal=1,
     m2_flow_nominal=1,
     cooler(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -384,9 +372,7 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=10000)),
     heater(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -405,9 +391,7 @@ model BenchmarkBuilding "Benchmark building model"
     m1_flow_nominal=1,
     m2_flow_nominal=1,
     cooler(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -419,9 +403,7 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=10000)),
     heater(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -440,9 +422,7 @@ model BenchmarkBuilding "Benchmark building model"
     m1_flow_nominal=1,
     m2_flow_nominal=1,
     cooler(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -454,9 +434,7 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=10000)),
     heater(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -475,9 +453,7 @@ model BenchmarkBuilding "Benchmark building model"
     m1_flow_nominal=1,
     m2_flow_nominal=1,
     cooler(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -489,9 +465,7 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=10000)),
     heater(redeclare HydraulicModules.Admix hydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.032,
+        parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=0.5,
         Kv=6.3,
         redeclare
@@ -646,50 +620,50 @@ equation
          {{0.545455,274},{14,274},{14,268},{32.38,268}}, color={0,127,255}));
   connect(genericAHU.port_b1, ventilationUnit1.port_a1) annotation (Line(points=
          {{0.545455,250},{32,250},{32,256}}, color={0,127,255}));
-  connect(ventilationUnit1.port_a4, genericAHU.port_a5) annotation (Line(points={{54.8,
+  connect(ventilationUnit1.port_a4, genericAHU.port_a5) annotation (Line(points={{53.66,
           236},{52,236},{52,174},{-38.1818,174},{-38.1818,220}},       color={238,
           46,47}));
-  connect(ventilationUnit1.port_b4, genericAHU.port_b5) annotation (Line(points={{62.02,
+  connect(ventilationUnit1.port_b4, genericAHU.port_b5) annotation (Line(points={{60.12,
           236},{60,236},{60,184},{-27.8182,184},{-27.8182,220}},        color={238,
           46,47}));
   connect(genericAHU.port_a2,ventilationUnit2. port_b2) annotation (Line(points=
          {{0.545455,274},{102,274},{102,268},{202.38,268}}, color={0,127,255}));
   connect(genericAHU.port_b1,ventilationUnit2. port_a1) annotation (Line(points=
          {{0.545455,250},{202,250},{202,256}}, color={0,127,255}));
-  connect(ventilationUnit2.port_a4, genericAHU.port_a5) annotation (Line(points={{224.8,
+  connect(ventilationUnit2.port_a4, genericAHU.port_a5) annotation (Line(points={{223.66,
           236},{224,236},{224,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
           47}));
-  connect(ventilationUnit2.port_b4, genericAHU.port_b5) annotation (Line(points={{232.02,
+  connect(ventilationUnit2.port_b4, genericAHU.port_b5) annotation (Line(points={{230.12,
           236},{232,236},{232,184},{-27.8182,184},{-27.8182,220}},
         color={238,46,47}));
   connect(genericAHU.port_a2,ventilationUnit3. port_b2) annotation (Line(points=
          {{0.545455,274},{150,274},{150,268},{300.38,268}}, color={0,127,255}));
   connect(genericAHU.port_b1,ventilationUnit3. port_a1) annotation (Line(points=
          {{0.545455,250},{300,250},{300,256}}, color={0,127,255}));
-  connect(ventilationUnit3.port_a4, genericAHU.port_a5) annotation (Line(points={{322.8,
+  connect(ventilationUnit3.port_a4, genericAHU.port_a5) annotation (Line(points={{321.66,
           236},{322,236},{322,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
           47}));
-  connect(ventilationUnit3.port_b4, genericAHU.port_b5) annotation (Line(points={{330.02,
+  connect(ventilationUnit3.port_b4, genericAHU.port_b5) annotation (Line(points={{328.12,
           236},{330,236},{330,184},{-27.8182,184},{-27.8182,220}},
         color={238,46,47}));
   connect(genericAHU.port_a2,ventilationUnit4. port_b2) annotation (Line(points=
          {{0.545455,274},{202,274},{202,268},{400.38,268}}, color={0,127,255}));
   connect(genericAHU.port_b1,ventilationUnit4. port_a1) annotation (Line(points=
          {{0.545455,250},{400,250},{400,256}}, color={0,127,255}));
-  connect(ventilationUnit4.port_a4, genericAHU.port_a5) annotation (Line(points={{422.8,
+  connect(ventilationUnit4.port_a4, genericAHU.port_a5) annotation (Line(points={{421.66,
           236},{424,236},{424,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
           47}));
-  connect(ventilationUnit4.port_b4, genericAHU.port_b5) annotation (Line(points={{430.02,
+  connect(ventilationUnit4.port_b4, genericAHU.port_b5) annotation (Line(points={{428.12,
           236},{432,236},{432,184},{-27.8182,184},{-27.8182,220}},
         color={238,46,47}));
   connect(genericAHU.port_a2,ventilationUnit5. port_b2)
     annotation (Line(points={{0.545455,274},{510.38,274}}, color={0,127,255}));
   connect(genericAHU.port_b1,ventilationUnit5. port_a1) annotation (Line(points=
          {{0.545455,250},{510,250},{510,262}}, color={0,127,255}));
-  connect(ventilationUnit5.port_a4, genericAHU.port_a5) annotation (Line(points={{532.8,
+  connect(ventilationUnit5.port_a4, genericAHU.port_a5) annotation (Line(points={{531.66,
           242},{532,242},{532,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
           47}));
-  connect(ventilationUnit5.port_b4, genericAHU.port_b5) annotation (Line(points={{540.02,
+  connect(ventilationUnit5.port_b4, genericAHU.port_b5) annotation (Line(points={{538.12,
           242},{540,242},{540,184},{-27.8182,184},{-27.8182,220}},
         color={238,46,47}));
   connect(ventilationUnit1.port_b1, thermalZone1.ports[1]) annotation (Line(
@@ -952,21 +926,21 @@ equation
   connect(vol.ports[2], genericAHU.port_b4) annotation (Line(points={{121,76},{
           -49.0909,76},{-49.0909,220}}, color={0,127,255}));
   connect(vol.ports[3], ventilationUnit1.port_b3) annotation (Line(points={{121.667,
-          76},{47.2,76},{47.2,236}},         color={0,127,255}));
+          76},{46.06,76},{46.06,236}},       color={0,127,255}));
   connect(vol.ports[4], tabs4_1.port_b2) annotation (Line(points={{122.333,76},
           {186,76},{186,120.364}}, color={0,127,255}));
   connect(vol.ports[5], ventilationUnit2.port_b3) annotation (Line(points={{123,76},
-          {217.2,76},{217.2,236}},     color={0,127,255}));
+          {216.06,76},{216.06,236}},   color={0,127,255}));
   connect(vol.ports[6],tabs4_2. port_b2) annotation (Line(points={{123.667,76},
           {268,76},{268,120.364}}, color={0,127,255}));
   connect(vol.ports[7], ventilationUnit3.port_b3) annotation (Line(points={{124.333,
-          76},{315.2,76},{315.2,236}},         color={0,127,255}));
+          76},{314.06,76},{314.06,236}},       color={0,127,255}));
   connect(vol.ports[8], ventilationUnit4.port_b3) annotation (Line(points={{125,76},
-          {415.2,76},{415.2,236}},             color={0,127,255}));
+          {414.06,76},{414.06,236}},           color={0,127,255}));
   connect(vol.ports[9],tabs4_4.  port_b2) annotation (Line(points={{125.667,76},
           {468,76},{468,120.364}}, color={0,127,255}));
   connect(vol.ports[10], ventilationUnit5.port_b3) annotation (Line(points={{126.333,
-          76},{525.2,76},{525.2,242}},     color={0,127,255}));
+          76},{524.06,76},{524.06,242}},   color={0,127,255}));
   connect(vol.ports[11],tabs4_5. port_b2) annotation (Line(points={{127,76},{
           568,76},{568,120.364}},  color={0,127,255}));
   connect(tabs4_3.port_b2, vol.ports[12]) annotation (Line(points={{372,120.364},
