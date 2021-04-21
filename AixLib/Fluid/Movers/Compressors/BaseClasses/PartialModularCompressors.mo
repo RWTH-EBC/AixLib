@@ -154,7 +154,8 @@ partial model PartialModularCompressors
   //
   replaceable model ModularController =
     Controls.HeatPump.ModularHeatPumps.ModularCompressorController
-    constrainedby Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
+    constrainedby
+    Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
     "Model of the modular controller"
     annotation (choicesAllMatching=true,
                 Dialog(tab="Controller", group="General"));
@@ -273,7 +274,7 @@ partial model PartialModularCompressors
     annotation(Dialog(tab = "Pressure and heat losses",
                group="Pressure losses - Advanced"),
                HideResult=not show_parCom);
-  parameter Boolean homotopyInitialization[nCom] = fill(true, nCom)
+  constant Boolean homotopyInitialization[nCom] = fill(true, nCom)
     "= true, use homotopy method  for initialisation"
     annotation(Dialog(tab = "Pressure and heat losses",
                group="Pressure losses - Advanced"),
