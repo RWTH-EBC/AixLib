@@ -113,8 +113,8 @@ Trad=Radiative.T;
 dT_V=Tin - Tair;
 dT_R=Tout - Tair;
 
-  connect(twoStar_RadEx.rad, Radiative) annotation (Line(
-      points={{32,55.1},{36,55.1},{36,80},{46,80}},
+  connect(twoStar_RadEx.radPort, Radiative) annotation (Line(
+      points={{32,56.1},{36,56.1},{36,80},{46,80}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
@@ -144,8 +144,8 @@ dT_R=Tout - Tair;
       points={{-13,19.34},{-52,19.34},{-52,39}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(radiatorWall.port_b, twoStar_RadEx.conv) annotation (Line(
-      points={{-13,19.34},{32,19.34},{32,36.8}},
+  connect(radiatorWall.port_b, twoStar_RadEx.convPort) annotation (Line(
+      points={{-13,19.34},{32,19.34},{32,36}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(heatConv_Radiator.port_b, Convective) annotation (Line(

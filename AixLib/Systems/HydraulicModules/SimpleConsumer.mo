@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model SimpleConsumer "Simple Consumer"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
   import SI=Modelica.SIunits;

@@ -29,30 +29,15 @@ package UsersGuide "User's Guide"
   in the above model, the parameters for the flow resistance are
 </p>
 <pre>
-
-
-
   val(dpValve_nominal=6000, dpFixed=0, m_flow_nominal=0.1);
-
-
-
   res(dp_nominal=10000,                m_flow_nominal=0.1);
-
-
-
 </pre>
 <p>
   Instead of this arrangement, the model <code>res</code> can be
   deleted and the valve configured as
 </p>
 <pre>
-
-
-
   val(dpValve_nominal=6000, dpFixed=10000, m_flow_nominal=0.1);
-
-
-
 </pre>
 <p>
   This yields the same simulation results, but a nonlinear equation can
@@ -74,21 +59,9 @@ package UsersGuide "User's Guide"
   Suppose the parameters are
 </p>
 <pre>
-
-
-
   val(dpValve_nominal=6000, dpFixed={0, 0}, m_flow_nominal=0.1);
-
-
-
   res1(dp_nominal=10000,                    m_flow_nominal=0.1);
-
-
-
   res3(dp_nominal=100,                      m_flow_nominal=0.1);
-
-
-
 </pre>
 <p>
   An equivalent model could be created by deleting the two resistance
@@ -96,13 +69,7 @@ package UsersGuide "User's Guide"
   valve as
 </p>
 <pre>
-
-
-
   val(dpValve_nominal=6000, dpFixed={10000, 100}, m_flow_nominal=0.1);
-
-
-
 </pre>
 <h4>
   Leakage flow rate
