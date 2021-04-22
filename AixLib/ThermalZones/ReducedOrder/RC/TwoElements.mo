@@ -44,8 +44,8 @@ model TwoElements
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabsExtWalls if ATotExt
      > 0 "Q_HK_BT_AW, Auxiliary port at core of exterior walls"
     annotation (Placement(transformation(extent={{178,-190},{198,-170}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRadExtWalls if ATot > 0
-    "Q_HK_str_AW, Auxiliary port at indoor surface of exterior walls"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRad if ATot > 0
+    "Q_HK_str, Auxiliary port at indoor surface of windows, exterior and interior walls"
     annotation (Placement(transformation(extent={{230,-190},{250,-170}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkExtWalls if ATot > 0
     "Q_HK_FO_AW, Auxiliary port at indoor surface of exterior walls"
@@ -53,9 +53,6 @@ model TwoElements
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkConv if ATot > 0 or
     VAir > 0 "Q_HK_kon, Auxiliary port at indoor air volume"
     annotation (Placement(transformation(extent={{230,-140},{250,-120}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRadIntWalls if AInt > 0
-    "Q_HK_str_IW, Auxiliary port at indoor surface of interior walls"
-    annotation (Placement(transformation(extent={{230,-92},{250,-72}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkIntWalls if AInt > 0
     "Q_HK_FO_IW, Auxiliary port at indoor surface of interior walls"
     annotation (Placement(transformation(extent={{230,-116},{250,-96}})));
@@ -80,11 +77,10 @@ model TwoElements
     "Splits incoming heat flow from panel heating into separate flows for each wall element,
     weighted by their area"
     annotation (Placement(transformation(extent={{226,-164},{206,-144}})));
-  BaseClasses.ThermSplitter thermSplitterHkRadExtWallsWin(
-    final splitFactor=splitFactorExtWin,
-    final nOut=dimensionExtWin,
-    final nIn=1) if ATot > 0
-    "Splits incoming heat flow from radiative heating/cooling into separate flows for each wall element,
+  BaseClasses.ThermSplitter thermSplitterHkRad(
+    final splitFactor=splitFactor,
+    final nOut=dimension,
+    final nIn=1) if ATot > 0 "Splits incoming heat flow from radiative heating/cooling into separate flows for each wall element,
     weighted by their area"
     annotation (Placement(transformation(extent={{226,-190},{206,-170}})));
 
@@ -134,13 +130,11 @@ equation
     connect(thermSplitterIntGains.portOut[2], intWallRC.port_a);
     connect(thermSplitterSolRad.portOut[2], intWallRC.port_a);
   elseif ATotExt > 0 and ATotWin > 0 and AInt > 0 then
-    connect(thermSplitterIntGains.portOut[3], intWallRC.port_a)
-      annotation (Line(
+    connect(thermSplitterIntGains.portOut[3], intWallRC.port_a) annotation (Line(
       points={{190,86},{166,86},{166,-40},{182,-40}},
       color={191,0,0},
       smooth=Smooth.None));
-    connect(thermSplitterSolRad.portOut[3], intWallRC.port_a)
-      annotation (
+    connect(thermSplitterSolRad.portOut[3], intWallRC.port_a) annotation (
       Line(
       points={{-122,146},{-58,146},{-58,96},{160,96},{160,-40},{182,-40}},
       color={191,0,0},
@@ -172,8 +166,6 @@ equation
         color={191,0,0}));
   connect(hkConv, senTAir.port) annotation (Line(points={{240,-130},{114,-130},{
           114,-22},{66,-22},{66,0},{80,0}},  color={191,0,0}));
-  connect(hkRadIntWalls, intWallRC.port_a) annotation (Line(points={{240,-82},{
-          178,-82},{178,-40},{182,-40}}, color={191,0,0}));
   connect(fhkIntWalls, intWallRC.port_a) annotation (Line(points={{240,-106},{
           178,-106},{178,-40},{182,-40}}, color={191,0,0}));
   connect(tabsIntWalls, intWallRC.port_a1) annotation (Line(points={{240,-20},{
@@ -181,7 +173,9 @@ equation
   connect(tabsExtWalls, tabsExtWalls) annotation (Line(points={{188,-180},{188,-180}},
                                   color={191,0,0}));
   connect(fhkExtWalls, thermSplitterFhkExtWallsWin.portIn[1]) annotation (Line(points={{240,-154},{226,-154}}, color={191,0,0}));
-  connect(hkRadExtWalls, thermSplitterHkRadExtWallsWin.portIn[1]) annotation (Line(points={{240,-180},{226,-180}}, color={191,0,0}));
+  connect(hkRad, thermSplitterHkRad.portIn[1])
+    annotation (Line(points={{240,-180},{226,-180}}, color={191,0,0}));
+
   if ATotExt > 0 and ATotWin > 0 then
     connect(thermSplitterFhkExtWallsWin.portOut[1], convExtWall.solid) annotation (Line(points={{206,
             -154},{-76,-154},{-76,-40},{-114,-40}},                                                                                        color={191,
@@ -189,18 +183,37 @@ equation
     connect(thermSplitterFhkExtWallsWin.portOut[2], convWin.solid) annotation (
       Line(points={{206,-154},{-46,-154},{-46,40},{-116,40}},
                                                             color={191,0,0}));
-    connect(thermSplitterHkRadExtWallsWin.portOut[1], convExtWall.solid)  annotation (Line(points={{206,
-            -180},{206,-162},{-76,-162},{-76,-40},{-114,-40}},                                                                                color={191,
-          0,0}));
-    connect(thermSplitterHkRadExtWallsWin.portOut[2], convWin.solid) annotation (
-      Line(points={{206,-180},{206,-162},{-46,-162},{-46,40},{-116,40}},
-                                                            color={191,0,0}));
   elseif not ATotExt > 0 and ATotWin > 0 then
     connect(thermSplitterFhkExtWallsWin.portOut[1], convWin.solid);
-    connect(thermSplitterHkRadExtWallsWin.portOut[1], convWin.solid);
   elseif ATotExt > 0 and not ATotWin > 0 then
     connect(thermSplitterFhkExtWallsWin.portOut[1], convExtWall.solid);
-    connect(thermSplitterHkRadExtWallsWin.portOut[1], convExtWall.solid);
+  end if;
+
+  if ATotExt > 0 and ATotWin > 0 and AInt > 0 then
+    connect(thermSplitterHkRad.portOut[1], convExtWall.solid) annotation (Line(
+          points={{206,-180},{206,-162},{-76,-162},{-76,-40},{-114,-40}}, color=
+           {191,0,0}));
+    connect(thermSplitterHkRad.portOut[2], convWin.solid) annotation (Line(
+          points={{206,-180},{206,-162},{-46,-162},{-46,40},{-116,40}}, color={191,
+            0,0}));
+    connect(thermSplitterHkRad.portOut[3], convIntWall.solid) annotation (Line(
+        points={{206,-180},{206,-108},{178,-108},{178,-40},{148,-40}},
+                                                             color={191,0,0}));
+  elseif not ATotExt > 0 and ATotWin > 0 and AInt > 0 then
+    connect(thermSplitterHkRad.portOut[1], convWin.solid);
+    connect(thermSplitterHkRad.portOut[2], convIntWall.solid);
+  elseif ATotExt > 0 and not ATotWin > 0 and AInt > 0 then
+    connect(thermSplitterHkRad.portOut[1], convExtWall.solid);
+    connect(thermSplitterHkRad.portOut[2], convIntWall.solid);
+  elseif ATotExt > 0 and ATotWin > 0 and not AInt > 0 then
+    connect(thermSplitterHkRad.portOut[1], convExtWall.solid);
+    connect(thermSplitterHkRad.portOut[2], convWin.solid);
+  elseif ATotExt > 0 and not ATotWin > 0 and not AInt > 0 then
+    connect(thermSplitterHkRad.portOut[1], convExtWall.solid);
+  elseif not ATotExt > 0 and ATotWin > 0 and not AInt > 0 then
+    connect(thermSplitterHkRad.portOut[1], convWin.solid);
+  elseif not ATotExt > 0 and not ATotWin > 0 and AInt > 0 then
+    connect(thermSplitterHkRad.portOut[1], convIntWall.solid);
   end if;
 
    annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
