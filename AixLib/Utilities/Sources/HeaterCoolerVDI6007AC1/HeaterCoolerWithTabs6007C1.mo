@@ -521,29 +521,65 @@ equation
           {60,-37.2}}, color={0,0,127}));
   connect(pITempCoolRem.y, gainCConv.u) annotation (Line(points={{68,-14},{80,-14},{80,-37.2}}, color={0,0,127}));
 
-  connect(pITempHeatPanel.y, sumHeating.u[2]) annotation (Line(
+  connect(sumHeating.y, heatingPower) annotation (Line(points={{134.6,30},{160,30}}, color={0,0,127}));
+  connect(sumCooling.y, coolingPower) annotation (Line(points={{134.6,-30},{160,-30}}, color={0,0,127}));
+
+  if ((recOrSep and zoneParam.floor and zoneParam.radiator and zoneParam.tabs)
+  or (not recOrSep and floor_on and radiator_on and tabs_on)) then
+  connect(pITempHeatPanel.y, sumHeating.u[3]) annotation (Line(
       points={{18,14},{112,14},{112,30},{120.8,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(pITempHeatRem.y, sumHeating.u[1]) annotation (Line(
+  connect(pITempHeatRem.y, sumHeating.u[2]) annotation (Line(
       points={{68,14},{112,14},{112,30},{120.8,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(tabsHeatingPower, sumHeating.u[3]) annotation (Line(points={{-90,100},
-          {-88,100},{-88,14},{114,14},{114,30},{120.8,30}}, color={0,0,127}));
-  connect(sumHeating.y, heatingPower) annotation (Line(points={{134.6,30},{160,30}}, color={0,0,127}));
-  connect(pITempCoolPanel.y, sumCooling.u[2]) annotation (Line(
+  connect(tabsHeatingPower, sumHeating.u[1]) annotation (Line(points={{-90,100},
+            {-90,14},{112,14},{112,30},{120.8,30}},         color={0,0,127},
+        pattern=LinePattern.Dash));
+  connect(pITempCoolPanel.y, sumCooling.u[3]) annotation (Line(
       points={{18,-14},{112,-14},{112,-30},{120.8,-30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(pITempCoolRem.y, sumCooling.u[1]) annotation (Line(
+  connect(pITempCoolRem.y, sumCooling.u[2]) annotation (Line(
       points={{68,-14},{112,-14},{112,-30},{120.8,-30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(tabsCoolingPower, sumCooling.u[3]) annotation (Line(points={{-64,100},
-          {-64,-14},{112,-14},{112,-30},{120.8,-30}}, color={0,0,127}));
-  connect(sumCooling.y, coolingPower)
-    annotation (Line(points={{134.6,-30},{160,-30}}, color={0,0,127}));
+  connect(tabsCoolingPower, sumCooling.u[1]) annotation (Line(points={{-64,100},
+          {-64,-14},{112,-14},{112,-30},{120.8,-30}}, color={0,0,127},
+        pattern=LinePattern.Dash));
+  elseif ((recOrSep and zoneParam.floor and not zoneParam.radiator and zoneParam.tabs)
+  or (not recOrSep and floor_on and not radiator_on and tabs_on)) then
+  connect(pITempHeatPanel.y, sumHeating.u[2]);
+  connect(pITempCoolPanel.y, sumCooling.u[2]);
+  connect(tabsHeatingPower, sumHeating.u[1]);
+  connect(tabsCoolingPower, sumCooling.u[1]);
+  elseif ((recOrSep and not zoneParam.floor and zoneParam.radiator and zoneParam.tabs)
+  or (not recOrSep and not floor_on and radiator_on and tabs_on)) then
+  connect(tabsHeatingPower, sumHeating.u[1]);
+  connect(tabsCoolingPower, sumCooling.u[1]);
+  connect(pITempHeatRem.y, sumHeating.u[2]);
+  connect(pITempCoolRem.y, sumCooling.u[2]);
+  elseif ((recOrSep and zoneParam.floor and zoneParam.radiator and not zoneParam.tabs)
+  or (not recOrSep and floor_on and radiator_on and not tabs_on)) then
+  connect(pITempHeatRem.y, sumHeating.u[1]);
+  connect(pITempCoolRem.y, sumCooling.u[1]);
+  connect(pITempHeatPanel.y, sumHeating.u[2]);
+  connect(pITempCoolPanel.y, sumCooling.u[2]);
+  elseif ((recOrSep and not zoneParam.floor and not zoneParam.radiator and zoneParam.tabs)
+  or (not recOrSep and not floor_on and not radiator_on and tabs_on)) then
+  connect(tabsHeatingPower, sumHeating.u[1]);
+  connect(tabsCoolingPower, sumCooling.u[1]);
+  elseif ((recOrSep and zoneParam.floor and not zoneParam.radiator and not zoneParam.tabs)
+  or (not recOrSep and floor_on and not radiator_on and not tabs_on)) then
+  connect(pITempHeatPanel.y, sumHeating.u[1]);
+  connect(pITempCoolPanel.y, sumCooling.u[1]);
+  elseif ((recOrSep and not zoneParam.floor and zoneParam.radiator and not zoneParam.tabs)
+  or (not recOrSep and not floor_on and radiator_on and not tabs_on)) then
+  connect(pITempHeatRem.y, sumHeating.u[1]);
+  connect(pITempCoolRem.y, sumCooling.u[1]);
+  end if;
+
   connect(tabsCoolingPower, gainCTabsExt.u) annotation (Line(points={{-64,100},{
           -64,36},{-54,36},{-54,-28},{-40,-28},{-40,-37.2}}, color={0,0,127}));
   connect(tabsCoolingPower, gainCTabsInt.u) annotation (Line(points={{-64,100},{
