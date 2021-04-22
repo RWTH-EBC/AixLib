@@ -157,10 +157,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     one or several exterior building components to heating load";
   parameter Real shareHeatPanelInt "Contribution from any heated surfaces of 
     one or several interior building components to heating load";
-  parameter Real shareHeatRadExt "Radiant contribution of one or several 
-    exterior building components to heating load";
-  parameter Real shareHeatRadInt "Radiant contribution of one or several 
-    interior building components to heating load";
+  parameter Real shareHeatRad "Radiant contribution to heating load";
   parameter Real shareHeatConv "Convective contribution to heating load";
   parameter Real shareCoolTabsExt "Contribution from a system installed in the 
     core of one or several exterior building components to cooling load";
@@ -170,10 +167,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     one or several exterior building components to cooling load";
   parameter Real shareCoolPanelInt "Contribution from any cooled surfaces of 
     one or several interior building components to cooling load";
-  parameter Real shareCoolRadExt "Radiant contribution of one or several 
-    exterior building components to cooling load";
-  parameter Real shareCoolRadInt "Radiant contribution of one or several 
-    interior building components to cooling load";
+  parameter Real shareCoolRad "Radiant contribution to cooling load";
   parameter Real shareCoolConv "Convective contribution to cooling load";
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=

@@ -45,10 +45,10 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     "contribution from any heated surfaces of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
   parameter Real share_Heater_PanelInt(min=0, max=1) = 0
     "contribution from any heated surfaces of one or several interior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
-  parameter Real share_Heater_RadExt(min=0, max=1) = 0
+  parameter Real share_Heater_Rad(min=0, max=1) = 0
     "radiant contribution of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
-  parameter Real share_Heater_RadInt(min=0, max=1) = 0
-    "radiant contribution of one or several interior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
+ //parameter Real share_Heater_RadInt(min=0, max=1) = 0
+   // "radiant contribution of one or several interior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"))
   parameter Real share_Heater_Conv(min=0, max=1) = 1
     "convective contribution to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
   parameter Boolean Cooler_on=true "Activates the cooler"
@@ -74,10 +74,10 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     "contribution from any cooled surfaces of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
   parameter Real share_Cooler_PanelInt(min=0, max=1) = 0
     "contribution from any cooled surfaces of one or several interior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
-  parameter Real share_Cooler_RadExt(min=0, max=1) = 0
+  parameter Real share_Cooler_Rad(min=0, max=1) = 0
     "radiant contribution of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
-  parameter Real share_Cooler_RadInt(min=0, max=1) = 0
-    "radiant contribution of one or several interior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
+ // parameter Real share_Cooler_RadInt(min=0, max=1) = 0
+   // "radiant contribution of one or several interior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
   parameter Real share_Cooler_Conv(min=0, max=1) = 1
     "convective contribution to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
 
@@ -206,8 +206,7 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     each share_Heater_TabsInt=share_Heater_TabsInt,
     each share_Heater_PanelExt=share_Heater_PanelExt,
     each share_Heater_PanelInt=share_Heater_PanelInt,
-    each share_Heater_RadExt=share_Heater_RadExt,
-    each share_Heater_RadInt=share_Heater_RadInt,
+    each share_Heater_Rad=share_Heater_Rad,
     each share_Heater_Conv=share_Heater_Conv,
     each h_cooler_Panel=h_cooler_Panel,
     each l_cooler_Panel=l_cooler_Panel,
@@ -221,8 +220,7 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     each share_Cooler_TabsInt=share_Cooler_TabsInt,
     each share_Cooler_PanelExt=share_Cooler_PanelExt,
     each share_Cooler_PanelInt=share_Cooler_PanelInt,
-    each share_Cooler_RadExt=share_Cooler_RadExt,
-    each share_Cooler_RadInt=share_Cooler_RadInt,
+    each share_Cooler_Rad=share_Cooler_Rad,
     each share_Cooler_Conv=share_Cooler_Conv,
     final zoneParam=zoneParam,
     each recOrSep=recOrSep,
@@ -660,9 +658,9 @@ equation
   connect(heaterCoolerWithTabs6007C1.heatCoolTabsExt, ROM.tabsExtWalls)
     annotation (Line(points={{70.5,37.76},{70.5,38.88},{80.8,38.88},{80.8,56}},
         color={191,0,0}));
-  connect(heaterCoolerWithTabs6007C1.heatCoolRadExt, ROM.hkRadExtWalls)
-    annotation (Line(points={{76.125,37.76},{76.125,38.88},{86,38.88},{86,56}},
-        color={191,0,0}));
+  connect(heaterCoolerWithTabs6007C1.heatCoolRad, ROM.hkRad) annotation (Line(
+        points={{76.125,37.76},{76.125,38.88},{86,38.88},{86,56}}, color={191,0,
+          0}));
   connect(heaterCoolerWithTabs6007C1.heatCoolPanelExt, ROM.fhkExtWalls)
     annotation (Line(points={{73.3125,37.76},{73.3125,39.88},{86,39.88},{86,58.6}},
         color={191,0,0}));
@@ -672,10 +670,6 @@ equation
   connect(heaterCoolerWithTabs6007C1.heatCoolPanelInt, ROM.fhkIntWalls)
     annotation (Line(points={{74.7188,37.76},{74.7188,38.88},{86,38.88},{86,
           63.4}},
-        color={191,0,0}));
-  connect(heaterCoolerWithTabs6007C1.heatCoolRadInt, ROM.hkRadIntWalls)
-    annotation (Line(points={{77.5313,37.76},{77.5313,39.88},{86,39.88},{86,
-          65.8}},
         color={191,0,0}));
   connect(heaterCoolerWithTabs6007C1.heatCoolTabsInt, ROM.tabsIntWalls)
     annotation (Line(points={{71.9063,37.76},{71.9063,38},{72,38},{72,40},{86,
