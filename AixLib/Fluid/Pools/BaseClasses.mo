@@ -384,7 +384,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
     parameter Real phi_sup_max= 0.64
                                     "Desired maximal relative humidity of ventilation supply air";
     parameter Modelica.SIunits.Temperature T_desired "Desired Air Temperature in K";
-    parameter Real phi_set= 0.54 "Desired relative humidy Air";
+
 
     parameter Real y_Max= 1 "Max. factor of set Ventilation Flow Rate";
 
@@ -412,11 +412,11 @@ package BaseClasses "Base classes for Swimming Pool Models"
       annotation (Placement(transformation(extent={{-122,-36},{-82,4}})));
     Modelica.Blocks.Sources.CombiTimeTable tableAHU(
       tableOnFile=true,
+      smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       tableName="AHU",
       columns=2:2,
-      fileName=ModelicaServices.ExternalReferences.loadResource(
-          "modelica://Output_Schwimmbad_Modell/Hallenbad/AHU_Hallenbad_saettigung.txt"))
+      fileName=ModelicaServices.ExternalReferences.loadResource("modelica://Output_Schwimmbad_Modell/Hallenbad/AHU_Hallenbad_saettigung.txt"))
       "Boundary condition: Opening Hours of swiming pools"
       annotation (Placement(transformation(extent={{-90,52},{-74,68}})));
     ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum
