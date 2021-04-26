@@ -14,7 +14,7 @@ model tabsHeaterCoolerController
     "Threshold temperature above which cooling is activated"  annotation (Dialog(tab="Cooler", enable=not recOrSep));
   parameter Boolean recOrSep = false "Use record if true or seperate parameters if false" annotation(choices(choice =  false
         "Seperate",choice = true "Record",radioButtons = true));
-  parameter Boolean roomtempcontrol = true "TABS room temperature control" annotation(choices(choice =  false
+  parameter Boolean tabsRoomTempControl = false "TABS room temperature control" annotation(choices(choice =  false
         "without room temperature control",choice = true "with room temperature control",radioButtons = true));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus" annotation (Placement(
@@ -58,7 +58,8 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
     "true if cooler is active" annotation (Placement(transformation(extent={{-18,-78},{2,-58}})));
 
   // Room temperature control
-  Modelica.Blocks.Interfaces.RealInput TOpe if roomtempcontrol "Operative indoor air temperature"
+  Modelica.Blocks.Interfaces.RealInput TOpe if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
+     and tabsRoomTempControl)) "Operative indoor air temperature"
     annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
         rotation=-90,
@@ -69,23 +70,28 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
   Modelica.Blocks.Logical.Hysteresis hysteresisHeating(
     uLow=273.15 + 18,
     uHigh=273.15 + 24,
-    pre_y_start=true) if roomtempcontrol annotation (Placement(transformation(
+    pre_y_start=true) if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
+     and tabsRoomTempControl)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={40,66})));
-  Modelica.Blocks.Logical.Switch switchHeater1 if roomtempcontrol
+  Modelica.Blocks.Logical.Switch switchHeater1 if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
+     and tabsRoomTempControl))
     annotation (Placement(transformation(extent={{68,32},{88,52}})));
-  Math.MovingAverage movingAverage1(aveTime=timeAverage) if roomtempcontrol
+  Math.MovingAverage movingAverage1(aveTime=timeAverage) if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
+     and tabsRoomTempControl))
     "Calculates the moving average of operative indoor air temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=0,
         origin={22,92})));
-  Modelica.Blocks.Logical.Switch switchCooler1 if roomtempcontrol
+  Modelica.Blocks.Logical.Switch switchCooler1 if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
+     and tabsRoomTempControl))
     annotation (Placement(transformation(extent={{68,-52},{88,-32}})));
   Modelica.Blocks.Logical.Hysteresis hysteresisCooling(
     uLow=273.15 + 20,
     uHigh=273.15 + 25,
-    pre_y_start=false) if roomtempcontrol annotation (Placement(transformation(
+    pre_y_start=false) if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
+     and tabsRoomTempControl)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={20,66})));
@@ -125,7 +131,8 @@ equation
           -68},{-26,-68},{-26,-20},{-31,-20}},
                                           color={255,0,255}));
 
-  if (roomtempcontrol) then
+  if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
+     and tabsRoomTempControl)) then
   connect(hysteresisHeating.y, switchHeater1.u2) annotation (Line(points={{40,59.4},{40,42},{66,42}}, color={255,0,255}));
   connect(TOpe, movingAverage1.u) annotation (Line(points={{2,108},{1.5,108},{1.5,
             92},{14.8,92}},   color={0,0,127}));
@@ -147,7 +154,7 @@ equation
           20},{54,34},{66,34}}, color={0,0,127}));
   connect(off.y, switchHeater1.u1) annotation (Line(points={{-1.3,1},{56,1},{56,
           50},{66,50}}, color={0,0,127}));
-  elseif (not roomtempcontrol) then
+  else
   connect(switchCooler.y, tabsCoolingPower) annotation (Line(
       points={{41,-20},{110,-20}},
       color={0,0,127},

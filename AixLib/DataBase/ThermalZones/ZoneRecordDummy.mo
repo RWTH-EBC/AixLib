@@ -93,6 +93,8 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     tabs = false,
     floor = false,
     radiator = false,
+    ventilation = false,
+    withTabsRoomTempControl = false,
     TThresholdHeaterTabs = Modelica.Constants.eps,
     TThresholdCoolerTabs = 2*Modelica.Constants.eps,
     powerHeatTabs = Modelica.Constants.eps,

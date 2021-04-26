@@ -123,6 +123,8 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean tabs "TABS is available";
   parameter Boolean floor "Panel Heating/Cooling is available";
   parameter Boolean radiator "Radiator Heating is available";
+  parameter Boolean ventilation "Convective Heating/Cooling is available";
+  parameter Boolean withTabsRoomTempControl "Use room temperature loop to control TABS activity";
   parameter Modelica.SIunits.Temperature TThresholdHeaterTabs
     "Threshold temperature below TABS heating is used";
   parameter Modelica.SIunits.Temperature TThresholdCoolerTabs
