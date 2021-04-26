@@ -20,7 +20,7 @@ public
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=30
     "Time constant of Integrator block";
   parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
+  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump_max(min=0) = 2000 "Rpm of the Pump";
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
@@ -36,7 +36,7 @@ public
     annotation(Dialog(group="PID"));
   Modelica.Blocks.Sources.Constant constVflowSet(final k=vFlowSetCon) if not useExternalVset annotation (Placement(transformation(extent={{-100,-30},{-80,-10}})));
   AixLib.Controls.Continuous.LimPID PID(
-    final yMax=rpm_pump,
+    final yMax=rpm_pump_max,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PID,
     final k=k,
