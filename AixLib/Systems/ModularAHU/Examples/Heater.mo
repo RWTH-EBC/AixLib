@@ -96,5 +96,7 @@ equation
       StopTime=3600,
       __Dymola_fixedstepsize=1,
       __Dymola_Algorithm="Dassl"),
-    __Dymola_Commands);
+    __Dymola_Commands(file(ensureSimulated=true) =
+        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/Heater.mos"
+        "Simulate and plot"));
 end Heater;

@@ -123,7 +123,7 @@ model GenericAHU "Example of generic ahu model"
     T=283.15) annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=270,
-        origin={12,-40})));
+        origin={14,-40})));
   Fluid.Sources.Boundary_pT SourceHeater(
     nPorts=1,
     redeclare package Medium = Media.Water,
@@ -138,12 +138,12 @@ model GenericAHU "Example of generic ahu model"
         origin={48,-40})));
   Controller.CtrAHUBasic ctrAHUBasic(
     TFlowSet=293.15,
-    usePreheater=false,
+    usePreheater=true,
     useTwoFanCtr=true,
     VFlowSet=3000/3600,
     initType=Modelica.Blocks.Types.InitPID.InitialState,
                                                       ctrRh(k=0.01))
-    annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
+    annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
     annotation (Line(points={{70,40},{60.5455,40}}, color={0,127,255}));
@@ -159,15 +159,15 @@ equation
           {-26,-14},{-32.7273,-14}},           color={0,127,255}));
   connect(SourceCooler.ports[1], genericAHU.port_a4) annotation (Line(points={{
           -2,-32},{-2,-14},{-7.10543e-15,-14}}, color={0,127,255}));
-  connect(SinkSink.ports[1], genericAHU.port_b4) annotation (Line(points={{12,
-          -32},{10,-32},{10,-14},{10.9091,-14}}, color={0,127,255}));
+  connect(SinkSink.ports[1], genericAHU.port_b4) annotation (Line(points={{14,-32},
+          {10,-32},{10,-14},{10.9091,-14}},      color={0,127,255}));
   connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{32,-32},
           {30,-32},{30,-22},{20,-22},{20,-14},{21.8182,-14}},         color={0,
           127,255}));
   connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{48,-32},
           {48,-26},{32.1818,-26},{32.1818,-14}},      color={0,127,255}));
   connect(ctrAHUBasic.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
-      points={{-20,72.1},{0,72.1},{0,52.3},{-6.66134e-15,52.3}},
+      points={{-20,70.1},{0,70.1},{0,52.3},{-6.66134e-15,52.3}},
       color={255,204,51},
       thickness=0.5));
   annotation (experiment(StopTime=7200), Documentation(revisions="<html>
@@ -176,5 +176,8 @@ equation
 </ul>
 </html>", info="<html>
 <p>This example demonstrates the GenericAHU model with a simple control. The supply air temperature set point is 20&deg;C.</p>
-</html>"));
+</html>"),
+    __Dymola_Commands(file(ensureSimulated=true) =
+        "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos"
+        "Simulate and plot"));
 end GenericAHU;

@@ -21,6 +21,9 @@ replaceable package Medium2 =
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+
   parameter Fluid.Movers.BaseClasses.Characteristics.efficiencyParameters
     hydraulicEfficiency(
       V_flow={0},
@@ -296,8 +299,7 @@ replaceable package Medium2 =
         rotation=180,
         origin={50,40})));
 
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of mass balance: dynamic (3 initialization options) or steady state";
+
 protected
   Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
     initType=Modelica.Blocks.Types.Init.SteadyState,
