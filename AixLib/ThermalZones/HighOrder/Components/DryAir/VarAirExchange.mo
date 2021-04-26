@@ -44,9 +44,5 @@ equation
     Formatted documentation appropriately
   </li>
 </ul>
-</html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{60, -58}, {30, -72}, {-22, -68}, {-16, -60}, {-68, -52}, {-30, -80}, {-24, -74}, {46, -74}, {60, -58}}, lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, 16}, {30, -50}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air"), Polygon(points = {{-58, 22}, {-28, 36}, {24, 32}, {18, 24}, {70, 16}, {32, 44}, {26, 38}, {-44, 38}, {-58, 22}}, lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid)}));
+</html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2})));
 end VarAirExchange;

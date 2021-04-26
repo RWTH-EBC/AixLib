@@ -1,69 +1,23 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
-model WindowSimple "Window with radiation and U-Value"
-  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
-  parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature";
-  parameter Boolean selectable=true "Select window type"
-    annotation (Dialog(group="Window type", descriptionLabel=true));
-  parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType=
-     DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Window type"
-    annotation (Dialog(
-      group="Window type",
-      enable=selectable,
-      descriptionLabel=true), choicesAllMatching=true);
-  parameter Real frameFraction(
-    min=0.0,
-    max=1.0) = if selectable then WindowType.frameFraction else 0.2
-    "Frame fraction" annotation (Dialog(
-      group="Window type",
-      enable=not selectable,
-      descriptionLabel=true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw=if selectable then
-      WindowType.Uw else 1.50
-    "Thermal transmission coefficient of whole window"
-    annotation (Dialog(group="Window type", enable=not selectable));
-  parameter Real g=if selectable then WindowType.g else 0.60
-    "Coefficient of solar energy transmission"
-    annotation (Dialog(group="Window type", enable=not selectable));
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+model WindowSimple "Simple window with radiation and U-Value"
+  extends BaseClasses.PartialWindow(
+    redeclare replaceable model CorrSolGain = BaseClasses.CorrectionSolarGain.CorGSimple,
+    final use_solarRadWinTrans=false,
+    final use_windSpeedPort=false);
 
-  replaceable model correctionSolarGain =
-      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
-    "Model for correction of solar gain factor" annotation (Dialog(
-        descriptionLabel=true), choicesAllMatching=true);
-  Utilities.Interfaces.SolarRad_in solarRad_in
-    annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
-  correctionSolarGain corG(
-    final Uw=Uw,
-    final n=1)
-    annotation (Placement(transformation(extent={{-50,50},{-30,70}})));
-  Utilities.Interfaces.RadPort
-                            Star
-    annotation (Placement(transformation(extent={{80,50},{100,70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside
-    annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(
-    final G=windowarea*Uw)
+    final G=windowarea*WindowType.Uw)
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_inside
-    annotation (Placement(transformation(extent={{80,-20},{100,0}})));
-  Modelica.Blocks.Math.Gain Ag(
-    final k(unit="m2", min=0.0) = (1 - frameFraction)*windowarea*g)
-    annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
-    annotation (Placement(transformation(extent={{2,50},{22,70}})));
+    annotation (Placement(transformation(extent={{28,50},{48,70}})));
 equation
-  connect(port_outside, HeatTrans.port_a)
-    annotation (Line(points={{-90,-10},{-49.5,-10},{-10,-10}}));
-  connect(HeatTrans.port_b, port_inside)
-    annotation (Line(points={{10,-10},{10,-10},{90,-10}}));
-  connect(corG.SR_input[1], solarRad_in)
-    annotation (Line(points={{-49.8,59.9},{
-          -66.9,59.9},{-66.9,60},{-90,60}}, color={255,128,0}));
-  connect(corG.solarRadWinTrans[1], Ag.u)
-    annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
-  connect(Ag.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-3.4,60},{2,60}}, color={0,0,127}));
-  connect(Star, prescribedHeatFlow.port)
-    annotation (Line(points={{90,60},{22,60}}, color={95,95,95}));
+  connect(prescribedHeatFlow.port, radPort) annotation (Line(points={{48,60},{90,60}}, color={191,0,0}));
+  connect(port_outside, HeatTrans.port_a) annotation (Line(points={{-90,-10},{-10,-10}}, color={191,0,0}));
+  connect(HeatTrans.port_b, port_inside) annotation (Line(points={{10,-10},{90,-10}}, color={191,0,0}));
+  connect(Ag.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-3.4,60},{28,60}}, color={0,0,127}));
+  connect(solarRad_in, corrSolGain.SR_input[1]) annotation (Line(points={{-90,60},{-70,60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
+  connect(corrSolGain.solarRadWinTrans[1], Ag.u) annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,

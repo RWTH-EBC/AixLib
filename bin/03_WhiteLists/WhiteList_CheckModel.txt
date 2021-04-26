@@ -5,7 +5,7 @@ Experimental
 []
 
 ThermalZones
-['AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600FF', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case620', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case640',  'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650',  'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case650FF',  'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case900FF', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case920', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case940', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950', 'AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case950FF']
+[]
 
 Airflow
 []
