@@ -117,15 +117,13 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     shareHeatTabsInt = Modelica.Constants.eps,
     shareHeatPanelExt = Modelica.Constants.eps,
     shareHeatPanelInt = Modelica.Constants.eps,
-    shareHeatRadExt = Modelica.Constants.eps,
-    shareHeatRadInt = Modelica.Constants.eps,
+    shareHeatRad = Modelica.Constants.eps,
     shareHeatConv = Modelica.Constants.eps,
     shareCoolTabsExt = Modelica.Constants.eps,
     shareCoolTabsInt = Modelica.Constants.eps,
     shareCoolPanelExt = Modelica.Constants.eps,
     shareCoolPanelInt = Modelica.Constants.eps,
-    shareCoolRadExt = Modelica.Constants.eps,
-    shareCoolRadInt = Modelica.Constants.eps,
+    shareCoolRad = Modelica.Constants.eps,
     shareCoolConv = Modelica.Constants.eps);
   annotation (Documentation(revisions="<html><ul>
   <li>
