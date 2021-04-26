@@ -360,7 +360,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(ventilationUnit1.port_a3, tabs.port_a2) annotation (Line(points={{39.6,
           236},{39.6,100},{140,100},{140,172}}, color={0,127,255}));
-  connect(ventilationUnit1.port_b3, tabs.port_b2) annotation (Line(points={{47.2,
+  connect(ventilationUnit1.port_b3, tabs.port_b2) annotation (Line(points={{46.06,
           236},{44,236},{44,80},{156,80},{156,172.364}}, color={0,127,255}));
 connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
         points={{110,-88},{112,-88},{112,-80}}, color={0,127,255}));
@@ -447,10 +447,10 @@ connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
             {-65,50},{164,50},{164,172.364}},  color={0,127,255}));
     connect(heatExchangerSystem.port_b2, tabs[i].port_a1) annotation (Line(points={{-75,
           8},{-75,58},{132,58},{132,172}}, color={0,127,255}));
-    connect(ventilationUnit1[i].port_a4, genericAHU.port_a5) annotation (Line(points={{54.8,
+    connect(ventilationUnit1[i].port_a4, genericAHU.port_a5) annotation (Line(points={{53.66,
             236},{52,236},{52,174},{-38.1818,174},{-38.1818,220}},     color={238,
           46,47}));
-    connect(ventilationUnit1[i].port_b4, genericAHU.port_b5) annotation (Line(points={{62.02,
+    connect(ventilationUnit1[i].port_b4, genericAHU.port_b5) annotation (Line(points={{60.12,
             236},{60,236},{60,184},{-27.8182,184},{-27.8182,220}},      color={238,
           46,47}));
   connect(genericAHU.port_a4, tabs[i].port_a2) annotation (Line(points={{-60,220},{

@@ -6,6 +6,8 @@ model CtrAHUBasic "Simple controller for AHU"
     annotation (Dialog(enable=useExternalTset == false));
   parameter Boolean useExternalTset=false
     "If True, set temperature can be given externally";
+      parameter Boolean useExternalVset=false
+    "If True, set volume flow can be given externally";
   parameter Modelica.SIunits.VolumeFlowRate VFlowSet=3000/3600
     "Set value of volume flow [m^3/s]"
     annotation (dialog(group="Fan Controller"));
@@ -44,8 +46,7 @@ model CtrAHUBasic "Simple controller for AHU"
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
           extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Sources.Constant TFrostProtection(final k=273.15 + 5) if
-                                                                      not useExternalTset
+  Modelica.Blocks.Sources.Constant TFrostProtection(final k=273.15 + 5)
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Controls.Continuous.LimPID PID_VflowSup(
     final yMax=dpMax,
@@ -58,7 +59,7 @@ model CtrAHUBasic "Simple controller for AHU"
     y_start=y_start,
     final reverseAction=false,
     final reset=AixLib.Types.Reset.Disabled)
-    annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
+    annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
   Controls.Continuous.LimPID PID_VflowRet(
     final yMax=dpMax,
     final yMin=0,
@@ -71,8 +72,9 @@ model CtrAHUBasic "Simple controller for AHU"
     final reverseAction=false,
     final reset=AixLib.Types.Reset.Disabled) if useTwoFanCont
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
-  Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet)
-    annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
+  Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet) if not
+    useExternalVset
+    annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
 
   Modelica.Blocks.Sources.Constant ConstWRG(final k=0)
     annotation (Placement(transformation(extent={{40,-32},{52,-20}})));
@@ -84,6 +86,10 @@ model CtrAHUBasic "Simple controller for AHU"
         rotation=0,
         origin={66,-36})));
 
+  Modelica.Blocks.Interfaces.RealInput VFlow if useExternalVset
+    "Connector of second Real input signal" annotation (Placement(
+        transformation(extent={{-140,-80},{-100,-40}}),iconTransformation(
+          extent={{-140,-80},{-100,-40}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
       points={{20.2,90},{54,90},{54,88},{100.05,88},{100.05,0.05}},
@@ -119,10 +125,11 @@ equation
       pattern=LinePattern.Dash));
   connect(TFrostProtection.y, ctrPh.Tset)
     annotation (Line(points={{-39,90},{-2,90}}, color={0,0,127}));
-  connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-70},{-30,
-          -70},{-30,-50},{-2,-50}}, color={0,0,127}));
+  connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-80},{-30,
+          -80},{-30,-60},{-2,-60}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(PID_VflowSup.u_m, genericAHUBus.heaterBus.VFlowAirMea) annotation (
-      Line(points={{10,-62},{10,-98},{100.05,-98},{100.05,0.05}}, color={0,0,
+      Line(points={{10,-72},{10,-98},{100.05,-98},{100.05,0.05}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
@@ -168,10 +175,11 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ConstVflow.y, PID_VflowRet.u_s) annotation (Line(points={{-59,-70},{-42,
-          -70},{-42,-90},{-22,-90}}, color={0,0,127}));
-  connect(PID_VflowSup.y, genericAHUBus.dpFanSupSet) annotation (Line(points={{
-          21,-50},{100,-50},{100,-34},{100.05,-34},{100.05,0.05}}, color={0,0,
+  connect(ConstVflow.y, PID_VflowRet.u_s) annotation (Line(points={{-59,-80},{-30,
+          -80},{-30,-90},{-22,-90}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(PID_VflowSup.y, genericAHUBus.dpFanSupSet) annotation (Line(points={{21,-60},
+          {100,-60},{100,-34},{100.05,-34},{100.05,0.05}},         color={0,0,
           127}), Text(
       string="%second",
       index=1,
@@ -197,13 +205,21 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   if not useTwoFanCont then
-    connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points=
-            {{21,-50},{100.05,-50},{100.05,0.05}}, color={0,0,127}), Text(
+    connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{21,-60},
+            {100.05,-60},{100.05,0.05}},           color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
   end if;
+  connect(VFlow, PID_VflowSup.u_s) annotation (Line(
+      points={{-120,-60},{-2,-60}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(VFlow, PID_VflowRet.u_s) annotation (Line(
+      points={{-120,-60},{-30,-60},{-30,-90},{-22,-90}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-90,20},{56,-20}},

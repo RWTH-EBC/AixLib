@@ -1,0 +1,35 @@
+within AixLib.Systems.Benchmark.BaseClasses;
+expandable connector MainBus2ZoneMainBuilding
+  "Data bus for E.ON ERC main building system"
+  extends Modelica.Icons.SignalBus;
+  import SI = Modelica.SIunits;
+  EONERC_MainBuilding.BaseClasses.HeatPumpSystemBus hpSystemBus
+    "Heat pump system bus";
+  EONERC_MainBuilding.BaseClasses.SwitchingUnitBus swuBus "Switching unit bus";
+  HighTempSystemBus htsBus
+    "High temoerature system bus";
+  EONERC_MainBuilding.BaseClasses.TwoCircuitBus gtfBus "Geothermalfield bus";
+  EONERC_MainBuilding.BaseClasses.TwoCircuitBus hxBus
+    "Heat exchanger system bus";
+  TabsBus2 tabs1Bus "Bus for concrete core activation 1";
+  TabsBus2 tabs2Bus "Bus for concrete core activation 2";
+  ModularAHU.BaseClasses.GenericAHUBus ahu1Bus "Bus for AHU";
+  ModularAHU.BaseClasses.GenericAHUBus ahu2Bus "Bus for AHU";
+  SI.Temperature TRoom1Mea "Temperature in room 1";
+  SI.Temperature TRoom2Mea "Temperature in room 2";
+  EvaluationBus evaBus
+    "Bus for energy consumption measurement";
+  annotation (
+    Icon(graphics,
+         coordinateSystem(preserveAspectRatio=false)),
+    Diagram(graphics,
+            coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>Definition of a bus connector for the ERC Heatpump System.</p>
+</html>", revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
+<li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
+</ul>
+</html>"));
+end MainBus2ZoneMainBuilding;

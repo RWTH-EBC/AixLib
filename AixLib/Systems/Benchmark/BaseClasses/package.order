@@ -11,3 +11,5 @@ BenchmarkSharedOffice
 BenchmarkConferenceRoom
 Ashrae140_900
 HeatpumpBenchmarkSystem
+MainBus2ZoneMainBuilding
+EnergyCounter2Zones
