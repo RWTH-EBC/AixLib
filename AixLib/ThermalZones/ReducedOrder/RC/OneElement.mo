@@ -200,6 +200,16 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "Trace substance mass flow rate added to the thermal zone"
     annotation (Placement(transformation(extent={{-280,70},{-240,110}}), iconTransformation(extent={{-260,90},{-240,110}})));
 
+  Modelica.Blocks.Interfaces.RealOutput TOpe if ATot > 0
+    "Operative indoor air temperature" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={200,190})));
+  Utilities.Sources.HeaterCoolerVDI6007AC1.TOpe tOpe if ATot > 0 annotation (
+      Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={200,170})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
@@ -435,6 +445,12 @@ equation
           {-52,90},{-260,90}}, color={0,0,127}));
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
           90},{-260,90}}, color={0,0,127}));
+  connect(tOpe.TOpe, TOpe)
+    annotation (Line(points={{200,176},{200,190}}, color={0,0,127}));
+  connect(senTRad.T, tOpe.TRad) annotation (Line(points={{210,120},{198,120},{
+          198,164},{198.2,164}}, color={0,0,127}));
+  connect(senTAir.T, tOpe.TAir) annotation (Line(points={{100,0},{108,0},{108,
+          160},{202,160},{202,164},{201.92,164}}, color={0,0,127}));
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
