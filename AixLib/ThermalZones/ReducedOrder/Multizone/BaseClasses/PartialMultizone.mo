@@ -190,13 +190,13 @@ equation
   // if ideal heating or cooling is set by record
   elseif (ASurTot > 0 or VAir > 0) and recOrSep then
     for i in 1:numZones loop
-      if zoneParam[i].HeaterOn then
+      if zoneParam[i].heating then
         connect(zone[i].PHeater, PHeater[i]);
         connect(TSetHeat[i], zone[i].TSetHeat);
       else
         PHeater[i] = 0;
       end if;
-      if zoneParam[i].CoolerOn then
+      if zoneParam[i].cooling then
         connect(zone[i].PCooler, PCooler[i]);
         connect(TSetCool[i], zone[i].TSetCool);
       else
