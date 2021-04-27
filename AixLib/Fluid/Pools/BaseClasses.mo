@@ -189,54 +189,61 @@ package BaseClasses "Base classes for Swimming Pool Models"
       allowFlowReversal=false,
       m_flow_nominal=m_flow_nominal,
       redeclare Movers.Data.Generic per(
-        pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7}, dp={
-              pumpHead/0.7,pumpHead,0}),
-        hydraulicEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/
-              0.7}, eta={0.70,0.8,0.70}),
-        motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
-            eta={0.9,0.9,0.9})),
+        pressure(V_flow={0,m_flow_nominal/1000*0.25,m_flow_nominal/1000*0.5,
+              m_flow_nominal/1000,m_flow_nominal/1000/0.7,m_flow_nominal/1000/
+              0.5}, dp={pumpHead/0.5,pumpHead/0.7,pumpHead,pumpHead*0.25,
+              pumpHead*0.25*0.25,0}),
+        use_powerCharacteristic=true,
+        power(V_flow={0,(m_flow_nominal/1000*0.2),(m_flow_nominal/1000*0.5),
+              m_flow_nominal/1000*0.7,m_flow_nominal/1000,m_flow_nominal/1000/
+              0.7}, P={(m_flow_nominal/0.7)/1000*pumpHead/0.7/0.9,
+              m_flow_nominal/1000*pumpHead/0.8/0.9,(m_flow_nominal/1000*0.7)*
+              pumpHead/0.7/0.9,(m_flow_nominal/1000*0.5)*pumpHead/0.7/0.9,(
+              m_flow_nominal/1000*0.2)*pumpHead/0.7/0.9,0})),
       inputType=AixLib.Fluid.Types.InputType.Continuous,
       addPowerToMedium=false,
       nominalValuesDefineDefaultPressureCurve=true,
-      use_inputFilter=false,
       dp_nominal=pumpHead,
       m_flow_start=m_flow_nominal)
-      annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+      annotation (Placement(transformation(extent={{-60,18},{-40,38}})));
     FixedResistances.PressureDrop res(
-      redeclare package  Medium = Medium,
+      redeclare package Medium =  Medium,
       allowFlowReversal=false,
       m_flow_nominal=m_flow_nominal,
       show_T=false,
       dp_nominal= pumpHead)
-      annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+      annotation (Placement(transformation(extent={{24,18},{44,38}})));
     Modelica.Blocks.Interfaces.RealInput setMFlow annotation (Placement(
           transformation(extent={{-128,44},{-88,84}}), iconTransformation(
             extent={{-112,60},{-88,84}})));
-    Sensors.MassFlowRate senMasFlo( redeclare package  Medium = Medium)
-      annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+    Sensors.MassFlowRate senMasFlo( redeclare package Medium =  Medium)
+      annotation (Placement(transformation(extent={{-4,18},{16,38}})));
     Controls.Continuous.LimPID PI(
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
       k=0.1,
       Ti=5,
       yMax=m_flow_nominal/0.9,
-      yMin=0) annotation (Placement(transformation(extent={{-56,52},{-36,72}})));
+      yMin=0) annotation (Placement(transformation(extent={{-54,74},{-34,94}})));
   equation
-    connect(port_a, CirculationPump.port_a) annotation (Line(points={{-100,0},{-88,
-            0},{-88,-2},{-60,-2},{-60,0}}, color={0,127,255}));
-    connect(res.port_b, port_b) annotation (Line(points={{40,0},{62,0},{62,-4},{100,
-            -4},{100,0}}, color={0,127,255}));
-    connect(CirculationPump.P, P) annotation (Line(points={{-39,9},{-28,9},{-28,46},
-            {106,46}}, color={0,0,127}));
-    connect(PI.u_m, senMasFlo.m_flow) annotation (Line(points={{-46,50},{-46,38},
-            {2,38},{2,11}}, color={0,0,127}));
-    connect(PI.u_s, setMFlow) annotation (Line(points={{-58,62},{-84,62},{-84,
+    connect(CirculationPump.P, P) annotation (Line(points={{-39,37},{-24,37},{
+            -24,46},{106,46}},
+                       color={0,0,127}));
+    connect(PI.u_m, senMasFlo.m_flow) annotation (Line(points={{-44,72},{-44,66},
+            {6,66},{6,39}}, color={0,0,127}));
+    connect(PI.u_s, setMFlow) annotation (Line(points={{-56,84},{-84,84},{-84,
             64},{-108,64}}, color={0,0,127}));
-    connect(PI.y, CirculationPump.m_flow_in) annotation (Line(points={{-35,62},
-            {-35,41},{-50,41},{-50,12}}, color={0,0,127}));
+    connect(PI.y, CirculationPump.m_flow_in) annotation (Line(points={{-33,84},
+            {-33,69},{-50,69},{-50,40}}, color={0,0,127}));
     connect(CirculationPump.port_b, senMasFlo.port_a)
-      annotation (Line(points={{-40,0},{-8,0}}, color={0,127,255}));
+      annotation (Line(points={{-40,28},{-4,28}},
+                                                color={0,127,255}));
     connect(senMasFlo.port_b, res.port_a)
-      annotation (Line(points={{12,0},{20,0}}, color={0,127,255}));
+      annotation (Line(points={{16,28},{24,28}},
+                                               color={0,127,255}));
+    connect(port_a, CirculationPump.port_a) annotation (Line(points={{-100,0},{
+            -78,0},{-78,28},{-60,28}}, color={0,127,255}));
+    connect(res.port_b, port_b) annotation (Line(points={{44,28},{72,28},{72,0},
+            {100,0}}, color={0,127,255}));
     annotation (Icon(graphics={Ellipse(
             extent={{-60,60},{60,-60}},
             lineColor={0,0,0},
@@ -416,7 +423,8 @@ package BaseClasses "Base classes for Swimming Pool Models"
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       tableName="AHU",
       columns=2:2,
-      fileName=ModelicaServices.ExternalReferences.loadResource("modelica://Output_Schwimmbad_Modell/Hallenbad/AHU_Hallenbad_saettigung.txt"))
+      fileName=ModelicaServices.ExternalReferences.loadResource(
+          "modelica://Output_Schwimmbad_Modell/Hallenbad/AHU_Hallenbad_saettigung.txt"))
       "Boundary condition: Opening Hours of swiming pools"
       annotation (Placement(transformation(extent={{-90,52},{-74,68}})));
     ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum
@@ -503,4 +511,88 @@ package BaseClasses "Base classes for Swimming Pool Models"
           coordinateSystem(preserveAspectRatio=false)));
   end idealHeatExchanger;
 
+  model PumpAndPressureDrop2
+    "Model for a pump and a corresponding pressure drop to avoid pressure build up in the system"
+    extends AixLib.Fluid.Interfaces.PartialTwoPort
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+
+    parameter Modelica.SIunits.Pressure pumpHead( min=0.001) "Nominal pressure difference pump and resistance";
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min= 0.0001);
+    parameter Modelica.SIunits.Pressure p_start;
+    parameter Modelica.SIunits.Temperature T_water;
+
+    Modelica.Blocks.Interfaces.RealOutput P( final quantity = "Power", final unit= "W")
+      "Output eletric energy needed for pump operation"
+      annotation (Placement(transformation(extent={{96,36},{116,56}})));
+    Movers.SpeedControlled_y     CirculationPump(
+      redeclare package Medium = Medium,
+      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+      p_start=p_start,
+      T_start=T_water,
+      allowFlowReversal=false,
+      redeclare Movers.Data.Generic per(
+        pressure(V_flow={0,m_flow_nominal*0.5,m_flow_nominal/1000,(
+              m_flow_nominal/1000/0.7)}, dp={pumpHead/0.7,pumpHead,pumpHead*
+              0.25,0}),
+        hydraulicEfficiency(V_flow={0,m_flow_nominal*0.5,m_flow_nominal/1000,
+              m_flow_nominal/1000/0.7}, eta={0.70,0.8,0.75,0.70}),
+        motorEfficiency(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.7},
+            eta={0.9,0.9,0.9}),
+        motorCooledByFluid=false),
+      inputType=AixLib.Fluid.Types.InputType.Continuous,
+      addPowerToMedium=false,
+      use_inputFilter=false)
+      annotation (Placement(transformation(extent={{-56,18},{-36,38}})));
+    FixedResistances.PressureDrop res(
+      redeclare package Medium =  Medium,
+      allowFlowReversal=false,
+      m_flow_nominal=m_flow_nominal,
+      show_T=false,
+      dp_nominal= pumpHead)
+      annotation (Placement(transformation(extent={{24,18},{44,38}})));
+    Modelica.Blocks.Interfaces.RealInput setMFlow annotation (Placement(
+          transformation(extent={{-128,44},{-88,84}}), iconTransformation(
+            extent={{-112,60},{-88,84}})));
+    Sensors.MassFlowRate senMasFlo( redeclare package Medium =  Medium)
+      annotation (Placement(transformation(extent={{-4,18},{16,38}})));
+    Controls.Continuous.LimPID PI(
+      controllerType=Modelica.Blocks.Types.SimpleController.PI,
+      k=0.1,
+      Ti=5,
+      yMax=m_flow_nominal/0.9,
+      yMin=0) annotation (Placement(transformation(extent={{-54,74},{-34,94}})));
+    Modelica.Blocks.Math.Gain gain(k=1/m_flow_nominal*1500)
+      annotation (Placement(transformation(extent={{-82,68},{-62,88}})));
+    Modelica.Blocks.Math.Gain gain1(k=1/m_flow_nominal*1500)
+      annotation (Placement(transformation(extent={{-2,56},{-22,76}})));
+  equation
+    connect(CirculationPump.P, P) annotation (Line(points={{-35,37},{-24,37},{
+            -24,46},{106,46}},
+                       color={0,0,127}));
+    connect(CirculationPump.port_b, senMasFlo.port_a)
+      annotation (Line(points={{-36,28},{-4,28}},
+                                                color={0,127,255}));
+    connect(senMasFlo.port_b, res.port_a)
+      annotation (Line(points={{16,28},{24,28}},
+                                               color={0,127,255}));
+    connect(port_a, CirculationPump.port_a) annotation (Line(points={{-100,0},{
+            -78,0},{-78,28},{-56,28}}, color={0,127,255}));
+    connect(res.port_b, port_b) annotation (Line(points={{44,28},{72,28},{72,0},
+            {100,0}}, color={0,127,255}));
+    connect(setMFlow, gain.u) annotation (Line(points={{-108,64},{-96,64},{-96,
+            78},{-84,78}}, color={0,0,127}));
+    connect(gain.y, PI.u_s) annotation (Line(points={{-61,78},{-58,78},{-58,84},
+            {-56,84}}, color={0,0,127}));
+    connect(PI.u_m, gain1.y)
+      annotation (Line(points={{-44,72},{-44,66},{-23,66}}, color={0,0,127}));
+    connect(gain1.u, senMasFlo.m_flow)
+      annotation (Line(points={{0,66},{6,66},{6,39}}, color={0,0,127}));
+    annotation (Icon(graphics={Ellipse(
+            extent={{-60,60},{60,-60}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Line(points={{0,60},{60,0},{0,-60}},
+              color={0,0,0})}));
+  end PumpAndPressureDrop2;
 end BaseClasses;
