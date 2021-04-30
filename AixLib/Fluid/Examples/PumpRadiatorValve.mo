@@ -6,10 +6,14 @@ model PumpRadiatorValve
 
   package Medium = AixLib.Media.Water;
 
-  AixLib.Fluid.Movers.Pump
-             pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false), Head_max = 2,
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
+    MinMaxCharacteristics=AixLib.DataBase.Pumps.Pump1(),
+    V_flow_max=2,
+    ControlStrategy=2,
+    V_flow(fixed=false),
+    Head_max=2,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{-54,10},{-34,30}})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     m_flow_nominal=0.1,

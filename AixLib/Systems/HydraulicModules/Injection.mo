@@ -185,8 +185,8 @@ model Injection "Injection circuit with pump and three way valve"
 
 
 protected
-  Fluid.Sensors.VolumeFlowRate          VFSen_injection(redeclare package
-      Medium = Medium, final allowFlowReversal=allowFlowReversal,
+  Fluid.Sensors.VolumeFlowRate          VFSen_injection(redeclare package Medium =
+               Medium, final allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal)
     "Volume flow in injection line" annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},

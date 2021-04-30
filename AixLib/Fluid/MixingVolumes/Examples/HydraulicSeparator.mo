@@ -10,15 +10,13 @@ model HydraulicSeparator
     pumpMaxVolumeFlow=0.03,
     m_flow_nominal=0.1)
     annotation (Placement(transformation(extent={{18,-6},{38,14}})));
-  AixLib.Fluid.Movers.Pump
-                         pump(
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
     V_flow(start=0.002),
     ControlStrategy=2,
     V_flow_max=12,
     Head_max=10,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
   Sources.Boundary_pT              boundary_p(
     nPorts=1,
     redeclare package Medium = Medium,
@@ -56,14 +54,12 @@ model HydraulicSeparator
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-36,60})));
-  AixLib.Fluid.Movers.Pump
-                         pump1(
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump1(
     ControlStrategy=2,
     V_flow_max=12,
     Head_max=10,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{66,0},{86,20}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{66,0},{86,20}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                         temperatureMixedTop(redeclare package Medium =
                Medium, m_flow_nominal=1)

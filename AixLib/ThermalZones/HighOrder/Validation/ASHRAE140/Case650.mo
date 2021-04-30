@@ -1,7 +1,6 @@
 ﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case650
-  extends
-    AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
+  extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
     dispTypeCoolOrTempMin="Q Cool",
     dispTypeHeatOrTempMax="Q Heat",
     tableCoolOrTempMin=[650,-6545,-4816],

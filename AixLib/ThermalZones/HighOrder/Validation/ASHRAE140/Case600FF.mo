@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case600FF
-  extends
-    AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
+  extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase(
     checkTimeCoolOrTempMin=288000,
     checkTimeHeatOrTempMax=25029000,
     dispTypeCoolOrTempMin="T Min",
