@@ -244,8 +244,8 @@ equation
           {15.3,-69.8}},                                                                                                                                   color={191,0,0}));
   connect(Wall_Bath.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{56,-40},{44,-40},{44,-74},{15.3,-74},{
           15.3,-69.8}},                                                                                                                                  color={191,0,0}));
-  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points
-        ={{-110,50},{-80,50},{-80,66},{44,66},{44,76.68},{67.4,76.68}}, color={
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points=
+         {{-110,50},{-80,50},{-80,66},{44,66},{44,76.68},{67.4,76.68}}, color={
           0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{66, 85}, {44, 85}, {44, 90}, {-100, 90}}, color = {191, 0, 0}));
   connect(airload.port, NaturalVentilation.port_b) annotation(Line(points={{20,-2},{44,-2},{44,66},{100,66},{100,85},{94,85}},            color = {191, 0, 0}));

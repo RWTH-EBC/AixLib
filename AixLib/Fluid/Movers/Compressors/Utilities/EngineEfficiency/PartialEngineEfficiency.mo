@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency;
 partial model PartialEngineEfficiency
   "Based model used by all models describing engine efficiencies"
   extends BaseClasses.PartialEfficiency;

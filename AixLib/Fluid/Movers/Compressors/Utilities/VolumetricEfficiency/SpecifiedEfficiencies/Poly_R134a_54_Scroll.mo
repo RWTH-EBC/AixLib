@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
 model Poly_R134a_54_Scroll
   "Scroll Compressor - R134a - 54.24 cm³ - Polynomial "
   extends PolynomialVolumetricEfficiency(

@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.SpecifiedEfficiencies;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.SpecifiedEfficiencies;
 model Buck_R134aR450aR1234yfR1234zee_VarDisVol_ReciprocatingRotaryScroll
   "Reciporating/Rotary/Scroll Compressor - R134a, R450a, R1234yf, R1234ze(e) - Similitude - Power"
   extends PowerEngineEfficiency(
