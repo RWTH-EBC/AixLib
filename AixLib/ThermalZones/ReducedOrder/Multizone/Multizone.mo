@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
   "Multizone model"
   extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;

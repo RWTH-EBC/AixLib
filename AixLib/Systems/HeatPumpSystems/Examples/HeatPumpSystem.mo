@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.Examples;
+﻿within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;

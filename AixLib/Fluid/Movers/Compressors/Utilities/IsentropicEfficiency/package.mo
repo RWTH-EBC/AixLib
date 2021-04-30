@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities;
 package IsentropicEfficiency "Package that contains models describing different isentropic efficiencies"
   extends Modelica.Icons.Library;
 
