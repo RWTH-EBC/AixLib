@@ -1,4 +1,4 @@
-within AixLib.Fluid.Examples.GeothermalHeatPump.Control;
+﻿within AixLib.Fluid.Examples.GeothermalHeatPump.Control;
 model geothermalFieldController
   "Controls the heat exchange with a heat or cold source by setting two valves"
 

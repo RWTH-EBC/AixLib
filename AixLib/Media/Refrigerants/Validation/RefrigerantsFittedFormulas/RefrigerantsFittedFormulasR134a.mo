@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.Validation.RefrigerantsFittedFormulas;
+﻿within AixLib.Media.Refrigerants.Validation.RefrigerantsFittedFormulas;
 model RefrigerantsFittedFormulasR134a
   "Model that checks the fitted formulas of R134a"
   extends Modelica.Icons.Example;

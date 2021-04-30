@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.R410A_HEoS;
+﻿within AixLib.Media.Refrigerants.R410A_HEoS;
 package R410a_IIR_P1_48_T233_340_Formula "Refrigerant model for R410a using a hybrid approach with explicit formulas"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants

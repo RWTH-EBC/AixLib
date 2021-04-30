@@ -1,4 +1,4 @@
-within AixLib.Electrical.PVSystem.BaseClasses;
+﻿within AixLib.Electrical.PVSystem.BaseClasses;
 model PVModuleDC "partial model for PV module"
 
  parameter Modelica.SIunits.Area Area

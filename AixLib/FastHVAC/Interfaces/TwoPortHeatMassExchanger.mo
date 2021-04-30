@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Interfaces;
+﻿within AixLib.FastHVAC.Interfaces;
 model TwoPortHeatMassExchanger
   "Model transporting one enthalpy stream with storing mass or energy"
   parameter Modelica.Media.Interfaces.Types.Temperature T_start = workingFluid.T0;

@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
+﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
 model MixingValveAndHEX_ExergyDestruction_Simplified
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real T_0 = 298.15 "Exergy reference temperature";

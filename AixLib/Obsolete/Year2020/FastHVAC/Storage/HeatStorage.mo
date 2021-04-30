@@ -235,8 +235,7 @@ Fluid.Storage.BaseClasses.StorageCover top_cover(
 
   replaceable model HeatTransfer =
      AixLib.FastHVAC.Components.Storage.BaseClasses.HeatTransferOnlyConduction
-    constrainedby
-    AixLib.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers
+    constrainedby AixLib.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
 protected
