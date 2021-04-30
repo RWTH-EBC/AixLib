@@ -29,15 +29,14 @@ model PumpRadiatorThermostaticValve
   AixLib.Fluid.Sources.Boundary_pT
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-98, 10}, {-78, 30}})));
-  AixLib.Fluid.Actuators.Valves.ThermostaticValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve simpleValve(
     Influence_PressureDrop=0.15,
     Kvs=0.4,
     Kv_setT=0.12,
     leakageOpening=0,
     redeclare package Medium = Medium,
     m_flow_small=1e-4,
-    dp(start=20000))
-    annotation (Placement(transformation(extent={{32,10},{52,30}})));
+    dp(start=20000)) annotation (Placement(transformation(extent={{32,10},{52,30}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
