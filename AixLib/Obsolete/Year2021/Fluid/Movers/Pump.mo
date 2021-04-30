@@ -1,6 +1,8 @@
 within AixLib.Obsolete.Year2021.Fluid.Movers;
 model Pump
-  import AixLib;
+
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
   parameter AixLib.DataBase.Pumps.MinMaxCharacteristicsBaseDataDefinition MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1()
     "Head = f(V_flow) for minimal and maximal rotational speed"                                                                                                     annotation(choicesAllMatching = true);
@@ -46,7 +48,9 @@ equation
   end if;
   // Connect the pump variables with the variables of the two port model
   Head = -dp / (Medium.density(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow))) * Modelica.Constants.g_n);
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false,
+  annotation (
+    obsolete = "Obsolete model - Use one of the valves in package AixLib.Fluid.Movers.",
+    Icon(coordinateSystem(preserveAspectRatio = false,
   extent = {{-100, -100}, {100, 100}}),
   graphics={  Ellipse(extent = {{-100, 96}, {100, -104}},
   lineColor = {0, 0, 0}, fillColor = {0, 127, 0},

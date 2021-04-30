@@ -1,6 +1,8 @@
 within AixLib.Obsolete.Year2021.Fluid.Actuators.Valves;
 model MixingValve
-  import AixLib;
+
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+
   extends Modelica.Fluid.Fittings.BaseClasses.PartialTeeJunction;
   outer AixLib.Utilities.Sources.BaseParameters baseParameters
     "System wide properties";
@@ -177,7 +179,9 @@ equation
   else
      connect(opening, opening_actual);
   end if;
-  annotation (            Icon(coordinateSystem(
+  annotation (
+    obsolete = "Obsolete model - Use one of the valves in package AixLib.Fluid.Actuators.Valves.",
+    Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Polygon(
           points={{-40,20},{40,-20},{40,20},{-40,-20},{-40,20}},
