@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances.Examples;
+within AixLib.Fluid.FixedResistances.Examples;
 model SimplePipe
 
   extends Modelica.Icons.Example;
