@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Sunblinds;
+within AixLib.ThermalZones.HighOrder.Components.Sunblinds;
 model Sunblind_Task44 "sunblinds modell after suggestions by IEA Task 44"
 extends
     AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind(Imax=0);

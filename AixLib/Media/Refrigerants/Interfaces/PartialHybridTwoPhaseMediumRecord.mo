@@ -1,4 +1,4 @@
-﻿within AixLib.Media.Refrigerants.Interfaces;
+within AixLib.Media.Refrigerants.Interfaces;
 partial package PartialHybridTwoPhaseMediumRecord
   "Base class for two phase medium using a hybrid approach with records"
   extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula;

@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.Chiller;
+within AixLib.FastHVAC.Components.Chiller;
 model Chiller "Base model of FastHVAC Chiller"
   import AixLib;
 
