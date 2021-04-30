@@ -65,8 +65,7 @@ model StorageSolarCollector
   Modelica.Blocks.Sources.Pulse pulse(period = 3600,               width = 1, amplitude = 60,
     offset=101325)                                                                            annotation(Placement(transformation(extent={{-96,-18},
             {-76,2}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
-                                 simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
     Kvs=2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) annotation (Placement(transformation(

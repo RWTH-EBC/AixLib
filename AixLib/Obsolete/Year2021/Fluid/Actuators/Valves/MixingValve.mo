@@ -18,16 +18,14 @@ model MixingValve
     ///////////////////////////////////////////////////////////////////////////
     //Valves                                                                 //
     ///////////////////////////////////////////////////////////////////////////
-  AixLib.Fluid.Actuators.Valves.SimpleValve Valve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve Valve(
     Kvs=Kvs,
     m_flow_small=1e-4,
-    redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve Valve2(
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve Valve2(
     Kvs=Kvs,
     m_flow_small=1e-4,
-    redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-44,-84},{-24,-64}})));
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-44,-84},{-24,-64}})));
 
     ///////////////////////////////////////////////////////////////////////////
     //Calculation of Opening                                                 //

@@ -28,11 +28,10 @@ model PumpRadiatorValve
   AixLib.Fluid.Sources.Boundary_pT
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-98, 10}, {-78, 30}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
     Kvs=0.4,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{30,10},{50,30}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{30,10},{50,30}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,

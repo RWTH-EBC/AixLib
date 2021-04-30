@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators.Valves;
+within AixLib.Obsolete.Year2021.Fluid.Actuators.Valves;
 model SimpleValve
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
   parameter Real Kvs = 1.4 "Kv value at full opening (=1)";

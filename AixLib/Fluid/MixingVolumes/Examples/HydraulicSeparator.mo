@@ -72,10 +72,7 @@ model HydraulicSeparator
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={92,-26})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
-                                 simpleValve(redeclare package Medium = Medium,
-      m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{70,-74},{50,-54}})));
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(redeclare package Medium = Medium, m_flow_small=1e-4) annotation (Placement(transformation(extent={{70,-74},{50,-54}})));
   AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1Sec(redeclare package Medium =
                Medium)
     annotation (Placement(transformation(extent={{2,-66},{-18,-46}})));
