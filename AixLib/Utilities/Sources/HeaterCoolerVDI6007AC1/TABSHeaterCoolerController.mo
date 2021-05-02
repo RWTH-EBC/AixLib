@@ -53,9 +53,11 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
     annotation (Placement(transformation(extent={{100,-30},
           {120,-10}}),       iconTransformation(extent={{72,-30},{92,-10}})));
   Modelica.Blocks.Interaction.Show.BooleanValue heaterActive
-    "true if heater is active" annotation (Placement(transformation(extent={{-24,58},{-4,78}})));
+    "true if heater is active" annotation (Placement(transformation(extent={{-28,80},
+            {-8,100}})));
   Modelica.Blocks.Interaction.Show.BooleanValue coolerActive
-    "true if cooler is active" annotation (Placement(transformation(extent={{-18,-78},{2,-58}})));
+    "true if cooler is active" annotation (Placement(transformation(extent={{-22,-98},
+            {-2,-78}})));
 
   // Room temperature control
   Modelica.Blocks.Interfaces.RealInput TOpe if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
@@ -123,12 +125,12 @@ equation
   connect(coolingPower.y, switchCooler.u1) annotation (Line(points={{0.7,-39},{
           0,-39},{0,-12},{18,-12}},color={0,0,127}));
   connect(less.y, heaterActive.activePort) annotation (Line(points={{-31,20},{
-          -25.5,20},{-25.5,68}},
+          -29.5,20},{-29.5,90}},
                            color={255,0,255}));
   connect(less.y, switchHeater.u2) annotation (Line(points={{-31,20},{18,20}}, color={255,0,255}));
   connect(greater.y, switchCooler.u2) annotation (Line(points={{-31,-20},{18,-20}}, color={255,0,255}));
-  connect(coolerActive.activePort, greater.y) annotation (Line(points={{-19.5,
-          -68},{-26,-68},{-26,-20},{-31,-20}},
+  connect(coolerActive.activePort, greater.y) annotation (Line(points={{-23.5,
+          -88},{-26,-88},{-26,-20},{-31,-20}},
                                           color={255,0,255}));
 
   if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
