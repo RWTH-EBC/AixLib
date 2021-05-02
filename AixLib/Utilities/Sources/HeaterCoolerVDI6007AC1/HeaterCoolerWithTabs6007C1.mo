@@ -430,20 +430,16 @@ equation
   else
   connect(heaterActive, pITempHeatPanel.onOff) annotation (Line(
       points={{-160,20},{-82,20},{-82,10},{2.8,10}},
-      color={255,0,255},
-      pattern=LinePattern.Dash));
+      color={255,0,255}));
   connect(heaterActive, pITempHeatRem.onOff) annotation (Line(
       points={{-160,20},{-82,20},{-82,10},{52.8,10}},
-      color={255,0,255},
-      pattern=LinePattern.Dash));
+      color={255,0,255}));
   connect(coolerActive, pITempCoolPanel.onOff) annotation (Line(
       points={{-160,-20},{-82,-20},{-82,-10},{2.8,-10}},
-      color={255,0,255},
-      pattern=LinePattern.Dash));
+      color={255,0,255}));
   connect(coolerActive, pITempCoolRem.onOff) annotation (Line(
       points={{-160,-20},{-82,-20},{-82,-10},{52.8,-10}},
-      color={255,0,255},
-      pattern=LinePattern.Dash));
+      color={255,0,255}));
   end if;
 
   connect(Heating.port, heatCoolTabsExt) annotation (Line(points={{-20,74},{-20,
