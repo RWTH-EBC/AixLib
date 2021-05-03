@@ -386,6 +386,10 @@ model HeaterCoolerWithTabs6007C1
         rotation=90,
         origin={-64,100}),iconTransformation(extent={{-180,
             -40},{-140,0}})));
+  tabsPlusAirController tabsPlusAirController1 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on));
+    //annotation (Placement(transformation(extent={{-118,2},{-104,16}})));
+  tabsPlusAirController tabsPlusAirController2 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on));
+    //annotation (Placement(transformation(extent={{-118,-16},{-104,-2}})));
 equation
 
   connect(TAir, tOpe.TAir) annotation (Line(points={{-150,100},{-150,78},{-139.2,
@@ -415,27 +419,69 @@ equation
       points={{-110.05,28},{-82,28},{-82,10},{2.8,10}},
       color={255,0,255},
       pattern=LinePattern.Dash));
-  connect(booleanExpressionHeater.y, pITempHeatRem.onOff) annotation (Line(
-      points={{-110.05,28},{-82,28},{-82,10},{52.8,10}},
-      color={255,0,255},
-      pattern=LinePattern.Dash));
   connect(booleanExpressionCooler.y, pITempCoolPanel.onOff) annotation (Line(
       points={{-111,-30},{-82,-30},{-82,-10},{2.8,-10}},
-      color={255,0,255},
-      pattern=LinePattern.Dash));
-  connect(booleanExpressionCooler.y, pITempCoolRem.onOff) annotation (Line(
-      points={{-111,-30},{-82,-30},{-82,-10},{52.8,-10}},
       color={255,0,255},
       pattern=LinePattern.Dash));
   else
   connect(heaterActive, pITempHeatPanel.onOff) annotation (Line(
       points={{-160,20},{-82,20},{-82,10},{2.8,10}},
       color={255,0,255}));
-  connect(heaterActive, pITempHeatRem.onOff) annotation (Line(
-      points={{-160,20},{-82,20},{-82,10},{52.8,10}},
-      color={255,0,255}));
   connect(coolerActive, pITempCoolPanel.onOff) annotation (Line(
       points={{-160,-20},{-82,-20},{-82,-10},{2.8,-10}},
+      color={255,0,255}));
+  end if;
+
+  if staOrDyn and ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on)) then
+  connect(booleanExpressionHeater.y, tabsPlusAirController1.HeaterCoolerActiveInput);
+   // annotation (Line(points={{-110.05,28},{-140,28},{-140,7.32},{-118,7.32}},
+   //     color={255,0,255}));
+  connect(tabsCoolingPower, tabsPlusAirController1.tabsPower); //annotation (Line(
+    //    points={{-64,100},{-64,62},{-124,62},{-124,12.08},{-118,12.08}}, color={
+    //      0,0,127}));
+  connect(tabsPlusAirController1.HeaterCoolerActiveOutput, pITempHeatRem.onOff);
+    //annotation (Line(points={{-103.86,9},{-25.93,9},{-25.93,10},{52.8,10}},
+    //    color={255,0,255}));
+  connect(booleanExpressionCooler.y, tabsPlusAirController2.HeaterCoolerActiveInput);
+   // annotation (Line(points={{-111,-30},{-140,-30},{-140,-10.68},{-118,-10.68}},
+   //     color={255,0,255}));
+  connect(tabsHeatingPower, tabsPlusAirController2.tabsPower); // annotation (Line(
+     //   points={{-90,100},{-96,100},{-96,64},{-126,64},{-126,-5.92},{-118,-5.92}},
+     //   color={0,0,127}));
+  connect(tabsPlusAirController2.HeaterCoolerActiveOutput, pITempCoolRem.onOff);
+   // annotation (Line(points={{-103.86,-9},{-24.93,-9},{-24.93,-10},{52.8,-10}},
+   //     color={255,0,255}));
+  elseif not staOrDyn and ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on)) then
+  connect(heaterActive, tabsPlusAirController1.HeaterCoolerActiveInput);
+   // annotation (Line(points={{-160,20},{-140,20},{-140,7.32},{-118,7.32}},
+    //    color={255,0,255}));
+  connect(tabsCoolingPower, tabsPlusAirController1.tabsPower); //annotation (Line(
+     //   points={{-64,100},{-64,62},{-124,62},{-124,12.08},{-118,12.08}}, color={
+     //     0,0,127}));
+  connect(tabsPlusAirController1.HeaterCoolerActiveOutput, pITempHeatRem.onOff);
+   // annotation (Line(points={{-103.86,9},{-25.93,9},{-25.93,10},{52.8,10}},
+   //     color={255,0,255}));
+  connect(coolerActive, tabsPlusAirController2.HeaterCoolerActiveInput);
+   // annotation (Line(points={{-160,-20},{-140,-20},{-140,-10.68},{-118,-10.68}},
+   //     color={255,0,255}));
+  connect(tabsHeatingPower, tabsPlusAirController2.tabsPower); //annotation (Line(
+       // points={{-90,100},{-90,62},{-120,62},{-120,-5.92},{-118,-5.92}},
+      //  color={0,0,127}));
+  connect(tabsPlusAirController2.HeaterCoolerActiveOutput, pITempCoolRem.onOff);
+    //annotation (Line(points={{-103.86,-9},{-24.93,-9},{-24.93,-10},{52.8,-10}},
+    //    color={255,0,255}))
+  elseif staOrDyn and ((recOrSep and not zoneParam.tabs and zoneParam.radiator) or (not recOrSep and not tabs_on and radiator_on)) then
+  connect(booleanExpressionHeater.y, pITempHeatRem.onOff) annotation (Line(
+      points={{-110.05,28},{-82,28},{-82,10},{52.8,10}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(booleanExpressionCooler.y, pITempCoolRem.onOff) annotation (Line(
+      points={{-111,-30},{-82,-30},{-82,-10},{52.8,-10}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  elseif not staOrDyn and ((recOrSep and not zoneParam.tabs and zoneParam.radiator) or (not recOrSep and not tabs_on and radiator_on)) then
+  connect(heaterActive, pITempHeatRem.onOff) annotation (Line(
+      points={{-160,20},{-82,20},{-82,10},{52.8,10}},
       color={255,0,255}));
   connect(coolerActive, pITempCoolRem.onOff) annotation (Line(
       points={{-160,-20},{-82,-20},{-82,-10},{52.8,-10}},
@@ -573,7 +619,9 @@ equation
   connect(tabsHeatingPower, gainHTabsExt.u) annotation (Line(points={{-90,100},{
           -90,32},{-20,32},{-20,39.2}}, color={0,0,127}));
   connect(tabsHeatingPower, gainHTabsInt.u) annotation (Line(points={{-90,100},{
-          -90,32},{0,32},{0,39.2}},     color={0,0,127}));
+          -90,32},{-2.22045e-16,32},{-2.22045e-16,39.2}},
+                                        color={0,0,127}));
+
   annotation (Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
