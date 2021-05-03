@@ -10,7 +10,7 @@ model tabsHeaterCoolerController
     "Fixed available cooling power of TABS"  annotation (Dialog(tab="Cooler", enable=not recOrSep));
   parameter Real TThreshold_Heat_Tabs = 273.15 + 14
     "Threshold temperature below which heating is activated"  annotation (Dialog(tab="Heater", enable=not recOrSep));
-  parameter Real TThreshold_Cool_Tabs = 273.15 + 16
+  parameter Real TThreshold_Cool_Tabs = 273.15 + 18
     "Threshold temperature above which cooling is activated"  annotation (Dialog(tab="Cooler", enable=not recOrSep));
   parameter Boolean recOrSep = false "Use record if true or seperate parameters if false" annotation(choices(choice =  false
         "Seperate",choice = true "Record",radioButtons = true));
@@ -70,8 +70,8 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
         rotation=-90,
         origin={2,108})));
   Modelica.Blocks.Logical.Hysteresis hysteresisHeating(
-    uLow=273.15 + 18,
-    uHigh=273.15 + 24,
+    uLow=273.15 + 19,
+    uHigh=273.15 + 23,
     pre_y_start=true) if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
      and tabsRoomTempControl)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -90,7 +90,7 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
      and tabsRoomTempControl))
     annotation (Placement(transformation(extent={{68,-52},{88,-32}})));
   Modelica.Blocks.Logical.Hysteresis hysteresisCooling(
-    uLow=273.15 + 20,
+    uLow=273.15 + 21,
     uHigh=273.15 + 25,
     pre_y_start=false) if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
      and tabsRoomTempControl)) annotation (Placement(transformation(
@@ -124,14 +124,12 @@ equation
                                   color={0,0,127}));
   connect(coolingPower.y, switchCooler.u1) annotation (Line(points={{0.7,-39},{
           0,-39},{0,-12},{18,-12}},color={0,0,127}));
-  connect(less.y, heaterActive.activePort) annotation (Line(points={{-31,20},{
-          -29.5,20},{-29.5,90}},
-                           color={255,0,255}));
+  connect(less.y, heaterActive.activePort) annotation (Line(points={{-31,20},{-29.5,
+          20},{-29.5,90}}, color={255,0,255}));
   connect(less.y, switchHeater.u2) annotation (Line(points={{-31,20},{18,20}}, color={255,0,255}));
   connect(greater.y, switchCooler.u2) annotation (Line(points={{-31,-20},{18,-20}}, color={255,0,255}));
-  connect(coolerActive.activePort, greater.y) annotation (Line(points={{-23.5,
-          -88},{-26,-88},{-26,-20},{-31,-20}},
-                                          color={255,0,255}));
+  connect(coolerActive.activePort, greater.y) annotation (Line(points={{-23.5,-88},
+          {-26,-88},{-26,-20},{-31,-20}}, color={255,0,255}));
 
   if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
      and tabsRoomTempControl)) then
