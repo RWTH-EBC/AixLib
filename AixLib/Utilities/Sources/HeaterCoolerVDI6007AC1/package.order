@@ -7,3 +7,5 @@ tabsHeaterCoolerController
 tabsOnOffController
 MovingAverageTest
 tabsPlusAirController
+tabsHeatingCurve
+test
