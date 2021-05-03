@@ -386,9 +386,11 @@ model HeaterCoolerWithTabs6007C1
         rotation=90,
         origin={-64,100}),iconTransformation(extent={{-180,
             -40},{-140,0}})));
-  tabsPlusAirController tabsPlusAirController1 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on));
+  tabsPlusAirController tabsPlusAirController1 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on))
+    "if TABS cooling is active, air heating is set to inactive";
     //annotation (Placement(transformation(extent={{-118,2},{-104,16}})));
-  tabsPlusAirController tabsPlusAirController2 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on));
+  tabsPlusAirController tabsPlusAirController2 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on))
+    "if TABS heating is active, air cooling is set to inactive";
     //annotation (Placement(transformation(extent={{-118,-16},{-104,-2}})));
 equation
 
