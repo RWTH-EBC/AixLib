@@ -42,10 +42,12 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
   Modelica.Blocks.Sources.Constant off(k=0) annotation (Placement(transformation(extent={{-16,-6},{-2,8}})));
   Modelica.Blocks.Sources.Constant heatingPower(k=if not recOrSep then
         power_Heater_Tabs else zoneParam.powerHeatTabs)
-    "Fixed available heating power of TABS" annotation (Placement(transformation(extent={{-14,38},{0,52}})));
+    "Fixed available heating power of TABS" annotation (Placement(transformation(extent={{-158,62},
+            {-144,76}})));
   Modelica.Blocks.Sources.Constant coolingPower(k=if not recOrSep then
         power_Cooler_Tabs else zoneParam.powerCoolTabs)
-    "Fixed available cooling power of TABS" annotation (Placement(transformation(extent={{-14,-46},{0,-32}})));
+    "Fixed available cooling power of TABS" annotation (Placement(transformation(extent={{-158,
+            -72},{-144,-58}})));
   Modelica.Blocks.Interfaces.RealOutput tabsHeatingPower "Power for heating"
     annotation (Placement(transformation(extent={{100,10},
           {120,30}}),      iconTransformation(extent={{72,10},{92,30}})));
@@ -97,6 +99,18 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={20,66})));
+  tabsHeatingCurve tabs_HeatingCurve(
+    power_high=if not recOrSep then power_Heater_Tabs else zoneParam.powerHeatTabs,
+
+    T_upperlimit=273.15 + 15,
+    T_lowerlimit=273.15 + 0)
+    annotation (Placement(transformation(extent={{-12,32},{8,52}})));
+  tabsHeatingCurve tabsCoolingCurve(
+    power_high=if not recOrSep then power_Cooler_Tabs else zoneParam.powerCoolTabs,
+
+    T_upperlimit=273.15 + 22,
+    T_lowerlimit=273.15 + 18)
+    annotation (Placement(transformation(extent={{-18,-56},{2,-36}})));
 equation
 
   connect(TAirThresholdHeatingTabs.y, less.u2) annotation (Line(points={{-73.4,12},{-54,12}}, color={0,0,127}));
@@ -119,11 +133,6 @@ equation
           {18,12}},     color={0,0,127}));
   connect(off.y, switchCooler.u3) annotation (Line(points={{-1.3,1},{8,1},{8,
           -28},{18,-28}}, color={0,0,127}));
-  connect(heatingPower.y, switchHeater.u1) annotation (Line(points={{0.7,45},{
-          7.5,45},{7.5,28},{18,28}},
-                                  color={0,0,127}));
-  connect(coolingPower.y, switchCooler.u1) annotation (Line(points={{0.7,-39},{
-          0,-39},{0,-12},{18,-12}},color={0,0,127}));
   connect(less.y, heaterActive.activePort) annotation (Line(points={{-31,20},{-29.5,
           20},{-29.5,90}}, color={255,0,255}));
   connect(less.y, switchHeater.u2) annotation (Line(points={{-31,20},{18,20}}, color={255,0,255}));
@@ -165,6 +174,14 @@ equation
       pattern=LinePattern.Dash));
   end if;
 
+  connect(tabs_HeatingCurve.powerOutput, switchHeater.u1) annotation (Line(
+        points={{9,42},{12,42},{12,28},{18,28}}, color={0,0,127}));
+  connect(movingAverage.y, tabs_HeatingCurve.tDryBul) annotation (Line(points={
+          {-69.1,67},{-40.55,67},{-40.55,42},{-12,42}}, color={0,0,127}));
+  connect(tabsCoolingCurve.powerOutput, switchCooler.u1) annotation (Line(
+        points={{3,-46},{4,-46},{4,-12},{18,-12}}, color={0,0,127}));
+  connect(movingAverage.y, tabsCoolingCurve.tDryBul)
+    annotation (Line(points={{-69.1,67},{-18,67},{-18,-46}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-58, 32}, {62, -20}}, lineColor = {175, 175, 175}, textString = "%name")}),
