@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Storage;
+within AixLib.Fluid.Storage;
 model TwoPhaseSeparator
   "Model of a fully-mixed two-phase tank that works as ideally phase seperator"
 

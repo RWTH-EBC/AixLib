@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
