@@ -5,7 +5,7 @@ model tabsHeatingCurve
   Modelica.Blocks.Interfaces.RealOutput powerOutput "TABS power output curve"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   parameter Real power_high "High power output [W/m^2]";
-  parameter Real power_low "Low power output [W/m^2]";
+  parameter Real power_low = power_high/3 "Low power output [W/m^2]";
   parameter Real T_upperlimit "Hot temperature threshold";
   parameter Real T_lowerlimit "Cold Temperature threshold";
 
