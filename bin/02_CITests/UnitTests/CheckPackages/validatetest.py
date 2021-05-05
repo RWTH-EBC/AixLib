@@ -134,8 +134,8 @@ class ValidateTest(object):
 			
 			Library = rootdir = "IBPSA"+os.sep+Package+os.sep+"package.mo"
 			dymola = self.dymola
+			
 			try:
-				dymola_exception = DymolaException
 				PackageCheck = dymola.openModel(Library)
 				
 				if PackageCheck == True:
@@ -361,7 +361,7 @@ class ValidateTest(object):
 		green = "\033[0;32m"
 		
 		dymola = self.dymola										
-		dymola_exception = self.dymola_exception
+		#dymola_exception = self.dymola_exception
 		try:
 			#dymola_exception = DymolaException
 			PackageCheck = dymola.openModel(self.Library)
@@ -382,7 +382,7 @@ class ValidateTest(object):
 					result=dymola.checkModel(i)
 					if result == True:
 						print('\n'+green+' Successful: '+CEND+i+'\n')
-						continue
+						
 					if result == False:
 						print("Check for Model "+i+CRED+" failed!"+CEND+'\n')
 						print('\n'+ CRED+' Error: '+CEND+i+'\n')
@@ -435,7 +435,7 @@ class ValidateTest(object):
 			logfile = self.Package+"-log.txt"
 			ValidateTest._WriteErrorlog(self,logfile)
 			return ErrorList
-		except dymola_exception as ex:
+		except DymolaException as ex:
 			print(("2: Error: " + str(ex)))
 		finally:
 			if dymola is not None:
@@ -455,7 +455,7 @@ class ValidateTest(object):
 		
 		### Sets the Dymola path to activate the GUI
 		try:
-			dymola_exception = DymolaException
+			#dymola_exception = DymolaException
 			PackageCheck = dymola.openModel(self.Library)
 			if PackageCheck == True:
 				print("Found AixLib Library and start Checkmodel Tests \n Check Package " + self.Package+" \n")
@@ -531,7 +531,7 @@ class ValidateTest(object):
 			ValidateTest._WriteErrorlog(self,logfile)
 			return ErrorList
 		
-		except dymola_exception as ex:
+		except DymolaException as ex:
 			print(("2: Error: " + str(ex)))
 		finally:
 			if dymola is not None:
@@ -719,7 +719,7 @@ if  __name__ == '__main__':
 	
 	dymola = None
 	try:
-		dymola_exception = DymolaException
+		#dymola_exception = DymolaException
 		print("1: Starting Dymola instance")
 		if platform.system()  == "Windows":
 			dymola = DymolaInterface()
@@ -734,7 +734,7 @@ if  __name__ == '__main__':
 		CRED = '\033[91m'
 		CEND = '\033[0m'
 		green = "\033[0;32m"
-		
+		'''
 		while dym_sta_lic_available == False:
 			print(CRED+"No Dymola License is available"+CEND)
 			dymola.close()
@@ -754,7 +754,7 @@ if  __name__ == '__main__':
 					exit(1)
 		print(("2: Using Dymola port " + str(dymola._portnumber)))
 		print(green+"Dymola License is available"+CEND)
-		
+		'''
 		
 		
 		from validatetest import  ValidateTest
@@ -769,7 +769,7 @@ if  __name__ == '__main__':
 								SimulateExamples = args.SimulateExamples,
 								Changedmodels = args.Changedmodels,
 								dymola = dymola,
-								dymola_exception = dymola_exception)
+								dymola_exception = DymolaException)
 								
 		Git_Operation_Class = Git_Repository_Clone(Repository="Repo")
 	
