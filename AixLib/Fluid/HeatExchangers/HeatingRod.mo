@@ -9,7 +9,7 @@ model HeatingRod
 
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Heat flow rate at u=1, positive for heating";
-  parameter Modelica.SIunits.Volume V "Volume of heat exchanger";
+  parameter Modelica.SIunits.Volume V=m_flow_nominal*tau/rho_default "Volume of heat exchanger";
   parameter Real eta=0.97 "Efficiency of the heating rod";
 
   // Count switches
@@ -225,58 +225,11 @@ AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
 revisions="<html>
 <ul>
 <li>
-November 3, 2016, by Michael Wetter:<br/>
-Set <code>preHea(final alpha=0)</code> as this allows to simplify the
-system of equations.<br/>
+May 5, 2021, by Fabian Wuellhorst:<br/>
+Added model.<br/>
 This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/570\">#570</a>.
-</li>
-<li>
-November 19, 2015, by Michael Wetter:<br/>
-Removed assignment of parameter
-<code>showDesignFlowDirection</code> in <code>extends</code> statement.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/349\">#349</a>.
-</li>
-<li>
-May 6, 2015, by Michael Wetter:<br/>
-Set <code>prescribedHeatFlowRate=true</code>.
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">
-#412</a>.
-</li>
-<li>
-May 1, 2015, by Marcus Fuchs:<br/>
-Corrected typo in documentation.
-</li>
-<li>
-November 12, 2014, by Michael Wetter:<br/>
-Added output signal <code>Q_flow</code> so that it has
-the same output ports as
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet\">
-AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet</a>.
-</li>
-<li>
-September 11, 2014, by Christoph Nytsch-Geusen:<br/>
-Renaming class to <code>HeaterCooler_u</code>.
-</li>
-<li>
-October 15, 2013, by Michael Wetter:<br/>
-Redeclared the control volume to be final so that it does not show
-anymore in the parameter window.
-</li>
-<li>
-July 11, 2011, by Michael Wetter:<br/>
-Redeclared fluid volume as final. This prevents the fluid volume model
-to appear in the dialog window.
-</li>
-<li>
-May 24, 2011, by Michael Wetter:<br/>
-Changed base class to allow using the model as a dynamic or a steady-state model.
-</li>
-<li>
-April 17, 2008, by Michael Wetter:<br/>
-First implementation.
+<a href=\"https://github.com/RWTH-EBC/AixLib/issues/1092\">
+AixLib, #1092</a>.
 </li>
 </ul>
 </html>"));
