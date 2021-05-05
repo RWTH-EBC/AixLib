@@ -17,3 +17,12 @@ convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_oda"},
 convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_amb_eva"}, {"TEvaAmbMea"});
 convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"T_amb_con"}, {"TConAmbMea"});
 convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"iceFac"}, {"iceFacMea"});
+
+// Change naming of ThermalMachine to VapourCompressionMachine
+convertClass("AixLib.Controls.Interfaces.ThermalMachineControlBus", "AixLib.Controls.Interfaces.VapourCompressionMachineControlBus");
+convertClass("AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine", "AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine");
+
+// Change naming of Security to safety
+convertClass("AixLib.Controls.HeatPump.SecurityControls", "AixLib.Controls.HeatPump.SafetyControls");
+convertClass("AixLib.Controls.HeatPump.SecurityControls.SecurityControl", "AixLib.Controls.HeatPump.SafetyControls.SafetyControl");
+convertClass("AixLib.Controls.HeatPump.SecurityControls.BaseClasses.PartialSecurityControl", "AixLib.Controls.HeatPump.SafetyControls.BaseClasses.PartialSafetyControl");
