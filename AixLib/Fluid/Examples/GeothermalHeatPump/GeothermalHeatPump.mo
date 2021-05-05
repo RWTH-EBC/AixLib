@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Examples.GeothermalHeatPump;
+within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;
@@ -151,16 +151,17 @@ equation
           -18,-57},{-18,-8.00001},{-16.5,-8.00001},{-16.5,-8.00002}}, color={0,
           127,255}));
   annotation (experiment(Tolerance=1e-6, StopTime=86400), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
-        "Simulate and plot"), Documentation(revisions="<html>
+        "Simulate and plot"), Documentation(revisions="<html><ul>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
-    Use new heat pump model and add simulate and plot script.
-    (see issue <a href=
+    Use new heat pump model and add simulate and plot script. (see
+    issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
   </li>
   <li>May 19, 2017, by Marc Baranski:<br/>
     First implementation.
   </li>
+</ul>
 </html>", info="<html>
 <p>
   Simple stand-alone model of a combined heat and cold supply system.

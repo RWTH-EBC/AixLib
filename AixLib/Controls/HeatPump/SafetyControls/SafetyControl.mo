@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SafetyControls;
+within AixLib.Controls.HeatPump.SafetyControls;
 block SafetyControl "Block including all safety levels"
   extends BaseClasses.PartialSafetyControl;
 
@@ -207,8 +207,8 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  Aggregation of the four main safety measurements of a heat pump.
-  The order is based on the relevance to the real system. Only the
+  Aggregation of the four main safety measurements of a heat pump. The
+  order is based on the relevance to the real system. Only the
   AntiFreeze-Control is put last because of the relevance for the
   simulation. If the medium temperature falls below the critical value,
   the simulation will fail.
@@ -225,8 +225,7 @@ equation
   </li>
   <li>
     <a href=
-    \"modelica://AixLib.Controls.HeatPump.SafetyControls.OnOffControl+\">
-    OnOffControl</a>
+    \"modelica://AixLib.Controls.HeatPump.SafetyControls.OnOffControl+\">OnOffControl</a>
   </li>
   <li>
     <a href=
@@ -239,8 +238,8 @@ equation
   </li>
 </ul>
 <p>
-  The safety function for the anti legionella control is placed
-  inside the model <a href=
+  The safety function for the anti legionella control is placed inside
+  the model <a href=
   \"modelica://AixLib.Controls.HeatPump.HPControl\">HPControl</a>
 </p>
 </html>"));

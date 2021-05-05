@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses;
+within AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses;
 partial model BoilerBase
   "Base class containing the simple boiler model as peak load device"
   extends Interfaces.PartialTwoPort;
@@ -33,14 +33,15 @@ equation
   \"modelica://AixLib.Fluid.Examples.GeothermalHeatPump\">AixLib.Fluid.Examples.GeothermalHeatPump</a>.
 </p>
 </html>", revisions="<html>
+<ul>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
-    Add energyDynamics as parameter
-    (see issue <a href=
+    Add energyDynamics as parameter (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
   </li>
   <li>May 19, 2017, by Marc Baranski:<br/>
     First implementation.
   </li>
+</ul>
 </html>"));
 end BoilerBase;

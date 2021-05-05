@@ -31,17 +31,16 @@ equation
       Tolerance=1e-6),
     Diagram(coordinateSystem(extent={{-100,-100},{120,100}})),
     Icon(coordinateSystem(extent={{-100,-100},{120,100}})),
-    Documentation(info="<html>
-<p>This example illustrates how to use the heating rod model. </p>
+    Documentation(info="<html><p>
+  This example illustrates how to use the heating rod model.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-May 5, 2021, by Fabian Wuellhorst:<br/>
-Added model.<br/>
-This is for
-<a href=\"https://github.com/RWTH-EBC/AixLib/issues/1092\">
-AixLib, #1092</a>.
-</li>
+  <li>May 5, 2021, by Fabian Wuellhorst:<br/>
+    Added model.<br/>
+    This is for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1092\">AixLib, #1092</a>.
+  </li>
 </ul>
 </html>"));
 end HeatingRod;

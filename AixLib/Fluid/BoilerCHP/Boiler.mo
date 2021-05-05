@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP;
+within AixLib.Fluid.BoilerCHP;
 model Boiler "Boiler with internal and external control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
         a=paramBoiler.pressureDrop), vol(energyDynamics=energyDynamics,
@@ -145,8 +145,7 @@ equation
         revisions="<html><ul>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
-    Add energyDynamics as parameter
-    (see issue <a href=
+    Add energyDynamics as parameter (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
   </li>
   <li>
