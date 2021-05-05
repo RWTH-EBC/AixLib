@@ -1,5 +1,8 @@
-within AixLib.Fluid.Actuators.Valves;
+within AixLib.Obsolete.Year2021.Fluid.Actuators.Valves;
 model ThermostaticValve
+
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
   parameter Real Kvs = 1.4 "Kv value at full opening (=1)" annotation(Dialog(group = "Valve"));
   parameter Real Kv_setT = 0.8
@@ -35,7 +38,9 @@ equation
   else
     opening = min(1, (P - TempDiff) * (Kv_setT / Kvs) / P);
   end if;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
+  annotation (
+    obsolete = "Obsolete model - Use one of the valves in package AixLib.Fluid.Actuators.Valves.",
+    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
             lineThickness =                                                                                                   1, fillColor = {0, 0, 255},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Documentation(revisions="<html><ul>
   <li>

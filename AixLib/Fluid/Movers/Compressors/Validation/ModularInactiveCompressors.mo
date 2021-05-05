@@ -62,14 +62,14 @@ model ModularInactiveCompressors
     freqHz=1)
     "Prescribed valve's opening"
     annotation (Placement(transformation(extent={{-88,-80},{-68,-60}})));
-  Actuators.Valves.SimpleValve simVal(
+  Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simVal(
     redeclare package Medium = Medium,
     m_flow_start=0.025,
     m_flow_small=1e-6,
-    Kvs=1.4) "Model of a simple valve to simulate pressure losses"
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
-                rotation=-90,
-                origin={40,-40})));
+    Kvs=1.4) "Model of a simple valve to simulate pressure losses" annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=-90,
+        origin={40,-40})));
   Sources.Boundary_pT   sink(
     redeclare package Medium = Medium,
     nPorts=1,

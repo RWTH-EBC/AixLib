@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
-  extends
-    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
+  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
     constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
