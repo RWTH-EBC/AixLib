@@ -1,6 +1,6 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
-block SecurityControl "Block including all security levels"
-  extends BaseClasses.PartialSecurityControl;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
+block SafetyControl "Block including all safety levels"
+  extends BaseClasses.PartialSafetyControl;
 
   parameter Boolean use_minRunTime=true
     "False if minimal runtime of HP is not considered"
@@ -45,7 +45,7 @@ block SecurityControl "Block including all security levels"
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=not use_chiller and use_deFro, group="Defrost"));
   parameter Boolean use_antFre=true
-    "True if anti freeze control is part of security control"
+    "True if anti freeze control is part of safety control"
     annotation (Dialog(group="Anti Freeze Control"), choices(checkBox=true));
   parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
     "Limit temperature for anti freeze control"
@@ -207,7 +207,7 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  Aggregation of the four main security measurements of a heat pump.
+  Aggregation of the four main safety measurements of a heat pump.
   The order is based on the relevance to the real system. Only the
   AntiFreeze-Control is put last because of the relevance for the
   simulation. If the medium temperature falls below the critical value,
@@ -215,33 +215,33 @@ equation
 </p>
 <p>
   All used functions are optional. See the used models for more info on
-  each security function:
+  each safety function:
 </p>
 <ul>
   <li>
     <a href=
-    \"modelica://AixLib.Controls.HeatPump.SecurityControls.DefrostControl\">
+    \"modelica://AixLib.Controls.HeatPump.SafetyControls.DefrostControl\">
     DefrostControl</a>
   </li>
   <li>
     <a href=
-    \"modelica://AixLib.Controls.HeatPump.SecurityControls.OnOffControl+\">
+    \"modelica://AixLib.Controls.HeatPump.SafetyControls.OnOffControl+\">
     OnOffControl</a>
   </li>
   <li>
     <a href=
-    \"modelica://AixLib.Controls.HeatPump.SecurityControls.OperationalEnvelope\">
+    \"modelica://AixLib.Controls.HeatPump.SafetyControls.OperationalEnvelope\">
     OperationalEnvelope</a>
   </li>
   <li>
     <a href=
-    \"modelica://AixLib.Controls.HeatPump.SecurityControls.AntiFreeze\">AntiFreeze</a>
+    \"modelica://AixLib.Controls.HeatPump.SafetyControls.AntiFreeze\">AntiFreeze</a>
   </li>
 </ul>
 <p>
-  The security function for the anti legionella control is placed
+  The safety function for the anti legionella control is placed
   inside the model <a href=
   \"modelica://AixLib.Controls.HeatPump.HPControl\">HPControl</a>
 </p>
 </html>"));
-end SecurityControl;
+end SafetyControl;

@@ -1,5 +1,5 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
-partial block PartialSecurityControl "Base Block"
+﻿within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
+partial block PartialSafetyControl "Base Block"
   Modelica.Blocks.Interfaces.RealInput nSet
     "Set value relative speed of compressor. Analog from 0 to 1"
     annotation (Placement(transformation(extent={{-152,4},{-120,36}})));
@@ -12,7 +12,7 @@ partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Sources.Constant conZer(final k=0)
     "If an error occurs, the compressor speed is set to zero"
     annotation (Placement(transformation(extent={{58,-24},{70,-12}})));
-  Interfaces.ThermalMachineControlBus sigBusHP
+  Interfaces.VapourCompressionMachineControlBus sigBusHP
     "Bus-connector for the heat pump"
     annotation (Placement(transformation(extent={{-152,-84},{-118,-54}})));
   Modelica.Blocks.Interfaces.BooleanOutput modeOut
@@ -110,13 +110,13 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  Partial block for a security control. Based on the signals in the
+  Partial block for a safety control. Based on the signals in the
   sigBusHP either the input signals are equal to the output signals or,
   if an error occurs, set to 0.
 </p>
 <p>
   The Output ERR informs about the number of errors in the specific
-  security block.
+  safety block.
 </p>
 </html>"));
-end PartialSecurityControl;
+end PartialSafetyControl;

@@ -14,8 +14,8 @@ package BaseClasses "Package with partial classes of Performance Data"
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-80,-110})));
-    AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus
-      "Bus-connector used in a thermal machine" annotation (Placement(
+    AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus
+      "Bus-connector used in a heat pump" annotation (Placement(
           transformation(
           extent={{-15,-14},{15,14}},
           rotation=0,

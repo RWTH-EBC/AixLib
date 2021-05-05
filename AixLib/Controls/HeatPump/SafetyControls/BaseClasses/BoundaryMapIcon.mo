@@ -1,15 +1,15 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+﻿within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
 partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
 
   parameter Boolean use_opeEnvFroRec=true
-    "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Security Control", group="Operational Envelope"),choices(checkBox=true));
+    "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Safety Control", group="Operational Envelope"),choices(checkBox=true));
   parameter DataBase.HeatPump.HeatPumpBaseDataDefinition
     dataTable "Data Table of HP" annotation (choicesAllMatching=true, Dialog(
-      tab="Security Control",
+      tab="Safety Control",
       group="Operational Envelope",
       enable=use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
-    annotation (Dialog(tab="Security Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
   parameter Real iconMin=-70
     "Used to set the frame where the icon should appear"
     annotation (Dialog(tab="Dynamic Icon"));
@@ -65,7 +65,7 @@ protected
 </html>", info="<html>
 <p>
   Icon block used for the icon of the dynamic icon of the model
-  <a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.BaseClasses.BoundaryMap\">
+  <a href=\"modelica://AixLib.Controls.HeatPump.SafetyControls.BaseClasses.BoundaryMap\">
   BoundaryMap</a>. Extending this model will display the used
   operational envelope in the top-layer of the used models.
 </p>

@@ -1,7 +1,7 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
-  extends BaseClasses.PartialSecurityControl;
+  extends BaseClasses.PartialSafetyControl;
   extends BaseClasses.BoundaryMapIcon(final iconMin=-70,
   final iconMax=70);
  parameter Boolean use_opeEnv

@@ -1,9 +1,9 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 model AntiFreeze "Model to prevent source from freezing"
-  extends BaseClasses.PartialSecurityControl;
+  extends BaseClasses.PartialSafetyControl;
 
   parameter Boolean use_antFre=true
-    "True if anti freeze control is part of security control" annotation(choices(checkBox=true));
+    "True if anti freeze control is part of safety control" annotation(choices(checkBox=true));
   parameter Modelica.SIunits.ThermodynamicTemperature TAntFre=276.15
     "Limit temperature for anti freeze control"
     annotation (Dialog(enable=use_antFre));

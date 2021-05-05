@@ -17,7 +17,7 @@ model Chiller "Base model of FastHVAC Chiller"
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Modelica.SIunits.Power Q_useNominal(start=0)
-    "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
+    "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataMainChi =
       AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
@@ -228,7 +228,7 @@ model Chiller "Base model of FastHVAC Chiller"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.ThermalMachineControlBus sigBus annotation (Placement(
+  Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (Placement(
         transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(
           extent={{-108,-52},{-90,-26}})));
   AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(

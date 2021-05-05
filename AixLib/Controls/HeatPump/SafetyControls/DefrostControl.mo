@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   parameter Real minIceFac "Minimal value above which no defrost is necessary";
@@ -51,7 +51,7 @@ block DefrostControl
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
   Modelica.Blocks.Interfaces.BooleanOutput modeOut
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
-  Interfaces.ThermalMachineControlBus sigBusHP
+  Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
   Utilities.Logical.SmoothSwitch swiPel if not use_chiller
     "If defrost is on, output will be positive" annotation (Placement(

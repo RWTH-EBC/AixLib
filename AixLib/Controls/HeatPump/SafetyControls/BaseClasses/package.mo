@@ -1,5 +1,5 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
-package BaseClasses "Package with base classes for AixLib.Controls.HeatPump.SecurityControls"
+﻿within AixLib.Controls.HeatPump.SafetyControls;
+package BaseClasses "Package with base classes for AixLib.Controls.HeatPump.SafetyControls"
 
 
 
@@ -29,7 +29,7 @@ annotation (Icon(graphics={
 <p>
   This package contains base classes that are used to construct the
   models in <a href=
-  \"modelica://AixLib.Controls.HeatPump.SecurityControls\">SecurityControls</a>
+  \"modelica://AixLib.Controls.HeatPump.SafetyControls\">SafetyControls</a>
 </p>
 </html>"));
 end BaseClasses;

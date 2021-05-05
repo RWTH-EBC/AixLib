@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.BaseClasses;
-partial model PartialReversibleThermalMachine
+partial model PartialReversibleVapourCompressionMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
@@ -20,21 +20,21 @@ partial model PartialReversibleThermalMachine
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
-    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
+    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a vapour compression machine"
     annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
         origin={0,-1})));
 
-  parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+  parameter Boolean use_rev=true "Is the vapour compression machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Modelica.SIunits.Power Q_useNominal(start=0)
-    "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
+    "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=
           use_autoCalc));
-  parameter Real scalingFactor=1 "Scaling-factor of thermal machine";
+  parameter Real scalingFactor=1 "Scaling-factor of vapour compression machine";
   parameter Boolean use_refIne=true
     "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
@@ -298,7 +298,7 @@ partial model PartialReversibleThermalMachine
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus annotation (
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
 
@@ -687,7 +687,7 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  This partial model for a generic grey-box thermal machine (heat pump
+  This partial model for a generic grey-box vapour compression machine (heat pump
   or chiller) uses empirical data to model the refrigerant cycle. The
   modelling of system inertias and heat losses allow the simulation of
   transient states.
@@ -711,12 +711,12 @@ equation
 </h4>
 <p>
   Using a signal bus as a connector, this model working as a heat pump
-  can be easily combined with several control or security blocks from
+  can be easily combined with several control or safety blocks from
   <a href=
   \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>.
   The relevant data is aggregated. In order to control both chillers
   and heat pumps, both flow and return temperature are aggregated. The
-  mode signal chooses the operation type of the thermal machine:
+  mode signal chooses the operation type of the vapour compression machine:
 </p>
 <ul>
   <li>mode = true: Main operation mode (heat pump: heating; chiller:
@@ -727,7 +727,7 @@ equation
   </li>
 </ul>
 <p>
-  To model both on/off and inverter controlled thermal machines, the
+  To model both on/off and inverter controlled vapour compression machines, the
   compressor speed is normalizd to a relative value between 0 and 1.
 </p>
 <p>
@@ -764,7 +764,7 @@ equation
 <p>
   To simplify the parametrization of the evaporator and condenser
   volumes and nominal mass flows there exists an option of automatic
-  estimation based on the nominal usable power of the thermal machine.
+  estimation based on the nominal usable power of the vapour compression machine.
   This function uses a linear correlation of these parameters, which
   was established from the linear regression of more than 20 data sets
   of water-to-water heat pumps from different manufacturers (e.g.
@@ -778,7 +778,7 @@ equation
   Assumptions
 </h4>
 <p>
-  Several assumptions where made in order to model the thermal machine.
+  Several assumptions where made in order to model the vapour compression machine.
   For a detailed description see the corresponding model.
 </p>
 <ol>
@@ -805,7 +805,7 @@ equation
     <b>Scaling factor</b>: A scaling facor is implemented for scaling
     of the thermal power and capacity. The factor scales the parameters
     V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the
-    thermal machine can supply more heat with the COP staying nearly
+    vapour compression machine can supply more heat with the COP staying nearly
     constant. However, one has to make sure that the supplied pressure
     difference or mass flow is also scaled with this factor, as the
     nominal values do not increase said mass flow.
@@ -825,4 +825,4 @@ equation
   </li>
 </ul>
 </html>"));
-end PartialReversibleThermalMachine;
+end PartialReversibleVapourCompressionMachine;

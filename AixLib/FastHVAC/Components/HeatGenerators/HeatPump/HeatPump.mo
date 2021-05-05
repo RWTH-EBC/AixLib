@@ -17,7 +17,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Modelica.SIunits.Power Q_useNominal(start=0)
-    "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
+    "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataHea =
       AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
@@ -228,7 +228,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.ThermalMachineControlBus sigBusHP
+  Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
   AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(

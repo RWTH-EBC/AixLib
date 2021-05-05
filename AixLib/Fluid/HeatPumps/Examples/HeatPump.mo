@@ -166,7 +166,7 @@ model HeatPump "Example for the reversible heat pump model."
     uLow=273.15 + 15,
     uHigh=273.15 + 19)
     annotation (Placement(transformation(extent={{58,40},{48,50}})));
-  Controls.Interfaces.ThermalMachineControlBus sigBus1 annotation (Placement(
+  Controls.Interfaces.VapourCompressionMachineControlBus sigBus1 annotation (Placement(
         transformation(extent={{-34,22},{-4,56}}), iconTransformation(extent={{
             -22,30},{-4,56}})));
 equation
