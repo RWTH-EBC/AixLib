@@ -1,7 +1,8 @@
-within AixLib.Fluid.BoilerCHP;
+﻿within AixLib.Fluid.BoilerCHP;
 model Boiler "Boiler with internal and external control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
-        a=paramBoiler.pressureDrop), vol(V=paramBoiler.volume));
+        a=paramBoiler.pressureDrop), vol(energyDynamics=energyDynamics,
+                                         V=paramBoiler.volume));
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler
@@ -36,6 +37,10 @@ model Boiler "Boiler with internal and external control"
     annotation(Dialog(tab="External Control"));
   parameter Real FA=0.2 "Increment for increased set temperature"
     annotation(Dialog(tab="External Control"));
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics"));
   Modelica.Blocks.Interfaces.BooleanInput isOn
     "Switches Controler on and off"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
@@ -59,14 +64,16 @@ model Boiler "Boiler with internal and external control"
      50}})));
   replaceable model ExtControl =
     AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC
-     constrainedby AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl
+     constrainedby
+    AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl
       "External control"
       annotation (Dialog(tab="External Control"),choicesAllMatching=true);
   BaseClasses.Controllers.InternalControl internalControl(
     final paramBoiler=paramBoiler,
     final KR=KR,
     final TN=TN,
-    final riseTime=riseTime)
+    final riseTime=riseTime,
+    final energyDynamics=energyDynamics)
     "Internal control"
     annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
   ExtControl myExternalControl(
@@ -79,6 +86,7 @@ model Boiler "Boiler with internal and external control"
     "External control"
      annotation (Placement(transformation(extent={{-10,38},
             {10,58}})));
+
 
 equation
   connect(internalControl.QflowHeater, heater.Q_flow) annotation (Line(points={
@@ -135,6 +143,12 @@ equation
 </p>
 </html>",
         revisions="<html><ul>
+  <li>
+    <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
+    Add energyDynamics as parameter
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
+  </li>
   <li>
     <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions

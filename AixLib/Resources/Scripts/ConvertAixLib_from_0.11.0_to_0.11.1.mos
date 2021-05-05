@@ -31,3 +31,4 @@ convertClass("AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine", "AixLib
 convertClass("AixLib.Controls.HeatPump.SecurityControls", "AixLib.Controls.HeatPump.SafetyControls");
 convertClass("AixLib.Controls.HeatPump.SecurityControls.SecurityControl", "AixLib.Controls.HeatPump.SafetyControls.SafetyControl");
 convertClass("AixLib.Controls.HeatPump.SecurityControls.BaseClasses.PartialSecurityControl", "AixLib.Controls.HeatPump.SafetyControls.BaseClasses.PartialSafetyControl");
+
