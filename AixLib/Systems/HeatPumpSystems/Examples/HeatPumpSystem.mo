@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.Examples;
+﻿within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;
@@ -241,7 +241,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatP
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

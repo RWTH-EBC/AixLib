@@ -150,7 +150,7 @@ equation
   connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{
           -18,-57},{-18,-8.00001},{-16.5,-8.00001},{-16.5,-8.00002}}, color={0,
           127,255}));
-  annotation (experiment(StopTime=86400, Interval=10), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
+  annotation (experiment(Tolerance=1e-6, StopTime=86400), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
         "Simulate and plot"), Documentation(revisions="<html>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
