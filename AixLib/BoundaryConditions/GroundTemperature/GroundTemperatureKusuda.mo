@@ -1,4 +1,4 @@
-﻿within AixLib.BoundaryConditions.GroundTemperature;
+within AixLib.BoundaryConditions.GroundTemperature;
 model GroundTemperatureKusuda "Model for undisturbed ground temperature"
 
   parameter Modelica.SIunits.Temperature T_mean "Average air temperature over the year";

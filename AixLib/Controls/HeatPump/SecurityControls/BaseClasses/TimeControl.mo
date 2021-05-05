@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 block TimeControl
   "Counts seconds a device is turned on and returns true if the time is inside given boundaries"
   extends Modelica.Blocks.Interfaces.BooleanSISO;

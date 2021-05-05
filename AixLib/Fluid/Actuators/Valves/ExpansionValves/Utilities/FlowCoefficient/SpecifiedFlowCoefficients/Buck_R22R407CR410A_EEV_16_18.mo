@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients;
 model Buck_R22R407CR410A_EEV_16_18
   "Buckingham - Similitude for R22, R407C, R410A - EEV - 1.6 mm to 1.8 mm "
   extends PowerFlowCoefficient(

@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Interfaces.RealInput nSet
     "Set value relative speed of compressor. Analog from 0 to 1"
