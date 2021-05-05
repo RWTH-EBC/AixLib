@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledTest
   "Testing the pump speed algorithm with the new \"one record\" pump model."
   extends Modelica.Icons.Example;
@@ -33,13 +33,12 @@ model PumpSpeedControlledTest
     duration(displayUnit="s") = 100,
     startTime(displayUnit="s") = 100)
     annotation (Placement(transformation(extent={{46,30},{26,50}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
     Kvs=system.m_flow_nominal*3600/995/sqrt(system.g*pump.Hnom/1e5*1000),
     m_flow_start=system.m_flow_start,
     m_flow_small=system.m_flow_small,
-    dp_start=pump.p_b_start - pump.p_a_start)
-    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
+    dp_start=pump.p_b_start - pump.p_a_start) annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
     offset=0.5,

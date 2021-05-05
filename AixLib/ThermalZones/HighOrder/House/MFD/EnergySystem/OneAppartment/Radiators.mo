@@ -42,13 +42,12 @@ model Radiators
     redeclare package Medium = Medium,
     selectable=true)
     annotation (Placement(transformation(extent={{83,-48},{100,-31}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveKi(
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveKi(
     Kvs=0.41,
     Kv_setT=0.262,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{-67,-82.5},{-82,-66.5}})));
+    dp(start=1000)) annotation (Placement(transformation(extent={{-67,-82.5},{-82,-66.5}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorLi(
     radiatorType=Type_Radiator_Livingroom,
     m_flow_nominal=0.01,
@@ -67,34 +66,30 @@ model Radiators
     redeclare package Medium = Medium,
     selectable=true)
     annotation (Placement(transformation(extent={{86,33},{101,48}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveBa(
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveBa(
     Kvs=0.24,
     Kv_setT=0.162,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{38,-47},{50,-31}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveLi(
+    dp(start=1000)) annotation (Placement(transformation(extent={{38,-47},{50,-31}})));
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveLi(
     Kvs=1.43,
     Kv_setT=0.4,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{-67,-4},{-79,12}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveCh(
+    dp(start=1000)) annotation (Placement(transformation(extent={{-67,-4},{-79,12}})));
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveCh(
     Kvs=0.16,
     Kv_setT=0.088,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{64,32},{76,48}})));
-  Fluid.Actuators.Valves.ThermostaticValve valveBe(
+    dp(start=1000)) annotation (Placement(transformation(extent={{64,32},{76,48}})));
+  Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve valveBe(
     Kvs=0.24,
     Kv_setT=0.182,
     m_flow_small=0.0001,
     redeclare package Medium = Medium,
-    dp(start=1000))
-    annotation (Placement(transformation(extent={{49,74},{60,87}})));
+    dp(start=1000)) annotation (Placement(transformation(extent={{49,74},{60,87}})));
   Modelica.Fluid.Pipes.StaticPipe thStF(
     diameter = Diam_Main,
     length = Length_thSt,

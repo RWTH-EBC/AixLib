@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpHdpVarControlTest
   "testing the pump dp-var algorithm with the new \"one record\" pump model."
   extends Modelica.Icons.Example;
@@ -24,12 +24,11 @@ model PumpHdpVarControlTest
     period=600,
     startTime=0)
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
     Kvs=6.3,
     m_flow_start=system.m_flow_start,
-    m_flow_small=system.m_flow_small)
-    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
+    m_flow_small=system.m_flow_small) annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
     offset=0.5,

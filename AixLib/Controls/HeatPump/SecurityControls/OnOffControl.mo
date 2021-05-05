@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
+within AixLib.Controls.HeatPump.SecurityControls;
 model OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
   parameter Boolean use_minRunTime

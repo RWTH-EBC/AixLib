@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.BaseClasses.Internal;
+within AixLib.Controls.HVACAgentBasedControl.BaseClasses.Internal;
 function sendToUDP
   extends Modelica.Icons.Function;
   input Modelica_DeviceDrivers.Communication.UDPSocket socket;
