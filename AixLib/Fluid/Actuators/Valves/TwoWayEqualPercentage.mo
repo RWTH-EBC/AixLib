@@ -40,14 +40,6 @@ as the regularization near the origin.
 </html>", revisions="<html>
 <ul>
 <li>
-August 7, 2020, by Ettore Zanetti:<br/>
-changed the computation of <code>phi</code> using
-<code>max(0.1*l, . )</code> to avoid
-phi=0.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1376\">
-issue 1376</a>.
-</li>
-<li>
 February 21, 2020, by Michael Wetter:<br/>
 Changed icon to display its operating state.<br/>
 This is for

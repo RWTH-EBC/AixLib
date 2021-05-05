@@ -54,7 +54,8 @@ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">AixL
 </html>"),
 experiment(
       StopTime=604800,
-      Tolerance=1e-06),
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Cvode"),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/RoomWithoutLatentGain.mos"
   "Simulate and plot"),

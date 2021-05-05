@@ -21,13 +21,12 @@ model PumpNdpVarControlTest
 
   Modelica.Blocks.Sources.BooleanPulse PumpOn(period=600, width=500/600*100)
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
     m_flow_start=system.m_flow_start,
     m_flow_small=system.m_flow_small,
     Kvs=system.m_flow_nominal*3600/995/sqrt(system.g*2*pump.Hnom/1e5*1000),
-    dp_start=pump.p_b_start - pump.p_a_start)
-    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
+    dp_start=pump.p_b_start - pump.p_a_start) annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
     offset=0.5,

@@ -50,11 +50,7 @@ equation
           fillPattern=FillPattern.Solid),Text(
           extent={{-48,146},{50,98}},
           lineColor={0,0,255},
-          textString="%name"),
-        Text(
-          extent={{98,-46},{-22,-96}},
-          lineColor={0,0,0},
-          textString=DynamicSelect("", String(V, leftjustified=false, significantDigits=3)))}),
+          textString="%name")}),
 defaultComponentName="toVolFra",
 Documentation(info="<html>
 <p>
@@ -68,12 +64,6 @@ of the mixture.
 </html>",
 revisions="<html>
 <ul>
-<li>
-February 25, 2020, by Michael Wetter:<br/>
-Changed icon to display its operating state.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
-</li>
 <li>
 February 13, 2011 by Michael Wetter:<br/>
 Changed connectors from the obsolete <code>RealSignal</code>

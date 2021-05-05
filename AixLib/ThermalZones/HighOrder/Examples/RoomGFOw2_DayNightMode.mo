@@ -44,11 +44,10 @@ model RoomGFOw2_DayNightMode
     redeclare package Medium = Medium,
     m_flow_nominal=1.5*m_flow_nominal,
     dpValve_nominal=0.5*dp_nominal)                                               annotation(Placement(transformation(extent={{22,-36},{42,-16}})));
-  AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
-       0.0001,
-    MinMaxCharacteristics=DataBase.Pumps.Pump1())
-               "Pump in heating system"
-                                annotation(Placement(transformation(extent={{-74,-36},{-54,-16}})));
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump Pump(
+    redeclare package Medium = Medium,
+    m_flow_small=0.0001,
+    MinMaxCharacteristics=DataBase.Pumps.Pump1()) "Pump in heating system" annotation (Placement(transformation(extent={{-74,-36},{-54,-16}})));
   AixLib.Utilities.Sources.NightMode nightMode(dayEnd = 22, dayStart = 6) annotation(Placement(transformation(extent={{-86,0},{-66,20}})));
   AixLib.Fluid.FixedResistances.PressureDrop res(
     redeclare package Medium = Medium,

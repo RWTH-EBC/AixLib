@@ -81,11 +81,6 @@ from <code>rooB</code> to <code>rooA</code>.
 </html>", revisions="<html>
 <ul>
 <li>
-March 26, 2021 by Michael Wetter:<br/>
-Updated comments for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
-</li>
-<li>
 May 30, 2018, by Michael Wetter:<br/>
 Added example for instace of
 <a href=\"modelica://AixLib.Airflow.Multizone.ZonalFlow_m_flow\">AixLib.Airflow.Multizone.ZonalFlow_m_flow</a>.

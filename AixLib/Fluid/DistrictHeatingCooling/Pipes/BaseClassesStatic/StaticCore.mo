@@ -52,7 +52,7 @@ model StaticCore
   parameter Real ReC=4000
     "Reynolds number where transition to turbulent starts";
 
-  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
   parameter Boolean linearized = false
     "= true, use linear relation between m_flow and dp for any flow rate"

@@ -77,7 +77,9 @@ AixLib.Fluid.MassExchangers.ConstantEffectiveness</a>.
 <ul>
 <li>
 September 25, 2018, by Michael Wetter:<br/>
-Refactored model to use a common base class.
+Refactored model to use a common base class with
+<a href=\"modelica://Buildings.Fluid.HeatExchangers.PlateHeatExchangerEffectivenessNTU\">
+Buildings.Fluid.HeatExchangers.PlateHeatExchangerEffectivenessNTU</a>.
 </li>
 </ul>
 </html>"));

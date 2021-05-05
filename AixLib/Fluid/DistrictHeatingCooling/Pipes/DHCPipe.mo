@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCPipe "Generic pipe model for DHC applications"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
@@ -84,7 +84,7 @@ model DHCPipe "Generic pipe model for DHC applications"
     "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc. if use_zeta"
     annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
 
-  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
   parameter Boolean linearized = false
