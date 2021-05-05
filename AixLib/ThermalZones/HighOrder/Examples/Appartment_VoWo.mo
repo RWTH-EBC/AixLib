@@ -16,9 +16,7 @@ model Appartment_VoWo "Simulation of 1 apartment "
     solIrrThreshold=350,
     TOutAirLimit=290.15)
     annotation (Placement(transformation(extent={{-42,-4},{36,46}})));
-  AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
-       0.0001) "Pump in heating system"
-    annotation (Placement(transformation(extent={{4,-82},{-16,-62}})));
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=0.0001) "Pump in heating system" annotation (Placement(transformation(extent={{4,-82},{-16,-62}})));
   AixLib.Fluid.FixedResistances.PressureDrop res1(
     redeclare package Medium = Medium,
     dp_nominal=200,

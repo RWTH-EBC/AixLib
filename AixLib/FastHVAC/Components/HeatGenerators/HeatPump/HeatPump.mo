@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.HeatGenerators.HeatPump;
+within AixLib.FastHVAC.Components.HeatGenerators.HeatPump;
 model HeatPump "Base model of FastHVAC Heat Pump"
 
 //General

@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.HighOrder.Components.Sunblinds;
 model SunblindTimeVariable
-  extends
-    AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind(Imax=0);
+  extends AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind(Imax=0);
 
 
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 600,0; 1200,

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTable2D "Performance data coming from manufacturer"
   extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;

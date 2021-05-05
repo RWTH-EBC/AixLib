@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.HeatExchangers;
+within AixLib.FastHVAC.Components.HeatExchangers;
 model MultiRadiator "Simple multi radiator model"
 
   /* *******************************************************************

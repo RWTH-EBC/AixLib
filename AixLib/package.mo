@@ -69,9 +69,9 @@ package AixLib
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.5_to_0.10.6.mos",
     version="0.10.6",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.6_to_0.10.7.mos",
-    version="0.11.0",
+    version="0.10.7",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.7_to_0.11.0.mos",
-    version="0.11.1",
+    version="0.11.0",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.11.0_to_0.11.1.mos")),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed

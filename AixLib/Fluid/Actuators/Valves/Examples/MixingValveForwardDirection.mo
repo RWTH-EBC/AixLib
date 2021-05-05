@@ -17,11 +17,10 @@ model MixingValveForwardDirection
     redeclare package Medium = Medium,
     p=150000)
     annotation (Placement(transformation(extent={{-100,-60},{-80,-80}})));
-  AixLib.Fluid.Actuators.Valves.MixingValve
-                                          mixingValveFiltered(
-      filteredOpening=true, riseTime=100,
-    redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-34,-10},{-14,10}})));
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.MixingValve mixingValveFiltered(
+    filteredOpening=true,
+    riseTime=100,
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-34,-10},{-14,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                         temperatureSensor1(redeclare package Medium =
                Medium, m_flow_nominal=1)

@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 package SafetyControls
 
 
