@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.Chiller;
+﻿within AixLib.FastHVAC.Examples.Chiller;
 model Chiller
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor

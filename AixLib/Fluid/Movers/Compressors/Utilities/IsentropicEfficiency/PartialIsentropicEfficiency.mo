@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency;
 partial model PartialIsentropicEfficiency
   "Based model used by all models describing isentropic efficiencies"
   extends BaseClasses.PartialEfficiency;

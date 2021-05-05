@@ -1,4 +1,4 @@
-within AixLib.DataBase.CHP.ModularCHPEngineMedia;
+﻿within AixLib.DataBase.CHP.ModularCHPEngineMedia;
 package CHPCoolantPropyleneGlycolWater
   "Package with model for propylene glycol - water with constant properties"
   extends Modelica.Media.Interfaces.PartialSimpleMedium(

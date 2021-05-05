@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
+﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
 model HeatPump
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor

@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.Functions.IcingFactor;
+﻿within AixLib.DataBase.HeatPump.Functions.IcingFactor;
 partial function PartialBaseFct "Base function for all icing factor functions"
   extends Modelica.Icons.Function;
   input Modelica.SIunits.ThermodynamicTemperature T_flow_ev "Evaporator supply temperature";

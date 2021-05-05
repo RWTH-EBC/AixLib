@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
 model Poly_R22_20_Rotary "Rotary Compressor - R22 - 20.7 cm³ - Polynomial"
   extends PolynomialVolumetricEfficiency(
     final polyMod=Types.VolumetricPolynomialModels.Li2013,

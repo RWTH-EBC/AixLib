@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
 
   parameter Boolean use_opeEnvFroRec=true

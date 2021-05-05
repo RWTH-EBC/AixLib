@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
 model CtrlPassThroughN "'n_set' passhrough for PumpSpeedControlled"
   extends BaseClasses.PumpController;
 equation

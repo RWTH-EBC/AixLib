@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.BaseClasses;
+﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 model PumpInterface_PumpSpeedControlled
   "Speed controlled polynomial based pump with controller"
   extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;
@@ -7,8 +7,7 @@ model PumpInterface_PumpSpeedControlled
 
   replaceable
     AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlPassThroughN
-    pumpController(pumpParam=pumpParam) constrainedby
-    Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
+    pumpController(pumpParam=pumpParam) constrainedby Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
     annotation (
     Dialog(enable=true, tab="Control Strategy"),
     Placement(transformation(extent={{-20,40},{20,80}})),

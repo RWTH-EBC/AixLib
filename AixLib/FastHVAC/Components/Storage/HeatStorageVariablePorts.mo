@@ -249,8 +249,7 @@ public
         origin={0,-38})));
 
   replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction  constrainedby
-    BaseClasses.PartialHeatTransferLayers
+     BaseClasses.HeatTransferOnlyConduction  constrainedby BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
   HeatTransfer heatTransfer(final Medium=medium,final data=data,

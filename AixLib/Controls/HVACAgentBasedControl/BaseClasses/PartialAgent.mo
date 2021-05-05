@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
+﻿within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
 partial model PartialAgent
   parameter Integer name "Name of the agent (five-digit number, eg. 10001)";
   parameter Boolean usePoke=false
