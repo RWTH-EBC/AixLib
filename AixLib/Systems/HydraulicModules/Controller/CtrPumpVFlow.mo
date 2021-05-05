@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.Controller;
+within AixLib.Systems.HydraulicModules.Controller;
 block CtrPumpVFlow
   "Volume Flow Set Point Controller for variable Speed pumps"
          Modelica.Blocks.Interfaces.RealInput vFlowAct
@@ -144,7 +144,7 @@ equation
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
     Documentation(revisions="<html><ul>
-    <li>April 14, 2021, by Phillip Stoffel:<br/>
+  <li>April 14, 2021, by Phillip Stoffel:<br/>
     First implementation.
   </li>
 </ul>
@@ -155,7 +155,8 @@ equation
   vFlowAct.
 </p>
 <p>
-The controller adjusts the pump speed to archive the specified volume flow
+  The controller adjusts the pump speed to archive the specified volume
+  flow
 </p>
 </html>"));
 end CtrPumpVFlow;
