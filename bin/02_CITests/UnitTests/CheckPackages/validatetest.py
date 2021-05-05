@@ -385,16 +385,18 @@ class ValidateTest(object):
 						continue
 					if result == False:
 						print("Check for Model "+i+CRED+" failed!"+CEND+'\n')
+						print('\n'+ CRED+' Error: '+CEND+i+'\n')
+						Log = dymola.getLastError()
+						print(Log)
 						print("Second Check Test for model "+i)
-						result=dymola.checkModel(i)
-						if result == True:
+						sec_result=dymola.checkModel(i)
+						if sec_result == True:
 							print('\n'+ green+ ' Successful: '+CEND+i+'\n')
 							continue
-						if result == False:
+						if sec_result == False:
 							ErrorList.append(i)
 							print('\n'+ CRED+' Error: '+CEND+i+'\n')
-							Log = dymola.getLastError()
-							print(Log)
+							continue
 			
 			if self.Changedmodels == True:
 				print("	Test only changed or new models")
