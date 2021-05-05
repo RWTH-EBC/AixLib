@@ -259,8 +259,8 @@ equation
      Line(points={{94,-50},{102,-50},{108,-50}}, color={0,127,255}));
   connect(heatPump.port_b1, heatStorage.port_a_heatGenerator) annotation (Line(
         points={{-16.5,20},{6,20},{6,-64.04},{26.24,-64.04}}, color={0,127,255}));
-  connect(heatPump.port_b1, geothField_sink1.ports[2]) annotation (Line(points={{-16.5,
-          20},{-16,20},{-16,28},{-146,28},{-146,24.8}},        color={0,127,255}));
+  connect(heatPump.port_b1, geothField_sink1.ports[1]) annotation (Line(points={{-16.5,
+          20},{-16,20},{-16,28},{-146,28},{-146,27.2}},        color={0,127,255}));
   connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{-18,
           -57},{-18,-8.00001},{-16.5,-8.00001}}, color={0,127,255}));
   connect(heatPump.port_b2, geothField_sink1.ports[2]) annotation (Line(points={
@@ -286,11 +286,6 @@ equation
           -120},{160,80}})),              Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-120},{160,80}})),
     experiment(StopTime=3600, Interval=10),
-    __Dymola_experimentSetupOutput(
-      states=false,
-      derivatives=false,
-      inputs=false,
-      auxiliaries=false),
     Documentation(info="<html><p>
   Base class of an example demonstrating the use of a heat pump
   connected to two storages and a geothermal source. A replaceable

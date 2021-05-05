@@ -10,6 +10,8 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
       redeclare package Medium_con = Medium,
       redeclare package Medium_eva = Medium,
       use_rev=false,
+      use_refIne=false,
+      refIneFre_constant=0,
       mFlow_conNominal=0.5,
       VCon=0.005,
       dpCon_nominal=0,
@@ -25,9 +27,8 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
       GEvaOut=0,
       GEvaIns=0,
       redeclare model PerDataMainHP =
-          DataBase.HeatPump.PerformanceData.PolynomalApproach (redeclare
-            function PolyData =
-              AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade)));
+          DataBase.HeatPump.PerformanceData.LookUpTable2D (dataTable=
+              AixLib.DataBase.HeatPump.EN255.Vitocal350BWH110())));
 
   Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium,
       nPorts=1) annotation (Placement(transformation(
@@ -132,7 +133,11 @@ equation
   connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{
           -18,-57},{-18,-8.00001},{-16.5,-8.00001},{-16.5,-8.00002}}, color={0,
           127,255}));
-  annotation (experiment(StopTime=86400, Interval=10), Documentation(revisions="<html><ul>
+  annotation (experiment(StopTime=86400, Interval=10), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
+        "Simulate and plot"), Documentation(revisions="<html><ul>
+  <li>May 05, 2021, by Fabian Wuellhorst:<br/>
+    Use new heat pump model and add simulate and plot script.
+  </li>
   <li>May 19, 2017, by Marc Baranski:<br/>
     First implementation.
   </li>

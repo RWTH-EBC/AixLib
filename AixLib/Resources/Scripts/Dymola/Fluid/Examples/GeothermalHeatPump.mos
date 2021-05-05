@@ -1,0 +1,3 @@
+simulateModel("AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump", stopTime=86400, method="dassl", tolerance=1e-06, resultFile="GeothermalHeatPump");
+createPlot(id=1, position={0, 0, 792, 1247}, y={"heatPumpPower"}, grid=true, colors={{28,108,200}});
+createPlot(id=2, y={"heatStorage.layer[1].T","heatStorage.layer[5].T","coldStorage.layer[5].T","coldStorage.layer[1].T"}, colors={{28,108,200},{0,140,72},{238,46,47},{217,67,180}});

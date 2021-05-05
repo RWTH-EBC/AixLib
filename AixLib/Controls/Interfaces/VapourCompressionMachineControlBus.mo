@@ -41,7 +41,7 @@ extends Modelica.Icons.SignalBus;
     "Ambient temperature on evaporator side";
   Modelica.SIunits.ThermodynamicTemperature TConAmbMea
     "Ambient temperature on condenser side";
-  Real iceFacMea
+  Real iceFacMea(start=1)
     "Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen). 1 means no icing/frosting."
 annotation (
   defaultComponentName = "sigBusHP",
