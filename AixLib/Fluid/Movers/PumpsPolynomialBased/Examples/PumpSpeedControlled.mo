@@ -1,17 +1,17 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
-model PumpSpeedControlledTest
-  "Testing the pump speed algorithm with the new \"one record\" pump model."
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+model PumpSpeedControlled "Testing the pump speed controlled model."
   extends Modelica.Icons.Example;
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
-  PumpSpeedControlled pump(
+  .AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled pump(
     m_flow_nominal=m_flow_nominal,
     pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4(),
     calculatePower=true,
     calculateEfficiency=true,
     redeclare function efficiencyCharacteristic =
         AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency,
+
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
@@ -25,11 +25,6 @@ model PumpSpeedControlledTest
     duration(displayUnit="s") = 100,
     startTime(displayUnit="s") = 100)
     annotation (Placement(transformation(extent={{46,30},{26,50}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
-    redeclare package Medium = Medium,
-    Kvs=6.3,
-    m_flow_small=1E-4*m_flow_nominal)
-    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
     offset=0.5,
@@ -38,12 +33,17 @@ model PumpSpeedControlledTest
     startTime(displayUnit="s") = 300)
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   AixLib.Fluid.Sources.Boundary_pT vessle(
-    redeclare package Medium = Medium,
-    nPorts=2) annotation (Placement(transformation(
+    redeclare package Medium = Medium, nPorts=2)
+              annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-36,20})));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
+  Actuators.Valves.TwoWayLinear             simpleValve(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    dpValve_nominal=1000)
+    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 equation
   connect(pumpBus, pump.pumpBus) annotation (Line(
       points={{0,40},{0,20}},
@@ -62,14 +62,14 @@ equation
       string="%second",
       index=2,
       extent={{6,3},{6,3}}));
-  connect(rampValvePosition.y, simpleValve.opening)
-    annotation (Line(points={{-21,-60},{-30,-60},{-30,-38}}, color={0,0,127}));
+  connect(simpleValve.y, rampValvePosition.y)
+    annotation (Line(points={{-30,-42},{-30,-60},{-21,-60}}, color={0,0,127}));
+  connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{40,
+          10},{40,-30},{-20,-30}}, color={0,127,255}));
   connect(simpleValve.port_b, vessle.ports[1]) annotation (Line(points={{-40,-30},
-          {-52,-30},{-52,10},{-34,10}}, color={0,127,255}));
+          {-60,-30},{-60,10},{-34,10}}, color={0,127,255}));
   connect(vessle.ports[2], pump.port_a)
     annotation (Line(points={{-38,10},{-10,10}}, color={0,127,255}));
-  connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{48,
-          10},{48,-30},{-20,-30}}, color={0,127,255}));
   annotation (
     experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
@@ -108,4 +108,4 @@ equation
     __Dymola_Commands(file=
         "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledTest.mos"
         "Simulate and plot"));
-end PumpSpeedControlledTest;
+end PumpSpeedControlled;
