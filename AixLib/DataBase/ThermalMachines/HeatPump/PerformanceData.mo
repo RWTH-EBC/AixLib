@@ -730,6 +730,31 @@ package PerformanceData "Different models used for a black box heat pump model"
     partial model PartialPerformanceData
       "Model with a replaceable for different methods of data aggregation"
 
+      parameter Modelica.SIunits.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+      annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+      parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+      parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+      parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+      parameter Real PLRMin=0.4 "Limit of PLR; less =0"
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+      parameter Boolean HighTemp=false "true: THot > 60°C"
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+      parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+      parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+      parameter Modelica.SIunits.Temperature TSource=280 "temperature of heat source"
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+
+     parameter Boolean dTConFix=false
+       annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+
       Modelica.Blocks.Interfaces.RealOutput Pel(final unit="W", final displayUnit="kW")
                                                           "Electrical Power consumed by HP" annotation (Placement(
             transformation(
@@ -813,6 +838,777 @@ package PerformanceData "Different models used for a black box heat pump model"
 </p>
 </html>"));
   end BaseClasses;
+
+  model LookUpTableNDNotManudacturer "4-dimensional table without manufacturer data for heat pump"
+   extends
+      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+
+
+    SDF.NDTable SDFCOP(
+      final nin=4,
+      final readFromFile=true,
+      final filename=FilenameCOP,
+      final dataset="\COP",
+      final dataUnit="-",
+      final scaleUnits={"degC","-","K","degC"},
+      final interpMethod=SDF.Types.InterpolationMethod.Linear,
+      final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+      "SDF-Table data for COP nominal"
+                               annotation (Placement(transformation(
+          extent={{-12,-12},{12,12}},
+          rotation=-90,
+          origin={76,-18})));
+    Modelica.Blocks.Routing.Multiplex4 multiplex4_1 annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=-90,
+          origin={38,16})));
+    Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin1
+      annotation (Placement(transformation(extent={{-7,-7},{7,7}},
+          rotation=0,
+          origin={73,83})));
+    DimensionHeatPump dimensionHeatPump(HighTemp=HighTemp,
+      THotNom=THotNom,
+      TSourceNom=TSourceNom,
+      QNom=QNom,
+      DeltaTCon=DeltaTCon,
+      dTConFix=dTConFix)
+      annotation (Placement(transformation(extent={{-80,-16},{-60,4}})));
+    Modelica.Blocks.Logical.LessThreshold pLRMin(threshold=PLRMin)
+      annotation (Placement(transformation(extent={{-124,50},{-104,70}})));
+    Modelica.Blocks.Logical.Switch switch4
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-60,60})));
+    Modelica.Blocks.Logical.Switch switch3
+      annotation (Placement(transformation(extent={{-9,-9},{9,9}},
+          rotation=270,
+          origin={-35,13})));
+    Modelica.Blocks.Sources.RealExpression zero
+      annotation (Placement(transformation(extent={{-52,70},{-70,90}})));
+    Modelica.Blocks.Math.Add add(k1=-1)
+      annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+          rotation=-90,
+          origin={80,-72})));
+    Modelica.Blocks.Math.Product product1
+      annotation (Placement(transformation(extent={{-18,-72},{-2,-56}})));
+    Modelica.Blocks.Math.Product product2
+      annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+          rotation=-90,
+          origin={-80,-62})));
+
+    Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=PLRMin)
+      annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+          rotation=-90,
+          origin={74,62})));
+    Modelica.Blocks.Sources.RealExpression deltaTCon(y=DeltaTCon)
+      annotation (Placement(transformation(extent={{-7,-8},{7,8}},
+          rotation=180,
+          origin={51,62})));
+    Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin4
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={36,126})));
+    Modelica.Blocks.Math.Add add1
+      annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+          rotation=180,
+          origin={58,108})));
+    Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom) annotation (
+        Placement(transformation(
+          extent={{6,-6},{-6,6}},
+          rotation=270,
+          origin={58,2})));
+    Modelica.Blocks.Routing.Multiplex4 multiplex4_2 annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=-90,
+          origin={76,16})));
+    Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin5
+      annotation (Placement(transformation(extent={{4,-4},{-4,4}},
+          rotation=270,
+          origin={58,16})));
+    SDF.NDTable SDFCOP1(
+      final nin=4,
+      final readFromFile=true,
+      final filename=FilenameCOP,
+      final dataset="\COP",
+      final dataUnit="-",
+      final scaleUnits={"degC","-","K","degC"},
+      final interpMethod=SDF.Types.InterpolationMethod.Linear,
+      final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+      "SDF-Table data for COP" annotation (Placement(transformation(
+          extent={{-12,-12},{12,12}},
+          rotation=-90,
+          origin={38,-16})));
+    Modelica.Blocks.Continuous.FirstOrder firstOrder(T=15)
+      annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+          rotation=-90,
+          origin={-80,-90})));
+    Modelica.Blocks.Continuous.FirstOrder firstOrder1(T=15)
+      annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+          rotation=-90,
+          origin={80,-90})));
+    Modelica.Blocks.Sources.RealExpression zero1
+      annotation (Placement(transformation(extent={{0,26},{-18,46}})));
+    Modelica.Blocks.Sources.RealExpression tSource(y=TSource)
+      annotation (Placement(transformation(extent={{40,74},{56,92}})));
+    Modelica.Blocks.Sources.RealExpression deltaTCon1(y=DeltaTCon)
+      annotation (Placement(transformation(extent={{-7,-8},{7,8}},
+          rotation=180,
+          origin={91,104})));
+    Modelica.Blocks.Math.Add add2(k2=-1)
+      annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+          rotation=180,
+          origin={122,60})));
+    Modelica.Blocks.Logical.Switch switch2
+      annotation (Placement(transformation(extent={{6,-6},{-6,6}},
+          rotation=90,
+          origin={-108,-38})));
+    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=dTConFix)
+      annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
+  protected
+    parameter String FilenameCOP= if HighTemp==false then "D:/dja-mzu/SDF/WP/COP_Scroll_DIM4_R410a.sdf" else "D:/dja-mzu/SDF/WP/COP_DIM4_R134a.sdf";
+
+
+  equation
+
+
+    connect(fromKelvin1.Celsius,multiplex4_1. u1[1]) annotation (Line(points={{80.7,83},
+            {86,83},{86,50},{47,50},{47,28}},                     color={0,0,127}));
+    connect(switch4.y,switch3. u3) annotation (Line(points={{-49,60},{-42,60},{
+            -42,50},{-42.2,50},{-42.2,23.8}},
+                                          color={0,0,127}));
+    connect(pLRMin.y,switch4. u2) annotation (Line(points={{-103,60},{-72,60}},
+                                               color={255,0,255}));
+    connect(zero.y, switch4.u1) annotation (Line(points={{-70.9,80},{-80,80},{
+            -80,68},{-72,68}}, color={0,0,127}));
+    connect(product1.y,product2. u1) annotation (Line(points={{-1.2,-64},{24,
+            -64},{24,-48},{-75.2,-48},{-75.2,-52.4}},              color={0,0,127}));
+    connect(product2.y,add. u2) annotation (Line(points={{-80,-70.8},{-80,-74},
+            {42,-74},{42,-60},{76.4,-60},{76.4,-64.8}},
+                                color={0,0,127}));
+    connect(product1.y,add. u1)
+      annotation (Line(points={{-1.2,-64},{32,-64},{32,-58},{83.6,-58},{83.6,
+            -64.8}},                                        color={0,0,127}));
+    connect(sigBus.PLR, switch4.u3) annotation (Line(
+        points={{1.075,104.07},{1.075,92},{-90,92},{-90,52},{-72,52}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(sigBus.PLR, pLRMin.u) annotation (Line(
+        points={{1.075,104.07},{1.075,98},{2,98},{2,92},{-136,92},{-136,60},{
+            -126,60}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(sigBus.Shutdown, switch3.u2) annotation (Line(
+        points={{1.075,104.07},{1.075,48},{-35,48},{-35,23.8}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,6},{-3,6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(dimensionHeatPump.QEvapNom, sigBus.QEvapNom) annotation (Line(
+          points={{-59,-4},{8,-4},{8,58},{1.075,58},{1.075,104.07}}, color={0,0,
+            127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(limiter.y, multiplex4_1.u2[1]) annotation (Line(points={{74,55.4},{
+            74,46},{41,46},{41,28}},      color={0,0,127}));
+    connect(sigBus.PLR, limiter.u) annotation (Line(
+        points={{1.075,104.07},{6,104.07},{6,69.2},{74,69.2}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(product1.y, Pel) annotation (Line(points={{-1.2,-64},{24,-64},{24,
+            -92},{0,-92},{0,-110}},
+                               color={0,0,127}));
+    connect(product2.y, sigBus.QCon) annotation (Line(points={{-80,-70.8},{-80,
+            -74},{-152,-74},{-152,104.07},{1.075,104.07}}, color={0,0,127}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(limiter.y, multiplex4_2.u2[1]) annotation (Line(points={{74,55.4},{
+            74,36},{79,36},{79,28}}, color={0,0,127}));
+    connect(fromKelvin1.Celsius, multiplex4_2.u1[1]) annotation (Line(points={{80.7,83},
+            {90,83},{90,40},{85,40},{85,28}},        color={0,0,127}));
+    connect(dimensionHeatPump.PelFullLoad, product1.u2) annotation (Line(points={{-59,-14},
+            {-58,-14},{-58,-68.8},{-19.6,-68.8}},    color={0,0,127}));
+    connect(tHotNom.y, fromKelvin5.Kelvin)
+      annotation (Line(points={{58,8.6},{58,11.2}}, color={0,0,127}));
+    connect(sigBus.T_flow_co, fromKelvin4.Kelvin) annotation (Line(
+        points={{1.075,104.07},{2,104.07},{2,126},{24,126}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(product2.y, firstOrder.u) annotation (Line(points={{-80,-70.8},{-80,
+            -82.8}},         color={0,0,127}));
+    connect(add.y, firstOrder1.u) annotation (Line(points={{80,-78.6},{80,-82.8}},
+                                         color={0,0,127}));
+    connect(firstOrder1.y, QEva) annotation (Line(points={{80,-96.6},{80,-110}},
+                                                      color={0,0,127}));
+    connect(firstOrder.y, QCon) annotation (Line(points={{-80,-96.6},{-80,-110}},
+                                                       color={0,0,127}));
+    connect(add1.y, multiplex4_1.u4[1])
+      annotation (Line(points={{49.2,108},{29,108},{29,28}}, color={0,0,127}));
+    connect(fromKelvin5.Celsius, multiplex4_2.u4[1]) annotation (Line(points={{
+            58,20.4},{58,32},{67,32},{67,28}}, color={0,0,127}));
+    connect(multiplex4_1.y, SDFCOP1.u)
+      annotation (Line(points={{38,5},{38,-1.6}}, color={0,0,127}));
+    connect(multiplex4_2.y, SDFCOP.u)
+      annotation (Line(points={{76,5},{76,-3.6}}, color={0,0,127}));
+    connect(fromKelvin4.Celsius, add1.u2) annotation (Line(points={{47,126},{80,
+            126},{80,112.8},{67.6,112.8}}, color={0,0,127}));
+    connect(zero1.y, switch3.u1) annotation (Line(points={{-18.9,36},{-27.8,36},
+            {-27.8,23.8}}, color={0,0,127}));
+    connect(fromKelvin1.Kelvin, tSource.y)
+      annotation (Line(points={{64.6,83},{56.8,83}}, color={0,0,127}));
+    connect(deltaTCon.y, multiplex4_1.u3[1])
+      annotation (Line(points={{43.3,62},{35,62},{35,28}}, color={0,0,127}));
+    connect(deltaTCon1.y, add1.u1) annotation (Line(points={{83.3,104},{74,104},
+            {74,103.2},{67.6,103.2}}, color={0,0,127}));
+    connect(add2.y, multiplex4_2.u3[1]) annotation (Line(points={{113.2,60},{104,60},
+            {104,36},{73,36},{73,28}}, color={0,0,127}));
+    connect(fromKelvin4.Celsius, add2.u2) annotation (Line(points={{47,126},{
+            140,126},{140,64.8},{131.6,64.8}},           color={0,0,127}));
+    connect(fromKelvin5.Celsius, add2.u1) annotation (Line(points={{58,20.4},{
+            58,38},{140,38},{140,54},{131.6,54},{131.6,55.2}},
+                                                        color={0,0,127}));
+    connect(SDFCOP1.y, switch2.u1) annotation (Line(points={{38,-29.2},{38,-42},
+            {-84,-42},{-84,-16},{-112.8,-16},{-112.8,-30.8}},          color={0,0,
+            127}));
+    connect(switch2.y, product2.u2) annotation (Line(points={{-108,-44.6},{-108,
+            -48},{-84.8,-48},{-84.8,-52.4}},
+                                        color={0,0,127}));
+    connect(SDFCOP.y, switch2.u3) annotation (Line(points={{76,-31.2},{76,-36},
+            {-14,-36},{-14,-28},{-103.2,-28},{-103.2,-30.8}},
+                                                  color={0,0,127}));
+    connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-119,0},
+            {-108,0},{-108,-30.8}},
+                              color={255,0,255}));
+    connect(switch2.y, sigBus.COP) annotation (Line(points={{-108,-44.6},{-108,
+            -48},{-168,-48},{-168,120},{1.075,120},{1.075,104.07}}, color={0,0,
+            127}), Text(
+        string="%second",
+        index=1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(switch3.y, product1.u1) annotation (Line(points={{-35,3.1},{-35,
+            -59.2},{-19.6,-59.2}}, color={0,0,127}));
+    connect(add1.y, dimensionHeatPump.u) annotation (Line(points={{49.2,108},{
+            -94,108},{-94,-12},{-82,-12}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>This model uses 4-dimensional table data, wich are calculated for a simplyfied refrigerant circuit with the use of isentropic compressor efficienciecs as a function of pressure gradient and frequency, superheating and calibration of minimal temperature differencees in condeser and evaporater. The table data ist a function of THot, TSource, deltaTCon and relative power, which represents compressor frequency.</p>
+<p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
+<p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
+</html>"));
+  end LookUpTableNDNotManudacturer;
+
+  model DimensionHeatPump
+
+    parameter Boolean HighTemp=false;
+    parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+       parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+   parameter Boolean dTConFix=false "Constant delta T condenser"
+     annotation (Dialog(descriptionLabel=true, group="General machine information"));
+
+
+
+    Modelica.Blocks.Interfaces.RealOutput PelFullLoad(final unit="W", final
+        displayUnit="kW")
+      "maximal notwendige elektrische Leistung im Betriebspunkt" annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={110,-80})));
+    Modelica.Blocks.Math.Division division1
+      annotation (Placement(transformation(extent={{0,-90},{20,-70}})));
+
+
+    Modelica.Blocks.Interfaces.RealOutput QEvapNom(final unit="W", final
+        displayUnit="kW")
+      "maximal notwendige elektrische Leistung im Betriebspunkt" annotation (
+        Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={110,20})));
+    Modelica.Blocks.Math.Add add(k2=-1)
+      annotation (Placement(transformation(extent={{64,10},{84,30}})));
+
+    Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom)
+      annotation (Placement(transformation(extent={{-100,22},{-78,46}})));
+    Modelica.Blocks.Sources.RealExpression tSourceNom(y=TSourceNom)
+      annotation (Placement(transformation(extent={{-100,80},{-74,104}})));
+    Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin3
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-36,92})));
+    Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin2
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-56,34})));
+    Modelica.Blocks.Sources.RealExpression qNom(y=QNom)
+      annotation (Placement(transformation(extent={{-48,-84},{-32,-64}})));
+    Modelica.Blocks.Sources.RealExpression qNom1(y=QNom)
+      annotation (Placement(transformation(extent={{30,16},{46,36}})));
+    Modelica.Blocks.Sources.RealExpression deltaTCon(y=DeltaTCon)
+      annotation (Placement(transformation(extent={{12,11},{-12,-11}},
+          rotation=180,
+          origin={-88,57})));
+    Modelica.Blocks.Routing.Multiplex4 multiplex4_1 annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=-90,
+          origin={-10,12})));
+    SDF.NDTable SDFCOP1(
+      final nin=4,
+      final readFromFile=true,
+      final filename=FilenameCOP,
+      final dataset="\COP",
+      final dataUnit="-",
+      final scaleUnits={"degC","-","K","degC"},
+      final interpMethod=SDF.Types.InterpolationMethod.Linear,
+      final extrapMethod=SDF.Types.ExtrapolationMethod.Linear)
+      "SDF-Table data for COP" annotation (Placement(transformation(
+          extent={{-12,-12},{12,12}},
+          rotation=-90,
+          origin={-10,-20})));
+    Modelica.Blocks.Sources.RealExpression PLRNom(y=1) annotation (Placement(
+          transformation(
+          extent={{11,12},{-11,-12}},
+          rotation=180,
+          origin={-89,74})));
+    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=dTConFix)
+      annotation (Placement(transformation(extent={{-126,-34},{-98,-12}})));
+    Modelica.Blocks.Logical.Switch switch2
+      annotation (Placement(transformation(extent={{11,-11},{-11,11}},
+          rotation=180,
+          origin={-55,-23})));
+    Modelica.Blocks.Interfaces.RealInput u
+      annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
+  protected
+  parameter String FilenameCOP= if HighTemp==false then "D:/dja-mzu/SDF/WP/COP_Scroll_DIM4_R410a.sdf" else "D:/dja-mzu/SDF/WP/COP_DIM4_R134a.sdf";
+
+
+  equation
+    connect(division1.y, PelFullLoad) annotation (Line(points={{21,-80},{110,
+            -80}},              color={0,0,127}));
+    connect(add.y, QEvapNom)
+      annotation (Line(points={{85,20},{110,20}}, color={0,0,127}));
+    connect(division1.y, add.u2) annotation (Line(points={{21,-80},{40,-80},{40,
+            14},{62,14}}, color={0,0,127}));
+    connect(tHotNom.y, fromKelvin2.Kelvin)
+      annotation (Line(points={{-76.9,34},{-68,34}}, color={0,0,127}));
+    connect(tSourceNom.y, fromKelvin3.Kelvin)
+      annotation (Line(points={{-72.7,92},{-48,92}}, color={0,0,127}));
+    connect(qNom.y, division1.u1)
+      annotation (Line(points={{-31.2,-74},{-2,-74}}, color={0,0,127}));
+    connect(add.u1, qNom1.y)
+      annotation (Line(points={{62,26},{46.8,26}}, color={0,0,127}));
+    connect(SDFCOP1.y, division1.u2) annotation (Line(points={{-10,-33.2},{-10,
+            -86},{-2,-86}},     color={0,0,127}));
+    connect(multiplex4_1.y, SDFCOP1.u)
+      annotation (Line(points={{-10,1},{-10,-5.6}}, color={0,0,127}));
+    connect(fromKelvin3.Celsius, multiplex4_1.u1[1]) annotation (Line(points={{-25,92},
+            {-1,92},{-1,24}},                       color={0,0,127}));
+    connect(PLRNom.y, multiplex4_1.u2[1])
+      annotation (Line(points={{-76.9,74},{-7,74},{-7,24}}, color={0,0,127}));
+    connect(deltaTCon.y, multiplex4_1.u3[1])
+      annotation (Line(points={{-74.8,57},{-13,57},{-13,24}}, color={0,0,127}));
+    connect(booleanExpression.y, switch2.u2)
+      annotation (Line(points={{-96.6,-23},{-68.2,-23}}, color={255,0,255}));
+    connect(fromKelvin2.Celsius, switch2.u3) annotation (Line(points={{-45,34},{-40,
+            34},{-40,10},{-80,10},{-80,-14.2},{-68.2,-14.2}}, color={0,0,127}));
+    connect(switch2.y, multiplex4_1.u4[1]) annotation (Line(points={{-42.9,-23},{-32,
+            -23},{-32,38},{-19,38},{-19,24}}, color={0,0,127}));
+    connect(u, switch2.u1) annotation (Line(points={{-120,-60},{-90,-60},{-90,-31.8},
+            {-68.2,-31.8}}, color={0,0,127}));
+    annotation (
+      Icon(coordinateSystem(preserveAspectRatio=false)),
+      Diagram(coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>Auslegung des Betriebspunktes indem die maximale elektrische Leistung vorliegt</p>
+</html>"));
+  end DimensionHeatPump;
+
+  model NotManu2
+    SDF.NDTable SDFCOP(
+      final nin=4,
+      final readFromFile=true,
+      final filename=FilenameCOP,
+      final dataset="\COP",
+      final dataUnit="-",
+      final scaleUnits={"degC","-","K","degC"},
+      final interpMethod=SDF.Types.InterpolationMethod.Linear,
+      final extrapMethod=SDF.Types.ExtrapolationMethod.None)
+      "SDF-Table data for COP nominal"
+                               annotation (Placement(transformation(
+          extent={{-12,-12},{12,12}},
+          rotation=-90,
+          origin={76,-18})));
+    Modelica.Blocks.Routing.Multiplex4 multiplex4_1 annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=-90,
+          origin={38,16})));
+    Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin1
+      annotation (Placement(transformation(extent={{-7,-7},{7,7}},
+          rotation=0,
+          origin={73,83})));
+    DimensionHeatPump dimensionHeatPump(
+      HighTemp=HighTemp,
+      THotNom=THotNom,
+      TSourceNom=TSourceNom,
+      QNom=QNom)
+      annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
+    Modelica.Blocks.Logical.LessThreshold pLRMin(threshold=PLRMin)
+      annotation (Placement(transformation(extent={{-124,50},{-104,70}})));
+    Modelica.Blocks.Logical.Switch switch4
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-60,60})));
+    Modelica.Blocks.Logical.Switch switch3
+      annotation (Placement(transformation(extent={{-9,-9},{9,9}},
+          rotation=270,
+          origin={-35,13})));
+    Modelica.Blocks.Sources.RealExpression zero
+      annotation (Placement(transformation(extent={{-52,70},{-70,90}})));
+    Modelica.Blocks.Math.Add add(k1=-1)
+      annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+          rotation=-90,
+          origin={80,-72})));
+    Modelica.Blocks.Math.Product product1
+      annotation (Placement(transformation(extent={{-18,-72},{-2,-56}})));
+    Modelica.Blocks.Math.Product product2
+      annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+          rotation=-90,
+          origin={-80,-62})));
+    Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=PLRMin)
+      annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+          rotation=-90,
+          origin={74,62})));
+    Modelica.Blocks.Sources.RealExpression deltaTCon(y=DeltaTCon)
+      annotation (Placement(transformation(extent={{-7,-8},{7,8}},
+          rotation=180,
+          origin={51,62})));
+    Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin4
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={36,126})));
+    Modelica.Blocks.Math.Add add1
+      annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+          rotation=180,
+          origin={58,108})));
+    Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom) annotation (
+        Placement(transformation(
+          extent={{6,-6},{-6,6}},
+          rotation=270,
+          origin={58,2})));
+    Modelica.Blocks.Routing.Multiplex4 multiplex4_2 annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=-90,
+          origin={76,16})));
+    Modelica.Blocks.Math.Division division
+      annotation (Placement(transformation(extent={{116,-54},{100,-38}})));
+    Modelica.Blocks.Math.Product product3
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={-30,-26})));
+    Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin5
+      annotation (Placement(transformation(extent={{4,-4},{-4,4}},
+          rotation=270,
+          origin={58,16})));
+    SDF.NDTable SDFCOP1(
+      final nin=4,
+      final readFromFile=true,
+      final filename=FilenameCOP,
+      final dataset="\COP",
+      final dataUnit="-",
+      final scaleUnits={"degC","-","K","degC"},
+      final interpMethod=SDF.Types.InterpolationMethod.Linear,
+      final extrapMethod=SDF.Types.ExtrapolationMethod.None)
+      "SDF-Table data for COP" annotation (Placement(transformation(
+          extent={{-12,-12},{12,12}},
+          rotation=-90,
+          origin={38,-16})));
+    Modelica.Blocks.Continuous.FirstOrder firstOrder(T=10)
+      annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+          rotation=-90,
+          origin={-80,-90})));
+    Modelica.Blocks.Continuous.FirstOrder firstOrder1(T=10)
+      annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+          rotation=-90,
+          origin={80,-90})));
+    Modelica.Blocks.Sources.RealExpression zero1
+      annotation (Placement(transformation(extent={{0,26},{-18,46}})));
+    Modelica.Blocks.Sources.RealExpression tSource(y=TSource)
+      annotation (Placement(transformation(extent={{40,74},{56,92}})));
+    Modelica.Blocks.Logical.Switch switch1
+      annotation (Placement(transformation(extent={{8,-8},{-8,8}},
+          rotation=0,
+          origin={108,116})));
+    Modelica.Blocks.Logical.Greater greater
+      annotation (Placement(transformation(extent={{124,78},{108,94}})));
+    Modelica.Blocks.Sources.RealExpression deltaTCon2(y=THotNom - DeltaTCon)
+      annotation (Placement(transformation(extent={{160,52},{144,66}})));
+    Modelica.Blocks.Math.Add add2(k2=-1)
+      annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+          rotation=180,
+          origin={144,130})));
+    Modelica.Blocks.Sources.RealExpression deltaTCon3(y=THotNom)
+      annotation (Placement(transformation(extent={{166,102},{150,116}})));
+    Modelica.Blocks.Sources.RealExpression deltaTCon4(y=DeltaTCon)
+      annotation (Placement(transformation(extent={{170,86},{154,100}})));
+    Modelica.Blocks.Logical.Greater greater1
+      annotation (Placement(transformation(extent={{126,40},{110,56}})));
+    Modelica.Blocks.Math.Product product4
+      annotation (Placement(transformation(extent={{7,-7},{-7,7}},
+          rotation=0,
+          origin={147,27})));
+    Modelica.Blocks.Logical.And and1
+      annotation (Placement(transformation(extent={{112,58},{98,72}})));
+    Modelica.Blocks.Sources.RealExpression deltaTCon1(y=DeltaTCon)
+      annotation (Placement(transformation(extent={{156,-6},{140,8}})));
+    Modelica.Blocks.Logical.Switch switch2
+      annotation (Placement(transformation(extent={{8,-8},{-8,8}},
+          rotation=0,
+          origin={62,-44})));
+    Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=1, uMin=0)
+      annotation (Placement(transformation(extent={{5,-5},{-5,5}},
+          rotation=0,
+          origin={85,-39})));
+    Modelica.Blocks.Interfaces.RealOutput Pel(final unit="W", final displayUnit=
+         "kW")                                          "Electrical Power consumed by HP" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={0,-110})));
+    Modelica.Blocks.Interfaces.RealOutput QCon(final unit="W", final
+        displayUnit="kW")
+      "Heat flow rate through Condenser" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={-80,-110})));
+    Controls.Interfaces.ThermalMachineControlBus        sigBus
+      "Bus-connector used in a thermal machine" annotation (Placement(
+          transformation(
+          extent={{-15,-14},{15,14}},
+          rotation=0,
+          origin={1,104})));
+    Modelica.Blocks.Interfaces.RealOutput QEva(final unit="W", final
+        displayUnit="kW")                                                  "Heat flow rate through Condenser"  annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={80,-110})));
+  equation
+    connect(fromKelvin1.Celsius,multiplex4_1. u1[1]) annotation (Line(points={{80.7,83},
+            {86,83},{86,50},{47,50},{47,28}},                     color={0,0,127}));
+    connect(switch4.y,switch3. u3) annotation (Line(points={{-49,60},{-42,60},{
+            -42,50},{-42.2,50},{-42.2,23.8}},
+                                          color={0,0,127}));
+    connect(pLRMin.y,switch4. u2) annotation (Line(points={{-103,60},{-72,60}},
+                                               color={255,0,255}));
+    connect(zero.y,switch4. u1) annotation (Line(points={{-70.9,80},{-80,80},{
+            -80,68},{-72,68}}, color={0,0,127}));
+    connect(product1.y,product2. u1) annotation (Line(points={{-1.2,-64},{24,
+            -64},{24,-48},{-75.2,-48},{-75.2,-52.4}},              color={0,0,127}));
+    connect(product2.y,add. u2) annotation (Line(points={{-80,-70.8},{-80,-74},
+            {42,-74},{42,-60},{76.4,-60},{76.4,-64.8}},
+                                color={0,0,127}));
+    connect(product1.y,add. u1)
+      annotation (Line(points={{-1.2,-64},{32,-64},{32,-58},{83.6,-58},{83.6,
+            -64.8}},                                        color={0,0,127}));
+    connect(sigBus.PLR,switch4. u3) annotation (Line(
+        points={{1.075,104.07},{1.075,92},{-90,92},{-90,52},{-72,52}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(sigBus.PLR,pLRMin. u) annotation (Line(
+        points={{1.075,104.07},{1.075,98},{2,98},{2,92},{-136,92},{-136,60},{
+            -126,60}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(sigBus.Shutdown,switch3. u2) annotation (Line(
+        points={{1.075,104.07},{1.075,48},{-35,48},{-35,23.8}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,6},{-3,6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(dimensionHeatPump.QEvapNom, sigBus.QEvapNom) annotation (Line(
+          points={{-59,-8},{8,-8},{8,58},{1.075,58},{1.075,104.07}}, color={0,0,
+            127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(limiter.y,multiplex4_1. u2[1]) annotation (Line(points={{74,55.4},{
+            74,46},{41,46},{41,28}},      color={0,0,127}));
+    connect(sigBus.PLR,limiter. u) annotation (Line(
+        points={{1.075,104.07},{6,104.07},{6,69.2},{74,69.2}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(product1.y,Pel)  annotation (Line(points={{-1.2,-64},{24,-64},{24,
+            -92},{0,-92},{0,-110}},
+                               color={0,0,127}));
+    connect(product2.y,sigBus. QCon) annotation (Line(points={{-80,-70.8},{-80,
+            -74},{-152,-74},{-152,104.07},{1.075,104.07}}, color={0,0,127}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(deltaTCon.y,multiplex4_2. u3[1]) annotation (Line(points={{43.3,62},
+            {40,62},{40,54},{66,54},{66,40},{70,40},{70,32},{73,32},{73,28}},
+          color={0,0,127}));
+    connect(limiter.y,multiplex4_2. u2[1]) annotation (Line(points={{74,55.4},{
+            74,36},{79,36},{79,28}}, color={0,0,127}));
+    connect(fromKelvin1.Celsius,multiplex4_2. u1[1]) annotation (Line(points={{80.7,83},
+            {90,83},{90,40},{85,40},{85,28}},        color={0,0,127}));
+    connect(dimensionHeatPump.PelFullLoad,product1. u2) annotation (Line(points={{-59,-18},
+            {-58,-18},{-58,-68.8},{-19.6,-68.8}},    color={0,0,127}));
+    connect(switch3.y,product3. u2) annotation (Line(points={{-35,3.1},{-35,-6},
+            {-36,-6},{-36,-14}}, color={0,0,127}));
+    connect(product3.y,product1. u1) annotation (Line(points={{-30,-37},{-30,
+            -59.2},{-19.6,-59.2}},              color={0,0,127}));
+    connect(tHotNom.y,fromKelvin5. Kelvin)
+      annotation (Line(points={{58,8.6},{58,11.2}}, color={0,0,127}));
+    connect(SDFCOP.y,division. u1) annotation (Line(points={{76,-31.2},{76,-34},
+            {124,-34},{124,-41.2},{117.6,-41.2}},                     color={0,
+            0,127}));
+    connect(sigBus.T_flow_co,fromKelvin4. Kelvin) annotation (Line(
+        points={{1.075,104.07},{2,104.07},{2,126},{24,126}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(SDFCOP1.y,division. u2) annotation (Line(points={{38,-29.2},{38,-54},
+            {94,-54},{94,-58},{124,-58},{124,-50.8},{117.6,-50.8}},
+          color={0,0,127}));
+    connect(product2.y,firstOrder. u) annotation (Line(points={{-80,-70.8},{-80,
+            -82.8}},         color={0,0,127}));
+    connect(add.y,firstOrder1. u) annotation (Line(points={{80,-78.6},{80,-82.8}},
+                                         color={0,0,127}));
+    connect(firstOrder1.y,QEva)  annotation (Line(points={{80,-96.6},{80,-110}},
+                                                      color={0,0,127}));
+    connect(firstOrder.y,QCon)  annotation (Line(points={{-80,-96.6},{-80,-110}},
+                                                       color={0,0,127}));
+    connect(SDFCOP1.y,product2. u2) annotation (Line(points={{38,-29.2},{38,-40},
+            {-84,-40},{-84,-52.4},{-84.8,-52.4}},
+                                  color={0,0,127}));
+    connect(add1.y,multiplex4_1. u4[1])
+      annotation (Line(points={{49.2,108},{29,108},{29,28}}, color={0,0,127}));
+    connect(fromKelvin5.Celsius,multiplex4_2. u4[1]) annotation (Line(points={{
+            58,20.4},{58,32},{67,32},{67,28}}, color={0,0,127}));
+    connect(multiplex4_1.y,SDFCOP1. u)
+      annotation (Line(points={{38,5},{38,-1.6}}, color={0,0,127}));
+    connect(multiplex4_2.y,SDFCOP. u)
+      annotation (Line(points={{76,5},{76,-3.6}}, color={0,0,127}));
+    connect(fromKelvin4.Celsius,add1. u2) annotation (Line(points={{47,126},{80,
+            126},{80,112.8},{67.6,112.8}}, color={0,0,127}));
+    connect(zero1.y,switch3. u1) annotation (Line(points={{-18.9,36},{-27.8,36},
+            {-27.8,23.8}}, color={0,0,127}));
+    connect(SDFCOP1.y,sigBus. COP) annotation (Line(points={{38,-29.2},{38,-32},
+            {14,-32},{14,104.07},{1.075,104.07}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(fromKelvin1.Kelvin,tSource. y)
+      annotation (Line(points={{64.6,83},{56.8,83}}, color={0,0,127}));
+    connect(fromKelvin4.Kelvin, greater.u1) annotation (Line(points={{24,126},{
+            26,126},{26,154},{142,154},{142,86},{125.6,86}}, color={0,0,127}));
+    connect(deltaTCon2.y, greater.u2) annotation (Line(points={{143.2,59},{136,
+            59},{136,79.6},{125.6,79.6}}, color={0,0,127}));
+    connect(add2.y, switch1.u1) annotation (Line(points={{135.2,130},{128,130},
+            {128,122.4},{117.6,122.4}}, color={0,0,127}));
+    connect(fromKelvin4.Kelvin, add2.u2) annotation (Line(points={{24,126},{30,
+            126},{30,166},{162,166},{162,134.8},{153.6,134.8}}, color={0,0,127}));
+    connect(deltaTCon3.y, add2.u1) annotation (Line(points={{149.2,109},{149.2,
+            118},{160,118},{160,125.2},{153.6,125.2}}, color={0,0,127}));
+    connect(sigBus.PLR, product4.u2) annotation (Line(
+        points={{1.075,104.07},{1.075,4},{158,4},{158,22.8},{155.4,22.8}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(deltaTCon4.y, product4.u1) annotation (Line(points={{153.2,93},{150,
+            93},{150,66},{164,66},{164,31.2},{155.4,31.2}}, color={0,0,127}));
+    connect(add2.y, greater1.u1) annotation (Line(points={{135.2,130},{132,130},
+            {132,48},{127.6,48}}, color={0,0,127}));
+    connect(greater1.y, and1.u2) annotation (Line(points={{109.2,48},{106,48},{
+            106,59.4},{113.4,59.4}}, color={255,0,255}));
+    connect(greater.y, and1.u1) annotation (Line(points={{107.2,86},{104,86},{
+            104,82},{102,82},{102,72},{118,72},{118,65},{113.4,65}}, color={255,
+            0,255}));
+    connect(and1.y, switch1.u2) annotation (Line(points={{97.3,65},{100,65},{
+            100,100},{126,100},{126,116},{117.6,116}}, color={255,0,255}));
+    connect(deltaTCon4.y, switch1.u3) annotation (Line(points={{153.2,93},{136,
+            93},{136,109.6},{117.6,109.6}}, color={0,0,127}));
+    connect(product4.y, greater1.u2) annotation (Line(points={{139.3,27},{134,
+            27},{134,41.6},{127.6,41.6}}, color={0,0,127}));
+    connect(switch2.u3, division.y) annotation (Line(points={{71.6,-50.4},{82,
+            -50.4},{82,-46},{99.2,-46}}, color={0,0,127}));
+    connect(switch2.u1, limiter1.y) annotation (Line(points={{71.6,-37.6},{
+            72.55,-37.6},{72.55,-39},{79.5,-39}}, color={0,0,127}));
+    connect(division.y, limiter1.u) annotation (Line(points={{99.2,-46},{98,-46},
+            {98,-39},{91,-39}}, color={0,0,127}));
+    connect(and1.y, switch2.u2) annotation (Line(points={{97.3,65},{98,65},{98,
+            -44},{71.6,-44}}, color={255,0,255}));
+    connect(deltaTCon4.y, add1.u1) annotation (Line(points={{153.2,93},{82,93},
+            {82,103.2},{67.6,103.2}}, color={0,0,127}));
+    connect(deltaTCon.y, multiplex4_1.u3[1])
+      annotation (Line(points={{43.3,62},{35,62},{35,28}}, color={0,0,127}));
+    connect(division.y, product3.u1) annotation (Line(points={{99.2,-46},{-10,
+            -46},{-10,-10},{-24,-10},{-24,-14}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end NotManu2;
 annotation (Documentation(revisions="<html><ul>
   <li>
     <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>

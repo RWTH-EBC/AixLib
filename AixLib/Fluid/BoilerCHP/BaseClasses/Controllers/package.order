@@ -5,3 +5,13 @@ ExternalControlNightDayHC
 InternalControl
 PIController
 PartialExternalControl
+ExternalControl
+BoilerAmbientLosses
+ReturnInfluence
+StationaryBehaviour
+SDFControl
+EfficiencyCalc
+Iteration_ExhaustTemp
+Test_SDF
+ControlCHPNotManufacturer
+ControlBoilerNotManufacturer

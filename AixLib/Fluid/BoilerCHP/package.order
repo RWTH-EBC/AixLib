@@ -1,8 +1,12 @@
 Boiler
 BoilerNoControl
 CHP
-HeatGeneratorNoControl
+BoilerNotManufacturer
 ModularCHP
 Data
 Examples
 BaseClasses
+ModularBoilerNotManufacturer
+CHPNotManufacturer
+ModularCHPNotManufacturer
+BoilerIterativ

@@ -5,6 +5,31 @@ partial model PartialInnerCycle
   parameter Boolean use_rev=true "True if the thermal machine is reversible";
   parameter Real scalingFactor=1 "Scaling factor of thermal machine";
 
+
+
+//NotManufacturer
+
+parameter Modelica.SIunits.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Boolean HighTemp=false "true: THot > 60°C"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+     parameter Modelica.SIunits.Temperature TSource=280 "Temperature of heat source"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+ parameter Boolean dTConFix=false "Constant delta T condenser"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
   AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-18,86},{18,118}}), iconTransformation(
           extent={{-16,88},{18,118}})));

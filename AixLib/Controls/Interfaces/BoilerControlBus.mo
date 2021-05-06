@@ -3,11 +3,18 @@ expandable connector BoilerControlBus
   "Standard data bus with boiler information"
   extends Modelica.Icons.SignalBus;
 
-Boolean isOn "Switches Controller on and off";
-Modelica.SIunits.Temperature TAmbient "Ambient air temperature";
-Boolean switchToNightMode "Switches the boiler to night mode";
-Modelica.SIunits.Power chemicalEnergyFlowRate
-  "Flow of primary (chemical) energy into boiler";
+//Boolean isOn "Switches Controller on and off";
+//Modelica.SIunits.Temperature TAmbient "Ambient air temperature";
+//Boolean switchToNightMode "Switches the boiler to night mode";
+//Modelica.SIunits.Power chemicalEnergyFlowRate "Flow of primary (chemical) energy into boiler";
+
+Real QRel "Part load ratio";
+Real dTWater "Water temperature difference at setpoint";
+
+
+
+
+
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),

@@ -15,13 +15,12 @@ model HeatGeneratorNoControllSystem "Example that illustrates use of heat genera
         Media.Specialized.Water.TemperatureDependentDensity, nPorts=1)
     "Sink"
     annotation (Placement(transformation(extent={{60,-10},{40,10}})));
-  HeatGeneratorNoControl heatGeneratorNoControll(
+  BoilerNotManufacturer heatGeneratorNoControll(
     redeclare package Medium =
-        Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=
-        0.03,
+        Media.Specialized.Water.TemperatureDependentDensity,
+    m_flow_nominal=0.03,
     V=0.002,
-    coeffPresLoss=1e10)
-    "Heat generator without control"
+    coeffPresLoss=1e10) "Heat generator without control"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Trapezoid trapezoid(
     rising=7200,

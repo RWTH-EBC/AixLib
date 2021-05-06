@@ -17,7 +17,15 @@ Modelica.SIunits.ThermodynamicTemperature T_ret_ev "temperature of flow out of e
 
 Modelica.SIunits.ThermodynamicTemperature T_ret_co "temperature of flow out of condenser";
 
+Modelica.SIunits.ThermodynamicTemperature TSource "temperature of heat source";
+
 Modelica.SIunits.Power Pel "Total electrical active power";
+
+Real QRel "Part load ratio";
+
+Real PLR "Part load ratio compressor";
+
+Boolean Shutdown "true: force shutdown";
 
 Modelica.SIunits.MassFlowRate m_flow_ev "Mass flow rate through evaporator";
 
@@ -43,5 +51,34 @@ annotation (
 <p>March 31, 2017, by Marc Baranski:</p>
 <p>First implementation. </p>
 </html>"));
+
+ Real PEl;
+ Real QCon;
+ Real QEvap;
+ Real QEvapNom;
+
+Real THotMax;
+Real THotNom;
+ Real TSourceNom;
+ Real QNom;
+ Real PLRMin;
+ Boolean HighTemp;
+ Real DeltaTCon;
+ Real DeltaTEvap;
+
+Real COP;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 end ThermalMachineControlBus;

@@ -193,6 +193,29 @@ partial model PartialReversibleThermalMachine
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
+//NotManufacturer
+
+parameter Modelica.SIunits.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Boolean HighTemp=false "true: THot > 60°C"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature TSource=280 "Temperature of heat source"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    parameter Boolean dTConFix=false "Constant delta T condenser"
+      annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
 
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity con(
     redeclare final package Medium = Medium_con,
@@ -559,7 +582,8 @@ equation
                                                color={0,127,255}));
   connect(port_b1, senT_b1.port_b) annotation (Line(points={{100,60},{72,60},{72,
           92},{48,92}}, color={0,127,255}));
-  annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"),
+              Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},
           fillColor={170,213,255},

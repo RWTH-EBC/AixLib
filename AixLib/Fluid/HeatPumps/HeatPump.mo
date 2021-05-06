@@ -5,18 +5,33 @@ model HeatPump
   use_rev=true,
   final machineType = true,
   redeclare AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
-      final use_rev=use_rev,
+      final use_rev=false,
       final scalingFactor=scalingFactor,
-      redeclare model PerDataMainHP = PerDataMainHP,
+      THotMax=THotMax,
+      THotNom=THotNom,
+      TSourceNom=TSourceNom,
+      QNom=QNom,
+      PLRMin=PLRMin,
+      HighTemp=HighTemp,
+      DeltaTCon=DeltaTCon,
+      DeltaTEvap=DeltaTEvap,
+      TSource=TSource,
+      dTConFix=dTConFix,
+      redeclare model PerDataMainHP =
+          DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTableNDNotManudacturer,
       redeclare model PerDataRevHP = PerDataRevHP));
 
 
   replaceable model PerDataMainHP =
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTableND
+    constrainedby
+    AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of a heat pump in main operation mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataRevHP =
-      AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTableND
+    constrainedby
+    AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 

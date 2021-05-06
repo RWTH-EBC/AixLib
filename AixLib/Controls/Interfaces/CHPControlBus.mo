@@ -148,6 +148,16 @@ expandable connector CHPControlBus
     "= false to use a prescibed heating circuit mass flow, = true to use a prescribed volume flow"
     annotation (Dialog(tab="Operation point", group="CHP Unit"));
 
+  // Definition of variables describing CHPNotManufacturer
+  //
+  Real PLR "Partload ratio of electric Power";
+  Modelica.SIunits.Energy ElectricEnergy
+  "Produced electric energy"
+  annotation(Dialog(tab="NotManufacturer"));
+  Modelica.SIunits.Energy EnergyConsumption
+  "Energy consumption"
+    annotation(Dialog(tab="NotManufacturer"));
+
   annotation (Documentation(revisions="<html><ul>
   <li>January, 2019, by Julian Matthes:<br/>
     First implementation (see <a href=

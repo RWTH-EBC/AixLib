@@ -6,3 +6,4 @@ ModularExpansionValveControlBus
 ModularHeatPumpControlBus
 ModularSensorControlBus
 ThermalMachineControlBus
+GeneralModularConnector
