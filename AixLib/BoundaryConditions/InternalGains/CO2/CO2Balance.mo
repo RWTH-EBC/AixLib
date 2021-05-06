@@ -1,4 +1,4 @@
-within AixLib.BoundaryConditions.InternalGains.CO2;
+﻿within AixLib.BoundaryConditions.InternalGains.CO2;
 model CO2Balance "Calculation of CO2 concentration within a thermal zone"
   parameter Modelica.SIunits.Area areaZon "Zone area";
   parameter Real actDeg = 1.8 "Activity degree (Met units)";
@@ -139,7 +139,8 @@ equation
   See <a href=
   \"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange\">
   AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange</a>.
-</p>
+ </p>
+ </html>", revisions="<html>
 <ul>
   <li>August 27, 2020, by Katharina Breuer:<br/>
     First implementation
