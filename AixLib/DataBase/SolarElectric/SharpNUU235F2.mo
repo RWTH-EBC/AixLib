@@ -1,5 +1,5 @@
 within AixLib.DataBase.SolarElectric;
-record SharpNUU235F2 "Sharp NU-U235F2"
+record SharpNUU235F2 "Sharp NU-U235F2 record also used for validation with NIST data"
    extends AixLib.DataBase.SolarElectric.PVBaseDataDefinition(
    n_ser=60,
    n_par=1,
@@ -23,5 +23,12 @@ record SharpNUU235F2 "Sharp NU-U235F2"
 <p>
   Record for record used with AixLib.Fluid.Solar.Electric.PVsystem
 </p>
+</html>",
+revisions="<html><ul>
+  <li>
+  <i>May 6, 2021</i> by Laura Maier:<br/>
+  Added new record for NIST-data based validation
+  </li>
+  </ul>
 </html>"));
 end SharpNUU235F2;

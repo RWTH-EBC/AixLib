@@ -32,6 +32,10 @@ record CanadianSolarCS6P250P "CS6P250PPoly"
 </html>",
       revisions="<html><ul>
   <li>
+  <i>May 6, 2021</i> by Laura Maier:<br/>
+  Adapted to new PV model
+  </li>
+  <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>
     Moved into AixLib
   </li>

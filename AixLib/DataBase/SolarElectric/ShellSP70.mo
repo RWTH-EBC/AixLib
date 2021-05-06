@@ -21,5 +21,12 @@ record ShellSP70 "Shell SP70"
 <p>
   Record for record used with AixLib.Fluid.Solar.Electric.PVsystem
 </p>
+</html>",
+      revisions="<html><ul>
+  <li>
+  <i>May 6, 2021</i> by Laura Maier:<br/>
+  Adapted to new PV model
+  </li>
+</ul>
 </html>"));
 end ShellSP70;
