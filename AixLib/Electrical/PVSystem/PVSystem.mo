@@ -1,4 +1,4 @@
-within AixLib.Electrical.PVSystem;
+﻿within AixLib.Electrical.PVSystem;
 model PVSystem
   "Model that determines the DC performance of a Silicium-based PV array"
 
@@ -258,10 +258,11 @@ equation
   W. A.
 </p>
 <ul>
+</html>",
+revisions="<html><ul>
   <li>
-    <i>April 15, 2020&#160;</i> by Laura Maier:<br/>
-    Finalization of the model (see <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/767\">issue 767</a>).
+    <i>May 6, 2021&#160;</i> by Laura Maier:<br/>
+    Finalization of the model
   </li>
   <li>
     <i>April, 2020&#160;</i> by Arnold Fütterer:<br/>
