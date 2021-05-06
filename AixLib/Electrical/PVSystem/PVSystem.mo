@@ -97,7 +97,7 @@ model PVSystem
     annotation (Placement(transformation(extent={{-84,-30},{-64,-10}})));
 
   BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
-        transformation(extent={{-122,-4},{-82,36}}),  iconTransformation(extent={{-128,-4},
+        transformation(extent={{-122,-20},{-82,20}}), iconTransformation(extent={{-128,-4},
             {-108,16}})));
 equation
 
@@ -105,10 +105,11 @@ equation
     annotation (Line(points={{-63,-26},{-24,-26},{-24,-40},{8,-40}},
                                                                  color={0,0,127}));
   connect(pVRadiationHorizontalTRY.absRadRat, iVCharacteristics.absRadRat)
-    annotation (Line(points={{-63,-14},{-2,-14},{-2,-36},{8,-36}}, color={0,0,127}));
+    annotation (Line(points={{-63,-14},{-22,-14},{-22,-36},{8,-36}},
+                                                                   color={0,0,127}));
   connect(pVRadiationHorizontalTRY.radTil, cellTemperature.radTil)
-    annotation (Line(points={{-63,-26},{-54,-26},{-54,57.8},{-42,57.8}},
-                                                                     color={0,0,127}));
+    annotation (Line(points={{-63,-26},{-50,-26},{-50,58},{-46,58},{-46,57.8},{
+          -42,57.8}},                                                color={0,0,127}));
   connect(iVCharacteristics.eta, cellTemperature.eta)
     annotation (Line(points={{31,-38},{76,-38},{76,-60},{-50,-60},{-50,61.8},{
           -42,61.8}},                                                                     color={0,0,127}));
@@ -117,7 +118,7 @@ equation
   connect(iVCharacteristics.DCOutputPower, DCOutputPower)
     annotation (Line(points={{31,-26},{66,-26},{66,0},{110,0}}, color={0,0,127}));
   connect(weaBus.winSpe, cellTemperature.winVel) annotation (Line(
-      points={{-102,16},{-72,16},{-72,71.9},{-42,71.9}},
+      points={{-102,0},{-72,0},{-72,71.9},{-42,71.9}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -125,7 +126,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.TDryBul, cellTemperature.T_a) annotation (Line(
-      points={{-102,16},{-72,16},{-72,75.4},{-42,75.4}},
+      points={{-102,0},{-72,0},{-72,75.4},{-42,75.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -133,7 +134,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.HGloHor, pVRadiationHorizontalTRY.radHor) annotation (Line(
-      points={{-102,16},{-96,16},{-96,-14},{-86,-14}},
+      points={{-102,0},{-96,0},{-96,-14},{-86,-14}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
