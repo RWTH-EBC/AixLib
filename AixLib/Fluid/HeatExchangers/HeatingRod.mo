@@ -184,53 +184,54 @@ equation
           color={238,46,47},
           thickness=0.5)}),
 defaultComponentName="hea",
-Documentation(info="<html>
-<p>
-Model for an ideal heater or cooler with prescribed heat flow rate to the medium.
+Documentation(info="<html><p>
+  Model for an ideal heater or cooler with prescribed heat flow rate to
+  the medium.
 </p>
 <p>
-This model adds heat in the amount of <code>Q_flow = u Q_flow_nominal</code> to the medium.
-The input signal <code>u</code> and the nominal heat flow rate <code>Q_flow_nominal</code>
-can be positive or negative. A positive value of <code>Q_flow</code> means
-heating, and negative means cooling.
+  This model adds heat in the amount of <code>Q_flow = u
+  Q_flow_nominal</code> to the medium. The input signal <code>u</code>
+  and the nominal heat flow rate <code>Q_flow_nominal</code> can be
+  positive or negative. A positive value of <code>Q_flow</code> means
+  heating, and negative means cooling.
 </p>
 <p>
-The outlet conditions at <code>port_a</code> are not affected by this model,
-other than for a possible pressure difference due to flow friction.
+  The outlet conditions at <code>port_a</code> are not affected by this
+  model, other than for a possible pressure difference due to flow
+  friction.
 </p>
 <p>
-Optionally, this model can have a flow resistance.
-Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
+  Optionally, this model can have a flow resistance. Set
+  <code>dp_nominal = 0</code> to disable the flow friction calculation.
 </p>
 <p>
-For a model that uses as an input the fluid temperature leaving at
-<code>port_b</code>, use
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
-AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
+  For a model that uses as an input the fluid temperature leaving at
+  <code>port_b</code>, use <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
 </p>
-<h4>Limitations</h4>
+<h4>
+  Limitations
+</h4>
 <p>
-This model does not affect the humidity of the air. Therefore,
-if used to cool air below the dew point temperature, the water mass fraction
-will not change.
+  This model does not affect the humidity of the air. Therefore, if
+  used to cool air below the dew point temperature, the water mass
+  fraction will not change.
 </p>
-<h4>Validation</h4>
+<h4>
+  Validation
+</h4>
 <p>
-The model has been validated against the analytical solution in
-the example
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u\">
-AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
+  The model has been validated against the analytical solution in the
+  example <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u\">AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-May 5, 2021, by Fabian Wuellhorst:<br/>
-Added model.<br/>
-This is for
-<a href=\"https://github.com/RWTH-EBC/AixLib/issues/1092\">
-AixLib, #1092</a>.
-</li>
+revisions="<html><ul>
+  <li>May 5, 2021, by Fabian Wuellhorst:<br/>
+    Added model.<br/>
+    This is for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1092\">AixLib, #1092</a>.
+  </li>
 </ul>
 </html>"));
 end HeatingRod;

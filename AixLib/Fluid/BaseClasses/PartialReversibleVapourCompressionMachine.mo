@@ -687,10 +687,10 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  This partial model for a generic grey-box vapour compression machine (heat pump
-  or chiller) uses empirical data to model the refrigerant cycle. The
-  modelling of system inertias and heat losses allow the simulation of
-  transient states.
+  This partial model for a generic grey-box vapour compression machine
+  (heat pump or chiller) uses empirical data to model the refrigerant
+  cycle. The modelling of system inertias and heat losses allow the
+  simulation of transient states.
 </p>
 <p>
   Resulting in the choosen model structure, several configurations are
@@ -716,7 +716,8 @@ equation
   \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>.
   The relevant data is aggregated. In order to control both chillers
   and heat pumps, both flow and return temperature are aggregated. The
-  mode signal chooses the operation type of the vapour compression machine:
+  mode signal chooses the operation type of the vapour compression
+  machine:
 </p>
 <ul>
   <li>mode = true: Main operation mode (heat pump: heating; chiller:
@@ -727,8 +728,9 @@ equation
   </li>
 </ul>
 <p>
-  To model both on/off and inverter controlled vapour compression machines, the
-  compressor speed is normalizd to a relative value between 0 and 1.
+  To model both on/off and inverter controlled vapour compression
+  machines, the compressor speed is normalizd to a relative value
+  between 0 and 1.
 </p>
 <p>
   Possible icing of the evaporator is modelled with an input value
@@ -764,22 +766,23 @@ equation
 <p>
   To simplify the parametrization of the evaporator and condenser
   volumes and nominal mass flows there exists an option of automatic
-  estimation based on the nominal usable power of the vapour compression machine.
-  This function uses a linear correlation of these parameters, which
-  was established from the linear regression of more than 20 data sets
-  of water-to-water heat pumps from different manufacturers (e.g.
-  Carrier, Trane, Lennox) ranging from about 25kW to 1MW nominal power.
-  The linear regressions with coefficients of determination above 91%
-  give a good approximation of these parameters. Nevertheless,
-  estimates for machines outside the given range should be checked for
-  plausibility during simulation.
+  estimation based on the nominal usable power of the vapour
+  compression machine. This function uses a linear correlation of these
+  parameters, which was established from the linear regression of more
+  than 20 data sets of water-to-water heat pumps from different
+  manufacturers (e.g. Carrier, Trane, Lennox) ranging from about 25kW
+  to 1MW nominal power. The linear regressions with coefficients of
+  determination above 91% give a good approximation of these
+  parameters. Nevertheless, estimates for machines outside the given
+  range should be checked for plausibility during simulation.
 </p>
 <h4>
   Assumptions
 </h4>
 <p>
-  Several assumptions where made in order to model the vapour compression machine.
-  For a detailed description see the corresponding model.
+  Several assumptions where made in order to model the vapour
+  compression machine. For a detailed description see the corresponding
+  model.
 </p>
 <ol>
   <li>
@@ -805,10 +808,10 @@ equation
     <b>Scaling factor</b>: A scaling facor is implemented for scaling
     of the thermal power and capacity. The factor scales the parameters
     V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the
-    vapour compression machine can supply more heat with the COP staying nearly
-    constant. However, one has to make sure that the supplied pressure
-    difference or mass flow is also scaled with this factor, as the
-    nominal values do not increase said mass flow.
+    vapour compression machine can supply more heat with the COP
+    staying nearly constant. However, one has to make sure that the
+    supplied pressure difference or mass flow is also scaled with this
+    factor, as the nominal values do not increase said mass flow.
   </li>
 </ol>
 <h4>
