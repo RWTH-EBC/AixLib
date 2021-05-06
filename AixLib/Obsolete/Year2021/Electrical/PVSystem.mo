@@ -379,9 +379,8 @@ package PVSystem
 
       parameter Integer NumberOfPanels = 1
         "Number of panels";
-      parameter AixLib.Obsolete.DataBase.SolarElectric.PVBaseRecord data
-        "PV data set"
-        annotation (choicesAllMatching=true);
+      parameter AixLib.Obsolete.Year2021.DataBase.SolarElectric.PVBaseRecord
+        data "PV data set" annotation (choicesAllMatching=true);
       parameter Modelica.SIunits.Power MaxOutputPower
         "Maximum output power for inverter";
       Modelica.Blocks.Interfaces.RealOutput PVPowerW(
