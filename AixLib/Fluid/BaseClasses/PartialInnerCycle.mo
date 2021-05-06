@@ -143,8 +143,8 @@ equation
     Documentation(revisions="<html><ul>
   <li>
     <i>May 22, 2019</i> by Julian Matthes:<br/>
-    Rebuild due to the introducion of the vapour compression machine partial model
-    (see issue <a href=
+    Rebuild due to the introducion of the vapour compression machine
+    partial model (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
   <li>
@@ -155,12 +155,12 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  This black box model represents the refrigerant cycle of a vapour compression
-  machine. Used in AixLib.Fluid.HeatPumps.HeatPump and
+  This black box model represents the refrigerant cycle of a vapour
+  compression machine. Used in AixLib.Fluid.HeatPumps.HeatPump and
   AixLib.Fluid.Chiller.Chiller, this model serves the simulation of a
-  reversible vapour compression machine. Thus, data both of chillers and heat
-  pumps can be used to calculate the three relevant values <span style=
-  \"font-family: Courier New;\">P_el</span>, <span style=
+  reversible vapour compression machine. Thus, data both of chillers
+  and heat pumps can be used to calculate the three relevant values
+  <span style=\"font-family: Courier New;\">P_el</span>, <span style=
   \"font-family: Courier New;\">QCon</span> and <span style=
   \"font-family: Courier New;\">QEva</span>. The <span style=
   \"font-family: Courier New;\">mode</span> of the machine is used to

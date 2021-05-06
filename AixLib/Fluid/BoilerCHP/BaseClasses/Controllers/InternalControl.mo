@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
+within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model InternalControl "Internal control model for boiler"
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
@@ -186,10 +186,9 @@ equation
 revisions="<html><ul>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
-    Add energyDynamics as parameter
-    (see issue <a href=
+    Add energyDynamics as parameter (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
-  </li>  
+  </li>
   <li>
     <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions

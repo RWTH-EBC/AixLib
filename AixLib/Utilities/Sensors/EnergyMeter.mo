@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Sensors;
+within AixLib.Utilities.Sensors;
 model EnergyMeter
   "\"Integrates power [W] that is connected to input connector\""
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -48,12 +48,13 @@ equation
   </li>
 </ul>
 </html>", revisions="<html>
+<ul>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
-    Add energyDynamics as parameter
-    (see issue <a href=
+    Add energyDynamics as parameter (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
   </li>
+</ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-60,-80},{60,80}})));
 end EnergyMeter;
