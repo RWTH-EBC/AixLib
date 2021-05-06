@@ -60,12 +60,11 @@ model RotaryCompressorPressureHeatLosses
     freqHz=1)
     "Prescribed valve's opening"
     annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
-  Actuators.Valves.SimpleValve simVal(
+  Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simVal(
     redeclare package Medium = Medium,
     m_flow_start=0.025,
     m_flow_small=1e-6,
-    Kvs=1.4) "Model of a simple valve to simulate pressure losses"
-    annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+    Kvs=1.4) "Model of a simple valve to simulate pressure losses" annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   MixingVolumes.MixingVolume sink(
     redeclare package Medium = Medium,
     V=10e-3,
