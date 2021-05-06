@@ -1,4 +1,4 @@
-within AixLib.Fluid;
+﻿within AixLib.Fluid;
 package FixedResistances "Package with models for fixed flow resistances"
   extends Modelica.Icons.VariantsPackage;
 
