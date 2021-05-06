@@ -8,11 +8,11 @@ model LightsRelToMaxValue "Multiplies relative input with max value (heat flow d
 
 equation
 
-  connect(radConvertor.rad, radHeat) annotation (Line(
+  connect(radConvertor.radPort, radHeat) annotation (Line(
       points={{71.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(radiativeHeat.port, radConvertor.conv) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
+  connect(radiativeHeat.port, radConvertor.convPort) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
   annotation ( Icon(graphics={
         Ellipse(
           extent={{-50,72},{50,-40}},

@@ -18,13 +18,19 @@ model StorageSolarCollector
     k_HE=1500,
     d=1.5,
     h=2.5,
-    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
+    redeclare package Medium = Medium,
+    m_flow_nominal_layer=solarThermal.m_flow_nominal,
+    m_flow_nominal_HE=solarThermal.m_flow_nominal)
+                                       annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-60,14},
             {-40,34}})));
-  AixLib.Fluid.Movers.Pump
-             pump(ControlStrategy = 1,
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
+    ControlStrategy=1,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                 annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={-8,70})));
+    m_flow_small=1e-4) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-8,70})));
   AixLib.Fluid.Sources.Boundary_pT
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent = {{-86, 70}, {-66, 90}})));
@@ -59,8 +65,7 @@ model StorageSolarCollector
   Modelica.Blocks.Sources.Pulse pulse(period = 3600,               width = 1, amplitude = 60,
     offset=101325)                                                                            annotation(Placement(transformation(extent={{-96,-18},
             {-76,2}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
-                                 simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
     Kvs=2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) annotation (Placement(transformation(

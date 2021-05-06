@@ -2,7 +2,7 @@ within AixLib.Fluid.Actuators.Valves;
 model TwoWayQuickOpening
   "Two way valve with quick opening flow characteristics"
   extends BaseClasses.PartialTwoWayValveKv(
-    phi=max(0,
+    phi=max(0.1*l,
          if homotopyInitialization then
            homotopy(
              actual=l + Modelica.Fluid.Utilities.regPow(

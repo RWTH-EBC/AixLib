@@ -4,7 +4,7 @@ model Radiator "Radiator multilayer model"
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
-
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(each final C_nominal=fill(1E-2, Medium.nC), each final C_start=fill(0, Medium.nC));
   // parameter Real kv=.1;
   parameter Boolean selectable=false
     "Radiator record" annotation(Dialog(group="Radiator Data"));
@@ -70,9 +70,7 @@ model Radiator "Radiator multilayer model"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
   parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature, in degrees Celsius"
-    annotation (Dialog(group="Miscellaneous"));
+
   parameter SIunits.Temperature RT_nom[3]=
     (if selectable then radiatorType.RT_nom
     else Modelica.SIunits.Conversions.from_degC({75,65,20}))
@@ -81,18 +79,26 @@ model Radiator "Radiator multilayer model"
   parameter Real PD = (if selectable then radiatorType.PressureDrop else 548208)
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2"
     annotation (Dialog(group="Miscellaneous", enable=not selectable));
+  parameter Boolean from_dp = false
+    "= true, use m_flow = f(dp) else dp = f(m_flow)"
+    annotation (Evaluate=true, Dialog(tab="Advanced"));
+  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(Evaluate=true, Dialog(tab="Advanced"));
+  parameter Boolean linearized = false
+    "= true, use linear relation between m_flow and dp for any flow rate"
+    annotation(Evaluate=true, Dialog(tab="Advanced"));
+
   parameter Integer N=16
     "Number of discretisation layers";
   parameter AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.Temp
-    calc_dT=calcT.exp
+    calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp
     "Select calculation method";
-  SIunits.Temperature TV_1;
-  SIunits.Temperature TR_N;
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvectiveHeat
     "Convective heat port to room"
-    annotation (Placement(transformation(extent={{-60,20},{-44,36}}, rotation=
+    annotation (Placement(transformation(extent={{-48,32},{-32,48}}, rotation=
            0), iconTransformation(extent={{-30,10},{-10,30}})));
-  AixLib.Utilities.Interfaces.RadPort RadiativeHeat "Radiative heat port to room" annotation (Placement(transformation(extent={{30,12},{50,30}}, rotation=0), iconTransformation(extent={{30,10},{50,30}})));
+  AixLib.Utilities.Interfaces.RadPort RadiativeHeat "Radiative heat port to room" annotation (Placement(transformation(extent={{30,32},{50,50}}, rotation=0), iconTransformation(extent={{30,10},{50,30}})));
   Sensors.TemperatureTwoPort FlowTemperature(redeclare package Medium =
              Medium,
     m_flow_nominal=m_flow_nominal)
@@ -103,14 +109,22 @@ model Radiator "Radiator multilayer model"
     m_flow_nominal=m_flow_nominal)
     "Return temperature"
     annotation (Placement(transformation(extent={{62,-10},{82,10}})));
-  BaseClasses.PressureDropRadiator pressureDropRadiator(redeclare package Medium =
-             Medium, PD=PD,
-    m_flow_small=0.01)
+  FixedResistances.PressureDrop    res(
+    redeclare final package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
+    final show_T=show_T,
+    final from_dp=from_dp,
+    final dp_nominal=PD*m_flow_nominal^2,
+    final homotopyInitialization=homotopyInitialization,
+    final linearized=linearized,
+    final deltaM=deltaM)
     "Base class of radiator"
     annotation (Placement(transformation(extent={{26,-10},{46,10}})));
 
+  parameter Real deltaM=0.3 "Fraction of nominal mass flow rate where transition to turbulent occurs" annotation (Dialog(group="Transition to laminar"));
+  parameter Modelica.Fluid.Types.Dynamics initDynamicsWall=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial "Like energyDynamics, but SteadyState leeds to same behavior as DynamicFreeInitial" annotation (Dialog(tab="Initialization", group="Solid material"));
 protected
-  parameter Modelica.SIunits.Temperature T0_N[N]= {(T0-ki*0.2) for ki in 1:N};
   parameter SIunits.Volume Vol_Water=(length*VolumeWater/1000)/N
     "Volume of water";
   parameter SIunits.Volume Vol_Steel=(length*MassSteel) / DensitySteel /N
@@ -141,6 +155,15 @@ protected
 
   BaseClasses.MultiLayerThermalDelta multiLayer_HE[N](
     redeclare each package Medium = Medium,
+    each final allowFlowReversal=allowFlowReversal,
+    each final m_flow_small=m_flow_small,
+    each final show_T=false,
+    each final energyDynamics=energyDynamics,
+    each final massDynamics=massDynamics,
+    each final p_start=p_start,
+    each final T_start=T_start,
+    each final X_start=X_start,
+    each final mSenFac=1,
     each M_Radiator=(length*MassSteel)/N,
     each calc_dT=calc_dT,
     each Type=Type,
@@ -148,7 +171,6 @@ protected
     each DensitySteel=DensitySteel,
     each CapacitySteel=CapacitySteel,
     each length=length,
-    T0=T0_N,
     each Vol_Water=Vol_Water,
     each s_eff=Type[1],
     each Q_dot_nom_i=Q_dot_nom_i,
@@ -158,13 +180,12 @@ protected
     each eps=eps,
     each A=A/N,
     each d=d,
-    each m_flow_nominal=m_flow_nominal)
+    each m_flow_nominal=m_flow_nominal,
+    each final initDynamicsWall=initDynamicsWall)
     "Multilayer base class"
     annotation (Placement(transformation(extent={{-28,-18},{8,18}})));
 
 equation
-  TV_1=multiLayer_HE[1].TIn;
-  TR_N=multiLayer_HE[N].TOut;
 
   for i in 1:N loop
     connect(multiLayer_HE[i].convective, ConvectiveHeat);
@@ -176,10 +197,9 @@ equation
   end for;
 
   connect( FlowTemperature.port_b, multiLayer_HE[1].port_a);
-  connect( pressureDropRadiator.port_a, multiLayer_HE[N].port_b);
+  connect(res.port_a, multiLayer_HE[N].port_b);
 
-  connect(pressureDropRadiator.port_b, ReturnTemperature.port_a) annotation (
-      Line(
+  connect(res.port_b, ReturnTemperature.port_a) annotation (Line(
       points={{46,0},{62,0}},
       color={0,127,255},
       smooth=Smooth.None));

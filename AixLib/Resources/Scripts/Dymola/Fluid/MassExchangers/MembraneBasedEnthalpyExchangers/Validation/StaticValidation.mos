@@ -1,0 +1,23 @@
+﻿simulateModel("AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Validation.StaticValidation", stopTime=29600, numberOfIntervals=0, outputInterval=1, method="dassl",tolerance=1E-6, resultFile="StaticValidation");
+createPlot(id=1, 
+  position={14, 20, 584, 565}, 
+  y={"m3hOda.y", "V_flow_exp.showNumber"}, 
+  range={0.0, 30000.0, 100.0, 500.0}, 
+  grid=true, 
+  colors={{28,108,200}, 
+  {238,46,47}});
+createPlot(id=1, 
+  position={14, 20, 584, 565}, 
+  y={"senTemSup.T", "T_Sup_exp.showNumber"}, 
+  range={0.0, 30000.0, 286.0, 296.0}, 
+  grid=true, 
+  subPlot=102, 
+  colors={{28,108,200}, {238,46,47}}, 
+  displayUnits={"K", ""});
+createPlot(id=1, 
+  position={14, 20, 584, 565}, 
+  y={"toDryAirSup.XiDry", "X_Sup_exp.showNumber"}, 
+  range={0.0, 30000.0, 0.004, 0.012}, 
+  grid=true, 
+  subPlot=103, 
+  colors={{28,108,200}, {238,46,47}});

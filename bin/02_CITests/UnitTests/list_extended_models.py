@@ -51,12 +51,12 @@ class Extended_model(object):
 			for l in regression_models:
 				#model = l[:l.rfind(".")]
 				
-				Num_Example = l.rfind("Examples")
-				Num_Validation = l.rfind("Validation")
+				Num_Example = l.rfind(".Examples")
+				Num_Validation = l.rfind(".Validation")
 				if Num_Example > Num_Validation:
-					model = l[:Num_Example+8]
+					model = l[:Num_Example+9]
 				else:
-					model = l[:Num_Validation+10]
+					model = l[:Num_Validation+11]
 				#model = l[:l.rfind("Validation")]
 				models.append(model)
 		testmodels = list(set(models))
