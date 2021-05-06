@@ -1,7 +1,6 @@
-within AixLib.Obsolete;
+within AixLib.Obsolete.Year2021;
 package Electrical
   extends Modelica.Icons.Package;
-
 
 annotation (Icon(graphics={
         Rectangle(
