@@ -90,7 +90,7 @@ model CtrAHUBasic "Simple controller for AHU"
     y_start=y_start,
     final reverseAction=false,
     final reset=AixLib.Types.Reset.Disabled) if useTwoFanCtr
-    "PID controller for retrun fan. Is deactivated if useTwoFanCtr is false."
+    "PID controller for return fan. Is deactivated if useTwoFanCtr is false."
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
   Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet)
     "Constant volume flow setpoint"

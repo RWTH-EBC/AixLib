@@ -9,7 +9,7 @@ expandable connector GenericAHUBus
   SI.Temperature TOutsAirMea "Outside air temperature";
   SI.Temperature TSupAirMea "Supply air temperature";
   SI.Temperature TRetAirMea "Return air temperature";
-  SI.Temperature TExhAirMea "Return air temperature";
+  SI.Temperature TExhAirMea "Exhaust air temperature";
   SI.VolumeFlowRate  V_flow_RetAirMea  "Return air volume flow";
   Real dpFanRetSet "Set pressure difference for fan in return air canal";
   Real dpFanRetMea "Measured pressure difference for fan in return air canal";

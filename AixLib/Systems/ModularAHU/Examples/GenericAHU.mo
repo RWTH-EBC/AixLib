@@ -2,20 +2,14 @@ within AixLib.Systems.ModularAHU.Examples;
 model GenericAHU "Example of generic ahu model"
   extends Modelica.Icons.Example;
   AixLib.Systems.ModularAHU.GenericAHU genericAHU(
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Media.Water,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_amb=293.15,
-    m1_flow_nominal=3000/3600*1.2,
-    m2_flow_nominal=0.5,
-    T_start=293.15,
-    usePreheater=true,
-    useHumidifierRet=true,
-    useHumidifier=true,
-    perheater(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
+    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    hydraulicEfficiency(V_flow={0,1000}, eta={0.7,0.7}),
+    preheater(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -27,10 +21,22 @@ model GenericAHU "Example of generic ahu model"
         tau2=15,
         dT_nom=30,
         Q_nom=30000)),
+    redeclare package Medium1 = Media.Air,
+    redeclare package Medium2 = Media.Water,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T_amb=293.15,
+    m1_flow_nominal=3000/3600*1.2,
+    m2_flow_nominal=0.5,
+    T_start=293.15,
+    usePreheater=true,
+    useHumidifierRet=true,
+    useHumidifier=true,
     cooler(redeclare AixLib.Systems.HydraulicModules.Admix hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -46,6 +52,8 @@ model GenericAHU "Example of generic ahu model"
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -117,7 +125,7 @@ model GenericAHU "Example of generic ahu model"
         extent={{8,-8},{-8,8}},
         rotation=270,
         origin={-2,-40})));
-  Fluid.Sources.Boundary_pT SinkSink(
+  Fluid.Sources.Boundary_pT SinkCooler(
     nPorts=1,
     redeclare package Medium = Media.Water,
     T=283.15) annotation (Placement(transformation(
@@ -159,8 +167,8 @@ equation
           {-26,-14},{-32.7273,-14}},           color={0,127,255}));
   connect(SourceCooler.ports[1], genericAHU.port_a4) annotation (Line(points={{
           -2,-32},{-2,-14},{-7.10543e-15,-14}}, color={0,127,255}));
-  connect(SinkSink.ports[1], genericAHU.port_b4) annotation (Line(points={{14,-32},
-          {10,-32},{10,-14},{10.9091,-14}},      color={0,127,255}));
+  connect(SinkCooler.ports[1], genericAHU.port_b4) annotation (Line(points={{14,
+          -32},{10,-32},{10,-14},{10.9091,-14}}, color={0,127,255}));
   connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{32,-32},
           {30,-32},{30,-22},{20,-22},{20,-14},{21.8182,-14}},         color={0,
           127,255}));
@@ -177,7 +185,7 @@ equation
 </html>", info="<html>
 <p>This example demonstrates the GenericAHU model with a simple control. The supply air temperature set point is 20&deg;C.</p>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true) =
+    __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/ModularAHU/Examples/GenericAHU.mos"
         "Simulate and plot"));
 end GenericAHU;

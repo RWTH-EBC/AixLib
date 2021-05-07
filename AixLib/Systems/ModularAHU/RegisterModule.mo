@@ -29,6 +29,8 @@ model RegisterModule "AHU register module for heaters and coolers"
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer of temperature sensors in air chanal" annotation(Dialog(tab="Advanced"));
   replaceable AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
+    length=1,
+    Kv=6.3,
     final energyDynamics=energyDynamics,
     final T_amb=T_amb,
     redeclare final package Medium = Medium2,
@@ -54,7 +56,9 @@ model RegisterModule "AHU register module for heaters and coolers"
     final massDynamics=massDynamics,
     T1_start=T_start,
     T2_start=T_start,
-    tau_C=10)
+    tau_C=10,
+    dT_nom=1,
+    Q_nom=1000)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
             {20,68}})));
   AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus

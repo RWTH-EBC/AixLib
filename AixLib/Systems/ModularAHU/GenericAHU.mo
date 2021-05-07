@@ -30,9 +30,9 @@ replaceable package Medium2 =
       eta={0.7}) "Hydraulic efficiency of the fans" annotation (dialog(group="Fans"));
 
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
+  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal
     "Nominal mass flow rate in air canal";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
+  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal
     "Nominal mass flow rate in hydraulics";
   parameter Modelica.SIunits.Temperature T_start=303.15
     "Initialization temperature" annotation(Dialog(tab="Advanced", group="Initialization"));
@@ -69,7 +69,7 @@ replaceable package Medium2 =
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-210,70},{-230,90}}),
         iconTransformation(extent={{-210,70},{-230,90}})));
-  RegisterModule perheater(
+  RegisterModule preheater(
     redeclare package Medium1 = Medium1,
     redeclare package Medium2 = Medium2,
     final allowFlowReversal1=allowFlowReversal1,
@@ -184,10 +184,8 @@ replaceable package Medium2 =
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
-    per(
-      use_powerCharacteristic=false,
-      final hydraulicEfficiency=hydraulicEfficiency,
-      final motorEfficiency(eta={0.95})),
+    redeclare Fluid.Movers.Data.Fans.GenericFan per(hydraulicEfficiency=
+          hydraulicEfficiency, motorEfficiency(eta={0.95})),
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Supply air fan"
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
   Fluid.Movers.FlowControlled_dp fanRet(
@@ -197,10 +195,8 @@ replaceable package Medium2 =
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
-    per(
-      use_powerCharacteristic=false,
-      final hydraulicEfficiency=hydraulicEfficiency,
-      motorEfficiency(eta={0.95})),
+    redeclare Fluid.Movers.Data.Fans.GenericFan per(hydraulicEfficiency=
+          hydraulicEfficiency, motorEfficiency(eta={0.95})),
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Return air fan"
                                         annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -331,9 +327,9 @@ protected
         rotation=270,
         origin={150,102})));
 equation
-  connect(perheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},
+  connect(preheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},
           {-160,-27.5385},{-160,-100}},            color={0,127,255}));
-  connect(perheater.port_b2, port_b3) annotation (Line(points={{-110,-27.5385},
+  connect(preheater.port_b2, port_b3) annotation (Line(points={{-110,-27.5385},
           {-110,-100},{-120,-100}},          color={0,127,255}));
   connect(const.y, add.u2)
     annotation (Line(points={{-93.7,33},{-94,33},{-94,35.6},{-88.8,35.6}},
@@ -341,10 +337,10 @@ equation
   connect(dampHX.port_b, dynamicHX.port_a2) annotation (Line(points={{-70,0},{
           -64,0},{-64,-0.4},{-60,-0.4}},
                                    color={0,127,255}));
-  connect(perheater.port_b1, dampHX.port_a) annotation (Line(points={{-110,
+  connect(preheater.port_b1, dampHX.port_a) annotation (Line(points={{-110,
           0.153846},{-112,0.153846},{-112,0},{-90,0}},
                                            color={0,127,255}));
-  connect(flapSup.port_b, perheater.port_a1) annotation (Line(points={{-170,0},
+  connect(flapSup.port_b,preheater. port_a1) annotation (Line(points={{-170,0},
           {-164,0},{-164,0.153846},{-154,0.153846}}, color={0,127,255}));
   connect(cooler.port_b1, heater.port_a1)
     annotation (Line(points={{46,0.153846},{76,0.153846}}, color={0,127,255}));
@@ -532,7 +528,7 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(perheater.registerBus, genericAHUBus.preheaterBus) annotation (Line(
+  connect(preheater.registerBus, genericAHUBus.preheaterBus) annotation (Line(
       points={{-153.78,-13.9231},{-172,-13.9231},{-172,-14},{-242,-14},{-242,
           120},{-118,120},{-118,120.09},{0.09,120.09}},
       color={255,204,51},
