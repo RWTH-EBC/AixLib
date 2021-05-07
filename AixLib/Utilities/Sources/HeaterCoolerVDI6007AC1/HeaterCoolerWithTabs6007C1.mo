@@ -432,19 +432,19 @@ equation
   end if;
 
   if staOrDyn and ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on)) then
-  connect(booleanExpressionHeater.y, tabsPlusAirController.HeaterActiveInput);
+  connect(booleanExpressionHeater.y, tabsPlusAirController.remHeaterActiveInput);
   connect(tabsCoolingPower, tabsPlusAirController.tabsCoolPower);
-  connect(tabsPlusAirController.HeaterActiveOutput, pITempHeatRem.onOff);
-  connect(booleanExpressionCooler.y, tabsPlusAirController.CoolerActiveInput);
+  connect(tabsPlusAirController.remHeaterActiveOutput, pITempHeatRem.onOff);
+  connect(booleanExpressionCooler.y, tabsPlusAirController.remCoolerActiveInput);
   connect(tabsHeatingPower, tabsPlusAirController.tabsHeatPower);
-  connect(tabsPlusAirController.CoolerActiveOutput, pITempCoolRem.onOff);
+  connect(tabsPlusAirController.remCoolerActiveOutput, pITempCoolRem.onOff);
   elseif not staOrDyn and ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on)) then
-  connect(heaterActive, tabsPlusAirController.HeaterActiveInput);
+  connect(heaterActive, tabsPlusAirController.remHeaterActiveInput);
   connect(tabsCoolingPower, tabsPlusAirController.tabsCoolPower);
-  connect(tabsPlusAirController.HeaterActiveOutput, pITempHeatRem.onOff);
-  connect(coolerActive, tabsPlusAirController.CoolerActiveInput);
+  connect(tabsPlusAirController.remHeaterActiveOutput, pITempHeatRem.onOff);
+  connect(coolerActive, tabsPlusAirController.remCoolerActiveInput);
   connect(tabsHeatingPower, tabsPlusAirController.tabsHeatPower);
-  connect(tabsPlusAirController.CoolerActiveOutput, pITempCoolRem.onOff);
+  connect(tabsPlusAirController.remCoolerActiveOutput, pITempCoolRem.onOff);
   elseif staOrDyn and ((recOrSep and not zoneParam.tabs and zoneParam.radiator) or (not recOrSep and not tabs_on and radiator_on)) then
   connect(booleanExpressionHeater.y, pITempHeatRem.onOff) annotation (Line(
       points={{-110.05,28},{-82,28},{-82,10},{52.8,10}},
