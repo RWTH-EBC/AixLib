@@ -13,7 +13,7 @@ model PumpHeadControlled "testing the head controlled pump model."
     Qnom=1.45) annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
-    offset=1,
+    offset=-0.5,
     height=1,
     duration(displayUnit="s") = 120,
     startTime(displayUnit="min") = 120)
@@ -35,12 +35,6 @@ model PumpHeadControlled "testing the head controlled pump model."
     annotation (Placement(transformation(extent={{46,30},{26,50}})));
   BaseClasses.PumpBus                                          pumpBus
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  Modelica.Blocks.Sources.Ramp rampValvePosition1(
-    offset=0.5,
-    height=-0.48,
-    duration(displayUnit="s") = 120,
-    startTime(displayUnit="min") = 120)
-    annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   Actuators.Valves.TwoWayLinear             simpleValve(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
@@ -68,12 +62,12 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{40,
           10},{40,-30},{-20,-30}}, color={0,127,255}));
-  connect(simpleValve.y, rampValvePosition1.y)
-    annotation (Line(points={{-30,-42},{-30,-60},{-21,-60}}, color={0,0,127}));
   connect(vessle.ports[1], pump.port_a)
     annotation (Line(points={{-34,10},{-10,10}}, color={0,127,255}));
   connect(simpleValve.port_b, vessle.ports[2]) annotation (Line(points={{-40,-30},
           {-60,-30},{-60,10},{-38,10}}, color={0,127,255}));
+  connect(rampValvePosition.y, simpleValve.y)
+    annotation (Line(points={{-21,-60},{-30,-60},{-30,-42}}, color={0,0,127}));
   annotation (
       experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
@@ -105,6 +99,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file=
-        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlledDpV.mos"
+          "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlled.mos"
         "Simulate and plot"));
 end PumpHeadControlled;
