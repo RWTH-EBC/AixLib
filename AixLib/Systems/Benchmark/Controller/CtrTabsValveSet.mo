@@ -20,8 +20,9 @@ model CtrTabsValveSet "Controller for concrete core activation"
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
 
-  BaseClasses.TabsBus2 tabsBus annotation (Placement(transformation(extent={{82,
-            -18},{116,18}}), iconTransformation(extent={{88,-14},{112,14}})));
+  EONERC_MainBuilding.BaseClasses.TabsBus2 tabsBus annotation (Placement(
+        transformation(extent={{82,-18},{116,18}}), iconTransformation(extent={
+            {88,-14},{112,14}})));
   HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=2500)
     annotation (Placement(transformation(extent={{-18,60},{2,80}})));
   Modelica.Blocks.Interfaces.RealInput valveHotSet

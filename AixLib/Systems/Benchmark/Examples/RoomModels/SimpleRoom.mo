@@ -40,13 +40,11 @@ model SimpleRoom
         dT_nom=7,
         Q_nom=10000)))
     annotation (Placement(transformation(extent={{-80,-12},{-34,38}})));
-  AixLib.Systems.Benchmark.Tabs2
-        tabs4_1(
+  AixLib.Systems.EONERC_MainBuilding.Tabs2 tabs4_1(
     redeclare package Medium = MediumWater,
     area=30*20,
     thickness=0.3,
-    alpha=15)
-    annotation (Placement(transformation(extent={{20,-60},{60,-20}})));
+    alpha=15) annotation (Placement(transformation(extent={{20,-60},{60,-20}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone
                                                     thermalZone1(
     redeclare package Medium = MediumAir,
@@ -279,13 +277,13 @@ equation
   connect(bouWaterhot1.ports[1], ventilationUnit1.port_b4) annotation (Line(
         points={{-20,-76},{-50,-76},{-50,-12},{-45.96,-12}}, color={0,127,255}));
   connect(bouWaterhot1.ports[2], tabs4_1.port_b1) annotation (Line(points={{-16,-76},
-          {56,-76},{56,-59.6364}},      color={0,127,255}));
+          {32,-76},{32,-60}},           color={0,127,255}));
   connect(tabs4_1.port_a1, bouWaterhot.ports[2]) annotation (Line(points={{24,
           -60},{-52,-60},{-52,-82}}, color={0,127,255}));
-  connect(bouWatercold.ports[1], tabs4_1.port_a2) annotation (Line(points={{-8,
-          -116},{2,-116},{2,-102},{32,-102},{32,-60}}, color={0,127,255}));
+  connect(bouWatercold.ports[1], tabs4_1.port_a2) annotation (Line(points={{-8,-116},
+          {2,-116},{2,-102},{48,-102},{48,-60}},       color={0,127,255}));
   connect(bouWatercold1.ports[1], tabs4_1.port_b2) annotation (Line(points={{22,-116},
-          {48,-116},{48,-59.6364}},       color={0,127,255}));
+          {56,-116},{56,-59.6364}},       color={0,127,255}));
   connect(bouWatercold.ports[2], ventilationUnit1.port_a3) annotation (Line(
         points={{-4,-116},{-72,-116},{-72,-12},{-70.8,-12}}, color={0,127,255}));
   connect(bouWatercold1.ports[2], ventilationUnit1.port_b3) annotation (Line(

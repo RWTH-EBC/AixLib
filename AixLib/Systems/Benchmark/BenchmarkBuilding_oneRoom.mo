@@ -39,7 +39,7 @@ model BenchmarkBuilding_oneRoom "Benchmark building model"
     m_flow_nominal=10,
     T_start=323.15)
     annotation (Placement(transformation(extent={{-188,-80},{-144,-34}})));
-  Benchmark.Tabs2 tabs4_1(
+  EONERC_MainBuilding.Tabs2 tabs4_1(
     redeclare package Medium = MediumWater,
     area=30*20,
     thickness=0.3,

@@ -8,3 +8,6 @@ EnergyCounter
 HeatpumpAndConsumerControllerBus
 SimpleERCBus
 WeatherAC
+MainBus2ZoneMainBuilding
+EnergyCounter2Zones
+TabsBus2

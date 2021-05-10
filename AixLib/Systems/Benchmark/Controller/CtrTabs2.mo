@@ -26,8 +26,9 @@ model CtrTabs2 "Controller for concrete core activation"
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  BaseClasses.TabsBus2 tabsBus annotation (Placement(transformation(extent={{82,
-            -18},{116,18}}), iconTransformation(extent={{88,-14},{112,14}})));
+  EONERC_MainBuilding.BaseClasses.TabsBus2 tabsBus annotation (Placement(
+        transformation(extent={{82,-18},{116,18}}), iconTransformation(extent={
+            {88,-14},{112,14}})));
   HydraulicModules.Controller.CtrThrottle ctrThrottleHot(useExternalTset=true)
     annotation (Placement(transformation(extent={{-20,22},{0,42}})));
   HydraulicModules.Controller.CtrThrottle ctrThrottleCold(useExternalTset=true,

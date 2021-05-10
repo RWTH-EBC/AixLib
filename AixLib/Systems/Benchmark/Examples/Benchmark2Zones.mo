@@ -4,13 +4,12 @@ model Benchmark2Zones
 
   BenchmarkBuilding benchmarkBuilding
     annotation (Placement(transformation(extent={{-60,-78},{64,6}})));
-  Controller.Benchmark2ZonesControl
-                                  benchmark2ZonesControl
+  EONERC_MainBuilding.Controller.MainBuilding2ZonesControl
+    benchmark2ZonesControl
     annotation (Placement(transformation(extent={{-40,14},{-20,40}})));
-  BaseClasses.EnergyCounter2Zones
-                            energyCounter2Zones
+  EONERC_MainBuilding.BaseClasses.EnergyCounter2Zones energyCounter2Zones
     annotation (Placement(transformation(extent={{20,42},{40,62}})));
-  BaseClasses.MainBus2ZoneMainBuilding mainBus
+  EONERC_MainBuilding.BaseClasses.MainBus2ZoneMainBuilding mainBus
     annotation (Placement(transformation(extent={{-14,48},{6,68}})));
 equation
   connect(benchmark2ZonesControl.bus, benchmarkBuilding.mainBus) annotation (

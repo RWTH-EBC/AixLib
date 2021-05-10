@@ -45,8 +45,7 @@ model SimpleRoomVolFlowCtrl_vhu_SP_cca_VF_ig
         dT_nom=7,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{-80,-12},{-34,38}})));
-  AixLib.Systems.Benchmark.Tabs2
-        tabs4_1(
+  AixLib.Systems.EONERC_MainBuilding.Tabs2 tabs4_1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=4,
     area=48,

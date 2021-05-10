@@ -11,11 +11,16 @@ expandable connector MainBus
   EONERC_MainBuilding.BaseClasses.TwoCircuitBus gtfBus "Geothermalfield bus";
   EONERC_MainBuilding.BaseClasses.TwoCircuitBus hxBus
     "Heat exchanger system bus";
-  TabsBus2 tabs1Bus "Bus for concrete core activation 1";
-  TabsBus2 tabs2Bus "Bus for concrete core activation 2";
-  TabsBus2 tabs3Bus "Bus for concrete core activation 3";
-  TabsBus2 tabs4Bus "Bus for concrete core activation 4";
-  TabsBus2 tabs5Bus "Bus for concrete core activation 5";
+  EONERC_MainBuilding.BaseClasses.TabsBus2 tabs1Bus
+    "Bus for concrete core activation 1";
+  EONERC_MainBuilding.BaseClasses.TabsBus2 tabs2Bus
+    "Bus for concrete core activation 2";
+  EONERC_MainBuilding.BaseClasses.TabsBus2 tabs3Bus
+    "Bus for concrete core activation 3";
+  EONERC_MainBuilding.BaseClasses.TabsBus2 tabs4Bus
+    "Bus for concrete core activation 4";
+  EONERC_MainBuilding.BaseClasses.TabsBus2 tabs5Bus
+    "Bus for concrete core activation 5";
   ModularAHU.BaseClasses.GenericAHUBus ahuBus "Bus for AHU";
   ModularAHU.BaseClasses.GenericAHUBus vu1Bus "Ventilation unit 1";
   ModularAHU.BaseClasses.GenericAHUBus vu2Bus "Ventilation unit 2";
