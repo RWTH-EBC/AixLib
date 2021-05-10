@@ -4,6 +4,7 @@ BenchmarkBuilding_oneRoom
 HighTemperatureSystem
 HeatpumpSystem
 Tabs
+TabsSimple
 Controller
 Examples
 BaseClasses

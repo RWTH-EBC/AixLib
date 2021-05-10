@@ -72,6 +72,8 @@ record Ashrae140_900 "Ashrae140 900 Testcase"
     withAHU=false,
     minAHU=0,
     maxAHU=12,
+    maxIrr = {100},
+    shadingFactor = {1},
     hHeat=167500,
     lHeat=0,
     KRHeat=1000,
@@ -82,9 +84,9 @@ record Ashrae140_900 "Ashrae140 900 Testcase"
     KRCool=1000,
     TNCool=1,
     CoolerOn=false,
-    TThresholdHeater=273.15 + 15,
+        TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
-    withIdealThresholds=false);                     //not area specific: W_per_person/area => input will be number of persons
+    withIdealThresholds=false);                    //not area specific: W_per_person/area => input will be number of persons
   annotation (Documentation(revisions="<html>
  <ul>
   <li>
