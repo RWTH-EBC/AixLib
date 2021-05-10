@@ -66,6 +66,12 @@ partial model PartialMultizone "Partial model for multizone models"
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
         iconTransformation(extent={{80,0},{100,20}})));
+   Modelica.Blocks.Interfaces.RealOutput TOpe[size(zone, 1)](
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if ASurTot > 0 "Indoor operative temperature"
+    annotation (Placement(transformation(extent={{100,86},{120,106}})));
+
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
@@ -234,6 +240,8 @@ equation
           {90,76.47},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}},
                                                                    color={191,0,
           0}));
+  connect(zone.TOpe, TOpe) annotation (Line(points={{82.1,89.59},{93.05,89.59},
+          {93.05,96},{110,96}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
