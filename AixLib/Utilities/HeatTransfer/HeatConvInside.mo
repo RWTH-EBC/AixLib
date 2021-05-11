@@ -31,7 +31,7 @@ model HeatConvInside
       choice=3 "horizontal facing down",
       radioButtons=true),
       Evaluate=true);
-  parameter Modelica.SIunits.Area A(min=0) "Area of surface";
+  parameter Modelica.SIunits.Area A(min=Modelica.Constants.eps) "Area of surface";
   Modelica.SIunits.CoefficientOfHeatTransfer hCon "variable heat transfer coefficient";
 
 protected
