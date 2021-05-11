@@ -72,7 +72,7 @@ package AixLib
     version="0.10.7",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.7_to_0.11.0.mos",
     version="0.11.0",
-                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.11.0_to_0.11.1.mos"),
+                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.11.0_to_0.11.1.mos",
 	version="0.11.1",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.11.1_to_0.11.2.mos")),
   Documentation(info = "<html><p>
