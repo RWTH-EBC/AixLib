@@ -1,13 +1,13 @@
-last-generated=2016-11-02
+last-generated=2021-05-11
 statistics-simulation=
 {
-  "numerical Jacobians": "0", 
-  "nonlinear": " ", 
-  "linear": " "
+  "linear": " ",
+  "nonlinear": " ",
+  "numerical Jacobians": "0"
 }
-senMasFlo.m_flow=[3., 3.]
-time=[0., 1.]
-senSpeEnt.H_flow=[135902.828125, 135902.828125]
-cheMasFra.y=[-0., -0.]
-cheMasFlo.y=[0., 0.]
-cheSpeEnt.y=[0., 0.]
+time=[0e+00, 1e+00]
+senMasFlo.m_flow=[3e+00, 3e+00]
+senSpeEnt.H_flow=[1.35902828125e+05, 1.35902828125e+05]
+cheMasFra.y=[0e+00, 0e+00]
+cheMasFlo.y=[0e+00, 0e+00]
+cheSpeEnt.y=[0e+00, 0e+00]
