@@ -19,8 +19,8 @@ model HeatConvInside
                                          annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 3 then true else false));
 
-  parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 1 then true else false));
+  parameter Modelica.SIunits.TemperatureDifference dT_small = 0.1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
+        enable=if calcMethod == 1 or calcMethod == 2 or calcMethod == 4 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
@@ -79,19 +79,20 @@ equation
     // floor (horizontal facing up)
 
     if surfaceOrientation == 2 then
-      if port_b.T >= port_a.T then
-        hCon = 2*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small);
-      else
-        hCon = 0.54*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small);
-      end if;
+      hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
+        y1=2*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
+        y2=0.54*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
+        x_small=dT_small);
+
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      if port_b.T >= port_a.T then
-        hCon = 0.54*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small);
-      else
-        hCon = 2*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small);
-      end if;
+       hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
+        y1=0.54*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
+        y2=2*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
+        x_small=dT_small);
 
     // vertical plate
     else
