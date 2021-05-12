@@ -26,9 +26,9 @@ record SharpNUU235F2 "Sharp NU-U235F2 record also used for validation with NIST 
 </html>",
 revisions="<html><ul>
   <li>
-  <i>May 6, 2021</i> by Laura Maier:<br/>
-  Added new record for NIST-data based validation
+    <i>May 6, 2021</i> by Laura Maier:<br/>
+    Added new record for NIST-data based validation
   </li>
-  </ul>
+</ul>
 </html>"));
 end SharpNUU235F2;

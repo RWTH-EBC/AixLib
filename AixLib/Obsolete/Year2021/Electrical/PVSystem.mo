@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2021.Electrical;
+within AixLib.Obsolete.Year2021.Electrical;
 package PVSystem
 
   model PVSystem "PVSystem"
@@ -308,6 +308,7 @@ package PVSystem
   \"AixLib.Fluid.Solar.Electric.PVSystem\">PVsystem</a> model.
 </p>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>
     Moved into AixLib
@@ -362,6 +363,7 @@ package PVSystem
   \"AixLib.Fluid.Solar.Electric.PVSystemTMY3\">PVsystemTMY3</a> model.
 </p>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>October 20, 2017</i> ,by Larissa Kuehn:<br/>
     First implementation
@@ -510,8 +512,7 @@ package PVSystem
   </li>
 </ul>
 </html>",info="<html><h4>
-  <span style=\"color: #008000\">Overview</span>
-</h4>
+<span style=\"color: #008000\">Overview</span>
 <p>
   The <b>PVinverterRMS</b> model represents a simple PV inverter.
 </p>
@@ -597,6 +598,7 @@ package PVSystem
   temperature&#160;dependency&#160;for&#160;efficiency.
 </p>
 </html>",revisions="<html><ul>
+<ul>
   <li>
     <i>October 20, 2017</i> by Larissa Kühn:<br/>
     Modification of Input to make the model compatible with diffent

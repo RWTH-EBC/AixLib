@@ -83,9 +83,9 @@ package SolarElectric
 </html>",
         revisions="<html><ul>
   <li>
-  <i>May 6, 2021</i> by Laura Maier:<br/>
-  Adapted record which is also used in research project FUBIC suppored 
-  by the BMWi (promotional reference: 03ET1619)
+    <i>May 6, 2021</i> by Laura Maier:<br/>
+    Adapted record which is also used in research project FUBIC
+    suppored by the BMWi (promotional reference: 03ET1619)
   </li>
 </ul>
 </html>"));

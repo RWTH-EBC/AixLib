@@ -24,6 +24,7 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>
     Moved into AixLib
@@ -58,6 +59,7 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>
     Moved into AixLib
@@ -100,6 +102,7 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>
     Moved into AixLib
@@ -135,6 +138,7 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>
     Moved into AixLib
@@ -170,6 +174,7 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>
     Moved into AixLib
@@ -204,6 +209,7 @@ package DataBase
   \"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>", revisions="<html><ul>
+<ul>
   <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>
     Moved into AixLib
