@@ -40,14 +40,6 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
   Modelica.Blocks.Logical.Switch switchHeater annotation (Placement(transformation(extent={{20,10},{40,30}})));
   Modelica.Blocks.Logical.Switch switchCooler annotation (Placement(transformation(extent={{20,-30},{40,-10}})));
   Modelica.Blocks.Sources.Constant off(k=0) annotation (Placement(transformation(extent={{-16,-6},{-2,8}})));
-  Modelica.Blocks.Sources.Constant heatingPower(k=if not recOrSep then
-        power_Heater_Tabs else zoneParam.powerHeatTabs)
-    "Fixed available heating power of TABS" annotation (Placement(transformation(extent={{-158,62},
-            {-144,76}})));
-  Modelica.Blocks.Sources.Constant coolingPower(k=if not recOrSep then
-        power_Cooler_Tabs else zoneParam.powerCoolTabs)
-    "Fixed available cooling power of TABS" annotation (Placement(transformation(extent={{-158,
-            -72},{-144,-58}})));
   Modelica.Blocks.Interfaces.RealOutput tabsHeatingPower "Power for heating"
     annotation (Placement(transformation(extent={{100,10},
           {120,30}}),      iconTransformation(extent={{72,10},{92,30}})));
@@ -101,16 +93,16 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
         origin={20,66})));
   tabsHeatingCurve tabs_HeatingCurve(
     power_high=if not recOrSep then power_Heater_Tabs else zoneParam.powerHeatTabs,
-
     T_upperlimit=273.15 + 15,
     T_lowerlimit=273.15 + 0)
     annotation (Placement(transformation(extent={{-12,32},{8,52}})));
+
   tabsHeatingCurve tabsCoolingCurve(
     power_high=if not recOrSep then power_Cooler_Tabs else zoneParam.powerCoolTabs,
-
     T_upperlimit=273.15 + 22,
     T_lowerlimit=273.15 + 18)
     annotation (Placement(transformation(extent={{-18,-56},{2,-36}})));
+
 equation
 
   connect(TAirThresholdHeatingTabs.y, less.u2) annotation (Line(points={{-73.4,12},{-54,12}}, color={0,0,127}));
