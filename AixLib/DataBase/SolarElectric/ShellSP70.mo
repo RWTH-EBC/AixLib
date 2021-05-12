@@ -24,8 +24,8 @@ record ShellSP70 "Shell SP70"
 </html>",
       revisions="<html><ul>
   <li>
-  <i>May 6, 2021</i> by Laura Maier:<br/>
-  Adapted to new PV model
+    <i>May 6, 2021</i> by Laura Maier:<br/>
+    Adapted to new PV model
   </li>
 </ul>
 </html>"));
