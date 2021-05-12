@@ -386,7 +386,7 @@ model HeaterCoolerWithTabs6007C1
         rotation=90,
         origin={-64,100}),iconTransformation(extent={{-180,
             -40},{-140,0}})));
-  tabsPlusAirController tabsPlusAirController if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on))
+  tabsPlusAirController tabsPlusAirController1 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on))
     "if TABS cooling is active, air heating is set to inactive and if TABS heating is active, air cooling is set to inactive";
 
 equation
@@ -432,19 +432,19 @@ equation
   end if;
 
   if staOrDyn and ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on)) then
-  connect(booleanExpressionHeater.y, tabsPlusAirController.remHeaterActiveInput);
-  connect(tabsCoolingPower, tabsPlusAirController.tabsCoolPower);
-  connect(tabsPlusAirController.remHeaterActiveOutput, pITempHeatRem.onOff);
-  connect(booleanExpressionCooler.y, tabsPlusAirController.remCoolerActiveInput);
-  connect(tabsHeatingPower, tabsPlusAirController.tabsHeatPower);
-  connect(tabsPlusAirController.remCoolerActiveOutput, pITempCoolRem.onOff);
+  connect(booleanExpressionHeater.y, tabsPlusAirController1.remHeaterActiveInput);
+  connect(tabsCoolingPower, tabsPlusAirController1.tabsCoolPower);
+  connect(tabsPlusAirController1.remHeaterActiveOutput, pITempHeatRem.onOff);
+  connect(booleanExpressionCooler.y, tabsPlusAirController1.remCoolerActiveInput);
+  connect(tabsHeatingPower, tabsPlusAirController1.tabsHeatPower);
+  connect(tabsPlusAirController1.remCoolerActiveOutput, pITempCoolRem.onOff);
   elseif not staOrDyn and ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on)) then
-  connect(heaterActive, tabsPlusAirController.remHeaterActiveInput);
-  connect(tabsCoolingPower, tabsPlusAirController.tabsCoolPower);
-  connect(tabsPlusAirController.remHeaterActiveOutput, pITempHeatRem.onOff);
-  connect(coolerActive, tabsPlusAirController.remCoolerActiveInput);
-  connect(tabsHeatingPower, tabsPlusAirController.tabsHeatPower);
-  connect(tabsPlusAirController.remCoolerActiveOutput, pITempCoolRem.onOff);
+  connect(heaterActive, tabsPlusAirController1.remHeaterActiveInput);
+  connect(tabsCoolingPower, tabsPlusAirController1.tabsCoolPower);
+  connect(tabsPlusAirController1.remHeaterActiveOutput, pITempHeatRem.onOff);
+  connect(coolerActive, tabsPlusAirController1.remCoolerActiveInput);
+  connect(tabsHeatingPower, tabsPlusAirController1.tabsHeatPower);
+  connect(tabsPlusAirController1.remCoolerActiveOutput, pITempCoolRem.onOff);
   elseif staOrDyn and ((recOrSep and not zoneParam.tabs and zoneParam.radiator) or (not recOrSep and not tabs_on and radiator_on)) then
   connect(booleanExpressionHeater.y, pITempHeatRem.onOff) annotation (Line(
       points={{-110.05,28},{-82,28},{-82,10},{52.8,10}},
