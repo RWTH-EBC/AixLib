@@ -7,7 +7,7 @@ model CellTemperatureMountingCloseToGround
 
 equation
 
- T_c = if noEvent(radTil >= 0.01) then
+ T_c = if noEvent(radTil >= Modelica.Constants.eps) then
  radTil*(exp(-2.98-0.0471*winVel))+(T_a)+radTil/1000*1
  else
  (T_a);

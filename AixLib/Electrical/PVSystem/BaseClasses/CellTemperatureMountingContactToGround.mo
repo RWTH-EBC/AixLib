@@ -7,7 +7,7 @@ extends AixLib.Electrical.PVSystem.BaseClasses.PartialCellTemperature;
 
 equation
 
- T_c = if noEvent(radTil >= 0.01) then
+ T_c = if noEvent(radTil >= Modelica.Constants.eps) then
      radTil*(exp(-2.81-0.0455*winVel))+(T_a)
  else
  (T_a);
