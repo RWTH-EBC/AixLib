@@ -5,10 +5,16 @@ model CellTemperatureOpenRack
 
  extends AixLib.Electrical.PVSystem.BaseClasses.PartialCellTemperature;
 
+ final parameter Modelica.SIunits.Temperature T_a_0 = 293.15
+ "Reference ambient temperature";
+ final parameter Real coeff_trans_abs = 0.9
+ "Module specific coefficient as a product of transmission and absorption.
+ It is usually unknown and set to 0.9 in literature";
+
 equation
 
  T_c = if noEvent(radTil >= 0.01) then
- (T_a)+(T_NOCT-293.15)*radTil/radNOCT*9.5/(5.7+3.8*winVel)*(1-eta/0.9)
+ (T_a)+(T_NOCT-T_a_0)*radTil/radNOCT*9.5/(5.7+3.8*winVel)*(1-eta/coeff_trans_abs)
  else
  (T_a);
 
