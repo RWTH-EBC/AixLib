@@ -1,6 +1,6 @@
 within AixLib.Electrical.PVSystem.BaseClasses;
 model CellTemperatureOpenRack
-   "Model for determining the cell temperature of a PV module mounted on an 
+   "Empirical model for determining the cell temperature of a PV module mounted on an 
    open rack"
 
  extends AixLib.Electrical.PVSystem.BaseClasses.PartialCellTemperature;
