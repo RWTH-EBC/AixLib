@@ -13,7 +13,7 @@ model CellTemperatureOpenRack
 
 equation
 
- T_c = if noEvent(radTil >= 0.01) then
+ T_c = if noEvent(radTil >= Modelica.Constants.eps) then
  (T_a)+(T_NOCT-T_a_0)*radTil/radNOCT*9.5/(5.7+3.8*winVel)*(1-eta/coeff_trans_abs)
  else
  (T_a);
