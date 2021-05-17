@@ -112,7 +112,10 @@ model HeaterCoolerWithTabs6007C1
         iconTransformation(extent={{80,-26},{120,14}})));
 
 // operative Temperatur
-  TOpe tOpe "Calculates the operative temperature as mean of air and radiative temperature from thermal zone" annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  TOpe calcTOpe
+    "Calculates the operative temperature as mean of air and radiative temperature from thermal zone"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-136,68})));
   Modelica.Blocks.Interfaces.RealInput TAir "Indoor air temperature from thermal zone" annotation (Placement(transformation(extent={{20,-20},{-20,20}},
@@ -391,26 +394,26 @@ model HeaterCoolerWithTabs6007C1
 
 equation
 
-  connect(TAir, tOpe.TAir) annotation (Line(points={{-150,100},{-150,78},{-139.2,
-          78}},      color={0,0,127}));
-  connect(TRad, tOpe.TRad) annotation (Line(points={{-120,100},{-120,78},{-133,78}},
-                color={0,0,127}));
+  connect(TAir, calcTOpe.TAir) annotation (Line(points={{-150,100},{-150,78},{-139.2,
+          78}}, color={0,0,127}));
+  connect(TRad, calcTOpe.TRad) annotation (Line(points={{-120,100},{-120,78},{-133,
+          78}}, color={0,0,127}));
   connect(setPointHeat, pITempHeatPanel.setPoint) annotation (Line(points={{-160,
           50},{-68,50},{-68,22},{3.6,22},{3.6,21.2}}, color={0,0,127}));
   connect(setPointHeat, pITempHeatRem.setPoint) annotation (Line(points={{-160,50},
           {-68,50},{-68,22},{53.6,22},{53.6,21.2}}, color={0,0,127}));
-  connect(tOpe.TOpe, pITempHeatPanel.TOpe) annotation (Line(points={{-136,58},{-74,
-          58},{-74,6},{5.2,6}}, color={0,0,127}));
-  connect(tOpe.TOpe, pITempHeatRem.TOpe) annotation (Line(points={{-136,58},{-74,
-          58},{-74,6},{55.2,6}}, color={0,0,127}));
+  connect(calcTOpe.TOpe, pITempHeatPanel.TOpe) annotation (Line(points={{-136,
+          58},{-74,58},{-74,6},{5.2,6}}, color={0,0,127}));
+  connect(calcTOpe.TOpe, pITempHeatRem.TOpe) annotation (Line(points={{-136,58},
+          {-74,58},{-74,6},{55.2,6}}, color={0,0,127}));
   connect(setPointCool, pITempCoolPanel.setPoint) annotation (Line(points={{-160,
           -50},{-68,-50},{-68,-21.2},{3.6,-21.2}}, color={0,0,127}));
   connect(setPointCool, pITempCoolRem.setPoint) annotation (Line(points={{-160,-50},
           {-68,-50},{-68,-21.2},{53.6,-21.2}}, color={0,0,127}));
-  connect(tOpe.TOpe, pITempCoolPanel.TOpe) annotation (Line(points={{-136,58},{-74,
-          58},{-74,-6},{5.2,-6}}, color={0,0,127}));
-  connect(tOpe.TOpe, pITempCoolRem.TOpe) annotation (Line(points={{-136,58},{-74,
-          58},{-74,-6},{55.2,-6}}, color={0,0,127}));
+  connect(calcTOpe.TOpe, pITempCoolPanel.TOpe) annotation (Line(points={{-136,
+          58},{-74,58},{-74,-6},{5.2,-6}}, color={0,0,127}));
+  connect(calcTOpe.TOpe, pITempCoolRem.TOpe) annotation (Line(points={{-136,58},
+          {-74,58},{-74,-6},{55.2,-6}}, color={0,0,127}));
 
 // übernommen aus HeaterCoolerPI und nicht sicher was es macht
   if staOrDyn then

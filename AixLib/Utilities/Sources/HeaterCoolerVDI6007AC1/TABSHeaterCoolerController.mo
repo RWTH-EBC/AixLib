@@ -35,8 +35,9 @@ Modelica.Blocks.Sources.Constant TAirThresholdHeatingTabs(k=if not recOrSep then
         origin={-42,-20})));
 Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then TThreshold_Cool_Tabs else zoneParam.TThresholdCoolerTabs)
     "Threshold temperature above which cooling is activated" annotation (Placement(transformation(extent={{-86,-34},{-74,-22}})));
-  Math.MovingAverage movingAverage(aveTime=timeAverage)
-    "Calculates the moving average of ambient air temperature" annotation (Placement(transformation(extent={{-88,58},{-70,76}})));
+  Math.MovingAverage movingAverageTOutdoor(aveTime=timeAverage)
+    "Calculates the moving average of ambient air temperature"
+    annotation (Placement(transformation(extent={{-88,58},{-70,76}})));
   Modelica.Blocks.Logical.Switch switchHeater annotation (Placement(transformation(extent={{20,10},{40,30}})));
   Modelica.Blocks.Logical.Switch switchCooler annotation (Placement(transformation(extent={{20,-30},{40,-10}})));
   Modelica.Blocks.Sources.Constant off(k=0) annotation (Placement(transformation(extent={{-16,-6},{-2,8}})));
@@ -74,10 +75,12 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
   Modelica.Blocks.Logical.Switch switchHeater1 if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
      and tabsRoomTempControl))
     annotation (Placement(transformation(extent={{68,32},{88,52}})));
-  Math.MovingAverage movingAverage1(aveTime=timeAverage) if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
+  Math.MovingAverage movingAverageTOpe(aveTime=timeAverage) if
+                                                            ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
      and tabsRoomTempControl))
     "Calculates the moving average of operative indoor air temperature"
-    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
         rotation=0,
         origin={22,92})));
   Modelica.Blocks.Logical.Switch switchCooler1 if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
@@ -107,7 +110,7 @@ equation
 
   connect(TAirThresholdHeatingTabs.y, less.u2) annotation (Line(points={{-73.4,12},{-54,12}}, color={0,0,127}));
   connect(TAirThresholdCoolingTabs.y, greater.u2) annotation (Line(points={{-73.4,-28},{-54,-28}}, color={0,0,127}));
-  connect(weaBus.TDryBul, movingAverage.u) annotation (Line(
+  connect(weaBus.TDryBul, movingAverageTOutdoor.u) annotation (Line(
       points={{-94,91},{-94,67},{-89.8,67}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -115,12 +118,10 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(movingAverage.y, less.u1) annotation (Line(points={{-69.1,67},{-69.1,
-          68},{-66,68},{-66,20},{-54,20}},
-                                       color={0,0,127}));
-  connect(movingAverage.y, greater.u1) annotation (Line(points={{-69.1,67},{
-          -69.1,68},{-66,68},{-66,-20},{-54,-20}},
-                                             color={0,0,127}));
+  connect(movingAverageTOutdoor.y, less.u1) annotation (Line(points={{-69.1,67},
+          {-69.1,68},{-66,68},{-66,20},{-54,20}}, color={0,0,127}));
+  connect(movingAverageTOutdoor.y, greater.u1) annotation (Line(points={{-69.1,
+          67},{-69.1,68},{-66,68},{-66,-20},{-54,-20}}, color={0,0,127}));
   connect(off.y, switchHeater.u3) annotation (Line(points={{-1.3,1},{8,1},{8,12},
           {18,12}},     color={0,0,127}));
   connect(off.y, switchCooler.u3) annotation (Line(points={{-1.3,1},{8,1},{8,
@@ -135,18 +136,18 @@ equation
   if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
      and tabsRoomTempControl)) then
   connect(hysteresisHeating.y, switchHeater1.u2) annotation (Line(points={{40,59.4},{40,42},{66,42}}, color={255,0,255}));
-  connect(TOpe, movingAverage1.u) annotation (Line(points={{2,108},{1.5,108},{1.5,
-            92},{14.8,92}},   color={0,0,127}));
-  connect(movingAverage1.y, hysteresisHeating.u) annotation (Line(points={{28.6,92},
-            {40,92},{40,73.2}},                                                                         color={0,0,127}));
+    connect(TOpe, movingAverageTOpe.u) annotation (Line(points={{2,108},{1.5,
+            108},{1.5,92},{14.8,92}}, color={0,0,127}));
+    connect(movingAverageTOpe.y, hysteresisHeating.u)
+      annotation (Line(points={{28.6,92},{40,92},{40,73.2}}, color={0,0,127}));
   connect(switchHeater1.y, tabsHeatingPower) annotation (Line(points={{89,42},{
           94,42},{94,20},{110,20}}, color={0,0,127}));
   connect(off.y, switchCooler1.u3) annotation (Line(points={{-1.3,1},{8,1},{8,
           -50},{66,-50}}, color={0,0,127}));
   connect(switchCooler.y, switchCooler1.u1) annotation (Line(points={{41,-20},{
           52,-20},{52,-34},{66,-34}}, color={0,0,127}));
-  connect(movingAverage1.y, hysteresisCooling.u) annotation (Line(points={{28.6,92},
-            {30,92},{30,78},{20,78},{20,73.2}},   color={0,0,127}));
+    connect(movingAverageTOpe.y, hysteresisCooling.u) annotation (Line(points={
+            {28.6,92},{30,92},{30,78},{20,78},{20,73.2}}, color={0,0,127}));
   connect(hysteresisCooling.y, switchCooler1.u2) annotation (Line(points={{20,
           59.4},{20,36},{48,36},{48,-42},{66,-42}}, color={255,0,255}));
   connect(switchCooler1.y, tabsCoolingPower) annotation (Line(points={{89,-42},
@@ -168,11 +169,11 @@ equation
 
   connect(tabs_HeatingCurve.powerOutput, switchHeater.u1) annotation (Line(
         points={{9,42},{12,42},{12,28},{18,28}}, color={0,0,127}));
-  connect(movingAverage.y, tabs_HeatingCurve.tDryBul) annotation (Line(points={
-          {-69.1,67},{-40.55,67},{-40.55,42},{-12,42}}, color={0,0,127}));
+  connect(movingAverageTOutdoor.y, tabs_HeatingCurve.tDryBul) annotation (Line(
+        points={{-69.1,67},{-40.55,67},{-40.55,42},{-12,42}}, color={0,0,127}));
   connect(tabsCoolingCurve.powerOutput, switchCooler.u1) annotation (Line(
         points={{3,-46},{4,-46},{4,-12},{18,-12}}, color={0,0,127}));
-  connect(movingAverage.y, tabsCoolingCurve.tDryBul)
+  connect(movingAverageTOutdoor.y, tabsCoolingCurve.tDryBul)
     annotation (Line(points={{-69.1,67},{-18,67},{-18,-46}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
