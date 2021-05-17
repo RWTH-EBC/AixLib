@@ -65,8 +65,8 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
         rotation=-90,
         origin={2,108})));
   Modelica.Blocks.Logical.Hysteresis hysteresisHeating(
-    uLow=273.15 + 19,
-    uHigh=273.15 + 23,
+    uLow=273.15 + 21.1,
+    uHigh=273.15 + 22,
     pre_y_start=true) if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
      and tabsRoomTempControl)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -87,8 +87,8 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
      and tabsRoomTempControl))
     annotation (Placement(transformation(extent={{68,-52},{88,-32}})));
   Modelica.Blocks.Logical.Hysteresis hysteresisCooling(
-    uLow=273.15 + 21,
-    uHigh=273.15 + 25,
+    uLow=273.15 + 22,
+    uHigh=273.15 + 24,
     pre_y_start=false) if ((recOrSep and zoneParam.withTabsRoomTempControl) or (not recOrSep
      and tabsRoomTempControl)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -102,8 +102,9 @@ Modelica.Blocks.Sources.Constant TAirThresholdCoolingTabs(k=if not recOrSep then
 
   tabsHeatingCurve tabsCoolingCurve(
     power_high=if not recOrSep then power_Cooler_Tabs else zoneParam.powerCoolTabs,
-    T_upperlimit=273.15 + 22,
-    T_lowerlimit=273.15 + 18)
+    T_upperlimit=273.15 + 25,
+    T_lowerlimit=273.15 + 18,
+    heatingOrCooling=false)
     annotation (Placement(transformation(extent={{-18,-56},{2,-36}})));
 
 equation
