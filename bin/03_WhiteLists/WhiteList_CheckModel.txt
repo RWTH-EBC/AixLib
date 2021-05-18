@@ -13,7 +13,7 @@ Controls
 []
 
 BoundaryConditions
-[]
+['IBPSA.BoundaryConditions.Validation.IsotropicAndPerezDiffuseRadiation']
 
 Obsolete
 []
