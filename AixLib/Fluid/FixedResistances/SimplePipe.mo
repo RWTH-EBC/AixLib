@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model SimplePipe "Simple pipe model with n discrete elements"
 
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
@@ -52,7 +52,7 @@ model SimplePipe "Simple pipe model with n discrete elements"
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
 
-  parameter Boolean homotopyInitialization=true "= true, use homotopy method"
+  constant Boolean homotopyInitialization=true "= true, use homotopy method"
     annotation (Evaluate=true, Dialog(tab="Advanced"));
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"

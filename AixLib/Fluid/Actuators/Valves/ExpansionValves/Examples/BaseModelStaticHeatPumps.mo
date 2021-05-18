@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.StaticHeatPumpBoundaries;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples;
 model BaseModelStaticHeatPumps
   "Base model to test compressors using static heat pump boundaries"
   extends Modelica.Icons.Example;
@@ -6,7 +6,7 @@ model BaseModelStaticHeatPumps
   // Definition of medium
   //
   replaceable package Medium =
-    Modelica
+    Modelica.Media.R134a.R134a_ph
     constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
     "Medium of the compressor"
     annotation(Dialog(tab="General",group="General"),
