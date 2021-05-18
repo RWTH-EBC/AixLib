@@ -53,16 +53,17 @@ parameter HeatCapacityPerArea cDown;
     annotation (Placement(transformation(extent={{50,-36},{70,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConvWall
     annotation (Placement(transformation(extent={{-22,-110},{-2,-90}})));
-  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(A=A, eps=eps) annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(A=A_floor, eps=eps)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));
   Utilities.HeatTransfer.HeatConvInside HeatConv(
-    final A=A,
+    final A=A_floor,
     final calcMethod=calcMethod,
     final hCon_const=hCon_const,
-    surfaceOrientation=if isFloor then 2 else 1)
-    annotation (Placement(transformation(
+    surfaceOrientation=if isFloor then 2 else 1) annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1.77636e-015,74})));
@@ -83,6 +84,7 @@ parameter HeatCapacityPerArea cDown;
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-12,-56})));
+  parameter Modelica.SIunits.Area A_floor=A "Area of surface of wall / Floor";
 equation
 
   connect(port_a, TFlow.port_a) annotation (Line(

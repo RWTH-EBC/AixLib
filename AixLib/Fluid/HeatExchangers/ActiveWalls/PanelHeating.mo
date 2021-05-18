@@ -13,14 +13,16 @@ model PanelHeating
       choice = true "Floorheating",
       choice = false "Ceilingheating",
       radioButtons = true));
-
+  parameter Modelica.SIunits.Length Spacing=Modelica.Constants.pi * floorHeatingType.k_top *
+          floorHeatingType.diameter *
+          AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.logDT({floorHeatingType.Temp_nom[1],
+          floorHeatingType.Temp_nom[2],(floorHeatingType.q_dot_nom/8.92) ^ (1/1.1) + floorHeatingType.Temp_nom[3]}) / (floorHeatingType.q_dot_nom * 2) "Spacing of Pipe";
   parameter Integer dis(min=1) = 5 "Number of Discreatisation Layers";
 
   parameter Modelica.SIunits.Area A "Area of floor / heating panel part";
 
   parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
-
   parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient at surface" annotation (Dialog(group="Heat convection",
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
@@ -47,10 +49,10 @@ model PanelHeating
   final parameter BaseClasses.HeatCapacityPerArea
     cDown=cFloorHeating * (1-cTopRatio);
 
-  final parameter Modelica.SIunits.Length tubeLength=A/floorHeatingType.Spacing;
+  final parameter Modelica.SIunits.Length tubeLength=A/Spacing;
 
   final parameter Modelica.SIunits.Volume VWater=
-    Modelica.SIunits.Conversions.from_litre(floorHeatingType.VolumeWaterPerMeter*tubeLength)
+    Modelica.SIunits.Conversions.from_litre(Modelica.Constants.pi * floorHeatingType.diameter ^ 2 * tubeLength / 4)
       "Volume of Water";
 
   // ACCORDING TO GLUECK, Bauteilaktivierung 1999
@@ -81,7 +83,7 @@ model PanelHeating
   AixLib.Utilities.Interfaces.RadPort starRad annotation (Placement(transformation(extent={{-26,50},{-6,70}}), iconTransformation(extent={{-22,28},{-2,48}})));
   BaseClasses.PanelHeatingSegment panelHeatingSegment[dis](
     redeclare package Medium = Medium,
-    each final A=A/dis,
+    each final A=tubeLength * floorHeatingType.diameter * Modelica.Constants.pi / dis / 2,
     each final eps=eps,
     each final T0=T0,
     each final VWater=VWater/dis,
@@ -91,7 +93,8 @@ model PanelHeating
     each final cDown=cDown,
     each final isFloor=isFloor,
     each final calcMethod=calcMethod,
-    each final hCon_const=hCon_const) annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
+    each final hCon_const=hCon_const,
+    A_foor=A)                         annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
 
   BaseClasses.PressureDropPH pressureDrop(
     redeclare package Medium = Medium,

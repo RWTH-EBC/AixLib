@@ -7,12 +7,13 @@ parameter Modelica.SIunits.CoefficientOfHeatTransfer k_isolation "k_isolation of
 parameter Modelica.SIunits.CoefficientOfHeatTransfer k_top "Heat transfer coefficient for layers above tubes";
 parameter Modelica.SIunits.CoefficientOfHeatTransfer k_down "Heat transfer coefficient for layers underneath tubes";
 parameter Real VolumeWaterPerMeter(unit="l/m") "Water volume";
-parameter Modelica.SIunits.Length Spacing "Spacing of Pipe";
+
 parameter Modelica.SIunits.Emissivity eps "Emissivity of Floor";
 parameter AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.HeatCapacityPerArea C_ActivatedElement = 50000;
 parameter Real c_top_ratio;
 parameter Real PressureDropExponent;
 parameter Real PressureDropCoefficient;
+parameter Real diameter;
 
 annotation (Documentation(revisions="<html><ul>
   <li>

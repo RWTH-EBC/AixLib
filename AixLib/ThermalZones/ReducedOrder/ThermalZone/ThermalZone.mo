@@ -1,9 +1,10 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   parameter Integer internalGainsMode = 1
@@ -324,7 +325,7 @@ protected
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={48,36})));
-  Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) if
+  Modelica.Blocks.Sources.Constant TSoil(final k=TBasement) if
     zoneParam.AFloor > 0
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
@@ -390,6 +391,7 @@ public
     final til=zoneParam.tiltRoof)
     "Calculates diffuse solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
+  parameter Real TBasement=zoneParam.TSoil "Constant output value";
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
