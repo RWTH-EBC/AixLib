@@ -56,7 +56,7 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-This model generates four json files,
+This model generates four json files, 
 using a single or multiple inputs and at different points in time.
 </p>
 </html>", revisions="<html>
@@ -70,7 +70,8 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1114\">#1114</a>.
 </html>"),
     experiment(
       StopTime=2,
-      Tolerance=1e-06),
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Lsodar"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/Files/Examples/JSONWriter.mos"
         "Simulate and plot"));
 end JSONWriter;

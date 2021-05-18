@@ -106,6 +106,7 @@ partial model PartialModularController
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
+    final reverseAction=reverseAction,
     final reset=reset) if not useExt
     "Internal controller if internal controller is required"
     annotation (Placement(transformation(extent={{-70,30},{-50,50}})));

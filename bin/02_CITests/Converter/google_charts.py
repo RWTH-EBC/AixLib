@@ -8,50 +8,15 @@ from git import Repo
 from shutil import copyfile
 import shutil
 import pathlib
+import glob
+import gviz_api
+from matplotlib.pyplot import figure
+import mpld3
 # get datas and create a line chart
-def Create_Line_Chart():
 
-	html_chart = open("index.html", "w")
-	html_str ="""
-	<html>
-	  <head>
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-		  google.charts.load('current', {'packages':['corechart']});
-		  google.charts.setOnLoadCallback(drawChart);
-
-		  function drawChart() {
-			var data = google.visualization.arrayToDataTable([
-			  ['Year', 'Sales', 'Expenses'],
-			  ['2004',  1000,      400],
-			  ['2005',  1170,      460],
-			  ['2006',  660,       1120],
-			  ['2007',  1030,      540]
-			]);
-
-			var options = {
-			  title: 'Company Performance',
-			  curveType: 'function',
-			  legend: { position: 'bottom' }
-			};
-
-			var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-			chart.draw(data, options);
-		  }
-		</script>
-	  </head>
-	  <body>
-		<div id="curve_chart" style="width: 900px; height: 500px"></div>
-	  </body>
-	</html>
-	"""
-	
-	html_chart.write(html_str)
-	html_chart.close()
 
 def read_data():
-	ref_file = "AixLib_BoundaryConditions_WeatherData_BaseClasses_Examples_CheckRadiation.txt"
+	ref_file = "bin"+os.sep+"02_CITests"+os.sep+"Converter"+os.sep+"IBPSA_Airflow_Multizone_Examples_CO2TransportStep.txt"
 	Entire = 0
 	## Lists
 	Value_List= []
@@ -60,14 +25,14 @@ def read_data():
 	## Dictionary
 	distriction_values = {}
 	distriction_time = {}
-	
 	for line in open(ref_file, 'r'):
-		#line = line.lstrip()
 		if line.find("last-generated=") > -1:
 			continue
 		if line.find("statistics-simulation=") > -1: 
 			continue
 		values = (line.split("="))
+		if len(values) < 2:
+			continue
 		legend = values[0]
 		#print(legend)
 		numbers = values[1]
@@ -78,10 +43,6 @@ def read_data():
 		distriction_values[legend] = numbers
 		Value_List.append(legend)
 		continue
-	
-	
-	#print(distriction_values)
-	#print(Value_List)
 	for i in Value_List:
 		y = distriction_values.get(i)
 		y = y.split(",")
@@ -108,73 +69,27 @@ def read_data():
 	tim_seq = time_int/ (float(len(Y_Axis))/float(len(Value_List)))
 	
 	num_times = time_beg
-	#print(tim_seq)
 	times_list = []
 	t = ((float(len(Y_Axis))/float(len(Value_List))))
 	i = 0
 	while (i) < t:
-	#for i in Y_Axis:
 		times_list.append(num_times)
 		num_times = num_times + tim_seq
 		i = i +1
 	X_Axis = times_list
-	#print(times_list)
-	
 	
 	return  distriction_values, distriction_time, Value_List,X_Axis,ref_file
 	
-	'''
-	for v in x:
-		v = v.replace("[","")
-		v = v.replace("]","")
-		v = v.replace("\n","")
-		v = v.replace("'","")
-		v = v.lstrip()
-		v = float(v)
-		X_Axis.append(v)
-	print(X_Axis)
-	'''
-	'''
-	dia_name = ref_file.replace(".txt","")
-	dia_name = dia_name.replace("_",".")
-	plt.title(dia_name)
-	plt.xlabel("Time")
-	plt.ylabel(Value_List[0])
-	#plt.yticks(Y_Axis)
-	plt.plot(X_Axis, Y_Axis, marker = 'o', c = 'g')
-	  
-	plt.show()'''
-	
-	
-	'''
-		for i in values:
-			list = []
-			list = i.split("=")
-			if len(list) < 2:
-				continue
-			legend = list[0]
-			#print(legend)
-			numbers = list[1]
-			#print(numbers)
-			count= count +1
-			distriction[legend] = numbers
-		#print(count)	
-		print(distriction)
-		#X.append(values[0])
-		#Y.append(values[1])
-	'''
-	#plt.plot(X, Y)
-	#plt.show()
 	
 	
 def func_plot(distriction_values, distriction_time, Value_List,X_Axis,ref_file):
 	dia_name = ref_file.replace(".txt","")
 	dia_name = dia_name.replace("_",".")
 	
-	
-	
 	counter = 0
+	
 	fig, ax = plt.subplots()
+	lines_list = []
 	for i in Value_List:
 		Y_Axis = []
 		counter = counter + 1 
@@ -189,21 +104,24 @@ def func_plot(distriction_values, distriction_time, Value_List,X_Axis,ref_file):
 			v = float(v)
 			Y_Axis.append(v)
 						
-		l0, = ax.plot(X_Axis,Y_Axis, visible=False, lw=2)
+		l0, = ax.plot(X_Axis,Y_Axis, visible=False, lw=2, color='k', label=i)
+		lines_list.append(l0,)
+	lines = []
+	for k in lines_list:
+		lines.append(k)
 	
-	plt.subplots_adjust(left=0.2)
-	#print(X_Axis)
-	#rax = plt.axes(X_Axis)
-	rax = plt.axes([0.05, 0.4, 0.1, 0.15]) 
-	check = CheckButtons(rax, Value_List, [False,  True])
-	plt.title(dia_name)
+	
+	#check = CheckButtons(rax, Value_List, [False,  True])
+	#plt.title(dia_name)
 	#plt.xlabel("Time")
 	#plt.ylabel(Value_List[0])
 	#plt.yticks(Y_Axis)
-	check.on_clicked(func)
-
-	plt.show()
+	#check.on_clicked(func)
+	#plt.plot(X_Axis, Y_Axis, marker = 'o', c = 'g')
+	  
+	#plt.show()
 	
+	return lines, fig
 	
 def write_data_rows():
 	
@@ -229,12 +147,7 @@ def createFolder(directory):
         print ('Error: Creating directory. ' +  directory)
         
 
-
-
 def diff_ref(path_aix,path_ibpsa,path_diff,path_new):
-	
-	
-	
 	aix_ref_files = os.listdir(path_aix) 
 	ibpsa_ref_files = os.listdir(path_ibpsa) 
 	ibpsa_list = []
@@ -249,7 +162,6 @@ def diff_ref(path_aix,path_ibpsa,path_diff,path_new):
 	list3 = list(set3)
 	
 	for f in list3:
-		#
 		aix_ref = f
 		ibpsa_ref = f.replace("AixLib","IBPSA")
 		
@@ -295,8 +207,8 @@ def diff_ref(path_aix,path_ibpsa,path_diff,path_new):
 	new_ref =os.listdir(path_new)
 	return diff_ref, new_ref
 	
-def get_lines( filename ):
-    f = open( filename, "r" )
+def get_lines(filename):
+    f = open(filename,"r")
     lines = f.readline()
     f.close
     return lines
@@ -354,57 +266,268 @@ def add_new_ref(diff_ref,new_ref,path_aix,path_ibpsa,path_new,path_diff):
 	#shutil.copy2(source,path_new)'''
 		
 def func(label):
-    if label == '2 Hz':
-        l0.set_visible(not l0.get_visible())
-    elif label == '4 Hz':
-        l1.set_visible(not l1.get_visible())
-    elif label == '6 Hz':
-        l2.set_visible(not l2.get_visible())
-    plt.draw()
+	index = labels.index(label)
+	lines[index].set_visible(not lines[index].get_visible())
+	plt.draw()
 
-#def new_format():
+def diff_mos(path_aix_mos,path_ibpsa_mos,path_diff_mos,path_new_mos):
+	
+	aix_mos_files = glob.glob(path_aix_mos+os.sep+'**/*.mos',recursive=True)
+	ibpsa_mos_files = glob.glob(path_ibpsa_mos+os.sep+'**/*.mos',recursive=True)
+	
+	ibpsa_list = []
+	aixlib_list = []
+	## Give double mos files
+	for i in ibpsa_mos_files:
+		ibpsa_list.append(i.split(os.sep)[-1])
+	for i in aix_mos_files:
+		aixlib_list.append(i.split(os.sep)[-1])
+	
+	
+	set1 = set(aixlib_list)
+	set2 = set(ibpsa_list)
+	set3 = set1.intersection(set2)
+	list3 = list(set3)
+	for i in list3:
+		aixlib = glob.glob(path_aix_mos+os.sep+'**/*'+os.sep+i,recursive=True)
+		ibpsa = glob.glob(path_ibpsa_mos+os.sep+'**/*'+os.sep+i,recursive=True)
+		for l in aixlib:
+			aix = l
+			ibpsa = "modelica-ibpsa"+os.sep+l.replace("AixLib","IBPSA")
+			result = path_diff_mos +os.sep+l
+			result = (result.replace(os.sep+"AixLib"+os.sep+"Resources"+os.sep+"Scripts"+os.sep+"Dymola",""))
+			createFolder(result[:result.rfind(os.sep)])
+		
+			outputFile = open(result,"w")
+			inputFile1 = open(aix,"r")
+			inputFile2 = open(ibpsa,"r")
+			
+			line1 = inputFile1.readline()
+			line2 = inputFile2.readline()
+			line3 = line2.replace("IBPSA","AixLib")
+			while line1 != "" or line3 != "":
+				if line1 != line3:
+					outputFile.write("AixLib: "+line1)
+					outputFile.write("IBPSA: "+line2+"\n")
+					
+				line1 = inputFile1.readline()
+				line3 = inputFile2.readline()	
+			inputFile1.close()
+			inputFile2.close()
+			outputFile.close()
+			#print(result)
+			if os.stat(result).st_size == 0:  
+				os.remove(result)
+			
+	new_ref =(set1^set2)&set2
+	new_mos_list = []
+	for i in new_ref:
+		if i.find("ConvertIBPSA") > -1 :
+			continue
+		else:
+			ibpsa = glob.glob(path_ibpsa_mos+os.sep+'**/*'+os.sep+i,recursive=True)
+			new_mos_list.append(ibpsa)
+			source = path_new_mos+os.sep+i
+			for l in ibpsa:
+				shutil.copy2(l,source)
+	
+	
 	
 
+def removeEmptyFolders(path, removeRoot=True):
+  #'Function to remove empty folders'
+  if not os.path.isdir(path):
+    return
+
+  # remove empty subfolders
+  files = os.listdir(path)
+  if len(files):
+    for f in files:
+      fullpath = os.path.join(path, f)
+      if os.path.isdir(fullpath):
+        removeEmptyFolders(fullpath)
+
+  # if folder empty, delete it
+  files = os.listdir(path)
+  if len(files) == 0 and removeRoot:
+    #print("Removing empty folder: "+ path)
+    os.rmdir(path)
+
+def usageString():
+  'Return usage string to be output in error cases'
+  return 'Usage: %s directory [removeRoot]' % sys.argv[0]
+
+
+
+
+def main():
+	# Creating the data
+	description = {"name": ("string", "Name"),
+					 "salary": ("number", "Salary"),
+					 "full_time": ("boolean", "Full Time Employee")}
+	data = [{"name": "Mike", "salary": (10000, "$10,000"), "full_time": True},
+			  {"name": "Jim", "salary": (800, "$800"), "full_time": False},
+			  {"name": "Alice", "salary": (12500, "$12,500"), "full_time": True},
+			  {"name": "Bob", "salary": (7000, "$7,000"), "full_time": True}]
+
+	# Loading it into gviz_api.DataTable
+	data_table = gviz_api.DataTable(description)
+	data_table.LoadData(data)
+
+	# Create a JavaScript code string.
+	jscode = data_table.ToJSCode("jscode_data",
+								   columns_order=("name", "salary", "full_time"),
+								   order_by="salary")
+	# Create a JSON string.
+	json = data_table.ToJSon(columns_order=("name", "salary", "full_time"),
+							   order_by="salary")
+
+	# Put the JS code and JSON string into the template.
+	#print("Content-type: text/html")
+	  
+	#print( page_template % vars())
+	ref_file = "bin"+os.sep+"02_CITests"+os.sep+"Converter"+os.sep+"index.html"
+	file = open(ref_file,"w")
+	file.write(page_template % vars())
 
 if  __name__ == '__main__':
 	### Settings
-	
+	'''
 	path_aix = "AixLib"+os.sep+"Resources"+os.sep+"ReferenceResults"+os.sep+"Dymola"
 	path_ibpsa = "modelica-ibpsa"+os.sep+"IBPSA"+os.sep+"Resources"+os.sep+"ReferenceResults"+os.sep+"Dymola"
+	
+	path_aix_mos = "AixLib"+os.sep+"Resources"+os.sep+"Scripts"+os.sep+"Dymola"
+	path_ibpsa_mos = "modelica-ibpsa"+os.sep+"IBPSA"+os.sep+"Resources"+os.sep+"Scripts"+os.sep+"Dymola"
 	
 	path_diff = "bin"+os.sep+"03_WhiteLists"+os.sep+"Ref_list"+os.sep+"diff_ref"
 	createFolder(path_diff)
 	path_new  = "bin"+os.sep+"03_WhiteLists"+os.sep+"Ref_list"+os.sep+"new_ref"
 	createFolder(path_new)
 	
-	#Create_Line_Chart()
-	#read_data()
-	#write_data_rows()
-	#results = read_data()
-	#distriction_values = results[0]
-	#distriction_time = results[1]
-	#Value_List = results[2]
-	#ref_file = results[4]
-	#X_Axis = results[3]
-	#func_plot(distriction_values, distriction_time, Value_List,X_Axis,ref_file)
-	#func_plot.check.on_clicked(func)
+	path_diff_mos = "bin"+os.sep+"03_WhiteLists"+os.sep+"mos_list"+os.sep+"diff_mos"
+	createFolder(path_diff_mos)
+	path_new_mos  = "bin"+os.sep+"03_WhiteLists"+os.sep+"mos_list"+os.sep+"new_mos"
+	createFolder(path_new_mos)
 	
-	#plt.show()
-	'''
 	
-	print(results[0])
-	print("\n Abschnitt")
-	print(results[1])
-	print("\n Abschnitt")
-	print(results[2])
-	'''
 	_CloneRepository()
+	
 	results = diff_ref(path_aix,path_ibpsa,path_diff,path_new)
 	diff_ref = results[0]
 	new_ref = results[1]
 	
 	add_new_ref(diff_ref,new_ref,path_aix,path_ibpsa,path_new,path_diff)
 		
+	mos_results = diff_mos(path_aix_mos,path_ibpsa_mos,path_diff_mos,path_new_mos)
+	#print(mos_results)
 	
+	removeRoot = True
+	removeEmptyFolders(path_diff_mos, removeRoot)
+	
+	
+	'''
+	
+	
+	#write_data_rows()
+	results = read_data()
+	## Value Number with Legend
+	distriction_values = results[0]
+	## Value time with time sequence
+	distriction_time = results[1]
+	## Legend name
+	Value_List = results[2]
+	## Reference File
+	ref_file = results[4]
+	## Number value 
+	X_Axis = results[3]
+	
+
+	
+	result = func_plot(distriction_values, distriction_time, Value_List,X_Axis,ref_file)
+	lines = result[0]
+	fig = result[1]
+	plt.subplots_adjust(left=0.2)
+	rax = plt.axes([0.05, 0.4, 0.1, 0.15]) 
+	labels = [str(line.get_label()) for line in lines]
+	visibility = [line.get_visible() for line in lines]
+	check = CheckButtons(rax, labels, visibility)
+	
+	#check.on_clicked(func)
+	check.on_clicked(func)
+	
+	t = plt.show()
+	#func_plot.check.on_clicked(func)
+	#Create_Line_Chart(distriction_values, distriction_time, Value_List,X_Axis,ref_file)
+	#mpld3.save_html(fig,'myfig.html')
+	
+	
+	fig = figure()
+	ax = fig.gca()
+	ax.plot([1,2,3,4])
+	#print(type(fig))
+	mpld3.save_html(fig,'myfig.html')
+	
+	
+	'''
+			
+	page_template = """
+	<html>
+	<head>
+	  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+		  google.charts.load('current', {'packages':['line']});
+		  google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart() {
+
+		  var data = new google.visualization.DataTable();
+		  data.addColumn('number', 'Day');
+		  data.addColumn('number', 'Guardians of the Galaxy');
+		  data.addColumn('number', 'The Avengers');
+		  data.addColumn('number', 'Transformers: Age of Extinction');
+
+		  data.addRows([
+			[1,  37.8, 80.8, 41.8],
+			[2,  30.9, 69.5, 32.4],
+			[3,  25.4,   57, 25.7],
+			[4,  11.7, 18.8, 10.5],
+			[5,  11.9, 17.6, 10.4],
+			[6,   8.8, 13.6,  7.7],
+			[7,   7.6, 12.3,  9.6],
+			[8,  12.3, 29.2, 10.6],
+			[9,  16.9, 42.9, 14.8],
+			[10, 12.8, 30.9, 11.6],
+			[11,  5.3,  7.9,  4.7],
+			[12,  6.6,  8.4,  5.2],
+			[13,  4.8,  6.3,  3.6],
+			[14,  4.2,  6.2,  3.4]
+		  ]);
+
+		  var options = {
+			chart: {
+			  title: 'Box Office Earnings in First Two Weeks of Opening',
+			  subtitle: 'in millions of dollars (USD)'
+			},
+			width: 900,
+			height: 500,
+			axes: {
+			  x: {
+				0: {side: 'bottom'}
+			  }
+			}
+		  };
+
+		  var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+		  chart.draw(data, google.charts.Line.convertOptions(options));
+		}
+	  </script>
+	</head>
+	<body>
+	  <div id="line_top_x"></div>
+	</body>
+
+	"""
+	main()'''
 	
 	

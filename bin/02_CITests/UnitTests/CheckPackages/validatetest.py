@@ -14,7 +14,7 @@ from sort_models import git_models
 import time 
 import glob
 from threading import Thread, Event
-import time
+
  
 class Git_Repository_Clone(object):
 	"""work with Repository in Git"""

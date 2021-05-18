@@ -6,10 +6,9 @@ model Damper
 
   AixLib.Fluid.Actuators.Dampers.Exponential res(
     redeclare package Medium = Medium,
-    use_inputFilter=false,
-    dpDamper_nominal=10,
     m_flow_nominal=1,
-    k1=0.45) "A damper with quadratic relationship between m_flow and dp"
+    use_inputFilter=false)
+    "A damper with quadratic relationship between m_flow and dp"
     annotation (Placement(transformation(extent={{0,30},{20,50}})));
 
     Modelica.Blocks.Sources.Ramp yRam(
@@ -37,7 +36,7 @@ model Damper
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     dpFixed_nominal=5,
-    dpDamper_nominal=10)
+    dp_nominal=10)
     "A damper with a mass flow proportional to the input signal and using dpFixed_nominal"
     annotation (Placement(transformation(extent={{0,-90},{20,-70}})));
 
@@ -46,7 +45,7 @@ model Damper
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     dpFixed_nominal=0,
-    dpDamper_nominal=10,
+    dp_nominal=10,
     from_dp=false)
     "A damper with a mass flow proportional to the input signal and using from_dp = false"
     annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
@@ -54,7 +53,7 @@ model Damper
   AixLib.Fluid.Actuators.Dampers.PressureIndependent preInd(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    dpDamper_nominal=10,
+    dp_nominal=10,
     use_inputFilter=false)
     "A damper with a mass flow proportional to the input signal"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));

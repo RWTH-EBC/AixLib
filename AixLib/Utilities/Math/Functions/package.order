@@ -14,7 +14,6 @@ fallingFactorial
 integerReplicator
 inverseXRegularized
 isMonotonic
-linearInterpolation
 polynomial
 powerLinearized
 quadraticLinear
@@ -30,5 +29,6 @@ smoothMin
 spliceFunction
 splineDerivatives
 trapezoidalIntegration
+linearInterpolation
 Examples
 BaseClasses

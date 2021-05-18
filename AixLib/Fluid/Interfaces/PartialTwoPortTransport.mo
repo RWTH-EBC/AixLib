@@ -21,14 +21,10 @@ partial model PartialTwoPortTransport
   // Diagnostics
   parameter Boolean show_T = true
     "= true, if temperatures at port_a and port_b are computed"
-    annotation(
-      Dialog(tab="Advanced", group="Diagnostics"),
-      HideResult=true);
+    annotation(Dialog(tab="Advanced",group="Diagnostics"));
   parameter Boolean show_V_flow = true
     "= true, if volume flow rate at inflowing port is computed"
-    annotation(
-      Dialog(tab="Advanced", group="Diagnostics"),
-      HideResult=true);
+    annotation(Dialog(tab="Advanced",group="Diagnostics"));
 
   // Variables
   Medium.MassFlowRate m_flow(
@@ -125,12 +121,6 @@ users have not used this global definition to assign parameters.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>
-March 30, 2021, by Michael Wetter:<br/>
-Added annotation <code>HideResult=true</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">AixLib, #1459</a>.
-</li>
 <li>
 September 15, 2016, by Michael Wetter:<br/>
 Removed wrong annotation, which caused an error in the pedantic model check

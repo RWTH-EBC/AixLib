@@ -105,7 +105,7 @@ partial model PartialCompressor
                enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses
                         or simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
                         then true else false));
-  constant Boolean homotopyInitialization=true
+  parameter Boolean homotopyInitialization=true
     "= true, use homotopy method  for initialisation"
     annotation(Dialog(tab = "Pressure losses",group="Advanced",
                enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses

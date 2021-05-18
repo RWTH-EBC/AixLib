@@ -10,9 +10,6 @@ partial model PartialWaterToWater
     "Refrigerant in the component"
     annotation (choicesAllMatching = true);
 
-  constant Boolean homotopyInitialization = true "= true, use homotopy method"
-    annotation(HideResult=true);
-
   parameter Boolean enable_variable_speed = true
     "Set to true to allow modulating of compressor speed";
 
@@ -44,6 +41,8 @@ partial model PartialWaterToWater
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Evaporator and condenser"));
 
+  parameter Boolean homotopyInitialization=true "= true, use homotopy method"
+    annotation (Dialog(tab="Advanced"));
   parameter Boolean enable_temperature_protection = true
     "Enable temperature protection"
     annotation(Evaluate=true, Dialog(group="Temperature protection"));
@@ -150,11 +149,6 @@ protected
     final dTHys=dTHys) if enable_temperature_protection
     "Disables compressor when outside of allowed operation range"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-
-initial equation
-  assert(homotopyInitialization, "In " + getInstanceName() +
-    ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
-    level = AssertionLevel.warning);
 
 equation
   if enable_temperature_protection then
@@ -319,12 +313,6 @@ PhD Thesis. Oklahoma State University. Stillwater, Oklahoma, USA. 2012.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-Changed <code>homotopyInitialization</code> to a constant.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib, #1341</a>.
-</li>
 <li>
 May 30, 2017, by Filip Jorissen:<br/>
 Added temperature protection block and

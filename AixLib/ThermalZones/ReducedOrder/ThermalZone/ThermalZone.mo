@@ -1,10 +1,9 @@
-﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby
-    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   parameter Integer internalGainsMode = 1
@@ -97,6 +96,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     final wfGro=zoneParam.wfGro,
     final hConWallOut=zoneParam.hConWallOut,
     final hRad=zoneParam.hRadWall,
+    final use_sunblind=sum(zoneParam.ATransparent) > 0,
     final hConWinOut=zoneParam.hConWinOut,
     final aExt=zoneParam.aExt,
     final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0

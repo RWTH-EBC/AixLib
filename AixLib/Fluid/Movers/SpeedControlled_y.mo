@@ -64,12 +64,31 @@ equation
     annotation (defaultComponentName="fan",
     Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
             100}}),
-         graphics={
-        Text(
-          extent={{-40,126},{-160,76}},
+            graphics={
+            Text(
+              extent={{6,136},{104,114}},
           lineColor={0,0,127},
-          visible=inputType == AixLib.Fluid.Types.InputType.Continuous or inputType == AixLib.Fluid.Types.InputType.Stages,
-          textString=DynamicSelect("y", if inputType == AixLib.Fluid.Types.InputType.Continuous then String(y, format=".2f") else String(stage)))}),
+          textString="y [0..1]"),
+        Rectangle(
+          visible=use_inputFilter,
+          extent={{-34,40},{32,100}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          visible=use_inputFilter,
+          extent={{-34,100},{32,40}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Text(
+          visible=use_inputFilter,
+          extent={{-22,92},{20,46}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid,
+          textString="M",
+          textStyle={TextStyle.Bold})}),
     Documentation(info="<html>
 <p>
 This model describes a fan or pump with prescribed normalized speed.
@@ -90,12 +109,6 @@ User's Guide</a> for more information.
 </html>",
       revisions="<html>
 <ul>
-<li>
-February 21, 2020, by Michael Wetter:<br/>
-Changed icon to display its operating stage.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
-</li>
 <li>
 March 24, 2017, by Michael Wetter:<br/>
 Renamed <code>filteredSpeed</code> to <code>use_inputFilter</code>.<br/>
