@@ -16,6 +16,8 @@ EquationOfTime
 GetAbsolutePath
 GetHeaderElement
 GetTimeSpanTMY3
+GetTimeSpanTMY3LongHeader
 GetTimeSpanTMY3_NonzeroStart
+LimitMin
 LocalCivilTime
 SolarTime

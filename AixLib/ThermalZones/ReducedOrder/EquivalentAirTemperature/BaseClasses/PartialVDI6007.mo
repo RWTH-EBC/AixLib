@@ -18,7 +18,6 @@ partial model PartialVDI6007
   parameter Boolean withLongwave=true
     "Set to true to include longwave radiation exchange"
     annotation(choices(checkBox = true));
-  parameter Boolean use_sunblind=true "Should the model be able to block solar irradiance";
 
   Modelica.SIunits.Temperature TEqWall[n] "Equivalent wall temperature";
   Modelica.SIunits.Temperature TEqWin[n] "Equivalent window temperature";
@@ -55,19 +54,13 @@ partial model PartialVDI6007
   Modelica.Blocks.Interfaces.RealInput sunblind[n](
     each min=0,
     each max=1,
-    each final unit="1") if use_sunblind
-    "Opening factor of sunblinds for each direction (1 - open(no shading) to 0 - closed(100% shaded))"
+    each final unit="1")
+    "Opening factor of sunblinds for each direction (0 - open to 1 - closed)"
     annotation (Placement(
     transformation(
     extent={{-20,-20},{20,20}},
     rotation=-90,
     origin={0,120})));
-
-protected
-  Modelica.Blocks.Interfaces.RealInput sunblind_internal[n](
-    each min=0,
-    each max=1,
-    each final unit="1") "Needed to connect to conditional connector";
 
 initial equation
   assert(noEvent(abs(sum(wfWall) + sum(wfWin) + wfGro) > 0.1),
@@ -77,17 +70,10 @@ initial equation
    irrelevant.", level=AssertionLevel.warning);
 
 equation
-
-  connect(sunblind, sunblind_internal);
-
-  if not use_sunblind then
-    sunblind_internal = ones(n);
-  end if;
-
   delTEqLW=(TBlaSky - TDryBul)*hRad/(hRad + hConWallOut);
   delTEqSW=HSol*aExt/(hRad + hConWallOut);
   if withLongwave then
-    TEqWin=TDryBul.+delTEqLWWin*sunblind_internal;
+    TEqWin=TDryBul.+delTEqLWWin*(ones(n)-sunblind);
     TEqWall=TDryBul.+delTEqLW.+delTEqSW;
   else
     TEqWin=TDryBul*ones(n);
@@ -128,8 +114,9 @@ equation
   Line(points={{2,-78},{32,-48},{100,-48}}, color={0,0,0}),
   Line(points={{32,20},{32,-48}}, color={0,0,0})}),
   Documentation(info="<html>
-<p><span style=\"font-family: Courier New;\">PartialVDI6007</span> is a partial model for <span style=\"font-family: Courier New;\">EquivalentAirTemperature</span> models. </p><p>Sunblinds are assumed to be external with ideal rear ventilation -&gt; no increase of window temperature if sunblinds block all irradiation. </p>
-</html>",
+  <p><code>PartialVDI6007</code> is a partial model for <code>EquivalentAirTemperature</code>
+  models.</p>
+  </html>",
   revisions="<html>
   <ul>
   <li>
