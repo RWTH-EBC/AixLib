@@ -16,7 +16,7 @@ model PanelHeating
   parameter Modelica.SIunits.Length Spacing=Modelica.Constants.pi * floorHeatingType.k_top *
           floorHeatingType.diameter *
           AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.logDT({floorHeatingType.Temp_nom[1],
-          floorHeatingType.Temp_nom[2],(floorHeatingType.q_dot_nom/8.92) ^ (1/1.1) + floorHeatingType.Temp_nom[3]}) / (floorHeatingType.q_dot_nom * 2) "Spacing of Pipe";
+          floorHeatingType.Temp_nom[2],floorHeatingType.Temp_nom[3]}) / (floorHeatingType.q_dot_nom * 2) "Spacing of Pipe";
   parameter Integer dis(min=1) = 5 "Number of Discreatisation Layers";
 
   parameter Modelica.SIunits.Area A "Area of floor / heating panel part";
@@ -94,7 +94,7 @@ model PanelHeating
     each final isFloor=isFloor,
     each final calcMethod=calcMethod,
     each final hCon_const=hCon_const,
-    A_foor=A)                         annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
+    A_floor=A)                        annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
 
   BaseClasses.PressureDropPH pressureDrop(
     redeclare package Medium = Medium,
