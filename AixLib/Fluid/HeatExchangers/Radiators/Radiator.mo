@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.Radiators;
+within AixLib.Fluid.HeatExchangers.Radiators;
 model Radiator "Radiator multilayer model"
   import Modelica.SIunits;
   import calcT =
