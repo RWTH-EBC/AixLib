@@ -217,7 +217,8 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
   Modelica.Blocks.Interfaces.RealInput T[nu](final unit="K", final quantity="Thermodynamical Temperature") if use_moisture_balance and
     ATot > 0
     "Input Temperatures of different moisture sources"
-    annotation (Placement(transformation(extent={{-264,-112},{-232,-80}})));
+    annotation (Placement(transformation(extent={{-266,-116},{-234,-84}}),
+        iconTransformation(extent={{-264,-112},{-232,-80}})));
   Modelica.Blocks.Interfaces.RealInput QLat_flow[nu](final unit="W", final
       quantity="HeatFlowRate") if use_moisture_balance and
     ATot > 0 "Input of QLat of different moisture sources in the zone"
@@ -439,12 +440,13 @@ equation
           {-52,90},{-260,90}}, color={0,0,127}));
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
           90},{-260,90}}, color={0,0,127}));
-  connect(QLat_flow, sumQLat.u) annotation (Line(points={{-250,-144},{-225.2,-144},
-          {-225.2,-120}}, color={0,0,127}));
+  connect(QLat_flow, sumQLat.u) annotation (Line(points={{-250,-144},{-230,-144},
+          {-230,-120},{-225.2,-120}},
+                          color={0,0,127}));
   connect(divisionMI2MO.y, sumM_flow.u)
     annotation (Line(points={{-187.5,-94},{-183.2,-94}}, color={0,0,127}));
-  connect(T, toH_fg.u) annotation (Line(points={{-248,-96},{-226,-96},{-226,-96.12},{-222.12,
-          -96.12}},                  color={0,0,127}));
+  connect(T, toH_fg.u) annotation (Line(points={{-250,-100},{-226,-100},{-226,
+          -96.12},{-222.12,-96.12}}, color={0,0,127}));
   connect(toH_fg.y, divisionMI2MO.u2) annotation (Line(points={{-209.88,-96.12},{-204,-96.12},{-204,
           -96},{-202,-96},{-202,-97.6},{-199,-97.6}},                     color=
          {0,0,127}));

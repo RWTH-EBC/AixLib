@@ -1,11 +1,11 @@
-within AixLib.Fluid.Pools;
+﻿within AixLib.Fluid.Pools;
 model IndoorSwimmingPool
 
   package Medium = AixLib.Media.Water (
       cp_const=4180,
       d_const=995.65,
       eta_const=0.00079722,
-      lambda_const=0.61439);
+      lambda_const=0.61439); //Water properties for water with 30 °C
 
   parameter DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam
     "Choose setup for this swimming pool" annotation (choicesAllMatching=true);
@@ -13,6 +13,7 @@ model IndoorSwimmingPool
   //Calculated from record/input data
 
   final parameter Modelica.SIunits.MassFlowRate m_flow_start = poolParam.Q* Medium.d_const "Mass Flow Rate from Storage to Pool at the beginning";
+  final parameter Modelica.SIunits.MassFlowRate m_flow_start_2 = poolParam.Q_night* Medium.d_const "Mass Flow Rate from Storage to Pool at the beginning";
   final parameter Modelica.SIunits.MassFlowRate m_flow_recycledStart=poolParam.Q*poolParam.x_recycling
                                                                            "Nominal Mass Flow Rate for recycled water, min to catch zero flow";
 
@@ -26,11 +27,10 @@ model IndoorSwimmingPool
       Modelica.Media.Air.ReferenceMoistAir.Utilities.Water95_Utilities.psat(
       TAir)
            "Saturation pressure at air temperature of the zone";
-  Modelica.SIunits.HeatFlowRate Q_pool(start=0)
-                                               "Heat demand of swimming pool";
-  Modelica.SIunits.HeatFlowRate Q_sum(start=0) "Heat demand of swimming pool";
-  Modelica.SIunits.HeatFlowRate Q_FW(start=0)  "Heat demand to bring fresh water to pool temp";
-  Real phi(start=0)  "Relative humidty";
+  Modelica.SIunits.HeatFlowRate Q_pool         "Heat demand of swimming pool";
+  Modelica.SIunits.HeatFlowRate Q_sum "Heat demand of swimming pool";
+  Modelica.SIunits.HeatFlowRate Q_FW  "Heat demand to bring fresh water to pool temp";
+  Real phi  "Relative humidty";
 
   // Fixed parameters and constants
 
@@ -40,13 +40,11 @@ model IndoorSwimmingPool
   final parameter Modelica.SIunits.Pressure pumpHead = 170000
     "Expected average flow resistance of watertreatment cycle";
   final parameter Real epsilon = 0.9*0.95
-    "Product of expected emission coefficients of water and the surrounding wall surfaces";
+    "Product of expected emission coefficients of water (0.95) and the surrounding wall surfaces (0.95)";
   final constant Modelica.SIunits.CoefficientOfHeatTransfer alpha_Air=3.5
-    "Coefficient of heat transfer between the water surface and the room air";
-  final constant Modelica.SIunits.CoefficientOfHeatTransfer alpha_W=820
-    "Coefficient of heat transfer between the water and the pool walls";
+    "Coefficient of heat transfer between the water surface and the room air"; // approximated for free and forced convection at velocities between 0,05 to 0,2 m/s  above a plane
   final constant Real R_D(final unit="J/(kg.K)") = 461.52
-    "Specific gas constant for steam";
+    "Specific gas constant for steam"; // source: Lucas, Klaus Thermodynamik (2008)
 
   // Flow variables
   Modelica.SIunits.MassFlowRate m_flow_evap( start= 0.001)
@@ -86,7 +84,7 @@ model IndoorSwimmingPool
           {8,26}})));
   Sources.Boundary_pT souFW(
     redeclare package Medium = Medium,
-    T=288.15,
+    T=283.15,
     nPorts=1) "Source for fresh water"
     annotation (Placement(transformation(extent={{-94,-100},{-82,-88}})));
   Sources.Boundary_pT souRW(
@@ -208,11 +206,11 @@ model IndoorSwimmingPool
       rotation=180,
       origin={107,55})));
 
-  BaseClasses.PumpAndPressureDrop circPump(
+  BaseClasses.PumpAndPressureDrop  circPump(
     final replaceable package Medium = Medium,
     final m_flow_nominal=m_flow_start,
     final pumpHead=pumpHead,
-    p_start=200000,
+    p_start=101300,
     T_water=poolParam.T_pool)
     "Pumping system to depict power consumption and set the right mass flow rate"
     annotation (Placement(transformation(
@@ -243,7 +241,7 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{44,-52},{58,-40}})));
   Sources.Boundary_pT preBou(
     redeclare package Medium = Medium,
-    p=200000,
+    p=101300,
     nPorts=1) annotation (Placement(transformation(extent={{38,10},{30,18}})));
   Modelica.Blocks.Interfaces.RealOutput MFlowFW(final quantity="MassFlowRate", final
       unit="kg/s") "Fresh water to compensate waste water and evaporation losses"
@@ -533,5 +531,21 @@ connect(convWaterSurface.fluid, convPoolSurface)
     experiment(
       StopTime=3153600,
       Interval=600,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"),
+    Documentation(info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>Model for indoor swimming pools to calculate energy and water demands. Optional use of a wave machine, pool cover, partial load for the circulation pump and recirculation of waste water (recycling is reduced to the input of warm water instead of cold fresh water). </p>
+<p><br><br><img src=\"C:/Users/vda-apo/sciebo/Austausch Verena-Anna/Austausch Modelica/AbbildungInfoTextmini.jpg\"/> </p>
+<h4>Important parameters and Inputs </h4>
+<p>All pool specific parameters are collected in one <a href=\"AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord\">AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord</a> record.</p>
+<p>Needs a profil for the opening hours and for the operation of the wave machine. </p>
+<p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
+<p>The number of people in the swimming pool does not affect the evaporation. There are only two states: used and not used. There are no water losses or heat gains due to people entering or leaving the swimming pool. </p>
+<h4>References </h4>
+<ul>
+<li>German Association of Engineers: Guideline VDI 2089-1, January 2010: Building Services in swimming baths - Indoor Pools</li>
+<li>German Institute for Standardization DIN 19643-1, November 2012: Treatment of water of swimming pools and baths - Part 1 General Requirements</li>
+<li>Chroistoph Saunus, 2005: Schwimmb&auml;der Planung - Ausf&uuml;hrung - Betrieb</li>
+</ul>
+</html>"));
 end IndoorSwimmingPool;

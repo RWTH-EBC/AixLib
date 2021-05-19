@@ -3,27 +3,27 @@ record IndoorSwimmingPoolBaseRecord
   extends Modelica.Icons.Record;
 
   parameter Modelica.SIunits.Temperature T_pool "Water temperature of swimming pool";
-  parameter Modelica.SIunits.Volume V_storage "Usable Volume of water storage";
-  parameter Modelica.SIunits.Volume V_pool "Usable Volume of pool water";
+  parameter Modelica.SIunits.Volume V_storage "Usable Volume of water storage, DIN 19643-1";
+  parameter Modelica.SIunits.Volume V_pool "Volume of pool water";
   parameter Modelica.SIunits.Area A_pool( min=0)
                                                 "Area of water surface of swimming pool";
   parameter Modelica.SIunits.Length d_pool( min=0)
-                                             "Depth of swimming pool";
+                                             "Average depth of swimming pool";
   parameter Modelica.SIunits.VolumeFlowRate Q(min= 0.001) "Volume Flow Rate";
 
-  parameter Real beta_inUse( final unit="m/s") "Water transfer coefficient during opening hours";
+  parameter Real beta_inUse( final unit="m/s") "Water transfer coefficient during opening hours, VDI 2089";
 
 
   parameter Boolean use_poolCover=false "Pool covered during non opening hours";
   parameter Boolean use_partialLoad=false  "Partial load operation implemented for the non opening hours?";
-  parameter Modelica.SIunits.VolumeFlowRate Q_night( min=0) "In case of partial load: mass flow rate during non-opening hours";
+  parameter Modelica.SIunits.VolumeFlowRate Q_night( min=0) "In case of partial load: mass flow rate during non-opening hours, DIN 19643-1";
   parameter Boolean use_waterRecycling= false
                                          "Recycled water used for refilling pool water?";
-  parameter Real x_recycling( min=0)   "Percentage of fill water which comes from the recycling unit";
+  parameter Real x_recycling( min=0)   "Percentage of fill water which comes from the recycling unit, DIN 19643-1: <= 0,8";
 
 
   parameter Modelica.SIunits.MassFlowRate m_flow_out( min=0.0001)
-                                                              "Waterexchange due to people in the pool";
+                                                              "Waterexchange due to people in the pool, DIN 19643-1";
 
  // Wave mode
   parameter Boolean use_wavePool=false "Is there a wave machine installed?";
@@ -63,4 +63,18 @@ record IndoorSwimmingPoolBaseRecord
 
 
 
+  annotation (Documentation(info="<html>
+
+  This is the base definition of indoor swimming pool records used in <a href=
+  \"AixLib.Fluid.Pools.IndoorSwimmingPool\">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+  It aggregates all parameters at one record to enhance usability,
+  exchanging entire datasets and automatic generation of these
+  datasets.
+<h4>References </h4>
+<ul>
+<li>German Association of Engineers: Guideline VDI 2089-1, January 2010: Building Services in swimming baths - Indoor Pools</li>
+<li>German Institute for Standardization DIN 19643-1, November 2012: Treatment of water of swimming pools and baths - Part 1 General Requirements</li>
+<li>Chroistoph Saunus, 2005: Schwimmb&auml;der Planung - Ausf&uuml;hrung - Betrieb</li>
+</ul>
+</html>"));
 end IndoorSwimmingPoolBaseRecord;
