@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Pools;
+within AixLib.Fluid.Pools;
 model IndoorSwimmingPool
 
   package Medium = AixLib.Media.Water (
@@ -532,20 +532,56 @@ connect(convWaterSurface.fluid, convPoolSurface)
       StopTime=3153600,
       Interval=600,
       __Dymola_Algorithm="Dassl"),
-    Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Model for indoor swimming pools to calculate energy and water demands. Optional use of a wave machine, pool cover, partial load for the circulation pump and recirculation of waste water (recycling is reduced to the input of warm water instead of cold fresh water). </p>
-<p><br><br><img src=\"C:/Users/vda-apo/sciebo/Austausch Verena-Anna/Austausch Modelica/AbbildungInfoTextmini.jpg\"/> </p>
-<h4>Important parameters and Inputs </h4>
-<p>All pool specific parameters are collected in one <a href=\"AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord\">AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord</a> record.</p>
-<p>Needs a profil for the opening hours and for the operation of the wave machine. </p>
-<p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
-<p>The number of people in the swimming pool does not affect the evaporation. There are only two states: used and not used. There are no water losses or heat gains due to people entering or leaving the swimming pool. </p>
-<h4>References </h4>
+    Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Model for indoor swimming pools to calculate energy and water
+  demands. Optional use of a wave machine, pool cover, partial load for
+  the circulation pump and recirculation of waste water (recycling is
+  reduced to the input of warm water instead of cold fresh water).
+</p>
+<p>
+  <br/>
+  <br/>
+  <img src=
+  \"C:/Users/vda-apo/sciebo/Austausch%20Verena-Anna/Austausch%20Modelica/AbbildungInfoTextmini.jpg\">
+</p>
+<h4>
+  Important parameters and Inputs
+</h4>
+<p>
+  All pool specific parameters are collected in one <a href=
+  \"AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord\">AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord</a>
+  record.
+</p>
+<p>
+  Needs a profil for the opening hours and for the operation of the
+  wave machine.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Assumptions</span></b>
+</p>
+<p>
+  The number of people in the swimming pool does not affect the
+  evaporation. There are only two states: used and not used. There are
+  no water losses or heat gains due to people entering or leaving the
+  swimming pool.
+</p>
+<h4>
+  References
+</h4>
 <ul>
-<li>German Association of Engineers: Guideline VDI 2089-1, January 2010: Building Services in swimming baths - Indoor Pools</li>
-<li>German Institute for Standardization DIN 19643-1, November 2012: Treatment of water of swimming pools and baths - Part 1 General Requirements</li>
-<li>Chroistoph Saunus, 2005: Schwimmb&auml;der Planung - Ausf&uuml;hrung - Betrieb</li>
+  <li>German Association of Engineers: Guideline VDI 2089-1, January
+  2010: Building Services in swimming baths - Indoor Pools
+  </li>
+  <li>German Institute for Standardization DIN 19643-1, November 2012:
+  Treatment of water of swimming pools and baths - Part 1 General
+  Requirements
+  </li>
+  <li>Chroistoph Saunus, 2005: Schwimmbäder Planung - Ausführung -
+  Betrieb
+  </li>
 </ul>
 </html>"));
 end IndoorSwimmingPool;

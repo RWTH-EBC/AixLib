@@ -63,18 +63,25 @@ record IndoorSwimmingPoolBaseRecord
 
 
 
-  annotation (Documentation(info="<html>
-
-  This is the base definition of indoor swimming pool records used in <a href=
-  \"AixLib.Fluid.Pools.IndoorSwimmingPool\">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
-  It aggregates all parameters at one record to enhance usability,
-  exchanging entire datasets and automatic generation of these
-  datasets.
-<h4>References </h4>
+  annotation (Documentation(info="<html>This is the base definition of indoor swimming pool records used in
+<a href=
+\"AixLib.Fluid.Pools.IndoorSwimmingPool\">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
+It aggregates all parameters at one record to enhance usability,
+exchanging entire datasets and automatic generation of these datasets.
+<h4>
+  References
+</h4>
 <ul>
-<li>German Association of Engineers: Guideline VDI 2089-1, January 2010: Building Services in swimming baths - Indoor Pools</li>
-<li>German Institute for Standardization DIN 19643-1, November 2012: Treatment of water of swimming pools and baths - Part 1 General Requirements</li>
-<li>Chroistoph Saunus, 2005: Schwimmb&auml;der Planung - Ausf&uuml;hrung - Betrieb</li>
+  <li>German Association of Engineers: Guideline VDI 2089-1, January
+  2010: Building Services in swimming baths - Indoor Pools
+  </li>
+  <li>German Institute for Standardization DIN 19643-1, November 2012:
+  Treatment of water of swimming pools and baths - Part 1 General
+  Requirements
+  </li>
+  <li>Chroistoph Saunus, 2005: Schwimmbäder Planung - Ausführung -
+  Betrieb
+  </li>
 </ul>
 </html>"));
 end IndoorSwimmingPoolBaseRecord;
