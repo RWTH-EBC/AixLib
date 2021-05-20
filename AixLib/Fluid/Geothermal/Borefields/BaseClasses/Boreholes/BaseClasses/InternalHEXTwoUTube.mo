@@ -2,7 +2,8 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses;
 model InternalHEXTwoUTube
   "Internal heat exchanger of a borehole for a double U-tube configuration. In loop 1, fluid 1 streams from a1 to b1 and comes back from a2 to b2. In loop 2: fluid 2 streams from a3 to b3 and comes back from a4 to b4."
 
-  extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialInternalHEX;
+  extends
+    AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialInternalHEX;
   extends AixLib.Fluid.Interfaces.EightPortHeatMassExchanger(
     redeclare final package Medium1 = Medium,
     redeclare final package Medium2 = Medium,
@@ -158,7 +159,7 @@ initial equation
 equation
   assert(borFieDat.conDat.borCon == AixLib.Fluid.Geothermal.Borefields.Types.BoreholeConfiguration.DoubleUTubeParallel
      or borFieDat.conDat.borCon == AixLib.Fluid.Geothermal.Borefields.Types.BoreholeConfiguration.DoubleUTubeSeries,
-    "This model should be used for double U-type borefield, not single U-type. 
+    "This model should be used for double U-type borefield, not single U-type.
   Check that the conDat record has been correctly parametrized");
   connect(RVol1.y, RConv1.Rc) annotation (Line(
       points={{-30.7,64},{-34,64},{-34,46},{-8,46}},
@@ -223,23 +224,23 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 <p>
-Model for the heat transfer between the fluid and within the borehole filling. 
-This model computes the dynamic response of the fluid in the tubes, 
-the heat transfer between the fluid and the borehole filling, 
+Model for the heat transfer between the fluid and within the borehole filling.
+This model computes the dynamic response of the fluid in the tubes,
+the heat transfer between the fluid and the borehole filling,
 and the heat storage within the fluid and the borehole filling.
 </p>
 <p>
-This model computes the different thermal resistances present 
-in a single-U-tube borehole using the method of Bauer et al. (2011) 
-and computing explicitely the fluid-to-ground thermal resistance 
-<i>R<sub>b</sub></i> and the 
+This model computes the different thermal resistances present
+in a single-U-tube borehole using the method of Bauer et al. (2011)
+and computing explicitely the fluid-to-ground thermal resistance
+<i>R<sub>b</sub></i> and the
 grout-to-grout resistance
 <i>R<sub>a</sub></i> as defined by Claesson and Hellstrom (2011)
-using the multipole method. 
+using the multipole method.
 </p>
 <h4>References</h4>
-<p>J. Claesson and G. Hellstrom. 
-<i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger. 
+<p>J. Claesson and G. Hellstrom.
+<i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger.
 </i>
 HVAC&amp;R Research,
 17(6): 895-911, 2011.</p>
@@ -256,6 +257,7 @@ International Journal Of Energy Research, 35:312-320, 2011.
 July 10, 2018, by Alex Laferri&egrave;re:<br/>
 Updated documentation following major changes to the AixLib.Fluid.HeatExchangers.Ground package.
 Additionally, implemented a partial InternalHex model.
+</li>
 <li>
 June 18, 2014, by Michael Wetter:<br/>
 Added initialization for temperatures and derivatives of <code>capFil1</code>
@@ -267,7 +269,7 @@ Removed unused parameters <code>B0</code> and <code>B1</code>.
 </li>
 <li>
 January 24, 2014, by Michael Wetter:<br/>
-Revised implementation, added comments, replaced 
+Revised implementation, added comments, replaced
 <code>HeatTransfer.Windows.BaseClasses.ThermalConductor</code>
 with resistance models from the Modelica Standard Library.
 </li>

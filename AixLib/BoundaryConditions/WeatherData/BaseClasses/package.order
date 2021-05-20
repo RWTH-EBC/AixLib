@@ -1,5 +1,7 @@
 CheckBlackBodySkyTemperature
 CheckCeilingHeight
+CheckDewPointTemperature
+CheckDryBulbTemperature
 CheckIRRadiation
 CheckPressure
 CheckRadiation
@@ -12,8 +14,19 @@ ConvertRadiation
 ConvertRelativeHumidity
 ConvertTime
 EquationOfTime
+LimiterCeilingHeight
+LimiterHorizontalInfraredIrradiation
+LimiterOpaqueSkyCover
+LimiterRelativeHumidity
+LimiterTotalSkyCover
+LimiterWindDirection
+LimiterWindSpeed
 LocalCivilTime
+PartialLimiter
+PartialLimiterMin
 SolarTime
+SourceSelector
+SourceSelectorRadiation
 getAbsolutePath
 getHeaderElementTMY3
 getLatitudeTMY3
