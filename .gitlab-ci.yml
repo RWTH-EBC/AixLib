@@ -9,6 +9,8 @@ stages:
     - SetSettings
     - CheckSettings
     - Ref_Check
+    - Ref_Update
+    - Dif_Ref
     - build
     - HTMLCheck
     - deploy
@@ -19,6 +21,7 @@ stages:
     - Check
     - Simulate
     - RegressionTest
+
  
 variables:
     Praefix_Branch: "Correct_HTML_"
@@ -29,6 +32,10 @@ variables:
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/deploy/deploy_ref.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/development_check.gitlab-ci.yml' 
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/deploy/IBPSA_Merge.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
