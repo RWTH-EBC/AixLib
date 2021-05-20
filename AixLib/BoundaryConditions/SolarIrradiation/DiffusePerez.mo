@@ -1,7 +1,8 @@
 within AixLib.BoundaryConditions.SolarIrradiation;
 block DiffusePerez
   "Hemispherical diffuse irradiation on a tilted surface using Perez's anisotropic sky model"
-  extends AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
+  extends
+    AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
 
   parameter Real rho(min=0, max=1, final unit="1")=0.2 "Ground reflectance";
   parameter Modelica.SIunits.Angle lat "Latitude";

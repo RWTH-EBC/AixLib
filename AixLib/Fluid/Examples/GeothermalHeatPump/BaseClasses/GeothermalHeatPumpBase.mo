@@ -24,12 +24,11 @@ partial model GeothermalHeatPumpBase
     tableHeatFlowCondenser=[0,266.16,275.15,280.15,283.15,293.15; 308.15,9700,11600,13000,14800,16300; 323.15,10000,11200,12900,16700,17500]) "Base load energy conversion unit" annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
 
     replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
-      redeclare package Medium = Medium)                                       constrainedby AixLib.Fluid.Interfaces.PartialTwoPort
+      redeclare package Medium = Medium)                                       constrainedby
+    AixLib.Fluid.Interfaces.PartialTwoPort
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
 
   Storage.Storage coldStorage(
-    layer_HE(T_start=T_start_cold),
-    layer(T_start=T_start_cold),
     redeclare package Medium = Medium,
     n=5,
     lambda_ins=0.075,
@@ -41,6 +40,7 @@ partial model GeothermalHeatPumpBase
     V_HE=0.02,
     A_HE=7,
     d=1) "Storage tank for buffering cold demand" annotation (Placement(transformation(extent={{52,-14},{24,20}})));
+
   FixedResistances.PressureDrop                     resistanceColdStorage(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
@@ -87,8 +87,6 @@ partial model GeothermalHeatPumpBase
         rotation=90,
         origin={-60,1})));
   Storage.Storage heatStorage(
-    layer_HE(T_start=T_start_warm),
-    layer(T_start=T_start_warm),
     redeclare package Medium = Medium,
     n=5,
     lambda_ins=0.075,

@@ -9,25 +9,29 @@ model MixingBox
 
   AixLib.Fluid.Actuators.Dampers.MixingBox mixBox(
     mOut_flow_nominal=1,
-    dpOut_nominal=20,
     mRec_flow_nominal=1,
-    dpRec_nominal=20,
     mExh_flow_nominal=1,
-    dpExh_nominal=20,
-    redeclare package Medium = Medium) "mixing box"
+    redeclare package Medium = Medium,
+    dpDamExh_nominal=10,
+    dpDamOut_nominal=10,
+    dpDamRec_nominal=10,
+    dpFixExh_nominal=20,
+    dpFixOut_nominal=20,
+    dpFixRec_nominal=20)
+             "mixing box"
     annotation (Placement(transformation(extent={{14,-22},{34,-2}})));
-    AixLib.Fluid.Sources.Boundary_pT bouIn(             redeclare package Medium =
-               Medium, T=273.15 + 10,
+    AixLib.Fluid.Sources.Boundary_pT bouIn(             redeclare package
+      Medium = Medium, T=273.15 + 10,
     use_p_in=true,
     nPorts=2)                                             annotation (Placement(
         transformation(extent={{-60,2},{-40,22}})));
-    AixLib.Fluid.Sources.Boundary_pT bouSup(             redeclare package Medium =
-               Medium, T=273.15 + 26,
+    AixLib.Fluid.Sources.Boundary_pT bouSup(             redeclare package
+      Medium = Medium, T=273.15 + 26,
     use_p_in=true,
     nPorts=1)                                                                       annotation (Placement(
         transformation(extent={{68,-10},{48,10}})));
-    AixLib.Fluid.Sources.Boundary_pT bouRet(             redeclare package Medium =
-               Medium, T=273.15 + 20,
+    AixLib.Fluid.Sources.Boundary_pT bouRet(             redeclare package
+      Medium = Medium, T=273.15 + 20,
     use_p_in=true,
     nPorts=1)                                                         annotation (Placement(
         transformation(extent={{68,-90},{48,-70}})));
