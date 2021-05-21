@@ -81,7 +81,26 @@ public
   /* *******************************************************************
       Components
      ******************************************************************* */
+     AixLib.Utilities.HeatTransfer.CylindricHeatTransfer pipeWall(
+    rho=d,
+    c=c,
+    d_out=outerDiameter,
+    d_in=innerDiameter,
+    length=length,
+    lambda=lambda,
+    T0=T_0)
+    annotation (Placement(transformation(extent={{-10,14},{10,34}})));
 
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer
+    insulation(
+    d_out=outerDiameter*parameterIso.factor*2 + outerDiameter,
+    d_in=outerDiameter,
+    length=length,
+    lambda=parameterIso.lambda,
+    rho=parameterIso.d,
+    c=parameterIso.c,
+    T0=T_0) if withInsulation
+    annotation (Placement(transformation(extent={{-10,34},{10,54}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside
     annotation (Placement(transformation(extent={{-98,42},{-78,62}}),
         iconTransformation(extent={{-98,42},{-78,62}})));
@@ -101,6 +120,11 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-38,52})));
+  AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx(eps=eps, A=Modelica.Constants.pi*outerDiameter*length) if withRadiationParam annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={46,52})));
+
   FastHVAC.Components.Pipes.BaseClasses.PipeBase pipeBase(
     medium=medium,
     nParallel=nParallel,
