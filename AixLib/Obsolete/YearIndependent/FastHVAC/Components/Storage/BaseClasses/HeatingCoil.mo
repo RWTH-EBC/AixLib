@@ -26,6 +26,17 @@ model HeatingCoil
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-2,0})));
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer PipeWall_HC1[dis_HC](
+    each T0=T_start,
+    rho=fill(pipeRecordHC.d, dis_HC),
+    c=fill(pipeRecordHC.c, dis_HC),
+    d_out=fill(pipeRecordHC.d_o, dis_HC),
+    d_in=fill(pipeRecordHC.d_i, dis_HC),
+    length=fill(lengthHC/dis_HC, dis_HC),
+    lambda=fill(pipeRecordHC.lambda, dis_HC)) annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-2,50})));
 
   AixLib.Utilities.HeatTransfer.HeatConv conv_HC1_Outside[dis_HC](each hCon=hConHC, A=fill(pipeRecordHC.d_o*Modelica.Constants.pi*lengthHC/
         dis_HC, dis_HC)) annotation (Placement(transformation(
