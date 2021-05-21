@@ -2,19 +2,14 @@ within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
 partial model GeothermalHeatPumpBase
   "Base class of the geothermal heat pump system"
 
-
   replaceable package Medium = AixLib.Media.Water
     "Medium model used for hydronic components";
 
   parameter Modelica.SIunits.Temperature T_start_cold = 300
     "Initial temperature of cold components";
 
-  parameter Modelica.SIunits.Temperature T_start_warm = 300
+  parameter Modelica.SIunits.Temperature T_start_hot=300
     "Initial temperature of warm components";
-
-  //parameter Modelica.SIunits.Temperature T_start_hot = 300
-  //  "Initial temperature of high temperature components";
-
 
     replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
       redeclare package Medium = Medium)                                       constrainedby
@@ -33,8 +28,8 @@ partial model GeothermalHeatPumpBase
     V_HE=0.02,
     A_HE=7,
     d=1,
-    m_flow_nominal_layer=0.5,
-    m_flow_nominal_HE=0.5,
+    m_flow_nominal_layer=m_flow_nominal_layer,
+    m_flow_nominal_HE=m_flow_nominal_HE,
     T_start=T_start_cold)
          "Storage tank for buffering cold demand" annotation (Placement(transformation(extent={{52,-14},{24,20}})));
   FixedResistances.PressureDrop                     resistanceColdStorage(
@@ -94,10 +89,10 @@ partial model GeothermalHeatPumpBase
     h=1,
     V_HE=0.01,
     d=1,
-    m_flow_nominal_layer=0.5,
-    m_flow_nominal_HE=0.5,
-    T_start=T_start_warm)
-         "Storage tank for buffering heat demand" annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
+    m_flow_nominal_layer=m_flow_nominal_layer,
+    m_flow_nominal_HE=m_flow_nominal_HE,
+    T_start=T_start_hot) "Storage tank for buffering heat demand"
+    annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
   FixedResistances.PressureDrop                     resistanceHeatStorage(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
@@ -149,7 +144,7 @@ partial model GeothermalHeatPumpBase
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    T_start=T_start_warm)
+    T_start=T_start_hot)
     "Pump moving fluid from storage tank to heat consumers"
     annotation (Placement(transformation(extent={{58,-57},{72,-43}})));
   FixedResistances.PressureDrop                     resistanceColdConsumerReturn(
@@ -205,9 +200,11 @@ partial model GeothermalHeatPumpBase
         extent={{-14,17},{14,-17}},
         rotation=90,
         origin={-25,5.99998})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_layer=0.5
+    "Nominal mass flow rate in layers of storages";
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_HE=0.5
+    "Nominal mass flow rate of heat exchanger layers of storages";
 equation
-
-
 
   connect(resistanceGeothermalSource.port_b, valveHeatSink.port_a) annotation (
       Line(

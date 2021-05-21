@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTable2D "Performance data coming from manufacturer"
   extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
@@ -160,6 +160,11 @@ equation
     Rectangle(fillColor={255,215,136},
       fillPattern=FillPattern.Solid,
       extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(revisions="<html><ul>
+  <li>
+    <i>May 21, 2021&#1092;</i> by Fabian Wüllhorst:<br/>
+    Make use of BaseClasses (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
+  </li>
   <li>
     <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
     First implementation (see issue <a href=

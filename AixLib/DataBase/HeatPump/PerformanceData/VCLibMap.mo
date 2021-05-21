@@ -1,6 +1,6 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model VCLibMap
-  "Multi-dimensional performance map encompasing choices of fluid and flowsheet based on steady state calculations using the Vapor Compression Library"
+  "Multi-dimensional performance map encompasing choices of fluid and flowsheet based on steady state calculations using the Vapour Compression Library"
   extends BaseClasses.PartialPerformanceData;
   // Parameters Heat pump operation
   parameter Modelica.SIunits.Power QCon_flow_nominal=5000
