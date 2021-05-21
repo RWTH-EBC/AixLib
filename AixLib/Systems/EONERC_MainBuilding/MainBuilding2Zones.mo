@@ -42,7 +42,7 @@ model MainBuilding2Zones "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=Benchmark.BaseClasses.BenchmarkCanteen(),
+    zoneParam=BaseClasses.ERCMainBuilding_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -161,7 +161,7 @@ model MainBuilding2Zones "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone2(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=Benchmark.BaseClasses.BenchmarkWorkshop(),
+    zoneParam=BaseClasses.ERCMainBuilding_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -858,12 +858,12 @@ equation
           121.6,16},{106.4,16},{106.4,18}}, color={0,0,127}));
   connect(limiterCCACold1.u,Q_flow_CCA_cold1. y)
     annotation (Line(points={{130.8,16},{139.2,16}},   color={0,0,127}));
-  connect(vol5.ports[3], switchingUnit.port_b1) annotation (Line(points={{
-          120.933,-50},{198,-50},{198,-36},{236,-36}}, color={0,127,255}));
+  connect(vol5.ports[3], switchingUnit.port_b1) annotation (Line(points={{120.933,
+          -50},{198,-50},{198,-36},{236,-36}},         color={0,127,255}));
   connect(vol4.ports[3], switchingUnit.port_a2)
     annotation (Line(points={{104.933,-60},{236,-60}}, color={0,127,255}));
-  connect(genericAHU1.port_b5, genericAHU.port_b5) annotation (Line(points={{
-          116.182,160},{116,160},{116,120},{-1.81818,120},{-1.81818,248}},
+  connect(genericAHU1.port_b5, genericAHU.port_b5) annotation (Line(points={{116.182,
+          160},{116,160},{116,120},{-1.81818,120},{-1.81818,248}},
         color={238,46,47}));
   connect(genericAHU.port_a5, vol2.ports[4]) annotation (Line(points={{-12.1818,
           248},{-12,248},{-12,128},{-176,128},{-176,-18.8}}, color={238,46,47}));
