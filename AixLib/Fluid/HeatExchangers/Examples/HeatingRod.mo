@@ -14,7 +14,8 @@ model HeatingRod "Example for the usage of the heating rod model"
     dp_nominal=1000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=289.15,
-    Q_flow_nominal=10*Q_flow_nominal)
+    Q_flow_nominal=10*Q_flow_nominal,
+    eta=0.97)
     annotation (Placement(transformation(extent={{-30,-54},{-2,-26}})));
   Modelica.Blocks.Interfaces.IntegerOutput numSwiHR
     "Number of on switches of heating rod"
