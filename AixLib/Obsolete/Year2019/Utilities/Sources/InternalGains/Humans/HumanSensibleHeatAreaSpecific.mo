@@ -36,12 +36,12 @@ protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
 equation
   connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{42, 32}, {42, 50}, {90, 50}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
-  connect(RadiativeHeat.port, RadiationConvertor.conv) annotation (Line(
-      points={{42,-8},{44,-8},{44,-12},{48,-12},{48,-10},{48.96,-10}},
+  connect(RadiativeHeat.port, RadiationConvertor.convPort) annotation (Line(
+      points={{42,-8},{44,-8},{44,-12},{48,-12},{48,-10},{48,-10}},
       color={191,0,0},
       pattern=LinePattern.Solid));
-  connect(RadiationConvertor.rad, RadHeat) annotation (Line(
-      points={{70.92,-10},{90,-10}},
+  connect(RadiationConvertor.radPort, RadHeat) annotation (Line(
+      points={{72.12,-10},{90,-10}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(Schedule, internalGainsPeopleSpecific.u)
@@ -52,7 +52,7 @@ equation
       points={{3,-48},{14.8,-48}},
       color={0,0,127}));
   connect(SurfaceArea_People.y, RadiationConvertor.A_in) annotation (Line(
-      points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
+      points={{28.6,-48},{40,-48},{40,20},{60,20},{60,3.2}},
       color={0,0,127}));
   connect(internalGainsPeopleSpecific.y, productHeatOutput.u[1]) annotation (
       Line(points={{-57.4,-20},{-54,-20},{-54,4},{-40,4},{-40,7.5}}, color={0,0,

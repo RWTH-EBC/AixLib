@@ -1,7 +1,7 @@
 ﻿within AixLib.Utilities.HeatTransfer;
 model HeatConvInside
-  "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, or a constant convective heat transfer coefficient"
-  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient hCon_const
+  "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, according to ASHRAE140-2017 or a constant convective heat transfer coefficient"
+  /* calculation of natural convection in the inside of a building according to B.Glueck, ASHRAE140-2017, EN ISO 6946 or using a constant convective heat transfer coefficient hCon_const
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
@@ -11,6 +11,7 @@ model HeatConvInside
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
       choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
       radioButtons=true),
     Evaluate=true);
 
@@ -88,99 +89,53 @@ equation
       hCon = 1.6*(posDiff^0.3);
     end if;
 
-  // ++++++++++++++++hCon_const++++++++++++++++
-  else
+
+    // ++++++++++++++++hCon_const++++++++++++++++
+
+
+  elseif calcMethod == 3 then
     hCon = hCon_const;
+
+
+
+    // ++++++++++++++++ASHRAE140-2017++++++++++++++++
+    // upward heat flow: hCon = 4.13, downward heat flow: hCon = 1, horizontal heat flow: hCon = 3.16
+   elseif calcMethod == 4 then
+
+
+    // floor (horizontal facing up)
+    if surfaceOrientation == 2 then
+      hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
+        y1=4.13,
+        y2=1,
+        x_small=dT_small);
+
+      // ceiling (horizontal facing down)
+    elseif surfaceOrientation == 3 then
+      hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
+        y1=1,
+        y2=4.13,
+        x_small=dT_small);
+
+      // vertical
+    else
+      hCon = 3.16;
+    end if;
+
+  else
+    hCon = Modelica.Constants.eps;
+    assert(0>1, "Choose another value for calcMethod. In component " + getInstanceName() + " the value is calcMethod = " + String(calcMethod) + ".", AssertionLevel.error);
+
   end if;
 
-  port_a.Q_flow =hCon*A*(port_a.T - port_b.T);
+  port_a.Q_flow = hCon*A*(port_a.T - port_b.T);
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
-        Rectangle(
-          extent={{-80,60},{0,-100}},
-          lineColor={0,255,255},
-          fillColor={211,243,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(extent={{-80,60},{80,-100}}, lineColor={0,0,0}),
-        Rectangle(
-          extent={{60,60},{80,-100}},
-          lineColor={0,0,255},
-          pattern = LinePattern.None,
-          fillColor={244,244,244},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{40,60},{60,-100}},
-          lineColor={0,0,255},
-          pattern = LinePattern.None,
-          fillColor={207,207,207},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{20,60},{40,-100}},
-          lineColor={0,0,255},
-          pattern = LinePattern.None,
-          fillColor={182,182,182},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{0,60},{20,-100}},
-          lineColor={0,0,255},
-          pattern = LinePattern.None,
-          fillColor={156,156,156},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{80,60},{80,60},{60,20},{60,60},{80,60}},
-          lineColor={0,0,255},
-          pattern = LinePattern.None,
-          lineThickness=0.5,
-          fillColor={157,166,208},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{60,60},{60,20},{40,-20},{40,60},{60,60}},
-          lineColor={0,0,255},
-          pattern = LinePattern.None,
-          lineThickness=0.5,
-          fillColor={102,110,139},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{40,60},{40,-20},{20,-60},{20,60},{40,60}},
-          lineColor={0,0,255},
-          pattern = LinePattern.None,
-          lineThickness=0.5,
-          fillColor={75,82,103},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{20,60},{20,-60},{0,-100},{0,60},{20,60}},
-          lineColor={0,0,255},
-          pattern = LinePattern.None,
-          lineThickness=0.5,
-          fillColor={51,56,70},
-          fillPattern=FillPattern.Solid),
-        Line(
-          points={{-58,20},{-68,8}},
-          color={0,0,255},
-          thickness=0.5),
-        Line(
-          points={{-58,20},{-58,-60}},
-          color={0,0,255},
-          thickness=0.5),
-        Line(
-          points={{-40,20},{-50,8}},
-          color={0,0,255},
-          thickness=0.5),
-        Line(
-          points={{-40,20},{-40,-60}},
-          color={0,0,255},
-          thickness=0.5),
-        Line(
-          points={{-22,20},{-32,8}},
-          color={0,0,255},
-          thickness=0.5),
-        Line(
-          points={{-22,20},{-22,-60}},
-          color={0,0,255},
-          thickness=0.5)}),
+        grid={2,2})),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
@@ -188,25 +143,25 @@ equation
         Rectangle(
           extent={{0,80},{20,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={156,156,156},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{20,80},{40,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={182,182,182},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{40,80},{60,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={207,207,207},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{60,80},{80,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={244,244,244},
           fillPattern=FillPattern.Solid),
         Rectangle(
@@ -217,28 +172,28 @@ equation
         Polygon(
           points={{80,80},{80,80},{60,40},{60,80},{80,80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           lineThickness=0.5,
           fillColor={157,166,208},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{60,80},{60,40},{40,0},{40,80},{60,80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           lineThickness=0.5,
           fillColor={102,110,139},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{40,80},{40,0},{20,-40},{20,80},{40,80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           lineThickness=0.5,
           fillColor={75,82,103},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{20,80},{20,-40},{0,-80},{0,80},{20,80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           lineThickness=0.5,
           fillColor={51,56,70},
           fillPattern=FillPattern.Solid),
