@@ -85,7 +85,26 @@ public
   /* *******************************************************************
       Components
      ******************************************************************* */
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer pipeWall[nNodes](
+    rho=fill(d, nNodes),
+    c=fill(c, nNodes),
+    d_out=fill(outerDiameter, nNodes),
+    d_in=fill(innerDiameter, nNodes),
+    length=fill(length/nNodes, nNodes),
+    lambda=fill(lambda, nNodes),
+    T0=fill(T_0, nNodes))
+  annotation (Placement(transformation(extent={{-10,-36},{10,-16}})));
 
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer insulation[nNodes](
+    rho=fill(parameterIso.d, nNodes),
+    c=fill(parameterIso.c, nNodes),
+    d_out=fill(outerDiameter*parameterIso.factor*2 + outerDiameter, nNodes),
+    d_in=fill(outerDiameter, nNodes),
+    length=fill(length/nNodes, nNodes),
+    lambda=fill(parameterIso.lambda, nNodes),
+    T0=fill(T_0, nNodes)) if
+       withInsulation
+  annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside
   annotation (Placement(transformation(extent={{46,82},{66,102}}),
         iconTransformation(extent={{46,82},{66,102}})));
@@ -105,6 +124,11 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={58,28})));
+  AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=AOutside/nNodes) if
+                                            withRadiationParam annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=-90,
+        origin={-58,30})));
   FastHVAC.Components.Pipes.BaseClasses.PipeBase pipeBase(
     medium=medium,
     nParallel=nParallel,
