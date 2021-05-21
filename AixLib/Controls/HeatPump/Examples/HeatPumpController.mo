@@ -98,10 +98,6 @@ equation
         color={0,0,127}), Text(
       index=1,
       extent={{6,3},{6,3}}));
-  connect(T_meas.y, hPControllerOnOff.T_meas) annotation (Line(points={{-79,30},
-          {-70,30},{-70,4},{-60,4}}, color={0,0,127}));
-  connect(T_set.y, hPControllerOnOff.T_set) annotation (Line(points={{-79,-30},
-          {-70,-30},{-70,-4},{-60,-4}}, color={0,0,127}));
   connect(T_meas.y,showT_meas. numberPort) annotation (Line(points={{-79,30},{
           -66,30},{-66,80},{-63,80}}, color={0,0,127}));
   connect(T_meas.y, output_T_meas) annotation (Line(points={{-79,30},{-74,30},{
@@ -127,6 +123,10 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  connect(T_meas.y, hPControllerOnOff.TSet) annotation (Line(points={{-79,30},{
+          -68,30},{-68,4},{-60,4}}, color={0,0,127}));
+  connect(T_set.y, hPControllerOnOff.TMea) annotation (Line(points={{-79,-30},{
+          -68,-30},{-68,-4},{-60,-4}}, color={0,0,127}));
   annotation (experiment(StopTime=10000, Interval=10), Documentation(info="<html><p>
   This example can be used to test that <a href=
   \"modelica://AixLib.Controls.HeatPump.HPControllerOnOff\">AixLib.Controls.HeatPump.HPControllerOnOff</a>

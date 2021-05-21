@@ -1,4 +1,4 @@
-within AixLib.Fluid.Examples.GeothermalHeatPump;
+﻿within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;
@@ -114,10 +114,6 @@ equation
           0,127}));
   connect(PeakLoadDevice.port_b,heatConsumerFlow. ports[1]) annotation (Line(
         points={{120,-50},{120,-50},{148,-50}}, color={0,127,255}));
-  connect(TStorageSet.y,hPControllerOnOff. T_meas) annotation (Line(points={{-147.4,
-          6},{-132,6},{-132,76},{-78,76}},   color={0,0,127}));
-  connect(getTStorageUpper.y, hPControllerOnOff.T_set) annotation (Line(points=
-          {{-139,68},{-139,68},{-116,68},{-78,68}}, color={0,0,127}));
   connect(hPControllerOnOff.heatPumpControlBus, heatPumpControlBus) annotation (
      Line(
       points={{-58.05,72.05},{-44,72.05},{-44,79},{-0.5,79}},
@@ -150,6 +146,10 @@ equation
   connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{
           -18,-57},{-18,-8.00001},{-16.5,-8.00001},{-16.5,-8.00002}}, color={0,
           127,255}));
+  connect(TStorageSet.y, hPControllerOnOff.TSet) annotation (Line(points={{
+          -147.4,6},{-130,6},{-130,76},{-78,76}}, color={0,0,127}));
+  connect(getTStorageUpper.y, hPControllerOnOff.TMea)
+    annotation (Line(points={{-139,68},{-78,68}}, color={0,0,127}));
   annotation (experiment(Tolerance=1e-6, StopTime=86400), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
         "Simulate and plot"), Documentation(revisions="<html><ul>
   <li>

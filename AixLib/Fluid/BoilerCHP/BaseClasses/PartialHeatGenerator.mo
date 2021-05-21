@@ -20,6 +20,29 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer, default 20 minutes"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
+    "Guess value of dp = port_a.p - port_b.p"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
+    "Guess value of m_flow = port_a.m_flow"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
+    "Start value of pressure"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
+
+  parameter Modelica.SIunits.PressureDifference dp_nominal=m_flow_nominal ^ 2 * a / (rho_default ^ 2)
+    "Pressure drop at nominal mass flow rate";
+  parameter Boolean from_dp=false
+    "= true, use m_flow = f(dp) else dp = f(m_flow)"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Modelica.SIunits.Density rho_default = 1000 "Default density of medium. Value assumes water";
+  parameter Boolean linearized=false
+    "= true, use linear relation between m_flow and dp for any flow rate"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Real deltaM=0.3
+    "Fraction of nominal mass flow rate where transition to turbulent occurs"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Real a "Coefficient of old approach from model Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate. Recalculated to dp_nominal based on IBPSA approach.";
   Sensors.TemperatureTwoPort senTCold(
     redeclare final package Medium = Medium,
     final tau=tau,
@@ -78,27 +101,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final deltaM=deltaM)
     "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
-    "Guess value of dp = port_a.p - port_b.p"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
-    "Guess value of m_flow = port_a.m_flow"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
-    "Start value of pressure"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
 
-  parameter Modelica.SIunits.PressureDifference dp_nominal=1
-    "Pressure drop at nominal mass flow rate";
-  parameter Boolean from_dp=false
-    "= true, use m_flow = f(dp) else dp = f(m_flow)"
-    annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  parameter Boolean linearized=false
-    "= true, use linear relation between m_flow and dp for any flow rate"
-    annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  parameter Real deltaM=0.3
-    "Fraction of nominal mass flow rate where transition to turbulent occurs"
-    annotation (Dialog(tab="Advanced", group="Pressure drop"));
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
           -80},{-80,-80}}, color={0,127,255},
