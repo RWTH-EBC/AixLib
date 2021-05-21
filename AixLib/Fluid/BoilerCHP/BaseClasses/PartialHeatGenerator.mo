@@ -69,10 +69,13 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
   FixedResistances.PressureDrop                             pressureDrop(
     redeclare final package Medium = Medium,
-    m_flow_nominal=1,
+    final m_flow_nominal=m_flow_nominal,
     final show_T=false,
     final allowFlowReversal=allowFlowReversal,
-    dp_nominal=1)
+    final from_dp=from_dp,
+    final dp_nominal=dp_nominal,
+    final linearized=linearized,
+    final deltaM=deltaM)
     "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
@@ -85,6 +88,17 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     "Start value of pressure"
     annotation (Dialog(tab="Advanced", group="Initialization"));
 
+  parameter Modelica.SIunits.PressureDifference dp_nominal=1
+    "Pressure drop at nominal mass flow rate";
+  parameter Boolean from_dp=false
+    "= true, use m_flow = f(dp) else dp = f(m_flow)"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Boolean linearized=false
+    "= true, use linear relation between m_flow and dp for any flow rate"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Real deltaM=0.3
+    "Fraction of nominal mass flow rate where transition to turbulent occurs"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
           -80},{-80,-80}}, color={0,127,255},
