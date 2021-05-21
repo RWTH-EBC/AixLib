@@ -30,7 +30,8 @@ model EnthalpyFlowRate "Test model for the enthalpy flow rate sensors"
 
   AixLib.Fluid.Sensors.SpecificEnthalpyTwoPort senH(
     redeclare package Medium = Medium,
-    m_flow_nominal=2) "Specific enthalpy sensor"
+    m_flow_nominal=2,
+    tau=0)            "Specific enthalpy sensor"
                 annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.Fluid.Sensors.MassFlowRate senM_flow(
     redeclare package Medium = Medium) "Mass flow rate sensor"

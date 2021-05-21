@@ -1,4 +1,4 @@
-within AixLib.Fluid.BaseClasses;
+﻿within AixLib.Fluid.BaseClasses;
 partial model PartialReversibleVapourCompressionMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -188,7 +188,7 @@ partial model PartialReversibleVapourCompressionMachine
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  parameter Boolean homotopyInitialization=false "= true, use homotopy method"
+  constant Boolean homotopyInitialization=false "= true, use homotopy method"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"

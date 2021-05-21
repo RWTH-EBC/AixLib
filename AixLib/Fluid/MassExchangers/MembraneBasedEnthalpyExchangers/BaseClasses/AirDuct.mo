@@ -43,7 +43,7 @@ model AirDuct "model of the air duct"
      annotation(Dialog(tab="Heat and Mass transfer"));
 
   // Advanced
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
   // Dynamics

@@ -178,8 +178,27 @@ def create_ReferenceResults( tool, package, path, n_pro, show_gui):
 		Exit.close()
 		sys.exit(0)
 		
-
-
+def _update_ref(batch, tool, package,path,  n_pro, show_gui):
+	import buildingspy.development.regressiontest as u
+	
+	ut = u.Tester(tool=tool)
+	ut.batchMode(batch)
+	ut.setLibraryRoot(path)
+	Errorlist = []
+	green = "\033[0;32m"
+	CRED = '\033[91m'
+	CEND = '\033[0m'
+	if package is not None:
+			ut.setSinglePackage(package)
+	ut.setNumberOfThreads(n_pro)
+	ut.pedanticModelica(False)
+	ut.showGUI(show_gui)
+	retVal = ut.run()
+	
+	
+	return retVal
+	
+	
 def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 	
 	import buildingspy.development.regressiontest as u
@@ -304,6 +323,17 @@ def _runOpenModelicaUnitTests():
     ut.test_OpenModelica(cmpl=True, simulate=True,
                          packages=['Examples'], number=-1)
 
+
+
+def createFolder(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print ('Error: Creating directory. ' +  directory)
+		
+		
+		
 if __name__ == '__main__':
 	import multiprocessing
 	import platform
@@ -345,6 +375,10 @@ if __name__ == '__main__':
 	unit_test_group.add_argument("--check-ref",
                         help='checks if all reference files exist',
                         action="store_true")
+	unit_test_group.add_argument("--update-ref",
+                        help='update all reference files',
+                        action="store_true")
+	
 	
 	unit_test_group.add_argument("--modified-models",
                         help='Regression test only for modified models',
@@ -414,7 +448,37 @@ if __name__ == '__main__':
                            show_gui = args.show_gui)
 		exit(0)
 
-	
+	if args.update_ref:
+		
+		ret_val = _update_ref(batch = args.batch, 
+							tool = args.tool,
+							package = single_package,
+							path = args.path,  
+							n_pro = args.number_of_processors, 
+							show_gui = args.show_gui)
+		package = single_package
+		new_ref_path = ".."+os.sep+"New_Reference_Files"
+		ref_dir = ".."+os.sep+"AixLib"+os.sep+"Resources"+os.sep+"ReferenceResults"+os.sep+"Dymola"
+		import os 
+		from datetime import date
+		import shutil
+		ref_files = os.listdir(ref_dir)
+		current_date = date.today()
+		
+		ref_list = []
+		createFolder(new_ref_path)
+		
+		for i in ref_files:
+			if i.find(package):
+				t = ref_dir+os.sep+i
+				for line in open(t, 'r'):
+					if line.find("last-generated=") > -1:
+						if line.find(str(current_date))> -1:
+							shutil.copy2(t,new_ref_path)
+							continue
+						
+		
+		exit(ret_val)
 	
 	elif args.coverage_only:
 		ret_val = _run_coverage_only(batch = args.batch,
@@ -445,6 +509,7 @@ if __name__ == '__main__':
 			green = "\033[0;32m"
 			CRED = '\033[91m'
 			CEND = '\033[0m'
+			
 			while dym_sta_lic_available == False:
 				print(CRED+"No Dymola License is available"+CEND)
 				dymola.close()
