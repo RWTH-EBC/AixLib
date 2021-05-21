@@ -1,7 +1,8 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model TraceSubstanceConservationDynamicBalance
   "This test checks if trace substance mass flow rates are conserved when a dynamic balance is used"
-  extends AixLib.Fluid.MixingVolumes.Validation.BaseClasses.TraceSubstanceConservation(
+  extends
+    AixLib.Fluid.MixingVolumes.Validation.BaseClasses.TraceSubstanceConservation(
      vol(massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
@@ -63,7 +64,7 @@ equation
     Documentation(info="<html>
 <p>
 This test checks if the trace substance flow rate is
-conserved when adding moisture to a mixing volume that is configured to steady state.<br />
+conserved when adding moisture to a mixing volume that is configured to steady state.<br/>
 The trace substance flow rate at the inlet and outlet should be equal
 since the trace substance concentration should not
 be affected by the independent mass fraction concentration.
