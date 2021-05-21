@@ -48,6 +48,18 @@ model PipeBase
   Modelica.Fluid.Interfaces.HeatPorts_a heatPorts[nNodes]
     annotation (Placement(transformation(extent={{-18,58},{22,66}}),
         iconTransformation(extent={{-44,40},{42,58}})));
+  AixLib.Obsolete.YearIndependent.Utilities.HeatTransfer.HeatConvPipeInside heatConvPipeInside[nNodes](
+  each hConIn_const=hConIn_const,
+    d_i=fill(parameterPipe.d_i, nNodes),
+    length=fill(length, nNodes),
+    d_a=fill(parameterPipe.d_o, nNodes),
+    A_sur=fill(nParallel*parameterPipe.d_o*Modelica.Constants.pi*length/nNodes, nNodes),
+    medium=fill(medium, nNodes),
+    each calcHCon=calcHCon)
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={0,38})));
   Sensors.MassFlowSensor massFlowRate
     annotation (Placement(transformation(extent={{44,-10},{64,10}})));
   Modelica.Blocks.Math.Division divideMassFlow
