@@ -68,6 +68,10 @@ model ML_thermal_delta "Multi layers of heat exchanger"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-52,48})));
+  AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx(eps=1, A=(s_eff*dotQ_nomLayer)/((delta_nom)*Modelica.Constants.sigma*eps)) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={32,46})));
   Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorWall     radiatorWall(
     lambda=lambdaSteel,
     c=capacitySteel,
