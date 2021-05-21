@@ -42,10 +42,19 @@ equation
       Tolerance=1e-6),
     Diagram(coordinateSystem(extent={{-100,-100},{120,100}})),
     Icon(coordinateSystem(extent={{-100,-100},{120,100}})),
-    Documentation(info="<html>
-<p>This example illustrates how to use the heating rod model. </p>
-<p>The model consist of a water volume with heat loss to the ambient. The set point of the water temperature is different between night and day. The heater tracks the set point temperature, except for the periods in which the water temperature is above the set point. </p>
-<p>As output, the number of times the heating rod was used is given along with the energy required to supply the heat.</p>
+    Documentation(info="<html><p>
+  This example illustrates how to use the heating rod model.
+</p>
+<p>
+  The model consist of a water volume with heat loss to the ambient.
+  The set point of the water temperature is different between night and
+  day. The heater tracks the set point temperature, except for the
+  periods in which the water temperature is above the set point.
+</p>
+<p>
+  As output, the number of times the heating rod was used is given
+  along with the energy required to supply the heat.
+</p>
 </html>", revisions="<html>
 <ul>
   <li>May 5, 2021, by Fabian Wuellhorst:<br/>

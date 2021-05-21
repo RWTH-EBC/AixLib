@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model PolynomalApproach
   "Calculating heat pump data based on a polynomal approach"
   extends
@@ -88,7 +88,7 @@ equation
           extent={{-90,-108},{90,72}},
           textString="f")}), Documentation(revisions="<html><ul>
   <li>
-    <i>May 21, 2021&#1092;</i> by Fabian Wüllhorst:<br/>
+    <i>May 21, 2021ф</i> by Fabian Wüllhorst:<br/>
     Make use of BaseClasses (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
   </li>
