@@ -8,7 +8,6 @@ model ModularHeatPump
  parameter Boolean HighTemp=false "High temperature HP"
    annotation(choices(checkBox=true), Dialog(descriptionLabel=true, group="General machine information"));
 
-
  parameter Modelica.SIunits.Temperature THotMax= if HighTemp==false then  273.15+55  else 273.15+90 "Max. value of THot to force shutdown"
  annotation (Dialog(tab="Advanced", group="General machine information"));
   parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
@@ -22,6 +21,8 @@ model ModularHeatPump
 
   parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(enable=dTConFix,tab="Advanced",group="General machine information"));
+
+    parameter Modelica.SIunits.Temperature T_Start_Condenser;
 
     parameter Boolean TSourceInternal=true
                                           "Use internal TSource?"
@@ -65,6 +66,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     allowFlowReversalEva=false,
     allowFlowReversalCon=false,
     initType=Modelica.Blocks.Types.Init.SteadyState,
+    TCon_start=T_Start_Condenser,
     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     show_TPort=false,
@@ -109,7 +111,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     annotation (Placement(transformation(extent={{60,-40},{44,-24}})));
   Modelica.Blocks.Sources.RealExpression tSource(y=TSourceFixed)
                                                         "TSource"
-    annotation (Placement(transformation(extent={{-58,-76},{-34,-62}})));
+    annotation (Placement(transformation(extent={{-62,-98},{-38,-84}})));
   Sensors.TemperatureTwoPort senTCold(
     redeclare final package Medium = Media.Water,
     final m_flow_nominal=QNom/(4180*DeltaTCon),
@@ -154,8 +156,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
         rotation=180,
         origin={-4,-64})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=TSourceInternal)
-    annotation (Placement(transformation(extent={{-94,-74},{-74,-54}})));
-
+    annotation (Placement(transformation(extent={{-80,-84},{-60,-64}})));
 
   Modelica.Blocks.Logical.Greater greater
     annotation (Placement(transformation(extent={{30,42},{14,58}})));
@@ -165,8 +166,8 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
   Movers.SpeedControlled_y fan1(redeclare package Medium = Media.Water,
     allowFlowReversal=false,
     m_flow_small=0.001,
-    per(pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/500}, dp={50174/0.8,
-            50174,0})),
+    per(pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/500}, dp={(25000
+             + dpExternal)/0.8,(25000 + dpExternal),0})),
     addPowerToMedium=false)
     annotation (Placement(transformation(extent={{-74,-10},{-54,10}})));
 protected
@@ -175,9 +176,10 @@ protected
 
  parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="Advanced",group="General machine information"));
+    parameter Modelica.SIunits.Pressure dpExternal=0 "Additional system pressure difference";
+
 
 equation
-
 
   connect(mode.y, sigBus.mode) annotation (Line(points={{27.2,99},{2,99},{2,
           99.085},{-4.925,99.085}},
@@ -195,7 +197,7 @@ equation
   connect(senTCold.port_b, heatPump.port_a1) annotation (Line(points={{-28,0},{-10,
           0}},                color={0,127,255}));
   connect(sigBus, heatPump.sigBus) annotation (Line(
-      points={{-5,99},{-5,32},{-24,32},{-24,-9.9},{-9.9,-9.9}},
+      points={{-5,99},{-5,28},{-24,28},{-24,-9.9},{-9.9,-9.9}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -238,7 +240,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(sigBus.PLR, control.PLR) annotation (Line(
-      points={{-4.925,99.085},{-4.925,52},{-44,52}},
+      points={{-4.925,99.085},{-4.925,53},{-44,53}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -246,13 +248,15 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(senTHot.T, control.THot) annotation (Line(points={{58,8.8},{58,28},{4,
-          28},{4,42.2},{-43.8,42.2}}, color={0,0,127}));
+          28},{4,42},{-44,42}}, color={0,0,127}));
   connect(switch1.y, bouEvap_a.T_in) annotation (Line(points={{4.8,-64},{10,-64},
           {10,-76},{14,-76},{14,-82},{68,-82},{68,-68},{62,-68}}, color={0,0,127}));
-  connect(tSource.y, switch1.u1) annotation (Line(points={{-32.8,-69},{-13.6,-69},
-          {-13.6,-70.4}}, color={0,0,127}));
-  connect(booleanExpression.y, switch1.u2) annotation (Line(points={{-73,-64},{
-          -13.6,-64}},                 color={255,0,255}));
+  connect(tSource.y, switch1.u1) annotation (Line(points={{-36.8,-91},{-13.6,
+          -91},{-13.6,-70.4}},
+                          color={0,0,127}));
+  connect(booleanExpression.y, switch1.u2) annotation (Line(points={{-59,-74},{
+          -44,-74},{-44,-64},{-13.6,-64}},
+                                       color={255,0,255}));
   connect(tHotMax.y, greater.u2) annotation (Line(points={{36.8,36},{32,36},{32,
           43.6},{31.6,43.6}},     color={0,0,127}));
   connect(greater.y, sigBus.Shutdown) annotation (Line(points={{13.2,50},{10,50},
@@ -269,12 +273,12 @@ equation
     annotation (Line(points={{-100,0},{-74,0}}, color={0,127,255}));
   connect(senTCold.port_a, fan1.port_b)
     annotation (Line(points={{-46,0},{-54,0}}, color={0,127,255}));
-  connect(control.mFlowCon, fan1.y) annotation (Line(points={{-67.2,46},{-80,46},
-          {-80,12},{-64,12}}, color={0,0,127}));
+  connect(control.mFlowCon, fan1.y) annotation (Line(points={{-67.2,46},{-76,46},
+          {-76,20},{-64,20},{-64,12}}, color={0,0,127}));
   connect(senTCold.T, control.TCold) annotation (Line(points={{-37,11},{-37,36},
-          {-42,36},{-42,37.2},{-44,37.2}}, color={0,0,127}));
+          {-42,36},{-42,37},{-44,37}}, color={0,0,127}));
   connect(sigBus.TSource, switch1.u3) annotation (Line(
-      points={{-4.925,99.085},{-4.925,74},{-100,74},{-100,-57.6},{-13.6,-57.6}},
+      points={{-4.925,99.085},{-4.925,74},{-110,74},{-110,-57.6},{-13.6,-57.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -318,6 +322,6 @@ equation
 <li>as a low temperature heat pump, using R410a and a scroll compressor</li>
 </ul>
 <p><br>Concept </p>
-<p><br>The inner cycle of the heat pump is a Black-Box. The Black-Box uses 4-D performance maps, which describe the COP. The maps are based on a given THot, TSource, deltaTCon and PLR. The parameters QNom, THotNom, TSourceNom describe the nominal behaviour for a full load operation point e.g. W10W55 or B0W45. The nominal full load electircal power is calculated with the nominal COP and is constant for different TSource. The part load beaviour describes the part load of the compressor as a product of PLR and nominal full load electrical power (variable speed control). The thermal power and the thermal demand are calculated for any operation point as a function of COP and electrical power.</p>
+<p><br>The inner cycle of the heat pump is a Black-Box. The Black-Box uses 4-D performance maps, which describe the COP. The maps are based on a given THot, TSource, deltaTCon and PLR (for further informations: AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTableNDNotManudacturer). The parameters QNom, THotNom, TSourceNom describe the nominal behaviour for a full load operation point e.g. W10W55 or B0W45. The nominal full load electircal power is calculated with the nominal COP and is constant for different TSource. The part load beaviour describes the part load of the compressor as a product of PLR and nominal full load electrical power (variable speed control). The thermal power and the thermal demand are calculated for any operation point as a function of COP and electrical power.</p>
 </html>"));
 end ModularHeatPump;

@@ -1,8 +1,8 @@
 within AixLib.Fluid.BoilerCHP;
 model CHPNotManufacturer
    extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
-    redeclare package Medium = Media.Water,                        pressureDrop(
-        a=0), vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(
+    redeclare package Medium = Media.Water,                        pressureDrop(a=0),
+              vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(
           0.8265*PelNom/1000 + 7.8516)/1000));
 
 parameter Modelica.SIunits.Power PelNom=100000;
@@ -21,8 +21,8 @@ constant Real Brennwert=46753;
   SDF.NDTable SDFStromkennzahl(
     nin=2,
     readFromFile=true,
-    filename=Filename_Stromkennzahl,
-    dataset="/Stromkennzahl",
+    filename=Filename_PTHR,
+    dataset="/PTHR",
     dataUnit="[-]",
     scaleUnits={"W","-"},
     interpMethod=SDF.Types.InterpolationMethod.Linear,
@@ -86,8 +86,8 @@ constant Real Brennwert=46753;
   SDF.NDTable SDFEta(
     nin=2,
     readFromFile=true,
-    filename=Filename_EtaSys,
-    dataset="/EtaSystem",
+    filename=Filename_EtaEL,
+    dataset="/EtaEL",
     dataUnit="-",
     scaleUnits={"W","-"},
     interpMethod=SDF.Types.InterpolationMethod.Linear,
@@ -107,8 +107,8 @@ constant Real Brennwert=46753;
         rotation=270,
         origin={0,-110})));
 protected
-  parameter String Filename_Stromkennzahl= "D:/dja-mzu/SDF/BHKW/Stromkennzahl.sdf";
-   parameter String Filename_EtaSys= "D:/dja-mzu/SDF/BHKW/Eta.sdf";
+  parameter String Filename_PTHR= "D:/dja-mzu/SDF/BHKW/Stromkennzahl.sdf";
+   parameter String Filename_EtaEL= "D:/dja-mzu/SDF/BHKW/EtaEL.sdf";
 
 
 equation

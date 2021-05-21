@@ -157,7 +157,10 @@ expandable connector CHPControlBus
   Modelica.SIunits.Energy EnergyConsumption
   "Energy consumption"
     annotation(Dialog(tab="NotManufacturer"));
-
+     Modelica.SIunits.Temperature TVolume
+    "temperature cooling water exhaust heat exchanger exit";
+Modelica.SIunits.Temperature TCold "Sensor output TCold";
+Modelica.SIunits.Temperature THot "Sensor output THot";
   annotation (Documentation(revisions="<html><ul>
   <li>January, 2019, by Julian Matthes:<br/>
     First implementation (see <a href=

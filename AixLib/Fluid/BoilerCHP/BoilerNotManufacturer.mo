@@ -4,24 +4,12 @@ model BoilerNotManufacturer "Simple heat generator without control"
     redeclare package Medium = Media.Water,                       pressureDrop(
         a=coeffPresLoss), vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QNom/1000 - 13.388)/1000));
 
-  parameter Modelica.SIunits.TemperatureDifference dTWaterNom=15 "Temperature difference dimension point";
-  parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint";
-  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Return temperature TCold";
-  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "thermal dimension power";
+  parameter Modelica.SIunits.TemperatureDifference dTWaterNom=15 "Nominal temperature difference heat circuit";
+  parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Setpoint temperature difference heat circuit";
+  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Nominal TCold";
+  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Nominal thermal power";
   parameter Boolean m_flowVar=false "Boolean for use of variable water massflow";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
-
-
-//    replaceable package Medium2 = Media.Water constrainedby
-//     Modelica.Media.Interfaces.PartialMedium "Medium heat source"
-//       annotation (choices(
-//         choice(redeclare package Medium = AixLib.Media.Water "Water"),
-//         choice(redeclare package Medium =
-//             AixLib.Media.Antifreeze.PropyleneGlycolWater (
-//               property_T=293.15,
-//               X_a=0.40)
-//               "Propylene glycol water, 40% mass fraction")));
-//
 
 
 
@@ -31,18 +19,18 @@ model BoilerNotManufacturer "Simple heat generator without control"
         extent={{-10,10},{10,-10}},
         rotation=90,
         origin={-18,-50})));
-  BaseClasses.Controllers.StationaryBehaviour Soll(
+  BaseClasses.Controllers.StationaryBehaviour Set(
     TColdDim=TColdNom,
     QNom=QNom,
     dTWaterNom=dTWaterNom,
     m_flowVar=m_flowVar)
     annotation (Placement(transformation(extent={{-30,70},{-10,90}})));
-  BaseClasses.Controllers.ReturnInfluence Ist(
+  BaseClasses.Controllers.ReturnInfluence ReturnInfluence(
     TColdNom=TColdNom,
     QNom=QNom,
     dTWaterNom=dTWaterNom,
     m_flowVar=m_flowVar)
-    annotation (Placement(transformation(extent={{0,36},{20,56}})));
+    annotation (Placement(transformation(extent={{4,36},{24,56}})));
   Modelica.Blocks.Interfaces.RealInput PLR "Part Load Ratio" annotation (
       Placement(transformation(extent={{-140,34},{-100,74}}),
         iconTransformation(extent={{-140,34},{-100,74}})));
@@ -86,6 +74,11 @@ model BoilerNotManufacturer "Simple heat generator without control"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={82,40})));
+  Modelica.Blocks.Interfaces.RealOutput TVolume "TVolume" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={0,-110})));
 protected
     parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
@@ -93,15 +86,14 @@ protected
     "Heat capacity of metal (J/K)";
 
 equation
-
+TVolume=vol.T;
 
   connect(vol.heatPort, internalCapacity.port) annotation (Line(points={{-50,-70},
           {-50,-50},{-28,-50}},           color={191,0,0}));
-  connect(dTWater, Soll.dTWater)
-    annotation (Line(points={{-120,90},{-76,90},{-76,82},{-32,82}},
-                                                  color={0,0,127}));
-  connect(dTWater, Ist.DeltaTWater) annotation (Line(points={{-120,90},{-84,90},
-          {-84,39},{-2,39}}, color={0,0,127}));
+  connect(dTWater, Set.dTWater) annotation (Line(points={{-120,90},{-76,90},{
+          -76,82},{-32,82}}, color={0,0,127}));
+  connect(dTWater, ReturnInfluence.DeltaTWater) annotation (Line(points={{-120,90},
+          {-84,90},{-84,39},{2,39}},      color={0,0,127}));
   connect(RealZero.y, switch3.u1) annotation (Line(points={{21,72},{46,72},{46,
           3.8},{46.2,3.8}},
                        color={0,0,127}));
@@ -111,17 +103,17 @@ equation
           {39,26},{39,3.8}},            color={255,0,255}));
   connect(PLR, limiter.u) annotation (Line(points={{-120,54},{-77.2,54}},
                               color={0,0,127}));
-  connect(limiter.y, Ist.PLR) annotation (Line(points={{-63.4,54},{-40,54},{-40,
-          46},{-2,46}}, color={0,0,127}));
-  connect(limiter.y, Soll.PLR) annotation (Line(points={{-63.4,54},{-60,54},{
-          -60,86},{-32,86}}, color={0,0,127}));
+  connect(limiter.y, ReturnInfluence.PLR) annotation (Line(points={{-63.4,54},{
+          -40,54},{-40,46},{2,46}},  color={0,0,127}));
+  connect(limiter.y, Set.PLR) annotation (Line(points={{-63.4,54},{-60,54},{-60,
+          86},{-32,86}}, color={0,0,127}));
   connect(heatFlowSensor.port_b, fixedTemperature.port)
     annotation (Line(points={{-14,-34},{2,-34}}, color={191,0,0}));
   connect(ConductanceToEnv.port_b, heatFlowSensor.port_a)
     annotation (Line(points={{-32,-34},{-26,-34}}, color={191,0,0}));
   connect(switch3.y, heater.Q_flow) annotation (Line(points={{39,-16.9},{39,-22},
           {-60,-22},{-60,-40}}, color={0,0,127}));
-  connect(heatFlowSensor.Q_flow, Soll.QLosses)
+  connect(heatFlowSensor.Q_flow, Set.QLosses)
     annotation (Line(points={{-20,-28},{-20,68}}, color={0,0,127}));
   connect(lessEqualThreshold.y, switch1.u2) annotation (Line(points={{-43.4,26},
           {62,26},{62,60},{82,60},{82,52}},                   color={255,0,255}));
@@ -129,14 +121,14 @@ equation
           52}},                       color={0,0,127}));
   connect(switch1.y, PowerDemand)
     annotation (Line(points={{82,29},{82,20},{110,20}},   color={0,0,127}));
-  connect(Soll.PowerDemand, switch1.u3) annotation (Line(points={{-20,91},{-20,
-          96},{74,96},{74,52}},       color={0,0,127}));
-  connect(senTCold.T, Ist.TColdMeasure) annotation (Line(points={{-70,-69},{-70,
-          4},{-26,4},{-26,53},{-2,53}},           color={0,0,127}));
-  connect(heatFlowSensor.Q_flow, Ist.QLosses) annotation (Line(points={{-20,-28},
-          {-20,20},{10,20},{10,34}}, color={0,0,127}));
-  connect(Ist.Q_flow, switch3.u3) annotation (Line(points={{21,46},{31.8,46},{
-          31.8,3.8}},                color={0,0,127}));
+  connect(Set.PowerDemand, switch1.u3) annotation (Line(points={{-20,91},{-20,
+          96},{74,96},{74,52}}, color={0,0,127}));
+  connect(senTCold.T, ReturnInfluence.TColdMeasure) annotation (Line(points={{-70,-69},
+          {-70,4},{-26,4},{-26,53},{2,53}},           color={0,0,127}));
+  connect(heatFlowSensor.Q_flow, ReturnInfluence.QLosses) annotation (Line(
+        points={{-20,-28},{-20,20},{14,20},{14,34}}, color={0,0,127}));
+  connect(ReturnInfluence.Q_flow, switch3.u3)
+    annotation (Line(points={{25,46},{31.8,46},{31.8,3.8}}, color={0,0,127}));
   connect(ConductanceToEnv.port_a, vol.heatPort)
     annotation (Line(points={{-44,-34},{-50,-34},{-50,-70}}, color={191,0,0}));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

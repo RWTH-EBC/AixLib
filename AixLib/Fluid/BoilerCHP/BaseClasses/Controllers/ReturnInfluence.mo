@@ -1,9 +1,9 @@
-﻿within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
+within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model ReturnInfluence
 
-  parameter Modelica.SIunits.Temperature TColdNom=273.15+35; // Rücklauf Setpoint
-  parameter Modelica.SIunits.HeatFlowRate QNom=50000; // thermische Nennleistung
-  parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20; // Auslegungstemperaturdifferenz
+  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Nominal TCold";
+  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Nominal thermal power";
+  parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Nominal temperature difference heat circuit";
  parameter Boolean m_flowVar=false;
 
 
@@ -27,7 +27,7 @@ model ReturnInfluence
     nin=4,
     readFromFile=true,
     filename=Filename,
-    dataset="/Eta",
+    dataset="/Eta_TCold",
     dataUnit="-",
     scaleUnits={"K","degC","-","K"},
     interpMethod=SDF.Types.InterpolationMethod.Linear)
@@ -73,7 +73,7 @@ model ReturnInfluence
   Modelica.Blocks.Math.Add add1(k1=1, k2=1)
     annotation (Placement(transformation(extent={{68,-64},{88,-44}})));
 protected
-  parameter String Filename= if m_flowVar==false then "D:/dja-mzu/BoilerSDF/Instat/ReturnFlowBehaviour_mNom.sdf" else "D:/dja-mzu/BoilerSDF/Instat/ReturnFlowBehaviour_mVar.sdf";
+  parameter String Filename= if m_flowVar==false then "D:/dja-mzu/SDF/Boiler/Eta_TCold_mNom.sdf" else "D:/dja-mzu/SDF/Boiler/Eta_TCold_mVar.sdf";
 
 equation
 

@@ -967,14 +967,14 @@ package PerformanceData "Different models used for a black box heat pump model"
     Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=dTConFix)
       annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
   protected
-    parameter String FilenameCOP= if HighTemp==false then "D:/dja-mzu/SDF/WP/COP_Scroll_DIM4_R410a.sdf" else "D:/dja-mzu/SDF/WP/COP_DIM4_R134a.sdf";
+    parameter String FilenameCOP= if HighTemp==false then "D:/dja-mzu/SDF/WP/COP_Scroll_R410a.sdf" else "D:/dja-mzu/SDF/WP/COP_Hubkolben_R134a.sdf";
 
 
   equation
 
 
     connect(fromKelvin1.Celsius,multiplex4_1. u1[1]) annotation (Line(points={{80.7,83},
-            {86,83},{86,50},{47,50},{47,28}},                     color={0,0,127}));
+            {90,83},{90,50},{47,50},{47,28}},                     color={0,0,127}));
     connect(switch4.y,switch3. u3) annotation (Line(points={{-49,60},{-42,60},{
             -42,50},{-42.2,50},{-42.2,23.8}},
                                           color={0,0,127}));
@@ -1214,7 +1214,7 @@ package PerformanceData "Different models used for a black box heat pump model"
     Modelica.Blocks.Interfaces.RealInput u
       annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   protected
-  parameter String FilenameCOP= if HighTemp==false then "D:/dja-mzu/SDF/WP/COP_Scroll_DIM4_R410a.sdf" else "D:/dja-mzu/SDF/WP/COP_DIM4_R134a.sdf";
+  parameter String FilenameCOP= if HighTemp==false then "D:/dja-mzu/SDF/WP/COP_Scroll_R410a.sdf" else "D:/dja-mzu/SDF/WP/COP_Hubkolben_R134a.sdf";
 
 
   equation

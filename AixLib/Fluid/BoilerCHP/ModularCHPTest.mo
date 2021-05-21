@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP;
-model ModularCHPNotManufacturer
+model ModularCHPTest
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = Media.Water,m_flow_nominal=m_flow_nominalCC);
 
@@ -24,7 +24,7 @@ model ModularCHPNotManufacturer
     PelNom=PelNom)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   inner Modelica.Fluid.System system(p_start=system.p_ambient)
-    annotation (Placement(transformation(extent={{100,20},{120,40}})));
+    annotation (Placement(transformation(extent={{100,70},{120,90}})));
 
   Sensors.TemperatureTwoPort THotHeatCircuit(
     redeclare package Medium = Media.Water,
@@ -35,23 +35,19 @@ model ModularCHPNotManufacturer
   HeatExchangers.DryCoilEffectivenessNTU hex(
     redeclare package Medium1 = Media.Water,
     redeclare package Medium2 = Media.Water,
-    allowFlowReversal1=false,
-    allowFlowReversal2=false,
+    allowFlowReversal1=true,
+    allowFlowReversal2=true,
     m1_flow_nominal=m_flow_nominalHC,
     m2_flow_nominal=m_flow_nominalCC,
-    from_dp1=true,
-    dp1_nominal=2500,
-    linearizeFlowResistance1=true,
-    from_dp2=true,
+    dp1_nominal=0,
     dp2_nominal=2500,
-    linearizeFlowResistance2=true,
     configuration=AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow,
     use_Q_flow_nominal=true,
     Q_flow_nominal=(1.3423*PelNom/1000 + 17.681)*1000,
     T_a1_nominal=333.15,
     T_a2_nominal=359.41,
     r_nominal=1)
-    annotation (Placement(transformation(extent={{-8,-56},{12,-76}})));
+    annotation (Placement(transformation(extent={{-10,-56},{10,-76}})));
   Sensors.TemperatureTwoPort TColdHeatCircuit(
     redeclare package Medium = Media.Water,
     m_flow_nominal=m_flow_nominalHC,
@@ -63,7 +59,7 @@ model ModularCHPNotManufacturer
     m_flow_nominal=m_flow_nominalCC,
     initType=Modelica.Blocks.Types.Init.InitialState,
     T_start=TStart)
-    annotation (Placement(transformation(extent={{-12,-68},{-28,-52}})));
+    annotation (Placement(transformation(extent={{-16,-68},{-32,-52}})));
   Sensors.TemperatureTwoPort THotCoolingWater(
     redeclare package Medium = Media.Water,
     m_flow_nominal=m_flow_nominalCC,
@@ -88,34 +84,42 @@ model ModularCHPNotManufacturer
   Modelica.Blocks.Continuous.Integrator integrator
     annotation (Placement(transformation(extent={{50,0},{70,20}})));
   Modelica.Blocks.Continuous.Integrator integrator1
-    annotation (Placement(transformation(extent={{40,30},{60,50}})));
+    annotation (Placement(transformation(extent={{36,28},{56,48}})));
 
-  BaseClasses.Controllers.ControlCHPNotManufacturer controlCHPNotManufacturer(
-    PelNom=PelNom,
-    deltaTHeatingCircuit=deltaTHeatingCircuit,
-    THotCoolingWaterMax=THotCoolingWaterMax)
-    annotation (Placement(transformation(extent={{-150,-50},{-130,-30}})));
   Modelica.Blocks.Logical.Greater greater
     annotation (Placement(transformation(extent={{-62,22},{-42,42}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=THotCoolingWaterMax)
-    annotation (Placement(transformation(extent={{-134,14},{-102,34}})));
+    annotation (Placement(transformation(extent={{-110,14},{-78,34}})));
   Sources.Boundary_pT bou(
-    p=100000,
     use_T_in=false,
     redeclare package Medium = Media.Water,
     nPorts=1)
-    annotation (Placement(transformation(extent={{-60,-54},{-40,-34}})));
-  Movers.FlowControlled_m_flow fan(redeclare package Medium = Media.Water,
+    annotation (Placement(transformation(extent={{-80,-54},{-60,-34}})));
+  Movers.FlowControlled_m_flow fan(
+    redeclare package Medium = Media.Water,
     p_start=100000,
-      m_flow_nominal=m_flow_nominalCC) annotation (Placement(transformation(
+    m_flow_nominal=m_flow_nominalCC)   annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-32,-14})));
-  Movers.FlowControlled_m_flow fan1(redeclare package Medium = Media.Water,
-      m_flow_nominal=m_flow_nominalCC) annotation (Placement(transformation(
-        extent={{10,-8},{-10,8}},
+        origin={-36,-14})));
+  Movers.SpeedControlled_y fan1(
+    redeclare package Medium = Media.Water,
+    allowFlowReversal=false,
+    m_flow_small=0.001,
+    per(pressure(V_flow={0,V_flow_HC,V_flow_HC*2}, dp={dp_nominal/0.8,
+            dp_nominal,0})),
+    addPowerToMedium=false)
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=90,
-        origin={-92,-46})));
+        origin={-100,-30})));
+  FixedResistances.HydraulicResistance              hydraulicResistance(
+    redeclare package Medium = Media.Water,
+    m_flow_nominal=m_flow_nominalCC,
+    zeta=1,
+    diameter=1)
+    annotation (Placement(transformation(extent={{-88,-82},{-68,-62}})));
+  BaseClasses.Controllers.ControlCHPNotManufacturer controlCHPNotManufacturer
+    annotation (Placement(transformation(extent={{-154,-22},{-134,-2}})));
 protected
   parameter Modelica.SIunits.Temperature TMinCoolingWater=354.15;
   parameter Modelica.SIunits.TemperatureDifference deltaTCoolingWater=3.47;
@@ -135,12 +139,12 @@ protected
               "Propylene glycol water, 40% mass fraction")));
 
 
- parameter Modelica.SIunits.Pressure dp_nominal=2500;
+ parameter Modelica.SIunits.Pressure dp_nominal=16*V_flow_HC^2*MediumHCCC.d_const/(2*Modelica.Constants.pi^2);
  parameter Modelica.SIunits.VolumeFlowRate V_flow_CC=m_flow_nominalCC/MediumHCCC.d_const;
  parameter Modelica.SIunits.VolumeFlowRate V_flow_HC=m_flow_nominalHC/MediumHCCC.d_const;
 
 
-//  zeta=a/8*(Modelica.Constants.pi^2)/Medium.d_const,
+//  zeta=2*dp_nominal*Modelica.Constants.pi^2/(Medium.d_const*V_flow_CC^2*16),
 
 equation
 
@@ -153,9 +157,9 @@ equation
 
 
   connect(hex.port_b1,THotHeatCircuit. port_a)
-    annotation (Line(points={{12,-72},{58,-72}},         color={0,127,255}));
+    annotation (Line(points={{10,-72},{58,-72}},         color={0,127,255}));
   connect(TColdHeatCircuit.port_b,hex. port_a1)
-    annotation (Line(points={{-36,-72},{-8,-72}},  color={0,127,255}));
+    annotation (Line(points={{-36,-72},{-10,-72}}, color={0,127,255}));
   connect(pLRMin.y, switch4.u2) annotation (Line(points={{-65,68},{-29.8,68},{
           -29.8,67}},                 color={255,0,255}));
   connect(switch3.y, cHPNotManufacturer.PLR) annotation (Line(points={{5,35.1},
@@ -189,28 +193,17 @@ equation
   connect(cHPNotManufacturer.PowerDemand, integrator.u) annotation (Line(points={{11,-4},
           {42,-4},{42,10},{48,10}},             color={0,0,127}));
   connect(cHPNotManufacturer.Pel, integrator1.u) annotation (Line(points={{11,8},{
-          38,8},{38,40}},                   color={0,0,127}));
-  connect(cHPNotManufacturer.THotEngine, controlCHPNotManufacturer.TVolume)
-    annotation (Line(points={{0,-11},{0,-28},{-160,-28},{-160,-37},{-152,-37}},
-        color={0,0,127}));
+          34,8},{34,38}},                   color={0,0,127}));
   connect(cHPNotManufacturer.THotEngine, greater.u1) annotation (Line(points={{
           0,-11},{0,-28},{-72,-28},{-72,32},{-64,32}}, color={0,0,127}));
   connect(realExpression1.y, greater.u2)
-    annotation (Line(points={{-100.4,24},{-64,24}}, color={0,0,127}));
+    annotation (Line(points={{-76.4,24},{-64,24}},  color={0,0,127}));
   connect(greater.y, switch3.u2) annotation (Line(points={{-41,32},{28,32},{28,
           74},{5,74},{5,55.8}}, color={255,0,255}));
-  connect(greater.y, controlCHPNotManufacturer.shutdown) annotation (Line(
-        points={{-41,32},{-32,32},{-32,48},{-164,48},{-164,-49},{-152,-49}},
-        color={255,0,255}));
-  connect(pLRMin.y, controlCHPNotManufacturer.PLROff) annotation (Line(points={{-65,68},
-          {-60,68},{-60,86},{-168,86},{-168,-52},{-152,-52}},          color={
-          255,0,255}));
-  connect(cHPNotManufacturer.port_b, THotCoolingWater.port_a)
-    annotation (Line(points={{10,0},{30,0},{30,-60}}, color={0,127,255}));
   connect(THotCoolingWater.port_b, hex.port_a2)
-    annotation (Line(points={{16,-60},{12,-60}}, color={0,127,255}));
+    annotation (Line(points={{16,-60},{10,-60}}, color={0,127,255}));
   connect(hex.port_b2, TColdCoolingWater.port_a)
-    annotation (Line(points={{-8,-60},{-12,-60}}, color={0,127,255}));
+    annotation (Line(points={{-10,-60},{-16,-60}},color={0,127,255}));
   connect(integrator.y, cHPControlBus.EnergyConsumption) annotation (Line(
         points={{71,10},{92,10},{92,100},{0.1,100},{0.1,102.1}}, color={0,0,127}),
       Text(
@@ -218,37 +211,59 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(integrator1.y, cHPControlBus.ElectricEnergy) annotation (Line(points=
-          {{61,40},{80,40},{80,102.1},{0.1,102.1}}, color={0,0,127}), Text(
+  connect(integrator1.y, cHPControlBus.ElectricEnergy) annotation (Line(points={{57,38},
+          {80,38},{80,102.1},{0.1,102.1}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(cHPNotManufacturer.THotEngine, cHPControlBus.TVolume) annotation (
-      Line(points={{0,-11},{2,-11},{2,-34},{132,-34},{132,102.1},{0.1,102.1}},
+      Line(points={{0,-11},{0,-28},{124,-28},{124,102.1},{0.1,102.1}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(fan.port_b, cHPNotManufacturer.port_a)
-    annotation (Line(points={{-32,-4},{-32,0},{-10,0}}, color={0,127,255}));
-  connect(fan.port_a, TColdCoolingWater.port_b) annotation (Line(points={{-32,
-          -24},{-32,-60},{-28,-60}}, color={0,127,255}));
-  connect(bou.ports[1], fan.port_a) annotation (Line(points={{-40,-44},{-32,-44},
-          {-32,-24}}, color={0,127,255}));
+    annotation (Line(points={{-36,-4},{-36,0},{-10,0}}, color={0,127,255}));
+  connect(fan.port_a, TColdCoolingWater.port_b) annotation (Line(points={{-36,-24},
+          {-36,-60},{-32,-60}}, color={0,127,255}));
+  connect(cHPNotManufacturer.port_b, THotCoolingWater.port_a)
+    annotation (Line(points={{10,0},{30,0},{30,-60}}, color={0,127,255}));
+  connect(bou.ports[1], fan.port_a) annotation (Line(points={{-60,-44},{-36,-44},
+          {-36,-24}}, color={0,127,255}));
+  connect(port_a, fan1.port_a)
+    annotation (Line(points={{-100,0},{-100,-20}}, color={0,127,255}));
+  connect(hydraulicResistance.port_b, TColdHeatCircuit.port_a)
+    annotation (Line(points={{-68,-72},{-56,-72}}, color={0,127,255}));
+  connect(hydraulicResistance.port_a, fan1.port_b) annotation (Line(points={{-88,-72},
+          {-100,-72},{-100,-40}},      color={0,127,255}));
+  connect(controlCHPNotManufacturer.mFlowRelHC, fan1.y) annotation (Line(points=
+         {{-133,-19},{-134,-19},{-134,-30},{-112,-30}}, color={0,0,127}));
   connect(controlCHPNotManufacturer.mFlowCC, fan.m_flow_in) annotation (Line(
-        points={{-129,-40},{-114,-40},{-114,-14},{-44,-14}}, color={0,0,127}));
-  connect(fan1.port_a, port_a)
-    annotation (Line(points={{-92,-36},{-92,0},{-100,0}}, color={0,127,255}));
-  connect(controlCHPNotManufacturer.mFlowRelHC, fan1.m_flow_in) annotation (
-      Line(points={{-129,-47},{-114,-47},{-114,-46},{-101.6,-46}}, color={0,0,
-          127}));
-  connect(fan1.port_b, TColdHeatCircuit.port_a) annotation (Line(points={{-92,
-          -56},{-92,-72},{-56,-72}}, color={0,127,255}));
-  connect(THotHeatCircuit.T, controlCHPNotManufacturer.THot) annotation (Line(
-        points={{68,-61},{68,-48},{124,-48},{124,-84},{-210,-84},{-210,-45},{
-          -152,-45}}, color={0,0,127}));
+        points={{-133,-12.8},{-48,-12.8},{-48,-14}}, color={0,0,127}));
+  connect(cHPNotManufacturer.THotEngine, controlCHPNotManufacturer.TVolume)
+    annotation (Line(points={{0,-11},{0,-28},{-72,-28},{-72,12},{-170,12},{-170,
+          -9},{-156,-9}}, color={0,0,127}));
+  connect(controlCHPNotManufacturer.PLROff, pLRMin.y) annotation (Line(points={
+          {-156,-20},{-176,-20},{-176,46},{-65,46},{-65,68}}, color={255,0,255}));
+  connect(greater.y, controlCHPNotManufacturer.shutdown) annotation (Line(
+        points={{-41,32},{-30,32},{-30,52},{-182,52},{-182,-14.6},{-156,-14.6}},
+        color={255,0,255}));
+  connect(THotHeatCircuit.T, cHPControlBus.THot) annotation (Line(points={{68,
+          -61},{68,-40},{130,-40},{130,120},{0.1,120},{0.1,102.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(TColdHeatCircuit.T, cHPControlBus.TCold) annotation (Line(points={{
+          -46,-61},{-46,-58},{-188,-58},{-188,120},{0.1,120},{0.1,102.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
@@ -257,11 +272,11 @@ equation
           fillColor={170,170,255})}),                            Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(
-      StopTime=5000,
+      StopTime=1000,
       Interval=1,
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
     Documentation(info="<html>
 <p>Model of a CHP-module with an inner cooling circuit and a control unit. Heat circuit and cooling circuit are connected with a heat exchanger. Further informations are given in the submodel discribtion.</p>
 </html>"));
-end ModularCHPNotManufacturer;
+end ModularCHPTest;

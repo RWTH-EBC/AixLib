@@ -1,12 +1,11 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model StationaryBehaviour
 
-   parameter Modelica.SIunits.Temperature TColdDim=273.15+ 35;
-   parameter Modelica.SIunits.HeatFlowRate QNom=50000; // thermische Nennleistung [W]
-   parameter AixLib.DataBase.Boiler.EtaTExhaust.EtaTExhaustBaseDataDefinition paramEta=AixLib.DataBase.Boiler.EtaTExhaust.Ambient1();
+   parameter Modelica.SIunits.Temperature TColdDim=273.15+35 "Nominal TCold";
+   parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Nominal thermal power";
+      parameter AixLib.DataBase.Boiler.EtaTExhaust.EtaTExhaustBaseDataDefinition paramEta=AixLib.DataBase.Boiler.EtaTExhaust.Ambient1();
    parameter Real EtaTable[:,2]=paramEta.EtaTable;
-   parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20; // Auslegungstemperaturdifferenz
-
+   parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Nominal temperature difference heat circuit";
    parameter Boolean m_flowVar=false;
 
 
@@ -72,7 +71,7 @@ model StationaryBehaviour
                                          "Product QSetPoint"
     annotation (Placement(transformation(extent={{0,-18},{16,-2}})));
 protected
-  parameter String Filename= if m_flowVar==false then "D:/dja-mzu/BoilerSDF/Stat/BoilerBehaviour_mNom.sdf" else "D:/dja-mzu/BoilerSDF/Stat/BoilerBehaviour_mVar.sdf";
+  parameter String Filename= if m_flowVar==false then "D:/dja-mzu/SDF/Boiler/TAg_mNom.sdf" else "D:/dja-mzu/SDF/Boiler/TAg_mVar.sdf";
 
 equation
 
@@ -119,5 +118,6 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>This model estimates the exhaust temperature. The adiabatic efficiency is a function of the exhaust temperature. The power demand is the sum of the ambient losses, the given thermal power of the setpoint and the exhaust losses.</p>
+<p><img src=\"modelica://AixLib/../../../Diagramme AixLib/Boiler/Kennfeld_TAG_PLRvar_20K_mNom.png\"/></p>
 </html>"));
 end StationaryBehaviour;
