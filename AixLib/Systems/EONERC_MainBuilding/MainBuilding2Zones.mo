@@ -577,7 +577,7 @@ model MainBuilding2Zones "Benchmark building model"
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={148,16})));
-  Modelica.Blocks.Nonlinear.Limiter limiterCCACold1(uMax=100000, uMin=0)
+  Modelica.Blocks.Nonlinear.Limiter limiterCCACold1(uMax=80000,  uMin=0)
     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
