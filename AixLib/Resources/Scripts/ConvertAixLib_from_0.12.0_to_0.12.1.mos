@@ -2,6 +2,9 @@
 
 convertClear();
 
+convertClass("AixLib.FastHVAC", "AixLib.Obsolete.YearIndependent.FastHVAC");
+convertClass("AixLib.Utilities.HeatTransfer.HeatConvPipeInside", "AixLib.Obsolete.YearIndependent.Utilities.HeatTransfer.HeatConvPipeInside");
+
 // Change naming in AixLib.Controls.Interfaces.ThermalMachineControlBus
 convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"n"}, {"nSet"});
 convertElement("AixLib.Controls.Interfaces.ThermalMachineControlBus", {"mode"}, {"modeSet"});
