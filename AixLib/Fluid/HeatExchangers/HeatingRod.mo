@@ -184,18 +184,60 @@ equation
           color={238,46,47},
           thickness=0.5)}),
 defaultComponentName="hea",
-Documentation(info="<html>
-<p>Model for a heating rod. </p>
-<p>This model adds heat in the amount of <span style=\"font-family: Courier New;\">Q_flow = u Q_flow_nominal</span> to the medium. The input signal <span style=\"font-family: Courier New;\">u</span> and the nominal heat flow rate <span style=\"font-family: Courier New;\">Q_flow_nominal</span> can be positive or negative. A positive value of <span style=\"font-family: Courier New;\">Q_flow</span> means heating, and negative means cooling. </p>
-<p>The outlet conditions at <span style=\"font-family: Courier New;\">port_a</span> are not affected by this model, other than for a possible pressure difference due to flow friction. </p>
-<p>Optionally, this model can have a flow resistance. Set <span style=\"font-family: Courier New;\">dp_nominal = 0</span> to disable the flow friction calculation. </p>
-<p>For a model that uses as an input the fluid temperature leaving at <span style=\"font-family: Courier New;\">port_b</span>, use <a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">AixLib.Fluid.HeatExchangers.PrescribedOutlet</a> </p>
-<p>As output, the electrical energy required to supply <span style=\"font-family: Courier New;\">Q_flow</span> is calculated using the efficiency which is a parameter of the model.</p>
-<p>Lastly, the number of times the heating rod switches on may be used as an output.</p>
-<h4>Limitations </h4>
-<p>This model does not affect the humidity of the air. Therefore, if used to cool air below the dew point temperature, the water mass fraction will not change. </p>
-<h4>Validation </h4>
-<p>The model has been validated against the analytical solution in the example <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u\">AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>. </p>
+Documentation(info="<html><p>
+  Model for a heating rod.
+</p>
+<p>
+  This model adds heat in the amount of <span style=
+  \"font-family: Courier New;\">Q_flow = u Q_flow_nominal</span> to the
+  medium. The input signal <span style=
+  \"font-family: Courier New;\">u</span> and the nominal heat flow rate
+  <span style=\"font-family: Courier New;\">Q_flow_nominal</span> can be
+  positive or negative. A positive value of <span style=
+  \"font-family: Courier New;\">Q_flow</span> means heating, and negative
+  means cooling.
+</p>
+<p>
+  The outlet conditions at <span style=
+  \"font-family: Courier New;\">port_a</span> are not affected by this
+  model, other than for a possible pressure difference due to flow
+  friction.
+</p>
+<p>
+  Optionally, this model can have a flow resistance. Set <span style=
+  \"font-family: Courier New;\">dp_nominal = 0</span> to disable the flow
+  friction calculation.
+</p>
+<p>
+  For a model that uses as an input the fluid temperature leaving at
+  <span style=\"font-family: Courier New;\">port_b</span>, use <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
+</p>
+<p>
+  As output, the electrical energy required to supply <span style=
+  \"font-family: Courier New;\">Q_flow</span> is calculated using the
+  efficiency which is a parameter of the model.
+</p>
+<p>
+  Lastly, the number of times the heating rod switches on may be used
+  as an output.
+</p>
+<h4>
+  Limitations
+</h4>
+<p>
+  This model does not affect the humidity of the air. Therefore, if
+  used to cool air below the dew point temperature, the water mass
+  fraction will not change.
+</p>
+<h4>
+  Validation
+</h4>
+<p>
+  The model has been validated against the analytical solution in the
+  example <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u\">AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
+</p>
 </html>",
 revisions="<html><ul>
   <li>May 5, 2021, by Fabian Wuellhorst:<br/>

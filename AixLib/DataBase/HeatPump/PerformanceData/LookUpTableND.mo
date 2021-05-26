@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
@@ -280,8 +280,9 @@ equation
   </li>
 </ul>
 </html>", revisions="<html><ul>
+<ul>
   <li>
-    <i>May 21, 2021&#1092;</i> by Fabian Wüllhorst:<br/>
+    <i>May 21, 2021ф</i> by Fabian Wüllhorst:<br/>
     Make use of BaseClasses (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1092\">#1092</a>)
   </li>
