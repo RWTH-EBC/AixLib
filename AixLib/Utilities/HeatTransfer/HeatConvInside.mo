@@ -19,8 +19,8 @@ model HeatConvInside
                                          annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 3 then true else false));
 
-  parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 1 then true else false));
+  parameter Modelica.SIunits.TemperatureDifference dT_small = 0.1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
+        enable=if calcMethod == 1 or calcMethod == 2 or calcMethod == 4 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
@@ -31,7 +31,7 @@ model HeatConvInside
       choice=3 "horizontal facing down",
       radioButtons=true),
       Evaluate=true);
-  parameter Modelica.SIunits.Area A(min=0) "Area of surface";
+  parameter Modelica.SIunits.Area A(min=Modelica.Constants.eps) "Area of surface";
   Modelica.SIunits.CoefficientOfHeatTransfer hCon "variable heat transfer coefficient";
 
 protected
@@ -77,16 +77,26 @@ equation
   elseif calcMethod == 2 then
 
     // floor (horizontal facing up)
+
     if surfaceOrientation == 2 then
-      hCon = smooth(2, noEvent(if port_b.T >= port_a.T then 2*(posDiff^0.31) else 0.54*(posDiff^0.31)));
+      hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
+        y1=2*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
+        y2=0.54*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
+        x_small=dT_small);
+
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      hCon = smooth(2, noEvent(if port_b.T >= port_a.T then 0.54*(posDiff^0.31) else 2*(posDiff^0.31)));
+       hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
+        y1=0.54*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
+        y2=2*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
+        x_small=dT_small);
 
     // vertical plate
     else
-      hCon = 1.6*(posDiff^0.3);
+      hCon = 1.6*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small);
     end if;
 
 
@@ -311,6 +321,9 @@ equation
   \"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a>
 </p>
 <ul>
+  <li>
+    <i>May 6, 2021</i> by Felix Stegemerten / Larissa K&uuml;hn<br/>
+    Bugfixing Method &quot;Glueck&quot;</li>
   <li>
     <i>May 30, 2019</i> by Katharina Brinkmann / Philipp Mehrfeld:<br/>
     <a href=
