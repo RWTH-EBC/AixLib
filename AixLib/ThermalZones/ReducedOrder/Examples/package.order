@@ -3,6 +3,7 @@ Multizone
 MultizoneEquipped
 MultizoneMoistAirCO2
 MultizoneMoistAirCO2Equipped
+MultizoneEquippedSwimmingBath
 MultizonePartlyCooled
 SimpleRoomFourElements
 SimpleRoomOneElement
@@ -12,5 +13,3 @@ ThermalZone
 ThermalZoneAirExchange
 ThermalZoneMoistAir
 ThermalZoneMoistCO2AirExchange
-MyMultizoneEquipped
-MultizoneEquippedMine

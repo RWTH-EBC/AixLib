@@ -285,7 +285,7 @@ package BaseClasses "Package with base classes for multizone models"
         connect(zone[i].MFlowRecycledWater, MFlowRW[i]) annotation (Line(points={{82.1,
                 61.3},{82.1,-78.35},{110,-78.35},{110,-80}},
                                                    color={0,0,127}));
-      elseif use_swimmingPools_MZ and not zone[i].use_swimmingPools or not use_swimmingPools_MZ then
+      else
         PPump[i] = 0;
         QHeatPools[i]= 0;
         MFlowWW[i]= 0;

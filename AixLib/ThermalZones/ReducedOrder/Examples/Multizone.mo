@@ -16,7 +16,6 @@ model Multizone "Illustrates the use of Multizone"
         Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
         Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
         Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle()},
-
     redeclare package Medium = AixLib.Media.Air,
     T_start=293.15,
     use_swimmingPools_MZ=true,
@@ -25,6 +24,7 @@ model Multizone "Illustrates the use of Multizone"
     internalGainsMode=1)
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
+
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
     weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,

@@ -18,7 +18,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
     parameter Modelica.SIunits.HeatCapacity CExt[nExt](
       each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, exterior wall with earth contact"
       annotation(Dialog(group="Exterior walls"));
-    parameter Modelica.SIunits.Area AExt "Area of exterior pool wall with earth contact" annotation(Dialog(group="Exterior walls"));
+    parameter Modelica.SIunits.Area AExt(min=0) "Area of exterior pool wall with earth contact" annotation(Dialog(group="Exterior walls"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt "Coefficient of heat transfer between the water and exterior pool walls" annotation(Dialog(group="Exterior walls"));
 
     // Interior Pool Walls - vertical and horizontal combined
@@ -27,7 +27,7 @@ package BaseClasses "Base classes for Swimming Pool Models"
       each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b, interior wall" annotation(Dialog(group="Interior walls"));
     parameter Modelica.SIunits.HeatCapacity CInt[nInt](
       each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, interior wall" annotation(Dialog(group="Interior walls"));
-    parameter Modelica.SIunits.Area AInt "Area of interior pool walls " annotation(Dialog(group="Interior walls"));
+    parameter Modelica.SIunits.Area AInt(min=0) "Area of interior pool walls " annotation(Dialog(group="Interior walls"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt "Coefficient of heat transfer between the water and interior pool walls" annotation(Dialog(group="Interior walls"));
 
     // Pool Floor with earth contact
@@ -42,10 +42,10 @@ package BaseClasses "Base classes for Swimming Pool Models"
     parameter Modelica.SIunits.HeatCapacity CFloor[nFloor](
       each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, pool floor, pool floor with earth contact"
       annotation(Dialog(group="Pool floor"));
-    parameter Modelica.SIunits.Area AFloor "Area of pool floor with earth contact" annotation(Dialog(group="Pool floor"));
+    parameter Modelica.SIunits.Area AFloor(min=0) "Area of pool floor with earth contact" annotation(Dialog(group="Pool floor"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer hConFloor "Coefficient of heat transfer between the water and pool floor" annotation(Dialog(group="Pool floor"));
 
-    Modelica.Thermal.HeatTransfer.Components.Convection convExt if AExt > 0.01
+    Modelica.Thermal.HeatTransfer.Components.Convection convExt
       "Convection between Water and pool wall"
       annotation (Placement(transformation(extent={{-26,24},{-42,40}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall extWalRC(
@@ -53,27 +53,23 @@ package BaseClasses "Base classes for Swimming Pool Models"
       final RExtRem=RExtRem,
       final CExt=CExt,
       final n=nExt,
-      T_start=T_start) if AExt > 0.01
-                                   "Pool walls with earth contact"
+      T_start=T_start)             "Pool walls with earth contact"
       annotation (Placement(transformation(extent={{0,26},{18,42}})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-      prescribedTemperature1 if AFloor > 0.01 or AExt > 0.01
+      prescribedTemperature1
       "Generate Heat Flow for earth contact"
                              annotation (Placement(transformation(
           extent={{-6,-6},{6,6}},
           rotation=180,
           origin={48,18})));
 
-    Modelica.Blocks.Sources.Constant const_hConExt(k=AExt*hConExt) if
-                                                                 AExt > 0.01
+    Modelica.Blocks.Sources.Constant const_hConExt(k=AExt*hConExt)
       "heat transfer coefficient between vertikal pool wall and water"
       annotation (Placement(transformation(extent={{-8,40},{-24,56}})));
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_a if AExt > 0
-       or AInt > 0 or AFloor > 0
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_a
       "Inlet for heattransfer"
       annotation (Placement(transformation(extent={{-110,-8},{-90,12}})));
-    Modelica.Blocks.Interfaces.RealInput TSoil if AFloor > 0.01 or AExt > 0.01
-                                               "Temperature of Soil"
+    Modelica.Blocks.Interfaces.RealInput TSoil "Temperature of Soil"
       annotation (Placement(transformation(extent={{126,-2},{86,38}}),
           iconTransformation(extent={{126,16},{86,56}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall floorRC(
@@ -81,30 +77,25 @@ package BaseClasses "Base classes for Swimming Pool Models"
       final RExtRem=RFloorRem,
       final CExt=CFloor,
       final n=nFloor,
-      T_start=T_start) if AFloor > 0.01
-                                     "Floor of Swimming Poolwith earth contact"
+      T_start=T_start)               "Floor of Swimming Poolwith earth contact"
       annotation (Placement(transformation(extent={{0,-16},{18,0}})));
     ThermalZones.ReducedOrder.RC.BaseClasses.InteriorWall intWalRC(
       final n=nInt,
       final RInt=RInt,
       final CInt=CInt,
-      final T_start=T_start) if AInt > 0.01
+      final T_start=T_start)
       "RC element representing interior pool walls, horizontal and vertical"
       annotation (Placement(transformation(extent={{0,-58},{16,-40}})));
-    Modelica.Thermal.HeatTransfer.Components.Convection convFloor if AFloor >
-      0.01
+    Modelica.Thermal.HeatTransfer.Components.Convection convFloor
       "Convection between Water and pool floor"
       annotation (Placement(transformation(extent={{-24,-20},{-42,-2}})));
-    Modelica.Blocks.Sources.Constant const_hConFloor(k=AFloor*hConFloor) if
-                                                                     AFloor >
-      0.01
+    Modelica.Blocks.Sources.Constant const_hConFloor(k=AFloor*hConFloor)
       "Heat transfer coefficient between pool floor and water"
       annotation (Placement(transformation(extent={{-4,0},{-20,16}})));
-    Modelica.Thermal.HeatTransfer.Components.Convection convInt if AInt > 0.01
+    Modelica.Thermal.HeatTransfer.Components.Convection convInt
       "Convection between water and interior pool walls"
       annotation (Placement(transformation(extent={{-24,-58},{-42,-40}})));
-    Modelica.Blocks.Sources.Constant const_hConInt(k=AInt*hConInt) if
-                                                                 AInt > 0.01
+    Modelica.Blocks.Sources.Constant const_hConInt(k=AInt*hConInt)
       "Heat transfer coefficient between interior pool wall and water"
       annotation (Placement(transformation(extent={{-6,-44},{-22,-28}})));
   equation
@@ -167,7 +158,10 @@ package BaseClasses "Base classes for Swimming Pool Models"
             fillPattern=FillPattern.Solid),
           Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0})}),
                                                                    Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+          coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>This model is a base model to calculate the heat transfer through pool walls. The pool walls are sorted by: vertical walls with earth contact, pool floor with earth contact and the sum of walls and pool floor without earth contact.</p>
+</html>"));
   end HeatTransferConduction;
 
   model PumpAndPressureDrop
@@ -261,7 +255,9 @@ package BaseClasses "Base classes for Swimming Pool Models"
             lineColor={0,0,0},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid), Line(points={{0,60},{60,0},{0,-60}},
-              color={0,0,0})}));
+              color={0,0,0})}), Documentation(info="<html>
+<p>This is model&nbsp; describes a&nbsp;pump&nbsp;with prescribed mass flow (<a href=\"AixLib.Fluid.Movers.FlowControlled_m_flow\">AixLib.Fluid.Movers.FlowControlled_m_flow</a>) and&nbsp;a&nbsp;corresponding&nbsp;pressure&nbsp;drop&nbsp;(<a href=\"FixedResistances.PressureDrop\">FixedResistances.PressureDrop</a>) to&nbsp;avoid&nbsp;pressure&nbsp;build&nbsp;up&nbsp;in&nbsp;the&nbsp;system, while calculating the consumed power. </p>
+</html>"));
   end PumpAndPressureDrop;
 
   model toH_fg "Convert from Kelvin to kJ/kg"
@@ -287,7 +283,9 @@ package BaseClasses "Base classes for Swimming Pool Models"
         Rectangle(
           extent={{-100,100},{98,-100}},
           lineColor={0,0,0},
-          lineThickness=0.5)}));
+          lineThickness=0.5)}), Documentation(info="<html>
+<p>This model calculates the latent heat of the water vapor based on the temperature (in Kelvin) with the function <a href=\"AixLib.Media.Air.enthalpyOfCondensingGas\">AixLib.Media.Air.enthalpyOfCondensingGas</a>. </p>
+</html>"));
   end toH_fg;
 
   block DivisionMI2MO "Division of multiple values"
@@ -318,10 +316,13 @@ package BaseClasses "Base classes for Swimming Pool Models"
             extent={{-60,94},{90,54}},
             lineColor={128,128,128},
             textString="u1 / u2")}),                                Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+          coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>Block to divide the values of two vectors. </p>
+</html>"));
   end DivisionMI2MO;
 
-  model waveMachine "Simple Model to calculate energy demands of a wave machine"
+  model waveMachine "Calculate energy demands of a wave machine"
 
     parameter Modelica.SIunits.Length h_wave "Height of generated wave";
     parameter Modelica.SIunits.Length w_wave "Width of wave machine outlet/of generated wave";
@@ -392,7 +393,14 @@ package BaseClasses "Base classes for Swimming Pool Models"
             color={28,108,200},
             smooth=Smooth.Bezier,
             thickness=1)}),                                        Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+          coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>Model to calculate the energy demand of a wavemachine. Based on values of:</p>
+<ul>
+<li>German Association for the Recreational and Medicinal Bath Industry (Deutsche Gesellschaft f&uuml;r das Badewesen DGfdB), April 2015 : Richtlinien f&uuml;r den B&auml;derbau</li>
+<li>Chroistoph Saunus, 2005: Schwimmb&auml;der Planung - Ausf&uuml;hrung - Betrieb</li>
+</ul>
+</html>"));
   end waveMachine;
 
   model AHUcontrol "Simple on/off controller for AHU"
@@ -465,7 +473,10 @@ package BaseClasses "Base classes for Swimming Pool Models"
     connect(absToRelHum.relHum, conPID.u_m)
       annotation (Line(points={{-54,-4},{-40,-4},{-40,16}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+          coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>Model for an simple airhandling unit controller. See for an Example here: <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquippedSwimmingPool\">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquippedSwimmingPool</a> </p>
+</html>"));
   end AHUcontrol;
 
   model idealHeatExchanger "Basic Heatexchanger"
@@ -522,7 +533,10 @@ package BaseClasses "Base classes for Swimming Pool Models"
       annotation (Line(points={{-83.4,59},{-98,59},{-98,58},{-110,58}},
                                                       color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+          coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>Model for a simple heat exchanger for the <a href=\"AixLib.Fluid.Pools.IndoorSwimmingPool\">AixLib.Fluid.Pools.IndoorSwimmingPool</a> model. Includes a hysteresis to shut off the heater if the temperature of the cycle exceeds a certain limit. </p>
+</html>"));
   end idealHeatExchanger;
 
 end BaseClasses;

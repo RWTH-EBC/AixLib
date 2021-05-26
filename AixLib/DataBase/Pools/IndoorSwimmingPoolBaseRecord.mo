@@ -38,7 +38,7 @@ record IndoorSwimmingPoolBaseRecord
     min=Modelica.Constants.small) "Resistance of remaining resistor RExtRem between capacitor n and port_b, exterior wall with earth contact";
   parameter Modelica.SIunits.HeatCapacity CExt[nExt](
     each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, exterior wall with earth contact";
-  parameter Modelica.SIunits.Area AExt "Area of exterior pool wall with earth contact";
+  parameter Modelica.SIunits.Area AExt(min=0) "Area of exterior pool wall with earth contact";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt "Coefficient of heat transfer between the water and exterior pool walls";
 
   // Interior Pool Walls - vertical and horizontal combined
@@ -47,7 +47,7 @@ record IndoorSwimmingPoolBaseRecord
     each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b, interior wall";
   parameter Modelica.SIunits.HeatCapacity CInt[nInt](
     each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, interior wall";
-  parameter Modelica.SIunits.Area AInt "Area of interior pool walls ";
+  parameter Modelica.SIunits.Area AInt(min=0) "Area of interior pool walls ";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt "Coefficient of heat transfer between the water and interior pool walls";
 
   // Pool Floor with earth contact
@@ -58,7 +58,7 @@ record IndoorSwimmingPoolBaseRecord
     min=Modelica.Constants.small) "Resistance of remaining resistor RFloorRem between capacitor n and port_b, pool floor with earth contact";
   parameter Modelica.SIunits.HeatCapacity CFloor[nFloor](
     each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, pool floor, pool floor with earth contact";
-  parameter Modelica.SIunits.Area AFloor "Area of pool floor with earth contact";
+  parameter Modelica.SIunits.Area AFloor(min=0) "Area of pool floor with earth contact";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConFloor "Coefficient of heat transfer between the water and pool floor";
 
 

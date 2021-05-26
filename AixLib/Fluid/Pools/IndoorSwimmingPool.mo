@@ -7,7 +7,8 @@ model IndoorSwimmingPool
       eta_const=0.00079722,
       lambda_const=0.61439); //Water properties for water with 30 °C
 
-  parameter DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam
+  parameter DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam=
+      DataBase.Pools.TypesOfIndoorSwimmingPools.NoPool()
     "Choose setup for this swimming pool" annotation (choicesAllMatching=true);
 
   //Calculated from record/input data
@@ -17,8 +18,9 @@ model IndoorSwimmingPool
   final parameter Modelica.SIunits.MassFlowRate m_flow_recycledStart=poolParam.Q*poolParam.x_recycling
                                                                            "Nominal Mass Flow Rate for recycled water, min to catch zero flow";
 
-  final parameter Modelica.SIunits.SpecificEnergy h_evap = AixLib.Media.Air.enthalpyOfCondensingGas(poolParam.T_pool)
-                                                                                                                     "Evaporation enthalpy";
+  final parameter Modelica.SIunits.SpecificEnergy h_evap = AixLib.Media.Air.enthalpyOfVaporization(poolParam.T_pool) "Evaporation enthalpy";
+  final parameter Modelica.SIunits.SpecificEnergy h_vapor = AixLib.Media.Air.enthalpyOfCondensingGas(poolParam.T_pool)
+                                                                                                                     "Latent heat of evaporating water";
 
   Modelica.SIunits.Pressure psat_T_pool=
       Modelica.Media.Air.ReferenceMoistAir.Utilities.Water95_Utilities.psat(
@@ -325,6 +327,12 @@ Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlowEvapLoss
         extent={{-6,-8},{6,8}},
         rotation=90,
         origin={24,-12})));
+  Modelica.Blocks.Math.Gain hEvapLatentHeatGain(final k=h_vapor)
+    "Calculation of heat flow rate due to evaporation" annotation (Placement(
+        transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=-90,
+        origin={64,30})));
 equation
 
 
@@ -423,11 +431,10 @@ equation
   connect(hEvapGain.y, minus1Gain.u) annotation (Line(points={{64,34.4},{64,
         38},{38.8,38}},  color={0,0,127}));
 
-  if poolParam.AExt>0 or poolParam.AFloor>0 then
-    connect(TSoil, heatTransferConduction.TSoil) annotation (Line(points={{107,61},
+  connect(TSoil, heatTransferConduction.TSoil) annotation (Line(points={{107,61},
             {90,61},{90,56.88},{46.48,56.88}},
                                           color={0,0,127}));
-  end if;
+
 
   connect(QPool, QPool)
     annotation (Line(points={{110,-28},{110,-28}}, color={0,0,127}));
@@ -449,8 +456,6 @@ connect(getMFlowToPool.y, circPump.setMFlow) annotation (Line(points={{10.7,
           -57.3,-60}}, color={0,0,127}));
   connect(getMFlowOut.y, MFlowWW) annotation (Line(points={{58.7,-46},{80,-46},{80,-48},
           {92,-48},{92,-70},{106,-70}}, color={0,0,127}));
-  connect(QEvap, hEvapGain.y) annotation (Line(points={{108,38},{64,38},{64,
-        34.4}},                 color={0,0,127}));
 
 connect(souRW.ports[1], mFlowRW.port_a)
   annotation (Line(points={{-82,-66},{-64,-66},{-64,-70},{-44,-70}},
@@ -521,6 +526,10 @@ connect(convWaterSurface.fluid, convPoolSurface)
   connect(getTPool.y, idealHeatExchanger.TPool) annotation (Line(points={{94.7,
           12},{96,12},{96,-4},{30,-4},{30,-6},{29.76,-6},{29.76,-6.48}}, color=
           {0,0,127}));
+  connect(getMFlowEvap.y, hEvapLatentHeatGain.u)
+    annotation (Line(points={{56.7,18},{64,18},{64,25.2}}, color={0,0,127}));
+  connect(hEvapLatentHeatGain.y, QEvap)
+    annotation (Line(points={{64,34.4},{64,38},{108,38}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Line(
             points={{-72,30}}, color={255,255,170}), Bitmap(extent={{-102,-104},{100,98}},
                          fileName=
@@ -535,9 +544,9 @@ connect(convWaterSurface.fluid, convPoolSurface)
     Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>Model for indoor swimming pools to calculate energy and water demands. Optional use of a wave machine, pool cover, partial load for the circulation pump and recirculation of waste water (recycling is reduced to the input of warm water instead of cold fresh water). </p>
-<p><br><br><img src=\"C:/Users/vda-apo/sciebo/Austausch Verena-Anna/Austausch Modelica/AbbildungInfoTextmini.jpg\"/> </p>
+<p><br>The image below shows the swimming pool and the corresponding water treatment cycle, which is described in the model. </p><p><br><img src=\"modelica://AixLib/Resources/Images/Fluid/Pools/AbbildungInfoTextmini.jpg\"/> </p>
 <h4>Important parameters and Inputs </h4>
-<p>All pool specific parameters are collected in one <a href=\"AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord\">AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord</a> record.</p>
+<p>All pool specific parameters are collected in one <a href=\"AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord\">AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord</a>.</p>
 <p>Needs a profil for the opening hours and for the operation of the wave machine. </p>
 <p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
 <p>The number of people in the swimming pool does not affect the evaporation. There are only two states: used and not used. There are no water losses or heat gains due to people entering or leaving the swimming pool. </p>
