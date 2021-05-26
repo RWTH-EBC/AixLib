@@ -80,6 +80,7 @@ def read_aixlib_convert(aixlib_dir):
 	
 #  change the paths in the script from IBPSA.Package.model -> AixLib.Package.model
 def create_convert_aixlib(data,dst,l_conv_aix,comp):
+	
 	if comp is False:
 		print("The latest conversion script is up to date from the IBPSA")
 	if comp is True:
@@ -147,33 +148,54 @@ def compare_conversions(data,aixlib_dir,l_conv_aix):
 		return True
 	if len(list)==0:
 		return False
-def add_conv_to_package(aixlib_mos,aixlib_dir):
-	file = open("AixLib"+os.sep+"package.mo", "r")
-	list = []
-	counter = 0
-	number = aixlib_mos[aixlib_mos.find("_to_")+4:aixlib_mos.find(".mos")]
-	#print(number)
-	#ConvertAixLib_from_0.11.0_to_0.12.0.mos")),
-	aixlib_mos = aixlib_mos[aixlib_mos.find("ConvertAixLib"):]
+def _read_package():
+	file =  open("AixLib"+os.sep+"package.mo", "r")	
+	list = []	
 	for line in file:
-		
 		if line.find("conversion(from(") > -1:
 			list.append(line)
 			counter = 1
 			continue	
 		if line.find('.mos")),') >-1 and counter == 1:
+			
+			version_number = line[line.find("_to_")+4:line.find(".mos")]
+			return version_number
+			#list.append(version_number)
+	
+	#return list
+def add_conv_to_package(aixlib_mos,aixlib_dir):
+	file = open("AixLib"+os.sep+"package.mo", "r")
+	list = []
+	counter = 0
+	number_beg = aixlib_mos[aixlib_mos.find("_to_")+4:aixlib_mos.find(".mos")]
+	
+	number = aixlib_mos[aixlib_mos.find("from")+5:aixlib_mos.find("_to")]
+	version_number = _read_package()
+	
+	#ConvertAixLib_from_0.11.0_to_0.12.0.mos")),
+	aixlib_mos = aixlib_mos[aixlib_mos.find("ConvertAixLib"):]
+	
+	for line in file:
+		if line.find('version =') and line.find(version_number) > -1:
+			list.append(line.replace(version_number,number_beg))
+			
+		elif line.find("conversion(from(") > -1:
+			list.append(line)
+			counter = 1
+			continue	
+		elif line.find('.mos")),') >-1 and counter == 1:
 			ent = line.replace('.mos")),','.mos",')
 			list.append(ent)
 			version = '    version="'+number+'", script="modelica://'+aixlib_dir.replace(os.sep,"/")+'/' +aixlib_mos +'")),\n'
-			print(version)
+			#print(version)
 			list.append(version)
 			counter = 0
 			continue
 		else: 
 			list.append(line)
 			continue
-	for i in list:
-		print(i)
+	#for i in list:
+	#	print(i)
 	file.close()
 	pack =  open("AixLib"+os.sep+"package.mo", "w")
 	for i in list:
@@ -209,6 +231,7 @@ if  __name__ == '__main__':
 		add_conv_to_package(aixlib_mos,aixlib_dir)
 		print("New Aixlib Conversion skrip was created")
 	
+	_read_package()
 	#aixlib_mos = "ConvertAixLib_from_0.11.0_to_0.12.0.mos"
 	#aixlib_dir = "D:\01_Arbeit\04_Github\01_GitLabCI\IBPSA_Merge\GitLabCI\AixLib\Resources\Scripts"
 	#aixlib_dir = "AixLib\Resources\Scripts"
