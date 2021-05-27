@@ -8,6 +8,7 @@ package Examples "Collection of models that illustrate model use and test models
 
   model MultizoneEquippedSwimmingBath "Indoor Swimming Hall"
     import AixLib;
+  import ModelicaServices;
     extends Modelica.Icons.Example;
 
 
@@ -65,8 +66,8 @@ package Examples "Collection of models that illustrate model use and test models
       tableOnFile=true,
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       tableName="Internals",
-      fileName=Modelica.Utilities.Files.loadResource(
-          "modelica://Output_Schwimmbad_Modell/Hallenbad/InternalGains_Hallenbad.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/InternalGains_SwimmingBath.txt"),
       columns=2:(1 + 3*6))
       "Profiles for internal gains"
       annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
@@ -75,8 +76,8 @@ package Examples "Collection of models that illustrate model use and test models
       tableOnFile=true,
       tableName="Tset",
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-      fileName=ModelicaServices.ExternalReferences.loadResource(
-          "modelica://Output_Schwimmbad_Modell/Hallenbad/TsetHeat_ParkbadAhlen_6Zonen.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/TsetHeat_6Zones_SwimmingBath.txt"),
       columns=2:(1 + 6))
       "Set points for heater"
       annotation (Placement(transformation(extent={{72,-68},{56,-52}})));
@@ -85,8 +86,8 @@ package Examples "Collection of models that illustrate model use and test models
         tableOnFile=true,
         tableName="Tset",
         extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-      fileName=ModelicaServices.ExternalReferences.loadResource(
-          "modelica://Output_Schwimmbad_Modell/Hallenbad/TsetCool_ParkbadAhlen_6Zonen.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/TsetCool_6Zones_SwimmingBath.txt"),
       columns=2:(1 + 6))
         "Set points for cooler"
       annotation (Placement(transformation(extent={{74,-92},{58,-76}})));
@@ -97,8 +98,8 @@ package Examples "Collection of models that illustrate model use and test models
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       tableName="OpeningHours",
       columns=2:(1 + 6),
-      fileName=ModelicaServices.ExternalReferences.loadResource(
-          "modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/Profile_openingHours_pools.txt"))
       "Boundary condition: Opening Hours of swiming pools"
       annotation (Placement(transformation(extent={{-64,-32},{-48,-16}})));
     Modelica.Blocks.Sources.CombiTimeTable tableWavePool(
@@ -107,8 +108,8 @@ package Examples "Collection of models that illustrate model use and test models
       smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       tableName="wavePool",
-      fileName=ModelicaServices.ExternalReferences.loadResource(
-          "modelica://Output_Schwimmbad_Modell/Hallenbad/wavePool_Hallenbad.txt"))
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/Profile_wavePool.txt"))
       "Boundary condition: Profil of wave pool"
       annotation (Placement(transformation(extent={{-64,-58},{-48,-42}})));
     AixLib.Fluid.Pools.BaseClasses.AHUcontrol aHUcontrol(

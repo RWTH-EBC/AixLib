@@ -19,8 +19,7 @@ model IndoorSwimmingPool
                                                                            "Nominal Mass Flow Rate for recycled water, min to catch zero flow";
 
   final parameter Modelica.SIunits.SpecificEnergy h_evap = AixLib.Media.Air.enthalpyOfVaporization(poolParam.T_pool) "Evaporation enthalpy";
-  final parameter Modelica.SIunits.SpecificEnergy h_vapor = AixLib.Media.Air.enthalpyOfCondensingGas(poolParam.T_pool)
-                                                                                                                     "Latent heat of evaporating water";
+  final parameter Modelica.SIunits.SpecificEnergy h_vapor = AixLib.Media.Air.enthalpyOfCondensingGas(poolParam.T_pool)               "Latent heat of evaporating water";
 
   Modelica.SIunits.Pressure psat_T_pool=
       Modelica.Media.Air.ReferenceMoistAir.Utilities.Water95_Utilities.psat(
@@ -311,7 +310,7 @@ Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlowEvapLoss
       origin={-14,74})));
   Modelica.Blocks.Sources.RealExpression getTPool(final y=poolWater.T)
     "Get water temperature of poolWater"
-    annotation (Placement(transformation(extent={{80,6},{94,18}})));
+    annotation (Placement(transformation(extent={{72,6},{86,18}})));
   Modelica.Blocks.Sources.RealExpression getQPool(final y=Q_pool)
     "Prescribed mass flow for intake of recycled water into the pool-watertreatment cycle"
     annotation (Placement(transformation(extent={{-6,-34},{8,-22}})));
@@ -508,7 +507,7 @@ connect(getHeatCoefConv.y, convWaterSurface.Gc)
 connect(convWaterSurface.fluid, convPoolSurface)
   annotation (Line(points={{-14,80},{-14,100},{-6,100}}, color={191,0,0}));
   connect(getTPool.y, TPool)
-    annotation (Line(points={{94.7,12},{108,12}}, color={0,0,127}));
+    annotation (Line(points={{86.7,12},{108,12}}, color={0,0,127}));
   connect(poolWater.heatPort, radWaterSurface.port_a) annotation (Line(points={{
           -12,16},{-28,16},{-28,66},{-45,66}}, color={191,0,0}));
   connect(poolWater.heatPort, convWaterSurface.solid)
@@ -523,8 +522,8 @@ connect(convWaterSurface.fluid, convPoolSurface)
     annotation (Line(points={{24,-6},{24,6},{1,6}}, color={0,127,255}));
   connect(getQPool.y, idealHeatExchanger.setQFlow) annotation (Line(points={{
           8.7,-28},{12,-28},{12,-12},{16.96,-12}}, color={0,0,127}));
-  connect(getTPool.y, idealHeatExchanger.TPool) annotation (Line(points={{94.7,
-          12},{96,12},{96,-4},{30,-4},{30,-6},{29.76,-6},{29.76,-6.48}}, color=
+  connect(getTPool.y, idealHeatExchanger.TPool) annotation (Line(points={{86.7,12},
+          {96,12},{96,-4},{30,-4},{30,-6},{29.76,-6},{29.76,-6.48}},     color=
           {0,0,127}));
   connect(getMFlowEvap.y, hEvapLatentHeatGain.u)
     annotation (Line(points={{56.7,18},{64,18},{64,25.2}}, color={0,0,127}));
