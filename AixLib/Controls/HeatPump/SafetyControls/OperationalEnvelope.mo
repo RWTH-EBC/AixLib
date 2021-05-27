@@ -1,7 +1,7 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+within AixLib.Controls.HeatPump.SafetyControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
-  extends BaseClasses.PartialSecurityControl;
+  extends BaseClasses.PartialSafetyControl;
   extends BaseClasses.BoundaryMapIcon(final iconMin=-70,
   final iconMax=70);
  parameter Boolean use_opeEnv
@@ -35,7 +35,7 @@ equation
 
   connect(modeSet, modeOut) annotation (Line(points={{-136,-20},{-114,-20},{
           -114,-92},{114,-92},{114,-20},{130,-20}}, color={255,0,255}));
-  connect(sigBusHP.T_flow_ev, toDegCT_flow_ev.u) annotation (Line(
+  connect(sigBusHP.TEvaInMea, toDegCT_flow_ev.u) annotation (Line(
       points={{-134.915,-68.925},{-98,-68.925},{-98,12},{-83.2,12}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -47,7 +47,7 @@ equation
     annotation (Line(points={{-66.06,12},{-69.4,12}},   color={0,0,127}));
   connect(boundaryMap.y_in, toDegCT_ret_co.y)
     annotation (Line(points={{-66.06,-18},{-69.4,-18}},   color={0,0,127}));
-  connect(sigBusHP.T_ret_co, toDegCT_ret_co.u) annotation (Line(
+  connect(sigBusHP.TConOutMea, toDegCT_ret_co.u) annotation (Line(
       points={{-134.915,-68.925},{-98,-68.925},{-98,-18},{-83.2,-18}},
       color={255,204,51},
       thickness=0.5), Text(

@@ -2,7 +2,7 @@ IndexMassFraction
 MassFlowRateMultiplier
 PartialInnerCycle
 PartialResistance
-PartialReversibleThermalMachine
+PartialReversibleVapourCompressionMachine
 PartialThreeWayResistance
 FlowModels
 Validation

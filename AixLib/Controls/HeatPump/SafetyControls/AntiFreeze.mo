@@ -1,9 +1,9 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+within AixLib.Controls.HeatPump.SafetyControls;
 model AntiFreeze "Model to prevent source from freezing"
-  extends BaseClasses.PartialSecurityControl;
+  extends BaseClasses.PartialSafetyControl;
 
   parameter Boolean use_antFre=true
-    "True if anti freeze control is part of security control" annotation(choices(checkBox=true));
+    "True if anti freeze control is part of safety control" annotation(choices(checkBox=true));
   parameter Modelica.SIunits.ThermodynamicTemperature TAntFre=276.15
     "Limit temperature for anti freeze control"
     annotation (Dialog(enable=use_antFre));
@@ -37,7 +37,7 @@ equation
           -114,-64},{96,-64},{96,-20},{130,-20}}, color={255,0,255}));
   connect(min.y, hysteresis.u) annotation (Line(points={{-83,-14},{-72,-14},{-72,
           -6},{-64.4,-6}}, color={0,0,127}));
-  connect(sigBusHP.T_flow_co, min.u1) annotation (Line(
+  connect(sigBusHP.TConInMea, min.u1) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-38},{-112,-38},{-112,-8},{-106,-8}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -46,7 +46,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
 
-  connect(sigBusHP.T_ret_ev, min.u2) annotation (Line(
+  connect(sigBusHP.TEvaOutMea, min.u2) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-38},{-112,-38},{-112,-20},{-106,-20}},
       color={255,204,51},
       thickness=0.5), Text(
