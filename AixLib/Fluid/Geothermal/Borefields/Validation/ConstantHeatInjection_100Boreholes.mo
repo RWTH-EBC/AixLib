@@ -41,7 +41,7 @@ model ConstantHeatInjection_100Boreholes
     tau=0)
     "Outlet temperature of the borefield"
     annotation (Placement(transformation(extent={{70,-30},{90,-10}})));
-  AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.ConstantHeatInjection_100Boreholes_Borefield borFieDat
+  parameter AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.ConstantHeatInjection_100Boreholes_Borefield borFieDat
     "Borefield data"
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
   AixLib.Fluid.Sources.Boundary_ph sin(
@@ -98,6 +98,11 @@ AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFacto
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+April 8, 2021, by Michael Wetter:<br/>
+Added missing <code>parameter</code> keyword.<br/>
+For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">AixLib, issue 1464</a>.
+</li>
 <li>
 June 24, 2019, by Michael Wetter:<br/>
 Changed <code>StopTime</code> from integer to floating point.<br/>

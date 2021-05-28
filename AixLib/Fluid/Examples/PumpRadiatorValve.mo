@@ -6,10 +6,14 @@ model PumpRadiatorValve
 
   package Medium = AixLib.Media.Water;
 
-  AixLib.Fluid.Movers.Pump
-             pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false), Head_max = 2,
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
+    MinMaxCharacteristics=AixLib.DataBase.Pumps.Pump1(),
+    V_flow_max=2,
+    ControlStrategy=2,
+    V_flow(fixed=false),
+    Head_max=2,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{-54,10},{-34,30}})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     m_flow_nominal=0.1,
@@ -24,11 +28,10 @@ model PumpRadiatorValve
   AixLib.Fluid.Sources.Boundary_pT
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-98, 10}, {-78, 30}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
     Kvs=0.4,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{30,10},{50,30}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{30,10},{50,30}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
@@ -74,23 +77,32 @@ equation
   preserveAspectRatio=false)),
   Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})),
   experiment(StopTime = 86400, Interval = 60),
-  Documentation(info = "<html>
-  <p>
-  This model contains a simple model of a heating system, with a pump, ideal
-  heat source, pipes, simple valve and radiator. It serves as a
-  demonstration case of how components of the <code>AixLib</code> library can
-  be used.</p>
-</html>", revisions="<html>
+  Documentation(info = "<html><p>
+  This model contains a simple model of a heating system, with a pump,
+  ideal heat source, pipes, simple valve and radiator. It serves as a
+  demonstration case of how components of the <code>AixLib</code>
+  library can be used.
+</p>
 <ul>
-<li><i>April 25, 2017</i> by Peter Remmen:<br/>Move Example from
-<code>Fluid.HeatExchangers.Examples</code> to <code>Fluid.Examples</code></li>
+  <li>
+    <i>April 25, 2017</i> by Peter Remmen:<br/>
+    Move Example from <code>Fluid.HeatExchangers.Examples</code> to
+    <code>Fluid.Examples</code>
+  </li>
 </ul>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib and replaced boiler with idealHeater</li>
-<li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib and replaced boiler with idealHeater
+  </li>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe
+  </li>
 </ul>
 </html>"));
 end PumpRadiatorValve;

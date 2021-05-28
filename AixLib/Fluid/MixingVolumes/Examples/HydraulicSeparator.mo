@@ -10,15 +10,13 @@ model HydraulicSeparator
     pumpMaxVolumeFlow=0.03,
     m_flow_nominal=0.1)
     annotation (Placement(transformation(extent={{18,-6},{38,14}})));
-  AixLib.Fluid.Movers.Pump
-                         pump(
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
     V_flow(start=0.002),
     ControlStrategy=2,
     V_flow_max=12,
     Head_max=10,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
   Sources.Boundary_pT              boundary_p(
     nPorts=1,
     redeclare package Medium = Medium,
@@ -46,8 +44,8 @@ model HydraulicSeparator
     m_flow_nominal=0.1,
     dp_nominal=200) "Hydraulic resistance in primary circuit"
     annotation (Placement(transformation(extent={{-50,-26},{-70,-6}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorPrim(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorPrim(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-54,-2},{-34,18}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow(
     Q_flow=1.6e3,
@@ -56,17 +54,15 @@ model HydraulicSeparator
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-36,60})));
-  AixLib.Fluid.Movers.Pump
-                         pump1(
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump1(
     ControlStrategy=2,
     V_flow_max=12,
     Head_max=10,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{66,0},{86,20}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{66,0},{86,20}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureMixedTop(redeclare package
-      Medium = Medium, m_flow_nominal=1)
+                                        temperatureMixedTop(redeclare package Medium =
+               Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{38,0},{58,20}})));
   FixedResistances.PressureDrop       res2(
     redeclare package Medium = Medium,
@@ -76,16 +72,13 @@ model HydraulicSeparator
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={92,-26})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
-                                 simpleValve(redeclare package Medium = Medium,
-      m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{70,-74},{50,-54}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1Sec(redeclare package
-      Medium = Medium)
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(redeclare package Medium = Medium, m_flow_small=1e-4) annotation (Placement(transformation(extent={{70,-74},{50,-54}})));
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1Sec(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{2,-66},{-18,-46}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureBottom(redeclare package
-      Medium = Medium, m_flow_nominal=1)
+                                        temperatureBottom(redeclare package Medium =
+               Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{10,-46},{30,-26}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(
       T=273.15+20)
@@ -109,8 +102,8 @@ model HydraulicSeparator
     offset=0.2)
     annotation (Placement(transformation(extent={{48,-42},{68,-22}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureMixedBottom(redeclare
-      package Medium = Medium, m_flow_nominal=1)
+                                        temperatureMixedBottom(redeclare package Medium =
+                       Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-8,-26},{-28,-6}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                         temperatureTop(redeclare package Medium =
@@ -181,9 +174,23 @@ equation
     annotation (Line(points={{2,-56},{18,-56},{20,-74}}, color={0,127,255}));
   connect(simpleValve.port_b, heatSink.ports[2])
     annotation (Line(points={{50,-64},{28,-64},{24,-74}}, color={0,127,255}));
-  annotation (Documentation(info="<html>
-<p>This model shows the usage of a Hydraulic Separator within a simple heating circuit. The primary circuit consists of a tank, a pump, a boiler (represented by a pipe with prescribed heat-flux), a pipe and some sensors. The secondary circuit consists of a pump, a static pipe, a valve and a radiator (represented by a pipe with heat-transfer to the outside). Between the two circuit lies the Hydraulic Separator. The example shows that the model of the Hydraulic Separator works in consistence with ones expactation. There is mixing of the fluids between bottom and top of the Hydraulic Separator depending on the mass flowrates in the circuits. If the mass-flows are the same and no mass is exchanged between top and bottom, there is still a small amount of heat transported via conduction. </p>
-</html>", revisions="<html>
-<p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>
+  annotation (Documentation(info="<html><p>
+  This model shows the usage of a Hydraulic Separator within a simple
+  heating circuit. The primary circuit consists of a tank, a pump, a
+  boiler (represented by a pipe with prescribed heat-flux), a pipe and
+  some sensors. The secondary circuit consists of a pump, a static
+  pipe, a valve and a radiator (represented by a pipe with
+  heat-transfer to the outside). Between the two circuit lies the
+  Hydraulic Separator. The example shows that the model of the
+  Hydraulic Separator works in consistence with ones expactation. There
+  is mixing of the fluids between bottom and top of the Hydraulic
+  Separator depending on the mass flowrates in the circuits. If the
+  mass-flows are the same and no mass is exchanged between top and
+  bottom, there is still a small amount of heat transported via
+  conduction.
+</p>
+<p>
+  26.11.2014, by <i>Roozbeh Sangi</i>: implemented
+</p>
 </html>"),    experiment(StopTime=20000));
 end HydraulicSeparator;

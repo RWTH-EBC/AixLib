@@ -1,0 +1,11 @@
+clear
+
+convertClear();
+
+convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", "T0", "T_start");
+convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", "HeatConda", "heatCond_a");
+convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", "HeatCondb", "heatCond_b");
+convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", {"n", "T0"}, {"n=%n%", "T_start=fill(%T0%, %n%)"}, true);
+convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", fill("",0), {"A=12", "n=8", "d=fill(0.1, 8)", "rho=fill(1600, 8)", "lambda=fill(2.4, 8)", "c=fill(1000, 8)", "T_start=fill(Modelica.SIunits.Conversions.from_degC(16), 8)"}, false);
+
+convertClass("AixLib.FastHVAC.Components.Storage.HeatStorage", "AixLib.Obsolete.Year2020.FastHVAC.Storage.HeatStorage");

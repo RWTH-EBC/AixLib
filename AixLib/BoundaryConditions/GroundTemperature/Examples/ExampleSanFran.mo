@@ -78,30 +78,38 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(groundTemperatureKusuda.port_a, temperatureSensor.port) annotation (
+  connect(groundTemperatureKusuda.port, temperatureSensor.port) annotation (
       Line(points={{59.4,-55},{70,-55},{70,-50},{74,-50}}, color={191,0,0}));
   connect(temperatureSensor.T, T_ground) annotation (Line(points={{94,-50},{108,
           -50}},                     color={0,0,127}));
   connect(T_mean, T_mean)
     annotation (Line(points={{108,30},{108,30}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li><i>May 2017</i>, by Felix Buenning: Updated documentation, added T_amp as output</li>
-<li><i>October 2016</i>, by Felix Buenning: Developed and implemented</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>May 2017</i>, by Felix Buenning: Updated documentation, added
+    T_amp as output
+  </li>
+  <li>
+    <i>October 2016</i>, by Felix Buenning: Developed and implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Example to test and tune Kusuda ground temperature model with the weather model from the Modelica Buildings Library.</p>
-
-<p>The outputs T, T<sub>amp</sub> and T<sub>mean</sub> in the top of the model can be used to determine the parameters
-t<sub>shift</sub> (day of the coldest air temperature in the year), T<sub>mean</sub> (average air temperature in the year)
- and T<sub>amp</sub> (amplitude of the air temperature) for the Kusuda ground temperature model. </p>
-
-<p>The output T<sub>ground</sub> constitutes the main result of this example and shows the trajectory of the ground
-temperature over the year.</p>
-
-
-
-
+<p>
+  Example to test and tune Kusuda ground temperature model with the
+  weather model from the Modelica Buildings Library.
+</p>
+<p>
+  The outputs T, T<sub>amp</sub> and T<sub>mean</sub> in the top of the
+  model can be used to determine the parameters t<sub>shift</sub> (day
+  of the coldest air temperature in the year), T<sub>mean</sub>
+  (average air temperature in the year) and T<sub>amp</sub> (amplitude
+  of the air temperature) for the Kusuda ground temperature model.
+</p>
+<p>
+  The output T<sub>ground</sub> constitutes the main result of this
+  example and shows the trajectory of the ground temperature over the
+  year.
+</p>
 </html>"), experiment(
       StopTime=3.1536e+007,
       __Dymola_NumberOfIntervals=10000,

@@ -18,12 +18,12 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
-  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package
-      Medium = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-70,22},{-50,42}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package
-      Medium = Medium) annotation (Placement(transformation(extent={{-70,-40},{-50,
+  Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package Medium =
+               Medium) annotation (Placement(transformation(extent={{-70,-40},{-50,
             -20}}), iconTransformation(extent={{-70,-40},{-50,-20}})));
   MixingVolumes.MixingVolume vol_flow(
     final nPorts=n + 1,
@@ -58,8 +58,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     each final C_nominal=C_nominal,
     final allowFlowReversal=allowFlowReversal) annotation (Placement(
         transformation(extent={{-10,-20},{10,0}}, rotation=0)));
-  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final
-      package Medium = Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final package Medium =
+                       Medium) annotation (Placement(
       visible=true,
       transformation(
         origin={0,60},
@@ -69,8 +69,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
         origin={0,60},
         extent={{-6,-24},{6,24}},
         rotation=90)));
-  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final
-      package Medium = Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final package Medium =
+                       Medium) annotation (Placement(
       visible=true,
       transformation(
         origin={0,-60},
@@ -130,21 +130,44 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           textString="[n] return")}),
-    Documentation(revisions="<html>
-<ul>
-<li><i>January 11, 2019&nbsp;</i> by Fabian W&uuml;llhorst:<br/>
-Make model more dynamic (See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/673\">#673</a>)</li>
-<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
-Added documentation.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>January 11, 2019&#160;</i> by Fabian Wüllhorst:<br/>
+    Make model more dynamic (See <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/673\">#673</a>)
+  </li>
+  <li>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>November 06, 2014&#160;</i> by Ana Constantin:<br/>
+    Added documentation.
+  </li>
 </ul>
 </html>", info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Model for a contributor for different floor heating circuits in a house.</p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The contributor is built to connect <span style=\"font-family: Courier New;\">n</span> floor heating circuits together. The volume is used for nummerical reasons, to have a point where all the flows mix together. </p>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a></p>
+<h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Model for a contributor for different floor heating circuits in a
+  house.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The contributor is built to connect <span style=
+  \"font-family: Courier New;\">n</span> floor heating circuits together.
+  The volume is used for nummerical reasons, to have a point where all
+  the flows mix together.
+</p>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a>
+</p>
 </html>"));
 end Distributor;

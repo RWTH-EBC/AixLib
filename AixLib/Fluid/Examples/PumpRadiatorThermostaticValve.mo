@@ -6,10 +6,13 @@ model PumpRadiatorThermostaticValve
 
   package Medium = AixLib.Media.Water;
 
-  AixLib.Fluid.Movers.Pump
-             pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false),
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
+    MinMaxCharacteristics=AixLib.DataBase.Pumps.Pump1(),
+    V_flow_max=2,
+    ControlStrategy=2,
+    V_flow(fixed=false),
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{-54,10},{-34,30}})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     dp_nominal=200,
@@ -26,15 +29,14 @@ model PumpRadiatorThermostaticValve
   AixLib.Fluid.Sources.Boundary_pT
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-98, 10}, {-78, 30}})));
-  AixLib.Fluid.Actuators.Valves.ThermostaticValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve simpleValve(
     Influence_PressureDrop=0.15,
     Kvs=0.4,
     Kv_setT=0.12,
     leakageOpening=0,
     redeclare package Medium = Medium,
     m_flow_small=1e-4,
-    dp(start=20000))
-    annotation (Placement(transformation(extent={{32,10},{52,30}})));
+    dp(start=20000)) annotation (Placement(transformation(extent={{32,10},{52,30}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
@@ -77,18 +79,24 @@ equation
           64},{116,64},{116,22},{120.8,22}}, color={191,0,0}));
   connect(radiator.RadiativeHeat, RadTemp.port) annotation (Line(points={{127.4,
           22},{132,22},{132,64},{136,64}}, color={95,95,95}));
-  annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false)),             Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60), Documentation(info = "<html>
-  <p>This model contains a simple model of a heating system, with a pump, ideal
-  heat source, pipes, thermostatic valve and radiator. It serves as a
-  demonstration case of how components of the <code>AixLib</code> library can
-  be used.</p>
-</html>", revisions="<html>
- <ul>
- <li><i>April 25, 2017</i> by Peter Remmen:<br/>Move Example from
- <code>Fluid.HeatExchangers.Examples</code> to <code>Fluid.Examples</code></li>
- </ul>
- <ul>
- <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
- </ul>
+  annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false)),             Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60), Documentation(info = "<html><p>
+  This model contains a simple model of a heating system, with a pump,
+  ideal heat source, pipes, thermostatic valve and radiator. It serves
+  as a demonstration case of how components of the <code>AixLib</code>
+  library can be used.
+</p>
+<ul>
+  <li>
+    <i>April 25, 2017</i> by Peter Remmen:<br/>
+    Move Example from <code>Fluid.HeatExchangers.Examples</code> to
+    <code>Fluid.Examples</code>
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe
+  </li>
+</ul>
 </html>"));
 end PumpRadiatorThermostaticValve;

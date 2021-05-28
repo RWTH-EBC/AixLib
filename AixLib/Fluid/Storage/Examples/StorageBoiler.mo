@@ -20,12 +20,16 @@ model StorageBoiler
     d=1,
     h=2,
     k_HE=1500,
-    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-18,12},{2,32}})));
+    redeclare package Medium = Medium,
+    m_flow_nominal_layer=pipe1.m_flow_nominal,
+    m_flow_nominal_HE=pipe.m_flow_nominal)
+                                       annotation (Placement(transformation(extent={{-18,12},{2,32}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-56,12},
             {-36,32}})));
-  AixLib.Fluid.Movers.Pump
-             pump(redeclare package Medium = Medium, m_flow_small=1e-4)
-                  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={6,60})));
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(redeclare package Medium = Medium, m_flow_small=1e-4) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={6,60})));
   AixLib.Fluid.Sources.Boundary_pT
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent={{-48,68},
@@ -93,22 +97,33 @@ equation
           -2},{80,-2},{80,78},{42,78}}, color={0,127,255}));
   connect(const.y, hea.TSet) annotation (Line(points={{57.7,67},{52,67},{52,86},
           {44,86}}, color={0,0,127}));
-  annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
-<h4><font color=\"#008000\">Overview</font></h4>
- <p>This is a simple example of a storage and a boiler.</p>
- </html>", revisions="<html>
+  annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is a simple example of a storage and a boiler.
+</p>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib and replaced boiler with idealHeater</li>
-<li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
-<li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
-<li><i>13.12.2013</i>
-    by Sebastian Stinner:<br/>
-    implemented</li>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib and replaced boiler with idealHeater
+  </li>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe
+  </li>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>13.12.2013</i> by Sebastian Stinner:<br/>
+    implemented
+  </li>
 </ul>
 </html>"));
 end StorageBoiler;

@@ -64,15 +64,32 @@ model testPumpHeadCalculation
   annotation (
     experiment(StopTime=5),
     __Dymola_Commands(file(ensureSimulated=true) = "Resources/Scripts/Dymola/DataBase/Pumps/ControlPump/Examples/testPumpHeadCalculation.mos"),
-    Documentation(info="<html>
-<p>simulate and plot script</p>
-<p>Use this test to check pump head calculation with the polynomial functions and respective coefficients from <a href=\"Zugabe.Zugabe_DB.Pump.PumpBaseRecord\">Zugabe.Zugabe_DB.Pump.PumpBaseRecord</a>.</p>
-<p>This test case makes use of nMin and nMax parameters of the pump record in the table for setting pump speed. Make sure that these values are set properly in the pump record or change the profile in the speed table.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  simulate and plot script
+</p>
+<p>
+  Use this test to check pump head calculation with the polynomial
+  functions and respective coefficients from <a href=
+  \"Zugabe.Zugabe_DB.Pump.PumpBaseRecord\">Zugabe.Zugabe_DB.Pump.PumpBaseRecord</a>.
+</p>
+<p>
+  This test case makes use of nMin and nMax parameters of the pump
+  record in the table for setting pump speed. Make sure that these
+  values are set properly in the pump record or change the profile in
+  the speed table.
+</p>
 <ul>
-<li>2018-01-24 by Peter Matthes:<br />Highlights pumpParam parameter and adds graphic for pump head curve display in plot Script.</li>
-<li>2017-12-06 by Peter Matthes:<br />Adds hint for nMin and nMax in the documentation and fixes test for missing ABC coefficients.</li>
-<li>2017-11-23 by Peter Matthes:<br />Implemented</li>
+  <li>2018-01-24 by Peter Matthes:<br/>
+    Highlights pumpParam parameter and adds graphic for pump head curve
+    display in plot Script.
+  </li>
+  <li>2017-12-06 by Peter Matthes:<br/>
+    Adds hint for nMin and nMax in the documentation and fixes test for
+    missing ABC coefficients.
+  </li>
+  <li>2017-11-23 by Peter Matthes:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"),
     Diagram(graphics={Text(

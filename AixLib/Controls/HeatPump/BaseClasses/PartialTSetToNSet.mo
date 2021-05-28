@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.BaseClasses;
+within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
   parameter Boolean use_secHeaGen=false
@@ -10,7 +10,7 @@ partial model PartialTSetToNSet
   parameter Modelica.SIunits.Time movAveTime=300
     "Time span for building the average of the outdoor air temperature. Used for heating limit temperature" annotation (Dialog(group="Heating limit temperature"));
 
- Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
+  AixLib.Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));
   Modelica.Blocks.Sources.Constant conZer(final k=0)
                                                "If an error occurs, the compressor speed is set to zero"
@@ -22,7 +22,7 @@ partial model PartialTSetToNSet
     annotation (Placement(transformation(extent={{-132,44},{-100,76}})));
   Modelica.Blocks.Interfaces.RealOutput nOut "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Interfaces.ThermalMachineControlBus sigBusHP
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-124,-42},{-90,-12}})));
   Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
                                                    "Relative power of second heat generator, from 0 to 1"
@@ -68,7 +68,7 @@ equation
           70,-18},{70,-74.4},{18.4,-74.4}},
                                           color={0,0,127}));
   connect(sigBusHP.T_oda, movAve.u) annotation (Line(
-      points={{-106.915,-26.925},{-94,-26.925},{-94,-27},{-89.2,-27}},
+      points={{-107,-27},{-94,-27},{-94,-27},{-89.2,-27}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -93,12 +93,12 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="%name")}),      Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end PartialTSetToNSet;
