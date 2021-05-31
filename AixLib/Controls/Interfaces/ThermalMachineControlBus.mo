@@ -52,33 +52,7 @@ annotation (
 <p>First implementation. </p>
 </html>"));
 
- Real PEl;
- Real QCon;
- Real QEvap;
- Real QEvapNom;
 
-Real THotMax;
-Real THotNom;
- Real TSourceNom;
- Real QNom;
- Real PLRMin;
- Boolean HighTemp;
- Real DeltaTCon;
- Real DeltaTEvap;
-
-Real COP;
-
-
-
-
-
-
-
-
-
-
-
-
-
+ Modelica.SIunits.Power QEvapNom "Nominal evaporation heat flow";
 
 end ThermalMachineControlBus;

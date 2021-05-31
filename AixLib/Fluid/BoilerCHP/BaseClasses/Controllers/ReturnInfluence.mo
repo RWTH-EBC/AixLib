@@ -8,8 +8,7 @@ model ReturnInfluence
 
 
  Modelica.Blocks.Interfaces.RealInput TColdMeasure(final quantity=
-        "ThermodynamicTemperature")
-                        "Measured temperature of Water return flow Dim1"
+        "ThermodynamicTemperature") "Measured temperature of Water return flow"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
@@ -18,7 +17,8 @@ model ReturnInfluence
       unit="W")
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
- Modelica.Blocks.Interfaces.RealInput PLR "Dim4" annotation (Placement(
+ Modelica.Blocks.Interfaces.RealInput PLR "Part Load Ratio"
+                                                 annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
@@ -45,8 +45,8 @@ model ReturnInfluence
   Modelica.Blocks.Math.Add add(k1=1, k2=-1)
     annotation (Placement(transformation(extent={{-28,38},{-8,58}})));
 
- Modelica.Blocks.Interfaces.RealInput DeltaTWater "Dim4" annotation (Placement(
-        transformation(
+ Modelica.Blocks.Interfaces.RealInput dTWater
+    "temperature difference THot-TCold" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-120,-70})));
@@ -82,8 +82,8 @@ equation
     annotation (Line(points={{-81,30},{-72,30}}, color={0,0,127}));
   connect(add.y, multiplex4_1.u1[1]) annotation (Line(points={{-7,48},{0,48},{0,
           15},{2,15}},                            color={0,0,127}));
-  connect(DeltaTWater, multiplex4_1.u4[1]) annotation (Line(points={{-120,-70},
-          {-60,-70},{-60,-3},{2,-3}}, color={0,0,127}));
+  connect(dTWater, multiplex4_1.u4[1]) annotation (Line(points={{-120,-70},{-60,
+          -70},{-60,-3},{2,-3}}, color={0,0,127}));
   connect(PLR, multiplex4_1.u3[1]) annotation (Line(points={{-120,0},{-88,0},{
           -88,3},{2,3}},     color={0,0,127}));
   connect(fromKelvin.Celsius, multiplex4_1.u2[1]) annotation (Line(points={{-49,30},
@@ -113,7 +113,7 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This Model calculates the change of efficiency and heat flow in case of a different return temperature from the nominal return temperature. For example, if return temperature decreases the exhaust temperature will decrease as well and the heatflow increases.</p>
+<p>This Model calculates the change of efficiency and heat flow in case of TCold is different from nominal TCold. For example, if TCold decreases the exhaust temperature will decrease as well and the heatflow increases.</p>
 <p><img src=\"modelica://AixLib/../../../Diagramme AixLib/Boiler/Kennfeld_EtaRL_TRL30_PLRvar_20K_mNom.png\"/></p>
 </html>"),
     experiment(StopTime=86400, __Dymola_NumberOfIntervals=3600));

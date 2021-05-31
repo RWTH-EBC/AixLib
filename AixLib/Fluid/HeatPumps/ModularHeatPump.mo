@@ -133,13 +133,8 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     use_T_in=true,
     T=306.15,
     nPorts=1) annotation (Placement(transformation(extent={{60,-82},{40,-62}})));
-  Modelica.Blocks.Interfaces.RealOutput EnergyDemand
-    "Demand of electrical energy"
-    annotation (Placement(transformation(extent={{100,54},{120,74}})));
   Modelica.Blocks.Continuous.Integrator integrator
     annotation (Placement(transformation(extent={{52,58},{64,70}})));
-  Modelica.Blocks.Interfaces.RealOutput COP "actual COP"
-    annotation (Placement(transformation(extent={{100,-82},{120,-62}})));
 
   BaseClasses.ControlMflowNotManufacturer control(
     THotMax=THotMax,
@@ -220,18 +215,8 @@ equation
           {40,-32},{40,-50},{86,-50},{86,-64},{62,-64}},       color={0,0,127}));
   connect(senTHot.port_b, port_b) annotation (Line(points={{66,0},{100,0}},
                     color={0,127,255}));
-  connect(integrator.y, EnergyDemand)
-    annotation (Line(points={{64.6,64},{110,64}}, color={0,0,127}));
   connect(sigBus.Pel, integrator.u) annotation (Line(
       points={{-4.925,99.085},{-4.925,64},{50.8,64}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.COP, COP) annotation (Line(
-      points={{-4.925,99.085},{-6,99.085},{-6,124},{132,124},{132,-72},{110,-72}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

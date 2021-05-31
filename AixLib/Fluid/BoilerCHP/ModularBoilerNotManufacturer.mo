@@ -77,7 +77,7 @@ model ModularBoilerNotManufacturer
     "Temperature sensor of hot side of heat generator (supply)"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={40,0})));
+        origin={60,0})));
   Sensors.TemperatureTwoPort senTCold(
     redeclare final package Medium = Media.Water,
     final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
@@ -157,9 +157,9 @@ equation
           86},{-42,78.2},{-21.8,78.2}},                              color={0,0,
           127}));
   connect(senTHot.port_b, port_b)
-    annotation (Line(points={{50,0},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{70,0},{100,0}}, color={0,127,255}));
   connect(senTHot.port_a, heatGeneratorNoControl.port_b)
-    annotation (Line(points={{30,0},{12,0}}, color={0,127,255}));
+    annotation (Line(points={{50,0},{12,0}}, color={0,127,255}));
   connect(port_a, senTCold.port_a)
     annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
   connect(heatGeneratorNoControl.PowerDemand, integrator1.u) annotation (Line(
@@ -185,8 +185,8 @@ equation
     annotation (Line(points={{43.2,64},{30,64},{30,50}}, color={255,0,255}));
   connect(port_b, port_b) annotation (Line(points={{100,0},{106,0},{106,0},{100,
           0}}, color={0,127,255}));
-  connect(senTHot.T, greater.u1) annotation (Line(points={{40,11},{92,11},{92,64},
-          {61.6,64}},     color={0,0,127}));
+  connect(senTHot.T, greater.u1) annotation (Line(points={{60,11},{92,11},{92,
+          64},{61.6,64}}, color={0,0,127}));
   connect(tHotMax.y, greater.u2) annotation (Line(points={{71.1,46},{68,46},{68,
           57.6},{61.6,57.6}}, color={0,0,127}));
   connect(senTCold.T, controlBoilerNotManufacturer.TCold) annotation (Line(
@@ -219,8 +219,8 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(integrator1.y, boilerControlBus.EnergyDemand) annotation (Line(points
-        ={{88.6,-32},{124,-32},{124,120},{-1.95,120},{-1.95,100.05}}, color={0,
+  connect(integrator1.y, boilerControlBus.EnergyDemand) annotation (Line(points=
+         {{88.6,-32},{124,-32},{124,120},{-1.95,120},{-1.95,100.05}}, color={0,
           0,127}), Text(
       string="%second",
       index=1,

@@ -18,7 +18,7 @@ constant Real Brennwert=46753;
   Modelica.Blocks.Sources.RealExpression pelNom(y=PelNom)
     "Nominal electric Power"
     annotation (Placement(transformation(extent={{-90,30},{-74,50}})));
-  SDF.NDTable SDFStromkennzahl(
+  SDF.NDTable SDF1(
     nin=2,
     readFromFile=true,
     filename=Filename_PTHR,
@@ -27,10 +27,10 @@ constant Real Brennwert=46753;
     scaleUnits={"W","-"},
     interpMethod=SDF.Types.InterpolationMethod.Linear,
     data=SDF.Functions.readTableData(
-        SDFStromkennzahl.filename,
-        SDFStromkennzahl.dataset,
-        SDFStromkennzahl.dataUnit,
-        SDFStromkennzahl.scaleUnits)) "Gibt die Stromkennzahl aus"
+        SDF1.filename,
+        SDF1.dataset,
+        SDF1.dataUnit,
+        SDF1.scaleUnits)) "Power to Heat Ratio"
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{-56,38},{-42,52}})));
@@ -83,7 +83,7 @@ constant Real Brennwert=46753;
         origin={-40,-32})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=293.15)
     annotation (Placement(transformation(extent={{30,-38},{18,-26}})));
-  SDF.NDTable SDFEta(
+  SDF.NDTable SDF2(
     nin=2,
     readFromFile=true,
     filename=Filename_EtaEL,
@@ -92,10 +92,10 @@ constant Real Brennwert=46753;
     scaleUnits={"W","-"},
     interpMethod=SDF.Types.InterpolationMethod.Linear,
     data=SDF.Functions.readTableData(
-        SDFStromkennzahl.filename,
-        SDFStromkennzahl.dataset,
-        SDFStromkennzahl.dataUnit,
-        SDFStromkennzahl.scaleUnits)) "Electrical Efficiency"
+        SDF1.filename,
+        SDF1.dataset,
+        SDF1.dataUnit,
+        SDF1.scaleUnits)) "Electric Efficiency"
     annotation (Placement(transformation(extent={{-20,-12},{0,8}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-16,-26},{-4,-38}})));
@@ -116,9 +116,8 @@ equation
 THotEngine=vol.T;
   connect(pelNom.y, product.u2) annotation (Line(points={{-73.2,40},{-57.4,40},
           {-57.4,40.8}},color={0,0,127}));
-  connect(SDFStromkennzahl.y, division.u2) annotation (Line(points={{1,90},{8,
-          90},{8,36.8},{34.6,36.8}},
-                                 color={0,0,127}));
+  connect(SDF1.y, division.u2) annotation (Line(points={{1,90},{8,90},{8,36.8},
+          {34.6,36.8}}, color={0,0,127}));
   connect(InternalDemand.y, product1.u1) annotation (Line(points={{41,96},{46.8,
           96},{46.8,91.6}},       color={0,0,127}));
   connect(product.y, product1.u2) annotation (Line(points={{-41.3,45},{28,45},{
@@ -127,9 +126,8 @@ THotEngine=vol.T;
   connect(pelNom.y, multiplex2_2.u1[1]) annotation (Line(points={{-73.2,40},{
           -66,40},{-66,63.2},{-51.6,63.2}},
                                         color={0,0,127}));
-  connect(multiplex2_2.y, SDFStromkennzahl.u)
-    annotation (Line(points={{-33.2,68},{-28,68},{-28,90},{-22,90}},
-                                                 color={0,0,127}));
+  connect(multiplex2_2.y, SDF1.u) annotation (Line(points={{-33.2,68},{-28,68},
+          {-28,90},{-22,90}}, color={0,0,127}));
   connect(division.y, switch3.u3) annotation (Line(points={{50.7,41},{54,41},{
           54,8}},             color={0,0,127}));
   connect(switch3.y, heater.Q_flow) annotation (Line(points={{62,-15},{62,-22},
@@ -156,8 +154,8 @@ THotEngine=vol.T;
     annotation (Line(points={{-50,-70},{-50,-54},{-12,-54}}, color={191,0,0}));
   connect(vol.heatPort, ConductanceToEnv.port_a)
     annotation (Line(points={{-50,-70},{-50,-32},{-46,-32}}, color={191,0,0}));
-  connect(multiplex2_2.y, SDFEta.u) annotation (Line(points={{-33.2,68},{-28,68},
-          {-28,-2},{-22,-2}},color={0,0,127}));
+  connect(multiplex2_2.y, SDF2.u) annotation (Line(points={{-33.2,68},{-28,68},
+          {-28,-2},{-22,-2}}, color={0,0,127}));
   connect(port_b, port_b) annotation (Line(points={{100,0},{93,0},{93,0},{100,0}},
         color={0,127,255}));
   connect(PLR, lessEqualThreshold.u) annotation (Line(points={{-120,66},{-94,66},
@@ -168,8 +166,8 @@ THotEngine=vol.T;
     annotation (Line(points={{-34,-32},{-16,-32}}, color={191,0,0}));
   connect(heatFlowSensor.port_b, fixedTemperature.port)
     annotation (Line(points={{-4,-32},{18,-32}}, color={191,0,0}));
-  connect(SDFEta.y, division1.u2) annotation (Line(points={{1,-2},{36,-2},{36,
-          -44.8},{60.4,-44.8}},             color={0,0,127}));
+  connect(SDF2.y, division1.u2) annotation (Line(points={{1,-2},{36,-2},{36,-44.8},
+          {60.4,-44.8}}, color={0,0,127}));
   connect(division1.y, PowerDemand)
     annotation (Line(points={{78.8,-40},{110,-40}}, color={0,0,127}));
   connect(product.y, division1.u1) annotation (Line(points={{-41.3,45},{-34,45},
