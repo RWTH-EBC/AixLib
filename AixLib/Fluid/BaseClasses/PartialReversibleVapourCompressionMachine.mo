@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BaseClasses;
-partial model PartialReversibleThermalMachine
+within AixLib.Fluid.BaseClasses;
+partial model PartialReversibleVapourCompressionMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
@@ -20,21 +20,21 @@ partial model PartialReversibleThermalMachine
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
-    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
+    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a vapour compression machine"
     annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
         origin={0,-1})));
 
-  parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+  parameter Boolean use_rev=true "Is the vapour compression machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Modelica.SIunits.Power Q_useNominal(start=0)
-    "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
+    "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=
           use_autoCalc));
-  parameter Real scalingFactor=1 "Scaling-factor of thermal machine";
+  parameter Real scalingFactor=1 "Scaling-factor of vapour compression machine";
   parameter Boolean use_refIne=true
     "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
@@ -286,30 +286,30 @@ partial model PartialReversibleThermalMachine
     use_evaCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
-        rotation=180,
-        origin={68,-108})));
+        rotation=0,
+        origin={-32,-110})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
     use_conCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
-        rotation=180,
-        origin={68,110})));
+        rotation=0,
+        origin={-52,114})));
 
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus annotation (
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
 
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
-      displayUnit="degC") if use_evaCap
+      displayUnit="degC") if use_evaCap and not useBusConnectorOnly
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=0,
         origin={110,-100})));
   Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final
-      displayUnit="degC") if use_conCap
+      displayUnit="degC") if use_conCap and not useBusConnectorOnly
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
@@ -395,6 +395,12 @@ partial model PartialReversibleThermalMachine
 
   //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
 
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
+        Modelica.Constants.eps)
+    "Use default nSet value" annotation (Placement(transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=180,
+        origin={-66,-28})));
 protected
   parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
   parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
@@ -420,40 +426,40 @@ equation
   "Given nominal power (Q_useNominal) for auto-calculation of evaporator and condenser data is outside the range of data sheets considered. Please control the auto-calculated volumes!",
   level = AssertionLevel.warning);
 
-  connect(senT_a1.T, sigBus.T_flow_co) annotation (Line(points={{-34,79},{-34,
-          40},{-76,40},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
+  connect(senT_a1.T, sigBus.TConInMea) annotation (Line(points={{-34,79},{-34,40},
+          {-76,40},{-76,-42.915},{-104.925,-42.915}},     color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBus.T_ret_co) annotation (Line(points={{38,81},{38,-36},
+  connect(senT_b1.T, sigBus.TConOutMea) annotation (Line(points={{38,81},{38,-36},
           {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBus.T_flow_ev) annotation (Line(points={{38,-75},{38,-36},
+  connect(senT_a2.T, sigBus.TEvaInMea) annotation (Line(points={{38,-75},{38,-36},
           {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBus.T_ret_ev) annotation (Line(points={{-52,-75},{-52,
+  connect(senT_b2.T, sigBus.TEvaOutMea) annotation (Line(points={{-52,-75},{-52,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_eva.m_flow, sigBus.m_flow_ev) annotation (Line(points={{72,-49},
+  connect(mFlow_eva.m_flow, sigBus.m_flowEvaMea) annotation (Line(points={{72,-49},
           {72,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_con.m_flow, sigBus.m_flow_co) annotation (Line(points={{-76,
-          49},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(mFlow_con.m_flow, sigBus.m_flowConMea) annotation (Line(points={{-76,49},
+          {-76,-42.915},{-104.925,-42.915}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
@@ -482,45 +488,48 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(innerCycle.Pel, sigBus.Pel) annotation (Line(points={{28.73,-0.865},{38,
-          -0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,
+  connect(innerCycle.Pel, sigBus.PelMea) annotation (Line(points={{28.73,-0.865},
+          {38,-0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}},
+                                                                        color={0,
           0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
 
-  connect(modeSet, sigBus.mode) annotation (Line(points={{-116,-20},{-76,-20},{-76,
-          -42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+  connect(modeSet, sigBus.modeSet) annotation (Line(points={{-116,-20},{-76,-20},
+          {-76,-42.915},{-104.925,-42.915}},
+                                        color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(nSet,sigBus.n)  annotation (Line(points={{-116,20},{-76,20},{-76,-42.915},
+  connect(nSet,sigBus.nSet)  annotation (Line(points={{-116,20},{-76,20},{-76,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(iceFac_in, sigBus.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
-          {-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(iceFac_in, sigBus.iceFacMea) annotation (Line(points={{-76,-136},{-76,
+          -42.915},{-104.925,-42.915}},
+                               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(T_amb_con, varTempOutCon.T) annotation (Line(
-      points={{110,100},{84,100},{84,110},{77.6,110}},
+      points={{110,100},{80,100},{80,126},{-76,126},{-76,114},{-61.6,114}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(varTempOutCon.port, con.port_out) annotation (Line(
-      points={{60,110},{0,110}},
+      points={{-44,114},{0,114},{0,110}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(T_amb_eva, varTempOutEva.T) annotation (Line(
-      points={{110,-100},{94,-100},{94,-108},{77.6,-108}},
+      points={{110,-100},{80,-100},{80,-120},{-48,-120},{-48,-110},{-41.6,-110}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(eva.port_out, varTempOutEva.port) annotation (Line(
-      points={{0,-102},{0,-108},{60,-108}},
+      points={{0,-102},{0,-110},{-24,-110}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60},{-100,
@@ -559,6 +568,34 @@ equation
                                                color={0,127,255}));
   connect(port_b1, senT_b1.port_b) annotation (Line(points={{100,60},{72,60},{72,
           92},{48,92}}, color={0,127,255}));
+  connect(greaterThreshold.y, sigBus.onOffMea) annotation (Line(points={{-59.4,-28},
+          {-56,-28},{-56,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(varTempOutCon.T, sigBus.TConAmbMea) annotation (Line(
+      points={{-61.6,114},{-76,114},{-76,-42.915},{-104.925,-42.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(varTempOutEva.T, sigBus.TEvaAmbMea) annotation (Line(
+      points={{-41.6,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(greaterThreshold.u, sigBus.nSet) annotation (Line(points={{-73.2,-28},
+          {-76,-28},{-76,-42.915},{-104.925,-42.915}},color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},
@@ -650,10 +687,10 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-  This partial model for a generic grey-box thermal machine (heat pump
-  or chiller) uses empirical data to model the refrigerant cycle. The
-  modelling of system inertias and heat losses allow the simulation of
-  transient states.
+  This partial model for a generic grey-box vapour compression machine
+  (heat pump or chiller) uses empirical data to model the refrigerant
+  cycle. The modelling of system inertias and heat losses allow the
+  simulation of transient states.
 </p>
 <p>
   Resulting in the choosen model structure, several configurations are
@@ -674,12 +711,13 @@ equation
 </h4>
 <p>
   Using a signal bus as a connector, this model working as a heat pump
-  can be easily combined with several control or security blocks from
+  can be easily combined with several control or safety blocks from
   <a href=
   \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>.
   The relevant data is aggregated. In order to control both chillers
   and heat pumps, both flow and return temperature are aggregated. The
-  mode signal chooses the operation type of the thermal machine:
+  mode signal chooses the operation type of the vapour compression
+  machine:
 </p>
 <ul>
   <li>mode = true: Main operation mode (heat pump: heating; chiller:
@@ -690,8 +728,9 @@ equation
   </li>
 </ul>
 <p>
-  To model both on/off and inverter controlled thermal machines, the
-  compressor speed is normalizd to a relative value between 0 and 1.
+  To model both on/off and inverter controlled vapour compression
+  machines, the compressor speed is normalizd to a relative value
+  between 0 and 1.
 </p>
 <p>
   Possible icing of the evaporator is modelled with an input value
@@ -727,22 +766,23 @@ equation
 <p>
   To simplify the parametrization of the evaporator and condenser
   volumes and nominal mass flows there exists an option of automatic
-  estimation based on the nominal usable power of the thermal machine.
-  This function uses a linear correlation of these parameters, which
-  was established from the linear regression of more than 20 data sets
-  of water-to-water heat pumps from different manufacturers (e.g.
-  Carrier, Trane, Lennox) ranging from about 25kW to 1MW nominal power.
-  The linear regressions with coefficients of determination above 91%
-  give a good approximation of these parameters. Nevertheless,
-  estimates for machines outside the given range should be checked for
-  plausibility during simulation.
+  estimation based on the nominal usable power of the vapour
+  compression machine. This function uses a linear correlation of these
+  parameters, which was established from the linear regression of more
+  than 20 data sets of water-to-water heat pumps from different
+  manufacturers (e.g. Carrier, Trane, Lennox) ranging from about 25kW
+  to 1MW nominal power. The linear regressions with coefficients of
+  determination above 91% give a good approximation of these
+  parameters. Nevertheless, estimates for machines outside the given
+  range should be checked for plausibility during simulation.
 </p>
 <h4>
   Assumptions
 </h4>
 <p>
-  Several assumptions where made in order to model the thermal machine.
-  For a detailed description see the corresponding model.
+  Several assumptions where made in order to model the vapour
+  compression machine. For a detailed description see the corresponding
+  model.
 </p>
 <ol>
   <li>
@@ -768,10 +808,10 @@ equation
     <b>Scaling factor</b>: A scaling facor is implemented for scaling
     of the thermal power and capacity. The factor scales the parameters
     V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the
-    thermal machine can supply more heat with the COP staying nearly
-    constant. However, one has to make sure that the supplied pressure
-    difference or mass flow is also scaled with this factor, as the
-    nominal values do not increase said mass flow.
+    vapour compression machine can supply more heat with the COP
+    staying nearly constant. However, one has to make sure that the
+    supplied pressure difference or mass flow is also scaled with this
+    factor, as the nominal values do not increase said mass flow.
   </li>
 </ol>
 <h4>
@@ -788,4 +828,4 @@ equation
   </li>
 </ul>
 </html>"));
-end PartialReversibleThermalMachine;
+end PartialReversibleVapourCompressionMachine;

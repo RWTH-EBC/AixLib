@@ -22,7 +22,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Modelica.SIunits.Power Q_useNominal(start=0)
-    "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
+    "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataHea =
       AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
@@ -233,7 +233,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.ThermalMachineControlBus sigBusHP
+  Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
   AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
@@ -356,8 +356,9 @@ equation
           -16,-86},{-30,-86},{-30,-86.1},{-43.2,-86.1}}, color={176,0,0}));
   connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
           -86.1},{-82,-86.1},{-82,-60},{-100,-60}}, color={176,0,0}));
-  connect(iceFac_in, sigBusHP.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
-          {-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(iceFac_in, sigBusHP.iceFacMea) annotation (Line(points={{-76,-136},{
+          -76,-42.915},{-104.925,-42.915}},
+                               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -379,44 +380,47 @@ equation
                              color={0,0,127}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(points={{16,64.6},
           {16,75.04},{0,75.04}}, color={0,0,127}));
-  connect(mFlow_con.dotm, sigBusHP.m_flow_co) annotation (Line(points={{-79,51},
+  connect(mFlow_con.dotm, sigBusHP.m_flowConMea) annotation (Line(points={{-79,51},
           {-79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(nSet,sigBusHP.n)  annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
-          {-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(nSet,sigBusHP.nSet)  annotation (Line(points={{-116,20},{-84,20},{-84,
+          -42.915},{-104.925,-42.915}},
+                               color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-84,-18},
-          {-84,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+  connect(modeSet, sigBusHP.modeSet) annotation (Line(points={{-116,-18},{-84,
+          -18},{-84,-42.915},{-104.925,-42.915}},
+                                             color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-33,81},{-33,
+  connect(senT_a1.T, sigBusHP.TConInMea) annotation (Line(points={{-33,81},{-33,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{39,-75},{39,-36},
+  connect(senT_a2.T, sigBusHP.TEvaInMea) annotation (Line(points={{39,-75},{39,-36},
           {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBusHP.T_ret_co) annotation (Line(points={{39,81},{39,-36},
+  connect(senT_b1.T, sigBusHP.TConOutMea) annotation (Line(points={{39,81},{39,-36},
           {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
-          {42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
+  connect(innerCycle.Pel, sigBusHP.PelMea) annotation (Line(points={{28.73,
+          -0.865},{42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,
+          -42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -430,14 +434,14 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_eva.dotm, sigBusHP.m_flow_ev) annotation (Line(points={{69,-51},
+  connect(mFlow_eva.dotm, sigBusHP.m_flowEvaMea) annotation (Line(points={{69,-51},
           {69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-53,-75},{-53,
+  connect(senT_b2.T, sigBusHP.TEvaOutMea) annotation (Line(points={{-53,-75},{-53,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,

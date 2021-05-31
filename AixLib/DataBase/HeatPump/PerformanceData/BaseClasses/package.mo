@@ -1,8 +1,5 @@
-within AixLib.Controls.HeatPump.SecurityControls;
-package BaseClasses "Package with base classes for AixLib.Controls.HeatPump.SecurityControls"
-
-
-
+within AixLib.DataBase.HeatPump.PerformanceData;
+package BaseClasses "Package with partial classes of Performance Data"
 annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},
@@ -27,9 +24,8 @@ annotation (Icon(graphics={
 </ul>
 </html>", info="<html>
 <p>
-  This package contains base classes that are used to construct the
-  models in <a href=
-  \"modelica://AixLib.Controls.HeatPump.SecurityControls\">SecurityControls</a>
+  This package contains base classes for the package <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData\">AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData</a>.
 </p>
 </html>"));
 end BaseClasses;

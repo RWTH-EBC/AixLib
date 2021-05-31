@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
 block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
   parameter Integer maxRunPer_h "Number of maximal on/off cycles per hour";

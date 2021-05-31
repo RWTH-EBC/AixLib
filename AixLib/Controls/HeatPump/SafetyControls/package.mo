@@ -1,5 +1,5 @@
 within AixLib.Controls.HeatPump;
-package SecurityControls
+package SafetyControls
 
 
 
@@ -13,8 +13,8 @@ annotation (Documentation(revisions="<html><ul>
 </ul>
 </html>", info="<html>
 <p>
-  Package with models for simulation of heat pump relevant security
+  Package with models for simulation of heat pump relevant safety
   control strategies.
 </p>
 </html>"));
-end SecurityControls;
+end SafetyControls;

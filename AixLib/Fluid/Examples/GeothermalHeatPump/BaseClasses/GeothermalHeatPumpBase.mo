@@ -2,26 +2,14 @@ within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
 partial model GeothermalHeatPumpBase
   "Base class of the geothermal heat pump system"
 
-
   replaceable package Medium = AixLib.Media.Water
     "Medium model used for hydronic components";
 
-  parameter Modelica.SIunits.Temperature T_start_cold[5] = 300*ones(5)
+  parameter Modelica.SIunits.Temperature T_start_cold = 300
     "Initial temperature of cold components";
 
-  parameter Modelica.SIunits.Temperature T_start_warm[5] = 300*ones(5)
+  parameter Modelica.SIunits.Temperature T_start_hot=300
     "Initial temperature of warm components";
-
-  parameter Modelica.SIunits.Temperature T_start_hot = 300
-    "Initial temperature of high temperature components";
-
-
-  AixLib.Obsolete.Year2019.Fluid.HeatPumps.HeatPumpSimple heatPumpTab(
-    volumeEvaporator(T_start=T_start_cold[1]),
-    volumeCondenser(T_start=T_start_warm[5]),
-    redeclare package Medium = Medium,
-    tablePower=[0,266.15,275.15,280.15,283.15,293.15; 308.15,3300,3400,3500,3700,3800; 323.15,4500,4400,4600,5000,5100],
-    tableHeatFlowCondenser=[0,266.16,275.15,280.15,283.15,293.15; 308.15,9700,11600,13000,14800,16300; 323.15,10000,11200,12900,16700,17500]) "Base load energy conversion unit" annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
 
     replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
       redeclare package Medium = Medium)                                       constrainedby
@@ -39,8 +27,11 @@ partial model GeothermalHeatPumpBase
     h=1.5,
     V_HE=0.02,
     A_HE=7,
-    d=1) "Storage tank for buffering cold demand" annotation (Placement(transformation(extent={{52,-14},{24,20}})));
-
+    d=1,
+    m_flow_nominal_layer=m_flow_nominal_layer,
+    m_flow_nominal_HE=m_flow_nominal_HE,
+    T_start=T_start_cold)
+         "Storage tank for buffering cold demand" annotation (Placement(transformation(extent={{52,-14},{24,20}})));
   FixedResistances.PressureDrop                     resistanceColdStorage(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
@@ -97,7 +88,11 @@ partial model GeothermalHeatPumpBase
     A_HE=3,
     h=1,
     V_HE=0.01,
-    d=1) "Storage tank for buffering heat demand" annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
+    d=1,
+    m_flow_nominal_layer=m_flow_nominal_layer,
+    m_flow_nominal_HE=m_flow_nominal_HE,
+    T_start=T_start_hot) "Storage tank for buffering heat demand"
+    annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
   FixedResistances.PressureDrop                     resistanceHeatStorage(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
@@ -142,14 +137,14 @@ partial model GeothermalHeatPumpBase
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    T_start=T_start_cold[1])
+    T_start=T_start_cold)
     "Pump moving fluid from storage tank to cold consumers"
     annotation (Placement(transformation(extent={{58,-27},{72,-13}})));
   AixLib.Fluid.Movers.FlowControlled_dp pumpHeatConsumer(
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    T_start=T_start_warm[5])
+    T_start=T_start_hot)
     "Pump moving fluid from storage tank to heat consumers"
     annotation (Placement(transformation(extent={{58,-57},{72,-43}})));
   FixedResistances.PressureDrop                     resistanceColdConsumerReturn(
@@ -172,7 +167,7 @@ partial model GeothermalHeatPumpBase
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    T_start=T_start_cold[1])
+    T_start=T_start_cold)
     "Pump moving fluid from storage tank to condenser of heat pump"
                              annotation (Placement(transformation(
         extent={{-7,7},{7,-7}},
@@ -182,7 +177,7 @@ partial model GeothermalHeatPumpBase
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    T_start=T_start_cold[1])
+    T_start=T_start_cold)
     "Pump moving fluid from storage tank to evaporator of heat pump"
                              annotation (Placement(transformation(
         extent={{-7,7},{7,-7}},
@@ -192,17 +187,24 @@ partial model GeothermalHeatPumpBase
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    T_start=T_start_cold[1])
+    T_start=T_start_cold)
     "Pump moving fluid from geothermal source into system" annotation (
       Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-89,-54})));
-  Controls.Interfaces.ThermalMachineControlBus heatPumpControlBus
+  Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
     annotation (Placement(transformation(extent={{-21,60},{20,98}})));
+  HeatPumps.HeatPump heatPump(useBusConnectorOnly=true) annotation (Placement(
+        transformation(
+        extent={{-14,17},{14,-17}},
+        rotation=90,
+        origin={-25,5.99998})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_layer=0.5
+    "Nominal mass flow rate in layers of storages";
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_HE=0.5
+    "Nominal mass flow rate of heat exchanger layers of storages";
 equation
-
-
 
   connect(resistanceGeothermalSource.port_b, valveHeatSink.port_a) annotation (
       Line(
@@ -231,20 +233,6 @@ equation
     annotation (Line(points={{72,-20},{80,-20}}, color={0,127,255}));
   connect(pumpHeatConsumer.port_b, resistanceHeatConsumerFlow.port_a)
     annotation (Line(points={{72,-50},{80,-50}}, color={0,127,255}));
-  connect(valveHeatSource.port_b, heatPumpTab.port_a_source) annotation (Line(
-        points={{-60,7},{-60,14.9},{-38.2,14.9}}, color={0,127,255}));
-  connect(valveColdStorage.port_b, heatPumpTab.port_a_source) annotation (Line(
-        points={{-58,38},{-62,38},{-62,14.9},{-38.2,14.9}}, color={0,127,255}));
-  connect(valveHeatSink.port_b, heatPumpTab.port_a_sink) annotation (Line(
-        points={{-24,-54},{-16,-54},{-5.8,-54},{-5.8,-8.9}}, color={0,127,255}));
-  connect(valveHeatStorage.port_b, heatPumpTab.port_a_sink) annotation (Line(
-        points={{-18,-57},{-18,-54},{-5.8,-54},{-5.8,-8.9}}, color={0,127,255}));
-  connect(heatPumpTab.port_b_sink, geothField_sink1.ports[1]) annotation (Line(
-        points={{-5.8,14.9},{2,14.9},{2,27.2},{-146,27.2}},
-                                                        color={0,127,255}));
-  connect(heatStorage.port_a_heatGenerator, heatPumpTab.port_b_sink)
-    annotation (Line(points={{26.24,-64.04},{10,-64.04},{10,14.9},{-5.8,14.9}},
-        color={0,127,255}));
   connect(heatStorage.port_b_consumer, pumpHeatConsumer.port_a) annotation (
       Line(points={{38,-62},{38,-62},{38,-50},{58,-50}}, color={0,127,255}));
   connect(resistanceColdConsumerReturn.port_b, coldStorage.port_b_consumer)
@@ -252,9 +240,6 @@ equation
   connect(resistanceHeatConsumerReturn.port_b, heatStorage.port_a_consumer)
     annotation (Line(points={{80,-106},{80,-106},{38,-106},{38,-96}}, color={0,127,
           255}));
-  connect(heatPumpTab.port_b_source, coldStorage.port_b_heatGenerator)
-    annotation (Line(points={{-38.2,-8.9},{-38.2,-24},{18,-24},{18,-10.6},{26.24,
-          -10.6}}, color={0,127,255}));
   connect(pumpEvaporator.port_b, resistanceColdStorage.port_a) annotation (Line(
         points={{-8.88178e-016,36},{-8.88178e-016,38},{-28,38}}, color={0,127,255}));
   connect(coldStorage.port_a_heatGenerator, pumpEvaporator.port_a) annotation (
@@ -267,26 +252,37 @@ equation
     annotation (Line(points={{-82,-54},{-79,-54},{-76,-54}}, color={0,127,255}));
   connect(pumpGeothermalSource.port_a, geothFieldSource.ports[1])
     annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
-  connect(heatPumpTab.OnOff, heatPumpControlBus.onOff) annotation (Line(points={
-          {-22,16.6},{-22,16.6},{-22,60},{-0.3975,60},{-0.3975,79.095}}, color={
-          255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(resistanceHeatConsumerFlow.port_b, PeakLoadDevice.port_a) annotation (
      Line(points={{94,-50},{102,-50},{108,-50}}, color={0,127,255}));
-  connect(geothField_sink1.ports[2], heatPumpTab.port_b_source) annotation (
-      Line(points={{-146,24.8},{-92,24.8},{-92,-8.9},{-38.2,-8.9}}, color={0,
-          127,255}));
+  connect(heatPump.port_b1, heatStorage.port_a_heatGenerator) annotation (Line(
+        points={{-16.5,20},{6,20},{6,-64.04},{26.24,-64.04}}, color={0,127,255}));
+  connect(heatPump.port_b1, geothField_sink1.ports[1]) annotation (Line(points={{-16.5,
+          20},{-16,20},{-16,28},{-146,28},{-146,27.2}},        color={0,127,255}));
+  connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{-18,
+          -57},{-18,-8.00001},{-16.5,-8.00001}}, color={0,127,255}));
+  connect(heatPump.port_b2, geothField_sink1.ports[2]) annotation (Line(points={
+          {-33.5,-8.00001},{-88,-8.00001},{-88,24.8},{-146,24.8}}, color={0,127,
+          255}));
+  connect(coldStorage.port_b_heatGenerator, heatPump.port_b2) annotation (Line(
+        points={{26.24,-10.6},{-33.5,-10.6},{-33.5,-8.00001}}, color={0,127,255}));
+  connect(heatPump.port_a2, valveHeatSource.port_b) annotation (Line(points={{-33.5,
+          20},{-44,20},{-44,7},{-60,7}}, color={0,127,255}));
+  connect(heatPump.port_a2, valveColdStorage.port_b) annotation (Line(points={{-33.5,
+          20},{-44,20},{-44,38},{-58,38}}, color={0,127,255}));
+  connect(valveHeatSink.port_b, heatPump.port_a1) annotation (Line(points={{-24,
+          -54},{-24,-56},{-16.5,-56},{-16.5,-8.00002}}, color={0,127,255}));
+  connect(heatPumpControlBus, heatPump.sigBus) annotation (Line(
+      points={{-0.5,79},{-0.5,-32},{-30.525,-32},{-30.525,-7.86002}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-120},{160,80}})),
     experiment(StopTime=3600, Interval=10),
-    __Dymola_experimentSetupOutput(
-      states=false,
-      derivatives=false,
-      inputs=false,
-      auxiliaries=false),
     Documentation(info="<html><p>
   Base class of an example demonstrating the use of a heat pump
   connected to two storages and a geothermal source. A replaceable

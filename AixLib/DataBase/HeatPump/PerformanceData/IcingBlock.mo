@@ -8,7 +8,8 @@ model IcingBlock
     "Enumeration for choosing how reference time (time = 0) should be defined";
   parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
   replaceable function iceFunc =
-      Functions.IcingFactor.BasicIcingApproach constrainedby AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct            "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
+      Functions.IcingFactor.BasicIcingApproach constrainedby
+    AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct                                                                     "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput T_flow_ev(unit="K", displayUnit="degC")
     "Temperature at evaporator inlet"
     annotation (Placement(transformation(extent={{-128,0},{-100,28}}),
