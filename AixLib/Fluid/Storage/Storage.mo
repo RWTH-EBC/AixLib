@@ -27,10 +27,10 @@ model Storage
                                     annotation(Placement(transformation(extent = {{-10, 82}, {10, 102}}), iconTransformation(extent = {{-10, 90}, {10, 110}})));
   Fluid.MixingVolumes.MixingVolume
                      layer[n](
-    final energyDynamics=energyDynamics,
-    final p_start=p_start,
-    final T_start=T_start,
-    final m_flow_small=m_flow_small_layer,
+    each final energyDynamics=energyDynamics,
+    each final p_start=p_start,
+    each final T_start=T_start,
+    each final m_flow_small=m_flow_small_layer,
     each final V = V / n,
     redeclare final package Medium = Medium,
     each final nPorts=2,
@@ -45,10 +45,10 @@ model Storage
                                          annotation(Placement(transformation(extent = {{74, 78}, {94, 98}}), iconTransformation(extent = {{74, 78}, {94, 98}})));
   Fluid.MixingVolumes.MixingVolume
                      layer_HE[n](
-    final energyDynamics=energyDynamics,
-    final p_start=p_start,
-    final T_start=T_start,
-    final m_flow_small=m_flow_small_layer_HE,
+    each final energyDynamics=energyDynamics,
+    each final p_start=p_start,
+    each final T_start=T_start,
+    each final m_flow_small=m_flow_small_layer_HE,
     each final V = V_HE / n,
     redeclare final package Medium = Medium,
     each final nPorts=2,

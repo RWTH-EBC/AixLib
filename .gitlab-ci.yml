@@ -3,18 +3,25 @@ image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
 
 stages:
     - deleteBranch
+    - IBPSA_Merge
+    - Update_WhiteList
+    - Release
     - SetSettings
     - CheckSettings
     - Ref_Check
+    - Ref_Update
+    - Dif_Ref
     - build
     - HTMLCheck
     - deploy
     - openMR
     - post
+    - ChangedModels
     - StyleCheck
     - Check
     - Simulate
     - RegressionTest
+
  
 variables:
     Praefix_Branch: "Correct_HTML_"
@@ -22,10 +29,15 @@ variables:
     Newbranch: ${Praefix_Branch}${CI_COMMIT_REF_NAME}
     Github_Repository : RWTH-EBC/AixLib
   
-
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/deploy/deploy_ref.gitlab-ci.yml'
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/UnitTests/development_check.gitlab-ci.yml' 
+  - project: 'EBC/EBC_all/gitlab_ci/templates'
+    file:  'modelica-ci-tests/deploy/IBPSA_Merge.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file:  'modelica-ci-tests/UnitTests/regression_ref_check.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
@@ -44,6 +56,3 @@ include:
     file:  'modelica-ci-tests/UnitTests/changed_check_model.gitlab-ci.yml'
   - project: 'EBC/EBC_all/gitlab_ci/templates'
     file: 'modelica-ci-tests/UnitTests/changed_regression_test.gitlab-ci.yml'
-  
-  
-  
