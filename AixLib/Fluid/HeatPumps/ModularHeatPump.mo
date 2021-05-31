@@ -22,7 +22,8 @@ model ModularHeatPump
   parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(enable=dTConFix,tab="Advanced",group="General machine information"));
 
-    parameter Modelica.SIunits.Temperature T_Start_Condenser;
+    parameter Modelica.SIunits.Temperature T_Start_Condenser=293.15 "Initial temperature condenser"
+    annotation (Dialog(tab="Advanced"));
 
     parameter Boolean TSourceInternal=true
                                           "Use internal TSource?"
@@ -44,6 +45,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
               X_a=0.40)
               "Propylene glycol water, 40% mass fraction")));
 
+               parameter Modelica.SIunits.Pressure dpExternal=0 "Additional system pressure difference";
   HeatPump heatPump(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -171,7 +173,7 @@ protected
 
  parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="Advanced",group="General machine information"));
-    parameter Modelica.SIunits.Pressure dpExternal=0 "Additional system pressure difference";
+
 
 
 equation

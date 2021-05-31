@@ -76,7 +76,7 @@ model ModularCHPNotManufacturer
         rotation=0,
         origin={-19,67})));
   Modelica.Blocks.Logical.LessThreshold pLRMin(threshold=PLRMin)
-    annotation (Placement(transformation(extent={{-86,58},{-66,78}})));
+    annotation (Placement(transformation(extent={{-92,58},{-72,78}})));
   Controls.Interfaces.CHPControlBus cHPControlBus
     annotation (Placement(transformation(extent={{-20,82},{20,122}})));
   Modelica.Blocks.Continuous.Integrator integrator
@@ -154,7 +154,7 @@ equation
     annotation (Line(points={{10,-72},{58,-72}},         color={0,127,255}));
   connect(TColdHeatCircuit.port_b,hex. port_a1)
     annotation (Line(points={{-36,-72},{-10,-72}}, color={0,127,255}));
-  connect(pLRMin.y, switch4.u2) annotation (Line(points={{-65,68},{-29.8,68},{
+  connect(pLRMin.y, switch4.u2) annotation (Line(points={{-71,68},{-29.8,68},{
           -29.8,67}},                 color={255,0,255}));
   connect(switch3.y, cHPNotManufacturer.PLR) annotation (Line(points={{5,35.1},
           {5,14},{-20,14},{-20,6.6},{-12,6.6}},color={0,0,127}));
@@ -177,7 +177,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(cHPControlBus.PLR, pLRMin.u) annotation (Line(
-      points={{0.1,102.1},{0.1,92},{-104,92},{-104,68},{-88,68}},
+      points={{0.1,102.1},{0.1,92},{-104,92},{-104,68},{-94,68}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -240,7 +240,7 @@ equation
     annotation (Line(points={{0,-11},{0,-28},{-72,-28},{-72,12},{-156,12},{-156,
           -9},{-146,-9}}, color={0,0,127}));
   connect(controlCHPNotManufacturer.PLROff, pLRMin.y) annotation (Line(points={{-146,
-          -20},{-166,-20},{-166,46},{-65,46},{-65,68}},       color={255,0,255}));
+          -20},{-168,-20},{-168,46},{-71,46},{-71,68}},       color={255,0,255}));
   connect(greater.y, controlCHPNotManufacturer.shutdown) annotation (Line(
         points={{-41,32},{-30,32},{-30,52},{-160,52},{-160,-14.6},{-146,-14.6}},
         color={255,0,255}));
