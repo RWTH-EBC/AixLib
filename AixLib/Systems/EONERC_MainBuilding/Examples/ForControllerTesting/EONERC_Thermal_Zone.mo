@@ -8,11 +8,35 @@ model EONERC_Thermal_Zone "Test of ERC Thermal Zone"
   parameter Real Tair = 293 "Air Temperature";
   Tabs2                     tabs1(
     redeclare package Medium = MediumWater,
+    m_flow_nominal=7.5,
     area=60*60,
     thickness=0.3,
     alpha=15,
-    length=500)
-    annotation (Placement(transformation(extent={{196,-138},{236,-98}})));
+    length=100,
+    pump(parameterPipe=DataBase.Pipes.Copper.Copper_54x1_5(),
+         redeclare
+        HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+        PumpInterface(pump(redeclare
+            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
+    throttlePumpHot(parameterPipe=DataBase.Pipes.Copper.Copper_54x1_5(),
+                    redeclare
+        HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+        PumpInterface(pump(redeclare
+            Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
+    throttlePumpCold(parameterPipe=DataBase.Pipes.Copper.Copper_54x1_5(),
+                     redeclare
+        HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+        PumpInterface(pump(redeclare
+            Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
+    dynamicHX1(m1_flow_nominal=7.5, m2_flow_nominal=7.5),
+    dynamicHX(
+      m1_flow_nominal=7.5,
+      m2_flow_nominal=7.5,
+      nNodes=4,
+      Q_nom=60000),
+    pipe(parameterPipe=DataBase.Pipes.Copper.Copper_64x2()))
+    annotation (Placement(transformation(extent={{198,-138},{238,-98}})));
+
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
@@ -29,7 +53,8 @@ model EONERC_Thermal_Zone "Test of ERC Thermal Zone"
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    filNam=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{36,16},{56,36}})));
 
@@ -279,7 +304,7 @@ equation
   connect(internalGains.y,thermalZone1. intGains) annotation (Line(points={{203,
           -66.3},{200.4,-66.3},{200.4,-53.36}},
                                             color={0,0,127}));
-  connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{216,
+  connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{218,
           -96.1818},{220,-96.1818},{220,-27.84},{206.56,-27.84}},   color={191,
           0,0}));
   connect(boundaryOutsideAir.T_in,weaBus. TDryBul) annotation (Line(points={{-114,
@@ -329,7 +354,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(tabs1.tabsBus,mainBus. tabs1Bus) annotation (Line(
-      points={{195.8,-119.636},{282,-119.636},{282,94},{1.115,94},{1.115,95.145}},
+      points={{197.8,-119.636},{282,-119.636},{282,94},{1.115,94},{1.115,95.145}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -342,22 +367,23 @@ equation
   connect(boundaryExhaustAir.ports[1],genericAHU. port_b2) annotation (Line(
         points={{-92,-50},{-58,-50}},                        color={0,127,255}));
   connect(boundary4.ports[1], tabs1.port_a1) annotation (Line(points={{178,-198},
-          {178,-170},{200,-170},{200,-138}}, color={244,125,35}));
+          {178,-170},{202,-170},{202,-138}}, color={244,125,35}));
   connect(boundary1.ports[1], tabs1.port_b1)
-    annotation (Line(points={{208,-198},{208,-138}}, color={244,125,35}));
+    annotation (Line(points={{208,-198},{208,-138},{210,-138}},
+                                                     color={244,125,35}));
   connect(boundary5.ports[1], genericAHU.port_a5) annotation (Line(points={{22,-216},
           {23.8182,-216},{23.8182,-104}},       color={238,46,47}));
   connect(boundary6.ports[1], genericAHU.port_b5) annotation (Line(points={{44,-216},
           {34.1818,-216},{34.1818,-104}},       color={238,46,47}));
   connect(boundary2.ports[1], tabs1.port_b2) annotation (Line(points={{113.6,
-          -156},{232,-156},{232,-137.636}},
+          -156},{234,-156},{234,-137.636}},
                                       color={0,127,255}));
   connect(boundary2.ports[2], genericAHU.port_b4) annotation (Line(points={{110.4,
           -156},{14,-156},{14,-104},{12.9091,-104}},   color={0,127,255}));
   connect(boundary3.ports[1], genericAHU.port_a4) annotation (Line(points={{89.6,
           -156},{3,-156},{3,-104},{2,-104}},       color={0,127,255}));
   connect(boundary3.ports[2], tabs1.port_a2) annotation (Line(points={{86.4,
-          -156},{224,-156},{224,-138}},
+          -156},{226,-156},{226,-138}},
                                   color={0,127,255}));
   annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated=
            true)=
