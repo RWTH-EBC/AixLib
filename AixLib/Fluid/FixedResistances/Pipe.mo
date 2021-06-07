@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances;
+within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
   extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;
@@ -250,8 +250,8 @@ equation
         connect(heatConv_withInsulation.port_a, heatPorts);
         connect(heatPorts,thermalCollector.port_a);
         connect(thermalCollector.port_b,heatPort_outside);
-    connect(Insulation.port_b, twoStar_RadEx.conv);
-    connect(twoStar_RadEx.rad, heatPorts_Star);
+    connect(Insulation.port_b, twoStar_RadEx.convPort);
+    connect(twoStar_RadEx.radPort, heatPorts_Star);
         connect(heatPorts_Star, thermalCollector_Star.port_a);
         connect(thermalCollector_Star.port_b, Star);
 
@@ -262,8 +262,8 @@ equation
         connect(heatConv.port_a, heatPorts);
         connect(heatPorts,thermalCollector.port_a);
         connect(thermalCollector.port_b,heatPort_outside);
-    connect(PipeWall.port_b, twoStar_RadEx.conv);
-    connect(twoStar_RadEx.rad, heatPorts_Star);
+    connect(PipeWall.port_b, twoStar_RadEx.convPort);
+    connect(twoStar_RadEx.radPort, heatPorts_Star);
         connect(heatPorts_Star, thermalCollector_Star.port_a);
         connect(thermalCollector_Star.port_b, Star);
 

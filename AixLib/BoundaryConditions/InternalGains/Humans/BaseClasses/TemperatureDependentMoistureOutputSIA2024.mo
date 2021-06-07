@@ -10,7 +10,7 @@ model TemperatureDependentMoistureOutputSIA2024
 
   Modelica.Blocks.Interfaces.RealOutput moistOutput "Moisture output in g/h"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  TemperatureDependentHeatOutputSIA2024 temperatureDependentHeatOutput_SIA2024
+  TemperatureDependentHeatOutputSIA2024 temperatureDependentHeatOutput_SIA2024(activityDegree=activityDegree)
     "Temperature dependent heat output"
     annotation (Placement(transformation(extent={{-74,32},{-54,52}})));
 protected

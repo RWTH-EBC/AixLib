@@ -12,6 +12,9 @@ model InternalControl "Internal control model for boiler"
     "Time constant of boiler heater (T>0 required)";
   parameter Modelica.SIunits.Time riseTime
     "Rise/fall time for step input(T>0 required)";
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics"));
   Real outputPower
     "Output power";
   Modelica.Blocks.Interfaces.BooleanInput isOn
@@ -69,10 +72,12 @@ model InternalControl "Internal control model for boiler"
     final rangeSwitch=false)
     "PI temperature controller"
     annotation (Placement(transformation(extent={{-40.5,36},{-24,52.5}})));
-  Utilities.Sensors.EnergyMeter eEnergyMeter_P
+  Utilities.Sensors.EnergyMeter eEnergyMeter_P(final energyDynamics=
+        energyDynamics)
     "For primary energy consumption"
     annotation (Placement(transformation(extent={{30,63},{49.5,84}})));
-  Utilities.Sensors.EnergyMeter eEnergyMeter_S
+  Utilities.Sensors.EnergyMeter eEnergyMeter_S(final energyDynamics=
+        energyDynamics)
     "For secondary energy consumption"
     annotation (Placement(transformation(extent={{30,82.5},{49.5,103.5}})));
   Modelica.Blocks.Tables.CombiTable1D efficiencyTable(
@@ -91,6 +96,7 @@ model InternalControl "Internal control model for boiler"
     prescribedTemperature
     "Converts Tflow_hot real input to temperature"
     annotation (Placement(transformation(extent={{-69,-7.5},{-54,7.5}})));
+
 
 equation
 
@@ -178,6 +184,11 @@ equation
 </p>
 </html>",
 revisions="<html><ul>
+  <li>
+    <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
+    Add energyDynamics as parameter (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
+  </li>
   <li>
     <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
     Adapted to AixLib conventions

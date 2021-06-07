@@ -81,14 +81,14 @@ model PlugFlowPipeZeta
     "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
     annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
 
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
   parameter Boolean linearized = false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
-  Modelica.SIunits.Velocity v_water;
+  Modelica.SIunits.Velocity v_med "Velocity of the medium in the pipe";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
@@ -139,7 +139,7 @@ protected
     length*((dh + 2*thickness)^2 - dh^2)*Modelica.Constants.pi/4*cPip*rhoPip "Heat capacity of pipe wall";
 
   final parameter Modelica.SIunits.Volume VEqu=CPip/(rho_default*cp_default)
-    "Equivalent water volume to represent pipe wall thermal inertia";
+    "Equivalent medium volume to represent pipe wall thermal inertia";
 
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -152,7 +152,7 @@ protected
 
   parameter Real C(unit="J/(K.m)")=
     rho_default*Modelica.Constants.pi*(dh/2)^2*cp_default
-    "Thermal capacity per unit length of water in pipe";
+    "Thermal capacity per unit length of medium in pipe";
 
   parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
       p=Medium.p_default,
@@ -174,8 +174,8 @@ public
     m_flow_start=m_flow_start) if use_zeta
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
 equation
-  //calculation of the flow velocity of water in the pipes
-  v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
+  //calculation of the flow velocity of medium in the pipes
+  v_med = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
   for i in 1:nPorts loop
     connect(vol.ports[i + 1], ports_b[i])

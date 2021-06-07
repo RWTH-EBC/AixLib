@@ -9,11 +9,12 @@ model DryAir_test "Simulation to test the dry air models"
     Max_VR=0.15,
     Tset=295.15)
     annotation (Placement(transformation(extent={{-12,-14},{8,6}})));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=100, T(
-        start=303.15))
-    annotation (Placement(transformation(extent={{30,-12},{50,8}})));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload1(T(start=
-          289.15))
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(T0=303.15,
+    V=100)
+    annotation (Placement(transformation(extent={{32,-12},{52,8}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload1(
+    T0=289.15,
+    V=48)
     annotation (Placement(transformation(extent={{-12,70},{8,90}})));
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange varAirExchange
     annotation (Placement(transformation(extent={{-12,38},{8,58}})));
@@ -32,16 +33,17 @@ equation
   realOut[2] = varAirExchange.port_b.Q_flow;
   realOut[3] = infiltrationRate_DIN12831.port_b.Q_flow;
   realOut[4] = dynamicVentilation.port_inside.Q_flow;
-  connect(dynamicVentilation.port_inside, airload.port) annotation(Line(points = {{7.4, -5}, {19.5, -5}, {19.5, -4}, {31, -4}}, color = {191, 0, 0}));
-  connect(fixedHeatFlow.port, airload1.port) annotation(Line(points = {{-70, 82}, {-38, 82}, {-38, 78}, {-11, 78}}, color = {191, 0, 0}));
+  connect(dynamicVentilation.port_inside, airload.port) annotation(Line(points={{7.4,-5},{19.5,-5},{19.5,-12},{42,-12}},        color = {191, 0, 0}));
+  connect(fixedHeatFlow.port, airload1.port) annotation(Line(points={{-70,82},{-38,82},{-38,70},{-2,70}},           color = {191, 0, 0}));
   connect(TempOutsideDaycurve.port, varAirExchange.port_a) annotation(Line(points = {{-70, 50}, {-41, 50}, {-41, 48}, {-12, 48}}, color = {191, 0, 0}));
   connect(TempInside.port, varAirExchange.port_b) annotation(Line(points = {{70, 50}, {49, 50}, {49, 48}, {8, 48}}, color = {191, 0, 0}));
   connect(TempOutsideDaycurve.port, infiltrationRate_DIN12831.port_a) annotation(Line(points = {{-70, 50}, {-50, 50}, {-50, 22}, {-12, 22}}, color = {191, 0, 0}));
   connect(TempInside.port, infiltrationRate_DIN12831.port_b) annotation(Line(points = {{70, 50}, {40, 50}, {40, 22}, {8, 22}}, color = {191, 0, 0}));
   connect(sine.y, TempOutsideDaycurve.T) annotation(Line(points = {{-86.6, 26}, {-92, 26}, {-92, 50}}, color = {0, 0, 127}));
-  connect(sine1.y, varAirExchange.InPort1) annotation(Line(points = {{-23.5, 37}, {-17.75, 37}, {-17.75, 41.6}, {-11, 41.6}}, color = {0, 0, 127}));
+  connect(sine1.y, varAirExchange.ventRate) annotation (Line(points={{-23.5,37},
+          {-17.75,37},{-17.75,41.6},{-11,41.6}}, color={0,0,127}));
   connect(TempOutsideDaycurve.port, dynamicVentilation.port_outside) annotation(Line(points = {{-70, 50}, {-50, 50}, {-50, -5}, {-11.6, -5}}, color = {191, 0, 0}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{12, 90}, {20, 82}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{12, 60}, {20, 52}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{12, 32}, {20, 24}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{12, 6}, {20, -2}}, lineColor = {0, 0, 255}, textString = "4")}), experiment(StopTime = 86400, Interval = 15, Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(revisions = "<html><ul>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{12, 90}, {20, 82}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{12, 60}, {20, 52}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{12, 32}, {20, 24}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{12, 6}, {20, -2}}, lineColor = {0, 0, 255}, textString = "4")}), experiment(StopTime = 86400, Interval = 15, Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(revisions = "<html><ul>
   <li>
     <i>May 14, 2013&#160;</i> by Ole Odendahl:<br/>
     Implemented remaining DryAir models, adjusted existing model,

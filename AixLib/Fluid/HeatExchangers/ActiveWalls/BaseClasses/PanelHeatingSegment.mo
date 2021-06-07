@@ -106,8 +106,8 @@ equation
       points={{3.60822e-015,84},{3.60822e-015,92.5},{-2,92.5},{-2,100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(twoStar_RadEx.rad, starRad) annotation (Line(
-      points={{-30,83.1},{-30,102},{-28,102}},
+  connect(twoStar_RadEx.radPort, starRad) annotation (Line(
+      points={{-30,84.1},{-30,102},{-28,102}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
@@ -115,8 +115,8 @@ equation
       points={{-12,-100},{-12,-100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panel_Segment1.port_b, twoStar_RadEx.conv) annotation (Line(
-      points={{-16.9,39.1},{-16.9,51.55},{-30,51.55},{-30,64.8}},
+  connect(panel_Segment1.port_b, twoStar_RadEx.convPort) annotation (Line(
+      points={{-16.9,39.1},{-16.9,51.55},{-30,51.55},{-30,64}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(panel_Segment1.port_b, HeatConv.port_b) annotation (Line(

@@ -65,6 +65,140 @@ def _setEnvironmentVariables(var, value):
     else:
         os.environ[var] = value
 
+
+def create_ReferenceResults( tool, package, path, n_pro, show_gui):
+	from reference_check import Reg_Reference
+	import buildingspy.development.regressiontest as u
+	ref_check = Reg_Reference(package = args.single_package,
+									  library = args.path)
+	
+	CRED = '\033[91m'
+	CEND = '\033[0m'
+	green = "\033[0;32m"	
+	mos_list = ref_check.compare_ref_mos()
+		
+	ut = u.Tester(tool=tool)
+	ut.batchMode(False)
+	ut.setLibraryRoot(".")
+	
+	exitFile = ".."+os.sep+"bin"+os.sep+"06_Configfiles"+os.sep+"exit.sh"
+	Exit = open(exitFile, "w")
+	Ref_List = []
+	'''if mos_list is not None:
+		ut.setSinglePackage(self.package)
+		ut.setNumberOfThreads(self.n_pro)
+		ut.pedanticModelica(False)
+		ut.showGUI(True)
+		#ut.showGUI(self.show_gui)
+		retVal = ut.run()'''
+			
+	Ref_Whitelist = open(".."+os.sep+"bin"+os.sep+"03_WhiteLists"+os.sep+"ref_Whitelist.txt", "r")
+	WhiteList = []
+	'''
+	line = Ref_Whitelist.readline()
+	if len(line) == 0:
+		print("Leere Zeile")
+		print(line)
+	else:
+		line = line.replace('\n','')
+		line = line.replace("'",'')
+		WhiteList.append(line)
+	Ref_Whitelist.close()'''
+	for x in Ref_Whitelist:
+		x = x.strip()
+		if len(x) == 0:
+			continue
+		else:
+			WhiteList.append(x)
+	
+	Ref_Whitelist.close()
+	
+	if mos_list is not None:
+		for z in mos_list:
+			print(CRED+"No Reference result for Model "+CEND +z)
+		
+		for i in mos_list:
+			name = i
+			name = name[:name.rfind(".")]
+			Ref_List.append(name)
+		Ref = list(set(Ref_List))
+		
+		Err_List = []
+		for z in Ref:
+			for i in WhiteList:
+				if  z.find(i) > -1:
+					print(green+"Don´t Create Reference results for Package "+CEND+z+ green+" : This Package is on the WhiteList"+CEND) 
+					Err_List.append(z)
+				else:
+					continue
+		for x in Err_List:
+			Ref.remove(x)
+		
+		if len(Ref) == 0:
+			print(green+"All Reference files exists, except the Models on WhiteList."+CEND)
+			Exit.write("#!/bin/bash"+"\n"+"\n"+"exit 0")
+			Exit.close()
+			exit(0)
+		
+		print(green+"Create reference results for following Examples:"+CEND)
+		for x in Ref:
+			print('		'+x)
+			 
+		
+		for i in Ref:
+			
+			'''if i.find("DataBase")> -1:
+				continue
+			if i.find("Obsolete") > -1:
+				continue
+			if i.find("Types") >-1: 
+				continue
+			if i.find("UsersGuide") > -1:
+				continue
+			if i.find("Utilities") > -1:
+				continue'''			
+			print(green+"Generate new Reference File for "+CEND+i)
+			#name = i.replace("_",".")
+			#name = name[:name.rfind(".")]
+			ut.setSinglePackage(i)
+			ut.setNumberOfThreads(n_pro)
+			ut.pedanticModelica(False)
+			ut.showGUI(False)
+			#ut.showGUI(self.show_gui)
+			retVal = ut.run()
+			continue
+			
+			
+		Exit.write("#!/bin/bash"+"\n"+"\n"+"exit 1")
+		Exit.close()
+		print("Check the new reference results")
+	if len(mos_list) == 0:
+		print("All Reference files exists.")
+		Exit.write("#!/bin/bash"+"\n"+"\n"+"exit 0")
+		Exit.close()
+		sys.exit(0)
+		
+def _update_ref(batch, tool, package,path,  n_pro, show_gui):
+	import buildingspy.development.regressiontest as u
+	
+	ut = u.Tester(tool=tool)
+	ut.batchMode(batch)
+	ut.setLibraryRoot(path)
+	Errorlist = []
+	green = "\033[0;32m"
+	CRED = '\033[91m'
+	CEND = '\033[0m'
+	if package is not None:
+			ut.setSinglePackage(package)
+	ut.setNumberOfThreads(n_pro)
+	ut.pedanticModelica(False)
+	ut.showGUI(show_gui)
+	retVal = ut.run()
+	
+	
+	return retVal
+	
+	
 def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 	
 	import buildingspy.development.regressiontest as u
@@ -73,12 +207,19 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 	ut.batchMode(batch)
 	ut.setLibraryRoot(path)
 	Errorlist = []
+	green = "\033[0;32m"
+	CRED = '\033[91m'
+	CEND = '\033[0m'
+			 
+	
+	
 	if modified_models == False:
 		if package is not None:
 			ut.setSinglePackage(package)
 		ut.setNumberOfThreads(n_pro)
 		ut.pedanticModelica(False)
 		ut.showGUI(show_gui)
+		#ut._check_fmu_statistics("y")
 		# ut.get_test_example_coverage()
 		# Below are some option that may occassionally be used.
 		# These are currently not exposed as command line arguments.
@@ -142,20 +283,20 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui,modified_models):
 				retVal = ut.run()
 				if retVal == 1:
 					Errorlist.append(l)
-					print("Regression test for model "+l+ " was not successfull")
+					print(CRED+"Regression test for model "+l+ " was not successfull"+CEND)
 				if retVal != 0:
-					print("Regression test for model "+l+ " was successful")
+					print(green+"Regression test for model "+l+ " was successful"+CEND)
 				# comment out this line for local usage
 				ut.get_test_example_coverage()
 			if len(Errorlist) > 0:
 				retVal = 1
-				print("Regression test failed")
-				print("The following packages failed")
+				print(CRED+"Regression test failed"+CEND)
+				print("The following packages "+CRED+"failed"+CEND)
 				for l in Errorlist:
-					print("		Error: "+l)
+					print(CRED+"		Error: "+CEND+l)
 			else:
 				retVal = 0
-				print("Regression test was successful")
+				print(green+"Regression test was successful"+CEND)
 			
 		return retVal
 
@@ -182,12 +323,24 @@ def _runOpenModelicaUnitTests():
     ut.test_OpenModelica(cmpl=True, simulate=True,
                          packages=['Examples'], number=-1)
 
+
+
+def createFolder(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print ('Error: Creating directory. ' +  directory)
+		
+		
+		
 if __name__ == '__main__':
 	import multiprocessing
 	import platform
 	import argparse
 	import os
 	import sys
+	import time
 	
 	# Configure the argument parser
 	parser = argparse.ArgumentParser(description='Run the unit tests or the html validation only.')
@@ -219,7 +372,14 @@ if __name__ == '__main__':
                         help='Only run the coverage test',
                         action="store_true")
 
-
+	unit_test_group.add_argument("--check-ref",
+                        help='checks if all reference files exist',
+                        action="store_true")
+	unit_test_group.add_argument("--update-ref",
+                        help='update all reference files',
+                        action="store_true")
+	
+	
 	unit_test_group.add_argument("--modified-models",
                         help='Regression test only for modified models',
 						default=False,
@@ -262,6 +422,8 @@ if __name__ == '__main__':
 									  library = "package.mo",
 									  DymolaVersion = args.DymolaVersion)
 	
+	
+	
 	if args.validate_html_only:
         # Validate the html syntax only, and then exit
 		ret_val = _validate_html(args.path)
@@ -277,7 +439,48 @@ if __name__ == '__main__':
 	else:
 		single_package = None
 
-	if args.coverage_only:
+	if args.check_ref:
+		
+		ret_val = create_ReferenceResults(tool = args.tool,
+                           package = single_package,
+                           path = args.path,
+                           n_pro = args.number_of_processors,
+                           show_gui = args.show_gui)
+		exit(0)
+
+	if args.update_ref:
+		
+		ret_val = _update_ref(batch = args.batch, 
+							tool = args.tool,
+							package = single_package,
+							path = args.path,  
+							n_pro = args.number_of_processors, 
+							show_gui = args.show_gui)
+		package = single_package
+		new_ref_path = ".."+os.sep+"New_Reference_Files"
+		ref_dir = ".."+os.sep+"AixLib"+os.sep+"Resources"+os.sep+"ReferenceResults"+os.sep+"Dymola"
+		import os 
+		from datetime import date
+		import shutil
+		ref_files = os.listdir(ref_dir)
+		current_date = date.today()
+		
+		ref_list = []
+		createFolder(new_ref_path)
+		
+		for i in ref_files:
+			if i.find(package):
+				t = ref_dir+os.sep+i
+				for line in open(t, 'r'):
+					if line.find("last-generated=") > -1:
+						if line.find(str(current_date))> -1:
+							shutil.copy2(t,new_ref_path)
+							continue
+						
+		
+		exit(ret_val)
+	
+	elif args.coverage_only:
 		ret_val = _run_coverage_only(batch = args.batch,
                            tool = args.tool,
                            package = single_package,
@@ -285,15 +488,59 @@ if __name__ == '__main__':
                            n_pro = args.number_of_processors,
                            show_gui = args.show_gui)
 		exit(ret_val)
-
-
-	retVal = _runUnitTests(batch = args.batch,
-                           tool = args.tool,
-                           package = single_package,
-                           path = args.path,
-                           n_pro = args.number_of_processors,
-                           show_gui = args.show_gui,
-						   modified_models = args.modified_models)
-	exit(retVal)
-
-#   _runOpenModelicaUnitTests()
+	else:
+		from dymola.dymola_interface import DymolaInterface
+		from dymola.dymola_exception import DymolaException
+		
+		dymola = None
+		try:
+			
+			print("1: Starting Dymola instance")
+			if platform.system()  == "Windows":
+				dymola = DymolaInterface()
+			else:
+				dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
+				
+			### Writes all information in the log file, not only the last entries
+			dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
+			dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+			lic_counter = 0
+			
+			green = "\033[0;32m"
+			CRED = '\033[91m'
+			CEND = '\033[0m'
+			
+			while dym_sta_lic_available == False:
+				print(CRED+"No Dymola License is available"+CEND)
+				dymola.close()
+				print("Check Dymola license after 60.0 seconds")
+				time.sleep(180.0)
+				### Sets the Dymola path to activate the GUI
+				if platform.system()  == "Windows":
+					dymola = DymolaInterface()
+				else:
+					dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
+				dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+				lic_counter = lic_counter +1 	
+				if lic_counter > 30:
+					if dym_sta_lic_available == False:
+						print(CRED+"There are currently no available Dymola licenses available. Please try again later."+CEND)
+						dymola.close()
+						exit(1)
+			print(("2: Using Dymola port " + str(dymola._portnumber)))
+			print(green+"Dymola License is available"+CEND)
+			retVal = _runUnitTests(batch = args.batch,
+								   tool = args.tool,
+								   package = single_package,
+								   path = args.path,
+								   n_pro = args.number_of_processors,
+								   show_gui = args.show_gui,
+								   modified_models = args.modified_models)
+			exit(retVal)
+		except DymolaException as ex:
+			print(("2: Error: " + str(ex)))
+		finally:
+			if dymola is not None:
+				dymola.close()
+				dymola = None
+			#   _runOpenModelicaUnitTests()

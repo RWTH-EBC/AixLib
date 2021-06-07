@@ -1,7 +1,8 @@
 within AixLib.BoundaryConditions.WeatherData.Validation;
 model ThreeYears_usingTwoYearDataNegativeStart
   "Validation model for a simulation spanning three years, starting at a negative time and using only two years of data"
-  extends AixLib.BoundaryConditions.WeatherData.Validation.ThreeYears_usingTwoYearData;
+  extends
+    AixLib.BoundaryConditions.WeatherData.Validation.ThreeYears_usingTwoYearData;
 
   annotation (experiment(
       StartTime=-47174400,
