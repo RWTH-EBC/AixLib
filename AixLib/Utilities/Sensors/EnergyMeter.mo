@@ -1,7 +1,9 @@
 within AixLib.Utilities.Sensors;
 model EnergyMeter
   "\"Integrates power [W] that is connected to input connector\""
-
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics"));
   Modelica.Blocks.Interfaces.RealInput p(unit="W") annotation(Placement(transformation(origin={-60,0},    extent={{14,-14},
             {-14,14}},                                                                                                                     rotation = 180),
         iconTransformation(
@@ -9,7 +11,7 @@ model EnergyMeter
         rotation=180,
         origin={-56,0})));
   Modelica.SIunits.Conversions.NonSIunits.Energy_kWh q_kWh;
-  Modelica.SIunits.Energy q_joule(stateSelect = StateSelect.avoid, start = 0.0);
+  Modelica.SIunits.Energy q_joule(stateSelect = StateSelect.avoid, start = 0.0, fixed=energyDynamics==Modelica.Fluid.Types.Dynamics.FixedInitial);
 equation
   der(q_joule) = p;
   q_kWh = Modelica.SIunits.Conversions.to_kWh(q_joule);
@@ -43,6 +45,14 @@ equation
   </li>
   <li>by Alexander Hoh:<br/>
     implemented
+  </li>
+</ul>
+</html>", revisions="<html>
+<ul>
+  <li>
+    <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
+    Add energyDynamics as parameter (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
   </li>
 </ul>
 </html>"),

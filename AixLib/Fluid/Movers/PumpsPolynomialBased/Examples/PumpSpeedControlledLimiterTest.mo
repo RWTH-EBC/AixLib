@@ -32,13 +32,12 @@ model PumpSpeedControlledLimiterTest
         *1.25; 90,pump.pumpParam.nMax*1.25; 120,pump.pumpParam.nMin*0.75; 150,
         pump.pumpParam.nMin*0.75])
                 annotation (Placement(transformation(extent={{46,30},{26,50}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
     redeclare package Medium = Medium,
     Kvs=system.m_flow_nominal*3600/995/sqrt(system.g*pump.Hnom/1e5*1000),
     m_flow_start=system.m_flow_start,
     m_flow_small=system.m_flow_small,
-    dp_start=pump.p_b_start - pump.p_a_start)
-    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
+    dp_start=pump.p_b_start - pump.p_a_start) annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableValvePosition(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,

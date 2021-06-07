@@ -1,7 +1,7 @@
 RegisterModule
 VentilationUnit
 GenericAHU
-BaseClasses
 Controller
 Examples
 Validation
+BaseClasses

@@ -8,8 +8,8 @@ model DHCSupplyHeaterCoolerStorage
     V_Tank=500)
     annotation (Placement(transformation(extent={{-92,4},{-72,24}})));
   Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling substation1(
-                                                                   redeclare
-      package Medium = Medium,
+                                                                   redeclare package Medium =
+                       Medium,
     m_flow_nominal=5,
     heaDem_max=10000,
     deltaT_heaSecSet=278.15,
@@ -20,8 +20,8 @@ model DHCSupplyHeaterCoolerStorage
         rotation=-90,
         origin={-16,-14})));
   Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling substation2(
-                                                                   redeclare
-      package Medium = Medium,
+                                                                   redeclare package Medium =
+                       Medium,
     m_flow_nominal=5,
     heaDem_max=10000,
     deltaT_heaSecSet=278.15,

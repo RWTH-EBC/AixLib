@@ -128,7 +128,7 @@ model HeatPumpSystem "Example for a heat pump system"
     use_revHP=false,
     VCon=0.004,
     VEva=0.004)
-    annotation (Placement(transformation(extent={{10,-90},{64,-30}})));
+    annotation (Placement(transformation(extent={{10,-92},{64,-32}})));
 
 
   AixLib.Fluid.Sensors.TemperatureTwoPort
@@ -188,27 +188,27 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(sou.ports[1], heatPumpSystem.port_a2)
-    annotation (Line(points={{82,-90},{64,-90},{64,-81.4286}},
+    annotation (Line(points={{82,-90},{64,-90},{64,-83.4286}},
                                                           color={0,127,255}));
   connect(sin.ports[1], heatPumpSystem.port_b2) annotation (Line(points={{-28,-90},
-          {14,-90},{14,-81.4286},{10,-81.4286}},
+          {14,-90},{14,-83.4286},{10,-83.4286}},
                                        color={0,127,255}));
   connect(weaBus.TDryBul, heatPumpSystem.T_oda) annotation (Line(
-      points={{-68,64},{-58,64},{-58,-43.0714},{5.95,-43.0714}},
+      points={{-68,64},{-58,64},{-58,-45.0714},{5.95,-45.0714}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(senT_a1.port_a, heatPumpSystem.port_b1) annotation (Line(points={{88,-30},
-          {88,-55.7143},{64,-55.7143}},      color={0,127,255}));
+          {88,-57.7143},{64,-57.7143}},      color={0,127,255}));
   connect(senT_a1.port_b, rad.port_a) annotation (Line(points={{88,-10},{90,-10},
           {90,12},{40,12}}, color={0,127,255}));
   connect(senT_a1.T, heatPumpSystem.TAct) annotation (Line(points={{77,-20},{54,
-          -20},{54,-16},{-2,-16},{-2,-24},{5.95,-24},{5.95,-34.0714}},
+          -20},{54,-16},{-2,-16},{-2,-24},{5.95,-24},{5.95,-36.0714}},
                                                      color={0,0,127}));
   connect(rad.port_b, heatPumpSystem.port_a1) annotation (Line(points={{20,12},
-          {-12,12},{-12,-55.7143},{10,-55.7143}},color={0,127,255}));
+          {-12,12},{-12,-57.7143},{10,-57.7143}},color={0,127,255}));
   connect(rad.port_b, preSou.ports[1])
     annotation (Line(points={{20,12},{-28,12}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
@@ -241,7 +241,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatP
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

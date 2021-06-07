@@ -149,7 +149,6 @@ equation
   possible to choose between these options with the parameter
   \"functionality\".
 </p>
-</html>", revisions="<html>
 <ul>
   <li>August 31, 2020, by Alexander Kümpel:<br/>
     Remove pipes
