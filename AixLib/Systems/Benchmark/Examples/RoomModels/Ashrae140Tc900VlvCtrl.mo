@@ -40,16 +40,6 @@ model Ashrae140Tc900VlvCtrl "Ashrae140 Test Case 900 Valve Controlled"
         dT_nom=7,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{-80,-12},{-34,38}})));
-  AixLib.Systems.Benchmark.Tabs2
-        tabs4_1(
-    redeclare package Medium = MediumWater,
-    m_flow_nominal=0.5,
-    area=48,
-    thickness=0.05,
-    alpha=20,
-    dynamicHX1(nNodes=4, Q_nom=2000),
-    dynamicHX(nNodes=4, Q_nom=2000))
-    annotation (Placement(transformation(extent={{20,-60},{60,-20}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone
                                                     thermalZone1(
     redeclare package Medium = MediumAir,
@@ -250,6 +240,15 @@ model Ashrae140Tc900VlvCtrl "Ashrae140 Test Case 900 Valve Controlled"
     annotation (Placement(transformation(extent={{-180,84},{-140,124}})));
   Modelica.Blocks.Interfaces.RealOutput TAirRoom "Indoor air temperature"
     annotation (Placement(transformation(extent={{96,54},{116,74}})));
+  EONERC_MainBuilding.Tabs2 tabs(
+    redeclare package Medium = MediumWater,
+    m_flow_nominal=0.5,
+    area=48,
+    thickness=0.05,
+    alpha=20,
+    dynamicHX1(nNodes=4, Q_nom=2000),
+    dynamicHX(nNodes=4, Q_nom=2000))
+    annotation (Placement(transformation(extent={{22,-78},{64,-32}})));
 equation
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
       points={{-59,70},{6,70},{6,58.8}},
@@ -262,9 +261,6 @@ equation
   connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{36.7,
           8.88178e-16},{40,8.88178e-16},{40,25.68},{51,25.68}},
                                               color={0,0,127}));
-  connect(tabs4_1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,
-          -18.1818},{46,-18.1818},{46,45.92},{56.5,45.92}},               color=
-         {191,0,0}));
   connect(ventilationUnit1.port_b1, thermalZone1.ports[1]) annotation (Line(
         points={{-33.54,13},{25.125,13},{25.125,28.44}},
                                                      color={0,127,255}));
@@ -280,14 +276,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(bou1.ports[1], ventilationUnit1.port_b2) annotation (Line(points={{
           -94,29},{-94,28},{-79.54,28}}, color={0,127,255}));
-  connect(tabs4_1.tabsBus, bus.tabs1Bus) annotation (Line(
-      points={{19.8,-41.6364},{2,-41.6364},{2,108.11},{-1.91,108.11}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(ventilationUnit1.genericAHUBus, bus.vu1Bus) annotation (Line(
       points={{-57,43.25},{-57,60},{-1.91,60},{-1.91,108.11}},
       color={255,204,51},
@@ -300,18 +288,10 @@ equation
         points={{-56,-82},{-56,-12},{-53.78,-12}},color={0,127,255}));
   connect(bouWaterhot1.ports[1], ventilationUnit1.port_b4) annotation (Line(
         points={{-20,-76},{-50,-76},{-50,-12},{-45.96,-12}}, color={0,127,255}));
-  connect(bouWaterhot1.ports[2], tabs4_1.port_b1) annotation (Line(points={{-16,-76},
-          {56,-76},{56,-59.6364}},      color={0,127,255}));
-  connect(tabs4_1.port_a1, bouWaterhot.ports[2]) annotation (Line(points={{24,
-          -60},{-52,-60},{-52,-82}}, color={0,127,255}));
-  connect(bouWatercold.ports[1], tabs4_1.port_a2) annotation (Line(points={{-8,
-          -116},{2,-116},{2,-102},{32,-102},{32,-60}}, color={0,127,255}));
-  connect(bouWatercold1.ports[1], tabs4_1.port_b2) annotation (Line(points={{22,-116},
-          {48,-116},{48,-59.6364}},       color={0,127,255}));
-  connect(bouWatercold.ports[2], ventilationUnit1.port_a3) annotation (Line(
-        points={{-4,-116},{-72,-116},{-72,-12},{-70.8,-12}}, color={0,127,255}));
-  connect(bouWatercold1.ports[2], ventilationUnit1.port_b3) annotation (Line(
-        points={{26,-116},{26,-112},{-66,-112},{-66,-12},{-62.98,-12}},color={0,
+  connect(bouWatercold.ports[1], ventilationUnit1.port_a3) annotation (Line(
+        points={{-8,-116},{-72,-116},{-72,-12},{-70.8,-12}}, color={0,127,255}));
+  connect(bouWatercold1.ports[1], ventilationUnit1.port_b3) annotation (Line(
+        points={{22,-116},{22,-112},{-66,-112},{-66,-12},{-62.98,-12}},color={0,
           127,255}));
   connect(thermalZone1.TAir, bus.TRoom1Mea) annotation (Line(points={{58.5,63.4},
           {58.5,112},{-1.91,112},{-1.91,108.11}}, color={0,0,127}), Text(
@@ -352,18 +332,38 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrTabsValveSet.valveHotSet, valveTabsHotSet) annotation (Line(points
-        ={{-104.3,166.1},{-121.15,166.1},{-121.15,190},{-160,190}}, color={0,0,
+  connect(ctrTabsValveSet.valveHotSet, valveTabsHotSet) annotation (Line(points=
+         {{-104.3,166.1},{-121.15,166.1},{-121.15,190},{-160,190}}, color={0,0,
           127}));
   connect(ctrTabsValveSet.valveColdSet, valveTabsColdSet) annotation (Line(
         points={{-104.3,157.9},{-160,157.9},{-160,162}}, color={0,0,127}));
-  connect(ctrVentilationUnitValveSet.VsetCooler, valveAhuCoolerSet) annotation
-    (Line(points={{-104.2,140.6},{-121.1,140.6},{-121.1,136},{-160,136}}, color
-        ={0,0,127}));
-  connect(ctrVentilationUnitValveSet.VsetHeater, valveAhuHeaterSet) annotation
-    (Line(points={{-104.1,132.5},{-160,132.5},{-160,104}}, color={0,0,127}));
+  connect(ctrVentilationUnitValveSet.VsetCooler, valveAhuCoolerSet) annotation (
+     Line(points={{-104.2,140.6},{-121.1,140.6},{-121.1,136},{-160,136}}, color=
+         {0,0,127}));
+  connect(ctrVentilationUnitValveSet.VsetHeater, valveAhuHeaterSet) annotation (
+     Line(points={{-104.1,132.5},{-160,132.5},{-160,104}}, color={0,0,127}));
   connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{58.5,63.4},{92,
           63.4},{92,64},{106,64}}, color={0,0,127}));
+  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{
+          43,-29.9091},{43,8.04545},{56.5,8.04545},{56.5,45.92}}, color={191,0,
+          0}));
+  connect(tabs.tabsBus, bus.tabs1Bus) annotation (Line(
+      points={{21.79,-56.8818},{21.79,-57.4409},{-1.91,-57.4409},{-1.91,108.11}},
+
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(bouWatercold.ports[2], tabs.port_a2) annotation (Line(points={{-4,
+          -116},{52,-116},{52,-78},{51.4,-78}}, color={0,127,255}));
+  connect(bouWatercold1.ports[2], tabs.port_b2) annotation (Line(points={{26,
+          -116},{60,-116},{60,-77.5818},{59.8,-77.5818}}, color={0,127,255}));
+  connect(bouWaterhot1.ports[2], tabs.port_a1) annotation (Line(points={{-16,
+          -76},{4,-76},{4,-78},{26.2,-78}}, color={0,127,255}));
+  connect(bouWaterhot.ports[2], tabs.port_b1) annotation (Line(points={{-52,-82},
+          {34,-82},{34,-78},{34.6,-78}}, color={0,127,255}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-140},{140,
             200}})),

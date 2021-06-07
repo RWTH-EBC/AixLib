@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_MainBuilding.Examples;
+within AixLib.Systems.EONERC_MainBuilding.Examples.ForControllerTesting;
 model EONERC_MainBuilding_simple
   "Energy system of main building with controller"
   extends Modelica.Icons.Example;

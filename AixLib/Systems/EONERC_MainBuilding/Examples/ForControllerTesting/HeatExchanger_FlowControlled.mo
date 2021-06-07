@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_MainBuilding.Examples;
+within AixLib.Systems.EONERC_MainBuilding.Examples.ForControllerTesting;
 model HeatExchanger_FlowControlled
   "Test of heat exachgner model of E.ON ERC main building"
   extends Modelica.Icons.Example;

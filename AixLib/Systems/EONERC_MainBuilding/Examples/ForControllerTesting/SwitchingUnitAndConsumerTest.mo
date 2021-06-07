@@ -1,6 +1,5 @@
-within AixLib.Systems.EONERC_MainBuilding.Examples;
-model SwitchingUnitAndConsumerTest
-  "Test of switchingUnit model of E.ON ERC main building"
+within AixLib.Systems.EONERC_MainBuilding.Examples.ForControllerTesting;
+model SwitchingUnitAndConsumerTest "Test of Switching Units and Consumer"
   extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);

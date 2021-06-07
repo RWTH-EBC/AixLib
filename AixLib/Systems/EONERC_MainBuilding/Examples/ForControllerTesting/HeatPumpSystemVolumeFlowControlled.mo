@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_MainBuilding.Examples;
+within AixLib.Systems.EONERC_MainBuilding.Examples.ForControllerTesting;
 model HeatPumpSystemVolumeFlowControlled "Validation of HeatpumpSystem"
   extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water

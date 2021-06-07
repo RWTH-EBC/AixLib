@@ -1,5 +1,5 @@
-within AixLib.Systems.EONERC_MainBuilding.Examples;
-model GeothermalFieldSimpleFlowControl_test
+within AixLib.Systems.EONERC_MainBuilding.Examples.ForControllerTesting;
+model GeothermalFieldSimpleFlowControl
   "Test of geothermal field model of E.ON ERC main building"
   extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water
@@ -18,7 +18,7 @@ model GeothermalFieldSimpleFlowControl_test
              annotation (Placement(transformation(extent={{-20,-58},{20,-2}})));
   Controller.CtrGTFSimpleFlowCtrl ctrGTFSimpleFlowCtrl(
     k=500,
-    Ti=20,
+    Ti=30,
     Td=0) annotation (Placement(transformation(extent={{-64,-30},{-44,-10}})));
   Fluid.Sources.MassFlowSource_T        boundary5(
     redeclare package Medium = Medium,
@@ -41,12 +41,16 @@ model GeothermalFieldSimpleFlowControl_test
   Modelica.Blocks.Interfaces.RealOutput Tout "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{98,8},{114,24}}),
         iconTransformation(extent={{98,8},{114,24}})));
-  Modelica.Blocks.Sources.Constant const(k=5)
-    annotation (Placement(transformation(extent={{-102,50},{-82,70}})));
-  Modelica.Blocks.Sources.Constant const1(k=5)
-    annotation (Placement(transformation(extent={{-108,-6},{-88,14}})));
-  Modelica.Blocks.Sources.Constant const2(k=295)
-    annotation (Placement(transformation(extent={{-102,20},{-82,40}})));
+  Modelica.Blocks.Interfaces.RealInput mflow_gtf
+    "Connector of setpoint input signal" annotation (Placement(transformation(
+          extent={{-114,-28},{-96,-10}}), iconTransformation(extent={{-114,-28},
+            {-96,-10}})));
+  Modelica.Blocks.Interfaces.RealInput m_flow_in "Prescribed mass flow rate"
+    annotation (Placement(transformation(extent={{-110,46},{-90,66}}),
+        iconTransformation(extent={{-110,46},{-90,66}})));
+  Modelica.Blocks.Interfaces.RealInput Tin "Prescribed boundary temperature"
+    annotation (Placement(transformation(extent={{-110,18},{-94,34}}),
+        iconTransformation(extent={{-110,18},{-94,34}})));
 equation
   connect(ctrGTFSimpleFlowCtrl.gtfBus, gtf.twoCircuitBus) annotation (Line(
       points={{-42.7,-20},{-44,-20},{-44,-19.675},{-20.1667,-19.675}},
@@ -60,15 +64,15 @@ equation
     annotation (Line(points={{20,26},{22,26},{22,30}}, color={0,127,255}));
   connect(senTem.T, Tout)
     annotation (Line(points={{31,16},{106,16}}, color={0,0,127}));
-  connect(const.y, boundary5.m_flow_in) annotation (Line(points={{-81,60},{-62,
-          60},{-62,56},{-44,56}}, color={0,0,127}));
-  connect(const1.y, ctrGTFSimpleFlowCtrl.mflow_gtf) annotation (Line(points={{
-          -87,4},{-76,4},{-76,-19.9},{-64.3,-19.9}}, color={0,0,127}));
-  connect(const2.y, boundary5.T_in) annotation (Line(points={{-81,30},{-62,30},
-          {-62,52},{-44,52}}, color={0,0,127}));
+  connect(ctrGTFSimpleFlowCtrl.mflow_gtf, mflow_gtf) annotation (Line(points={{-64.3,
+          -19.9},{-82.15,-19.9},{-82.15,-19},{-105,-19}},       color={0,0,127}));
+  connect(boundary5.m_flow_in, m_flow_in)
+    annotation (Line(points={{-44,56},{-100,56}}, color={0,0,127}));
+  connect(boundary5.T_in, Tin) annotation (Line(points={{-44,52},{-64,52},{-64,
+          26},{-102,26}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000),
                                          __Dymola_Commands(file(ensureSimulated=
            true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpValidation.mos"
         "Simulate and plot"));
-end GeothermalFieldSimpleFlowControl_test;
+end GeothermalFieldSimpleFlowControl;
