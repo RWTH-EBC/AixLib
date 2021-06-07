@@ -1,4 +1,4 @@
-within AixLib.Systems.Benchmark.Controller;
+within AixLib.Systems.EONERC_MainBuilding.Controller;
 model CtrTabs2 "Controller for concrete core activation"
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
   parameter Modelica.SIunits.Temperature TflowSet = 293.15 "Flow temperature set point of consumer";

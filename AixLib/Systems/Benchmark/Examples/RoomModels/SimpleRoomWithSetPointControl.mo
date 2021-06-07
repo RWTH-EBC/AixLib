@@ -14,8 +14,8 @@ model SimpleRoomWithSetPointControl
     Ti=200,
     VFlowSet=3*1800/3600)
     annotation (Placement(transformation(extent={{-100,100},{-80,120}})));
-  AixLib.Systems.Benchmark.Controller.CtrTabs2
-           ctrTabs2_1(useExternalTset=true, TflowSet=295.15)
+  AixLib.Systems.EONERC_MainBuilding.Controller.CtrTabs2 ctrTabs2_1(
+      useExternalTset=true, TflowSet=295.15)
     annotation (Placement(transformation(extent={{-100,122},{-80,142}})));
   Modelica.Blocks.Interfaces.RealInput TsetCca
     "Connector of second Real input signal" annotation (Placement(

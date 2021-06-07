@@ -9,7 +9,7 @@ model MainBuilding2Zones "Benchmark building model"
               annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
-        origin={314,-58})));
+        origin={398,-60})));
   HeatpumpSystem heatpumpSystem(redeclare package Medium = MediumWater)
     annotation (Placement(transformation(extent={{-40,-80},{70,-34}})));
   EONERC_MainBuilding.SwitchingUnit switchingUnit(redeclare package Medium =
@@ -243,14 +243,14 @@ model MainBuilding2Zones "Benchmark building model"
     use_X_in=true,
     use_Xi_in=false,
     use_T_in=true,
-    nPorts=2,
+    nPorts=1,
     redeclare package Medium = Media.Air,
     T=283.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-140,250})));
   Fluid.Sources.Boundary_pT boundaryExhaustAir(          redeclare package
-      Medium = Media.Air, nPorts=2)
+      Medium = Media.Air, nPorts=1)
                           annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
@@ -275,7 +275,7 @@ model MainBuilding2Zones "Benchmark building model"
     redeclare package Medium = MediumWater,
     m_flow_nominal=1,
     V=0.01,
-    nPorts=3)
+    nPorts=4)
     annotation (Placement(transformation(extent={{130,100},{144,114}})));
   ModularAHU.GenericAHU                genericAHU1(
     redeclare package Medium1 = MediumAir,
@@ -592,6 +592,22 @@ model MainBuilding2Zones "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={-78,-88})));
+  Fluid.Sources.Boundary_pT boundaryOutsideAir1(
+    use_X_in=true,
+    use_Xi_in=false,
+    use_T_in=true,
+    nPorts=1,
+    redeclare package Medium = Media.Air,
+    T=283.15) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=180,
+        origin={-82,190})));
+  Fluid.Sources.Boundary_pT boundaryExhaustAir1(redeclare package Medium =
+        Media.Air, nPorts=1)
+                          annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=180,
+        origin={8,216})));
 equation
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
       Line(points={{18,-98},{18,-77.4444},{15,-77.4444}},           color={191,
@@ -707,17 +723,17 @@ equation
   connect(boundaryOutsideAir.T_in, prescribedTemperature.T) annotation (Line(
         points={{-152,246},{-220,246},{-220,-120},{18,-120}},  color={0,0,127}));
   connect(bou.ports[1], switchingUnit.port_b2)
-    annotation (Line(points={{304,-58},{290,-58},{290,-60},{276,-60}},
-                                                   color={0,127,255}));
+    annotation (Line(points={{388,-60},{276,-60}}, color={0,127,255}));
   connect(switchingUnit.port_a1, vol.ports[1]) annotation (Line(points={{276,-36},
           {276,76},{118.9,76}},        color={0,127,255}));
-  connect(vol1.ports[1], genericAHU.port_a4) annotation (Line(points={{135.133,
+  connect(vol1.ports[1], genericAHU.port_a4) annotation (Line(points={{134.9,
           100},{-34,100},{-34,248}},
                                 color={0,127,255}));
-  connect(vol1.ports[2], tabs1.port_a2) annotation (Line(points={{137,100},{186,
-          100},{186,120}}, color={0,127,255}));
-  connect(vol1.ports[3], tabs2.port_a2) annotation (Line(points={{138.867,100},
-          {392,100},{392,122}},
+  connect(vol1.ports[2], tabs1.port_a2) annotation (Line(points={{136.3,100},{
+          186,100},{186,120}},
+                           color={0,127,255}));
+  connect(vol1.ports[3], tabs2.port_a2) annotation (Line(points={{137.7,100},{
+          392,100},{392,122}},
                            color={0,127,255}));
   connect(vol.ports[2], genericAHU.port_b4) annotation (Line(points={{120.3,76},
           {-23.0909,76},{-23.0909,248}},color={0,127,255}));
@@ -725,10 +741,8 @@ equation
           76},{194,120.364}}, color={0,127,255}));
   connect(vol.ports[4], tabs2.port_b2) annotation (Line(points={{123.1,76},{400,
           76},{400,122.364}}, color={0,127,255}));
-  connect(boundaryOutsideAir.ports[1], genericAHU1.port_a1) annotation (Line(
-        points={{-130,248},{-122,248},{-122,190},{24,190}}, color={0,127,255}));
   connect(vol1.ports[1], genericAHU1.port_a4)
-    annotation (Line(points={{135.133,100},{84,100},{84,160}},
+    annotation (Line(points={{134.9,100},{84,100},{84,160}},
                                                            color={0,127,255}));
   connect(vol.ports[2], genericAHU1.port_b4) annotation (Line(points={{120.3,76},
           {94.9091,76},{94.9091,160}}, color={0,127,255}));
@@ -773,15 +787,6 @@ equation
           {170,46},{-65,46},{-65,8}},               color={244,125,35}));
   connect(tabs2.port_a1, heatExchangerSystem.port_b2) annotation (Line(points={
           {368,122},{368,54},{-75,54},{-75,8}}, color={244,125,35}));
-  connect(tabs1.tabsBus, mainBus.tabs1Bus) annotation (Line(
-      points={{157.8,138.364},{244,138.364},{244,428},{161.115,428},{161.115,
-          419.145}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(tabs2.tabsBus, mainBus.tabs2Bus) annotation (Line(
       points={{363.8,140.364},{440,140.364},{440,419.145},{161.115,419.145}},
       color={255,204,51},
@@ -872,7 +877,7 @@ equation
   connect(prescribedTemperature.T, Tair) annotation (Line(points={{18,-120},{18,
           -112},{-28,-112}}, color={0,0,127}));
   connect(admixCold.hydraulicBus, mainBus.consCold1Bus) annotation (Line(
-      points={{98,-10},{98,28},{-254,28},{-254,430},{161.115,430},{161.115,
+      points={{98,-10},{98,28},{-220,28},{-220,420},{161.115,420},{161.115,
           419.145}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -882,14 +887,30 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(bou1.ports[1], heatExchangerSystem.port_a2) annotation (Line(points={
           {-78,-78},{-78,-40},{-75,-40}}, color={0,127,255}));
-  connect(genericAHU.port_a1, boundaryOutsideAir.ports[2]) annotation (Line(
-        points={{-94,278},{-108,278},{-108,282},{-130,282},{-130,252}}, color={
+  connect(genericAHU.port_a1, boundaryOutsideAir.ports[1]) annotation (Line(
+        points={{-94,278},{-108,278},{-108,282},{-130,282},{-130,250}}, color={
           0,127,255}));
   connect(boundaryExhaustAir.ports[1], genericAHU.port_b2) annotation (Line(
-        points={{-136,300},{-116,300},{-116,302},{-94,302}}, color={0,127,255}));
-  connect(genericAHU1.port_b2, boundaryExhaustAir.ports[2]) annotation (Line(
-        points={{24,214},{-42,214},{-42,218},{-112,218},{-112,304},{-136,304}},
-        color={0,127,255}));
+        points={{-136,302},{-116,302},{-116,302},{-94,302}}, color={0,127,255}));
+  connect(x_pTphi.X, boundaryOutsideAir1.X_in) annotation (Line(points={{-161,
+          270},{-158,270},{-158,194},{-94,194}}, color={0,0,127}));
+  connect(boundaryOutsideAir1.T_in, boundaryOutsideAir.T_in) annotation (Line(
+        points={{-94,186},{-154,186},{-154,246},{-152,246}}, color={0,0,127}));
+  connect(boundaryOutsideAir1.ports[1], genericAHU1.port_a1)
+    annotation (Line(points={{-72,190},{24,190}}, color={0,127,255}));
+  connect(genericAHU1.port_b2, boundaryExhaustAir1.ports[1]) annotation (Line(
+        points={{24,214},{22,214},{22,216},{18,216}}, color={0,127,255}));
+  connect(tabs1.tabsBus, mainBus.tabs1Bus) annotation (Line(
+      points={{157.8,138.364},{242,138.364},{242,410},{161.115,410},{161.115,
+          419.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(switchingUnit.port_b2, vol1.ports[4]) annotation (Line(points={{276,
+          -60},{294,-60},{294,100},{139.1,100}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},
@@ -904,7 +925,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Main Building 2 zones")}),
     experiment(
-      StopTime=86400,
+      StopTime=31536000,
       Tolerance=0.001,
       __Dymola_fixedstepsize=0.5,
       __Dymola_Algorithm="Dassl"));

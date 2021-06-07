@@ -24,14 +24,14 @@ model CtrHP "Heatpump Controller"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
         rotation=0,
         origin={70,-18})));
-  Modelica.Blocks.Logical.Hysteresis       hysteresis3(uLow=5 + 273.15, uHigh=7
+  Modelica.Blocks.Logical.Hysteresis       hysteresis3(uLow=5 + 273.15, uHigh=6
          + 273.15)
     annotation (Placement(transformation(extent={{-26,18},{-16,28}})));
   Modelica.Blocks.Logical.Or or2 annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,
         origin={8,28})));
-  Modelica.Blocks.Logical.Hysteresis       hysteresis2(uLow=40 + 273.15, uHigh=
+  Modelica.Blocks.Logical.Hysteresis       hysteresis2(uLow=44 + 273.15, uHigh=
         45 + 273.15)
     annotation (Placement(transformation(extent={{-26,36},{-16,46}})));
   Modelica.Blocks.Sources.Constant THPHotSet1(k=T_con_set)
