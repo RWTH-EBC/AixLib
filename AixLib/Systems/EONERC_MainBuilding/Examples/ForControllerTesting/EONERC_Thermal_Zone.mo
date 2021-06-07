@@ -9,8 +9,8 @@ model EONERC_Thermal_Zone "Test of ERC Thermal Zone"
   Tabs2                     tabs1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=7.5,
-    area=60*60,
-    thickness=0.3,
+    area=60*30,
+    thickness=0.1,
     alpha=15,
     length=100,
     pump(parameterPipe=DataBase.Pipes.Copper.Copper_54x1_5(),
