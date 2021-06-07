@@ -8,8 +8,8 @@ model DHCSupplyHeaterCoolerStorage
     V_Tank=500)
     annotation (Placement(transformation(extent={{-92,4},{-72,24}})));
   Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling substation1(
-                                                                   redeclare
-      package Medium = Medium,
+                                                                   redeclare package Medium =
+                       Medium,
     m_flow_nominal=5,
     heaDem_max=10000,
     deltaT_heaSecSet=278.15,
@@ -20,8 +20,8 @@ model DHCSupplyHeaterCoolerStorage
         rotation=-90,
         origin={-16,-14})));
   Demands.ClosedLoop.DHCSubstationHeatPumpDirectCooling substation2(
-                                                                   redeclare
-      package Medium = Medium,
+                                                                   redeclare package Medium =
+                       Medium,
     m_flow_nominal=5,
     heaDem_max=10000,
     deltaT_heaSecSet=278.15,
@@ -112,12 +112,11 @@ equation
       StopTime=172800,
       Interval=60,
       Tolerance=1e-05),
-    Documentation(revisions="<html>
-<ul>
-<li>
-October 23, 2018, by Tobias Blacha:<br/>
-Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>October 23, 2018, by Tobias Blacha:<br/>
+    Implemented for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 403</a>.
+  </li>
 </ul>
 </html>"),
     __Dymola_experimentSetupOutput(equidistant=false));

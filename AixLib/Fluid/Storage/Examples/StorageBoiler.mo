@@ -20,12 +20,16 @@ model StorageBoiler
     d=1,
     h=2,
     k_HE=1500,
-    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-18,12},{2,32}})));
+    redeclare package Medium = Medium,
+    m_flow_nominal_layer=pipe1.m_flow_nominal,
+    m_flow_nominal_HE=pipe.m_flow_nominal)
+                                       annotation (Placement(transformation(extent={{-18,12},{2,32}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-56,12},
             {-36,32}})));
-  AixLib.Fluid.Movers.Pump
-             pump(redeclare package Medium = Medium, m_flow_small=1e-4)
-                  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={6,60})));
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(redeclare package Medium = Medium, m_flow_small=1e-4) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={6,60})));
   AixLib.Fluid.Sources.Boundary_pT
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent={{-48,68},

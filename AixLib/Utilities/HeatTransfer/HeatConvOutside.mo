@@ -21,7 +21,7 @@ model HeatConvOutside "Model for heat transfer at outside surfaces. Choice betwe
           calcMethod == 2),                                                                                                                                                                                           choicesAllMatching = true);
   // Variables
   Modelica.SIunits.CoefficientOfHeatTransfer hCon "Convection heat transfer coeffient";
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if calcMethod == 1 or calcMethod == 2              annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if calcMethod == 1 or calcMethod == 2              annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent={{-100,-80},{-80,-60}})));
 
 protected
   Modelica.Blocks.Interfaces.RealInput WindSpeed_internal(unit="m/s");

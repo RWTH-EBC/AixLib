@@ -16,7 +16,7 @@ partial model PartialSunblind "A Base Class for Sunblindes"
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={8,-100}), iconTransformation(
+        origin={0,-90}),  iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-90})));
@@ -27,4 +27,5 @@ partial model PartialSunblind "A Base Class for Sunblindes"
 initial equation
   assert(n==size(gsunblind,1),"gsunblind has to have n elements");
 
+  annotation (Diagram(coordinateSystem(extent={{-80,-80},{80,80}})), Icon(coordinateSystem(extent={{-80,-80},{80,80}})));
 end PartialSunblind;

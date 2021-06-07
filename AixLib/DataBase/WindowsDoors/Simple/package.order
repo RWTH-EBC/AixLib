@@ -1,6 +1,9 @@
 OWBaseDataDefinition_Simple
 WindowSimple_ASHRAE140
+WindowSimple_ASHRAE140_NoSWTrans
 WindowSimple_EnEV2002
 WindowSimple_EnEV2009
+WindowSimple_TwinHouses
 WindowSimple_WSchV1984
 WindowSimple_WSchV1995
+WindowSimple_Warehouse

@@ -2,8 +2,7 @@ within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-temperature networks for buildings with 
   heat pump and direct cooling."
 
-      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model for water"
+      replaceable package Medium = Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
@@ -260,8 +259,8 @@ equation
     annotation (Line(points={{-141.4,-64},{-130,-64}}, color={0,0,127}));
   connect(senT_heaPumInSec.port_b, heaPum.port_a1) annotation (Line(points={{70,-85},
           {68,-85},{68,-84},{66,-84},{66,-36},{58,-36}},      color={0,127,255},
-
       thickness=0.5));
+
   connect(senT_heaPumInSec.port_a, souHeaSec.ports[1])
     annotation (Line(points={{90,-85},{106,-85}}, color={0,127,255},
       thickness=0.5));
@@ -326,12 +325,27 @@ equation
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-240,-160},{240,
             160}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 08, 2020,by</i> Tobias Blacha:<br>Move to development</li>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br>Implemented </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 08, 2020,by</i> Tobias Blacha:<br/>
+    Move to development
+  </li>
+  <li>
+    <i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+    Implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirectional low-temperature networks for buildings with heat pump and direct cooling. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application for energy balancing. This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>. The mass flows are controlled equation-based and calculated using the heating and cooling demands and the specified temperatures of the warm and cold line of the network.</p>
+<p>
+  Substation model for bidirectional low-temperature networks for
+  buildings with heat pump and direct cooling. In the case of
+  simultaneous cooling and heating demands, the return flows are used
+  as supply flows for the other application for energy balancing. This
+  model uses the heat pump <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a>.
+  The mass flows are controlled equation-based and calculated using the
+  heating and cooling demands and the specified temperatures of the
+  warm and cold line of the network.
+</p>
 </html>"));
 end DHCSubstationHeatPumpDirectCooling;

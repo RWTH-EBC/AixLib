@@ -7,7 +7,7 @@ model Sunblind "Reduces beam at Imax and TOutAirLimit"
 
   Modelica.Blocks.Interfaces.RealInput TOutAir(unit="K", displayUnit="degC")
     "Outdoor air (dry bulb) temperature"
-    annotation (Placement(transformation(extent={{-132,-56},{-100,-24}})));
+    annotation (Placement(transformation(extent={{-112,-56},{-80,-24}}), iconTransformation(extent={{-100,-40},{-80,-20}})));
 equation
    for i in 1:n loop
      if (Rad_In[i].I>Imax and TOutAir > TOutAirLimit) then
@@ -27,7 +27,7 @@ equation
      end if;
      end for;
             annotation ( Icon(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+          preserveAspectRatio=false, extent={{-80,-80},{80,80}}),
                                                 graphics={
         Rectangle(
           extent={{-80,80},{80,-80}},
@@ -204,5 +204,6 @@ equation
     Implemented.
   </li>
 </ul>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(extent={{-80,-80},{80,80}})));
 end Sunblind;

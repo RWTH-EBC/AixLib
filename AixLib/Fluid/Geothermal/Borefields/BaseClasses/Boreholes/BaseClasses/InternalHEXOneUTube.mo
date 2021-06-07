@@ -1,7 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses;
 model InternalHEXOneUTube
   "Internal heat exchanger of a borehole for a single U-tube configuration"
-  extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialInternalHEX;
+  extends
+    AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialInternalHEX;
   extends AixLib.Fluid.Interfaces.FourPortHeatMassExchanger(
     redeclare final package Medium1 = Medium,
     redeclare final package Medium2 = Medium,

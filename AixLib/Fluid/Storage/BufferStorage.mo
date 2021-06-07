@@ -36,8 +36,7 @@ model BufferStorage
 
   parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby
-    DataBase.Storage.BufferStorageBaseDataDefinition                                                                                         "Data record for Storage"
+  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
   annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
@@ -127,20 +126,17 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,-80})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package
-                                                                                Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package Medium =
                 Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
-      package                                                                    Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
-      package                                                                      Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -165,8 +161,8 @@ model BufferStorage
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
-    m_flow_small=m_flow_small,
-    allowFlowReversal=allowFlowReversal_layers,
+    each final allowFlowReversal=allowFlowReversal_layers,
+    each final m_flow_small=m_flow_small,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
     final T_start=fill(TStart,n),

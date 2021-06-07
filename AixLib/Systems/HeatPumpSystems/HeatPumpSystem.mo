@@ -57,12 +57,14 @@ model HeatPumpSystem
 //Heat Pump
 
   replaceable model PerDataHea =
-      AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D              constrainedby AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D              constrainedby
+    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in heating mode"
     annotation (Dialog(tab="Heat Pump"),choicesAllMatching=true);
 
   replaceable model PerDataChi =
-      AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D              constrainedby AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D              constrainedby
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
 
@@ -149,19 +151,8 @@ model HeatPumpSystem
     "Initial temperature of heat capacity at evaporator"
     annotation (Dialog(tab="Initialization", group="Evaporator",
       enable=use_evaCap));
-  Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
-      Placement(transformation(
-        extent={{-7,7},{7,-7}},
-        rotation=180,
-        origin={87,-1})));
 equation
 
-  connect(constTAmb.y, heatPump.T_amb_con) annotation (Line(points={{79.3,-1},{
-          79.3,0},{28,0},{28,16},{20.2,16},{20.2,16.3333}},
-                                                       color={0,0,127}));
-  connect(constTAmb.y, heatPump.T_amb_eva) annotation (Line(points={{79.3,-1},{
-          79.3,0},{28,0},{28,-20.3333},{20.2,-20.3333}},
-                                                    color={0,0,127}));
   connect(port_a1, port_a1)
     annotation (Line(points={{-100,60},{-100,60}}, color={0,127,255}));
   connect(heatPump.sigBus, hPSystemController.sigBusHP) annotation (Line(

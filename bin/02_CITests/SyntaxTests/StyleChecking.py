@@ -96,7 +96,7 @@ class StyleCheck(object):
 				self.Changedmodels = False
 			else:
 				for l in model_list:
-					#print("Check package or model "+ l)
+					print("Check package or model "+ l)
 					path = self.Library.replace("package.mo", "")
 					dymola.ExecuteCommand('ModelManagement.Check.checkLibrary(false, false, false, true, "'+l+'", translationStructure=false);')
 					inputfile = path+l+"_StyleCheckLog.html"
@@ -116,6 +116,9 @@ class StyleCheck(object):
 		return Logfile, model_list
 
 	def _StyleCheckLog_Check(self):
+		CRED = '\033[91m'
+		CEND = '\033[0m'
+		green = "\033[0;32m"
 		result = StyleCheck._CheckStyle(self)
 		inputfile = result[0]
 		model_list = result[1]
@@ -147,7 +150,7 @@ class StyleCheck(object):
 			if len(line) == 0:
 				continue
 			else:
-				#print("Error in model: \n \n"+line.lstrip())
+				print(CRED+"Error in model: \n "+CEND+line.lstrip())
 				ErrorCount = ErrorCount + 1 
 				ErrorLog.write(line)
 			
@@ -156,19 +159,19 @@ class StyleCheck(object):
 		ErrorLog.close()
 		if self.Changedmodels == False:
 			if ErrorCount == 0:
-				print("Style Check of model or package "+self.Package+ " was successful")
+				print(green+"Style Check of model or package "+self.Package+ " was successful"+CEND)
 				exit(0)
 			elif ErrorCount > 0 :
-				print("Test failed. Look in "+ self.Package + "_StyleErrorLog.html")
+				print(CRED+"Test failed. Look in "+ self.Package + "_StyleErrorLog.html"+CEND)
 				exit(1)
 		else:
 			if ErrorCount == 0:
 				for l in model_list:
-					print("\n Style Check of model or package "+l+ " was successful")
+					print(green+"\n Style Check of model or package "+l+ " was successful"+CEND)
 					continue
 				exit(0)
 			elif ErrorCount > 0 :
-				print("\nTest failed. Look in "+ outputfile.lstrip() )
+				print(CRED+"\nTest failed. Look in "+ outputfile.lstrip() +CEND)
 				exit(1)
 			
 		
