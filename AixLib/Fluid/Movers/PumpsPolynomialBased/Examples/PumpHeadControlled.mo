@@ -13,7 +13,7 @@ model PumpHeadControlled "testing the head controlled pump model."
     Qnom=1.45) annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
-    offset=-0.5,
+    offset=0.5,
     height=1,
     duration(displayUnit="s") = 120,
     startTime(displayUnit="min") = 120)
