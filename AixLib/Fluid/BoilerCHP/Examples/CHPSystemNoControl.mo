@@ -60,5 +60,8 @@ equation
   </li>
 </ul>
 </html>"),
-experiment(StopTime=300, Interval=60));
+experiment(Tolerance=1e-6, StopTime=300, Interval=60),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mos"
+        "Simulate and Plot"));
 end CHPSystemNoControl;
