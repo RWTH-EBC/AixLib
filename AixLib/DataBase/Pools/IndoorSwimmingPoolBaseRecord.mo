@@ -2,29 +2,29 @@ within AixLib.DataBase.Pools;
 record IndoorSwimmingPoolBaseRecord
   extends Modelica.Icons.Record;
 
-  parameter Modelica.SIunits.Temperature T_pool "Water temperature of swimming pool";
-  parameter Modelica.SIunits.Volume V_storage "Usable Volume of water storage, DIN 19643-1";
+  parameter Modelica.SIunits.Temperature T_pool_start "Initial temperature of swimming pool";
+  parameter Modelica.SIunits.Temperature T_pool "Set water temperature of swimming pool";
   parameter Modelica.SIunits.Volume V_pool "Volume of pool water";
-  parameter Modelica.SIunits.Area A_pool( min=0)
-                                                "Area of water surface of swimming pool";
-  parameter Modelica.SIunits.Length d_pool( min=0)
-                                             "Average depth of swimming pool";
-  parameter Modelica.SIunits.VolumeFlowRate Q(min= 0.001) "Volume Flow Rate";
-
-  parameter Real beta_inUse( final unit="m/s") "Water transfer coefficient during opening hours, VDI 2089";
+  parameter Modelica.SIunits.Area A_pool(min=0) "Area of water surface of swimming pool";
+  parameter Modelica.SIunits.Length d_pool(min=0) "Average depth of swimming pool";
+  parameter Modelica.SIunits.Volume V_storage "Usable Volume of water storage, DIN 19643-1";
 
 
-  parameter Boolean use_poolCover=false "Pool covered during non opening hours";
+  // parameter for pool water circulation
+  parameter Modelica.SIunits.VolumeFlowRate V_flow(min=0.001) "Circulation volume flow rate";
+  parameter Modelica.SIunits.VolumeFlowRate V_flow_partial(min=0) "In case of partial load: circulation volume flow rate during non-opening hours, DIN 19643-1";
   parameter Boolean use_partialLoad=false  "Partial load operation implemented for the non opening hours?";
-  parameter Modelica.SIunits.VolumeFlowRate Q_night( min=0) "In case of partial load: mass flow rate during non-opening hours, DIN 19643-1";
-  parameter Boolean use_waterRecycling= false
-                                         "Recycled water used for refilling pool water?";
-  parameter Real x_recycling( min=0)   "Percentage of fill water which comes from the recycling unit, DIN 19643-1: <= 0,8";
+
+  // parameter for evaporation
+  parameter Real beta_inUse(unit="m/s") "Water transfer coefficient during opening hours, VDI 2089";
+  parameter Boolean use_poolCover=false "Pool covered during non opening hours";
 
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_out( min=0.0001)
-                                                              "Waterexchange due to people in the pool, DIN 19643-1";
-
+  // parameter for fresh water
+  parameter Boolean use_waterRecycling= false "Recycled water used for refilling pool water?";
+  parameter Real x_recycling(min=0) "Percentage of fill water which comes from the recycling unit, DIN 19643-1: <= 0,8";
+  parameter Modelica.SIunits.MassFlowRate m_flow_out(min=0.0001)
+                                                                "Waterexchange due to people in the pool, DIN 19643-1";
  // Wave mode
   parameter Boolean use_wavePool=false "Is there a wave machine installed?";
   parameter Modelica.SIunits.Length h_wave=0 "Height of generatedwave";
