@@ -15,7 +15,7 @@ model OFD_UFH
       choice=3 "WSchV_1995",
       choice=4 "WSchV_1984",
       radioButtons=true));
-  parameter Integer dis = 50;
+  parameter Integer dis=10;
   parameter Modelica.SIunits.Distance Spacing[nHeatedRooms] = fill(0.2, 10);
   parameter Modelica.SIunits.Diameter d_a[nHeatedRooms] = fill(0.017, 10);
   parameter Modelica.SIunits.Diameter d[nHeatedRooms] = fill(0.018, 10);
