@@ -42,13 +42,13 @@ equation
        Line(points={{14,-52},{14,-58}}, color={28,108,200}),
        Line(points={{24,-56},{24,-40},{38,-40},{38,-56},{38,-40},{52,-40},
              {52,-56}}, color={28,108,200})}),
-                 Documentation(info="<html>
-<h4>
+                 Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>
 </h4>
 <p>
-Model for the calculation of the medium floor surface temperature using an underfloor heating circuit with <span style=
-\"font-family: Courier New;\">dis</span> elements
+  Model for the calculation of the medium floor surface temperature
+  using an underfloor heating circuit with <span style=
+  \"font-family: Courier New;\">dis</span> elements
 </p>
 </html>"));
 end SumT_F;

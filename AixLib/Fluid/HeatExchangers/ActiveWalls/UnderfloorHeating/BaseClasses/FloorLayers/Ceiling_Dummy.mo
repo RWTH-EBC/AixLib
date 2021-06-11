@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers;
 record Ceiling_Dummy "Ceiling dummy to prevent downward heat flow in underfloor heating"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = 4 "Number of wall layers (1 - screed, 2 - flooring)",
