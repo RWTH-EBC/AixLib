@@ -181,51 +181,55 @@ equation
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Backward)}),  Documentation(
-   info="<html>
-<p>
+   info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
 <p>
-Model for heat transfer of a pipe element within wall layers
+  Model for heat transfer of a pipe element within wall layers
 </p>
 <p>
   <b><span style=\"color: #008000;\">Concept</span></b>
 </p>
 <p>
-The fluid in the pipe segment is represented by a mass flow and a volume element with heat transfer.
+  The fluid in the pipe segment is represented by a mass flow and a
+  volume element with heat transfer.
 </p>
 <p>
-The heat transfer from the fluid to the surface of the wall elements is split into the following parts:
+  The heat transfer from the fluid to the surface of the wall elements
+  is split into the following parts:
 </p>
 <p>
-- convection from fluid to inner pipe
+  - convection from fluid to inner pipe
 </p>
 <p>
-- heat conduction in pipe layers
+  - heat conduction in pipe layers
 </p>
 <p>
-- heat transfer from pipe outside to heat conductive floor layer
+  - heat transfer from pipe outside to heat conductive floor layer
 </p>
 <p>
-- heat conduction through upper wall layers
+  - heat conduction through upper wall layers
 </p>
 <p>
-- heat conduction through lower wall layers
+  - heat conduction through lower wall layers
 </p>
 <p>
-<b><span style=\"color: #008000;\">Thermal Resistance R_x</span></b>
-<p>
-The thermal resistance R_x represents the heat transfer from pipe outside to the middle temperaatur of the heat conductive layer.
-It needs to be added according to the type of the heating systen (see EN 11855-2 p. 45).
-</p>
-<b><span style=\"color: #008000;\">Water Volume</span></b>
+  <b><span style=\"color: #008000;\">Thermal Resistance R_x</span></b>
 </p>
 <p>
-The water volume in the pipe element can be calculated by the inner diameter of the pipe or by time constant and the mass flow. 
+  The thermal resistance R_x represents the heat transfer from pipe
+  outside to the middle temperaatur of the heat conductive layer. It
+  needs to be added according to the type of the heating systen (see EN
+  11855-2 p. 45).
+</p><b><span style=\"color: #008000;\">Water Volume</span></b>
+<p>
+  The water volume in the pipe element can be calculated by the inner
+  diameter of the pipe or by time constant and the mass flow.
 </p>
 <p>
-The maximum velocity in the pipe is set for 0.5 m/s. If the Water Volume is calculated by time constant,
-a nominal inner diameter is calculated with the maximum velocity for easier parametrization.
+  The maximum velocity in the pipe is set for 0.5 m/s. If the Water
+  Volume is calculated by time constant, a nominal inner diameter is
+  calculated with the maximum velocity for easier parametrization.
 </p>
 </html>"),                 Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-40},{100,

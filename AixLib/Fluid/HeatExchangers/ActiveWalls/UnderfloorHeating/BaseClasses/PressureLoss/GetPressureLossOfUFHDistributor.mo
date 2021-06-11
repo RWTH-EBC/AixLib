@@ -32,9 +32,21 @@ algorithm
     offset := -13.799344983248627;
   end if;
   preDrop := Modelica.Constants.e^(slope * Modelica.Math.log(vol_flow_internal) + offset)*1000;
-  annotation (Documentation(info="<html>
-<p>Get the pressure loss of an under floor heating system based on the number of heating circuit distributor outlets. The data is calculated based on the log-log-diagram in the following image. Based on [1, p. 11].</p>
-<p><img src=\"modelica://UnderfloorHeating/Resources/PressureLossOfUFHDistributor.png\"/></p>
-<p>[1] SCH&Uuml;TZ ENERGY SYSTEMS: Heizkreisverteiler: Montageanleitung/- Technische Information. 2017; <a href=\"https://www.schuetz-energy.net/downloads/anleitungen/montageanleitung-heizkreisverteiler/schuetz-montageanleitung-fbh-heizkreisverteiler-de.pdf\">Link to pdf</a></p>
+  annotation (Documentation(info="<html><p>
+  Get the pressure loss of an under floor heating system based on the
+  number of heating circuit distributor outlets. The data is calculated
+  based on the log-log-diagram in the following image. Based on [1, p.
+  11].
+</p>
+<p>
+  <img src=
+  \"modelica://UnderfloorHeating/Resources/PressureLossOfUFHDistributor.png\">
+</p>
+<p>
+  [1] SCHÜTZ ENERGY SYSTEMS: Heizkreisverteiler: Montageanleitung/-
+  Technische Information. 2017; <a href=
+  \"https://www.schuetz-energy.net/downloads/anleitungen/montageanleitung-heizkreisverteiler/schuetz-montageanleitung-fbh-heizkreisverteiler-de.pdf\">
+  Link to pdf</a>
+</p>
 </html>"));
 end GetPressureLossOfUFHDistributor;

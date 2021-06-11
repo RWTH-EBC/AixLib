@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingRoom "Model for heating of one room with underfloor heating"
   extends UnderfloorHeating.BaseClasses.PartialModularPort_ab(final nPorts=
         CircuitNo, final m_flow_nominal=m_flow_PanelHeating);
@@ -373,44 +373,79 @@ equation
           textString="R_u"),
         Line(points={{-48,-2},{-52,-6},{-52,-38},{-56,-40},{-52,-42},{-52,-66},{
               -46,-70}}, color={0,0,0})}),Documentation(
-   info="<html>
-<p>
+   info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
 <p>
-Model for heat transfer of an underfloor heating for one room
+  Model for heat transfer of an underfloor heating for one room
 </p>
 <p>
   <b><span style=\"color: #008000;\">Concept</span></b>
 </p>
-<p>This model calculates the number of heating circuits needed for the heating of one room by an underfloor heating.
-</p>
-<p> Every heating circuit has an equal percentage valve that has to be regulated from outside.
-</p>
-<p>For the determination of the nominal mass flow the regulations by prEN 1264 are implemented.
-</p>
-<b><span style=\"color: #008000;\">Layer Structure</span></b>
-<p>For dimensioning it is important that the layer structure of the floor is set right! </p>
-<p> The wall layers above the heating circuits have to be in the following order:</p>
-<p>1. Cover/Screed </p>
-<p>2. Floor </p>
-<p> The wall layers below the heating circuits need to be in the record with the following order: </p>
-<p>1. Isolation</p>
-<p>2. Load-bearing substrate </p>
-<p>3. Plaster </p>
-<p> If there is a floor plate underneath the heating circuits, the wall record needs to consist of 4 layers, whereas the first layer needs to be the isolation!</p>
-<b><span style=\"color: #008000;\">Isolation</span></b>
-<p> The thermal resistance of the isolation needs to fulfill the following requirements:</p>
-<p> Room underneath the underfloor heating is heated: R<sub>lambda,Ins</sub> <code> >= 0,75 W/m²K</code></p>
-<p> Room underneath the underfloor heating is not heated / floor plate: R<sub>lambda,Ins</sub> <code> >= 1,25 W/m²K</code></p>
-<b><span style=\"color: #008000;\">Water Volume</span></b>
+<p>
+  This model calculates the number of heating circuits needed for the
+  heating of one room by an underfloor heating.
 </p>
 <p>
-The water volume in the pipe element can be calculated by the inner diameter of the pipe or by time constant and the mass flow. 
+  Every heating circuit has an equal percentage valve that has to be
+  regulated from outside.
 </p>
 <p>
-The maximum velocity in the pipe is set for 0.5 m/s. If the Water Volume is calculated by time constant,
-a nominal inner diameter is calculated with the maximum velocity for easier parametrization.
+  For the determination of the nominal mass flow the regulations by
+  prEN 1264 are implemented.
+</p><b><span style=\"color: #008000;\">Layer Structure</span></b>
+<p>
+  For dimensioning it is important that the layer structure of the
+  floor is set right!
+</p>
+<p>
+  The wall layers above the heating circuits have to be in the
+  following order:
+</p>
+<p>
+  1. Cover/Screed
+</p>
+<p>
+  2. Floor
+</p>
+<p>
+  The wall layers below the heating circuits need to be in the record
+  with the following order:
+</p>
+<p>
+  1. Isolation
+</p>
+<p>
+  2. Load-bearing substrate
+</p>
+<p>
+  3. Plaster
+</p>
+<p>
+  If there is a floor plate underneath the heating circuits, the wall
+  record needs to consist of 4 layers, whereas the first layer needs to
+  be the isolation!
+</p><b><span style=\"color: #008000;\">Isolation</span></b>
+<p>
+  The thermal resistance of the isolation needs to fulfill the
+  following requirements:
+</p>
+<p>
+  Room underneath the underfloor heating is heated:
+  R<sub>lambda,Ins</sub> <code>&gt;= 0,75 W/m²K</code>
+</p>
+<p>
+  Room underneath the underfloor heating is not heated / floor plate:
+  R<sub>lambda,Ins</sub> <code>&gt;= 1,25 W/m²K</code>
+</p><b><span style=\"color: #008000;\">Water Volume</span></b>
+<p>
+  The water volume in the pipe element can be calculated by the inner
+  diameter of the pipe or by time constant and the mass flow.
+</p>
+<p>
+  The maximum velocity in the pipe is set for 0.5 m/s. If the Water
+  Volume is calculated by time constant, a nominal inner diameter is
+  calculated with the maximum velocity for easier parametrization.
 </p>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,
