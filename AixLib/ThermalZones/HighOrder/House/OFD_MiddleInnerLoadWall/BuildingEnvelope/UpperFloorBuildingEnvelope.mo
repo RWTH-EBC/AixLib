@@ -113,6 +113,7 @@ model UpperFloorBuildingEnvelope
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Bedroom(
     final denAir=denAir,
     final cAir=cAir,
+    final use_UFH=use_UFH,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
@@ -157,8 +158,6 @@ model UpperFloorBuildingEnvelope
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Bedroom,
     final T0_air=T0_air) annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
-    final use_UFH=use_UFH)
-                         annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Children1(
     final denAir=denAir,
     final cAir=cAir,
@@ -257,6 +256,7 @@ model UpperFloorBuildingEnvelope
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Children2(
     final denAir=denAir,
     final cAir=cAir,
+    final use_UFH=use_UFH,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
     final initDynamicsAir=initDynamicsAir,
@@ -301,8 +301,6 @@ model UpperFloorBuildingEnvelope
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Children2,
     final T0_air=T0_air) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
-    final use_UFH=use_UFH)
-                         annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1 Corridor(
     final denAir=denAir,
     final cAir=cAir,
