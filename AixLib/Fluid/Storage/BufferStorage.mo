@@ -161,6 +161,8 @@ model BufferStorage
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
+    each final allowFlowReversal=allowFlowReversal_layers,
+    each final m_flow_small=m_flow_small,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
     final T_start=fill(TStart,n),
@@ -277,12 +279,13 @@ model BufferStorage
         origin={6,-44})));
 
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil1(
+    m_flow_small=m_flow_small_HC1,
     disHC=disHC1,
     hConHC=hConHC1,
     redeclare package Medium = MediumHC1,
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
-    allowFlowReversal=true,
+    allowFlowReversal=allowFlowReversal_HC1,
     final m_flow_nominal=mHC1_flow_nominal,
     TStart=TStart) if useHeatingCoil1
     annotation (Placement(transformation(
@@ -290,19 +293,35 @@ model BufferStorage
         rotation=270,
         origin={-58,29})));
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil2(
+    m_flow_small=m_flow_small_HC2,
     disHC=disHC2,
     lengthHC=data.lengthHC2,
     hConHC=hConHC2,
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
-    allowFlowReversal=true,
-    final m_flow_nominal=mHC1_flow_nominal,
+    allowFlowReversal=allowFlowReversal_HC2,
+    final m_flow_nominal=mHC2_flow_nominal,
     TStart=TStart) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-56,-39})));
 
+  parameter SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil1));
+  parameter SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil2));
+  parameter SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+  parameter Boolean allowFlowReversal_layers=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal. Used only if model has two ports."
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC1=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC2=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
 initial equation
    assert(data.hHC1Up<=data.hTank and data.hHC1Up>=0.0 and
      data.hHC1Low<=data.hTank and data.hHC1Low>=0.0,

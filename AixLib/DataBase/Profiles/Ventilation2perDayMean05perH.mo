@@ -61,7 +61,7 @@ record Ventilation2perDayMean05perH
 <ul>
   <li>
     <i>August 30, 2013&#160;</i> by Ole Odendahl:<br/>
-    Formatted documentation appropriately 
+    Formatted documentation appropriately
   </li>
   <li>
     <i>July 3, 2012&#160;</i> by Ana Constantin:<br/>

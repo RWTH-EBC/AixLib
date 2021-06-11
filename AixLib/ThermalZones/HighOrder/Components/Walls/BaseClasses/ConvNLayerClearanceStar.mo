@@ -30,24 +30,26 @@ model ConvNLayerClearanceStar
         "horizontal facing up",                                                                                                    choice = 3
         "horizontal facing down",                                                                                                    radioButtons = true));
   parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient at inside surface" annotation (Dialog(
-        descriptionLabel=true), choices(
+        group="Convection", descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant hCon (constant)",
+      choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
       radioButtons=true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2 "Constant convective heat transfer coefficient"     annotation(Dialog(group="Convection",   enable=
           calcMethod == 1));
-  parameter Modelica.SIunits.Emissivity eps = wallType.eps
-    "Longwave emission coefficient"                                                                                     annotation(Dialog(group = "Radiation"));
+
   parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
     Evaluate=true,
     Dialog(group = "Radiation", compact=true),
     choices(
       choice=1 "No approx",
-      choice=2 "Linear approx wall temp",
-      choice=3 "Linear approx rad temp",
-      choice=4 "Linear approx T0",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
       radioButtons=true));
+  parameter Modelica.SIunits.Temperature T_ref=Modelica.SIunits.Conversions.from_degC(16) "Reference temperature for optional linearization" annotation (Dialog(group = "Radiation", enable=radCalcMethod == 4));
+
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
@@ -63,9 +65,10 @@ model ConvNLayerClearanceStar
   AixLib.Utilities.Interfaces.RadPort radPort
     annotation (Placement(transformation(extent={{90,52},{110,72}})));
   AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
-    A=A,
-    eps=eps,
-    radCalcMethod=radCalcMethod)
+    final A=A,
+    final eps=wallType.eps,
+    final radCalcMethod=radCalcMethod,
+    final T_ref=T_ref)
     annotation (Placement(transformation(extent={{54,30},{74,50}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation (
       Placement(transformation(extent={{-110,-10},{-90,10}}),
@@ -163,6 +166,11 @@ equation
   <code>HeatPort_a</code>, the last element represents the layer
   connected to <code>HeatPort_b</code>.
 </p>
+<p>
+  <code>HeatPort_b1</code> is the connection for
+  <code>absSolarRadWin</code> the transmitted radiation through a
+  window, that is absorbed by a wall.
+</p>
 <h4>
   <span style=\"color:#008000\">Example Results</span>
 </h4>
@@ -175,6 +183,12 @@ equation
   \"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>.
 </p>
 <ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/898\">#898</a>:Added
+    HeatPort to connect absSolarRadWin in Wall.
+  </li>
   <li>
     <i>April 23, 2020</i> by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>:

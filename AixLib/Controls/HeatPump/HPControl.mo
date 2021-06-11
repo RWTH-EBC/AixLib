@@ -4,7 +4,7 @@ model HPControl
   //General
   replaceable model TSetToNSet =
       AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
-    final use_secHeaGen=use_secHeaGen);
+    final use_secHeaGen=use_secHeaGen) annotation(choicesAllMatching=true);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
 //Heating Curve
@@ -60,7 +60,7 @@ model HPControl
     final zerTim=zerTim) if
                        use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
-  Interfaces.ThermalMachineControlBus sigBusHP
+  Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
   Modelica.Blocks.Interfaces.RealOutput nOut
     annotation (Placement(transformation(extent={{100,6},{128,34}})));

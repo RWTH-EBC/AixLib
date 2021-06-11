@@ -94,6 +94,8 @@ model Ow2IwL2IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -113,6 +115,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withDoor=withDoor1,
     U_door=U_door_OD1,
     eps_door=eps_door_OD1,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final use_condLayers=true)
                            annotation (Placement(transformation(extent={{-58,-14},{-48,44}})));
 
@@ -121,6 +125,8 @@ model Ow2IwL2IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -140,6 +146,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withDoor=withDoor2,
     U_door=U_door_OD2,
     eps_door=eps_door_OD2,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final use_condLayers=true)
                            annotation (Placement(transformation(
         origin={23,59},
@@ -150,6 +158,8 @@ model Ow2IwL2IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -165,6 +175,8 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_height=room_height,
     withWindow=false,
     withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final use_condLayers=true)
                     annotation (Placement(transformation(
         origin={61,24},
@@ -175,6 +187,8 @@ model Ow2IwL2IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -190,6 +204,8 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_height=room_height,
     withWindow=false,
     withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final use_condLayers=true)
                     annotation (Placement(transformation(
         origin={22,-60},
@@ -200,6 +216,8 @@ model Ow2IwL2IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -216,6 +234,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withWindow=false,
     withDoor=false,
     ISOrientation=3,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final use_condLayers=not use_UFH)
                      annotation (Placement(transformation(
         origin={-30,61},
@@ -226,6 +246,8 @@ model Ow2IwL2IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -242,6 +264,8 @@ model Ow2IwL2IwS1Gr1Uf1
     withWindow=false,
     withDoor=false,
     ISOrientation=2,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final use_condLayers=not use_UFH)
                      annotation (Placement(transformation(
         origin={-27,-60},
@@ -252,6 +276,8 @@ model Ow2IwL2IwS1Gr1Uf1
     final calcMethodOut=calcMethodOut,
     final hConOut_const=hConOut_const,
     final surfaceType=surfaceType,
+    final radLongCalcMethod=radLongCalcMethod,
+    final T_ref=T_ref,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
@@ -267,6 +293,8 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_height=room_height,
     withWindow=false,
     withDoor=false,
+    redeclare final model WindowModel = WindowModel,
+    redeclare final model CorrSolarGainWin = CorrSolarGainWin,
     final use_condLayers=true)
                     annotation (Placement(transformation(
         origin={61,-15},

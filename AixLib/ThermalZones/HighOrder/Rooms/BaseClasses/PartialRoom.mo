@@ -55,16 +55,16 @@ partial model PartialRoom "Partial model with base component that are necessary 
     annotation (Placement(transformation(extent={{22,-20},{36,-6}})));
 
 equation
-  connect(airload.port,Tair. port) annotation (Line(points={{10,-18},{22,-18},{22,-13}},
+  connect(airload.port,Tair.port) annotation (Line(points={{10,-18},{22,-18},{22,-13}},
                                    color={191,0,0}));
-  connect(thermRoom,thermStar_Demux. portConv) annotation (Line(points={{-10,22},{-10,6},{-10.125,6},{-10.125,4}}, color={191,0,0}));
-  connect(starRoom,thermStar_Demux. portRad) annotation (Line(
+  connect(thermRoom,thermStar_Demux.portConv) annotation (Line(points={{-10,22},{-10,6},{-10.125,6},{-10.125,4}}, color={191,0,0}));
+  connect(starRoom,thermStar_Demux.portRad) annotation (Line(
       points={{12,22},{12,4},{-3.875,4},{-3.875,4}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(thermStar_Demux.portConv,airload. port) annotation (Line(points={{-10.125,4},{-10.125,4},{-14,4},{-14,-18},{10,-18}},
+  connect(thermStar_Demux.portConv,airload.port) annotation (Line(points={{-10.125,4},{-10.125,4},{-14,4},{-14,-18},{10,-18}},
                                                                                                                color={191,0,0}));
-  connect(infiltrationRate.port_b,airload. port) annotation (Line(
+  connect(infiltrationRate.port_b,airload.port) annotation (Line(
       points={{-18,-4},{-16,-4},{-16,-18},{10,-18}},
       color={191,0,0},
       pattern=LinePattern.Dash));
@@ -74,9 +74,9 @@ equation
       pattern=LinePattern.Dash));
   connect(NaturalVentilation.port_a,thermOutside)  annotation (Line(points={{-30,-18},{-68,-18},{-68,100},{-100,100}},
                                              color={191,0,0}));
-  connect(NaturalVentilation.port_b,airload. port) annotation (Line(points={{-18,-18},{10,-18}},
+  connect(NaturalVentilation.port_b,airload.port) annotation (Line(points={{-18,-18},{10,-18}},
                                                                color={191,0,0}));
-  connect(dynamicVentilation.port_inside,airload. port) annotation (Line(
+  connect(dynamicVentilation.port_inside,airload.port) annotation (Line(
       points={{-18.12,-32},{10,-32},{10,-18}},
       color={191,0,0},
       pattern=LinePattern.Dash));
@@ -84,7 +84,8 @@ equation
       points={{-30,-32},{-72,-32},{-72,100},{-100,100}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation (Line(points={{-112,80},{-70,80},{-70,-20},{-50,-20},{-50,-21},{-30.6,-21}}, color={0,0,127}));
+  connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points={{-112,80},{-70,80},{-70,-20},{-50,-20},{-50,-21.84},{-29.4,-21.84}},
+                                                                                                                                                color={0,0,127}));
     annotation (Dialog(tab="Infiltration acc. to EN 12831 (building airtightness"),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>

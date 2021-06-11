@@ -5,14 +5,13 @@ model PumpHydraulicResistance_closedLoop
   extends Modelica.Icons.Example;
 
   replaceable package Medium = AixLib.Media.Water;
-  AixLib.Fluid.Movers.Pump pump(
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
     V_flow(fixed=false),
     MinMaxCharacteristics=AixLib.DataBase.Pumps.Pump1(),
     V_flow_max=2,
     ControlStrategy=2,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance(zeta = 2,
     redeclare package Medium = Medium,
     diameter=0.05,

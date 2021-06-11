@@ -166,7 +166,7 @@ model HeatPump "Example for the reversible heat pump model."
     uLow=273.15 + 15,
     uHigh=273.15 + 19)
     annotation (Placement(transformation(extent={{58,40},{48,50}})));
-  Controls.Interfaces.ThermalMachineControlBus sigBus1 annotation (Placement(
+  Controls.Interfaces.VapourCompressionMachineControlBus sigBus1 annotation (Placement(
         transformation(extent={{-34,22},{-4,56}}), iconTransformation(extent={{
             -22,30},{-4,56}})));
 equation
@@ -212,20 +212,20 @@ equation
           -4,66},{32,66},{32,53},{25,53}}, color={255,0,255}));
   connect(logicalSwitch.y, booleanToReal.u)
     annotation (Line(points={{13.5,53},{7,53},{7,35}}, color={255,0,255}));
-  connect(booleanStep.y, sigBus1.mode) annotation (Line(points={{-4,77.4},{-10,
+  connect(booleanStep.y, sigBus1.modeSet) annotation (Line(points={{-4,77.4},{-10,
           77.4},{-10,39.085},{-18.925,39.085}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(iceFac.y, sigBus1.iceFac) annotation (Line(points={{-57.2,38},{-34,38},
-          {-34,39.085},{-18.925,39.085}}, color={0,0,127}), Text(
+  connect(iceFac.y, sigBus1.iceFacMea) annotation (Line(points={{-57.2,38},{-34,
+          38},{-34,39.085},{-18.925,39.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanToReal.y,sigBus1.n)  annotation (Line(points={{7,23.5},{
-          -18.925,23.5},{-18.925,39.085}}, color={0,0,127}), Text(
+  connect(booleanToReal.y, sigBus1.nSet) annotation (Line(points={{7,23.5},{-18.925,
+          23.5},{-18.925,39.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

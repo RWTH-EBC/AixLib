@@ -12,18 +12,16 @@ class Approaches
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
-</html>",
-            info="<html><p>
-  A generic polynomial approach is presented below:<br/>
-  <br/>
-  <code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br/>
-  <br/>
-  All flow coefficient models presented in this library are based on a
-  literature review. Therefore, the variable <code>corFact</code>
-  allows a correction of the flow coefficient if the general modelling
-  approach presented in the litarature differs from <code>ṁ =
-  C*A<sub>valve</sub>*sqrt(2*ρ<sub>inlet</sub>*dp).</code>
-</p>
+</html>",   info="<html><p>
+A generic polynomial approach is presented below:<br/>
+<br/>
+<code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br/>
+<br/>
+All flow coefficient models presented in this library are based on a
+literature review. Therefore, the variable <code>corFact</code> allows
+a correction of the flow coefficient if the general modelling approach
+presented in the litarature differs from <code>ṁ =
+C*A<sub>valve</sub>*sqrt(2*ρ<sub>inlet</sub>*dp).</code>
 <h4>
   Common model variables
 </h4>
@@ -222,18 +220,16 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
     \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
-</html>",
-            info="<html><p>
-  A generic power approach is presented below:<br/>
-  <br/>
-  <code>C = corFact * a * product(P[i]^b[i] for i in 1:nT)</code><br/>
-  <br/>
-  All flow coefficient models presented in this library are based on a
-  literature review. Therefore, the variable <code>corFact</code>
-  allows a correction of the flow coefficient if the general modelling
-  approach presented in the litarature differs from <code>ṁ =
-  C*A<sub>valve</sub>*sqrt(2*ρ<sub>inlet</sub>*dp).</code>
-</p>
+</html>",   info="<html><p>
+A generic power approach is presented below:<br/>
+<br/>
+<code>C = corFact * a * product(P[i]^b[i] for i in 1:nT)</code><br/>
+<br/>
+All flow coefficient models presented in this library are based on a
+literature review. Therefore, the variable <code>corFact</code> allows
+a correction of the flow coefficient if the general modelling approach
+presented in the litarature differs from <code>ṁ =
+C*A<sub>valve</sub>*sqrt(2*ρ<sub>inlet</sub>*dp).</code>
 <h4>
   Common model variables
 </h4>

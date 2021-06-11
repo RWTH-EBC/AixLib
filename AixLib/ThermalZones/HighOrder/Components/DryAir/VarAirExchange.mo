@@ -5,14 +5,17 @@ model VarAirExchange "Heat flow caused by air exchange"
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1000
     "Specific heat capacity of air";
   parameter Modelica.SIunits.Density rho = 1.25 "Air density";
-  Modelica.Blocks.Interfaces.RealInput InPort1 annotation(Placement(transformation(extent={{-120,-20},{-100,-40}}), iconTransformation(extent={{-120,-40},{-100,-60}})));
-
+  Modelica.Blocks.Interfaces.RealInput ventRate(unit="1/h")
+                                               annotation (Placement(
+        transformation(extent={{-100,-54},{-80,-74}})));
+protected
+  constant Real hToS(unit="s/h")=3600 "conversion factor from hours to seconds";
 equation
-  port_a.Q_flow = InPort1 * V * c * rho * (port_a.T - port_b.T) / 3600;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent={{-80,80},{80,-80}},       lineColor = {0, 0, 0}), Rectangle(extent={{-80,80},{80,-80}},       lineColor = {0, 0, 0}), Rectangle(extent={{-100,100},{100,-100}},   lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Polygon(points={{60,-38},{30,-52},{-22,-48},{-16,-40},{-68,-32},{-30,-60},{-24,-54},{46,-54},{60,-38}},                    lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-30,36},{30,-30}},      lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air"), Polygon(points={{-58,42},{-28,56},{24,52},{18,44},{70,36},{32,64},{26,58},{-44,58},{-58,42}},                    lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
+  port_a.Q_flow =ventRate*V*c*rho*(port_a.T - port_b.T)/hToS;
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{60, -58}, {30, -72}, {-22, -68}, {-16, -60}, {-68, -52}, {-30, -80}, {-24, -74}, {46, -74}, {60, -58}}, lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, 16}, {30, -50}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air"), Polygon(points = {{-58, 22}, {-28, 36}, {24, 32}, {18, 24}, {70, 16}, {32, 44}, {26, 38}, {-44, 38}, {-58, 22}}, lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

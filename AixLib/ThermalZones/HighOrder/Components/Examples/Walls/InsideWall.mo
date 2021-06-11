@@ -7,11 +7,13 @@ model InsideWall
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside3(T = 283.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-84, 22})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall wall_simple_new(
     outside=false,
-    use_shortWaveRadIn=true,
-    solarDistribution=0.038,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half wallPar,
     wall_length=5,
     wall_height=2,
+    withWindow=false,
+    redeclare model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
+    redeclare model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     withDoor=true,
     T0=289.15,
     withSunblind=false,
@@ -20,11 +22,13 @@ model InsideWall
     TOutAirLimit=273.15 + 17) annotation (Placement(transformation(extent={{28,-4},{40,68}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall wall_simple1_new(
     outside=false,
-    use_shortWaveRadIn=true,
-    solarDistribution=0.038,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half wallPar,
     wall_length=5,
     wall_height=2,
+    withWindow=false,
+    redeclare model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
+    redeclare model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     withDoor=true,
     T0=287.15,
     withSunblind=false,
@@ -37,8 +41,6 @@ model InsideWall
   Modelica.Blocks.Sources.RealExpression UValue_new(y = -Tinside3.port.Q_flow / (Tinside3.T - Tinside.T) / (wall_simple_new.wall_length * wall_simple_new.wall_height)) annotation(Placement(transformation(extent = {{-28, -100}, {28, -80}})));
   Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(extent={{-56,-50},{-72,-38}})));
   Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux1 annotation (Placement(transformation(extent={{56,-52},{70,-40}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=0)
-    annotation (Placement(transformation(extent={{-74,78},{-54,98}})));
 equation
   connect(wall_simple1_new.port_outside, wall_simple_new.port_outside) annotation(Line(points = {{-23.7, 30}, {-23.7, 32}, {27.7, 32}}, color = {191, 0, 0}));
   connect(thermStar_Demux.portConvRadComb, wall_simple1_new.thermStarComb_inside) annotation (Line(points={{-56,-44},{-39.24,-44},{-39.24,30},{-36,30}},            color={191,0,0}));
@@ -47,10 +49,6 @@ equation
   connect(Tinside3.port, thermStar_Demux.portConv) annotation (Line(points={{-74,22},{-60,22},{-60,-18},{-92,-18},{-92,-47.75},{-72,-47.75}},      color={191,0,0}));
   connect(Tinside1.port, thermStar_Demux1.portRad) annotation (Line(points={{72,60},{56,60},{56,-22},{88,-22},{88,-42.25},{70,-42.25}},    color={191,0,0}));
   connect(Tinside.port, thermStar_Demux1.portConv) annotation (Line(points={{72,20},{60,20},{60,-18},{94,-18},{94,-50},{82,-50},{82,-49.75},{70,-49.75}},      color={191,0,0}));
-  connect(realExpression.y, wall_simple1_new.solarRadWin) annotation (Line(
-        points={{-53,88},{-44,88},{-44,56.4},{-36.6,56.4}}, color={0,0,127}));
-  connect(realExpression.y, wall_simple_new.solarRadWin) annotation (Line(
-        points={{-53,88},{50,88},{50,58.4},{40.6,58.4}}, color={0,0,127}));
   annotation (experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

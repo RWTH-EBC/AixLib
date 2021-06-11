@@ -11,23 +11,26 @@ The whole process is automatically triggered by checking into the version contro
 In our case we mirror a github repository in GitLab. This way the repository can be tested and corrected with the CI in Gitlab. 
 We also use the Docker service to create an image containing Dymola and thus be able to simulate models in Dymola.
 
-For more information read the [General Documentation](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/04_Documentation/Documentation_GitLab.md) and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
+For more information read the [General Documentation](https://github.com/RWTH-EBC/AixLib/blob/development/bin/04_Documentation/Documentation_GitLab.md) and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
 
 ![E.ON EBC RWTH Aachen University](04_Documentation/Images/GITLABCI.png)
 
 
 ## What CI Tests are implement?
-#### Check, Simulate and Regressiontest: [UnitTests](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/02_CITests/UnitTests)
+#### Check, Simulate and Regressiontest: [UnitTests](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests/UnitTests)
 
 With these tests, models are validated or simulated or models will  compared and evaluated with stored values by means of a unit test.
 
-#### Correct HTML and Style Check: [SyntaxTest](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/02_CITests/SyntaxTests)
+#### Correct HTML and Style Check: [SyntaxTest](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests/SyntaxTests)
 
 The html code (documentation) is tested and corrected if necessary. Thus the deposited HTML code is checked for correctness and corrected.
 
 With the ModelManagement library in dymola the style of the models is checked. 
 
-#### Clean the Modelica [CleanUpSkripts](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/02_CITests/CleanUpSkripts)
+#### IBPSA Merge
+This template performs an automatic IBPSA merge into AixLib. The models of the IBPSA are copied into the AixLib, a new conversion script is created based on the IBPSA and integrated into the AixLib as well as the whitelists are created.
+
+#### Clean the Modelica [CleanUpSkripts](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests/CleanUpSkripts)
 Removes any files that were created when running simulations in Dymola, such as *.mat or dymola.log 
 
 ## Folder 
@@ -38,17 +41,17 @@ This folder contains tests and functions that are builded for the CI Tests.
 
 ### 2 CITests
 This folder contains all CI tests for AixLib in GitLab with unitTests, syntaxTest and cleanUpScripts
-For more information view this [CI Tests](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/02_CITests).
+For more information view this [CI Tests](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests).
 
 ### 3 WhiteLists
-This folder contains models in [WhiteLists](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/03_WhiteLists), which will not test in the CITests.
+This folder contains models in [WhiteLists](https://github.com/RWTH-EBC/AixLib/blob/development/bin/03_WhiteLists), which will not test in the CITests.
 
 
 ### 4 Documentation
-This folder contains [documentation](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/04_Documentation) for CI, e.g. how new tests can be integrated or relevant commands for the CI 
+This folder contains [documentation](https://github.com/RWTH-EBC/AixLib/blob/development/bin/04_Documentation) for CI, e.g. how new tests can be integrated or relevant commands for the CI 
 
 ### 5 Templates
-This folder contains [Templates](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/05_Templates) for the CI tests implemented so far. The following example can be used to implement the tests in the CI. 
+This folder contains [Templates](https://github.com/RWTH-EBC/AixLib/blob/development/bin/05_Templates) for the CI tests implemented so far. The following example can be used to implement the tests in the CI. 
 
 
 
@@ -97,7 +100,7 @@ The templates are also implemented under the following repository [Templates](ht
 
 ### 6 Configfiles
 
-This folder contains [Config files](https://github.com/RWTH-EBC/AixLib/tree/issue802_CleanCI_Infrastructure/bin/06_Configfiles) which are used for the CI. 
+This folder contains [Config files](https://github.com/RWTH-EBC/AixLib/blob/development/bin/06_Configfiles) which are used for the CI. 
 
 For question ask [Sven Hinrichs](https://git.rwth-aachen.de/sven.hinrichs)
 

@@ -1,7 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.Data.Filling;
 record Bentonite
   "Filling data record of Bentonite heat transfer properties"
-  extends AixLib.Fluid.Geothermal.Borefields.Data.Filling.Template(
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Filling.Template(
       kFil=1.15,
       dFil=1600,
       cFil=800);

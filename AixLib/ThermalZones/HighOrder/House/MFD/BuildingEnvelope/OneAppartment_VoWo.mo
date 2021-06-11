@@ -20,32 +20,51 @@ model OneAppartment_VoWo
   parameter Modelica.SIunits.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+
+  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+
   AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Livingroom_VoWo Livingroom(TMC = TMC, TIR = TIR, Floor = Floor,
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{-68, 26}, {-16, 78}})));
   AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Children_VoWo Children(TMC = TMC, TIR = TIR, Floor = Floor,
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{36, 38}, {74, 76}})));
   AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Corridor_VoWo Corridor(TMC = TMC, TIR = TIR, Floor = Floor,
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{22, -12}, {60, 26}})));
   AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bedroom_VoWo Bedroom(TMC = TMC, TIR = TIR, Floor = Floor,
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{-64, -74}, {-20, -30}})));
   AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bathroom_VoWo Bathroom(TMC = TMC, TIR = TIR, Floor = Floor,
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{-6, -72}, {32, -34}})));
   AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Kitchen_VoWo Kitchen(TMC = TMC, TIR = TIR, Floor = Floor,
+    redeclare final model WindowModel=WindowModel,
+    redeclare final model CorrSolarGainWin=CorrSolarGainWin,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,

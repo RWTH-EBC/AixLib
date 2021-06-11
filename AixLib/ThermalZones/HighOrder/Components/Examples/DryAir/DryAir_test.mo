@@ -40,7 +40,8 @@ equation
   connect(TempOutsideDaycurve.port, infiltrationRate_DIN12831.port_a) annotation(Line(points = {{-70, 50}, {-50, 50}, {-50, 22}, {-12, 22}}, color = {191, 0, 0}));
   connect(TempInside.port, infiltrationRate_DIN12831.port_b) annotation(Line(points = {{70, 50}, {40, 50}, {40, 22}, {8, 22}}, color = {191, 0, 0}));
   connect(sine.y, TempOutsideDaycurve.T) annotation(Line(points = {{-86.6, 26}, {-92, 26}, {-92, 50}}, color = {0, 0, 127}));
-  connect(sine1.y, varAirExchange.InPort1) annotation(Line(points = {{-23.5, 37}, {-17.75, 37}, {-17.75, 41.6}, {-11, 41.6}}, color = {0, 0, 127}));
+  connect(sine1.y, varAirExchange.ventRate) annotation (Line(points={{-23.5,37},
+          {-17.75,37},{-17.75,41.6},{-11,41.6}}, color={0,0,127}));
   connect(TempOutsideDaycurve.port, dynamicVentilation.port_outside) annotation(Line(points = {{-70, 50}, {-50, 50}, {-50, -5}, {-11.6, -5}}, color = {191, 0, 0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{12, 90}, {20, 82}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{12, 60}, {20, 52}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{12, 32}, {20, 24}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{12, 6}, {20, -2}}, lineColor = {0, 0, 255}, textString = "4")}), experiment(StopTime = 86400, Interval = 15, Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(revisions = "<html><ul>
   <li>

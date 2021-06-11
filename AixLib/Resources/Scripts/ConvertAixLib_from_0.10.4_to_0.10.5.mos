@@ -2,8 +2,16 @@ clear
 
 convertClear();
 
-convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Attic_Ro2Lf1", "AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Attic_Ro2Lf1");
-convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Cellar", "AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Cellar");
-convertElement("AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams", "calcMethod", "calcMethodOut");
-convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", "calcMethod", "calcMethodOut");
+convertClass("AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirExchange",
+              "AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistCO2AirExchange");
+convertClass("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAir",
+              "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2");
+convertClass("AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirEquipped",
+              "AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped");
 
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange",
+              "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCO2AirExchange");
+convertClass("AixLib.ThermalZones.ReducedOrder.MultiZone.MultiZoneMoistAir",
+              "AixLib.ThermalZones.ReducedOrder.MultiZone.MultiZoneMoistAirCO2");
+convertClass("AixLib.ThermalZones.ReducedOrder.MultiZone.MultiZoneMoistAirEquipped",
+              "AixLib.ThermalZones.ReducedOrder.MultiZone.MultiZoneMoistAirCO2Equipped");

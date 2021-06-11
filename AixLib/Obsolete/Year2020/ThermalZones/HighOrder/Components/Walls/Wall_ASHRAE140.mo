@@ -61,7 +61,8 @@ model Wall_ASHRAE140 "Wall modell for ASHRAE 140 with absorbtion of solar radiat
     "Choose if the wall has got a window (only outside walls)"                                     annotation(Dialog( tab="Window", enable = outside));
    replaceable model Window =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140
-   constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+   constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
 
@@ -141,7 +142,6 @@ public
     annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
   AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door Door(
-    T0=T0,
     door_area=door_height*door_width,
     U=U_door*2,
     eps=eps_door) if withDoor annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
