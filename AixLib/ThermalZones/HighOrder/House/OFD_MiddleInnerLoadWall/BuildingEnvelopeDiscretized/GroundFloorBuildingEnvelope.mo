@@ -108,7 +108,9 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final Type_Win=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -153,7 +155,9 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final Type_Win=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -196,7 +200,9 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final Type_Win=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -241,7 +247,9 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final Type_Win=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -286,7 +294,9 @@ model GroundFloorBuildingEnvelope
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final Type_Win=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
@@ -366,9 +376,6 @@ model GroundFloorBuildingEnvelope
   AixLib.Utilities.Interfaces.ConvRadComb portConvRadRooms[5]
     "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  Modelica.Blocks.Sources.Constant constAirEx[5](k=fill(0.5, 5))
-    "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic"
-    annotation (Placement(transformation(extent={{-180,-12},{-160,8}})));
 equation
   for i in 1:dis loop
   connect(Livingroom.thermCeiling[i], thermCeiling_Livingroom[i]) annotation (Line(

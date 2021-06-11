@@ -77,7 +77,9 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final surfaceType=surfaceType,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final WindowType=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final T0=TWalls_start,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -101,7 +103,9 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final surfaceType=surfaceType,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final WindowType=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final T0=TWalls_start,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -131,7 +135,9 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final surfaceType=surfaceType,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final WindowType=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final T0=TWalls_start,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -156,7 +162,9 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final surfaceType=surfaceType,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final WindowType=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final T0=TWalls_start,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -181,7 +189,9 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final surfaceType=surfaceType,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final WindowType=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final T0=TWalls_start,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -207,7 +217,9 @@ model Ow2IwL1IwS1Lf1At1Ro1
     each final surfaceType=surfaceType,
     each final calcMethodIn=calcMethodIn,
     each final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     each final WindowType=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     each final T0=TWalls_start,
     each final withSunblind=use_sunblind,
     each final Blinding=1 - ratioSunblind,
@@ -232,7 +244,9 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final surfaceType=surfaceType,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
+    redeclare model WindowModel = WindowModel,
     final WindowType=Type_Win,
+    redeclare model CorrSolarGainWin = CorrSolarGainWin,
     final T0=TWalls_start,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -293,8 +307,7 @@ equation
   connect(SolarRadiationPort_OW1, outside_wall1.SolarRadiationPort) annotation (
      Line(points={{-99.5,30},{-63.5,30},{-63.5,35.5833}}, color={255,128,0}));
   connect(outside_wall2.SolarRadiationPort, SolarRadiationPort_OW2) annotation (
-     Line(points={{-2.41667,65.5},{-2.41667,70},{44.5,70},{44.5,92},{44.5,
-          101}},
+     Line(points={{-2.41667,65.5},{-2.41667,70},{44.5,70},{44.5,92},{44.5,101}},
         color={255,128,0}));
   connect(roof.SolarRadiationPort, SolarRadiationPort_Roof) annotation (Line(
         points={{70.5833,62.8999},{70.5833,70},{74,70},{74,100}}, color={255,128,
@@ -304,8 +317,8 @@ equation
                                                         color={0,0,127}));
   connect(outside_wall2.port_outside, thermOutside) annotation (Line(points={{-29,
           64.25},{-29,100},{-100,100}},                                                                         color={191,0,0}));
-  connect(roof.port_outside, thermOutside) annotation (Line(points={{55,
-          62.1499},{55,72},{-29,72},{-29,100},{-100,100}},                                                               color={191,0,0}));
+  connect(roof.port_outside, thermOutside) annotation (Line(points={{55,62.1499},
+          {55,72},{-29,72},{-29,100},{-100,100}},                                                                        color={191,0,0}));
   connect(outside_wall1.port_outside, thermOutside) annotation (Line(points={{-62.25,9},{-76,9},{-76,100},{-100,100}}, color={191,0,0}));
   for i in 1:dis loop
   connect(thermFloor[i], floor[i].port_outside) annotation (Line(
@@ -318,13 +331,11 @@ equation
           {32,-48},{-6,-48},{-6,-28},{-7,-28},{-7,-8}},                                                                                                                    color={191,0,0}));
   connect(inside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{56,4.00001},{54,4.00001},{54,4},{44,4},{44,-48},{-6,-48},{-6,-28},{-7,-28},{-7,-8}},              color={191,0,0}));
   connect(roof.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{55,56},
-          {54,56},{54,50},{44,50},{44,-48},{-6,-48},{-6,-28},{-7,-28},{-7,
-          -8}},                                                                                                                                                                           color={191,0,0}));
+          {54,56},{54,50},{44,50},{44,-48},{-6,-48},{-6,-28},{-7,-28},{-7,-8}},                                                                                                           color={191,0,0}));
   connect(Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{22,58},
           {22,50},{44,50},{44,-48},{-6,-48},{-6,-28},{-7,-28},{-7,-8}},                                                                                                              color={191,0,0}));
   connect(outside_wall2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-29,54},
-          {-30,54},{-30,50},{44,50},{44,-48},{-6,-48},{-6,-28},{-7,-28},{
-          -7,-8}},                                                                                                                                                                                    color={191,0,0}));
+          {-30,54},{-30,50},{44,50},{44,-48},{-6,-48},{-6,-28},{-7,-28},{-7,-8}},                                                                                                                     color={191,0,0}));
   connect(outside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-52,9},{-40,9},{-40,50},{44,50},{44,-48},{-6,-48},{-6,-28},{-7,-28},{-7,-8}},              color={191,0,0}));
   annotation (Icon(graphics={
         Rectangle(

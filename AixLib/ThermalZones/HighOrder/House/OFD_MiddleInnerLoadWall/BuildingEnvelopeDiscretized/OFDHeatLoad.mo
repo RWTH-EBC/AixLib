@@ -50,15 +50,19 @@ model OFDHeatLoad
     annotation (Placement(transformation(extent={{88,-92},{108,-72}})));
   WholeHouseBuildingEnvelope wholeHouseBuildingEnvelope(
     use_UFH=false,
-    redeclare UnderfloorHeating.BaseClasses.FloorLayers.EnEV2009Heavy_UFH
-                                                        wallTypes,
+    redeclare
+      Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.EnEV2009Heavy_UFH
+      wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=292.15,
     calcMethodIn=1,
+    redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009
       Type_Win,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
     dis=1,
@@ -132,8 +136,7 @@ equation
     annotation (Line(points={{51,70.5},{48,70.5},{48,43.2},{43.68,43.2}},color=
           {255,128,0}));
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
-    annotation (Line(points={{51,70.8333},{48,70.8333},{48,34.8},{43.68,
-          34.8}},
+    annotation (Line(points={{51,70.8333},{48,70.8333},{48,34.8},{43.68,34.8}},
         color={255,128,0}));
   connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-20},{-26,-20},{-26,10},{-14,10},{-14,10.16}},        color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
