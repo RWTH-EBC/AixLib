@@ -311,12 +311,12 @@ equation
   connect(upperFloor_Building.thermCorridor, varAirExchange.port_a) annotation (
      Line(points={{24.3,-14.3},{39,-14.3},{39,-16}}, color={191,0,0}));
   connect(groundFloor_Building.AirExchangePort[1:5], AirExchangePort[1:5])
-    annotation (Line(points={{-23,-47.84},{-74,-47.84},{-74,53.4545},{
-          -114,53.4545}},
+    annotation (Line(points={{-23,-47.84},{-74,-47.84},{-74,53.4545},{-114,
+          53.4545}},
         color={0,0,127}));
   connect(upperFloor_Building.AirExchangePort[1:5], AirExchangePort[6:10])
-    annotation (Line(points={{-27.45,11.23},{-74,11.23},{-74,66.1818},{
-          -114,66.1818}},
+    annotation (Line(points={{-27.45,11.23},{-74,11.23},{-74,66.1818},{-114,
+          66.1818}},
         color={0,0,127}));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO1, SolarRadiationPort_RoofS)
     annotation (Line(points={{-11,80.1},{-11,90},{60,90},{60,58},{106,58}},
@@ -342,10 +342,9 @@ equation
                                                                                                                                                   color={191,0,0}));
   connect(attic_2Ro_5Rooms.thermRoom5, upperFloor_Building.thermCeiling_Children2) annotation (Line(points={{17.6,45.9},{14.87,45.9},{14.87,36.07}},
                                                                                                                                                  color={191,0,0}));
-  connect(AirExchangeCorridor_Source.y, varAirExchange.InPort1) annotation (Line(points={{49.7,-13},{41.5,-13},{41.5,-15.5}}, color={0,0,127}));
   connect(heatingToRooms[1:5], groundFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,
-          -21.8182},{-90,-21.8182},{-90,-22},{-78,-22},{-78,-46},{0,-46},
-          {0,-48.08}},                                                                                                                                 color={191,0,0}));
+          -21.8182},{-90,-21.8182},{-90,-22},{-78,-22},{-78,-46},{0,-46},{0,
+          -48.08}},                                                                                                                                    color={191,0,0}));
   connect(heatingToRooms[6:10], upperFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,
           -12.7273},{-76,-12.7273},{-76,-6},{-1,-6},{-1,12.84}},                                                                                   color={191,0,0}));
   connect(heatStarToCombAttic.portConv, attic_2Ro_5Rooms.thermRoom) annotation (Line(points={{-30,54.125},{-20,54.125},{-20,54},{-3.08,54},{-3.08,63}}, color={191,0,0}));
@@ -385,6 +384,8 @@ equation
         points={{-26,-98},{-14,-98},{-14,-100},{0,-100}}, color={191,0,0}));
   connect(thermalCollectorGroundPlate.port_a[1], groPlateUp) annotation (Line(
         points={{-26,-86},{-64,-86},{-64,-90},{-102,-90}}, color={191,0,0}));
+  connect(varAirExchange.ventRate, AirExchangeCorridor_Source.y) annotation (
+      Line(points={{42.2,-16.5},{42.2,-13},{49.7,-13}}, color={0,0,127}));
   annotation (Icon(graphics={Rectangle(
           extent={{100,100},{-100,-100}},
           lineColor={0,0,0},
