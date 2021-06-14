@@ -6,8 +6,47 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
   extends AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
   redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone PeakLoadDevice(redeclare
         package                                                                                                   Medium =
-                         Medium));
+                         Medium, energyDynamics=energyDynamics),
+                                  heatPump(
+      redeclare package Medium_con = Medium,
+      redeclare package Medium_eva = Medium,
+      use_rev=false,
+      use_autoCalc=false,
+      Q_useNominal=0,
+      use_refIne=false,
+      refIneFre_constant=0,
+      mFlow_conNominal=0.5,
+      VCon=0.005,
+      dpCon_nominal=0,
+      use_conCap=false,
+      CCon=0,
+      GConOut=0,
+      GConIns=0,
+      mFlow_evaNominal=0.5,
+      VEva=0.005,
+      dpEva_nominal=0,
+      use_evaCap=false,
+      CEva=0,
+      GEvaOut=0,
+      GEvaIns=0,
+      massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+      energyDynamics=energyDynamics,
+      redeclare model PerDataMainHP =
+          DataBase.HeatPump.PerformanceData.LookUpTable2D (dataTable=
+              AixLib.DataBase.HeatPump.EN255.Vitocal350BWH110()),
+      redeclare model PerDataRevHP =
+          DataBase.Chiller.PerformanceData.LookUpTable2D),
+    heatStorage(energyDynamics=energyDynamics),
+    coldStorage(energyDynamics=energyDynamics),
+    pumpCondenser(energyDynamics=energyDynamics),
+    pumpGeothermalSource(energyDynamics=energyDynamics),
+    pumpEvaporator(energyDynamics=energyDynamics),
+    pumpColdConsumer(energyDynamics=energyDynamics),
+    pumpHeatConsumer(energyDynamics=energyDynamics));
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics"));
   Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium,
       nPorts=1) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -58,7 +97,7 @@ equation
   connect(pressureDifference.y, pumpColdConsumer.dp_in) annotation (Line(points={{147.4,6},
           {147.4,6},{65,6},{65,-11.6}},              color={0,0,127}));
   connect(pressureDifference.y, pumpHeatConsumer.dp_in) annotation (Line(points={{147.4,6},
-          {147.4,6},{56,6},{56,-36},{65,-36},{65,-41.6}},              color={0,
+          {56,6},{56,-36},{65,-36},{65,-41.6}},                        color={0,
           0,127}));
   connect(resistanceColdConsumerReturn.port_a,coldConsumerReturn. ports[1])
     annotation (Line(points={{94,32},{114,32},{148,32}},
@@ -75,10 +114,6 @@ equation
           0,127}));
   connect(PeakLoadDevice.port_b,heatConsumerFlow. ports[1]) annotation (Line(
         points={{120,-50},{120,-50},{148,-50}}, color={0,127,255}));
-  connect(TStorageSet.y,hPControllerOnOff. T_meas) annotation (Line(points={{-147.4,
-          6},{-132,6},{-132,76},{-78,76}},   color={0,0,127}));
-  connect(getTStorageUpper.y, hPControllerOnOff.T_set) annotation (Line(points=
-          {{-139,68},{-139,68},{-116,68},{-78,68}}, color={0,0,127}));
   connect(hPControllerOnOff.heatPumpControlBus, heatPumpControlBus) annotation (
      Line(
       points={{-58.05,72.05},{-44,72.05},{-44,79},{-0.5,79}},
@@ -91,11 +126,11 @@ equation
     annotation (Line(points={{112.77,-56.54},{112.77,-118},{-26,-118},{-26,-100},
           {-71.5,-100},{-71.5,-119.5}}, color={0,0,127}));
   connect(getTStorageLower.y,geothermalFieldControllerCold. temperature)
-    annotation (Line(points={{-139,52},{-122,52},{-108,52},{-108,36},{-100,36}},
+    annotation (Line(points={{-139,52},{-108,52},{-108,36},{-100,36}},
         color={0,0,127}));
   connect(geothermalFieldControllerCold.valveOpening1, valveColdStorage.y)
-    annotation (Line(points={{-83.04,40.8},{-82,40.8},{-82,40},{-82,52},{-82,54},
-          {-52,54},{-52,46.4}}, color={0,0,127}));
+    annotation (Line(points={{-83.04,40.8},{-82,40.8},{-82,54},{-52,54},{-52,
+          46.4}},               color={0,0,127}));
   connect(geothermalFieldControllerCold.valveOpening2, valveHeatSource.y)
     annotation (Line(points={{-83.04,31.2},{-82,31.2},{-82,1},{-68.4,1}}, color=
          {0,0,127}));
@@ -108,7 +143,21 @@ equation
   connect(geothermalFieldControllerHeat.valveOpening2, valveHeatStorage.y)
     annotation (Line(points={{-83.04,-30.8},{-56,-30.8},{-56,-63},{-26.4,-63}},
         color={0,0,127}));
-  annotation (experiment(StopTime=86400, Interval=10), Documentation(revisions="<html><ul>
+  connect(valveHeatStorage.port_b, heatPump.port_a1) annotation (Line(points={{
+          -18,-57},{-18,-8.00001},{-16.5,-8.00001},{-16.5,-8.00002}}, color={0,
+          127,255}));
+  connect(TStorageSet.y, hPControllerOnOff.TSet) annotation (Line(points={{
+          -147.4,6},{-130,6},{-130,76},{-78,76}}, color={0,0,127}));
+  connect(getTStorageUpper.y, hPControllerOnOff.TMea)
+    annotation (Line(points={{-139,68},{-78,68}}, color={0,0,127}));
+  annotation (experiment(Tolerance=1e-6, StopTime=86400), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
+        "Simulate and plot"), Documentation(revisions="<html><ul>
+  <li>
+    <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
+    Use new heat pump model and add simulate and plot script. (see
+    issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
+  </li>
   <li>May 19, 2017, by Marc Baranski:<br/>
     First implementation.
   </li>

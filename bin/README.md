@@ -27,6 +27,9 @@ The html code (documentation) is tested and corrected if necessary. Thus the dep
 
 With the ModelManagement library in dymola the style of the models is checked. 
 
+#### IBPSA Merge
+This template performs an automatic IBPSA merge into AixLib. The models of the IBPSA are copied into the AixLib, a new conversion script is created based on the IBPSA and integrated into the AixLib as well as the whitelists are created.
+
 #### Clean the Modelica [CleanUpSkripts](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests/CleanUpSkripts)
 Removes any files that were created when running simulations in Dymola, such as *.mat or dymola.log 
 

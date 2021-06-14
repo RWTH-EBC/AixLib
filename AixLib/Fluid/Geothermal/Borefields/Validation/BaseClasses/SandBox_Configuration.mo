@@ -1,7 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
 record SandBox_Configuration
   "Configuration data record for the Beier et al. (2011) experiment"
-  extends AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
       borCon = Types.BoreholeConfiguration.SingleUTube,
       use_Rb=true,
       Rb=0.165,

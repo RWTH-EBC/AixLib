@@ -6,10 +6,13 @@ model PumpRadiatorThermostaticValve
 
   package Medium = AixLib.Media.Water;
 
-  AixLib.Fluid.Movers.Pump
-             pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false),
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
+    MinMaxCharacteristics=AixLib.DataBase.Pumps.Pump1(),
+    V_flow_max=2,
+    ControlStrategy=2,
+    V_flow(fixed=false),
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
+    m_flow_small=1e-4) annotation (Placement(transformation(extent={{-54,10},{-34,30}})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     dp_nominal=200,
@@ -26,15 +29,14 @@ model PumpRadiatorThermostaticValve
   AixLib.Fluid.Sources.Boundary_pT
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-98, 10}, {-78, 30}})));
-  AixLib.Fluid.Actuators.Valves.ThermostaticValve simpleValve(
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.ThermostaticValve simpleValve(
     Influence_PressureDrop=0.15,
     Kvs=0.4,
     Kv_setT=0.12,
     leakageOpening=0,
     redeclare package Medium = Medium,
     m_flow_small=1e-4,
-    dp(start=20000))
-    annotation (Placement(transformation(extent={{32,10},{52,30}})));
+    dp(start=20000)) annotation (Placement(transformation(extent={{32,10},{52,30}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
