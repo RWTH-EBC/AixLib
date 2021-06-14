@@ -14,8 +14,8 @@ block CtrRegBasic "Controller for heating and cooling registers"
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
-  parameter Boolean reverseAction = false
-    "Set to true for throttling the water flow rate through a cooling coil controller";
+  parameter Boolean reverseAction = true
+    "Set to true if a heating coil, and false if a cooling coil is controlled";
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(group="PID"));
@@ -38,7 +38,7 @@ block CtrRegBasic "Controller for heating and cooling registers"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction,
+    final reverseActing=reverseAction,
     final reset=AixLib.Types.Reset.Disabled) "PID controller for valve opening"
             annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump)

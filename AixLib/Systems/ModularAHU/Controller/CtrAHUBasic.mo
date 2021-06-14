@@ -76,7 +76,7 @@ model CtrAHUBasic "Simple controller for AHU"
     final Td=0,
     final initType=initType,
     y_start=y_start,
-    final reverseAction=false,
+    final reverseActing=true,
     final reset=AixLib.Types.Reset.Disabled) "PID controller for supply fan"
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   Controls.Continuous.LimPID PID_VflowRet(
@@ -88,7 +88,7 @@ model CtrAHUBasic "Simple controller for AHU"
     final Td=0,
     final initType=initType,
     y_start=y_start,
-    final reverseAction=false,
+    final reverseActing=true,
     final reset=AixLib.Types.Reset.Disabled) if useTwoFanCtr
     "PID controller for return fan. Is deactivated if useTwoFanCtr is false."
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
