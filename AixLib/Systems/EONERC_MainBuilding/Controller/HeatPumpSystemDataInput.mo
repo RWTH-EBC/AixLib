@@ -116,9 +116,9 @@ equation
           -6,10},{-7.6,10}},    color={0,0,127}));
   connect(combiTimeTable.y[9], division.u1) annotation (Line(points={{-79,0},{-74,
           0},{-74,17.6},{-1.2,17.6}},  color={0,0,127}));
-  connect(booleanConstant.y, heatPumpSystemBus1.busHP.mode) annotation (Line(
-        points={{32.6,0},{46.35,0},{46.35,0.05},{100.05,0.05}}, color={255,0,255}),
-      Text(
+  connect(booleanConstant.y, heatPumpSystemBus1.busHP.modeSet) annotation (Line(
+        points={{32.6,0},{46.35,0},{46.35,0.05},{100.05,0.05}}, color={255,0,
+          255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -166,8 +166,9 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(Toutside, combiTimeTable.y[14])
     annotation (Line(points={{-80,-100},{-80,0},{-79,0}}, color={0,0,127}));
-  connect(ice.y, heatPumpSystemBus1.busHP.iceFac) annotation (Line(points={{74.7,
-          -7},{86.35,-7},{86.35,0.05},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(ice.y, heatPumpSystemBus1.busHP.iceFacMea) annotation (Line(points={{
+          74.7,-7},{86.35,-7},{86.35,0.05},{100.05,0.05}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -181,7 +182,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(division.y, heatPumpSystemBus1.busHP.n) annotation (Line(points={{
+  connect(division.y, heatPumpSystemBus1.busHP.nSet) annotation (Line(points={{
           12.6,14},{100.05,14},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,

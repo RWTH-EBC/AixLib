@@ -17,9 +17,9 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    final reverseAction=true)
-    annotation (Dialog(enable=true, group="PID Controllers"),Placement(transformation(extent={{-40,80},
-            {-20,100}})));
+    reverseActing=not (true)) annotation (Dialog(enable=true, group=
+          "PID Controllers"), Placement(transformation(extent={{-40,80},{-20,
+            100}})));
   Controls.Continuous.LimPID PIDadmix2(
     final yMax=1,
     final yMin=0,
@@ -27,9 +27,8 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    final reverseAction=true)
-    annotation (Dialog(enable=true, group="PID Controllers"),Placement(transformation(extent={{-60,-20},
-            {-40,0}})));
+    reverseActing=not (true)) annotation (Dialog(enable=true, group=
+          "PID Controllers"), Placement(transformation(extent={{-60,-20},{-40,0}})));
   Controls.Continuous.LimPID PIDBoiler1(
     final yMax=1,
     final yMin=0,
@@ -37,8 +36,8 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    final reverseAction=false) annotation (Dialog(enable=true, group="PID Controllers"),
-      Placement(transformation(extent={{-40,40},{-20,60}})));
+    reverseActing=not (false)) annotation (Dialog(enable=true, group=
+          "PID Controllers"), Placement(transformation(extent={{-40,40},{-20,60}})));
   Controls.Continuous.LimPID PIDBoiler2(
     final yMax=1,
     final yMin=0,
@@ -46,8 +45,8 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    final reverseAction=false) annotation (Dialog(enable=true, group="PID Controllers"),
-      Placement(transformation(extent={{-20,-60},{0,-40}})));
+    reverseActing=not (false)) annotation (Dialog(enable=true, group=
+          "PID Controllers"), Placement(transformation(extent={{-20,-60},{0,-40}})));
   Modelica.Blocks.Sources.Constant TBoiler1Set_in(final k=T_set_in)
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   Modelica.Blocks.Sources.Constant TBoilerSet_out(final k=T_set)
@@ -66,8 +65,8 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    final reverseAction=false) annotation (Dialog(enable=true, group="PID Controllers"),
-      Placement(transformation(extent={{20,-100},{40,-80}})));
+    reverseActing=not (false)) annotation (Dialog(enable=true, group=
+          "PID Controllers"), Placement(transformation(extent={{20,-100},{40,-80}})));
 equation
   connect(rpmPumps.y, highTemperatureSystemBus.admixBus1.pumpBus.rpmSet)
     annotation (Line(points={{61,90},{100.09,90},{100.09,1.085}},color={0,0,127}),

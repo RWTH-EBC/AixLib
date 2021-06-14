@@ -75,8 +75,8 @@ model EnergyCounter "Sums up all consumed energy"
   Modelica.Blocks.Math.Product product3
     annotation (Placement(transformation(extent={{104,22},{110,28}})));
 equation
-  connect(integrator.u, mainBus.hpSystemBus.busHP.Pel) annotation (Line(points={
-          {-11,95},{-98.905,95},{-98.905,0.09}}, color={0,0,127}), Text(
+  connect(integrator.u, mainBus.hpSystemBus.busHP.PelMea) annotation (Line(
+        points={{-11,95},{-98.905,95},{-98.905,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

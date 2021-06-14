@@ -63,16 +63,16 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, bus.hpSystemBus.busHP.mode) annotation (Line(points={{86.4,-4},
-          {100.35,-4},{100.35,-0.935},{100.07,-0.935}}, color={255,0,255}),
-      Text(
+  connect(booleanConstant.y, bus.hpSystemBus.busHP.modeSet) annotation (Line(
+        points={{86.4,-4},{100.35,-4},{100.35,-0.935},{100.07,-0.935}}, color={
+          255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ice.y, bus.hpSystemBus.busHP.iceFac) annotation (Line(points={{86.4,
-          -46},{100,-46},{100,-0.935},{100.07,-0.935}},
-                                         color={0,0,127}), Text(
+  connect(ice.y, bus.hpSystemBus.busHP.iceFacMea) annotation (Line(points={{
+          86.4,-46},{100,-46},{100,-0.935},{100.07,-0.935}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -92,9 +92,9 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ctrHP.T_ev, bus.hpSystemBus.busHP.T_ret_ev) annotation (Line(points={{-83.6,
-          46},{-98,46},{-98,100},{100.07,100},{100.07,-0.935}},
-                                                        color={0,0,127}), Text(
+  connect(ctrHP.T_ev, bus.hpSystemBus.busHP.TEvaOutMea) annotation (Line(points
+        ={{-83.6,46},{-98,46},{-98,100},{100.07,100},{100.07,-0.935}}, color={0,
+          0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -121,8 +121,8 @@ equation
           -13.8,17.8},{14,17.8},{14,112},{-60,112},{-60,90}}, color={255,0,255}));
   connect(modeExternal.reCoolingGC, flapRecooler.u) annotation (Line(points={{
           -13.8,9.4},{26,9.4},{26,48},{44.4,48}}, color={255,0,255}));
-  connect(modeExternal.freeCoolingGC, flapFreeCooler.u) annotation (Line(points
-        ={{-13.8,1},{30,1},{30,28},{44.4,28}}, color={255,0,255}));
+  connect(modeExternal.freeCoolingGC, flapFreeCooler.u) annotation (Line(points=
+         {{-13.8,1},{30,1},{30,28},{44.4,28}}, color={255,0,255}));
   connect(flapFreeCooler.y, bus.hpSystemBus.busThrottleFreecool.valveSet)
     annotation (Line(points={{62.8,28},{100,28},{100,24},{100.07,24},{100.07,-0.935}},
         color={0,0,127}), Text(
@@ -190,9 +190,9 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(modeExternal.freeCoolingGC, gcOn.u2) annotation (Line(points={{-13.8,
           1},{18.1,1},{18.1,-0.6},{44.6,-0.6}}, color={255,0,255}));
-  connect(ctrHP.T_con, bus.hpSystemBus.busHP.T_ret_co) annotation (Line(points=
-          {{-83.6,76},{-100,76},{-100,100},{100.07,100},{100.07,-0.935}}, color=
-         {0,0,127}), Text(
+  connect(ctrHP.T_con, bus.hpSystemBus.busHP.TConOutMea) annotation (Line(
+        points={{-83.6,76},{-100,76},{-100,100},{100.07,100},{100.07,-0.935}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -207,7 +207,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrHP.N_rel, bus.hpSystemBus.busHP.n) annotation (Line(points={{-38,
+  connect(ctrHP.N_rel, bus.hpSystemBus.busHP.nSet) annotation (Line(points={{-38,
           66},{100.07,66},{100.07,-0.935}}, color={0,0,127}), Text(
       string="%second",
       index=1,

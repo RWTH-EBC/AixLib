@@ -89,7 +89,7 @@ model HeatPumpSystemSimpleControl "Simple Control of the heat pump"
          + 11) annotation (Placement(transformation(extent={{-48,6},{-38,16}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-22,4},{-2,24}})));
-  Controls.Continuous.LimPID        PID(
+  Controls.Continuous.LimPID PID(
     final yMax=1,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -97,8 +97,8 @@ model HeatPumpSystemSimpleControl "Simple Control of the heat pump"
     final Ti=60,
     final Td=0,
     initType=Modelica.Blocks.Types.InitPID.NoInit,
-    final reverseAction=true)
-            annotation (Placement(transformation(extent={{-76,20},{-56,40}})));
+    reverseActing=not (true))
+    annotation (Placement(transformation(extent={{-76,20},{-56,40}})));
 equation
   connect(greaterThreshold.y, heatPumpSystemBus1.busPumpCold.pumpBus.onSet)
     annotation (Line(points={{14.7,93},{80,93},{80,92},{100.05,92},{100.05,0.05}},
@@ -128,9 +128,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, heatPumpSystemBus1.busHP.mode) annotation (Line(
-        points={{32.6,0},{46.35,0},{46.35,0.05},{100.05,0.05}}, color={255,0,255}),
-      Text(
+  connect(booleanConstant.y, heatPumpSystemBus1.busHP.modeSet) annotation (Line(
+        points={{32.6,0},{46.35,0},{46.35,0.05},{100.05,0.05}}, color={255,0,
+          255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -160,8 +160,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ice.y, heatPumpSystemBus1.busHP.iceFac) annotation (Line(points={{74.7,
-          -7},{86.35,-7},{86.35,0.05},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(ice.y, heatPumpSystemBus1.busHP.iceFacMea) annotation (Line(points={{
+          74.7,-7},{86.35,-7},{86.35,0.05},{100.05,0.05}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -217,8 +218,8 @@ equation
           {-82.65,30},{-78,30}}, color={0,0,127}));
   connect(PID.y, switch1.u1) annotation (Line(points={{-55,30},{-40,30},{-40,22},
           {-24,22}}, color={0,0,127}));
-  connect(PID.u_m, heatPumpSystemBus1.busHP.T_ret_co) annotation (Line(points={
-          {-66,18},{-66,-18},{100.05,-18},{100.05,0.05}}, color={0,0,127}),
+  connect(PID.u_m, heatPumpSystemBus1.busHP.TConOutMea) annotation (Line(points
+        ={{-66,18},{-66,-18},{100.05,-18},{100.05,0.05}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
