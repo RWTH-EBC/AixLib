@@ -136,22 +136,30 @@ replaceable package Medium2 =
   Fluid.Actuators.Dampers.Exponential flapSup(
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal) "Supply air flap"
+    final m_flow_nominal=m1_flow_nominal,
+    final dpDamper_nominal=dpDamper_nominal)
+                                          "Supply air flap"
     annotation (Placement(transformation(extent={{-190,-10},{-170,10}})));
   Fluid.Actuators.Dampers.Exponential flapRet(
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal) "Return air flap"
+    final m_flow_nominal=m1_flow_nominal,
+    final dpDamper_nominal=dpDamper_nominal)
+                                          "Return air flap"
     annotation (Placement(transformation(extent={{200,70},{180,90}})));
   Fluid.Actuators.Dampers.Exponential dampHX(
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal) "Flap to heat recovery system"
+    final m_flow_nominal=m1_flow_nominal,
+    final dpDamper_nominal=dpDamper_nominal)
+                                          "Flap to heat recovery system"
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
   Fluid.Actuators.Dampers.Exponential dampBypass(
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal) "Bypass flap of heat recovery system"
+    final m_flow_nominal=m1_flow_nominal,
+    final dpDamper_nominal=dpDamper_nominal)
+                                          "Bypass flap of heat recovery system"
     annotation (Placement(transformation(extent={{-90,-10},{-70,-30}})));
   Modelica.Blocks.Sources.Constant const(k=1)
     annotation (Placement(transformation(extent={{-100,30},{-94,36}})));
@@ -296,6 +304,8 @@ replaceable package Medium2 =
         origin={50,40})));
 
 
+  parameter Modelica.SIunits.PressureDifference dpDamper_nominal = 1
+    "Pressure drop of fully open dampers at nominal mass flow rate";
 protected
   Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
     initType=Modelica.Blocks.Types.Init.SteadyState,
