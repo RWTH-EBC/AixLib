@@ -833,16 +833,16 @@ Conversion"),
           extent={{-8,-8},{8,8}},
           rotation=270,
           origin={64,-54})));
-    AixLib.Fluid.Movers.Pump pump(
-      V_flow(fixed=false),
-      ControlStrategy=2,
-      redeclare package Medium = Water,
-      m_flow_small=1e-4,
-      V_flow_max=9.36,
-      MinMaxCharacteristics=
-          AixLib.DataBase.Pumps.MinMaxCharacteristicsBaseDataDefinition(
-          minMaxHead=[0,3,10; 5,3,10]))
-      annotation (Placement(transformation(extent={{18,-70},{4,-56}})));
+  AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
+    V_flow(fixed=false),
+    ControlStrategy=2,
+    redeclare package Medium = Water,
+    m_flow_small=1e-4,
+    V_flow_max=9.36,
+    MinMaxCharacteristics=
+        AixLib.DataBase.Pumps.MinMaxCharacteristicsBaseDataDefinition(
+        minMaxHead=[0,3,10; 5,3,10]))
+    annotation (Placement(transformation(extent={{18,-70},{4,-56}})));
     Modelica.Blocks.Logical.Not not1
       annotation (Placement(transformation(extent={{6,-52},{10,-48}})));
   equation

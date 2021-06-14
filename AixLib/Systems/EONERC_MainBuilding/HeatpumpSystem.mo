@@ -660,8 +660,8 @@ equation
     annotation (Line(points={{54.6,-74},{59.2,-74}}, color={0,0,127}));
   connect(firstOrder.y, convection1.Gc)
     annotation (Line(points={{68.4,-74},{70,-74},{70,-98}}, color={0,0,127}));
-  connect(temperatureSensor.T, prescribedTemperature.T) annotation (Line(points
-        ={{40,-142},{49.2,-142},{49.2,-122}}, color={0,0,127}));
+  connect(temperatureSensor.T, prescribedTemperature.T) annotation (Line(points=
+         {{40,-142},{49.2,-142},{49.2,-122}}, color={0,0,127}));
   connect(prescribedTemperature.port, convection1.fluid)
     annotation (Line(points={{58,-122},{60,-122},{60,-108}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,

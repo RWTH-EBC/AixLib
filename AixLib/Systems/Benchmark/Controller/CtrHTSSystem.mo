@@ -16,8 +16,8 @@ model CtrHTSSystem "Controller of high termperature system"
     k=0.01,
     Ti=60,
     Td=0,
-    final reverseAction=false) annotation (Dialog(enable=true, group="PID Controllers"),
-      Placement(transformation(extent={{-40,10},{-20,30}})));
+    reverseActing=not (false)) annotation (Dialog(enable=true, group=
+          "PID Controllers"), Placement(transformation(extent={{-40,10},{-20,30}})));
   Modelica.Blocks.Sources.Constant TBoilerSet_out(final k=T_boi_set)
     annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant1

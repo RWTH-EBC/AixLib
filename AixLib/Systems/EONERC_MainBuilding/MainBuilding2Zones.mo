@@ -1,5 +1,6 @@
 within AixLib.Systems.EONERC_MainBuilding;
 model MainBuilding2Zones "Benchmark building model"
+  import ModelicaServices;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
     package MediumAir = AixLib.Media.AirIncompressible
@@ -27,16 +28,16 @@ model MainBuilding2Zones "Benchmark building model"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={18,-108})));
-  EONERC_MainBuilding.Tabs2 tabs1(
+  Tabs tabs1(
     redeclare package Medium = MediumWater,
-    area=30*20,
-    thickness=0.3,
+    area=33.8*59.4,
+    thickness=0.3*2,
     alpha=15)
     annotation (Placement(transformation(extent={{158,120},{198,160}})));
-  EONERC_MainBuilding.Tabs2 tabs2(
+  Tabs tabs2(
     redeclare package Medium = MediumWater,
-    area=30*30,
-    thickness=0.3,
+    area=33.8*59.4,
+    thickness=0.3*2,
     alpha=15)
     annotation (Placement(transformation(extent={{364,122},{404,162}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
@@ -55,8 +56,8 @@ model MainBuilding2Zones "Benchmark building model"
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{40,368},{60,388}})));
 
@@ -916,7 +917,7 @@ equation
           extent={{-220,420},{580,-120}},
           lineColor={0,0,127},
           pattern=LinePattern.Dash,
-          fillColor={215,215,215},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid), Text(
           extent={{-164,316},{514,-6}},
           lineColor={0,0,0},

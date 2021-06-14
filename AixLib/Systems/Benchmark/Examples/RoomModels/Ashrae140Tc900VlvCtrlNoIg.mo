@@ -272,13 +272,13 @@ equation
           24,-26.1818},{62,-26.1818},{62,45.92},{56.5,45.92}}, color={191,0,0}));
   connect(tabs.tabsBus, bus.tabs1Bus) annotation (Line(
       points={{5.82,-49.6364},{5.82,-50.8182},{-1.91,-50.8182},{-1.91,108.11}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+
   connect(bouWatercold.ports[2], tabs.port_a2) annotation (Line(points={{-4,
           -116},{32,-116},{32,-68},{31.2,-68}}, color={0,127,255}));
   connect(bouWatercold1.ports[2], tabs.port_b2) annotation (Line(points={{38,

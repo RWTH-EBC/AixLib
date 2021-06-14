@@ -34,7 +34,7 @@ block CtrHXmflow "Controller for heat exchanger system"
             {116,16}}),         iconTransformation(extent={{92,-20},{130,22}})));
   Modelica.Blocks.Sources.Constant const(k=1)
     annotation (Placement(transformation(extent={{26,-96},{46,-76}})));
-  Controls.Continuous.LimPID        PID1(
+  Controls.Continuous.LimPID PID1(
     final yMax=1,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -44,9 +44,9 @@ block CtrHXmflow "Controller for heat exchanger system"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=false)
-            annotation (Placement(transformation(extent={{-74,44},{-54,64}})));
-  Controls.Continuous.LimPID        PID2(
+    reverseActing=not (false))
+    annotation (Placement(transformation(extent={{-74,44},{-54,64}})));
+  Controls.Continuous.LimPID PID2(
     final yMax=1,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -56,8 +56,8 @@ block CtrHXmflow "Controller for heat exchanger system"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=false)
-            annotation (Placement(transformation(extent={{-54,-54},{-34,-34}})));
+    reverseActing=not (false))
+    annotation (Placement(transformation(extent={{-54,-54},{-34,-34}})));
   Modelica.Blocks.Math.Product product1
     annotation (Placement(transformation(extent={{-16,60},{4,80}})));
   Modelica.Blocks.Math.Product product2

@@ -26,8 +26,8 @@ model CtrVentilationUnitValveSet "Simple controller for Ventilation Unit"
     final Td=0,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=y_start,
-    final reverseAction=false,
-    final reset=AixLib.Types.Reset.Disabled)
+    final reset=AixLib.Types.Reset.Disabled,
+    reverseActing=not (false))
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet) if not
     useExternalVset

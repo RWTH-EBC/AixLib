@@ -29,8 +29,8 @@ model GlycolCooler
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={-30,-12})));
-  AixLib.Fluid.Sources.FixedBoundary bound_Air_Out(redeclare package Medium =
-        Medium_Air, nPorts=1)
+  AixLib.Obsolete.Fluid.Sources.FixedBoundary bound_Air_Out(redeclare package
+      Medium = Medium_Air, nPorts=1)
     annotation (Placement(transformation(extent={{-60,-20},{-44,-4}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort Temp_Air_In(redeclare package
       Medium = Medium_Air) annotation (Placement(transformation(

@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding;
-model Tabs2 "Concrete core activation"
+model Tabs "Concrete core activation"
   import SI=Modelica.SIunits;
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
@@ -409,4 +409,4 @@ equation
           color={28,108,200},
           thickness=0.5)}),                                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
-end Tabs2;
+end Tabs;

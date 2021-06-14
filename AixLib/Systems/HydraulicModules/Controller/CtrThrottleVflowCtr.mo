@@ -40,8 +40,8 @@ block CtrThrottleVflowCtr "Controller for unmixed circuit with valve"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction)
-            annotation (Placement(transformation(extent={{-16,-40},{4,-60}})));
+    reverseActing=not (reverseAction))
+    annotation (Placement(transformation(extent={{-16,-40},{4,-60}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
   Modelica.Blocks.Logical.GreaterThreshold

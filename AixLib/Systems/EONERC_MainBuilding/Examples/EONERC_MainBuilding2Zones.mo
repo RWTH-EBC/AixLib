@@ -36,7 +36,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   annotation (experiment(
-      StopTime=2419200,
+      StopTime=86400,
       Interval=59.9999616,
       __Dymola_Algorithm="Dassl"),
     __Dymola_experimentFlags(

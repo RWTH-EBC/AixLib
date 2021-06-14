@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Controller;
+﻿within AixLib.Systems.HydraulicModules.Controller;
 block CtrPumpVFlow
   "Volume Flow Set Point Controller for variable Speed pumps"
          Modelica.Blocks.Interfaces.RealInput vFlowAct
@@ -46,8 +46,8 @@ public
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction)
-            annotation (Placement(transformation(extent={{-20,-40},{0,-60}})));
+    reverseActing=not (reverseAction))
+    annotation (Placement(transformation(extent={{-20,-40},{0,-60}})));
 
   Modelica.Blocks.Logical.GreaterThreshold
                                         pumpSwitchOff(final threshold=0)

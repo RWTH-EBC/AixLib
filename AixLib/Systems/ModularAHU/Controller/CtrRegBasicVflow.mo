@@ -38,9 +38,9 @@ block CtrRegBasicVflow "Controller for heating and cooling registers"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction,
-    final reset=AixLib.Types.Reset.Disabled)
-            annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
+    final reset=AixLib.Types.Reset.Disabled,
+    reverseActing=not (reverseAction))
+    annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{-14,-18},
             {6,2}})));
 

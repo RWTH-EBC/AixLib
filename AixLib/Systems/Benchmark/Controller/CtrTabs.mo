@@ -23,7 +23,7 @@ model CtrTabs "Controller for concrete core activation"
 
   BaseClasses.TabsBus tabsBus annotation (Placement(transformation(extent={{82,-20},
             {120,20}}), iconTransformation(extent={{86,-16},{118,20}})));
-  Controls.Continuous.LimPID        PID(
+  Controls.Continuous.LimPID PID(
     final yMax=1,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PID,
@@ -34,9 +34,9 @@ model CtrTabs "Controller for concrete core activation"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=true,
-    y_reset=0)
-            annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
+    y_reset=0,
+    reverseActing=not (true))
+    annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{60,70},
             {80,90}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
@@ -45,7 +45,7 @@ model CtrTabs "Controller for concrete core activation"
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Controls.Continuous.LimPID        PID1(
+  Controls.Continuous.LimPID PID1(
     final yMax=1,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PID,
@@ -56,9 +56,9 @@ model CtrTabs "Controller for concrete core activation"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=false,
-    y_reset=0)
-            annotation (Placement(transformation(extent={{-20,20},{0,40}})));
+    y_reset=0,
+    reverseActing=not (false))
+    annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{20,-20},{40,0}})));
   Modelica.Blocks.Logical.Greater heatingMode

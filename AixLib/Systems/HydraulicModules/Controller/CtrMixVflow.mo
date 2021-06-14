@@ -42,13 +42,13 @@ block CtrMixVflow "Controller for mixed and injection circuits"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction)
-            annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
+    reverseActing=not (reverseAction))
+    annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
 
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{40,64},{60,84}})));
-  Controls.Continuous.LimPID        PID1(
+  Controls.Continuous.LimPID PID1(
     final yMax=rpm_pump,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PID,
@@ -59,8 +59,8 @@ block CtrMixVflow "Controller for mixed and injection circuits"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseActionPump)
-            annotation (Placement(transformation(extent={{-44,38},{-24,58}})));
+    reverseActing=not (reverseActionPump))
+    annotation (Placement(transformation(extent={{-44,38},{-24,58}})));
   Modelica.Blocks.Math.Gain cubicmeters2kgpersec(k=1000)
     annotation (Placement(transformation(extent={{14,-6},{2,6}})));
   Modelica.Blocks.Interfaces.RealInput Mflowset

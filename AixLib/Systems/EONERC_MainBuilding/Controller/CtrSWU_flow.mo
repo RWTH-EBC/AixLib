@@ -48,7 +48,7 @@ Mode 5: Cooling with GTF and HP"
     annotation (Placement(transformation(extent={{-18,12},{2,32}})));
   Modelica.Blocks.Sources.Constant const(k=rpm_pump)
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
-  Controls.Continuous.LimPID        PID1(
+  Controls.Continuous.LimPID PID1(
     final yMax=1,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -57,8 +57,8 @@ Mode 5: Cooling with GTF and HP"
     final xi_start=0,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=false)
-            annotation (Placement(transformation(extent={{-20,44},{0,64}})));
+    reverseActing=not (false))
+    annotation (Placement(transformation(extent={{-20,44},{0,64}})));
   Modelica.Blocks.Math.Product product1
     annotation (Placement(transformation(extent={{38,64},{58,84}})));
   Modelica.Blocks.Interfaces.RealInput mFlowHxGtf

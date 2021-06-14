@@ -6,25 +6,24 @@ model EONERC_Thermal_Zone "Test of ERC Thermal Zone"
     annotation (choicesAllMatching=true);
     extends Modelica.Icons.Example;
   parameter Real Tair = 293 "Air Temperature";
-  Tabs2                     tabs1(
+  .AixLib.Systems.EONERC_MainBuilding.Tabs tabs1(
     redeclare package Medium = MediumWater,
     m_flow_nominal=7.5,
     area=60*30,
     thickness=0.1,
     alpha=15,
     length=100,
-    pump(parameterPipe=DataBase.Pipes.Copper.Copper_54x1_5(),
-         redeclare
+    pump(parameterPipe=DataBase.Pipes.Copper.Copper_54x1_5(), redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
     throttlePumpHot(parameterPipe=DataBase.Pipes.Copper.Copper_54x1_5(),
-                    redeclare
+        redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
     throttlePumpCold(parameterPipe=DataBase.Pipes.Copper.Copper_54x1_5(),
-                     redeclare
+        redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),

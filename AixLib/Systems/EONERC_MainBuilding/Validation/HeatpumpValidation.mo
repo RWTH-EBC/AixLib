@@ -106,8 +106,7 @@ model HeatpumpValidation
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={74,70})));
-  AixLib.Controls.Interfaces.ThermalMachineControlBus
-                           sigBusHP
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-16,-78},{16,-42}}),
         iconTransformation(extent={{6,-64},{24,-38}})));
   Modelica.Blocks.Math.Division division
@@ -144,14 +143,14 @@ equation
     annotation (Line(points={{-20,20},{-70,20}}, color={0,127,255}));
   connect(heatPump.port_b2, boundary2.ports[1])
     annotation (Line(points={{4,-20},{70,-20}}, color={0,127,255}));
-  connect(iceFac.y, sigBusHP.iceFac) annotation (Line(points={{39,-60},{29.25,-60},
-          {29.25,-59.91},{0.08,-59.91}}, color={0,0,127}), Text(
+  connect(iceFac.y, sigBusHP.iceFacMea) annotation (Line(points={{39,-60},{
+          29.25,-60},{29.25,-59.91},{0.08,-59.91}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(booleanConstant.y, sigBusHP.mode) annotation (Line(points={{1,-90},{12,
-          -90},{12,-59.91},{0.08,-59.91}}, color={255,0,255}), Text(
+  connect(booleanConstant.y, sigBusHP.modeSet) annotation (Line(points={{1,-90},
+          {12,-90},{12,-59.91},{0.08,-59.91}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -166,7 +165,7 @@ equation
           70},{54,70},{54,48},{100,48},{100,12},{92,12}}, color={0,0,127}));
   connect(combiTimeTable.y[9], division.u1)
     annotation (Line(points={{-79,70},{-42,70},{-42,-54}}, color={0,0,127}));
-  connect(division.y, sigBusHP.n) annotation (Line(points={{-19,-60},{-10,-60},
+  connect(division.y, sigBusHP.nSet) annotation (Line(points={{-19,-60},{-10,-60},
           {-10,-59.91},{0.08,-59.91}}, color={0,0,127}), Text(
       string="%second",
       index=1,

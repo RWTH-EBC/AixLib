@@ -57,8 +57,8 @@ model CtrAHUBasic "Simple controller for AHU"
     final Td=0,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=y_start,
-    final reverseAction=false,
-    final reset=AixLib.Types.Reset.Disabled)
+    final reset=AixLib.Types.Reset.Disabled,
+    reverseActing=not (false))
     annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
   Controls.Continuous.LimPID PID_VflowRet(
     final yMax=dpMax,
@@ -69,8 +69,8 @@ model CtrAHUBasic "Simple controller for AHU"
     final Td=0,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=y_start,
-    final reverseAction=false,
-    final reset=AixLib.Types.Reset.Disabled) if useTwoFanCont
+    final reset=AixLib.Types.Reset.Disabled,
+    reverseActing=not (false)) if useTwoFanCont
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
   Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet) if not
     useExternalVset

@@ -1,8 +1,7 @@
 ﻿within AixLib.Fluid.BoilerCHP;
 model CHPNoControl
   "Table based CHP model without an internal controller"
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
-        a=1e10), vol(
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=1e10, vol(
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
       massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
                      V=param.vol[1]));

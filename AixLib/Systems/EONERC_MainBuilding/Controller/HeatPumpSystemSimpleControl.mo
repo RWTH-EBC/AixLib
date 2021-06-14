@@ -89,7 +89,7 @@ model HeatPumpSystemSimpleControl "Simple Control of the heat pump"
          + 11) annotation (Placement(transformation(extent={{-48,6},{-38,16}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-22,4},{-2,24}})));
-  Controls.Continuous.LimPID        PID(
+  Controls.Continuous.LimPID PID(
     final yMax=1,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -97,8 +97,8 @@ model HeatPumpSystemSimpleControl "Simple Control of the heat pump"
     final Ti=60,
     final Td=0,
     initType=Modelica.Blocks.Types.InitPID.NoInit,
-    final reverseAction=true)
-            annotation (Placement(transformation(extent={{-76,20},{-56,40}})));
+    reverseActing=not (true))
+    annotation (Placement(transformation(extent={{-76,20},{-56,40}})));
 equation
   connect(greaterThreshold.y, heatPumpSystemBus1.busPumpCold.pumpBus.onSet)
     annotation (Line(points={{14.7,93},{80,93},{80,92},{100.05,92},{100.05,0.05}},
