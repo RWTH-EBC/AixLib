@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Controller;
+﻿within AixLib.Systems.HydraulicModules.Controller;
 block CtrThrottle "Controller for unmixed circuit with valve"
   //Boolean choice;
 
@@ -12,8 +12,8 @@ block CtrThrottle "Controller for unmixed circuit with valve"
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
-  parameter Boolean reverseAction = false
-    "Set to true for throttling the water flow rate through a cooling coil controller";
+  parameter Boolean reverseAction = true
+    "Set to true if heating system, and false for cooling system";
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(group="PID"));
@@ -40,8 +40,8 @@ block CtrThrottle "Controller for unmixed circuit with valve"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction)
-            annotation (Placement(transformation(extent={{-16,-40},{4,-60}})));
+    reverseActing=reverseAction)
+            annotation (Placement(transformation(extent={{-20,-40},{0,-60}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
   Modelica.Blocks.Logical.GreaterThreshold
@@ -55,23 +55,23 @@ public
         iconTransformation(extent={{90,-22},{138,26}})));
 equation
     connect(PID.u_s, Tset) annotation (Line(
-      points={{-18,-50},{-67.1,-50},{-67.1,-60},{-120,-60}},
+      points={{-22,-50},{-67.1,-50},{-67.1,-60},{-120,-60}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(constTflowSet.y, PID.u_s) annotation (Line(
-      points={{-79,-20},{-68,-20},{-68,-50},{-18,-50}},
+      points={{-79,-20},{-68,-20},{-68,-50},{-22,-50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{5,-50},{48,
-          -50},{48,0.12},{100.12,0.12}},  color={0,0,127}), Text(
+  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{1,-50},{48,-50},
+          {48,0.12},{100.12,0.12}},       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(PID.u_m, Tact)
-    annotation (Line(points={{-6,-38},{-8,-38},{-8,60},{-120,60}}, color={0,0,127}));
+    annotation (Line(points={{-10,-38},{-10,60},{-120,60}},        color={0,0,127}));
   connect(PID.y,pumpSwitchOff. u)
-    annotation (Line(points={{5,-50},{4,-50},{4,40},{14.4,40}}, color={0,0,127}));
+    annotation (Line(points={{1,-50},{4,-50},{4,40},{14.4,40}}, color={0,0,127}));
   connect(constRpmPump.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
           {41,0},{100.12,0},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
