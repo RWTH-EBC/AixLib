@@ -17,7 +17,7 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    reverseActing=not (true)) annotation (Dialog(enable=true, group=
+    reverseActing=true)       annotation (Dialog(enable=true, group=
           "PID Controllers"), Placement(transformation(extent={{-40,80},{-20,
             100}})));
   Controls.Continuous.LimPID PIDadmix2(
@@ -27,7 +27,7 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    reverseActing=not (true)) annotation (Dialog(enable=true, group=
+    reverseActing=true)       annotation (Dialog(enable=true, group=
           "PID Controllers"), Placement(transformation(extent={{-60,-20},{-40,0}})));
   Controls.Continuous.LimPID PIDBoiler1(
     final yMax=1,
@@ -36,7 +36,7 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    reverseActing=not (false)) annotation (Dialog(enable=true, group=
+    reverseActing=true)        annotation (Dialog(enable=true, group=
           "PID Controllers"), Placement(transformation(extent={{-40,40},{-20,60}})));
   Controls.Continuous.LimPID PIDBoiler2(
     final yMax=1,
@@ -45,7 +45,7 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    reverseActing=not (false)) annotation (Dialog(enable=true, group=
+    reverseActing=true)        annotation (Dialog(enable=true, group=
           "PID Controllers"), Placement(transformation(extent={{-20,-60},{0,-40}})));
   Modelica.Blocks.Sources.Constant TBoiler1Set_in(final k=T_set_in)
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));

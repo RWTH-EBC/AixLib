@@ -79,7 +79,7 @@ model MainBuildingEnergySystem
     Ti=150,
     k=0.05,
     rpm_pump=600,
-    reverseAction=false)
+    reverseAction=true)
     annotation (Placement(transformation(extent={{-202,62},{-188,76}})));
   HydraulicModules.SimpleConsumer consumerHTC(
     kA=20000,
@@ -115,7 +115,8 @@ model MainBuildingEnergySystem
     TflowSet=301.15,
     k=0.05,
     Td=0,
-    rpm_pump=1500)
+    rpm_pump=1500,
+    reverseAction=true)
     annotation (Placement(transformation(extent={{-124,62},{-110,76}})));
   HydraulicModules.Admix admixLTC(
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
@@ -171,7 +172,7 @@ model MainBuildingEnergySystem
     k=0.05,
     Td=0,
     rpm_pump=1600,
-    reverseAction=true)
+    reverseAction=false)
     annotation (Placement(transformation(extent={{-24,64},{-10,78}})));
   GeothermalFieldSimple geothermalFieldSimple(
     redeclare package Medium = Medium,
@@ -221,7 +222,7 @@ model MainBuildingEnergySystem
     k=0.05,
     Td=0,
     rpm_pump=1400,
-    reverseAction=true)
+    reverseAction=false)
     annotation (Placement(transformation(extent={{78,64},{90,78}})));
   BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{-56,
             104},{-26,134}}), iconTransformation(extent={{-30,110},{-10,130}})));

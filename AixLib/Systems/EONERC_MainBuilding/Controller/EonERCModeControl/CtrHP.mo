@@ -16,7 +16,7 @@ model CtrHP "Heatpump Controller"
     initType=Modelica.Blocks.Types.InitPID.NoInit,
     reset=AixLib.Types.Reset.Parameter,
     y_reset=N_rel_min,
-    reverseActing=not (true))
+    reverseActing=false)
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
   Modelica.Blocks.Logical.Switch modeHeating
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
@@ -50,7 +50,7 @@ model CtrHP "Heatpump Controller"
     initType=Modelica.Blocks.Types.InitPID.NoInit,
     reset=AixLib.Types.Reset.Parameter,
     y_reset=N_rel_min,
-    reverseActing=not (false))
+    reverseActing=true)
     annotation (Placement(transformation(extent={{-80,20},{-60,0}})));
   Modelica.Blocks.Interfaces.BooleanOutput On
                                     "Connector of Boolean output signal"

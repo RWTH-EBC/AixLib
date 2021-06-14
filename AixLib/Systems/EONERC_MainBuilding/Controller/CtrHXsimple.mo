@@ -39,7 +39,7 @@ block CtrHXsimple "Controller for heat exchanger system"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    reverseActing=not (false))
+    reverseActing=true)
     annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpmPumpSec)
                                                                   annotation (Placement(transformation(extent={{20,-10},{40,10}})));
