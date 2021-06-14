@@ -1,7 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses;
 record SmallScale_Configuration
   "Configuration data record for the Cimmino and Bernier (2015) experiment"
-  extends AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
+  extends
+    AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
       borCon = Types.BoreholeConfiguration.SingleUTube,
       nBor=1,
       cooBor={{0,0}},

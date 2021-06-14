@@ -18,7 +18,7 @@ model PumpSpeedControlledDpV
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
     offset=0.5,
-    height=-0.48,
+    height=0.48,
     duration(displayUnit="s") = 120,
     startTime(displayUnit="min") = 120)
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));

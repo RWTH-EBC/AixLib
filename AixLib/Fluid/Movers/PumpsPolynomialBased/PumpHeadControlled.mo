@@ -75,7 +75,8 @@ model PumpHeadControlled
       enable=calculate_Power));
   replaceable function efficiencyCharacteristic =
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency
-    constrainedby AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
+    constrainedby
+    AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency
     "eta = f(H, Q, P)" annotation (Dialog(
       tab="General",
       group="Power and Efficiency",
@@ -122,7 +123,7 @@ protected
     annotation (Placement(transformation(extent={{-100,66},{-80,86}})));
   Modelica.Blocks.Sources.RealExpression pumpHead(y=head)
     "implements a connectable object that can be cuppled with pumpBus."
-    annotation (Placement(transformation(extent={{74,10},{94,30}})));
+    annotation (Placement(transformation(extent={{73,-20},{93,0}})));
   Modelica.Blocks.Sources.RealExpression pumpEfficiency(y=eta) if
     calculateEfficiency
     "implements a connectable object that can be cuppled with pumpBus."
@@ -132,6 +133,12 @@ protected
   Modelica.Blocks.Sources.RealExpression pressure_difference(y=-dp_pump)
     "implements a connectable object that can be cuppled with pumpBus."
     annotation (Placement(transformation(extent={{-71,-76},{-51,-56}})));
+  Modelica.Blocks.Continuous.CriticalDamping
+                                    criticalDamping(
+    y_start=Hstart,
+    f=1/5,
+    initType=Modelica.Blocks.Types.Init.InitialOutput)
+    annotation (Placement(transformation(extent={{50,-20},{70,0}})));
 public
   Modelica.Blocks.Logical.Switch onOff
     annotation (Placement(transformation(extent={{48,10},{68,30}})));
@@ -166,7 +173,7 @@ equation
     "for the interpolation of the min curve"
     annotation (Line(points={{-77,20},{-77,45},{-79,45}}, color={0,0,127}));
 
-  head = onOff.y "safe head after limiting and other checks.";
+  head = criticalDamping.y "safe head after limiting and other checks.";
   dp_pump = head * rho_default * Modelica.Constants.g_n;
   //Calculate power and Efficiency
   if pumpBus.onSet and head >
@@ -214,23 +221,23 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,76},{-66,93},{0.5975,93},{0.5975,100.597}},
-                                                      color={0,0,127}), Text(
+  connect(pumpPower.y, pumpBus.PelMea) annotation (Line(points={{-79,76},{-66,
+          76},{-66,93},{0.5975,93},{0.5975,100.597}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{95,20},{96,20},{96,90},{0.5975,90},{0.5975,100.597}},
-                                                color={0,0,127}), Text(
+  connect(pumpHead.y, pumpBus.dpMea) annotation (Line(points={{94,-10},{95,-10},
+          {95,90},{0.5975,90},{0.5975,100.597}},color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},{-62,60},{-62,100.597},{0.5975,100.597}},
-                                                        color={0,0,127}), Text(
+  connect(pumpEfficiency.y, pumpBus.efficiencyMea) annotation (Line(points={{-79,60},
+          {-62,60},{-62,100.597},{0.5975,100.597}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(onOff.u2, pumpBus.onSet) annotation (Line(points={{46,20},{38,20},{38,100.597},{0.5975,100.597}},
-                                      color={255,0,255}), Text(
+  connect(onOff.u2, pumpBus.onSet) annotation (Line(points={{46,20},{38,20},{38,
+          100.597},{0.5975,100.597}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -246,14 +253,14 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
 
-  connect(variableLimiter.u, pumpBus.dpSet) annotation (Line(points={{-12,20},{-19,20},{-19,100.597},{0.5975,100.597}},
-                                                   color={0,0,127}), Text(
+  connect(variableLimiter.u, pumpBus.dpSet) annotation (Line(points={{-12,20},{
+          -19,20},{-19,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(realExpression.y, pumpBus.rpmMea) annotation (Line(points={{30,44},{30,100.597},{0.5975,100.597}},
-                                         color={0,0,127}), Text(
+  connect(realExpression.y, pumpBus.rpmMea) annotation (Line(points={{30,44},{
+          30,100.597},{0.5975,100.597}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -266,6 +273,8 @@ equation
     annotation (Line(points={{-11,-80},{31,-80}}, color={0,127,255}));
   connect(vol.ports[2], port_b)
     annotation (Line(points={{35,-80},{100,-80},{100,0}}, color={0,127,255}));
+  connect(onOff.y, criticalDamping.u) annotation (Line(points={{69,20},{70,20},{
+          70,5},{41,5},{41,-10},{48,-10}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=true,

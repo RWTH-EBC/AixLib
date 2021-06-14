@@ -7,6 +7,7 @@ At this time are five different Checks implemented.
 
 ## What is implement?
 
+
 ## CleanUpScripts
  
 ### cleanmodelica
@@ -104,6 +105,10 @@ The following command is used to check the models:
 
 A whitelist of IBPSA models was created. The list contains all models of the IBPSA library that have not passed the CheckTest. These models are ignored during the test and are therefore sorted out before the test. 
 To keep the white list up to date, it should be updated regularly. This is done using the tag --WhisteList
+
+### IBPSA Merge
+As soon as the branch IBPSA_Merge is created the automatic merging of the IBPSA repo starts. First the models of the IBPSA are copied into the AixLib and then a suitable conversion skirpt. In the next stage the white lists are updated. Finally a pull request is created. The user should now check the AixLib again locally. At the same time, the CI runs and checks and simulates models, as well as performs a regression test. If certain models or scripts need to be adjusted manually, the user should do so with the comment message "fix errors manually".
+
 
 ## Overall process
 

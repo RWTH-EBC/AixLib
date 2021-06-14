@@ -11,7 +11,6 @@ model PumpSpeedControlled "Testing the pump speed controlled model."
     calculateEfficiency=true,
     redeclare function efficiencyCharacteristic =
         AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency,
-
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
@@ -28,7 +27,7 @@ model PumpSpeedControlled "Testing the pump speed controlled model."
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
     offset=0.5,
-    height=-0.48,
+    height=0.48,
     duration(displayUnit="s") = 100,
     startTime(displayUnit="s") = 300)
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
@@ -106,6 +105,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file=
-        "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledTest.mos"
+          "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlled.mos"
         "Simulate and plot"));
 end PumpSpeedControlled;

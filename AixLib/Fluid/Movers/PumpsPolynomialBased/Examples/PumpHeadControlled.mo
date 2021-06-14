@@ -9,12 +9,12 @@ model PumpHeadControlled "testing the head controlled pump model."
     calculatePower=true,
     calculateEfficiency=true,
     redeclare package Medium = Medium,
-    pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4(),
-    Qnom=1.45) annotation (Placement(transformation(extent={{-10,0},{10,20}})));
+    pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V9())
+               annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
-    offset=1,
-    height=1,
+    offset=0.5,
+    height=0.5,
     duration(displayUnit="s") = 120,
     startTime(displayUnit="min") = 120)
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
@@ -24,27 +24,24 @@ model PumpHeadControlled "testing the head controlled pump model."
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-36,20})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
-  Modelica.Blocks.Sources.BooleanPulse    PumpOn1(period=600, width=500/600*100)
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.1 "Nominal mass flow rate";
+  Modelica.Blocks.Sources.BooleanPulse    PumpOn1(period=600, width=500/600*100,
+    startTime=0)
     annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
   Modelica.Blocks.Sources.Ramp rampPumpDp(
-    height=4,
-    offset=5,
+    height=2,
+    offset=2,
     duration(displayUnit="s") = 100,
     startTime(displayUnit="s") = 100)
     annotation (Placement(transformation(extent={{46,30},{26,50}})));
   BaseClasses.PumpBus                                          pumpBus
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  Modelica.Blocks.Sources.Ramp rampValvePosition1(
-    offset=0.5,
-    height=-0.48,
-    duration(displayUnit="s") = 120,
-    startTime(displayUnit="min") = 120)
-    annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   Actuators.Valves.TwoWayLinear             simpleValve(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
-    dpValve_nominal=1000)
+    CvData=AixLib.Fluid.Types.CvTypes.Kv,
+    Kv=6.3,
+    dpFixed_nominal=1000)
     annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 equation
   connect(PumpOn1.y, pumpBus.onSet) annotation (Line(points={{-49,40},{-28,40},{
@@ -68,14 +65,17 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{40,
           10},{40,-30},{-20,-30}}, color={0,127,255}));
-  connect(simpleValve.y, rampValvePosition1.y)
-    annotation (Line(points={{-30,-42},{-30,-60},{-21,-60}}, color={0,0,127}));
   connect(vessle.ports[1], pump.port_a)
     annotation (Line(points={{-34,10},{-10,10}}, color={0,127,255}));
   connect(simpleValve.port_b, vessle.ports[2]) annotation (Line(points={{-40,-30},
           {-60,-30},{-60,10},{-38,10}}, color={0,127,255}));
+  connect(rampValvePosition.y, simpleValve.y)
+    annotation (Line(points={{-21,-60},{-30,-60},{-30,-42}}, color={0,0,127}));
   annotation (
-      experiment(Tolerance=1e-6,StopTime=600),
+      experiment(
+      StopTime=600,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -105,6 +105,6 @@ equation
 </ul>
 </html>"),
     __Dymola_Commands(file=
-        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlledDpV.mos"
+          "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpHeadControlled.mos"
         "Simulate and plot"));
 end PumpHeadControlled;
