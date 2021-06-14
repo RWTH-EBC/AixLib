@@ -127,9 +127,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, heatPumpSystemBus1.busHP.modeSet) annotation (Line(
-        points={{32.6,0},{46.35,0},{46.35,0.05},{100.05,0.05}}, color={255,0,
-          255}), Text(
+  connect(booleanConstant.y, heatPumpSystemBus1.busHP.mode) annotation (Line(
+        points={{32.6,0},{46.35,0},{46.35,0.05},{100.05,0.05}}, color={255,0,255}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -159,9 +159,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ice.y, heatPumpSystemBus1.busHP.iceFacMea) annotation (Line(points={{
-          74.7,-7},{86.35,-7},{86.35,0.05},{100.05,0.05}}, color={0,0,127}),
-      Text(
+  connect(ice.y, heatPumpSystemBus1.busHP.iceFac) annotation (Line(points={{74.7,
+          -7},{86.35,-7},{86.35,0.05},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

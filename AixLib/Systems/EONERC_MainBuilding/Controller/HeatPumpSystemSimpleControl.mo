@@ -128,9 +128,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, heatPumpSystemBus1.busHP.modeSet) annotation (Line(
-        points={{32.6,0},{46.35,0},{46.35,0.05},{100.05,0.05}}, color={255,0,
-          255}), Text(
+  connect(booleanConstant.y, heatPumpSystemBus1.busHP.mode) annotation (Line(
+        points={{32.6,0},{46.35,0},{46.35,0.05},{100.05,0.05}}, color={255,0,255}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -160,9 +160,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ice.y, heatPumpSystemBus1.busHP.iceFacMea) annotation (Line(points={{
-          74.7,-7},{86.35,-7},{86.35,0.05},{100.05,0.05}}, color={0,0,127}),
-      Text(
+  connect(ice.y, heatPumpSystemBus1.busHP.iceFac) annotation (Line(points={{74.7,
+          -7},{86.35,-7},{86.35,0.05},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -218,8 +217,8 @@ equation
           {-82.65,30},{-78,30}}, color={0,0,127}));
   connect(PID.y, switch1.u1) annotation (Line(points={{-55,30},{-40,30},{-40,22},
           {-24,22}}, color={0,0,127}));
-  connect(PID.u_m, heatPumpSystemBus1.busHP.TConOutMea) annotation (Line(points
-        ={{-66,18},{-66,-18},{100.05,-18},{100.05,0.05}}, color={0,0,127}),
+  connect(PID.u_m, heatPumpSystemBus1.busHP.T_ret_co) annotation (Line(points={
+          {-66,18},{-66,-18},{100.05,-18},{100.05,0.05}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,

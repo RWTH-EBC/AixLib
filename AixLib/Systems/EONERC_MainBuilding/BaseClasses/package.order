@@ -5,4 +5,10 @@ TwoCircuitBus
 MainBus
 EvaluationBus
 EnergyCounter
+HeatpumpAndConsumerControllerBus
+SimpleERCBus
 WeatherAC
+MainBus2ZoneMainBuilding
+EnergyCounter2Zones
+TabsBus2
+ERCMainBuilding_Office

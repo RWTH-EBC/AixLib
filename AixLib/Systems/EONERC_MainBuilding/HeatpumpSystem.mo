@@ -300,6 +300,9 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature
+    annotation (Placement(transformation(extent={{50,-126},{58,-118}})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a2(
     tau(displayUnit="s"),
@@ -452,9 +455,6 @@ equation
           {-86,-88},{-86,-12},{-80,-12}},          color={0,127,255}));
   connect(convection.fluid, T_outside)
     annotation (Line(points={{20,-108},{40,-108}},
-                                                 color={191,0,0}));
-  connect(convection1.fluid, T_outside)
-    annotation (Line(points={{60,-108},{40,-108}},
                                                  color={191,0,0}));
   connect(throttle_freecool.port_a2, volAirCoolerFreecool.ports[1]) annotation (
      Line(points={{120,-88},{114,-88},{114,-102}},color={0,127,255}));
@@ -660,6 +660,10 @@ equation
     annotation (Line(points={{54.6,-74},{59.2,-74}}, color={0,0,127}));
   connect(firstOrder.y, convection1.Gc)
     annotation (Line(points={{68.4,-74},{70,-74},{70,-98}}, color={0,0,127}));
+  connect(temperatureSensor.T, prescribedTemperature.T) annotation (Line(points=
+         {{40,-142},{49.2,-142},{49.2,-122}}, color={0,0,127}));
+  connect(prescribedTemperature.port, convection1.fluid)
+    annotation (Line(points={{58,-122},{60,-122},{60,-108}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -120},{220,60}}), graphics={
         Rectangle(

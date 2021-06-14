@@ -5,16 +5,16 @@ block CtrGTFSimple "Controller for geothermal field"
     annotation (Placement(transformation(extent={{40,70},{60,90}})));
   Modelica.Blocks.Interfaces.BooleanInput on
                                    "Connector of Boolean input signal"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
-        iconTransformation(extent={{-140,-20},{-100,20}})));
+    annotation (Placement(transformation(extent={{-130,-22},{-90,18}}),
+        iconTransformation(extent={{-130,-22},{-90,18}})));
   Modelica.Blocks.Sources.Constant rpm(k=rpmPump)
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   parameter Real rpmPump(min=0, unit="1") = 2100 "Rpm of the pump";
   BaseClasses.TwoCircuitBus gtfBus annotation (Placement(transformation(extent=
             {{80,-18},{120,18}}), iconTransformation(extent={{96,-18},{130,18}})));
 equation
-  connect(booleanToReal.u, on) annotation (Line(points={{38,80},{-50,80},{-50,0},
-          {-120,0}},                  color={255,0,255}));
+  connect(booleanToReal.u, on) annotation (Line(points={{38,80},{-6,80},{-6,-2},
+          {-110,-2}},                 color={255,0,255}));
   connect(booleanToReal.y, gtfBus.secBus.valveSet) annotation (Line(points={{61,
           80},{78,80},{78,82},{100.1,82},{100.1,0.09}}, color={0,0,127}), Text(
       string="%second",
@@ -27,8 +27,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(on, gtfBus.primBus.pumpBus.onSet) annotation (Line(points={{
-          -120,0},{-12,0},{-12,0.09},{100.1,0.09}}, color={255,0,255}), Text(
+  connect(on, gtfBus.primBus.pumpBus.onSet) annotation (Line(points={{-110,-2},
+          {48,-2},{48,0.09},{100.1,0.09}},          color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
