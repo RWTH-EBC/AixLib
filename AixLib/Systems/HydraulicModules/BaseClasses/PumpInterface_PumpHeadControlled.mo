@@ -3,110 +3,19 @@ model PumpInterface_PumpHeadControlled
   "Head controlled polynomial based pump with controller"
   extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;
 
-  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam
+  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam = AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord()
     "pump parameter record" annotation (choicesAllMatching=true);
 
-  replaceable
-    AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH
-    pumpController(pumpParam=pumpParam) constrainedby Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
-    annotation (
-    Dialog(enable=true, tab="Control Strategy"),
-    Placement(transformation(extent={{-20,40},{20,80}})),
-    __Dymola_choicesAllMatching=true);
 
-  parameter Real Qnom(
-    quantity="VolumeFlowRate",
-    unit="m3/h",
-    displayUnit="m3/h") = 0.67*max(pumpParam.maxMinSpeedCurves[:, 1]) "<html>Nominal volume flow rate in m³/h (~0.67*Qmax).<br/>
-</html>" annotation (Dialog(
-        tab="Control Strategy", group="Design point for dp_var control"));
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm Nnom=
-      Modelica.Math.Vectors.interpolate(
-      x=pumpParam.maxMinSpeedCurves[:, 1],
-      y=pumpParam.maxMinSpeedCurves[:, 2],
-      xi=Qnom) "<html><br/>
-Pump speed in design point (Qnom,Hnom).<br/>
-Default is maximum speed at Qnom from pumpParam.maxMinSpeedCurves.<br/>
-Note that N is defined only on [nMin, nMax]. Due to power
-limitation<br/>
-maller than nMax for higher Q.
-</html>" annotation (Dialog(tab="Control Strategy",
-        group="Design point for dp_var control"));
-  parameter Modelica.SIunits.Height Hnom=
-      AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
-      pumpParam.cHQN,
-      Qnom,
-      Nnom) "<html><br/>
-Nominal pump head in m (water).<br/>
-Will by default be calculated automatically from Qnom and Nnom.<br/>
-change the value make sure to also set a feasible Qnom.
-</html>"
-    annotation (Dialog(tab="Control Strategy", group=
-          "Design point for dp_var control"));
-  parameter Modelica.SIunits.Height H0=0.5*Hnom
-    "Pump head at Q == 0 m3/h (defines left point of dp_var line)." annotation (
-     Dialog(tab="Control Strategy", group="Design point for dp_var control"));
-
-  parameter Real Qstart(
-    quantity="VolumeFlowRate",
-    unit="m3/h",
-    displayUnit="m3/h") = Qnom "<html>Volume flow rate in m³/h at start of simulation.<br/>
-.
-</html>"
-    annotation (Dialog(tab="Initialization", group="Volume flow"));
-  parameter Medium.MassFlowRate m_flow_start=physics.m_flow_start "<html><br/>
-Start value of m_flow in port_a.m_flow<br/>
-Used to initialize ports a and b and for initial checks of model.<br/>
-Use it to conveniently initialize upper level models' start mass flow
-rate.<br/>
-default.
-</html>"
-    annotation (Dialog(
-      tab="Initialization",
-      group="Volume flow",
-      enable=false));
-
-  parameter Modelica.SIunits.Height Hstart=max(0,
-      AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
-      pumpParam.cHQN,
-      Qstart,
-      Nnom)) "<html><br/>
-Start value of pump head. Will be used to initialize criticalDamping
-block<br/>
-and pressure in ports a and b.<br/>
-Default is to calculate it from Qstart and Nnom. If you change the
-value<br/>
-e to also set Qstart to a suitable value.
-</html>"
+  parameter Medium.AbsolutePressure p_start=Medium.p_default "Start value for pressure."
     annotation (Dialog(tab="Initialization", group="Pressure"));
-  parameter Medium.AbsolutePressure p_a_start=physics.system.p_start "<html><br/>
-Start value for inlet pressure. Use it to set a defined absolute
-pressure<br/>
-in the circuit. For example system.p_start. Also use it to
-initialize<br/>
-</html>"
-    annotation (Dialog(tab="Initialization", group="Pressure"));
-  parameter Medium.AbsolutePressure p_b_start=physics.p_b_start "<html><br/>
-Start value for outlet pressure. It depends on p_a_start and
-Hstart.<br/>
-It is deactivated for user input by default. Use it in an upper level
-model<br/>
-circuit.
-</html>"
-    annotation (Dialog(
-      tab="Initialization",
-      group="Pressure",
-      enable=false));
-
 
   // Assumptions
-  parameter Boolean checkValve=false "= true to prevent reverse flow"
-    annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
   // Power and Efficiency
-  parameter Boolean calculatePower=false "calc. power consumption?"
+  parameter Boolean calculatePower=true "calc. power consumption?"
     annotation (Dialog(tab="General", group="Power and Efficiency"));
   parameter Boolean calculateEfficiency=false
     "calc. efficency? (eta = f(H, Q, P))" annotation (Dialog(
@@ -115,34 +24,28 @@ circuit.
       enable=calculate_Power));
 
   Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled physics(
-    pumpParam=pumpParam,
-    Qnom=Qnom,
-    Nnom=Nnom,
-    redeclare package Medium = Medium,
-    Qstart=Qstart,
-    p_a_start=p_a_start,
-    T_start=T_start,
-    checkValve=checkValve,
-    V=V,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
+    final pumpParam=pumpParam,
+    redeclare final package Medium = Medium,
+    final p_start=p_start,
+    final T_start=T_start,
+    final V=V,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    massDynamics=massDynamics,
-    calculatePower=calculatePower,
-    calculateEfficiency=calculateEfficiency,
-    redeclare function efficiencyCharacteristic =
+    final massDynamics=massDynamics,
+    final calculatePower=calculatePower,
+    final calculateEfficiency=calculateEfficiency,
+    redeclare final function efficiencyCharacteristic =
         Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency)
-    annotation (Placement(transformation(extent={{-30,-50},{30,10}})));
+    annotation (Placement(transformation(extent={{-30,-30},{30,30}})));
 
 equation
-  connect(pumpController.pumpBus, physics.pumpBus) annotation (Line(
-      points={{0,40},{0,10}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(physics.port_a, port_a) annotation (Line(points={{-30,-20},{-66,-20},{
-          -66,0},{-100,0}}, color={0,127,255}));
-  connect(physics.port_b, port_b) annotation (Line(points={{30,-20},{66,-20},{66,
-          0},{100,0}}, color={0,127,255}));
-  connect(pumpController.pumpControllerBus, pumpBus) annotation (Line(
-      points={{0,80},{0,89},{0,89},{0,100}},
+  connect(physics.port_a, port_a) annotation (Line(points={{-30,0},{-100,0}},
+                            color={0,127,255}));
+  connect(physics.port_b, port_b) annotation (Line(points={{30,0},{100,0}},
+                       color={0,127,255}));
+  connect(physics.pumpBus, pumpBus) annotation (Line(
+      points={{0,30},{0,65},{0,65},{0,100}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

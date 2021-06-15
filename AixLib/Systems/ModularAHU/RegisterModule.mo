@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU;
+﻿within AixLib.Systems.ModularAHU;
 model RegisterModule "AHU register module for heaters and coolers"
     extends AixLib.Fluid.Interfaces.PartialFourPortParallel;
 
@@ -29,6 +29,8 @@ model RegisterModule "AHU register module for heaters and coolers"
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer of temperature sensors in air chanal" annotation(Dialog(tab="Advanced"));
   replaceable AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
+    length=1,
+    Kv=6.3,
     final energyDynamics=energyDynamics,
     final T_amb=T_amb,
     redeclare final package Medium = Medium2,
@@ -48,16 +50,19 @@ model RegisterModule "AHU register module for heaters and coolers"
     final allowFlowReversal2=allowFlowReversal2,
     redeclare final package Medium1 = Medium1,
     redeclare final package Medium2 = Medium2,
-    tau1=5,
-    tau2=10,
+    tau1=2,
+    tau2=8,
     energyDynamics=energyDynamics,
     final massDynamics=massDynamics,
     T1_start=T_start,
-    T2_start=T_start)
+    T2_start=T_start,
+    tau_C=10,
+    dT_nom=1,
+    Q_nom=1000)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
             {20,68}})));
   AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus
-    annotation (Placement(transformation(extent={{-102,-12},{-78,10}}),
+    annotation (Placement(transformation(extent={{-108,-20},{-70,18}}),
         iconTransformation(extent={{-112,-14},{-86,12}})));
 
 
@@ -120,7 +125,7 @@ equation
           {60,60}},                   color={0,127,255}));
   connect(hydraulicModule.hydraulicBus, registerBus.hydraulicBus) annotation (
       Line(
-      points={{-36,-40},{-89.94,-40},{-89.94,-0.945}},
+      points={{-36,-40},{-88.905,-40},{-88.905,-0.905}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -131,13 +136,14 @@ equation
   connect(VFSen_out.port_b, dynamicHX.port_a1) annotation (Line(points={{-28,60},
           {-20,60}},                       color={0,127,255}));
   connect(PT1_airIn.y, registerBus.TAirInMea) annotation (Line(points={{-70,101},
-          {-70,110},{-89.94,110},{-89.94,-0.945}},          color={0,0,127}),
+          {-70,110},{-88.905,110},{-88.905,-0.905}},        color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(PT1_airOut.y, registerBus.TAirOutMea) annotation (Line(points={{70,101},
-          {70,110},{-89.94,110},{-89.94,-0.945}}, color={0,0,127}), Text(
+          {70,110},{-88.905,110},{-88.905,-0.905}},
+                                                  color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -150,7 +156,7 @@ equation
   connect(hydraulicModule.port_b2, port_b2) annotation (Line(points={{24.8,-78},
           {100,-78},{100,-60}}, color={0,127,255}));
   connect(VFSen_out.V_flow, registerBus.VFlowAirMea) annotation (Line(points={{-38,49},
-          {-38,34},{-89.94,34},{-89.94,-0.945}},         color={0,0,127}), Text(
+          {-38,34},{-88.905,34},{-88.905,-0.905}},       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},

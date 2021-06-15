@@ -95,6 +95,7 @@ model ERC_ExperimentalHall_CoolingCircuit
         origin={6,4})));
   AixLib.Systems.HydraulicModules.ThrottlePump unmixedThrottle(
     parameterPipe=DataBase.Pipes.Copper.Copper_42x1_2(),
+    valve(flowCharacteristics=AixLib.Fluid.Actuators.Valves.Data.Linear()),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
@@ -114,6 +115,7 @@ model ERC_ExperimentalHall_CoolingCircuit
         origin={74,4})));
   AixLib.Systems.HydraulicModules.Admix admix(
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
