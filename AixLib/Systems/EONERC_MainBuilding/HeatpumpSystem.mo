@@ -120,8 +120,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     Kv=160,
     valve(
       riseTime=240,
-      order=1,
-      l=0.0000001),
+      order=1),
     pipe3(length=20),
     T_amb=T_amb)  annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},

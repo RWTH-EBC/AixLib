@@ -4,6 +4,7 @@ HighTempSystemBus
 TwoCircuitBus
 MainBus
 EvaluationBus
+EvaluationBus2Zones
 EnergyCounter
 HeatpumpAndConsumerControllerBus
 SimpleERCBus

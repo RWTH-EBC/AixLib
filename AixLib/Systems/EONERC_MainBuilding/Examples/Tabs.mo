@@ -57,7 +57,7 @@ model Tabs "Test of Tabs"
     offset=273.15 + 30,
     startTime=0)
     annotation (Placement(transformation(extent={{-80,80},{-60,100}})));
-  Controller.CtrTabs2 ctrTabs2_1
+  Controller.CtrTabs ctrTabs2_1
     annotation (Placement(transformation(extent={{-80,46},{-60,66}})));
 equation
   connect(boundary1.ports[1], tabs2_1.port_a1) annotation (Line(points={{-70,10},

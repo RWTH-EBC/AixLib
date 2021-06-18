@@ -30,14 +30,14 @@ model MainBuilding2Zones "Benchmark building model"
         origin={18,-108})));
   Tabs tabs1(
     redeclare package Medium = MediumWater,
-    area=33.8*59.4,
-    thickness=0.3*2,
+    area=33.8*59.4*2,
+    thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{158,120},{198,160}})));
   Tabs tabs2(
     redeclare package Medium = MediumWater,
-    area=33.8*59.4,
-    thickness=0.3*2,
+    area=33.8*59.4*2,
+    thickness=0.3,
     alpha=15)
     annotation (Placement(transformation(extent={{364,122},{404,162}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
@@ -173,7 +173,7 @@ model MainBuilding2Zones "Benchmark building model"
     nPorts=2)
     "Thermal zone"
     annotation (Placement(transformation(extent={{294,206},{350,260}})));
-  ModularAHU.GenericAHU                genericAHU(
+  ModularAHU.GenericAHU genericAHU1(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
@@ -183,7 +183,7 @@ model MainBuilding2Zones "Benchmark building model"
     usePreheater=false,
     useHumidifierRet=false,
     useHumidifier=false,
-    perheater(redeclare HydraulicModules.Admix hydraulicModule(
+    preheater(redeclare HydraulicModules.Admix hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
@@ -201,6 +201,8 @@ model MainBuilding2Zones "Benchmark building model"
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -216,6 +218,8 @@ model MainBuilding2Zones "Benchmark building model"
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -278,7 +282,7 @@ model MainBuilding2Zones "Benchmark building model"
     V=0.01,
     nPorts=4)
     annotation (Placement(transformation(extent={{130,100},{144,114}})));
-  ModularAHU.GenericAHU                genericAHU1(
+  ModularAHU.GenericAHU                genericAHU2(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
@@ -288,7 +292,7 @@ model MainBuilding2Zones "Benchmark building model"
     usePreheater=false,
     useHumidifierRet=false,
     useHumidifier=false,
-    perheater(redeclare HydraulicModules.Admix hydraulicModule(
+    preheater(redeclare HydraulicModules.Admix hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
@@ -306,6 +310,8 @@ model MainBuilding2Zones "Benchmark building model"
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -321,6 +327,8 @@ model MainBuilding2Zones "Benchmark building model"
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=
+            AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
         redeclare
           HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -459,6 +467,7 @@ model MainBuilding2Zones "Benchmark building model"
         origin={-159,-83})));
   HydraulicModules.Admix admixHTC(
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
@@ -485,7 +494,7 @@ model MainBuilding2Zones "Benchmark building model"
     Ti=150,
     k=0.05,
     rpm_pump=600,
-    reverseAction=false)
+    reverseAction=true)
     annotation (Placement(transformation(extent={{-202,144},{-188,158}})));
   HydraulicModules.SimpleConsumer consumerHTC(
     kA=20000,
@@ -520,6 +529,7 @@ model MainBuilding2Zones "Benchmark building model"
         origin={-174,186})));
   HydraulicModules.Admix admixCold(
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
@@ -556,7 +566,7 @@ model MainBuilding2Zones "Benchmark building model"
     k=0.05,
     Td=0,
     rpm_pump=1400,
-    reverseAction=true)
+    reverseAction=false)
     annotation (Placement(transformation(extent={{78,-18},{90,-4}})));
   Fluid.MixingVolumes.MixingVolume vol4(
     redeclare package Medium = MediumWater,
@@ -727,44 +737,43 @@ equation
     annotation (Line(points={{388,-60},{276,-60}}, color={0,127,255}));
   connect(switchingUnit.port_a1, vol.ports[1]) annotation (Line(points={{276,-36},
           {276,76},{118.9,76}},        color={0,127,255}));
-  connect(vol1.ports[1], genericAHU.port_a4) annotation (Line(points={{134.9,
-          100},{-34,100},{-34,248}},
-                                color={0,127,255}));
+  connect(vol1.ports[1], genericAHU1.port_a4) annotation (Line(points={{134.9,
+          100},{-34,100},{-34,248}}, color={0,127,255}));
   connect(vol1.ports[2], tabs1.port_a2) annotation (Line(points={{136.3,100},{
           186,100},{186,120}},
                            color={0,127,255}));
   connect(vol1.ports[3], tabs2.port_a2) annotation (Line(points={{137.7,100},{
           392,100},{392,122}},
                            color={0,127,255}));
-  connect(vol.ports[2], genericAHU.port_b4) annotation (Line(points={{120.3,76},
-          {-23.0909,76},{-23.0909,248}},color={0,127,255}));
+  connect(vol.ports[2], genericAHU1.port_b4) annotation (Line(points={{120.3,76},
+          {-23.0909,76},{-23.0909,248}}, color={0,127,255}));
   connect(vol.ports[3], tabs1.port_b2) annotation (Line(points={{121.7,76},{194,
           76},{194,120.364}}, color={0,127,255}));
   connect(vol.ports[4], tabs2.port_b2) annotation (Line(points={{123.1,76},{400,
           76},{400,122.364}}, color={0,127,255}));
-  connect(vol1.ports[1], genericAHU1.port_a4)
+  connect(vol1.ports[1],genericAHU2. port_a4)
     annotation (Line(points={{134.9,100},{84,100},{84,160}},
                                                            color={0,127,255}));
-  connect(vol.ports[2], genericAHU1.port_b4) annotation (Line(points={{120.3,76},
+  connect(vol.ports[2],genericAHU2. port_b4) annotation (Line(points={{120.3,76},
           {94.9091,76},{94.9091,160}}, color={0,127,255}));
-  connect(genericAHU1.port_a5, genericAHU.port_a5) annotation (Line(points={{105.818,
+  connect(genericAHU2.port_a5, genericAHU1.port_a5) annotation (Line(points={{105.818,
           160},{106,160},{106,128},{-12.1818,128},{-12.1818,248}},
         color={238,46,47}));
   connect(thermalZone2.intGains, internalGains1.y) annotation (Line(points={{
           344.4,210.32},{343.2,210.32},{343.2,197.7},{345,197.7}}, color={0,0,
           127}));
-  connect(genericAHU1.port_a2, thermalZone2.ports[1]) annotation (Line(points={{144.545,
+  connect(genericAHU2.port_a2, thermalZone2.ports[1]) annotation (Line(points={{144.545,
           214},{231.272,214},{231.272,213.56},{315.42,213.56}},          color=
           {0,127,255}));
-  connect(genericAHU1.port_b1, thermalZone2.ports[2]) annotation (Line(points={{144.545,
+  connect(genericAHU2.port_b1, thermalZone2.ports[2]) annotation (Line(points={{144.545,
           190},{332,190},{332,213.56},{328.58,213.56}},          color={0,127,
           255}));
-  connect(genericAHU.port_b1, thermalZone1.ports[1]) annotation (Line(points={{26.5455,
-          278},{142,278},{142,304.12},{133.42,304.12}},         color={0,127,
+  connect(genericAHU1.port_b1, thermalZone1.ports[1]) annotation (Line(points={{26.5455,
+          278},{142,278},{142,304.12},{133.42,304.12}},          color={0,127,
           255}));
-  connect(genericAHU.port_a2, thermalZone1.ports[2]) annotation (Line(points={{26.5455,
-          302},{80,302},{80,304.12},{146.58,304.12}},         color={0,127,255}));
-  connect(genericAHU1.genericAHUBus, mainBus.ahu2Bus) annotation (Line(
+  connect(genericAHU1.port_a2, thermalZone1.ports[2]) annotation (Line(points={{26.5455,
+          302},{80,302},{80,304.12},{146.58,304.12}},          color={0,127,255}));
+  connect(genericAHU2.genericAHUBus, mainBus.ahu2Bus) annotation (Line(
       points={{84,226.3},{84,419.145},{161.115,419.145}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -772,7 +781,7 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(genericAHU.genericAHUBus, mainBus.ahu1Bus) annotation (Line(
+  connect(genericAHU1.genericAHUBus, mainBus.ahu1Bus) annotation (Line(
       points={{-34,314.3},{-36,314.3},{-36,419.145},{161.115,419.145}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -868,12 +877,13 @@ equation
           -50},{198,-50},{198,-36},{236,-36}},         color={0,127,255}));
   connect(vol4.ports[3], switchingUnit.port_a2)
     annotation (Line(points={{104.933,-60},{236,-60}}, color={0,127,255}));
-  connect(genericAHU1.port_b5, genericAHU.port_b5) annotation (Line(points={{116.182,
+  connect(genericAHU2.port_b5, genericAHU1.port_b5) annotation (Line(points={{116.182,
           160},{116,160},{116,120},{-1.81818,120},{-1.81818,248}},
         color={238,46,47}));
-  connect(genericAHU.port_a5, vol2.ports[4]) annotation (Line(points={{-12.1818,
-          248},{-12,248},{-12,128},{-176,128},{-176,-18.8}}, color={238,46,47}));
-  connect(genericAHU1.port_b5, vol3.ports[4]) annotation (Line(points={{116.182,
+  connect(genericAHU1.port_a5, vol2.ports[4]) annotation (Line(points={{
+          -12.1818,248},{-12,248},{-12,128},{-176,128},{-176,-18.8}}, color={
+          238,46,47}));
+  connect(genericAHU2.port_b5, vol3.ports[4]) annotation (Line(points={{116.182,
           160},{116.182,120},{-164,120},{-164,8.8}}, color={238,46,47}));
   connect(prescribedTemperature.T, Tair) annotation (Line(points={{18,-120},{18,
           -112},{-28,-112}}, color={0,0,127}));
@@ -888,18 +898,18 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(bou1.ports[1], heatExchangerSystem.port_a2) annotation (Line(points={
           {-78,-78},{-78,-40},{-75,-40}}, color={0,127,255}));
-  connect(genericAHU.port_a1, boundaryOutsideAir.ports[1]) annotation (Line(
+  connect(genericAHU1.port_a1, boundaryOutsideAir.ports[1]) annotation (Line(
         points={{-94,278},{-108,278},{-108,282},{-130,282},{-130,250}}, color={
           0,127,255}));
-  connect(boundaryExhaustAir.ports[1], genericAHU.port_b2) annotation (Line(
+  connect(boundaryExhaustAir.ports[1], genericAHU1.port_b2) annotation (Line(
         points={{-136,302},{-116,302},{-116,302},{-94,302}}, color={0,127,255}));
   connect(x_pTphi.X, boundaryOutsideAir1.X_in) annotation (Line(points={{-161,
           270},{-158,270},{-158,194},{-94,194}}, color={0,0,127}));
   connect(boundaryOutsideAir1.T_in, boundaryOutsideAir.T_in) annotation (Line(
         points={{-94,186},{-154,186},{-154,246},{-152,246}}, color={0,0,127}));
-  connect(boundaryOutsideAir1.ports[1], genericAHU1.port_a1)
+  connect(boundaryOutsideAir1.ports[1],genericAHU2. port_a1)
     annotation (Line(points={{-72,190},{24,190}}, color={0,127,255}));
-  connect(genericAHU1.port_b2, boundaryExhaustAir1.ports[1]) annotation (Line(
+  connect(genericAHU2.port_b2, boundaryExhaustAir1.ports[1]) annotation (Line(
         points={{24,214},{22,214},{22,216},{18,216}}, color={0,127,255}));
   connect(tabs1.tabsBus, mainBus.tabs1Bus) annotation (Line(
       points={{157.8,138.364},{242,138.364},{242,410},{161.115,410},{161.115,

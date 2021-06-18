@@ -21,7 +21,7 @@ model Tabs "Concrete core activation"
 
   Fluid.FixedResistances.GenericPipe  pipe(
     redeclare package Medium = Medium,
-    parameterPipe=DataBase.Pipes.Copper.Copper_22x1_5(),
+    parameterPipe=DataBase.Pipes.PE_X.DIN_16893_SDR11_d160(),
     withInsulation=false,
     withConvection=false,
     m_flow_nominal=m_flow_nominal,
@@ -35,7 +35,7 @@ model Tabs "Concrete core activation"
 
   HydraulicModules.Pump  pump(
     redeclare package Medium = Medium,
-    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
+    parameterPipe=DataBase.Pipes.Copper.Copper_76_1x2(),
     allowFlowReversal=allowFlowReversal,
     T_amb=293.15,
     m_flow_nominal=m_flow_nominal,
@@ -99,7 +99,7 @@ model Tabs "Concrete core activation"
     tau2=10,
     tau_C=2,
     dT_nom=1,
-    Q_nom=20000)
+    Q_nom=50000)
     annotation (Placement(transformation(extent={{16,-38},{-4,-18}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX1(
     redeclare package Medium1 = Medium,
@@ -112,13 +112,13 @@ model Tabs "Concrete core activation"
     tau2=10,
     tau_C=2,
     dT_nom=1,
-    Q_nom=20000)
+    Q_nom=50000)
     annotation (Placement(transformation(extent={{-14,-38},{-34,-18}})));
   Fluid.Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-60,-28},{-48,-16}})));
   HydraulicModules.ThrottlePump throttlePumpHot(
     redeclare package Medium = Medium,
-    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
+    parameterPipe=DataBase.Pipes.Copper.Copper_66_7x2(),
     allowFlowReversal=allowFlowReversal,
     T_amb=293.15,
     m_flow_nominal=m_flow_nominal,
@@ -127,14 +127,15 @@ model Tabs "Concrete core activation"
     Kv=10,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per))) annotation (
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
+          per)))                                                  annotation (
       Placement(transformation(
         extent={{-15,-15},{15,15}},
         rotation=90,
         origin={-25,-59})));
   HydraulicModules.ThrottlePump throttlePumpCold(
     redeclare package Medium = Medium,
-    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
+    parameterPipe=DataBase.Pipes.Copper.Copper_66_7x2(),
     allowFlowReversal=allowFlowReversal,
     T_amb=293.15,
     m_flow_nominal=m_flow_nominal,
@@ -143,11 +144,12 @@ model Tabs "Concrete core activation"
     Kv=10,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per))) annotation (
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
+          per)))                                                  annotation (
       Placement(transformation(
         extent={{-15,-15},{15,15}},
         rotation=90,
-        origin={15,-59})));
+        origin={15,-57})));
 equation
 
   connect(pump.port_b1, pipe.port_a) annotation (Line(points={{-16.4,40},{-16.4,
@@ -173,14 +175,14 @@ equation
     annotation (Line(points={{-34,-44},{-34,-34}}, color={0,127,255}));
   connect(throttlePumpHot.port_a2, dynamicHX1.port_b2) annotation (Line(points=
           {{-16,-44},{-16,-34},{-14,-34}}, color={0,127,255}));
-  connect(throttlePumpCold.port_b1, dynamicHX.port_a2) annotation (Line(points={{6,-44},
-          {6,-42},{-4,-42},{-4,-34}},          color={0,127,255}));
-  connect(throttlePumpCold.port_a2, dynamicHX.port_b2) annotation (Line(points={{24,-44},
-          {26,-44},{26,-34},{16,-34}},           color={0,127,255}));
+  connect(throttlePumpCold.port_b1, dynamicHX.port_a2) annotation (Line(points={{6,-42},
+          {-4,-42},{-4,-34}},                  color={0,127,255}));
+  connect(throttlePumpCold.port_a2, dynamicHX.port_b2) annotation (Line(points={{24,-42},
+          {26,-42},{26,-34},{16,-34}},           color={0,127,255}));
   connect(throttlePumpHot.port_a1, port_a1) annotation (Line(points={{-34,-74},
           {-76,-74},{-76,-100},{-80,-100}}, color={0,127,255}));
   connect(port_a2, throttlePumpCold.port_a1) annotation (Line(points={{40,-100},
-          {40,-94},{6,-94},{6,-74}},  color={0,127,255}));
+          {40,-94},{6,-94},{6,-72}},  color={0,127,255}));
   connect(pump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
       points={{-26,16},{-99.9,16},{-99.9,0.1}},
       color={255,204,51},
@@ -200,7 +202,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(throttlePumpCold.hydraulicBus, tabsBus.coldThrottleBus) annotation (
       Line(
-      points={{0,-59},{-99.9,-59},{-99.9,0.1}},
+      points={{0,-57},{-99.9,-57},{-99.9,0.1}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -209,8 +211,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(pipe.port_b, pump.port_a2)
     annotation (Line(points={{10,52},{12.4,52},{12.4,40}}, color={0,127,255}));
-  connect(throttlePumpCold.port_b2, port_b2) annotation (Line(points={{24,-74},
-          {26,-74},{26,-78},{80,-78},{80,-100}}, color={0,127,255}));
+  connect(throttlePumpCold.port_b2, port_b2) annotation (Line(points={{24,-72},
+          {26,-72},{26,-78},{80,-78},{80,-100}}, color={0,127,255}));
   connect(throttlePumpHot.port_b2, port_b1) annotation (Line(points={{-16,-74},
           {-16,-82},{-40,-82},{-40,-100},{-40,-100}}, color={0,127,255}));
     annotation (Dialog(tab="Initialization"),

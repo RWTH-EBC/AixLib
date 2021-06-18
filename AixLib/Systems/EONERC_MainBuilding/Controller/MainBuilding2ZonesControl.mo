@@ -43,7 +43,7 @@ model MainBuilding2ZonesControl "Mode based control for HP system, and GTF"
   ModularAHU.Controller.CtrAHUTsetRoom ctrAHU1Basic(useExternalTset=false,
       VFlowSet=15500/3600)
     annotation (Placement(transformation(extent={{-60,-140},{-40,-120}})));
-  CtrTabs2 ctrTabs2_1(useExternalTset=false, TflowSet=292.15)
+  CtrTabs ctrTabs2_1(useExternalTset=false, TflowSet=292.15)
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
   CtrHighTemperatureSystem ctrHighTemperatureSystem
     annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
@@ -53,7 +53,7 @@ model MainBuilding2ZonesControl "Mode based control for HP system, and GTF"
     annotation (Placement(transformation(extent={{-70,-90},{-50,-70}})));
   ModularAHU.Controller.CtrAHUTsetRoom ctrAHU1Basic1(VFlowSet=15500/3600)
     annotation (Placement(transformation(extent={{-60,-160},{-40,-140}})));
-  CtrTabs2 ctrTabs2_2(useExternalTset=false, TflowSet=292.15)
+  CtrTabs ctrTabs2_2(useExternalTset=false, TflowSet=292.15)
     annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
   Modelica.Blocks.Logical.And and1
     annotation (Placement(transformation(extent={{40,80},{54,94}})));
@@ -61,6 +61,8 @@ model MainBuilding2ZonesControl "Mode based control for HP system, and GTF"
     annotation (Placement(transformation(extent={{26,76},{34,84}})));
   Modelica.Blocks.Math.BooleanToReal flapHP1
     annotation (Placement(transformation(extent={{60,80},{74,94}})));
+  Modelica.Blocks.Logical.Not not2
+    annotation (Placement(transformation(extent={{4,64},{12,72}})));
 equation
   connect(rpmPumpCold.y, bus.hpSystemBus.busPumpCold.pumpBus.rpmSet) annotation (Line(
         points={{86.4,-18},{100.07,-18},{100.07,-0.935}}, color={0,0,127}),
@@ -185,9 +187,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modeStateSelector.useHP, flapHP.u) annotation (Line(points={{-9.8,
-          15.8},{14,15.8},{14,68},{38.4,68}},
-                                      color={255,0,255}));
   connect(modeStateSelector.heatingMode, ctrHP.heatingModeActive) annotation (
       Line(points={{-34,22.1},{-100,22.1},{-100,60},{-83.6,60}},
         color={255,0,255}));
@@ -337,6 +336,10 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(and1.u1, ctrHP.On) annotation (Line(points={{38.6,87},{-10,87},{-10,
           68},{-38,68}}, color={255,0,255}));
+  connect(flapHP.u, not2.y)
+    annotation (Line(points={{38.4,68},{12.4,68}}, color={255,0,255}));
+  connect(modeStateSelector.freeCoolingGC, not2.u) annotation (Line(points={{
+          -9.8,-1},{-2,-1},{-2,68},{3.2,68}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -180},{100,100}}), graphics={Line(
           points={{20,80},{80,0},{40,-80}},

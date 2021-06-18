@@ -31,6 +31,7 @@ model HighTemperatureSystem
     T_amb=T_amb,
     length=1,
     Kv=25,
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
@@ -50,6 +51,7 @@ model HighTemperatureSystem
     T_amb=T_amb,
     length=1,
     Kv=25,
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare

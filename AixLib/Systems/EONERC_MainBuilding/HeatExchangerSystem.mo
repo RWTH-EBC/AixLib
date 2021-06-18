@@ -61,6 +61,7 @@ model HeatExchangerSystem
     Kv=160,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     pipe2(length=5),
     pipe3(length=10),

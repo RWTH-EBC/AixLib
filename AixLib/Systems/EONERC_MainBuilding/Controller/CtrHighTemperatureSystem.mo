@@ -17,7 +17,7 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    reverseActing=true)       annotation (Dialog(enable=true, group=
+    reverseActing=false)      annotation (Dialog(enable=true, group=
           "PID Controllers"), Placement(transformation(extent={{-40,80},{-20,
             100}})));
   Controls.Continuous.LimPID PIDadmix2(
@@ -27,7 +27,7 @@ model CtrHighTemperatureSystem
     k=0.01,
     Ti=60,
     Td=0,
-    reverseActing=true)       annotation (Dialog(enable=true, group=
+    reverseActing=false)      annotation (Dialog(enable=true, group=
           "PID Controllers"), Placement(transformation(extent={{-60,-20},{-40,0}})));
   Controls.Continuous.LimPID PIDBoiler1(
     final yMax=1,

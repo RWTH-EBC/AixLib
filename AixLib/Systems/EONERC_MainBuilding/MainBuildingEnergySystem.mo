@@ -51,6 +51,7 @@ model MainBuildingEnergySystem
         origin={-159,-83})));
   HydraulicModules.Admix admixHTC(
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(
@@ -120,6 +121,7 @@ model MainBuildingEnergySystem
     annotation (Placement(transformation(extent={{-124,62},{-110,76}})));
   HydraulicModules.Admix admixLTC(
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(
@@ -144,6 +146,7 @@ model MainBuildingEnergySystem
         origin={-90,70})));
   HydraulicModules.Admix admixCold1(
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(
@@ -183,6 +186,7 @@ model MainBuildingEnergySystem
             annotation (Placement(transformation(extent={{36,-22},{62,16}})));
   HydraulicModules.Admix admixCold2(
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearLinear(),
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(

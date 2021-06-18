@@ -18,7 +18,7 @@ expandable connector MainBus2ZoneMainBuilding
   SI.Temperature TRoom2Mea "Temperature in room 2";
   Systems.HydraulicModules.BaseClasses.HydraulicBus consHtcBus "Consumer bus high temperature cycle";
   Systems.HydraulicModules.BaseClasses.HydraulicBus consCold1Bus "Consumer bus cold temperature cycle 1";
-  Benchmark.BaseClasses.EvaluationBus evaBus
+  EONERC_MainBuilding.BaseClasses.EvaluationBus evaBus
     "Bus for energy consumption measurement";
   annotation (
     Icon(graphics,
