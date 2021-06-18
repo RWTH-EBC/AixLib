@@ -50,7 +50,7 @@ model GreenWall
     Placement(transformation(extent = {{2, -46}, {22, -26}})));
   Modelica.Blocks.Sources.Constant airExchangeRate1(k = -mflow_plantwall) annotation (
     Placement(transformation(extent = {{-34, -46}, {-14, -26}})));
-  GreenWall_1.BaseClasses.GreenWallConsumption greenWallConsumption annotation (
+  BaseClasses.GreenWallConsumption             greenWallConsumption annotation (
      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
