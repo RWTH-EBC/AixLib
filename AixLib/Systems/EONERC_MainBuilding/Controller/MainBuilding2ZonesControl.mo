@@ -1,5 +1,6 @@
 within AixLib.Systems.EONERC_MainBuilding.Controller;
 model MainBuilding2ZonesControl "Mode based control for HP system, and GTF"
+  import AixLib;
   parameter Real rpmC=1750 "RPM for pump on cold side";
   parameter Real rpmH=2820 "RPM for pump hot side";
   Modelica.Blocks.Sources.Constant rpmPumpCold(k=rpmC)
@@ -10,7 +11,7 @@ model MainBuilding2ZonesControl "Mode based control for HP system, and GTF"
     annotation (Placement(transformation(extent={{78,-8},{86,0}})));
   Modelica.Blocks.Sources.Constant ice(k=1)
     annotation (Placement(transformation(extent={{78,-50},{86,-42}})));
-  EONERC_MainBuilding.BaseClasses.MainBus2ZoneMainBuilding bus annotation (
+  AixLib.Systems.EONERC_MainBuilding.BaseClasses.MainBus2Zones bus annotation (
       Placement(transformation(extent={{86,-14},{114,12}}), iconTransformation(
           extent={{88,-20},{128,22}})));
   EONERC_MainBuilding.Controller.EonERCModeControl.CtrHP ctrHP(N_rel_min=0.3)

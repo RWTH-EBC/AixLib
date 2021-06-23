@@ -1,6 +1,7 @@
 within AixLib.Systems.EONERC_MainBuilding;
 model MainBuilding2Zones "Benchmark building model"
   import ModelicaServices;
+  import AixLib;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
     package MediumAir = AixLib.Media.AirIncompressible
@@ -265,8 +266,8 @@ model MainBuilding2Zones "Benchmark building model"
     m_flow_nominal=2,
     T_amb=293.15)
     annotation (Placement(transformation(extent={{272,-120},{248,-88}})));
-  EONERC_MainBuilding.BaseClasses.MainBus2ZoneMainBuilding mainBus annotation (
-      Placement(transformation(extent={{138,390},{184,448}}),
+  AixLib.Systems.EONERC_MainBuilding.BaseClasses.MainBus2Zones mainBus
+    annotation (Placement(transformation(extent={{138,390},{184,448}}),
         iconTransformation(extent={{110,388},{170,444}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi
     annotation (Placement(transformation(extent={{-182,260},{-162,280}})));

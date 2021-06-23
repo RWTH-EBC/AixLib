@@ -1,9 +1,10 @@
 within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 model EnergyCounter2Zones "Sums up all consumed energy"
+  import AixLib;
   parameter Modelica.SIunits.Temperature Tset = 273.15+21 "Set Temperature of rooms for ISE calculation";
 
-  EONERC_MainBuilding.BaseClasses.MainBus2ZoneMainBuilding mainBus annotation (
-      Placement(transformation(extent={{-118,-18},{-82,16}}),
+  AixLib.Systems.EONERC_MainBuilding.BaseClasses.MainBus2Zones mainBus
+    annotation (Placement(transformation(extent={{-118,-18},{-82,16}}),
         iconTransformation(extent={{-18,-42},{16,-6}})));
   Modelica.Blocks.Continuous.Integrator integrator
     annotation (Placement(transformation(extent={{-10,90},{0,100}})));

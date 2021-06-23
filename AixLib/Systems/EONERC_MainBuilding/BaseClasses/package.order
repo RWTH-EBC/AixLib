@@ -9,7 +9,7 @@ EnergyCounter
 HeatpumpAndConsumerControllerBus
 SimpleERCBus
 WeatherAC
-MainBus2ZoneMainBuilding
+MainBus2Zones
 EnergyCounter2Zones
 TabsBus2
 ERCMainBuilding_Office
