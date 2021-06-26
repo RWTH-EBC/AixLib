@@ -338,12 +338,12 @@ equation
                    color={0,127,255}));
   connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{85.3,
           26},{68,26},{68,25.68},{51,25.68}}, color={0,0,127}));
-  connect(bouWaterhot.ports[1], genericAHU1.port_a5) annotation (Line(points={{
-          -40,-64},{-40,-4},{-33.6364,-4}}, color={0,127,255}));
-  connect(bouWaterhot1.ports[1], genericAHU1.port_b5) annotation (Line(points={
-          {-18,-64},{-28,-64},{-28,-4},{-27.7636,-4}}, color={0,127,255}));
-  connect(bouWatercold1.ports[1], genericAHU1.port_b4) annotation (Line(points=
-          {{56,-96},{-74,-96},{-74,-40},{-40,-40},{-40,-4},{-39.8182,-4}},
+  connect(bouWaterhot.ports[1], genericAHU1.port_a5) annotation (Line(points={{-40,-64},
+          {-40,-4},{-33.6364,-4}},          color={0,127,255}));
+  connect(bouWaterhot1.ports[1], genericAHU1.port_b5) annotation (Line(points={{-18,-64},
+          {-28,-64},{-28,-4},{-27.7636,-4}},           color={0,127,255}));
+  connect(bouWatercold1.ports[1], genericAHU1.port_b4) annotation (Line(points={{56,-96},
+          {-74,-96},{-74,-40},{-40,-40},{-40,-4},{-39.8182,-4}},
         color={0,127,255}));
   connect(genericAHU1.port_a4, bouWatercold.ports[1]) annotation (Line(points={
           {-46,-4},{-46,-34},{-80,-34},{-80,-88},{26,-88}}, color={0,127,255}));
@@ -355,8 +355,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{
-          40,-18.1818},{40,-8},{62,-8},{62,45.92},{56.5,45.92}}, color={191,0,0}));
+  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,
+          -18.1818},{40,-8},{62,-8},{62,45.92},{56.5,45.92}},    color={191,0,0}));
   connect(bouWaterhot1.ports[2], tabs.port_b1)
     annotation (Line(points={{-14,-64},{32,-64},{32,-60}}, color={0,127,255}));
   connect(bouWaterhot.ports[2], tabs.port_a1) annotation (Line(points={{-36,-64},
