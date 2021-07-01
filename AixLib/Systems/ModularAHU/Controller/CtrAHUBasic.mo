@@ -4,6 +4,8 @@ model CtrAHUBasic "Simple controller for AHU"
   parameter Modelica.SIunits.Temperature TFlowSet=289.15
     "Flow temperature set point of consumer"
     annotation (Dialog(enable=useExternalTset == false));
+  parameter Boolean usePreheater = true "If true, a preaheater is used" annotation (choices(checkBox=true), Dialog(group="Preheater"));
+
   parameter Boolean useExternalTset=false
     "If True, set temperature can be given externally";
       parameter Boolean useExternalVset=false
@@ -28,7 +30,8 @@ model CtrAHUBasic "Simple controller for AHU"
   BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
           extent={{90,-10},{110,10}}), iconTransformation(extent={{84,-14},{116,
             16}})));
-  CtrRegBasic ctrPh(final useExternalTset=true, Td=0) annotation (dialog(enable=
+  CtrRegBasic ctrPh(final useExternalTset=true, Td=0) if usePreheater
+                                                      annotation (dialog(enable=
          True), Placement(transformation(extent={{0,80},{20,100}})));
   CtrRegBasic ctrCo(
     final useExternalTset=true,
@@ -47,7 +50,8 @@ model CtrAHUBasic "Simple controller for AHU"
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
           extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Sources.Constant TFrostProtection(final k=273.15 + 5)
+  Modelica.Blocks.Sources.Constant TFrostProtection(final k=273.15 + 5) if
+    usePreheater
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Controls.Continuous.LimPID PID_VflowSup(
     final yMax=dpMax,
@@ -59,7 +63,7 @@ model CtrAHUBasic "Simple controller for AHU"
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=y_start,
     final reset=AixLib.Types.Reset.Disabled,
-    reverseActing=true)
+    reverseActing=not (false))
     annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
   Controls.Continuous.LimPID PID_VflowRet(
     final yMax=dpMax,
@@ -71,7 +75,7 @@ model CtrAHUBasic "Simple controller for AHU"
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=y_start,
     final reset=AixLib.Types.Reset.Disabled,
-    reverseActing=true) if        useTwoFanCont
+    reverseActing=not (false)) if useTwoFanCont
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
   Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet) if not
     useExternalVset
@@ -93,7 +97,7 @@ model CtrAHUBasic "Simple controller for AHU"
           extent={{-140,-80},{-100,-40}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
-      points={{20.2,90},{54,90},{54,88},{100.05,88},{100.05,0.05}},
+      points={{20.2,90},{100.05,90},{100.05,0.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

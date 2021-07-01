@@ -123,13 +123,15 @@ model SimpleRoom
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 
   AixLib.Fluid.Sources.Boundary_pT bou(
     redeclare package Medium = MediumAir,
-    use_Xi_in=true,
+    use_X_in=true,
+    use_Xi_in=false,
     p=bou1.p + 400,
     use_T_in=true,
     nPorts=1) annotation (Placement(transformation(extent={{-100,10},{-88,22}})));
@@ -324,13 +326,6 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(x_pTphi.X, bou.Xi_in) annotation (Line(points={{-107.4,14},{-106,14},
-          {-106,13.6},{-101.2,13.6}},
-                                color={0,0,127}));
-  connect(bou1.ports[1], genericAHU1.port_b2) annotation (Line(points={{-88,32},
-          {-80,32}},                   color={0,127,255}));
-  connect(bou.ports[1], genericAHU1.port_a1) annotation (Line(points={{-88,16},
-          {-80,16}},                  color={0,127,255}));
   connect(genericAHU1.port_b1, thermalZone1.ports[1]) annotation (Line(points={{
           -11.6909,16},{25.125,16},{25.125,28.44}}, color={0,127,255}));
   connect(genericAHU1.port_a2, thermalZone1.ports[2]) annotation (Line(points={{
@@ -373,6 +368,12 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(bou1.ports[1], genericAHU1.port_b2)
+    annotation (Line(points={{-88,32},{-80,32}}, color={0,127,255}));
+  connect(bou.ports[1], genericAHU1.port_a1)
+    annotation (Line(points={{-88,16},{-80,16}}, color={0,127,255}));
+  connect(x_pTphi.X, bou.X_in) annotation (Line(points={{-107.4,14},{-104,14},{
+          -104,13.6},{-101.2,13.6}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)));
