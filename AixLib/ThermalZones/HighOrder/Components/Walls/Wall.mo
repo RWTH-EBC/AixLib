@@ -81,8 +81,10 @@ model Wall
   // window parameters
   parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
-  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
-   constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
+  replaceable model WindowModel =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+   constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(
      redeclare final model CorrSolGain=CorrSolarGainWin,
      final T0=T0,
      final windowarea=windowarea,
@@ -95,7 +97,8 @@ model Wall
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
-  replaceable model CorrSolarGainWin = WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+  replaceable model CorrSolarGainWin =
+      WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     constrainedby WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab = "Window", enable = withWindow and outside));
 
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
@@ -127,6 +130,7 @@ model Wall
     final energyDynamics=energyDynamics,
     final h=wall_height,
     final l=wall_length,
+    final use_condLayers=use_condLayers,
     final T0=T0,
     final clearance=clearance,
     final wallType=wallPar,
@@ -135,8 +139,6 @@ model Wall
     final hCon_const=hConIn_const,
     final radCalcMethod=radLongCalcMethod,
     final T_ref=T_ref) "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
-    final use_condLayers=use_condLayers)
-                             "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A=ANet) if                                    outside annotation(Placement(transformation(origin={-37.5,90.5},extent={{-10.5,-10.5},{10.5,10.5}})));
   AixLib.Utilities.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
