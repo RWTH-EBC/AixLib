@@ -9,22 +9,26 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.Length d_pool(min=0) "Average depth of swimming pool";
   parameter Modelica.SIunits.Volume V_storage "Usable Volume of water storage, DIN 19643-1";
 
-
   // parameter for pool water circulation
   parameter Modelica.SIunits.VolumeFlowRate V_flow(min=0.001) "Circulation volume flow rate";
-  parameter Modelica.SIunits.VolumeFlowRate V_flow_partial(min=0) "In case of partial load: circulation volume flow rate during non-opening hours, DIN 19643-1";
-  parameter Boolean use_partialLoad=false  "Partial load operation implemented for the non opening hours?";
+  parameter Modelica.SIunits.VolumeFlowRate V_flow_partial(min=0) "In the case of partial load: circulation volume flow rate during non-opening hours, DIN 19643-1";
+  parameter Boolean use_partialLoad=false  "Partial load operation implemented for non opening hours?";
+  parameter Boolean use_idealHeatExchanger=false "Include an ideal heat exchanger into the circulation system";
+
 
   // parameter for evaporation
-  parameter Real beta_inUse(unit="m/s") "Water transfer coefficient during opening hours, VDI 2089";
+  parameter Real beta_inUse(unit="m/s") "Water transfer coefficient during opening hours if pool is used, VDI 2089";
   parameter Boolean use_poolCover=false "Pool covered during non opening hours";
 
 
   // parameter for fresh water
   parameter Boolean use_waterRecycling= false "Recycled water used for refilling pool water?";
-  parameter Real x_recycling(min=0) "Percentage of fill water which comes from the recycling unit, DIN 19643-1: <= 0,8";
-  parameter Modelica.SIunits.MassFlowRate m_flow_out(min=0.0001)
-                                                                "Waterexchange due to people in the pool, DIN 19643-1";
+  parameter Real x_recycling(min=0) "Percentage of refilling water provided by recycled  pool water, DIN 19643-1: <= 0,8";
+  parameter Modelica.SIunits.MassFlowRate m_flow_out(min=0.0001) "Waterexchange due to people in the pool, DIN 19643-1";
+  parameter Boolean use_HRS=false "Is a heat recovery system physically integrated?";
+  parameter Modelica.SIunits.Efficiency efficiencyHRS "Effieciency of heat recovery system";
+
+
  // Wave mode
   parameter Boolean use_wavePool=false "Is there a wave machine installed?";
   parameter Modelica.SIunits.Length h_wave=0 "Height of generatedwave";
