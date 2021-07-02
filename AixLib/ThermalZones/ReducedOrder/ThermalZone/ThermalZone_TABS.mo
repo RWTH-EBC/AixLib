@@ -808,6 +808,9 @@ equation
     annotation (Line(points={{82,93},{82,98},{110,98}}, color={0,0,127}));
   connect(ROM.TOpe, tabsHeaterCoolerController.TOpe) annotation (Line(points={{
           82,93},{82,98},{88,98},{88,24.56},{83.14,24.56}}, color={0,0,127}));
+  connect(heaterCoolerWithTabs6007C1.heatOrCool, ROM.heatingOrCooling)
+    annotation (Line(points={{82.65,38.6},{66.325,38.6},{66.325,54},{51.2,54}},
+        color={255,0,255}));
   annotation (Documentation(revisions="<html>
 <ul>
 <li>November 20, 2020, by Katharina Breuer:<br>Combine thermal zone models</li>

@@ -353,7 +353,8 @@ model HeaterCoolerWithTabs6007C1
   or (not recOrSep and not floor_on and radiator_on and not tabs_on)
   or (not recOrSep and floor_on and not radiator_on and not tabs_on)) then 1
   else 0) if
-       ((recOrSep and zoneParam.heating) or (not recOrSep and heating_on)) annotation (Placement(transformation(extent={{122,24},{134,36}})));
+       ((recOrSep and zoneParam.heating) or (not recOrSep and heating_on)) annotation (Placement(transformation(extent={{120,24},
+            {132,36}})));
   Modelica.Blocks.Math.Sum sumCooling(nin=
   if
   ((recOrSep and zoneParam.floor and zoneParam.radiator and zoneParam.tabs)
@@ -373,7 +374,8 @@ model HeaterCoolerWithTabs6007C1
   or (not recOrSep and not floor_on and radiator_on and not tabs_on)
   or (not recOrSep and floor_on and not radiator_on and not tabs_on)) then 1
   else 0) if
-       ((recOrSep and zoneParam.cooling) or (not recOrSep and cooling_on)) annotation (Placement(transformation(extent={{122,-36},{134,-24}})));
+       ((recOrSep and zoneParam.cooling) or (not recOrSep and cooling_on)) annotation (Placement(transformation(extent={{120,-36},
+            {132,-24}})));
 
   // TABS Controller
 
@@ -392,6 +394,37 @@ model HeaterCoolerWithTabs6007C1
   tabsPlusAirController tabsPlusAirController1 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on))
     "if TABS cooling is active, air heating is set to inactive and if TABS heating is active, air cooling is set to inactive";
 
+  Modelica.Blocks.Interfaces.BooleanOutput heatOrCool if ((recOrSep and
+    zoneParam.heating) or (recOrSep and zoneParam.cooling) or (not recOrSep
+     and heating_on) or (not recOrSep and cooling_on))
+    "true if heating last active, false if cooling last active" annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={136,110})));
+  heatTransferSwitcher heatTransferCoeffSwitcher if ((recOrSep and zoneParam.heating
+     and zoneParam.cooling) or (not recOrSep and heating_on and cooling_on))
+    "if heating and cooling system is installed this block outputs which system was last active"
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={136,74})));
+  Modelica.Blocks.Sources.BooleanConstant onlyHeating(k=true) if (recOrSep and
+    zoneParam.heating and not zoneParam.cooling) or (not recOrSep and
+    heating_on and not cooling_on)
+    "Outputs true if only heating system is installed" annotation (Placement(
+        transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={121,73})));
+  Modelica.Blocks.Sources.BooleanConstant onlyCooling(k=false) if (recOrSep
+     and not zoneParam.heating and zoneParam.cooling) or (not recOrSep and not
+    heating_on and cooling_on)
+    "Outputs false if only cooling system is installed" annotation (Placement(
+        transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={151,73})));
 equation
 
   connect(TAir, calcTOpe.TAir) annotation (Line(points={{-150,100},{-150,78},{-139.2,
@@ -531,32 +564,34 @@ equation
           {80,-28},{60,-28},{60,-37.2}}, color={0,0,127}));
   connect(pITempCoolRem.y, gainCConv.u) annotation (Line(points={{68,-14},{80,-14},{80,-37.2}}, color={0,0,127}));
 
-  connect(sumHeating.y, heatingPower) annotation (Line(points={{134.6,30},{160,30}}, color={0,0,127}));
-  connect(sumCooling.y, coolingPower) annotation (Line(points={{134.6,-30},{160,-30}}, color={0,0,127}));
+  connect(sumHeating.y, heatingPower) annotation (Line(points={{132.6,30},{160,30}}, color={0,0,127}));
+  connect(sumCooling.y, coolingPower) annotation (Line(points={{132.6,-30},{160,
+          -30}},                                                                       color={0,0,127}));
 
   if ((recOrSep and zoneParam.floor and zoneParam.radiator and zoneParam.tabs)
   or (not recOrSep and floor_on and radiator_on and tabs_on)) then
   connect(pITempHeatPanel.y, sumHeating.u[3]) annotation (Line(
-      points={{18,14},{112,14},{112,30},{120.8,30}},
+      points={{18,14},{112,14},{112,30},{118.8,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(pITempHeatRem.y, sumHeating.u[2]) annotation (Line(
-      points={{68,14},{112,14},{112,30},{120.8,30}},
+      points={{68,14},{112,14},{112,30},{118.8,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(tabsHeatingPower, sumHeating.u[1]) annotation (Line(points={{-90,100},
-            {-90,14},{112,14},{112,30},{120.8,30}},         color={0,0,127},
+            {-90,14},{112,14},{112,30},{118.8,30}},         color={0,0,127},
         pattern=LinePattern.Dash));
   connect(pITempCoolPanel.y, sumCooling.u[3]) annotation (Line(
-      points={{18,-14},{112,-14},{112,-30},{120.8,-30}},
+      points={{18,-14},{112,-14},{112,-30},{118.8,-30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(pITempCoolRem.y, sumCooling.u[2]) annotation (Line(
-      points={{68,-14},{112,-14},{112,-30},{120.8,-30}},
+      points={{68,-14},{112,-14},{112,-30},{118.8,-30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(tabsCoolingPower, sumCooling.u[1]) annotation (Line(points={{-64,100},
-          {-64,-14},{112,-14},{112,-30},{120.8,-30}}, color={0,0,127},
+            {-64,-14},{112,-14},{112,-30},{118.8,-30}},
+                                                      color={0,0,127},
         pattern=LinePattern.Dash));
   elseif ((recOrSep and zoneParam.floor and not zoneParam.radiator and zoneParam.tabs)
   or (not recOrSep and floor_on and not radiator_on and tabs_on)) then
@@ -600,6 +635,19 @@ equation
           -90,32},{-2.22045e-16,32},{-2.22045e-16,39.2}},
                                         color={0,0,127}));
 
+  if (recOrSep and zoneParam.heating and zoneParam.cooling) or (not recOrSep and heating_on and cooling_on) then
+  connect(sumHeating.y, heatTransferCoeffSwitcher.pHeating) annotation (Line(
+        points={{132.6,30},{134,30},{134,66.8},{133.6,66.8}}, color={0,0,127}));
+  connect(sumCooling.y, heatTransferCoeffSwitcher.pCooling) annotation (Line(
+        points={{132.6,-30},{138.4,-30},{138.4,66.8}}, color={0,0,127}));
+  connect(heatTransferCoeffSwitcher.heatingOrCooling, heatOrCool) annotation (Line(points={{136,80.6},{136,110}}, color={255,0,255}));
+  elseif (recOrSep and zoneParam.heating and not zoneParam.cooling) or (not recOrSep and heating_on and not cooling_on) then
+  connect(onlyHeating.y, heatOrCool) annotation (Line(points={{121,78.5},{121,90.25},
+          {136,90.25},{136,110}}, color={255,0,255}));
+  elseif (recOrSep and not zoneParam.heating and zoneParam.cooling) or (not recOrSep and not heating_on and cooling_on) then
+  connect(onlyCooling.y, heatOrCool) annotation (Line(points={{151,78.5},{151,91.25},
+          {136,91.25},{136,110}}, color={255,0,255}));
+  end if;
   annotation (Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

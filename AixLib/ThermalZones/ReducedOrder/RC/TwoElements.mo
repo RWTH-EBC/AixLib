@@ -5,7 +5,10 @@ model TwoElements
 
   parameter Modelica.SIunits.Area AInt "Area of interior walls"
     annotation(Dialog(group="Interior walls"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIntHeat
+    "Convective coefficient of heat transfer of interior walls (indoor)"
+    annotation(Dialog(group="Interior walls"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIntCool
     "Convective coefficient of heat transfer of interior walls (indoor)"
     annotation(Dialog(group="Interior walls"));
   parameter Integer nInt(min = 1) "Number of RC-elements of interior walls"
@@ -84,17 +87,31 @@ model TwoElements
     weighted by their area"
     annotation (Placement(transformation(extent={{226,-190},{206,-170}})));
 
+  Modelica.Blocks.Logical.Switch switch_hConInt if AInt > 0
+    "switches between of convective heat transfer coefficient for heating or cooling"
+    annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=90,
+        origin={138,-58})));
 protected
   Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0)) if
                                                                      AInt > 0
     "Convective heat transfer of interior walls"
     annotation (Placement(transformation(extent={{148,-30},{128,-50}})));
-  Modelica.Blocks.Sources.Constant hConIntWall(k=AInt*hConInt) if AInt > 0
-    "Coefficient of convective heat transfer for interior walls"
-    annotation (Placement(transformation(
-      extent={{5,-5},{-5,5}},
-      rotation=-90,
-      origin={138,-61})));
+  Modelica.Blocks.Sources.Constant hConIntWall_Heat(k=AInt*hConIntHeat) if
+                                                                  AInt > 0
+    "Coefficient of convective heat transfer for interior walls" annotation (
+      Placement(transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=-90,
+        origin={126,-75})));
+  Modelica.Blocks.Sources.Constant hConIntWall_Cool(k=AInt*hConIntCool) if
+                                                                  AInt > 0
+    "Coefficient of convective heat transfer for interior walls" annotation (
+      Placement(transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=-90,
+        origin={150,-75})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallIntWall(
     final G=min(ATotExt, AInt)*hRad, dT(start=0)) if
                                              ATotExt > 0 and AInt > 0
@@ -105,7 +122,6 @@ protected
                                              ATotWin > 0 and AInt > 0
     "Resistor between interior walls and windows"
     annotation (Placement(transformation(extent={{74,-118},{94,-98}})));
-
 equation
   connect(resExtWallIntWall.port_a, convExtWall.solid)
     annotation (Line(
@@ -151,9 +167,6 @@ equation
     {-116,40}},
     color={191,0,0},
     smooth=Smooth.None));
-  connect(hConIntWall.y, convIntWall.Gc)
-    annotation (Line(points={{138,-55.5},{138,-50},{138,-50}},
-                                                         color={0,0,127}));
   connect(intWallRC.port_a, intWallIndoorSurface)
     annotation (Line(points={{182,-40},{168,-40},{168,-80},{-120,-80},{-120,
           -180}},
@@ -216,6 +229,15 @@ equation
     connect(thermSplitterHkRad.portOut[1], convIntWall.solid);
   end if;
 
+  connect(heatingOrCooling, switch_hConInt.u2) annotation (Line(points={{-108,-200},
+          {12,-200},{12,-62.8},{138,-62.8}}, color={255,0,255}));
+  connect(hConIntWall_Heat.y, switch_hConInt.u1) annotation (Line(points={{126,-69.5},
+          {128,-69.5},{128,-62.8},{134.8,-62.8}}, color={0,0,127}));
+  connect(hConIntWall_Cool.y, switch_hConInt.u3) annotation (Line(points={{150,-69.5},
+          {146,-69.5},{146,-70},{142,-70},{142,-62.8},{141.2,-62.8}}, color={0,0,
+          127}));
+  connect(switch_hConInt.y, convIntWall.Gc) annotation (Line(points={{138,-53.6},
+          {137.5,-53.6},{137.5,-50},{138,-50}}, color={0,0,127}));
    annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}}), graphics={
   Polygon(

@@ -23,13 +23,15 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real ratioWinConRad
     "Ratio for windows between convective and radiative heat emission";
   parameter Modelica.SIunits.Area AExt[nOrientations] "Areas of exterior walls by orientations";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt "Convective coefficient of heat transfer for exterior walls (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExtHeat "Convective coefficient of heat transfer for exterior walls (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExtCool "Convective coefficient of heat transfer for exterior walls (indoor)";
   parameter Integer nExt(min=1) "Number of RC-elements of exterior walls";
   parameter Modelica.SIunits.ThermalResistance RExt[nExt] "Resistances of exterior walls, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RExtRem "Resistance of remaining resistor RExtRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CExt[nExt] "Heat capacities of exterior walls, from inside to outside";
   parameter Modelica.SIunits.Area AInt "Area of interior walls";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt "Convective coefficient of heat transfer of interior walls (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIntHeat "Convective coefficient of heat transfer of interior walls (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIntCool "Convective coefficient of heat transfer of interior walls (indoor)";
   parameter Integer nInt(min=1) "Number of RC-elements of interior walls";
   parameter Modelica.SIunits.ThermalResistance RInt[nInt] "Resistances of interior wall, from port to center";
   parameter Modelica.SIunits.HeatCapacity CInt[nInt] "Heat capacities of interior walls, from port to center";

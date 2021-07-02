@@ -35,7 +35,10 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Modelica.SIunits.Area AExt[nOrientations]
     "Vector of areas of exterior walls by orientations"
     annotation(Dialog(group="Exterior walls"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExtHeat
+    "Convective coefficient of heat transfer of exterior walls (indoor)"
+    annotation(Dialog(group="Exterior walls"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExtCool
     "Convective coefficient of heat transfer of exterior walls (indoor)"
     annotation(Dialog(group="Exterior walls"));
   parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls"
@@ -211,6 +214,17 @@ model OneElement "Thermal Zone with one element for exterior walls"
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={200,170})));
+  Modelica.Blocks.Logical.Switch switch_hConExt if ATotExt > 0
+    "switches between of convective heat transfer coefficient for heating or cooling"
+    annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=90,
+        origin={-104,-58})));
+  Modelica.Blocks.Interfaces.BooleanInput heatingOrCooling if ATot > 0
+    "true if heating active" annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={-108,-200})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
@@ -233,13 +247,20 @@ protected
                                                                      ATotExt > 0
     "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-114,-30},{-94,-50}})));
-  Modelica.Blocks.Sources.Constant hConExtWall_const(
-  final k=ATotExt*hConExt) if ATotExt > 0
-    "Coefficient of convective heat transfer for exterior walls"
-    annotation (Placement(transformation(
-    extent={{5,-5},{-5,5}},
-    rotation=-90,
-    origin={-104,-61})));
+  Modelica.Blocks.Sources.Constant hConExtWall_Heat_const(final k=ATotExt*
+        hConExtHeat) if       ATotExt > 0
+    "Coefficient of convective heat transfer for exterior walls" annotation (
+      Placement(transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=-90,
+        origin={-116,-69})));
+  Modelica.Blocks.Sources.Constant hConExtWall_Cool_const(final k=ATotExt*
+        hConExtCool) if       ATotExt > 0
+    "Coefficient of convective heat transfer for exterior walls" annotation (
+      Placement(transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=-90,
+        origin={-92,-69})));
   Modelica.Thermal.HeatTransfer.Components.Convection convWin if ATotWin > 0
     "Convective heat transfer of windows"
     annotation (Placement(transformation(extent={{-116,30},{-96,50}})));
@@ -377,9 +398,6 @@ equation
   connect(hConWin_const.y, convWin.Gc)
     annotation (Line(points={{-106,61.4},{-106,50},{-106,50}},
     color={0,0,127}));
-  connect(hConExtWall_const.y, convExtWall.Gc)
-    annotation (Line(points={{-104,-55.5},{-104,-22},{-104,-22},{-104,-50}},
-    color={0,0,127}));
   connect(convExtWall.fluid, senTAir.port)
     annotation (Line(points={{-94,-40},{66,-40},{66,0},{80,0}},
     color={191,0,0}));
@@ -452,6 +470,14 @@ equation
           {198,164},{198.2,164}}, color={0,0,127}));
   connect(senTAir.T, calcTOpe.TAir) annotation (Line(points={{100,0},{108,0},{
           108,160},{202,160},{202,164},{201.92,164}}, color={0,0,127}));
+  connect(heatingOrCooling, switch_hConExt.u2) annotation (Line(points={{-108,-200},
+          {-108,-62.8},{-104,-62.8}}, color={255,0,255}));
+  connect(switch_hConExt.y, convExtWall.Gc)
+    annotation (Line(points={{-104,-53.6},{-104,-50}}, color={0,0,127}));
+  connect(hConExtWall_Heat_const.y, switch_hConExt.u1) annotation (Line(points={
+          {-116,-63.5},{-106,-63.5},{-106,-62.8},{-107.2,-62.8}}, color={0,0,127}));
+  connect(hConExtWall_Cool_const.y, switch_hConExt.u3) annotation (Line(points={
+          {-92,-63.5},{-100,-63.5},{-100,-62.8},{-100.8,-62.8}}, color={0,0,127}));
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
