@@ -13,7 +13,7 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.VolumeFlowRate V_flow(min=0.001) "Circulation volume flow rate";
   parameter Modelica.SIunits.VolumeFlowRate V_flow_partial(min=0) "In the case of partial load: circulation volume flow rate during non-opening hours, DIN 19643-1";
   parameter Boolean use_partialLoad=false  "Partial load operation implemented for non opening hours?";
-  parameter Boolean use_idealHeatExchanger=false "Include an ideal heat exchanger into the circulation system";
+  parameter Boolean use_idealHeatExchanger=true "Include an ideal heat exchanger into the circulation system";
 
 
   // parameter for evaporation
@@ -34,36 +34,20 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.Length h_wave=0 "Height of generatedwave";
   parameter Modelica.SIunits.Length w_wave=0 "Width of generated wave/ width of wave machine outlet";
 
- // Exterior Pool Wall - with earth contact - only vertical
-  parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls with earth contact";
-  parameter Modelica.SIunits.ThermalResistance RExt[nExt](
-    each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b exterior wall with earth contact";
-  parameter Modelica.SIunits.ThermalResistance RExtRem(
-    min=Modelica.Constants.small) "Resistance of remaining resistor RExtRem between capacitor n and port_b, exterior wall with earth contact";
-  parameter Modelica.SIunits.HeatCapacity CExt[nExt](
-    each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, exterior wall with earth contact";
-  parameter Modelica.SIunits.Area AExt(min=0) "Area of exterior pool wall with earth contact";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt "Coefficient of heat transfer between the water and exterior pool walls";
+ // Pool Walls
+  parameter Modelica.SIunits.Area AInnerPoolWall(min=0.001);
+  parameter Modelica.SIunits.Area APoolWallWithEarthContact(min=0.001);
+  parameter Modelica.SIunits.Area APoolFloorWithEarthContact(min=0.001);
+  parameter Modelica.SIunits.Area AInnerPoolFloor(min=0.001);
 
-  // Interior Pool Walls - vertical and horizontal combined
-  parameter Integer nInt(min=1) "Number of RC elements of interior walls";
-  parameter Modelica.SIunits.ThermalResistance RInt[nInt](
-    each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b, interior wall";
-  parameter Modelica.SIunits.HeatCapacity CInt[nInt](
-    each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, interior wall";
-  parameter Modelica.SIunits.Area AInt(min=0) "Area of interior pool walls ";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt "Coefficient of heat transfer between the water and interior pool walls";
+  parameter Integer nPoolWall(min=1) "Number of Layers";
+  parameter Modelica.SIunits.Thickness dPool[nPoolWall];
+  parameter Modelica.SIunits.Density rhoPool[nPoolWall];
+  parameter Modelica.SIunits.ThermalConductivity lambdaPool[nPoolWall];
+  parameter Modelica.SIunits.SpecificHeatCapacity cPool[nPoolWall];
 
-  // Pool Floor with earth contact
-  parameter Integer nFloor(min = 1) "Number of RC-elements of pool floor with earth contact";
-  parameter Modelica.SIunits.ThermalResistance RFloor [nFloor](
-    each min=Modelica.Constants.small) "Vector of resistors, from port_a to port_b, pool floor with earth contact";
-  parameter Modelica.SIunits.ThermalResistance RFloorRem(
-    min=Modelica.Constants.small) "Resistance of remaining resistor RFloorRem between capacitor n and port_b, pool floor with earth contact";
-  parameter Modelica.SIunits.HeatCapacity CFloor[nFloor](
-    each min=Modelica.Constants.small) "Vector of heat capacities, from port_a to port_b, pool floor, pool floor with earth contact";
-  parameter Modelica.SIunits.Area AFloor(min=0) "Area of pool floor with earth contact";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConFloor "Coefficient of heat transfer between the water and pool floor";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWaterHorizontal;
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWaterVertical;
 
 
 
