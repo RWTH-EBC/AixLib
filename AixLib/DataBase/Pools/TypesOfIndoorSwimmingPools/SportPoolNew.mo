@@ -26,7 +26,7 @@ record SportPoolNew "Pool which is mainly used by sport swimmers"
     APoolWallWithEarthContact = 143.32,
     APoolFloorWithEarthContact = 559.82,
     AInnerPoolFloor = 0.001,
-    nPool = 6,
+    nPoolWall = 6,
     dPool = {0.05,0.002,0.05,0.2,0.002,0.1},
     rhoPool = {250,900,250,2104.2,900,30},
     lambdaPool = {1.4,0.35,1.4,1.94,0.35,0.041},
