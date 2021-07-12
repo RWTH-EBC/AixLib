@@ -1,21 +1,34 @@
 within AixLib.ThermalZones.HighOrder.Components.DryAir;
 model Airload "Air volume"
-  parameter Modelica.SIunits.Density rho = 1.19 "Density of air";
+
+  extends Modelica.Thermal.HeatTransfer.Components.HeatCapacitor(final C=rho*V*c,
+    final T(
+      stateSelect=StateSelect.always,
+      fixed=(initDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
+      start=T0),
+    final der_T(
+      fixed=(initDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
+      start=0));
+
+  parameter Modelica.Fluid.Types.Dynamics initDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Like energyDynamics, but SteadyState leeds to same behavior as DynamicFreeInitial"
+    annotation(Evaluate=true, Dialog(tab="Initialization"));
+  parameter Modelica.SIunits.Temperature T0
+    "initial temperature" annotation(Dialog(tab="Initialization"));
+
+  parameter Modelica.SIunits.Density rho = 1.19
+    "Density of air";
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1007
     "Specific heat capacity of air";
-  parameter Modelica.SIunits.Volume V = 48.0 "Volume of the room";
-  Modelica.SIunits.Temperature T(start=293.15, nominal=293.15,
-        min=223.15, max=323.15, displayUnit="degC") "Temperature of airload";
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port annotation(Placement(transformation(extent = {{-104, -24}, {-76, 4}}), iconTransformation(extent = {{-100, -30}, {-80, -10}})));
-protected
-  parameter Modelica.SIunits.Mass m = rho * V;
+  parameter Modelica.SIunits.Volume V
+    "Volume of the room";
+
 equation
-  T = port.T;
-  m * c * der(T) = port.Q_flow;
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-28, 14}, {32, -52}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, 16}, {30, -50}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={                                                                                                                                          Rectangle(extent={{-100,100},{100,-100}},   lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-28,34},{32,-32}},      lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={                                                                      Rectangle(extent={{-100,76},{100,-100}},    lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-28,34},{32,-32}},      lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Air")}), Documentation(revisions = "<html><ul>
   <li>
     <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>

@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatPumps;
 model HeatPump
   "Grey-box model for reversible heat pumps using a black-box to simulate the refrigeration cycle"
-  extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine(
+  extends AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine(
   use_rev=true,
   final machineType = true,
   redeclare AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
@@ -136,7 +136,7 @@ model HeatPump
   Using a signal bus as a connector, this heat pump model can be easily
   combined with the new <a href=
   \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a>
-  or several control or security blocks from <a href=
+  or several control or safety blocks from <a href=
   \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>.
   The relevant data is aggregated. In order to control both chillers
   and heat pumps, both flow and return temperature are aggregated. The
