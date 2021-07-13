@@ -202,17 +202,17 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
   Modelica.Blocks.Math.Sum      sumQLat(final nin=nu) if  use_moisture_balance and
     ATot > 0                                   "Sum of all QLat intakes"
     annotation (Placement(transformation(extent={{-224,-126},{-212,-114}})));
-  Fluid.Pools.BaseClasses.toH_fg toH_fg(nu=nu) if use_moisture_balance and ATot > 0
+  EESchwimmModelica.Obsolete.BaseClassesOld.toH_fg toH_fg(nu=nu) if
+                                                  use_moisture_balance and ATot > 0
     "Calculation of specific evaporation enthalpy of the different QLat sources"
     annotation (Placement(transformation(extent={{-222,-102},{-210,-90}})));
 
   Modelica.Blocks.Math.Sum sumM_flow(nin=nu) if     use_moisture_balance and
     ATot > 0 "Sum of different m flow"
     annotation (Placement(transformation(extent={{-182,-100},{-170,-88}})));
-  Fluid.Pools.BaseClasses.DivisionMI2MO
-                            divisionMI2MO(n=nu) if use_moisture_balance and
-    ATot > 0
-    "Dividing QLat by the specific h_fg to calculate mFlow"
+  EESchwimmModelica.Obsolete.BaseClassesOld.DivisionMI2MO divisionMI2MO(n=nu)
+    if                                             use_moisture_balance and
+    ATot > 0 "Dividing QLat by the specific h_fg to calculate mFlow"
     annotation (Placement(transformation(extent={{-198,-100},{-188,-88}})));
   Modelica.Blocks.Interfaces.RealInput T[nu](final unit="K", final quantity="Thermodynamical Temperature") if use_moisture_balance and
     ATot > 0

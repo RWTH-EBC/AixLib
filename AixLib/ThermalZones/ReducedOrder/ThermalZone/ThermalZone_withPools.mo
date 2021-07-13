@@ -407,8 +407,8 @@ public
    final parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]= zoneParam.poolParam[:]
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = use_swimmingPools));
 
-  Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](final poolParam=
-        poolParam) if                                                                       (ATot
+  EESchwimmModelica.Obsolete.IndoorSwimmingPoolOld indoorSwimmingPool[numPools]
+    (final poolParam=poolParam) if                                                          (ATot
      > 0) and use_swimmingPools
     annotation (Placement(transformation(extent={{-68,-86},{-52,-72}})));
 
@@ -519,7 +519,7 @@ equation
           127}));
       connect(indoorSwimmingPool[i].QEvap, ROM.QLat_flow[i + 1]) annotation (
           Line(points={{-51.36,-79.28},{-51.36,-70},{-22,-70},{-22,-62},{-4,-62},
-              {-4,-6},{32,-6},{32,59.6},{37,59.6}},
+              {-4,-6},{32,-6},{32,62},{37,62}},
             color={0,0,127}));
     end for;
     connect(SumPoolWasteWater.y, MFlowWasteWater) annotation (Line(points={{-25.15,
@@ -799,13 +799,11 @@ end if;
 
   if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_AirExchange then
     connect(SumQLat2_flow.y, ROM.QLat_flow[1]) annotation (Line(points={{-26.98,
-            -62},{-4,-62},{-4,4},{32,4},{32,59.6},{37,59.6}},
-                                                            color={0,0,127}));
+            -62},{-4,-62},{-4,4},{32,4},{32,62},{37,62}},   color={0,0,127}));
   end if;
   if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and not use_AirExchange then
     connect(SumQLat1_flow.y, ROM.QLat_flow[1]) annotation (Line(points={{-26.98,
-            -62},{-4,-62},{-4,4},{32,4},{32,59.6},{37,59.6}},
-                                                            color={0,0,127}));
+            -62},{-4,-62},{-4,4},{32,4},{32,62},{37,62}},   color={0,0,127}));
   end if;
   connect(humVolAirROM.y, X_w) annotation (Line(points={{-59.5,-50},{4,-50},{4,-6},
           {96,-6},{96,-86},{112,-86}}, color={0,0,127}));

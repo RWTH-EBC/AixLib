@@ -2,7 +2,7 @@
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
   extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizoneSP;
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
   parameter Boolean heatAHU
     "Status of heating of AHU"
@@ -290,8 +290,9 @@ equation
   connect(airFlowRateSplit.airFlowIn, AirHandlingUnit.Vflow_out) annotation (
       Line(points={{44,20.8},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,31}},
         color={0,0,127}));
-  connect(zone.X_w, X_w) annotation (Line(points={{82.52,51.87},{94,51.87},{94,42},
-          {110,42}}, color={0,0,127}));
+  connect(zone.X_w, X_w) annotation (Line(points={{82.1,55.15},{94,55.15},{94,
+          42},{110,42}},
+                     color={0,0,127}));
   connect(minTemp.y, absToRelHum.TDryBul) annotation (Line(points={{19.5,-28},{-100,
           -28},{-100,72},{-42,72},{-42,78.2},{-37,78.2}}, color={0,0,127}));
   connect(AirHandlingUnit.T_supplyAirOut, relToAbsHum1.TDryBul) annotation (
@@ -302,8 +303,8 @@ equation
   connect(replicatorHumidityVentilation.y, zone.ventHum) annotation (Line(
         points={{65,42.5},{65,44},{30,44},{30,54.945},{39.05,54.945}}, color={0,
           0,127}));
-  connect(zone.X_w, moistSplitter.portIn) annotation (Line(points={{82.52,51.87},
-          {94,51.87},{94,100},{-76,100},{-76,86},{-68,86}},
+  connect(zone.X_w, moistSplitter.portIn) annotation (Line(points={{82.1,55.15},
+          {94,55.15},{94,100},{-76,100},{-76,86},{-68,86}},
                                                           color={0,0,127}));
   connect(moistSplitter.portOut[1], absToRelHum.absHum) annotation (Line(points=
          {{-48,86},{-44,86},{-44,83.6},{-37,83.6}}, color={0,0,127}));
@@ -313,7 +314,7 @@ equation
   connect(absToRelHum.relHum, AirHandlingUnit.phi_extractAir) annotation (Line(
         points={{-25,81},{10,81},{10,44},{18,44},{18,29.5},{12.4,29.5}}, color={
           0,0,127}));
-  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.52,48.59},{82.52,20},
+  connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,51.05},{82.1,20},
           {110,20}},color={0,0,127}));
   if not use_moisture_balance then
   connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)

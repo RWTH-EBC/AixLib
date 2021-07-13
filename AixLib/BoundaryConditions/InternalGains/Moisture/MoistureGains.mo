@@ -7,7 +7,6 @@ model MoistureGains
   parameter Modelica.SIunits.Area roomArea=20 "Area of room";
   parameter Modelica.SIunits.Temperature T= 310.15 "Temperature of moisture source";
 
-
   Modelica.Blocks.Interfaces.RealOutput QLat_flow
     "Latent heat of moisture gain"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

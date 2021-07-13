@@ -10,21 +10,18 @@ model Multizone "Illustrates the use of Multizone"
     ABuilding=8375,
     ASurTot=12744.27,
     numZones=5,
-    zoneParam={
-        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
-        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
-        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
-        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
-        Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle()},
-    redeclare package Medium = AixLib.Media.Air,
+    zoneParam={AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
     T_start=293.15,
-    use_swimmingPools_MZ=true,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
     internalGainsMode=1)
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
-
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
     weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -137,7 +134,7 @@ equation
           -55},{36.8,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=315360, Interval=3600),
+    experiment(StopTime=3.1536e+007, Interval=3600),
     Documentation(info="<html><p>
   This example illustrates the use of <a href=
   \"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>.

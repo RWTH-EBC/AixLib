@@ -82,7 +82,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.SIunits.HeatFlux lightingPowerSpecific "Heat flux of lighting";
   parameter Real ratioConvectiveHeatLighting
     "Ratio of convective heat from overall heat output for lights";
-  parameter Boolean useConstantACHrate=true
+  parameter Boolean useConstantACHrate
     "Choose if a constant infiltration rate is used";
   parameter Real baseACH "Base ACH rate for ventilation controller";
   parameter Real maxUserACH "Additional ACH value for max. user activity";
@@ -110,8 +110,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real KRCool "Gain of the controller";
   parameter Modelica.SIunits.Time TNCool
     "Time constant of the controller";
-  parameter Boolean CoolerOn=true
-                             "Use chiller component";
+  parameter Boolean CoolerOn "Use chiller component";
   parameter Modelica.SIunits.Temperature TThresholdHeater
     "Threshold temperature below ideal heater is used";
   parameter Modelica.SIunits.Temperature TThresholdCooler
@@ -122,8 +121,8 @@ record ZoneBaseRecord "Base record definition for zone records"
 
   // Add for Pools
    parameter Boolean use_swimmingPools=false;
-   parameter Integer numPools( min=1);
-   replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]
+   parameter Integer numPools(min=1);
+   replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools]
                                                                                          annotation (choicesAllMatching=false);
 
 
