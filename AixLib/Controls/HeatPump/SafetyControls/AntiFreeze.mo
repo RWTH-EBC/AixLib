@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 model AntiFreeze "Model to prevent source from freezing"
   extends BaseClasses.PartialSafetyControl;
 

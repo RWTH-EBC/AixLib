@@ -15,7 +15,8 @@ model SolarRadInRoom
 
   replaceable parameter
     ThermalZones.HighOrder.Components.Types.PartialCoeffTable staticCoeffTable
-    constrainedby AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable
+    constrainedby
+    AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable
     "Record holding the values to reproduce the tables"
     annotation (Dialog(group="Static Calculation", enable=not use_dynamicMethod),
                                                                        choicesAllMatching=true,

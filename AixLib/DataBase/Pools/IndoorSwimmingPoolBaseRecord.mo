@@ -39,15 +39,9 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.Area APoolWallWithEarthContact(min=0.001);
   parameter Modelica.SIunits.Area APoolFloorWithEarthContact(min=0.001);
   parameter Modelica.SIunits.Area AInnerPoolFloor(min=0.001);
-
-  parameter Integer nPoolWall(min=1) "Number of Layers";
-  parameter Modelica.SIunits.Thickness dPool[nPoolWall];
-  parameter Modelica.SIunits.Density rhoPool[nPoolWall];
-  parameter Modelica.SIunits.ThermalConductivity lambdaPool[nPoolWall];
-  parameter Modelica.SIunits.SpecificHeatCapacity cPool[nPoolWall];
-
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWaterHorizontal;
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWaterVertical;
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam;
 
 
 

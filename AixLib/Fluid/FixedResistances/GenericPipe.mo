@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model GenericPipe
   "Pipe model that includes several selectable pipe models"
 

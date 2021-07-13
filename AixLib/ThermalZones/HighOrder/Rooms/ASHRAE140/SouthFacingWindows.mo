@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140;
 model SouthFacingWindows "windows facing south"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(
-    redeclare replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
+    redeclare replaceable model WindowModel =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
       redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls
       wallTypes(
@@ -40,7 +41,8 @@ model SouthFacingWindows "windows facing south"
     annotation(Dialog(tab = "Short wave radiation"));
 
   replaceable parameter AixLib.ThermalZones.HighOrder.Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions
-    constrainedby AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+    constrainedby
+    AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable(              final abs=absInnerWallSurf)
     "Tables of solar distribution fractions"
     annotation (Dialog(tab = "Short wave radiation", enable=not use_dynamicShortWaveRadMethod), choicesAllMatching=true, Placement(transformation(extent={{78,78},{98,98}})));
 

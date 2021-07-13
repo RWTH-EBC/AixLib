@@ -26,26 +26,11 @@ record SportPool "Pool which is mainly used by sport swimmers"
     APoolWallWithEarthContact = 143.32,
     APoolFloorWithEarthContact = 559.82,
     AInnerPoolFloor = 0.001,
-    nPoolWall = 6,
-    dPool = {0.05,0.002,0.05,0.2,0.002,0.1},
-    rhoPool = {250,900,250,2104.2,900,30},
-    lambdaPool = {1.4,0.35,1.4,1.94,0.35,0.041},
-    cPool = {2000,2300,2000,780,2300,1380},
     hConWaterHorizontal = 50.0,
-    hConWaterVertical = 5200.0);
+    hConWaterVertical = 5200.0,
+    PoolWallParam = AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteConstruction());
 
   annotation (Documentation(info="<html>
-
-  This is the base definition of indoor swimming pool records used in <a href=
-  \"AixLib.Fluid.Pools.IndoorSwimmingPool\">AixLib.Fluid.Pools.IndoorSwimmingPool</a>.
-  It aggregates all parameters at one record to enhance usability,
-  exchanging entire datasets and automatic generation of these
-  datasets.
-<h4>References </h4>
-<ul>
-<li>German Association of Engineers: Guideline VDI 2089-1, January 2010: Building Services in swimming baths - Indoor Pools</li>
-<li>German Institute for Standardization DIN 19643-1, November 2012: Treatment of water of swimming pools and baths - Part 1 General Requirements</li>
-<li>Chroistoph Saunus, 2005: Schwimmb&auml;der Planung - Ausf&uuml;hrung - Betrieb</li>
-</ul>
+<p>The swimming pool &quot;SportPool&quot; describes a typical indoor swimming pool, which is mainly used for sport swimming. </p>
 </html>"));
 end SportPool;

@@ -7,9 +7,11 @@ partial model PartialWindow "Partial model for windows"
   parameter Modelica.SIunits.Area windowarea "Total fenestration area";
   parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature";
 
-  replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window record / type" annotation (Dialog(group="Window type", descriptionLabel=true), choicesAllMatching=true);
+  replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType constrainedby
+    DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple                                                                                                       "Window record / type" annotation (Dialog(group="Window type", descriptionLabel=true), choicesAllMatching=true);
 
-  replaceable model CorrSolGain = CorrectionSolarGain.PartialCorG constrainedby CorrectionSolarGain.PartialCorG(
+  replaceable model CorrSolGain = CorrectionSolarGain.PartialCorG constrainedby
+    CorrectionSolarGain.PartialCorG(
     final n=1,
     final Uw=WindowType.Uw,
     final g=WindowType.g) "Class / Model for correction of transimtted solar irradiance (shortwave radiation) through window" annotation (choicesAllMatching=true);

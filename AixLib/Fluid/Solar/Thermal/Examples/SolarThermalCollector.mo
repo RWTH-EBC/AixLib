@@ -3,8 +3,8 @@ model SolarThermalCollector
   "Example to demonstrate the function of the solar thermal collector model"
   extends Modelica.Icons.Example;
 
-  replaceable package Medium = AixLib.Media.Water constrainedby Modelica.Media.Interfaces.PartialMedium
-                                            "Medium model";
+  replaceable package Medium = AixLib.Media.Water constrainedby
+    Modelica.Media.Interfaces.PartialMedium "Medium model";
 
   Sources.Boundary_pT                source(
     nPorts=1,

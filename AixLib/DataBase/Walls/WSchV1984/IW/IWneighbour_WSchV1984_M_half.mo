@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.WSchV1984.IW;
+﻿within AixLib.DataBase.Walls.WSchV1984.IW;
 record IWneighbour_WSchV1984_M_half
   "Inner wall towards neighbour after WSchV1984, for building of type S (mitel), only half"
   extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.175, 0.015}
