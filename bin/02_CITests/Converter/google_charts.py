@@ -9,15 +9,13 @@ from shutil import copyfile
 import shutil
 import pathlib
 import glob
-import gviz_api
-from matplotlib.pyplot import figure
-import mpld3
+import pandas as pd
+import argparse
+
 # get datas and create a line chart
 
 
-def read_data():
-	ref_file = "bin"+os.sep+"02_CITests"+os.sep+"Converter"+os.sep+"IBPSA_Airflow_Multizone_Examples_CO2TransportStep.txt"
-	Entire = 0
+def read_data(ref_file):
 	## Lists
 	Value_List= []
 	time_List =[]
@@ -34,7 +32,6 @@ def read_data():
 		if len(values) < 2:
 			continue
 		legend = values[0]
-		#print(legend)
 		numbers = values[1]
 		#print(numbers)
 		if legend.find("time") > -1 :
@@ -43,6 +40,7 @@ def read_data():
 		distriction_values[legend] = numbers
 		Value_List.append(legend)
 		continue
+
 	for i in Value_List:
 		y = distriction_values.get(i)
 		y = y.split(",")
@@ -52,33 +50,39 @@ def read_data():
 			v = v.replace("\n","")
 			v = v.replace("'","")
 			v = v.lstrip()
-			v = float(v)
+			#v = float(v)
 			Y_Axis.append(v)
 	
 	x = distriction_time.get("time")
-	x = x.replace("[","")
-	x = x.replace("]","")
-	x = x.replace("\n","")		
-	x = x.replace("'","")
-	x = x.lstrip()
-	x = x.split(",")
-	
+	if x is None:
+		return distriction_values, distriction_time, Value_List, X_Axis, ref_file
+	else:
+		x = x.replace("[","")
+		x = x.replace("]","")
+		x = x.replace("\n","")
+		x = x.replace("'","")
+		x = x.lstrip()
+		x = x.split(",")
+
 	time_end = float((x[len(x)-1]))
 	time_beg = float((x[0]))
 	time_int = time_end -  time_beg
-	tim_seq = time_int/ (float(len(Y_Axis))/float(len(Value_List)))
-	
-	num_times = time_beg
-	times_list = []
-	t = ((float(len(Y_Axis))/float(len(Value_List))))
-	i = 0
-	while (i) < t:
-		times_list.append(num_times)
-		num_times = num_times + tim_seq
-		i = i +1
-	X_Axis = times_list
-	
-	return  distriction_values, distriction_time, Value_List,X_Axis,ref_file
+	if len(Value_List)==0:
+		return distriction_values, distriction_time, Value_List, X_Axis, ref_file
+	else:
+		tim_seq = time_int/ (float(len(Y_Axis))/float(len(Value_List)))
+
+		num_times = time_beg
+		times_list = []
+		t = ((float(len(Y_Axis))/float(len(Value_List))))
+		i = 0
+		while (i) < t:
+			times_list.append(num_times)
+			num_times = num_times + tim_seq
+			i = i +1
+		X_Axis = times_list
+
+		return  distriction_values, distriction_time, Value_List,X_Axis,ref_file
 	
 	
 	
@@ -359,175 +363,498 @@ def usageString():
 
 
 
+def read_unitTest_log(f_log):
+	path = "AixLib"+os.sep+"funnel_comp"
+	log = open(f_log,"r")
+	lines = log.readlines()
+	var_dic = {}
+	var_list = []
+	path_list = []
+	for i in lines:
 
-def main():
-	# Creating the data
-	description = {"name": ("string", "Name"),
-					 "salary": ("number", "Salary"),
-					 "full_time": ("boolean", "Full Time Employee")}
-	data = [{"name": "Mike", "salary": (10000, "$10,000"), "full_time": True},
-			  {"name": "Jim", "salary": (800, "$800"), "full_time": False},
-			  {"name": "Alice", "salary": (12500, "$12,500"), "full_time": True},
-			  {"name": "Bob", "salary": (7000, "$7,000"), "full_time": True}]
+		if  i.find("*** Warning:") >-1 :
+			if i.find(".mat")> -1 :
+				model = (i[i.find(("Warning:"))+9:i.find(".mat")])
+				var = (i[i.find((".mat:"))+5:i.find("exceeds ")])
+				var = var.lstrip()
+				var_dic[model] = var 
+				path_list.append(path+os.sep+model+".mat_"+var)
+				var_list.append(var)
+				#print(i[i.find(("*** Warning"):i.find(".mat"))])
 
-	# Loading it into gviz_api.DataTable
-	data_table = gviz_api.DataTable(description)
-	data_table.LoadData(data)
+	return var_dic, path_list, var_list
+	
+def sort_mo_var(dic):
+	ref_path = "AixLib"+os.sep+"Resources"+os.sep+"ReferenceResults"+os.sep+"Dymola"
+	mo_list = []
+	var_mod_dic = {}
 
-	# Create a JavaScript code string.
-	jscode = data_table.ToJSCode("jscode_data",
-								   columns_order=("name", "salary", "full_time"),
-								   order_by="salary")
-	# Create a JSON string.
-	json = data_table.ToJSon(columns_order=("name", "salary", "full_time"),
-							   order_by="salary")
+	for i in dic:
+		mo_list.append(i)
+	for file in os.listdir(ref_path):
+		for l in mo_list:
+			if file.find(l)>-1:
+				var_mod_dic[ref_path+os.sep+file] = dic[l]
+	return  var_mod_dic
 
-	# Put the JS code and JSON string into the template.
-	#print("Content-type: text/html")
-	  
-	#print( page_template % vars())
-	ref_file = "bin"+os.sep+"02_CITests"+os.sep+"Converter"+os.sep+"index.html"
-	file = open(ref_file,"w")
-	file.write(page_template % vars())
+def read_csv_funnel(url,csv_file, test_csv):
+	# Parameter
+	csv_file = url.strip()+os.sep+csv_file
+	test_csv = url.strip()+os.sep+test_csv
+	try:
+		var_model = pd.read_csv(csv_file)
+		var_test = pd.read_csv(test_csv)
+		temps = var_model[['x','y']]
+		d = temps.values.tolist()
+		c = temps.columns.tolist()
+		test_tmp = var_test[['x','y']]
+		e = test_tmp.values.tolist()
+		e_list = []
+		for i in range(0,len(e)):
+			e_list.append((e[i][1]))
+
+		result = zip(d,e_list)
+		result_set = list(result)
+		value_list = []
+		for i in result_set:
+			i = str(i)
+			i = i.replace("(", "")
+			i = i.replace("[", "")
+			i = i.replace("]", "")
+			i = i.replace(")", "")
+			value_list.append("[" + i + "]")
+		return value_list
+	
+	except pd.errors.EmptyDataError:
+		print(csv_file + "is empty")
+
+
+def mako_line_html_chart(data,temp,temp_chart,f_log,csv_file,test_csv):
+	from mako.template import Template
+	green = "\033[0;32m"
+	CRED = '\033[91m'
+	CEND = '\033[0m'
+	if os.path.isdir(temp_chart) is False:
+		os.mkdir(temp_chart)
+
+	for i in data[0]:
+		model_name = i
+		path_name = "AixLib"+os.sep+"funnel_comp"+os.sep+i+".mat_"+data[0][i]
+		title = i+".mat_"+data[0][i]
+		var = data[0][i]
+		var_list = []
+		path_name = path_name.strip()
+
+		folder = os.path.isdir(path_name)
+		if folder is False:
+			print("Cant find folder: " + CRED + model_name + CEND + " with Variable "+CRED+data[0][i]+CEND)
+			continue
+		else:
+			print("Print model: " + green + model_name + CEND + " with Variable: " + green + var + CEND)
+			value = read_csv_funnel(path_name, csv_file, test_csv)
+
+			# Render Template
+
+			mytemplate = Template(filename=temp)
+			var_list.append(var.strip() + "_ref")
+			var_list.append(var)
+
+			# values = value : variable numbers/Reference results
+			# var = var_list : legend variables
+			# model = model_name : model name
+			# title = path_name : folder name
+
+			hmtl_chart = mytemplate.render(values=value, var=var_list, model=model_name, title=title)
+			html = temp_chart + os.sep + model_name + "_" + var.strip() + ".html"
+			file_tmp = open(html, "w")
+			file_tmp.write(hmtl_chart)
+			file_tmp.close()
+def create_index_layout(temp_chart):
+	temp = "bin" + os.sep + "02_CITests" + os.sep + "Converter" + os.sep + "01_templates" + os.sep + "index.txt"
+	from mako.template import Template
+	html_model = []
+
+	for i in (os.listdir(temp_chart)):
+		if i.endswith(".html") and i!= "index.html":
+			html_model.append(i)
+	mytemplate = Template(filename=temp)
+	if len(html_model) > 0:
+		first_model = html_model[0]
+	else:
+		print("No html files")
+		os.rmdir(temp_chart)
+		exit(0)
+	hmtl_chart = mytemplate.render(first_model=first_model, html_model=html_model)
+	html = temp_chart + os.sep + "index.html"
+	file_tmp = open(html, "w")
+	file_tmp.write(hmtl_chart)
+	file_tmp.close()
+def create_layout(index_path):
+	temp = "bin" + os.sep + "02_CITests" + os.sep + "Converter" + os.sep + "01_templates" + os.sep + "layout_index.txt"
+	folder = (os.listdir(index_path))
+	package_list = []
+	for i in folder:
+		if i == "style.css" or i == "index.html":
+			continue
+		else:
+			#package_list.append(i+os.sep+"index.html")
+			package_list.append(i)
+
+	from mako.template import Template
+	mytemplate = Template(filename=temp)
+	if len(package_list) == 0:
+		print("No html files")
+		#os.rmdir(temp_chart)
+		exit(0)
+	else:
+		print(package_list)
+		hmtl_chart = mytemplate.render(single_package=package_list)
+		html = index_path + os.sep + "index.html"
+		file_tmp = open(html, "w")
+		file_tmp.write(hmtl_chart)
+		file_tmp.close()
 
 if  __name__ == '__main__':
-	### Settings
-	'''
-	path_aix = "AixLib"+os.sep+"Resources"+os.sep+"ReferenceResults"+os.sep+"Dymola"
-	path_ibpsa = "modelica-ibpsa"+os.sep+"IBPSA"+os.sep+"Resources"+os.sep+"ReferenceResults"+os.sep+"Dymola"
-	
-	path_aix_mos = "AixLib"+os.sep+"Resources"+os.sep+"Scripts"+os.sep+"Dymola"
-	path_ibpsa_mos = "modelica-ibpsa"+os.sep+"IBPSA"+os.sep+"Resources"+os.sep+"Scripts"+os.sep+"Dymola"
-	
-	path_diff = "bin"+os.sep+"03_WhiteLists"+os.sep+"Ref_list"+os.sep+"diff_ref"
-	createFolder(path_diff)
-	path_new  = "bin"+os.sep+"03_WhiteLists"+os.sep+"Ref_list"+os.sep+"new_ref"
-	createFolder(path_new)
-	
-	path_diff_mos = "bin"+os.sep+"03_WhiteLists"+os.sep+"mos_list"+os.sep+"diff_mos"
-	createFolder(path_diff_mos)
-	path_new_mos  = "bin"+os.sep+"03_WhiteLists"+os.sep+"mos_list"+os.sep+"new_mos"
-	createFolder(path_new_mos)
-	
-	
-	_CloneRepository()
-	
-	results = diff_ref(path_aix,path_ibpsa,path_diff,path_new)
-	diff_ref = results[0]
-	new_ref = results[1]
-	
-	add_new_ref(diff_ref,new_ref,path_aix,path_ibpsa,path_new,path_diff)
-		
-	mos_results = diff_mos(path_aix_mos,path_ibpsa_mos,path_diff_mos,path_new_mos)
-	#print(mos_results)
-	
-	removeRoot = True
-	removeEmptyFolders(path_diff_mos, removeRoot)
-	
-	
-	'''
-	
-	
-	#write_data_rows()
-	results = read_data()
-	## Value Number with Legend
-	distriction_values = results[0]
-	## Value time with time sequence
-	distriction_time = results[1]
-	## Legend name
-	Value_List = results[2]
-	## Reference File
-	ref_file = results[4]
-	## Number value 
-	X_Axis = results[3]
-	
+	green = "\033[0;32m"
+	CRED = '\033[91m'
+	CEND = '\033[0m'
 
-	
-	result = func_plot(distriction_values, distriction_time, Value_List,X_Axis,ref_file)
-	lines = result[0]
-	fig = result[1]
-	plt.subplots_adjust(left=0.2)
-	rax = plt.axes([0.05, 0.4, 0.1, 0.15]) 
-	labels = [str(line.get_label()) for line in lines]
-	visibility = [line.get_visible() for line in lines]
-	check = CheckButtons(rax, labels, visibility)
-	
-	#check.on_clicked(func)
-	check.on_clicked(func)
-	
-	t = plt.show()
-	#func_plot.check.on_clicked(func)
-	#Create_Line_Chart(distriction_values, distriction_time, Value_List,X_Axis,ref_file)
-	#mpld3.save_html(fig,'myfig.html')
-	
-	
-	fig = figure()
-	ax = fig.gca()
-	ax.plot([1,2,3,4])
-	#print(type(fig))
-	mpld3.save_html(fig,'myfig.html')
-	
-	
-	'''
-			
-	page_template = """
-	<html>
-	<head>
-	  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-		  google.charts.load('current', {'packages':['line']});
-		  google.charts.setOnLoadCallback(drawChart);
+	## Initialize a Parser
+	# Set environment variables
+	parser = argparse.ArgumentParser(description='Plot diagramms')
+	unit_test_group = parser.add_argument_group("arguments to plot diagrams")
 
-		function drawChart() {
+	unit_test_group.add_argument("--line-html",
+								 help='plot a google html chart in line form',
+								 action="store_true")
+	unit_test_group.add_argument("--create-layout",
+								 help='plot a google html chart in line form',
+								 action="store_true")
+	unit_test_group.add_argument("--line-matplot",
+								 help='plot a google html chart in line form',
+								 action="store_true")
 
-		  var data = new google.visualization.DataTable();
-		  data.addColumn('number', 'Day');
-		  data.addColumn('number', 'Guardians of the Galaxy');
-		  data.addColumn('number', 'The Avengers');
-		  data.addColumn('number', 'Transformers: Age of Extinction');
+	unit_test_group.add_argument("-m", "--modellist",
+								metavar = "Modelica.Model",
+								help = "Plot this model")
 
-		  data.addRows([
-			[1,  37.8, 80.8, 41.8],
-			[2,  30.9, 69.5, 32.4],
-			[3,  25.4,   57, 25.7],
-			[4,  11.7, 18.8, 10.5],
-			[5,  11.9, 17.6, 10.4],
-			[6,   8.8, 13.6,  7.7],
-			[7,   7.6, 12.3,  9.6],
-			[8,  12.3, 29.2, 10.6],
-			[9,  16.9, 42.9, 14.8],
-			[10, 12.8, 30.9, 11.6],
-			[11,  5.3,  7.9,  4.7],
-			[12,  6.6,  8.4,  5.2],
-			[13,  4.8,  6.3,  3.6],
-			[14,  4.2,  6.2,  3.4]
-		  ]);
+	unit_test_group.add_argument("-pM", "--plotModel",
+								 help="Plot this model",
+								 action="store_true")
+	unit_test_group.add_argument("--all-model",
+								 help='Plot all model',
+								 action="store_true")
 
-		  var options = {
-			chart: {
-			  title: 'Box Office Earnings in First Two Weeks of Opening',
-			  subtitle: 'in millions of dollars (USD)'
-			},
-			width: 900,
-			height: 500,
-			axes: {
-			  x: {
-				0: {side: 'bottom'}
-			  }
-			}
-		  };
 
-		  var chart = new google.charts.Line(document.getElementById('line_top_x'));
+	unit_test_group.add_argument("-e", "--error",
+								 help='Plot only model with errors',
+								 action="store_true")
 
-		  chart.draw(data, google.charts.Line.convertOptions(options));
-		}
-	  </script>
-	</head>
-	<body>
-	  <div id="line_top_x"></div>
-	</body>
+	unit_test_group.add_argument('-s', "--single-package",
+								 metavar="Modelica.Package",
+								 help="Test only the Modelica package Modelica.Package")
+	unit_test_group.add_argument('-fun', "--funnel-comp",
+								 help="Take the datas from funnel_comp",
+								 action = "store_true")
+	unit_test_group.add_argument('-ref', "--ref-txt",
+								 help="Take the datas from reference datas",
+								 action="store_true")
+	# Parse the arguments
+	args = parser.parse_args()
 
-	"""
-	main()'''
-	
-	
+	# *********************************************************************************************************
+	csv_file = "reference.csv"
+	test_csv = "test.csv"
+	temp = "bin" + os.sep + "02_CITests" + os.sep + "Converter" + os.sep + "01_templates" + os.sep + "google_chart.txt"
+
+	index_path = "bin" + os.sep + "03_WhiteLists" + os.sep + "charts"
+	f_log = "AixLib" + os.sep + "unitTests-dymola.log"
+	## Create Line chart html
+
+	if args.line_html is True:
+		temp_chart = "bin" + os.sep + "03_WhiteLists" + os.sep + "charts" + os.sep + args.single_package
+
+		# Plot all Datas with an error
+		if args.error is True:
+			file = os.path.isfile(f_log)
+			data = read_unitTest_log(f_log)
+			if file is False:
+				print(f_log+ " does not exists")
+				exit(1)
+			############################################################
+			# Data from funnel comp
+			if args.funnel_comp is True:
+				print("Plot line Chart")
+				print("plot the different reference results")
+				mako_line_html_chart(data, temp, temp_chart, f_log, csv_file, test_csv)
+				create_index_layout(temp_chart)
+
+				if  len(os.listdir(temp_chart)) == 0 :
+					os.rmdir(temp_chart)
+
+			############################################################
+			# Data from reference files
+			if args.ref_txt is True:
+
+				dic = data[0]
+				print(dic)
+				file_list = sort_mo_var(dic)
+
+				for i in file_list:
+					results = read_data(i)
+					var_List = []
+					# Variable Name
+					var = file_list[i].strip()
+					# Model name
+					mo = i[i.rfind("_")+1:i.find(".txt")]
+					## Value Number with Legend
+					distriction_values = results[0]
+					var_value = distriction_values[var]
+					var_value = (var_value.split(","))
+					## Value time with time sequence
+					distriction_time = results[1]
+					## Legend name
+					Value_List = results[2]
+					## Reference File
+					ref_file = results[4]
+					## Number value
+					X_Axis = results[3]
+
+					for i in range(0,len(X_Axis)):
+						var_val = var_value[i].replace("[","")
+						var_val = var_val.replace("]","")
+						time = str(X_Axis[i])
+						time  = time.replace("[","")
+						time = time.replace("]", "")
+						var_List.append("["+time + str(", ") + var_val+"]")
+						continue
+					legend = []
+					legend.append(var)
+					from mako.template import Template
+					mytemplate = Template(filename=temp)
+					hmtl_chart = mytemplate.render(values=var_List, var=legend, model=i, title=i)
+					html = temp_chart + os.sep + mo + "_" + var.strip() + ".html"
+					file_tmp = open(html, "w")
+					file_tmp.write(hmtl_chart)
+					file_tmp.close()
+					create_index_layout(temp_chart)
+		# Plot all models with reference datas
+
+		if args.all_model is True:
+
+			if args.funnel_comp is True:
+				data = {}
+				funnel_path = "AixLib" + os.sep + "funnel_comp"
+				funnel_list = (os.listdir(funnel_path))
+				path_list = []
+				var_list = []
+				for i in funnel_list:
+					model = i[:i.find(".mat")]
+					var = i[i.find(".mat_") + 5:]
+					data[model] = var
+					path_list.append(funnel_path + os.sep + i)
+					var_list.append(var)
+				data = data, path_list, var_list
+				print("Plot line Chart ")
+				print("plot the different reference results of all models")
+				mako_line_html_chart(data, temp, temp_chart, f_log, csv_file, test_csv)
+				create_index_layout(temp_chart)
+			if args.ref_txt is True:
+				ref_path = "AixLib" + os.sep + "Resources" + os.sep + "ReferenceResults" + os.sep + "Dymola"
+				data = {}
+				ref_list = (os.listdir(ref_path))
+				for i in ref_list:
+					file = ref_path+os.sep+i
+					results = read_data(file)
+					## Value Number with Legend
+					distriction_values = results[0]
+					## Value time with time sequence
+					distriction_time = results[1]
+					## Legend name
+					Value_List = results[2]
+					## Reference File
+					ref_file = results[4]
+					## Number value
+					X_Axis = results[3]
+					time_list = []
+					var_list = []
+					value_list = []
+					for y in X_Axis:
+						time_list.append(y)
+					for x in distriction_values:
+						t = ((distriction_values[x].split(",")))
+						var_list.append(t)
+					new = zip(time_list, zip(*var_list))
+					result_set = list(new)
+					for a in result_set:
+						a = str(a)
+						a = a.replace("(", "")
+						a = a.replace("[", "")
+						a = a.replace("]", "")
+						a = a.replace(")", "")
+						a = a.replace("'", "")
+						a = a.replace("\\n", "")
+						value_list.append("[" + a + "]")
+					value_list = map(str,(value_list))
+					#variable_list.append
+					from mako.template import Template
+					mytemplate = Template(filename=temp)
+					hmtl_chart = mytemplate.render(values=value_list, var=Value_List, model=ref_file, title=i)
+					html = temp_chart + os.sep + i.replace(".txt","") +   ".html"
+					file_tmp = open(html, "w")
+					file_tmp.write(hmtl_chart)
+					file_tmp.close()
+					create_index_layout(temp_chart)
+################################################################################
+		if args.plotModel is True:
+			if os.path.isdir(temp_chart) is False:
+				os.mkdir(temp_chart)
+			model_list = args.modellist
+			print(model_list)
+			model_list = model_list.split("\n")
+			if args.funnel_comp is True:
+				data = {}
+				funnel_path = "AixLib" + os.sep + "funnel_comp"
+				path_list = []
+				var_list = []
+				for i in model_list:
+					model = i[:i.find(".mat")]
+					var = i[i.find(".mat_") + 5:]
+					data[model] = var
+					path_list.append(funnel_path + os.sep + i)
+					var_list.append(var)
+				data = data, path_list, var_list
+				print("Plot line Chart ")
+				print("plot the different reference results of all models")
+				mako_line_html_chart(data, temp, temp_chart, f_log, csv_file, test_csv)
+				create_index_layout(temp_chart,temp_chart)
+			if args.ref_txt is True:
+				ref_path = "AixLib" + os.sep + "Resources" + os.sep + "ReferenceResults" + os.sep + "Dymola"
+				data = {}
+				for i in model_list:
+					i = i.lstrip()
+					print("Plot for model: "+ i)
+					#file = ref_path + os.sep + i+".txt"
+					file = i
+					results = read_data(i.lstrip())
+					## Value Number with Legend
+					distriction_values = results[0]
+					## Value time with time sequence
+					distriction_time = results[1]
+					## Legend name
+					Value_List = results[2]
+					## Reference File
+					ref_file = results[4]
+					## Number value
+					X_Axis = results[3]
+					time_list = []
+					var_list = []
+					value_list = []
+					for y in X_Axis:
+						time_list.append(y)
+					for x in distriction_values:
+						t = ((distriction_values[x].split(",")))
+						var_list.append(t)
+					new = zip(time_list, zip(*var_list))
+					result_set = list(new)
+					for a in result_set:
+						a = str(a)
+						a = a.replace("(", "")
+						a = a.replace("[", "")
+						a = a.replace("]", "")
+						a = a.replace(")", "")
+						a = a.replace("'", "")
+						a = a.replace("\\n", "")
+						value_list.append("[" + a + "]")
+					value_list = map(str, (value_list))
+					from mako.template import Template
+
+					mytemplate = Template(filename=temp)
+					hmtl_chart = mytemplate.render(values=value_list, var=Value_List, model=ref_file, title=i)
+					i = (i.replace(".txt", ""))
+					i = i[i.find("Dymola")+7:]
+					html = temp_chart + os.sep + i.replace(".txt", "") + ".html"
+					file_tmp = open(html, "w")
+					file_tmp.write(hmtl_chart)
+					file_tmp.close()
+					create_index_layout(temp_chart)
+
+
+
+			'''
+			if file is False:
+				print(f_log + " does not exists")
+				exit(1)
+			if args.funnel_comp is True:
+				print("Plot all model from funnel comp folder ")
+				print("plot the different reference results")
+				mako_line_html_chart(data, temp, temp_chart, f_log, csv_file, test_csv)
+			'''
+
+		'''
+		if args.model is True:
+			model_list = []
+			print("Plot line Chart for model"+model_list)
+
+			results = read_data()
+			## Value Number with Legend
+			distriction_values = results[0]
+			## Value time with time sequence
+			distriction_time = results[1]
+			## Legend name
+			Value_List = results[2]
+			## Reference File
+			ref_file = results[4]
+			## Number value
+			X_Axis = results[3]
+			print(results)
+			data = read_unitTest_log(f_log)
+			mako_line_html_chart(data, temp, temp_chart, f_log, csv_file, test_csv)
+		'''
+		## Plot a Package
+		if args.single_package is False:
+			data = read_unitTest_log(f_log)
+			mako_line_html_chart(data, temp, temp_chart, f_log, csv_file, test_csv)
+
+	# *********************************************************************************************************
+	## Create Line matplot chart
+	if args.line_matplot is True:
+		print("Plot matplot Chart")
+		# write_data_rows()
+		results = read_data()
+		## Value Number with Legend
+		distriction_values = results[0]
+		## Value time with time sequence
+		distriction_time = results[1]
+		print(distriction_time)
+		## Legend name
+		Value_List = results[2]
+		## Reference File
+		ref_file = results[4]
+		## Number value
+		X_Axis = results[3]
+		#print(results)
+
+		result = func_plot(distriction_values, distriction_time, Value_List, X_Axis, ref_file)
+		lines = result[0]
+		fig = result[1]
+		plt.subplots_adjust(left=0.2)
+		rax = plt.axes([0.05, 0.4, 0.1, 0.15])
+		labels = [str(line.get_label()) for line in lines]
+		visibility = [line.get_visible() for line in lines]
+		check = CheckButtons(rax, labels, visibility)
+
+		# check.on_clicked(func)
+		check.on_clicked(func)
+		t = plt.show()
+		# func_plot.check.on_clicked(func)
+		# Create_Line_Chart(distriction_values, distriction_time, Value_List,X_Axis,ref_file)
+		# mpld3.save_html(fig,'myfig.html')
+
+		fig = figure()
+		ax = fig.gca()
+		ax.plot([1, 2, 3, 4])
+		# print(type(fig))
+		mpld3.save_html(fig, 'myfig.html')
+	if args.create_layout is True:
+		create_layout(index_path)
