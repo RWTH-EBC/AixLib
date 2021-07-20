@@ -1,11 +1,11 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlledDpV
-  "Testing the pump dp-var algorithm with the new \"one record\" pump model with internal speed limitation (instead of pump head limitation)."
+  "Testing the pump dp-var algorithm with the speed controlled pump model."
   extends Modelica.Icons.Example;
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
-  PumpSpeedControlled                                                    pump(
+  .AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled pump(
     m_flow_nominal=m_flow_nominal,
     calculatePower=true,
     calculateEfficiency=true,
@@ -14,16 +14,11 @@ model PumpSpeedControlledDpV
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   Modelica.Blocks.Sources.BooleanPulse PumpOn(period=600, width=500/600*100)
-    annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
-    redeclare package Medium = Medium,
-    m_flow_small=1E-4*m_flow_nominal,
-    Kvs=6.3)
-    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
+    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
     offset=0.5,
-    height=-0.48,
+    height=0.48,
     duration(displayUnit="s") = 120,
     startTime(displayUnit="min") = 120)
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
@@ -39,15 +34,14 @@ model PumpSpeedControlledDpV
   BaseClasses.PumpBus pumpBus annotation (Placement(transformation(extent={{-10,
             50},{10,70}}), iconTransformation(extent={{-24,34},{-4,54}})));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
+  Actuators.Valves.TwoWayLinear             simpleValve(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    dpValve_nominal=1000)
+    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 equation
-  connect(rampValvePosition.y, simpleValve.opening)
-    annotation (Line(points={{-21,-60},{-30,-60},{-30,-38}}, color={0,0,127}));
-  connect(simpleValve.port_b, vessle.ports[1]) annotation (Line(points={{-40,
-          -30},{-52,-30},{-52,10},{-34,10}}, color={0,127,255}));
-  connect(vessle.ports[2], pump.port_a)
-    annotation (Line(points={{-38,10},{-10,10}}, color={0,127,255}));
-  connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{48,
-          10},{48,-30},{-20,-30}}, color={0,127,255}));
+  connect(vessle.ports[1], pump.port_a)
+    annotation (Line(points={{-34,10},{-10,10}}, color={0,127,255}));
   connect(pump.pumpBus, ctrlDpVarN.pumpBus) annotation (Line(
       points={{0,20},{0,26}},
       color={255,204,51},
@@ -60,12 +54,18 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(PumpOn.y, pumpBus.onSet) annotation (Line(points={{-59,50},{-30,50},{
+  connect(PumpOn.y, pumpBus.onSet) annotation (Line(points={{-59,60},{-30,60},{
           -30,60.05},{0.05,60.05}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(simpleValve.port_b, vessle.ports[2]) annotation (Line(points={{-40,-30},
+          {-60,-30},{-60,10},{-38,10}}, color={0,127,255}));
+  connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{40,
+          10},{40,-30},{-20,-30}}, color={0,127,255}));
+  connect(simpleValve.y, rampValvePosition.y)
+    annotation (Line(points={{-30,-42},{-30,-60},{-21,-60}}, color={0,0,127}));
   annotation (
       experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
