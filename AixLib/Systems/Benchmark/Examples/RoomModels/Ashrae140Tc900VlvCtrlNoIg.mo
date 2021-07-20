@@ -161,14 +161,20 @@ model Ashrae140Tc900VlvCtrlNoIg "Ashrae140 Test Case 900 Valve Controlled"
   Modelica.Blocks.Interfaces.RealInput internal_gain_3
     "Input profiles for internal gains persons, machines, light"
     annotation (Placement(transformation(extent={{-180,-112},{-140,-72}})));
-  EONERC_MainBuilding.Tabs2 tabs(
+  EONERC_MainBuilding.Tabs tabs(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.5,
     area=48,
     thickness=0.05,
     alpha=20,
+    length=200,
     dynamicHX1(nNodes=4, Q_nom=2000),
-    dynamicHX(nNodes=4, Q_nom=2000))
+    dynamicHX(nNodes=4, Q_nom=2000),
+    throttlePumpHot(Kv=4, redeclare
+        HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+        PumpInterface(pump(redeclare
+            Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per))),
+    throttlePumpCold(Kv=4))
     annotation (Placement(transformation(extent={{6,-68},{42,-28}})));
 equation
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
@@ -268,8 +274,8 @@ equation
           -160,-58},{52,-58},{52,25.68},{51,25.68}}, color={0,0,127}));
   connect(internal_gain_3, thermalZone1.intGains[3]) annotation (Line(points={{
           -160,-92},{51,-92},{51,27.52}}, color={0,0,127}));
-  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{
-          24,-26.1818},{62,-26.1818},{62,45.92},{56.5,45.92}}, color={191,0,0}));
+  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{24,
+          -26.1818},{62,-26.1818},{62,45.92},{56.5,45.92}},    color={191,0,0}));
   connect(tabs.tabsBus, bus.tabs1Bus) annotation (Line(
       points={{5.82,-49.6364},{5.82,-50.8182},{-1.91,-50.8182},{-1.91,108.11}},
       color={255,204,51},
@@ -281,8 +287,8 @@ equation
 
   connect(bouWatercold.ports[2], tabs.port_a2) annotation (Line(points={{-4,
           -116},{32,-116},{32,-68},{31.2,-68}}, color={0,127,255}));
-  connect(bouWatercold1.ports[2], tabs.port_b2) annotation (Line(points={{38,
-          -116},{38,-67.6364},{38.4,-67.6364}}, color={0,127,255}));
+  connect(bouWatercold1.ports[2], tabs.port_b2) annotation (Line(points={{38,-116},
+          {38,-67.6364},{38.4,-67.6364}},       color={0,127,255}));
   connect(bouWaterhot.ports[2], tabs.port_a1) annotation (Line(points={{-52,-82},
           {10,-82},{10,-68},{9.6,-68}}, color={0,127,255}));
   connect(bouWaterhot1.ports[2], tabs.port_b1) annotation (Line(points={{-16,

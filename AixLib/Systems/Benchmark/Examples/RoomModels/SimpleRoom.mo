@@ -40,7 +40,7 @@ model SimpleRoom
         dT_nom=7,
         Q_nom=10000)))
     annotation (Placement(transformation(extent={{-80,-12},{-34,38}})));
-  AixLib.Systems.EONERC_MainBuilding.Tabs2 tabs4_1(
+  AixLib.Systems.EONERC_MainBuilding.Tabs tabs4_1(
     redeclare package Medium = MediumWater,
     area=30*20,
     thickness=0.3,

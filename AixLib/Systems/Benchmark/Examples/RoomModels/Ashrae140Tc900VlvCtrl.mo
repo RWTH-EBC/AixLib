@@ -240,14 +240,17 @@ model Ashrae140Tc900VlvCtrl "Ashrae140 Test Case 900 Valve Controlled"
     annotation (Placement(transformation(extent={{-180,84},{-140,124}})));
   Modelica.Blocks.Interfaces.RealOutput TAirRoom "Indoor air temperature"
     annotation (Placement(transformation(extent={{96,54},{116,74}})));
-  EONERC_MainBuilding.Tabs2 tabs(
+  EONERC_MainBuilding.Tabs tabs(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.5,
     area=48,
     thickness=0.05,
     alpha=20,
+    length=200,
     dynamicHX1(nNodes=4, Q_nom=2000),
-    dynamicHX(nNodes=4, Q_nom=2000))
+    dynamicHX(nNodes=4, Q_nom=2000),
+    throttlePumpHot(Kv=4),
+    throttlePumpCold(Kv=4))
     annotation (Placement(transformation(extent={{22,-78},{64,-32}})));
 equation
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
@@ -358,8 +361,8 @@ equation
 
   connect(bouWatercold.ports[2], tabs.port_a2) annotation (Line(points={{-4,
           -116},{52,-116},{52,-78},{51.4,-78}}, color={0,127,255}));
-  connect(bouWatercold1.ports[2], tabs.port_b2) annotation (Line(points={{26,
-          -116},{60,-116},{60,-77.5818},{59.8,-77.5818}}, color={0,127,255}));
+  connect(bouWatercold1.ports[2], tabs.port_b2) annotation (Line(points={{26,-116},
+          {60,-116},{60,-77.5818},{59.8,-77.5818}},       color={0,127,255}));
   connect(bouWaterhot1.ports[2], tabs.port_a1) annotation (Line(points={{-16,
           -76},{4,-76},{4,-78},{26.2,-78}}, color={0,127,255}));
   connect(bouWaterhot.ports[2], tabs.port_b1) annotation (Line(points={{-52,-82},
