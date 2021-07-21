@@ -1,5 +1,4 @@
 last-generated=2021-07-20
-
 statistics-initialization=
 {
   "nonlinear": "1",
