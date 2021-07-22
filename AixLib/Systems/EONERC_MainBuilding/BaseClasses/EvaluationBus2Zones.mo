@@ -11,16 +11,16 @@ expandable connector EvaluationBus2Zones
   SI.Energy WelPumpSWUMea "Consumed energy of switching unit pump";
   SI.Energy WelPumpGTFMea "Consumed energy of geothermal field pump";
   SI.Energy WelPumpsHTSMea "Consumed energy of pumps in high temperature system";
-  SI.Energy QbrBoiMea "Consumed energy of boiler";
+  SI.Energy QbrBoi1Mea "Consumed energy of boiler 1";
+  SI.Energy QbrBoi2Mea "Consumed energy of boiler 2";
   SI.Energy QbrCHPMea "Consumed energy of chp";
   SI.Energy WelCPHMea "Produced electricity of chp";
   SI.Energy WelTotalMea "Total consumed electricity";
   SI.Energy QbrTotalMea "Total consumed fuel";
-  Real IseRoom1 "ISE of room 1";
-  Real IseRoom2 "ISE of room 2";
-  Real IseRoom3 "ISE of room 3";
-  Real IseRoom4 "ISE of room 4";
-  Real IseRoom5 "ISE of room 5";
+  Real IseHTC "ISE of high temperature consumer";
+  Real IseCold1 "ISE of cold consumer 1";
+  Real IseZone2 "ISE of cold conumer 2";
+  Real IseZone1 "ISE of low temperature heating consumer";
 
   annotation (
     Icon(graphics,

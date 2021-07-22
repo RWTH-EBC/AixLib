@@ -14,11 +14,11 @@ expandable connector MainBus2Zones
   TabsBus2 tabs2Bus "Bus for concrete core activation 2";
   ModularAHU.BaseClasses.GenericAHUBus ahu1Bus "Bus for AHU";
   ModularAHU.BaseClasses.GenericAHUBus ahu2Bus "Bus for AHU";
-  SI.Temperature TRoom1Mea "Temperature in room 1";
-  SI.Temperature TRoom2Mea "Temperature in room 2";
+  SI.Temperature TZone1Mea "Temperature in room 1";
+  SI.Temperature TZone2Mea "Temperature in room 2";
   Systems.HydraulicModules.BaseClasses.HydraulicBus consHtcBus "Consumer bus high temperature cycle";
   Systems.HydraulicModules.BaseClasses.HydraulicBus consCold1Bus "Consumer bus cold temperature cycle 1";
-  EONERC_MainBuilding.BaseClasses.EvaluationBus evaBus
+  EONERC_MainBuilding.BaseClasses.EvaluationBus2Zones evaBus
     "Bus for energy consumption measurement";
   annotation (
     Icon(graphics,

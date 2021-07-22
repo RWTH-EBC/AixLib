@@ -292,14 +292,14 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrAHU1Basic.T_act, bus.TRoom1Mea) annotation (Line(points={{-62,-130},
+  connect(ctrAHU1Basic.T_act, bus.TZone1Mea) annotation (Line(points={{-62,-130},
           {-118,-130},{-118,-192},{126,-192},{126,-0.935},{100.07,-0.935}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ctrAHU1Basic1.T_act, bus.TRoom2Mea) annotation (Line(points={{-62,
+  connect(ctrAHU1Basic1.T_act, bus.TZone2Mea) annotation (Line(points={{-62,
           -150},{-110,-150},{-110,-178},{100.07,-178},{100.07,-0.935}}, color={
           0,0,127}), Text(
       string="%second",

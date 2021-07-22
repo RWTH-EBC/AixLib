@@ -188,6 +188,7 @@ model MainBuilding2Zones "Benchmark building model"
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
         redeclare
           HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -297,6 +298,7 @@ model MainBuilding2Zones "Benchmark building model"
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
         redeclare
           HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -665,14 +667,14 @@ equation
   connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
         points={{270,-88},{270,-80},{264,-80}}, color={0,127,255}));
 
-  connect(thermalZone1.TAir, mainBus.TRoom1Mea) annotation (Line(points={{170.8,
+  connect(thermalZone1.TAir, mainBus.TZone1Mea) annotation (Line(points={{170.8,
           348.2},{170,348.2},{170,419.145},{161.115,419.145}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(thermalZone2.TAir, mainBus.TRoom2Mea) annotation (Line(points={{352.8,
+  connect(thermalZone2.TAir, mainBus.TZone2Mea) annotation (Line(points={{352.8,
           254.6},{352.8,419.145},{161.115,419.145}}, color={0,0,127}), Text(
       string="%second",
       index=1,
