@@ -1,19 +1,19 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
 model SimpleRoomWithControl
-  extends RoomModels.SimpleRoom(genericAHU1(dynamicHX(dT_nom=1)))
+  extends RoomModels.SimpleRoom
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=86400));
 
   ModularAHU.Controller.CtrAHUTsetRoom          ctrVentilationUnitTsetRoom(
-    TRoomSet=295.15,
+    TRoomSet=298.15,
     k=0.3,
     Ti=200,
     VFlowSet=3*1800/3600)
     annotation (Placement(transformation(extent={{-100,120},{-80,140}})));
   Controller.CtrTabs                                     ctrTabs2_1(
-      useExternalTset=true, TflowSet=295.15)
+      useExternalTset=false, TflowSet=295.15)
     annotation (Placement(transformation(extent={{-100,100},{-80,120}})));
   Modelica.Blocks.Nonlinear.Limiter limiterCCAHot(uMax=0, uMin=-100000)
     annotation (Placement(transformation(extent={{-122,-18},{-114,-10}})));
@@ -44,8 +44,8 @@ model SimpleRoomWithControl
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={-106,-58})));
-  Modelica.Blocks.Math.Add coldDemand(k1=-0.001*0.5, k2=-0.001*0.5) annotation
-    (Placement(transformation(
+  Modelica.Blocks.Math.Add coldDemand(k1=-0.001*0.5, k2=-0.001*0.5) annotation (
+     Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={-138,-54})));
@@ -108,7 +108,5 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(Tair, ccaHeatCurve.u[1])
     annotation (Line(points={{-142,32},{-142,110}}, color={0,0,127}));
-  connect(ccaHeatCurve.y[1], ctrTabs2_1.Tset)
-    annotation (Line(points={{-119,110},{-102,110}}, color={0,0,127}));
-  annotation (experiment(StopTime=31536000, Interval=3600.00288));
+  annotation (experiment(StopTime=432000, Interval=3600.00288));
 end SimpleRoomWithControl;

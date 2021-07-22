@@ -26,9 +26,9 @@ model MainBuilding2Zones "Benchmark building model"
     annotation (Placement(transformation(extent={{-130,-40},{-60,8}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={18,-108})));
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={8,-100})));
   Tabs tabs1(
     redeclare package Medium = MediumWater,
     area=33.8*59.4*2,
@@ -597,7 +597,7 @@ model MainBuilding2Zones "Benchmark building model"
   Modelica.Blocks.Interfaces.RealOutput Tair
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={-28,-112}), iconTransformation(extent={{-64,-140},{-44,-120}})));
+        origin={-48,-140}), iconTransformation(extent={{-64,-140},{-44,-120}})));
   Fluid.Sources.Boundary_pT          bou1(redeclare package Medium =
         MediumWater, nPorts=1)
               annotation (Placement(transformation(
@@ -620,9 +620,12 @@ model MainBuilding2Zones "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={8,216})));
+  Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=0)
+    "Ice Protection"
+    annotation (Placement(transformation(extent={{-20,-106},{-8,-94}})));
 equation
   connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
-      Line(points={{18,-98},{18,-77.4444},{15,-77.4444}},           color={191,
+      Line(points={{14,-100},{14,-77.4444},{15,-77.4444}},          color={191,
           0,0}));
   connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
       points={{60,378},{112,378},{112,342.4}},
@@ -732,8 +735,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(x_pTphi.X, boundaryOutsideAir.X_in) annotation (Line(points={{-161,
           270},{-158,270},{-158,254},{-152,254}}, color={0,0,127}));
-  connect(boundaryOutsideAir.T_in, prescribedTemperature.T) annotation (Line(
-        points={{-152,246},{-220,246},{-220,-120},{18,-120}},  color={0,0,127}));
   connect(bou.ports[1], switchingUnit.port_b2)
     annotation (Line(points={{388,-60},{276,-60}}, color={0,127,255}));
   connect(switchingUnit.port_a1, vol.ports[1]) annotation (Line(points={{276,-36},
@@ -886,8 +887,6 @@ equation
           238,46,47}));
   connect(genericAHU2.port_b5, vol3.ports[4]) annotation (Line(points={{116.182,
           160},{116.182,120},{-164,120},{-164,8.8}}, color={238,46,47}));
-  connect(prescribedTemperature.T, Tair) annotation (Line(points={{18,-120},{18,
-          -112},{-28,-112}}, color={0,0,127}));
   connect(admixCold.hydraulicBus, mainBus.consCold1Bus) annotation (Line(
       points={{98,-10},{98,28},{-220,28},{-220,420},{161.115,420},{161.115,
           419.145}},
@@ -923,6 +922,12 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(switchingUnit.port_b2, vol1.ports[4]) annotation (Line(points={{276,
           -60},{294,-60},{294,100},{139.1,100}}, color={0,127,255}));
+  connect(x_pTphi.T, Tair) annotation (Line(points={{-184,270},{-210,270},{-210,
+          268},{-228,268},{-228,-140},{-48,-140}}, color={0,0,127}));
+  connect(Tair, temperatureLimiter.u) annotation (Line(points={{-48,-140},{-22,
+          -140},{-22,-124},{-21.2,-124},{-21.2,-100}}, color={0,0,127}));
+  connect(temperatureLimiter.y, prescribedTemperature.T)
+    annotation (Line(points={{-7.4,-100},{0.8,-100}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},

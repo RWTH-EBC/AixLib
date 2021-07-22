@@ -132,7 +132,6 @@ model SimpleRoom
     redeclare package Medium = MediumAir,
     use_X_in=true,
     use_Xi_in=false,
-    p=bou1.p + 400,
     use_T_in=true,
     nPorts=1) annotation (Placement(transformation(extent={{-100,10},{-88,22}})));
   AixLib.Fluid.Sources.Boundary_pT bou1(

@@ -21,7 +21,7 @@ model Tabs "Concrete core activation"
 
   Fluid.FixedResistances.GenericPipe  pipe(
     redeclare package Medium = Medium,
-    parameterPipe=DataBase.Pipes.PE_X.DIN_16893_SDR11_d160(),
+    parameterPipe=DataBase.Pipes.Copper.Copper_133x3(),
     withInsulation=false,
     withConvection=false,
     m_flow_nominal=m_flow_nominal,
