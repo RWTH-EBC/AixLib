@@ -125,7 +125,7 @@ if  __name__ == '__main__':
     args = parser.parse_args()
     GITHUB_TOKEN = args.GITHUB_TOKEN
     GITHUB_REPOSITORY = args.GITHUB_REPOSITORY
-    page_url = args.GITLAB_Page+args.Working_Branch
+    page_url = args.GITLAB_Page+args.Working_Branch+"/plots"
     pr_number = get_pull_branch(args.Working_Branch)
     post_comment(pr_number,page_url,GITHUB_TOKEN,GITHUB_REPOSITORY)
 
