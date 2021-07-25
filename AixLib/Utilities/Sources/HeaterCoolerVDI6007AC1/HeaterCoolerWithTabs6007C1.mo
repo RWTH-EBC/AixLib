@@ -394,9 +394,7 @@ model HeaterCoolerWithTabs6007C1
   tabsPlusAirController tabsPlusAirController1 if ((recOrSep and zoneParam.tabs and zoneParam.radiator) or (not recOrSep and tabs_on and radiator_on))
     "if TABS cooling is active, air heating is set to inactive and if TABS heating is active, air cooling is set to inactive";
 
-  Modelica.Blocks.Interfaces.BooleanOutput heatOrCool if ((recOrSep and
-    zoneParam.heating) or (recOrSep and zoneParam.cooling) or (not recOrSep
-     and heating_on) or (not recOrSep and cooling_on))
+  Modelica.Blocks.Interfaces.BooleanOutput heatOrCool
     "true if heating last active, false if cooling last active" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -419,7 +417,8 @@ model HeaterCoolerWithTabs6007C1
         origin={121,73})));
   Modelica.Blocks.Sources.BooleanConstant onlyCooling(k=false) if (recOrSep
      and not zoneParam.heating and zoneParam.cooling) or (not recOrSep and not
-    heating_on and cooling_on)
+    heating_on and cooling_on) or (recOrSep and not zoneParam.heating and not
+    zoneParam.cooling) or (not recOrSep and not heating_on and not cooling_on)
     "Outputs false if only cooling system is installed" annotation (Placement(
         transformation(
         extent={{-5,-5},{5,5}},

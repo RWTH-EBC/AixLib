@@ -232,8 +232,8 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     each floor_on=floor_on,
     each radiator_on=radiator_on,
     each staOrDyn=not zoneParam.withIdealThresholds) if (ATot > 0 or zoneParam.VAir
-     > 0) and (recOrSep and (zoneParam.heating or zoneParam.cooling)) or (
-    not recOrSep and (heating_on or cooling_on))
+     > 0) and (recOrSep and (zoneParam.heating or zoneParam.cooling)) or (not
+    recOrSep and (heating_on or cooling_on))
     annotation (Placement(transformation(extent={{66,26},{84,38}})));
   Utilities.Sources.HeaterCoolerVDI6007AC1.tabsHeaterCoolerController
     tabsHeaterCoolerController(
