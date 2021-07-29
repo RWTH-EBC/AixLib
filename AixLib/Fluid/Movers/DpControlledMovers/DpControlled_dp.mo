@@ -119,6 +119,6 @@ equation
 </tbody>
 </table>
 
-<p><img src=\"modelica://MoversWithControl/Resources/img/Curve_Types.jpg\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\"/></p>
 </html>"));
 end DpControlled_dp;
