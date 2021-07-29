@@ -26,11 +26,11 @@ model DpControlled_dp
                       "Pressure drop"
     annotation (Placement(transformation(extent={{28,20},{48,40}})));
   AixLib.Fluid.Sensors.MassFlowRate masFloRat(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{66,20},{86,40}})));
-  MoversWithControl.DpControlled_dp     dpControlled_dp(
+  AixLib.Fluid.Movers.DpControlledMovers.DpControlled_dp dpControlled_dp(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    ctrlType=MoversWithControl.Types.CtrlType.dpVar,
+    ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar,
     redeclare AixLib.Fluid.Movers.Data.Generic per(pressure(V_flow={0,1,1.5}*
             m_flow_nominal, dp={2,1,0}*m_flow_nominal), motorCooledByFluid=false),
     dp_nominal=dp_nominal)
