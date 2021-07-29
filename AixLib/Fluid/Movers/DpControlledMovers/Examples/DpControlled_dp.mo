@@ -46,7 +46,7 @@ model DpControlled_dp
     duration=1800,
     offset=0,
     startTime=900)  annotation (Placement(transformation(extent={{80,60},{60,80}})));
-  Buildings.Fluid.Delays.DelayFirstOrder vol(
+  AixLib.Fluid.Delays.DelayFirstOrder vol(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal_max,
     nPorts=2) annotation (Placement(transformation(extent={{-10,58},{10,78}})));

@@ -1,8 +1,8 @@
 within AixLib.Fluid.Movers.DpControlledMovers;
 model DpControlled_dp
-  extends Buildings.Fluid.Interfaces.LumpedVolumeDeclarations(
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
     final mSenFac=1);
-  extends Buildings.Fluid.Interfaces.PartialTwoPortInterface;   //TODO: Use attributes in modifier as in PartialFlowMachine
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;   //FIXME: Use attributes in modifier as in PartialFlowMachine
 
   parameter Modelica.SIunits.PressureDifference dp_nominal(
     min=0,
@@ -14,28 +14,28 @@ model DpControlled_dp
 
   parameter AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType ctrlType "Type of mover control";
 
-  replaceable parameter Buildings.Fluid.Movers.Data.Generic per(
+  replaceable parameter AixLib.Fluid.Movers.Data.Generic per(
     pressure(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
     dp =     dp_nominal * {1.3, 1, 0.75, 0}))
-    constrainedby Buildings.Fluid.Movers.Data.Generic
+    constrainedby AixLib.Fluid.Movers.Data.Generic
     "Record with performance data"
     annotation (choicesAllMatching=true,
       Placement(transformation(extent={{52,60},{72,80}})));
 
-  parameter Buildings.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
+  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
     dp =     dp_nominal * {1, 1, 0.75, 0}) "Volume flow rate vs. total pressure rise"
     annotation(Evaluate=true,
                Dialog(group="Pressure curve"));
 
-  parameter Buildings.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpVar(
+  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpVar(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
     dp =     dp_nominal * {0.5, 1, 0.75, 0}) "Volume flow rate vs. total pressure rise"
     annotation(Evaluate=true,
                Dialog(group="Pressure curve"));
 
-  Buildings.Fluid.Movers.FlowControlled_dp mov(
+  AixLib.Fluid.Movers.FlowControlled_dp mov(
     redeclare final package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     final per=per,
@@ -50,8 +50,8 @@ model DpControlled_dp
     u(each final unit="m3/s"),
     y(each final unit="Pa")) annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
 
-  //TODO: Check that table output for dp is 0, when measured mass flow rate > m_flow_max (default = 2*m_flow_nominal). e.g. when pumps are in series
-  //TODO: Use min of two curves between per.pressure and pressureCurve_dpConst/Var in current operating point.
+  //FIXME: Check that table output for dp is 0, when measured mass flow rate > m_flow_max (default = 2*m_flow_nominal). e.g. when pumps are in series
+  //FIXME: Use min of two curves between per.pressure and pressureCurve_dpConst/Var in current operating point.
   AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 protected
   final parameter Modelica.SIunits.Density rho_default=
