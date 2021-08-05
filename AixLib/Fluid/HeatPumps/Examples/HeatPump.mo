@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.Examples;
+﻿within AixLib.Fluid.HeatPumps.Examples;
 model HeatPump "Example for the reversible heat pump model."
  extends Modelica.Icons.Example;
 
@@ -33,6 +33,7 @@ model HeatPump "Example for the reversible heat pump model."
         rotation=-90,
         origin={2,-76})));
   AixLib.Fluid.HeatPumps.HeatPump heatPump(
+    use_non_manufacturer=false,
     refIneFre_constant=1,
     useBusConnectorOnly=true,
     CEva=100,

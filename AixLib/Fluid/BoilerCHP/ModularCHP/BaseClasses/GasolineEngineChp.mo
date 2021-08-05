@@ -3,14 +3,17 @@ model GasolineEngineChp
   "Thermal and mechanical model of an internal combustion engine with consideration of the individual mass flows"
 
   replaceable package Medium_Fuel =
-      DataBase.CHP.ModularCHPEngineMedia.LiquidFuel_LPG             constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+      DataBase.CHP.ModularCHPEngineMedia.LiquidFuel_LPG             constrainedby
+    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Fuel medium model used in the CHP plant" annotation(choicesAllMatching=true);
   replaceable package Medium_Air =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                               constrainedby DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                                                               constrainedby
+    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
     "Air medium model used in the CHP plant" annotation(choicesAllMatching=true);
   replaceable package Medium_Exhaust =
-      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
+    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
   parameter
     DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord

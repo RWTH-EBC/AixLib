@@ -1,4 +1,4 @@
-within AixLib.Fluid.BaseClasses;
+﻿within AixLib.Fluid.BaseClasses;
 partial model PartialReversibleVapourCompressionMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -19,22 +19,22 @@ partial model PartialReversibleVapourCompressionMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
+
   replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
     AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a vapour compression machine"
     annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
         origin={0,-1})));
-
-  parameter Boolean use_rev=true "Is the vapour compression machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+  parameter Boolean use_rev=false "Is the vapour compression machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true, enable= not use_non_manufacturer));
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Modelica.SIunits.Power Q_useNominal(start=0)
     "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=
-          use_autoCalc));
-  parameter Real scalingFactor=1 "Scaling-factor of vapour compression machine";
+          use_autoCalc and not use_non_manufacturer));
+  parameter Real scalingFactor=1 "Scaling-factor of vapour compression machine" annotation(Dialog(enable=not use_non_manufacturer));
   parameter Boolean use_refIne=true
     "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(

@@ -1,4 +1,4 @@
-within AixLib.Controls.Interfaces;
+﻿within AixLib.Controls.Interfaces;
 expandable connector VapourCompressionMachineControlBus
   "Standard data bus with heat pump or chiller information"
 extends Modelica.Icons.SignalBus;
@@ -56,6 +56,15 @@ annotation (
   First implementation.
 </p>
 </html>"));
+
+  // Non Manufacturer Models only
+  Real QRel "Part load ratio";
+
+  Real PLR "Part load ratio compressor";
+
+  Boolean Shutdown "true: force shutdown";
+
+  Modelica.SIunits.Power QEvapNom "Nominal evaporation heat flow";
 
   annotation (Documentation(info="<html><p>
   Bus connector with all relevant signals for vapour compression

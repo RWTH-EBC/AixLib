@@ -1,9 +1,9 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model PolynomalApproach
   "Calculating heat pump data based on a polynomal approach"
   extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
-
+  parameter Real scalingFactor=1 "Scaling factor of heat pump";
   replaceable function PolyData =
       AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
   Modelica.Blocks.Sources.RealExpression internal_Pel(final y=Char[1]*
@@ -60,14 +60,16 @@ equation
   connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
           {42,-18.6},{42,-22},{-88,-22},{-88,-38},{-80.8,-38}}, color={0,0,127}));
   connect(switchPel.u2, sigBus.onOffMea) annotation (Line(points={{42,-4.8},{42,
-          14},{0,14},{0,84},{1.075,84},{1.075,104.07}}, color={255,0,255}),
+          14},{0,14},{0,84},{-0.925,84},{-0.925,100.07}},
+                                                        color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(switchQCon.u2, sigBus.onOffMea) annotation (Line(points={{-60,-4.8},{
-          -58,-4.8},{-58,28},{1.075,28},{1.075,104.07}}, color={255,0,255}),
+          -58,-4.8},{-58,28},{-0.925,28},{-0.925,100.07}},
+                                                         color={255,0,255}),
       Text(
       string="%second",
       index=1,

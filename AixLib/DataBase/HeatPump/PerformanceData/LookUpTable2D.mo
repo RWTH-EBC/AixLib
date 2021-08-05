@@ -1,7 +1,8 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTable2D "Performance data coming from manufacturer"
   extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+  parameter Real scalingFactor=1 "Scaling factor of heat pump";
 
   parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
     "Smoothness of table interpolation";
@@ -61,6 +62,18 @@ model LookUpTable2D "Performance data coming from manufacturer"
         rotation=-90,
         origin={-11,23})));
 
+  Modelica.Blocks.Math.Add calcRedQCon
+    "Based on redcued heat flow to the evaporator, the heat flow to the condenser is also reduced"
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=270,
+        origin={78,-72})));
+  Modelica.Blocks.Math.Product proRedQEva
+    "Based on the icing factor, the heat flow to the evaporator is reduced"
+    annotation (Placement(transformation(
+        extent={{-6,6},{6,-6}},
+        rotation=270,
+        origin={-82,-64})));
 protected
   parameter Real minSou = min(dataTable.tableP_ele[1,2:end]);
   parameter Real minSup = min(dataTable.tableP_ele[2:end,1]);
@@ -73,6 +86,11 @@ protected
         rotation=270,
         origin={-15,43})));
 
+  Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
+    "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{-6,-6},
+            {6,6}},
+        rotation=270,
+        origin={-78,-42})));
 equation
   if printAsserts then
     assert(
@@ -103,14 +121,14 @@ equation
           60},{52,60},{52,50.8},{54.4,50.8}},
                                   color={0,0,127}));
   connect(sigBus.TConOutMea, t_Co_ou.u) annotation (Line(
-      points={{1.075,104.07},{-54,104.07},{-54,83.2}},
+      points={{-0.925,100.07},{-54,100.07},{-54,83.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBus.TEvaInMea, t_Ev_in.u) annotation (Line(
-      points={{1.075,104.07},{2,104.07},{2,104},{52,104},{52,79.2}},
+      points={{-0.925,100.07},{2,100.07},{2,104},{52,104},{52,79.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -127,7 +145,7 @@ equation
   connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-15,39.7},{-15,
           31.4},{-15.2,31.4}}, color={0,0,127}));
   connect(sigBus.nSet, nTimesSF.u1) annotation (Line(
-      points={{1.075,104.07},{-2,104.07},{-2,31.4},{-6.8,31.4}},
+      points={{-0.925,100.07},{-2,100.07},{-2,31.4},{-6.8,31.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -138,13 +156,29 @@ equation
           8},{-42.8,8},{-42.8,5.4}}, color={0,0,127}));
   connect(nTimesSF.y, nTimesQCon.u2) annotation (Line(points={{-11,15.3},{-11,
           8},{36.4,8},{36.4,-2.8}}, color={0,0,127}));
-  connect(nTimesPel.y, calcRedQCon.u2) annotation (Line(points={{-47,-10.7},{
-          -47,-22},{76.4,-22},{76.4,-60.8}}, color={0,0,127}));
-  connect(nTimesPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={{-47,
-          -10.7},{-47,-22},{-94,-22},{-94,-38},{-80.8,-38}},      color={0,0,
+  connect(nTimesPel.y, calcRedQCon.u2) annotation (Line(points={{-47,-10.7},{-47,-22},{74.4,-22},{74.4,
+          -64.8}},                           color={0,0,127}));
+  connect(nTimesPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={{-47,-10.7},{-47,-22},
+          {-94,-22},{-94,-42},{-82.8,-42}},                       color={0,0,
           127}));
-  connect(nTimesQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{40,
-          -16.6},{40,-28},{-76,-28},{-76,-33.2}},      color={0,0,127}));
+  connect(nTimesQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{40,-16.6},{40,-28},
+          {-78,-28},{-78,-37.2}},                      color={0,0,127}));
+  connect(proRedQEva.u1,sigBus. iceFacMea) annotation (Line(points={{-85.6,-56.8},{-85.6,-52},{-98,
+          -52},{-98,90},{-0.925,90},{-0.925,100.07}},                color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(proRedQEva.y, QEva) annotation (Line(points={{-82,-70.6},{-82,-88},{80,-88},{80,-110}},
+                               color={0,0,127}));
+  connect(proRedQEva.y,calcRedQCon. u1) annotation (Line(points={{-82,-70.6},{-82,-74},{-68,-74},{-68,
+          -58},{81.6,-58},{81.6,-64.8}},                          color={0,0,
+          127}));
+  connect(calcRedQCon.y, QCon) annotation (Line(points={{78,-78.6},{78,-82},{-64,-82},{-64,-110},{-80,
+          -110}},                                   color={0,0,127}));
+  connect(proRedQEva.u2,feedbackHeatFlowEvaporator. y) annotation (Line(
+        points={{-78.4,-56.8},{-78,-56.8},{-78,-47.4}}, color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),

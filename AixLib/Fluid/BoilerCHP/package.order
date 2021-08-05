@@ -1,7 +1,9 @@
 Boiler
 BoilerNoControl
+BoilerNotManufacturer
 CHP
 CHPNoControl
+CHPNotManufacturer
 HeatGeneratorNoControl
 ModularCHP
 Data

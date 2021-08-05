@@ -5,3 +5,5 @@ ExternalControlNightDayHC
 InternalControl
 PIController
 PartialExternalControl
+ReturnInfluence
+StationaryBehaviour

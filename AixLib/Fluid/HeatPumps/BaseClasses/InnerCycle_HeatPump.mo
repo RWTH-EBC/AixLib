@@ -1,28 +1,45 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle_HeatPump
   "Blackbox model of refrigerant cycle of a heat pump"
   extends AixLib.Fluid.BaseClasses.PartialInnerCycle;
 
+  parameter Boolean use_non_manufacturer=false;
+
   replaceable model PerDataMainHP =
       AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
-    constrainedby AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData(
-     final scalingFactor = scalingFactor)
-    "Replaceable model for performance data of a heat pump in main operation mode"
-    annotation (choicesAllMatching=true);
+                                                                                  constrainedby
+    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+    "Replaceable model for performance data of a heat pump in main operation mode" annotation (
+      choicesAllMatching=true);
 
   replaceable model PerDataRevHP =
       AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
-    constrainedby AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
+    constrainedby
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
     "Replaceable model for performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 
-  PerDataMainHP PerformanceDataHPHeating
+  DataBase.HeatPump.PerformanceData.LookUpTableNDNotManufacturerSlim
+    lookUpTableNDNotManufacturerHeating(
+    THotMax=THotMax,
+    THotNom=THotNom,
+    TSourceNom=TSourceNom,
+    QNom=QNom,
+    PLRMin=PLRMin,
+    HighTemp=HighTemp,
+    DeltaTCon=DeltaTCon,
+    DeltaTEvap=DeltaTEvap,
+    TSource=TSource,
+    dTConFix=dTConFix) if                  use_non_manufacturer
+    annotation (Placement(transformation(extent={{48,18},{100,80}})));
+
+  PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer
   annotation (Placement(transformation(
-  extent={{7,20},{61,76}},  rotation=0)));
-  PerDataRevHP PerformanceDataHPCooling if use_rev
+  extent={{-17,20},{37,76}},rotation=0)));
+  PerDataRevHP PerformanceDataHPCooling if use_rev and not use_non_manufacturer
   annotation (Placement(transformation(extent={{-27,-28},{27,28}},
-  rotation=0,origin={-34,48})));
+  rotation=0,origin={-66,48})));
   Modelica.Blocks.Math.Gain gainEva(final k=-1)
     "Negate QEva to match definition of heat flow direction" annotation (
       Placement(transformation(
@@ -36,21 +53,46 @@ model InnerCycle_HeatPump
         rotation=0,
         origin={58,-20})));
 
+  // Data only relevant for non manufacturer approach
+  parameter Modelica.SIunits.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Boolean HighTemp=false "true: THot > 60°C"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+  parameter Modelica.SIunits.Temperature TSource=280 "temperature of heat source"
+   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+  parameter Boolean dTConFix=false
+  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
 
 equation
 
   connect(PerformanceDataHPHeating.QCon, switchQCon.u1)
-    annotation (Line(points={{12.4,17.2},{12.4,-4},{68,-4}}, color={0,0,127}));
+    annotation (Line(points={{-11.6,17.2},{-11.6,-4},{68,-4}},
+                                                             color={0,0,127}));
   connect(PerformanceDataHPHeating.Pel, switchPel.u1) annotation (Line(
-        points={{34,17.2},{34,-30},{8,-30},{8,-68}}, color={0,0,127}));
+        points={{10,17.2},{10,-30},{8,-30},{8,-68}}, color={0,0,127}));
   connect(PerformanceDataHPCooling.Pel, switchPel.u3) annotation (
       Line(
-      points={{-34,17.2},{-34,-30},{-8,-30},{-8,-68}},
+      points={{-66,17.2},{-66,-30},{-8,-30},{-8,-68}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(PerformanceDataHPCooling.QEva, switchQEva.u3) annotation (
       Line(
-      points={{-12.4,17.2},{-12.4,-22},{-68,-22}},
+      points={{-44.4,17.2},{-44.4,-22},{-68,-22}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(constZero.y, switchPel.u3)
@@ -69,19 +111,34 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(PerformanceDataHPCooling.QCon, gainCon.u) annotation (Line(
-      points={{-55.6,17.2},{-55.6,2},{-24,2},{-24,-20},{53.2,-20}},
+      points={{-87.6,17.2},{-87.6,2},{-24,2},{-24,-20},{53.2,-20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataHPHeating.QEva, gainEva.u) annotation (Line(points={{55.6,
-          17.2},{55.6,-6},{-51.2,-6}},       color={0,0,127}));
+  connect(PerformanceDataHPHeating.QEva, gainEva.u) annotation (Line(points={{31.6,
+          17.2},{31.6,-6},{-51.2,-6}},       color={0,0,127}));
   connect(sigBus, PerformanceDataHPCooling.sigBus) annotation (Line(
-      points={{0,102},{0,86},{-33.73,86},{-33.73,77.12}},
+      points={{0,102},{0,86},{-65.73,86},{-65.73,77.12}},
       color={255,204,51},
       thickness=0.5));
   connect(sigBus, PerformanceDataHPHeating.sigBus) annotation (Line(
-      points={{0,102},{0,86},{34.27,86},{34.27,77.12}},
+      points={{0,102},{0,86},{9.73,86},{9.73,76}},
       color={255,204,51},
       thickness=0.5));
+  connect(sigBus, lookUpTableNDNotManufacturerHeating.sigBus) annotation (Line(
+      points={{0,102},{73.74,102},{73.74,80}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(lookUpTableNDNotManufacturerHeating.QCon, switchQCon.u1) annotation (
+      Line(points={{53.2,14.9},{53.2,6},{64,6},{64,-4},{68,-4}}, color={0,0,127}));
+  connect(lookUpTableNDNotManufacturerHeating.Pel, switchPel.u1) annotation (
+      Line(points={{74,14.9},{74,6},{34,6},{34,-30},{8,-30},{8,-68}}, color={0,0,
+          127}));
+  connect(lookUpTableNDNotManufacturerHeating.QEva, gainEva.u) annotation (Line(
+        points={{94.8,14.9},{94.8,6},{56,6},{56,-6},{-51.2,-6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

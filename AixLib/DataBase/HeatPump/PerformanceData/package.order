@@ -5,3 +5,6 @@ LookUpTable2D
 LookUpTableND
 PolynomalApproach
 calcCOP
+LookUpTableNDNotManufacturer
+NominalHeatPumpNotManufacturer
+LookUpTableNDNotManufacturerSlim

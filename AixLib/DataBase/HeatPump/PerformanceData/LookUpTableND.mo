@@ -1,7 +1,8 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
-  extends
-    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+
+  parameter Real scalingFactor=1 "Scaling factor of heat pump";
   parameter Real nConv=100
     "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
   parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -108,6 +109,19 @@ model LookUpTableND "N-dimensional table with data for heat pump"
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={46,4})));
+  Modelica.Blocks.Math.Add calcRedQCon
+    "Based on redcued heat flow to the evaporator, the heat flow to the condenser is also reduced"
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=270,
+        origin={78,-72})));
+  Modelica.Blocks.Math.Product proRedQEva
+    "Based on the icing factor, the heat flow to the evaporator is reduced"
+    annotation (Placement(transformation(
+        extent={{-6,6},{6,-6}},
+        rotation=270,
+        origin={-82,-64})));
+
 protected
   Modelica.Blocks.Sources.Constant realCorr(final k=scalingFactor)
     "Calculates correction of table output based on scaling factor"
@@ -115,6 +129,11 @@ protected
         extent={{-6,-6},{6,6}},
         rotation=270,
         origin={0,36})));
+  Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
+    "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{-6,-6},
+            {6,6}},
+        rotation=270,
+        origin={-78,-42})));
 equation
 
   connect(constZero.y, switchQCon.u3) annotation (Line(points={{-1.33227e-15,
@@ -128,21 +147,21 @@ equation
   connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-2,55.6},{-2,
           52},{48,52},{48,44.4}},            color={0,0,127}));
   connect(sigBus.TEvaInMea, t_Ev_in.u) annotation (Line(
-      points={{1.075,104.07},{-2,104.07},{-2,84.8}},
+      points={{-0.925,100.07},{-2,100.07},{-2,84.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBus.TConOutMea, t_Co_ou.u) annotation (Line(
-      points={{1.075,104.07},{15,104.07},{15,84.6}},
+      points={{-0.925,100.07},{15,100.07},{15,84.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBus.nSet, nConGain.u) annotation (Line(
-      points={{1.075,104.07},{-22,104.07},{-22,84.8}},
+      points={{-0.925,100.07},{-22,100.07},{-22,84.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -171,30 +190,46 @@ equation
   connect(scalingFacTimesPel.y, switchPel.u1) annotation (Line(points={{46,-0.4},
           {46,-4},{50,-4},{50,-6},{50.8,-6},{50.8,-6.8}},
                                                 color={0,0,127}));
-  connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{46,-20.6},{46,
-          -50},{76.4,-50},{76.4,-60.8}}, color={0,0,127}));
+  connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{46,-20.6},{46,-50},{74.4,-50},{74.4,
+          -64.8}},                       color={0,0,127}));
   connect(switchPel.y, Pel) annotation (Line(points={{46,-20.6},{46,-64},{0,-64},
           {0,-110}}, color={0,0,127}));
-  connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{-56,
-          -20.6},{-56,-24},{-76,-24},{-76,-33.2}},                   color={0,0,
+  connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{-56,-20.6},{-56,-24},
+          {-78,-24},{-78,-37.2}},                                    color={0,0,
           127}));
-  connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={{46,
-          -20.6},{46,-26},{-86,-26},{-86,-38},{-80.8,-38}},
+  connect(switchPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={{46,-20.6},{46,-26},
+          {-86,-26},{-86,-42},{-82.8,-42}},
                  color={0,0,127}));
-  connect(switchQCon.u2, sigBus.onOffMea) annotation (Line(points={{-56,-6.8},{
-          -56,-2},{78,-2},{78,102},{1.075,102},{1.075,104.07}},  color={255,0,
+  connect(switchQCon.u2, sigBus.onOffMea) annotation (Line(points={{-56,-6.8},{-56,-2},{78,-2},{78,
+          102},{-0.925,102},{-0.925,100.07}},                    color={255,0,
           255}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switchPel.u2, sigBus.onOffMea) annotation (Line(points={{46,-6.8},{46,
-          -2},{78,-2},{78,102},{1.075,102},{1.075,104.07}},    color={255,0,255}),
+  connect(switchPel.u2, sigBus.onOffMea) annotation (Line(points={{46,-6.8},{46,-2},{78,-2},{78,102},
+          {-0.925,102},{-0.925,100.07}},                       color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(proRedQEva.u1,sigBus. iceFacMea) annotation (Line(points={{-85.6,-56.8},{-85.6,-52},{-98,
+          -52},{-98,90},{-0.925,90},{-0.925,100.07}},                color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(proRedQEva.y, QEva) annotation (Line(points={{-82,-70.6},{-82,-88},{80,-88},{80,-110}},
+                               color={0,0,127}));
+  connect(proRedQEva.y,calcRedQCon. u1) annotation (Line(points={{-82,-70.6},{-82,-74},{-68,-74},{-68,
+          -58},{81.6,-58},{81.6,-64.8}},                          color={0,0,
+          127}));
+  connect(calcRedQCon.y, QCon) annotation (Line(points={{78,-78.6},{78,-82},{-64,-82},{-64,-94},{-80,
+          -94},{-80,-110}},                         color={0,0,127}));
+  connect(proRedQEva.u2,feedbackHeatFlowEvaporator. y) annotation (Line(
+        points={{-78.4,-56.8},{-78,-56.8},{-78,-47.4}}, color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),

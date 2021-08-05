@@ -1,24 +1,63 @@
-within AixLib.Fluid.HeatPumps;
+﻿within AixLib.Fluid.HeatPumps;
 model HeatPump
   "Grey-box model for reversible heat pumps using a black-box to simulate the refrigeration cycle"
+
   extends AixLib.Fluid.BaseClasses.PartialReversibleVapourCompressionMachine(
-  use_rev=true,
-  final machineType = true,
-  redeclare AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
+    use_rev=use_rev,
+    final machineType=true,
+   redeclare AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
+      redeclare model PerDataMainHP = PerDataMainHP,
+      redeclare model PerDataRevHP = PerDataRevHP,
       final use_rev=use_rev,
       final scalingFactor=scalingFactor,
-      redeclare model PerDataMainHP = PerDataMainHP,
-      redeclare model PerDataRevHP = PerDataRevHP));
-
+      final use_non_manufacturer=use_non_manufacturer,
+      final THotMax=THotMax,
+      final THotNom=THotNom,
+      final TSourceNom=TSourceNom,
+      final QNom=QNom,
+      final PLRMin=PLRMin,
+      final HighTemp=HighTemp,
+      final DeltaTCon=DeltaTCon,
+      final DeltaTEvap=DeltaTEvap,
+      final TSource=TSource,
+      final dTConFix=dTConFix));
 
   replaceable model PerDataMainHP =
       AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
-  "Performance data of a heat pump in main operation mode"
-    annotation (choicesAllMatching=true);
+    "Performance data of a heat pump in main operation mode"
+    annotation (Dialog(enable=not use_non_manufacturer),choicesAllMatching=true);
   replaceable model PerDataRevHP =
       AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of a heat pump in reversible operation mode"
-    annotation (Dialog(enable=use_rev),choicesAllMatching=true);
+    annotation (Dialog(enable=not use_non_manufacturer),choicesAllMatching=true);
+    // NotManufacturer - only relevant if PerDataMainHP is set to
+
+  parameter Boolean use_non_manufacturer=false
+                                              "Use non manufacturer approach?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+
+  // Data only relevant for non manufacturer approach
+  parameter Modelica.SIunits.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Real PLRMin=0.4 "Limit of PLR; less =0"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Boolean HighTemp=false "true: THot > 60°C"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7
+    "Temperature difference heat sink condenser"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3
+    "Temperature difference heat source evaporator"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Modelica.SIunits.Temperature TSource=280 "Temperature of heat source"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Boolean dTConFix=false "Constant delta T condenser"
+    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(

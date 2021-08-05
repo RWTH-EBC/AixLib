@@ -1,8 +1,9 @@
-within AixLib.DataBase.HeatPump.PerformanceData;
+﻿within AixLib.DataBase.HeatPump.PerformanceData;
 model VCLibMap
   "Multi-dimensional performance map encompasing choices of fluid and flowsheet based on steady state calculations using the Vapour Compression Library"
   extends BaseClasses.PartialPerformanceData;
   // Parameters Heat pump operation
+  parameter Real scalingFactor=1 "Scaling factor of heat pump";
   parameter Modelica.SIunits.Power QCon_flow_nominal=5000
     "Nominal heating power of heat pump"                                                 annotation(Dialog(group=
           "Heat pump specification"));
@@ -163,34 +164,35 @@ equation
           36},{50,39}}, color={0,0,127}));
   connect(const_minCOP.y, max.u2) annotation (Line(points={{5,39.5},{5,36},{27.6,
           36},{27.6,32.8}}, color={0,0,127}));
-  connect(multiplex3_1.u1[1], sigBus.nSet) annotation (Line(points={{4.2,85.2},
-          {4.2,90},{14,90},{14,104.07},{1.075,104.07}}, color={0,0,127}), Text(
+  connect(multiplex3_1.u1[1], sigBus.nSet) annotation (Line(points={{4.2,85.2},{
+          4.2,90},{14,90},{14,100.07},{-0.925,100.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(multiplex3_1.u2[1],sigBus.TConInMea)  annotation (Line(points={{0,85.2},
-          {0,94},{0,104.07},{1.075,104.07}}, color={0,0,127}), Text(
+          {0,94},{0,100.07},{-0.925,100.07}},color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(multiplex3_1.u3[1],sigBus.TEvaInMea)  annotation (Line(points={{-4.2,85.2},
-          {-4.2,88},{-14,88},{-14,104.07},{1.075,104.07}}, color={0,0,127}),
+          {-4.2,88},{-14,88},{-14,100.07},{-0.925,100.07}},color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(switchPel.u2, sigBus.onOffMea) annotation (Line(points={{44,-6.8},{44,
-          0},{88,0},{88,94},{1.075,94},{1.075,104.07}}, color={255,0,255}),
+          0},{88,0},{88,94},{-0.925,94},{-0.925,100.07}},
+                                                        color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switchQCon.u2, sigBus.onOffMea) annotation (Line(points={{-46,-6.8},{
-          -46,0},{88,0},{88,94},{0,94},{0,104.07},{1.075,104.07}}, color={255,0,
+  connect(switchQCon.u2, sigBus.onOffMea) annotation (Line(points={{-46,-6.8},{-46,
+          0},{88,0},{88,94},{0,94},{0,100.07},{-0.925,100.07}},    color={255,0,
           255}), Text(
       string="%second",
       index=1,
