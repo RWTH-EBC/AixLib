@@ -8,7 +8,7 @@ model ThermalZone "Illustrates the use of ThermalZone"
       Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle(),
       Output_Schwimmbad_Modell.Hallenbad.Hallenbad_DataBase.Hallenbad_Schwimmhalle()}
     "Setup for zones" annotation (choicesAllMatching=false);
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone_withPools thermalZone_withPools[numZones](
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone           thermalZone_withPools[numZones](
     each final internalGainsMode=1,
     each final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final zoneParam=zoneParam,
@@ -50,14 +50,6 @@ model ThermalZone "Illustrates the use of ThermalZone"
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{64,-20},{52,-8}})));
 
-  Modelica.Blocks.Sources.CombiTimeTable tableOpeningHours(
-    tableOnFile=true,
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName="OpeningHours",
-    columns=2:(numZones + 1),
-    fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))                                                        "Boundary condition: Opening Hours of swiming pools"
-    annotation (Placement(transformation(extent={{-74,-88},{-58,-72}})));
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
     tableOnFile=true,
     tableName="Tset",
@@ -134,8 +126,6 @@ equation
         color={0,0,127}));
     end if;
    end for;
-  connect(tableOpeningHours.y, thermalZone_withPools.openingHours) annotation (
-      Line(points={{-57.2,-80},{-28,-80},{-28,-10.4},{1.2,-10.4}}, color={0,0,127}));
 
 
   connect(sine.y, gain.u)
