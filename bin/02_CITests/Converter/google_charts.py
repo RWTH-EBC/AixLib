@@ -12,10 +12,9 @@ import glob
 import pandas as pd
 import argparse
 
-# get datas and create a line chart
 
 
-def read_data(ref_file):
+def read_data(ref_file): ## Read Reference results in AixLib\Resources\ReferenceResults\Dymola\${modelname}.txt
 	## Lists
 	Value_List= []
 	time_List =[]
@@ -23,6 +22,7 @@ def read_data(ref_file):
 	## Dictionary
 	distriction_values = {}
 	distriction_time = {}
+	## searches for values and time intervals
 	for line in open(ref_file, 'r'):
 		if line.find("last-generated=") > -1:
 			continue
