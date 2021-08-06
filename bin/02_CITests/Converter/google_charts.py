@@ -708,7 +708,7 @@ if  __name__ == '__main__':
 ################################################################################
 		if args.plotModel is True:
 			if os.path.isdir(temp_chart) is False:
-				os.mkdir(temp_chart)
+				os.makedirs(temp_chart)
 			model_list = args.modellist
 			print(model_list)
 			model_list = model_list.split("\n")
