@@ -90,7 +90,7 @@ model HeatTransferConduction
         origin={-54,78},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWall
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWall
     annotation (Placement(transformation(extent={{76,-98},{96,-78}})));
 equation
   connect(HeatFlowOuter.T, TSoil)

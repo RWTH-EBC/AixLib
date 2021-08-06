@@ -3,52 +3,66 @@ model waveMachine "Calculate energy demands of a wave machine"
 
   parameter Modelica.SIunits.Length h_wave "Height of generated wave";
   parameter Modelica.SIunits.Length w_wave "Width of wave machine outlet/of generated wave";
+  parameter Modelica.SIunits.Time wavePool_startTime "Start time of first wave cycle";
+  parameter Modelica.SIunits.Time wavePool_period "Time of cycling period";
+  parameter Real wavePool_width "Length of wave generation within cycling period";
 
   Modelica.Blocks.Math.RealToBoolean useWavePool(threshold=1)
     "If input = 1, then true, else no waves generated"
-    annotation (Placement(transformation(extent={{-16,-8},{0,8}})));
+    annotation (Placement(transformation(extent={{-58,-8},{-42,8}})));
   Modelica.Blocks.Tables.CombiTable1D tablePWave(
     y(unit="W/m"),
     tableOnFile=false,
     table=[0,0; 0.7,3500; 0.9,6000; 1.3,12000],
     extrapolation=Modelica.Blocks.Types.Extrapolation.LastTwoPoints)
     "Estimate consumed power per width to generate wave of a certain heigth; "
-    annotation (Placement(transformation(extent={{-38,36},{-18,56}})));
+    annotation (Placement(transformation(extent={{-46,50},{-26,70}})));
   Modelica.Blocks.Sources.RealExpression get_h_wave(y=h_wave)
     "Get height of generated wave"
-    annotation (Placement(transformation(extent={{-82,36},{-62,56}})));
-  Modelica.Blocks.Interfaces.RealInput wavePool "Input profil of wave machine"
+    annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
+  Modelica.Blocks.Interfaces.RealInput open "Input profil of wave machine"
     annotation (Placement(transformation(extent={{-136,-20},{-96,20}})));
   Modelica.Blocks.Interfaces.RealOutput PWaveMachine( final unit="W", final quantity="Power")
     "Power consumption of wave machine"
     annotation (Placement(transformation(extent={{96,-10},{116,10}})));
   Modelica.Blocks.Math.Gain multiply(k=w_wave) "Multply by width of wave"
-    annotation (Placement(transformation(extent={{8,38},{24,54}})));
+    annotation (Placement(transformation(extent={{0,52},{16,68}})));
   Modelica.Blocks.Sources.Constant zero(k=0)
     "no output if wave machine is off"
-    annotation (Placement(transformation(extent={{-14,-38},{0,-24}})));
+    annotation (Placement(transformation(extent={{-14,-78},{0,-64}})));
   Modelica.Blocks.Logical.Switch switchWaveMachine
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+  Modelica.Blocks.Logical.And and1
+    annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+  Modelica.Blocks.Sources.BooleanPulse wavePoolCycle(
+    width=wavePool_width,
+    period=wavePool_period,
+    startTime=wavePool_startTime)
+    annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
 equation
-  connect(get_h_wave.y, tablePWave.u[1]) annotation (Line(points={{-61,46},{
-          -40,46}},              color={0,0,127}));
-  connect(multiply.u, tablePWave.y[1]) annotation (Line(points={{6.4,46},{-17,
-          46}},               color={0,0,127}));
-  connect(wavePool, useWavePool.u) annotation (Line(points={{-116,0},{-17.6,0}},
-                           color={0,0,127}));
+  connect(get_h_wave.y, tablePWave.u[1]) annotation (Line(points={{-69,60},{-48,
+          60}},                  color={0,0,127}));
+  connect(multiply.u, tablePWave.y[1]) annotation (Line(points={{-1.6,60},{-25,60}},
+                              color={0,0,127}));
+  connect(open, useWavePool.u)
+    annotation (Line(points={{-116,0},{-59.6,0}}, color={0,0,127}));
   connect(switchWaveMachine.y, PWaveMachine) annotation (Line(points={{81,0},{
           106,0}},                     color={0,0,127}));
-  connect(useWavePool.y, switchWaveMachine.u2) annotation (Line(points={{0.8,0},
-          {58,0}},                        color={255,0,255}));
   connect(multiply.y, switchWaveMachine.u1)
-    annotation (Line(points={{24.8,46},{50,46},{50,8},{58,8}},
+    annotation (Line(points={{16.8,60},{42,60},{42,8},{58,8}},
                                                              color={0,0,127}));
-  connect(zero.y, switchWaveMachine.u3) annotation (Line(points={{0.7,-31},{
-          52,-31},{52,-8},{58,-8}}, color={0,0,127}));
+  connect(zero.y, switchWaveMachine.u3) annotation (Line(points={{0.7,-71},{52,-71},
+          {52,-8},{58,-8}},         color={0,0,127}));
   connect(PWaveMachine, PWaveMachine) annotation (Line(
       points={{106,0},{101,0},{101,0},{106,0}},
       color={0,0,127},
       smooth=Smooth.Bezier));
+  connect(useWavePool.y, and1.u1)
+    annotation (Line(points={{-41.2,0},{-10,0}}, color={255,0,255}));
+  connect(and1.y, switchWaveMachine.u2)
+    annotation (Line(points={{13,0},{58,0}}, color={255,0,255}));
+  connect(wavePoolCycle.y, and1.u2) annotation (Line(points={{-39,-40},{-24,-40},
+          {-24,-8},{-10,-8}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0}),
         Line(
