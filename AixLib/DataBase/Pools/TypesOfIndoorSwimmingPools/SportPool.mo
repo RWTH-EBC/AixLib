@@ -1,6 +1,5 @@
 within AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools;
 record SportPool "Pool which is mainly used by sport swimmers"
-
   extends IndoorSwimmingPoolBaseRecord(
     T_pool_start = 301.15,
     T_pool = 301.15,
@@ -22,6 +21,9 @@ record SportPool "Pool which is mainly used by sport swimmers"
     use_wavePool = false,
     h_wave = 0,
     w_wave = 0,
+    wavePool_period = 1800,
+    wavePool_startTime = 0,
+    wavePool_width = 10/30*100,
     AInnerPoolWall = 21.658,
     APoolWallWithEarthContact = 143.32,
     APoolFloorWithEarthContact = 559.82,

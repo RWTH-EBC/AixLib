@@ -89,7 +89,7 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     withIdealThresholds=false,
     use_swimmingPools=false,
     numPools=1,
-    poolParam= {AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.NoPool()});
+    poolParam={AixLib.DataBase.Pools.IndoorSwimmingPoolDummy()});
 
 
 

@@ -31,18 +31,21 @@ record IndoorSwimmingPoolBaseRecord
 
  // Wave mode
   parameter Boolean use_wavePool=false "Is there a wave machine installed?";
-  parameter Modelica.SIunits.Length h_wave=0 "Height of generatedwave";
-  parameter Modelica.SIunits.Length w_wave=0 "Width of generated wave/ width of wave machine outlet";
+  parameter Modelica.SIunits.Length h_wave "Height of generatedwave";
+  parameter Modelica.SIunits.Length w_wave "Width of generated wave/ width of wave machine outlet";
+  parameter Modelica.SIunits.Time wavePool_startTime "Start time of first wave cycle";
+  parameter Modelica.SIunits.Time wavePool_period "Time of cycling period";
+  parameter Real wavePool_width "Length of wave generation within cycling period";
+
 
  // Pool Walls
-  parameter Modelica.SIunits.Area AInnerPoolWall(min=0.001);
-  parameter Modelica.SIunits.Area APoolWallWithEarthContact(min=0.001);
-  parameter Modelica.SIunits.Area APoolFloorWithEarthContact(min=0.001);
-  parameter Modelica.SIunits.Area AInnerPoolFloor(min=0.001);
+  parameter Modelica.SIunits.Area AInnerPoolWall;
+  parameter Modelica.SIunits.Area APoolWallWithEarthContact;
+  parameter Modelica.SIunits.Area APoolFloorWithEarthContact;
+  parameter Modelica.SIunits.Area AInnerPoolFloor;
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWaterHorizontal;
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWaterVertical;
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam;
-
 
 
   annotation (Documentation(info="<html>

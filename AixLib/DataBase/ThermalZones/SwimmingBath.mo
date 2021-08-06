@@ -572,7 +572,7 @@ package SwimmingBath "Zones for an exemplary indoor swimming bath"
       TThresholdCooler = 295.15,
       use_swimmingPools=true,
       numPools=2,
-      poolParam= {AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(),AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.ChildrensPool()});
+      poolParam= {AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool(),AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools.SportPool()});
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));

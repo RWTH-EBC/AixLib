@@ -120,12 +120,10 @@ record ZoneBaseRecord "Base record definition for zone records"
         be used";
 
   // Add for Pools
-   parameter Boolean use_swimmingPools=false;
-   parameter Integer numPools(min=1);
-   replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools]
-                                                                                         annotation (choicesAllMatching=false);
-
-
+  parameter Boolean use_swimmingPools=false;
+  parameter Integer numPools(min=1)=1;
+  replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools]
+   annotation (choicesAllMatching=false);
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
