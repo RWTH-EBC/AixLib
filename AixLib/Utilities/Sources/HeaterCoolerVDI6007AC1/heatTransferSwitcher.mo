@@ -8,7 +8,7 @@ model heatTransferSwitcher
   Modelica.Blocks.Interfaces.BooleanOutput heatingOrCooling
     "True if heating was last active"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresis(uLow=-1, uHigh=1)
+  Modelica.Blocks.Logical.Hysteresis hysteresis(uLow=-5, uHigh=5)
     "Outputs true if power input is positive (heating) and false if power input is negative (cooling)"
     annotation (Placement(transformation(extent={{-22,-10},{-2,10}})));
   Modelica.Blocks.Math.Add add
