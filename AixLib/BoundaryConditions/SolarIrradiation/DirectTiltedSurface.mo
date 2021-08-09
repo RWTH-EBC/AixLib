@@ -1,6 +1,7 @@
 within AixLib.BoundaryConditions.SolarIrradiation;
 block DirectTiltedSurface "Direct solar irradiation on a tilted surface"
-  extends AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
+  extends
+    AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
 
   parameter Modelica.SIunits.Angle lat "Latitude";
   parameter Modelica.SIunits.Angle azi "Surface azimuth";

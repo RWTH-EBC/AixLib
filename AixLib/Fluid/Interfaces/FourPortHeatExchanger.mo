@@ -17,7 +17,7 @@ model FourPortHeatExchanger
      annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
 
   // Advanced
-  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
   // Assumptions
@@ -71,7 +71,8 @@ model FourPortHeatExchanger
     "Heat flow rate into medium 2";
 
   replaceable AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort vol1[nNodes](
-    each V = m1_flow_nominal*tau1/rho1_nominal/nNodes) constrainedby MixingVolumes.BaseClasses.PartialMixingVolume(
+    each V = m1_flow_nominal*tau1/rho1_nominal/nNodes) constrainedby
+    MixingVolumes.BaseClasses.PartialMixingVolume(
     redeclare final package Medium = Medium1,
     each nPorts=2,
     each V=m1_flow_nominal*tau1/rho1_nominal,
@@ -91,7 +92,8 @@ model FourPortHeatExchanger
       __Dymola_choicesAllMatching=true);
 
   replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2[nNodes](
-    each V = m2_flow_nominal*tau2/rho2_nominal/nNodes) constrainedby MixingVolumes.BaseClasses.PartialMixingVolume(
+    each V = m2_flow_nominal*tau2/rho2_nominal/nNodes) constrainedby
+    MixingVolumes.BaseClasses.PartialMixingVolume(
     redeclare final package Medium = Medium2,
     each nPorts=2,
     each V=m2_flow_nominal*tau2/rho2_nominal,

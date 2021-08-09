@@ -24,7 +24,7 @@ model DHCSubstationHeatPumpChiller
     "Set supply temperature for space heating on secondary side (building system)"
     annotation (Dialog(tab = "General", group = "Building System"));
 
-    parameter Modelica.SIunits.Temperature deltaT_heaSecSet
+    parameter Modelica.SIunits.TemperatureDifference deltaT_heaSecSet
     "Set temperature difference for heating on secondary site (building system)"
      annotation (Dialog(tab = "General", group = "Building System"));
 

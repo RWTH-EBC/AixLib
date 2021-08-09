@@ -59,7 +59,7 @@ model SimpleRoomFourElements
     AWin={7,7},
     ATransparent={7,7},
     AExt={3.5,8},
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    redeclare replaceable package Medium = Modelica.Media.Air.SimpleAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
@@ -111,8 +111,8 @@ model SimpleRoomFourElements
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
     (convective)"
     annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
-  Modelica.Blocks.Sources.Constant const[2](each k=1)
-    "Sets sunblind signal to 1 (open)"
+  Modelica.Blocks.Sources.Constant const[2](each k=0)
+    "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
   BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(transformation(extent={{-100,-10},{-66,22}}),

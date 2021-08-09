@@ -1,11 +1,13 @@
 within AixLib.Utilities;
 package Math "Library with functions such as for smoothing"
   extends Modelica.Icons.Package;
-
-annotation (preferredView="info", Documentation(info="<html><p>
-  This package contains blocks and functions for commonly used
-  mathematical operations. The classes in this package augment the
-  classes <a href=\"modelica://Modelica.Blocks\">Modelica.Blocks</a>.
+annotation (preferredView="info", Documentation(info="<html>
+<p>
+This package contains blocks and functions for commonly used
+mathematical operations.
+The classes in this package augment the classes
+<a href=\"modelica://Modelica.Blocks\">
+Modelica.Blocks</a>.
 </p>
 </html>"),
 Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
@@ -15,4 +17,5 @@ Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
             -50.2},{23.7,-64.2},{29.3,-73.1},{35,-78.4},{40.6,-80},{46.2,-77.6},
             {51.9,-71.5},{57.5,-61.9},{63.9,-47.2},{72,-24.8},{80,0}}, color={
             0,0,0}, smooth=Smooth.Bezier)}));
+
 end Math;

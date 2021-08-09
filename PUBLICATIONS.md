@@ -20,12 +20,19 @@ ISBN: 978-91-7519-380-9
 DOI: 10.3384/ECP14096293   
 URL: http://dx.doi.org/10.3384/ecp14096
 
+#### Validation of a building model as part of the AixLib Modelica library for dynamic plant and building performance simulations
+Xanthopoulou, Konstantina; Mehrfeld, Philipp; Kangowski, Paul; Lanzerath, Franz; Müller, Dirk (2021)
+In: Energy and Buildings, Volume 250, Pages: 111248  
+[Info](http://www.ebc.eonerc.rwth-aachen.de/go/id/dncb/lidx/1/file/225819)  
+ISS: ISSN 0378-7788     
+DOI: 10.1016/j.enbuild.2021.111248   
+URL: https://doi.org/10.1016/j.enbuild.2021.111248
+
 ### ROM (Reduced Order Model)
 
 #### Verification of a Low Order Building Model for the Modelica Library AixLib using ASHRAE Standard 140
 Lauster, Moritz Robert; Constantin, Ana; Remmen, Peter; Fuchs, Marcus; Müller, Dirk
 In: Proceedings of Building Simulation 2017: 15th Conference of IBPSA, BS2017, 2017-08-07 - 2017-08-09, San Francisco, USA / Editors: Charles S. Barnaby and Michael Wetter, Pages: 1149-1158  
-[Info](http://www.ebc.eonerc.rwth-aachen.de/go/id/dncb/lidx/1/file/712453)    
 ISBN: 978-1-7750520-0-5  
 DOI: 10.26868/25222708.2017.303  
 
@@ -60,7 +67,9 @@ Mans, Michael; Blacha, Tobias; Remmen, Peter; Müller, Dirk; Modelica Conference
 
 
 ## Fast HVAC <a name="fasthvac"></a>
-```enter publications here```
+
+#### FastHVAC : A Library for Fast Composition and Simulation of Building Energy Systems
+Stinner, S., Schumacher, M., Finkbeiner, K., Streblow, R., & Müller, D. (2015). In: Proceedings of the International Modelica Conference, Versailles, France, September 21-23, pp. 921-927, DOI: [DOI: 10.3384/ecp15118921](http://dx.doi.org/10.3384/ecp15118921)
 
 
 ## Building Automation Systems <a name="bas"></a>

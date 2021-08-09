@@ -26,8 +26,8 @@ partial model GeothermalHeatPumpControlledBase
     final unit="K",
     displayUnit="degC",
     min=0,
-    start=T_start_warm) "Temperature in the heat storage"
-    annotation (Placement(transformation(
+    start=T_start_hot) "Temperature in the heat storage" annotation (Placement(
+        transformation(
         origin={-100,-120},
         extent={{10,-10},{-10,10}},
         rotation=90), iconTransformation(
