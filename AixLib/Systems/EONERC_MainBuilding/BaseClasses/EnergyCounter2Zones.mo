@@ -1,6 +1,7 @@
 within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 model EnergyCounter2Zones "Sums up all consumed energy"
     parameter Modelica.SIunits.Temperature Tset = 273.15+22 "Set Temperature of rooms for ISE calculation";
+    parameter Modelica.SIunits.Temperature deltaTset = 2 "Set Temperature of rooms for ISE calculation";
   MainBus2Zones mainBus annotation (Placement(transformation(extent={{-118,-18},
             {-80,18}}), iconTransformation(extent={{-18,-42},{16,-6}})));
   Modelica.Blocks.Continuous.Integrator integrator
@@ -32,9 +33,9 @@ model EnergyCounter2Zones "Sums up all consumed energy"
   Modelica.Blocks.Math.Sum sum1(nin=3)
     annotation (Placement(transformation(extent={{-30,-22},{-20,-12}})));
   Modelica.Blocks.Math.Sum sumWel(nin=7)
-    annotation (Placement(transformation(extent={{60,4},{70,14}})));
+    annotation (Placement(transformation(extent={{50,-22},{60,-12}})));
   Modelica.Blocks.Math.Sum sumQbr(nin=3)
-    annotation (Placement(transformation(extent={{60,-40},{70,-30}})));
+    annotation (Placement(transformation(extent={{50,-40},{60,-30}})));
   Modelica.Blocks.Continuous.Integrator integrator11
     annotation (Placement(transformation(extent={{112,88},{122,98}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=0, uMin=-100)
@@ -44,33 +45,37 @@ model EnergyCounter2Zones "Sums up all consumed energy"
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{102,90},{108,96}})));
   Modelica.Blocks.Sources.Constant const(k=273.15 + 59.5)
-    annotation (Placement(transformation(extent={{62,86},{68,92}})));
+    annotation (Placement(transformation(extent={{60,88},{66,94}})));
   Modelica.Blocks.Continuous.Integrator integrator13
-    annotation (Placement(transformation(extent={{114,40},{124,50}})));
+    annotation (Placement(transformation(extent={{114,22},{124,32}})));
   Modelica.Blocks.Nonlinear.Limiter limiter2(uMax=1000, uMin=0)
-    annotation (Placement(transformation(extent={{90,40},{100,50}})));
+    annotation (Placement(transformation(extent={{90,22},{100,32}})));
   Modelica.Blocks.Math.Add add4(k2=-1)
-    annotation (Placement(transformation(extent={{76,40},{86,50}})));
+    annotation (Placement(transformation(extent={{76,22},{86,32}})));
   Modelica.Blocks.Sources.Constant const2(k=273.15 + 16.5)
-    annotation (Placement(transformation(extent={{64,38},{70,44}})));
+    annotation (Placement(transformation(extent={{64,20},{70,26}})));
   Modelica.Blocks.Math.Product product2
-    annotation (Placement(transformation(extent={{104,42},{110,48}})));
+    annotation (Placement(transformation(extent={{104,24},{110,30}})));
   Modelica.Blocks.Continuous.Integrator integrator12
-    annotation (Placement(transformation(extent={{110,56},{120,66}})));
+    annotation (Placement(transformation(extent={{112,48},{122,58}})));
   Modelica.Blocks.Math.Add add3(k2=-1)
-    annotation (Placement(transformation(extent={{84,56},{94,66}})));
+    annotation (Placement(transformation(extent={{72,48},{82,58}})));
   Modelica.Blocks.Math.Product product1
-    annotation (Placement(transformation(extent={{100,58},{106,64}})));
+    annotation (Placement(transformation(extent={{102,50},{108,56}})));
   Modelica.Blocks.Sources.Constant const1(k=Tset)
-    annotation (Placement(transformation(extent={{72,54},{78,60}})));
+    annotation (Placement(transformation(extent={{60,46},{68,54}})));
   Modelica.Blocks.Continuous.Integrator integrator14
-    annotation (Placement(transformation(extent={{110,74},{120,84}})));
+    annotation (Placement(transformation(extent={{110,66},{120,76}})));
   Modelica.Blocks.Math.Add add6(k2=-1)
-    annotation (Placement(transformation(extent={{84,74},{94,84}})));
+    annotation (Placement(transformation(extent={{70,66},{80,76}})));
   Modelica.Blocks.Math.Product product4
-    annotation (Placement(transformation(extent={{100,76},{106,82}})));
+    annotation (Placement(transformation(extent={{100,68},{106,74}})));
   Modelica.Blocks.Sources.Constant const4(k=Tset)
-    annotation (Placement(transformation(extent={{72,72},{78,78}})));
+    annotation (Placement(transformation(extent={{58,64},{66,72}})));
+  Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=deltaTset, uMin=-deltaTset)
+    annotation (Placement(transformation(extent={{86,48},{96,58}})));
+  Modelica.Blocks.Nonlinear.DeadZone deadZone1(uMax=deltaTset, uMin=-deltaTset)
+    annotation (Placement(transformation(extent={{86,66},{96,76}})));
 equation
   connect(integrator.u, mainBus.hpSystemBus.busHP.Pel) annotation (Line(points={
           {-11,95},{-98.905,95},{-98.905,0.09}}, color={0,0,127}), Text(
@@ -240,33 +245,36 @@ equation
   connect(sum1.y, integrator6.u) annotation (Line(points={{-19.5,-17},{-14.75,
           -17},{-14.75,-17},{-11,-17}}, color={0,0,127}));
   connect(integrator.y, sumWel.u[1])
-    annotation (Line(points={{0.5,95},{59,95},{59,8.14286}}, color={0,0,127}));
+    annotation (Line(points={{0.5,95},{49,95},{49,-17.8571}},color={0,0,127}));
   connect(integrator1.y, sumWel.u[2])
-    annotation (Line(points={{0.5,79},{59,79},{59,8.42857}}, color={0,0,127}));
+    annotation (Line(points={{0.5,79},{49,79},{49,-17.5714}},color={0,0,127}));
   connect(integrator2.y, sumWel.u[3]) annotation (Line(points={{0.5,61},{32,61},
-          {32,10},{59,10},{59,8.71429}}, color={0,0,127}));
+          {32,10},{49,10},{49,-17.2857}},color={0,0,127}));
   connect(integrator3.y, sumWel.u[4]) annotation (Line(points={{0.5,45},{16,45},
-          {16,46},{32,46},{32,9},{59,9}}, color={0,0,127}));
+          {16,46},{32,46},{32,-17},{49,-17}},
+                                          color={0,0,127}));
   connect(integrator4.y, sumWel.u[5]) annotation (Line(points={{0.5,25},{32.25,
-          25},{32.25,9.28571},{59,9.28571}}, color={0,0,127}));
+          25},{32.25,-16.7143},{49,-16.7143}},
+                                             color={0,0,127}));
   connect(integrator5.y, sumWel.u[6])
-    annotation (Line(points={{0.5,9},{59,9},{59,9.57143}}, color={0,0,127}));
-  connect(integrator6.y, sumWel.u[7]) annotation (Line(points={{0.5,-17},{59,
-          -17},{59,9.85714}}, color={0,0,127}));
-  connect(sumWel.y, mainBus.evaBus.WelTotalMea) annotation (Line(points={{70.5,9},
-          {80,9},{80,0.09},{-98.905,0.09}}, color={0,0,127}), Text(
+    annotation (Line(points={{0.5,9},{49,9},{49,-16.4286}},color={0,0,127}));
+  connect(integrator6.y, sumWel.u[7]) annotation (Line(points={{0.5,-17},{49,
+          -17},{49,-16.1429}},color={0,0,127}));
+  connect(sumWel.y, mainBus.evaBus.WelTotalMea) annotation (Line(points={{60.5,-17},
+          {64,-17},{64,-16},{66,-16},{66,0.09},{-98.905,0.09}},
+                                            color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(integrator7.y, sumQbr.u[1]) annotation (Line(points={{0.5,-35},{21.25,
-          -35},{21.25,-35.6667},{59,-35.6667}}, color={0,0,127}));
+          -35},{21.25,-35.6667},{49,-35.6667}}, color={0,0,127}));
   connect(integrator8.y, sumQbr.u[2])
-    annotation (Line(points={{0.5,-55},{59,-55},{59,-35}}, color={0,0,127}));
-  connect(integrator9.y, sumQbr.u[3]) annotation (Line(points={{0.5,-75},{30,
-          -75},{30,-76},{58,-76},{58,-34.3333},{59,-34.3333}}, color={0,0,127}));
-  connect(sumQbr.y, mainBus.evaBus.QbrTotalMea) annotation (Line(points={{70.5,-35},
-          {76,-35},{76,-36},{80,-36},{80,0.09},{-98.905,0.09}}, color={0,0,127}),
+    annotation (Line(points={{0.5,-55},{49,-55},{49,-35}}, color={0,0,127}));
+  connect(integrator9.y, sumQbr.u[3]) annotation (Line(points={{0.5,-75},{20,
+          -75},{20,-74},{48,-74},{48,-34.3333},{49,-34.3333}}, color={0,0,127}));
+  connect(sumQbr.y, mainBus.evaBus.QbrTotalMea) annotation (Line(points={{60.5,-35},
+          {64,-35},{64,-36},{66,-36},{66,0.09},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -280,7 +288,7 @@ equation
           {101.4,94.5},{101.4,94.8}}, color={0,0,127}));
   connect(product.y, integrator11.u) annotation (Line(points={{108.3,93},{
           109.15,93},{109.15,93},{111,93}}, color={0,0,127}));
-  connect(const.y, add2.u2) annotation (Line(points={{68.3,89},{70.15,89},{
+  connect(const.y, add2.u2) annotation (Line(points={{66.3,91},{70.15,91},{
           70.15,90},{73,90}}, color={0,0,127}));
   connect(add2.u1, mainBus.consHtcBus.TFwrdInMea) annotation (Line(points={{73,96},
           {68,96},{68,112},{-98.905,112},{-98.905,0.09}}, color={0,0,127}),
@@ -296,75 +304,79 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(const2.y, add4.u2) annotation (Line(points={{70.3,41},{72.15,41},{
-          72.15,42},{75,42}}, color={0,0,127}));
+  connect(const2.y, add4.u2) annotation (Line(points={{70.3,23},{72.15,23},{72.15,
+          24},{75,24}},       color={0,0,127}));
   connect(add4.y, limiter2.u)
-    annotation (Line(points={{86.5,45},{89,45}}, color={0,0,127}));
+    annotation (Line(points={{86.5,27},{89,27}}, color={0,0,127}));
   connect(integrator13.u, product2.y)
-    annotation (Line(points={{113,45},{110.3,45}}, color={0,0,127}));
-  connect(limiter2.y, product2.u2) annotation (Line(points={{100.5,45},{102.25,
-          45},{102.25,43.2},{103.4,43.2}}, color={0,0,127}));
-  connect(limiter2.y, product2.u1) annotation (Line(points={{100.5,45},{100.5,
-          46.8},{103.4,46.8}}, color={0,0,127}));
-  connect(add4.u1, mainBus.consCold1Bus.TFwrdInMea) annotation (Line(points={{75,
-          48},{62,48},{62,50},{54,50},{54,114},{-98.905,114},{-98.905,0.09}},
+    annotation (Line(points={{113,27},{110.3,27}}, color={0,0,127}));
+  connect(limiter2.y, product2.u2) annotation (Line(points={{100.5,27},{102.25,27},
+          {102.25,25.2},{103.4,25.2}},     color={0,0,127}));
+  connect(limiter2.y, product2.u1) annotation (Line(points={{100.5,27},{100.5,28.8},
+          {103.4,28.8}},       color={0,0,127}));
+  connect(add4.u1, mainBus.consCold1Bus.TFwrdInMea) annotation (Line(points={{75,30},
+          {62,30},{62,32},{54,32},{54,96},{-98.905,96},{-98.905,0.09}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(integrator13.y, mainBus.evaBus.IseCold1) annotation (Line(points={{124.5,
-          45},{150,45},{150,122},{-98.905,122},{-98.905,0.09}}, color={0,0,127}),
+          27},{150,27},{150,104},{-98.905,104},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(product1.y, integrator12.u)
-    annotation (Line(points={{106.3,61},{109,61}}, color={0,0,127}));
-  connect(const1.y, add3.u2) annotation (Line(points={{78.3,57},{80.15,57},{80.15,
-          58},{83,58}}, color={0,0,127}));
+    annotation (Line(points={{108.3,53},{111,53}}, color={0,0,127}));
+  connect(const1.y, add3.u2) annotation (Line(points={{68.4,50},{71,50}},
+                        color={0,0,127}));
   connect(product4.y, integrator14.u)
-    annotation (Line(points={{106.3,79},{109,79}}, color={0,0,127}));
-  connect(const4.y,add6. u2) annotation (Line(points={{78.3,75},{80.15,75},{
-          80.15,76},{83,76}},
+    annotation (Line(points={{106.3,71},{109,71}}, color={0,0,127}));
+  connect(const4.y,add6. u2) annotation (Line(points={{66.4,68},{69,68}},
                           color={0,0,127}));
-  connect(add6.y,product4. u2) annotation (Line(points={{94.5,79},{97.25,79},{
-          97.25,77.2},{99.4,77.2}},     color={0,0,127}));
-  connect(add6.y,product4. u1) annotation (Line(points={{94.5,79},{97.25,79},{
-          97.25,80.8},{99.4,80.8}},     color={0,0,127}));
-  connect(add3.y, product1.u1) annotation (Line(points={{94.5,61},{97.25,61},{97.25,
-          62.8},{99.4,62.8}}, color={0,0,127}));
-  connect(add3.y, product1.u2) annotation (Line(points={{94.5,61},{97.25,61},{97.25,
-          59.2},{99.4,59.2}}, color={0,0,127}));
-  connect(add6.u1, mainBus.TZone1Mea) annotation (Line(points={{83,82},{-16,82},
-          {-16,84},{-98.905,84},{-98.905,0.09}},
+  connect(add6.u1, mainBus.TZone1Mea) annotation (Line(points={{69,74},{-30,74},
+          {-30,76},{-98.905,76},{-98.905,0.09}},
                                       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(add3.u1, mainBus.TZone2Mea) annotation (Line(points={{83,64},{72,64},
-          {72,100},{-100,100},{-100,0.09},{-98.905,0.09}},
+  connect(add3.u1, mainBus.TZone2Mea) annotation (Line(points={{71,56},{54,56},
+          {54,102},{-100,102},{-100,0.09},{-98.905,0.09}},
                                                 color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(integrator14.y, mainBus.evaBus.IseZone1) annotation (Line(points={{120.5,
-          79},{128,79},{128,98},{-98.905,98},{-98.905,0.09}}, color={0,0,127}),
+          71},{126,71},{126,72},{132,72},{132,104},{-98.905,104},{-98.905,0.09}},
+                                                              color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(integrator12.y, mainBus.evaBus.IseZone2) annotation (Line(points={{120.5,
-          61},{134,61},{134,100},{-98.905,100},{-98.905,0.09}}, color={0,0,127}),
+  connect(integrator12.y, mainBus.evaBus.IseZone2) annotation (Line(points={{122.5,
+          53},{132,53},{132,104},{-98.905,104},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(add3.y, deadZone.u)
+    annotation (Line(points={{82.5,53},{85,53}}, color={0,0,127}));
+  connect(deadZone.y, product1.u1) annotation (Line(points={{96.5,53},{98.25,53},
+          {98.25,54.8},{101.4,54.8}}, color={0,0,127}));
+  connect(deadZone.y, product1.u2) annotation (Line(points={{96.5,53},{97.25,53},
+          {97.25,51.2},{101.4,51.2}}, color={0,0,127}));
+  connect(add6.y, deadZone1.u) annotation (Line(points={{80.5,71},{82.25,71},{
+          82.25,71},{85,71}}, color={0,0,127}));
+  connect(deadZone1.y, product4.u1) annotation (Line(points={{96.5,71},{98.25,
+          71},{98.25,72.8},{99.4,72.8}}, color={0,0,127}));
+  connect(deadZone1.y, product4.u2) annotation (Line(points={{96.5,71},{98.25,
+          71},{98.25,69.2},{99.4,69.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-86,80},{94,-20}},

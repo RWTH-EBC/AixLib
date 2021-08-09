@@ -311,7 +311,7 @@ model MainBuildingEnergySystem
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={118,106})));
-  Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=0)
+  Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=273.15)
     "Ice Protection"
     annotation (Placement(transformation(extent={{-36,-120},{-24,-108}})));
 equation

@@ -622,7 +622,7 @@ model MainBuilding2Zones "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={8,216})));
-  Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=0)
+  Modelica.Blocks.Nonlinear.Limiter temperatureLimiter(uMax=373, uMin=273.15)
     "Ice Protection"
     annotation (Placement(transformation(extent={{-20,-106},{-8,-94}})));
 equation

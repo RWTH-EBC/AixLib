@@ -210,6 +210,7 @@ model SimpleRoom
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
         Kv=6.3,
+        valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearLinear(),
         redeclare
           HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
           PumpInterface(pump(redeclare
@@ -276,12 +277,6 @@ equation
       thickness=0.5), Text(
       string="%first",
       index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(thermalZone1.TAir, bus.TRoom1Mea) annotation (Line(points={{58.5,63.4},
-          {58.5,112},{0.09,112},{0.09,94.11}},    color={0,0,127}), Text(
-      string="%second",
-      index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(HeatPower.y, integratorHeat.u)
@@ -373,6 +368,12 @@ equation
     annotation (Line(points={{-88,16},{-80,16}}, color={0,127,255}));
   connect(x_pTphi.X, bou.X_in) annotation (Line(points={{-107.4,14},{-104,14},{
           -104,13.6},{-101.2,13.6}}, color={0,0,127}));
+  connect(thermalZone1.TAir, bus.TZone1Mea) annotation (Line(points={{58.5,63.4},
+          {58.5,94.11},{0.09,94.11}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)));
