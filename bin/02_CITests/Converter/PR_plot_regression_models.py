@@ -61,21 +61,7 @@ def get_pull_branch(Working_branch):
             print(name)
             return (i["number"])
 
-        '''
-        #i.split(",")
-        if i.find("'ref':") > -1:
-            i = i.replace("'","")
-            i = i[i.find("ref:")+4:]
-            print(i)
-            #if i == Working_branch:'''
-
-    #pull_request_number = pull_request_number["number"]
-
-            #if i.replace("'","") == Working_branch:
-
-    #pull_request_branch = pull_request_json["head"]
-    #print(pull_request_branch)
-
+  
 
 
 
@@ -122,29 +108,11 @@ if  __name__ == '__main__':
     check_test_group.add_argument('-GP', "--GITLAB-Page", default="${GITLAB_Page}", help="Set your gitlab page url")
 
     # Parse the arguments
+	# set Variables 
     args = parser.parse_args()
     GITHUB_TOKEN = args.GITHUB_TOKEN
     GITHUB_REPOSITORY = args.GITHUB_REPOSITORY
     page_url = args.GITLAB_Page+args.Working_Branch+"/plots"
+	
     pr_number = get_pull_branch(args.Working_Branch)
     post_comment(pr_number,page_url,GITHUB_TOKEN,GITHUB_REPOSITORY)
-
-
-    '''
-    GET_API_DATA = GET_API_GITHUB(GITHUB_REPOSITORY=args.GITHUB_REPOSITORY, Correct_Branch=args.Correct_Branch,
-                                  Working_Branch=args.Working_Branch)
-    owner = GET_API_DATA.return_owner()
-    # print("USERNAME is "+ Username)
-    # sys.stdout.write(Username)
-    # sys.exit(0)
-
-    PULL_REQUEST = PULL_REQUEST_GITHUB(GITHUB_REPOSITORY=args.GITHUB_REPOSITORY, Correct_Branch=args.Correct_Branch,
-                                       Working_Branch=args.Working_Branch, GITHUB_TOKEN=args.GITHUB_TOKEN, OWNER=owner)
-
-    pull_request_response = PULL_REQUEST.post_pull_request()
-    pull_request_number = PULL_REQUEST.get_pull_request_number(pull_request_response)
-    assignees_owner = GET_API_DATA.get_GitHub_Username()
-    PULL_REQUEST.update_pull_request_assignees(pull_request_number, assignees_owner)
-    print("Pull Request")
-    exit(0)
-    '''
