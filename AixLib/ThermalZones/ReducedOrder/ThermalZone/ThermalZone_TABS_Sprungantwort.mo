@@ -32,10 +32,16 @@ model ThermalZone_TABS_Sprungantwort "Thermal zone containing moisture balance"
     annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real l_heater_Rem=0 "Lower limit controller output of the heater"
     annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater_TABS=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater_TABS=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real KR_heater_Panel = 18 "Gain of the panel heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Panel = 2300 "Time constant of the panel heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Real KR_heater_Rem = 1000 "Gain of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Rem = 1 "Time constant of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Real KR_heater_TABS = 18 "Gain of the TABS heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater_TABS = 2300 "Time constant of the TABS heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
 
   parameter Real share_Heater_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
@@ -61,10 +67,16 @@ model ThermalZone_TABS_Sprungantwort "Thermal zone containing moisture balance"
     annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real l_cooler_Rem=0 "Lower limit controller output of the cooler"
     annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler_TABS=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler_TABS=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real KR_cooler_Panel = 18 "Gain of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler_Panel = 2300 "Time constant of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Real KR_cooler_Rem = 1000 "Gain of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler_Rem = 1 "Time constant of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Real KR_cooler_TABS = 18 "Gain of the TABS cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler_TABS = 2300 "Time constant of the TABS cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
 
   parameter Real share_Cooler_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
@@ -725,28 +737,11 @@ equation
           127}));
   connect(preTemVen.port, airExc.port_a)
     annotation (Line(points={{-30,-4},{-22,-4}},             color={191,0,0}));
-  connect(mixedTemp.mixedTemperatureOut, preTemVen.T)
-    annotation (Line(points={{-46,-5},{-42,-5},{-42,-4},{-38.8,-4}},
-                                                     color={0,0,127}));
   connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-27.4,-28},{
           -24,-28},{-24,-10},{-21.2,-10},{-21.2,-9.12}},           color={0,0,
           127}));
   connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-4},{92,
           -4},{92,78},{86,78}},                color={191,0,0}));
-  connect(weaBus.TDryBul, mixedTemp.temperature_flow2) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-78,10},{-78,-6.8},{-65.6,-6.8}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(weaBus.TDryBul, ventCont.Tambient) annotation (Line(
-      points={{-100,34},{-68,34},{-68,10},{-60,10},{-60,-24},{-68,-24}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
   if internalGainsMode == 3 then
     connect(humanTotHeaDependent.QLat_flow, SumQLat1_flow.u[1]) annotation (
         Line(points={{75.6,-16},{92,-16},{92,-4},{8,-4},{8,-54},{-42,-54},{-42,-59.9},
@@ -825,6 +820,12 @@ equation
           {-6.75,34.5},{3.2,34.5}}, color={0,0,127}));
   connect(const2.y, preTemWall.T) annotation (Line(points={{-17.5,33},{-17.5,
           26.5},{-18.8,26.5},{-18.8,20}}, color={0,0,127}));
+  connect(const2.y, preTemVen.T) annotation (Line(points={{-17.5,33},{-17.5,14.5},
+          {-38.8,14.5},{-38.8,-4}}, color={0,0,127}));
+  connect(const2.y, ventCont.Tambient) annotation (Line(points={{-17.5,33},{-17.5,
+          5.5},{-68,5.5},{-68,-24}}, color={0,0,127}));
+  connect(const2.y, mixedTemp.temperature_flow2) annotation (Line(points={{-17.5,
+          33},{-41.75,33},{-41.75,-6.8},{-65.6,-6.8}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
 <li>November 20, 2020, by Katharina Breuer:<br>Combine thermal zone models</li>
