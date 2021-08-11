@@ -11,3 +11,4 @@ tabsHeatingCurve
 test
 tabsHeaterCoolerController_test
 heatTransferSwitcher
+HeaterCoolerWithTabsPI

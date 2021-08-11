@@ -32,10 +32,16 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real l_heater_Rem=0 "Lower limit controller output of the heater"
     annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater_TABS=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater_TABS=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real KR_heater_Panel = 18 "Gain of the panel heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Panel = 2300 "Time constant of the panel heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Real KR_heater_Rem = 1000 "Gain of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater_Rem = 1 "Time constant of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Real KR_heater_TABS = 18 "Gain of the TABS heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater_TABS = 2300 "Time constant of the TABS heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
 
   parameter Real share_Heater_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
@@ -61,10 +67,16 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real l_cooler_Rem=0 "Lower limit controller output of the cooler"
     annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler_TABS=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler_TABS=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real KR_cooler_Panel = 18 "Gain of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler_Panel = 2300 "Time constant of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Real KR_cooler_Rem = 1000 "Gain of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler_Rem = 1 "Time constant of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Real KR_cooler_TABS = 18 "Gain of the TABS cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler_TABS = 2300 "Time constant of the TABS cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
 
   parameter Real share_Cooler_TabsExt(min=0, max=1) = 0
     "contribution from a system installed in the core of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
@@ -193,6 +205,16 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
     final til=zoneParam.tiltRoof)
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,82},{-68,98}})));
+
+  //each h_heater_TABS=h_heater_TABS,
+  //each l_heater_TABS=l_heater_TABS,
+  //each KR_heater_TABS=KR_heater_TABS,
+  //each TN_heater_TABS=TN_heater_TABS,
+  //each h_cooler_TABS=h_cooler_TABS,
+  //each l_cooler_TABS=l_cooler_TABS,
+  //each KR_cooler_TABS=KR_cooler_TABS,
+  //each TN_cooler_TABS=TN_cooler_TABS,
+
   Utilities.Sources.HeaterCoolerVDI6007AC1.HeaterCoolerWithTabs6007C1 heaterCoolerWithTabs6007C1(
     each h_heater_Panel=h_heater_Panel,
     each l_heater_Panel=l_heater_Panel,
@@ -235,6 +257,7 @@ model ThermalZone_TABS "Thermal zone containing moisture balance"
      > 0) and (recOrSep and (zoneParam.heating or zoneParam.cooling)) or (not
     recOrSep and (heating_on or cooling_on))
     annotation (Placement(transformation(extent={{66,26},{84,38}})));
+
   Utilities.Sources.HeaterCoolerVDI6007AC1.tabsHeaterCoolerController
     tabsHeaterCoolerController(
     each power_Heater_Tabs=power_Heater_Tabs,

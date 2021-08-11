@@ -86,10 +86,51 @@ partial model PartialMultizone "Partial model for multizone models"
        ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
-  ThermalZone.ThermalZone_TABS                             zone[numZones](
+  ThermalZone.ThermalZone_TABS_Sprungantwort               zone[numZones](
     each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each Cooler_on=Cooler_on,
+    each h_heater_Panel=h_heater_Panel,
+    each l_heater_Panel=l_heater_Panel,
+    each h_heater_Rem=h_heater_Rem,
+    each l_heater_Rem=l_heater_Rem,
+    each h_heater_TABS=h_heater_TABS,
+    each l_heater_TABS=l_heater_TABS,
+    each KR_heater_Panel=KR_heater_Panel,
+    each TN_heater_Panel=TN_heater_Panel,
+    each KR_heater_Rem=KR_heater_Rem,
+    each TN_heater_Rem=TN_heater_Rem,
+    each KR_heater_TABS=KR_heater_TABS,
+    each TN_heater_TABS=TN_heater_TABS,
+    each share_Heater_TabsExt=share_Heater_TabsExt,
+    each share_Heater_TabsInt=share_Heater_TabsInt,
+    each share_Heater_PanelExt=share_Heater_PanelExt,
+    each share_Heater_PanelInt=share_Heater_PanelInt,
+    each share_Heater_Rad=share_Heater_Rad,
+    each share_Heater_Conv=share_Heater_Conv,
+    each h_cooler_Panel=h_cooler_Panel,
+    each l_cooler_Panel=l_cooler_Panel,
+    each h_cooler_Rem=h_cooler_Rem,
+    each l_cooler_Rem=l_cooler_Rem,
+    each h_cooler_TABS=h_cooler_TABS,
+    each l_cooler_TABS=l_cooler_TABS,
+    each KR_cooler_Panel=KR_cooler_Panel,
+    each TN_cooler_Panel=TN_cooler_Panel,
+    each KR_cooler_Rem=KR_cooler_Rem,
+    each TN_cooler_Rem=TN_cooler_Rem,
+    each KR_cooler_TABS=KR_cooler_TABS,
+    each TN_cooler_TABS=TN_cooler_TABS,
+    each share_Cooler_TabsExt=share_Cooler_TabsExt,
+    each share_Cooler_TabsInt=share_Cooler_TabsInt,
+    each share_Cooler_PanelExt=share_Cooler_PanelExt,
+    each share_Cooler_PanelInt=share_Cooler_PanelInt,
+    each share_Cooler_Rad=share_Cooler_Rad,
+    each share_Cooler_Conv=share_Cooler_Conv,
+    each heating_on=heating_on,
+    each cooling_on=cooling_on,
+    each tabs_on=tabs_on,
+    each floor_on=floor_on,
+    each radiator_on=radiator_on,
     each use_C_flow=use_C_flow,
     each use_moisture_balance=use_moisture_balance,
     each use_AirExchange=use_AirExchange,
@@ -113,11 +154,11 @@ partial model PartialMultizone "Partial model for multizone models"
 
   parameter Integer internalGainsMode
     "Decides which internal gains model for persons is used";
-  parameter Boolean recOrSep=true "Use record or seperate parameters"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice =  false
-        "Seperate",choice = true "Record",radioButtons = true));
-  parameter Boolean Heater_on=true "Activates the heater"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  //parameter Boolean recOrSep=true "Use record or seperate parameters"
+  //  annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice =  false
+  //      "Seperate",choice = true "Record",radioButtons = true));
+  //parameter Boolean Heater_on=true "Activates the heater"
+  //  annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real h_heater=0 "Upper limit controller output of the heater"
     annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real l_heater=0 "Lower limit controller output of the heater"
@@ -127,8 +168,8 @@ partial model PartialMultizone "Partial model for multizone models"
   parameter Modelica.SIunits.Time TN_heater=1
     "Time constant of the heating controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Boolean Cooler_on=true "Activates the cooler"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  //parameter Boolean Cooler_on=true "Activates the cooler"
+  //  annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real h_cooler=0 "Upper limit controller output of the cooler"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real l_cooler=0 "Lower limit controller output of the cooler"
@@ -138,6 +179,91 @@ partial model PartialMultizone "Partial model for multizone models"
   parameter Modelica.SIunits.Time TN_cooler=1
     "Time constant of the cooling controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+
+  // Heater/ cooler parameters
+  parameter Boolean recOrSep=true "Use record or seperate parameters"
+    annotation (Dialog(tab="HeaterCooler", group="Modes"), choices(choice =  false
+        "Seperate",choice = true "Record",radioButtons = true));
+  parameter Boolean Heater_on=true "Activates the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Boolean heating_on = true "Activates heating" annotation (Dialog(tab="HeaterCooler", group="Modes"));
+  parameter Boolean cooling_on = true "Activates cooling" annotation (Dialog(tab="HeaterCooler", group="Modes"));
+  parameter Boolean tabs_on = false "TABS is available" annotation (Dialog(tab="HeaterCooler", group="Modes"));
+  parameter Boolean floor_on = false "Panel heating and/or cooling is available" annotation (Dialog(tab="HeaterCooler", group="Modes"));
+  parameter Boolean radiator_on = true "Radiator heating or Convective heating and/or cooling is available" annotation (Dialog(tab="HeaterCooler", group="Modes"));
+  parameter Real h_heater_Panel=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater_Panel=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater_Rem=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater_Rem=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater_TABS=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater_TABS=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real KR_heater_Panel = 18 "Gain of the panel heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater_Panel = 2300 "Time constant of the panel heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Real KR_heater_Rem = 1000 "Gain of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater_Rem = 1 "Time constant of the heating controller for radiative and convective heating system" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Real KR_heater_TABS = 18 "Gain of the TABS heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater_TABS = 2300 "Time constant of the TABS heating controller" annotation(Dialog(tab = "HeaterCooler", group = "Heater",enable=not recOrSep));
+
+  parameter Real share_Heater_TabsExt(min=0, max=1) = 0
+    "contribution from a system installed in the core of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
+  parameter Real share_Heater_TabsInt(min=0, max=1) = 0
+    "contribution from a system installed in the core of one or several interior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
+  parameter Real share_Heater_PanelExt(min=0, max=1) = 0
+    "contribution from any heated surfaces of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
+  parameter Real share_Heater_PanelInt(min=0, max=1) = 0
+    "contribution from any heated surfaces of one or several interior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
+  parameter Real share_Heater_Rad(min=0, max=1) = 0
+    "radiant contribution of one or several exterior building components to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
+  parameter Real share_Heater_Conv(min=0, max=1) = 1
+    "convective contribution to heating load" annotation(Dialog(tab = "HeaterCooler", group = "Heater"));
+  parameter Boolean Cooler_on=true "Activates the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler_Panel=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler_Panel=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler_Rem=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler_Rem=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler_TABS=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler_TABS=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real KR_cooler_Panel = 18 "Gain of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler_Panel = 2300 "Time constant of the panel cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Real KR_cooler_Rem = 1000 "Gain of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler_Rem = 1 "Time constant of the cooling controller for radiative and convective cooling system" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Real KR_cooler_TABS = 18 "Gain of the TABS cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler_TABS = 2300 "Time constant of the TABS cooling controller" annotation(Dialog(tab = "HeaterCooler", group = "Cooler",enable=not recOrSep));
+
+  parameter Real share_Cooler_TabsExt(min=0, max=1) = 0
+    "contribution from a system installed in the core of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
+  parameter Real share_Cooler_TabsInt(min=0, max=1) = 0
+    "contribution from a system installed in the core of one or several interior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
+  parameter Real share_Cooler_PanelExt(min=0, max=1) = 0
+    "contribution from any cooled surfaces of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
+  parameter Real share_Cooler_PanelInt(min=0, max=1) = 0
+    "contribution from any cooled surfaces of one or several interior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
+  parameter Real share_Cooler_Rad(min=0, max=1) = 0
+    "radiant contribution of one or several exterior building components to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
+  parameter Real share_Cooler_Conv(min=0, max=1) = 1
+    "convective contribution to cooling load" annotation(Dialog(tab = "HeaterCooler", group = "Cooler"));
+
+  parameter Real power_Heater_Tabs = 0
+    "Fixed available heating power of TABS"  annotation (Dialog(tab= "HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real power_Cooler_Tabs = 0
+    "Fixed available cooling power of TABS"  annotation (Dialog(tab= "HeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real TThreshold_Heat_Tabs = 273.15 + 14
+    "Threshold temperature below which heating is activated"  annotation (Dialog(tab= "HeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real TThreshold_Cool_Tabs = 273.15 + 16
+    "Threshold temperature above which cooling is activated"  annotation (Dialog(tab= "HeaterCooler", group="Cooler", enable=not recOrSep));
 
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
     final quantity="ThermodynamicTemperature",
