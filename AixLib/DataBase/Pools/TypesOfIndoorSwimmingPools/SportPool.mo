@@ -1,7 +1,6 @@
 within AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools;
 record SportPool "Pool which is mainly used by sport swimmers"
   extends IndoorSwimmingPoolBaseRecord(
-    T_pool_start = 301.15,
     T_pool = 301.15,
     V_pool = 942.956,
     A_pool = 416.5,

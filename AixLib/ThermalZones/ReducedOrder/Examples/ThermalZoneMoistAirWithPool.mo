@@ -111,7 +111,7 @@ model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAir"
         590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])
     "Table with profiles for internal gains"
-    annotation(Placement(transformation(extent={{-14,-59},{0,-45}})));
+    annotation(Placement(transformation(extent={{-14,-61},{0,-47}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     "Radiative heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{46,-10},{26,10}})));
@@ -147,8 +147,7 @@ model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAir"
     tableName="OpeningHours",
     columns=2:(numZones + 1),
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))
-                                                                                                                                            "Boundary condition: Opening Hours of swiming pools"
+        "modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))                                                        "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-96,-24},{-80,-8}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
@@ -156,7 +155,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y, thermalZone.intGains)
-    annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
+    annotation (Line(points={{0.7,-54},{8,-54},{8,-8.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
     annotation (Line(points={{26,0},{10.2,0},{10.2,3.4}},
                                                      color={191,0,0}));

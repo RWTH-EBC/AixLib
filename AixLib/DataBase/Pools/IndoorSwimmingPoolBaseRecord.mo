@@ -2,7 +2,6 @@ within AixLib.DataBase.Pools;
 record IndoorSwimmingPoolBaseRecord
   extends Modelica.Icons.Record;
 
-  parameter Modelica.SIunits.Temperature T_pool_start "Initial temperature of swimming pool";
   parameter Modelica.SIunits.Temperature T_pool "Set water temperature of swimming pool";
   parameter Modelica.SIunits.Volume V_pool "Volume of pool water";
   parameter Modelica.SIunits.Area A_pool(min=0) "Area of water surface of swimming pool";

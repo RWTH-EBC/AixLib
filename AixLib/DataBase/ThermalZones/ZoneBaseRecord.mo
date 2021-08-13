@@ -121,8 +121,8 @@ record ZoneBaseRecord "Base record definition for zone records"
 
   // Add for Pools
   parameter Boolean use_swimmingPools=false;
-  parameter Integer numPools(min=1)=1;
-  replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools]
+  parameter Integer numPools;
+  replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]
    annotation (choicesAllMatching=false);
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=

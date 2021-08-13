@@ -2,7 +2,6 @@ within AixLib.DataBase.Pools.TypesOfIndoorSwimmingPools;
 record ChildrensPool "Pool which is mainly used by children"
 
   extends IndoorSwimmingPoolBaseRecord(
-    T_pool_start = 303.15,
     T_pool = 303.15,
     V_pool = 126.8,
     A_pool = 125.0,

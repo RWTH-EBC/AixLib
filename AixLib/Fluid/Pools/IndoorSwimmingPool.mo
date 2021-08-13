@@ -49,6 +49,7 @@ model IndoorSwimmingPool
 
   AixLib.Fluid.MixingVolumes.MixingVolume Storage(
     redeclare package Medium = WaterMedium,
+    T_start=poolParam.T_pool,
     m_flow_nominal=m_flow,
     V=poolParam.V_storage,
     nPorts=4) annotation (Placement(transformation(extent={{-28,-54},{-8,-34}})));
@@ -58,6 +59,7 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{54,-80},{42,-68}})));
   AixLib.Fluid.MixingVolumes.MixingVolume poolWater(
     redeclare package Medium = WaterMedium,
+    T_start=poolParam.T_pool,
     m_flow_nominal=m_flow,
     V=poolParam.V_pool,
     nPorts=3)
@@ -279,6 +281,12 @@ model IndoorSwimmingPool
     T=283.15,
     nPorts=1)
     annotation (Placement(transformation(extent={{-66,-76},{-52,-62}})));
+  Modelica.Blocks.Sources.RealExpression m_Eavporation1(y=poolWater.T)
+    annotation (Placement(transformation(extent={{9,-9},{-9,9}},
+        rotation=180,
+        origin={87,91})));
+  Modelica.Blocks.Interfaces.RealOutput T_Pool "Value of Real output"
+    annotation (Placement(transformation(extent={{100,82},{120,102}})));
 equation
   // Fresh water and water recycling
   if poolParam.use_waterRecycling then
@@ -400,6 +408,8 @@ equation
           255}));
   connect(waveMachine.open, openingHours) annotation (Line(points={{-55.28,-91},
           {-82,-91},{-82,83},{-101,83}}, color={0,0,127}));
+  connect(m_Eavporation1.y, T_Pool) annotation (Line(points={{96.9,91},{102.45,
+          91},{102.45,92},{110,92}}, color={0,0,127}));
   annotation (Line(
         points={{47,-32},{47,-14},{-25,-14},{-25,-6}}, color={0,127,255}),
              Line(points={{18.4,-40},

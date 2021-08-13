@@ -2,7 +2,8 @@ within AixLib.ThermalZones.ReducedOrder.Examples;
 model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone_withPools
+                                                           thermalZone_withPools(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     zoneParam=
         DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
@@ -136,7 +137,7 @@ model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
 equation
-  connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
+  connect(weaDat.weaBus, thermalZone_withPools.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,6},{-10,6}},
       color={255,204,51},
       thickness=0.5));
@@ -147,22 +148,22 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-9.6,
-          -1.6},{-35.65,-1.6},{-35.65,-4},{-61,-4}}, color={0,0,127}), Text(
+  connect(thermalZone_withPools.ventTemp, weaBus.TDryBul) annotation (Line(
+        points={{-9.6,-1.6},{-35.65,-1.6},{-35.65,-4},{-61,-4}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const.y, thermalZone.ventRate) annotation (Line(points={{-71,-30},{
-          -40,-30},{-8,-30},{-7,-30},{-7,-4.2},{-9.6,-4.2}},
-                                                      color={0,0,127}));
-  connect(internalGains.y, thermalZone.intGains)
+  connect(const.y, thermalZone_withPools.ventRate) annotation (Line(points={{-71,
+          -30},{-40,-30},{-8,-30},{-7,-30},{-7,-4.2},{-9.6,-4.2}}, color={0,0,
+          127}));
+  connect(internalGains.y, thermalZone_withPools.intGains)
     annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
-  connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
-    annotation (Line(points={{26,0},{10.2,0},{10.2,3.4}},
-                                                     color={191,0,0}));
-  connect(prescribedHeatFlow1.port, thermalZone.intGainsConv) annotation (Line(
-        points={{26,-18},{18,-18},{18,0.4},{10.2,0.4}},
-                                                    color={191,0,0}));
+  connect(prescribedHeatFlow.port, thermalZone_withPools.intGainsRad)
+    annotation (Line(points={{26,0},{10.2,0},{10.2,3.4}}, color={191,0,0}));
+  connect(prescribedHeatFlow1.port, thermalZone_withPools.intGainsConv)
+    annotation (Line(points={{26,-18},{18,-18},{18,0.4},{10.2,0.4}}, color={191,
+          0,0}));
   connect(gain1.y, prescribedHeatFlow1.Q_flow)
     annotation (Line(points={{53.4,-18},{46,-18}},          color={0,0,127}));
   connect(gain.y, prescribedHeatFlow.Q_flow)

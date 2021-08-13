@@ -3,7 +3,8 @@ model ThermalZoneMoistAir
   "Illustrates the use of ThermalZoneMoistAir"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone_withPools
+                                                           thermalZone_withPools(
     use_moisture_balance=true,
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -143,18 +144,17 @@ model ThermalZoneMoistAir
       nPorts=1) "sink of air"
     annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
 equation
-  connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-72,30},{-34,30},{-34,0},{-10,0}},
+  connect(weaDat.weaBus, thermalZone_withPools.weaBus) annotation (Line(
+      points={{-72,30},{-34,30},{-34,6},{-10,6}},
       color={255,204,51},
       thickness=0.5));
-  connect(internalGains.y, thermalZone.intGains)
+  connect(internalGains.y, thermalZone_withPools.intGains)
     annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
-  connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
-    annotation (Line(points={{26,0},{10.2,0},{10.2,3.4}},
-                                                     color={191,0,0}));
-  connect(prescribedHeatFlow1.port, thermalZone.intGainsConv) annotation (Line(
-        points={{26,-18},{18,-18},{18,0.4},{10.2,0.4}},
-                                                    color={191,0,0}));
+  connect(prescribedHeatFlow.port, thermalZone_withPools.intGainsRad)
+    annotation (Line(points={{26,0},{10.2,0},{10.2,3.4}}, color={191,0,0}));
+  connect(prescribedHeatFlow1.port, thermalZone_withPools.intGainsConv)
+    annotation (Line(points={{26,-18},{18,-18},{18,0.4},{10.2,0.4}}, color={191,
+          0,0}));
   connect(gain1.y, prescribedHeatFlow1.Q_flow)
     annotation (Line(points={{53.4,-18},{46,-18}},          color={0,0,127}));
   connect(gain.y, prescribedHeatFlow.Q_flow)
@@ -163,11 +163,12 @@ equation
     annotation (Line(points={{73,0},{67.2,0}},          color={0,0,127}));
   connect(sine.y, gain1.u) annotation (Line(points={{73,0},{70,0},{70,-18},{67.2,
           -18}}, color={0,0,127}));
-  connect(sourcAir.ports[1], thermalZone.ports[1]) annotation (Line(points={{
-          -64,-70},{-46,-70},{-46,-36},{-2.35,-36},{-2.35,-7.2}}, color={0,127,
-          255}));
-  connect(thermalZone.ports[2], sinAir.ports[1]) annotation (Line(points={{2.35,
-          -7.2},{2.35,-40},{-38,-40},{-38,-76},{-32,-76}}, color={0,127,255}));
+  connect(sourcAir.ports[1], thermalZone_withPools.ports[1]) annotation (Line(
+        points={{-64,-70},{-46,-70},{-46,-36},{-2.35,-36},{-2.35,-7.2}}, color=
+          {0,127,255}));
+  connect(thermalZone_withPools.ports[2], sinAir.ports[1]) annotation (Line(
+        points={{2.35,-7.2},{2.35,-40},{-38,-40},{-38,-76},{-32,-76}}, color={0,
+          127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
           3.1536e+007, Interval=3600),

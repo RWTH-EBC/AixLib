@@ -1,11 +1,11 @@
 within AixLib.Fluid.Pools;
 model MultiplePools
 
- parameter AixLib.DataBase.ThermalZones.SwimminghallBaseRecord Swimminghall
+ replaceable parameter AixLib.DataBase.ThermalZones.SwimminghallBaseRecord Swimminghall
     "Choose setup for this zone" annotation (choicesAllMatching=true);
 
   final parameter Boolean use_swimmingPools = Swimminghall.use_swimmingPools;
-  final parameter Real numPools = Swimminghall.numPools;
+  final parameter Integer numPools = Swimminghall.numPools;
 
 
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools] = Swimminghall.poolParam
