@@ -677,10 +677,6 @@ equation
   connect(heaterCoolerWithTabs6007C1.coolingPower, PCooler) annotation (Line(
         points={{80.625,31.64},{82,31.64},{82,32},{98,32},{98,-20},{110,-20}},
         color={0,0,127}));
-  connect(TAir, heaterCoolerWithTabs6007C1.TAir) annotation (Line(points={{110,80},
-          {88,80},{88,38},{66.5625,38}}, color={0,0,127}));
-  connect(TRad, heaterCoolerWithTabs6007C1.TRad) annotation (Line(points={{110,60},
-          {90,60},{90,38},{68.25,38}}, color={0,0,127}));
   connect(heaterCoolerWithTabs6007C1.heatCoolTabsExt, ROM.tabsExtWalls)
     annotation (Line(points={{70.5,37.76},{70.5,38.88},{80.8,38.88},{80.8,56}},
         color={191,0,0}));
@@ -834,6 +830,8 @@ equation
   connect(heaterCoolerWithTabs6007C1.heatOrCool, ROM.heatingOrCooling)
     annotation (Line(points={{82.65,38.6},{66.325,38.6},{66.325,54},{51.2,54}},
         color={255,0,255}));
+  connect(TOpe, heaterCoolerWithTabs6007C1.tOperative) annotation (Line(points={
+          {110,98},{88,98},{88,32},{66,32}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
 <li>November 20, 2020, by Katharina Breuer:<br>Combine thermal zone models</li>
