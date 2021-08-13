@@ -514,8 +514,8 @@ equation
   connect(heaterActive, pITempHeatTABS.onOff) annotation (Line(points={{-160,20},
             {-82,20},{-82,10},{-19.2,10}},
                                        color={255,0,255}));
-    connect(coolerActive, pITempCoolTABS.onOff) annotation (Line(points={{-160,
-            -20},{-82,-20},{-82,-10},{-19.2,-10}},
+    connect(coolerActive, pITempCoolTABS.onOff) annotation (Line(points={{-160,-20},
+            {-82,-20},{-82,-10},{-19.2,-10}},
                                             color={255,0,255}));
   elseif staOrDyn and ((recOrSep and not zoneParam.tabs and zoneParam.radiator) or (not recOrSep and not tabs_on and radiator_on)) then
   connect(booleanExpressionHeater.y, pITempHeatRem.onOff) annotation (Line(
@@ -528,7 +528,7 @@ equation
       pattern=LinePattern.Dash));
   elseif not staOrDyn and ((recOrSep and not zoneParam.tabs and zoneParam.radiator) or (not recOrSep and not tabs_on and radiator_on)) then
   connect(heaterActive, pITempHeatRem.onOff) annotation (Line(
-      points={{-160,20},{-82,20},{-82,10},{52.8,10}},
+      points={{-160,20},{-84,20},{-84,10},{52.8,10}},
       color={255,0,255}));
   connect(coolerActive, pITempCoolRem.onOff) annotation (Line(
       points={{-160,-20},{-82,-20},{-82,-10},{52.8,-10}},
@@ -579,11 +579,11 @@ equation
   connect(pITempHeatRem.y, gainHRad.u) annotation (Line(points={{68,14},{80,14},
           {80,30},{60,30},{60,39.2}}, color={0,0,127}));
   connect(pITempHeatRem.y, gainHConv.u) annotation (Line(points={{68,14},{80,14},{80,39.2}}, color={0,0,127}));
-  connect(pITempHeatTABS.y, gainHTabsInt.u) annotation (Line(points={{-4,14},{
-          -2,14},{-2,30},{0,30},{0,39.2}},
+  connect(pITempHeatTABS.y, gainHTabsInt.u) annotation (Line(points={{-4,14},{-2,
+          14},{-2,30},{0,30},{0,39.2}},
                                    color={0,0,127}));
-  connect(pITempHeatTABS.y, gainHTabsExt.u) annotation (Line(points={{-4,14},{
-          -2,14},{-2,30},{-20,30},{-20,39.2}},
+  connect(pITempHeatTABS.y, gainHTabsExt.u) annotation (Line(points={{-4,14},{-2,
+          14},{-2,30},{-20,30},{-20,39.2}},
                                      color={0,0,127}));
 
   connect(gainCTabsExt.y, Cooling.Q_flow) annotation (Line(points={{-20,-46.4},{
@@ -605,11 +605,11 @@ equation
   connect(pITempCoolRem.y, gainCRad.u) annotation (Line(points={{68,-14},{80,-14},
           {80,-28},{60,-28},{60,-37.2}}, color={0,0,127}));
   connect(pITempCoolRem.y, gainCConv.u) annotation (Line(points={{68,-14},{80,-14},{80,-37.2}}, color={0,0,127}));
-  connect(pITempCoolTABS.y, gainCTabsInt.u) annotation (Line(points={{-4,-14},{
-          -4,-28},{0,-28},{0,-38},{4.44089e-16,-38},{4.44089e-16,-37.2}},
+  connect(pITempCoolTABS.y, gainCTabsInt.u) annotation (Line(points={{-4,-14},{-4,
+          -28},{0,-28},{0,-38},{4.44089e-16,-38},{4.44089e-16,-37.2}},
                                       color={0,0,127}));
-  connect(pITempCoolTABS.y, gainCTabsExt.u) annotation (Line(points={{-4,-14},{
-          -4,-28},{-20,-28},{-20,-37.2}},color={0,0,127}));
+  connect(pITempCoolTABS.y, gainCTabsExt.u) annotation (Line(points={{-4,-14},{-4,
+          -28},{-20,-28},{-20,-37.2}},   color={0,0,127}));
 
   connect(sumHeating.y, heatingPower) annotation (Line(points={{132.6,30},{160,30}}, color={0,0,127}));
   connect(sumCooling.y, coolingPower) annotation (Line(points={{132.6,-30},{160,
@@ -649,6 +649,8 @@ equation
   connect(pITempCoolPanel.y, sumCooling.u[2]);
   elseif ((recOrSep and not zoneParam.floor and zoneParam.radiator and zoneParam.tabs)
   or (not recOrSep and not floor_on and radiator_on and tabs_on)) then
+  connect(pITempHeatTABS.y, sumHeating.u[1]);
+  connect(pITempCoolTABS.y, sumCooling.u[1]);
   connect(pITempHeatRem.y, sumHeating.u[2]);
   connect(pITempCoolRem.y, sumCooling.u[2]);
   elseif ((recOrSep and zoneParam.floor and zoneParam.radiator and not zoneParam.tabs)
