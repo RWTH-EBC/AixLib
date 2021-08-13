@@ -152,7 +152,17 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real lCoolRem "Lower limit radiative and convective controller output";
   parameter Real KRCoolRem "Gain of the radiative and convective controller";
   parameter Modelica.SIunits.Time TNCoolRem
-    "Time constant of the radiative and convective controller";
+      "Time constant of the radiative and convective controller";
+  parameter Real hHeatTABS "Upper limit TABS controller output";
+  parameter Real lHeatTABS "Lower limit TABS controller output";
+  parameter Real KRHeatTABS "Gain of the TABS controller";
+  parameter Modelica.SIunits.Time TNHeatTABS
+    "Time constant of the TABS controller";
+  parameter Real hCoolTABS "Upper limit TABS controller output";
+  parameter Real lCoolTABS "Lower limit TABS controller output";
+  parameter Real KRCoolTABS "Gain of the TABS controller";
+  parameter Modelica.SIunits.Time TNCoolTABS
+    "Time constant of the TABS controller";
   parameter Real shareHeatTabsExt "Contribution from a system installed in the 
     core of one or several exterior building components to heating load";
   parameter Real shareHeatTabsInt "Contribution from a system installed in the 
