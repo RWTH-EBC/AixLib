@@ -86,7 +86,7 @@ partial model PartialMultizone "Partial model for multizone models"
        ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
-  ThermalZone.ThermalZone_TABS_Sprungantwort               zone[numZones](
+  ThermalZone.ThermalZone_TABS                             zone[numZones](
     each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each Cooler_on=Cooler_on,
