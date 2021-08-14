@@ -627,8 +627,9 @@ equation
   connect(onlyHeating.y, heatOrCool) annotation (Line(points={{121,78.5},{121,90.25},
           {136,90.25},{136,110}}, color={255,0,255}));
   elseif (recOrSep and not zoneParam.heating and zoneParam.cooling) or (not recOrSep and not heating_on and cooling_on) then
-  connect(onlyCooling.y, heatOrCool) annotation (Line(points={{151,78.5},{151,91.25},
-          {136,91.25},{136,110}}, color={255,0,255}));
+  connect(onlyCooling.y, heatOrCool) annotation (Line(points={{151,78.5},{151,
+            91.25},{136,91.25},{136,110}},
+                                  color={255,0,255}));
   end if;
   connect(tOperative, pITempHeatPanel.TOpe) annotation (Line(points={{-160,
           8.88178e-16},{-78,8.88178e-16},{-78,6},{5.2,6}}, color={0,0,127}));
