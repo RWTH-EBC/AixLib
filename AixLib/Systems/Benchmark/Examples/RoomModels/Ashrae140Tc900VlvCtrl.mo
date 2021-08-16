@@ -38,7 +38,8 @@ model Ashrae140Tc900VlvCtrl "Ashrae140 Test Case 900 Valve Controlled"
         dp1_nominal=5,
         dp2_nominal=1000,
         dT_nom=7,
-        Q_nom=2000)))
+        Q_nom=2000)),
+    flapSup(dpDamper_nominal=50))
     annotation (Placement(transformation(extent={{-80,-12},{-34,38}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone
                                                     thermalZone1(
