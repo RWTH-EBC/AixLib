@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
-model TwoElements_Test
+model TwoElements_Panel_nosplit
   "Thermal Zone with two elements for exterior and interior walls"
   extends OneElement(AArray={ATotExt,ATotWin,AInt});
 
@@ -36,8 +36,9 @@ model TwoElements_Test
     final T_start=T_start) if AInt > 0 "RC-element for interior walls"
     annotation (Placement(transformation(extent={{182,-50},{202,-28}})));
 
-  // Integration of VDI 6007-1 panel heating and tabs into Two Element
+  // Integration of VDI 6007-1 Anhang C1 panel heating and tabs into Two Element
 
+  // Booleans not currently used, future implementation similar to other auxiliary ports
   parameter Boolean corePortExtWalls = false
     "Additional heat port at core of exterior walls"
     annotation(Dialog(group="Exterior walls"),choices(checkBox = true));
@@ -47,31 +48,28 @@ model TwoElements_Test
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabsExtWalls if ATotExt
      > 0 "Q_HK_BT_AW, Auxiliary port at core of exterior walls"
     annotation (Placement(transformation(extent={{178,-190},{198,-170}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRad if ATot > 0
-    "Q_HK_str, Auxiliary port at indoor surface of windows, exterior and interior walls"
-    annotation (Placement(transformation(extent={{230,-190},{250,-170}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkExtWalls if ATot > 0
-    "Q_HK_FO_AW, Auxiliary port at indoor surface of exterior walls"
-    annotation (Placement(transformation(extent={{230,-164},{250,-144}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkConv if ATot > 0 or
-    VAir > 0 "Q_HK_kon, Auxiliary port at indoor air volume"
-    annotation (Placement(transformation(extent={{230,-140},{250,-120}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkIntWalls if AInt > 0
-    "Q_HK_FO_IW, Auxiliary port at indoor surface of interior walls"
-    annotation (Placement(transformation(extent={{230,-116},{250,-96}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabsIntWalls if AInt > 0
     "Q_HK_BT_IW, Auxiliary port at core of interior walls"
     annotation (Placement(transformation(extent={{230,-30},{250,-10}})));
+  // Can be connected to intGainsRad in the future instead
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRad if ATot > 0
+    "Q_HK_str, Auxiliary port at indoor surface of windows, exterior and interior walls"
+    annotation (Placement(transformation(extent={{230,-190},{250,-170}})));
+  // Can be connected to intWallIndoorSurface in the future instead, !change conditional statements
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkExtWalls if ATot > 0
+    "Q_HK_FO_AW, Auxiliary port at indoor surface of exterior walls"
+    annotation (Placement(transformation(extent={{230,-164},{250,-144}})));
+  // Can be connected to intGainsConv in the future instead
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkConv if ATot > 0 or
+    VAir > 0 "Q_HK_kon, Auxiliary port at indoor air volume"
+    annotation (Placement(transformation(extent={{230,-140},{250,-120}})));
+  // Can be connected to extWallIndoorSurface in the future instead, !change conditional statements
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkIntWalls if AInt > 0
+    "Q_HK_FO_IW, Auxiliary port at indoor surface of interior walls"
+    annotation (Placement(transformation(extent={{230,-116},{250,-96}})));
 
-  // Implementation of thermal splitter for external walls and windows
-
-  parameter Modelica.SIunits.Area[:] AArrayExtWin = {ATotExt, ATotWin}
-    "List of external wall and window surface areas";
-  parameter Integer dimensionExtWin = sum({if A>0 then 1 else 0 for A in AArrayExtWin})
-    "Number of non-zero wall surface areas";
-  parameter Real splitFactorExtWin[dimensionExtWin, 1]=
-    BaseClasses.splitFacVal(dimensionExtWin, 1, AArrayExtWin, fill(0, 1), fill(0, 1))
-    "Share of each wall surface area that is non-zero";
+  // Thermal splitter for radiative heat flow, is equal to thermal splitter for intgains
+  // can be deleted if Q_HK_str is connected to intGainsRad
 
   BaseClasses.ThermSplitter thermSplitterHkRad(
     final splitFactor=splitFactor,
@@ -80,6 +78,7 @@ model TwoElements_Test
     weighted by their area"
     annotation (Placement(transformation(extent={{226,-190},{206,-170}})));
 
+  // switch heat transfer coefficients for panel heating and cooling
   Modelica.Blocks.Logical.Switch switch_hConInt if AInt > 0
     "switches between of convective heat transfer coefficient for heating or cooling"
     annotation (Placement(transformation(
@@ -276,4 +275,4 @@ equation
   extent={{-60,60},{64,-64}},
   lineColor={0,0,0},
   textString="2")}));
-end TwoElements_Test;
+end TwoElements_Panel_nosplit;
