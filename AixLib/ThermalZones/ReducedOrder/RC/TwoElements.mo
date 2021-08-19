@@ -36,8 +36,9 @@ model TwoElements
     final T_start=T_start) if AInt > 0 "RC-element for interior walls"
     annotation (Placement(transformation(extent={{182,-50},{202,-28}})));
 
-  // Integration of VDI 6007-1 panel heating and tabs into Two Element
+  // Integration of VDI 6007-1 Anhang C1 panel heating and tabs into Two Element
 
+  // Booleans not currently used, future implementation similar to other auxiliary ports
   parameter Boolean corePortExtWalls = false
     "Additional heat port at core of exterior walls"
     annotation(Dialog(group="Exterior walls"),choices(checkBox = true));
@@ -47,15 +48,19 @@ model TwoElements
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabsExtWalls if ATotExt
      > 0 "Q_HK_BT_AW, Auxiliary port at core of exterior walls"
     annotation (Placement(transformation(extent={{178,-190},{198,-170}})));
+  // Can be connected to intGainsRad in the future instead
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkRad if ATot > 0
     "Q_HK_str, Auxiliary port at indoor surface of windows, exterior and interior walls"
     annotation (Placement(transformation(extent={{230,-190},{250,-170}})));
+  // Can be connected to extWallIndoorSurface in the future instead, !change conditional statements
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkExtWalls if ATot > 0
     "Q_HK_FO_AW, Auxiliary port at indoor surface of exterior walls"
     annotation (Placement(transformation(extent={{230,-164},{250,-144}})));
+  // Can be connected to intGainsConv in the future instead
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a hkConv if ATot > 0 or
     VAir > 0 "Q_HK_kon, Auxiliary port at indoor air volume"
     annotation (Placement(transformation(extent={{230,-140},{250,-120}})));
+  // Can be connected to intWallIndoorSurface in the future instead, !change conditional statements
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a fhkIntWalls if AInt > 0
     "Q_HK_FO_IW, Auxiliary port at indoor surface of interior walls"
     annotation (Placement(transformation(extent={{230,-116},{250,-96}})));
@@ -63,23 +68,25 @@ model TwoElements
     "Q_HK_BT_IW, Auxiliary port at core of interior walls"
     annotation (Placement(transformation(extent={{230,-30},{250,-10}})));
 
-  // Implementation of thermal splitter for external walls and windows
 
-  parameter Modelica.SIunits.Area[:] AArrayExtWin = {ATotExt, ATotWin}
-    "List of external wall and window surface areas";
-  parameter Integer dimensionExtWin = sum({if A>0 then 1 else 0 for A in AArrayExtWin})
-    "Number of non-zero wall surface areas";
-  parameter Real splitFactorExtWin[dimensionExtWin, 1]=
-    BaseClasses.splitFacVal(dimensionExtWin, 1, AArrayExtWin, fill(0, 1), fill(0, 1))
-    "Share of each wall surface area that is non-zero";
 
-  BaseClasses.ThermSplitter thermSplitterFhkExtWallsWin(
-    final splitFactor=splitFactorExtWin,
-    final nOut=dimensionExtWin,
-    final nIn=1) if ATot > 0
-    "Splits incoming heat flow from panel heating into separate flows for each wall element,
-    weighted by their area"
-    annotation (Placement(transformation(extent={{226,-164},{206,-144}})));
+  //parameter Modelica.SIunits.Area[:] AArrayExtWin = {ATotExt, ATotWin}
+  //  "List of external wall and window surface areas";
+  //parameter Integer dimensionExtWin = sum({if A>0 then 1 else 0 for A in AArrayExtWin})
+  //  "Number of non-zero wall surface areas";
+  //parameter Real splitFactorExtWin[dimensionExtWin, 1]=
+  //  BaseClasses.splitFacVal(dimensionExtWin, 1, AArrayExtWin, fill(0, 1), fill(0, 1))
+  //  "Share of each wall surface area that is non-zero";
+  //BaseClasses.ThermSplitter thermSplitterFhkExtWallsWin(
+  //  final splitFactor=splitFactorExtWin,
+  //  final nOut=dimensionExtWin,
+  //  final nIn=1) if ATot > 0
+  //  "Splits incoming heat flow from panel heating into separate flows for each wall element,
+  //  weighted by their area"
+  //  annotation (Placement(transformation(extent={{226,-164},{206,-144}})));
+
+  // Thermal splitter for radiative heat flow, is equal to thermal splitter for intgains
+  // can be deleted if Q_HK_str is connected to intGainsRad
   BaseClasses.ThermSplitter thermSplitterHkRad(
     final splitFactor=splitFactor,
     final nOut=dimension,
@@ -181,27 +188,21 @@ equation
           114,-22},{66,-22},{66,0},{80,0}},  color={191,0,0}));
   connect(fhkIntWalls, intWallRC.port_a) annotation (Line(points={{240,-106},{
           178,-106},{178,-40},{182,-40}}, color={191,0,0}));
+  connect(fhkExtWalls, extWallRC.port_a) annotation (Line(points={{240,-154},{42,
+          -154},{42,-40},{-158,-40}}, color={191,0,0}));
   connect(tabsIntWalls, intWallRC.port_a1) annotation (Line(points={{240,-20},{
           240,-22},{192,-22},{192,-28}}, color={191,0,0}));
   connect(tabsExtWalls, tabsExtWalls) annotation (Line(points={{188,-180},{188,-180}},
                                   color={191,0,0}));
-  connect(fhkExtWalls, thermSplitterFhkExtWallsWin.portIn[1]) annotation (Line(points={{240,-154},{226,-154}}, color={191,0,0}));
   connect(hkRad, thermSplitterHkRad.portIn[1])
     annotation (Line(points={{240,-180},{226,-180}}, color={191,0,0}));
 
   if ATotExt > 0 and ATotWin > 0 then
-    connect(thermSplitterFhkExtWallsWin.portOut[1], convExtWall.solid) annotation (Line(points={{206,
-            -154},{-76,-154},{-76,-40},{-114,-40}},                                                                                        color={191,
-          0,0}));
-    connect(thermSplitterFhkExtWallsWin.portOut[2], convWin.solid) annotation (
-      Line(points={{206,-154},{-46,-154},{-46,40},{-116,40}},
-                                                            color={191,0,0}));
   elseif not ATotExt > 0 and ATotWin > 0 then
-    connect(thermSplitterFhkExtWallsWin.portOut[1], convWin.solid);
   elseif ATotExt > 0 and not ATotWin > 0 then
-    connect(thermSplitterFhkExtWallsWin.portOut[1], convExtWall.solid);
   end if;
 
+  // can be deleted if hkrad connected to intGainsRad
   if ATotExt > 0 and ATotWin > 0 and AInt > 0 then
     connect(thermSplitterHkRad.portOut[1], convExtWall.solid) annotation (Line(
           points={{206,-180},{206,-162},{-76,-162},{-76,-40},{-114,-40}}, color=
@@ -238,6 +239,7 @@ equation
           127}));
   connect(switch_hConInt.y, convIntWall.Gc) annotation (Line(points={{138,-53.6},
           {137.5,-53.6},{137.5,-50},{138,-50}}, color={0,0,127}));
+
    annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}}), graphics={
   Polygon(
