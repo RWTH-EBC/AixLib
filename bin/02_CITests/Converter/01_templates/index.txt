@@ -1,0 +1,16 @@
+  <!doctype html>
+    <html>
+      <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <title>Regression plots</title>
+      </head>
+      <body>
+        <header>
+	  %for model in html_model:
+	      <br><li><a href="${model}" target="content">${model}</a></li></br>
+	  %endfor
+        </header>
+        
+      </body>
+    </html>
