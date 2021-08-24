@@ -251,13 +251,13 @@ model MainBuilding2Zones "Benchmark building model"
     use_Xi_in=false,
     use_T_in=true,
     nPorts=1,
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = MediumAir,
     T=283.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-140,250})));
-  Fluid.Sources.Boundary_pT boundaryExhaustAir(          redeclare package
-      Medium = Media.Air, nPorts=1)
+  Fluid.Sources.Boundary_pT boundaryExhaustAir(redeclare package Medium =
+        MediumAir,        nPorts=1)
                           annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
@@ -611,13 +611,13 @@ model MainBuilding2Zones "Benchmark building model"
     use_Xi_in=false,
     use_T_in=true,
     nPorts=1,
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = MediumAir,
     T=283.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-82,190})));
   Fluid.Sources.Boundary_pT boundaryExhaustAir1(redeclare package Medium =
-        Media.Air, nPorts=1)
+        MediumAir, nPorts=1)
                           annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,

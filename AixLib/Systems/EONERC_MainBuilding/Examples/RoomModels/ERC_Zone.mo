@@ -196,7 +196,7 @@ model ERC_Zone "Model of a ERC-Thermal Zone Including CCA and AHU"
       TLiqWat_in=288.15))
     annotation (Placement(transformation(extent={{-36,-32},{0,-6}})));
   Fluid.Sources.Boundary_pT boundaryExhaustAir(redeclare package Medium =
-        Media.Air, nPorts=1)
+        MediumAir, nPorts=1)
                           annotation (Placement(transformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
@@ -211,7 +211,7 @@ model ERC_Zone "Model of a ERC-Thermal Zone Including CCA and AHU"
     use_X_in=true,
     use_Xi_in=false,
     use_T_in=true,
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = MediumAir,
     T=283.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{4,-4},{-4,4}},
