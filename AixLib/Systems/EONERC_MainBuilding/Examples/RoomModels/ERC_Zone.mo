@@ -1,18 +1,18 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model SimpleRoom
-    extends Modelica.Icons.Example;
+model ERC_Zone "Model of a ERC-Thermal Zone Including CCA and AHU"
+  extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
     annotation (choicesAllMatching=true);
     package MediumAir = AixLib.Media.AirIncompressible
     annotation (choicesAllMatching=true);
-
-  AixLib.Systems.EONERC_MainBuilding.Tabs tabs(
+  AixLib.Systems.EONERC_MainBuilding.Tabs
+       tabs1(
     redeclare package Medium = MediumWater,
     area=33.8*59.4*2,
     thickness=0.3,
-    alpha=15) annotation (Placement(transformation(extent={{20,-60},{60,-20}})));
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone
-                                                    thermalZone1(
+    alpha=15)
+    annotation (Placement(transformation(extent={{78,-42},{98,-20}})));
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=BaseClasses.ERCMainBuilding_Office(),
@@ -24,7 +24,14 @@ model SimpleRoom
     Heater_on=false,
     Cooler_on=false,
     nPorts=2) "Thermal zone"
-    annotation (Placement(transformation(extent={{6,22},{56,68}})));
+    annotation (Placement(transformation(extent={{2,-2},{58,56}})));
+  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
+    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+    computeWetBulbTemperature=false,
+    filNam=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"))
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
+
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="UserProfiles",
@@ -113,89 +120,9 @@ model SimpleRoom
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])
     "Table with profiles for internal gains"
     annotation(Placement(transformation(extent={{-7,-7},{7,7}},
-        rotation=180,
-        origin={93,26})));
-
-  AixLib.BoundaryConditions.WeatherData.Bus weaBus
-    "Weather data bus"
-    annotation (Placement(transformation(extent={{-88,44},{-54,76}}),
-    iconTransformation(extent={{-150,388},{-130,408}})));
-  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
-    computeWetBulbTemperature=false,
-    filNam=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"))
-    "Weather data reader"
-    annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-
-  AixLib.Fluid.Sources.Boundary_pT bou(
-    redeclare package Medium = MediumAir,
-    use_X_in=true,
-    use_Xi_in=false,
-    use_T_in=true,
-    nPorts=1) annotation (Placement(transformation(extent={{-100,10},{-88,22}})));
-  AixLib.Fluid.Sources.Boundary_pT bou1(
-    redeclare package Medium = MediumAir,
-    use_T_in=false,
-    nPorts=1)
-    annotation (Placement(transformation(extent={{-100,26},{-88,38}})));
-  AixLib.Systems.EONERC_MainBuilding.BaseClasses.MainBus2Zones bus annotation (Placement(
-        transformation(extent={{-18,72},{18,116}}), iconTransformation(extent={
-            {110,388},{170,444}})));
-  AixLib.Fluid.Sources.Boundary_pT bouWaterhot(
-    redeclare package Medium = MediumWater,
-    use_T_in=false,
-    T=333.15,
-    nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-38,-74})));
-  AixLib.Fluid.Sources.Boundary_pT bouWaterhot1(
-    redeclare package Medium = MediumWater,
-    use_T_in=false,
-    T=333.15,
-    nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-16,-74})));
-  AixLib.Fluid.Sources.Boundary_pT bouWatercold(
-    redeclare package Medium = MediumWater,
-    use_T_in=false,
-    T=283.15,
-    nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={24,-78})));
-  AixLib.Fluid.Sources.Boundary_pT bouWatercold1(
-    redeclare package Medium = MediumWater,
-    use_T_in=false,
-    T=283.15,
-    nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={66,-94})));
-  Modelica.Blocks.Sources.RealExpression HeatPower(y=1000*4.18*(bus.tabs1Bus.hotThrottleBus.VFlowInMea
-        *(bus.tabs1Bus.hotThrottleBus.TFwrdInMea - bus.tabs1Bus.hotThrottleBus.TRtrnOutMea)
-         + bus.ahu1Bus.heaterBus.hydraulicBus.VFlowInMea*(bus.ahu1Bus.heaterBus.hydraulicBus.TFwrdInMea
-         - bus.ahu1Bus.heaterBus.hydraulicBus.TRtrnOutMea)))
-    annotation (Placement(transformation(extent={{72,-22},{92,-2}})));
-  Modelica.Blocks.Continuous.Integrator integratorHeat
-    annotation (Placement(transformation(extent={{100,-22},{120,-2}})));
-  Modelica.Blocks.Continuous.Integrator integratorCold
-    annotation (Placement(transformation(extent={{100,-62},{120,-42}})));
-  Modelica.Blocks.Interfaces.RealOutput EnergyHeat
-    "Connector of Real output signal" annotation (Placement(transformation(
-          extent={{128,-22},{148,-2}}), iconTransformation(extent={{126,-22},{
-            146,-2}})));
-  Modelica.Blocks.Interfaces.RealOutput EnergyCold
-    "Connector of Real output signal" annotation (Placement(transformation(
-          extent={{130,-62},{150,-42}}), iconTransformation(extent={{120,-62},{
-            140,-42}})));
-  Modelica.Blocks.Sources.RealExpression ColdPower(y=1000*4.18*(bus.tabs1Bus.coldThrottleBus.VFlowInMea
-        *(bus.tabs1Bus.coldThrottleBus.TFwrdInMea - bus.tabs1Bus.coldThrottleBus.TRtrnOutMea)
-         + bus.ahu1Bus.coolerBus.hydraulicBus.VFlowInMea*(bus.ahu1Bus.coolerBus.hydraulicBus.TFwrdInMea
-         - bus.ahu1Bus.coolerBus.hydraulicBus.TRtrnOutMea)))
-    annotation (Placement(transformation(extent={{72,-62},{92,-42}})));
+        origin={53,-26})));
+
   ModularAHU.GenericAHU genericAHU1(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
@@ -267,116 +194,174 @@ model SimpleRoom
       dp_nominal=20,
       mWat_flow_nominal=0.5,
       TLiqWat_in=288.15))
-    annotation (Placement(transformation(extent={{-80,-4},{-12,40}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi
-    annotation (Placement(transformation(extent={{-120,8},{-108,20}})));
+    annotation (Placement(transformation(extent={{-36,-32},{0,-6}})));
+  Fluid.Sources.Boundary_pT boundaryExhaustAir(redeclare package Medium =
+        Media.Air, nPorts=1)
+                          annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=180,
+        origin={-62,-10})));
+  BoundaryConditions.WeatherData.Bus        weaBus
+    "Weather data bus"
+    annotation (Placement(transformation(extent={{-68,42},{-34,74}}),
+    iconTransformation(extent={{-150,388},{-130,408}})));
+  BaseClasses.ZoneBus zoneBus
+    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+  Fluid.Sources.Boundary_pT boundaryOutsideAir1(
+    use_X_in=true,
+    use_Xi_in=false,
+    use_T_in=true,
+    redeclare package Medium = Media.Air,
+    T=283.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=180,
+        origin={-62,-20})));
+  Utilities.Psychrometrics.X_pTphi x_pTphi1
+    annotation (Placement(transformation(extent={{-78,-8},{-70,0}})));
+  Fluid.Sources.Boundary_pT        bouWaterhot(
+    redeclare package Medium = MediumWater,
+    use_T_in=false,
+    T=333.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={-5,-57})));
+  Fluid.Sources.Boundary_pT        bouWaterhot1(
+    redeclare package Medium = MediumWater,
+    use_T_in=false,
+    T=333.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={13,-53})));
+  Fluid.Sources.Boundary_pT        bouWatercold(
+    redeclare package Medium = MediumWater,
+    use_T_in=false,
+    T=285.15,
+    nPorts=2) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=270,
+        origin={46,-90})));
+  Fluid.Sources.Boundary_pT        bouWatercold1(
+    redeclare package Medium = MediumWater,
+    use_T_in=false,
+    T=285.15,
+    nPorts=2) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=270,
+        origin={22,-90})));
+  Fluid.Sources.Boundary_pT        bouWaterhot2(
+    redeclare package Medium = MediumWater,
+    use_T_in=false,
+    T=308.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={73,-59})));
+  Fluid.Sources.Boundary_pT        bouWaterhot3(
+    redeclare package Medium = MediumWater,
+    use_T_in=false,
+    T=308.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={55,-53})));
 equation
-  connect(weaBus, thermalZone1.weaBus) annotation (Line(
-      points={{-71,60},{6,60},{6,58.8}},
+  connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
+      points={{-80,90},{0,90},{0,44.4},{2,44.4}},
       color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(HeatPower.y, integratorHeat.u)
-    annotation (Line(points={{93,-12},{98,-12}}, color={0,0,127}));
-  connect(integratorHeat.y, EnergyHeat)
-    annotation (Line(points={{121,-12},{138,-12}}, color={0,0,127}));
-  connect(integratorCold.y, EnergyCold)
-    annotation (Line(points={{121,-52},{140,-52}}, color={0,0,127}));
-  connect(ColdPower.y, integratorCold.u)
-    annotation (Line(points={{93,-52},{98,-52}}, color={0,0,127}));
-  connect(weaDat.weaBus, weaBus) annotation (Line(
-      points={{-80,90},{-70,90},{-70,60},{-71,60}},
+      thickness=0.5));
+  connect(weaDat.weaBus,weaBus)  annotation (Line(
+      points={{-80,90},{-51,90},{-51,58}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(x_pTphi.phi, weaBus.relHum) annotation (Line(points={{-121.2,10.4},{
-          -124,10.4},{-124,60},{-71,60}},                  color={0,0,127}),
-      Text(
+      extent={{6,3},{6,3}}));
+  connect(internalGains.y,thermalZone1. intGains) annotation (Line(points={{53,-18.3},
+          {52,-18.3},{52,-12},{52.4,-12},{52.4,2.64}},
+                                            color={0,0,127}));
+  connect(tabs1.heatPort,thermalZone1. intGainsConv) annotation (Line(points={{88,-19},
+          {88,28.16},{58.56,28.16}},                                color={191,
+          0,0}));
+  connect(genericAHU1.port_b1,thermalZone1. ports[1]) annotation (Line(points={{
+          0.163636,-20.1818},{28,-20.1818},{28,6.12},{23.42,6.12}},
+                                                                 color={0,127,
+          255}));
+  connect(genericAHU1.port_a2,thermalZone1. ports[2]) annotation (Line(points={{
+          0.163636,-10.7273},{38,-10.7273},{38,6.12},{36.58,6.12}},
+                                                               color={0,127,255}));
+  connect(boundaryExhaustAir.ports[1],genericAHU1. port_b2) annotation (Line(
+        points={{-58,-10},{-58,-10.7273},{-36,-10.7273}},    color={0,127,255}));
+  connect(thermalZone1.TAir, zoneBus.TZoneMea) annotation (Line(points={{60.8,50.2},
+          {78.4,50.2},{78.4,100.05},{0.05,100.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(x_pTphi.p_in, weaBus.pAtm) annotation (Line(points={{-121.2,17.6},{
-          -122,17.6},{-122,18},{-124,18},{-124,60},{-71,60}},
-                                                           color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(bou.T_in, x_pTphi.T) annotation (Line(points={{-101.2,18.4},{-106,
-          18.4},{-106,42},{-124,42},{-124,14},{-121.2,14}},
-                                                    color={0,0,127}));
-  connect(x_pTphi.T, weaBus.TDryBul) annotation (Line(points={{-121.2,14},{-124,
-          14},{-124,60},{-71,60}},
-                               color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(genericAHU1.port_b1, thermalZone1.ports[1]) annotation (Line(points={{
-          -11.6909,16},{25.125,16},{25.125,28.44}}, color={0,127,255}));
-  connect(genericAHU1.port_a2, thermalZone1.ports[2]) annotation (Line(points={{
-          -11.6909,32},{-4,32},{-4,24},{12,24},{12,28.44},{36.875,28.44}},
-                   color={0,127,255}));
-  connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{85.3,
-          26},{68,26},{68,25.68},{51,25.68}}, color={0,0,127}));
-  connect(bouWaterhot.ports[1], genericAHU1.port_a5) annotation (Line(points={{-40,-64},
-          {-40,-4},{-33.6364,-4}},          color={0,127,255}));
-  connect(bouWaterhot1.ports[1], genericAHU1.port_b5) annotation (Line(points={{-18,-64},
-          {-28,-64},{-28,-4},{-27.7636,-4}},           color={0,127,255}));
-  connect(bouWatercold1.ports[1], genericAHU1.port_b4) annotation (Line(points={{56,-96},
-          {-76,-96},{-76,-42},{-42,-42},{-42,-4},{-39.8182,-4}},
-        color={0,127,255}));
-  connect(genericAHU1.port_a4, bouWatercold.ports[1]) annotation (Line(points={
-          {-46,-4},{-46,-34},{-80,-34},{-80,-88},{26,-88}}, color={0,127,255}));
-  connect(genericAHU1.genericAHUBus, bus.ahu1Bus) annotation (Line(
-      points={{-46,40.2},{-44,40.2},{-44,94.11},{0.09,94.11}},
+  connect(genericAHU1.genericAHUBus, zoneBus.ahuBus) annotation (Line(
+      points={{-18,-5.88182},{-18,100.05},{0.05,100.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,
-          -18.1818},{40,-8},{62,-8},{62,45.92},{56.5,45.92}},    color={191,0,0}));
-  connect(bouWaterhot1.ports[2], tabs.port_b1)
-    annotation (Line(points={{-14,-64},{32,-64},{32,-60}}, color={0,127,255}));
-  connect(bouWaterhot.ports[2], tabs.port_a1) annotation (Line(points={{-36,-64},
-          {-36,-60},{24,-60}}, color={0,127,255}));
-  connect(bouWatercold.ports[2], tabs.port_a2)
-    annotation (Line(points={{22,-88},{48,-88},{48,-60}}, color={0,127,255}));
-  connect(bouWatercold1.ports[2], tabs.port_b2)
-    annotation (Line(points={{56,-92},{56,-59.6364}}, color={0,127,255}));
-  connect(tabs.tabsBus, bus.tabs1Bus) annotation (Line(
-      points={{19.8,-41.6364},{0.09,-41.6364},{0.09,94.11}},
+  connect(tabs1.tabsBus, zoneBus.tabsBus) annotation (Line(
+      points={{77.9,-31.9},{77.9,100.05},{0.05,100.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(boundaryOutsideAir1.T_in, weaBus.TDryBul) annotation (Line(points={{-66.8,
+          -21.6},{-94,-21.6},{-94,58},{-51,58}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(bou1.ports[1], genericAHU1.port_b2)
-    annotation (Line(points={{-88,32},{-80,32}}, color={0,127,255}));
-  connect(bou.ports[1], genericAHU1.port_a1)
-    annotation (Line(points={{-88,16},{-80,16}}, color={0,127,255}));
-  connect(x_pTphi.X, bou.X_in) annotation (Line(points={{-107.4,14},{-104,14},{
-          -104,13.6},{-101.2,13.6}}, color={0,0,127}));
-  connect(thermalZone1.TAir, bus.TZone1Mea) annotation (Line(points={{58.5,63.4},
-          {58.5,94.11},{0.09,94.11}}, color={0,0,127}), Text(
+  connect(x_pTphi1.X, boundaryOutsideAir1.X_in) annotation (Line(points={{-69.6,
+          -4},{-68,-4},{-68,-18.4},{-66.8,-18.4}}, color={0,0,127}));
+  connect(x_pTphi1.X, boundaryOutsideAir1.X_in) annotation (Line(points={{-69.6,
+          -4},{-68,-4},{-68,-18.4},{-66.8,-18.4}}, color={0,0,127}));
+  connect(boundaryOutsideAir1.ports[1], genericAHU1.port_a1) annotation (Line(
+        points={{-58,-20},{-58,-20.1818},{-36,-20.1818}}, color={0,127,255}));
+  connect(x_pTphi1.T, weaBus.TDryBul) annotation (Line(points={{-78.8,-4},{-94,-4},
+          {-94,58},{-51,58}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(x_pTphi1.phi, weaBus.relHum) annotation (Line(points={{-78.8,-6.4},{-78.8,
+          -6},{-94,-6},{-94,58},{-51,58}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(genericAHU1.port_b4, genericAHU1.port_a5) annotation (Line(points={{
-          -39.8182,-4},{-36,-4},{-36,-4},{-33.6364,-4}}, color={0,127,255}));
-  annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false)),
-    Diagram(coordinateSystem(preserveAspectRatio=false)));
-end SimpleRoom;
+  connect(x_pTphi1.p_in, weaBus.pAtm) annotation (Line(points={{-78.8,-1.6},{-78,
+          -1.6},{-78,-2},{-94,-2},{-94,58},{-51,58}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(bouWaterhot.ports[1], genericAHU1.port_a5) annotation (Line(points={{-5,-52},
+          {-12,-52},{-12,-32},{-11.4545,-32}},      color={0,127,255}));
+  connect(bouWaterhot1.ports[1], genericAHU1.port_b5) annotation (Line(points={{
+          13,-48},{12,-48},{12,-42},{-8,-42},{-8,-32},{-8.34545,-32}}, color={0,
+          127,255}));
+  connect(bouWatercold1.ports[1], genericAHU1.port_a4) annotation (Line(points={
+          {24,-80},{-18,-80},{-18,-32}}, color={0,127,255}));
+  connect(bouWatercold.ports[1], tabs1.port_b2) annotation (Line(points={{48,-80},
+          {96,-80},{96,-41.8}}, color={0,127,255}));
+  connect(bouWatercold1.ports[2], tabs1.port_a2) annotation (Line(points={{20,-80},
+          {22,-80},{22,-72},{92,-72},{92,-42}}, color={0,127,255}));
+  connect(genericAHU1.port_b4, bouWatercold.ports[2]) annotation (Line(points={{
+          -14.7273,-32},{-14,-32},{-14,-74},{46,-74},{46,-80},{44,-80}}, color={
+          0,127,255}));
+  connect(bouWaterhot2.ports[1], tabs1.port_b1)
+    annotation (Line(points={{73,-54},{84,-54},{84,-42}}, color={0,127,255}));
+  connect(bouWaterhot3.ports[1], tabs1.port_a1)
+    annotation (Line(points={{55,-48},{80,-48},{80,-42}}, color={0,127,255}));
+end ERC_Zone;

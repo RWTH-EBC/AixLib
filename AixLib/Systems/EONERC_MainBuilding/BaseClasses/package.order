@@ -9,6 +9,7 @@ EvaluationBus2Zones
 HeatpumpAndConsumerControllerBus
 SimpleERCBus
 TabsBus2
+ZoneBus
 WeatherAC
 ERCMainBuilding_Office
 EnergyCounter
