@@ -475,6 +475,17 @@ equation
     annotation (Line(points={{-192,6},{-158,6},{-158,-40}}, color={191,0,0}));
   connect(extTabsRC.port_b, extWall) annotation (Line(points={{-212,6},{-220,6},
           {-220,-40},{-240,-40}}, color={191,0,0}));
+  if WithTabs and ExtTabs then
+    if ConcreteCore then
+      connect(tabs,extTabsRC.port_CC)  annotation (Line(points={{-240,-180},{
+              -240,-52},{-202,-52},{-202,-6.2}},
+                                    color={191,0,0}));
+    else
+      connect(tabs,extTabsRC.port_a)  annotation (Line(points={{-240,-180},{
+              -240,-52},{-188,-52},{-188,6},{-192,6}},
+                                             color={191,0,0}));
+    end if;
+  end if;
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
