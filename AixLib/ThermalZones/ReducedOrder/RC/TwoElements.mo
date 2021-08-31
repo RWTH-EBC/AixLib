@@ -38,15 +38,14 @@ model TwoElements
     final RInt=RTabs,
     final CInt=CTabs,
     final T_start=T_start,
-    final ConcreteCore=ConcreteCore) if     not ExtTabs and ATabs > 0 "RC-element for interior walls"
+    final ConcreteCore=ConcreteCore) if not ExtTabs and WithTabs "RC-element for interior walls"
     annotation (Placement(transformation(extent={{210,-156},{230,-134}})));
 protected
   Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0)) if
                                                                      AInt > 0
     "Convective heat transfer of interior walls"
     annotation (Placement(transformation(extent={{148,-30},{128,-50}})));
-  Modelica.Blocks.Sources.Constant hConIntWall(
-    k= if ExtTabs then AInt*hConInt else AInt*hConInt + ATabs*hConTabs) if
+  Modelica.Blocks.Sources.Constant hConIntWall(k=AInt*hConInt) if
        AInt > 0
     "Coefficient of convective heat transfer for interior walls"
     annotation (Placement(transformation(
@@ -120,17 +119,16 @@ equation
   connect(convIntWall.fluid, senTAir.port)
     annotation (Line(points={{128,-40},{68,-40},{68,0},{80,0}},
     color={191,0,0}));
-  connect(intTabsRC.port_a, intWallRC.port_a) annotation (Line(points={{210,
-          -146},{178,-146},{178,-40},{182,-40}},
-                                           color={191,0,0}));
-  if ATabs > 0 and not ExtTabs then
+  connect(intTabsRC.port_a, intWallRC.port_a) annotation (Line(points={{210,-146},
+          {178,-146},{178,-40},{182,-40}}, color={191,0,0}));
+  if WithTabs and not ExtTabs then
     if ConcreteCore then
-      connect(tabs,intTabsRC.port_CC)  annotation (Line(points={{-240,-180},{
-              -240,-162},{220,-162},{220,-155.8}},
+      connect(tabs,intTabsRC.port_CC)  annotation (Line(points={{-240,-180},{-240,
+              -162},{220,-162},{220,-155.8}},
                                     color={191,0,0}));
     else
-      connect(tabs,intTabsRC.port_a)  annotation (Line(points={{-240,-180},{
-              -240,-162},{160,-162},{160,-146},{210,-146}},
+      connect(tabs,intTabsRC.port_a)  annotation (Line(points={{-240,-180},{-240,
+              -162},{160,-162},{160,-146},{210,-146}},
                                              color={191,0,0}));
     end if;
   end if;

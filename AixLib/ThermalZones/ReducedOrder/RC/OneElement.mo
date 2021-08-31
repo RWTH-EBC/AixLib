@@ -62,15 +62,15 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Boolean use_C_flow = false
     "Set to true to enable input connector for trace substance"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
+  parameter Boolean WithTabs
+    "If true, the zone has TABS"
+    annotation(Dialog(group="Tabs"),choices(checkBox = true));
   parameter Boolean ExtTabs
     "If true, the TABS are exterior (Groundfloor, Rooftop)"
     annotation(Dialog(group="Tabs"),choices(checkBox = true));
-  parameter Modelica.SIunits.Area ATabs
-    "Total area of TABS"
-    annotation(Dialog(group="Tabs"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConTabs
-    "Convective coefficient of heat transfer of tabs (indoor)"
-    annotation(Dialog(group="Tabs"));
+  parameter Boolean ConcreteCore
+    "If true, TABS of concrete core type"
+    annotation(Dialog(group="Tabs"),choices(checkBox = true));
   parameter Integer nTabs(min = 1) "Number of RC-elements of tabs"
     annotation(Dialog(group="Tabs"));
   parameter Modelica.SIunits.ThermalResistance RTabs[nTabs](
@@ -85,9 +85,6 @@ model OneElement "Thermal Zone with one element for exterior walls"
     each min=Modelica.Constants.small)
     "Vector of heat capacities of tabs, from inside to outside"
     annotation(Dialog(group="Tabs"));
-  parameter Boolean ConcreteCore
-    "If true, TABS of concrete core type"
-    annotation(Dialog(group="Tabs"),choices(checkBox = true));
   Modelica.Blocks.Interfaces.RealInput solRad[nOrientations](
     each final quantity="RadiantEnergyFluenceRate",
     each final unit="W/m2") if sum(ATransparent) > 0
@@ -225,7 +222,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "Trace substance mass flow rate added to the thermal zone"
     annotation (Placement(transformation(extent={{-280,70},{-240,110}}), iconTransformation(extent={{-260,90},{-240,110}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs if ATabs > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs if WithTabs
     "heat port for TABS"              annotation (Placement(transformation(
           extent={{-250,-190},{-230,-170}}), iconTransformation(extent={{-250,-50},
             {-230,-30}})));
@@ -235,7 +232,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     RExtRem=RRemTabs,
     CExt=CTabs,
     final T_start=T_start,
-    final ConcreteCore=ConcreteCore) if ExtTabs and ATabs > 0
+    final ConcreteCore=ConcreteCore) if ExtTabs and WithTabs
     "RC-element for exterior TABS" annotation (Placement(transformation(
         extent={{-10,-11},{10,11}},
         rotation=180,
@@ -262,8 +259,7 @@ protected
                                                                      ATotExt > 0
     "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-114,-30},{-94,-50}})));
-  Modelica.Blocks.Sources.Constant hConExtWall_const(
-  final k=if ExtTabs then ATotExt*hConExt + ATabs*hConTabs else ATotExt*hConExt) if
+  Modelica.Blocks.Sources.Constant hConExtWall_const(final k=ATotExt*hConExt) if
        ATotExt > 0
     "Coefficient of convective heat transfer for exterior walls"
     annotation (Placement(transformation(

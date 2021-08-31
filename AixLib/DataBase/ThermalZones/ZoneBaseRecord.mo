@@ -118,14 +118,13 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
+  parameter Boolean WithTabs  "Zone has TABS";
   parameter Boolean ExtTabs  "Zone TABS are external (Groundfloor or rooftop)";
-  parameter Modelica.SIunits.Area ATabs "Total TABS area";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConTabs "Convective coefficient of heat transfer for TABS (indoor)";
+  parameter Boolean CCTabs "Zone TABS are concrete core type";
   parameter Integer nTabs(min=1) "Number of RC-elements of TABS";
   parameter Modelica.SIunits.ThermalResistance RTabs[nTabs] "Resistances of TABS, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RRemTabs "Resistance of remaining resistor RExtRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CTabs[nTabs] "Heat capacities of TABS, from inside to outside";
-  parameter Boolean CCTabs "Zone TABS are concrete core type";
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
