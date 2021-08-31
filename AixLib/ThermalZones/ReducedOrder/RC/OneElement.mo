@@ -478,11 +478,11 @@ equation
   if WithTabs and ExtTabs then
     if ConcreteCore then
       connect(tabs,extTabsRC.port_CC)  annotation (Line(points={{-240,-180},{
-              -240,-52},{-202,-52},{-202,-6.2}},
+              -240,-24},{-202,-24},{-202,-6.2}},
                                     color={191,0,0}));
     else
       connect(tabs,extTabsRC.port_a)  annotation (Line(points={{-240,-180},{
-              -240,-52},{-188,-52},{-188,6},{-192,6}},
+              -240,-24},{-188,-24},{-188,6},{-192,6}},
                                              color={191,0,0}));
     end if;
   end if;
