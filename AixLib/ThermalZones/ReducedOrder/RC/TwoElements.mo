@@ -33,7 +33,7 @@ model TwoElements
     final T_start=T_start) if AInt > 0 "RC-element for interior walls"
     annotation (Placement(transformation(extent={{182,-50},{202,-28}})));
 
-  BaseClasses.InteriorWall intTabsRC(
+  BaseClasses.InteriorTabs intTabsRC(
     final n=nTabs,
     final RInt=RTabs,
     final CInt=CTabs,
