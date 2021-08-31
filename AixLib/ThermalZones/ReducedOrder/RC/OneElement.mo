@@ -477,13 +477,13 @@ equation
           {-220,-40},{-240,-40}}, color={191,0,0}));
   if WithTabs and ExtTabs then
     if ConcreteCore then
-      connect(tabs,extTabsRC.port_CC)  annotation (Line(points={{-240,-180},{
-              -240,-24},{-202,-24},{-202,-6.2}},
-                                    color={191,0,0}));
+      connect(tabs,extTabsRC.port_CC)  annotation (Line(points={{-240,-180},{-240,
+              -18},{-202,-18},{-202,-6.2}}, color={191,0,0},
+    pattern=LinePattern.Dash));
     else
-      connect(tabs,extTabsRC.port_a)  annotation (Line(points={{-240,-180},{
-              -240,-24},{-188,-24},{-188,6},{-192,6}},
-                                             color={191,0,0}));
+      connect(tabs,extTabsRC.port_a)  annotation (Line(points={{-240,-180},{-240,
+              -18},{-190,-18},{-190,6},{-192,6}},
+                                             color={191,0,0}, pattern=LinePattern.Dash));
     end if;
   end if;
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(

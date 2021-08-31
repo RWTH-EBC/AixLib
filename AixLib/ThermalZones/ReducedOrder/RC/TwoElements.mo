@@ -125,11 +125,11 @@ equation
     if ConcreteCore then
       connect(tabs,intTabsRC.port_CC)  annotation (Line(points={{-240,-180},{-240,
               -162},{220,-162},{220,-155.8}},
-                                    color={191,0,0}));
+                                    color={191,0,0}, pattern=LinePattern.Dash));
     else
-      connect(tabs,intTabsRC.port_a)  annotation (Line(points={{-240,-180},{-240,
-              -162},{160,-162},{160,-146},{210,-146}},
-                                             color={191,0,0}));
+      connect(tabs,intTabsRC.port_a)  annotation (Line(points={{-240,-180},{
+              -240,-162},{198,-162},{198,-146},{210,-146}},
+                                             color={191,0,0}, pattern=LinePattern.Dash));
     end if;
   end if;
 
