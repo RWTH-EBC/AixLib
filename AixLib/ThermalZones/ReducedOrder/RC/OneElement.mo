@@ -63,10 +63,10 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "Set to true to enable input connector for trace substance"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
   parameter Boolean ExtTabs
-    "If true, input connector QLat_flow is enabled and room air computes moisture balance"
+    "If true, the TABS are exterior (Groundfloor, Rooftop)"
     annotation(Dialog(group="Tabs"),choices(checkBox = true));
   parameter Modelica.SIunits.Area ATabs
-    "Vector of areas of exterior tabs by orientations"
+    "Total area of TABS"
     annotation(Dialog(group="Tabs"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConTabs
     "Convective coefficient of heat transfer of tabs (indoor)"
@@ -85,7 +85,9 @@ model OneElement "Thermal Zone with one element for exterior walls"
     each min=Modelica.Constants.small)
     "Vector of heat capacities of tabs, from inside to outside"
     annotation(Dialog(group="Tabs"));
-
+  parameter Boolean ConcreteCore
+    "If true, TABS of concrete core type"
+    annotation(Dialog(group="Tabs"),choices(checkBox = true));
   Modelica.Blocks.Interfaces.RealInput solRad[nOrientations](
     each final quantity="RadiantEnergyFluenceRate",
     each final unit="W/m2") if sum(ATransparent) > 0

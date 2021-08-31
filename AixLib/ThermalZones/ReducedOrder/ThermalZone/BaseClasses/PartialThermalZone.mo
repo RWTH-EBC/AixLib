@@ -110,7 +110,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final nTabs=zoneParam.nTabs,
     final RTabs=zoneParam.RTabs,
     final RRemTabs=zoneParam.RRemTabs,
-    final CTabs=zoneParam.CTabs) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
+    final CTabs=zoneParam.CTabs,
+    final ConcreteCore=zoneParam.CCTabs) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
             {86,92}})));
 
 protected
