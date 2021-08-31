@@ -1,4 +1,4 @@
-within AixLib.DataBase.ThermalZones;
+﻿within AixLib.DataBase.ThermalZones;
 record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
@@ -118,6 +118,14 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
+  parameter Boolean ExtTabs  "Zone is connected to central air handling unit";
+  parameter Modelica.SIunits.Area ATabs "Areas of exterior walls by orientations";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConTabs "Convective coefficient of heat transfer for exterior walls (indoor)";
+  parameter Integer nTabs(min=1) "Number of RC-elements of exterior walls";
+  parameter Modelica.SIunits.ThermalResistance RTabs[nTabs] "Resistances of exterior walls, from inside to outside";
+  parameter Modelica.SIunits.ThermalResistance RRemTabs "Resistance of remaining resistor RExtRem between capacity n and outside";
+  parameter Modelica.SIunits.HeatCapacity CTabs[nTabs] "Heat capacities of exterior walls, from inside to outside";
+  parameter Boolean CCTabs "Zone is connected to central air handling unit";
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
