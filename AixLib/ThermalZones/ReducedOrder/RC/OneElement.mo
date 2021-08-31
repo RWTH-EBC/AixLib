@@ -62,8 +62,6 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Boolean use_C_flow = false
     "Set to true to enable input connector for trace substance"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Temperature T_soil
-    "Soil Temperature";
   parameter Boolean ExtTabs
     "If true, the TABS are exterior (Groundfloor, Rooftop)"
     annotation(Dialog(group="Tabs"),choices(checkBox = true));
@@ -241,7 +239,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "RC-element for exterior TABS" annotation (Placement(transformation(
         extent={{-10,-11},{10,11}},
         rotation=180,
-        origin={-178,1})));
+        origin={-202,5})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
@@ -323,9 +321,6 @@ protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
     use_moisture_balance and ATot >0 "Converter for latent heat flow rate"
     annotation (Placement(transformation(extent={{-202,-130},{-182,-110}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TSoil(T=T_soil) if
-     ExtTabs and ATabs > 0  "Soil Temperature for exterior TABS"
-    annotation (Placement(transformation(extent={{-218,-8},{-198,12}})));
 equation
   connect(volAir.ports, ports)
     annotation (Line(
@@ -437,8 +432,8 @@ equation
     annotation (Line(points={{100,0},{108,0},{108,160},{250,160}},
     color={0,0,127}));
   connect(convWin.solid, windowIndoorSurface)
-    annotation (Line(points={{-116,40},{-130,40},{-130,-10},{-212,-10},{-212,
-    -146},{-200,-146},{-200,-180}},
+    annotation (Line(points={{-116,40},{-130,40},{-130,-10},{-212,-10},{-212,-146},
+          {-200,-146},{-200,-180}},
     color={191,0,0}));
   connect(convExtWall.solid, extWallIndoorSurface)
     annotation (Line(points={{-114,-40},{-134,-40},{-152,-40},{-152,-58},{-208,
@@ -481,9 +476,9 @@ equation
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
           90},{-260,90}}, color={0,0,127}));
   connect(extTabsRC.port_a, extWallRC.port_a)
-    annotation (Line(points={{-168,2},{-158,2},{-158,-40}}, color={191,0,0}));
-  connect(TSoil.port, extTabsRC.port_b) annotation (Line(points={{-198,2},{-188,
-          2}},                    color={191,0,0}));
+    annotation (Line(points={{-192,6},{-158,6},{-158,-40}}, color={191,0,0}));
+  connect(extTabsRC.port_b, extWall) annotation (Line(points={{-212,6},{-220,6},
+          {-220,-40},{-240,-40}}, color={191,0,0}));
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
@@ -532,7 +527,7 @@ equation
     fillPattern=FillPattern.Solid,
     textString="Indoor Air"),
   Rectangle(
-    extent={{-236,20},{-162,-14}},
+    extent={{-236,20},{-192,-14}},
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid),

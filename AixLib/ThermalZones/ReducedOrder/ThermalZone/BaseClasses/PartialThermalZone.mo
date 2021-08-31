@@ -104,7 +104,6 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final C_start=C_start,
     final C_nominal=C_nominal,
     final mSenFac=mSenFac,
-    final T_soil=zoneParam.TSoil,
     final ExtTabs=zoneParam.ExtTabs,
     final ATabs=zoneParam.ATabs,
     final hConTabs=zoneParam.hConTabs,
