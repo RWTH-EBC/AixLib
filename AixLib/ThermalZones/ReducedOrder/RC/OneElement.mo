@@ -229,6 +229,17 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "heat port for TABS"              annotation (Placement(transformation(
           extent={{-250,-190},{-230,-170}}), iconTransformation(extent={{-250,-50},
             {-230,-30}})));
+  BaseClasses.ExteriorTabs extTabsRC(
+    final n=nTabs,
+    RExt=RTabs,
+    RExtRem=RRemTabs,
+    CExt=CTabs,
+    final T_start=T_start,
+    final ConcreteCore=ConcreteCore) if ExtTabs and ATabs > 0
+    "RC-element for exterior TABS" annotation (Placement(transformation(
+        extent={{-10,-11},{10,11}},
+        rotation=180,
+        origin={-178,1})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
@@ -252,7 +263,8 @@ protected
     "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-114,-30},{-94,-50}})));
   Modelica.Blocks.Sources.Constant hConExtWall_const(
-  final k=ATotExt*hConExt) if ATotExt > 0
+  final k=if ExtTabs then ATotExt*hConExt + ATabs*hConTabs else ATotExt*hConExt) if
+       ATotExt > 0
     "Coefficient of convective heat transfer for exterior walls"
     annotation (Placement(transformation(
     extent={{5,-5},{-5,5}},
@@ -307,9 +319,11 @@ protected
     annotation (Placement(transformation(extent={{-200,-100},{-180,-80}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
-    use_moisture_balance and ATot >0
-    "Converter for latent heat flow rate"
+    use_moisture_balance and ATot >0 "Converter for latent heat flow rate"
     annotation (Placement(transformation(extent={{-202,-130},{-182,-110}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TSoil(T=286.15) if
+     ExtTabs and ATabs > 0  "Soil Temperature for exterior TABS"
+    annotation (Placement(transformation(extent={{-218,-8},{-198,12}})));
 equation
   connect(volAir.ports, ports)
     annotation (Line(
@@ -464,6 +478,10 @@ equation
           {-52,90},{-260,90}}, color={0,0,127}));
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
           90},{-260,90}}, color={0,0,127}));
+  connect(extTabsRC.port_a, extWallRC.port_a)
+    annotation (Line(points={{-168,2},{-158,2},{-158,-40}}, color={191,0,0}));
+  connect(TSoil.port, extTabsRC.port_b) annotation (Line(points={{-198,2},{-188,
+          2}},                    color={191,0,0}));
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
@@ -493,7 +511,7 @@ equation
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
-    textString="Exterior Walls"),
+          textString="Exterior Walls"),
   Text(
     extent={{-202,82},{-168,64}},
     lineColor={0,0,255},
@@ -510,7 +528,21 @@ equation
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
-    textString="Indoor Air")}),
+    textString="Indoor Air"),
+  Rectangle(
+    extent={{-236,20},{-162,-14}},
+    lineColor={0,0,255},
+    fillColor={215,215,215},
+    fillPattern=FillPattern.Solid),
+  Text(
+    extent={{-27.5,8.5},{27.5,-8.5}},
+    lineColor={0,0,255},
+    fillColor={215,215,215},
+    fillPattern=FillPattern.Solid,
+          textString="Ext TABS
+",
+          origin={-225.5,2.5},
+          rotation=90)}),
   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),
    graphics={

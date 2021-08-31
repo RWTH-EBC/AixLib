@@ -120,15 +120,18 @@ equation
   connect(convIntWall.fluid, senTAir.port)
     annotation (Line(points={{128,-40},{68,-40},{68,0},{80,0}},
     color={191,0,0}));
-  connect(intTabsRC.port_a, intWallRC.port_a) annotation (Line(points={{210,-146},
-          {178,-146},{178,-40},{182,-40}}, color={191,0,0}));
+  connect(intTabsRC.port_a, intWallRC.port_a) annotation (Line(points={{210,
+          -146},{178,-146},{178,-40},{182,-40}},
+                                           color={191,0,0}));
   if ATabs > 0 and not ExtTabs then
     if ConcreteCore then
-      connect(tabs, intTabsRC.port_CC) annotation (Line(points={{-240,-180},{-240,-162},
-          {220,-162},{220,-155.8}}, color={191,0,0}));
+      connect(tabs,intTabsRC.port_CC)  annotation (Line(points={{-240,-180},{
+              -240,-162},{220,-162},{220,-155.8}},
+                                    color={191,0,0}));
     else
-      connect(tabs, intTabsRC.port_a) annotation (Line(points={{-240,-180},{-240,-162},
-          {160,-162},{160,-146},{210,-146}}, color={191,0,0}));
+      connect(tabs,intTabsRC.port_a)  annotation (Line(points={{-240,-180},{
+              -240,-162},{160,-162},{160,-146},{210,-146}},
+                                             color={191,0,0}));
     end if;
   end if;
 
