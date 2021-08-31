@@ -62,6 +62,29 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Boolean use_C_flow = false
     "Set to true to enable input connector for trace substance"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
+  parameter Boolean ExtTabs=false
+    "If true, input connector QLat_flow is enabled and room air computes moisture balance"
+    annotation(Dialog(group="Tabs"),choices(checkBox = true));
+  parameter Modelica.SIunits.Area ATabs=20
+    "Vector of areas of exterior tabs by orientations"
+    annotation(Dialog(group="Tabs"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConTabs=1.7
+    "Convective coefficient of heat transfer of tabs (indoor)"
+    annotation(Dialog(group="Tabs"));
+  parameter Integer nTabs(min = 1) "Number of RC-elements of tabs"
+    annotation(Dialog(group="Tabs"));
+  parameter Modelica.SIunits.ThermalResistance RTabs[nTabs](
+    each min=Modelica.Constants.small)
+    "Vector of resistances of tabs, from inside to outside"
+    annotation(Dialog(group="Tabs"));
+  parameter Modelica.SIunits.ThermalResistance RRemTabs(
+    min=Modelica.Constants.small)
+    "Resistance of remaining resistor RExtRem between capacity n and outside"
+    annotation(Dialog(group="Tabs"));
+  parameter Modelica.SIunits.HeatCapacity CTabs[nTabs](
+    each min=Modelica.Constants.small)
+    "Vector of heat capacities of tabs, from inside to outside"
+    annotation(Dialog(group="Tabs"));
 
   Modelica.Blocks.Interfaces.RealInput solRad[nOrientations](
     each final quantity="RadiantEnergyFluenceRate",

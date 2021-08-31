@@ -33,12 +33,20 @@ model TwoElements
     final T_start=T_start) if AInt > 0 "RC-element for interior walls"
     annotation (Placement(transformation(extent={{182,-50},{202,-28}})));
 
+  BaseClasses.InteriorWall intTabsRC(
+    final n=nTabs,
+    final RInt=RTabs,
+    final CInt=CTabs,
+    final T_start=T_start) if not ExtTabs and ATabs > 0 "RC-element for interior walls"
+    annotation (Placement(transformation(extent={{210,-156},{230,-134}})));
 protected
   Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0)) if
                                                                      AInt > 0
     "Convective heat transfer of interior walls"
     annotation (Placement(transformation(extent={{148,-30},{128,-50}})));
-  Modelica.Blocks.Sources.Constant hConIntWall(k=AInt*hConInt) if AInt > 0
+  Modelica.Blocks.Sources.Constant hConIntWall(
+    k= if ExtTabs then AInt*hConInt else AInt*hConInt + ATabs*hConTabs) if
+       AInt > 0
     "Coefficient of convective heat transfer for interior walls"
     annotation (Placement(transformation(
       extent={{5,-5},{-5,5}},
@@ -109,8 +117,10 @@ equation
     annotation (Line(points={{182,-40},{168,-40},{168,-82},{-120,-82},{-120,-180}},
     color={191,0,0}));
   connect(convIntWall.fluid, senTAir.port)
-    annotation (Line(points={{128,-40},{66,-40},{66,0},{80,0}},
+    annotation (Line(points={{128,-40},{68,-40},{68,0},{80,0}},
     color={191,0,0}));
+  connect(intTabsRC.port_a, intWallRC.port_a) annotation (Line(points={{210,-146},
+          {178,-146},{178,-40},{182,-40}}, color={191,0,0}));
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}}), graphics={
   Polygon(
@@ -125,7 +135,21 @@ equation
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
-    textString="Interior Walls")}), Documentation(revisions="<html>
+    textString="Interior Walls"),
+  Polygon(
+    points={{202,-128},{236,-128},{236,-176},{202,-176},{202,-128}},
+    lineColor={0,0,255},
+    smooth=Smooth.None,
+    fillColor={215,215,215},
+    fillPattern=FillPattern.Solid),
+  Text(
+    extent={{192,-158},{258,-182}},
+    lineColor={0,0,255},
+    fillColor={215,215,215},
+    fillPattern=FillPattern.Solid,
+          textString="Int
+TABS
+")}),                               Documentation(revisions="<html>
   <ul>
   <li>
   July 11, 2019, by Katharina Brinkmann:<br/>
