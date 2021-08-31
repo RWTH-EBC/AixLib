@@ -225,6 +225,10 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "Trace substance mass flow rate added to the thermal zone"
     annotation (Placement(transformation(extent={{-280,70},{-240,110}}), iconTransformation(extent={{-260,90},{-240,110}})));
 
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs if ATabs > 0
+    "heat port for TABS"              annotation (Placement(transformation(
+          extent={{-250,-190},{-230,-170}}), iconTransformation(extent={{-250,-50},
+            {-230,-30}})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";

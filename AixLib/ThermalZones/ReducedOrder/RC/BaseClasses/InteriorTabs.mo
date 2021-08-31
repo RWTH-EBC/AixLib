@@ -6,7 +6,7 @@ model InteriorTabs
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_CC if ConcreteCore
     "concrete core port"
     annotation (Placement(transformation(extent={{-10,30},{10,50}}),
-    iconTransformation(extent={{-110,-10},{-90,10}})));
+    iconTransformation(extent={{-10,-108},{10,-88}})));
 equation
   // Connect concrete core port
   if ConcreteCore then
