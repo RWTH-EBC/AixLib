@@ -62,6 +62,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Boolean use_C_flow = false
     "Set to true to enable input connector for trace substance"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.Temperature T_soil
+    "Soil Temperature";
   parameter Boolean ExtTabs
     "If true, the TABS are exterior (Groundfloor, Rooftop)"
     annotation(Dialog(group="Tabs"),choices(checkBox = true));
@@ -321,7 +323,7 @@ protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
     use_moisture_balance and ATot >0 "Converter for latent heat flow rate"
     annotation (Placement(transformation(extent={{-202,-130},{-182,-110}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TSoil(T=286.15) if
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TSoil(T=T_soil) if
      ExtTabs and ATabs > 0  "Soil Temperature for exterior TABS"
     annotation (Placement(transformation(extent={{-218,-8},{-198,12}})));
 equation
@@ -540,8 +542,7 @@ equation
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
           textString="Ext TABS
-",
-          origin={-225.5,2.5},
+",        origin={-225.5,2.5},
           rotation=90)}),
   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),
