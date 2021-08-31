@@ -6,7 +6,7 @@ model ExteriorTabs
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_CC if ConcreteCore
                                                              "interior port"
     annotation (Placement(transformation(extent={{-10,108},{10,128}}),
-    iconTransformation(extent={{-110,-10},{-90,10}})));
+    iconTransformation(extent={{-10,112},{10,132}})));
 equation
   if ConcreteCore then
     for i in 1:n loop
