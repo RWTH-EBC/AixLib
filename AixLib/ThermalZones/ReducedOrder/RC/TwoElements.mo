@@ -38,7 +38,7 @@ model TwoElements
     final RInt=RTabs,
     final CInt=CTabs,
     final T_start=T_start,
-    ConcreteCore=ConcreteCore) if     not ExtTabs and ATabs > 0 "RC-element for interior walls"
+    final ConcreteCore=ConcreteCore) if     not ExtTabs and ATabs > 0 "RC-element for interior walls"
     annotation (Placement(transformation(extent={{210,-156},{230,-134}})));
 protected
   Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0)) if
