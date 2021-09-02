@@ -31,14 +31,14 @@ model MainBuilding2Zones "Benchmark building model"
         origin={8,-100})));
   Tabs tabs1(
     redeclare package Medium = MediumWater,
-    area=33.8*59.4*2,
-    thickness=0.3,
+    area=60*60,
+    thickness=0.05,
     alpha=15)
     annotation (Placement(transformation(extent={{158,120},{198,160}})));
   Tabs tabs2(
     redeclare package Medium = MediumWater,
-    area=33.8*59.4*2,
-    thickness=0.3,
+    area=60*60,
+    thickness=0.05,
     alpha=15)
     annotation (Placement(transformation(extent={{364,122},{404,162}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
@@ -231,7 +231,7 @@ model MainBuilding2Zones "Benchmark building model"
         tau1=5,
         tau2=15,
         dT_nom=20,
-        Q_nom=60000)),
+        Q_nom=100000)),
     dynamicHX(
       dp1_nominal=150,
       dp2_nominal=150,
@@ -341,7 +341,7 @@ model MainBuilding2Zones "Benchmark building model"
         tau1=5,
         tau2=15,
         dT_nom=20,
-        Q_nom=60000)),
+        Q_nom=100000)),
     dynamicHX(
       dp1_nominal=150,
       dp2_nominal=150,
@@ -838,18 +838,17 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(boundary1.ports[1],highTemperatureSystem. port_b) annotation (Line(
-        points={{-188,-34},{-176.4,-34},{-176.4,-46}}, color={0,127,255}));
+        points={{-188,-34},{-176.4,-34},{-176.4,-46}}, color={255,0,0}));
   connect(highTemperatureSystem.port_a,vol3. ports[1]) annotation (Line(points={{-164.8,
-          -46},{-164.8,11.2},{-164,11.2}},        color={0,127,255}));
+          -46},{-164.8,11.2},{-164,11.2}},        color={255,0,0}));
   connect(vol3.ports[2], heatExchangerSystem.port_b1) annotation (Line(points={{-164,
-          10.4},{-164,-11.2},{-130,-11.2}},color={0,127,255}));
+          10.4},{-164,-11.2},{-130,-11.2}},color={255,0,0}));
   connect(admixHTC.port_b2,vol3. ports[3]) annotation (Line(points={{-164,140},
           {-164,9.6}},           color={238,46,47}));
   connect(highTemperatureSystem.port_b, vol2.ports[1]) annotation (Line(points=
-          {{-176.4,-46},{-176,-46},{-176,-21.2}}, color={0,127,255}));
+          {{-176.4,-46},{-176,-46},{-176,-21.2}}, color={255,0,0}));
   connect(vol2.ports[2], heatExchangerSystem.port_a1) annotation (Line(points={
-          {-176,-20.4},{-160,-20.4},{-160,-20.8},{-130,-20.8}}, color={0,127,
-          255}));
+          {-176,-20.4},{-160,-20.4},{-160,-20.8},{-130,-20.8}}, color={255,0,0}));
   connect(vol2.ports[3], admixHTC.port_a1)
     annotation (Line(points={{-176,-19.6},{-176,140}}, color={238,46,47}));
   connect(Q_flow_AHU1.y,limiterAHU1. u)
@@ -885,7 +884,7 @@ equation
           160},{116,160},{116,120},{-1.81818,120},{-1.81818,248}},
         color={238,46,47}));
   connect(genericAHU1.port_a5, vol2.ports[4]) annotation (Line(points={{
-          -12.1818,248},{-12,248},{-12,128},{-176,128},{-176,-18.8}}, color={
+          -12.1818,248},{-12,248},{-12,126},{-176,126},{-176,-18.8}}, color={
           238,46,47}));
   connect(genericAHU2.port_b5, vol3.ports[4]) annotation (Line(points={{116.182,
           160},{116.182,120},{-164,120},{-164,8.8}}, color={238,46,47}));
