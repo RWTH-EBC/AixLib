@@ -71,6 +71,8 @@ model EastWestFacingWindows "windows facing south and west"
         extent={{-5,-35},{5,35}},
         rotation=90,
         origin={18,-68})));
+    final use_condLayers=true)
+                      annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_West(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -100,6 +102,11 @@ model EastWestFacingWindows "windows facing south and west"
         rotation=0,
         origin={-83,13})));
 
+    final use_condLayers=true)
+                             annotation (Placement(transformation(
+        extent={{-4,-24},{4,24}},
+        rotation=-90,
+        origin={26,78})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_East(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -128,6 +135,11 @@ model EastWestFacingWindows "windows facing south and west"
         rotation=180,
         origin={69,13})));
 
+    final use_condLayers=true)
+                             annotation (Placement(transformation(
+        extent={{-4.00001,-24},{4.00001,24}},
+        rotation=90,
+        origin={26,-68})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_North(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -157,6 +169,8 @@ model EastWestFacingWindows "windows facing south and west"
         rotation=90,
         origin={18,69})));
 
+    final use_condLayers=true)
+                     annotation (Placement(transformation(extent={{74,-36},{60,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -205,6 +219,8 @@ model EastWestFacingWindows "windows facing south and west"
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     calcMethodOut=calcMethodOut) annotation (Placement(transformation(
+    use_condLayers=not use_UFH)
+                     annotation (Placement(transformation(
         extent={{-2.00031,-12},{2.00003,12}},
         rotation=90,
         origin={-42,-68})));

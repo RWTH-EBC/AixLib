@@ -197,6 +197,11 @@ model SouthFacingWindows "windows facing south"
     final TOutAirLimit=TOutAirLimit,
     calcMethodOut=calcMethodOut)
       annotation(Placement(transformation(extent={{-2.00031,-12},{2.00003,12}}, rotation=90, origin={-38,-70})));
+    use_condLayers=not use_UFH)
+                     annotation (Placement(transformation(
+        extent={{-2.00031,-12},{2.00003,12}},
+        rotation=90,
+        origin={-32,-64})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
     annotation (Placement(transformation(extent={{-104,-104},{-96,-96}}), iconTransformation(extent={{-108,-108},{-92,-92}})));

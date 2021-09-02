@@ -79,7 +79,8 @@ model WholeHouseBuildingEnvelope
     final Tset_Hobby=TDynVentHobby_set,
     final Tset_Corridor=TDynVentCorridorGF_set,
     final Tset_WC=TDynVentWCStorage_set,
-    final Tset_Kitchen=TDynVentKitchen_set) annotation (Placement(transformation(extent={{-20,-74},{20,-26}})));
+    final Tset_Kitchen=TDynVentKitchen_set,
+    final use_UFH=use_UFH)                  annotation (Placement(transformation(extent={{-20,-74},{20,-26}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope upperFloor_Building(
     final denAir=denAir,
     final cAir=cAir,
@@ -118,7 +119,8 @@ model WholeHouseBuildingEnvelope
     final Tset_Bath=TDynVentBath_set,
     final Tset_Children2=TDynVentChildren2_set,
     final UValOutDoors=UValOutDoors,
-    final epsOutDoors=epsOutDoors) annotation (Placement(transformation(extent={{-24,-12},{22,34}})));
+    final epsOutDoors=epsOutDoors,
+    final use_UFH=use_UFH)         annotation (Placement(transformation(extent={{-24,-12},{22,34}})));
   AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(
     final denAir=denAir,
     final cAir=cAir,
@@ -233,10 +235,13 @@ model WholeHouseBuildingEnvelope
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
         iconTransformation(extent={{-10,-110},{10,-90}})));
   Components.Walls.BaseClasses.SimpleNLayer groPlateLowPart[5](
-    final A={groundFloor_Building.Livingroom.floor.Wall.simpleNLayer.A,groundFloor_Building.Hobby.floor.Wall.simpleNLayer.A,groundFloor_Building.Corridor.floor.Wall.simpleNLayer.A,groundFloor_Building.WC_Storage.floor.Wall.simpleNLayer.A,groundFloor_Building.Kitchen.floor.Wall.simpleNLayer.A},
+    final A={groundFloor_Building.Livingroom.floor.Wall.A,groundFloor_Building.Hobby.floor.Wall.A,
+        groundFloor_Building.Corridor.floor.Wall.A,groundFloor_Building.WC_Storage.floor.Wall.A,
+        groundFloor_Building.Kitchen.floor.Wall.A},
     each final T_start=fill(TWalls_start, wallTypes.groundPlate_low_half.n),
     each final wallRec=wallTypes.groundPlate_low_half,
-    each final energyDynamics=energyDynamicsWalls)    annotation (Placement(transformation(
+    each final energyDynamics=energyDynamicsWalls) if not (use_UFH)
+                                                      annotation (Placement(transformation(
         extent={{-4,-18},{4,18}},
         rotation=-90,
         origin={0,-86})));
@@ -248,6 +253,9 @@ model WholeHouseBuildingEnvelope
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloUp[5] "Heat port ceiling of ground floor" annotation (Placement(transformation(extent={{-110,-4},{-90,16}}), iconTransformation(extent={{-110,-10},{-90,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloDown[5] "Heat port floor of ground floor (towards ground plate)" annotation (Placement(transformation(extent={{-112,-78},{-92,-58}}), iconTransformation(extent={{-110,-66},{-90,-46}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groPlateUp[5] "Heat port ground plate towards ground floor" annotation (Placement(transformation(extent={{-112,-100},{-92,-80}}), iconTransformation(extent={{-110,-90},{-90,-70}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorGroundPlate[5](each m=1) if
+       use_UFH
+    annotation (Placement(transformation(extent={{-32,-98},{-20,-86}})));
 equation
   connect(upperFloor_Building.thermOutside, thermOutside) annotation (Line(
         points={{-24,33.54},{-74,33.54},{-74,100},{-100,100}}, color={191,0,0}));
@@ -326,9 +334,11 @@ equation
   connect(heatStarToCombAttic.portConv, attic_2Ro_5Rooms.thermRoom) annotation (Line(points={{-30,54.125},{-20,54.125},{-20,54},{-3.08,54},{-3.08,63}}, color={191,0,0}));
   connect(attic_2Ro_5Rooms.starRoom, heatStarToCombAttic.portRad) annotation (Line(points={{3.52,63},{3.52,52},{-26,52},{-26,47.875},{-30,47.875}}, color={0,0,0}));
   connect(heatStarToCombAttic.portConvRadComb, heatingToRooms[11]) annotation (Line(points={{-42,51},{-46,51},{-46,50},{-72,50},{-72,-10.9091},{-102,-10.9091}}, color={191,0,0}));
-  connect(AirExchangePort[11], attic_2Ro_5Rooms.AirExchangePort) annotation (Line(points={{-114,68.7273},{-76,68.7273},{-76,76.205},{-24.2,76.205}}, color={0,0,127}));
+  connect(AirExchangePort[11], attic_2Ro_5Rooms.AirExchangePort) annotation (Line(points={{-114,
+          68.7273},{-76,68.7273},{-76,76.205},{-24.2,76.205}},                                                                                       color={0,0,127}));
   connect(groPlateLowPart.port_b, groundTemp) annotation (Line(points={{0,-90},{0,-100}}, color={191,0,0}));
-  connect(groPlateLowPart.port_a, groPlateUp) annotation (Line(points={{8.88178e-16,-82},{0,-82},{0,-80},{-38,-80},{-38,-90},{-102,-90}}, color={191,0,0}));
+  connect(groPlateLowPart.port_a, groPlateUp) annotation (Line(points={{8.88178e-16,-82},{0,-82},{0,-80},
+          {-38,-80},{-38,-90},{-102,-90}},                                                                         color={191,0,0}));
   connect(groFloDown, groundFloor_Building.groundTemp) annotation (Line(points={{-102,-68},{-38,-68},{-38,-74},{0,-74}}, color={191,0,0}));
   connect(upperFloor_Building.thermFloor_Bedroom, uppFloDown[1]) annotation (Line(points={{-13.88,-14.3},{-13.88,-18},{-40,-18},{-40,20},{-100,20}}, color={191,0,0}));
   connect(upperFloor_Building.thermFloor_Children1, uppFloDown[2]) annotation (Line(points={{-8.36,-14.3},{-8.36,-18},{-40,-18},{-40,24},{-100,24}}, color={191,0,0}));
@@ -341,6 +351,10 @@ equation
   connect(groundFloor_Building.thermCeiling_WCStorage, groFloUp[4]) annotation (Line(points={{5.8,-23.84},{5.8,-20},{-44,-20},{-44,10},{-100,10}}, color={191,0,0}));
   connect(groundFloor_Building.thermCeiling_Kitchen, groFloUp[5]) annotation (Line(points={{14.2,-23.84},{14.2,-20},{-44,-20},{-44,14},{-100,14}}, color={191,0,0}));
 
+  connect(thermalCollectorGroundPlate.port_b, groundTemp) annotation (Line(
+        points={{-26,-98},{-14,-98},{-14,-100},{0,-100}}, color={191,0,0}));
+  connect(thermalCollectorGroundPlate.port_a[1], groPlateUp) annotation (Line(
+        points={{-26,-86},{-64,-86},{-64,-90},{-102,-90}}, color={191,0,0}));
   annotation (Icon(graphics={Rectangle(
           extent={{100,100},{-100,-100}},
           lineColor={0,0,0},

@@ -5,8 +5,10 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Modelica.SIunits.Density denAir=1.19 "Density of air" annotation (Dialog(group="Air volume of room"));
   parameter Modelica.SIunits.SpecificHeatCapacity cAir=1007 "Specific heat capacity of air" annotation (Dialog(group="Air volume of room"));
 
+  parameter Boolean use_UFH = false "If underfloor heating, conductive wall layers in floor and ceiling are disabled" annotation(Dialog(group = "Structure of wall layers"));
   replaceable parameter AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
-    wallTypes constrainedby AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
+    wallTypes constrainedby
+    AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
     "Types of walls (contains multiple records)"
     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
 
