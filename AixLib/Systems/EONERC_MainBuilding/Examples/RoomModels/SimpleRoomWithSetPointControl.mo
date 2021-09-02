@@ -1,6 +1,6 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
 model SimpleRoomWithSetPointControl
-  extends RoomModels.SimpleRoom
+  extends RoomModels.SimpleRoom(genericAHU1(heater(dynamicHX(Q_nom=100000))))
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),

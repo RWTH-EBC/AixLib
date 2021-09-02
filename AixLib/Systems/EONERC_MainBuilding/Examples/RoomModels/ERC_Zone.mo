@@ -8,9 +8,9 @@ model ERC_Zone "Model of a ERC-Thermal Zone Including CCA and AHU"
   AixLib.Systems.EONERC_MainBuilding.Tabs
        tabs1(
     redeclare package Medium = MediumWater,
-    area=33.8*59.4*2,
-    thickness=0.3,
-    alpha=15)
+    area=60*60,
+    thickness=0.05,
+    alpha=20)
     annotation (Placement(transformation(extent={{78,-42},{98,-20}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
@@ -180,7 +180,7 @@ model ERC_Zone "Model of a ERC-Thermal Zone Including CCA and AHU"
         tau1=5,
         tau2=15,
         dT_nom=20,
-        Q_nom=60000)),
+        Q_nom=100000)),
     dynamicHX(
       dp1_nominal=150,
       dp2_nominal=150,
