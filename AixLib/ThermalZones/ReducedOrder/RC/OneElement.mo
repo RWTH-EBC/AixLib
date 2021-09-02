@@ -210,12 +210,13 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "Splits incoming solar radiation into separate gains for each wall element,
     weighted by their area"
     annotation (Placement(transformation(extent={{-138,138},{-122,154}})));
-  BaseClasses.ExteriorWall extWallRC(
+  BaseClasses.ExteriorTabs extWallRC(
     final n=nExt,
     final RExt=RExt,
     final CExt=CExt,
     final RExtRem=RExtRem,
-    final T_start=T_start) if ATotExt > 0 "RC-element for exterior walls"
+    final T_start=T_start,
+    ConcreteCore=false) if    ATotExt > 0 "RC-element for exterior walls"
     annotation (Placement(transformation(extent={{-158,-50},{-178,-28}})));
 
   Modelica.Blocks.Interfaces.RealInput[Medium.nC] C_flow if use_C_flow
@@ -224,8 +225,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs if WithTabs
     "heat port for TABS"              annotation (Placement(transformation(
-          extent={{-250,-190},{-230,-170}}), iconTransformation(extent={{-250,-50},
-            {-230,-30}})));
+          extent={{-250,-190},{-230,-170}}), iconTransformation(extent={{-250,-6},
+            {-230,14}})));
   BaseClasses.ExteriorTabs extTabsRC(
     final n=nTabs,
     RExt=RTabs,

@@ -391,6 +391,9 @@ public
     final til=zoneParam.tiltRoof)
     "Calculates diffuse solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs if zoneParam.WithTabs
+    "Radiative internal gains" annotation (Placement(transformation(extent={{-110,50},
+            {-90,70}}),      iconTransformation(extent={{-76,-84},{-56,-64}})));
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
@@ -679,6 +682,8 @@ equation
         color={0,0,127}));
   connect(humVolAirROM.y, airExcMoi.HumOut) annotation (Line(points={{-59.5,-50},
           {-4,-50},{-4,0},{-6,0},{-6,0.16},{-6.8,0.16}}, color={0,0,127}));
+  connect(tabs, ROM.tabs) annotation (Line(points={{-100,60},{28,60},{28,74.4},
+          {38,74.4}}, color={191,0,0}));
   annotation (Documentation(revisions="<html><ul>
   <li>November 20, 2020, by Katharina Breuer:<br/>
     Combine thermal zone models
