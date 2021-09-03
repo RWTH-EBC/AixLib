@@ -1,10 +1,11 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingRoom "Model for heating of one room with underfloor heating"
   extends UnderfloorHeating.BaseClasses.PartialModularPort_ab(final nPorts=
         CircuitNo, final m_flow_nominal=m_flow_PanelHeating);
    extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
    import Modelica.Constants.pi;
 
+  parameter Boolean ROM=false "False in High order models will be used";
   parameter Integer dis(min=1) "Number of Discreatisation Layers";
   final parameter Integer CircuitNo(min=1) = integer(ceil(PipeLength/maxLength))
     "number of circuits in one room";
@@ -154,6 +155,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     each final X_start=X_start,
     each final C_start=C_start,
     each final C_nominal=C_nominal,
+    each final ROM=ROM,
     each final mSenFac=mSenFac,
     each final dp_Pipe=dp_Pipe,
     each final dp_Valve=dp_Valve,
@@ -175,7 +177,15 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     each m_flow_Circuit=m_flow_Circuit,
     each final wallTypeFloor=wallTypeFloor,
     each final wallTypeCeiling=wallTypeCeiling,
-    each R_x=R_add*CircuitNo)
+    each R_x=R_add*CircuitNo,
+    each nFloorTabs=1,
+    each RFloorTabs={0},
+    each RFloorRemTabs=0,
+    each CFloorTabs={0},
+    each nRoofTabs=1,
+    each RRoofTabs={0},
+    each RRoofRemTabs=0,
+    each CRoofTabs={0})
     annotation (Placement(transformation(extent={{-22,-8},{22,8}})));
   BaseClasses.EN1264.HeatFlux EN_1264(
     lambda_E=lambda_E,
@@ -199,16 +209,16 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     D=d,
     T=Spacing)
     annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[dis]
-    annotation (Placement(transformation(extent={{-10,50},{10,70}}),
-        iconTransformation(extent={{-10,50},{10,70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[dis]
-    annotation (Placement(transformation(extent={{-10,-90},{10,-70}}),
-        iconTransformation(extent={{-10,-90},{10,-70}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling[dis](each m=
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor annotation (
+      Placement(transformation(extent={{-10,50},{10,70}}), iconTransformation(
+          extent={{-10,50},{10,70}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling annotation (
+      Placement(transformation(extent={{-10,-90},{10,-70}}), iconTransformation(
+          extent={{-10,-90},{10,-70}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling(m=
         CircuitNo)
     annotation (Placement(transformation(extent={{-10,-58},{10,-38}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor[dis](each m=
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor(m=
         CircuitNo)
     annotation (Placement(transformation(extent={{-10,40},{10,20}})));
   Modelica.Blocks.Interfaces.RealInput valveInput[CircuitNo] annotation (
@@ -262,20 +272,15 @@ equation
   // HEAT CONNECTIONS
 
   for i in 1:CircuitNo loop
-    for m in 1:dis loop
-    connect(underfloorHeatingCircuit[i].heatCeiling[m], thermalCollectorCeiling[m].port_a[
-      i]) annotation (Line(points={{0.44,-8.8},{0.44,-24},{0,-24},{0,-38}},
+    connect(underfloorHeatingCircuit[i].heatCeiling, thermalCollectorCeiling.port_a[i]) annotation (Line(points={{0.44,-8.8},{0.44,-24},{0,-24},{0,-38}},
           color={191,0,0}));
-    connect(thermalCollectorFloor[m].port_a[i], underfloorHeatingCircuit[i].heatFloor[m])
+    connect(thermalCollectorFloor.port_a[i], underfloorHeatingCircuit[i].heatFloor)
       annotation (Line(points={{0,20},{0,7.6}}, color={191,0,0}));
-    end for;
   end for;
-  for m in 1:dis loop
-  connect(thermalCollectorCeiling[m].port_b, heatCeiling[m])
+  connect(thermalCollectorCeiling.port_b, heatCeiling)
     annotation (Line(points={{0,-58},{0,-80}}, color={191,0,0}));
-  connect(heatFloor[m], thermalCollectorFloor[m].port_b)
+  connect(heatFloor, thermalCollectorFloor.port_b)
     annotation (Line(points={{0,60},{0,40}}, color={191,0,0}));
-  end for;
 
   // VALVE CONNECTION
   for i in 1:CircuitNo loop

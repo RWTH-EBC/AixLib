@@ -29,8 +29,8 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
     withSheathing=false)
     annotation (Placement(transformation(extent={{-32,-64},{18,-34}})));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor[dis](
-      each G=area/dis*10.8)
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(G=
+        area*10.8)
     annotation (Placement(transformation(extent={{-4,-12},{-24,8}})));
   parameter Integer dis=100
     "Number of discretization layers for panel heating pipe";
@@ -50,13 +50,11 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
     annotation (Placement(transformation(extent={{74,-60},{54,-40}})));
 equation
 
-  for i in 1:dis loop
-    connect(fixedHeatFlow1.port, underfloorHeatingSystem.heatCeiling[i])
+   connect(fixedHeatFlow1.port, underfloorHeatingSystem.heatCeiling[1])
     annotation (Line(points={{38,-90},{20,-90},{20,-92},{-7,-92},{-7,-64}},
         color={191,0,0}));
-    connect(thermalConductor[i].port_b, vol.heatPort) annotation (Line(points={{-24,-2},
+   connect(thermalConductor.port_b, vol.heatPort) annotation (Line(points={{-24,-2},
           {-34,-2},{-34,22},{-10,22}}, color={191,0,0}));
-  end for;
 
   connect(const.y, underfloorHeatingSystem.valveInput) annotation (Line(points={
           {-85.3,-19},{-23,-19},{-23,-32}}, color={0,0,127}));
@@ -70,7 +68,7 @@ equation
   connect(underfloorHeatingSystem.T_FlowNominal, boundary.T_in) annotation (
       Line(points={{-32,-62.5},{-62,-62.5},{-62,-70},{-114,-70},{-114,-44},{-100,
           -44}}, color={0,0,127}));
-  connect(thermalConductor.port_a, underfloorHeatingSystem.heatFloor)
+  connect(thermalConductor.port_a, underfloorHeatingSystem.heatFloor[1])
     annotation (Line(points={{-4,-2},{-2,-2},{-2,-4},{4,-4},{4,-24},{-7,-24},{-7,
           -34}}, color={191,0,0}));
   connect(fixedHeatFlow.port, vol.heatPort) annotation (Line(points={{-20,84},{-14,

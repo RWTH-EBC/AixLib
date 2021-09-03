@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingSystem "Model for an underfloor heating system"
 extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
         false, final m_flow_nominal = m_flow_total);
@@ -160,10 +160,10 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-64,68})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[RoomNo*dis]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[RoomNo]
     annotation (Placement(transformation(extent={{-10,50},{10,70}}),
         iconTransformation(extent={{-10,50},{10,70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[RoomNo*dis]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[RoomNo]
     annotation (Placement(transformation(extent={{-10,-70},{10,-50}}),
         iconTransformation(extent={{-10,-70},{10,-50}})));
 protected
@@ -182,14 +182,12 @@ equation
 
   // HEAT CONNECTIONS
 
-   for i in 1:RoomNo loop
-     for n in 1:dis loop
-  connect(heatFloor[(i-1)*dis+n], underfloorHeatingRoom[i].heatFloor[n])
-    annotation (Line(points={{0,60},{0,36}}, color={191,0,0}));
-  connect(underfloorHeatingRoom[i].heatCeiling[n], heatCeiling[(i-1)*dis+n])
-    annotation (Line(points={{0,16},{0,-60}}, color={191,0,0}));
-     end for;
-          end for;
+  for i in 1:RoomNo loop
+    connect(heatFloor[i], underfloorHeatingRoom[i].heatFloor)
+      annotation (Line(points={{0,60},{0,36}}, color={191,0,0}));
+    connect(underfloorHeatingRoom[i].heatCeiling, heatCeiling[i])
+      annotation (Line(points={{0,16},{0,-60}}, color={191,0,0}));
+  end for;
 
  // OUTER FLUID CONNECTIONS
   connect(port_a, TFlow.port_a)
