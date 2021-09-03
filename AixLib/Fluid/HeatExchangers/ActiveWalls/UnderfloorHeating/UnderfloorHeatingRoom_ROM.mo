@@ -1,5 +1,6 @@
 ﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
-model UnderfloorHeatingRoom "Model for heating of one room with underfloor heating"
+model UnderfloorHeatingRoom_ROM
+  "Model for heating of one room with underfloor heating"
   extends UnderfloorHeating.BaseClasses.PartialModularPort_ab(final nPorts=
         CircuitNo, final m_flow_nominal=m_flow_PanelHeating);
    extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
@@ -12,31 +13,6 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   parameter Modelica.SIunits.Area A "Floor Area"
     annotation (Dialog(group="Room Specifications"));
 
-  // HOM
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
-  final parameter Modelica.SIunits.Thickness InsulationThickness=
-      wallTypeCeiling.d[1] "Thickness of thermal insulation";
-  final parameter Modelica.SIunits.ThermalConductivity lambda_ins=
-      wallTypeCeiling.lambda[1] "Thermal conductivity of thermal insulation";
-  final parameter Modelica.SIunits.ThermalInsulance R_lambdaIns= InsulationThickness/lambda_ins "Thermal resistance of thermal insulation";
-
-  final parameter Modelica.SIunits.Thickness CoverThickness=wallTypeFloor.d[1]
-    "thickness of cover above pipe";
-  final parameter Modelica.SIunits.ThermalConductivity lambda_u=wallTypeFloor.lambda[1]
-    "Thermal conductivity of wall layers above panel heating without flooring (coverage)";
-  final parameter Modelica.SIunits.ThermalConductivity lambda_E=lambda_u
-    "Thermal conductivity of cover";
-
-  final parameter Modelica.SIunits.ThermalInsulance R_lambdaB=wallTypeFloor.d[2]
-      /wallTypeFloor.lambda[2] "Thermal resistance of flooring";
-
-  final parameter Modelica.SIunits.ThermalInsulance R_lambdaCeiling=if Ceiling
-       then wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] else (wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] + wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] + wallTypeCeiling.d[4]/wallTypeCeiling.lambda[4])
-    "Thermal resistance of ceiling";
-  final parameter Modelica.SIunits.ThermalInsulance R_lambdaPlaster=if Ceiling
-       then wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] else 0
-    "Thermal resistance of plaster";
   final parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Ceiling = 5.8824 "Coefficient of heat transfer at Ceiling Surface";
   final parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Floor = 10.8 "Coefficient of heat transfer at floor surface";
 
@@ -145,24 +121,14 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     "Outer diameter of sheathing";
 
   // Heatflux calculations
-  final parameter Modelica.SIunits.Power Q_F=if q <= q_G then q*A else q_G*A
+  final parameter Modelica.SIunits.Power Q_F=q*A
     "nominal heat flow of panel heating";
-  final parameter Modelica.SIunits.Power Q_out=Q_Nf - Q_F
-    "needed heating power by other heating equipment";
 
-
-
-  final parameter Modelica.SIunits.ThermalInsulance R_U = if Ceiling and not ROM then R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster + 1/alpha_Ceiling
- elseif
-       not Ceiling and not ROM then R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster else A*(RRoofTabs+RRoofRemTabs)
+  final parameter Modelica.SIunits.ThermalInsulance R_U = A*(RRoofTabs+RRoofRemTabs)
   "Thermal resistance of wall layers under panel heating";
-  final parameter Modelica.SIunits.ThermalInsulance R_O = if not ROM then 1 / alpha_Floor + R_lambdaB + CoverThickness / lambda_u else A*(RFloorTabs+RFloorRemTabs)
+  final parameter Modelica.SIunits.ThermalInsulance R_O = A*(RFloorTabs+RFloorRemTabs)
   "Thermal resistance of wall layers above panel heating";
 
-  final parameter Real K_H=if not ROM then EN_1264.K_H else 0
-    "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
-  final parameter Modelica.SIunits.HeatFlux q_G=if not ROM then EN_1264.q_G else 99999
-    "specific limiting heat flux";
   parameter Modelica.SIunits.TemperatureDifference dT_Hi
     "Nominal temperature difference between heating medium"
     annotation (Dialog(group="Panel Heating"));
@@ -184,8 +150,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   final parameter Modelica.SIunits.TemperatureDifference dT_HU=
       UnderfloorHeating.BaseClasses.logDT({T_Flow,T_Return,T_U});
 
-  final parameter Modelica.SIunits.ThermalResistance R_add = if not ROM then 1/(K_H*(1 + R_O/R_U*dT_Hi/dT_HU)*A + A*(T_Room-T_U)/(R_U*dT_HU)) - 1/(A/R_O + A/R_U*dT_Hi/dT_HU) - R_pipe - 1/(2200 * pi*d_i*PipeLength) else 0 "additional thermal resistance";
-  final parameter Modelica.SIunits.ThermalResistance R_pipe = if withSheathing then (log(d_M/d_a))/(2*lambda_M*pi*PipeLength) + (log(d_a/d_i))/(2*lambda_R*pi*PipeLength) else (log(d_a/d_i))/(2*lambda_R*pi*PipeLength) "thermal resistance through pipe layers";
+  final parameter Modelica.SIunits.ThermalResistance R_add = 0 "additional thermal resistance";
   UnderfloorHeatingCircuit underfloorHeatingCircuit[CircuitNo](
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
@@ -214,8 +179,6 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     each use_vmax=use_vmax,
     each final Spacing=Spacing,
     each m_flow_Circuit=m_flow_Circuit,
-    each final wallTypeFloor=wallTypeFloor,
-    each final wallTypeCeiling=wallTypeCeiling,
     each R_x=R_add*CircuitNo,
     each nFloorTabs=nFloorTabs,
     each RFloorTabs=if ROM then fill(RFloorTabs*CircuitNo, nFloorTabs) else {0},
@@ -226,28 +189,6 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     each RRoofRemTabs=if ROM then RRoofRemTabs*CircuitNo else 0,
     each CRoofTabs=if ROM then fill(CRoofTabs/CircuitNo, nRoofTabs) else {0})
     annotation (Placement(transformation(extent={{-22,-8},{22,8}})));
-  BaseClasses.EN1264.HeatFlux EN_1264(
-    lambda_E=lambda_E,
-    R_lambdaB0=R_lambdaB,
-    R_lambdaIns=R_lambdaIns,
-    alpha_Ceiling=alpha_Ceiling,
-    T_U=T_U,
-    d_a=d_a,
-    lambda_R=lambda_R,
-    s_R=PipeThickness,
-    withSheathing=withSheathing,
-    lambda_M=lambda_M,
-    s_u=CoverThickness,
-    T_Fmax=T_Fmax,
-    T_Room=T_Room,
-    q_Gmax=q_Gmax,
-    dT_H=dT_Hi,
-    Ceiling=Ceiling,
-    R_lambdaCeiling=R_lambdaCeiling,
-    R_lambdaPlaster=R_lambdaPlaster,
-    D=d,
-    T=Spacing) if not ROM
-    annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor annotation (
       Placement(transformation(extent={{-10,50},{10,70}}), iconTransformation(
           extent={{-10,50},{10,70}})));
@@ -275,28 +216,6 @@ protected
     "Specific Heat capacity of medium";
 
 initial equation
-  if not ROM then
-    assert(q_Gmax >= K_H*dT_Hi and q_G >= K_H*dT_Hi, "Panel Heating Parameters evaluate to a limiting heat flux that exceeds the maximum limiting heat flux in"
-       + getInstanceName());
-
-    if Q_out > 1 then
-      Modelica.Utilities.Streams.print("In" + getInstanceName() + "additional heating equipment is required to cover heat load");
-    end if;
-
-    if Ceiling then
-      assert(wallTypeFloor.n == 2 and wallTypeCeiling.n == 3, "EN 1264 calculates parameters only for panel heating type A (2 floor layers, 3 ceiling layers). Error accuring in"
-         + getInstanceName());
-    else
-      assert(wallTypeFloor.n == 2 and wallTypeCeiling.n == 4, "EN 1264 calculates parameters only for panel heating type A (2 floor layers, 4 ground plate layers). Error accuring in"
-         + getInstanceName());
-    end if;
-
-    if T_U >= 18 + 273.15 then
-      assert(R_lambdaIns >= 0.75, "Thermal resistivity of insulation layer needs to be greater than 0.75 m²K / W (see EN 1264-4 table 1)");
-    else
-      assert(R_lambdaIns >= 1.25, "Thermal resistivity of insulation layer needs to be greater than 1.25 m²K / W (see EN 1264-4 table 1)");
-    end if;
-  end if;
   assert(T_Return < T_Flow, "Return Temperature is higher than the Flow Temperature in" + getInstanceName());
 
 equation
@@ -497,4 +416,4 @@ equation
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,
             60}})));
-end UnderfloorHeatingRoom;
+end UnderfloorHeatingRoom_ROM;

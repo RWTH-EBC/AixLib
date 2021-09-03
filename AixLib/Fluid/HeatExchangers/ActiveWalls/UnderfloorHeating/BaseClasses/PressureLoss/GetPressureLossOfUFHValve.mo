@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
 function GetPressureLossOfUFHValve
   "Function to evaluate the pressure loss for regulating valve of heating circuit."
   input Modelica.SIunits.VolumeFlowRate vol_flow "Volume flow rate";

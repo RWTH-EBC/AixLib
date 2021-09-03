@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers;
 record CEpartition_EnEV2009_SM_loHalf_UFH
   "Ceiling partition after EnEV 2009, for building of type S (schwer) and M (mittel), lower half for underfloor heating"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(

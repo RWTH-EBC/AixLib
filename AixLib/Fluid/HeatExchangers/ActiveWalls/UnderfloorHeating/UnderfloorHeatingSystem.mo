@@ -14,6 +14,8 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
               "Propylene glycol water, 40% mass fraction")));
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
+  parameter Boolean ROM=false "False in High order models will be used";
+
   parameter Integer RoomNo(min=1) "Number of rooms heated with panel heating" annotation (Dialog(group="General"));
   final parameter Integer CircuitNo[RoomNo]=underfloorHeatingRoom.CircuitNo
     "Number of circuits in a certain room";
@@ -29,12 +31,41 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   parameter Modelica.SIunits.Length maxLength = 120 "Maximum Length for one Circuit" annotation(Dialog(group = "Panel Heating"));
   parameter Modelica.SIunits.Temperature T_Fmax[RoomNo] = fill(29 + 273.15, RoomNo) "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
   parameter Modelica.SIunits.Temperature T_Room[RoomNo] = fill(20 + 273.15, RoomNo) "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
   parameter Boolean Ceiling[RoomNo] "false if ground plate is under panel heating" annotation (Dialog(group = "Room Specifications"));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
   parameter Modelica.SIunits.Temperature T_U[RoomNo] = fill(Modelica.SIunits.Conversions.from_degC(20), RoomNo) "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
   parameter Modelica.SIunits.Distance Spacing[RoomNo] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
   final parameter Modelica.SIunits.Length PipeLength[RoomNo] = A ./ Spacing "Pipe Length in every room";
+
+    // HOM
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+
+  //ROM
+  // Floor TABS
+  parameter Integer nFloorTabs[RoomNo]=fill(1, RoomNo) "Number of RC-elements of Floor tabs"
+    annotation(Dialog(group="Floor tabs", enable=ROM));
+  parameter Modelica.SIunits.ThermalResistance RFloorTabs[RoomNo]=fill(0, RoomNo)
+    "Vector of resistances of Floor tabs, from inside to outside"
+    annotation(Dialog(group="Floor tabs", enable=ROM));
+  parameter Modelica.SIunits.ThermalResistance RFloorRemTabs[RoomNo]=fill(0, RoomNo)
+    "Resistance of remaining resistor RFloorRem between capacity n and outside"
+    annotation(Dialog(group="Floor tabs", enable=ROM));
+  parameter Modelica.SIunits.HeatCapacity CFloorTabs[RoomNo]=fill(0, RoomNo)
+    "Vector of heat capacities of Floor tabs, from inside to outside"
+    annotation(Dialog(group="Floor tabs", enable=ROM));
+
+  // Ceiling TABS
+  parameter Integer nRoofTabs[RoomNo]=fill(1, RoomNo) "Number of RC-elements of Roof tabs"
+    annotation(Dialog(group="Roof tabs", enable=ROM));
+  parameter Modelica.SIunits.ThermalResistance RRoofTabs[RoomNo]=fill(0, RoomNo)
+    "Vector of resistances of Roof tabs, from inside to outside"
+    annotation(Dialog(group="Roof tabs", enable=ROM));
+  parameter Modelica.SIunits.ThermalResistance RRoofRemTabs[RoomNo]=fill(0, RoomNo)
+    "Resistance of remaining resistor RRoofRem between capacity n and outside"
+    annotation(Dialog(group="Roof tabs", enable=ROM));
+  parameter Modelica.SIunits.HeatCapacity CRoofTabs[RoomNo]=fill(0, RoomNo)
+    "Vector of heat capacities of Roof tabs, from inside to outside"
+    annotation(Dialog(group="Roof tabs", enable=ROM));
 
   parameter
     UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition PipeMaterial=
@@ -108,6 +139,7 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
+    each final ROM=ROM,
     final Q_Nf=Q_Nf,
     final A=A,
     final dp_Pipe=dp_Pipe,
@@ -132,7 +164,15 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     each maxLength=maxLength,
     final wallTypeFloor=wallTypeFloor,
     final wallTypeCeiling=wallTypeCeiling,
-    final dT_Hi=dT_Hi)
+    final dT_Hi=dT_Hi,
+    final nFloorTabs=nFloorTabs,
+    final RFloorTabs=RFloorTabs,
+    final RFloorRemTabs=RFloorRemTabs,
+    final CFloorTabs=CFloorTabs,
+    final nRoofTabs=nRoofTabs,
+    final RRoofTabs=RRoofTabs,
+    final RRoofRemTabs=RRoofRemTabs,
+    final CRoofTabs=CRoofTabs)
     annotation (Placement(transformation(extent={{-16,16},{16,36}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort TFlow(
     redeclare package Medium = Medium,

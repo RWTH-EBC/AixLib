@@ -12,9 +12,10 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
       choice=1 "Calculate water volume with inner diameter",
       choice=2 "Calculate water volume with time constant",
       radioButtons=true));
+  parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
+
 
   // HOM
-  parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications", enable=not ROM));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
 

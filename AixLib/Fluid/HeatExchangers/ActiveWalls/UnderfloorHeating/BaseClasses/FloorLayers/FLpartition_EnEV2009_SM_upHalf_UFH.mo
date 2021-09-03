@@ -1,12 +1,12 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers;
 record FLpartition_EnEV2009_SM_upHalf_UFH
   "Floor partition after EnEV 2009, for building of type S (schwer) and M (mittel), upper half for undefloor heating"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = 2 "Number of wall layers (1 - screed, 2 - flooring)",
     d={0.060,0.0045} "Thickness of wall layers",
-    rho={2000,120} "Density of wall layers",
-    lambda={1.2,0.045} "Thermal conductivity of wall layers",
-    c={1000,1030} "Specific heat capacity of wall layers",
+    rho={2000,150} "Density of wall layers",
+    lambda={1.21,0.045} "Thermal conductivity of wall layers",
+    c={1000,840} "Specific heat capacity of wall layers",
     eps=0.95 "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html><ul>
   <li>

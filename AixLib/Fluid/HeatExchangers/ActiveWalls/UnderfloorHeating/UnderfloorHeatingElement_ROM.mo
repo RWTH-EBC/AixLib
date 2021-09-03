@@ -119,6 +119,7 @@ model UnderfloorHeatingElement_ROM
         extent={{5,-5},{-5,5}},
         rotation=270,
         origin={0.5,24.5})));
+
   ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall RoofTabsRC(
     final n=nRoofTabs,
     final RExt=RRoofTabs,

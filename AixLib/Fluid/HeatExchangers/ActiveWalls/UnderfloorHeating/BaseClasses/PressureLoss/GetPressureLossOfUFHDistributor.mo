@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
 function GetPressureLossOfUFHDistributor
   "Function to evaluate the pressure loss for a given number of heating circuit distributor outlets."
   input Modelica.SIunits.VolumeFlowRate vol_flow "Volume flow rate";
