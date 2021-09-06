@@ -241,7 +241,7 @@ equation
 
   // HEATING CIRCUITS FLUID CONNECTIONS
 
-     for m in 1:CircuitNo[1] loop
+  for m in 1:CircuitNo[1] loop
     connect(distributor.flowPorts[m], underfloorHeatingRoom[1].ports_a[m]);
     connect(underfloorHeatingRoom[1].ports_b[m], distributor.returnPorts[m]);
     connect(underfloorHeatingRoom[1].valveInput[m], valveInput[m]) annotation (

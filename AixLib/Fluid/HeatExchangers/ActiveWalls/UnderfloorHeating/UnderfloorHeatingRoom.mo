@@ -152,16 +152,14 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
 
 
 
-  final parameter Modelica.SIunits.ThermalInsulance R_U = if Ceiling and not ROM then R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster + 1/alpha_Ceiling
- elseif
-       not Ceiling and not ROM then R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster else A*(RRoofTabs+RRoofRemTabs)
+  final parameter Modelica.SIunits.ThermalInsulance R_U = if Ceiling then R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster + 1/alpha_Ceiling
+ else R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster
   "Thermal resistance of wall layers under panel heating";
-  final parameter Modelica.SIunits.ThermalInsulance R_O = if not ROM then 1 / alpha_Floor + R_lambdaB + CoverThickness / lambda_u else A*(RFloorTabs+RFloorRemTabs)
-  "Thermal resistance of wall layers above panel heating";
+  final parameter Modelica.SIunits.ThermalInsulance R_O = 1 / alpha_Floor + R_lambdaB + CoverThickness / lambda_u  "Thermal resistance of wall layers above panel heating";
 
-  final parameter Real K_H=if not ROM then EN_1264.K_H else 0.0001
+  final parameter Real K_H=EN_1264.K_H
     "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
-  final parameter Modelica.SIunits.HeatFlux q_G=if not ROM then EN_1264.q_G else 99999
+  final parameter Modelica.SIunits.HeatFlux q_G=EN_1264.q_G
     "specific limiting heat flux";
   parameter Modelica.SIunits.TemperatureDifference dT_Hi
     "Nominal temperature difference between heating medium"
@@ -184,7 +182,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   final parameter Modelica.SIunits.TemperatureDifference dT_HU=
       UnderfloorHeating.BaseClasses.logDT({T_Flow,T_Return,T_U});
 
-  final parameter Modelica.SIunits.ThermalResistance R_add = if not ROM then 1/(K_H*(1 + R_O/R_U*dT_Hi/dT_HU)*A + A*(T_Room-T_U)/(R_U*dT_HU)) - 1/(A/R_O + A/R_U*dT_Hi/dT_HU) - R_pipe - 1/(2200 * pi*d_i*PipeLength) else 0 "additional thermal resistance";
+  final parameter Modelica.SIunits.ThermalResistance R_add = 1/(K_H*(1 + R_O/R_U*dT_Hi/dT_HU)*A + A*(T_Room-T_U)/(R_U*dT_HU)) - 1/(A/R_O + A/R_U*dT_Hi/dT_HU) - R_pipe - 1/(2200 * pi*d_i*PipeLength) "additional thermal resistance";
   final parameter Modelica.SIunits.ThermalResistance R_pipe = if withSheathing then (log(d_M/d_a))/(2*lambda_M*pi*PipeLength) + (log(d_a/d_i))/(2*lambda_R*pi*PipeLength) else (log(d_a/d_i))/(2*lambda_R*pi*PipeLength) "thermal resistance through pipe layers";
   UnderfloorHeatingCircuit underfloorHeatingCircuit[CircuitNo](
     each final energyDynamics=energyDynamics,
@@ -275,27 +273,25 @@ protected
     "Specific Heat capacity of medium";
 
 initial equation
-  if not ROM then
-    assert(q_Gmax >= K_H*dT_Hi and q_G >= K_H*dT_Hi, "Panel Heating Parameters evaluate to a limiting heat flux that exceeds the maximum limiting heat flux in"
+  assert(q_Gmax >= K_H*dT_Hi and q_G >= K_H*dT_Hi, "Panel Heating Parameters evaluate to a limiting heat flux that exceeds the maximum limiting heat flux in"
+     + getInstanceName());
+
+  if Q_out > 1 then
+    Modelica.Utilities.Streams.print("In" + getInstanceName() + "additional heating equipment is required to cover heat load");
+  end if;
+
+  if Ceiling then
+    assert(wallTypeFloor.n == 2 and wallTypeCeiling.n == 3, "EN 1264 calculates parameters only for panel heating type A (2 floor layers, 3 ceiling layers). Error accuring in"
        + getInstanceName());
+  else
+    assert(wallTypeFloor.n == 2 and wallTypeCeiling.n == 4, "EN 1264 calculates parameters only for panel heating type A (2 floor layers, 4 ground plate layers). Error accuring in"
+       + getInstanceName());
+  end if;
 
-    if Q_out > 1 then
-      Modelica.Utilities.Streams.print("In" + getInstanceName() + "additional heating equipment is required to cover heat load");
-    end if;
-
-    if Ceiling then
-      assert(wallTypeFloor.n == 2 and wallTypeCeiling.n == 3, "EN 1264 calculates parameters only for panel heating type A (2 floor layers, 3 ceiling layers). Error accuring in"
-         + getInstanceName());
-    else
-      assert(wallTypeFloor.n == 2 and wallTypeCeiling.n == 4, "EN 1264 calculates parameters only for panel heating type A (2 floor layers, 4 ground plate layers). Error accuring in"
-         + getInstanceName());
-    end if;
-
-    if T_U >= 18 + 273.15 then
-      assert(R_lambdaIns >= 0.75, "Thermal resistivity of insulation layer needs to be greater than 0.75 m²K / W (see EN 1264-4 table 1)");
-    else
-      assert(R_lambdaIns >= 1.25, "Thermal resistivity of insulation layer needs to be greater than 1.25 m²K / W (see EN 1264-4 table 1)");
-    end if;
+  if T_U >= 18 + 273.15 then
+    assert(R_lambdaIns >= 0.75, "Thermal resistivity of insulation layer needs to be greater than 0.75 m²K / W (see EN 1264-4 table 1)");
+  else
+    assert(R_lambdaIns >= 1.25, "Thermal resistivity of insulation layer needs to be greater than 1.25 m²K / W (see EN 1264-4 table 1)");
   end if;
   assert(T_Return < T_Flow, "Return Temperature is higher than the Flow Temperature in" + getInstanceName());
 

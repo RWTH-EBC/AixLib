@@ -125,6 +125,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.SIunits.ThermalResistance RTabs[nTabs] "Resistances of TABS, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RRemTabs "Resistance of remaining resistor RExtRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CTabs[nTabs] "Heat capacities of TABS, from inside to outside";
+  parameter Modelica.SIunits.Area ATabs "Areas of exterior walls by orientations";
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
