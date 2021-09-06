@@ -38,7 +38,7 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
 
     // HOM
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo]=fill(BaseClasses.FloorLayers.Ceiling_Dummy(), RoomNo) "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
 
   //ROM
   // Floor TABS
@@ -91,7 +91,7 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   parameter Modelica.SIunits.TemperatureDifference sigma_des(max = 5) = 5  "Temperature Spread for room with highest heat load (max = 5)";
   final parameter Modelica.SIunits.TemperatureDifference dT_Hdes = q_max / K_H[1] "Temperature difference between medium and room for room with highest heat flux";
   final parameter Modelica.SIunits.TemperatureDifference dT_Vdes = dT_Hdes + sigma_des / 2 + sigma_des^(2) / (12 * dT_Hdes) "Temperature difference at flow temperature";
-  final parameter Modelica.SIunits.Temperature T_Vdes = (T_Roomdes - ((sigma_des + T_Roomdes) * e^(sigma_des / dT_Hdes))) / (1 - e^(sigma_des / dT_Hdes)) "Flow Temperature according to EN 1264";
+  final parameter Modelica.SIunits.Temperature T_Vdes = if not ROM then (T_Roomdes - ((sigma_des + T_Roomdes) * e^(sigma_des / dT_Hdes))) / (1 - e^(sigma_des / dT_Hdes)) else 313.15 "Flow Temperature according to EN 1264";
   final parameter Modelica.SIunits.Temperature T_Roomdes = T_Room[1] "Room temperature in room with highest heat flux";
   final parameter Modelica.SIunits.TemperatureDifference sigma_i[RoomNo] = cat(1, {sigma_des}, {(3 * dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - dT_Hi[n])  / ( 3 * dT_Hi[n])) ^ (0.5) - 1)) for n in 2:RoomNo}) "Nominal temperature spread in rooms";
   final parameter Modelica.SIunits.Temperature T_Return[RoomNo] = fill(T_Vdes, RoomNo) .- sigma_i "Nominal return temperature in each room";

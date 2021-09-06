@@ -159,7 +159,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   final parameter Modelica.SIunits.ThermalInsulance R_O = if not ROM then 1 / alpha_Floor + R_lambdaB + CoverThickness / lambda_u else A*(RFloorTabs+RFloorRemTabs)
   "Thermal resistance of wall layers above panel heating";
 
-  final parameter Real K_H=if not ROM then EN_1264.K_H else 0
+  final parameter Real K_H=if not ROM then EN_1264.K_H else 0.0001
     "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
   final parameter Modelica.SIunits.HeatFlux q_G=if not ROM then EN_1264.q_G else 99999
     "specific limiting heat flux";
@@ -246,7 +246,7 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
     R_lambdaCeiling=R_lambdaCeiling,
     R_lambdaPlaster=R_lambdaPlaster,
     D=d,
-    T=Spacing) if not ROM
+    T=Spacing)
     annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor annotation (
       Placement(transformation(extent={{-10,50},{10,70}}), iconTransformation(

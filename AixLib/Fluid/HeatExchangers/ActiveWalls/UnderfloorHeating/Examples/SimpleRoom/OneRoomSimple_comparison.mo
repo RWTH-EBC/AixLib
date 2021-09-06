@@ -57,28 +57,19 @@ model OneRoomSimple_comparison
     annotation (Placement(transformation(extent={{158,76},{178,96}})));
   UnderfloorHeatingSystem                   underfloorHeatingSystem1(
     redeclare package Medium = MediumWater,
-    ROM=true,
     RoomNo=1,
     dis=dis,
     Q_Nf=-1.*{fixedHeatFlow.Q_flow},
     A={area},
     wallTypeFloor={
-        UnderfloorHeating.BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH()},
-
+        testtabs.SimpleBuildingtesttabs.SimpleBuildingtesttabs_DataBase.SimpleBuildingtesttabs_tz_2_upperTABS()},
     Ceiling={false},
-    wallTypeCeiling={UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy()},
-
     Spacing={0.35},
-    RFloorTabs={0.0007122009079856064},
-    RFloorRemTabs={0.0067671379349896},
-    CFloorTabs={2252039.0449639163},
-    RRoofTabs={0.007051365754278833},
-    RRoofRemTabs={0.15823789044406827},
-    CRoofTabs={13650817.772798557},
     PipeThickness={0.002},
     d_a={0.017},
     withSheathing=false)
     annotation (Placement(transformation(extent={{168,-62},{218,-32}})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor1(G=area*
         10.8)
     annotation (Placement(transformation(extent={{194,-10},{174,10}})));
@@ -135,14 +126,14 @@ equation
   connect(underfloorHeatingSystem1.port_b, bou1.ports[1]) annotation (Line(
         points={{218,-47},{236,-47},{236,-48},{252,-48}}, color={0,127,255}));
   connect(underfloorHeatingSystem1.m_flowNominal, boundary1.m_flow_in)
-    annotation (Line(points={{168,-56},{158,-56},{158,-54},{130,-54},{130,-60},
-          {92,-60},{92,-38},{98,-38}}, color={0,0,127}));
+    annotation (Line(points={{168,-56},{158,-56},{158,-54},{130,-54},{130,-60},{
+          92,-60},{92,-38},{98,-38}},  color={0,0,127}));
   connect(underfloorHeatingSystem1.T_FlowNominal, boundary1.T_in) annotation (
       Line(points={{168,-60.5},{136,-60.5},{136,-68},{84,-68},{84,-42},{98,-42}},
         color={0,0,127}));
   connect(thermalConductor1.port_a, underfloorHeatingSystem1.heatFloor[1])
-    annotation (Line(points={{194,0},{196,0},{196,-2},{202,-2},{202,-22},{193,
-          -22},{193,-32}}, color={191,0,0}));
+    annotation (Line(points={{194,0},{196,0},{196,-2},{202,-2},{202,-22},{193,-22},
+          {193,-32}},      color={191,0,0}));
   connect(fixedHeatFlow2.port, vol1.heatPort) annotation (Line(points={{178,86},
           {184,86},{184,24},{188,24}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
