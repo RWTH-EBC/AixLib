@@ -682,8 +682,10 @@ equation
         color={0,0,127}));
   connect(humVolAirROM.y, airExcMoi.HumOut) annotation (Line(points={{-59.5,-50},
           {-4,-50},{-4,0},{-6,0},{-6,0.16},{-6.8,0.16}}, color={0,0,127}));
-  connect(tabs, ROM.tabs) annotation (Line(points={{-100,60},{28,60},{28,74.4},
+  if zoneParam.WithTabs then
+    connect(tabs, ROM.tabs) annotation (Line(points={{-100,60},{28,60},{28,74.4},
           {38,74.4}}, color={191,0,0}));
+  end if;
   annotation (Documentation(revisions="<html><ul>
   <li>November 20, 2020, by Katharina Breuer:<br/>
     Combine thermal zone models
