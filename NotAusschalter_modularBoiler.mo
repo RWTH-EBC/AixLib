@@ -1,5 +1,6 @@
 ﻿within ;
 model NotAusschalter_modularBoiler
+                                   //Notausschaltung bei Überschreitung der Grenztemperatur und Abschaltung bei Unterschreitung von PLRmin
   parameter Modelica.SIunits.Temperature THotMax=273.15+90 "Grenztemperatur, ab der das System abgeschaltet wird";
   parameter Real PLRmin=0.15 "Minimal zulässiges PLR";
 
