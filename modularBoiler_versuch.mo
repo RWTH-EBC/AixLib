@@ -1,9 +1,10 @@
-within ;
+﻿within ;
 model modularBoiler_versuch
 
 extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium =Media.Water, final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom));
 
+  parameter Modelica.SIunits.Temperature T_out "Außentemperatur für Vorlauftemperaturregelung";
   parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
    annotation (Dialog(group="Nominal condition"));
   parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Return temperature TCold"
@@ -105,6 +106,8 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,52})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=T_out)
+    annotation (Placement(transformation(extent={{66,76},{46,96}})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
@@ -165,7 +168,7 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(boilerControlBus.PLR, hierarchischeRegelung_modularBoiler1.PLR_ein)
     annotation (Line(
-      points={{-1.95,100.05},{0,100.05},{0,62},{-1,62}},
+      points={{-1.95,100.05},{0,100.05},{0,62},{0.8,62}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -189,5 +192,9 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(realExpression.y, hierarchischeRegelung_modularBoiler1.T_outdoor)
+    annotation (Line(points={{45,86},{-2.4,86},{-2.4,62}}, color={0,0,127}));
+  connect(hierarchischeRegelung_modularBoiler1.mFlow_relB, fan1.y) annotation (
+      Line(points={{-5.2,42},{-6,42},{-6,28},{-50,28},{-50,12}}, color={0,0,127}));
   annotation (uses(Modelica(version="3.2.3")));
 end modularBoiler_versuch;

@@ -22,6 +22,8 @@ model NotAusschalter_modularBoiler
     annotation (Placement(transformation(extent={{-120,-32},{-80,8}})));
   Modelica.Blocks.Interfaces.RealOutput PLR_set
     annotation (Placement(transformation(extent={{90,20},{110,40}})));
+  Modelica.Blocks.Interfaces.BooleanOutput PLRmin_boolean
+    annotation (Placement(transformation(extent={{90,-58},{110,-38}})));
 equation
 
   connect(tHotMax.y, greater.u2)
@@ -45,5 +47,7 @@ equation
           22},{32,22}}, color={0,0,127}));
   connect(switch1.y, PLR_set)
     annotation (Line(points={{55,30},{100,30}}, color={0,0,127}));
+  connect(lessThreshold.y, PLRmin_boolean) annotation (Line(points={{-41,-12},{
+          -18,-12},{-18,-48},{100,-48}}, color={255,0,255}));
   annotation (uses(Modelica(version="3.2.3")));
 end NotAusschalter_modularBoiler;
