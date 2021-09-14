@@ -108,6 +108,8 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
         origin={0,52})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=T_out)
     annotation (Placement(transformation(extent={{66,76},{46,96}})));
+  test_Regler test_Regler1
+    annotation (Placement(transformation(extent={{34,42},{54,62}})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
@@ -176,7 +178,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(senTHot.T, hierarchischeRegelung_modularBoiler1.T_ein) annotation (
-      Line(points={{60,11},{36,11},{36,76},{7,76},{7,62}}, color={0,0,127}));
+      Line(points={{60,11},{60,72},{7,72},{7,62}},         color={0,0,127}));
   connect(controlBoilerNotManufacturer.mFlowRel,
     hierarchischeRegelung_modularBoiler1.mFlow_rel) annotation (Line(points={{
           -79,54},{-42,54},{-42,78},{-6,78},{-6,62}}, color={0,0,127}));
@@ -196,5 +198,10 @@ equation
     annotation (Line(points={{45,86},{-2.4,86},{-2.4,62}}, color={0,0,127}));
   connect(hierarchischeRegelung_modularBoiler1.mFlow_relB, fan1.y) annotation (
       Line(points={{-5.2,42},{-6,42},{-6,28},{-50,28},{-50,12}}, color={0,0,127}));
+  connect(hierarchischeRegelung_modularBoiler1.T_set, test_Regler1.Tset)
+    annotation (Line(points={{-1,42},{-2,42},{-2,32},{16,32},{16,57},{34,57}},
+        color={0,0,127}));
+  connect(senTHot.T, test_Regler1.T_m) annotation (Line(points={{60,11},{60,24},
+          {24,24},{24,49},{34,49}}, color={0,0,127}));
   annotation (uses(Modelica(version="3.2.3")));
 end modularBoiler_versuch;
