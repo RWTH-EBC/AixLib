@@ -16,10 +16,7 @@ model RoomSteadyState
       winDirSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
       HInfHorSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
       HSou=AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor),
-    intGai(table=[0,0,0,0; 86400,0,0,0]),
-
-  extends AixLib.Icons.ibpsa;
-    thermalZoneOneElement(T_start=293.15));
+    intGai(table=[0,0,0,0; 86400,0,0,0]));
 
   Modelica.Blocks.Sources.Constant zer(k=0) "Zero input signal"
     annotation (Placement(transformation(extent={{-134,44},{-114,64}})));
