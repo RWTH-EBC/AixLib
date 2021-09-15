@@ -3,6 +3,8 @@ model PressureDrop
   "Example model for flow resistance with nominal pressure drop as parameter"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Air "Medium model";
 
   Modelica.Blocks.Sources.Ramp P(

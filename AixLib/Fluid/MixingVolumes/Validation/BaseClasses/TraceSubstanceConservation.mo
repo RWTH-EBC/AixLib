@@ -2,6 +2,8 @@ within AixLib.Fluid.MixingVolumes.Validation.BaseClasses;
 model TraceSubstanceConservation
   "This test checks if trace substance mass flow rates are conserved"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   constant String substanceName="CO2";
   package Medium = AixLib.Media.Air(extraPropertiesNames={substanceName});
   AixLib.Fluid.Sources.MassFlowSource_h sou(

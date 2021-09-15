@@ -3,6 +3,8 @@ model IdealSource
   "Base class for pressure and mass flow source with optional power input"
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport(show_T=false);
 
+  extends AixLib.Icons.ibpsa;
+
   // Quantity to control
   parameter Boolean control_m_flow
     "if true, then the mass flow rate is equal to the value of m_flow_in"

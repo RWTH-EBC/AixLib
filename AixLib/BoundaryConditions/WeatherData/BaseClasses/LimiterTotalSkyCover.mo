@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block LimiterTotalSkyCover "Block that limits the total sky cover"
   extends PartialLimiter;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput nTot(
     final unit="1") "Total sky cover"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

@@ -2,6 +2,8 @@ within AixLib.Fluid.FMI.Conversion.Validation;
 model AirToOutlet "Validation model for air to outlet conversion"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Boolean allowFlowReversal = false
     "= true to allow flow reversal, false restricts to design direction (inlet -> outlet)"
     annotation(Evaluate=true);

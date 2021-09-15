@@ -19,6 +19,8 @@ model NumberOfBeamsDynamics
     step1(startTime=300),
     step3(startTime=200),
     step2(startTime=300));
+
+  extends AixLib.Icons.ibpsa;
   annotation (
 experiment(Tolerance=1e-6, StopTime=500),
    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/ActiveBeams/Validation/NumberOfBeamsDynamics.mos"

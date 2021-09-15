@@ -15,6 +15,8 @@ model ConstantEffectiveness
   mWat1_flow = +mWat_flow,
   mWat2_flow = -mWat_flow);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Efficiency epsS(max=1) = 0.8
     "Sensible heat exchanger effectiveness";
   parameter Modelica.SIunits.Efficiency epsL(max=1) = 0.8

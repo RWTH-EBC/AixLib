@@ -3,6 +3,8 @@ model SublimationPressureIce
   "Model to test the wet bulb temperature computation"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   AixLib.Utilities.Psychrometrics.SublimationPressureIce pSat
     "Saturation pressure"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));

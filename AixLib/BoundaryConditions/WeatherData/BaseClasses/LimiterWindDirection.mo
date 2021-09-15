@@ -3,6 +3,8 @@ block LimiterWindDirection "Block that limits the wind direction"
   extends PartialLimiter(
     final uMax=2*Modelica.Constants.pi);
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput winDir(
     final unit="rad") "Wind direction"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

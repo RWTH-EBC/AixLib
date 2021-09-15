@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
 block DirectTiltedSurface "Direct solar irradiation on a tilted surface"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput incAng(
     quantity="Angle",
     unit="rad",

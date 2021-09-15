@@ -1,6 +1,8 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
 model PlugFlowULg "Validation against data from Université de Liège"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1

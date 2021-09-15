@@ -5,6 +5,8 @@ model DoorOperable
     final vAB = VAB_flow/A,
     final vBA = VBA_flow/A);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real CDOpe=0.65 "Discharge coefficient of open door"
     annotation (Dialog(group="Open door"));
 

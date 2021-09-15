@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.SpecifiedEfficiencies;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.SpecifiedEfficiencies;
 model Generic_VarRef_VarDisVol_RotaryScroll "Generic overall engine efficiency based on literature review for 
   various compressors"
   extends PolynomialEngineEfficiency(

@@ -1,6 +1,8 @@
 within AixLib.Fluid.Actuators.BaseClasses;
 partial model ValveParameters "Model with parameters for valves"
 
+  extends AixLib.Icons.ibpsa;
+
   parameter AixLib.Fluid.Types.CvTypes CvData=AixLib.Fluid.Types.CvTypes.OpPoint
     "Selection of flow coefficient"
    annotation(Dialog(group = "Flow Coefficient"));

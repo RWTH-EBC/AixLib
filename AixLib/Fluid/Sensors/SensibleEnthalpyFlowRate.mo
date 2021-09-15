@@ -7,6 +7,8 @@ model SensibleEnthalpyFlowRate
     tau=0);
   extends AixLib.Fluid.BaseClasses.IndexMassFraction(final substanceName="water");
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput H_flow(final unit="W")
     "Sensible enthalpy flow rate, positive if from port_a to port_b"
     annotation (Placement(transformation(

@@ -2,6 +2,8 @@ within AixLib.Utilities.Math.Examples;
 model BooleanReplicator "Test model for boolean replicator"
 
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.BooleanTable booTab(table={100,200,400,500})
     "Boolean input signal"
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));

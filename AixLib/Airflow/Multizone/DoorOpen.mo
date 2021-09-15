@@ -5,6 +5,8 @@ model DoorOpen
     final vAB = VAB_flow/AOpe,
     final vBA = VBA_flow/AOpe);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real CD=0.65 "Discharge coefficient"
     annotation (Dialog(group="Orifice characteristics"));
 

@@ -3,6 +3,8 @@ model FlowMachineInterface
   "Partial model with performance curves for fans or pumps"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   import cha = AixLib.Fluid.Movers.BaseClasses.Characteristics;
 
   constant Boolean homotopyInitialization = true "= true, use homotopy method"

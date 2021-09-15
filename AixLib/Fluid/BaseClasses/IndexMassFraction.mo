@@ -1,6 +1,8 @@
 within AixLib.Fluid.BaseClasses;
 block IndexMassFraction
   "Computes the index of a substance in the mass fraction vector Xi"
+
+  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
       Modelica.Media.Interfaces.PartialCondensingGases "Medium model"
       annotation (choices(

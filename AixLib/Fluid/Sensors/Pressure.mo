@@ -3,6 +3,8 @@ model Pressure "Ideal pressure sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor(
     final warnAboutOnePortConnection = false);
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput p(final quantity="AbsolutePressure",
                                           final unit="Pa",
                                           min=0) "Pressure at port"

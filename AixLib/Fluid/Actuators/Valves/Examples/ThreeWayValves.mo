@@ -2,6 +2,8 @@
 model ThreeWayValves "Three way valves with different opening characteristics"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Water "Medium in the component";
 
   AixLib.Fluid.Actuators.Valves.ThreeWayLinear valLin(

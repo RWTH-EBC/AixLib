@@ -3,6 +3,8 @@ model ShaGFunction
   "Verifies the SHA-1 encryption of a single borehole"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   //Input
   parameter String strIn=
     AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.shaGFunction(

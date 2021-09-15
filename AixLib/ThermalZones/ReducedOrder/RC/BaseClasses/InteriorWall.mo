@@ -1,6 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.RC.BaseClasses;
 model InteriorWall "Interior wall consisting of variable number of RC elements"
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Integer n(min = 1) "Number of RC-elements";
   parameter Modelica.SIunits.ThermalResistance RInt[n](
    each min=Modelica.Constants.small)

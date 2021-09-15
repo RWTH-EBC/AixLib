@@ -1,6 +1,8 @@
 within AixLib.Controls.Discrete.Examples;
 model BooleanDelay "Example model for boolean delay"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Controls.Discrete.BooleanDelay del(samplePeriod=0.05)
                                                annotation (Placement(
         transformation(extent={{0,-20},{20,0}})));

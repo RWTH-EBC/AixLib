@@ -3,6 +3,8 @@ partial model TwoWayFlowElementBuoyancy
   "Flow resistance that uses the power law"
   extends AixLib.Airflow.Multizone.BaseClasses.TwoWayFlowElement;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Length wOpe=0.9 "Width of opening"
     annotation (Dialog(group="Geometry"));
   parameter Modelica.SIunits.Length hOpe=2.1 "Height of opening"

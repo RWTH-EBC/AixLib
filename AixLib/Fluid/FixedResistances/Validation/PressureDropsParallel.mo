@@ -3,6 +3,8 @@ model PressureDropsParallel
    "Test with multiple resistances in parallel"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Water "Medium model";
 
     Modelica.Blocks.Sources.Ramp P(

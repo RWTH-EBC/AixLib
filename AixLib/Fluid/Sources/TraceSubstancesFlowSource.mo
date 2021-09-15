@@ -2,6 +2,8 @@ within AixLib.Fluid.Sources;
 model TraceSubstancesFlowSource
   "Source with mass flow that does not take part in medium mass balance (such as CO2)"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     AixLib.Media.Air(extraPropertiesNames={"CO2"}) "Medium in the component"
       annotation (choices(
@@ -18,8 +20,8 @@ model TraceSubstancesFlowSource
   parameter Modelica.SIunits.MassFlowRate m_flow = 0
     "Fixed mass flow rate going out of the fluid port"
     annotation (Dialog(enable = not use_m_flow_in));
-  Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s") if
-       use_m_flow_in "Prescribed mass flow rate for extra property"
+  Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s")
+    if use_m_flow_in "Prescribed mass flow rate for extra property"
     annotation (Placement(transformation(extent={{-141,-20},{-101,20}})));
 
   Modelica.Fluid.Interfaces.FluidPorts_b ports[nPorts](

@@ -4,6 +4,8 @@ block TwoPortPassThrough
    extends AixLib.Fluid.FMI.ExportContainers.PartialTwoPort(
      redeclare replaceable package Medium = AixLib.Media.Air);
 
+  extends AixLib.Icons.ibpsa;
+
 equation
   connect(inlet, outlet) annotation (Line(
       points={{-110,0},{-2,0},{-2,0},{110,0}},

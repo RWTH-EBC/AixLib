@@ -3,6 +3,8 @@ block LimiterHorizontalInfraredIrradiation
   "Block that limits the horizontal infrared irradiation"
   extends PartialLimiterMin;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput HHorIR(
     final unit="W/m2") = max(0, u) "Horizontal infrared irradiation"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

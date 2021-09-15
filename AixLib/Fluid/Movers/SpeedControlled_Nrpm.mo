@@ -19,8 +19,10 @@ model SpeedControlled_Nrpm
     gaiSpe(u(final unit="1/min"),
            final k=1/per.speed_rpm_nominal));
 
-  Modelica.Blocks.Interfaces.RealInput Nrpm(final unit="1/min") if
-    inputType == AixLib.Fluid.Types.InputType.Continuous
+  extends AixLib.Icons.ibpsa;
+
+  Modelica.Blocks.Interfaces.RealInput Nrpm(final unit="1/min")
+ if inputType == AixLib.Fluid.Types.InputType.Continuous
     "Prescribed rotational speed"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},

@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency;
 partial model PartialVolumetricEfficiency
   "Based model used by all models describing volumetric efficiencies"
   extends BaseClasses.PartialEfficiency;

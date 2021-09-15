@@ -2,6 +2,8 @@ within AixLib.Fluid.FMI;
 model Sink_T
   "Model of a sink with temperature for reverse flow as an input that can be exported as an FMU"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -20,8 +22,8 @@ model Sink_T
                                             min=0)
     "Prescribed boundary temperature"
     annotation (Placement(transformation(extent={{-140,60},{-100,100}})));
-  Modelica.Blocks.Interfaces.RealInput X_w_in(unit="1") if
-       Medium.nXi > 0 "Prescribed boundary composition"
+  Modelica.Blocks.Interfaces.RealInput X_w_in(unit="1")
+    if Medium.nXi > 0 "Prescribed boundary composition"
     annotation (Placement(transformation(extent={{-140,10},{-100,50}}),
         iconTransformation(extent={{-140,10},{-100,50}})));
 
@@ -35,8 +37,8 @@ model Sink_T
     final allowFlowReversal=allowFlowReversal,
     final use_p_in=use_p_in) "Fluid port"
     annotation (Placement(transformation(extent={{120,-10},{100,10}})));
-  AixLib.Fluid.FMI.Interfaces.PressureOutput p if
-     use_p_in "Pressure"
+  AixLib.Fluid.FMI.Interfaces.PressureOutput p
+  if use_p_in "Pressure"
   annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},

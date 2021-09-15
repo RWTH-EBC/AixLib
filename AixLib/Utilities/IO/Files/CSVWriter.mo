@@ -4,6 +4,8 @@ model CSVWriter
   extends AixLib.Utilities.IO.Files.BaseClasses.FileWriter(
     final isCombiTimeTable=false);
 
+  extends AixLib.Icons.ibpsa;
+
 initial algorithm
   if writeHeader then
     str := str + "time" + delimiter;

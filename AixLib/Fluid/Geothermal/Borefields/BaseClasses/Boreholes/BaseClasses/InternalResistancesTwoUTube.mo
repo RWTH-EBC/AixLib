@@ -4,6 +4,8 @@ model InternalResistancesTwoUTube
   extends
     AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialInternalResistances;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.ThermalResistance Rgg1_val
     "Thermal resistance between two neightbouring grout capacities, as defined by Bauer et al (2010)";
   parameter Modelica.SIunits.ThermalResistance Rgg2_val
@@ -91,7 +93,7 @@ model InternalResistancesTwoUTube
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor capFil1(T(start=
           T_start, fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial)),
       der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial)),
-    C=Co_fil/4) if  dynFil "Heat capacity of the filling material"
+    C=Co_fil/4)  if dynFil "Heat capacity of the filling material"
                                             annotation (Placement(transformation(extent={{-8,-8},
             {8,8}},
         rotation=90,
@@ -99,13 +101,13 @@ model InternalResistancesTwoUTube
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor capFil2(T(start=
           T_start, fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial)),
       der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial)),
-    C=Co_fil/4) if  dynFil "Heat capacity of the filling material"
+    C=Co_fil/4)  if dynFil "Heat capacity of the filling material"
                                             annotation (Placement(transformation(extent={{58,8},{
             74,24}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor capFil3(T(start=
           T_start, fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial)),
       der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial)),
-    C=Co_fil/4) if  dynFil "Heat capacity of the filling material"
+    C=Co_fil/4)  if dynFil "Heat capacity of the filling material"
                                             annotation (Placement(transformation(extent={{-8,-8},
             {8,8}},
         rotation=90,
@@ -113,7 +115,7 @@ model InternalResistancesTwoUTube
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor capFil4(T(start=
           T_start, fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial)),
       der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial)),
-    C=Co_fil/4) if  dynFil "Heat capacity of the filling material"
+    C=Co_fil/4)  if dynFil "Heat capacity of the filling material"
                                             annotation (Placement(transformation(extent={{-82,20},
             {-66,36}})));
 equation

@@ -3,6 +3,8 @@ model PressureIndependent
   "Test model for the pressure independent damper model"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air "Medium model for air";
   parameter Modelica.SIunits.PressureDifference dp_nominal(
     displayUnit="Pa") = 10

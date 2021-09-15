@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
 block DiffuseIsotropic
   "Diffuse solar irradiation on a tilted surface with an isotropic model"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   parameter Real rho=0.2 "Ground reflectance";
   parameter Modelica.SIunits.Angle til(displayUnit="deg") "Surface tilt angle";
 

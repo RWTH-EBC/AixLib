@@ -3,6 +3,8 @@ model Outside_CpLowRise
   "Boundary that takes weather data as an input and computes wind pressure for low-rise buildings"
   extends AixLib.Fluid.Sources.BaseClasses.Outside;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real Cp0(min=0, max=1, final unit="1") = 0.6
     "Wind pressure coefficient for wind normal to wall";
   parameter Real s(final min=0, final unit="1")

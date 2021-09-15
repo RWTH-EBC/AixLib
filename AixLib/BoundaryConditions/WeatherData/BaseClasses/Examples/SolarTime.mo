@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model SolarTime "Test model for solar time"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   Utilities.Time.ModelTime modTim "Block that outputs simulation time"
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
   AixLib.BoundaryConditions.WeatherData.BaseClasses.LocalCivilTime locTim(

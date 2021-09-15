@@ -3,6 +3,8 @@ model DryCoilEffectivenessNTUPControl
   "Model that demonstrates use of a heat exchanger without condensation that uses the epsilon-NTU relation with feedback control"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium1 = AixLib.Media.Water "Medium model for water";
  package Medium2 = AixLib.Media.Air "Medium model for air";
   parameter Modelica.SIunits.Temperature T_a1_nominal = 60+273.15

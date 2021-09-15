@@ -3,6 +3,8 @@ model BasicFlowFunction_dp_DerivativeCheck2
   "Model that checks the correct implementation of the 2nd order derivative of the flow function"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real k = 0.35 "Flow coefficient";
   parameter Modelica.SIunits.MassFlowRate m_flow_turbulent = 0.36
     "Mass flow rate where transition to turbulent flow occurs";
@@ -26,7 +28,7 @@ equation
 
   m_flow = AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
     dp=dp,
-    k=  k,
+    k = k,
     m_flow_turbulent=m_flow_turbulent);
 
   // Equate first and second order derivatives

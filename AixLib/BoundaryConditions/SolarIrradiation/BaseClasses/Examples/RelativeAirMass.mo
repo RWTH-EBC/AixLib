@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.Examples;
 model RelativeAirMass "Test model for relative air mass"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.RelativeAirMass
     relAirMas annotation (Placement(transformation(extent={{20,0},{40,20}})));
   AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(lat=

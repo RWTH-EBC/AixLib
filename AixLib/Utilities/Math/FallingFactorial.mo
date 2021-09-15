@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math;
 block FallingFactorial "Falling factorial function"
   extends Modelica.Blocks.Interfaces.IntegerSO;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.IntegerInput n "Integer number" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.IntegerInput k "Falling factorial power" annotation (Placement(

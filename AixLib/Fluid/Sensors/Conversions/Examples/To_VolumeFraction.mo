@@ -1,6 +1,8 @@
 within AixLib.Fluid.Sensors.Conversions.Examples;
 model To_VolumeFraction "Example problem for conversion model"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"});
 
   AixLib.Fluid.Sensors.Conversions.To_VolumeFraction conMasVolFra(MMMea=

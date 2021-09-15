@@ -2,6 +2,8 @@ within AixLib.Fluid.FMI;
 model Source_T
   "Model of a boundary with mass flow rate, pressure and temperature as an input that can be exported as an FMU"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -20,8 +22,8 @@ model Source_T
     annotation (Placement(transformation(extent={{-140,80},{-100,120}}),
         iconTransformation(extent={{-140,80},{-100,120}})));
 
-  AixLib.Fluid.FMI.Interfaces.PressureInput p_in if
-       use_p_in "Prescribed boundary pressure"
+  AixLib.Fluid.FMI.Interfaces.PressureInput p_in
+    if use_p_in "Prescribed boundary pressure"
     annotation (Placement(transformation(extent={{-140,28},{-100,68}}),
         iconTransformation(extent={{-140,28},{-100,68}})));
   Modelica.Blocks.Interfaces.RealInput T_in(unit="K",
@@ -29,8 +31,8 @@ model Source_T
                                             min=0)
     "Prescribed boundary temperature"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealInput X_w_in(unit="1") if
-       Medium.nXi > 0 "Prescribed boundary composition"
+  Modelica.Blocks.Interfaces.RealInput X_w_in(unit="1")
+    if Medium.nXi > 0 "Prescribed boundary composition"
     annotation (Placement(transformation(extent={{-140,-70},{-100,-30}}),
         iconTransformation(extent={{-140,-70},{-100,-30}})));
 

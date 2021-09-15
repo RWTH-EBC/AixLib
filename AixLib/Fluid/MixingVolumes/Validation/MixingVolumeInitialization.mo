@@ -1,6 +1,8 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeInitialization "Test model for mixing volume initialization"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
  package Medium = AixLib.Media.Air;
 
   AixLib.Fluid.Sources.Boundary_pT sou1(redeclare package Medium =

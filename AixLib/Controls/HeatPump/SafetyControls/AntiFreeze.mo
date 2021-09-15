@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 model AntiFreeze "Model to prevent source from freezing"
   extends BaseClasses.PartialSafetyControl;
 
@@ -15,8 +15,8 @@ model AntiFreeze "Model to prevent source from freezing"
   Modelica.Blocks.Logical.Hysteresis       hysteresis(
     final uLow=TAntFre,
     final pre_y_start=true,
-    final uHigh=TAntFre + dTHys) if
-       use_antFre
+    final uHigh=TAntFre + dTHys)
+    if use_antFre
     annotation (Placement(transformation(extent={{-62,-18},{-38,6}})));
                            //assume that the initial temperature is high enough.
   Modelica.Blocks.Math.Min min if use_antFre

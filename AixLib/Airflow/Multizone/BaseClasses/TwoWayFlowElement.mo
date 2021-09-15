@@ -11,6 +11,8 @@ partial model TwoWayFlowElement "Flow resistance that uses the power law"
     final m2_flow_small=1E-4*abs(m2_flow_nominal));
   extends AixLib.Airflow.Multizone.BaseClasses.ErrorControl;
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(

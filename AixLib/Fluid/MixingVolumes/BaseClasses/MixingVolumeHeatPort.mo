@@ -2,6 +2,8 @@ within AixLib.Fluid.MixingVolumes.BaseClasses;
 model MixingVolumeHeatPort
   "Mixing volume with heat port and initialize_p not set to final"
   extends AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume;
+
+  extends AixLib.Icons.ibpsa;
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(
       T(start=T_start)) "Heat port for heat exchange with the control volume"
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));

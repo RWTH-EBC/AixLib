@@ -4,6 +4,8 @@ model DryCoilEffectivenessNTU
   extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialEffectivenessNTU(
     UA = 1/(1/hA.hA_1 + 1/hA.hA_2));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real r_nominal(
     min=0,
     max=1) = 2/3

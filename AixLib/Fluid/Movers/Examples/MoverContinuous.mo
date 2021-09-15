@@ -6,6 +6,8 @@ model MoverContinuous
     pump_m_flow(inputType=AixLib.Fluid.Types.InputType.Continuous),
     pump_y(inputType=AixLib.Fluid.Types.InputType.Continuous),
     pump_dp(inputType=AixLib.Fluid.Types.InputType.Continuous));
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Ramp ramp(duration=1) "Ramp input for all movers"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Math.Gain gaiNrpm(k=2000) "Nominal rpm"

@@ -14,6 +14,8 @@ model PrescribedOutlet
       final energyDynamics = energyDynamics,
       final massDynamics = massDynamics));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.HeatFlowRate QMax_flow(min=0) = Modelica.Constants.inf
     "Maximum heat flow rate for heating (positive)"
     annotation (Evaluate=true, Dialog(enable=use_TSet));

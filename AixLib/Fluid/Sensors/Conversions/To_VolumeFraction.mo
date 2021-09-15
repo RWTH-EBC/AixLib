@@ -1,6 +1,8 @@
 within AixLib.Fluid.Sensors.Conversions;
 model To_VolumeFraction "Conversion from mass fraction to volume fraction"
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.MolarMass MMMea "Molar mass of measured substance";
   parameter Modelica.SIunits.MolarMass MMBul=Modelica.Media.IdealGases.Common.SingleGasesData.Air.MM
     "Molar mass of bulk medium";

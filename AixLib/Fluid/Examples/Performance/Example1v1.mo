@@ -3,6 +3,8 @@ model Example1v1 "Example 1 model without mixing volume"
   extends AixLib.Fluid.Examples.Performance.BaseClasses.Example1(
       allowFlowReversal(k=false), from_dp(k=true));
 
+  extends AixLib.Icons.ibpsa;
+
 equation
   for i in 1:nRes.k loop
     connect(res[i].port_b, val.port_3) annotation (Line(

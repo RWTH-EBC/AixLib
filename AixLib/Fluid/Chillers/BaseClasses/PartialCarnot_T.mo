@@ -3,6 +3,8 @@ partial model PartialCarnot_T
   "Partial model for chiller with performance curve adjusted based on Carnot efficiency"
   extends AixLib.Fluid.Chillers.BaseClasses.Carnot;
 
+  extends AixLib.Icons.ibpsa;
+
 protected
   Modelica.Blocks.Sources.RealExpression PEle "Electrical power consumption"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));

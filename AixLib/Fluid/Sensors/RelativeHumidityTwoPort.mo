@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors;
 model RelativeHumidityTwoPort "Ideal two port relative humidity sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput phi(final unit="1",
                                             min=0,
                                             start=phi_start)

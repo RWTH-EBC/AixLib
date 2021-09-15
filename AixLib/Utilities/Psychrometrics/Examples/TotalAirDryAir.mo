@@ -2,6 +2,8 @@ within AixLib.Utilities.Psychrometrics.Examples;
 model TotalAirDryAir
   "Unit test for conversion of humidity per total air and dry air mass"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
    package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
     Modelica.Blocks.Sources.Ramp XHum(

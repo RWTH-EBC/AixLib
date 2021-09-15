@@ -1,6 +1,8 @@
 within AixLib.Fluid.Interfaces.Examples.BaseClasses;
 partial model PrescribedOutletState "Test model for prescribed outlet state"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium = AixLib.Media.Air
      constrainedby Modelica.Media.Interfaces.PartialMedium  "Medium model";
 

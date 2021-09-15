@@ -3,6 +3,8 @@ model CoupledVolumesWater
   "Validation model for two coupled volumes with water"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium = AixLib.Media.Water
     constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
 

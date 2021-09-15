@@ -3,6 +3,8 @@ model NaturalVentilation
   "Model with flow reversal due to density difference"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air;
 
   AixLib.Fluid.MixingVolumes.MixingVolume volA(

@@ -1,6 +1,8 @@
 within AixLib.Fluid.Sensors.Examples;
 model TemperatureWetBulb "Test model for the wet bulb temperature sensor"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
  package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
     Modelica.Blocks.Sources.Ramp p(

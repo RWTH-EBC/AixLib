@@ -1,6 +1,8 @@
 within AixLib.Fluid.HeatPumps.Examples;
 model Carnot_y "Test model for heat pump based on Carnot efficiency"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
  package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Water "Medium model";
   parameter Real COP_nominal = 6 "Nominal COP";

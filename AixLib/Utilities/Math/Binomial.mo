@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math;
 block Binomial "Binomial function"
   extends Modelica.Blocks.Interfaces.IntegerSO;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.IntegerInput n "Size of set" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.IntegerInput k "Size of subsets" annotation (Placement(

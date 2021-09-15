@@ -3,6 +3,8 @@ model ParallelFlowOptimised
   "Parallel connection with prescribed flow rate and optimised parameters"
   extends ParallelFlow(
     resParallel(each from_dp=true));
+
+  extends AixLib.Icons.ibpsa;
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

@@ -1,6 +1,8 @@
 within AixLib.Fluid.HeatPumps.Compressors.Validation;
 model ReciprocatingCompressor
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Fluid.HeatPumps.Compressors.ReciprocatingCompressor com(
     redeclare package ref = AixLib.Media.Refrigerants.R410A,
     pisDis=0.00162,

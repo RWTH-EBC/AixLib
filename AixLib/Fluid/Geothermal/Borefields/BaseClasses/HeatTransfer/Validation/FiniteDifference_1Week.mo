@@ -3,6 +3,8 @@ model FiniteDifference_1Week
   "Short term validation of ground temperature response model"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Temperature T_start = 283.15
     "Initial soil temperature";
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical soi(

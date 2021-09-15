@@ -2,6 +2,8 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregati
 model ShiftAggregationCells "This validation case test the cell shifting procedure"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   discrete Integer curCel "Current occupied cell";
   discrete Modelica.SIunits.HeatFlowRate[5] QAggShi_flow
     "Shifted vector of aggregated loads";

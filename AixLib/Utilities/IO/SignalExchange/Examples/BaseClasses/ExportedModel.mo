@@ -2,6 +2,8 @@ within AixLib.Utilities.IO.SignalExchange.Examples.BaseClasses;
 model ExportedModel "Model to be exported as an FMU"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealInput oveWriSet_u "Signal for overwrite block for set point"
     annotation (Placement(transformation(extent={{-140,80},{-100,120}})));
   Modelica.Blocks.Interfaces.BooleanInput oveWriSet_activate "Activation for overwrite block for set point"
@@ -20,8 +22,7 @@ model ExportedModel "Model to be exported as an FMU"
         uExt(
           y=oveWriSet_u),
         activate(
-          y=oveWriSet_activate)
-      ),
+          y=oveWriSet_activate)),
       oveWriAct(
         uExt(
           y=oveWriAct_u),

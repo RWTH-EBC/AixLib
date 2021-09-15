@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors.Examples;
 model RelativeHumidity "Test model for relative humidity sensor"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
 

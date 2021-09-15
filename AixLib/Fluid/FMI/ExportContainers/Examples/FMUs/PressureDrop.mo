@@ -6,6 +6,8 @@ block PressureDrop
       AixLib.Fluid.FixedResistances.PressureDrop com(final m_flow_nominal=
           m_flow_nominal, final dp_nominal=if use_p_in then dp_nominal else 0));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
   parameter Modelica.SIunits.PressureDifference dp_nominal(displayUnit="Pa")=100

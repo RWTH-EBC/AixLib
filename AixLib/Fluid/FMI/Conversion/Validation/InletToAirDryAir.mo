@@ -3,6 +3,8 @@ model InletToAirDryAir
   "Validation model for inlet to air with dry air medium"
   extends AixLib.Fluid.FMI.Conversion.Validation.InletToAirMoistAir(
     redeclare replaceable package Medium = Modelica.Media.Air.SimpleAir);
+
+  extends AixLib.Icons.ibpsa;
   annotation (Documentation(info="<html>
 <p>
 This validation test is identical to

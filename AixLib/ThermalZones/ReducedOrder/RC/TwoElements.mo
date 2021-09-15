@@ -3,6 +3,8 @@ model TwoElements
   "Thermal Zone with two elements for exterior and interior walls"
   extends OneElement(AArray={ATotExt,ATotWin,AInt});
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Area AInt "Area of interior walls"
     annotation(Dialog(group="Interior walls"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt
@@ -22,8 +24,8 @@ model TwoElements
     "Additional heat port at indoor surface of interior walls"
     annotation(Dialog(group="Interior walls"),choices(checkBox = true));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intWallIndoorSurface if
-    indoorPortIntWalls "Auxiliary port at indoor surface of interior walls"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intWallIndoorSurface
+ if indoorPortIntWalls "Auxiliary port at indoor surface of interior walls"
     annotation (Placement(transformation(extent={{-130,-190},{-110,-170}}),
     iconTransformation(extent={{-130,-190},{-110,-170}})));
   BaseClasses.InteriorWall intWallRC(
@@ -34,8 +36,8 @@ model TwoElements
     annotation (Placement(transformation(extent={{182,-50},{202,-28}})));
 
 protected
-  Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0)) if
-                                                                     AInt > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0))
+                                                                  if AInt > 0
     "Convective heat transfer of interior walls"
     annotation (Placement(transformation(extent={{148,-30},{128,-50}})));
   Modelica.Blocks.Sources.Constant hConIntWall(k=AInt*hConInt) if AInt > 0
@@ -45,13 +47,13 @@ protected
       rotation=-90,
       origin={138,-61})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallIntWall(
-    final G=min(ATotExt, AInt)*hRad, dT(start=0)) if
-                                             ATotExt > 0 and AInt > 0
+    final G=min(ATotExt, AInt)*hRad, dT(start=0))
+                                          if ATotExt > 0 and AInt > 0
     "Resistor between exterior walls and interior walls"
     annotation (Placement(transformation(extent={{138,-116},{158,-96}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntWallWin(
-    final G=min(ATotWin, AInt)*hRad, dT(start=0)) if
-                                             ATotWin > 0 and AInt > 0
+    final G=min(ATotWin, AInt)*hRad, dT(start=0))
+                                          if ATotWin > 0 and AInt > 0
     "Resistor between interior walls and windows"
     annotation (Placement(transformation(extent={{74,-118},{94,-98}})));
 

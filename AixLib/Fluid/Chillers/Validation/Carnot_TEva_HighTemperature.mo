@@ -2,6 +2,8 @@ within AixLib.Fluid.Chillers.Validation;
 model Carnot_TEva_HighTemperature
   "Test model for Carnot_TEva with high evaporator temperature"
   extends Examples.Carnot_TEva(TEvaLvg(height=34), sou2(use_T_in=true));
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Ramp TEvaEnt(
     startTime=3000,
     height=38,

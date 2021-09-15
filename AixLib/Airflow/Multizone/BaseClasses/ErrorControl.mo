@@ -1,5 +1,7 @@
 within AixLib.Airflow.Multizone.BaseClasses;
 model ErrorControl "Interface that defines parameters for error control"
+
+  extends AixLib.Icons.ibpsa;
   parameter Boolean forceErrorControlOnFlow = true
     "Flag to force error control on m_flow. Set to true if interested in flow rate"
     annotation(Dialog(tab="Advanced"));

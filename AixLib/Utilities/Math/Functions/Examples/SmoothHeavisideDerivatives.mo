@@ -2,6 +2,8 @@ within AixLib.Utilities.Math.Functions.Examples;
 model SmoothHeavisideDerivatives
   "Test model for the derivatives of the smoothHeavisidefunction"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   Real y = AixLib.Utilities.Math.Functions.smoothHeaviside(x=time, delta=0.2) "Function value";
   Real der_y = der(y) "First derivative";
   Real der2_y = der(der_y) "Second derivative";

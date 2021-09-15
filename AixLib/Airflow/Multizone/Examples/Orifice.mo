@@ -1,6 +1,8 @@
 within AixLib.Airflow.Multizone.Examples;
 model Orifice "Model with an orifice"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
   AixLib.Airflow.Multizone.Orifice ori(redeclare package Medium = Medium, A=
         0.2) "Orifice"

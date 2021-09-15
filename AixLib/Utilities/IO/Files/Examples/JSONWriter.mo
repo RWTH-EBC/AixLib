@@ -1,6 +1,8 @@
 within AixLib.Utilities.IO.Files.Examples;
 model JSONWriter "Example use of the JSON writer"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.IO.Files.JSONWriter jsonWriterInitial(
     nin=3,
     fileName="InitialOutputs.json",

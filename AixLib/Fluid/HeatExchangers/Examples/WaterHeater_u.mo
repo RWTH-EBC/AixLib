@@ -10,6 +10,8 @@ model WaterHeater_u
     vol(V=V/1000),
     mov(nominalValuesDefineDefaultPressureCurve=true));
 
+  extends AixLib.Icons.ibpsa;
+
   HeaterCooler_u hea(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,

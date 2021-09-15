@@ -10,6 +10,8 @@ partial model PartialTwoWayValve "Partial model for a two way valve"
       rhoStd=Medium.density_pTX(101325, 273.15+4, Medium.X_default));
 
   extends AixLib.Fluid.Actuators.BaseClasses.ActuatorSignal;
+
+  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.PressureDifference dpFixed_nominal(displayUnit="Pa", min=0) = 0
     "Pressure drop of pipe and other resistances that are in series"
      annotation(Dialog(group = "Nominal condition"));

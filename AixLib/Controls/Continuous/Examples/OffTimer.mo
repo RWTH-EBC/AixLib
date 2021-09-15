@@ -2,6 +2,8 @@ within AixLib.Controls.Continuous.Examples;
 model OffTimer "Example model for off timer"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=0.2)
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
   AixLib.Controls.Continuous.OffTimer offTim1

@@ -7,6 +7,8 @@ model ThermalZoneHVACWithExhaust
     con(nPorts=3),
     vol(nPorts=3));
 
+  extends AixLib.Icons.ibpsa;
+
   Movers.FlowControlled_m_flow exh(
     redeclare package Medium = MediumA,
     addPowerToMedium=false,

@@ -1,6 +1,8 @@
 within AixLib.Controls.SetPoints.Examples;
 model SupplyReturnTemperatureReset "Test model for the heating curve"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Controls.SetPoints.SupplyReturnTemperatureReset heaCur(
     m=1,
     TSup_nominal=333.15,

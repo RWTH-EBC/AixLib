@@ -11,6 +11,8 @@ model ControlledFlowMachine "Fans with different control signals as input"
     fan3(addPowerToMedium=false, use_inputFilter=false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
+  extends AixLib.Icons.ibpsa;
+
   annotation (
 experiment(Tolerance=1e-6, StopTime=600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/ControlledFlowMachine.mos"

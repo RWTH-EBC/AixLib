@@ -2,6 +2,8 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
 model PlugFlowAIT
   "Validation pipe against data from Austrian Institute of Technology"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
   parameter Modelica.SIunits.Length Lcap=1
     "Length over which transient effects typically take place";

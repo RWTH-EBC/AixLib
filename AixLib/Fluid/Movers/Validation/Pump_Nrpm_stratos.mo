@@ -1,6 +1,8 @@
 within AixLib.Fluid.Movers.Validation;
 model Pump_Nrpm_stratos "Model validation using a Wilo Stratos 80/1-12 pump"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   parameter Data.Pumps.Wilo.Stratos80slash1to12 per "Pump performance data"

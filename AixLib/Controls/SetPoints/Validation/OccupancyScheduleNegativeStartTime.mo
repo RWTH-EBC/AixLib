@@ -2,6 +2,8 @@ within AixLib.Controls.SetPoints.Validation;
 model OccupancyScheduleNegativeStartTime
   "Test model for occupancy schedule with look-ahead"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Controls.SetPoints.OccupancySchedule occSchDay(occupancy=3600*{7,24})
                                                        "Day schedule"
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));

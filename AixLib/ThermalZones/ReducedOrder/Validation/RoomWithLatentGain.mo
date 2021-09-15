@@ -13,6 +13,8 @@ model RoomWithLatentGain
       endTime2=0,
       startTime3=0,
       endTime3=0));
+
+  extends AixLib.Icons.ibpsa;
   Fluid.Sensors.RelativeHumidity senRelHum(
     redeclare package Medium = Medium)
     "Relative humidity of room air"

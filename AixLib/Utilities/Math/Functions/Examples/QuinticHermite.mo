@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math.Functions.Examples;
 model QuinticHermite "Example model using quintic Hermite spline"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   parameter Real a = 0.5 "Exponential argument coefficient";
   parameter Real x1 = 1 "Lower abscissa value";
   parameter Real x2 = 2.6 "Upper abscissa value";

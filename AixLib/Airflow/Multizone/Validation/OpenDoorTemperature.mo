@@ -3,6 +3,8 @@ model OpenDoorTemperature
   "Model with one open door and only temperature-driven flow"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air "Medium model";
 
   AixLib.Airflow.Multizone.DoorOpen doo(

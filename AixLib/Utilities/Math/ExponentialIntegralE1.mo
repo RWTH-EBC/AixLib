@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math;
 block ExponentialIntegralE1 "Exponential integral function, E1"
   extends Modelica.Blocks.Interfaces.SISO;
+
+  extends AixLib.Icons.ibpsa;
 equation
   y = AixLib.Utilities.Math.Functions.exponentialIntegralE1(x=u);
   annotation (defaultComponentName="E1",

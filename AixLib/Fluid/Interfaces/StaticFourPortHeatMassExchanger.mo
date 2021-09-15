@@ -6,6 +6,8 @@ model StaticFourPortHeatMassExchanger
    final computeFlowResistance1=(dp1_nominal > Modelica.Constants.eps),
    final computeFlowResistance2=(dp2_nominal > Modelica.Constants.eps));
 
+  extends AixLib.Icons.ibpsa;
+
   constant Boolean prescribedHeatFlowRate1 = false
     "Set to true if the heat flow rate into fluid 1 is not a function of the component temperature";
   constant Boolean prescribedHeatFlowRate2 = false

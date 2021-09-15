@@ -6,6 +6,8 @@ model TraceSubstanceConservationDynamicBalance
      vol(massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Continuous.Integrator intTraSubIn(
     k=1,
     initType=Modelica.Blocks.Types.Init.InitialState,

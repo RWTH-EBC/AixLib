@@ -2,6 +2,8 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
 model TransportWaterAir
   "Validation model, one having water and the other air"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package MediumW = AixLib.Media.Water "Medium in the pipe";
   package MediumA = AixLib.Media.Air(extraPropertiesNames={"CO2"})
    "Medium in the duct";

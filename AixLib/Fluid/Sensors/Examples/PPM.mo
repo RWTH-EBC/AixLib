@@ -1,6 +1,8 @@
 within AixLib.Fluid.Sensors.Examples;
 model PPM "Test model for the extra property sensor outputting PPM"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"})
     "Medium model";
 

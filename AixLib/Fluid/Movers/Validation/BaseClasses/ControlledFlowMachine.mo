@@ -3,6 +3,8 @@ model ControlledFlowMachine
 
   package Medium = AixLib.Media.Air "Medium model";
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Sources.Pulse y(
     startTime=0,
     offset=0,

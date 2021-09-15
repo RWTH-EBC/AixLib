@@ -2,6 +2,8 @@ within AixLib.ThermalZones.ReducedOrder.SolarGain;
 model CorrectionGDoublePane
   "Double pane window solar correction"
   extends BaseClasses.PartialCorrectionG;
+
+  extends AixLib.Icons.ibpsa;
   import con = Modelica.SIunits.Conversions;
 
   // Parameters for the transmission correction factor based on VDI 6007 Part 3

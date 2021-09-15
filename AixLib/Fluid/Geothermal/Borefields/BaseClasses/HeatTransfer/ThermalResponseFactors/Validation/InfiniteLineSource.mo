@@ -2,6 +2,8 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalRespon
 model InfiniteLineSource "Test case for infinite line source"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.ThermalDiffusivity aSoi = 1.0e-6 "Ground thermal diffusivity";
   parameter Modelica.SIunits.Radius rSource = 0.075 "Minimum radius";
   parameter Modelica.SIunits.Radius[5] r = {rSource, 2*rSource, 5*rSource, 10*rSource, 20*rSource}

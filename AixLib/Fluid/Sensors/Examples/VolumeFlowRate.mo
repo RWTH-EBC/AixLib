@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors.Examples;
 model VolumeFlowRate "Test model for the volume flow rate sensor"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air
     "Medium model";
 

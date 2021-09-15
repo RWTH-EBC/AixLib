@@ -1,6 +1,8 @@
 within AixLib.Fluid.HeatExchangers.Radiators.Examples;
 model RadiatorEN442_2 "Test model for radiator"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
  package Medium = AixLib.Media.Water "Medium model";
  parameter Modelica.SIunits.Temperature TRoo = 20+273.15 "Room temperature"
     annotation (Evaluate=false);

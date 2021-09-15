@@ -4,6 +4,8 @@ partial model PartialThreeWayResistance
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
     final mSenFac=1);
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Fluid.Interfaces.FluidPort_a port_1(
     redeclare package Medium = Medium,
     h_outflow(start=Medium.h_default, nominal=Medium.h_default),
@@ -89,8 +91,8 @@ partial model PartialThreeWayResistance
     final X_start=X_start,
     final C_start=C_start,
     final allowFlowReversal=true,
-    final prescribedHeatFlowRate=false) if
-       have_controlVolume "Fluid volume to break algebraic loop"
+    final prescribedHeatFlowRate=false)
+    if have_controlVolume "Fluid volume to break algebraic loop"
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
 protected

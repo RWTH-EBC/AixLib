@@ -4,6 +4,8 @@ block HVACThermalZoneAir1 "Validation model for the convective HVAC system"
     redeclare package Medium = AixLib.Media.Air,
     hvacAda(nPorts=2));
 
+  extends AixLib.Icons.ibpsa;
+
 protected
   Sources.Boundary_pT bou(
     redeclare package Medium = Medium,

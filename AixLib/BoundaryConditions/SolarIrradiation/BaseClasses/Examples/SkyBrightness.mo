@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.Examples;
 model SkyBrightness "Test model for sky brightness"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.RelativeAirMass relAirMas
     "Relative air mass"
      annotation (Placement(transformation(extent={{10,20},{30,40}})));

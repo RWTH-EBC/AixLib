@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.Examples;
 model DiffuseIsotropic
   "Test model for diffuse solar irradiation on a tilted surface by using isotropic model"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.DiffuseIsotropic
     HDifTilIso(til=1.5707963267949)
     annotation (Placement(transformation(extent={{40,0},{60,20}})));

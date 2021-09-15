@@ -2,6 +2,8 @@ within AixLib.Utilities.Cryptographics.Validation;
 model SHA1 "Model that verifies the SHA1 encryption C function"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   //Test strings
   parameter String strIn1 = "abc"
     "First test string";

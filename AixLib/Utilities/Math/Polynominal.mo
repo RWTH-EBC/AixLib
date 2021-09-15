@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math;
 block Polynominal "Polynominal function"
   extends Modelica.Blocks.Interfaces.SISO;
+
+  extends AixLib.Icons.ibpsa;
  parameter Real a[:] "Coefficients";
 equation
   y = AixLib.Utilities.Math.Functions.polynomial(a=a, x=u);

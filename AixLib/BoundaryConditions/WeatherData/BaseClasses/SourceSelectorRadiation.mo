@@ -2,36 +2,38 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block SourceSelectorRadiation
   "Block that selects the solar radiation source and outputs the solar radiation quantities"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   parameter AixLib.BoundaryConditions.Types.RadiationDataSource datSou "Data source"
     annotation(Evaluate=true);
 
   Modelica.Blocks.Interfaces.RealInput HDirNorFil(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
+    final unit="W/m2")
+   if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
     "Direct normal solar irradiation from weather data file" annotation (Placement(transformation(extent={{-140,
             -10},{-100,30}}), iconTransformation(extent={{-120,10},{-100,30}})));
 
   Modelica.Blocks.Interfaces.RealInput HDirNorIn(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HDifHor or
+    final unit="W/m2")
+   if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HDifHor or
       datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HGloHor
     "Direct normal solar irradiation from input connector" annotation (Placement(transformation(extent={{-140,
             -40},{-100,0}}),  iconTransformation(extent={{-120,-30},{-100,-10}})));
 
   Modelica.Blocks.Interfaces.RealInput HDifHorFil(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-     datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
+    final unit="W/m2")
+  if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
     "Diffuse horizontal solar irradiation from weather data file" annotation (Placement(transformation(
           extent={{-140,60},{-100,100}}), iconTransformation(extent={{-120,80},{
             -100,100}})));
 
   Modelica.Blocks.Interfaces.RealInput HDifHorIn(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-     datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor or
+    final unit="W/m2")
+  if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor or
      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HDifHor
     "Diffuse horizontal solar irradiation from input connector" annotation (Placement(transformation(
           extent={{-140,30},{-100,70}}),  iconTransformation(extent={{-120,50},{
@@ -39,16 +41,16 @@ block SourceSelectorRadiation
 
   Modelica.Blocks.Interfaces.RealInput HGloHorFil(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
+    final unit="W/m2")
+   if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.File
     "Global horizontal solar irradiation from weather data file" annotation (Placement(transformation(extent={{-140,
             -70},{-100,-30}}),        iconTransformation(extent={{-120,-70},{-100,
             -50}})));
 
   Modelica.Blocks.Interfaces.RealInput HGloHorIn(
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") if
-      datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor or
+    final unit="W/m2")
+   if datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor or
       datSou == AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HGloHor
     "Global horizontal solar irradiation from input connector" annotation (Placement(transformation(extent={{-140,
             -98},{-100,-58}}),        iconTransformation(extent={{-120,-100},{-100,

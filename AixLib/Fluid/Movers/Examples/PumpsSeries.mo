@@ -1,6 +1,8 @@
 within AixLib.Fluid.Movers.Examples;
 model PumpsSeries "Two flow machines in series"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1

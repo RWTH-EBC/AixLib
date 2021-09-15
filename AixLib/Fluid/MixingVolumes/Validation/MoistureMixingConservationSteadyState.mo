@@ -7,6 +7,8 @@ model MoistureMixingConservationSteadyState
     mFloSol(k=sou1.m_flow + sou2.m_flow),
     hSol(k=Medium.h_default*(sou1.m_flow + sou2.m_flow)));
 
+  extends AixLib.Icons.ibpsa;
+
 equation
   connect(cheMasFra.u2, senMasFra.X) annotation (Line(
       points={{138,-44},{110,-44},{110,9}},

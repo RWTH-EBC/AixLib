@@ -1,6 +1,8 @@
 within AixLib.Utilities.IO.Files.Examples;
 model CSVWriter "Example of csv writer use"
   extends AixLib.Utilities.IO.Files.Examples.BaseClasses.PartialCSV;
+
+  extends AixLib.Icons.ibpsa;
   CombiTimeTableWriter combiTimeTableWriter(
     nin=2,
     samplePeriod=0.3,

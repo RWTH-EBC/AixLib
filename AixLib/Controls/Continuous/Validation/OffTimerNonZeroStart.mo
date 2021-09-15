@@ -4,6 +4,8 @@ model OffTimerNonZeroStart
   extends AixLib.Controls.Continuous.Examples.OffTimer(
     booleanPulse(startTime=-1));
 
+  extends AixLib.Icons.ibpsa;
+
   annotation (experiment(Tolerance=1e-6, StartTime=-1, StopTime=0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Validation/OffTimerNonZeroStart.mos"
         "Simulate and plot"),

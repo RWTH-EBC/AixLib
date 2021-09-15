@@ -3,6 +3,8 @@ block IdealSource_m_flow "Declaration of an FMU that exports a mass flow source 
    extends AixLib.Fluid.FMI.ExportContainers.PartialTwoPort(
      redeclare replaceable package Medium = AixLib.Media.Air);
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s")
     "Prescribed mass flow rate"
     annotation (Placement(transformation(

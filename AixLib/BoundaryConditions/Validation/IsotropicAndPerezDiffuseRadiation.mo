@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.Validation;
 model IsotropicAndPerezDiffuseRadiation
   "Partial model to run BESTEST validation case studies for weather data processing"
   extends AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput HPer(
     final quantity="RadiantEnergyFluenceRate",
     final unit="W/m2")

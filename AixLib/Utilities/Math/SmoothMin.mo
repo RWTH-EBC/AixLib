@@ -2,6 +2,8 @@ within AixLib.Utilities.Math;
 block SmoothMin
   "Once continuously differentiable approximation to the minimum function"
   extends Modelica.Blocks.Interfaces.SI2SO;
+
+  extends AixLib.Icons.ibpsa;
   parameter Real deltaX "Width of transition interval";
 equation
   y = AixLib.Utilities.Math.Functions.smoothMin(x1=u1, x2=u2, deltaX=deltaX);

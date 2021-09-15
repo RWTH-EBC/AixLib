@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math.Functions.Examples;
 model RegStep "Example for inlined regStep function"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   Real y "Function value";
 equation
   y=AixLib.Utilities.Math.Functions.regStep(time, 1, -1, 1e-5);

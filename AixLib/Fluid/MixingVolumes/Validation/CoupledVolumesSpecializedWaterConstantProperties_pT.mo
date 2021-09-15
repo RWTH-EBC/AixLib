@@ -5,6 +5,8 @@ model CoupledVolumesSpecializedWaterConstantProperties_pT
     redeclare package Medium =
         AixLib.Media.Specialized.Water.ConstantProperties_pT);
 
+  extends AixLib.Icons.ibpsa;
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

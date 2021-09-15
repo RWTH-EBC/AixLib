@@ -3,6 +3,8 @@ model AirToOutletFlowReversal
   "Validation model for air to outlet converter with flow reversal enabled"
   extends AixLib.Fluid.FMI.Conversion.Validation.AirToOutlet(
     allowFlowReversal = true);
+
+  extends AixLib.Icons.ibpsa;
   BoundaryCondition bouAirNoC(
     redeclare package Medium = AixLib.Media.Air (
       X_default={0.015, 0.985}))

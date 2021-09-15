@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatExchangers.BaseClasses;
 model HACoilInside "Calculates the hA value for water inside a coil"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Water mass flow rate"
     annotation(Dialog(tab="General", group="Nominal condition"));
 

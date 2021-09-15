@@ -8,6 +8,8 @@ block Fan "Declaration of an FMU that exports a fan"
                           false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
   parameter Modelica.SIunits.PressureDifference dp_nominal(displayUnit="Pa")=500

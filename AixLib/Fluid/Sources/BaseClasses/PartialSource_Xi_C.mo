@@ -3,6 +3,8 @@ partial model PartialSource_Xi_C
   "Partial component source with parameter definitions for Xi and C"
   extends AixLib.Fluid.Sources.BaseClasses.PartialSource;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Boolean use_X_in = false
     "Get the composition (all fractions) from the input connector"
     annotation(Evaluate=true, HideResult=true, Dialog(tab="Advanced"));

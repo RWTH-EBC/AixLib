@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatPumps.Examples;
 model ScrollWaterToWater_OneRoomRadiator
   "Heat pump with scroll compressor connected to a simple room model with radiator"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   replaceable package MediumA =
       AixLib.Media.Air "Medium model for air";
   replaceable package MediumW =

@@ -14,6 +14,8 @@ model ReciprocatingWaterToWater
       pDro=per.pDro,
       dTSup=per.dTSup));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Data.ReciprocatingWaterToWater.Generic per
     "Heat pump performance data"
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-98,

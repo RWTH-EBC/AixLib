@@ -3,6 +3,8 @@ model DewPointTemperatureDerivativeCheck_amb
   "Model to test correct implementation of derivative"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Real y "Function value";
   Real y_comp "Function value for comparison";
   Real err "Integration error";

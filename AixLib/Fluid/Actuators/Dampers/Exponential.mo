@@ -2,6 +2,8 @@ within AixLib.Fluid.Actuators.Dampers;
 model Exponential
   "Air damper with exponential opening characteristics"
   extends AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential;
+
+  extends AixLib.Icons.ibpsa;
 equation
   // Pressure drop calculation
   if linearized then

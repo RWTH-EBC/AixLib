@@ -2,6 +2,8 @@ within AixLib.Fluid.Examples.Performance;
 model Example7
   "Example 7 model of Modelica code that is more efficiently compiled into C-code"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   parameter Integer nTem = 500;
   parameter Real R = 0.001;
   parameter Real C = 1000;

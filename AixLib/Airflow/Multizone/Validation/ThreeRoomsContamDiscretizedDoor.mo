@@ -13,6 +13,8 @@ model ThreeRoomsContamDiscretizedDoor
     hA=3/2,
     hB=3/2,
     dp_turbulent(displayUnit="Pa") = 0.01));
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Constant open1(k=1)
     "Constant signal for door opening"
     annotation (Placement(

@@ -2,6 +2,8 @@ within AixLib.Fluid.Sources.Validation.BaseClasses;
 model BoundarySystemWithXi_in
   "System model for testing boundary condition with mass fraction input"
   extends AixLib.Fluid.Sources.Validation.BaseClasses.BoundarySystem(sou(use_Xi_in=true));
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput Xi_in[Medium.nXi]
     "Prescribed boundary composition"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));

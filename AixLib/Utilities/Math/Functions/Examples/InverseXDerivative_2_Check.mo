@@ -2,6 +2,8 @@ within AixLib.Utilities.Math.Functions.Examples;
 model InverseXDerivative_2_Check
   "Model that checks the correct implementation of the 2nd order derivative of InverseXRegularized"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.Diagnostics.CheckEquality cheEqu1(
     threShold=1e-3)
     "Block for checking integration error";

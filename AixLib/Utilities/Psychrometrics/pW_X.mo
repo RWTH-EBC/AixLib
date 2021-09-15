@@ -2,6 +2,8 @@ within AixLib.Utilities.Psychrometrics;
 block pW_X "Water vapor pressure for given humidity ratio"
   extends
     AixLib.Utilities.Psychrometrics.BaseClasses.HumidityRatioVaporPressure;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput X_w(min=0, max=0.99999, nominal=0.1)
     "Water concentration at dry bulb temperature"
     annotation (Placement(transformation(extent={{-120,-10},{-100,10}}), iconTransformation(extent={{-120,-10},{-100,10}})));

@@ -10,6 +10,8 @@ model ConstantEffectiveness "Heat exchanger with constant effectiveness"
     mWat1_flow = 0,
     mWat2_flow = 0);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Efficiency eps(max=1) = 0.8
     "Heat exchanger effectiveness";
 

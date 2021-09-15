@@ -11,6 +11,8 @@ model WD300
     weaDatTDryBulTDewPoinOpa(
       filNam=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/855740.mos")));
+
+  extends AixLib.Icons.ibpsa;
   annotation (
     experiment(
       StopTime=3.1536e+07,

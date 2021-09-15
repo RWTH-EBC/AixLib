@@ -3,6 +3,8 @@ model Carnot_TEva_2ndLaw
   "Test model to verify that the 2nd law is not violated"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Water "Medium model";
 
   parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-4

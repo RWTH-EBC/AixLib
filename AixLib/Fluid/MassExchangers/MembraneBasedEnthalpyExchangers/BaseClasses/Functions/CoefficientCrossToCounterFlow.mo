@@ -1,4 +1,4 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
+﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
 function CoefficientCrossToCounterFlow
   "Calculates coefficient of efficiency of cross flow exchanger to counter flow exchanger based on NTU-method"
   input Real NTU "number of transfer units";

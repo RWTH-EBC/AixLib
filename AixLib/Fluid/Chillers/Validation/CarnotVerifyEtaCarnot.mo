@@ -3,6 +3,8 @@ model CarnotVerifyEtaCarnot
   "Test model to verify the Carnot effectiveness computation for non-zero approach temperatures"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Water "Medium model";
 
   parameter Real etaCarnot_nominal=0.315046

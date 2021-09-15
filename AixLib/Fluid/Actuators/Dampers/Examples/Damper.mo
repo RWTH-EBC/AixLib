@@ -2,6 +2,8 @@ within AixLib.Fluid.Actuators.Dampers.Examples;
 model Damper
   "Dampers with constant pressure difference and varying control signal."
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air "Medium model for air";
 
   AixLib.Fluid.Actuators.Dampers.Exponential res(

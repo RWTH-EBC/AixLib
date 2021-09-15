@@ -3,6 +3,8 @@ model PowerInterface
   "Partial model to compute power draw and heat dissipation of fans and pumps"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 

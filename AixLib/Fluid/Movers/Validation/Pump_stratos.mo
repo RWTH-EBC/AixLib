@@ -14,6 +14,8 @@ model Pump_stratos "Stratos pumps with speed as input"
       redeclare package Medium = Medium,
       use_inputFilter=false,
       per=per));
+
+  extends AixLib.Icons.ibpsa;
   parameter Data.Pumps.Wilo.Stratos25slash1to6 per
     annotation (Placement(transformation(extent={{100,100},{120,120}})));
 equation

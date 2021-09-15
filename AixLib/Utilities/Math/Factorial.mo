@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math;
 block Factorial "Factorial function"
   extends Modelica.Blocks.Interfaces.IntegerSO;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.IntegerInput u "Connector of integer input signal"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 equation

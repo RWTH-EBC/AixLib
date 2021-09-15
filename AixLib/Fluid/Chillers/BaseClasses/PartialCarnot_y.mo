@@ -29,6 +29,8 @@ partial model PartialCarnot_y
       final homotopyInitialization=homotopyInitialization,
       final Q_flow_nominal=QEva_flow_nominal));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Power P_nominal(min=0)
     "Nominal compressor power (at y=1)"
     annotation (Dialog(group="Nominal condition"));

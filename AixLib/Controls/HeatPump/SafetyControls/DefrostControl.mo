@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   parameter Real minIceFac "Minimal value above which no defrost is necessary";
@@ -11,8 +11,8 @@ block DefrostControl
   Modelica.Blocks.Logical.Hysteresis            iceFacGreMinHea(
     final uLow=minIceFac,
     final uHigh=minIceFac + deltaIceFac,
-    final pre_y_start=true) if
-                     not use_chiller
+    final pre_y_start=true)
+                  if not use_chiller
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
@@ -24,12 +24,12 @@ block DefrostControl
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={0,110})));
-  Modelica.Blocks.Sources.BooleanConstant conTrueNotUseChi(final k=true) if
-    not use_chiller
+  Modelica.Blocks.Sources.BooleanConstant conTrueNotUseChi(final k=true)
+ if not use_chiller
     "If ice is melted with an additional heater, HP can continue running"
     annotation (Placement(transformation(extent={{-36,-6},{-24,6}})));
-  Modelica.Blocks.Sources.Constant constPel_deFro(final k=calcPel_deFro) if
-                                                                           not
+  Modelica.Blocks.Sources.Constant constPel_deFro(final k=calcPel_deFro)
+                                                                        if not
     use_chiller "Calculate how much eletrical energy is used to melt ice"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -67,8 +67,8 @@ block DefrostControl
   Modelica.Blocks.Logical.Hysteresis            iceFacGreMinChi(
     final uLow=minIceFac,
     final uHigh=minIceFac + deltaIceFac,
-    final pre_y_start=true) if
-                     use_chiller
+    final pre_y_start=true)
+                  if use_chiller
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
@@ -77,12 +77,12 @@ block DefrostControl
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     "If a chiller is used to defrost, mode will be false"
     annotation (Placement(transformation(extent={{58,-42},{78,-22}})));
-  Modelica.Blocks.Sources.BooleanConstant conFalseNotUseChi(final k=true) if
-                                                                          not
+  Modelica.Blocks.Sources.BooleanConstant conFalseNotUseChi(final k=true)
+                                                                       if not
     use_chiller "Just to omit warnings"
     annotation (Placement(transformation(extent={{28,-48},{38,-38}})));
-  Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=false) if
-    use_chiller "Set mode to false to simulate the defrost cycle"
+  Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=false)
+ if use_chiller "Set mode to false to simulate the defrost cycle"
     annotation (Placement(transformation(extent={{28,-66},{38,-56}})));
 equation
   connect(conOne.y, swiErr.u3) annotation (Line(points={{36.6,-6},{38,-6},{38,4},

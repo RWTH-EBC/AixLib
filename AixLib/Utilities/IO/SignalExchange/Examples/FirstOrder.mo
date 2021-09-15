@@ -3,6 +3,8 @@ model FirstOrder
   "Uses signal exchange block for a first order dynamic system"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   BaseClasses.ExportedModel expMod
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Constant uSet(k=2)

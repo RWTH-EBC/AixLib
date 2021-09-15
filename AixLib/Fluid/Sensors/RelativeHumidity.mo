@@ -3,6 +3,8 @@ model RelativeHumidity "Ideal one port relative humidity sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
   extends Modelica.Icons.RotationalSensor;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput phi(final unit="1", min=0)
     "Relative humidity in port medium"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

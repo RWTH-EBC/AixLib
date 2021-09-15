@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors.Examples;
 model Pressure "Test model for the pressure sensor"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air
     "Medium model";
 

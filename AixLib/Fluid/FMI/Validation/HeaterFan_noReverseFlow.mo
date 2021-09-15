@@ -2,6 +2,8 @@ within AixLib.Fluid.FMI.Validation;
 model HeaterFan_noReverseFlow
   "Heater and fan in series, model configured to not allow flow reversal"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air "Medium model";
 
   final parameter Boolean allowFlowReversal = false
@@ -59,8 +61,8 @@ model HeaterFan_noReverseFlow
   Modelica.Blocks.Sources.Constant X_w_in(k=0.01) "Inlet mass fraction"
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
 
-  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01) if
-     Medium.nC > 0 "Trace substances for forward flow"
+  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01)
+  if Medium.nC > 0 "Trace substances for forward flow"
     annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
 equation
   connect(uHea.y, hea.u) annotation (Line(

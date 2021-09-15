@@ -2,6 +2,8 @@ within AixLib.Fluid.Humidifiers.Examples;
 model Humidifier_u "Model that demonstrates the ideal humidifier model"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air;
 
 

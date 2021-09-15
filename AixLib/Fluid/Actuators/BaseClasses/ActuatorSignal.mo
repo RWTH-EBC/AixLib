@@ -2,6 +2,8 @@ within AixLib.Fluid.Actuators.BaseClasses;
 model ActuatorSignal
   "Partial model that implements the filtered opening for valves and dampers"
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Boolean use_inputFilter=true
     "= true, if opening is filtered with a 2nd order CriticalDamping filter"
     annotation(Dialog(tab="Dynamics", group="Filtered opening"));
@@ -49,8 +51,8 @@ protected
      final analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping,
      final filterType=Modelica.Blocks.Types.FilterType.LowPass,
      x(each stateSelect=StateSelect.always,
-       each start=0)) if
-        use_inputFilter
+       each start=0))
+     if use_inputFilter
     "Second order filter to approximate valve opening time, and to improve numerics"
     annotation (Placement(transformation(extent={{6,81},{20,95}})));
 

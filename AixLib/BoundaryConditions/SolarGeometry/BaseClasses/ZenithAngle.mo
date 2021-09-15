@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.SolarGeometry.BaseClasses;
 block ZenithAngle "Zenith angle"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Angle lat "Latitude";
   Modelica.Blocks.Interfaces.RealInput solHouAng(quantity="Angle", unit="rad")
     "Solar hour angle"

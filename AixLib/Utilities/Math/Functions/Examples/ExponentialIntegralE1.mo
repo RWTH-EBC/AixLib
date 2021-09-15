@@ -3,6 +3,8 @@ model ExponentialIntegralE1
   "Test case for the exponential integral, E1"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Real E1 "Exponential integral E1";
 
 equation

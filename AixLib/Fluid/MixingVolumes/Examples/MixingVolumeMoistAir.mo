@@ -2,6 +2,8 @@ within AixLib.Fluid.MixingVolumes.Examples;
 model MixingVolumeMoistAir "Test model for mixing volume with moist air input"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air;
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.001

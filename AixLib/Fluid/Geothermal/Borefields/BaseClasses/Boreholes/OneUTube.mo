@@ -2,6 +2,8 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes;
 model OneUTube "Single U-tube borehole heat exchanger"
   extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialBorehole;
 
+  extends AixLib.Icons.ibpsa;
+
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalHEXOneUTube
     intHex[nSeg](
     redeclare each final package Medium = Medium,

@@ -2,6 +2,8 @@ within AixLib.Fluid.Chillers.Examples;
 model Carnot_TEva
   "Test model for chiller based on Carnot efficiency and evaporator outlet temperature control signal"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
  package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Water "Medium model";
 

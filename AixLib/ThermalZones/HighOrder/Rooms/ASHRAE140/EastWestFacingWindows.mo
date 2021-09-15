@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140;
 model EastWestFacingWindows "windows facing south and west"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(
-    redeclare replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
+    redeclare replaceable model WindowModel =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
       redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls
       wallTypes(

@@ -1,6 +1,8 @@
 within AixLib.Controls.SetPoints.Examples;
 model OccupancySchedule "Test model for occupancy schedule with look-ahead"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Controls.SetPoints.OccupancySchedule occSchDay "Day schedule"
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
   AixLib.Controls.SetPoints.OccupancySchedule occSchWee(occupancy=3600*{7,19,

@@ -4,6 +4,8 @@ model HeaterCooler_u "Heater or cooler with prescribed heat flow rate"
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
     final prescribedHeatFlowRate=true));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Heat flow rate at u=1, positive for heating";
   Modelica.Blocks.Interfaces.RealInput u(unit="1") "Control input"

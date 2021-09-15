@@ -2,6 +2,8 @@ within AixLib.Utilities.Psychrometrics.Examples;
 model SaturationPressure "Model to test the wet bulb temperature computation"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
 

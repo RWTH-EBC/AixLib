@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses;
 model ModificationFactor "Factor to modify nominal capacity"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Integer nBeams(min=1) "Number of beams in parallel";
 
   parameter Data.Generic per "Performance data"

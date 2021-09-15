@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
 block SkyClearness "Sky clearness"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealInput zen(
     quantity="Angle",
     unit="rad",

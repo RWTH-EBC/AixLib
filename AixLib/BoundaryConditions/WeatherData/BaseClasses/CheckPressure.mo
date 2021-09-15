@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block CheckPressure
   "Ensures that the interpolated pressure is between prescribed bounds"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput PIn(
     final quantity="Pressure",
     final unit="Pa") "Atmospheric pressure"

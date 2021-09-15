@@ -13,6 +13,8 @@ model TwoWayQuickOpening
           else
             l + Modelica.Fluid.Utilities.regPow(y_actual, alpInv, delta0)*(1 - l)));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real alp = 2 "Parameter for valve characteristics, alp>0";
   parameter Real delta0 = 0.01 "Range of significant deviation from power law";
 protected

@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatExchangers.Validation;
 model PrescribedOutlet
   "Model that demonstrates the ideal heater/cooler model for a prescribed outlet temperature, configured as steady-state"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate";

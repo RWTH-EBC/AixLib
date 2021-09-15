@@ -3,6 +3,8 @@ model GFunction_100boreholes
   "g-Function calculation for a field of 10 by 10 boreholes"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Integer nBor = 100 "Number of boreholes";
   parameter Modelica.SIunits.Position cooBor[nBor, 2] = {{7.5*mod(i-1,10), 7.5*floor((i-1)/10)} for i in 1:nBor}
     "Coordinates of boreholes";

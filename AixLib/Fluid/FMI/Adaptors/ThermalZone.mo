@@ -2,6 +2,8 @@ within AixLib.Fluid.FMI.Adaptors;
 model ThermalZone
   "Adaptor for connecting a thermal zone to signal ports which then can be exposed at an FMI interface"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -31,21 +33,21 @@ model ThermalZone
 
 protected
   x_i_toX_w x_i_toX(
-    redeclare final package Medium = Medium) if
-    Medium.nXi > 0 "Conversion from x_i to X_w"
+    redeclare final package Medium = Medium)
+ if Medium.nXi > 0 "Conversion from x_i to X_w"
     annotation (Placement(transformation(extent={{-20,-30},{-40,-10}})));
 
   RealVectorExpression XiSup(
     final n=Medium.nXi,
-    final y=inStream(ports[1].Xi_outflow)) if
-       Medium.nXi > 0
+    final y=inStream(ports[1].Xi_outflow))
+    if Medium.nXi > 0
       "Water vapor concentration of supply air"
     annotation (Placement(transformation(extent={{20,-30},{0,-10}})));
 
   RealVectorExpression CSup(
     final n=Medium.nC,
-    final y=inStream(ports[1].C_outflow)) if
-    Medium.nC > 0 "Trace substance concentration of supply air"
+    final y=inStream(ports[1].C_outflow))
+ if Medium.nC > 0 "Trace substance concentration of supply air"
     annotation (Placement(transformation(extent={{20,-70},{0,-50}})));
 
   Sources.MassFlowSource_T bou[nPorts](
@@ -136,8 +138,8 @@ First implementation.
       Modelica.Media.Interfaces.PartialMedium "Medium model within the source"
      annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
-    Modelica.Blocks.Interfaces.RealInput Xi[Medium.nXi](each final unit="kg/kg") if
-      Medium.nXi > 0 "Water vapor concentration in kg/kg total air"
+    Modelica.Blocks.Interfaces.RealInput Xi[Medium.nXi](each final unit="kg/kg")
+   if Medium.nXi > 0 "Water vapor concentration in kg/kg total air"
       annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
           iconTransformation(extent={{-140,-20},{-100,20}})));
 

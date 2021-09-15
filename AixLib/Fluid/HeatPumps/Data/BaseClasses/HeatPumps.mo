@@ -3,6 +3,8 @@ partial record HeatPumps
   "Base record for calibrated heat pump models"
   extends Modelica.Icons.Record;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Efficiency etaEle
     "Electro-mechanical efficiency of the compressor"
     annotation (Dialog(group="Compressor"));

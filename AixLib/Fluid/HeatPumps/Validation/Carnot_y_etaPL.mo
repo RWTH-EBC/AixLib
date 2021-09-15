@@ -5,6 +5,8 @@ model Carnot_y_etaPL
       T1_start=303.15,
       T2_start=278.15));
 
+  extends AixLib.Icons.ibpsa;
+
   annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Validation/Carnot_y_etaPL.mos"
         "Simulate and plot"),

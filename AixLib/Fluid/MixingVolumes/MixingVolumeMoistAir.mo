@@ -9,6 +9,8 @@ model MixingVolumeMoistAir
       final use_C_flow = use_C_flow),
     final initialize_p = not Medium.singleState);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Boolean use_C_flow = false
     "Set to true to enable input connector for trace substance"
     annotation(Evaluate=true, Dialog(tab="Advanced"));

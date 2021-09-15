@@ -2,6 +2,8 @@ within AixLib.Media.Specialized.Air.Examples;
 model PerfectGasDerivativeCheck
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
    package Medium = AixLib.Media.Specialized.Air.PerfectGas;
 
     Modelica.SIunits.Temperature T "Temperature";

@@ -2,6 +2,8 @@ within AixLib.Fluid.Movers.Examples;
 model ClosedLoop_y "Flow machine with feedback control"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air;
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 0.1

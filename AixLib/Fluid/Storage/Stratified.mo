@@ -2,6 +2,8 @@ within AixLib.Fluid.Storage;
 model Stratified "Model of a stratified tank for thermal energy storage"
   extends AixLib.Fluid.Storage.BaseClasses.PartialStratified(vol(each nPorts=3));
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Fluid.Interfaces.FluidPort_a fluPorVol[nSeg](
     redeclare each final package Medium = Medium)
     "Fluid port that connects to the control volumes of the tank"

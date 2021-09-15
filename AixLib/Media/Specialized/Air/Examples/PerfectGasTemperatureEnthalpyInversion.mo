@@ -4,6 +4,8 @@ model PerfectGasTemperatureEnthalpyInversion
   extends Modelica.Icons.Example;
   extends AixLib.Media.Examples.BaseClasses.TestTemperatureEnthalpyInversion(
     redeclare package Medium = AixLib.Media.Specialized.Air.PerfectGas);
+
+  extends AixLib.Icons.ibpsa;
   annotation (
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Specialized/Air/Examples/PerfectGasTemperatureEnthalpyInversion.mos"

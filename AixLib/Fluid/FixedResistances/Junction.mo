@@ -26,6 +26,8 @@ model Junction
       homotopyInitialization=homotopyInitialization,
       deltaM=deltaM));
 
+  extends AixLib.Icons.ibpsa;
+
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 

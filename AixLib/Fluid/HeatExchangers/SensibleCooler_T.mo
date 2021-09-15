@@ -14,6 +14,8 @@ model SensibleCooler_T
       final T_start=T_start,
       final X_start=Medium.X_default));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.HeatFlowRate QMin_flow(max=0) = -Modelica.Constants.inf
     "Maximum heat flow rate for cooling (negative)"
     annotation (Evaluate=true);

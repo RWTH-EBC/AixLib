@@ -5,6 +5,8 @@ model StratifiedEnhanced "Stratified tank model with enhanced discretization"
     vol(each prescribedHeatFlowRate=true,
         each nPorts=3));
 
+  extends AixLib.Icons.ibpsa;
+
 protected
   AixLib.Fluid.Sensors.EnthalpyFlowRate H_a_flow(
     redeclare package Medium = Medium,

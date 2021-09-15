@@ -3,6 +3,8 @@ model Carnot_y_etaPL
   "Test model for the part load efficiency curve with compressor speed as input signal"
   extends Examples.Carnot_y(chi(a={0.7,0.3}));
 
+  extends AixLib.Icons.ibpsa;
+
   annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_y_etaPL.mos"
         "Simulate and plot"),

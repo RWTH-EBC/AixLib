@@ -2,6 +2,8 @@ within AixLib.Utilities.IO.SignalExchange;
 model Read "Block that allows a signal to be read as an FMU output"
   extends Modelica.Blocks.Routing.RealPassThrough;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter String description "Description of the signal being read";
 
   parameter SignalTypes.SignalsForKPIs KPIs = SignalTypes.SignalsForKPIs.None

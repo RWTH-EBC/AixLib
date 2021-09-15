@@ -4,6 +4,8 @@ model DelayFirstOrder
   extends AixLib.Fluid.MixingVolumes.MixingVolume(final V=V_nominal,
                                                  final mSenFac=1);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Time tau = 60 "Time constant at nominal flow"
     annotation (Dialog(tab="Dynamics", group="Nominal condition"));
 

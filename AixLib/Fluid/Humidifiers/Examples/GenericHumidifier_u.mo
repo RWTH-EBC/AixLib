@@ -1,4 +1,4 @@
-within AixLib.Fluid.Humidifiers.Examples;
+﻿within AixLib.Fluid.Humidifiers.Examples;
 model GenericHumidifier_u
   "Model that demonstrates the steam and adiabtic humidifier"
   extends Modelica.Icons.Example;

@@ -9,6 +9,8 @@ model WaterProperties_pT
         p_nominal=5e5),
     TMin=273.15,
     TMax=273.15+150);
+
+  extends AixLib.Icons.ibpsa;
 equation
   // Check the implementation of the base properties
   basPro.state.p=p;

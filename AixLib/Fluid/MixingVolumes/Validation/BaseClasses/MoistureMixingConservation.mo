@@ -2,6 +2,8 @@ within AixLib.Fluid.MixingVolumes.Validation.BaseClasses;
 partial model MoistureMixingConservation
   "Partial for checking conservation of mass for independent mass fraction"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air "Medium model";
   AixLib.Fluid.Sources.MassFlowSource_h sou1(
     redeclare package Medium = Medium,

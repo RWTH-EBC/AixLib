@@ -3,6 +3,8 @@ model PIDHysteresisTimer
   "PID controller with anti-windup, hysteresis and timer to prevent short cycling"
   extends Modelica.Blocks.Interfaces.SVcontrol;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real minOffTime=600
     "Minimum time that devices needs to be off before it can run again"
       annotation (Dialog(group="On/off controller"));

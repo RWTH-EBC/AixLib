@@ -1,6 +1,8 @@
 within AixLib.Utilities.Psychrometrics.Functions.Examples;
 model SaturationPressure "Model to test the saturationPressure function"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Temperature TMin = 190 "Temperature";
   parameter Modelica.SIunits.Temperature TMax = 373.16 "Temperature";
   Modelica.SIunits.Temperature T "Temperature";

@@ -2,6 +2,8 @@ within AixLib.Media.Examples;
 model AirDerivativeCheck "Model that tests the derivative implementation"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
    package Medium = AixLib.Media.Air;
     Modelica.SIunits.Temperature T "Temperature";
     Modelica.SIunits.MassFraction X[1] "Water vapor mass fraction";

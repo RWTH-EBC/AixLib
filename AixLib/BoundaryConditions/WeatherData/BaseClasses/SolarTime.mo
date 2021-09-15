@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block SolarTime "Solar time"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput locTim(quantity="Time", unit="s")
     "Local time" annotation (Placement(transformation(extent={{-140,-74},{-100,
             -34}}), iconTransformation(extent={{-140,-74},{-100,-34}})));

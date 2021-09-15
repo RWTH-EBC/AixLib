@@ -4,6 +4,8 @@ model ThreeYears_usingTwoYearDataPositiveStart
   extends
     AixLib.BoundaryConditions.WeatherData.Validation.ThreeYears_usingTwoYearData;
 
+  extends AixLib.Icons.ibpsa;
+
   annotation (experiment(
       StartTime=15638400,
       StopTime=110246400,

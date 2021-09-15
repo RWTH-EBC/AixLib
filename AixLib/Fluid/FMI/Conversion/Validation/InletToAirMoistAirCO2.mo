@@ -3,6 +3,8 @@ model InletToAirMoistAirCO2
   "Validation model for inlet to AixLib.Media.Air conversion with C02 trace substances"
   extends AixLib.Fluid.FMI.Conversion.Validation.InletToAirDryAir(
     redeclare replaceable package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"}));
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Constant CRev[Medium.nC](each k=0.8)
               "Trace substance for reverse flow"
     annotation (Placement(transformation(extent={{92,-80},{72,-60}})));

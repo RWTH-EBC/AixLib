@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors;
 model SpecificEnthalpyTwoPort "Ideal two port sensor for the specific enthalpy"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.SpecificEnthalpy h_out_start=
     Medium.specificEnthalpy_pTX(p=Medium.p_default, T=Medium.T_default, X=Medium.X_default)
     "Initial or guess value of output (= state)"

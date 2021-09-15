@@ -3,6 +3,8 @@ partial model FluidProperties
   "Model that tests the implementation of the fluid properties"
   extends PartialProperties;
 
+  extends AixLib.Icons.ibpsa;
+
   Medium.ThermodynamicState state_phX "Medium state";
   Medium.ThermodynamicState state_psX "Medium state";
 

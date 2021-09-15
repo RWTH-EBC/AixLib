@@ -2,6 +2,8 @@ within AixLib.Media.Examples.BaseClasses;
 partial model PartialProperties
   "Partial model that contains common parameters of the fluid properties"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium;
 
   parameter Modelica.SIunits.Temperature TMin

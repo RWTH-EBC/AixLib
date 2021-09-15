@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors;
 model TraceSubstancesTwoPort "Ideal two port sensor for trace substance"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput C(min=0,
                                           start=C_start)
     "Trace substance of the passing fluid"

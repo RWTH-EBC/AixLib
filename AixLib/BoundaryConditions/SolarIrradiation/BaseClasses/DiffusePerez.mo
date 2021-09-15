@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
 block DiffusePerez
   "Hemispherical diffuse irradiation on a tilted surface with Perez's anisotropic model"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   parameter Real rho=0.2 "Ground reflectance";
   parameter Modelica.SIunits.Angle til(displayUnit="deg") "Surface tilt angle";
   Modelica.Blocks.Interfaces.RealInput briCof1 "Brightening Coeffcient F1"

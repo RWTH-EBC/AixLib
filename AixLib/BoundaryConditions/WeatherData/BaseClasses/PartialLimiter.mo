@@ -3,6 +3,8 @@ partial block PartialLimiter
   "Partial block to limit a signal"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   constant Real uMin = 0 "Minimum value";
   constant Real uMax = 1 "Maximum value";
 

@@ -3,6 +3,8 @@ model StratifiedEnhancedInternalHex
   "Example showing the use of StratifiedEnhancedInternalHex"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package MediumTan = AixLib.Media.Water "Medium in the tank";
   package MediumHex = AixLib.Media.Water "Medium in the heat exchanger";
 

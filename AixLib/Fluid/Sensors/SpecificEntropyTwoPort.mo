@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors;
 model SpecificEntropyTwoPort "Ideal two port sensor for the specific entropy"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.SpecificEntropy s_start=
     Medium.specificEntropy_pTX(p=Medium.p_default, T=Medium.T_default, X=Medium.X_default)
     "Initial or guess value of output (= state)"

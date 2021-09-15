@@ -9,6 +9,8 @@ model DryCoilEffectivenessNTUMassFlow
     sou_2(nPorts=1),
     sin_2(nPorts=1));
 
+  extends AixLib.Icons.ibpsa;
+
   AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU hex(
     redeclare package Medium1 = Medium1,
     redeclare package Medium2 = Medium2,

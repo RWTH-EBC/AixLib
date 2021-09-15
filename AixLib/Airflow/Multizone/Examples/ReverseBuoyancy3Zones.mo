@@ -2,6 +2,8 @@ within AixLib.Airflow.Multizone.Examples;
 model ReverseBuoyancy3Zones
   "Model with three rooms and buoyancy-driven air circulation that reverses direction"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
   AixLib.Fluid.MixingVolumes.MixingVolume volEas(
     redeclare package Medium = Medium,

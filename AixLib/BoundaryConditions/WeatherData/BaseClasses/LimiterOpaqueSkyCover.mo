@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block LimiterOpaqueSkyCover "Block that limits the opaque sky cover"
   extends PartialLimiter;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput nOpa(
     final unit="1") "Opaque sky cover"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

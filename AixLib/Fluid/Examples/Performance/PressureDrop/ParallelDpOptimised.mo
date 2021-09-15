@@ -2,6 +2,8 @@ within AixLib.Fluid.Examples.Performance.PressureDrop;
 model ParallelDpOptimised
   "Parallel connection with prescribed pressure difference and optimised parameters"
   extends ParallelDp(resParallel(each from_dp=true));
+
+  extends AixLib.Icons.ibpsa;
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

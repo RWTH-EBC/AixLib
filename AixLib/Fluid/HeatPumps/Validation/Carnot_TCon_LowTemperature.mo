@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatPumps.Validation;
 model Carnot_TCon_LowTemperature
   "Test model for Carnot_TCon with low condenser leaving water temperature"
   extends Examples.Carnot_TCon(TConLvg(height=-32), sou1(use_T_in=true));
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Ramp TConEnt(
     duration=60,
     offset=273.15 + 20,

@@ -2,6 +2,8 @@ within AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature;
 model VDI6007 "Equivalent air temperature as defined in VDI 6007 Part 1"
   extends BaseClasses.PartialVDI6007;
 
+  extends AixLib.Icons.ibpsa;
+
 initial equation
   assert(noEvent(abs(sum(wfWall) + sum(wfWin) + wfGro - 1) < 0.1),
   "The sum of the weighting factors (walls,windows and ground)  is

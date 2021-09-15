@@ -1,6 +1,8 @@
 within AixLib.Fluid.Sources.Examples;
 model PropertySource_h "Model that illustrates the use of PropertySource_h"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"});
 
   AixLib.Fluid.Sources.PropertySource_h proSouXi(

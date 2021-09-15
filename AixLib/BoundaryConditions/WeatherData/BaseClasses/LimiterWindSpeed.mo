@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block LimiterWindSpeed "Block that limits the wind speed"
   extends PartialLimiterMin;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput winSpe(
     final unit="m/s") = max(0, u) "Wind speed"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

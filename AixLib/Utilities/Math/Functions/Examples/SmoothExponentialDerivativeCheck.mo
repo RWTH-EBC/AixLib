@@ -2,6 +2,8 @@ within AixLib.Utilities.Math.Functions.Examples;
 model SmoothExponentialDerivativeCheck
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real delta = 0.5 "Smoothing area";
   Real x "Independent variable";
   Real y "Approximate function value";

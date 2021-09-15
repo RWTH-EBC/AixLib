@@ -2,6 +2,8 @@ within AixLib.Utilities.IO.Files.BaseClasses;
 model FileWriter "Partial model for writing results to a .csv file"
   extends Modelica.Blocks.Icons.DiscreteBlock;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Integer nin
     "Number of inputs"
     annotation(Evaluate=true, Dialog(connectorSizing=true));

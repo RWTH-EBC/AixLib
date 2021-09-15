@@ -3,6 +3,8 @@ model TwoWayValveParameterization
   "Model to test and illustrate different parameterization for valves"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Water;
 
 

@@ -1,6 +1,8 @@
 within AixLib.Fluid.FMI.ExportContainers;
 partial block PartialTwoPort
   "Partial block to be used as a container to export a thermofluid flow model with two ports"
+
+  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(

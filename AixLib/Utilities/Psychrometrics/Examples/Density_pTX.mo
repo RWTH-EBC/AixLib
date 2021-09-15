@@ -2,6 +2,8 @@ within AixLib.Utilities.Psychrometrics.Examples;
 model Density_pTX "Model to test the density computation"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
 

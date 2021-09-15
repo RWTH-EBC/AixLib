@@ -3,6 +3,8 @@ model FiniteLineSource_Erfint
   "Test case for the evaluation of the integral of the error function"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Real u "Independent variable";
   Real erfint "Integral of the error function";
   Real erfint_num "Numerical integral of the error function";

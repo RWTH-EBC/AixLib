@@ -3,6 +3,8 @@ model MixingVolumeMoistureReverseFlowPrescribedHeatFlowRate
   "Validation model for mixing volume with moisture input and flow reversal and prescribed heat flow rate"
   extends MixingVolumeMoistureReverseFlow(
     prescribedHeatFlowRate=true);
+
+  extends AixLib.Icons.ibpsa;
   annotation (Documentation(
 info="<html>
 <p>

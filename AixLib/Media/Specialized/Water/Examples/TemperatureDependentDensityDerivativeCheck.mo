@@ -3,6 +3,8 @@ model TemperatureDependentDensityDerivativeCheck
   "Model that tests the derivative implementation"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
    package Medium =
       AixLib.Media.Specialized.Water.TemperatureDependentDensity
     "Medium model";

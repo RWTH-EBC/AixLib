@@ -2,6 +2,8 @@ within AixLib.Utilities.Psychrometrics.Examples;
 model TWetBul_TDryBulXi
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
 
@@ -21,8 +23,8 @@ model TWetBul_TDryBulXi
     height=(0.0133 - 0.0175),
     offset=0.0175) "Humidity concentration"
                  annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-  AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBulApp(redeclare
-      package Medium = Medium, approximateWetBulb=true)
+  AixLib.Utilities.Psychrometrics.TWetBul_TDryBulXi wetBulApp(redeclare package
+              Medium = Medium, approximateWetBulb=true)
     "Model for wet bulb temperature"
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
 equation

@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
 block BrighteningCoefficient "Circumsolar and horizon brightening coefficients"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   import H = AixLib.Utilities.Math.Functions.regStep;
   Modelica.Blocks.Interfaces.RealInput zen(
     quantity="Angle",

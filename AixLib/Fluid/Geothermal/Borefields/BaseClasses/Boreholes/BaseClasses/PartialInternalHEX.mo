@@ -1,6 +1,8 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses;
 partial model PartialInternalHEX
   "Partial model to implement the internal heat exchanger of a borehole segment"
+
+  extends AixLib.Icons.ibpsa;
   parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template
     borFieDat "Borefield parameters"
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));

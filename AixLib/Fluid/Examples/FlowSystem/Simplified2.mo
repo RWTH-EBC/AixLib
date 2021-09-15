@@ -5,6 +5,8 @@ model Simplified2 "Using from_dp"
     valSouth2(each from_dp=true),
     valNorth1(each from_dp=true),
     valNorth2(each from_dp=true));
+
+  extends AixLib.Icons.ibpsa;
   annotation (Documentation(info="<html>
 <p>
 The model is simplified: using <code>from_dp</code> to find more efficient tearing variables.

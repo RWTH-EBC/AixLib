@@ -6,6 +6,8 @@ model MixingVolumeMFactor
       T=Medium.T_default),
   vol(mSenFac=10),
     bou(nPorts=3));
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Fluid.MixingVolumes.MixingVolume volMFactor(
     redeclare package Medium = Medium,
     mSenFac=10,

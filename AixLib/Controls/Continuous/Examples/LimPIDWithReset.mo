@@ -3,6 +3,8 @@ model LimPIDWithReset
   "Example that demonstrates the controller output reset"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Plant plaWitRes "Plant connected to controller with reset" annotation (
       Placement(transformation(extent={{20,40},{40,60}})));
   Controller conWitRes(reset=AixLib.Types.Reset.Parameter)

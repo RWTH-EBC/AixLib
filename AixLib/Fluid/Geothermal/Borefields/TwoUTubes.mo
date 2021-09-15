@@ -3,6 +3,8 @@ model TwoUTubes
   "Borefield model containing double U-tube boreholes"
   extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield(
     redeclare AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.TwoUTube borHol);
+
+  extends AixLib.Icons.ibpsa;
   annotation (
   defaultComponentName="borFie",
   Documentation(info="<html>

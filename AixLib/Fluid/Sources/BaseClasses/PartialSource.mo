@@ -2,6 +2,8 @@ within AixLib.Fluid.Sources.BaseClasses;
 partial model PartialSource
   "Partial component source with one fluid connector"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(

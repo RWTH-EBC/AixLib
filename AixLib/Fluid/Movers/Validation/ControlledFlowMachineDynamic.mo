@@ -7,6 +7,8 @@ model ControlledFlowMachineDynamic
     fan1(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
     fan2(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
     fan3(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
+
+  extends AixLib.Icons.ibpsa;
   annotation (
 experiment(Tolerance=1e-6, StopTime=600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/ControlledFlowMachineDynamic.mos"

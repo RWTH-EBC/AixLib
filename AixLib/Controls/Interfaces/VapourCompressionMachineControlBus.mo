@@ -1,4 +1,4 @@
-within AixLib.Controls.Interfaces;
+﻿within AixLib.Controls.Interfaces;
 expandable connector VapourCompressionMachineControlBus
   "Standard data bus with heat pump or chiller information"
 extends Modelica.Icons.SignalBus;

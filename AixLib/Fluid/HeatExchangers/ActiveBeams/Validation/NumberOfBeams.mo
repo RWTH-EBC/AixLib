@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatExchangers.ActiveBeams.Validation;
 model NumberOfBeams
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package MediumA = AixLib.Media.Air "Medium model for air";
 
   package MediumW = AixLib.Media.Water "Medium model for water";

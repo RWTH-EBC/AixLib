@@ -3,6 +3,8 @@ model OneRoom
   "Model with one room for the validation of the multizone air exchange models"
 
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
 
   AixLib.Fluid.MixingVolumes.MixingVolume volEas(

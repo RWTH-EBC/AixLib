@@ -14,6 +14,8 @@ model RoomWithoutLatentGain
       endTime2=0,
       startTime3=0,
       endTime3=0));
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Constant QLat_flow(k=0) "Zero latent heat gain"
     annotation (Placement(
     transformation(

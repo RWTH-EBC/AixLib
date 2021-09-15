@@ -2,6 +2,8 @@ within AixLib.Fluid.FMI.BaseClasses;
 block hOut_toT "Conversion from h to T"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -9,8 +11,8 @@ block hOut_toT "Conversion from h to T"
   Modelica.Blocks.Interfaces.RealInput h(final unit="J/kg") "Specific enthalpy"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}})));
 
-  Modelica.Blocks.Interfaces.RealInput Xi[Medium.nXi](each final unit="kg/kg") if
-       Medium.nXi > 0 "Water vapor concentration in kg/kg total air"
+  Modelica.Blocks.Interfaces.RealInput Xi[Medium.nXi](each final unit="kg/kg")
+    if Medium.nXi > 0 "Water vapor concentration in kg/kg total air"
     annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
 
   Modelica.Blocks.Interfaces.RealOutput T(final unit="K",

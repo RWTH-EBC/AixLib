@@ -2,6 +2,8 @@ within AixLib.Controls.SetPoints;
 block OccupancySchedule "Occupancy schedule with look-ahead"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real occupancy[:]=3600*{7, 19}
     "Occupancy table, each entry switching occupancy on or off";
   parameter Boolean firstEntryOccupied = true

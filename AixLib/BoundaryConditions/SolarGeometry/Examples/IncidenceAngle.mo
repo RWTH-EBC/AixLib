@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.SolarGeometry.Examples;
 model IncidenceAngle "Test model for solar incidence angle"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAngHor(
     til=AixLib.Types.Tilt.Ceiling,
     lat=0.73097781993588,

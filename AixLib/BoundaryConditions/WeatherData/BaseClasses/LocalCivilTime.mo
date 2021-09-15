@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block LocalCivilTime "Converts the clock time to local civil time."
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput cloTim(
     final quantity="Time",
     final unit="s") "Clock time"

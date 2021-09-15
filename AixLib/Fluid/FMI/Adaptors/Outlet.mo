@@ -1,6 +1,8 @@
 within AixLib.Fluid.FMI.Adaptors;
 model Outlet "Adaptor for connecting a fluid outlet to the FMI interface"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -28,8 +30,8 @@ model Outlet "Adaptor for connecting a fluid outlet to the FMI interface"
         transformation(extent={{-110,-10},{-90,10}}),
           iconTransformation(extent={{-110,
             -10},{-90,10}})));
-  AixLib.Fluid.FMI.Interfaces.PressureInput p if
-       use_p_in "Pressure to be sent to outlet"
+  AixLib.Fluid.FMI.Interfaces.PressureInput p
+    if use_p_in "Pressure to be sent to outlet"
               annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},

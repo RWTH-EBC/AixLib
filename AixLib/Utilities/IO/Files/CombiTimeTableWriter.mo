@@ -5,6 +5,8 @@ model CombiTimeTableWriter
     final delimiter="\t",
     final isCombiTimeTable=true);
 
+  extends AixLib.Icons.ibpsa;
+
 initial algorithm
   if writeHeader then
     str :="# time" + delimiter;

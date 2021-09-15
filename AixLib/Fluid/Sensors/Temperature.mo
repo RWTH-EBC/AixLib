@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors;
 model Temperature "Ideal one port temperature sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput T(final quantity="ThermodynamicTemperature",
                                           final unit = "K",
                                           min=0,

@@ -3,6 +3,8 @@ model LimPIDReset
   "Test model for PID controller with optional intgerator reset"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Sources.Sine setPoi(freqHz=1) "Set point signal"
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
   AixLib.Controls.Continuous.LimPID limPIDPar(

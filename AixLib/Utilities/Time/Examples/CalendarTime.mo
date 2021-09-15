@@ -1,6 +1,8 @@
 within AixLib.Utilities.Time.Examples;
 model CalendarTime "Example for the calendar time model"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.Time.CalendarTime calendarTime2016(
     zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2016)
     "Computes date and time assuming time=0 corresponds to new year 2016"

@@ -2,6 +2,8 @@ within AixLib.Fluid.BaseClasses.FlowModels.Validation;
 model BasicFlowFunction_m_flow_DerivativeCheck2
   "Model that checks the correct implementation of the 2nd order derivative of the flow function"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.Diagnostics.CheckEquality cheEqu1(
     threShold=1e-3)
     "Block for checking integration error";

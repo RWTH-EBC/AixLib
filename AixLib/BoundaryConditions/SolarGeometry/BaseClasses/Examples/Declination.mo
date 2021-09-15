@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Examples;
 model Declination "Test model for declination"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination decAng
     "Declination angle"
     annotation (Placement(transformation(extent={{20,0},{40,20}})));

@@ -3,6 +3,8 @@ model VDI6007WithWindow
   "Equivalent air temperature as defined in VDI 6007 Part 1 with modifications"
   extends BaseClasses.PartialVDI6007;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWinOut
     "Windows' convective coefficient of heat transfer (outdoor)";
 

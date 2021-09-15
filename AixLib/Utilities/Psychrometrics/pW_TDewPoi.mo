@@ -2,6 +2,8 @@ within AixLib.Utilities.Psychrometrics;
 block pW_TDewPoi
   "Model to compute the water vapor pressure for a given dew point temperature of moist air"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput p_w "Water vapor partial pressure"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput T(final quantity="ThermodynamicTemperature",

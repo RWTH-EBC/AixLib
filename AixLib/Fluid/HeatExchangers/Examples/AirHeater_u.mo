@@ -8,6 +8,8 @@ model AirHeater_u
     Q_flow_nominal=30*6*6,
     mov(nominalValuesDefineDefaultPressureCurve=true, dp_nominal=1200));
 
+  extends AixLib.Icons.ibpsa;
+
   HeaterCooler_u hea(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,

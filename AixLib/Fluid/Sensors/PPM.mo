@@ -8,6 +8,8 @@ model PPM
                    each max=1)));
   extends Modelica.Icons.RotationalSensor;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter String substanceName = "CO2" "Name of trace substance";
 
   parameter Modelica.SIunits.MolarMass MM=

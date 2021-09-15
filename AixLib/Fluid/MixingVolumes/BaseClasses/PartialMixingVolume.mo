@@ -3,6 +3,8 @@ model PartialMixingVolume
   "Partial mixing volume with inlet and outlet ports (flow reversal is allowed)"
 
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+
+  extends AixLib.Icons.ibpsa;
   parameter Boolean initialize_p = not Medium.singleState
     "= true to set up initial equations for pressure"
     annotation(HideResult=true, Evaluate=true, Dialog(tab="Advanced"));
@@ -62,8 +64,8 @@ protected
     hOut(start=Medium.specificEnthalpy_pTX(
                  p=p_start,
                  T=T_start,
-                 X=X_start))) if
-         useSteadyStateTwoPort "Model for steady-state balance if nPorts=2"
+                 X=X_start)))
+      if useSteadyStateTwoPort "Model for steady-state balance if nPorts=2"
         annotation (Placement(transformation(extent={{20,0},{40,20}})));
   AixLib.Fluid.Interfaces.ConservationEquation dynBal(
     final simplify_mWat_flow = simplify_mWat_flow,
@@ -79,8 +81,8 @@ protected
     final initialize_p = initialize_p,
     m(start=V*rho_start),
     nPorts=nPorts,
-    final mSenFac=mSenFac) if
-         not useSteadyStateTwoPort "Model for dynamic energy balance"
+    final mSenFac=mSenFac)
+      if not useSteadyStateTwoPort "Model for dynamic energy balance"
     annotation (Placement(transformation(extent={{60,0},{80,20}})));
 
   // Density at start values, used to compute initial values and start guesses

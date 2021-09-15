@@ -2,6 +2,8 @@ within AixLib.Fluid.Examples.Performance;
 model Example4 "Example 4 model of simple condensing heat exchanger"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air;
   parameter Boolean allowFlowReversal=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal";

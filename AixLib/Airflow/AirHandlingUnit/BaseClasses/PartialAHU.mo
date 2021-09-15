@@ -147,8 +147,8 @@ partial model PartialAHU "Defines necessary parameters and connectors"
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,-4})));
-  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s") if
-   use_Vflow_in_extractAir "Volume flow of extract air"
+  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s")
+if use_Vflow_in_extractAir "Volume flow of extract air"
     annotation (Placement(transformation(extent={{114,80},{86,108}}),
         iconTransformation(extent={{88,32},{80,40}})));
 protected

@@ -5,6 +5,8 @@ extends ExternalObject;
   function constructor
     "Construct an extendable array that can be used to store double valuesCreate empty file"
     extends Modelica.Icons.Function;
+
+  extends AixLib.Icons.ibpsa;
     input String instanceName "Instance name of the file write";
     input String fileName "Name of the file, including extension";
     input Integer numColumns "Number of columns that are written to file";

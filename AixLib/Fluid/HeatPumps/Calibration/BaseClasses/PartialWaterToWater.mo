@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatPumps.Calibration.BaseClasses;
 model PartialWaterToWater
   "Partial model for calibration of water to water heat pumps"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium1 = Modelica.Media.Interfaces.PartialMedium
     "Medium model at the condenser side";
 

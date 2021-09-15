@@ -3,6 +3,8 @@ model MassFlowSource_h
   "Ideal flow source that produces a prescribed mass flow with prescribed specific enthalpy, composition and trace substances"
   extends AixLib.Fluid.Sources.BaseClasses.PartialSource_Xi_C;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Boolean use_m_flow_in = false
     "Get the mass flow rate from the input connector"
     annotation(Evaluate=true, HideResult=true, Dialog(group="Conditional inputs"));

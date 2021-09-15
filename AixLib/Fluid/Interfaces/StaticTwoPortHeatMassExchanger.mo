@@ -5,6 +5,8 @@ model StaticTwoPortHeatMassExchanger
   extends AixLib.Fluid.Interfaces.TwoPortFlowResistanceParameters(
     final computeFlowResistance=(abs(dp_nominal) > Modelica.Constants.eps));
 
+  extends AixLib.Icons.ibpsa;
+
   constant Boolean sensibleOnly "Set to true if sensible exchange only";
   constant Boolean prescribedHeatFlowRate
     "Set to true if the heat flow rate is not a function of the component temperature";

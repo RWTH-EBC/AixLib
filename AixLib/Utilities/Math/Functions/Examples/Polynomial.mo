@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math.Functions.Examples;
 model Polynomial
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   Real x "Function value";
 equation
   x=AixLib.Utilities.Math.Functions.polynomial(x=time^3-2, a={2, 4, -4, 5});

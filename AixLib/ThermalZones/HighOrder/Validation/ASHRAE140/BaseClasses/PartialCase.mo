@@ -127,7 +127,8 @@ partial model PartialCase "This is the base class from which the base cases will
   replaceable parameter DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 windowParam
     constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window parametrization"
     annotation (choicesAllMatching=true);
-  replaceable model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
+  replaceable model CorrSolarGainWin =
+      Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140
     constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 

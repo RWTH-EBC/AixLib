@@ -3,6 +3,8 @@ model ResistanceVolumeFlowReversal
   "System demonstrating impact of allowFlowReversal on number/size of non-linear systems"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
   parameter Real m_flow_nominal=0.1 "Gain value multiplied with input signal";
   AixLib.Fluid.Sources.Boundary_pT bou(

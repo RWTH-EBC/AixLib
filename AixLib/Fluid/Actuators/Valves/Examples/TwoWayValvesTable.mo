@@ -1,6 +1,8 @@
 within AixLib.Fluid.Actuators.Valves.Examples;
 model TwoWayValvesTable "Two way valve with linear opening characteristics"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium";
 
     Modelica.Blocks.Sources.Ramp y(

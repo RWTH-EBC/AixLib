@@ -3,6 +3,8 @@ model PlugFlowPipe
   "Pipe model using spatialDistribution for temperature delay"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector;
 
+  extends AixLib.Icons.ibpsa;
+
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 

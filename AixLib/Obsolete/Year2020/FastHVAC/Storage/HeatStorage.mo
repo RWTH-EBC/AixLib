@@ -123,23 +123,23 @@ public
                                                                     annotation (Placement(transformation(extent={{98,44},{118,64}})));
 
   AixLib.Obsolete.YearIndependent.FastHVAC.Interfaces.EnthalpyPort_a
-    port_HC1_in if                                         use_heatingCoil1
+    port_HC1_in                                         if use_heatingCoil1
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,70},{-90,90}}),
         iconTransformation(extent={{-88,52},{-72,68}})));
   AixLib.Obsolete.YearIndependent.FastHVAC.Interfaces.EnthalpyPort_b
-    port_HC1_out if                                         use_heatingCoil1
+    port_HC1_out                                         if use_heatingCoil1
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}}),
         iconTransformation(extent={{-90,12},{-74,28}})));
 
   AixLib.Obsolete.YearIndependent.FastHVAC.Interfaces.EnthalpyPort_a
-    port_HC2_in if                                         use_heatingCoil2
+    port_HC2_in                                         if use_heatingCoil2
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}}),
         iconTransformation(extent={{-90,-26},{-76,-12}})));
   AixLib.Obsolete.YearIndependent.FastHVAC.Interfaces.EnthalpyPort_b
-    port_HC2_out if                                         use_heatingCoil2
+    port_HC2_out                                         if use_heatingCoil2
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}}),
         iconTransformation(extent={{-90,-66},{-76,-52}})));

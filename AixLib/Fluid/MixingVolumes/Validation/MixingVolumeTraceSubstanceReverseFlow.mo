@@ -9,6 +9,8 @@ model MixingVolumeTraceSubstanceReverseFlow
     gain(k=1/1000),
     bou(C={0.003}));
 
+  extends AixLib.Icons.ibpsa;
+
 equation
   connect(gain.y, volSte.C_flow[1]) annotation (Line(points={{-19,40},{-10,40},{
           -10,-46},{8,-46}}, color={0,0,127}));

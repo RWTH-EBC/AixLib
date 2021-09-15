@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors;
 model SpecificEntropy "Ideal one port specific entropy sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput s(final quantity="SpecificEntropy",
                                           final unit="J/(kg.K)")
     "Specific entropy in port medium"

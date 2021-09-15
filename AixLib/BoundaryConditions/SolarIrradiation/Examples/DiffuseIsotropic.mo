@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.SolarIrradiation.Examples;
 model DiffuseIsotropic
   "Test model for diffuse solar irradiation on a tilted surface using the isotropic model"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   parameter Real rho=0.2 "Ground reflectance";
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=

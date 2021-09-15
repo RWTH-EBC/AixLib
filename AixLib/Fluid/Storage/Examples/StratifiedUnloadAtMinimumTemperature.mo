@@ -2,6 +2,8 @@ within AixLib.Fluid.Storage.Examples;
 model StratifiedUnloadAtMinimumTemperature
   "Example that demonstrates how to draw from a hot water tank at the minimum temperature"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium model";
 
   parameter Modelica.SIunits.Volume VTan=3 "Tank volume";

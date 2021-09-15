@@ -2,6 +2,8 @@ within AixLib.Fluid.Examples.Performance;
 model Example2 "Example 2 model with series pressure components"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";

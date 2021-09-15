@@ -2,6 +2,8 @@ within AixLib.Utilities.Math;
 block SmoothLimit
   "Once continuously differentiable approximation to the limit function"
  extends Modelica.Blocks.Interfaces.SISO;
+
+  extends AixLib.Icons.ibpsa;
  parameter Real deltaX "Width of transition interval";
  parameter Real upper "Upper limit";
  parameter Real lower "Lower limit";

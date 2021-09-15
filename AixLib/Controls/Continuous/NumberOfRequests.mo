@@ -3,6 +3,8 @@ block NumberOfRequests
   "Outputs the number of signals that are above/below a certain threshold"
    extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Integer nin "Number of inputs";
   parameter Real threShold = 0 "Threshold";
   parameter Integer kind

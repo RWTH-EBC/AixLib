@@ -1,6 +1,8 @@
 within AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses;
 model DerivativesCubicSpline "Cubic spline for interpolation"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   parameter Real[:] xd={0,0.5,1};
   parameter Real[size(xd, 1)] yd={0,0.75,1};
 

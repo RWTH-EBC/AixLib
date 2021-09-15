@@ -2,6 +2,8 @@ within AixLib.Fluid.Movers.Validation.BaseClasses;
 partial model FlowMachine_ZeroFlow
   "Base class to test flow machines with zero flow rate"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium = AixLib.Media.Air
       constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
 

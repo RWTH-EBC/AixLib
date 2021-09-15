@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -162,7 +162,7 @@ model HPSystemController
     final TantFre=TantFre,
     final tableUpp=tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
-    final dataTable=dataTable) if         use_sec
+    final dataTable=dataTable)         if use_sec
     annotation (Placement(transformation(extent={{8,-16},{48,24}})));
   Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
@@ -227,8 +227,8 @@ model HPSystemController
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
   AixLib.DataBase.HeatPump.PerformanceData.IcingBlock
     icingBlock(redeclare final function iceFunc =
-        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
-       use_deFro
+        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach)
+    if use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro
     annotation (Placement(transformation(extent={{44,56},{60,72}})));

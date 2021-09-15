@@ -1,6 +1,8 @@
 within AixLib.BoundaryConditions.WeatherData.Examples;
 model ReaderTMY3 "Test model for reading weather data"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data reader"

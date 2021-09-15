@@ -3,6 +3,8 @@ model AggregationCellTimes
   "This validation case shows the construction of the aggregation time and size vectors"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Integer i = 6 "Number of aggregation cells";
   parameter Modelica.SIunits.Time tLoaAgg=10 "Time resolution of load aggregation";
   final parameter Modelica.SIunits.Time[i] nu(each fixed=false)

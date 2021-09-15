@@ -1,6 +1,8 @@
 within AixLib.Fluid.FixedResistances.BaseClasses;
 model PlugFlowTransportDelay "Delay time for given normalized velocity"
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Length length "Pipe length";
   parameter Modelica.SIunits.Length dh
     "Hydraulic diameter (assuming a round cross section area)";

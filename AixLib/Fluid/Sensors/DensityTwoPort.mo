@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors;
 model DensityTwoPort "Ideal two port density sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput d(final quantity="Density",
                                           final unit="kg/m3",
                                           min=0) "Density of the passing fluid"

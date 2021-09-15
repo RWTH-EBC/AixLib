@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors;
 model Velocity "Ideal sensor for flow velocity"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
   extends Modelica.Icons.RotationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   parameter Medium.Density
     d_start=Medium.density(Medium.setState_pTX(p_start, T_start, X_start))
     "Initial or guess value of density"

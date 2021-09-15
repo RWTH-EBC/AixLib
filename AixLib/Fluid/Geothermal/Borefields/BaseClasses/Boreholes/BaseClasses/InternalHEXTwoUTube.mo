@@ -48,6 +48,8 @@ model InternalHEXTwoUTube
       final V=VTubSeg,
       final mSenFac=mSenFac));
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Sources.RealExpression RVol1(y=
     AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.convectionResistanceCircularPipe(
       hSeg=hSeg,

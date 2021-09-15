@@ -5,6 +5,8 @@ model MixingVolumeHeatMoisturePort
     redeclare package Medium = AixLib.Media.Air,
     redeclare AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatMoisturePort vol);
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Sources.Constant const[nEle](each k=0) "Zero input signal"
     annotation (Placement(transformation(extent={{-60,28},{-40,48}})));
 equation

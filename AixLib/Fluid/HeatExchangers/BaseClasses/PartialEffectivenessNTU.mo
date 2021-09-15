@@ -8,6 +8,8 @@ model PartialEffectivenessNTU
       Q2_flow = -Q1_flow,
       mWat1_flow = 0,
       mWat2_flow = 0);
+
+  extends AixLib.Icons.ibpsa;
   import con = AixLib.Fluid.Types.HeatExchangerConfiguration;
   import flo = AixLib.Fluid.Types.HeatExchangerFlowRegime;
 

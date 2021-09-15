@@ -2,6 +2,8 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalRespon
 model FiniteLineSource "Test case for finite line source"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.ThermalDiffusivity aSoi = 1.0e-6 "Ground thermal diffusivity";
   parameter Modelica.SIunits.Distance[2] r = {0.075, 7.0}
     "Radial position of evaluation of the solution";

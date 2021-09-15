@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatExchangers.Validation;
 model HeaterCooler_u "Model that demonstrates the ideal heater model"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air;
 
 

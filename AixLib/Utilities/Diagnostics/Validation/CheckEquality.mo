@@ -2,6 +2,8 @@ within AixLib.Utilities.Diagnostics.Validation;
 model CheckEquality "Validation model for the check equality model"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   AixLib.Utilities.Diagnostics.CheckEquality cheEqu
     "Checks for equality of the input"
     annotation (Placement(transformation(extent={{20,10},{40,30}})));

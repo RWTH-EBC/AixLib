@@ -2,6 +2,8 @@ within AixLib.Airflow.Multizone.Examples;
 model OneOpenDoor "Model with one open and one closed door"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = Modelica.Media.Air.SimpleAir;
 
   AixLib.Airflow.Multizone.DoorDiscretizedOpen dooOpe(

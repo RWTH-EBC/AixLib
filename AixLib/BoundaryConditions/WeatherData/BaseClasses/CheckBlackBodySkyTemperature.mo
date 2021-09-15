@@ -3,6 +3,8 @@ block CheckBlackBodySkyTemperature
   "Check the validity of the black-body sky temperature data"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Temperature TMin(displayUnit="degC") = 203.15
     "Minimum allowed temperature";
   parameter Modelica.SIunits.Temperature TMax(displayUnit="degC") = 343.15

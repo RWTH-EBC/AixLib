@@ -2,6 +2,8 @@ within AixLib.Fluid.FixedResistances.Validation;
 model LosslessPipe "Validation model for lossless pipe"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Air "Medium model";
 
   Modelica.Blocks.Sources.Ramp m_flow(

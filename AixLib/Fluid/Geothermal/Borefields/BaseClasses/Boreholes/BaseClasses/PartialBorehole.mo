@@ -6,6 +6,8 @@ partial model PartialBorehole
   extends AixLib.Fluid.Interfaces.TwoPortFlowResistanceParameters(
     computeFlowResistance=dp_nominal > Modelica.Constants.eps);
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(

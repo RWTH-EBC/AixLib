@@ -2,6 +2,8 @@ within AixLib.Utilities.Psychrometrics;
 block TDewPoi_pW
   "Model to compute the dew point temperature for given water vapor pressure of moist air"
   extends Modelica.Blocks.Icons.Block;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput p_w(final quantity="Pressure",
                                            final unit="Pa",
                                            displayUnit="Pa")

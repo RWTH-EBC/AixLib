@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block SafetyControl "Block including all safety levels"
   extends BaseClasses.PartialSafetyControl;
 
@@ -89,18 +89,18 @@ block SafetyControl "Block including all safety levels"
         origin={130,80})));
   AntiFreeze antiFreeze(final TAntFre=TantFre, final use_antFre=use_antFre)
     annotation (Placement(transformation(extent={{24,-8},{48,12}})));
-  Modelica.Blocks.Routing.BooleanPassThrough boolPasThrDef if
-                                                           not use_deFro
+  Modelica.Blocks.Routing.BooleanPassThrough boolPasThrDef
+                                                        if not use_deFro
     "No 2. Layer" annotation (Placement(transformation(extent={{-92,-50},{-76,
             -34}})), choicesAllMatching=true);
-  Modelica.Blocks.Interfaces.IntegerOutput ERR_opeEnv if
-                                                     use_opeEnv annotation (
+  Modelica.Blocks.Interfaces.IntegerOutput ERR_opeEnv
+                                                  if use_opeEnv annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,-110})));
-  Modelica.Blocks.Interfaces.IntegerOutput ERR_antFre if
-                                                     use_antFre annotation (
+  Modelica.Blocks.Interfaces.IntegerOutput ERR_antFre
+                                                  if use_antFre annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

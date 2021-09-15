@@ -1,6 +1,8 @@
 within AixLib.Fluid.HeatPumps.Compressors.BaseClasses;
 partial model PartialCompressor "Partial compressor model"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package ref = AixLib.Media.Refrigerants.R410A
     "Refrigerant in the component"
     annotation (choicesAllMatching = true);

@@ -5,6 +5,8 @@ model CoupledVolumesSpecializedWaterTemperatureDependentDensity
     redeclare package Medium =
         AixLib.Media.Specialized.Water.TemperatureDependentDensity);
 
+  extends AixLib.Icons.ibpsa;
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

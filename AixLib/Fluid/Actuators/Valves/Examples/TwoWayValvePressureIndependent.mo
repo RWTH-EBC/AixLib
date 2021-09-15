@@ -2,6 +2,8 @@ within AixLib.Fluid.Actuators.Valves.Examples;
 model TwoWayValvePressureIndependent
   "Two way valves with pressure independent opening characteristic"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
     Modelica.Blocks.Sources.Ramp y(

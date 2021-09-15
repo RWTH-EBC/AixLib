@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math;
 block Average "Average of a vector"
   extends Modelica.Blocks.Interfaces.MISO;
+
+  extends AixLib.Icons.ibpsa;
 equation
  y = AixLib.Utilities.Math.Functions.average(u=u, nin=nin);
 annotation (defaultComponentName="ave",

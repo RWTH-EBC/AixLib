@@ -5,6 +5,8 @@ model EvaporatorCondenser
       AixLib.Fluid.MixingVolumes.MixingVolume vol(final
         prescribedHeatFlowRate=false));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.ThermalConductance UA
     "Thermal conductance of heat exchanger";
   parameter Modelica.SIunits.ThermalConductance UA_small=UA/10

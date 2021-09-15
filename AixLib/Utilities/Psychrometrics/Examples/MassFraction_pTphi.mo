@@ -2,6 +2,8 @@ within AixLib.Utilities.Psychrometrics.Examples;
 model MassFraction_pTphi "Unit test for dew point temperature calculation"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
    package Medium1 = AixLib.Media.Air "Medium model";
    package Medium2 = AixLib.Media.Air "Medium model";
     Modelica.Blocks.Sources.Ramp Phi(

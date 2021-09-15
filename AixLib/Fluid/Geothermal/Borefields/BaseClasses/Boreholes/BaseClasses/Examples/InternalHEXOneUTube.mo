@@ -3,6 +3,8 @@ model InternalHEXOneUTube
   "Comparison of the effective borehole thermal resistance  from the thermal network of Bauer et al. with the resistance calculated by singleUTubeResistances (ref)"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Integer nSeg(min=1) = 10
     "Number of segments to use in vertical discretization of the boreholes";
   parameter Modelica.SIunits.Length hSeg = borFieDat.conDat.hBor/nSeg

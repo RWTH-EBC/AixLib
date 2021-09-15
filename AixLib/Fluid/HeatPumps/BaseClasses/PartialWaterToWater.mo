@@ -6,6 +6,8 @@ partial model PartialWaterToWater
     final computeFlowResistance1 = dp1_nominal > 0,
     final computeFlowResistance2 = dp2_nominal > 0);
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package ref = AixLib.Media.Refrigerants.R410A
     "Refrigerant in the component"
     annotation (choicesAllMatching = true);
@@ -64,13 +66,13 @@ partial model PartialWaterToWater
   Modelica.Blocks.Interfaces.BooleanOutput errNegTemDif if enable_temperature_protection
     "if true, compressor disabled since condenser temperature is below evaporator temperature";
 
-  Modelica.Blocks.Interfaces.RealInput y(final unit = "1") if
-    enable_variable_speed == true
+  Modelica.Blocks.Interfaces.RealInput y(final unit = "1")
+ if enable_variable_speed == true
     "Modulating signal for compressor frequency, equal to 1 at full load condition"
     annotation (Placement(transformation(extent={{-140,10},{-100,50}})));
 
-  Modelica.Blocks.Interfaces.IntegerInput stage if
-    enable_variable_speed == false
+  Modelica.Blocks.Interfaces.IntegerInput stage
+ if enable_variable_speed == false
     "Current stage of the heat pump, equal to 1 at full load condition"
     annotation (Placement(transformation(extent={{-140,10},{-100,50}})));
 
@@ -136,12 +138,12 @@ partial model PartialWaterToWater
         origin={50,-6})));
 
 protected
-  Modelica.Blocks.Math.IntegerToReal intToRea if
-    enable_variable_speed == false "Conversion for stage signal"
+  Modelica.Blocks.Math.IntegerToReal intToRea
+ if enable_variable_speed == false "Conversion for stage signal"
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
 
-  Modelica.Blocks.Nonlinear.Limiter lim(final uMin=0, final uMax=1) if
-    enable_variable_speed == false "Limiter for control signal"
+  Modelica.Blocks.Nonlinear.Limiter lim(final uMin=0, final uMax=1)
+ if enable_variable_speed == false "Limiter for control signal"
     annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
 
   Compressors.BaseClasses.TemperatureProtection temPro(

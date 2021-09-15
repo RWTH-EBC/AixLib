@@ -5,6 +5,8 @@ extends ExternalObject;
   function constructor
     "Verify whether a file writer with  the same path exists and cache variable keys"
     extends Modelica.Icons.Function;
+
+  extends AixLib.Icons.ibpsa;
     input String instanceName "Instance name of the file write";
     input String fileName "Name of the file, including extension";
     input Boolean dumpAtDestruction "=true, to write cached values at destruction";

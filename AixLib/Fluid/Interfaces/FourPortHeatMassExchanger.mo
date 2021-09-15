@@ -9,6 +9,8 @@ model FourPortHeatMassExchanger
   extends AixLib.Fluid.Interfaces.FourPortFlowResistanceParameters(
      final computeFlowResistance1=true, final computeFlowResistance2=true);
 
+  extends AixLib.Icons.ibpsa;
+
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 

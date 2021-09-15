@@ -3,6 +3,8 @@ model ConvectionResistanceCircularPipe
   "Validation of the correlation used to evaluate the convection resistance in circular pipes"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Height hSeg = 1.0 "Height of the element";
   parameter Modelica.SIunits.Radius rTub = 0.02 "Tube radius";
   parameter Modelica.SIunits.Length eTub = 0.002 "Tube thickness";

@@ -3,6 +3,8 @@ partial model PartialTwoWayValveKv
   "Partial model for a two way valve using a Kv characteristic"
   extends AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve;
 
+  extends AixLib.Icons.ibpsa;
+
 equation
  kVal = phi*Kv_SI;
  if (dpFixed_nominal > Modelica.Constants.eps) then

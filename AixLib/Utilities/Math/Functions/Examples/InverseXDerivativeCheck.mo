@@ -3,6 +3,8 @@ model InverseXDerivativeCheck
   "Model that checks the correct implementation of the 1st order derivative of InverseXRegularized"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   constant Real gain = 4 "Gain for computing the mass flow rate";
 
   parameter Real delta = 0.7 "Smoothing coefficient";
@@ -17,8 +19,8 @@ initial equation
 equation
   x = time^3*gain;
   y = AixLib.Utilities.Math.Functions.inverseXRegularized(
-    x=  x,
-    delta=  delta);
+    x = x,
+    delta = delta);
   der(y_comp) = AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized(x=x,delta=delta,x_der=der(x));
   err = y-y_comp;
   assert(abs(err) < 1E-3, "Error in implementation.");

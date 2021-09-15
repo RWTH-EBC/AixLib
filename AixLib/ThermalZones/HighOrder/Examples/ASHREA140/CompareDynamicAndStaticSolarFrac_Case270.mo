@@ -27,7 +27,8 @@ model CompareDynamicAndStaticSolarFrac_Case270 "Based on Case270 from validation
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare model WindowModel = Components.WindowsDoors.Window_ASHRAE140,
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140,
     solar_absorptance_OW=0.1,
     redeclare Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions,
     outerWall_South(

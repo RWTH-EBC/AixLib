@@ -3,6 +3,8 @@ partial model Outside
   "Boundary that takes weather data, and optionally trace substances, as an input"
   extends AixLib.Fluid.Sources.BaseClasses.PartialSource(final verifyInputs=true);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Boolean use_C_in = false
     "Get the trace substances from the input connector"
     annotation(Evaluate=true, HideResult=true);
@@ -22,8 +24,8 @@ partial model Outside
 protected
   final parameter Boolean singleSubstance = (Medium.nX == 1)
     "True if single substance medium";
-  AixLib.Utilities.Psychrometrics.X_pTphi x_pTphi if
-       not singleSubstance "Block to compute water vapor concentration";
+  AixLib.Utilities.Psychrometrics.X_pTphi x_pTphi
+    if not singleSubstance "Block to compute water vapor concentration";
 
   Modelica.Blocks.Interfaces.RealInput T_in_internal(final unit="K",
                                                      displayUnit="degC")

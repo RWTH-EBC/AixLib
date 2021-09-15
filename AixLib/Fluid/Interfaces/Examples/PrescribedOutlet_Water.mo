@@ -9,6 +9,8 @@ model PrescribedOutlet_Water
     cooLimPow(use_X_wSet=false),
     heaCooUnl(use_X_wSet=false));
 
+  extends AixLib.Icons.ibpsa;
+
 equation
   connect(setHeaHigPow.y[1], heaHigPow.TSet) annotation (Line(points={{-39,120},
           {-20,120},{-20,94},{-11,94}}, color={0,0,127}));

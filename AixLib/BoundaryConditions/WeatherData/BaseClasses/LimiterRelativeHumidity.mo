@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block LimiterRelativeHumidity "Block that limits the relative humidity"
   extends PartialLimiter;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput relHum(
     final unit="1") "Relative humidity"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

@@ -3,6 +3,8 @@ model TraceSubstances "Ideal one port trace substances sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
   extends Modelica.Icons.RotationalSensor;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter String substanceName = "CO2" "Name of trace substance";
 
   Modelica.Blocks.Interfaces.RealOutput C(min=0)

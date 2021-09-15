@@ -3,6 +3,8 @@ model Measured_SmallScale
   "Long term validation of ground temperature response model using the small scale experiment of Cimmino and Bernier (2015)"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real sizFac=375.0 "Scaling factor of the experiment";
   parameter AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses.SmallScale_Borefield
     borFieDat "Borefield parameters"

@@ -2,6 +2,8 @@ within AixLib.Fluid.MassExchangers.Examples;
 model ConstantEffectiveness
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium1 = AixLib.Media.Air;
  package Medium2 = AixLib.Media.Air;
 

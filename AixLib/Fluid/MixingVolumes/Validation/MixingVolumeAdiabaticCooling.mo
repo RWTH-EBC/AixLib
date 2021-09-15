@@ -3,6 +3,8 @@ model MixingVolumeAdiabaticCooling
   "Validation model for mixing volume with adiabatic cooling"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air "Medium model";
   MixingVolumeMoistAir volSim(
     redeclare package Medium = Medium,

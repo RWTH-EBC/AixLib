@@ -13,6 +13,8 @@ model Heater_T "Heater with prescribed outlet temperature"
       final T_start=T_start,
       final X_start=Medium.X_default));
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.HeatFlowRate QMax_flow(min=0) = Modelica.Constants.inf
     "Maximum heat flow rate for heating (positive)"
     annotation (Evaluate=true);

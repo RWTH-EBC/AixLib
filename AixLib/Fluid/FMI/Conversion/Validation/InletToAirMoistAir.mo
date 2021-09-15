@@ -3,6 +3,8 @@ model InletToAirMoistAir
   "Validation model for inlet to AixLib.Media.Air conversion without trace substances"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium = AixLib.Media.Air
      constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
   parameter Boolean use_p_in = false
@@ -29,8 +31,8 @@ model InletToAirMoistAir
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   Modelica.Blocks.Sources.Constant X_w_in(k=0.01) "Inlet mass fraction"
     annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
-  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01) if
-     Medium.nC > 0 "Trace substances for forward flow"
+  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01)
+  if Medium.nC > 0 "Trace substances for forward flow"
     annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
   AixLib.Fluid.FMI.Conversion.InletToAir conAirRevFlo(redeclare package
       Medium = Medium, allowFlowReversal=true)

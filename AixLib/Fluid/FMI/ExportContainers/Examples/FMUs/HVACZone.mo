@@ -4,6 +4,8 @@ block HVACZone
   extends AixLib.Fluid.FMI.ExportContainers.HVACZone(
     redeclare final package Medium = MediumA, hvacAda(nPorts=2));
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package MediumA = AixLib.Media.Air "Medium for air";
   replaceable package MediumW = AixLib.Media.Water "Medium for water";
 

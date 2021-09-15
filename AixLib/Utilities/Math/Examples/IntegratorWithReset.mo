@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math.Examples;
 model IntegratorWithReset "Test model for integrator with reset"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Constant cons(k=10) "Constant as source term"
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
 

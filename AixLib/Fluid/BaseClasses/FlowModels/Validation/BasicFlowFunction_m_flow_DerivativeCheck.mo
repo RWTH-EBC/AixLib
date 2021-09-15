@@ -3,6 +3,8 @@ model BasicFlowFunction_m_flow_DerivativeCheck
   "Model that checks the correct implementation of the 1st order derivative of the flow function"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   constant Real gain = 0.5 "Gain for computing the mass flow rate";
 
   parameter Real k = 0.35 "Flow coefficient";
@@ -18,7 +20,7 @@ equation
   m_flow = time*gain;
   dp = AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow(
     m_flow=m_flow,
-    k=  k,
+    k = k,
     m_flow_turbulent=m_flow_turbulent);
   der(dp) = der(dp_comp);
   err = dp-dp_comp;

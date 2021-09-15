@@ -4,6 +4,8 @@ model MixingVolumeHeatPortAir
   extends AixLib.Fluid.MixingVolumes.BaseClasses.Validation.MixingVolumeHeatPortWater(
     redeclare package Medium = AixLib.Media.Air);
 
+  extends AixLib.Icons.ibpsa;
+
   annotation (Documentation(info="<html>
 <p>
 Model that validates that the initial conditions are uniquely set

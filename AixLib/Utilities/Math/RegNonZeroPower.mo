@@ -2,6 +2,8 @@ within AixLib.Utilities.Math;
 block RegNonZeroPower
   "Power function, regularized near zero, but nonzero value for x=0"
   extends Modelica.Blocks.Interfaces.SISO;
+
+  extends AixLib.Icons.ibpsa;
   parameter Real n "Exponent";
   parameter Real delta = 0.01 "Abscissa value where transition occurs";
 equation

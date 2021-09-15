@@ -2,6 +2,8 @@ within AixLib.Utilities.Time;
 model CalendarTime
   "Computes the unix time stamp and calendar time from the simulation time"
   extends Modelica.Blocks.Icons.DiscreteBlock;
+
+  extends AixLib.Icons.ibpsa;
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim
     "Enumeration for choosing how reference time (time = 0) should be defined";
   parameter Integer yearRef(min=firstYear, max=lastYear) = 2016

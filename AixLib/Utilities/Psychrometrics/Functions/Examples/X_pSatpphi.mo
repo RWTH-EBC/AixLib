@@ -1,6 +1,8 @@
 within AixLib.Utilities.Psychrometrics.Functions.Examples;
 model X_pSatpphi "Model to test X_pSatpphi function"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
   parameter Modelica.SIunits.Temperature T = 293.15 "Temperature";

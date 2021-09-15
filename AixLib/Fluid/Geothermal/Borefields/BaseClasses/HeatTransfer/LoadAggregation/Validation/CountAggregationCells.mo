@@ -2,6 +2,8 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregati
 model CountAggregationCells "This validation case verifies the counting of the required length of aggregation vectors"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Integer i "Number of aggregation cells";
 
 equation

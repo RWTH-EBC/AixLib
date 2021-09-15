@@ -5,6 +5,8 @@ model MixingVolumeHeatReverseFlow
     AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MixingVolumeReverseFlow(
       gain(k=10));
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeaDyn
     "Prescribed heat flow rate"
     annotation (Placement(transformation(extent={{0,50},{20,70}})));

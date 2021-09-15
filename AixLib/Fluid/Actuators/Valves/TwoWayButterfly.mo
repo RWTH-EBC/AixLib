@@ -6,6 +6,8 @@ model TwoWayButterfly
     final Kv = Kvs,
     final c={0,1.101898284705380E-01, 2.217227395456580,  -7.483401207660790, 1.277617623360130E+01, -6.618045307070130});
 
+  extends AixLib.Icons.ibpsa;
+
 
   parameter Real Kvs "Kv value at fully open valve"
     annotation(choices(

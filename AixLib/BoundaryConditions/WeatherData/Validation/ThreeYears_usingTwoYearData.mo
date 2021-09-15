@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.WeatherData.Validation;
 model ThreeYears_usingTwoYearData
   "Validation model for a simulation spanning three years but using only two years of data"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     computeWetBulbTemperature=false,
     TDewPoiSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,

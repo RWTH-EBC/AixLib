@@ -13,6 +13,8 @@ model TwoWayEqualPercentage
         R,
         l,
         delta0)));
+
+  extends AixLib.Icons.ibpsa;
   parameter Real R=50 "Rangeability, R=50...100 typically";
   parameter Real delta0=0.01
     "Range of significant deviation from equal percentage law";

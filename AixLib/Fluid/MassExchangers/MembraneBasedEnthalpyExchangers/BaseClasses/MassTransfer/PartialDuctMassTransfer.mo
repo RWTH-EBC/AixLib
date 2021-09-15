@@ -1,4 +1,4 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
+﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
 partial model PartialDuctMassTransfer
   "partial model for rectangular duct mass transfer models"
   extends PartialFlowMassTransfer;

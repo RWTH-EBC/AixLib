@@ -10,6 +10,8 @@ model WaterCooler_T
     mov(nominalValuesDefineDefaultPressureCurve=true),
     TOut(y=273.15 + 22 - 5*cos(time/86400*2*Modelica.Constants.pi)));
 
+  extends AixLib.Icons.ibpsa;
+
   SensibleCooler_T coo(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,

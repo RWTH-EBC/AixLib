@@ -1,6 +1,8 @@
 within AixLib.Utilities.IO.Files;
 model JSONWriter "Model for writing results to a json file"
   extends Modelica.Blocks.Icons.DiscreteBlock;
+
+  extends AixLib.Icons.ibpsa;
   parameter Integer nin
     "Number of inputs"
     annotation(Evaluate=true, Dialog(connectorSizing=true));

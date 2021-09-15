@@ -2,6 +2,8 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block LimiterCeilingHeight "Block that limits the relative humidity"
   extends PartialLimiterMin;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.RealOutput ceiHei(
     final unit="m") = max(0, u) "Cloud cover ceiling height"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

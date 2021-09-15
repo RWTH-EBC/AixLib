@@ -3,6 +3,8 @@ model TwoWayTable "Two way valve with table-specified flow characteristics"
   extends BaseClasses.PartialTwoWayValveKv(
     phi=max(0.1*l, phiLooUp.y[1]),
     final l = phiLooUp.table[1, 2]);
+
+  extends AixLib.Icons.ibpsa;
   parameter Data.Generic flowCharacteristics "Table with flow characteristics"
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-80,
             60},{-60,80}})));

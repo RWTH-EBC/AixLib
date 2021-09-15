@@ -1,6 +1,8 @@
 within AixLib.Fluid.Sources.Examples;
 model TraceSubstancesFlowSource
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"});
 
   MixingVolumes.MixingVolume vol(

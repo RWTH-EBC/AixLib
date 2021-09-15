@@ -3,6 +3,8 @@ model FiniteLineSource_Integrand_Length
   "Test case for finite line source integrand function"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real dis_over_len = 0.0005 "Radial distance between borehole axes";
   parameter Modelica.SIunits.Height len150 = 150.0 "Length of emitting borehole";
   parameter Modelica.SIunits.Height len75 = 75.0 "Length of emitting borehole";

@@ -2,6 +2,8 @@ within AixLib.Fluid.Storage.Examples;
 model Stratified "Test model for stratified tank"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Water "Medium model";
 
   AixLib.Fluid.Storage.Stratified tanSim(

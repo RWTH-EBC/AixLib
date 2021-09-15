@@ -1,6 +1,8 @@
 within AixLib.Fluid.Sensors;
 model TemperatureWetBulbTwoPort "Ideal wet bulb temperature sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
+
+  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput T(
     start=TWetBul_start,
     final quantity="ThermodynamicTemperature",

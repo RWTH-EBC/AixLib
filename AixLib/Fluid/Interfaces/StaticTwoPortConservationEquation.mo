@@ -3,6 +3,8 @@ model StaticTwoPortConservationEquation
   "Partial model for static energy and mass conservation equations"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
+  extends AixLib.Icons.ibpsa;
+
   constant Boolean simplify_mWat_flow = true
     "Set to true to cause port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero";
 
@@ -21,11 +23,11 @@ model StaticTwoPortConservationEquation
     "Sensible plus latent heat flow rate transferred into the medium"
     annotation (Placement(transformation(extent={{-140,60},{-100,100}})));
   Modelica.Blocks.Interfaces.RealInput mWat_flow(final quantity="MassFlowRate",
-                                                 unit="kg/s") if
-       use_mWat_flow "Moisture mass flow rate added to the medium"
+                                                 unit="kg/s")
+    if use_mWat_flow "Moisture mass flow rate added to the medium"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}})));
-  Modelica.Blocks.Interfaces.RealInput[Medium.nC] C_flow if
-       use_C_flow "Trace substance mass flow rate added to the medium"
+  Modelica.Blocks.Interfaces.RealInput[Medium.nC] C_flow
+    if use_C_flow "Trace substance mass flow rate added to the medium"
     annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
 
   // Outputs that are needed in models that extend this model

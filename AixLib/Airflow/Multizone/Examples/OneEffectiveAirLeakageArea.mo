@@ -1,6 +1,8 @@
 within AixLib.Airflow.Multizone.Examples;
 model OneEffectiveAirLeakageArea "Model with an effective air leakage area"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
 
   AixLib.Fluid.MixingVolumes.MixingVolume volA(

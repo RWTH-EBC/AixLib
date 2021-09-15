@@ -3,6 +3,8 @@ model MixingVolumeHeatPortWater
   "Validation model for setting the initialization of the pressure for water"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model";
 

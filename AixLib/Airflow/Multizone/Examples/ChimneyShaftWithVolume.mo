@@ -2,6 +2,8 @@ within AixLib.Airflow.Multizone.Examples;
 model ChimneyShaftWithVolume
   "Model with chimney effect and a dynamic model of a shaft"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
 
   AixLib.Fluid.MixingVolumes.MixingVolume roo(

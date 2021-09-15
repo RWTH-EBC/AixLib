@@ -35,6 +35,8 @@ partial model PartialThreeWayValve "Partial three way valve"
     extends AixLib.Fluid.Actuators.BaseClasses.ValveParameters(
       rhoStd=Medium.density_pTX(101325, 273.15+4, Medium.X_default));
 
+  extends AixLib.Icons.ibpsa;
+
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 

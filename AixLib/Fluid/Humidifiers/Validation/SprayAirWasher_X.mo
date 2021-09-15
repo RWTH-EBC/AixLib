@@ -3,6 +3,8 @@ model SprayAirWasher_X
   "Model that demonstrates the spray air washer model, configured as steady-state"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air;
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1

@@ -3,6 +3,8 @@ model PIDHysteresis
   "PID controller with anti-windup, output limiter and output hysteresis"
   extends Modelica.Blocks.Interfaces.SVcontrol;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real eOn = 1
     "if off and control error > eOn, switch to set point tracking"
     annotation (Dialog(group="Hysteresis"));

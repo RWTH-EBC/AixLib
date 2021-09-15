@@ -2,6 +2,8 @@ within AixLib.Fluid.Interfaces.Examples;
 model ReverseFlowHumidifier
   "Model that tests the reverse flow for a humidifier"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
 package Medium = AixLib.Media.Air;
   Modelica.Blocks.Math.Add cheTem(k2=-1)
     "Check whether the outputs of the forward flow and reverse flow model are identical"

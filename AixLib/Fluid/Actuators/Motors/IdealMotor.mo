@@ -2,6 +2,8 @@ within AixLib.Fluid.Actuators.Motors;
 model IdealMotor "Ideal motor model with hysteresis"
   extends Modelica.Blocks.Interfaces.SISO;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real delta(min=0, max=0.5) = 0.05 "Hysteresis";
   parameter Modelica.SIunits.Time tOpe(min=0) = 120 "Opening time";
   parameter Modelica.SIunits.Time tClo(min=0) = tOpe "Closing time";

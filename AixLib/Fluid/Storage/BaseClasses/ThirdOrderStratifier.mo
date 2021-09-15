@@ -3,6 +3,8 @@ model ThirdOrderStratifier
   "Model to reduce the numerical dissipation in a tank"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model" annotation (choicesAllMatching=true);
 

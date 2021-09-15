@@ -1,6 +1,8 @@
 within AixLib.Utilities.Math.Functions.Examples;
 model CubicHermite "Test problem for cubic hermite splines"
   extends Modelica.Icons.Example;
+
+  extends AixLib.Icons.ibpsa;
   parameter Real[:] xd={-1,1,5,6} "Support points";
   parameter Real[size(xd, 1)] yd={-1,1,2,10} "Support points";
   parameter Real[size(xd, 1)] d(each fixed=false)

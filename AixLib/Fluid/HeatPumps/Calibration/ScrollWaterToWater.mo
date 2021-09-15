@@ -25,6 +25,8 @@ model ScrollWaterToWater
     m1_flow_nominal=1.42,
     m2_flow_nominal=1.42);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Real volRat(min = 1.0, unit = "1") = 2.0
     "Built-in volume ratio";
 

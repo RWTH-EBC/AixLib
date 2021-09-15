@@ -2,6 +2,8 @@ within AixLib.Fluid.FMI.Adaptors;
 model HVAC
   "Adaptor for connecting an HVAC system to signal ports which then can be exposed at an FMI interface"
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -35,8 +37,8 @@ model HVAC
         rotation=90,
         origin={-60,-120})));
   Modelica.Blocks.Interfaces.RealOutput X_wZon[nPorts](
-    each final unit="kg/kg") if
-       Medium.nXi > 0
+    each final unit="kg/kg")
+    if Medium.nXi > 0
     "Water mass fraction per total air mass of the backward flowing medium in the connector outlet"
     annotation (Placement(transformation(extent={{20,20},{-20,-20}},
         rotation=90,
@@ -79,8 +81,8 @@ protected
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   AixLib.Fluid.FMI.BaseClasses.X_w_toX x_w_toX(
-    redeclare final package Medium = Medium) if
-       Medium.nXi > 0 "Conversion from X_w to X"
+    redeclare final package Medium = Medium)
+    if Medium.nXi > 0 "Conversion from X_w to X"
     annotation (Placement(transformation(extent={{40,-40},{20,-20}})));
 
   Modelica.Blocks.Sources.RealExpression hSup[nPorts](
@@ -90,14 +92,14 @@ protected
 
   RealVectorExpression XiSup[nPorts](
     each final n = Medium.nXi,
-    final y={inStream(ports[i].Xi_outflow) for i in 1:nPorts}) if
-       Medium.nXi > 0 "Water vapor concentration of supply air"
+    final y={inStream(ports[i].Xi_outflow) for i in 1:nPorts})
+    if Medium.nXi > 0 "Water vapor concentration of supply air"
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
 
   RealVectorExpression CSup[nPorts](
     each final n=Medium.nC,
-    final y={inStream(ports[i].C_outflow) for i in 1:nPorts}) if
-       Medium.nC > 0 "Trace substance concentration of supply air"
+    final y={inStream(ports[i].C_outflow) for i in 1:nPorts})
+    if Medium.nC > 0 "Trace substance concentration of supply air"
     annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
 
   ///////////////////////////////////////////////////////////////////////////

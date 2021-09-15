@@ -3,6 +3,8 @@ model MediumColumnDynamic
   "Vertical shaft with no friction and storage of heat and mass"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
+  extends AixLib.Icons.ibpsa;
+
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(

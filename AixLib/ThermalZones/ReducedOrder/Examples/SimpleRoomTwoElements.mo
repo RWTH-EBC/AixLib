@@ -3,6 +3,8 @@ model SimpleRoomTwoElements
  "Illustrates the use of a thermal zone with two heat conduction elements"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,

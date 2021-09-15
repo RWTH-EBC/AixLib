@@ -3,6 +3,8 @@ model MSLAIT
   "Validation pipe against data from Austrian Institute of Technology with standard library components"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Fluid.Sources.MassFlowSource_T Point1(
     redeclare package Medium = Medium,
     use_T_in=true,

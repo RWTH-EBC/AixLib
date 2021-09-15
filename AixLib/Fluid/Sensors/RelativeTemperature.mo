@@ -1,6 +1,8 @@
 within AixLib.Fluid.Sensors;
 model RelativeTemperature "Ideal relative temperature sensor"
   extends Modelica.Icons.TranslationalSensor;
+
+  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the sensor"
       annotation (choices(

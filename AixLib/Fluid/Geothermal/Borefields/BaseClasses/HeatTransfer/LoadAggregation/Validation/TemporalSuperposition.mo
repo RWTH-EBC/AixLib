@@ -2,6 +2,8 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregati
 model TemporalSuperposition "This validation case applies temporal superposition with truncated vectors"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.TemperatureDifference supPos = AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregation.temporalSuperposition(
       i=6,
       QAgg_flow={2,1e6,3,1e6,1e6},

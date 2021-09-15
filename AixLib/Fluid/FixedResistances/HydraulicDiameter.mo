@@ -4,6 +4,8 @@ model HydraulicDiameter "Fixed flow resistance with hydraulic diameter and m_flo
     final deltaM =  eta_default*dh/4*Modelica.Constants.pi*ReC/m_flow_nominal_pos,
     final dp_nominal=fac*dpStraightPipe_nominal);
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Length dh=sqrt(4*m_flow_nominal/rho_default/v_nominal/Modelica.Constants.pi)
     "Hydraulic diameter (assuming a round cross section area)";
 

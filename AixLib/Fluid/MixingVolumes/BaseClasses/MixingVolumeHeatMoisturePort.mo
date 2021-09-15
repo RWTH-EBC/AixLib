@@ -7,6 +7,8 @@ model MixingVolumeHeatMoisturePort
     steBal(
       final use_mWat_flow = true));
 
+  extends AixLib.Icons.ibpsa;
+
    Modelica.Blocks.Interfaces.RealInput mWat_flow(final quantity="MassFlowRate",
                                                  final unit = "kg/s")
     "Water flow rate added into the medium"

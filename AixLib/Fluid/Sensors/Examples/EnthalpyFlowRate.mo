@@ -2,6 +2,8 @@ within AixLib.Fluid.Sensors.Examples;
 model EnthalpyFlowRate "Test model for the enthalpy flow rate sensors"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   package Medium = AixLib.Media.Air "Medium model";
 
   AixLib.Fluid.Sensors.EnthalpyFlowRate senH_flow(

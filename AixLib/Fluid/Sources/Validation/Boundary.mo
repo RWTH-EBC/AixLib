@@ -2,6 +2,8 @@ within AixLib.Fluid.Sources.Validation;
 model Boundary "Validation model for boundary with different media"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  AixLib.Fluid.Sources.Validation.BaseClasses.BoundarySystem bouWat(
    redeclare package Medium = AixLib.Media.Water)
    "Boundary with water"

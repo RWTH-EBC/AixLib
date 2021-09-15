@@ -2,6 +2,8 @@ within AixLib.Controls.Continuous;
 model OffTimer "Records the time since the input changed to false"
   extends Modelica.Blocks.Icons.PartialBooleanBlock;
 
+  extends AixLib.Icons.ibpsa;
+
   Modelica.Blocks.Interfaces.BooleanInput u "Connector of Boolean input signal"
     annotation (Placement(transformation(
           extent={{-140,-20},{-100,20}})));

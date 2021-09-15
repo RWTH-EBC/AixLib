@@ -3,6 +3,8 @@ block ConvertTime
   "Converts the simulation time to calendar time in scale of 1 year (365 days), or a multiple of a year"
   extends Modelica.Blocks.Icons.Block;
 
+  extends AixLib.Icons.ibpsa;
+
   parameter Modelica.SIunits.Time weaDatStaTim(displayUnit="d") "Start time of weather data";
   parameter Modelica.SIunits.Time weaDatEndTim(displayUnit="d") "End time of weather data";
 

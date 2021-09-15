@@ -2,6 +2,8 @@ within AixLib.Utilities.Math.Functions.Examples;
 model SpliceFunction
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
   Real y "Function value";
 equation
   y=AixLib.Utilities.Math.Functions.spliceFunction(

@@ -6,6 +6,8 @@ model WaterProperties
     redeclare package Medium = AixLib.Media.Water,
     TMin=273.15,
     TMax=373.15);
+
+  extends AixLib.Icons.ibpsa;
 equation
   // Check the implementation of the base properties
   basPro.state.p=p;

@@ -2,6 +2,8 @@ within AixLib.Media.Examples;
 model WaterDerivativeCheck "Model that tests the derivative implementation"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
    package Medium = AixLib.Media.Water;
 
     Modelica.SIunits.Temperature T "Temperature";

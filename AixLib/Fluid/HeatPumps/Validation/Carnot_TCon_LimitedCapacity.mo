@@ -2,6 +2,8 @@ within AixLib.Fluid.HeatPumps.Validation;
 model Carnot_TCon_LimitedCapacity
   "Test model for Carnot_TCon with limited heating capacity"
   extends Examples.Carnot_TCon(heaPum(QCon_flow_max=250000));
+
+  extends AixLib.Icons.ibpsa;
   annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Validation/Carnot_TCon_LimitedCapacity.mos"
         "Simulate and plot"),

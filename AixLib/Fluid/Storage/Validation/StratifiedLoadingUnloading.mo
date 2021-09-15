@@ -2,6 +2,8 @@ within AixLib.Fluid.Storage.Validation;
 model StratifiedLoadingUnloading "Test model for stratified tank"
   extends Modelica.Icons.Example;
 
+  extends AixLib.Icons.ibpsa;
+
  package Medium = AixLib.Media.Water "Medium model";
  constant Integer nSeg = 7 "Number of segments in tank";
 
