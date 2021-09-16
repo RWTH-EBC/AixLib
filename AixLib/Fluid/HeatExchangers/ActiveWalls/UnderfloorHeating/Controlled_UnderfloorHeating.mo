@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
-model Controlled_UnderfloorHeating_ROM
+model Controlled_UnderfloorHeating
   "Example for underfloor heating system with two rooms for ideal upward and downward heat flow"
   package MediumAir = AixLib.Media.Air;
   package MediumWater = AixLib.Media.Water;
@@ -91,7 +91,6 @@ equation
   connect(underfloorHeatingSystem.T_FlowNominal, boundary.T_in) annotation (
       Line(points={{-26,-14.4},{-42,-14.4},{-42,-22},{-94,-22},{-94,4},{-80,4}},
                  color={0,0,127}));
-
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},
             {100,80}}), graphics={
@@ -238,4 +237,4 @@ equation
         Line(points={{82,4},{82,10}}, color={28,108,200})}),     Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,80}})),
     experiment(StopTime=8640000));
-end Controlled_UnderfloorHeating_ROM;
+end Controlled_UnderfloorHeating;

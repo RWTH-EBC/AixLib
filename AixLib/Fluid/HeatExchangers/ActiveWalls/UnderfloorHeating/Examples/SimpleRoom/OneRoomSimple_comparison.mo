@@ -87,7 +87,7 @@ model OneRoomSimple_comparison
   Sources.Boundary_pT              bou1(redeclare package Medium = MediumWater,
       nPorts=1)
     annotation (Placement(transformation(extent={{272,-58},{252,-38}})));
-  Controlled_UnderfloorHeating_ROM controlled_UnderfloorHeating_ROM(
+  Controlled_UnderfloorHeating controlled_UnderfloorHeating_ROM(
     RoomNo=1,
     area={area},
     HeatLoad=-1.*{fixedHeatFlow4.Q_flow},
@@ -96,6 +96,7 @@ model OneRoomSimple_comparison
     d_out={0.017},
     wallTypeFloor={
         testtabs.SimpleBuildingtesttabs.SimpleBuildingtesttabs_DataBase.SimpleBuildingtesttabs_tz_2_upperTABS()},
+
     Controlled=false)
     annotation (Placement(transformation(extent={{282,-16},{332,24}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor2(G=area*
@@ -108,7 +109,7 @@ model OneRoomSimple_comparison
     annotation (Placement(transformation(extent={{328,58},{348,78}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow4(Q_flow=-1000)
     annotation (Placement(transformation(extent={{290,78},{310,98}})));
-  Controlled_UnderfloorHeating_ROM controlled_UnderfloorHeating_ROM1(
+  Controlled_UnderfloorHeating controlled_UnderfloorHeating_ROM1(
     RoomNo=1,
     area={area},
     HeatLoad=-1.*{fixedHeatFlow4.Q_flow},
@@ -117,6 +118,7 @@ model OneRoomSimple_comparison
     d_out={0.017},
     wallTypeFloor={
         testtabs.SimpleBuildingtesttabs.SimpleBuildingtesttabs_DataBase.SimpleBuildingtesttabs_tz_2_upperTABS()},
+
     Controlled=true)
     annotation (Placement(transformation(extent={{376,-76},{426,-36}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor3(G=area*

@@ -9,13 +9,8 @@ model UnderfloorHeatingElement "Pipe Segment of Underfloor Heating System"
     "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics"));
 
-  parameter Integer n_pipe(min = 1) "Number of Pipe Layers" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.SIunits.Length PipeLength "Length of pipe" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.SIunits.Thickness d_a[n_pipe] "Outer Diameters of pipe layers" annotation(Dialog(group = "Panel Heating"));
-  parameter Modelica.SIunits.Thickness d_i[n_pipe] "Inner Diameters of pipe layers" annotation(Dialog(group = "Panel Heating"));
-  parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] "Thermal conductivity of pipe layers" annotation(Dialog(group = "Panel Heating"));
-
   parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
+  parameter Modelica.SIunits.Length PipeLength "Length of pipe";
 
   parameter Integer calculateVol "Calculation method to determine Water Volume" annotation (Dialog(group="Calculation Method to determine Water Volume in Pipe",
         descriptionLabel=true), choices(
@@ -27,15 +22,15 @@ model UnderfloorHeatingElement "Pipe Segment of Underfloor Heating System"
   final parameter Modelica.SIunits.Time tau_nom = V_Water * (rho_default * dis) / m_flow_Circuit;
 
   parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor
-    "Wall type for floor"
-    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor  "Wall type for floor"      annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
   final parameter Integer n_floor(min = 1) = wallTypeFloor.n "Number of floor layers";
-
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling
-    "Wall type for ceiling"
-    annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling  "Wall type for ceiling"   annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
   final parameter Integer n_ceiling(min = 1) = wallTypeCeiling.n "Number of ceiling layers";
+  parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord  "Pipe layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+  final parameter Integer n_pipe(min = 1) = PipeRecord.n "Number of Pipe Layers";
+  final parameter Modelica.SIunits.Thickness d_a[n_pipe] = PipeRecord.d "Outer Diameters of pipe layers";
+  final parameter Modelica.SIunits.Thickness d_i[n_pipe] = PipeRecord.d .- 2*PipeRecord.t "Inner Diameters of pipe layers";
+  final parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] = PipeRecord.lambda "Thermal conductivity of pipe layers";
 
   parameter Modelica.SIunits.Temperature T0(start = 273.15 + 20) "Start Temperature";
 
@@ -75,7 +70,8 @@ model UnderfloorHeatingElement "Pipe Segment of Underfloor Heating System"
         extent={{-7,-8},{7,8}},
         rotation=90,
         origin={0,27})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor "upward heat flow to heated room" annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor
+    "upward heat flow to heated room"                                                             annotation (
       Placement(transformation(extent={{-8,34},{8,50}}), iconTransformation(
           extent={{-10,32},{10,52}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling "downward heat flow" annotation (

@@ -1,9 +1,8 @@
-Controlled_UnderfloorHeating_ROM
+Controlled_UnderfloorHeating
 UnderfloorHeatingSystem
 UnderfloorHeatingRoom
 UnderfloorHeatingCircuit
 UnderfloorHeatingElement
-UnderfloorHeatingElement_ROM
-UnderfloorHeatingRoom_ROM
 BaseClasses
 Examples
+Reduced

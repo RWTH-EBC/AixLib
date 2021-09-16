@@ -1,5 +1,5 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
-model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced;
+model TABSCircuit "One Circuit in an Underfloor Heating System"
  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
         false, final m_flow_nominal = m_flow_Circuit);
   import Modelica.Constants.pi;
@@ -12,20 +12,16 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
       choice=2 "Calculate water volume with time constant",
       radioButtons=true));
   parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
+  parameter Modelica.SIunits.ThermalResistance R_Pipe(min=Modelica.Constants.small) "Resistance of Pipe";
+  parameter Modelica.SIunits.Thickness d_i(min=Modelica.Constants.small) "Inner Diameters of pipe layers" annotation(Dialog(group = "Panel Heating"));
 
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord  "Pipe layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-
-  parameter Modelica.SIunits.MassFlowRate m_flow_Circuit(min=Modelica.Constants.small) "nominal mass flow rate" annotation (Dialog(group = "Panel Heating"));
+  parameter Modelica.SIunits.MassFlowRate m_flow_Circuit "nominal mass flow rate" annotation (Dialog(group = "Panel Heating"));
   final parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal = m_flow_Circuit / rho_default "nominal volume flow rate";
   parameter Modelica.SIunits.PressureDifference dp_Pipe=100*PipeLength
     "Nominal pressure drop" annotation (Dialog(group="Pressure Drop"));
   parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system" annotation (Dialog(group="Pressure Drop"));
   parameter Modelica.SIunits.PressureDifference dpFixed_nominal = 0 "Nominal additional pressure drop e.g. for distributor" annotation (Dialog(group="Pressure Drop"));
 
-
-  parameter Modelica.SIunits.Temperature T_Fmax=302.15        "Maximum surface temperature" annotation (Dialog(group = "Room Specifications"));
   parameter Modelica.SIunits.Temperature T_Room=293.15        "Nominal Room Temperature" annotation (Dialog(group = "Room Specifications"));
 
   parameter Modelica.SIunits.Distance Spacing "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
@@ -33,8 +29,6 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
     "Length of Panel Heating Pipe" annotation (Dialog(group="Panel Heating"));
 
   parameter Integer use_vmax(min = 1, max = 2) "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
-
-  parameter Modelica.SIunits.ThermalResistance R_x = 0 "additional thermal resistance";
 
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
@@ -56,17 +50,20 @@ public
     allowFlowReversal=false)
     annotation (Placement(transformation(extent={{60,-6},{72,6}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatTABS annotation (
       Placement(transformation(extent={{-10,34},{10,54}}), iconTransformation(
           extent={{-8,30},{8,46}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling annotation (
-      Placement(transformation(extent={{-10,-56},{10,-36}}), iconTransformation(
-          extent={{-6,-52},{10,-36}})));
-  BaseClasses.SumT_F sumT_Fm(dis=integer(dis))
-    annotation (Placement(transformation(extent={{16,10},{28,22}})));
-  Modelica.Blocks.Interaction.Show.RealValue T_Fm "arithmetic mean of floor surface temperature"
-    annotation (Placement(transformation(extent={{38,10},{48,22}})));
-  UnderfloorHeatingElement underfloorHeatingElement[dis](
+  AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced.TABSElement
+    TABSElement[dis](
+    redeclare each final package Medium = Medium,
+    each final R_Pipe=R_Pipe*dis,
+    each final d_i = d_i,
+    each final dis=integer(dis),
+    each final T0=T_Room,
+    each m_flow_Circuit=m_flow_Circuit,
+    each use_vmax=use_vmax,
+    each final PipeLength=PipeLength,
+    each calculateVol=calculateVol,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
     each final p_start=p_start,
@@ -74,20 +71,7 @@ public
     each final X_start=X_start,
     each final C_start=C_start,
     each final C_nominal=C_nominal,
-    each final mSenFac=mSenFac,
-    each final energyDynamicsWalls=energyDynamics,
-    each m_flow_Circuit=m_flow_Circuit,
-    each final A=A/dis,
-    redeclare each final package Medium = Medium,
-    each final T0=T_Room,
-    each calculateVol=calculateVol,
-    each final dis=integer(dis),
-    each final PipeLength=PipeLength/dis,
-    each final wallTypeFloor=wallTypeFloor,
-    each final wallTypeCeiling=wallTypeCeiling,
-    each final PipeRecord=PipeRecord,
-    each use_vmax=use_vmax,
-    each R_x=R_x*dis)
+    each final mSenFac=mSenFac)
     annotation (Placement(transformation(extent={{-10,-4},{10,4}})));
 
   AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage val(
@@ -104,30 +88,24 @@ public
         rotation=-90,
         origin={-74,58})));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector
-    thermalCollectorCeiling(m=dis)
-    annotation (Placement(transformation(extent={{-10,-34},{10,-14}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector
-    thermalCollectorFloor(m=dis) annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector HeatCollector(m=dis)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={0,26})));
+        origin={0,24})));
 initial equation
 assert(dp_Pipe + dp_Valve <= 25000, "According to prEN1264 pressure drop in a heating circuit is supposed to be under 250 mbar. Error accuring in" + getInstanceName(), AssertionLevel.warning);
 
-equation
-  assert(
-      sumT_Fm.T_Fm <= T_Fmax,
-      "Surface temperature in" + getInstanceName() + "too high",
-      AssertionLevel.warning);
+
 //OUTER CONNECTIONS
-  connect(port_a, val.port_a)
+equation
+ connect(port_a, val.port_a)
     annotation (Line(points={{-100,0},{-84,0}}, color={0,127,255}));
   connect(val.port_b, TFlow.port_a)
     annotation (Line(points={{-64,0},{-48,0}}, color={0,127,255}));
-  connect(TFlow.port_b, underfloorHeatingElement[1].port_a)
+  connect(TFlow.port_b, TABSElement[1].port_a)
     annotation (Line(points={{-36,0},{-10,0}}, color={0,127,255}));
-  connect(underfloorHeatingElement[dis].port_b, TReturn.port_a)
+  connect(TABSElement[dis].port_b, TReturn.port_a)
     annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));
   connect(TReturn.port_b, port_b)
     annotation (Line(points={{72,0},{100,0}}, color={0,127,255}));
@@ -136,37 +114,28 @@ equation
 
   if dis > 1 then
     for i in 1:(dis-1) loop
-      connect(underfloorHeatingElement[i].port_b, underfloorHeatingElement[i + 1].port_a)
-          annotation (Line(
-            points={{10,0},{10,-10},{-10,-10},{-10,0}},
-            color={0,127,255},
-            pattern=LinePattern.Dash));
+      connect(TABSElement[i].port_b, TABSElement[i + 1].port_a) annotation (
+          Line(
+          points={{10,0},{10,-10},{-10,-10},{-10,0}},
+          color={0,127,255},
+          pattern=LinePattern.Dash));
     end for;
   end if;
 
 // HEAT CONNECTIONS
-  connect(thermalCollectorFloor.port_b, heatFloor) annotation (Line(points={{1.33227e-15,
-          36},{0,36},{0,44}},            color={191,0,0}));
-  connect(thermalCollectorCeiling.port_b, heatCeiling) annotation (Line(points={{0,-34},
-          {0,-46}},                               color={191,0,0}));
   for i in 1:dis loop
-    connect(thermalCollectorFloor.port_a[i], sumT_Fm.port_a[i]) annotation (Line(
-        points={{-1.33227e-15,16},{16,16}},      color={191,0,0}));
-    connect(thermalCollectorCeiling.port_a[i], underfloorHeatingElement[i].heatCeiling)    annotation (Line(points={{0,-14},
-            {0,-4.2},{-0.2,-4.2}},                                                                                                                               color=
-       {191,0,0}));
-    connect(thermalCollectorFloor.port_a[i], underfloorHeatingElement[i].heatFloor)    annotation (Line(points={{
-              -1.33227e-15,16},{0,16},{0,4.2}},                                                                                                                color=
-         {191,0,0}));
   end for;
 
   //OTHER CONNECTIONS
-  connect(sumT_Fm.T_Fm, T_Fm.numberPort)
-    annotation (Line(points={{28.12,16},{37.25,16}}, color={0,0,127}));
   connect(val.y, valveInput)
     annotation (Line(points={{-74,12},{-74,58}}, color={0,0,127}));
 
-
+  connect(heatTABS, HeatCollector.port_b) annotation (Line(points={{0,44},{0,34},
+          {1.33227e-15,34}}, color={191,0,0}));
+  connect(HeatCollector.port_a, TABSElement.heatTabs) annotation (Line(
+      points={{0,14},{0,4.2}},
+      color={191,0,0},
+      smooth=Smooth.Bezier));
    annotation (Icon(coordinateSystem(preserveAspectRatio=false,
         extent={{-100,-40},{100,40}},
         initialScale=0.1), graphics={
@@ -293,7 +262,12 @@ equation
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false,
         extent={{-100,-45},{100,45}},
-        initialScale=0.1)),Documentation(
+        initialScale=0.1), graphics={Line(
+          points={{-138,52}},
+          color={0,0,0},
+          thickness=0.5,
+          smooth=Smooth.Bezier)}),
+                           Documentation(
    info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
@@ -357,4 +331,4 @@ equation
   calculated with the maximum velocity for easier parametrization.
 </p>
 </html>"));
-end UnderfloorHeatingCircuit;
+end TABSCircuit;

@@ -1,24 +1,35 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters;
 model K_H_TypeA
  "Merge of all functions to calculate K_H for underfloor heating type A (EN 1264)"
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+  parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord  "Pipe layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+
+  final parameter Boolean withSheathing = if PipeRecord.n == 2 then true else false "false if pipe has no Sheathing" annotation (choices(checkBox=true));
+  final parameter Boolean Ceiling = if wallTypeCeiling.n == 3 then true else false  "false if ground plate is under panel heating"  annotation (Dialog(group="Room Specifications"), choices(checkBox=true));
+  final parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Ceiling = 5.8824 "Coefficient of heat transfer at floor surface";
+  final parameter Modelica.SIunits.ThermalInsulance R_alphaCeiling = if Ceiling then 1/alpha_Ceiling else 0 "Thermal resistance at the ceiling";
+  final parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Floor = 10.8 "Coefficient of heat transfer at floor surface";
+  final parameter Modelica.SIunits.Thickness s_u = wallTypeFloor.d[1] "thickness of floor screed";
+  final parameter Modelica.SIunits.ThermalConductivity lambda_E = wallTypeFloor.lambda[1] "Thermal conductivity of floor screed";
+  final parameter Modelica.SIunits.ThermalInsulance R_lambdaB0 = if wallTypeFloor.n == 2 then wallTypeFloor.d[2]/wallTypeFloor.lambda[2] else 0 "Thermal resistance of flooring";
+  final parameter Modelica.SIunits.ThermalInsulance R_lambdaIns = wallTypeCeiling.d[1]/wallTypeCeiling.lambda[1] "Thermal resistance of thermal insulation";
+  final parameter Modelica.SIunits.ThermalInsulance R_lambdaCeiling = if Ceiling then wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2]
+    else wallTypeCeiling.d[2]/wallTypeCeiling.lambda[2] + wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] + wallTypeCeiling.d[4]/wallTypeCeiling.lambda[4] "Thermal resistance of ceiling";
+  final parameter Modelica.SIunits.ThermalInsulance R_lambdaPlaster = if Ceiling then wallTypeCeiling.d[3]/wallTypeCeiling.lambda[3] else 0 "Thermal resistance of plaster";
+ final parameter Modelica.SIunits.ThermalConductivity lambda_R = PipeRecord.lambda[1] "Coefficient of heat transfer of pipe material";
+ final parameter Modelica.SIunits.Diameter d_a = PipeRecord.d[1] "outer diameter of pipe";
+ final parameter Modelica.SIunits.ThermalConductivity lambda_M = if withSheathing then PipeRecord.lambda[2] else 0  "Thermal Conductivity for Sheathing" annotation (Dialog(enable = withSheathing));
+ final parameter Modelica.SIunits.Diameter D = if withSheathing then PipeRecord.d[2] else 0  "Outer diameter of pipe including Sheathing" annotation (Dialog(enable = withSheathing));
+ final parameter Modelica.SIunits.Thickness s_R = PipeRecord.t[1] "thickness of pipe wall";
 
  parameter Modelica.SIunits.Distance T "Spacing between tubes";
- parameter Modelica.SIunits.Diameter d_a "outer diameter of pipe";
- parameter Modelica.SIunits.ThermalConductivity lambda_R "Coefficient of heat transfer of pipe material";
  constant Modelica.SIunits.ThermalConductivity lambda_R0 = 0.35;
- parameter Modelica.SIunits.Thickness s_R "thickness of pipe wall";
  constant Modelica.SIunits.Thickness s_R0 = 0.002;
 
- parameter Boolean withSheathing = true "false if pipe has no Sheathing" annotation (choices(checkBox=true));
- parameter Modelica.SIunits.Diameter D = d_a  "Outer diameter of pipe including Sheathing" annotation (Dialog(enable = withSheathing));
  final parameter Modelica.SIunits.Diameter d_M = if withSheathing then D else 0;
- parameter Modelica.SIunits.ThermalConductivity lambda_M = 0  "Thermal Conductivity for Sheathing" annotation (Dialog(enable = withSheathing));
 
- parameter Modelica.SIunits.Thickness s_u "thickness of floor screed";
- parameter Modelica.SIunits.ThermalConductivity lambda_E "Thermal conductivity of floor screed";
- parameter Modelica.SIunits.ThermalInsulance R_lambdaB0 "Thermal resistance of flooring";
  final parameter Modelica.SIunits.ThermalInsulance R_lambdaB = if R_lambdaB0 < 0.1 then 0.1 else R_lambdaB0 "Thermal resistance of flooring used for dimensioning";
-
  final parameter Modelica.SIunits.CoefficientOfHeatTransfer B =  if withSheathing == false then
  if lambda_R == 0.35 and s_R == 0.002 then
    6.7
@@ -35,7 +46,6 @@ model K_H_TypeA
  "system dependent coefficient" annotation (Dialog(enable = false));
  constant Modelica.SIunits.CoefficientOfHeatTransfer B_0 = 6.7 "system dependent coefficient for lambda_R0 = 0.35 W/(m.K) abd s_R0 = 0.002 m";
 
- final parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Floor = 10.8 "Coefficient of heat transfer at floor surface";
  constant Modelica.SIunits.ThermalConductivity lambda_u0 = 1;
  constant Modelica.SIunits.Diameter s_u0 = 0.045;
  final parameter Real a_B = (1 / alpha_Floor + s_u0 / lambda_u0) / (1 / alpha_Floor + s_u0 / lambda_E + R_lambdaB);

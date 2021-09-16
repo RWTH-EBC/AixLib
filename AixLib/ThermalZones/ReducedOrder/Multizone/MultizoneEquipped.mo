@@ -127,7 +127,7 @@ model MultizoneEquipped
   Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
-  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Controlled_UnderfloorHeating_ROM
+  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Controlled_UnderfloorHeating
     controlled_UnderfloorHeating_ROM(
     RoomNo=numTabs,
     area=ATabs,

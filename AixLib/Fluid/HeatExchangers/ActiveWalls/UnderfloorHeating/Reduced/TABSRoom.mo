@@ -1,53 +1,27 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
-model UnderfloorHeatingRoom_ROM
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced;
+model TABSRoom
   "Model for heating of one room with underfloor heating"
   extends UnderfloorHeating.BaseClasses.PartialModularPort_ab(final nPorts=
         CircuitNo, final m_flow_nominal=m_flow_PanelHeating);
    extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
    import Modelica.Constants.pi;
 
-  parameter Boolean ROM=false "False in High order models will be used";
   parameter Integer dis(min=1) "Number of Discreatisation Layers";
   final parameter Integer CircuitNo(min=1) = integer(ceil(PipeLength/maxLength))
     "number of circuits in one room";
   parameter Modelica.SIunits.Area A "Floor Area"
     annotation (Dialog(group="Room Specifications"));
 
-  final parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Ceiling = 5.8824 "Coefficient of heat transfer at Ceiling Surface";
-  final parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Floor = 10.8 "Coefficient of heat transfer at floor surface";
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+  parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord  "Pipe layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
 
-  //ROM
-  // Floor TABS
-  parameter Integer nFloorTabs(min = 1) "Number of RC-elements of Floor tabs"
-    annotation(Dialog(group="Floor tabs", enable=ROM));
-  parameter Modelica.SIunits.ThermalResistance RFloorTabs(
-    each min=Modelica.Constants.small)
-    "Vector of resistances of Floor tabs, from inside to outside"
-    annotation(Dialog(group="Floor tabs", enable=ROM));
-  parameter Modelica.SIunits.ThermalResistance RFloorRemTabs(
-    min=Modelica.Constants.small)
-    "Resistance of remaining resistor RFloorRem between capacity n and outside"
-    annotation(Dialog(group="Floor tabs", enable=ROM));
-  parameter Modelica.SIunits.HeatCapacity CFloorTabs(
-    each min=Modelica.Constants.small)
-    "Vector of heat capacities of Floor tabs, from inside to outside"
-    annotation(Dialog(group="Floor tabs", enable=ROM));
+  final parameter Modelica.SIunits.CoefficientOfHeatTransfer h_turb = 2200 "Coefficient of heat transfer at the inner surface of pipe due to turbulent flow";
+  final parameter Modelica.SIunits.ThermalResistance R_conv = 1 / (h_turb * pi * PipeLength * (PipeRecord.d[1] - 2*PipeRecord.t[1])) "Thermal convective Resistance in pipe";
+  final parameter Modelica.SIunits.ThermalResistance R_cond = sum(log(PipeRecord.d./(PipeRecord.d .- 2*PipeRecord.t))./ (2*pi*PipeLength.*PipeRecord.lambda)) "Thermal Resistance for pipe layers (conduction)";
 
-  // Ceiling TABS
-  parameter Integer nRoofTabs(min = 1) "Number of RC-elements of Roof tabs"
-    annotation(Dialog(group="Roof tabs", enable=ROM));
-  parameter Modelica.SIunits.ThermalResistance RRoofTabs(
-    each min=Modelica.Constants.small)
-    "Vector of resistances of Roof tabs, from inside to outside"
-    annotation(Dialog(group="Roof tabs", enable=ROM));
-  parameter Modelica.SIunits.ThermalResistance RRoofRemTabs(
-    min=Modelica.Constants.small)
-    "Resistance of remaining resistor RRoofRem between capacity n and outside"
-    annotation(Dialog(group="Roof tabs", enable=ROM));
-  parameter Modelica.SIunits.HeatCapacity CRoofTabs(
-    each min=Modelica.Constants.small)
-    "Vector of heat capacities of Roof tabs, from inside to outside"
-    annotation(Dialog(group="Roof tabs", enable=ROM));
+  final parameter Modelica.SIunits.ThermalResistance R_Pipe(min=Modelica.Constants.small) = R_add + R_conv + R_cond
+    "Resistance of resistors RCond_up for upper part";
 
   parameter Integer calculateVol annotation (Dialog(group="Panel Heating",
         descriptionLabel=true), choices(
@@ -71,18 +45,16 @@ model UnderfloorHeatingRoom_ROM
     "Pressure Difference set in regulating valve for pressure equalization" annotation (Dialog(group="Pressure Drop"));
   parameter Modelica.SIunits.PressureDifference dpFixed_nominal =  0  "Additional pressure drop for every heating circuit, e.g. for distributor" annotation (Dialog(group="Pressure Drop"));
 
-  parameter Modelica.SIunits.Temperature T_Fmax=29 + 273.15
+  parameter Modelica.SIunits.Temperature T_Fmax=302.15
     "Maximum surface temperature"
     annotation (Dialog(group="Room Specifications"));
-  parameter Modelica.SIunits.Temperature T_Room=20 + 273.15
+  parameter Modelica.SIunits.Temperature T_Room=293.15
     "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
 
   final parameter Modelica.SIunits.HeatFlux q_Gmax=8.92*(T_Fmax - T_Room)^(1.1)
     "Maxium possible heat flux with given surface temperature and room temperature";
-  parameter Boolean Ceiling "false if ground plate is under panel heating"
-    annotation (Dialog(group="Room Specifications"), choices(checkBox=true));
 
-  parameter Modelica.SIunits.Temperature T_U= Modelica.SIunits.Conversions.from_degC(20)
+  parameter Modelica.SIunits.Temperature T_U=Modelica.SIunits.Conversions.from_degC(20)
     "Nominal Room Temperature lying under panel heating"
     annotation (Dialog(group="Room Specifications"));
   // Pipe
@@ -91,67 +63,42 @@ model UnderfloorHeatingRoom_ROM
   final parameter Modelica.SIunits.Length PipeLength=A/Spacing
     "possible pipe length for given panel heating area";
 
-  parameter
-    UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition PipeMaterial
-    "Pipe Material"
-    annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
-  final parameter Modelica.SIunits.ThermalConductivity lambda_R=PipeMaterial.lambda
-    "Thermal conductivity of pipe material";
-  parameter Modelica.SIunits.Thickness PipeThickness "thickness of pipe wall"
-    annotation (Dialog(group="Panel Heating"));
-  parameter Modelica.SIunits.Diameter d_a "outer diameter of pipe"
-    annotation (Dialog(group="Panel Heating"));
-  final parameter Modelica.SIunits.Diameter d_i=d_a - 2*PipeThickness
-    "inner diameter of pipe";
-
-  parameter Boolean withSheathing=false "false if pipe has no sheathing"
-    annotation (Dialog(group="Panel Heating"), choices(checkBox=true));
-  parameter
-    UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition
-    SheathingMaterial=
-      UnderfloorHeating.BaseClasses.Sheathing_Materials.PVCwithTrappedAir()
-    "Sheathing Material" annotation (Dialog(group="Panel Heating"));
-  final parameter Modelica.SIunits.ThermalConductivity lambda_M=if
-      withSheathing then SheathingMaterial.lambda else 0
-    "Thermal Conductivity for sheathing";
-  parameter Modelica.SIunits.Diameter d(min=d_a) = d_a
-    "Outer diameter of pipe including sheathing"
-    annotation (Dialog(group="Panel Heating", enable=withSheathing));
-  final parameter Modelica.SIunits.Diameter d_M=if withSheathing then d else 0
-    "Outer diameter of sheathing";
+  final parameter Modelica.SIunits.Diameter d_i=PipeRecord.d[1] - 2*PipeRecord.t[1] "inner diameter of pipe";
 
   // Heatflux calculations
-  final parameter Modelica.SIunits.Power Q_F=q*A
+  final parameter Modelica.SIunits.Power Q_F=if q <= q_G then q*A else q_G*A
     "nominal heat flow of panel heating";
+  final parameter Modelica.SIunits.Power Q_out=Q_Nf - Q_F
+    "needed heating power by other heating equipment";
 
-  final parameter Modelica.SIunits.ThermalInsulance R_U = A*(RRoofTabs+RRoofRemTabs)
-  "Thermal resistance of wall layers under panel heating";
-  final parameter Modelica.SIunits.ThermalInsulance R_O = A*(RFloorTabs+RFloorRemTabs)
-  "Thermal resistance of wall layers above panel heating";
+  final parameter Modelica.SIunits.ThermalInsulance R_U = EN_1264.R_U  "Thermal resistance of wall layers under panel heating";
+  final parameter Modelica.SIunits.ThermalInsulance R_O = EN_1264.R_O  "Thermal resistance of wall layers above panel heating";
 
+  final parameter Real K_H=EN_1264.K_H
+    "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
+  final parameter Modelica.SIunits.HeatFlux q_G=EN_1264.q_G
+    "specific limiting heat flux";
   parameter Modelica.SIunits.TemperatureDifference dT_Hi
     "Nominal temperature difference between heating medium"
     annotation (Dialog(group="Panel Heating"));
 
-  final parameter Modelica.SIunits.TemperatureDifference sigma_i=T_Flow -
-      T_Return
+  final parameter Modelica.SIunits.TemperatureDifference sigma_i=T_Flow - T_Return
     "Temperature spread for room (max = 5 for room with highest heat load)"
     annotation (Dialog(group="Room Specifications"));
 
-  final parameter Modelica.SIunits.MassFlowRate m_flow_PanelHeating= A*q/(
-      sigma_i*Cp_Medium)*(1 + (R_O/R_U) + (T_Room - T_U)/(q*R_U))
+  final parameter Modelica.SIunits.MassFlowRate m_flow_PanelHeating= A*q/(sigma_i*Cp_Medium)*(1 + (R_O/R_U) + (T_Room - T_U)/(q*R_U))
     "nominal mass flow rate";
-  final parameter Modelica.SIunits.MassFlowRate m_flow_Circuit=
-      m_flow_PanelHeating/CircuitNo
+  final parameter Modelica.SIunits.MassFlowRate m_flow_Circuit=m_flow_PanelHeating/CircuitNo
     "Nominal mass flow rate in each heating circuit";
   parameter Integer use_vmax(min=1, max=2) "Output if v > v_max (0.5 m/s)"
     annotation (choices(choice=1 "Warning", choice=2 "Error"));
 
-  final parameter Modelica.SIunits.TemperatureDifference dT_HU=
-      UnderfloorHeating.BaseClasses.logDT({T_Flow,T_Return,T_U});
+  final parameter Modelica.SIunits.TemperatureDifference dT_HU = UnderfloorHeating.BaseClasses.logDT({T_Flow,T_Return,T_U});
+  final parameter Modelica.SIunits.ThermalResistance R_add = 1/(K_H*(1 + R_O/R_U*dT_Hi/dT_HU)*A + A*(T_Room-T_U)/(R_U*dT_HU)) - 1/(A/R_O + A/R_U*dT_Hi/dT_HU) - R_pipe - 1/(2200 * pi*d_i*PipeLength) "additional thermal resistance";
+  final parameter Modelica.SIunits.ThermalResistance R_pipe = EN_1264.R_pipe/PipeLength "thermal resistance through pipe layers";
 
-  final parameter Modelica.SIunits.ThermalResistance R_add = 0 "additional thermal resistance";
-  UnderfloorHeatingCircuit underfloorHeatingCircuit[CircuitNo](
+  TABSCircuit tABSCircuit[CircuitNo](
+    redeclare each final package Medium = Medium,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
     each final p_start=p_start,
@@ -159,54 +106,45 @@ model UnderfloorHeatingRoom_ROM
     each final X_start=X_start,
     each final C_start=C_start,
     each final C_nominal=C_nominal,
-    each final ROM=ROM,
     each final mSenFac=mSenFac,
     each final dp_Pipe=dp_Pipe,
     each final dp_Valve=dp_Valve,
     each final dpFixed_nominal=dpFixed_nominal,
-    each final T_Fmax=T_Fmax,
     each final T_Room=T_Room,
-    each final PipeMaterial=PipeMaterial,
-    each final PipeThickness=PipeThickness,
-    each final d_a=d_a,
-    each final withSheathing=withSheathing,
-    each SheathingMaterial=SheathingMaterial,
-    each d=d,
-    redeclare each final package Medium = Medium,
+    each final d_i=d_i,
+    each final R_Pipe=R_Pipe*CircuitNo,
     each final A=A/CircuitNo,
     each calculateVol=calculateVol,
     each final dis=dis,
     each use_vmax=use_vmax,
     each final Spacing=Spacing,
-    each m_flow_Circuit=m_flow_Circuit,
-    each R_x=R_add*CircuitNo,
-    each nFloorTabs=nFloorTabs,
-    each RFloorTabs=if ROM then fill(RFloorTabs*CircuitNo, nFloorTabs) else {0},
-    each RFloorRemTabs=if ROM then RFloorRemTabs*CircuitNo else 0,
-    each CFloorTabs=if ROM then fill(CFloorTabs/CircuitNo, nFloorTabs) else {0},
-    each nRoofTabs=nRoofTabs,
-    each RRoofTabs=if ROM then fill(RRoofTabs*CircuitNo, nRoofTabs) else {0},
-    each RRoofRemTabs=if ROM then RRoofRemTabs*CircuitNo else 0,
-    each CRoofTabs=if ROM then fill(CRoofTabs/CircuitNo, nRoofTabs) else {0})
+    each m_flow_Circuit=m_flow_Circuit)
     annotation (Placement(transformation(extent={{-22,-8},{22,8}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor annotation (
+  BaseClasses.EN1264.HeatFlux EN_1264(
+    final wallTypeFloor = wallTypeFloor,
+    final wallTypeCeiling = wallTypeCeiling,
+    final PipeRecord = PipeRecord,
+    final T_U=T_U,
+    final T_Fmax=T_Fmax,
+    final T_Room=T_Room,
+    final q_Gmax=q_Gmax,
+    final dT_H=dT_Hi,
+    final T=Spacing)
+    annotation (Placement(transformation(extent={{-100,-60},{-60,-40}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatTABS annotation (
       Placement(transformation(extent={{-10,50},{10,70}}), iconTransformation(
           extent={{-10,50},{10,70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling annotation (
-      Placement(transformation(extent={{-10,-90},{10,-70}}), iconTransformation(
-          extent={{-10,-90},{10,-70}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling(m=
-        CircuitNo)
-    annotation (Placement(transformation(extent={{-10,-58},{10,-38}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor(m=
-        CircuitNo)
-    annotation (Placement(transformation(extent={{-10,40},{10,20}})));
-  Modelica.Blocks.Interfaces.RealInput valveInput[CircuitNo] annotation (
-      Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput valveInput annotation (Placement(
+        transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-62,74})));
 
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector CollectorHeat(m=
+        CircuitNo) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={0,32})));
 protected
    parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -216,6 +154,12 @@ protected
     "Specific Heat capacity of medium";
 
 initial equation
+  assert(q_Gmax >= K_H*dT_Hi and q_G >= K_H*dT_Hi, "Panel Heating Parameters evaluate to a limiting heat flux that exceeds the maximum limiting heat flux in"
+     + getInstanceName());
+
+  if Q_out > 1 then
+    Modelica.Utilities.Streams.print("In" + getInstanceName() + "additional heating equipment is required to cover heat load");
+  end if;
   assert(T_Return < T_Flow, "Return Temperature is higher than the Flow Temperature in" + getInstanceName());
 
 equation
@@ -223,31 +167,31 @@ equation
   // FLUID CONNECTIONS
 
   for i in 1:CircuitNo loop
-    connect(ports_a[i], underfloorHeatingCircuit[i].port_a)
+    connect(ports_a[i], tABSCircuit[i].port_a)
       annotation (Line(points={{-100,0},{-22,0}}, color={0,127,255}));
-    connect(underfloorHeatingCircuit[i].port_b, ports_b[i])
+    connect(tABSCircuit[i].port_b, ports_b[i])
       annotation (Line(points={{22,0},{100,0}}, color={0,127,255}));
-
   end for;
 
   // HEAT CONNECTIONS
 
   for i in 1:CircuitNo loop
-    connect(underfloorHeatingCircuit[i].heatCeiling, thermalCollectorCeiling.port_a[i]) annotation (Line(points={{0.44,-8.8},{0.44,-24},{0,-24},{0,-38}},
-          color={191,0,0}));
-    connect(thermalCollectorFloor.port_a[i], underfloorHeatingCircuit[i].heatFloor)
-      annotation (Line(points={{0,20},{0,7.6}}, color={191,0,0}));
+    for v in 1:dis loop
+    end for;
   end for;
-  connect(thermalCollectorCeiling.port_b, heatCeiling)
-    annotation (Line(points={{0,-58},{0,-80}}, color={191,0,0}));
-  connect(heatFloor, thermalCollectorFloor.port_b)
-    annotation (Line(points={{0,60},{0,40}}, color={191,0,0}));
 
   // VALVE CONNECTION
   for i in 1:CircuitNo loop
-  connect(valveInput[i], underfloorHeatingCircuit[i].valveInput) annotation (Line(
-        points={{-62,74},{-62,32},{-16.28,32},{-16.28,11.6}}, color={0,0,127}));
+    connect(valveInput, tABSCircuit[i].valveInput) annotation (Line(points={{-62,74},
+            {-62,43},{-16.28,43},{-16.28,11.6}},
+                                       color={0,0,127}));
   end for;
+  connect(heatTABS, CollectorHeat.port_b)
+    annotation (Line(points={{0,60},{0,42}}, color={191,0,0}));
+  connect(CollectorHeat.port_a, tABSCircuit.heatTABS) annotation (Line(
+      points={{0,22},{0,7.6},{0,7.6}},
+      color={191,0,0},
+      smooth=Smooth.Bezier));
   annotation (
     Dialog(group="Panel Heating", enable=withSheathing),
     choicesAllMatching=true,
@@ -416,4 +360,4 @@ equation
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,
             60}})));
-end UnderfloorHeatingRoom_ROM;
+end TABSRoom;
