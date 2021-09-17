@@ -7,7 +7,7 @@ block OperationalEnvelope
   parameter Boolean use_opeEnv
     "False to allow HP to run out of operational envelope" annotation(choices(checkBox=true));
   parameter Modelica.SIunits.TemperatureDifference dTHyst=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
-    annotation (Dialog(tab="Safety Control", group="Operational Envelope"));
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=use_opeEnv));
     Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_ret_co annotation (
       extent=[-88,38; -76,50], Placement(transformation(extent={{-82,-24},{
             -70,-12}})));

@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -108,6 +108,8 @@ model HPSystemController
       enable=use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
     annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
+  parameter Modelica.SIunits.TemperatureDifference dTHystOperEnv=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=use_opeEnv));
   parameter Boolean use_deFro=true "False if defrost in not considered"
                                     annotation (choices(checkBox=true), Dialog(
         tab="Safety Control",group="Defrost", descriptionLabel = true, enable=use_sec));
@@ -152,6 +154,7 @@ model HPSystemController
     final maxRunPerHou=maxRunPerHou,
     final use_opeEnv=use_opeEnv,
     final use_minLocTime=use_minLocTime,
+    final dTHystOperEnv=dTHystOperEnv,
     pre_n_start=pre_n_start,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
