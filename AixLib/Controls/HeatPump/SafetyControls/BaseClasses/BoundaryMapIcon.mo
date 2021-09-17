@@ -10,8 +10,6 @@ partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
       enable=use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
     annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
-  parameter Real dx = 1 "Delta value used for both upper and lower hysteresis. Used to avoid state events when used as a safety control."
-    annotation (Dialog(tab="Security Control", group="Operational Envelope"));
   parameter Real iconMin=-70
     "Used to set the frame where the icon should appear"
     annotation (Dialog(tab="Dynamic Icon"));

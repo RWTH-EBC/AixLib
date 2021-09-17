@@ -1,12 +1,13 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
   extends BaseClasses.PartialSafetyControl;
   extends BaseClasses.BoundaryMapIcon(final iconMin=-70,
   final iconMax=70);
- parameter Boolean use_opeEnv
-  "False to allow HP to run out of operational envelope" annotation(choices(checkBox=true));
-
+  parameter Boolean use_opeEnv
+    "False to allow HP to run out of operational envelope" annotation(choices(checkBox=true));
+  parameter Modelica.SIunits.TemperatureDifference dTHyst=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope"));
     Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_ret_co annotation (
       extent=[-88,38; -76,50], Placement(transformation(extent={{-82,-24},{
             -70,-12}})));
@@ -16,7 +17,8 @@ block OperationalEnvelope
   BaseClasses.BoundaryMap boundaryMap(                         final tableUpp=
         tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
-    final dataTable=dataTable) if
+    final dataTable=dataTable,
+    final dx=dTHyst) if
                      use_opeEnv
     annotation (Placement(transformation(extent={{-62,-28},{-4,22}})));
   Modelica.Blocks.Sources.BooleanConstant booConOpeEnv(final k=true) if not
