@@ -1,10 +1,11 @@
-within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
+﻿within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
 block BoundaryMap
   "Block which returns false if the input parameters are out of the given charasteristic map.
 For the boundaries of the y-input value, a dynamic hysteresis is used to ensure a used device will stay off a certain time after shutdown."
   extends AixLib.Controls.HeatPump.SafetyControls.BaseClasses.BoundaryMapIcon(
      final iconMin=-70, final iconMax=70);
-  parameter Real dx = 1 "Delta value used for both upper and lower hysteresis. Used to avoid state-events when used as a safety control.";
+  parameter Real dx "Delta value used for both upper and lower hysteresis. Used to avoid state events when used as a safety control."
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope"));
   Modelica.Blocks.Interfaces.BooleanOutput noErr
     "If an error occurs, this will be false"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

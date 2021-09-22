@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block SafetyControl "Block including all safety levels"
   extends BaseClasses.PartialSafetyControl;
 
@@ -29,6 +29,8 @@ block SafetyControl "Block including all safety levels"
       choicesAllMatching=true);
   parameter Real tableUpp[:,2] "Upper boundary of envelope"
     annotation (Dialog(group="Operational Envelope", enable=use_opeEnv and not use_opeEnvFroRec));
+  parameter Modelica.SIunits.TemperatureDifference dTHystOperEnv=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+    annotation (Dialog(group="Operational Envelope", enable=use_opeEnv));
   parameter Boolean pre_n_start=true "Start value of pre(n) at initial time"
     annotation (Dialog(group="OnOffControl", descriptionLabel=true),choices(checkBox=true));
   parameter Boolean use_deFro
@@ -55,7 +57,8 @@ block SafetyControl "Block including all safety levels"
     final use_opeEnv=use_opeEnv,
     final tableUpp=tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
-    final dataTable=dataTable)
+    final dataTable=dataTable,
+    final dTHyst=dTHystOperEnv)
     annotation (Placement(transformation(extent={{-10,-10},{14,12}})));
   OnOffControl onOffController(
     final minRunTime=minRunTime,
