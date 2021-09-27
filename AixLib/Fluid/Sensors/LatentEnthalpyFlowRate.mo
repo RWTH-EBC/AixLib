@@ -7,8 +7,6 @@ model LatentEnthalpyFlowRate
     tau=0);
   extends AixLib.Fluid.BaseClasses.IndexMassFraction(final substanceName="water");
   extends Modelica.Icons.RotationalSensor;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput H_flow(final unit="W")
     "Latent enthalpy flow rate, positive if from port_a to port_b"
     annotation (Placement(transformation(
@@ -214,5 +212,6 @@ First implementation.
 Implementation is based on enthalpy sensor of <code>Modelica.Fluid</code>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end LatentEnthalpyFlowRate;

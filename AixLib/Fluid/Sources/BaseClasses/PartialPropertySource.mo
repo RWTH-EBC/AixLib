@@ -3,8 +3,6 @@ partial model PartialPropertySource
   "Partial model for overriding fluid properties that flow through the component"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Boolean use_Xi_in= false
     "Set to true to get the composition from the input connector"
     annotation(Evaluate=true, Dialog(group="Inputs"));

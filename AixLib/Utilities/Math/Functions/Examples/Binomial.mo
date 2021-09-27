@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Functions.Examples;
 model Binomial "Test case for evaluation of binomial coefficients"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Real bin[10] "Binomial coefficient";
   Integer n "Size of set";
 
@@ -35,5 +33,6 @@ June 6, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Binomial;

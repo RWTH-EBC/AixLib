@@ -6,8 +6,6 @@ partial model PartialEffectiveness
     prescribedHeatFlowRate2=true,
     show_T=false);
 
-  extends AixLib.Icons.ibpsa;
-
   Medium1.Temperature T_in1 = if allowFlowReversal1 then
     fra_a1 * Medium1.temperature(state_a1_inflow) + fra_b1 * Medium1.temperature(state_b1_inflow) else
     Medium1.temperature(state_a1_inflow)
@@ -162,5 +160,6 @@ April 28, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialEffectiveness;

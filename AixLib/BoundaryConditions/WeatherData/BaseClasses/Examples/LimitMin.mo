@@ -1,8 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model LimitMin "Test model for ceiling height check"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.Time.ModelTime modTim
     annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
   AixLib.BoundaryConditions.WeatherData.BaseClasses.LimiterCeilingHeight limCeiHei

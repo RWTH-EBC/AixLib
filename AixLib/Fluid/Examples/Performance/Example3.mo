@@ -3,8 +3,6 @@ model Example3
   "Example 3 model with mixed series/parallel pressure drop components"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";

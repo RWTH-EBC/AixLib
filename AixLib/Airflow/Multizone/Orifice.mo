@@ -4,8 +4,6 @@ model Orifice "Orifice"
     m=0.5,
     k=CD*A*sqrt(2.0/rho_default));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Area A "Area of orifice"
     annotation (Dialog(group="Orifice characteristics"));
   parameter Real CD=0.65 "Discharge coefficient"
@@ -123,5 +121,6 @@ February 4, 2005 by Michael Wetter:<br/>
 Released first version.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Orifice;

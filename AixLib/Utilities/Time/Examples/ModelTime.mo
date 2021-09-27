@@ -1,8 +1,6 @@
 within AixLib.Utilities.Time.Examples;
 model ModelTime "Test model for the ModelTime block"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.Time.ModelTime modTim "Model time"
     annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
 equation

@@ -3,8 +3,6 @@ model InvertingBasicFlowFunction_m_flow
   "Test model that inverts basicFlowFunction_m_flow"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  parameter Real k = 0.5 "Flow coefficient";
  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.5
     "Nominal mass flow rate";
@@ -49,5 +47,6 @@ August 5, 2015, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end InvertingBasicFlowFunction_m_flow;

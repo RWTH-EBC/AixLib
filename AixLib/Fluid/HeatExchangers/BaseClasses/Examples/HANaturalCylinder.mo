@@ -1,8 +1,6 @@
 within AixLib.Fluid.HeatExchangers.BaseClasses.Examples;
 model HANaturalCylinder "Test model for natural convection outside of a coil"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder hANatCyl(redeclare
       package Medium = AixLib.Media.Water,
       ChaLen=0.1,
@@ -40,5 +38,6 @@ equation
         Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder\">
         AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder</a>.
         </p>
-        </html>"));
+        </html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end HANaturalCylinder;

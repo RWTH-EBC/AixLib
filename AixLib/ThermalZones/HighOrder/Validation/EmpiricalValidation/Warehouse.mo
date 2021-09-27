@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
+within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model Warehouse
   import ModelicaServices;
     extends Modelica.Icons.Example;
@@ -9,8 +9,7 @@ model Warehouse
     TWalls_start=283.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_Warehouse Type_Win,
-    redeclare model CorrSolarGainWin =
-        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple)
+    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple)
     annotation (Placement(transformation(extent={{2,-30},{68,42}})));
 
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather(

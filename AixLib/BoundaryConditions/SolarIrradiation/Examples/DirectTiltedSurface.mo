@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.SolarIrradiation.Examples;
 model DirectTiltedSurface
   "Test model for direct solar irradiation on a tilted surface"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Angle lat=37/180*Modelica.Constants.pi "Latitude";
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
         Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
@@ -65,5 +63,6 @@ May 24, 2010, by Wangda Zuo:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end DirectTiltedSurface;

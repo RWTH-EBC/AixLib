@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math;
 block Bicubic "Bicubic function"
   extends Modelica.Blocks.Interfaces.SI2SO;
-
-  extends AixLib.Icons.ibpsa;
  input Real a[10] "Coefficients";
 equation
   y =  AixLib.Utilities.Math.Functions.bicubic(a=a, x1=u1, x2=u2);
@@ -31,5 +29,6 @@ Sep 17, 2010 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Bicubic;

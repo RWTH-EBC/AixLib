@@ -5,8 +5,6 @@ model CO2TransportStep "Model with transport of CO2 through buoyancy driven flow
     volTop(nPorts=3),
     volEas(nPorts=6));
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.Fluid.Sensors.TraceSubstances CO2SenTop(redeclare package Medium = Medium)
     "CO2 sensor"
     annotation (Placement(transformation(extent={{20,120},{40,140}})));
@@ -80,5 +78,6 @@ Buildings.Airflow.Multizone.Validation.ThreeRoomsContam</a>
 and added documentation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end CO2TransportStep;

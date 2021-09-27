@@ -2,8 +2,6 @@ within AixLib.Utilities.Psychrometrics.Functions.Examples;
 model phi_pTX "Model to test phi_pTX"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Pressure p = 101325 "Pressure of the medium";
   Modelica.SIunits.Temperature T "Temperature";
   Modelica.SIunits.MassFraction X_w "Mass fraction";
@@ -35,5 +33,6 @@ Added inverse implementation check
 for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1110\">#1110</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end phi_pTX;

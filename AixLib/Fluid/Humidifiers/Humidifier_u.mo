@@ -7,8 +7,6 @@ model Humidifier_u
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol(
     final prescribedHeatFlowRate=true));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.MassFlowRate mWat_flow_nominal
     "Water mass flow rate at u=1, positive for humidification";
 
@@ -190,5 +188,6 @@ April 17, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Humidifier_u;

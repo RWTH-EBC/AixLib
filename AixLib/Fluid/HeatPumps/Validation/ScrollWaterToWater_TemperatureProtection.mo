@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatPumps.Validation;
 model ScrollWaterToWater_TemperatureProtection
   "Test model for temperature protection of scroll water to water heat pump"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium1 = AixLib.Media.Water "Medium model";
   package Medium2 = AixLib.Media.Water "Medium model";
 
@@ -130,5 +128,6 @@ First implementation.
 See <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ScrollWaterToWater_TemperatureProtection;

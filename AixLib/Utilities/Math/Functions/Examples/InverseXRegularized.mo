@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Functions.Examples;
 model InverseXRegularized
   "Test problem for function that replaces 1/x around the origin by a twice continuously differentiable function"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Real x "Independent variable";
   parameter Real delta = 0.5 "Small value for approximation";
   final parameter Real deltaInv = 1/delta "Inverse value of delta";
@@ -44,5 +42,6 @@ March 8, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end InverseXRegularized;

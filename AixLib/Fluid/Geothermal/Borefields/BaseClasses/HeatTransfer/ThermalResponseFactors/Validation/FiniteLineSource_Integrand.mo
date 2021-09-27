@@ -3,8 +3,6 @@ model FiniteLineSource_Integrand
   "Test case for finite line source integrand function"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Distance dis = 0.075 "Radial distance between borehole axes";
   parameter Modelica.SIunits.Height len1 = 150.0 "Length of emitting borehole";
   parameter Modelica.SIunits.Height burDep1 = 4.0 "Buried depth of emitting borehole";
@@ -40,5 +38,6 @@ July 17, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FiniteLineSource_Integrand;

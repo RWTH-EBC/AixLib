@@ -24,5 +24,6 @@ November 28, 2013, by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end RegNonZeroPower;

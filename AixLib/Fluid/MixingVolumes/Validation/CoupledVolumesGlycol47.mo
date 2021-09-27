@@ -4,8 +4,6 @@ model CoupledVolumesGlycol47
   extends AixLib.Fluid.MixingVolumes.Validation.CoupledVolumesWater(
     redeclare package Medium = Modelica.Media.Incompressible.Examples.Glycol47);
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

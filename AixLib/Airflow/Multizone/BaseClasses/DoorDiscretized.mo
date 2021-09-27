@@ -3,8 +3,6 @@ partial model DoorDiscretized
   "Door model using discretization along height coordinate"
   extends AixLib.Airflow.Multizone.BaseClasses.TwoWayFlowElementBuoyancy;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Integer nCom=10 "Number of compartments for the discretization";
 
   parameter Modelica.SIunits.PressureDifference dp_turbulent(
@@ -170,5 +168,6 @@ Renamed protected parameters for consistency with the naming conventions.
        Released first version.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end DoorDiscretized;

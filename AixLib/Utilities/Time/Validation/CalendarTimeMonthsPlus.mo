@@ -3,8 +3,6 @@ model CalendarTimeMonthsPlus
   "Validation model for the calendar time model with start time slightly higher than the full hour"
   extends AixLib.Utilities.Time.Validation.CalendarTimeMonths;
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (
     __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/Time/Validation/CalendarTimeMonthsPlus.mos"
         "Simulate and plot"),

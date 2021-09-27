@@ -2,8 +2,6 @@ within AixLib.Utilities.Math;
 block SmoothHeaviside
   "Twice continuously differentiable approximation to the Heaviside function"
   extends Modelica.Blocks.Interfaces.SISO;
-
-  extends AixLib.Icons.ibpsa;
  parameter Real delta(min=Modelica.Constants.eps) "Width of transition interval";
 equation
   y = AixLib.Utilities.Math.Functions.smoothHeaviside(x=u, delta=delta);
@@ -72,5 +70,6 @@ July 14, 2010, by Wangda Zuo:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SmoothHeaviside;

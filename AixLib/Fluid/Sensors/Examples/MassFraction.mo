@@ -2,8 +2,6 @@ within AixLib.Fluid.Sensors.Examples;
 model MassFraction "Test model for the mass fraction sensor"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Air
     "Medium model";
 
@@ -71,5 +69,6 @@ April 7, 2009 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MassFraction;

@@ -2,8 +2,6 @@ within AixLib.Fluid.Actuators.Valves.Examples;
 model TwoWayValveTable
   "Two way valve with nonlinear opening characteristics based on a table"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium";
 
     Modelica.Blocks.Sources.Ramp y(
@@ -137,5 +135,6 @@ April 2, 2014 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TwoWayValveTable;

@@ -5,8 +5,6 @@ model TwoWayPressureIndependent "Model of a pressure-independent two way valve"
             from_dp=true,
             phi=max(0.1*l, l + y_actual*(1 - l)));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real l2(min=1e-10) = 0.01
     "Gain for mass flow increase if pressure is above nominal pressure"
     annotation(Dialog(tab="Advanced"));
@@ -272,5 +270,6 @@ January 29, 2015, by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TwoWayPressureIndependent;

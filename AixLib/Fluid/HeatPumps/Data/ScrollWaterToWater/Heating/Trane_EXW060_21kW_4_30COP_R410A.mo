@@ -10,6 +10,7 @@ record Trane_EXW060_21kW_4_30COP_R410A =
     UACon = 3260.47025405,
     UAEva = 41007.3610647)
     "Calibrated parameters for Trane EXW060"
+
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
@@ -25,4 +26,5 @@ March 6, 2017, by Massimo Cimmino:<br/>
 Calibrated parameters.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");

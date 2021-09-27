@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Functions.Examples;
 model RegNonZeroPowerDerivative_2_Check
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real n=0.33 "Exponent";
 
   constant Real gain = 4 "Gain for computing the mass flow rate";
@@ -24,9 +22,9 @@ initial equation
 equation
   x = time^3*gain;
   y = AixLib.Utilities.Math.Functions.regNonZeroPower(
-       x =     x,
-       n =     n,
-       delta = delta);
+       x=      x,
+       n=      n,
+       delta=  delta);
 
   der_y = der(y);
   der_y_comp = der(y_comp);
@@ -59,5 +57,6 @@ April 14, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end RegNonZeroPowerDerivative_2_Check;

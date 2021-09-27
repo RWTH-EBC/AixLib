@@ -2,8 +2,6 @@ within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeTraceSubstance
   "Test model for mixing volume with trace substance input"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"})
     "Medium model";
 

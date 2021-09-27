@@ -6,8 +6,6 @@ model ThermalZones
     nPorts =  3,
     nZon = 2);
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package MediumA = AixLib.Media.Air "Medium for air";
 
   parameter Modelica.SIunits.Volume V=6*10*3 "Room volume";

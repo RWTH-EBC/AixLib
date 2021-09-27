@@ -2,8 +2,6 @@ within AixLib.Fluid.Examples.Performance.BaseClasses;
 partial model Example1 "Example 1 partial model"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
   parameter Real m_flow_nominal=0.1 "Gain value multiplied with input signal";
 
@@ -131,5 +129,6 @@ April 17, 2015, by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Example1;

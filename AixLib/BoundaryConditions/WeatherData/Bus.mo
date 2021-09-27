@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData;
 expandable connector Bus "Data bus that stores weather data"
   extends Modelica.Icons.SignalBus;
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (
     defaultComponentName="weaBus",
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
@@ -22,5 +20,6 @@ June 25, 2010, by Wangda Zuo:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Bus;

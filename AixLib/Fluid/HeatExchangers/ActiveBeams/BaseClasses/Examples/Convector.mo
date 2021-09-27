@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.Examples;
 model Convector
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water "Water model";
 
   AixLib.Fluid.Sources.MassFlowSource_T wat(
@@ -73,5 +71,6 @@ May 20, 2016, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Convector;

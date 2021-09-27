@@ -7,8 +7,6 @@ model TwoPortHeatMassExchanger
   extends AixLib.Fluid.Interfaces.TwoPortFlowResistanceParameters(
     final computeFlowResistance=true);
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 

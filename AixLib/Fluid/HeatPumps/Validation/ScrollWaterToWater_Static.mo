@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatPumps.Validation;
 model ScrollWaterToWater_Static
   "Test model for static scroll water to water heat pump"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium1 = AixLib.Media.Water "Medium model";
   package Medium2 = AixLib.Media.Water "Medium model";
 
@@ -127,5 +125,6 @@ October 18, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ScrollWaterToWater_Static;

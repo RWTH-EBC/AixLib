@@ -5,8 +5,6 @@ model Simplified3 "Neglecting pressure drop in splitters"
     spl1(dp_nominal={0,0,0}),
     spl3(dp_nominal={0,0,0}),
     spl2(dp_nominal={1000,0,0}));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(info="<html>
 <p>
 The model is further simplified by removing some small pressure drops in the bypass.

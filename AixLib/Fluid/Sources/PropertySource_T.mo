@@ -1,8 +1,6 @@
 within AixLib.Fluid.Sources;
 model PropertySource_T
   "Model for overriding fluid properties that flow through the component, using temperature input"
-
-  extends AixLib.Icons.ibpsa;
   // The parameter declaration is before 'extends',
   // since this affects the parameter order in the parameters window.
   parameter Boolean use_T_in= false

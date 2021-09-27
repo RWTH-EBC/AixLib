@@ -1,7 +1,5 @@
 within AixLib.Fluid.FMI.Interfaces;
 connector FluidProperties "Type definition for fluid properties"
-
-  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -15,8 +13,8 @@ connector FluidProperties "Type definition for fluid properties"
 
 
   Medium.Temperature T "Temperature";
-  AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w
-    if Medium.nXi > 0 "Water vapor mass fractions per kg total air";
+  AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w if
+       Medium.nXi > 0 "Water vapor mass fractions per kg total air";
   Medium.ExtraProperty C[Medium.nC] "Properties c_i/m";
 
   annotation (Documentation(info="<html>
@@ -70,5 +68,6 @@ November 8, 2014 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FluidProperties;

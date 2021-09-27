@@ -3,8 +3,6 @@ model MassFlowSource_WeatherData
   "Ideal flow source that produces a prescribed mass flow with prescribed
   trace substances, outside specific enthalpy and mass fraction "
   extends AixLib.Fluid.Sources.BaseClasses.PartialSource(final verifyInputs=true);
-
-  extends AixLib.Icons.ibpsa;
   parameter Boolean use_m_flow_in = false
     "Get the mass flow rate from the input connector"
     annotation(Evaluate=true, HideResult=true);
@@ -18,8 +16,8 @@ model MassFlowSource_WeatherData
     final quantity=Medium.extraPropertiesNames)=fill(0, Medium.nC)
     "Fixed values of trace substances"
     annotation (Dialog(enable = (not use_C_in) and Medium.nC > 0));
-  Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s")
-    if use_m_flow_in "Prescribed mass flow rate"
+  Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s") if
+       use_m_flow_in "Prescribed mass flow rate"
     annotation (Placement(transformation(extent={{-120,60},{-80,100}}),
       iconTransformation(extent={{-120,60},{-80,100}})));
   Modelica.Blocks.Interfaces.RealInput C_in[Medium.nC](
@@ -207,5 +205,6 @@ substances, outside enthalpy and composition. Weather bus is used.
 See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/777\">#777</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MassFlowSource_WeatherData;

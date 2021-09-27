@@ -1,8 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model GetHeaderElement "Test model to get header element"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Angle longitude(fixed=false, displayUnit="deg")
     "Longitude";
   parameter Modelica.SIunits.Angle latitude(fixed=false, displayUnit="deg")

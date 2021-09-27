@@ -30,6 +30,7 @@ December 6, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 
 end Generic;

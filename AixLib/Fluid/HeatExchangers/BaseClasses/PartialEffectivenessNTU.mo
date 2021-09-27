@@ -8,8 +8,6 @@ model PartialEffectivenessNTU
       Q2_flow = -Q1_flow,
       mWat1_flow = 0,
       mWat2_flow = 0);
-
-  extends AixLib.Icons.ibpsa;
   import con = AixLib.Fluid.Types.HeatExchangerConfiguration;
   import flo = AixLib.Fluid.Types.HeatExchangerFlowRegime;
 
@@ -265,5 +263,6 @@ February 12, 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialEffectivenessNTU;

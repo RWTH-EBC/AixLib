@@ -1,8 +1,6 @@
 within AixLib.Utilities.IO.SignalExchange;
 model WeatherStation
   "Implements typical weather measurements with signal exchange blocks"
-
-  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data"
     annotation (Placement(
         transformation(extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-112,

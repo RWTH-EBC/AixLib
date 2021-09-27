@@ -17,8 +17,6 @@ model SpeedControlled_y
       use_inputFilter=false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
-  extends AixLib.Icons.ibpsa;
-
 equation
   connect(gain.y, floMacDyn.y) annotation (Line(
       points={{-25,100},{8,100},{8,30},{29.8,30},{29.8,12}},
@@ -51,5 +49,6 @@ March 24 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SpeedControlled_y;

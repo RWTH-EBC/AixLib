@@ -8,8 +8,6 @@ model GetTimeSpanTMY3_NonzeroStart
     staTim = 30992400,
     endTim = 31863600);
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (
     Documentation(info="<html>
 <p>

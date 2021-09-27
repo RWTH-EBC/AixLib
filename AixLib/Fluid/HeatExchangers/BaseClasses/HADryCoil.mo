@@ -3,8 +3,6 @@ model HADryCoil
   "Sensible convective heat transfer model for air to water coil"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.ThermalConductance UA_nominal(min=0)
     "Thermal conductance at nominal flow"
           annotation(Dialog(tab="General", group="Nominal condition"));

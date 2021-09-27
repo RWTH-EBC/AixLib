@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.BaseClasses;
+within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompression
   "Partial model for compression that contains basic definitions used in 
   various compressor models"
@@ -281,8 +281,8 @@ partial model PartialCompression
              hOut<Medium.dewEnthalpy(Medium.setSat_p(pOut))) then
              (hOut - Medium.bubbleEnthalpy(Medium.setSat_p(pOut)))/
              max(Medium.dewEnthalpy(Medium.setSat_p(pOut)) -
-             Medium.bubbleEnthalpy(Medium.setSat_p(pOut)), 1e-6) else 1.0))
- if show_qua
+             Medium.bubbleEnthalpy(Medium.setSat_p(pOut)), 1e-6) else 1.0)) if
+    show_qua
     "Record containing compressor's vapour qualities";
 
   // Definition of variables

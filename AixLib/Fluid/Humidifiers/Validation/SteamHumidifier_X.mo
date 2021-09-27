@@ -6,8 +6,6 @@ model SteamHumidifier_X
       mWatMax_flow=mWat_flow_nominal,
       massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState));
 
-  extends AixLib.Icons.ibpsa;
-
 annotation (
     __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Humidifiers/Validation/SteamHumidifier_X.mos"
         "Simulate and plot"),

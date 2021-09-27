@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData.Validation;
 model ReaderTMY3HDirNor
   "Test model for calculating the direct normal radiation"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDatInpCon(filNam=
         Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
       HSou=AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor)
@@ -56,5 +54,6 @@ December 06, 2016, by Thierry S. Nouidui:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ReaderTMY3HDirNor;

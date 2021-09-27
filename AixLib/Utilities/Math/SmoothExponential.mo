@@ -2,8 +2,6 @@ within AixLib.Utilities.Math;
 block SmoothExponential
   "Once continuously differentiable approximation to exp(-|x|) in interval |x| < delta"
   extends Modelica.Blocks.Interfaces.SISO;
-
-  extends AixLib.Icons.ibpsa;
   parameter Real delta "Transition point where approximation occurs";
 equation
   y = AixLib.Utilities.Math.Functions.smoothExponential(x=u, delta=delta);

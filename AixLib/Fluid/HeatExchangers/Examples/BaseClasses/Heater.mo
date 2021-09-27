@@ -1,8 +1,6 @@
 within AixLib.Fluid.HeatExchangers.Examples.BaseClasses;
 partial model Heater "Base class for example model for the heater and cooler"
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model";
 

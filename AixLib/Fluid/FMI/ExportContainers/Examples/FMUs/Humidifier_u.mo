@@ -10,8 +10,6 @@ block Humidifier_u
       massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
       final energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
 

@@ -3,8 +3,6 @@ model CylindricalHeatSource_Integrand
   "Test case for cylindrical heat source integrand function"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real Fo = 1.0 "Fourier time";
   parameter Real[4] p = {1, 2, 5, 10} "Ratio of distance over borehole radius";
   Real u "Integration variable";
@@ -36,5 +34,6 @@ July 17, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end CylindricalHeatSource_Integrand;

@@ -14,8 +14,6 @@ model MoistureMixingConservationDynamicBalance
     hSol(k=sum(U_start)),
     mWatFlo3(k=0));
 
-  extends AixLib.Icons.ibpsa;
-
     parameter Modelica.SIunits.Mass[3] m_start(each fixed=false)
     "Initial mass of the mixing volumes";
     parameter Modelica.SIunits.InternalEnergy[3] U_start(each fixed=false)

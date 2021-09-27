@@ -1,7 +1,5 @@
 within AixLib.Fluid.Interfaces;
 partial model PartialTwoPort "Partial component with two ports"
-
-  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(

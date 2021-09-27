@@ -12,8 +12,6 @@ model EthyleneGlycolWater
     T_min=223.15,
     T_max=373.15);
 
-  extends AixLib.Icons.ibpsa;
-
    annotation(experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Antifreeze/Validation/EthyleneGlycolWater.mos"
         "Simulate and plot"),
@@ -36,6 +34,7 @@ December 18, 2020, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 
 end EthyleneGlycolWater;

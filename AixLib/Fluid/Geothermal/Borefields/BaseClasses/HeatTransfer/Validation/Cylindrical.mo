@@ -3,8 +3,6 @@ model Cylindrical
   "Comparison of the Cylindrical with the GroundTemperatureResponse"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Temperature T_start = 295.15
     "Initial soil temperature";
   parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template borFieDat=
@@ -68,5 +66,6 @@ June 13, 2018, by Damien Picard:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Cylindrical;

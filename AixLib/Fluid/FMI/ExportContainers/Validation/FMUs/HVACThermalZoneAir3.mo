@@ -2,8 +2,6 @@ within AixLib.Fluid.FMI.ExportContainers.Validation.FMUs;
 block HVACThermalZoneAir3 "Validation model for the convective HVAC system"
   extends AixLib.Fluid.FMI.ExportContainers.Validation.FMUs.HVACThermalZoneAir1(
     redeclare package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2", "VOC", "CH2O"}));
-
-  extends AixLib.Icons.ibpsa;
 annotation (
     Documentation(info="<html>
 <p>

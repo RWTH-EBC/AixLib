@@ -146,8 +146,8 @@ protected
   Modelica.Blocks.Sources.RealExpression pumpHead(y=head)
     "implements a connectable object that can be cuppled with pumpBus."
     annotation (Placement(transformation(extent={{54,-50},{74,-30}})));
-  Modelica.Blocks.Sources.RealExpression pumpEfficiency(y=eta)
- if calculateEfficiency
+  Modelica.Blocks.Sources.RealExpression pumpEfficiency(y=eta) if
+    calculateEfficiency
     "implements a connectable object that can be cuppled with pumpBus."
     annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
   Modelica.Blocks.Sources.Constant off(k=Modelica.Constants.small)

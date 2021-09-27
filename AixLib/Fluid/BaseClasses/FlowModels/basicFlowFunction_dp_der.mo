@@ -68,5 +68,6 @@ First implementation to avoid in Dymola 2016 the warning
 \"Differentiating ... under the assumption that it is continuous at switching\".
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end basicFlowFunction_dp_der;

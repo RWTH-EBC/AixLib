@@ -19,11 +19,9 @@ model SpeedControlled_y
     gaiSpe(u(final unit="1"),
            final k=1/per.speed_nominal));
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Interfaces.RealInput y(
-    unit="1")
- if inputType == AixLib.Fluid.Types.InputType.Continuous
+    unit="1") if
+    inputType == AixLib.Fluid.Types.InputType.Continuous
     "Constant normalized rotational speed"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -157,5 +155,6 @@ October 31, 2005 by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Cas
 Model added to the Fluid library
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SpeedControlled_y;

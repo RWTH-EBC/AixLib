@@ -2,8 +2,6 @@ within AixLib.ThermalZones.ReducedOrder.Validation.VDI6007;
 model TestCase12 "VDI 6007 Test Case 12 model"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium = Modelica.Media.Air.SimpleAir
    constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
 

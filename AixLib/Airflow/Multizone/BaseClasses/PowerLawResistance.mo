@@ -6,8 +6,6 @@ partial model PowerLawResistance "Flow resistance that uses the power law"
     final m_flow_small=1E-4*abs(m_flow_nominal));
   extends AixLib.Airflow.Multizone.BaseClasses.ErrorControl;
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
@@ -212,5 +210,6 @@ Renamed protected parameters for consistency with the naming conventions.
 <li>February 4, 2005 by Michael Wetter:<br/>
        Released first version.
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PowerLawResistance;

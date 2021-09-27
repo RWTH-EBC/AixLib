@@ -6,8 +6,6 @@ model MassFractionTwoPort "Ideal two port mass fraction sensor"
   extends AixLib.Fluid.BaseClasses.IndexMassFraction(substanceName = "water");
   extends Modelica.Icons.RotationalSensor;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Medium.MassFraction X_start=Medium.X_default[i_x]
     "Initial or guess value of output (= state)"
     annotation (Dialog(group="Initialization"));
@@ -141,5 +139,6 @@ Feb. 8, 2011 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MassFractionTwoPort;

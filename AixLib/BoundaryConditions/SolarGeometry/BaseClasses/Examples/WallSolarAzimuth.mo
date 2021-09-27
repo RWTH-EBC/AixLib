@@ -1,8 +1,6 @@
 within AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Examples;
 model WallSolarAzimuth "Test model for wall solar azimuth angle"
 extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng(
     azi=0,
     lat=lat,
@@ -65,5 +63,6 @@ Feb 01, 2012, by Kaustubh Phalak<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end WallSolarAzimuth;

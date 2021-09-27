@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Examples;
 model ExponentialIntegralE1
   "Test model for exponentialIntegralE1 function "
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Ramp x(duration=30, height=30) "Real signal"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   AixLib.Utilities.Math.ExponentialIntegralE1 E1 "Exponential integral E1"
@@ -25,5 +23,6 @@ AixLib.Utilities.Math.ExponentialIntegralE1</a>.
 July 17, 2018, by Massimo Cimmino:<br/>First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ExponentialIntegralE1;

@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData.Validation;
 model OverAYear_usingOneYearData
   "Validation model for a simulation extending with two months over one year but using data for only one year"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     computeWetBulbTemperature=false,
     TDewPoiSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
@@ -34,6 +32,7 @@ The test script plots the dry bulb temperature for the days 0-10 and 365-375 for
 First implementation for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/842\">issue 842</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 
 end OverAYear_usingOneYearData;

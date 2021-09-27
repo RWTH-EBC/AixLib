@@ -38,5 +38,6 @@ October 7, 2015 by Kevin Sartor:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PipeDataBaseDefinition;

@@ -3,8 +3,6 @@ model PartialStratified
   "Partial model of a stratified tank for thermal energy storage"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
-  extends AixLib.Icons.ibpsa;
-
   import Modelica.Fluid.Types;
   import Modelica.Fluid.Types.Dynamics;
   parameter Modelica.SIunits.Volume VTan "Tank volume";

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCPipe "Generic pipe model for DHC applications"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
@@ -263,14 +263,14 @@ public
     linearized=linearized,
     m_flow_start=m_flow_start) if use_zeta
     annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1)
-    if not use_soil "Thermal pass through if there is no soil activated"
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thePasThr(final m=1) if
+       not use_soil "Thermal pass through if there is no soil activated"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-16,54})));
-  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium)
-                                                 if not use_zeta
+  Interfaces.PassThroughMedium pasThrMed(redeclare package Medium = Medium) if
+                                                    not use_zeta
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
 equation
   //calculation of the flow velocity of water in the pipes

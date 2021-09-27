@@ -2,8 +2,6 @@ within AixLib.Fluid.FMI.ExportContainers.Validation.FMUs;
 block ThermalZoneAir2 "Validation of simple thermal zone"
   extends AixLib.Fluid.FMI.ExportContainers.Validation.FMUs.ThermalZoneAir1(
     redeclare package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"}));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(info="<html>
 <p>
 This example validates that

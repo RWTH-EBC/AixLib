@@ -9,8 +9,6 @@ model DryCoilEffectivenessNTUMassFlow
     sou_2(nPorts=1),
     sin_2(nPorts=1));
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU hex(
     redeclare package Medium1 = Medium1,
     redeclare package Medium2 = Medium2,
@@ -73,5 +71,6 @@ February 12, 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end DryCoilEffectivenessNTUMassFlow;

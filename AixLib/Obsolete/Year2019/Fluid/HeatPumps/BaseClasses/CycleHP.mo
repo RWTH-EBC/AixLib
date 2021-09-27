@@ -134,8 +134,8 @@ public
     tableName="NoName",
     fileName="NoName",
     table=tableQdot_con,
-    smoothness=smoothness)
-                         if not (capCalcType == 1)
+    smoothness=smoothness) if
+                            not (capCalcType == 1)
     annotation (extent=[-60,40; -40,60], Placement(transformation(extent={{-40,20},
             {-20,40}})));
 
@@ -143,8 +143,8 @@ public
     tableName="NoName",
     fileName="NoName",
     table=tableP_ele,
-    smoothness=smoothness)
-                     if not (capCalcType == 1) "Electrical power table"
+    smoothness=smoothness) if
+                        not (capCalcType == 1) "Electrical power table"
     annotation (extent=[-60,-20; -40,0], Placement(transformation(extent={{-40,-10},
             {-20,10}})));
 public
@@ -153,8 +153,8 @@ public
 public
   Modelica.Blocks.Sources.RealExpression realT_conOut(y=T_conOutCorr)
     annotation (Placement(transformation(extent={{-94,6},{-74,26}}, rotation=0)));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=timeConstantCycle)
-                                                                 if PT1_cycle
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=timeConstantCycle) if
+                                                                    PT1_cycle
     annotation (Placement(transformation(extent={{42,-6},{62,14}})));
 public
   Modelica.Blocks.Math.Product productPelCoP1 annotation (Placement(

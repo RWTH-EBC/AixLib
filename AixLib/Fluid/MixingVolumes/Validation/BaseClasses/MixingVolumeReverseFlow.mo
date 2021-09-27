@@ -2,8 +2,6 @@ within AixLib.Fluid.MixingVolumes.Validation.BaseClasses;
 partial model MixingVolumeReverseFlow
   "Test model for mixing volume with flow reversal"
  extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  package Medium = AixLib.Media.Air "Medium model";
 
   constant Boolean prescribedHeatFlowRate = false
@@ -112,5 +110,6 @@ January 19, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MixingVolumeReverseFlow;

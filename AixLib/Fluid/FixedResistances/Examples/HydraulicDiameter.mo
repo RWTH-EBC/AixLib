@@ -3,8 +3,6 @@ model HydraulicDiameter
   "Example model for flow resistance with hydraulic diameter as parameter"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Water "Medium model";
 
   Modelica.Blocks.Sources.Ramp P(
@@ -81,5 +79,6 @@ First implementation for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end HydraulicDiameter;

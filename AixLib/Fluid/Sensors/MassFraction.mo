@@ -6,8 +6,6 @@ model MassFraction "Ideal one port mass fraction sensor"
   extends AixLib.Fluid.BaseClasses.IndexMassFraction(substanceName = "water");
   extends Modelica.Icons.RotationalSensor;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Interfaces.RealOutput X(min=-1e-3,
                                           max=1.001,
                                           final unit="kg/kg") "Mass fraction in port"
@@ -100,5 +98,6 @@ First implementation.
 Implementation is based on enthalpy sensor of <code>Modelica.Fluid</code>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MassFraction;

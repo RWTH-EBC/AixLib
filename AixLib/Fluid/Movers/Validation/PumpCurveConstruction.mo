@@ -3,8 +3,6 @@ model PumpCurveConstruction
   "Validation model that tests that the pump curve is properly extrapolated to V=0 and dp=0"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water "Medium model";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 1

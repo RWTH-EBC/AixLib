@@ -3,8 +3,6 @@ model MultipoleThermalResistances_OneUTube
   "Validation of the thermal resitances for a single U-tube borehole"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Integer nPip=2 "Number of pipes";
   parameter Integer J=3 "Number of multipoles";
   parameter Modelica.SIunits.Position[nPip] xPip={0.03, -0.03}
@@ -70,5 +68,6 @@ June 21, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MultipoleThermalResistances_OneUTube;

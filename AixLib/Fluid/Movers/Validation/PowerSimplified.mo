@@ -3,8 +3,6 @@ model PowerSimplified
   "Power calculation comparison among three mover types, using simplified power computation for m_flow and dp"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water "Medium model";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=3
@@ -173,5 +171,6 @@ November 22, 2014, by Michael Wetter:<br/>
 Revised implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PowerSimplified;

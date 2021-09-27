@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances;
+within AixLib.Fluid.FixedResistances;
 model GenericPipe
   "Pipe model that includes several selectable pipe models"
 
@@ -89,8 +89,8 @@ model GenericPipe
     final massDynamics=massDynamics) if pipeModel == "SimplePipe"
     annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
-    final m=nNodes)
-    if pipeModel == "SimplePipe"
+    final m=nNodes) if
+       pipeModel == "SimplePipe"
                 annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,14})));
@@ -115,13 +115,13 @@ model GenericPipe
         rotation=270,
         origin={0,70})));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughInsulation(final m=1)
-    if not withInsulation annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughInsulation(final m=1) if
+       not withInsulation annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,42})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1)
-     if not withConvection annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1) if
+        not withConvection annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,70})));

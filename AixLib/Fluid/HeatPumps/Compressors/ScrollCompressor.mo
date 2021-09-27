@@ -3,8 +3,6 @@ model ScrollCompressor
   "Model for a scroll compressor, based on Jin (2002)"
   extends AixLib.Fluid.HeatPumps.Compressors.BaseClasses.PartialCompressor;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real volRat(
     min = 1.0,
     final unit = "1")
@@ -154,5 +152,6 @@ November 11, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ScrollCompressor;

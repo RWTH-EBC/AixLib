@@ -2,8 +2,6 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Exam
 model InternalResistancesTwoUTube "Validation of InternalResistancesTwoUTube"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Integer nSeg(min=1) = 10
     "Number of segments to use in vertical discretization of the boreholes";
   parameter Modelica.SIunits.Length hSeg = borFieDat.conDat.hBor/nSeg
@@ -86,5 +84,6 @@ July 19, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end InternalResistancesTwoUTube;

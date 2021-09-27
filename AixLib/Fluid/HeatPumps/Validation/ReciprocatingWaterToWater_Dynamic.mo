@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatPumps.Validation;
 model ReciprocatingWaterToWater_Dynamic
   "Test model for variable speed reciprocating water to water heat pump"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium1 = AixLib.Media.Water "Medium model";
   package Medium2 = AixLib.Media.Water "Medium model";
 
@@ -190,5 +188,6 @@ November 14, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ReciprocatingWaterToWater_Dynamic;

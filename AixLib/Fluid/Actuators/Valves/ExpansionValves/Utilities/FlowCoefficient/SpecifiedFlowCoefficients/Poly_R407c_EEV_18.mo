@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients;
 model Poly_R407c_EEV_18 "Polynomial - R407c - EEV - 1.8 mm"
   extends PolynomialFlowCoefficient(
     final polyMod=Types.PolynomialModels.Li2013,

@@ -26,8 +26,8 @@ model SimpleNLayer "Wall consisting of n layers"
       start=T_start),
     final der_T(
       each fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
-      each start=0))
-    if not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
+      each start=0)) if
+       not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
     annotation (Placement(transformation(extent={{-10,-42},{10,-22}})));
 
   // n HeatConds

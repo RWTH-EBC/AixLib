@@ -7,8 +7,6 @@ model SimpleRoomFourElementsTraceSubstance
       use_C_flow=true,
       nPorts=2));
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium = AixLib.Media.Air (
     extraPropertiesNames={"C_flow"}) "Medium model"
     annotation (choicesAllMatching=true);

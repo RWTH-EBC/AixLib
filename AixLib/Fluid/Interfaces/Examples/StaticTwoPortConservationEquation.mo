@@ -2,8 +2,6 @@ within AixLib.Fluid.Interfaces.Examples;
 model StaticTwoPortConservationEquation
   "Model that tests the static two port conservation equation"
 extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  package MediumW = AixLib.Media.Water "Medium model";
  package MediumA = AixLib.Media.Air "Medium model";
 
@@ -127,5 +125,6 @@ July 17, 2015, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end StaticTwoPortConservationEquation;

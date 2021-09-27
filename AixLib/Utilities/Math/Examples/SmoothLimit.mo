@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math.Examples;
 model SmoothLimit "Test model for smooth limit"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Sine sine(freqHz=8)
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   AixLib.Utilities.Math.SmoothLimit smoLim(
@@ -31,5 +29,6 @@ July 14, 2010, by Wangda Zuo, Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SmoothLimit;

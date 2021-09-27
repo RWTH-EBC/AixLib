@@ -2,8 +2,6 @@ within AixLib.Fluid.Actuators.Valves.Validation;
 model ThreeWayValveParameterization
   "Test model for parameterization of three-way valves"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium in the component";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.4
@@ -167,5 +165,6 @@ June 7, 2017, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ThreeWayValveParameterization;

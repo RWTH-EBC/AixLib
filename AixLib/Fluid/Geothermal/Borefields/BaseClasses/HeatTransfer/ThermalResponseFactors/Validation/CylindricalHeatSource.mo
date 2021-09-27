@@ -2,8 +2,6 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalRespon
 model CylindricalHeatSource "Test case for cylindrical heat source"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.ThermalDiffusivity aSoi = 1.0e-6 "Ground thermal diffusivity";
   parameter Modelica.SIunits.Radius rSource = 0.075 "Radius of cylinder source";
   parameter Modelica.SIunits.Radius[5] r = {rSource, 2*rSource, 5*rSource, 10*rSource, 20*rSource}
@@ -38,5 +36,6 @@ June 11, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end CylindricalHeatSource;

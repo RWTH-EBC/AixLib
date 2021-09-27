@@ -1,8 +1,6 @@
 within AixLib.BoundaryConditions.SolarGeometry.BaseClasses;
 block Declination "Declination angle"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput nDay(quantity="Time", unit="s")
     "Day number with units of seconds"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));

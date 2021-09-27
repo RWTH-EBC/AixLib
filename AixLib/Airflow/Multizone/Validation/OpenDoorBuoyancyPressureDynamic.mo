@@ -3,8 +3,6 @@ model OpenDoorBuoyancyPressureDynamic
   "Model with open door and buoyancy and pressure driven flow"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Air "Medium model";
 
   AixLib.Airflow.Multizone.DoorOpen doo(redeclare package Medium = Medium)
@@ -112,5 +110,6 @@ October 9, 2020 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end OpenDoorBuoyancyPressureDynamic;

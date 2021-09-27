@@ -2,8 +2,6 @@ within AixLib.Utilities.Math;
 block PowerLinearized
   "Power function that is linearized below a user-defined threshold"
   extends Modelica.Blocks.Interfaces.SISO;
-
-  extends AixLib.Icons.ibpsa;
   parameter Real n "Exponent";
   parameter Real x0 "Abscissa value below which linearization occurs";
 
@@ -41,5 +39,6 @@ November 29, 2013, by Marcus Fuchs:<br/>
 Implementation based on Functions.powerLinearized.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PowerLinearized;

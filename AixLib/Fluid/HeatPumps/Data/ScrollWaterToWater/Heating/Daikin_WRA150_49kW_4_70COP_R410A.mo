@@ -10,6 +10,7 @@ record Daikin_WRA150_49kW_4_70COP_R410A =
     UACon = 10364.1606457,
     UAEva = 52300.8714734)
     "Calibrated parameters for Daikin WRA150"
+
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
@@ -25,4 +26,5 @@ March 6, 2017, by Massimo Cimmino:<br/>
 Calibrated parameters.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");

@@ -11,8 +11,6 @@ partial model Door
     final m1_flow_small=1E-4*abs(m1_flow_nominal),
     final m2_flow_small=1E-4*abs(m2_flow_nominal));
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -123,5 +121,6 @@ First implementation for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1353\">#1353</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Door;

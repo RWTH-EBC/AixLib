@@ -93,5 +93,6 @@ algorithm
   First Implementation.
   </li>
   </ul>
-  </html>"));
+  </html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end splitFacVal;

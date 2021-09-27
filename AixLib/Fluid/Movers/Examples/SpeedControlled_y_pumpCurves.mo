@@ -2,8 +2,6 @@ within AixLib.Fluid.Movers.Examples;
 model SpeedControlled_y_pumpCurves
   "Pumps that illustrates the use of the pump curves"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium model";
 
   // For OpenModelica, changed m_flow_nominal to a constant. Otherwise
@@ -199,5 +197,6 @@ instead of a <code>realInput</code>.
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SpeedControlled_y_pumpCurves;

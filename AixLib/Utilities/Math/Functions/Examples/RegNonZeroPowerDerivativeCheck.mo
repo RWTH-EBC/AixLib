@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math.Functions.Examples;
 model RegNonZeroPowerDerivativeCheck
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  parameter Real n=0.33 "Exponent";
  parameter Real delta = 0.1 "Abscissa value where transition occurs";
 
@@ -38,5 +36,6 @@ April 14, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end RegNonZeroPowerDerivativeCheck;

@@ -2,8 +2,6 @@ within AixLib.Controls.Continuous.Examples;
 model NumberOfRequests
   "Example model for block that outputs the number of requests"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Controls.Continuous.NumberOfRequests numReq(
     nin=2,
     threShold=0,
@@ -45,5 +43,6 @@ The figure below shows the inputs and the output of the block.
 <p align=\"center\">
 <img alt=\"Simulation results\" src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/NumberOfRequests.png\" border=\"1\" />
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end NumberOfRequests;

@@ -3,8 +3,6 @@ model SeriesDpOptimised
   "Series connection with prescribed pressure difference and optimised parameters"
   extends SeriesDp(
     resSeries(each from_dp=false));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

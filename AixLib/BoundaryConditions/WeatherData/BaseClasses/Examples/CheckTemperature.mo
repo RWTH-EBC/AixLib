@@ -1,8 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model CheckTemperature "Test model for CheckTemperature"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckDryBulbTemperature
     cheTemDryBul "Check dry bulb temperature "
     annotation (Placement(transformation(extent={{60,20},{80,40}})));

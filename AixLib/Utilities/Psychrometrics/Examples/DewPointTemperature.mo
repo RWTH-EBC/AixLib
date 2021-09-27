@@ -1,8 +1,6 @@
 within AixLib.Utilities.Psychrometrics.Examples;
 model DewPointTemperature "Unit test for dew point temperature calculation"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
    package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
   AixLib.Utilities.Psychrometrics.pW_TDewPoi watVapPre

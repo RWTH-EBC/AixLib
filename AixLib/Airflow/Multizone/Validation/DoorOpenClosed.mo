@@ -3,8 +3,6 @@ model DoorOpenClosed
   "Model with operable door and door that is always open"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Air "Medium model";
 
   Fluid.Sources.Boundary_pT bouA(

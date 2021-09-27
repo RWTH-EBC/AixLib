@@ -2,8 +2,6 @@ within AixLib.Fluid.Sensors.BaseClasses;
 partial model PartialAbsoluteSensor
   "Partial component to model a sensor that measures a potential variable"
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium=Modelica.Media.Interfaces.PartialMedium
     "Medium in the sensor"
     annotation (choices(

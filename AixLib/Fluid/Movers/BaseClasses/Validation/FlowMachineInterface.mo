@@ -1,8 +1,6 @@
 within AixLib.Fluid.Movers.BaseClasses.Validation;
 model FlowMachineInterface "Simple model to validate FlowMachineInterface"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Fluid.Movers.BaseClasses.FlowMachineInterface eff(
     per(pressure(V_flow={0,1}, dp={1000,0})),
     rho_default=1.2,

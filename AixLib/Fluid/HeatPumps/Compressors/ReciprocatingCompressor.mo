@@ -3,8 +3,6 @@ model ReciprocatingCompressor
   "Model for a reciprocating compressor, based on Jin (2002)"
   extends AixLib.Fluid.HeatPumps.Compressors.BaseClasses.PartialCompressor;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.VolumeFlowRate pisDis
     "Piston displacement";
 
@@ -131,5 +129,6 @@ November 14, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ReciprocatingCompressor;

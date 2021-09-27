@@ -25,8 +25,6 @@ model InternalHEXOneUTube
       final V=VTubSeg,
       final mSenFac=mSenFac));
 
-  extends AixLib.Icons.ibpsa;
-
 protected
   parameter Real Rgg_val(fixed=false) "Thermal resistance between the two grout zones";
 

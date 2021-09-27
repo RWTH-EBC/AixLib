@@ -3,8 +3,6 @@ model ThermalZoneHVACNoExhaust
   "Example of a thermal zone and an HVAC system both exposed using the FMI adaptor"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package MediumA = AixLib.Media.Air "Medium for air";
 
   AixLib.Fluid.FMI.Adaptors.HVAC hvacAda(

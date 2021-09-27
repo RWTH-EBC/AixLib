@@ -4,8 +4,6 @@ model MixingVolumeHeatReverseFlowPrescribedHeatFlowRate
   extends MixingVolumeHeatReverseFlow(
     prescribedHeatFlowRate=true);
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (Documentation(
 info="<html>
 <p>

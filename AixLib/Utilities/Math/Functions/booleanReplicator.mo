@@ -18,5 +18,6 @@ Implementation based on Kaustubh Phalak&apos;s block
 AixLib.Utilities.Math.BooleanReplicator</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end booleanReplicator;

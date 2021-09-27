@@ -2,8 +2,6 @@ within AixLib.Fluid.MixingVolumes.BaseClasses;
 model MixingVolumeHeatPort
   "Mixing volume with heat port and initialize_p not set to final"
   extends AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume;
-
-  extends AixLib.Icons.ibpsa;
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(
       T(start=T_start)) "Heat port for heat exchange with the control volume"
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
@@ -42,5 +40,6 @@ First implementation for
 <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1013\">Buildings, issue 1013</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MixingVolumeHeatPort;

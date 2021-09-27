@@ -6,8 +6,6 @@ model ThreeWayLinear "Three way valve with linear characteristics"
       redeclare TwoWayLinear res3(
         final l=l[2]));
 
-  extends AixLib.Icons.ibpsa;
-
 equation
   connect(inv.y, res3.y) annotation (Line(points={{-62.6,46},{20,46},{20,-50},{
           12,-50}},      color={0,0,127}));
@@ -68,5 +66,6 @@ June 16, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ThreeWayLinear;

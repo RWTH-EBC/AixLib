@@ -4,8 +4,6 @@ block BooleanDelay "Zero order hold for boolean variable"
   extends Modelica.Blocks.Interfaces.DiscreteBlock(
     firstTrigger(fixed=true,
                  start=firstTrigger_start));
-
-  extends AixLib.Icons.ibpsa;
   parameter Boolean firstTrigger_start=false
     "Start value for rising edge signals first sample instant"
     annotation (Dialog(tab="Initialization"));
@@ -57,5 +55,6 @@ November 26, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end BooleanDelay;

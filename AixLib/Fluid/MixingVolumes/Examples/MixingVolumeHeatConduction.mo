@@ -1,8 +1,6 @@
 within AixLib.Fluid.MixingVolumes.Examples;
 model MixingVolumeHeatConduction "Test model for heat transfer to volume"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
     package Medium = AixLib.Media.Air;
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor theCon(G=10)
     "Thermal conductor"

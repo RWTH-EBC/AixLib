@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Functions.Examples;
 model Factorial "Test case for evaluation of factorials"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Integer fac "Factorial of n";
   Integer n "n";
 
@@ -28,5 +26,6 @@ June 6, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Factorial;

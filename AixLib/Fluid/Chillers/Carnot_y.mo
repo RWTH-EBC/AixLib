@@ -4,8 +4,6 @@ model Carnot_y
   extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_y(
     final COP_is_for_cooling = true);
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (
 defaultComponentName="chi",
 Documentation(info="<html>

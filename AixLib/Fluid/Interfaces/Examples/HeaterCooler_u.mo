@@ -3,8 +3,6 @@ model HeaterCooler_u
   "Model that tests a heat exchanger model with reverse flow"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.HeatExchangers.HeaterCooler_u hea1(
@@ -535,5 +533,6 @@ April 17, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end HeaterCooler_u;

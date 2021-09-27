@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers;
 model EnthalpyExchanger
   "model for a parallel membrane enthalpy exchanger"
 
@@ -206,8 +206,8 @@ model EnthalpyExchanger
     final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{-36,-28},{22,28}})));
 
-  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)")
-    if not useConPer "membrane permeability in Barrer"
+  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)") if
+       not useConPer "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
 //   Modelica.Blocks.Interfaces.RealInput[n] coeCroCouSens if not couFloArr
@@ -251,8 +251,8 @@ protected
     final hCons2=airDuct2.heatTransfer.hCons,
     final aspRatCroToTot=aspRatCroToTot,
     final cp1=Medium.specificHeatCapacityCp(airDuct1.states[1]),
-    final cp2=Medium.specificHeatCapacityCp(airDuct2.states[1]))
-      if not couFloArr;
+    final cp2=Medium.specificHeatCapacityCp(airDuct2.states[1])) if
+         not couFloArr;
   BaseClasses.MassTransfer.CrossFlowReduction masRedFac(
     final n=n,
     final nParallel=nParallel,
@@ -262,8 +262,8 @@ protected
     final thicknessMem=thicknessMem,
     final kCons1=airDuct1.massTransfer.kCons,
     final kCons2=airDuct2.massTransfer.kCons,
-    final aspRatCroToTot=aspRatCroToTot)
-      if not couFloArr;
+    final aspRatCroToTot=aspRatCroToTot) if
+         not couFloArr;
 
 equation
   if useConPer then

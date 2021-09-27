@@ -3,8 +3,6 @@ model ThermSplitter "A simple model which weights a given set of thermal inputs
   to calculate an average temperature and aggregated heat flow per output"
 
   parameter Integer nOut "Number of splitter outputs";
-
-  extends AixLib.Icons.ibpsa;
   parameter Integer nIn "Number of splitter inputs";
   parameter Real splitFactor[nOut, nIn]= fill(1/nOut, nOut, nIn)
     "Matrix of split factor for outputs (between 0 and 1 for each row)";
@@ -74,5 +72,6 @@ equation
   Implemented.
   </li>
   </ul>
-  </html>"));
+  </html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ThermSplitter;

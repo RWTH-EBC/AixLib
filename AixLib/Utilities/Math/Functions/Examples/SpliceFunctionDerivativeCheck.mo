@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Functions.Examples;
 model SpliceFunctionDerivativeCheck
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real delta = 0.2 "Smoothing area";
   Real deltax "Smoothing area as a function of x";
 
@@ -52,5 +50,6 @@ May 20, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SpliceFunctionDerivativeCheck;

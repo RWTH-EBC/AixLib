@@ -2,8 +2,6 @@ within AixLib.Utilities.Math;
 block QuadraticLinear
   "Function that is quadratic in first argument and linear in second argument"
   extends Modelica.Blocks.Interfaces.SI2SO;
-
-  extends AixLib.Icons.ibpsa;
   parameter Real a[6] "Coefficients";
 equation
   y = AixLib.Utilities.Math.Functions.quadraticLinear(a=a, x1=u1, x2=u2);

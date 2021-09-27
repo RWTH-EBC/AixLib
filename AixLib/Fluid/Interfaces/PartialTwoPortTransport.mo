@@ -3,8 +3,6 @@ partial model PartialTwoPortTransport
   "Partial element transporting fluid between two ports without storage of mass or energy"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
 
-  extends AixLib.Icons.ibpsa;
-
   // Advanced
   // Note: value of dp_start shall be refined by derived model,
   // based on local dp_nominal
@@ -23,12 +21,12 @@ partial model PartialTwoPortTransport
   // Diagnostics
   parameter Boolean show_T = true
     "= true, if temperatures at port_a and port_b are computed"
-    annotation (
+    annotation(
       Dialog(tab="Advanced", group="Diagnostics"),
       HideResult=true);
   parameter Boolean show_V_flow = true
     "= true, if volume flow rate at inflowing port is computed"
-    annotation (
+    annotation(
       Dialog(tab="Advanced", group="Diagnostics"),
       HideResult=true);
 
@@ -185,5 +183,6 @@ October 20, 2014, by Filip Jorisson:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialTwoPortTransport;

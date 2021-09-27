@@ -3,8 +3,6 @@ model PlugFlow
   "Lossless pipe model with spatialDistribution plug flow implementation"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Length dh
     "Hydraulic diameter (assuming a round cross section area)";
   parameter Modelica.SIunits.Length length(min=0) "Pipe length";
@@ -177,5 +175,6 @@ Axial diffusion in water is assumed to be negligibe.
 The water temperature is assumed uniform in a cross section.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PlugFlow;

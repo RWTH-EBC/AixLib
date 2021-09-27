@@ -3,8 +3,6 @@ model FallingFactorial
   "Test case for evaluation of falling factorials"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Integer falFac[10] "Falling factorial of n";
   Integer n "n";
 
@@ -32,5 +30,6 @@ June 6, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FallingFactorial;

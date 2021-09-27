@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math.Examples;
 model Average "Test model for average function"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.Math.Average average(nin=2)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Sources.Ramp x1(duration=1)
@@ -40,5 +38,6 @@ November 28, 2013 by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Average;

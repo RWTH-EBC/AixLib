@@ -1,8 +1,6 @@
 within AixLib.Fluid.Examples.FlowSystem;
 model Basic "Example implementation of flow system"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium model";
   AixLib.Fluid.Movers.FlowControlled_dp pmpSouth(
     redeclare package Medium = Medium,

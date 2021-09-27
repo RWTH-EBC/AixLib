@@ -2,8 +2,6 @@ within AixLib.ThermalZones.ReducedOrder.Validation.VDI6007;
 model TestCase1 "VDI 6007 Test Case 1 model"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   RC.TwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     hConExt=2.7,

@@ -2,8 +2,6 @@ within AixLib.Fluid.FMI;
 block FlowSplitter_u "Model of a flow splitter that can be exported as an FMU"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -183,5 +181,6 @@ November 20, 2014, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FlowSplitter_u;

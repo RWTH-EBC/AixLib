@@ -2,8 +2,6 @@ within AixLib.Fluid.FMI.ExportContainers;
 partial block HVACZones
   "Partial block to export an HVAC system that has no radiative component and that serves multiple zones as an FMU"
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -298,5 +296,6 @@ May 25, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end HVACZones;

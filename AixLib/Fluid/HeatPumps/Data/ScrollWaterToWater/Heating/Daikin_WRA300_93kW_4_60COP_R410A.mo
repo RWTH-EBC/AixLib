@@ -10,6 +10,7 @@ record Daikin_WRA300_93kW_4_60COP_R410A =
     UACon = 16784.7393136,
     UAEva = 114049.474787)
     "Calibrated parameters for Daikin WRA300"
+
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
@@ -25,4 +26,5 @@ March 6, 2017, by Massimo Cimmino:<br/>
 Calibrated parameters.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");

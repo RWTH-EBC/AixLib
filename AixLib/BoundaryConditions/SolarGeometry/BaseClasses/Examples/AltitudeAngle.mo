@@ -1,8 +1,6 @@
 within AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Examples;
 model AltitudeAngle "Test model for altitude angle"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle zen(lat=
         0.73268921998722) "Zenith angle"
     annotation (Placement(transformation(extent={{36,-10},{56,10}})));
@@ -84,5 +82,6 @@ Feb 01, 2012, by Kaustubh Phalak<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end AltitudeAngle;

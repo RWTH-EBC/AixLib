@@ -2,8 +2,6 @@ within AixLib.Utilities.Diagnostics;
 block AssertInequality "Assert when condition is violated"
   extends BaseClasses.PartialInputCheck(message = "Inputs differ by more than threShold",
      threShold = 0);
-
-  extends AixLib.Icons.ibpsa;
 equation
   if noEvent(time > t0) then
     assert(noEvent(u1 > u2 - threShold), message + "\n"
@@ -50,5 +48,6 @@ April 17, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end AssertInequality;

@@ -14,8 +14,6 @@ model SteamHumidifier_X
       final energyDynamics = Modelica.Fluid.Types.Dynamics.SteadyState,
       final massDynamics = massDynamics));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.MassFlowRate mWatMax_flow(min=0) = Modelica.Constants.inf
     "Maximum water mass flow rate addition (positive)"
     annotation (Evaluate=true);
@@ -269,5 +267,6 @@ May 10, 2017, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SteamHumidifier_X;

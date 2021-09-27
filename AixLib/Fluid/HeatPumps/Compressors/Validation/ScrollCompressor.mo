@@ -1,8 +1,6 @@
 within AixLib.Fluid.HeatPumps.Compressors.Validation;
 model ScrollCompressor
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature eva(T=253.15)
     "Evaporating temperature"
     annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
@@ -55,5 +53,6 @@ October 17, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ScrollCompressor;

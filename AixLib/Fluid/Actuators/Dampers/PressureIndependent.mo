@@ -5,8 +5,6 @@ model PressureIndependent
     final linearized=false,
     final casePreInd=true,
     from_dp=true);
-
-  extends AixLib.Icons.ibpsa;
   input Real phi = l + y_internal*(1 - l)
     "Ratio actual to nominal mass flow rate of damper, phi=kDam(y)/kDam(y=1)";
   parameter Real l2(unit="1", min=1e-10) = 0.01

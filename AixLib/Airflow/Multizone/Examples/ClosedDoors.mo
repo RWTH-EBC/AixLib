@@ -1,8 +1,6 @@
 within AixLib.Airflow.Multizone.Examples;
 model ClosedDoors "Model with three closed doors"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Specialized.Air.PerfectGas;
 
   AixLib.Airflow.Multizone.DoorDiscretizedOperable dooAB(
@@ -147,5 +145,6 @@ November 10, 2011, by Michael Wetter:<br/>
 Added documentation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ClosedDoors;

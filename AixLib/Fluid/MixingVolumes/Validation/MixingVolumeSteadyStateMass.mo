@@ -1,8 +1,6 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeSteadyStateMass "Test model for steady state mass dynamics"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
   Sources.MassFlowSource_T sou(
     redeclare package Medium = Medium,

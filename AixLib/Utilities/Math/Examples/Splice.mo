@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math.Examples;
 model Splice "Test model for splice"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.Math.Splice splice(deltax=0.2)
     annotation (Placement(transformation(extent={{0,0},{20,20}})));
   Modelica.Blocks.Sources.Sine sine(freqHz=0.5)
@@ -38,5 +36,6 @@ July 27, 2012, by Kaustubh Phalak:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Splice;

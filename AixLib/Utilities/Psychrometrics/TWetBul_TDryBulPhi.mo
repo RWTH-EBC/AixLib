@@ -2,8 +2,6 @@ within AixLib.Utilities.Psychrometrics;
 block TWetBul_TDryBulPhi
   "Model to compute the wet bulb temperature based on relative humidity"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialCondensingGases "Medium model"
     annotation (choicesAllMatching = true);
@@ -199,5 +197,6 @@ October 1, 2012 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TWetBul_TDryBulPhi;

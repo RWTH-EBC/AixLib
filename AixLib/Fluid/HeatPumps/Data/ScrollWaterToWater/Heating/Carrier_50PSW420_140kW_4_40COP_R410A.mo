@@ -10,6 +10,7 @@ record Carrier_50PSW420_140kW_4_40COP_R410A =
     UACon = 22875.6244158,
     UAEva = 20395.4876127)
     "Calibrated parameters for Carrier 50PSW420"
+
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
@@ -25,4 +26,5 @@ March 6, 2017, by Massimo Cimmino:<br/>
 Calibrated parameters.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");

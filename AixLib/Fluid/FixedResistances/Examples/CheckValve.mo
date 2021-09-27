@@ -1,8 +1,6 @@
 within AixLib.Fluid.FixedResistances.Examples;
 model CheckValve "Example model for check valve"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium model";
   Modelica.Blocks.Sources.Ramp P_dp(
     duration=1,
@@ -95,5 +93,6 @@ Implementation of a hydraulic check valve. This is for
 <p>
 Example model for the use of a hydraulic check valve.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end CheckValve;

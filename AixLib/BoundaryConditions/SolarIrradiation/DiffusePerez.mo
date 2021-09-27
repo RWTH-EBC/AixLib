@@ -4,8 +4,6 @@ block DiffusePerez
   extends
     AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real rho(min=0, max=1, final unit="1")=0.2 "Ground reflectance";
   parameter Modelica.SIunits.Angle lat "Latitude";
   parameter Modelica.SIunits.Angle azi "Surface azimuth";

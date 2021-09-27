@@ -2,8 +2,6 @@ within AixLib.Fluid.Movers.Validation;
 model PumpCurveDerivatives
   "Check for monotoneously increasing pump curve relations between Nrpm, dp and m_flow"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   parameter Data.Pumps.Wilo.Stratos80slash1to12 per "Pump performance data"

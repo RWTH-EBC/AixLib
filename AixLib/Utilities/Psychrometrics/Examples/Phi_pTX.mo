@@ -2,8 +2,6 @@ within AixLib.Utilities.Psychrometrics.Examples;
 model Phi_pTX "Model to test the relative humidity computation"
  extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);
 
@@ -47,5 +45,6 @@ November 13, 2014, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Phi_pTX;

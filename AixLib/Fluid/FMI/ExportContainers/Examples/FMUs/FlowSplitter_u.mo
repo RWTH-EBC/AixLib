@@ -6,8 +6,6 @@ block FlowSplitter_u "Declaration of an FMU that exports a flow splitter"
         m_flow_nominal={0.1, 0.2},
         allowFlowReversal(start=false));
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (  Documentation(info="<html>
 <p>
 This example demonstrates how to export an FMU with a fluid flow component.

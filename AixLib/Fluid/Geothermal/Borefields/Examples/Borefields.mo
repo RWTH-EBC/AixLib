@@ -3,8 +3,6 @@ model Borefields
   "Example model with several borefield configurations operating simultaneously"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water;
 
   parameter Modelica.SIunits.Time tLoaAgg=300

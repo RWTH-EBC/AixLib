@@ -3,8 +3,6 @@ model EntropyFlowRate "Ideal entropy flow rate sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor(
     tau=0);
   extends Modelica.Icons.RotationalSensor;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput S_flow(final unit="W/K")
     "Entropy flow rate, positive if from port_a to port_b"
     annotation (Placement(transformation(
@@ -110,5 +108,6 @@ First implementation based on
 AixLib.Fluid.Sensors.EnthalpyFlowRate</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end EntropyFlowRate;

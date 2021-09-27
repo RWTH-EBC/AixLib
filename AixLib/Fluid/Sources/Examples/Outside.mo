@@ -2,8 +2,6 @@ within AixLib.Fluid.Sources.Examples;
 model Outside
   "Test model for source and sink with outside weather data"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air "Medium model for air";
   AixLib.Fluid.Sources.Outside bou(
    redeclare package Medium = Medium,
@@ -70,5 +68,6 @@ Feb. 9, 2011 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Outside;

@@ -4,8 +4,6 @@ model Carnot_y
   extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_y(
     final COP_is_for_cooling = false);
 
-  extends AixLib.Icons.ibpsa;
-
 initial equation
   assert(COP_nominal > 1, "The nominal COP of a heat pump must be bigger than one.");
   annotation (

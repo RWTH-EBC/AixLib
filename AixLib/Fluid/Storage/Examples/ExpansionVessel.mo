@@ -2,8 +2,6 @@ within AixLib.Fluid.Storage.Examples;
 model ExpansionVessel "Test model for expansion vessel"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
 // package Medium = Modelica.Media.Water.WaterIF97OnePhase_ph "Medium model";
  package Medium = AixLib.Media.Water "Medium model";
 

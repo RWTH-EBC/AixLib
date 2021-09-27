@@ -16,8 +16,6 @@ model SpeedControlled_Nrpm "Fan with zero mass flow rate and speed as input"
       use_inputFilter=false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
-  extends AixLib.Icons.ibpsa;
-
 equation
   connect(gain.y, floMacSta.Nrpm) annotation (Line(
       points={{-25,100},{30,100},{30,92}},
@@ -50,5 +48,6 @@ March 24 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SpeedControlled_Nrpm;

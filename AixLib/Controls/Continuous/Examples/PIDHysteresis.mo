@@ -2,8 +2,6 @@ within AixLib.Controls.Continuous.Examples;
 model PIDHysteresis "Example model for PID controller with hysteresis"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.Controls.Continuous.PIDHysteresis con(
     pre_y_start=false,
     yMin=0.3,
@@ -91,5 +89,6 @@ November 21, 2011, by Michael Wetter:<br/>
 Added documentation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PIDHysteresis;

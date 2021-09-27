@@ -35,5 +35,6 @@ Added <code>defaultComponentPrefixes</code> and
        Initial version
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end VeroLine80slash115dash2comma2slash2;

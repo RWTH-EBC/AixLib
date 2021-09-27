@@ -1,8 +1,6 @@
 within AixLib.Fluid.FixedResistances.Examples;
 model PlugFlowPipe "Simple example of plug flow pipe"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   replaceable package Medium = AixLib.Media.Water "Medium in the pipe" annotation (
       choicesAllMatching=true);
   Modelica.Blocks.Sources.Ramp Tin(
@@ -81,5 +79,6 @@ This test includes an inlet temperature step under a constant mass flow rate.
 <ul>
 <li>September 8, 2017 by Bram van der Heijde<br/>First implementation</li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PlugFlowPipe;

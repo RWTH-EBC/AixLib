@@ -3,8 +3,6 @@ model TemperatureProtection
   "Validation of temperature protection model"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.Fluid.HeatPumps.Compressors.BaseClasses.TemperatureProtection
     temPro(TConMax=313.15, TEvaMin=278.15) "Temperature protection block"
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));

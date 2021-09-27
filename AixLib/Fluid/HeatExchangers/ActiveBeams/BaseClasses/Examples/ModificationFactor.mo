@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.Examples;
 model ModificationFactor
    extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Sources.Constant const1(k=20) "Constant input signal"
     annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
   Modelica.Blocks.Sources.Ramp ramp(height=0.0792, duration=1)
@@ -56,5 +54,6 @@ May 20, 2016, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ModificationFactor;

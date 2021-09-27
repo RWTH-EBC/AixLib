@@ -2,8 +2,6 @@ within AixLib.Fluid.Examples.Performance;
 model Example5
   "Example 5 model of Modelica code that is inefficiently compiled into C-code"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   parameter Boolean efficient = false
   annotation(Evaluate=true);
 

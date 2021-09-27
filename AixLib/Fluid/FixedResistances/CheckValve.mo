@@ -10,8 +10,6 @@ model CheckValve "Check valve that avoids flow reversal"
   extends AixLib.Fluid.Actuators.BaseClasses.ValveParameters(
     rhoStd=Medium.density_pTX(101325, 273.15 + 4, Medium.X_default));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.PressureDifference dpFixed_nominal(
     displayUnit="Pa", min=0) = 0
     "Pressure drop of pipe and other resistances that are in series"
@@ -163,5 +161,6 @@ Implementation of a hydraulic check valve. This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1198\">issue 1198</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end CheckValve;

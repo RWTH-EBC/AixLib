@@ -2,8 +2,6 @@ within AixLib.Fluid.FixedResistances.Validation;
 model PressureDropsExplicit "Test of multiple resistances in series"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Air "Medium model";
   AixLib.Fluid.Sources.Boundary_ph sou(
    redeclare package Medium = Medium,
@@ -242,5 +240,6 @@ July 20, 2007 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PressureDropsExplicit;

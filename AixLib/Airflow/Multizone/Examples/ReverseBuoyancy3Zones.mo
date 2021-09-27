@@ -2,8 +2,6 @@ within AixLib.Airflow.Multizone.Examples;
 model ReverseBuoyancy3Zones
   "Model with three rooms and buoyancy-driven air circulation that reverses direction"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
   AixLib.Fluid.MixingVolumes.MixingVolume volEas(
     redeclare package Medium = Medium,
@@ -254,5 +252,6 @@ it cools down fast. Once it cooled down sufficiently,
 the flow direction between the three rooms reverses
 because the air in the bottom east is heaviest.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ReverseBuoyancy3Zones;

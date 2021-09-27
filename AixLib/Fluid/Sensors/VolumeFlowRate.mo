@@ -3,8 +3,6 @@ model VolumeFlowRate "Ideal sensor for volume flow rate"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor(
     tau=0);
   extends Modelica.Icons.RotationalSensor;
-
-  extends AixLib.Icons.ibpsa;
   parameter Medium.Density
     d_start=Medium.density(Medium.setState_pTX(p_start, T_start, X_start))
     "Initial or guess value of density"
@@ -137,5 +135,6 @@ First implementation.
 Implementation is based on <code>Modelica.Fluid</code>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end VolumeFlowRate;

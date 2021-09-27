@@ -5,8 +5,6 @@ extends ExternalObject;
   function constructor
     "Construct an extendable array that can be used to store double valuesCreate empty file"
     extends Modelica.Icons.Function;
-
-  extends AixLib.Icons.ibpsa;
     input String instanceName "Instance name of the file write";
     input String fileName "Name of the file, including extension";
     input Integer numColumns "Number of columns that are written to file";
@@ -28,7 +26,8 @@ the simulation stops with an error.
 </p>
 </html>", revisions="<html>
 c
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
   end constructor;
 
   function destructor "Release storage and close the external object"
@@ -49,7 +48,8 @@ May 12, 2018, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
   end destructor;
 
 annotation(Documentation(info="<html>
@@ -65,5 +65,6 @@ May 10 2018, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FileWriterObject;

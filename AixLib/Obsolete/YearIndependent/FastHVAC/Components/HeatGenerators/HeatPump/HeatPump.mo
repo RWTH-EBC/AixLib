@@ -218,14 +218,14 @@ model HeatPump "Base model of FastHVAC Heat Pump"
         extent={{-16,-16},{16,16}},
         rotation=90,
         origin={-76,-136})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva
- if use_EvaCap "Forces heat losses according to ambient temperature"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if
+    use_EvaCap "Forces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={68,-108})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon
- if use_ConCap "Forces heat losses according to ambient temperature"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
+    use_ConCap "Forces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,

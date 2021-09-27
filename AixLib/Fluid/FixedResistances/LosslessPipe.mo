@@ -1,8 +1,6 @@
 within AixLib.Fluid.FixedResistances;
 model LosslessPipe "Pipe with no flow friction and no heat transfer"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
-
-  extends AixLib.Icons.ibpsa;
   final parameter Boolean from_dp=true "Used to satisfy replaceable models";
 equation
   dp=0;
@@ -59,5 +57,6 @@ June 13, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end LosslessPipe;

@@ -3,8 +3,6 @@ block Density_pTX
   "Block to compute the density for given pressure, dry bulb temperature and moisture mass fraction"
    extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Interfaces.RealInput T(
     final quantity="ThermodynamicTemperature",
     final unit="K",

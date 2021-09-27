@@ -2,8 +2,6 @@ within AixLib.Fluid.Geothermal.Borefields.Validation;
 model ConstantHeatInjection_100Boreholes
   "Long-term temperature response of a borefield of 100 boreholes"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
   parameter Modelica.SIunits.Temperature T_start = 273.15

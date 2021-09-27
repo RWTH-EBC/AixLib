@@ -8,8 +8,6 @@ model Simplified5 "Removed most mass/energy dynamics"
     pumpCoo(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState),
     pumpHea(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState),
     heater(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(info="<html>
 <p>
 The model is further simplified by setting the mass dynamics and energy dynamics

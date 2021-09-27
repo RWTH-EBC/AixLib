@@ -2,8 +2,6 @@ within AixLib.Fluid.Geothermal.Borefields.Examples;
 model RectangularBorefield "Example model of a rectangular borefield"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water "Medium model";
 
   parameter Modelica.SIunits.Time tLoaAgg=300

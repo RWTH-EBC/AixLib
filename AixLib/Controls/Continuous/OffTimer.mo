@@ -2,8 +2,6 @@ within AixLib.Controls.Continuous;
 model OffTimer "Records the time since the input changed to false"
   extends Modelica.Blocks.Icons.PartialBooleanBlock;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Interfaces.BooleanInput u "Connector of Boolean input signal"
     annotation (Placement(transformation(
           extent={{-140,-20},{-100,20}})));
@@ -66,5 +64,6 @@ February 12, 2009, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end OffTimer;

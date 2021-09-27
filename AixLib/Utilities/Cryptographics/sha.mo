@@ -31,5 +31,6 @@ See <a href=\"https://github.com/open-ideas/IDEAS/issues/755\">
 #755</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end sha;

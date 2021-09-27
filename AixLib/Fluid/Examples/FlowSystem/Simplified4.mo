@@ -19,8 +19,6 @@ model Simplified4 "Removed valve dynamics"
     pumpCoo(use_inputFilter=false),
     valCoo(use_inputFilter=false),
     valHea(use_inputFilter=false));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(info="<html>
 <p>
 The model is further simplified by removing the valve and pump control dynamics.

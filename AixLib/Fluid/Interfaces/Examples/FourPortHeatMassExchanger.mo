@@ -2,8 +2,6 @@ within AixLib.Fluid.Interfaces.Examples;
 model FourPortHeatMassExchanger
   "FourPortHeatMassExchanger example model"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";

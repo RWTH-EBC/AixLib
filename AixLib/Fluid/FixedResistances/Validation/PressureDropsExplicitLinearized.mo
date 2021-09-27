@@ -10,8 +10,6 @@ model PressureDropsExplicitLinearized
     res32(linearized=true),
     res41(linearized=true),
     res42(linearized=true));
-
-  extends AixLib.Icons.ibpsa;
   annotation (
 experiment(StartTime=-1, Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PressureDropsExplicitLinearized.mos"
@@ -27,6 +25,7 @@ December 1, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 
 end PressureDropsExplicitLinearized;

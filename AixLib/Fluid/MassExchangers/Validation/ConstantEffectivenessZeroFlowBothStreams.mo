@@ -8,8 +8,6 @@ model ConstantEffectivenessZeroFlowBothStreams
     PIn(
       height=0,
       offset=101325));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

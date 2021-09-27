@@ -1,8 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.RC.BaseClasses;
 model ExteriorWall "Exterior wall consisting of variable number of RC elements"
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Integer n(min = 1) "Number of RC-elements";
   parameter Modelica.SIunits.ThermalResistance RExt[n](
     each min=Modelica.Constants.small)

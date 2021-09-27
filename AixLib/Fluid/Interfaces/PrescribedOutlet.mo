@@ -3,8 +3,6 @@ model PrescribedOutlet
   "Component that assigns the outlet fluid property at port_a based on an input signal"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.HeatFlowRate QMax_flow(min=0) = Modelica.Constants.inf
     "Maximum heat flow rate for heating (positive)"
     annotation (Evaluate=true, Dialog(enable=use_TSet));
@@ -492,5 +490,6 @@ November 10, 2014, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PrescribedOutlet;

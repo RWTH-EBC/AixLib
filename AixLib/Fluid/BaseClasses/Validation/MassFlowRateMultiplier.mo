@@ -1,8 +1,6 @@
 within AixLib.Fluid.BaseClasses.Validation;
 model MassFlowRateMultiplier "Example use of MassFlowRateMultiplier"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.BaseClasses.MassFlowRateMultiplier
@@ -53,5 +51,6 @@ July 19, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MassFlowRateMultiplier;

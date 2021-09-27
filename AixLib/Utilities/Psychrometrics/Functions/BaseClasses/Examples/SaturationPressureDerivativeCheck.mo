@@ -3,8 +3,6 @@ model SaturationPressureDerivativeCheck
   "Model to test correct implementation of derivative"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Temperature TMin = 190 "Temperature";
   parameter Modelica.SIunits.Temperature TMax = 373.16 "Temperature";
 
@@ -60,5 +58,6 @@ November 20, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SaturationPressureDerivativeCheck;

@@ -2,8 +2,6 @@ within AixLib.Fluid.Sources.Examples;
 model Outside_CpLowRise
   "Test model for source and sink with outside weather data and wind pressure"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air "Medium model for air";
   AixLib.Fluid.Sources.Outside_CpLowRise west(
     redeclare package Medium = Medium,

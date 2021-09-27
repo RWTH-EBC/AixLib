@@ -4,8 +4,6 @@ model SeriesParallelFlowOptimised
   extends SeriesParallelFlow(
     res2(from_dp=false),
     resParallel(each from_dp=true));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

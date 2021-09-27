@@ -13,8 +13,6 @@ model ScrollWaterToWater
       final PLos=datHeaPum.PLos*scaling_factor,
       final dTSup=datHeaPum.dTSup));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter AixLib.Fluid.HeatPumps.Data.ScrollWaterToWater.Generic datHeaPum
     "Heat pump data" annotation (choicesAllMatching=true, Placement(
         transformation(extent={{-98,78},{-78,98}})));
@@ -105,5 +103,6 @@ November 11, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ScrollWaterToWater;

@@ -4,8 +4,6 @@ model Carnot_TEva_etaPL
   extends Examples.Carnot_TEva(
     chi(a={0.7,0.3},
     QEva_flow_min=-100000));
-
-  extends AixLib.Icons.ibpsa;
   annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_TEva_etaPL.mos"
         "Simulate and plot"),
@@ -23,5 +21,6 @@ February 10, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Carnot_TEva_etaPL;

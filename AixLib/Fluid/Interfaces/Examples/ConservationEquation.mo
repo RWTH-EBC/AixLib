@@ -1,8 +1,6 @@
 within AixLib.Fluid.Interfaces.Examples;
 model ConservationEquation "Model that tests the conservation equation"
 extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  package Medium = AixLib.Media.Water "Medium model";
   AixLib.Fluid.Interfaces.ConservationEquation dyn(
     redeclare package Medium = Medium,
@@ -116,5 +114,6 @@ September 11, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ConservationEquation;

@@ -2,8 +2,6 @@ within AixLib.Utilities.Psychrometrics;
 block ToDryAir
   "Block to convert absolute humidity from [kg/kg total air] to [kg/kg dry air]"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput XiDry
     "Water vapor concentration in [kg/kg dry air]"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

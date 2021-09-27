@@ -3,8 +3,6 @@ model MoistAirEnthalpyFlowRate
   "Test model for the sensible and latent enthalpy flow rate sensors"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Air;
 
   AixLib.Fluid.Sensors.EnthalpyFlowRate senH_flow(
@@ -112,5 +110,6 @@ Changed time constant of <code>senH</code> so that it has
 the same transient response model as <code>senH_flow</code>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MoistAirEnthalpyFlowRate;

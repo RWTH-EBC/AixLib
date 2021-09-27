@@ -6,8 +6,6 @@ model MoverStages
     pump_m_flow(inputType=AixLib.Fluid.Types.InputType.Stages),
     pump_y(inputType=AixLib.Fluid.Types.InputType.Stages),
     pump_dp(inputType=AixLib.Fluid.Types.InputType.Stages));
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=2

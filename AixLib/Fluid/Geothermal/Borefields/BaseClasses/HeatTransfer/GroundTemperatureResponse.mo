@@ -1,7 +1,5 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer;
 model GroundTemperatureResponse "Model calculating discrete load aggregation"
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Time tLoaAgg(final min = Modelica.Constants.eps)=3600
     "Time resolution of load aggregation";
   parameter Integer nCel(min=1)=5 "Number of cells per aggregation level";
@@ -344,5 +342,6 @@ April 5, 2018, by Alex Laferri&egrave;re:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end GroundTemperatureResponse;

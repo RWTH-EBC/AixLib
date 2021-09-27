@@ -1,8 +1,6 @@
 within AixLib.Fluid.Sources.Validation.BaseClasses;
 model BoundarySystem "System model for testing of boundary condition"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component";
 
@@ -49,5 +47,6 @@ This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">AixLib, #1205</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end BoundarySystem;

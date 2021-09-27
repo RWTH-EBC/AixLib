@@ -3,8 +3,6 @@ model IndirectTankHeatExchanger
   "Example showing the use of IndirectTankHeatExchanger"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water "Buildings library model for water";
 
   AixLib.Fluid.Storage.BaseClasses.IndirectTankHeatExchanger indTanHex(
@@ -95,5 +93,6 @@ March 27, 2013 by Peter Grant:<br/>
 First implementation
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end IndirectTankHeatExchanger;

@@ -1,8 +1,6 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples;
 model BoreholeDynamics "Example model for different borehole models and dynamics"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
   parameter Integer nSeg(min=1) = 10
@@ -312,5 +310,6 @@ February, 2018, by Damien Picard:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end BoreholeDynamics;

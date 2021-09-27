@@ -3,8 +3,6 @@ model PrescribedOutlet "Test model for prescribed outlet state"
   extends Modelica.Icons.Example;
   extends AixLib.Fluid.Interfaces.Examples.BaseClasses.PrescribedOutletState;
 
-  extends AixLib.Icons.ibpsa;
-
 equation
   connect(setHeaHigPow.y[1], heaHigPow.TSet) annotation (Line(points={{-39,120},
           {-20,120},{-20,94},{-12,94}}, color={0,0,127}));
@@ -47,5 +45,6 @@ November 11, 2014, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PrescribedOutlet;

@@ -1,8 +1,6 @@
 within AixLib.Fluid.Sources.Examples;
 model TraceSubstancesFlowSource
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"});
 
   MixingVolumes.MixingVolume vol(
@@ -279,5 +277,6 @@ September 18, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TraceSubstancesFlowSource;

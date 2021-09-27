@@ -10,8 +10,6 @@ partial model ZonalFlow "Flow across zonal boundaries of a room"
     final m1_flow_small=1E-4*abs(m1_flow_nominal),
     final m2_flow_small=1E-4*abs(m2_flow_nominal));
 
-  extends AixLib.Icons.ibpsa;
-
    replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
@@ -98,5 +96,6 @@ January 4, 2006, by Michael Wetter:<br/>
 Implemented first version.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ZonalFlow;

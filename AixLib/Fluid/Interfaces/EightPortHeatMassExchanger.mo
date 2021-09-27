@@ -14,8 +14,6 @@ model EightPortHeatMassExchanger
   extends AixLib.Fluid.Interfaces.EightPortFlowResistanceParameters(
      final computeFlowResistance1=true, final computeFlowResistance2=true,final computeFlowResistance3=true, final computeFlowResistance4=true);
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 

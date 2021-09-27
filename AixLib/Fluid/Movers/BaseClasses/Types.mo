@@ -12,5 +12,6 @@ package Types "Package with type definitions"
 <p>
 This package contains type definitions for movers.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Types;

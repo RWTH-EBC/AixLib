@@ -5,8 +5,6 @@ model Carnot_y_etaCar
     heaPum(use_eta_Carnot_nominal=true,
            etaCarnot_nominal=0.494805));
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Validation/Carnot_y_etaCar.mos"
         "Simulate and plot"),
@@ -24,5 +22,6 @@ February 5, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Carnot_y_etaCar;

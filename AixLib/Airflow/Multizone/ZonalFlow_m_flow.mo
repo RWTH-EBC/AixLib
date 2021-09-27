@@ -1,8 +1,6 @@
 within AixLib.Airflow.Multizone;
 model ZonalFlow_m_flow "Zonal flow with input air change per second"
   extends AixLib.Airflow.Multizone.BaseClasses.ZonalFlow;
-
-  extends AixLib.Icons.ibpsa;
    Modelica.Blocks.Interfaces.RealInput mAB_flow "Mass flow rate from A to B, positive if flow from port_a1 to port_b1"
     annotation (Placement(transformation(extent={{-120,90},{-100,110}})));
   Modelica.Blocks.Interfaces.RealInput mBA_flow "Mass flow rate from B to A, positive if flow from port_a2 to port_b2"
@@ -38,5 +36,6 @@ January 17, 2006, by Michael Wetter:<br/>
 Implemented first version.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ZonalFlow_m_flow;

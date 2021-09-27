@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math.Examples;
 model SmoothBlocks "Test model for smooth min and smooth max functions"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   SmoothMax smoMax(deltaX=0.5) annotation (Placement(transformation(extent={{
             -20,40},{0,60}})));
   Modelica.Blocks.Math.Max max annotation (Placement(transformation(extent={{
@@ -65,5 +63,6 @@ August 15, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SmoothBlocks;

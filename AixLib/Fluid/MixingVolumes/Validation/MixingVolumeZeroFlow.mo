@@ -2,8 +2,6 @@ within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeZeroFlow
   "Mixing volume verification around zero flow with heat exchange"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
   AixLib.Fluid.MixingVolumes.MixingVolume volNonLinSys(
     nPorts=2,

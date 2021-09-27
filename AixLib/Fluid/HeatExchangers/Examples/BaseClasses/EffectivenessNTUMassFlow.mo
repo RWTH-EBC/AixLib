@@ -1,8 +1,6 @@
 within AixLib.Fluid.HeatExchangers.Examples.BaseClasses;
 partial model EffectivenessNTUMassFlow
   "Partial model of epsilon-NTU coil that tests variable mass flow rates"
-
-  extends AixLib.Icons.ibpsa;
   package Medium1 = AixLib.Media.Water "Medium model for water";
   package Medium2 = AixLib.Media.Air
     "Medium model for air";

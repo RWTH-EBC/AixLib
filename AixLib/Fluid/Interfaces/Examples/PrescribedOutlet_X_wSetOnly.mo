@@ -8,8 +8,6 @@ model PrescribedOutlet_X_wSetOnly
     heaCooUnl(use_TSet=false),
     steSta(use_TSet=false));
 
-  extends AixLib.Icons.ibpsa;
-
 equation
   connect(setHeaHigPow.y[2], heaHigPow.X_wSet) annotation (Line(points={{-39,120},
           {-20,120},{-20,90},{-12,90}}, color={0,0,127}));
@@ -47,5 +45,6 @@ November 11, 2014, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PrescribedOutlet_X_wSetOnly;

@@ -2,8 +2,6 @@ within AixLib.Utilities.Diagnostics;
 block CheckEquality "Check equality between inputs up to a threshold"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real threShold(min=0)=1e-2 "Threshold for equality comparison";
 
   Modelica.Blocks.Interfaces.RealInput u1 "Value to check"

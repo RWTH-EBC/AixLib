@@ -2,8 +2,6 @@ within AixLib.Fluid.Sensors.BaseClasses;
 partial model PartialFlowSensor
   "Partial component to model sensors that measure flow properties"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate, used for regularization near zero flow"
     annotation(Dialog(group = "Nominal condition"));
@@ -52,5 +50,6 @@ First implementation.
 Implementation is based on <code>Modelica.Fluid</code>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialFlowSensor;

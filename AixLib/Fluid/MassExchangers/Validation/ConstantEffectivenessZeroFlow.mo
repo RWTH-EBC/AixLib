@@ -5,8 +5,6 @@ model ConstantEffectivenessZeroFlow
     PSin_1(
       height=0,
       offset=1E5), PIn(height=0, offset=101325));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

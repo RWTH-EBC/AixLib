@@ -8,8 +8,6 @@ model BoreholeOneUTube "Test for the single U-tube borehole model"
       borHol(
         energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (
     __Dymola_Commands( file=
           "Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/Examples/BoreholeOneUTube.mos"

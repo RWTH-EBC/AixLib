@@ -5,8 +5,6 @@ partial model PartialTwoPortInterface
     port_a(p(start=Medium.p_default)),
     port_b(p(start=Medium.p_default)));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate"
     annotation(Dialog(group = "Nominal condition"));
@@ -16,7 +14,7 @@ partial model PartialTwoPortInterface
   // Diagnostics
    parameter Boolean show_T = false
     "= true, if actual temperature at port is computed"
-    annotation (
+    annotation(
       Dialog(tab="Advanced", group="Diagnostics"),
       HideResult=true);
 
@@ -29,14 +27,14 @@ partial model PartialTwoPortInterface
   Medium.ThermodynamicState sta_a=
       Medium.setState_phX(port_a.p,
                           noEvent(actualStream(port_a.h_outflow)),
-                          noEvent(actualStream(port_a.Xi_outflow)))
-      if show_T "Medium properties in port_a";
+                          noEvent(actualStream(port_a.Xi_outflow))) if
+         show_T "Medium properties in port_a";
 
   Medium.ThermodynamicState sta_b=
       Medium.setState_phX(port_b.p,
                           noEvent(actualStream(port_b.h_outflow)),
-                          noEvent(actualStream(port_b.Xi_outflow)))
-       if show_T "Medium properties in port_b";
+                          noEvent(actualStream(port_b.Xi_outflow))) if
+          show_T "Medium properties in port_b";
 
 protected
   final parameter Modelica.SIunits.MassFlowRate _m_flow_start = 0
@@ -179,5 +177,6 @@ March 11, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialTwoPortInterface;

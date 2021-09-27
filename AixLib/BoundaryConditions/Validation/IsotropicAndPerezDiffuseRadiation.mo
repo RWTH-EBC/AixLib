@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.Validation;
 model IsotropicAndPerezDiffuseRadiation
   "Partial model to run BESTEST validation case studies for weather data processing"
   extends AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput HPer(
     final quantity="RadiantEnergyFluenceRate",
     final unit="W/m2")
@@ -102,5 +100,6 @@ This model outputs the global radiation with a certain inclination and orientati
 using the isotropic sky model and the Perez sky model. The variable <code>H</code> is
 the global radiation calculated using the isotropic sky model, while <code>HPer</code> is
 the global radiation calculated using the Perez sky model.</p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end IsotropicAndPerezDiffuseRadiation;

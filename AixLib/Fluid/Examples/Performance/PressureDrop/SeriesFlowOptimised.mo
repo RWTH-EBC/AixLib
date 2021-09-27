@@ -2,8 +2,6 @@ within AixLib.Fluid.Examples.Performance.PressureDrop;
 model SeriesFlowOptimised
   "Series connection with prescribed flow and optimised parameters"
   extends SeriesFlow(resSeries(each from_dp=false));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

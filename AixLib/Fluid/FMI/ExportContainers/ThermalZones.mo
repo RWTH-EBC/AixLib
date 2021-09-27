@@ -2,8 +2,6 @@ within AixLib.Fluid.FMI.ExportContainers;
 partial block ThermalZones
   "Partial block to export a model of multiple thermal zones as an FMU"
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -244,5 +242,6 @@ April 27, 2016, by Thierry S. Nouidui:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ThermalZones;

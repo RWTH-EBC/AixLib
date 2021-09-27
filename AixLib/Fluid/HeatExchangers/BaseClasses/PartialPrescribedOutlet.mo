@@ -5,8 +5,6 @@ partial model PartialPrescribedOutlet
   extends AixLib.Fluid.Interfaces.TwoPortFlowResistanceParameters(
     final computeFlowResistance=(abs(dp_nominal) > Modelica.Constants.eps));
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
@@ -107,5 +105,6 @@ March 19, 2014, by Christoph Nytsch-Geusen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialPrescribedOutlet;

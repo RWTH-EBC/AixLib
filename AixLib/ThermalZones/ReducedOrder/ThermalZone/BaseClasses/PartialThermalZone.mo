@@ -50,8 +50,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-49,-108},{49,-84}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv
- if ATot > 0 or zoneParam.VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
+    ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{94,10},{114,30}}),
                               iconTransformation(extent={{92,-6},{112,14}})));

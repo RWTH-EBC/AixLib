@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.Examples;
 model SkyClearness "Test model for sky clearness"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(lat=
         0.34906585039887)
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));

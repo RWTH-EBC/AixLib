@@ -2,8 +2,6 @@ within AixLib.Fluid.Sources.Examples;
 model MassFlowSource_WeatherData
   "Test model for source (sink) with weather bus"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air "Medium model for air";
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
@@ -66,5 +64,6 @@ May 21, 2017 by Jianjun Hu:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MassFlowSource_WeatherData;

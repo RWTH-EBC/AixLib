@@ -2,8 +2,6 @@ within AixLib.Utilities.IO.SignalExchange;
 block Overwrite "Block that allows a signal to overwritten by an FMU input"
   extends Modelica.Blocks.Interfaces.SISO;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter String description "Description of the signal being overwritten";
 
   Modelica.Blocks.Logical.Switch swi

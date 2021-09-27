@@ -2,8 +2,6 @@ within AixLib.Fluid.Interfaces;
 partial model PartialFourPortParallel
   "Partial model with four ports for components with parallel flow"
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium1 =
     Modelica.Media.Interfaces.PartialMedium "Medium 1 in the component"
       annotation (choices(

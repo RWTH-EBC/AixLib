@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Functions.Examples;
 model IsMonotonic
   "Tests the correct implementation of the function isMonotonic"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Real x_incStrict[3] = {0, 1, 2} "strictly increasing";
   Real x_notMon[3] = {0, 3, 2} "not monotonic";
   Real x_incWeak[4] = {0, 1, 1, 2} "weakly increasing";
@@ -74,5 +72,6 @@ January 8, 2014, by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end IsMonotonic;

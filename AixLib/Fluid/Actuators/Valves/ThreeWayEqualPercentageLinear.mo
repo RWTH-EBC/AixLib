@@ -8,8 +8,6 @@ model ThreeWayEqualPercentageLinear
         final l=l[1]),
       redeclare TwoWayLinear res3(
         final l=l[2]));
-
-  extends AixLib.Icons.ibpsa;
   parameter Real R = 50 "Rangeability, R=50...100 typically";
   parameter Real delta0 = 0.01
     "Range of significant deviation from equal percentage law";
@@ -91,5 +89,6 @@ June 16, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ThreeWayEqualPercentageLinear;

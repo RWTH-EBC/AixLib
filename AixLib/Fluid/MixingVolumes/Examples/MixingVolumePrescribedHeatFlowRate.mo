@@ -2,8 +2,6 @@ within AixLib.Fluid.MixingVolumes.Examples;
 model MixingVolumePrescribedHeatFlowRate
   "Test model for heat transfer to volume"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
     package Medium = AixLib.Media.Air;
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heaFlo
     "Heat flow sensor"

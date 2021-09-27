@@ -3,8 +3,6 @@ model InternalResistancesOneUTube
   "Validation of the thermal resistances using the method of Bauer et al. (2011) for a single U-tube borehole"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
 
   // Geometry of the borehole
   parameter Real Rb(unit="(m.K)/W") = 0.0
@@ -81,5 +79,6 @@ June 21, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end InternalResistancesOneUTube;

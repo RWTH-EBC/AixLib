@@ -1,7 +1,7 @@
 within AixLib.BoundaryConditions.Validation;
-package BESTEST "Boundary conditions validation according to BESTEST specifications"
+package BESTEST
+  "Boundary conditions validation according to BESTEST specifications"
   extends Modelica.Icons.ExamplesPackage;
-
   annotation (
     Documentation(
       info="<html>

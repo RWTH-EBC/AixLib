@@ -2,8 +2,6 @@ within AixLib.Fluid.Chillers.Validation;
 model Carnot_TEva_reverseFlow
   "Test model for chiller based on Carnot efficiency and evaporator outlet temperature control signal"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Water "Medium model";
 
@@ -143,5 +141,6 @@ November 25, 2015, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Carnot_TEva_reverseFlow;

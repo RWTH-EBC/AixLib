@@ -2,8 +2,6 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
 model PlugFlowAIT
   "Validation pipe against data from Austrian Institute of Technology"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
   parameter Modelica.SIunits.Length Lcap=1
     "Length over which transient effects typically take place";
@@ -429,5 +427,6 @@ influence of allowFlowReversal and the presence of explicit volumes in the pipe.
 </li>
 <li>January 26, 2016 by Carles Ribas:<br/>First implementation. </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PlugFlowAIT;

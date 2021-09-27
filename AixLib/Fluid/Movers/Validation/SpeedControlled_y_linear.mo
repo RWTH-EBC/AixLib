@@ -2,8 +2,6 @@ within AixLib.Fluid.Movers.Validation;
 model SpeedControlled_y_linear
   "Pump with linear characteristic for pressure vs. flow rate"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium model";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.5
@@ -123,5 +121,6 @@ March 24 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SpeedControlled_y_linear;

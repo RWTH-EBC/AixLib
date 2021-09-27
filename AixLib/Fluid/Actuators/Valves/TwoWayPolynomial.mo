@@ -3,8 +3,6 @@ model TwoWayPolynomial "Two way valve with polynomial characteristic"
   extends AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValveKv(
     phi=max(0.1*l, l + pol_y*(1 - l)));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real[:] c
     "Polynomial coefficients, starting with fixed offset";
 
@@ -73,5 +71,6 @@ September 30, 2017 by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TwoWayPolynomial;

@@ -2,8 +2,6 @@ within AixLib.Fluid.Actuators.Dampers;
 model MixingBox "Outside air mixing box with interlocked air dampers"
   extends AixLib.Fluid.Actuators.BaseClasses.ActuatorSignal;
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
@@ -355,5 +353,6 @@ See
 AixLib.Fluid.Actuators.Dampers.Exponential</a>
 for the description of the exponential damper model.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MixingBox;

@@ -7,8 +7,6 @@ model TemperatureDependentDensityProperties
         AixLib.Media.Specialized.Water.TemperatureDependentDensity,
     TMin=273.15,
     TMax=373.15);
-
-  extends AixLib.Icons.ibpsa;
 equation
   // Check the implementation of the base properties
   basPro.state.p=p;
@@ -28,5 +26,6 @@ December 19, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TemperatureDependentDensityProperties;

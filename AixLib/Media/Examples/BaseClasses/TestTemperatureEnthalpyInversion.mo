@@ -1,8 +1,6 @@
 within AixLib.Media.Examples.BaseClasses;
 partial model TestTemperatureEnthalpyInversion
   "Model to check computation of h(T) and its inverse with a controlleable tolerance"
-
-  extends AixLib.Icons.ibpsa;
    replaceable package Medium =
         Modelica.Media.Interfaces.PartialMedium;
      parameter Modelica.SIunits.Temperature T0=273.15+20 "Temperature";
@@ -48,5 +46,6 @@ January 21, 2010 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TestTemperatureEnthalpyInversion;

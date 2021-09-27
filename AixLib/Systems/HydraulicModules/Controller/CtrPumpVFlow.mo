@@ -5,8 +5,8 @@ block CtrPumpVFlow
     "Connector of measurement input signal" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent=
            {{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput vFlowSet
-                                            if useExternalVset
+  Modelica.Blocks.Interfaces.RealInput vFlowSet if
+                                               useExternalVset
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-140,-80},{-100,-40}}), iconTransformation(
           extent={{-140,-80},{-100,-40}})));
@@ -52,7 +52,7 @@ public
   Modelica.Blocks.Logical.GreaterThreshold
                                         pumpSwitchOff(final threshold=0)
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  Modelica.Blocks.Sources.Constant constValvSet(final k=1)         if not useExternalVset
+  Modelica.Blocks.Sources.Constant constValvSet(final k=1) if         not useExternalVset
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 equation
 

@@ -3,8 +3,6 @@ block LimPID
   "P, PI, PD, and PID controller with limited output, anti-windup compensation and setpoint weighting"
 
   extends Modelica.Blocks.Interfaces.SVcontrol;
-
-  extends AixLib.Icons.ibpsa;
   output Real controlError = u_s - u_m
     "Control error (set point - measurement)";
 
@@ -69,15 +67,15 @@ block LimPID
     annotation(Dialog(enable=reset == AixLib.Types.Reset.Parameter,
                       group="Integrator reset"));
 
-  Modelica.Blocks.Interfaces.BooleanInput trigger
-    if reset <> AixLib.Types.Reset.Disabled
+  Modelica.Blocks.Interfaces.BooleanInput trigger if
+       reset <> AixLib.Types.Reset.Disabled
     "Resets the controller output when trigger becomes true"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-80,-120})));
 
-  Modelica.Blocks.Interfaces.RealInput y_reset_in
-    if reset == AixLib.Types.Reset.Input
+  Modelica.Blocks.Interfaces.RealInput y_reset_in if
+       reset == AixLib.Types.Reset.Input
     "Input signal for state to which integrator is reset, enabled if reset = AixLib.Types.Reset.Input"
     annotation (Placement(transformation(extent={{-140,-100},{-100,-60}})));
 
@@ -100,8 +98,8 @@ block LimPID
              else if initType == Modelica.Blocks.Types.InitPID.InitialState
                   or initType == Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
              then Modelica.Blocks.Types.Init.InitialState
-             else Modelica.Blocks.Types.Init.NoInit)
-    if with_I "Integral term"
+             else Modelica.Blocks.Types.Init.NoInit) if
+       with_I "Integral term"
        annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
 
   Modelica.Blocks.Continuous.Derivative D(
@@ -189,8 +187,8 @@ protected
 
 
   Modelica.Blocks.Sources.RealExpression intRes(
-    final y=y_reset_internal/k - addPID.u1 - addPID.u2)
-    if reset <> AixLib.Types.Reset.Disabled
+    final y=y_reset_internal/k - addPID.u1 - addPID.u2) if
+       reset <> AixLib.Types.Reset.Disabled
     "Signal source for integrator reset"
     annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
 

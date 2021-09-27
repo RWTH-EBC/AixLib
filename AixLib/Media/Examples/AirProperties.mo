@@ -7,8 +7,6 @@ model AirProperties
     TMin=273.15-30,
     TMax=273.15+60);
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.SIunits.SpecificEnthalpy hLiq "Specific enthalpy of liquid";
 
 equation
@@ -36,5 +34,6 @@ December 19, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end AirProperties;

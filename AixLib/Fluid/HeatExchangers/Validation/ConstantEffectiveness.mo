@@ -3,8 +3,6 @@ model ConstantEffectiveness
   "Model that demonstrates use of a heat exchanger with constant effectiveness"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Air "Medium model";
 
@@ -129,5 +127,6 @@ April 28, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ConstantEffectiveness;

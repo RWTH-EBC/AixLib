@@ -5,8 +5,6 @@ extends ExternalObject;
   function constructor
     "Verify whether a file writer with  the same path exists and cache variable keys"
     extends Modelica.Icons.Function;
-
-  extends AixLib.Icons.ibpsa;
     input String instanceName "Instance name of the file write";
     input String fileName "Name of the file, including extension";
     input Boolean dumpAtDestruction "=true, to write cached values at destruction";
@@ -27,7 +25,8 @@ the simulation stops with an error.
 </p>
 </html>", revisions="<html>
 c
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
   end constructor;
 
   function destructor "Release storage and close the external object, write data if needed"
@@ -48,7 +47,8 @@ April 15 2019, by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
   end destructor;
 
 annotation(Documentation(info="<html>
@@ -64,5 +64,6 @@ April 15 2019, by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end JSONWriterObject;

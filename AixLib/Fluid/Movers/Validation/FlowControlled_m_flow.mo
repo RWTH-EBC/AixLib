@@ -15,8 +15,6 @@ model FlowControlled_m_flow
       use_inputFilter=false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
-  extends AixLib.Icons.ibpsa;
-
 equation
   connect(gain.y, floMacSta.m_flow_in) annotation (Line(
       points={{-25,100},{29.8,100},{29.8,92}},
@@ -49,5 +47,6 @@ March 24 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FlowControlled_m_flow;

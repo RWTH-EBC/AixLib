@@ -4,8 +4,6 @@ block ThermalZoneAir1 "Validation of simple thermal zone"
     redeclare package Medium = AixLib.Media.Air,
     nPorts =  2);
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Volume V=6*10*3 "Room volume";
 
   /////////////////////////////////////////////////////////

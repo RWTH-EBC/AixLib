@@ -3,8 +3,6 @@ model HeatExchangerLocation
   "Test model for heat exchanger with hHex_a and hHex_b interchanged"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water "Medium model";
 
   parameter Modelica.SIunits.HeatFlowRate QHex_flow_nominal = 6000

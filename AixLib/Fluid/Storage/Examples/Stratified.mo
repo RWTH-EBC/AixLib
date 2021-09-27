@@ -2,8 +2,6 @@ within AixLib.Fluid.Storage.Examples;
 model Stratified "Test model for stratified tank"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Water "Medium model";
 
   AixLib.Fluid.Storage.Stratified tanSim(
@@ -162,5 +160,6 @@ This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Stratified;

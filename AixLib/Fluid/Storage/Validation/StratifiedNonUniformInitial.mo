@@ -3,8 +3,6 @@ model StratifiedNonUniformInitial
   "Test model for stratified tank with non-uniform initial temperature"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water "Medium model";
   constant Integer nSeg = 7 "Number of segments in tank";
 
@@ -146,5 +144,6 @@ This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1246\">#1246</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end StratifiedNonUniformInitial;

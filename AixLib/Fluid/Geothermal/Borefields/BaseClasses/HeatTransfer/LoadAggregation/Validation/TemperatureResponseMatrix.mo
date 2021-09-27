@@ -3,8 +3,6 @@ model TemperatureResponseMatrix
   "This validation case test the calculation, writing and reading of the temperature step response"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Time timSer[26+50,2]=
     AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregation.temperatureResponseMatrix(
       nBor=1,
@@ -43,5 +41,6 @@ July 18, 2018, by Alex Laferri&egrave;re:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TemperatureResponseMatrix;

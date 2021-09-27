@@ -2,8 +2,6 @@ within AixLib.Media.Specialized.Air.Examples;
 model PerfectGasDerivativeCheck
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
    package Medium = AixLib.Media.Specialized.Air.PerfectGas;
 
     Modelica.SIunits.Temperature T "Temperature";
@@ -58,5 +56,6 @@ May 12, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PerfectGasDerivativeCheck;

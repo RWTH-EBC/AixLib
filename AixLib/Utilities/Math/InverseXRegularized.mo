@@ -2,8 +2,6 @@ within AixLib.Utilities.Math;
 block InverseXRegularized
   "Function that approximates 1/x by a twice continuously differentiable function"
   extends Modelica.Blocks.Interfaces.SISO;
-
-  extends AixLib.Icons.ibpsa;
   parameter Real delta(min=0) "Abscissa value below which approximation occurs";
 equation
   y = AixLib.Utilities.Math.Functions.inverseXRegularized(x=u, delta=delta);

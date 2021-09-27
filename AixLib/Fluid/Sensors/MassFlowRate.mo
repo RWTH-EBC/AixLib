@@ -4,8 +4,6 @@ extends AixLib.Fluid.Sensors.BaseClasses.PartialFlowSensor(
   final m_flow_nominal = 0,
   final m_flow_small = 0);
 extends Modelica.Icons.RotationalSensor;
-
-  extends AixLib.Icons.ibpsa;
 Modelica.Blocks.Interfaces.RealOutput m_flow(quantity="MassFlowRate",
                                              final unit="kg/s")
   "Mass flow rate from port_a to port_b" annotation (Placement(
@@ -57,5 +55,6 @@ First implementation.
 Implementation is based on <code>Modelica.Fluid</code>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MassFlowRate;

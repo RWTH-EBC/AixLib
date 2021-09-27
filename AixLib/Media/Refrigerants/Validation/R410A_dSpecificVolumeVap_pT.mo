@@ -3,8 +3,6 @@ model R410A_dSpecificVolumeVap_pT
   "Validation of the derivatives of the specific volume with regards to p and T"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.AbsolutePressure p = 400e3
     "Pressure of refrigerant vapor";
 
@@ -98,5 +96,6 @@ January 25, 2017, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end R410A_dSpecificVolumeVap_pT;

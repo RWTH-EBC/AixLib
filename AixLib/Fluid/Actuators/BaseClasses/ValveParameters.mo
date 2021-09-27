@@ -1,8 +1,6 @@
 within AixLib.Fluid.Actuators.BaseClasses;
 partial model ValveParameters "Model with parameters for valves"
 
-  extends AixLib.Icons.ibpsa;
-
   parameter AixLib.Fluid.Types.CvTypes CvData=AixLib.Fluid.Types.CvTypes.OpPoint
     "Selection of flow coefficient"
    annotation(Dialog(group = "Flow Coefficient"));
@@ -158,5 +156,6 @@ February 18, 2009 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ValveParameters;

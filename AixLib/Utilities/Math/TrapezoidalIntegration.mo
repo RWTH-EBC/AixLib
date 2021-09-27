@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math;
 model TrapezoidalIntegration "Integration using the trapezoidal rule"
   extends Modelica.Blocks.Interfaces.MISO;
-
-  extends AixLib.Icons.ibpsa;
   parameter Integer N "Number of integrand points";
   parameter Real deltaX "Width of interval for Trapezoidal integration";
 equation
@@ -19,5 +17,6 @@ November 29, 2013 by Marcus Fuchs:<br/>
 Implementation based on Functions.trapezoidalIntegration.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TrapezoidalIntegration;

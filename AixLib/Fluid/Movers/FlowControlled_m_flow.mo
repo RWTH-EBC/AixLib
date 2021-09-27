@@ -22,8 +22,6 @@ model FlowControlled_m_flow
       final use_powerCharacteristic = if per.havePressureCurve then per.use_powerCharacteristic else false)),
     preSou(m_flow_start=m_flow_start));
 
-  extends AixLib.Icons.ibpsa;
-
   // For air, we set dp_nominal = 600 as default, for water we set 10000
   parameter Modelica.SIunits.PressureDifference dp_nominal(min=0, displayUnit="Pa")=
     if rho_default < 500 then 500 else 10000
@@ -46,8 +44,8 @@ model FlowControlled_m_flow
 
   Modelica.Blocks.Interfaces.RealInput m_flow_in(
     final unit="kg/s",
-    nominal=m_flow_nominal)
-    if inputType == AixLib.Fluid.Types.InputType.Continuous
+    nominal=m_flow_nominal) if
+       inputType == AixLib.Fluid.Types.InputType.Continuous
     "Prescribed mass flow rate"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -160,5 +158,6 @@ Revised implementation to allow zero flow rate.
     by Michael Wetter:<br/>
        Model added to the AixLib library.
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FlowControlled_m_flow;

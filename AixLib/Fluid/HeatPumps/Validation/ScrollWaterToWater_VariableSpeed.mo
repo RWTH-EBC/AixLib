@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatPumps.Validation;
 model ScrollWaterToWater_VariableSpeed
   "Test model for scroll water to water heat pump"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium1 = AixLib.Media.Water "Medium model";
   package Medium2 = AixLib.Media.Water "Medium model";
 
@@ -122,5 +120,6 @@ November 11, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ScrollWaterToWater_VariableSpeed;

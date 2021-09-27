@@ -3,8 +3,6 @@ model HeatExchangerDynamics
   "Test model for stratified tank with steady-state and dynamic heat exchanger balance"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Water "Medium model";
 
   constant Integer nSeg = 7 "Number of segments in tank";

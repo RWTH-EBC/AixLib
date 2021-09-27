@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block CheckDewPointTemperature
   "Check the validity of the dew point temperature data"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput TIn(
     final quantity="ThermodynamicTemperature",
     final unit="K",

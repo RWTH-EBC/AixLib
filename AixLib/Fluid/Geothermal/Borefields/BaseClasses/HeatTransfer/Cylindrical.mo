@@ -2,8 +2,6 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer;
 model Cylindrical
   "Heat conduction in a cylinder using the radial discretization as advised by Eskilson"
 
-  extends AixLib.Icons.ibpsa;
-
   parameter AixLib.Fluid.Geothermal.Borefields.Data.Soil.Template soiDat
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
   parameter Modelica.SIunits.Height h "Height of the cylinder";
@@ -267,5 +265,6 @@ April 14 2011, by Pierre Vigouroux:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Cylindrical;

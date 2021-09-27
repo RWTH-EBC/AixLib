@@ -2,8 +2,6 @@ within AixLib.Fluid.Examples.Performance.PressureDrop;
 model ParallelFlow
   "Parallel connection with prescribed flow rate and non-optimised parameters"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
   parameter Integer nRes(min=2) = 10 "Number of resistances";
   parameter Modelica.SIunits.PressureDifference dp_nominal=1

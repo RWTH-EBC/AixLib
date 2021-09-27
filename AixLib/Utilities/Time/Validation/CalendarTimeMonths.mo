@@ -1,8 +1,6 @@
 within AixLib.Utilities.Time.Validation;
 model CalendarTimeMonths "Validation model for the calendar time model"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.Time.CalendarTime calTim(zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2015)
     "Computes date and time assuming time=0 corresponds to new year 2015"
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));

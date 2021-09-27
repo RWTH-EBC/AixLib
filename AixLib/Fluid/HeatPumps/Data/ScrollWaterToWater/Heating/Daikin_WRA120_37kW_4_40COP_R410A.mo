@@ -10,6 +10,7 @@ record Daikin_WRA120_37kW_4_40COP_R410A =
     UACon = 6395.36493022,
     UAEva = 43952.8437636)
     "Calibrated parameters for Daikin WRA120"
+
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
@@ -25,4 +26,5 @@ March 6, 2017, by Massimo Cimmino:<br/>
 Calibrated parameters.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");

@@ -3,8 +3,6 @@ model TimeGeometric
   "Test case for geometric expansion of time vector"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Duration dt = 2.0 "Minimum time step";
   parameter Modelica.SIunits.Time t_max = 20.0 "Maximum value of time";
   parameter Integer nTim = 5 "Number of time values";
@@ -34,5 +32,6 @@ July 17, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TimeGeometric;

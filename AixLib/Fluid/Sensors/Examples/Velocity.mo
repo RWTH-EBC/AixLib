@@ -2,8 +2,6 @@ within AixLib.Fluid.Sensors.Examples;
 model Velocity "Test model for the flow velocity sensor"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Air "Medium model";
 
   parameter Modelica.SIunits.Area A = 0.1*0.1/4*Modelica.Constants.pi
@@ -73,5 +71,6 @@ May 20, 2016 by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Velocity;

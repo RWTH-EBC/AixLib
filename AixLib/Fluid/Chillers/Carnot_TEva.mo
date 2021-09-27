@@ -26,8 +26,6 @@ model Carnot_TEva
     final energyDynamics=energyDynamics,
     final homotopyInitialization=homotopyInitialization));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.HeatFlowRate QEva_flow_min(
     max=0) = -Modelica.Constants.inf
     "Maximum heat flow rate for cooling (negative)";
@@ -185,5 +183,6 @@ November 25, 2015 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Carnot_TEva;

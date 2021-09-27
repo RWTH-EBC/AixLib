@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math;
 block IntegerReplicator "Integer signal replicator"
   extends Modelica.Blocks.Icons.IntegerBlock;
-
-  extends AixLib.Icons.ibpsa;
   parameter Integer nout=1 "Number of outputs";
   Modelica.Blocks.Interfaces.IntegerInput u "Connector of integer input signal"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -36,5 +34,6 @@ This block replicates the integer input signal to an array of <code>nout</code> 
 <li>August 31, 2012, by Michael Wetter:<br/>Revised documentation. </li>
 <li>July 27, 2012, by Kaustubh Phalak:<br/>First implementation. </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end IntegerReplicator;

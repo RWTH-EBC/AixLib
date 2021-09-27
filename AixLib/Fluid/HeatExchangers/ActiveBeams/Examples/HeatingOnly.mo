@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatExchangers.ActiveBeams.Examples;
 model HeatingOnly
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package MediumA = AixLib.Media.Air "Medium model for air";
 
   package MediumW = AixLib.Media.Water "Medium model for water";
@@ -145,5 +143,6 @@ May 20, 2016, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end HeatingOnly;

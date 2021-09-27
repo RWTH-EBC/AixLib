@@ -4,8 +4,6 @@ model Carnot_TCon_etaPL
   extends Examples.Carnot_TCon(
     heaPum(a={0.7,0.3}),
     TConLvg(height=10, offset=273.15 + 25));
-
-  extends AixLib.Icons.ibpsa;
   annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Validation/Carnot_TCon_etaPL.mos"
         "Simulate and plot"),
@@ -23,5 +21,6 @@ February 10, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Carnot_TCon_etaPL;

@@ -3,8 +3,6 @@ model OpenDoorPressure
   "Model with one open door and only pressure-driven flow"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Air "Medium model";
 
   AixLib.Airflow.Multizone.DoorOpen doo(
@@ -94,5 +92,6 @@ October 9, 2020 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end OpenDoorPressure;

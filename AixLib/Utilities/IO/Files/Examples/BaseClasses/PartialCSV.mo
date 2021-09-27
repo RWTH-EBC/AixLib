@@ -1,8 +1,6 @@
 within AixLib.Utilities.IO.Files.Examples.BaseClasses;
 model PartialCSV "Base model for CSV reader and writer example"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Cosine cos(freqHz=0.345) "Cosine"
     annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
   Modelica.Blocks.Sources.Step step(startTime=5) "Step function"
@@ -19,5 +17,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
 <p>
 Partial model that contains a step function and cosine signal.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialCSV;

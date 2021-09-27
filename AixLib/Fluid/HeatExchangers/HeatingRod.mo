@@ -31,8 +31,8 @@ model HeatingRod
       final y_start=0) if use_countNumSwi
     "To count on-off cycles"
     annotation (Placement(transformation(extent={{68,-68},{86,-52}})));
-  Modelica.Blocks.Sources.IntegerConstant integerConstant(final k=1)
- if use_countNumSwi
+  Modelica.Blocks.Sources.IntegerConstant integerConstant(final k=1) if
+    use_countNumSwi
     annotation (Placement(transformation(extent={{38,-68},{54,-52}})));
   Modelica.Blocks.Interfaces.IntegerOutput numSwi if use_countNumSwi
     "Number of on switches "

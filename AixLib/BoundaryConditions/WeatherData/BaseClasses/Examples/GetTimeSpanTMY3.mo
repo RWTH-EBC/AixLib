@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model GetTimeSpanTMY3 "Test model to get the time span of a weather file"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter String filNam = Modelica.Utilities.Files.loadResource(
   "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     "Name of weather data file";

@@ -108,6 +108,8 @@ model HPSystemController
       enable=use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
     annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
+  parameter Modelica.SIunits.TemperatureDifference dTHystOperEnv=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=use_opeEnv));
   parameter Boolean use_deFro=true "False if defrost in not considered"
                                     annotation (choices(checkBox=true), Dialog(
         tab="Safety Control",group="Defrost", descriptionLabel = true, enable=use_sec));
@@ -152,6 +154,7 @@ model HPSystemController
     final maxRunPerHou=maxRunPerHou,
     final use_opeEnv=use_opeEnv,
     final use_minLocTime=use_minLocTime,
+    final dTHystOperEnv=dTHystOperEnv,
     pre_n_start=pre_n_start,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
@@ -162,7 +165,7 @@ model HPSystemController
     final TantFre=TantFre,
     final tableUpp=tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
-    final dataTable=dataTable)         if use_sec
+    final dataTable=dataTable) if         use_sec
     annotation (Placement(transformation(extent={{8,-16},{48,24}})));
   Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
@@ -227,8 +230,8 @@ model HPSystemController
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
   AixLib.DataBase.HeatPump.PerformanceData.IcingBlock
     icingBlock(redeclare final function iceFunc =
-        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach)
-    if use_deFro
+        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
+       use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro
     annotation (Placement(transformation(extent={{44,56},{60,72}})));

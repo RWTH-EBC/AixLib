@@ -3,8 +3,6 @@ model MixingBox
   "Mixing box with constant pressure difference and varying control signal"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Air
     "Medium in the component"
          annotation (choicesAllMatching = true);
@@ -95,5 +93,6 @@ February 23, 2010 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MixingBox;

@@ -1,8 +1,6 @@
 within AixLib.Utilities.IO.SignalExchange.Examples;
 model WeatherStation "Example use of WeatherStation"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Utilities.IO.SignalExchange.WeatherStation weaSta "Weather station"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
@@ -33,5 +31,6 @@ September 29, 2020, by David Blum:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end WeatherStation;

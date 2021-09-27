@@ -3,8 +3,6 @@ block TWetBul_TDryBulXi
   "Model to compute the wet bulb temperature based on mass fraction"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialCondensingGases "Medium model"                          annotation (
       choicesAllMatching = true);
@@ -250,5 +248,6 @@ May 7, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TWetBul_TDryBulXi;

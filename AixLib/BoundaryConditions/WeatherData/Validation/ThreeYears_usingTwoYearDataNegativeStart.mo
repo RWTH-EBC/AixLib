@@ -4,8 +4,6 @@ model ThreeYears_usingTwoYearDataNegativeStart
   extends
     AixLib.BoundaryConditions.WeatherData.Validation.ThreeYears_usingTwoYearData;
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (experiment(
       StartTime=-47174400,
       StopTime=47433600,
@@ -24,6 +22,7 @@ but using only two years of data with equidistant monthly values.
 First implementation for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/842\">issue 842</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 
 end ThreeYears_usingTwoYearDataNegativeStart;

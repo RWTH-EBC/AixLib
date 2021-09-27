@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.Examples;
 model DerivateCubicSpline
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Sources.Clock clock "Clock"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses.DerivativesCubicSpline
@@ -33,5 +31,6 @@ May 20, 2016, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end DerivateCubicSpline;

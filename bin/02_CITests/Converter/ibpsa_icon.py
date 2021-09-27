@@ -1,24 +1,15 @@
-#Reihenfolge:
-# ######## Local ###############
-# Ibpsa_modelle in eine Liste schreiben
-# Neues Icon Pack mit einbinden
-# Dateien überschreiben
-# ### Github #########
-#Überarbeitete Version pushen
-# Tests durchführen
-# In Ibpsa_Merge einfügen und testen
 import os
 from pathlib import Path
 
-# Read whitelist and return a list
-def read_wh(path):
+
+def read_wh(path): # Read whitelist and return a list
     wh = open(path,"r")
     wl = wh.readlines()
     wh.close()
     return wl
 
-## Sort List of models
-def sort_list(mo_li):
+
+def sort_list(mo_li): # Sort List of models
     list = []
     for i in mo_li:
         if len(i) == 1:
@@ -37,11 +28,12 @@ def sort_list(mo_li):
         list.append(mo)
     return list
 
-## Add ibpsa icon and search a suitable line
-def add_icon(mo_li):
+
+def add_icon(mo_li): # Add ibpsa icon and search a suitable line
     entry = "  extends AixLib.Icons.ibpsa;"
     for i in mo_li:
         if (exist_file(i)) == True:
+            print(i)
             f = open(i,"r+")
             lines = f.readlines()
             f.close()
@@ -52,9 +44,8 @@ def add_icon(mo_li):
             semi = 0
             ano = 0
             for t in lines:
-                #ModelName == Zeile Mit Modelname
                 c = c + 1
-                if t.find(mo) > -1:
+                if t.find(mo) > -1:  #ModelName == Zeile Mit Modelname
                     if len(y) == 0:
                         if t.find("type ") > -1:
                             y = []
@@ -120,16 +111,39 @@ def add_icon(mo_li):
             print(i)
             print("File does not exist.")
 
-# File exist
-def exist_file(file):
+def exist_file(file): # File exist
     f = Path(file)
     if f.is_file():
         return True
     else:
         return False
 
+def lock(mo_li): # lock ibpsa models
+    entry = '   __Dymola_LockedEditing="ibpsa");'
+    old_text = '</html>"));'
+    new_text = '</html>"), ' +"\n" + entry
+    replacements = {old_text : new_text}
+    lines = []
+    for model in mo_li:
+
+        if exist_file(model) == True:
+            print("lock object: "+model)
+            infile = open(model).read()
+            outfile = open(model, 'w')
+
+            for i in replacements.keys():
+                infile = infile.replace(i, replacements[i])
+            outfile.write(infile)
+            outfile.close
+
+        else:
+            print("\n************************************")
+            print(model)
+            print("File does not exist.")
+            continue
 if __name__ == '__main__':
     path = "bin"+os.sep+"03_WhiteLists"+os.sep+"HTML_IBPSA_WhiteList.txt"
     mo_li = read_wh(path)
     mo_li = sort_list(mo_li)
-    add_icon(mo_li)
+    #add_icon(mo_li)
+    lock(mo_li)

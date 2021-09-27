@@ -2,8 +2,6 @@ within AixLib.Fluid.Interfaces.Examples;
 model ReverseFlowMassExchanger
   "Model that tests the reverse flow for a mass exchanger"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
 package Medium = AixLib.Media.Air;
   Modelica.Blocks.Math.Add cheTem(k2=-1)
     "Check whether the outputs of the forward flow and reverse flow model are identical"
@@ -337,5 +335,6 @@ August 19, 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ReverseFlowMassExchanger;

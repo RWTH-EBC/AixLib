@@ -2,8 +2,6 @@ within AixLib.Controls.Continuous.Examples;
 model LimPID "Test model for PID controller with optional reverse action"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Sources.Pulse pulse(period=0.25)
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   AixLib.Controls.Continuous.LimPID limPID(
@@ -111,5 +109,6 @@ reverse action.
 The assertion blocks test whether the results
 of all three controllers are identical.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end LimPID;

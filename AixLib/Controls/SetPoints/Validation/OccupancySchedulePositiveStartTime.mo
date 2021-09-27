@@ -2,8 +2,6 @@ within AixLib.Controls.SetPoints.Validation;
 model OccupancySchedulePositiveStartTime
   "Validation model for occupancy schedule with positive start time"
   extends OccupancyScheduleNegativeStartTime;
-
-  extends AixLib.Icons.ibpsa;
   annotation (experiment(
       StartTime=86400,
       StopTime=207360,
@@ -22,6 +20,7 @@ October 30, 2017, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 
 end OccupancySchedulePositiveStartTime;

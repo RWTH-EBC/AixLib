@@ -1,8 +1,6 @@
 within AixLib.Fluid.HeatExchangers.ActiveBeams;
 model Cooling "Active beam unit for cooling"
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package MediumWat =
     Modelica.Media.Interfaces.PartialMedium "Medium 1 in the component"
       annotation (choices(
@@ -72,7 +70,7 @@ model Cooling "Active beam unit for cooling"
   // Diagnostics
   parameter Boolean show_T = false
     "= true, if actual temperature at port is computed"
-    annotation (
+    annotation(
       Dialog(tab="Advanced", group="Diagnostics"),
       HideResult=true);
 
@@ -110,23 +108,23 @@ model Cooling "Active beam unit for cooling"
   MediumWat.ThermodynamicState staWatCoo_a=
       MediumWat.setState_phX(watCoo_a.p,
                            noEvent(actualStream(watCoo_a.h_outflow)),
-                           noEvent(actualStream(watCoo_a.Xi_outflow)))
-      if show_T "Medium properties in port watCoo_a";
+                           noEvent(actualStream(watCoo_a.Xi_outflow))) if
+         show_T "Medium properties in port watCoo_a";
   MediumWat.ThermodynamicState staWatCoo_b=
       MediumWat.setState_phX(watCoo_b.p,
                            noEvent(actualStream(watCoo_b.h_outflow)),
-                           noEvent(actualStream(watCoo_b.Xi_outflow)))
-      if show_T "Medium properties in port watCoo_b";
+                           noEvent(actualStream(watCoo_b.Xi_outflow))) if
+         show_T "Medium properties in port watCoo_b";
   MediumAir.ThermodynamicState staAir_a=
       MediumAir.setState_phX(air_a.p,
                            noEvent(actualStream(air_a.h_outflow)),
-                           noEvent(actualStream(air_a.Xi_outflow)))
-      if show_T "Medium properties in port air_a";
+                           noEvent(actualStream(air_a.Xi_outflow))) if
+         show_T "Medium properties in port air_a";
   MediumAir.ThermodynamicState staAir_b=
       MediumAir.setState_phX(air_b.p,
                            noEvent(actualStream(air_b.h_outflow)),
-                           noEvent(actualStream(air_b.Xi_outflow)))
-      if show_T "Medium properties in port air_b";
+                           noEvent(actualStream(air_b.Xi_outflow))) if
+         show_T "Medium properties in port air_b";
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heaToRoo(
     final alpha=0)
@@ -337,5 +335,6 @@ May 20, 2016, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Cooling;

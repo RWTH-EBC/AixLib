@@ -9,8 +9,6 @@ model Simplified1 "Aggregated pressure drops"
     valSouth2(each dpFixed_nominal=50000),
     valNorth1(each dpFixed_nominal=50000),
     valNorth2(each dpFixed_nominal=50000));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(info="<html>
 <p>
 The model is simplified: series pressure drop components are aggregated into the valve model.

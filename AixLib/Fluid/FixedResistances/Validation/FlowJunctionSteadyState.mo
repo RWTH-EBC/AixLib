@@ -3,8 +3,6 @@ model FlowJunctionSteadyState
   "Test model for the three way splitter/mixer model configured as steady-state"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Air "Medium model";
 
   AixLib.Fluid.FixedResistances.Junction spl(
@@ -116,5 +114,6 @@ This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FlowJunctionSteadyState;

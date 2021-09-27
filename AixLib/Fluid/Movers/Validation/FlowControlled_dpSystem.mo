@@ -2,8 +2,6 @@ within AixLib.Fluid.Movers.Validation;
 model FlowControlled_dpSystem
   "Demonstration of the use of prescribedPressure"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 0.1
     "Nominal mass flow rate";

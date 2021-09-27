@@ -58,8 +58,8 @@ model Membrane "model of membrane"
     annotation(Dialog(tab="Initialization", group="Mass Transfer"));
 
   // Inputs
-  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)")
-    if not useConPer "membrane permeability in Barrer"
+  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)") if
+       not useConPer "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouSens if not couFloArr
     "coefficient for heat transfer reduction due to cross-flow portion";

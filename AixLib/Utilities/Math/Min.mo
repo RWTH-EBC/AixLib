@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math;
 block Min "Minimum element of a vector"
   extends Modelica.Blocks.Interfaces.MISO;
-
-  extends AixLib.Icons.ibpsa;
 equation
  y = min(u);
 annotation (

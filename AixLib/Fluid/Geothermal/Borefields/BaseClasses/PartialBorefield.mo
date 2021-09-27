@@ -9,8 +9,6 @@ partial model PartialBorefield
     final dp_nominal=borFieDat.conDat.dp_nominal,
     final computeFlowResistance=(borFieDat.conDat.dp_nominal > Modelica.Constants.eps));
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Water "Water"),
@@ -341,5 +339,6 @@ July 2014, by Damien Picard:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialBorefield;

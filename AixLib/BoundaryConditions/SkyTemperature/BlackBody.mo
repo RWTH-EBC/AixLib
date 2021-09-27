@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.SkyTemperature;
 block BlackBody "Calculate black body sky temperature"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter AixLib.BoundaryConditions.Types.SkyTemperatureCalculation calTSky=
     AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.TemperaturesAndSkyCover
     "Computation of black-body sky temperature"

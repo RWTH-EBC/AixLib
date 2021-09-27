@@ -1,8 +1,6 @@
 within AixLib.Airflow.Multizone.Examples;
 model ZonalFlow "Model with prescribed air exchange between two volumes"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
   parameter Modelica.SIunits.Volume volA=100 "Volume of room A";
   parameter Modelica.SIunits.Volume volB=1 "Volume of room B";
@@ -103,5 +101,6 @@ November 10, 2011, by Michael Wetter:<br/>
 Added documentation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ZonalFlow;

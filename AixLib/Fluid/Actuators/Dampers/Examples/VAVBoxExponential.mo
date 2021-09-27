@@ -3,8 +3,6 @@ model VAVBoxExponential
   "VAV box with constant pressure difference and varying control signal"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Air;
 
   AixLib.Fluid.Actuators.Dampers.Exponential dam(
@@ -95,5 +93,6 @@ July 20, 2007 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end VAVBoxExponential;

@@ -2,8 +2,6 @@ within AixLib.Fluid.FMI.Validation;
 model HeaterFan
   "Heater and fan in series, model configured to allow flow reversal"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air "Medium model";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=Q_flow_nominal/1000/10
@@ -66,12 +64,12 @@ model HeaterFan
     "Moisture mass fraction for back flow"
     annotation (Placement(transformation(extent={{120,-6},{100,14}})));
 
-  Modelica.Blocks.Sources.Constant CBac[Medium.nC](each k=0.01)
-  if Medium.nC > 0 "Trace substances for back flow"
+  Modelica.Blocks.Sources.Constant CBac[Medium.nC](each k=0.01) if
+     Medium.nC > 0 "Trace substances for back flow"
     annotation (Placement(transformation(extent={{120,-60},{100,-40}})));
 
-  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01)
-  if Medium.nC > 0 "Trace substances for forward flow"
+  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01) if
+     Medium.nC > 0 "Trace substances for forward flow"
     annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
 equation
   connect(uHea.y, hea.u) annotation (Line(

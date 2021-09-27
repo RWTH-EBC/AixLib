@@ -1,13 +1,12 @@
 within AixLib.Controls.Continuous.Examples;
 model SignalRanker "Example model for signal ranker"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Sine sine(freqHz=2)
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
   Modelica.Blocks.Sources.Pulse pulse(period=0.25)
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
-  AixLib.Controls.Continuous.SignalRanker sigRan( nin=3)
+  AixLib.Controls.Continuous.SignalRanker sigRan(
+                                                  nin=3)
     annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Sources.ExpSine expSine(freqHz=10, damping=1)
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
@@ -40,5 +39,6 @@ November 21, 2011, by Michael Wetter:<br/>
 Added documentation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SignalRanker;

@@ -2,8 +2,6 @@ within AixLib.Airflow.Multizone;
 model ZonalFlow_ACS "Zonal flow with input air change per second"
   extends AixLib.Airflow.Multizone.BaseClasses.ZonalFlow;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Boolean useDefaultProperties = false
     "Set to true to use constant density";
   parameter Modelica.SIunits.Volume V "Volume of room";
@@ -89,5 +87,6 @@ January 4, 2006 by Michael Wetter:<br/>
 Implemented first version.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ZonalFlow_ACS;

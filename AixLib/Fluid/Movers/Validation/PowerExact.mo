@@ -4,8 +4,6 @@ model PowerExact
   extends PowerSimplified(
     pump_dp(per=per),
     pump_m_flow(per=per));
-
-  extends AixLib.Icons.ibpsa;
   annotation (
     experiment(Tolerance=1e-6, StopTime=200),
     __Dymola_Commands(file=
@@ -35,5 +33,6 @@ First implementation for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PowerExact;

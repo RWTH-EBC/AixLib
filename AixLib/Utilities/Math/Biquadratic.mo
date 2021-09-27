@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math;
 block Biquadratic "Biquadratic function"
   extends Modelica.Blocks.Interfaces.SI2SO;
-
-  extends AixLib.Icons.ibpsa;
   parameter Real a[6] "Coefficients";
 equation
   y =  AixLib.Utilities.Math.Functions.biquadratic(a=a, x1=u1, x2=u2);
@@ -28,5 +26,6 @@ Sep. 8, 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Biquadratic;

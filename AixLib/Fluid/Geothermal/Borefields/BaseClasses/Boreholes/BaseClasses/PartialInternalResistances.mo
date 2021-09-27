@@ -1,8 +1,6 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses;
 partial model PartialInternalResistances
   "Partial model to implement borehole segment internal resistance models"
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Length hSeg
     "Length of the internal heat exchanger";
   parameter Modelica.SIunits.Temperature T_start
@@ -74,5 +72,6 @@ June, 2018, by Damien Picard:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialInternalResistances;

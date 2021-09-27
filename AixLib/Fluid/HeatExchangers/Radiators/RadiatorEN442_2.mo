@@ -10,8 +10,6 @@ model RadiatorEN442_2 "Dynamic radiator for space heating"
      final mSenFac = 1 + 500*mDry/(VWat*cp_nominal*Medium.density(
         Medium.setState_pTX(Medium.p_default, Medium.T_default, Medium.X_default))));
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 

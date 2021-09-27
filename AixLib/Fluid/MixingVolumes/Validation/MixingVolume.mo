@@ -2,8 +2,6 @@ within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolume "Test model for mixing volumes"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Air "Medium model";
 
     Modelica.Blocks.Sources.Ramp P(
@@ -219,5 +217,6 @@ October 12, 2009 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end MixingVolume;

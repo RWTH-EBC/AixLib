@@ -2,8 +2,6 @@ within AixLib.Fluid.Actuators.Valves.Examples;
 model TwoWayValvesMotor
   "Two way valves with different opening characteristics and motor"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.Actuators.Valves.TwoWayLinear valLin(
@@ -137,5 +135,6 @@ June 16, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TwoWayValvesMotor;

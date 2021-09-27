@@ -3,8 +3,6 @@ model WaterVaporPressureDerivativeCheck
   "Model to test correct implementation of derivative"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Real y "Function value";
   Real y_comp "Function value for comparison";
   Real err "Integration error";
@@ -62,5 +60,6 @@ October 29, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end WaterVaporPressureDerivativeCheck;

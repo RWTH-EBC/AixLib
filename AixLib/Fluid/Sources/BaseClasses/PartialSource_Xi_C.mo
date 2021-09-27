@@ -3,8 +3,6 @@ partial model PartialSource_Xi_C
   "Partial component source with parameter definitions for Xi and C"
   extends AixLib.Fluid.Sources.BaseClasses.PartialSource;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Boolean use_X_in = false
     "Get the composition (all fractions) from the input connector"
     annotation(Evaluate=true, HideResult=true, Dialog(tab="Advanced"));
@@ -143,5 +141,6 @@ Initial version for refactoring inputs of sources.
 See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialSource_Xi_C;

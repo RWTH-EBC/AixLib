@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 block CheckDryBulbTemperature
   "Check the validity of the dry bulb temperature data"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput TIn(
     final quantity="ThermodynamicTemperature",
     final unit="K",

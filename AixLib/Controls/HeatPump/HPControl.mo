@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
@@ -57,8 +57,8 @@ model HPControl
     trigWeekDay=trigWeekDay,
     trigHour=trigHour,
     yearRef=2017,
-    final zerTim=zerTim)
-                    if use_antLeg
+    final zerTim=zerTim) if
+                       use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
   Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));

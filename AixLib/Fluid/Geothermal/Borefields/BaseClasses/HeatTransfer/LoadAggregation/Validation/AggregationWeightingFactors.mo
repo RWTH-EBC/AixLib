@@ -3,8 +3,6 @@ model AggregationWeightingFactors
   "This validation case verifies the calculation of the weighting factors kappa"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real[6,2] timSer=
     [0, 0;
     0.999999999999999, 7.96581783184631e-06;
@@ -42,5 +40,6 @@ July 18, 2018, by Alex Laferri&egrave;re:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end AggregationWeightingFactors;

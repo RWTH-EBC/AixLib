@@ -2,8 +2,6 @@ within AixLib.Fluid.Sensors.Examples;
 model EntropyFlowRate "Test model for the entropy flow rate sensors"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   package Medium = AixLib.Media.Air "Medium model";
 
   AixLib.Fluid.Sensors.EntropyFlowRate  senS_flow(
@@ -86,5 +84,6 @@ July 29, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end EntropyFlowRate;

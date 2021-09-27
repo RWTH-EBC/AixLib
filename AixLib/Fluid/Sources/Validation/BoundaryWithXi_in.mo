@@ -3,8 +3,6 @@ model BoundaryWithXi_in
   "Validation model for boundary with different media and independent mass fraction input"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.Fluid.Sources.Validation.BaseClasses.BoundarySystemWithXi_in bouMoiAir(
     redeclare package Medium = AixLib.Media.Air)
     "Boundary with moist air"

@@ -3,8 +3,6 @@ model FiniteDifference_1Week
   "Short term validation of ground temperature response model"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Temperature T_start = 283.15
     "Initial soil temperature";
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Cylindrical soi(
@@ -132,5 +130,6 @@ June 13, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FiniteDifference_1Week;

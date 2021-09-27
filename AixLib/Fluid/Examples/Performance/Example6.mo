@@ -2,8 +2,6 @@ within AixLib.Fluid.Examples.Performance;
 model Example6
   "Example 6 model of Modelica code that is inefficiently compiled into C-code"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   parameter Integer nCapacitors = 500;
   parameter Real R = 0.001;
    //annotation(Evaluate=true);

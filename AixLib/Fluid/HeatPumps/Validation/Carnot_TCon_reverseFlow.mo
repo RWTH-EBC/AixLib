@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatPumps.Validation;
 model Carnot_TCon_reverseFlow
   "Test model for heat pump based on Carnot efficiency and condenser outlet temperature control signal"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Water "Medium model";
 
@@ -126,5 +124,6 @@ November 25, 2015, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Carnot_TCon_reverseFlow;

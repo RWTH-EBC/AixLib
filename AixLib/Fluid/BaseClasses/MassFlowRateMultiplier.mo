@@ -2,8 +2,6 @@ within AixLib.Fluid.BaseClasses;
 model MassFlowRateMultiplier "Model that multiplies the mass flow rate"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Real k "Gain for mass flow rate";
 
 initial equation

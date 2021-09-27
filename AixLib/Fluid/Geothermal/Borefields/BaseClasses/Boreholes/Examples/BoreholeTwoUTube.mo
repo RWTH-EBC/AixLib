@@ -8,8 +8,6 @@ model BoreholeTwoUTube "Test for the double U-tube borehole model"
         conDat=AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Example(
           borCon=AixLib.Fluid.Geothermal.Borefields.Types.BoreholeConfiguration.DoubleUTubeParallel)));
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (experiment(Tolerance=1e-6, StopTime=360000),
         __Dymola_Commands(file=
           "Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/Examples/BoreholeTwoUTube.mos"
@@ -34,5 +32,6 @@ August 30, 2011, by Pierre Vigouroux:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end BoreholeTwoUTube;

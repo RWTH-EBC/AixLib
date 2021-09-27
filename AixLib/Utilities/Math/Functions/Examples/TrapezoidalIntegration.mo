@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Functions.Examples;
 model TrapezoidalIntegration
   "Tests the correct implementation of the function trapezoidalIntegration"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Real y1[7] = {72, 70, 64, 54, 40, 22, 0}; //function values of y = -2*x^2-72 for x={0,1,2,3,4,5,6}
   Real y "Integration result";
   //Real y2[7] = {0.3333, 1.0, 3.0, 9.9, 27.0, 81.0, 243.0}; // //function values of y = 3^(3x-1) for x=0:0.3333:2
@@ -28,5 +26,6 @@ January 8, 2014, by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TrapezoidalIntegration;

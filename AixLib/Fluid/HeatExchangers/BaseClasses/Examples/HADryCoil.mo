@@ -1,8 +1,6 @@
 within AixLib.Fluid.HeatExchangers.BaseClasses.Examples;
 model HADryCoil "Test model for dry coil convection coefficient"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Fluid.HeatExchangers.BaseClasses.HADryCoil  hADryCoi(
     m_flow_nominal_w=0.1,
     UA_nominal=10000,
@@ -90,5 +88,6 @@ April 9, 2017, by Michael Wetter:<br/>
 First version.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end HADryCoil;

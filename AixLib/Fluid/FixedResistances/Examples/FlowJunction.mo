@@ -3,8 +3,6 @@ model FlowJunction
   "Test model for the three way splitter/mixer model"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Air "Medium model";
 
   AixLib.Fluid.FixedResistances.Junction spl(
@@ -120,5 +118,6 @@ July 20, 2007 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FlowJunction;

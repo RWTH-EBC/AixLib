@@ -2,8 +2,6 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
 model FlowReversal
   "Simple example of plug flow pipe with flow reversal"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water "Medium in the pipe";
   Modelica.Blocks.Sources.Step m_flow(
     height=-4,
@@ -80,5 +78,6 @@ October 25, 2017, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FlowReversal;

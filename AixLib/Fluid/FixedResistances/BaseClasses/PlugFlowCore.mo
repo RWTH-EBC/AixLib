@@ -3,8 +3,6 @@ model PlugFlowCore
   "Pipe model using spatialDistribution for temperature delay with modified delay tracker"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
@@ -273,5 +271,6 @@ D., Nytsch-Geusen, C., Wetter, M. and Helsen, L. (2017).<br/>
 Dynamic equation-based thermo-hydraulic pipe model for district heating and cooling systems.<br/>
 <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
 <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi: 10.1016/j.enconman.2017.08.072</a>.</p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PlugFlowCore;

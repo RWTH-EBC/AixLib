@@ -1,8 +1,6 @@
 within AixLib.Fluid.Examples.Performance;
 model Example1v2 "Example 1 model with mixing volume"
   extends AixLib.Fluid.Examples.Performance.BaseClasses.Example1;
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Time tau=10 "Time constant at nominal flow";
 
   Fluid.Delays.DelayFirstOrder[nRes.k] vol(

@@ -9,8 +9,6 @@ partial model PartialResistance "Partial model for a hydraulic resistance"
           then m_flow_nominal_pos else 1),
      final m_flow_small = 1E-4*abs(m_flow_nominal));
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
@@ -236,5 +234,6 @@ July 20, 2007 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialResistance;

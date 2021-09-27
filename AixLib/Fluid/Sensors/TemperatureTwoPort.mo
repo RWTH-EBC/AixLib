@@ -1,8 +1,6 @@
 within AixLib.Fluid.Sensors;
 model TemperatureTwoPort "Ideal two port temperature sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput T(final quantity="ThermodynamicTemperature",
                                           final unit="K",
                                           displayUnit = "degC",
@@ -205,5 +203,6 @@ First implementation, based on
 <a href=\"modelica://AixLib.Fluid.Sensors.Temperature\">AixLib.Fluid.Sensors.Temperature</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TemperatureTwoPort;

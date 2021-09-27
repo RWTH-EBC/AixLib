@@ -1,7 +1,5 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses;
 partial model PartialBorehole "Partial model for borehole example models"
-
-  extends AixLib.Icons.ibpsa;
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   parameter Integer nSeg(min=1) = 10
@@ -84,5 +82,6 @@ July 9, 2018, by Alex Laferri&egrave;re:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialBorehole;

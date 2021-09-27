@@ -3,8 +3,6 @@ model LimPIDReset
   "Test model for PID controller with optional intgerator reset"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Sources.Sine setPoi(freqHz=1) "Set point signal"
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
   AixLib.Controls.Continuous.LimPID limPIDPar(
@@ -122,5 +120,6 @@ The instance <code>limPIWithReset</code> is the implementation from this library
 with integrator reset enabled. Whenever the boolean pulse input becomes true,
 the integrator is reset to <code>y_reset</code>.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end LimPIDReset;

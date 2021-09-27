@@ -1,8 +1,6 @@
 within AixLib.Fluid.Sensors;
 model TemperatureWetBulbTwoPort "Ideal wet bulb temperature sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput T(
     start=TWetBul_start,
     final quantity="ThermodynamicTemperature",
@@ -155,5 +153,6 @@ Implementation is based on
 <a href=\"modelica://AixLib.Fluid.Sensors.Temperature\">AixLib.Fluid.Sensors.Temperature</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TemperatureWetBulbTwoPort;

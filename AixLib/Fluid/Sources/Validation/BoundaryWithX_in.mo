@@ -3,8 +3,6 @@ model BoundaryWithX_in
   "Validation model for boundary with different media and mass fraction input"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.Fluid.Sources.Validation.BaseClasses.BoundarySystemWithX_in bouMoiAir(
     redeclare package Medium = AixLib.Media.Air)
     "Boundary with moist air"

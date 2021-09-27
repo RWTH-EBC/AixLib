@@ -2,14 +2,12 @@ within AixLib.Fluid.FMI.BaseClasses;
 block X_w_toX "Conversion from Xi to X"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
-  Modelica.Blocks.Interfaces.RealInput X_w(final unit="kg/kg")
-     if Medium.nXi > 0 "Water mass fraction per total air mass"
+  Modelica.Blocks.Interfaces.RealInput X_w(final unit="kg/kg") if
+        Medium.nXi > 0 "Water mass fraction per total air mass"
      annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput X[Medium.nX](
     each final unit="kg/kg",
@@ -54,5 +52,6 @@ input <code>X</code>, because the conversion from scalar to vector
 needs to access the conditional connector, but conditional connectors
 can only be used in <code>connect</code> statements.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end X_w_toX;

@@ -2,8 +2,6 @@ within AixLib.Airflow.Multizone.Examples;
 model ReverseBuoyancy
   "Model with four rooms and buoyancy-driven air circulation that reverses direction"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air;
   AixLib.Fluid.MixingVolumes.MixingVolume volBotEas(
     redeclare package Medium = Medium,
@@ -297,5 +295,6 @@ November 10, 2011, by Michael Wetter:<br/>
 Added documentation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end ReverseBuoyancy;

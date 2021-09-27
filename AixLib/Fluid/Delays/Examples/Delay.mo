@@ -1,8 +1,6 @@
 within AixLib.Fluid.Delays.Examples;
 model Delay
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
 // We set X_default to a small enough value to avoid saturation at the medium temperature
 // that is used in this model.
  package Medium = AixLib.Media.Air(X_default={0.001, 0.999});

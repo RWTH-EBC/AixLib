@@ -10,6 +10,7 @@ record Daikin_WRA048_16kW_4_60COP_R410A =
     UACon = 2860.44257631,
     UAEva = 17688.743889)
     "Calibrated parameters for Daikin WRA048"
+
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
@@ -25,4 +26,5 @@ March 6, 2017, by Massimo Cimmino:<br/>
 Calibrated parameters.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");

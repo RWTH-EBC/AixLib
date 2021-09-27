@@ -2,8 +2,6 @@ within AixLib.Fluid.FixedResistances.Validation;
 model LosslessPipe "Validation model for lossless pipe"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Air "Medium model";
 
   Modelica.Blocks.Sources.Ramp m_flow(
@@ -59,5 +57,6 @@ First implementation for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end LosslessPipe;

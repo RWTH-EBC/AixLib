@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model CheckBlackBodySkyTemperature
   "Test model for CheckBlackBodySkyTemperature"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckBlackBodySkyTemperature
     cheSkyBlaBodTem "Check for the black body sky temperature"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));

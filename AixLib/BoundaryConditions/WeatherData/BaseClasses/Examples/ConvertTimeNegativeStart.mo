@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model ConvertTimeNegativeStart
   "Validation of time conversion for negative start time"
   extends AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples.ConvertTime;
-
-  extends AixLib.Icons.ibpsa;
   annotation (
   Documentation(info="<html>
 <p>

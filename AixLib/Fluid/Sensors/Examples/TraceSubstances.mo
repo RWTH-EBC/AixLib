@@ -1,8 +1,6 @@
 within AixLib.Fluid.Sensors.Examples;
 model TraceSubstances "Test model for the extra property sensor"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"})
     "Medium model";
 
@@ -166,5 +164,6 @@ September 29, 2009 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TraceSubstances;

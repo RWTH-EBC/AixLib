@@ -3,8 +3,6 @@ model DoorDiscretizedOperable
   "Door model using discretization along height coordinate"
   extends AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized;
 
-  extends AixLib.Icons.ibpsa;
-
    parameter Modelica.SIunits.PressureDifference dpCloRat(min=0,
                                                           displayUnit="Pa") = 4
     "Pressure drop at rating condition of closed door"
@@ -150,5 +148,6 @@ February 10, 2005 by Michael Wetter:<br/>
 Released first version.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end DoorDiscretizedOperable;

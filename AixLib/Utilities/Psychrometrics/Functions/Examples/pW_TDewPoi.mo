@@ -2,8 +2,6 @@ within AixLib.Utilities.Psychrometrics.Functions.Examples;
 model pW_TDewPoi "Model to test pW_TDewPoi and its inverse function"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.SIunits.Temperature T "Dew point temperature";
   Modelica.SIunits.Temperature TInv "Dew point temperature";
   Modelica.SIunits.TemperatureDifference dT "Difference between temperatures";

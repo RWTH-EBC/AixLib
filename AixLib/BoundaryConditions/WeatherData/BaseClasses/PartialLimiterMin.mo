@@ -3,8 +3,6 @@ partial block PartialLimiterMin
   "Partial block to limit a signal"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Interfaces.RealInput u "Connector of Real input signal"
   annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}})));

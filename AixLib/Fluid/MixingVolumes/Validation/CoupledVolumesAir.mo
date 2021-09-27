@@ -4,8 +4,6 @@ model CoupledVolumesAir
   extends AixLib.Fluid.MixingVolumes.Validation.CoupledVolumesWater(
     redeclare package Medium = AixLib.Media.Air);
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

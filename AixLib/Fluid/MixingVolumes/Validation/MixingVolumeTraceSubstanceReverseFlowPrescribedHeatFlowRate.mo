@@ -3,8 +3,6 @@ model MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate
   "Validation model for mixing volume with trace substance input and flow reversal, and prescribed heat flow rate"
   extends MixingVolumeTraceSubstanceReverseFlow(
     prescribedHeatFlowRate=true);
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(
 info="<html>
 <p>

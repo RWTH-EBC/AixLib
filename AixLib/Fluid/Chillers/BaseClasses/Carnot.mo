@@ -4,8 +4,6 @@ partial model Carnot
     m1_flow_nominal = QCon_flow_nominal/cp1_default/dTCon_nominal,
     m2_flow_nominal = QEva_flow_nominal/cp2_default/dTEva_nominal);
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
@@ -150,7 +148,7 @@ protected
   constant Boolean COP_is_for_cooling
     "Set to true if the specified COP is for cooling";
 
-  parameter Real etaCarnot_nominal_internal(unit="1")=
+  parameter Real etaCarnot_nominal_internal(unit="1") =
     if use_eta_Carnot_nominal
       then etaCarnot_nominal
       else COP_nominal/
@@ -159,7 +157,7 @@ protected
 
   // For Carnot_y, computing etaPL = f(yPL) introduces a nonlinear equation.
   // The parameter below avoids this if a = {1}.
-  final parameter Boolean evaluate_etaPL=
+  final parameter Boolean evaluate_etaPL =
     not ((size(a, 1) == 1 and abs(a[1] - 1)  < Modelica.Constants.eps))
     "Flag, true if etaPL should be computed as it depends on yPL"
     annotation(Evaluate=true);
@@ -426,5 +424,6 @@ January 26, 2016, by Michael Wetter:<br/>
 First implementation of this base class.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Carnot;

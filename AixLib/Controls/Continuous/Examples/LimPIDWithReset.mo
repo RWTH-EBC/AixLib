@@ -3,8 +3,6 @@ model LimPIDWithReset
   "Example that demonstrates the controller output reset"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Plant plaWitRes "Plant connected to controller with reset" annotation (
       Placement(transformation(extent={{20,40},{40,60}})));
   Controller conWitRes(reset=AixLib.Types.Reset.Parameter)
@@ -101,7 +99,8 @@ October 3, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
   end Plant;
 
   model Controller "PID controller with optional output reset"
@@ -184,7 +183,8 @@ October 3, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
   end Controller;
 
 equation
@@ -224,5 +224,6 @@ September 29, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end LimPIDWithReset;

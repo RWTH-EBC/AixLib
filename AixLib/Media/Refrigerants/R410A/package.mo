@@ -11,16 +11,10 @@ package R410A "Refrigerant R410A"
   final constant Modelica.SIunits.Temperature T_min = 173.15
     "Minimum temperature for correlated properties";
 
-protected 
-  final constant Real b = 4.355134e-4
-    "Coefficient b for Martin-Hou equation of state";
-  final constant Real k = 5.75
-    "Coefficient K for Martin-Hou equation of state";
-public 
   final constant Modelica.SIunits.AbsolutePressure pCri = 4926.1e3
     "Critical pressure";
 
-protected 
+protected
   final constant Real A[:] = {-1.721781e2, 2.381558e-1, -4.329207e-4, -6.241072e-7}
     "Coefficients A for Martin-Hou equation of state";
 
@@ -30,7 +24,11 @@ protected
   final constant Real C[:] = {-6.293665e3, 1.532461e1, 0, 1.604125e-4}
     "Coefficients C for Martin-Hou equation of state";
 
+  final constant Real b = 4.355134e-4
+    "Coefficient b for Martin-Hou equation of state";
 
+  final constant Real k = 5.75
+    "Coefficient K for Martin-Hou equation of state";
 
 annotation (preferredView="info",Documentation(info="<HTML>
 <p>

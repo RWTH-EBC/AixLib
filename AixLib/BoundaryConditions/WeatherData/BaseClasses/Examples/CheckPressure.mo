@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model CheckPressure "Test model for pressure check"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckPressure chePre
     "Block that checks the pressure"
     annotation (Placement(transformation(extent={{20,0},{40,20}})));

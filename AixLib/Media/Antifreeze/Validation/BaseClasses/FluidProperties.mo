@@ -2,8 +2,6 @@ within AixLib.Media.Antifreeze.Validation.BaseClasses;
 partial model FluidProperties
   "Partial model that tests the implementation of temperature- and concentration-dependent fluid properties"
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium =
       AixLib.Media.Antifreeze.Validation.BaseClasses.PropyleneGlycolWater
     "Medium package";
@@ -64,5 +62,6 @@ March 14, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FluidProperties;

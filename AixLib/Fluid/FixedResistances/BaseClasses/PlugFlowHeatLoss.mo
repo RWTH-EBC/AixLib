@@ -4,8 +4,6 @@ model PlugFlowHeatLoss
   extends Fluid.Interfaces.PartialTwoPortTransport(
     final allowFlowReversal=true,
     final dp_start=0);
-
-  extends AixLib.Icons.ibpsa;
     // allowFlowReversal set to true because this model is used for inlet and outlets
 
   parameter Real C(unit="J/(K.m)")

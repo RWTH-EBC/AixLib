@@ -6,8 +6,6 @@ block HVACZones
     nZon = 2,
     nPorts = 3);
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package MediumA = AixLib.Media.Air "Medium for air";
   replaceable package MediumW = AixLib.Media.Water "Medium for water";
 

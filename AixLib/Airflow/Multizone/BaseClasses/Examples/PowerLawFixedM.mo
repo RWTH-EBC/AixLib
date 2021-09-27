@@ -1,8 +1,6 @@
 within AixLib.Airflow.Multizone.BaseClasses.Examples;
 model PowerLawFixedM "Test model for power law function"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   parameter Real k = 2/10^m "Flow coefficient, k = V_flow/ dp^m";
 
   constant Real m(min=0.5, max=1) = 0.5
@@ -66,5 +64,6 @@ August 12, 2011, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PowerLawFixedM;

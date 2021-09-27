@@ -1,8 +1,6 @@
 within AixLib.Fluid.Geothermal.Borefields.Validation;
 model Sandbox "Validation of BorefieldOneUTube based on the experiment of Beier et al. (2011)"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Water;
 
   parameter Modelica.SIunits.Temperature T_start = 273.15 + 22.09

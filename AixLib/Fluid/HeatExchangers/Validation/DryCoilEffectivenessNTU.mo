@@ -3,8 +3,6 @@ model DryCoilEffectivenessNTU
   "Model that demonstrates use of a heat exchanger without condensation that uses the epsilon-NTU relation"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium1 = AixLib.Media.Water;
  package Medium2 = AixLib.Media.Air;
 
@@ -271,5 +269,6 @@ February 12, 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end DryCoilEffectivenessNTU;

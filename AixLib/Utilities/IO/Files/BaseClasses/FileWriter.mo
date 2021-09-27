@@ -2,8 +2,6 @@ within AixLib.Utilities.IO.Files.BaseClasses;
 model FileWriter "Partial model for writing results to a .csv file"
   extends Modelica.Blocks.Icons.DiscreteBlock;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Integer nin
     "Number of inputs"
     annotation(Evaluate=true, Dialog(connectorSizing=true));
@@ -123,5 +121,6 @@ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
 Base class for a file writer.        
 See extending classes.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FileWriter;

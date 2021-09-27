@@ -1,8 +1,6 @@
 within AixLib.Utilities.Diagnostics.BaseClasses;
 block PartialInputCheck "Assert when condition is violated"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Time startTime = 0
     "Start time for activating the assert";
   parameter Real threShold(min=0)=1E-2 "Threshold for equality comparison";
@@ -39,5 +37,6 @@ April 17, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialInputCheck;

@@ -4,8 +4,6 @@ model OneUTube
   extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield(
     redeclare AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube borHol);
 
-  extends AixLib.Icons.ibpsa;
-
   annotation (
   defaultComponentName="borFie",
   Documentation(info="<html>
@@ -33,5 +31,6 @@ July 2014, by Damien Picard:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end OneUTube;

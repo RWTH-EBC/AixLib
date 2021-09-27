@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math.Functions.Examples;
 model Polynomial
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Real x "Function value";
 equation
   x=AixLib.Utilities.Math.Functions.polynomial(x=time^3-2, a={2, 4, -4, 5});
@@ -43,5 +41,6 @@ October 29, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Polynomial;

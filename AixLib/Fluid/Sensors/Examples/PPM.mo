@@ -1,8 +1,6 @@
 within AixLib.Fluid.Sensors.Examples;
 model PPM "Test model for the extra property sensor outputting PPM"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"})
     "Medium model";
 
@@ -155,5 +153,6 @@ See issue
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PPM;

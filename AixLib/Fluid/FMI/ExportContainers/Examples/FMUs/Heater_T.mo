@@ -9,8 +9,6 @@ block Heater_T
       final QMax_flow=QMax_flow,
       final energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.HeatFlowRate QMax_flow=Modelica.Constants.inf
     "Maximum heat flow rate for heating (positive)";
   parameter Modelica.SIunits.HeatFlowRate QMin_flow=-Modelica.Constants.inf

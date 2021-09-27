@@ -3,8 +3,6 @@ model Outside
   "Boundary that takes weather data, and optionally trace substances, as an input"
   extends AixLib.Fluid.Sources.BaseClasses.Outside;
 
-  extends AixLib.Icons.ibpsa;
-
 equation
   connect(weaBus.pAtm, p_in_internal);
   connect(weaBus.TDryBul, T_in_internal);
@@ -53,5 +51,6 @@ Feb. 9, 2011 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Outside;

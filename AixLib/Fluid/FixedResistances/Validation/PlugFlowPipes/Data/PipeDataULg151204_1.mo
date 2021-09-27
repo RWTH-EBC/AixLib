@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
+within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
 record PipeDataULg151204_1
   "Experimental data from ULg's pipe test bench from December 4, 2015 (1);
   increase followed by a decrease in temperature"
@@ -39,5 +39,6 @@ See <a href=\"AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseCl
 AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg</a>
 for more information.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PipeDataULg151204_1;

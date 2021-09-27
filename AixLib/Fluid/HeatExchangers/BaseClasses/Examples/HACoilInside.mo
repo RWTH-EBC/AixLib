@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatExchangers.BaseClasses.Examples;
 model HACoilInside "Test model for HACoilInside"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Sources.Sine sine(
     freqHz=0.1,
     amplitude=0.063,
@@ -44,5 +42,6 @@ May 11, 2013, by Michael Wetter:<br/>
 First version.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end HACoilInside;

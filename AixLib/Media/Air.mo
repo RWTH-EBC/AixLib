@@ -180,7 +180,8 @@ First implementation based on Modelica Standard Library,
 but with <code>noEvent</code> added to check of bounds.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
   end BaseProperties;
 
 redeclare function density "Gas density"
@@ -193,7 +194,8 @@ algorithm
   Inline=true,
   Documentation(info="<html>
 Density is computed from pressure, temperature and composition in the thermodynamic state record applying the ideal gas law.
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end density;
 
 redeclare function extends dynamicViscosity
@@ -230,7 +232,8 @@ December 19, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end dynamicViscosity;
 
 redeclare function enthalpyOfCondensingGas
@@ -297,7 +300,8 @@ algorithm
     Inline=true,
     Documentation(info="<html>
 The ideal gas constant for moist air is computed from <a href=\"modelica://Modelica.Media.Air.MoistAir.ThermodynamicState\">thermodynamic state</a> assuming that all water is in the gas phase.
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end gasConstant;
 
 redeclare function extends pressure
@@ -310,7 +314,8 @@ algorithm
   Inline=true,
   Documentation(info="<html>
 Pressure is returned from the thermodynamic state record input as a simple assignment.
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end pressure;
 
 redeclare function extends isobaricExpansionCoefficient
@@ -343,7 +348,8 @@ December 18, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end isobaricExpansionCoefficient;
 
 redeclare function extends isothermalCompressibility
@@ -376,7 +382,8 @@ December 18, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end isothermalCompressibility;
 
 redeclare function extends saturationPressure
@@ -465,7 +472,8 @@ November 27, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end specificEntropy;
 
 redeclare function extends density_derp_T
@@ -487,7 +495,8 @@ December 18, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end density_derp_T;
 
 redeclare function extends density_derT_p
@@ -512,7 +521,8 @@ December 18, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end density_derT_p;
 
 redeclare function extends density_derX
@@ -537,7 +547,8 @@ December 18, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end density_derX;
 
 redeclare replaceable function extends specificHeatCapacityCp
@@ -584,7 +595,8 @@ algorithm
 The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
     is computed from density <code>d</code>, temperature <code>T</code> and composition <code>X</code>.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end setState_dTX;
 
 redeclare function extends setState_phX
@@ -600,7 +612,8 @@ algorithm
   Documentation(info="<html>
 The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">
 thermodynamic state record</a> is computed from pressure p, specific enthalpy h and composition X.
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end setState_phX;
 
 redeclare function extends setState_pTX
@@ -616,7 +629,8 @@ algorithm
   Documentation(info="<html>
 The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">
 thermodynamic state record</a> is computed from pressure p, temperature T and composition X.
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end setState_pTX;
 
 redeclare function extends setState_psX
@@ -671,7 +685,8 @@ November 27, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end setState_psX;
 
 redeclare replaceable function extends specificEnthalpy
@@ -710,7 +725,8 @@ Added <code>Inline=true</code> for
 issue 227</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end specificEnthalpy_pTX;
 
 redeclare replaceable function extends specificGibbsEnergy
@@ -752,7 +768,8 @@ December 18, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end isentropicEnthalpy;
 
 redeclare function extends specificInternalEnergy "Specific internal energy"
@@ -772,7 +789,8 @@ algorithm
   Inline=true,
   Documentation(info="<html>
 Temperature is returned from the thermodynamic state record input as a simple assignment.
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end temperature;
 
 redeclare function extends molarMass "Return the molar mass"
@@ -793,7 +811,8 @@ December 18, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end molarMass;
 
 redeclare replaceable function temperature_phX
@@ -823,7 +842,8 @@ Added <code>Inline=true</code> for
 issue 227</a>.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end temperature_phX;
 
 redeclare function extends thermalConductivity
@@ -870,7 +890,8 @@ November 21, 2013, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
   end GasProperties;
   // In the assignments below, we compute cv as OpenModelica
   // cannot evaluate cv=cp-R as defined in GasProperties.

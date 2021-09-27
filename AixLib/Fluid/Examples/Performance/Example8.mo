@@ -1,8 +1,6 @@
 within AixLib.Fluid.Examples.Performance;
 model Example8 "Common subexpression elimination example"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Real a = sin(time+1);
   Real b = sin(time+1);
 

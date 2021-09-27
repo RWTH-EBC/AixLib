@@ -14,8 +14,6 @@ model IndirectTankHeatExchanger
     redeclare final package Medium = MediumHex,
     final show_T=false);
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
@@ -98,8 +96,8 @@ model IndirectTankHeatExchanger
      each T(start=T_start,
             fixed=(energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.FixedInitial)),
      each der_T(
-            fixed=(energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.SteadyStateInitial)))
-          if not energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.SteadyState
+            fixed=(energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.SteadyStateInitial))) if
+             not energyDynamicsSolid == Modelica.Fluid.Types.Dynamics.SteadyState
     "Thermal mass of the heat exchanger"
     annotation (Placement(transformation(extent={{-6,6},{14,26}})));
 protected
@@ -368,5 +366,6 @@ Propagated <code>allowFlowReversal</code>.
           First implementation.
           </li>
           </ul>
-          </html>"));
+          </html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end IndirectTankHeatExchanger;

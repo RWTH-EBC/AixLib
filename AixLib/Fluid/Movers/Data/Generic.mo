@@ -165,5 +165,6 @@ AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>
 to normalize the control input signal.
 Otherwise, these speed parameters in RPM are not used in the models.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Generic;

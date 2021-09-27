@@ -2,8 +2,6 @@ within AixLib.Fluid.Sensors;
 model SpecificEnthalpy "Ideal one port specific enthalpy sensor"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
   extends Modelica.Icons.RotationalSensor;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealOutput h_out(final quantity="SpecificEnergy",
                                               final unit="J/kg")
     "Specific enthalpy in port medium"
@@ -62,5 +60,6 @@ September 29, 2009, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end SpecificEnthalpy;

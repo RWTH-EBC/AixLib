@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model Admix "Admix circuit with three way valve and pump"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 

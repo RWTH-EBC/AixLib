@@ -26,8 +26,6 @@ model Carnot_TCon
     final homotopyInitialization=homotopyInitialization,
     final Q_flow_nominal=QEva_flow_nominal));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.HeatFlowRate QCon_flow_max(
     min=0) = Modelica.Constants.inf
     "Maximum heat flow rate for heating (positive)";
@@ -179,5 +177,6 @@ November 25, 2015 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Carnot_TCon;

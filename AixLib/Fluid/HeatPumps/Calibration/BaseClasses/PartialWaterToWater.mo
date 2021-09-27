@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatPumps.Calibration.BaseClasses;
 model PartialWaterToWater
   "Partial model for calibration of water to water heat pumps"
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium1 = Modelica.Media.Interfaces.PartialMedium
     "Medium model at the condenser side";
 
@@ -124,5 +122,6 @@ October 31, 2016, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialWaterToWater;

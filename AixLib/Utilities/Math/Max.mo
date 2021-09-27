@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math;
 block Max "Maximum element of a vector"
   extends Modelica.Blocks.Interfaces.MISO;
-
-  extends AixLib.Icons.ibpsa;
 equation
  y = max(u);
 annotation (defaultComponentName="max",

@@ -3,8 +3,6 @@ model Buoyancy
   "Model to add buoyancy if there is a temperature inversion in the tank"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium "Medium model"  annotation (
       choicesAllMatching = true);
   parameter Modelica.SIunits.Volume V "Volume";

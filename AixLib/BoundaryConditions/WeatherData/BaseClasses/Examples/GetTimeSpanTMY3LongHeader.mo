@@ -3,8 +3,6 @@ model GetTimeSpanTMY3LongHeader
   "Test model to get the time span of a weather file with a long header line"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter String filNam=Modelica.Utilities.Files.loadResource(
   "modelica://AixLib/Resources/Data/BoundaryConditions/WeatherData/BaseClasses/Examples/weatherWithLongHeader.mos")
    "Name of weather data file";

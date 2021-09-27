@@ -2,8 +2,6 @@ within AixLib.Utilities.Psychrometrics;
 block SaturationPressureLiquid
   "Saturation pressure as a function of temperature"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Interfaces.RealInput TSat(unit="K",
                                             displayUnit="degC",
                                             nominal=300)

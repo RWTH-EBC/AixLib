@@ -7,8 +7,6 @@ model MixingVolumeMoistureReverseFlow
     redeclare MixingVolumeMoistAir volDyn,
     redeclare MixingVolumeMoistAir volSte);
 
-  extends AixLib.Icons.ibpsa;
-
 equation
   connect(volDyn.mWat_flow, gain.y) annotation (Line(points={{8,18},{-2,18},{-10,
           18},{-10,40},{-19,40}}, color={0,0,127}));

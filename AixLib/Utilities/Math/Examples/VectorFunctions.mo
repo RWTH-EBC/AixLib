@@ -2,8 +2,6 @@ within AixLib.Utilities.Math.Examples;
 model VectorFunctions "Test model for functions that take a vector as argument"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   AixLib.Utilities.Math.Min minVec(
                    nin=3)
     annotation (Placement(transformation(extent={{-20,20},{0,40}})));
@@ -62,5 +60,6 @@ August 15, 2008, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end VectorFunctions;

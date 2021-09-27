@@ -3,8 +3,6 @@ model GFunction_SmallScaleValidation
   "g-Function calculation for the small scale validation case"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses.SmallScale_Borefield borFieDat
     "Record of borehole configuration data";
   parameter Integer nBor = borFieDat.conDat.nBor "Number of boreholes";
@@ -104,5 +102,6 @@ July 18, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end GFunction_SmallScaleValidation;

@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatPumps.Compressors.BaseClasses;
 model TemperatureProtection
   "Temperature protection for heat pump compressor"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Temperature TConMax
     "Upper bound for condenser temperature";
   parameter Modelica.SIunits.Temperature TEvaMin
@@ -165,5 +163,6 @@ and <code>TEvaMin</code>.
 Parameter <code>dTHys</code> may be used
 to change the hysteresis interval.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TemperatureProtection;

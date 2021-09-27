@@ -2,8 +2,6 @@ within AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.BaseClasses;
 partial model PartialVDI6007
   "Partial model for equivalent air temperature as defined in VDI 6007 Part 1"
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.Emissivity aExt
     "Coefficient of absorption of exterior walls (outdoor)";
   parameter Integer n "Number of orientations (without ground)";
@@ -149,5 +147,6 @@ equation
   Implemented.
   </li>
   </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PartialVDI6007;

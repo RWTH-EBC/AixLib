@@ -10,8 +10,6 @@ block HeaterCooler_u
       massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
     "Nominal mass flow rate";
   parameter Modelica.SIunits.PressureDifference dp_nominal(displayUnit="Pa")=0

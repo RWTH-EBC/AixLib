@@ -2,8 +2,6 @@ within AixLib.BoundaryConditions.SolarIrradiation.Examples;
 model DiffusePerez
   "Test model for diffuse solar irradiation on a tilted surface using the Perez model"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   parameter Modelica.SIunits.Angle lat=37/180*Modelica.Constants.pi "Latitude";
   parameter Modelica.SIunits.Angle azi=0.3 "Azi angle";
   parameter Modelica.SIunits.Angle til=0.5 "Tilted angle";
@@ -79,5 +77,6 @@ May 24, 2010, by Wangda Zuo:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end DiffusePerez;

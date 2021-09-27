@@ -3,8 +3,6 @@ model VDI6007WithWindow
   "Equivalent air temperature as defined in VDI 6007 Part 1 with modifications"
   extends BaseClasses.PartialVDI6007;
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWinOut
     "Windows' convective coefficient of heat transfer (outdoor)";
 
@@ -53,5 +51,6 @@ equation
   case heat transfer through windows and exterior walls is handled separately in
   the Reduced Order Model. The sum of all weightfactors for windows should be
   one as well as the sum for all wall elements.</p>
-  </html>"));
+  </html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end VDI6007WithWindow;

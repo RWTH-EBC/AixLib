@@ -1,8 +1,6 @@
 within AixLib.Fluid.Movers.BaseClasses.Validation;
 model PowerInterface "Simple model to validate PowerInterface"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   AixLib.Fluid.Movers.BaseClasses.PowerInterface powCoo(
     motorCooledByFluid=true,
     delta_V_flow=0.05) "Power interface model"

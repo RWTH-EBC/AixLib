@@ -3,8 +3,6 @@ block HVACThermalZoneSimpleAir2
   "Validation model for the convective HVAC system"
   extends AixLib.Fluid.FMI.ExportContainers.Validation.FMUs.HVACThermalZoneAir1(
     redeclare package Medium = Modelica.Media.Air.SimpleAir(extraPropertiesNames={"CO2"}));
-
-  extends AixLib.Icons.ibpsa;
 annotation (
     Documentation(info="<html>
 <p>

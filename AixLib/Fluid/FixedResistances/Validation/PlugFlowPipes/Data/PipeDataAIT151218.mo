@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
+within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
 record PipeDataAIT151218
   "Experimental data from AIT monitoring data December 18, 2015"
     extends BaseClasses.PipeDataBaseDefinition(
@@ -58,5 +58,6 @@ Notice that length are approximated
 <li>Wall roughness coefficient: 0.1 mm </li>
 </ul>
 
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PipeDataAIT151218;

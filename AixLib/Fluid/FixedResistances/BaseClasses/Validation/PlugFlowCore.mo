@@ -1,8 +1,6 @@
 within AixLib.Fluid.FixedResistances.BaseClasses.Validation;
 model PlugFlowCore "Simple example of plug flow pipe core"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   replaceable package Medium = AixLib.Media.Water "Medium in pipes"
                                             annotation (
       choicesAllMatching=true);
@@ -126,5 +124,6 @@ September 8, 2017 by Bram van der Heijde:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PlugFlowCore;

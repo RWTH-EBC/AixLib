@@ -1,8 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model EquationOfTime "Test model for equation of time"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Utilities.Time.ModelTime modTim "Block that outputs simulation time"
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   AixLib.BoundaryConditions.WeatherData.BaseClasses.EquationOfTime eqnTim

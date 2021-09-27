@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math.Examples;
 model Bicubic "Test model for bicubic function"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
   Modelica.Blocks.Sources.Ramp x1(duration=1)
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Sources.Ramp x2(
@@ -40,5 +38,6 @@ Sep 17, 2010 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Bicubic;

@@ -33,5 +33,6 @@ AixLib.Utilities.Math.Binomial</a>.
 July 17, 2018, by Massimo Cimmino:<br/>First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Binomial;

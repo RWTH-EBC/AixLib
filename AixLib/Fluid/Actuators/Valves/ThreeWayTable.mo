@@ -5,8 +5,6 @@ model ThreeWayTable
       redeclare TwoWayTable res1(final flowCharacteristics=flowCharacteristics1),
       redeclare TwoWayTable res3(final flowCharacteristics=flowCharacteristics3));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Data.Generic flowCharacteristics1
     "Table with flow characteristics for direct flow path at port_1"
      annotation (choicesAllMatching=true, Placement(transformation(extent={{-90,80},

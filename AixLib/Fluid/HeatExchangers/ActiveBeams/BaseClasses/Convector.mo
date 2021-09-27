@@ -6,8 +6,6 @@ model Convector "Heat exchanger for the water stream"
     final computeFlowResistance=true,
     final dp_nominal = per.dpWat_nominal "Don't multiply with nBeams, as the beams are in parallel");
 
-  extends AixLib.Icons.ibpsa;
-
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
@@ -174,5 +172,6 @@ May 20, 2016, by Alessandro Maccarini:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Convector;

@@ -1,8 +1,6 @@
 within AixLib.Utilities.Math;
 block BooleanReplicator "Boolean signal replicator"
   extends Modelica.Blocks.Icons.BooleanBlock;
-
-  extends AixLib.Icons.ibpsa;
   parameter Integer nout=1 "Number of outputs";
   Modelica.Blocks.Interfaces.BooleanInput u "Connector of boolean input signal"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -41,5 +39,6 @@ July 27, 2012, by Kaustubh Phalak:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end BooleanReplicator;

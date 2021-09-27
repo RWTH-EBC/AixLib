@@ -1,8 +1,6 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeMassFlow "Test model for mass flow into and out of volume"
   extends Modelica.Icons.Example;
-
-  extends AixLib.Icons.ibpsa;
  package Medium = AixLib.Media.Air "Medium model";
 
   parameter Modelica.SIunits.PressureDifference dp_nominal = 10

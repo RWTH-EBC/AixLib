@@ -29,6 +29,8 @@ block SafetyControl "Block including all safety levels"
       choicesAllMatching=true);
   parameter Real tableUpp[:,2] "Upper boundary of envelope"
     annotation (Dialog(group="Operational Envelope", enable=use_opeEnv and not use_opeEnvFroRec));
+  parameter Modelica.SIunits.TemperatureDifference dTHystOperEnv=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+    annotation (Dialog(group="Operational Envelope", enable=use_opeEnv));
   parameter Boolean pre_n_start=true "Start value of pre(n) at initial time"
     annotation (Dialog(group="OnOffControl", descriptionLabel=true),choices(checkBox=true));
   parameter Boolean use_deFro
@@ -55,7 +57,8 @@ block SafetyControl "Block including all safety levels"
     final use_opeEnv=use_opeEnv,
     final tableUpp=tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
-    final dataTable=dataTable)
+    final dataTable=dataTable,
+    final dTHyst=dTHystOperEnv)
     annotation (Placement(transformation(extent={{-10,-10},{14,12}})));
   OnOffControl onOffController(
     final minRunTime=minRunTime,
@@ -89,18 +92,18 @@ block SafetyControl "Block including all safety levels"
         origin={130,80})));
   AntiFreeze antiFreeze(final TAntFre=TantFre, final use_antFre=use_antFre)
     annotation (Placement(transformation(extent={{24,-8},{48,12}})));
-  Modelica.Blocks.Routing.BooleanPassThrough boolPasThrDef
-                                                        if not use_deFro
+  Modelica.Blocks.Routing.BooleanPassThrough boolPasThrDef if
+                                                           not use_deFro
     "No 2. Layer" annotation (Placement(transformation(extent={{-92,-50},{-76,
             -34}})), choicesAllMatching=true);
-  Modelica.Blocks.Interfaces.IntegerOutput ERR_opeEnv
-                                                  if use_opeEnv annotation (
+  Modelica.Blocks.Interfaces.IntegerOutput ERR_opeEnv if
+                                                     use_opeEnv annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,-110})));
-  Modelica.Blocks.Interfaces.IntegerOutput ERR_antFre
-                                                  if use_antFre annotation (
+  Modelica.Blocks.Interfaces.IntegerOutput ERR_antFre if
+                                                     use_antFre annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

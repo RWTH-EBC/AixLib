@@ -50,5 +50,6 @@ January 19, 2016, by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end TopS40slash7;

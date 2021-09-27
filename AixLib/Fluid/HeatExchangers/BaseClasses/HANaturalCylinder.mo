@@ -2,8 +2,6 @@ within AixLib.Fluid.HeatExchangers.BaseClasses;
 model HANaturalCylinder
   "Calculates an hA value for natural convection around a cylinder"
   extends Modelica.Blocks.Icons.Block;
-
-  extends AixLib.Icons.ibpsa;
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium inside the tank";
   parameter Modelica.SIunits.Diameter ChaLen

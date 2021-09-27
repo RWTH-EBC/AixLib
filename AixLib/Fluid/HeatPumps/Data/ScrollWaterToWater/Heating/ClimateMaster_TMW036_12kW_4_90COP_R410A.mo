@@ -10,6 +10,7 @@ record ClimateMaster_TMW036_12kW_4_90COP_R410A =
     UACon = 2434.90888536,
     UAEva = 925.546637632)
     "Calibrated parameters for ClimateMaster TMW036"
+
   annotation (
     defaultComponentPrefixes = "parameter",
     defaultComponentName="datHeaPum",
@@ -25,4 +26,5 @@ March 6, 2017, by Massimo Cimmino:<br/>
 Calibrated parameters.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");

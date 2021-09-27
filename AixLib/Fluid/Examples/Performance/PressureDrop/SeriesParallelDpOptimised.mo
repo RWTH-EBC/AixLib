@@ -4,8 +4,6 @@ model SeriesParallelDpOptimised
   extends SeriesParallelDp(
     res2(from_dp=true),
     resParallel(each from_dp=true));
-
-  extends AixLib.Icons.ibpsa;
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

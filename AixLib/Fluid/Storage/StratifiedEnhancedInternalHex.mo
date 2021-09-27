@@ -3,8 +3,6 @@ model StratifiedEnhancedInternalHex
   "A model of a water storage tank with a secondary loop and intenral heat exchanger"
   extends StratifiedEnhanced;
 
-  extends AixLib.Icons.ibpsa;
-
   replaceable package MediumHex =
       Modelica.Media.Interfaces.PartialMedium "Medium in the heat exchanger"
     annotation(Dialog(tab="General", group="Heat exchanger"));
@@ -340,5 +338,6 @@ January 29, 2013 by Peter Grant:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end StratifiedEnhancedInternalHex;

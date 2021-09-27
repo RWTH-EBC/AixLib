@@ -53,5 +53,6 @@ First implementation.
 <p>
 Performance data for a generic active beam.
 </p>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end Generic;

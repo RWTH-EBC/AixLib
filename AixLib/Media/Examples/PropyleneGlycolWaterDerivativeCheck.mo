@@ -3,8 +3,6 @@ model PropyleneGlycolWaterDerivativeCheck
   "Model that tests the derivative implementation"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
    package Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater (
       X_a=0.60,
       property_T=293.15);
@@ -62,5 +60,6 @@ March 13, 2018, by Massimo Cimmino:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PropyleneGlycolWaterDerivativeCheck;

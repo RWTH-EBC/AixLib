@@ -22,8 +22,6 @@ model FlowControlled_dp
             dp =     {i/(nOri-1)*2.0*dp_nominal for i in (nOri-1):-1:0}),
       final use_powerCharacteristic = if per.havePressureCurve then per.use_powerCharacteristic else false)));
 
-  extends AixLib.Icons.ibpsa;
-
   parameter Modelica.SIunits.PressureDifference dp_start(
     min=0,
     displayUnit="Pa")=0 "Initial value of pressure raise"
@@ -65,8 +63,8 @@ model FlowControlled_dp
         rotation=90,
         origin={-80,120})));
 
-  Modelica.Blocks.Interfaces.RealInput dp_in(final unit="Pa")
- if inputType == AixLib.Fluid.Types.InputType.Continuous
+  Modelica.Blocks.Interfaces.RealInput dp_in(final unit="Pa") if
+    inputType == AixLib.Fluid.Types.InputType.Continuous
     "Prescribed pressure rise"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -268,5 +266,6 @@ Revised implementation to allow zero flow rate.
     by Michael Wetter:<br/>
        Added model to the AixLib library.
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end FlowControlled_dp;

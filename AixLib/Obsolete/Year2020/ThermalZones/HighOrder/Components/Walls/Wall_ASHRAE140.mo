@@ -125,7 +125,7 @@ public
     heatConv(calcMethod=2)) "Wall" annotation (Placement(transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
-                                 SolarRadiationPort  if outside annotation (
+                                 SolarRadiationPort if  outside annotation (
       Placement(transformation(extent={{-116,79},{-96,99}}),
         iconTransformation(extent={{-36,100},{-16,120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside
@@ -197,7 +197,7 @@ public
   Window window(
     T0=T0,
     windowarea=windowarea,
-    WindowType=WindowType)          if withWindow and outside
+    WindowType=WindowType) if          withWindow and outside
     annotation (Placement(transformation(extent={{-9,-42},{11,-22}})));
 equation
 

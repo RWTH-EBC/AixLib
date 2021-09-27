@@ -3,8 +3,6 @@ block WallSolarAzimuth
   "Angle measured in a horizontal plane between the projection of the sun's rays and the normal to a vertical surface"
   extends Modelica.Blocks.Icons.Block;
 
-  extends AixLib.Icons.ibpsa;
-
   Modelica.Blocks.Interfaces.RealInput incAng(quantity="Angle",
                                               unit="rad",
                                               displayUnit="rad")
@@ -68,5 +66,6 @@ Feb 01, 2012, by Kaustubh Phalak<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end WallSolarAzimuth;

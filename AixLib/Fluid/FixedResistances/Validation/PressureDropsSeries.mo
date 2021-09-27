@@ -2,8 +2,6 @@ within AixLib.Fluid.FixedResistances.Validation;
 model PressureDropsSeries "Test of multiple resistances in series"
   extends Modelica.Icons.Example;
 
-  extends AixLib.Icons.ibpsa;
-
  package Medium = AixLib.Media.Air "Medium model";
 
    parameter Integer nRes(min=2) = 10 "Number of resistances";
@@ -66,5 +64,6 @@ July 20, 2007 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"), 
+   __Dymola_LockedEditing="ibpsa");
 end PressureDropsSeries;
