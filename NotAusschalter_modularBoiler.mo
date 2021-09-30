@@ -14,16 +14,10 @@ model NotAusschalter_modularBoiler
     annotation (Placement(transformation(extent={{34,20},{54,40}})));
   Modelica.Blocks.Sources.RealExpression realExpression
     annotation (Placement(transformation(extent={{-100,70},{-80,90}})));
-  Modelica.Blocks.Logical.Switch switch2
-    annotation (Placement(transformation(extent={{0,-22},{20,-2}})));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=PLRmin)
-    annotation (Placement(transformation(extent={{-62,-22},{-42,-2}})));
   Modelica.Blocks.Interfaces.RealInput PLR_ein
     annotation (Placement(transformation(extent={{-120,-32},{-80,8}})));
   Modelica.Blocks.Interfaces.RealOutput PLR_set
     annotation (Placement(transformation(extent={{90,20},{110,40}})));
-  Modelica.Blocks.Interfaces.BooleanOutput PLRmin_boolean
-    annotation (Placement(transformation(extent={{90,-58},{110,-38}})));
 equation
 
   connect(tHotMax.y, greater.u2)
@@ -35,19 +29,9 @@ equation
   connect(realExpression.y, switch1.u1) annotation (Line(points={{-79,80},{-10,80},
           {-10,38},{32,38}},
                            color={0,0,127}));
-  connect(lessThreshold.y, switch2.u2)
-    annotation (Line(points={{-41,-12},{-2,-12}},  color={255,0,255}));
-  connect(PLR_ein, lessThreshold.u)
-    annotation (Line(points={{-100,-12},{-64,-12}}, color={0,0,127}));
-  connect(realExpression.y, switch2.u1) annotation (Line(points={{-79,80},{-10,80},
-          {-10,-4},{-2,-4}}, color={0,0,127}));
-  connect(PLR_ein, switch2.u3) annotation (Line(points={{-100,-12},{-70,-12},{-70,
-          -40},{-6,-40},{-6,-20},{-2,-20}}, color={0,0,127}));
-  connect(switch2.y, switch1.u3) annotation (Line(points={{21,-12},{24,-12},{24,
-          22},{32,22}}, color={0,0,127}));
   connect(switch1.y, PLR_set)
     annotation (Line(points={{55,30},{100,30}}, color={0,0,127}));
-  connect(lessThreshold.y, PLRmin_boolean) annotation (Line(points={{-41,-12},{
-          -18,-12},{-18,-48},{100,-48}}, color={255,0,255}));
+  connect(PLR_ein, switch1.u3) annotation (Line(points={{-100,-12},{18,-12},{18,
+          22},{32,22}}, color={0,0,127}));
   annotation (uses(Modelica(version="3.2.3")));
 end NotAusschalter_modularBoiler;

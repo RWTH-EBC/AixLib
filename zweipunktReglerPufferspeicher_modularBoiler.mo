@@ -39,7 +39,7 @@ model zweipunktRegler_Pufferspeicher
         origin={21,-57})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare final package          Medium =
                 Medium) if use_BufferStorage
-    annotation (Placement(transformation(extent={{-114,-62},{-94,-42}})));
+    annotation (Placement(transformation(extent={{-112,-64},{-92,-44}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package          Medium =
                 Medium) if use_BufferStorage
     annotation (Placement(transformation(extent={{94,-62},{114,-42}})));
@@ -78,8 +78,8 @@ equation
   connect(PLR_ein, switch1.u1) annotation (Line(points={{-100,90},{24,90},{24,42},
           {32,42}},     color={0,0,127}));
 
-  connect(port_a, bufferStorage.fluidportTop1) annotation (Line(points={{-104,-52},
-          {-62,-52},{-62,-62.25},{1.81,-62.25}},        color={0,127,255}));
+  connect(port_a, bufferStorage.fluidportTop1) annotation (Line(points={{-102,
+          -54},{-62,-54},{-62,-62.25},{1.81,-62.25}},   color={0,127,255}));
   connect(bufferStorage.fluidportBottom1, port_b) annotation (Line(points={{40.38,
           -62.0625},{52.19,-62.0625},{52.19,-52},{104,-52}},      color={0,127,
           255}));

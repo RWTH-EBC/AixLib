@@ -15,7 +15,7 @@ model zweipunktRegler_modularBoiler
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-4,24},{16,44}})));
   Modelica.Blocks.Sources.RealExpression realZero
-    annotation (Placement(transformation(extent={{-102,-16},{-82,4}})));
+    annotation (Placement(transformation(extent={{-102,-30},{-82,-10}})));
   Modelica.Blocks.Interfaces.RealInput PLR_ein
     annotation (Placement(transformation(extent={{-120,70},{-80,110}})));
   Modelica.Blocks.Interfaces.RealOutput PLR_aus
@@ -33,8 +33,9 @@ equation
     annotation (Line(points={{17,34},{100,34}}, color={0,0,127}));
   connect(T_ein, onOffController.u)
     annotation (Line(points={{-100,28},{-56,28}}, color={0,0,127}));
-  connect(realZero.y, switch1.u3) annotation (Line(points={{-81,-6},{-16,-6},{-16,
-          26},{-6,26}}, color={0,0,127}));
+  connect(realZero.y, switch1.u3) annotation (Line(points={{-81,-20},{-16,-20},
+          {-16,26},{-6,26}},
+                        color={0,0,127}));
   connect(PLR_ein, switch1.u1) annotation (Line(points={{-100,90},{-16,90},{-16,
           42},{-6,42}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{-122,0},{-82,40}})),

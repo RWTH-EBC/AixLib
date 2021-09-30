@@ -80,12 +80,14 @@ package Examples "Holds examples for the modular energy system units"
         m_flow_nominal=1, nPorts=2),
       bou(nPorts=1),
       TSpeicher(y=60 + 273.15),
-      sine(offset=0));
+      sine(
+        amplitude=-30000,
+        freqHz=1/3600,
+        offset=-50000));
     Modules.ModularBoiler.ModularBoiler
       modularBoilerNotManufacturer(TColdNom=333.15, QNom=100000)
       annotation (Placement(transformation(extent={{-38,-8},{-18,12}})));
-    AixLib.Controls.Interfaces.BoilerControlBus
-                                         boilerControlBus
+    Interfaces.BoilerControlBus          boilerControlBus
       annotation (Placement(transformation(extent={{-92,0},{-72,20}})));
     Modelica.Fluid.Pipes.StaticPipe pipe(
       redeclare package Medium =
@@ -109,7 +111,7 @@ package Examples "Holds examples for the modular energy system units"
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
     connect(boilerControlBus.PLR, switch1.y) annotation (Line(
-        points={{-82,10},{-82,-8},{-52,-8},{-52,-29},{-59.1,-29}},
+        points={{-81.95,10.05},{-81.95,-8},{-52,-8},{-52,-29},{-59.1,-29}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",

@@ -6,11 +6,11 @@ model erweiterteRegelung_modularBoiler
     vorlauftemperaturRegelung_modularBoiler1
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a if use_BufferStorage
-    annotation (Placement(transformation(extent={{-106,-16},{-86,4}})));
+    annotation (Placement(transformation(extent={{-106,-20},{-86,0}})));
   zweipunktRegler_Pufferspeicher zweipunktRegler_Pufferspeicher1 if use_BufferStorage
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b if use_BufferStorage
-    annotation (Placement(transformation(extent={{86,-14},{106,6}})));
+    annotation (Placement(transformation(extent={{86,-20},{106,0}})));
   Modelica.Blocks.Interfaces.RealInput PLR_ein
     annotation (Placement(transformation(extent={{-120,54},{-80,94}})));
   Modelica.Blocks.Interfaces.RealInput T_ein

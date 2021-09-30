@@ -31,7 +31,7 @@ model hierarchischeRegelung_erweiterteRegelung
   Modelica.Fluid.Interfaces.FluidPort_a port_a
     annotation (Placement(transformation(extent={{-110,-92},{-90,-72}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b
-    annotation (Placement(transformation(extent={{88,-92},{108,-72}})));
+    annotation (Placement(transformation(extent={{86,-92},{106,-72}})));
 equation
 
   connect(T_ein, notAusschalter_modularBoiler.T_ein) annotation (Line(points={{-100,
