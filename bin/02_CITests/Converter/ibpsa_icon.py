@@ -118,32 +118,91 @@ def exist_file(file): # File exist
     else:
         return False
 
-def lock(mo_li): # lock ibpsa models
-    entry = '   __Dymola_LockedEditing="ibpsa");'
-    old_text = '</html>"));'
-    new_text = '</html>"), ' +"\n" + entry
-    replacements = {old_text : new_text}
-    lines = []
-    for model in mo_li:
 
-        if exist_file(model) == True:
-            print("lock object: "+model)
-            infile = open(model).read()
-            outfile = open(model, 'w')
+def get_last_line(model):
+    flag = '__Dymola_LockedEditing="Model from IBPSA");'
+    model_part = []
+    flag_tag = False
+    if exist_file(model) == True:
+        infile = open(model, "r")
+        for lines in infile:
+            model_part.append(lines)
+            if lines.find(flag) > -1 :
+                flag_tag = True
+        infile.close()
+        return model_part, flag_tag
+    else:
+        print("\n************************************")
+        print(model)
+        print("File does not exist.")
 
-            for i in replacements.keys():
-                infile = infile.replace(i, replacements[i])
-            outfile.write(infile)
-            outfile.close
+def lock_model(model,content):
+    mo = model[model.rfind(os.sep) + 1:model.rfind(".mo")]
+    last_entry = content[len(content) - 1]
+    flag = '   __Dymola_LockedEditing="Model from IBPSA");'
+    old_html_flag = '</html>"));'
+    new_html_flag = '</html>"),  \n' + flag
+    old = ');'
+    new = ', \n' + flag
+    replacements = {old_html_flag: new_html_flag,old : new }
 
-        else:
-            print("\n************************************")
-            print(model)
-            print("File does not exist.")
-            continue
+
+    if last_entry.find(mo) > -1 and last_entry.find("end") > -1:
+        flag_lines = content[len(content) - 2]
+        if flag_lines.isspace() == True:
+            flag_lines = content[len(content) - 3]
+            del content[len(content) - 2]
+        if flag_lines.find(old_html_flag) > -1 :
+            flag_lines = flag_lines.replace(old_html_flag,new_html_flag)
+        elif flag_lines.find(old) > -1 :
+            flag_lines = flag_lines.replace(old, new)
+        #for i in replacements.keys():
+        #    flag_lines = flag_lines.replace(i, replacements[i])
+        del content[len(content) - 2]
+        content.insert(len(content) - 1, flag_lines)
+        return content
+    else:
+        flag_lines = content[len(content) - 1]
+        if flag_lines.find(old_html_flag) > -1 :
+            flag_lines = flag_lines.replace(old_html_flag,new_html_flag)
+        elif flag_lines.find(old) > -1 :
+            flag_lines = flag_lines.replace(old, new)
+        #for i in replacements.keys():
+        #    flag_lines = flag_lines.replace(i, replacements[i])
+        del content[len(content) - 1]
+        content.insert(len(content) , flag_lines)
+        return content
+
+
+
+def write_lock_model(model, new_content):
+    print("lock object: " + model)
+    outfile = open(model, 'w')
+    new_content = (' '.join(new_content))
+    outfile.write(new_content)
+    outfile.close
+
+
+
+
 if __name__ == '__main__':
+    # python bin\02_CITests\Converter\ibpsa_icon.py
     path = "bin"+os.sep+"03_WhiteLists"+os.sep+"HTML_IBPSA_WhiteList.txt"
     mo_li = read_wh(path)
     mo_li = sort_list(mo_li)
-    #add_icon(mo_li)
-    lock(mo_li)
+    for model in mo_li:
+        if exist_file(model) == True:
+            result = get_last_line(model)
+            content = result[0]
+            flag = result[1]
+            if flag == False:
+                new_content = lock_model(model,content)
+                write_lock_model(model, new_content)
+            else:
+                print("Already locked: "+ model)
+                continue
+        else:
+            continue
+            print("************************************")
+            print(model)
+            print("File does not exist.")

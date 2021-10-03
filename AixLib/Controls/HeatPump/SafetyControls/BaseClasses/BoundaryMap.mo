@@ -96,4 +96,3 @@ equation
 </html>"),
       uses(AixLib(version="0.7.3"), Modelica(version="3.2.2")));
 end BoundaryMap;
-
