@@ -16,15 +16,18 @@ parameter Modelica.SIunits.Temperature T_ref=273.15+60 "Solltemperatur";
  Modelica.Blocks.Interfaces.RealOutput PLR_aus
    annotation (Placement(transformation(extent={{90,24},{110,44}})));
 
- Modelica.Blocks.Interfaces.RealInput Tin_layer[n]
+ Modelica.Blocks.Interfaces.RealInput TLayers[n]
     "Input temperatures of the different layers of the buffer storage"
-    annotation (Placement(transformation(extent={{-120,-44},{-80,-4}})));
- replaceable BaseClass.twoPositionControllerCal.twoPositionController_layers twoPositionController
+    annotation (Placement(transformation(extent={{-120,18},{-80,58}})));
+ replaceable BaseClass.twoPositionControllerCal.twoPositionController_layers twoPositionController(layerCal=
+        layerCal)
    constrainedby Regelungseinheit.BaseClass.partialTwoPositionController
-   annotation (Placement(transformation(extent={{-52,30},{-32,50}})),
+   annotation (Placement(transformation(extent={{-52,22},{-32,42}})),
      choicesAllMatching=true);
-  Modelica.Blocks.Interfaces.RealInput Tin_top
-    annotation (Placement(transformation(extent={{-120,32},{-80,72}})));
+  Modelica.Blocks.Interfaces.RealInput TTop
+    annotation (Placement(transformation(extent={{-118,-28},{-78,12}})));
+  parameter Boolean layerCal=true
+    "If true, the two-position controller uses the mean temperature of the buffer storage";
 equation
   //BufferStorage
 
@@ -32,16 +35,18 @@ equation
 
  connect(switch1.y, PLR_aus)
    annotation (Line(points={{55,34},{100,34}}, color={0,0,127}));
- connect(realZero.y, switch1.u3) annotation (Line(points={{-81,-60},{26,-60},{
-          26,26},{32,26}},
-                       color={0,0,127}));
+ connect(realZero.y, switch1.u3) annotation (Line(points={{-81,-60},{26,-60},{26,
+          26},{32,26}},color={0,0,127}));
  connect(PLR_ein, switch1.u1) annotation (Line(points={{-100,90},{24,90},{24,42},
          {32,42}},     color={0,0,127}));
 
-  connect(Tin_layer, twoPositionController_layers.TLayers) annotation (Line(
-        points={{-100,-24},{-78,-24},{-78,35},{-54,35}}, color={0,0,127}));
- connect(twoPositionController_layers.y, switch1.u2) annotation (Line(points={{
-         -32,43.2},{0,43.2},{0,34},{32,34}}, color={255,0,255}));
+  connect(twoPositionController.y, switch1.u2) annotation (Line(points={{-32,35.2},
+          {0,35.2},{0,34},{32,34}}, color={255,0,255}));
+  if layerCal then
+    connect(TLayers, twoPositionController.TLayers);
+  else
+    connect(TTop, twoPositionController.TTop);
+  end if;
  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
        coordinateSystem(preserveAspectRatio=false)));
 end twoPositionController_modularBoiler;
