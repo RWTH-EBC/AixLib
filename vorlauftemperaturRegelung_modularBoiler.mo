@@ -31,14 +31,14 @@ model vorlauftemperaturRegelung_modularBoiler
     final TRoom_nominal=293.15)
     annotation (Placement(transformation(extent={{-54,-20},{-34,0}})));
   Modelica.Blocks.Interfaces.RealOutput T_Vorlauf
-    annotation (Placement(transformation(extent={{90,-20},{110,0}})));
+    annotation (Placement(transformation(extent={{88,-20},{108,0}})));
 
   Modelica.Blocks.Interfaces.RealInput T_outdoor
     annotation (Placement(transformation(extent={{-120,-30},{-80,10}})));
 equation
 
   connect(heatingCurve.TSet, T_Vorlauf)
-    annotation (Line(points={{-33,-10},{100,-10}},
+    annotation (Line(points={{-33,-10},{98,-10}},
                                                 color={0,0,127}));
   connect(T_outdoor, heatingCurve.T_oda)
     annotation (Line(points={{-100,-10},{-56,-10}}, color={0,0,127}));
