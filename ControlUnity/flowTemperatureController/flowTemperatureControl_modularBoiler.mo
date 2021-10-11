@@ -41,8 +41,7 @@ equation
   connect(heatingCurve.TSet, pIRegler_modularBoiler.Tset) annotation (Line(
         points={{-33,-10},{-6,-10},{-6,-5},{22,-5}}, color={0,0,127}));
   connect(Tin, pIRegler_modularBoiler.T_m) annotation (Line(points={{-100,42},{
-          -24,42},{-24,22},{16,22},{16,-13},{22,-13}}, color={0,0,127}));
+          16,42},{16,-13},{22,-13}}, color={0,0,127}));
   connect(pIRegler_modularBoiler.PLR_vorlauf, PLRset) annotation (Line(points={
           {42,-5},{68,-5},{68,-4},{100,-4}}, color={0,0,127}));
-  annotation ();
 end flowTemperatureControl_modularBoiler;

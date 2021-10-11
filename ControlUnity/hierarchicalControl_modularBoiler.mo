@@ -1,7 +1,7 @@
 within ControlUnity;
 model hierarchicalControl_modularBoiler
   parameter Real PLRmin=0.15;
-  parameter Boolean use_advancedControl=true "Selection between two position control and flow temperature control";
+  parameter Boolean use_advancedControl=true "Selection between two position control and flow temperature control, if true=flow temperature control is active";
 
   Modelica.Blocks.Interfaces.RealInput Tin
     annotation (Placement(transformation(extent={{-122,52},{-82,92}})));
@@ -9,16 +9,22 @@ model hierarchicalControl_modularBoiler
     annotation (Placement(transformation(extent={{90,64},{110,84}})));
   Modelica.Blocks.Interfaces.RealInput PLRin
     annotation (Placement(transformation(extent={{-118,-26},{-78,14}})));
+ twoPositionController.twoPositionControllerBufferStorage_modularBoiler
+    twoPositionControllerBufferStorage_modularBoiler
+    annotation (Placement(transformation(extent={{20,60},{40,80}})),
+    choices(
+    choice(redeclare twoPositionController.twoPositionControllerSimple_modularBoiler
+    twoPositionControllerSimple_modularBoiler = ControlUnity.twoPositionController.twoPositionControllerSimple_modularBoiler),
+    choice(redeclare twoPositionController.twoPositionControllerSimple_modularBoiler
+    twoPositionControllerSimple_modularBoiler = ControlUnity.twoPositionController.twoPositionControllerBufferStorage_modularBoiler)));
+
+
   NotAusschalter_modularBoiler notAusschalter_modularBoiler
     annotation (Placement(transformation(extent={{-60,26},{-40,46}})));
  Modelica.Blocks.Interfaces.RealInput Tamb if use_advancedControl
     "Outdoor temperature"
     annotation (Placement(transformation(extent={{-120,2},{-80,42}})));
 
-  replaceable twoPositionController.twoPositionControllerSimple_modularBoiler
-    twoPositionControllerSimple_modularBoiler constrainedby
-    ControlUnity.AdvancedControl.partialAdvancedControl.partialAdvancedController
-                                                                                  annotation (Placement(transformation(extent={{20,48},{40,68}})),choicesAllMatching=true);
   /// Emergency switch and mass flow control
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{44,-84},{64,-64}})));
@@ -35,6 +41,9 @@ model hierarchicalControl_modularBoiler
     annotation (Placement(transformation(extent={{-60,-28},{-46,-14}})));
   Modelica.Blocks.Logical.Switch switch2
     annotation (Placement(transformation(extent={{-28,-36},{-12,-20}})));
+
+
+
 
 
 
@@ -68,13 +77,5 @@ equation
   connect(realExpression1.y, switch2.u1) annotation (Line(points={{-49,-48},{-32,
           -48},{-32,-21.6},{-29.6,-21.6}}, color={0,0,127}));
 
-  //
-  connect(notAusschalter_modularBoiler.PLR_set,
-    twoPositionControllerSimple_modularBoiler.PLRin) annotation (Line(points={{-40,
-          39},{-12,39},{-12,67},{20,67}}, color={0,0,127}));
-  connect(Tin, twoPositionControllerSimple_modularBoiler.Tin) annotation (Line(
-        points={{-102,72},{-42,72},{-42,57.6},{20,57.6}}, color={0,0,127}));
-  connect(twoPositionControllerSimple_modularBoiler.PLRset, PLRset) annotation (
-     Line(points={{41,63.2},{68,63.2},{68,74},{100,74}},
-                                                     color={0,0,127}));
+
 end hierarchicalControl_modularBoiler;

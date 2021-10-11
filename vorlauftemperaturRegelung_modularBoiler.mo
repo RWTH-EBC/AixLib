@@ -30,17 +30,24 @@ model vorlauftemperaturRegelung_modularBoiler
     final use_tableData=true,
     final TRoom_nominal=293.15)
     annotation (Placement(transformation(extent={{-54,-20},{-34,0}})));
-  Modelica.Blocks.Interfaces.RealOutput T_Vorlauf
-    annotation (Placement(transformation(extent={{88,-20},{108,0}})));
 
-  Modelica.Blocks.Interfaces.RealInput T_outdoor
+  Modelica.Blocks.Interfaces.RealInput Tamb "Outdoor temperature"
     annotation (Placement(transformation(extent={{-120,-30},{-80,10}})));
+  PIRegler_modularBoiler pIRegler_modularBoiler
+    annotation (Placement(transformation(extent={{22,-20},{42,0}})));
+  Modelica.Blocks.Interfaces.RealInput Tin "Boiler temperature"
+    annotation (Placement(transformation(extent={{-120,22},{-80,62}})));
+  Modelica.Blocks.Interfaces.RealOutput PLRset
+    annotation (Placement(transformation(extent={{90,-14},{110,6}})));
 equation
 
-  connect(heatingCurve.TSet, T_Vorlauf)
-    annotation (Line(points={{-33,-10},{98,-10}},
-                                                color={0,0,127}));
-  connect(T_outdoor, heatingCurve.T_oda)
+  connect(Tamb, heatingCurve.T_oda)
     annotation (Line(points={{-100,-10},{-56,-10}}, color={0,0,127}));
+  connect(heatingCurve.TSet, pIRegler_modularBoiler.Tset) annotation (Line(
+        points={{-33,-10},{-6,-10},{-6,-5},{22,-5}}, color={0,0,127}));
+  connect(Tin, pIRegler_modularBoiler.T_m) annotation (Line(points={{-100,42},{
+          -24,42},{-24,22},{16,22},{16,-13},{22,-13}}, color={0,0,127}));
+  connect(pIRegler_modularBoiler.PLR_vorlauf, PLRset) annotation (Line(points={
+          {42,-5},{68,-5},{68,-4},{100,-4}}, color={0,0,127}));
   annotation (uses(AixLib(version="1.0.0"), Modelica(version="3.2.3")));
 end vorlauftemperaturRegelung_modularBoiler;

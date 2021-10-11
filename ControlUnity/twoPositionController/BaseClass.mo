@@ -15,26 +15,26 @@ package BaseClass "Partielle Modelle zur Erstellung der Regelungen"
       parameter Modelica.SIunits.TemperatureDifference TLayer_dif=8 "Reference difference temperature for the on off controller for the buffer storage with layer calculation";
       parameter Modelica.SIunits.Temperature Tlayerref=273.15+65;
 
-      Modelica.Blocks.Math.Sum sumTLayers(nin=n)
-        annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
-      Modelica.Blocks.Math.Division meanTemperatureBufferStorage
-        annotation (Placement(transformation(extent={{-34,14},{-14,34}})));
-      Modelica.Blocks.Sources.RealExpression realExpressionDynamic(y=n)
-        annotation (Placement(transformation(extent={{-74,-10},{-54,10}})));
       Modelica.Blocks.Sources.RealExpression realExpression(y=TLayer_dif)
-        annotation (Placement(transformation(extent={{-36,-32},{-16,-10}})));
+        annotation (Placement(transformation(extent={{30,-40},{10,-20}})));
       parameter Real bandwidth "Bandwidth around reference signal";
+      Modelica.Blocks.Math.Sum sumTLayers(nin=n)
+        annotation (Placement(transformation(extent={{-72,26},{-52,46}})));
+      Modelica.Blocks.Math.Division meanTemperatureDynamicStorage
+        annotation (Placement(transformation(extent={{-42,20},{-22,40}})));
+      Modelica.Blocks.Sources.RealExpression realExpressionDynamic(y=n)
+        annotation (Placement(transformation(extent={{-86,2},{-66,22}})));
     equation
-      connect(sumTLayers.y, meanTemperatureBufferStorage.u1) annotation (Line(
-            points={{-51,30},{-36,30}},                   color={0,0,127}));
-      connect(realExpressionDynamic.y, meanTemperatureBufferStorage.u2) annotation (
-         Line(points={{-53,0},{-42,0},{-42,18},{-36,18}}, color={0,0,127}));
-      connect(meanTemperatureBufferStorage.y, add.u1) annotation (Line(points={{-13,
-              24},{-2,24},{-2,32},{10,32}}, color={0,0,127}));
-      connect(realExpression.y, add.u2) annotation (Line(points={{-15,-21},{-15,-10},
-              {10,-10},{10,20}}, color={0,0,127}));
-      connect(TLayers, sumTLayers.u) annotation (Line(points={{-100,36},{-87,36},{-87,
-              30},{-74,30}}, color={0,0,127}));
+      connect(sumTLayers.y,meanTemperatureDynamicStorage. u1)
+        annotation (Line(points={{-51,36},{-44,36}},                       color={0,0,127}));
+      connect(realExpressionDynamic.y,meanTemperatureDynamicStorage. u2)
+        annotation (Line(points={{-65,12},{-54,12},{-54,24},{-44,24}},     color={0,0,127}));
+      connect(TLayers, sumTLayers.u)
+        annotation (Line(points={{-100,36},{-74,36}}, color={0,0,127}));
+      connect(meanTemperatureDynamicStorage.y, add.u1) annotation (Line(points=
+              {{-21,30},{-12,30},{-12,52},{-2,52}}, color={0,0,127}));
+      connect(realExpression.y, add.u2) annotation (Line(points={{9,-30},{-8,
+              -30},{-8,40},{-2,40}}, color={0,0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
     end twoPositionController_layers;
@@ -49,14 +49,15 @@ package BaseClass "Partielle Modelle zur Erstellung der Regelungen"
 
 
       Modelica.Blocks.Sources.RealExpression realExpression1(y=Ttop)
-        annotation (Placement(transformation(extent={{-100,-42},{-80,-22}})));
+        annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
       parameter Real bandwidth "Bandwidth around reference signal";
     equation
 
-      connect(realExpression1.y, add.u2) annotation (Line(points={{-79,-32},{-34,-32},
-              {-34,20},{10,20}}, color={0,0,127}));
-      connect(TLayers[1], add.u1) annotation (Line(points={{-100,36},{-46,36},{-46,32},
-              {10,32}}, color={0,0,127}));
+      connect(TLayers[1], add.u1) annotation (Line(points={{-100,36},{-46,36},{
+              -46,52},{-2,52}},
+                        color={0,0,127}));
+      connect(realExpression1.y, add.u2) annotation (Line(points={{-71,4},{-12,
+              4},{-12,40},{-2,40}}, color={0,0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
     end twoPositionController_top;
@@ -70,24 +71,36 @@ package BaseClass "Partielle Modelle zur Erstellung der Regelungen"
       parameter Integer n "Number of layers in the buffer storage";
 
     Modelica.Blocks.Math.Add add(k2=-1)
-      annotation (Placement(transformation(extent={{12,16},{32,36}})));
+      annotation (Placement(transformation(extent={{0,36},{20,56}})));
     Modelica.Blocks.Logical.OnOffController onOffController(pre_y_start=true)
-      annotation (Placement(transformation(extent={{58,22},{78,42}})));
-    Modelica.Blocks.Interfaces.BooleanOutput y
-      annotation (Placement(transformation(extent={{90,22},{110,42}})));
+      annotation (Placement(transformation(extent={{32,42},{52,62}})));
     Modelica.Blocks.Sources.RealExpression realExpression(y=Tref)
-      annotation (Placement(transformation(extent={{12,46},{32,66}})));
+      annotation (Placement(transformation(extent={{0,64},{20,84}})));
 
     Modelica.Blocks.Interfaces.RealInput TLayers[n]
       "Temperatures of the different layers in the buffer storage"
       annotation (Placement(transformation(extent={{-120,16},{-80,56}})));
+    Modelica.Blocks.Logical.Switch switch1
+      annotation (Placement(transformation(extent={{76,42},{96,62}})));
+    Modelica.Blocks.Interfaces.RealOutput PLRset
+      annotation (Placement(transformation(extent={{100,42},{120,62}})));
+    Modelica.Blocks.Sources.RealExpression realZero
+      annotation (Placement(transformation(extent={{22,14},{42,34}})));
+    Modelica.Blocks.Interfaces.RealInput PLRin
+      annotation (Placement(transformation(extent={{-120,70},{-80,110}})));
   equation
     connect(add.y,onOffController. u)
-      annotation (Line(points={{33,26},{56,26}}, color={0,0,127}));
-    connect(onOffController.y, y)
-      annotation (Line(points={{79,32},{100,32}}, color={255,0,255}));
-    connect(realExpression.y, onOffController.reference) annotation (Line(points={
-            {33,56},{42,56},{42,38},{56,38}}, color={0,0,127}));
+      annotation (Line(points={{21,46},{30,46}}, color={0,0,127}));
+    connect(realExpression.y, onOffController.reference) annotation (Line(points={{21,74},
+            {24,74},{24,58},{30,58}},         color={0,0,127}));
+    connect(switch1.y, PLRset)
+      annotation (Line(points={{97,52},{110,52}}, color={0,0,127}));
+    connect(realZero.y, switch1.u3) annotation (Line(points={{43,24},{68,24},{
+            68,44},{74,44}}, color={0,0,127}));
+    connect(PLRin, switch1.u1) annotation (Line(points={{-100,90},{68,90},{68,
+            60},{74,60}}, color={0,0,127}));
+    connect(onOffController.y, switch1.u2)
+      annotation (Line(points={{53,52},{74,52}}, color={255,0,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end partialTwoPositionController;

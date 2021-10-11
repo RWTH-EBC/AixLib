@@ -1,4 +1,4 @@
-within Regelungseinheit;
+within Regelungseinheit.twoPositionController;
 model twoPositionController_modularBoiler
 
 parameter Modelica.SIunits.Temperature T_ref=273.15+60 "Solltemperatur";
@@ -21,7 +21,8 @@ parameter Modelica.SIunits.Temperature T_ref=273.15+60 "Solltemperatur";
     annotation (Placement(transformation(extent={{-120,18},{-80,58}})));
  replaceable BaseClass.twoPositionControllerCal.twoPositionController_layers twoPositionController(layerCal=
         layerCal)
-   constrainedby Regelungseinheit.BaseClass.partialTwoPositionController
+   constrainedby
+    Regelungseinheit.twoPositionController.BaseClass.partialTwoPositionController
    annotation (Placement(transformation(extent={{-52,22},{-32,42}})),
      choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput TTop
@@ -30,8 +31,6 @@ parameter Modelica.SIunits.Temperature T_ref=273.15+60 "Solltemperatur";
     "If true, the two-position controller uses the mean temperature of the buffer storage";
 equation
   //BufferStorage
-
-
 
  connect(switch1.y, PLR_aus)
    annotation (Line(points={{55,34},{100,34}}, color={0,0,127}));

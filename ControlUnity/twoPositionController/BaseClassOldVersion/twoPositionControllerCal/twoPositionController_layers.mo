@@ -1,14 +1,14 @@
-within Regelungseinheit.BaseClass.twoPositionControllerCal;
+within ControlUnity.twoPositionController.BaseClassOldVersion.twoPositionControllerCal;
 model twoPositionController_layers
 
-  extends Regelungseinheit.BaseClass.partialTwoPositionController(
+  extends
+    ControlUnity.twoPositionController.BaseClassOldVersion.partialTwoPositionController(
       realExpression(y=TLayer_dif), onOffController(bandwidth=bandwidth));
    parameter Boolean layerCal=true
     "If true, the two-position controller uses the mean temperature of the buffer storage";
-     parameter Integer n=3 "Number of layers in buffer storage";
+
   parameter Modelica.SIunits.TemperatureDifference TLayer_dif=8 "Reference difference temperature for the on off controller for the buffer storage with layer calculation";
   parameter Modelica.SIunits.Temperature Tlayerref=273.15+65;
-
 
   Modelica.Blocks.Math.Sum sumTLayers(nin=n)
     annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
@@ -24,12 +24,13 @@ equation
         points={{-51,30},{-36,30}},                   color={0,0,127}));
   connect(realExpressionDynamic.y, meanTemperatureBufferStorage.u2) annotation (
      Line(points={{-53,0},{-42,0},{-42,18},{-36,18}}, color={0,0,127}));
-  connect(meanTemperatureBufferStorage.y, add.u1) annotation (Line(points={{-13,
-          24},{-2,24},{-2,32},{10,32}}, color={0,0,127}));
+  connect(meanTemperatureBufferStorage.y, add.u1) annotation (Line(points={{-13,24},
+          {-2,24},{-2,38},{-12,38}},    color={0,0,127}));
   connect(realExpression.y, add.u2) annotation (Line(points={{-15,-21},{-15,-10},
-          {10,-10},{10,20}}, color={0,0,127}));
-  connect(TLayers, sumTLayers.u) annotation (Line(points={{-100,36},{-87,36},{
-          -87,30},{-74,30}}, color={0,0,127}));
+          {-12,-10},{-12,26}},
+                             color={0,0,127}));
+  connect(TLayers, sumTLayers.u) annotation (Line(points={{-100,36},{-87,36},{-87,
+          30},{-74,30}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end twoPositionController_layers;

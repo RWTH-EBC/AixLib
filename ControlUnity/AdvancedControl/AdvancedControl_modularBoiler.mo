@@ -1,32 +1,49 @@
 ﻿within ControlUnity.AdvancedControl;
 model AdvancedControl_modularBoiler
   "Advanced control for modular boiler"
+  extends ControlUnity.AdvancedControl.partialAdvancedControl.partialAdvancedController;
   parameter Boolean use_BufferStorage=false "true=Pufferspeicher wird ausgewählt, false=Vorlauftemperaturregelung" annotation(choices(
       choice=true "Control with buffer storage",
-      choice=false "control without buffer storage"));
+      choice=false "control with flow temperature control"));
 
-  ControlUnity.flowTemperatureController.flowTemperatureControl_modularBoiler
-    vorlauftemperaturRegelung_modularBoiler1 if not use_BufferStorage
-    annotation (Placement(transformation(extent={{-10,50},{10,70}})));
-  Modelica.Blocks.Interfaces.RealInput PLR_ein
-    annotation (Placement(transformation(extent={{-120,54},{-80,94}})));
-  Modelica.Blocks.Interfaces.RealInput T_ein
-    annotation (Placement(transformation(extent={{-120,16},{-80,56}})));
-  Modelica.Blocks.Interfaces.RealOutput PLR_aus
-    annotation (Placement(transformation(extent={{90,30},{110,50}})));
-  twoPositionController.twoPositionControllerAdvanced_modularBoiler
-    twoPositionControllerAdvanced_modularBoiler if use_BufferStorage
-    annotation (Placement(transformation(extent={{-4,-10},{16,10}})));
+
+    // Flow temperature control
+ flowTemperatureController.flowTemperatureControl_modularBoiler
+    flowTemperatureControl_modularBoiler if not use_Bufferstorage
+    annotation (Placement(transformation(extent={{0,-20},{20,0}})));
+  Modelica.Blocks.Interfaces.RealInput Tamb if not use_Bufferstorage
+    annotation (Placement(transformation(extent={{-120,-84},{-80,-44}})));
+
+
+
+  //Two position control with buffer storage
+twoPositionController.twoPositionControllerAdvanced_modularBoiler
+    twoPositionControllerAdvanced_modularBoiler(redeclare
+      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
+      twoPositionController_layers) if             use_BufferStorage
+    annotation (Placement(transformation(extent={{2,46},{22,66}})));
+  Modelica.Blocks.Interfaces.RealInput TLayer[n] if use_Bufferstorage
+    annotation (Placement(transformation(extent={{-120,26},{-80,66}})));
+
 equation
+  //
 
-  connect(PLR_ein, vorlauftemperaturRegelung_modularBoiler1.PLR_ein)
-    annotation (Line(points={{-100,74},{-56,74},{-56,67},{-10,67}}, color={0,0,127}));
-  connect(T_ein, vorlauftemperaturRegelung_modularBoiler1.Tamb) annotation (
-      Line(points={{-100,36},{-16,36},{-16,59},{-10,59}}, color={0,0,127}));
-  connect(vorlauftemperaturRegelung_modularBoiler1.PLRset, PLR_aus) annotation (
-     Line(points={{10,59.6},{52,59.6},{52,40},{100,40}}, color={0,0,127}));
-  connect(PLR_ein, twoPositionControllerAdvanced_modularBoiler.PLR_ein)
-    annotation (Line(points={{-100,74},{-54,74},{-54,9},{-4,9}}, color={0,0,127}));
-  connect(twoPositionControllerAdvanced_modularBoiler.PLR_aus, PLR_aus)
-    annotation (Line(points={{16,3.4},{54,3.4},{54,40},{100,40}}, color={0,0,127}));
+
+  if use_Bufferstorage then
+  connect(PLRin, twoPositionControllerAdvanced_modularBoiler.PLR_ein)
+    annotation (Line(points={{-100,90},{-50,90},{-50,65},{2,65}}, color={0,0,127}));
+  connect(TLayer, twoPositionControllerAdvanced_modularBoiler.TLayers)
+    annotation (Line(points={{-100,46},{-50,46},{-50,59.8},{2,59.8}}, color={0,0,
+          127}));
+  connect(twoPositionControllerAdvanced_modularBoiler.PLR_aus, PLRset)
+    annotation (Line(points={{22,59.4},{56,59.4},{56,30},{100,30}}, color={0,0,127}));
+  else
+  connect(Tin, flowTemperatureControl_modularBoiler.Tin) annotation (Line(
+        points={{-100,-4},{-50,-4},{-50,-5.8},{0,-5.8}}, color={0,0,127}));
+  connect(Tamb, flowTemperatureControl_modularBoiler.Tamb) annotation (Line(
+        points={{-100,-64},{-52,-64},{-52,-11},{0,-11}}, color={0,0,127}));
+  connect(flowTemperatureControl_modularBoiler.PLRset, PLRset) annotation (Line(
+        points={{20,-10.4},{38,-10.4},{38,-10},{56,-10},{56,30},{100,30}},
+        color={0,0,127}));
+   end if;
 end AdvancedControl_modularBoiler;

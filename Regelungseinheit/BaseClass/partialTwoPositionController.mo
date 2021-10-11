@@ -1,9 +1,12 @@
 within Regelungseinheit.BaseClass;
 partial model partialTwoPositionController
   "Base model for the two position controller"
- parameter Boolean layerCal
-                           "If true, the two-position controller uses the mean temperature of the buffer storage";
+
  parameter Modelica.SIunits.Temperature Tref=273.15+60 "Reference Temperature for the on off controller";
+  parameter Boolean layerCal=true
+    "If true, the two-position controller uses the mean temperature of the buffer storage";
+    parameter Integer n "Number of layers in the buffer storage";
+
 
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{12,16},{32,36}})));
@@ -14,12 +17,11 @@ partial model partialTwoPositionController
   Modelica.Blocks.Sources.RealExpression realExpression(y=Tref)
     annotation (Placement(transformation(extent={{12,46},{32,66}})));
 
-  Modelica.Blocks.Interfaces.RealInput TLayers[:] if layerCal
-    "Input array with the temperatures on the different layers of the buffer storage"
-    annotation (Placement(transformation(extent={{-122,22},{-82,62}})));
-  Modelica.Blocks.Interfaces.RealInput TTop if not layerCal
-    "Temperature of the too layer of the buffer storage"
-    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
+  Modelica.Blocks.Interfaces.RealInput TLayers[n] if layerCal
+    "Temperatures of the different layers in the buffer storage"
+    annotation (Placement(transformation(extent={{-120,16},{-80,56}})));
+  Modelica.Blocks.Interfaces.RealInput TTop if not layerCal "Temperature on the top layer"
+    annotation (Placement(transformation(extent={{-120,-22},{-80,18}})));
 equation
   connect(add.y,onOffController. u)
     annotation (Line(points={{33,26},{56,26}}, color={0,0,127}));
