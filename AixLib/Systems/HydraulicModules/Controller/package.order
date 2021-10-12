@@ -3,3 +3,5 @@ CtrPump
 CtrPumpVFlow
 CtrThrottle
 CtrThrottleVFlow
+CtrThrottleQFlow
+CalcHydraulicPower

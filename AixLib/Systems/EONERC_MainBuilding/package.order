@@ -6,6 +6,7 @@ SwitchingUnit
 HeatExchangerSystem
 GeothermalFieldSimple
 Tabs
+TabsSimple
 Controller
 BaseClasses
 Validation
