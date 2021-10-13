@@ -4,19 +4,19 @@ model hierarchicalControl_modularBoiler
   parameter Boolean use_advancedControl=true "Selection between two position control and flow temperature control, if true=flow temperature control is active";
 
   Modelica.Blocks.Interfaces.RealInput Tin
+    "Boiler Temperature; for emergency stop"
     annotation (Placement(transformation(extent={{-122,52},{-82,92}})));
   Modelica.Blocks.Interfaces.RealOutput PLRset
-    annotation (Placement(transformation(extent={{90,64},{110,84}})));
+    annotation (Placement(transformation(extent={{90,44},{110,64}})));
   Modelica.Blocks.Interfaces.RealInput PLRin
     annotation (Placement(transformation(extent={{-118,-26},{-78,14}})));
- twoPositionController.twoPositionControllerBufferStorage_modularBoiler
-    twoPositionControllerBufferStorage_modularBoiler
-    annotation (Placement(transformation(extent={{20,60},{40,80}})),
-    choices(
-    choice(redeclare twoPositionController.twoPositionControllerSimple_modularBoiler
-    twoPositionControllerSimple_modularBoiler = ControlUnity.twoPositionController.twoPositionControllerSimple_modularBoiler),
-    choice(redeclare twoPositionController.twoPositionControllerSimple_modularBoiler
-    twoPositionControllerSimple_modularBoiler = ControlUnity.twoPositionController.twoPositionControllerBufferStorage_modularBoiler)));
+    //Two position controller
+
+//Flow temperature control
+
+   flowTemperatureController.flowTemperatureControl_heatingCurve
+    flowTemperatureControl_heatingCurve
+    annotation (Placement(transformation(extent={{34,-34},{54,-14}})));
 
 
   NotAusschalter_modularBoiler notAusschalter_modularBoiler
@@ -47,6 +47,16 @@ model hierarchicalControl_modularBoiler
 
 
 
+  twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
+    twoPositionController_layers(n=n)
+    annotation (Placement(transformation(extent={{22,40},{42,60}})));
+  parameter Integer n=3 "Number of layers in the buffer storage";
+  Modelica.Blocks.Interfaces.RealInput TLayers[n]
+    "Different temperatures of  layers of  buffer storage; 1 is first layer, n ist last layer"
+    annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={12,100})));
 equation
   //Advanced or simple control
   connect(Tin, notAusschalter_modularBoiler.T_ein) annotation (Line(points={{-102,
@@ -78,4 +88,10 @@ equation
           -48},{-32,-21.6},{-29.6,-21.6}}, color={0,0,127}));
 
 
+  connect(notAusschalter_modularBoiler.PLR_set, twoPositionController_layers.PLRin)
+    annotation (Line(points={{-40,39},{-12,39},{-12,59},{22,59}}, color={0,0,127}));
+  connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points={{43,55.2},
+          {66.5,55.2},{66.5,54},{100,54}},           color={0,0,127}));
+  connect(TLayers, twoPositionController_layers.TLayers)
+    annotation (Line(points={{12,100},{12,53.6},{22,53.6}}, color={0,0,127}));
 end hierarchicalControl_modularBoiler;

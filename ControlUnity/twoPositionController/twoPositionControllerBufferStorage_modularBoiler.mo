@@ -26,11 +26,11 @@ model twoPositionControllerBufferStorage_modularBoiler
 equation
   //BufferStorage
 
-  if layerCal then
-    connect(TLayers[n], twoPositionController.TLayers[n]);
-  else
-    connect(TLayers[1], twoPositionController.TLayers[1]);
-  end if;
+
+    connect(TLayers, twoPositionController.TLayers);
+
+
+
   connect(twoPositionController.PLRset, PLRset) annotation (Line(points={{-19,35.2},
           {37.5,35.2},{37.5,34},{100,34}}, color={0,0,127}));
   connect(PLRin, twoPositionController.PLRin) annotation (Line(points={{-100,72},

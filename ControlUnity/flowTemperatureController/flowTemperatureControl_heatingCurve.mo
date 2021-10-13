@@ -1,6 +1,6 @@
 within ControlUnity.flowTemperatureController;
-model flowTemperatureControl_modularBoiler
-  "Flow temperature control for the modularBoiler model"
+model flowTemperatureControl_heatingCurve
+  "Flow temperature control (power control) for the modularBoiler model"
    //Heating Curve
  replaceable function HeatingCurveFunction =
       AixLib.Controls.SetPoints.Functions.HeatingCurveFunction constrainedby
@@ -40,8 +40,8 @@ equation
     annotation (Line(points={{-100,-10},{-56,-10}}, color={0,0,127}));
   connect(heatingCurve.TSet, pIRegler_modularBoiler.Tset) annotation (Line(
         points={{-33,-10},{-6,-10},{-6,-5},{22,-5}}, color={0,0,127}));
-  connect(Tin, pIRegler_modularBoiler.T_m) annotation (Line(points={{-100,42},{
-          16,42},{16,-13},{22,-13}}, color={0,0,127}));
-  connect(pIRegler_modularBoiler.PLR_vorlauf, PLRset) annotation (Line(points={
-          {42,-5},{68,-5},{68,-4},{100,-4}}, color={0,0,127}));
-end flowTemperatureControl_modularBoiler;
+  connect(Tin, pIRegler_modularBoiler.T_m) annotation (Line(points={{-100,42},{16,
+          42},{16,-13},{22,-13}}, color={0,0,127}));
+  connect(pIRegler_modularBoiler.PLR_vorlauf, PLRset) annotation (Line(points={{
+          42,-5},{68,-5},{68,-4},{100,-4}}, color={0,0,127}));
+end flowTemperatureControl_heatingCurve;
