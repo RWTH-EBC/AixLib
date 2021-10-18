@@ -19,7 +19,7 @@ record ASHRAE140_900
     hConExt=3.160000000000001,
     nExt=1,
     RExt={0.000985315078012},
-    RExtRem=Modelica.Constants.inf,
+    RExtRem=0.0274795299795,
     CExt={8775985.69078},
     AInt=48.0,
     hConInt=4.130000000000001,
@@ -55,14 +55,14 @@ record ASHRAE140_900
     wfWall={0.15094339622641512,0.25471698113207547,0.33962264150943394,0.25471698113207547},
     wfWin={1.0,0.0,0.0,0.0},
     wfGro=0,
-    specificPeople=1/14,
+    specificPeople=0.07143,
     activityDegree=1.2,
-    fixedHeatFlowRatePersons=125/100,
+    fixedHeatFlowRatePersons=1.25,
     ratioConvectiveHeatPeople=0.5,
     internalGainsMoistureNoPeople=0.5,
-    internalGainsMachinesSpecific=20/100,
+    internalGainsMachinesSpecific=0.2,
     ratioConvectiveHeatMachines=0.6,
-    lightingPowerSpecific=420/100,
+    lightingPowerSpecific=4.2,
     ratioConvectiveHeatLighting=0.6,
     useConstantACHrate=false,
     baseACH=0.2,
@@ -85,16 +85,8 @@ record ASHRAE140_900
     KRCool=1000,
     TNCool=1,
     CoolerOn=false,
-        TThresholdHeater=273.15 + 15,
+    TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
-  annotation (Documentation(revisions="<html><ul>
-  <li>
-    <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
-    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>
-    Implement dummy zone record to assign this record as default
-    parameter value, where unavoidable.
-  </li>
-</ul>
-</html>"));
+
 end ASHRAE140_900;
