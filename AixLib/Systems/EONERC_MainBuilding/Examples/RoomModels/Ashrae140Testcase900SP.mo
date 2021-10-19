@@ -11,7 +11,7 @@ model Ashrae140Testcase900SP
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.1,
     area=48,
-    thickness=0.05,
+    thickness=0.1,
     alpha=20,
     dynamicHX1(
       m1_flow_nominal=0.1,
@@ -32,7 +32,8 @@ model Ashrae140Testcase900SP
     throttlePumpCold(Kv=10, redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
-            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
+            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
+    pipe(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_28x0_9()))
     annotation (Placement(transformation(extent={{78,-42},{98,-20}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
@@ -307,7 +308,8 @@ model Ashrae140Testcase900SP
       rpm_pump=2000), ctrThrottleColdQFlow(
       k=0.05,
       Ti=120,
-      rpm_pump=3000))
+      rpm_pump=3000),
+    ctrPump(rpm_pump=3000))
     annotation (Placement(transformation(extent={{-66,32},{-46,52}})));
   Modelica.Blocks.Interfaces.RealInput QFlowTabsSet
     "Connector of second Real input signal" annotation (Placement(

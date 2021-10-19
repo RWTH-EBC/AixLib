@@ -26,7 +26,7 @@ record ASHRAE140_900
     nInt=1,
     RInt={0.000491103488785},
     CInt={5373300.22817},
-    AFloor=48.0,
+    AFloor=0.0,
     hConFloor=4.130000000000001,
     nFloor=1,
     RFloor={0.17413196439},
