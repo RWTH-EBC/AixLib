@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 partial model PartialHeatPumpSystem
   "Partial model containing the basic heat pump block and different control blocks(optional)"
     extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -174,6 +174,8 @@ partial model PartialHeatPumpSystem
       tab="Safety Control",
       group="Operational Envelope",
       enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
+  parameter Modelica.SIunits.TemperatureDifference dTHystOperEnv=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=use_opeEnv));
   parameter Boolean use_deFro=true "False if defrost in not considered"
                                     annotation (choices(checkBox=true), Dialog(
         tab="Safety Control",group="Defrost", descriptionLabel = true, enable=use_sec));
@@ -275,8 +277,8 @@ partial model PartialHeatPumpSystem
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
 
-  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
-    Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
+  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
+                                              annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
   Fluid.Movers.SpeedControlled_y           pumSin(
@@ -384,6 +386,7 @@ partial model PartialHeatPumpSystem
     final use_opeEnvFroRec=use_opeEnvFroRec,
     final dataTable=dataTable,
     final tableUpp=tableUpp,
+    final dTHystOperEnv=dTHystOperEnv,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
     final deltaIceFac=deltaIceFac,
@@ -400,32 +403,31 @@ partial model PartialHeatPumpSystem
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));
 equation
   connect(pumSin.port_b, heatPump.port_a1) annotation (Line(
-      points={{-62,40},{-62,9},{-26,9}},
+      points={{-62,40},{-62,11.2},{-26,11.2}},
       color={0,127,255},
       pattern=LinePattern.Dash));
 
   connect(pumSou.port_b, heatPump.port_a2) annotation (Line(
-      points={{52,-42},{30,-42},{30,-13},{18,-13}},
+      points={{52,-42},{30,-42},{30,-15.2},{18,-15.2}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSin.port_b, heatPump.port_a1) annotation (Line(
-      points={{-64,12},{-26,12},{-26,9}},
+      points={{-64,12},{-26,12},{-26,11.2}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSou.port_b, heatPump.port_a2) annotation (Line(
-      points={{54,-16},{18,-16},{18,-13}},
+      points={{54,-16},{18,-16},{18,-15.2}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(heatPump.port_b1, secHeaGen.port_a) annotation (Line(
-      points={{18,9},{18,60},{32,60},{32,61}},
+      points={{18,11.2},{18,60},{32,60},{32,61}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(heatPump.port_b1, mediumPassThroughSecHeaGen.port_a) annotation (Line(
-      points={{18,9},{18,34},{32,34}},
+      points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-13},{-60,
-          -13},{-60,-60},{-100,-60}},
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},{-60,-60},{-100,-60}},
                                  color={0,127,255}));
 connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
