@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingSystem "Model for an underfloor heating system"
 extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
         false, final m_flow_nominal = m_flow_total);
@@ -155,8 +155,8 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     annotation (Placement(transformation(extent={{-60,-64},{-80,-44}})));
   Modelica.Blocks.Interfaces.RealOutput T_FlowNominal
     annotation (Placement(transformation(extent={{-90,-64},{-110,-44}})));
-  Modelica.Blocks.Interfaces.RealInput valveInput[sum(CircuitNo)] annotation (
-      Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput valveInput[RoomNo] annotation (Placement(
+        transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-64,68})));
@@ -206,9 +206,6 @@ equation
      for m in 1:CircuitNo[1] loop
     connect(distributor.flowPorts[m], underfloorHeatingRoom[1].ports_a[m]);
     connect(underfloorHeatingRoom[1].ports_b[m], distributor.returnPorts[m]);
-    connect(underfloorHeatingRoom[1].valveInput[m], valveInput[m]) annotation (
-        Line(points={{-9.92,38},{-10,38},{-10,42},{-64,42},{-64,68}}, color={0,0,
-            127}));
   end for;
 
   if RoomNo > 1 then
@@ -222,9 +219,6 @@ equation
           sum(CircuitNo[v] for v in 1:(x - 1)) + u)]) annotation (Line(points={{16,
                 27.4286},{24,27.4286},{24,-22},{-26.4,-22},{-26.4,-12.4}},
               color={0,127,255}));
-        connect(underfloorHeatingRoom[x].valveInput[u], valveInput[(sum(
-          CircuitNo[v] for v in 1:(x - 1)) + u)]) annotation (Line(points={{-9.92,
-                38},{-10,38},{-10,42},{-64,42},{-64,68}}, color={0,0,127}));
       end for;
           end for;
   end if;
@@ -235,6 +229,8 @@ equation
     annotation (Line(points={{-81,-36},{-100,-36}}, color={0,0,127}));
   connect(T_FlowNom.y, T_FlowNominal)
     annotation (Line(points={{-81,-54},{-100,-54}}, color={0,0,127}));
+  connect(valveInput, underfloorHeatingRoom.valveInput) annotation (Line(points
+        ={{-64,68},{-64,50},{-9.92,50},{-9.92,38}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(extent={{-100,-60},{100,60}}, initialScale=0.1),
         graphics={
         Rectangle(

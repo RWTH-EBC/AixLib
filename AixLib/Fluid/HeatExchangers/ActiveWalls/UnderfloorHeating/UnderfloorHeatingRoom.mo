@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingRoom "Model for heating of one room with underfloor heating"
   extends UnderfloorHeating.BaseClasses.PartialModularPort_ab(final nPorts=
         CircuitNo, final m_flow_nominal=m_flow_PanelHeating);
@@ -211,8 +211,8 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor[dis](each m=
         CircuitNo)
     annotation (Placement(transformation(extent={{-10,40},{10,20}})));
-  Modelica.Blocks.Interfaces.RealInput valveInput[CircuitNo] annotation (
-      Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput valveInput annotation (Placement(
+        transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-62,74})));
@@ -279,7 +279,7 @@ equation
 
   // VALVE CONNECTION
   for i in 1:CircuitNo loop
-  connect(valveInput[i], underfloorHeatingCircuit[i].valveInput) annotation (Line(
+  connect(valveInput, underfloorHeatingCircuit[i].valveInput) annotation (Line(
         points={{-62,74},{-62,32},{-16.28,32},{-16.28,11.6}}, color={0,0,127}));
   end for;
   annotation (
