@@ -84,9 +84,6 @@ model Multizone "Illustrates the use of Multizone"
   Modelica.Blocks.Sources.Constant TSet[5](each k=0)
     "Dummy for heater cooler (not existing in record)"
     annotation (Placement(transformation(extent={{66,-60},{56,-50}})));
-  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.MultizonePostProcessing
-    multizonePostProcessing
-    annotation (Placement(transformation(extent={{50,50},{70,70}})));
 equation
   connect(weaDat.weaBus,weaBus)  annotation (Line(
       points={{-62,40},{-51,40},{-51,6}},
