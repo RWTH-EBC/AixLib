@@ -102,6 +102,7 @@ equation
   connect(pressureCurveSelected.y[1], dpMin.u1) annotation (Line(points={{-29,50},{-24,50},{-24,39.6},{-17.2,39.6}}, color={0,0,127}));
   connect(pressureCurvePer.y[1], dpMin.u2) annotation (Line(points={{-29,20},{-24,20},{-24,32},{-17.2,32},{-17.2,32.4}}, color={0,0,127}));
   connect(dpMin.y, mov.dp_in) annotation (Line(points={{-3.4,36},{0,36},{0,12}}, color={0,0,127}));
+  connect(senVolFlo.V_flow, pressureCurvePer.u[1]) annotation (Line(points={{-70,11},{-70,20},{-52,20}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         preferredView="info",
