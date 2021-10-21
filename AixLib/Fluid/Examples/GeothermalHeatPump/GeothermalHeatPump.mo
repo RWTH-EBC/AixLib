@@ -67,12 +67,12 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
         origin={154,-106})));
   Sources.Boundary_pT coldConsumerReturn(redeclare package Medium = Medium,
       nPorts=1,
-    T=290.15) "Source representing cold consumer"
+    T=287.15) "Source representing cold consumer"
                 annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={154,32})));
-  Modelica.Blocks.Sources.Constant pressureDifference(k=40000)
+  Modelica.Blocks.Sources.Constant pressureDifference(k=60000)
     "Pressure difference used for all pumps"                   annotation (
       Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -85,10 +85,11 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
     "Set point of upper heat storage temperature"
     annotation (Placement(transformation(extent={{-160,0},{-148,12}})));
   Control.geothermalFieldController     geothermalFieldControllerCold(
-      temperature_low=273.15 + 6, temperature_high=273.15 + 8)
+      temperature_low=273.15 + 8, temperature_high=273.15 + 10)
     "Controls the heat exchange with the geothermal field and the heat storage"
     annotation (Placement(transformation(extent={{-102,28},{-86,44}})));
-  Control.geothermalFieldController     geothermalFieldControllerHeat
+  Control.geothermalFieldController     geothermalFieldControllerHeat(
+      temperature_low=308.15, temperature_high=313.15)
     "Controls the heat exchange with the geothermal field and the heat storage"
     annotation (Placement(transformation(extent={{-100,-34},{-84,-18}})));
 equation
