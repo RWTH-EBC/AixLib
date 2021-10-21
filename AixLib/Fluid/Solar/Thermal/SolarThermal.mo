@@ -2,7 +2,7 @@ within AixLib.Fluid.Solar.Thermal;
 model SolarThermal "Model of a solar thermal panel"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
     vol(final V=volPip),
-    pressureDrop(a=pressureDropCoeff),
+    a=pressureDropCoeff,
     dp_start=pressureDropCoeff*(m_flow_start *
       Medium.density(Medium.setState_pTX(
                        p_start,

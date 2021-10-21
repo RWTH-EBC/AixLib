@@ -1,8 +1,9 @@
 ﻿within AixLib.Fluid.BoilerCHP;
 model BoilerNoControl "Boiler model with physics only"
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(final a=a),
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
                                      vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-                                         final V=V));
+                                         final V=V),
+                                         a = paramBoiler.pressureDrop);
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group=
@@ -71,9 +72,6 @@ model BoilerNoControl "Boiler model with physics only"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-60,2})));
-
-  parameter Real a=paramBoiler.pressureDrop
-    "Coefficient for quadratic pressure drop term";
   Modelica.Blocks.Interfaces.RealOutput T_out
     "Outflow temperature of the passing fluid" annotation (Placement(transformation(
           extent={{100,50},{120,70}}), iconTransformation(extent={{62,22},{82,42}})));

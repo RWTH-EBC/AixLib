@@ -1,7 +1,6 @@
 within AixLib.Fluid.BoilerCHP;
 model CHP "Table based CHP model"
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
-        a=1e10), vol(V=param.vol[1]));
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=1e10, vol(V=param.vol[1]));
 
   parameter AixLib.DataBase.CHP.CHPDataSimple.CHPBaseDataDefinition param
     "CHP data set"
