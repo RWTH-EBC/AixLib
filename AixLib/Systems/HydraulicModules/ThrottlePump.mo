@@ -3,6 +3,19 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
 
+
+  Fluid.Actuators.Valves.TwoWayTable         valve(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    CvData=AixLib.Fluid.Types.CvTypes.Kv,
+    final allowFlowReversal=allowFlowReversal,
+    Kv=Kv,
+    order=1,
+    init=Modelica.Blocks.Types.Init.InitialState,
+    y_start=0,
+    flowCharacteristics=Fluid.Actuators.Valves.Data.Linear())
+           annotation (Dialog(enable=true, group="Actuators"), Placement(
+        transformation(extent={{-36,10},{-16,30}})));
   replaceable BaseClasses.BasicPumpInterface PumpInterface(
     redeclare package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
@@ -13,17 +26,6 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     Dialog(group="Actuators"),
     choicesAllMatching=true,
     Placement(transformation(extent={{32,12},{48,28}})));
-  AixLib.Fluid.Actuators.Valves.TwoWayLinear valve(
-    redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    final allowFlowReversal=allowFlowReversal,
-    Kv=Kv,
-    order=1,
-    init=Modelica.Blocks.Types.Init.InitialState,
-    y_start=0)
-           annotation (Dialog(enable=true, group="Actuators"), Placement(
-        transformation(extent={{-36,10},{-16,30}})));
   Fluid.FixedResistances.GenericPipe  pipe1(
     redeclare package Medium = Medium,
     pipeModel=pipeModel,

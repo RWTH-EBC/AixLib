@@ -3,6 +3,7 @@ AirHeater_u
 DryCoilEffectivenessNTUMassFlow
 DryCoilEffectivenessNTUPControl
 DynamicHX
+HeatingRod
 WaterCooler_T
 WaterHeater_T
 WaterHeater_u

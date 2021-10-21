@@ -1,0 +1,3 @@
+simulateModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystemNoControl", tolerance=1e-06, stopTime=300, method="dassl",  resultFile="CHPSystemNoControl");
+createPlot(id=1, position={15, 10, 1039, 644}, y={"TSet.y"}, range={0.0, 300.0, -0.2, 1.2000000000000002}, grid=true, filename="CHPSystemNoControl.mat", colors={{28,108,200}});
+createPlot(id=1, position={15, 10, 1039, 319}, y={"combinedHeatPower.electricalPower", "combinedHeatPower.thermalPower", "combinedHeatPower.fuelInput"}, range={0.0, 300.0, -20000.0, 160000.0}, grid=true, , filename="CHPSystemNoControl.mat", subPlot=2, colors={{28,108,200}, {238,46,47}, {0,140,72}});

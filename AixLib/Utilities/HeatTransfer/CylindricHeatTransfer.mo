@@ -27,8 +27,8 @@ model CylindricHeatTransfer "Model for cylindric heat transfer"
     lambda=lambda,
     d_in=(d_out + d_in)/2,
     d_out=d_out,
-    nParallel=nParallel)
-    "Outer heat conduction" annotation (Placement(transformation(extent={{-10,56},
+    nParallel=nParallel) "Outer heat conduction"
+                            annotation (Placement(transformation(extent={{-10,56},
             {10,76}}, rotation=0)));
   AixLib.Utilities.HeatTransfer.CylindricLoad CylindricLoad1(
     final energyDynamics=energyDynamics,
@@ -38,16 +38,16 @@ model CylindricHeatTransfer "Model for cylindric heat transfer"
     d_out=d_out,
     length=length,
     T0=T0,
-    nParallel=nParallel)
-    "Heat capacity" annotation (Placement(transformation(extent={{-10,38},{10,58}},
+    nParallel=nParallel) "Heat capacity"
+                    annotation (Placement(transformation(extent={{-10,38},{10,58}},
                       rotation=0)));
   AixLib.Utilities.HeatTransfer.CylindricHeatConduction CylindricHeatConductionIn(
     length=length,
     lambda=lambda,
     d_out=(d_out + d_in)/2,
     d_in=d_in,
-    nParallel=nParallel)
-    "Inner heat conduction" annotation (Placement(transformation(extent={{-10,14},
+    nParallel=nParallel) "Inner heat conduction"
+                            annotation (Placement(transformation(extent={{-10,14},
             {10,34}}, rotation=0)));
 equation
   connect(CylindricHeatConductionOut.port_b, port_b) annotation (Line(

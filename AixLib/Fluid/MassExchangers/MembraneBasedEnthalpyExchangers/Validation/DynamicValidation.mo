@@ -39,7 +39,7 @@ model DynamicValidation
   parameter Real B=4.64E5
     "constant B of linear dependency equation for permeability";
 
-	
+
   EnthalpyExchanger enthalpyExchanger(
     redeclare package Medium = Media.Air,
     n=n,

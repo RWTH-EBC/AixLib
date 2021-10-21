@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.ValidationData;
 record AcceptedResultsFromASHRAEHeatingLoad
-  extends
-    AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.ValidationData.ValidationDataASHRAEBaseDataDefinition(
+  extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.ValidationData.ValidationDataASHRAEBaseDataDefinition(
       Results=[600,4296,5709; 620,4613,5944; 640,2751,3803; 650,0,0; 900,1170,
         2041; 920,3313,4300; 940,793,1411; 950,0,0; 210,6456,6967; 220,6944,
         8787; 230,10376,12243; 240,5649,7448; 250,4751,7024; 270,4510,5920; 280,

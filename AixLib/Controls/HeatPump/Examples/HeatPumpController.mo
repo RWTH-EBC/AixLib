@@ -11,7 +11,7 @@ model HeatPumpController "Example for usage of heat pump controller"
   Modelica.Blocks.Interaction.Show.BooleanValue showOnOff
     "Shows the current value of the on/off signal"
     annotation (Placement(transformation(extent={{66,40},{86,60}})));
-  Interfaces.ThermalMachineControlBus heatPumpControlBus
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
     "Required to make the signals on the bus accessible" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -23,15 +23,15 @@ model HeatPumpController "Example for usage of heat pump controller"
   Modelica.Blocks.Sources.RealExpression temperatureMeasurements[4](y={280,290,
         300,310}) "Represents temperature measurements in heat pump"
                   annotation (Placement(transformation(
-        extent={{-31,-10},{31,10}},
-        rotation=180,
-        origin={69,0})));
+        extent={{-30,-10},{30,10}},
+        rotation=0,
+        origin={-70,-76})));
   Modelica.Blocks.Sources.RealExpression massFlowRateMeasurements[2](y={0.5,1})
     "Represents mass flow rate measurements in heat pump"
     annotation (Placement(transformation(
-        extent={{-31,-10},{31,10}},
-        rotation=180,
-        origin={69,-20})));
+        extent={{-30,-10},{30,10}},
+        rotation=0,
+        origin={-70,-96})));
   Modelica.Blocks.Sources.Sine T_meas(
     freqHz=1/3600,
     amplitude=6,
@@ -61,78 +61,72 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(heatPumpControlBus.n, showN.numberPort) annotation (Line(
+  connect(heatPumpControlBus.nSet, showN.numberPort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,70},{58.5,70}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(temperatureMeasurements[1].y, heatPumpControlBus.T_flow_ev)
-    annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
-          -0.05}}, color={0,0,127}), Text(
-      string="%second",
+  connect(temperatureMeasurements[1].y, heatPumpControlBus.TEvaInMea)
+    annotation (Line(points={{-37,-76},{0.05,-76},{0.05,-0.05}},
+                   color={0,0,127}), Text(
       index=1,
       extent={{6,3},{6,3}}));
-  connect(temperatureMeasurements[2].y, heatPumpControlBus.T_flow_co)
-    annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
-          -0.05}}, color={0,0,127}), Text(
-      string="%second",
+  connect(temperatureMeasurements[2].y, heatPumpControlBus.TConInMea)
+    annotation (Line(points={{-37,-76},{0.05,-76},{0.05,-0.05}},
+                   color={0,0,127}), Text(
       index=1,
       extent={{6,3},{6,3}}));
-  connect(temperatureMeasurements[3].y, heatPumpControlBus.T_ret_ev)
-    annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
-          -0.05}}, color={0,0,127}), Text(
-      string="%second",
+  connect(temperatureMeasurements[3].y, heatPumpControlBus.TEvaOutMea)
+    annotation (Line(points={{-37,-76},{0.05,-76},{0.05,-0.05}},
+                   color={0,0,127}), Text(
       index=1,
       extent={{6,3},{6,3}}));
-  connect(temperatureMeasurements[4].y, heatPumpControlBus.T_ret_co)
-    annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
-          -0.05}}, color={0,0,127}), Text(
-      string="%second",
+  connect(temperatureMeasurements[4].y, heatPumpControlBus.TConOutMea)
+    annotation (Line(points={{-37,-76},{0.05,-76},{0.05,-0.05}},
+                   color={0,0,127}), Text(
       index=1,
       extent={{6,3},{6,3}}));
-  connect(massFlowRateMeasurements[1].y, heatPumpControlBus.m_flow_ev)
-    annotation (Line(points={{34.9,-20},{20,-20},{20,-0.05},{0.05,-0.05}},
+  connect(massFlowRateMeasurements[1].y, heatPumpControlBus.m_flowEvaMea)
+    annotation (Line(points={{-37,-96},{20,-96},{20,-0.05},{0.05,-0.05}},
         color={0,0,127}), Text(
-      string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(massFlowRateMeasurements[2].y, heatPumpControlBus.m_flow_co)
-    annotation (Line(points={{34.9,-20},{20,-20},{20,-0.05},{0.05,-0.05}},
+  connect(massFlowRateMeasurements[2].y, heatPumpControlBus.m_flowConMea)
+    annotation (Line(points={{-37,-96},{0,-96},{0,-0.05},{0.05,-0.05}},
         color={0,0,127}), Text(
-      string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(T_meas.y, hPControllerOnOff.T_meas) annotation (Line(points={{-79,30},
-          {-70,30},{-70,4},{-60,4}}, color={0,0,127}));
-  connect(T_set.y, hPControllerOnOff.T_set) annotation (Line(points={{-79,-30},
-          {-70,-30},{-70,-4},{-60,-4}}, color={0,0,127}));
   connect(T_meas.y,showT_meas. numberPort) annotation (Line(points={{-79,30},{
           -66,30},{-66,80},{-63,80}}, color={0,0,127}));
   connect(T_meas.y, output_T_meas) annotation (Line(points={{-79,30},{-74,30},{
           -74,-60},{100,-60}}, color={0,0,127}));
-  connect(heatPumpControlBus.mode, showMode.activePort) annotation (Line(
+  connect(heatPumpControlBus.modeSet, showMode.activePort) annotation (Line(
       points={{0.05,-0.05},{10,-0.05},{20,-0.05},{20,28},{64.5,28}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatPumpControlBus.onOff, showOnOff.activePort) annotation (Line(
+  connect(heatPumpControlBus.onOffMea, showOnOff.activePort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,50},{64.5,50}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatPumpControlBus.onOff, output_on) annotation (Line(
+  connect(heatPumpControlBus.onOffMea, output_on) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,-80},{100,-80}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  connect(T_meas.y, hPControllerOnOff.TSet) annotation (Line(points={{-79,30},{
+          -68,30},{-68,4},{-60,4}}, color={0,0,127}));
+  connect(T_set.y, hPControllerOnOff.TMea) annotation (Line(points={{-79,-30},{
+          -68,-30},{-68,-4},{-60,-4}}, color={0,0,127}));
   annotation (experiment(StopTime=10000, Interval=10), Documentation(info="<html><p>
   This example can be used to test that <a href=
   \"modelica://AixLib.Controls.HeatPump.HPControllerOnOff\">AixLib.Controls.HeatPump.HPControllerOnOff</a>

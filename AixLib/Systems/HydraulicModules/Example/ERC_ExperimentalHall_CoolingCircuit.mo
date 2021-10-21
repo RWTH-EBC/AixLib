@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Example;
+﻿within AixLib.Systems.HydraulicModules.Example;
 model ERC_ExperimentalHall_CoolingCircuit
   "Cooling circuit of the new ERC experimental hall"
   extends Modelica.Icons.Example;
@@ -57,18 +57,18 @@ model ERC_ExperimentalHall_CoolingCircuit
     k=0.12,
     xi_start=0.5,
     initType=Modelica.Blocks.Types.InitPID.InitialState,
-    reverseAction=true)
-    annotation (Placement(transformation(extent={{-142,-2},{-116,24}})));
+    reverseAction=false)
+    annotation (Placement(transformation(extent={{-140,0},{-120,20}})));
   Controller.CtrThrottle ctrUnmixedThrottle(
     initType=Modelica.Blocks.Types.InitPID.InitialState,
-    reverseAction=true,
+    reverseAction=false,
     Td=0,
     rpm_pump=3000,
     TflowSet=291.15,
     k=0.2,
-    Ti=60) annotation (Placement(transformation(extent={{-142,80},{-118,104}})));
+    Ti=60) annotation (Placement(transformation(extent={{-140,80},{-120,100}})));
   Controller.CtrPump ctrUnmixedSimple
-    annotation (Placement(transformation(extent={{-142,58},{-118,82}})));
+    annotation (Placement(transformation(extent={{-140,60},{-120,80}})));
   AixLib.Fluid.Sources.Boundary_pT bou1(
     nPorts=1,
     redeclare package Medium = Medium,
@@ -95,6 +95,7 @@ model ERC_ExperimentalHall_CoolingCircuit
         origin={6,4})));
   AixLib.Systems.HydraulicModules.ThrottlePump unmixedThrottle(
     parameterPipe=DataBase.Pipes.Copper.Copper_42x1_2(),
+    valve(flowCharacteristics=AixLib.Fluid.Actuators.Valves.Data.Linear()),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
@@ -114,6 +115,7 @@ model ERC_ExperimentalHall_CoolingCircuit
         origin={74,4})));
   AixLib.Systems.HydraulicModules.Admix admix(
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
@@ -161,16 +163,15 @@ equation
     annotation (Line(points={{-54,51},{-54,29},{-53,29}},
                                                  color={0,127,255}));
   connect(ctrMix.hydraulicBus, admix.hydraulicBus) annotation (Line(
-      points={{-114.18,11.26},{-104.455,11.26},{-104.455,4},{-93,4}},
+      points={{-118.6,10.2},{-104.455,10.2},{-104.455,4},{-93,4}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedSimple.hydraulicBus, unmixed.hydraulicBus) annotation (Line(
-      points={{-116.32,70.24},{-19,70.24},{-19,4}},
+      points={{-118.6,70.2},{-19,70.2},{-19,4}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedThrottle.hydraulicBus, unmixedThrottle.hydraulicBus) annotation (Line(
-      points={{-116.32,92.24},{-50,92.24},{-50,92},{50,92},{50,50},{49,50},{49,
-          4}},
+      points={{-118.6,90.2},{-50,90.2},{-50,92},{50,92},{50,50},{49,50},{49,4}},
       color={255,204,51},
       thickness=0.5));
   connect(admix.port_a1, hex.port_a2) annotation (Line(points={{-83,-21},{-83,-28},{-106,-28}},
@@ -187,7 +188,7 @@ equation
   connect(admix.port_b2, hex.port_b2) annotation (Line(points={{-53,-21},{-53,-68},{-106,-68}},
                        color={0,127,255}));
   connect(ctrUnmixedThrottle.hydraulicBus, hydraulicBus) annotation (Line(
-      points={{-116.32,92.24},{-114.42,92.24},{-114.42,104},{-114,104}},
+      points={{-118.6,90.2},{-114.42,90.2},{-114.42,104},{-114,104}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -195,7 +196,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrUnmixedThrottle.Tact, hydraulicBus.TRtrnInMea) annotation (Line(
-        points={{-144.4,99.2},{-152,99.2},{-152,104.05},{-113.95,104.05}},
+        points={{-142,96},{-152,96},{-152,104.05},{-113.95,104.05}},
         color={0,0,127}), Text(
       string="%second",
       index=1,

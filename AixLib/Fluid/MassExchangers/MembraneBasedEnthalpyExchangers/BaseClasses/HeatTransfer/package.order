@@ -1,7 +1,7 @@
-PartialHeatTransfer
-PartialFlowHeatTransfer
-PartialDuctHeatTransfer
-LocalDuctConvectiveHeatFlow
-MembraneHeatTransfer
 AdsorptionEnthalpy
 CrossFlowReduction
+LocalDuctConvectiveHeatFlow
+MembraneHeatTransfer
+PartialDuctHeatTransfer
+PartialFlowHeatTransfer
+PartialHeatTransfer
