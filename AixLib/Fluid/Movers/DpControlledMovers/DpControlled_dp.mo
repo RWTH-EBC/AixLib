@@ -20,7 +20,10 @@ model DpControlled_dp
     annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=90,
-        origin={-20,120})));
+        origin={-20,120}), iconTransformation(
+        extent={{20,-20},{-20,20}},
+        rotation=90,
+        origin={-40,120})));
 
   parameter Modelica.SIunits.PressureDifference dp_nominal(
     min=0,
@@ -207,7 +210,112 @@ equation
   connect(mov.P, P) annotation (Line(points={{11,9},{80,9},{80,80},{110,80}}, color={0,0,127}));
   connect(mov.y_actual, y_actual) annotation (Line(points={{11,7},{82,7},{82,60},{110,60}}, color={0,0,127}));
   connect(mov.dp_actual, dp_actual) annotation (Line(points={{11,5},{84,5},{84,40},{110,40}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-94,100},{-42,48}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None),
+        Line(
+          points={{0,90},{100,90}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{0,70},{100,70}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{0,50},{100,50}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Rectangle(
+          extent={{-100,16},{100,-16}},
+          lineColor={0,0,0},
+          fillColor={0,127,255},
+          fillPattern=FillPattern.HorizontalCylinder),
+        Ellipse(
+          extent={{-58,58},{58,-58}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={0,100,199}),
+        Polygon(
+          points={{0,50},{0,-50},{54,0},{0,50}},
+          lineColor={0,0,0},
+          pattern=LinePattern.None,
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={255,255,255}),
+        Ellipse(
+          extent={{4,16},{36,-16}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          visible=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState,
+          fillColor={0,100,199}),
+        Line(
+          points={{0,100},{0,50}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Rectangle(
+          visible=use_inputFilter,
+          extent={{-32,40},{34,100}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          visible=use_inputFilter,
+          extent={{-32,100},{34,40}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Text(
+          visible=use_inputFilter,
+          extent={{-20,92},{22,46}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid,
+          textString="M",
+          textStyle={TextStyle.Bold}),
+        Line(
+          points={{-94,48},{-94,96}},
+          color={0,0,0},
+          thickness=0.5),
+        Line(
+          points={{-1,-24},{-1,24}},
+          color={0,0,0},
+          thickness=0.5,
+          origin={-70,49},
+          rotation=90),
+        Polygon(
+          points={{-96,96},{-92,96},{-94,100},{-96,96}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-2,-2},{2,-2},{0,2},{-2,-2}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          origin={-44,48},
+          rotation=270),
+        Line(
+          points={{-94,92},{-68,84},{-56,74},{-48,48}},
+          color={0,0,0},
+          thickness=0.5),
+        Line(
+          points={{-94,84},{-68,84},{-56,74},{-48,48}},
+          color={255,0,0},
+          thickness=0.5,
+          pattern=LinePattern.Dash,
+          visible=ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar),
+        Line(
+          points={{-94,66},{-68,84},{-56,74},{-48,48}},
+          color={0,128,255},
+          thickness=0.5,
+          pattern=LinePattern.Dash,
+          visible=ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst)}),                           Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         preferredView="info",
         defaultComponentName="pum",
