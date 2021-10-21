@@ -1,5 +1,5 @@
 within ControlUnity.twoPositionController;
-model twoPositionControllerSimple_modularBoiler
+model twoPositionControllerSimple_modularBoiler "Simple two position controller"
   extends ControlUnity.twoPositionController.BaseClass.partialTwoPositionController;
 
   parameter Modelica.SIunits.Temperature T_ref=273.15+60 "Solltemperatur";
@@ -9,8 +9,9 @@ model twoPositionControllerSimple_modularBoiler
     annotation (Placement(transformation(extent={{-88,-20},{-68,0}})));
 equation
 
-  connect(TLayers[1], add.u1) annotation (Line(points={{-100,36},{-52,36},{-52,
-          52},{-2,52}}, color={0,0,127}));
+  connect(TLayers[1], add.u1) annotation (Line(points={{-100,22.6667},{-52,
+          22.6667},{-52,52},{-2,52}},
+                        color={0,0,127}));
   connect(realExpression1.y, add.u2) annotation (Line(points={{-67,-10},{-36,
           -10},{-36,40},{-2,40}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{-122,0},{-82,40}})),

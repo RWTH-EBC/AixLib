@@ -1,16 +1,17 @@
 within ControlUnity.twoPositionController.BaseClass.twoPositionControllerCal;
-model twoPositionController_layers
+model twoPositionController_layers "Two position controller using mean temperature of buffer storage for calculation"
 
   extends
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(
-      realExpression(y=TLayer_dif), onOffController(bandwidth=bandwidth));
+      realExpression(y=T_m),        onOffController(bandwidth=bandwidth));
    parameter Boolean layerCal=true
     "If true, the two-position controller uses the mean temperature of the buffer storage";
+    parameter Modelica.SIunits.Temperature T_m=273.15+55 "Mean temperature of all layers of the buffer storage";
 
   parameter Modelica.SIunits.TemperatureDifference TLayer_dif=8 "Reference difference temperature for the on off controller for the buffer storage with layer calculation";
   parameter Modelica.SIunits.Temperature Tlayerref=273.15+65;
 
-  Modelica.Blocks.Sources.RealExpression realExpression(y=TLayer_dif)
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=0)
     annotation (Placement(transformation(extent={{30,-40},{10,-20}})));
   parameter Real bandwidth "Bandwidth around reference signal";
   Modelica.Blocks.Math.Sum sumTLayers(nin=n)
@@ -26,10 +27,10 @@ equation
     annotation (Line(points={{-65,12},{-54,12},{-54,24},{-38,24}},     color={0,0,127}));
   connect(meanTemperatureDynamicStorage.y, add.u1) annotation (Line(points={{-15,
           30},{-12,30},{-12,52},{-2,52}}, color={0,0,127}));
-  connect(realExpression.y, add.u2) annotation (Line(points={{9,-30},{-8,-30},{-8,
-          40},{-2,40}}, color={0,0,127}));
   connect(TLayers, sumTLayers.u)
     annotation (Line(points={{-100,36},{-68,36}}, color={0,0,127}));
+  connect(realExpression1.y, add.u2) annotation (Line(points={{9,-30},{-8,-30},{
+          -8,40},{-2,40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end twoPositionController_layers;

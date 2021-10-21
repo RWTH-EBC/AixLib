@@ -4,3 +4,7 @@ twoPositionController
 threePositionController
 flowTemperatureController
 AdvancedControl
+Regulation_modularBoiler
+emergencySwitch_modularBoiler
+hierarchicalControl_Tester
+tester

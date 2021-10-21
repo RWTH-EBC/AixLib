@@ -21,13 +21,7 @@ model hierarchicalControl_modularBoiler
     bandwidth=bandwidth) if              not use_advancedControl
                                  constrainedby
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController
-    annotation (Placement(transformation(extent={{24,44},{44,64}})),choices(
-    choice(redeclare twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
-    twoPositionController_layers=ControlUnity.twoPositionController.twoPositionControllerSimple_modularBoiler "Simple two position controller"),
-    choice(redeclare twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
-    twoPositionController_layers=ControlUnity.twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers "Mean temperature"),
-    choice(redeclare twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
-    twoPositionController_layers=ControlUnity.twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top "Top level temperature")));
+    annotation (Placement(transformation(extent={{24,44},{44,64}})), choicesAllMatching=true, Dialog(enable=not use_advancedControl));
   Modelica.Blocks.Interfaces.RealInput TLayers[n] if not use_advancedControl
     "Different temperatures of layers of buffer storage; 1 lowest layer and n top layer"
     annotation (Placement(transformation(
@@ -57,12 +51,9 @@ model hierarchicalControl_modularBoiler
   //Flow temperature control
   replaceable flowTemperatureController.flowTemperatureControl_heatingCurve
     flowTemperatureControl_heatingCurve if use_advancedControl
-    annotation (Placement(transformation(extent={{-18,-76},{2,-56}})),
-                                                                     choices(
-    choice(redeclare  flowTemperatureController.flowTemperatureControl_heatingCurve
-    flowTemperatureControl_heatingCurve= ControlUnity.flowTemperatureController.flowTemperatureControl_heatingCurve "Flow temperature control with heating curve"),
-    choice(redeclare flowTemperatureController.flowTemperatureControl_heatingCurve
-    flowTemperatureControl_heatingCurve= ControlUnity.flowTemperatureController.renturnAdmixture.returnAdmixture "Return Admixture")));
+    constrainedby
+    ControlUnity.flowTemperatureController.partialFlowtemperatureControl
+    annotation (Placement(transformation(extent={{-18,-76},{2,-56}})), choicesAllMatching=true, Dialog(enable= use_advancedControl));
 
     Modelica.Blocks.Interfaces.RealInput Tamb if use_advancedControl
     "Outdoor temperature"
@@ -78,28 +69,26 @@ model hierarchicalControl_modularBoiler
         origin={-10,-108})));
 
   parameter Modelica.SIunits.Temperature THotMax=273.15 + 90
-    "Grenztemperatur, ab der das System abgeschaltet wird";
+    "Maximum temperature, from which the system is switched off" annotation(Dialog(group="Security-related systems"));
 
 
 equation
   //Advanced or simple control
+  if use_advancedControl then
 connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
-        points={{-10,-108},{-10,-76},{-9.8,-76}}, color={0,0,127}));
+        points={{-10,-108},{-10,-76},{-2.4,-76}}, color={0,0,127}));
   connect(Tamb, flowTemperatureControl_heatingCurve.Tamb) annotation (Line(
         points={{-100,-78},{-70,-78},{-70,-66},{-18,-66}},       color={0,0,127}));
   connect(emergencySwitch_modularBoiler2.PLR_set,
     flowTemperatureControl_heatingCurve.PLRin) annotation (Line(points={{44,-21},
           {58,-21},{58,-48},{-26,-48},{-26,-59},{-18,-59}}, color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.y, PLRset) annotation (Line(
-        points={{2,-66},{82,-66},{82,60},{100,60}}, color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.PLR,
-    emergencySwitch_modularBoiler2.PLR_ein) annotation (Line(points={{2,-66.4},{
-          10,-66.4},{10,-25.2},{24,-25.2}}, color={0,0,127}));
+  connect(flowTemperatureControl_heatingCurve.y,
+    emergencySwitch_modularBoiler2.PLR_ein) annotation (Line(points={{2,-66},{10,
+          -66},{10,-25.2},{24,-25.2}},      color={0,0,127}));
   connect(Tin, emergencySwitch_modularBoiler2.T_ein) annotation (Line(points={{-102,
           72},{-74,72},{-74,18},{18,18},{18,-18.8},{24,-18.8}}, color={0,0,127}));
-    if use_advancedControl then
+else
 
-    else
  connect(PLRin, emergencySwitch_modularBoiler1.PLR_ein) annotation (Line(
         points={{-100,0},{-32,0},{-32,54.8},{-18,54.8}}, color={0,0,127}));
   connect(Tin, emergencySwitch_modularBoiler1.T_ein) annotation (Line(points={{-102,
@@ -111,9 +100,10 @@ connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
   connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points={
           {45,59.2},{67.5,59.2},{67.5,60},{100,60}}, color={0,0,127}));
 
-   end if;
+  end if;
 
 
 
-
+  connect(flowTemperatureControl_heatingCurve.PLRset, PLRset) annotation (Line(
+        points={{2.2,-59},{78,-59},{78,60},{100,60}}, color={0,0,127}));
 end hierarchicalControl_modularBoiler;

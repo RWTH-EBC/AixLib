@@ -1,13 +1,15 @@
 within ControlUnity.twoPositionController.BaseClass.twoPositionControllerCal;
 model twoPositionController_top
-  "Calculation of the temperature of the buffer storage with the temperature on the top level"
+  "Two position controller using top level of buffer storage for calculation"
   extends
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(
       realExpression(y=Tref), onOffController(bandwidth=bandwidth));
   parameter Modelica.SIunits.Temperature Tref=273.15+60 "Reference temperature for two position controller using top level temperature";
   parameter Modelica.SIunits.Temperature Ttop=273.15+70 "Temperature on the top level of the buffer storage";
+  parameter Boolean layerCal=true
+    "If true, the two-position controller uses the mean temperature of the buffer storage";
 
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=Ttop)
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=0)
     annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
   parameter Real bandwidth "Bandwidth around reference signal";
 equation

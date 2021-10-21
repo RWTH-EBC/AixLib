@@ -87,15 +87,16 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(returnAdmixture1.y, hydraulicBus.valveSet) annotation (Line(points={{
-          -78,10.4},{-62,10.4},{-62,10.05},{-41.95,10.05}}, color={0,0,127}),
-      Text(
+  connect(returnAdmixture1.valveSet, hydraulicBus.valveSet) annotation (Line(
+        points={{-78,10.4},{-62,10.4},{-62,10.05},{-41.95,10.05}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(sine.y, returnAdmixture1.TMea)
-    annotation (Line(points={{-86,-31},{-86,2},{-85,2}}, color={0,0,127}));
+    annotation (Line(points={{-86,-31},{-86,2},{-82.4,2}},
+                                                         color={0,0,127}));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
