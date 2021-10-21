@@ -99,42 +99,49 @@ model MultizonePostProcessing
     final quantity="HeatFlowRate",
     final unit="W")
     "Summed heating power consumed by ideal heaters"
-    annotation (Placement(transformation(extent={{100,42},{120,62}})));
+    annotation (Placement(transformation(extent={{100,30},{120,50}}),
+        iconTransformation(extent={{100,30},{120,50}})));
   Modelica.Blocks.Interfaces.RealOutput PCoolerSum(
     final quantity="HeatFlowRate",
     final unit="W")
     "Summed cooling power consumed by ideal coolers"
-    annotation (Placement(transformation(extent={{100,22},{120,42}})));
+    annotation (Placement(transformation(extent={{100,10},{120,30}}),
+        iconTransformation(extent={{100,10},{120,30}})));
   Modelica.Blocks.Interfaces.RealOutput WHeaterSum(
     final quantity="Energy",
     final unit="J",
     displayUnit="kWh")
     "Summed heating energy consumed by ideal heater"
-    annotation (Placement(transformation(extent={{100,0},{120,20}})));
+    annotation (Placement(transformation(extent={{100,-12},{120,8}}),
+        iconTransformation(extent={{100,-12},{120,8}})));
   Modelica.Blocks.Interfaces.RealOutput WCoolerSum(
     final quantity="Energy",
     final unit="J",
     displayUnit="kWh")
     "Summed cooling energy consumed by ideal coolers"
-    annotation (Placement(transformation(extent={{100,-20},{120,0}})));
+    annotation (Placement(transformation(extent={{100,-32},{120,-12}}),
+        iconTransformation(extent={{100,-32},{120,-12}})));
   Modelica.Blocks.Interfaces.RealOutput WElAHU(
     final quantity="Energy",
     final unit="J",
     displayUnit="kWh")
     "Electric energy consumed by AHU"
-    annotation (Placement(transformation(extent={{100,-42},{120,-22}})));
+    annotation (Placement(transformation(extent={{100,-54},{120,-34}}),
+        iconTransformation(extent={{100,-54},{120,-34}})));
   Modelica.Blocks.Interfaces.RealOutput WHeatAHU(
     final quantity="Energy",
     final unit="J",
     displayUnit="kWh")
     "Heating energy consumed by AHU"
-    annotation (Placement(transformation(extent={{100,-64},{120,-44}})));
+    annotation (Placement(transformation(extent={{100,-76},{120,-56}}),
+        iconTransformation(extent={{100,-76},{120,-56}})));
   Modelica.Blocks.Interfaces.RealOutput WCoolAHU(
     final quantity="Energy",
     final unit="J",
     displayUnit="kWh")
     "Cooling energy consumed by AHU"
-    annotation (Placement(transformation(extent={{100,-88},{120,-68}})));
+    annotation (Placement(transformation(extent={{100,-100},{120,-80}}),
+        iconTransformation(extent={{100,-100},{120,-80}})));
 
   Utilities.Psychrometrics.Phi_pTX calcPhi[numZones] if calc_rel_humidity
     "Calculates relative humdity"
@@ -146,13 +153,13 @@ model MultizonePostProcessing
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "Average operative air temperature in building"
-    annotation (Placement(transformation(extent={{100,72},{120,92}}),
-        iconTransformation(extent={{100,82},{120,102}})));
+    annotation (Placement(transformation(extent={{100,68},{120,88}}),
+        iconTransformation(extent={{100,68},{120,88}})));
   Modelica.Blocks.Interfaces.RealOutput RelHumidityMean(final unit="1") if
     calc_rel_humidity
     "Average relative humidity in building" annotation (Placement(
-        transformation(extent={{100,56},{120,76}}), iconTransformation(extent={
-            {100,82},{120,102}})));
+        transformation(extent={{100,50},{120,70}}), iconTransformation(extent={{100,50},
+            {120,70}})));
   Modelica.Blocks.Math.Add operativeTemperatureCalc[numZones](k1=0.5, k2=0.5)
     annotation (Placement(transformation(extent={{-22,66},{-2,86}})));
   Modelica.Blocks.Math.Sum TOperativeAverageCalc(nin=numZones, k=zoneParam.VAir
@@ -192,25 +199,25 @@ equation
   connect(TAirAverageCalc.y, TAirMean) annotation (Line(points={{74.8,96},{92,
           96},{92,98},{110,98}}, color={0,0,127}));
   connect(PHeaterSumCalc.y, PHeaterSum)
-    annotation (Line(points={{74.8,36},{92,36},{92,52},{110,52}},
+    annotation (Line(points={{74.8,36},{92,36},{92,40},{110,40}},
                                                   color={0,0,127}));
   connect(PCoolerSumCalc.y, PCoolerSum) annotation (Line(points={{74.8,-6},{92,
-          -6},{92,32},{110,32}},
+          -6},{92,20},{110,20}},
                              color={0,0,127}));
   connect(WHeaterSumCalc.y, WHeaterSum) annotation (Line(points={{74.8,16},{92,
-          16},{92,10},{110,10}},
+          16},{92,-2},{110,-2}},
                              color={0,0,127}));
   connect(WCoolerSumCalc.y, WCoolerSum)
-    annotation (Line(points={{74.8,-26},{92,-26},{92,-10},{110,-10}},
+    annotation (Line(points={{74.8,-26},{92,-26},{92,-22},{110,-22}},
                                                 color={0,0,127}));
   connect(WElAHUCalc.y, WElAHU)
-    annotation (Line(points={{74.8,-48},{92,-48},{92,-32},{110,-32}},
+    annotation (Line(points={{74.8,-48},{92,-48},{92,-44},{110,-44}},
                                                     color={0,0,127}));
   connect(WHeatAHUCalc.y, WHeatAHU)
-    annotation (Line(points={{74.8,-70},{92,-70},{92,-54},{110,-54}},
+    annotation (Line(points={{74.8,-70},{92,-70},{92,-66},{110,-66}},
                                                     color={0,0,127}));
   connect(WCoolAHUCalc.y, WCoolAHU)
-    annotation (Line(points={{74.8,-94},{92,-94},{92,-78},{110,-78}},
+    annotation (Line(points={{74.8,-94},{92,-94},{92,-90},{110,-90}},
                                                     color={0,0,127}));
   connect(constPressure.y, calcPhi.p) annotation (Line(points={{-61.2,28},{-42,
           28},{-42,34},{-23,34}}, color={0,0,127}));
@@ -224,12 +231,12 @@ equation
           {-72,76},{-72,70},{-24,70}}, color={0,0,127}));
   connect(operativeTemperatureCalc.y, TOperativeAverageCalc.u) annotation (Line(
         points={{-1,76},{28,76},{28,76},{56.4,76}}, color={0,0,127}));
-  connect(TOperativeAverageCalc.y, TOperativeMean) annotation (Line(points={{
-          74.8,76},{90,76},{90,82},{110,82}}, color={0,0,127}));
+  connect(TOperativeAverageCalc.y, TOperativeMean) annotation (Line(points={{74.8,76},
+          {90,76},{90,78},{110,78}},          color={0,0,127}));
   connect(calcPhi.phi, RelHumditiyMeanCalc.u) annotation (Line(points={{-1,42},
           {15.5,42},{15.5,56},{56.4,56}}, color={0,0,127}));
-  connect(RelHumditiyMeanCalc.y, RelHumidityMean) annotation (Line(points={{
-          74.8,56},{88,56},{88,66},{110,66}}, color={0,0,127}));
+  connect(RelHumditiyMeanCalc.y, RelHumidityMean) annotation (Line(points={{74.8,56},
+          {88,56},{88,60},{110,60}},          color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
