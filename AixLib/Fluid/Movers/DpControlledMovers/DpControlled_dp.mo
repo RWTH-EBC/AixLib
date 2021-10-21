@@ -65,6 +65,13 @@ protected
       p=Medium.p_default,
       T=Medium.T_default,
       X=Medium.X_default) "Default medium density";
+  final parameter Medium.ThermodynamicState sta_start=Medium.setState_pTX(
+    T=T_start,
+    p=p_start,
+    X=X_start) "Medium state at start values";
+
+  final parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start = Medium.specificEnthalpy(sta_start)
+    "Start value for outflowing enthalpy";
 
 initial equation
   assert(pressureCurveSelected.table[1, 1] == 0.0,
