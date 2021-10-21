@@ -65,7 +65,7 @@ equation
   connect(vol.ports[2], dp.port_a) annotation (Line(points={{2,-50},{2,-60},{-60,-60},{-60,0},{-52,0}},         color={0,127,255}));
   connect(fixedTemperature.port, vol.heatPort) annotation (Line(points={{-20,-40},{-10,-40}},
                                                                                             color={191,0,0}));
-  connect(dpControlled_dp.P, integrator.u) annotation (Line(points={{1,9},{16,9},{16,70},{38,70}}, color={0,0,127}));
+  connect(dpControlled_dp.P, integrator.u) annotation (Line(points={{1,9},{8,9},{8,70},{38,70}},   color={0,0,127}));
   connect(integrator.y, elEnergy) annotation (Line(points={{61,70},{110,70}}, color={0,0,127}));
   annotation (
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpControlled_dpConst.mos"
