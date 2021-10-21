@@ -7,6 +7,10 @@ model MultizonePostProcessing
     "Number of zones";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
+  parameter Modelica.SIunits.Pressure PAirConstant = 101325
+    "constant pressure of indoor air for rel. humidity calculation"  annotation (Dialog(
+    enable=calc_rel_humidity));
+  parameter Boolean calc_rel_humidity "true to calculate rel. humidity";
   Modelica.Blocks.Math.Sum PHeaterSumCalc(nin=numZones)
     "Power consumed for heating with ideal heaters"
     annotation (Placement(transformation(extent={{58,28},{74,44}})));
@@ -37,7 +41,8 @@ model MultizonePostProcessing
             96}})));
   Modelica.Blocks.Interfaces.RealInput X_w[numZones](
     final quantity="MassFraction",
-    final unit="1") "Absolute humidity in thermal zone" annotation (
+    final unit="1") if calc_rel_humidity
+                    "Absolute humidity in thermal zone" annotation (
       Placement(transformation(extent={{-140,28},{-100,68}}),
         iconTransformation(extent={{-140,22},{-100,62}})));
   Modelica.Blocks.Interfaces.RealInput PCooler[numZones](final quantity="HeatFlowRate",
@@ -131,10 +136,11 @@ model MultizonePostProcessing
     "Cooling energy consumed by AHU"
     annotation (Placement(transformation(extent={{100,-88},{120,-68}})));
 
-  Utilities.Psychrometrics.Phi_pTX calcPhi[numZones]
+  Utilities.Psychrometrics.Phi_pTX calcPhi[numZones] if calc_rel_humidity
     "Calculates relative humdity"
     annotation (Placement(transformation(extent={{-22,32},{-2,52}})));
-  Modelica.Blocks.Sources.Constant constPressure[numZones](k=101325)
+  Modelica.Blocks.Sources.Constant constPressure[numZones](k=PAirConstant) if
+    calc_rel_humidity
     annotation (Placement(transformation(extent={{-78,20},{-62,36}})));
   Modelica.Blocks.Interfaces.RealOutput TOperativeMean(
     final quantity="ThermodynamicTemperature",
@@ -142,7 +148,8 @@ model MultizonePostProcessing
     displayUnit="degC") "Average operative air temperature in building"
     annotation (Placement(transformation(extent={{100,72},{120,92}}),
         iconTransformation(extent={{100,82},{120,102}})));
-  Modelica.Blocks.Interfaces.RealOutput RelHumidityMean(final unit="1")
+  Modelica.Blocks.Interfaces.RealOutput RelHumidityMean(final unit="1") if
+    calc_rel_humidity
     "Average relative humidity in building" annotation (Placement(
         transformation(extent={{100,56},{120,76}}), iconTransformation(extent={
             {100,82},{120,102}})));
@@ -152,7 +159,8 @@ model MultizonePostProcessing
         /VAir) "Average operative temperature of all zones"
     annotation (Placement(transformation(extent={{58,68},{74,84}})));
   Modelica.Blocks.Math.Sum RelHumditiyMeanCalc(nin=numZones, k=zoneParam.VAir/
-        VAir) "Average relative humidity of all zones"
+        VAir) if calc_rel_humidity
+              "Average relative humidity of all zones"
     annotation (Placement(transformation(extent={{58,48},{74,64}})));
 equation
   connect(TAirAverageCalc.u, TAir) annotation (Line(points={{56.4,96},{56.4,100},
