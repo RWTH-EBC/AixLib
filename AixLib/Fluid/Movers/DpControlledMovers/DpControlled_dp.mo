@@ -210,7 +210,7 @@ equation
   connect(dpMin.y, mov.dp_in) annotation (Line(points={{-3.4,36},{0,36},{0,12}}, color={0,0,127}));
   connect(senVolFlo.V_flow, pressureCurvePer.u[1]) annotation (Line(points={{-70,11},{-70,20},{-52,20}}, color={0,0,127}));
   connect(dpMea, mov.dpMea) annotation (Line(
-      points={{-20,120},{-20,52},{-8,52},{-8,12}},
+      points={{-20,120},{-20,80},{-8,80},{-8,12}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(mov.heatPort, heatPort) annotation (Line(points={{0,-6.8},{0,-100}}, color={191,0,0}));
