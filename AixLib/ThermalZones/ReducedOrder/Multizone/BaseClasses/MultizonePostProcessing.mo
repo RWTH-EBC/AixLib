@@ -160,7 +160,7 @@ model MultizonePostProcessing
     "Average relative humidity in building" annotation (Placement(
         transformation(extent={{100,50},{120,70}}), iconTransformation(extent={{100,50},
             {120,70}})));
-  Modelica.Blocks.Math.Add operativeTemperatureCalc[numZones](k1=0.5, k2=0.5)
+  Modelica.Blocks.Math.Add operativeTemperatureCalc[numZones](each k1=0.5, each k2=0.5)
     annotation (Placement(transformation(extent={{-22,66},{-2,86}})));
   Modelica.Blocks.Math.Sum TOperativeAverageCalc(nin=numZones, k=zoneParam.VAir
         /VAir) "Average operative temperature of all zones"
