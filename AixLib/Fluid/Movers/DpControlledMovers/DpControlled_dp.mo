@@ -151,6 +151,8 @@ model DpControlled_dp
     final y_start=y_start,
     final dp_start=dp_start,
     final dp_nominal=dp_nominal,
+    final constantHead=dp_nominal,
+    final heads=dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(per.speeds, 1)},
     final prescribeSystemPressure=prescribeSystemPressure) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments "Smoothness of table interpolation"
@@ -309,13 +311,13 @@ equation
           color={255,0,0},
           thickness=0.5,
           pattern=LinePattern.Dash,
-          visible=ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar),
+          visible=ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst),
         Line(
           points={{-94,66},{-68,84},{-56,74},{-48,48}},
-          color={0,128,255},
+          color={73,175,36},
           thickness=0.5,
           pattern=LinePattern.Dash,
-          visible=ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst)}),                           Diagram(
+          visible=ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar)}),                                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         preferredView="info",
         defaultComponentName="pum",
