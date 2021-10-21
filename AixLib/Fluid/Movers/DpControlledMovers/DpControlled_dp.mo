@@ -11,6 +11,17 @@ model DpControlled_dp
       p(start=p_start),
       final m_flow(max = if allowFlowReversal then +Modelica.Constants.inf else 0)));
 
+
+  Modelica.Blocks.Interfaces.RealInput dpMea(
+    final quantity="PressureDifference",
+    final displayUnit="Pa",
+    final unit="Pa")=gain.u if prescribeSystemPressure
+    "Measurement of pressure difference between two points where the set point should be obtained"
+    annotation (Placement(transformation(
+        extent={{20,-20},{-20,20}},
+        rotation=90,
+        origin={-20,120})));
+
   parameter Modelica.SIunits.PressureDifference dp_nominal(
     min=0,
     displayUnit="Pa")=
@@ -18,9 +29,6 @@ model DpControlled_dp
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per"
     annotation(Dialog(group="Nominal condition"));
-
-  parameter AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType ctrlType "Type of mover control";
-
   replaceable parameter AixLib.Fluid.Movers.Data.Generic per(
     pressure(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
@@ -28,19 +36,65 @@ model DpControlled_dp
     constrainedby AixLib.Fluid.Movers.Data.Generic
     "Record with performance data"
     annotation (choicesAllMatching=true,
-      Placement(transformation(extent={{52,60},{72,80}})));
-
+      Placement(transformation(extent={{12,22},{32,42}})));
+  parameter AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpTotal
+                                                                           "Type of mover control";
   parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
-    dp =     dp_nominal * {1, 1, 0.75, 0}) "Volume flow rate vs. total pressure rise"
-    annotation(Dialog(group="Pressure curve", enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst)));
+    dp =     dp_nominal * {1, 1, 0.75, 0}) "dpConst control: Volume flow rate vs. total pressure rise"
+    annotation(Dialog(enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst)));
 
   parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpVar(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
-    dp =     dp_nominal * {0.5, 1, 0.75, 0}) "Volume flow rate vs. total pressure rise"
-    annotation(Dialog(group="Pressure curve", enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar)));
+    dp =     dp_nominal * {0.5, 1, 0.75, 0}) "dpVar control: Volume flow rate vs. total pressure rise"
+    annotation(Dialog(enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar)));
 
-  AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+  parameter Boolean addPowerToMedium=true
+    "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)";
+
+  parameter Boolean nominalValuesDefineDefaultPressureCurve = false
+    "Set to true to avoid warning if m_flow_nominal and dp_nominal are used to construct the default pressure curve";
+  parameter Boolean prescribeSystemPressure=false "=true, to control mover such that pressure difference is obtained across two remote points in system" annotation (Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.Time tauMov=1 "Time constant in mover (pump or fan) of fluid volume for nominal flow, used if energy or mass balance is dynamic"
+    annotation (Dialog(tab="Dynamics",
+                        group="Nominal condition",
+                        enable=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState or massDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
+
+  // Classes used to implement the filtered speed
+  parameter Boolean use_inputFilter=true
+    "= true, if speed is filtered with a 2nd order CriticalDamping filter"
+    annotation(Dialog(tab="Dynamics", group="Filtered speed"));
+  parameter Modelica.SIunits.Time riseTime=30
+    "Rise time of the filter (time to reach 99.6 % of the speed)"
+    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
+  parameter Modelica.Blocks.Types.Init init=Modelica.Blocks.Types.Init.InitialOutput
+    "Type of initialization (no init/steady state/initial state/initial output)"
+    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
+  parameter Real y_start(min=0, max=1, unit="1")=0 "Initial value of speed"
+    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
+
+  // Sensor parameters
+  parameter Modelica.SIunits.PressureDifference dp_start=0 "Initial value of pressure raise" annotation (Dialog(
+      tab="Dynamics",
+      group="Filtered speed",
+      enable=use_inputFilter));
+  parameter Modelica.SIunits.Time tauSen=0 "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)" annotation (Dialog(tab="Sensor"));
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState "Type of initialization (InitialState and InitialOutput are identical)"
+    annotation (Dialog(tab="Sensor", group="Initialization"));
+  parameter Modelica.Media.Interfaces.Types.Density d_start=Medium.density(Medium.setState_pTX(
+      senVolFlo.p_start,
+      senVolFlo.T_start,
+      senVolFlo.X_start)) "Initial or guess value of density" annotation (Dialog(tab="Sensor", group="Initialization"));
+
+  AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(redeclare final package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal,                                           final m_flow_nominal=m_flow_nominal,
+    final m_flow_small=m_flow_small,
+    final tau=tauSen,
+    final initType=initType,
+    final d_start=d_start,
+    final T_start=T_start,
+    final p_start=p_start,
+    final X_start=X_start)                                                                                                    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   Modelica.Blocks.Tables.CombiTable1D pressureCurveSelected(
     final tableOnFile=false,
@@ -51,26 +105,68 @@ model DpControlled_dp
           else
               [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
     final columns=2:size(pressureCurveSelected.table, 2),
+    final smoothness=smoothness,
     final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     u(each final unit="m3/s"),
-    y(each final unit="Pa")) annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
+    y(each final unit="Pa"),
+    final verboseExtrapolation=verboseExtrapolation)
+                             annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
 
   Modelica.Blocks.Tables.CombiTable1D pressureCurvePer(
     final tableOnFile=false,
     table=[cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
     final columns=2:size(pressureCurveSelected.table, 2),
+    final smoothness=smoothness,
     final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     u(each final unit="m3/s"),
-    y(each final unit="Pa")) annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
+    y(each final unit="Pa"),
+    final verboseExtrapolation=verboseExtrapolation)
+                             annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
   Modelica.Blocks.Math.Min dpMin(u1(final unit="Pa"), u2(final unit="Pa"), y(final unit="Pa")) "Routes minimal pressure-rise signal if two curves are not congruent." annotation (Placement(transformation(extent={{-16,30},{-4,42}})));
+
   AixLib.Fluid.Movers.FlowControlled_dp mov(
     redeclare final package Medium = Medium,
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics,
-    m_flow_nominal=m_flow_nominal,
+    final p_start=p_start,
+    final T_start=T_start,
+    final X_start=X_start,
+    final C_start=C_start,
+    final C_nominal=C_nominal,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
+    final m_flow_small=m_flow_small,
+    final show_T=false,
     final per=per,
-    dp_nominal=dp_nominal)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    final inputType=AixLib.Fluid.Types.InputType.Continuous,
+    final addPowerToMedium=addPowerToMedium,
+    final nominalValuesDefineDefaultPressureCurve=nominalValuesDefineDefaultPressureCurve,
+    final tau=tauMov,
+    final use_inputFilter=use_inputFilter,
+    final riseTime=riseTime,
+    final init=init,
+    final y_start=y_start,
+    final dp_start=dp_start,
+    final dp_nominal=dp_nominal,
+    final prescribeSystemPressure=prescribeSystemPressure) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments "Smoothness of table interpolation"
+    annotation (Dialog(tab="Curve / Table", group="Table data interpretation"));
+  parameter Boolean verboseExtrapolation=false "= true, if warning messages are to be printed if table input is outside the definition range"
+    annotation (Dialog(tab="Curve / Table", group="Table data interpretation"));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat dissipation to environment" annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+  Modelica.Blocks.Interfaces.RealOutput P(quantity="Power", final unit="W")
+                    "Electrical power consumed"
+    annotation (Placement(transformation(extent={{100,70},{120,90}}),
+        iconTransformation(extent={{100,80},{120,100}})));
+  Modelica.Blocks.Interfaces.RealOutput y_actual(final unit="1")
+    "Actual normalised pump speed that is used for computations"
+    annotation (Placement(transformation(extent={{100,50},{120,70}}),
+        iconTransformation(extent={{100,60},{120,80}})));
+  Modelica.Blocks.Interfaces.RealOutput dp_actual(final unit="Pa")
+    "Pressure difference between the mover inlet and outlet"
+    annotation (Placement(transformation(extent={{100,30},{120,50}}),
+        iconTransformation(extent={{100,40},{120,60}})));
 protected
   final parameter Modelica.SIunits.Density rho_default=
     Medium.density_pTX(
@@ -103,9 +199,18 @@ equation
   connect(pressureCurvePer.y[1], dpMin.u2) annotation (Line(points={{-29,20},{-24,20},{-24,32},{-17.2,32},{-17.2,32.4}}, color={0,0,127}));
   connect(dpMin.y, mov.dp_in) annotation (Line(points={{-3.4,36},{0,36},{0,12}}, color={0,0,127}));
   connect(senVolFlo.V_flow, pressureCurvePer.u[1]) annotation (Line(points={{-70,11},{-70,20},{-52,20}}, color={0,0,127}));
+  connect(dpMea, mov.dpMea) annotation (Line(
+      points={{-20,120},{-20,52},{-8,52},{-8,12}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(mov.heatPort, heatPort) annotation (Line(points={{0,-6.8},{0,-100}}, color={191,0,0}));
+  connect(mov.P, P) annotation (Line(points={{11,9},{80,9},{80,80},{110,80}}, color={0,0,127}));
+  connect(mov.y_actual, y_actual) annotation (Line(points={{11,7},{82,7},{82,60},{110,60}}, color={0,0,127}));
+  connect(mov.dp_actual, dp_actual) annotation (Line(points={{11,5},{84,5},{84,40},{110,40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         preferredView="info",
+        defaultComponentName="pum",
     Documentation(info="<html>
 
 <style type=\"text/css\">
