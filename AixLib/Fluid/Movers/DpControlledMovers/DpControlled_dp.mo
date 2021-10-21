@@ -2,7 +2,7 @@ within AixLib.Fluid.Movers.DpControlledMovers;
 model DpControlled_dp
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
     final mSenFac=1);
-  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;   //FIXME: Use attributes in modifier as in PartialFlowMachine
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(m_flow_nominal(final min=Modelica.Constants.small));   //FIXME: Use attributes in modifier as in PartialFlowMachine
 
   parameter Modelica.SIunits.PressureDifference dp_nominal(
     min=0,
