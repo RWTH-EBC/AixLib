@@ -63,5 +63,10 @@ equation
   connect(vol.ports[2], dp.port_a) annotation (Line(points={{2,-50},{2,-60},{-60,-60},{-60,0},{-52,0}},         color={0,127,255}));
   connect(fixedTemperature.port, vol.heatPort) annotation (Line(points={{-20,-40},{-10,-40}},
                                                                                             color={191,0,0}));
-  annotation (experiment(StopTime=3600, __Dymola_Algorithm="Dassl"));
+  annotation (
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpControlled_dpConst.mos"
+        "Simulate and plot"),
+    experiment(
+      StopTime=3600,
+      Tolerance=1e-06));
 end DpControlled_dpConst;
