@@ -67,15 +67,12 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final T_start=T_start)
     "Fluid volume"
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
-  Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate pressureDrop(
+  FixedResistances.PressureDrop                             pressureDrop(
     redeclare final package Medium = Medium,
-    final b=0,
-    final m_flow_small=m_flow_small,
+    m_flow_nominal=m_flow_nominal,
     final show_T=false,
-    final show_V_flow=false,
     final allowFlowReversal=allowFlowReversal,
-    final dp_start=dp_start,
-    final m_flow_start=m_flow_start)
+    final dp_nominal=dp_nominal)
     "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
@@ -87,6 +84,11 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure"
     annotation (Dialog(tab="Advanced", group="Initialization"));
+  parameter Modelica.SIunits.PressureDifference dp_nominal = m_flow_nominal ^2 * a / (rho_default^2)
+    "Pressure drop at nominal mass flow rate based on pressure curve coefficient a";
+  parameter Real a "Pressure curve coefficent based on PD in AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition";
+  parameter Modelica.SIunits.Density rho_default = Medium.density_pTX(Medium.p_default, Medium.T_default, Medium.X_default);
+
 
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
