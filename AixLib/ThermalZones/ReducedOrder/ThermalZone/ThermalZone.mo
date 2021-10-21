@@ -9,8 +9,10 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation(choicesAllMatching=true);
   parameter Integer internalGainsMode = 1
      "decides which internal gains model for persons is used";
-  parameter Boolean use_AirExchange = false
-    "Consider infiltration and ventilation by setting true";
+  parameter Boolean use_NaturalAirExchange = false
+    "Consider natural infiltration and ventilation by setting true";
+ parameter Boolean use_MechanicalAirExchange = false
+    "Consider mechanical ventilation by setting true";
 
   // Heater/ cooler parameters
   parameter Boolean recOrSep=true "Use record or seperate parameters"
@@ -215,16 +217,16 @@ model ThermalZone "Thermal zone containing moisture balance"
     final maxOverheatingACH=zoneParam.maxOverheatingACH,
     final maxSummerACH=zoneParam.maxSummerACH,
     final winterReduction=zoneParam.winterReduction,
-    final Tmean_start=zoneParam.T_start) if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
+    final Tmean_start=zoneParam.T_start) if (ATot > 0 or zoneParam.VAir > 0)
+     and use_NaturalAirExchange
     "Calculates natural venitlation and infiltration"
     annotation (Placement(transformation(extent={{-68,-34},{-48,-14}})));
-  Utilities.Psychrometrics.MixedTemperature mixedTemp if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
+  Utilities.Psychrometrics.MixedTemperature mixedTemp if (ATot > 0 or zoneParam.VAir
+     > 0) and use_NaturalAirExchange and use_MechanicalAirExchange
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-56,-2},{-48,6}})));
   HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange and not use_moisture_balance
+       (ATot > 0 or zoneParam.VAir > 0) and  (use_NaturalAirExchange or use_MechanicalAirExchange) and not use_moisture_balance
     "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-12},{-6,4}})));
 
@@ -278,8 +280,9 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Ventilation and infiltration humidity" annotation (Placement(
         transformation(extent={{-128,-108},{-88,-68}}), iconTransformation(
           extent={{-106,-82},{-84,-60}})));
-  HighOrder.Components.MoistAir.VarMoistAirExchange airExcMoi(final V=zoneParam.VAir) if
-    (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange and use_moisture_balance
+  HighOrder.Components.MoistAir.VarMoistAirExchange airExcMoi(final V=zoneParam.VAir) if (ATot
+     > 0 or zoneParam.VAir > 0) and (use_NaturalAirExchange or
+    use_MechanicalAirExchange) and use_moisture_balance
     "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-12},{-6,4}})));
 
@@ -361,16 +364,16 @@ protected
     annotation (Placement(transformation(extent={{4,31},{12,38}})));
 
   // protected: AirExchange
-  Modelica.Blocks.Math.Add addInfVen if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
+  Modelica.Blocks.Math.Add addInfVen if (ATot > 0 or zoneParam.VAir > 0) and
+    use_NaturalAirExchange and use_MechanicalAirExchange
     "Combines infiltration and ventilation"
     annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-34,-28})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemVen if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemVen if (ATot >
+    0 or zoneParam.VAir > 0) and (use_MechanicalAirExchange or use_AirExchange)
     "Prescribed temperature for ventilation"
     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -392,11 +395,13 @@ public
     "Calculates diffuse solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
   Utilities.Psychrometrics.MixedHumidity mixedHumidity if (ATot > 0 or
-    zoneParam.VAir > 0) and use_AirExchange and use_moisture_balance
+    zoneParam.VAir > 0) and use_NaturalAirExchange and
+    use_MechanicalAirExchange and use_moisture_balance
     "Mixes humidity of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-56,-10},{-48,-2}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi if (ATot > 0 or zoneParam.VAir > 0)
-     and use_AirExchange and use_moisture_balance
+     and use_NaturalAirExchange and use_MechanicalAirExchange and
+    use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-12},{-64,-6}})));
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
@@ -643,6 +648,56 @@ equation
     connect(noMoisturePerson.y, SumQLat2_flow.u[1]) annotation (Line(points={{-49.6,
             -62},{-40,-62},{-40,-59.2}}, color={0,0,127}));
   end if;
+
+
+if not use_MechnicalAirExchange then
+    connect(weaBus.TDryBul, preTemVen.T) annotation (Line(
+      points={{-100,34},{-86,34},{-86,10},{-42,10},{-42,0},{-40.8,0}},
+      color={255,204,51},
+      thickness=0.5,
+      pattern=LinePattern.Dash), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+    connect(ventCont.y, cO2Balance.airExc) annotation (Line(
+      points={{-49,-24},{-46,-24},{-46,-34},{12,-34},{12,-64.9},{20,-64.9}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+    connect(ventCont.y, airExcMoi.ventRate) annotation (Line(
+      points={{-49,-24},{-46,-24},{-46,-12},{-28,-12},{-28,-9.12},{-21.2,-9.12}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+    connect(ventCont.y, airExc.ventRate) annotation (Line(
+      points={{-49,-24},{-46,-24},{-46,-12},{-28,-12},{-28,-9.12},{-21.2,-9.12}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+    if use_moisture_balance then
+    end if;
+
+  elseif not use_NaturalAirExchange then
+    connect(ventRate, cO2Balance.airExc) annotation (Line(
+      points={{-108,-64},{-74,-64},{-74,-34},{12,-34},{12,-64.9},{20,-64.9}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+    connect(ventRate, airExc.ventRate) annotation (Line(
+      points={{-108,-64},{-74,-64},{-74,-34},{-24,-34},{-24,-9.12},{-21.2,-9.12}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+    connect(ventRate, airExcMoi.ventRate) annotation (Line(
+      points={{-108,-64},{-74,-64},{-74,-34},{-24,-34},{-24,-9.12},{-21.2,-9.12}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  else
+     connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-27.4,-28},
+            {-24,-28},{-24,-34},{12,-34},{12,-64.9},{20,-64.9}},
+                                                            color={0,0,127}));
+     connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-27.4,-28},
+            {-24,-28},{-24,-9.12},{-21.2,-9.12}},    color={0,0,127}));
+     connect(addInfVen.y, airExcMoi.ventRate) annotation (Line(points={{-27.4,-28},
+            {-24,-28},{-24,-9.12},{-21.2,-9.12}},    color={0,0,127}));
+end if;
+
   connect(moistureGains.QLat_flow, SumQLat1_flow.u[2]) annotation (Line(points={{-59.5,
           -73},{-52,-73},{-52,-74},{-46,-74},{-46,-64.1},{-40,-64.1}},    color=
          {0,0,127}));
@@ -684,8 +739,6 @@ equation
         color={0,0,127}));
   connect(humVolAirROM.y, airExcMoi.HumOut) annotation (Line(points={{-59.5,-50},
           {-4,-50},{-4,0},{-6,0},{-6,0.16},{-6.8,0.16}}, color={0,0,127}));
-  connect(mixedHumidity.mixedHumidityOut, airExcMoi.HumIn) annotation (Line(
-        points={{-48,-6},{-34,-6},{-34,-8},{-21.2,-8}}, color={0,0,127}));
   connect(ventHum, mixedHumidity.humidity_flow1) annotation (Line(points={{-108,
           -88},{-74,-88},{-74,-2.88},{-55.84,-2.88}}, color={0,0,127}));
   connect(ventRate, mixedHumidity.flowRate_flow1) annotation (Line(points={{-108,
@@ -721,6 +774,12 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(x_pTphi.X[1], airExcMoi.HumIn) annotation (Line(
+      points={{-63.7,-9},{-62,-9},{-62,-10},{-34,-10},{-34,-8},{-21.2,-8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(mixedHumidity.mixedHumidityOut, airExcMoi.HumIn) annotation (Line(
+        points={{-48,-6},{-34,-6},{-34,-8},{-21.2,-8}}, color={0,0,127}));
   annotation (Documentation(revisions="<html><ul>
   <li>November 20, 2020, by Katharina Breuer:<br/>
     Combine thermal zone models
