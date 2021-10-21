@@ -66,7 +66,8 @@ equation
     end if;
   end if;
 
-  TsetCoo = if X_intern < X_coolerIn then dewPoi.T else Tset;
+  //TsetCoo = if X_intern < X_coolerIn then dewPoi.T else Tset;
+  TsetCoo = Tset;
 
   connect(X_intern, pWat.X_w);
 

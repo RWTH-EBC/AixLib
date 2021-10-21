@@ -22,6 +22,7 @@ partial model PartialCooler
 
   parameter Boolean use_T_set=false "if true, a set temperature is used to calculate the necessary heat flow rate";
   parameter Boolean use_X_set=false "if true, a set humidity is used to calculate the necessary heat flow rate";
+  parameter Real eff=0.8 "cooling/dehumidification efficiency of cooler [0...1]";
 
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal = 45E3 "maximum heat output of heater at design point. Only used, if use_T_set = true";
 
@@ -128,6 +129,10 @@ partial model PartialCooler
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
   Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
+  Modelica.SIunits.Temperature T_Sur "temperature of cooling surface";
+  Modelica.SIunits.MassFraction X_Sur "absolute humidity at cooling surface";
+  Modelica.SIunits.SpecificEnthalpy h_Sur "specific enthalpy at cooling surface";
+  Modelica.SIunits.Pressure p_satSur "saturation pressure at cooling surface";
 protected
   Modelica.SIunits.MassFlowRate mb_flow "mass flow over boundary";
   Modelica.Blocks.Interfaces.RealInput Q_in_internal "internal heat flow rate";
@@ -146,21 +151,30 @@ equation
   mb_flow = m_flow_airIn / (1+X_airIn) * (X_airIn - X_airOut); // condensate
 
   // heat flows
-  Q_flow = -(m_flow_airIn * h_airIn - m_flow_airOut * h_airOut);
+  Q_flow = (m_flow_airIn * h_airIn - m_flow_airOut * h_airOut);
   Q = Q_flow;
 
   if not use_T_set then
     Q_in_internal = Q_in;
-    Q_flow = heatFlowSensor.Q_flow;
+    Q_flow = -heatFlowSensor.Q_flow;
   else
-    Q_flow = -Q_in_internal;
+    Q_flow = Q_in_internal;
   end if;
 
   // sepcific enthalpies
   h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
-  h_airOut = cp_air * (T_intern - 273.15) + X_intern * (cp_steam * (T_intern - 273.15) + r0);
+  h_airOut = cp_air * (T_airOut - 273.15) + X_airOut * (cp_steam * (T_airOut - 273.15) + r0);
+  h_Sur = cp_air * (T_Sur - 273.15) + X_Sur * (cp_steam * (T_Sur - 273.15) + r0);
 
-  T_airOut = T_intern;
+  if not use_X_set then
+    T_airOut = T_intern;
+  else
+    (T_airIn - T_Sur)/max(X_airIn - X_Sur,0.00009) = (T_airIn - T_airOut)/max(X_airIn - X_airOut,0.00001);
+    eff = (h_airIn - h_airOut)/max(h_airIn - h_Sur,0.0001);
+    p_satSur = AixLib.Utilities.Psychrometrics.Functions.saturationPressure(T_Sur);
+    X_Sur = AixLib.Utilities.Psychrometrics.Functions.X_pW(p_satSur);
+  end if;
+
   X_airOut = X_intern;
 
   partialPressureDrop.dp = dp;
