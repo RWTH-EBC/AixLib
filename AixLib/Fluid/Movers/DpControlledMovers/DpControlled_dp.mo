@@ -26,14 +26,12 @@ model DpControlled_dp
   parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
     dp =     dp_nominal * {1, 1, 0.75, 0}) "Volume flow rate vs. total pressure rise"
-    annotation(Evaluate=true,
-               Dialog(group="Pressure curve"));
+    annotation(Evaluate=Dialog(group="Pressure curve", enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst)));
 
   parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpVar(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
     dp =     dp_nominal * {0.5, 1, 0.75, 0}) "Volume flow rate vs. total pressure rise"
-    annotation(Evaluate=true,
-               Dialog(group="Pressure curve"));
+    annotation(Dialog(group="Pressure curve", enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar)));
 
   AixLib.Fluid.Movers.FlowControlled_dp mov(
     redeclare final package Medium = Medium,
@@ -69,6 +67,7 @@ equation
   connect(senVolFlo.V_flow, pressureCurveSelected.u[1]) annotation (Line(points={{-60,11},{-60,20},{-42,20}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
+        preferredView="info",
     Documentation(info="<html>
 
 <style type=\"text/css\">
