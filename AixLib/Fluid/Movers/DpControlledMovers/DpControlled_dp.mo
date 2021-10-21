@@ -42,6 +42,8 @@ model DpControlled_dp
 
   AixLib.Fluid.Movers.FlowControlled_dp mov(
     redeclare final package Medium = Medium,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
     m_flow_nominal=m_flow_nominal,
     final per=per,
     dp_nominal=dp_nominal)
@@ -56,7 +58,6 @@ model DpControlled_dp
     u(each final unit="m3/s"),
     y(each final unit="Pa")) annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
 
-  //FIXME: Check that table output for dp is 0, when measured mass flow rate > m_flow_max (default = 2*m_flow_nominal). e.g. when pumps are in series
   //FIXME: Use min of two curves between per.pressure and pressureCurve_dpConst/Var in current operating point.
   AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 protected
