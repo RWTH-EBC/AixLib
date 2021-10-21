@@ -3,10 +3,11 @@ model DpControlled_dpConst
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=3600/3600*1.0
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1.0
     "Nominal mass flow rate";
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal_max = 2*m_flow_nominal "To describe max point of mover's characteristic curve.";
-  parameter Modelica.SIunits.PressureDifference dp_nominal=1.0e5 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
+  parameter Modelica.SIunits.PressureDifference dp_nominal=100000
+                                                                 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per";
 
@@ -30,8 +31,7 @@ model DpControlled_dpConst
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    redeclare AixLib.Fluid.Movers.Data.Generic per(pressure(V_flow={0,1,1.5}*
-            m_flow_nominal, dp={2,1,0}*m_flow_nominal), motorCooledByFluid=false),
+    redeclare Data.Generic per(pressure=dpControlled_dp.pressureCurve_default, motorCooledByFluid=false),
     dp_nominal=dp_nominal,
     ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst)
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
@@ -52,6 +52,8 @@ model DpControlled_dpConst
     nPorts=2) annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=293.15) annotation (Placement(transformation(extent={{-36,-48},{-20,-32}})));
 
+  Modelica.Blocks.Continuous.Integrator integrator(u(final quantity="Power", final unit="W"), y(final quantity="Energy", final unit="J", final displayUnit="kW.h")) annotation (Placement(transformation(extent={{40,60},{60,80}})));
+  Modelica.Blocks.Interfaces.RealOutput elEnergy(final quantity="Energy", final unit="J", final displayUnit="kW.h") "Cumulated electrical power" annotation (Placement(transformation(extent={{100,60},{120,80}})));
 equation
 
   connect(dpControlled_dp.port_b,val. port_a) annotation (Line(points={{0,0},{22,0}},   color={0,127,255}));
@@ -63,6 +65,8 @@ equation
   connect(vol.ports[2], dp.port_a) annotation (Line(points={{2,-50},{2,-60},{-60,-60},{-60,0},{-52,0}},         color={0,127,255}));
   connect(fixedTemperature.port, vol.heatPort) annotation (Line(points={{-20,-40},{-10,-40}},
                                                                                             color={191,0,0}));
+  connect(dpControlled_dp.P, integrator.u) annotation (Line(points={{1,9},{16,9},{16,70},{38,70}}, color={0,0,127}));
+  connect(integrator.y, elEnergy) annotation (Line(points={{61,70},{110,70}}, color={0,0,127}));
   annotation (
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/DpControlledMovers/Examples/DpControlled_dpConst.mos"
         "Simulate and plot"),

@@ -22,3 +22,8 @@ createPlot(id=2, subPlot=3,
  y={"val.y_actual"},
  autoscale = true
 );
+createPlot(id=2, subPlot=4,
+ y={"elEnergy"},
+ displayUnits={"kW.h"},
+ autoscale = true
+);

@@ -33,15 +33,16 @@ model DpControlled_dp
         and for default pressure curve if not specified in record per"
     annotation(Dialog(group="Nominal condition"));
   replaceable parameter AixLib.Fluid.Movers.Data.Generic per(
-    pressure(
-    V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
-    dp =     dp_nominal * {1.3, 1, 0.75, 0}))
+    pressure=pressureCurve_default)
     constrainedby AixLib.Fluid.Movers.Data.Generic
     "Record with performance data"
     annotation (choicesAllMatching=true,
       Placement(transformation(extent={{12,22},{32,42}})));
   parameter AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpTotal
                                                                            "Type of mover control";
+  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_default(
+    V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
+    dp =     dp_nominal * {1.3, 1, 0.75, 0}) "General mover curve: Volume flow rate vs. total pressure rise";
   parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
     V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
     dp =     dp_nominal * {1, 1, 0.75, 0}) "dpConst control: Volume flow rate vs. total pressure rise"
@@ -89,24 +90,25 @@ model DpControlled_dp
       senVolFlo.T_start,
       senVolFlo.X_start)) "Initial or guess value of density" annotation (Dialog(tab="Sensor", group="Initialization"));
 
-  AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(redeclare final package Medium = Medium,
-    final allowFlowReversal=allowFlowReversal,                                           final m_flow_nominal=m_flow_nominal,
+  AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(
+    redeclare final package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal,
     final m_flow_small=m_flow_small,
     final tau=tauSen,
     final initType=initType,
     final d_start=d_start,
     final T_start=T_start,
     final p_start=p_start,
-    final X_start=X_start)                                                                                                    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    final X_start=X_start) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   Modelica.Blocks.Tables.CombiTable1D pressureCurveSelected(
     final tableOnFile=false,
-    table=if (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst) then
-              [cat(1, pressureCurve_dpConst.V_flow),cat(1, pressureCurve_dpConst.dp)]
-          elseif (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar) then
-              [cat(1, pressureCurve_dpVar.V_flow),cat(1, pressureCurve_dpVar.dp)]
-          else
-              [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
+    final table=if (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst) then [cat(1, pressureCurve_dpConst.V_flow),cat(1, pressureCurve_dpConst.dp)] elseif (ctrlType ==
+        AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar) then [cat(1, pressureCurve_dpVar.V_flow),cat(1, pressureCurve_dpVar.dp)] else [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
+    final tableName="NoName",
+    final fileName="NoName",
+    final verboseRead=true,
     final columns=2:size(pressureCurveSelected.table, 2),
     final smoothness=smoothness,
     final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
@@ -118,6 +120,9 @@ model DpControlled_dp
   Modelica.Blocks.Tables.CombiTable1D pressureCurvePer(
     final tableOnFile=false,
     table=[cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
+    final tableName="NoName",
+    final fileName="NoName",
+    final verboseRead=true,
     final columns=2:size(pressureCurveSelected.table, 2),
     final smoothness=smoothness,
     final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
