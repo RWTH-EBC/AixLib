@@ -40,6 +40,29 @@ model DpControlled_dp
     dp =     dp_nominal * {0.5, 1, 0.75, 0}) "Volume flow rate vs. total pressure rise"
     annotation(Dialog(group="Pressure curve", enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar)));
 
+  AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+
+  Modelica.Blocks.Tables.CombiTable1D pressureCurveSelected(
+    final tableOnFile=false,
+    table=if (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst) then
+              [cat(1, pressureCurve_dpConst.V_flow),cat(1, pressureCurve_dpConst.dp)]
+          elseif (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar) then
+              [cat(1, pressureCurve_dpVar.V_flow),cat(1, pressureCurve_dpVar.dp)]
+          else
+              [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
+    final columns=2:size(pressureCurveSelected.table, 2),
+    final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
+    u(each final unit="m3/s"),
+    y(each final unit="Pa")) annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
+
+  Modelica.Blocks.Tables.CombiTable1D pressureCurvePer(
+    final tableOnFile=false,
+    table=[cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
+    final columns=2:size(pressureCurveSelected.table, 2),
+    final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
+    u(each final unit="m3/s"),
+    y(each final unit="Pa")) annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
+  Modelica.Blocks.Math.Min dpMin(u1(final unit="Pa"), u2(final unit="Pa"), y(final unit="Pa")) "Routes minimal pressure-rise signal if two curves are not congruent." annotation (Placement(transformation(extent={{-16,30},{-4,42}})));
   AixLib.Fluid.Movers.FlowControlled_dp mov(
     redeclare final package Medium = Medium,
     final energyDynamics=energyDynamics,
@@ -48,18 +71,6 @@ model DpControlled_dp
     final per=per,
     dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-  Modelica.Blocks.Tables.CombiTable1D pressureCurveSelected(
-    final tableOnFile=false,
-    table=if (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst) then [cat(1, pressureCurve_dpConst.V_flow),cat(1, pressureCurve_dpConst.dp)] elseif (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar)
-         then [cat(1, pressureCurve_dpVar.V_flow),cat(1, pressureCurve_dpVar.dp)] else [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
-    final columns=2:size(pressureCurveSelected.table, 2),
-    final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
-    u(each final unit="m3/s"),
-    y(each final unit="Pa")) annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
-
-  //FIXME: Use min of two curves between per.pressure and pressureCurve_dpConst/Var in current operating point.
-  AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(redeclare final package Medium = Medium, final m_flow_nominal=m_flow_nominal) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 protected
   final parameter Modelica.SIunits.Density rho_default=
     Medium.density_pTX(
@@ -75,6 +86,7 @@ protected
     "Start value for outflowing enthalpy";
 
 initial equation
+  assert(pressureCurvePer.n==1 and pressureCurveSelected.n==1,  "\n+++++++++++++++++++++++++++++++++++++++++++\nNumber of outputs in tables in component "+getInstanceName()+" must equal 1, but they are "+String(pressureCurvePer.n)+" and "+String(pressureCurveSelected.n)+".\n+++++++++++++++++++++++++++++++++++++++++++");
   assert(pressureCurveSelected.table[1, 1] == 0.0,
     "\n+++++++++++++++++++++++++++++++++++++++++++\nParameterization error in component ("+getInstanceName()+".pressureCurveSelected):\nThe mover's (pump or fan) curve must have first point at V_flow = 0.0 m3/s.\n+++++++++++++++++++++++++++++++++++++++++++",
     AssertionLevel.error);
@@ -84,10 +96,12 @@ initial equation
 equation
   connect(mov.port_b, port_b)
     annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
-  connect(pressureCurveSelected.y[1], mov.dp_in) annotation (Line(points={{-19,20},{0,20},{0,12}}, color={0,0,127}));
-  connect(port_a, senVolFlo.port_a) annotation (Line(points={{-100,0},{-70,0}}, color={0,127,255}));
-  connect(senVolFlo.port_b, mov.port_a) annotation (Line(points={{-50,0},{-10,0}}, color={0,127,255}));
-  connect(senVolFlo.V_flow, pressureCurveSelected.u[1]) annotation (Line(points={{-60,11},{-60,20},{-42,20}}, color={0,0,127}));
+  connect(port_a, senVolFlo.port_a) annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
+  connect(senVolFlo.port_b, mov.port_a) annotation (Line(points={{-60,0},{-10,0}}, color={0,127,255}));
+  connect(senVolFlo.V_flow, pressureCurveSelected.u[1]) annotation (Line(points={{-70,11},{-70,50},{-52,50}}, color={0,0,127}));
+  connect(pressureCurveSelected.y[1], dpMin.u1) annotation (Line(points={{-29,50},{-24,50},{-24,39.6},{-17.2,39.6}}, color={0,0,127}));
+  connect(pressureCurvePer.y[1], dpMin.u2) annotation (Line(points={{-29,20},{-24,20},{-24,32},{-17.2,32},{-17.2,32.4}}, color={0,0,127}));
+  connect(dpMin.y, mov.dp_in) annotation (Line(points={{-3.4,36},{0,36},{0,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         preferredView="info",
