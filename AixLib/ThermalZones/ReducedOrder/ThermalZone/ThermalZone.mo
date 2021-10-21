@@ -1,9 +1,10 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   parameter Integer internalGainsMode = 1
@@ -394,7 +395,8 @@ public
     zoneParam.VAir > 0) and use_AirExchange and use_moisture_balance
     "Mixes humidity of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-56,-10},{-48,-2}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi
+  Utilities.Psychrometrics.X_pTphi x_pTphi if (ATot > 0 or zoneParam.VAir > 0)
+     and use_AirExchange and use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-12},{-64,-6}})));
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
