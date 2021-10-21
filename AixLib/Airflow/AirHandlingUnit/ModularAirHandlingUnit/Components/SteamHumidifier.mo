@@ -4,18 +4,6 @@ model SteamHumidifier
 
   Modelica.SIunits.SpecificEnthalpy h_steam "specific enthalpy of steam";
 
-  Modelica.Blocks.Interfaces.RealInput T_steamIn(
-    final quantity = "ThermodynamicTemperature",
-    final unit = "K",
-    displayUnit = "degC")
-    annotation (Placement(transformation(
-        extent={{20,-20},{-20,20}},
-        rotation=-90,
-        origin={-40,-104}), iconTransformation(
-        extent={{10,-10},{-10,10}},
-        rotation=-90,
-        origin={-30,-94})));
-
   Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
 equation
@@ -35,8 +23,8 @@ equation
   Q = Q_flow;
 
   // specific enthalpies
-   assert(T_steamIn >= 373.15, "Steam temperature T has to be higher than 100 degC");
-   h_steam = cp_water * (373.15 - 273.15) + cp_steam * (T_steamIn - 373.15) + r100;
+   assert(T_watIn >= 373.15, "Steam temperature T has to be higher than 100 degC");
+   h_steam = cp_water * (373.15 - 273.15) + cp_steam * (T_watIn - 373.15) + r100;
         annotation (
     preferredView="info",
     Documentation(info="<html>

@@ -153,12 +153,13 @@ protected
     annotation (Placement(transformation(extent={{4,23},{16,35}})));
 
 equation
-  connect(intGains[1],humanSenHea. Schedule) annotation (Line(points={{80,-113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
+  connect(intGains[1],humanSenHea. Schedule) annotation (Line(points={{80,
+          -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
         color={0,0,127}));
   connect(intGains[2],machinesSenHea. Schedule) annotation (Line(points={{80,-100},
           {80,-100},{80,-78},{54,-78},{54,-46.5},{65,-46.5}}, color={0,0,127}));
-  connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-86.6667},{80,-86.6667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},
-                                                                 color={0,0,127}));
+  connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-86.6667},
+          {80,-86.6667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},color={0,0,127}));
   connect(lights.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,-60.8},
           {92,-60.8},{92,-60},{92,-60},{92,50},{86,50},{86,50}},
                                        color={191,0,0}));

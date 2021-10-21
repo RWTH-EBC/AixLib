@@ -95,11 +95,11 @@ equation
     annotation (Line(points={{166.6,-16},{184,-16}}, color={0,0,127}));
   connect(desiredT_sup1.y, exampleAHU2.TSupSet) annotation (Line(points={{149.4,
           48},{74,48},{74,-42},{-1,-42},{-1,4.9}}, color={0,0,127}));
-  connect(min_phi_supplyAir.y, exampleAHU2.phiSet[1]) annotation (Line(points={
-          {87.4,-54},{68,-54},{68,-56},{17.3333,-56},{17.3333,1.8}}, color={0,0,
+  connect(min_phi_supplyAir.y, exampleAHU2.phiSet[1]) annotation (Line(points={{87.4,
+          -54},{68,-54},{68,-56},{17.3333,-56},{17.3333,1.8}},       color={0,0,
           127}));
-  connect(max_phi_supplyAir.y, exampleAHU2.phiSet[2]) annotation (Line(points={
-          {87.4,-86},{17.3333,-86},{17.3333,8}}, color={0,0,127}));
+  connect(max_phi_supplyAir.y, exampleAHU2.phiSet[2]) annotation (Line(points={{87.4,
+          -86},{17.3333,-86},{17.3333,8}},       color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},
             {140,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{140,100}})),

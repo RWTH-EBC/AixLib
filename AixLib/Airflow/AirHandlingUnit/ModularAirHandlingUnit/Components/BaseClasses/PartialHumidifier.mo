@@ -83,6 +83,18 @@ model PartialHumidifier "partial model of a humidifier"
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,102})));
+  Modelica.Blocks.Interfaces.RealInput T_watIn(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC")
+    "mass flow rate of water"
+    annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={-20,-106}), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-30,-94})));
 protected
   Modelica.Blocks.Math.Max max
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));

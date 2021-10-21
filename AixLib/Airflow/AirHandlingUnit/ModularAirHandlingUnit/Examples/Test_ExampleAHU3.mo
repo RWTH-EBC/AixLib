@@ -154,8 +154,8 @@ equation
           48},{122,-42},{60,-42},{60,-54},{53.2,-54}}, color={0,0,127}));
   connect(desiredT_sup1.y, x_pTphi1.T) annotation (Line(points={{149.4,48},{122,
           48},{122,-74},{64,-74},{64,-86},{53.2,-86}}, color={0,0,127}));
-  connect(T_setCooler1.y, exampleAHU2.T_coolingSurf1) annotation (Line(points={
-          {-69.4,-62},{-24.2222,-62},{-24.2222,8}}, color={0,0,127}));
+  connect(T_setCooler1.y, exampleAHU2.T_coolingSurf1) annotation (Line(points={{-69.4,
+          -62},{-24.2222,-62},{-24.2222,8}},        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},
             {140,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{140,100}})),

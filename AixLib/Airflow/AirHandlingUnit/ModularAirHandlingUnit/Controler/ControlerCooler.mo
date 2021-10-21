@@ -5,7 +5,7 @@ model ControlerCooler
   parameter Boolean use_PhiSet = false
     "true if relative humidity is controlled, otherwise absolute humidity is controlled";
 
-  Modelica.Blocks.Interfaces.RealInput Tset
+  Modelica.Blocks.Interfaces.RealInput Tset(start=293.15)
     "set value for temperature at cooler outlet"
     annotation (Placement(transformation(extent={{-140,30},{-100,70}}),
         iconTransformation(extent={{-120,50},{-100,70}})));
@@ -40,8 +40,15 @@ model ControlerCooler
   Modelica.Blocks.Interfaces.RealOutput XCooSet if dehumidifying
     "set value for humidity control of cooler"
     annotation (Placement(visible=(dehumidifying==true),transformation(extent={{100,-50},{120,-30}})));
+  Modelica.Blocks.Interfaces.RealInput TsupSet(start=293.15)
+    "set value for temperature at supply air outlet" annotation (Placement(
+        transformation(extent={{-140,-60},{-100,-20}}), iconTransformation(
+          extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={0,110})));
 protected
-  Modelica.Blocks.Interfaces.RealInput X_intern "internal mass fraction";
+  Modelica.Blocks.Interfaces.RealInput X_intern(start=0.01)
+    "internal mass fraction";
 equation
 
   if not dehumidifying then
@@ -49,8 +56,9 @@ equation
   else
     if use_PhiSet then
       connect(X_intern,x_pTphi.X[1]);
-      connect(Tset, x_pTphi.T) annotation (Line(visible=(dehumidifying==true and use_PhiSet==true),points={{-120,50},{-76,50},{-76,-34},
-          {-62,-34}}, color={0,0,127}));
+      connect(TsupSet, x_pTphi.T) annotation (Line(visible=(dehumidifying==true and use_PhiSet==true),points={{-120,
+              -40},{-76,-40},{-76,-34},{-62,-34}},
+                      color={0,0,127}));
       connect(PhiSet, x_pTphi.phi) annotation (Line(visible=(dehumidifying==true and use_PhiSet==true),points={{-120,-70},{-76,-70},{-76,
           -40},{-62,-40}},                     color={0,0,127}));
     else
@@ -58,7 +66,7 @@ equation
     end if;
   end if;
 
-  TsetCoo = smooth(1, if X_intern < X_coolerIn then dewPoi.T else Tset);
+  TsetCoo = if X_intern < X_coolerIn then dewPoi.T else Tset;
 
   connect(X_intern, pWat.X_w);
 

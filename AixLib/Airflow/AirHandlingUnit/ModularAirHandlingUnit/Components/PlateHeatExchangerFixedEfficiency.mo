@@ -101,35 +101,20 @@ model PlateHeatExchangerFixedEfficiency
                                        iconTransformation(extent={{100,-90},{120,
             -70}})));
 
-  Modelica.Blocks.Interfaces.RealInput T_set(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC")
-    "Set temperature of supply air. Is used to limit heat recovery."
-    annotation (Placement(transformation(
-        extent={{20,-20},{-20,20}},
-        rotation=90,
-        origin={10,110}), iconTransformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
-        origin={0,100})));
   Modelica.Blocks.Interfaces.RealOutput dp "pressure difference"
     annotation (Placement(transformation(extent={{100,-112},{120,-92}})));
+  Modelica.Blocks.Interfaces.BooleanInput hrsOn annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={0,120})));
 protected
-  Modelica.Blocks.Logical.LessEqual lessEqual
-    annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
-  Modelica.Blocks.Logical.GreaterEqual greaterEqual
-    annotation (Placement(transformation(extent={{-52,20},{-32,40}})));
-  Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
-    annotation (Placement(transformation(extent={{-4,-10},{16,10}})));
-  Modelica.Blocks.Logical.LessEqual lessEqual1
-    annotation (Placement(transformation(extent={{-52,-40},{-32,-20}})));
   Modelica.Blocks.Sources.RealExpression T_out_max(y=T_airOutOda_max)
-    annotation (Placement(transformation(extent={{-56,72},{-68,88}})));
+    annotation (Placement(transformation(extent={{8,12},{20,28}})));
   Utilities.Logical.SmoothSwitch switch1
     annotation (Placement(transformation(extent={{42,-10},{62,10}})));
   Modelica.Blocks.Sources.RealExpression T_out_min(y=T_airOutOda_min)
-    annotation (Placement(transformation(extent={{12,20},{24,36}})));
+    annotation (Placement(transformation(extent={{8,-28},{20,-12}})));
 equation
 
   //mass balances
@@ -155,34 +140,14 @@ equation
 
   partialPressureDrop.dp + partialPressureDrop2.dp = dp;
 
-  connect(T_airInOda, lessEqual.u1) annotation (Line(points={{-120,40},{-80,40},
-          {-80,0},{-64,0}}, color={0,0,127}));
-  connect(T_airInEta, lessEqual.u2) annotation (Line(points={{120,50},{-80,50},{
-          -80,-8},{-64,-8}}, color={0,0,127}));
-  connect(lessEqual.y, logicalSwitch.u2)
-    annotation (Line(points={{-41,0},{-6,0}}, color={255,0,255}));
-  connect(greaterEqual.y, logicalSwitch.u1) annotation (Line(points={{-31,30},{-22,
-          30},{-22,8},{-6,8}}, color={255,0,255}));
-  connect(lessEqual1.y, logicalSwitch.u3) annotation (Line(points={{-31,-30},{-18,
-          -30},{-18,-8},{-6,-8}}, color={255,0,255}));
-  connect(T_set, greaterEqual.u2) annotation (Line(points={{10,110},{10,62},{
-          -80,62},{-80,22},{-54,22}},
-                              color={0,0,127}));
-  connect(T_out_max.y, greaterEqual.u1) annotation (Line(points={{-68.6,80},{-80,
-          80},{-80,30},{-54,30}}, color={0,0,127}));
-  connect(T_out_max.y, lessEqual1.u1) annotation (Line(points={{-68.6,80},{-80,80},
-          {-80,-30},{-54,-30}}, color={0,0,127}));
-  connect(T_set, lessEqual1.u2) annotation (Line(points={{10,110},{10,62},{-80,
-          62},{-80,-38},{-54,-38}},
-                                color={0,0,127}));
-  connect(logicalSwitch.y, switch1.u2)
-    annotation (Line(points={{17,0},{40,0}}, color={255,0,255}));
-  connect(T_out_min.y, switch1.u1) annotation (Line(points={{24.6,28},{28,28},{28,
-          8},{40,8}}, color={0,0,127}));
-  connect(T_out_max.y, switch1.u3) annotation (Line(points={{-68.6,80},{-80,80},
-          {-80,-50},{28,-50},{28,-8},{40,-8}}, color={0,0,127}));
   connect(switch1.y, T_airOutOda) annotation (Line(points={{63,0},{80,0},{80,-50},
           {110,-50}}, color={0,0,127}));
+  connect(T_out_max.y, switch1.u1) annotation (Line(points={{20.6,20},{30,20},{
+          30,8},{40,8}}, color={0,0,127}));
+  connect(T_out_min.y, switch1.u3) annotation (Line(points={{20.6,-20},{30,-20},
+          {30,-8},{40,-8}}, color={0,0,127}));
+  connect(hrsOn, switch1.u2)
+    annotation (Line(points={{0,120},{0,0},{40,0}}, color={255,0,255}));
       annotation (
     preferredView="info",
     Documentation(info="<html>

@@ -58,6 +58,11 @@ model FanSimple "model of a simple fan"
       final unit="W") "electrical power of fan" annotation (Placement(
         transformation(extent={{100,-90},{120,-70}}), iconTransformation(extent={{100,-90},
             {120,-70}})));
+  Modelica.Blocks.Interfaces.RealOutput dT_fan(
+    final quantity="ThermodynamicTemperatureDifference",
+    final unit="K") "temperature increase over fan" annotation (Placement(
+        transformation(extent={{100,-50},{120,-30}}), iconTransformation(extent={{100,-60},
+            {120,-40}})));
 equation
   // mass balance
   m_flow_airIn - m_flow_airOut = 0;
@@ -76,6 +81,9 @@ equation
   // specific enthalpies
   h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
   h_airOut = cp_air * (T_airOut - 273.15) + X_airOut * (cp_steam * (T_airOut - 273.15) + r0);
+
+  // temperature increase
+  dT_fan = T_airOut - T_airIn;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Ellipse(
