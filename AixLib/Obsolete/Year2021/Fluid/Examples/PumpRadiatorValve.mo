@@ -1,4 +1,4 @@
-within AixLib.Fluid.Examples;
+within AixLib.Obsolete.Year2021.Fluid.Examples;
 model PumpRadiatorValve
   "Example of a simple heating system with radiator and simple valve"
   import AixLib;
