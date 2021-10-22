@@ -221,11 +221,11 @@ model ThermalZone "Thermal zone containing moisture balance"
     final Tmean_start=zoneParam.T_start) if (ATot > 0 or zoneParam.VAir > 0)
      and use_NaturalAirExchange
     "Calculates natural venitlation and infiltration"
-    annotation (Placement(transformation(extent={{-68,-34},{-48,-14}})));
+    annotation (Placement(transformation(extent={{-66,-34},{-50,-18}})));
   Utilities.Psychrometrics.MixedTemperature mixedTemp if (ATot > 0 or zoneParam.VAir
      > 0) and use_NaturalAirExchange and use_MechanicalAirExchange
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
-    annotation (Placement(transformation(extent={{-56,-2},{-48,6}})));
+    annotation (Placement(transformation(extent={{-56,-4},{-48,4}})));
   HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
        (ATot > 0 or zoneParam.VAir > 0) and  (use_NaturalAirExchange or use_MechanicalAirExchange) and not use_moisture_balance
     "Heat flow due to ventilation"
@@ -285,7 +285,7 @@ model ThermalZone "Thermal zone containing moisture balance"
      > 0 or zoneParam.VAir > 0) and (use_NaturalAirExchange or
     use_MechanicalAirExchange) and use_moisture_balance
     "Heat flow due to ventilation"
-    annotation (Placement(transformation(extent={{-22,-12},{-6,4}})));
+    annotation (Placement(transformation(extent={{-22,-14},{-6,2}})));
 
   // CO2
   BoundaryConditions.InternalGains.CO2.CO2Balance cO2Balance(
@@ -379,7 +379,7 @@ protected
     annotation (Placement(transformation(
         extent={{-3,-3},{3,3}},
         rotation=0,
-        origin={-35,1})));
+        origin={-35,-1})));
 
   // protected: MoistAir
   Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w) if
@@ -399,10 +399,10 @@ public
     zoneParam.VAir > 0) and use_NaturalAirExchange and
     use_MechanicalAirExchange and use_moisture_balance
     "Mixes humidity of infiltration flow and mechanical ventilation flow"
-    annotation (Placement(transformation(extent={{-56,-10},{-48,-2}})));
+    annotation (Placement(transformation(extent={{-56,-12},{-48,-4}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi if (ATot > 0 or zoneParam.VAir > 0)
      and use_NaturalAirExchange and use_moisture_balance
-    annotation (Placement(transformation(extent={{-70,-12},{-64,-6}})));
+    annotation (Placement(transformation(extent={{-70,-14},{-64,-8}})));
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
@@ -591,24 +591,26 @@ equation
           47.24},{9.94,52},{26,52},{26,89},{37,89}}, color={0,0,127}));
 
   connect(ventCont.y, addInfVen.u1) annotation (Line(
-      points={{-49,-24},{-41,-24}},
+      points={{-50.8,-26},{-46,-26},{-46,-24},{-41,-24}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
-          -113.333},{80,-92},{46,-92},{46,-36},{-68,-36},{-68,-30}},     color=
+          -113.333},{80,-92},{46,-92},{46,-36},{-66,-36},{-66,-30.8}},   color=
           {0,0,127}));
   connect(ventRate, addInfVen.u2) annotation (Line(points={{-108,-64},{-76,-64},
           {-76,-34},{-44,-34},{-44,-30},{-41,-30}},
                                       color={0,0,127}));
-  connect(ventRate, mixedTemp.flowRate_flow1) annotation (Line(points={{-108,-64},
-          {-76,-64},{-76,3.2},{-55.84,3.2}}, color={0,0,127}));
+  connect(ventRate, mixedTemp.flowRate_flow1) annotation (Line(points={{-108,
+          -64},{-76,-64},{-76,1.2},{-55.84,1.2}},
+                                             color={0,0,127}));
   connect(ventTemp, mixedTemp.temperature_flow1) annotation (Line(points={{-108,
-          -40},{-78,-40},{-78,5.12},{-55.84,5.12}},  color={0,0,127}));
-  connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{87,90},{56,90},{56,
-          0},{-2,0},{-2,-14},{-72,-14},{-72,-18},{-68,-18}},      color={0,0,
+          -40},{-78,-40},{-78,3.12},{-55.84,3.12}},  color={0,0,127}));
+  connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{87,90},{56,90},{
+          56,0},{-2,0},{-2,-16},{-72,-16},{-72,-21.2},{-66,-21.2}},
+                                                                  color={0,0,
           127}));
   connect(preTemVen.port, airExc.port_a)
-    annotation (Line(points={{-32,1},{-26,1},{-26,-4},{-22,-4}},
+    annotation (Line(points={{-32,-1},{-26,-1},{-26,-4},{-22,-4}},
                                                              color={191,0,0}));
   connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-29.5,-27},{
           -24,-27},{-24,-10},{-21.2,-10},{-21.2,-9.12}},           color={0,0,
@@ -616,14 +618,14 @@ equation
   connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-4},{44,
           -4},{44,-2},{92,-2},{92,78},{86,78}},color={191,0,0}));
   connect(weaBus.TDryBul, mixedTemp.temperature_flow2) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,1.2},{-55.84,1.2}},
+      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-0.8},{-55.84,-0.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDryBul, ventCont.Tambient) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-24},{-68,-24}},
+      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-26},{-66,-26}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -646,7 +648,7 @@ equation
 
 if not use_MechanicalAirExchange then
     connect(weaBus.TDryBul, preTemVen.T) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-42,10},{-42,1},{-38.6,1}},
+      points={{-100,34},{-86,34},{-86,10},{-42,10},{-42,-1},{-38.6,-1}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash), Text(
@@ -655,20 +657,22 @@ if not use_MechanicalAirExchange then
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
     connect(ventCont.y, cO2Balance.airExc) annotation (Line(
-      points={{-49,-24},{-46,-24},{-46,-34},{12,-34},{12,-64.9},{20,-64.9}},
+      points={{-50.8,-26},{-46,-26},{-46,-34},{12,-34},{12,-64.9},{20,-64.9}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(ventCont.y, airExcMoi.ventRate) annotation (Line(
-      points={{-49,-24},{-46,-24},{-46,-12},{-28,-12},{-28,-9.12},{-21.2,-9.12}},
+      points={{-50.8,-26},{-46,-26},{-46,-12},{-28,-12},{-28,-11.12},{-21.2,
+            -11.12}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(ventCont.y, airExc.ventRate) annotation (Line(
-      points={{-49,-24},{-46,-24},{-46,-12},{-28,-12},{-28,-9.12},{-21.2,-9.12}},
+      points={{-50.8,-26},{-46,-26},{-46,-12},{-28,-12},{-28,-9.12},{-21.2,
+            -9.12}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     if use_moisture_balance then
         connect(x_pTphi.X[1], airExcMoi.HumIn) annotation (Line(
-      points={{-63.7,-9},{-62,-9},{-62,-10},{-34,-10},{-34,-8},{-21.2,-8}},
+      points={{-63.7,-11},{-62,-11},{-62,-10},{-21.2,-10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     end if;
@@ -682,17 +686,18 @@ if not use_MechanicalAirExchange then
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(ventRate, airExcMoi.ventRate) annotation (Line(
-      points={{-108,-64},{-74,-64},{-74,-34},{-24,-34},{-24,-9.12},{-21.2,-9.12}},
+      points={{-108,-64},{-74,-64},{-74,-34},{-24,-34},{-24,-11.12},{-21.2,
+            -11.12}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(ventTemp, preTemVen.T) annotation (Line(
-      points={{-108,-40},{-78,-40},{-78,6},{-44,6},{-44,1},{-38.6,1}},
+      points={{-108,-40},{-78,-40},{-78,6},{-44,6},{-44,-1},{-38.6,-1}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     if use_moisture_balance then
       connect(ventHum, airExcMoi.HumIn) annotation (Line(
-      points={{-108,-88},{-74,-88},{-74,-2},{-46,-2},{-46,-4},{-30,-4},{-30,-8},
-          {-21.2,-8}},
+      points={{-108,-88},{-74,-88},{-74,-2},{-46,-2},{-46,-4},{-30,-4},{-30,-10},
+              {-21.2,-10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     end if;
@@ -703,10 +708,10 @@ if not use_MechanicalAirExchange then
      connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-29.5,-27},
             {-24,-27},{-24,-9.12},{-21.2,-9.12}},    color={0,0,127}));
      connect(addInfVen.y, airExcMoi.ventRate) annotation (Line(points={{-29.5,
-            -27},{-24,-27},{-24,-9.12},{-21.2,-9.12}},
+            -27},{-24,-27},{-24,-11.12},{-21.2,-11.12}},
                                                      color={0,0,127}));
-     connect(mixedTemp.mixedTemperatureOut, preTemVen.T)  annotation (Line(points={{-48,2},
-            {-44,2},{-44,1},{-38.6,1}},              color={0,0,127}));
+     connect(mixedTemp.mixedTemperatureOut, preTemVen.T)  annotation (Line(points={{-48,0},
+            {-44,0},{-44,-1},{-38.6,-1}},            color={0,0,127}));
 end if;
 
 
@@ -738,30 +743,34 @@ end if;
           {10.9,-67}}, color={0,0,127}));
   connect(ROM.C_flow[1], cO2Balance.mCO2_flow) annotation (Line(points={{37,84},
           {34,84},{34,-6},{50,-6},{50,-62.8},{34.7,-62.8}}, color={0,0,127}));
-  connect(airExcMoi.port_a, preTemVen.port)    annotation (Line(points={{-22,-4},
-          {-26,-4},{-26,1},{-32,1}},             color={191,0,0}));
+  connect(airExcMoi.port_a, preTemVen.port)    annotation (Line(points={{-22,-6},
+          {-26,-6},{-26,-1},{-32,-1}},           color={191,0,0}));
   connect(airExcMoi.ventRate, addInfVen.y) annotation (Line(points={{-21.2,
-          -9.12},{-24,-9.12},{-24,-27},{-29.5,-27}}, color={0,0,127}));
-  connect(airExcMoi.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-4},
-          {58,-4},{58,78},{86,78}}, color={191,0,0}));
-  connect(airExcMoi.QLat_flow, SumQLat2_flow.u[3]) annotation (Line(points={{
-          -5.68,-8.96},{-6,-8.96},{-6,-40},{-42,-40},{-42,-64.8},{-40,-64.8}},
+          -11.12},{-24,-11.12},{-24,-27},{-29.5,-27}},
+                                                     color={0,0,127}));
+  connect(airExcMoi.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-6},
+          {58,-6},{58,78},{86,78}}, color={191,0,0}));
+  connect(airExcMoi.QLat_flow, SumQLat2_flow.u[3]) annotation (Line(points={{-5.68,
+          -10.96},{-6,-10.96},{-6,-40},{-42,-40},{-42,-64.8},{-40,-64.8}},
         color={0,0,127}));
   connect(humVolAirROM.y, airExcMoi.HumOut) annotation (Line(points={{-59.5,-50},
-          {-4,-50},{-4,0},{-6,0},{-6,0.16},{-6.8,0.16}}, color={0,0,127}));
+          {-4,-50},{-4,0},{-6,0},{-6,-1.84},{-6.8,-1.84}},
+                                                         color={0,0,127}));
   connect(ventHum, mixedHumidity.humidity_flow1) annotation (Line(points={{-108,
-          -88},{-74,-88},{-74,-2.88},{-55.84,-2.88}}, color={0,0,127}));
+          -88},{-74,-88},{-74,-4.88},{-55.84,-4.88}}, color={0,0,127}));
   connect(ventRate, mixedHumidity.flowRate_flow1) annotation (Line(points={{-108,
-          -64},{-76,-64},{-76,-4.8},{-55.84,-4.8}}, color={0,0,127}));
-  connect(ventCont.y, mixedHumidity.flowRate_flow2) annotation (Line(points={{-49,
-          -24},{-46,-24},{-46,-12},{-60,-12},{-60,-8.8},{-55.84,-8.8}}, color={0,
+          -64},{-76,-64},{-76,-6.8},{-55.84,-6.8}}, color={0,0,127}));
+  connect(ventCont.y, mixedHumidity.flowRate_flow2) annotation (Line(points={{-50.8,
+          -26},{-46,-26},{-46,-12},{-60,-12},{-60,-10.8},{-55.84,-10.8}},
+                                                                        color={0,
           0,127}));
-  connect(ventCont.y, mixedTemp.flowRate_flow2) annotation (Line(points={{-49,-24},
-          {-46,-24},{-46,-12},{-60,-12},{-60,-0.8},{-55.84,-0.8}}, color={0,0,127}));
-  connect(x_pTphi.X[1], mixedHumidity.humidity_flow2) annotation (Line(points={{
-          -63.7,-9},{-62,-9},{-62,-6.8},{-55.84,-6.8}}, color={0,0,127}));
+  connect(ventCont.y, mixedTemp.flowRate_flow2) annotation (Line(points={{-50.8,
+          -26},{-46,-26},{-46,-12},{-60,-12},{-60,-2.8},{-55.84,-2.8}},
+                                                                   color={0,0,127}));
+  connect(x_pTphi.X[1], mixedHumidity.humidity_flow2) annotation (Line(points={{-63.7,
+          -11},{-62,-11},{-62,-8.8},{-55.84,-8.8}},     color={0,0,127}));
   connect(weaBus.pAtm, x_pTphi.p_in) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-7.2},{-70.6,-7.2}},
+      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-9.2},{-70.6,-9.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -769,7 +778,7 @@ end if;
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.TDryBul, x_pTphi.T) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-9},{-70.6,-9}},
+      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-11},{-70.6,-11}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -777,7 +786,7 @@ end if;
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.relHum, x_pTphi.phi) annotation (Line(
-      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-10.8},{-70.6,-10.8}},
+      points={{-100,34},{-86,34},{-86,10},{-80,10},{-80,-12.8},{-70.6,-12.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -785,7 +794,8 @@ end if;
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(mixedHumidity.mixedHumidityOut, airExcMoi.HumIn) annotation (Line(
-        points={{-48,-6},{-34,-6},{-34,-8},{-21.2,-8}}, color={0,0,127}));
+        points={{-48,-8},{-34,-8},{-34,-10},{-21.2,-10}},
+                                                        color={0,0,127}));
   connect(TSetHeat, heaterCooler.setPointHeat) annotation (Line(points={{-108,-16},
           {-86,-16},{-86,6},{74,6},{74,18},{75.42,18},{75.42,28.8}}, color={0,0,
           127}));

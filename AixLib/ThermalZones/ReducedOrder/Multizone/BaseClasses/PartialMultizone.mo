@@ -18,8 +18,10 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  parameter Boolean use_AirExchange=true
-    "Consider infiltration and ventilation by setting true";
+  parameter Boolean use_NaturalAirExchange=true
+    "Consider natural infiltration by setting true";
+  parameter Boolean use_MechanicalAirExchange=true
+    "Consider mechanical ventilation infiltration by setting true";
   parameter Boolean use_C_flow=false
     "Set to true to enable input connector for trace substance"
     annotation (Dialog(tab="CO2"));
@@ -37,7 +39,8 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Dialog(tab="Moisture"));
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
 
@@ -80,6 +83,8 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[numZones](
+    each use_NaturalAirExchange=use_NaturalAirExchange,
+    each use_MechanicalAirExchange=use_MechanicalAirExchange,
     each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each h_heater=h_heater,
@@ -93,7 +98,6 @@ partial model PartialMultizone "Partial model for multizone models"
     each TN_cooler=TN_cooler,
     each use_C_flow=use_C_flow,
     each use_moisture_balance=use_moisture_balance,
-    each use_AirExchange=use_AirExchange,
     each XCO2_amb=XCO2_amb,
     each areaBod=areaBod,
     each metOnePerSit=metOnePerSit,
