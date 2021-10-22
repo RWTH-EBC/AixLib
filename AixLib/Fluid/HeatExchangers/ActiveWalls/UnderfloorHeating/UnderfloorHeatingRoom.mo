@@ -217,9 +217,9 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
         rotation=-90,
         origin={-62,74})));
 
-  Modelica.Blocks.Sources.RealExpression realExpression(y=sum(heatFloor.Q_flow))
+  Modelica.Blocks.Sources.RealExpression Q_flowFloorSum(y=sum(heatFloor.Q_flow))
     annotation (Placement(transformation(extent={{40,-48},{60,-28}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=sum(heatCeiling.Q_flow))
+  Modelica.Blocks.Sources.RealExpression Q_flowCeilingSum(y=sum(heatCeiling.Q_flow))
     annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
   Modelica.Blocks.Interfaces.RealOutput Q_flowFloor annotation (Placement(
         transformation(
@@ -296,9 +296,9 @@ equation
   connect(valveInput, underfloorHeatingCircuit[i].valveInput) annotation (Line(
         points={{-62,74},{-62,32},{-16.28,32},{-16.28,11.6}}, color={0,0,127}));
   end for;
-  connect(realExpression.y, Q_flowFloor)
+  connect(Q_flowFloorSum.y, Q_flowFloor)
     annotation (Line(points={{61,-38},{100,-38}}, color={0,0,127}));
-  connect(realExpression1.y, Q_flowCeiling)
+  connect(Q_flowCeilingSum.y, Q_flowCeiling)
     annotation (Line(points={{61,-60},{100,-60}}, color={0,0,127}));
   annotation (
     Dialog(group="Panel Heating", enable=withSheathing),
