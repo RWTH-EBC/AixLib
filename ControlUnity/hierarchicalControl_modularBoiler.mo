@@ -77,11 +77,12 @@ equation
   if use_advancedControl then
 connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
         points={{-10,-108},{-10,-76},{-2.4,-76}}, color={0,0,127}));
-  connect(Tamb, flowTemperatureControl_heatingCurve.Tamb) annotation (Line(
+  connect(Tamb, flowTemperatureControl_heatingCurve.u) annotation (Line(
         points={{-100,-78},{-70,-78},{-70,-66},{-18,-66}},       color={0,0,127}));
   connect(emergencySwitch_modularBoiler2.PLR_set,
     flowTemperatureControl_heatingCurve.PLRin) annotation (Line(points={{44,-21},
-          {58,-21},{58,-48},{-26,-48},{-26,-59},{-18,-59}}, color={0,0,127}));
+            {58,-21},{58,-48},{-26,-48},{-26,-58},{-18,-58}},
+                                                            color={0,0,127}));
   connect(flowTemperatureControl_heatingCurve.y,
     emergencySwitch_modularBoiler2.PLR_ein) annotation (Line(points={{2,-66},{10,
           -66},{10,-25.2},{24,-25.2}},      color={0,0,127}));
@@ -105,5 +106,5 @@ else
 
 
   connect(flowTemperatureControl_heatingCurve.PLRset, PLRset) annotation (Line(
-        points={{2.2,-59},{78,-59},{78,60},{100,60}}, color={0,0,127}));
+        points={{2.2,-58},{78,-58},{78,60},{100,60}}, color={0,0,127}));
 end hierarchicalControl_modularBoiler;
