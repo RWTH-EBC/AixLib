@@ -29,7 +29,7 @@ model MixedHumidity
 equation
   mixedHumidityOut = (humidity_flow1*flowRate_flow1*rho_flow1 + humidity_flow2*
     flowRate_flow2* rho_flow2)/(flowRate_flow1 * rho_flow1+ flowRate_flow2*rho_flow2)
-    "Calculation of the air temperature of the mixed air stream";
+    "Calculation of the air humidity of the mixed air stream";
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
