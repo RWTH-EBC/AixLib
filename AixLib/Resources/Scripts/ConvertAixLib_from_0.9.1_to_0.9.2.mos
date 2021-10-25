@@ -1,0 +1,5 @@
+clear
+
+convertClear();
+
+convertClass("AixLib.Fluid.Storage.BaseClasses.StorageWall", "AixLib.Obsolete.Year2019.Fluid.Storage.StorageWall");

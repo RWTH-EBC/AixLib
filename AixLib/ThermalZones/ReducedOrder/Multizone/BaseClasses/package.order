@@ -1,5 +1,8 @@
+AbsToRelHum
 AirFlowRateSplit
 AirFlowRateSum
+MultizonePostProcessing
+MoistSplitter
 PartialMultizone
 RelToAbsHum
 SumCondition

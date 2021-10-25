@@ -7,10 +7,8 @@ model Throttle "Test for ummixed throttle circuit"
 
   AixLib.Systems.HydraulicModules.Throttle Throttle(
     redeclare package Medium = Medium,
+    parameterPipe=DataBase.Pipes.Copper.Copper_28x1(),
     m_flow_nominal=1,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_amb=293.15,
     length=1,
@@ -37,6 +35,7 @@ model Throttle "Test for ummixed throttle circuit"
       startTime=180)
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   AixLib.Fluid.Sources.Boundary_pT   boundary(
+    p=boundary1.p + 1000,
     T=323.15,
     redeclare package Medium = Medium,
     nPorts=1) annotation (Placement(transformation(
@@ -66,8 +65,8 @@ equation
     annotation (Line(points={{-8,-20},{-8,-40}}, color={0,127,255}));
   connect(Throttle.port_b2, boundary1.ports[1])
     annotation (Line(points={{28,-20},{28,-40}}, color={0,127,255}));
-  connect(valveOpening.y, hydraulicBus.valSet) annotation (Line(points={{-79,10},
-          {-41.95,10},{-41.95,10.05}}, color={0,0,127}), Text(
+  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-79,
+          10},{-41.95,10},{-41.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -77,9 +76,13 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=1000),
-    Documentation(revisions="<html>
-<ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
+    Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Alexander Kümpel:<br/>
+    Transfer from ZUGABE to AixLib.
+  </li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_Commands(file(ensureSimulated=true)=
+        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Throttle.mos"
+        "Simulate and plot"));
 end Throttle;

@@ -1,14 +1,13 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 model HeaterCoolerPI "heater and cooler with variable setpoints"
   extends AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCoolerPI;
-  parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
-  parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
   parameter Boolean staOrDyn = true "Static or dynamic activation of heater" annotation(choices(choice = true "Static", choice =  false "Dynamic",
                   radioButtons = true));
   Modelica.Blocks.Interfaces.RealInput setPointCool(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") annotation (
+    displayUnit="degC") if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep
+     and Cooler_on))    annotation (
       Placement(transformation(extent={{-120,-60},{-80,-20}}),
         iconTransformation(
         extent={{-20,-20},{20,20}},
@@ -17,7 +16,8 @@ model HeaterCoolerPI "heater and cooler with variable setpoints"
   Modelica.Blocks.Interfaces.RealInput setPointHeat(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") annotation (
+    displayUnit="degC") if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep
+     and Heater_on))    annotation (
       Placement(transformation(extent={{-120,20},{-80,60}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -58,17 +58,28 @@ equation
     annotation (Line(points={{-100,40},{-18,40},{-18,29}}, color={0,0,127}));
   connect(setPointCool, pITempCool.setPoint) annotation (Line(points={{-100,-40},
           {-58,-40},{-18,-40},{-18,-29}}, color={0,0,127}));
-  annotation (Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>This is just as simple heater and/or cooler with a PI-controller. It can be used as an quasi-ideal source for heating and cooling applications. </p>
- </html>", revisions="<html>
- <ul>
- <li><i>October, 2015&nbsp;</i> by Moritz Lauster:<br/>Adapted to Annex60 and restructuring, combined V1 and V2 as well as seperate parameter and record from EBC Libs</li>
- </ul>
- <ul>
- <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
- </ul>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+  annotation (Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is just as simple heater and/or cooler with a PI-controller. It
+  can be used as an quasi-ideal source for heating and cooling
+  applications.
+</p>
+<ul>
+  <li>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    Adapted to Annex60 and restructuring, combined V1 and V2 as well as
+    seperate parameter and record from EBC Libs
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>June, 2014&#160;</i> by Moritz Lauster:<br/>
+    Added some basic documentation
+  </li>
+</ul>
+</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})));

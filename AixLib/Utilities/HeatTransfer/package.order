@@ -5,7 +5,7 @@ CylindricLoad
 HeatConv
 HeatConvInside
 HeatConvOutside
-HeatConvPipeInside
 HeatConvPipeInsideDynamic
-HeatToStar
+HeatToRad
+SolarRadInRoom
 SolarRadToHeat

@@ -1,0 +1,24 @@
+convertModifiers(
+	"AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity", 
+	{"fixed_T_start"},
+	fill("",0));
+convertModifiers(
+	"AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine", 
+	{"fixed_TCon_start", "fixed_TEva_start"},
+	fill("",0));
+convertModifiers(
+	"AixLib.Fluid.HeatPumps.HeatPump", 
+	{"fixed_TCon_start", "fixed_TEva_start"},
+	fill("",0));
+convertModifiers(
+	"AixLib.Fluid.Chillers.Chiller", 
+	{"fixed_TCon_start", "fixed_TEva_start"},
+	fill("",0));
+convertModifiers(
+	"AixLib.Systems.HeatPumpSystems.HeatPumpSystem", 
+	{"fixed_TCon_start", "fixed_TEva_start"},
+	fill("",0));
+convertElement(
+	"AixLib.Controls.Interfaces.ThermalMachineControlBus",
+	{"N"},
+	{"n"});

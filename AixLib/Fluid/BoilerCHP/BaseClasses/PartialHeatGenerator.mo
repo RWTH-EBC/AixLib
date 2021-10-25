@@ -20,6 +20,29 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer, default 20 minutes"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
+    "Guess value of dp = port_a.p - port_b.p"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
+    "Guess value of m_flow = port_a.m_flow"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
+    "Start value of pressure"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
+
+  parameter Modelica.SIunits.PressureDifference dp_nominal=m_flow_nominal ^ 2 * a / (rho_default ^ 2)
+    "Pressure drop at nominal mass flow rate";
+  parameter Boolean from_dp=false
+    "= true, use m_flow = f(dp) else dp = f(m_flow)"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Modelica.SIunits.Density rho_default = 1000 "Default density of medium. Value assumes water";
+  parameter Boolean linearized=false
+    "= true, use linear relation between m_flow and dp for any flow rate"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Real deltaM=0.3
+    "Fraction of nominal mass flow rate where transition to turbulent occurs"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Real a "Coefficient of old approach from model Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate. Recalculated to dp_nominal based on IBPSA approach.";
   Sensors.TemperatureTwoPort senTCold(
     redeclare final package Medium = Medium,
     final tau=tau,
@@ -89,7 +112,6 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Real a "Pressure curve coefficent based on PD in AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition";
   parameter Modelica.SIunits.Density rho_default = Medium.density_pTX(Medium.p_default, Medium.T_default, Medium.X_default);
 
-
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
           -80},{-80,-80}}, color={0,127,255},
@@ -120,28 +142,26 @@ equation
           lineColor={0,0,0},
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={170,170,255})}),
-    Documentation(info="<html>
-<p>
-Partial model to implement heat generator models with one heat exchanger volume.
+    Documentation(info="<html><p>
+  Partial model to implement heat generator models with one heat
+  exchanger volume.
 </p>
 <p>
-Classes that extend this model need to implement the controller which shoud also
-calculate
-the heat flow to the heat exchanger volume.
+  Classes that extend this model need to implement the controller which
+  shoud also calculate the heat flow to the heat exchanger volume.
 </p>
 <p>
-The volume of the heat exchanger as well as the pressure loss coefficient should
-be set
-for each heat generator separately.
+  The volume of the heat exchanger as well as the pressure loss
+  coefficient should be set for each heat generator separately.
 </p>
-</html>", revisions="<html>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li>
-October 11, 2016 by Pooyan Jahangiri:<br/>
-First implementation.
-</li>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>October 11, 2016 by Pooyan Jahangiri:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end PartialHeatGenerator;

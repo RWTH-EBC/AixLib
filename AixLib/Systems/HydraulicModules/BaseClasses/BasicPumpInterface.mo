@@ -1,10 +1,23 @@
-within AixLib.Systems.HydraulicModules.BaseClasses;
+﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 partial model BasicPumpInterface "Pump interface for different pump types"
  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
   AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus
     pumpBus annotation (Placement(transformation(extent={{-20,80},{20,120}}),
         iconTransformation(extent={{-20,80},{20,120}})));
+
+
+
+  // Initialization
+  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
+    "Initialization temperature" annotation(Dialog(tab="Initialization"));
+
+  // Dynamics
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
+    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
@@ -35,11 +48,17 @@ partial model BasicPumpInterface "Pump interface for different pump types"
           fillPattern=FillPattern.Sphere,
           fillColor={220,220,220})}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>May 20, 2018, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+    Documentation(revisions="<html><ul>
+  <li>May 20, 2018, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>This is a basic container model for different pump typs. A new container model for a specific pump should be extended from this class. In this way, replacing the pump model in the hydraulic modules is easy.</p>
+<p>
+  This is a basic container model for different pump typs. A new
+  container model for a specific pump should be extended from this
+  class. In this way, replacing the pump model in the hydraulic modules
+  is easy.
+</p>
 </html>"));
 end BasicPumpInterface;

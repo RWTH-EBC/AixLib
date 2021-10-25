@@ -87,22 +87,28 @@ equation
   annotation (experiment(StartTime=0,StopTime=31536000),Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    Documentation(info="<html>
-  <p>This example shows the application of
-  <a href=\"Windows.BaseClasses.Illumination\">Illumination</a>.
-   For solar radiation, the example relies on the standard
-  weather file in AixLib.</p>
-  <p>The idea of the example is to show a typical application of all
+    Documentation(info="<html><p>
+  This example shows the application of <a href=
+  \"Windows.BaseClasses.Illumination\">Illumination</a>. For solar
+  radiation, the example relies on the standard weather file in AixLib.
+</p>
+<p>
+  The idea of the example is to show a typical application of all
   sub-models and to use the example in unit tests. The results are
-  reasonable, but not related to any real use case or measurement
-  data.</p>
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI 6007-3
-  June 2015. Calculation of transient thermal response of rooms
-  and buildings - Modelling of solar radiation.</p>
-</html>", revisions="<html>
+  reasonable, but not related to any real use case or measurement data.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  Modelling of solar radiation.
+</p>
 <ul>
-<li>July 13, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+  <li>July 13, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end Illumination;

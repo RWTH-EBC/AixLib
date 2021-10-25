@@ -12,6 +12,9 @@ model InternalControl "Internal control model for boiler"
     "Time constant of boiler heater (T>0 required)";
   parameter Modelica.SIunits.Time riseTime
     "Rise/fall time for step input(T>0 required)";
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics"));
   Real outputPower
     "Output power";
   Modelica.Blocks.Interfaces.BooleanInput isOn
@@ -69,10 +72,12 @@ model InternalControl "Internal control model for boiler"
     final rangeSwitch=false)
     "PI temperature controller"
     annotation (Placement(transformation(extent={{-40.5,36},{-24,52.5}})));
-  Utilities.Sensors.EnergyMeter eEnergyMeter_P
+  Utilities.Sensors.EnergyMeter eEnergyMeter_P(final energyDynamics=
+        energyDynamics)
     "For primary energy consumption"
     annotation (Placement(transformation(extent={{30,63},{49.5,84}})));
-  Utilities.Sensors.EnergyMeter eEnergyMeter_S
+  Utilities.Sensors.EnergyMeter eEnergyMeter_S(final energyDynamics=
+        energyDynamics)
     "For secondary energy consumption"
     annotation (Placement(transformation(extent={{30,82.5},{49.5,103.5}})));
   Modelica.Blocks.Tables.CombiTable1D efficiencyTable(
@@ -91,6 +96,7 @@ model InternalControl "Internal control model for boiler"
     prescribedTemperature
     "Converts Tflow_hot real input to temperature"
     annotation (Placement(transformation(extent={{-69,-7.5},{-54,7.5}})));
+
 
 equation
 
@@ -150,28 +156,55 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           textString="%name")}),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Internal control of the boiler</p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>This model is a derivation of BoilerTaktTable.</p>
-<p>There is a differentiation made between primary and secondary energy
-consumption.</p>
-<p>The primary power output can be read at the output of <b>ControlerHeater.
-</b>It is then multiplied with an efficienca factor to calculate the the
-effective heat flow that heats up the fluid in the boiler<b>.</b></p>
-<p>There are two energy meters: one for the primary energy and one for the
-secondary. </p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Internal control of the boiler
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  This model is a derivation of BoilerTaktTable.
+</p>
+<p>
+  There is a differentiation made between primary and secondary energy
+  consumption.
+</p>
+<p>
+  The primary power output can be read at the output of
+  <b>ControlerHeater.</b> It is then multiplied with an efficienca
+  factor to calculate the the effective heat flow that heats up the
+  fluid in the boiler<b>.</b>
+</p>
+<p>
+  There are two energy meters: one for the primary energy and one for
+  the secondary.
+</p>
 </html>",
-revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
-appropriately</li>
-<li><i>July 12, 2011</i> by Ana Constantin:<br/>Implemented</li>
+revisions="<html><ul>
+  <li>
+    <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
+    Add energyDynamics as parameter (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1093\">#1093</a>)
+  </li>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib
+  </li>
+  <li>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>July 12, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end InternalControl;

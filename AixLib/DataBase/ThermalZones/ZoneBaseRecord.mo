@@ -67,10 +67,15 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Weight factors of the windows";
   parameter Real wfGro
     "Weight factor of the ground";
-
-  parameter Real internalGainsPeopleSpecific "Heat Flux of people";
+  parameter Real specificPeople "people per squaremeter";
+  parameter Real activityDegree "acitivity degree of people in met";
+  parameter Modelica.SIunits.HeatFlowRate fixedHeatFlowRatePersons
+    "Area specific heatflowrate by persons in case of temperature independent
+    calculation";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
+  parameter Real internalGainsMoistureNoPeople
+    "internal moisture production of plants, etc. except from people in g/(h m²)";
   parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
   parameter Real ratioConvectiveHeatMachines
     "Ratio of convective heat from overall heat output for machines";
@@ -87,14 +92,14 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Additional ACH in summer, Tmin, Tmax";
   parameter Real winterReduction[3]
     "Reduction factor of userACH for cold weather";
-
   parameter Boolean withAHU
     "Zone is connected to central air handling unit";
   parameter Real minAHU(unit = "m3/(h.m2)")
     "Minimum specific air flow supplied by the AHU";
   parameter Real maxAHU(unit = "m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
-
+  parameter Real shadingFactor[nOrientations] "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds.";
+  parameter Real maxIrr[nOrientations](unit = "W/m2") "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature.";
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";
   parameter Real KRHeat "Gain of the controller";
@@ -106,42 +111,58 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.SIunits.Time TNCool
     "Time constant of the controller";
   parameter Boolean CoolerOn "Use chiller component";
-
-  annotation(Documentation(info="<html>
-<p>This is the base definition of zone records used in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. It aggregates all parameters at one record to enhance usability, exchanging entire datasets and automatic generation of these datasets.</p>
-<h4>References</h4>
-<p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
-</html>",  revisions="<html>
+  parameter Modelica.SIunits.Temperature TThresholdHeater
+    "Threshold temperature below ideal heater is used";
+  parameter Modelica.SIunits.Temperature TThresholdCooler
+    "Threshold temperature above ideal cooler is used";
+  parameter Boolean withIdealThresholds
+    "Sets if the threshold temperatures for ideal heater and cooler should
+        be used";
+  annotation(Documentation(info="<html><p>
+  This is the base definition of zone records used in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
+  It aggregates all parameters at one record to enhance usability,
+  exchanging entire datasets and automatic generation of these
+  datasets.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  For automatic generation of thermal zone and multizone models as well
+  as for datasets, see <a href=
+  \"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a>
+</p>
 <ul>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation.
+  <li>November 27, 2019, by David Jansen:<br/>
+    Integrate threshold for heater and cooler.
   </li>
-  <li>
-  January 4, 2016, by Moritz Lauster:<br/>
-  Clean up.
+  <li>July 10, 2019, by David Jansen:<br/>
+    Adds specificPeople (persons per squaremetre). Adds activityDegree.
+  </li>
+  <li>September 27, 2016, by Moritz Lauster:<br/>
+    Reimplementation.
+  </li>
+  <li>January 4, 2016, by Moritz Lauster:<br/>
+    Clean up.
   </li>
   <li>June, 2015, by Moritz Lauster:<br/>
-  Added new parameters to use further calculation cores.
+    Added new parameters to use further calculation cores.
   </li>
-  <li>
-  February 4, 2014, by Ole Odendahl:<br/>
-  Added new parameters for the setup of the ACH. It is 
-  now possible to assign different values to the ACH for 
-  each zone based on this record.
+  <li>February 4, 2014, by Ole Odendahl:<br/>
+    Added new parameters for the setup of the ACH. It is now possible
+    to assign different values to the ACH for each zone based on this
+    record.
   </li>
-  <li>
-  January 27, 2014, by Ole Odendahl:<br/>
-  Added new parameter withAHU to choose whether the zone
-  is connected to a central air handling unit. Default 
-  is false.
+  <li>January 27, 2014, by Ole Odendahl:<br/>
+    Added new parameter withAHU to choose whether the zone is connected
+    to a central air handling unit. Default is false.
   </li>
-  <li>
-  November, 2012, by Moritz Lauster:<br/>
-  Restored links
+  <li>November, 2012, by Moritz Lauster:<br/>
+    Restored links
   </li>
   <li>March, 2012, by Peter Matthes:<br/>
-  Implemented
+    Implemented
   </li>
 </ul>
 </html>"));

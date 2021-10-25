@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.Examples;
+within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;
@@ -73,7 +73,8 @@ model HeatPumpSystem "Example for a heat pump system"
     redeclare package Medium_eva = Medium_sou,
     dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
-    use_revHP=false,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     refIneFre_constant=0.01,
     dpEva_nominal=0,
     deltaM_con=0.1,
@@ -104,12 +105,13 @@ model HeatPumpSystem "Example for a heat pump system"
     QCon_nominal=10000,
     P_el_nominal=2500,
     redeclare model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-        dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(tableP_ele=[0,
-            -5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,
-            4958,5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,
-            7583]),
+        dataTable=
+            AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(
+            tableP_ele=[0,-5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833;
+            45,4833,4917,4958,5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,
+            7125,7250,7417,7583]),
         printAsserts=false,
         extrapolation=false),
     redeclare function HeatingCurveFunction =
@@ -118,18 +120,16 @@ model HeatPumpSystem "Example for a heat pump system"
     use_minLocTime=true,
     use_runPerHou=true,
     pre_n_start=true,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    fixed_TCon_start=true,
-    fixed_TEva_start=true,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
     TCon_nominal=313.15,
     TCon_start=313.15,
     TEva_start=283.15,
+    use_revHP=false,
     VCon=0.004,
     VEva=0.004)
-    annotation (Placement(transformation(extent={{10,-90},{64,-30}})));
+    annotation (Placement(transformation(extent={{10,-92},{64,-32}})));
+
 
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
@@ -188,46 +188,59 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(sou.ports[1], heatPumpSystem.port_a2)
-    annotation (Line(points={{82,-90},{64,-90},{64,-81.4286}},
+    annotation (Line(points={{82,-90},{64,-90},{64,-83.4286}},
                                                           color={0,127,255}));
   connect(sin.ports[1], heatPumpSystem.port_b2) annotation (Line(points={{-28,-90},
-          {14,-90},{14,-81.4286},{10,-81.4286}},
+          {14,-90},{14,-83.4286},{10,-83.4286}},
                                        color={0,127,255}));
   connect(weaBus.TDryBul, heatPumpSystem.T_oda) annotation (Line(
-      points={{-68,64},{-58,64},{-58,-43.0714},{5.95,-43.0714}},
+      points={{-68,64},{-58,64},{-58,-45.0714},{5.95,-45.0714}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(senT_a1.port_a, heatPumpSystem.port_b1) annotation (Line(points={{88,-30},
-          {88,-55.7143},{64,-55.7143}},      color={0,127,255}));
+          {88,-57.7143},{64,-57.7143}},      color={0,127,255}));
   connect(senT_a1.port_b, rad.port_a) annotation (Line(points={{88,-10},{90,-10},
           {90,12},{40,12}}, color={0,127,255}));
   connect(senT_a1.T, heatPumpSystem.TAct) annotation (Line(points={{77,-20},{54,
-          -20},{54,-16},{-2,-16},{-2,-24},{5.95,-24},{5.95,-34.0714}},
+          -20},{54,-16},{-2,-16},{-2,-24},{5.95,-24},{5.95,-36.0714}},
                                                      color={0,0,127}));
   connect(rad.port_b, heatPumpSystem.port_a1) annotation (Line(points={{20,12},
-          {-12,12},{-12,-55.7143},{10,-55.7143}},color={0,127,255}));
+          {-12,12},{-12,-57.7143},{10,-57.7143}},color={0,127,255}));
   connect(rad.port_b, preSou.ports[1])
     annotation (Line(points={{20,12},{-28,12}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
-    experiment(StopTime=86400, Tolerance=1e-06),
-    __Dymola_experimentSetupOutput,
-    Documentation(info="<html>
-<p>Model for testing the model <a href=\"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Systems.HeatPumpSystems.HeatPumpSystem</a>.</p>
-<p>A simple radiator is used to heat a room. This example is based on the example in <a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.ScrollWaterToWater_OneRoomRadiator\">AixLib.Fluid.HeatPumps.Examples.ScrollWaterToWater_OneRoomRadiator</a>.</p>
+    experiment(Tolerance=1e-6, StopTime=86400),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos"
+        "Simulate and plot"),
+    Documentation(info="<html><p>
+  Model for testing the model <a href=
+  \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Systems.HeatPumpSystems.HeatPumpSystem</a>.
+</p>
+<p>
+  A simple radiator is used to heat a room. This example is based on
+  the example in <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.Examples.ScrollWaterToWater_OneRoomRadiator\">
+  AixLib.Fluid.HeatPumps.Examples.ScrollWaterToWater_OneRoomRadiator</a>.
+</p>
 </html>",
-   revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+   revisions="<html><ul>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

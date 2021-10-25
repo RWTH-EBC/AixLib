@@ -1,21 +1,18 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
+within AixLib.Fluid.BoilerCHP.ModularCHP;
 model ModularCHPIntegrated
   "Modular combined heat and power system model integrated into a heating circuit"
   import AixLib;
 
   replaceable package Medium_Fuel =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
-                                                                    constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                                                    constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Fuel medium model used in the CHP plant" annotation(choicesAllMatching=true);
   replaceable package Medium_Coolant = Modelica.Media.Air.DryAirNasa
-                                                           constrainedby
-    Modelica.Media.Interfaces.PartialMedium
+                                                           constrainedby Modelica.Media.Interfaces.PartialMedium
     "Coolant medium model used in the CHP plant" annotation (choicesAllMatching=true);
 
   replaceable package Medium_HeatingCircuit =
-      Modelica.Media.CompressibleLiquids.LinearColdWater   constrainedby
-    Modelica.Media.Interfaces.PartialMedium
+      Modelica.Media.CompressibleLiquids.LinearColdWater   constrainedby Modelica.Media.Interfaces.PartialMedium
     "Heating circuit medium model" annotation (
       __Dymola_choicesAllMatching=true);
 
@@ -206,13 +203,11 @@ model ModularCHPIntegrated
 protected
   replaceable package Medium_Air =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                               constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                                                               constrainedby DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
     "Air medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   replaceable package Medium_Exhaust =
-      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng + Cal_mEng
@@ -303,11 +298,24 @@ CHP"),  Rectangle(
           color={0,127,255},
           thickness=1)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model of a gas engine CHP plant is using the CHP power unit <a href=\"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a> extended by a heat exchanger to the heating circuit. Also, a simple controller model is added to simulate different operation conditions by transferring an On-/Off-Signal and the modulation factor via the bus port.</p>
-<h4>Calibration and limitations: </h4>
-<p>Model calibration and limitations can be found in <a href=\"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a> </p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model of a gas engine CHP plant is using the CHP power unit
+  <a href=
+  \"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a>
+  extended by a heat exchanger to the heating circuit. Also, a simple
+  controller model is added to simulate different operation conditions
+  by transferring an On-/Off-Signal and the modulation factor via the
+  bus port.
+</p>
+<h4>
+  Calibration and limitations:
+</h4>
+<p>
+  Model calibration and limitations can be found in <a href=
+  \"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a>
+</p>
 <ul>
   <li>
     <i>April, 2019&#160;</i> by Julian Matthes:<br/>

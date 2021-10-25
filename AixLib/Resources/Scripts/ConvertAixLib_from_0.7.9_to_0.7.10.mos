@@ -1,3 +1,7 @@
+// add missing convert class for HumanSensibleHeat_VDI2078
+convertClass("AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078",
+			 "AixLib.Utilities.Sources.InternalGains.Humans.Obsolete.HumanSensibleHeat_VDI2078");
+
 // correct renaming of hRad
 convertElement("AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office","hConvRadWall","hRadWall");
 convertElement("AixLib.DataBase.ThermalZones.ZoneBaseRecord","hConvRadWall","hRadWall");

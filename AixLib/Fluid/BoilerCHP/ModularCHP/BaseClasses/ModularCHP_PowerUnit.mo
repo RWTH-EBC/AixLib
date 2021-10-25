@@ -1,15 +1,13 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
+within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model ModularCHP_PowerUnit "Model of modular CHP power unit"
   import AixLib;
 
   replaceable package Medium_Fuel =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
-                                                                    constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                                                    constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Fuel medium model used in the CHP plant" annotation(choicesAllMatching=true);
   replaceable package Medium_Coolant =
-      Modelica.Media.Air.DryAirNasa     constrainedby
-    Modelica.Media.Interfaces.PartialMedium
+      Modelica.Media.Air.DryAirNasa     constrainedby Modelica.Media.Interfaces.PartialMedium
     "Coolant medium model used in the CHP plant" annotation (choicesAllMatching=true);
 
   parameter
@@ -115,10 +113,10 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
        > 0.0001 then gasolineEngineChp.cHPCombustionEngine.m_flow_Fue else 0.0001
     "Fuel consumption rate of CHP unit";
   type SpecificEmission=Real(final unit="g/(kW.h)", min=0.0001);
-  SpecificEmission b_CO2=if noEvent(abs(Q_Therm + P_El) > 0) then 3600000000*
+  SpecificEmission b_CO2=if noEvent(abs(Q_Therm + P_El) > 0) then 3600000000.0 *
       m_flow_CO2/(Q_Therm + P_El) else 0
     "Specific CO2 emissions per kWh (heat and power)";
-  SpecificEmission b_e=if noEvent(abs(Q_Therm + P_El) > 0) then 3600000000*
+  SpecificEmission b_e=if noEvent(abs(Q_Therm + P_El) > 0) then 3600000000.0 *
       m_flow_Fue/(Q_Therm + P_El) else 0
     "Specific fuel consumption per kWh (heat and power)";
   Real FueUtiRate=(Q_Therm + P_El)/(m_flow_Fue*Medium_Fuel.H_U)
@@ -232,13 +230,11 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
 protected
   replaceable package Medium_Air =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                               constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                                                               constrainedby DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
     "Air medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   replaceable package Medium_Exhaust =
-      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
 equation
@@ -405,7 +401,6 @@ CHP"),  Rectangle(
   Supercharged internal combustion engines and diesel engines cannot be
   completely mapped.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April, 2019&#160;</i> by Julian Matthes:<br/>

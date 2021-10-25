@@ -1,0 +1,4 @@
+[submodule "netCDF-DataReader"]
+	path = netCDF-DataReader
+	url = https://github.com/modelica-3rdparty/netCDF-DataReader
+	branch = master

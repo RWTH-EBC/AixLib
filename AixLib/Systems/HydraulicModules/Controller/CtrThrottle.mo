@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Controller;
+﻿within AixLib.Systems.HydraulicModules.Controller;
 block CtrThrottle "Controller for unmixed circuit with valve"
   //Boolean choice;
 
@@ -8,12 +8,12 @@ block CtrThrottle "Controller for unmixed circuit with valve"
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
   parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
+  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
-  parameter Boolean reverseAction = false
-    "Set to true for throttling the water flow rate through a cooling coil controller";
+  parameter Boolean reverseAction = true
+    "Set to true if heating system, and false for cooling system";
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(group="PID"));
@@ -40,8 +40,8 @@ block CtrThrottle "Controller for unmixed circuit with valve"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction)
-            annotation (Placement(transformation(extent={{-16,-40},{4,-60}})));
+    reverseActing=reverseAction)
+            annotation (Placement(transformation(extent={{-20,-40},{0,-60}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
   Modelica.Blocks.Logical.GreaterThreshold
@@ -51,55 +51,51 @@ equation
 
 public
   BaseClasses.HydraulicBus  hydraulicBus
-    annotation (Placement(transformation(extent={{66,-38},{120,16}})));
+    annotation (Placement(transformation(extent={{76,-24},{124,24}}),
+        iconTransformation(extent={{90,-22},{138,26}})));
 equation
     connect(PID.u_s, Tset) annotation (Line(
-      points={{-18,-50},{-67.1,-50},{-67.1,-60},{-120,-60}},
+      points={{-22,-50},{-67.1,-50},{-67.1,-60},{-120,-60}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(constTflowSet.y, PID.u_s) annotation (Line(
-      points={{-79,-20},{-68,-20},{-68,-50},{-18,-50}},
+      points={{-79,-20},{-68,-20},{-68,-50},{-22,-50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.y, hydraulicBus.valSet) annotation (Line(points={{5,-50},{48,-50},
-          {48,-10.865},{93.135,-10.865}},
-                                      color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(constRpmPump.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{41,0},{48,0},{48,-10.865},{93.135,-10.865}}, color={0,0,127}), Text(
+  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{1,-50},{48,-50},
+          {48,0.12},{100.12,0.12}},       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(PID.u_m, Tact)
-    annotation (Line(points={{-6,-38},{-8,-38},{-8,60},{-120,60}}, color={0,0,127}));
+    annotation (Line(points={{-10,-38},{-10,60},{-120,60}},        color={0,0,127}));
   connect(PID.y,pumpSwitchOff. u)
-    annotation (Line(points={{5,-50},{4,-50},{4,40},{14.4,40}}, color={0,0,127}));
-  connect(pumpSwitchOff.y, hydraulicBus.pumpBus.onOff_Input) annotation (Line(points={{32.8,40},
-          {93.135,40},{93.135,-10.865}},                     color={255,0,255}), Text(
+    annotation (Line(points={{1,-50},{4,-50},{4,40},{14.4,40}}, color={0,0,127}));
+  connect(constRpmPump.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
+          {41,0},{100.12,0},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(pumpSwitchOff.y, hydraulicBus.pumpBus.onSet) annotation (Line(points=
+          {{32.8,40},{100.12,40},{100.12,0.12}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-          Text(
-          extent={{-90,20},{56,-20}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
-          textString="HCMI"),
           Rectangle(
-          extent={{-90,80},{70,-80}},
+          extent={{-100,100},{100,-100}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),Line(
-          points={{10,80},{70,0},{30,-80}},
+          points={{-100,100},{-36,-2},{-100,-100}},
           color={95,95,95},
           thickness=0.5),
           Text(
-          extent={{-90,20},{56,-20}},
+          extent={{-48,20},{98,-20}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
@@ -107,12 +103,20 @@ equation
           textString="Control")}),
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
-    Documentation(revisions="<html>
-<ul>
-<li>January 22, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+    Documentation(revisions="<html><ul>
+  <li>January 22, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for Throttle and ThrottlePump circuit. The controlled variable needs to be connected to Tact.</p>
-<p>If the valve is fully closed, the pump will switch off.</p>
+<p>
+  Simple controller for Throttle and ThrottlePump circuit that is based
+  on a PID controller. The controlled variable needs to be connected to
+  Tact.
+</p>
+<p>
+  If the valve is fully closed, the pump will switch off. The pump
+  frequency is constant, if pump is on
+</p>
 </html>"));
 end CtrThrottle;

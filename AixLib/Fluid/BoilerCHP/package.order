@@ -1,8 +1,9 @@
 Boiler
+BoilerNoControl
 CHP
+CHPNoControl
 HeatGeneratorNoControl
 ModularCHP
-BoilerNoControl
 Data
 Examples
 BaseClasses

@@ -1,8 +1,15 @@
+ComparisonThermalZoneMoistAndDryAir
 Multizone
 MultizoneEquipped
+MultizoneMoistAirCO2
+MultizoneMoistAirCO2Equipped
+MultizonePartlyCooled
 SimpleRoomFourElements
+SimpleRoomFourElementsTraceSubstance
 SimpleRoomOneElement
 SimpleRoomThreeElements
 SimpleRoomTwoElements
 ThermalZone
-ThermalZoneEquipped
+ThermalZoneAirExchange
+ThermalZoneMoistAir
+ThermalZoneMoistCO2AirExchange

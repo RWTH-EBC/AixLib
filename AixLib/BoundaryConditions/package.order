@@ -1,7 +1,9 @@
 UsersGuide
 GroundTemperature
+InternalGains
 SkyTemperature
 SolarGeometry
 SolarIrradiation
 WeatherData
 Types
+Validation
