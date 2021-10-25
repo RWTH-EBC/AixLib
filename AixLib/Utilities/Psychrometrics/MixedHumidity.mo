@@ -8,24 +8,25 @@ model MixedHumidity
   Modelica.Blocks.Interfaces.RealInput humidity_flow1(
     final quantity="MassFraction",
     final unit="kg/kg",
-    min=0) "Humidity volume flow 1" annotation (Placement(transformation(extent=
-           {{-120,54},{-80,94}}), iconTransformation(extent={{-112,62},{-80,94}})));
+    min=0) "Humidity volume flow 1" annotation (Placement(transformation(extent={{-120,56},
+            {-80,96}}),           iconTransformation(extent={{-112,64},{-80,96}})));
   Modelica.Blocks.Interfaces.RealInput humidity_flow2(
     final quantity="MassFraction",
     final unit="kg/kg",
-    min=0) "Humidity volume flow 2" annotation (Placement(transformation(extent=
-           {{-120,-44},{-80,-4}}), iconTransformation(extent={{-112,-36},{-80,-4}})));
+    min=0) "Humidity volume flow 2" annotation (Placement(transformation(extent={{-120,
+            -46},{-80,-6}}),       iconTransformation(extent={{-112,-38},{-80,
+            -6}})));
   Modelica.Blocks.Interfaces.RealOutput mixedHumidityOut(
     final quantity="MassFraction",
     final unit="kg/kg",
     min=0) "Output for the mixed humidity"
     annotation (Placement(transformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Interfaces.RealInput flowRate_flow1 "Flow rate volume flow 1"
-    annotation (Placement(transformation(extent={{-120,6},{-80,46}}),
-        iconTransformation(extent={{-112,14},{-80,46}})));
+    annotation (Placement(transformation(extent={{-120,8},{-80,48}}),
+        iconTransformation(extent={{-112,16},{-80,48}})));
   Modelica.Blocks.Interfaces.RealInput flowRate_flow2 "Flow rate volume flow 2"
-    annotation (Placement(transformation(extent={{-120,
-            -94},{-80,-54}}), iconTransformation(extent={{-112,-86},{-80,-54}})));
+    annotation (Placement(transformation(extent={{-120,-96},{-80,-56}}),
+                              iconTransformation(extent={{-112,-88},{-80,-56}})));
 equation
   mixedHumidityOut = (humidity_flow1*flowRate_flow1*rho_flow1 + humidity_flow2*
     flowRate_flow2* rho_flow2)/(flowRate_flow1 * rho_flow1+ flowRate_flow2*rho_flow2)
