@@ -317,8 +317,24 @@ model Ashrae140Testcase900SP
             {{-126,26},{-92,60}})));
   Modelica.Blocks.Interfaces.RealInput TAhuSet
     "Connector of second Real input signal" annotation (Placement(
-        transformation(extent={{-126,2},{-92,36}}), iconTransformation(extent={
-            {-126,2},{-92,36}})));
+        transformation(extent={{-126,0},{-92,34}}), iconTransformation(extent={{-126,0},
+            {-92,34}})));
+  Modelica.Blocks.Sources.RealExpression PowerCold(y=4.18*(Bus.tabsBus.coldThrottleBus.VFlowInMea
+        *(Bus.tabsBus.coldThrottleBus.TFwrdInMea - Bus.tabsBus.coldThrottleBus.TRtrnOutMea)
+         + Bus.ahuBus.coolerBus.hydraulicBus.VFlowInMea*(Bus.ahuBus.coolerBus.hydraulicBus.TFwrdInMea
+         - Bus.ahuBus.coolerBus.hydraulicBus.TRtrnOutMea))*1000)
+    annotation (Placement(transformation(extent={{0,-126},{60,-106}})));
+  Modelica.Blocks.Sources.RealExpression PowerHeat(y=4.18*(Bus.tabsBus.hotThrottleBus.VFlowInMea
+        *(Bus.tabsBus.hotThrottleBus.TFwrdInMea - Bus.tabsBus.hotThrottleBus.TRtrnOutMea)
+         + Bus.ahuBus.heaterBus.hydraulicBus.VFlowInMea*(Bus.ahuBus.heaterBus.hydraulicBus.TFwrdInMea
+         - Bus.ahuBus.heaterBus.hydraulicBus.TRtrnOutMea))*1000)
+    annotation (Placement(transformation(extent={{0,-148},{60,-126}})));
+  Modelica.Blocks.Interfaces.RealOutput TAirRoom "Indoor air temperature"
+    annotation (Placement(transformation(extent={{90,40},{110,60}})));
+  Modelica.Blocks.Interfaces.RealOutput QFlowCold "Value of Real output"
+    annotation (Placement(transformation(extent={{90,-126},{110,-106}})));
+  Modelica.Blocks.Interfaces.RealOutput QFlowHeat "Value of Real output"
+    annotation (Placement(transformation(extent={{90,-148},{110,-128}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-80,90},{0,90},{0,44.4},{2,44.4}},
@@ -431,9 +447,19 @@ equation
   connect(ctrTabsQflow.QFlowSet, QFlowTabsSet) annotation (Line(points={{-66.3,
           42.1},{-109,42.1},{-109,43}}, color={0,0,127}));
   connect(ctrAhu.Tset, TAhuSet) annotation (Line(points={{-68,18},{-88,18},{-88,
-          19},{-109,19}}, color={0,0,127}));
+          17},{-109,17}}, color={0,0,127}));
+  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{60.8,50.2},{
+          100,50.2},{100,50}}, color={0,0,127}));
+  connect(PowerCold.y, QFlowCold)
+    annotation (Line(points={{63,-116},{100,-116}}, color={0,0,127}));
+  connect(PowerHeat.y, QFlowHeat) annotation (Line(points={{63,-137},{100,-137},
+          {100,-138}}, color={0,0,127}));
+  connect(QFlowHeat, QFlowHeat)
+    annotation (Line(points={{100,-138},{100,-138}}, color={0,0,127}));
   annotation (experiment(
       StopTime=3600,
       Interval=60,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"),
+    Diagram(coordinateSystem(extent={{-100,-180},{100,100}})),
+    Icon(coordinateSystem(extent={{-100,-180},{100,100}})));
 end Ashrae140Testcase900SP;
