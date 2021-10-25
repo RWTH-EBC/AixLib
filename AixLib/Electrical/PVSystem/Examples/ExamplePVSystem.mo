@@ -45,7 +45,9 @@ equation
       points={{-80,0},{-34,0},{-34,0.72},{-10.16,0.72}},
       color={255,204,51},
       thickness=0.5));
-  annotation (experiment(StopTime=31536000, Interval=900), Documentation(info="<html><p>
+  annotation (experiment(StopTime=31536000, Interval=900, Tolerance=1e-06),
+  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Electrical/PVSystem/Examples/ExamplePVSystem.mos"),
+  Documentation(info="<html><p>
   Simulation to test the <a href=
   \"AixLib.Electrical.PVSystem.PVSystem\">PVSystem</a> model.
 </p>
