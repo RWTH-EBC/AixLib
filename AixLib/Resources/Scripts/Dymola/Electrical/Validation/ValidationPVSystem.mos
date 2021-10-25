@@ -1,0 +1,2 @@
+simulateModel("AixLib.Electrical.PVSystem.Validation.ValidationPVSystem", startTime=28684800, stopTime=28771200, method="dassl", tolerance=1e-06, resultFile="ValidationPVSystem");
+createPlot(id=1, position={0, 0, 792, 1247}, y={"DCOutputPower","DCOutputPower_Measured"}, grid=true, colors={{28,108,200},{238,46,47}});
