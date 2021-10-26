@@ -1,8 +1,7 @@
 within AixLib.Fluid.BoilerCHP;
 model HeatGeneratorNoControl "Simple heat generator without control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
-                          a=coeffPresLoss,
-                          vol(V=V));
+        a=coeffPresLoss, vol(V=V));
 
   Modelica.Blocks.Interfaces.RealInput Q_flow(final unit="W")
     "Prescribed heat flow"
