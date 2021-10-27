@@ -82,5 +82,7 @@ equation
   </li>
 </ul>
 </html>"),
-experiment(StopTime=35000, Interval=60));
+experiment(StopTime=35000, Interval=60), __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystem.mos"
+        "Simulate and Plot"));
 end CHPSystem;
