@@ -115,22 +115,7 @@ model DpControlled_dp
     u(each final unit="m3/s"),
     y(each final unit="Pa"),
     final verboseExtrapolation=verboseExtrapolation)
-                             annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
-
-  Modelica.Blocks.Tables.CombiTable1D pressureCurvePer(
-    final tableOnFile=false,
-    table=[cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
-    final tableName="NoName",
-    final fileName="NoName",
-    final verboseRead=true,
-    final columns=2:size(pressureCurveSelected.table, 2),
-    final smoothness=smoothness,
-    final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
-    u(each final unit="m3/s"),
-    y(each final unit="Pa"),
-    final verboseExtrapolation=verboseExtrapolation)
-                             annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
-  Modelica.Blocks.Math.Min dpMin(u1(final unit="Pa"), u2(final unit="Pa"), y(final unit="Pa")) "Routes minimal pressure-rise signal if two curves are not congruent." annotation (Placement(transformation(extent={{-16,30},{-4,42}})));
+                             annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
 
   AixLib.Fluid.Movers.FlowControlled_dp mov(
     redeclare final package Medium = Medium,
@@ -235,11 +220,7 @@ equation
     annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
   connect(port_a, senVolFlo.port_a) annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
   connect(senVolFlo.port_b, mov.port_a) annotation (Line(points={{-60,0},{-10,0}}, color={0,127,255}));
-  connect(senVolFlo.V_flow, pressureCurveSelected.u[1]) annotation (Line(points={{-70,11},{-70,50},{-52,50}}, color={0,0,127}));
-  connect(pressureCurveSelected.y[1], dpMin.u1) annotation (Line(points={{-29,50},{-24,50},{-24,39.6},{-17.2,39.6}}, color={0,0,127}));
-  connect(pressureCurvePer.y[1], dpMin.u2) annotation (Line(points={{-29,20},{-24,20},{-24,32},{-17.2,32},{-17.2,32.4}}, color={0,0,127}));
-  connect(dpMin.y, mov.dp_in) annotation (Line(points={{-3.4,36},{0,36},{0,12}}, color={0,0,127}));
-  connect(senVolFlo.V_flow, pressureCurvePer.u[1]) annotation (Line(points={{-70,11},{-70,20},{-52,20}}, color={0,0,127}));
+  connect(senVolFlo.V_flow, pressureCurveSelected.u[1]) annotation (Line(points={{-70,11},{-70,40},{-52,40}}, color={0,0,127}));
   connect(dpMea, mov.dpMea) annotation (Line(
       points={{-20,120},{-20,80},{-8,80},{-8,12}},
       color={0,0,127},
@@ -248,6 +229,7 @@ equation
   connect(mov.P, P) annotation (Line(points={{11,9},{80,9},{80,80},{110,80}}, color={0,0,127}));
   connect(mov.y_actual, y_actual) annotation (Line(points={{11,7},{82,7},{82,60},{110,60}}, color={0,0,127}));
   connect(mov.dp_actual, dp_actual) annotation (Line(points={{11,5},{84,5},{84,40},{110,40}}, color={0,0,127}));
+  connect(pressureCurveSelected.y[1], mov.dp_in) annotation (Line(points={{-29,40},{0,40},{0,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-94,100},{-42,48}},
