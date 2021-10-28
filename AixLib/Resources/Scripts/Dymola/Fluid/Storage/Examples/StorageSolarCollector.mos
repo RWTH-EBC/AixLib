@@ -1,0 +1,3 @@
+simulateModel("AixLib.Fluid.Storage.Examples.StorageSolarCollector", tolerance=1e-6, stopTime=172800, method="dassl", resultFile="StorageSolarCollector");
+createPlot(id=1, position={405, 134, 811, 420}, y={"solarThermal.senTCold.T", "solarThermal.senTHot.T"}, range={0.0, 90000.0, -200.0, 1800.0}, grid=true, filename="StorageSolarCollector.mat", colors={{28,108,200}, {238,46,47}}, displayUnits={{"degC"}, {"degC"}});
+createPlot(id=2, position={104, 0, 742, 420}, y={"bufferStorage.TTop", "bufferStorage.TBottom"}, range={0.0, 90000.0, 25.0, 65.0}, grid=true, filename="StorageSolarCollector.mat", colors={{28,108,200}, {238,46,47}}, displayUnits={{"degC"}, {"degC"}});
