@@ -200,7 +200,7 @@ protected
   end checkDpCurves;
 
 initial equation
-  assert(pressureCurvePer.n==1 and pressureCurveSelected.n==1,  "\n+++++++++++++++++++++++++++++++++++++++++++\nNumber of outputs in tables in component "+getInstanceName()+" must equal 1, but they are "+String(pressureCurvePer.n)+" and "+String(pressureCurveSelected.n)+".\n+++++++++++++++++++++++++++++++++++++++++++");
+  assert(pressureCurveSelected.n==1,  "\n+++++++++++++++++++++++++++++++++++++++++++\nNumber of outputs of table component "+getInstanceName()+".pressureCurveSelected must equal 1, but they are "+String(pressureCurveSelected.n)+".\n+++++++++++++++++++++++++++++++++++++++++++");
   assert(pressureCurveSelected.table[1, 1] == 0.0,
     "\n+++++++++++++++++++++++++++++++++++++++++++\nParameterization error in component ("+getInstanceName()+".pressureCurveSelected):\nThe mover's (pump or fan) curve must have first point at V_flow = 0.0 m3/s.\n+++++++++++++++++++++++++++++++++++++++++++",
     AssertionLevel.error);
