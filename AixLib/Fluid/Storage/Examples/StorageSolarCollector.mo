@@ -5,23 +5,22 @@ model StorageSolarCollector
 
   replaceable package Medium = AixLib.Media.Water;
 
-  AixLib.Fluid.Storage.Storage storage(
+  AixLib.Fluid.Storage.BufferStorage
+                               bufferStorage(
+    redeclare package MediumHC1 = Medium,
+    redeclare package MediumHC2 = Medium,
+    m1_flow_nominal=solarThermal.m_flow_nominal,
+    m2_flow_nominal=solarThermal.m_flow_nominal,
+    mHC1_flow_nominal=solarThermal.m_flow_nominal,
+    useHeatingCoil2=false,
+    useHeatingRod=false,
+    redeclare AixLib.DataBase.Storage.Generic_New_2000l data(hHC1Up=2.1),
     n=10,
-    V_HE=0.05,
-    kappa=0.4,
-    beta=350e-6,
-    A_HE=20,
-    lambda_ins=0.04,
-    s_ins=0.1,
     hConIn=1500,
     hConOut=15,
-    k_HE=1500,
-    d=1.5,
-    h=2.5,
     redeclare package Medium = Medium,
-    m_flow_nominal_layer=solarThermal.m_flow_nominal,
-    m_flow_nominal_HE=solarThermal.m_flow_nominal)
-                                       annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
+    hConHC1=1500)                      annotation (Placement(transformation(extent={{-10,14},
+            {-30,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-60,14},
             {-40,34}})));
   AixLib.Obsolete.Year2021.Fluid.Movers.Pump pump(
@@ -92,16 +91,8 @@ model StorageSolarCollector
     offset={273.15,0.01})
     annotation (Placement(transformation(extent={{10,32},{30,52}})));
 equation
-  connect(fixedTemperature.port, storage.heatPort) annotation(Line(points={{-40,24},
-          {-28,24}},                                                                                color = {191, 0, 0}));
   connect(booleanExpression.y, pump.IsNight) annotation(Line(points={{25,70},{
           2.2,70}},                                                                             color = {255, 0, 255}));
-  connect(pump.port_b, storage.port_a_heatGenerator) annotation(Line(points={{-8,60},
-          {-8,32.8},{-11.6,32.8}},                                                                                     color = {0, 127, 255}));
-  connect(pipe.port_a, storage.port_b_heatGenerator) annotation(Line(points={{-6,0},{
-          -8,0},{-8,16},{-11.6,16}},                                                                                        color = {0, 127, 255}));
-  connect(pipe1.port_b, storage.port_a_consumer) annotation(Line(points={{-20,-16},
-          {-20,14}},                                                                                           color = {0, 127, 255}));
   connect(hotSummerDay.y[2], solarThermal.Irradiation) annotation(Line(points={{31,42},
           {31,10},{34,10}},                                                                                           color = {0, 0, 127}));
   connect(hotSummerDay.y[1], solarThermal.T_air) annotation(Line(points={{31,42},
@@ -122,9 +113,6 @@ equation
   connect(boundary_ph1.ports[1], pipe1.port_a) annotation (Line(
       points={{-46,-16},{-40,-16}},
       color={0,127,255}));
-  connect(boundary_ph2.ports[1], storage.port_b_consumer) annotation (Line(
-      points={{-66,52},{-20,52},{-20,34}},
-      color={0,127,255}));
   connect(boundary_p.ports[1], pump.port_a) annotation (Line(
       points={{-66,80},{-36,80},{-8,80}},
       color={0,127,255}));
@@ -133,6 +121,18 @@ equation
       color={0,0,127}));
   connect(const1.y, add.u1) annotation (Line(points={{78.4,24},{85.6,24},{85.6,
           25.2}}, color={0,0,127}));
+  connect(boundary_ph2.ports[1], bufferStorage.fluidportTop2) annotation (Line(
+        points={{-66,52},{-50,52},{-50,50},{-23.125,50},{-23.125,34.1}}, color=
+          {0,127,255}));
+  connect(pipe1.port_b, bufferStorage.fluidportBottom2) annotation (Line(points
+        ={{-20,-16},{-16,-16},{-16,0},{-22.875,0},{-22.875,13.9}}, color={0,127,
+          255}));
+  connect(fixedTemperature.port, bufferStorage.heatportOutside) annotation (
+      Line(points={{-40,24},{-34,24},{-34,24.6},{-29.75,24.6}}, color={191,0,0}));
+  connect(pipe.port_a, bufferStorage.portHC1Out) annotation (Line(points={{-6,0},
+          {-6,26.6},{-9.875,26.6}}, color={0,127,255}));
+  connect(bufferStorage.portHC1In, pump.port_b) annotation (Line(points={{-9.75,
+          29.7},{-9.75,44.85},{-8,44.85},{-8,60}}, color={0,127,255}));
   annotation (experiment(StopTime = 172800, Interval = 60),Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
