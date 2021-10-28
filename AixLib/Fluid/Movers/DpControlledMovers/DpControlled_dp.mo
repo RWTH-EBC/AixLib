@@ -12,18 +12,15 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
       final m_flow(max = if allowFlowReversal then +Modelica.Constants.inf else 0)));
 
 
-  Modelica.Blocks.Interfaces.RealInput dpMea(
-    final quantity="PressureDifference",
-    final displayUnit="Pa",
-    final unit="Pa")=gain.u if prescribeSystemPressure
-    "Measurement of pressure difference between two points where the set point should be obtained"
-    annotation (Placement(transformation(
+  replaceable parameter AixLib.Fluid.Movers.Data.Generic per(
+    pressure=pressureCurve_default)
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
+    annotation (choicesAllMatching=true,
+      Placement(transformation(extent={{12,22},{32,42}}, iconTransformation(
         extent={{20,-20},{-20,20}},
         rotation=90,
-        origin={-20,120}), iconTransformation(
-        extent={{20,-20},{-20,20}},
-        rotation=90,
-        origin={-40,120})));
+        origin={-40,120}))));
 
   parameter Modelica.SIunits.PressureDifference dp_nominal(
     min=0,
@@ -32,12 +29,6 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per"
     annotation(Dialog(group="Nominal condition"));
-  replaceable parameter AixLib.Fluid.Movers.Data.Generic per(
-    pressure=pressureCurve_default)
-    constrainedby AixLib.Fluid.Movers.Data.Generic
-    "Record with performance data"
-    annotation (choicesAllMatching=true,
-      Placement(transformation(extent={{12,22},{32,42}})));
   parameter AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpTotal
                                                                            "Type of mover control";
   parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_default(
@@ -89,6 +80,24 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
       senVolFlo.p_start,
       senVolFlo.T_start,
       senVolFlo.X_start)) "Initial or guess value of density" annotation (Dialog(tab="Sensor", group="Initialization"));
+
+  // Table parameters
+  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments "Smoothness of table interpolation"
+    annotation (Dialog(tab="Curve / Table", group="Table data interpretation"));
+  parameter Boolean verboseExtrapolation=false "= true, if warning messages are to be printed if table input is outside the definition range"
+    annotation (Dialog(tab="Curve / Table", group="Table data interpretation"));
+
+  Modelica.Blocks.Interfaces.RealInput dpMea(
+    final quantity="PressureDifference",
+    final displayUnit="Pa",
+    final unit="Pa")=gain.u if prescribeSystemPressure
+    "Measurement of pressure difference between two points where the set point should be obtained"
+    annotation (Placement(transformation(
+        extent={{20,-20},{-20,20}},
+        rotation=90,
+        origin={-20,120})));
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat dissipation to environment" annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
   AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(
     redeclare final package Medium = Medium,
@@ -145,11 +154,6 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     final heads=dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(per.speeds, 1)},
     final prescribeSystemPressure=prescribeSystemPressure) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments "Smoothness of table interpolation"
-    annotation (Dialog(tab="Curve / Table", group="Table data interpretation"));
-  parameter Boolean verboseExtrapolation=false "= true, if warning messages are to be printed if table input is outside the definition range"
-    annotation (Dialog(tab="Curve / Table", group="Table data interpretation"));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat dissipation to environment" annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Modelica.Blocks.Interfaces.RealOutput P(quantity="Power", final unit="W")
                     "Electrical power consumed"
     annotation (Placement(transformation(extent={{100,70},{120,90}}),
