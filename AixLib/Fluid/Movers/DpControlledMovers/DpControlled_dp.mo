@@ -190,6 +190,29 @@ protected
 
   final parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start = Medium.specificEnthalpy(sta_start)
     "Start value for outflowing enthalpy";
+  final parameter Modelica.SIunits.VolumeFlowRate V_flow_min = min(min(pressureCurve_default.V_flow), min(min(pressureCurve_dpConst.V_flow), min(pressureCurve_dpVar.V_flow))) "Get minimum of three vectors";
+  final parameter Modelica.SIunits.VolumeFlowRate V_flow_max = max(max(pressureCurve_default.V_flow), max(max(pressureCurve_dpConst.V_flow), max(pressureCurve_dpVar.V_flow))) "Get maximum of three vectors";
+
+  constant Integer n_sup_pts = 100 "Supporting points";
+  final parameter Modelica.SIunits.PressureDifference dps_default[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_default.V_flow,pressureCurve_default.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max);
+  final parameter Modelica.SIunits.PressureDifference dps_dpConst[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_dpConst.V_flow,pressureCurve_dpConst.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max);
+  final parameter Modelica.SIunits.PressureDifference dps_dpVar[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_dpVar.V_flow,pressureCurve_dpVar.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max);
+
+  function checkDpCurves
+    input Modelica.SIunits.PressureDifference dps_default[:];
+    input Modelica.SIunits.PressureDifference dps_other[:];
+    input Integer n_sup_pts(min=2) "Supporting points";
+    output Boolean dps_error "Use a boolean to avoid multiple assertion errors to be printed";
+  algorithm
+    dps_error := false;
+    for i in 1:1:n_sup_pts loop
+     if dps_error == false and dps_other[i]<=dps_default[i] then
+       dps_error :=false;
+     else
+       dps_error :=true;
+     end if;
+    end for;
+  end checkDpCurves;
 
 initial equation
   assert(pressureCurvePer.n==1 and pressureCurveSelected.n==1,  "\n+++++++++++++++++++++++++++++++++++++++++++\nNumber of outputs in tables in component "+getInstanceName()+" must equal 1, but they are "+String(pressureCurvePer.n)+" and "+String(pressureCurveSelected.n)+".\n+++++++++++++++++++++++++++++++++++++++++++");
@@ -199,6 +222,14 @@ initial equation
   assert(pressureCurveSelected.table[size(pressureCurveSelected.table, 1), size(pressureCurveSelected.table, 2)] == 0.0,
     "\n+++++++++++++++++++++++++++++++++++++++++++\nParameterization error in component ("+getInstanceName()+".pressureCurveSelected):\nThe mover's (pump or fan) curve must have last point at dp = 0.0 Pa.\n+++++++++++++++++++++++++++++++++++++++++++",
     AssertionLevel.error);
+  // Check on the basis of n supporting points if both controlled curves are correct parametrized so that they lie below the default curve.
+  assert(checkDpCurves(dps_default, dps_dpConst, n_sup_pts)==false,
+    "\n+++++++++++++++++++++++++++++++++++++++++++\nParameterization error in component ("+getInstanceName()+".pressureCurve_dpConst):\nThe dp values of the curve must be less or equal the default/total mover's curve.\n+++++++++++++++++++++++++++++++++++++++++++",
+     AssertionLevel.error);
+  assert(checkDpCurves(dps_default, dps_dpVar, n_sup_pts)==false,
+    "\n+++++++++++++++++++++++++++++++++++++++++++\nParameterization error in component ("+getInstanceName()+".pressureCurve_dpVar):\nThe dp values of the curve must be less or equal the default/total mover's curve.\n+++++++++++++++++++++++++++++++++++++++++++",
+    AssertionLevel.error);
+
 equation
   connect(mov.port_b, port_b)
     annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
