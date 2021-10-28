@@ -151,7 +151,7 @@ equation
           -147.4,6},{-130,6},{-130,76},{-78,76}}, color={0,0,127}));
   connect(getTStorageUpper.y, hPControllerOnOff.TMea)
     annotation (Line(points={{-139,68},{-78,68}}, color={0,0,127}));
-  annotation (experiment(Tolerance=1e-6, StopTime=86400), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
+  annotation (experiment(Tolerance=1e-6, StartTime=0, StopTime=86400), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
         "Simulate and plot"), Documentation(revisions="<html><ul>
   <li>
     <i>May 5, 2021</i> by Fabian Wüllhorst:<br/>
