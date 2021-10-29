@@ -363,50 +363,171 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
         preferredView="info",
         defaultComponentName="pum",
-    Documentation(info="<html>
-<p>This model represents a pump or fan which includes already a <b>controller</b>. Be aware that this model does not only represent the physical behavior of an HVAC component but also controls this HVAC component.</p>
-<p>In addition to the standard characteristic curve (should equal <span style=\"font-family: Courier New; font-size: 8pt;\">per.pressure</span>), the controller is able to store two further characteristic/control curves. This enables the user to quickly select between the two common control modes <i>constant pressure</i> (<span style=\"font-family: Courier New; font-size: 8pt;\">dpConst</span>) and <i>variable pressure</i> (<span style=\"font-family: Courier New; font-size: 8pt;\">dpVar</span>). The common control modes of pumps are concisely explained in the referenced white paper [1].</p>
-<p>Often, the <a href=\"AixLib.Fluid.Movers.FlowControlled_dp\">AixLib.Fluid.Movers.FlowControlled_dp</a>. This means no speed control is possible. Please use <a href=\"AixLib.Fluid.Movers.SpeedControlled_y\">AixLib.Fluid.Movers.SpeedControlled_y</a> for this application.</p>
-<p>The model has a standard parametrization for the three curves basing on the parameter <span style=\"font-family: Courier New; font-size: 8pt;\">m_flow_nominal</span> and <span style=\"font-family: Courier New; font-size: 8pt;\">dp_nominal</span>. See the figure and table below. </p>
-<p><img height=\"300\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\"/> </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
-<td valign=\"middle\"><p align=\"center\"><b><span style=\"font-family: Arial;\">m_flow   </span></b></p></td>
-<td valign=\"middle\"><p align=\"center\"><b><span style=\"font-family: Arial;\">dp_total   </span></b></p></td>
-<td valign=\"middle\"><p align=\"center\"><b><span style=\"font-family: Arial;\">dp_constCtrl   </span></b></p></td>
-<td valign=\"middle\"><p align=\"center\"><b><span style=\"font-family: Arial;\">dp_varCtrl   </span></b></p></td>
-</tr>
-<tr>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">0</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">1.3</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">1</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">0.5</span></p></td>
-</tr>
-<tr>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">1</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">1</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">1</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">1</span></p></td>
-</tr>
-<tr>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">1.5</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">0.75</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">0.75</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">0.75</span></p></td>
-</tr>
-<tr>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">2</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">0</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">0</span></p></td>
-<td valign=\"middle\"><p><span style=\"font-family: Arial;\">0</span></p></td>
-</tr>
+    Documentation(info="<html><p>
+  This model represents a pump or fan which includes already a
+  <b>controller</b>. Be aware that this model does not only represent
+  the physical behavior of an HVAC component but also controls this
+  HVAC component.
+</p>
+<p>
+  In addition to the standard characteristic curve (should equal
+  <span style=
+  \"font-family: Courier New; font-size: 8pt;\">per.pressure</span>), the
+  controller is able to store two further characteristic/control
+  curves. This enables the user to quickly select between the two
+  common control modes <i>constant pressure</i> (<span style=
+  \"font-family: Courier New; font-size: 8pt;\">dpConst</span>) and
+  <i>variable pressure</i> (<span style=
+  \"font-family: Courier New; font-size: 8pt;\">dpVar</span>). The common
+  control modes of pumps are concisely explained in the referenced
+  white paper [1].
+</p>
+<p>
+  Often, the <a href=
+  \"AixLib.Fluid.Movers.FlowControlled_dp\">AixLib.Fluid.Movers.FlowControlled_dp</a>.
+  This means no speed control is possible. Please use <a href=
+  \"AixLib.Fluid.Movers.SpeedControlled_y\">AixLib.Fluid.Movers.SpeedControlled_y</a>
+  for this application.
+</p>
+<p>
+  The model has a standard parametrization for the three curves basing
+  on the parameter <span style=
+  \"font-family: Courier New; font-size: 8pt;\">m_flow_nominal</span> and
+  <span style=
+  \"font-family: Courier New; font-size: 8pt;\">dp_nominal</span>. See
+  the figure and table below.
+</p>
+<p>
+  <img height=\"300\" src=
+  \"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\">
+</p>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+  <tr>
+    <td valign=\"middle\">
+      <p style=\"text-align:center;\">
+        <b><span style=\"font-family: Arial;\">m_flow</span></b>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p style=\"text-align:center;\">
+        <b><span style=\"font-family: Arial;\">dp_total</span></b>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p style=\"text-align:center;\">
+        <b><span style=\"font-family: Arial;\">dp_constCtrl</span></b>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p style=\"text-align:center;\">
+        <b><span style=\"font-family: Arial;\">dp_varCtrl</span></b>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">0</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">1.3</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">1</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">0.5</span>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">1</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">1</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">1</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">1</span>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">1.5</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">0.75</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">0.75</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">0.75</span>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">2</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">0</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">0</span>
+      </p>
+    </td>
+    <td valign=\"middle\">
+      <p>
+        <span style=\"font-family: Arial;\">0</span>
+      </p>
+    </td>
+  </tr>
 </table>
-<p><h3>References<h3></p>
-<p>[1] Robinson, Reece. 2019. Pumping Control Methods and Their Impact on System Effciency. <a href=\"https://www.esmagazine.com/ext/resources/images/WhitePapers/CBS-US-Whitepaper.pdf\">Link to PDF</a>. </p>
+<h3>
+  References
+</h3>
+<p>
+  [1] Robinson, Reece. 2019. Pumping Control Methods and Their Impact
+  on System Effciency. <a href=
+  \"https://www.esmagazine.com/ext/resources/images/WhitePapers/CBS-US-Whitepaper.pdf\">
+  Link to PDF</a>.
+</p>
 </html>", revisions="<html>
- <ul>
- <li>October 28, 2021, by Philipp Mehrfeld:<br/>
- <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1151\">#1151</a> Added model to library.
- </li>
- </ul>
- </html>"));
+<ul>
+  <li>October 28, 2021, by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1151\">#1151</a>
+    Added model to library.
+  </li>
+</ul>
+</html>"));
 end DpControlled_dp;
