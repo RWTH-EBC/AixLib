@@ -12,7 +12,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
       final m_flow(max = if allowFlowReversal then +Modelica.Constants.inf else 0)));
 
 
-  replaceable parameter Data.Generic per(pressure=pressureCurve_default) "Record with performance data"
+  replaceable parameter AixLib.Fluid.Movers.Data.Generic per(pressure=pressureCurve_default) "Record with performance data"
     annotation (choicesAllMatching=true,
     Dialog(group="Machine characteristics"),
     Placement(transformation(extent={{12,22},{32,42}})));
@@ -24,18 +24,18 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per"
     annotation(Dialog(group="Nominal condition"));
-  parameter Types.CtrlType ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpTotal "Type of mover control" annotation (Dialog(group="Control characteristics"));
-  parameter BaseClasses.Characteristics.flowParameters pressureCurve_default(
+  parameter AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpTotal "Type of mover control" annotation (Dialog(group="Control characteristics"));
+  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_default(
       V_flow=m_flow_nominal/rho_default*{0,1,1.5,2},
       dp=dp_nominal*{1.3,1,0.75,0})
     "General mover curve: volume flow rate vs. total pressure head"
     annotation (Dialog(group="Machine characteristics"));
-  parameter BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
+  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
       V_flow=m_flow_nominal/rho_default*{0,1,1.5,2},
       dp=dp_nominal*{1,1,0.75,0})
     "dpConst control: volume flow rate vs. total pressure head"
     annotation(Dialog(enable=(ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst), group="Control characteristics"));
-  parameter BaseClasses.Characteristics.flowParameters pressureCurve_dpVar(
+  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpVar(
       V_flow=m_flow_nominal/rho_default*{0,1,1.5,2},
       dp=dp_nominal*{0.5,1,0.75,0})
     "dpVar control: volume flow rate vs. total pressure head"
