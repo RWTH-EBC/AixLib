@@ -12,15 +12,10 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
       final m_flow(max = if allowFlowReversal then +Modelica.Constants.inf else 0)));
 
 
-  replaceable parameter AixLib.Fluid.Movers.Data.Generic per(
-    pressure=pressureCurve_default)
-    constrainedby AixLib.Fluid.Movers.Data.Generic
-    "Record with performance data"
+  replaceable parameter Data.Generic per(pressure=pressureCurve_default) "Record with performance data"
     annotation (choicesAllMatching=true,
-      Placement(transformation(extent={{12,22},{32,42}}, iconTransformation(
-        extent={{20,-20},{-20,20}},
-        rotation=90,
-        origin={-40,120}))));
+    Dialog(group="Machine characteristics"),
+    Placement(transformation(extent={{12,22},{32,42}})));
 
   parameter Modelica.SIunits.PressureDifference dp_nominal(
     min=0,
@@ -29,31 +24,35 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per"
     annotation(Dialog(group="Nominal condition"));
-  parameter AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpTotal
-                                                                           "Type of mover control";
-  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_default(
-    V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
-    dp =     dp_nominal * {1.3, 1, 0.75, 0}) "General mover curve: Volume flow rate vs. total pressure rise";
-  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
-    V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
-    dp =     dp_nominal * {1, 1, 0.75, 0}) "dpConst control: Volume flow rate vs. total pressure rise"
-    annotation(Dialog(enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst)));
-
-  parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_dpVar(
-    V_flow = m_flow_nominal/rho_default * {0, 1, 1.5, 2},
-    dp =     dp_nominal * {0.5, 1, 0.75, 0}) "dpVar control: Volume flow rate vs. total pressure rise"
-    annotation(Dialog(enable=(ctrlType==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar)));
+  parameter Types.CtrlType ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpTotal "Type of mover control" annotation (Dialog(group="Control characteristics"));
+  parameter BaseClasses.Characteristics.flowParameters pressureCurve_default(
+      V_flow=m_flow_nominal/rho_default*{0,1,1.5,2},
+      dp=dp_nominal*{1.3,1,0.75,0})
+    "General mover curve: volume flow rate vs. total pressure head"
+    annotation (Dialog(group="Machine characteristics"));
+  parameter BaseClasses.Characteristics.flowParameters pressureCurve_dpConst(
+      V_flow=m_flow_nominal/rho_default*{0,1,1.5,2},
+      dp=dp_nominal*{1,1,0.75,0})
+    "dpConst control: volume flow rate vs. total pressure head"
+    annotation(Dialog(enable=(ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst), group="Control characteristics"));
+  parameter BaseClasses.Characteristics.flowParameters pressureCurve_dpVar(
+      V_flow=m_flow_nominal/rho_default*{0,1,1.5,2},
+      dp=dp_nominal*{0.5,1,0.75,0})
+    "dpVar control: volume flow rate vs. total pressure head"
+    annotation(Dialog(enable=(ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar), group="Control characteristics"));
 
   parameter Boolean addPowerToMedium=true
     "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)";
-
   parameter Boolean nominalValuesDefineDefaultPressureCurve = false
     "Set to true to avoid warning if m_flow_nominal and dp_nominal are used to construct the default pressure curve";
-  parameter Boolean prescribeSystemPressure=false "=true, to control mover such that pressure difference is obtained across two remote points in system" annotation (Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Time tauMov=1 "Time constant in mover (pump or fan) of fluid volume for nominal flow, used if energy or mass balance is dynamic"
+  parameter Boolean prescribeSystemPressure=false
+    "=true, to control mover such that pressure difference is obtained across two remote points in system"
+    annotation (Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.Time tauMov=1
+    "Time constant in mover (pump or fan) of fluid volume for nominal flow, used if energy or mass balance is dynamic"
     annotation (Dialog(tab="Dynamics",
-                        group="Nominal condition",
-                        enable=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState or massDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
+                       group="Nominal condition",
+                       enable=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState or massDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
 
   // Classes used to implement the filtered speed
   parameter Boolean use_inputFilter=true
@@ -65,16 +64,19 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
   parameter Modelica.Blocks.Types.Init init=Modelica.Blocks.Types.Init.InitialOutput
     "Type of initialization (no init/steady state/initial state/initial output)"
     annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
-  parameter Real y_start(min=0, max=1, unit="1")=0 "Initial value of speed"
+  parameter Real y_start(min=0, max=1, unit="1")=0
+    "Initial value of speed"
     annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
 
   // Sensor parameters
-  parameter Modelica.SIunits.PressureDifference dp_start=0 "Initial value of pressure raise" annotation (Dialog(
-      tab="Dynamics",
-      group="Filtered speed",
-      enable=use_inputFilter));
-  parameter Modelica.SIunits.Time tauSen=0 "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)" annotation (Dialog(tab="Sensor"));
-  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState "Type of initialization (InitialState and InitialOutput are identical)"
+  parameter Modelica.SIunits.PressureDifference dp_start=0
+    "Initial value of pressure raise"
+    annotation (Dialog(tab="Dynamics", group="Filtered speed", enable=use_inputFilter));
+  parameter Modelica.SIunits.Time tauSen=0
+    "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
+    annotation (Dialog(tab="Sensor"));
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
+    "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Sensor", group="Initialization"));
   parameter Modelica.Media.Interfaces.Types.Density d_start=Medium.density(Medium.setState_pTX(
       senVolFlo.p_start,
@@ -82,9 +84,11 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
       senVolFlo.X_start)) "Initial or guess value of density" annotation (Dialog(tab="Sensor", group="Initialization"));
 
   // Table parameters
-  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments "Smoothness of table interpolation"
+  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
+    "Smoothness of table interpolation"
     annotation (Dialog(tab="Curve / Table", group="Table data interpretation"));
-  parameter Boolean verboseExtrapolation=false "= true, if warning messages are to be printed if table input is outside the definition range"
+  parameter Boolean verboseExtrapolation=false
+    "= true, if warning messages are to be printed if table input is outside the definition range"
     annotation (Dialog(tab="Curve / Table", group="Table data interpretation"));
 
   Modelica.Blocks.Interfaces.RealInput dpMea(
@@ -97,7 +101,9 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
         rotation=90,
         origin={-20,120})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat dissipation to environment" annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
+    "Heat dissipation to environment"
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
   AixLib.Fluid.Sensors.VolumeFlowRate senVolFlo(
     redeclare final package Medium = Medium,
@@ -109,12 +115,19 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     final d_start=d_start,
     final T_start=T_start,
     final p_start=p_start,
-    final X_start=X_start) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    final X_start=X_start)
+    "Sensor to measure volume flow rate"
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   Modelica.Blocks.Tables.CombiTable1D pressureCurveSelected(
     final tableOnFile=false,
-    final table=if (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst) then [cat(1, pressureCurve_dpConst.V_flow),cat(1, pressureCurve_dpConst.dp)] elseif (ctrlType ==
-        AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar) then [cat(1, pressureCurve_dpVar.V_flow),cat(1, pressureCurve_dpVar.dp)] else [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
+    final table=
+      if (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst) then
+        [cat(1, pressureCurve_dpConst.V_flow),cat(1, pressureCurve_dpConst.dp)]
+      elseif (ctrlType ==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar) then
+        [cat(1, pressureCurve_dpVar.V_flow),cat(1, pressureCurve_dpVar.dp)]
+      else
+        [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
     final tableName="NoName",
     final fileName="NoName",
     final verboseRead=true,
@@ -124,7 +137,8 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     u(each final unit="m3/s"),
     y(each final unit="Pa"),
     final verboseExtrapolation=verboseExtrapolation)
-                             annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
+    "Table with points of selected curve to calculate dp from V_flow"
+    annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
 
   AixLib.Fluid.Movers.FlowControlled_dp mov(
     redeclare final package Medium = Medium,
@@ -152,44 +166,52 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     final dp_nominal=dp_nominal,
     final constantHead=dp_nominal,
     final heads=dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(per.speeds, 1)},
-    final prescribeSystemPressure=prescribeSystemPressure) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    final prescribeSystemPressure=prescribeSystemPressure)
+    "Mover: pump or fan"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-  Modelica.Blocks.Interfaces.RealOutput P(quantity="Power", final unit="W")
-                    "Electrical power consumed"
-    annotation (Placement(transformation(extent={{100,70},{120,90}}),
-        iconTransformation(extent={{100,80},{120,100}})));
+  Modelica.Blocks.Interfaces.RealOutput P(final quantity="Power", final unit="W")
+    "Electrical power consumed"
+    annotation (Placement(transformation(extent={{100,70},{120,90}}), iconTransformation(extent={{100,80},{120,100}})));
   Modelica.Blocks.Interfaces.RealOutput y_actual(final unit="1")
     "Actual normalised pump speed that is used for computations"
-    annotation (Placement(transformation(extent={{100,50},{120,70}}),
-        iconTransformation(extent={{100,60},{120,80}})));
+    annotation (Placement(transformation(extent={{100,50},{120,70}}), iconTransformation(extent={{100,60},{120,80}})));
   Modelica.Blocks.Interfaces.RealOutput dp_actual(final unit="Pa")
     "Pressure difference between the mover inlet and outlet"
-    annotation (Placement(transformation(extent={{100,30},{120,50}}),
-        iconTransformation(extent={{100,40},{120,60}})));
+    annotation (Placement(transformation(extent={{100,30},{120,50}}), iconTransformation(extent={{100,40},{120,60}})));
+
 protected
-  final parameter Modelica.SIunits.Density rho_default=
-    Medium.density_pTX(
+  final parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
       p=Medium.p_default,
       T=Medium.T_default,
-      X=Medium.X_default) "Default medium density";
+      X=Medium.X_default)
+    "Default medium density";
   final parameter Medium.ThermodynamicState sta_start=Medium.setState_pTX(
-    T=T_start,
-    p=p_start,
-    X=X_start) "Medium state at start values";
+      T=T_start,
+      p=p_start,
+      X=X_start)
+    "Medium state at start values";
 
   final parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start = Medium.specificEnthalpy(sta_start)
     "Start value for outflowing enthalpy";
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_min = min(min(pressureCurve_default.V_flow), min(min(pressureCurve_dpConst.V_flow), min(pressureCurve_dpVar.V_flow))) "Get minimum of three vectors";
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_max = max(max(pressureCurve_default.V_flow), max(max(pressureCurve_dpConst.V_flow), max(pressureCurve_dpVar.V_flow))) "Get maximum of three vectors";
 
-  constant Integer n_sup_pts = 100 "Supporting points";
-  final parameter Modelica.SIunits.PressureDifference dps_default[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_default.V_flow,pressureCurve_default.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max);
-  final parameter Modelica.SIunits.PressureDifference dps_dpConst[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_dpConst.V_flow,pressureCurve_dpConst.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max);
-  final parameter Modelica.SIunits.PressureDifference dps_dpVar[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_dpVar.V_flow,pressureCurve_dpVar.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max);
+  final parameter Modelica.SIunits.VolumeFlowRate V_flow_min = min(min(pressureCurve_default.V_flow), min(min(pressureCurve_dpConst.V_flow), min(pressureCurve_dpVar.V_flow)))
+    "Get minimum of three vectors";
+  final parameter Modelica.SIunits.VolumeFlowRate V_flow_max = max(max(pressureCurve_default.V_flow), max(max(pressureCurve_dpConst.V_flow), max(pressureCurve_dpVar.V_flow)))
+    "Get maximum of three vectors";
+
+  constant Integer n_sup_pts = 100
+    "Supporting points";
+  final parameter Modelica.SIunits.PressureDifference dps_default[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_default.V_flow,pressureCurve_default.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max)
+    "Vector (equally spaced) with pressure heads (default curve) on the basis of n_sup_pts supporting points";
+  final parameter Modelica.SIunits.PressureDifference dps_dpConst[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_dpConst.V_flow,pressureCurve_dpConst.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max)
+    "Vector (equally spaced) with pressure heads (dpConst curve) on the basis of n_sup_pts supporting points";
+  final parameter Modelica.SIunits.PressureDifference dps_dpVar[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_dpVar.V_flow,pressureCurve_dpVar.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max)
+    "Vector (equally spaced) with pressure heads (dpVar curve) on the basis of n_sup_pts supporting points";
 
   function checkDpCurves
-    input Modelica.SIunits.PressureDifference dps_default[:];
-    input Modelica.SIunits.PressureDifference dps_other[:];
+    input Modelica.SIunits.PressureDifference dps_default[:] "Reference vector containing pressure head points";
+    input Modelica.SIunits.PressureDifference dps_other[:] "Comparing vector containing pressure head points";
     input Integer n_sup_pts(min=2) "Supporting points";
     output Boolean dps_error "Use a boolean to avoid multiple assertion errors to be printed";
   algorithm
@@ -204,7 +226,9 @@ protected
   end checkDpCurves;
 
 initial equation
-  assert(pressureCurveSelected.n==1,  "\n+++++++++++++++++++++++++++++++++++++++++++\nNumber of outputs of table component "+getInstanceName()+".pressureCurveSelected must equal 1, but they are "+String(pressureCurveSelected.n)+".\n+++++++++++++++++++++++++++++++++++++++++++");
+  assert(pressureCurveSelected.n==1,
+    "\n+++++++++++++++++++++++++++++++++++++++++++\nNumber of outputs of table component "+getInstanceName()+".pressureCurveSelected must equal 1, but they are "+String(pressureCurveSelected.n)+".\n+++++++++++++++++++++++++++++++++++++++++++",
+    AssertionLevel.error);
   assert(pressureCurveSelected.table[1, 1] == 0.0,
     "\n+++++++++++++++++++++++++++++++++++++++++++\nParameterization error in component ("+getInstanceName()+".pressureCurveSelected):\nThe mover's (pump or fan) curve must have first point at V_flow = 0.0 m3/s.\n+++++++++++++++++++++++++++++++++++++++++++",
     AssertionLevel.error);
@@ -220,15 +244,11 @@ initial equation
     AssertionLevel.error);
 
 equation
-  connect(mov.port_b, port_b)
-    annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
+  connect(mov.port_b, port_b) annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
   connect(port_a, senVolFlo.port_a) annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
   connect(senVolFlo.port_b, mov.port_a) annotation (Line(points={{-60,0},{-10,0}}, color={0,127,255}));
   connect(senVolFlo.V_flow, pressureCurveSelected.u[1]) annotation (Line(points={{-70,11},{-70,40},{-52,40}}, color={0,0,127}));
-  connect(dpMea, mov.dpMea) annotation (Line(
-      points={{-20,120},{-20,80},{-8,80},{-8,12}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
+  connect(dpMea, mov.dpMea) annotation (Line(points={{-20,120},{-20,80},{-8,80},{-8,12}},color={0,0,127},pattern=LinePattern.Dash));
   connect(mov.heatPort, heatPort) annotation (Line(points={{0,-6.8},{0,-100}}, color={191,0,0}));
   connect(mov.P, P) annotation (Line(points={{11,9},{80,9},{80,80},{110,80}}, color={0,0,127}));
   connect(mov.y_actual, y_actual) annotation (Line(points={{11,7},{82,7},{82,60},{110,60}}, color={0,0,127}));
