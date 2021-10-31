@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Chiller;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Chiller;
 model Chiller "Base model of FastHVAC Chiller"
   import AixLib;
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
