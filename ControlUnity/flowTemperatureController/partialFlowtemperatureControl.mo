@@ -14,10 +14,18 @@ partial model partialFlowtemperatureControl
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={56,-100})));
+  Modelica.Blocks.Interfaces.RealInput u
+    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
+  Modelica.Blocks.Interfaces.RealInput PLRin
+    annotation (Placement(transformation(extent={{-120,60},{-80,100}})));
+  Modelica.Blocks.Interfaces.RealOutput PLRset
+    annotation (Placement(transformation(extent={{92,70},{112,90}})));
 equation
   connect(TMea, PID.u_m)
     annotation (Line(points={{56,-100},{56,-12}}, color={0,0,127}));
   connect(PID.y, y) annotation (Line(points={{67,0},{100,0}}, color={0,0,127}));
+  connect(PLRin, PLRset)
+    annotation (Line(points={{-100,80},{102,80}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end partialFlowtemperatureControl;

@@ -1,9 +1,9 @@
 within ControlUnity;
 model Regulation_modularBoiler
-  parameter Real PLRmin=0.15;
+  parameter Real PLRmin=0.15 "Minimum value for partial load ratio, so that the boiler is switched on";
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{44,-20},{64,0}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=PLRmin)
+  Modelica.Blocks.Sources.RealExpression realExpression(y=0)
     annotation (Placement(transformation(extent={{12,-12},{32,8}})));
   Modelica.Blocks.Sources.RealExpression realExpression1
     annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
