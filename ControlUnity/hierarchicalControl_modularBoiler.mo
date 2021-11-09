@@ -52,7 +52,8 @@ model hierarchicalControl_modularBoiler
 
   //Flow temperature control
   replaceable flowTemperatureController.flowTemperatureControl_heatingCurve
-    flowTemperatureControl_heatingCurve if use_advancedControl
+    flowTemperatureControl_heatingCurve(declination=1.2) if
+                                           use_advancedControl
     constrainedby
     ControlUnity.flowTemperatureController.partialFlowtemperatureControl
     annotation (Placement(transformation(extent={{-20,-76},{0,-56}})), choicesAllMatching=true, Dialog(enable= use_advancedControl));
@@ -88,11 +89,16 @@ model hierarchicalControl_modularBoiler
     annotation (Placement(transformation(extent={{-102,-54},{-86,-36}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=Tb) if use_advancedControl
     annotation (Placement(transformation(extent={{-98,-34},{-80,-18}})));
+  Modelica.Blocks.Interfaces.RealOutput valPos if use_advancedControl and severalHeatcurcuits
+    "Valve Position for the admix flowtemprature control"
+    annotation (Placement(transformation(extent={{90,-76},{110,-56}})));
+
   //Flow temperature control
 
 
   parameter Modelica.SIunits.Temperature THotMax=273.15 + 90
     "Maximum temperature, from which the system is switched off" annotation(Dialog(group="Security-related systems"));
+
 
 
 
@@ -145,4 +151,6 @@ connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
           {-61.6,-54.4}}, color={0,0,127}));
   connect(switch2.y, flowTemperatureControl_heatingCurve.u) annotation (Line(
         points={{-43.2,-48},{-34,-48},{-34,-66},{-20,-66}}, color={0,0,127}));
+  connect(flowTemperatureControl_heatingCurve.y, valPos)
+    annotation (Line(points={{0,-66},{100,-66}}, color={0,0,127}));
 end hierarchicalControl_modularBoiler;
