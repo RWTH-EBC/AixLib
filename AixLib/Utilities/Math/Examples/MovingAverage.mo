@@ -16,7 +16,7 @@ equation
   connect(pulse.y, movingAverage.u)
     annotation (Line(points={{-73,0},{-34.4,0}}, color={0,0,127}));
 
-annotation(experiment(Tolerance=1e-6, StopTime=50.0),
+annotation(experiment(Tolerance=1e-6, StopTime=50.0, Algorithm="CVode"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/MovingAverage.mos"
         "Simulate and plot"),
     Documentation(info="<html>
