@@ -6,6 +6,4 @@ AixLib.Types
 
 AixLib.Utilities
 
-AixLib.Systems
-
 AixLib.Fluid.Solar.Thermal.Examples
