@@ -1,14 +1,6 @@
 within ControlUnity.Modules.Tester;
-model BoilerTesterFlowtemperatureControl
+model BoilerTesterFlowtemperatureControl_admixture
   "Test model for the controller model of the boiler"
-  Modelica.Blocks.Sources.Sine sine1(
-    amplitude=-3,
-    freqHz=1/3600,
-    offset=273.15,
-    startTime=10) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={44,90})));
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     T_start=293.15,
@@ -54,17 +46,14 @@ model BoilerTesterFlowtemperatureControl
     TColdNom=333.15,
     QNom=100000,
     n=1,
-    use_advancedControl=true)
-    annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
-  Modelica.Blocks.Sources.Ramp ramp(
-    height=-30,
-    duration=100,
-    offset=274.15) annotation (Placement(transformation(
+    use_advancedControl=true,
+    severalHeatcurcuits=true)
+    annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
+  flowTemperatureController.renturnAdmixture.Admix_modularBoiler
+    admix_modularBoiler annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={82,86})));
-  Modelica.Blocks.Sources.RealExpression PLR(y=1)
-    annotation (Placement(transformation(extent={{-118,24},{-98,44}})));
+        rotation=90,
+        origin={-62,-30})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
           32}},                       color={191,0,0}));
@@ -77,7 +66,7 @@ equation
           60,-16}},           color={0,127,255}));
   connect(boilerControlBus, modularBoiler_Controller.boilerControlBus)
     annotation (Line(
-      points={{-72,36},{-50,36},{-50,33.8},{-24,33.8}},
+      points={{-72,36},{-50,36},{-50,33.8},{-26,33.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -85,19 +74,11 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(vol.ports[2], modularBoiler_Controller.port_b) annotation (Line(
-        points={{64,22},{26,22},{26,24},{-10,24}}, color={0,127,255}));
-  connect(pipe.port_b, modularBoiler_Controller.port_a) annotation (Line(points={{38,-16},
-          {30,-16},{30,6},{-42,6},{-42,24},{-30,24}},          color={0,127,255}));
+        points={{64,22},{26,22},{26,24},{-12,24}}, color={0,127,255}));
+  connect(pipe.port_b, modularBoiler_Controller.port_a) annotation (Line(points=
+         {{38,-16},{30,-16},{30,6},{-42,6},{-42,24},{-32,24}}, color={0,127,255}));
   connect(bou.ports[1], modularBoiler_Controller.port_a) annotation (Line(
-        points={{16,-22},{18,-22},{18,0},{-30,0},{-30,24}}, color={0,127,255}));
-  connect(PLR.y, boilerControlBus.PLR) annotation (Line(points={{-97,34},{-86,
-          34},{-86,36.05},{-71.95,36.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(ramp.y, modularBoiler_Controller.Tamb) annotation (Line(points={{82,
-          75},{82,68},{-15.2,68},{-15.2,34}}, color={0,0,127}));
+        points={{16,-22},{18,-22},{18,0},{-32,0},{-32,24}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end BoilerTesterFlowtemperatureControl;
+end BoilerTesterFlowtemperatureControl_admixture;

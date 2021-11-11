@@ -11,7 +11,8 @@ model hierarchicalControl_modularBoiler
   Modelica.Blocks.Interfaces.RealOutput PLRset
     annotation (Placement(transformation(extent={{90,50},{110,70}})));
 
-
+  Modelica.Blocks.Interfaces.RealInput PLRin
+    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
  //Two position controller
  replaceable twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
     twoPositionController_layers(n=n,
@@ -30,8 +31,7 @@ model hierarchicalControl_modularBoiler
         origin={6,100})));
   emergencySwitch_modularBoiler emergencySwitch_modularBoiler1 if not use_advancedControl
     annotation (Placement(transformation(extent={{-18,46},{2,66}})));
-  Modelica.Blocks.Interfaces.RealInput PLRin if not use_advancedControl
-    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
+
 
   parameter Integer n=3 "Number of layers in the buffer storage" annotation(Dialog(
         group="Two position controller"));
@@ -52,8 +52,7 @@ model hierarchicalControl_modularBoiler
 
   //Flow temperature control
   replaceable flowTemperatureController.flowTemperatureControl_heatingCurve
-    flowTemperatureControl_heatingCurve(declination=1.2) if
-                                           use_advancedControl
+    flowTemperatureControl_heatingCurve if use_advancedControl
     constrainedby
     ControlUnity.flowTemperatureController.partialFlowtemperatureControl
     annotation (Placement(transformation(extent={{-20,-76},{0,-56}})), choicesAllMatching=true, Dialog(enable= use_advancedControl));
@@ -63,15 +62,13 @@ model hierarchicalControl_modularBoiler
     annotation (Placement(transformation(extent={{-120,-98},{-80,-58}})));
 
  emergencySwitch_modularBoiler emergencySwitch_modularBoiler2 if use_advancedControl
-    annotation (Placement(transformation(extent={{14,-36},{34,-16}})));
+    annotation (Placement(transformation(extent={{18,-36},{38,-16}})));
   Modelica.Blocks.Interfaces.RealInput TMeaRet if use_advancedControl
     "Measurement temperature of the return" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-10,-108})));
- Modelica.Blocks.Logical.Switch switch1 if use_advancedControl
-    annotation (Placement(transformation(extent={{72,-4},{92,16}})));
 
   parameter Boolean severalHeatcurcuits=false "If true, there are two or more heat curcuits" annotation(Dialog(enable=use_advancedControl, group="Flow temperature control"), choices(
       choice=true "Several heat curcuits",
@@ -80,9 +77,6 @@ model hierarchicalControl_modularBoiler
   parameter Modelica.SIunits.Temperature Tb=273.15+60 "Fix boiler temperature for return admixture with several heat curcuits" annotation(Dialog(enable=severalHeatCurcuits, group="Flow temperature control"));
   Modelica.Blocks.Logical.Switch switch2 if use_advancedControl
     annotation (Placement(transformation(extent={{-60,-56},{-44,-40}})));
-    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=
-        severalHeatcurcuits) if use_advancedControl
-    annotation (Placement(transformation(extent={{28,-6},{48,14}})));
 
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=
         severalHeatcurcuits) if use_advancedControl
@@ -91,7 +85,7 @@ model hierarchicalControl_modularBoiler
     annotation (Placement(transformation(extent={{-98,-34},{-80,-18}})));
   Modelica.Blocks.Interfaces.RealOutput valPos if use_advancedControl and severalHeatcurcuits
     "Valve Position for the admix flowtemprature control"
-    annotation (Placement(transformation(extent={{90,-76},{110,-56}})));
+    annotation (Placement(transformation(extent={{94,-80},{114,-60}})));
 
   //Flow temperature control
 
@@ -104,29 +98,22 @@ model hierarchicalControl_modularBoiler
 
 equation
   //Advanced or simple control
-  if use_advancedControl then
+  if use_advancedControl then  //advanced control
 connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
-        points={{-10,-108},{-10,-76},{-4.4,-76}}, color={0,0,127}));
-  connect(emergencySwitch_modularBoiler2.PLR_set,
-    flowTemperatureControl_heatingCurve.PLRin) annotation (Line(points={{34,-23},
-            {38,-23},{38,-48},{-30,-48},{-30,-56},{-26,-56},{-26,-58},{-20,-58}},
-                                                            color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.y,
-    emergencySwitch_modularBoiler2.PLR_ein) annotation (Line(points={{0,-66},{8,
-            -66},{8,-27.2},{14,-27.2}},     color={0,0,127}));
+        points={{-10,-108},{-10,-76},{-12,-76}},  color={0,0,127}));
   connect(Tin, emergencySwitch_modularBoiler2.T_ein) annotation (Line(points={{-102,72},
-            {-76,72},{-76,14},{-16,14},{-16,-20.8},{14,-20.8}}, color={0,0,127}));
-   connect(booleanExpression.y, switch1.u2)
-    annotation (Line(points={{49,4},{60,4},{60,6},{70,6}}, color={255,0,255}));
-  connect(flowTemperatureControl_heatingCurve.PLRset, switch1.u3) annotation (
-      Line(points={{0.2,-58},{60,-58},{60,-2},{70,-2}}, color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.y, switch1.u1) annotation (Line(
-        points={{0,-66},{54,-66},{54,14},{70,14}}, color={0,0,127}));
-  connect(switch1.y, PLRset)
-                            annotation (Line(points={{93,6},{98,6},{98,50},{78,
-          50},{78,60},{100,60}}, color={0,0,127}));
-  else
+            {-76,72},{-76,14},{-16,14},{-16,-20.8},{18,-20.8}}, color={0,0,127}));
+   connect(booleanExpression1.y, switch2.u2) annotation (Line(points={{-85.2,-45},
+          {-68.6,-45},{-68.6,-48},{-61.6,-48}}, color={255,0,255}));
+  connect(realExpression.y, switch2.u1) annotation (Line(points={{-79.1,-26},{-70,
+          -26},{-70,-41.6},{-61.6,-41.6}}, color={0,0,127}));
+  connect(Tamb, switch2.u3) annotation (Line(points={{-100,-78},{-68,-78},{-68,-54.4},
+          {-61.6,-54.4}}, color={0,0,127}));
+  connect(switch2.y, flowTemperatureControl_heatingCurve.u) annotation (Line(
+        points={{-43.2,-48},{-34,-48},{-34,-67.6},{-20,-67.6}},
+                                                            color={0,0,127}));
 
+  else //simple control
  connect(PLRin, emergencySwitch_modularBoiler1.PLR_ein) annotation (Line(
         points={{-100,0},{-32,0},{-32,54.8},{-18,54.8}}, color={0,0,127}));
   connect(Tin, emergencySwitch_modularBoiler1.T_ein) annotation (Line(points={{-102,
@@ -142,15 +129,16 @@ connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
 
 
 
+/// unconditioned quantities
 
-  connect(booleanExpression1.y, switch2.u2) annotation (Line(points={{-85.2,-45},
-          {-68.6,-45},{-68.6,-48},{-61.6,-48}}, color={255,0,255}));
-  connect(realExpression.y, switch2.u1) annotation (Line(points={{-79.1,-26},{-70,
-          -26},{-70,-41.6},{-61.6,-41.6}}, color={0,0,127}));
-  connect(Tamb, switch2.u3) annotation (Line(points={{-100,-78},{-68,-78},{-68,-54.4},
-          {-61.6,-54.4}}, color={0,0,127}));
-  connect(switch2.y, flowTemperatureControl_heatingCurve.u) annotation (Line(
-        points={{-43.2,-48},{-34,-48},{-34,-66},{-20,-66}}, color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.y, valPos)
-    annotation (Line(points={{0,-66},{100,-66}}, color={0,0,127}));
+  connect(flowTemperatureControl_heatingCurve.valPos, valPos) annotation (Line(
+        points={{0,-67.6},{50,-67.6},{50,-70},{104,-70}}, color={0,0,127}));
+  connect(flowTemperatureControl_heatingCurve.PLRset,
+    emergencySwitch_modularBoiler2.PLR_ein) annotation (Line(points={{0.2,-58},{
+          8,-58},{8,-27.2},{18,-27.2}}, color={0,0,127}));
+  connect(emergencySwitch_modularBoiler2.PLR_set, PLRset) annotation (Line(
+        points={{38,-23},{58,-23},{58,-22},{82,-22},{82,60},{100,60}}, color={0,
+          0,127}));
+  connect(PLRin, flowTemperatureControl_heatingCurve.PLRin) annotation (Line(
+        points={{-100,0},{-26,0},{-26,-58},{-20,-58}}, color={0,0,127}));
 end hierarchicalControl_modularBoiler;
