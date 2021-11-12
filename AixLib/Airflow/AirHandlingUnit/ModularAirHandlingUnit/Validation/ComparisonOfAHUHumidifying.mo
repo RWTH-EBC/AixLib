@@ -31,7 +31,7 @@ model ComparisonOfAHUHumidifying
     heating=true,
     heatRecovery=false,
     use_PhiSet=false,
-    Twat=273.15,
+    Twat=293.15,
     dp_sup(displayUnit="Pa"),
     dp_eta(displayUnit="Pa"),
     redeclare model humidifier = Components.SprayHumidifier)
