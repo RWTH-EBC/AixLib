@@ -351,8 +351,9 @@ equation
     annotation (Line(points={{134.4,-80},{141.6,-80}}, color={0,0,127}));
   connect(passThroughHea.T_airOut, phi.T) annotation (Line(points={{117,-26},{134,
           -26},{134,-70},{138,-70},{138,-76.8},{141.6,-76.8}}, color={0,0,127}));
-  connect(hea.T_airOut, phi.T) annotation (Line(points={{117,-49},{134,-49},{134,
-          -70},{138,-70},{138,-76.8},{141.6,-76.8}}, color={0,0,127}));
+  connect(hea.T_airOut, phi.T) annotation (Line(points={{117,-49},{134,-49},{
+          134,-70},{138,-70},{138,-76.8},{141.6,-76.8}},
+                                                     color={0,0,127}));
   connect(p_atm.y, phi.p) annotation (Line(points={{134.4,-92},{138,-92},{138,-83.2},
           {141.6,-83.2}}, color={0,0,127}));
   connect(phi.phi, phi_supplyAirOut) annotation (Line(points={{150.4,-80},{156,-80},
