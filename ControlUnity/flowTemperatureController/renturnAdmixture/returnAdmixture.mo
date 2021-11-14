@@ -7,7 +7,7 @@ model returnAdmixture
 
 
 equation
-  connect(u, PID1.u_s) annotation (Line(points={{-100,-24},{-58,-24},{-58,44},{
+  connect(u, PID1.u_s) annotation (Line(points={{-100,-16},{-58,-16},{-58,44},{
           -12,44}}, color={0,0,127}));
  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
        coordinateSystem(preserveAspectRatio=false)));

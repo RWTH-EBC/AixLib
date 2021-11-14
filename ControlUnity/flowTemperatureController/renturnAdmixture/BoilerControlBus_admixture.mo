@@ -1,5 +1,5 @@
-within ControlUnity;
-expandable connector BoilerControlBus_modularBoiler
+within ControlUnity.flowTemperatureController.renturnAdmixture;
+expandable connector BoilerControlBus_admixture
   "Standard data bus with boiler information"
   extends Modelica.Icons.SignalBus;
 
@@ -14,6 +14,21 @@ Modelica.SIunits.TemperatureDifference DeltaTWater "Setpoint temperature differe
 Modelica.SIunits.Temperature TCold "Sensor output TCold";
 Modelica.SIunits.Temperature THot "Sensor output THot";
 Modelica.SIunits.Power EnergyDemand "Energy Demand";
+
+//Control
+
+//Admixture
+ import SI = Modelica.SIunits;
+  AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus
+    pumpBus;
+  Real valveSet(min=0, max=1) "Valve opening setpoint 0..1";
+  Real valveMea(min=0, max=1) "Actual valve opening 0..1";
+  SI.Temperature TFwrdInMea "Flow Temperature into forward line";
+  SI.Temperature TFwrdOutMea "Flow Temperature out of forward line";
+  SI.Temperature TRtrnInMea "Temperature into return line";
+  SI.Temperature TRtrnOutMea "Temperature out of return line";
+  SI.VolumeFlowRate VFlowInMea "Volume flow into forward line";
+  SI.VolumeFlowRate VFlowOutMea "Volume flow out of forward line";
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
@@ -31,4 +46,4 @@ Modelica.SIunits.Power EnergyDemand "Energy Demand";
 </ul>
 
 </html>"));
-end BoilerControlBus_modularBoiler;
+end BoilerControlBus_admixture;

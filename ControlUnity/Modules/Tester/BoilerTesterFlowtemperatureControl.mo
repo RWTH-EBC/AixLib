@@ -75,7 +75,7 @@ equation
     annotation (Line(points={{52,32},{52,4},{58,4}},     color={191,0,0}));
   connect(vol.ports[1],pipe. port_a) annotation (Line(points={{60,22},{60,-16},{
           60,-16}},           color={0,127,255}));
-  connect(boilerControlBus, modularBoiler_Controller.boilerControlBus)
+  connect(boilerControlBus, modularBoiler_Controller.boilerControlBus_Control)
     annotation (Line(
       points={{-72,36},{-50,36},{-50,33.8},{-24,33.8}},
       color={255,204,51},

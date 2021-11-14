@@ -1,11 +1,10 @@
 ﻿within ControlUnity.flowTemperatureController.renturnAdmixture;
 model Admix_modularBoiler
   "Admix circuit with three way valve and pump"
-  extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
+  extends ControlUnity.flowTemperatureController.renturnAdmixture.PartialHydraulicModule_modularBoiler;
 
   parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
-    parameter Integer n=3 "Number of heat curcuits";
 
   parameter AixLib.Fluid.Actuators.Valves.Data.GenericThreeWay valveCharacteristic
     "Valve characteristic of three way valve" annotation (

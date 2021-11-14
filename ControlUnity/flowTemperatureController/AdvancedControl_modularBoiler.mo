@@ -23,7 +23,7 @@ equation
   if use_Bufferstorage then
   else
     connect(Tin, flowTemperatureControl_modularBoiler.TMea) annotation (Line(
-          points={{-100,-4},{-50,-4},{-50,-5.8},{0,-5.8}}, color={0,0,127}));
+          points={{-100,-4},{-50,-4},{-50,-20},{8,-20}}, color={0,0,127}));
   connect(Tamb, flowTemperatureControl_modularBoiler.Tamb) annotation (Line(
         points={{-100,-64},{-52,-64},{-52,-11},{0,-11}}, color={0,0,127}));
     connect(flowTemperatureControl_modularBoiler.PLR, PLRset) annotation (Line(
