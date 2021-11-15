@@ -12,17 +12,18 @@ model Ashrae140Testcase900 "Model of a ERC-Thermal Zone Including CCA and AHU"
     area=48,
     thickness=0.1,
     alpha=20,
+    length=50,
     dynamicHX1(
       m1_flow_nominal=0.1,
       m2_flow_nominal=0.1,
       nNodes=4,
-      dT_nom=3,
+      dT_nom=6,
       Q_nom=6000),
     dynamicHX(
       m1_flow_nominal=0.1,
       m2_flow_nominal=0.1,
       nNodes=4,
-      dT_nom=10,
+      dT_nom=4,
       Q_nom=6000),
     throttlePumpHot(Kv=2, redeclare
         HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -286,6 +287,20 @@ model Ashrae140Testcase900 "Model of a ERC-Thermal Zone Including CCA and AHU"
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={55,-53})));
+  Modelica.Blocks.Sources.RealExpression PowerCold(y=4.18*(Bus.tabsBus.coldThrottleBus.VFlowInMea
+        *(Bus.tabsBus.coldThrottleBus.TFwrdInMea - Bus.tabsBus.coldThrottleBus.TRtrnOutMea)
+         + Bus.ahuBus.coolerBus.hydraulicBus.VFlowInMea*(Bus.ahuBus.coolerBus.hydraulicBus.TFwrdInMea
+         - Bus.ahuBus.coolerBus.hydraulicBus.TRtrnOutMea))*1000)
+    annotation (Placement(transformation(extent={{-10,-128},{50,-108}})));
+  Modelica.Blocks.Sources.RealExpression PowerHeat(y=4.18*(Bus.tabsBus.hotThrottleBus.VFlowInMea
+        *(Bus.tabsBus.hotThrottleBus.TFwrdInMea - Bus.tabsBus.hotThrottleBus.TRtrnOutMea)
+         + Bus.ahuBus.heaterBus.hydraulicBus.VFlowInMea*(Bus.ahuBus.heaterBus.hydraulicBus.TFwrdInMea
+         - Bus.ahuBus.heaterBus.hydraulicBus.TRtrnOutMea))*1000)
+    annotation (Placement(transformation(extent={{-10,-150},{50,-128}})));
+  Modelica.Blocks.Interfaces.RealOutput QFlowCold "Value of Real output"
+    annotation (Placement(transformation(extent={{80,-128},{100,-108}})));
+  Modelica.Blocks.Interfaces.RealOutput QFlowHeat "Value of Real output"
+    annotation (Placement(transformation(extent={{80,-150},{100,-130}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-80,90},{0,90},{0,44.4},{2,44.4}},
@@ -383,8 +398,16 @@ equation
     annotation (Line(points={{73,-54},{84,-54},{84,-42}}, color={0,127,255}));
   connect(bouWaterhot3.ports[1], tabs1.port_a1)
     annotation (Line(points={{55,-48},{80,-48},{80,-42}}, color={0,127,255}));
+  connect(PowerCold.y,QFlowCold)
+    annotation (Line(points={{53,-118},{90,-118}},  color={0,0,127}));
+  connect(PowerHeat.y,QFlowHeat)  annotation (Line(points={{53,-139},{90,-139},
+          {90,-140}},  color={0,0,127}));
+  connect(QFlowHeat,QFlowHeat)
+    annotation (Line(points={{90,-140},{90,-140}},   color={0,0,127}));
   annotation (experiment(
       StopTime=3600,
       Interval=60,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"),
+    Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
+    Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
 end Ashrae140Testcase900;

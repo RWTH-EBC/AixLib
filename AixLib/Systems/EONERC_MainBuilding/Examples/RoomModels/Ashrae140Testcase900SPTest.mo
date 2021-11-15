@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.Examples.RoomModels;
-model Ashrae140Testcase900SP
+model Ashrae140Testcase900SPTest
   "Model of a ERC-Thermal Zone Including CCA and AHU"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -327,12 +327,22 @@ model Ashrae140Testcase900SP
     annotation (Placement(transformation(extent={{80,-128},{100,-108}})));
   Modelica.Blocks.Interfaces.RealOutput QFlowHeat "Value of Real output"
     annotation (Placement(transformation(extent={{80,-150},{100,-130}})));
-  Modelica.Blocks.Interfaces.RealInput QFlowTabsSet
-    "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-148,24},{-108,64}})));
-  Modelica.Blocks.Interfaces.RealInput TAhuSet
-    "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-148,0},{-108,40}})));
+  Modelica.Blocks.Sources.Trapezoid trapezoid(
+    amplitude=10,
+    rising=900,
+    width=3600,
+    falling=900,
+    period=9000,
+    offset=-5)
+    annotation (Placement(transformation(extent={{-190,36},{-170,56}})));
+  Modelica.Blocks.Sources.Trapezoid trapezoid1(
+    amplitude=15,
+    rising=900,
+    width=3600,
+    falling=900,
+    period=9000,
+    offset=285)
+    annotation (Placement(transformation(extent={{-192,0},{-172,20}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-80,90},{0,90},{0,44.4},{2,44.4}},
@@ -448,14 +458,14 @@ equation
           {90,-140}},  color={0,0,127}));
   connect(QFlowHeat,QFlowHeat)
     annotation (Line(points={{90,-140},{90,-140}},   color={0,0,127}));
-  connect(ctrTabsQflow.QFlowSet, QFlowTabsSet) annotation (Line(points={{-66.3,
-          42.1},{-128,42.1},{-128,44}}, color={0,0,127}));
-  connect(ctrAhu.Tset, TAhuSet)
-    annotation (Line(points={{-68,20},{-128,20}}, color={0,0,127}));
+  connect(trapezoid.y, ctrTabsQflow.QFlowSet) annotation (Line(points={{-169,46},
+          {-118,46},{-118,42.1},{-66.3,42.1}}, color={0,0,127}));
+  connect(trapezoid1.y, ctrAhu.Tset) annotation (Line(points={{-171,10},{-108.5,
+          10},{-108.5,20},{-68,20}}, color={0,0,127}));
   annotation (experiment(
       StopTime=3600,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(extent={{-100,-160},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-160},{100,100}})));
-end Ashrae140Testcase900SP;
+end Ashrae140Testcase900SPTest;
