@@ -333,6 +333,8 @@ model Ashrae140Testcase900SP
   Modelica.Blocks.Interfaces.RealInput TAhuSet
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-148,0},{-108,40}})));
+  Modelica.Blocks.Interfaces.RealOutput TAirRoom "Indoor air temperature"
+    annotation (Placement(transformation(extent={{96,40},{116,60}})));
 equation
   connect(weaDat.weaBus,thermalZone1. weaBus) annotation (Line(
       points={{-80,90},{0,90},{0,44.4},{2,44.4}},
@@ -452,6 +454,8 @@ equation
           42.1},{-128,42.1},{-128,44}}, color={0,0,127}));
   connect(ctrAhu.Tset, TAhuSet)
     annotation (Line(points={{-68,20},{-128,20}}, color={0,0,127}));
+  connect(thermalZone1.TAir, TAirRoom) annotation (Line(points={{60.8,50.2},{86,
+          50.2},{86,50},{106,50}}, color={0,0,127}));
   annotation (experiment(
       StopTime=3600,
       Interval=60,
