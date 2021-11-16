@@ -36,8 +36,8 @@ model tester
 equation
   connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
         points={{-16,-108},{-16,-82},{-16,-56},{-16.4,-56}}, color={0,0,127}));
-  connect(Tamb, flowTemperatureControl_heatingCurve.u) annotation (Line(points={
-          {-100,-78},{-66,-78},{-66,-46},{-32,-46}}, color={0,0,127}));
+  connect(Tamb, flowTemperatureControl_heatingCurve.Tamb) annotation (Line(
+        points={{-100,-78},{-66,-78},{-66,-46},{-32,-46}}, color={0,0,127}));
   connect(booleanExpression.y, switch1.u2)
     annotation (Line(points={{41,-52},{52,-52}}, color={255,0,255}));
   connect(flowTemperatureControl_heatingCurve.valPos,

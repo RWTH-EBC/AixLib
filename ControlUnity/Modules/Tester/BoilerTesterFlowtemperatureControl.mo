@@ -55,11 +55,12 @@ model BoilerTesterFlowtemperatureControl
     QNom=100000,
     n=1,
     use_advancedControl=true)
-    annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
+    annotation (Placement(transformation(extent={{-28,14},{-8,34}})));
   Modelica.Blocks.Sources.Ramp ramp(
-    height=-30,
-    duration=100,
-    offset=274.15) annotation (Placement(transformation(
+    height=-20,
+    duration=20000,
+    offset=273.15,
+    startTime=0) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={82,86})));
@@ -77,7 +78,7 @@ equation
           60,-16}},           color={0,127,255}));
   connect(boilerControlBus, modularBoiler_Controller.boilerControlBus_Control)
     annotation (Line(
-      points={{-72,36},{-50,36},{-50,33.8},{-24,33.8}},
+      points={{-72,36},{-50,36},{-50,33.8},{-22,33.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -85,11 +86,11 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(vol.ports[2], modularBoiler_Controller.port_b) annotation (Line(
-        points={{64,22},{26,22},{26,24},{-10,24}}, color={0,127,255}));
+        points={{64,22},{26,22},{26,24},{-8,24}},  color={0,127,255}));
   connect(pipe.port_b, modularBoiler_Controller.port_a) annotation (Line(points={{38,-16},
-          {30,-16},{30,6},{-42,6},{-42,24},{-30,24}},          color={0,127,255}));
+          {30,-16},{30,6},{-42,6},{-42,24},{-28,24}},          color={0,127,255}));
   connect(bou.ports[1], modularBoiler_Controller.port_a) annotation (Line(
-        points={{16,-22},{18,-22},{18,0},{-30,0},{-30,24}}, color={0,127,255}));
+        points={{16,-22},{18,-22},{18,0},{-28,0},{-28,24}}, color={0,127,255}));
   connect(PLR.y, boilerControlBus.PLR) annotation (Line(points={{-97,34},{-86,
           34},{-86,36.05},{-71.95,36.05}}, color={0,0,127}), Text(
       string="%second",
@@ -97,7 +98,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ramp.y, modularBoiler_Controller.Tamb) annotation (Line(points={{82,
-          75},{82,68},{-15.2,68},{-15.2,34}}, color={0,0,127}));
+          75},{82,68},{-13.2,68},{-13.2,34}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterFlowtemperatureControl;

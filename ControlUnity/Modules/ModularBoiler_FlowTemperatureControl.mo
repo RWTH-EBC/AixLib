@@ -108,7 +108,7 @@ model ModularBoiler_FlowTemperatureControl
     bandwidth=2.5,
     redeclare flowTemperatureController.flowTemperatureControl_heatingCurve
       flowTemperatureControl_heatingCurve,
-    severalHeatcurcuits=true,
+    severalHeatcurcuits=false,
     Tb=Tb)
     annotation (Placement(transformation(extent={{-6,50},{14,70}})));
   Regulation_modularBoiler regulation_modularBoiler
@@ -203,11 +203,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(controlBoilerNotManufacturer.mFlowRel, regulation_modularBoiler.mFlow_rel)
-    annotation (Line(points={{-79,54},{-74,54},{-74,54.2},{-62,54.2}}, color={0,
-          0,127}));
-  connect(regulation_modularBoiler.mFlow_relB, fan1.y) annotation (Line(points={{-41.8,
-          55},{-34,55},{-34,20},{-50,20},{-50,12}},        color={0,0,127}));
   connect(hierarchicalControl_modularBoiler1.PLRset, heatGeneratorNoControl.PLR)
     annotation (Line(points={{14,66},{28,66},{28,16},{-16,16},{-16,5.4},{-10,5.4}},
         color={0,0,127}));
@@ -226,13 +221,11 @@ equation
   connect(regulation_modularBoiler.PLRset, hierarchicalControl_modularBoiler1.PLRin)
     annotation (Line(points={{-42,59.6},{-26,59.6},{-26,60},{-6,60}}, color={0,0,
           127}));
-  connect(hierarchicalControl_modularBoiler1.valPos, boilerControlBus_Control.valPos)
-    annotation (Line(points={{14.4,53},{32,53},{32,98},{-40,98}}, color={0,0,
-          127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+  connect(controlBoilerNotManufacturer.mFlowRel, regulation_modularBoiler.mFlow_rel)
+    annotation (Line(points={{-79,54},{-70,54},{-70,54.2},{-62,54.2}}, color={0,
+          0,127}));
+  connect(regulation_modularBoiler.mFlow_relB, fan1.y) annotation (Line(points=
+          {{-41.8,55},{-34,55},{-34,22},{-50,22},{-50,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

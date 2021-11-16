@@ -30,7 +30,7 @@ model Boiler
 equation
   connect(boilerControlBus, modularBoiler_1_1.boilerControlBus) annotation (
       Line(
-      points={{-88,18},{-72,18},{-72,8},{-52,8},{-52,12},{-28.2,12}},
+      points={{-88,18},{-72,18},{-72,8},{-52,8},{-52,11.8},{-32,11.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

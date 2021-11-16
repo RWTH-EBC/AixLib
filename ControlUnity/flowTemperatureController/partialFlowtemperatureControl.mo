@@ -9,7 +9,7 @@ partial model partialFlowtemperatureControl
     Ti=5,
     yMax=1,
     yMin=0) "PI Controller for controlling the valve position"
-            annotation (Placement(transformation(extent={{-30,-26},{-10,-6}})));
+            annotation (Placement(transformation(extent={{-32,-26},{-12,-6}})));
   Modelica.Blocks.Interfaces.RealOutput valPos "Valve position"
     annotation (Placement(transformation(extent={{90,-26},{110,-6}})));
   Modelica.Blocks.Interfaces.RealInput TMea annotation (Placement(
@@ -45,11 +45,11 @@ equation
   connect(PID1.y, switch1.u3) annotation (Line(points={{11,44},{28,44},{28,72},{
           48,72}}, color={0,0,127}));
   connect(u, PID.u_s)
-    annotation (Line(points={{-100,-16},{-32,-16}}, color={0,0,127}));
+    annotation (Line(points={{-100,-16},{-34,-16}}, color={0,0,127}));
   connect(PID.y, valPos)
-    annotation (Line(points={{-9,-16},{100,-16}}, color={0,0,127}));
-  connect(TMea, PID.u_m)
-    annotation (Line(points={{-20,-100},{-20,-28}}, color={0,0,127}));
+    annotation (Line(points={{-11,-16},{100,-16}},color={0,0,127}));
+  connect(TMea, PID.u_m) annotation (Line(points={{-20,-100},{-20,-28},{-22,-28}},
+        color={0,0,127}));
   connect(TMea, PID1.u_m) annotation (Line(points={{-20,-100},{-20,-60},{0,-60},
           {0,32}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

@@ -4,7 +4,7 @@ model twoPositionControllerSimple_modularBoiler "Simple two position controller"
       onOffController(bandwidth=2.5,
                       pre_y_start=false));
 
-  parameter Modelica.SIunits.Temperature T_ref=273.15+60 "Solltemperatur";
+  parameter Modelica.SIunits.Temperature T_ref=273.15+70 "Solltemperatur";
   parameter Real bandwidth=0 "Bandbreite"; //bandwidth=Abgrenzung nach unten und oben, z.B; bandwidth=2 58,60,62
 
   Modelica.Blocks.Sources.RealExpression realExpression1
