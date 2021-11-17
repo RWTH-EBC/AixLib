@@ -152,65 +152,59 @@ within AixLib.Controls.Continuous;
          Line(points={{12,68},{12,34}}),
          Line(points={{-60,34},{12,34}})}),
  defaultComponentName="conPID",
- Documentation(info="<html>
- <p>
- Block of a controller for set point tracking with a hysteresis element that switches the
- controller on and off.
- </p>
- <p>
- If the controller is off, and the control error becomes larger than <code>eOn</code>, then
- the controller switches to on and remains on until the control error is smaller than <code>eOff</code>.
- When the controller is on, the set point tracking can be done using a P-, PI-, or PID-controller.
- In its off-mode, the control output is zero. Thus, the parameters <code>yMin</code> and <code>yMax</code> are
- used to constrain the output of the controller during its on mode only. This can be used, for
- example, to modulate a device between 0.3 and 1.0, and switch it to off when the control error
- is small enough.
- </p>
- </html>", revisions="<html>
- <ul>
- <li>
- June 1, 2020, by Michael Wetter:<br/>
- Corrected wrong convention of reverse and direct action.<br/>
- Changed default configuration from PID to PI.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1365\">issue 1365</a>.
- </li>
- <li>
- September 29, 2016, by Michael Wetter:<br/>
- Removed parameter <code>limitsAtInit</code> because it is no longer
- used in the PID controller.
- </li>
- <li>
- April 13, 2016, by Michael Wetter:<br/>
- Set <code>zer(final k=0)</code> and made swi, zer and zer1 protected
- which they are also for
- <a href=\"modelica://AixLib.Controls.Continuous.PIDHysteresis\">
- AixLib.Controls.Continuous.PIDHysteresis</a>.
- These changes are not backwards compatible.
- </li>
- <li>
- March 15, 2016, by Michael Wetter:<br/>
- Changed the default value to <code>strict=true</code>
- in order to avoid events when the controller saturates.
- Also assigned propogated values to be <code>final</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
- </li>
- <li>
- February 24, 2010, by Michael Wetter:<br/>
- Changed PID controller from Modelica Standard Library to
- PID controller from Buildings library to allow reverse control action.
- </li>
- <li>
- October 2, 2009, by Michael Wetter:<br/>
- Fixed error in default parameter <code>eOn</code>.
- Fixed error by introducing parameter <code>Td</code>,
- which used to be hard-wired in the PID controller.
- </li>
- <li>
- February 14, 2009, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),  
+ Documentation(info="<html><p>
+  Block of a controller for set point tracking with a hysteresis
+  element that switches the controller on and off.
+</p>
+<p>
+  If the controller is off, and the control error becomes larger than
+  <code>eOn</code>, then the controller switches to on and remains on
+  until the control error is smaller than <code>eOff</code>. When the
+  controller is on, the set point tracking can be done using a P-, PI-,
+  or PID-controller. In its off-mode, the control output is zero. Thus,
+  the parameters <code>yMin</code> and <code>yMax</code> are used to
+  constrain the output of the controller during its on mode only. This
+  can be used, for example, to modulate a device between 0.3 and 1.0,
+  and switch it to off when the control error is small enough.
+</p>
+</html>", revisions="<html>
+<ul>
+  <li>June 1, 2020, by Michael Wetter:<br/>
+    Corrected wrong convention of reverse and direct action.<br/>
+    Changed default configuration from PID to PI.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1365\">issue
+    1365</a>.
+  </li>
+  <li>September 29, 2016, by Michael Wetter:<br/>
+    Removed parameter <code>limitsAtInit</code> because it is no longer
+    used in the PID controller.
+  </li>
+  <li>April 13, 2016, by Michael Wetter:<br/>
+    Set <code>zer(final k=0)</code> and made swi, zer and zer1
+    protected which they are also for <a href=
+    \"modelica://AixLib.Controls.Continuous.PIDHysteresis\">AixLib.Controls.Continuous.PIDHysteresis</a>.
+    These changes are not backwards compatible.
+  </li>
+  <li>March 15, 2016, by Michael Wetter:<br/>
+    Changed the default value to <code>strict=true</code> in order to
+    avoid events when the controller saturates. Also assigned
+    propogated values to be <code>final</code>. This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
+  </li>
+  <li>February 24, 2010, by Michael Wetter:<br/>
+    Changed PID controller from Modelica Standard Library to PID
+    controller from Buildings library to allow reverse control action.
+  </li>
+  <li>October 2, 2009, by Michael Wetter:<br/>
+    Fixed error in default parameter <code>eOn</code>. Fixed error by
+    introducing parameter <code>Td</code>, which used to be hard-wired
+    in the PID controller.
+  </li>
+  <li>February 14, 2009, by Michael Wetter:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"),  
    __Dymola_LockedEditing="Model from IBPSA");
  end PIDHysteresis;
