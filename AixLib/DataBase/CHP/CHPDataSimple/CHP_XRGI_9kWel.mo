@@ -42,7 +42,10 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
 <h4>
   <span style=\"color:#008000\">Data Sheet (English, German)</span>
 </h4>
-<table summary=\"Data Sheet\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">
+<table>
+  <caption>
+    \"Data Sheet\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\
+  </caption>
   <tr>
     <td valign=\"top\">
       <p>
@@ -252,7 +255,10 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
     </td>
   </tr>
 </table>
-<table summary=\"Emmisions\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">
+<table>
+  <caption>
+    \"Emmisions\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\
+  </caption>
   <tr>
     <td valign=\"top\">
       <p>

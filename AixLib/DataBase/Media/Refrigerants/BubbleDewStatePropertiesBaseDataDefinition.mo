@@ -111,158 +111,166 @@ record BubbleDewStatePropertiesBaseDataDefinition
   \"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
   AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:<br/>
 </p>
-<table summary=\"Formulas for calculating saturation properties\"
-cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\" style=
-\"border-collapse:collapse;\">
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Saturation pressure</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationPressure.png\"
-        alt=\"Formula to calculate saturation pressure\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Saturation temperature</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationTemperature.png\"
-        alt=\"Formula to calculate saturation temperature\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Bubble density</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleDensity.png\"
-        alt=\"Formula to calculate bubble density\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Dew density</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewDensity.png\"
-        alt=\"Formula to calculate dew density\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Bubble Enthalpy</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEnthalpy.png\"
-        alt=\"Formula to calculate bubble enthalpy\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Dew Enthalpy</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEnthalpy.png\"
-        alt=\"Formula to calculate dew enthalpy\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Bubble Entropy</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEntropy.png\"
-        alt=\"Formula to calculate bubble entropy\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Dew Entropy</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEntropy.png\"
-        alt=\"Formula to calculate dew entropy\">
-      </p>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Formulas for calculating saturation properties\" cellspacing=\"0\"
+    cellpadding=\"2\" border=\"1\" width=\"80%\" style=
+    \"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Saturation pressure</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationPressure.png\"
+            alt=\"Formula to calculate saturation pressure\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Saturation temperature</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationTemperature.png\"
+            alt=\"Formula to calculate saturation temperature\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Bubble density</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleDensity.png\"
+            alt=\"Formula to calculate bubble density\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Dew density</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewDensity.png\"
+            alt=\"Formula to calculate dew density\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Bubble Enthalpy</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEnthalpy.png\"
+            alt=\"Formula to calculate bubble enthalpy\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Dew Enthalpy</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEnthalpy.png\"
+            alt=\"Formula to calculate dew enthalpy\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Bubble Entropy</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEntropy.png\"
+            alt=\"Formula to calculate bubble entropy\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Dew Entropy</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEntropy.png\"
+            alt=\"Formula to calculate dew entropy\">
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      As it can be seen, the fitted formulas consist basically of the
+      coefficient e<sub>i</sub> as well as of the parameters
+      Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the
+      fitting coefficients and must be obtained during a fitting
+      procedure. While the fitting procedure, the formulas presented
+      above are fitted to external data (e.g. obtained from
+      measurements or external media libraries) and the fitting
+      coefficients are determined.
+    </p>
+    <h4>
+      Assumptions and limitations
+    </h4>
+    <p>
+      The fitting procedure is performed for a <b>predefined range of
+      the external data</b> that is given in terms of, for example,
+      temperature and pressure. As a consequence, the fitting
+      coefficients are also just valid within the predefined range of
+      external data.
+    </p>
+    <h4>
+      References
+    </h4>
+    <p>
+      Thorade, Matthis; Saadat, Ali (2012): <a href=
+      \"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia
+      - A fluid properties library</a>. In: <i>Proceedings of the 9th
+      International Modelica Conference</i>; September 3-5; 2012;
+      Munich; Germany. Linköping University Electronic Press, S. 63–70.
+    </p>
+    <p>
+      Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow,
+      Rita; Müller, Dirk (2014): <a href=
+      \"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the
+      Refrigerant Propane for Fast and Accurate Dynamic
+      Simulations</a>. In: <i>The 10th International Modelica
+      Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping
+      University Electronic Press (Linköping Electronic Conference
+      Proceedings), S. 1271–1275
+    </p>
+  </caption>
 </table>
-<p>
-  As it can be seen, the fitted formulas consist basically of the
-  coefficient e<sub>i</sub> as well as of the parameters
-  Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the
-  fitting coefficients and must be obtained during a fitting procedure.
-  While the fitting procedure, the formulas presented above are fitted
-  to external data (e.g. obtained from measurements or external media
-  libraries) and the fitting coefficients are determined.
-</p>
-<h4>
-  Assumptions and limitations
-</h4>
-<p>
-  The fitting procedure is performed for a <b>predefined range of the
-  external data</b> that is given in terms of, for example, temperature
-  and pressure. As a consequence, the fitting coefficients are also
-  just valid within the predefined range of external data.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  Thorade, Matthis; Saadat, Ali (2012): <a href=
-  \"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A
-  fluid properties library</a>. In: <i>Proceedings of the 9th
-  International Modelica Conference</i>; September 3-5; 2012; Munich;
-  Germany. Linköping University Electronic Press, S. 63–70.
-</p>
-<p>
-  Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
-  Müller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A
-  Medium Model for the Refrigerant Propane for Fast and Accurate
-  Dynamic Simulations</a>. In: <i>The 10th International Modelica
-  Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping University
-  Electronic Press (Linköping Electronic Conference Proceedings), S.
-  1271–1275
-</p>
 </html>"));
 end BubbleDewStatePropertiesBaseDataDefinition;
