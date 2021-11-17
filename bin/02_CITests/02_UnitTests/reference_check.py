@@ -622,7 +622,7 @@ if __name__ == '__main__':
                 for package in changed_list:
                     print(f'Check package: {package}')
                     retVal = ref_check._check_regression_test(package)
-                    if retVal == 1:
+                    if retVal != 0:
                         error_list.append(package)
                         print(f'{CRED}Regression test for model {package} was not successfull{CEND}')
                     else:
