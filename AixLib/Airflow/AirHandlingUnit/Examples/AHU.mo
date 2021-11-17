@@ -3,6 +3,7 @@ model AHU
   "Example to test all states of the AHU model - Play with the possible modes (boolean parameters for: heating, cooling, de-/humidification"
     extends Modelica.Icons.Example;
 
+
   Modelica.Blocks.Sources.Sine     tempOutside(
     amplitude=10,
     freqHz=1/86400,

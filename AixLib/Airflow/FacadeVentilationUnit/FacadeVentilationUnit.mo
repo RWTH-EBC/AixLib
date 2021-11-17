@@ -6,8 +6,6 @@ model FacadeVentilationUnit
   replaceable package Air = AixLib.Media.Air
     "Air Model in the system";
 
-
-
   parameter AixLib.Airflow.FacadeVentilationUnit.DataBase.FVUBaseRecord
     fVUParam=AixLib.Airflow.FacadeVentilationUnit.DataBase.FVUBaseRecord()
     "Record containing the characteristic parameters of the unit";

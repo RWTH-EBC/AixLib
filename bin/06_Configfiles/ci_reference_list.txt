@@ -195,6 +195,10 @@ AixLib.Controls.SetPoints.Validation.OccupancyScheduleNegativeStartTime
 
 AixLib.Controls.SetPoints.Validation.OccupancySchedulePositiveStartTime
 
+AixLib.Electrical.Examples.ExamplePVSystem
+
+AixLib.Electrical.Validation.ValidationPVSystem
+
 AixLib.Fluid.Actuators.BaseClasses.Examples.EqualPercentageDerivativeCheck
 
 AixLib.Fluid.Actuators.Dampers.Examples.Damper
@@ -702,6 +706,10 @@ AixLib.Fluid.MixingVolumes.Validation.TraceSubstanceConservationSteadyState
 AixLib.Fluid.Movers.BaseClasses.Validation.FlowMachineInterface
 
 AixLib.Fluid.Movers.BaseClasses.Validation.PowerInterface
+
+AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpConst
+
+AixLib.Fluid.Movers.DpControlledMovers.Examples.DpControlled_dpVar
 
 AixLib.Fluid.Movers.Examples.ClosedLoop_y
 

@@ -600,7 +600,7 @@ if __name__ == '__main__':
                                             library=args.library,
                                             dymolaversion=args.dymolaversion,
                                             path="package.mo")
-            list_reg_model._dym_check_lic()
+            #list_reg_model._dym_check_lic()
             lines = list_reg_model._get_lines()  # string change ref file
             ref_list = list_reg_model._get_ref(lines)  # get reference files from ref file
             mos_list = list_reg_model._get_mos(lines)  # get mos script from ref file
@@ -608,7 +608,7 @@ if __name__ == '__main__':
             modelica_list = list_reg_model._get_mo(lines)  # get modelica files from ref file
             mo_list = ref_check._get_ref_model()  # get the regression models from reference file list
             modelica_list = ref_check._compare_reg_model(modelica_list, mo_list)  # filter: get mo_list == modelica_list
-
+            print(modelica_list)
             model_list = list_reg_model._get_usedmodel(
                 mo_list)  # gives a list of regression models where submodels have been modified
 
