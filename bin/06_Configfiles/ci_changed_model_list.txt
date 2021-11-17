@@ -1,4 +1,0 @@
-AixLib\Resources\ReferenceResults\Dymola\AixLib_Airflow_Multizone_BaseClasses_Examples_WindPressureLowRise.txt
-AixLib\Resources\ReferenceResults\Dymola\AixLib_Airflow_Multizone_BaseClasses_Examples_PowerLaw.txt
-AixLib\Resources\ReferenceResults\Dymola\AixLib_Airflow_Multizone_BaseClasses_Examples_PowerLawFixedM.txt
-AixLib\Airflow\Multizone\BaseClasses\Examples\PowerLawFixedM.mo
