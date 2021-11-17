@@ -1,0 +1,162 @@
+stages:
+    - check
+    - create_whitelist
+    
+.check_model_job:
+    stage: check
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+    artifacts:
+        when: on_failure
+        paths:
+            - ${library}/${library}.${lib_package}-log.txt
+            - ${library}/${library}.${lib_package}-errorlog.txt
+        expire_in: 7 day 
+    only:
+        - external_pull_requests
+    retry:
+        max: 2
+        when: runner_system_failure  
+    except:
+        variables:
+            %for commit in except_commit_list:
+            - $CI_COMMIT_MESSAGE  =~ /${commit}/
+            %endfor
+            
+%for package in package_list:
+Check_${library}_${package}:
+    variables:
+        lib_package: ${package}
+    extends: .check_model_job
+
+%endfor
+
+.check_changed_models_job:
+    stage: check
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - git diff --raw --diff-filter=AMT HEAD^1 >  ${ch_file}
+        - python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} -CM 
+    artifacts:
+        when: on_failure
+        paths:
+            - ${library}/${library}.${lib_package}-log.txt
+            - ${library}/${library}.${lib_package}-errorlog.txt
+        expire_in: 7 day
+    except:
+        refs:
+            - external_pull_requests
+            ${merge_branch}
+        variables:
+            %for commit in except_commit_list:
+            - $CI_COMMIT_MESSAGE  =~ /${commit}/
+            %endfor
+    only:
+        changes:
+            - ${library}/${lib_package}/**/*
+    retry:
+        max: 2
+        when: runner_system_failure
+
+%for package in package_list:
+Check_${library}_${package}_changed_models:
+    variables:
+        lib_package: ${package}
+    extends: .check_changed_models_job
+
+%endfor
+
+.CI_check_model_job:
+    stage: check
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+    artifacts:
+        when: on_failure
+        paths:
+            - ${library}/${library}.${lib_package}-log.txt
+            - ${library}/${library}.${lib_package}-errorlog.txt
+        expire_in: 7 day 
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE  =~ /${check_commit}/
+    except:
+        refs:
+            - external_pull_requests
+    retry:
+        max: 2
+        when: runner_system_failure  
+    
+            
+%for package in package_list:
+CI_Check_${library}_${package}:
+    variables:
+        lib_package: ${package}
+    extends: .CI_check_model_job
+
+%endfor
+
+whitelist_job:
+    stage: create_whitelist
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - export PYTHONIOENCODING=utf-8 
+        - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - ssh-keyscan github.com >> ~/.ssh/known_hosts
+        - ssh-agent -a /tmp/ssh_agent.sock > /dev/null
+        - echo "${GITHUB_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        - chmod 600 ~/.ssh/id_rsa
+        - git config --global user.name "${GITLAB_USER_NAME}"
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
+    script:
+        - mkdir whitelist && cd whitelist
+        - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
+        - cd ${CI_PROJECT_NAME}
+        - echo "FAIL" > ${exit_file}
+        - python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} ${git_url} ${wh_path} --library ${library} --wh-library ${wh_library} --whitelist
+    after_script:
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36
+        - export PYTHONIOENCODING=utf-8 # just in case
+        - cd whitelist && cd ${CI_PROJECT_NAME}
+        - if cat ${exit_file} | grep "FAIL"; then
+            message="Automatic push of CI - Update model_whitelist. Please pull the new files before push again. [skip ci]" ;
+            git add ${wh_file} ;
+            git commit -m "$message" ;
+            git push git@github.com:${Github_Repository}.git ;
+            GREEN='\033[0;32m' ;
+            NC='\033[0m' ;
+            echo  -e "$GREEN New html whitelist files were pushed to this branch.$NC" ;
+            exit 0;
+          else 
+            echo 'successful' > ${exit_file} ;
+            echo  -e "$GREEN Whitelist is already up to date. Please delete the version number in file ${wh_file}, if you want to recreate the whitelist.$NC" ;
+            exit 0 ;
+          fi
+    artifacts:
+        paths:
+            - whitelist/${CI_PROJECT_NAME}/${wh_file}
+        expire_in: 7 day 
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /${wh_commit}/
+    except:
+        refs:
+            - external_pull_requests
