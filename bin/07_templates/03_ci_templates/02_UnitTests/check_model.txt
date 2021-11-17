@@ -60,9 +60,6 @@ Check_${library}_${package}:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor
-    only:
-        changes:
-            - ${library}/${lib_package}/**/*
     retry:
         max: 2
         when: runner_system_failure
@@ -71,6 +68,9 @@ Check_${library}_${package}:
 Check_${library}_${package}_changed_models:
     variables:
         lib_package: ${package}
+    only:
+        changes:
+            - ${library}/${package}/**/*
     extends: .check_changed_models_job
 
 %endfor

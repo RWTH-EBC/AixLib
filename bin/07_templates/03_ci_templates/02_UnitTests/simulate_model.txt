@@ -104,7 +104,7 @@ simulate_${library}_${package}_changed_models:
         lib_package: ${package}
     only:
         changes:
-            - ${library}/${package_name}/**/*  
+            - ${library}/${package}/**/*  
     extends: .simulate_changed_models_job
 
 %endfor
