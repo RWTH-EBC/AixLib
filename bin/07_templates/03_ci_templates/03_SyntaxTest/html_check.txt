@@ -18,7 +18,6 @@ trigger_check_HTML:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - python bin/02_CITests/03_SyntaxTests/html_tidy_errors.py --s ${library} --correct-view --log  --align --font
-    after_script:
         - if cat ${exit_file} | grep "exit 1"; then 
             echo "Test was not successful!" ;
             exit 1;

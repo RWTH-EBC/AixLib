@@ -8,7 +8,6 @@ import sys
 # -*- coding: utf-8 -*-
 """View errors in the HTML code of a Modelica .mo file
 
-@author: Sven Hinrichs
 The script will
 * collect all the HTML code (<html>...</html>) in the Modelica file and
 * print out the original code with line numbers as well as
@@ -91,10 +90,9 @@ class HTML_Tidy(object):
                 htmlList = HTML_Tidy.getInfoRevisionsHTML(self, model)
                 htmlStr = HTML_Tidy.join_body(
                     self, htmlList=htmlList, substitutions_dict={'\\"': '"'})
-                document_corr, errors = HTML_Tidy.htmlCorrection(self, htmlStr)
+                document_corr, errors = HTML_Tidy._htmlCorrection(self, htmlStr)
                 docCorrStr = HTML_Tidy.number_print_List(self, document_corr.split('\n'), sep='\n')
-                ErrWhite = "Warning: The summary attribute on the <table> element is obsolete in HTML5"
-                if len(errors) > 0 and errors.find(ErrWhite) == -1:
+                if len(errors) > 0 and errors.find("Warning: The summary attribute on the <table> element is obsolete in HTML5") == -1:
                     print('\n' + "----" + model + "----")
                     print("\n-------- HTML Code --------")
                     print(f"\n{HTML_Tidy.number_print_List(self, htmlList)}")
@@ -109,8 +107,7 @@ class HTML_Tidy(object):
         if self.log:
             file = HTML_Tidy._return_logfile(self, errMsg)
             print("##########################################################")
-            print("you can find your logfile under " +
-                  rootDir + os.sep + "HTML-logfile.txt")
+            print(f'Logfile is saved in {rootDir}{os.sep}HTML-logfile.txt')
             var = HTML_Tidy.read_logFile(self, file)
             return var
 
@@ -225,7 +222,7 @@ class HTML_Tidy(object):
         newfile.write(document_corr.encode("utf-8"))
 
     def _return_logfile(self, err_message):  # This function creates the logfile
-        file = self.package.replace(".", os.sep) + os.sep + "HTML-logfile.txt"
+        file = f'{self.package.replace(".", os.sep)}{os.sep}HTML-logfile.txt'
         log_file = open(f'{file}', "w")
         if len(err_message) >= 0:
             for error in err_message:
@@ -240,14 +237,19 @@ class HTML_Tidy(object):
         for line in lines:
             line = line.replace("\n", "")
             if line.find("Warning: The summary attribute on the <table> element is obsolete in HTML5") > -1:
+                err_list.append(line)
                 continue
-            if self.font is False:
+            if self.font is True:
                 if line.find("Warning: <font> element removed from HTML5") > -1:
+                    err_list.append(line)
                     continue
-            if self.align is False:
+            if self.align is True:
                 if line.find('Warning: <p> attribute "align" not allowed for HTML5') > -1:
+                    err_list.append(line)
                     continue
             if line.find("--") > -1 and line.find(".mo") > -1:
+                continue
+            if line.find('Warning: <img> lacks "alt" attribute') > -1:
                 continue
             elif line.find("Warning") > -1:
                 err_list.append(line)
@@ -258,13 +260,12 @@ class HTML_Tidy(object):
             exit_file.write("#!/bin/bash" + "\n" + "\n" + "exit 1")
             exit_file.close()
             var = 1
-            return (var)
         else:
             print("HTML Check was successful!")
             exit_file.write("#!/bin/bash" + "\n" + "\n" + "exit 0")
             exit_file.close()
             var = 0
-            return var
+        return var
 
     def _CheckFile(self, moFile):
         """
@@ -279,7 +280,7 @@ class HTML_Tidy(object):
 
         with io.open(moFile, mode="r", encoding="utf-8-sig") as f:
             lines = f.readlines()
-            nLin = len(lines)
+        nLin = len(lines)
         isTagClosed = True
         code = list()
         htmlCode = list()
@@ -344,6 +345,7 @@ class HTML_Tidy(object):
         document_corr_img = ""
         CloseFound = True
         for line in document_corr.splitlines():
+            line, CloseFound = HTML_Tidy.correct_table_summary(self, line, CloseFound)
             if self.font == True:
                 line, CloseFound = HTML_Tidy.correct_font(
                     self, line, CloseFound)
@@ -369,39 +371,7 @@ class HTML_Tidy(object):
             self, theString=htmlCorrect, substitutions_dict=substitutions_dict)
         return document_corr, errors
 
-    def htmlCorrection(self, htmlStr: str,
-                       substitutions_dict: dict = {'"': '\\"', '<br>': '<br/>', '<br/>': '<br/>'}) -> (str, str):
-        """Returns cleaned html code and found errors
-		Calls tidylib which will produce a clean version of the html code
-		and also the errors that it has found.
-		Parameters
-		----------
-		htmlStr : str
-				The html code as a single string.
-		substitutions_dict : dict
-				A dictionary with key:value pairs for old and new text.
-				The html code must be escaped in Modelica. Generate properly
-				escaped code we need to add the escape characters. All the
-				while we can replace html errors that Dymola introduces.
-				i.e. '<br>' -> '<br />'
-		Returns
-		-------
-		str
-				The tidy html code with escape characters as one string.
-		str
-				The error messages from tidylib.
-		"""
-        from tidylib import tidy_document
-        htmlCorrect, errors = tidy_document(f"{htmlStr}",
-                                            options={'doctype': 'html5',
-                                                     'show-body-only': 1,
-                                                     'numeric-entities': 1,
-                                                     'output-html': 1,
-                                                     'wrap': 72,
-                                                     'alt-text': '', })
-        document_corr = HTML_Tidy.make_string_replacements(
-            self, theString=htmlCorrect, substitutions_dict=substitutions_dict)
-        return document_corr, errors
+
 
     def correct_table_summary(self, line, CloseFound):  # delete Summary in table and add <caption> Text </caption>
         if CloseFound == True:
@@ -463,11 +433,6 @@ class HTML_Tidy(object):
         return line, CloseFound
 
     def correct_font(self, line, CloseFound):  # Replace font to style für html5
-        # <h4><font color=\"#008000\">Overview</font></h4>
-        # <h4><font color=\"#008000\">Overview</font></h4>
-        # <h4><span style="color:#008000">Overview</span></h4>
-        #	  <span style="color:#008000">Overview</span>
-        #		\"#008000\"
         if CloseFound == True:
             styleTag_1 = line.encode("utf-8").find(b"style=")
             styleTag_2 = line.encode("utf-8").find(b"color")
