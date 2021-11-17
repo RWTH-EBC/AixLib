@@ -62,35 +62,34 @@ within AixLib.Controls.Continuous.Examples;
   annotation (                      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Examples/PIDHysteresisTimer.mos"
          "Simulate and plot"),
      experiment(Tolerance=1e-6, StopTime=86400),
-     Documentation(info="<html>
- <p>
- Example that demonstrates the use of the PID controller
- with hysteresis and off timer.
- The example is identical to
- <a href=\"modelica://AixLib.Controls.Continuous.Examples.PIDHysteresis\">
- AixLib.Controls.Continuous.Examples.PIDHysteresis</a>,
- except that the controller also has an off timer.
- This timer keeps the control signal at <i>y=0</i>
- for a period of <code>minOffTime=1000</code> seconds.
- This may be used to avoid short-cycling if the load is small
- and the system has little heat capacity.
- </p>
- <p>
- The figure below shows the control error
- <code>con.feeBac.y</code> and the control signal
- <code>con.y</code>.
- </p>
- <p align=\"center\">
- <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/PIDHysteresisTimerError.png\" border=\"1\" alt=\"Control error.\"/><br/>
- <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/PIDHysteresisTimerOutput.png\" border=\"1\" alt=\"Control signal.\"/>
- </p>
- </html>", revisions="<html>
- <ul>
- <li>
- November 21, 2011, by Michael Wetter:<br/>
- Added documentation.
- </li>
- </ul>
- </html>"),  
+     Documentation(info="<html><p>
+  Example that demonstrates the use of the PID controller with
+  hysteresis and off timer. The example is identical to <a href=
+  \"modelica://AixLib.Controls.Continuous.Examples.PIDHysteresis\">AixLib.Controls.Continuous.Examples.PIDHysteresis</a>,
+  except that the controller also has an off timer. This timer keeps
+  the control signal at <i>y=0</i> for a period of
+  <code>minOffTime=1000</code> seconds. This may be used to avoid
+  short-cycling if the load is small and the system has little heat
+  capacity.
+</p>
+<p>
+  The figure below shows the control error <code>con.feeBac.y</code>
+  and the control signal <code>con.y</code>.
+</p>
+<p style=\"text-align:center;\">
+  <img src=
+  \"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/PIDHysteresisTimerError.png\"
+  border=\"1\" alt=\"Control error.\"><br/>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/PIDHysteresisTimerOutput.png\"
+  border=\"1\" alt=\"Control signal.\">
+</p>
+</html>", revisions="<html>
+<ul>
+  <li>November 21, 2011, by Michael Wetter:<br/>
+    Added documentation.
+  </li>
+</ul>
+</html>"),  
    __Dymola_LockedEditing="Model from IBPSA");
  end PIDHysteresisTimer;
