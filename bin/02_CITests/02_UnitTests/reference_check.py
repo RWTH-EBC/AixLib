@@ -610,7 +610,6 @@ if __name__ == '__main__':
             modelica_list = ref_check._compare_reg_model(modelica_list, mo_list)  # filter: get mo_list == modelica_list
             model_list = list_reg_model._get_usedmodel(
                 mo_list)  # gives a list of regression models where submodels have been modified
-
             changed_list = list_reg_model._insert_list(ref_list, mos_list, modelica_list,
                                                        model_list)  # give a list with packages to check
             if len(changed_list) == 0:
