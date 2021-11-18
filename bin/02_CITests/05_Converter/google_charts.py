@@ -11,7 +11,6 @@ import glob
 import pandas as pd
 import argparse
 
-
 class Plot_Charts(object):
 
     def __init__(self, package, library):
