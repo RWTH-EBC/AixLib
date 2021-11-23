@@ -78,7 +78,8 @@ Scripts that simulate and validate modelica models using dymola
 ### runUnitTests.py
 The regression test is implemented with the following command:	
 `cd AixLib && python ../bin/02_CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "AixLib.Airflow" --library AixLib --batch -DS 2020`
-Further information can be found under the following [link](../bin/04_Documentation/How_to_integrate_new_tests.md) and explains among other things how to create new UnitTests.
+
+Further information can be found under the following [link](../04_Documentation/How_to_integrate_new_tests.md) and explains among other things how to create new UnitTests.
 
 
 
@@ -86,6 +87,7 @@ Further information can be found under the following [link](../bin/04_Documentat
 This test checks the models and simulates the packages "examples" and "validations". 
 
 The following command is used to check the models:
+
 `python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "Airflow" --library AixLib -DS 2020 --wh-library IBPSA --filterwhitelist `
 
 A whitelist of IBPSA models was created. The list contains all models of the IBPSA library that have not passed the CheckTest. These models are ignored during the test and are therefore sorted out before the test. 

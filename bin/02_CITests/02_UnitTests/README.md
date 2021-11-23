@@ -5,17 +5,22 @@ This templates check, simulate or perform a regression test of AixLib models.
 Add the following lines to your .gitlab-ci.yml:
 	
 	stages:
-		- Check
-		- Simulate
+		- Ref_Check
+		- Update_WhiteList
+		- check
+		- post
+		- create_whitelist
+		- simulate
 		- RegressionTest
+		- Update_Ref
+		- plot_ref
+		- prepare
+		- deploy
 
 	include:
-		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'ci-tests/UnitTests/check_model.gitlab-ci.yml'
-		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'ci-tests/UnitTests/regression_test.gitlac-ci.yml'
-		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'ci-tests/UnitTests/simulate_model.gitlab-ci.yml'	
+		- 'bin/07_templates/03_ci_templates/02_UnitTests/check_model.gitlab-ci.yml'  
+		- 'bin/07_templates/03_ci_templates/02_UnitTests/regression_test.gitlab-ci.yml'  
+		- 'bin/07_templates/03_ci_templates/02_UnitTests/simulate_model.gitlab-ci.yml'
 
 	
 
@@ -320,18 +325,20 @@ This test check and simulate the models. You have following options:
 	check_test_group.add_argument("-n", "--number-of-processors", type=int, default= multiprocessing.cpu_count(), help="Maximum number of processors to be used")
 	check_test_group.add_argument("--show-gui", help="show the GUI of the simulator" , action="store_true")
 	check_test_group.add_argument("-WL", "--WhiteList", help="Create a WhiteList of IBPSA Library: y: Create WhiteList, n: Don´t create WhiteList" , action="store_true")
-	check_test_group.add_argument("-SE", "--SimulateExamples", help="Check and Simulate Examples in the Package" , action="store_true")
+	check_test_group.add_argument("-SE", "--simulateexamples", help="Check and Simulate Examples in the Package" , action="store_true")
 	check_test_group.add_argument("-DS", "--DymolaVersion",default="2020", help="Version of Dymola(Give the number e.g. 2020")
 	
-	1.	--WhiteList
+	1.	--whitelist
 	
 Clone the repository of IBPSA and check the models. Models that failed will append to the Whitelist. These models will not checked.
 
-	2. --SimulateExamples
+	2. --simulateexamples
 
 Example:
 
-	- python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Airflow" -p AixLib/package.mo --SimulateExamples
+`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "Airflow" --library AixLib -DS 2020 --wh-library IBPSA --filterwhitelist --simulateexamples`
+	
+`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py -DS 2020 --repo-dir IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git  --library AixLib --wh-library IBPSA --whitelist`
 
 
 The Test will check and simulate all examples and validation in AixLib. 

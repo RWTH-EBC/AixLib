@@ -8,7 +8,7 @@ Usually, not only the entire system is rebuilt, but also automated tests are per
 The whole process is automatically triggered by checking into the version control system.
 
 
-## CI commands 
+## CI commands and ci [lists](08_interact_CI)
 
 - `git commit -m "ci_update_ref"` 			# Update referencefiles for all models that are added in file bin/08_interact_CI/update_ref.txt  
 - `git commit -m "ci_show_ref"`	  			# plot all referencefiles that are added in file bin/08_interact_CI/show_ref.txt [only as pull_request]
@@ -21,15 +21,15 @@ The whole process is automatically triggered by checking into the version contro
 - `git commit -m "ci_html"` 				# Test only the html of models
 
 ## Libraries that need to be installed
-- `pip install mako pandas toml matplotlib argparse`
+`pip install mako pandas toml matplotlib argparse`
   
 
 ## What CI Tests are implement?
-#### Check, Simulate and Regressiontest: [UnitTests](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests/UnitTests)
+#### Check, Simulate and Regressiontest: [UnitTests](02_CITests/UnitTests)
 
 With these tests, models are validated or simulated or models will  compared and evaluated with stored values by means of a unit test.
 
-#### Correct HTML and Style Check: [SyntaxTest](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests/SyntaxTests)
+#### Correct HTML and Style Check: [SyntaxTest](02_CITests/SyntaxTests)
 
 The html code (documentation) is tested and corrected if necessary. Thus the deposited HTML code is checked for correctness and corrected.
 
@@ -59,7 +59,7 @@ This folder contains [documentation](https://github.com/RWTH-EBC/AixLib/blob/dev
 This folder contains [Config files](https://github.com/RWTH-EBC/AixLib/blob/development/bin/06_Configfiles) which are used for the CI. 
 
 ### 07_templates
-This folder contains [Templates](https://github.com/RWTH-EBC/AixLib/blob/development/bin/07_templates) for the CI tests implemented so far. The following example can be used to implement the tests in the CI. 
+This folder contains [Templates](07_templates/03_ci_templates) for the CI tests implemented so far. The following example can be used to implement the tests in the CI. 
 			
 		image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
 		stages:
