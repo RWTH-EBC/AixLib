@@ -8,7 +8,7 @@ At this time are five different Checks implemented.
 ## What is implement?
 
 
-## CleanUpScripts
+## CleanUp
  
 ### cleanmodelica
 
@@ -32,13 +32,7 @@ Additionally the code is corrected  the HTML Code to the HTML5 syntax. This incl
 	Warning: <p> attribute "align" not allowed for HTML5
 	Warning: <font> element removed from HTML5
 	Warning: <th> attribute "align" not allowed for HTML5
-
-The error message 
-
-	Warning: The summary attribute on the <table> element is obsolete in HTML5 
-
-is ignored and will be implemented in the future
-	
+	Warning: The summary attribute on the <table> element is obsolete in HTML5
    
 If the test was not successfull, CI creates a new branch and push the corrected code to the new branch. 
 For this process you have to create new variables in your repository.
@@ -60,24 +54,15 @@ For the implementation of the html_tidy errors.py the following step must be don
 
 [Create a GL_TOKEN](https://docs.gitlab.com/ce/user/profile/personal_access_tokens.html#creating-a-personal-access-token)
 
-
-
-
-$TARGET_BRANCH: Your current work branch.
-
-
 ![E.ON EBC RWTH Aachen University](../04_Documentation/Images/CreateNewBranch.png)
 
 ### StyleChecking.py
 
-
 This Script evaluated the documentation of the AixLib Models in dymola. The script operated with the ModelManagement in Dymola. 
-
-
 
 To work with this Script type following Command:
 
-	python bin/CITests/SyntaxTests/StyleChecking.py -s "AixLib" -p AixLib/package.mo 
+`python bin/02_CITests/03_SyntaxTests/StyleChecking.py -s AixLib -p AixLib/package.mo -DS 2020`
 
 
 ![E.ON EBC RWTH Aachen University](../04_Documentation/Images/ModelManagement_StyleChecking.PNG)
@@ -92,8 +77,8 @@ Scripts that simulate and validate modelica models using dymola
 
 ### runUnitTests.py
 The regression test is implemented with the following command:	
-	-  cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --single-package AixLib.Airflow --tool dymola
-Further information can be found under the following [link](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/-/blob/master/bin/04_Documentation/How_to_integrate_new_tests.md) and explains among other things how to create new UnitTests.
+`cd AixLib && python ../bin/02_CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "AixLib.Airflow" --library AixLib --batch -DS 2020`
+Further information can be found under the following [link](../bin/04_Documentation/How_to_integrate_new_tests.md) and explains among other things how to create new UnitTests.
 
 
 
@@ -101,7 +86,7 @@ Further information can be found under the following [link](https://git.rwth-aac
 This test checks the models and simulates the packages "examples" and "validations". 
 
 The following command is used to check the models:
-	- python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Airflow" -p AixLib/package.mo 
+`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "Airflow" --library AixLib -DS 2020 --wh-library IBPSA --filterwhitelist `
 
 A whitelist of IBPSA models was created. The list contains all models of the IBPSA library that have not passed the CheckTest. These models are ignored during the test and are therefore sorted out before the test. 
 To keep the white list up to date, it should be updated regularly. This is done using the tag --WhisteList
