@@ -317,16 +317,28 @@ The reference file then looks like the one below and can be compared and used in
 	
 This test check and simulate the models. You have following options:
 	
-	check_test_group = parser.add_argument_group("arguments to run check tests")
-	check_test_group.add_argument("-b", "--batch", action ="store_true", help="Run in batch mode without user Interaction")
-	check_test_group.add_argument("-t", "--tool", metavar="dymola",default="dymola", help="Tool for the Checking Tests. Set to Dymola")
-	check_test_group.add_argument('-s',"--single-package",metavar="AixLib.Package", help="Test only the Modelica package AixLib.Package")
-	check_test_group.add_argument("-p","--path", default=".", help = "Path where top-level package.mo of the library is located")
-	check_test_group.add_argument("-n", "--number-of-processors", type=int, default= multiprocessing.cpu_count(), help="Maximum number of processors to be used")
-	check_test_group.add_argument("--show-gui", help="show the GUI of the simulator" , action="store_true")
-	check_test_group.add_argument("-WL", "--WhiteList", help="Create a WhiteList of IBPSA Library: y: Create WhiteList, n: Don´t create WhiteList" , action="store_true")
-	check_test_group.add_argument("-SE", "--simulateexamples", help="Check and Simulate Examples in the Package" , action="store_true")
-	check_test_group.add_argument("-DS", "--DymolaVersion",default="2020", help="Version of Dymola(Give the number e.g. 2020")
+	 parser = argparse.ArgumentParser(description="Check and Validate single Packages")  # Configure the argument parser
+    check_test_group = parser.add_argument_group("arguments to run check tests")
+    check_test_group.add_argument('-s', "--single-package", metavar="AixLib.Package",
+                                  help="Test only the Modelica package AixLib.Package")
+    check_test_group.add_argument("-n", "--number-of-processors", type=int, default=multiprocessing.cpu_count(),
+                                  help="Maximum number of processors to be used")
+    check_test_group.add_argument("--show-gui", help="show the GUI of the simulator", action="store_true")
+    check_test_group.add_argument("-WL", "--whitelist",
+                                  help="Create a WhiteList of IBPSA Library: y: Create WhiteList, n: Don´t create WhiteList",
+                                  action="store_true")
+    check_test_group.add_argument("-SE", "--simulateexamples", help="Check and Simulate Examples in the Package",
+                                  action="store_true")
+    check_test_group.add_argument("-DS", "--dymolaversion", default="2020",
+                                  help="Version of Dymola(Give the number e.g. 2020")
+    check_test_group.add_argument("-V", "--check-version", default=False, action="store_true")
+    check_test_group.add_argument("-CM", "--changedmodels", default=False, action="store_true")
+    check_test_group.add_argument("-FW", "--filterwhitelist", default=False, action="store_true")
+    check_test_group.add_argument("-L", "--library", default="AixLib", help="Library to test")
+    check_test_group.add_argument("-wh-l", "--wh-library", help="Library to test")
+    check_test_group.add_argument("--repo-dir", help="Library to test")
+    check_test_group.add_argument("--git-url", default="https://github.com/ibpsa/modelica-ibpsa.git", help="url repository")
+    check_test_group.add_argument("--wh-path", help="path of white library")
 	
 	1.	--whitelist
 	

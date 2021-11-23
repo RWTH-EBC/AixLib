@@ -5,21 +5,20 @@ This templates check, simulate and make a regression test of the AixLib models.
 To integrate the tests in the GitLab-CI  include the templates.
 Add the following lines to your .gitlab-ci.yml:
 
-	#!/bin/bash
 	image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
 
 	stages:
 		- build
-		- HTMLCheck
-		- openMR
-		- deploy
+		- HTML_Check
+		- create_html_whitelist
 		- StyleCheck
+		- deploy
+		- openMR
+		- post
 		
 	include:
-		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
-		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'ci-tests/SyntaxTests/style_check.gitlab-ci.yml'
+		- 'bin/07_templates/03_ci_templates/03_SyntaxTest/html_check.gitlab-ci.yml'  
+		- 'bin/07_templates/03_ci_templates/03_SyntaxTest/style_check.gitlab-ci.yml
 '	
 
 
@@ -93,9 +92,6 @@ The following option will be checked:
 For more help type the command: 
 
 	- python bin/02_CITests/SyntaxTests/StyleChecking.py --help
-
-
-	
 
 	
 # What is done?

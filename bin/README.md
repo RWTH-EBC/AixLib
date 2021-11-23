@@ -25,17 +25,17 @@ The whole process is automatically triggered by checking into the version contro
   
 
 ## What CI Tests are implement?
-#### Check, Simulate and Regressiontest: [UnitTests](02_CITests/UnitTests)
+#### Check, Simulate and Regressiontest: [UnitTests](02_CITests/02_UnitTests)
 
 With these tests, models are validated or simulated or models will  compared and evaluated with stored values by means of a unit test.
 
-#### Correct HTML and Style Check: [SyntaxTest](02_CITests/SyntaxTests)
+#### Correct HTML and Style Check: [SyntaxTest](02_CITests/03_SyntaxTests)
 
 The html code (documentation) is tested and corrected if necessary. Thus the deposited HTML code is checked for correctness and corrected.
 
 With the ModelManagement library in dymola the style of the models is checked. 
 
-#### IBPSA Merge
+#### IBPSA Merge(02_CITests/06_deploy/IBPSA_Merge)
 This template performs an automatic IBPSA merge into AixLib. The models of the IBPSA are copied into the AixLib, a new conversion script is created based on the IBPSA and integrated into the AixLib as well as the whitelists are created.
 
 ## Folder 
@@ -46,17 +46,17 @@ This folder contains tests and functions that are builded for the CI Tests.
 
 ### 02_CITests
 This folder contains all CI tests for AixLib in GitLab with unitTests, syntaxTest and cleanUpScripts
-For more information view this [CI Tests](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests).
+For more information view this [CI Tests](02_CITests).
 
 ### 03_ci_whitelist
-This folder contains models in [WhiteLists](https://github.com/RWTH-EBC/AixLib/blob/development/bin/03_WhiteLists), which will not test in the CITests.
+This folder contains models in [WhiteLists](03_ci_whitelist), which will not test in the CITests.
 
 ### 04_Documentation
-This folder contains [documentation](https://github.com/RWTH-EBC/AixLib/blob/development/bin/04_Documentation) for CI, e.g. how new tests can be integrated or relevant commands for the CI 
+This folder contains [documentation](04_Documentation) for CI, e.g. how new tests can be integrated or relevant commands for the CI 
 
 ### 06_Configfiles
 
-This folder contains [Config files](https://github.com/RWTH-EBC/AixLib/blob/development/bin/06_Configfiles) which are used for the CI. 
+This folder contains [Config files](06_Configfiles) which are used for the CI. 
 
 ### 07_templates
 This folder contains [Templates](07_templates/03_ci_templates) for the CI tests implemented so far. The following example can be used to implement the tests in the CI. 
@@ -96,14 +96,14 @@ This folder contains [Templates](07_templates/03_ci_templates) for the CI tests 
 			- 'bin/07_templates/03_ci_templates/03_SyntaxTest/style_check.gitlab-ci.yml' 
 			- 'bin/07_templates/03_ci_templates/04_CleanUpScript/ci_setting.gitlab-ci.yml'
 
-### 08_interact_CI
+### [08_interact_CI](08_interact_CI)
 
-This folder is important for the CI commands. 
+This folder is contains CI commands. 
 
 `show_ref.txt`: If certain models are visualized on the basis of the reference files, these must be entered line by line in the text file show_ref.txt. Afterwards the file must be pushed with the command `git commit -m "ci_show_ref"`
  
 `update_ref.txt`: If the reference files are to be updated for certain models, the reference files must be entered line by line in the text file update_ref.txt. Afterwards the file must be pushed with the CI commands command `git commit -m "ci_update_ref"`
 
-### 09_Setting
+### [09_Setting](09_Setting)
 
 This folder contains settings for the CI. The CI_setting.toml file contains the variables for the CI. Changes can be made in the toml file. The templates are then updated with the command `python bin/02_CITests/07_ci_templates/ci_templates.py --setting`.

@@ -3,12 +3,18 @@
 At this time are five different Checks implemented. 
 
 
-
-
 ## What is implement?
 
+## [_config.py](_config.py)
+The files `_config.py` contains file references and set variables which are important for the tests as well as the creation of CI templates. 
 
-## CleanUp
+Before the templates are created with the command 
+
+`python bin/02_CITests/07_ci_templates/ci_templates.py`, 
+
+the variables `image_name` and `variable_main_list` in the file `_config.py` should be checked to see if they are set correctly for the current repository. 
+
+## [01_CleanUp](01_CleanUp)
  
 ### cleanmodelica
 
@@ -21,8 +27,43 @@ This script deletes following files:
 	'success.','stop', 'stop.','fmiModelIdentifier.h', 'modelDescription.xml',
 	'fmiFunctions.o', 'CSVWriter.csvWriter.csv', 'test.csv',
 
-You can use it for deploy your Library.
-## SyntaxTests
+### setting_check
+
+Checks if all necessary variables and files are set or exist.
+
+The test is performed by the commit `git commit -m "ci_setting"`.
+
+Then the templates are created based on the CI_setting.toml file and pushed into the current branch.
+
+## [02_UnitTests](02_UnitTests)
+Scripts that simulate and validate modelica models using dymola	
+
+### reference_check.py
+The regression test is implemented with the following command:	
+`cd AixLib && python ../bin/02_CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "AixLib.Airflow" --library AixLib --batch -DS 2020`
+
+Further information can be found under the following [link](../04_Documentation/How_to_integrate_new_tests.md) and explains among other things how to create new UnitTests.
+
+### validatetest.py
+This test checks the models and simulates the packages "examples" and "validations". 
+
+The following command is used to check the models except models that are on the whitelist  :
+
+`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "Airflow" --library AixLib -DS 2020 --wh-library IBPSA --filterwhitelist`
+
+The following command is used to check the models without a whitelist:
+
+`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package Airflow --library AixLib -DS 2020`
+
+The following command is used to simulate the examples except models that are on the whitelist  :
+
+`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package Airflow --library AixLib -DS 2020 --wh-library IBPSA --filterwhitelist --simulateexamples`
+
+The following command is used to simulate the examples without a whitelist:
+
+`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package Airflow --library AixLib -DS 2020   --simulateexamples`
+
+## [03_SyntaxTests](03_SyntaxTests)
 This folder evaluated and correct the code in the AixLib. 
 
 ### html_tidy_errors.py
@@ -41,7 +82,6 @@ For this process you have to create new variables in your repository.
 
 
 For the implementation of the html_tidy errors.py the following step must be done.
-
 
 #### $GL_TOKEN
 1. Log in to GitLab.
@@ -72,28 +112,9 @@ In the future, the models that fail the test will have to be revised and adapted
 If the Test failed, Gitlab export two log files with a errorlist.
 
 
-## UnitTests
-Scripts that simulate and validate modelica models using dymola	
-
-### runUnitTests.py
-The regression test is implemented with the following command:	
-`cd AixLib && python ../bin/02_CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "AixLib.Airflow" --library AixLib --batch -DS 2020`
-
-Further information can be found under the following [link](../04_Documentation/How_to_integrate_new_tests.md) and explains among other things how to create new UnitTests.
 
 
-
-### validatetest.py
-This test checks the models and simulates the packages "examples" and "validations". 
-
-The following command is used to check the models:
-
-`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "Airflow" --library AixLib -DS 2020 --wh-library IBPSA --filterwhitelist `
-
-A whitelist of IBPSA models was created. The list contains all models of the IBPSA library that have not passed the CheckTest. These models are ignored during the test and are therefore sorted out before the test. 
-To keep the white list up to date, it should be updated regularly. This is done using the tag --WhisteList
-
-### IBPSA Merge
+### IBPSA [Merge](06_deploy/IBPSA_Merge)
 As soon as the branch IBPSA_Merge is created the automatic merging of the IBPSA repo starts. First the models of the IBPSA are copied into the AixLib and then a suitable conversion skirpt. In the next stage the white lists are updated. Finally a pull request is created. The user should now check the AixLib again locally. At the same time, the CI runs and checks and simulates models, as well as performs a regression test. If certain models or scripts need to be adjusted manually, the user should do so with the comment message "fix errors manually".
 
 
