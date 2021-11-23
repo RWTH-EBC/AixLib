@@ -5,12 +5,23 @@ model BoilerTesterTwoPositionControllerBufferStorage
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
+       parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
+          parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
+            parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power";
+            parameter Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom);
+             parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal";
+
+
+
+
+
+
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     T_start=293.15,
     m_flow_nominal=1,
     redeclare package Medium = AixLib.Media.Water,
     V=3,
-    nPorts=1)
+    nPorts=3)
     annotation (Placement(transformation(extent={{52,22},{72,42}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater
     "Prescribed heat flow" annotation (
@@ -18,6 +29,8 @@ model BoilerTesterTwoPositionControllerBufferStorage
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={16,48})));
+
+
   Modelica.Blocks.Sources.Sine sine(
     amplitude=-30000,
     freqHz=1/3600,
@@ -45,13 +58,13 @@ model BoilerTesterTwoPositionControllerBufferStorage
     annotation (Placement(transformation(extent={{-104,2},{-84,22}})));
   twoPositionController.Storage_modularBoiler storage_modularBoiler(
     n=3,
-    d=1,
-    h=2,
-    lambda_ins=0.04,
+    d=0.5,
+    h=1,
+    lambda_ins=0.02,
     s_ins=0.1,
     hConIn=1500,
     hConOut=15,
-    V_HE=0.05,
+    V_HE=0.1,
     k_HE=1500,
     A_HE=20,
     beta=0.00035,
@@ -59,20 +72,21 @@ model BoilerTesterTwoPositionControllerBufferStorage
     m_flow_nominal_layer=1,
     m_flow_nominal_HE=1)
     annotation (Placement(transformation(extent={{-2,-28},{18,-8}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)
-                                                                                      annotation(Placement(transformation(extent={{-26,-56},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)   annotation(Placement(transformation(extent={{-26,-56},
             {-14,-44}})));
   AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph5(redeclare package Medium = Medium, nPorts=1)
-                                                     annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={80,-62})));
-  AixLib.Fluid.Sources.MassFlowSource_T boundary(
-    m_flow=0.5,
-    redeclare package Medium = Medium,
-    use_m_flow_in=false,
-    nPorts=1) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={108,-40})));
+                                                     annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={114,30})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=1)
+    annotation (Placement(transformation(extent={{100,-22},{86,-12}})));
+  AixLib.Fluid.Movers.SpeedControlled_y fan1(
+    redeclare package Medium = AixLib.Media.Water,
+    allowFlowReversal=false,
+    m_flow_small=0.001,
+    per(pressure(V_flow={0,V_flow_nominal,V_flow_nominal/0.7}, dp={dp_nominal/
+            0.7,dp_nominal,0})),
+    addPowerToMedium=false)
+    annotation (Placement(transformation(extent={{78,-58},{58,-38}})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
           32}},                       color={191,0,0}));
@@ -106,24 +120,27 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(modularBoiler_Controller.port_b, storage_modularBoiler.port_a_heatGenerator)
-    annotation (Line(points={{-12,22},{10,22},{10,6},{28,6},{28,-9.2},{16.4,
-          -9.2}}, color={0,127,255}));
+    annotation (Line(points={{-12,22},{10,22},{10,6},{28,6},{28,-9.2},{16.4,-9.2}},
+        color={0,127,255}));
   connect(storage_modularBoiler.port_b_heatGenerator, modularBoiler_Controller.port_a)
-    annotation (Line(points={{16.4,-26},{20,-26},{20,-30},{-40,-30},{-40,22},{
-          -32,22}}, color={0,127,255}));
+    annotation (Line(points={{16.4,-26},{20,-26},{20,-30},{-40,-30},{-40,22},{-32,
+          22}}, color={0,127,255}));
   connect(fixedTemperature.port, storage_modularBoiler.heatPort) annotation (
-      Line(points={{-14,-50},{-8,-50},{-8,-18},{0,-18}}, color={191,0,0}));
+      Line(points={{-14,-50},{-6,-50},{-6,-18},{0,-18}}, color={191,0,0}));
   connect(storage_modularBoiler.TTop, modularBoiler_Controller.TLayers[1])
-    annotation (Line(points={{19,-12.6},{34,-12.6},{34,30},{-10,30},{-10,31.1},
-          {-19.9,31.1}}, color={0,0,127}));
+    annotation (Line(points={{19,-12.6},{34,-12.6},{34,30},{-10,30},{-10,31.1},{
+          -19.9,31.1}}, color={0,0,127}));
   connect(vol.ports[1], storage_modularBoiler.port_b_consumer) annotation (Line(
-        points={{62,22},{62,16},{12,16},{12,-4},{8,-4},{8,-8}}, color={0,127,
-          255}));
-  connect(boundary_ph5.ports[1], storage_modularBoiler.port_a_consumer)
-    annotation (Line(points={{70,-62},{42,-62},{42,-58},{8,-58},{8,-28}}, color
-        ={0,127,255}));
-  connect(boundary.ports[1], storage_modularBoiler.port_a_consumer)
-    annotation (Line(points={{98,-40},{8,-40},{8,-28}}, color={0,127,255}));
+        points={{59.3333,22},{59.3333,16},{12,16},{12,-4},{8,-4},{8,-8}}, color=
+         {0,127,255}));
+  connect(boundary_ph5.ports[1], vol.ports[2]) annotation (Line(points={{104,30},
+          {84,30},{84,22},{62,22}}, color={0,127,255}));
+  connect(fan1.port_b, storage_modularBoiler.port_a_consumer)
+    annotation (Line(points={{58,-48},{8,-48},{8,-28}}, color={0,127,255}));
+  connect(vol.ports[3], fan1.port_a) annotation (Line(points={{64.6667,22},{78,
+          22},{78,16},{106,16},{106,-48},{78,-48}}, color={0,127,255}));
+  connect(realExpression.y, fan1.y)
+    annotation (Line(points={{85.3,-17},{68,-17},{68,-36}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterTwoPositionControllerBufferStorage;

@@ -7,9 +7,9 @@ package Medium = AixLib.Media.Water
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     T_start=293.15,
     m_flow_nominal=1,
-    nPorts=2,
     redeclare package Medium = AixLib.Media.Water,
-    V=3)
+    V=3,
+    nPorts=1)
     annotation (Placement(transformation(extent={{52,22},{72,42}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater
     "Prescribed heat flow" annotation (
@@ -23,7 +23,7 @@ package Medium = AixLib.Media.Water
     offset=-50000)
     annotation (Placement(transformation(extent={{-60,68},{-40,88}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
-    annotation (Placement(transformation(extent={{58,-6},{78,14}})));
+    annotation (Placement(transformation(extent={{66,-8},{86,12}})));
 
   flowTemperatureController.renturnAdmixture.BoilerControlBus_admixture
     boilerControlBus_admixture
@@ -58,6 +58,13 @@ package Medium = AixLib.Media.Water
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={18,-30})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 60)
+    annotation (Placement(transformation(
+        extent={{-6,-5},{6,5}},
+        rotation=-90,
+        origin={-20,65})));
+  Modelica.Blocks.Sources.Constant RPM(k=2000)
+    annotation (Placement(transformation(extent={{-114,-2},{-94,18}})));
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
     m_flow_nominal=8*996/3600,
     dp_nominal=8000,
@@ -66,16 +73,9 @@ package Medium = AixLib.Media.Water
     redeclare package Medium = Medium)
     "Hydraulic resistance in distribution cirquit (shortcut pipe)" annotation (
       Placement(transformation(
-        extent={{-7,-8},{7,8}},
-        rotation=180,
-        origin={19,-76})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 60)
-    annotation (Placement(transformation(
-        extent={{-6,-5},{6,5}},
-        rotation=-90,
-        origin={-20,65})));
-  Modelica.Blocks.Sources.Constant RPM(k=2000)
-    annotation (Placement(transformation(extent={{-114,-2},{-94,18}})));
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={14,-68})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
           32}},                       color={191,0,0}));
@@ -83,7 +83,7 @@ equation
     annotation (Line(points={{-39,78},{16,78},{16,58}},
                                                       color={0,0,127}));
   connect(vol.heatPort,temperatureSensor. port)
-    annotation (Line(points={{52,32},{52,4},{58,4}},     color={191,0,0}));
+    annotation (Line(points={{52,32},{52,2},{66,2}},     color={191,0,0}));
   connect(boilerControlBus_admixture, modularBoiler_Controller.boilerControlBus_Control)
     annotation (Line(
       points={{-72,50},{-28,50},{-28,33.8}},
@@ -106,10 +106,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modularBoiler_Controller.port_b, vol.ports[1]) annotation (Line(
-        points={{-14,24},{16,24},{60,24},{60,22}}, color={0,127,255}));
-  connect(modularBoiler_Controller.port_b, vol.ports[2])
-    annotation (Line(points={{-14,24},{64,24},{64,22}}, color={0,127,255}));
   connect(boilerControlBus_admixture, admix_modularBoiler.boilerControlBus_admixture)
     annotation (Line(
       points={{-72,50},{-70,50},{-70,98},{130,98},{130,-18},{114,-18},{114,-30},
@@ -126,10 +122,6 @@ equation
   connect(admix_modularBoiler.port_b2, modularBoiler_Controller.port_a)
     annotation (Line(points={{6,-10},{6,6},{-42,6},{-42,24},{-34,24}}, color={0,
           127,255}));
-  connect(hydRes.port_a, admix_modularBoiler.port_b1)
-    annotation (Line(points={{26,-76},{30,-76},{30,-50}}, color={0,127,255}));
-  connect(hydRes.port_b, admix_modularBoiler.port_a2) annotation (Line(points={
-          {12,-76},{10,-76},{10,-74},{6,-74},{6,-50}}, color={0,127,255}));
   connect(modularBoiler_Controller.valPos, admix_modularBoiler.valveSet)
     annotation (Line(points={{-13.8,29.2},{48,29.2},{48,48},{90,48},{90,-22.8},
           {42.8,-22.8}}, color={0,0,127}));
@@ -141,6 +133,12 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(admix_modularBoiler.port_b1, vol.ports[1]) annotation (Line(points={{
+          30,-50},{30,-74},{62,-74},{62,22}}, color={0,127,255}));
+  connect(admix_modularBoiler.port_a2, hydRes.port_a) annotation (Line(points={
+          {6,-50},{6,-56},{-8,-56},{-8,-68},{4,-68}}, color={0,127,255}));
+  connect(hydRes.port_b, admix_modularBoiler.port_b1) annotation (Line(points={
+          {24,-68},{26,-68},{26,-50},{30,-50}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterFlowtemperatureControl_admixture;

@@ -6,12 +6,12 @@ model twoPositionController_layers "Two position controller using mean temperatu
       realExpression(y=TMean));
    parameter Boolean layerCal=true
     "If true, the two-position controller uses the mean temperature of the buffer storage";
-    parameter Modelica.SIunits.Temperature TMean=273.15+55 "Mean temperature of all layers of the buffer storage";
+    parameter Modelica.SIunits.Temperature TMean=273.15+70 "Mean temperature of all layers of the buffer storage";
 
   parameter Modelica.SIunits.TemperatureDifference TLayer_dif=8 "Reference difference temperature for the on off controller for the buffer storage with layer calculation";
   parameter Modelica.SIunits.Temperature Tlayerref=273.15+65;
 
-  parameter Real bandwidth "Bandwidth around reference signal";
+
   Modelica.Blocks.Math.Sum sumTLayers(nin=n)
     annotation (Placement(transformation(extent={{-52,18},{-32,38}})));
   Modelica.Blocks.Math.Division meanTemperatureDynamicStorage

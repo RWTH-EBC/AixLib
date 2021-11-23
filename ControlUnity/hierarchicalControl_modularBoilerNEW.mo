@@ -20,13 +20,11 @@ model hierarchicalControl_modularBoilerNEW
       emergencySwitch_modularBoiler emergencySwitch_modularBoiler1
     annotation (Placement(transformation(extent={{-64,16},{-44,36}})));
  //Two position controller
- replaceable twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
+ replaceable twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
     twoPositionController_layers(
     n=n,
     variablePLR=variablePLR,
     layerCal=layerCal,
-    TLayer_dif=TLayer_dif,
-    Tlayerref=Tlayerref,
     bandwidth=bandwidth) if              not use_advancedControl
                                  constrainedby
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController
