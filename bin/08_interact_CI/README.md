@@ -21,44 +21,10 @@ update_ref : Updates the model and the whole package in which the model is locat
 
 ## Create yaml templates
 - python bin/02_CITests/07_ci_templates/ci_templates.py
+
+## Create yaml templates from toml file 
+- python bin/02_CITests/07_ci_templates/ci_templates.py --setting
+
 ## Check files and paths in _config.py
 - python bin/02_CITests/01_CleanUp/setting_check.py
 
-- CI_Regressiontest xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y
-- CI_create_plots xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y
-
-
-- Regressiontest_job
-- Regression_overall_coverage
-- prepare_create_plots
-- Regressiontest_changed_Job
-- Changed_create_plots
-- RegressionTest_Check_References
-- Update_Regression_Results xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-- plot_reference_results xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-
-- check_model_job
-- check_changed_models_job
-- CI_check_model_job xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-- whitelist_job xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-
-- CI_simulate_model_job xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-- simulate_model_job
-- simulate_changed_models_job
-
-- trigger_check_HTML
-- HTML_Merge_Checks
-- HTML_Check
-- CI_HTML_Check
-- Open_Pull_Request
-- htmL_whitelist_job  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-
-
-- Style_Check_AixLib
-- Style_Check_ChangedModel
-
-- IBPSA 	 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-- WhiteList	 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-- IBPSA_Pull_Request	 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 
-
-- pages	 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y 

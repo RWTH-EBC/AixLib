@@ -1,3 +1,18 @@
+## What is CI?
+
+Continuous integration is a term from software development that describes the process of continuously assembling components to form an application. 
+The goal of continuous integration is to increase software quality.
+Typical actions are translating and linking the application parts, but in principle any other operations to generate derived information are performed. 
+Usually, not only the entire system is rebuilt, but also automated tests are performed and software metrics are created to measure software quality. 
+The whole process is automatically triggered by checking into the version control system.
+
+### How we use CI?
+In our case we mirror a github repository in GitLab. This way the repository can be tested and corrected with the CI in Gitlab. 
+We also use the Docker service to create an image containing Dymola and thus be able to simulate models in Dymola.
+
+For more information read the [General Documentation](https://github.com/RWTH-EBC/AixLib/blob/development/bin/04_Documentation/Documentation_GitLab.md) and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
+
+![E.ON EBC RWTH Aachen University](04_Documentation/Images/GITLABCI.png)
 
 # How Configure the CI Tests
 

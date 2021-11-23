@@ -61,7 +61,6 @@ This folder contains [documentation](https://github.com/RWTH-EBC/AixLib/blob/dev
 ### 06_Configfiles
 
 This folder contains [Config files](https://github.com/RWTH-EBC/AixLib/blob/development/bin/06_Configfiles) which are used for the CI. 
-For question ask [Sven Hinrichs](https://git.rwth-aachen.de/sven.hinrichs)
 
 ### 07_templates
 This folder contains [Templates](https://github.com/RWTH-EBC/AixLib/blob/development/bin/07_templates) for the CI tests implemented so far. The following example can be used to implement the tests in the CI. 
