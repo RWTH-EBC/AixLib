@@ -1,12 +1,10 @@
-from buildingspy.development import error_dictionary_jmodelica
-from buildingspy.development import error_dictionary_dymola
-
 import codecs
 import multiprocessing
 import argparse
 import os
 import sys 
 import platform
+import time
 
 class StyleCheck(object):
 	""" Class to Check the Style of Packages and Models
@@ -118,7 +116,7 @@ class StyleCheck(object):
 
 	def _StyleCheckLog_Check(self):
 		StyleCheck._dym_check_lic(self)
-		result = StyleCheck._CheckStyle(self)
+		result = StyleCheck._checkstyle(self)
 		inputfile = result[0]
 		model_list = result[1]
 		outputfile = inputfile.replace("_StyleCheckLog.html", "_StyleErrorLog.html")
