@@ -7,16 +7,16 @@ show_ref : Lists all mentioned reference results graphically.
 update_ref : Updates the model and the whole package in which the model is located.
 
 ## Command list
-- update_ref_commit = "ci_update_ref" # Update referencefiles for all models in file  bin/08_interact_CI/update_ref.txt y [immer]
-- show_ref_commit = "ci_show_ref"	# plot all referencifiles in file bin/08_interact_CI/show_ref.txt [nur pull_request]
-- dif_ref_commit = "ci_dif_ref" [nicht implementiert]
-- html_commit = "ci_correct_html"  y
-- create_wh_commit = "ci_create_whitelist" y
-- create_html_wh_commit = "ci_create_html_whitelist"  y
-- simulate_commit = "ci_simulate" y
-- check_commit = "ci_check" y
-- regression_test_commit = "ci_regression_test" [nur als pull_request] y
-- ci_html_commit = "ci_html" y
+
+- `git commit -m "ci_update_ref"` 			# Update referencefiles for all models that are added in file bin/08_interact_CI/update_ref.txt  
+- `git commit -m "ci_show_ref"`	  			# plot all referencefiles that are added in file bin/08_interact_CI/show_ref.txt [only as pull_request]
+- `git commit -m "ci_correct_html"`     	# CI bot message: correct html syntax
+- `git commit -m "ci_create_whitelist"` 	# create a new whitelist for the model check
+- `git commit -m "ci_create_html_whitelist"`# create a new html whitelist for the html check
+- `git commit -m "ci_simulate"` 	  		# Simulate all examples
+- `git commit -m "ci_check"` 		  		# Check all models
+- `git commit -m "ci_regression_test"` 		# Start the regression test [only as pull_request]
+- `git commit -m "ci_html"` 				# Test only the html of models
 
 
 ## Create yaml templates

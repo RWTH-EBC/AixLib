@@ -7,13 +7,6 @@ Typical actions are translating and linking the application parts, but in princi
 Usually, not only the entire system is rebuilt, but also automated tests are performed and software metrics are created to measure software quality. 
 The whole process is automatically triggered by checking into the version control system.
 
-### How we use CI?
-In our case we mirror a github repository in GitLab. This way the repository can be tested and corrected with the CI in Gitlab. 
-We also use the Docker service to create an image containing Dymola and thus be able to simulate models in Dymola.
-
-For more information read the [General Documentation](https://github.com/RWTH-EBC/AixLib/blob/development/bin/04_Documentation/Documentation_GitLab.md) and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
-
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/GITLABCI.png)
 
 ## CI commands 
 
@@ -104,10 +97,10 @@ This folder contains [Templates](https://github.com/RWTH-EBC/AixLib/blob/develop
 
 This folder is important for the CI commands. 
 
-show_ref.txt: If certain models are visualized on the basis of the reference files, these must be entered line by line in the text file show_ref.txt. Afterwards the file must be pushed with the command `git commit -m "ci_show_ref"`
+`show_ref.txt`: If certain models are visualized on the basis of the reference files, these must be entered line by line in the text file show_ref.txt. Afterwards the file must be pushed with the command `git commit -m "ci_show_ref"`
  
-update_ref.txt: If the reference files are to be updated for certain models, the reference files must be entered line by line in the text file update_ref.txt. Afterwards the file must be pushed with the CI commands command '''git commit -m "ci_update_ref"'''
+`update_ref.txt`: If the reference files are to be updated for certain models, the reference files must be entered line by line in the text file update_ref.txt. Afterwards the file must be pushed with the CI commands command `git commit -m "ci_update_ref"`
 
 ### 09_Setting
 
-This folder contains settings for the CI. The CI_setting.toml file contains the variables for the CI. Changes can be made in the toml file. The templates are then updated with the command python bin/02_CITests/07_ci_templates/ci_templates.py --setting.
+This folder contains settings for the CI. The CI_setting.toml file contains the variables for the CI. Changes can be made in the toml file. The templates are then updated with the command `python bin/02_CITests/07_ci_templates/ci_templates.py --setting`.
