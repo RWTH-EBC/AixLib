@@ -20,6 +20,9 @@ The whole process is automatically triggered by checking into the version contro
 - `git commit -m "ci_regression_test"` 		# Start the regression test [only as pull_request]
 - `git commit -m "ci_html"` 				# Test only the html of models
 
+## Libraries that need to be installed
+- `pip install mako pandas toml matplotlib argparse`
+  
 
 ## What CI Tests are implement?
 #### Check, Simulate and Regressiontest: [UnitTests](https://github.com/RWTH-EBC/AixLib/blob/development/bin/02_CITests/UnitTests)
