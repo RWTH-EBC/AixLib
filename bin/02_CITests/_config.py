@@ -1,4 +1,8 @@
 import os
+# image_name
+image_name = 'registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest'
+variable_main_list = ['Github_Repository: RWTH-EBC/AixLib', 'GITLAB_Page: https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib']
+
 
 #[Whitelist files]
 ch_file = f'bin{os.sep}06_Configfiles{os.sep}ci_changed_model_list.txt'
@@ -42,9 +46,7 @@ resource_dir = f'Resources{os.sep}Scripts{os.sep}Dymola'
 # Setting file
 setting_file = f'bin{os.sep}09_Setting{os.sep}CI_setting_template.txt'
 
-# image_name
-image_name = 'registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest'
-variable_main_list = ['Github_Repository: RWTH-EBC/AixLib', 'GITLAB_Page: https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib']
+
 stage_list = ["check_setting", "build_templates", "Ref_Check", "build", "HTML_Check", "IBPSA_Merge", "create_html_whitelist", "Update_WhiteList", "Release", "StyleCheck", "check", "openMR", "post", "create_whitelist", "simulate", "RegressionTest", "Update_Ref", "plot_ref", "prepare", "deploy"]
 
 
