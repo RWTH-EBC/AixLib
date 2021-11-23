@@ -50,11 +50,12 @@ model BoilerTesterFlowtemperatureControl
   AixLib.Systems.ModularEnergySystems.Interfaces.BoilerControlBus
                                        boilerControlBus
     annotation (Placement(transformation(extent={{-82,26},{-62,46}})));
-  ModularBoiler_FlowTemperatureControl modularBoiler_Controller(
+  ModularBoiler_FlowTemperatureControlHeatCurve modularBoiler_Controller(
     TColdNom=333.15,
     QNom=100000,
     n=1,
-    use_advancedControl=true)
+    use_advancedControl=true,
+    severalHeatcurcuits=false)
     annotation (Placement(transformation(extent={{-28,14},{-8,34}})));
   Modelica.Blocks.Sources.Ramp ramp(
     height=-20,
@@ -66,6 +67,8 @@ model BoilerTesterFlowtemperatureControl
         origin={82,86})));
   Modelica.Blocks.Sources.RealExpression PLR(y=1)
     annotation (Placement(transformation(extent={{-118,24},{-98,44}})));
+  Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
+    annotation (Placement(transformation(extent={{-98,-14},{-78,6}})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
           32}},                       color={191,0,0}));
@@ -98,7 +101,13 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ramp.y, modularBoiler_Controller.Tamb) annotation (Line(points={{82,
-          75},{82,68},{-13.2,68},{-13.2,34}}, color={0,0,127}));
+          75},{82,68},{-11.6,68},{-11.6,34}}, color={0,0,127}));
+  connect(isOn.y, boilerControlBus.isOn) annotation (Line(points={{-77,-4},{
+          -71.95,-4},{-71.95,36.05}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterFlowtemperatureControl;

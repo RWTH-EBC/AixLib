@@ -2,7 +2,7 @@ within ControlUnity.flowTemperatureController.renturnAdmixture;
 expandable connector BoilerControlBus_admixture
   "Standard data bus with boiler information"
   extends Modelica.Icons.SignalBus;
-
+  parameter Integer n=1 "Number of heat curcuits";
 Boolean isOn "Switches Controller on and off";
 Modelica.SIunits.Temperature TAmbient "Ambient air temperature";
 Boolean switchToNightMode "Switches the boiler to night mode";

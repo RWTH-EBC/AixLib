@@ -139,22 +139,17 @@ model Admix_modularBoiler
     choicesAllMatching=true,
     Placement(transformation(extent={{22,12},{38,28}})));
 
+  Modelica.Blocks.Interfaces.RealInput valveSet annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={-36,124})));
 equation
 
   connect(const.y, prescribedTemperature.T)
     annotation (Line(points={{55.2,-20},{49.6,-20}}, color={0,0,127}));
   connect(valve.port_2, pipe2.port_a)
     annotation (Line(points={{-20,20},{-8,20}}, color={0,127,255}));
-  connect(valve.y, hydraulicBus.valveSet) annotation (Line(points={{-30,32},{-30,
-          100},{-14,100},{-14,100.1},{0.1,100.1}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(valve.y_actual, hydraulicBus.valveMea) annotation (Line(points={{-25,
-          27},{-25,100.5},{0.1,100.5},{0.1,100.1}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(pipe5.port_a,junc456. ports[1])
     annotation (Line(points={{-50,-60},{-32.1333,-60}}, color={0,127,255}));
   connect(pipe6.port_a,junc456. ports[2]) annotation (Line(points={{-30,-28},{
@@ -175,13 +170,6 @@ equation
                                              color={191,0,0}));
   connect(pipe4.heatPort, prescribedTemperature.port) annotation (Line(points={{32,
           -52},{32,-48},{0,-48},{0,-20},{32,-20}}, color={191,0,0}));
-  connect(PumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
-      points={{30,28},{30,100.1},{0.1,100.1}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(PumpInterface.port_b, pipe3.port_a)
     annotation (Line(points={{38,20},{60,20}}, color={0,127,255}));
   connect(senT_a1.port_b,pipe1. port_a)
@@ -198,6 +186,24 @@ equation
     annotation (Line(points={{76,20},{88,20}}, color={0,127,255}));
   connect(pipe6.port_b, valve.port_3)
     annotation (Line(points={{-30,-12},{-30,10}}, color={0,127,255}));
+  connect(valve.y_actual, boilerControlBus_admixture.valveMea) annotation (Line(
+        points={{-25,27},{-14,27},{-14,92},{0.1,92},{0.1,100.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(boilerControlBus_admixture.pumpBus, PumpInterface.pumpBus)
+    annotation (Line(
+      points={{0.1,100.1},{14,100.1},{14,90},{30,90},{30,28}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(valveSet, valve.y) annotation (Line(points={{-36,124},{-36,94},{-30,
+          94},{-30,32}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(initialScale=0.1), graphics={
         Polygon(

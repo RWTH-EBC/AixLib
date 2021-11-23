@@ -48,6 +48,8 @@ model BoilerTesterTwoPositionController
     TColdNom=333.15,
     QNom=100000,
     n=1) annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
+  Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
+    annotation (Placement(transformation(extent={{-104,2},{-84,22}})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{
           52,32}},                    color={191,0,0}));
@@ -82,6 +84,12 @@ equation
   connect(temperatureSensor.T, modularBoiler_Controller.TLayers[1]) annotation
     (Line(points={{78,4},{86,4},{86,68},{-19.9,68},{-19.9,33.1}}, color={0,0,
           127}));
+  connect(isOn.y, boilerControlBus.isOn) annotation (Line(points={{-83,12},{
+          -71.95,12},{-71.95,36.05}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterTwoPositionController;

@@ -116,9 +116,9 @@ connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
   connect(emergencySwitch_modularBoiler1.PLR_set, twoPositionController_layers.PLRin)
     annotation (Line(points={{2,59},{10,59},{10,63},{24,63}}, color={0,0,127}));
   connect(TLayers, twoPositionController_layers.TLayers) annotation (Line(
-        points={{6,100},{6,72},{18,72},{18,57.6},{24,57.6}}, color={0,0,127}));
-  connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points={
-          {45,59.2},{67.5,59.2},{67.5,60},{100,60}}, color={0,0,127}));
+        points={{6,100},{6,72},{18,72},{18,51.8},{24,51.8}}, color={0,0,127}));
+  connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points={{45.2,
+            54.6},{67.5,54.6},{67.5,60},{100,60}},   color={0,0,127}));
 
   end if;
 

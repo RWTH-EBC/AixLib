@@ -1,5 +1,5 @@
 within ControlUnity.Modules;
-model ModularBoiler_TwoPositionController
+model ModularBoiler_TwoPositionControllerBufferStorage
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium =AixLib.Media.Water,
                            final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom));
@@ -122,7 +122,7 @@ model ModularBoiler_TwoPositionController
     n=1,
     bandwidth=2.5,
     severalHeatcurcuits=false,
-    k=3) annotation (Placement(transformation(extent={{2,40},{22,60}})));
+    k=3) annotation (Placement(transformation(extent={{0,40},{20,60}})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
@@ -203,7 +203,7 @@ equation
           55},{-34,55},{-34,20},{-50,20},{-50,12}},        color={0,0,127}));
   connect(boilerControlBus.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
     annotation (Line(
-      points={{-39.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,50.6},{2,50.6}},
+      points={{-39.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,50.6},{0,50.6}},
 
       color={255,204,51},
       thickness=0.5), Text(
@@ -212,18 +212,18 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(TLayers, hierarchicalControl_modularBoilerNEW1.TLayers) annotation (
-      Line(points={{53,101},{53,72},{12.6,72},{12.6,60}}, color={0,0,127}));
+      Line(points={{53,101},{53,72},{10.6,72},{10.6,60}}, color={0,0,127}));
   connect(regulation_modularBoiler.PLRset,
     hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,
-          59.6},{-20,59.6},{-20,57.4},{2,57.4}}, color={0,0,127}));
+          59.6},{-20,59.6},{-20,57.4},{0,57.4}}, color={0,0,127}));
   connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tin) annotation (
-      Line(points={{60,11},{54,11},{54,64},{-6,64},{-6,53.2},{2,53.2}}, color={
+      Line(points={{60,11},{54,11},{54,64},{-6,64},{-6,53.2},{0,53.2}}, color={
           0,0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset, heatGeneratorNoControl.PLR)
-    annotation (Line(points={{22,56},{30,56},{30,16},{-16,16},{-16,5.4},{-10,
+    annotation (Line(points={{20,56},{30,56},{30,16},{-16,16},{-16,5.4},{-10,
           5.4}}, color={0,0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset,
-    regulation_modularBoiler.PLRMea) annotation (Line(points={{22,56},{30,56},{
+    regulation_modularBoiler.PLRMea) annotation (Line(points={{20,56},{30,56},{
           30,38},{-68,38},{-68,49.4},{-62,49.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
@@ -257,4 +257,4 @@ equation
 </ol>
 </html>"),
     experiment(StopTime=10));
-end ModularBoiler_TwoPositionController;
+end ModularBoiler_TwoPositionControllerBufferStorage;
