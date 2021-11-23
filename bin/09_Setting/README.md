@@ -10,9 +10,9 @@ The whole process is automatically triggered by checking into the version contro
 In our case we mirror a github repository in GitLab. This way the repository can be tested and corrected with the CI in Gitlab. 
 We also use the Docker service to create an image containing Dymola and thus be able to simulate models in Dymola.
 
-For more information read the [General Documentation](https://github.com/RWTH-EBC/AixLib/blob/development/bin/04_Documentation/Documentation_GitLab.md) and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
+For more information read the [General Documentation](../04_Documentation/Documentation_GitLab.md) and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/GITLABCI.png)
+![E.ON EBC RWTH Aachen University](../04_Documentation/Images/GITLABCI.png)
 
 # How Configure the CI Tests
 
@@ -86,10 +86,10 @@ You can create as many personal access tokens as you like from your GitLab profi
 Before you push to your branch, please be sure that your git configs are covered with your datas in your github account. 
 
 Set your username:
-	git config --global user.name "FIRST_NAME LAST_NAME"
+`git config --global user.name "FIRST_NAME LAST_NAME"`
 
 Set your email address:
-	git config --global user.email "MY_NAME@example.com"
+`git config --global user.email "MY_NAME@example.com"`
 	
 It is important that these settings are correct, because the github_api.py script creates a pull request and declares you as Assigneed to this pull_request. 
 	
