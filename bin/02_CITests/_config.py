@@ -46,8 +46,8 @@ setting_file = f'bin{os.sep}09_Setting{os.sep}CI_setting_template.txt'
 image_name = 'registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest'
 variable_main_list = ['Github_Repository: RWTH-EBC/AixLib', 'GITLAB_Page: https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib']
 stage_list = ["check_setting", "build_templates", "Ref_Check", "build", "HTML_Check", "IBPSA_Merge", "create_html_whitelist", "Update_WhiteList", "Release", "StyleCheck", "check", "openMR", "post", "create_whitelist", "simulate", "RegressionTest", "Update_Ref", "plot_ref", "prepare", "deploy"]
-# Pull Request Comment
-#self.post_comment_message = f'Error in regression test.\\n Compare the results on the following page {self.page_url}'
+
+
 gitlab_ci_variables = ["GITHUB_API_TOKEN", "GITHUB_PRIVATE_KEY", "GL_TOKEN"]  # Set these Token with this name in your gitlab ci under CI/Variables
 
 
