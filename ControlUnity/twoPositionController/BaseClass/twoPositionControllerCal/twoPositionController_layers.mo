@@ -2,14 +2,13 @@ within ControlUnity.twoPositionController.BaseClass.twoPositionControllerCal;
 model twoPositionController_layers "Two position controller using mean temperature of buffer storage for calculation"
 
   extends
-    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(
-      realExpression(y=TMean));
+    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController;
    parameter Boolean layerCal=true
     "If true, the two-position controller uses the mean temperature of the buffer storage";
     parameter Modelica.SIunits.Temperature TMean=273.15+70 "Mean temperature of all layers of the buffer storage";
 
   parameter Modelica.SIunits.TemperatureDifference TLayer_dif=8 "Reference difference temperature for the on off controller for the buffer storage with layer calculation";
-  parameter Modelica.SIunits.Temperature Tlayerref=273.15+65;
+  parameter Modelica.SIunits.Temperature Tref=273.15+70;
 
 
   Modelica.Blocks.Math.Sum sumTLayers(nin=n)

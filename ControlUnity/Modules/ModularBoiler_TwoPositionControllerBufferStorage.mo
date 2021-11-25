@@ -120,9 +120,9 @@ model ModularBoiler_TwoPositionControllerBufferStorage
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=false,
     redeclare
-      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
-      twoPositionController_layers,
-    n=1,
+      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
+      twoPositionController_layers(n=n),
+    n=n,
     bandwidth=2.5,
     severalHeatcurcuits=false,
     k=1) annotation (Placement(transformation(extent={{0,40},{20,60}})));

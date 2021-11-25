@@ -1,11 +1,9 @@
 within ControlUnity.twoPositionController;
 model twoPositionControllerSimple_modularBoiler "Simple two position controller"
   extends ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(n=1,
-      onOffController(bandwidth=2.5,
-                      pre_y_start=false));
+      onOffController(pre_y_start=false));
 
   parameter Modelica.SIunits.Temperature T_ref=273.15+70 "Solltemperatur";
-  parameter Real bandwidth=0 "Bandbreite"; //bandwidth=Abgrenzung nach unten und oben, z.B; bandwidth=2 58,60,62
 
 equation
 

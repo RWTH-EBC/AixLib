@@ -108,6 +108,12 @@ model Storage_modularBoiler
       displayUnit = "degC")
     "Temperature on the top level of the storage"
     annotation (Placement(transformation(extent={{100,44},{120,64}})));
+  Modelica.Blocks.Interfaces.RealOutput TBottom
+    "Temperature at the bottom of the storage (first layer)"
+    annotation (Placement(transformation(extent={{100,-80},{120,-60}})));
+  Modelica.Blocks.Interfaces.RealOutput TLayer[n]
+    "Temperature of the n layers of the storage"
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
   parameter Modelica.SIunits.Volume V = A * h;
   parameter Modelica.SIunits.Area A = Modelica.Constants.pi * d ^ 2 / 4;
@@ -163,6 +169,12 @@ equation
 
   //Temperature sensor
   TTop=layer[n].heatPort.T;
+  TBottom=layer[1].heatPort.T;
+
+  for m in 1:n loop
+    TLayer[m]=layer[m].heatPort.T;
+  end for;
+
 
   annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-154, 3}, {-136, -7}, {-110, -3}, {-84, -7}, {-48, -5}, {-18, -9}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 0, 255},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {78, -59}, rotation = 360), Polygon(points = {{-154, 3}, {-134, -3}, {-110, 1}, {-84, -1}, {-56, -5}, {-30, -11}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {14, 110, 255},

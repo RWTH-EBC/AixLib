@@ -119,6 +119,8 @@ model ModularBoiler_TwoPositionController
   ControlUnity.hierarchicalControl_modularBoilerNEW
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=false,
+    redeclare twoPositionController.twoPositionControllerSimple_modularBoiler
+      twoPositionController_layers,
     n=1,
     bandwidth=2.5,
     severalHeatcurcuits=false,
@@ -204,13 +206,13 @@ equation
   connect(boilerControlBus.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
     annotation (Line(
       points={{-39.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,50.6},{2,50.6}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+
   connect(TLayers, hierarchicalControl_modularBoilerNEW1.TLayers) annotation (
       Line(points={{53,101},{53,72},{12.6,72},{12.6,60}}, color={0,0,127}));
   connect(regulation_modularBoiler.PLRset,

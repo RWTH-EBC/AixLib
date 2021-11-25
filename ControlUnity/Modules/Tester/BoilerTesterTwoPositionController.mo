@@ -32,7 +32,6 @@ model BoilerTesterTwoPositionController
     annotation (Placement(transformation(extent={{58,-6},{78,14}})));
   Modelica.Fluid.Pipes.StaticPipe pipe(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     allowFlowReversal=true,
     length=5,
     isCircular=true,
@@ -41,6 +40,7 @@ model BoilerTesterTwoPositionController
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           dp_nominal=0, m_flow_nominal=0.4785))
     annotation (Placement(transformation(extent={{60,-26},{38,-6}})));
+
   AixLib.Systems.ModularEnergySystems.Interfaces.BoilerControlBus
                                        boilerControlBus
     annotation (Placement(transformation(extent={{-82,26},{-62,46}})));
@@ -77,12 +77,12 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(vol.ports[2], modularBoiler_Controller.port_b) annotation (Line(
         points={{64,22},{26,22},{26,24},{-12,24}}, color={0,127,255}));
-  connect(pipe.port_b, modularBoiler_Controller.port_a) annotation (Line(points
-        ={{38,-16},{30,-16},{30,6},{-42,6},{-42,24},{-32,24}}, color={0,127,255}));
+  connect(pipe.port_b, modularBoiler_Controller.port_a) annotation (Line(points=
+         {{38,-16},{30,-16},{30,6},{-42,6},{-42,24},{-32,24}}, color={0,127,255}));
   connect(bou.ports[1], modularBoiler_Controller.port_a) annotation (Line(
         points={{16,-22},{18,-22},{18,0},{-32,0},{-32,24}}, color={0,127,255}));
-  connect(temperatureSensor.T, modularBoiler_Controller.TLayers[1]) annotation
-    (Line(points={{78,4},{86,4},{86,68},{-19.9,68},{-19.9,33.1}}, color={0,0,
+  connect(temperatureSensor.T, modularBoiler_Controller.TLayers[1]) annotation (
+     Line(points={{78,4},{86,4},{86,68},{-19.9,68},{-19.9,33.1}}, color={0,0,
           127}));
   connect(isOn.y, boilerControlBus.isOn) annotation (Line(points={{-83,12},{
           -71.95,12},{-71.95,36.05}}, color={255,0,255}), Text(
