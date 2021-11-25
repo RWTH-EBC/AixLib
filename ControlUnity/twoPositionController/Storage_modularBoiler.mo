@@ -24,7 +24,8 @@ model Storage_modularBoiler
                                     annotation(Placement(transformation(extent = {{-10, -108}, {10, -88}}), iconTransformation(extent = {{-10, -110}, {10, -90}})));
   Modelica.Fluid.Interfaces.FluidPort_b
                     port_b_consumer(redeclare final package Medium = Medium)
-                                    annotation(Placement(transformation(extent = {{-10, 82}, {10, 102}}), iconTransformation(extent = {{-10, 90}, {10, 110}})));
+                                    annotation(Placement(transformation(extent={{-10,82},
+            {10,102}}),                                                                                   iconTransformation(extent = {{-10, 90}, {10, 110}})));
   AixLib.Fluid.MixingVolumes.MixingVolume layer[n](
     each final energyDynamics=energyDynamics,
     each final p_start=p_start,
@@ -132,7 +133,7 @@ equation
       points={{0,-98},{0,-34},{20,-34},{20,-2},{10,-2}},
       color={0,127,255}));
   connect(layer[n].ports[2], port_b_consumer) annotation (Line(
-      points={{10,2},{16,2},{20,2},{20,40},{0,40},{0,92}},
+      points={{10,2},{20,2},{20,40},{0,40},{0,92}},
       color={0,127,255}));
 
   //Connect layers
