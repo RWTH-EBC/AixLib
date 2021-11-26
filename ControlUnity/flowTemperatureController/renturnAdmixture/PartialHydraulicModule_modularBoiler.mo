@@ -68,7 +68,7 @@ partial model PartialHydraulicModule_modularBoiler
   // Sensors
   // -------------------------------------------------
 
-protected
+
   AixLib.Fluid.Sensors.VolumeFlowRate VFSen_out(
     redeclare package Medium = Medium,
     T_start=T_start,

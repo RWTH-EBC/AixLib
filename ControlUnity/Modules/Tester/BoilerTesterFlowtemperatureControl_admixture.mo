@@ -9,7 +9,7 @@ package Medium = AixLib.Media.Water
     m_flow_nominal=1,
     redeclare package Medium = AixLib.Media.Water,
     V=3,
-    nPorts=1)
+    nPorts=3)
     annotation (Placement(transformation(extent={{52,22},{72,42}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater
     "Prescribed heat flow" annotation (
@@ -58,24 +58,16 @@ package Medium = AixLib.Media.Water
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={18,-30})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 60)
+  Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 70)
     annotation (Placement(transformation(
         extent={{-6,-5},{6,5}},
         rotation=-90,
         origin={-20,65})));
   Modelica.Blocks.Sources.Constant RPM(k=2000)
     annotation (Placement(transformation(extent={{-114,-2},{-94,18}})));
-  AixLib.Fluid.FixedResistances.PressureDrop hydRes(
-    m_flow_nominal=8*996/3600,
-    dp_nominal=8000,
-    m_flow(start=hydRes.m_flow_nominal),
-    dp(start=hydRes.dp_nominal),
-    redeclare package Medium = Medium)
-    "Hydraulic resistance in distribution cirquit (shortcut pipe)" annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={14,-68})));
+  AixLib.Fluid.Sources.Boundary_pT
+                      boundary_ph5(redeclare package Medium = Medium, nPorts=1)
+                                                     annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={112,34})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
           32}},                       color={191,0,0}));
@@ -133,12 +125,13 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(admix_modularBoiler.port_b1, vol.ports[1]) annotation (Line(points={{
-          30,-50},{30,-74},{62,-74},{62,22}}, color={0,127,255}));
-  connect(admix_modularBoiler.port_a2, hydRes.port_a) annotation (Line(points={
-          {6,-50},{6,-56},{-8,-56},{-8,-68},{4,-68}}, color={0,127,255}));
-  connect(hydRes.port_b, admix_modularBoiler.port_b1) annotation (Line(points={
-          {24,-68},{26,-68},{26,-50},{30,-50}}, color={0,127,255}));
+  connect(admix_modularBoiler.port_b1, vol.ports[1]) annotation (Line(points={{30,-50},
+          {30,-74},{59.3333,-74},{59.3333,22}},
+                                              color={0,127,255}));
+  connect(boundary_ph5.ports[1], vol.ports[2]) annotation (Line(points={{102,34},
+          {86,34},{86,22},{62,22}}, color={0,127,255}));
+  connect(vol.ports[3], admix_modularBoiler.port_a2) annotation (Line(points={{
+          64.6667,22},{64,22},{64,-86},{6,-86},{6,-50}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterFlowtemperatureControl_admixture;

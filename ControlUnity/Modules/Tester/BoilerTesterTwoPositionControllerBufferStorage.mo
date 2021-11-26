@@ -53,11 +53,11 @@ model BoilerTesterTwoPositionControllerBufferStorage
   ModularBoiler_TwoPositionControllerBufferStorage modularBoiler_Controller(
     TColdNom=333.15,
     QNom=100000,
-    n=10)
-         annotation (Placement(transformation(extent={{-32,12},{-12,32}})));
+    n=1) annotation (Placement(transformation(extent={{-32,12},{-12,32}})));
   Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
     annotation (Placement(transformation(extent={{-104,2},{-84,22}})));
   twoPositionController.Storage_modularBoiler storage_modularBoiler(
+    x=5,
     n=10,
     d=0.5,
     h=1,
@@ -139,9 +139,9 @@ equation
           22},{78,16},{106,16},{106,-48},{78,-48}}, color={0,127,255}));
   connect(realExpression.y, fan1.y)
     annotation (Line(points={{85.3,-17},{68,-17},{68,-36}}, color={0,0,127}));
-  connect(storage_modularBoiler.TLayer, modularBoiler_Controller.TLayers)
-    annotation (Line(points={{19,-18},{38,-18},{38,28},{-12,28},{-12,42},{-19.9,
-          42},{-19.9,31.1}}, color={0,0,127}));
+  connect(storage_modularBoiler.TTop, modularBoiler_Controller.TLayers[1])
+    annotation (Line(points={{19,-10.4},{34,-10.4},{34,30},{-12,30},{-12,40},{
+          -19.9,40},{-19.9,31.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterTwoPositionControllerBufferStorage;

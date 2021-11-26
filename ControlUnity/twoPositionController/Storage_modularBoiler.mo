@@ -5,6 +5,7 @@ model Storage_modularBoiler
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
+  parameter Integer x(max=n) "Number of layer which is used";
   parameter Integer n(min = 3) "number of layers";
   parameter Modelica.SIunits.Length d "storage diameter";
   parameter Modelica.SIunits.Length h "storage height";
@@ -108,13 +109,15 @@ model Storage_modularBoiler
       min=0,
       displayUnit = "degC")
     "Temperature on the top level of the storage"
-    annotation (Placement(transformation(extent={{100,44},{120,64}})));
+    annotation (Placement(transformation(extent={{100,66},{120,86}})));
   Modelica.Blocks.Interfaces.RealOutput TBottom
     "Temperature at the bottom of the storage (first layer)"
     annotation (Placement(transformation(extent={{100,-80},{120,-60}})));
   Modelica.Blocks.Interfaces.RealOutput TLayer[n]
     "Temperature of the n layers of the storage"
-    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+    annotation (Placement(transformation(extent={{102,28},{122,48}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package Medium = Medium)
+    annotation (Placement(transformation(extent={{96,-12},{116,8}})));
 protected
   parameter Modelica.SIunits.Volume V = A * h;
   parameter Modelica.SIunits.Area A = Modelica.Constants.pi * d ^ 2 / 4;
@@ -175,6 +178,10 @@ equation
   for m in 1:n loop
     TLayer[m]=layer[m].heatPort.T;
   end for;
+
+
+ //Connection of layer x with the fluidport
+  connect(port_b, layer[x].ports[2]);
 
 
   annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-154, 3}, {-136, -7}, {-110, -3}, {-84, -7}, {-48, -5}, {-18, -9}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 0, 255},

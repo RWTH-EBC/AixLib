@@ -124,7 +124,8 @@ model ModularBoiler_FlowTemperatureControlAdmix
     use_advancedControl=true,
     n=n,
     bandwidth=2.5,
-    severalHeatcurcuits=true)
+    severalHeatcurcuits=true,
+    k=1)
     annotation (Placement(transformation(extent={{-2,48},{18,68}})));
   Modelica.Blocks.Interfaces.RealInput Tset
     "Set temperatures for the flow temperatures of the n heating curcuits"
