@@ -230,8 +230,9 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.TMea) annotation (
-      Line(points={{60,11},{60,36},{3.8,36},{3.8,47.2}}, color={0,0,127}));
+  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.TMeaBoiler)
+    annotation (Line(points={{60,11},{60,36},{3.8,36},{3.8,47.2}}, color={0,0,
+          127}));
   connect(regulation_modularBoiler.PLRset,
     hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,
           59.6},{-24,59.6},{-24,65.4},{-2,65.4}}, color={0,0,127}));

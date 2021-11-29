@@ -9,10 +9,10 @@ model returnAdmixture
 
   Modelica.Blocks.Interfaces.RealInput Tset
     "Set temperatures for k heat curcuits"
-    annotation (Placement(transformation(extent={{-120,-82},{-80,-42}})));
+    annotation (Placement(transformation(extent={{-120,-52},{-80,-12}})));
   Modelica.Blocks.Interfaces.RealOutput valPos
     "Valve position for the k heat curcuits"
-    annotation (Placement(transformation(extent={{90,-72},{110,-52}})));
+    annotation (Placement(transformation(extent={{90,-42},{110,-22}})));
   Modelica.Blocks.Interfaces.RealInput TMea
     "Measurement temperatures for the k heat curcuits" annotation (Placement(
         transformation(
@@ -24,7 +24,7 @@ model returnAdmixture
     k=0.01,
     Ti=5,
     yMax=1,
-    yMin=0) annotation (Placement(transformation(extent={{-10,-72},{10,-52}})));
+    yMin=0) annotation (Placement(transformation(extent={{-10,-42},{10,-22}})));
   Modelica.Blocks.Interfaces.RealInput PLRin
     annotation (Placement(transformation(extent={{-120,68},{-80,108}})));
   Modelica.Blocks.Interfaces.RealOutput PLRset
@@ -38,7 +38,7 @@ model returnAdmixture
   Modelica.Blocks.Interfaces.RealInput TMeaBoiler
     "Measured boiler temperature to keep the fixed temperature"
     annotation (Placement(transformation(extent={{-120,10},{-80,50}})));
-  Modelica.Blocks.Logical.OnOffController onOffController(pre_y_start=false,
+  Modelica.Blocks.Logical.OnOffController onOffController(pre_y_start=true,
       bandwidth=bandwidth)
     annotation (Placement(transformation(extent={{8,36},{28,56}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=TBoiler)
@@ -50,13 +50,13 @@ model returnAdmixture
   parameter Real bandwidth "Bandwidth around reference signal";
 equation
   connect(Tset, PID.u_s)
-    annotation (Line(points={{-100,-62},{-12,-62}},
+    annotation (Line(points={{-100,-32},{-12,-32}},
                                                 color={0,0,127}));
   connect(PID.y, valPos)
-    annotation (Line(points={{11,-62},{100,-62}},
+    annotation (Line(points={{11,-32},{100,-32}},
                                               color={0,0,127}));
   connect(TMea, PID.u_m)
-    annotation (Line(points={{0,-100},{0,-74}}, color={0,0,127}));
+    annotation (Line(points={{0,-100},{0,-44}}, color={0,0,127}));
   connect(realExpression1.y, onOffController.reference)
     annotation (Line(points={{-3,52},{6,52}}, color={0,0,127}));
   connect(realZero.y,switch2. u3) annotation (Line(points={{37,26},{44,26},{44,38},

@@ -126,7 +126,7 @@ model ModularBoiler_FlowTemperatureControlAdmix
     bandwidth=2.5,
     severalHeatcurcuits=true,
     k=1)
-    annotation (Placement(transformation(extent={{-2,48},{18,68}})));
+    annotation (Placement(transformation(extent={{-4,48},{16,68}})));
   Modelica.Blocks.Interfaces.RealInput Tset
     "Set temperatures for the flow temperatures of the n heating curcuits"
     annotation (Placement(transformation(
@@ -136,6 +136,10 @@ model ModularBoiler_FlowTemperatureControlAdmix
   Modelica.Blocks.Interfaces.RealOutput valPos annotation (Placement(
         transformation(extent={{94,44},{110,60}}), iconTransformation(extent={{
             94,44},{110,60}})));
+  Modelica.Blocks.Interfaces.RealInput TMeaCon
+    "Measurement temperature of the consumer" annotation (Placement(
+        transformation(extent={{114,16},{84,46}}), iconTransformation(extent={{
+            114,16},{84,46}})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
@@ -207,7 +211,7 @@ equation
           {{-41.8,55},{-34,55},{-34,22},{-50,22},{-50,12}}, color={0,0,127}));
   connect(boilerControlBus_Control.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
     annotation (Line(
-      points={{-39.95,98.05},{-20,98.05},{-20,58.6},{-2,58.6}},
+      points={{-39.95,98.05},{-20,98.05},{-20,58.6},{-4,58.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -215,13 +219,13 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset,
-    regulation_modularBoiler.PLRMea) annotation (Line(points={{18,64},{18,32},{
+    regulation_modularBoiler.PLRMea) annotation (Line(points={{16,64},{16,32},{
           -66,32},{-66,49.4},{-62,49.4}}, color={0,0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset, heatGeneratorNoControl.PLR)
-    annotation (Line(points={{18,64},{18,16},{-10,16},{-10,5.4}}, color={0,0,
+    annotation (Line(points={{16,64},{16,16},{-10,16},{-10,5.4}}, color={0,0,
           127}));
   connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tin) annotation (
-      Line(points={{60,11},{60,78},{-6,78},{-6,61.2},{-2,61.2}}, color={0,0,127}));
+      Line(points={{60,11},{60,78},{-6,78},{-6,61.2},{-4,61.2}}, color={0,0,127}));
   connect(boilerControlBus_Control.PLR, regulation_modularBoiler.PLRin)
     annotation (Line(
       points={{-39.95,98.05},{-39.95,74},{-72,74},{-72,59},{-62,59}},
@@ -231,15 +235,18 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.TMea) annotation (
-      Line(points={{60,11},{60,36},{3.8,36},{3.8,47.2}}, color={0,0,127}));
+  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.TMeaBoiler)
+    annotation (Line(points={{60,11},{60,36},{1.8,36},{1.8,47.2}}, color={0,0,
+          127}));
   connect(regulation_modularBoiler.PLRset,
     hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,
-          59.6},{-24,59.6},{-24,65.4},{-2,65.4}}, color={0,0,127}));
+          59.6},{-24,59.6},{-24,65.4},{-4,65.4}}, color={0,0,127}));
   connect(Tset, hierarchicalControl_modularBoilerNEW1.TsetAdm) annotation (Line(
-        points={{34,100},{34,38},{10.2,38},{10.2,47}}, color={0,0,127}));
+        points={{34,100},{34,38},{8.2,38},{8.2,47}},   color={0,0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.valPos, valPos) annotation (
-      Line(points={{18,51.4},{58,51.4},{58,52},{102,52}}, color={0,0,127}));
+      Line(points={{16,51.4},{58,51.4},{58,52},{102,52}}, color={0,0,127}));
+  connect(TMeaCon, hierarchicalControl_modularBoilerNEW1.TMeaCon) annotation (
+      Line(points={{99,31},{72,31},{72,42},{11.6,42},{11.6,47}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

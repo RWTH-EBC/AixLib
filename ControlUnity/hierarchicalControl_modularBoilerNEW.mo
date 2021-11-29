@@ -63,8 +63,9 @@ model hierarchicalControl_modularBoilerNEW
     "Outdoor temperature"
     annotation (Placement(transformation(extent={{-120,-98},{-80,-58}})));
 
-  Modelica.Blocks.Interfaces.RealInput TMea if use_advancedControl
-    "Measurement temperature of the return" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput TMeaBoiler if
+                                               use_advancedControl
+    "Measurement flow temperature of the boiler" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -102,6 +103,12 @@ model hierarchicalControl_modularBoilerNEW
     "If true, the user can determine the PLR between PLRmin and 1; else you have a two position conttol with the values 0 and 1 for PLR";
 
   parameter Integer k "Number of heat curcuits";
+  Modelica.Blocks.Interfaces.RealInput TMeaCon
+    "Measurement temperature of the consumer" annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={56,-110})));
 equation
 
 
@@ -109,10 +116,11 @@ equation
 
   connect(Tamb, flowTemperatureControl_heatingCurve.Tamb) annotation (Line(
         points={{-100,-78},{-74,-78},{-74,-60},{-28,-60}}, color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.TMea, TMea) annotation (Line(
-        points={{-11.4,-70},{-11.4,-87},{-42,-87},{-42,-108}}, color={0,0,127}));
+  connect(flowTemperatureControl_heatingCurve.TMea, TMeaBoiler) annotation (
+      Line(points={{-11.4,-70},{-11.4,-87},{-42,-87},{-42,-108}}, color={0,0,
+          127}));
   connect(TsetAdm, returnAdmixture.Tset) annotation (Line(points={{22,-110},{22,
-          -70.2},{46,-70.2}}, color={0,0,127}));
+          -67.2},{46,-67.2}}, color={0,0,127}));
   connect(Tin, emergencySwitch_modularBoiler1.T_ein) annotation (Line(points={{-100,
           32},{-72,32},{-72,31.2},{-64,31.2}}, color={0,0,127}));
   connect(isOn, emergencySwitch_modularBoiler1.isOn) annotation (Line(points={{-100,
@@ -134,19 +142,18 @@ equation
   connect(returnAdmixture.PLRset, PLRset) annotation (Line(points={{66,-59.4},{
           78,-59.4},{78,60},{100,60}},
                                   color={0,0,127}));
-  connect(returnAdmixture.valPos, valPos) annotation (Line(points={{66,-70.2},{
-          80,-70.2},{80,-66},{100,-66}},
+  connect(returnAdmixture.valPos, valPos) annotation (Line(points={{66,-67.2},{
+          80,-67.2},{80,-66},{100,-66}},
                                       color={0,0,127}));
   connect(flowTemperatureControl_heatingCurve.PLRset, PLRset) annotation (Line(
         points={{-8,-60},{-2,-60},{-2,-4},{86,-4},{86,60},{100,60}}, color={0,0,
           127}));
-  connect(TMea, returnAdmixture.TMea) annotation (Line(points={{-42,-108},{-42,
-          -82},{56,-82},{56,-74}},
-                              color={0,0,127}));
   connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points=
           {{45.2,54.6},{62,54.6},{62,60},{100,60}}, color={0,0,127}));
   connect(TLayers, twoPositionController_layers.TLayers)
     annotation (Line(points={{6,100},{6,51.8},{24,51.8}}, color={0,0,127}));
-  connect(TMea, returnAdmixture.TMeaBoiler) annotation (Line(points={{-42,-108},
-          {-42,-78},{16,-78},{16,-61},{46,-61}}, color={0,0,127}));
+  connect(TMeaBoiler, returnAdmixture.TMeaBoiler) annotation (Line(points={{-42,
+          -108},{-42,-78},{16,-78},{16,-61},{46,-61}}, color={0,0,127}));
+  connect(TMeaCon, returnAdmixture.TMea)
+    annotation (Line(points={{56,-110},{56,-74}}, color={0,0,127}));
 end hierarchicalControl_modularBoilerNEW;

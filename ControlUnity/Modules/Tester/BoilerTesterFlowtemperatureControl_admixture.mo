@@ -57,7 +57,7 @@ package Medium = AixLib.Media.Water
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
-        origin={18,-30})));
+        origin={20,-30})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 70)
     annotation (Placement(transformation(
         extent={{-6,-5},{6,5}},
@@ -67,7 +67,7 @@ package Medium = AixLib.Media.Water
     annotation (Placement(transformation(extent={{-114,-2},{-94,18}})));
   AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph5(redeclare package Medium = Medium, nPorts=1)
-                                                     annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={112,34})));
+                                                     annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={114,22})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
           32}},                       color={191,0,0}));
@@ -101,7 +101,7 @@ equation
   connect(boilerControlBus_admixture, admix_modularBoiler.boilerControlBus_admixture)
     annotation (Line(
       points={{-72,50},{-70,50},{-70,98},{130,98},{130,-18},{114,-18},{114,-30},
-          {38,-30}},
+          {40,-30}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -109,14 +109,14 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(modularBoiler_Controller.port_b, admix_modularBoiler.port_a1)
-    annotation (Line(points={{-14,24},{8,24},{8,2},{30,2},{30,-10}}, color={0,
+    annotation (Line(points={{-14,24},{8,24},{8,2},{32,2},{32,-10}}, color={0,
           127,255}));
   connect(admix_modularBoiler.port_b2, modularBoiler_Controller.port_a)
-    annotation (Line(points={{6,-10},{6,6},{-42,6},{-42,24},{-34,24}}, color={0,
+    annotation (Line(points={{8,-10},{8,6},{-42,6},{-42,24},{-34,24}}, color={0,
           127,255}));
   connect(modularBoiler_Controller.valPos, admix_modularBoiler.valveSet)
     annotation (Line(points={{-13.8,29.2},{48,29.2},{48,48},{90,48},{90,-22.8},
-          {42.8,-22.8}}, color={0,0,127}));
+          {44.8,-22.8}}, color={0,0,127}));
   connect(realExpression.y, modularBoiler_Controller.Tset) annotation (Line(
         points={{-20,58.4},{-22,58.4},{-22,32.8},{-22.2,32.8}}, color={0,0,127}));
   connect(RPM.y, boilerControlBus_admixture.pumpBus.rpmSet) annotation (Line(
@@ -125,13 +125,16 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(admix_modularBoiler.port_b1, vol.ports[1]) annotation (Line(points={{30,-50},
-          {30,-74},{59.3333,-74},{59.3333,22}},
+  connect(admix_modularBoiler.port_b1, vol.ports[1]) annotation (Line(points={{32,-50},
+          {32,-74},{59.3333,-74},{59.3333,22}},
                                               color={0,127,255}));
-  connect(boundary_ph5.ports[1], vol.ports[2]) annotation (Line(points={{102,34},
-          {86,34},{86,22},{62,22}}, color={0,127,255}));
-  connect(vol.ports[3], admix_modularBoiler.port_a2) annotation (Line(points={{
-          64.6667,22},{64,22},{64,-86},{6,-86},{6,-50}}, color={0,127,255}));
+  connect(vol.ports[2], admix_modularBoiler.port_a2) annotation (Line(points={{
+          62,22},{64,22},{64,-86},{8,-86},{8,-50}}, color={0,127,255}));
+  connect(boundary_ph5.ports[1], vol.ports[3])
+    annotation (Line(points={{104,22},{64.6667,22}}, color={0,127,255}));
+  connect(temperatureSensor.T, modularBoiler_Controller.TMeaCon) annotation (
+      Line(points={{86,2},{96,2},{96,16},{16,16},{16,27.1},{-14.1,27.1}}, color
+        ={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterFlowtemperatureControl_admixture;
