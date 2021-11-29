@@ -58,7 +58,7 @@ package Medium = AixLib.Media.Water
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={20,-30})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 70)
+  Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 60)
     annotation (Placement(transformation(
         extent={{-6,-5},{6,5}},
         rotation=-90,
