@@ -255,6 +255,8 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
     if use_swimmingPools_MZ and zone[i].use_swimmingPools then
+      connect(openingHours, zone[i].openingHours) annotation (Line(points={{48,-100},{48,
+          -25},{69.92,-25},{69.92,52.28}}, color={0,0,127}));
       connect(zone[i].PPool, PPump[i]) annotation (Line(points={{82.1,61.3},{82.1,
               -16},{82,-16},{82,-92},{110,-92},{110,-90}}, color={0,0,127}));
       connect(zone[i].QHeatPools, QHeatPools[i]) annotation (Line(points={{82.1,61.3},{82.1,
@@ -280,10 +282,8 @@ equation
                                                                    color={191,0,
           0}));
 
-  if use_swimmingPools_MZ then
-    connect(openingHours, zone.openingHours) annotation (Line(points={{48,-100},{48,
-          -25},{69.92,-25},{69.92,52.28}}, color={0,0,127}));
-  end if;
+
+
    annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),

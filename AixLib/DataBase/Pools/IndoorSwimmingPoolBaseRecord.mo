@@ -44,7 +44,10 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.Area AInnerPoolFloor;
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWaterHorizontal;
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWaterVertical;
-  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam;
+  //replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition PoolWallParam;
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+    PoolWallParam constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
+    annotation (choicesAllMatching=true, Placement(transformation(extent={{48,-98},{68,-78}})));
 
 
   annotation (Documentation(info="<html>

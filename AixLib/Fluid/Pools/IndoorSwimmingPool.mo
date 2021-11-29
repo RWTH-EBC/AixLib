@@ -3,7 +3,7 @@ model IndoorSwimmingPool
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam
   "Choose setup for this pool" annotation (choicesAllMatching=true);
 
-  replaceable package WaterMedium = AixLib.Media.Water (
+  replaceable package MediumPool = AixLib.Media.Water (
     cp_const = 4180,
     d_const = 995.65,
     eta_const = 0.00079722,
@@ -32,8 +32,8 @@ model IndoorSwimmingPool
   parameter Modelica.SIunits.Pressure pumpHead=170000   "Expected average flow resistance of water cycle";
 
   // Pool circulation flow rate
-  parameter Modelica.SIunits.MassFlowRate m_flow = poolParam.V_flow * WaterMedium.d_const "Circulation mass flow rate to the pool";
-  parameter Modelica.SIunits.MassFlowRate m_flow_partial = poolParam.V_flow_partial * WaterMedium.d_const "Partial circulation mass flow rate to pool during non operating hours";
+  parameter Modelica.SIunits.MassFlowRate m_flow = poolParam.V_flow * MediumPool.d_const "Circulation mass flow rate to the pool";
+  parameter Modelica.SIunits.MassFlowRate m_flow_partial = poolParam.V_flow_partial * MediumPool.d_const "Partial circulation mass flow rate to pool during non operating hours";
   Modelica.SIunits.MassFlowRate m_flow_toPool(start=0.0);
 
   // Fresh water and water recycling
@@ -48,27 +48,27 @@ model IndoorSwimmingPool
     "Product of expected emission coefficients of water (0.95) and the surrounding wall surfaces (0.95)";
 
   AixLib.Fluid.MixingVolumes.MixingVolume Storage(
-    redeclare package Medium = WaterMedium,
+    redeclare package Medium = MediumPool,
     T_start=poolParam.T_pool,
     m_flow_nominal=m_flow,
     V=poolParam.V_storage,
-    nPorts=4) annotation (Placement(transformation(extent={{-28,-54},{-8,-34}})));
+    nPorts=4) annotation (Placement(transformation(extent={{-30,-54},{-10,-34}})));
 
   AixLib.Fluid.Sources.Boundary_pT Sinc(
-    redeclare package Medium = WaterMedium, nPorts=1)
+    redeclare package Medium = MediumPool, nPorts=1)
     annotation (Placement(transformation(extent={{54,-80},{42,-68}})));
   AixLib.Fluid.MixingVolumes.MixingVolume poolWater(
-    redeclare package Medium = WaterMedium,
+    redeclare package Medium = MediumPool,
     T_start=poolParam.T_pool,
     m_flow_nominal=m_flow,
     V=poolParam.V_pool,
     nPorts=3)
-    annotation (Placement(transformation(extent={{-20,6},{0,26}})));
+    annotation (Placement(transformation(extent={{-20,14},{0,34}})));
 
   Modelica.Blocks.Sources.RealExpression PoolWater(y=m_flow_toPool)
-    annotation (Placement(transformation(extent={{26,-76},{10,-60}})));
+    annotation (Placement(transformation(extent={{24,-78},{8,-62}})));
   AixLib.Fluid.HeatExchangers.Heater_T IdealHeatExchangerPool(
-    redeclare package Medium = WaterMedium,
+    redeclare package Medium = MediumPool,
     m_flow_nominal=m_flow,
     m_flow_small=0.0001,
     dp_nominal(displayUnit="bar") = 100000,
@@ -86,19 +86,19 @@ model IndoorSwimmingPool
           extent={{100,-28},{120,-8}})));
 
   AixLib.Fluid.Movers.BaseClasses.IdealSource idealSource1(
-    redeclare package Medium = WaterMedium,
+    redeclare package Medium = MediumPool,
     m_flow_small=0.00001,
     control_m_flow=true)
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=0,
-        origin={44,6})));
+        origin={44,14})));
   Modelica.Blocks.Sources.RealExpression m_Eavporation(y=m_flow_evap)
     annotation (Placement(transformation(extent={{-9,-9},{9,9}},
         rotation=180,
-        origin={63,21})));
+        origin={65,27})));
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness HeatExchanger(
-    redeclare package Medium1 = WaterMedium,
-    redeclare package Medium2 = WaterMedium,
+    redeclare package Medium1 = MediumPool,
+    redeclare package Medium2 = MediumPool,
     m1_flow_nominal=poolParam.m_flow_out*1.5,
     m2_flow_nominal=poolParam.m_flow_out,
     dp1_nominal(displayUnit="bar") = 100000,
@@ -142,10 +142,10 @@ model IndoorSwimmingPool
         origin={49,77})));
 
   Modelica.Blocks.Sources.RealExpression FreshWater(y=m_flow_freshWater)  annotation (Placement(transformation(extent={{-76,-48},
-            {-50,-34}})));
+            {-58,-34}})));
 
   BaseClasses.PumpAndPressureDrop pumpAndPressureDrop(
-    redeclare package Medium = WaterMedium,
+    redeclare package Medium = MediumPool,
     allowFlowReversal=false,
     pumpHead=pumpHead,
     m_flow_nominal=m_flow,
@@ -153,15 +153,15 @@ model IndoorSwimmingPool
     T_water=poolParam.T_pool) annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=180,
-        origin={8,-54})));
+        origin={4,-54})));
 
   AixLib.Fluid.Sources.Boundary_pT SincEvaporation(
-    redeclare package Medium = WaterMedium, nPorts=1)   annotation (Placement(transformation(extent={{98,0},{
-            86,12}})));
+    redeclare package Medium = MediumPool, nPorts=1)   annotation (Placement(transformation(extent={{100,8},
+            {88,20}})));
 
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness HeatExchangerPool(
-    redeclare package Medium1 = WaterMedium,
-    redeclare package Medium2 = WaterMedium,
+    redeclare package Medium1 = MediumPool,
+    redeclare package Medium2 = MediumPool,
     m1_flow_nominal=poolParam.m_flow_out*1.5,
     m2_flow_nominal=poolParam.m_flow_out,
     dp1_nominal(displayUnit="bar") = 100000,
@@ -170,14 +170,16 @@ model IndoorSwimmingPool
              annotation (Placement(transformation(
         extent={{-7,-6},{7,6}},
         rotation=90,
-        origin={22,-15})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b1(
-    redeclare package Medium = WaterMedium) if poolParam.use_idealHeatExchanger == false
-    "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)" annotation (Placement(transformation(extent={{-110,-14},{-90,6}})));
+        origin={26,-15})));
+  Modelica.Fluid.Interfaces.FluidPort_b fromPool(redeclare package Medium =
+        MediumPool) if                        poolParam.use_idealHeatExchanger == false
+    "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
+    annotation (Placement(transformation(extent={{-110,-12},{-90,8}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a1(
-    redeclare package Medium = WaterMedium) if poolParam.use_idealHeatExchanger == false
-    "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)" annotation (Placement(transformation(extent={{-110,-38},{-90,-18}})));
+  Modelica.Fluid.Interfaces.FluidPort_a toPool(redeclare package Medium =
+        MediumPool) if                        poolParam.use_idealHeatExchanger == false
+    "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
+    annotation (Placement(transformation(extent={{-110,-38},{-90,-18}})));
 
   BaseClasses.waveMachine waveMachine(
     h_wave=poolParam.h_wave,
@@ -205,27 +207,29 @@ model IndoorSwimmingPool
   Modelica.Thermal.HeatTransfer.Components.BodyRadiation radWaterSurface(
   final Gr=epsilon*poolParam.A_pool)
   "Model to depict the heat flow rate due to radiation between the pool surface an the surrounding walls" annotation (Placement(transformation(
-      extent={{-7,-7},{7,7}},
+      extent={{-5,-5},{5,5}},
       rotation=90,
-      origin={-61,77})));
+      origin={-61,79})));
 
   Modelica.Thermal.HeatTransfer.Components.Convection convWaterSurface
   "Convection at the watersurface" annotation (Placement(transformation(
-      extent={{-7,7},{7,-7}},
+      extent={{-6,6},{6,-6}},
       rotation=90,
-      origin={-29,77})));
+      origin={-28,78})));
 
   Modelica.Blocks.Sources.RealExpression getHeatCoefConv(y=alpha_Air*poolParam.A_pool)
-    "Coefficient of heat transfer between water surface and room air" annotation (Placement(transformation(extent={{4,68},{-14,86}})));
+    "Coefficient of heat transfer between water surface and room air" annotation (Placement(transformation(extent={{6,72},{
+            -12,90}})));
 
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlowEvapLoss annotation (Placement(transformation(extent={{0,36},{-16,52}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlowEvapLoss annotation (Placement(transformation(extent={{0,40},{
+            -16,56}})));
 
   Modelica.Blocks.Math.Gain hEvapLatentHeatGain(final k=h_vapor)
     "Calculation of heat flow rate due to evaporation" annotation (Placement(
         transformation(
         extent={{6,-6},{-6,6}},
         rotation=270,
-        origin={42,34})));
+        origin={42,38})));
 
   Modelica.Blocks.Interfaces.RealOutput MFlowFreshWater
     "Flow rate of added fresh water to the pool and water treatment system" annotation (Placement(transformation(extent={{100,-96},{120,-76}}),
@@ -240,17 +244,18 @@ model IndoorSwimmingPool
     hConWaterVertical=poolParam.hConWaterVertical,
     PoolWall=poolParam.PoolWallParam)
     "Model to depict the heat flow rate through the pool walls to the bordering room/soil"
-    annotation (Placement(transformation(extent={{6,52},{22,68}})));
+    annotation (Placement(transformation(extent={{6,56},{22,72}})));
 
   Modelica.Blocks.Math.Gain minus1Gain(final k=-1) annotation (Placement(
         transformation(
         extent={{4,-4},{-4,4}},
         rotation=0,
-        origin={24,44})));
+        origin={18,48})));
 
   Modelica.Blocks.Interfaces.RealOutput QEvap(final quantity="HeatFlowRate",
       final unit="W")
-                     "Heat needed to compensate losses" annotation (Placement(transformation(extent={{100,34},{120,54}}),
+                     "Heat needed to compensate losses" annotation (Placement(transformation(extent={{100,38},
+            {120,58}}),
       iconTransformation(extent={{100,2},{120,22}})));
 
   Modelica.Blocks.Interfaces.RealInput TSoil(
@@ -260,10 +265,10 @@ model IndoorSwimmingPool
         transformation(
         extent={{-13,-13},{13,13}},
         rotation=180,
-        origin={105,69}), iconTransformation(
+        origin={107,73}), iconTransformation(
       extent={{-11,-11},{11,11}},
       rotation=180,
-      origin={103,67})));
+      origin={105,71})));
 
   Modelica.Blocks.Interfaces.RealOutput PPool(
     final quantity="Power",
@@ -276,17 +281,19 @@ model IndoorSwimmingPool
     "Add electric power of pump and the optional wave pool"
     annotation (Placement(transformation(extent={{78,-56},{86,-64}})));
   Sources.MassFlowSource_T boundary(
-    redeclare package Medium = WaterMedium,
+    redeclare package Medium = MediumPool,
     use_m_flow_in=true,
-    T=283.15,
+    T=TFreshWater,
     nPorts=1)
-    annotation (Placement(transformation(extent={{-66,-76},{-52,-62}})));
+    annotation (Placement(transformation(extent={{-68,-80},{-56,-68}})));
   Modelica.Blocks.Sources.RealExpression m_Eavporation1(y=poolWater.T)
     annotation (Placement(transformation(extent={{9,-9},{-9,9}},
         rotation=180,
         origin={87,91})));
   Modelica.Blocks.Interfaces.RealOutput T_Pool "Value of Real output"
     annotation (Placement(transformation(extent={{100,82},{120,102}})));
+  parameter Modelica.Media.Interfaces.Types.Temperature TFreshWater=283.15
+    "Fixed value of temperature for fresh water supply";
 equation
   // Fresh water and water recycling
   if poolParam.use_waterRecycling then
@@ -328,24 +335,22 @@ equation
    end if;
 
 
-  connect(pumpAndPressureDrop.port_b, IdealHeatExchangerPool.port_a) annotation (Line(points={{16,-54},
-            {48,-54},{48,-22}},                                                                                                color={0,127,255}));
+  connect(pumpAndPressureDrop.port_b, IdealHeatExchangerPool.port_a) annotation (Line(points={{12,-54},
+          {48,-54},{48,-22}},                                                                                                  color={0,127,255}));
   connect(IdealHeatExchangerPool.port_b, poolWater.ports[2]) annotation (Line(
-        points={{48,-8},{44,-8},{44,0},{-10,0},{-10,6}},        color={0,127,255}));
+        points={{48,-8},{44,-8},{44,6},{-10,6},{-10,14}},       color={0,127,255}));
   connect(IdealHeatExchangerPool.Q_flow, QPool) annotation (Line(points={{56,-7.3},
             {56,-4},{84,-4},{84,-18},{110,-18}},                                                        color={0,0,127}));
   connect(IdealHeatExchangerPool.TSet, SetTemperature.y) annotation (Line(
         points={{56,-23.4},{56,-28},{62.9,-28}},   color={0,0,127}));
-  connect(pumpAndPressureDrop.port_b, HeatExchangerPool.port_b2) annotation (Line(points={{16,-54},
-            {25.6,-54},{25.6,-22}},                                                                                      color={0,127,255}));
+  connect(pumpAndPressureDrop.port_b, HeatExchangerPool.port_b2) annotation (Line(points={{12,-54},
+          {29.6,-54},{29.6,-22}},                                                                                        color={0,127,255}));
   connect(HeatExchangerPool.port_a2, poolWater.ports[2]) annotation (Line(
-        points={{25.6,-8},{26,-8},{26,0},{-10,0},{-10,6}},        color={0,127,255}));
-  connect(HeatExchangerPool.port_b1, port_b1) annotation (Line(points={{18.4,-8},
-            {18,-8},{18,-4},{-100,-4}},
-                                 color={0,127,255}));
-  connect(HeatExchangerPool.port_a1, port_a1) annotation (Line(points={{18.4,-22},
-            {18,-22},{18,-28},{-100,-28}},
-                                         color={0,127,255}));
+        points={{29.6,-8},{30,-8},{30,6},{-10,6},{-10,14}},       color={0,127,255}));
+  connect(HeatExchangerPool.port_b1, fromPool) annotation (Line(points={{22.4,-8},
+          {22,-8},{22,-2},{-100,-2}}, color={0,127,255}));
+  connect(HeatExchangerPool.port_a1, toPool) annotation (Line(points={{22.4,-22},
+          {22,-22},{22,-28},{-100,-28}}, color={0,127,255}));
   connect(waveMachine.PWaveMachine, elPower.u[2]) annotation (Line(points={{-37.52,
           -91},{64,-91},{64,-62},{78,-62},{78,-60}},   color={0,0,127}));
   connect(absToRelHum.TDryBul, TAir) annotation (Line(points={{46.2,83},{46,83},
@@ -355,61 +360,64 @@ equation
   connect(HeatExchanger.port_b2, Sinc.ports[1]) annotation (Line(points={{-16.4,
           -74},{42,-74}},                         color={0,127,255}));
   connect(HeatExchanger.port_b1, Storage.ports[1]) annotation (Line(points={{-23.6,
-          -60},{-22,-60},{-22,-54},{-21,-54}},
+          -60},{-22,-60},{-22,-54},{-23,-54}},
                                    color={0,127,255}));
   connect(HeatExchanger.port_a2, Storage.ports[2])  annotation (Line(points={{-16.4,
-          -60},{-18,-60},{-18,-54},{-19,-54}},           color={0,127,255}));
-  connect(Storage.ports[3], pumpAndPressureDrop.port_a) annotation (Line(points={{-17,-54},
-          {0,-54}},                                                                                          color={0,127,255}));
-  connect(PoolWater.y, pumpAndPressureDrop.setMFlow) annotation (Line(points={{9.2,-68},
-          {0,-68},{0,-59.76}},           color={0,0,127}));
+          -60},{-18,-60},{-18,-54},{-21,-54}},           color={0,127,255}));
+  connect(Storage.ports[3], pumpAndPressureDrop.port_a) annotation (Line(points={{-19,-54},
+          {-4,-54}},                                                                                         color={0,127,255}));
+  connect(PoolWater.y, pumpAndPressureDrop.setMFlow) annotation (Line(points={{7.2,-70},
+          {-8,-70},{-8,-60},{-4,-60},{-4,-59.76}},
+                                         color={0,0,127}));
   connect(poolWater.ports[1], Storage.ports[4]) annotation (Line(points={{
-          -12.6667,6},{-12.6667,0},{-42,0},{-42,-54},{-15,-54}},
+          -12.6667,14},{-12.6667,6},{-42,6},{-42,-54},{-17,-54}},
                                                  color={0,127,255}));
   connect(poolWater.ports[3], idealSource1.port_a) annotation (Line(points={{-7.33333,
-          6},{40,6}},                 color={0,127,255}));
+          14},{40,14}},               color={0,127,255}));
   connect(idealSource1.port_b, SincEvaporation.ports[1]) annotation (Line(
-        points={{48,6},{86,6}},                   color={0,127,255}));
-  connect(m_Eavporation.y, idealSource1.m_flow_in) annotation (Line(points={{53.1,21},
-          {41.6,21},{41.6,9.2}},      color={0,0,127}));
-  connect(radWaterSurface.port_b, radPoolSurface)  annotation (Line(points={{-61,84},{-61,104}},         color={191,0,0}));
-  connect(convWaterSurface.fluid, convPoolSurface) annotation (Line(points={{-29,84},
-          {-28,84},{-28,100}},                       color={191,0,0}));
-  connect(convWaterSurface.solid, poolWater.heatPort) annotation (Line(points={{-29,70},
-          {-28,70},{-28,16},{-20,16}},                         color={191,0,0}));
-  connect(radWaterSurface.port_a, poolWater.heatPort) annotation (Line(points={{-61,70},
-          {-60,70},{-60,30},{-28,30},{-28,16},{-20,16}},       color={191,0,0}));
-  connect(preHeatFlowEvapLoss.port, poolWater.heatPort) annotation (Line(points={{-16,44},
-          {-28,44},{-28,16},{-20,16}},        color={191,0,0}));
-  connect(m_Eavporation.y, hEvapLatentHeatGain.u) annotation (Line(points={{53.1,21},
-          {42,21},{42,26.8}},           color={0,0,127}));
-  connect(FreshWater.y, MFlowFreshWater) annotation (Line(points={{-48.7,-41},{
-          -48,-41},{-48,-60},{-34,-60},{-34,-86},{110,-86}},
-                                                           color={0,0,127}));
+        points={{48,14},{88,14}},                 color={0,127,255}));
+  connect(m_Eavporation.y, idealSource1.m_flow_in) annotation (Line(points={{55.1,27},
+          {41.6,27},{41.6,17.2}},     color={0,0,127}));
+  connect(radWaterSurface.port_b, radPoolSurface)  annotation (Line(points={{-61,84},
+          {-61,104}},                                                                                    color={191,0,0}));
+  connect(convWaterSurface.fluid, convPoolSurface) annotation (Line(points={{-28,84},
+          {-28,100}},                                color={191,0,0}));
+  connect(convWaterSurface.solid, poolWater.heatPort) annotation (Line(points={{-28,72},
+          {-28,24},{-20,24}},                                  color={191,0,0}));
+  connect(radWaterSurface.port_a, poolWater.heatPort) annotation (Line(points={{-61,74},
+          {-61,30},{-28,30},{-28,24},{-20,24}},                color={191,0,0}));
+  connect(preHeatFlowEvapLoss.port, poolWater.heatPort) annotation (Line(points={{-16,48},
+          {-28,48},{-28,24},{-20,24}},        color={191,0,0}));
+  connect(m_Eavporation.y, hEvapLatentHeatGain.u) annotation (Line(points={{55.1,27},
+          {42,27},{42,30.8}},           color={0,0,127}));
+  connect(FreshWater.y, MFlowFreshWater) annotation (Line(points={{-57.1,-41},{-52,
+          -41},{-52,-60},{-38,-60},{-38,-86},{110,-86}},   color={0,0,127}));
   connect(heatTransferConduction.heatport_a, poolWater.heatPort) annotation (
-      Line(points={{5.76,59.92},{-28,59.92},{-28,16},{-20,16}}, color={191,0,0}));
-  connect(hEvapLatentHeatGain.y, minus1Gain.u)  annotation (Line(points={{42,40.6},{42,44},{28.8,44}}, color={0,0,127}));
-  connect(hEvapLatentHeatGain.y, QEvap) annotation (Line(points={{42,40.6},{42,44},{110,44}}, color={0,0,127}));
-  connect(heatTransferConduction.TSoil, TSoil) annotation (Line(points={{22.48,62.88},
-          {78,62.88},{78,69},{105,69}}, color={0,0,127}));
+      Line(points={{5.76,63.92},{-28,63.92},{-28,24},{-20,24}}, color={191,0,0}));
+  connect(hEvapLatentHeatGain.y, minus1Gain.u)  annotation (Line(points={{42,44.6},
+          {42,48},{22.8,48}},                                                                          color={0,0,127}));
+  connect(hEvapLatentHeatGain.y, QEvap) annotation (Line(points={{42,44.6},{42,48},
+          {110,48}},                                                                          color={0,0,127}));
+  connect(heatTransferConduction.TSoil, TSoil) annotation (Line(points={{22.48,66.88},
+          {78,66.88},{78,73},{107,73}}, color={0,0,127}));
   connect(convPoolSurface, convPoolSurface) annotation (Line(points={{-28,100},{-28,100}}, color={191,0,0}));
-  connect(getHeatCoefConv.y, convWaterSurface.Gc) annotation (Line(points={{-14.9,77},{-22,77}}, color={0,0,127}));
-  connect(minus1Gain.y, preHeatFlowEvapLoss.Q_flow) annotation (Line(points={{19.6,44},{0,44}}, color={0,0,127}));
+  connect(getHeatCoefConv.y, convWaterSurface.Gc) annotation (Line(points={{-12.9,
+          81},{-18,81},{-18,78},{-22,78}},                                                       color={0,0,127}));
+  connect(minus1Gain.y, preHeatFlowEvapLoss.Q_flow) annotation (Line(points={{13.6,48},
+          {0,48}},                                                                              color={0,0,127}));
   connect(elPower.y, PPool)  annotation (Line(points={{86.68,-60},{98,-60},{98,-52},
           {110,-52}},                                                         color={0,0,127}));
-  connect(pumpAndPressureDrop.P, elPower.u[1]) annotation (Line(points={{16.48,-57.68},
+  connect(pumpAndPressureDrop.P, elPower.u[1]) annotation (Line(points={{12.48,-57.68},
           {78,-57.68},{78,-60}},   color={0,0,127}));
-  connect(FreshWater.y, boundary.m_flow_in) annotation (Line(points={{-48.7,-41},
-          {-48.7,-42},{-48,-42},{-48,-50},{-74,-50},{-74,-64},{-66,-64},{-66,
-          -63.4},{-67.4,-63.4}},                                    color={0,0,
-          127}));
-  connect(boundary.ports[1], HeatExchanger.port_a1) annotation (Line(points={{-52,-69},
-          {-44,-69},{-44,-74},{-23.6,-74}},                      color={0,127,
+  connect(boundary.ports[1], HeatExchanger.port_a1) annotation (Line(points={{-56,-74},
+          {-23.6,-74}},                                          color={0,127,
           255}));
   connect(waveMachine.open, openingHours) annotation (Line(points={{-55.28,-91},
           {-82,-91},{-82,83},{-101,83}}, color={0,0,127}));
   connect(m_Eavporation1.y, T_Pool) annotation (Line(points={{96.9,91},{102.45,
           91},{102.45,92},{110,92}}, color={0,0,127}));
+  connect(FreshWater.y, boundary.m_flow_in) annotation (Line(points={{-57.1,-41},
+          {-52,-41},{-52,-60},{-76,-60},{-76,-69.2},{-69.2,-69.2}}, color={0,0,127}));
   annotation (Line(
         points={{47,-32},{47,-14},{-25,-14},{-25,-6}}, color={0,127,255}),
              Line(points={{18.4,-40},

@@ -1,7 +1,7 @@
 within AixLib.Fluid.Pools;
 model MultiplePools
 
- replaceable parameter AixLib.DataBase.ThermalZones.SwimminghallBaseRecord Swimminghall
+ replaceable parameter AixLib.DataBase.ThermalZones.SwimmingHallMultiplePools Swimminghall
     "Choose setup for this zone" annotation (choicesAllMatching=true);
 
   final parameter Boolean use_swimmingPools = Swimminghall.use_swimmingPools;
@@ -26,7 +26,7 @@ model MultiplePools
     annotation (Placement(transformation(extent={{-60,60},{-20,100}})));
   Modelica.Blocks.Interfaces.RealInput openingHours if
     use_swimmingPools "Input profile for opening hours"
-    annotation (Placement(transformation(extent={{-88,32},{-48,72}})));
+    annotation (Placement(transformation(extent={{-90,34},{-50,74}})));
   Modelica.Blocks.Interfaces.RealInput persons if  use_swimmingPools
    "Input profile for persons" annotation (Placement(transformation(extent={{-106,-22},{-66,18}})));
   Modelica.Blocks.Interfaces.RealOutput QEvap1[numPools] if
@@ -44,25 +44,38 @@ model MultiplePools
   Modelica.Blocks.Interfaces.RealOutput MFlowFreshWater1[numPools] if use_swimmingPools
     "Flow rate of added fresh water to the pool and water treatment system"
     annotation (Placement(transformation(extent={{56,-76},{76,-56}})));
+
+  Integer nIdeal;
+  Integer nNonIdeal;
+  Boolean TestArray[3] = {true, false, true};
+  Boolean TestArray2[5] = {poolParam.use_idealHeatExchanger};
+
+
 equation
-  connect(indoorSwimmingPool.TSoil, TSoil) annotation (Line(points={{16.81,5.44},
-          {62,5.44},{62,50}}, color={0,0,127}));
-  connect(indoorSwimmingPool.X_w, X_w) annotation (Line(points={{6.55,18.24},{6.55,
+  nIdeal = Modelica.Math.BooleanVectors.countTrue(TestArray);
+  //nNonIdeal = ndims(TestArray);
+
+  if use_swimmingPools then
+      connect(indoorSwimmingPool.TSoil, TSoil) annotation (Line(points={{17.35,6.72},
+          {62,6.72},{62,50}}, color={0,0,127}));
+      connect(indoorSwimmingPool.X_w, X_w) annotation (Line(points={{6.55,18.24},{6.55,
           42.12},{6,42.12},{6,66}}, color={0,0,127}));
-  connect(indoorSwimmingPool.TAir, TAir) annotation (Line(points={{-3.17,18.24},
+      connect(indoorSwimmingPool.TAir, TAir) annotation (Line(points={{-3.17,18.24},
           {-3.17,68},{-40,68},{-40,80}}, color={0,0,127}));
-  connect(indoorSwimmingPool.openingHours, openingHours) annotation (Line(
-        points={{-38.27,10.56},{-68,10.56},{-68,52}}, color={0,0,127}));
-  connect(indoorSwimmingPool.persons, persons) annotation (Line(points={{-38.27,
+      connect(indoorSwimmingPool.openingHours, openingHours) annotation (Line(
+        points={{-38.27,10.56},{-70,10.56},{-70,54}}, color={0,0,127}));
+      connect(indoorSwimmingPool.persons, persons) annotation (Line(points={{-38.27,
           -1.6},{-86,-1.6},{-86,-2}}, color={0,0,127}));
-  connect(indoorSwimmingPool.QEvap, QEvap1) annotation (Line(points={{18.7,-12.16},
+      connect(indoorSwimmingPool.QEvap, QEvap1) annotation (Line(points={{18.7,-12.16},
           {58,-12.16},{58,-14}}, color={0,0,127}));
-  connect(indoorSwimmingPool.QPool, QPool1) annotation (Line(points={{18.7,-21.76},
+      connect(indoorSwimmingPool.QPool, QPool1) annotation (Line(points={{18.7,-21.76},
           {38,-21.76},{38,-30},{80,-30}}, color={0,0,127}));
-  connect(indoorSwimmingPool.PPool, PPool1) annotation (Line(points={{18.7,-32.64},
+      connect(indoorSwimmingPool.PPool, PPool1) annotation (Line(points={{18.7,-32.64},
           {32,-32.64},{32,-44},{68,-44},{68,-46}}, color={0,0,127}));
-  connect(indoorSwimmingPool.MFlowFreshWater, MFlowFreshWater1) annotation (
+      connect(indoorSwimmingPool.MFlowFreshWater, MFlowFreshWater1) annotation (
       Line(points={{18.7,-43.52},{26,-43.52},{26,-66},{66,-66}}, color={0,0,127}));
+  end if;
+
     annotation (Placement(transformation(extent={{-22,-48},{28,16}})),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
