@@ -10,30 +10,31 @@ model Test
 
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools] = Swimminghall.poolParam
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = use_swimmingPools));
-    //if use_swimmingPools and  ATot > 0
 
-  Integer nIdealTest;
-  Integer nNonIdealTest;
-  Boolean TestArray[3] = {true, false, true};
-  Boolean TestArray2[2] = {poolParam[1].use_idealHeatExchanger,poolParam[2].use_idealHeatExchanger};
 
-  Integer nIdeal;
-  Integer nNonIdeal;
-  Boolean IdealPools[1,numPools] = {poolParam[:].use_idealHeatExchanger};
-  Boolean IdealPooolVector[numPools];
+  parameter Integer numNonIdeal = numPools - sum(if poolParam[i].use_idealHeatExchanger then 1 else 0 for i in 1:numPools);
+ // Integer counter(start=0);
 
+  Modelica.Blocks.Math.Sum sum1(nin=numPools)
+    annotation (Placement(transformation(extent={{-10,-2},{10,18}})));
+  Modelica.Blocks.Sources.Constant const(k=0)
+    annotation (Placement(transformation(extent={{-88,14},{-68,34}})));
+  Modelica.Blocks.Sources.Constant const1[numNonIdeal](each k=1)
+    annotation (Placement(transformation(extent={{-88,-28},{-68,-8}})));
+  Modelica.Blocks.Interfaces.RealOutput y1   "Connector of Real output signal"   annotation (Placement(transformation(extent={{28,-2},{48,18}})));
 
 equation
-  nIdealTest = Modelica.Math.BooleanVectors.countTrue(TestArray);
-  nNonIdealTest = ndims(TestArray);
-
   for i in 1:numPools loop
-    IdealPooolVector[i] = IdealPools[1,i];
-  end for;
+    if numNonIdeal > 0 then
+        connect(sum1.u[i], const1[i].y);
+    else
+      connect(sum1.u[i], const.y);
+    end if;
+   end for;
 
-  nIdeal = Modelica.Math.BooleanVectors.countTrue(IdealPooolVector);
-  nNonIdeal = ndims(IdealPooolVector)-nIdeal;
 
+  connect(sum1.y, y1)
+    annotation (Line(points={{11,8},{38,8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Test;

@@ -54,7 +54,7 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{-90,-48},{-70,-28}})));
 equation
   connect(TSoil.y, indoorSwimmingPool2_1.TSoil) annotation (Line(points={{71.2,40},
-          {64,40},{64,27.27},{33.7,27.27}},      color={0,0,127}));
+          {64,40},{64,25.79},{33.02,25.79}},     color={0,0,127}));
   connect(indoorSwimmingPool2_1.X_w, X_W.y) annotation (Line(points={{20.1,
           40.59},{20.1,66},{71.2,66}}, color={0,0,127}));
   connect(indoorSwimmingPool2_1.TAir, T_Air.y) annotation (Line(points={{7.86,
@@ -73,8 +73,8 @@ equation
       Line(points={{35.4,-30.82},{48,-30.82},{48,-42},{106,-42}},color={0,0,127}));
   connect(boundary.ports[1], indoorSwimmingPool2_1.toPool) annotation (Line(
         points={{-68,-77},{-50,-77},{-50,-9.36},{-36,-9.36}}, color={0,127,255}));
-  connect(bou.ports[1], indoorSwimmingPool2_1.fromPool) annotation (Line(points
-        ={{-70,-38},{-54,-38},{-54,0},{-36,0},{-36,0.26}}, color={0,127,255}));
+  connect(bou.ports[1], indoorSwimmingPool2_1.fromPool) annotation (Line(points={{-70,-38},
+          {-54,-38},{-54,0},{-36,0},{-36,-0.48}},          color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=10800, __Dymola_Algorithm="Dassl"));
