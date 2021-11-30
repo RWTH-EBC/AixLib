@@ -3,12 +3,13 @@ model IndoorSwimmingPool
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam
   "Choose setup for this pool" annotation (choicesAllMatching=true);
 
-  replaceable package WaterMedium = AixLib.Media.Water (
-    cp_const = 4180,
-    d_const = 995.65,
-    eta_const = 0.00079722,
-    lambda_const = 0.61439)
+  replaceable package WaterMedium = AixLib.Media.Water
     "Water properties for water with 30 °C" annotation (choicesAllMatching=true);
+  //(
+  //  cp_const = 4180,
+  //  d_const = 995.65,
+  //  eta_const = 0.00079722,
+  //  lambda_const = 0.61439)
 
   // Water transfer coefficients according to VDI 2089 Blatt 1
   parameter Real beta_nonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));
@@ -32,8 +33,8 @@ model IndoorSwimmingPool
   parameter Modelica.SIunits.Pressure pumpHead=170000   "Expected average flow resistance of water cycle";
 
   // Pool circulation flow rate
-  parameter Modelica.SIunits.MassFlowRate m_flow = poolParam.V_flow * WaterMedium.d_const "Circulation mass flow rate to the pool";
-  parameter Modelica.SIunits.MassFlowRate m_flow_partial = poolParam.V_flow_partial * WaterMedium.d_const "Partial circulation mass flow rate to pool during non operating hours";
+  parameter Modelica.SIunits.MassFlowRate m_flow = poolParam.V_flow * rhoWater_default "Circulation mass flow rate to the pool";
+  parameter Modelica.SIunits.MassFlowRate m_flow_partial = poolParam.V_flow_partial * rhoWater_default "Partial circulation mass flow rate to pool during non operating hours";
   Modelica.SIunits.MassFlowRate m_flow_toPool(start=0.0);
 
   // Fresh water and water recycling
@@ -289,6 +290,14 @@ model IndoorSwimmingPool
         origin={87,91})));
   Modelica.Blocks.Interfaces.RealOutput T_Pool "Value of Real output"
     annotation (Placement(transformation(extent={{100,82},{120,102}})));
+
+final parameter Modelica.SIunits.Density rhoWater_default=
+    WaterMedium.density_pTX(
+      p=WaterMedium.p_default,
+      T=273.15+30,
+      X=WaterMedium.X_default) "Default medium density";
+
+
 equation
   // Fresh water and water recycling
   if poolParam.use_waterRecycling then
@@ -400,8 +409,8 @@ equation
   connect(pumpAndPressureDrop.P, elPower.u[1]) annotation (Line(points={{16.48,-57.68},
           {78,-57.68},{78,-60}},   color={0,0,127}));
   connect(FreshWater.y, boundary.m_flow_in) annotation (Line(points={{-48.7,-41},
-          {-48.7,-42},{-48,-42},{-48,-50},{-74,-50},{-74,-70},{-66,-70},{-66,
-          -69.2},{-65.2,-69.2}},                                    color={0,0,
+          {-48.7,-42},{-48,-42},{-48,-50},{-74,-50},{-74,-70},{-66,-70},{-66,-69.2},
+          {-65.2,-69.2}},                                           color={0,0,
           127}));
   connect(boundary.ports[1], HeatExchanger.port_a1) annotation (Line(points={{-52,-74},
           {-23.6,-74}},                                          color={0,127,

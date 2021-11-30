@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Pools.Example;
+within AixLib.Fluid.Pools.Example;
 model IndoorSwimmingPool
     extends Modelica.Icons.Example;
   AixLib.Fluid.Pools.IndoorSwimmingPool                indoorSwimmingPool2_1(poolParam=
@@ -7,12 +7,7 @@ model IndoorSwimmingPool
         WaterMedium)
     annotation (Placement(transformation(extent={{-36,-36},{32,38}})));
 
-    replaceable package WaterMedium = AixLib.Media.Water (
-    cp_const = 4180,
-    d_const = 995.65,
-    eta_const = 0.00079722,
-    lambda_const = 0.61439)
-    "Water properties for water with 30 °C" annotation (choicesAllMatching=true);
+    replaceable package WaterMedium = AixLib.Media.Water annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Sources.RealExpression TSoil(y=8)
     annotation (Placement(transformation(extent={{88,32},{72,48}})));
