@@ -54,4 +54,13 @@ IBPSA.Fluid.Humidifiers.SprayAirWasher_X
  
 
 IBPSA.Fluid.HeatPumps.Calibration.BaseClasses.PartialWaterToWater 
+
+
+IBPSA.Systems.ModularAHU.RegisterModule
+
+
+IBPSA.Fluid.Actuators.Dampers.VAVBoxExponential
+
+
+IBPSA.Fluid.Storage.BufferStorage
  
