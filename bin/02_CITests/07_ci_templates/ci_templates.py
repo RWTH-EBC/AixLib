@@ -323,7 +323,7 @@ def _config_test():
     return config_list
 
 def _config_settings_check():
-    library = input(f'What library should test package? ')
+    library = input(f'Which library should be tested? (e.g. AixLib)')
     print(f'Setting library: {library}')
     package_list = _get_package(library)
     package_list_final = []

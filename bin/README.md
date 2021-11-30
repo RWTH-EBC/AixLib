@@ -19,20 +19,8 @@ The whole process is automatically triggered by checking into the version contro
 - `git commit -m "ci_check"` 		  		# Check all models
 - `git commit -m "ci_regression_test"` 		# Start the regression test [only as pull_request]
 - `git commit -m "ci_html"` 				# Test only the html of models
+- `git commit -m " [skip ci]"` 			# Skip the CI
 
-## How to create your own gitlab CI [templates](02_CITests/07_ci_templates)
-
-Execute the `python bin/02_CITests/07_ci_templates/ci_templates.py` command in the root directory of your repository
-
-Also the variables in the `bin/02_CiTests/_config.py` should be checked before. Important are the variables `image_name` and `variable_main_list`.
-
-The settings are then stored under `bin/09_Setting/CI_setting.toml`
-
-Then the command `python bin/02_CITests/07_ci_templates/ci_templates.py --setting` must be executed.
-
-## Libraries that need to be installed
-`pip install mako pandas toml matplotlib argparse`
-  
 
 ## What CI Tests are implement?
 #### Check, Simulate and Regressiontest: [UnitTests](02_CITests/02_UnitTests)
@@ -45,7 +33,7 @@ The html code (documentation) is tested and corrected if necessary. Thus the dep
 
 With the ModelManagement library in dymola the style of the models is checked. 
 
-#### IBPSA Merge(02_CITests/06_deploy/IBPSA_Merge)
+#### [IBPSA Merge](02_CITests/06_deploy/IBPSA_Merge)
 This template performs an automatic IBPSA merge into AixLib. The models of the IBPSA are copied into the AixLib, a new conversion script is created based on the IBPSA and integrated into the AixLib as well as the whitelists are created.
 
 ## Folder 
