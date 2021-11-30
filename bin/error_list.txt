@@ -5,3 +5,12 @@ IBPSA.Fluid.Actuators.Dampers.VAVBoxExponential
 
 
 IBPSA.Fluid.Storage.BufferStorage
+
+
+IBPSA.BoundaryConditions.InternalGains.Examples.InternalGains.BaseClasses.Humans
+
+
+IBPSA.Fluid.MixingVolumes.Validation.BaseClasses.MoistureMixingConservation
+
+
+IBPSA.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase
