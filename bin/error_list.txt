@@ -14,3 +14,9 @@ IBPSA.Fluid.MixingVolumes.Validation.BaseClasses.MoistureMixingConservation
 
 
 IBPSA.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase
+
+
+IBPSA.Fluid.MixingVolumes.Validation.BaseClasses.MixingVolumeReverseFlow
+
+
+IBPSA.Fluid.Examples.Performance.BaseClasses.Example1
