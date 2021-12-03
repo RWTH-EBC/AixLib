@@ -3,7 +3,7 @@ model twoPositionControllerSimple_modularBoiler "Simple two position controller"
   extends ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(n=1,
       onOffController(pre_y_start=false));
 
-  parameter Modelica.SIunits.Temperature T_ref=273.15+70 "Solltemperatur";
+  parameter Modelica.SIunits.Temperature T_ref=273.15+60 "Solltemperatur";
 
 equation
 

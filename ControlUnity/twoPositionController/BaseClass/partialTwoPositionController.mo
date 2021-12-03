@@ -2,7 +2,7 @@ within ControlUnity.twoPositionController.BaseClass;
 partial model partialTwoPositionController
   "Base model for the two position controller"
   //Parameters
- parameter Modelica.SIunits.Temperature Tref=273.15+70 "Reference Temperature for the on off controller";
+ parameter Modelica.SIunits.Temperature Tref=273.15+60 "Reference Temperature for the on off controller";
  parameter Integer n  "Number of layers in the buffer storage";
  parameter Boolean variablePLR=false "If true, the user can determine the PLR between PLRmin and 1; else you have a two position conttol with the values 0 and 1 for PLR";
 
@@ -34,7 +34,7 @@ partial model partialTwoPositionController
     annotation (Placement(transformation(extent={{10,50},{22,66}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=variablePLR)
     annotation (Placement(transformation(extent={{6,64},{20,82}})));
-  parameter Real bandwidth=2.5 "Bandwidth around reference signal";
+  parameter Real bandwidth=4 "Bandwidth around reference signal";
 equation
   connect(realExpression.y, onOffController.reference) annotation (Line(points={{23,42},
           {26,42},{26,12},{32,12}},         color={0,0,127}));

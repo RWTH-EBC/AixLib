@@ -84,7 +84,7 @@ model ModularBoiler_FlowTemperatureControlHeatCurve
     m_flowVar=m_flowVar,
     Advanced=Advanced,
     dTWaterSet=dTWaterSet)
-    annotation (Placement(transformation(extent={{-100,36},{-80,56}})));
+    annotation (Placement(transformation(extent={{-100,34},{-80,54}})));
   AixLib.Fluid.Movers.SpeedControlled_y fan1(
     redeclare package Medium = AixLib.Media.Water,
     allowFlowReversal=false,
@@ -133,7 +133,8 @@ model ModularBoiler_FlowTemperatureControlHeatCurve
     use_advancedControl=true,
     n=n,
     bandwidth=2.5,
-    severalHeatcurcuits=false)
+    severalHeatcurcuits=false,
+    k=1)
     annotation (Placement(transformation(extent={{-2,48},{18,68}})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
@@ -174,18 +175,18 @@ equation
   connect(senTCold.port_b, fan1.port_a)
     annotation (Line(points={{-70,0},{-60,0}}, color={0,127,255}));
   connect(controlBoilerNotManufacturer.DeltaTWater_b, heatGeneratorNoControl.dTWater)
-    annotation (Line(points={{-79,40.8},{-70,40.8},{-70,16},{-26,16},{-26,9},{
+    annotation (Line(points={{-79,38.8},{-70,38.8},{-70,16},{-26,16},{-26,9},{
           -10,9}}, color={0,0,127}));
   connect(port_b, port_b) annotation (Line(points={{100,0},{106,0},{106,0},{100,
           0}}, color={0,127,255}));
   connect(senTCold.T, controlBoilerNotManufacturer.TCold) annotation (Line(
-        points={{-80,11},{-80,26},{-114,26},{-114,49},{-102,49}}, color={0,0,127}));
+        points={{-80,11},{-80,26},{-114,26},{-114,47},{-102,47}}, color={0,0,127}));
   connect(heatGeneratorNoControl.TVolume, controlBoilerNotManufacturer.THot)
-    annotation (Line(points={{2,-11},{2,-40},{-110,-40},{-110,46},{-102,46}},
+    annotation (Line(points={{2,-11},{2,-40},{-110,-40},{-110,44},{-102,44}},
         color={0,0,127}));
   connect(boilerControlBus_Control.DeltaTWater, controlBoilerNotManufacturer.DeltaTWater_a)
     annotation (Line(
-      points={{-39.95,98.05},{-39.95,92},{-106,92},{-106,43},{-102,43}},
+      points={{-39.95,98.05},{-39.95,92},{-106,92},{-106,41},{-102,41}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -200,7 +201,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(controlBoilerNotManufacturer.mFlowRel, regulation_modularBoiler.mFlow_rel)
-    annotation (Line(points={{-79,54},{-70,54},{-70,54.2},{-62,54.2}}, color={0,
+    annotation (Line(points={{-79,52},{-70,52},{-70,54.2},{-62,54.2}}, color={0,
           0,127}));
   connect(regulation_modularBoiler.mFlow_relB, fan1.y) annotation (Line(points=
           {{-41.8,55},{-34,55},{-34,22},{-50,22},{-50,12}}, color={0,0,127}));

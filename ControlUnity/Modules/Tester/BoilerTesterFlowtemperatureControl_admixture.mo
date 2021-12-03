@@ -115,7 +115,7 @@ equation
     annotation (Line(points={{8,-10},{8,6},{-42,6},{-42,24},{-34,24}}, color={0,
           127,255}));
   connect(modularBoiler_Controller.valPos, admix_modularBoiler.valveSet)
-    annotation (Line(points={{-13.8,29.2},{48,29.2},{48,48},{90,48},{90,-22.8},
+    annotation (Line(points={{-13.8,31.2},{48,31.2},{48,48},{90,48},{90,-22.8},
           {44.8,-22.8}}, color={0,0,127}));
   connect(realExpression.y, modularBoiler_Controller.Tset) annotation (Line(
         points={{-20,58.4},{-22,58.4},{-22,32.8},{-22.2,32.8}}, color={0,0,127}));
@@ -133,7 +133,7 @@ equation
   connect(boundary_ph5.ports[1], vol.ports[3])
     annotation (Line(points={{104,22},{64.6667,22}}, color={0,127,255}));
   connect(temperatureSensor.T, modularBoiler_Controller.TMeaCon) annotation (
-      Line(points={{86,2},{96,2},{96,16},{16,16},{16,27.1},{-14.1,27.1}}, color
+      Line(points={{86,2},{96,2},{96,16},{16,16},{16,27.1},{-13.9,27.1}}, color
         ={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

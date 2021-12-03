@@ -37,7 +37,7 @@ model flowTemperatureControl_heatingCurve
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.01,
     Ti=5,
-    yMax=0.999,
+    yMax=0.99,
     yMin=0) "PI Controller for controlling the valve position"
             annotation (Placement(transformation(extent={{-22,-10},{-2,10}})));
   Modelica.Blocks.Logical.Switch switch1 annotation (Placement(transformation(

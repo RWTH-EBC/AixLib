@@ -123,7 +123,7 @@ model ModularBoiler_TwoPositionControllerBufferStorage
       twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
       twoPositionController_layers(n=n),
     n=n,
-    bandwidth=2.5,
+    bandwidth=5,
     severalHeatcurcuits=false,
     k=1) annotation (Placement(transformation(extent={{0,40},{20,60}})));
 protected

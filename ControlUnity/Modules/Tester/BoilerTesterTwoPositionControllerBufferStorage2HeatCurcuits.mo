@@ -53,8 +53,8 @@ model BoilerTesterTwoPositionControllerBufferStorage2HeatCurcuits
   twoPositionController.Storage_modularBoiler storage_modularBoiler(
     x=5,
     n=10,
-    d=0.5,
-    h=1,
+    d=1.5,
+    h=3,
     lambda_ins=0.02,
     s_ins=0.1,
     hConIn=1500,

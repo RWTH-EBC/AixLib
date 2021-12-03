@@ -31,6 +31,7 @@ package Medium = AixLib.Media.Water
   ModularBoiler_FlowTemperatureControlAdmix modularBoiler_Controller(
     TColdNom=333.15,
     QNom=100000,
+    m_flowVar=false,
     n=1,
     use_advancedControl=true,
     severalHeatcurcuits=true,

@@ -8,7 +8,7 @@ model twoPositionController_layers "Two position controller using mean temperatu
     parameter Modelica.SIunits.Temperature TMean=273.15+70 "Mean temperature of all layers of the buffer storage";
 
   parameter Modelica.SIunits.TemperatureDifference TLayer_dif=8 "Reference difference temperature for the on off controller for the buffer storage with layer calculation";
-  parameter Modelica.SIunits.Temperature Tref=273.15+70;
+  parameter Modelica.SIunits.Temperature Tref=273.15+60;
 
 
   Modelica.Blocks.Math.Sum sumTLayers(nin=n)

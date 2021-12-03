@@ -5,7 +5,7 @@ model Regulation_modularBoiler
   parameter Boolean severalHeatcurcuits=false;
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{44,-20},{64,0}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=0)
+  Modelica.Blocks.Sources.RealExpression realExpression(y=0.05)
     annotation (Placement(transformation(extent={{12,-12},{32,8}})));
   Modelica.Blocks.Sources.RealExpression realExpression1 if not
     use_advancedControl or (use_advancedControl and severalHeatcurcuits)
