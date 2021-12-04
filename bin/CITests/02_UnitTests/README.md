@@ -18,9 +18,9 @@ Add the following lines to your .gitlab-ci.yml:
 		- deploy
 
 	include:
-		- 'bin/07_templates/03_ci_templates/02_UnitTests/check_model.gitlab-ci.yml'  
-		- 'bin/07_templates/03_ci_templates/02_UnitTests/regression_test.gitlab-ci.yml'  
-		- 'bin/07_templates/03_ci_templates/02_UnitTests/simulate_model.gitlab-ci.yml'
+		- 'bin/templates/03_ci_templates/02_UnitTests/check_model.gitlab-ci.yml'  
+		- 'bin/templates/03_ci_templates/02_UnitTests/regression_test.gitlab-ci.yml'  
+		- 'bin/templates/03_ci_templates/02_UnitTests/simulate_model.gitlab-ci.yml'
 
 	
 
@@ -348,9 +348,9 @@ Clone the repository of IBPSA and check the models. Models that failed will appe
 
 Example:
 
-`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "Airflow" --library AixLib -DS 2020 --wh-library IBPSA --filterwhitelist --simulateexamples`
+`python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "Airflow" --library AixLib -DS 2020 --wh-library IBPSA --filterwhitelist --simulateexamples`
 	
-`python bin/02_CITests/02_UnitTests/CheckPackages/validatetest.py -DS 2020 --repo-dir IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git  --library AixLib --wh-library IBPSA --whitelist`
+`python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS 2020 --repo-dir IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git  --library AixLib --wh-library IBPSA --whitelist`
 
 
 The Test will check and simulate all examples and validation in AixLib. 

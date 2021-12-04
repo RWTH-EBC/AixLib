@@ -23,7 +23,7 @@ The whole process is automatically triggered by checking into the version contro
 
 
 ## What CI Tests are implement?
-#### Check, Simulate and Regressiontest: [UnitTests](02_CITests/02_UnitTests)
+#### Check, Simulate and Regressiontest: [UnitTests](CITests/02_UnitTests)
 
 With these tests, models are validated or simulated or models will  compared and evaluated with stored values by means of a unit test.
 

@@ -20,10 +20,10 @@ update_ref : Updates the model and the whole package in which the model is locat
 
 
 ## Create yaml templates
-`python bin/02_CITests/07_ci_templates/ci_templates.py`
+`python bin/CITests/07_ci_templates/ci_templates.py`
 
 ## Create yaml templates from toml file 
-`python bin/02_CITests/07_ci_templates/ci_templates.py --setting`
+`python bin/CITests/07_ci_templates/ci_templates.py --setting`
 
 ## Check files and paths in _config.py
-`python bin/02_CITests/01_CleanUp/setting_check.py`
+`python bin/CITests/01_CleanUp/setting_check.py`

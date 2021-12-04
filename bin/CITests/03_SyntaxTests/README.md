@@ -17,8 +17,8 @@ Add the following lines to your .gitlab-ci.yml:
 		- post
 		
 	include:
-		- 'bin/07_templates/03_ci_templates/03_SyntaxTest/html_check.gitlab-ci.yml'  
-		- 'bin/07_templates/03_ci_templates/03_SyntaxTest/style_check.gitlab-ci.yml
+		- 'bin/templates/03_ci_templates/03_SyntaxTest/html_check.gitlab-ci.yml'  
+		- 'bin/templates/03_ci_templates/03_SyntaxTest/style_check.gitlab-ci.yml
 '	
 
 
@@ -69,29 +69,29 @@ Add the following command to your .gitlab-ci.yml.
 
 For more information look at following [Repository](https://github.com/RWTH-EBC/HTML-Tidy-Modelica)
 
-![E.ON EBC RWTH Aachen University](../../04_Documentation/Images/HTMLProcess.png)
+![E.ON EBC RWTH Aachen University](../../Documentation/Images/HTMLProcess.png)
 
 
 
 
-For more help type the command python bin/02_CITests/SyntaxTests/html_tidy_errors.py --help
+For more help type the command python bin/CITests/SyntaxTests/html_tidy_errors.py --help
 
 
 ### StyleChecking
 
 The test StyleChecking use the ModelManagement library in modelica. The script tests the syntax of models or library.
 
-	- python bin/02_CITests/SyntaxTests/StyleChecking.py -s "AixLib" -p AixLib/package.mo
+	- python bin/CITests/SyntaxTests/StyleChecking.py -s "AixLib" -p AixLib/package.mo
 
 
 The following option will be checked:
 
-![E.ON EBC RWTH Aachen University](../../04_Documentation/Images/ModelManagement_StyleChecking.PNG)
+![E.ON EBC RWTH Aachen University](../../Documentation/Images/ModelManagement_StyleChecking.PNG)
 
 
 For more help type the command: 
 
-	- python bin/02_CITests/SyntaxTests/StyleChecking.py --help
+	- python bin/CITests/SyntaxTests/StyleChecking.py --help
 
 	
 # What is done?

@@ -308,7 +308,7 @@ RegressionTest_Check_References:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > ${exit_file}
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref < ../${eof_file}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 2 < ../${eof_file}
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate python36
@@ -382,7 +382,7 @@ Update_Regression_Results:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > ${exit_file}
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package ${library} < ../${eof_file}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package ${library} -n 2 < ../${eof_file}
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate python36

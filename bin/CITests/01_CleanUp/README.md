@@ -8,7 +8,7 @@ The test is performed by the commit `git commit -m "ci_setting"`.
 	stages:
 		- check_setting
 	include:
-		- 'bin/07_templates/03_ci_templates/04_CleanUpScript/ci_setting.gitlab-ci.yml'  
+		- 'bin/templates/03_ci_templates/04_CleanUpScript/ci_setting.gitlab-ci.yml'  
 
 
 
