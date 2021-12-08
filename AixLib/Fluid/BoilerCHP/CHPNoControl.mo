@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP;
+within AixLib.Fluid.BoilerCHP;
 model CHPNoControl
   "Table based CHP model without an internal controller"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=1e10, vol(
@@ -204,11 +204,21 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-        Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
-<p>A table based combined heat and power (CHP) model. The input is the relative part load rate [0...1]. </p>
-<p><b><span style=\"color: #008000;\">Concept</span> </b></p>
-<p>The dimension of thermal and electrical power outputs and fuel input as well as the electricity profile should be in kW. The dimension of fuel consumption depends on the user&apos;s data. </p>
+        Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  A table based combined heat and power (CHP) model. The input is the
+  relative part load rate [0...1].
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  The dimension of thermal and electrical power outputs and fuel input
+  as well as the electricity profile should be in kW. The dimension of
+  fuel consumption depends on the user's data.
+</p>
 </html>",
 revisions="<html><ul>
   <li>August 31, 2020, by Alexander Kümpel:<br/>
