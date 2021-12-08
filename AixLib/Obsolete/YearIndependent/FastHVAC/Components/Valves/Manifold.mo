@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Valves;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Valves;
 model Manifold
 extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 

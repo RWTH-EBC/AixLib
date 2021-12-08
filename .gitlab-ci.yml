@@ -26,15 +26,13 @@ stages:
     - prepare
     - deploy
     
-
- 
 variables:
     Praefix_Branch: "Correct_HTML_"
     TARGET_BRANCH: $CI_COMMIT_REF_NAME
     Newbranch: ${Praefix_Branch}${CI_COMMIT_REF_NAME}
     Github_Repository : RWTH-EBC/AixLib
     GITLAB_Page: "https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib"
-    
+   
     
 include:
   - project: 'EBC/EBC_all/gitlab_ci/templates'

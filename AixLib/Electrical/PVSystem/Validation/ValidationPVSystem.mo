@@ -1,4 +1,4 @@
-within AixLib.Electrical.PVSystem.Validation;
+﻿within AixLib.Electrical.PVSystem.Validation;
 model ValidationPVSystem
   "Validation with empirical data from NIST for the date of 14.06.2016"
   extends Modelica.Icons.Example;
@@ -80,8 +80,9 @@ equation
     experiment(
       StartTime=28684800,
       StopTime=28771200,
-      Interval=60,
-      __Dymola_Algorithm="Dassl"),
+      Tolerance=1e-06,
+      Method="dassl"),
+      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Electrical/Validation/ValidationPVSystem.mos" "Simulate and Plot"),
     Documentation(info="<html><p>
   The PVSystem model is validaded with empirical data from: <a href=
   \"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a>
