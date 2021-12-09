@@ -11,11 +11,10 @@ expandable connector TabsBus "Data bus for tabs"
     Diagram(graphics,
             coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>Definition of a bus connector for the ERC Heatpump System.</p>
+<p>Definition of a bus connector for the Tabs Module.</p>
 </html>", revisions="<html>
 <ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
-<li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
+<li>December 09, 2021, by Alexander K&uuml;mpel:<br>Transfer to AixLib.</li>
 </ul>
 </html>"));
 end TabsBus;
