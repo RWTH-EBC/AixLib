@@ -1,7 +1,13 @@
 within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ERC) main building"
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium in the system" annotation (choicesAllMatching=true);
+    "Medium in the system" annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15,
+          X_a=0.40))));
 
   parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
@@ -30,6 +36,7 @@ model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ER
   HydraulicModules.Pump pump_hot(
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_133x3(),
+    tauHeaTra=tauHeaTra,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start_hot,
@@ -50,6 +57,7 @@ model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ER
   HydraulicModules.Pump pump_cold(
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
+    tauHeaTra=tauHeaTra,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start_cold,
@@ -125,20 +133,22 @@ model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ER
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start_hot,
-    tauHeaTra(displayUnit="h") = 21600,
+    tauHeaTra=tauHeaTra,
     length=10,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
     Kv=160,
     valve(riseTime=240, order=1),
     pipe3(length=20),
-    T_amb=T_amb) annotation (Placement(transformation(
+    final T_amb=T_amb)
+                 annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=0,
         origin={-60,-100})));
   HydraulicModules.Throttle throttle_HS(
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_133x3(),
+    tauHeaTra=tauHeaTra,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start_hot,
@@ -155,6 +165,7 @@ model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ER
   HydraulicModules.Throttle throttle_CS(
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_133x3(),
+    tauHeaTra=tauHeaTra,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start_cold,
@@ -171,6 +182,7 @@ model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ER
   HydraulicModules.Throttle throttle_freecool(
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_108x2_5(),
+    tauHeaTra=tauHeaTra,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start_cold,
@@ -310,6 +322,8 @@ model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ER
     prescribedTemperature
     annotation (Placement(transformation(extent={{50,-126},{58,-118}})));
 
+  parameter Modelica.SIunits.Time tauHeaTra(displayUnit="h") = 21600
+    "Time constant for heat transfer of temperature sensors to ambient";
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a2(
     tau(displayUnit="s"),
@@ -318,7 +332,8 @@ protected
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{-204,-14},{-192,-26}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_a1(
     initType=Modelica.Blocks.Types.Init.SteadyState,
@@ -334,7 +349,8 @@ protected
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{200,-6},{212,-18}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_a2(
     initType=Modelica.Blocks.Types.Init.SteadyState,
@@ -350,7 +366,8 @@ protected
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{206,6},{194,18}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_a3(
     initType=Modelica.Blocks.Types.Init.SteadyState,
@@ -361,12 +378,13 @@ protected
         origin={200,28})));
   Fluid.Sensors.TemperatureTwoPort senT_b2(
     tau(displayUnit="s"),
-    T_start=T_start_hot,
-    redeclare package Medium = Medium,
-    transferHeat=true,
+    final T_start=T_start_hot,
+    redeclare final package Medium = Medium,
+    final transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal) annotation (Placement(
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)                       annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=180,
