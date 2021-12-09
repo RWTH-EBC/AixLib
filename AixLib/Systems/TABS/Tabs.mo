@@ -445,6 +445,10 @@ equation
             100}})),
     Documentation(info="<html>
 <p>This module is a thermally activated building system (TABS) with a closed hydraunic system that is connected to the concrete and supplied by two throttle circuits via heat exchangers.</p>
-<p>One throttle circtuit has to be connected to cold water and the other one to hot water.</p>
+<p>One throttle circtuit has to be connected to cold water and the other one to hot water.</p><p>The pumps and valves have to be specified in the hdraulicModules.</p>
+</html>", revisions="<html>
+<ul>
+<li>December 09, 2021, by Alexander K&uuml;mpel:<br>Transfer to AixLib.</li>
+</ul>
 </html>"));
 end Tabs;
