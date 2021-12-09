@@ -1,12 +1,9 @@
 within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
 record Erc_ShaftSouth_Borefield "Data of the ERC Field"
-  extends Data.Borefield.Template(
-    final filDat=
-        AixLib.Fluid.Geothermal.Borefields.BaseClasses.Erc_ShaftSouth_Filling(),
-    final soiDat=
-        AixLib.Fluid.Geothermal.Borefields.BaseClasses.Erc_ShaftSouth_Soil(),
-    final conDat=
-        AixLib.Fluid.Geothermal.Borefields.BaseClasses.Erc_ShaftSouth_Configuration());
+  extends AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template(
+     filDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.Erc_ShaftSouth_Filling(),
+     soiDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.Erc_ShaftSouth_Soil(),
+     conDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.Erc_ShaftSouth_Configuration());
 
   annotation (Documentation(info="<html>
 <p>Borefield data of the southern shaft of the ERC field</p>

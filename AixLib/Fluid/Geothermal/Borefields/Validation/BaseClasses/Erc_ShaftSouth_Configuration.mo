@@ -1,7 +1,7 @@
 within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
 record Erc_ShaftSouth_Configuration
   "Configuration of the southern shaft of the ERC field"
-  extends Data.Configuration.Template(
+  extends AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
     borCon=AixLib.Fluid.Geothermal.Borefields.Types.BoreholeConfiguration.DoubleUTubeParallel,
     use_Rb=true,
     Rb=0.2,
@@ -20,9 +20,17 @@ record Erc_ShaftSouth_Configuration
 
 
   annotation (Documentation(info="<html>
-<p>Soil data of the southern Shaft of the ERC field</p>
-</html>", revisions="<html>
-<p>December  9, 2021, by Phillip Stoffel:</p>
-<p>First implementation. </p>
-</html>"));
+ <p>
+ This record contains the configuration of the ERC field.
+ </p>
+ </html>",
+revisions="<html>
+ <ul>
+ <li>
+ December 9, 2021, by Phillip Stoffel:<br/>
+ Revised implementation, added <code>defaultComponentPrefixes</code> and
+ <code>defaultComponentName</code>.
+ </li>
+ </ul>
+ </html>"));
 end Erc_ShaftSouth_Configuration;
