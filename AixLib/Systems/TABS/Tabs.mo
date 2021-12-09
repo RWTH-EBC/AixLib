@@ -45,6 +45,8 @@ model Tabs "Thermally Activated Building Systems"
     m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal,
     length=length,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T_start=T_start) "Pipe that goes through the concrete" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,

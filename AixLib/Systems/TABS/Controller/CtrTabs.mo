@@ -33,6 +33,7 @@ model CtrTabs "Controller for concrete core activation"
     final Ti=Ti_hot,
     final Td=0,
     final rpm_pump=rpm_pump_hot,
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
     final reverseAction=true)
     annotation (Placement(transformation(extent={{-20,22},{0,42}})));
   HydraulicModules.Controller.CtrThrottle ctrThrottleCold(
@@ -41,6 +42,7 @@ model CtrTabs "Controller for concrete core activation"
     final Ti=Ti_cold,
     final Td=0,
     rpm_pump=rpm_pump_cold,
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
     final reverseAction=false)
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
   HydraulicModules.Controller.CtrPump ctrPump(final rpm_pump=rpm_pump_concrete)
