@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased;
+within AixLib.Fluid.Movers.PumpsPolynomialBased;
 model PumpSpeedControlled
   "Pump model with speed control, onOff-Switch and bounding of speed instead of pump delivery head."
 
