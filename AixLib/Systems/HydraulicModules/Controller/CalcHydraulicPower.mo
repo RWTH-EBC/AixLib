@@ -1,8 +1,8 @@
 within AixLib.Systems.HydraulicModules.Controller;
 model CalcHydraulicPower
 
-  parameter Real Density = 1000 "Density of Medium";
-  parameter Real HeatCapacity = 4180 "Heat Capacity of Medium";
+  parameter Real rho = 1000 "Density of Medium";
+  parameter Real cp = 4180 "Heat Capacity of Medium";
 public
   BaseClasses.HydraulicBus  hydraulicBus
     annotation (Placement(transformation(extent={{-124,-24},{-76,24}}),
@@ -15,7 +15,8 @@ public
     annotation (Placement(transformation(extent={{-56,-10},{-38,8}})));
   Modelica.Blocks.Math.Gain gain1(k=HeatCapacity)
     annotation (Placement(transformation(extent={{-22,-10},{-4,8}})));
-  Modelica.Blocks.Interfaces.RealOutput Qflow "Connector of Real output signal"
+  Modelica.Blocks.Interfaces.RealOutput Q_flow
+    "Connector of Real output signal"
     annotation (Placement(transformation(extent={{98,-10},{118,10}})));
 equation
   connect(add.u2, hydraulicBus.TFwrdInMea) annotation (Line(points={{-22,26},{-99.88,
@@ -42,9 +43,9 @@ equation
     annotation (Line(points={{-37.1,-1},{-23.8,-1}}, color={0,0,127}));
   connect(gain1.y, product1.u2) annotation (Line(points={{-3.1,-1},{8,-1},{8,-6},
           {56,-6}},     color={0,0,127}));
-  connect(product1.y, Qflow)
-    annotation (Line(points={{79,0},{108,0}},         color={0,0,127}));
-  connect(Qflow, Qflow)
+  connect(product1.y, Q_flow)
+    annotation (Line(points={{79,0},{108,0}}, color={0,0,127}));
+  connect(Q_flow, Q_flow)
     annotation (Line(points={{108,0},{108,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(

@@ -1,21 +1,21 @@
 within AixLib.Systems.HydraulicModules.Controller;
 block CtrThrottleQFlow
   "Volume Flow Set Point Controller for Throttles"
-         Modelica.Blocks.Interfaces.RealInput QFlowAct
+         Modelica.Blocks.Interfaces.RealInput Q_flowMea
     "Connector of measurement input signal" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent=
            {{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput QFlowSet if
+  Modelica.Blocks.Interfaces.RealInput Q_flowSet if
                                                useExternalQset
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-140,-70},{-100,-30}}), iconTransformation(
           extent={{-140,-70},{-100,-30}})));
-public
   BaseClasses.HydraulicBus  hydraulicBus
     annotation (Placement(transformation(extent={{76,-24},{124,24}}),
         iconTransformation(extent={{90,-22},{138,26}})));
-          parameter Boolean useExternalQset = false "If True, set Volume Flow can be given externally";
-  parameter Modelica.SIunits.Power QFlowSetCon = 0 "Power set point of consumer in W";
+
+  parameter Boolean useExternalQset = false "If True, set Volume Flow can be given externally";
+  parameter Modelica.SIunits.Power Q_flowSetCon = 0 "Power set point of consumer in W";
   parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
@@ -34,8 +34,9 @@ public
     annotation(Dialog(group="PID"));
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
-  Modelica.Blocks.Sources.Constant constQflowSet(final k=QFlowSetCon) if not useExternalQset annotation (Placement(transformation(extent={{-100,
-            -10},{-80,10}})));
+  Modelica.Blocks.Sources.Constant constQ_flowSet(final k=Q_flowSetCon) if
+                                                                         not useExternalQset
+    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   AixLib.Controls.Continuous.LimPID PID(
     final yMax=1,
     final yMin=0,
@@ -57,17 +58,17 @@ public
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 equation
 
-    connect(PID.u_s,QFlowSet)  annotation (Line(
+  connect(PID.u_s, Q_flowSet) annotation (Line(
       points={{-22,-50},{-120,-50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-    connect(constQflowSet.y, PID.u_s) annotation (Line(
+  connect(constQ_flowSet.y, PID.u_s) annotation (Line(
       points={{-79,0},{-66,0},{-66,-50},{-22,-50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.u_m,QFlowAct)
-    annotation (Line(points={{-10,-38},{-10,60},{-120,60}},        color={0,0,127}));
+  connect(PID.u_m, Q_flowMea)
+    annotation (Line(points={{-10,-38},{-10,60},{-120,60}}, color={0,0,127}));
   connect(PID.y,pumpSwitchOff. u)
     annotation (Line(points={{1,-50},{8,-50},{8,40},{18,40}},   color={0,0,127}));
   connect(pumpSwitchOff.y, hydraulicBus.pumpBus.onSet) annotation (Line(points={{41,40},
@@ -152,10 +153,10 @@ equation
 <p>
   Simple controller for Throttle and ThrottlePump circuit that is based
   on a PID controller. The controlled variable needs to be connected to
-  QFlowAct.
+  QFlowAct. The set point can be passed externally or as parameter. 
 </p>
 <p>
-The controller adjusts the valve to archive the specified thermal Power
+The controller adjusts the valve to archieve the specified thermal Power
 </p>
 </html>"));
 end CtrThrottleQFlow;
