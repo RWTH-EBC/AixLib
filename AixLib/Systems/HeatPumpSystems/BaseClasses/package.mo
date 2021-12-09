@@ -1,5 +1,6 @@
-within AixLib.Systems.HeatPumpSystems;
+﻿within AixLib.Systems.HeatPumpSystems;
 package BaseClasses "BaseClasses for heat pump systems"
+    extends Modelica.Icons.BasesPackage;
 
 annotation (Documentation(revisions="<html><ul>
   <li>
