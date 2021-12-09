@@ -275,59 +275,64 @@ equation
   The type of activity determines the load for machines in the room for
   one person according to DIN 18599-10. The following values are used:
 </p>
-<table summary=\"DIN 18599-10 activity level and produces heat output\"
-cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
-  <tr>
-    <td style=\"background-color: #dcdcdc\">
-      Activity Type
-    </td>
-    <td style=\"background-color: #dcdcdc\">
-      Heat Load [W]
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        1
-      </p>
-    </td>
-    <td>
-      <p>
-        50
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        2
-      </p>
-    </td>
-    <td>
-      <p>
-        100
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        3
-      </p>
-    </td>
-    <td>
-      <p>
-        150
-      </p>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"DIN 18599-10 activity level and produces heat output\"
+    cellspacing=\"2\" cellpadding=\"0\" border=\"0\"&gt;
+    <table>
+      <tr>
+        <td style=\"background-color: #dcdcdc\">
+          Activity Type
+        </td>
+        <td style=\"background-color: #dcdcdc\">
+          Heat Load [W]
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            1
+          </p>
+        </td>
+        <td>
+          <p>
+            50
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            2
+          </p>
+        </td>
+        <td>
+          <p>
+            100
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            3
+          </p>
+        </td>
+        <td>
+          <p>
+            150
+          </p>
+        </td>
+      </tr>
+    </table>
+    <h4>
+      <span style=\"color: #008000\">References</span>
+    </h4>
+    <p>
+      DIN 18599-10
+    </p>
+  </caption>
 </table>
-<h4>
-  <span style=\"color: #008000\">References</span>
-</h4>
-<p>
-  DIN 18599-10
-</p>
 </html>",
     revisions="<html><ul>
   <li>

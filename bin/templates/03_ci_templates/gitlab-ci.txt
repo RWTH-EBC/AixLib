@@ -1,0 +1,18 @@
+
+image: ${image_name}
+
+stages:
+    %for stage in stage_list:
+    - ${stage}
+    %endfor
+    
+variables:
+    %for variable in variable_list:
+    ${variable}
+    %endfor
+    
+include:
+  %for file in file_list:
+    - '${file}'  
+  %endfor
+  
