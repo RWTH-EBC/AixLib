@@ -1,6 +1,5 @@
 within AixLib.Systems.HeatPumpSystems.BaseClasses;
-expandable connector HeatPumpSystemBus
-  "Data bus for ERC Heatpump system"
+expandable connector HeatPumpSystemERCBus "Data bus for ERC Heatpump system"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
   AixLib.Controls.Interfaces.VapourCompressionMachineControlBus busHP;
@@ -37,4 +36,4 @@ expandable connector HeatPumpSystemBus
 <li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
 </ul>
 </html>"));
-end HeatPumpSystemBus;
+end HeatPumpSystemERCBus;

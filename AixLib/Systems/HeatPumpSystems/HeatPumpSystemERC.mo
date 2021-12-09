@@ -1,5 +1,5 @@
 within AixLib.Systems.HeatPumpSystems;
-model HeatPumpSystemERC "Heat pump system of the E.ON ERC main building"
+model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ERC) main building"
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
@@ -279,9 +279,9 @@ model HeatPumpSystemERC "Heat pump system of the E.ON ERC main building"
     annotation (Placement(transformation(extent={{24,-84},{32,-76}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{42,-80},{54,-68}})));
-  BaseClasses.HeatPumpSystemBus heatPumpSystemBus annotation (Placement(
-        transformation(extent={{-14,46},{14,74}}), iconTransformation(extent={{
-            -10,50},{10,70}})));
+  BaseClasses.HeatPumpSystemERCBus heatPumpSystemBus annotation (Placement(
+        transformation(extent={{-14,46},{14,74}}), iconTransformation(extent={{-10,
+            50},{10,70}})));
 
 
   Modelica.Blocks.Logical.Switch switch2
