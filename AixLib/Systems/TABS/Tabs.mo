@@ -45,7 +45,7 @@ model Tabs "Thermally Activated Building Systems"
     m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal,
     length=length,
-    T_start=T_start) annotation (Placement(transformation(
+    T_start=T_start) "Pipe that goes through the concrete" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={0,58})));
@@ -62,7 +62,7 @@ model Tabs "Thermally Activated Building Systems"
     massDynamics=massDynamics,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per)))
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per))) "Hydraulic module with of the internal circuit that supplies the concrete"
     annotation (Dialog(enable=true, group="Hydronics"), Placement(
         transformation(
         extent={{-20,-20},{20,20}},
@@ -102,7 +102,7 @@ model Tabs "Thermally Activated Building Systems"
       Placement(transformation(extent={{-10,88},{10,108}}), iconTransformation(
           extent={{-10,100},{10,120}})));
 
-  BaseClasses.TabsBus tabsBus annotation (Placement(transformation(extent={{-120,
+  BaseClasses.TabsBus tabsBus "Connector bus" annotation (Placement(transformation(extent={{-120,
             -20},{-80,20}}), iconTransformation(extent={{-116,-14},{-86,16}})));
 
   Modelica.Blocks.Sources.Constant const(k=area*alpha)
@@ -154,7 +154,7 @@ model Tabs "Thermally Activated Building Systems"
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per))) annotation (Dialog(enable=true, group="Hydronics"), Placement(
+          per))) "Hydraulic module with pump and valve for hot water supply" annotation (Dialog(enable=true, group="Hydronics"), Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -173,7 +173,7 @@ model Tabs "Thermally Activated Building Systems"
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per))) annotation (Dialog(enable=true, group="Hydronics"), Placement(
+          per))) "Hydraulic module with pump and throttle valve for cold water supply" annotation (Dialog(enable=true, group="Hydronics"), Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
