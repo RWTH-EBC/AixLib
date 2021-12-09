@@ -152,10 +152,10 @@ equation
 <p>
   Simple controller for Throttle and ThrottlePump circuit that is based
   on a PID controller. The controlled variable needs to be connected to
-  vFlowAct.
+  QFlowAct.
 </p>
 <p>
-  The controller adjusts the valve to archive the specified volume flow
+The controller adjusts the valve to archive the specified thermal Power
 </p>
 </html>"));
 end CtrThrottleQFlow;
