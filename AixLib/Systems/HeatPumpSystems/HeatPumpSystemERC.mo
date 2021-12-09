@@ -82,8 +82,9 @@ model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ER
     TStart=T_start_cold)
     annotation (Placement(transformation(extent={{124,-16},{100,14}})));
   Fluid.Storage.BufferStorage heatStorage(
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    final mSenFac=1,
     final m1_flow_nominal=m_flow_nominal,
     final m2_flow_nominal=m_flow_nominal,
     n=4,
@@ -95,12 +96,12 @@ model HeatPumpSystemERC "Heat pump system of the E.ON energy research center (ER
     upToDownHC2=false,
     useHeatingRod=false,
     TStartWall=T_start_hot,
-    TStartIns=T_start_hot,
-    redeclare model HeatTransfer =
+    final TStartIns=T_start_hot,
+    redeclare final model HeatTransfer =
         Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
-    redeclare package MediumHC1 = Medium,
-    redeclare package MediumHC2 = Medium,
-    TStart=T_start_hot)
+    redeclare final package MediumHC1 = Medium,
+    redeclare final package MediumHC2 = Medium,
+    final TStart=T_start_hot)
                    annotation (Placement(transformation(
         extent={{12,-15},{-12,15}},
         rotation=0,
