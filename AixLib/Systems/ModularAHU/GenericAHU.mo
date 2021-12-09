@@ -80,7 +80,8 @@ replaceable package Medium2 =
     tau=tau,
     T_amb=T_amb,
     energyDynamics=energyDynamics,
-    massDynamics=massDynamics) if
+    massDynamics=massDynamics,
+    redeclare replaceable HydraulicModules.Admix hydraulicModule) if
                     usePreheater "Preheating coil subsystem"
     annotation (Dialog(enable=usePreheater, group="Preheater"),Placement(transformation(extent={{-154,
             -46},{-110,14}})));
@@ -95,7 +96,9 @@ replaceable package Medium2 =
     tau=tau,
     T_amb=T_amb,
     energyDynamics=energyDynamics,
-    massDynamics=massDynamics) "Cooling coil subsystem"
+    massDynamics=massDynamics,
+    redeclare replaceable HydraulicModules.Admix hydraulicModule)
+                               "Cooling coil subsystem"
     annotation (Dialog(enable=true, group="Cooler"),Placement(transformation(extent={{2,-46},{46,14}})));
   RegisterModule heater(
     redeclare package Medium1 = Medium1,
@@ -108,7 +111,9 @@ replaceable package Medium2 =
     tau=tau,
     T_amb=T_amb,
     energyDynamics=energyDynamics,
-    massDynamics=massDynamics) "Heating coil subsystem"
+    massDynamics=massDynamics,
+    redeclare replaceable HydraulicModules.Admix hydraulicModule)
+                               "Heating coil subsystem"
     annotation (Dialog(enable=true, group="Heater"),Placement(transformation(extent={{76,-46},{120,14}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX(
     redeclare package Medium1 = Medium1,
@@ -117,10 +122,15 @@ replaceable package Medium2 =
     final allowFlowReversal2=allowFlowReversal1,
     final m1_flow_nominal=m1_flow_nominal,
     final m2_flow_nominal=m1_flow_nominal,
+    dp1_nominal=10,
+    dp2_nominal=10,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
     final T1_start=T_start,
-    final T2_start=T_start) "Heat recovery heat exchanger"
+    final T2_start=T_start,
+    dT_nom=1,
+    Q_nom=1000*m1_flow_nominal)
+                            "Heat recovery heat exchanger"
     annotation (Dialog(enable=true, group="Heat recovery heat exchanger"),Placement(transformation(extent={{-20,-14},
             {-60,54}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare package Medium =
