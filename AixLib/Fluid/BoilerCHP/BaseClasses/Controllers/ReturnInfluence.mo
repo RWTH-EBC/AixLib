@@ -30,7 +30,8 @@ model ReturnInfluence
     dataset="/Eta_TCold",
     dataUnit="-",
     scaleUnits={"K","degC","-","K"},
-    interpMethod=SDF.Types.InterpolationMethod.Linear)
+    interpMethod=SDF.Types.InterpolationMethod.Linear,
+    extrapMethod=SDF.Types.ExtrapolationMethod.Hold)
     annotation (Placement(transformation(extent={{36,-4},{56,16}})));
   Modelica.Blocks.Sources.RealExpression tColdNom(y=TColdNom)
     "Return Water temperature Setpoint"
