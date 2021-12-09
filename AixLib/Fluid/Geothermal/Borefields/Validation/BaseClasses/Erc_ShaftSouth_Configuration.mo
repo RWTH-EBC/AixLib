@@ -18,4 +18,11 @@ record Erc_ShaftSouth_Configuration
     cooBor={{9*mod((i - 1), 13),9*floor((i - 1)/13)} for i in 1:13},
     mBor_flow_small=1E-4*abs(41.8));
 
+
+  annotation (Documentation(info="<html>
+<p>Soil data of the southern Shaft of the ERC field</p>
+</html>", revisions="<html>
+<p>December  9, 2021, by Phillip Stoffel:</p>
+<p>First implementation. </p>
+</html>"));
 end Erc_ShaftSouth_Configuration;
