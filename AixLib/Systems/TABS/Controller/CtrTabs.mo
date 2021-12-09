@@ -41,7 +41,7 @@ model CtrTabs "Controller for concrete core activation"
     final Ti=Ti_cold,
     final Td=0,
     rpm_pump=rpm_pump_cold,
-      reverseAction=false)
+    final reverseAction=false)
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
   HydraulicModules.Controller.CtrPump ctrPump(final rpm_pump=rpm_pump_concrete)
     annotation (Placement(transformation(extent={{-20,60},{0,80}})));

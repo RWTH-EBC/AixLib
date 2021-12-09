@@ -108,7 +108,7 @@ model Tabs "Thermally Activated Building Systems"
   Modelica.Blocks.Sources.Constant const(k=area*alpha)
     annotation (Placement(transformation(extent={{-60,68},{-40,88}})));
 
-  Fluid.HeatExchangers.DynamicHX dynamicHX(
+  Fluid.HeatExchangers.DynamicHX dynamicHXCold(
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
     redeclare package Medium1 = Medium,
@@ -123,7 +123,7 @@ model Tabs "Thermally Activated Building Systems"
     final dT_nom=dT_nom_hx,
     final Q_nom=Q_nom_hx)
     annotation (Placement(transformation(extent={{48,-36},{28,-16}})));
-  Fluid.HeatExchangers.DynamicHX dynamicHX1(
+  Fluid.HeatExchangers.DynamicHX dynamicHXHot(
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
     redeclare package Medium1 = Medium,
@@ -194,23 +194,22 @@ equation
                                               color={191,0,0}));
   connect(convection.Gc, const.y)
     annotation (Line(points={{-6,78},{-39,78}},  color={0,0,127}));
-  connect(dynamicHX1.port_a1, dynamicHX.port_b1)
+  connect(dynamicHXHot.port_a1, dynamicHXCold.port_b1)
     annotation (Line(points={{-28,-20},{28,-20}}, color={0,127,255}));
-  connect(dynamicHX.port_a1, pumpSys.port_b2) annotation (Line(points={{48,-20},
-          {52,-20},{52,-8},{10,-8},{10,-4},{12,-4},{12,0}},
-                                          color={0,127,255}));
-  connect(dynamicHX1.port_b1, pumpSys.port_a1) annotation (Line(points={{-48,-20},
-          {-52,-20},{-52,-6},{-12,-6},{-12,0}},
-                                color={0,127,255}));
-  connect(bou.ports[1], dynamicHX1.port_b1) annotation (Line(points={{-74,-20},
-          {-48,-20}},                       color={0,127,255}));
-  connect(throttlePumpHot.port_b1, dynamicHX1.port_a2) annotation (Line(points={
-          {-52,-40},{-52,-32},{-48,-32}}, color={0,127,255}));
-  connect(throttlePumpHot.port_a2, dynamicHX1.port_b2) annotation (Line(points={{-28,-40},
-          {-28,-32}},                               color={0,127,255}));
-  connect(throttlePumpCold.port_b1, dynamicHX.port_a2)
-    annotation (Line(points={{28,-40},{28,-32}},          color={0,127,255}));
-  connect(throttlePumpCold.port_a2, dynamicHX.port_b2)
+  connect(dynamicHXCold.port_a1, pumpSys.port_b2) annotation (Line(points={{48,
+          -20},{52,-20},{52,-8},{10,-8},{10,-4},{12,-4},{12,0}}, color={0,127,
+          255}));
+  connect(dynamicHXHot.port_b1, pumpSys.port_a1) annotation (Line(points={{-48,
+          -20},{-52,-20},{-52,-6},{-12,-6},{-12,0}}, color={0,127,255}));
+  connect(bou.ports[1], dynamicHXHot.port_b1)
+    annotation (Line(points={{-74,-20},{-48,-20}}, color={0,127,255}));
+  connect(throttlePumpHot.port_b1, dynamicHXHot.port_a2) annotation (Line(
+        points={{-52,-40},{-52,-32},{-48,-32}}, color={0,127,255}));
+  connect(throttlePumpHot.port_a2, dynamicHXHot.port_b2)
+    annotation (Line(points={{-28,-40},{-28,-32}}, color={0,127,255}));
+  connect(throttlePumpCold.port_b1, dynamicHXCold.port_a2)
+    annotation (Line(points={{28,-40},{28,-32}}, color={0,127,255}));
+  connect(throttlePumpCold.port_a2, dynamicHXCold.port_b2)
     annotation (Line(points={{52,-40},{52,-32},{48,-32}}, color={0,127,255}));
   connect(throttlePumpHot.port_a1, port_a1) annotation (Line(points={{-52,-80},{
           -76,-80},{-76,-100},{-80,-100}}, color={0,127,255}));
