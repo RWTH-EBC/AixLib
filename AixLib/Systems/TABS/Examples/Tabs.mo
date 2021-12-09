@@ -71,6 +71,7 @@ equation
 <li>December 09, 2021, by Alexander K&uuml;mpel:<br>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>Example of the Tabs system.</p>
+<p>Example for testing the Tabs system <a href=
+  \"modelica://AixLib.Systems.TABS.Tabs\">AixLib.Systems.TABS.Tabs</a>.</p>
 </html>"));
 end Tabs;
