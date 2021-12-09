@@ -14,8 +14,9 @@ For the boundaries of the y-input value, a dynamic hysteresis is used to ensure 
   Modelica.Blocks.Interfaces.RealInput y_in "Current value on y-Axis"
     annotation (Placement(transformation(extent={{-128,-74},{-100,-46}})));
 
-  Modelica.Blocks.Tables.CombiTable1Ds uppCombiTable1Ds(final table=tableUpp, smoothness=
-        Modelica.Blocks.Types.Smoothness.LinearSegments,
+  Modelica.Blocks.Tables.CombiTable1Ds uppCombiTable1Ds(
+    final table=tableUpp_internal,
+    final smoothness= Modelica.Blocks.Types.Smoothness.LinearSegments,
     final tableOnFile=false)
     annotation (Placement(transformation(extent={{-48,68},{-28,88}})));
   Modelica.Blocks.MathBoolean.Nor

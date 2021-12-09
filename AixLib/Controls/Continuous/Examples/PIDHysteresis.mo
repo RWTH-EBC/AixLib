@@ -62,33 +62,29 @@ within AixLib.Controls.Continuous.Examples;
   annotation (                      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Examples/PIDHysteresis.mos"
          "Simulate and plot"),
      experiment(Tolerance=1e-6, StopTime=86400),
-     Documentation(info="<html>
- <p>
- Example that demonstrates the use of the PID controller
- with hysteresis. The control objective is to keep
- the temperature of the energy storage <code>cap</code>
- at <i>40</i>&deg;C.
- The controller <code>con</code> is parameterized to
- switch on if the control error is bigger than
- <i>e<sub>on</sub>=1</i>.
- The output of the controller remains above <i>y<sub>min</sub>=0.3</i> until the control
- error is smaller than <i>e<sub>off</sub>=-1</i>, at which
- time the controller outputs <i>y=0</i> until the
- control error is again bigger than <i>1</i>.
- The figure below shows the control error
- <code>con.feeBac.y</code> and the control signal
- <code>con.y</code>.
- </p>
- <p align=\"center\">
- <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/PIDHysteresis.png\" border=\"1\" alt=\"Control error.\"/>
- </p>
- </html>", revisions="<html>
- <ul>
- <li>
- November 21, 2011, by Michael Wetter:<br/>
- Added documentation.
- </li>
- </ul>
- </html>"),  
+     Documentation(info="<html><p>
+  Example that demonstrates the use of the PID controller with
+  hysteresis. The control objective is to keep the temperature of the
+  energy storage <code>cap</code> at <i>40</i>°C. The controller
+  <code>con</code> is parameterized to switch on if the control error
+  is bigger than <i>e<sub>on</sub>=1</i>. The output of the controller
+  remains above <i>y<sub>min</sub>=0.3</i> until the control error is
+  smaller than <i>e<sub>off</sub>=-1</i>, at which time the controller
+  outputs <i>y=0</i> until the control error is again bigger than
+  <i>1</i>. The figure below shows the control error
+  <code>con.feeBac.y</code> and the control signal <code>con.y</code>.
+</p>
+<p style=\"text-align:center;\">
+  <img src=
+  \"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/PIDHysteresis.png\"
+  border=\"1\" alt=\"Control error.\">
+</p>
+</html>", revisions="<html>
+<ul>
+  <li>November 21, 2011, by Michael Wetter:<br/>
+    Added documentation.
+  </li>
+</ul>
+</html>"),  
    __Dymola_LockedEditing="Model from IBPSA");
  end PIDHysteresis;
