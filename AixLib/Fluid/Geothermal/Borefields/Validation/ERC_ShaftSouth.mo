@@ -100,18 +100,20 @@ equation
     annotation (Line(points={{0,0},{4,0}}, color={0,127,255}));
   connect(TBorFieIn.port_a, boundary.ports[1])
     annotation (Line(points={{-20,0},{-24,0}}, color={0,127,255}));
-  annotation (Documentation(info="<html>
-<p>
-This example uses measured data of the E.ON ERC geothermal field to validate the boreholefield model. 
-For the validation the measured inlet temperature and the measured massflow are used as inputs whereas the measured outlet 
-temperature is compared with the simulated outlet temperature. The data includes one year of operation with small failures of the monitoring system 
-(linear parts in the simulation).
+  annotation (Documentation(info="<html><p>
+  This example uses measured data of the E.ON ERC geothermal field to
+  validate the boreholefield model. For the validation the measured
+  inlet temperature and the measured massflow are used as inputs
+  whereas the measured outlet temperature is compared with the
+  simulated outlet temperature. The data includes one year of operation
+  with small failures of the monitoring system (linear parts in the
+  simulation).
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-May 06, 2021, by Phillip Stoffel:<br/>
-First implementation.
-</li>
+  <li>May 06, 2021, by Phillip Stoffel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
 __Dymola_Commands(file="Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Examples/RectangularBorefield.mos"

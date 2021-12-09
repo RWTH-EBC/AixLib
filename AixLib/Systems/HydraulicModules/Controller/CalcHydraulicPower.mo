@@ -72,10 +72,8 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-Calculates the power auf hydraulic modules and returns the power as real 
-</p>
-<p>
-
+  Calculates the power auf hydraulic modules and returns the power as
+  real
 </p>
 </html>"));
 end CalcHydraulicPower;

@@ -19,18 +19,15 @@ record Erc_ShaftSouth_Configuration
     mBor_flow_small=1E-4*abs(41.8));
 
 
-  annotation (Documentation(info="<html>
- <p>
- This record contains the configuration of the ERC field.
- </p>
- </html>",
-revisions="<html>
- <ul>
- <li>
- December 9, 2021, by Phillip Stoffel:<br/>
- Revised implementation, added <code>defaultComponentPrefixes</code> and
- <code>defaultComponentName</code>.
- </li>
- </ul>
- </html>"));
+  annotation (Documentation(info="<html><p>
+  This record contains the configuration of the ERC field.
+</p>
+</html>",
+revisions="<html><ul>
+  <li>December 9, 2021, by Phillip Stoffel:<br/>
+    Revised implementation, added <code>defaultComponentPrefixes</code>
+    and <code>defaultComponentName</code>.
+  </li>
+</ul>
+</html>"));
 end Erc_ShaftSouth_Configuration;
