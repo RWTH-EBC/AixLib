@@ -63,5 +63,18 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Control")}), Diagram(coordinateSystem(preserveAspectRatio=
-           false)));
+           false)),
+    Documentation(revisions="<html><ul>
+  <li>December 9, 2021, by Phillip Stoffel:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+Calculates the power auf hydraulic modules and returns the power as real 
+</p>
+<p>
+
+</p>
+</html>"));
 end CalcHydraulicPower;
