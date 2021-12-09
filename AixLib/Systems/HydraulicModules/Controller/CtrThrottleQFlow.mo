@@ -153,10 +153,11 @@ equation
 <p>
   Simple controller for Throttle and ThrottlePump circuit that is based
   on a PID controller. The controlled variable needs to be connected to
-  QFlowAct. The set point can be passed externally or as parameter. 
+  QFlowAct. The set point can be passed externally or as parameter.
 </p>
 <p>
-The controller adjusts the valve to archieve the specified thermal Power
+  The controller adjusts the valve to archieve the specified thermal
+  Power
 </p>
 </html>"));
 end CtrThrottleQFlow;
