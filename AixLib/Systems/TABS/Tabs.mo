@@ -57,7 +57,7 @@ model Tabs "Thermally Activated Building Systems"
     T_amb=293.15,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    length=1,
+    length=length_hyd,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -138,8 +138,8 @@ model Tabs "Thermally Activated Building Systems"
     final dT_nom=dT_nom_hx,
     final Q_nom=Q_nom_hx)
     annotation (Placement(transformation(extent={{-28,-36},{-48,-16}})));
-  Fluid.Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=2)
-    annotation (Placement(transformation(extent={{-86,-28},{-74,-16}})));
+  Fluid.Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
+    annotation (Placement(transformation(extent={{-86,-26},{-74,-14}})));
   HydraulicModules.ThrottlePump throttlePumpHot(
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
@@ -202,8 +202,8 @@ equation
   connect(dynamicHX1.port_b1, pumpSys.port_a1) annotation (Line(points={{-48,-20},
           {-52,-20},{-52,-6},{-12,-6},{-12,0}},
                                 color={0,127,255}));
-  connect(bou.ports[1], dynamicHX1.port_b1) annotation (Line(points={{-74,-20.8},
-          {-68,-20.8},{-68,-20},{-48,-20}}, color={0,127,255}));
+  connect(bou.ports[1], dynamicHX1.port_b1) annotation (Line(points={{-74,-20},
+          {-48,-20}},                       color={0,127,255}));
   connect(throttlePumpHot.port_b1, dynamicHX1.port_a2) annotation (Line(points={
           {-52,-40},{-52,-32},{-48,-32}}, color={0,127,255}));
   connect(throttlePumpHot.port_a2, dynamicHX1.port_b2) annotation (Line(points={{-28,-40},
@@ -249,8 +249,6 @@ equation
           52,-86},{80,-86},{80,-100}}, color={0,127,255}));
   connect(throttlePumpHot.port_b2, port_b1) annotation (Line(points={{-28,-80},{
           -28,-82},{-40,-82},{-40,-100}}, color={0,127,255}));
-  connect(bou.ports[2], dynamicHX1.port_b1) annotation (Line(points={{-74,-23.2},
-          {-68,-23.2},{-68,-24},{-60,-24},{-60,-20},{-48,-20}}, color={0,127,255}));
   connect(pipe.heatPort, convection.solid) annotation (Line(points={{
           7.21645e-16,68},{7.21645e-16,70},{-3.88578e-16,70},{-3.88578e-16,72}},
         color={191,0,0}));
