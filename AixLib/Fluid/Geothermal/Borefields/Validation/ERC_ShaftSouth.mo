@@ -72,7 +72,7 @@ model ERC_ShaftSouth "Example model of a rectangular borefield"
         "modelica://AixLib/Resources/Data/Fluid/Geothermal/Borefields/HeatTransfer/Validation/ERC_South_2018.txt"))
     annotation (Placement(transformation(extent={{-100,-6},{-80,14}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature T_out
-    annotation (Placement(transformation(extent={{-52,-64},{-42,-54}})));
+    annotation (Placement(transformation(extent={{-52,-66},{-42,-56}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TBorFieOutMeas
     annotation (Placement(transformation(extent={{-20,-70},{0,-50}})));
   Sensors.TemperatureTwoPort TBorFieIn(redeclare package Medium =
@@ -91,11 +91,11 @@ equation
           -74,4},{-74,8},{-46,8}}, color={0,0,127}));
   connect(boundary.T_in, ErcMea.y[1])
     annotation (Line(points={{-46,4},{-79,4}}, color={0,0,127}));
-  connect(T_out.T, ErcMea.y[3]) annotation (Line(points={{-53,-59},{-53,-58},{-74,
-          -58},{-74,4},{-79,4}},
+  connect(T_out.T, ErcMea.y[3]) annotation (Line(points={{-53,-61},{-53,-60},{
+          -74,-60},{-74,4},{-79,4}},
                              color={0,0,127}));
   connect(T_out.port, TBorFieOutMeas.port)
-    annotation (Line(points={{-42,-59},{-20,-59},{-20,-60}}, color={191,0,0}));
+    annotation (Line(points={{-42,-61},{-20,-61},{-20,-60}}, color={191,0,0}));
   connect(TBorFieIn.port_b, ERCField.port_a)
     annotation (Line(points={{0,0},{4,0}}, color={0,127,255}));
   connect(TBorFieIn.port_a, boundary.ports[1])
