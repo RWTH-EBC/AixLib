@@ -48,7 +48,7 @@ model Tabs "Thermally Activated Building Systems"
     T_start=T_start) annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
-        origin={0,52})));
+        origin={0,58})));
 
   HydraulicModules.Pump pumpSys(
     redeclare package Medium = Medium,
@@ -65,9 +65,9 @@ model Tabs "Thermally Activated Building Systems"
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per)))
     annotation (Dialog(enable=true, group="Hydronics"), Placement(
         transformation(
-        extent={{-24,-24},{24,24}},
+        extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-2,16})));
+        origin={0,20})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(redeclare package Medium =
         Medium)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
@@ -92,21 +92,21 @@ model Tabs "Thermally Activated Building Systems"
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=270,
-        origin={28,66})));
+        origin={32,72})));
   Modelica.Thermal.HeatTransfer.Components.Convection convection annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-6,-6},{6,6}},
         rotation=90,
-        origin={0,80})));
+        origin={0,78})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort annotation (
-      Placement(transformation(extent={{-10,90},{10,110}}), iconTransformation(
-          extent={{-10,120},{10,140}})));
+      Placement(transformation(extent={{-10,88},{10,108}}), iconTransformation(
+          extent={{-10,100},{10,120}})));
 
   BaseClasses.TabsBus tabsBus annotation (Placement(transformation(extent={{-120,
             -20},{-80,20}}), iconTransformation(extent={{-116,-14},{-86,16}})));
 
   Modelica.Blocks.Sources.Constant const(k=area*alpha)
-    annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
+    annotation (Placement(transformation(extent={{-60,68},{-40,88}})));
 
   Fluid.HeatExchangers.DynamicHX dynamicHX(
     energyDynamics=energyDynamics,
@@ -122,7 +122,7 @@ model Tabs "Thermally Activated Building Systems"
     final tau_C=2,
     final dT_nom=dT_nom_hx,
     final Q_nom=Q_nom_hx)
-    annotation (Placement(transformation(extent={{30,-36},{10,-16}})));
+    annotation (Placement(transformation(extent={{48,-36},{28,-16}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX1(
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
@@ -181,38 +181,43 @@ model Tabs "Thermally Activated Building Systems"
 
 equation
 
-  connect(pumpSys.port_b1, pipe.port_a) annotation (Line(points={{-16.4,40},{-16.4,
-          52},{-10,52}}, color={0,127,255}));
-  connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{8.88178e-16,
-          62},{0,62},{0,66},{20,66}}, color={191,0,0}));
-  connect(heatCapacitor.port, convection.solid) annotation (Line(points={{20,66},
-          {0,66},{0,70},{-6.66134e-16,70}}, color={191,0,0}));
+  connect(pumpSys.port_b1, pipe.port_a) annotation (Line(points={{-12,40},{-24,
+          40},{-24,58},{-10,58}},
+                         color={0,127,255}));
+  connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{
+          7.21645e-16,68},{7.21645e-16,72},{24,72}},
+                                      color={191,0,0}));
+  connect(heatCapacitor.port, convection.solid) annotation (Line(points={{24,72},
+          {-3.33067e-16,72}},               color={191,0,0}));
   connect(convection.fluid, heatPort)
-    annotation (Line(points={{0,90},{0,100}}, color={191,0,0}));
+    annotation (Line(points={{4.44089e-16,84},{0,98}},
+                                              color={191,0,0}));
   connect(convection.Gc, const.y)
-    annotation (Line(points={{-10,80},{-19,80}}, color={0,0,127}));
+    annotation (Line(points={{-6,78},{-39,78}},  color={0,0,127}));
   connect(dynamicHX1.port_a1, dynamicHX.port_b1)
-    annotation (Line(points={{-28,-20},{10,-20}}, color={0,127,255}));
-  connect(dynamicHX.port_a1, pumpSys.port_b2) annotation (Line(points={{30,-20},
-          {30,-12},{12.4,-12},{12.4,-8}}, color={0,127,255}));
+    annotation (Line(points={{-28,-20},{28,-20}}, color={0,127,255}));
+  connect(dynamicHX.port_a1, pumpSys.port_b2) annotation (Line(points={{48,-20},
+          {52,-20},{52,-8},{10,-8},{10,-4},{12,-4},{12,0}},
+                                          color={0,127,255}));
   connect(dynamicHX1.port_b1, pumpSys.port_a1) annotation (Line(points={{-48,-20},
-          {-48,-8},{-16.4,-8}}, color={0,127,255}));
+          {-52,-20},{-52,-6},{-12,-6},{-12,0}},
+                                color={0,127,255}));
   connect(bou.ports[1], dynamicHX1.port_b1) annotation (Line(points={{-74,-20.8},
           {-68,-20.8},{-68,-20},{-48,-20}}, color={0,127,255}));
   connect(throttlePumpHot.port_b1, dynamicHX1.port_a2) annotation (Line(points={
           {-52,-40},{-52,-32},{-48,-32}}, color={0,127,255}));
-  connect(throttlePumpHot.port_a2, dynamicHX1.port_b2) annotation (Line(points={
-          {-28,-40},{-16,-40},{-16,-32},{-28,-32}}, color={0,127,255}));
+  connect(throttlePumpHot.port_a2, dynamicHX1.port_b2) annotation (Line(points={{-28,-40},
+          {-28,-32}},                               color={0,127,255}));
   connect(throttlePumpCold.port_b1, dynamicHX.port_a2)
-    annotation (Line(points={{28,-40},{10,-40},{10,-32}}, color={0,127,255}));
+    annotation (Line(points={{28,-40},{28,-32}},          color={0,127,255}));
   connect(throttlePumpCold.port_a2, dynamicHX.port_b2)
-    annotation (Line(points={{52,-40},{52,-32},{30,-32}}, color={0,127,255}));
+    annotation (Line(points={{52,-40},{52,-32},{48,-32}}, color={0,127,255}));
   connect(throttlePumpHot.port_a1, port_a1) annotation (Line(points={{-52,-80},{
           -76,-80},{-76,-100},{-80,-100}}, color={0,127,255}));
   connect(port_a2, throttlePumpCold.port_a1) annotation (Line(points={{40,-100},
           {40,-84},{34,-84},{34,-86},{28,-86},{28,-80}}, color={0,127,255}));
   connect(pumpSys.hydraulicBus, tabsBus.pumpBus) annotation (Line(
-      points={{-26,16},{-99.9,16},{-99.9,0.1}},
+      points={{-20,20},{-74,20},{-74,0.1},{-99.9,0.1}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -238,32 +243,37 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(pipe.port_b, pumpSys.port_a2)
-    annotation (Line(points={{10,52},{12.4,52},{12.4,40}}, color={0,127,255}));
+    annotation (Line(points={{10,58},{26,58},{26,40},{12,40}},
+                                                           color={0,127,255}));
   connect(throttlePumpCold.port_b2, port_b2) annotation (Line(points={{52,-80},{
           52,-86},{80,-86},{80,-100}}, color={0,127,255}));
   connect(throttlePumpHot.port_b2, port_b1) annotation (Line(points={{-28,-80},{
           -28,-82},{-40,-82},{-40,-100}}, color={0,127,255}));
   connect(bou.ports[2], dynamicHX1.port_b1) annotation (Line(points={{-74,-23.2},
           {-68,-23.2},{-68,-24},{-60,-24},{-60,-20},{-48,-20}}, color={0,127,255}));
+  connect(pipe.heatPort, convection.solid) annotation (Line(points={{
+          7.21645e-16,68},{7.21645e-16,70},{-3.88578e-16,70},{-3.88578e-16,72}},
+        color={191,0,0}));
   annotation (
     Dialog(tab="Initialization"),
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,120}}),
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}}),
         graphics={
         Rectangle(
-          extent={{-100,120},{100,-100}},
+          extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Dash),
         Rectangle(
-          extent={{-68,98},{68,40}},
+          extent={{-68,80},{68,40}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-68,98},{68,94}},
+          extent={{-68,74},{68,80}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
@@ -275,49 +285,45 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-78,98},{-68,40}},
+          extent={{-76,80},{-68,40}},
           lineColor={0,0,0},
           fillColor={192,192,192},
           fillPattern=FillPattern.Backward),
         Rectangle(
-          extent={{68,98},{76,40}},
+          extent={{68,80},{76,40}},
           lineColor={0,0,0},
           fillColor={192,192,192},
           fillPattern=FillPattern.Backward),
         Line(
           points={{-40,-90},{-40,-46}},
           color={238,46,47},
-          thickness=0.5),
+          thickness=1),
         Line(
-          points={{-40,-24},{-40,72},{40,72},{40,-20}},
+          points={{-56,-24},{-56,56},{56,56},{56,-24}},
           color={28,108,200},
-          thickness=0.5),
+          thickness=1),
         Ellipse(
           extent={{-8,8},{8,-8}},
           lineColor={0,0,0},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          origin={-40,12},
+          origin={-56,12},
           rotation=180),
         Line(
           points={{4,-4},{-4,4}},
           color={0,0,0},
           thickness=0.5,
-          origin={-36,16},
+          origin={-52,16},
           rotation=180),
         Line(
           points={{4,4},{-4,-4}},
           color={0,0,0},
           thickness=0.5,
-          origin={-44,16},
+          origin={-60,16},
           rotation=180),
-        Line(
-          points={{40,-24},{40,-20}},
-          color={28,108,200},
-          thickness=0.5),
         Rectangle(
-          extent={{-40,74},{40,70}},
+          extent={{-56,60},{56,56}},
           lineColor={28,108,200},
           lineThickness=0.5,
           fillColor={28,108,200},
@@ -331,44 +337,44 @@ equation
           points={{-38,108}},
           color={238,46,47},
           arrow={Arrow.None,Arrow.Filled}),
-        Line(points={{-52,114},{-52,100}}, color={238,46,47}),
-        Line(points={{-56,110},{-52,114},{-48,110}}, color={238,46,47}),
-        Line(points={{-4,110},{0,114},{4,110}}, color={238,46,47}),
-        Line(points={{0,114},{0,100}}, color={238,46,47}),
-        Line(points={{50,110},{54,114},{58,110}}, color={238,46,47}),
-        Line(points={{54,114},{54,100}}, color={238,46,47}),
+        Line(points={{-52,96},{-52,82}},   color={238,46,47}),
+        Line(points={{-56,92},{-52,96},{-48,92}},    color={238,46,47}),
+        Line(points={{-4,92},{0,96},{4,92}},    color={238,46,47}),
+        Line(points={{0,96},{0,82}},   color={238,46,47}),
+        Line(points={{50,92},{54,96},{58,92}},    color={238,46,47}),
+        Line(points={{54,96},{54,82}},   color={238,46,47}),
         Rectangle(
           extent={{-84,-24},{-34,-46}},
           lineColor={0,0,0},
-          lineThickness=0.5),
+          lineThickness=1),
         Rectangle(
           extent={{34,-24},{84,-46}},
           lineColor={0,0,0},
-          lineThickness=0.5),
+          lineThickness=1),
         Line(
           points={{-80,-46},{-80,-90}},
           color={238,46,47},
-          thickness=0.5),
+          thickness=1),
         Line(
           points={{80,-46},{80,-88}},
           color={28,108,200},
-          thickness=0.5),
+          thickness=1),
         Line(
           points={{-84,-24},{-34,-46}},
           color={0,0,0},
-          thickness=0.5),
+          thickness=1),
         Line(
           points={{34,-46},{84,-24}},
           color={0,0,0},
-          thickness=0.5),
+          thickness=1),
         Line(
           points={{34,-24},{84,-46}},
           color={0,0,0},
-          thickness=0.5),
+          thickness=1),
         Line(
           points={{40,-46},{40,-90}},
           color={28,108,200},
-          thickness=0.5),
+          thickness=1),
         Polygon(
           points={{76,-78},{84,-78},{80,-70},{76,-78}},
           lineColor={0,0,0},
@@ -440,15 +446,16 @@ equation
         Line(
           points={{-34,-30},{34,-30}},
           color={28,108,200},
-          thickness=0.5)}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})),
+          thickness=1),
+        Line(points={{-190,60}}, color={28,108,200})}),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}})),
     Documentation(info="<html>
 <p>This module is a thermally activated building system (TABS) with a closed hydraunic system that is connected to the concrete and supplied by two throttle circuits via heat exchangers.</p>
 <p>One throttle circtuit has to be connected to cold water and the other one to hot water.</p><p>The pumps and valves have to be specified in the hdraulicModules.</p>
 </html>", revisions="<html>
 <ul>
-<li>December 09, 2021, by Alexander K&uuml;mpel:<br>Transfer to AixLib.</li>
+<li>December 09, 2021, by Alexander K&uuml;mpel:<br>First implementation.</li>
 </ul>
 </html>"));
 end Tabs;

@@ -40,7 +40,7 @@ model CtrTabs "Controller for concrete core activation"
     final k=k_cold,
     final Ti=Ti_cold,
     final Td=0,
-    rpm_pump=rpm_pump,
+    rpm_pump=rpm_pump_cold,
       reverseAction=false)
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
   HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=rpm_pump_concrete)
@@ -51,9 +51,12 @@ model CtrTabs "Controller for concrete core activation"
             {-54,26}})));
   Modelica.Blocks.Math.Add add1(k2=+1)
     annotation (Placement(transformation(extent={{-42,-42},{-32,-32}})));
-  Modelica.Blocks.Sources.Constant constTflowSet2(final k=0.15) annotation (Placement(transformation(extent={{-56,-44},
+  Modelica.Blocks.Sources.Constant constTflowSet2(final k=offset)
+                                                                annotation (Placement(transformation(extent={{-56,-44},
             {-48,-36}})));
 
+  parameter Real offset=0.1
+    "Constant offset between cooling and heating setpoint to avoid oscillations and simultaneous cooling and heating.";
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
       points={{1.4,70.2},{40,70.2},{40,70},{100,70},{100,36},{99.085,36},{
@@ -149,7 +152,7 @@ equation
 <p>Simple controller for TABS. The temperature of the water that flows into the concrete is controlled.</p>
 </html>", revisions="<html>
 <ul>
-<li>December 09, 2021, by Alexander K&uuml;mpel:<br>Transfer to AixLib.</li>
+<li>December 09, 2021, by Alexander K&uuml;mpel:<br>First implementation.</li>
 </ul>
 </html>"));
 end CtrTabs;
