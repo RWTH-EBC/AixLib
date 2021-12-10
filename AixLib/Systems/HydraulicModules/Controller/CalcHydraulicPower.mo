@@ -11,9 +11,9 @@ public
     annotation (Placement(transformation(extent={{-20,22},{0,42}})));
   Modelica.Blocks.Math.Product product1
     annotation (Placement(transformation(extent={{58,-10},{78,10}})));
-  Modelica.Blocks.Math.Gain gain(k=Density)
+  Modelica.Blocks.Math.Gain gain(k=rho)
     annotation (Placement(transformation(extent={{-56,-10},{-38,8}})));
-  Modelica.Blocks.Math.Gain gain1(k=HeatCapacity)
+  Modelica.Blocks.Math.Gain gain1(k=cp)
     annotation (Placement(transformation(extent={{-22,-10},{-4,8}})));
   Modelica.Blocks.Interfaces.RealOutput Q_flow
     "Connector of Real output signal"
