@@ -2,7 +2,8 @@ within AixLib.Utilities.Math.Examples;
 model MovingAverage "Example for moving average model"
   extends Modelica.Icons.Example;
 
-    AixLib.Utilities.Math.MovingAverage movingAverage(final aveTime=pulse.period/2)
+    AixLib.Utilities.Math.MovingAverage movingAverage(final aveTime=pulse.period/2, u_start=
+        0)
     annotation (Placement(transformation(extent={{-28,-34},{36,34}})));
   Modelica.Blocks.Sources.Pulse pulse(amplitude=1, period=10)
     annotation (Placement(transformation(extent={{-94,-10},{-74,10}})));

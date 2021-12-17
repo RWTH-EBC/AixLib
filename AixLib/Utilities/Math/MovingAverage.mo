@@ -5,9 +5,12 @@ model MovingAverage
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y "Continuous output signal"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Continuous.Integrator uInt(initType=Modelica.Blocks.Types.Init.NoInit);
-initial equation
-y = u;
+  Modelica.Blocks.Continuous.Integrator uInt(
+    final initType=Modelica.Blocks.Types.Init.InitialOutput,
+    final k=1,
+    final use_reset=false,
+    final y_start=u_start);
+  parameter Real u_start = 0 "Start value of input";
 
 equation
   y * aveTime = uInt.y - delay(uInt.y, aveTime);
