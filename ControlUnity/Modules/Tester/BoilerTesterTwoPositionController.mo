@@ -47,7 +47,10 @@ model BoilerTesterTwoPositionController
   ModularBoiler_TwoPositionController modularBoiler_Controller(
     TColdNom=333.15,
     QNom=100000,
-    n=1) annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
+    n=1,
+    Tref=353.15,
+    bandwidth=4)
+         annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
   Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
     annotation (Placement(transformation(extent={{-104,2},{-84,22}})));
 equation
@@ -81,9 +84,6 @@ equation
          {{38,-16},{30,-16},{30,6},{-42,6},{-42,24},{-32,24}}, color={0,127,255}));
   connect(bou.ports[1], modularBoiler_Controller.port_a) annotation (Line(
         points={{16,-22},{18,-22},{18,0},{-32,0},{-32,24}}, color={0,127,255}));
-  connect(temperatureSensor.T, modularBoiler_Controller.TLayers[1]) annotation (
-     Line(points={{78,4},{86,4},{86,68},{-19.9,68},{-19.9,33.1}}, color={0,0,
-          127}));
   connect(isOn.y, boilerControlBus.isOn) annotation (Line(points={{-83,12},{
           -71.95,12},{-71.95,36.05}}, color={255,0,255}), Text(
       string="%second",

@@ -1,14 +1,6 @@
 within ControlUnity.Modules.Tester;
 model BoilerTesterFlowtemperatureControl
   "Test model for the controller model of the boiler"
-  Modelica.Blocks.Sources.Sine sine1(
-    amplitude=-3,
-    freqHz=1/3600,
-    offset=273.15,
-    startTime=10) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={44,90})));
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     T_start=293.15,
@@ -53,7 +45,7 @@ model BoilerTesterFlowtemperatureControl
   ModularBoiler_FlowTemperatureControlHeatCurve modularBoiler_Controller(
     TColdNom=333.15,
     QNom=100000,
-    m_flowVar=false,
+    m_flowVar=true,
     Advanced=false,
     dTWaterSet=20,
     n=1,
@@ -67,11 +59,13 @@ model BoilerTesterFlowtemperatureControl
     startTime=0) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={82,84})));
+        origin={84,84})));
   Modelica.Blocks.Sources.RealExpression PLR(y=1)
     annotation (Placement(transformation(extent={{-118,24},{-98,44}})));
   Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
     annotation (Placement(transformation(extent={{-98,-14},{-78,6}})));
+  Modelica.Blocks.Sources.RealExpression dT(y=20)
+    annotation (Placement(transformation(extent={{-112,44},{-92,64}})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
           32}},                       color={191,0,0}));
@@ -103,14 +97,20 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ramp.y, modularBoiler_Controller.Tamb) annotation (Line(points={{82,73},
-          {82,68},{-11.6,68},{-11.6,34}},     color={0,0,127}));
   connect(isOn.y, boilerControlBus.isOn) annotation (Line(points={{-77,-4},{
           -71.95,-4},{-71.95,36.05}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(dT.y, boilerControlBus.DeltaTWater) annotation (Line(points={{-91,54},
+          {-71.95,54},{-71.95,36.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ramp.y, modularBoiler_Controller.Tamb) annotation (Line(points={{84,
+          73},{84,64},{-11.6,64},{-11.6,34}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterFlowtemperatureControl;

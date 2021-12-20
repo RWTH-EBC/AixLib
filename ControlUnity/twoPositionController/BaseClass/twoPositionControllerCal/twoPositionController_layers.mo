@@ -2,13 +2,16 @@ within ControlUnity.twoPositionController.BaseClass.twoPositionControllerCal;
 model twoPositionController_layers "Two position controller using mean temperature of buffer storage for calculation"
 
   extends
-    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController;
+    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(
+      onOffController(bandwidth=bandwidth));
    parameter Boolean layerCal=true
     "If true, the two-position controller uses the mean temperature of the buffer storage";
-    parameter Modelica.SIunits.Temperature TMean=273.15+70 "Mean temperature of all layers of the buffer storage";
+    parameter Modelica.SIunits.Temperature TMean=273.15 + 70
+                                                           "Mean temperature of all layers of the buffer storage";
 
   parameter Modelica.SIunits.TemperatureDifference TLayer_dif=8 "Reference difference temperature for the on off controller for the buffer storage with layer calculation";
   parameter Modelica.SIunits.Temperature Tref=273.15+60;
+  parameter Real bandwidth     "Bandwidth around reference signal";
 
 
   Modelica.Blocks.Math.Sum sumTLayers(nin=n)
@@ -28,5 +31,8 @@ equation
   connect(meanTemperatureDynamicStorage.y, onOffController.u) annotation (Line(
         points={{-1,22},{20,22},{20,0},{32,0}},  color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>Model for a two-position controller that is used in combination with a buffer storage with n layers. This model regulates the flow temperature of the buffer storage. The mean value of the temperature of the n layers of the buffer storage is regulated. </p>
+</html>"));
 end twoPositionController_layers;

@@ -1,9 +1,11 @@
 within ControlUnity.twoPositionController;
 model twoPositionControllerSimple_modularBoiler "Simple two position controller"
   extends ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(n=1,
-      onOffController(pre_y_start=false));
+      onOffController(bandwidth=bandwidth,
+                      pre_y_start=false));
 
-  parameter Modelica.SIunits.Temperature T_ref=273.15+60 "Solltemperatur";
+  parameter Modelica.SIunits.Temperature T_ref           "Solltemperatur";
+   parameter Real bandwidth     "Bandwidth around reference signal";
 
 equation
 
@@ -11,6 +13,6 @@ equation
           -36,-22},{-36,0},{32,0}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{-122,0},{-82,40}})),
     Documentation(info="<html>
-<p>-pre_y_start wurde auf true gesetzt, s.d. der Kessel auch zwischen 58&deg;C und 62&deg;C eingeschaltet ist.</p>
+<p>Simple two position controller for heat generators. This model regulates the flow temperature of the boiler, which has a fix value determined by the user before the beginning of the simulation. </p>
 </html>"));
 end twoPositionControllerSimple_modularBoiler;

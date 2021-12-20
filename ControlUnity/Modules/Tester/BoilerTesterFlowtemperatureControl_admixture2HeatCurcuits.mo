@@ -212,8 +212,8 @@ equation
   connect(admix_modularBoiler1.port_b2, modularBoiler_Controller.port_a)
     annotation (Line(points={{-51.2,-62},{-50,-62},{-50,24},{-34,24}}, color={0,
           127,255}));
-  connect(temperatureSensor.T, modularBoiler_Controller.TMeaCon[1]) annotation
-    (Line(points={{86,2},{92,2},{92,0},{94,0},{94,18},{24,18},{24,26.35},{-13.9,
+  connect(temperatureSensor.T, modularBoiler_Controller.TMeaCon[1]) annotation (
+     Line(points={{86,2},{92,2},{92,0},{94,0},{94,18},{24,18},{24,26.35},{-13.9,
           26.35}}, color={0,0,127}));
   connect(temperatureSensor1.T, modularBoiler_Controller.TMeaCon[2])
     annotation (Line(points={{14,-82},{46,-82},{46,-44},{4,-44},{4,27.85},{

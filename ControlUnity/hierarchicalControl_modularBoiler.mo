@@ -97,8 +97,9 @@ equation
   if use_advancedControl then  //advanced control
 connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
         points={{-10,-108},{-10,-76},{-3.4,-76}}, color={0,0,127}));
-  connect(Tin, emergencySwitch_modularBoiler2.T_ein) annotation (Line(points={{-102,72},
-            {-76,72},{-76,14},{-16,14},{-16,-20.8},{18,-20.8}}, color={0,0,127}));
+    connect(Tin, emergencySwitch_modularBoiler2.TBoiler) annotation (Line(
+          points={{-102,72},{-76,72},{-76,14},{-16,14},{-16,-20.8},{18,-20.8}},
+          color={0,0,127}));
    connect(booleanExpression1.y, switch2.u2) annotation (Line(points={{-85.2,-45},
           {-68.6,-45},{-68.6,-48},{-61.6,-48}}, color={255,0,255}));
   connect(realExpression.y, switch2.u1) annotation (Line(points={{-79.1,-26},{-70,
@@ -111,8 +112,8 @@ connect(TMeaRet, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
   else //simple control
  connect(PLRin, emergencySwitch_modularBoiler1.PLR_ein) annotation (Line(
         points={{-100,0},{-32,0},{-32,54.8},{-18,54.8}}, color={0,0,127}));
-  connect(Tin, emergencySwitch_modularBoiler1.T_ein) annotation (Line(points={{-102,
-          72},{-30,72},{-30,61.2},{-18,61.2}}, color={0,0,127}));
+    connect(Tin, emergencySwitch_modularBoiler1.TBoiler) annotation (Line(
+          points={{-102,72},{-30,72},{-30,61.2},{-18,61.2}}, color={0,0,127}));
   connect(emergencySwitch_modularBoiler1.PLR_set, twoPositionController_layers.PLRin)
     annotation (Line(points={{2,59},{10,59},{10,63},{24,63}}, color={0,0,127}));
   connect(TLayers, twoPositionController_layers.TLayers) annotation (Line(

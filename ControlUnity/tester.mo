@@ -43,8 +43,8 @@ equation
   connect(flowTemperatureControl_heatingCurve.valPos,
     emergencySwitch_modularBoiler2.PLR_ein) annotation (Line(points={{-12,-46},
           {0,-46},{0,6.8},{8,6.8}}, color={0,0,127}));
-  connect(Tin, emergencySwitch_modularBoiler2.T_ein) annotation (Line(points={{-100,
-          18},{-44,18},{-44,13.2},{8,13.2}}, color={0,0,127}));
+  connect(Tin, emergencySwitch_modularBoiler2.TBoiler) annotation (Line(points=
+          {{-100,18},{-44,18},{-44,13.2},{8,13.2}}, color={0,0,127}));
   connect(emergencySwitch_modularBoiler2.PLR_set,
     flowTemperatureControl_heatingCurve.PLRin) annotation (Line(points={{28,11},
           {32,11},{32,-28},{-50,-28},{-50,-38},{-32,-38}}, color={0,0,127}));

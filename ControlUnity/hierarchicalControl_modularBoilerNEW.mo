@@ -25,9 +25,10 @@ model hierarchicalControl_modularBoilerNEW
     n=n,
     variablePLR=variablePLR,
     layerCal=layerCal,
-    bandwidth=bandwidth) if              not use_advancedControl
+    bandwidth=bandwidth,
+    Tref=Tref) if              not use_advancedControl
                                  constrainedby
-    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController
+    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(Tref=Tref, bandwidth=bandwidth)
     annotation (Placement(transformation(extent={{24,44},{44,64}})), choicesAllMatching=true, Dialog(enable=not use_advancedControl));
   Modelica.Blocks.Interfaces.RealInput TLayers[n] if not use_advancedControl
     "Different temperatures of layers of buffer storage, 1 lowest layer and n top layer; if simple two position controller, then it is equal to Tin"
@@ -112,6 +113,8 @@ model hierarchicalControl_modularBoilerNEW
         origin={56,-110})));
   parameter Modelica.SIunits.Temperature TBoiler=273.15 + 75
     "Fix boiler temperature for the admixture";
+  parameter Modelica.SIunits.Temperature Tref
+    "Reference Temperature for the on off controller";
 equation
 
 
@@ -122,8 +125,6 @@ equation
   connect(flowTemperatureControl_heatingCurve.TMea, TMeaBoiler) annotation (
       Line(points={{-11.4,-70},{-11.4,-87},{-42,-87},{-42,-108}}, color={0,0,
           127}));
-  connect(Tin, emergencySwitch_modularBoiler1.T_ein) annotation (Line(points={{-100,
-          32},{-72,32},{-72,31.2},{-64,31.2}}, color={0,0,127}));
   connect(isOn, emergencySwitch_modularBoiler1.isOn) annotation (Line(points={{-100,
           6},{-74,6},{-74,23.8},{-64,23.8}}, color={255,0,255}));
   connect(PLRin, twoPositionController_layers.PLRin) annotation (Line(points={{-100,
@@ -155,4 +156,6 @@ equation
     annotation (Line(points={{56,-110},{56,-74},{56,-74}}, color={0,0,127}));
   connect(TsetAdm, returnAdmixture.Tset) annotation (Line(points={{22,-110},{22,
           -67.2},{46,-67.2}}, color={0,0,127}));
+  connect(Tin, emergencySwitch_modularBoiler1.TBoiler) annotation (Line(points=
+          {{-100,32},{-82,32},{-82,31.2},{-64,31.2}}, color={0,0,127}));
 end hierarchicalControl_modularBoilerNEW;

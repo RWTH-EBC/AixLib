@@ -84,7 +84,7 @@ model ModularBoiler_FlowTemperatureControlAdmix
     m_flowVar=m_flowVar,
     Advanced=Advanced,
     dTWaterSet=dTWaterSet)
-    annotation (Placement(transformation(extent={{-100,36},{-80,56}})));
+    annotation (Placement(transformation(extent={{-102,40},{-82,60}})));
   AixLib.Fluid.Movers.SpeedControlled_y fan1(
     redeclare package Medium = AixLib.Media.Water,
     allowFlowReversal=false,
@@ -102,7 +102,7 @@ model ModularBoiler_FlowTemperatureControlAdmix
 
   Regulation_modularBoiler regulation_modularBoiler(use_advancedControl=
         use_advancedControl, severalHeatcurcuits=severalHeatcurcuits)
-    annotation (Placement(transformation(extent={{-62,46},{-42,66}})));
+    annotation (Placement(transformation(extent={{-64,48},{-44,68}})));
   parameter Integer n=3 "Number of layers in the buffer storage";
   parameter Boolean use_advancedControl=false
     "Selection between two position control and flow temperature control, if true=flow temperature control is active" annotation(choices(
@@ -183,18 +183,18 @@ equation
   connect(senTCold.port_b, fan1.port_a)
     annotation (Line(points={{-70,0},{-60,0}}, color={0,127,255}));
   connect(controlBoilerNotManufacturer.DeltaTWater_b, heatGeneratorNoControl.dTWater)
-    annotation (Line(points={{-79,40.8},{-70,40.8},{-70,16},{-26,16},{-26,9},{
+    annotation (Line(points={{-81,44.8},{-70,44.8},{-70,16},{-26,16},{-26,9},{
           -10,9}}, color={0,0,127}));
   connect(port_b, port_b) annotation (Line(points={{100,0},{106,0},{106,0},{100,
           0}}, color={0,127,255}));
   connect(senTCold.T, controlBoilerNotManufacturer.TCold) annotation (Line(
-        points={{-80,11},{-80,26},{-114,26},{-114,49},{-102,49}}, color={0,0,127}));
+        points={{-80,11},{-80,26},{-114,26},{-114,53},{-104,53}}, color={0,0,127}));
   connect(heatGeneratorNoControl.TVolume, controlBoilerNotManufacturer.THot)
-    annotation (Line(points={{2,-11},{2,-40},{-110,-40},{-110,46},{-102,46}},
+    annotation (Line(points={{2,-11},{2,-40},{-110,-40},{-110,50},{-104,50}},
         color={0,0,127}));
   connect(boilerControlBus_Control.DeltaTWater, controlBoilerNotManufacturer.DeltaTWater_a)
     annotation (Line(
-      points={{-39.95,98.05},{-39.95,92},{-106,92},{-106,43},{-102,43}},
+      points={{-39.95,98.05},{-39.95,92},{-106,92},{-106,47},{-104,47}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -209,10 +209,10 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(controlBoilerNotManufacturer.mFlowRel, regulation_modularBoiler.mFlow_rel)
-    annotation (Line(points={{-79,54},{-70,54},{-70,54.2},{-62,54.2}}, color={0,
+    annotation (Line(points={{-81,58},{-70,58},{-70,56.2},{-64,56.2}}, color={0,
           0,127}));
-  connect(regulation_modularBoiler.mFlow_relB, fan1.y) annotation (Line(points=
-          {{-41.8,55},{-34,55},{-34,22},{-50,22},{-50,12}}, color={0,0,127}));
+  connect(regulation_modularBoiler.mFlow_relB, fan1.y) annotation (Line(points={{-43.8,
+          57},{-34,57},{-34,22},{-50,22},{-50,12}},         color={0,0,127}));
   connect(boilerControlBus_Control.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
     annotation (Line(
       points={{-39.95,98.05},{-20,98.05},{-20,58.6},{-4,58.6}},
@@ -224,7 +224,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset,
     regulation_modularBoiler.PLRMea) annotation (Line(points={{16,64},{16,32},{
-          -66,32},{-66,49.4},{-62,49.4}}, color={0,0,127}));
+          -66,32},{-66,51.4},{-64,51.4}}, color={0,0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset, heatGeneratorNoControl.PLR)
     annotation (Line(points={{16,64},{16,16},{-10,16},{-10,5.4}}, color={0,0,
           127}));
@@ -232,7 +232,7 @@ equation
       Line(points={{60,11},{60,78},{-6,78},{-6,61.2},{-4,61.2}}, color={0,0,127}));
   connect(boilerControlBus_Control.PLR, regulation_modularBoiler.PLRin)
     annotation (Line(
-      points={{-39.95,98.05},{-39.95,74},{-72,74},{-72,59},{-62,59}},
+      points={{-39.95,98.05},{-39.95,74},{-72,74},{-72,61},{-64,61}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -243,8 +243,8 @@ equation
     annotation (Line(points={{60,11},{60,36},{1.8,36},{1.8,47.2}}, color={0,0,
           127}));
   connect(regulation_modularBoiler.PLRset,
-    hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,
-          59.6},{-24,59.6},{-24,65.4},{-4,65.4}}, color={0,0,127}));
+    hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-44,
+          61.6},{-24,61.6},{-24,65.4},{-4,65.4}}, color={0,0,127}));
   connect(TMeaCon, hierarchicalControl_modularBoilerNEW1.TMeaCon) annotation (
       Line(points={{101,31},{76,31},{76,42},{11.6,42},{11.6,47}}, color={0,0,
           127}));

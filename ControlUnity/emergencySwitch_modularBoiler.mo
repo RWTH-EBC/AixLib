@@ -8,7 +8,8 @@ model emergencySwitch_modularBoiler
     annotation (Placement(transformation(extent={{-56,20},{-36,40}})));
   Modelica.Blocks.Sources.RealExpression tHotMax(y=TMax)
     annotation (Placement(transformation(extent={{-102,12},{-82,32}})));
-  Modelica.Blocks.Interfaces.RealInput T_ein
+  Modelica.Blocks.Interfaces.RealInput TBoiler
+    "Boiler temperature for measurement "
     annotation (Placement(transformation(extent={{-120,32},{-80,72}})));
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{38,20},{58,40}})));
@@ -22,8 +23,8 @@ equation
 
   connect(tHotMax.y, greater.u2)
     annotation (Line(points={{-81,22},{-58,22}}, color={0,0,127}));
-  connect(T_ein, greater.u1) annotation (Line(points={{-100,52},{-80,52},{-80,30},
-          {-58,30}}, color={0,0,127}));
+  connect(TBoiler, greater.u1) annotation (Line(points={{-100,52},{-80,52},{-80,
+          30},{-58,30}}, color={0,0,127}));
   connect(logicalSwitch.y, y)
     annotation (Line(points={{59,30},{102,30}}, color={255,0,255}));
   connect(greater.y, logicalSwitch.u2)
@@ -32,4 +33,8 @@ equation
           84},{-22,84},{-22,38},{36,38}}, color={255,0,255}));
   connect(isOn, logicalSwitch.u3) annotation (Line(points={{-100,-22},{18,-22},
           {18,22},{36,22}}, color={255,0,255}));
+
+   ///Assertion
+   assert(TBoiler<TMax, "Maximum boiler temperature has been exceeded", AssertionLevel.warning);
+
 end emergencySwitch_modularBoiler;

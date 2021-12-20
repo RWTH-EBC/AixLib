@@ -133,8 +133,8 @@ equation
   connect(boundary_ph5.ports[1], vol.ports[3])
     annotation (Line(points={{104,22},{64.6667,22}}, color={0,127,255}));
   connect(temperatureSensor.T, modularBoiler_Controller.TMeaCon) annotation (
-      Line(points={{86,2},{96,2},{96,16},{16,16},{16,27.1},{-13.9,27.1}}, color
-        ={0,0,127}));
+      Line(points={{86,2},{96,2},{96,16},{16,16},{16,27.1},{-13.9,27.1}}, color=
+         {0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterFlowtemperatureControl_admixture;
