@@ -33,7 +33,7 @@ model PumpAndPressureDrop
     m_flow_nominal=m_flow_nominal,
     show_T=false,
     from_dp=false,
-    dp_nominal= pumpHead,
+    dp_nominal=pumpHead - poolParam.dpHeatExchangerPool,
     homotopyInitialization=true,
     linearized=false,
     deltaM=0.3)

@@ -437,12 +437,13 @@ public
   Modelica.Blocks.Math.MultiSum sumPoolPPump(nu=numPools) if use_swimmingPools and ATot > 0
     "Sum up electriical energy consumption of the circulation pump of all swimming pools"
     annotation (Placement(transformation(extent={{-38,-86},{-28,-76}})));
-  Modelica.Blocks.Math.MultiSum sumPoolQHeat(nu=numPools) if use_swimmingPools and ATot > 0
+  Modelica.Blocks.Math.MultiSum sumPoolQHeat(nu=numPools) if use_swimmingPools
+     and ATot > 0 and use_idealHeaterPool
     "Sum up heat demands of all swimming pools"
-    annotation (Placement(transformation(extent={{-38,-86},{-28,-76}})));
+    annotation (Placement(transformation(extent={{-38,-100},{-28,-90}})));
   Modelica.Blocks.Math.MultiSum sumPoolFreshWater(nu=numPools) if
     use_swimmingPools and ATot > 0 "Sum up fresh water demands of all swimming pools"
-    annotation (Placement(transformation(extent={{-38,-86},{-28,-76}})));
+    annotation (Placement(transformation(extent={{-40,-112},{-30,-102}})));
 
   Modelica.Blocks.Interfaces.RealInput openingHours if use_swimmingPools and
     ATot > 0
@@ -492,7 +493,7 @@ equation
       connect(indoorSwimmingPool[i].PPool,sumPoolPPump. u[i]) annotation (Line(points={{-51.2,
               -82.64},{-38,-82.64},{-38,-81}},                 color={0,0,127}));
       connect(indoorSwimmingPool[i].MFlowFreshWater,sumPoolFreshWater. u[i]) annotation (Line(points={{-51.2,
-              -85.02},{-38,-85.02},{-38,-81}},
+              -85.02},{-40,-85.02},{-40,-107}},
             color={0,0,127}));
       connect(indoorSwimmingPool[i].openingHours, openingHours) annotation (
           Line(points={{-68.08,-73.19},{-78,-73.19},{-78,-88},{48,-88},{48,-100},
@@ -513,7 +514,8 @@ equation
                                                               color={0,0,127}));
       if use_idealHeaterPool then
               connect(indoorSwimmingPool[i].QPool,sumPoolQHeat. u[i]) annotation (Line(points={{-51.2,
-              -80.26},{-52,-80.26},{-52,-81},{-38,-81}},color={0,0,127}));
+                -80.26},{-52,-80.26},{-52,-95},{-38,-95}},
+                                                        color={0,0,127}));
       else
           connect(fromPool[i], indoorSwimmingPool[i].fromPool);
           connect(toPool[i], indoorSwimmingPool[i].toPool);
@@ -521,11 +523,11 @@ equation
     end for;
     connect(sumPoolPPump.y, PPool) annotation (Line(points={{-27.15,-81},{35.425,
             -81},{35.425,-40},{110,-40}},        color={0,0,127}));
-    connect(sumPoolQHeat.y, QHeatPools) annotation (Line(points={{-27.15,-81},{94,
-            -81},{94,-54},{100,-54},{100,-52},{110,-52}},
+    connect(sumPoolQHeat.y, QHeatPools) annotation (Line(points={{-27.15,-95},{
+            94,-95},{94,-54},{100,-54},{100,-52},{110,-52}},
                                          color={0,0,127}));
-    connect(sumPoolFreshWater.y, PoolFreshWater) annotation (Line(points={{-27.15,
-            -81},{98,-81},{98,-66},{110,-66}},
+    connect(sumPoolFreshWater.y, PoolFreshWater) annotation (Line(points={{-29.15,
+            -107},{98,-107},{98,-66},{110,-66}},
                                              color={0,0,127}));end if;
 
 

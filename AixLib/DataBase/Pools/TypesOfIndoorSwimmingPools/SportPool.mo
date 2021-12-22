@@ -10,6 +10,7 @@ record SportPool "Pool which is mainly used by sport swimmers"
     V_flow_partial=0.023144444444444443,
     use_partialLoad=true,
     use_idealHeatExchanger=true,
+    dpHeatExchangerPool = 300,
     beta_inUse=0.011111111111111112,
     use_poolCover=false,
     use_waterRecycling=false,

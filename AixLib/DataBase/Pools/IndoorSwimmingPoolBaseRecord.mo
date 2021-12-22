@@ -13,7 +13,7 @@ record IndoorSwimmingPoolBaseRecord
   parameter Modelica.SIunits.VolumeFlowRate V_flow_partial(min=0) "In the case of partial load: circulation volume flow rate during non-opening hours, DIN 19643-1";
   parameter Boolean use_partialLoad=false  "Partial load operation implemented for non opening hours?";
   parameter Boolean use_idealHeatExchanger=true "Include an ideal heat exchanger into the circulation system";
-
+  parameter Modelica.SIunits.PressureDifference dpHeatExchangerPool "Pressure drop of heat exchanger";
 
   // parameter for evaporation
   parameter Real beta_inUse(unit="m/s") "Water transfer coefficient during opening hours if pool is used, VDI 2089";

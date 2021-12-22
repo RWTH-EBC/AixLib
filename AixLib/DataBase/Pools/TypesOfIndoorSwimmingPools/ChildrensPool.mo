@@ -11,6 +11,7 @@ record ChildrensPool "Pool which is mainly used by children"
     V_flow_partial=0.0125,
     use_partialLoad=true,
     use_idealHeatExchanger=true,
+    dpHeatExchangerPool = 300,
     beta_inUse=0.011111111111111112,
     use_poolCover=false,
     use_waterRecycling=false,
