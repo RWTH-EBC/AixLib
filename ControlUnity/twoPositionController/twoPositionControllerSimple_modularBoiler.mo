@@ -14,5 +14,9 @@ equation
     annotation (Placement(transformation(extent={{-122,0},{-82,40}})),
     Documentation(info="<html>
 <p>Simple two position controller for heat generators. This model regulates the flow temperature of the boiler, which has a fix value determined by the user before the beginning of the simulation. </p>
+<h4>Important parameters</h4>
+<ul>
+<li>Tref: With this parameter, the user can select the set temperature</li>
+</ul>
 </html>"));
 end twoPositionControllerSimple_modularBoiler;

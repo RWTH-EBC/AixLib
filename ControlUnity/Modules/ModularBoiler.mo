@@ -1,12 +1,13 @@
 within ControlUnity.Modules;
-model ModularBoiler_FlowTemperatureControlHeatCurve
+model ModularBoiler
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium =AixLib.Media.Water,
                            final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom));
 
   parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Return temperature TCold"
+  parameter Modelica.SIunits.Temperature TColdNom=273.15 + 35
+                                                            "Return temperature TCold"
    annotation (Dialog(group="Nominal condition"));
   parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power"
    annotation (Dialog(group="Nominal condition"));
@@ -22,10 +23,11 @@ model ModularBoiler_FlowTemperatureControlHeatCurve
   parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
    annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
 
-  parameter Modelica.SIunits.Temperature THotMax=273.15+90 "Maximal temperature to force shutdown";
+  parameter Modelica.SIunits.Temperature THotMax=378.15      "Maximal temperature to force shutdown" annotation(Dialog(tab="Control", group="Security-related systems"));
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
-  parameter Modelica.SIunits.Temperature TStart=273.15+20 "T start"
+  parameter Modelica.SIunits.Temperature TStart=273.15 + 20
+                                                          "T start"
    annotation (Dialog(tab="Advanced"));
 
    parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
@@ -84,7 +86,7 @@ model ModularBoiler_FlowTemperatureControlHeatCurve
     m_flowVar=m_flowVar,
     Advanced=Advanced,
     dTWaterSet=dTWaterSet)
-    annotation (Placement(transformation(extent={{-100,34},{-80,54}})));
+    annotation (Placement(transformation(extent={{-100,36},{-80,56}})));
   AixLib.Fluid.Movers.SpeedControlled_y fan1(
     redeclare package Medium = AixLib.Media.Water,
     allowFlowReversal=false,
@@ -93,49 +95,70 @@ model ModularBoiler_FlowTemperatureControlHeatCurve
             dp_nominal,0})),
     addPowerToMedium=false)
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-  flowTemperatureController.renturnAdmixture.BoilerControlBus_admixture
-    boilerControlBus_Control(n=n)
-    annotation (Placement(transformation(extent={{-50,88},{-30,108}})));
+  AixLib.Systems.ModularEnergySystems.Interfaces.BoilerControlBus
+    boilerControlBus
+    annotation (Placement(transformation(extent={{-74,88},{-54,108}})));
 
      //
     ///Control unity
 
-  Regulation_modularBoiler regulation_modularBoiler(use_advancedControl=
-        use_advancedControl, severalHeatcurcuits=severalHeatcurcuits)
+  Regulation_modularBoiler regulation_modularBoiler(use_advancedControl=false)
     annotation (Placement(transformation(extent={{-62,46},{-42,66}})));
-  parameter Integer n=3 "Number of layers in the buffer storage";
-  parameter Boolean use_advancedControl=false
-    "Selection between two position control and flow temperature control, if true=flow temperature control is active" annotation(choices(
+  parameter Integer n= if simpleTwoPosition then 1 else n "Number of layers in the buffer storage" annotation(Dialog(tab="Control", group="Two position control"));
+  parameter Boolean simpleTwoPosition annotation(Dialog(tab="Control", group="Two position control"));
+  parameter Boolean use_advancedControl
+    "Selection between two position control and flow temperature control, if true=flow temperature control is active"
+                                                                                                                     annotation(choices(
       choice=true "Flow temperature control",
       choice=false "Two position control",
-      radioButtons=true));
-  parameter Boolean severalHeatcurcuits=false
-    "If true, there are two or more heat curcuits" annotation(Dialog(enable=use_advancedControl, group="Flow temperature control"), choices(
-      choice=true "Several heat curcuits",
-      choice=false "One heat curcuit",
-      radioButtons=true));
-  parameter Modelica.SIunits.Temperature Tb=273.15 + 60
-    "Fix boiler temperature for return admixture with several heat curcuits" annotation(Dialog(enable=severalHeatcurcuits, group="Flow temperature control"));
+      radioButtons=true), Dialog(tab="Control", group="Parameters"));
+
    ///Control unity
    //
-  Modelica.Blocks.Interfaces.RealInput Tamb if not severalHeatcurcuits
-    "Ambient temperature for flow temperature control with heat curve"
-    annotation (Placement(transformation(
-        extent={{-16,-16},{16,16}},
-        rotation=-90,
-        origin={64,100}), iconTransformation(
-        extent={{-16,-16},{16,16}},
-        rotation=-90,
-        origin={64,100})));
-
   ControlUnity.hierarchicalControl_modularBoilerNEW
     hierarchicalControl_modularBoilerNEW1(
-    use_advancedControl=true,
+    use_advancedControl=use_advancedControl,
+    redeclare
+      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
+      twoPositionController_layers,
     n=n,
-    bandwidth=2.5,
-    severalHeatcurcuits=false,
-    k=1)
-    annotation (Placement(transformation(extent={{-2,48},{18,68}})));
+    bandwidth=bandwidth,
+    severalHeatcurcuits=severalHeatcurcuits,
+    k=k,
+    TBoiler=TBoiler,
+    Tref=Tref)
+         annotation (Placement(transformation(extent={{0,40},{20,60}})));
+  parameter Modelica.SIunits.Temperature Tref
+    "Reference Temperature for the on off controller"
+                                                     annotation(Dialog(tab="Control", group="Two position control"));
+  parameter Real bandwidth=2.5 "Bandwidth around reference signal" annotation(Dialog(tab="Control", group="Two position control"));
+  Modelica.Blocks.Interfaces.RealInput TLayers[n] if not use_advancedControl
+     and not simpleTwoPosition                                               annotation (Placement(
+        transformation(
+        extent={{-17,-17},{17,17}},
+        rotation=-90,
+        origin={53,99}), iconTransformation(extent={{4,74},{38,108}})));
+  parameter Integer k=3 "Number of heat curcuits"  annotation(Dialog(tab="Control", group="Admixture control"));
+  parameter Modelica.SIunits.Temperature TBoiler=273.15 + 75
+    "Fix boiler temperature for the admixture" annotation(Dialog(tab="Control", group="Admixture control"));
+  parameter Boolean severalHeatcurcuits
+    "If true, there are two or more heat curcuits"
+                                                  annotation(choices(
+      choice=true "Several heat curcuits",
+      choice=false "One heat curcuit",
+      radioButtons=true), Dialog(tab="Control", group="Flow temperature control"));
+  Modelica.Blocks.Interfaces.RealInput TCon[k] if use_advancedControl and
+    severalHeatcurcuits "Set temperature for the consumers" annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={-8,100})));
+  Modelica.Blocks.Interfaces.RealInput TMeaCon[k] if use_advancedControl and
+    severalHeatcurcuits "Measurement temperature of the consumers"
+    annotation (Placement(transformation(extent={{120,14},{80,54}})));
+  Modelica.Blocks.Interfaces.RealOutput valPos[k] if use_advancedControl and
+    severalHeatcurcuits "Valve position for the admixture"
+    annotation (Placement(transformation(extent={{90,58},{110,78}})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
@@ -160,6 +183,15 @@ equation
   else
   end if;
 
+  ///Connections of Two position controller
+ if simpleTwoPosition then
+  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.TLayers[1])
+    annotation (Line(points={{60,11},{60,66},{10.6,66},{10.6,60}}, color={0,0,127}));
+    else
+  connect(TLayers, hierarchicalControl_modularBoilerNEW1.TLayers) annotation (
+      Line(points={{53,99},{53,80},{10.6,80},{10.6,60}}, color={0,0,127}));
+   end if;
+   ///
   connect(senTHot.port_b, port_b)
     annotation (Line(points={{70,0},{100,0}}, color={0,127,255}));
   connect(senTHot.port_a, heatGeneratorNoControl.port_b)
@@ -175,71 +207,85 @@ equation
   connect(senTCold.port_b, fan1.port_a)
     annotation (Line(points={{-70,0},{-60,0}}, color={0,127,255}));
   connect(controlBoilerNotManufacturer.DeltaTWater_b, heatGeneratorNoControl.dTWater)
-    annotation (Line(points={{-79,38.8},{-70,38.8},{-70,16},{-26,16},{-26,9},{
+    annotation (Line(points={{-79,40.8},{-70,40.8},{-70,16},{-26,16},{-26,9},{
           -10,9}}, color={0,0,127}));
-  connect(port_b, port_b) annotation (Line(points={{100,0},{106,0},{106,0},{100,
-          0}}, color={0,127,255}));
+  connect(port_b, port_b) annotation (Line(points={{100,0},{100,0}},
+               color={0,127,255}));
   connect(senTCold.T, controlBoilerNotManufacturer.TCold) annotation (Line(
-        points={{-80,11},{-80,26},{-114,26},{-114,47},{-102,47}}, color={0,0,127}));
+        points={{-80,11},{-80,26},{-114,26},{-114,49},{-102,49}}, color={0,0,127}));
   connect(heatGeneratorNoControl.TVolume, controlBoilerNotManufacturer.THot)
-    annotation (Line(points={{2,-11},{2,-40},{-110,-40},{-110,44},{-102,44}},
+    annotation (Line(points={{2,-11},{2,-40},{-110,-40},{-110,46},{-102,46}},
         color={0,0,127}));
-  connect(boilerControlBus_Control.DeltaTWater, controlBoilerNotManufacturer.DeltaTWater_a)
+  connect(boilerControlBus.DeltaTWater, controlBoilerNotManufacturer.DeltaTWater_a)
     annotation (Line(
-      points={{-39.95,98.05},{-39.95,92},{-106,92},{-106,41},{-102,41}},
+      points={{-63.95,98.05},{-63.95,92},{-106,92},{-106,43},{-102,43}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(integrator1.y, boilerControlBus_Control.EnergyDemand) annotation (
-      Line(points={{88.6,-32},{110,-32},{110,106},{-39.95,106},{-39.95,98.05}},
-        color={0,0,127}), Text(
+  connect(integrator1.y, boilerControlBus.EnergyDemand) annotation (Line(points={{88.6,
+          -32},{110,-32},{110,106},{-63.95,106},{-63.95,98.05}},      color={0,
+          0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(boilerControlBus.PLR, regulation_modularBoiler.PLRin) annotation (
+      Line(
+      points={{-63.95,98.05},{-63.95,92},{-74,92},{-74,59},{-62,59}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   connect(controlBoilerNotManufacturer.mFlowRel, regulation_modularBoiler.mFlow_rel)
-    annotation (Line(points={{-79,52},{-70,52},{-70,54.2},{-62,54.2}}, color={0,
+    annotation (Line(points={{-79,54},{-74,54},{-74,54.2},{-62,54.2}}, color={0,
           0,127}));
-  connect(regulation_modularBoiler.mFlow_relB, fan1.y) annotation (Line(points=
-          {{-41.8,55},{-34,55},{-34,22},{-50,22},{-50,12}}, color={0,0,127}));
-  connect(boilerControlBus_Control.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
+  connect(regulation_modularBoiler.mFlow_relB, fan1.y) annotation (Line(points={{-41.8,
+          55},{-34,55},{-34,20},{-50,20},{-50,12}},        color={0,0,127}));
+  connect(boilerControlBus.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
     annotation (Line(
-      points={{-39.95,98.05},{-20,98.05},{-20,61.6},{-2,61.6}},
+      points={{-63.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,53.6},{0,53.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(hierarchicalControl_modularBoilerNEW1.PLRset,
-    regulation_modularBoiler.PLRMea) annotation (Line(points={{18,64},{18,32},{
-          -66,32},{-66,49.4},{-62,49.4}}, color={0,0,127}));
-  connect(hierarchicalControl_modularBoilerNEW1.PLRset, heatGeneratorNoControl.PLR)
-    annotation (Line(points={{18,64},{18,16},{-10,16},{-10,5.4}}, color={0,0,
-          127}));
-  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tb) annotation (Line(
-        points={{60,11},{60,78},{-6,78},{-6,56.4},{-2.2,56.4}}, color={0,0,127}));
-  connect(boilerControlBus_Control.PLR, regulation_modularBoiler.PLRin)
-    annotation (Line(
-      points={{-39.95,98.05},{-39.95,74},{-72,74},{-72,59},{-62,59}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.TMeaBoiler)
-    annotation (Line(points={{60,11},{60,36},{3.8,36},{3.8,47.2}}, color={0,0,
-          127}));
+
   connect(regulation_modularBoiler.PLRset,
-    hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,
-          59.6},{-24,59.6},{-24,65.4},{-2,65.4}}, color={0,0,127}));
-  connect(Tamb, hierarchicalControl_modularBoilerNEW1.Tamb) annotation (Line(
-        points={{64,100},{64,60},{24,60},{24,42},{-10,42},{-10,50.2},{-2,50.2}},
-        color={0,0,127}));
+    hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,59.6},
+          {-20,59.6},{-20,57.4},{0,57.4}},       color={0,0,127}));
+  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tb) annotation (Line(
+        points={{60,11},{56,11},{56,72},{-4,72},{-4,48.4},{-0.2,48.4}}, color={0,
+          0,127}));
+  connect(hierarchicalControl_modularBoilerNEW1.PLRset, heatGeneratorNoControl.PLR)
+    annotation (Line(points={{20,56},{30,56},{30,16},{-16,16},{-16,5.4},{-10,5.4}},
+                 color={0,0,127}));
+  connect(hierarchicalControl_modularBoilerNEW1.PLRset,
+    regulation_modularBoiler.PLRMea) annotation (Line(points={{20,56},{30,56},{30,
+          32},{-68,32},{-68,49.4},{-62,49.4}},    color={0,0,127}));
+
+
+  connect(boilerControlBus.Tamb, hierarchicalControl_modularBoilerNEW1.Tamb)
+    annotation (Line(
+      points={{-64,98},{-38,98},{-38,82},{-30,82},{-30,42.2},{0,42.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(TCon, hierarchicalControl_modularBoilerNEW1.TCon) annotation (Line(
+        points={{-8,100},{-8,34},{13.8,34},{13.8,38.4}}, color={0,0,127}));
+  connect(TMeaCon, hierarchicalControl_modularBoilerNEW1.TMeaCon)
+    annotation (Line(points={{100,34},{19,34},{19,38.4}}, color={0,0,127}));
+  connect(hierarchicalControl_modularBoilerNEW1.valPos, valPos) annotation (
+      Line(points={{20,43.4},{48,43.4},{48,58},{78,58},{78,68},{100,68}}, color
+        ={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
@@ -272,4 +318,4 @@ equation
 </ol>
 </html>"),
     experiment(StopTime=10));
-end ModularBoiler_FlowTemperatureControlHeatCurve;
+end ModularBoiler;

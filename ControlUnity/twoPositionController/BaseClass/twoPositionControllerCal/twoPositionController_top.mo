@@ -20,5 +20,10 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>Model for a two-position controller that is used in combination with a buffer storage with n layers. This model regulates the flow temperature of the buffer storage. The user can choose between whether the temperature of the top layer or another layer of the storage should be controlled.</p>
+<h4>Important parameters</h4>
+<ul>
+<li>n: The user can decide how many layers the buffer storage has</li>
+<li>Tref: With this parameter, the user can select the set temperature</li>
+</ul>
 </html>"));
 end twoPositionController_top;

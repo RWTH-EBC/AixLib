@@ -10,13 +10,14 @@ model BoilerTesterTwoPositionControllerStorageBuffer
             parameter Modelica.SIunits.HeatFlowRate QNom=100000 "Thermal dimension power";
             parameter Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom);
              parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal";
-             parameter Modelica.SIunits.Time t=60*80 "Time until the buffer storage is fully loaded";
+             parameter Modelica.SIunits.Time t=60*120
+                                                     "Time until the buffer storage is fully loaded";
      parameter Modelica.SIunits.Density rhoW=997 "Density of water";
      parameter Modelica.SIunits.HeatCapacity cW=4180 "Heat Capacity of water";
      parameter Modelica.SIunits.TemperatureDifference dT=20;
      parameter Real l=1.73 "Relation between height and diameter of the buffer storage";
-     parameter Modelica.SIunits.Height hTank=QNom*t/( Modelica.Constants.pi/4*dTank^2*rhoW*cW*dT);
-     parameter Modelica.SIunits.Diameter dTank=hTank/1.73;
+     parameter Modelica.SIunits.Height hTank=(QNom*t*1.73^2/( Modelica.Constants.pi/4*rhoW*cW*dT))^(1/3) annotation(Evaluate=true);
+     parameter Modelica.SIunits.Diameter dTank=hTank/1.73 annotation(Evaluate=true);
 
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -49,7 +50,8 @@ model BoilerTesterTwoPositionControllerStorageBuffer
   ModularBoiler_TwoPositionControllerBufferStorage modularBoiler_Controller(
     TColdNom=333.15,
     QNom=100000,
-    n=1,
+    n=bufferStorage.n,
+    storage_ctrl=true,
     Tref=333.15)
          annotation (Placement(transformation(extent={{-32,12},{-12,32}})));
   Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
@@ -72,6 +74,9 @@ model BoilerTesterTwoPositionControllerStorageBuffer
 
 
 
+  parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
+      AixLib.DataBase.Storage.Generic_New_2000l(hTank=hTank, dTank=dTank)
+                                                  "Data record for Storage";
   AixLib.Fluid.Storage.BufferStorage bufferStorage(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
@@ -90,9 +95,7 @@ model BoilerTesterTwoPositionControllerStorageBuffer
         AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
-    TStart=303.15) annotation (Placement(transformation(extent={{26,-30},{6,-6}})));
-  parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_New_2000l() "Data record for Storage";
+    TStart=303.15) annotation (Placement(transformation(extent={{26,-38},{6,-14}})));
 equation
 
   ///Determination of storage volume
@@ -134,24 +137,26 @@ equation
   connect(boundary_ph5.ports[1], vol.ports[1]) annotation (Line(points={{104,30},
           {84,30},{84,22},{59.3333,22}},
                                     color={0,127,255}));
-  connect(vol.ports[2], fan1.port_a) annotation (Line(points={{62,22},{78,22},{78,
-          16},{106,16},{106,-48},{78,-48}},         color={0,127,255}));
+  connect(vol.ports[2], fan1.port_a) annotation (Line(points={{62,22},{78,22},{
+          78,16},{106,16},{106,-48},{78,-48}},      color={0,127,255}));
   connect(realExpression.y, fan1.y)
     annotation (Line(points={{85.3,-17},{68,-17},{68,-36}}, color={0,0,127}));
-  connect(modularBoiler_Controller.port_b, bufferStorage.fluidportTop1)
-    annotation (Line(points={{-12,22},{19.5,22},{19.5,-5.88}}, color={0,127,255}));
-  connect(bufferStorage.fluidportTop2, vol.ports[3]) annotation (Line(points={{12.875,
-          -5.88},{12.875,22},{64.6667,22}}, color={0,127,255}));
-  connect(fan1.port_b, bufferStorage.fluidportBottom2) annotation (Line(points={
-          {58,-48},{13.125,-48},{13.125,-30.12}}, color={0,127,255}));
-  connect(bufferStorage.fluidportBottom1, modularBoiler_Controller.port_a)
-    annotation (Line(points={{19.375,-30.24},{19.375,-36},{-46,-36},{-46,22},{-32,
-          22}}, color={0,127,255}));
   connect(fixedTemperature.port, bufferStorage.heatportOutside) annotation (
-      Line(points={{-14,-50},{-2,-50},{-2,-17.28},{6.25,-17.28}}, color={191,0,0}));
-  connect(bufferStorage.TTop, modularBoiler_Controller.TLayers[1]) annotation (
-      Line(points={{26,-7.44},{32,-7.44},{32,-6},{36,-6},{36,28},{-6,28},{-6,44},
-          {-10,44},{-10,42},{-19.9,42},{-19.9,31.1}}, color={0,0,127}));
+      Line(points={{-14,-50},{-4,-50},{-4,-25.28},{6.25,-25.28}}, color={191,0,
+          0}));
+  connect(modularBoiler_Controller.port_b, bufferStorage.fluidportTop1)
+    annotation (Line(points={{-12,22},{4,22},{4,20},{19.5,20},{19.5,-13.88}},
+        color={0,127,255}));
+  connect(fan1.port_b, bufferStorage.fluidportBottom2) annotation (Line(points=
+          {{58,-48},{13.125,-48},{13.125,-38.12}}, color={0,127,255}));
+  connect(bufferStorage.fluidportBottom1, modularBoiler_Controller.port_a)
+    annotation (Line(points={{19.375,-38.24},{19.375,-78},{-44,-78},{-44,22},{
+          -32,22}}, color={0,127,255}));
+  connect(bufferStorage.fluidportTop2, vol.ports[3]) annotation (Line(points={{
+          12.875,-13.88},{12.875,22},{64.6667,22}}, color={0,127,255}));
+  connect(bufferStorage.TLayer, modularBoiler_Controller.TLayers) annotation (
+      Line(points={{5,-19.76},{-6,-19.76},{-6,42},{-19.9,42},{-19.9,31.1}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterTwoPositionControllerStorageBuffer;

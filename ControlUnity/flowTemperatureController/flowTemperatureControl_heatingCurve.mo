@@ -69,4 +69,11 @@ equation
           0},{-38,42},{120,42},{120,-66},{38,-66},{38,-60}}, color={0,0,127}));
   connect(TMea, switch1.u1) annotation (Line(points={{66,-100},{66,-72},{22,-72},
           {22,-60}}, color={0,0,127}));
+  annotation (Documentation(info="<html>
+<p>Ambient temperature guided flow temperature control for heat generators. The temperature control can be switched on and off via the isOn input from the outside. A heating curve model is used to determine the required flow temperature depending on the ambient temperature. The associated data are recorded in a table and the values are determined by means of interpolation. Furthermore, the model has a day and night mode, in which the set temperatures differ at the same ambient temperature. The PI-Controller was set for this application. </p>
+<h4>Important parameters</h4>
+<ul>
+<li>declination: The user can choose the steepness of the curve. The higher the parameter, the higher the determined </li>
+</ul>
+</html>"));
 end flowTemperatureControl_heatingCurve;

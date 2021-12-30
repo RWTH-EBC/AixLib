@@ -205,7 +205,7 @@ equation
           55},{-34,55},{-34,20},{-50,20},{-50,12}},        color={0,0,127}));
   connect(boilerControlBus.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
     annotation (Line(
-      points={{-39.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,50.6},{2,50.6}},
+      points={{-39.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,53.6},{2,53.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -216,9 +216,9 @@ equation
   connect(regulation_modularBoiler.PLRset,
     hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,
           59.6},{-20,59.6},{-20,57.4},{2,57.4}}, color={0,0,127}));
-  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tin) annotation (
-      Line(points={{60,11},{54,11},{54,64},{-6,64},{-6,53.2},{2,53.2}}, color={
-          0,0,127}));
+  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tb) annotation (Line(
+        points={{60,11},{54,11},{54,64},{-6,64},{-6,48.4},{1.8,48.4}}, color={0,
+          0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset, heatGeneratorNoControl.PLR)
     annotation (Line(points={{22,56},{30,56},{30,16},{-16,16},{-16,5.4},{-10,
           5.4}}, color={0,0,127}));

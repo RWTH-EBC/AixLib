@@ -5,11 +5,9 @@ model returnAdmixture
 
   parameter Modelica.SIunits.Temperature T_flow "Flow temperature resulting from the return admixture for each heating curcuit";
   parameter Modelica.SIunits.Temperature TBoiler= 273.15+75 "Fix boiler temperature for the admixture";
+  parameter Modelica.SIunits.Temperature Tset[k];
 
 
-  Modelica.Blocks.Interfaces.RealInput Tset[k]
-    "Set temperatures for k heat curcuits"
-    annotation (Placement(transformation(extent={{-120,-52},{-80,-12}})));
   Modelica.Blocks.Interfaces.RealOutput valPos[k]
     "Valve position for the k heat curcuits"
     annotation (Placement(transformation(extent={{90,-42},{110,-22}})));
@@ -41,12 +39,23 @@ model returnAdmixture
   parameter Real bandwidth "Bandwidth around reference signal";
   Modelica.Blocks.Continuous.LimPID PID1(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.01,
-    Ti=5,
+    k=0.5,
+    Ti=3,
     yMax=0.999,
     yMin=0) "PI Controller for controlling the valve position"
             annotation (Placement(transformation(extent={{-14,30},{6,50}})));
+  Modelica.Blocks.Interfaces.RealInput TCon[k]
+    "Set temperature for the consumers"
+    annotation (Placement(transformation(extent={{-120,-52},{-80,-12}})));
 equation
+
+  /// Set temperature of the consumers
+ // for m in 1:k loop
+ // TConsumer[m]= Tset[m];
+ // end for;
+
+
+
   connect(isOn, switch1.u2) annotation (Line(points={{-100,74},{32,74}},
                      color={255,0,255}));
   connect(switch1.y, PLRset) annotation (Line(points={{55,74},{72,74},{72,46},{
@@ -63,8 +72,19 @@ equation
     annotation (Line(points={{0,-100},{0,-44}}, color={0,0,127}));
   connect(PID.y, valPos)
     annotation (Line(points={{11,-32},{100,-32}}, color={0,0,127}));
-  connect(Tset, PID.u_s)
+  connect(TCon, PID.u_s)
     annotation (Line(points={{-100,-32},{-12,-32}}, color={0,0,127}));
  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-       coordinateSystem(preserveAspectRatio=false)));
+       coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>Admixture control for heat generators. The temperature control can be switched on and off via the isOn input from the outside. This model controls two seperate control loops:</p>
+<ul>
+<li>Flow temperature control of the boiler: The fix flow temperature of the boiler is controller by a PI-Controller which sets the PLR depending on the temperature difference between set temperature and actual temperature.</li>
+<li>Flow temperature to the consument: Fix or variable flow temperature to the consument. The valve for the admixture is controlled by a PI-Controller regarding to the temperature difference between set temperature and actual temperature.</li>
+</ul>
+<h4>Important parameters</h4>
+<ul>
+<li>TBoiler: The user sets the fix flow temperature of the boiler before the simulation.</li>
+</ul>
+</html>"));
 end returnAdmixture;

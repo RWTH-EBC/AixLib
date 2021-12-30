@@ -6,7 +6,8 @@ model ModularBoiler_TwoPositionControllerBufferStorage
 
   parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Return temperature TCold"
+  parameter Modelica.SIunits.Temperature TColdNom=273.15 + 35
+                                                            "Return temperature TCold"
    annotation (Dialog(group="Nominal condition"));
   parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power"
    annotation (Dialog(group="Nominal condition"));
@@ -22,10 +23,12 @@ model ModularBoiler_TwoPositionControllerBufferStorage
   parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
    annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
 
-  parameter Modelica.SIunits.Temperature THotMax=273.15+90 "Maximal temperature to force shutdown";
+  parameter Modelica.SIunits.Temperature THotMax=273.15 + 90
+                                                           "Maximal temperature to force shutdown";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
-  parameter Modelica.SIunits.Temperature TStart=273.15+20 "T start"
+  parameter Modelica.SIunits.Temperature TStart=273.15 + 20
+                                                          "T start"
    annotation (Dialog(tab="Advanced"));
 
    parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
@@ -107,7 +110,8 @@ model ModularBoiler_TwoPositionControllerBufferStorage
         extent={{-17,-17},{17,17}},
         rotation=-90,
         origin={53,101}),iconTransformation(extent={{4,74},{38,108}})));
-  parameter Integer n=3 "Number of layers in the buffer storage";
+  parameter Integer n= if storage_ctrl then n else 1 "Number of layers in the buffer storage";
+  parameter Boolean storage_ctrl=false;
   parameter Boolean use_advancedControl=false
     "Selection between two position control and flow temperature control, if true=flow temperature control is active" annotation(choices(
       choice=true "Flow temperature control",
@@ -121,7 +125,7 @@ model ModularBoiler_TwoPositionControllerBufferStorage
     use_advancedControl=false,
     redeclare
       twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
-      twoPositionController_layers(n=n),
+      twoPositionController_layers,
     n=n,
     bandwidth=5,
     severalHeatcurcuits=false,
@@ -210,7 +214,7 @@ equation
           55},{-34,55},{-34,20},{-50,20},{-50,12}},        color={0,0,127}));
   connect(boilerControlBus.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
     annotation (Line(
-      points={{-39.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,50.6},{0,50.6}},
+      points={{-39.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,53.6},{0,53.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -223,8 +227,8 @@ equation
   connect(regulation_modularBoiler.PLRset,
     hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,59.6},
           {-20,59.6},{-20,57.4},{0,57.4}}, color={0,0,127}));
-  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tin) annotation (
-      Line(points={{60,11},{54,11},{54,64},{-6,64},{-6,53.2},{0,53.2}}, color={0,
+  connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tb) annotation (Line(
+        points={{60,11},{54,11},{54,64},{-6,64},{-6,48.4},{-0.2,48.4}}, color={0,
           0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset, heatGeneratorNoControl.PLR)
     annotation (Line(points={{20,56},{30,56},{30,16},{-16,16},{-16,5.4},{-10,5.4}},

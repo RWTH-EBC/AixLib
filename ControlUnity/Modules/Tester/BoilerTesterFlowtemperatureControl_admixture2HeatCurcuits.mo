@@ -246,10 +246,10 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(realExpression.y, modularBoiler_Controller.Tset[1]) annotation (Line(
-        points={{-20,58.4},{-22.2,58.4},{-22.2,32}}, color={0,0,127}));
-  connect(realExpression1.y, modularBoiler_Controller.Tset[2]) annotation (Line(
-        points={{-6,54.4},{-6,42},{-22.2,42},{-22.2,33.6}}, color={0,0,127}));
+  connect(realExpression.y, modularBoiler_Controller.TCon[1])
+    annotation (Line(points={{-20,58.4},{-20,35}}, color={0,0,127}));
+  connect(realExpression1.y, modularBoiler_Controller.TCon[2])
+    annotation (Line(points={{-6,54.4},{-6,33},{-20,33}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BoilerTesterFlowtemperatureControl_admixture2HeatCurcuits;

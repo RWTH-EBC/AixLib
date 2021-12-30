@@ -45,7 +45,7 @@ model BoilerTesterFlowtemperatureControl
   ModularBoiler_FlowTemperatureControlHeatCurve modularBoiler_Controller(
     TColdNom=333.15,
     QNom=100000,
-    m_flowVar=true,
+    m_flowVar=false,
     Advanced=false,
     dTWaterSet=20,
     n=1,
@@ -64,8 +64,6 @@ model BoilerTesterFlowtemperatureControl
     annotation (Placement(transformation(extent={{-118,24},{-98,44}})));
   Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
     annotation (Placement(transformation(extent={{-98,-14},{-78,6}})));
-  Modelica.Blocks.Sources.RealExpression dT(y=20)
-    annotation (Placement(transformation(extent={{-112,44},{-92,64}})));
 equation
   connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
           32}},                       color={191,0,0}));
@@ -99,12 +97,6 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(isOn.y, boilerControlBus.isOn) annotation (Line(points={{-77,-4},{
           -71.95,-4},{-71.95,36.05}}, color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(dT.y, boilerControlBus.DeltaTWater) annotation (Line(points={{-91,54},
-          {-71.95,54},{-71.95,36.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
