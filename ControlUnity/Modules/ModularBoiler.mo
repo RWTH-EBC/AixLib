@@ -284,8 +284,8 @@ equation
   connect(TMeaCon, hierarchicalControl_modularBoilerNEW1.TMeaCon)
     annotation (Line(points={{100,34},{19,34},{19,38.4}}, color={0,0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.valPos, valPos) annotation (
-      Line(points={{20,43.4},{48,43.4},{48,58},{78,58},{78,68},{100,68}}, color
-        ={0,0,127}));
+      Line(points={{20,43.4},{48,43.4},{48,58},{78,58},{78,68},{100,68}}, color=
+         {0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

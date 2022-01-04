@@ -29,7 +29,7 @@ model hierarchicalControl_modularBoilerNEW
     Tref=Tref) if              not use_advancedControl
                                  constrainedby
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(Tref=Tref, bandwidth=bandwidth, n=n)
-    annotation (Placement(transformation(extent={{24,44},{44,64}})), choicesAllMatching=true, Dialog(enable=not use_advancedControl));
+    annotation (Placement(transformation(extent={{24,24},{44,44}})), choicesAllMatching=true, Dialog(enable=not use_advancedControl));
   Modelica.Blocks.Interfaces.RealInput TLayers[n]
     "Different temperatures of layers of buffer storage, 1 lowest layer and n top layer; if simple two position controller, then it is equal to Tin"
     annotation (Placement(transformation(
@@ -49,7 +49,8 @@ model hierarchicalControl_modularBoilerNEW
 
   //Flow temperature control
   flowTemperatureController.flowTemperatureControl_heatingCurve
-    flowTemperatureControl_heatingCurve if use_advancedControl and not severalHeatcurcuits
+    flowTemperatureControl_heatingCurve(declination=declination) if
+                                           use_advancedControl and not severalHeatcurcuits
     annotation (Placement(transformation(extent={{-28,-70},{-8,-50}})));
 
     Modelica.Blocks.Interfaces.RealInput Tamb if use_advancedControl and not
@@ -108,6 +109,7 @@ model hierarchicalControl_modularBoilerNEW
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={38,-116})));
+  parameter Real declination=1 annotation(Dialog(group="Flow temperature control"));
 equation
 
 
@@ -117,10 +119,10 @@ equation
         points={{-100,-78},{-74,-78},{-74,-60},{-28,-60}}, color={0,0,127}));
   connect(isOn, emergencySwitch_modularBoiler1.isOn) annotation (Line(points={{-100,36},
           {-74,36},{-74,33.4},{-60,33.4}},   color={255,0,255}));
-  connect(PLRin, twoPositionController_layers.PLRin) annotation (Line(points={{-100,
-          74},{-38,74},{-38,63},{24,63}}, color={0,0,127}));
+  connect(PLRin, twoPositionController_layers.PLRin) annotation (Line(points={{-100,74},
+          {-38,74},{-38,43},{24,43}},     color={0,0,127}));
   connect(emergencySwitch_modularBoiler1.y, twoPositionController_layers.isOn)
-    annotation (Line(points={{-39.8,29},{10,29},{10,57.4},{24,57.4}}, color={255,
+    annotation (Line(points={{-39.8,29},{10,29},{10,37.4},{24,37.4}}, color={255,
           0,255}));
   connect(emergencySwitch_modularBoiler1.y, flowTemperatureControl_heatingCurve.isOn)
     annotation (Line(points={{-39.8,29},{-36,29},{-36,-68},{-28,-68}}, color={255,
@@ -134,18 +136,18 @@ equation
   connect(flowTemperatureControl_heatingCurve.PLRset, PLRset) annotation (Line(
         points={{-8,-60},{-2,-60},{-2,-4},{86,-4},{86,60},{100,60}}, color={0,0,
           127}));
-  connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points=
-          {{45.2,54.6},{62,54.6},{62,60},{100,60}}, color={0,0,127}));
+  connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points={{45.2,
+          34.6},{62,34.6},{62,60},{100,60}},        color={0,0,127}));
   connect(TLayers, twoPositionController_layers.TLayers)
-    annotation (Line(points={{6,100},{6,51.8},{24,51.8}}, color={0,0,127}));
+    annotation (Line(points={{6,100},{6,31.8},{24,31.8}}, color={0,0,127}));
   connect(returnAdmixture.valPos, valPos) annotation (Line(points={{66,-67.2},{
           82,-67.2},{82,-66},{100,-66}}, color={0,0,127}));
   connect(Tb, emergencySwitch_modularBoiler1.TBoiler) annotation (Line(points={
           {-102,-16},{-82,-16},{-82,20.4},{-60,20.4}}, color={0,0,127}));
   connect(Tb, returnAdmixture.TMeaBoiler) annotation (Line(points={{-102,-16},{
           -114,-16},{-114,-92},{30,-92},{30,-61},{46,-61}}, color={0,0,127}));
-  connect(Tb, flowTemperatureControl_heatingCurve.TMea) annotation (Line(points
-        ={{-102,-16},{-114,-16},{-114,-92},{-11.4,-92},{-11.4,-70}}, color={0,0,
+  connect(Tb, flowTemperatureControl_heatingCurve.TMea) annotation (Line(points=
+         {{-102,-16},{-114,-16},{-114,-92},{-11.4,-92},{-11.4,-70}}, color={0,0,
           127}));
   connect(TMeaCon, returnAdmixture.TMea) annotation (Line(points={{90,-116},{90,
           -86},{56,-86},{56,-74}}, color={0,0,127}));
