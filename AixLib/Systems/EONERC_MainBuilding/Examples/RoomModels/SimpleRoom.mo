@@ -8,9 +8,9 @@ model SimpleRoom
 
   AixLib.Systems.EONERC_MainBuilding.Tabs tabs(
     redeclare package Medium = MediumWater,
-    area=33.8*59.4*2,
-    thickness=0.3,
-    alpha=15) annotation (Placement(transformation(extent={{20,-60},{60,-20}})));
+    area=thermalZone1.zoneParam.AZone,
+    thickness=0.05,
+    alpha=15) annotation (Placement(transformation(extent={{20,-58},{60,-18}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone
                                                     thermalZone1(
     redeclare package Medium = MediumAir,
@@ -146,34 +146,34 @@ model SimpleRoom
     redeclare package Medium = MediumWater,
     use_T_in=false,
     T=333.15,
-    nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-7,-7},{7,7}},
         rotation=90,
-        origin={-38,-74})));
+        origin={-35,-71})));
   AixLib.Fluid.Sources.Boundary_pT bouWaterhot1(
     redeclare package Medium = MediumWater,
     use_T_in=false,
     T=333.15,
-    nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-7,-7},{7,7}},
         rotation=90,
-        origin={-16,-74})));
+        origin={-19,-71})));
   AixLib.Fluid.Sources.Boundary_pT bouWatercold(
     redeclare package Medium = MediumWater,
     use_T_in=false,
     T=283.15,
     nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-7,-7},{7,7}},
         rotation=270,
-        origin={24,-78})));
+        origin={41,-83})));
   AixLib.Fluid.Sources.Boundary_pT bouWatercold1(
     redeclare package Medium = MediumWater,
     use_T_in=false,
     T=283.15,
     nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-7,-7},{7,7}},
         rotation=180,
-        origin={66,-94})));
+        origin={63,-93})));
   Modelica.Blocks.Sources.RealExpression HeatPower(y=1000*4.18*(bus.tabs1Bus.hotThrottleBus.VFlowInMea
         *(bus.tabs1Bus.hotThrottleBus.TFwrdInMea - bus.tabs1Bus.hotThrottleBus.TRtrnOutMea)
          + bus.ahu1Bus.heaterBus.hydraulicBus.VFlowInMea*(bus.ahu1Bus.heaterBus.hydraulicBus.TFwrdInMea
@@ -196,6 +196,24 @@ model SimpleRoom
          + bus.ahu1Bus.coolerBus.hydraulicBus.VFlowInMea*(bus.ahu1Bus.coolerBus.hydraulicBus.TFwrdInMea
          - bus.ahu1Bus.coolerBus.hydraulicBus.TRtrnOutMea)))
     annotation (Placement(transformation(extent={{72,-62},{92,-42}})));
+  Utilities.Psychrometrics.X_pTphi x_pTphi
+    annotation (Placement(transformation(extent={{-120,8},{-108,20}})));
+  Fluid.Sources.Boundary_pT        bouWaterhot2(
+    redeclare package Medium = MediumWater,
+    use_T_in=false,
+    T=313.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-7,-7},{7,7}},
+        rotation=90,
+        origin={5,-81})));
+  Fluid.Sources.Boundary_pT        bouWaterhot3(
+    redeclare package Medium = MediumWater,
+    use_T_in=false,
+    T=313.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-7,-7},{7,7}},
+        rotation=90,
+        origin={21,-81})));
   ModularAHU.GenericAHU genericAHU1(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
@@ -236,8 +254,8 @@ model SimpleRoom
         dp2_nominal=1000,
         tau1=5,
         tau2=10,
-        dT_nom=15,
-        Q_nom=150000)),
+        dT_nom=10,
+        Q_nom=200000)),
     heater(redeclare HydraulicModules.Admix hydraulicModule(
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
         length=1,
@@ -253,7 +271,7 @@ model SimpleRoom
         tau1=5,
         tau2=15,
         dT_nom=20,
-        Q_nom=60000)),
+        Q_nom=150000)),
     dynamicHX(
       dp1_nominal=150,
       dp2_nominal=150,
@@ -267,9 +285,7 @@ model SimpleRoom
       dp_nominal=20,
       mWat_flow_nominal=0.5,
       TLiqWat_in=288.15))
-    annotation (Placement(transformation(extent={{-80,-4},{-12,40}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi
-    annotation (Placement(transformation(extent={{-120,8},{-108,20}})));
+    annotation (Placement(transformation(extent={{-80,-4},{-4,40}})));
 equation
   connect(weaBus, thermalZone1.weaBus) annotation (Line(
       points={{-71,60},{6,60},{6,58.8}},
@@ -320,52 +336,24 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(genericAHU1.port_b1, thermalZone1.ports[1]) annotation (Line(points={{
-          -11.6909,16},{25.125,16},{25.125,28.44}}, color={0,127,255}));
-  connect(genericAHU1.port_a2, thermalZone1.ports[2]) annotation (Line(points={{
-          -11.6909,32},{-4,32},{-4,24},{12,24},{12,28.44},{36.875,28.44}},
-                   color={0,127,255}));
   connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{85.3,
           26},{68,26},{68,25.68},{51,25.68}}, color={0,0,127}));
-  connect(bouWaterhot.ports[1], genericAHU1.port_a5) annotation (Line(points={{-40,-64},
-          {-40,-4},{-33.6364,-4}},          color={0,127,255}));
-  connect(bouWaterhot1.ports[1], genericAHU1.port_b5) annotation (Line(points={{-18,-64},
-          {-28,-64},{-28,-4},{-27.7636,-4}},           color={0,127,255}));
-  connect(bouWatercold1.ports[1], genericAHU1.port_b4) annotation (Line(points={{56,-96},
-          {-76,-96},{-76,-42},{-42,-42},{-42,-4},{-39.8182,-4}},
-        color={0,127,255}));
-  connect(genericAHU1.port_a4, bouWatercold.ports[1]) annotation (Line(points={
-          {-46,-4},{-46,-34},{-80,-34},{-80,-88},{26,-88}}, color={0,127,255}));
-  connect(genericAHU1.genericAHUBus, bus.ahu1Bus) annotation (Line(
-      points={{-46,40.2},{-44,40.2},{-44,94.11},{0.09,94.11}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{40,
-          -18.1818},{40,-8},{62,-8},{62,45.92},{56.5,45.92}},    color={191,0,0}));
-  connect(bouWaterhot1.ports[2], tabs.port_b1)
-    annotation (Line(points={{-14,-64},{32,-64},{32,-60}}, color={0,127,255}));
-  connect(bouWaterhot.ports[2], tabs.port_a1) annotation (Line(points={{-36,-64},
-          {-36,-60},{24,-60}}, color={0,127,255}));
-  connect(bouWatercold.ports[2], tabs.port_a2)
-    annotation (Line(points={{22,-88},{48,-88},{48,-60}}, color={0,127,255}));
-  connect(bouWatercold1.ports[2], tabs.port_b2)
-    annotation (Line(points={{56,-92},{56,-59.6364}}, color={0,127,255}));
+          -16.1818},{40,-8},{62,-8},{62,45.92},{56.5,45.92}},    color={191,0,0}));
+  connect(bouWatercold.ports[1], tabs.port_a2)
+    annotation (Line(points={{42.4,-90},{48,-90},{48,-58}},
+                                                          color={0,127,255}));
+  connect(bouWatercold1.ports[1], tabs.port_b2)
+    annotation (Line(points={{56,-94.4},{56,-57.6364}},
+                                                      color={0,127,255}));
   connect(tabs.tabsBus, bus.tabs1Bus) annotation (Line(
-      points={{19.8,-41.6364},{0.09,-41.6364},{0.09,94.11}},
+      points={{19.8,-39.6364},{0.09,-39.6364},{0.09,94.11}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(bou1.ports[1], genericAHU1.port_b2)
-    annotation (Line(points={{-88,32},{-80,32}}, color={0,127,255}));
-  connect(bou.ports[1], genericAHU1.port_a1)
-    annotation (Line(points={{-88,16},{-80,16}}, color={0,127,255}));
   connect(x_pTphi.X, bou.X_in) annotation (Line(points={{-107.4,14},{-104,14},{
           -104,13.6},{-101.2,13.6}}, color={0,0,127}));
   connect(thermalZone1.TAir, bus.TZone1Mea) annotation (Line(points={{58.5,63.4},
@@ -374,8 +362,37 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(genericAHU1.port_b4, genericAHU1.port_a5) annotation (Line(points={{
-          -39.8182,-4},{-36,-4},{-36,-4},{-33.6364,-4}}, color={0,127,255}));
+  connect(tabs.port_a1, bouWaterhot2.ports[1]) annotation (Line(points={{24,-58},
+          {24,-68},{4,-68},{4,-74},{5,-74}}, color={0,127,255}));
+  connect(tabs.port_b1, bouWaterhot3.ports[1]) annotation (Line(points={{32,-58},
+          {32,-70},{21,-70},{21,-74}}, color={0,127,255}));
+  connect(bou1.ports[1], genericAHU1.port_b2)
+    annotation (Line(points={{-88,32},{-80,32}}, color={0,127,255}));
+  connect(bou.ports[1], genericAHU1.port_a1)
+    annotation (Line(points={{-88,16},{-80,16}}, color={0,127,255}));
+  connect(genericAHU1.port_a2, thermalZone1.ports[1]) annotation (Line(points={
+          {-3.65455,32},{-2,32},{-2,36},{4,36},{4,26},{2,26},{2,18},{4,18},{4,
+          16},{36,16},{36,28.44},{25.125,28.44}}, color={0,127,255}));
+  connect(genericAHU1.port_b1, thermalZone1.ports[2]) annotation (Line(points={
+          {-3.65455,16},{36,16},{36,28.44},{36.875,28.44}}, color={0,127,255}));
+  connect(genericAHU1.port_a4, bouWatercold.ports[2]) annotation (Line(points={
+          {-42,-4},{-42,-22},{-86,-22},{-86,-90},{39.6,-90}}, color={0,127,255}));
+  connect(genericAHU1.port_b4, bouWatercold1.ports[2]) annotation (Line(points=
+          {{-35.0909,-4},{-34,-4},{-34,-12},{64,-12},{64,-82},{56,-82},{56,
+          -91.6}}, color={0,127,255}));
+  connect(genericAHU1.port_a5, bouWaterhot.ports[1]) annotation (Line(points={{
+          -28.1818,-4},{-28.1818,-58},{-35,-58},{-35,-64}}, color={0,127,255}));
+  connect(genericAHU1.port_b5, bouWaterhot1.ports[1]) annotation (Line(points={{
+          -21.6182,-4},{-20,-4},{-20,-58},{-19,-58},{-19,-64}},  color={0,127,
+          255}));
+  connect(genericAHU1.genericAHUBus, bus.ahu1Bus) annotation (Line(
+      points={{-42,40.2},{-42,58},{0.09,58},{0.09,94.11}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)));
