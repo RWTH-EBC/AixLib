@@ -49,8 +49,9 @@ model hierarchicalControl_modularBoilerNEW
 
   //Flow temperature control
   flowTemperatureController.flowTemperatureControl_heatingCurve
-    flowTemperatureControl_heatingCurve(declination=declination) if
-                                           use_advancedControl and not severalHeatcurcuits
+    flowTemperatureControl_heatingCurve(declination=declination,
+    day_hour=day_hour,
+    night_hour=night_hour) if              use_advancedControl and not severalHeatcurcuits
     annotation (Placement(transformation(extent={{-28,-70},{-8,-50}})));
 
     Modelica.Blocks.Interfaces.RealInput Tamb if use_advancedControl and not
@@ -59,9 +60,7 @@ model hierarchicalControl_modularBoilerNEW
     annotation (Placement(transformation(extent={{-120,-98},{-80,-58}})));
 
         flowTemperatureController.renturnAdmixture.returnAdmixture returnAdmixture(k=k,
-    TBoiler=TBoiler,
-    Tset=Tset,
-    bandwidth=bandwidth) if                                                           use_advancedControl and severalHeatcurcuits
+    TBoiler=TBoiler) if                                                               use_advancedControl and severalHeatcurcuits
     annotation (Placement(transformation(extent={{46,-74},{66,-54}})));
   Modelica.Blocks.Interfaces.RealOutput valPos[k] if use_advancedControl and severalHeatcurcuits
     "Valve position to control the three-way valve"
@@ -110,6 +109,8 @@ model hierarchicalControl_modularBoilerNEW
         rotation=90,
         origin={38,-116})));
   parameter Real declination=1 annotation(Dialog(group="Flow temperature control"));
+  parameter Real day_hour=6 annotation(Dialog(group="Flow temperature control"));
+  parameter Real night_hour=22 annotation (Dialog(group="Flow temperature control"));
 equation
 
 

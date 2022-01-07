@@ -3,7 +3,8 @@ model twoPositionController_top
   "Two position controller using top level of buffer storage for calculation"
   extends
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(
-      realExpression(y=Tref), n=1,
+    n=1,
+      realExpression(y=Tref),
     onOffController(bandwidth=bandwidth));
   parameter Modelica.SIunits.Temperature Tref=273.15+60 "Reference temperature for two position controller using top level temperature";
   parameter Modelica.SIunits.Temperature Ttop=273.15 + 70
@@ -12,10 +13,12 @@ model twoPositionController_top
     "If true, the two-position controller uses the mean temperature of the buffer storage";
     parameter Real bandwidth     "Bandwidth around reference signal";
 
+  parameter Modelica.Blocks.Interfaces.IntegerOutput y=n
+    "Value of Integer output";
 equation
 
-  connect(TLayers[1], onOffController.u) annotation (Line(points={{-100,-22},{12,
-          -22},{12,0},{32,0}}, color={0,0,127}));
+  connect(TLayers[1], onOffController.u) annotation (Line(points={{-100,-22},{
+          -2,-22},{-2,0},{32,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

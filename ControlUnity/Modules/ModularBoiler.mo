@@ -119,14 +119,17 @@ model ModularBoiler
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=use_advancedControl,
     redeclare
-      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
+      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
       twoPositionController_layers,
     n=n,
     bandwidth=bandwidth,
     severalHeatcurcuits=severalHeatcurcuits,
     k=k,
     TBoiler=TBoiler,
-    Tref=Tref)
+    Tref=Tref,
+    declination=declination,
+    day_hour=day_hour,
+    night_hour=night_hour)
          annotation (Placement(transformation(extent={{0,40},{20,60}})));
   parameter Modelica.SIunits.Temperature Tref
     "Reference Temperature for the on off controller"
@@ -159,6 +162,9 @@ model ModularBoiler
   Modelica.Blocks.Interfaces.RealOutput valPos[k] if use_advancedControl and
     severalHeatcurcuits "Valve position for the admixture"
     annotation (Placement(transformation(extent={{90,58},{110,78}})));
+  parameter Real declination=1 annotation(Dialog(tab="Control", group="Flow temperature control"));
+  parameter Real day_hour=6 annotation(Dialog(tab="Control", group="Flow temperature control"));
+  parameter Real night_hour=22 annotation(Dialog(tab="Control", group="Flow temperature control"));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
