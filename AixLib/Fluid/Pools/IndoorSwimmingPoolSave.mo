@@ -364,7 +364,7 @@ equation
   connect(HeatExchanger.port_a2, Storage.ports[2])  annotation (Line(points={{-16.4,
           -60},{-18,-60},{-18,-54},{-21,-54}},           color={0,127,255}));
   connect(Storage.ports[3], pumpAndPressureDrop.port_a) annotation (Line(points={{-19,-54},
-          {-4,-54}},                                                                                         color={0,127,255}));
+          {-3.84,-54}},                                                                                      color={0,127,255}));
   connect(PoolWater.y, pumpAndPressureDrop.setMFlow) annotation (Line(points={{7.2,-70},
           {-8,-70},{-8,-60},{-4,-60},{-4,-59.76}},
                                          color={0,0,127}));

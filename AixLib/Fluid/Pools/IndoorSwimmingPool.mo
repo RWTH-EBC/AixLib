@@ -327,7 +327,16 @@ equation
      end if;
    end if;
 
+  if poolParam.use_idealHeatExchanger then
+      connect(IdealHeatExchangerPool.port_b, poolWater.ports[2]) annotation (Line(
+        points={{48,-8},{48,0},{-10,0},{-10,6}},                color={0,127,255}));
+  else
+      connect(toPool, poolWater.ports[2]) annotation (Line(points={{-100,-28},{
+            -10,-28},{-10,6}},         color={0,127,255}));
+  end if;
 
+  connect(poolWater.ports[3], idealSource1.port_a) annotation (Line(points={{
+          -7.33333,6},{40,6}},        color={0,127,255}));
   connect(pumpAndPressureDrop.port_b, IdealHeatExchangerPool.port_a) annotation (Line(points={{16,-54},
             {48,-54},{48,-22}},                                                                                                color={0,127,255}));
   connect(IdealHeatExchangerPool.port_b, poolWater.ports[2]) annotation (Line(
@@ -352,12 +361,12 @@ equation
   connect(Storage.ports[3], pumpAndPressureDrop.port_a) annotation (Line(points={{-17,-54},
           {0.16,-54}},                                                                                       color={0,127,255}));
   connect(PoolWater.y, pumpAndPressureDrop.setMFlow) annotation (Line(points={{9.2,-68},
-          {0,-68},{0,-59.76}},           color={0,0,127}));
+          {-6,-68},{-6,-60},{0,-60},{0,-59.76}},
+                                         color={0,0,127}));
   connect(poolWater.ports[1], Storage.ports[4]) annotation (Line(points={{
           -12.6667,6},{-12.6667,0},{-42,0},{-42,-54},{-15,-54}},
                                                  color={0,127,255}));
-  connect(poolWater.ports[2], idealSource1.port_a) annotation (Line(points={{-10,6},
-          {40,6}},                    color={0,127,255}));
+
   connect(idealSource1.port_b, SincEvaporation.ports[1]) annotation (Line(
         points={{48,6},{86,6}},                   color={0,127,255}));
   connect(m_Eavporation.y, idealSource1.m_flow_in) annotation (Line(points={{53.1,21},
@@ -402,8 +411,7 @@ equation
           91},{102.45,92},{110,92}}, color={0,0,127}));
   connect(pumpAndPressureDrop.port_b, fromPool) annotation (Line(points={{16,
           -54},{26,-54},{26,-4},{-100,-4}}, color={0,127,255}));
-  connect(toPool, poolWater.ports[3]) annotation (Line(points={{-100,-28},{
-          -7.33333,-28},{-7.33333,6}}, color={0,127,255}));
+
   annotation (Line(
         points={{47,-32},{47,-14},{-25,-14},{-25,-6}}, color={0,127,255}),
              Line(points={{18.4,-40},
