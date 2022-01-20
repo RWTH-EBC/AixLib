@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAir"
+model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAirWithPool"
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone_withPools
@@ -11,11 +11,10 @@ model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAir"
     redeclare package Medium = AixLib.Media.Air,
     internalGainsMode=3,
     recOrSep=true,
-    use_idealHeaterPool=false,
+    use_idealHeaterPool=true,
     nPorts=2,
     T_start=293.15,
-    zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())
+    zoneParam=AixLib.DataBase.ThermalZones.SwimmingBath.SwimmingHall())
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -147,11 +146,14 @@ model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAir"
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="OpeningHours",
-    columns=2:(numZones + 1),
+    columns=2:2,
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://Output_Schwimmbad_Modell/Hallenbad/OpeningHours_Hallenbad.txt"))                                                        "Boundary condition: Opening Hours of swiming pools"
+        "modelica://AixLib/Resources/LowOrder_ExampleData/Profile_openingHours_pools.txt"))
+                                                                                                                                            "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-96,-24},{-80,-8}})));
 equation
+  connect(thermalZone_withPools.openingHours, tableOpeningHours.y[1])  annotation (Line(points={{5.2,
+          -8.4},{5.2,-16},{-79.2,-16}},color={0,0,127}));
   connect(weaDat.weaBus, thermalZone_withPools.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,6},{-10,6}},
       color={255,204,51},

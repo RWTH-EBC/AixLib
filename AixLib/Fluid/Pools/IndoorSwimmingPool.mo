@@ -146,12 +146,13 @@ model IndoorSwimmingPool
             {-50,-34}})));
 
   BaseClasses.PumpAndPressureDrop pumpAndPressureDrop(
-    redeclare package Medium = WaterMedium,
-    allowFlowReversal=false,
+    redeclare package WaterMedium = WaterMedium,
     pumpHead=pumpHead,
     m_flow_nominal=m_flow,
     p_start=101300,
-    T_water=poolParam.T_pool) annotation (Placement(transformation(
+    T_pool=poolParam.T_pool,
+    dpHeatExchangerPool=poolParam.dpHeatExchangerPool)
+                              annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=180,
         origin={8,-54})));
@@ -330,7 +331,7 @@ equation
   connect(pumpAndPressureDrop.port_b, IdealHeatExchangerPool.port_a) annotation (Line(points={{16,-54},
             {48,-54},{48,-22}},                                                                                                color={0,127,255}));
   connect(IdealHeatExchangerPool.port_b, poolWater.ports[2]) annotation (Line(
-        points={{48,-8},{44,-8},{44,0},{-10,0},{-10,6}},        color={0,127,255}));
+        points={{48,-8},{48,0},{-10,0},{-10,6}},                color={0,127,255}));
   connect(IdealHeatExchangerPool.Q_flow, QPool) annotation (Line(points={{56,-7.3},
             {56,-4},{84,-4},{84,-18},{110,-18}},                                                        color={0,0,127}));
   connect(IdealHeatExchangerPool.TSet, SetTemperature.y) annotation (Line(
@@ -349,7 +350,7 @@ equation
   connect(HeatExchanger.port_a2, Storage.ports[2])  annotation (Line(points={{-16.4,
           -60},{-18,-60},{-18,-54},{-19,-54}},           color={0,127,255}));
   connect(Storage.ports[3], pumpAndPressureDrop.port_a) annotation (Line(points={{-17,-54},
-          {0,-54}},                                                                                          color={0,127,255}));
+          {0.16,-54}},                                                                                       color={0,127,255}));
   connect(PoolWater.y, pumpAndPressureDrop.setMFlow) annotation (Line(points={{9.2,-68},
           {0,-68},{0,-59.76}},           color={0,0,127}));
   connect(poolWater.ports[1], Storage.ports[4]) annotation (Line(points={{

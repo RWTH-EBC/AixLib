@@ -8,7 +8,8 @@ package AixLib
     SDF(version="0.4.1"),
     Modelica_Synchronous(version="0.93.0"),
     Modelica_DeviceDrivers(version="1.8.2"),
-    EESchwimmModelica(version="3")),
+    EESchwimmModelica(version="3"),
+    ModelicaServices(version="3.2.3")),
   version="1.0.6",
   conversion(from(
     version="0.3.2",

@@ -25,10 +25,10 @@ record ChildrensPool "Pool which is mainly used by children"
     wavePool_period=1800,
     wavePool_startTime=0,
     wavePool_width=0,
-    AInnerPoolWall=0.0,
+    AInnerPoolWall=0.001,
     APoolWallWithEarthContact=156.5,
     APoolFloorWithEarthContact=156.5,
-    AInnerPoolFloor=0.0,
+    AInnerPoolFloor=0.001,
     hConWaterHorizontal=50.0,
     hConWaterVertical=5200.0,
     PoolWallParam=

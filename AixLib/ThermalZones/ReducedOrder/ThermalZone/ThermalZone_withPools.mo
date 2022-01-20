@@ -464,15 +464,15 @@ public
       package Medium = MediumWater) if  use_swimmingPools and ATot > 0 and
     use_idealHeaterPool == false  "Outlet of heat exchanger for pool heating"
                                                       annotation (Placement(transformation(
-          extent={{-60,-112},{-40,-92}}), iconTransformation(extent={{90,24},{110,
-            44}})));
+          extent={{-60,-112},{-40,-92}}), iconTransformation(extent={{-66,-82},
+            {-50,-66}})));
   Modelica.Fluid.Interfaces.FluidPort_a toPool[numPools](redeclare final
       package Medium = MediumWater) if
                                      use_swimmingPools and ATot > 0 and
     use_idealHeaterPool == false "Inlet for heat exchanger for pool heating"
                                                      annotation (Placement(transformation(
-          extent={{-84,-112},{-64,-92}}), iconTransformation(extent={{90,-12},{110,
-            8}})));
+          extent={{-84,-82},{-68,-66}}),  iconTransformation(extent={{-84,-82},
+            {-68,-66}})));
 equation
     if use_swimmingPools and (ATot > 0) then
       for i in 1:numPools loop
