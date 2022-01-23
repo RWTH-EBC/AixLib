@@ -115,7 +115,7 @@ package Tester_NEW "Tester models for the modules"
       simpleTwoPosition=true,
       use_advancedControl=false,
       Tref=343.15,
-      bandwidth=2.5,
+      bandwidth=4,
       severalHeatcurcuits=false)
            annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
@@ -215,8 +215,9 @@ package Tester_NEW "Tester models for the modules"
       simpleTwoPosition=true,
       use_advancedControl=true,
       severalHeatcurcuits=false,
-      declination=1)
-      annotation (Placement(transformation(extent={{-28,14},{-8,34}})));
+      declination=2.3,
+      TMax=378.15)
+      annotation (Placement(transformation(extent={{-28,12},{-8,32}})));
     Modelica.Blocks.Sources.Ramp ramp(
       height=-20,
       duration=20000,
@@ -240,11 +241,11 @@ package Tester_NEW "Tester models for the modules"
     connect(vol.ports[1],pipe. port_a) annotation (Line(points={{60,22},{60,-16},{
             60,-16}},           color={0,127,255}));
     connect(vol.ports[2], modularBoiler_Controller.port_b) annotation (Line(
-          points={{64,22},{26,22},{26,24},{-8,24}},  color={0,127,255}));
+          points={{64,22},{-8,22}},                  color={0,127,255}));
     connect(pipe.port_b, modularBoiler_Controller.port_a) annotation (Line(points={{38,-16},
-            {30,-16},{30,6},{-42,6},{-42,24},{-28,24}},          color={0,127,255}));
+            {30,-16},{30,6},{-42,6},{-42,22},{-28,22}},          color={0,127,255}));
     connect(bou.ports[1], modularBoiler_Controller.port_a) annotation (Line(
-          points={{16,-22},{18,-22},{18,0},{-28,0},{-28,24}}, color={0,127,255}));
+          points={{16,-22},{18,-22},{18,0},{-28,0},{-28,22}}, color={0,127,255}));
     connect(PLR.y, boilerControlBus.PLR) annotation (Line(points={{-97,34},{-86,
             34},{-86,36.05},{-71.95,36.05}}, color={0,0,127}), Text(
         string="%second",
@@ -259,7 +260,7 @@ package Tester_NEW "Tester models for the modules"
         horizontalAlignment=TextAlignment.Left));
     connect(boilerControlBus, modularBoiler_Controller.boilerControlBus)
       annotation (Line(
-        points={{-72,36},{-48,36},{-48,33.8},{-24.4,33.8}},
+        points={{-72,36},{-48,36},{-48,31.8},{-24.4,31.8}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
@@ -302,19 +303,20 @@ package Tester_NEW "Tester models for the modules"
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
       annotation (Placement(transformation(extent={{66,-8},{86,12}})));
 
-    flowTemperatureController.renturnAdmixture.BoilerControlBus_admixture
-      boilerControlBus_admixture
-      annotation (Placement(transformation(extent={{-82,40},{-62,60}})));
     ModularBoiler                             modularBoiler_Controller(
       TColdNom=333.15,
-      QNom=100000,
+      QNom=200000,
       n=1,
       simpleTwoPosition=true,
       use_advancedControl=true,
       k=2,
       TBoiler=348.15,
-      severalHeatcurcuits=true)
+      severalHeatcurcuits=true,
+      TVar=true)
       annotation (Placement(transformation(extent={{-34,18},{-14,38}})));
+    flowTemperatureController.renturnAdmixture.BoilerControlBus_admixture
+      boilerControlBus_admixture
+      annotation (Placement(transformation(extent={{-82,40},{-62,60}})));
     parameter Integer n=2 "Number of layers in the buffer storage";
     Modelica.Blocks.Sources.RealExpression PLR(y=1)
       annotation (Placement(transformation(extent={{-124,38},{-104,58}})));
@@ -404,6 +406,11 @@ package Tester_NEW "Tester models for the modules"
     flowTemperatureController.renturnAdmixture.BoilerControlBus_admixture
       boilerControlBus_admixture1
       annotation (Placement(transformation(extent={{40,-88},{60,-68}})));
+    Modelica.Blocks.Sources.Ramp ramp(
+      height=15,
+      duration=60000,
+      offset=273.15 + 75)
+      annotation (Placement(transformation(extent={{-58,62},{-44,76}})));
   equation
     connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
             32}},                       color={191,0,0}));
@@ -529,6 +536,9 @@ package Tester_NEW "Tester models for the modules"
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(ramp.y, modularBoiler_Controller.TBoilerVar) annotation (Line(
+          points={{-43.3,69},{-36,69},{-36,44},{-20.8,44},{-20.8,38}}, color={0,
+            0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end BoilerTesterFlowtemperatureControl_admixture;
@@ -544,15 +554,22 @@ package Tester_NEW "Tester models for the modules"
               parameter Modelica.SIunits.HeatFlowRate QNom=modularBoiler_Controller.QNom "Thermal dimension power";
               parameter Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom);
                parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal";
-               parameter Modelica.SIunits.Time t=60*60 "Time until the buffer storage is fully loaded" annotation(Dialog(group="Control"));
+               parameter Modelica.SIunits.Time t=60*60 "Time until the buffer storage is fully loaded" annotation(Dialog(enable= advancedVolume, group="Control"));
        parameter Modelica.SIunits.Density rhoW=997 "Density of water";
        parameter Modelica.SIunits.HeatCapacity cW=4180 "Heat Capacity of water";
        parameter Modelica.SIunits.TemperatureDifference dT=20;
        parameter Real l=1.73 "Relation between height and diameter of the buffer storage" annotation(Dialog(group="Control"));
         parameter Modelica.SIunits.Height hTank=(QNom*t*1.73^2/( Modelica.Constants.pi/4*rhoW*cW*dT))^(1/3) annotation(Evaluate=true, Dialog(group="Control"));
        parameter Modelica.SIunits.Diameter dTank=hTank/1.73 annotation(Evaluate=true, Dialog(group="Control"));
-       //parameter Modelica.SIunits.Height hUpperPortDemand=hTank - 0.1;
-      // parameter Modelica.SIunits.Height hUpperPortSupply=hTank - 0.1;
+       parameter Modelica.SIunits.Height hUpperPortDemand=hTank - 0.1;
+       parameter Modelica.SIunits.Height hUpperPortSupply=hTank - 0.1;
+
+
+       //Consumer pump parametrizing
+       parameter Modelica.SIunits.VolumeFlowRate V_flow_nominalC1=m_flow_nominalC1/Medium.d_const;
+       parameter Modelica.SIunits.MassFlowRate m_flow_nominalC1=abs(sine.offset+sine.amplitude)/(Medium.cp_const*dTWaterNom);
+        parameter Modelica.SIunits.VolumeFlowRate V_flow_nominalC2=m_flow_nominalC2/Medium.d_const;
+         parameter Modelica.SIunits.MassFlowRate m_flow_nominalC2=abs(sine1.offset+sine1.amplitude)/(Medium.cp_const*dTWaterNom);
 
     AixLib.Fluid.MixingVolumes.MixingVolume vol(
       T_start=293.15,
@@ -583,27 +600,21 @@ package Tester_NEW "Tester models for the modules"
       annotation (Placement(transformation(extent={{-78,32},{-58,52}})));
     ModularBoiler                                    modularBoiler_Controller(
       TColdNom=333.15,
-      QNom=100000,
+      QNom=200000,
       n=modularBufferStorage.n,
       simpleTwoPosition=false,
       use_advancedControl=false,
-      Tref=328.15,
-      bandwidth=2,
+      Tref=348.15,
+      bandwidth=5,
       severalHeatcurcuits=false)
-           annotation (Placement(transformation(extent={{-54,18},{-34,38}})));
+           annotation (Placement(transformation(extent={{-52,18},{-32,38}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
-    AixLib.Fluid.Sources.Boundary_pT
-                        boundary_ph5(redeclare package Medium = Medium, nPorts=1)
-                                                       annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={92,36})));
-    Modelica.Blocks.Sources.RealExpression realExpression(y=1)
-      annotation (Placement(transformation(extent={{82,6},{68,16}})));
     AixLib.Fluid.Movers.SpeedControlled_y fan1(
       redeclare package Medium = AixLib.Media.Water,
       allowFlowReversal=false,
       m_flow_small=0.001,
-      per(pressure(V_flow={0,V_flow_nominal,V_flow_nominal/0.7}, dp={dp_nominal/
-              0.7,dp_nominal,0})),
+      per(pressure(V_flow={0,V_flow_nominalC1,2*V_flow_nominalC1}, dp={dp_nominal/0.8,dp_nominal,0})),
       addPowerToMedium=false)
       annotation (Placement(transformation(extent={{72,-24},{52,-4}})));
 
@@ -615,7 +626,7 @@ package Tester_NEW "Tester models for the modules"
       m_flow_nominal=1,
       V=3,
       nPorts=2)
-      annotation (Placement(transformation(extent={{36,-66},{50,-50}})));
+      annotation (Placement(transformation(extent={{36,-66},{52,-50}})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater1
       "Prescribed heat flow" annotation (
         Placement(transformation(
@@ -623,32 +634,43 @@ package Tester_NEW "Tester models for the modules"
           rotation=-90,
           origin={23,-47})));
     Modelica.Blocks.Sources.Sine sine1(
-      amplitude=0,
+      amplitude=-10000,
       freqHz=1/3600,
-      offset=0)
-      annotation (Placement(transformation(extent={{4,-44},{18,-30}})));
+      offset=-20000)
+      annotation (Placement(transformation(extent={{6,-42},{20,-28}})));
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
       annotation (Placement(transformation(extent={{42,-88},{56,-74}})));
     AixLib.Fluid.Movers.SpeedControlled_y fan2(
       redeclare package Medium = AixLib.Media.Water,
       allowFlowReversal=false,
       m_flow_small=0.001,
-      per(pressure(V_flow={0,V_flow_nominal,V_flow_nominal/0.7}, dp={dp_nominal/0.7,
-              dp_nominal,0})),
+      per(pressure(V_flow={0,V_flow_nominalC2,2*V_flow_nominalC2}, dp={dp_nominal/0.8,dp_nominal,0})),
       addPowerToMedium=false)
-      annotation (Placement(transformation(extent={{14,-88},{-2,-72}})));
-    Modelica.Blocks.Sources.RealExpression realExpression1(y=1)
-      annotation (Placement(transformation(extent={{20,-64},{8,-56}})));
+      annotation (Placement(transformation(extent={{14,-90},{-2,-74}})));
     twoPositionController.ModularBufferStorage modularBufferStorage(
       QNom=QNom,
-      t(displayUnit="min"),
-      x=5) annotation (Placement(transformation(extent={{-10,-12},{10,8}})));
+      dTWaterNom=modularBoiler_Controller.dTWaterNom,
+      t(displayUnit="min") = 3600,
+      hTank=2.4,
+      dTank=1.2,
+      advancedVolume=false,
+      n=10,
+      x=9,
+      m2_flow_nominal=abs(sine.offset + sine.amplitude + sine1.offset + sine1.amplitude)/(Medium.cp_const
+          *dTWaterNom))
+           annotation (Placement(transformation(extent={{-10,-12},{10,8}})));
+    AixLib.Fluid.Sources.Boundary_pT
+                        boundary_ph1(redeclare package Medium = Medium, nPorts=1)
+                                                       annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={106,32})));
+    AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
+          AixLib.Media.Water, m_flow_nominal=1)
+      annotation (Placement(transformation(extent={{12,4},{32,24}})));
+    Modelica.Blocks.Sources.RealExpression realExpression(y=0.5)
+      annotation (Placement(transformation(extent={{84,2},{70,16}})));
+    Modelica.Blocks.Sources.RealExpression realExpression1(y=0.5)
+      annotation (Placement(transformation(extent={{-30,-72},{-16,-58}})));
   equation
 
-    ///Determination of storage volume
-
-  //bufferStorage.data.dTank
-  //bufferStorage.data.hTank
 
     connect(heater.port,vol. heatPort) annotation (Line(points={{-6,44},{-6,38},{30,
             38}},                       color={191,0,0}));
@@ -659,7 +681,7 @@ package Tester_NEW "Tester models for the modules"
       annotation (Line(points={{30,38},{30,10},{36,10}},   color={191,0,0}));
     connect(boilerControlBus, modularBoiler_Controller.boilerControlBus)
       annotation (Line(
-        points={{-68,42},{-60,42},{-60,38},{-56,38},{-56,37.8},{-50.4,37.8}},
+        points={{-68,42},{-60,42},{-60,38},{-56,38},{-56,37.8},{-48.4,37.8}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
@@ -672,23 +694,16 @@ package Tester_NEW "Tester models for the modules"
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(boundary_ph5.ports[1], vol.ports[1]) annotation (Line(points={{82,36},
-            {62,36},{62,28},{37.3333,28}},
-                                      color={0,127,255}));
-    connect(vol.ports[2], fan1.port_a) annotation (Line(points={{40,28},{56,28},
-            {56,22},{84,22},{84,-14},{72,-14}},       color={0,127,255}));
-    connect(realExpression.y, fan1.y)
-      annotation (Line(points={{67.3,11},{62,11},{62,-2}},    color={0,0,127}));
+    connect(vol.ports[1], fan1.port_a) annotation (Line(points={{37.3333,28},{
+            56,28},{56,22},{84,22},{84,-14},{72,-14}},color={0,127,255}));
     connect(heater1.port,vol1. heatPort)
       annotation (Line(points={{23,-54},{23,-58},{36,-58}}, color={191,0,0}));
     connect(sine1.y,heater1. Q_flow)
-      annotation (Line(points={{18.7,-37},{23,-37},{23,-40}}, color={0,0,127}));
+      annotation (Line(points={{20.7,-35},{23,-35},{23,-40}}, color={0,0,127}));
     connect(vol1.heatPort,temperatureSensor1. port)
       annotation (Line(points={{36,-58},{36,-81},{42,-81}}, color={191,0,0}));
-    connect(vol1.ports[1],fan2. port_a) annotation (Line(points={{41.6,-66},{42,
-            -66},{42,-76},{20,-76},{20,-80},{14,-80}}, color={0,127,255}));
-    connect(realExpression1.y,fan2. y) annotation (Line(points={{7.4,-60},{6,-60},
-            {6,-70.4}},       color={0,0,127}));
+    connect(vol1.ports[1],fan2. port_a) annotation (Line(points={{42.4,-66},{42,-66},{42,-76},{20,-76},
+            {20,-82},{14,-82}},                        color={0,127,255}));
     connect(PLR.y, boilerControlBus.PLR) annotation (Line(points={{-83.4,42},{-76,
             42},{-76,42.05},{-67.95,42.05}}, color={0,0,127}), Text(
         string="%second",
@@ -696,23 +711,28 @@ package Tester_NEW "Tester models for the modules"
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
     connect(modularBoiler_Controller.port_b, modularBufferStorage.fluidportTop1)
-      annotation (Line(points={{-34,28},{6,28},{6,8}}, color={0,127,255}));
-    connect(modularBufferStorage.fluidportTop2, vol.ports[3]) annotation (Line(
-          points={{-6,8},{-6,24},{42.6667,24},{42.6667,28}}, color={0,127,255}));
+      annotation (Line(points={{-32,28},{6,28},{6,8}}, color={0,127,255}));
     connect(modularBufferStorage.fluidportBottom1, modularBoiler_Controller.port_a)
-      annotation (Line(points={{6,-12},{6,-20},{-62,-20},{-62,28},{-54,28}},
-          color={0,127,255}));
-    connect(fan1.port_b, modularBufferStorage.fluidportBottom2) annotation (
-        Line(points={{52,-14},{40,-14},{40,-16},{-6,-16},{-6,-12}}, color={0,
-            127,255}));
-    connect(modularBufferStorage.port_b, vol1.ports[2]) annotation (Line(points
-          ={{10,-2},{34,-2},{34,-46},{58,-46},{58,-66},{44.4,-66}}, color={0,
-            127,255}));
-    connect(fan2.port_b, modularBufferStorage.fluidportBottom2) annotation (
-        Line(points={{-2,-80},{-6,-80},{-6,-12}}, color={0,127,255}));
-    connect(modularBufferStorage.TLayer, modularBoiler_Controller.TLayers)
-      annotation (Line(points={{-10,1.8},{-18,1.8},{-18,2},{-30,2},{-30,44},{
-            -41.9,44},{-41.9,37.1}}, color={0,0,127}));
+      annotation (Line(points={{6,-12},{6,-20},{-62,-20},{-62,28},{-52,28}}, color={0,127,255}));
+    connect(fan1.port_b, modularBufferStorage.fluidportBottom2) annotation (Line(points={{52,
+            -14},{40,-14},{40,-16},{-6,-16},{-6,-12}}, color={0,127,255}));
+    connect(fan2.port_b, modularBufferStorage.fluidportBottom2)
+      annotation (Line(points={{-2,-82},{-6,-82},{-6,-12}}, color={0,127,255}));
+    connect(modularBufferStorage.TLayer, modularBoiler_Controller.TLayers) annotation (Line(
+          points={{-11,3},{-24,3},{-24,44},{-39.9,44},{-39.9,37.1}}, color={0,0,127}));
+    connect(boundary_ph1.ports[1], vol.ports[2])
+      annotation (Line(points={{96,32},{70,32},{70,28},{40,28}}, color={0,127,255}));
+    connect(senTem.port_a, modularBufferStorage.fluidportTop2)
+      annotation (Line(points={{12,14},{4,14},{4,8},{-6,8}}, color={0,127,255}));
+    connect(senTem.port_b, vol.ports[3]) annotation (Line(points={{32,14},{38,
+            14},{38,28},{42.6667,28}},
+                  color={0,127,255}));
+    connect(realExpression.y, fan1.y)
+      annotation (Line(points={{69.3,9},{62,9},{62,-2}}, color={0,0,127}));
+    connect(realExpression1.y, fan2.y)
+      annotation (Line(points={{-15.3,-65},{6,-65},{6,-72.4}}, color={0,0,127}));
+    connect(modularBufferStorage.fluidportTop2, vol1.ports[2]) annotation (Line(points={{-6,8},{-6,
+            12},{16,12},{16,-10},{46,-10},{46,-50},{62,-50},{62,-66},{45.6,-66}}, color={0,127,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end BoilerTesterTwoPositionControllerStorageBuffer;
@@ -913,8 +933,8 @@ package Tester_NEW "Tester models for the modules"
     connect(bufferStorage.port_b, vol1.ports[2]) annotation (Line(points={{8.25,2},{36,
             2},{36,-38},{60,-38},{60,-66},{44.4,-66}}, color={0,127,255}));
     connect(bufferStorage.TLayer, modularBoiler_Controller.TLayers) annotation
-      (Line(points={{-14,8.72},{-18,8.72},{-18,14},{-28,14},{-28,46},{-41.9,46},
-            {-41.9,37.1}}, color={0,0,127}));
+      (Line(points={{-15.25,8.72},{-18,8.72},{-18,14},{-28,14},{-28,46},{-41.9,
+            46},{-41.9,37.1}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end BoilerTesterTwoPositionControllerStorageBufferOLD;

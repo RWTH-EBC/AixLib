@@ -36,7 +36,16 @@ partial model partialTwoPositionController
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=variablePLR)
     annotation (Placement(transformation(extent={{-62,74},{-48,92}})));
   parameter Real bandwidth     "Bandwidth around reference signal";
+
+ Boolean isOnMea;
 equation
+if PLRset >0 then
+    isOnMea=true;
+  else
+     isOnMea=false;
+  end if;
+
+
   connect(realExpression.y, onOffController.reference) annotation (Line(points={{23,42},
           {26,42},{26,12},{32,12}},         color={0,0,127}));
   connect(switch1.y, PLRset)

@@ -5,90 +5,72 @@ model Admix_Control "Test for admix circuit"
   package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
 
-  Admix_modularBoiler                   Admix(
-    parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(),
-    valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
-    redeclare
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
-    redeclare package Medium = Medium,
-    m_flow_nominal=0.1,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    length=1,
-    Kv=10,
-    T_amb=293.15) annotation (Placement(transformation(
-        extent={{-30,-30},{30,30}},
-        rotation=90,
-        origin={10,10})));
-
   AixLib.Fluid.Sources.Boundary_pT   boundary(
-    nPorts=1,
     T=343.15,
-    redeclare package Medium = Medium)
-              annotation (Placement(transformation(
+    redeclare package Medium = Medium,
+    nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-8,-50})));
   AixLib.Fluid.Sources.Boundary_pT   boundary1(
-    nPorts=1,
     T=323.15,
-    redeclare package Medium = Medium)
-              annotation (Placement(transformation(
+    redeclare package Medium = Medium,
+    nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={28,-50})));
 
-  AixLib.Fluid.FixedResistances.PressureDrop hydRes(
-    m_flow_nominal=8*996/3600,
-    dp_nominal=8000,
-    m_flow(start=hydRes.m_flow_nominal),
-    dp(start=hydRes.dp_nominal),
-    redeclare package Medium = Medium)
-    "Hydraulic resistance in distribution cirquit (shortcut pipe)" annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={10,60})));
   Modelica.Blocks.Sources.Ramp valveOpening(              duration=500,
       startTime=180)
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
-  Modelica.Blocks.Sources.Constant RPM(k=2000)
-    annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
-  BoilerControlBus_admixture boilerControlBus_admixture
-    annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
+  Admixture admixture[2](
+    redeclare package Medium = Medium,
+    k=2,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    Kv=10,
+    each valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
+    m_flow_nominalCon=0.5,
+    dp_nominalCon=5000,
+    QNomCon=10000) annotation (Placement(transformation(
+        extent={{-23,-23},{23,23}},
+        rotation=90,
+        origin={13,5})));
+
+
+
+
+  AdmixtureBus admixtureBus[2] annotation (Placement(transformation(extent={{-60,-4},{-40,16}})));
+  Modelica.Blocks.Sources.Ramp valveOpening1(duration=220, startTime=180)
+    annotation (Placement(transformation(extent={{-100,38},{-80,58}})));
 equation
 
-  connect(Admix.port_b1, hydRes.port_a)
-    annotation (Line(points={{-8,40},{-8,60},{0,60}},     color={0,127,255}));
-  connect(Admix.port_a2, hydRes.port_b) annotation (Line(points={{28,40},{28,60},
-          {20,60}},                color={0,127,255}));
-  connect(Admix.port_a1, boundary.ports[1])
-    annotation (Line(points={{-8,-20},{-8,-40}},         color={0,127,255}));
-  connect(Admix.port_b2, boundary1.ports[1])
-    annotation (Line(points={{28,-20},{28,-40}},           color={0,127,255}));
-  connect(boilerControlBus_admixture, Admix.boilerControlBus_admixture)
-    annotation (Line(
-      points={{-42,10},{-32,10},{-32,10},{-20,10}},
+  connect(admixtureBus, admixture.admixtureBus) annotation (Line(
+      points={{-50,6},{-30,6},{-30,5},{-8.85,5}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(valveOpening.y, boilerControlBus_admixture.valveSet) annotation (Line(
-        points={{-79,10},{-60,10},{-60,10.05},{-41.95,10.05}}, color={0,0,127}),
+  connect(boundary1.ports, admixture.port_b2) annotation (Line(points={{28,-40},{28,-30},{28,-18},
+          {26.8,-18}}, color={0,127,255}));
+  connect(boundary.ports, admixture.port_a1) annotation (Line(points={{-8,-40},{-4,-40},{-4,-24},
+          {-0.8,-24},{-0.8,-18}}, color={0,127,255}));
+  connect(valveOpening.y, admixtureBus[1].valveSet) annotation (Line(points={{
+          -79,10},{-66,10},{-66,6.025},{-49.95,6.025}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(valveOpening1.y, admixtureBus[2].valveSet) annotation (Line(points={{
+          -79,48},{-66,48},{-66,46},{-49.95,46},{-49.95,6.075}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(RPM.y, boilerControlBus_admixture.pumpBus.rpmSet) annotation (Line(
-        points={{-79,50},{-41.95,50},{-41.95,10.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+  connect(admixture.port_a2, admixture.port_b1) annotation (Line(points={{26.8,
+          28},{26.8,58},{-0.8,58},{-0.8,28}}, color={0,127,255}));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

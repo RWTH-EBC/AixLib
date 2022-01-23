@@ -9,7 +9,7 @@ model Regulation_modularBoiler
     annotation (Placement(transformation(extent={{12,-12},{32,8}})));
   Modelica.Blocks.Sources.RealExpression realExpression1 if not
     use_advancedControl or (use_advancedControl and severalHeatcurcuits)
-    annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
+    annotation (Placement(transformation(extent={{-66,56},{-46,76}})));
   Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=PLRmin) if not
     use_advancedControl or (use_advancedControl and severalHeatcurcuits)
     annotation (Placement(transformation(extent={{-60,36},{-46,50}})));
@@ -41,8 +41,8 @@ equation
           43},{-61.4,43}},   color={0,0,127}));
   connect(PLRin,switch2. u3) annotation (Line(points={{-100,30},{-70,30},{-70,29.6},
           {-29.6,29.6}},  color={0,0,127}));
-  connect(realExpression1.y,switch2. u1) annotation (Line(points={{-49,16},{-32,
-          16},{-32,42.4},{-29.6,42.4}},    color={0,0,127}));
+  connect(realExpression1.y,switch2. u1) annotation (Line(points={{-45,66},{-34,
+          66},{-34,42.4},{-29.6,42.4}},    color={0,0,127}));
   connect(switch2.y, PLRset)
     annotation (Line(points={{-11.2,36},{100,36}}, color={0,0,127}));
   connect(PLRMea, lessThreshold1.u) annotation (Line(points={{-100,-66},{-72,-66},

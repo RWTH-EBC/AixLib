@@ -119,8 +119,6 @@ model Storage_modularBoiler
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package Medium
       =                                                                         Medium)
     annotation (Placement(transformation(extent={{96,-12},{116,8}})));
-  Modelica.Blocks.Interfaces.RealInput u
-    annotation (Placement(transformation(extent={{-326,60},{-286,100}})));
 protected
   parameter Modelica.SIunits.Volume V = A * h;
   parameter Modelica.SIunits.Area A = Modelica.Constants.pi * d ^ 2 / 4;

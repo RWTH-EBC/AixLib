@@ -4,3 +4,7 @@ BoilerControlBus_admixture
 PartialFourPort_modularBoiler
 Admix_modularBoiler
 Admix_Control
+Admixture
+AdmixtureBus
+PartialTwoPortInterface_Admix
+ModularAdmixture

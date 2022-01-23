@@ -95,7 +95,8 @@ model BoilerTesterTwoPositionControllerStorageBuffer
         AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
-    TStart=303.15) annotation (Placement(transformation(extent={{26,-38},{6,-14}})));
+    TStart=303.15,
+    x=5)           annotation (Placement(transformation(extent={{26,-38},{6,-14}})));
 equation
 
   ///Determination of storage volume
@@ -152,10 +153,10 @@ equation
   connect(bufferStorage.fluidportBottom1, modularBoiler_Controller.port_a)
     annotation (Line(points={{19.375,-38.24},{19.375,-78},{-44,-78},{-44,22},{
           -32,22}}, color={0,127,255}));
-  connect(bufferStorage.fluidportTop2, vol.ports[3]) annotation (Line(points={{
-          12.875,-13.88},{12.875,22},{64.6667,22}}, color={0,127,255}));
+  connect(bufferStorage.fluidportTop2, vol.ports[3]) annotation (Line(points={{12.875,
+          -13.88},{12.875,22},{64.6667,22}},        color={0,127,255}));
   connect(bufferStorage.TLayer, modularBoiler_Controller.TLayers) annotation (
-      Line(points={{5,-19.76},{-6,-19.76},{-6,42},{-19.9,42},{-19.9,31.1}},
+      Line(points={{4.75,-19.28},{-6,-19.28},{-6,42},{-19.9,42},{-19.9,31.1}},
         color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

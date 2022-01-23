@@ -47,11 +47,13 @@ model BoilerTesterTwoPositionControllerBufferStorage2HeatCurcuits
   ModularBoiler_TwoPositionControllerBufferStorage modularBoiler_Controller(
     TColdNom=333.15,
     QNom=100000,
-    n=1) annotation (Placement(transformation(extent={{-36,38},{-16,58}})));
+    n=1,
+    Tref=338.15)
+         annotation (Placement(transformation(extent={{-36,38},{-16,58}})));
   Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
     annotation (Placement(transformation(extent={{-108,28},{-88,48}})));
   twoPositionController.Storage_modularBoiler storage_modularBoiler(
-    x=5,
+    x=8,
     n=10,
     d=1.5,
     h=3,

@@ -13,12 +13,16 @@ model twoPositionController_top
     "If true, the two-position controller uses the mean temperature of the buffer storage";
     parameter Real bandwidth     "Bandwidth around reference signal";
 
-  parameter Modelica.Blocks.Interfaces.IntegerOutput y=n
-    "Value of Integer output";
+  parameter Modelica.Blocks.Interfaces.IntegerOutput y=n "Value of Integer output";
+
+
+
 equation
 
-  connect(TLayers[1], onOffController.u) annotation (Line(points={{-100,-22},{
-          -2,-22},{-2,0},{32,0}}, color={0,0,127}));
+
+
+  connect(TLayers[n], onOffController.u) annotation (Line(points={{-100,-22},{-34,-22},
+          {-34,0},{32,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

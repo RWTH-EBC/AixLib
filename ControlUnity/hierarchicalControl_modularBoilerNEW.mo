@@ -18,7 +18,7 @@ model hierarchicalControl_modularBoilerNEW
     use_advancedControl and severalHeatcurcuits)
     annotation (Placement(transformation(extent={{-120,54},{-80,94}})));
 
-      emergencySwitch_modularBoiler emergencySwitch_modularBoiler1
+      emergencySwitch_modularBoiler emergencySwitch_modularBoiler1(TMax=TMax)
     annotation (Placement(transformation(extent={{-60,16},{-40,36}})));
  //Two position controller
  replaceable twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
@@ -51,7 +51,8 @@ model hierarchicalControl_modularBoilerNEW
   flowTemperatureController.flowTemperatureControl_heatingCurve
     flowTemperatureControl_heatingCurve(declination=declination,
     day_hour=day_hour,
-    night_hour=night_hour) if              use_advancedControl and not severalHeatcurcuits
+    night_hour=night_hour,
+    TOffset=TOffset) if                    use_advancedControl and not severalHeatcurcuits
     annotation (Placement(transformation(extent={{-28,-70},{-8,-50}})));
 
     Modelica.Blocks.Interfaces.RealInput Tamb if use_advancedControl and not
@@ -60,6 +61,7 @@ model hierarchicalControl_modularBoilerNEW
     annotation (Placement(transformation(extent={{-120,-98},{-80,-58}})));
 
         flowTemperatureController.renturnAdmixture.returnAdmixture returnAdmixture(k=k,
+    TVar=TVar,
     TBoiler=TBoiler) if                                                               use_advancedControl and severalHeatcurcuits
     annotation (Placement(transformation(extent={{46,-74},{66,-54}})));
   Modelica.Blocks.Interfaces.RealOutput valPos[k] if use_advancedControl and severalHeatcurcuits
@@ -73,8 +75,7 @@ model hierarchicalControl_modularBoilerNEW
 
   //Flow temperature control
 
-  parameter Modelica.SIunits.Temperature THotMax=378.15
-    "Maximum temperature, from which the system is switched off" annotation(Dialog(group="Security-related systems"));
+
 
 
 
@@ -108,9 +109,22 @@ model hierarchicalControl_modularBoilerNEW
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={38,-116})));
-  parameter Real declination=1 annotation(Dialog(group="Flow temperature control"));
-  parameter Real day_hour=6 annotation(Dialog(group="Flow temperature control"));
-  parameter Real night_hour=22 annotation (Dialog(group="Flow temperature control"));
+  parameter Real declination=1 "Declination of curve" annotation(Dialog(group="Flow temperature control"));
+  parameter Real day_hour=6 "Hour of day in which day mode is enabled" annotation(Dialog(group="Flow temperature control"));
+  parameter Real night_hour=22 "Hour of night in which night mode is enabled" annotation (Dialog(group="Flow temperature control"));
+  parameter Modelica.SIunits.ThermodynamicTemperature TOffset(displayUnit="K") = 0
+    "Offset to heating curve temperature" annotation(Dialog(group="Flow temperature control"));
+  parameter Modelica.SIunits.Temperature TMax=273.15 + 105
+    "Maximum temperature, at which the system is shut down" annotation(Dialog(group="Security-related systems"));
+  parameter Boolean TVar
+    "Choice between variable oder constant boiler temperature for the admixture control";
+  Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and
+    severalHeatcurcuits and TVar
+    "Variable boiler temperature for the admixture control" annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={-2,-116})));
 equation
 
 
@@ -126,7 +140,8 @@ equation
     annotation (Line(points={{-39.8,29},{10,29},{10,37.4},{24,37.4}}, color={255,
           0,255}));
   connect(emergencySwitch_modularBoiler1.y, flowTemperatureControl_heatingCurve.isOn)
-    annotation (Line(points={{-39.8,29},{-36,29},{-36,-68},{-28,-68}}, color={255,
+    annotation (Line(points={{-39.8,29},{-36,29},{-36,-63.8},{-28,-63.8}},
+                                                                       color={255,
           0,255}));
   connect(emergencySwitch_modularBoiler1.y, returnAdmixture.isOn) annotation (
       Line(points={{-39.8,29},{10,29},{10,-56.6},{46,-56.6}},
@@ -141,19 +156,23 @@ equation
           34.6},{62,34.6},{62,60},{100,60}},        color={0,0,127}));
   connect(TLayers, twoPositionController_layers.TLayers)
     annotation (Line(points={{6,100},{6,31.8},{24,31.8}}, color={0,0,127}));
-  connect(returnAdmixture.valPos, valPos) annotation (Line(points={{66,-67.2},{
-          82,-67.2},{82,-66},{100,-66}}, color={0,0,127}));
+  connect(returnAdmixture.valPos, valPos) annotation (Line(points={{66,-69.8},{
+          82,-69.8},{82,-66},{100,-66}}, color={0,0,127}));
   connect(Tb, emergencySwitch_modularBoiler1.TBoiler) annotation (Line(points={
           {-102,-16},{-82,-16},{-82,20.4},{-60,20.4}}, color={0,0,127}));
   connect(Tb, returnAdmixture.TMeaBoiler) annotation (Line(points={{-102,-16},{
-          -114,-16},{-114,-92},{30,-92},{30,-61},{46,-61}}, color={0,0,127}));
-  connect(Tb, flowTemperatureControl_heatingCurve.TMea) annotation (Line(points=
-         {{-102,-16},{-114,-16},{-114,-92},{-11.4,-92},{-11.4,-70}}, color={0,0,
+          -114,-16},{-114,-92},{30,-92},{30,-64},{45.8,-64}},
+                                                            color={0,0,127}));
+  connect(Tb, flowTemperatureControl_heatingCurve.TMea) annotation (Line(points={{-102,
+          -16},{-114,-16},{-114,-92},{-20,-92},{-20,-82},{-19.2,-82},{-19.2,-70}},
+                                                                     color={0,0,
           127}));
   connect(TMeaCon, returnAdmixture.TMea) annotation (Line(points={{90,-116},{90,
           -86},{56,-86},{56,-74}}, color={0,0,127}));
   connect(TCon, returnAdmixture.TCon) annotation (Line(points={{38,-116},{38,
-          -67.2},{46,-67.2}}, color={0,0,127}));
+          -69.8},{46,-69.8}}, color={0,0,127}));
+  connect(TBoilerVar, returnAdmixture.TBoilerVar) annotation (Line(points={{-2,
+          -116},{-2,-59.8},{46,-59.8}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Model that contains the three different variants of control for heat generators:</p>
 <ul>

@@ -128,8 +128,8 @@ equation
   connect(admix_modularBoiler.port_b1, vol.ports[1]) annotation (Line(points={{32,-50},
           {32,-74},{59.3333,-74},{59.3333,22}},
                                               color={0,127,255}));
-  connect(vol.ports[2], admix_modularBoiler.port_a2) annotation (Line(points={{
-          62,22},{64,22},{64,-86},{8,-86},{8,-50}}, color={0,127,255}));
+  connect(vol.ports[2], admix_modularBoiler.port_a2) annotation (Line(points={{62,22},
+          {64,22},{64,-84},{8,-84},{8,-50}},        color={0,127,255}));
   connect(boundary_ph5.ports[1], vol.ports[3])
     annotation (Line(points={{104,22},{64.6667,22}}, color={0,127,255}));
   connect(temperatureSensor.T, modularBoiler_Controller.TMeaCon) annotation (
