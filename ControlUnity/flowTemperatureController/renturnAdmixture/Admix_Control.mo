@@ -29,9 +29,10 @@ model Admix_Control "Test for admix circuit"
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     Kv=10,
     each valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
-    m_flow_nominalCon=0.5,
-    dp_nominalCon=5000,
-    QNomCon=10000) annotation (Placement(transformation(
+    m_flow_nominalCon=m_flow_nominalCon,
+    dp_nominalCon=dp_nominalCon,
+    QNomCon=QNomCon)
+                   annotation (Placement(transformation(
         extent={{-23,-23},{23,23}},
         rotation=90,
         origin={13,5})));
@@ -42,6 +43,13 @@ model Admix_Control "Test for admix circuit"
   AdmixtureBus admixtureBus[2] annotation (Placement(transformation(extent={{-60,-4},{-40,16}})));
   Modelica.Blocks.Sources.Ramp valveOpening1(duration=220, startTime=180)
     annotation (Placement(transformation(extent={{-100,38},{-80,58}})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominalCon[:]={0.5,0.7}
+    "Nominal mass flow rate for the individual consumers";
+  parameter Modelica.SIunits.PressureDifference dp_nominalCon[:](displayUnit=
+        "Pa")={5000,7000}
+    "Pressure drop at nominal conditions for the individual consumers";
+  parameter Modelica.SIunits.HeatFlowRate QNomCon[:]={7000,10000}
+    "Nominal heat power that the consumers need";
 equation
 
   connect(admixtureBus, admixture.admixtureBus) annotation (Line(
@@ -56,21 +64,20 @@ equation
           {26.8,-18}}, color={0,127,255}));
   connect(boundary.ports, admixture.port_a1) annotation (Line(points={{-8,-40},{-4,-40},{-4,-24},
           {-0.8,-24},{-0.8,-18}}, color={0,127,255}));
-  connect(valveOpening.y, admixtureBus[1].valveSet) annotation (Line(points={{
-          -79,10},{-66,10},{-66,6.025},{-49.95,6.025}}, color={0,0,127}), Text(
+  connect(valveOpening.y, admixtureBus[1].valveSet) annotation (Line(points={{-79,10},{-66,10},{-66,
+          6.025},{-49.95,6.025}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(valveOpening1.y, admixtureBus[2].valveSet) annotation (Line(points={{
-          -79,48},{-66,48},{-66,46},{-49.95,46},{-49.95,6.075}}, color={0,0,127}),
-      Text(
+  connect(valveOpening1.y, admixtureBus[2].valveSet) annotation (Line(points={{-79,48},{-66,48},{
+          -66,46},{-49.95,46},{-49.95,6.075}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(admixture.port_a2, admixture.port_b1) annotation (Line(points={{26.8,
-          28},{26.8,58},{-0.8,58},{-0.8,28}}, color={0,127,255}));
+  connect(admixture.port_a2, admixture.port_b1) annotation (Line(points={{26.8,28},{26.8,58},{-0.8,
+          58},{-0.8,28}}, color={0,127,255}));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

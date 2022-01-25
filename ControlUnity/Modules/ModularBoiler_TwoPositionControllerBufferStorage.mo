@@ -120,7 +120,7 @@ model ModularBoiler_TwoPositionControllerBufferStorage
 
    ///Control unity
    //
-  ControlUnity.hierarchicalControl_modularBoilerNEW
+  ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=false,
     redeclare
@@ -130,8 +130,7 @@ model ModularBoiler_TwoPositionControllerBufferStorage
     bandwidth=5,
     severalHeatcurcuits=false,
     k=1,
-    Tref=Tref)
-         annotation (Placement(transformation(extent={{0,40},{20,60}})));
+    Tref=Tref) annotation (Placement(transformation(extent={{0,40},{20,60}})));
   parameter Modelica.SIunits.Temperature Tref
     "Reference Temperature for the on off controller";
 protected

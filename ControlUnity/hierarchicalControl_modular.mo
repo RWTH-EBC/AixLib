@@ -1,5 +1,5 @@
 within ControlUnity;
-model hierarchicalControl_modularBoilerNEW
+model hierarchicalControl_modular
 
   ///Hierarchy Control
   parameter Real PLRmin=0.15;
@@ -9,14 +9,15 @@ model hierarchicalControl_modularBoilerNEW
       choice=false "Two position control",
       radioButtons=true));
 
+
   Modelica.Blocks.Interfaces.RealInput Tb "Boiler temperature"
-    annotation (Placement(transformation(extent={{-122,-36},{-82,4}})));
+    annotation (Placement(transformation(extent={{-120,-52},{-80,-12}})));
   Modelica.Blocks.Interfaces.RealOutput PLRset
-    annotation (Placement(transformation(extent={{90,50},{110,70}})));
+    annotation (Placement(transformation(extent={{92,50},{112,70}})));
 
   Modelica.Blocks.Interfaces.RealInput PLRin if not use_advancedControl or (
     use_advancedControl and severalHeatcurcuits)
-    annotation (Placement(transformation(extent={{-120,54},{-80,94}})));
+    annotation (Placement(transformation(extent={{-120,38},{-80,78}})));
 
       emergencySwitch_modularBoiler emergencySwitch_modularBoiler1(TMax=TMax)
     annotation (Placement(transformation(extent={{-60,16},{-40,36}})));
@@ -37,7 +38,6 @@ model hierarchicalControl_modularBoilerNEW
         rotation=-90,
         origin={6,100})));
 
-
   parameter Integer n=3 "Number of layers in the buffer storage" annotation(Dialog(
         group="Two position controller"));
 
@@ -53,7 +53,7 @@ model hierarchicalControl_modularBoilerNEW
     day_hour=day_hour,
     night_hour=night_hour,
     TOffset=TOffset) if                    use_advancedControl and not severalHeatcurcuits
-    annotation (Placement(transformation(extent={{-28,-70},{-8,-50}})));
+    annotation (Placement(transformation(extent={{-30,-70},{-10,-50}})));
 
     Modelica.Blocks.Interfaces.RealInput Tamb if use_advancedControl and not
     severalHeatcurcuits
@@ -63,7 +63,7 @@ model hierarchicalControl_modularBoilerNEW
         flowTemperatureController.renturnAdmixture.returnAdmixture returnAdmixture(k=k,
     TVar=TVar,
     TBoiler=TBoiler) if                                                               use_advancedControl and severalHeatcurcuits
-    annotation (Placement(transformation(extent={{46,-74},{66,-54}})));
+    annotation (Placement(transformation(extent={{42,-74},{62,-54}})));
   Modelica.Blocks.Interfaces.RealOutput valPos[k] if use_advancedControl and severalHeatcurcuits
     "Valve position to control the three-way valve"
     annotation (Placement(transformation(extent={{90,-76},{110,-56}})));
@@ -72,16 +72,10 @@ model hierarchicalControl_modularBoilerNEW
       choice=false "One heat curcuit",
       radioButtons=true));
 
-
   //Flow temperature control
 
-
-
-
-
-
   Modelica.Blocks.Interfaces.BooleanInput isOn
-    annotation (Placement(transformation(extent={{-120,16},{-80,56}})));
+    annotation (Placement(transformation(extent={{-122,0},{-82,40}})));
 
   parameter Boolean variablePLR=false
     "If true, the user can determine the PLR between PLRmin and 1; else you have a two position conttol with the values 0 and 1 for PLR";
@@ -108,7 +102,7 @@ model hierarchicalControl_modularBoilerNEW
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={38,-116})));
+        origin={34,-116})));
   parameter Real declination=1 "Declination of curve" annotation(Dialog(group="Flow temperature control"));
   parameter Real day_hour=6 "Hour of day in which day mode is enabled" annotation(Dialog(group="Flow temperature control"));
   parameter Real night_hour=22 "Hour of night in which night mode is enabled" annotation (Dialog(group="Flow temperature control"));
@@ -118,61 +112,57 @@ model hierarchicalControl_modularBoilerNEW
     "Maximum temperature, at which the system is shut down" annotation(Dialog(group="Security-related systems"));
   parameter Boolean TVar
     "Choice between variable oder constant boiler temperature for the admixture control";
-  Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and
-    severalHeatcurcuits and TVar
-    "Variable boiler temperature for the admixture control" annotation (
-      Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and severalHeatcurcuits
+     and TVar "Variable boiler temperature for the admixture control" annotation (Placement(
+        transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-2,-116})));
+        origin={0,-116})));
 equation
-
 
 /// unconditioned quantities
 
   connect(Tamb, flowTemperatureControl_heatingCurve.Tamb) annotation (Line(
-        points={{-100,-78},{-74,-78},{-74,-60},{-28,-60}}, color={0,0,127}));
-  connect(isOn, emergencySwitch_modularBoiler1.isOn) annotation (Line(points={{-100,36},
-          {-74,36},{-74,33.4},{-60,33.4}},   color={255,0,255}));
-  connect(PLRin, twoPositionController_layers.PLRin) annotation (Line(points={{-100,74},
-          {-38,74},{-38,43},{24,43}},     color={0,0,127}));
+        points={{-100,-78},{-74,-78},{-74,-60},{-30,-60}}, color={0,0,127}));
+  connect(isOn, emergencySwitch_modularBoiler1.isOn) annotation (Line(points={{-102,20},{-76,20},
+          {-76,34},{-68,34},{-68,33.4},{-60,33.4}},
+                                             color={255,0,255}));
+  connect(PLRin, twoPositionController_layers.PLRin) annotation (Line(points={{-100,58},{-38,58},
+          {-38,43},{24,43}},              color={0,0,127}));
   connect(emergencySwitch_modularBoiler1.y, twoPositionController_layers.isOn)
-    annotation (Line(points={{-39.8,29},{10,29},{10,37.4},{24,37.4}}, color={255,
+    annotation (Line(points={{-39.6,26},{10,26},{10,37.4},{24,37.4}}, color={255,
           0,255}));
   connect(emergencySwitch_modularBoiler1.y, flowTemperatureControl_heatingCurve.isOn)
-    annotation (Line(points={{-39.8,29},{-36,29},{-36,-63.8},{-28,-63.8}},
+    annotation (Line(points={{-39.6,26},{-36,26},{-36,-63.8},{-30,-63.8}},
                                                                        color={255,
           0,255}));
   connect(emergencySwitch_modularBoiler1.y, returnAdmixture.isOn) annotation (
-      Line(points={{-39.8,29},{10,29},{10,-56.6},{46,-56.6}},
+      Line(points={{-39.6,26},{10,26},{10,-56.6},{42,-56.6}},
                                                           color={255,0,255}));
-  connect(returnAdmixture.PLRset, PLRset) annotation (Line(points={{66,-59.4},{
-          78,-59.4},{78,60},{100,60}},
-                                  color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.PLRset, PLRset) annotation (Line(
-        points={{-8,-60},{-2,-60},{-2,-4},{86,-4},{86,60},{100,60}}, color={0,0,
-          127}));
-  connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points={{45.2,
-          34.6},{62,34.6},{62,60},{100,60}},        color={0,0,127}));
   connect(TLayers, twoPositionController_layers.TLayers)
     annotation (Line(points={{6,100},{6,31.8},{24,31.8}}, color={0,0,127}));
-  connect(returnAdmixture.valPos, valPos) annotation (Line(points={{66,-69.8},{
-          82,-69.8},{82,-66},{100,-66}}, color={0,0,127}));
-  connect(Tb, emergencySwitch_modularBoiler1.TBoiler) annotation (Line(points={
-          {-102,-16},{-82,-16},{-82,20.4},{-60,20.4}}, color={0,0,127}));
-  connect(Tb, returnAdmixture.TMeaBoiler) annotation (Line(points={{-102,-16},{
-          -114,-16},{-114,-92},{30,-92},{30,-64},{45.8,-64}},
-                                                            color={0,0,127}));
-  connect(Tb, flowTemperatureControl_heatingCurve.TMea) annotation (Line(points={{-102,
-          -16},{-114,-16},{-114,-92},{-20,-92},{-20,-82},{-19.2,-82},{-19.2,-70}},
+  connect(returnAdmixture.valPos, valPos) annotation (Line(points={{62,-69.8},{82,-69.8},{82,-66},
+          {100,-66}},                    color={0,0,127}));
+  connect(Tb, emergencySwitch_modularBoiler1.TBoiler) annotation (Line(points={{-100,-32},{-74,-32},
+          {-74,20},{-68,20},{-68,19.8},{-60,19.8}},    color={0,0,127}));
+  connect(Tb, returnAdmixture.TMeaBoiler) annotation (Line(points={{-100,-32},{-114,-32},{-114,-92},
+          {30,-92},{30,-64},{41.8,-64}},                    color={0,0,127}));
+  connect(Tb, flowTemperatureControl_heatingCurve.TMea) annotation (Line(points={{-100,-32},{-114,
+          -32},{-114,-92},{-20,-92},{-20,-82},{-21.2,-82},{-21.2,-70}},
                                                                      color={0,0,
           127}));
-  connect(TMeaCon, returnAdmixture.TMea) annotation (Line(points={{90,-116},{90,
-          -86},{56,-86},{56,-74}}, color={0,0,127}));
-  connect(TCon, returnAdmixture.TCon) annotation (Line(points={{38,-116},{38,
-          -69.8},{46,-69.8}}, color={0,0,127}));
-  connect(TBoilerVar, returnAdmixture.TBoilerVar) annotation (Line(points={{-2,
-          -116},{-2,-59.8},{46,-59.8}}, color={0,0,127}));
+  connect(TMeaCon, returnAdmixture.TMea) annotation (Line(points={{90,-116},{90,-86},{52,-86},{52,
+          -74}},                   color={0,0,127}));
+  connect(TCon, returnAdmixture.TCon) annotation (Line(points={{34,-116},{34,-69.8},{42,-69.8}},
+                              color={0,0,127}));
+  connect(TBoilerVar, returnAdmixture.TBoilerVar)
+    annotation (Line(points={{0,-116},{0,-59.8},{42,-59.8}}, color={0,0,127}));
+  connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points={{45.2,34.6},{52,34.6},
+          {52,60},{102,60}}, color={0,0,127}));
+  connect(flowTemperatureControl_heatingCurve.PLRset, PLRset) annotation (Line(points={{-10,-60},
+          {-4,-60},{-4,-30},{64,-30},{64,60},{102,60}}, color={0,0,127}));
+  connect(returnAdmixture.PLRset, PLRset) annotation (Line(points={{62,-59.4},{70,-59.4},{70,-56},
+          {78,-56},{78,60},{102,60}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Model that contains the three different variants of control for heat generators:</p>
 <ul>
@@ -192,4 +182,4 @@ equation
 <li>bandwidth: Width of the hysteresis.</li>
 </ul>
 </html>"));
-end hierarchicalControl_modularBoilerNEW;
+end hierarchicalControl_modular;

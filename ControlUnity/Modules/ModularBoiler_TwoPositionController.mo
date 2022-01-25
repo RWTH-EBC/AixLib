@@ -111,7 +111,7 @@ model ModularBoiler_TwoPositionController
 
    ///Control unity
    //
-  ControlUnity.hierarchicalControl_modularBoilerNEW
+  ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=false,
     redeclare twoPositionController.twoPositionControllerSimple_modularBoiler
@@ -120,8 +120,7 @@ model ModularBoiler_TwoPositionController
     bandwidth=bandwidth,
     severalHeatcurcuits=false,
     k=3,
-    Tref=Tref)
-         annotation (Placement(transformation(extent={{2,40},{22,60}})));
+    Tref=Tref) annotation (Placement(transformation(extent={{2,40},{22,60}})));
   parameter Modelica.SIunits.Temperature Tref
     "Reference Temperature for the on off controller";
   parameter Real bandwidth=2.5 "Bandwidth around reference signal";

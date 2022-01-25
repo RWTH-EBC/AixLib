@@ -119,7 +119,7 @@ model ModularBoiler_FlowTemperatureControlAdmixModule
    ///Control unity
    //
 
-  ControlUnity.hierarchicalControl_modularBoilerNEW
+  ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=true,
     n=n,

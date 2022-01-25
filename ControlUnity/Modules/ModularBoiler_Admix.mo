@@ -124,11 +124,9 @@ model ModularBoiler_Admix
 
    ///Control unity
    //
-  ControlUnity.hierarchicalControl_modularBoilerNEW
-    hierarchicalControl_modularBoilerNEW1(
+  ControlUnity.hierarchicalControl_modular hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=use_advancedControl,
-    redeclare
-      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
+    redeclare twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
       twoPositionController_layers,
     n=n,
     bandwidth=bandwidth,
@@ -138,8 +136,8 @@ model ModularBoiler_Admix
     Tref=Tref,
     declination=declination,
     day_hour=day_hour,
-    night_hour=night_hour)
-         annotation (Placement(transformation(extent={{0,40},{20,60}})));
+    night_hour=night_hour,
+    TVar=TVar) annotation (Placement(transformation(extent={{0,40},{20,60}})));
   parameter Modelica.SIunits.Temperature Tref
     "Reference Temperature for the on off controller"
                                                      annotation(Dialog(tab="Control", group="Two position control"));
@@ -199,6 +197,20 @@ model ModularBoiler_Admix
   parameter Modelica.SIunits.PressureDifference dp_nominalCon[:]
     "Pressure drop at nominal conditions for the individual consumers" annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
   parameter Modelica.SIunits.HeatFlowRate QNomCon[:] "Nominal heat power that the consumers need" annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
+  parameter Boolean TVar
+    "Choice between variable oder constant boiler temperature for the admixture control";
+  Modelica.Fluid.Interfaces.FluidPort_a port_a1(replaceable package Medium =
+        AixLib.Media.Water)
+    annotation (Placement(transformation(extent={{90,-88},{110,-68}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(replaceable package Medium =
+        AixLib.Media.Water)
+    annotation (Placement(transformation(extent={{-108,-88},{-88,-68}})));
+  Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and severalHeatcurcuits
+     and TVar "Variable boiler temperature for the admixture control" annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={24,102})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
@@ -213,13 +225,11 @@ protected
               "Propylene glycol water, 40% mass fraction")));
 
 equation
-
-  connect(port_a, port_a)
+ connect(port_a, port_a)
     annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
 
+
   if Pump==false then
-  connect(port_a, heatGeneratorNoControl.port_a) annotation (Line(points={{-100,0},{-100,
-            -20},{-22,-20},{-22,0}},         color={0,127,255}));
   else
   end if;
 
@@ -319,21 +329,20 @@ equation
 
     ///Admixture
 
- if use_advancedControl and severalHeatcurcuits then
- for m in 1:k loop
- connect(senTHot.port_b, admixture[m].port_a1);
- connect(admixture[m].port_b1, port_b);
- connect(admixture[m].port_b2, port_a);
- connect(heatGeneratorNoControl.port_a, admixture[m].port_a2);
 
- end for;
- else
-connect(fan1.port_b, heatGeneratorNoControl.port_a)
-    annotation (Line(points={{-40,0},{-22,0}},color={0,127,255}));
-  connect(senTHot.port_b, port_b) annotation (Line(points={{70,0},{100,0}}, color={0,127,255}));
-   end if;
-
-
+   if use_advancedControl and severalHeatcurcuits then
+   for m in 1:k loop
+   connect(senTHot.port_b, admixture[m].port_a1);
+   connect(admixture[m].port_b1, ports_b[m]);
+   connect(port_a1, admixture[m].port_a2);
+   connect(admixture[m].port_b2, port_b);
+   end for;
+   else
+    connect(port_a, senTCold.port_a)
+    annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
+  connect(senTHot.port_b, ports_b[1])
+  annotation (Line(points={{70,0},{86,0},{86,20},{100,20}}, color={0,127,255}));
+  end if;
 
 
 
@@ -345,23 +354,25 @@ connect(fan1.port_b, heatGeneratorNoControl.port_a)
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(admixtureBus.Tsen_b1, hierarchicalControl_modularBoilerNEW1.TMeaCon)
-    annotation (Line(
-      points={{72.05,-65.95},{42,-65.95},{42,-38},{19,-38},{19,38.4}},
+
+
+  connect(hierarchicalControl_modularBoilerNEW1.valPos, admixtureBus.valveSet) annotation (Line(
+        points={{20,43.4},{34,43.4},{34,44},{52,44},{52,-65.95},{72.05,-65.95}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(admixtureBus.Tsen_b1, hierarchicalControl_modularBoilerNEW1.TMeaCon) annotation (Line(
+      points={{72.05,-65.95},{44,-65.95},{44,20},{19,20},{19,38.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(hierarchicalControl_modularBoilerNEW1.valPos, admixtureBus.valveSet)
-    annotation (Line(points={{20,43.4},{36,43.4},{36,44},{52,44},{52,-58},{72.05,-58},{72.05,
-          -65.95}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-
+  connect(TBoilerVar, hierarchicalControl_modularBoilerNEW1.TBoilerVar) annotation (Line(points={
+          {24,102},{24,26},{10.2,26},{10.2,38.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

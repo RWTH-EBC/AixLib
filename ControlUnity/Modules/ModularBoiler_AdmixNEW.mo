@@ -118,7 +118,7 @@ model ModularBoiler_AdmixNEW
 
    ///Control unity
    //
-  ControlUnity.hierarchicalControl_modularBoilerNEW
+  ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=use_advancedControl,
     redeclare
@@ -134,8 +134,7 @@ model ModularBoiler_AdmixNEW
     day_hour=day_hour,
     night_hour=night_hour,
     TOffset=TOffset,
-    TMax=TMax)
-         annotation (Placement(transformation(extent={{0,40},{20,60}})));
+    TMax=TMax) annotation (Placement(transformation(extent={{0,40},{20,60}})));
   parameter Modelica.SIunits.Temperature Tref
     "Reference Temperature for the on off controller"
                                                      annotation(Dialog(enable=not use_advancedControl, tab="Control", group="Two position control"));

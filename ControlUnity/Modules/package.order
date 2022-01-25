@@ -6,7 +6,6 @@ ModularBoiler_FlowTemperatureControlHeatCurve
 ModularBoiler_FlowTemperatureControlAdmix
 ModularBoiler_TwoPositionControllerBufferStorage
 ModularBoiler_FlowTemperatureControlAdmixModule
-ModularCHP
 Tester
 Tester_NEW
 TesterFinal

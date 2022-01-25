@@ -119,7 +119,7 @@ model ModularBoiler_FlowTemperatureControlAdmix
    ///Control unity
    //
 
-  ControlUnity.hierarchicalControl_modularBoilerNEW
+  ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=true,
     n=n,
@@ -127,8 +127,7 @@ model ModularBoiler_FlowTemperatureControlAdmix
     severalHeatcurcuits=true,
     k=k,
     TBoiler=TBoiler,
-    Tset=Tset)
-    annotation (Placement(transformation(extent={{-4,48},{16,68}})));
+    Tset=Tset) annotation (Placement(transformation(extent={{-4,48},{16,68}})));
   Modelica.Blocks.Interfaces.RealOutput valPos[k] annotation (Placement(
         transformation(extent={{94,64},{110,80}}), iconTransformation(extent={{
             94,64},{110,80}})));

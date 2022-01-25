@@ -116,7 +116,8 @@ package Tester_NEW "Tester models for the modules"
       use_advancedControl=false,
       Tref=343.15,
       bandwidth=4,
-      severalHeatcurcuits=false)
+      severalHeatcurcuits=false,
+      TVar=false)
            annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-104,2},{-84,22}})));

@@ -128,14 +128,13 @@ model ModularBoiler_FlowTemperatureControlHeatCurve
         rotation=-90,
         origin={64,100})));
 
-  ControlUnity.hierarchicalControl_modularBoilerNEW
+  ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=true,
     n=n,
     bandwidth=2.5,
     severalHeatcurcuits=false,
-    k=1)
-    annotation (Placement(transformation(extent={{-2,48},{18,68}})));
+    k=1) annotation (Placement(transformation(extent={{-2,48},{18,68}})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
