@@ -96,7 +96,7 @@ model PartialHumidifier "partial model of a humidifier"
         rotation=90,
         origin={-30,-94})));
 protected
-  Modelica.Blocks.Math.Max max
+  Modelica.Blocks.Math.Max max if use_X_set
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   Modelica.Blocks.Interfaces.RealInput X_intern "internal mass fraction";
   Modelica.Blocks.Interfaces.RealInput m_wat_flow_intern "internal mass flow rate of water";
@@ -107,9 +107,9 @@ equation
 
   // specific enthalpies
    h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
-   h_airOut = cp_air * (T_airOut - 273.15) + X_intern * (cp_steam * (T_airOut - 273.15) + r0);
+   h_airOut = cp_air * (T_airOut - 273.15) + X_airOut * (cp_steam * (T_airOut - 273.15) + r0);
 
-   X_airOut = X_intern;
+   // X_airOut = X_intern;
 
    partialPressureDrop.dp = dp;
 
