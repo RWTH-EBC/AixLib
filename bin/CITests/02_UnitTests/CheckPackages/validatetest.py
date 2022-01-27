@@ -521,7 +521,7 @@ def create_wh_workflow():
             print(f'{CRED}Error:{CEND} git url or whitelist path is missing!')
             exit(1)
         if args.git_url is not None:
-            print(f'Setting: library {args.git_url}')
+            print(f'Setting whitelist library git-url: {args.git_url}')
             Git_Class = Git_Repository_Clone(repo_dir=args.repo_dir,
                                              git_url=args.git_url)
             Git_Class._clone_repository()

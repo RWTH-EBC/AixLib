@@ -78,7 +78,7 @@ class HTML_Tidy(object):
             results = HTML_Tidy._CheckFile(self, model)
             document_corr = results[0]
             err = results[1]
-            if err is not "":  # write error to error message
+            if err != "":  # write error to error message
                 errMsg.append("[-- %s ]\n%s" % (model, err))
             if self.correct_backup:
                 HTML_Tidy._backup_old_files(
@@ -545,7 +545,10 @@ class HTML_whitelist(object):
         self.html_wh_file = html_wh_file
 
     def create_whitelist(self):  # Create a new whiteList
-        Repo.clone_from(self.git_url, self.wh_library)
+        if os.path.exists(self.wh_library):
+            print(f'Folder {self.wh_library} already exists.')
+        else:
+            Repo.clone_from(self.git_url, self.wh_library)
         model_list = []
         for subdir, dirs, files in os.walk(self.wh_library):
             for file in files:
@@ -558,6 +561,7 @@ class HTML_whitelist(object):
         for model in model_list:
             file.write("\n" + model + ".mo" + "\n")
         file.close()
+        print(f'A new html whitelist was created.')
 
 
 if __name__ == '__main__':
@@ -582,7 +586,7 @@ if __name__ == '__main__':
     parser.add_argument("--correct-view", action="store_true", default=False,
                         help="Print the Correct HTML Code")
     parser.add_argument("-L", "--library", default="AixLib", help="Library to test")
-    parser.add_argument("--wh_library", default="IBPSA", help="Library on whitelist")
+    parser.add_argument("--wh-library", default="IBPSA", help="Library on whitelist")
     parser.add_argument("--git-url", default="https://github.com/ibpsa/modelica-ibpsa.git", help="url repository")
 
     args = parser.parse_args()

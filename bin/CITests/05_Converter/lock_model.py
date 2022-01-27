@@ -146,7 +146,7 @@ class Lock_model(object):
                 continue
 
 if __name__ == '__main__':
-    # python bin/02_CITests/Converter/ibpsa_icon.py --library "AixLib" --wh-library "IBPSA"
+    # python bin/CITests/05_Converter/lock_model.py --library "AixLib" --wh-library "IBPSA"
     parser = argparse.ArgumentParser(description='Lock models.')
     unit_test_group = parser.add_argument_group("arguments to run class Lock_model")
     unit_test_group.add_argument("-L", "--library", default="AixLib", help="Library to test")

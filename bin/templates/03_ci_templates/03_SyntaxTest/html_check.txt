@@ -87,7 +87,7 @@ HTML_Check:
             cd $CI_PROJECT_NAME ;
             python bin/CITests/03_SyntaxTests/html_tidy_errors.py --s ${library} --correct-overwrite --align --font --log;
             git checkout -B $Newbranch;
-            message=${html_commit};
+            message="${html_commit}";
             git add . ;
             echo $message;
             git commit -m "$message" ;
@@ -194,7 +194,7 @@ html_whitelist_job:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
         - python bin/CITests/03_SyntaxTests/html_tidy_errors.py --WhiteList ${git}					
-        - message=${bot_html_commit}
+        - message="${bot_html_commit}"
         - git add ${html_wh_file}
         - git commit -m "$message"
         - git push git@github.com:$Github_Repository.git

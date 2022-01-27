@@ -419,6 +419,8 @@ IBPSA.Utilities.Psychrometrics.Constants.mo
 
 IBPSA.Utilities.Psychrometrics.TWetBul_TDryBulXi.mo
 
+IBPSA.Utilities.Psychrometrics.hSat_pTSat.mo
+
 IBPSA.Utilities.Psychrometrics.ToTotalAir.mo
 
 IBPSA.Utilities.Psychrometrics.pW_TDewPoi.mo
@@ -2315,6 +2317,8 @@ IBPSA.Fluid.HeatExchangers.ConstantEffectiveness.mo
 
 IBPSA.Fluid.HeatExchangers.EvaporatorCondenser.mo
 
+IBPSA.Fluid.HeatExchangers.WetCoilEffectivenessNTU.mo
+
 IBPSA.Fluid.HeatExchangers.PrescribedOutlet.mo
 
 IBPSA.Fluid.HeatExchangers.HeaterCooler_u.mo
@@ -2325,13 +2329,23 @@ IBPSA.Fluid.HeatExchangers.SensibleCooler_T.mo
 
 IBPSA.Fluid.HeatExchangers.Heater_T.mo
 
+IBPSA.Fluid.HeatExchangers.BaseClasses.WetCoilWetRegime.mo
+
 IBPSA.Fluid.HeatExchangers.BaseClasses.package.mo
+
+IBPSA.Fluid.HeatExchangers.BaseClasses.lmtd.mo
+
+IBPSA.Fluid.HeatExchangers.BaseClasses.WetCoilDryWetRegime.mo
+
+IBPSA.Fluid.HeatExchangers.BaseClasses.WetCoilUARated.mo
 
 IBPSA.Fluid.HeatExchangers.BaseClasses.PartialEffectiveness.mo
 
 IBPSA.Fluid.HeatExchangers.BaseClasses.HACoilInside.mo
 
 IBPSA.Fluid.HeatExchangers.BaseClasses.dynamicViscosityWater.mo
+
+IBPSA.Fluid.HeatExchangers.BaseClasses.WetCoilDryRegime.mo
 
 IBPSA.Fluid.HeatExchangers.BaseClasses.epsilon_C.mo
 
@@ -2340,6 +2354,8 @@ IBPSA.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder.mo
 IBPSA.Fluid.HeatExchangers.BaseClasses.PartialEffectivenessNTU.mo
 
 IBPSA.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ.mo
+
+IBPSA.Fluid.HeatExchangers.BaseClasses.determineWaterIndex.mo
 
 IBPSA.Fluid.HeatExchangers.BaseClasses.isobaricExpansionCoefficientWater.mo
 
@@ -2375,6 +2391,8 @@ IBPSA.Fluid.HeatExchangers.Examples.WaterHeater_u.mo
 
 IBPSA.Fluid.HeatExchangers.Examples.DryCoilEffectivenessNTUPControl.mo
 
+IBPSA.Fluid.HeatExchangers.Examples.WetCoilEffectivenessNTUMassFlow.mo
+
 IBPSA.Fluid.HeatExchangers.Examples.AirHeater_T.mo
 
 IBPSA.Fluid.HeatExchangers.Examples.DryCoilEffectivenessNTUMassFlow.mo
@@ -2394,6 +2412,8 @@ IBPSA.Fluid.HeatExchangers.Validation.package.mo
 IBPSA.Fluid.HeatExchangers.Validation.ConstantEffectiveness.mo
 
 IBPSA.Fluid.HeatExchangers.Validation.EvaporatorCondenser.mo
+
+IBPSA.Fluid.HeatExchangers.Validation.WetCoilEffectivenessNTU.mo
 
 IBPSA.Fluid.HeatExchangers.Validation.PrescribedOutlet.mo
 
