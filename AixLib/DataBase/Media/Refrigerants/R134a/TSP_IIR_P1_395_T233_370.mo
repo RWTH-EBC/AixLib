@@ -205,72 +205,77 @@ record TSP_IIR_P1_395_T233_370
   The provided coefficients are fitted to external data by Engelpracht
   and are valid within the following range:<br/>
 </p>
-<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
-border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
-  <tr>
-    <td>
-      <p>
-        Parameter
-      </p>
-    </td>
-    <td>
-      <p>
-        Minimum Value
-      </p>
-    </td>
-    <td>
-      <p>
-        Maximum Value
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        Pressure (p) in bar
-      </p>
-    </td>
-    <td>
-      <p>
-        1
-      </p>
-    </td>
-    <td>
-      <p>
-        39.5
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        Temperature (T) in K
-      </p>
-    </td>
-    <td>
-      <p>
-        233.15
-      </p>
-    </td>
-    <td>
-      <p>
-        370.15
-      </p>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"
+    width=\"30%\" style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <td>
+          <p>
+            Parameter
+          </p>
+        </td>
+        <td>
+          <p>
+            Minimum Value
+          </p>
+        </td>
+        <td>
+          <p>
+            Maximum Value
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            Pressure (p) in bar
+          </p>
+        </td>
+        <td>
+          <p>
+            1
+          </p>
+        </td>
+        <td>
+          <p>
+            39.5
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            Temperature (T) in K
+          </p>
+        </td>
+        <td>
+          <p>
+            233.15
+          </p>
+        </td>
+        <td>
+          <p>
+            370.15
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      The reference point is defined as 200 kJ/kg and 1 kJ/kg/K,
+      respectively, for enthalpy and entropy for the saturated liquid
+      at 273.15 K.
+    </p>
+    <h4>
+      References
+    </h4>
+    <p>
+      Engelpracht, Mirko (2017): Development of modular and scalable
+      simulation models for heat pumps and chillers considering various
+      refrigerants. <i>Master Thesis</i>
+    </p>
+  </caption>
 </table>
-<p>
-  The reference point is defined as 200 kJ/kg and 1 kJ/kg/K,
-  respectively, for enthalpy and entropy for the saturated liquid at
-  273.15 K.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  Engelpracht, Mirko (2017): Development of modular and scalable
-  simulation models for heat pumps and chillers considering various
-  refrigerants. <i>Master Thesis</i>
-</p>
 </html>"));
 end TSP_IIR_P1_395_T233_370;
