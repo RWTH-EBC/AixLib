@@ -5,8 +5,7 @@ model StorageSolarCollector
 
   replaceable package Medium = AixLib.Media.Water;
 
-  AixLib.Fluid.Storage.BufferStorage
-                               bufferStorage(
+  AixLib.Fluid.Storage.StorageDetailed bufferStorage(
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
     m1_flow_nominal=solarThermal.m_flow_nominal,

@@ -6,7 +6,7 @@ model BufferStorage
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
-  AixLib.Fluid.Storage.BufferStorage bufferStorage(
+  AixLib.Fluid.Storage.StorageDetailed bufferStorage(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     m1_flow_nominal=const.k,
