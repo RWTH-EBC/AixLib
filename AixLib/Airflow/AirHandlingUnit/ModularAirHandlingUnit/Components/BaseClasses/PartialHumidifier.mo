@@ -114,7 +114,7 @@ equation
    partialPressureDrop.dp = dp;
 
     // conditional connectors
-   connect(max.y,X_intern);
+   // connect(max.y,X_intern);
    connect(m_wat_flow,m_wat_flow_intern);
 
   connect(X_set, max.u1) annotation (Line(points={{0,110},{0,86},{-48,86},{-48,76},
