@@ -1,5 +1,6 @@
 within AixLib.Fluid.Storage;
-model Storage
+model StorageSimple
+  "Simplified multi-layer storage model with volumes as heat exchangers without pressure losses"
 
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
@@ -195,4 +196,4 @@ equation
   </li>
 </ul>
 </html>"));
-end Storage;
+end StorageSimple;
