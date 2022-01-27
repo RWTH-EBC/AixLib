@@ -25,6 +25,9 @@ equation
   // specific enthalpies
    assert(T_watIn >= 373.15, "Steam temperature T has to be higher than 100 degC");
    h_steam = cp_water * (373.15 - 273.15) + cp_steam * (T_watIn - 373.15) + r100;
+
+   connect(max.y,X_intern);
+
         annotation (
     preferredView="info",
     Documentation(info="<html>
