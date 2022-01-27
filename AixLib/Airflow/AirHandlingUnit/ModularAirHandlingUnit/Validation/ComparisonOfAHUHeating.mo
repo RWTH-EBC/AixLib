@@ -1,5 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation;
-model ComparisonOfAHUHeatng "Comparitive simulation with existing AHU model"
+model ComparisonOfAHUHeating "Comparitive simulation with existing AHU model"
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Constant Vflow_in(k=100)
     annotation (Placement(transformation(extent={{-100,62},{-80,82}})));
@@ -130,4 +130,4 @@ Check whether variable allCond is always 1.")}),
       StopTime=86400,
       Interval=1,
       __Dymola_Algorithm="Dassl"));
-end ComparisonOfAHUHeatng;
+end ComparisonOfAHUHeating;
