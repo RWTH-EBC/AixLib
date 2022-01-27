@@ -45,7 +45,9 @@ model Tabs "Test of Tabs"
   AixLib.Systems.TABS.Tabs tabs(
     redeclare package Medium = Medium,
     area=3000,
-    thickness=0.03)
+    thickness=0.03,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial)
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 equation
   connect(ramp.y, prescribedTemperature.T)
@@ -70,8 +72,7 @@ equation
   </li>
 </ul>
 </html>", info="<html>
-<p>
-  Example of the Tabs system.
-</p>
+<p>Example for testing the Tabs system <a href=
+  \"modelica://AixLib.Systems.TABS.Tabs\">AixLib.Systems.TABS.Tabs</a>.</p>
 </html>"));
 end Tabs;

@@ -33,7 +33,8 @@ model CtrTabs "Controller for concrete core activation"
     final Ti=Ti_hot,
     final Td=0,
     final rpm_pump=rpm_pump_hot,
-    final reverseAction)
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
+    final reverseAction=true)
     annotation (Placement(transformation(extent={{-20,22},{0,42}})));
   HydraulicModules.Controller.CtrThrottle ctrThrottleCold(
     final useExternalTset=true,
@@ -41,15 +42,16 @@ model CtrTabs "Controller for concrete core activation"
     final Ti=Ti_cold,
     final Td=0,
     rpm_pump=rpm_pump_cold,
-      reverseAction=false)
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
+    final reverseAction=false)
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
-  HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=rpm_pump_concrete)
+  HydraulicModules.Controller.CtrPump ctrPump(final rpm_pump=rpm_pump_concrete)
     annotation (Placement(transformation(extent={{-20,60},{0,80}})));
-  Modelica.Blocks.Math.Add add(k2=-1)
+  Modelica.Blocks.Math.Add add(final k1=1, final k2=-1)
     annotation (Placement(transformation(extent={{-48,20},{-38,30}})));
   Modelica.Blocks.Sources.Constant constTflowSet1(final k=0.15)  annotation (Placement(transformation(extent={{-62,18},
             {-54,26}})));
-  Modelica.Blocks.Math.Add add1(k2=+1)
+  Modelica.Blocks.Math.Add add1(final k1=1, final k2=+1)
     annotation (Placement(transformation(extent={{-42,-42},{-32,-32}})));
   Modelica.Blocks.Sources.Constant constTflowSet2(final k=offset)
                                                                 annotation (Placement(transformation(extent={{-56,-44},

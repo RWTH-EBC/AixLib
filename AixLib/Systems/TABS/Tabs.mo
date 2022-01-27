@@ -2,7 +2,12 @@ within AixLib.Systems.TABS;
 model Tabs "Thermally Activated Building Systems"
   import SI = Modelica.SIunits;
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium in the system" annotation (choicesAllMatching=true);
+    "Medium in the system" annotation (choices(
+      choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+      choice(redeclare package Medium = AixLib.Media.Water "Water"),
+      choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15,
+              X_a=0.40) "Propylene glycol water, 40% mass fraction")));
   parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
@@ -10,42 +15,62 @@ model Tabs "Thermally Activated Building Systems"
     "Nominal mass flow rate";
   parameter Modelica.SIunits.Temperature T_start=293.15
     "Initial or guess value of output (= state)";
-  parameter Modelica.SIunits.Length length=100 "Pipe length" annotation(Dialog(group="Concrete core activation"));
+  parameter Modelica.SIunits.Length length=100 "Pipe length"
+    annotation (Dialog(group="Concrete core activation"));
   parameter DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
-      DataBase.Pipes.Copper.Copper_133x3() "Pipe type with representative length and diameter" annotation(Dialog(group="Concrete core activation"));
+      DataBase.Pipes.Copper.Copper_133x3()
+    "Pipe type with representative length and diameter"
+    annotation (Dialog(group="Concrete core activation"));
 
-  parameter SI.Area area "Area of activated concrete" annotation(Dialog(group="Concrete core activation"));
-  parameter SI.Length thickness "Thickness of activated concrete" annotation(Dialog(group="Concrete core activation"));
+  parameter SI.Area area "Area of activated concrete"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter SI.Length thickness "Thickness of activated concrete"
+    annotation (Dialog(group="Concrete core activation"));
   parameter SI.SpecificHeatCapacity cp=1000
-    "Specific heat capacity of concrete" annotation(Dialog(group="Concrete core activation"));
-  parameter SI.Density rho=2100 "Density of activated concrete" annotation(Dialog(group="Concrete core activation"));
-  parameter Real alpha=10 "Heat transfer coefficient concrete to air" annotation(Dialog(group="Concrete core activation"));
-  parameter SI.PressureDifference dp_hx_nominal=1000 "Pressure difference" annotation(Dialog(group="Heat exchangers in hydronic system"));
+    "Specific heat capacity of concrete"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter SI.Density rho=2100 "Density of activated concrete"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter Real alpha=10 "Heat transfer coefficient concrete to air"
+    annotation (Dialog(group="Concrete core activation"));
+  parameter SI.PressureDifference dp_hx_nominal=1000 "Pressure difference"
+    annotation (Dialog(group="Heat exchangers in hydronic system"));
   parameter SI.TemperatureDifference dT_nom_hx=1
-    "Temperature difference at nominal conditions (used to calculate Gc)" annotation(Dialog(group="Heat exchangers in hydronic system"));
+    "Temperature difference at nominal conditions (used to calculate Gc)"
+    annotation (Dialog(group="Heat exchangers in hydronic system"));
   parameter SI.HeatFlowRate Q_nom_hx=50000
-    "Temperature difference at nominal conditions (used to calculate Gc) of the heat exchangers" annotation(Dialog(group="Heat exchangers in hydronic system"));
+    "Heat flow at nominal conditions (used to calculate Gc) of the heat exchangers"
+    annotation (Dialog(group="Heat exchangers in hydronic system"));
 
-  parameter Modelica.SIunits.Length length_hyd=1 "Pipe length of hydronic system" annotation(Dialog(group="Hydronics"));
+  parameter Modelica.SIunits.Length length_hyd=1
+    "Pipe length of hydronic system" annotation (Dialog(group="Hydronics"));
   parameter DataBase.Pipes.PipeBaseDataDefinition parameterPipe_hyd=
-      DataBase.Pipes.Copper.Copper_64x2() "Pipe type with representative length and diameter" annotation(Dialog(group="Hydronics"));
+      DataBase.Pipes.Copper.Copper_64x2()
+    "Pipe type with representative length and diameter"
+    annotation (Dialog(group="Hydronics"));
 
   // Dynamics
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+    annotation (Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+    "Type of mass balance: dynamic (3 initialization options) or steady state"
+    annotation (Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+  parameter SI.Temperature T_amb=293.15 "Ambient temperature for heat loss";
 
   Fluid.FixedResistances.GenericPipe pipe(
     redeclare package Medium = Medium,
-    parameterPipe=parameterPipe,
-    withInsulation=false,
-    withConvection=false,
-    m_flow_nominal=m_flow_nominal,
+    final pipeModel,
+    final parameterPipe=parameterPipe,
+    final withInsulation=false,
+    final withConvection=false,
+    final m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal,
-    length=length,
-    T_start=T_start) annotation (Placement(transformation(
+    final length=length,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    final T_start=T_start) "Pipe that goes through the concrete" annotation (
+      Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={0,58})));
@@ -53,16 +78,17 @@ model Tabs "Thermally Activated Building Systems"
   HydraulicModules.Pump pumpSys(
     redeclare package Medium = Medium,
     parameterPipe=parameterPipe_hyd,
-    allowFlowReversal=allowFlowReversal,
-    T_amb=293.15,
+    final allowFlowReversal=allowFlowReversal,
+    final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    T_start=T_start,
+    final T_start=T_start,
     length=length_hyd,
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per)))
+    "Hydraulic module with of the internal circuit that supplies the concrete"
     annotation (Dialog(enable=true, group="Hydronics"), Placement(
         transformation(
         extent={{-20,-20},{20,20}},
@@ -74,12 +100,12 @@ model Tabs "Thermally Activated Building Systems"
     annotation (Placement(transformation(extent={{-90,-110},{-70,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare package Medium =
         Medium)
-    "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
+    "Fluid connector b1 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-50,-110},{-30,-90}}),
         iconTransformation(extent={{-50,-110},{-30,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a2(redeclare package Medium =
         Medium)
-    "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
+    "Fluid connector a2 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{30,-110},{50,-90}}),
         iconTransformation(extent={{30,-110},{50,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare package Medium =
@@ -98,42 +124,52 @@ model Tabs "Thermally Activated Building Systems"
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={0,78})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort annotation (
-      Placement(transformation(extent={{-10,88},{10,108}}), iconTransformation(
-          extent={{-10,100},{10,120}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+    "heat port for connection to room volume" annotation (Placement(
+        transformation(extent={{-10,88},{10,108}}), iconTransformation(extent={{
+            -10,100},{10,120}})));
 
-  BaseClasses.TabsBus tabsBus annotation (Placement(transformation(extent={{-120,
-            -20},{-80,20}}), iconTransformation(extent={{-116,-14},{-86,16}})));
+  BaseClasses.TabsBus tabsBus "Connector bus" annotation (Placement(
+        transformation(extent={{-120,-20},{-80,20}}), iconTransformation(extent=
+           {{-116,-14},{-86,16}})));
 
   Modelica.Blocks.Sources.Constant const(k=area*alpha)
     annotation (Placement(transformation(extent={{-60,68},{-40,88}})));
 
-  Fluid.HeatExchangers.DynamicHX dynamicHX(
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
-    redeclare package Medium1 = Medium,
-    redeclare package Medium2 = Medium,
-    m1_flow_nominal=m_flow_nominal,
-    m2_flow_nominal=m_flow_nominal,
-    final dp1_nominal=dp_hx_nominal,
-    final dp2_nominal=dp_hx_nominal,
-    final tau1=10,
-    final tau2=10,
-    final tau_C=2,
-    final dT_nom=dT_nom_hx,
-    final Q_nom=Q_nom_hx)
-    annotation (Placement(transformation(extent={{48,-36},{28,-16}})));
-  Fluid.HeatExchangers.DynamicHX dynamicHX1(
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
-    redeclare package Medium1 = Medium,
-    redeclare package Medium2 = Medium,
+  Fluid.HeatExchangers.DynamicHX dynamicHXCold(
+    final allowFlowReversal1=true,
+    final allowFlowReversal2=true,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    redeclare final package Medium1 = Medium,
+    redeclare final package Medium2 = Medium,
     final m1_flow_nominal=m_flow_nominal,
     final m2_flow_nominal=m_flow_nominal,
     final dp1_nominal=dp_hx_nominal,
     final dp2_nominal=dp_hx_nominal,
     final tau1=10,
     final tau2=10,
+    final T1_start=T_start,
+    final T2_start=T_start,
+    final tau_C=2,
+    final dT_nom=dT_nom_hx,
+    final Q_nom=Q_nom_hx)
+    annotation (Placement(transformation(extent={{48,-36},{28,-16}})));
+  Fluid.HeatExchangers.DynamicHX dynamicHXHot(
+    final allowFlowReversal1=true,
+    final allowFlowReversal2=true,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    redeclare final package Medium1 = Medium,
+    redeclare final package Medium2 = Medium,
+    final m1_flow_nominal=m_flow_nominal,
+    final m2_flow_nominal=m_flow_nominal,
+    final dp1_nominal=dp_hx_nominal,
+    final dp2_nominal=dp_hx_nominal,
+    final tau1=10,
+    final tau2=10,
+    final T1_start=T_start,
+    final T2_start=T_start,
     final tau_C=2,
     final dT_nom=dT_nom_hx,
     final Q_nom=Q_nom_hx)
@@ -141,39 +177,42 @@ model Tabs "Thermally Activated Building Systems"
   Fluid.Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-86,-26},{-74,-14}})));
   HydraulicModules.ThrottlePump throttlePumpHot(
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
     redeclare package Medium = Medium,
     parameterPipe=parameterPipe_hyd,
-    allowFlowReversal=allowFlowReversal,
-    T_amb=293.15,
+    final allowFlowReversal=allowFlowReversal,
+    final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    T_start=T_start,
-    length=1,
+    final T_start=T_start,
+    length=length_hyd,
     Kv=10,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per))) annotation (Dialog(enable=true, group="Hydronics"), Placement(
+          per))) "Hydraulic module with pump and valve for hot water supply"
+    annotation (Dialog(enable=true, group="Hydronics"), Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-40,-60})));
   HydraulicModules.ThrottlePump throttlePumpCold(
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
     redeclare package Medium = Medium,
     parameterPipe=parameterPipe_hyd,
-    allowFlowReversal=allowFlowReversal,
-    T_amb=293.15,
+    final allowFlowReversal=allowFlowReversal,
+    final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    T_start=T_start,
-    length=1,
+    final T_start=T_start,
+    length=length_hyd,
     Kv=10,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per))) annotation (Dialog(enable=true, group="Hydronics"), Placement(
+          per)))
+    "Hydraulic module with pump and throttle valve for cold water supply"
+    annotation (Dialog(enable=true, group="Hydronics"), Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -181,36 +220,31 @@ model Tabs "Thermally Activated Building Systems"
 
 equation
 
-  connect(pumpSys.port_b1, pipe.port_a) annotation (Line(points={{-12,40},{-24,
-          40},{-24,58},{-10,58}},
-                         color={0,127,255}));
-  connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{
-          7.21645e-16,68},{7.21645e-16,72},{24,72}},
-                                      color={191,0,0}));
-  connect(heatCapacitor.port, convection.solid) annotation (Line(points={{24,72},
-          {-3.33067e-16,72}},               color={191,0,0}));
+  connect(pumpSys.port_b1, pipe.port_a) annotation (Line(points={{-12,40},{-24,40},
+          {-24,58},{-10,58}}, color={0,127,255}));
+  connect(pipe.heatPort, heatCapacitor.port) annotation (Line(points={{7.21645e-16,
+          68},{7.21645e-16,72},{24,72}}, color={191,0,0}));
+  connect(heatCapacitor.port, convection.solid)
+    annotation (Line(points={{24,72},{-3.33067e-16,72}}, color={191,0,0}));
   connect(convection.fluid, heatPort)
-    annotation (Line(points={{4.44089e-16,84},{0,98}},
-                                              color={191,0,0}));
+    annotation (Line(points={{4.44089e-16,84},{0,98}}, color={191,0,0}));
   connect(convection.Gc, const.y)
-    annotation (Line(points={{-6,78},{-39,78}},  color={0,0,127}));
-  connect(dynamicHX1.port_a1, dynamicHX.port_b1)
+    annotation (Line(points={{-6,78},{-39,78}}, color={0,0,127}));
+  connect(dynamicHXHot.port_a1, dynamicHXCold.port_b1)
     annotation (Line(points={{-28,-20},{28,-20}}, color={0,127,255}));
-  connect(dynamicHX.port_a1, pumpSys.port_b2) annotation (Line(points={{48,-20},
-          {52,-20},{52,-8},{10,-8},{10,-4},{12,-4},{12,0}},
-                                          color={0,127,255}));
-  connect(dynamicHX1.port_b1, pumpSys.port_a1) annotation (Line(points={{-48,-20},
-          {-52,-20},{-52,-6},{-12,-6},{-12,0}},
-                                color={0,127,255}));
-  connect(bou.ports[1], dynamicHX1.port_b1) annotation (Line(points={{-74,-20},
-          {-48,-20}},                       color={0,127,255}));
-  connect(throttlePumpHot.port_b1, dynamicHX1.port_a2) annotation (Line(points={
-          {-52,-40},{-52,-32},{-48,-32}}, color={0,127,255}));
-  connect(throttlePumpHot.port_a2, dynamicHX1.port_b2) annotation (Line(points={{-28,-40},
-          {-28,-32}},                               color={0,127,255}));
-  connect(throttlePumpCold.port_b1, dynamicHX.port_a2)
-    annotation (Line(points={{28,-40},{28,-32}},          color={0,127,255}));
-  connect(throttlePumpCold.port_a2, dynamicHX.port_b2)
+  connect(dynamicHXCold.port_a1, pumpSys.port_b2) annotation (Line(points={{48,-20},
+          {52,-20},{52,-8},{10,-8},{10,-4},{12,-4},{12,0}}, color={0,127,255}));
+  connect(dynamicHXHot.port_b1, pumpSys.port_a1) annotation (Line(points={{-48,-20},
+          {-52,-20},{-52,-6},{-12,-6},{-12,0}}, color={0,127,255}));
+  connect(bou.ports[1], dynamicHXHot.port_b1)
+    annotation (Line(points={{-74,-20},{-48,-20}}, color={0,127,255}));
+  connect(throttlePumpHot.port_b1, dynamicHXHot.port_a2) annotation (Line(
+        points={{-52,-40},{-52,-32},{-48,-32}}, color={0,127,255}));
+  connect(throttlePumpHot.port_a2, dynamicHXHot.port_b2)
+    annotation (Line(points={{-28,-40},{-28,-32}}, color={0,127,255}));
+  connect(throttlePumpCold.port_b1, dynamicHXCold.port_a2)
+    annotation (Line(points={{28,-40},{28,-32}}, color={0,127,255}));
+  connect(throttlePumpCold.port_a2, dynamicHXCold.port_b2)
     annotation (Line(points={{52,-40},{52,-32},{48,-32}}, color={0,127,255}));
   connect(throttlePumpHot.port_a1, port_a1) annotation (Line(points={{-52,-80},{
           -76,-80},{-76,-100},{-80,-100}}, color={0,127,255}));
@@ -242,20 +276,18 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(pipe.port_b, pumpSys.port_a2)
-    annotation (Line(points={{10,58},{26,58},{26,40},{12,40}},
-                                                           color={0,127,255}));
+  connect(pipe.port_b, pumpSys.port_a2) annotation (Line(points={{10,58},{26,58},
+          {26,40},{12,40}}, color={0,127,255}));
   connect(throttlePumpCold.port_b2, port_b2) annotation (Line(points={{52,-80},{
           52,-86},{80,-86},{80,-100}}, color={0,127,255}));
   connect(throttlePumpHot.port_b2, port_b1) annotation (Line(points={{-28,-80},{
           -28,-82},{-40,-82},{-40,-100}}, color={0,127,255}));
-  connect(pipe.heatPort, convection.solid) annotation (Line(points={{
-          7.21645e-16,68},{7.21645e-16,70},{-3.88578e-16,70},{-3.88578e-16,72}},
-        color={191,0,0}));
+  connect(pipe.heatPort, convection.solid) annotation (Line(points={{7.21645e-16,
+          68},{7.21645e-16,70},{-3.88578e-16,70},{-3.88578e-16,72}}, color={191,
+          0,0}));
   annotation (
     Dialog(tab="Initialization"),
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}),
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -335,12 +367,12 @@ equation
           points={{-38,108}},
           color={238,46,47},
           arrow={Arrow.None,Arrow.Filled}),
-        Line(points={{-52,96},{-52,82}},   color={238,46,47}),
-        Line(points={{-56,92},{-52,96},{-48,92}},    color={238,46,47}),
-        Line(points={{-4,92},{0,96},{4,92}},    color={238,46,47}),
-        Line(points={{0,96},{0,82}},   color={238,46,47}),
-        Line(points={{50,92},{54,96},{58,92}},    color={238,46,47}),
-        Line(points={{54,96},{54,82}},   color={238,46,47}),
+        Line(points={{-52,96},{-52,82}}, color={238,46,47}),
+        Line(points={{-56,92},{-52,96},{-48,92}}, color={238,46,47}),
+        Line(points={{-4,92},{0,96},{4,92}}, color={238,46,47}),
+        Line(points={{0,96},{0,82}}, color={238,46,47}),
+        Line(points={{50,92},{54,96},{58,92}}, color={238,46,47}),
+        Line(points={{54,96},{54,82}}, color={238,46,47}),
         Rectangle(
           extent={{-84,-24},{-34,-46}},
           lineColor={0,0,0},
@@ -446,20 +478,11 @@ equation
           color={28,108,200},
           thickness=1),
         Line(points={{-190,60}}, color={28,108,200})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}})),
-    Documentation(info="<html><p>
-  This module is a thermally activated building system (TABS) with a
-  closed hydraunic system that is connected to the concrete and
-  supplied by two throttle circuits via heat exchangers.
-</p>
-<p>
-  One throttle circtuit has to be connected to cold water and the other
-  one to hot water.
-</p>
-<p>
-  The pumps and valves have to be specified in the hdraulicModules.
-</p>
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}})),
+    Documentation(info="<html>
+<p>This module is a thermally activated building system (TABS) with a closed hydraunic system that is connected to the concrete and supplied by two throttle circuits via heat exchangers.</p>
+<p>One throttle circtuit has to be connected to cold water and the other one to hot water.</p><p>The pumps and valves have to be specified in the hdraulicModules.</p>
 </html>", revisions="<html>
 <ul>
   <li>December 09, 2021, by Alexander Kümpel:<br/>
