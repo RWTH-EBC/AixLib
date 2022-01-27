@@ -96,6 +96,54 @@ model StorageSimple
    parameter Modelica.SIunits.MassFlowRate m_flow_small_layer_HE=1E-4*abs(m_flow_nominal_HE)
     "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
 
+  Modelica.Blocks.Interfaces.RealOutput TTopLayer(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    min=0,
+    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
+        transformation(
+        origin={-99,85},
+        extent={{5,5},{-5,-5}},
+        rotation=0), iconTransformation(
+        extent={{5,5},{-5,-5}},
+        rotation=0,
+        origin={-76,88})));
+  Modelica.Blocks.Interfaces.RealOutput TBottomLayer(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    min=0,
+    displayUnit="degC") "Temperature in the bottom layer" annotation (Placement(
+        transformation(
+        origin={-99,-83},
+        extent={{5,5},{-5,-5}},
+        rotation=0), iconTransformation(
+        extent={{5,5},{-5,-5}},
+        rotation=0,
+        origin={-76,-80})));
+  Modelica.Blocks.Interfaces.RealOutput TTopLayer_HE(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    min=0,
+    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
+        transformation(
+        origin={97,71},
+        extent={{-5,5},{5,-5}},
+        rotation=0), iconTransformation(
+        extent={{-5,5},{5,-5}},
+        rotation=0,
+        origin={102,88})));
+  Modelica.Blocks.Interfaces.RealOutput TBottomLayer_HE(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    min=0,
+    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
+        transformation(
+        origin={95,-69},
+        extent={{-5,5},{5,-5}},
+        rotation=0), iconTransformation(
+        extent={{-5,5},{5,-5}},
+        rotation=0,
+        origin={102,-80})));
 protected
   parameter Modelica.SIunits.Volume V = A * h;
   parameter Modelica.SIunits.Area A = Modelica.Constants.pi * d ^ 2 / 4;
@@ -142,6 +190,18 @@ equation
     connect(bouyancy[k].port_b, layer[k].heatPort);
   end for;
   connect(heatPort, heatPort) annotation(Line(points = {{-106, 0}, {-106, 0}}, color = {191, 0, 0}));
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////  connection of Temperature Sensor//////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+  TBottomLayer = layer[1].heatPort.T;
+
+  TTopLayer = layer[n].heatPort.T;
+
+  TBottomLayer_HE = layer_HE[1].heatPort.T;
+
+  TTopLayer_HE = layer_HE[n].heatPort.T;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-154, 3}, {-136, -7}, {-110, -3}, {-84, -7}, {-48, -5}, {-18, -9}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 0, 255},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {78, -59}, rotation = 360), Polygon(points = {{-154, 3}, {-134, -3}, {-110, 1}, {-84, -1}, {-56, -5}, {-30, -11}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {14, 110, 255},
