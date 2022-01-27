@@ -158,11 +158,16 @@ equation
           -72,40},{-72,36}},          color={0,0,127}));
   connect(const.y, add.u2) annotation (Line(points={{-95.6,36},{-94,36},{-94,
           36.4},{-91.2,36.4}}, color={0,0,127}));
-  annotation (Documentation(info="<html>
-<p>This example compares the simulated behavior with measured data. The input filter of the valve is deactivated because the measured actual opening (includes opening delay already) is used.</p>
+  annotation (Documentation(info="<html><p>
+  This example compares the simulated behavior with measured data. The
+  input filter of the valve is deactivated because the measured actual
+  opening (includes opening delay already) is used.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>November 4, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+  <li>November 4, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(
