@@ -1,4 +1,6 @@
 within AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Examples;
+
+
  model AltitudeAngle "Test model for altitude angle"
    extends Modelica.Icons.Example;
    AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle zen(lat=
