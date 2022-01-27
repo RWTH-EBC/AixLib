@@ -10,7 +10,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation(choicesAllMatching=true);
   parameter Integer internalGainsMode = 1
      "decides which internal gains model for persons is used";
-  parameter Boolean use_NaturalAirExchange = false
+  parameter Boolean use_NaturalAirExchange = if zoneParam.baseACH > 0.0 then true else false
     "Consider natural infiltration and ventilation by setting true";
  parameter Boolean use_MechanicalAirExchange = false
     "Consider mechanical ventilation by setting true";

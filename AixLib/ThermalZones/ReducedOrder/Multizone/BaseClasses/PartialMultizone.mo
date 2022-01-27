@@ -18,7 +18,7 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  parameter Boolean use_NaturalAirExchange=true
+  parameter Boolean use_NaturalAirExchange=if zoneParam.baseACH > 0.0 then true else false
     "Consider natural infiltration by setting true";
   parameter Boolean use_MechanicalAirExchange=true
     "Consider mechanical ventilation infiltration by setting true";
