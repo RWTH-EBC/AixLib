@@ -165,7 +165,7 @@ class ValidateTest(object):
         lines = changed_models.readlines()
         for line in lines:
             if line.rfind(".mo") > -1 and line.find("package") == -1:
-                if line.find(self.package) > -1 and line.find("ReferenceResults") == -1:
+                if line.find(f'{self.mo_library}{os.sep}{self.package}') > -1 and line.find("ReferenceResults") == -1:
                     model = line.lstrip()
                     model = model.strip()
                     model = model.replace("\n", "")
@@ -202,7 +202,7 @@ class ValidateTest(object):
         lines = changed_models.readlines()
         for line in lines:
             if line.rfind(".mo") > -1 and line.find("package") == -1:
-                if line.find(self.package) > -1 and line.find("ReferenceResults") == -1:
+                if line.find(f'{self.mo_library}{os.sep}{self.package}') > -1 and line.find("ReferenceResults") == -1:
                     model = line.lstrip()
                     model = model.strip()
                     model = model.replace("\n", "")
