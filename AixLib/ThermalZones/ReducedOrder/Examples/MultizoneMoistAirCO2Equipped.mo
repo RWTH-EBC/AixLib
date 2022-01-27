@@ -127,7 +127,7 @@ equation
   connect(replicator.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-23.4,
           -54},{-18.7,-54},{-14,-54}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, multizone.intGainsRad) annotation (Line(
-        points={{6,-54},{18,-54},{18,-22},{18,-2},{18,-3},{34,-3}},
+        points={{6,-54},{18,-54},{18,-3},{34,-3}},
                                 color={191,0,0}));
   connect(prescribedHeatFlow1.port, multizone.intGainsConv) annotation (Line(
         points={{6,-76},{18,-76},{26,-76},{26,-6.2},{34,-6.2}},
