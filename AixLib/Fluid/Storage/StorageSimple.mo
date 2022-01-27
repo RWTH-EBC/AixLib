@@ -150,50 +150,31 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid, origin = {-52, 33}, rotation = 360), Polygon(points = {{-39, -30}, {-31, -30}, {-11, -30}, {23, -30}, {67, -30}, {93, -30}, {121, -30}, {121, 24}, {-39, 26}, {-39, -30}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 170, 170},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {-37, 38}, rotation = 360), Polygon(points = {{-80, 100}, {-80, 54}, {-62, 54}, {-30, 54}, {32, 54}, {80, 54}, {80, 82}, {80, 100}, {-80, 100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 62, 62},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {4, 0}, rotation = 360), Rectangle(extent = {{-76, 100}, {84, -100}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                   1), Line(points = {{-21, 94}, {-21, 132}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-56, 67}, rotation = 270, visible = use_heatingCoil1), Line(points = {{-54, 88}, {68, 56}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{68, 56}, {-48, 44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{-48, 44}, {62, 6}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, 6}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{76, -81}, {-26, -81}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{0, -9}, {0, 9}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-34, -81}, rotation = 90, visible = use_heatingCoil1), Line(points = {{62, -42}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, -42}, {-42, -80}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{48, 88}, {-54, 88}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1)}), Documentation(info = "<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  Simple model for a buffer storage.
-</p>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
-<p>
-  The water volume can be discretised in several layers.
-</p>
-<p>
-  The following physical processes are modelled
-</p>
+            lineThickness =                                                                                                   1), Line(points = {{-21, 94}, {-21, 132}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-56, 67}, rotation = 270, visible = use_heatingCoil1), Line(points = {{-54, 88}, {68, 56}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{68, 56}, {-48, 44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{-48, 44}, {62, 6}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, 6}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{76, -81}, {-26, -81}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{0, -9}, {0, 9}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-34, -81}, rotation = 90, visible = use_heatingCoil1), Line(points = {{62, -42}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, -42}, {-42, -80}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{48, 88}, {-54, 88}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1)}), Documentation(info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
+<p>Simple multi-layer thermal energy storage model with volumes as heat exchangers (no pressure losses). </p>
+<p><b><span style=\"color: #008000;\">Concept</span> </b></p>
+<p>The water volume of the thermal energy storage can be discretised in several layers. </p>
+<p>The following physical processes are modelled </p>
 <ul>
-  <li>heat exchange with the environment
-  </li>
-  <li>heat exchange over the heat exchanger
-  </li>
-  <li>a bouyancy model for the heat transfer between the layers
-  </li>
+<li>heat exchange with the environment </li>
+<li>heat exchange over the heat exchanger </li>
+<li>a bouyancy model for the heat transfer between the layers </li>
 </ul>
-<p>
-  <br/>
-  <b><span style=\"color: #008000\">Example Results</span></b>
-</p>
-<p>
-  <a href=
-  \"AixLib.HVAC.Storage.Examples.StorageBoiler\">AixLib.HVAC.Storage.Examples.StorageBoiler</a>
-</p>
-<p>
-  <a href=
-  \"AixLib.HVAC.Storage.Examples.StorageSolarCollector\">AixLib.HVAC.Storage.Examples.StorageSolarCollector</a>
-</p>
+<p><br>In contrast to the StorageDetailed model, the following simplifications are taken as a basis:</p>
 <ul>
-  <li>
-    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class
-  </li>
-  <li>
-    <i>13.12.2013</i> by Sebastian Stinner:<br/>
-    implemented
-  </li>
+<li>Only indirect charging and discharging using a heat exchanger is possible. Thus, there are two separated hydraulic circuits.</li>
+<li>The heat exchanger is an array of volumes without any pressure losses</li>
+<li>There is no optional heating coil and no second heating coil. Hence, the StorageSimple model is limited to a two-circuit application.</li>
+</ul>
+<p><br><b><span style=\"color: #008000;\">Example Results</span></b> </p>
+<p><a href=\"AixLib.HVAC.Storage.Examples.StorageBoiler\">AixLib.HVAC.Storage.Examples.StorageBoiler</a> </p>
+<p><a href=\"AixLib.HVAC.Storage.Examples.StorageSolarCollector\">AixLib.HVAC.Storage.Examples.StorageSolarCollector</a> </p>
+<ul>
+<li>November 2022 by Laura Maier:</li>
+<p>Rename model and specify difference compared to detailed thermal energy storage model</p>
+<li><i>November 2014&nbsp;</i> by Marcus Fuchs:<br>Changed model to use Annex 60 base class </li>
+<li><i>13.12.2013</i> by Sebastian Stinner:<br>implemented </li>
 </ul>
 </html>"));
 end StorageSimple;
