@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 model MultizonePostProcessing
   "Calculates and outputs values of interest for multizone model"
   parameter Modelica.SIunits.Volume VAir
@@ -169,6 +169,20 @@ model MultizonePostProcessing
         VAir) if calc_rel_humidity
               "Average relative humidity of all zones"
     annotation (Placement(transformation(extent={{58,48},{74,64}})));
+  Modelica.Blocks.Interfaces.RealOutput QIntGains[numZones,3](
+    final quantity="Energy",
+    final unit="J",
+    displayUnit="kWh") "Summed cooling energy consumed by ideal coolers"
+    annotation (Placement(transformation(extent={{100,-122},{120,-102}}),
+        iconTransformation(extent={{100,-130},{120,-110}})));
+  Modelica.Blocks.Interfaces.RealInput QIntGains_flow[numZones,3](final
+      quantity="HeatFlowRate", final unit="W")
+    "Power consumed for cooling with ideal coolers by each zone" annotation (
+      Placement(transformation(extent={{-140,-140},{-100,-100}}),
+        iconTransformation(extent={{-140,-140},{-100,-100}})));
+  Modelica.Blocks.Continuous.Integrator QIntGainCalc[numZones,3]
+    "Energy consumed for cooling by AHU"
+    annotation (Placement(transformation(extent={{58,-124},{74,-108}})));
 equation
   connect(TAirAverageCalc.u, TAir) annotation (Line(points={{56.4,96},{56.4,100},
           {-120,100}}, color={0,0,127}));
@@ -237,9 +251,14 @@ equation
           {15.5,42},{15.5,56},{56.4,56}}, color={0,0,127}));
   connect(RelHumditiyMeanCalc.y, RelHumidityMean) annotation (Line(points={{74.8,56},
           {88,56},{88,60},{110,60}},          color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  connect(QIntGains_flow, QIntGainCalc.u) annotation (Line(points={{-120,-120},
+          {-32,-120},{-32,-116},{56.4,-116}}, color={0,0,127}));
+  connect(QIntGainCalc.y, QIntGains) annotation (Line(points={{74.8,-116},{92,
+          -116},{92,-112},{110,-112}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -120},{100,100}}),                                  graphics={
         Rectangle(
-          extent={{-100,100},{100,-100}},
+          extent={{-100,100},{100,-120}},
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
@@ -279,7 +298,8 @@ equation
         Ellipse(extent={{2,-64},{10,-70}}, lineColor={28,108,200}),
         Ellipse(extent={{12,-54},{20,-60}}, lineColor={28,108,200})}),
                                                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{100,
+            100}})),
     Documentation(info="<html><p>
   This model is used to simplify the post processing. It's purpose is
   to calculate and output common simulation information and KPI for
