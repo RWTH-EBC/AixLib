@@ -27,19 +27,19 @@ Create_templates:
         - mkdir -p ~/.ssh
         - ssh-keyscan github.com >> ~/.ssh/known_hosts
         - ssh-agent -a /tmp/ssh_agent.sock > /dev/null
-        - echo "${GITHUB_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        - echo "$GITHUB_PRIVATE_KEY" > ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
-        - git config --global user.name "${GITLAB_USER_NAME}"
-        - git config --global user.email "${GITLAB_USER_EMAIL}"
+        - git config --global user.name "$GITLAB_USER_NAME"
+        - git config --global user.email "$GITLAB_USER_EMAIL"
     script:
         - mkdir build_template && cd build_template
-        - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
+        - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
         - cd $CI_PROJECT_NAME
         - python bin/CITests/07_ci_templates/ci_templates.py --setting
         - message="Automatic push of CI with new created CI templates. Please pull the new files before push again. [skip ci]"
         - git add .
         - git commit -m "$message"
-        - git push git@github.com:${Github_Repository}.git
+        - git push git@github.com:$Github_Repository.git
     only:
         variables:
             - $CI_COMMIT_MESSAGE  =~ /${ci_setting_commit}/

@@ -120,17 +120,17 @@ class ValidateTest(object):
             print(f'{self.CRED}Error:{self.CEND} Found no examples')
             exit(0)
         for example in example_list:
-            print(f'Simulate model: {example}')
+            #print(f'Simulate model: {example}')
             result = self.dymola.checkModel(example, simulate=True)
             if result is True:
-                print(f'\n {self.green}Successful:{self.CEND} {example}\n')
+                print(f'\n{self.green}Successful:{self.CEND} {example}\n')
             if result is False:
                 print(f'Simulate model {example} {self.CRED} failed! {self.CEND} \n Second check test for model {example}')
                 sec_result = self.dymola.checkModel(example, simulate=True)
                 if sec_result is True:
-                    print(f'\n {self.green} Successful: {self.CEND} {example} \n')
+                    print(f'\n{self.green} Successful: {self.CEND} {example} \n')
                 if sec_result is False:
-                    print(f'\n {self.CRED} Error: {self.CEND} {example}\n')
+                    print(f'\n{self.CRED} Error: {self.CEND} {example}\n')
                     log = self.dymola.getLastError()
                     print(f'{log}')
                     error_model.append(example)
@@ -165,7 +165,7 @@ class ValidateTest(object):
         lines = changed_models.readlines()
         for line in lines:
             if line.rfind(".mo") > -1 and line.find("package") == -1:
-                if line.find(self.package) > -1 and line.find("ReferenceResults") == -1:
+                if line.find(f'{self.mo_library}{os.sep}{self.package}') > -1 and line.find("ReferenceResults") == -1:
                     model = line.lstrip()
                     model = model.strip()
                     model = model.replace("\n", "")
@@ -202,7 +202,7 @@ class ValidateTest(object):
         lines = changed_models.readlines()
         for line in lines:
             if line.rfind(".mo") > -1 and line.find("package") == -1:
-                if line.find(self.package) > -1 and line.find("ReferenceResults") == -1:
+                if line.find(f'{self.mo_library}{os.sep}{self.package}') > -1 and line.find("ReferenceResults") == -1:
                     model = line.lstrip()
                     model = model.strip()
                     model = model.replace("\n", "")
@@ -287,8 +287,8 @@ class Create_whitelist(object):
             "Advanced.TranslationInCommandLog:=true;")  # ## Writes all information in the log file, not only the
 
     def read_script_version(self):
-        aixlib_dir = self.library + os.sep + "Resources" + os.sep + "Scripts"
-        filelist = (glob.glob(aixlib_dir + os.sep + "*.mos"))
+
+        '''
         list = []
         for file in filelist:
             list.append(file.replace(".mos", ""))
@@ -305,7 +305,15 @@ class Create_whitelist(object):
         data = (data[len(data) - 1])
         data = data.split(os.sep)
         version = (data[len(data) - 1])
+        return version'''
+        from natsort import natsorted
+        aixlib_dir = self.library + os.sep + "Resources" + os.sep + "Scripts"
+        filelist = (glob.glob(aixlib_dir + os.sep + "*.mos"))
+        sorted_list = natsorted(filelist)
+        last_script = sorted_list[len(sorted_list) - 1]
+        version = last_script[last_script.rfind(os.sep)+1:last_script.rfind(".mos")]
         return version
+
 
     def _check_fileexist(self):
         if os.path.exists(self.wh_file):
@@ -326,7 +334,6 @@ class Create_whitelist(object):
             if line.strip("\n") == version.strip("\n"):
                 print(f'Whitelist is on version {version}. The Whitelist is already up to date')
                 version_check = True
-
         vfile.close()
         return version_check
 
@@ -377,14 +384,14 @@ class Create_whitelist(object):
                 continue
             if result is False:
                 print(f'\n{self.CRED}Error:{self.CEND} {model}\n')
-                log = self.dymola.getLastError()
-                print(f'{log}')
+                #log = self.dymola.getLastError()
+                #print(f'{log}')
                 error_model.append(model)
-                error_message.append(log)
+                #error_message.append(log)
                 continue
         self.dymola.savelog(f'{self.wh_lib}-log.txt')
         self.dymola.close()
-        return error_model, error_message
+        return error_model
 
     def _write_exit_log(self, version_check):  # write entry in exit file
         exit = open(self.exit_file, "w")
@@ -524,8 +531,7 @@ def create_wh_workflow():
             model_list = Whitelist_class._get_wh_model(args.wh_path)
         print(f'Write new writelist from {args.wh_library} library')
         Whitelist_class._dym_check_lic()
-        result = Whitelist_class._check_wh_model(model_list)
-        error_model_list = result[0]
+        error_model_list = Whitelist_class._check_wh_model(model_list)
         Whitelist_class._write_whitelist(error_model_list, version)
         exit(0)
     else:

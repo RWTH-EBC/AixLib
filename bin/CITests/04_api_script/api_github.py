@@ -32,10 +32,11 @@ class GET_API_GITHUB(object):
 		response = requests.request("GET", url, headers=headers, data=payload)
 		branch = response.json()
 		commit = branch["commit"]
-		commit = commit["author"]
-		if commit is not None:
-			login = commit["login"]
-			return login
+		commit = commit["commit"]
+		committer = commit["committer"]
+		name = committer["name"]
+		if name is not None:
+			return name
 
 	def return_owner(self):
 		owner = self.github_repo.split("/")
@@ -51,14 +52,12 @@ class PULL_REQUEST_GITHUB(object):
 	
 	def _post_comment_IBBSA_merge(self, owner, base_branch):
 		url = f'https://api.github.com/repos/{self.github_repo}/pulls'
-		#payload = '{\n    \"title\": \"IBPSA Merge ' + self.working_branch + '\",\n    \"body\": \"**Following you will find the instructions for the IBPSA merge:**\\n  1. Please pull this branch IBPSA_Merge to your local repository.\\n 2. As an additional saftey check please open the AixLib library in dymola and check whether errors due to false package orders may have occurred. You do not need to translate the whole library or simulate any models. This was already done by the CI.\\n 3. If you need to fix bugs or perform changes to the models of the AixLib, push these changes using this commit message to prevent to run the automatic IBPSA merge again: **`fix errors manually`**. \\n  4. You can also output the different reference files between the IBPSA and the AixLib using the CI or perform an automatic update of the referent files which lead to problems. To do this, use one of the following commit messages \\n  **`Trigger CI - give different reference results`** \\n  **`Trigger CI - Update reference results`** \\n The CI outputs the reference files as artifacts in GitLab. To find them go to the triggered pipeline git GitLab and find the artifacts as download on the right site. \\n 5. If the tests in the CI have passed successfully, merge the branch IBPSA_Merge to development branch. **Delete** the Branch ' + self.correct_branch + '\",\n    \"head\": \"' + self.OWNER + ':' + self.correct_branch + '\",\n    \"base\": \"' + self.working_branch + '\"\n  \n}'
-		title = f'\"title\": \"IBPSA Merge {self.working_branch}\"'
+		title = f'\"title\": \"IBPSA Merge into {base_branch}\"'
 		body = f'\"body\":\"**Following you will find the instructions for the IBPSA merge:**\\n  1. Please pull this branch IBPSA_Merge to your local repository.\\n 2. As an additional saftey check please open the AixLib library in dymola and check whether errors due to false package orders may have occurred. You do not need to translate the whole library or simulate any models. This was already done by the CI.\\n 3. If you need to fix bugs or perform changes to the models of the AixLib, push these changes using this commit message to prevent to run the automatic IBPSA merge again: **`fix errors manually`**. \\n  4. You can also output the different reference files between the IBPSA and the AixLib using the CI or perform an automatic update of the referent files which lead to problems. To do this, use one of the following commit messages \\n  **`ci_dif_ref`** \\n  **`ci_update_ref`** \\n The CI outputs the reference files as artifacts in GitLab. To find them go to the triggered pipeline git GitLab and find the artifacts as download on the right site. \\n 5. If the tests in the CI have passed successfully, merge the branch IBPSA_Merge to development branch. **Delete** the Branch {self.working_branch}\"'
 		head = f'\"head\":\"{owner}:{self.working_branch}\"'
 		base = f'\"base\": \"{base_branch}\"'
 		message = f'\n	{title},\n	{body},\n	{head},\n	{base}\n'
 		payload = "{" + message + "}"
-
 		headers = {
 			'Authorization': 'Bearer '+self.github_token,
 			'Content-Type': 'application/json'
@@ -110,7 +109,7 @@ class PULL_REQUEST_GITHUB(object):
 
 	def _post_comment_regression(self, pr_number, page_url):
 		url = f'https://api.github.com/repos/{self.github_repo}/issues/{str(pr_number)}/comments'
-		message = f'Errors in regression test. Compare the results on the following page\\n {page_url}'
+		message = f'Errors in regression test. Compare the results on the following page\\n {page_url} \\n \\n To only check reference results, push your new changes by commiting \\n git commit -m "ci_regression_test" # Start the regression test [only as pull_request] \\n \\n To update the reference results, add the models to the file bin/08_interact_CI/update_ref.txt and commit using \\n git commit -m "ci_update_ref"'
 		body = f'\"body\":\"{message}\"'
 		payload = "{"+body+"}"
 		headers = {
@@ -137,7 +136,7 @@ if  __name__ == '__main__':
 	check_test_group = parser.add_argument_group("Arguments to set Environment Variables")
 	check_test_group.add_argument("-CB", "--correct-branch", default ="${Newbranch}", help="Branch to correct your Code")
 	check_test_group.add_argument("-GR", "--github-repo", default="RWTH-EBC/AixLib", help="Environment Variable owner/RepositoryName" )
-	check_test_group.add_argument('-WB', "--working-branch",default="${TARGET_BRANCH}", help="Your current working Branch")
+	check_test_group.add_argument('-WB', "--working-branch", default="${TARGET_BRANCH}", help="Your current working Branch")
 	check_test_group.add_argument("--base-branch", default="master",
 								  help="your base branch (master or develpment)")
 	check_test_group.add_argument('-GT', "--github-token", default="${GITHUB_API_TOKEN}", help="Your Set GITHUB Token")
@@ -194,7 +193,7 @@ if  __name__ == '__main__':
 											   github_token=args.github_token)
 			get_api = GET_API_GITHUB(github_repo=args.github_repo, working_branch=args.working_branch)
 			owner = get_api.return_owner()
-			base_branch = "development"
+			base_branch = args.base_branch
 			pr_response = pull_request._post_comment_IBBSA_merge(owner, base_branch)
 			time.sleep(3)
 			pr_number = get_api._get_pr_number()

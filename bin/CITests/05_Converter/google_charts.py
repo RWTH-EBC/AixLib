@@ -224,6 +224,17 @@ class Plot_Charts(object):
         except OSError:
             print(f'Error: Creating directory. {directory}')
 
+    def _read_unitTest_numerical_log(self):
+        log_file = open(self.f_log, "r")
+        lines = log_file.readlines()
+        model_list = []
+        for line in lines:
+            if line.find("*** Warning:") > -1:
+                if line.find("*** Warning: Numerical Jacobian in 'RunScript") > -1 and line.find(".mos") > -1:
+                    model = line[line.rfind((os.sep)) :line.find(".mos")].lstrip()
+                    model_list.append(model)
+        return model_list
+
     def _read_unitTest_log(self):  # Read unitTest_log from regressionTest, write variable and modelname with difference
         log_file = open(self.f_log, "r")
         lines = log_file.readlines()
@@ -233,6 +244,10 @@ class Plot_Charts(object):
                 if line.find(".mat") > -1:
                     model = line[line.find(("Warning:")) + 9:line.find(".mat")]  # modelname
                     var = line[line.find((".mat:")) + 5:line.find("exceeds ")].lstrip()  # variable name
+                    model_var_list.append(f'{model}:{var}')
+                if line.find("*** Warning: Numerical Jacobian in 'RunScript") > -1 and line.find(".mos") > -1:
+                    model = line[line.rfind(os.sep)+1 :line.find(".mos")].lstrip()
+                    var = ""
                     model_var_list.append(f'{model}:{var}')
         return model_var_list
 
@@ -315,18 +330,36 @@ class Plot_Charts(object):
 
     def _mako_line_html_chart(self, model, var):  # Load and read the templates, write variables in the templates
         from mako.template import Template
-        path_name = (f'{self.library}{os.sep}funnel_comp{os.sep}{model}.mat_{var}'.strip())
-        if os.path.isdir(path_name) is False:
-            print(f'Cant find folder: {self.CRED}{model}{self.CEND} with variable {self.CRED}{var}{self.CEND}')
+        if var == "":
+            path_list = os.listdir((f'{self.library}{os.sep}funnel_comp'.strip()))
+            for file in path_list:
+                if file[:file.find(".mat")] == model:
+                    path_name = (f'{self.library}{os.sep}funnel_comp{os.sep}{file}'.strip())
+                    var = file[file.find(".mat") + 5:]
+                    if os.path.isdir(path_name) is False:
+                        print(f'Cant find folder: {self.CRED}{model}{self.CEND} with variable {self.CRED}{var}{self.CEND}')
+                    else:
+                        print(f'Plot model: {self.green}{model}{self.CEND} with variable:{self.green} {var}{self.CEND}')
+                        value = Plot_Charts._read_csv_funnel(self, path_name)
+                        mytemplate = Template(filename=self.chart_temp_file)  # Render Template
+                        hmtl_chart = mytemplate.render(values=value, var=[f'{var}_ref', var], model=model,
+                                                       title=f'{model}.mat_{var}')
+                        file_tmp = open(f'{self.temp_chart_path}{os.sep}{model}_{var.strip()}.html', "w")
+                        file_tmp.write(hmtl_chart)
+                        file_tmp.close()
         else:
-            print(f'Plot model: {self.green}{model}{self.CEND} with variable:{self.green} {var}{self.CEND}')
-            value = Plot_Charts._read_csv_funnel(self, path_name)
-            mytemplate = Template(filename=self.chart_temp_file)  # Render Template
-            hmtl_chart = mytemplate.render(values=value, var=[f'{var}_ref', var], model=model,
-                                           title=f'{model}.mat_{var}')
-            file_tmp = open(f'{self.temp_chart_path}{os.sep}{model}_{var.strip()}.html', "w")
-            file_tmp.write(hmtl_chart)
-            file_tmp.close()
+            path_name = (f'{self.library}{os.sep}funnel_comp{os.sep}{model}.mat_{var}'.strip())
+            if os.path.isdir(path_name) is False:
+                print(f'Cant find folder: {self.CRED}{model}{self.CEND} with variable {self.CRED}{var}{self.CEND}')
+            else:
+                print(f'Plot model: {self.green}{model}{self.CEND} with variable:{self.green} {var}{self.CEND}')
+                value = Plot_Charts._read_csv_funnel(self, path_name)
+                mytemplate = Template(filename=self.chart_temp_file)  # Render Template
+                hmtl_chart = mytemplate.render(values=value, var=[f'{var}_ref', var], model=model,
+                                               title=f'{model}.mat_{var}')
+                file_tmp = open(f'{self.temp_chart_path}{os.sep}{model}_{var.strip()}.html', "w")
+                file_tmp.write(hmtl_chart)
+                file_tmp.close()
 
     def _mako_line_html_new_chart(self, ref_file, value_list, legend_List):  # Load and read the templates, write variables in the templates
         from mako.template import Template
@@ -379,6 +412,9 @@ class Plot_Charts(object):
 
     def _create_layout(self):  # Creates a layout index that has all links to the subordinate index files
         package_list = []
+        if not os.path.exists(self.chart_dir):
+            print(f'Folder {self.chart_dir} does not exist.')
+            exit(0)
         for folder in os.listdir(self.chart_dir):
             if folder == "style.css" or folder == "index.html":
                 continue
@@ -422,6 +458,7 @@ def _delte_folder():
         print(f'directonary {chart_dir} does not exist.')
     else:
         folder_list = os.listdir(chart_dir)
+        print(folder_list)
         for folder in folder_list:
             if folder.find(".") > -1:
                 os.remove(chart_dir + os.sep + folder)
@@ -511,7 +548,6 @@ if __name__ == '__main__':
                 var = list[1]
                 if args.funnel_comp is True:  # Data from funnel comp
                     charts._mako_line_html_chart(model, var)
-
                 if args.ref_txt is True:  # Data from reference files
                     ref_file = charts._get_ref_file(model)
                     if ref_file is None:

@@ -10,12 +10,12 @@ stages:
         - source activate python36  
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package $lib_package --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag}
     artifacts:
         when: on_failure
         paths:
-            - ${library}/${library}.${lib_package}-log.txt
-            - ${library}/${library}.${lib_package}-errorlog.txt
+            - ${library}/${library}.$lib_package-log.txt
+            - ${library}/${library}.$lib_package-errorlog.txt
         expire_in: 7 day 
     only:
         - external_pull_requests
@@ -45,12 +45,12 @@ Check_${library}_${package}:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 >  ${ch_file}
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} -CM 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package $lib_package --library ${library} -DS ${dymolaversion} -CM
     artifacts:
         when: on_failure
         paths:
-            - ${library}/${library}.${lib_package}-log.txt
-            - ${library}/${library}.${lib_package}-errorlog.txt
+            - ${library}/${library}.$lib_package-log.txt
+            - ${library}/${library}.$lib_package-errorlog.txt
         expire_in: 7 day
     except:
         refs:
@@ -83,12 +83,12 @@ Check_${library}_${package}_changed_models:
         - source activate python36  
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package $lib_package --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag}
     artifacts:
         when: on_failure
         paths:
-            - ${library}/${library}.${lib_package}-log.txt
-            - ${library}/${library}.${lib_package}-errorlog.txt
+            - ${library}/${library}.$lib_package-log.txt
+            - ${library}/${library}.$lib_package-errorlog.txt
         expire_in: 7 day 
     only:
         variables:
@@ -121,26 +121,26 @@ whitelist_job:
         - mkdir -p ~/.ssh
         - ssh-keyscan github.com >> ~/.ssh/known_hosts
         - ssh-agent -a /tmp/ssh_agent.sock > /dev/null
-        - echo "${GITHUB_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        - echo "$GITHUB_PRIVATE_KEY" > ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
-        - git config --global user.name "${GITLAB_USER_NAME}"
-        - git config --global user.email "${GITLAB_USER_EMAIL}"
+        - git config --global user.name "$GITLAB_USER_NAME"
+        - git config --global user.email "$GITLAB_USER_EMAIL"
     script:
         - mkdir whitelist && cd whitelist
-        - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
-        - cd ${CI_PROJECT_NAME}
+        - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:$Github_Repository.git
+        - cd $CI_PROJECT_NAME
         - echo "FAIL" > ${exit_file}
         - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} ${git_url} ${wh_path} --library ${library} --wh-library ${wh_library} --whitelist
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate python36
         - export PYTHONIOENCODING=utf-8 # just in case
-        - cd whitelist && cd ${CI_PROJECT_NAME}
+        - cd whitelist && cd $CI_PROJECT_NAME
         - if cat ${exit_file} | grep "FAIL"; then
-            message="Automatic push of CI - Update model_whitelist. Please pull the new files before push again. [skip ci]" ;
+            message="${bot_check_commit}" ;
             git add ${wh_file} ;
             git commit -m "$message" ;
-            git push git@github.com:${Github_Repository}.git ;
+            git push git@github.com:$Github_Repository.git ;
             GREEN='\033[0;32m' ;
             NC='\033[0m' ;
             echo  -e "$GREEN New html whitelist files were pushed to this branch.$NC" ;
@@ -152,7 +152,7 @@ whitelist_job:
           fi
     artifacts:
         paths:
-            - whitelist/${CI_PROJECT_NAME}/${wh_file}
+            - whitelist/$CI_PROJECT_NAME/${wh_file}
         expire_in: 7 day 
     only:
         variables:

@@ -16,9 +16,10 @@ class StyleCheck(object):
 		self.dymolaversion = dymolaversion
 		self.changed_models = changed_models
 		sys.path.append('bin/CITests')
-		from _config import exit_file, html_wh_file
+		from _config import exit_file, html_wh_file, ch_file
 		self.exit_file = exit_file
 		self.html_wh_file = html_wh_file
+		self.ch_file = ch_file
 
 		self.CRED = '\033[91m'  # Colors
 		self.CEND = '\033[0m'
@@ -99,7 +100,7 @@ class StyleCheck(object):
 		return logfile, model_list
 
 	def _sort_mo_models(self):
-		changed_file= codecs.open(self.exit_file, "r", encoding='utf8')
+		changed_file = codecs.open(self.ch_file, "r", encoding='utf8')
 		model_list = []
 		lines = changed_file.readlines()
 		for line in lines:

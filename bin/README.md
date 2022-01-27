@@ -10,17 +10,23 @@ The whole process is automatically triggered by checking into the version contro
 
 ## CI commands and ci [lists](interact_CI)
 
-- `git commit -m "ci_update_ref"` 			# Update referencefiles for all models that are added in file bin/08_interact_CI/update_ref.txt  
-- `git commit -m "ci_show_ref"`	  			# plot all referencefiles that are added in file bin/08_interact_CI/show_ref.txt [only as pull_request]
-- `git commit -m "ci_correct_html"`     	# CI bot message: correct html syntax
+- `git commit -m "ci_update_ref"` 			# Update referencefiles for all models that are added in file bin/interact_CI/update_ref.txt  
+- `git commit -m "ci_show_ref"`	  			# plot all referencefiles that are added in file bin/interact_CI/show_ref.txt [only as pull_request]
 - `git commit -m "ci_create_whitelist"` 	# create a new whitelist for the model check
 - `git commit -m "ci_create_html_whitelist"`# create a new html whitelist for the html check
 - `git commit -m "ci_simulate"` 	  		# Simulate all examples
 - `git commit -m "ci_check"` 		  		# Check all models
 - `git commit -m "ci_regression_test"` 		# Start the regression test [only as pull_request]
 - `git commit -m "ci_html"` 				# Test only the html of models
-- `git commit -m " [skip ci]"` 			# Skip the CI
+- `git commit -m " [skip ci]"` 				# Skip the CI
 
+## [Create your own templates](https://git.rwth-aachen.de/EBC/EBC_all/gitlab_ci/templates)
+
+1. Copy the content of the folder modelica-ci-tests into your repo under the folder "bin/".
+2. Execute the `python bin/CITests/07_ci_templates/ci_templates.py` command in the root directory of your repository. Also the variables in the `bin/CITests/_config.py` should be checked before. Important are the variables `image_name` and `variable_main_list`.
+3. Now the templates should have been created with the main yaml file in your folder
+4. The environment variables "GITHUB_API_TOKEN", "GITHUB_PRIVATE_KEY" and  must be set under Setting/CICD/Variables. For testing the push command `git commit -m "ci_setting"` can be used.
+5. If changes are made to the templates (for example, an additional package is to be tested), these can be added to the `bin\Setting\CI_setting.toml` file. Then execute the command `python bin/CITests/07_ci_templates/ci_templates.py --setting`.
 
 ## What CI Tests are implement?
 #### Check, Simulate and Regressiontest: [UnitTests](CITests/02_UnitTests)

@@ -4,9 +4,12 @@
 Here you find the Documentation for CI with AixLib
 
 
-1. [General Documentation](https://github.com/RWTH-EBC/AixLib/blob/development/bin/04_Documentation/Documentation_GitLab.md)
-2. [How to integrate Unittests](How_to_integrate_new_tests.md) More from a CI Environment view
-3. [Gitlab CICD Commands](https://github.com/RWTH-EBC/AixLib/blob/development/bin/04_Documentation/Gitlab_CICD_Commands.md) From a Modelica POV
+1. [General Documentation](Documentation_GitLab.md)
+2. [How to integrate Unittests](How_to_integrate_new_tests.md) 
+3. [Gitlab CICD Commands](Gitlab_CICD_Commands.md) 
+4. [Setup your own gitlab runner](setup_gitlab_runner.md)
 
 
-For more Documentation for CI with AixLib look at the following [Repository](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker/tree/master/04_Documentation)
+For more information about the CI with dymola docker look at the following [Repository](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
+
+For more information about the modelica CI templates look at the following [Repository](https://git.rwth-aachen.de/EBC/EBC_all/gitlab_ci/templates)

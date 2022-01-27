@@ -1,7 +1,8 @@
 import os
-# image_name
-image_name = 'registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest'
+
+image_name = 'registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest' # image_name
 variable_main_list = ['Github_Repository: RWTH-EBC/AixLib', 'GITLAB_Page: https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib']
+base_branch = "development"
 
 
 #[Whitelist files]

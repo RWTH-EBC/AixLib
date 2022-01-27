@@ -18,12 +18,3 @@ update_ref : Updates the model and the whole package in which the model is locat
 - `git commit -m "ci_regression_test"` 		# Start the regression test [only as pull_request]
 - `git commit -m "ci_html"` 				# Test only the html of models
 
-
-## Create yaml templates
-`python bin/CITests/07_ci_templates/ci_templates.py`
-
-## Create yaml templates from toml file 
-`python bin/CITests/07_ci_templates/ci_templates.py --setting`
-
-## Check files and paths in _config.py
-`python bin/CITests/01_CleanUp/setting_check.py`

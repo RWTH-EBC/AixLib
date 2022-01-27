@@ -1,0 +1,22 @@
+name: github-action-slack
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 12 1 * *'
+
+
+jobs:
+  slack_message_job:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # in this example, there is a newer version already installed, 3.7.7, so the older version will be downloaded
+        python-version: ['3.10']
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.0-alpha.1'
+      - run:  pip install requests datetime argparse slack_sdk
+      - run:  python bin/CITests/04_api_script/api_slack.py --github-token ${{ secrets.GIT_TOKEN }} --slack-token ${{ secrets.SLACK_BOT_TOKEN }} --github-repo "RWTH-EBC/AixLib"
+

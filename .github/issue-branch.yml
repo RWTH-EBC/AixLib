@@ -1,0 +1,9 @@
+# configuration file for automatic issue branch creation
+branchName: '${issue.number}-${issue.title}'
+silent: false
+autoCloseIssue: true
+gitSafeReplacementChar: '-'
+
+branches:
+  - label: question
+    skip: true

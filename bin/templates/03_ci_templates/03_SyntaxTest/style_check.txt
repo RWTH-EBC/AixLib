@@ -35,7 +35,7 @@ Style_Check_ChangedModel:
         - source activate python36  
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - (git diff --raw --diff-filter=AMT HEAD^1) >  bin/03_WhiteLists/changedmodels.txt
+        - (git diff --raw --diff-filter=AMT HEAD^1) >  ${ch_file}
         - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -CM -DS ${dymolaversion}
     only:
         changes:
