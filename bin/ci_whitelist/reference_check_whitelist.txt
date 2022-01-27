@@ -4,6 +4,4 @@ AixLib.Obsolete
 
 AixLib.Types
 
-AixLib.Utilities
-
 AixLib.Fluid.Solar.Thermal.Examples
