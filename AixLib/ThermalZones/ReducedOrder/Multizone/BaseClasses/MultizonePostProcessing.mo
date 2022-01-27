@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
+within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 model MultizonePostProcessing
   "Calculates and outputs values of interest for multizone model"
   parameter Modelica.SIunits.Volume VAir
@@ -280,7 +280,10 @@ equation
         Ellipse(extent={{12,-54},{20,-60}}, lineColor={28,108,200})}),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model is used to simplify the post processing. It&apos;s purpose is to calculate and output common simulation information and KPI for later post processing. </p>
+    Documentation(info="<html><p>
+  This model is used to simplify the post processing. It's purpose is
+  to calculate and output common simulation information and KPI for
+  later post processing.
+</p>
 </html>"));
 end MultizonePostProcessing;

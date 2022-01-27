@@ -201,54 +201,49 @@ within AixLib.Controls.Continuous;
                -76}}, color={0,0,127})}),
     defaultComponentName="conPID",
  Documentation(
- info="<html>
- <p>
- Block of a controller for set point tracking with a hysteresis element that switches the controller on and off, and a timer that prevents the
- controller to short cycle.
- </p>
- <p>
- The controller is similar to
- <a href=\"modelica://AixLib.Controls.Continuous.PIDHysteresis\">
- AixLib.Controls.Continuous.PIDHysteresis</a> but in addition,
- it has a timer that prevents the controller from switching to on
- too fast. When the controller switches off, the timer starts and
- avoids the controller from switching on until <code>minOffTime</code> seconds elapsed.
- </p>
- </html>", revisions="<html>
- <ul>
- <li>
- June 1, 2020, by Michael Wetter:<br/>
- Corrected wrong convention of reverse and direct action.<br/>
- Changed default configuration from PID to PI.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1365\">issue 1365</a>.
- </li>
- <li>
- September 29, 2016, by Michael Wetter:<br/>
- Removed parameter <code>limitsAtInit</code> because it is no longer
- used in the PID controller.
- </li>
- <li>
- March 15, 2016, by Michael Wetter:<br/>
- Changed the default value to <code>strict=true</code>
- in order to avoid events when the controller saturates.
- Also assigned propogated values to be <code>final</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
- </li>
- <li>
- February 24, 2010, by Michael Wetter:<br/>
- Changed PID controller from Modelica Standard Library to
- PID controller from Buildings library to allow reverse control action.
- </li>
- <li>
- October 2, 2009, by Michael Wetter:<br/>
- Fixed error in default parameter <code>eOn</code>.
- </li>
- <li>
- February 9, 2009, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),  
+ info="<html><p>
+  Block of a controller for set point tracking with a hysteresis
+  element that switches the controller on and off, and a timer that
+  prevents the controller to short cycle.
+</p>
+<p>
+  The controller is similar to <a href=
+  \"modelica://AixLib.Controls.Continuous.PIDHysteresis\">AixLib.Controls.Continuous.PIDHysteresis</a>
+  but in addition, it has a timer that prevents the controller from
+  switching to on too fast. When the controller switches off, the timer
+  starts and avoids the controller from switching on until
+  <code>minOffTime</code> seconds elapsed.
+</p>
+</html>", revisions="<html>
+<ul>
+  <li>June 1, 2020, by Michael Wetter:<br/>
+    Corrected wrong convention of reverse and direct action.<br/>
+    Changed default configuration from PID to PI.<br/>
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1365\">issue
+    1365</a>.
+  </li>
+  <li>September 29, 2016, by Michael Wetter:<br/>
+    Removed parameter <code>limitsAtInit</code> because it is no longer
+    used in the PID controller.
+  </li>
+  <li>March 15, 2016, by Michael Wetter:<br/>
+    Changed the default value to <code>strict=true</code> in order to
+    avoid events when the controller saturates. Also assigned
+    propogated values to be <code>final</code>. This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
+  </li>
+  <li>February 24, 2010, by Michael Wetter:<br/>
+    Changed PID controller from Modelica Standard Library to PID
+    controller from Buildings library to allow reverse control action.
+  </li>
+  <li>October 2, 2009, by Michael Wetter:<br/>
+    Fixed error in default parameter <code>eOn</code>.
+  </li>
+  <li>February 9, 2009, by Michael Wetter:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"),  
    __Dymola_LockedEditing="Model from IBPSA");
  end PIDHysteresisTimer;

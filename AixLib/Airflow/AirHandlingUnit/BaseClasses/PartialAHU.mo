@@ -155,7 +155,7 @@ protected
   Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir_internal(unit="m3/s") "Needed to connect to conditional connector";
 equation
   dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
-  humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
+  humidification = if humidificationSet and heating and cooling then humidificationSet else false;
 
   connect(Vflow_in_extractAir, Vflow_in_extractAir_internal);
 
