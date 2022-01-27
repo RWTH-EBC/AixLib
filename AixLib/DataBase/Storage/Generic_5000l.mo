@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Storage;
+within AixLib.DataBase.Storage;
 record Generic_5000l "Pseudo storage with 5000 l (standing)"
   extends BufferStorageBaseDataDefinition(
     hTank=2.82,
@@ -28,13 +28,21 @@ record Generic_5000l "Pseudo storage with 5000 l (standing)"
     lengthHC1=1500,
     lengthHC2=1500);
 
-  annotation (Icon(graphics),               Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Buffer Storage: Generic 5000 l</p>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Base data definition for record used with <a
-href=\"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and <a
-href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a> </p>
+  annotation (Icon(graphics),               Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Buffer Storage: Generic 5000 l
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Base data definition for record used with <a href=
+  \"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and
+  <a href=
+  \"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a>
+</p>
 </html>", revisions="<html>
 <ul>
   <li>December, 9 2021, by Alexander Kümpel:<br/>

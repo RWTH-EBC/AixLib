@@ -28,12 +28,17 @@ expandable connector HeatPumpSystemERCBus "Data bus for ERC Heatpump system"
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(graphics,
             coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Definition of a bus connector for the ERC Heatpump System.</p>
+    Documentation(info="<html><p>
+  Definition of a bus connector for the ERC Heatpump System.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
-<li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
+  <li>October 25, 2017, by Alexander Kümpel:<br/>
+    Adaption for hydraulic modules in AixLib.
+  </li>
+  <li>February 6, 2016, by Peter Matthes:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end HeatPumpSystemERCBus;
