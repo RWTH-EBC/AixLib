@@ -1,5 +1,5 @@
 within AixLib.DataBase.Storage;
-record BufferStorageBaseDataDefinition
+record StorageDetailedBaseDataDefinition
   "Base data definition for Buffer storage records"
   extends Modelica.Icons.Record;
 ///////////input parameters////////////
@@ -72,4 +72,4 @@ record BufferStorageBaseDataDefinition
   </li>
 </ul>
 </html>"));
-end BufferStorageBaseDataDefinition;
+end StorageDetailedBaseDataDefinition;
