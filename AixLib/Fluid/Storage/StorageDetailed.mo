@@ -36,9 +36,9 @@ model StorageDetailed
 
   parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby
-    DataBase.Storage.BufferStorageBaseDataDefinition                                                                                         "Data record for Storage"
-  annotation (choicesAllMatching);
+  replaceable parameter DataBase.Storage.StorageDetailedBaseDataDefinition data
+    constrainedby DataBase.Storage.StorageDetailedBaseDataDefinition
+    "Data record for Storage" annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
 
@@ -170,12 +170,6 @@ model StorageDetailed
       "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
-  Modelica.Fluid.Interfaces.FluidPort_b portHC1Out(redeclare final package
-      Medium =
-        MediumHC1) if useHeatingCoil1
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-90,2},{-70,22}}),
-        iconTransformation(extent={{-88,20},{-74,32}})));
   AixLib.Fluid.MixingVolumes.MixingVolume          layer[n](
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
@@ -213,6 +207,12 @@ model StorageDetailed
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,36},{-72,56}}),
         iconTransformation(extent={{-90,50},{-74,64}})));
+  Modelica.Fluid.Interfaces.FluidPort_b portHC1Out(redeclare final package
+      Medium =
+        MediumHC1) if useHeatingCoil1
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-90,2},{-70,22}}),
+        iconTransformation(extent={{-88,20},{-74,32}})));
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /////HEATING COIL 2 ////////////////////////////////////////////////////////////////////
