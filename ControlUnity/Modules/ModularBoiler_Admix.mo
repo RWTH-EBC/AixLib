@@ -3,7 +3,7 @@ model ModularBoiler_Admix
   extends AixLib.Fluid.Interfaces.PartialModularPort_b(
   redeclare package Medium = AixLib.Media.Water,
   final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
-  nPorts=2,
+  final nPorts=k,
   dp_start=0,
   m_flow_start=0,
   dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2,
@@ -85,7 +85,7 @@ model ModularBoiler_Admix
     "Temperature sensor of hot side of heat generator (supply)"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-80,0})));
+        origin={-72,0})));
   Modelica.Blocks.Continuous.Integrator integrator1
     annotation (Placement(transformation(extent={{76,-40},{88,-28}})));
 
@@ -103,7 +103,7 @@ model ModularBoiler_Admix
     per(pressure(V_flow={0,V_flow_nominal,2*V_flow_nominal}, dp={dp_nominal/0.8,
             dp_nominal,0})),
     addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+    annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
   AixLib.Systems.ModularEnergySystems.Interfaces.BoilerControlBus
     boilerControlBus
     annotation (Placement(transformation(extent={{-74,88},{-54,108}})));
@@ -249,15 +249,15 @@ equation
                                                    color={0,0,127}));
 
   connect(fan1.port_b, heatGeneratorNoControl.port_a)
-    annotation (Line(points={{-40,0},{-22,0}},color={0,127,255}));
+    annotation (Line(points={{-32,0},{-22,0}},color={0,127,255}));
   connect(senTCold.port_b, fan1.port_a)
-    annotation (Line(points={{-70,0},{-60,0}}, color={0,127,255}));
+    annotation (Line(points={{-62,0},{-52,0}}, color={0,127,255}));
   connect(controlBoilerNotManufacturer.DeltaTWater_b, heatGeneratorNoControl.dTWater)
     annotation (Line(points={{-79,40.8},{-70,40.8},{-70,16},{-34,16},{-34,9},{-24,9}},
                    color={0,0,127}));
 
   connect(senTCold.T, controlBoilerNotManufacturer.TCold) annotation (Line(
-        points={{-80,11},{-80,26},{-114,26},{-114,49},{-102,49}}, color={0,0,127}));
+        points={{-72,11},{-72,26},{-114,26},{-114,49},{-102,49}}, color={0,0,127}));
   connect(heatGeneratorNoControl.TVolume, controlBoilerNotManufacturer.THot)
     annotation (Line(points={{-12,-11},{-12,-26},{-110,-26},{-110,46},{-102,46}},
         color={0,0,127}));
@@ -290,10 +290,10 @@ equation
     annotation (Line(points={{-79,54},{-74,54},{-74,54.2},{-62,54.2}}, color={0,
           0,127}));
   connect(regulation_modularBoiler.mFlow_relB, fan1.y) annotation (Line(points={{-41.8,
-          55},{-34,55},{-34,20},{-50,20},{-50,12}},        color={0,0,127}));
+          55},{-34,55},{-34,20},{-42,20},{-42,12}},        color={0,0,127}));
   connect(boilerControlBus.isOn, hierarchicalControl_modularBoilerNEW1.isOn)
     annotation (Line(
-      points={{-63.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,53.6},{0,53.6}},
+      points={{-63.95,98.05},{-34,98.05},{-34,92},{-26,92},{-26,52},{-0.2,52}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -303,16 +303,16 @@ equation
 
   connect(regulation_modularBoiler.PLRset,
     hierarchicalControl_modularBoilerNEW1.PLRin) annotation (Line(points={{-42,59.6},
-          {-20,59.6},{-20,57.4},{0,57.4}},       color={0,0,127}));
+          {-20,59.6},{-20,55.8},{0,55.8}},       color={0,0,127}));
   connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.Tb) annotation (Line(
-        points={{60,11},{56,11},{56,72},{-4,72},{-4,48.4},{-0.2,48.4}}, color={0,
+        points={{60,11},{56,11},{56,72},{-4,72},{-4,46.8},{0,46.8}},    color={0,
           0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset, heatGeneratorNoControl.PLR)
-    annotation (Line(points={{20,56},{30,56},{30,16},{-30,16},{-30,5.4},{-24,5.4}},
+    annotation (Line(points={{20.2,56},{30,56},{30,16},{-30,16},{-30,5.4},{-24,5.4}},
                  color={0,0,127}));
   connect(hierarchicalControl_modularBoilerNEW1.PLRset,
-    regulation_modularBoiler.PLRMea) annotation (Line(points={{20,56},{30,56},{30,
-          32},{-68,32},{-68,49.4},{-62,49.4}},    color={0,0,127}));
+    regulation_modularBoiler.PLRMea) annotation (Line(points={{20.2,56},{30,56},
+          {30,32},{-68,32},{-68,49.4},{-62,49.4}},color={0,0,127}));
 
   connect(boilerControlBus.Tamb, hierarchicalControl_modularBoilerNEW1.Tamb)
     annotation (Line(
@@ -324,7 +324,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(TCon, hierarchicalControl_modularBoilerNEW1.TCon) annotation (Line(
-        points={{-8,100},{-8,34},{13.8,34},{13.8,38.4}}, color={0,0,127}));
+        points={{-8,100},{-8,34},{13.4,34},{13.4,38.4}}, color={0,0,127}));
 
 
     ///Admixture
@@ -339,9 +339,11 @@ equation
    end for;
    else
     connect(port_a, senTCold.port_a)
-    annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{-82,0}}, color={0,127,255},
+        pattern=LinePattern.Dash));
   connect(senTHot.port_b, ports_b[1])
-  annotation (Line(points={{70,0},{86,0},{86,20},{100,20}}, color={0,127,255}));
+  annotation (Line(points={{70,0},{86,0},{86,0},{100,0}},   color={0,127,255},
+        pattern=LinePattern.Dash));
   end if;
 
 
@@ -371,8 +373,8 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(TBoilerVar, hierarchicalControl_modularBoilerNEW1.TBoilerVar) annotation (Line(points={
-          {24,102},{24,26},{10.2,26},{10.2,38.2}}, color={0,0,127}));
+  connect(TBoilerVar, hierarchicalControl_modularBoilerNEW1.TBoilerVar) annotation (Line(points={{24,102},
+          {24,26},{10,26},{10,38.4}},              color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
