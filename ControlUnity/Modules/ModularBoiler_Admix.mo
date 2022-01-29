@@ -87,7 +87,7 @@ model ModularBoiler_Admix
         rotation=0,
         origin={-72,0})));
   Modelica.Blocks.Continuous.Integrator integrator1
-    annotation (Placement(transformation(extent={{76,-40},{88,-28}})));
+    annotation (Placement(transformation(extent={{80,-42},{92,-30}})));
 
   AixLib.Systems.ModularEnergySystems.Controls.ControlBoilerNotManufacturer controlBoilerNotManufacturer(
     DeltaTWaterNom=dTWaterNom,
@@ -190,7 +190,7 @@ model ModularBoiler_Admix
       AixLib.DataBase.Pipes.Insulation.Iso50pc()
     "Insulation Type (can be overwritten in each pipe)";
   flowTemperatureController.renturnAdmixture.AdmixtureBus admixtureBus[k]
-    annotation (Placement(transformation(extent={{62,-76},{82,-56}})));
+    annotation (Placement(transformation(extent={{66,-84},{86,-64}})));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominalCon[:]
     "Nominal mass flow rate for the individual consumers" annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
 
@@ -199,12 +199,6 @@ model ModularBoiler_Admix
   parameter Modelica.SIunits.HeatFlowRate QNomCon[:] "Nominal heat power that the consumers need" annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
   parameter Boolean TVar
     "Choice between variable oder constant boiler temperature for the admixture control";
-  Modelica.Fluid.Interfaces.FluidPort_a port_a1(replaceable package Medium =
-        AixLib.Media.Water)
-    annotation (Placement(transformation(extent={{90,-88},{110,-68}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(replaceable package Medium =
-        AixLib.Media.Water)
-    annotation (Placement(transformation(extent={{-108,-88},{-88,-68}})));
   Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and severalHeatcurcuits
      and TVar "Variable boiler temperature for the admixture control" annotation (Placement(
         transformation(
@@ -245,7 +239,7 @@ equation
   connect(senTHot.port_a, heatGeneratorNoControl.port_b)
     annotation (Line(points={{50,0},{-2,0}}, color={0,127,255}));
   connect(heatGeneratorNoControl.PowerDemand, integrator1.u) annotation (Line(
-        points={{-1,-7},{30,-7},{30,-34},{74.8,-34}},
+        points={{-1,-7},{30,-7},{30,-36},{78.8,-36}},
                                                    color={0,0,127}));
 
   connect(fan1.port_b, heatGeneratorNoControl.port_a)
@@ -270,8 +264,8 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(integrator1.y, boilerControlBus.EnergyDemand) annotation (Line(points={{88.6,-34},
-          {110,-34},{110,106},{-63.95,106},{-63.95,98.05}},           color={0,
+  connect(integrator1.y, boilerControlBus.EnergyDemand) annotation (Line(points={{92.6,
+          -36},{110,-36},{110,106},{-63.95,106},{-63.95,98.05}},      color={0,
           0,127}), Text(
       string="%second",
       index=1,
@@ -332,10 +326,22 @@ equation
 
    if use_advancedControl and severalHeatcurcuits then
    for m in 1:k loop
-   connect(senTHot.port_b, admixture[m].port_a1);
-   connect(admixture[m].port_b1, ports_b[m]);
-   connect(port_a1, admixture[m].port_a2);
-   connect(admixture[m].port_b2, port_b);
+   connect(senTHot.port_b, admixture[m].port_a1) annotation (Line(
+      points={{70,0},{70,-34},{-26,-34},{-26,-57.6},{2,-57.6}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+   connect(admixture[m].port_b1, ports_b[m]) annotation (Line(
+      points={{34,-57.6},{48,-57.6},{48,-56},{74,-56},{74,0},{100,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+   connect(port_a, admixture[m].port_a2) annotation (Line(
+      points={{-100,0},{-100,-86},{40,-86},{40,-74.4},{34,-74.4}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  connect(admixture[m].port_b2, port_a) annotation (Line(
+      points={{2,-74.4},{-46,-74.4},{-46,-54},{-100,-54},{-100,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
    end for;
    else
     connect(port_a, senTCold.port_a)
@@ -343,13 +349,14 @@ equation
         pattern=LinePattern.Dash));
   connect(senTHot.port_b, ports_b[1])
   annotation (Line(points={{70,0},{86,0},{86,0},{100,0}},   color={0,127,255},
-        pattern=LinePattern.Dash));
+  pattern=LinePattern.Dash));
+
   end if;
 
 
 
   connect(admixtureBus, admixture.admixtureBus) annotation (Line(
-      points={{72,-66},{72,-38},{18,-38},{18,-52.7}},
+      points={{76,-74},{76,-44},{18,-44},{18,-52.7}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -359,14 +366,14 @@ equation
 
 
   connect(hierarchicalControl_modularBoilerNEW1.valPos, admixtureBus.valveSet) annotation (Line(
-        points={{20,43.4},{34,43.4},{34,44},{52,44},{52,-65.95},{72.05,-65.95}}, color={0,0,127}),
+        points={{20,43.4},{34,43.4},{34,44},{52,44},{52,-73.95},{76.05,-73.95}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(admixtureBus.Tsen_b1, hierarchicalControl_modularBoilerNEW1.TMeaCon) annotation (Line(
-      points={{72.05,-65.95},{44,-65.95},{44,20},{19,20},{19,38.4}},
+      points={{76.05,-73.95},{44,-73.95},{44,20},{19,20},{19,38.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -375,6 +382,28 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(TBoilerVar, hierarchicalControl_modularBoilerNEW1.TBoilerVar) annotation (Line(points={{24,102},
           {24,26},{10,26},{10,38.4}},              color={0,0,127}));
+
+
+
+
+  connect(boilerControlBus.PLREx, hierarchicalControl_modularBoilerNEW1.PLRinEx)
+    annotation (Line(
+      points={{-63.95,98.05},{-32,98.05},{-32,59},{0,59}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(boilerControlBus.internControl, hierarchicalControl_modularBoilerNEW1.internControl)
+    annotation (Line(
+      points={{-63.95,98.05},{-20,98.05},{-20,70},{14.2,70},{14.2,60}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
