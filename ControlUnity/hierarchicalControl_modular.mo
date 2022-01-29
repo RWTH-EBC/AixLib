@@ -10,6 +10,7 @@ model hierarchicalControl_modular
       radioButtons=true));
 
 
+
   Modelica.Blocks.Interfaces.RealInput Tb "Boiler temperature"
     annotation (Placement(transformation(extent={{-120,-52},{-80,-12}})));
   Modelica.Blocks.Interfaces.RealOutput PLRset
@@ -118,6 +119,21 @@ model hierarchicalControl_modular
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-116})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{60,50},{80,70}})));
+  Modelica.Blocks.Interfaces.RealInput PLRinEx
+    "Set PLR from the extern control"
+    annotation (Placement(transformation(extent={{-120,70},{-80,110}})));
+  Modelica.Blocks.Interfaces.BooleanInput internControl
+    "Choice between intern and extern control" annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={42,100})));
+  Modelica.Blocks.Logical.Switch switch2
+    annotation (Placement(transformation(extent={{76,0},{96,20}})));
+  Modelica.Blocks.Sources.RealExpression realExpression
+    annotation (Placement(transformation(extent={{54,-6},{68,8}})));
 equation
 
 /// unconditioned quantities
@@ -157,12 +173,25 @@ equation
                               color={0,0,127}));
   connect(TBoilerVar, returnAdmixture.TBoilerVar)
     annotation (Line(points={{0,-116},{0,-59.8},{42,-59.8}}, color={0,0,127}));
-  connect(twoPositionController_layers.PLRset, PLRset) annotation (Line(points={{45.2,34.6},{52,34.6},
-          {52,60},{102,60}}, color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.PLRset, PLRset) annotation (Line(points={{-10,-60},
-          {-4,-60},{-4,-30},{64,-30},{64,60},{102,60}}, color={0,0,127}));
-  connect(returnAdmixture.PLRset, PLRset) annotation (Line(points={{62,-59.4},{70,-59.4},{70,-56},
-          {78,-56},{78,60},{102,60}}, color={0,0,127}));
+  connect(twoPositionController_layers.PLRset, switch1.u1) annotation (Line(
+        points={{45.2,34.6},{50,34.6},{50,68},{58,68}}, color={0,0,127}));
+  connect(returnAdmixture.PLRset, switch1.u1) annotation (Line(points={{62,
+          -59.4},{66,-59.4},{66,-20},{50,-20},{50,68},{58,68}}, color={0,0,127}));
+  connect(flowTemperatureControl_heatingCurve.PLRset, switch1.u1) annotation (
+      Line(points={{-10,-60},{-6,-60},{-6,-42},{50,-42},{50,68},{58,68}}, color=
+         {0,0,127}));
+  connect(PLRinEx, switch1.u3) annotation (Line(points={{-100,90},{-64,90},{-64,
+          62},{44,62},{44,52},{58,52}}, color={0,0,127}));
+  connect(internControl, switch1.u2)
+    annotation (Line(points={{42,100},{42,60},{58,60}}, color={255,0,255}));
+  connect(switch2.y, PLRset) annotation (Line(points={{97,10},{98,10},{98,46},{
+          88,46},{88,60},{102,60}}, color={0,0,127}));
+  connect(switch2.u3, realExpression.y)
+    annotation (Line(points={{74,2},{72,2},{72,1},{68.7,1}}, color={0,0,127}));
+  connect(switch1.y, switch2.u1) annotation (Line(points={{81,60},{84,60},{84,
+          30},{64,30},{64,18},{74,18}}, color={0,0,127}));
+  connect(emergencySwitch_modularBoiler1.y, switch2.u2) annotation (Line(points=
+         {{-39.6,26},{-28,26},{-28,10},{74,10}}, color={255,0,255}));
   annotation (Documentation(info="<html>
 <p>Model that contains the three different variants of control for heat generators:</p>
 <ul>
