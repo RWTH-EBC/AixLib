@@ -127,7 +127,7 @@ model Admixture
   AdmixtureBus admixtureBus annotation (Placement(transformation(extent={{-22,76},{22,114}}),
         iconTransformation(extent={{-22,76},{22,114}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=1)
-    annotation (Placement(transformation(extent={{6,50},{26,70}})));
+    annotation (Placement(transformation(extent={{8,52},{28,72}})));
 
   AixLib.Fluid.FixedResistances.PressureDrop res(
     redeclare package Medium = AixLib.Media.Water,
@@ -186,8 +186,9 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(realExpression.y, fan1.y) annotation (Line(points={{27,60},{36,60},{36,40},{12,40},
-          {12,32}}, color={0,0,127}));
+  connect(realExpression.y, fan1.y) annotation (Line(points={{29,62},{36,62},{
+          36,40},{12,40},{12,32}},
+                    color={0,0,127}));
   connect(VFSen_out.V_flow, admixtureBus.VFlowInMea) annotation (Line(points={{-96.8,44},{
           -114,44},{-114,95.095},{0.11,95.095}}, color={0,0,127}), Text(
       string="%second",
