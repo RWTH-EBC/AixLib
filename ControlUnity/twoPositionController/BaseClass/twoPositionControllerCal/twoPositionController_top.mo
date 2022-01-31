@@ -1,5 +1,5 @@
 within ControlUnity.twoPositionController.BaseClass.twoPositionControllerCal;
-model twoPositionController_top
+model TwoPositionController_top
   "Two position controller using top level of buffer storage for calculation"
   extends
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(
@@ -15,11 +15,7 @@ model twoPositionController_top
 
   parameter Modelica.Blocks.Interfaces.IntegerOutput y=n "Value of Integer output";
 
-
-
 equation
-
-
 
   connect(TLayers[n], onOffController.u) annotation (Line(points={{-100,-22},{-34,-22},
           {-34,0},{32,0}}, color={0,0,127}));
@@ -33,4 +29,4 @@ equation
 <li>Tref: With this parameter, the user can select the set temperature</li>
 </ul>
 </html>"));
-end twoPositionController_top;
+end TwoPositionController_top;

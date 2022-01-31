@@ -115,12 +115,16 @@ package Tester_NEW "Tester models for the modules"
       simpleTwoPosition=true,
       use_advancedControl=false,
       Tref=343.15,
-      bandwidth=4,
+      bandwidth=2.5,
       severalHeatcurcuits=false,
       TVar=false)
            annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-104,2},{-84,22}})));
+    Modelica.Blocks.Sources.RealExpression PLR1(y=1)
+      annotation (Placement(transformation(extent={{-100,16},{-88,36}})));
+    Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=50, period=120000)
+      annotation (Placement(transformation(extent={{-104,54},{-84,74}})));
   equation
     connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{
             52,32}},                    color={191,0,0}));
@@ -154,6 +158,20 @@ package Tester_NEW "Tester models for the modules"
           points={{16,-22},{18,-22},{18,0},{-32,0},{-32,24}}, color={0,127,255}));
     connect(isOn.y, boilerControlBus.isOn) annotation (Line(points={{-83,12},{
             -71.95,12},{-71.95,36.05}}, color={255,0,255}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(PLR1.y, boilerControlBus.PLREx) annotation (Line(points={{-87.4,26},
+            {-80,26},{-80,28},{-71.95,28},{-71.95,36.05}}, color={0,0,127}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(booleanPulse.y, boilerControlBus.internControl) annotation (Line(
+          points={{-83,64},{-71.95,64},{-71.95,36.05}}, color={255,0,255}),
+        Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
@@ -216,8 +234,9 @@ package Tester_NEW "Tester models for the modules"
       simpleTwoPosition=true,
       use_advancedControl=true,
       severalHeatcurcuits=false,
-      declination=2.3,
-      TMax=378.15)
+      declination=3,
+      TMax=378.15,
+      TVar=false)
       annotation (Placement(transformation(extent={{-28,12},{-8,32}})));
     Modelica.Blocks.Sources.Ramp ramp(
       height=-20,
@@ -231,6 +250,10 @@ package Tester_NEW "Tester models for the modules"
       annotation (Placement(transformation(extent={{-118,24},{-98,44}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-98,-14},{-78,6}})));
+    Modelica.Blocks.Sources.BooleanExpression internControl(y=true)
+      annotation (Placement(transformation(extent={{-104,50},{-84,70}})));
+    Modelica.Blocks.Sources.RealExpression PLR1(y=1)
+      annotation (Placement(transformation(extent={{-114,4},{-94,24}})));
   equation
     connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
             32}},                       color={191,0,0}));
@@ -274,6 +297,19 @@ package Tester_NEW "Tester models for the modules"
         index=1,
         extent={{-3,-6},{-3,-6}},
         horizontalAlignment=TextAlignment.Right));
+    connect(internControl.y, boilerControlBus.internControl) annotation (Line(
+          points={{-83,60},{-71.95,60},{-71.95,36.05}}, color={255,0,255}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(PLR1.y, boilerControlBus.PLREx) annotation (Line(points={{-93,14},{
+            -71.95,14},{-71.95,36.05}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end BoilerTesterFlowtemperatureControl;
@@ -412,6 +448,10 @@ package Tester_NEW "Tester models for the modules"
       duration=60000,
       offset=273.15 + 75)
       annotation (Placement(transformation(extent={{-58,62},{-44,76}})));
+    Modelica.Blocks.Sources.BooleanExpression isOn2(y=true)
+      annotation (Placement(transformation(extent={{-106,64},{-94,78}})));
+    Modelica.Blocks.Sources.RealExpression PLR2(y=1)
+      annotation (Placement(transformation(extent={{-122,48},{-102,68}})));
   equation
     connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
             32}},                       color={191,0,0}));
@@ -540,6 +580,20 @@ package Tester_NEW "Tester models for the modules"
     connect(ramp.y, modularBoiler_Controller.TBoilerVar) annotation (Line(
           points={{-43.3,69},{-36,69},{-36,44},{-20.8,44},{-20.8,38}}, color={0,
             0,127}));
+    connect(isOn2.y, boilerControlBus_admixture.internControl) annotation (Line(
+          points={{-93.4,71},{-71.95,71},{-71.95,50.05}}, color={255,0,255}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(PLR2.y, boilerControlBus_admixture.PLREx) annotation (Line(points={
+            {-101,58},{-86,58},{-86,50.05},{-71.95,50.05}}, color={0,0,127}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end BoilerTesterFlowtemperatureControl_admixture;
@@ -605,9 +659,13 @@ package Tester_NEW "Tester models for the modules"
       n=modularBufferStorage.n,
       simpleTwoPosition=false,
       use_advancedControl=false,
+      redeclare model TwoPositionController_top =
+          twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_layers,
+
       Tref=348.15,
       bandwidth=5,
-      severalHeatcurcuits=false)
+      severalHeatcurcuits=false,
+      TVar=false)
            annotation (Placement(transformation(extent={{-52,18},{-32,38}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
@@ -670,6 +728,10 @@ package Tester_NEW "Tester models for the modules"
       annotation (Placement(transformation(extent={{84,2},{70,16}})));
     Modelica.Blocks.Sources.RealExpression realExpression1(y=0.5)
       annotation (Placement(transformation(extent={{-30,-72},{-16,-58}})));
+    Modelica.Blocks.Sources.BooleanExpression isOn1(y=true)
+      annotation (Placement(transformation(extent={{-98,60},{-78,80}})));
+    Modelica.Blocks.Sources.RealExpression PLREx(y=1)
+      annotation (Placement(transformation(extent={{-98,46},{-86,66}})));
   equation
 
 
@@ -734,6 +796,18 @@ package Tester_NEW "Tester models for the modules"
       annotation (Line(points={{-15.3,-65},{6,-65},{6,-72.4}}, color={0,0,127}));
     connect(modularBufferStorage.fluidportTop2, vol1.ports[2]) annotation (Line(points={{-6,8},{-6,
             12},{16,12},{16,-10},{46,-10},{46,-50},{62,-50},{62,-66},{45.6,-66}}, color={0,127,255}));
+    connect(isOn1.y, boilerControlBus.internControl) annotation (Line(points={{
+            -77,70},{-67.95,70},{-67.95,42.05}}, color={255,0,255}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(PLREx.y, boilerControlBus.PLREx) annotation (Line(points={{-85.4,56},
+            {-67.95,56},{-67.95,42.05}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end BoilerTesterTwoPositionControllerStorageBuffer;
@@ -933,9 +1007,9 @@ package Tester_NEW "Tester models for the modules"
             {-2,-80},{-6.875,-80},{-6.875,-10.12}}, color={0,127,255}));
     connect(bufferStorage.port_b, vol1.ports[2]) annotation (Line(points={{8.25,2},{36,
             2},{36,-38},{60,-38},{60,-66},{44.4,-66}}, color={0,127,255}));
-    connect(bufferStorage.TLayer, modularBoiler_Controller.TLayers) annotation
-      (Line(points={{-15.25,8.72},{-18,8.72},{-18,14},{-28,14},{-28,46},{-41.9,
-            46},{-41.9,37.1}}, color={0,0,127}));
+    connect(bufferStorage.TLayer, modularBoiler_Controller.TLayers) annotation (
+       Line(points={{-14,8.72},{-18,8.72},{-18,14},{-28,14},{-28,46},{-41.9,46},
+            {-41.9,37.1}},     color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end BoilerTesterTwoPositionControllerStorageBufferOLD;

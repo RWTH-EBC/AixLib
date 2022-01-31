@@ -1,6 +1,8 @@
 within ControlUnity.twoPositionController;
-model twoPositionControllerSimple_modularBoiler "Simple two position controller"
-  extends ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(n=1,
+model TwoPositionControllerSimple_modularBoiler
+  "Simple two position controller"
+  extends
+    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(      n=1,
       onOffController(bandwidth=bandwidth,
                       pre_y_start=false));
 
@@ -19,4 +21,4 @@ equation
 <li>Tref: With this parameter, the user can select the set temperature</li>
 </ul>
 </html>"));
-end twoPositionControllerSimple_modularBoiler;
+end TwoPositionControllerSimple_modularBoiler;

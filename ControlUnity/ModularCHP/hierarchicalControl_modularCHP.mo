@@ -21,7 +21,7 @@ model hierarchicalControl_modularCHP
       emergencySwitch_modularBoiler emergencySwitch_modularBoiler1(TMax=TMax)
     annotation (Placement(transformation(extent={{-60,16},{-40,36}})));
  //Two position controller
- replaceable twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
+ replaceable twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_top
     twoPositionController_layers(
     n=n,
     variablePLR=variablePLR,
@@ -118,9 +118,9 @@ model hierarchicalControl_modularCHP
         rotation=90,
         origin={-2,-116})));
   Modelica.Blocks.Interfaces.BooleanOutput shutdown
-    annotation (Placement(transformation(extent={{94,-4},{114,16}})));
+    annotation (Placement(transformation(extent={{94,-2},{114,18}})));
   Modelica.Blocks.Logical.Not not1
-    annotation (Placement(transformation(extent={{40,-4},{60,16}})));
+    annotation (Placement(transformation(extent={{46,-2},{66,18}})));
 equation
 
 
@@ -157,22 +157,21 @@ equation
           {100,-66}},                    color={0,0,127}));
   connect(Tb, emergencySwitch_modularBoiler1.TBoiler) annotation (Line(points={{-102,-16},{-82,-16},
           {-82,19.8},{-60,19.8}},                      color={0,0,127}));
-  connect(Tb, returnAdmixture.TMeaBoiler) annotation (Line(points={{-102,-16},{-114,-16},{-114,-92},
-          {30,-92},{30,-64},{45.8,-64}},                    color={0,0,127}));
-  connect(Tb, flowTemperatureControl_heatingCurve.TMea) annotation (Line(points={{-102,-16},{-114,
-          -16},{-114,-92},{-20,-92},{-20,-82},{-19.2,-82},{-19.2,-70}},
-                                                                     color={0,0,
-          127}));
   connect(TMeaCon, returnAdmixture.TMea) annotation (Line(points={{90,-116},{90,
           -86},{56,-86},{56,-74}}, color={0,0,127}));
   connect(TCon, returnAdmixture.TCon) annotation (Line(points={{38,-116},{38,-69.8},{46,-69.8}},
                               color={0,0,127}));
   connect(TBoilerVar, returnAdmixture.TBoilerVar)
     annotation (Line(points={{-2,-116},{-2,-59.8},{46,-59.8}}, color={0,0,127}));
-  connect(not1.y, shutdown)
-    annotation (Line(points={{61,6},{104,6}}, color={255,0,255}));
   connect(emergencySwitch_modularBoiler1.y, not1.u) annotation (Line(points={{
-          -39.6,26},{-10,26},{-10,6},{38,6},{38,6}}, color={255,0,255}));
+          -39.6,26},{-16,26},{-16,8},{44,8}}, color={255,0,255}));
+  connect(not1.y, shutdown)
+    annotation (Line(points={{67,8},{104,8}}, color={255,0,255}));
+  connect(TLayers[1], flowTemperatureControl_heatingCurve.TMea) annotation (
+      Line(points={{6,113.333},{6,54},{-6,54},{-6,-82},{-19.2,-82},{-19.2,-70}},
+        color={0,0,127}));
+  connect(TLayers[1], returnAdmixture.TMeaBoiler) annotation (Line(points={{6,
+          113.333},{6,-64},{45.8,-64}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Model that contains the three different variants of control for heat generators:</p>
 <ul>

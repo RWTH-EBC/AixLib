@@ -14,6 +14,8 @@ Modelica.SIunits.TemperatureDifference DeltaTWater "Setpoint temperature differe
 Modelica.SIunits.Temperature TCold "Sensor output TCold";
 Modelica.SIunits.Temperature THot "Sensor output THot";
 Modelica.SIunits.Power EnergyDemand "Energy Demand";
+Boolean internControl;
+Real PLREx;
 
 //Control
 

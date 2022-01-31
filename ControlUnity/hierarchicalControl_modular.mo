@@ -23,15 +23,21 @@ model hierarchicalControl_modular
       emergencySwitch_modularBoiler emergencySwitch_modularBoiler1(TMax=TMax)
     annotation (Placement(transformation(extent={{-60,16},{-40,36}})));
  //Two position controller
- replaceable twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
-    twoPositionController_layers(
+ replaceable model TwoPositionController_top =
+      ControlUnity.twoPositionController.BaseClass.partialTwoPositionController
+ constrainedby
+    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(Tref=Tref, bandwidth=bandwidth, n=n) annotation(choicesAllMatching=true);
+
+   twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_top
+    twoPositionController_top(
     n=n,
-    variablePLR=variablePLR,
     bandwidth=bandwidth,
-    Tref=Tref) if              not use_advancedControl
-                                 constrainedby
-    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(Tref=Tref, bandwidth=bandwidth, n=n)
-    annotation (Placement(transformation(extent={{24,24},{44,44}})), choicesAllMatching=true, Dialog(enable=not use_advancedControl));
+    Ttop=Ttop) if not use_advancedControl
+    annotation (Placement(transformation(extent={{16,32},{36,52}})));
+  parameter Modelica.SIunits.Temperature Ttop=273.15 + 70
+    "Temperature on the top level of the buffer storage";
+
+
   Modelica.Blocks.Interfaces.RealInput TLayers[n]
     "Different temperatures of layers of buffer storage, 1 lowest layer and n top layer; if simple two position controller, then it is equal to Tin"
     annotation (Placement(transformation(
@@ -134,6 +140,8 @@ model hierarchicalControl_modular
     annotation (Placement(transformation(extent={{76,0},{96,20}})));
   Modelica.Blocks.Sources.RealExpression realExpression
     annotation (Placement(transformation(extent={{54,-6},{68,8}})));
+
+
 equation
 
 /// unconditioned quantities
@@ -143,11 +151,6 @@ equation
   connect(isOn, emergencySwitch_modularBoiler1.isOn) annotation (Line(points={{-102,20},{-76,20},
           {-76,34},{-68,34},{-68,33.4},{-60,33.4}},
                                              color={255,0,255}));
-  connect(PLRin, twoPositionController_layers.PLRin) annotation (Line(points={{-100,58},{-38,58},
-          {-38,43},{24,43}},              color={0,0,127}));
-  connect(emergencySwitch_modularBoiler1.y, twoPositionController_layers.isOn)
-    annotation (Line(points={{-39.6,26},{10,26},{10,37.4},{24,37.4}}, color={255,
-          0,255}));
   connect(emergencySwitch_modularBoiler1.y, flowTemperatureControl_heatingCurve.isOn)
     annotation (Line(points={{-39.6,26},{-36,26},{-36,-63.8},{-30,-63.8}},
                                                                        color={255,
@@ -155,8 +158,6 @@ equation
   connect(emergencySwitch_modularBoiler1.y, returnAdmixture.isOn) annotation (
       Line(points={{-39.6,26},{10,26},{10,-56.6},{42,-56.6}},
                                                           color={255,0,255}));
-  connect(TLayers, twoPositionController_layers.TLayers)
-    annotation (Line(points={{6,100},{6,31.8},{24,31.8}}, color={0,0,127}));
   connect(returnAdmixture.valPos, valPos) annotation (Line(points={{62,-69.8},{82,-69.8},{82,-66},
           {100,-66}},                    color={0,0,127}));
   connect(Tb, emergencySwitch_modularBoiler1.TBoiler) annotation (Line(points={{-100,-32},{-74,-32},
@@ -173,8 +174,6 @@ equation
                               color={0,0,127}));
   connect(TBoilerVar, returnAdmixture.TBoilerVar)
     annotation (Line(points={{0,-116},{0,-59.8},{42,-59.8}}, color={0,0,127}));
-  connect(twoPositionController_layers.PLRset, switch1.u1) annotation (Line(
-        points={{45.2,34.6},{50,34.6},{50,68},{58,68}}, color={0,0,127}));
   connect(returnAdmixture.PLRset, switch1.u1) annotation (Line(points={{62,
           -59.4},{66,-59.4},{66,-20},{50,-20},{50,68},{58,68}}, color={0,0,127}));
   connect(flowTemperatureControl_heatingCurve.PLRset, switch1.u1) annotation (
@@ -190,8 +189,17 @@ equation
     annotation (Line(points={{74,2},{72,2},{72,1},{68.7,1}}, color={0,0,127}));
   connect(switch1.y, switch2.u1) annotation (Line(points={{81,60},{84,60},{84,
           30},{64,30},{64,18},{74,18}}, color={0,0,127}));
-  connect(emergencySwitch_modularBoiler1.y, switch2.u2) annotation (Line(points=
-         {{-39.6,26},{-28,26},{-28,10},{74,10}}, color={255,0,255}));
+  connect(emergencySwitch_modularBoiler1.y, switch2.u2) annotation (Line(points={{-39.6,
+          26},{-28,26},{-28,10},{74,10}},        color={255,0,255}));
+  connect(PLRin, twoPositionController_top.PLRin) annotation (Line(points={{-100,
+          58},{-44,58},{-44,51},{16,51}}, color={0,0,127}));
+  connect(TLayers, twoPositionController_top.TLayers)
+    annotation (Line(points={{6,100},{6,39.8},{16,39.8}}, color={0,0,127}));
+  connect(emergencySwitch_modularBoiler1.y, twoPositionController_top.isOn)
+    annotation (Line(points={{-39.6,26},{-36,26},{-36,46},{16,46},{16,45.4}},
+        color={255,0,255}));
+  connect(twoPositionController_top.PLRset, switch1.u1) annotation (Line(points=
+         {{37.2,42.6},{50,42},{50,68},{58,68}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Model that contains the three different variants of control for heat generators:</p>
 <ul>

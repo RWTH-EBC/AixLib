@@ -116,8 +116,7 @@ model Storage_modularBoiler
   Modelica.Blocks.Interfaces.RealOutput TLayer[n]
     "Temperature of the n layers of the storage"
     annotation (Placement(transformation(extent={{102,28},{122,48}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package Medium
-      =                                                                         Medium)
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package Medium = Medium)
     annotation (Placement(transformation(extent={{96,-12},{116,8}})));
 protected
   parameter Modelica.SIunits.Volume V = A * h;

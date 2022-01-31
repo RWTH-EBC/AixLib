@@ -1,5 +1,6 @@
 within ControlUnity.twoPositionController.BaseClass.twoPositionControllerCal;
-model twoPositionController_layers "Two position controller using mean temperature of buffer storage for calculation"
+model TwoPositionController_layers
+  "Two position controller using mean temperature of buffer storage for calculation"
 
   extends
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController(
@@ -13,6 +14,7 @@ model twoPositionController_layers "Two position controller using mean temperatu
   parameter Modelica.SIunits.Temperature Tref=273.15+60;
   parameter Real bandwidth     "Bandwidth around reference signal";
 
+  parameter Real Layer=1;
 
   Modelica.Blocks.Math.Sum sumTLayers(nin=n)
     annotation (Placement(transformation(extent={{-52,18},{-32,38}})));
@@ -40,4 +42,4 @@ equation
 <li>Tref: With this parameter, the user can select the set temperature</li>
 </ul>
 </html>"));
-end twoPositionController_layers;
+end TwoPositionController_layers;

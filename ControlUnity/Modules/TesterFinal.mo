@@ -19,7 +19,7 @@ package TesterFinal
       m_flow_nominal=1,
       redeclare package Medium = AixLib.Media.Water,
       V=3,
-      nPorts=4)
+      nPorts=3)
       annotation (Placement(transformation(extent={{52,22},{72,42}})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater
       "Prescribed heat flow" annotation (
@@ -59,9 +59,6 @@ package TesterFinal
           extent={{-6,-5},{6,5}},
           rotation=-90,
           origin={-32,53})));
-    AixLib.Fluid.Sources.Boundary_pT
-                        boundary_ph5(redeclare package Medium = Medium, nPorts=1)
-                                                       annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={114,22})));
     Modelica.Blocks.Sources.RealExpression realExpression1(y=273.15 + 67)
       annotation (Placement(transformation(
           extent={{-6,-5},{6,5}},
@@ -83,43 +80,24 @@ package TesterFinal
       m_flow_nominal=1,
       redeclare package Medium = AixLib.Media.Water,
       V=3,
-      nPorts=2)
+      nPorts=1)
       annotation (Placement(transformation(extent={{-72,-70},{-58,-54}})));
-    AixLib.Fluid.Sources.Boundary_pT
-                        boundary_ph1(redeclare package Medium = Medium, nPorts=3)
-                                                       annotation(Placement(transformation(extent={{8,-8},{
-              -8,8}},                                                                                                       rotation=0,     origin={-24,-70})));
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
       annotation (Placement(transformation(extent={{-68,-88},{-54,-74}})));
     parameter Integer k=2 "Number of heat curcuits";
 
-    Modelica.Fluid.Pipes.StaticPipe pipe(
-      redeclare package Medium =
-          Modelica.Media.Water.ConstantPropertyLiquidWater,
-      allowFlowReversal=true,
-      length=5,
-      isCircular=true,
-      diameter=0.03,
-      redeclare model FlowModel =
-          Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-            dp_nominal=0, m_flow_nominal=0.4785))
-      annotation (Placement(transformation(extent={{-30,-40},{-52,-20}})));
-    Modelica.Fluid.Pipes.StaticPipe pipe1(
-      redeclare package Medium =
-          Modelica.Media.Water.ConstantPropertyLiquidWater,
-      allowFlowReversal=true,
-      length=5,
-      isCircular=true,
-      diameter=0.03,
-      redeclare model FlowModel =
-          Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-            dp_nominal=0, m_flow_nominal=0.4785))
-      annotation (Placement(transformation(extent={{36,-18},{14,2}})));
     flowTemperatureController.renturnAdmixture.AdmixtureBus admixtureBus[p]
       annotation (Placement(transformation(extent={{0,12},{20,32}})));
     AixLib.Systems.ModularEnergySystems.Interfaces.BoilerControlBus
       boilerControlBus
       annotation (Placement(transformation(extent={{-78,34},{-58,54}})));
+    Modelica.Blocks.Sources.RealExpression PLR1(y=1)
+      annotation (Placement(transformation(extent={{-108,52},{-96,72}})));
+    Modelica.Blocks.Sources.BooleanExpression internControl(y=true)
+      annotation (Placement(transformation(extent={{-86,64},{-74,78}})));
+    AixLib.Fluid.Sources.Boundary_pT
+                        boundary_ph5(redeclare package Medium = Medium, nPorts=
+          1)                                           annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={100,24})));
   equation
     connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{52,
             32}},                       color={191,0,0}));
@@ -128,35 +106,19 @@ package TesterFinal
                                                         color={0,0,127}));
     connect(vol.heatPort,temperatureSensor. port)
       annotation (Line(points={{52,32},{52,2},{66,2}},     color={191,0,0}));
-    connect(boundary_ph5.ports[1], vol.ports[2])
-      annotation (Line(points={{104,22},{61,22}},      color={0,127,255}));
     connect(realExpression.y, modularBoiler_AdmixNEW.TCon[1]) annotation (Line(points={{-32,46.4},{
             -32,40},{-24.8,40},{-24.8,39}}, color={0,0,127}));
     connect(heater1.port, vol1.heatPort) annotation (Line(points={{-82,-58},{
             -82,-62},{-72,-62}}, color={191,0,0}));
     connect(temperatureSensor1.port, vol1.heatPort) annotation (Line(points={{
             -68,-81},{-70,-81},{-70,-82},{-72,-82},{-72,-62}}, color={191,0,0}));
-    connect(boundary_ph1.ports[1], vol1.ports[1])
-      annotation (Line(points={{-32,-67.8667},{-50,-67.8667},{-50,-70},{-66.4,
-            -70}},                                        color={0,127,255}));
     connect(sine1.y, heater1.Q_flow) annotation (Line(points={{-87.5,-65},{-86,
             -65},{-86,-38},{-82,-38},{-82,-42}}, color={0,0,127}));
     connect(modularBoiler_AdmixNEW.TCon[2], realExpression1.y) annotation (Line(points={{-24.8,37},
             {-24.8,44},{-12,44},{-12,46.4}}, color={0,0,127}));
-    connect(vol.ports[2], pipe1.port_a)
-      annotation (Line(points={{61,22},{52,22},{52,-8},{36,-8}}, color={0,127,255}));
-    connect(vol1.ports[2], pipe.port_a) annotation (Line(points={{-63.6,-70},{-38,-70},{-38,-38},{-22,
-            -38},{-22,-30},{-30,-30}}, color={0,127,255}));
     connect(modularBoiler_AdmixNEW.ports_b[1], vol.ports[1])
-      annotation (Line(points={{-14,28},{24,28},{24,22},{59,22}}, color={0,127,255}));
-    connect(modularBoiler_AdmixNEW.ports_b[2], boundary_ph1.ports[2]) annotation (Line(points={{-14,28},
-            {-10,28},{-10,-56},{-32,-56},{-32,-70}},          color={0,127,255}));
-    connect(pipe1.port_b, modularBoiler_AdmixNEW.port_a1) annotation (Line(points={{14,-8},{4,-8},{
-            4,6},{-6,6},{-6,20.2},{-14,20.2}}, color={0,127,255}));
-    connect(pipe.port_b, modularBoiler_AdmixNEW.port_a1) annotation (Line(points={{-52,-30},{-56,-30},
-            {-56,-26},{-60,-26},{-60,0},{-16,0},{-16,20.2},{-14,20.2}}, color={0,127,255}));
-    connect(modularBoiler_AdmixNEW.port_b, modularBoiler_AdmixNEW.port_a) annotation (Line(points={
-            {-33.8,20.2},{-42,20.2},{-42,28},{-34,28}}, color={0,127,255}));
+      annotation (Line(points={{-14,28},{24,28},{24,22},{59.3333,22}},
+                                                                  color={0,127,255}));
     connect(boilerControlBus, modularBoiler_AdmixNEW.boilerControlBus) annotation (Line(
         points={{-68,44},{-50,44},{-50,37.8},{-30.4,37.8}},
         color={255,204,51},
@@ -178,13 +140,35 @@ package TesterFinal
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
     connect(admixtureBus, modularBoiler_AdmixNEW.admixtureBus) annotation (Line(
-        points={{10,22},{-4,22},{-4,21.4},{-16.8,21.4}},
+        points={{10,22},{-4,22},{-4,20.6},{-16.4,20.6}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(PLR1.y, boilerControlBus.PLREx) annotation (Line(points={{-95.4,62},
+            {-82,62},{-82,60},{-67.95,60},{-67.95,44.05}}, color={0,0,127}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(internControl.y, boilerControlBus.internControl) annotation (Line(
+          points={{-73.4,71},{-67.95,71},{-67.95,44.05}}, color={255,0,255}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(vol.ports[2], modularBoiler_AdmixNEW.port_a) annotation (Line(
+          points={{62,22},{60,22},{60,-16},{-34,-16},{-34,28}}, color={0,127,
+            255}));
+    connect(vol1.ports[1], modularBoiler_AdmixNEW.port_a) annotation (Line(
+          points={{-65,-70},{-58,-70},{-58,-66},{-38,-66},{-38,28},{-34,28}},
+          color={0,127,255}));
+    connect(boundary_ph5.ports[1], vol.ports[3]) annotation (Line(points={{90,
+            24},{82,24},{82,22},{64.6667,22}}, color={0,127,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end BoilerTesterAdmixture;

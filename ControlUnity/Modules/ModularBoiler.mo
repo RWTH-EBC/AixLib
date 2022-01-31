@@ -102,6 +102,7 @@ model ModularBoiler
      //
     ///Control unity
 
+
   Regulation_modularBoiler regulation_modularBoiler(use_advancedControl=false)
     annotation (Placement(transformation(extent={{-62,46},{-42,66}})));
   parameter Integer n= if simpleTwoPosition then 1 else n "Number of layers in the buffer storage" annotation(Dialog(enable=not use_advancedControl,tab="Control", group="Two position control"));
@@ -118,11 +119,14 @@ model ModularBoiler
 
    ///Control unity
    //
-  ControlUnity.hierarchicalControl_modular hierarchicalControl_modularBoilerNEW1(
+   replaceable model TwoPositionController_top =
+      ControlUnity.twoPositionController.BaseClass.partialTwoPositionController
+    constrainedby
+    ControlUnity.twoPositionController.BaseClass.partialTwoPositionController annotation(choicesAllMatching=true, Dialog(tab="Control", group="Two position control"));
+
+  ControlUnity.hierarchicalControl_modular
+    hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=use_advancedControl,
-    internControl=internControl,
-    redeclare twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
-      twoPositionController_layers,
     n=n,
     bandwidth=bandwidth,
     severalHeatcurcuits=severalHeatcurcuits,
@@ -134,7 +138,9 @@ model ModularBoiler
     night_hour=night_hour,
     TOffset=TOffset,
     TMax=TMax,
-    TVar=TVar) annotation (Placement(transformation(extent={{0,40},{20,60}})));
+    TVar=TVar,
+    redeclare replaceable model TwoPositionController_top =
+        TwoPositionController_top)                                                                                                                         annotation (Placement(transformation(extent={{0,40},{20,60}})));
   parameter Modelica.SIunits.Temperature Tref
     "Reference Temperature for the on off controller"
                                                      annotation(Dialog(enable=not use_advancedControl, tab="Control", group="Two position control"));
@@ -184,11 +190,7 @@ model ModularBoiler
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={32,100})));
-  parameter Boolean internControl
-    "Choice between the intern or extern control; true=intern control of this model" annotation(Dialog(tab="Control", group="Parameters"),choices(
-      choice=true "Intern control",
-      choice=false "Extern control",
-      radioButtons=true));
+
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
@@ -308,15 +310,6 @@ equation
   connect(hierarchicalControl_modularBoilerNEW1.valPos, valPos) annotation (
       Line(points={{20,43.4},{48,43.4},{48,58},{78,58},{78,68},{100,68}}, color=
          {0,0,127}));
-  connect(boilerControlBus.Tamb, hierarchicalControl_modularBoilerNEW1.Tamb) annotation (
-      Line(
-      points={{-64,98},{-50,98},{-50,86},{-28,86},{-28,42.2},{0,42.2}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(regulation_modularBoiler.mFlow_relB, boilerControlBus.mFlow_relB) annotation (Line(
         points={{-41.8,55},{-34,55},{-34,80},{-64,80},{-64,98}}, color={0,0,127}), Text(
       string="%second",
@@ -325,9 +318,27 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(TBoilerVar, hierarchicalControl_modularBoilerNEW1.TBoilerVar) annotation (Line(points={
           {32,100},{34,100},{34,28},{10,28},{10,38.4}}, color={0,0,127}));
-  connect(boilerControlBus.PLREx, hierarchicalControl_modularBoilerNEW1.PLRinEx) annotation (
-      Line(
-      points={{-64,98},{-56,98},{-56,84},{-12,84},{-12,58.8},{0,58.8}},
+  connect(boilerControlBus.Tamb, hierarchicalControl_modularBoilerNEW1.Tamb)
+    annotation (Line(
+      points={{-64,98},{-52,98},{-52,90},{-30,90},{-30,42.2},{0,42.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(boilerControlBus.internControl, hierarchicalControl_modularBoilerNEW1.internControl)
+    annotation (Line(
+      points={{-63.95,98.05},{-18,98.05},{-18,68},{14.2,68},{14.2,60}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(boilerControlBus.PLREx, hierarchicalControl_modularBoilerNEW1.PLRinEx)
+    annotation (Line(
+      points={{-63.95,98.05},{-40,98.05},{-40,74},{-12,74},{-12,59},{0,59}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

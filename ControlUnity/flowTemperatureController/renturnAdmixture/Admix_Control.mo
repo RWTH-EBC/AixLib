@@ -28,11 +28,9 @@ model Admix_Control "Test for admix circuit"
     k=2,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     Kv=10,
-    each valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
     m_flow_nominalCon=m_flow_nominalCon,
     dp_nominalCon=dp_nominalCon,
-    QNomCon=QNomCon)
-                   annotation (Placement(transformation(
+    QNomCon=QNomCon) annotation (Placement(transformation(
         extent={{-23,-23},{23,23}},
         rotation=90,
         origin={13,5})));

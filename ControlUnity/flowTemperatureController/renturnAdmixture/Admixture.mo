@@ -1,6 +1,7 @@
 within ControlUnity.flowTemperatureController.renturnAdmixture;
 model Admixture
-  extends ControlUnity.flowTemperatureController.renturnAdmixture.PartialFourPort_modularBoiler(
+  extends
+    ControlUnity.flowTemperatureController.renturnAdmixture.PartialFourPort_modularBoiler(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
     final allowFlowReversal1 = allowFlowReversal,
@@ -11,11 +12,6 @@ model Admixture
     parameter Integer k "number of heat curcuits";
 
     parameter Real Kv "Kv value of valve (can be overwritten in the valve)"  annotation (Dialog(group="Actuators"));
-    parameter AixLib.Fluid.Actuators.Valves.Data.GenericThreeWay valveCharacteristic
-    "Valve characteristic of three way valve" annotation (
-    choicesAllMatching=true,
-    Placement(transformation(extent={{-118,-120},{-98,-100}})),
-    Dialog(group="Actuators"));
 
 
 
@@ -61,7 +57,8 @@ model Admixture
     final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-88,14},{-76,26}})));
 
-  AixLib.Fluid.Actuators.Valves.ThreeWayTable valve(
+  AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear
+                                              valve(
     final massDynamics=massDynamics,
     order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
@@ -73,21 +70,11 @@ model Admixture
     final m_flow_nominal=m_flow_nominalCon,
     final energyDynamics=energyDynamics,
     Kv=Kv,
-    dpFixed_nominal={10,10},
-    final flowCharacteristics1=valveCharacteristic.a_ab,
-    final flowCharacteristics3=valveCharacteristic.b_ab) annotation (Dialog(
+    dpFixed_nominal={10,10})                             annotation (Dialog(
         enable=true, group="Actuators"), Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-52,20})));
-  AixLib.Fluid.Movers.SpeedControlled_y fan1(
-    redeclare package Medium = AixLib.Media.Water,
-    allowFlowReversal=false,
-    m_flow_small=0.001,
-    per(pressure(V_flow={0,V_flow_nominalCon,2*V_flow_nominalCon}, dp={dp_nominalCon/0.8,
-            dp_nominalCon,0})),
-    addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{2,10},{22,30}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senT_b1(
     final m_flow_nominal=m_flow_nominalCon,
     tau=0.01,
@@ -126,13 +113,21 @@ model Admixture
 
   AdmixtureBus admixtureBus annotation (Placement(transformation(extent={{-22,76},{22,114}}),
         iconTransformation(extent={{-22,76},{22,114}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=1)
-    annotation (Placement(transformation(extent={{8,52},{28,72}})));
 
   AixLib.Fluid.FixedResistances.PressureDrop res(
     redeclare package Medium = AixLib.Media.Water,
                                                  m_flow_nominal=m_flow_nominalCon, dp_nominal=
         dp_nominalCon) annotation (Placement(transformation(extent={{-32,10},{-12,30}})));
+  AixLib.Fluid.Movers.SpeedControlled_y fan1(
+    redeclare package Medium = AixLib.Media.Water,
+    allowFlowReversal=false,
+    m_flow_small=0.001,
+    per(pressure(V_flow={0,V_flow_nominalCon,2*V_flow_nominalCon}, dp={
+            dp_nominalCon/0.8,dp_nominalCon,0})),
+    addPowerToMedium=false)
+    annotation (Placement(transformation(extent={{2,10},{22,30}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=1)
+    annotation (Placement(transformation(extent={{6,44},{26,64}})));
 equation
   connect(port_a1, VFSen_out.port_a)
     annotation (Line(points={{-100,60},{-88,60},{-88,52}}, color={0,127,255}));
@@ -140,8 +135,6 @@ equation
     annotation (Line(points={{-88,36},{-88,20}}, color={0,127,255}));
   connect(senT_a1.port_b, valve.port_1)
     annotation (Line(points={{-76,20},{-62,20}}, color={0,127,255}));
-  connect(fan1.port_b, senT_b1.port_a)
-    annotation (Line(points={{22,20},{44,20}}, color={0,127,255}));
   connect(senT_b1.port_b, VFSen_in.port_a)
     annotation (Line(points={{56,20},{74,20},{74,36}}, color={0,127,255}));
   connect(VFSen_in.port_b, port_b1)
@@ -186,9 +179,6 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(realExpression.y, fan1.y) annotation (Line(points={{29,62},{36,62},{
-          36,40},{12,40},{12,32}},
-                    color={0,0,127}));
   connect(VFSen_out.V_flow, admixtureBus.VFlowInMea) annotation (Line(points={{-96.8,44},{
           -114,44},{-114,95.095},{0.11,95.095}}, color={0,0,127}), Text(
       string="%second",
@@ -209,8 +199,12 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(valve.port_2, res.port_a)
     annotation (Line(points={{-42,20},{-32,20}}, color={0,127,255}));
-  connect(fan1.port_a, res.port_b)
-    annotation (Line(points={{2,20},{-12,20}}, color={0,127,255}));
+  connect(res.port_b, fan1.port_a)
+    annotation (Line(points={{-12,20},{2,20}}, color={0,127,255}));
+  connect(fan1.port_b, senT_b1.port_a)
+    annotation (Line(points={{22,20},{44,20}}, color={0,127,255}));
+  connect(realExpression.y, fan1.y) annotation (Line(points={{27,54},{36,54},{
+          36,40},{12,40},{12,32}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(initialScale=0.1), graphics={
         Polygon(

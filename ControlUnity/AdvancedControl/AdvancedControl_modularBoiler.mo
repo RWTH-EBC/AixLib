@@ -19,7 +19,7 @@ model AdvancedControl_modularBoiler
   //Two position control with buffer storage
 twoPositionController.twoPositionControllerAdvanced_modularBoiler
     twoPositionControllerAdvanced_modularBoiler(redeclare
-      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
+      twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_top
       twoPositionController_layers) if             use_BufferStorage
     annotation (Placement(transformation(extent={{2,46},{22,66}})));
   Modelica.Blocks.Interfaces.RealInput TLayer[n] if use_Bufferstorage

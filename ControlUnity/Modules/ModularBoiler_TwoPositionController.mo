@@ -114,8 +114,6 @@ model ModularBoiler_TwoPositionController
   ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=false,
-    redeclare twoPositionController.twoPositionControllerSimple_modularBoiler
-      twoPositionController_layers,
     n=1,
     bandwidth=bandwidth,
     severalHeatcurcuits=false,

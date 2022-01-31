@@ -121,9 +121,6 @@ model ModularBoiler_AdmixNEW
   ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=use_advancedControl,
-    redeclare
-      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
-      twoPositionController_layers,
     n=n,
     bandwidth=bandwidth,
     severalHeatcurcuits=severalHeatcurcuits,
@@ -167,16 +164,15 @@ model ModularBoiler_AdmixNEW
     "Offset to heating curve temperature" annotation(Dialog(enable=use_advancedControl and not severalHeatcurcuits, tab="Control", group="Flow temperature control"));
   parameter Modelica.SIunits.Temperature TMax=273.15 + 105
     "Maximum temperature, at which the system is shut down" annotation(Dialog(tab="Control", group="Security-related systems"));
-  flowTemperatureController.renturnAdmixture.Admixture           admixture          [k](
+  flowTemperatureController.renturnAdmixture.Admixture admixture[k](
     redeclare package Medium = Medium,
     k=k,
     m_flow_nominalCon=m_flow_nominalCon,
     dp_nominalCon=dp_nominalCon,
     QNomCon=QNomCon,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    Kv=10,
-    each valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage()) if
-    use_advancedControl and severalHeatcurcuits annotation (Placement(transformation(
+    Kv=10) if use_advancedControl and severalHeatcurcuits annotation (Placement(
+        transformation(
         extent={{-16,-14},{16,14}},
         rotation=0,
         origin={22,-72})));

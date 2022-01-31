@@ -124,10 +124,9 @@ model ModularBoiler_Admix
 
    ///Control unity
    //
-  ControlUnity.hierarchicalControl_modular hierarchicalControl_modularBoilerNEW1(
+  ControlUnity.hierarchicalControl_modular
+    hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=use_advancedControl,
-    redeclare twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_top
-      twoPositionController_layers,
     n=n,
     bandwidth=bandwidth,
     severalHeatcurcuits=severalHeatcurcuits,
@@ -166,16 +165,15 @@ model ModularBoiler_Admix
   parameter Real declination=1 annotation(Dialog(tab="Control", group="Flow temperature control"));
   parameter Real day_hour=6 annotation(Dialog(tab="Control", group="Flow temperature control"));
   parameter Real night_hour=22 annotation(Dialog(tab="Control", group="Flow temperature control"));
-  flowTemperatureController.renturnAdmixture.Admixture           admixture          [k](
+  flowTemperatureController.renturnAdmixture.Admixture admixture[k](
     redeclare package Medium = Medium,
     k=k,
     m_flow_nominalCon=m_flow_nominalCon,
     dp_nominalCon=dp_nominalCon,
     QNomCon=QNomCon,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    Kv=10,
-    each valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage()) if
-    use_advancedControl and severalHeatcurcuits annotation (Placement(transformation(
+    Kv=10) if use_advancedControl and severalHeatcurcuits annotation (Placement(
+        transformation(
         extent={{-16,-14},{16,14}},
         rotation=0,
         origin={18,-66})));
@@ -335,22 +333,24 @@ equation
       color={0,127,255},
       pattern=LinePattern.Dash));
    connect(port_a, admixture[m].port_a2) annotation (Line(
-      points={{-100,0},{-100,-86},{40,-86},{40,-74.4},{34,-74.4}},
+      points={{-100,0},{-100,-86},{-98,-86},{-98,-88},{34,-88},{34,-74.4}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(admixture[m].port_b2, port_a) annotation (Line(
-      points={{2,-74.4},{-46,-74.4},{-46,-54},{-100,-54},{-100,0}},
+      connect(admixture[m].port_b2, senTCold.port_a)
+                                                    annotation (Line(
+      points={{2,-74.4},{-36,-74.4},{-36,-74},{-82,-74},{-82,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));
    end for;
    else
-    connect(port_a, senTCold.port_a)
-    annotation (Line(points={{-100,0},{-82,0}}, color={0,127,255},
-        pattern=LinePattern.Dash));
-  connect(senTHot.port_b, ports_b[1])
-  annotation (Line(points={{70,0},{86,0},{86,0},{100,0}},   color={0,127,255},
-  pattern=LinePattern.Dash));
-
+ connect(port_a, senTCold.port_a) annotation (Line(
+      points={{-100,0},{-82,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  connect(senTHot.port_b, ports_b[1]) annotation (Line(
+      points={{70,0},{100,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
   end if;
 
 
@@ -404,6 +404,10 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+
+
+
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

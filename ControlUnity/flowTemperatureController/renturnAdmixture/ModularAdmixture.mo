@@ -9,16 +9,15 @@ replaceable package Medium =
      parameter Boolean severalHeatcurcuits=true;
 
 
-  Admixture                                                      admixture          [k](
+  Admixture admixture[k](
     redeclare package Medium = Medium,
     k=k,
     m_flow_nominalCon=m_flow_nominalCon,
     dp_nominalCon=dp_nominalCon,
     QNomCon=QNomCon,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    Kv=10,
-    each valveCharacteristic=AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage()) if
-    use_advancedControl and severalHeatcurcuits annotation (Placement(transformation(
+    Kv=10) if use_advancedControl and severalHeatcurcuits annotation (Placement(
+        transformation(
         extent={{-19,-19},{19,19}},
         rotation=0,
         origin={5,1})));

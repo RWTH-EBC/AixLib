@@ -123,9 +123,6 @@ model ModularBoiler_TwoPositionControllerBufferStorage
   ControlUnity.hierarchicalControl_modular
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=false,
-    redeclare
-      twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
-      twoPositionController_layers,
     n=n,
     bandwidth=5,
     severalHeatcurcuits=false,

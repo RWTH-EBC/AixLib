@@ -35,7 +35,7 @@ model flowTemperatureControl_heatingCurve
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Continuous.LimPID PID(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.3,
+    k=1,
     Ti=3,
     yMax=0.99,
     yMin=0) "PI Controller for controlling the valve position"

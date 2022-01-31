@@ -7,7 +7,7 @@ model hierarchicalControl_Tester
     annotation (Placement(transformation(extent={{-96,36},{-76,56}})));
   Modelica.Blocks.Sources.RealExpression Tamb[3](y=x)
     annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
-  twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
+  twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_layers
     twoPositionController_layers(bandwidth=2)
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
 equation

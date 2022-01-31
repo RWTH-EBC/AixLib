@@ -94,9 +94,10 @@ model ModularCHP
     m_flow_nominal=m_flow_nominalCC,
     zeta=1,
     diameter=1) annotation (Placement(transformation(extent={{-88,-82},{-68,-62}})));
-  AixLib.Systems.ModularEnergySystems.Controls.ControlCHPNotManufacturer controlCHPNotManufacturer
+  ControlCHPNotManufacturerModular controlCHPNotManufacturerModular
     annotation (Placement(transformation(extent={{-144,-22},{-124,-2}})));
-  Regulation_ModularCHP regulation_ModularCHP(use_advancedControl=false)
+  Regulation_ModularCHP regulation_ModularCHP(PLRMin=PLRMin,
+                                              use_advancedControl=false)
     annotation (Placement(transformation(extent={{-74,44},{-54,64}})));
   hierarchicalControl_modularCHP hierarchicalControl_modularCHP1(
     PLRmin=0.5,
@@ -196,7 +197,7 @@ equation
 ///
 if simpleTwoPosition then
   connect(THotHeatCircuit.T, hierarchicalControl_modularCHP1.TLayers[1]) annotation (Line(points=
-         {{68,-61},{48,-61},{48,66},{4.6,66},{4.6,64}}, color={0,0,127}));
+         {{68,-61},{68,-34},{48,-34},{48,64},{4.6,64}}, color={0,0,127}));
 else
   connect(TLayers, hierarchicalControl_modularCHP1.TLayers)
     annotation (Line(points={{79,101},{79,70},{4.6,70},{4.6,64}}, color={0,0,127}));
@@ -252,13 +253,13 @@ end if;
     annotation (Line(points={{-68,-72},{-56,-72}}, color={0,127,255}));
   connect(hydraulicResistance.port_a, fan1.port_b) annotation (Line(points={{-88,-72},
           {-100,-72},{-100,-40}},      color={0,127,255}));
-  connect(controlCHPNotManufacturer.mFlowRelHC, fan1.y) annotation (Line(points={{-123,
-          -19},{-120,-19},{-120,-30},{-112,-30}},       color={0,0,127}));
-  connect(controlCHPNotManufacturer.mFlowCC, fan.m_flow_in) annotation (Line(
-        points={{-123,-12.8},{-48,-12.8},{-48,-14}}, color={0,0,127}));
-  connect(cHPNotManufacturer.THotEngine, controlCHPNotManufacturer.TVolume)
-    annotation (Line(points={{0,-11},{0,-28},{-72,-28},{-72,12},{-156,12},{-156,
-          -9},{-146,-9}}, color={0,0,127}));
+  connect(controlCHPNotManufacturerModular.mFlowRelHC, fan1.y) annotation (Line(points={{-123,-19},
+          {-120,-19},{-120,-30},{-112,-30}}, color={0,0,127}));
+  connect(controlCHPNotManufacturerModular.mFlowCC, fan.m_flow_in)
+    annotation (Line(points={{-123,-12.8},{-48,-12.8},{-48,-14}}, color={0,0,127}));
+  connect(cHPNotManufacturer.THotEngine, controlCHPNotManufacturerModular.TVolume) annotation (
+      Line(points={{0,-11},{0,-28},{-72,-28},{-72,12},{-156,12},{-156,-9},{-146,-9}}, color={0,0,
+          127}));
   connect(THotHeatCircuit.T, cHPControlBus.THot) annotation (Line(points={{68,-61},{68,-40},{130,
           -40},{130,120},{-60,120},{-60,102}},                      color={0,0,
           127}), Text(
@@ -281,42 +282,44 @@ end if;
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(regulation_ModularCHP.PLRset, hierarchicalControl_modularCHP1.PLRin) annotation (Line(
-        points={{-54,57.6},{-30,57.6},{-30,61.4},{-6,61.4}}, color={0,0,127}));
-  connect(cHPControlBus.Tamb, hierarchicalControl_modularCHP1.Tamb) annotation (Line(
-      points={{-60,102},{-24,102},{-24,96},{-34,96},{-34,46.2},{-6,46.2}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(TBoilerVar, hierarchicalControl_modularCHP1.TBoilerVar) annotation (Line(points={{40,102},
           {38,102},{38,34},{3.8,34},{3.8,42.4}}, color={0,0,127}));
   connect(TCon, hierarchicalControl_modularCHP1.TCon) annotation (Line(points={{-10,102},{-10,32},
           {7.8,32},{7.8,42.4}}, color={0,0,127}));
-  connect(cHPControlBus.PLR, regulation_ModularCHP.PLRin) annotation (Line(
-      points={{-59.9,102.1},{-74,102.1},{-74,100},{-92,100},{-92,58},{-74,58}},
+
+
+
+  connect(cHPControlBus.PLR, hierarchicalControl_modularCHP1.PLRin) annotation (Line(
+      points={{-60,102},{-60,70},{-14,70},{-14,61.4},{-6,61.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(hierarchicalControl_modularCHP1.PLRset, cHPNotManufacturer.PLR) annotation (Line(
-        points={{14,61.2},{26,61.2},{26,12},{-22,12},{-22,6.6},{-12,6.6}},
-                                                                       color={0,0,127}));
+  connect(hierarchicalControl_modularCHP1.PLRset, regulation_ModularCHP.PLRin) annotation (Line(
+        points={{14,61.2},{22,61.2},{22,26},{-82,26},{-82,58},{-74,58}}, color={0,0,127}));
+  connect(regulation_ModularCHP.PLRset, cHPNotManufacturer.PLR) annotation (Line(points={{-54,57.6},
+          {-48,57.6},{-48,58},{-38,58},{-38,6.6},{-12,6.6}}, color={0,0,127}));
+  connect(regulation_ModularCHP.PLRoff, controlCHPNotManufacturerModular.PLROff) annotation (
+      Line(points={{-54,51.8},{-52,51.8},{-52,18},{-180,18},{-180,-20},{-146,-20}}, color={255,0,
+          255}));
+  connect(hierarchicalControl_modularCHP1.shutdown, controlCHPNotManufacturerModular.shutdown)
+    annotation (Line(points={{14.4,54.8},{32,54.8},{32,14},{-166,14},{-166,-14.6},{-146,-14.6}},
+        color={255,0,255}));
+  connect(cHPNotManufacturer.THotEngine, hierarchicalControl_modularCHP1.Tb) annotation (Line(
+        points={{0,-11},{-2,-11},{-2,-24},{-14,-24},{-14,52.4},{-6.2,52.4}}, color={0,0,127}));
 
 
-
-  connect(THotHeatCircuit.T, hierarchicalControl_modularCHP1.Tb) annotation (Line(points={{68,-61},
-          {48,-61},{48,30},{-16,30},{-16,52.4},{-6.2,52.4}}, color={0,0,127}));
-  connect(hierarchicalControl_modularCHP1.shutdown, controlCHPNotManufacturer.shutdown)
-    annotation (Line(points={{14.4,54.6},{18,54.6},{18,22},{-170,22},{-170,
-          -14.6},{-146,-14.6}}, color={255,0,255}));
-  connect(hierarchicalControl_modularCHP1.PLRset, controlCHPNotManufacturer.PLR)
-    annotation (Line(points={{14,61.2},{24,61.2},{24,62},{36,62},{36,16},{-162,
-          16},{-162,-19.6},{-146,-19.6}}, color={0,0,127}));
+  connect(cHPControlBus.Tamb, hierarchicalControl_modularCHP1.Tamb) annotation (
+     Line(
+      points={{-59.9,102.1},{-30,102.1},{-30,46.2},{-6,46.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

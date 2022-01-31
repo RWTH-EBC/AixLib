@@ -14,7 +14,7 @@ model hierarchicalControl_modularBoiler
   Modelica.Blocks.Interfaces.RealInput PLRin
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
  //Two position controller
- replaceable twoPositionController.BaseClass.twoPositionControllerCal.twoPositionController_layers
+ replaceable twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_layers
     twoPositionController_layers(n=n,
     layerCal=layerCal,
     TLayer_dif=TLayer_dif,
