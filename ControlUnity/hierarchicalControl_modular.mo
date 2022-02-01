@@ -43,7 +43,7 @@ model hierarchicalControl_modular
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
-        origin={6,100})));
+        origin={4,100})));
 
   parameter Integer n=3 "Number of layers in the buffer storage" annotation(Dialog(
         group="Two position controller"));
@@ -194,7 +194,7 @@ equation
   connect(PLRin, twoPositionController_top.PLRin) annotation (Line(points={{-100,
           58},{-44,58},{-44,51},{16,51}}, color={0,0,127}));
   connect(TLayers, twoPositionController_top.TLayers)
-    annotation (Line(points={{6,100},{6,39.8},{16,39.8}}, color={0,0,127}));
+    annotation (Line(points={{4,100},{4,39.8},{16,39.8}}, color={0,0,127}));
   connect(emergencySwitch_modularBoiler1.y, twoPositionController_top.isOn)
     annotation (Line(points={{-39.6,26},{-36,26},{-36,46},{16,46},{16,45.4}},
         color={255,0,255}));
