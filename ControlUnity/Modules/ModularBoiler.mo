@@ -218,10 +218,10 @@ equation
   ///Connections of Two position controller
  if simpleTwoPosition then
   connect(senTHot.T, hierarchicalControl_modularBoilerNEW1.TLayers[1])
-    annotation (Line(points={{60,11},{60,66},{10.6,66},{10.6,60}}, color={0,0,127}));
+    annotation (Line(points={{60,11},{60,66},{10.4,66},{10.4,60}}, color={0,0,127}));
     else
   connect(TLayers, hierarchicalControl_modularBoilerNEW1.TLayers) annotation (
-      Line(points={{69,99},{69,76},{10,76},{10,68},{10.6,68},{10.6,60}},
+      Line(points={{69,99},{69,76},{10,76},{10,68},{10.4,68},{10.4,60}},
                                                          color={0,0,127}));
    end if;
    ///

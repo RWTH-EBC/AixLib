@@ -35,7 +35,7 @@ model flowTemperatureControl_heatingCurve
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Continuous.LimPID PID(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=1,
+    k=0.5,
     Ti=3,
     yMax=0.99,
     yMin=0) "PI Controller for controlling the valve position"
@@ -52,7 +52,7 @@ model flowTemperatureControl_heatingCurve
   Modelica.Blocks.Interfaces.BooleanInput isOn
     annotation (Placement(transformation(extent={{-120,-58},{-80,-18}})));
   Modelica.Blocks.Sources.RealExpression realExpression
-    annotation (Placement(transformation(extent={{-6,-60},{14,-40}})));
+    annotation (Placement(transformation(extent={{-4,-64},{16,-44}})));
   parameter Modelica.SIunits.ThermodynamicTemperature TOffset=0
     "Offset to heating curve temperature";
 
@@ -74,7 +74,7 @@ if PLRset >0 then
   connect(isOn, switch1.u2)
     annotation (Line(points={{-100,-38},{18,-38},{18,-8},{36,-8}}, color={255,0,255}));
   connect(realExpression.y, switch1.u3)
-    annotation (Line(points={{15,-50},{28,-50},{28,-16},{36,-16}}, color={0,0,127}));
+    annotation (Line(points={{17,-54},{28,-54},{28,-16},{36,-16}}, color={0,0,127}));
   connect(switch1.y, PLRset)
     annotation (Line(points={{59,-8},{76,-8},{76,0},{100,0}}, color={0,0,127}));
   annotation (Documentation(info="<html>
