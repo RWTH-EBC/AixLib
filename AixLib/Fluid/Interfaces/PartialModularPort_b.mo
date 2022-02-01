@@ -6,7 +6,7 @@ partial model PartialModularPort_b
   //
   replaceable package Medium =
     Modelica.Media.R134a.R134a_ph
-    constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
+    constrainedby Modelica.Media.Interfaces.PartialMedium
     "Medium in the component"
     annotation (choicesAllMatching = true);
 
