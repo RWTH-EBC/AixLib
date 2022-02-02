@@ -139,7 +139,7 @@ model hierarchicalControl_modular
   Modelica.Blocks.Logical.Switch switch2
     annotation (Placement(transformation(extent={{76,0},{96,20}})));
   Modelica.Blocks.Sources.RealExpression realExpression
-    annotation (Placement(transformation(extent={{54,-6},{68,8}})));
+    annotation (Placement(transformation(extent={{54,-10},{68,4}})));
 
 
 equation
@@ -186,7 +186,8 @@ equation
   connect(switch2.y, PLRset) annotation (Line(points={{97,10},{98,10},{98,46},{
           88,46},{88,60},{102,60}}, color={0,0,127}));
   connect(switch2.u3, realExpression.y)
-    annotation (Line(points={{74,2},{72,2},{72,1},{68.7,1}}, color={0,0,127}));
+    annotation (Line(points={{74,2},{72,2},{72,-3},{68.7,-3}},
+                                                             color={0,0,127}));
   connect(switch1.y, switch2.u1) annotation (Line(points={{81,60},{84,60},{84,
           30},{64,30},{64,18},{74,18}}, color={0,0,127}));
   connect(emergencySwitch_modularBoiler1.y, switch2.u2) annotation (Line(points={{-39.6,
