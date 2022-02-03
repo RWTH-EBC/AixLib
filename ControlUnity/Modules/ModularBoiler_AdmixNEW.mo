@@ -118,7 +118,7 @@ model ModularBoiler_AdmixNEW
 
    ///Control unity
    //
-  ControlUnity.hierarchicalControl_modular
+  ControlUnity.hierarchicalControl_modularOLD
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=use_advancedControl,
     n=n,

@@ -124,12 +124,14 @@ model ModularBoiler
     constrainedby
     ControlUnity.twoPositionController.BaseClass.partialTwoPositionController annotation(choicesAllMatching=true, Dialog(tab="Control", group="Two position control"));
 
-  ControlUnity.hierarchicalControl_modular
-    hierarchicalControl_modularBoilerNEW1(
+  hierarchicalControl_modular hierarchicalControl_modularBoilerNEW1(
+    PLRMin=PLRMin,
     use_advancedControl=use_advancedControl,
+    manualTimeDelay=manualTimeDelay,
     n=n,
     bandwidth=bandwidth,
     severalHeatcurcuits=severalHeatcurcuits,
+    variablePLR=variablePLR,
     k=k,
     TBoiler=TBoiler,
     Tref=Tref,
@@ -138,9 +140,12 @@ model ModularBoiler
     night_hour=night_hour,
     TOffset=TOffset,
     TMax=TMax,
-    TVar=TVar,
     redeclare replaceable model TwoPositionController_top =
-        TwoPositionController_top)                                                                                                                         annotation (Placement(transformation(extent={{0,40},{20,60}})));
+        TwoPositionController_top,
+    time_minOff=time_minOff,
+    time_minOn=time_minOn,
+    variableSetTemperature_admix=variableSetTemperature_admix)
+    annotation (Placement(transformation(extent={{0,40},{20,60}})));
   parameter Modelica.SIunits.Temperature Tref
     "Reference Temperature for the on off controller"
                                                      annotation(Dialog(enable=not use_advancedControl, tab="Control", group="Two position control"));
@@ -191,6 +196,22 @@ model ModularBoiler
         rotation=-90,
         origin={32,100})));
 
+  parameter Boolean manualTimeDelay
+    "If true, the user can set a time during which the heat genearator is switched on independently of the internal control" annotation(Dialog(tab="Control", group="Manual control"), choices(
+      choice=true "Manual control with time delay",
+      choice=false "Automatic intern control",
+      radioButtons=true));
+  parameter Boolean variablePLR
+    "If true, the user can determine the PLR between PLRmin and 1; else you have a two position conttol with the values 0 and 1 for PLR";
+  parameter Boolean variableSetTemperature_admix
+    "Choice between variable oder constant boiler temperature for the admixture control; if true the boiler temperature can be set from the outside via interface " annotation(Dialog(tab="Control", group="Admixture control"), choices(
+      choice=true "Variable set boiler temperature",
+      choice=false "Constant set boiler temperature",
+      radioButtons=true));
+  parameter Modelica.SIunits.Time time_minOff=900
+    "Time after which the device can be turned on again" annotation(Dialog(tab="Control", group="Manual control"));
+  parameter Modelica.SIunits.Time time_minOn=900
+    "Time after which the device can be turned off again" annotation(Dialog(tab="Control", group="Manual control"));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
   parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;

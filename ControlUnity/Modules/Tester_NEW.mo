@@ -117,13 +117,16 @@ package Tester_NEW "Tester models for the modules"
       Tref=343.15,
       bandwidth=2.5,
       severalHeatcurcuits=false,
-      TVar=false)
+      TVar=false,
+      manualTimeDelay=false,
+      variablePLR=false,
+      variableSetTemperature_admix=false)
            annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-104,2},{-84,22}})));
     Modelica.Blocks.Sources.RealExpression PLR1(y=1)
       annotation (Placement(transformation(extent={{-100,16},{-88,36}})));
-    Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=50, period=120000)
+    Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=100,period=120000)
       annotation (Placement(transformation(extent={{-104,54},{-84,74}})));
   equation
     connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{
@@ -206,7 +209,7 @@ package Tester_NEW "Tester models for the modules"
       use_T_in=false,
       redeclare package Medium = AixLib.Media.Water,
       nPorts=1)
-      annotation (Placement(transformation(extent={{-4,-32},{16,-12}})));
+      annotation (Placement(transformation(extent={{-4,-36},{16,-16}})));
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
       annotation (Placement(transformation(extent={{58,-6},{78,14}})));
     Modelica.Fluid.Pipes.StaticPipe pipe(
@@ -269,7 +272,7 @@ package Tester_NEW "Tester models for the modules"
     connect(pipe.port_b, modularBoiler_Controller.port_a) annotation (Line(points={{38,-16},
             {30,-16},{30,6},{-42,6},{-42,22},{-28,22}},          color={0,127,255}));
     connect(bou.ports[1], modularBoiler_Controller.port_a) annotation (Line(
-          points={{16,-22},{18,-22},{18,0},{-28,0},{-28,22}}, color={0,127,255}));
+          points={{16,-26},{18,-26},{18,0},{-28,0},{-28,22}}, color={0,127,255}));
     connect(PLR.y, boilerControlBus.PLR) annotation (Line(points={{-97,34},{-86,
             34},{-86,36.05},{-71.95,36.05}}, color={0,0,127}), Text(
         string="%second",

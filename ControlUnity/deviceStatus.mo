@@ -11,11 +11,11 @@ model deviceStatus
     "Time after which the device can be turned off again";
   parameter Boolean use_safetyShutoff=false
     "Set true, to enable an additional boolean input to perform manual shutoffs for security reasons without messing up the timer";
-  Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=45, period=500)
-    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression
+    annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 equation
-  connect(booleanPulse.y, deviceStatusDelay1.u)
-    annotation (Line(points={{-79,0},{12,0}}, color={255,0,255}));
+  connect(deviceStatusDelay1.u, booleanExpression.y)
+    annotation (Line(points={{12,0},{-9,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end deviceStatus;

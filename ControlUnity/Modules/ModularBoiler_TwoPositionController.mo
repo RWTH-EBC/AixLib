@@ -111,7 +111,7 @@ model ModularBoiler_TwoPositionController
 
    ///Control unity
    //
-  ControlUnity.hierarchicalControl_modular
+  ControlUnity.hierarchicalControl_modularOLD
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=false,
     n=1,

@@ -99,13 +99,13 @@ package Examples
 
     ModularCHP modularCHP(
       PelNom(displayUnit="kW") = 100000,
-      PLRMin=0.15,
       use_advancedControl=true,
       TVar=false,
       bandwidth=4,
       Tref=358.15,
       severalHeatcurcuits=false,
-      declination=1.2,
+      declination=5,
+      TOffset(displayUnit="K"),
       simpleTwoPosition=true) annotation (Placement(transformation(extent={{-24,-14},
               {-4,6}})));
     AixLib.Controls.Interfaces.CHPControlBus cHPControlBus

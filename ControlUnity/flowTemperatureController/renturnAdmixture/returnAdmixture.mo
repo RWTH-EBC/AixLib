@@ -2,7 +2,7 @@ within ControlUnity.flowTemperatureController.renturnAdmixture;
 model returnAdmixture
   "Flow temperature control with return admixture"
   parameter Integer k=1 "Number of heat curcuits";
-  parameter Boolean TVar=false "Choice between variable oder constant boiler temperature for the admixture control";
+  parameter Boolean variableSetTemperature_admix=false "Choice between variable oder constant boiler temperature for the admixture control";
 
   parameter Modelica.SIunits.Temperature TBoiler= 273.15+75 "Fix boiler temperature for the admixture";
 
@@ -35,7 +35,7 @@ model returnAdmixture
   Modelica.Blocks.Interfaces.RealInput TMeaBoiler
     "Measured boiler temperature to keep the fixed temperature"
     annotation (Placement(transformation(extent={{-122,-20},{-82,20}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=TBoiler) if not TVar
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=TBoiler) if not variableSetTemperature_admix
     annotation (Placement(transformation(extent={{-66,12},{-46,32}})));
   Modelica.Blocks.Continuous.LimPID PID1(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -49,7 +49,7 @@ model returnAdmixture
     annotation (Placement(transformation(extent={{-120,-78},{-80,-38}})));
 
     Boolean isOnMea;
-  Modelica.Blocks.Interfaces.RealInput TBoilerVar if TVar
+  Modelica.Blocks.Interfaces.RealInput TBoilerVar if variableSetTemperature_admix
     "Variable boiler temperature for the renturn admixture"
     annotation (Placement(transformation(extent={{-120,22},{-80,62}})));
 equation

@@ -7,8 +7,7 @@ model TwoPositionController_top
       realExpression(y=Tref),
     onOffController(bandwidth=bandwidth));
   parameter Modelica.SIunits.Temperature Tref=273.15+60 "Reference temperature for two position controller using top level temperature";
-  parameter Modelica.SIunits.Temperature Ttop=273.15 + 70
-                                                        "Temperature on the top level of the buffer storage";
+
   parameter Boolean layerCal=true
     "If true, the two-position controller uses the mean temperature of the buffer storage";
     parameter Real bandwidth     "Bandwidth around reference signal";

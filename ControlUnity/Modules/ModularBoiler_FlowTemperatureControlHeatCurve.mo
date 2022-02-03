@@ -128,7 +128,7 @@ model ModularBoiler_FlowTemperatureControlHeatCurve
         rotation=-90,
         origin={64,100})));
 
-  ControlUnity.hierarchicalControl_modular
+  ControlUnity.hierarchicalControl_modularOLD
     hierarchicalControl_modularBoilerNEW1(
     use_advancedControl=true,
     n=n,

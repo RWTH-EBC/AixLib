@@ -7,7 +7,7 @@ protected
 
 public
   parameter Modelica.SIunits.Temperature TMax=273.15+105 "Maximum temperature, at which the system is shut down";
-  parameter Real PLRmin=0.15 "Minimal zulässiges PLR";
+  parameter Real PLRMin=0.15 "Minimal zulässiges PLR";
 
   Modelica.Blocks.Sources.RealExpression tHotMax(y=THotMax)
     annotation (Placement(transformation(extent={{-100,-4},{-80,16}})));
