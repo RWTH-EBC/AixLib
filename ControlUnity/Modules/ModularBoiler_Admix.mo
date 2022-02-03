@@ -3,12 +3,18 @@ model ModularBoiler_Admix
   extends AixLib.Fluid.Interfaces.PartialModularPort_b(
   redeclare package Medium = AixLib.Media.Water,
   final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
-  final nPorts=k,
-  dp_start=0,
-  m_flow_start=0,
-  dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2,
-    port_a(p(start=Medium.p_default)),
-    ports_b(p(start=Medium.p_default)));
+  nPorts,
+  dp_nominal=dp_nominal_calc);
+
+  // extends AixLib.Fluid.Interfaces.PartialModularPort_b(
+  // redeclare package Medium = AixLib.Media.Water,
+  // final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom),
+  // final nPorts=k,
+  // dp_start=0,
+  // m_flow_start=0,
+  // dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2,
+  //   port_a(p(start=Medium.p_default)),
+  //   ports_b(p(start=Medium.p_default)));
 
 
 
@@ -39,12 +45,12 @@ model ModularBoiler_Admix
                                                           "T start"
    annotation (Dialog(tab="Advanced"));
 
-   parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
-     "Guess value of dp = port_a.p - port_b.p"
-     annotation (Dialog(tab="Advanced", group="Initialization"));
-   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
-     "Guess value of m_flow = port_a.m_flow"
-     annotation (Dialog(tab="Advanced", group="Initialization"));
+//    parameter Modelica.SIunits.PressureDifference dp_start=0
+//      "Guess value of dp = port_a.p - port_b.p"
+//      annotation (Dialog(tab="Advanced", group="Initialization"));
+//    parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
+//      "Guess value of m_flow = port_a.m_flow"
+//      annotation (Dialog(tab="Advanced", group="Initialization"));
    parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
      "Start value of pressure"
      annotation (Dialog(tab="Advanced", group="Initialization"));
@@ -111,11 +117,11 @@ model ModularBoiler_Admix
      //
     ///Control unity
 
-  Regulation_modularBoiler regulation_modularBoiler(use_advancedControl=false)
+  Regulation_modularBoiler regulation_modularBoiler(use_advancedControl=use_advancedControl)
     annotation (Placement(transformation(extent={{-62,46},{-42,66}})));
   parameter Integer n= if simpleTwoPosition then 1 else n "Number of layers in the buffer storage" annotation(Dialog(tab="Control", group="Two position control"));
-  parameter Boolean simpleTwoPosition annotation(Dialog(tab="Control", group="Two position control"));
-  parameter Boolean use_advancedControl
+  parameter Boolean simpleTwoPosition = false annotation(Dialog(tab="Control", group="Two position control"));
+  parameter Boolean use_advancedControl = true
     "Selection between two position control and flow temperature control, if true=flow temperature control is active"
                                                                                                                      annotation(choices(
       choice=true "Flow temperature control",
@@ -130,7 +136,7 @@ model ModularBoiler_Admix
     n=n,
     bandwidth=bandwidth,
     severalHeatcurcuits=severalHeatcurcuits,
-    k=k,
+    k=nPorts,
     TBoiler=TBoiler,
     Tref=Tref,
     declination=declination,
@@ -147,16 +153,16 @@ model ModularBoiler_Admix
         extent={{-17,-17},{17,17}},
         rotation=-90,
         origin={53,99}), iconTransformation(extent={{4,74},{38,108}})));
-  parameter Integer k=2 "Number of heat curcuits"  annotation(Dialog(tab="Control", group="Admixture control"));
+  //parameter Integer k=2 "Number of heat curcuits"  annotation(Dialog(tab="Control", group="Admixture control"));
   parameter Modelica.SIunits.Temperature TBoiler=273.15 + 75
     "Fix boiler temperature for the admixture" annotation(Dialog(tab="Control", group="Admixture control"));
-  parameter Boolean severalHeatcurcuits
+  parameter Boolean severalHeatcurcuits = true
     "If true, there are two or more heat curcuits"
                                                   annotation(choices(
       choice=true "Several heat curcuits",
       choice=false "One heat curcuit",
       radioButtons=true), Dialog(tab="Control", group="Flow temperature control"));
-  Modelica.Blocks.Interfaces.RealInput TCon[k] if use_advancedControl and
+  Modelica.Blocks.Interfaces.RealInput TCon[nPorts] if use_advancedControl and
     severalHeatcurcuits "Set temperature for the consumers" annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -165,14 +171,14 @@ model ModularBoiler_Admix
   parameter Real declination=1 annotation(Dialog(tab="Control", group="Flow temperature control"));
   parameter Real day_hour=6 annotation(Dialog(tab="Control", group="Flow temperature control"));
   parameter Real night_hour=22 annotation(Dialog(tab="Control", group="Flow temperature control"));
-  flowTemperatureController.renturnAdmixture.Admixture admixture[k](
+  flowTemperatureController.renturnAdmixture.Admixture admixture[nPorts](
     redeclare package Medium = Medium,
-    k=k,
+    each k=nPorts,
     m_flow_nominalCon=m_flow_nominalCon,
     dp_nominalCon=dp_nominalCon,
     QNomCon=QNomCon,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    Kv=10) if use_advancedControl and severalHeatcurcuits annotation (Placement(
+    each energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    each Kv=10) if use_advancedControl and severalHeatcurcuits annotation (Placement(
         transformation(
         extent={{-16,-14},{16,14}},
         rotation=0,
@@ -187,7 +193,7 @@ model ModularBoiler_Admix
   parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition parameterIso=
       AixLib.DataBase.Pipes.Insulation.Iso50pc()
     "Insulation Type (can be overwritten in each pipe)";
-  flowTemperatureController.renturnAdmixture.AdmixtureBus admixtureBus[k]
+  flowTemperatureController.renturnAdmixture.AdmixtureBus admixtureBus[nPorts]
     annotation (Placement(transformation(extent={{66,-84},{86,-64}})));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominalCon[:]
     "Nominal mass flow rate for the individual consumers" annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
@@ -195,7 +201,7 @@ model ModularBoiler_Admix
   parameter Modelica.SIunits.PressureDifference dp_nominalCon[:]
     "Pressure drop at nominal conditions for the individual consumers" annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
   parameter Modelica.SIunits.HeatFlowRate QNomCon[:] "Nominal heat power that the consumers need" annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
-  parameter Boolean TVar
+  parameter Boolean TVar = true
     "Choice between variable oder constant boiler temperature for the admixture control";
   Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and severalHeatcurcuits
      and TVar "Variable boiler temperature for the admixture control" annotation (Placement(
@@ -205,7 +211,7 @@ model ModularBoiler_Admix
         origin={24,102})));
 protected
    parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
-  parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
+  parameter Modelica.SIunits.PressureDifference dp_nominal_calc=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
    replaceable package MediumBoiler =AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat source"
       annotation (choices(
@@ -217,10 +223,6 @@ protected
               "Propylene glycol water, 40% mass fraction")));
 
 equation
- connect(port_a, port_a)
-    annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
-
-
   if Pump==false then
   else
   end if;
@@ -323,7 +325,7 @@ equation
 
 
    if use_advancedControl and severalHeatcurcuits then
-   for m in 1:k loop
+   for m in 1:nPorts loop
    connect(senTHot.port_b, admixture[m].port_a1) annotation (Line(
       points={{70,0},{70,-34},{-26,-34},{-26,-57.6},{2,-57.6}},
       color={0,127,255},
@@ -388,7 +390,7 @@ equation
 
   connect(boilerControlBus.PLREx, hierarchicalControl_modularBoilerNEW1.PLRinEx)
     annotation (Line(
-      points={{-63.95,98.05},{-32,98.05},{-32,59},{0,59}},
+      points={{-64,98},{-32,98},{-32,59},{0,59}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -397,7 +399,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(boilerControlBus.internControl, hierarchicalControl_modularBoilerNEW1.internControl)
     annotation (Line(
-      points={{-63.95,98.05},{-20,98.05},{-20,70},{14.2,70},{14.2,60}},
+      points={{-64,98},{-20,98},{-20,70},{14.2,70},{14.2,60}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

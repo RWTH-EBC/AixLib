@@ -21,8 +21,10 @@ model Regulation_modularBoiler
     annotation (Placement(transformation(extent={{-120,-38},{-80,2}})));
   Modelica.Blocks.Interfaces.RealOutput mFlow_relB
     annotation (Placement(transformation(extent={{92,-20},{112,0}})));
-  Modelica.Blocks.Interfaces.RealOutput PLRset if not use_advancedControl or (use_advancedControl and severalHeatcurcuits)
+  Modelica.Blocks.Interfaces.RealOutput PLRset if
+   not use_advancedControl or (use_advancedControl and severalHeatcurcuits)
     annotation (Placement(transformation(extent={{90,26},{110,46}})));
+
   Modelica.Blocks.Interfaces.RealInput PLRMea
     "Measured PLR after starting the simulation"
     annotation (Placement(transformation(extent={{-120,-86},{-80,-46}})));
