@@ -35,8 +35,6 @@ model ControlCHPNotManufacturerModular
     annotation (Placement(transformation(extent={{30,24},{42,36}})));
   Modelica.Blocks.Math.Product mflowCC
     annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
-  Modelica.Blocks.Logical.Or or1
-    annotation (Placement(transformation(extent={{-30,-58},{-10,-38}})));
   Modelica.Blocks.Math.Add add1(k1=-1)
     annotation (Placement(transformation(extent={{0,58},{20,78}})));
   Modelica.Blocks.Interfaces.RealInput TVolume
@@ -44,8 +42,6 @@ model ControlCHPNotManufacturerModular
     annotation (Placement(transformation(extent={{-140,10},{-100,50}})));
   Modelica.Blocks.Sources.RealExpression realExpression2(y=0.0003)
     annotation (Placement(transformation(extent={{10,-72},{20,-52}})));
-  Modelica.Blocks.Interfaces.BooleanInput shutdown
-    annotation (Placement(transformation(extent={{-140,-46},{-100,-6}})));
   Modelica.Blocks.Interfaces.RealOutput mFlowRelHC "Normalized mFlow HC"
     annotation (Placement(transformation(extent={{100,-80},{120,-60}})));
   Modelica.Blocks.Interfaces.RealOutput mFlowCC "Absolut mFlow CC"
@@ -79,29 +75,24 @@ equation
           127}));
   connect(TVolume, PID3.u_m)
     annotation (Line(points={{-120,30},{-24,30},{-24,50}}, color={0,0,127}));
-  connect(shutdown, or1.u1) annotation (Line(points={{-120,-26},{-92,-26},{-92,
-          -48},{-32,-48}},
-                 color={255,0,255}));
   connect(switch2.y, mFlowCC) annotation (Line(points={{85,-8},{92,-8},{92,-8},
           {110,-8}}, color={0,0,127}));
-  connect(or1.y, switch2.u2) annotation (Line(points={{-9,-48},{28,-48},{28,-8},
-          {62,-8}}, color={255,0,255}));
   connect(mflowCC.y, switch2.u3) annotation (Line(points={{15,0},{44,0},{44,-16},
           {62,-16}}, color={0,0,127}));
-  connect(realExpression2.y, switch2.u1) annotation (Line(points={{20.5,-62},{
-          30,-62},{30,2},{62,2},{62,0}}, color={0,0,127}));
-  connect(PLROff, or1.u2) annotation (Line(points={{-120,-80},{-78,-80},{-78,
-          -56},{-32,-56}}, color={255,0,255}));
   connect(limiter.y, switch1.u3) annotation (Line(points={{42.6,30},{46,30},{46,
           -78},{52,-78}}, color={0,0,127}));
   connect(realExpression2.y, switch1.u1)
     annotation (Line(points={{20.5,-62},{52,-62}}, color={0,0,127}));
-  connect(or1.y, switch1.u2) annotation (Line(points={{-9,-48},{-2,-48},{-2,-70},
-          {52,-70}}, color={255,0,255}));
   connect(switch1.y, mFlowRelHC)
     annotation (Line(points={{75,-70},{110,-70}}, color={0,0,127}));
   connect(limiter.y, mflowCC.u2) annotation (Line(points={{42.6,30},{54,30},{54,
           16},{-24,16},{-24,-6},{-8,-6}}, color={0,0,127}));
+  connect(realExpression2.y, switch2.u1) annotation (Line(points={{20.5,-62},{
+          48,-62},{48,-2},{56,-2},{56,0},{62,0}}, color={0,0,127}));
+  connect(PLROff, switch1.u2) annotation (Line(points={{-120,-80},{-34,-80},{
+          -34,-70},{52,-70}}, color={255,0,255}));
+  connect(PLROff, switch2.u2) annotation (Line(points={{-120,-80},{-44,-80},{
+          -44,-22},{54,-22},{54,-8},{62,-8}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(
           extent={{-100,100},{100,-100}},

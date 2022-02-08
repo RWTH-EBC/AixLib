@@ -168,8 +168,8 @@ equation
   connect(TLayers, internalControl.TLayers) annotation (Line(points={{4,100},{4,
           44},{-11.4,44},{-11.4,34}},
                                     color={0,0,127}));
-  connect(Tb, internalControl.Tb) annotation (Line(points={{-100,-32},{-82,-32},
-          {-82,-34},{-58,-34},{-58,20.6},{-22,20.6}},color={0,0,127}));
+  connect(Tb, internalControl.Tflow) annotation (Line(points={{-100,-32},{-82,-32},
+          {-82,-34},{-58,-34},{-58,20.6},{-22,20.6}}, color={0,0,127}));
   connect(TMeaCon, internalControl.TMeaCon) annotation (Line(points={{90,-116},{
           90,-80},{-3.6,-80},{-3.6,13.8}}, color={0,0,127}));
   connect(TCon, internalControl.TCon) annotation (Line(points={{34,-116},{34,-82},

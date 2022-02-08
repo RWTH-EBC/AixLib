@@ -16,8 +16,8 @@ model ModularBufferStorage
      parameter Modelica.SIunits.HeatCapacity cW=Medium.cp_const "Heat Capacity of water";
      parameter Modelica.SIunits.TemperatureDifference dT=20;
      parameter Real l=1.73 "Relation between height and diameter of the buffer storage" annotation(Dialog(enable= advancedVolume, group="Control"));
-      parameter Modelica.SIunits.Height hTank=(QNom*t*1.73^2/( Modelica.Constants.pi/4*rhoW*cW*dT))^(1/3) annotation(Evaluate=true, Dialog(enable= not advancedVolume, group="Control"));
-     parameter Modelica.SIunits.Diameter dTank=hTank/1.73 annotation(Evaluate=true, Dialog(enable=not advancedVolume, group="Control"));
+      parameter Modelica.SIunits.Height hTank=(QNom*t*l^2/( Modelica.Constants.pi/4*rhoW*cW*dT))^(1/3) annotation (Dialog(enable= not advancedVolume, group="Control"));
+     parameter Modelica.SIunits.Diameter dTank=hTank/l annotation (Dialog(enable= not advancedVolume, group="Control"));
      parameter Modelica.SIunits.Height hUpperPortDemand=hTank - 0.1;
      parameter Modelica.SIunits.Height hUpperPortSupply=hTank - 0.1;
 
@@ -41,8 +41,6 @@ model ModularBufferStorage
     annotation (Placement(transformation(extent={{50,-110},{70,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b fluidportTop2(h_outflow(start=Medium.h_default, nominal=Medium.h_default))
     annotation (Placement(transformation(extent={{-70,90},{-50,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
   AixLib.Fluid.Storage.BufferStorage bufferStorage(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -62,8 +60,7 @@ model ModularBufferStorage
         AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
-    TStart=303.15,
-    x=x)           annotation (Placement(transformation(extent={{22,-28},{-22,28}})));
+    TStart=303.15)           annotation (Placement(transformation(extent={{22,-28},{-22,28}})));
   parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l(
       hTank=hTank,
@@ -71,7 +68,7 @@ model ModularBufferStorage
       hUpperPortSupply=hUpperPortSupply,
       dTank=dTank)                                "Data record for Storage" annotation(Dialog(group="Control"));
   parameter Integer n=10 " Model assumptions Number of Layers";
-  parameter Integer x "Number of layer which is used" annotation(Dialog(group="Control"));
+
   Modelica.Blocks.Interfaces.RealOutput TLayer[n]
     "Temperatures of the different layers of the buffer storage"
     annotation (Placement(transformation(extent={{-100,40},{-120,60}})));
@@ -90,10 +87,9 @@ equation
           {-6.325,-28.28},{-6.325,-80},{-60,-80},{-60,-100}}, color={0,127,255}));
   connect(fixedTemperature.port, bufferStorage.heatportOutside) annotation (Line(
         points={{-84,0},{-52,0},{-52,1.68},{-21.45,1.68}}, color={191,0,0}));
-  connect(bufferStorage.port_b, port_b) annotation (Line(points={{26.95,3.55271e-15},
-          {63.475,3.55271e-15},{63.475,0},{100,0}}, color={0,127,255}));
-  connect(bufferStorage.TLayer, TLayer) annotation (Line(points={{-24.75,15.68},{-90,15.68},{-90,
-          50},{-110,50}}, color={0,0,127}));
+  connect(bufferStorage.TLayer, TLayer) annotation (Line(points={{-22,15.68},{-90,
+          15.68},{-90,50},{-110,50}},
+                          color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ModularBufferStorage;

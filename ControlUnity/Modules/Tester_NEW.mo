@@ -120,13 +120,15 @@ package Tester_NEW "Tester models for the modules"
       TVar=false,
       manualTimeDelay=false,
       variablePLR=false,
-      variableSetTemperature_admix=false)
+      variableSetTemperature_admix=false,
+      time_minOff=0,
+      time_minOn=10000)
            annotation (Placement(transformation(extent={{-32,14},{-12,34}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-104,2},{-84,22}})));
     Modelica.Blocks.Sources.RealExpression PLR1(y=1)
       annotation (Placement(transformation(extent={{-100,16},{-88,36}})));
-    Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=100,period=120000)
+    Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=50, period=40000)
       annotation (Placement(transformation(extent={{-104,54},{-84,74}})));
   equation
     connect(heater.port,vol. heatPort) annotation (Line(points={{16,38},{16,32},{
@@ -237,9 +239,12 @@ package Tester_NEW "Tester models for the modules"
       simpleTwoPosition=true,
       use_advancedControl=true,
       severalHeatcurcuits=false,
-      declination=3,
+      declination=1.2,
       TMax=378.15,
-      TVar=false)
+      TVar=false,
+      manualTimeDelay=false,
+      variablePLR=false,
+      variableSetTemperature_admix=false)
       annotation (Placement(transformation(extent={{-28,12},{-8,32}})));
     Modelica.Blocks.Sources.Ramp ramp(
       height=-20,
@@ -612,15 +617,15 @@ package Tester_NEW "Tester models for the modules"
               parameter Modelica.SIunits.HeatFlowRate QNom=modularBoiler_Controller.QNom "Thermal dimension power";
               parameter Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom);
                parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal";
-               parameter Modelica.SIunits.Time t=60*60 "Time until the buffer storage is fully loaded" annotation(Dialog(enable= advancedVolume, group="Control"));
+              // parameter Modelica.SIunits.Time t=60*60 "Time until the buffer storage is fully loaded" annotation(Dialog(enable= advancedVolume, group="Control"));
        parameter Modelica.SIunits.Density rhoW=997 "Density of water";
        parameter Modelica.SIunits.HeatCapacity cW=4180 "Heat Capacity of water";
        parameter Modelica.SIunits.TemperatureDifference dT=20;
        parameter Real l=1.73 "Relation between height and diameter of the buffer storage" annotation(Dialog(group="Control"));
-        parameter Modelica.SIunits.Height hTank=(QNom*t*1.73^2/( Modelica.Constants.pi/4*rhoW*cW*dT))^(1/3) annotation(Evaluate=true, Dialog(group="Control"));
-       parameter Modelica.SIunits.Diameter dTank=hTank/1.73 annotation(Evaluate=true, Dialog(group="Control"));
-       parameter Modelica.SIunits.Height hUpperPortDemand=hTank - 0.1;
-       parameter Modelica.SIunits.Height hUpperPortSupply=hTank - 0.1;
+        //parameter Modelica.SIunits.Height hTank=(QNom*t*1.73^2/( Modelica.Constants.pi/4*rhoW*cW*dT))^(1/3) annotation(Evaluate=true, Dialog(group="Control"));
+      // parameter Modelica.SIunits.Diameter dTank=hTank/1.73 annotation(Evaluate=true, Dialog(group="Control"));
+     //  parameter Modelica.SIunits.Height hUpperPortDemand=hTank - 0.1;
+      // parameter Modelica.SIunits.Height hUpperPortSupply=hTank - 0.1;
 
 
        //Consumer pump parametrizing
@@ -663,13 +668,16 @@ package Tester_NEW "Tester models for the modules"
       simpleTwoPosition=false,
       use_advancedControl=false,
       redeclare model TwoPositionController_top =
-          twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_layers,
-
+          twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_top,
       Tref=348.15,
       bandwidth=5,
       severalHeatcurcuits=false,
-      TVar=false)
+      TVar=false,
+      manualTimeDelay=false,
+      variablePLR=false,
+      variableSetTemperature_admix=false)
            annotation (Placement(transformation(extent={{-52,18},{-32,38}})));
+
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
     AixLib.Fluid.Movers.SpeedControlled_y fan1(
@@ -680,9 +688,9 @@ package Tester_NEW "Tester models for the modules"
       addPowerToMedium=false)
       annotation (Placement(transformation(extent={{72,-24},{52,-4}})));
 
-    parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-        AixLib.DataBase.Storage.Generic_New_2000l(hTank=hTank, dTank=dTank)
-                                                    "Data record for Storage" annotation(Dialog(group="Control"));
+
+
+
     AixLib.Fluid.MixingVolumes.MixingVolume vol1(
       redeclare package Medium = AixLib.Media.Water,
       m_flow_nominal=1,
@@ -710,14 +718,11 @@ package Tester_NEW "Tester models for the modules"
       addPowerToMedium=false)
       annotation (Placement(transformation(extent={{14,-90},{-2,-74}})));
     twoPositionController.ModularBufferStorage modularBufferStorage(
-      QNom=QNom,
+      QNom=modularBoiler_Controller.QNom,
       dTWaterNom=modularBoiler_Controller.dTWaterNom,
       t(displayUnit="min") = 3600,
-      hTank=2.4,
-      dTank=1.2,
-      advancedVolume=false,
+      advancedVolume=true,
       n=10,
-      x=9,
       m2_flow_nominal=abs(sine.offset + sine.amplitude + sine1.offset + sine1.amplitude)/(Medium.cp_const
           *dTWaterNom))
            annotation (Placement(transformation(extent={{-10,-12},{10,8}})));

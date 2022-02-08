@@ -17,6 +17,7 @@ model InternalControl "This model contains the internal controller"
 
    twoPositionController.BaseClass.twoPositionControllerCal.TwoPositionController_top
     twoPositionController_top(
+    Tref=Tref,
     n=n,
     bandwidth=bandwidth) if
                   not use_advancedControl
@@ -53,7 +54,8 @@ model InternalControl "This model contains the internal controller"
   Modelica.Blocks.Interfaces.RealInput PLRin if not use_advancedControl or (
     use_advancedControl and severalHeatcurcuits)
     annotation (Placement(transformation(extent={{-120,40},{-80,80}})));
-  Modelica.Blocks.Interfaces.RealInput Tb "Boiler temperature"
+  Modelica.Blocks.Interfaces.RealInput Tflow
+    "Flow temperature of the heat generator"
     annotation (Placement(transformation(extent={{-120,-54},{-80,-14}})));
   Modelica.Blocks.Interfaces.RealInput TLayers[n]
     "Different temperatures of layers of buffer storage, 1 lowest layer and n top layer; if simple two position controller, then it is equal to Tin"
@@ -112,13 +114,13 @@ equation
           {18,-56.6},{42,-56.6}}, color={255,0,255}));
   connect(returnAdmixture.valPos, valPos) annotation (Line(points={{62,-69.8},{74,
           -69.8},{74,-64},{104,-64}}, color={0,0,127}));
-  connect(Tb, flowTemperatureControl_heatingCurve.TMea) annotation (Line(points=
-         {{-100,-34},{-58,-34},{-58,-78},{-21.2,-78},{-21.2,-70}}, color={0,0,127}));
+  connect(Tflow, flowTemperatureControl_heatingCurve.TMea) annotation (Line(
+        points={{-100,-34},{-58,-34},{-58,-78},{-21.2,-78},{-21.2,-70}}, color=
+          {0,0,127}));
   connect(Tamb, flowTemperatureControl_heatingCurve.Tamb) annotation (Line(
         points={{-100,-78},{-68,-78},{-68,-60},{-30,-60}}, color={0,0,127}));
-  connect(Tb, returnAdmixture.TMeaBoiler) annotation (Line(points={{-100,-34},{-58,
-          -34},{-58,-80},{-8,-80},{-8,-64},{41.8,-64}},
-                                      color={0,0,127}));
+  connect(Tflow, returnAdmixture.TMeaBoiler) annotation (Line(points={{-100,-34},
+          {-58,-34},{-58,-80},{-8,-80},{-8,-64},{41.8,-64}}, color={0,0,127}));
   connect(TBoilerVar, returnAdmixture.TBoilerVar)
     annotation (Line(points={{2,-102},{2,-59.8},{42,-59.8}}, color={0,0,127}));
   connect(TCon, returnAdmixture.TCon) annotation (Line(points={{32,-102},{34,-102},

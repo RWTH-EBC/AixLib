@@ -5,7 +5,10 @@ package Examples
     ModularCHP modularCHP(
       PelNom(displayUnit="kW") = 100000,
       use_advancedControl=false,
-      TVar=false,
+      manualTimeDelay=true,
+      time_minOff=0,
+      time_minOn=10000,
+      variableSetTemperature_admix=false,
       bandwidth=4,
       Tref=358.15,
       severalHeatcurcuits=true,
@@ -54,6 +57,10 @@ package Examples
       annotation (Placement(transformation(extent={{-104,4},{-92,24}})));
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-98,-24},{-78,-4}})));
+    Modelica.Blocks.Sources.RealExpression PLREx(y=1)
+      annotation (Placement(transformation(extent={{-106,18},{-94,38}})));
+    Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=100, period=40000)
+      annotation (Placement(transformation(extent={{-96,44},{-80,60}})));
   equation
     connect(cHPControlBus, modularCHP.cHPControlBus) annotation (Line(
         points={{-66,14},{-22,14},{-22,8.2}},
@@ -89,6 +96,18 @@ package Examples
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(PLREx.y, cHPControlBus.PLREx) annotation (Line(points={{-93.4,28},{
+            -65.9,28},{-65.9,14.1}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(booleanPulse.y, cHPControlBus.internControl) annotation (Line(
+          points={{-79.2,52},{-65.9,52},{-65.9,14.1}}, color={255,0,255}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
     annotation (
       Icon(coordinateSystem(preserveAspectRatio=false)),
       Diagram(coordinateSystem(preserveAspectRatio=false)),
@@ -104,7 +123,9 @@ package Examples
       bandwidth=4,
       Tref=358.15,
       severalHeatcurcuits=false,
-      declination=5,
+      declination=6,
+      day_hour=6,
+      night_hour=22,
       TOffset(displayUnit="K"),
       simpleTwoPosition=true) annotation (Placement(transformation(extent={{-24,-14},
               {-4,6}})));
@@ -213,17 +234,17 @@ package Examples
        Modelica.Media.Water.ConstantPropertyLiquidWater
        constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-         parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
-            parameter Modelica.SIunits.PressureDifference dp_nominal=7.143*10^8*exp(-0.007078*QNom/1000)*(V_flow_nominal)^2;
-              parameter Modelica.SIunits.HeatFlowRate QNom=modularCHP.QNom "Thermal dimension power";
-              parameter Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom);
+         //parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal=m_flow_nominal/Medium.d_const;
+            parameter Modelica.SIunits.PressureDifference dp_nominal=modularCHP.dp_nominal;
+              parameter Modelica.SIunits.HeatFlowRate PelNom=modularCHP.PelNom "Thermal dimension power";
+             // parameter Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom);
                parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal";
                parameter Modelica.SIunits.Time t=60*60 "Time until the buffer storage is fully loaded" annotation(Dialog(enable= advancedVolume, group="Control"));
-       parameter Modelica.SIunits.Density rhoW=997 "Density of water";
-       parameter Modelica.SIunits.HeatCapacity cW=4180 "Heat Capacity of water";
+       parameter Modelica.SIunits.Density rhoW=Medium.d_const "Density of water";
+       parameter Modelica.SIunits.HeatCapacity cW=Medium.cp_const "Heat Capacity of water";
        parameter Modelica.SIunits.TemperatureDifference dT=20;
        parameter Real l=1.73 "Relation between height and diameter of the buffer storage" annotation(Dialog(group="Control"));
-        parameter Modelica.SIunits.Height hTank=(QNom*t*1.73^2/( Modelica.Constants.pi/4*rhoW*cW*dT))^(1/3) annotation(Evaluate=true, Dialog(group="Control"));
+        parameter Modelica.SIunits.Height hTank=(PelNom*t*1.73^2/( Modelica.Constants.pi/4*rhoW*cW*dT))^(1/3) annotation(Evaluate=true, Dialog(group="Control"));
        parameter Modelica.SIunits.Diameter dTank=hTank/1.73 annotation(Evaluate=true, Dialog(group="Control"));
        parameter Modelica.SIunits.Height hUpperPortDemand=hTank - 0.1;
        parameter Modelica.SIunits.Height hUpperPortSupply=hTank - 0.1;
@@ -236,13 +257,16 @@ package Examples
          parameter Modelica.SIunits.MassFlowRate m_flow_nominalC2=abs(sine1.offset+sine1.amplitude)/(Medium.cp_const*dTWaterNom);
 
     ModularCHP modularCHP(
-      PelNom(displayUnit="kW") = 100000,
-      use_advancedControl=true,
+      PelNom(displayUnit="kW") = 200000,
+      use_advancedControl=false,
       TVar=false,
+      n=modularBufferStorage.n,
       bandwidth=4,
       Tref=358.15,
       severalHeatcurcuits=true,
-      simpleTwoPosition=true) annotation (Placement(transformation(extent={{-26,-12},{-6,8}})));
+      simpleTwoPosition=false)
+                              annotation (Placement(transformation(extent={{-28,-12},
+              {-8,8}})));
     AixLib.Controls.Interfaces.CHPControlBus cHPControlBus
       annotation (Placement(transformation(extent={{-86,-6},{-46,34}})));
 
@@ -277,14 +301,13 @@ package Examples
     Modelica.Blocks.Sources.BooleanExpression isOn(y=true)
       annotation (Placement(transformation(extent={{-98,-24},{-78,-4}})));
     twoPositionController.ModularBufferStorage modularBufferStorage(
-      QNom=QNom,
-      dTWaterNom=modularBoiler_Controller.dTWaterNom,
+      dp_nominal=modularCHP.dp_nominal,
+      QNom=modularCHP.PelNom,
+      m_flow_nominal=modularCHP.m_flow_nominalHC,
+      dTWaterNom=modularCHP.deltaTHeatingCircuit,
       t(displayUnit="min") = 3600,
-      hTank=2.4,
-      dTank=1.2,
-      advancedVolume=false,
+      advancedVolume=true,
       n=10,
-      x=9,
       m2_flow_nominal=abs(sine.offset + sine.amplitude + sine1.offset + sine1.amplitude)
           /(Medium.cp_const*dTWaterNom))
            annotation (Placement(transformation(extent={{6,-38},{26,-18}})));
@@ -322,9 +345,14 @@ package Examples
       annotation (Placement(transformation(extent={{46,-98},{60,-84}})));
     Modelica.Blocks.Sources.RealExpression realExpression1(y=0.5)
       annotation (Placement(transformation(extent={{4,-70},{-10,-56}})));
+    Modelica.Blocks.Sources.Sine sine1(
+      amplitude=-10000,
+      freqHz=1/3600,
+      offset=-20000)
+      annotation (Placement(transformation(extent={{-52,-66},{-38,-52}})));
   equation
     connect(cHPControlBus, modularCHP.cHPControlBus) annotation (Line(
-        points={{-66,14},{-22,14},{-22,8.2}},
+        points={{-66,14},{-24,14},{-24,8.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
@@ -353,10 +381,8 @@ package Examples
         horizontalAlignment=TextAlignment.Left));
     connect(bou.ports[1], vol.ports[1])
       annotation (Line(points={{66,28},{41.3333,28}}, color={0,127,255}));
-    connect(modularBufferStorage.TLayer, modularCHP.TCon) annotation (Line(points=
-           {{5,-23},{0,-23},{0,16},{-17,16},{-17,8.2}}, color={0,0,127}));
     connect(modularCHP.port_b, modularBufferStorage.fluidportTop1)
-      annotation (Line(points={{-6,-2},{22,-2},{22,-18}}, color={0,127,255}));
+      annotation (Line(points={{-8,-2},{22,-2},{22,-18}}, color={0,127,255}));
     connect(modularBufferStorage.fluidportTop2, vol.ports[2])
       annotation (Line(points={{10,-18},{10,28},{44,28}}, color={0,127,255}));
     connect(vol.ports[3], fan1.port_a) annotation (Line(points={{46.6667,28},{
@@ -367,7 +393,7 @@ package Examples
     connect(fan1.port_b, modularBufferStorage.fluidportBottom2) annotation (Line(
           points={{48,-32},{34,-32},{34,-42},{10,-42},{10,-38}}, color={0,127,255}));
     connect(modularBufferStorage.fluidportBottom1, modularCHP.port_a) annotation (
-       Line(points={{22,-38},{22,-48},{-40,-48},{-40,-2},{-26,-2}}, color={0,127,255}));
+       Line(points={{22,-38},{22,-48},{-40,-48},{-40,-2},{-28,-2}}, color={0,127,255}));
     connect(heater1.port, vol1.heatPort) annotation (Line(points={{11,-68},{10,-68},
             {10,-70},{30,-70}}, color={191,0,0}));
     connect(temperatureSensor1.port, vol1.heatPort) annotation (Line(points={{46,-91},
@@ -382,6 +408,11 @@ package Examples
     connect(fan2.port_b, modularBufferStorage.fluidportBottom2) annotation (Line(
           points={{-18,-86},{-24,-86},{-24,-84},{-30,-84},{-30,-42},{10,-42},{10,-38}},
           color={0,127,255}));
+    connect(sine1.y, heater1.Q_flow) annotation (Line(points={{-37.3,-59},{-20,-59},
+            {-20,-50},{11,-50},{11,-54}}, color={0,0,127}));
+    connect(modularBufferStorage.TLayer, modularCHP.TLayers) annotation (Line(
+          points={{5,-23},{-2,-23},{-2,12},{-15.9,12},{-15.9,7.1}}, color={0,0,
+            127}));
     annotation (
       Icon(coordinateSystem(preserveAspectRatio=false)),
       Diagram(coordinateSystem(preserveAspectRatio=false)),

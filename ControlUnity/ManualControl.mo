@@ -26,8 +26,8 @@ model ManualControl
     annotation (Placement(transformation(extent={{0,58},{20,78}})));
   Modelica.Blocks.Sources.RealExpression realExpression
     annotation (Placement(transformation(extent={{-32,50},{-12,70}})));
-  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold
-      =PLRMin)
+  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
+       PLRMin)
     annotation (Placement(transformation(extent={{-80,42},{-64,58}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=1)
     annotation (Placement(transformation(extent={{-34,66},{-14,86}})));

@@ -1,7 +1,7 @@
 within ControlUnity.ModularCHP;
 model ModularCHP
-   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package Medium =
-               AixLib.Media.Water,
+   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
+      Medium = AixLib.Media.Water,
                            m_flow_nominal=m_flow_nominalCC);
 
   parameter Modelica.SIunits.Power PelNom=200000 "Nominal electrical power";
@@ -100,8 +100,9 @@ model ModularCHP
                                               use_advancedControl=false)
     annotation (Placement(transformation(extent={{-74,44},{-54,64}})));
   hierarchicalControl_modularCHP hierarchicalControl_modularCHP1(
-    PLRmin=0.5,
     use_advancedControl=use_advancedControl,
+    manualTimeDelay=manualTimeDelay,
+    simpleTwoPosition=simpleTwoPosition,
     n=n,
     bandwidth=bandwidth,
     severalHeatcurcuits=severalHeatcurcuits,
@@ -113,7 +114,10 @@ model ModularCHP
     day_hour=day_hour,
     night_hour=night_hour,
     TOffset=TOffset,
-    TVar=TVar) annotation (Placement(transformation(extent={{-6,44},{14,64}})));
+    time_minOff=time_minOff,
+    time_minOn=time_minOn,
+    variableSetTemperature_admix=variableSetTemperature_admix)
+    annotation (Placement(transformation(extent={{-6,44},{14,64}})));
   parameter Boolean use_advancedControl
     "Selection between two position control and flow temperature control, if true=flow temperature control is active" annotation(choices(
       choice=true "Flow temperature control",
@@ -123,8 +127,7 @@ model ModularCHP
     "If true, the user can determine the PLR between PLRmin and 1; else you have a two position conttol with the values 0 and 1 for PLR";
   parameter Integer k=2
                       "Number of heat curcuits" annotation(Dialog(enable=use_advancedControl and severalHeatcurcuits, tab="Control", group="Admixture control"));
-  parameter Boolean TVar
-    "Choice between variable oder constant boiler temperature for the admixture control" annotation(Dialog(enable=use_advancedControl and severalHeatcurcuits and not TVar,tab="Control", group="Admixture control"));
+
   parameter Integer n=if simpleTwoPosition then 1 else n
                         "Number of layers in the buffer storage" annotation(Dialog(enable=not use_advancedControl,tab="Control", group="Two position control"));
   parameter Real bandwidth "Bandwidth around reference signal" annotation(Dialog(enable=not use_advancedControl, tab="Control", group="Two position control"));
@@ -134,7 +137,7 @@ model ModularCHP
       choice=false "One heat curcuit",
       radioButtons=true), Dialog(enable=use_advancedControl, tab="Control", group="Flow temperature control"));
   parameter Modelica.SIunits.Temperature TBoiler=273.15 + 75
-    "Fix boiler temperature for the admixture" annotation(Dialog(enable=use_advancedControl and severalHeatcurcuits and not TVar,tab="Control", group="Admixture control"));
+    "Fix boiler temperature for the admixture" annotation(Dialog(enable=use_advancedControl and severalHeatcurcuits and not variableSetTemperature_admix,tab="Control", group="Admixture control"));
   parameter Real declination=1 "Declination of curve" annotation(Dialog(enable=use_advancedControl and not severalHeatcurcuits, tab="Control", group="Flow temperature control"));
   parameter Real day_hour=6 "Hour of day in which day mode is enabled" annotation(Dialog(enable=use_advancedControl and not severalHeatcurcuits, tab="Control", group="Flow temperature control"));
   parameter Real night_hour=22 "Hour of night in which night mode is enabled" annotation(Dialog(enable=use_advancedControl and not severalHeatcurcuits, tab="Control", group="Flow temperature control"));
@@ -151,7 +154,7 @@ model ModularCHP
         rotation=-90,
         origin={79,101}),iconTransformation(extent={{4,74},{38,108}})));
   Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and severalHeatcurcuits
-     and TVar "Variable boiler temperature for the admixture control" annotation (Placement(
+     and variableSetTemperature_admix "Variable boiler temperature for the admixture control" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
@@ -162,6 +165,17 @@ model ModularCHP
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-10,102})));
+  parameter Boolean manualTimeDelay
+    "If true, the user can set a time during which the heat genearator is switched on independently of the internal control" annotation(Dialog(tab="Control", group="Manual control"), choices(
+      choice=true "Manual intern control",
+      choice=false "Automatic intern control",
+      radioButtons=true));
+  parameter Modelica.SIunits.Time time_minOff=900
+    "Time after which the device can be turned on again"  annotation(Dialog(tab="Control", group="Manual control"));
+  parameter Modelica.SIunits.Time time_minOn=900
+    "Time after which the device can be turned off again"  annotation(Dialog(tab="Control", group="Manual control"));
+  parameter Boolean variableSetTemperature_admix
+    "Choice between variable oder constant boiler temperature for the admixture control" annotation(Dialog(tab="Control", group="Admixture control"));
 protected
   parameter Modelica.SIunits.Temperature TMinCoolingWater=354.15;
   parameter Modelica.SIunits.TemperatureDifference deltaTCoolingWater=3.47;
@@ -196,11 +210,9 @@ equation
 
 ///
 if simpleTwoPosition then
-  connect(THotHeatCircuit.T, hierarchicalControl_modularCHP1.TLayers[1]) annotation (Line(points=
-         {{68,-61},{68,-34},{48,-34},{48,64},{4.6,64}}, color={0,0,127}));
 else
   connect(TLayers, hierarchicalControl_modularCHP1.TLayers)
-    annotation (Line(points={{79,101},{79,70},{4.6,70},{4.6,64}}, color={0,0,127}));
+    annotation (Line(points={{79,101},{79,70},{4.4,70},{4.4,64}}, color={0,0,127}));
 end if;
 
 
@@ -275,7 +287,7 @@ end if;
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(cHPControlBus.isOn, hierarchicalControl_modularCHP1.isOn) annotation (Line(
-      points={{-59.9,102.1},{-22,102.1},{-22,57.6},{-6,57.6}},
+      points={{-59.9,102.1},{-22,102.1},{-22,56},{-6.2,56}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -283,14 +295,15 @@ end if;
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(TBoilerVar, hierarchicalControl_modularCHP1.TBoilerVar) annotation (Line(points={{40,102},
-          {38,102},{38,34},{3.8,34},{3.8,42.4}}, color={0,0,127}));
-  connect(TCon, hierarchicalControl_modularCHP1.TCon) annotation (Line(points={{-10,102},{-10,32},
-          {7.8,32},{7.8,42.4}}, color={0,0,127}));
+          {38,102},{38,34},{4,34},{4,42.4}},     color={0,0,127}));
+  connect(TCon, hierarchicalControl_modularCHP1.TCon) annotation (Line(points={{-10,102},
+          {-10,32},{7.4,32},{7.4,42.4}},
+                                color={0,0,127}));
 
 
 
   connect(cHPControlBus.PLR, hierarchicalControl_modularCHP1.PLRin) annotation (Line(
-      points={{-60,102},{-60,70},{-14,70},{-14,61.4},{-6,61.4}},
+      points={{-60,102},{-60,70},{-14,70},{-14,59.8},{-6,59.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -298,28 +311,54 @@ end if;
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(hierarchicalControl_modularCHP1.PLRset, regulation_ModularCHP.PLRin) annotation (Line(
-        points={{14,61.2},{22,61.2},{22,26},{-82,26},{-82,58},{-74,58}}, color={0,0,127}));
+        points={{14.2,60},{22,60},{22,26},{-82,26},{-82,58},{-74,58}},   color={0,0,127}));
   connect(regulation_ModularCHP.PLRset, cHPNotManufacturer.PLR) annotation (Line(points={{-54,57.6},
           {-48,57.6},{-48,58},{-38,58},{-38,6.6},{-12,6.6}}, color={0,0,127}));
   connect(regulation_ModularCHP.PLRoff, controlCHPNotManufacturerModular.PLROff) annotation (
-      Line(points={{-54,51.8},{-52,51.8},{-52,18},{-180,18},{-180,-20},{-146,-20}}, color={255,0,
+      Line(points={{-54,51.4},{-52,51.4},{-52,18},{-180,18},{-180,-20},{-146,
+          -20}},                                                                    color={255,0,
           255}));
-  connect(hierarchicalControl_modularCHP1.shutdown, controlCHPNotManufacturerModular.shutdown)
-    annotation (Line(points={{14.4,54.8},{32,54.8},{32,14},{-166,14},{-166,-14.6},{-146,-14.6}},
-        color={255,0,255}));
-  connect(cHPNotManufacturer.THotEngine, hierarchicalControl_modularCHP1.Tb) annotation (Line(
-        points={{0,-11},{-2,-11},{-2,-24},{-14,-24},{-14,52.4},{-6.2,52.4}}, color={0,0,127}));
 
 
   connect(cHPControlBus.Tamb, hierarchicalControl_modularCHP1.Tamb) annotation (
      Line(
-      points={{-59.9,102.1},{-30,102.1},{-30,46.2},{-6,46.2}},
+      points={{-59.9,102.1},{-30,102.1},{-30,45},{-6,45}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(cHPControlBus.PLREx, hierarchicalControl_modularCHP1.PLRinEx)
+    annotation (Line(
+      points={{-59.9,102.1},{-59.9,70},{-14,70},{-14,63},{-6,63}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cHPControlBus.internControl, hierarchicalControl_modularCHP1.internControl)
+    annotation (Line(
+      points={{-59.9,102.1},{-22,102.1},{-22,78},{8.2,78},{8.2,64}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(THotHeatCircuit.T, hierarchicalControl_modularCHP1.TFlow) annotation (
+     Line(points={{68,-61},{46,-61},{46,28},{-12,28},{-12,49},{-6,49}}, color={
+          0,0,127}));
+  connect(THotCoolingWater.T, hierarchicalControl_modularCHP1.Tb) annotation (
+      Line(points={{23,-51.2},{23,22},{-24,22},{-24,52.4},{-6,52.4}}, color={0,
+          0,127}));
+  connect(THotHeatCircuit.T, hierarchicalControl_modularCHP1.TLayers[1])
+    annotation (Line(points={{68,-61},{68,-14},{52,-14},{52,70},{4.4,70},{4.4,
+          64}}, color={0,0,127}));
+  connect(hierarchicalControl_modularCHP1.shutdown, regulation_ModularCHP.shutdown)
+    annotation (Line(points={{14,51.4},{24,51.4},{24,52},{32,52},{32,14},{-78,
+          14},{-78,51.4},{-74,51.4}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

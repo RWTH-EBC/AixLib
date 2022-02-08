@@ -171,14 +171,6 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(admixtureBus.valveSet, valve.y) annotation (Line(
-      points={{0.11,95.095},{0.11,46},{-52,46},{-52,32}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(VFSen_out.V_flow, admixtureBus.VFlowInMea) annotation (Line(points={{-96.8,44},{
           -114,44},{-114,95.095},{0.11,95.095}}, color={0,0,127}), Text(
       string="%second",
@@ -205,6 +197,14 @@ equation
     annotation (Line(points={{22,20},{44,20}}, color={0,127,255}));
   connect(realExpression.y, fan1.y) annotation (Line(points={{27,54},{36,54},{
           36,40},{12,40},{12,32}}, color={0,0,127}));
+  connect(admixtureBus.valveSet, valve.y) annotation (Line(
+      points={{0.11,95.095},{0.11,42},{-52,42},{-52,32}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
     Icon(coordinateSystem(initialScale=0.1), graphics={
         Polygon(
