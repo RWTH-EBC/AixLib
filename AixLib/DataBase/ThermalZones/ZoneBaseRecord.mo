@@ -1,4 +1,4 @@
-within AixLib.DataBase.ThermalZones;
+﻿within AixLib.DataBase.ThermalZones;
 record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
@@ -92,7 +92,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Additional ACH in summer, Tmin, Tmax";
   parameter Real winterReduction[3]
     "Reduction factor of userACH for cold weather";
-  parameter Boolean withAHU
+  parameter Boolean withAHU=true
     "Zone is connected to central air handling unit";
   parameter Real minAHU(unit = "m3/(h.m2)")
     "Minimum specific air flow supplied by the AHU";
@@ -118,6 +118,26 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withIdealThresholds
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
+  parameter Modelica.SIunits.Area ATabs = 0 "Area of tabs";
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition TABS_up=
+      AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()          "Wall type for floor";
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition TABS_lo=
+  AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()          "Wall type for ceiling";
+  parameter Modelica.SIunits.Area ATabs_int = 0 "Area of internal tabs";
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition TABS_int_up=
+      AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()          "Wall type for floor";
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition TABS_int_lo=
+  AixLib.DataBase.Walls.ASHRAE140.DummyDefinition()          "Wall type for ceiling";
+  parameter Modelica.SIunits.ThermalResistance RExt_tabs = 0 "Resistances of exterior walls, from inside to outside";
+  parameter Modelica.SIunits.ThermalResistance RExtRem_tabs = 0 "Resistance of remaining resistor RExtRem between capacity n and outside";
+  parameter Modelica.SIunits.HeatCapacity CExt_tabs = 0 "Heat capacities of exterior walls, from inside to outside";
+  parameter Modelica.SIunits.Angle OrientationTabs[1]= {0} "Orientation of exterior tabs";
+  parameter Modelica.SIunits.ThermalResistance RInt_tabs = 0 "Resistances of exterior walls, from inside to outside";
+  parameter Modelica.SIunits.ThermalResistance RIntRem_tabs = 0 "Resistance of remaining resistor RExtRem between capacity n and outside";
+  parameter Modelica.SIunits.HeatCapacity CInt_tabs = 0 "Heat capacities of exterior walls, from inside to outside";
+  parameter Modelica.SIunits.Angle OrientationTabsInt[1]= {0} "Orientation of interior tabs";
+
+
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.

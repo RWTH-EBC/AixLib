@@ -3,7 +3,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped_control
+    multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     VAir=33500,
@@ -32,8 +33,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
             thermCapInt(each der_T(fixed=true))))),
     T_start=293.15,
     dpAHU_sup=80000000,
-    dpAHU_eta=80000000)
-    "Multizone"
+    dpAHU_eta=80000000) "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,

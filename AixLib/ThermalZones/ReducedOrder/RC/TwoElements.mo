@@ -38,7 +38,8 @@ protected
                                                                      AInt > 0
     "Convective heat transfer of interior walls"
     annotation (Placement(transformation(extent={{148,-30},{128,-50}})));
-  Modelica.Blocks.Sources.Constant hConIntWall(k=AInt*hConInt) if AInt > 0
+  Modelica.Blocks.Sources.Constant hConIntWall(k=AInt*hConInt) if
+       AInt > 0
     "Coefficient of convective heat transfer for interior walls"
     annotation (Placement(transformation(
       extent={{5,-5},{-5,5}},
@@ -109,8 +110,9 @@ equation
     annotation (Line(points={{182,-40},{168,-40},{168,-82},{-120,-82},{-120,-180}},
     color={191,0,0}));
   connect(convIntWall.fluid, senTAir.port)
-    annotation (Line(points={{128,-40},{66,-40},{66,0},{80,0}},
+    annotation (Line(points={{128,-40},{68,-40},{68,0},{82,0}},
     color={191,0,0}));
+
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}}), graphics={
   Polygon(

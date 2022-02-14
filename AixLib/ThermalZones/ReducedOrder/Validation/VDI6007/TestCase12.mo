@@ -98,7 +98,7 @@ model TestCase12 "VDI 6007 Test Case 12 model"
         297.85; 75600,297.85; 75600,296.05; 79200,296.05; 79200,295.05; 82800,
         295.05; 82800,294.05; 86400,294.05])
     "Outdoor air temperature"
-    annotation (Placement(transformation(extent={{-60,4},{-44,20}})));
+    annotation (Placement(transformation(extent={{-68,-8},{-52,8}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perRad
     "Radiative heat flow persons"
     annotation (Placement(transformation(extent={{48,-102},{68,-82}})));
@@ -198,7 +198,7 @@ equation
   connect(hConWall.y, theConWall.Gc)
     annotation (Line(points={{-2,0.4},{-2,6}},               color={0,0,127}));
   connect(outdoorTemp.y[1], preTem.T)
-    annotation (Line(points={{-43.2,12},{-31.2,12}},
+    annotation (Line(points={{-51.2,0},{-38,0},{-38,12},{-31.2,12}},
                                                  color={0,0,127}));
   connect(perRad.port, thermalZoneTwoElements.intGainsRad)
     annotation (Line(
@@ -239,7 +239,7 @@ equation
   connect(gain.y, ventilationIn.m_flow_in)
     annotation (Line(points={{-47.3,-22},{-32,-22}}, color={0,0,127}));
   connect(outdoorTemp.y[1], ventilationIn.T_in)
-    annotation (Line(points={{-43.2,12},{-40,12},{-40,-26},{-32,-26}},
+    annotation (Line(points={{-51.2,0},{-40,0},{-40,-26},{-32,-26}},
                                                        color={0,0,127}));
   connect(gain.y, gain1.u)
     annotation (Line(points={{-47.3,-22},{-44,-22},{-44,

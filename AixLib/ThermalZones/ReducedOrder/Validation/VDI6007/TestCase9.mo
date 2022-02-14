@@ -109,7 +109,7 @@ model TestCase9 "VDI 6007 Test Case 9 model"
         82800,0,0; 86400,0,0],
     columns={2,3})
     "Solar radiation"
-    annotation (Placement(transformation(extent={{-92,66},{-78,80}})));
+    annotation (Placement(transformation(extent={{-90,66},{-76,80}})));
   Modelica.Blocks.Sources.Constant g_sunblind(k=0.15)
     "g value for sunblind closed"
     annotation (Placement(
@@ -273,7 +273,7 @@ equation
     annotation (Line(points={{
     22.8,-52},{38,-52},{38,-56},{48,-56}}, color={0,0,127}));
   connect(tableSolRadWindow.y[1],greaterThreshold1. u)
-    annotation (Line(points={{-77.3,73},{-61,73},{-61,65}}, color={0,0,127}));
+    annotation (Line(points={{-75.3,73},{-61,73},{-61,65}}, color={0,0,127}));
   connect(sunblind_open.y, switch1.u3)
     annotation (Line(points={{-61,39.7},{-61,
     38},{-57.2,38},{-57.2,34.8}}, color={0,0,127}));
@@ -281,13 +281,13 @@ equation
     annotation (Line(points={{-45,41.7},{-45,38},
     {-50.8,38},{-50.8,34.8}}, color={0,0,127}));
   connect(tableSolRadWindow.y[1], product1.u1)
-    annotation (Line(points={{-77.3,
-    73},{-77.3,73},{-7,73}},  color={0,0,127}));
+    annotation (Line(points={{-75.3,73},{-7,73}},
+                              color={0,0,127}));
   connect(tableSolRadWindow.y[2], greaterThreshold2.u)
-    annotation (Line(points={{-77.3,73},{-25,73},{-25,65}}, color={0,0,127}));
+    annotation (Line(points={{-75.3,73},{-25,73},{-25,65}}, color={0,0,127}));
   connect(tableSolRadWindow.y[2], product.u1)
-    annotation (Line(points={{-77.3,
-    73},{-16,73},{-16,92},{-7,92}}, color={0,0,127}));
+    annotation (Line(points={{-75.3,73},{-16,73},{-16,92},{-7,92}},
+                                    color={0,0,127}));
   connect(const1.y, add.u2)
     annotation (Line(points={{-63.7,25},{-60.4,25},{
     -60.4,20.8}}, color={0,0,127}));

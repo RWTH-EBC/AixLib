@@ -1,64 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
 partial model PartialThermalZone "Partial model for thermal zone models"
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.BaseThermalZone;
 
-  parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
-    "Choose setup for this zone" annotation (choicesAllMatching=true);
-  parameter Integer nPorts=0
-    "Number of fluid ports"
-    annotation(Evaluate=true,
-    Dialog(connectorSizing=true, tab="General",group="Ports"));
-  parameter Boolean use_C_flow=false
-    "Set to true to enable input connector for trace substance"
-    annotation (Dialog(tab="CO2"));
-  parameter Boolean use_moisture_balance=false
-    "If true, input connector QLat_flow is enabled and room air computes moisture balance"
-    annotation (Dialog(tab="Moisture"));
-
-  Modelica.Blocks.Interfaces.RealInput intGains[3]
-    "Input profiles for internal gains persons, machines, light"
-    annotation (
-      Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={80,-100}), iconTransformation(
-        extent={{-12,-12},{12,12}},
-        rotation=90,
-        origin={80,-84})));
-  Modelica.Blocks.Interfaces.RealOutput TAir(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC") if ATot > 0 or zoneParam.VAir > 0
-    "Indoor air temperature"
-    annotation (Placement(transformation(extent={{100,70},{120,90}}),
-        iconTransformation(extent={{100,70},{120,90}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC") if ATot > 0
-    "Mean indoor radiation temperature"
-    annotation (Placement(transformation(
-          extent={{100,50},{120,70}}), iconTransformation(extent={{100,50},{120,
-            70}})));
-  BoundaryConditions.WeatherData.Bus weaBus
-    "Weather data bus"
-    annotation (Placement(
-    transformation(extent={{-117,18},{-83,50}}), iconTransformation(
-    extent={{-110,50},{-90,70}})));
-  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
-    redeclare each final package Medium = Medium)
-    "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-49,-108},{49,-84}}),
-        iconTransformation(extent={{-47,-84},{47,-60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
-    ATot > 0 or zoneParam.VAir > 0
-    "Convective internal gains"
-    annotation (Placement(transformation(extent={{94,10},{114,30}}),
-                              iconTransformation(extent={{92,-6},{112,14}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
-    "Radiative internal gains"
-    annotation (Placement(transformation(extent={{94,30},{114,50}}),
-                            iconTransformation(extent={{92,24},{112,44}})));
   RC.FourElements ROM(
     redeclare final package Medium = Medium,
     final use_moisture_balance=use_moisture_balance,
@@ -103,12 +46,9 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final T_start=T_start,
     final C_start=C_start,
     final C_nominal=C_nominal,
-    final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
-            {86,92}})));
+    final mSenFac=mSenFac) "RC calculation core"
+    annotation (Placement(transformation(extent={{38,56},{86,92}})));
 
-protected
-  parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
-  zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor);
 
 equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,90},{98,90},{98,80},{110,
@@ -120,11 +60,10 @@ equation
                                color={191,0,0}));
   connect(ROM.TRad, TRad) annotation (Line(points={{87,86},{96,86},{96,60},{110,
           60}},      color={0,0,127}));
-  connect(TRad, TRad)
-    annotation (Line(points={{110,60},{110,60}}, color={0,0,127}));
   connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86,82},{94,82},
           {94,40},{104,40}},
                            color={191,0,0}));
+
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
             {100,100}}),graphics={Text(extent={{
               -80,114},{92,64}},lineColor=

@@ -1,8 +1,9 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
-
+  extends
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+  package MediumAir = AixLib.Media.Air;
   parameter Boolean heatAHU
     "Status of heating of AHU"
     annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
@@ -62,6 +63,7 @@ model MultizoneEquipped
     constrainedby AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU
     "Air handling unit model"
     annotation(Dialog(tab="AirHandlingUnit"),choicesAllMatching=true);
+
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired
     minimal relative humidity [3]: Desired maximal relative humidity [4]:

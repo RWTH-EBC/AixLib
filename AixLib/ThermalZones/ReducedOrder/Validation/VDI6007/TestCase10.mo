@@ -147,7 +147,7 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     annotation (Placement(transformation(extent={{-56,4},{-50,10}})));
   Modelica.Blocks.Sources.Constant HSol(k=0)
     "Solar radiation on walls"
-    annotation (Placement(transformation(extent={{-84,22},{-78,28}})));
+    annotation (Placement(transformation(extent={{-46,14},{-38,22}})));
   Modelica.Blocks.Sources.Constant sunblind(k=0)
     "Dummy for g value of sunblinds (open)"
     annotation (Placement(
@@ -217,7 +217,7 @@ equation
     annotation (Line(points={{-3,5},{0.9,5},{0.9,0},{6.8,0}},
     color={0,0,127}));
   connect(HSol.y, eqAirTemp.HSol[1])
-    annotation (Line(points={{-77.7,25},{-32,25},{-32,10.4},{-26,10.4}},
+    annotation (Line(points={{-37.6,18},{-32,18},{-32,10.4},{-26,10.4}},
     color={0,0,127}));
   connect(sunblind.y, eqAirTemp.sunblind[1])
     annotation (Line(points={{-15,19.7},{-15,15.85},{-14,15.85},{-14,15.8}},

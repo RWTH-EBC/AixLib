@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
 model UnderfloorHeatingSystem "Model for an underfloor heating system"
 extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
         false, final m_flow_nominal = m_flow_total);
@@ -15,9 +15,9 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter Integer RoomNo(min=1) "Number of rooms heated with panel heating" annotation (Dialog(group="General"));
-  final parameter Integer CircuitNo[RoomNo]=underfloorHeatingRoom.CircuitNo
+  final parameter Integer CircuitNo[RoomNo]( min = 1)= underfloorHeatingRoom.CircuitNo
     "Number of circuits in a certain room";
-  parameter Integer dis  "Number of discretization layers for panel heating pipe";
+  parameter Integer dis(min = 1)  "Number of discretization layers for panel heating pipe";
   parameter Modelica.SIunits.Power Q_Nf[RoomNo] "Calculated Heat Load for room with panel heating" annotation (Dialog(group="Room Specifications"));
   parameter Modelica.SIunits.Area A[RoomNo] "Floor Area" annotation(Dialog(group = "Room Specifications"));
   parameter Integer calculateVol = 1 annotation (Dialog(group="Panel Heating",
@@ -29,28 +29,13 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   parameter Modelica.SIunits.Length maxLength = 120 "Maximum Length for one Circuit" annotation(Dialog(group = "Panel Heating"));
   parameter Modelica.SIunits.Temperature T_Fmax[RoomNo] = fill(29 + 273.15, RoomNo) "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
   parameter Modelica.SIunits.Temperature T_Room[RoomNo] = fill(20 + 273.15, RoomNo) "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  parameter Boolean Ceiling[RoomNo] "false if ground plate is under panel heating" annotation (Dialog(group = "Room Specifications"));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
   parameter Modelica.SIunits.Temperature T_U[RoomNo] = fill(Modelica.SIunits.Conversions.from_degC(20), RoomNo) "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
   parameter Modelica.SIunits.Distance Spacing[RoomNo] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
   final parameter Modelica.SIunits.Length PipeLength[RoomNo] = A ./ Spacing "Pipe Length in every room";
 
-  parameter
-    UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition PipeMaterial=
-      UnderfloorHeating.BaseClasses.PipeMaterials.PERTpipe() "Pipe Material"
-    annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
-  parameter Modelica.SIunits.Thickness PipeThickness[RoomNo] "Thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.SIunits.Diameter d_a[RoomNo] "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
-
-  parameter Boolean withSheathing = true "false if pipe has no Sheathing" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
-  parameter
-    UnderfloorHeating.BaseClasses.Sheathing_Materials.SheathingMaterialDefinition
-    SheathingMaterial=
-      UnderfloorHeating.BaseClasses.Sheathing_Materials.PVCwithTrappedAir()
-    "Sheathing Material" annotation (Dialog(group="Panel Heating", enable=
-          withSheathing), choicesAllMatching=true);
-  parameter Modelica.SIunits.Diameter d[RoomNo](min = d_a) = d_a "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for Ceiling" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+  parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord[RoomNo]  "Pipe layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
 
   final parameter Modelica.SIunits.MassFlowRate m_flow_total=sum(
       underfloorHeatingRoom.m_flow_PanelHeating)
@@ -113,16 +98,9 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     final dp_Pipe=dp_Pipe,
     final dp_Valve=dp_Valve,
     each final dpFixed_nominal=dp_Distributor,
-    final Ceiling=Ceiling,
     final T_U=T_U,
     final T_Fmax=T_Fmax,
     final T_Room=T_Room,
-    each final PipeMaterial=PipeMaterial,
-    final PipeThickness=PipeThickness,
-    final d_a=d_a,
-    each final withSheathing=withSheathing,
-    each final SheathingMaterial=SheathingMaterial,
-    final d=d,
     each use_vmax=use_vmax,
     each T_Flow=T_Vdes,
     T_Return=T_Return,
@@ -132,8 +110,9 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     each maxLength=maxLength,
     final wallTypeFloor=wallTypeFloor,
     final wallTypeCeiling=wallTypeCeiling,
+    final PipeRecord=PipeRecord,
     final dT_Hi=dT_Hi)
-    annotation (Placement(transformation(extent={{-16,16},{16,36}})));
+    annotation (Placement(transformation(extent={{-16,14},{16,34}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort TFlow(
     redeclare package Medium = Medium,
     allowFlowReversal=false,
@@ -155,15 +134,15 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     annotation (Placement(transformation(extent={{-60,-64},{-80,-44}})));
   Modelica.Blocks.Interfaces.RealOutput T_FlowNominal
     annotation (Placement(transformation(extent={{-90,-64},{-110,-44}})));
-  Modelica.Blocks.Interfaces.RealInput valveInput[sum(CircuitNo)] annotation (
-      Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput valveInput[RoomNo] annotation (Placement(
+        transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-64,68})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[RoomNo*dis]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[RoomNo]
     annotation (Placement(transformation(extent={{-10,50},{10,70}}),
         iconTransformation(extent={{-10,50},{10,70}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[RoomNo*dis]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[RoomNo]
     annotation (Placement(transformation(extent={{-10,-70},{10,-50}}),
         iconTransformation(extent={{-10,-70},{10,-50}})));
 protected
@@ -182,14 +161,12 @@ equation
 
   // HEAT CONNECTIONS
 
-   for i in 1:RoomNo loop
-     for n in 1:dis loop
-  connect(heatFloor[(i-1)*dis+n], underfloorHeatingRoom[i].heatFloor[n])
-    annotation (Line(points={{0,60},{0,36}}, color={191,0,0}));
-  connect(underfloorHeatingRoom[i].heatCeiling[n], heatCeiling[(i-1)*dis+n])
-    annotation (Line(points={{0,16},{0,-60}}, color={191,0,0}));
-     end for;
-          end for;
+  for i in 1:RoomNo loop
+    connect(heatFloor[i], underfloorHeatingRoom[i].heatFloor)
+      annotation (Line(points={{0,60},{0,34}}, color={191,0,0}));
+    connect(underfloorHeatingRoom[i].heatCeiling, heatCeiling[i])
+      annotation (Line(points={{0,14},{0,-60}}, color={191,0,0}));
+  end for;
 
  // OUTER FLUID CONNECTIONS
   connect(port_a, TFlow.port_a)
@@ -203,12 +180,9 @@ equation
 
   // HEATING CIRCUITS FLUID CONNECTIONS
 
-     for m in 1:CircuitNo[1] loop
+  for m in 1:CircuitNo[1] loop
     connect(distributor.flowPorts[m], underfloorHeatingRoom[1].ports_a[m]);
     connect(underfloorHeatingRoom[1].ports_b[m], distributor.returnPorts[m]);
-    connect(underfloorHeatingRoom[1].valveInput[m], valveInput[m]) annotation (
-        Line(points={{-9.92,38},{-10,38},{-10,42},{-64,42},{-64,68}}, color={0,0,
-            127}));
   end for;
 
   if RoomNo > 1 then
@@ -216,15 +190,12 @@ equation
       for u in 1:CircuitNo[x] loop
         connect(distributor.flowPorts[(sum(CircuitNo[v] for v in 1:(x - 1)) + u)],
           underfloorHeatingRoom[x].ports_a[u]) annotation (Line(points={{-29.6,
-                12},{-29.6,27.4286},{-16,27.4286}},
+                12},{-29.6,25.4286},{-16,25.4286}},
                                                 color={0,127,255}));
         connect(underfloorHeatingRoom[x].ports_b[u], distributor.returnPorts[(
           sum(CircuitNo[v] for v in 1:(x - 1)) + u)]) annotation (Line(points={{16,
-                27.4286},{24,27.4286},{24,-22},{-26.4,-22},{-26.4,-12.4}},
+                25.4286},{24,25.4286},{24,-22},{-26.4,-22},{-26.4,-12.4}},
               color={0,127,255}));
-        connect(underfloorHeatingRoom[x].valveInput[u], valveInput[(sum(
-          CircuitNo[v] for v in 1:(x - 1)) + u)]) annotation (Line(points={{-9.92,
-                38},{-10,38},{-10,42},{-64,42},{-64,68}}, color={0,0,127}));
       end for;
           end for;
   end if;
@@ -235,6 +206,10 @@ equation
     annotation (Line(points={{-81,-36},{-100,-36}}, color={0,0,127}));
   connect(T_FlowNom.y, T_FlowNominal)
     annotation (Line(points={{-81,-54},{-100,-54}}, color={0,0,127}));
+  for m in 1:RoomNo loop
+    connect(valveInput[m], underfloorHeatingRoom[m].valveInput)   annotation (Line(points={{-64,68},
+            {-64,36},{-9.92,36}},                                                                                         color={0,0,127}));
+  end for;
     annotation (Icon(coordinateSystem(extent={{-100,-60},{100,60}}, initialScale=0.1),
         graphics={
         Rectangle(

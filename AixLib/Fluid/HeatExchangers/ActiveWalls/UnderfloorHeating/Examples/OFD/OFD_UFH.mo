@@ -47,8 +47,12 @@ model OFD_UFH
     T0_air=294.15,
     TWalls_start=292.15,
     calcMethodIn=1,
+    redeclare model WindowModel =
+        ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple,
     redeclare AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009
       Type_Win,
+    redeclare model CorrSolarGainWin =
+        ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
     dis=dis,
