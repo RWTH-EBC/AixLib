@@ -1,18 +1,12 @@
-within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
-model PumpNdpVarControlTest
-  "testing the pump dp-var algorithm with the new \"one record\" pump model with internal speed limitation (instead of pump head limitation)."
+﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+model PumpSpeedControlledDpV
+  "Testing the pump dp-var algorithm with the speed controlled pump model."
   extends Modelica.Icons.Example;
-  inner Modelica.Fluid.System system(
-    allowFlowReversal=false,
-    p_ambient=300000,
-    T_ambient=293.15,
-    m_flow_start=pump.m_flow_start,
-    T_start=293.15)
-    annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
 
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
-  PumpSpeedControlled                                                    pump(
+  .AixLib.Fluid.Movers.PumpsPolynomialBased.PumpSpeedControlled pump(
+    m_flow_nominal=m_flow_nominal,
     calculatePower=true,
     calculateEfficiency=true,
     redeclare package Medium = Medium,
@@ -20,24 +14,16 @@ model PumpNdpVarControlTest
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   Modelica.Blocks.Sources.BooleanPulse PumpOn(period=600, width=500/600*100)
-    annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simpleValve(
-    redeclare package Medium = Medium,
-    m_flow_start=system.m_flow_start,
-    m_flow_small=system.m_flow_small,
-    Kvs=system.m_flow_nominal*3600/995/sqrt(system.g*2*pump.Hnom/1e5*1000),
-    dp_start=pump.p_b_start - pump.p_a_start) annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
+    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
 
   Modelica.Blocks.Sources.Ramp rampValvePosition(
     offset=0.5,
-    height=-0.48,
+    height=0.48,
     duration(displayUnit="s") = 120,
     startTime(displayUnit="min") = 120)
     annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
   AixLib.Fluid.Sources.Boundary_pT vessle(
     redeclare package Medium = Medium,
-    p=system.p_start,
-    T=system.T_start,
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -45,23 +31,22 @@ model PumpNdpVarControlTest
   Controls.CtrlDpVarN ctrlDpVarN(pumpParam=
         DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4())
     annotation (Placement(transformation(extent={{-10,26},{10,46}})));
-  BaseClasses.PumpBus pumpControllerBus1 annotation (Placement(transformation(
-          extent={{-10,50},{10,70}}), iconTransformation(extent={{-24,34},{-4,
-            54}})));
+  BaseClasses.PumpBus pumpBus annotation (Placement(transformation(extent={{-10,
+            50},{10,70}}), iconTransformation(extent={{-24,34},{-4,54}})));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
+  Actuators.Valves.TwoWayLinear             simpleValve(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    dpValve_nominal=1000)
+    annotation (Placement(transformation(extent={{-20,-20},{-40,-40}})));
 equation
-  connect(rampValvePosition.y, simpleValve.opening)
-    annotation (Line(points={{-21,-60},{-30,-60},{-30,-38}}, color={0,0,127}));
-  connect(simpleValve.port_b, vessle.ports[1]) annotation (Line(points={{-40,
-          -30},{-52,-30},{-52,10},{-34,10}}, color={0,127,255}));
-  connect(vessle.ports[2], pump.port_a)
-    annotation (Line(points={{-38,10},{-10,10}}, color={0,127,255}));
-  connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{48,
-          10},{48,-30},{-20,-30}}, color={0,127,255}));
+  connect(vessle.ports[1], pump.port_a)
+    annotation (Line(points={{-34,10},{-10,10}}, color={0,127,255}));
   connect(pump.pumpBus, ctrlDpVarN.pumpBus) annotation (Line(
       points={{0,20},{0,26}},
       color={255,204,51},
       thickness=0.5));
-  connect(ctrlDpVarN.pumpControllerBus, pumpControllerBus1) annotation (Line(
+  connect(ctrlDpVarN.pumpControllerBus, pumpBus) annotation (Line(
       points={{0,46},{0,60}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -69,14 +54,20 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(PumpOn.y, pumpControllerBus1.onSet) annotation (Line(points={{-59,50},
-          {-30,50},{-30,60.05},{0.05,60.05}}, color={255,0,255}), Text(
+  connect(PumpOn.y, pumpBus.onSet) annotation (Line(points={{-59,60},{-30,60},{
+          -30,60.05},{0.05,60.05}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(simpleValve.port_b, vessle.ports[2]) annotation (Line(points={{-40,-30},
+          {-60,-30},{-60,10},{-38,10}}, color={0,127,255}));
+  connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{40,
+          10},{40,-30},{-20,-30}}, color={0,127,255}));
+  connect(simpleValve.y, rampValvePosition.y)
+    annotation (Line(points={{-30,-42},{-30,-60},{-21,-60}}, color={0,0,127}));
   annotation (
-      experiment(StopTime=600),
+      experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming and restructuring.
@@ -131,15 +122,7 @@ equation
   pump speed might be bound to its limits only.
 </p>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpNdpVarControlTest.mos"
-        "Simulate and plot"),
-    Diagram(graphics={Text(
-          extent={{-82,94},{80,66}},
-          lineColor={100,100,100},
-          horizontalAlignment=TextAlignment.Left,
-          textString="* Tests PumpN model (speed controlled pump with controller block)
-* Tests dp-var control (PumpN version, \"dynamic\" calculation)
-* Tests system pressure drop change (ramp)
-* Tests pump off-switch")}));
-end PumpNdpVarControlTest;
+    __Dymola_Commands(file=
+        "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledDpV.mos"
+        "Simulate and plot"));
+end PumpSpeedControlledDpV;

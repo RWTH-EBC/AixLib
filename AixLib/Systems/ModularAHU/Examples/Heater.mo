@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Examples;
+﻿within AixLib.Systems.ModularAHU.Examples;
 model Heater "Heating register"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water
@@ -13,6 +13,8 @@ model Heater "Heating register"
       parameterIso=AixLib.DataBase.Pipes.Insulation.Iso25pc(),
       length=1,
       Kv=6.3,
+      valveCharacteristic=
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare

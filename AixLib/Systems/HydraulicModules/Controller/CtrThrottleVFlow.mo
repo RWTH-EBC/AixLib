@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Controller;
+﻿within AixLib.Systems.HydraulicModules.Controller;
 block CtrThrottleVFlow
   "Volume Flow Set Point Controller for Throttles"
          Modelica.Blocks.Interfaces.RealInput vFlowAct
@@ -24,8 +24,8 @@ public
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
-  parameter Boolean reverseAction = false
-    "Set to true for throttling the water flow rate through a cooling coil controller";
+  parameter Boolean reverseAction = true
+    "Set to true if heating system, and false for cooling system";
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(group="PID"));
@@ -46,7 +46,7 @@ public
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction)
+    final reverseActing=reverseAction)
             annotation (Placement(transformation(extent={{-20,-40},{0,-60}})));
 
   Modelica.Blocks.Logical.GreaterThreshold
