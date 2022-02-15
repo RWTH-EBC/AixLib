@@ -84,7 +84,7 @@ model OFD_UFH
     calculateVol=2,
     wallTypeFloor=fill(
         BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH(), 10),
-    Ceiling={false,false,false,false,false,true,true,true,true,true},
+    PipeRecord=fill(BaseClasses.Piping.PBpipe(), 10),
     wallTypeCeiling={
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(),
@@ -97,13 +97,8 @@ model OFD_UFH
         1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.WC_Storage.Ceiling[
         1].Wall.wallType,wholeHouseBuildingEnvelope.groundFloor_Building.Kitchen.Ceiling[
         1].Wall.wallType},
-    T_U={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
-        293.15},
-    Spacing=fill(0.2, 10),
-    PipeMaterial=BaseClasses.PipeMaterials.PERTpipe(),
-    PipeThickness=fill(0.002, 10),
-    d_a=fill(0.017, 10),
-    withSheathing=false)
+    T_U={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15},
+    Spacing=fill(0.2, 10))
     annotation (Placement(transformation(extent={{-68,-66},{-44,-52}})));
 
   AixLib.Fluid.Sources.MassFlowSource_T m_flow_specification1(
@@ -192,70 +187,86 @@ equation
   connect(const.y, underfloorHeatingSystem.valveInput) annotation (Line(points={{-79.4,
           -36},{-63.68,-36},{-63.68,-51.0667}},        color={0,0,127}));
           for i in 1:dis loop
-  connect(underfloorHeatingSystem.heatFloor[i], wholeHouseBuildingEnvelope.groFloDown[3*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
-          {-14,2.32}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatCeiling[i], wholeHouseBuildingEnvelope.groPlateUp[4])
-    annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -3.28}},
+  connect(underfloorHeatingSystem.heatFloor[1], wholeHouseBuildingEnvelope.groFloDown[3*dis+i])
+    annotation (Line(points={{-56,-53.05},{-54,-53.05},{-54,-44},{-22,-44},{-22,
+            2.32},{-14,2.32}},
+                       color={191,0,0}));
+  connect(underfloorHeatingSystem.heatCeiling[1], wholeHouseBuildingEnvelope.groPlateUp[4])
+    annotation (Line(points={{-56,-67.05},{-56,-70},{-4,-70},{-4,-30},{-14,-30},
+            {-14,-3.28}},
                   color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[dis+i], wholeHouseBuildingEnvelope.groFloDown[i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
-          {-14,2.32}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatCeiling[dis+i], wholeHouseBuildingEnvelope.groPlateUp[1])
-    annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -6.64}},
+  connect(underfloorHeatingSystem.heatFloor[2], wholeHouseBuildingEnvelope.groFloDown[i])
+    annotation (Line(points={{-56,-52.8167},{-54,-52.8167},{-54,-44},{-22,-44},
+            {-22,2.32},{-14,2.32}},
+                       color={191,0,0}));
+  connect(underfloorHeatingSystem.heatCeiling[2], wholeHouseBuildingEnvelope.groPlateUp[1])
+    annotation (Line(points={{-56,-66.8167},{-56,-70},{-4,-70},{-4,-30},{-14,
+            -30},{-14,-6.64}},
                   color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[2*dis+i], wholeHouseBuildingEnvelope.groFloDown[dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
-          {-14,2.32}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatCeiling[2*dis+i], wholeHouseBuildingEnvelope.groPlateUp[2])
-    annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -5.52}},
+  connect(underfloorHeatingSystem.heatFloor[3], wholeHouseBuildingEnvelope.groFloDown[dis+i])
+    annotation (Line(points={{-56,-52.5833},{-54,-52.5833},{-54,-44},{-22,-44},
+            {-22,2.32},{-14,2.32}},
+                       color={191,0,0}));
+  connect(underfloorHeatingSystem.heatCeiling[3], wholeHouseBuildingEnvelope.groPlateUp[2])
+    annotation (Line(points={{-56,-66.5833},{-56,-70},{-4,-70},{-4,-30},{-14,
+            -30},{-14,-5.52}},
                   color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[3*dis+i], wholeHouseBuildingEnvelope.groFloDown[2*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
-          {-14,2.32}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatCeiling[3*dis+i], wholeHouseBuildingEnvelope.groPlateUp[3])
-    annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-          -4.4}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[4*dis+i], wholeHouseBuildingEnvelope.groFloDown[4*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
-          {-14,2.32}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatCeiling[4*dis+i], wholeHouseBuildingEnvelope.groPlateUp[5])
-    annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -2.16}},
+  connect(underfloorHeatingSystem.heatFloor[4], wholeHouseBuildingEnvelope.groFloDown[2*dis+i])
+    annotation (Line(points={{-56,-52.35},{-54,-52.35},{-54,-44},{-22,-44},{-22,
+            2.32},{-14,2.32}},
+                       color={191,0,0}));
+  connect(underfloorHeatingSystem.heatCeiling[4], wholeHouseBuildingEnvelope.groPlateUp[3])
+    annotation (Line(points={{-56,-66.35},{-56,-70},{-4,-70},{-4,-30},{-14,-30},
+            {-14,-4.4}},
                   color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[5*dis+i], wholeHouseBuildingEnvelope.uppFloDown[i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
-  connect(wholeHouseBuildingEnvelope.groFloUp[i], underfloorHeatingSystem.heatCeiling[5*dis+i])
+  connect(underfloorHeatingSystem.heatFloor[5], wholeHouseBuildingEnvelope.groFloDown[4*dis+i])
+    annotation (Line(points={{-56,-52.1167},{-54,-52.1167},{-54,-44},{-22,-44},
+            {-22,2.32},{-14,2.32}},
+                       color={191,0,0}));
+  connect(underfloorHeatingSystem.heatCeiling[5], wholeHouseBuildingEnvelope.groPlateUp[5])
+    annotation (Line(points={{-56,-66.1167},{-56,-70},{-4,-70},{-4,-30},{-14,
+            -30},{-14,-2.16}},
+                  color={191,0,0}));
+  connect(underfloorHeatingSystem.heatFloor[6], wholeHouseBuildingEnvelope.uppFloDown[i])
+    annotation (Line(points={{-56,-51.8833},{-54,-51.8833},{-54,-44},{-22,-44},
+            {-22,24.72},{-14,24.72}},
+                        color={191,0,0}));
+  connect(wholeHouseBuildingEnvelope.groFloUp[i], underfloorHeatingSystem.heatCeiling[6])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[6*dis+i], wholeHouseBuildingEnvelope.uppFloDown[dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
-  connect(wholeHouseBuildingEnvelope.groFloUp[dis+i], underfloorHeatingSystem.heatCeiling[6*dis+i])
+            -70},{-44,-65.8833},{-56,-65.8833}},
+                                     color={191,0,0}));
+  connect(underfloorHeatingSystem.heatFloor[7], wholeHouseBuildingEnvelope.uppFloDown[dis+i])
+    annotation (Line(points={{-56,-51.65},{-54,-51.65},{-54,-44},{-22,-44},{-22,
+            24.72},{-14,24.72}},
+                        color={191,0,0}));
+  connect(wholeHouseBuildingEnvelope.groFloUp[dis+i], underfloorHeatingSystem.heatCeiling[7])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[7*dis+i], wholeHouseBuildingEnvelope.uppFloDown[2*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
-  connect(wholeHouseBuildingEnvelope.groFloUp[2*dis+i], underfloorHeatingSystem.heatCeiling[7*dis+i])
+            -70},{-44,-65.65},{-56,-65.65}},
+                                     color={191,0,0}));
+  connect(underfloorHeatingSystem.heatFloor[8], wholeHouseBuildingEnvelope.uppFloDown[2*dis+i])
+    annotation (Line(points={{-56,-51.4167},{-54,-51.4167},{-54,-44},{-22,-44},
+            {-22,24.72},{-14,24.72}},
+                        color={191,0,0}));
+  connect(wholeHouseBuildingEnvelope.groFloUp[2*dis+i], underfloorHeatingSystem.heatCeiling[8])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[8*dis+i], wholeHouseBuildingEnvelope.uppFloDown[3*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
-  connect(wholeHouseBuildingEnvelope.groFloUp[3*dis+i], underfloorHeatingSystem.heatCeiling[8*dis+i])
+            -70},{-44,-65.4167},{-56,-65.4167}},
+                                     color={191,0,0}));
+  connect(underfloorHeatingSystem.heatFloor[9], wholeHouseBuildingEnvelope.uppFloDown[3*dis+i])
+    annotation (Line(points={{-56,-51.1833},{-54,-51.1833},{-54,-44},{-22,-44},
+            {-22,24.72},{-14,24.72}},
+                        color={191,0,0}));
+  connect(wholeHouseBuildingEnvelope.groFloUp[3*dis+i], underfloorHeatingSystem.heatCeiling[9])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
-  connect(underfloorHeatingSystem.heatFloor[9*dis+i], wholeHouseBuildingEnvelope.uppFloDown[4*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
-  connect(wholeHouseBuildingEnvelope.groFloUp[4*dis+i], underfloorHeatingSystem.heatCeiling[9*dis+i])
-    annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
+            -70},{-44,-65.1833},{-56,-65.1833}},
+                                     color={191,0,0}));
+  connect(underfloorHeatingSystem.heatFloor[10], wholeHouseBuildingEnvelope.uppFloDown[4*dis+i])
+    annotation (Line(points={{-56,-50.95},{-54,-50.95},{-54,-44},{-22,-44},{-22,
+            24.72},{-14,24.72}},
+                        color={191,0,0}));
+  connect(wholeHouseBuildingEnvelope.groFloUp[4*dis+i], underfloorHeatingSystem.heatCeiling[10])
+    annotation (Line(points={{-14,18},{-18,18},{-18,-28},{-4,-28},{-4,-68},{-44,
+            -68},{-44,-64.95},{-56,-64.95}},
+                                     color={191,0,0}));
           end for;
   connect(underfloorHeatingSystem.m_flowNominal, m_flow_specification1.m_flow_in)
     annotation (Line(points={{-68,-63.2},{-74,-63.2},{-74,-64},{-118,-64},{-118,
