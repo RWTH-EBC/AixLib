@@ -24,12 +24,12 @@ model RCTABS "Pipe Segment of Underfloor Heating System"
   parameter Modelica.SIunits.Angle OrientationTabs=-1 "Orientation of exterior tabs";
 
   final parameter Real param_upper[3]=if not from_TEASER then
-      AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.RCTABS_parameter(
+      AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.TABSparameters(
       TABSlayers=UpperTABS,
       area=A,
       t_bt=t_bt_up) else fill(0, 3);
   final parameter Real param_lower[3]=
-      AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.RCTABS_parameter(
+      AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.TABSparameters(
       TABSlayers=LowerTABS,
       area=A,
       t_bt=t_bt_lo);

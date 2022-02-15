@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
-function RCTABS_parameter
+function TABSparameters
     // Resistors calculation
   import Modelica.Constants.pi;
   input Modelica.SIunits.Time t_bt = 7*86400;
@@ -65,4 +65,4 @@ algorithm
    param[2] :=c1_korr;
    param[3] :=(1/area)*(sum(r_up)) - r1;
 
-end RCTABS_parameter;
+end TABSparameters;
