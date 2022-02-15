@@ -20,14 +20,11 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
     A={area},
     wallTypeFloor={
         UnderfloorHeating.BaseClasses.FloorLayers.FLpartition_EnEV2009_SM_upHalf_UFH()},
-    Ceiling={false},
+    PipeRecord={BaseClasses.Piping.PBpipe()},
     wallTypeCeiling={
         UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy()},
-    Spacing={0.35},
-    PipeThickness={0.002},
-    d_a={0.017},
-    withSheathing=false)
-    annotation (Placement(transformation(extent={{-30,-64},{20,-34}})));
+    Spacing={0.35})
+    annotation (Placement(transformation(extent={{-28,-64},{22,-34}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(G=
         area*10.8)
@@ -51,28 +48,26 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
 equation
 
    connect(fixedHeatFlow1.port, underfloorHeatingSystem.heatCeiling[1])
-    annotation (Line(points={{38,-90},{20,-90},{20,-92},{-5,-92},{-5,-64}},
+    annotation (Line(points={{38,-90},{20,-90},{20,-92},{-3,-92},{-3,-64}},
         color={191,0,0}));
    connect(thermalConductor.port_b, vol.heatPort) annotation (Line(points={{-24,-2},
           {-34,-2},{-34,22},{-10,22}}, color={191,0,0}));
 
   connect(const.y, underfloorHeatingSystem.valveInput) annotation (Line(points={{-85.3,
-          -19},{-21,-19},{-21,-32}},        color={0,0,127}));
+          -19},{-19,-19},{-19,-32}},        color={0,0,127}));
   connect(boundary.ports[1], underfloorHeatingSystem.port_a) annotation (Line(
-        points={{-78,-48},{-56,-48},{-56,-49},{-30,-49}}, color={0,127,255}));
-  connect(underfloorHeatingSystem.port_b, bou.ports[1]) annotation (Line(points={{20,-49},
+        points={{-78,-48},{-56,-48},{-56,-49},{-28,-49}}, color={0,127,255}));
+  connect(underfloorHeatingSystem.port_b, bou.ports[1]) annotation (Line(points={{22,-49},
           {38,-49},{38,-50},{54,-50}},          color={0,127,255}));
   connect(underfloorHeatingSystem.m_flowNominal, boundary.m_flow_in)
-    annotation (Line(points={{-30,-58},{-40,-58},{-40,-56},{-68,-56},{-68,-62},
-          {-106,-62},{-106,-40},{-100,-40}},color={0,0,127}));
+    annotation (Line(points={{-28,-58},{-40,-58},{-40,-56},{-68,-56},{-68,-62},{
+          -106,-62},{-106,-40},{-100,-40}}, color={0,0,127}));
   connect(underfloorHeatingSystem.T_FlowNominal, boundary.T_in) annotation (
-      Line(points={{-30,-62.5},{-62,-62.5},{-62,-70},{-114,-70},{-114,-44},{
-          -100,-44}},
-                 color={0,0,127}));
+      Line(points={{-28,-62.5},{-62,-62.5},{-62,-70},{-114,-70},{-114,-44},{-100,
+          -44}}, color={0,0,127}));
   connect(thermalConductor.port_a, underfloorHeatingSystem.heatFloor[1])
-    annotation (Line(points={{-4,-2},{-2,-2},{-2,-4},{4,-4},{4,-24},{-5,-24},{
-          -5,-34}},
-                 color={191,0,0}));
+    annotation (Line(points={{-4,-2},{-2,-2},{-2,-4},{4,-4},{4,-24},{-3,-24},{-3,
+          -34}}, color={191,0,0}));
   connect(fixedHeatFlow.port, vol.heatPort) annotation (Line(points={{-20,84},{-14,
           84},{-14,22},{-10,22}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

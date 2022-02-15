@@ -1,5 +1,5 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
-model TABS_CCircuit
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
+model PumpCircuit
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
       false, final m_flow_nominal = m_flow_total);
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
@@ -130,4 +130,4 @@ equation
           color={238,46,47},
           thickness=0.5)}),                                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-40},{100,40}})));
-end TABS_CCircuit;
+end PumpCircuit;

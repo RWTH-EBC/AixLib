@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
-model Controlled_TABS
+model ControlledTABS
   "Example for underfloor heating system with two rooms for ideal upward and downward heat flow"
   package MediumAir = AixLib.Media.Air;
   package MediumWater = AixLib.Media.Water;
@@ -51,11 +51,12 @@ model Controlled_TABS
     final Reduced=Reduced)
     annotation (Placement(transformation(extent={{-24,-16},{30,16}})));
 
-  TABS_CCircuit tABS_CCircuit(redeclare package Medium = MediumWater,
+  BaseClasses.PumpCircuit tABS_CCircuit(
+    redeclare package Medium = MediumWater,
     m_flow_total=m_flow_total,
-    dp_nom=dp_total,                                                  V_Water=
-        V_Water)
-    annotation (Placement(transformation(extent={{-26,-11},{26,11}},
+    dp_nom=dp_total,
+    V_Water=V_Water) annotation (Placement(transformation(
+        extent={{-26,-11},{26,11}},
         rotation=180,
         origin={4,-89})));
   Sources.Boundary_pT              bou(redeclare package Medium = MediumWater,
@@ -241,4 +242,4 @@ equation
         Line(points={{82,4},{82,10}}, color={28,108,200})}),     Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{100,80}})),
     experiment(StopTime=8640000));
-end Controlled_TABS;
+end ControlledTABS;

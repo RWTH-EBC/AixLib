@@ -1,4 +1,4 @@
-Controlled_TABS
+ControlledTABS
 UnderfloorHeatingSystem
 UnderfloorHeatingRoom
 UnderfloorHeatingCircuit
@@ -6,6 +6,4 @@ UnderfloorHeatingElement
 BaseClasses
 Examples
 Reduced
-test_closedcircuit
-TABS_CCircuit
 Controlled_TABS2

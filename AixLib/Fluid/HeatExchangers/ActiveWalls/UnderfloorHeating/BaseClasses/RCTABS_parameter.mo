@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 function RCTABS_parameter
     // Resistors calculation
   import Modelica.Constants.pi;
@@ -64,6 +64,5 @@ algorithm
    param[1] :=r1;
    param[2] :=c1_korr;
    param[3] :=(1/area)*(sum(r_up)) - r1;
-
 
 end RCTABS_parameter;

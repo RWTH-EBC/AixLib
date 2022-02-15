@@ -24,8 +24,16 @@ model RCTABS "Pipe Segment of Underfloor Heating System"
   parameter Modelica.SIunits.Temperature T_Fmax=302.15        "Maximum surface temperature" annotation (Dialog(group = "Room Specifications"));
   parameter Modelica.SIunits.Angle OrientationTabs "Orientation of exterior tabs";
 
-  final parameter Real param_upper[3] = if not from_TEASER then AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced.RCTABS_parameter(TABSlayers=UpperTABS, area=A, t_bt=t_bt_up) else fill(0, 3);
-  final parameter Real param_lower[3] = AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced.RCTABS_parameter(TABSlayers=LowerTABS, area=A, t_bt=t_bt_lo);
+  final parameter Real param_upper[3]=if not from_TEASER then
+      AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.RCTABS_parameter(
+      TABSlayers=UpperTABS,
+      area=A,
+      t_bt=t_bt_up) else fill(0, 3);
+  final parameter Real param_lower[3]=
+      AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.RCTABS_parameter(
+      TABSlayers=LowerTABS,
+      area=A,
+      t_bt=t_bt_lo);
 
   parameter Modelica.SIunits.ThermalResistance R_up = param_upper[1];
   //param_upper[1];
