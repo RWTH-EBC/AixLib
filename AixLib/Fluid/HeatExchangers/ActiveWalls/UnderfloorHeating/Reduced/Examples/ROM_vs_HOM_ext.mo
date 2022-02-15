@@ -147,6 +147,12 @@ model ROM_vs_HOM_ext
     annotation (Placement(transformation(extent={{-66,42},{-52,56}})));
   Modelica.Blocks.Sources.Constant const1(each k=273.15)
     annotation (Placement(transformation(extent={{-86,-2},{-72,12}})));
+protected
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTAir
+    "Room air temperature"
+    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
+        rotation=0,
+        origin={17,-1})));
 equation
   for i in 1:dis loop
   end for;
@@ -210,6 +216,10 @@ equation
           {3.35,49},{3.35,32},{58,32}}, color={0,0,127}));
   connect(tABSSystem1.heatTABS[1], HOM_vol.heatPort) annotation (Line(points={{
           119,-12},{120,-12},{120,32},{128,32}}, color={191,0,0}));
+  connect(senTAir.port, ROM_vol.heatPort) annotation (Line(points={{12,-1},{12,
+          14},{-8,14},{-8,28}}, color={191,0,0}));
+  connect(senTAir.T, thermalTABS1.TAir) annotation (Line(points={{22,-1},{22,
+          -14},{-16,-14},{-16,-11}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -60},{160,60}})),                                    Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-60},{160,60}})));

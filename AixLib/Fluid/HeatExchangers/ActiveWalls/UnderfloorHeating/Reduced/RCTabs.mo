@@ -3,7 +3,6 @@ model RCTABS "Pipe Segment of Underfloor Heating System"
 
   parameter Boolean External = false "false if TABS is internal";
   parameter Boolean from_TEASER = false "false if TABS info not from TEASER";
-
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition UpperTABS
     "Upper TABS layers"
     annotation (Dialog(enable=not from_TEASER,
@@ -22,7 +21,7 @@ model RCTABS "Pipe Segment of Underfloor Heating System"
     annotation(Dialog(enable=not from_TEASER,
     group = "Room Specifications"));
   parameter Modelica.SIunits.Temperature T_Fmax=302.15        "Maximum surface temperature" annotation (Dialog(group = "Room Specifications"));
-  parameter Modelica.SIunits.Angle OrientationTabs "Orientation of exterior tabs";
+  parameter Modelica.SIunits.Angle OrientationTabs=-1 "Orientation of exterior tabs";
 
   final parameter Real param_upper[3]=if not from_TEASER then
       AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.RCTABS_parameter(

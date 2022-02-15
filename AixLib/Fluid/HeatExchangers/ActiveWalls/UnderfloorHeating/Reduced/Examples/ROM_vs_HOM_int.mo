@@ -35,12 +35,13 @@ model ROM_vs_HOM_int
     UpperTABS=BaseClasses.Flooring.FLpartition_EnEV2009_SM_upHalf_UFH_Laminate(),
     LowerTABS=BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH(),
     A=area,
+    OrientationTabs=-0.017453292519943,
     T_start=T_start,
     energyDynamics=energyDynamicsWalls)
             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-12,0})));
+        origin={-12,4})));
 
   MixingVolumes.MixingVolume ROM_vol(
     redeclare package Medium = MediumAir,
@@ -144,6 +145,12 @@ model ROM_vs_HOM_int
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={100,32})));
+protected
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTAir
+    "Room air temperature"
+    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
+        rotation=0,
+        origin={11,3})));
 equation
   for i in 1:dis loop
   end for;
@@ -156,7 +163,7 @@ equation
       color={0,127,255},
       smooth=Smooth.Bezier));
   connect(tABSSystem.heatTABS[1], thermalTABS1.port_heat) annotation (Line(
-        points={{-31,-26},{-31,-13},{-2,-13},{-2,0}}, color={191,0,0}));
+        points={{-31,-26},{-31,-13},{-2,-13},{-2,4}}, color={191,0,0}));
   connect(boundary3.ports[1], tABSSystem1.port_a) annotation (Line(
       points={{94,-18},{94,-19},{108,-19}},
       color={0,127,255},
@@ -165,8 +172,8 @@ equation
       points={{130,-19},{136,-19},{136,-18}},
       color={0,127,255},
       smooth=Smooth.Bezier));
-  connect(const2.y, tABSSystem1.valveInput[1]) annotation (Line(points={{106.7,
-          3},{106.7,3.5},{111.96,3.5},{111.96,-11.0667}}, color={0,0,127}));
+  connect(const2.y, tABSSystem1.valveInput[1]) annotation (Line(points={{106.7,3},
+          {106.7,3.5},{111.96,3.5},{111.96,-11.0667}},    color={0,0,127}));
   connect(cosine.y, multiProduct.u[1]) annotation (Line(points={{-97.3,37},{
           -89.65,37},{-89.65,31.45},{-78,31.45}}, color={0,0,127}));
   connect(m_flow1.y, multiProduct.u[2]) annotation (Line(points={{-95.2,12},{
@@ -196,10 +203,14 @@ equation
     annotation (Line(points={{80,32},{96,32}},    color={191,0,0}));
   connect(RTabs_Up_2.port_a, HOM_vol.heatPort)
     annotation (Line(points={{104,32},{128,32}},   color={191,0,0}));
-  connect(thermalTABS1.port_int, ROM_vol.heatPort) annotation (Line(points={{
-          -12,10},{-10,10},{-10,28},{-8,28}}, color={191,0,0}));
+  connect(thermalTABS1.port_int, ROM_vol.heatPort) annotation (Line(points={{-12,14},
+          {-10,14},{-10,28},{-8,28}},         color={191,0,0}));
   connect(tABSSystem1.heatTABS[1], HOM_vol.heatPort) annotation (Line(points={{
           119,-12},{119,10},{128,10},{128,32}}, color={191,0,0}));
+  connect(senTAir.port, ROM_vol.heatPort) annotation (Line(points={{6,3},{2,3},
+          {2,16},{-8,16},{-8,28}}, color={191,0,0}));
+  connect(senTAir.T, thermalTABS1.TAir) annotation (Line(points={{16,3},{20,3},
+          {20,-14},{-16,-14},{-16,-7}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -60},{160,60}})),                                    Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-60},{160,60}})));
