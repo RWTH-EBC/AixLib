@@ -2,12 +2,17 @@ within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoom "Partial model with base component that are necessary for all HOM rooms"
 
   extends PartialRoomParams;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start=T0_air);
 
   // Air volume of room
   parameter Modelica.SIunits.Volume room_V annotation (Dialog(group="Air volume of room"));
   parameter Integer nPorts=0 "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
+  parameter Boolean use_C_flow=false
+    "Set to true to enable trace substances in the rooms air"
+    annotation (Dialog(group="Trace Substances"));
+  parameter Boolean use_C_flow_input=true "Set to true to use an input connector for the trace substances. False indicates internal calculation" annotation(Dialog(enable=use_C_flow, group="Trace Substances"));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation (
       Placement(transformation(extent={{-20,12},{0,32}}),   iconTransformation(
           extent={{-24,-10},{-4,10}})));
@@ -51,13 +56,18 @@ partial model PartialRoom "Partial model with base component that are necessary 
 
   Fluid.MixingVolumes.MixingVolume airload(
     redeclare final package Medium = Medium,
-    final mSenFac=1,
+    final p_start=p_start,
+    final X_start=X_start,
+    final C_start=C_start,
+    final C_nominal=C_nominal,
+    final mSenFac=mSenFac,
+    final use_C_flow=use_C_flow,
     final nPorts=nPorts,
-    m_flow_nominal=room_V*6/3600*1.2,
+    final m_flow_nominal=room_V*6/3600*1.2,
     final V=room_V,
-    final energyDynamics=initDynamicsAir,
-    final massDynamics=initDynamicsAir,
-    final T_start=T0_air)
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    final T_start=T_start)
     "Indoor air volume"
     annotation (Placement(transformation(extent={{18,-22},{-2,-2}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
@@ -68,10 +78,12 @@ partial model PartialRoom "Partial model with base component that are necessary 
     extent={{-45,-12},{45,12}},
     origin={-3,-100}),iconTransformation(
     extent={{-30.5,-8},{30.5,8}},
-    origin={150,-179.5})));
-  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (
-      __Dymola_choicesAllMatching=true);
+    origin={0,-101.5})));
+
+  Modelica.Blocks.Interfaces.RealInput C_flow[Medium.nC] if use_C_flow and use_C_flow_input
+    "Trace substance mass flow rate added to the medium" annotation (Placement(
+        transformation(extent={{-124,6},{-100,30}}), iconTransformation(extent={
+            {-120,10},{-100,30}})));
 equation
   connect(thermRoom,thermStar_Demux.portConv) annotation (Line(points={{-10,22},{-10,6},{-10.125,6},{-10.125,4}}, color={191,0,0}));
   connect(starRoom,thermStar_Demux.portRad) annotation (Line(
@@ -112,6 +124,8 @@ equation
       points={{-18,-4},{-14,-4},{-14,-24},{24,-24},{24,-12},{18,-12}},
       color={191,0,0},
       pattern=LinePattern.Dash));
+  connect(airload.C_flow, C_flow) annotation (Line(points={{20,-18},{34,-18},{34,
+          -42},{-80,-42},{-80,18},{-112,18}}, color={0,0,127}));
     annotation (Dialog(tab="Infiltration acc. to EN 12831 (building airtightness"),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
