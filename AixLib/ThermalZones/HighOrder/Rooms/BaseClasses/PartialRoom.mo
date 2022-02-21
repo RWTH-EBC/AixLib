@@ -15,10 +15,10 @@ partial model PartialRoom "Partial model with base component that are necessary 
     annotation (Dialog(group="Trace Substances"));
   parameter Boolean use_C_flow_input=true "Set to true to use an input connector for the trace substances. False indicates internal calculation" annotation(Dialog(enable=use_C_flow, group="Trace Substances"));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation (
-      Placement(transformation(extent={{-20,12},{0,32}}),   iconTransformation(
+      Placement(transformation(extent={{-30,22},{-10,42}}), iconTransformation(
           extent={{-24,-10},{-4,10}})));
   Utilities.Interfaces.RadPort        starRoom annotation (Placement(transformation(
-          extent={{2,12},{22,32}}),  iconTransformation(extent={{6,-10},{26,10}})));
+          extent={{-2,20},{18,40}}), iconTransformation(extent={{6,-10},{26,10}})));
   Components.DryAir.InfiltrationRate_DIN12831
     infiltrationRate(
     final room_V=room_V,
@@ -27,7 +27,7 @@ partial model PartialRoom "Partial model with base component that are necessary 
     final eps=eps,
     final c=cAir,
     final rho = denAir) if use_infiltEN12831
-             annotation (Placement(transformation(extent={{-30,-10},{-18,2}})));
+             annotation (Placement(transformation(extent={{-60,-12},{-48,0}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort annotation (Placement(
         transformation(
         extent={{-13,-13},{13,13}},
@@ -40,20 +40,20 @@ partial model PartialRoom "Partial model with base component that are necessary 
   Utilities.Interfaces.Adaptors.ConvRadToCombPort        thermStar_Demux annotation (Placement(transformation(
         extent={{-6,5},{6,-5}},
         rotation=90,
-        origin={-7,-2})));
+        origin={-7,8})));
   Components.DryAir.VarAirExchange
     NaturalVentilation(final V=room_V)
-    annotation (Placement(transformation(extent={{-34,-24},{-22,-12}})));
+    annotation (Placement(transformation(extent={{-60,-24},{-48,-12}})));
   Components.DryAir.DynamicVentilation
     dynamicVentilation(
     final HeatingLimit=HeatingLimit,
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset) if withDynamicVentilation
-    annotation (Placement(transformation(extent={{-30,-38},{-18,-26}})));
+    annotation (Placement(transformation(extent={{-60,-38},{-48,-26}})));
 
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair
-    annotation (Placement(transformation(extent={{24,-6},{38,8}})));
+    annotation (Placement(transformation(extent={{36,-6},{50,8}})));
 
   Fluid.MixingVolumes.MixingVolume airload(
     redeclare final package Medium = Medium,
@@ -70,7 +70,7 @@ partial model PartialRoom "Partial model with base component that are necessary 
     final massDynamics=massDynamics,
     final T_start=T_start)
     "Indoor air volume"
-    annotation (Placement(transformation(extent={{18,-22},{-2,-2}})));
+    annotation (Placement(transformation(extent={{26,-22},{6,-2}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
       redeclare each final package Medium = Medium)
     "Auxiliary fluid inlets and outlets to indoor air volume"
@@ -86,47 +86,49 @@ partial model PartialRoom "Partial model with base component that are necessary 
         transformation(extent={{-124,6},{-100,30}}), iconTransformation(extent={
             {-120,10},{-100,30}})));
 equation
-  connect(thermRoom,thermStar_Demux.portConv) annotation (Line(points={{-10,22},{-10,6},{-10.125,6},{-10.125,4}}, color={191,0,0}));
+  connect(thermRoom,thermStar_Demux.portConv) annotation (Line(points={{-20,32},
+          {-20,14},{-10.125,14}},                                                                                 color={191,0,0}));
   connect(starRoom,thermStar_Demux.portRad) annotation (Line(
-      points={{12,22},{12,4},{-3.875,4},{-3.875,4}},
+      points={{8,30},{8,14},{-3.875,14}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(infiltrationRate.port_a,thermOutside)  annotation (Line(
-      points={{-30,-4},{-66,-4},{-66,100},{-100,100}},
+      points={{-60,-6},{-66,-6},{-66,100},{-100,100}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(NaturalVentilation.port_a,thermOutside)  annotation (Line(points={{-34,-18},
+  connect(NaturalVentilation.port_a,thermOutside)  annotation (Line(points={{-60,-18},
           {-68,-18},{-68,100},{-100,100}},   color={191,0,0}));
   connect(dynamicVentilation.port_outside,thermOutside)  annotation (Line(
-      points={{-30,-32},{-72,-32},{-72,100},{-100,100}},
+      points={{-60,-32},{-72,-32},{-72,100},{-100,100}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points={{-112,80},
-          {-70,80},{-70,-20},{-50,-20},{-50,-21.84},{-33.4,-21.84}},                                                                            color={0,0,127}));
-  connect(airload.heatPorts, ports) annotation (Line(
-      points={{8,-22},{8,-82},{0,-82},{0,-100},{-3,-100}},
+          {-70,80},{-70,-20},{-64,-20},{-64,-21.84},{-59.4,-21.84}},                                                                            color={0,0,127}));
+  connect(airload.ports, ports) annotation (Line(
+      points={{16,-22},{16,-82},{0,-82},{0,-100},{-3,-100}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(thermRoom, thermRoom) annotation (Line(points={{-10,22},{-6,22},{-6,22},
-          {-10,22}}, color={191,0,0}));
+  //connect(thermRoom, thermRoom) annotation (Line(points={{-10,22},{-6,22},{-6,22},
+   //       {-10,22}}, color={191,0,0}));
   connect(Tair.port, airload.heatPort)
-    annotation (Line(points={{24,1},{24,-12},{18,-12}}, color={191,0,0}));
+    annotation (Line(points={{36,1},{36,-12},{26,-12}}, color={191,0,0}));
   connect(dynamicVentilation.port_inside, airload.heatPort) annotation (Line(
-      points={{-18.12,-32},{24,-32},{24,-12},{18,-12}},
+      points={{-48.12,-32},{30,-32},{30,-12},{26,-12}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(NaturalVentilation.port_b, airload.heatPort) annotation (Line(points={
-          {-22,-18},{-20,-18},{-20,-24},{24,-24},{24,-12},{18,-12}}, color={191,
+  connect(NaturalVentilation.port_b, airload.heatPort) annotation (Line(points={{-48,-18},
+          {-42,-18},{-42,-24},{30,-24},{30,-12},{26,-12}},           color={191,
           0,0}));
-  connect(thermStar_Demux.portConv, airload.heatPort) annotation (Line(points={{
-          -10.125,4},{-12,4},{-12,-24},{24,-24},{24,-12},{18,-12}}, color={191,0,
+  connect(thermStar_Demux.portConv, airload.heatPort) annotation (Line(points={{-10.125,
+          14},{-12,14},{-12,-24},{30,-24},{30,-12},{26,-12}},       color={191,0,
           0}));
   connect(infiltrationRate.port_b, airload.heatPort) annotation (Line(
-      points={{-18,-4},{-14,-4},{-14,-24},{24,-24},{24,-12},{18,-12}},
+      points={{-48,-6},{-38,-6},{-38,-24},{30,-24},{30,-12},{26,-12}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(airload.C_flow, C_flow) annotation (Line(points={{20,-18},{34,-18},{34,
-          -42},{-80,-42},{-80,18},{-112,18}}, color={0,0,127}));
+  connect(airload.C_flow, C_flow) annotation (Line(points={{28,-18},{34,-18},{
+          34,-42},{-80,-42},{-80,18},{-112,18}},
+                                              color={0,0,127}));
     annotation (Dialog(tab="Infiltration acc. to EN 12831 (building airtightness"),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
