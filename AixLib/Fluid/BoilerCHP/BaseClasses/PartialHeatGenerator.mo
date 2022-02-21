@@ -31,18 +31,18 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     annotation (Dialog(tab="Advanced", group="Initialization"));
 
   parameter Modelica.SIunits.PressureDifference dp_nominal=m_flow_nominal ^ 2 * a / (rho_default ^ 2)
-    "Pressure drop at nominal mass flow rate";
+    "Pressure drop at nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  parameter Modelica.SIunits.Density rho_default = 1000 "Default density of medium. Value assumes water";
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
   parameter Real deltaM=0.3
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  parameter Real a "Coefficient of old approach from model Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate. Recalculated to dp_nominal based on IBPSA approach.";
+  parameter Real a "Coefficient of old approach from model Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate. Recalculated to dp_nominal based on IBPSA approach."
+  annotation (Dialog(tab="Advanced", group="Pressure drop"));
   Sensors.TemperatureTwoPort senTCold(
     redeclare final package Medium = Medium,
     final tau=tau,
@@ -95,12 +95,11 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final m_flow_nominal=m_flow_nominal,
     final show_T=false,
     final allowFlowReversal=allowFlowReversal,
-    final from_dp=from_dp,
-    final dp_nominal=dp_nominal,
-    final linearized=linearized,
-    final deltaM=deltaM)
+    final dp_nominal=dp_nominal)
     "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
+  parameter Modelica.SIunits.Density rho_default = Medium.density_pTX(Medium.p_default, Medium.T_default, Medium.X_default)
+  "Density used for parameterization of pressure curve" annotation (Dialog(tab="Advanced", group="Pressure drop"));
 
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
