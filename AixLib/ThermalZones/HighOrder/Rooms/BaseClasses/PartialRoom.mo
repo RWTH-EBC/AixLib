@@ -2,7 +2,8 @@ within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoom "Partial model with base component that are necessary for all HOM rooms"
 
   extends PartialRoomParams;
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start=T0_air);
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
+      Medium = Media.Air,                                  final T_start=T0_air);
 
   // Air volume of room
   parameter Modelica.SIunits.Volume room_V annotation (Dialog(group="Air volume of room"));
@@ -102,7 +103,7 @@ equation
       pattern=LinePattern.Dash));
   connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points={{-112,80},
           {-70,80},{-70,-20},{-50,-20},{-50,-21.84},{-33.4,-21.84}},                                                                            color={0,0,127}));
-  connect(airload.ports, ports) annotation (Line(
+  connect(airload.heatPorts, ports) annotation (Line(
       points={{8,-22},{8,-82},{0,-82},{0,-100},{-3,-100}},
       color={0,127,255},
       smooth=Smooth.None));

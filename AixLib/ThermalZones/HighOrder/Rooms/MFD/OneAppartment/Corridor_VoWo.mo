@@ -246,7 +246,7 @@ protected
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win = if TIR == 1 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR == 2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002() else if TIR == 3 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984() annotation(Dialog(tab = "Types"));
   parameter Modelica.SIunits.Volume room_V = 5.73 * 2.46;
 equation
-  connect(infiltrationRate.port_b, airload.port) annotation(Line(points={{-18,73},{0,73},{0,-12},{-22,-12}},        color = {191, 0, 0}));
+  connect(infiltrationRate.port_b, airload.heatPort) annotation(Line(points={{-18,73},{0,73},{0,-12},{-22,-12}},        color = {191, 0, 0}));
   connect(Wall_Staircase.port_outside, thermStaircase) annotation(Line(points={{112.2,-32},{140,-32},{140,-130},{-80,-130},{-80,80},{-102,80}},              color = {191, 0, 0}));
   connect(Wall_Kitchen2.port_outside, thermKitchen) annotation(Line(points={{52,-68.25},{52,-130},{-80,-130},{-80,50},{-102,50}},            color = {191, 0, 0}));
   connect(infiltrationRate.port_a, thermStaircase) annotation(Line(points = {{-44, 73}, {-80, 73}, {-80, 80}, {-102, 80}}, color = {191, 0, 0}));
@@ -266,7 +266,7 @@ equation
   connect(Wall_Children.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{46,20},{46,10},{94,10},{94,-44},{46,-44},{46,-36}},       color={191,0,0}));
   connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{118,58},{118,64},{94,64},{94,-44},{46,-44},{46,-36}},       color={191,0,0}));
   connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{117,78},{117,64},{94,64},{94,-44},{46,-44},{46,-36}},       color={191,0,0}));
-  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-22,-12},{41,-12},{41,-16}},     color={191,0,0}));
+  connect(airload.heatPort, thermStar_Demux.portConv) annotation (Line(points={{-22,-12},{41,-12},{41,-16}},     color={191,0,0}));
   annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-26, 6}, {82, -26}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Forward, textString = "Corridor"), Rectangle(extent = {{-110, -120}, {-90, -140}}, lineColor = {0, 0, 0},

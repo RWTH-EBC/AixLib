@@ -33,7 +33,7 @@ equation
   realOut[2] = varAirExchange.port_b.Q_flow;
   realOut[3] = infiltrationRate_DIN12831.port_b.Q_flow;
   realOut[4] = dynamicVentilation.port_inside.Q_flow;
-  connect(dynamicVentilation.port_inside, airload.port) annotation(Line(points={{7.4,-5},{19.5,-5},{19.5,-12},{42,-12}},        color = {191, 0, 0}));
+  connect(dynamicVentilation.port_inside, airload.heatPort) annotation(Line(points={{7.4,-5},{19.5,-5},{19.5,-12},{42,-12}},        color = {191, 0, 0}));
   connect(fixedHeatFlow.port, airload1.port) annotation(Line(points={{-70,82},{-38,82},{-38,70},{-2,70}},           color = {191, 0, 0}));
   connect(TempOutsideDaycurve.port, varAirExchange.port_a) annotation(Line(points = {{-70, 50}, {-41, 50}, {-41, 48}, {-12, 48}}, color = {191, 0, 0}));
   connect(TempInside.port, varAirExchange.port_b) annotation(Line(points = {{70, 50}, {49, 50}, {49, 48}, {8, 48}}, color = {191, 0, 0}));

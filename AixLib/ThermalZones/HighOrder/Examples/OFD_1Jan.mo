@@ -66,16 +66,16 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     annotation (Placement(transformation(extent={{-21.5,-84},{-9,-71}})));
 equation
   // Romm Temperatures
-  TAirRooms[1] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Livingroom.airload.port.T);
-  TAirRooms[2] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Hobby.airload.port.T);
-  TAirRooms[3] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Corridor.airload.port.T);
-  TAirRooms[4] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.WC_Storage.airload.port.T);
-  TAirRooms[5] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Kitchen.airload.port.T);
-  TAirRooms[6] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Bedroom.airload.port.T);
-  TAirRooms[7] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Children1.airload.port.T);
-  TAirRooms[8] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Corridor.airload.port.T);
-  TAirRooms[9] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Bath.airload.port.T);
-  TAirRooms[10] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Children2.airload.port.T);
+  TAirRooms[1] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Livingroom.airload.heatPort.T);
+  TAirRooms[2] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Hobby.airload.heatPort.T);
+  TAirRooms[3] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Corridor.airload.heatPort.T);
+  TAirRooms[4] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.WC_Storage.airload.heatPort.T);
+  TAirRooms[5] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Kitchen.airload.heatPort.T);
+  TAirRooms[6] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Bedroom.airload.heatPort.T);
+  TAirRooms[7] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Children1.airload.heatPort.T);
+  TAirRooms[8] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Corridor.airload.heatPort.T);
+  TAirRooms[9] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Bath.airload.heatPort.T);
+  TAirRooms[10] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Children2.airload.heatPort.T);
   //SimulationData
   VentilationSchedule[1] = NaturalVentilation.y[1];
   VentilationSchedule[2] = NaturalVentilation.y[2];
