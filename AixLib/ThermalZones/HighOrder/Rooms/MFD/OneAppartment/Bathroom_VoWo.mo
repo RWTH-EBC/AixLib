@@ -223,7 +223,7 @@ equation
                                                                                                                      color = {191, 0, 0}));
   connect(Wall_Floor.port_outside, thermFloor) annotation(Line(points={{106,-118.1},{106,-140},{-80,-140},{-80,-130},{-100,-130}},            color = {191, 0, 0}));
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-42, 73}, {-80, 73}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
-  connect(infiltrationRate.port_b, airload.heatPort) annotation(Line(points={{-16,73},{4,73},{4,60},{94,60},{94,16},{-36,16},{-36,-26},{-2,-26}},                   color = {191, 0, 0}));
+  connect(infiltrationRate.port_b, airload.port) annotation(Line(points={{-16,73},{4,73},{4,60},{94,60},{94,16},{-36,16},{-36,-26},{-2,-26}},                   color = {191, 0, 0}));
   connect(outsideWall.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{8,-94},{8,-84},{-6.66134e-16,-84},{-6.66134e-16,-78}},
                                                                                                                                                 color={191,0,0}));
   connect(Wall_Bedroom.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-46,-34},{-36,-34},{-36,-84},{-6.66134e-16,-84},{-6.66134e-16,-78}},
@@ -237,12 +237,12 @@ equation
       points={{5,-58},{5,-44},{20,-44}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(airload.heatPort, thermStar_Demux.portConv) annotation (Line(points={{-11,-18},{-36,-18},{-36,-57.9},{-5.1,-57.9}}, color={191,0,0}));
+  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-11,-18},{-36,-18},{-36,-57.9},{-5.1,-57.9}}, color={191,0,0}));
   connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points=
          {{-102,20},{-80,20},{-80,60},{4,60},{4,72.68},{17.4,72.68}}, color={0,
           0,127}));
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points = {{-100, 90}, {-80, 90}, {-80, 60}, {4, 60}, {4, 81}, {16, 81}}, color = {191, 0, 0}));
-  connect(airload.heatPort, NaturalVentilation.port_b) annotation(Line(points={{-2,-26},{-36,-26},{-36,16},{94,16},{94,60},{48,60},{48,81},{44,81}},                   color = {191, 0, 0}));
+  connect(airload.port, NaturalVentilation.port_b) annotation(Line(points={{-2,-26},{-36,-26},{-36,16},{94,16},{94,60},{48,60},{48,81},{44,81}},                   color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{8, -116.55}, {8, -140}, {-80, -140}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}})),           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-58, 62}, {-58, -118}, {104, -118}, {104, -58}, {42, -58}, {42, 62}, {-58, 62}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-44, -108}, {82, -58}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},

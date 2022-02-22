@@ -246,12 +246,12 @@ equation
   connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{104,34},{104,58},{54,58},{54,-32},{
           33.8,-32},{33.8,-12.7}},                                                                                                                                color={191,0,0}));
   connect(thermStar_Demux.portConv, ThermRoom) annotation (Line(points={{13.9,-19.1},{13.9,-20},{-20,-20},{-20,14},{-2,14}}, color={191,0,0}));
-  connect(airload.heatPort, infiltrationRate.port_b) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, -71}, {-46, -71}}, color = {191, 0, 0}));
+  connect(airload.port, infiltrationRate.port_b) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, -71}, {-46, -71}}, color = {191, 0, 0}));
   connect(NaturalVentilation.ventRate, AirExchangePort) annotation (Line(points=
          {{-70.7,-107.32},{-86,-107.32},{-86,70},{-160,70}}, color={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-72, -99}, {-86, -99}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
-  connect(airload.heatPort, ThermRoom) annotation(Line(points={{-38,0},{-20,0},{-20,14},{-2,14}},          color = {191, 0, 0}));
-  connect(NaturalVentilation.port_b, airload.heatPort) annotation(Line(points={{-46,-99},{-20,-99},{-20,0},{-38,0}},          color = {191, 0, 0}));
+  connect(airload.port, ThermRoom) annotation(Line(points={{-38,0},{-20,0},{-20,14},{-2,14}},          color = {191, 0, 0}));
+  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{-46,-99},{-20,-99},{-20,0},{-38,0}},          color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, 84.6}, {-4, 100}, {-86, 100}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}})),           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics={  Rectangle(extent = {{-62, 60}, {112, -92}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Rectangle(extent = {{38, 72}, {60, 52}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},

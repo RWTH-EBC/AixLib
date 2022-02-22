@@ -218,7 +218,7 @@ protected
   parameter Modelica.SIunits.Volume room_V = 3.38 * 4.20 * 2.46;
 equation
   connect(Strahlung_SE, outsideWall.SolarRadiationPort) annotation(Line(points = {{-82, 110}, {-82, 78}, {58, 78}, {58, 62.7}, {37.5, 62.7}}, color = {255, 128, 0}));
-  connect(infiltrationRate.port_b, airload.heatPort) annotation(Line(points={{-18,-107},{0,-107},{0,-36},{-32,-36},{-32,16},{-48,16}},              color = {191, 0, 0}));
+  connect(infiltrationRate.port_b, airload.port) annotation(Line(points={{-18,-107},{0,-107},{0,-36},{-32,-36},{-32,16},{-48,16}},              color = {191, 0, 0}));
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-44, -107}, {-80, -107}, {-80, 98}, {-60, 98}}, color = {191, 0, 0}));
   connect(outsideWall.WindSpeedPort, WindSpeedPort) annotation(Line(points = {{27.6, 60.45}, {27.6, 78}, {-80, 78}, {-80, 12}, {-104, 12}}, color = {0, 0, 127}));
   connect(Wall_Neighbour.port_outside, thermNeighbour) annotation(Line(points = {{62.3, 3.99999}, {100, 3.99999}, {100, -68}, {-80, -68}, {-80, 10}, {-100, 10}}, color = {191, 0, 0}));
@@ -232,7 +232,7 @@ equation
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(thermStar_Demux.portConv, ThermRoom) annotation (Line(points={{-5,-12},{-5,-3.95},{-16,-3.95},{-16,6}},       color={191,0,0}));
-  connect(thermStar_Demux.portConv, airload.heatPort) annotation (Line(points={{-5,-12},{-32,-12},{-32,16},{-48,16}},       color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-5,-12},{-32,-12},{-32,16},{-48,16}},       color={191,0,0}));
   connect(Wall_Corridor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-28,-44},{-28,-36},{-6.66134e-16,-36},{-6.66134e-16,-32}},
                                                                                                                                                       color={191,0,0}));
   connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{36,-42},{36,-36},{-6.66134e-16,-36},{-6.66134e-16,-32}},
@@ -251,7 +251,7 @@ equation
   connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points=
          {{-104,40},{-80,40},{-80,-68},{-50,-68},{-50,-89.32},{-42.6,-89.32}},
         color={0,0,127}));
-  connect(NaturalVentilation.port_b, airload.heatPort) annotation(Line(points = {{-16, -81}, {0, -81}, {0, -36}, {-32, -36}, {-32, 24}, {-39, 24}}, color = {191, 0, 0}));
+  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-16, -81}, {0, -81}, {0, -36}, {-32, -36}, {-32, 24}, {-39, 24}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-12, 60.45}, {-12, 98}, {-60, 98}}, color = {191, 0, 0}));
   connect(thermOutside, thermOutside) annotation(Line(points = {{-60, 98}, {-86, 98}, {-86, 98}, {-60, 98}}, color = {191, 0, 0}));
   annotation(DDiagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-54, 68}, {116, -108}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
