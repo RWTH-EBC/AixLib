@@ -3,7 +3,8 @@ partial model PartialRoom "Partial model with base component that are necessary 
 
   extends PartialRoomParams;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
-      Medium = Media.Air,                                  final T_start=T0_air);
+      Medium = Media.Air,
+      final T_start=T0_air);
 
   // Air volume of room
   parameter Modelica.SIunits.Volume room_V annotation (Dialog(group="Air volume of room"));
@@ -13,12 +14,15 @@ partial model PartialRoom "Partial model with base component that are necessary 
   parameter Boolean use_C_flow=false
     "Set to true to enable trace substances in the rooms air"
     annotation (Dialog(group="Trace Substances"));
+  parameter Boolean use_moisture_balance=false
+    "Set to true to enable moisture gain balance in the rooms air"
+    annotation (Dialog(group="Moist Air"));
   parameter Boolean use_C_flow_input=true "Set to true to use an input connector for the trace substances. False indicates internal calculation" annotation(Dialog(enable=use_C_flow, group="Trace Substances"));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation (
-      Placement(transformation(extent={{-20,12},{0,32}}),   iconTransformation(
-          extent={{-24,-10},{-4,10}})));
-  Utilities.Interfaces.RadPort        starRoom annotation (Placement(transformation(
-          extent={{2,12},{22,32}}),  iconTransformation(extent={{6,-10},{26,10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation (Placement(
+        transformation(extent={{-20,12},{0,32}}), iconTransformation(extent={{-24,
+            -10},{-4,10}})));
+  Utilities.Interfaces.RadPort starRoom annotation (Placement(transformation(
+          extent={{2,12},{22,32}}), iconTransformation(extent={{6,-10},{26,10}})));
   Components.DryAir.InfiltrationRate_DIN12831
     infiltrationRate(
     final room_V=room_V,
@@ -37,11 +41,12 @@ partial model PartialRoom "Partial model with base component that are necessary 
         rotation=0,
         origin={-110,69.5})));
 
-  Utilities.Interfaces.Adaptors.ConvRadToCombPort        thermStar_Demux annotation (Placement(transformation(
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(
+        transformation(
         extent={{-6,5},{6,-5}},
         rotation=90,
         origin={-7,-2})));
-  Components.DryAir.VarAirExchange
+  Components.MoistAir.VarMoistAirExchange
     NaturalVentilation(final V=room_V)
     annotation (Placement(transformation(extent={{-34,-24},{-22,-12}})));
   Components.DryAir.DynamicVentilation
@@ -55,7 +60,7 @@ partial model PartialRoom "Partial model with base component that are necessary 
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair
     annotation (Placement(transformation(extent={{24,-6},{38,8}})));
 
-  Fluid.MixingVolumes.MixingVolume airload(
+  Fluid.MixingVolumes.MixingVolumeMoistAir airload(
     redeclare final package Medium = Medium,
     final p_start=p_start,
     final X_start=X_start,
@@ -85,10 +90,66 @@ partial model PartialRoom "Partial model with base component that are necessary 
     "Trace substance mass flow rate added to the medium" annotation (Placement(
         transformation(extent={{-124,6},{-100,30}}), iconTransformation(extent={
             {-120,10},{-100,30}})));
+  Modelica.Blocks.Interfaces.RealInput ventHum if use_moisture_balance
+    "absolute humidity of ventilation air" annotation (Placement(transformation(
+          extent={{-122,-48},{-100,-26}}), iconTransformation(extent={{-120,-46},
+            {-100,-26}})));
+  Modelica.Blocks.Interfaces.RealInput QLat_flow(final unit="W") if
+    use_moisture_balance
+    "Latent heat gains for the room"
+    annotation (Placement(transformation(extent={{-124,-68},{-100,-44}}),
+        iconTransformation(extent={{-120,-80},{-100,-60}})));
+protected
+  constant Modelica.SIunits.SpecificEnergy h_fg=
+    AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37)
+    "Latent heat of water vapor";
+  Modelica.Blocks.Math.MultiSum sumQLat_flow(nu=2) if
+                                                use_moisture_balance
+    "sum of latent heat flows"
+    annotation (Placement(transformation(extent={{76,-40},{70,-34}})));
+  Modelica.Blocks.Math.Gain mWat_flow(
+    final k(unit="kg/J") = 1/h_fg,
+    u(final unit="W"),
+    y(final unit="kg/s")) if use_moisture_balance
+    "Water flow rate due to latent heat gain"
+    annotation (Placement(transformation(extent={{56,-32},{48,-24}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
+    use_moisture_balance
+    "Converter for latent heat flow rate"
+    annotation (Placement(transformation(extent={{58,-52},{46,-40}})));
+  Modelica.Blocks.Interfaces.RealOutput hum_internal
+    "internal humidity (used for case with no moisture balance";
+  Modelica.Blocks.Interfaces.RealOutput mWat_flow_internal
+    "internal mass flow rate of water vapor (used for case with no moisture balance)";
 equation
-  connect(thermRoom,thermStar_Demux.portConv) annotation (Line(points={{-10,22},{-10,6},{-10.125,6},{-10.125,4}}, color={191,0,0}));
+  hum_internal = 0;
+  mWat_flow_internal = 0;
+
+  connect(QLat_flow, sumQLat_flow.u[2]) annotation (Line(
+      points={{-112,-56},{80,-56},{80,-38.05},{76,-38.05}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(NaturalVentilation.QLat_flow, sumQLat_flow.u[1]) annotation (Line(
+      points={{-21.76,-21.72},{-16,-21.72},{-16,-50},{80,-50},{80,-35.95},{76,-35.95}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+
+  connect(airload.X_w, NaturalVentilation.HumOut) annotation (Line(
+      points={{-4,-16},{-14,-16},{-14,-14.88},{-22.6,-14.88}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(NaturalVentilation.HumIn, ventHum) annotation (Line(
+      points={{-33.4,-21},{-62,-21},{-62,-22},{-74,-22},{-74,-37},{-111,-37}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(conQLat_flow.port, airload.heatPort) annotation (Line(
+      points={{46,-46},{24,-46},{24,-12},{18,-12}},
+      color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(thermRoom,thermStar_Demux.portConv) annotation (Line(points={{-10,22},
+          {-10,4},{-10.125,4}},                                                                                   color={191,0,0}));
   connect(starRoom,thermStar_Demux.portRad) annotation (Line(
-      points={{12,22},{12,4},{-3.875,4},{-3.875,4}},
+      points={{12,22},{12,4},{-3.875,4}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(infiltrationRate.port_a,thermOutside)  annotation (Line(
@@ -102,13 +163,11 @@ equation
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(AirExchangePort, NaturalVentilation.ventRate) annotation (Line(points={{-112,80},
-          {-70,80},{-70,-20},{-50,-20},{-50,-21.84},{-33.4,-21.84}},                                                                            color={0,0,127}));
-  connect(airload.heatPorts, ports) annotation (Line(
+          {-70,80},{-70,-20},{-64,-20},{-64,-21.84},{-33.4,-21.84}},                                                                            color={0,0,127}));
+  connect(airload.ports, ports) annotation (Line(
       points={{8,-22},{8,-82},{0,-82},{0,-100},{-3,-100}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(thermRoom, thermRoom) annotation (Line(points={{-10,22},{-6,22},{-6,22},
-          {-10,22}}, color={191,0,0}));
   connect(Tair.port, airload.heatPort)
     annotation (Line(points={{24,1},{24,-12},{18,-12}}, color={191,0,0}));
   connect(dynamicVentilation.port_inside, airload.heatPort) annotation (Line(
@@ -118,15 +177,31 @@ equation
   connect(NaturalVentilation.port_b, airload.heatPort) annotation (Line(points={
           {-22,-18},{-20,-18},{-20,-24},{24,-24},{24,-12},{18,-12}}, color={191,
           0,0}));
-  connect(thermStar_Demux.portConv, airload.heatPort) annotation (Line(points={{
-          -10.125,4},{-12,4},{-12,-24},{24,-24},{24,-12},{18,-12}}, color={191,0,
+  connect(thermStar_Demux.portConv, airload.heatPort) annotation (Line(points={{-10.125,
+          4},{-12,4},{-12,-24},{24,-24},{24,-12},{18,-12}},         color={191,0,
           0}));
   connect(infiltrationRate.port_b, airload.heatPort) annotation (Line(
       points={{-18,-4},{-14,-4},{-14,-24},{24,-24},{24,-12},{18,-12}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(airload.C_flow, C_flow) annotation (Line(points={{20,-18},{34,-18},{34,
-          -42},{-80,-42},{-80,18},{-112,18}}, color={0,0,127}));
+          -42},{-80,-42},{-80,18},{-112,18}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(sumQLat_flow.y, mWat_flow.u) annotation (Line(
+      points={{69.49,-37},{64,-37},{64,-28},{56.8,-28}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(sumQLat_flow.y, conQLat_flow.Q_flow) annotation (Line(
+      points={{69.49,-37},{64,-37},{64,-46},{58,-46}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(mWat_flow.y, airload.mWat_flow) annotation (Line(
+      points={{47.6,-28},{36,-28},{36,-10},{26,-10},{26,-4},{20,-4}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+
+  connect(NaturalVentilation.HumIn, hum_internal);
+  connect(airload.mWat_flow, mWat_flow_internal);
     annotation (Dialog(tab="Infiltration acc. to EN 12831 (building airtightness"),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
