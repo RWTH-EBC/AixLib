@@ -9,9 +9,9 @@ class Slack_Notification(object):
         self.slack_token = slack_token
         self.github_token = github_token
         self.github_repo = github_repo
-        self.url = "https://api.github.com/repos/" + github_repo + "/branches"
+        self.url = f'https://api.github.com/repos/{github_repo}/branches'
 
-    def _get_date(self,  branch):  # date of last commit
+    def _get_data(self,  branch):  # date of last commit
         branch_url = self.url + "/" + branch
         payload = {}
         headers = {
@@ -22,17 +22,19 @@ class Slack_Notification(object):
         text = response.json()
         commit = text["commit"]
         commit = commit["commit"]
-        commit = commit["committer"]
-        return commit
+        #commit = commit["committer"]
+        author = commit["author"]
+        return author
 
     def _get_branches(self):  # get a list of branches in repo
         try:
+            url = f'{self.url}?per_page=100'
             payload={}
             headers = {
                 'Authorization': 'Bearer ' + self.github_token,
                 'Content-Type': 'application/json'
             }
-            response = requests.request("GET", self.url, headers=headers, data=payload)
+            response = requests.request("GET", url, headers=headers, data=payload)
             text = response.json()
             branch_list = []
             for dic in text:
@@ -59,24 +61,55 @@ class Slack_Notification(object):
         email = commit["email"]
         return email
 
-    def _get_slack_id(self, github_mail):
-        if github_mail.find("eonerc") == -1:
-            github_mail = github_mail.replace("@", "@eonerc.")
+    def _get_user_list(self):
         url = "https://slack.com/api/users.list"
         payload = {}
         headers = {
             'Authorization': 'Bearer ' + self.slack_token
         }
         response = requests.request("GET", url, headers=headers, data=payload)
-        name_text = response.json()
-        member_array = name_text["members"]
+        slack_user_list = response.json()
+        return slack_user_list
+
+    def _get_slack_mail(self, slack_user_list):
+        slack_mail_id = {}
+        member_array = slack_user_list["members"]
         for member in member_array:
             profile = member["profile"]
             slack_email = profile.get("email")
-            if github_mail == slack_email:
-                id = member.get("id")
-                #print(f'Slack id: {id}')
+            id = member.get("id")
+            if slack_email is None:
+                continue
+            slack_mail_id[slack_email] = id
+        return slack_mail_id
+
+    def _get_slack_id(self, github_mail, slack_mail_id, name):
+        for slack_email in slack_mail_id:
+            if github_mail.find("@rwth-aachen.de") > -1:
+                if github_mail.replace("@", "@eonerc.").lower() == slack_email.lower():
+                    print(f'Slack Email: {slack_email}')
+                    id = slack_mail_id[slack_email]
+                    print(f'Slack id: {id}')
+                    return id
+
+        for slack_email in slack_mail_id:
+            if github_mail.lower() == slack_email.lower():
+                print(f'Slack Email: {slack_email}')
+                id = slack_mail_id[slack_email]
+                print(f'Slack id: {id}')
                 return id
+        for slack_email in slack_mail_id:
+            if github_mail[:github_mail.rfind("@")].lower() == slack_email[:slack_email.rfind("@")].lower():
+                print(f'Slack Email: {slack_email}')
+                id = slack_mail_id[slack_email]
+                print(f'Slack id: {id}')
+                return id
+
+        print(f'Cannot find Slack ID of user: {name} \nSend Slack message to channel fg-modelica')
+        id = "CBZ9FJH27"
+        print(f'Slack channel fg-modelica-id: {id}')
+        return id
+
 
     def _delete_branch(self, branch):
         url = f'https://api.github.com/repos/{self.github_repo}/git/refs/heads/{branch}'
@@ -87,8 +120,7 @@ class Slack_Notification(object):
         response = requests.request("DELETE", url, headers=headers, data=payload)
         print(response.text)
 
-    def _get_pr_number(self):
-        branch = "slack"
+    def _get_pr_number(self, branch):
         url = f'https://api.github.com/repos/{self.github_repo}/pulls'
         payload = {}
         headers = {
@@ -110,7 +142,6 @@ class Slack_Notification(object):
             'Content-Type': 'application/json'
         }
         response = requests.request("PATCH", url, headers=headers, data=payload)
-        print(response.text.encode('utf8'))
 
     def return_owner(self):
         owner = self.github_repo.split("/")
@@ -118,7 +149,6 @@ class Slack_Notification(object):
 
     def _open_pr(self, branch, owner):
         base_branch = "development"
-        branch = "slack"
         url = f'https://api.github.com/repos/{self.github_repo}/pulls'
         title = f'\"title\": \"{branch} will be delete.\"'
         body = f'\"body\":\"The Branch {branch} is more than 180 days inactiv. The Branch and the Pull request will delte.\"'
@@ -131,7 +161,7 @@ class Slack_Notification(object):
             'Content-Type': 'application/json'
         }
         response = requests.request("POST", url, headers=headers, data=payload)
-        print(response.text)
+        #print(response.text)
         return response
 
     def _post_message(self, channel_id, message_text):
@@ -142,7 +172,6 @@ class Slack_Notification(object):
         client = WebClient(token=self.slack_token)  # WebClient instantiates a client that can call API methods
         # When using Bolt, you can use either `app.client` or the `client` passed to listeners.
         logger = logging.getLogger(__name__)
-
         try:
             result = client.chat_postMessage(  # Call the chat.postMessage method using the WebClient
                 channel=channel_id,
@@ -162,43 +191,63 @@ if __name__ == '__main__':
     args = parser.parse_args()  # Parse the arguments
     from api_slack import Slack_Notification
     slack = Slack_Notification(github_token=args.github_token, slack_token=args.slack_token, github_repo=args.github_repo)
-
+    slack_user_list = slack._get_user_list()
+    slack_mail_id = slack._get_slack_mail(slack_user_list)
     time_list = []
     l_time = slack._local_time()
     branch_list = slack._get_branches()
+
     for branch in branch_list:
-        commit = slack._get_date(branch)
-        name = slack._get_name(commit)
-        email = slack._get_name_mail(commit)
         if branch == "development" or branch == "master":
             continue
-        print("******************************")
-        print(f'Name: {name}')
-        print(f'Email: {email}')
-        print(f'Branch: {branch}')
-        time = slack._get_time(commit)
+        author = slack._get_data(branch)
+        name = author["name"]
+        github_mail = author["email"]
+        time = slack._get_time(author)
         previous_date = str(l_time - time)
+
         if previous_date.find("days") > -1:
             time_dif = int(previous_date[:previous_date.find("days")])
             if time_dif > 180:
-                message_text = f'The branch {branch} has been inactiv for more than {time_dif} days. A pull request is created and the branch is then deleted. If you want to restore the branch, go to the closed pull requests and restore your branch.'
-                print(message_text)
-                channel_id = slack._get_slack_id(email)
-                slack._post_message(channel_id, message_text)
+                if branch.find("Correct_HTML") > -1:
+                    slack._delete_branch(branch)
+                    continue
+                print(f'\n******************************')
+                print(f'Name: {name}')
+                print(f'Branch: {branch}')
+                print(f'GitHub E-Mail: {github_mail}')
+                channel_id = slack._get_slack_id(github_mail, slack_mail_id, name)
                 owner = slack.return_owner()
                 slack._open_pr(branch, owner)
-                pr_number = slack._get_pr_number()
+                pr_number = slack._get_pr_number(branch)
+
+                link_branch = f'https://github.com/{args.github_repo}/tree/{branch}'
+                link_pr = f'https://github.com/{args.github_repo}/pull/{str(pr_number)}'
+                message_text = f'The branch {branch} has been inactiv for more than {time_dif} days. ' \
+                               f'A pull request is created and the branch is then deleted. If you want to restore the branch, go to the closed pull requests and restore your branch.' \
+                               f'\nBranch URL: {link_branch}' \
+                               f'\nPull Request URL: {link_pr}'
+                print(message_text)
+                slack._post_message(channel_id, message_text)
                 slack._close_pr(pr_number)
                 slack._delete_branch(branch)
-                exit(0)
+                continue
             if time_dif > 90:
-                message_text = f'The branch {branch} has been inactiv for more than {time_dif} days. The branch is automatically deleted after 180 days. If you want to keep the branch, add changes to the branch. '
-                print(message_text)
-                channel_id = slack._get_slack_id(email)
-                slack._post_message(channel_id, message_text)
-                exit(0)
-            else:
-                print(f'Branch {branch} is since {time_dif} days inactive')
-                exit(0)
+                if branch.find("Correct_HTML") > -1:
+                    continue
+                print(f'\n******************************')
+                print(f'Name: {name}')
+                print(f'Branch: {branch}')
+                print(f'GitHub E-Mail: {github_mail}')
+                channel_id = slack._get_slack_id(github_mail, slack_mail_id, name)
+                link_branch = f'https://github.com/{args.github_repo}/tree/{branch}'
 
+                message_text = f'The branch {branch} has been inactiv for more than {time_dif} days. The branch is automatically deleted after 180 days. If you want to keep the branch, add changes to the branch.' \
+                               f'A pull request is created and the branch is then deleted. If you want to restore the branch, go to the closed pull requests and restore your branch. ' \
+                               f'\nBranch URL: {link_branch}'
+                print(message_text)
+                slack._post_message(channel_id, message_text)
+                continue
+            else:
+                continue
 
