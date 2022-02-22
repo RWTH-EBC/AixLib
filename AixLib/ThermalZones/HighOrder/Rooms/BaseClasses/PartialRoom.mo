@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoom "Partial model with base component that are necessary for all HOM rooms"
 
   extends PartialRoomParams;
@@ -208,6 +208,19 @@ equation
   <li>January 9, 2020 by Philipp Mehrfeld:<br/>
     Model added to the AixLib library.
   </li>
+  <li>February, 2022 by Fabian Wüllhorst and Martin Kremer:<br/>
+    Changed airLoad-model to mxing volume to use media model. Added possibility to analyse substance and water vapor balance.
 </ul>
+</html>", info="<html>
+<p> This model provides a basic configuration of an air load, replaceable parameter sets for wall paramters and air exchange models that can be used to 
+build up individual High-Order-Models for rooms.</p>
+<p> The air load is modelled with a mixing volume providing a media model for the air inside the room and the energy and mass balances. 
+It is possible to consider the water vapor balance for the indoor air humidity such as a substance balance to consider e.g. CO2-concentration in the room.
+For the default configuration substance and water vapor balance will not be considered. </p>
+<p><b>Note:</b> While the air exchange model for ventilated air provides also the water vapor exchange rate, the infiltration model and dynamic ventilation model
+only provide the thermal balance. Hence, no water vapor will be exchanged due to infiltration or the dynamic ventilation model.</p>
+<p><b>Note 2:</b> The dynamic ventilation model provides a control algorithm defining an air exchange due to natural ventilation depending on the room and outdoor air
+temperature. <b>It does not provide any physical background, but assumes an air exchange rate that can be set by the user.</b> This model should be used with caution.
+The setting of its parameters may have high influence on the simulation results.</p>
 </html>"));
 end PartialRoom;
