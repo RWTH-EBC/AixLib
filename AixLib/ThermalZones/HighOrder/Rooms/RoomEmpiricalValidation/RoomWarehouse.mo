@@ -1,6 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Rooms.RoomEmpiricalValidation;
 model RoomWarehouse "Room model of Warehouse for Empirical validation"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomFourWalls(
+    use_shortWaveRadIn=false,
     wallWest(
       redeclare DataBase.Walls.EmpiricalValidation.OW_Warehouse wallPar,
       final wall_length=room_width,
@@ -56,11 +57,6 @@ model RoomWarehouse "Room model of Warehouse for Empirical validation"
       final windowarea=60,
       final withDoor=false));
 
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation (Placement(
-        transformation(extent={{-120,10},{-104,26}}), iconTransformation(extent=
-           {{-120,20},{-100,40}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort[5] "N,E,S,W,Hor"
-    annotation (Placement(transformation(extent={{-120,48},{-100,68}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
     annotation (Placement(transformation(extent={{-36,-102},{-28,-94}})));
   Components.DryAir.VarAirExchange Ventilation(final V=room_V)
@@ -86,21 +82,8 @@ model RoomWarehouse "Room model of Warehouse for Empirical validation"
     final der_T(fixed=(initDynamicsAir == Modelica.Fluid.Types.Dynamics.SteadyStateInitial), start=0)) "Thermal capacity inside the room" annotation (Placement(transformation(extent={{30,16},{46,32}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor(R=1/
         35000) annotation (Placement(transformation(extent={{34,-4},{48,10}})));
+
 equation
-  connect(WindSpeedPort,wallWest.WindSpeedPort)  annotation (Line(points={{-112,18},
-          {-92,18},{-92,32},{-88,32},{-88,32.8},{-88.25,32.8}},           color=
-         {0,0,127}));
-  connect(WindSpeedPort, ceiling.WindSpeedPort) annotation (Line(points={{-112,18},
-          {-92,18},{-92,86},{-33.2,86},{-33.2,82.1}},         color={0,0,127}));
-  connect(WindSpeedPort,wallNorth.WindSpeedPort)  annotation (Line(points={{-112,18},
-          {-92,18},{-92,86},{-4,86},{-4,74.25}},        color={0,0,127}));
-  connect(WindSpeedPort,wallSouth.WindSpeedPort)  annotation (Line(points={{-112,18},
-          {-92,18},{-92,-82},{-12,-82},{-12,-66},{-7.66667,-66},{-7.66667,-73.25}},
-        color={0,0,127}));
-  connect(WindSpeedPort,wallEast.WindSpeedPort)  annotation (Line(points={{-112,18},
-          {-92,18},{-92,-82},{92,-82},{92,-6.8},{74.25,-6.8}},     color={0,0,127}));
-  connect(thermOutside, thermOutside)
-    annotation (Line(points={{-100,100},{-100,100}}, color={191,0,0}));
   connect(thermOutside, wallSouth.port_outside) annotation (Line(points={{-100,100},
           {-92,100},{-92,-82},{18,-82},{18,-73.25}},color={191,0,0}));
   connect(thermOutside, wallWest.port_outside) annotation (Line(points={{-100,100},
@@ -117,24 +100,7 @@ equation
   connect(thermOutside, wallEast.port_outside) annotation (Line(points={{-100,100},
           {-92,100},{-92,-82},{92,-82},{92,13},{74.25,13}},
                                                           color={191,0,0}));
-  connect(SolarRadiationPort[1], wallNorth.SolarRadiationPort) annotation (Line(
-        points={{-110,50},{-92,50},{-92,86},{62,86},{62,78},{-9.5,78},{-9.5,
-          75.5}},
-        color={255,128,0}));
-  connect(SolarRadiationPort[2], wallEast.SolarRadiationPort) annotation (Line(
-        points={{-110,54},{-92,54},{-92,86},{92,86},{92,40},{88,40},{88,-11.75},
-          {75.5,-11.75}},
-                  color={255,128,0}));
-  connect(SolarRadiationPort[3], wallSouth.SolarRadiationPort) annotation (Line(
-        points={{-110,58},{-92,58},{-92,86},{92,86},{92,-82},{-14.0833,-82},{
-          -14.0833,-74.5}},
-                   color={255,128,0}));
-  connect(SolarRadiationPort[4], wallWest.SolarRadiationPort) annotation (Line(
-        points={{-110,62},{-92,62},{-92,37.75},{-89.5,37.75}},     color={255,128,
-          0}));
-  connect(SolarRadiationPort[5], ceiling.SolarRadiationPort) annotation (Line(
-        points={{-110,66},{-92,66},{-92,86},{-31,86},{-31,82.6}},
-        color={255,128,0}));
+
   connect(thermStar_Demux.portConvRadComb, wallSouth.thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-7,-50},{18,-50},{18,-63}}, color={191,0,0}));
   connect(thermStar_Demux.portConvRadComb, wallWest.thermStarComb_inside)
@@ -158,7 +124,7 @@ equation
   connect(AirExchangePortRoom, Ventilation.ventRate) annotation (Line(points={{-112,-50},{-70,-50},{-70,6.16},{-29.4,6.16}},
                                              color={0,0,127}));
   connect(thermRoomNextDoor, Ventilation.port_a) annotation (Line(points={{-104,
-          -96},{-70,-96},{-70,10},{-30,10}}, color={191,0,0}));
+          -96},{-68,-96},{-68,10},{-30,10}}, color={191,0,0}));
   connect(thermalResistor.port_a, interiorThermCap.port) annotation (Line(points={{34,3},{34,16},{38,16}}, color={191,0,0}));
   connect(thermalResistor.port_b, airload.heatPort) annotation (Line(points={{48,3},{
           48,-36},{18,-36},{18,-12}},  color={191,0,0}));

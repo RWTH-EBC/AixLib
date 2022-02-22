@@ -153,7 +153,7 @@ model RoomTwinHouseN2 "N2"
     annotation (Placement(transformation(extent={{-36,-102},{-28,-94}}),
         iconTransformation(extent={{-36,-100},{-28,-92}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation (Placement(
-        transformation(extent={{-122,12},{-106,28}}), iconTransformation(extent={{-120,22},
+        transformation(extent={{-118,-14},{-102,2}}), iconTransformation(extent={{-120,22},
             {-100,42}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_Ceiling1
     annotation (Placement(transformation(extent={{-40,94},{-32,102}}),
@@ -216,16 +216,16 @@ model RoomTwinHouseN2 "N2"
     redeclare final Components.Types.CoeffTableEastWestWindow staticCoeffTable(abs=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06))
                                                         annotation (Placement(transformation(extent={{-44,26},{-24,46}})));
 equation
-  connect(WindSpeedPort, wallWest.WindSpeedPort) annotation (Line(points={{-114,20},{-68,20},{-68,20.4},{-64.3,20.4}},
-                                                       color={0,0,127}));
-  connect(WindSpeedPort, wallSouth.WindSpeedPort) annotation (Line(points={{-114,20},
-          {-68,20},{-68,-86},{-14,-86},{-14,-65.3},{-21.6667,-65.3}},
+  connect(WindSpeedPort, wallWest.WindSpeedPort) annotation (Line(points={{-110,-6},
+          {-68,-6},{-68,20.4},{-64.3,20.4}},           color={0,0,127}));
+  connect(WindSpeedPort, wallSouth.WindSpeedPort) annotation (Line(points={{-110,-6},
+          {-68,-6},{-68,-86},{-14,-86},{-14,-65.3},{-21.6667,-65.3}},
         color={0,0,127}));
-  connect(WindSpeedPort, wallEast.WindSpeedPort) annotation (Line(points={{-114,20},
-          {-68,20},{-68,-86},{88,-86},{88,20},{60.3,20},{60.3,20.4}},     color=
+  connect(WindSpeedPort, wallEast.WindSpeedPort) annotation (Line(points={{-110,-6},
+          {-68,-6},{-68,-86},{88,-86},{88,20},{60.3,20},{60.3,20.4}},     color=
          {0,0,127}));
-  connect(WindSpeedPort, wallNorth.WindSpeedPort) annotation (Line(points={{-114,20},
-          {-68,20},{-68,-86},{88,-86},{88,72},{-14.6667,72},{-14.6667,62.3}},
+  connect(WindSpeedPort, wallNorth.WindSpeedPort) annotation (Line(points={{-110,-6},
+          {-68,-6},{-68,-86},{88,-86},{88,72},{-14.6667,72},{-14.6667,62.3}},
                   color={0,0,127}));
   connect(thermOutside, wallWest.port_outside) annotation (Line(points={{-100,100},{-68,100},{-68,-6},{-64.3,-6}},
                                                color={191,0,0}));

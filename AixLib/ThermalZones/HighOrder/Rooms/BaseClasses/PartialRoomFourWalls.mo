@@ -19,8 +19,29 @@ partial model PartialRoomFourWalls
       descriptionLabel=true,
       enable=withWindow1));
 
-
+  parameter Boolean use_shortWaveRadIn=true
+    "Use bus connector for incoming shortwave radiation"
+    annotation (Dialog(tab="Inner walls", group="Shortwave Radiation"));
+  parameter Boolean use_shortWaveRadOut=true
+    "Use bus connector for outgoing shortwave radiation"
+    annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=use_shortWaveRadIn));
+  parameter Boolean use_dynamicShoWaveMethod=false
+    "True = dynamic as holistic approach, false = static approach to obtain the same values as provided in tables of the ASHREA"
+    annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=
+          use_shortWaveRadIn));
+  parameter Integer nWin=2
+    "Number of windows in room transmitting shortwave radiation"
+    annotation (Dialog(tab="Inner walls", group="Shortwave Radiation", enable=use_shortWaveRadIn));
+  replaceable parameter
+    ThermalZones.HighOrder.Components.Types.PartialCoeffTable staticCoeffTable
+    constrainedby
+    AixLib.ThermalZones.HighOrder.Components.Types.PartialCoeffTable
+    "Record holding the values to reproduce the tables"
+    annotation (choicesAllMatching=true, Dialog(tab="Inner walls", group="Shortwave Radiation", enable=
+          use_shortWaveRadIn and not use_dynamicShoWaveMethod));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall wallSouth(
+    final use_shortWaveRadIn=use_shortWaveRadIn,
+    final use_shortWaveRadOut=use_shortWaveRadOut,
     energyDynamics=energyDynamicsWalls,
     radLongCalcMethod=radLongCalcMethod,
     T_ref=T_ref,
@@ -43,6 +64,8 @@ partial model PartialRoomFourWalls
         rotation=90,
         origin={18,-68})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall wallWest(
+    final use_shortWaveRadIn=use_shortWaveRadIn,
+    final use_shortWaveRadOut=use_shortWaveRadOut,
     energyDynamics=energyDynamicsWalls,
     radLongCalcMethod=radLongCalcMethod,
     T_ref=T_ref,
@@ -65,6 +88,8 @@ partial model PartialRoomFourWalls
         origin={-83,13})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall wallEast(
+    final use_shortWaveRadIn=use_shortWaveRadIn,
+    final use_shortWaveRadOut=use_shortWaveRadOut,
     energyDynamics=energyDynamicsWalls,
     radLongCalcMethod=radLongCalcMethod,
     T_ref=T_ref,
@@ -87,6 +112,8 @@ partial model PartialRoomFourWalls
         origin={69,13})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall wallNorth(
+    final use_shortWaveRadIn=use_shortWaveRadIn,
+    final use_shortWaveRadOut=use_shortWaveRadOut,
     energyDynamics=energyDynamicsWalls,
     radLongCalcMethod=radLongCalcMethod,
     T_ref=T_ref,
@@ -109,6 +136,8 @@ partial model PartialRoomFourWalls
         origin={18,69})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
+    final use_shortWaveRadIn=use_shortWaveRadIn,
+    final use_shortWaveRadOut=use_shortWaveRadOut,
     energyDynamics=energyDynamicsWalls,
     radLongCalcMethod=radLongCalcMethod,
     T_ref=T_ref,
@@ -131,6 +160,8 @@ partial model PartialRoomFourWalls
         origin={-42,80})));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
+    final use_shortWaveRadIn=use_shortWaveRadIn,
+    final use_shortWaveRadOut=use_shortWaveRadOut,
     outside=false,
     energyDynamics=energyDynamicsWalls,
     radLongCalcMethod=radLongCalcMethod,
@@ -158,6 +189,17 @@ partial model PartialRoomFourWalls
     Modelica.Blocks.Interfaces.RealInput WindSpeedPort
       annotation (Placement(transformation(extent={{-116,28},{-100,44}}),
           iconTransformation(extent={{-120,-16},{-100,4}})));
+  Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
+    final use_dynamicMethod=use_dynamicShoWaveMethod,
+    final nWin=nWin,
+    final nWalls=4,
+    final nFloors=1,
+    final nCei=1,
+    final floor_length=room_length,
+    final floor_width=room_height,
+    final staticCoeffTable=staticCoeffTable) if use_shortWaveRadIn
+    annotation (Placement(transformation(extent={{-50,26},{-30,46}})));
+
 equation
   connect(wallSouth.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-7.66667,
           -73.25},{-8,-73.25},{-8,-82},{-94,-82},{-94,36},{-108,36}}, color={0,
@@ -209,6 +251,29 @@ equation
   connect(thermStar_Demux.portConvRadComb, ceiling.thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{44,-56},{44,50},{-42,50},{-42,78}},
                      color={191,0,0}));
+  connect(wallEast.shortRadWin, solarRadInRoom.win_in[1]) annotation (Line(points={{64.25,
+          26.275},{44,26.275},{44,46},{-54,46},{-54,36},{-51,36}},   color={0,0,0}, pattern=LinePattern.Dash));
+  connect(wallSouth.shortRadWin, solarRadInRoom.win_in[2]) annotation (Line(points={{35.2083,
+          -63.25},{35.2083,-56},{44,-56},{44,46},{-54,46},{-54,36},{-51,36}},
+                                                              color={0,0,0}, pattern=LinePattern.Dash));
+  connect(wallWest.shortRadWin, solarRadInRoom.win_in[3]) annotation (Line(points={{-78.25,
+          -0.275},{-54,-0.275},{-54,36},{-51,36}},                     color={0,0,0}, pattern=LinePattern.Dash));
+  connect(wallNorth.shortRadWin, solarRadInRoom.win_in[4]) annotation (Line(points={{32.75,
+          64.25},{32.75,46},{-54,46},{-54,36},{-51,36}}, color={0,0,0}, pattern=LinePattern.Dash));
+  connect(solarRadInRoom.walls[1], wallEast.shortRadWall) annotation (Line(points={{-29,
+          41.25},{44,41.25},{44,-4.775},{64,-4.775}}, color={0,0,0}, pattern=LinePattern.Dash));
+  connect(solarRadInRoom.walls[2], wallSouth.shortRadWall) annotation (Line(points={{-29,
+          41.75},{-20,41.75},{-20,38},{46,38},{46,-56},{-5.04167,-56},{-5.04167,
+          -63}},                                                     color={0,0,0}, pattern=LinePattern.Dash));
+  connect(solarRadInRoom.walls[3], wallWest.shortRadWall) annotation (Line(points={{-29,
+          42.25},{-20,42.25},{-20,46},{-54,46},{-54,30.775},{-78,30.775}},
+                                                          color={0,0,0}, pattern=LinePattern.Dash));
+  connect(solarRadInRoom.walls[4], wallNorth.shortRadWall) annotation (Line(points={{-29,
+          42.75},{-1.75,42.75},{-1.75,64}}, color={0,0,0}, pattern=LinePattern.Dash));
+  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-29,38},
+          {46,38},{46,-56},{-49.9,-56},{-49.9,-66}},                     color={0,0,0}, pattern=LinePattern.Dash));
+  connect(solarRadInRoom.ceilings[1], ceiling.shortRadWall) annotation (Line(points={{-29,34},
+          {-22,34},{-22,48},{-34.1,48},{-34.1,78}}, color={0,0,0}, pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false)),
                           Documentation(revisions="<html><ul>
