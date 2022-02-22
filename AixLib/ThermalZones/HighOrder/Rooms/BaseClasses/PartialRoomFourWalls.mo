@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoomFourWalls
   "Partial room model for a room with 4 walls, 1 ceiling and 1 floor"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(
@@ -323,22 +323,13 @@ equation
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false)),
                           Documentation(revisions="<html><ul>
-  <li>
-    <i>July 1, 2020</i> by Konstantina Xanhtopoulou:<br/>
-    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/896\">#896</a>:
-    Mainly added solar distribution fractions, extended from
-    PartialRoom.
-  </li>
+  <li>February, 2022 by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1123\">#1123</a>)
 </ul>
-<ul>
-  <li>
-    <i>March 9, 2015</i> by Ana Constantin:<br/>
-    Implemented
-  </li>
-</ul>
-</html>
-
-
-",         info="<html>
+</html>",  info="<html>
+<p>This model provides common interfaces for the most frequently used room in a building, one with four walls, a floor and a ceiling.</p>
+<p>To build up your own room, just extend this model and specify if the walls are inner or outer walls, have windows etc. Connect the heat ports to e.g. thermOuter for outside walls and add new heat ports to exchange heat with other sources, such as anothers room inner wall.</p>
+<p>See the various examples in RoomEmpiricalValidation or ASHRAE140 to see how to use this model.</p>
+<p>Note that all default values are by design not final. This means you have full control over the parametrization of your high-order room model.</p>
 </html>"));
 end PartialRoomFourWalls;
