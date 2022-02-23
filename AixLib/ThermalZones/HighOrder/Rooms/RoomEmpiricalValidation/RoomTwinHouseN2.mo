@@ -1,9 +1,9 @@
 within AixLib.ThermalZones.HighOrder.Rooms.RoomEmpiricalValidation;
 model RoomTwinHouseN2 "N2"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomFourWalls(
-    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
     redeclare Components.Types.CoeffTableEastWestWindow
       coeffTableSolDistrFractions,
+    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
     use_dynamicShortWaveRadMethod=true,
     redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes(
       OW=AixLib.DataBase.Walls.EmpiricalValidation.OW_S_N_TwinHouses(),
