@@ -28,7 +28,9 @@ model RegisterModule "AHU register module for heaters and coolers"
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer of temperature sensors in air chanal" annotation(Dialog(tab="Advanced"));
-  replaceable AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
+  replaceable HydraulicModules.Admix hydraulicModule
+  constrainedby
+    AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule(
     length=1,
     Kv=6.3,
     final energyDynamics=energyDynamics,
