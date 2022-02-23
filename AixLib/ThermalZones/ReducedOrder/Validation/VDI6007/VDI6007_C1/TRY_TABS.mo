@@ -167,31 +167,27 @@ model TRY_TABS "VDI 6007 Test Case 3 model"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
     annotation (Placement(transformation(extent={{142,-24},{162,-4}})));
 
-  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Controlled_TABS
+  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.ControlledTABS
     controlled_TABS(
     RoomNo=1,
-    area={ATabs},
+    Area={ATabs},
     HeatLoad={PowerTabs},
     Spacing={0.35},
-    wallTypeFloor={
+    WallTypeFloor={
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Flooring.FLpartition_EnEV2009_SM_upHalf_UFH_Laminate()},
-
-    wallTypeCeiling={
+    WallTypeCeiling={
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH()},
-
     PipeRecord={
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PBpipe()},
-
     Controlled=true,
     Reduced=true)
     annotation (Placement(transformation(extent={{-82,-174},{-22,-114}})));
+
   Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced.RCTABS rCTABS(
     UpperTABS=
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.FLground_EnEV2009_SML_upHalf_UFH(),
-
     LowerTABS=
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH(),
-
     A=ATabs,
     OrientationTabs=-0.017453292519943,
     T_start=T_start)
@@ -199,6 +195,7 @@ model TRY_TABS "VDI 6007 Test Case 3 model"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,-150})));
+
 protected
   Modelica.Blocks.Sources.Constant hConWall1(final k=(RoomRecord.hConWallOut +
         RoomRecord.hRadWall)*sum(RoomRecord.AExt))

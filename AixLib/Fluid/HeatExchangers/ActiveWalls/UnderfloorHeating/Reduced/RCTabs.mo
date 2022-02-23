@@ -114,7 +114,7 @@ model RCTABS "Pipe Segment of Underfloor Heating System"
         rotation=90,
         origin={-40,-110})));
 
-  Modelica.Blocks.Sources.RealExpression alpha_floor(y= if dT <= 0 then A*1.5 else A*(8.92*(abs(dT)^0.1) - 5.5)) if OrientationTabs == -1
+  Modelica.Blocks.Sources.RealExpression alpha_floor(y=if dT <= 0 then A*1.5 else A*(8.92*(abs(dT)^0.1) - 5.5)) if OrientationTabs == -1
     annotation (Placement(transformation(
         extent={{-10,-11},{10,11}},
         rotation=180,

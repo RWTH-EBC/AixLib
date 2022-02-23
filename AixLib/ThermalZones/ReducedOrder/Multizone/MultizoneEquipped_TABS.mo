@@ -16,13 +16,13 @@ model MultizoneEquipped_TABS
   fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PBpipe(),numTabs) "Pipe type for TABS";
 
 
-  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Controlled_TABS TABS(
+  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.ControlledTABS TABS(
     RoomNo=numTabs,
-    area=ATabs,
+    Area=ATabs,
     HeatLoad=TabsHeatLoad,
     Spacing=TabsSpacing,
-    wallTypeFloor=TabswallTypeFloor,
-    wallTypeCeiling=TabswallTypeCeiling,
+    WallTypeFloor=TabswallTypeFloor,
+    WallTypeCeiling=TabswallTypeCeiling,
     PipeRecord=TabsPipes,
     Controlled=true,
     Reduced=false) if  ATabs[1] > 0

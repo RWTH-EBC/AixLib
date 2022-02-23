@@ -402,14 +402,16 @@ equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
           127}));
-  connect(intGains[3], lights.uRel) annotation (Line(points={{80,-86.6667},{80,-86},
-          {50,-86},{50,-68.5},{56,-68.5}}, color={0,0,127}));
+  connect(intGains[3], lights.uRel) annotation (Line(points={{80,-86.6667},{80,
+          -86},{50,-86},{50,-68.5},{56,-68.5}},
+                                           color={0,0,127}));
   connect(lights.convHeat, ROM.intGainsConv) annotation (Line(points={{75,-62.8},
           {92,-62.8},{92,78},{86,78}}, color={191,0,0}));
   connect(machinesSenHea.convHeat, ROM.intGainsConv) annotation (Line(points={{75,
           -40.8},{92,-40.8},{92,78},{86,78}}, color={191,0,0}));
-  connect(intGains[1], humanSenHeaDependent.uRel) annotation (Line(points={{80,-113.333},
-          {80,-92},{46,-92},{46,-24},{56,-24}}, color={0,0,127}));
+  connect(intGains[1], humanSenHeaDependent.uRel) annotation (Line(points={{80,
+          -113.333},{80,-92},{46,-92},{46,-24},{56,-24}},
+                                                color={0,0,127}));
   connect(humanSenHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(
         points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
   connect(ROM.intGainsConv, humanSenHeaDependent.TRoom) annotation (Line(points=
@@ -424,8 +426,9 @@ equation
         points={{86,78},{92,78},{92,-10},{57,-10},{57,-15}}, color={191,0,0}));
   connect(humanSenHeaIndependent.radHeat, ROM.intGainsRad) annotation (Line(
         points={{75,-30},{94,-30},{94,82},{86,82}}, color={95,95,95}));
-  connect(intGains[1], humanTotHeaDependent.uRel) annotation (Line(points={{80,-113.333},
-          {80,-92},{46,-92},{46,-24},{56,-24}}, color={0,0,127}));
+  connect(intGains[1], humanTotHeaDependent.uRel) annotation (Line(points={{80,
+          -113.333},{80,-92},{46,-92},{46,-24},{56,-24}},
+                                                color={0,0,127}));
   connect(humanTotHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(
         points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
   connect(ROM.intGainsConv, humanTotHeaDependent.TRoom) annotation (Line(points=
@@ -589,8 +592,8 @@ equation
       points={{-49,-24},{-41.2,-24},{-41.2,-24.4}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,-113.333},
-          {80,-92},{46,-92},{46,-36},{-68,-36},{-68,-30}},               color=
+  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
+          -113.333},{80,-92},{46,-92},{46,-36},{-68,-36},{-68,-30}},     color=
           {0,0,127}));
   connect(ventRate, addInfVen.u2) annotation (Line(points={{-108,-64},{-74,-64},
           {-74,-34},{-42,-34},{-42,-31.6},{-41.2,-31.6}},

@@ -274,31 +274,27 @@ model CDD_TABS "VDI 6007 Test Case 3 model"
   Modelica.Blocks.Math.Gain gain3(k=1)
     "Reverses ventilation rate"
     annotation (Placement(transformation(extent={{-114,67},{-100,81}})));
-  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Controlled_TABS
+  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.ControlledTABS
     controlled_TABS(
     RoomNo=1,
-    area={ATabs},
+    Area={ATabs},
     HeatLoad={PowerTabs},
     Spacing={0.35},
-    wallTypeFloor={
+    WallTypeFloor={
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Flooring.FLpartition_EnEV2009_SM_upHalf_UFH_Laminate()},
-
-    wallTypeCeiling={
+    WallTypeCeiling={
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH()},
-
     PipeRecord={
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PBpipe()},
-
     Controlled=true,
     Reduced=true)
-    annotation (Placement(transformation(extent={{-80,-192},{-20,-132}})));
+    annotation (Placement(transformation(extent={{-78,-192},{-18,-132}})));
+
   Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced.RCTABS rCTABS(
     UpperTABS=
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.FLground_EnEV2009_SML_upHalf_UFH(),
-
     LowerTABS=
         Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.CEpartition_EnEV2009_SM_loHalf_UFH(),
-
     A=ATabs,
     OrientationTabs=-0.017453292519943,
     T_start=T_start)
@@ -306,6 +302,7 @@ model CDD_TABS "VDI 6007 Test Case 3 model"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={40,-150})));
+
 protected
   Modelica.Thermal.HeatTransfer.Components.Convection convTABS(dT(start=0))    "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
@@ -428,16 +425,16 @@ equation
                                              color={0,0,127}));
   end if;
   connect(SollTemp.y[1], controlled_TABS.T_Soll[1])
-    annotation (Line(points={{-105.2,-138},{-81.2,-138}}, color={0,0,127}));
+    annotation (Line(points={{-105.2,-138},{-79.2,-138}}, color={0,0,127}));
   connect(controlled_TABS.T_Room[1], thermalZoneTwoElements.TAir) annotation (
-      Line(points={{-81.2,-147},{-100,-147},{-100,-200},{198,-200},{198,32},{93,
+      Line(points={{-79.2,-147},{-100,-147},{-100,-200},{198,-200},{198,32},{93,
           32}}, color={0,0,127}));
   connect(rCTABS.port_int,convTABS. solid)
     annotation (Line(points={{50,-150},{90,-150}}, color={191,0,0}));
   connect(convTABS.fluid, heatFlowSensor.port_a) annotation (Line(points={{110,
           -150},{148,-150},{148,-128},{154,-128}}, color={191,0,0}));
   connect(controlled_TABS.heatFloor[1], rCTABS.port_heat) annotation (Line(
-        points={{-50,-132},{-2,-132},{-2,-160},{40,-160}}, color={191,0,0}));
+        points={{-48,-132},{-2,-132},{-2,-160},{40,-160}}, color={191,0,0}));
   connect(rCTABS.alpha_TABS, convTABS.Gc) annotation (Line(points={{29,-142},{
           22,-142},{22,-132},{72,-132},{72,-170},{100,-170},{100,-160}}, color=
           {0,0,127}));
