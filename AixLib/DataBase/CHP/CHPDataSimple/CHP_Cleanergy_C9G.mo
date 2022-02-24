@@ -53,7 +53,10 @@ record CHP_Cleanergy_C9G
 <h4>
   <span style=\"color:#008000\">Data Sheet (English, German)</span>
 </h4>
-<table summary=\"Data Sheet\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">
+<table>
+  <caption>
+    \"Data Sheet\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\
+  </caption>
   <tr>
     <td valign=\"top\">
       <p>
