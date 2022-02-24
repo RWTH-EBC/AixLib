@@ -4,6 +4,7 @@ model TestCase1 "VDI 6007 Test Case 1 model"
 
   RC.TwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    T_start=295.15,
     hConExt=2.7,
     hConWin=2.7,
     gWin=1,
@@ -25,8 +26,7 @@ model TestCase1 "VDI 6007 Test Case 1 model"
     ATransparent={0},
     AExt={10.5},
     extWallRC(thermCapExt(each der_T(fixed=true))),
-    intWallRC(thermCapInt(each der_T(fixed=true))),
-    T_start=295.15)
+    intWallRC(thermCapInt(each der_T(fixed=true))))
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature preTem(T=295.15)

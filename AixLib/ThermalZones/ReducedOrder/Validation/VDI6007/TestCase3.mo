@@ -43,7 +43,7 @@ model TestCase3 "VDI 6007 Test Case 3 model"
         64800,0; 68400,0; 72000,0; 75600,0; 79200,0; 82800,0; 86400,0],
     columns={2})
     "Table with internal gains"
-    annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
+    annotation (Placement(transformation(extent={{8,-62},{24,-46}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(
     tableOnFile=false,
     columns={2},
@@ -86,8 +86,7 @@ model TestCase3 "VDI 6007 Test Case 3 model"
     endTime2=864000,
     startTime3=5101200,
     endTime3=5184000,
-    threShold=0.15)
-    "Checks validation criteria"
+    threShold=0.15) "Checks validation criteria"
     annotation (Placement(transformation(extent={{84,46},{94,56}})));
   Modelica.Blocks.Math.Mean mean(f=1/3600)
     "Hourly mean of indoor air temperature"
@@ -100,8 +99,8 @@ equation
   connect(hConWall.y, theConWall.Gc)
     annotation (Line(points={{30,-13.6},{31,-13.6},{31,-4}}, color={0,0,127}));
   connect(intGai.y[1], macConv.Q_flow)
-    annotation (Line(points={{
-    22.8,-52},{36,-52},{36,-74},{48,-74}}, color={0,0,127}));
+    annotation (Line(points={{24.8,-54},{34,-54},{34,-74},{48,-74}},
+                                           color={0,0,127}));
   connect(macConv.port, thermalZoneTwoElements.intGainsConv) annotation (
       Line(points={{68,-74},{82,-74},{98,-74},{98,20},{92,20}}, color={191,0,0}));
   connect(const.y, thermalZoneTwoElements.solRad[1])

@@ -64,18 +64,6 @@ model MultizoneEquipped
     "Air handling unit model"
     annotation(Dialog(tab="AirHandlingUnit"),choicesAllMatching=true);
 
-  // TABS
-  parameter Integer numTabs;
-  parameter Modelica.SIunits.Area ATabs[numTabs] "Areas of exterior walls by orientations";
-  parameter Integer TabsConnection[numTabs] "";
-  parameter Modelica.SIunits.Power TabsHeatLoad[numTabs] "Calculated Heat Load for room with panel heating";
-  parameter Modelica.SIunits.Distance TabsSpacing[numTabs] = fill(0.35, numTabs) "Spacing between tubes";
-  parameter Modelica.SIunits.Thickness TabsPipeThickness[numTabs] = fill(0.002, numTabs)
-                                                                                        "thickness of pipe wall";
-  parameter Modelica.SIunits.Diameter TabsDiameter[numTabs] = fill(0.017, numTabs) "outer diameter of pipe";
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition TabswallTypeFloor[numTabs]=
-  fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(), numTabs) "Wall type for floor";
-
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired
     minimal relative humidity [3]: Desired maximal relative humidity [4]:
@@ -127,17 +115,7 @@ model MultizoneEquipped
   Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
-  Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Controlled_UnderfloorHeating
-    controlled_UnderfloorHeating_ROM(
-    RoomNo=numTabs,
-    area=ATabs,
-    HeatLoad=TabsHeatLoad,
-    Spacing=TabsSpacing,
-    PipeThickness=TabsPipeThickness,
-    d_out=TabsDiameter,
-    wallTypeFloor=TabswallTypeFloor) if
-                   numTabs > 0 and ATabs[1] > 0
-    annotation (Placement(transformation(extent={{4,-76},{36,-48}})));
+
 protected
   parameter Real zoneFactor[numZones,1](fixed=false)
     "Calculated zone factors";
@@ -343,20 +321,6 @@ equation
     annotation (Line(points={{12.4,12.25},{20,12.25},{20,29.5},{12.4,29.5}},
         color={0,0,127}));
   end if;
-
-  //TABS
-  for i in 1:numTabs loop
-    connect(controlled_UnderfloorHeating_ROM.T_Soll[i], TSetHeat[TabsConnection[i]]) annotation (
-      Line(points={{3.36,-51.5},{-40,-51.5},{-40,-100}}, color={0,0,127}));
-    connect(controlled_UnderfloorHeating_ROM.T_Room[i], zone[TabsConnection[i]].TAir) annotation (
-      Line(points={{3.36,-56.75},{-20,-56.75},{-20,-74},{98,-74},{98,85.9},{82.1,
-          85.9}}, color={0,0,127}));
-    if zoneParam[TabsConnection[i]].ATabs > 0 then
-        connect(controlled_UnderfloorHeating_ROM.heatFloor[i], zone[TabsConnection[i]].tabs)
-        annotation (Line(points={{20,-48},{72,-48},{72,54.33},{45.14,54.33}}, color={
-          191,0,0}));
-    end if;
-  end for;
 
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

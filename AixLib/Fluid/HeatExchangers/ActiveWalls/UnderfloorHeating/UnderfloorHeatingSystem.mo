@@ -34,7 +34,7 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   final parameter Modelica.SIunits.Length PipeLength[RoomNo] = A ./ Spacing "Pipe Length in every room";
 
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo]=fill(BaseClasses.FloorLayers.Ceiling_Dummy(), RoomNo) "Wall type for ceiling" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for Ceiling" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
   parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord[RoomNo]  "Pipe layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
 
   final parameter Modelica.SIunits.MassFlowRate m_flow_total=sum(
@@ -189,8 +189,9 @@ equation
     for x in 2:RoomNo loop
       for u in 1:CircuitNo[x] loop
         connect(distributor.flowPorts[(sum(CircuitNo[v] for v in 1:(x - 1)) + u)],
-          underfloorHeatingRoom[x].ports_a[u]) annotation (Line(points={{-29.6,12},
-                {-29.6,25.4286},{-16,25.4286}}, color={0,127,255}));
+          underfloorHeatingRoom[x].ports_a[u]) annotation (Line(points={{-29.6,
+                12},{-29.6,25.4286},{-16,25.4286}},
+                                                color={0,127,255}));
         connect(underfloorHeatingRoom[x].ports_b[u], distributor.returnPorts[(
           sum(CircuitNo[v] for v in 1:(x - 1)) + u)]) annotation (Line(points={{16,
                 25.4286},{24,25.4286},{24,-22},{-26.4,-22},{-26.4,-12.4}},

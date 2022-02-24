@@ -62,29 +62,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Boolean use_C_flow = false
     "Set to true to enable input connector for trace substance"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
-  parameter Boolean WithTabs
-    "If true, the zone has TABS"
-    annotation(Dialog(group="Tabs"),choices(checkBox = true));
-  parameter Boolean ExtTabs
-    "If true, the TABS are exterior (Groundfloor, Rooftop)"
-    annotation(Dialog(group="Tabs"),choices(checkBox = true));
-  parameter Boolean ConcreteCore
-    "If true, TABS of concrete core type"
-    annotation(Dialog(group="Tabs"),choices(checkBox = true));
-  parameter Integer nTabs(min = 1) "Number of RC-elements of tabs"
-    annotation(Dialog(group="Tabs"));
-  parameter Modelica.SIunits.ThermalResistance RTabs[nTabs](
-    each min=Modelica.Constants.small)
-    "Vector of resistances of tabs, from inside to outside"
-    annotation(Dialog(group="Tabs"));
-  parameter Modelica.SIunits.ThermalResistance RRemTabs(
-    min=Modelica.Constants.small)
-    "Resistance of remaining resistor RExtRem between capacity n and outside"
-    annotation(Dialog(group="Tabs"));
-  parameter Modelica.SIunits.HeatCapacity CTabs[nTabs](
-    each min=Modelica.Constants.small)
-    "Vector of heat capacities of tabs, from inside to outside"
-    annotation(Dialog(group="Tabs"));
+
   Modelica.Blocks.Interfaces.RealInput solRad[nOrientations](
     each final quantity="RadiantEnergyFluenceRate",
     each final unit="W/m2") if sum(ATransparent) > 0
@@ -210,34 +188,18 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "Splits incoming solar radiation into separate gains for each wall element,
     weighted by their area"
     annotation (Placement(transformation(extent={{-138,138},{-122,154}})));
-  BaseClasses.ExteriorTabs extWallRC(
+  BaseClasses.ExteriorWall extWallRC(
     final n=nExt,
     final RExt=RExt,
     final CExt=CExt,
     final RExtRem=RExtRem,
-    final T_start=T_start,
-    ConcreteCore=false) if    ATotExt > 0 "RC-element for exterior walls"
+    final T_start=T_start) if    ATotExt > 0 "RC-element for exterior walls"
     annotation (Placement(transformation(extent={{-158,-50},{-178,-28}})));
 
   Modelica.Blocks.Interfaces.RealInput[Medium.nC] C_flow if use_C_flow
     "Trace substance mass flow rate added to the thermal zone"
     annotation (Placement(transformation(extent={{-280,70},{-240,110}}), iconTransformation(extent={{-260,90},{-240,110}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs if WithTabs
-    "heat port for TABS"              annotation (Placement(transformation(
-          extent={{-250,-190},{-230,-170}}), iconTransformation(extent={{-250,-6},
-            {-230,14}})));
-  BaseClasses.ExteriorTabs extTabsRC(
-    final n=nTabs,
-    RExt=RTabs,
-    RExtRem=RRemTabs,
-    CExt=CTabs,
-    final T_start=T_start,
-    final ConcreteCore=ConcreteCore) if ExtTabs and WithTabs
-    "RC-element for exterior TABS" annotation (Placement(transformation(
-        extent={{-10,-11},{10,11}},
-        rotation=180,
-        origin={-202,5})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
@@ -261,8 +223,7 @@ protected
     "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-114,-30},{-94,-50}})));
   Modelica.Blocks.Sources.Constant hConExtWall_const(final k=ATotExt*hConExt) if
-       ATotExt > 0
-    "Coefficient of convective heat transfer for exterior walls"
+       ATotExt > 0 "Coefficient of convective heat transfer for exterior walls"
     annotation (Placement(transformation(
     extent={{5,-5},{-5,5}},
     rotation=-90,
@@ -295,7 +256,7 @@ protected
         origin={-146,10})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTAir if
     ATot > 0 or VAir > 0 "Indoor air temperature sensor"
-    annotation (Placement(transformation(extent={{80,-10},{100,10}})));
+    annotation (Placement(transformation(extent={{82,-10},{102,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTRad if
     ATot > 0 "Mean indoor radiation temperatur sensor"
     annotation (Placement(
@@ -404,29 +365,29 @@ equation
     annotation (Line(points={{-106,61.4},{-106,50},{-106,50}},
     color={0,0,127}));
   connect(hConExtWall_const.y, convExtWall.Gc)
-    annotation (Line(points={{-104,-55.5},{-104,-22},{-104,-22},{-104,-50}},
+    annotation (Line(points={{-104,-55.5},{-104,-50}},
     color={0,0,127}));
   connect(convExtWall.fluid, senTAir.port)
-    annotation (Line(points={{-94,-40},{66,-40},{66,0},{80,0}},
+    annotation (Line(points={{-94,-40},{66,-40},{66,0},{82,0}},
     color={191,0,0}));
   connect(convHeatSol.port, senTAir.port)
     annotation (Line(
-    points={{-146,124},{-62,124},{-62,92},{66,92},{66,0},{80,0}},
+    points={{-146,124},{-62,124},{-62,92},{66,92},{66,0},{82,0}},
     color={191,0,0},
     pattern=LinePattern.Dash));
   connect(intGainsConv, senTAir.port)
-    annotation (Line(points={{240,40},{66,40},{66,0},{80,0}},
+    annotation (Line(points={{240,40},{66,40},{66,0},{82,0}},
     color={191,0,0}));
   connect(convWin.fluid, senTAir.port)
-    annotation (Line(points={{-96,40},{66,40},{66,0},{80,0}},
+    annotation (Line(points={{-96,40},{66,40},{66,0},{82,0}},
     color={191,0,0}));
   connect(volAir.heatPort, senTAir.port)
-    annotation (Line(points={{42,-16},{42,0},{80,0}},
+    annotation (Line(points={{42,-16},{42,0},{82,0}},
                                                     color={191,0,0}));
   connect(volMoiAir.heatPort, senTAir.port)
-    annotation (Line(points={{-20,-16},{-20,0},{80,0}}, color={191,0,0}));
+    annotation (Line(points={{-20,-16},{-20,0},{82,0}}, color={191,0,0}));
   connect(senTAir.T, TAir)
-    annotation (Line(points={{100,0},{108,0},{108,160},{250,160}},
+    annotation (Line(points={{102,0},{108,0},{108,160},{250,160}},
     color={0,0,127}));
   connect(convWin.solid, windowIndoorSurface)
     annotation (Line(points={{-116,40},{-130,40},{-130,-10},{-212,-10},{-212,-146},
@@ -472,21 +433,7 @@ equation
           {-52,90},{-260,90}}, color={0,0,127}));
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
           90},{-260,90}}, color={0,0,127}));
-  connect(extTabsRC.port_a, extWallRC.port_a)
-    annotation (Line(points={{-192,6},{-158,6},{-158,-40}}, color={191,0,0}));
-  connect(extTabsRC.port_b, extWall) annotation (Line(points={{-212,6},{-220,6},
-          {-220,-40},{-240,-40}}, color={191,0,0}));
-  if WithTabs and ExtTabs then
-    if ConcreteCore then
-      connect(tabs,extTabsRC.port_CC)  annotation (Line(points={{-240,-180},{-240,
-              -18},{-202,-18},{-202,-6.2}}, color={191,0,0},
-    pattern=LinePattern.Dash));
-    else
-      connect(tabs,extTabsRC.port_a)  annotation (Line(points={{-240,-180},{-240,
-              -18},{-190,-18},{-190,6},{-192,6}},
-                                             color={191,0,0}, pattern=LinePattern.Dash));
-    end if;
-  end if;
+
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
@@ -533,20 +480,7 @@ equation
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
-    textString="Indoor Air"),
-  Rectangle(
-    extent={{-236,20},{-192,-14}},
-    lineColor={0,0,255},
-    fillColor={215,215,215},
-    fillPattern=FillPattern.Solid),
-  Text(
-    extent={{-27.5,8.5},{27.5,-8.5}},
-    lineColor={0,0,255},
-    fillColor={215,215,215},
-    fillPattern=FillPattern.Solid,
-          textString="Ext TABS
-",        origin={-225.5,2.5},
-          rotation=90)}),
+    textString="Indoor Air")}),
   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),
    graphics={

@@ -204,10 +204,10 @@ model Reduced_comparison_pipe_heat
     nPorts=1)
     annotation (Placement(transformation(extent={{12,-192},{32,-172}})));
   Sources.Boundary_pT              bou4(redeclare package Medium = MediumWater,
-
     T=303.15,
       nPorts=1)
     annotation (Placement(transformation(extent={{110,-192},{90,-172}})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor
              thermalResistor2[dis](R=0.005*dis)
     annotation (Placement(transformation(extent={{78,-168},{98,-148}})));
@@ -240,10 +240,10 @@ model Reduced_comparison_pipe_heat
     nPorts=1)
     annotation (Placement(transformation(extent={{118,-192},{138,-172}})));
   Sources.Boundary_pT              bou5(redeclare package Medium = MediumWater,
-
     T=303.15,
       nPorts=1)
     annotation (Placement(transformation(extent={{216,-192},{196,-172}})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor1(R=0.005)
     annotation (Placement(transformation(extent={{132,-132},{152,-112}})));
   BaseClasses.SumT_F sumT_F(dis=dis2)
@@ -285,11 +285,11 @@ equation
   connect(vol4.heatPort, thermalUFH.port_int)
     annotation (Line(points={{64,-56},{60,-56},{60,-82}}, color={191,0,0}));
   connect(fixedHeatFlow.port, thermalUFH.port_heat)
-    annotation (Line(points={{26,-94},{48,-94}}, color={191,0,0}));
+    annotation (Line(points={{26,-94},{72,-94}}, color={191,0,0}));
   connect(vol5.heatPort, thermalUFH1.port_int)
     annotation (Line(points={{160,-54},{156,-54},{156,-80}}, color={191,0,0}));
   connect(fixedHeatFlow1.port, thermalUFH1.port_heat)
-    annotation (Line(points={{122,-92},{144,-92}}, color={191,0,0}));
+    annotation (Line(points={{122,-92},{168,-92}}, color={191,0,0}));
   connect(thermalCollector1.port_b, vol6.heatPort) annotation (Line(points={{-44,
     -124},{-34,-124},{-34,-126},{-22,-126}}, color={191,0,0}));
 
@@ -297,7 +297,7 @@ equation
     connect(thermalUFH2[i].port_int, thermalCollector1.port_a[i])
         annotation (Line(points={{-44,-156},{-44,-144}},    color={191,0,0}));
     connect(fixedHeatFlow2[i].port, thermalUFH2[i].port_heat) annotation (Line(
-        points={{-90,-168},{-74,-168},{-74,-168},{-56,-168}}, color={191,0,0}));
+        points={{-90,-168},{-74,-168},{-74,-168},{-32,-168}}, color={191,0,0}));
     connect(thermalResistor2[i].port_b, thermalCollector2.port_a[i])
       annotation (Line(points={{98,-158},{98,-146},{60,-146}},
           color={191,0,0}));

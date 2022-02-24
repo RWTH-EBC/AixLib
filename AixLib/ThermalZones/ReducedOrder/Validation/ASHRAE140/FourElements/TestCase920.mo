@@ -76,7 +76,8 @@ model TestCase920 "Test case 920"
     AWin={12.0,0.0,0.0,0.0},
     ATransparent={12.0,0.0,0.0,0.0},
     nPorts=2,
-    AExt={21.6,10.200000000000003,21.6,10.200000000000003}) "Thermal zone" annotation (Placement(transformation(extent={{44,14},{92,50}})));
+    AExt={21.6,10.200000000000003,21.6,10.200000000000003}) "Thermal zone"
+    annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     wfGro=0,
     withLongwave=true,

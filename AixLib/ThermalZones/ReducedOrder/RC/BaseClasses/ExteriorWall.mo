@@ -55,7 +55,8 @@ equation
     annotation (Line(points={{-100,0},{-100,0},{-60,0}},
                                                        color={191,0,0}));
   connect(thermCapExt[n].port,thermResExtRem.port_a)
-  annotation (Line(points={{0,-12},{0,-12},{0,0},{40,0}}, color={191,0,0}));
+  annotation (Line(points={{0,-12},{20,-12},{20,0},{40,0}},
+                                                          color={191,0,0}));
 
   connect(thermResExtRem.port_b, port_b)
     annotation (Line(points={{60,0},{100,0}}, color={191,0,0}));

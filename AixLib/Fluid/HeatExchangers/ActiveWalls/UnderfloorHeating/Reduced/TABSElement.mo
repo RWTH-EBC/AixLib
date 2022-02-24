@@ -5,14 +5,20 @@ model TABSElement "Pipe Segment of Underfloor Heating System"
         false, final m_flow_nominal = m_flow_Circuit);
       extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
       import Modelica.Constants.pi;
-
+  parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics"));
+  parameter Boolean Reduced=true;
   parameter Modelica.SIunits.ThermalResistance R_Pipe(min=Modelica.Constants.small) "Resistance of Pipe";
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
 
   parameter Modelica.SIunits.Thickness d_i(min=Modelica.Constants.small) "Inner Diameters of pipe layers" annotation(Dialog(group = "Panel Heating"));
   parameter Modelica.SIunits.Length PipeLength "Length of pipe" annotation (Dialog( group = "Panel Heating"));
 
   parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
 
+  parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
   parameter Integer calculateVol "Calculation method to determine Water Volume" annotation (Dialog(group="Calculation Method to determine Water Volume in Pipe",
         descriptionLabel=true), choices(
       choice=1 "Calculation with inner diameter",
@@ -28,7 +34,7 @@ model TABSElement "Pipe Segment of Underfloor Heating System"
   final parameter Modelica.SIunits.VolumeFlowRate V_flow = m_flow_Circuit / rho_default "Nominal Volume Flow Rate in pipe";
   parameter Integer use_vmax(min = 1, max = 2) "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
   final parameter Modelica.SIunits.Velocity v = V_flow / (pi / 4 * d_i ^ (2)) "velocity of medium in pipe";
-  final parameter Modelica.SIunits.Diameter d_i_nom = sqrt(4 * V_flow / (pi * 0.5)) "Inner pipe diameter as a comparison for user parameter";
+  final parameter Modelica.SIunits.Diameter d_i_nom = sqrt(abs(4 * V_flow / (pi * 0.5))) "Inner pipe diameter as a comparison for user parameter";
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
@@ -53,6 +59,27 @@ model TABSElement "Pipe Segment of Underfloor Heating System"
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor RPipe(
   final R=R_Pipe)
     annotation (Placement(transformation(extent={{16,6},{28,18}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling if not Reduced
+    "upward heat flow to heated room" annotation (Placement(transformation(
+          extent={{-8,-48},{8,-32}}), iconTransformation(extent={{-10,-50},{10,
+            -30}})));
+  ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer        simpleNLayerFloor(
+    final A=A,
+    T_start=fill((T0), (wallTypeFloor.n)),
+    wallRec=wallTypeFloor,
+    energyDynamics=energyDynamicsWalls) if not Reduced
+                           annotation (Placement(transformation(
+        extent={{-7,-8},{7,8}},
+        rotation=90,
+        origin={-16,13})));
+public
+  ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer        simpleNLayerCeiling(
+    final A=A,
+    T_start=fill((T0), (wallTypeCeiling.n)),
+    wallRec=wallTypeCeiling) if not Reduced annotation (Placement(transformation(
+        extent={{7,-8},{-7,8}},
+        rotation=90,
+        origin={-16,-19})));
 protected
     parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -84,7 +111,18 @@ equation
     annotation (Line(points={{54,12},{28,12}}, color={191,0,0}));
   connect(RPipe.port_a, heatTabs)
     annotation (Line(points={{16,12},{0,12},{0,42}}, color={191,0,0}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+  // HOM Connections
+  if not Reduced then
+    connect(simpleNLayerCeiling.port_b, heatCeiling)
+      annotation (Line(points={{-16,-26},{-16,-40},{0,-40}}, color={191,0,0}));
+    connect(simpleNLayerFloor.port_b, heatTabs)
+      annotation (Line(points={{-16,20},{-16,42},{0,42}},  color={191,0,0}));
+    connect(simpleNLayerFloor.port_a, RPipe.port_a)
+      annotation (Line(points={{-16,6},{0,6},{0,12},{16,12}}, color={191,0,0}));
+    connect(simpleNLayerCeiling.port_a, RPipe.port_a) annotation (Line(points={{-16,
+            -12},{-16,6},{0,6},{0,12},{16,12}}, color={191,0,0}));
+  end if;
+   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -40},{100,40}},
         initialScale=0.1),        graphics={
         Rectangle(

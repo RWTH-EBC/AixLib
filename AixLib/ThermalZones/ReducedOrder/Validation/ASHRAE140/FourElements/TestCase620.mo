@@ -75,7 +75,8 @@ model TestCase620 "Test case 620"
     RRoofRem=0.061807839516,
     AWin={0.0,6.0,0.0,6.0},
     ATransparent={0.0,6.0,0.0,6.0},
-    AExt={21.6,10.200000000000003,21.6,10.200000000000003}) "Thermal zone" annotation (Placement(transformation(extent={{44,14},{92,50}})));
+    AExt={21.6,10.200000000000003,21.6,10.200000000000003}) "Thermal zone"
+    annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     wfGro=0,
     withLongwave=true,

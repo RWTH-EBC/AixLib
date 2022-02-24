@@ -1,4 +1,4 @@
-Controlled_UnderfloorHeating
+ControlledTABS
 UnderfloorHeatingSystem
 UnderfloorHeatingRoom
 UnderfloorHeatingCircuit
@@ -6,3 +6,4 @@ UnderfloorHeatingElement
 BaseClasses
 Examples
 Reduced
+ControlledTABS2

@@ -150,7 +150,7 @@ equation
     annotation (Line(points={{6.5,-116},{-4,-116},{-4,-116}},
     color={0,0,127}));
   connect(convFloor.fluid, senTAir.port)
-    annotation (Line(points={{-12,-108},{-12,-40},{66,-40},{66,0},{80,0}},
+    annotation (Line(points={{-12,-108},{-12,-40},{66,-40},{66,0},{82,0}},
     color={191,0,0}));
   connect(floorRC.port_a, floorIndoorSurface)
     annotation (Line(points={{-10.9091,-136},{-10.9091,-136},{-10.9091,-132},{

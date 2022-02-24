@@ -96,9 +96,9 @@ model OneRoomSimple_comparison
     d_out={0.017},
     wallTypeFloor={
         testtabs.SimpleBuildingtesttabs.SimpleBuildingtesttabs_DataBase.SimpleBuildingtesttabs_tz_2_upperTABS()},
-
     Controlled=false)
     annotation (Placement(transformation(extent={{282,-16},{332,24}})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor2(G=area*
         10.8)
     annotation (Placement(transformation(extent={{326,32},{306,52}})));
@@ -118,9 +118,9 @@ model OneRoomSimple_comparison
     d_out={0.017},
     wallTypeFloor={
         testtabs.SimpleBuildingtesttabs.SimpleBuildingtesttabs_DataBase.SimpleBuildingtesttabs_tz_2_upperTABS()},
-
     Controlled=true)
     annotation (Placement(transformation(extent={{376,-76},{426,-36}})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor3(G=area*
         10.8)
     annotation (Placement(transformation(extent={{420,-28},{400,-8}})));

@@ -33,13 +33,6 @@ model TwoElements
     final T_start=T_start) if AInt > 0 "RC-element for interior walls"
     annotation (Placement(transformation(extent={{182,-50},{202,-28}})));
 
-  BaseClasses.InteriorTabs intTabsRC(
-    final n=nTabs,
-    final RInt=RTabs,
-    final CInt=CTabs,
-    final T_start=T_start,
-    final ConcreteCore=ConcreteCore) if not ExtTabs and WithTabs "RC-element for interior walls"
-    annotation (Placement(transformation(extent={{210,-156},{230,-134}})));
 protected
   Modelica.Thermal.HeatTransfer.Components.Convection convIntWall(dT(start=0)) if
                                                                      AInt > 0
@@ -117,25 +110,9 @@ equation
     annotation (Line(points={{182,-40},{168,-40},{168,-82},{-120,-82},{-120,-180}},
     color={191,0,0}));
   connect(convIntWall.fluid, senTAir.port)
-    annotation (Line(points={{128,-40},{68,-40},{68,0},{80,0}},
+    annotation (Line(points={{128,-40},{68,-40},{68,0},{82,0}},
     color={191,0,0}));
-  connect(intTabsRC.port_a, intWallRC.port_a) annotation (Line(points={{210,-146},
-          {178,-146},{178,-40},{182,-40}}, color={191,0,0}));
-  if WithTabs and not ExtTabs then
-    if ConcreteCore then
-      connect(tabs,intTabsRC.port_CC)  annotation (Line(points={{-240,-180},{-240,
-              -162},{220,-162},{220,-155.8}},
-                                    color={191,0,0}, pattern=LinePattern.Dash));
-    else
-      connect(tabs,intTabsRC.port_a)  annotation (Line(points={{-240,-180},{-240,
-              -162},{198,-162},{198,-146},{210,-146}},
-                                             color={191,0,0}, pattern=LinePattern.Dash));
-    end if;
-  end if;
 
-  if WithTabs then
-  else
-  end if;
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}}), graphics={
   Polygon(
@@ -150,21 +127,7 @@ equation
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
-    textString="Interior Walls"),
-  Polygon(
-    points={{202,-128},{236,-128},{236,-176},{202,-176},{202,-128}},
-    lineColor={0,0,255},
-    smooth=Smooth.None,
-    fillColor={215,215,215},
-    fillPattern=FillPattern.Solid),
-  Text(
-    extent={{192,-158},{258,-182}},
-    lineColor={0,0,255},
-    fillColor={215,215,215},
-    fillPattern=FillPattern.Solid,
-          textString="Int
-TABS
-")}),                               Documentation(revisions="<html>
+    textString="Interior Walls")}), Documentation(revisions="<html>
   <ul>
   <li>
   July 11, 2019, by Katharina Brinkmann:<br/>

@@ -12,6 +12,7 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
               "Propylene glycol water, 40% mass fraction")));
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
+  parameter Boolean Reduced=true;
   parameter Integer RoomNo(min=1) "Number of rooms heated with panel heating" annotation (Dialog(group="General"));
   final parameter Integer CircuitNo[RoomNo]=tABSRoom.CircuitNo
     "Number of circuits in a certain room";
@@ -32,12 +33,13 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   final parameter Modelica.SIunits.Length PipeLength[RoomNo] = A ./ Spacing "Pipe Length in every room";
 
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo]=fill(BaseClasses.FloorLayers.Ceiling_Dummy(), RoomNo) "Wall type for ceiling" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
+   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for Ceiling" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
   parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord[RoomNo]  "Pipe layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
 
   final parameter Modelica.SIunits.ThermalResistance R_x[RoomNo] = tABSRoom.R_add;
   final parameter Modelica.SIunits.MassFlowRate m_flow_total=sum(tABSRoom.m_flow_PanelHeating)
     "Total mass flow in the panel heating system";
+  Real m_flow_out = sum(tABSRoom.m_flow_PanelHeating .* valveInput);
   final parameter Modelica.SIunits.HeatFlux q_max=max(tABSRoom.q)
     "highest specific heat flux in system";
   parameter Modelica.SIunits.TemperatureDifference sigma_des(max = 5) = 5  "Temperature Spread for room with highest heat load (max = 5)";
@@ -59,9 +61,12 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
       UnderfloorHeating.BaseClasses.PressureLoss.GetPressureLossOfUFHDistributor(
       V_flow_total/n_Distributors, n_HC)
     "Nominal pressure drop of control equipment";
+  final parameter Modelica.SIunits.PressureDifference dp_total = max(dp_Pipe) + max(dp_Valve) + dp_Distributor;
   final parameter Integer n_Distributors(min = 1) = integer(ceil(sum(CircuitNo)/14)) "Number of Distributors needed in the underfloor heating system";
   final parameter Modelica.SIunits.VolumeFlowRate V_flow_total = m_flow_total / rho_default "Nominal system volume flow rate";
   final parameter Integer n_HC(min=1) = integer(ceil(sum(CircuitNo) / n_Distributors)) "Average number of heating circuits in distributor";
+  final parameter Modelica.SIunits.Volume V_Water = sum(tABSRoom.V_Water);
+
 
   BaseClasses.Distributor distributor(
     redeclare package Medium = Medium,
@@ -89,6 +94,7 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
+    each final Reduced=Reduced,
     final Q_Nf=Q_Nf,
     final A=A,
     final dp_Pipe=dp_Pipe,
@@ -122,11 +128,12 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
     T_start=T_start)
     annotation (Placement(transformation(extent={{34,-8},{50,8}})));
 
-  Modelica.Blocks.Sources.RealExpression m_flowNom(y=m_flow_total)
+  Modelica.Blocks.Sources.RealExpression m_flowNom(y=m_flow_out)
     annotation (Placement(transformation(extent={{-60,-46},{-80,-26}})));
   Modelica.Blocks.Interfaces.RealOutput m_flowNominal
     annotation (Placement(transformation(extent={{-90,-46},{-110,-26}})));
-  Modelica.Blocks.Sources.RealExpression T_FlowNom(y=T_Vdes)
+  Modelica.Blocks.Sources.RealExpression T_FlowNom(y=if T_Vdes > 272.15 then
+        T_Vdes else 278.15)
     annotation (Placement(transformation(extent={{-60,-64},{-80,-44}})));
   Modelica.Blocks.Interfaces.RealOutput T_FlowNominal
     annotation (Placement(transformation(extent={{-90,-64},{-110,-44}})));
@@ -138,6 +145,9 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatTABS[RoomNo]
     annotation (Placement(transformation(extent={{-10,50},{10,70}}),
         iconTransformation(extent={{-10,50},{10,70}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling[RoomNo] if not Reduced
+    annotation (Placement(transformation(extent={{-10,-70},{10,-50}}),
+        iconTransformation(extent={{-10,-70},{10,-50}})));
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -192,11 +202,15 @@ equation
     annotation (Line(points={{-81,-36},{-100,-36}}, color={0,0,127}));
   connect(T_FlowNom.y, T_FlowNominal)
     annotation (Line(points={{-81,-54},{-100,-54}}, color={0,0,127}));
-  connect(tABSRoom.heatTABS, heatTABS)
-    annotation (Line(points={{0,36},{0,60}}, color={191,0,0}));
+  connect(tABSRoom.heatTABS, heatTABS)    annotation (Line(points={{0,36},{0,60}}, color={191,0,0}));
   for m in 1:RoomNo loop
     connect(valveInput[m], tABSRoom[m].valveInput)   annotation (Line(points={{-64,68},{-64,38},{-9.92,38}}, color={0,0,127}));
   end for;
+  // HOM CONNECTIONS
+  if not Reduced then
+      connect(tABSRoom.heatCeiling, heatCeiling)    annotation (Line(points={{0,16},{
+            0,-60}},                                                                         color={191,0,0}));
+  end if;
     annotation (Icon(coordinateSystem(extent={{-100,-60},{100,60}}, initialScale=0.1),
         graphics={
         Rectangle(

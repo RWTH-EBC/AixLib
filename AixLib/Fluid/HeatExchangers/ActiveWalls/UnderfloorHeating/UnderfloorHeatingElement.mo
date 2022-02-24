@@ -8,7 +8,6 @@ model UnderfloorHeatingElement "Pipe Segment of Underfloor Heating System"
    parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics"));
-
   parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
   parameter Modelica.SIunits.Length PipeLength "Length of pipe";
 
@@ -139,21 +138,22 @@ equation
         pattern=LinePattern.Dash));
       end for;
 
-  connect(simpleNLayerFloor.port_b, heatFloor) annotation (Line(points={{1.33227e-15,
-          34},{0,34},{0,42}}, color={191,0,0}));
-  connect(simpleNLayerCeiling.port_b, heatCeiling) annotation (Line(points={{-1.33227e-15,
-          -20},{0,-20},{0,-40}}, color={191,0,0}));
-
   connect(heatConvPipeInside.port_b, vol.heatPort)
     annotation (Line(points={{44,12},{54,12}}, color={191,0,0}));
   connect(heatConvPipeInside.port_a, heatCondaPipe[1].port_a) annotation (Line(
         points={{36,12},{34,12},{34,9.28},{23,9.28}},color={191,0,0}));
   connect(thermalResistor.port_b, heatCondaPipe[n_pipe].port_b) annotation (Line(
         points={{14,14},{18,14},{18,15.16},{23,15.16}}, color={191,0,0}));
-  connect(thermalResistor.port_a, simpleNLayerFloor.port_a)
-    annotation (Line(points={{6,14},{0,14},{0,20}}, color={191,0,0}));
-  connect(thermalResistor.port_a, simpleNLayerCeiling.port_a)
-    annotation (Line(points={{6,14},{0,14},{0,-6}}, color={191,0,0}));
+
+    connect(thermalResistor.port_a, simpleNLayerFloor.port_a)    annotation (Line(points={{6,14},{
+            4.44089e-16,14},{4.44089e-16,20}},                                                                   color={191,0,0}));
+    connect(thermalResistor.port_a, simpleNLayerCeiling.port_a)    annotation (Line(points={{6,14},{-4.44089e-16,14},{-4.44089e-16,-6}},
+                                                    color={191,0,0}));
+    connect(simpleNLayerFloor.port_b, heatFloor) annotation (Line(points={{1.33227e-15,
+            34},{0,34},{0,42}},
+                              color={191,0,0}));
+    connect(simpleNLayerCeiling.port_b, heatCeiling) annotation (Line(points={{-1.33227e-15,
+          -20},{0,-20},{0,-40}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -40},{100,40}},
         initialScale=0.1),        graphics={

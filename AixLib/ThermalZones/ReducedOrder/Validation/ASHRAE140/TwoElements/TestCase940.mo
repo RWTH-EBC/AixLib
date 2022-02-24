@@ -418,8 +418,8 @@ equation
           -117.2,57.6}}, color={0,0,127}));
   connect(numRad.y, division.u2) annotation (Line(points={{-121.4,42},{-117.2,42},
           {-117.2,50.4}}, color={0,0,127}));
-  connect(division.y, weaDat.HInfHor_in) annotation (Line(points={{-103.4,54},{-100,
-          54},{-100,62},{-104,62},{-104,68.5},{-99,68.5}}, color={0,0,127}));
+  connect(division.y, weaDat.HInfHor_in) annotation (Line(points={{-103.4,54},{
+          -100,54},{-100,62},{-104,62},{-104,70},{-99,70}},color={0,0,127}));
   connect(souRad.y[1], weaDat.HDirNor_in) annotation (Line(points={{-115,14},{-106,
           14},{-94,14},{-94,64},{-102,64},{-102,67},{-99,67}}, color={0,0,127}));
   connect(souRad.y[2], weaDat.HGloHor_in) annotation (Line(points={{-115,14},{-94,

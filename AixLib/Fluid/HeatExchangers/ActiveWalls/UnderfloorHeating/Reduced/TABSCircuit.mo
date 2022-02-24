@@ -5,6 +5,9 @@ model TABSCircuit "One Circuit in an Underfloor Heating System"
   import Modelica.Constants.pi;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
+  parameter Boolean Reduced=true;
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
   parameter Integer dis(min=1) "Number of Discreatisation Layers";
   parameter Integer calculateVol annotation (Dialog(group="Panel Heating",
         descriptionLabel=true), choices(
@@ -29,6 +32,7 @@ model TABSCircuit "One Circuit in an Underfloor Heating System"
     "Length of Panel Heating Pipe" annotation (Dialog(group="Panel Heating"));
 
   parameter Integer use_vmax(min = 1, max = 2) "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
+  final parameter Modelica.SIunits.Volume V_Water = sum(TABSElement.V_Water);
 
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
@@ -59,6 +63,10 @@ public
     each final R_Pipe=R_Pipe*dis,
     each final d_i = d_i,
     each final dis=integer(dis),
+    each final A=A/dis,
+    each final Reduced=Reduced,
+    each final wallTypeFloor=wallTypeFloor,
+    each final wallTypeCeiling=wallTypeCeiling,
     each final T0=T_Room,
     each m_flow_Circuit=m_flow_Circuit,
     each use_vmax=use_vmax,
@@ -93,6 +101,12 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,24})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector
+    thermalCollectorCeiling(m=dis) if not Reduced
+    annotation (Placement(transformation(extent={{-10,-32},{10,-12}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling if not Reduced annotation (
+      Placement(transformation(extent={{-10,-54},{10,-34}}), iconTransformation(
+          extent={{-6,-50},{10,-34}})));
 initial equation
 assert(dp_Pipe + dp_Valve <= 25000, "According to prEN1264 pressure drop in a heating circuit is supposed to be under 250 mbar. Error accuring in" + getInstanceName(), AssertionLevel.warning);
 
@@ -136,7 +150,15 @@ equation
       points={{0,14},{0,4.2}},
       color={191,0,0},
       smooth=Smooth.Bezier));
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false,
+
+  // HOM CONNECTIONS
+  if not Reduced then
+    connect(thermalCollectorCeiling.port_b,heatCeiling)  annotation (Line(points={{0,-32},
+          {0,-44}},                               color={191,0,0}));
+    connect(thermalCollectorCeiling.port_a,TABSElement.heatCeiling)  annotation (Line(points={{0,-12},
+            {0,-4}},                          color={191,0,0}));
+  end if;
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false,
         extent={{-100,-40},{100,40}},
         initialScale=0.1), graphics={
         Rectangle(

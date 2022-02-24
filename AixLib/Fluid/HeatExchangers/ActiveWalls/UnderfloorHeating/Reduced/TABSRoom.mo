@@ -11,7 +11,7 @@ model TABSRoom
     "number of circuits in one room";
   parameter Modelica.SIunits.Area A "Floor Area"
     annotation (Dialog(group="Room Specifications"));
-
+  parameter Boolean Reduced=true;
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
   parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord  "Pipe layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
@@ -86,7 +86,7 @@ model TABSRoom
     "Temperature spread for room (max = 5 for room with highest heat load)"
     annotation (Dialog(group="Room Specifications"));
 
-  final parameter Modelica.SIunits.MassFlowRate m_flow_PanelHeating= A*q/(sigma_i*Cp_Medium)*(1 + (R_O/R_U) + (T_Room - T_U)/(q*R_U))
+  final parameter Modelica.SIunits.MassFlowRate m_flow_PanelHeating= abs(A*q/(sigma_i*Cp_Medium)*(1 + (R_O/R_U) + (T_Room - T_U)/(q*R_U)))
     "nominal mass flow rate";
   final parameter Modelica.SIunits.MassFlowRate m_flow_Circuit=m_flow_PanelHeating/CircuitNo
     "Nominal mass flow rate in each heating circuit";
@@ -96,6 +96,8 @@ model TABSRoom
   final parameter Modelica.SIunits.TemperatureDifference dT_HU = UnderfloorHeating.BaseClasses.logDT({T_Flow,T_Return,T_U});
   final parameter Modelica.SIunits.ThermalResistance R_add = 1/(K_H*(1 + R_O/R_U*dT_Hi/dT_HU)*A + A*(T_Room-T_U)/(R_U*dT_HU)) - 1/(A/R_O + A/R_U*dT_Hi/dT_HU) - R_pipe - 1/(2200 * pi*d_i*PipeLength) "additional thermal resistance";
   final parameter Modelica.SIunits.ThermalResistance R_pipe = EN_1264.R_pipe/PipeLength "thermal resistance through pipe layers";
+  final parameter Modelica.SIunits.Volume V_Water = sum(tABSCircuit.V_Water);
+
 
   TABSCircuit tABSCircuit[CircuitNo](
     redeclare each final package Medium = Medium,
@@ -107,6 +109,9 @@ model TABSRoom
     each final C_start=C_start,
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
+    each final Reduced=Reduced,
+    each final wallTypeFloor=wallTypeFloor,
+    each final wallTypeCeiling=wallTypeCeiling,
     each final dp_Pipe=dp_Pipe,
     each final dp_Valve=dp_Valve,
     each final dpFixed_nominal=dpFixed_nominal,
@@ -145,6 +150,12 @@ model TABSRoom
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,32})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling(m=
+        CircuitNo) if not Reduced
+    annotation (Placement(transformation(extent={{-10,-58},{10,-38}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCeiling if not Reduced annotation (
+      Placement(transformation(extent={{-10,-90},{10,-70}}), iconTransformation(
+          extent={{-10,-90},{10,-70}})));
 protected
    parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
@@ -192,7 +203,14 @@ equation
       points={{0,22},{0,7.6},{0,7.6}},
       color={191,0,0},
       smooth=Smooth.Bezier));
-  annotation (
+  // HOM CONNECTIONS
+  if not Reduced then
+    connect(thermalCollectorCeiling.port_b,heatCeiling)    annotation (Line(points={{0,-58},
+            {0,-80}},                                                                                 color={191,0,0}));
+    connect(thermalCollectorCeiling.port_a, tABSCircuit.heatCeiling)    annotation (Line(points={{0,-38},
+            {0.44,-38},{0.44,-8.4}},                                                                               color={191,0,0}));
+  end if;
+   annotation (
     Dialog(group="Panel Heating", enable=withSheathing),
     choicesAllMatching=true,
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,60}}),
