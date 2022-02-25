@@ -61,4 +61,4 @@ def convert_dat_to_txt(path, year):
 
 
 if __name__ == '__main__':
-    convert_dat_to_txt("TRY2010_12_Jahr.dat", 2010)
+    convert_dat_to_txt("TRY2015_524042130202_Jahr.dat", 2012)
