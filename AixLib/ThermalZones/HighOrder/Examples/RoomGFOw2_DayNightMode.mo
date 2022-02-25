@@ -23,7 +23,8 @@ model RoomGFOw2_DayNightMode
     TWalls_start=290.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002 Type_Win,
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=3,                                withDoor1 = false, withDoor2 = false, withWindow1 = true, solar_absorptance_OW = 0.6, room_length = 5.87, room_width = 3.84, room_height = 2.6, windowarea_OW1 = 8.4, withWindow2 = true, windowarea_OW2 = 1.73,
     T0_air=294.15)                                                                                                                                                                                                        annotation(Placement(transformation(extent = {{16, 8}, {52, 44}})));
@@ -105,7 +106,14 @@ model RoomGFOw2_DayNightMode
     yMax=1,
     yMin=0,
     initType=Modelica.Blocks.Types.InitPID.SteadyState) annotation (Placement(transformation(extent={{0,-8},{10,-18}})));
-  Utilities.Math.MovingAverage movingAverageTemp(aveTime=1800) "Slows down the measurement of the room temperature" annotation (Placement(transformation(extent={{14,-4},{8,0}})));
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(
+    final k=1,
+    final T=600,
+    final initType=Modelica.Blocks.Types.Init.InitialOutput,
+    final y_start=21 + 273.15) annotation (Placement(transformation(
+        extent={{-4,4},{4,-4}},
+        rotation=180,
+        origin={12,-2})));
 equation
   connect(varTemp.port, room_GF_2OW.thermOutside) annotation(Line(points={{-12,48},{16,48},{16,43.64}},           color = {191, 0, 0}));
   connect(res.port_b, heatValve_new.port_a)
@@ -117,8 +125,10 @@ equation
                                                                                                                           color = {0, 0, 127}));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[1], room_GF_2OW.SolarRadiationPort_OW2) annotation(Line(points = {{-90.88, 76.7}, {-90.88, 70}, {0, 70}, {0, 84}, {43.09, 84}, {43.09, 43.82}}, color = {255, 128, 0}));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[2], room_GF_2OW.SolarRadiationPort_OW1) annotation(Line(points = {{-90.88, 76.7}, {-90.88, 70}, {0, 70}, {0, 31.4}, {16.09, 31.4}}, color = {255, 128, 0}));
-  connect(combinedWeather.WindSpeed, room_GF_2OW.WindSpeedPort) annotation(Line(points={{-60.7333,98.8},{-4,98.8},{-4,18.8},{16.09,18.8}},        color = {0, 0, 127}));
-  connect(combinedWeather.AirTemp, varTemp.T) annotation(Line(points={{-60.7333,94.9},{-40,94.9},{-40,48},{-34,48}},                            color = {0, 0, 127}));
+  connect(combinedWeather.WindSpeed, room_GF_2OW.WindSpeedPort) annotation(Line(points={{
+          -60.7333,98.8},{-4,98.8},{-4,18.8},{16.09,18.8}},                                                                                       color = {0, 0, 127}));
+  connect(combinedWeather.AirTemp, varTemp.T) annotation(Line(points={{-60.7333,
+          94.9},{-40,94.9},{-40,48},{-34,48}},                                                                                                  color = {0, 0, 127}));
   connect(Pump.port_a, res2.port_b) annotation (Line(points={{-74,-26},{-80,-26},{-80,-68},{-10,-68}},
                                color={0,127,255}));
   connect(nightMode.SwitchToNightMode,Pump. IsNight) annotation(Line(points={{-67.15,10.3},{-64,10.3},{-64,-15.8}},        color = {255, 0, 255}));
@@ -149,8 +159,10 @@ equation
   connect(heatFlowSenRad.Q_flow, Q_flowToRoomRad) annotation (Line(points={{74,-2},{90,-2},{90,10},{110,10}}, color={0,0,127}));
   connect(controlPIThermostat.y, heatValve_new.y) annotation (Line(points={{10.5,-13},{20,-13},{20,-10},{32,-10},{32,-14}}, color={0,0,127}));
   connect(Tset.y, controlPIThermostat.u_s) annotation (Line(points={{-7.5,-1},{-4,-1},{-4,-13},{-1,-13}},color={0,0,127}));
-  connect(temperatureSensor.T, movingAverageTemp.u) annotation (Line(points={{23,-2},{14.6,-2}}, color={0,0,127}));
-  connect(movingAverageTemp.y, controlPIThermostat.u_m) annotation (Line(points={{7.7,-2},{5,-2},{5,-7}}, color={0,0,127}));
+  connect(temperatureSensor.T, firstOrder.u)
+    annotation (Line(points={{23,-2},{16.8,-2}}, color={0,0,127}));
+  connect(firstOrder.y, controlPIThermostat.u_m)
+    annotation (Line(points={{7.6,-2},{5,-2},{5,-7}}, color={0,0,127}));
   annotation(experiment(StopTime = 86400, Interval = 60, Tolerance=1e-6, Algorithm = "Dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/RoomGFOw2_DayNightMode.mos"
                       "Simulate and plot"),

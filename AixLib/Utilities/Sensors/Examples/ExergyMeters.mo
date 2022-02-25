@@ -395,7 +395,8 @@ equation
           0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=7200, Interval=10),
+    experiment(Tolerance=1e-6, StopTime=7200, Interval=10),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Sensors/Examples/ExergyMeters.mos" "Simulate and plot"),
     Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
