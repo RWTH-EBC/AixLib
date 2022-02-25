@@ -178,7 +178,8 @@ partial model PartialMultizone "Partial model for multizone models"
     extent={{80,-100},{100,-80}})));
   Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[numZones,3](final
       quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
-    "Power for cooling" annotation (Placement(transformation(extent={{100,-90},{
+    "Heat flow based on internal gains for each zone from persons, machines, and light"
+                        annotation (Placement(transformation(extent={{100,-90},{
             120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero

@@ -312,7 +312,9 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Calculates diffuse solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
   Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[3](each final quantity="HeatFlowRate",
-      each final unit="W") if ATot > 0 "Power for cooling" annotation (
+      each final unit="W") if ATot > 0
+    "Heat flow based on internal gains from persons, machines, and light"
+                                                           annotation (
       Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
   // protected: ThermalZone
