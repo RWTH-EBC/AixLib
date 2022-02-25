@@ -1,7 +1,7 @@
 within ;
 package AixLib
   annotation (
-  uses(
+  uses( 
     Modelica(version="3.2.3"), 
     Modelica_Synchronous(version="0.92.2"),
     NcDataReader2(version="2.5.0"),
