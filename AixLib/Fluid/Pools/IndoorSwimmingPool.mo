@@ -11,6 +11,15 @@ model IndoorSwimmingPool
   //  eta_const = 0.00079722,
   //  lambda_const = 0.61439)
 
+    // Assumptions
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
+    "Type of mass balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+
+
   // Water transfer coefficients according to VDI 2089 Blatt 1
   parameter Real beta_nonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));
   parameter Real beta_cover(unit="m/s")=0.7/3600 "Water transfer coefficient during non opening hours"
@@ -50,6 +59,8 @@ model IndoorSwimmingPool
 
   AixLib.Fluid.MixingVolumes.MixingVolume Storage(
     redeclare package Medium = WaterMedium,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T_start=poolParam.T_pool,
     m_flow_nominal=m_flow,
     V=poolParam.V_storage,
@@ -60,6 +71,8 @@ model IndoorSwimmingPool
     annotation (Placement(transformation(extent={{54,-80},{42,-68}})));
   AixLib.Fluid.MixingVolumes.MixingVolume poolWater(
     redeclare package Medium = WaterMedium,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     T_start=poolParam.T_pool,
     m_flow_nominal=m_flow,
     V=poolParam.V_pool,
@@ -73,7 +86,9 @@ model IndoorSwimmingPool
     m_flow_nominal=m_flow,
     m_flow_small=0.0001,
     dp_nominal(displayUnit="bar") = poolParam.dpHeatExchangerPool,
-    QMax_flow=1000000) if poolParam.use_idealHeatExchanger annotation (
+    QMax_flow=1000000,
+    energyDynamics=energyDynamics) if
+                          poolParam.use_idealHeatExchanger annotation (
       Placement(transformation(
         extent={{7,-10},{-7,10}},
         rotation=270,

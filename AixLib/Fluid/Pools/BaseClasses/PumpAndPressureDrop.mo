@@ -5,6 +5,15 @@ model PumpAndPressureDrop
   replaceable package WaterMedium =
     Modelica.Media.Interfaces.PartialMedium "Medium in the component";
 
+
+      // Assumptions
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
+    "Type of mass balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+
   parameter Modelica.SIunits.Pressure pumpHead( min=0.001) "Nominal pressure difference pump and resistance";
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min= 0.0001);
   parameter Modelica.SIunits.Pressure p_start;
@@ -17,7 +26,8 @@ model PumpAndPressureDrop
     annotation (Placement(transformation(extent={{96,36},{116,56}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow CirculationPump(
     redeclare package Medium = WaterMedium,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     p_start=p_start,
     T_start=T_pool,
     allowFlowReversal=false,
