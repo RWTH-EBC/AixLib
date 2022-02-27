@@ -416,7 +416,9 @@ public
 
 
   AixLib.Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](
-      poolParam=poolParam, redeclare package WaterMedium = MediumWater) if
+      poolParam=poolParam, redeclare package WaterMedium = MediumWater,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics) if
                                use_swimmingPools and  ATot > 0
     annotation (Placement(transformation(extent={{-68,-86},{-52,-72}})));
 

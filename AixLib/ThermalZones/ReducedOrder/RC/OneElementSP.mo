@@ -201,7 +201,7 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
 
   Modelica.Blocks.Math.Sum      sumQLat(final nin=nu) if  use_moisture_balance and
     ATot > 0                                   "Sum of all QLat intakes"
-    annotation (Placement(transformation(extent={{-224,-126},{-212,-114}})));
+    annotation (Placement(transformation(extent={{-214,-126},{-202,-114}})));
   EESchwimmModelica.Obsolete.BaseClassesOld.toH_fg toH_fg(nu=nu) if
                                                   use_moisture_balance and ATot > 0
     "Calculation of specific evaporation enthalpy of the different QLat sources"
@@ -441,7 +441,7 @@ equation
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
           90},{-260,90}}, color={0,0,127}));
   connect(QLat_flow, sumQLat.u) annotation (Line(points={{-250,-144},{-230,-144},
-          {-230,-120},{-225.2,-120}},
+          {-230,-120},{-215.2,-120}},
                           color={0,0,127}));
   connect(divisionMI2MO.y, sumM_flow.u)
     annotation (Line(points={{-185.5,-91},{-177,-91}},   color={0,0,127}));
@@ -457,7 +457,7 @@ equation
   connect(sumM_flow.y, volMoiAir.mWat_flow) annotation (Line(points={{-165.5,
           -91},{-136.49,-91},{-136.49,-8},{-22,-8}},
                                                 color={0,0,127}));
-  connect(sumQLat.y, conQLat_flow.Q_flow) annotation (Line(points={{-211.4,-120},
+  connect(sumQLat.y, conQLat_flow.Q_flow) annotation (Line(points={{-201.4,-120},
           {-192,-120}},                         color={0,0,127}));
   connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-172,
           -120},{-44,-120},{-44,-16},{-20,-16}}, color={191,0,0}));

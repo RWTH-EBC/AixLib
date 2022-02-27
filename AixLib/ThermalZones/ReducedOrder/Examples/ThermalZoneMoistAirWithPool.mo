@@ -148,8 +148,7 @@ model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAirWit
     tableName="OpeningHours",
     columns=2:2,
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Profile_openingHours_pools.txt"))
-                                                                                                                                            "Boundary condition: Opening Hours of swiming pools"
+        "modelica://AixLib/Resources/LowOrder_ExampleData/Profile_openingHours_pools.txt"))                                                 "Boundary condition: Opening Hours of swiming pools"
     annotation (Placement(transformation(extent={{-96,-24},{-80,-8}})));
 equation
   connect(thermalZone_withPools.openingHours, tableOpeningHours.y[1])  annotation (Line(points={{5.2,
