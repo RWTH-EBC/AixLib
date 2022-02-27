@@ -10,7 +10,7 @@ record SportPool "Pool which is mainly used by sport swimmers"
     V_flow_partial=0.023144444444444443,
     use_partialLoad=true,
     use_idealHeatExchanger=true,
-    dpHeatExchangerPool = 300,
+    dpHeatExchangerPool=300,
     beta_inUse=0.011111111111111112,
     use_poolCover=false,
     use_waterRecycling=false,
@@ -31,7 +31,7 @@ record SportPool "Pool which is mainly used by sport swimmers"
     hConWaterHorizontal=50.0,
     hConWaterVertical=5200.0,
     PoolWallParam=
-        AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteIsulationConstruction());
+        AixLib.DataBase.Pools.SwimmingPoolWall.ConcreteInsulationConstruction());
 
   annotation (Documentation(info="<html>
 <p>The swimming pool &quot;SportPool&quot; describes a typical indoor swimming pool, which is mainly used for sport swimming. </p>

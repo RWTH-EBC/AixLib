@@ -1,5 +1,6 @@
 within AixLib.DataBase.Pools.SwimmingPoolWall;
-record ConcreteIsulationConstruction "Concrete pool construction with isolation"
+record ConcreteInsulationConstruction
+  "Concrete pool construction with isolation"
   extends AixLib.DataBase.Walls.WallBaseDataDefinition(
     n(min=1) = 3 "Number of wall layers",
     d={0.05,0.2,0.1} "Thickness of wall layers",
@@ -9,4 +10,4 @@ record ConcreteIsulationConstruction "Concrete pool construction with isolation"
     eps=0.9 "Emissivity of inner wall surface");
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end ConcreteIsulationConstruction;
+end ConcreteInsulationConstruction;
