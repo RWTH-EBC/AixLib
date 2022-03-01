@@ -287,7 +287,7 @@ model CDD "VDI 6007 Test Case 3 model"
         origin={188,-64})));
   Modelica.Blocks.Math.Mean OutCoolingLoad(f=1/3600)
     "Hourly mean of indoor air temperature"
-    annotation (Placement(transformation(extent={{224,-70},{236,-58}})));
+    annotation (Placement(transformation(extent={{222,-70},{234,-58}})));
   Modelica.Blocks.Math.Sum  sum2(nin=2)
     "Conversion to kg/s"
     annotation (Placement(transformation(extent={{164,35},{178,49}})));
@@ -411,7 +411,7 @@ equation
   connect(OutOpTemp.u, multiSum.y) annotation (Line(points={{162.8,62},{133.19,62}},
                                    color={0,0,127}));
   connect(heatFlowSensor.Q_flow, OutCoolingLoad.u) annotation (Line(points={{198,-64},
-          {222.8,-64}},                      color={0,0,127}));
+          {220.8,-64}},                      color={0,0,127}));
   connect(sum2.y, OutAirTemp.u) annotation (Line(points={{178.7,42},{188.8,42}},
                          color={0,0,127}));
   connect(sum2.u[1], ToCelsius.y) annotation (Line(points={{162.6,41.3},{156.4,41.3},
@@ -490,7 +490,7 @@ equation
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
   __Dymola_Commands(file=
-  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/TestCase3.mos"
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/VDI6007_C1/CDD.mos"
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-160,-180},{240,100}})),
     Icon(coordinateSystem(extent={{-160,-180},{240,100}})));

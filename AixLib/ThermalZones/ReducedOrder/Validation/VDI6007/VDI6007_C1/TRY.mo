@@ -152,7 +152,7 @@ model TRY "VDI 6007 Test Case 3 model"
         origin={180,-114})));
   Modelica.Blocks.Math.Mean OutCoolingLoad(f=1/3600)
     "Hourly mean of indoor air temperature"
-    annotation (Placement(transformation(extent={{202,-120},{214,-108}})));
+    annotation (Placement(transformation(extent={{202,-118},{214,-106}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow IluRad1
     "Radiative heat flow persons"
     annotation (Placement(transformation(extent={{-16,-160},{4,-140}})));
@@ -371,7 +371,8 @@ equation
   connect(IluRad1.port, rCTABS.port_heat) annotation (Line(points={{4,-150},{22,
           -150}},                     color={191,0,0}));
   connect(heatFlowSensor.Q_flow, OutCoolingLoad.u) annotation (Line(points={{190,
-          -114},{200.8,-114}},                     color={0,0,127}));
+          -114},{196,-114},{196,-112},{200.8,-112}},
+                                                   color={0,0,127}));
   connect(perRad.port, port_a)
     annotation (Line(points={{74,-90},{152,-90},{152,-14}}, color={191,0,0}));
   connect(SonRad.port, port_a) annotation (Line(points={{74,-108},{152,-108},{
@@ -429,7 +430,7 @@ equation
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
   __Dymola_Commands(file=
-  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/TestCase3.mos"
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/VDI6007_C1/TRY.mos"
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-180,-180},{300,80}}),  graphics={
         Polygon(

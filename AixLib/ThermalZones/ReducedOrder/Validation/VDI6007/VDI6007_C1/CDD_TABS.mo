@@ -475,7 +475,7 @@ equation
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
   __Dymola_Commands(file=
-  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/TestCase3.mos"
+  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/VDI6007_C1/CDD_TABS.mos"
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-160,-200},{200,100}})),
     Icon(coordinateSystem(extent={{-160,-200},{200,100}})));
