@@ -55,7 +55,12 @@ equation
   connect(const4.y, cooler.T_coolingSurf) annotation (Line(points={{-39,-84},{-14.82,
           -84},{-14.82,-71.82}}, color={0,0,127}));
   annotation (experiment(StopTime=14400, __Dymola_NumberOfIntervals=14400),
-      Documentation(info="<html>
-<p>Testing <a href=\"modelica://SimpleAHU.Components.Heater\">SimpleAHU.Components.Heater</a> and <a href=\"SimpleAHU.Components.Cooler\">SimpleAHU.Components.Cooler</a> with set temperature and set humidity (for cooler). </p>
+      Documentation(info="<html><p>
+  Testing <a href=
+  \"modelica://SimpleAHU.Components.Heater\">SimpleAHU.Components.Heater</a>
+  and <a href=
+  \"SimpleAHU.Components.Cooler\">SimpleAHU.Components.Cooler</a> with
+  set temperature and set humidity (for cooler).
+</p>
 </html>"));
 end Test_SetConditionsHeaterCooler;

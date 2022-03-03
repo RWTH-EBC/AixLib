@@ -32,15 +32,32 @@ equation
 
         annotation (
     preferredView="info",
-    Documentation(info="<html>
-<p>This model describes an idealized steam humidifier.The enthalpy of the steam is considered by its temperature. All steam added to the air flow is binded in the air and leads to an increase of the absolute humidity.</p>
-<p>The heat flow is calculated using the specific steam enthalpy and mass flow rate of the steam.</p>
+    Documentation(info="<html><p>
+  This model describes an idealized steam humidifier.The enthalpy of
+  the steam is considered by its temperature. All steam added to the
+  air flow is binded in the air and leads to an increase of the
+  absolute humidity.
+</p>
+<p>
+  The heat flow is calculated using the specific steam enthalpy and
+  mass flow rate of the steam.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>May 2019, by Ervin Lejlic:<br>First implementation.</li>
-<li>May 2019, by Martin Kremer:<br>Changed variable names for naming convention and deleting efficiency.</li>
-<li>June 2019, by Martin Kremer:<br>Fixed bug in calculation of heat flow due to wrong calculation of steam enthalpy. Added assertion for steam temperature.</li>
-<li>April 2020, by Martin Kremer:<br>Changed to extend from partial humidifier.</li>
+  <li>May 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
+  <li>May 2019, by Martin Kremer:<br/>
+    Changed variable names for naming convention and deleting
+    efficiency.
+  </li>
+  <li>June 2019, by Martin Kremer:<br/>
+    Fixed bug in calculation of heat flow due to wrong calculation of
+    steam enthalpy. Added assertion for steam temperature.
+  </li>
+  <li>April 2020, by Martin Kremer:<br/>
+    Changed to extend from partial humidifier.
+  </li>
 </ul>
 </html>"),                  Icon(coordinateSystem(preserveAspectRatio=false),
         graphics={

@@ -78,16 +78,21 @@ equation
   connect(X_in.y, steamHumidifier.X_airIn) annotation (Line(points={{-79,-70},{
           -42,-70},{-42,-18},{-25,-18}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, Interval=1799.99712),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  In this model the massfraction of the model <a href=
+  \"modelica://SimpleAHU.Components.SteamHumidifier\">SimpleAHU.Components.SteamHumidifier</a>
+  is set.
+</p>
 <p>
-In this model the massfraction of the model <a href=\"modelica://SimpleAHU.Components.SteamHumidifier\">
-SimpleAHU.Components.SteamHumidifier</a> is set.</a> 
-<p>The results are then compared to <a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
-AixLib.Fluid.HeatExchangers.PrescribedOutlet</a> (boundary conditions are consistent).
+  The results are then compared to <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
+  (boundary conditions are consistent).
 </p>
 </html>", revisions="<html>
 <ul>
-<li>December, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>December, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=7000),

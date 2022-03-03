@@ -51,17 +51,24 @@ equation
   connect(flapPos.y, recircFlap.flapPosition)
     annotation (Line(points={{19,-10},{-15,-10},{-15,20}}, color={0,0,127}));
   annotation (experiment(StopTime=8000, __Dymola_NumberOfIntervals=7200),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  Simple test of the modell <a href=
+  \"modelica://SimpleAHU.Components.RecircFlap\">SimpleAHU.Components.RecircFlap</a>.
+</p>
 <p>
-Simple test of the modell <a href=\"modelica://SimpleAHU.Components.RecircFlap\">
-SimpleAHU.Components.RecircFlap</a>.
-<p>Flap position, incoming exhaust temperature and massfraction are changed over time.</p></a> 
-<p>The simulation results of temperature and massfraction are then compared with the results in <a href=\"modelica://Modelica.Blocks.Sources.CombiTimeTable\">
-Modelica.Blocks.Sources.CombiTimeTable</a>.
+  Flap position, incoming exhaust temperature and massfraction are
+  changed over time.
+</p>
+<p>
+  The simulation results of temperature and massfraction are then
+  compared with the results in <a href=
+  \"modelica://Modelica.Blocks.Sources.CombiTimeTable\">Modelica.Blocks.Sources.CombiTimeTable</a>.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=7000),

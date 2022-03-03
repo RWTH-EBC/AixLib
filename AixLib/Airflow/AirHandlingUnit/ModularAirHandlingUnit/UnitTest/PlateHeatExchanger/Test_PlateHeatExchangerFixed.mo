@@ -106,17 +106,24 @@ equation
       StopTime=8000,
       __Dymola_NumberOfIntervals=8000,
       __Dymola_Algorithm="Dassl"),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  There are two incoming airflows flowing through <a href=
+  \"modelica://SimpleAHU.Components.PlateHeatExchangerFixedEfficiency\">SimpleAHU.Components.PlateHeatExchangerFixedEfficiency</a>.
+</p>
 <p>
-There are two incoming airflows flowing through <a href=\"modelica://SimpleAHU.Components.PlateHeatExchangerFixedEfficiency\">
-SimpleAHU.Components.PlateHeatExchangerFixedEfficiency</a>.
-<p>The first one has weather Temperature and Massfraction and the second one has constant temperature and Massfraction.</p></a> 
-<p>The results are then compared to <a href=\"modelica://AixLib.Fluid.HeatExchangers.ConstantEffectiveness\">
-AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a> (boundary conditions are consistent).
+  The first one has weather Temperature and Massfraction and the second
+  one has constant temperature and Massfraction.
+</p>
+<p>
+  The results are then compared to <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.ConstantEffectiveness\">AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>
+  (boundary conditions are consistent).
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=31536000),

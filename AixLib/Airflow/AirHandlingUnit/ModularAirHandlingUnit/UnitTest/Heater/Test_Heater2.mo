@@ -70,18 +70,22 @@ equation
   connect(T_set.y, hea.TSet) annotation (Line(points={{-79,10},{-60,10},{-60,76},
           {8,76}}, color={0,0,127}));
   annotation (experiment(StopTime=8000, __Dymola_NumberOfIntervals=7200),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  Simple test for <a href=
+  \"modelica://SimpleAHU.Components.Heater\">SimpleAHU.Components.Heater</a>.
+  The temperature of the outflowing air is beeing controlled while the
+  incoming temperature and massflow change over time.
+</p>
 <p>
-Simple test for 
-<a href=\"modelica://SimpleAHU.Components.Heater\">
-SimpleAHU.Components.Heater</a>.
-The temperature of the outflowing air is beeing controlled while the incoming temperature and massflow change over time.
-<p>The results are then compared to <a href=\"modelica://AixLib.Fluid.HeatExchangers.Heater_T\">
-AixLib.Fluid.HeatExchangers.Heater_T</a> (boundary conditions are consistent).
+  The results are then compared to <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.Heater_T\">AixLib.Fluid.HeatExchangers.Heater_T</a>
+  (boundary conditions are consistent).
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"), Icon(graphics={
         Ellipse(lineColor = {75,138,73},

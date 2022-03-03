@@ -83,13 +83,12 @@ equation
   connect(T_set.y, heater1.T_set) annotation (Line(points={{-79,90},{-56,90},{-56,
           100},{-1,100},{-1,90}},       color={0,0,127}));
    annotation (experiment(StopTime=7200, __Dymola_NumberOfIntervals=7200),
- Documentation(info="<html>
-<p>
-Testing <a href=\"modelica://SimpleAHU.Components.Heater\">
-SimpleAHU.Components.Heater</a> with set temperature and heatport.
-The heatport uses water as heat source which changes its temperature over time.</p>
+ Documentation(info="<html><p>
+  Testing <a href=
+  \"modelica://SimpleAHU.Components.Heater\">SimpleAHU.Components.Heater</a>
+  with set temperature and heatport. The heatport uses water as heat
+  source which changes its temperature over time.
 </p>
-
 </html>"), Icon(graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

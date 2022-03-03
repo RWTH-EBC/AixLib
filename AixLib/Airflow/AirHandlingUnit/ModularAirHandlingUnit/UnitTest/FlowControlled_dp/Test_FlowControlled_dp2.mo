@@ -98,17 +98,23 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
     annotation (experiment(StopTime=31536000, Interval=1800),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  Testing modell <a href=
+  \"modelica://SimpleAHU.Components.FlowControlled_dp\">SimpleAHU.Components.FlowControlled_dp</a>
+  with weather data.
+</p>
 <p>
-Testing modell <a href=\"modelica://SimpleAHU.Components.FlowControlled_dp\">
-SimpleAHU.Components.FlowControlled_dp</a> with weather data.
-<p>Pressure rise and massflowrate are changed over time.</p></a> 
-<p>The simulation results can be compared to <a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_dp\">
-AixLib.Fluid.Movers.FlowControlled_dp</a>.
+  Pressure rise and massflowrate are changed over time.
+</p>
+<p>
+  The simulation results can be compared to <a href=
+  \"modelica://AixLib.Fluid.Movers.FlowControlled_dp\">AixLib.Fluid.Movers.FlowControlled_dp</a>.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=31536000),

@@ -110,17 +110,23 @@ equation
   connect(m_flow.y, speedControlledFan_Nrpm.m_flow_in) annotation (Line(points={
           {-79,-30},{-32,-30},{-32,50},{-21.4,50}}, color={0,0,127}));
  annotation (experiment(StopTime=31536000, Interval=1800),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  Testing modell <a href=
+  \"modelica://SimpleAHU.Components.SpeedControlledFan_Nrpm\">SimpleAHU.Components.SpeedControlledFan_Nrpm</a>
+  with weather data.
+</p>
 <p>
-Testing modell <a href=\"modelica://SimpleAHU.Components.SpeedControlledFan_Nrpm\">
-SimpleAHU.Components.SpeedControlledFan_Nrpm</a> with weather data.
-<p>Rotational speed and massflowrate are changed over time.</p></a> 
-<p>The simulation results can be compared to <a href=\"modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm\">
-AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Rotational speed and massflowrate are changed over time.
+</p>
+<p>
+  The simulation results can be compared to <a href=
+  \"modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm\">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=31536000),

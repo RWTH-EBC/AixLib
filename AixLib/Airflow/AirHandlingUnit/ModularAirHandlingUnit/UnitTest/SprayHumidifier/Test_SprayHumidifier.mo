@@ -83,16 +83,22 @@ equation
       StopTime=8000,
       __Dymola_NumberOfIntervals=8000,
       __Dymola_Algorithm="Dassl"),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  In this model the spray humidifier <a href=
+  \"modelica://SimpleAHU.Components.SprayHumidifier\">SimpleAHU.Components.SprayHumidifier</a>
+  controls the massfraction of outgoing air with <a href=
+  \"modelica://Modelica.Blocks.Continuous.LimPID\">Modelica.Blocks.Continuous.LimPID</a>
+</p>
 <p>
-In this model the spray humidifier <a href=\"modelica://SimpleAHU.Components.SprayHumidifier\">
-SimpleAHU.Components.SprayHumidifier</a> controls the massfraction of outgoing air with <a href=\"modelica://Modelica.Blocks.Continuous.LimPID\">Modelica.Blocks.Continuous.LimPID</a> 
-<p>The results are then compared to <a href=\"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">
-AixLib.Fluid.HeatExchangers.PrescribedOutlet</a> (boundary conditions are consistent).
+  The results are then compared to <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.PrescribedOutlet\">AixLib.Fluid.HeatExchangers.PrescribedOutlet</a>
+  (boundary conditions are consistent).
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=31536000),

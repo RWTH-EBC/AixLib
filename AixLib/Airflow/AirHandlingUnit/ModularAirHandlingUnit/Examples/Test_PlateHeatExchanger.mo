@@ -65,14 +65,14 @@ equation
   connect(const.y, plateHeatExchanger.T_set) annotation (Line(points={{31,0},{
           28,0},{28,20},{60,20},{60,82},{0,82},{0,62}}, color={0,0,127}));
 annotation (experiment(StopTime=3600, __Dymola_NumberOfIntervals=3600),
- Documentation(info="<html>
-<p>
-Testing <a href=\"modelica://SimpleAHU.Components.PlateHeatExchanger\">
-SimpleAHU.Components.PlateHeatExchanger</a> and <a href=\"modelica://SimpleAHU.Components.PlateHeatExchangerFixedEfficiency\">
-SimpleAHU.Components.PlateHeatExchangerFixedEfficiency</a> with changing massflow and temperature for outdoor air and exhaust air.
-
+ Documentation(info="<html><p>
+  Testing <a href=
+  \"modelica://SimpleAHU.Components.PlateHeatExchanger\">SimpleAHU.Components.PlateHeatExchanger</a>
+  and <a href=
+  \"modelica://SimpleAHU.Components.PlateHeatExchangerFixedEfficiency\">SimpleAHU.Components.PlateHeatExchangerFixedEfficiency</a>
+  with changing massflow and temperature for outdoor air and exhaust
+  air.
 </p>
-
 </html>"), Icon(graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

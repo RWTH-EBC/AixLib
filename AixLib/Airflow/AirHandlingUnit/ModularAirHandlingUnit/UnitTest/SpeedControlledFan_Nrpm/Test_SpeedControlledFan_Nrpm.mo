@@ -71,17 +71,22 @@ equation
   connect(n.y, pump.Nrpm) annotation (Line(points={{-79,90},{-54,90},{-54,-28},{
           -14,-28},{-14,-50}}, color={0,0,127}));
    annotation (experiment(StopTime=8000, __Dymola_NumberOfIntervals=7200),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  Simple test of the modell <a href=
+  \"modelica://SimpleAHU.Components.SpeedControlledFan_Nrpm\">SimpleAHU.Components.SpeedControlledFan_Nrpm</a>.
+</p>
 <p>
-Simple test of the modell <a href=\"modelica://SimpleAHU.Components.SpeedControlledFan_Nrpm\">
-SimpleAHU.Components.SpeedControlledFan_Nrpm</a>.
-<p>Rotational speed and massflowrate are changed over time.</p></a> 
-<p>The simulation results can be compared to <a href=\"modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm\">
-AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
+  Rotational speed and massflowrate are changed over time.
+</p>
+<p>
+  The simulation results can be compared to <a href=
+  \"modelica://AixLib.Fluid.Movers.SpeedControlled_Nrpm\">AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=7000),

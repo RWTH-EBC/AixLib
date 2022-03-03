@@ -43,12 +43,12 @@ equation
   connect(m_wat_in.y, sprayHumidifier.m_flow_watIn) annotation (Line(points={{
           -49,-60},{-17.2,-60},{-17.2,-37.4}}, color={0,0,127}));
    annotation (experiment(StopTime=7200, __Dymola_NumberOfIntervals=7200),
- Documentation(info="<html>
-<p>
-Testing <a href=\"modelica://SimpleAHU.Components.SprayHumidifier\">
-SimpleAHU.Components.SprayHumidifier</a> with changing massflow and temperature of incoming air and waterdrops.
+ Documentation(info="<html><p>
+  Testing <a href=
+  \"modelica://SimpleAHU.Components.SprayHumidifier\">SimpleAHU.Components.SprayHumidifier</a>
+  with changing massflow and temperature of incoming air and
+  waterdrops.
 </p>
-
 </html>"), Icon(graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

@@ -134,18 +134,51 @@ equation
 
 annotation (
     preferredView="info",
-    Documentation(info="<html>
-<p>This model describes an idealized model for a recirculation flap. Depending on the flap position the outdoor air is mixed with the exhaust air.</p>
-<p>The flap position can be set by the input parameter <code>flapPosition</code> where 0 means the flap is fully closed and 1 means fully open.</p>
-<p>The mixture of the streams is calculated using the Richmann's mixing rule.</p>
-<p align=\"center\"><i>T<sub>OdaOut</sub>=(m&#775;<sub>OdaIn</sub> &middot; c<sub>p,OdaIn</sub> &middot; T<sub>OdaIn</sub>+ m&#775;<sub>EtaRecirc</sub> &middot; c<sub>p,EtaIn</sub> &middot; T<sub>EtaIn</sub>) &frasl; (m&#775;<sub>OdaIn</sub> &middot; c<sub>p,OdaIn</sub> + m&#775;<sub>EtaRecirc</sub> &middot; c<sub>p,EtaIn</sub>) </i> </p>
-<p align=\"center\"><i>X<sub>OdaOut</sub>=(m&#775;<sub>OdaIn</sub> &middot; X<sub>OdaIn</sub>+ m&#775;<sub>EtaRecirc</sub> &middot; X<sub>EtaIn</sub>) &frasl; (m&#775;<sub>OdaIn</sub> + m&#775;<sub>EtaRecirc</sub>) </i> </p>
-<p>The recirculating mass flow rate of the exhaust air is calculated using a parameter <code>splitFactor</code>. The <code>splitFactor</code> is calculated by the <code>flapPosition</code> depending on the calculation mode. By default the relation between these is linear.</p>
-<p align=\"center\"><i>m&#775;<sub>EtaRecirc</sub>=m&#775;<sub>EtaIn</sub> &middot; splitFactor </i></p>
+    Documentation(info="<html><p>
+  This model describes an idealized model for a recirculation flap.
+  Depending on the flap position the outdoor air is mixed with the
+  exhaust air.
+</p>
+<p>
+  The flap position can be set by the input parameter
+  <code>flapPosition</code> where 0 means the flap is fully closed and
+  1 means fully open.
+</p>
+<p>
+  The mixture of the streams is calculated using the Richmann's mixing
+  rule.
+</p>
+<p style=\"text-align:center;\">
+  <i>T<sub>OdaOut</sub>=(ṁ<sub>OdaIn</sub> · c<sub>p,OdaIn</sub> ·
+  T<sub>OdaIn</sub>+ ṁ<sub>EtaRecirc</sub> · c<sub>p,EtaIn</sub> ·
+  T<sub>EtaIn</sub>) ⁄ (ṁ<sub>OdaIn</sub> · c<sub>p,OdaIn</sub> +
+  ṁ<sub>EtaRecirc</sub> · c<sub>p,EtaIn</sub>)</i>
+</p>
+<p style=\"text-align:center;\">
+  <i>X<sub>OdaOut</sub>=(ṁ<sub>OdaIn</sub> · X<sub>OdaIn</sub>+
+  ṁ<sub>EtaRecirc</sub> · X<sub>EtaIn</sub>) ⁄ (ṁ<sub>OdaIn</sub> +
+  ṁ<sub>EtaRecirc</sub>)</i>
+</p>
+<p>
+  The recirculating mass flow rate of the exhaust air is calculated
+  using a parameter <code>splitFactor</code>. The
+  <code>splitFactor</code> is calculated by the
+  <code>flapPosition</code> depending on the calculation mode. By
+  default the relation between these is linear.
+</p>
+<p style=\"text-align:center;\">
+  <i>ṁ<sub>EtaRecirc</sub>=ṁ<sub>EtaIn</sub> · splitFactor</i>
+</p>
 </html>", revisions="<html>
 <ul>
-<li>May 2019, by Ervin Lejlic:<br>First implementation.</li>
-<li>May 2019, by Martin Kremer:<br>Changing variable names. Adding possibility for other relation between flap position and volume flow through flap than linear.</li>
+  <li>May 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
+  <li>May 2019, by Martin Kremer:<br/>
+    Changing variable names. Adding possibility for other relation
+    between flap position and volume flow through flap than linear.
+  </li>
+</ul>
 </html>"),                  Icon(coordinateSystem(preserveAspectRatio=false),
         graphics={
         Rectangle(

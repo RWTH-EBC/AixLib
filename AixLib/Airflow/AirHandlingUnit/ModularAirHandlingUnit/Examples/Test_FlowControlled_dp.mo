@@ -34,12 +34,13 @@ equation
       points={{-80,90},{-68,90},{-68,60},{-20,60}},
       color={255,204,51},
       thickness=0.5));
- annotation (experiment(StopTime=31536000, Interval=1800),Documentation(info="<html>
+ annotation (experiment(StopTime=31536000, Interval=1800),Documentation(info="<html><p>
+  Testing modell <a href=
+  \"modelica://SimpleAHU.Components.FlowControlled_dp\">SimpleAHU.Components.FlowControlled_dp</a>
+  using weater data.
+</p>
 <p>
-Testing modell <a href=\"modelica://SimpleAHU.Components.FlowControlled_dp\">
-SimpleAHU.Components.FlowControlled_dp</a> using weater data.
-<p>Incoming pressure rise and massflow increase over time.</a>
-</p></a> 
+  Incoming pressure rise and massflow increase over time.
 </p>
 </html>", revisions="<html>
 

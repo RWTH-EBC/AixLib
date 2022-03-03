@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model PlateHeatExchangerFixedEfficiency
 
   parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
@@ -150,32 +150,49 @@ equation
     annotation (Line(points={{0,120},{0,0},{40,0}}, color={255,0,255}));
       annotation (
     preferredView="info",
-    Documentation(info="<html>
-<p>This model describes two streams of moist air where the exit temperature is calculated over a user set parameter.</p>
-<p>If the maximum possible temperature at the outlet overshoots the set temperature for the supply air, it will be reduced to the set temperature for heating case. In summer it will be vice versa.</p>
-    
-<h4>Main equations</h4>
-
-The temperature of the outgoing outdoor air is defined as:
-
-<p align=\"center\"><i>T<sub>airOutOda</sub> = &epsilon; * (T<sub>airInEta</sub> - T<sub>airInOda</sub>) + T<sub>airInOda</sub></i></p>
-
-
-<h4>Implementation</h4>
-<p>This model uses inputs that need to be set by models that extend or instantiate this model. The following inputs need to be assigned: 
+    Documentation(info="<html><p>
+  This model describes two streams of moist air where the exit
+  temperature is calculated over a user set parameter.
+</p>
+<p>
+  If the maximum possible temperature at the outlet overshoots the set
+  temperature for the supply air, it will be reduced to the set
+  temperature for heating case. In summer it will be vice versa.
+</p>
+<h4>
+  Main equations
+</h4>The temperature of the outgoing outdoor air is defined as:
+<p style=\"text-align:center;\">
+  <i>T<sub>airOutOda</sub> = ε * (T<sub>airInEta</sub> -
+  T<sub>airInOda</sub>) + T<sub>airInOda</sub></i>
+</p>
+<h4>
+  Implementation
+</h4>
+<p>
+  This model uses inputs that need to be set by models that extend or
+  instantiate this model. The following inputs need to be assigned:
+</p>
 <ul>
-<li>
-<i>&epsilon;</i>, parameter to calculate exit temperature.
-</li>
+  <li>
+    <i>ε</i>, parameter to calculate exit temperature.
+  </li>
 </ul>
-
-
 </html>", revisions="<html>
 <ul>
-<li>May 2019, by Ervin Lejlic:<br>First implementation.</li>
-<li>May 2019, by Martin Kremer:<br>Changed variable names for naming convention.</li>
-<li>August 2019, by Martin Kremer:<br> Added limitation for temperature at outdoor outlet. </li>
-<li>April 2020, by Martin Kremer:<br>Added efficiency for bypassed HRS. Changed limitation of temperature at outdoor outlet.</li>
+  <li>May 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
+  <li>May 2019, by Martin Kremer:<br/>
+    Changed variable names for naming convention.
+  </li>
+  <li>August 2019, by Martin Kremer:<br/>
+    Added limitation for temperature at outdoor outlet.
+  </li>
+  <li>April 2020, by Martin Kremer:<br/>
+    Added efficiency for bypassed HRS. Changed limitation of
+    temperature at outdoor outlet.
+  </li>
 </ul>
 </html>"),                  Icon(coordinateSystem(preserveAspectRatio=false),
         graphics={

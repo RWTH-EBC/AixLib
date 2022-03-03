@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model PlateHeatExchanger
 
   parameter Modelica.SIunits.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water";
@@ -234,17 +234,39 @@ equation
           50},{-84,68},{-54,68}}, color={0,0,127}));
    annotation (
     preferredView="info",
-    Documentation(info="<html>
-<p>This model describes an idealized plate heat exchanger. The model considers heat convection, thermal conduction and the heat capacity of the steel plates.</p>
-<p>If the maximum possible temperature at the outlet overshoots the set temperature for the supply air, it will be reduced to the set temperature for heating case. In summer it will be vice versa.</p>
-<h4>Main equations</h4>
-<p>The heat flow is described with following equation.: </p>
-<p align=\"center\"><i>Q&#775; = -(m&#775;<sub>airInOda</sub> &middot; h<sub>airInOda</sub> - m&#775;<sub>airOutOda</sub> &middot; h<sub>airOutOda</sub>)= m&#775;<sub>airInEta</sub> &middot; h<sub>airInEta</sub> - m&#775;<sub>airOutEta</sub> &middot; h<sub>airOutEta</sub></i> </p>
+    Documentation(info="<html><p>
+  This model describes an idealized plate heat exchanger. The model
+  considers heat convection, thermal conduction and the heat capacity
+  of the steel plates.
+</p>
+<p>
+  If the maximum possible temperature at the outlet overshoots the set
+  temperature for the supply air, it will be reduced to the set
+  temperature for heating case. In summer it will be vice versa.
+</p>
+<h4>
+  Main equations
+</h4>
+<p>
+  The heat flow is described with following equation.:
+</p>
+<p style=\"text-align:center;\">
+  <i>Q̇ = -(ṁ<sub>airInOda</sub> · h<sub>airInOda</sub> -
+  ṁ<sub>airOutOda</sub> · h<sub>airOutOda</sub>)=
+  ṁ<sub>airInEta</sub> · h<sub>airInEta</sub> - ṁ<sub>airOutEta</sub>
+  · h<sub>airOutEta</sub></i>
+</p>
 </html>", revisions="<html>
 <ul>
-<li>May 2019, by Ervin Lejlic:<br>First implementation.</li>
-<li>May 2019, by Martin Kremer:<br>Changed variable names for naming convention.</li>
-<li>August 2019, by Martin Kremer:<br>Added limitation for temperature at outdoor outlet.</li>
+  <li>May 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
+  <li>May 2019, by Martin Kremer:<br/>
+    Changed variable names for naming convention.
+  </li>
+  <li>August 2019, by Martin Kremer:<br/>
+    Added limitation for temperature at outdoor outlet.
+  </li>
 </ul>
 </html>"),                  Icon(coordinateSystem(preserveAspectRatio=false),
         graphics={
