@@ -44,6 +44,13 @@ model ComparisonOfAHUHumidifying
     annotation (Placement(transformation(extent={{-100,-12},{-80,8}})));
   Modelica.Blocks.Sources.Constant tempAddInRoom(k=2)
     annotation (Placement(transformation(extent={{94,60},{74,80}})));
+  Utilities.Psychrometrics.ToTotalAir toTotAir
+    annotation (Placement(transformation(extent={{-60,-10},{-48,2}})));
+  Utilities.Psychrometrics.Phi_pTX phi
+    annotation (Placement(transformation(extent={{-80,-58},{-68,-46}})));
+protected
+  Modelica.Blocks.Sources.Constant p_atm(k=101325)
+    annotation (Placement(transformation(extent={{-100,-66},{-92,-58}})));
 equation
   connect(desiredT_sup.y,ahu. T_supplyAir) annotation (Line(
       points={{41,22},{34,22},{34,31.7},{18.48,31.7}},
@@ -95,10 +102,19 @@ equation
           -72,34},{-72,-41.4},{-54.875,-41.4}}, color={0,0,127}));
   connect(WaterLoadOutside.y, ahu.X_outdoorAir) annotation (Line(points={{-79,
           -2},{-72,-2},{-72,26.3},{-62.36,26.3}}, color={0,0,127}));
-  connect(WaterLoadOutside.y, modularAHU.X_oda) annotation (Line(points={{-79,
-          -2},{-72,-2},{-72,-45.2},{-54.875,-45.2}}, color={0,0,127}));
   connect(tempAddInRoom.y, addToExtractTemp.u1) annotation (Line(points={{73,70},
           {58,70},{58,59.6},{47.2,59.6}}, color={0,0,127}));
+  connect(WaterLoadOutside.y, toTotAir.XiDry)
+    annotation (Line(points={{-79,-2},{-79,-4},{-60.6,-4}}, color={0,0,127}));
+  connect(toTotAir.XiTotalAir, phi.X_w) annotation (Line(points={{-47.4,-4},{
+          -42,-4},{-42,-28},{-74,-28},{-74,-42},{-84,-42},{-84,-52},{-80.6,-52}},
+        color={0,0,127}));
+  connect(TempOutside.y, phi.T) annotation (Line(points={{-79,34},{-72,34},{-72,
+          -44},{-80.6,-44},{-80.6,-47.2}}, color={0,0,127}));
+  connect(p_atm.y, phi.p) annotation (Line(points={{-91.6,-62},{-84,-62},{-84,
+          -56.8},{-80.6,-56.8}}, color={0,0,127}));
+  connect(phi.phi, modularAHU.phi_oda) annotation (Line(points={{-67.4,-52},{
+          -60,-52},{-60,-45.2},{-54.875,-45.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
         Text(

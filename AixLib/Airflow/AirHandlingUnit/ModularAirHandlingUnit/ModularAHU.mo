@@ -8,10 +8,10 @@ model ModularAHU "model of a modular air handling unit"
   parameter Boolean heatRecovery = false;
   parameter Boolean use_PhiSet = false;
 
-  parameter Modelica.SIunits.Temperature Twat = 373.15
+  parameter Modelica.SIunits.Temperature Twat=373.15
     "water or steam temperature"
     annotation(Dialog(group="Humidifying",enable=humidifying));
-  parameter Modelica.SIunits.Temperature TcooSur = 373.15
+  parameter Modelica.SIunits.Temperature TcooSur=373.15
     "temperature of cooling surface (set to high value if no condensate should 
     be considered)"
     annotation(Dialog(group="Cooling",enable=cooling or dehumidifying));
@@ -48,9 +48,10 @@ model ModularAHU "model of a modular air handling unit"
   Modelica.Blocks.Interfaces.RealInput T_oda(unit="K", start=288.15) "K"
     annotation (Placement(transformation(extent={{-174,26},{-146,54}}),
         iconTransformation(extent={{-168,36},{-160,44}})));
-  Modelica.Blocks.Interfaces.RealInput X_oda(start=0.007)
-    "kg of water/kg of dry air" annotation (Placement(transformation(extent={{-174,
-            -14},{-146,14}}), iconTransformation(extent={{-168,16},{-160,24}})));
+  Modelica.Blocks.Interfaces.RealInput phi_oda(start=0.5)
+    "relative humidity of outdoor air" annotation (Placement(transformation(
+          extent={{-174,-14},{-146,14}}), iconTransformation(extent={{-168,16},
+            {-160,24}})));
   Components.PlateHeatExchangerFixedEfficiency
     plateHeatExchangerFixedEfficiency(
     rho_air=rho,
@@ -249,7 +250,16 @@ protected
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={12,-82})));
+  ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum
+                          relToAbsHum
+    "Converter from relative humidity to absolute humidity"
+    annotation (Placement(transformation(extent={{-136,-8},{-126,2}})));
 equation
+
+  if phi_oda > 1 or phi_oda < 0 then
+    Modelica.Utilities.Streams.print("Warning: The relative humidity of outdoor air is not in the range [0, 1]");
+  end if;
+
   if not cooling and not dehumidifying then
     QCooIntern = 0;
   end if;
@@ -277,15 +287,10 @@ equation
           0,127}));
   connect(T_oda, plateHeatExchangerFixedEfficiency.T_airInOda) annotation (Line(
         points={{-160,40},{-120,40},{-120,17},{-95,17}}, color={0,0,127}));
-  connect(X_oda, plateHeatExchangerFixedEfficiency.X_airInOda) annotation (Line(
-        points={{-160,1.77636e-15},{-120,1.77636e-15},{-120,14},{-95,14}},
-        color={0,0,127}));
   connect(gain.y, passThroughHrs.m_flow_airIn) annotation (Line(points={{-127.4,
           80},{-120,80},{-120,-11},{-95,-11}}, color={0,0,127}));
   connect(T_oda, passThroughHrs.T_airIn) annotation (Line(points={{-160,40},{-120,
           40},{-120,-16},{-95,-16}}, color={0,0,127}));
-  connect(X_oda, passThroughHrs.X_airIn) annotation (Line(points={{-160,0},{-120,
-          0},{-120,-21},{-95,-21}}, color={0,0,127}));
   connect(VflowEta, gain1.u)
     annotation (Line(points={{160,80},{135.2,80}}, color={0,0,127}));
   connect(gain1.y, fanSimple1.m_flow_airIn) annotation (Line(points={{121.4,80},
@@ -458,6 +463,15 @@ equation
   connect(T_supplyAir, controlerCooler.TsupSet) annotation (Line(points={{100,
           -100},{100,-80},{34,-80},{34,-66},{-38,-66},{-38,-69.4}}, color={0,0,
           127}));
+  connect(relToAbsHum.absHum, passThroughHrs.X_airIn) annotation (Line(points={
+          {-125,-3},{-120,-3},{-120,-21},{-95,-21}}, color={0,0,127}));
+  connect(phi_oda, relToAbsHum.relHum)
+    annotation (Line(points={{-160,0},{-137,0},{-137,-0.4}}, color={0,0,127}));
+  connect(relToAbsHum.absHum, plateHeatExchangerFixedEfficiency.X_airInOda)
+    annotation (Line(points={{-125,-3},{-120,-3},{-120,14},{-95,14}}, color={0,
+          0,127}));
+  connect(T_oda, relToAbsHum.TDryBul) annotation (Line(points={{-160,40},{-120,
+          40},{-120,-12},{-142,-12},{-142,-5.8},{-137,-5.8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));

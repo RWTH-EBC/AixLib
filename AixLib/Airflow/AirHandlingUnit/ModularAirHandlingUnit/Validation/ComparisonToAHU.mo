@@ -58,6 +58,13 @@ model ComparisonToAHU
     annotation (Placement(transformation(extent={{60,-60},{48,-48}})));
   Modelica.Blocks.Math.Abs abs1
     annotation (Placement(transformation(extent={{-46,-100},{-66,-80}})));
+  Utilities.Psychrometrics.ToTotalAir toTotAir
+    annotation (Placement(transformation(extent={{-60,-12},{-48,0}})));
+  Utilities.Psychrometrics.Phi_pTX phi
+    annotation (Placement(transformation(extent={{-80,-60},{-68,-48}})));
+protected
+  Modelica.Blocks.Sources.Constant p_atm(k=101325)
+    annotation (Placement(transformation(extent={{-100,-68},{-92,-60}})));
 equation
   connect(desiredT_sup.y,ahu. T_supplyAir) annotation (Line(
       points={{41,22},{34,22},{34,31.7},{18.48,31.7}},
@@ -98,9 +105,6 @@ equation
   connect(tempOutside.y, modularAHU.T_oda) annotation (Line(points={{-79,32},{
           -74,32},{-74,16},{-100,16},{-100,-42},{-78,-42},{-78,-41.4},{-54.875,
           -41.4}}, color={0,0,127}));
-  connect(waterLoadOutside.y, modularAHU.X_oda) annotation (Line(points={{-79,
-          -2},{-72,-2},{-72,-22},{-100,-22},{-100,-45.2},{-54.875,-45.2}},
-        color={0,0,127}));
   connect(Vflow_in.y, modularAHU.VflowEta) annotation (Line(points={{-79,72},{
           -76,72},{-76,50},{-100,50},{-100,-26},{22,-26},{22,-38},{20,-38},{20,
           -37.6},{16.875,-37.6}}, color={0,0,127}));
@@ -121,6 +125,17 @@ equation
           32,-54},{32,-45.2},{16.875,-45.2}}, color={0,0,127}));
   connect(modularAHU.QflowC, abs1.u) annotation (Line(points={{-30.1563,-68.95},
           {-30.1563,-90},{-44,-90}}, color={0,0,127}));
+  connect(waterLoadOutside.y, toTotAir.XiDry) annotation (Line(points={{-79,-2},
+          {-66,-2},{-66,-6},{-60.6,-6}}, color={0,0,127}));
+  connect(phi.phi, modularAHU.phi_oda) annotation (Line(points={{-67.4,-54},{
+          -60,-54},{-60,-45.2},{-54.875,-45.2}}, color={0,0,127}));
+  connect(phi.X_w, toTotAir.XiTotalAir) annotation (Line(points={{-80.6,-54},{
+          -84,-54},{-84,-16},{-40,-16},{-40,-6},{-47.4,-6}}, color={0,0,127}));
+  connect(p_atm.y, phi.p) annotation (Line(points={{-91.6,-64},{-84,-64},{-84,
+          -58.8},{-80.6,-58.8}}, color={0,0,127}));
+  connect(tempOutside.y, phi.T) annotation (Line(points={{-79,32},{-74,32},{-74,
+          30},{-72,30},{-72,16},{-70,16},{-70,-14},{-86,-14},{-86,-40},{-80.6,
+          -40},{-80.6,-49.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
