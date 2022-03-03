@@ -34,12 +34,11 @@ equation
   connect(T_steam.y, steamHumidifier.T_steamIn) annotation (Line(points={{19,
           -70},{-16.5,-70},{-16.5,-20.44}}, color={0,0,127}));
    annotation (experiment(StopTime=3600, __Dymola_NumberOfIntervals=3600),
- Documentation(info="<html>
-<p>
-Testing <a href=\"modelica://SimpleAHU.Components.SteamHumidifier\">
-SimpleAHU.Components.SteamHumidifier</a> with changing massflow and temperature of incoming air and steam.
+ Documentation(info="<html><p>
+  Testing <a href=
+  \"modelica://SimpleAHU.Components.SteamHumidifier\">SimpleAHU.Components.SteamHumidifier</a>
+  with changing massflow and temperature of incoming air and steam.
 </p>
-
 </html>"), Icon(graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

@@ -79,18 +79,22 @@ equation
   connect(X_set_equation.y, preOut.X_wSet)
     annotation (Line(points={{33,10},{4,10},{4,80},{14,80}}, color={0,0,127}));
   annotation (experiment(StopTime=8000, __Dymola_NumberOfIntervals=7200),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  Simple test for <a href=
+  \"modelica://SimpleAHU.Components.Cooler\">SimpleAHU.Components.Cooler</a>.
+  The temperature of the outflowing air is beeing controlled under
+  changing massflow and incoming temperature.
+</p>
 <p>
-Simple test for 
-<a href=\"modelica://SimpleAHU.Components.Cooler\">
-SimpleAHU.Components.Cooler</a>.
-The temperature of the outflowing air is beeing controlled under changing massflow and incoming temperature.
-<p>The results are then compared to <a href=\"modelica://AixLib.Fluid.HeatExchangers.SensibleCooler_T\">
-AixLib.Fluid.HeatExchangers.SensibleCooler_T</a> (boundary conditions are consistent).
+  The results are then compared to <a href=
+  \"modelica://AixLib.Fluid.HeatExchangers.SensibleCooler_T\">AixLib.Fluid.HeatExchangers.SensibleCooler_T</a>
+  (boundary conditions are consistent).
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"), Icon(graphics={
         Ellipse(lineColor = {75,138,73},

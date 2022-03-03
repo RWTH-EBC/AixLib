@@ -91,15 +91,16 @@ equation
   connect(x_pTphi.X[1], plateHeatExchanger.X_airInOda) annotation (Line(points={
           {-63,-42},{-60,-42},{-60,44},{-22,44}}, color={0,0,127}));
   annotation (experiment(StopTime=31536000, Interval=3600),
- Documentation(info="<html>
-<p>
-Testing <a href=\"modelica://SimpleAHU.Components.PlateHeatExchanger\">
-SimpleAHU.Components.PlateHeatExchanger</a> and <a href=\"modelica://SimpleAHU.Components.PlateHeatExchangerFixedEfficiency\">
-SimpleAHU.Components.PlateHeatExchangerFixedEfficiency</a> with weather temperature and massfraction for outdoor air.
-<p>The temperature and massfraction of the exhaust air is constant.</p>
-
+ Documentation(info="<html><p>
+  Testing <a href=
+  \"modelica://SimpleAHU.Components.PlateHeatExchanger\">SimpleAHU.Components.PlateHeatExchanger</a>
+  and <a href=
+  \"modelica://SimpleAHU.Components.PlateHeatExchangerFixedEfficiency\">SimpleAHU.Components.PlateHeatExchangerFixedEfficiency</a>
+  with weather temperature and massfraction for outdoor air.
 </p>
-
+<p>
+  The temperature and massfraction of the exhaust air is constant.
+</p>
 </html>"), Icon(graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
 model PartialHumidifier "partial model of a humidifier"
 
   // parameters
@@ -123,11 +123,16 @@ equation
           {-42,64}}, color={0,0,127}));
         annotation (
     preferredView="info",
-    Documentation(info="<html>    
-<p>This model provides a partial humidifier. All water added to the air flow is binded in the air and leads to an increase of the absolute humidity.</p>
+    Documentation(info="<html><p>
+  This model provides a partial humidifier. All water added to the air
+  flow is binded in the air and leads to an increase of the absolute
+  humidity.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>April 2020, by Martin Kremer:<br>First implementation.</li>
+  <li>April 2020, by Martin Kremer:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),                  Icon(coordinateSystem(preserveAspectRatio=false),
         graphics={

@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SprayHumidifier "Idealized model of a spray humidifier"
   extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
 
@@ -127,27 +127,69 @@ equation
           lineColor={0,0,0},
           lineThickness=0.5)}),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model provides a idealized spray humidifier. The output air humidity is calculated either using the input air humidity and the mass flow rate of water:</P>
-<p align=\"center\"><i>m<sub>air,in</sub>  X<sub>air,in</sub> + m<sub>wat,in</sub> &eta;<sub>B</sub> = m<sub>air,out</sub> X<sub>air,out</sub> </i></p>
-<p>or it is calculated using a set point for the humidity at the outlet if the parameter <i>use_X_set</i> is set to true. 
-<b>Note:</b> If the relative humidity with the givin set-point or mass flow rate of water would exceed saturation the humidification is reduced to reach saturation as maximum.
-Additionally a warning will be thrown.</p>
-<p>The energy balance is formulated using the enthalpy of the air streams and the enthalpy of the water:</p>
-<p align=\"center\"><i>m<sub>air,in</sub> h<sub>air,in</sub> + m<sub>wat,in</sub> h<sub>wat,in</sub> &eta;<sub>B</sub> = m<sub>air,out</sub> h<sub>air,out</sub> </i></p>
-<p>The humidifying degree <i>&eta;<sub>B</sub></i> is calculated using the water to air ratio <i>E</i>:</p>
-<p align=\"center\"><i>&eta;<sub>B</sub> = 1 - exp(-k E) </i></p>
-<p align=\"center\"><i>E = m<sub>wat,in</sub> &frasl; m<sub>air,in</sub> </i></p>
-<p>If the boolean variable <i>simplify_m_wat_flow</i> is set to true, the mass flow rate of the water is not considered for the mass balance. 
-Moreover the enthalpy of the water is neglected for the energy balance.</p>
-<p>The equations are based on [1].
-<h4>References</h4>
-<p>[1]: Baumgarth, Hörner, Reeker (Hrsg.): <i>Handbuch der Klimatechnik</i>, Band 2, 5. Auflage, VDE Verlag GmbH, 2011 (pp.304-306)</p>
+    Documentation(info="<html><p>
+  This model provides a idealized spray humidifier. The output air
+  humidity is calculated either using the input air humidity and the
+  mass flow rate of water:
+</p>
+<p style=\"text-align:center;\">
+  <i>m<sub>air,in</sub> X<sub>air,in</sub> + m<sub>wat,in</sub>
+  η<sub>B</sub> = m<sub>air,out</sub> X<sub>air,out</sub></i>
+</p>
+<p>
+  or it is calculated using a set point for the humidity at the outlet
+  if the parameter <i>use_X_set</i> is set to true. <b>Note:</b> If the
+  relative humidity with the givin set-point or mass flow rate of water
+  would exceed saturation the humidification is reduced to reach
+  saturation as maximum. Additionally a warning will be thrown.
+</p>
+<p>
+  The energy balance is formulated using the enthalpy of the air
+  streams and the enthalpy of the water:
+</p>
+<p style=\"text-align:center;\">
+  <i>m<sub>air,in</sub> h<sub>air,in</sub> + m<sub>wat,in</sub>
+  h<sub>wat,in</sub> η<sub>B</sub> = m<sub>air,out</sub>
+  h<sub>air,out</sub></i>
+</p>
+<p>
+  The humidifying degree <i>η<sub>B</sub></i> is calculated using the
+  water to air ratio <i>E</i>:
+</p>
+<p style=\"text-align:center;\">
+  <i>η<sub>B</sub> = 1 - exp(-k E)</i>
+</p>
+<p style=\"text-align:center;\">
+  <i>E = m<sub>wat,in</sub> ⁄ m<sub>air,in</sub></i>
+</p>
+<p>
+  If the boolean variable <i>simplify_m_wat_flow</i> is set to true,
+  the mass flow rate of the water is not considered for the mass
+  balance. Moreover the enthalpy of the water is neglected for the
+  energy balance.
+</p>
+<p>
+  The equations are based on [1].
+</p>
+<h4>
+  References
+</h4>
+<p>
+  [1]: Baumgarth, Hörner, Reeker (Hrsg.): <i>Handbuch der
+  Klimatechnik</i>, Band 2, 5. Auflage, VDE Verlag GmbH, 2011
+  (pp.304-306)
+</p>
 </html>", revisions="<html>
 <ul>
-<li>April, 2019, by Martin Kremer:<br>First Implementation.</li>
-<li>April 2020, by Martin Kremer:<br>Extended from PartialHumidifier. </li>
-<li>January 2022, by Martin Kremer:<br>Implemented maximum limit for saturation. </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+    First Implementation.
+  </li>
+  <li>April 2020, by Martin Kremer:<br/>
+    Extended from PartialHumidifier.
+  </li>
+  <li>January 2022, by Martin Kremer:<br/>
+    Implemented maximum limit for saturation.
+  </li>
 </ul>
 </html>"));
 end SprayHumidifier;

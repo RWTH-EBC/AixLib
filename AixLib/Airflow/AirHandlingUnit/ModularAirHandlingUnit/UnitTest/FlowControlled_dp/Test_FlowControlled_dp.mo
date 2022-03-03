@@ -68,17 +68,22 @@ equation
   connect(dp.y, fan.dp_in)
     annotation (Line(points={{-79,90},{10,90},{10,42}}, color={0,0,127}));
    annotation (experiment(StopTime=8000, __Dymola_NumberOfIntervals=7200),
-   Documentation(info="<html>
+   Documentation(info="<html><p>
+  Simple test of the modell <a href=
+  \"modelica://SimpleAHU.Components.FlowControlled_dp\">SimpleAHU.Components.FlowControlled_dp</a>.
+</p>
 <p>
-Simple test of the modell <a href=\"modelica://SimpleAHU.Components.FlowControlled_dp\">
-SimpleAHU.Components.FlowControlled_dp</a>.
-<p>Pressure rise and massflowrate are changed over time.</p></a> 
-<p>The simulation results can be compared to <a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_dp\">
-AixLib.Fluid.Movers.FlowControlled_dp</a>.
+  Pressure rise and massflowrate are changed over time.
+</p>
+<p>
+  The simulation results can be compared to <a href=
+  \"modelica://AixLib.Fluid.Movers.FlowControlled_dp\">AixLib.Fluid.Movers.FlowControlled_dp</a>.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>November, 2019, by Ervin Lejlic:<br/>First implementation. </li>
+  <li>November, 2019, by Ervin Lejlic:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=7000),

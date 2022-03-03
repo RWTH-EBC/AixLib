@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model FanSimple "model of a simple fan"
 
   // parameters

@@ -117,12 +117,13 @@ equation
           {-100,-100},{-100,-90},{-88,-90}}, color={0,0,127}));
   connect(max.y, fluidSource.dotm) annotation (Line(points={{-65,-84},{-58,-84},
           {-58,-76.6},{-44,-76.6}}, color={0,0,127}));
- annotation (experiment(StopTime=31536000, Interval=1800),Documentation(info="<html>
+ annotation (experiment(StopTime=31536000, Interval=1800),Documentation(info="<html><p>
+  Testing modell <a href=
+  \"modelica://SimpleAHU.Components.FlowControlled_dp\">SimpleAHU.Components.FlowControlled_dp</a>
+  using weater data.
+</p>
 <p>
-Testing modell <a href=\"modelica://SimpleAHU.Components.FlowControlled_dp\">
-SimpleAHU.Components.FlowControlled_dp</a> using weater data.
-<p>Incoming pressure rise and massflow increase over time.</a>
-</p></a> 
+  Incoming pressure rise and massflow increase over time.
 </p>
 </html>", revisions="<html>
 

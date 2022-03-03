@@ -116,11 +116,19 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="V")}),
-    Documentation(info="<html>
-<p>This model calculates the mixed humidity of two different air flows by weighting with the volume flows. </p>
-<p>The density of the air is assumed to be constant and identical for both input flows. </p>
+    Documentation(info="<html><p>
+  This model calculates the mixed humidity of two different air flows
+  by weighting with the volume flows.
+</p>
+<p>
+  The density of the air is assumed to be constant and identical for
+  both input flows.
+</p>
 <ul>
-<li><i>October 21, 2021&nbsp;</i> by Larissa Kuehn:<br>Model created</li>
+  <li>
+    <i>October 21, 2021&#160;</i> by Larissa Kuehn:<br/>
+    Model created
+  </li>
 </ul>
 </html>"));
 end MixedHumidity;

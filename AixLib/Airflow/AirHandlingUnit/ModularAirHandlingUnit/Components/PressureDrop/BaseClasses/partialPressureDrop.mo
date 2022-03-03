@@ -7,11 +7,15 @@ partial model partialPressureDrop
 
         output Modelica.SIunits.Pressure dp;
 
- annotation (                                  Documentation(info="<html>
-          <p>This is a partial model for calculation of the pressure Drop in components.  </P>
+ annotation (                                  Documentation(info="<html><p>
+  This is a partial model for calculation of the pressure Drop in
+  components.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>September, 2019, by Ervin Lejlic:<br>First Implementation.</li>
+  <li>September, 2019, by Ervin Lejlic:<br/>
+    First Implementation.
+  </li>
 </ul>
 </html>"));
 

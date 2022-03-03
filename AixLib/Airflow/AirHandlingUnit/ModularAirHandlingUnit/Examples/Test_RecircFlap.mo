@@ -44,12 +44,15 @@ equation
           -100},{-72,-100},{-72,-70},{-62,-70}}, color={0,0,127}));
   connect(PID.y, recircFlap.m_flow_airInOda) annotation (Line(points={{-39,-70},
           {-30,-70},{-30,-40},{-48,-40},{-48,-22},{-37,-22}}, color={0,0,127}));
-  annotation (experiment(StopTime=3600, Interval=3600),Documentation(info="<html>
+  annotation (experiment(StopTime=3600, Interval=3600),Documentation(info="<html><p>
+  Testing modell <a href=
+  \"modelica://SimpleAHU.Components.RecircFlap\">SimpleAHU.Components.RecircFlap</a>.
+</p>
 <p>
-Testing modell <a href=\"modelica://SimpleAHU.Components.RecircFlap\">
-SimpleAHU.Components.RecircFlap</a>.
-<p>The incoming outdoor massflow is controlled with <a href=\"modelica://Modelica.Blocks.Continuous.LimPID\">Modelica.Blocks.Continuous.LimPID</a>
-so that the outgoing outdoor massflow equals that of the incoming exhaust air.</p></a> 
+  The incoming outdoor massflow is controlled with <a href=
+  \"modelica://Modelica.Blocks.Continuous.LimPID\">Modelica.Blocks.Continuous.LimPID</a>
+  so that the outgoing outdoor massflow equals that of the incoming
+  exhaust air.
 </p>
 </html>", revisions="<html>
 

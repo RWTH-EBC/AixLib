@@ -33,12 +33,13 @@ equation
           -48,50},{-48,49.8},{-16.38,49.8}}, color={0,0,127}));
   connect(m_flow.y, speedControlledFan_Nrpm.m_flow_in) annotation (Line(points={
           {-79,10},{-70,10},{-70,43},{-16.38,43}}, color={0,0,127}));
-annotation (experiment(StopTime=31536000, Interval=1800),Documentation(info="<html>
+annotation (experiment(StopTime=31536000, Interval=1800),Documentation(info="<html><p>
+  Testing modell <a href=
+  \"modelica://SimpleAHU.Components.SpeedControlledFan_Nrpm\">SimpleAHU.Components.SpeedControlledFan_Nrpm</a>
+  using weater data.
+</p>
 <p>
-Testing modell <a href=\"modelica://SimpleAHU.Components.SpeedControlledFan_Nrpm\">
-SimpleAHU.Components.SpeedControlledFan_Nrpm</a> using weater data.
-<p>Incoming pressure rise and massflow increase over time.</a>
-</p></a> 
+  Incoming pressure rise and massflow increase over time.
 </p>
 </html>", revisions="<html>
 

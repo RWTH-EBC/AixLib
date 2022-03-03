@@ -105,13 +105,12 @@ equation
   connect(X_set.y, cooler1.X_set) annotation (Line(points={{79,90},{70,90},{70,116},
           {24,116},{24,102}},        color={0,0,127}));
    annotation (experiment(StopTime=7200, __Dymola_NumberOfIntervals=7200),
- Documentation(info="<html>
-<p>
-Testing <a href=\"modelica://SimpleAHU.Components.Cooler\">
-SimpleAHU.Components.Cooler</a> with set temperature and heatport.
-The heatport uses water as cooling source which changes its temperature over time.</p>
+ Documentation(info="<html><p>
+  Testing <a href=
+  \"modelica://SimpleAHU.Components.Cooler\">SimpleAHU.Components.Cooler</a>
+  with set temperature and heatport. The heatport uses water as cooling
+  source which changes its temperature over time.
 </p>
-
 </html>"), Icon(graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

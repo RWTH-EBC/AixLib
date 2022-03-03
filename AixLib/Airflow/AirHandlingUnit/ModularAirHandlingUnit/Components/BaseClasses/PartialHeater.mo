@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
 partial model PartialHeater
   "BaseClass for heat exchangers in air handling units"
 
@@ -191,13 +191,24 @@ equation
           lineThickness=1,
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid,
-          textString="%name")}), Documentation(info="<html>
-<p>This partial model provides a idealized heat exchanger. The model considers the convective heat transfer from the heat transfer surface in the air stream. Moreover the heat capacity of the heating surface and the housing of the heat exchanger is considered.</p>
+          textString="%name")}), Documentation(info="<html><p>
+  This partial model provides a idealized heat exchanger. The model
+  considers the convective heat transfer from the heat transfer surface
+  in the air stream. Moreover the heat capacity of the heating surface
+  and the housing of the heat exchanger is considered.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>April, 2019, by Martin Kremer:<br/>First implementation.</li>
-<li>August, 2019, by Martin Kremer:<br/>Added possibility to use set temperature.</li>
-<li>December, 2019, by Martin Kremer:<br/>Removed internal PID. Output temperature is now directly set to set temperature.</li>
-<ul>
+  <li>April, 2019, by Martin Kremer:<br/>
+    First implementation.
+  </li>
+  <li>August, 2019, by Martin Kremer:<br/>
+    Added possibility to use set temperature.
+  </li>
+  <li>December, 2019, by Martin Kremer:<br/>
+    Removed internal PID. Output temperature is now directly set to set
+    temperature.
+  </li>
+</ul>
 </html>"));
 end PartialHeater;
