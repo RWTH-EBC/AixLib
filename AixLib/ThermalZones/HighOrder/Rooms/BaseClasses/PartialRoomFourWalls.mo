@@ -213,7 +213,8 @@ partial model PartialRoomFourWalls
         rotation=90,
         origin={60,-96})));
 protected
-  Utilities.Interfaces.ShortRadSurf shortRadSurf[nWin] annotation (Placement(transformation(extent={{58,-92},
+  Utilities.Interfaces.ShortRadSurf shortRadSurf[nWin] if use_shortWaveRadOut
+                                                       annotation (Placement(transformation(extent={{58,-92},
             {62,-88}}),                                                                                                  iconTransformation(extent={{58,-92},
             {62,-88}})));
 protected
@@ -242,18 +243,18 @@ equation
         points={{-110,56},{-96,56},{-96,-84},{-14,-84},{-14,-74.5},{-14.0833,
           -74.5}}, color={255,128,0}));
   connect(ceiling.SolarRadiationPort, SolarRadiationPort[5]) annotation (Line(
-        points={{-31,82.6},{-31,88},{-94,88},{-94,64},{-110,64}}, color={255,128,
+        points={{-31,82.6},{-31,88},{-94,88},{-94,60},{-110,60}}, color={255,128,
           0}));
   connect(wallWest.SolarRadiationPort, SolarRadiationPort[4]) annotation (Line(
-        points={{-89.5,37.75},{-89.5,38},{-96,38},{-96,60},{-110,60}}, color={
+        points={{-89.5,37.75},{-89.5,38},{-96,38},{-96,58},{-110,58}}, color={
           255,128,0}));
   connect(wallNorth.SolarRadiationPort, SolarRadiationPort[1]) annotation (Line(
-        points={{-9.5,75.5},{82,75.5},{82,-84},{-96,-84},{-96,48},{-110,48}},
+        points={{-9.5,75.5},{82,75.5},{82,-84},{-96,-84},{-96,52},{-110,52}},
         color={255,128,0}));
 
   connect(wallEast.SolarRadiationPort, SolarRadiationPort[2]) annotation (Line(
-        points={{75.5,-11.75},{75.5,-12},{82,-12},{82,-84},{-96,-84},{-96,52},{
-          -110,52}}, color={255,128,0}));
+        points={{75.5,-11.75},{75.5,-12},{82,-12},{82,-84},{-96,-84},{-96,54},{-110,
+          54}},      color={255,128,0}));
 
   connect(thermStar_Demux.portConvRadComb, floor.thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{-42,-56},{-42,-66}},
@@ -274,33 +275,35 @@ equation
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{44,-56},{44,50},{-42,50},{-42,78}},
                      color={191,0,0}));
   // Shortwave radiation
-  if wallEast.withWindow then
+  if (wallEast.withWindow and use_shortWaveRadOut) then
     connect(solarRadInRoom.win_in[sum(usesWindowInt[1:1])], wallEast.shortRadWin) annotation (Line(points={{-51,36},
             {-54,36},{-54,46},{44,46},{44,26.275},{64.25,26.275}},   color={0,0,0}, pattern=LinePattern.Dash));
   end if;
-  if wallSouth.withWindow then
+  if (wallSouth.withWindow and use_shortWaveRadOut) then
     connect(solarRadInRoom.win_in[sum(usesWindowInt[1:2])], wallSouth.shortRadWin) annotation (Line(points={{-51,36},
             {-54,36},{-54,-56},{44,-56},{44,46},{-54,46},{-54,-63.25},{35.2083,
             -63.25}},                                         color={0,0,0}, pattern=LinePattern.Dash));
   end if;
-  if wallWest.withWindow then
+  if (wallWest.withWindow and use_shortWaveRadOut) then
     connect(solarRadInRoom.win_in[sum(usesWindowInt[1:3])], wallWest.shortRadWin) annotation (Line(points={{-51,36},
           {-54,36},{-54,-0.275},{-78.25,-0.275}},                      color={0,0,0}, pattern=LinePattern.Dash));
   end if;
-  if wallNorth.withWindow then
+  if (wallNorth.withWindow and use_shortWaveRadOut) then
     connect(solarRadInRoom.win_in[sum(usesWindowInt[1:4])], wallNorth.shortRadWin) annotation (Line(points={{-51,36},
           {-54,36},{-54,64.25},{32.75,64.25}},           color={0,0,0}, pattern=LinePattern.Dash));
   end if;
   connect(solarRadInRoom.walls[1], wallEast.shortRadWall) annotation (Line(points={{-29,
-          41.25},{44,41.25},{44,-4.775},{64,-4.775}}, color={0,0,0}, pattern=LinePattern.Dash));
+          41.625},{44,41.625},{44,-4.775},{64,-4.775}},
+                                                      color={0,0,0}, pattern=LinePattern.Dash));
   connect(solarRadInRoom.walls[2], wallSouth.shortRadWall) annotation (Line(points={{-29,
-          41.75},{-20,41.75},{-20,38},{46,38},{46,-56},{-5.04167,-56},{-5.04167,
+          41.875},{-20,41.875},{-20,38},{46,38},{46,-56},{-5.04167,-56},{-5.04167,
           -63}},                                                     color={0,0,0}, pattern=LinePattern.Dash));
   connect(solarRadInRoom.walls[3], wallWest.shortRadWall) annotation (Line(points={{-29,
-          42.25},{-20,42.25},{-20,46},{-54,46},{-54,30.775},{-78,30.775}},
+          42.125},{-20,42.125},{-20,46},{-54,46},{-54,30.775},{-78,30.775}},
                                                           color={0,0,0}, pattern=LinePattern.Dash));
   connect(solarRadInRoom.walls[4], wallNorth.shortRadWall) annotation (Line(points={{-29,
-          42.75},{-1.75,42.75},{-1.75,64}}, color={0,0,0}, pattern=LinePattern.Dash));
+          42.375},{-1.75,42.375},{-1.75,64}},
+                                            color={0,0,0}, pattern=LinePattern.Dash));
   connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-29,38},
           {46,38},{46,-56},{-49.9,-56},{-49.9,-66}},                     color={0,0,0}, pattern=LinePattern.Dash));
   connect(solarRadInRoom.ceilings[1], ceiling.shortRadWall) annotation (Line(points={{-29,34},
