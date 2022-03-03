@@ -76,6 +76,7 @@ model RoomTwinHouseN2 "N2"
       final withWindow=false,
       final withDoor=false),
     ceiling(
+      outside=false,
       redeclare DataBase.Walls.EmpiricalValidation.CE_TwinHouses wallPar,
       final ISOrientation=3,
       final withWindow=false,

@@ -25,6 +25,7 @@ model CompareDynamicAndStaticSolarFrac_Case270 "Based on Case270 from validation
     redeclare model CorrSolarGainWin =
         Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_ASHRAE140,
     solar_absorptance_OW=0.1,
+    use_dynamicShortWaveRadMethod=true,
     redeclare Components.Types.CoeffTableSouthWindow coeffTableSolDistrFractions,
     use_shortWaveRadIn=true,
     ceiling(use_shortWaveRadOut=false))
