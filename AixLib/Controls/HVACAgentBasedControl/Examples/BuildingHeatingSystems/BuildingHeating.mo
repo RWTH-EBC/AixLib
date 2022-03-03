@@ -5,17 +5,14 @@ model BuildingHeating
 
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(), redeclare
-      package Medium = Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+                                                                 redeclare package Medium =
+                       Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
             {-34,84}})));
-  Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-138,40},
-            {-124,54}})));
-  Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent={{-138,62},
-            {-124,76}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{22,58},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{22,58},
             {48,84}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow fan(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=2)
@@ -316,17 +313,6 @@ equation
   connect(thermalZone1.intGainsRad, thermalZone1.intGainsConv) annotation (Line(
         points={{48,69.7},{52,69.7},{52,70},{54,70},{54,64.5},{48,64.5}}, color=
          {191,0,0}));
-  connect(thermalZone.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{-61.69,65.93},{-91.845,65.93},{-91.845,69},{-123.3,69}}, color=
-         {0,0,127}));
-  connect(thermalZone1.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{20.31,65.93},{-24,65.93},{-24,86},{-72,86},{-72,69},{-100,69},
-          {-123.3,69}}, color={0,0,127}));
-  connect(infiltrationRate.y, thermalZone.ventRate) annotation (Line(points={{
-          -123.3,47},{-86,47},{-86,56},{-56.1,56},{-56.1,60.08}}, color={0,0,
-          127}));
-  connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
-          {{25.9,60.08},{25.9,56},{-56.1,56},{-56.1,60.08}}, color={0,0,127}));
   connect(thermalZone1.intGains, internalGains.y) annotation (Line(points={{
           45.4,60.08},{45.4,48},{-62,48},{-84,48},{-84,38},{-114,38},{-114,23},
           {-123.3,23}}, color={0,0,127}));
@@ -366,37 +352,89 @@ equation
         preserveAspectRatio=false,
         extent={{-150,-150},{150,150}},
         initialScale=0.1)),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model is a an example to show agent-based control with the provided library for a simple heating system</li>
-<li>The system consists of two thermal zones and two heat sources</li>
-<li>The agents used are two RoomAgents, two HeatProducerAgents, one Broker and one MessageNotification</li>
+  <li>This model is a an example to show agent-based control with the
+  provided library for a simple heating system
+  </li>
+  <li>The system consists of two thermal zones and two heat sources
+  </li>
+  <li>The agents used are two RoomAgents, two HeatProducerAgents, one
+  Broker and one MessageNotification
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The two thermal zones are connected to a weather model, which results in different thermal loads depending on the boundary conditions. Each zone is equipped with a thermostatic valve, which allows to control the temperature in the zones to a limited degree. When the temperature in the zones goes above 20.5 or below 19.5 degC (and the valves are fully closed or opened) the RoomAgents become active and order an increase or decrease in heat supply from the broker. The broker calls for proposals from both heat suplliers. The suppliers use cost functions to determine the cost for the adjustments. The cheaper supplier is selcted by the broker and increases or decreases its heat supply. </p>
-<p>The trading procedure can be followed in the command line window of the dymosim.exe or found in the dslog.txt file after simulation. For one negotiation round it looks as follows. </p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The two thermal zones are connected to a weather model, which results
+  in different thermal loads depending on the boundary conditions. Each
+  zone is equipped with a thermostatic valve, which allows to control
+  the temperature in the zones to a limited degree. When the
+  temperature in the zones goes above 20.5 or below 19.5 degC (and the
+  valves are fully closed or opened) the RoomAgents become active and
+  order an increase or decrease in heat supply from the broker. The
+  broker calls for proposals from both heat suplliers. The suppliers
+  use cost functions to determine the cost for the adjustments. The
+  cheaper supplier is selcted by the broker and increases or decreases
+  its heat supply.
+</p>
+<p>
+  The trading procedure can be followed in the command line window of
+  the dymosim.exe or found in the dslog.txt file after simulation. For
+  one negotiation round it looks as follows.
+</p>
 <ul>
-<li>RoomAgent 10002 requests 25.1956 W of heat from Broker 10003.</li>
-<li>Broker 10003 collected the request of 25.1956 W of heat from Consumer 10002.</li>
-<li>Broker 10003 calls for proposal of 25.1956 W of heat from Producer 30001.</li>
-<li>HeatProducerAgent 30001 proposes adjustment of 25.1956 W for a price of 7.55868.</li>
-<li>Broker 10003 collects proposal of 25.1956 W of heat for the price of 7.55868 from Producer 30001.</li>
-<li>Broker 10003 calls for proposal of 25.1956 W of heat from Producer 30002.</li>
-<li>HeatProducerAgent 30002 proposes adjustment of 25.1956 W for a price of 15.1174.</li>
-<li>Broker 10003 collects proposal of 25.1956 W of heat for the price of 15.1174 from Producer 30002.</li>
-<li>Broker 10003 calculates an average price of 0.3 per W of heat.</li>
-<li>Broker 10003 asks for a confirmation of 25.1956 W of heat for the total price of 7.55868 from Consumer 10002.</li>
-<li>RoomAgent 10002 confirms the request of 25.1956 W of heat for a price of 7.55868.</li>
-<li>25.1956 W of heat were confirmed by consumers at broker 10003. Go on to final requests to producers.</li>
-<li>Broker 10003 accepts the proposal of 30001 and orders 25.1956 W of heat.</li>
-<li>HeatProducerAgent 30001 confirms the adjustment of 25.1956 W of heat. The setpoint is now 2251.37W.</li>
-<li>Broker 10003 rejects the proposal of 30002.</li>
+  <li>RoomAgent 10002 requests 25.1956 W of heat from Broker 10003.
+  </li>
+  <li>Broker 10003 collected the request of 25.1956 W of heat from
+  Consumer 10002.
+  </li>
+  <li>Broker 10003 calls for proposal of 25.1956 W of heat from
+  Producer 30001.
+  </li>
+  <li>HeatProducerAgent 30001 proposes adjustment of 25.1956 W for a
+  price of 7.55868.
+  </li>
+  <li>Broker 10003 collects proposal of 25.1956 W of heat for the price
+  of 7.55868 from Producer 30001.
+  </li>
+  <li>Broker 10003 calls for proposal of 25.1956 W of heat from
+  Producer 30002.
+  </li>
+  <li>HeatProducerAgent 30002 proposes adjustment of 25.1956 W for a
+  price of 15.1174.
+  </li>
+  <li>Broker 10003 collects proposal of 25.1956 W of heat for the price
+  of 15.1174 from Producer 30002.
+  </li>
+  <li>Broker 10003 calculates an average price of 0.3 per W of heat.
+  </li>
+  <li>Broker 10003 asks for a confirmation of 25.1956 W of heat for the
+  total price of 7.55868 from Consumer 10002.
+  </li>
+  <li>RoomAgent 10002 confirms the request of 25.1956 W of heat for a
+  price of 7.55868.
+  </li>
+  <li>25.1956 W of heat were confirmed by consumers at broker 10003. Go
+  on to final requests to producers.
+  </li>
+  <li>Broker 10003 accepts the proposal of 30001 and orders 25.1956 W
+  of heat.
+  </li>
+  <li>HeatProducerAgent 30001 confirms the adjustment of 25.1956 W of
+  heat. The setpoint is now 2251.37W.
+  </li>
+  <li>Broker 10003 rejects the proposal of 30002.
+  </li>
 </ul>
-</html>", revisions="<html>
 <ul>
-<li>July 2017, by Roozbeh Sangi: Documentation and modified</li>
-<li>November 2016, by Felix B&uuml;nning: Developed and implemented</li>
+  <li>July 2017, by Roozbeh Sangi: Documentation and modified
+  </li>
+  <li>November 2016, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>"),
     experiment(StartTime=2.6784e+006, StopTime=3.2832e+006),

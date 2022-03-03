@@ -3,6 +3,8 @@ model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import SI = Modelica.SIunits;
 
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start = TStart);
+
   replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model"
                  annotation (Dialog(group="Medium"),choicesAllMatching = true);
@@ -14,16 +16,27 @@ model BufferStorage
   replaceable package MediumHC2 =
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC2"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
+  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(group = "Nominal condition"));
+  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
+    "Nominal mass flow rate of fluid 2 ports"
+    annotation(Dialog(group = "Nominal condition"));
+
+  parameter Modelica.SIunits.MassFlowRate mHC1_flow_nominal(min=0) if useHeatingCoil1
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil1));
+  parameter Modelica.SIunits.MassFlowRate mHC2_flow_nominal(min=0) if useHeatingCoil2
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil2));
 
   parameter Boolean useHeatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
-  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
+  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-    AixLib.DataBase.Storage.Generic_New_2000l()
-    "Data record for Storage"
+  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
   annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
@@ -48,33 +61,46 @@ model BufferStorage
                                                  annotation(Dialog(enable = useHeatingCoil2,tab="Heating Coils and Rod"));
 
   parameter Modelica.SIunits.Temperature TStartWall=293.15
-    "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
+    "Starting Temperature of wall in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
   parameter Modelica.SIunits.Temperature TStartIns=293.15
-    "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialisation"));
+    "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////Advanced parameters/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+  parameter Integer nLowerPortSupply=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPortSupply/(data.hTank/n) + 0.5,0),1)) "Layer number lower end of supply is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nUpperPortSupply=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPortSupply/(data.hTank/n) + 0.5,0),n)) "Layer number upper end of supply is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nLowerPortDemand=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPortDemand/(data.hTank/n) + 0.5,0),1)) "Layer number lower end of demand is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nUpperPortDemand=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPortDemand/(data.hTank/n) + 0.5,0),n)) "Layer number upper end of demand is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nTS1=integer(AixLib.Utilities.Math.Functions.round(data.hTS1/(data.hTank/n) + 0.5,0)) "Layer number lower temperature sensor is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nTS2=integer(AixLib.Utilities.Math.Functions.round(data.hTS2/(data.hTank/n) + 0.5,0)) "Layer number upper temperature sensor is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+
+  parameter Integer nHC1Up=integer(ceil(data.hHC1Up/(data.hTank/n))) "Layer number upper end of heating coil 1 is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nHC1Low=integer(floor(data.hHC1Low/(data.hTank/n))+1) "Layer number lower end of heating coil 1 is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nHC2Up=integer(ceil(data.hHC2Up/(data.hTank/n))) "Layer number upper end of heating coil 2 is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nHC2Low=integer(floor(data.hHC2Low/(data.hTank/n))+1) "Layer number lower end of heating coil 2 is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
+  parameter Integer nHR=integer(AixLib.Utilities.Math.Functions.round(data.hHR/(data.hTank/n) + 0.5,0)) "Layer number heating rod is connected to"
+    annotation (Dialog(tab="Advanced", group="Connection Layers: !Any modification will overwrite the data record behaviour!", descriptionLabel = true));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////final parameters////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
- final parameter Integer nHC1Up=integer(ceil(data.hHC1Up/(data.hTank/n)));
- final parameter Integer nHC1Low=integer(floor(data.hHC1Low/(data.hTank/n))+1);
  final parameter Integer disHC1 = nHC1Up-nHC1Low+1;
-
- final parameter Integer nHC2Up=integer(ceil(data.hHC2Up/(data.hTank/n)));
- final parameter Integer nHC2Low=integer(floor(data.hHC2Low/(data.hTank/n))+1);
  final parameter Integer disHC2 = nHC2Up-nHC2Low+1;
 
- final parameter Integer nHR=integer(AixLib.Utilities.Math.Functions.round(data.hHR/(data.hTank/n) + 0.5,0));
-
- final parameter Integer nTS1=integer(AixLib.Utilities.Math.Functions.round(data.hTS1/(data.hTank/n) + 0.5,0));
- final parameter Integer nTS2=integer(AixLib.Utilities.Math.Functions.round(data.hTS2/(data.hTank/n) + 0.5,0));
-
- final parameter Integer nLowerPortDemand=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPortDemand/(data.hTank/n) + 0.5,0),1));
- final parameter Integer nUpperPortDemand=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPortDemand/(data.hTank/n) + 0.5,0),n));
  final parameter Boolean inpLowLayDemand=(nLowerPortDemand == 1); //if there is an input at the lowest layer
  final parameter Boolean inpHigLayDemand=(nUpperPortDemand == n);
 
- final parameter Integer nLowerPortSupply=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPortSupply/(data.hTank/n) + 0.5,0),1));
- final parameter Integer nUpperPortSupply=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPortSupply/(data.hTank/n) + 0.5,0),n));
  final parameter Boolean inpLowLaySupply=(nLowerPortSupply == 1); //if there is an input at the lowest layer
  final parameter Boolean inpHigLaySupply=(nUpperPortSupply == n);
 
@@ -113,26 +139,22 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,-80})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package
-              Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(redeclare final package Medium =
                 Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(redeclare final package Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
           rotation=0), iconTransformation(extent={{-36,-112},{-18,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop2(redeclare final package
-      Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop2(redeclare final package Medium =
         Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,92},{36,110}},rotation=0),
@@ -145,11 +167,20 @@ model BufferStorage
             {-14,20}}, rotation=0)));
 
   AixLib.Fluid.MixingVolumes.MixingVolume          layer[n](
+    each final energyDynamics=energyDynamics,
+    each final massDynamics=massDynamics,
+    each final p_start=p_start,
+    each final X_start=X_start,
+    each final C_start=C_start,
+    each final C_nominal=C_nominal,
+    each final mSenFac=mSenFac,
+    each final allowFlowReversal=allowFlowReversal_layers,
+    each final m_flow_small=m_flow_small,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
     final T_start=fill(TStart,n),
     redeclare each final package Medium = Medium,
-    each m_flow_nominal=0.05)
+    each final m_flow_nominal=m1_flow_nominal + m2_flow_nominal)
     "Layer volumes"
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
     replaceable model HeatTransfer =
@@ -205,82 +236,105 @@ model BufferStorage
 ////////////////////////////////////////////////////////////////////////////////////////
 
   AixLib.Fluid.Storage.BaseClasses.StorageCover topCover(
-    lambdaWall=data.lambdaWall,
-    lambdaIns=data.lambdaIns,
-    hConIn=hConIn,
-    hConOut=hConOut,
-    TStartWall=TStartWall,
-    TStartIns=TStartIns,
-    rhoIns=data.rhoIns,
-    cIns=data.cIns,
-    rhoWall=data.rhoWall,
-    cWall=data.cWall,
-    D1=data.dTank,
-    sWall=data.sWall,
-    sIns=data.sIns) annotation (Placement(transformation(
+    final energyDynamics=energyDynamics,
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=TStartWall,
+    final TStartIns=TStartIns,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+                    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={8,56})));
   AixLib.Fluid.Storage.BaseClasses.StorageMantle storageMantle[n](
-    each lambdaWall=data.lambdaWall,
-    each lambdaIns=data.lambdaIns,
-    each TStartWall=TStartWall,
-    each TStartIns=TStartIns,
-    each rhoIns=data.rhoIns,
-    each cIns=data.cIns,
-    each rhoWall=data.rhoWall,
-    each cWall=data.cWall,
-    each height=data.hTank/n,
-    each D1=data.dTank,
-    each sWall=data.sWall,
-    each sIns=data.sIns,
-    each hConIn=hConIn,
-    each hConOut=hConOut) annotation (Placement(transformation(extent={{20,-2},{40,18}})));
+    each final energyDynamics=energyDynamics,
+    each final lambdaWall=data.lambdaWall,
+    each final lambdaIns=data.lambdaIns,
+    each final TStartWall=TStartWall,
+    each final TStartIns=TStartIns,
+    each final rhoIns=data.rhoIns,
+    each final cIns=data.cIns,
+    each final rhoWall=data.rhoWall,
+    each final cWall=data.cWall,
+    each final height=data.hTank/n,
+    each final D1=data.dTank,
+    each final sWall=data.sWall,
+    each final sIns=data.sIns,
+    each final hConIn=hConIn,
+    each final hConOut=hConOut)
+                          annotation (Placement(transformation(extent={{20,-2},{40,18}})));
   AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
-    lambdaWall=data.lambdaWall,
-    lambdaIns=data.lambdaIns,
-    hConIn=hConIn,
-    hConOut=hConOut,
-    TStartWall=TStartWall,
-    TStartIns=TStartIns,
-    rhoIns=data.rhoIns,
-    cIns=data.cIns,
-    rhoWall=data.rhoWall,
-    cWall=data.cWall,
-    D1=data.dTank,
-    sWall=data.sWall,
-    sIns=data.sIns) annotation (Placement(transformation(
+    final energyDynamics=energyDynamics,
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=TStartWall,
+    final TStartIns=TStartIns,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+                    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={6,-44})));
 
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil1(
+    m_flow_small=m_flow_small_HC1,
     disHC=disHC1,
     hConHC=hConHC1,
     redeclare package Medium = MediumHC1,
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
-    allowFlowReversal=true,
-    m_flow_nominal=0.05,
+    allowFlowReversal=allowFlowReversal_HC1,
+    final m_flow_nominal=mHC1_flow_nominal,
     TStart=TStart) if useHeatingCoil1
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-58,29})));
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil2(
+    m_flow_small=m_flow_small_HC2,
     disHC=disHC2,
     lengthHC=data.lengthHC2,
     hConHC=hConHC2,
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
-    allowFlowReversal=true,
-    m_flow_nominal=0.05,
+    allowFlowReversal=allowFlowReversal_HC2,
+    final m_flow_nominal=mHC2_flow_nominal,
     TStart=TStart) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-56,-39})));
 
+  parameter SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil1));
+  parameter SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil2));
+  parameter SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+  parameter Boolean allowFlowReversal_layers=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal. Used only if model has two ports."
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC1=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC2=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
 initial equation
    assert(data.hHC1Up<=data.hTank and data.hHC1Up>=0.0 and
      data.hHC1Low<=data.hTank and data.hHC1Low>=0.0,
@@ -718,59 +772,123 @@ for i in 2:(n-1) loop
           thickness=2)}),
                  Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-80,-100},{80,100}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>December 10, 2013</i> by Kristian Huchtemann:<br/>Added documentation of storage and new heat transfer models.</li>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-<li><i>February 19, 2013 </i>by Sebastian Stinner: <br/>mistake in losses calculation corrected (thickness of &quot;wall&quot; and &quot;insulation&quot; was only considered once but has to be considered twice, additionally the components &quot;wall&quot; and &quot;insulation&quot; were exchanged )<br/>and mistake in bouyancy model &quot;Wetter&quot; corrected (bouyancy flows were flowing in the wrong direction)</li>
+    Documentation(revisions="<html><ul>
+  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
+    - <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a><br/>
+    - Replace MSL pipe by <a href=
+    \"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br/>
+
+    - Add energyDynamics and tidy up with heat transfer models.
+  </li>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Added to AixLib
+  </li>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>December 10, 2013</i> by Kristian Huchtemann:<br/>
+    Added documentation of storage and new heat transfer models.
+  </li>
+  <li>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
+  <li>
+    <i>February 19, 2013</i> by Sebastian Stinner:<br/>
+    mistake in losses calculation corrected (thickness of \"wall\" and
+    \"insulation\" was only considered once but has to be considered
+    twice, additionally the components \"wall\" and \"insulation\" were
+    exchanged )<br/>
+    and mistake in bouyancy model \"Wetter\" corrected (bouyancy flows
+    were flowing in the wrong direction)
+  </li>
 </ul>
 </html>",
-        info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Buffer Storage Model with support for heating rod and two heating coils. </p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>It represents a buffer storage stratified into n layers where 1 represents
-the bottom layer and n represents the top layer. The layers are connected to
-each other allowing heat and fluid transfer.The heat transfer between the layers
-can be selected to model the conductance between the layers or different models
-that additionally represent the buoyancy:</p>
-<p><b>HeatTransferOnlyConduction</b>: Model for heat transfer between buffer
-storage layers. Models conductance of water. An effective heat conductivity is
-therefore calculated. Used in BufferStorage model.</p>
-<p><b>HeatTransferLambdaSimple: </b>Model for heat transfer between buffer
-storage layers. Models conductance of water and additional effective
-conductivity (in case the above layer is colder than the lower layer). Used in
-BufferStorage model.</p>
-<p><b>HeatTransferLambdaEff: </b>Model for heat transfer between buffer storage
-layers. Models conductance of water and buoyancy according to Viskanta et al.,
-1997. An effective heat conductivity is therefore calculated. Used in
-BufferStorage model.</p>
-<p><b>HeatTransferLambdaEffSmooth: </b>Same as HeatTransfer_lambda_eff. In
-addition, the <i>smooth()</i> expression is used for the transition of the
-buoyancy model.</p>
-<p><b>HeatTransferLambdaEffTanh: </b>Same as HeatTransfer_lambda_eff. In
-addition, a tanh function is used for the transition of the buoyancy model
-(VariableTransition model). Attention: the initial value of the FullTransition
-model is 0.5. This may lead to a mixture of the storage at the beginning of the
-simulation.</p>
-<p><b>HeatTransferBuoyancyWetter: </b>Model for heat transfer between buffer
-storage layers. Models buoyancy according to
-Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings library, cf.
-https://simulationresearch.lbl.gov/modelica. No conduction is implemented apart
-from when buoyancy occurs.</p> <p>The geometrical data for the storage is read
-by records in the DataBase package. The model also includes heat losses over the
-storage walls (wall, top and bottom). No pressure losses are included. Thus
-external pressure loss models are required for the use of the model. </p>
-<h4><span style=\"color: #008000\">Sources</span></h4>
+        info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Buffer Storage Model with support for heating rod and two heating
+  coils.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  It represents a buffer storage stratified into n layers where 1
+  represents the bottom layer and n represents the top layer. The
+  layers are connected to each other allowing heat and fluid
+  transfer.The heat transfer between the layers can be selected to
+  model the conductance between the layers or different models that
+  additionally represent the buoyancy:
+</p>
+<p>
+  <b>HeatTransferOnlyConduction</b>: Model for heat transfer between
+  buffer storage layers. Models conductance of water. An effective heat
+  conductivity is therefore calculated. Used in BufferStorage model.
+</p>
+<p>
+  <b>HeatTransferLambdaSimple:</b> Model for heat transfer between
+  buffer storage layers. Models conductance of water and additional
+  effective conductivity (in case the above layer is colder than the
+  lower layer). Used in BufferStorage model.
+</p>
+<p>
+  <b>HeatTransferLambdaEff:</b> Model for heat transfer between buffer
+  storage layers. Models conductance of water and buoyancy according to
+  Viskanta et al., 1997. An effective heat conductivity is therefore
+  calculated. Used in BufferStorage model.
+</p>
+<p>
+  <b>HeatTransferLambdaEffSmooth:</b> Same as HeatTransfer_lambda_eff.
+  In addition, the <i>smooth()</i> expression is used for the
+  transition of the buoyancy model.
+</p>
+<p>
+  <b>HeatTransferLambdaEffTanh:</b> Same as HeatTransfer_lambda_eff. In
+  addition, a tanh function is used for the transition of the buoyancy
+  model (VariableTransition model). Attention: the initial value of the
+  FullTransition model is 0.5. This may lead to a mixture of the
+  storage at the beginning of the simulation.
+</p>
+<p>
+  <b>HeatTransferBuoyancyWetter:</b> Model for heat transfer between
+  buffer storage layers. Models buoyancy according to
+  Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings
+  library, cf. https://simulationresearch.lbl.gov/modelica. No
+  conduction is implemented apart from when buoyancy occurs.
+</p>
+<p>
+  The geometrical data for the storage is read by records in the
+  DataBase package. The model also includes heat losses over the
+  storage walls (wall, top and bottom). No pressure losses are
+  included. Thus external pressure loss models are required for the use
+  of the model.
+</p>
+<h4>
+  <span style=\"color: #008000\">Sources</span>
+</h4>
 <ul>
-<li>R. Viskanta, A. KaraIds: Interferometric observations of the temperature
-structure in water cooled or heated from above. <i>Advances in Water
-Resources,</i> volume 1, 1977, pages 57-69. Bibtex-Key [R.VISKANTA1977]</li>
+  <li>R. Viskanta, A. KaraIds: Interferometric observations of the
+  temperature structure in water cooled or heated from above.
+  <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69.
+  Bibtex-Key [R.VISKANTA1977]
+  </li>
 </ul>
-<h4><span style=\"color: #008000;\">Example Results</span></h4>
-<p><a href=\"AixLib.Fluid.Storage.Examples.BufferStorageCharging\">AixLib.Fluid.Storage.Examples.BufferStorageCharging</a></p>
+<h4>
+  <span style=\"color: #008000;\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Fluid.Storage.Examples.BufferStorageCharging\">AixLib.Fluid.Storage.Examples.BufferStorageCharging</a>
+</p>
 </html>"));
 end BufferStorage;

@@ -57,12 +57,11 @@ model RotaryCompressor
     freqHz=1)
     "Prescribed valve's opening"
     annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
-  Actuators.Valves.SimpleValve simVal(
+  Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simVal(
     redeclare package Medium = Medium,
     m_flow_start=0.025,
     m_flow_small=1e-6,
-    Kvs=1.4) "Model of a simple valve to simulate pressure losses"
-    annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+    Kvs=1.4) "Model of a simple valve to simulate pressure losses" annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Sources.Boundary_pT sink(
     redeclare package Medium = Medium,
     nPorts=1,
@@ -86,22 +85,21 @@ equation
   connect(fixTem.port, rotCom.heatPort)
     annotation (Line(points={{-60,-50},{-20,-50},{-20,-10}}, color={191,0,0}));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a example model to test the simple rotary compressor presented in
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.SimpleCompressors.RotaryCompressors.RotaryCompressor\">
-AixLib.Fluid.Movers.Compressors.SimpleCompressors.RotaryCompressors.RotaryCompressor</a>.
-Therefore, both the compressor's inlet and outlet conditions are prescribed
-in terms of pressure and temperature and the User can select different
-efficiency models using the dialog menu.
+  This is a example model to test the simple rotary compressor
+  presented in <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.SimpleCompressors.RotaryCompressors.RotaryCompressor\">
+  AixLib.Fluid.Movers.Compressors.SimpleCompressors.RotaryCompressors.RotaryCompressor</a>.
+  Therefore, both the compressor's inlet and outlet conditions are
+  prescribed in terms of pressure and temperature and the User can
+  select different efficiency models using the dialog menu.
 </p>
 </html>"),
 experiment(StopTime=1));

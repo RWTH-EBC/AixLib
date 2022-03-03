@@ -6,16 +6,13 @@ model ThrottlePump "Test for unmixed throttle and pump circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.ThrottlePump ThrottlePump(
+    parameterPipe=DataBase.Pipes.Copper.Copper_40x1(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=ThrottlePump.energyDynamics)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     Kv=6.3,
@@ -68,13 +65,8 @@ equation
           {-8,60},{0,60}},             color={0,127,255}));
   connect(ThrottlePump.port_a2, hydRes.port_b)
     annotation (Line(points={{28,40},{28,60},{20,60}},     color={0,127,255}));
-  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,40},
-          {-49.95,40},{-49.95,10.05}},    color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(valveOpening.y, hydraulicBus.valSet) annotation (Line(points={{-79,10},
-          {-64,10},{-64,10.05},{-49.95,10.05}}, color={0,0,127}), Text(
+  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-79,
+          10},{-64,10},{-64,10.05},{-49.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -82,15 +74,25 @@ equation
     annotation (Line(points={{-8,-20},{-8,-40},{-8,-40}}, color={0,127,255}));
   connect(ThrottlePump.port_b2, boundary1.ports[1])
     annotation (Line(points={{28,-20},{28,-40}}, color={0,127,255}));
+  connect(RPM.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{-79,40},
+          {-49.95,40},{-49.95,10.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=600),
-    Documentation(revisions="<html>
-<ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
+    Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Alexander Kümpel:<br/>
+    Transfer from ZUGABE to AixLib.
+  </li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_Commands(file(ensureSimulated=true)=
+        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/ThrottlePump.mos"
+        "Simulate and plot"));
 end ThrottlePump;

@@ -13,7 +13,7 @@ partial model GeothermalHeatPumpControlledBase
     final unit="K",
     displayUnit="degC",
     min=0,
-    start=T_start_cold[1]) "Temperature in the cold storage" annotation (
+    start=T_start_cold) "Temperature in the cold storage" annotation (
       Placement(transformation(
         origin={-134,-120},
         extent={{10,-10},{-10,10}},
@@ -26,8 +26,8 @@ partial model GeothermalHeatPumpControlledBase
     final unit="K",
     displayUnit="degC",
     min=0,
-    start=T_start_warm[heatStorage.n]) "Temperature in the heat storage"
-    annotation (Placement(transformation(
+    start=T_start_hot) "Temperature in the heat storage" annotation (Placement(
+        transformation(
         origin={-100,-120},
         extent={{10,-10},{-10,10}},
         rotation=90), iconTransformation(
@@ -52,21 +52,29 @@ partial model GeothermalHeatPumpControlledBase
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{140,60},{160,80}})));
 equation
-  connect(heatPumpTab.Power, heatPumpPower) annotation (Line(points={{-22,-12.3},
-          {-22,-12.3},{-22,-40},{-45.5,-40},{-45.5,-119.5}}, color={0,0,127}));
   connect(getTStorageLower.y, coldStorageTemperature) annotation (Line(points={
           {-139,52},{-134,52},{-134,-120}}, color={0,0,127}));
   connect(getTStorageUpper.y, heatStorageTemperature) annotation (Line(points={
           {-139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
-  annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html>
-<p>Base class of an example demonstrating the use of a heat pump connected to two storages and a geothermal source. A replaceable model is connected in the flow line of the heating circuit. A peak load device can be added here.  This model also includes basic controllers.</p>
-</html>", revisions="<html>
+  connect(heatPumpPower, heatPumpControlBus.PelMea) annotation (Line(points={{-45.5,
+          -119.5},{-45.5,-80},{-110,-80},{-110,64},{-94,64},{-94,79.095},{-0.3975,
+          79.095}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html><p>
+  Base class of an example demonstrating the use of a heat pump
+  connected to two storages and a geothermal source. A replaceable
+  model is connected in the flow line of the heating circuit. A peak
+  load device can be added here. This model also includes basic
+  controllers.
+</p>
 <ul>
-<li>
-May 19, 2017, by Marc Baranski:<br/>
-First implementation.
-</li>
+  <li>May 19, 2017, by Marc Baranski:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end GeothermalHeatPumpControlledBase;

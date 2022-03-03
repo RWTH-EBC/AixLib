@@ -6,16 +6,14 @@ model Admix "Test for admix circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.Admix Admix(
+    parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5(),
+    valveCharacteristic=Fluid.Actuators.Valves.Data.LinearEqualPercentage(),
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Admix.energyDynamics)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.032,
+    m_flow_nominal=0.1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     Kv=10,
@@ -76,24 +74,29 @@ equation
       string="%second",
       index=1,
       extent={{-25,3},{-25,3}}));
-  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,50},
-          {-41.95,50},{-41.95,10.05}},     color={0,0,127}), Text(
+  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-79,
+          10},{-60,10},{-60,10.05},{-41.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(valveOpening.y, hydraulicBus.valSet) annotation (Line(points={{-79,10},
-          {-60,10},{-60,10.05},{-41.95,10.05}}, color={0,0,127}), Text(
+  connect(RPM.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{-79,50},
+          {-41.95,50},{-41.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=800),
-    Documentation(revisions="<html>
-<ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
+    Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Alexander Kümpel:<br/>
+    Transfer from ZUGABE to AixLib.
+  </li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_Commands(file(ensureSimulated=true)=
+        "Resources/Scripts/Dymola/Systems/HydraulicModules/Examples/Admix.mos"
+        "Simulate and plot"));
 end Admix;

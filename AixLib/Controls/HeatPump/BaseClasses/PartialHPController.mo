@@ -1,7 +1,7 @@
 within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialHPController
   "Base class of a heat pump controller with bus interface"
-  AixLib.Controls.Interfaces.ThermalMachineControlBus heatPumpControlBus
+  AixLib.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
     annotation (Placement(transformation(
         extent={{-29.5,-29.5},{29.5,29.5}},
         rotation=270,
@@ -12,10 +12,16 @@ partial model PartialHPController
               -58,30},{62,-22}},                                                                                                                                                      lineColor = {175, 175, 175}, textString = "%name")}),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<p>March 31, 2017, by Marc Baranski:</p>
-<p>First implementation. </p>
+    Documentation(revisions="<html><p>
+  March 31, 2017, by Marc Baranski:
+</p>
+<p>
+  First implementation.
+</p>
 </html>", info="<html>
-<p>Base class for heat pump controllers that contains the <a href=\"modelica://AixLib.Controls.Interfaces.HeatPumpControlBus\">AixLib.Controls.Interfaces.HeatPumpControlBus</a>.</p>
+<p>
+  Base class for heat pump controllers that contains the <a href=
+  \"modelica://AixLib.Controls.Interfaces.HeatPumpControlBus\">AixLib.Controls.Interfaces.HeatPumpControlBus</a>.
+</p>
 </html>"));
 end PartialHPController;

@@ -1,7 +1,5 @@
 ![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
 
-[![Travis CI](https://travis-ci.org/RWTH-EBC/AixLib.svg?branch=master)](https://travis-ci.org/RWTH-EBC/AixLib)
-
 # AixLib
 
 **AixLib** is a Modelica model library for building performance simulations.  
@@ -15,13 +13,17 @@ If you have any questions regarding **AixLib**, feel free to contact us at aixli
 ## Clone repository
 
 * To clone the repository for the first time run:  
-  ``git clone --recurse-submodules https://github.com/lbl-srg/BuildingsPy.git``
+  ``git clone --recurse-submodules https://github.com/RWTH-EBC/AixLib.git``
 * If you have already cloned the repository, run:  
   ``git submodule update --init --recursive``
-
+* The default branch of AixLib is the ``development`` branch. This means that after cloning the repository, you always checked out the ``development`` branch.
 ## Release versions
 
 The latest version is always available on the [release page](https://github.com/RWTH-EBC/AixLib/releases) and defined in [AixLib's package.mo](https://github.com/RWTH-EBC/AixLib/blob/master/AixLib/package.mo).
+
+## Dymola >= 2021x & MSL 4.0 Compability
+
+Starting with the Dymola 2021x version, the MSL 4.0 is included and automatically loaded. This leads to incompability with AixLib. Details and possible solutions are described in [this issue](https://github.com/RWTH-EBC/AixLib/issues/1156).
 
 ## How to cite AixLib
 

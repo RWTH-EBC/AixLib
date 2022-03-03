@@ -16,12 +16,12 @@ model RotaryCompressorPressureLosses
     final allowFlowReversal=allowFlowReversal,
     final show_T=false,
     final from_dp=from_dp,
-    final homotopyInitialization=homotopyInitialization,
     final linearized=linearized,
     final dp_start=(1/40)*dp_start,
     final m_flow_start=m_flow_start)
     "Calculation of pressure drop at inlet of compressor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+
   FixedResistances.HydraulicResistance hydResOut(
     redeclare final package Medium=Medium,
     final zeta=zetOut,
@@ -30,7 +30,6 @@ model RotaryCompressorPressureLosses
     final allowFlowReversal=allowFlowReversal,
     final show_T=false,
     final from_dp=from_dp,
-    final homotopyInitialization=homotopyInitialization,
     final linearized=linearized,
     final dp_start=(1/40)*dp_start,
     final m_flow_start=m_flow_start)
@@ -160,36 +159,37 @@ equation
           points={{78,6},{72,2},{74,-2},{72,-6},{78,-2},{76,2},{78,6}},
           lineColor={0,0,0},
           fillColor={255,0,0},
-          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
-<ul>
-  <li>
-  October 27, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
+  <li>October 27, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a model of a simple rotary compressor that is used, for example, 
-in close-loop systems like heat pumps or chillers. It inherits from
-PartialCompressor which inherits from PartialCompression. Therefore, please 
-checkout these sub-models for further information of underlying modeling 
-approaches and parameterisation:
+  This is a model of a simple rotary compressor that is used, for
+  example, in close-loop systems like heat pumps or chillers. It
+  inherits from PartialCompressor which inherits from
+  PartialCompression. Therefore, please checkout these sub-models for
+  further information of underlying modeling approaches and
+  parameterisation:
 </p>
 <ul>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor</a>.
-</li>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
-</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor\">
+    AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor</a>.
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+    AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
+  </li>
 </ul>
 <p>
-For this model, pressure losses are assumed at inlet and outlet of
-the compressor. These pressure losses may occur due to reduction or
-enlargement of the cross-section.
+  For this model, pressure losses are assumed at inlet and outlet of
+  the compressor. These pressure losses may occur due to reduction or
+  enlargement of the cross-section.
 </p>
 </html>"));
 end RotaryCompressorPressureLosses;

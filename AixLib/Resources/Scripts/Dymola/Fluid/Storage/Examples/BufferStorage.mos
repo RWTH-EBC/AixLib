@@ -1,0 +1,4 @@
+simulateModel("AixLib.Fluid.Storage.Examples.BufferStorage", tolerance=1e-6, stopTime=86400, method="dassl", resultFile="BufferStorage");
+createPlot(id=1, position={405, 134, 811, 420}, y={"bufferStorage.heatingCoil1.Therm1[4].Q_flow"}, range={0.0, 90000.0, -200.0, 1800.0}, grid=true, filename="BufferStorage.mat", colors={{28,108,200}});
+createPlot(id=2, position={104, 0, 742, 420}, y={"bufferStorage.layer[4].T"}, range={0.0, 90000.0, 25.0, 65.0}, grid=true, filename="BufferStorage.mat", colors={{28,108,200}}, displayUnits={"degC"});
+createPlot(id=3, position={235, 62, 807, 420}, y={"bufferStorage.portHC1In.p", "bufferStorage.portHC1Out.p"}, range={0.0, 90000.0, 1.0, 1.16}, grid=true, filename="BufferStorage.mat", colors={{28,108,200}, {238,46,47}}, displayUnits={"bar", "bar"});

@@ -8,27 +8,13 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  Modelica.Blocks.Interfaces.RealInput ventRate(
-    final quantity="VolumeFlowRate",
-    final unit="1/h") if ATot > 0 or zoneParam.VAir > 0
-    "Ventilation and infiltration rate"
-    annotation (
-      Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={-72,-100}), iconTransformation(
-        extent={{-12,-12},{12,12}},
-        rotation=90,
-        origin={-70,-84})));
-  Modelica.Blocks.Interfaces.RealInput ventTemp(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0) if ATot > 0 or zoneParam.VAir > 0
-    "Ventilation and infiltration temperature"
-    annotation (Placement(
-        transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
-          extent={{-126,-52},{-100,-26}})));
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance"
+    annotation (Dialog(tab="CO2"));
+  parameter Boolean use_moisture_balance=false
+    "If true, input connector QLat_flow is enabled and room air computes moisture balance"
+    annotation (Dialog(tab="Moisture"));
+
   Modelica.Blocks.Interfaces.RealInput intGains[3]
     "Input profiles for internal gains persons, machines, light"
     annotation (
@@ -44,41 +30,43 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final unit="K",
     displayUnit="degC") if ATot > 0 or zoneParam.VAir > 0
     "Indoor air temperature"
-    annotation (Placement(transformation(extent={{100,46},{120,66}}),
-        iconTransformation(extent={{100,50},{120,70}})));
+    annotation (Placement(transformation(extent={{100,70},{120,90}}),
+        iconTransformation(extent={{100,70},{120,90}})));
   Modelica.Blocks.Interfaces.RealOutput TRad(
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") if ATot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(
-          extent={{100,28},{120,48}}), iconTransformation(extent={{100,28},{120,
-            48}})));
+          extent={{100,50},{120,70}}), iconTransformation(extent={{100,50},{120,
+            70}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
     transformation(extent={{-117,18},{-83,50}}), iconTransformation(
-    extent={{-110,-10},{-90,10}})));
+    extent={{-110,50},{-90,70}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare each final package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-83,-106},{15,-82}}),
+    annotation (Placement(transformation(extent={{-49,-108},{49,-84}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
     ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains"
-    annotation (Placement(transformation(extent={{94,-12},{114,8}}),
-                              iconTransformation(extent={{90,-60},{110,-40}})));
+    annotation (Placement(transformation(extent={{94,10},{114,30}}),
+                              iconTransformation(extent={{92,-6},{112,14}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
     "Radiative internal gains"
-    annotation (Placement(transformation(extent={{94,8},{114,28}}),
-                            iconTransformation(extent={{90,-20},{110,0}})));
+    annotation (Placement(transformation(extent={{94,30},{114,50}}),
+                            iconTransformation(extent={{92,24},{112,44}})));
   RC.FourElements ROM(
-    final nPorts=nPorts,
     redeclare final package Medium = Medium,
+    final use_moisture_balance=use_moisture_balance,
+    final use_C_flow=use_C_flow,
+    final nPorts=nPorts,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,
-    final nOrientations=zoneParam.nOrientations,
+    final nOrientations=size(zoneParam.AExt, 1),
     final AWin=zoneParam.AWin,
     final ATransparent=zoneParam.ATransparent,
     final hConWin=zoneParam.hConWin,
@@ -87,24 +75,24 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final ratioWinConRad=zoneParam.ratioWinConRad,
     final AExt=zoneParam.AExt,
     final hConExt=zoneParam.hConExt,
-    final nExt=zoneParam.nExt,
+    final nExt=size(zoneParam.CExt, 1),
     final RExt=zoneParam.RExt,
     final RExtRem=zoneParam.RExtRem,
     final CExt=zoneParam.CExt,
     final AInt=zoneParam.AInt,
     final hConInt=zoneParam.hConInt,
-    final nInt=zoneParam.nInt,
+    final nInt=size(zoneParam.CInt, 1),
     final RInt=zoneParam.RInt,
     final CInt=zoneParam.CInt,
     final AFloor=zoneParam.AFloor,
     final hConFloor=zoneParam.hConFloor,
-    final nFloor=zoneParam.nFloor,
+    final nFloor=size(zoneParam.CFloor, 1),
     final RFloor=zoneParam.RFloor,
     final RFloorRem=zoneParam.RFloorRem,
     final CFloor=zoneParam.CFloor,
     final ARoof=zoneParam.ARoof,
     final hConRoof=zoneParam.hConRoof,
-    final nRoof=zoneParam.nRoof,
+    final nRoof=size(zoneParam.CRoof, 1),
     final RRoof=zoneParam.RRoof,
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
@@ -115,25 +103,27 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final T_start=T_start,
     final C_start=C_start,
     final C_nominal=C_nominal,
-    final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,28},{86,64}})));
+    final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
+            {86,92}})));
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
   zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor);
 
 equation
-  connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
-          56}}, color={0,0,127}));
-  connect(ROM.ports, ports) annotation (Line(points={{77,28.05},{77,-4},{48,-4},
-          {48,-84},{-34,-84},{-34,-94}},        color={0,127,255}));
-  connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,50},
-          {92,-2},{104,-2}},   color={191,0,0}));
-  connect(ROM.TRad, TRad) annotation (Line(points={{87,58},{96,58},{96,40},{96,38},
-          {110,38}}, color={0,0,127}));
+  connect(ROM.TAir, TAir) annotation (Line(points={{87,90},{98,90},{98,80},{110,
+          80}}, color={0,0,127}));
+  connect(ROM.ports, ports) annotation (Line(points={{77,56.05},{78,56.05},{78,
+          52},{58,52},{58,4},{0,4},{0,-96}},    color={0,127,255}));
+  connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,78},{92,
+          78},{92,20},{104,20}},
+                               color={191,0,0}));
+  connect(ROM.TRad, TRad) annotation (Line(points={{87,86},{96,86},{96,60},{110,
+          60}},      color={0,0,127}));
   connect(TRad, TRad)
-    annotation (Line(points={{110,38},{110,38}}, color={0,0,127}));
-  connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86,54},{94,54},
-          {94,18},{104,18}},
+    annotation (Line(points={{110,60},{110,60}}, color={0,0,127}));
+  connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86,82},{94,82},
+          {94,40},{104,40}},
                            color={191,0,0}));
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
             {100,100}}),graphics={Text(extent={{
@@ -165,26 +155,39 @@ equation
           lineColor={95,95,95},
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
-          Documentation(info="<html>
-<p>Partial for <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. It defines connectors and a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
-<h4>Typical use and important parameters</h4>
-<p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.</p>
-</html>",  revisions="<html>
- <ul>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation based on Annex60 and MSL models.
+          Documentation(info="<html><p>
+  Partial for <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
+  models. It defines connectors and a <a href=
+  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>
+  model. Most connectors are conditional to allow conditional
+  modifications according to parameters or to pass-through conditional
+  removements in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.
+</p>
+<h4>
+  Typical use and important parameters
+</h4>
+<p>
+  All parameters are collected in one <a href=
+  \"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+  record. Further parameters for medium, initialization and dynamics
+  originate from <a href=
+  \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
+</p>
+<ul>
+  <li>September 27, 2016, by Moritz Lauster:<br/>
+    Reimplementation based on Annex60 and MSL models.
   </li>
-  <li>
-  March, 2012, by Moritz Lauster:<br/>
-  First implementation.
+  <li>March, 2012, by Moritz Lauster:<br/>
+    First implementation.
   </li>
- </ul>
- </html>"),
+</ul>
+</html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={
   Rectangle(
-    extent={{36,68},{88,28}},
+    extent={{32,100},{90,52}},
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid)}));

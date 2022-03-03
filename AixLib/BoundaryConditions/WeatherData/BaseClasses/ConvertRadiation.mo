@@ -17,21 +17,19 @@ equation
   HOut = HIn/Modelica.SIunits.Conversions.to_hour(Hou);
   annotation (
     defaultComponentName="conRad",
-    Documentation(info="<html>
-<p>
-The TMY3 data for solar radiation is the radiation accumulated in one hour. Thus, it used a unit of <code>Wh/m2</code>.
-This component converts <code>Wh/m2</code> to <code>W/m2</code> that is the standard unit in Modelica.
+    Documentation(info="<html><p>
+  The TMY3 data for solar radiation is the radiation accumulated in one
+  hour. Thus, it used a unit of <code>Wh/m2</code>. This component
+  converts <code>Wh/m2</code> to <code>W/m2</code> that is the standard
+  unit in Modelica.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-October 27, 2011, by Wangda Zuo:<br/>
-Add the unit conversion and delete the data validity check.
-</li>
-<li>
-July 14, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
+  <li>October 27, 2011, by Wangda Zuo:<br/>
+    Add the unit conversion and delete the data validity check.
+  </li>
+  <li>July 14, 2010, by Wangda Zuo:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,

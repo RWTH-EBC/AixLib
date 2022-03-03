@@ -155,7 +155,7 @@ protected
   Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir_internal(unit="m3/s") "Needed to connect to conditional connector";
 equation
   dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
-  humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
+  humidification = if humidificationSet and heating and cooling then humidificationSet else false;
 
   connect(Vflow_in_extractAir, Vflow_in_extractAir_internal);
 
@@ -166,11 +166,20 @@ equation
   annotation (Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false)), Icon(coordinateSystem(extent={{-100,-40},
             {100,40}}, preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li><i><span style=\"font-family: MS Shell Dlg 2;\">February, 2016&nbsp;</span></i> by Philipp Mehrfeld:<br/>Model implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i><span style=\"font-family: MS Shell Dlg 2;\">February,
+    2016&#160;</span></i> by Philipp Mehrfeld:<br/>
+    Model implemented
+  </li>
 </ul>
 </html>", info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Base class to provide connectors. Thus, it is possible to declare parameters in a general way in superior building model and give the opportunity whether an <a href=\"AixLib.Airflow.AirHandlingUnit.AHU\">AHU exist</a> or <a href=\"AixLib.Airflow.AirHandlingUnit.NoAHU\">does not</a>.</span></p>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\">Base class to provide
+  connectors. Thus, it is possible to declare parameters in a general
+  way in superior building model and give the opportunity whether an
+  <a href=\"AixLib.Airflow.AirHandlingUnit.AHU\">AHU exist</a> or
+  <a href=\"AixLib.Airflow.AirHandlingUnit.NoAHU\">does not</a>.</span>
+</p>
 </html>"));
 end PartialAHU;

@@ -1,4 +1,3 @@
-PumpSpeedControlledTest
-PumpSpeedControlledLimiterTest
-PumpHdpVarControlTest
-PumpNdpVarControlTest
+PumpHeadControlled
+PumpSpeedControlled
+PumpSpeedControlledDpV

@@ -10,34 +10,33 @@ model MixingValveBackwardDirection
     p=150000,
     nPorts=1)
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
-  AixLib.Fluid.Sources.Boundary_pT boundary_ph1(nPorts=1, redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sources.Boundary_pT boundary_ph1(nPorts=1, redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{90,20},{70,40}})));
-  AixLib.Fluid.Sources.Boundary_pT boundary_ph2(nPorts=1, redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sources.Boundary_pT boundary_ph2(nPorts=1, redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{92,-38},{72,-18}})));
-  AixLib.Fluid.Actuators.Valves.MixingValve
-                                          mixingValveFiltered(
-      filteredOpening=true, riseTime=100,
-    redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-6,-10},{-26,10}})));
+  AixLib.Obsolete.Year2021.Fluid.Actuators.Valves.MixingValve mixingValveFiltered(
+    filteredOpening=true,
+    riseTime=100,
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-6,-10},{-26,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureSensorMixed(redeclare
-      package Medium = Medium, m_flow_nominal=1)
+                                        temperatureSensorMixed(redeclare package Medium =
+                       Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorMixed(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorMixed(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureSensor1(redeclare package
-      Medium = Medium, m_flow_nominal=1)
+                                        temperatureSensor1(redeclare package Medium =
+               Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-8,20},{12,40}})));
   AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1(redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{40,20},{60,40}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureSensor2(redeclare package
-      Medium = Medium, m_flow_nominal=1)
+                                        temperatureSensor2(redeclare package Medium =
+               Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{4,-38},{24,-18}})));
   AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor2(redeclare package Medium =
         Medium)
@@ -79,13 +78,15 @@ equation
   connect(temperatureSensorMixed.port_a, boundary_ph.ports[1]) annotation (Line(
       points={{-76,0},{-86,0}},
       color={0,127,255}));
-  annotation (Documentation(info="<html>
-<p>
-This model shows the usage of a MixingValve against its design-direction. The results
-show that it is possible to use the MixingValve against its design-direction. The valve will
-then split the incoming flow into two fractions according to the opening of the valve.
+  annotation (Documentation(info="<html><p>
+  This model shows the usage of a MixingValve against its
+  design-direction. The results show that it is possible to use the
+  MixingValve against its design-direction. The valve will then split
+  the incoming flow into two fractions according to the opening of the
+  valve.
 </p>
-</html>", revisions="<html>
-<p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>
+<p>
+  26.11.2014, by <i>Roozbeh Sangi</i>: implemented
+</p>
 </html>"),    experiment(StopTime=1000));
 end MixingValveBackwardDirection;

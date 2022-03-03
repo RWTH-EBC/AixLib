@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
 model CtrlDpVarN "'dp variable' for PumpSpeedControlled"
   extends BaseClasses.PumpController;
 
@@ -78,32 +78,32 @@ public
   Modelica.Blocks.Routing.BooleanPassThrough onOffPassThrough1
     annotation (Placement(transformation(extent={{-88,-96},{-74,-82}})));
 equation
-  connect(pumpBus.power, powerPassThrough.u) annotation (Line(
+  connect(pumpBus.PelMea, powerPassThrough.u) annotation (Line(
       points={{0.1,-99.9},{-62,-99.9},{-62,-53},{-72.6,-53}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-5,3},{-5,3}}));
-  connect(powerPassThrough.y, pumpControllerBus.power) annotation (Line(points={{-88.7,
-          -53},{-98,-53},{-98,100.1},{0.1,100.1}},             color={0,0,127}));
-  connect(pumpBus.efficiency, efficiencyPassThrough.u) annotation (Line(
+  connect(powerPassThrough.y, pumpControllerBus.PelMea) annotation (Line(points=
+         {{-88.7,-53},{-98,-53},{-98,100.1},{0.1,100.1}}, color={0,0,127}));
+  connect(pumpBus.efficiencyMea, efficiencyPassThrough.u) annotation (Line(
       points={{0.1,-99.9},{-62,-99.9},{-62,-71},{-72.6,-71}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,3},{-3,3}}));
-  connect(efficiencyPassThrough.y, pumpControllerBus.efficiency) annotation (
-      Line(points={{-88.7,-71},{-98,-71},{-98,100.1},{0.1,100.1}},
-                                                             color={0,0,127}));
+  connect(efficiencyPassThrough.y, pumpControllerBus.efficiencyMea) annotation (
+     Line(points={{-88.7,-71},{-98,-71},{-98,100.1},{0.1,100.1}}, color={0,0,
+          127}));
   connect(PID.y, pumpSpeedSwitch.u1) annotation (Line(points={{15,-14},{38,-14},
           {38,-22},{58,-22}}, color={0,0,127}));
   connect(pumpBus.vFRcur_m3h, Q.u) annotation (Line(
       points={{0,-100},{-2,-100},{-2,-76},{-53,-76},{-53,-39.4}},
       color={255,204,51},
       thickness=0.5));
-  connect(pumpBus.head, PID.u_m) annotation (Line(
+  connect(pumpBus.dpMea, PID.u_m) annotation (Line(
       points={{0.1,-99.9},{4,-99.9},{4,-26}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -120,13 +120,12 @@ equation
           {10,8},{52,8},{52,-30},{58,-30}}, color={255,0,255}));
   connect(notOn.y,noDemand. condition)
     annotation (Line(points={{34,36.4},{34,36.4},{34,46}}, color={255,0,255}));
-  connect(pumpOn.condition, pumpControllerBus.onOff_Input) annotation (Line(
-        points={{-20,46},{-98,46},{-98,100.1},{0.1,100.1}},
-                                                      color={255,0,255}), Text(
+  connect(pumpOn.condition, pumpControllerBus.onSet) annotation (Line(points={{
+          -20,46},{-98,46},{-98,100.1},{0.1,100.1}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpSpeedSwitch.y, pumpBus.rpm_Input) annotation (Line(points={{81,-30},
+  connect(pumpSpeedSwitch.y, pumpBus.rpmSet) annotation (Line(points={{81,-30},
           {86,-30},{86,-99.9},{0.1,-99.9}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -139,34 +138,57 @@ equation
     annotation (Line(points={{-18.5,58},{-1,58}}, color={0,0,0}));
   connect(noDemand.outPort,Standby. inPort[1]) annotation (Line(points={{35.5,58},
           {50,58},{50,80},{-66,80},{-66,58},{-57,58}}, color={0,0,0}));
-  connect(pumpBus.rpm_Act, nActPassThrough.u) annotation (Line(
+  connect(pumpBus.rpmMea, nActPassThrough.u) annotation (Line(
       points={{0.1,-99.9},{-62,-99.9},{-62,-35},{-72.6,-35}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,3},{-3,3}}));
-  connect(nActPassThrough.y, pumpControllerBus.rpm_Act) annotation (Line(points={{-88.7,
-          -35},{-98,-35},{-98,100.1},{0.1,100.1}},  color={0,0,127}));
-  connect(pumpControllerBus.onOff_Input, onOffPassThrough1.u) annotation (Line(
+  connect(nActPassThrough.y, pumpControllerBus.rpmMea) annotation (Line(points=
+          {{-88.7,-35},{-98,-35},{-98,100.1},{0.1,100.1}}, color={0,0,127}));
+  connect(pumpControllerBus.onSet, onOffPassThrough1.u) annotation (Line(
       points={{0.1,100.1},{-98,100.1},{-98,-89},{-89.4,-89}},
       color={255,204,51},
       thickness=0.5));
-  connect(onOffPassThrough1.y, pumpBus.onOff_Input) annotation (Line(points={{-73.3,
-          -89},{-62,-89},{-62,-100},{0.1,-99.9}}, color={255,0,255}));
+  connect(onOffPassThrough1.y, pumpBus.onSet) annotation (Line(points={{-73.3,-89},
+          {-62,-89},{-62,-100},{0.1,-99.9}}, color={255,0,255}));
   annotation (
     Dialog(group="Heating curves"),
     choicesAllMatching=true,
-    Documentation(info="<html>
-<p>This controller implements the conventional variable dp control strategy. The pump&apos;s operating points fall on an ascending line with the point p0(Q0, H0) and p1(Qnom, Hnom) where Q0 and H0 are volume flow rate and pump head at zero mass flow. Hence p0 = (0, H0). p1 is the pump&apos;s design point. Normally, H0 = 0.5 * Hnom.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This controller implements the conventional variable dp control
+  strategy. The pump's operating points fall on an ascending line with
+  the point p0(Q0, H0) and p1(Qnom, Hnom) where Q0 and H0 are volume
+  flow rate and pump head at zero mass flow. Hence p0 = (0, H0). p1 is
+  the pump's design point. Normally, H0 = 0.5 * Hnom.
+</p>
 <ul>
-<li>2019-09-18 by Alexander Kümpel:<br />Renaming and bug fixes.</li>
-<li>2018-03-01 by Peter Matthes:<br />Simplified doc string to &quot;&apos;dp variable&apos; for PumpN&quot;.</li>
-<li>2018-02-05 by Peter Matthes:<br />Adds pass through for rpm_Act signal. Some controllers need the current speed signal for anti-windup.</li>
-<li>2018-01-26 by Peter Matthes:<br />* Changes parameter name n_start into Nstart to be compatible/exchangeable with the speed controlled (red pump) and the head controlled pump (blue pump).<br />* Changes icon to reflect relationship with red pump (speed control).</li>
-<li>2018-01-10 by Peter Matthes:<br />Adds state graph controller parts as taken from the BaseClass. Not all controllers need the state graph why we decided to remove it from the BaseClass.</li>
-<li>2017-12-05 by Peter Matthes:<br />Initial implementation.</li>
+  <li>2019-09-18 by Alexander Kümpel:<br/>
+    Renaming and bug fixes.
+  </li>
+  <li>2018-03-01 by Peter Matthes:<br/>
+    Simplified doc string to \"'dp variable' for PumpN\".
+  </li>
+  <li>2018-02-05 by Peter Matthes:<br/>
+    Adds pass through for rpm_Act signal. Some controllers need the
+    current speed signal for anti-windup.
+  </li>
+  <li>2018-01-26 by Peter Matthes:<br/>
+    * Changes parameter name n_start into Nstart to be
+    compatible/exchangeable with the speed controlled (red pump) and
+    the head controlled pump (blue pump).<br/>
+    * Changes icon to reflect relationship with red pump (speed
+    control).
+  </li>
+  <li>2018-01-10 by Peter Matthes:<br/>
+    Adds state graph controller parts as taken from the BaseClass. Not
+    all controllers need the state graph why we decided to remove it
+    from the BaseClass.
+  </li>
+  <li>2017-12-05 by Peter Matthes:<br/>
+    Initial implementation.
+  </li>
 </ul>
 </html>"),
     Icon(graphics={

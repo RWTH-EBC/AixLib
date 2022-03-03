@@ -4,7 +4,7 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(each final C_nominal=fill(1E-2, Medium.nC), each final C_start=fill(0, Medium.nC));
 
   parameter Modelica.SIunits.Mass M_Radiator
     "Mass of radiator";
@@ -30,9 +30,7 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
   parameter Modelica.SIunits.Length length
     "Length of radiator, in m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
-  parameter Modelica.SIunits.Temperature T0
-    "Initial temperature"
-    annotation (Dialog(group="Miscellaneous"));
+
   parameter Modelica.SIunits.Volume Vol_Water
     "Water volume inside layer";
   parameter Real s_eff=Type[1]
@@ -49,81 +47,60 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
     "Area of radiator layer";
   parameter Modelica.SIunits.Length d
     "Thickness of radiator wall";
-  Real dT_V;
-  Real dT_R;
-  Modelica.SIunits.Temperature TIn;
-  Modelica.SIunits.Temperature TOut;
-  Modelica.SIunits.Temperature TRad;
-  Modelica.SIunits.Temperature TAir;
+
+  parameter Modelica.Fluid.Types.Dynamics initDynamicsWall=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+   "Like energyDynamics, but SteadyState leeds to same behavior as DynamicFreeInitial"
+   annotation(Dialog(tab="Initialization", group="Solid material"));
+
   AixLib.Utilities.Interfaces.RadPort radiative annotation (Placement(transformation(extent={{22,73},{40,89}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convective
     annotation (Placement(transformation(extent={{-48,74},{-32,88}},
           rotation=0)));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=(s_eff*Q_dot_nom_i)/((
-        delta_nom)*Modelica.Constants.sigma*eps), eps=1) annotation (Placement(
-        transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(A=(s_eff*Q_dot_nom_i)/((delta_nom)*Modelica.Constants.sigma*eps), eps=1) annotation (Placement(transformation(
         origin={41,51},
         extent={{-11,-23},{11,23}},
         rotation=90)));
   AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.HeatConvRadiator
     heatConv_Radiator(
-    n=n,
-    NominalPower=Q_dot_nom_i,
-    s_eff=s_eff,
-    dT_nom=dT_nom) annotation (Placement(transformation(
+    final n=n,
+    final NominalPower=Q_dot_nom_i,
+    final s_eff=s_eff,
+    final dT_nom=dT_nom)
+                   annotation (Placement(transformation(
         origin={-17,51},
         extent={{-11,-27},{11,27}},
         rotation=90)));
   AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorWall radiator_wall(
-    lambda=LambdaSteel,
-    c=CapacitySteel,
-    d=d,
-    T0=T0,
-    A=A,
-    C=M_Radiator*CapacitySteel) annotation (Placement(transformation(
+    final initDynamics=initDynamicsWall,
+    final lambda=LambdaSteel,
+    final c=CapacitySteel,
+    final d=d,
+    final T0=T_start,
+    final A=A,
+    final C=M_Radiator*CapacitySteel) annotation (Placement(transformation(
         origin={-11,20},
         extent={{-8,-31},{8,31}},
         rotation=90)));
   AixLib.Fluid.MixingVolumes.MixingVolume Volume(
-    redeclare package Medium = Medium,
-    T_start=T0,
-    V=Vol_Water,
-    nPorts=2,
-    m_flow_nominal=1)
+    redeclare final package Medium = Medium,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    final p_start=p_start,
+    final T_start=T_start,
+    each final X_start=X_start,
+    each final C_start=C_start,
+    each final C_nominal=C_nominal,
+    final mSenFac=1,
+    final m_flow_small=m_flow_small,
+    final V=Vol_Water,
+    final use_C_flow=false,
+    final m_flow_nominal=m_flow_nominal,
+    nPorts=2)
     annotation (Placement(transformation(extent={{-16,-28},{6,-6}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureIn(redeclare package
-      Medium = Medium, m_flow_nominal=m_flow_nominal)
-    annotation (Placement(transformation(extent={{-70,-38},{-50,-18}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureOut(redeclare package
-      Medium = Medium, m_flow_nominal=m_flow_nominal)
-    annotation (Placement(transformation(extent={{50,-38},{70,-18}})));
+
 equation
- // Calculation of excess temperature
-TIn=temperatureIn.T;
-TOut=temperatureOut.T;
-TAir=convective.T;
-TRad=radiative.T;
 
-// Calculation of excess temperature
-dT_V=TIn - TAir;
-dT_R=TOut - TAir;
 
-  connect(port_a, temperatureIn.port_a) annotation (Line(
-      points={{-100,0},{-80,0},{-80,-28},{-70,-28}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(temperatureIn.port_b, Volume.ports[1]) annotation (Line(
-      points={{-50,-28},{-7.2,-28}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(Volume.ports[2], temperatureOut.port_a) annotation (Line(
-      points={{-2.8,-28},{50,-28}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(temperatureOut.port_b, port_b) annotation (Line(
-      points={{70,-28},{80,-28},{80,0},{100,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
   connect(heatConv_Radiator.port_b, convective) annotation (Line(
       points={{-17,61.34},{-17,68},{-40,68},{-40,81}},
       color={191,0,0},
@@ -132,12 +109,12 @@ dT_R=TOut - TAir;
       points={{-11,27.52},{-11,32},{-17,32},{-17,41.1}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(radiator_wall.port_b, twoStar_RadEx.Therm) annotation (Line(
-      points={{-11,27.52},{-11,32},{41,32},{41,40.88}},
+  connect(radiator_wall.port_b, twoStar_RadEx.convPort) annotation (Line(
+      points={{-11,27.52},{-11,32},{41,32},{41,40}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(twoStar_RadEx.Star, radiative) annotation (Line(
-      points={{41,61.01},{41,68.505},{31,68.505},{31,81}},
+  connect(twoStar_RadEx.radPort, radiative) annotation (Line(
+      points={{41,62.11},{41,68.505},{31,68.505},{31,81}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
@@ -146,6 +123,8 @@ dT_R=TOut - TAir;
           -11.62,12.48}},
       color={191,0,0},
       smooth=Smooth.None));
+  connect(port_a, Volume.ports[1]) annotation (Line(points={{-100,0},{-60,0},{-60,-42},{-7.2,-42},{-7.2,-28}}, color={0,127,255}));
+  connect(Volume.ports[2], port_b) annotation (Line(points={{-2.8,-28},{-4,-28},{-4,-42},{60,-42},{60,0},{100,0}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                       graphics={Text(
@@ -260,17 +239,23 @@ dT_R=TOut - TAir;
           color={0,0,0},
           thickness=0.5,
           smooth=Smooth.None)}),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
-formatted appropriately</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October, 2016&#160;</i> by Peter Remmen:<br/>
+    Transfer to AixLib.
+  </li>
+  <li>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>
-", info=
-    "<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Model of the multi layers of heat exchanger. From the water flow is the
-convective and radiative heat output calculated. </p>
+", info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model of the multi layers of heat exchanger. From the water flow is
+  the convective and radiative heat output calculated.
+</p>
 </html>"));
 end MultiLayerThermalDelta;
