@@ -58,7 +58,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     use_refIne=true,
     refIneFre_constant=5,
     nthOrder=3,
-    useBusConnectorOnly=false,
+    useBusConnectorOnly=true,
     dpCon_nominal=25000,
     use_conCap=false,
     dpEva_nominal=25000,
@@ -176,12 +176,6 @@ protected
 
 equation
 
-  connect(mode.y, sigBus.mode) annotation (Line(points={{27.2,99},{2,99},{2,99},
-          {-5,99}},         color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(heatPump.port_b1, senTHot.port_a)
     annotation (Line(points={{10,0},{50,0}},         color={0,127,255}));
 
@@ -270,6 +264,12 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
 
+  connect(mode.y, sigBus.modeSet) annotation (Line(points={{27.2,99},{14,99},{
+          14,80},{8,80},{8,78},{-5,78},{-5,99}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},
