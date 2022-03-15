@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SafetyControls;
+﻿within AixLib.Controls.HeatPump.SafetyControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
   extends BaseClasses.PartialSafetyControl;
@@ -16,8 +16,8 @@ block OperationalEnvelope
   BaseClasses.BoundaryMap boundaryMap(                         final tableUpp=
         tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
-    final dataTable=dataTable) if
-                     use_opeEnv
+    final dataTable=dataTable)
+                  if use_opeEnv
     annotation (Placement(transformation(extent={{-62,-28},{-4,22}})));
   Modelica.Blocks.Sources.BooleanConstant booConOpeEnv(final k=true) if not
     use_opeEnv

@@ -23,7 +23,8 @@ model RoomGFOw2_DayNightMode
     TWalls_start=290.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002 Type_Win,
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=3,                                withDoor1 = false, withDoor2 = false, withWindow1 = true, solar_absorptance_OW = 0.6, room_length = 5.87, room_width = 3.84, room_height = 2.6, windowarea_OW1 = 8.4, withWindow2 = true, windowarea_OW2 = 1.73,
     T0_air=294.15)                                                                                                                                                                                                        annotation(Placement(transformation(extent = {{16, 8}, {52, 44}})));

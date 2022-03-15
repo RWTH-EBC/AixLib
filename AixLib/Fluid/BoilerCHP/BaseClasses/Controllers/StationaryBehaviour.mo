@@ -67,7 +67,7 @@ model StationaryBehaviour
     annotation (Placement(transformation(extent={{40,-74},{60,-54}})));
 
 protected
-  parameter String Filename= if m_flowVar==false then "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/Boiler/TAg_mNom.sdf" else "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/Boiler/TAg_mVar.sdf";
+  parameter String Filename="modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/Boiler/TAg_mNom.sdf";
 equation
 
 

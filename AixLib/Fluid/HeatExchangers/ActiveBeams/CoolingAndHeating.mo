@@ -33,14 +33,14 @@ model CoolingAndHeating "Active beam unit for heating and cooling"
   MediumWat.ThermodynamicState staHea_a=
       MediumWat.setState_phX(watHea_a.p,
                           noEvent(actualStream(watHea_a.h_outflow)),
-                          noEvent(actualStream(watHea_a.Xi_outflow))) if
-         show_T "Medium properties in port watHea_a";
+                          noEvent(actualStream(watHea_a.Xi_outflow)))
+      if show_T "Medium properties in port watHea_a";
 
   MediumWat.ThermodynamicState staHea_b=
       MediumWat.setState_phX(watHea_b.p,
                           noEvent(actualStream(watHea_b.h_outflow)),
-                          noEvent(actualStream(watHea_b.Xi_outflow))) if
-          show_T "Medium properties in port watHea_b";
+                          noEvent(actualStream(watHea_b.Xi_outflow)))
+       if show_T "Medium properties in port watHea_b";
 
   Modelica.SIunits.PressureDifference dpWatHea(displayUnit="Pa") = watHea_a.p - watHea_b.p
     "Pressure difference between watHea_a and watHea_b";

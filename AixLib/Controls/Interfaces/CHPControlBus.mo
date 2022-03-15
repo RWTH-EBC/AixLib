@@ -147,6 +147,7 @@ expandable connector CHPControlBus
   Boolean volFlowControlHeating
     "= false to use a prescibed heating circuit mass flow, = true to use a prescribed volume flow"
     annotation (Dialog(tab="Operation point", group="CHP Unit"));
+    Modelica.SIunits.Power MaxThermalPower;
 
   annotation (Documentation(revisions="<html><ul>
   <li>January, 2019, by Julian Matthes:<br/>

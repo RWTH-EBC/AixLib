@@ -10,8 +10,8 @@ block ResistanceVolume
   parameter Modelica.SIunits.PressureDifference dp_nominal=100
     "Nominal pressure drop";
 
-  Modelica.Blocks.Sources.RealExpression dpCom(y=res.port_a.p - res.port_b.p) if
-       use_p_in "Pressure drop of the component"
+  Modelica.Blocks.Sources.RealExpression dpCom(y=res.port_a.p - res.port_b.p)
+    if use_p_in "Pressure drop of the component"
     annotation (Placement(transformation(extent={{-40,-90},{-20,-70}})));
 
 protected

@@ -26,12 +26,12 @@ model ThreeElements "Thermal Zone with three elements for exterior walls,
     "Additional heat port at indoor surface of floor plate"
     annotation(Dialog(group="Floor plate"),choices(checkBox = true));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a floor if  AFloor > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a floor  if AFloor > 0
     "Ambient port for floor plate"
     annotation (Placement(transformation(extent={{-10,-190},{10,-170}}),
     iconTransformation(extent={{-10,-190},{10,-170}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a floorIndoorSurface if
-    indoorPortFloor "Auxiliary port at indoor surface of floor plate"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a floorIndoorSurface
+ if indoorPortFloor "Auxiliary port at indoor surface of floor plate"
     annotation (Placement(
     transformation(extent={{-90,-190},{-70,-170}}), iconTransformation(
     extent={{-90,-190},{-70,-170}})));
@@ -53,8 +53,8 @@ protected
     extent={{-8,8},{8,-8}},
     rotation=90,
     origin={-12,-116})));
-  Modelica.Blocks.Sources.Constant hConFloor_const(final k=AFloor*hConFloor) if
-    AFloor > 0 "Coefficient of convective heat transfer for floor"
+  Modelica.Blocks.Sources.Constant hConFloor_const(final k=AFloor*hConFloor)
+ if AFloor > 0 "Coefficient of convective heat transfer for floor"
     annotation (Placement(transformation(
       extent={{-5,-5},{5,5}},
       rotation=180,

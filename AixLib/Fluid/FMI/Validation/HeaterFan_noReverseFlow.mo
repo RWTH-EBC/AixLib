@@ -59,8 +59,8 @@ model HeaterFan_noReverseFlow
   Modelica.Blocks.Sources.Constant X_w_in(k=0.01) "Inlet mass fraction"
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
 
-  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01) if
-     Medium.nC > 0 "Trace substances for forward flow"
+  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01)
+  if Medium.nC > 0 "Trace substances for forward flow"
     annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
 equation
   connect(uHea.y, hea.u) annotation (Line(

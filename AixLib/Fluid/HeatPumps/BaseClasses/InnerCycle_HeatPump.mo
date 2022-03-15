@@ -31,7 +31,7 @@ model InnerCycle_HeatPump
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
-    dTConFix=dTConFix) if                  use_non_manufacturer
+    dTConFix=dTConFix)                  if use_non_manufacturer
     annotation (Placement(transformation(extent={{48,18},{100,80}})));
 
   PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer

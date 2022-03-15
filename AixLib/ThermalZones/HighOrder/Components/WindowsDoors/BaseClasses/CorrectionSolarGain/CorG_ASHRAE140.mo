@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
 model CorG_ASHRAE140
   "Correction of the solar gain factor according to ASHRAE 140"
   extends PartialCorG;

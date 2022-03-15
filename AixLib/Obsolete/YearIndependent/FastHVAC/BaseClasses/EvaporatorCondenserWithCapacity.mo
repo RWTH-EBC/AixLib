@@ -41,8 +41,8 @@ model EvaporatorCondenserWithCapacity
         rotation=270,
         origin={12,52})));
 
-  Modelica.Blocks.Sources.RealExpression heatLossIns(final y=kAInn) if
-                                               use_cap
+  Modelica.Blocks.Sources.RealExpression heatLossIns(final y=kAInn)
+                                            if use_cap
     "Nominal heat loss coefficient to the inside" annotation (Placement(
         transformation(
         extent={{-15,-10},{15,10}},

@@ -246,15 +246,15 @@ partial model PartialReversibleVapourCompressionMachine
     final n=nthOrder,
     final f=refIneFre_constant,
     final x_start=x_start,
-    final y_start=yRefIne_start) if
-                                   use_refIne
+    final y_start=yRefIne_start)
+                                if use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
     annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=90,
         origin={-14,-52})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon if
-                                                                 not use_refIne
+  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon
+                                                              if not use_refIne
     "Use default nSet value" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
@@ -265,8 +265,8 @@ partial model PartialReversibleVapourCompressionMachine
     final n=nthOrder,
     final f=refIneFre_constant,
     final x_start=x_start,
-    final y_start=yRefIne_start) if
-                                   use_refIne
+    final y_start=yRefIne_start)
+                                if use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -282,14 +282,14 @@ partial model PartialReversibleVapourCompressionMachine
         extent={{-16,-16},{16,16}},
         rotation=90,
         origin={-76,-136})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if
-    use_evaCap "Foreces heat losses according to ambient temperature"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva
+ if use_evaCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-32,-110})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
-    use_conCap "Foreces heat losses according to ambient temperature"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon
+ if use_conCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,

@@ -86,8 +86,7 @@ model NominalHeatPumpNotManufacturer
   Modelica.Blocks.Interfaces.RealInput u
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
 protected
-parameter String FilenameCOP= if HighTemp==false then "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf" else "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Hubkolben_R134a.sdf";
-
+parameter String FilenameCOP= if HighTemp==true then "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Hubkolben_R134a.sdf" else "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf";
 equation
   connect(division1.y, PelFullLoad) annotation (Line(points={{21,-80},{110,
           -80}},              color={0,0,127}));

@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.EnEV2009.IW;
+﻿within AixLib.DataBase.Walls.EnEV2009.IW;
 record IWneighbour_EnEV2009_S_half
   "Inner wall towards neighbour after EnEV 2009, for building of type S (schwer), only half"
   extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.175, 0.015}

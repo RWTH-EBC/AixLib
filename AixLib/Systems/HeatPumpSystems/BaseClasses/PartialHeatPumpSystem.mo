@@ -291,8 +291,8 @@ partial model PartialHeatPumpSystem
     final init=initType,
     final addPowerToMedium=addPowerToMediumCon,
     final per=perCon,
-    final inputType=AixLib.Fluid.Types.InputType.Continuous) if
-                            use_conPum
+    final inputType=AixLib.Fluid.Types.InputType.Continuous)
+                         if use_conPum
     "Fan or pump at sink side of HP" annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,
@@ -309,8 +309,8 @@ partial model PartialHeatPumpSystem
     final init=initType,
     final addPowerToMedium=addPowerToMediumEva,
     final per=perEva,
-    final inputType=AixLib.Fluid.Types.InputType.Continuous) if
-                            use_evaPum
+    final inputType=AixLib.Fluid.Types.InputType.Continuous)
+                         if use_evaPum
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
@@ -321,8 +321,8 @@ partial model PartialHeatPumpSystem
     annotation (Placement(transformation(extent={{-130,104},{-100,134}})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     final allowFlowReversal=allowFlowReversalEva,
-    redeclare final package Medium = Medium_con) if
-                                              not use_conPum
+    redeclare final package Medium = Medium_con)
+                                           if not use_conPum
                                                             annotation (
       Placement(transformation(
         extent={{6,-6},{-6,6}},
@@ -330,8 +330,8 @@ partial model PartialHeatPumpSystem
         origin={-70,12})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSou(
     final allowFlowReversal=allowFlowReversalCon,
-    redeclare final package Medium = Medium_eva) if
-                                              not use_evaPum
+    redeclare final package Medium = Medium_eva)
+                                           if not use_evaPum
                                                             annotation (
       Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -344,16 +344,16 @@ partial model PartialHeatPumpSystem
     final m_flow_small=1E-4*abs(mFlow_conNominal),
     final Q_flow_nominal=Q_flow_nominal,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics) if
-                             use_secHeaGen annotation (Placement(transformation(
+    final massDynamics=massDynamics)
+                          if use_secHeaGen annotation (Placement(transformation(
         extent={{8,9},{-8,-9}},
         rotation=180,
         origin={40,61})));
 
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
     final allowFlowReversal=allowFlowReversalEva,
-    redeclare final package Medium = Medium_con) if
-                                              not use_secHeaGen
+    redeclare final package Medium = Medium_con)
+                                           if not use_secHeaGen
     "Used if monovalent HP System" annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,

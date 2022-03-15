@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
+﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
 partial model PartialExpansionValve
   "Base model for all expansion valve models"
 
@@ -124,8 +124,8 @@ partial model PartialExpansionValve
     final filterType=Modelica.Blocks.Types.FilterType.LowPass,
     order=2,
     f_cut=5/(2*Modelica.Constants.pi*risTim),
-    x(each stateSelect=StateSelect.always)) if
-        useInpFil
+    x(each stateSelect=StateSelect.always))
+     if useInpFil
     "Second order filter to approximate valve opening or closing time"
     annotation (Placement(transformation(
         extent={{-30,59},{-10,80}})));

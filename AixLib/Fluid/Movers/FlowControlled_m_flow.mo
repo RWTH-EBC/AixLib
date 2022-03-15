@@ -44,8 +44,8 @@ model FlowControlled_m_flow
 
   Modelica.Blocks.Interfaces.RealInput m_flow_in(
     final unit="kg/s",
-    nominal=m_flow_nominal) if
-       inputType == AixLib.Fluid.Types.InputType.Continuous
+    nominal=m_flow_nominal)
+    if inputType == AixLib.Fluid.Types.InputType.Continuous
     "Prescribed mass flow rate"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},

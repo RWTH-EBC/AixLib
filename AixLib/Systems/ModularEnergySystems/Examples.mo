@@ -2,23 +2,24 @@ within AixLib.Systems.ModularEnergySystems;
 package Examples "Holds examples for the modular energy system units"
   extends Modelica.Icons.ExamplesPackage;
   model HeatPump
-      extends AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer(
+      extends
+      AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer(
       vol(
-        T_start=343.15,
+        T_start=333.15,
         m_flow_nominal=1,
         V=0.4,
         nPorts=2),
       bou(use_T_in=true, nPorts=1),
       TSpeicher(y=70 + 273.15),
-      sine(freqHz=1/(12*3600), offset=-7000),
-      PLR(y=0.6));
+      sine(freqHz=0, offset=-100000),
+      PLR(y=1));
     Modules.ModularHeatPump.ModularHeatPumpNew
                                             modularHeatPumpNew(
       dTConFix=false,
       HighTemp=true,
-      THotNom=353.15,
-      TSourceNom=293.15,
-      QNom=14000,
+      THotNom=343.15,
+      TSourceNom=303.15,
+      QNom=100000,
       PLRMin=0.5,
       T_Start_Condenser=333.15,
       TSourceInternal=true,
@@ -80,7 +81,10 @@ package Examples "Holds examples for the modular energy system units"
         m_flow_nominal=1, nPorts=2),
       bou(nPorts=1),
       TSpeicher(y=60 + 273.15),
-      sine(offset=0));
+      sine(
+        amplitude=50000,
+        freqHz=1/3600,
+        offset=-50000));
     Modules.ModularBoiler.ModularBoiler
       modularBoilerNotManufacturer(TColdNom=333.15, QNom=100000)
       annotation (Placement(transformation(extent={{-38,-8},{-18,12}})));

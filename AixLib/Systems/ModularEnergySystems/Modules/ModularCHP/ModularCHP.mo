@@ -258,6 +258,13 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(cHPNotManufacturer.MaxThermalPower, cHPControlBus.MaxThermalPower)
+    annotation (Line(points={{-8.8,11},{-8.8,102.1},{0.1,102.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

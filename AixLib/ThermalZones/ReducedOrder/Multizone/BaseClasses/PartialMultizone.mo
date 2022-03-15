@@ -70,13 +70,13 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if
-       ASurTot > 0 or VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
+    if ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
         iconTransformation(extent={{-90,-92},{-70,-72}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
-       ASurTot > 0 "Radiative internal gains"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
+    if ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[numZones](

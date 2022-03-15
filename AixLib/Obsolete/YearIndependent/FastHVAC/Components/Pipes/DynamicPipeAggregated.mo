@@ -102,8 +102,8 @@ public
     d_in=fill(outerDiameter, nNodes),
     length=fill(length/nNodes, nNodes),
     lambda=fill(parameterIso.lambda, nNodes),
-    T0=fill(T_0, nNodes)) if
-       withInsulation
+    T0=fill(T_0, nNodes))
+    if withInsulation
   annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside
   annotation (Placement(transformation(extent={{46,82},{66,102}}),
@@ -116,16 +116,16 @@ public
       Placement(transformation(extent={{88,-10},{108,10}}),
         iconTransformation(extent={{88,-10},{108,10}})));
 
-  AixLib.Utilities.Interfaces.RadPort star if
-                                           withRadiationParam annotation (Placement(transformation(extent={{-70,86},{-50,106}}), iconTransformation(extent={{-70,86},{-50,106}})));
+  AixLib.Utilities.Interfaces.RadPort star
+                                        if withRadiationParam annotation (Placement(transformation(extent={{-70,86},{-50,106}}), iconTransformation(extent={{-70,86},{-50,106}})));
   AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hConOut, nNodes), A=AOutside/nNodes) if withConvection
     "Convection from pipe wall"
   annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={58,28})));
-  AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=AOutside/nNodes) if
-                                            withRadiationParam annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=AOutside/nNodes)
+                                         if withRadiationParam annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-58,30})));

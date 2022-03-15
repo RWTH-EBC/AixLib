@@ -195,10 +195,12 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-72,-112},{-46,-86}})));
 
-  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  replaceable model WindowModel =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
 
-  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+  replaceable model CorrSolarGainWin =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
 
 protected

@@ -56,9 +56,9 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     use_autoCalc=true,
     Q_useNominal=QNom,
     use_refIne=true,
-    refIneFre_constant=5,
-    nthOrder=3,
-    useBusConnectorOnly=false,
+    refIneFre_constant=2,
+    nthOrder=10,
+    useBusConnectorOnly=true,
     dpCon_nominal=25000,
     use_conCap=false,
     dpEva_nominal=25000,
@@ -82,7 +82,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     DeltaTEvap=DeltaTEvap,
     TSource=TSourceFixed,
     dTConFix=dTConFix)
-    annotation (Placement(transformation(extent={{-10,-18},{10,6}})));
+    annotation (Placement(transformation(extent={{-8,-18},{12,6}})));
 
   AixLib.Systems.ModularEnergySystems.Interfaces.VapourCompressionMachineControleBusModular
     sigBus annotation (Placement(transformation(extent={{-20,82},{10,116}}),
@@ -176,22 +176,16 @@ protected
 
 equation
 
-  connect(mode.y, sigBus.mode) annotation (Line(points={{27.2,99},{2,99},{2,99},
-          {-5,99}},         color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(heatPump.port_b1, senTHot.port_a)
-    annotation (Line(points={{10,0},{50,0}},         color={0,127,255}));
+    annotation (Line(points={{12,0},{50,0}},         color={0,127,255}));
 
   connect(mFlowEva.y, division1.u2) annotation (Line(points={{70.1,-37},{64,-37},
           {64,-36},{61.6,-36},{61.6,-36.8}},
                                     color={0,0,127}));
-  connect(senTCold.port_b, heatPump.port_a1) annotation (Line(points={{-28,0},{-10,
-          0}},                color={0,127,255}));
+  connect(senTCold.port_b, heatPump.port_a1) annotation (Line(points={{-28,0},{
+          -8,0}},             color={0,127,255}));
   connect(sigBus, heatPump.sigBus) annotation (Line(
-      points={{-5,99},{-5,28},{-24,28},{-24,-9.9},{-9.9,-9.9}},
+      points={{-5,99},{-5,28},{-24,28},{-24,-9.9},{-7.9,-9.9}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -207,9 +201,9 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(bouEvap_b.ports[1], heatPump.port_b2) annotation (Line(points={{-48,-40},
-          {-10,-40},{-10,-12}}, color={0,127,255}));
+          {-8,-40},{-8,-12}},   color={0,127,255}));
   connect(bouEvap_a.ports[1], heatPump.port_a2) annotation (Line(points={{40,-72},
-          {26,-72},{26,-12},{10,-12}},    color={0,127,255}));
+          {26,-72},{26,-12},{12,-12}},    color={0,127,255}));
    connect(division1.y,bouEvap_a. m_flow_in) annotation (Line(points={{43.2,-32},
           {40,-32},{40,-50},{86,-50},{86,-64},{62,-64}},       color={0,0,127}));
   connect(senTHot.port_b, port_b) annotation (Line(points={{66,0},{100,0}},
@@ -270,6 +264,12 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
 
+  connect(mode.y, sigBus.modeSet) annotation (Line(points={{27.2,99},{10,99},{
+          10,99},{-5,99}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},

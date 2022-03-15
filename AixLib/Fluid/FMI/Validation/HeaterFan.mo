@@ -64,12 +64,12 @@ model HeaterFan
     "Moisture mass fraction for back flow"
     annotation (Placement(transformation(extent={{120,-6},{100,14}})));
 
-  Modelica.Blocks.Sources.Constant CBac[Medium.nC](each k=0.01) if
-     Medium.nC > 0 "Trace substances for back flow"
+  Modelica.Blocks.Sources.Constant CBac[Medium.nC](each k=0.01)
+  if Medium.nC > 0 "Trace substances for back flow"
     annotation (Placement(transformation(extent={{120,-60},{100,-40}})));
 
-  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01) if
-     Medium.nC > 0 "Trace substances for forward flow"
+  Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01)
+  if Medium.nC > 0 "Trace substances for forward flow"
     annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
 equation
   connect(uHea.y, hea.u) annotation (Line(

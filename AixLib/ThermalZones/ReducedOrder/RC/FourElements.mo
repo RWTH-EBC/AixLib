@@ -30,8 +30,8 @@ model FourElements "Thermal Zone with four elements for exterior walls,
     "Ambient port for roof"
       annotation (Placement(transformation(extent={{-21,170},{-1,190}}),
                        iconTransformation(extent={{-21,170},{-1,190}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roofIndoorSurface if
-     indoorPortRoof "Auxiliary port at indoor surface of roof"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roofIndoorSurface
+  if indoorPortRoof "Auxiliary port at indoor surface of roof"
       annotation (Placement(
       transformation(extent={{-50,-190},{-30,-170}}), iconTransformation(
       extent={{-50,-190},{-30,-170}})));
@@ -48,44 +48,44 @@ model FourElements "Thermal Zone with four elements for exterior walls,
     origin={-12,155})));
 
 protected
-  Modelica.Thermal.HeatTransfer.Components.Convection convRoof if
-     ARoof > 0 "Convective heat transfer of roof"
+  Modelica.Thermal.HeatTransfer.Components.Convection convRoof
+  if ARoof > 0 "Convective heat transfer of roof"
     annotation (Placement(transformation(
     extent={{10,10},{-10,-10}},
     rotation=90,
     origin={-12,120})));
   Modelica.Blocks.Sources.Constant hConRoof_const(
-  final k=ARoof*hConRoof) if
-       ARoof > 0 "Coefficient of convective heat transfer for roof"
+  final k=ARoof*hConRoof)
+    if ARoof > 0 "Coefficient of convective heat transfer for roof"
      annotation (Placement(transformation(
        extent={{-5,-5},{5,5}},
        rotation=180,
        origin={22,120})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntRoof(
-    final G=min(AInt, ARoof)*hRad) if
-       AInt > 0 and ARoof > 0 "Resistor between interior walls and roof"
+    final G=min(AInt, ARoof)*hRad)
+    if AInt > 0 and ARoof > 0 "Resistor between interior walls and roof"
     annotation (Placement(
       transformation(
       extent={{-10,-10},{10,10}},
       rotation=-90,
       origin={186,10})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofWin(
-    final G=min(ARoof, ATotWin)*hRad) if
-       ARoof > 0 and ATotWin > 0 "Resistor between roof and windows"
+    final G=min(ARoof, ATotWin)*hRad)
+    if ARoof > 0 and ATotWin > 0 "Resistor between roof and windows"
     annotation (Placement(transformation(
       extent={{-10,-10},{10,10}},
       origin={-154,100})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofFloor(
-    final G=min(ARoof, AFloor)*hRad) if
-       ARoof > 0 and AFloor > 0 "Resistor between floor plate and roof"
+    final G=min(ARoof, AFloor)*hRad)
+    if ARoof > 0 and AFloor > 0 "Resistor between floor plate and roof"
     annotation (Placement(
       transformation(
       extent={{-10,-10},{10,10}},
       rotation=-90,
       origin={-56,-112})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallRoof(
-    final G=min(ATotExt, ARoof)*hRad) if
-      ATotExt > 0 and ARoof > 0 "Resistor between exterior walls and roof"
+    final G=min(ATotExt, ARoof)*hRad)
+   if ATotExt > 0 and ARoof > 0 "Resistor between exterior walls and roof"
     annotation (Placement(
       transformation(
       extent={{-10,-10},{10,10}},

@@ -98,6 +98,27 @@ constant Real Brennwert=46753;
   parameter String Filename_EtaEL= "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf";
 
 
+  Modelica.Blocks.Interfaces.RealOutput MaxThermalPower "maximal thermal Power"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-88,110})));
+  Modelica.Blocks.Math.Division division2
+    annotation (Placement(transformation(extent={{-36,130},{-22,144}})));
+  SDF.NDTable SDF3(
+    nin=2,
+    readFromFile=true,
+    filename=Filename_PTHR,
+    dataset="/PTHR",
+    dataUnit="[-]",
+    scaleUnits={"W","-"})
+      "Power to Heat Ratio"
+    annotation (Placement(transformation(extent={{-6,124},{14,144}})));
+  Modelica.Blocks.Routing.Multiplex2 multiplex2_1
+    annotation (Placement(transformation(extent={{-52,118},{-36,102}})));
+  Modelica.Blocks.Sources.RealExpression pelNom1(y=1)
+    "Nominal electric Power"
+    annotation (Placement(transformation(extent={{-88,80},{-72,100}})));
 equation
 
 THotEngine=vol.T;
@@ -161,6 +182,19 @@ THotEngine=vol.T;
           {-34,-18},{44,-18},{44,-35.2},{60.4,-35.2}}, color={0,0,127}));
   connect(product.y, division.u1) annotation (Line(points={{-41.3,45},{34,45},{
           34,46},{34.6,46},{34.6,45.2}}, color={0,0,127}));
+  connect(multiplex2_1.y, SDF3.u) annotation (Line(points={{-35.2,110},{-28,110},
+          {-28,112},{-14,112},{-14,134},{-8,134}}, color={0,0,127}));
+  connect(pelNom1.y, multiplex2_1.u2[1]) annotation (Line(points={{-71.2,90},{
+          -64,90},{-64,114.8},{-53.6,114.8}}, color={0,0,127}));
+  connect(pelNom.y, multiplex2_1.u1[1]) annotation (Line(points={{-73.2,40},{
+          -70,40},{-70,106},{-53.6,106},{-53.6,105.2}}, color={0,0,127}));
+  connect(pelNom.y, division2.u1) annotation (Line(points={{-73.2,40},{-48,40},
+          {-48,141.2},{-37.4,141.2}}, color={0,0,127}));
+  connect(SDF3.y, division2.u2) annotation (Line(points={{15,134},{20,134},{20,
+          174},{-46,174},{-46,132.8},{-37.4,132.8}}, color={0,0,127}));
+  connect(division2.y, MaxThermalPower) annotation (Line(points={{-21.3,137},{
+          -21.3,104},{-32,104},{-32,98},{-62,98},{-62,76},{-88,76},{-88,110}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

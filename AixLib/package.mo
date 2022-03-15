@@ -1,12 +1,13 @@
 within ;
 package AixLib
+
   annotation (
   uses(
-    Modelica(version="3.2.3"),
     Modelica_Synchronous(version="0.92.2"),
     NcDataReader2(version="2.5.0"),
     SDF(version="0.4.1"),
-    Modelica_DeviceDrivers(version="1.7.0")),
+    Modelica_DeviceDrivers(version="1.7.0"),
+    Modelica(version="3.2.3")),
   version = "1.0.0",
   conversion(from(
     version="0.3.2",
@@ -73,11 +74,10 @@ package AixLib
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.10.7_to_0.11.0.mos",
     version="0.11.0",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.11.0_to_0.11.1.mos",
-    version="0.11.1", 
+    version="0.11.1",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.11.1_to_0.12.0.mos",
-    version="0.12.0", 
+    version="0.12.0",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.12.0_to_0.12.1.mos")),
-
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed
   for research and teaching purposes. It aims at dynamic simulations of

@@ -71,8 +71,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
     Placement(transformation(extent={{-280,120},{-240,160}}),
     iconTransformation(extent={{-260,140},{-240,160}})));
 
-  Modelica.Blocks.Interfaces.RealInput QLat_flow(final unit="W") if
-    use_moisture_balance and ATot >0
+  Modelica.Blocks.Interfaces.RealInput QLat_flow(final unit="W")
+ if use_moisture_balance and ATot >0
     "Latent heat gains for the room"
     annotation (Placement(transformation(extent={{-280,-150},{-240,-110}}),
         iconTransformation(extent={{-260,-130},{-240,-110}})));
@@ -109,8 +109,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
     "Ambient port for windows"
     annotation (Placement(transformation(extent={{-250,30},{-230,50}}),
     iconTransformation(extent={{-250,30},{-230,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
-    ATot > 0 or VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv
+ if ATot > 0 or VAir > 0
     "Auxiliary port for sensible internal convective gains"
     annotation (Placement(
     transformation(extent={{230,30},{250,50}}), iconTransformation(extent={{230,30},
@@ -120,12 +120,12 @@ model OneElement "Thermal Zone with one element for exterior walls"
     annotation (Placement(
     transformation(extent={{230,70},{250,90}}),
     iconTransformation(extent={{230,70},{250,90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a windowIndoorSurface if
-    indoorPortWin "Auxiliary port at indoor surface of windows"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a windowIndoorSurface
+ if indoorPortWin "Auxiliary port at indoor surface of windows"
     annotation (Placement(transformation(extent={{-210,-190},{-190,-170}}),
     iconTransformation(extent={{-210,-190},{-190,-170}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a extWallIndoorSurface if
-    indoorPortExtWalls "Auxiliary port at indoor surface of exterior walls"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a extWallIndoorSurface
+ if indoorPortExtWalls "Auxiliary port at indoor surface of exterior walls"
     annotation (Placement(
     transformation(extent={{-170,-190},{-150,-170}}), iconTransformation(
     extent={{-170,-190},{-150,-170}})));
@@ -162,12 +162,12 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final use_C_flow=use_C_flow) if VAir > 0 and use_moisture_balance
     "Indoor air volume"
     annotation (Placement(transformation(extent={{-20,-26},{0,-6}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalResistor resWin(final R=RWin) if
-    ATotWin > 0 "Resistor for windows"
+  Modelica.Thermal.HeatTransfer.Components.ThermalResistor resWin(final R=RWin)
+ if ATotWin > 0 "Resistor for windows"
     annotation (Placement(transformation(extent={{-180,30},{-160,50}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow convHeatSol(
-    final alpha=0) if
-    ratioWinConRad > 0 and (ATot > 0 or VAir > 0) and sum(ATransparent) > 0
+    final alpha=0)
+ if ratioWinConRad > 0 and (ATot > 0 or VAir > 0) and sum(ATransparent) > 0
     "Solar heat considered as convection"
     annotation (Placement(transformation(extent={{-166,114},{-146,134}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow radHeatSol[
@@ -218,8 +218,8 @@ protected
   parameter Real splitFactorSolRad[dimension, nOrientations]=
     BaseClasses.splitFacVal(dimension, nOrientations, AArray, AExt, AWin)
     "Share of each wall surface area that is non-zero, for each orientation separately";
-  Modelica.Thermal.HeatTransfer.Components.Convection convExtWall(dT(start=0)) if
-                                                                     ATotExt > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection convExtWall(dT(start=0))
+                                                                  if ATotExt > 0
     "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-114,-30},{-94,-50}})));
   Modelica.Blocks.Sources.Constant hConExtWall_const(
@@ -243,8 +243,8 @@ protected
     "Emission coefficient of solar radiation considered as radiation"
     annotation (Placement(transformation(extent={{-206,141},{-196,151}})));
   Modelica.Blocks.Math.Gain eConvSol[nOrientations](
-    final k=gWin*ratioWinConRad*ATransparent) if
-    ratioWinConRad > 0 and sum(ATransparent) > 0
+    final k=gWin*ratioWinConRad*ATransparent)
+ if ratioWinConRad > 0 and sum(ATransparent) > 0
     "Emission coefficient of solar radiation considered as convection"
     annotation (Placement(transformation(extent={{-206,119},{-196,129}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallWin(
@@ -255,30 +255,30 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-146,10})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTAir if
-    ATot > 0 or VAir > 0 "Indoor air temperature sensor"
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTAir
+ if ATot > 0 or VAir > 0 "Indoor air temperature sensor"
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTRad if
-    ATot > 0 "Mean indoor radiation temperatur sensor"
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTRad
+ if ATot > 0 "Mean indoor radiation temperatur sensor"
     annotation (Placement(
     transformation(
     extent={{-10,-10},{10,10}},
     rotation=90,
     origin={210,110})));
-  Modelica.Blocks.Math.Sum sumSolRad(final nin=nOrientations) if
-    ratioWinConRad > 0 and sum(ATransparent) > 0
+  Modelica.Blocks.Math.Sum sumSolRad(final nin=nOrientations)
+ if ratioWinConRad > 0 and sum(ATransparent) > 0
     "Sums up solar radiation from different directions"
     annotation (Placement(transformation(extent={{-186,118},{-174,130}})));
 
   Modelica.Blocks.Math.Gain mWat_flow(
     final k(unit="kg/J") = 1/h_fg,
     u(final unit="W"),
-    y(final unit="kg/s")) if
-       use_moisture_balance and ATot >0 "Water flow rate due to latent heat gain"
+    y(final unit="kg/s"))
+    if use_moisture_balance and ATot >0 "Water flow rate due to latent heat gain"
     annotation (Placement(transformation(extent={{-200,-100},{-180,-80}})));
 
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
-    use_moisture_balance and ATot >0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow
+ if use_moisture_balance and ATot >0
     "Converter for latent heat flow rate"
     annotation (Placement(transformation(extent={{-202,-130},{-182,-110}})));
 equation

@@ -222,10 +222,12 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
   Modelica.Blocks.Sources.RealExpression realExpression(y=0)
     annotation (Placement(transformation(extent={{-74,-98},{-54,-78}})));
 
-  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  replaceable model WindowModel =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
 
-  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+  replaceable model CorrSolarGainWin =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
 
 protected

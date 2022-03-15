@@ -21,14 +21,14 @@ connector Inlet "Connector for fluid inlet"
 
   input Medium.MassFlowRate m_flow
     "Mass flow rate from the connection point into the component";
-  AixLib.Fluid.FMI.Interfaces.PressureInput p if
-     use_p_in "Thermodynamic pressure in the connection point";
+  AixLib.Fluid.FMI.Interfaces.PressureInput p
+  if use_p_in "Thermodynamic pressure in the connection point";
 
   input AixLib.Fluid.FMI.Interfaces.FluidProperties forward(
     redeclare final package Medium = Medium) "Inflowing properties";
   output AixLib.Fluid.FMI.Interfaces.FluidProperties backward(
-    redeclare final package Medium = Medium) if
-       allowFlowReversal "Outflowing properties";
+    redeclare final package Medium = Medium)
+    if allowFlowReversal "Outflowing properties";
 
 annotation (defaultComponentName="inlet",
   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},

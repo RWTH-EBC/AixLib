@@ -100,9 +100,9 @@ model LookUpTableNDNotManufacturerSlim
         origin={58,108})));
   Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom) annotation (
       Placement(transformation(
-        extent={{6,-6},{-6,6}},
+        extent={{18,-13},{-18,13}},
         rotation=0,
-        origin={268,112})));
+        origin={280,105})));
   Modelica.Blocks.Routing.Multiplex4 multiplex4_2 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -153,7 +153,7 @@ model LookUpTableNDNotManufacturerSlim
     annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
 
 protected
-  parameter String FilenameCOP= if HighTemp==false then "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf" else "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Hubkolben_R134a.sdf";
+parameter String FilenameCOP= if HighTemp==true then "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Hubkolben_R134a.sdf" else "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf";
 
 equation
 
@@ -226,16 +226,8 @@ equation
   connect(nominalHeatPump.PelFullLoad, product1.u2) annotation (Line(points={
           {-59,-14},{-58,-14},{-58,-68.8},{-19.6,-68.8}}, color={0,0,127}));
   connect(tHotNom.y, fromKelvin5.Kelvin)
-    annotation (Line(points={{261.4,112},{254,112},{254,82},{278,82},{278,78.8}},
-                                                  color={0,0,127}));
-  connect(sigBus.T_flow_co, fromKelvin4.Kelvin) annotation (Line(
-      points={{-1,100},{2,100},{2,126},{24,126}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
+    annotation (Line(points={{260.2,105},{236,105},{236,78},{258,78},{258,78.8},
+          {278,78.8}},                            color={0,0,127}));
   connect(product2.y, firstOrder.u) annotation (Line(points={{-80,-70.8},{-80,
           -82.8}},         color={0,0,127}));
   connect(add.y, firstOrder1.u) annotation (Line(points={{80,-78.6},{80,-82.8}},
@@ -290,6 +282,14 @@ equation
           127}), Text(
       string="%second",
       index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.TConInMea, fromKelvin4.Kelvin) annotation (Line(
+      points={{-0.925,100.07},{0,100.07},{0,126},{24,126}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

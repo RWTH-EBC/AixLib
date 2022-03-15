@@ -22,8 +22,8 @@ model InternalResistancesOneUTube
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor capFil1(
     C=Co_fil/2,
     T(start=T_start, fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial)),
-    der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial))) if
-       dynFil
+    der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial)))
+    if dynFil
     "Heat capacity of the filling material" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -32,8 +32,8 @@ model InternalResistancesOneUTube
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor capFil2(
     C=Co_fil/2,
     T(start=T_start, fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial)),
-    der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial))) if
-       dynFil
+    der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial)))
+    if dynFil
     "Heat capacity of the filling material" annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},

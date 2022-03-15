@@ -49,8 +49,8 @@ protected
      final analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping,
      final filterType=Modelica.Blocks.Types.FilterType.LowPass,
      x(each stateSelect=StateSelect.always,
-       each start=0)) if
-        use_inputFilter
+       each start=0))
+     if use_inputFilter
     "Second order filter to approximate valve opening time, and to improve numerics"
     annotation (Placement(transformation(extent={{6,81},{20,95}})));
 
