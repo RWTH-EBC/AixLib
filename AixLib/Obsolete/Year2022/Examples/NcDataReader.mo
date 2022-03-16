@@ -1,9 +1,9 @@
-within AixLib.Utilities.Examples;
+within AixLib.Obsolete.Year2022.Examples;
 model NcDataReader
   extends Modelica.Icons.Example;
-  Sources.NcDataReader NcDataReader_test(
+  Obsolete.Year2022.Utilities.NcDataReader NcDataReader_test(
     fileName=Modelica.Utilities.Files.loadResource(
-    "modelica://AixLib/Resources/NcDataReader_ExampleData/Temp_Year.nc"),
+        "modelica://AixLib/Resources/NcDataReader_ExampleData/Temp_Year.nc"),
     use_varName=true,
     use_attNameReal=true,
     use_attNameInt=true,
