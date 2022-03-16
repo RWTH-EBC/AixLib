@@ -103,7 +103,6 @@ equation
   connect(fixedTemperature.port, bufferStorage.heatportOutside) annotation (
       Line(points={{-36,22},{-28,22},{-28,23.9},{-17.7,23.9}}, color={191,0,0}));
   annotation (experiment(Tolerance=1e-6, StopTime=86400, Interval=60),
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageBoiler.mos" "Simulate and plot"),
     Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

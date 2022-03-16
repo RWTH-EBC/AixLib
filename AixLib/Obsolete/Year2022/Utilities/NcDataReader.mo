@@ -1,6 +1,5 @@
-within AixLib.Utilities.Sources;
-model NcDataReader
-  "File reader for external data"
+within AixLib.Obsolete.Year2022.Utilities;
+model NcDataReader "File reader for external data"
   import nc = NcDataReader2.Functions;
   parameter String fileName
     "File where external data is stored"
@@ -31,17 +30,17 @@ model NcDataReader
     annotation (Dialog(enable=use_attNameInt));
   parameter Modelica.SIunits.Time offset=0
     "Time period prior current simulation time";
-  Modelica.Blocks.Interfaces.RealOutput y[size(varName, 1)] if
-       use_varName
+  Modelica.Blocks.Interfaces.RealOutput y[size(varName, 1)]
+    if use_varName
     "Output Vector with all variables"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealOutput yAttReal[size(attNameReal, 1)] if
-       use_attNameReal
+  Modelica.Blocks.Interfaces.RealOutput yAttReal[size(attNameReal, 1)]
+    if use_attNameReal
     "Output Vector with all attributes of type double" annotation (Placement(
         transformation(extent={{100,64},{120,84}}), iconTransformation(extent={{
             100,64},{120,84}})));
-  Modelica.Blocks.Interfaces.IntegerOutput yAttInt[size(attNameInt, 1)] if
-       use_attNameInt
+  Modelica.Blocks.Interfaces.IntegerOutput yAttInt[size(attNameInt, 1)]
+    if use_attNameInt
     "Output Vector with all attributes of type integer" annotation (Placement(
         transformation(extent={{100,-74},{120,-54}}), iconTransformation(extent=
            {{100,-74},{120,-54}})));

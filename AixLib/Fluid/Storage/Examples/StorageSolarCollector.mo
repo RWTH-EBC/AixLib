@@ -134,7 +134,6 @@ equation
   connect(bufferStorage.portHC1In, pump.port_b) annotation (Line(points={{-9.75,
           29.7},{-9.75,44.85},{-8,44.85},{-8,60}}, color={0,127,255}));
   annotation (experiment(Tolerance=1e-6, StopTime = 172800, Interval = 60),
-  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSolarCollector.mos" "Simulate and plot"),
   Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
