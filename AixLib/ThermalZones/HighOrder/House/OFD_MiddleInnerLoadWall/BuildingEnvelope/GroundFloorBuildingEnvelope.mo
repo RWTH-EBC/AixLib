@@ -1,9 +1,12 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model GroundFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
     final Tset=372.15,
     withDynamicVentilation=false,                                               redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
+    parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   //////////room geometry
   parameter Modelica.SIunits.Length room_width=3.92
@@ -103,7 +106,7 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -149,7 +152,7 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -193,7 +196,7 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -239,7 +242,7 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final radLongCalcMethod=radLongCalcMethod,
     final T_ref=T_ref,
@@ -285,7 +288,7 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -439,10 +442,10 @@ equation
   connect(Corridor.thermRoom, thermCorridor) annotation (Line(points={{64.8,-9},{64.8,-32},{90,-32},{90,100},{110,100},{110,110}},
                                                            color={191,0,0}));
   connect(Livingroom.AirExchangePort, AirExchangePort[1]) annotation (Line(
-        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-15},{-115,-15}},
+        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-9},{-115,-9}},
         color={0,0,127}));
-  connect(Hobby.AirExchangePort, AirExchangePort[2]) annotation (Line(points={{85.9,68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-9},{-115,-9}},
-                                                                        color={
+  connect(Hobby.AirExchangePort, AirExchangePort[2]) annotation (Line(points={{85.9,
+          68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-6},{-115,-6}},color={
           0,0,127}));
   connect(Kitchen.SolarRadiationPort_OW1, South) annotation (Line(points={{-83.9,
           -61.6},{-90,-61.6},{-90,-92},{90,-92},{90,26},{110,26}}, color={255,
@@ -451,19 +454,25 @@ equation
       Line(points={{44,-10.9},{36,-10.9},{36,-92},{-34,-92},{-34,-48.8},{-46,-48.8}},
         color={191,0,0}));
 
-  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-63.32,13.92},{-63.32,-8},{-32,-8},{-32,-88},{0,-88},{0,-108}},
+  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-63.32,13.92},
+          {-63.32,-8},{-32,-8},{-32,-88},{0,-88},{0,-104}},
                                                color={191,0,0}));
-  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{66.14,26},{34,26},{34,-88},{0,-88},{0,-104}},
+  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{66.14,
+          26},{34,26},{34,-88},{0,-88},{0,-102}},
                                                color={191,0,0}));
   connect(Corridor.ground, groundTemp[3]) annotation (Line(points={{63.2,-26.86},{63.2,-34},{34,-34},{34,-88},{0,-88},{0,-100}},
                                         color={191,0,0}));
-  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{64.14,-37.44},{64.14,-34},{34,-34},{34,-88},{0,-88},{0,-96}},
+  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{64.14,-37.44},
+          {64.14,-34},{34,-34},{34,-88},{0,-88},{0,-98}},
                                                 color={191,0,0}));
-  connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},{-65.2,-14},{-32,-14},{-32,-88},{0,-88},{0,-92}},
+  connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},
+          {-65.2,-14},{-32,-14},{-32,-88},{0,-88},{0,-96}},
                                               color={191,0,0}));
   connect(Corridor.AirExchangePort, AirExchangePort[3]) annotation (Line(points={{84,4.205},{86,4.205},{86,4},{88,4},{88,-90},{-92,-90},{-92,-3},{-115,-3}}, color={0,0,127}));
-  connect(WC_Storage.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{83.9,-76.68},{88,-76.68},{88,-90},{-92,-90},{-92,3},{-115,3}}, color={0,0,127}));
-  connect(Kitchen.AirExchangePort, AirExchangePort[5]) annotation (Line(points={{-86,-74.24},{-92,-74.24},{-92,9},{-115,9}}, color={0,0,127}));
+  connect(WC_Storage.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{83.9,
+          -76.68},{88,-76.68},{88,-90},{-92,-90},{-92,0},{-115,0}},                                                                                color={0,0,127}));
+  connect(Kitchen.AirExchangePort, AirExchangePort[5]) annotation (Line(points={{-86,
+          -74.24},{-92,-74.24},{-92,3},{-115,3}},                                                                            color={0,0,127}));
   connect(heatStarToCombHeaters.portConvRadComb, portConvRadRooms) annotation (Line(points={{0,-18},{0,0}}, color={191,0,0}));
   connect(Livingroom.starRoom, heatStarToCombHeaters[1].portRad) annotation (Line(points={{-58.48,44},{-58,44},{-58,30},{-16,30},{-16,-38},{-5,-38}}, color={0,0,0}));
   connect(Livingroom.thermRoom, heatStarToCombHeaters[1].portConv) annotation (Line(points={{-65.08,44},{-66,44},{-66,26},{-20,26},{-20,-44},{5,-44},{5,-38}}, color={191,0,0}));

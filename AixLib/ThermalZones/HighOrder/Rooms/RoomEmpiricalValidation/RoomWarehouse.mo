@@ -77,9 +77,9 @@ model RoomWarehouse "Room model of Warehouse for Empirical validation"
     C=2100000*2000,
     final T(
       stateSelect=StateSelect.always,
-      fixed=(initDynamicsAir == Modelica.Fluid.Types.Dynamics.FixedInitial),
+      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
       start=T0_air),
-    final der_T(fixed=(initDynamicsAir == Modelica.Fluid.Types.Dynamics.SteadyStateInitial), start=0)) "Thermal capacity inside the room" annotation (Placement(transformation(extent={{30,16},{46,32}})));
+    final der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial), start=0)) "Thermal capacity inside the room" annotation (Placement(transformation(extent={{30,16},{46,32}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor(R=1/
         35000) annotation (Placement(transformation(extent={{34,-4},{48,10}})));
 

@@ -4,7 +4,7 @@ model Warehouse
     extends Modelica.Icons.Example;
   Rooms.RoomEmpiricalValidation.RoomWarehouse room(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=283.15,
     TWalls_start=283.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
@@ -126,12 +126,12 @@ equation
   connect(tempBottom.y, roomTempBottom) annotation (Line(points={{106.7,28},{158,28}}, color={0,0,127}));
 
   connect(weather.WindSpeed, room.WindSpeedPort) annotation (Line(points={{-59,94},
-          {-46,94},{-46,16},{-1.3,16},{-1.3,16.8}},color={0,0,127}));
+          {-46,94},{-46,16},{-1.3,16},{-1.3,3.84}},color={0,0,127}));
   connect(idealHeaterCooler.heatCoolRoom, room.thermRoom) annotation (Line(
         points={{49,-64},{60,-64},{60,14},{30.38,14},{30.38,6}},
         color={191,0,0}));
   connect(room.SolarRadiationPort, weather.SolarRadiation_OrientedSurfaces)
-    annotation (Line(points={{-1.3,26.88},{-82.8,26.88},{-82.8,77}},  color={255,
+    annotation (Line(points={{-1.3,26.16},{-82.8,26.16},{-82.8,77}},  color={255,
           128,0}));
   connect(Source_TsetC.y, idealHeaterCooler.setPointCool) annotation (Line(
         points={{15.65,-81.5},{37.6,-81.5},{37.6,-67.2}}, color={0,0,127}));
