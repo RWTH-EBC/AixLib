@@ -48,7 +48,7 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
     redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T0_air=294.15,
+    T0_air=293.15,
     TWalls_start=292.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009 Type_Win,
