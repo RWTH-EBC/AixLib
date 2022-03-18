@@ -56,7 +56,10 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
         Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
-    UValOutDoors=if TIR == 1 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
+    UValOutDoors=if TIR == 1 then 1.8 else 2.9,
+    upperFloor_Building(Corridor(T0_air=288.15), Bath(T0_air=297.15)),
+    groundFloor_Building(Corridor(T0_air=288.15)))
+                                                annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowRad[nRooms] annotation (Placement(transformation(extent={{-60,-24},{-48,-12}})));
   Modelica.Blocks.Sources.Constant adiabaticRadRooms[nRooms](k=fill(0, nRooms)) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-90,-26},{-74,-10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowAttic[1](Q_flow={0}) annotation (Placement(transformation(extent={{-62,-34},{-52,-24}})));
