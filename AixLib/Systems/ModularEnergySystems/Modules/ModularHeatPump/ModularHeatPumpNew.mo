@@ -51,13 +51,13 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     redeclare package Medium_eva =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
+    refIneFre_constant=2,
+    nthOrder=10,
     use_non_manufacturer=true,
     use_rev=false,
     use_autoCalc=true,
     Q_useNominal=QNom,
     use_refIne=true,
-    refIneFre_constant=2,
-    nthOrder=10,
     useBusConnectorOnly=true,
     dpCon_nominal=25000,
     use_conCap=false,
@@ -107,7 +107,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
 
   Modelica.Blocks.Sources.RealExpression mFlowEva(y=MediumEvap.cp_const*
         DeltaTEvap) "massflow heat source"
-    annotation (Placement(transformation(extent={{110,-48},{72,-26}})));
+    annotation (Placement(transformation(extent={{118,-50},{76,-26}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{60,-40},{44,-24}})));
   Modelica.Blocks.Sources.RealExpression tSource(y=TSourceFixed)
@@ -179,7 +179,7 @@ equation
   connect(heatPump.port_b1, senTHot.port_a)
     annotation (Line(points={{12,0},{50,0}},         color={0,127,255}));
 
-  connect(mFlowEva.y, division1.u2) annotation (Line(points={{70.1,-37},{64,-37},
+  connect(mFlowEva.y, division1.u2) annotation (Line(points={{73.9,-38},{64,-38},
           {64,-36},{61.6,-36},{61.6,-36.8}},
                                     color={0,0,127}));
   connect(senTCold.port_b, heatPump.port_a1) annotation (Line(points={{-28,0},{
@@ -192,14 +192,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.QEvapNom, division1.u1) annotation (Line(
-      points={{-4.925,99.085},{-4.925,74},{72,74},{72,-27.2},{61.6,-27.2}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(bouEvap_b.ports[1], heatPump.port_b2) annotation (Line(points={{-48,-40},
           {-8,-40},{-8,-12}},   color={0,127,255}));
   connect(bouEvap_a.ports[1], heatPump.port_a2) annotation (Line(points={{40,-72},
@@ -208,23 +200,7 @@ equation
           {40,-32},{40,-50},{86,-50},{86,-64},{62,-64}},       color={0,0,127}));
   connect(senTHot.port_b, port_b) annotation (Line(points={{66,0},{100,0}},
                     color={0,127,255}));
-  connect(sigBus.Pel, integrator.u) annotation (Line(
-      points={{-5,99},{-5,64},{50.8,64}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
 
-  connect(sigBus.PLR, control.PLR) annotation (Line(
-      points={{-4.925,99.085},{-4.925,53},{-44,53}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(senTHot.T, control.THot) annotation (Line(points={{58,8.8},{58,28},{4,
           28},{4,42},{-44,42}}, color={0,0,127}));
   connect(switch1.y, bouEvap_a.T_in) annotation (Line(points={{4.8,-64},{10,-64},
@@ -255,19 +231,43 @@ equation
           {-76,20},{-64,20},{-64,12}}, color={0,0,127}));
   connect(senTCold.T, control.TCold) annotation (Line(points={{-37,11},{-37,36},
           {-42,36},{-42,37},{-44,37}}, color={0,0,127}));
+
+  connect(mode.y, sigBus.modeSet) annotation (Line(points={{27.2,99},{10,99},{
+          10,99},{-5,99}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.PLR, control.PLR) annotation (Line(
+      points={{-4.925,99.085},{-4.925,53},{-44,53}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   connect(sigBus.TSource, switch1.u3) annotation (Line(
-      points={{-5,99},{-5,74},{-110,74},{-110,-57.6},{-13.6,-57.6}},
+      points={{-5,99},{-5,76},{-116,76},{-116,-57.6},{-13.6,-57.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-
-  connect(mode.y, sigBus.modeSet) annotation (Line(points={{27.2,99},{10,99},{
-          10,99},{-5,99}}, color={255,0,255}), Text(
-      string="%second",
-      index=1,
+  connect(sigBus.QEvapNom, division1.u1) annotation (Line(
+      points={{-4.925,99.085},{-4.925,74},{80,74},{80,-27.2},{61.6,-27.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(sigBus.Pel, integrator.u) annotation (Line(
+      points={{-5,99},{-5,64},{50.8,64}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

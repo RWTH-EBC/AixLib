@@ -19,7 +19,7 @@ package Examples "Holds examples for the modular energy system units"
       HighTemp=true,
       THotNom=343.15,
       TSourceNom=303.15,
-      QNom=100000,
+      QNom=200000,
       PLRMin=0.5,
       T_Start_Condenser=333.15,
       TSourceInternal=true,

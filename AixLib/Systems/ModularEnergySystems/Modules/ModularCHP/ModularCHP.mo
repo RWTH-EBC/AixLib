@@ -31,21 +31,21 @@ model ModularCHP
     T_start=TStart)
     annotation (Placement(transformation(extent={{58,-82},{78,-62}})));
   Fluid.HeatExchangers.DryCoilEffectivenessNTU hex(
-    redeclare package Medium1 = Media.Water,
-    redeclare package Medium2 = Media.Water,
+    redeclare package Medium1 = AixLib.Media.Water,
+    redeclare package Medium2 = AixLib.Media.Water,
     allowFlowReversal1=true,
     allowFlowReversal2=true,
-    m1_flow_nominal=m_flow_nominalHC,
-    m2_flow_nominal=m_flow_nominalCC,
-    dp1_nominal=0,
-    dp2_nominal=2500,
+    m1_flow_nominal=m_flow_nominalCC,
+    m2_flow_nominal=m_flow_nominalHC,
+    dp1_nominal=2500,
+    dp2_nominal=0,
     configuration=AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow,
     use_Q_flow_nominal=true,
     Q_flow_nominal=(1.3423*PelNom/1000 + 17.681)*1000,
-    T_a1_nominal=333.15,
-    T_a2_nominal=359.41,
+    T_a1_nominal=359.41,
+    T_a2_nominal=333.15,
     r_nominal=1)
-    annotation (Placement(transformation(extent={{-10,-56},{10,-76}})));
+    annotation (Placement(transformation(extent={{10,-76},{-12,-56}})));
   Fluid.Sensors.TemperatureTwoPort TColdHeatCircuit(
     redeclare package Medium = Media.Water,
     m_flow_nominal=m_flow_nominalHC,
@@ -150,10 +150,6 @@ equation
 //      Shutdown=false;
 //   end if;
 
-  connect(hex.port_b1,THotHeatCircuit. port_a)
-    annotation (Line(points={{10,-72},{58,-72}},         color={0,127,255}));
-  connect(TColdHeatCircuit.port_b,hex. port_a1)
-    annotation (Line(points={{-36,-72},{-10,-72}}, color={0,127,255}));
   connect(pLRMin.y, switch4.u2) annotation (Line(points={{-71,68},{-29.8,68},{
           -29.8,67}},                 color={255,0,255}));
   connect(switch3.y, cHPNotManufacturer.PLR) annotation (Line(points={{5,35.1},
@@ -194,10 +190,6 @@ equation
     annotation (Line(points={{-76.4,24},{-64,24}}, color={0,0,127}));
   connect(greater.y, switch3.u2) annotation (Line(points={{-41,32},{28,32},{28,
           74},{5,74},{5,55.8}}, color={255,0,255}));
-  connect(THotCoolingWater.port_b, hex.port_a2)
-    annotation (Line(points={{16,-60},{10,-60}}, color={0,127,255}));
-  connect(hex.port_b2, TColdCoolingWater.port_a)
-    annotation (Line(points={{-10,-60},{-16,-60}},color={0,127,255}));
   connect(integrator.y, cHPControlBus.EnergyConsumption) annotation (Line(
         points={{71,10},{92,10},{92,100},{0,100},{0,102}},       color={0,0,127}),
       Text(
@@ -265,6 +257,14 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(hex.port_a1, THotCoolingWater.port_b)
+    annotation (Line(points={{10,-60},{16,-60}}, color={0,127,255}));
+  connect(TColdCoolingWater.port_a, hex.port_b1)
+    annotation (Line(points={{-16,-60},{-12,-60}}, color={0,127,255}));
+  connect(TColdHeatCircuit.port_b, hex.port_a2)
+    annotation (Line(points={{-36,-72},{-12,-72}}, color={0,127,255}));
+  connect(hex.port_b2, THotHeatCircuit.port_a)
+    annotation (Line(points={{10,-72},{58,-72}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},

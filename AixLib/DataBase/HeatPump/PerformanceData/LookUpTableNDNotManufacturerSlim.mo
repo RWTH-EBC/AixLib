@@ -150,10 +150,10 @@ model LookUpTableNDNotManufacturerSlim
         rotation=90,
         origin={-108,-38})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=dTConFix)
-    annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
+    annotation (Placement(transformation(extent={{-150,-16},{-120,10}})));
 
 protected
-parameter String FilenameCOP= if HighTemp==true then "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Hubkolben_R134a.sdf" else "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf";
+parameter String FilenameCOP= if HighTemp==true then "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Hubkolben_R134a.sdf" else "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf" annotation (evaluate=True);
 
 equation
 
@@ -174,30 +174,6 @@ equation
   connect(product1.y,add. u1)
     annotation (Line(points={{-1.2,-64},{32,-64},{32,-58},{83.6,-58},{83.6,
           -64.8}},                                        color={0,0,127}));
-  connect(sigBus.PLR, switch4.u3) annotation (Line(
-      points={{-0.925,100.07},{-0.925,92},{-90,92},{-90,52},{-72,52}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.PLR, pLRMin.u) annotation (Line(
-      points={{-0.925,100.07},{-0.925,98},{2,98},{2,92},{-136,92},{-136,60},{-126,60}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.Shutdown, switch3.u2) annotation (Line(
-      points={{-0.925,100.07},{-0.925,48},{-35,48},{-35,23.8}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(nominalHeatPump.QEvapNom, sigBus.QEvapNom) annotation (Line(points={{-59,-4},{8,-4},{8,58},
           {-0.925,58},{-0.925,100.07}},                       color={0,0,127}),
       Text(
@@ -207,14 +183,6 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(limiter.y, multiplex4_1.u2[1]) annotation (Line(points={{74,55.4},{
           74,46},{41,46},{41,28}},      color={0,0,127}));
-  connect(sigBus.PLR, limiter.u) annotation (Line(
-      points={{-0.925,100.07},{6,100.07},{6,69.2},{74,69.2}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
 
   connect(product1.y, Pel) annotation (Line(points={{-1.2,-64},{24,-64},{24,
           -92},{0,-92},{0,-110}},
@@ -270,8 +238,8 @@ equation
   connect(SDFCOP.y, switch2.u3) annotation (Line(points={{250,-39.2},{250,-40},{
           58,-40},{58,-32},{-103.2,-32},{-103.2,-30.8}},
                                                 color={0,0,127}));
-  connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-119,0},
-          {-108,0},{-108,-30.8}},
+  connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-118.5,-3},
+          {-108,-3},{-108,-30.8}},
                             color={255,0,255}));
   connect(switch3.y, product1.u1) annotation (Line(points={{-35,3.1},{-35,
           -59.2},{-19.6,-59.2}}, color={0,0,127}));
@@ -291,6 +259,38 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.PLR, pLRMin.u) annotation (Line(
+      points={{-0.925,100.07},{-0.925,92},{-140,92},{-140,60},{-126,60}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.PLR, switch4.u3) annotation (Line(
+      points={{-0.925,100.07},{0,100.07},{0,92},{-88,92},{-88,52},{-72,52}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.Shutdown, switch3.u2) annotation (Line(
+      points={{-0.925,100.07},{0,100.07},{0,60},{-35,60},{-35,23.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.PLR, limiter.u) annotation (Line(
+      points={{-0.925,100.07},{16,100.07},{16,76},{74,76},{74,69.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},
