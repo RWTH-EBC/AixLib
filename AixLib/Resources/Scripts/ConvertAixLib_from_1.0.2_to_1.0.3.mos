@@ -8,3 +8,4 @@ convertClass("AixLib.Fluid.Storage.Storage", "AixLib.Fluid.Storage.StorageSimple
 
 //Rename data base due to renaming of buffer storage
 convertClass("AixLib.DataBase.Storage.BufferStorageBaseDataDefinition", "AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition");
+convertClass("AixLib.Fluid.Storage.Examples.BufferStorage", "AixLib.Fluid.Storage.Examples.StorageDetailedExample");
