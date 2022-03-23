@@ -86,7 +86,7 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(Tolerance=1e-6, StopTime=86400, Interval=60),
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/BufferStorage.mos" "Simulate and plot"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageDetailedExample.mos" "Simulate and plot"),
     Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
