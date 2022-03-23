@@ -1,0 +1,3 @@
+simulateModel("AixLib.Fluid.Storage.Examples.StorageBoiler", tolerance=1e-6, stopTime=86400, method="dassl", resultFile="StorageBoiler");
+createPlot(id=1, position={104, 0, 742, 420}, y={"bufferStorage.layer[5].T","bufferStorage.layer[1].T"}, range={0.0, 90000.0, 25.0, 65.0}, grid=true, filename="StorageBoiler.mat", colors={{28,108,200},{238,46,47}}, displayUnits={"degC","degC"});
+createPlot(id=2, position={104, 0, 742, 420}, y={"hea.Q_flow"}, range={0.0, 90000.0, 25.0, 65.0}, grid=true, filename="StorageBoiler.mat", colors={{28,108,200}}, displayUnits={"W"});
