@@ -246,14 +246,6 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(sigBus.TSource, switch1.u3) annotation (Line(
-      points={{-5,99},{-5,76},{-116,76},{-116,-57.6},{-13.6,-57.6}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(sigBus.QEvapNom, division1.u1) annotation (Line(
       points={{-4.925,99.085},{-4.925,74},{80,74},{80,-27.2},{61.6,-27.2}},
       color={255,204,51},
@@ -264,6 +256,14 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(sigBus.Pel, integrator.u) annotation (Line(
       points={{-5,99},{-5,64},{50.8,64}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.TSource, switch1.u3) annotation (Line(
+      points={{-5,99},{-5,68},{-114,68},{-114,-57.6},{-13.6,-57.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

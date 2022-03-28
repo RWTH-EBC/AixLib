@@ -1,25 +1,30 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularCHP;
-model ModularCHP
+model ModularCHP_ElDriven
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
-      Medium = Media.Water,m_flow_nominal=m_flow_nominalCC);
+      Medium = AixLib.Media.Water,
+                           m_flow_nominal=m_flow_nominalCC);
 
-  parameter Modelica.SIunits.Power PelNom=200000 "Nominal electrical power";
+  parameter Modelica.SIunits.Power NomPower=100000;
+parameter Boolean ElDriven=true;
 
   parameter Modelica.SIunits.TemperatureDifference deltaTHeatingCircuit=20 "Nominal temperature difference heat circuit";
 
-  parameter Modelica.SIunits.Temperature THotCoolingWaterMax=273.15+95 "Max. water temperature THot heat circuit";
+  parameter Modelica.SIunits.Temperature THotCoolingWaterMax=273.15 + 95
+                                                                       "Max. water temperature THot heat circuit";
 
   parameter Real PLRMin=0.5;
 
-  parameter Modelica.SIunits.Temperature TStart=273.15+20 "T start"
+  parameter Modelica.SIunits.Temperature TStart=273.15 + 20
+                                                          "T start"
    annotation (Dialog(tab="Advanced"));
 
   Fluid.BoilerCHP.CHPNotManufacturer cHPNotManufacturer(
     m_flow_nominal=m_flow_nominalCC,
     T_start=TStart,
+    NomPower=NomPower,
+    ElDriven=ElDriven,
     PLRMin=PLRMin,
-    redeclare package Medium = Media.Water,
-    PelNom=PelNom)
+    redeclare package Medium = Media.Water)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   inner Modelica.Fluid.System system(p_start=system.p_ambient)
     annotation (Placement(transformation(extent={{100,70},{120,90}})));
@@ -152,8 +157,8 @@ equation
 
   connect(pLRMin.y, switch4.u2) annotation (Line(points={{-71,68},{-29.8,68},{
           -29.8,67}},                 color={255,0,255}));
-  connect(switch3.y, cHPNotManufacturer.PLR) annotation (Line(points={{5,35.1},
-          {5,14},{-20,14},{-20,6.6},{-12,6.6}},color={0,0,127}));
+  connect(switch3.y, cHPNotManufacturer.PLR) annotation (Line(points={{5,35.1},{
+          5,14},{-20,14},{-20,9},{-12,9}},     color={0,0,127}));
   connect(realExpression.y, switch3.u1) annotation (Line(points={{45.3,68},{12,68},
           {12,60},{12.2,60},{12.2,55.8}}, color={0,0,127}));
   connect(switch4.y, switch3.u3) annotation (Line(points={{-9.1,67},{-2,67},{-2,
@@ -180,7 +185,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cHPNotManufacturer.PowerDemand, integrator.u) annotation (Line(points={{11,-4},
+  connect(cHPNotManufacturer.powerDemand, integrator.u) annotation (Line(points={{11,-4},
           {42,-4},{42,10},{48,10}},             color={0,0,127}));
   connect(cHPNotManufacturer.Pel, integrator1.u) annotation (Line(points={{11,8},{
           34,8},{34,38}},                   color={0,0,127}));
@@ -250,8 +255,9 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cHPNotManufacturer.MaxThermalPower, cHPControlBus.MaxThermalPower)
-    annotation (Line(points={{-8.8,11},{-8.8,102.1},{0.1,102.1}}, color={0,0,
+  connect(cHPNotManufacturer.maxThermalPower, cHPControlBus.MaxThermalPower)
+    annotation (Line(points={{-14.6,19},{-14.6,102.1},{0.1,102.1}},
+                                                                  color={0,0,
           127}), Text(
       string="%second",
       index=1,
@@ -265,6 +271,14 @@ equation
     annotation (Line(points={{-36,-72},{-12,-72}}, color={0,127,255}));
   connect(hex.port_b2, THotHeatCircuit.port_a)
     annotation (Line(points={{10,-72},{58,-72}}, color={0,127,255}));
+  connect(cHPNotManufacturer.minThermalPower, cHPControlBus.MinThermalPower)
+    annotation (Line(points={{-10.8,19},{-10.8,48},{0.1,48},{0.1,102.1}},
+                                                                    color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
@@ -280,4 +294,4 @@ equation
     Documentation(info="<html>
 <p>Model of a CHP-module with an inner cooling circuit and a control unit. Heat circuit and cooling circuit are connected with a heat exchanger. Further informations are given in the submodel discribtion.</p>
 </html>"));
-end ModularCHP;
+end ModularCHP_ElDriven;

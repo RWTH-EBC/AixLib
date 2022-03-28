@@ -135,14 +135,12 @@ model LookUpTableNDNotManufacturerSlim
         origin={80,-90})));
   Modelica.Blocks.Sources.RealExpression zero1
     annotation (Placement(transformation(extent={{0,26},{-18,46}})));
-  Modelica.Blocks.Sources.RealExpression tSource(y=TSource)
-    annotation (Placement(transformation(extent={{40,74},{56,92}})));
   Modelica.Blocks.Sources.RealExpression deltaTCon1(y=DeltaTCon)
     annotation (Placement(transformation(extent={{-7,-8},{7,8}},
         rotation=180,
         origin={91,104})));
-  Modelica.Blocks.Math.Add add2(k2=-1)
-    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+  Modelica.Blocks.Math.Add deltaT(k2=-1) annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
         rotation=270,
         origin={246,54})));
   Modelica.Blocks.Logical.Switch switch2
@@ -217,18 +215,16 @@ equation
           126},{80,112.8},{67.6,112.8}}, color={0,0,127}));
   connect(zero1.y, switch3.u1) annotation (Line(points={{-18.9,36},{-27.8,36},
           {-27.8,23.8}}, color={0,0,127}));
-  connect(fromKelvin1.Kelvin, tSource.y)
-    annotation (Line(points={{64.6,83},{56.8,83}}, color={0,0,127}));
   connect(deltaTCon.y, multiplex4_1.u3[1])
     annotation (Line(points={{43.3,62},{35,62},{35,28}}, color={0,0,127}));
   connect(deltaTCon1.y, add1.u1) annotation (Line(points={{83.3,104},{74,104},
           {74,103.2},{67.6,103.2}}, color={0,0,127}));
-  connect(add2.y, multiplex4_2.u3[1]) annotation (Line(points={{246,45.2},{246,42},
-          {247,42},{247,20}},        color={0,0,127}));
-  connect(fromKelvin4.Celsius, add2.u2) annotation (Line(points={{47,126},{140,126},
-          {140,63.6},{241.2,63.6}},                    color={0,0,127}));
-  connect(fromKelvin5.Celsius, add2.u1) annotation (Line(points={{278,69.6},{278,
-          64},{250.8,64},{250.8,63.6}},               color={0,0,127}));
+  connect(deltaT.y, multiplex4_2.u3[1]) annotation (Line(points={{246,45.2},{
+          246,42},{247,42},{247,20}}, color={0,0,127}));
+  connect(fromKelvin4.Celsius, deltaT.u2) annotation (Line(points={{47,126},{
+          140,126},{140,63.6},{241.2,63.6}}, color={0,0,127}));
+  connect(fromKelvin5.Celsius, deltaT.u1) annotation (Line(points={{278,69.6},{
+          278,64},{250.8,64},{250.8,63.6}}, color={0,0,127}));
   connect(SDFCOP1.y, switch2.u1) annotation (Line(points={{38,-29.2},{38,-44},{-84,
           -44},{-84,-18},{-112.8,-18},{-112.8,-30.8}},               color={0,0,
           127}));
@@ -291,6 +287,14 @@ equation
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus.TSource, fromKelvin1.Kelvin) annotation (Line(
+      points={{-1,100},{18,100},{18,96},{42,96},{42,83},{64.6,83}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},

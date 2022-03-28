@@ -141,7 +141,8 @@ package Examples "Holds examples for the modular energy system units"
       bou(nPorts=1),
       TSpeicher(y=60 + 273.15),
       sine(offset=0));
-    Modules.ModularCHP.ModularCHP modularCHP(PelNom(displayUnit="kW") = 100000)
+    Modules.ModularCHP.ModularCHP_ElDriven modularCHP(PelNom(displayUnit="kW")
+         = 100000)
       annotation (Placement(transformation(extent={{-26,-12},{-6,8}})));
     AixLib.Controls.Interfaces.CHPControlBus cHPControlBus
       annotation (Placement(transformation(extent={{-94,-4},{-54,36}})));

@@ -11,6 +11,8 @@ extends Modelica.Icons.InterfacesPackage;
     Boolean Shutdown "true: force shutdown";
 
     Modelica.SIunits.Power QEvapNom "Nominal evaporation heat flow";
+
+    Modelica.SIunits.Power QEvap "Nominal evaporation heat flow";
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end VapourCompressionMachineControleBusModular;
