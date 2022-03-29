@@ -20,7 +20,8 @@ model HeatPump
       final DeltaTCon=DeltaTCon,
       final DeltaTEvap=DeltaTEvap,
       final TSource=TSource,
-      final dTConFix=dTConFix));
+      final dTConFix=dTConFix,
+      TSourceInternal=TSourceInternal));
 
   replaceable model PerDataMainHP =
       AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
@@ -58,6 +59,10 @@ model HeatPump
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Boolean dTConFix=false "Constant delta T condenser"
     annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+    parameter Boolean TSourceInternal=false
+                                          "Use internal TSource?"
+    annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+
 
 equation
   connect(innerCycle.QEva, sigBus.QEvap) annotation (Line(points={{0,-30.7},{-6,
