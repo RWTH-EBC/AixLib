@@ -320,7 +320,7 @@ RegressionTest_Check_References:
             echo $pushmodel ;
             (git ls-files --others --exclude-standard) > ${new_ref_file} ;
             python bin/CITests/06_deploy/deploy_artifacts.py --library AixLib --ref --new-ref;
-            message="Automatic push of CI with new regression reference files. Please pull the new files before push again. Plottet Results $GITLAB_Page/$CI_COMMIT_REF_NAME/plots/ " ;
+            message="${bot_create_ref_commit}" ;
             git add $pushmodel ;
             git commit -m "$message";
             git push git@github.com:$Github_Repository.git ;
