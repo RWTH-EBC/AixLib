@@ -202,7 +202,7 @@ replaceable package Medium2 =
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
-    redeclare Fluid.Movers.Data.Fans.GenericFan per(hydraulicEfficiency=
+    redeclare Fluid.Movers.Data.Generic per(hydraulicEfficiency=
           hydraulicEfficiency, motorEfficiency(eta={0.95})),
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Supply air fan"
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
@@ -213,7 +213,7 @@ replaceable package Medium2 =
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
-    redeclare Fluid.Movers.Data.Fans.GenericFan per(hydraulicEfficiency=
+    redeclare Fluid.Movers.Data.Generic per(hydraulicEfficiency=
           hydraulicEfficiency, motorEfficiency(eta={0.95})),
     final inputType=AixLib.Fluid.Types.InputType.Continuous) "Return air fan"
                                         annotation (Placement(transformation(
