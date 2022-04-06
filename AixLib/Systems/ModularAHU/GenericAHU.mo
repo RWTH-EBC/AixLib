@@ -27,7 +27,7 @@ replaceable package Medium2 =
   parameter Fluid.Movers.BaseClasses.Characteristics.efficiencyParameters
     hydraulicEfficiency(
       V_flow={0},
-      eta={0.7}) "Hydraulic efficiency of the fans" annotation (dialog(group="Fans"));
+      eta={0.7}) "Hydraulic efficiency of the fans" annotation (Dialog(group="Fans"));
 
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
   parameter Modelica.SIunits.MassFlowRate m1_flow_nominal
