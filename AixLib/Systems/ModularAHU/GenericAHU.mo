@@ -30,9 +30,9 @@ replaceable package Medium2 =
       eta={0.7}) "Hydraulic efficiency of the fans" annotation (Dialog(group="Fans"));
 
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal
+  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal = 1
     "Nominal mass flow rate in air canal";
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal
+  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal = 0.5
     "Nominal mass flow rate in hydraulics";
   parameter Modelica.SIunits.Temperature T_start=303.15
     "Initialization temperature" annotation(Dialog(tab="Advanced", group="Initialization"));
