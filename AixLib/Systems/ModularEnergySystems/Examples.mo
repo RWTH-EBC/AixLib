@@ -5,19 +5,19 @@ package Examples "Holds examples for the modular energy system units"
       extends
       AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer(
       vol(
-        T_start=333.15,
+        T_start=303.15,
         m_flow_nominal=1,
-        V=0.4,
+        V=4,
         nPorts=2),
       bou(use_T_in=true, nPorts=1),
-      TSpeicher(y=70 + 273.15),
+      TSpeicher(y=50 + 273.15),
       sine(freqHz=0, offset=-100000),
       PLR(y=1));
     Modules.ModularHeatPump.ModularHeatPumpNew
                                             modularHeatPumpNew(
       dTConFix=false,
       HighTemp=true,
-      THotNom=343.15,
+      THotNom=333.15,
       TSourceNom=303.15,
       QNom=200000,
       PLRMin=0.5,
@@ -141,8 +141,8 @@ package Examples "Holds examples for the modular energy system units"
       bou(nPorts=1),
       TSpeicher(y=60 + 273.15),
       sine(offset=0));
-    Modules.ModularCHP.ModularCHP_ElDriven modularCHP(PelNom(displayUnit="kW")
-         = 100000)
+    Modules.ModularCHP.ModularCHP_ElDriven modularCHP(PelNom(displayUnit="kW")=
+           100000)
       annotation (Placement(transformation(extent={{-26,-12},{-6,8}})));
     AixLib.Controls.Interfaces.CHPControlBus cHPControlBus
       annotation (Placement(transformation(extent={{-94,-4},{-54,36}})));

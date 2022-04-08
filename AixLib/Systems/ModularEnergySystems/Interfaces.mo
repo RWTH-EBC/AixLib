@@ -13,6 +13,8 @@ extends Modelica.Icons.InterfacesPackage;
     Modelica.SIunits.Power QEvapNom "Nominal evaporation heat flow";
 
     Modelica.SIunits.Power QEvap "Nominal evaporation heat flow";
+
+    Real mFlowWaterRel;
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end VapourCompressionMachineControleBusModular;

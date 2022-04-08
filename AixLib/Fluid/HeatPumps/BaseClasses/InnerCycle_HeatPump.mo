@@ -31,7 +31,8 @@ model InnerCycle_HeatPump
     DeltaTCon=DeltaTCon,
     DeltaTEvap=DeltaTEvap,
     TSource=TSource,
-    dTConFix=dTConFix)                  if use_non_manufacturer
+    TSourceInternal=TSourceInternal,
+    THotExternal=THotExternal)          if use_non_manufacturer
     annotation (Placement(transformation(extent={{48,18},{100,80}})));
 
   PerDataMainHP PerformanceDataHPHeating if not use_non_manufacturer
@@ -74,8 +75,10 @@ model InnerCycle_HeatPump
   parameter Modelica.SIunits.Temperature TSource=280 "temperature of heat source"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-  parameter Boolean dTConFix=false
-  annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+  parameter Boolean TSourceInternal=false "Use internal TSource?"
+    annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+     parameter Boolean THotExternal=false "Use external THot?"
+                                                              annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
 
 equation

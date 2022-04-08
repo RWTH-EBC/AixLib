@@ -118,7 +118,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     annotation (Placement(transformation(extent={{-62,-98},{-38,-84}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senTCold(
-    redeclare final package Medium = Media.Water,
+    redeclare final package Medium = AixLib.Media.Water,
     final m_flow_nominal=QNom/(4180*DeltaTCon),
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final transferHeat=false,
@@ -163,13 +163,26 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     "Maximal THot"
     annotation (Placement(transformation(extent={{62,28},{38,44}})));
   AixLib.Fluid.Movers.SpeedControlled_y
-                           fan1(redeclare package Medium = Media.Water,
+                           fan1(
+    redeclare package Medium = AixLib.Media.Water,
     allowFlowReversal=false,
     m_flow_small=0.001,
     per(pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/500}, dp={(25000
              + dpExternal)/0.8,(25000 + dpExternal),0})),
-    addPowerToMedium=false)
+    addPowerToMedium=false,
+    use_inputFilter=false,
+    y_start=1)
     annotation (Placement(transformation(extent={{-74,-10},{-54,10}})));
+  Fluid.Sensors.MassFlowRate        senMasFloHP(redeclare package Medium =
+        Media.Water)        annotation (Placement(transformation(
+        extent={{8,8},{-8,-8}},
+        rotation=180,
+        origin={26,0})));
+  Modelica.Blocks.Math.Division relativeLoad "Main above"
+    annotation (Placement(transformation(extent={{158,38},{138,58}})));
+  Modelica.Blocks.Sources.RealExpression mFlowEva1(y=QNom/MediumCon.cp_const/
+        DeltaTCon)  "massflow heat source"
+    annotation (Placement(transformation(extent={{208,-24},{170,-2}})));
 protected
                replaceable package MediumCon = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat sink";
@@ -185,8 +198,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(heatPump.port_b1, senTHot.port_a)
-    annotation (Line(points={{10,0},{50,0}},         color={0,127,255}));
 
   connect(mFlowEva.y, division1.u2) annotation (Line(points={{70.1,-37},{64,-37},
           {64,-36},{61.6,-36},{61.6,-36.8}},
@@ -273,6 +284,20 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
 
+  connect(heatPump.port_b1, senMasFloHP.port_a) annotation (Line(points={{10,0},
+          {14,0},{14,8.88178e-16},{18,8.88178e-16}}, color={0,127,255}));
+  connect(senMasFloHP.port_b, senTHot.port_a) annotation (Line(points={{34,
+          -1.11022e-15},{42,-1.11022e-15},{42,0},{50,0}}, color={0,127,255}));
+  connect(senMasFloHP.m_flow, relativeLoad.u1) annotation (Line(points={{26,8.8},
+          {26,22},{206,22},{206,54},{160,54}}, color={0,0,127}));
+  connect(mFlowEva1.y, relativeLoad.u2) annotation (Line(points={{168.1,-13},{
+          166,-13},{166,42},{160,42}}, color={0,0,127}));
+  connect(relativeLoad.y, sigBus.mFlowWaterRel) annotation (Line(points={{137,
+          48},{78,48},{78,99.085},{-4.925,99.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},

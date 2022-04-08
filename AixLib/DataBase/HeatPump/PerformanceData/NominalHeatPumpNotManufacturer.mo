@@ -11,9 +11,6 @@ model NominalHeatPumpNotManufacturer
      parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
- parameter Boolean dTConFix=false "Constant delta T condenser"
-   annotation (Dialog(descriptionLabel=true, group="General machine information"));
-
   Modelica.Blocks.Interfaces.RealOutput PelFullLoad(final unit="W", final
       displayUnit="kW")
     "maximal notwendige elektrische Leistung im Betriebspunkt" annotation (
@@ -77,14 +74,6 @@ model NominalHeatPumpNotManufacturer
         extent={{11,12},{-11,-12}},
         rotation=180,
         origin={-89,74})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=dTConFix)
-    annotation (Placement(transformation(extent={{-126,-34},{-98,-12}})));
-  Modelica.Blocks.Logical.Switch switch2
-    annotation (Placement(transformation(extent={{11,-11},{-11,11}},
-        rotation=180,
-        origin={-55,-23})));
-  Modelica.Blocks.Interfaces.RealInput u
-    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
 protected
 parameter String FilenameCOP= if HighTemp==true then "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Hubkolben_R134a.sdf" else "modelica://AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf" annotation (evaluate=True);
 equation
@@ -112,14 +101,8 @@ equation
     annotation (Line(points={{-76.9,74},{-7,74},{-7,24}}, color={0,0,127}));
   connect(deltaTCon.y, multiplex4_1.u3[1])
     annotation (Line(points={{-74.8,57},{-13,57},{-13,24}}, color={0,0,127}));
-  connect(booleanExpression.y, switch2.u2)
-    annotation (Line(points={{-96.6,-23},{-68.2,-23}}, color={255,0,255}));
-  connect(fromKelvin2.Celsius, switch2.u3) annotation (Line(points={{-45,34},{-40,
-          34},{-40,10},{-80,10},{-80,-14.2},{-68.2,-14.2}}, color={0,0,127}));
-  connect(switch2.y, multiplex4_1.u4[1]) annotation (Line(points={{-42.9,-23},{-32,
-          -23},{-32,38},{-19,38},{-19,24}}, color={0,0,127}));
-  connect(u, switch2.u1) annotation (Line(points={{-120,-60},{-90,-60},{-90,-31.8},
-          {-68.2,-31.8}}, color={0,0,127}));
+  connect(fromKelvin2.Celsius, multiplex4_1.u4[1])
+    annotation (Line(points={{-45,34},{-19,34},{-19,24}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
