@@ -1,7 +1,6 @@
 within AixLib.Airflow.FacadeVentilationUnit;
 model FacadeVentilationUnit
   "Facade Ventilation Unit (FVU) equipped with a recuperator"
-
   replaceable package Water = AixLib.Media.Water
     "Water Model in the system";
   replaceable package Air = AixLib.Media.Air
