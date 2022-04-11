@@ -308,6 +308,20 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Mass fraction of co2 in ROM in kg_CO2/ kg_TotalAir"
     annotation (Placement(transformation(extent={{-8,-74},{10,-60}})));
 
+  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[zoneParam.nOrientationsRoof](
+    each final outSkyCon=false,
+    each final outGroCon=false,
+    each final lat=zoneParam.lat,
+    final azi=zoneParam.aziRoof,
+    final til=zoneParam.tiltRoof)
+    "Calculates diffuse solar radiation on titled surface for roof"
+    annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
+  Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[3](each final quantity="HeatFlowRate",
+      each final unit="W") if ATot > 0
+    "Heat flow based on internal gains from persons, machines, and light"
+                                                           annotation (
+      Placement(transformation(extent={{100,-50},{120,-30}}),
+        iconTransformation(extent={{100,-50},{120,-30}})));
   // protected: ThermalZone
 protected
     Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
@@ -386,15 +400,22 @@ protected
        (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-58},{-60,-42}})));
 
-public
-  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[zoneParam.nOrientationsRoof](
-    each final outSkyCon=false,
-    each final outGroCon=false,
-    each final lat=zoneParam.lat,
-    final azi=zoneParam.aziRoof,
-    final til=zoneParam.tiltRoof)
-    "Calculates diffuse solar radiation on titled surface for roof"
-    annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
+  // protected: Outputs
+  Modelica.Blocks.Sources.RealExpression QIntGainsInternalDep_flow[3](y={-lights.convHeat.Q_flow
+         - lights.radHeat.Q_flow,-machinesSenHea.radHeat.Q_flow -
+        machinesSenHea.convHeat.Q_flow, -humanSenHeaDependent.radHeat.Q_flow -
+        humanSenHeaDependent.convHeat.Q_flow}) if ATot > 0 and internalGainsMode == 1
+    annotation (Placement(transformation(extent={{94,-46},{98,-34}})));
+  Modelica.Blocks.Sources.RealExpression QIntGainsInternalInd_flow[3](y={-lights.convHeat.Q_flow
+         - lights.radHeat.Q_flow,-machinesSenHea.radHeat.Q_flow -
+        machinesSenHea.convHeat.Q_flow, -humanSenHeaIndependent.radHeat.Q_flow -
+        humanSenHeaIndependent.convHeat.Q_flow}) if ATot > 0 and internalGainsMode == 2
+    annotation (Placement(transformation(extent={{94,-46},{98,-34}})));
+  Modelica.Blocks.Sources.RealExpression QIntGainsInternalTot_flow[3](y={-lights.convHeat.Q_flow
+         - lights.radHeat.Q_flow,-machinesSenHea.radHeat.Q_flow -
+        machinesSenHea.convHeat.Q_flow, -humanTotHeaDependent.radHeat.Q_flow -
+        humanTotHeaDependent.convHeat.Q_flow}) if ATot > 0 and internalGainsMode == 3
+    annotation (Placement(transformation(extent={{94,-46},{98,-34}})));
   Utilities.Psychrometrics.MixedHumidity mixedHumidity if (ATot > 0 or
     zoneParam.VAir > 0) and use_NaturalAirExchange and
     use_MechanicalAirExchange and use_moisture_balance
@@ -794,6 +815,12 @@ end if;
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(QIntGainsInternalDep_flow.y, QIntGains_flow) annotation (Line(points={{98.2,
+          -40},{110,-40}},                   color={0,0,127}));
+  connect(QIntGainsInternalInd_flow.y, QIntGains_flow) annotation (Line(points={{98.2,
+          -40},{110,-40}},                   color={0,0,127}));
+  connect(QIntGainsInternalTot_flow.y, QIntGains_flow) annotation (Line(points={{98.2,
+          -40},{110,-40}},                   color={0,0,127}));
   connect(mixedHumidity.mixedHumidityOut, airExcMoi.HumIn) annotation (Line(
         points={{-48,-8},{-34,-8},{-34,-10},{-21.2,-10}},
                                                         color={0,0,127}));
