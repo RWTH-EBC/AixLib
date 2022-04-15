@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpHeadControlled "testing the head controlled pump model."
   extends Modelica.Icons.Example;
 

@@ -4,7 +4,8 @@ block BoundaryMap
 For the boundaries of the y-input value, a dynamic hysteresis is used to ensure a used device will stay off a certain time after shutdown."
   extends AixLib.Controls.HeatPump.SafetyControls.BaseClasses.BoundaryMapIcon(
      final iconMin=-70, final iconMax=70);
-  parameter Real dx = 1 "Delta value used for both upper and lower hysteresis. Used to avoid state-events when used as a safety control.";
+  parameter Real dx "Delta value used for both upper and lower hysteresis. Used to avoid state events when used as a safety control."
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope"));
   Modelica.Blocks.Interfaces.BooleanOutput noErr
     "If an error occurs, this will be false"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
@@ -13,8 +14,9 @@ For the boundaries of the y-input value, a dynamic hysteresis is used to ensure 
   Modelica.Blocks.Interfaces.RealInput y_in "Current value on y-Axis"
     annotation (Placement(transformation(extent={{-128,-74},{-100,-46}})));
 
-  Modelica.Blocks.Tables.CombiTable1Ds uppCombiTable1Ds(final table=tableUpp, smoothness=
-        Modelica.Blocks.Types.Smoothness.LinearSegments,
+  Modelica.Blocks.Tables.CombiTable1Ds uppCombiTable1Ds(
+    final table=tableUpp_internal,
+    final smoothness= Modelica.Blocks.Types.Smoothness.LinearSegments,
     final tableOnFile=false)
     annotation (Placement(transformation(extent={{-48,68},{-28,88}})));
   Modelica.Blocks.MathBoolean.Nor

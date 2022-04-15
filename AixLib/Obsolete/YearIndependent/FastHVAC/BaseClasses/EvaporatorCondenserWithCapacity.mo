@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.BaseClasses;
+within AixLib.Obsolete.YearIndependent.FastHVAC.BaseClasses;
 model EvaporatorCondenserWithCapacity
   extends
     AixLib.Obsolete.YearIndependent.FastHVAC.Interfaces.TwoPortHeatMassExchanger(
