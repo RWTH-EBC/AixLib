@@ -49,7 +49,7 @@ IBPSA:
             %endfor
     artifacts:
         paths:
-            - Merge_Package/GitLabCI/
+            - Merge_Package/${CI_PROJECT_NAME}/
         expire_in: 6 h     
 
 WhiteList:

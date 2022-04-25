@@ -82,7 +82,7 @@ def compare_conversions(l_ibpsa_conv, l_aixlib_conv):
 		if line1 == line2.replace("AixLib", "IBPSA"):
 			continue
 		else:
-			print(f'Different Content:\n{l_ibpsa_conv}: {line1}\n{l_aixlib_conv}: {line2} ')
+			#print(f'Different Content:\n{l_ibpsa_conv}: {line1}\n{l_aixlib_conv}: {line2} ')
 			result = False
 	return result
 
@@ -101,9 +101,9 @@ def _read_package():
 
 def add_conv_to_package(l_aixlib_conv, new_conversion_script, old_to_numb, old_from_numb, new_to_numb):
 	l_aixlib_conv = l_aixlib_conv.replace('\\','/')
-	print(f'old_to_numb_ {old_to_numb}')
-	print(f'old_from_numb {old_from_numb}')
-	print(f'new_to_numb {new_to_numb}')
+	#print(f'old_to_numb_ {old_to_numb}')
+	#print(f'old_from_numb {old_from_numb}')
+	#print(f'new_to_numb {new_to_numb}')
 	new_conversion_script = new_conversion_script.replace('\\','/')
 	file = open(f'AixLib{os.sep}package.mo', "r")
 	list = []
