@@ -60,6 +60,7 @@ class ValidateTest(object):
         self.dymola_exception = DymolaException()
         self.dymola.ExecuteCommand(
             "Advanced.TranslationInCommandLog:=true;")  # Writes all information in the log file, not only the
+        self.dymola.ExecuteCommand("/bin/dymola_scripts/open_MSL_4.0.mos")
 
     def _dym_check_lic(self):  # check the license
         dym_sta_lic_available = self.dymola.ExecuteCommand('RequestOption("Standard");')
