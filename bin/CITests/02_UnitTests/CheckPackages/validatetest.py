@@ -361,7 +361,7 @@ class Create_whitelist(object):
             print(f'Library Path is wrong. Please Check Path of {self.wh_lib} Library Path')
             exit(1)
         error_model = []
-        error_message = []
+        #error_message = []
         for model in model_list:
             result = self.dymola.checkModel(model)
             if result is True:
@@ -369,14 +369,15 @@ class Create_whitelist(object):
                 continue
             if result is False:
                 print(f'\n{self.CRED}Error:{self.CEND} {model}\n')
-                log = self.dymola.getLastError()
-                print(f'{log}')
+                #log = self.dymola.getLastError()
+                #print(f'{log}')
                 error_model.append(model)
-                error_message.append(log)
+                #error_message.append(log)
                 continue
         self.dymola.savelog(f'{self.wh_lib}-log.txt')
         self.dymola.close()
-        return error_model, error_message
+        #return error_model, error_message
+        return error_model
 
     def _write_exit_log(self, version_check):  # write entry in exit file
         exit = open(self.exit_file, "w")
@@ -506,18 +507,19 @@ def create_wh_workflow():
             print(f'{CRED}Error:{CEND} git url or whitelist path is missing!')
             exit(1)
         if args.git_url is not None:
-            print(f'Setting: library {args.git_url}')
+            print(f'Setting: whitelist git url library {args.git_url}')
             Git_Class = Git_Repository_Clone(repo_dir=args.repo_dir,
                                              git_url=args.git_url)
             Git_Class._clone_repository()
             model_list = Whitelist_class._get_wh_model(args.repo_dir)
         elif args.wh_path is not None:
-            print(f'Setting: library {args.wh_path}')
+            print(f'Setting: whitelist path library {args.wh_path}')
             model_list = Whitelist_class._get_wh_model(args.wh_path)
         print(f'Write new writelist from {args.wh_library} library')
         Whitelist_class._dym_check_lic()
         result = Whitelist_class._check_wh_model(model_list)
-        error_model_list = result[0]
+        #error_model_list = result[0]
+        error_model_list = result
         Whitelist_class._write_whitelist(error_model_list, version)
         exit(0)
     else:
