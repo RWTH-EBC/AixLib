@@ -66,7 +66,7 @@ class ValidateTest(object):
         #/ builds / EBC / EBC_all / github_ci / AixLib /.git /
         #library_check = self.dymola.openModel("../../../../../opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo")   # Load modelica library MSL 4.0.0
         #library_check = self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
-        library_check = self.dymola.openModel("library/Modelica 4.0.0/package.mo")  # Load modelica library MSL 4.0.0
+        library_check = self.dymola.openModel("../../../../../library/Modelica 4.0.0/package.mo")  # Load modelica library MSL 4.0.0
 
         if library_check is False:
             print("Failed to load Modelica library 4.0.0")
