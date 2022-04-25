@@ -141,26 +141,26 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
          Text(
            extent={{-150,110},{150,150}},
            textString="%name",
-           lineColor={0,0,255}),
+           textColor={0,0,255}),
          Text(
            extent={{-96,72},{-52,50}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="skyCle"),
          Text(
            extent={{-96,14},{-52,-8}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="skyBri"),
          Text(
            extent={{-96,-46},{-52,-68}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="zen"),
          Text(
            extent={{62,50},{106,28}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="F1"),
          Text(
            extent={{60,-30},{104,-52}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="F2")}), 
    __Dymola_LockedEditing="Model from IBPSA");
  end BrighteningCoefficient;

@@ -37,7 +37,7 @@ within AixLib.Fluid.FMI.ExportContainers;
            fillPattern=FillPattern.Solid),
          Text(
            extent={{-64,270},{78,164}},
-           lineColor={0,0,255},
+           textColor={0,0,255},
            textString="%name"),
          Rectangle(
            extent={{-62,100},{80,-62}},

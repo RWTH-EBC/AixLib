@@ -26,7 +26,7 @@ within AixLib.Fluid.MixingVolumes.Validation;
        StopTime=3600,
        Tolerance=1e-06),
      __Dymola_Commands(
-       file="Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/CoupledVolumesGlycol47.mos"
+       file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/CoupledVolumesGlycol47.mos"
             "Simulate and plot"), 
    __Dymola_LockedEditing="Model from IBPSA");
  end CoupledVolumesGlycol47;

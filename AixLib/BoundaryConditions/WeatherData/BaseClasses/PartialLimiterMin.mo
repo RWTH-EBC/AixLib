@@ -37,7 +37,7 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
        graphics={
          Text(
            extent={{-100,30},{98,-16}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            textString="0 <= u")}), 
    __Dymola_LockedEditing="Model from IBPSA");
  end PartialLimiterMin;

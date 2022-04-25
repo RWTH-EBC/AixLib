@@ -4,7 +4,7 @@ within AixLib.Fluid.HeatExchangers;
      redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
      final prescribedHeatFlowRate=true));
  
-   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
+   parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
      "Heat flow rate at u=1, positive for heating";
    Modelica.Blocks.Interfaces.RealInput u(unit="1") "Control input"
      annotation (Placement(transformation(
@@ -59,7 +59,7 @@ within AixLib.Fluid.HeatExchangers;
            fillPattern=FillPattern.Solid),
          Text(
            extent={{-56,-12},{54,-72}},
-           lineColor={255,255,255},
+           textColor={255,255,255},
            textString="Q=%Q_flow_nominal"),
          Rectangle(
            extent={{-100,60},{-70,58}},
@@ -69,11 +69,11 @@ within AixLib.Fluid.HeatExchangers;
            fillPattern=FillPattern.Solid),
          Text(
            extent={{-122,106},{-78,78}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="u"),
          Text(
            extent={{72,96},{116,68}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="Q_flow")}),
  defaultComponentName="hea",
  Documentation(info="<html>
@@ -116,6 +116,12 @@ within AixLib.Fluid.HeatExchangers;
  </html>",
  revisions="<html>
  <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
  <li>
  November 3, 2016, by Michael Wetter:<br/>
  Set <code>preHea(final alpha=0)</code> as this allows to simplify the

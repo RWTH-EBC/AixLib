@@ -43,22 +43,22 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
              100}}), graphics={Text(
            extent={{-150,110},{150,150}},
            textString="%name",
-           lineColor={0,0,255}),
+           textColor={0,0,255}),
          Text(
            extent={{-54,38},{42,-24}},
-           lineColor={0,0,255},
+           textColor={0,0,255},
            textString="t"),
          Text(
            extent={{-4,4},{52,-24}},
-           lineColor={0,0,255},
+           textColor={0,0,255},
            textString="sol"),
          Text(
            extent={{-94,66},{-42,50}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="equTim"),
          Text(
            extent={{-96,-44},{-44,-60}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="locTim")}), 
    __Dymola_LockedEditing="Model from IBPSA");
  end SolarTime;

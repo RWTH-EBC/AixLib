@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid;
+within AixLib.Fluid;
 package Interfaces "Package with interfaces for fluid models"
   extends Modelica.Icons.InterfacesPackage;
 

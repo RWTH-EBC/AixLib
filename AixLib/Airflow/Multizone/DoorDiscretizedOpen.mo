@@ -21,11 +21,11 @@ within AixLib.Airflow.Multizone;
  equation
    m=mFixed;
    A = wOpe*hOpe;
-   kVal = CD*dA*sqrt(2/rho_default);
+   CVal = CD*dA*sqrt(2/rho_default);
    // orifice equation
    for i in 1:nCom loop
      dV_flow[i] = AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM(
-       k=kVal,
+       C=CVal,
        dp=dpAB[i],
        m=mFixed,
        a=a,

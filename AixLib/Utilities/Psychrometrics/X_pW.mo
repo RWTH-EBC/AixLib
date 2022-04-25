@@ -12,8 +12,11 @@ within AixLib.Utilities.Psychrometrics;
                                             start=2000,
                                             nominal=1000) "Water vapor pressure"
      annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
-   output Modelica.SIunits.MassFraction x_w(min=0, max=1, nominal=0.01, start=0.001)
-     "Water mass fraction per mass of dry air";
+   output Modelica.Units.SI.MassFraction x_w(
+     min=0,
+     max=1,
+     nominal=0.01,
+     start=0.001) "Water mass fraction per mass of dry air";
  equation
    X_w = AixLib.Utilities.Psychrometrics.Functions.X_pW(p_w=p_w, p=p_in_internal);
    x_w = X_w/(1-X_w);
@@ -51,10 +54,10 @@ within AixLib.Utilities.Psychrometrics;
  </html>"),
      Icon(graphics={Text(
            extent={{-92,52},{-36,-40}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            textString="pW"), Text(
            extent={{46,44},{94,-24}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            textString="X")}), 
    __Dymola_LockedEditing="Model from IBPSA");
  end X_pW;

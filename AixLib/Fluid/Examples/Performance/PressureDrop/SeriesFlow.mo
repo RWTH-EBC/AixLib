@@ -4,9 +4,9 @@ within AixLib.Fluid.Examples.Performance.PressureDrop;
    extends Modelica.Icons.Example;
    package Medium = AixLib.Media.Air;
    parameter Integer nRes(min=2) = 10 "Number of resistances";
-   parameter Modelica.SIunits.PressureDifference dp_nominal=1
+   parameter Modelica.Units.SI.PressureDifference dp_nominal=1
      "Pressure drop at nominal mass flow rate";
-   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
+   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
      "Nominal mass flow rate";
  
    Sources.MassFlowSource_T sou(
@@ -59,8 +59,7 @@ within AixLib.Fluid.Examples.Performance.PressureDrop;
  </p>
  </html>"),
      experiment(Tolerance=1e-06, StopTime=1),
-     __Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlow.mos"
+     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/PressureDrop/SeriesFlow.mos"
          "Simulate and plot"), 
    __Dymola_LockedEditing="Model from IBPSA");
  end SeriesFlow;

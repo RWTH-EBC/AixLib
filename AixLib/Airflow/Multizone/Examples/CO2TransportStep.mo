@@ -26,8 +26,7 @@ within AixLib.Airflow.Multizone.Examples;
      nPorts=1) "CO2 source"
      annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
  equation
- 
-   connect(sou.m_flow_in, pulse.y)                             annotation (Line(
+   connect(sou.m_flow_in, pulse.y) annotation (Line(
        points={{-102.1,-70},{-119,-70}},
        color={0,0,127}));
    connect(sou.ports[1], volWes.ports[4])

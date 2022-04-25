@@ -3,13 +3,13 @@ within AixLib.Utilities.Psychrometrics.Functions.BaseClasses.Examples;
    "Model to test correct implementation of derivative"
    extends Modelica.Icons.Example;
  
-   parameter Modelica.SIunits.Temperature TMin = 190 "Temperature";
-   parameter Modelica.SIunits.Temperature TMax = 373.16 "Temperature";
+   parameter Modelica.Units.SI.Temperature TMin=190 "Temperature";
+   parameter Modelica.Units.SI.Temperature TMax=373.16 "Temperature";
  
    Real y "Function value";
    Real y_comp "Function value for comparison";
    Real err "Integration error";
-   Modelica.SIunits.Temperature T "Temperature";
+   Modelica.Units.SI.Temperature T "Temperature";
  initial equation
    y=y_comp;
  equation

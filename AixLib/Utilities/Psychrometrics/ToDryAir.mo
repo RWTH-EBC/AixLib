@@ -28,12 +28,12 @@ within AixLib.Utilities.Psychrometrics;
      Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
              100}}), graphics={Text(
            extent={{34,30},{86,-34}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            fillColor={0,0,0},
            fillPattern=FillPattern.Solid,
            textString="XiDry"), Text(
            extent={{-86,48},{-14,-52}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            fillColor={0,0,0},
            fillPattern=FillPattern.Solid,
            textString="XiTotal")}), 

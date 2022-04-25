@@ -2,24 +2,24 @@ within AixLib.BoundaryConditions.SolarIrradiation.Examples;
  model DirectTiltedSurface
    "Test model for direct solar irradiation on a tilted surface"
    extends Modelica.Icons.Example;
-   parameter Modelica.SIunits.Angle lat=37/180*Modelica.Constants.pi "Latitude";
+ 
    AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
          Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
      annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
    AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirRoo(
      til=AixLib.Types.Tilt.Ceiling,
-     lat=0.6457718232379,
-     azi=0.78539816339745) "Direct irradiation on roof"
+     azi=0.78539816339745)
+     "Direct irradiation on roof"
      annotation (Placement(transformation(extent={{20,20},{40,40}})));
    AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirFlo(
      til=AixLib.Types.Tilt.Floor,
-     lat=0.6457718232379,
-     azi=0.78539816339745) "Direct irradiation on floor"
+     azi=0.78539816339745)
+     "Direct irradiation on floor"
      annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
    AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirWal(
      til=AixLib.Types.Tilt.Wall,
-     lat=0.6457718232379,
-     azi=0.78539816339745) "Direct irradiation on wall"
+     azi=0.78539816339745)
+     "Direct irradiation on wall"
      annotation (Placement(transformation(extent={{20,-20},{40,0}})));
    AixLib.Utilities.Diagnostics.AssertEquality assEqu
      "Assert to ensure that direct radiation received by floor construction is zero"

@@ -9,8 +9,7 @@ within AixLib.BoundaryConditions;
  <p>
  Enumeration to define the data source used in the weather data reader.
  </p>
- </html>", revisions=
- "<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  July 20, 2011, by Michael Wetter:<br/>
@@ -32,8 +31,7 @@ within AixLib.BoundaryConditions;
  <p>
  Enumeration to define the data source used in the weather data reader.
  </p>
- </html>", revisions=
- "<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  August 13, 2012, by Wangda Zuo:<br/>
@@ -46,13 +44,12 @@ within AixLib.BoundaryConditions;
          "Use horizontal irradiation",
        TemperaturesAndSkyCover
          "Use dry-bulb and dew-point temperatures and sky cover")
-     "Enumeration for computation of sky temperature"
- annotation (Documentation(info="<html>
+     "Enumeration for computation of sky temperature" annotation (Documentation(
+         info =                 "<html>
  <p>
  Enumeration to define the method used to compute the sky temperature.
  </p>
- </html>", revisions=
- "<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  October 3, 2011, by Michael Wetter:<br/>

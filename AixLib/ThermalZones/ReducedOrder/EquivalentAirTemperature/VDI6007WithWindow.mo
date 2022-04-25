@@ -3,7 +3,7 @@ within AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature;
    "Equivalent air temperature as defined in VDI 6007 Part 1 with modifications"
    extends BaseClasses.PartialVDI6007;
  
-   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWinOut
+   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWinOut
      "Windows' convective coefficient of heat transfer (outdoor)";
  
    Modelica.Blocks.Interfaces.RealOutput TEqAirWin(final unit="K")

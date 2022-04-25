@@ -13,8 +13,8 @@ within AixLib.Fluid.FMI;
            X_a=0.40)
            "Propylene glycol water, 40% mass fraction")));
  
-   parameter Modelica.SIunits.MassFlowRate m_flow_nominal[nout](
-     each min=0) "Nominal mass flow rate for each outlet";
+   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal[nout](each min=0)
+     "Nominal mass flow rate for each outlet";
    parameter Boolean allowFlowReversal = true
      "= true to allow flow reversal, false restricts to design direction (inlet -> outlet)"
      annotation(Dialog(tab="Assumptions"), Evaluate=true);
@@ -41,8 +41,8 @@ within AixLib.Fluid.FMI;
      annotation (Placement(transformation(extent={{-140,60},{-100,100}}),
          iconTransformation(extent={{-120,70},{-100,90}})));
  protected
-   final parameter Modelica.SIunits.MassFlowRate mAve_flow_nominal=
-       sum(m_flow_nominal)/nout "Average nominal mass flow rate";
+   final parameter Modelica.Units.SI.MassFlowRate mAve_flow_nominal=sum(
+       m_flow_nominal)/nout "Average nominal mass flow rate";
  protected
    AixLib.Fluid.FMI.Interfaces.FluidProperties bacPro_internal(
      redeclare final package Medium = Medium)
@@ -81,7 +81,7 @@ within AixLib.Fluid.FMI;
              {100,100}}), graphics={
          Text(
            extent={{-100,98},{-60,60}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="u"),
          Rectangle(
            extent={{-100,14},{-22,-10}},

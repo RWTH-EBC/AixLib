@@ -4,7 +4,7 @@ within AixLib.Fluid.Interfaces.Examples.BaseClasses;
    replaceable package Medium = AixLib.Media.Air
       constrainedby Modelica.Media.Interfaces.PartialMedium  "Medium model";
  
-   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.1
+   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
      "Nominal mass flow rate";
  
    AixLib.Fluid.Sources.Boundary_pT sin(

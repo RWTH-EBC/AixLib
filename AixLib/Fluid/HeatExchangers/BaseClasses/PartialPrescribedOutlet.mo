@@ -8,13 +8,14 @@ within AixLib.Fluid.HeatExchangers.BaseClasses;
    constant Boolean homotopyInitialization = true "= true, use homotopy method"
      annotation(HideResult=true);
  
-   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-     "Nominal mass flow rate, used for regularization near zero flow"
-     annotation(Dialog(group = "Nominal condition"));
+   // Dynamics
+   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
+     "Type of energy balance: dynamic (3 initialization options) or steady state"
+     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
  
-   parameter Modelica.SIunits.Time tau(min=0) = 10
-     "Time constant at nominal flow rate (used if energyDynamics or massDynamics not equal Modelica.Fluid.Types.Dynamics.SteadyState)"
-     annotation(Dialog(tab = "Dynamics"));
+   parameter Modelica.Units.SI.Time tau(min=0) = 10
+     "Time constant at nominal flow rate (used if energyDynamics not equal Modelica.Fluid.Types.Dynamics.SteadyState)"
+     annotation (Dialog(tab="Dynamics", enable=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
  
  protected
    AixLib.Fluid.FixedResistances.PressureDrop preDro(
@@ -31,6 +32,7 @@ within AixLib.Fluid.HeatExchangers.BaseClasses;
  
    AixLib.Fluid.Interfaces.PrescribedOutlet outCon(
      redeclare final package Medium = Medium,
+     final energyDynamics=energyDynamics,
      final allowFlowReversal=allowFlowReversal,
      final m_flow_small=m_flow_small,
      final show_T=false,
@@ -79,6 +81,15 @@ within AixLib.Fluid.HeatExchangers.BaseClasses;
  </html>",
  revisions="<html>
  <ul>
+ <li>
+ March 10, 2022, by Michael Wetter:<br/>
+ Propagated <code>energyDynamics</code> from instance <code>outCon</code>.
+ </li>
+ <li>
+ April 29, 2021, by Michael Wetter:<br/>
+ Removed duplicate declaration of <code>m_flow_nominal</code> which is already
+ declared in the base class.<br/>
+ </li>
  <li>
  April 14, 2020, by Michael Wetter:<br/>
  Changed <code>homotopyInitialization</code> to a constant.<br/>

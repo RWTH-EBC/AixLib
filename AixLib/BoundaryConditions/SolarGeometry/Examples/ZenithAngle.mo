@@ -1,7 +1,7 @@
 within AixLib.BoundaryConditions.SolarGeometry.Examples;
  model ZenithAngle "Test model for zenith angle"
    extends Modelica.Icons.Example;
-   AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(lat=0.2)
+   AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen
      "Zenith angle"
      annotation (Placement(transformation(extent={{20,0},{40,20}})));
    AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
