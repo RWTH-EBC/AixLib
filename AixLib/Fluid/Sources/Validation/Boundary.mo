@@ -53,8 +53,7 @@ within AixLib.Fluid.Sources.Validation;
  </li>
  </ul>
  </html>"),
- __Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/Sources/Validation/Boundary.mos"
+ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Validation/Boundary.mos"
          "Simulate and plot"),
  experiment(
        StopTime=1,

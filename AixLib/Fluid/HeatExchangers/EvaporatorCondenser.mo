@@ -5,11 +5,11 @@ within AixLib.Fluid.HeatExchangers;
        AixLib.Fluid.MixingVolumes.MixingVolume vol(final
          prescribedHeatFlowRate=false));
  
-   parameter Modelica.SIunits.ThermalConductance UA
+   parameter Modelica.Units.SI.ThermalConductance UA
      "Thermal conductance of heat exchanger";
-   parameter Modelica.SIunits.ThermalConductance UA_small=UA/10
+   parameter Modelica.Units.SI.ThermalConductance UA_small=UA/10
      "Small thermal conductance for regularisation of heat transfer "
-     annotation(Dialog(tab = "Advanced"));
+     annotation (Dialog(tab="Advanced"));
  
    Modelica.Blocks.Interfaces.RealOutput Q_flow(unit="W")
      "Heat added to the fluid"
@@ -22,19 +22,18 @@ within AixLib.Fluid.HeatExchangers;
      annotation (Placement(transformation(extent={{-5,-55},{5,-65}}),
          iconTransformation(extent={{-5,-55},{5,-65}})));
  
-   Modelica.SIunits.Efficiency NTU = UA /
-     (AixLib.Utilities.Math.Functions.smoothMax(abs(port_a.m_flow),m_flow_small,m_flow_small)*cp_default)
-    "Number of transfer units of heat exchanger";
+   Modelica.Units.SI.Efficiency NTU=UA/(AixLib.Utilities.Math.Functions.smoothMax(
+       abs(port_a.m_flow),
+       m_flow_small,
+       m_flow_small)*cp_default) "Number of transfer units of heat exchanger";
  
-   Modelica.SIunits.Efficiency eps=
-     AixLib.Utilities.Math.Functions.smoothMin(
+   Modelica.Units.SI.Efficiency eps=AixLib.Utilities.Math.Functions.smoothMin(
        AixLib.Fluid.HeatExchangers.BaseClasses.epsilon_ntuZ(
-       NTU,
-       0,
-       Integer(AixLib.Fluid.Types.HeatExchangerFlowRegime.ConstantTemperaturePhaseChange)),
+         NTU,
+         0,
+         Integer(AixLib.Fluid.Types.HeatExchangerFlowRegime.ConstantTemperaturePhaseChange)),
        0.999,
-       1.0e-4)
-     "Effectiveness of heat exchanger";
+       1.0e-4) "Effectiveness of heat exchanger";
  
    Modelica.Blocks.Sources.RealExpression UAeff(
      final y=AixLib.Utilities.Math.Functions.smoothMax(
@@ -45,9 +44,9 @@ within AixLib.Fluid.HeatExchangers;
      annotation (Placement(transformation(extent={{-88,-80},{-68,-60}})));
  
  protected
-   parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
-     Medium.specificHeatCapacityCp(sta_default)
-      "Density, used to compute fluid volume";
+   parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
+       Medium.specificHeatCapacityCp(sta_default)
+     "Density, used to compute fluid volume";
  
    Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heaFlo
      "Heat flow sensor"
@@ -90,7 +89,7 @@ within AixLib.Fluid.HeatExchangers;
            fillPattern=FillPattern.Solid),
          Text(
            extent={{72,94},{116,66}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="Q_flow")}),
  defaultComponentName="evaCon",
  Documentation(info="<html>
@@ -118,6 +117,12 @@ within AixLib.Fluid.HeatExchangers;
  </html>",
  revisions="<html>
  <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
  <li>
  May 27, 2017, by Filip Jorissen:<br/>
  Regularised heat transfer around zero flow.<br/>

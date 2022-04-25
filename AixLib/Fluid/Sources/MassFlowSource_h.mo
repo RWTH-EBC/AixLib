@@ -6,9 +6,9 @@ within AixLib.Fluid.Sources;
    parameter Boolean use_m_flow_in = false
      "Get the mass flow rate from the input connector"
      annotation(Evaluate=true, HideResult=true, Dialog(group="Conditional inputs"));
-   parameter Modelica.SIunits.MassFlowRate m_flow = 0
+   parameter Modelica.Units.SI.MassFlowRate m_flow=0
      "Fixed mass flow rate going out of the fluid port"
-     annotation (Dialog(enable = not use_m_flow_in,group="Fixed inputs"));
+     annotation (Dialog(enable=not use_m_flow_in, group="Fixed inputs"));
  
    parameter Boolean use_h_in= false
      "Get the specific enthalpy from the input connector"
@@ -131,14 +131,14 @@ within AixLib.Fluid.Sources;
          Text(
            visible=use_m_flow_in,
            extent={{-185,132},{-45,100}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            fillColor={255,255,255},
            fillPattern=FillPattern.Solid,
            textString="m_flow"),
          Text(
            visible=use_h_in,
            extent={{-162,34},{-60,-6}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            fillColor={255,255,255},
            fillPattern=FillPattern.Solid,
            textString="h"),
@@ -159,7 +159,7 @@ within AixLib.Fluid.Sources;
            fillPattern=FillPattern.Solid),
          Text(
            extent={{-54,32},{16,-30}},
-           lineColor={255,0,0},
+           textColor={255,0,0},
            fillColor={255,0,0},
            fillPattern=FillPattern.Solid,
            textString="m"),
@@ -171,6 +171,6 @@ within AixLib.Fluid.Sources;
                                    Text(
            extent={{-161,110},{139,150}},
            textString="%name",
-           lineColor={0,0,255})}), 
+           textColor={0,0,255})}), 
    __Dymola_LockedEditing="Model from IBPSA");
  end MassFlowSource_h;

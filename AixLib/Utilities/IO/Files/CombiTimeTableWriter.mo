@@ -72,7 +72,7 @@ within AixLib.Utilities.IO.Files;
  </ul>
  </html>"), Icon(graphics={                                                Text(
            extent={{-88,90},{88,48}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            horizontalAlignment=TextAlignment.Right,
            textString="CombiTimeTable")}), 
    __Dymola_LockedEditing="Model from IBPSA");

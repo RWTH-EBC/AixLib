@@ -34,21 +34,21 @@ within AixLib.Fluid.Interfaces;
    // Diagnostics
     parameter Boolean show_T = false
      "= true, if actual temperature at port is computed"
-     annotation(
+     annotation (
        Dialog(tab="Advanced", group="Diagnostics"),
        HideResult=true);
  
    Medium.ThermodynamicState sta_a=
        Medium.setState_phX(port_a.p,
                            noEvent(actualStream(port_a.h_outflow)),
-                           noEvent(actualStream(port_a.Xi_outflow))) if
-          show_T "Medium properties in port_a";
+                           noEvent(actualStream(port_a.Xi_outflow)))
+       if show_T "Medium properties in port_a";
  
    Medium.ThermodynamicState sta_b[nPorts]=
        Medium.setState_phX(ports_b.p,
                            noEvent(actualStream(ports_b.h_outflow)),
-                           noEvent(actualStream(ports_b.Xi_outflow))) if
-          show_T "Medium properties in ports_b";
+                           noEvent(actualStream(ports_b.Xi_outflow)))
+       if show_T "Medium properties in ports_b";
    annotation (
      Documentation(info="<html>
  <p>
@@ -140,7 +140,7 @@ within AixLib.Fluid.Interfaces;
            visible=not allowFlowReversal),
          Text(
            extent={{-149,-114},{151,-154}},
-           lineColor={0,0,255},
+           textColor={0,0,255},
            textString="%name")}),
      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
              100}})), 

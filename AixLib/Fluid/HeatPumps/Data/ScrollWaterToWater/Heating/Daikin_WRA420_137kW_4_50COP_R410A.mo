@@ -10,7 +10,6 @@ within AixLib.Fluid.HeatPumps.Data.ScrollWaterToWater.Heating;
      UACon = 24801.5921552,
      UAEva = 297902.470363)
      "Calibrated parameters for Daikin WRA420"
- 
    annotation (
      defaultComponentPrefixes = "parameter",
      defaultComponentName="datHeaPum",

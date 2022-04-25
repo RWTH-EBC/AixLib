@@ -3,7 +3,7 @@ within AixLib.Fluid.Geothermal.Borefields.Validation;
    extends Modelica.Icons.Example;
    package Medium = AixLib.Media.Water;
  
-   parameter Modelica.SIunits.Temperature T_start = 273.15 + 22.09
+   parameter Modelica.Units.SI.Temperature T_start=273.15 + 22.09
      "Initial temperature of the sandbox";
  
    // mSenFac is set to its numerical value because it is a constant in the borehole model.
@@ -31,7 +31,6 @@ within AixLib.Fluid.Geothermal.Borefields.Validation;
      addPowerToMedium=false,
      use_inputFilter=false,
      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
      m_flow_nominal=borFieDat.conDat.mBorFie_flow_nominal,
      nominalValuesDefineDefaultPressureCurve=true,
      inputType=AixLib.Fluid.Types.InputType.Constant)
@@ -93,8 +92,7 @@ within AixLib.Fluid.Geothermal.Borefields.Validation;
            -14},{-52,-14}},
                          color={0,0,127}));
    annotation (experiment(Tolerance=1e-6, StopTime=186360),
-   __Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/Sandbox.mos"
+   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/Sandbox.mos"
          "Simulate and Plot"),
  Documentation(info="<html>
  <p>

@@ -99,8 +99,7 @@ within AixLib.Fluid.Sources.Examples;
  </li>
  </ul>
  </html>"),
-     __Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/Sources/Examples/PropertySource_h.mos"
+     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/PropertySource_h.mos"
          "Simulate and plot"),
      experiment(
        StopTime=1,

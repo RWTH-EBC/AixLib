@@ -4,7 +4,7 @@ within AixLib.Fluid.Geothermal.Borefields.Validation;
    extends Modelica.Icons.Example;
    package Medium = AixLib.Media.Water;
  
-   parameter Modelica.SIunits.Temperature T_start = 273.15
+   parameter Modelica.Units.SI.Temperature T_start=273.15
      "Initial temperature of the soil";
  
    AixLib.Fluid.Geothermal.Borefields.OneUTube borHol(
@@ -22,7 +22,6 @@ within AixLib.Fluid.Geothermal.Borefields.Validation;
      addPowerToMedium=false,
      use_inputFilter=false,
      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
      m_flow_nominal=borFieDat.conDat.mBorFie_flow_nominal,
      nominalValuesDefineDefaultPressureCurve=true,
      inputType=AixLib.Fluid.Types.InputType.Constant)
@@ -81,8 +80,7 @@ within AixLib.Fluid.Geothermal.Borefields.Validation;
    connect(hea.u, heaRat.y) annotation (Line(points={{-52,-14},{-60,-14},{-60,20},
            {-67,20}}, color={0,0,127}));
    annotation (experiment(Tolerance=1e-6, StopTime=31536.0E+06),
-   __Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/ConstantHeatInjection_100Boreholes.mos"
+   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/ConstantHeatInjection_100Boreholes.mos"
          "Simulate and Plot"),
  Documentation(info="<html>
  <p>

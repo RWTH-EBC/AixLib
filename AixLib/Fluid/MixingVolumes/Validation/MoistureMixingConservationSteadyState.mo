@@ -60,8 +60,7 @@ within AixLib.Fluid.MixingVolumes.Validation;
  </li>
  </ul>
  </html>"),
-     __Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MoistureMixingConservationSteadyState.mos"
+     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MoistureMixingConservationSteadyState.mos"
          "Simulate and plot"), 
    __Dymola_LockedEditing="Model from IBPSA");
  end MoistureMixingConservationSteadyState;

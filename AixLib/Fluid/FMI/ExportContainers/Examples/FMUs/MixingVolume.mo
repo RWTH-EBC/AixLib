@@ -3,8 +3,8 @@ within AixLib.Fluid.FMI.ExportContainers.Examples.FMUs;
    extends AixLib.Fluid.FMI.ExportContainers.PartialTwoPort(
      redeclare package Medium = AixLib.Media.Air);
  
-   parameter Modelica.SIunits.Volume V=1 "Volume";
-   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.01
+   parameter Modelica.Units.SI.Volume V=1 "Volume";
+   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
      "Nominal mass flow rate";
  
  protected

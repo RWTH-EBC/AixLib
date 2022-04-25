@@ -10,7 +10,6 @@ within AixLib.Fluid.HeatPumps.Data.ScrollWaterToWater.Heating;
      UACon = 4233.2477479,
      UAEva = 38367.2250194)
      "Calibrated parameters for Trane EXW120"
- 
    annotation (
      defaultComponentPrefixes = "parameter",
      defaultComponentName="datHeaPum",

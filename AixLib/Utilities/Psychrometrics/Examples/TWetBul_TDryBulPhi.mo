@@ -33,7 +33,7 @@ within AixLib.Utilities.Psychrometrics.Examples;
  protected
    block Assertions
      extends Modelica.Blocks.Icons.Block;
-     constant Modelica.SIunits.Temperature dT_max=0.1
+     constant Modelica.Units.SI.Temperature dT_max=0.1
        "Maximum allowed deviation with reference result";
  
      Modelica.Blocks.Interfaces.RealInput phi "Relative humidity"

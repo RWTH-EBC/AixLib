@@ -12,9 +12,9 @@ within AixLib.Utilities.IO.Files;
      AixLib.Utilities.IO.Files.BaseClasses.OutputTime.Terminal
      "Time when results are written to file"
      annotation(Evaluate=true);
-   parameter Modelica.SIunits.Time customTime = 0
+   parameter Modelica.Units.SI.Time customTime=0
      "Custom time when results are stored, used if outputTime=Custom only"
-     annotation(Dialog(enable=outputTime==AixLib.Utilities.IO.Files.BaseClasses.OutputTime.Custom));
+     annotation (Dialog(enable=outputTime == AixLib.Utilities.IO.Files.BaseClasses.OutputTime.Custom));
  
    Modelica.Blocks.Interfaces.RealVectorInput[nin] u "Variables that are saved"
       annotation (Placement(transformation(extent={{-120,20},{-80,-20}})));
@@ -95,7 +95,7 @@ within AixLib.Utilities.IO.Files;
    Icon(graphics={
           Text(
            extent={{-88,90},{88,48}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            horizontalAlignment=TextAlignment.Right,
            textString="JSON")}), 
    __Dymola_LockedEditing="Model from IBPSA");

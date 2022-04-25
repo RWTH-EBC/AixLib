@@ -14,7 +14,6 @@ within AixLib.Fluid.MixingVolumes.Validation.BaseClasses;
  
    AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol(
      redeclare package Medium = Medium,
-     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
      m_flow_nominal=1,
      V=1,
      nPorts=2,

@@ -10,7 +10,6 @@ within AixLib.Fluid.HeatPumps.Data.ScrollWaterToWater.Heating;
      UACon = 10364.1606457,
      UAEva = 52300.8714734)
      "Calibrated parameters for Daikin WRA150"
- 
    annotation (
      defaultComponentPrefixes = "parameter",
      defaultComponentName="datHeaPum",

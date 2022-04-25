@@ -9,7 +9,7 @@ within AixLib.Controls.Continuous;
      annotation (Placement(transformation(extent={{100,-10},{120,10}})));
  
  protected
-   discrete Modelica.SIunits.Time entryTime "Time instant when u became true";
+   discrete Modelica.Units.SI.Time entryTime "Time instant when u became true";
  initial equation
    pre(entryTime) = time;
  equation

@@ -9,7 +9,6 @@ within AixLib.Fluid.MixingVolumes.Validation;
      m_flow_nominal=1,
      V=1,
      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
      allowFlowReversal=false)
      "Steady state mixing volume requiring solution of non-linear system"
      annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
@@ -38,7 +37,7 @@ within AixLib.Fluid.MixingVolumes.Validation;
      "Prescribed temperature"
      annotation (Placement(transformation(extent={{-56,34},{-44,46}})));
    Modelica.Blocks.Sources.Cosine cos1(
-     freqHz=1,
+     f=1,
      offset=283.15,
      amplitude=0.001) "Cosine input"
      annotation (Placement(transformation(extent={{-76,34},{-64,46}})));
@@ -48,7 +47,6 @@ within AixLib.Fluid.MixingVolumes.Validation;
      m_flow_nominal=1,
      V=1,
      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
      allowFlowReversal=false)
      "Steady state mixing volume with prescribed temperature input"
      annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -64,7 +62,6 @@ within AixLib.Fluid.MixingVolumes.Validation;
      m_flow_nominal=1,
      V=1,
      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
      allowFlowReversal=false,
      prescribedHeatFlowRate=false)
      "Steady state mixing volume requiring solution of linear system"
@@ -95,7 +92,6 @@ within AixLib.Fluid.MixingVolumes.Validation;
      m_flow_nominal=1,
      V=1,
      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
      allowFlowReversal=false,
      prescribedHeatFlowRate=true)
      "Steady state mixing volume with fixed heat flow rate input"
@@ -172,7 +168,7 @@ within AixLib.Fluid.MixingVolumes.Validation;
          coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                      graphics={Text(
            extent={{12,30},{106,10}},
-           lineColor={28,108,200},
+           textColor={28,108,200},
            textString="<- vol.prescribedHeatFlowRate = true")}),
      experiment(
        Tolerance=1E-6, StopTime=2),
@@ -228,8 +224,7 @@ within AixLib.Fluid.MixingVolumes.Validation;
  increase the chance of the error being produced for this simple example.
  </p>
  </html>"),
-     __Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeZeroFlow.mos"
+     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeZeroFlow.mos"
          "Simulate and plot"), 
    __Dymola_LockedEditing="Model from IBPSA");
  end MixingVolumeZeroFlow;

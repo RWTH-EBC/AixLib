@@ -14,7 +14,6 @@ within AixLib.Airflow.Multizone.Examples;
      V=2.5*5*5,
      nPorts=4,
      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
      m_flow_nominal=0.01) "Control volume"
      annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
    AixLib.Fluid.MixingVolumes.MixingVolume volB(
@@ -22,13 +21,12 @@ within AixLib.Airflow.Multizone.Examples;
      V=2.5*5*5,
      nPorts=4,
      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
      m_flow_nominal=0.01) "Control volume"
      annotation (Placement(transformation(extent={{40,40},{60,60}})));
    Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeaFlo
      "Prescribed heat flow rate boundary condition"
      annotation (Placement(transformation(extent={{4,40},{24,60}})));
-   Modelica.Blocks.Sources.Sine sinBou(freqHz=1/3600)
+   Modelica.Blocks.Sources.Sine sinBou(f=1/3600)
      "Signal for heat flow rate boundary condition"
      annotation (Placement(transformation(extent={{-68,40},{-48,60}})));
    Modelica.Blocks.Math.Gain gai(k=100) "Gain for heat flow boundary condition"
@@ -38,7 +36,6 @@ within AixLib.Airflow.Multizone.Examples;
      V=2.5*5*5,
      nPorts=4,
      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
      m_flow_nominal=0.01) "Control volume"
      annotation (Placement(transformation(extent={{70,-40},{90,-20}})));
    AixLib.Airflow.Multizone.DoorDiscretizedOperable dooAC(
