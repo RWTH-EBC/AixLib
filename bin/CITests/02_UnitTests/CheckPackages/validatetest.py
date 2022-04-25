@@ -65,6 +65,12 @@ class ValidateTest(object):
         #self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
 
         library_check = self.dymola.openModel("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo")  # Load modelica library MSL 4.0.0
+        if library_check is False:
+            print("Failed to load Modelica library 4.0.0")
+            exit(1)
+        if library_check is True:
+            print("Load Modelica library 4.0.0 successful")
+
         print(f'Open Modelica library Modelica 4.0.0')
 
     def _dym_check_lic(self):  # check the license
