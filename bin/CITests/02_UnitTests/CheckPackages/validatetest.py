@@ -63,9 +63,9 @@ class ValidateTest(object):
         #self.dymola.ExecuteCommand("/bin/dymola_scripts/open_MSL_4.0.mos")
         #self.dymola.openModel("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo", changeDirectory=false)
         #self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
-
-        #library_check = self.dymola.openModel("../../../opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo")   # Load modelica library MSL 4.0.0
-        library_check = self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
+        #/ builds / EBC / EBC_all / github_ci / AixLib /.git /
+        library_check = self.dymola.openModel("../../../../../opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo")   # Load modelica library MSL 4.0.0
+        #library_check = self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
         if library_check is False:
             print("Failed to load Modelica library 4.0.0")
             exit(1)
@@ -74,7 +74,7 @@ class ValidateTest(object):
 
         print(f'Open Modelica library Modelica 4.0.0')
 
-    def _dym_check_lic(self):  # check the license
+    def _dym_check_lic(self):  # check dymola license
         dym_sta_lic_available = self.dymola.ExecuteCommand('RequestOption("Standard");')
         lic_counter = 0
         while dym_sta_lic_available is False:
