@@ -1,4 +1,4 @@
-within AixLib.DataBase.Pumps.PumpPolynomialBased;
+﻿within AixLib.DataBase.Pumps.PumpPolynomialBased;
 record PumpBaseRecord "Definition of pump data"
   extends Modelica.Icons.Record;
   // *****************************************************
@@ -10,17 +10,12 @@ record PumpBaseRecord "Definition of pump data"
      5, 12, 0.75;
     10, 0.5, 0.5]
       "maximum and minimum boundaries of pump (Q [m3/h], Hmax [m], Hmin [m])";
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm[:, :]
-    maxMinSpeedCurves=[
-      -1, nMax, nMin;
-       0, nMax, nMin;
-       5, 0.5*nMax, nMin;
-      10, nMin, nMin]
-        "maximum and minimum boundaries of pump speed 
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm[:,:] maxMinSpeedCurves=[-1,
+      nMax,nMin; 0,nMax,nMin; 5,0.5*nMax,nMin; 10,nMin,nMin] "maximum and minimum boundaries of pump speed 
      (Q [m3/h], nMax [rev/min], nMin [rev/min])";
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm nMin=0
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm nMin=0
     "minimum pump speed";
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm nMax=0
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm nMax=0
     "maximum pump speed";
 
   // *****************************************************

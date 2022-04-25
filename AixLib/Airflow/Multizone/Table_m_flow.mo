@@ -1,74 +1,74 @@
 within AixLib.Airflow.Multizone;
- model Table_m_flow
-   "Mass flow(y-axis) vs Pressure(x-axis) cubic spline fit model based from table data, with last two points linearly interpolated"
-   extends AixLib.Airflow.Multizone.BaseClasses.PartialOneWayFlowElement(
-     m_flow = AixLib.Airflow.Multizone.BaseClasses.interpolate(
-       u=dp,
-       xd=dpMea_nominal,
-       yd=mMea_flow_nominal,
-       d=d),
-     final m_flow_nominal=max(abs(dpMea_nominal[1]), abs(dpMea_nominal[end])));
- 
-   parameter Modelica.Units.SI.PressureDifference dpMea_nominal[:](each displayUnit="Pa")
-     "Pressure difference of test points"
-     annotation (Dialog(group="Test data"));
-   parameter Modelica.Units.SI.MassFlowRate mMea_flow_nominal[:]
-     "Mass flow rate of test points"
-     annotation (Dialog(group="Test data"));
- protected
-   parameter Real[size(dpMea_nominal, 1)] d = AixLib.Utilities.Math.Functions.splineDerivatives(
-     x=dpMea_nominal,
-     y=mMea_flow_nominal,
-     ensureMonotonicity=true)
-     "Derivatives at the support points";
- initial equation
-   assert(size(dpMea_nominal, 1) == size(mMea_flow_nominal, 1),
-     "Size of parameters are size(dpMea_nominal, 1) = " + String(size(dpMea_nominal, 1)) +
-     " and size(mMea_flow_nominal, 1) = " + String(size(mMea_flow_nominal, 1)) + ". They must be equal.");
-   annotation (
-     Icon(graphics={
-         Rectangle(
-           extent={{-50,80},{50,-80}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-100,6},{-50,-6}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{50,6},{100,-6}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-24,78},{0,-78}},
-           lineColor={28,108,200},
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{0,78},{26,-78}},
-           lineColor={28,108,200},
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid),
-         Text(
-           extent={{0,13},{0,-13}},
-           textColor={0,0,127},
-           textString="m_flow",
-           origin={13,0},
-           rotation=90),
-         Rectangle(
-           extent={{-24,78},{26,58}},
-           lineColor={28,108,200},
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Forward),
-         Line(points={{0,78},{0,-78}}, color={28,108,200})}),
-     defaultComponentName="tabDat",
-     Documentation(info="<html>
+model Table_m_flow
+  "Mass flow(y-axis) vs Pressure(x-axis) cubic spline fit model based from table data, with last two points linearly interpolated"
+  extends AixLib.Airflow.Multizone.BaseClasses.PartialOneWayFlowElement(
+    m_flow = AixLib.Airflow.Multizone.BaseClasses.interpolate(
+      u=dp,
+      xd=dpMea_nominal,
+      yd=mMea_flow_nominal,
+      d=d),
+    final m_flow_nominal=max(abs(dpMea_nominal[1]), abs(dpMea_nominal[end])));
+
+  parameter Modelica.Units.SI.PressureDifference dpMea_nominal[:](each displayUnit="Pa")
+    "Pressure difference of test points"
+    annotation (Dialog(group="Test data"));
+  parameter Modelica.Units.SI.MassFlowRate mMea_flow_nominal[:]
+    "Mass flow rate of test points"
+    annotation (Dialog(group="Test data"));
+protected
+  parameter Real[size(dpMea_nominal, 1)] d = AixLib.Utilities.Math.Functions.splineDerivatives(
+    x=dpMea_nominal,
+    y=mMea_flow_nominal,
+    ensureMonotonicity=true)
+    "Derivatives at the support points";
+initial equation
+  assert(size(dpMea_nominal, 1) == size(mMea_flow_nominal, 1),
+    "Size of parameters are size(dpMea_nominal, 1) = " + String(size(dpMea_nominal, 1)) +
+    " and size(mMea_flow_nominal, 1) = " + String(size(mMea_flow_nominal, 1)) + ". They must be equal.");
+  annotation (
+    Icon(graphics={
+        Rectangle(
+          extent={{-50,80},{50,-80}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-100,6},{-50,-6}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{50,6},{100,-6}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-24,78},{0,-78}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{0,78},{26,-78}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{0,13},{0,-13}},
+          textColor={0,0,127},
+          textString="m_flow",
+          origin={13,0},
+          rotation=90),
+        Rectangle(
+          extent={{-24,78},{26,58}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Forward),
+        Line(points={{0,78},{0,-78}}, color={28,108,200})}),
+    defaultComponentName="tabDat",
+    Documentation(info="<html>
  <p>
  This model describes the one-directional pressure driven air flow through an
  opening based on user-provided tabular data describing the relation between mass flow rate
@@ -98,7 +98,7 @@ within AixLib.Airflow.Multizone;
  <a href=\"https://doi.org/10.6028/NIST.TN.1887\">10.6028/NIST.TN.1887</a>.
  </li>
  </ul>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  February 2, 2022, by Michael Wetter:<br/>
@@ -111,6 +111,6 @@ within AixLib.Airflow.Multizone;
  </li>
  </ul>
  </html>
- "), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end Table_m_flow;
+ "),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Table_m_flow;

@@ -1,14 +1,16 @@
-within AixLib.Controls.HeatPump.BaseClasses;
+﻿within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
   parameter Boolean use_secHeaGen=false
                                        "True to choose a bivalent system" annotation(choices(checkBox=true));
 
   // Heating limit temperature
-  parameter Modelica.SIunits.Temperature T_heaLim=293.15
-    "Heating limit temperature. If the filtered outdoor air temperature surpasses this threshold, the device will be shut down" annotation(Dialog(group="Heating limit temperature"));
-  parameter Modelica.SIunits.Time movAveTime=300
-    "Time span for building the average of the outdoor air temperature. Used for heating limit temperature" annotation (Dialog(group="Heating limit temperature"));
+  parameter Modelica.Units.SI.Temperature T_heaLim=293.15
+    "Heating limit temperature. If the filtered outdoor air temperature surpasses this threshold, the device will be shut down"
+    annotation (Dialog(group="Heating limit temperature"));
+  parameter Modelica.Units.SI.Time movAveTime=300
+    "Time span for building the average of the outdoor air temperature. Used for heating limit temperature"
+    annotation (Dialog(group="Heating limit temperature"));
 
   AixLib.Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));

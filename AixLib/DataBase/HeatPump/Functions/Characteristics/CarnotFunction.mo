@@ -1,8 +1,8 @@
-within AixLib.DataBase.HeatPump.Functions.Characteristics;
+﻿within AixLib.DataBase.HeatPump.Functions.Characteristics;
 function CarnotFunction
   "Function to emulate the polynomal approach of the Carnot_y heat pump model"
   extends PartialBaseFct;
-  parameter Modelica.SIunits.Power Pel_nominal=2000
+  parameter Modelica.Units.SI.Power Pel_nominal=2000
     "Constant nominal electric power";
   parameter Real etaCarnot_nominal(unit="1") = 0.5
       "Carnot effectiveness (=COP/COP_Carnot) used if use_eta_Carnot_nominal = true"
@@ -12,7 +12,7 @@ function CarnotFunction
     "Coefficients for efficiency curve (need p(a=a, yPL=1)=1)"
     annotation (Dialog(group="Efficiency"));
 protected
-  Modelica.SIunits.Power Pel;
+  Modelica.Units.SI.Power Pel;
   Real COP;
   Real COP_carnot;
   Real etaPartLoad = AixLib.Utilities.Math.Functions.polynomial(a=a, x=N);

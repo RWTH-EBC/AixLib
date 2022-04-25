@@ -1,10 +1,11 @@
-within AixLib.Systems.HydraulicModules;
+﻿within AixLib.Systems.HydraulicModules;
 model Injection2WayValve
   "Injection circuit with pump and two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
 
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"  annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.Volume vol=0.0005 "Mixing Volume"
+    annotation (Dialog(tab="Advanced"));
 
 
   Fluid.Actuators.Valves.TwoWayTable  valve(

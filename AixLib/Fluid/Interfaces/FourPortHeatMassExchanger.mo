@@ -1,201 +1,201 @@
 within AixLib.Fluid.Interfaces;
- model FourPortHeatMassExchanger
-   "Model transporting two fluid streams between four ports with storing mass or energy"
-   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
-     port_a1(h_outflow(start=h1_outflow_start)),
-     port_b1(h_outflow(start=h1_outflow_start)),
-     port_a2(h_outflow(start=h2_outflow_start)),
-     port_b2(h_outflow(start=h2_outflow_start)));
-   extends AixLib.Fluid.Interfaces.FourPortFlowResistanceParameters(
-      final computeFlowResistance1=true, final computeFlowResistance2=true);
- 
-   constant Boolean homotopyInitialization = true "= true, use homotopy method"
-     annotation(HideResult=true);
- 
-   parameter Modelica.Units.SI.Time tau1=30 "Time constant at nominal flow"
-     annotation (Dialog(tab="Dynamics", group="Nominal condition"));
-   parameter Modelica.Units.SI.Time tau2=30 "Time constant at nominal flow"
-     annotation (Dialog(tab="Dynamics", group="Nominal condition"));
- 
-   // Assumptions
-   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-     "Type of energy balance: dynamic (3 initialization options) or steady state"
-     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
- 
-   // Initialization
-   parameter Medium1.AbsolutePressure p1_start = Medium1.p_default
-     "Start value of pressure"
-     annotation(Dialog(tab = "Initialization", group = "Medium 1"));
-   parameter Medium1.Temperature T1_start = Medium1.T_default
-     "Start value of temperature"
-     annotation(Dialog(tab = "Initialization", group = "Medium 1"));
-   parameter Medium1.MassFraction X1_start[Medium1.nX] = Medium1.X_default
-     "Start value of mass fractions m_i/m"
-     annotation (Dialog(tab="Initialization", group = "Medium 1", enable=Medium1.nXi > 0));
-   parameter Medium1.ExtraProperty C1_start[Medium1.nC](
-     final quantity=Medium1.extraPropertiesNames)=fill(0, Medium1.nC)
-     "Start value of trace substances"
-     annotation (Dialog(tab="Initialization", group = "Medium 1", enable=Medium1.nC > 0));
-   parameter Medium1.ExtraProperty C1_nominal[Medium1.nC](
-     final quantity=Medium1.extraPropertiesNames) = fill(1E-2, Medium1.nC)
-     "Nominal value of trace substances. (Set to typical order of magnitude.)"
+model FourPortHeatMassExchanger
+  "Model transporting two fluid streams between four ports with storing mass or energy"
+  extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
+    port_a1(h_outflow(start=h1_outflow_start)),
+    port_b1(h_outflow(start=h1_outflow_start)),
+    port_a2(h_outflow(start=h2_outflow_start)),
+    port_b2(h_outflow(start=h2_outflow_start)));
+  extends AixLib.Fluid.Interfaces.FourPortFlowResistanceParameters(
+     final computeFlowResistance1=true, final computeFlowResistance2=true);
+
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(HideResult=true);
+
+  parameter Modelica.Units.SI.Time tau1=30 "Time constant at nominal flow"
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
+  parameter Modelica.Units.SI.Time tau2=30 "Time constant at nominal flow"
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
+
+  // Assumptions
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
+
+  // Initialization
+  parameter Medium1.AbsolutePressure p1_start = Medium1.p_default
+    "Start value of pressure"
+    annotation(Dialog(tab = "Initialization", group = "Medium 1"));
+  parameter Medium1.Temperature T1_start = Medium1.T_default
+    "Start value of temperature"
+    annotation(Dialog(tab = "Initialization", group = "Medium 1"));
+  parameter Medium1.MassFraction X1_start[Medium1.nX] = Medium1.X_default
+    "Start value of mass fractions m_i/m"
+    annotation (Dialog(tab="Initialization", group = "Medium 1", enable=Medium1.nXi > 0));
+  parameter Medium1.ExtraProperty C1_start[Medium1.nC](
+    final quantity=Medium1.extraPropertiesNames)=fill(0, Medium1.nC)
+    "Start value of trace substances"
     annotation (Dialog(tab="Initialization", group = "Medium 1", enable=Medium1.nC > 0));
- 
-   parameter Medium2.AbsolutePressure p2_start = Medium2.p_default
-     "Start value of pressure"
-     annotation(Dialog(tab = "Initialization", group = "Medium 2"));
-   parameter Medium2.Temperature T2_start = Medium2.T_default
-     "Start value of temperature"
-     annotation(Dialog(tab = "Initialization", group = "Medium 2"));
-   parameter Medium2.MassFraction X2_start[Medium2.nX] = Medium2.X_default
-     "Start value of mass fractions m_i/m"
-     annotation (Dialog(tab="Initialization", group = "Medium 2", enable=Medium2.nXi > 0));
-   parameter Medium2.ExtraProperty C2_start[Medium2.nC](
-     final quantity=Medium2.extraPropertiesNames)=fill(0, Medium2.nC)
-     "Start value of trace substances"
-     annotation (Dialog(tab="Initialization", group = "Medium 2", enable=Medium2.nC > 0));
-   parameter Medium2.ExtraProperty C2_nominal[Medium2.nC](
-     final quantity=Medium2.extraPropertiesNames) = fill(1E-2, Medium2.nC)
-     "Nominal value of trace substances. (Set to typical order of magnitude.)"
+  parameter Medium1.ExtraProperty C1_nominal[Medium1.nC](
+    final quantity=Medium1.extraPropertiesNames) = fill(1E-2, Medium1.nC)
+    "Nominal value of trace substances. (Set to typical order of magnitude.)"
+   annotation (Dialog(tab="Initialization", group = "Medium 1", enable=Medium1.nC > 0));
+
+  parameter Medium2.AbsolutePressure p2_start = Medium2.p_default
+    "Start value of pressure"
+    annotation(Dialog(tab = "Initialization", group = "Medium 2"));
+  parameter Medium2.Temperature T2_start = Medium2.T_default
+    "Start value of temperature"
+    annotation(Dialog(tab = "Initialization", group = "Medium 2"));
+  parameter Medium2.MassFraction X2_start[Medium2.nX] = Medium2.X_default
+    "Start value of mass fractions m_i/m"
+    annotation (Dialog(tab="Initialization", group = "Medium 2", enable=Medium2.nXi > 0));
+  parameter Medium2.ExtraProperty C2_start[Medium2.nC](
+    final quantity=Medium2.extraPropertiesNames)=fill(0, Medium2.nC)
+    "Start value of trace substances"
     annotation (Dialog(tab="Initialization", group = "Medium 2", enable=Medium2.nC > 0));
- 
-   Modelica.Units.SI.HeatFlowRate Q1_flow=vol1.heatPort.Q_flow
-     "Heat flow rate into medium 1";
-   Modelica.Units.SI.HeatFlowRate Q2_flow=vol2.heatPort.Q_flow
-     "Heat flow rate into medium 2";
- 
-   replaceable AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort vol1
-     constrainedby
-     AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
-         redeclare final package Medium = Medium1,
-         nPorts = 2,
-         V=m1_flow_nominal*tau1/rho1_nominal,
-         final allowFlowReversal=allowFlowReversal1,
-         final m_flow_nominal=m1_flow_nominal,
-         energyDynamics=if tau1 > Modelica.Constants.eps
-                          then energyDynamics else
-                          Modelica.Fluid.Types.Dynamics.SteadyState,
-         massDynamics=if tau1 > Modelica.Constants.eps
-                          then energyDynamics else
-                          Modelica.Fluid.Types.Dynamics.SteadyState,
-         final p_start=p1_start,
-         final T_start=T1_start,
-         final X_start=X1_start,
-         final C_start=C1_start,
-         final C_nominal=C1_nominal,
-         mSenFac=1) "Volume for fluid 1"
-     annotation (Placement(transformation(extent={{-10,70}, {10,50}})));
- 
-   replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2
-     constrainedby
-     AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
-         redeclare final package Medium = Medium2,
-         nPorts = 2,
-         V=m2_flow_nominal*tau2/rho2_nominal,
-         final allowFlowReversal=allowFlowReversal2,
-         mSenFac=1,
-         final m_flow_nominal = m2_flow_nominal,
-         energyDynamics=if tau2 > Modelica.Constants.eps
-                          then energyDynamics else
-                          Modelica.Fluid.Types.Dynamics.SteadyState,
-         massDynamics=if tau2 > Modelica.Constants.eps
-                          then energyDynamics else
-                          Modelica.Fluid.Types.Dynamics.SteadyState,
-         final p_start=p2_start,
-         final T_start=T2_start,
-         final X_start=X2_start,
-         final C_start=C2_start,
-         final C_nominal=C2_nominal) "Volume for fluid 2"
-    annotation (Placement(transformation(
-         origin={2,-60},
-         extent={{-10,10},{10,-10}},
-         rotation=180)));
- 
-   AixLib.Fluid.FixedResistances.PressureDrop preDro1(
-     redeclare final package Medium = Medium1,
-     final m_flow_nominal=m1_flow_nominal,
-     final deltaM=deltaM1,
-     final allowFlowReversal=allowFlowReversal1,
-     final show_T=false,
-     final from_dp=from_dp1,
-     final linearized=linearizeFlowResistance1,
-     final homotopyInitialization=homotopyInitialization,
-     final dp_nominal=dp1_nominal) "Flow resistance of fluid 1"
-     annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
- 
-   AixLib.Fluid.FixedResistances.PressureDrop preDro2(
-     redeclare final package Medium = Medium2,
-     final m_flow_nominal=m2_flow_nominal,
-     final deltaM=deltaM2,
-     final allowFlowReversal=allowFlowReversal2,
-     final show_T=false,
-     final from_dp=from_dp2,
-     final linearized=linearizeFlowResistance2,
-     final homotopyInitialization=homotopyInitialization,
-     final dp_nominal=dp2_nominal) "Flow resistance of fluid 2"
-     annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
- 
- protected
-   parameter Medium1.ThermodynamicState sta1_nominal=Medium1.setState_pTX(
-       T=Medium1.T_default, p=Medium1.p_default, X=Medium1.X_default);
-   parameter Modelica.Units.SI.Density rho1_nominal=Medium1.density(sta1_nominal)
-     "Density, used to compute fluid volume";
-   parameter Medium2.ThermodynamicState sta2_nominal=Medium2.setState_pTX(
-       T=Medium2.T_default, p=Medium2.p_default, X=Medium2.X_default);
-   parameter Modelica.Units.SI.Density rho2_nominal=Medium2.density(sta2_nominal)
-     "Density, used to compute fluid volume";
- 
-   parameter Medium1.ThermodynamicState sta1_start=Medium1.setState_pTX(
-       T=T1_start, p=p1_start, X=X1_start);
-   parameter Modelica.Units.SI.SpecificEnthalpy h1_outflow_start=
-       Medium1.specificEnthalpy(sta1_start)
-     "Start value for outflowing enthalpy";
-   parameter Medium2.ThermodynamicState sta2_start=Medium2.setState_pTX(
-       T=T2_start, p=p2_start, X=X2_start);
-   parameter Modelica.Units.SI.SpecificEnthalpy h2_outflow_start=
-       Medium2.specificEnthalpy(sta2_start)
-     "Start value for outflowing enthalpy";
- 
- initial equation
-   // Check for tau1
-   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-           tau1 > Modelica.Constants.eps,
- "The parameter tau1, or the volume of the model from which tau may be derived, is unreasonably small.
+  parameter Medium2.ExtraProperty C2_nominal[Medium2.nC](
+    final quantity=Medium2.extraPropertiesNames) = fill(1E-2, Medium2.nC)
+    "Nominal value of trace substances. (Set to typical order of magnitude.)"
+   annotation (Dialog(tab="Initialization", group = "Medium 2", enable=Medium2.nC > 0));
+
+  Modelica.Units.SI.HeatFlowRate Q1_flow=vol1.heatPort.Q_flow
+    "Heat flow rate into medium 1";
+  Modelica.Units.SI.HeatFlowRate Q2_flow=vol2.heatPort.Q_flow
+    "Heat flow rate into medium 2";
+
+  replaceable AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort vol1
+    constrainedby
+    AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
+        redeclare final package Medium = Medium1,
+        nPorts = 2,
+        V=m1_flow_nominal*tau1/rho1_nominal,
+        final allowFlowReversal=allowFlowReversal1,
+        final m_flow_nominal=m1_flow_nominal,
+        energyDynamics=if tau1 > Modelica.Constants.eps
+                         then energyDynamics else
+                         Modelica.Fluid.Types.Dynamics.SteadyState,
+        massDynamics=if tau1 > Modelica.Constants.eps
+                         then energyDynamics else
+                         Modelica.Fluid.Types.Dynamics.SteadyState,
+        final p_start=p1_start,
+        final T_start=T1_start,
+        final X_start=X1_start,
+        final C_start=C1_start,
+        final C_nominal=C1_nominal,
+        mSenFac=1) "Volume for fluid 1"
+    annotation (Placement(transformation(extent={{-10,70}, {10,50}})));
+
+  replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2
+    constrainedby
+    AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
+        redeclare final package Medium = Medium2,
+        nPorts = 2,
+        V=m2_flow_nominal*tau2/rho2_nominal,
+        final allowFlowReversal=allowFlowReversal2,
+        mSenFac=1,
+        final m_flow_nominal = m2_flow_nominal,
+        energyDynamics=if tau2 > Modelica.Constants.eps
+                         then energyDynamics else
+                         Modelica.Fluid.Types.Dynamics.SteadyState,
+        massDynamics=if tau2 > Modelica.Constants.eps
+                         then energyDynamics else
+                         Modelica.Fluid.Types.Dynamics.SteadyState,
+        final p_start=p2_start,
+        final T_start=T2_start,
+        final X_start=X2_start,
+        final C_start=C2_start,
+        final C_nominal=C2_nominal) "Volume for fluid 2"
+   annotation (Placement(transformation(
+        origin={2,-60},
+        extent={{-10,10},{10,-10}},
+        rotation=180)));
+
+  AixLib.Fluid.FixedResistances.PressureDrop preDro1(
+    redeclare final package Medium = Medium1,
+    final m_flow_nominal=m1_flow_nominal,
+    final deltaM=deltaM1,
+    final allowFlowReversal=allowFlowReversal1,
+    final show_T=false,
+    final from_dp=from_dp1,
+    final linearized=linearizeFlowResistance1,
+    final homotopyInitialization=homotopyInitialization,
+    final dp_nominal=dp1_nominal) "Flow resistance of fluid 1"
+    annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
+
+  AixLib.Fluid.FixedResistances.PressureDrop preDro2(
+    redeclare final package Medium = Medium2,
+    final m_flow_nominal=m2_flow_nominal,
+    final deltaM=deltaM2,
+    final allowFlowReversal=allowFlowReversal2,
+    final show_T=false,
+    final from_dp=from_dp2,
+    final linearized=linearizeFlowResistance2,
+    final homotopyInitialization=homotopyInitialization,
+    final dp_nominal=dp2_nominal) "Flow resistance of fluid 2"
+    annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
+
+protected
+  parameter Medium1.ThermodynamicState sta1_nominal=Medium1.setState_pTX(
+      T=Medium1.T_default, p=Medium1.p_default, X=Medium1.X_default);
+  parameter Modelica.Units.SI.Density rho1_nominal=Medium1.density(sta1_nominal)
+    "Density, used to compute fluid volume";
+  parameter Medium2.ThermodynamicState sta2_nominal=Medium2.setState_pTX(
+      T=Medium2.T_default, p=Medium2.p_default, X=Medium2.X_default);
+  parameter Modelica.Units.SI.Density rho2_nominal=Medium2.density(sta2_nominal)
+    "Density, used to compute fluid volume";
+
+  parameter Medium1.ThermodynamicState sta1_start=Medium1.setState_pTX(
+      T=T1_start, p=p1_start, X=X1_start);
+  parameter Modelica.Units.SI.SpecificEnthalpy h1_outflow_start=
+      Medium1.specificEnthalpy(sta1_start)
+    "Start value for outflowing enthalpy";
+  parameter Medium2.ThermodynamicState sta2_start=Medium2.setState_pTX(
+      T=T2_start, p=p2_start, X=X2_start);
+  parameter Modelica.Units.SI.SpecificEnthalpy h2_outflow_start=
+      Medium2.specificEnthalpy(sta2_start)
+    "Start value for outflowing enthalpy";
+
+initial equation
+  // Check for tau1
+  assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
+          tau1 > Modelica.Constants.eps,
+"The parameter tau1, or the volume of the model from which tau may be derived, is unreasonably small.
   You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
-  Received tau1 = " + String(tau1) + "\n");
- 
-  // Check for tau2
-   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-           tau2 > Modelica.Constants.eps,
- "The parameter tau2, or the volume of the model from which tau may be derived, is unreasonably small.
+  Received tau1 = "+ String(tau1) + "\n");
+
+ // Check for tau2
+  assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
+          tau2 > Modelica.Constants.eps,
+"The parameter tau2, or the volume of the model from which tau may be derived, is unreasonably small.
   You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
-  Received tau2 = " + String(tau2) + "\n");
- 
-   assert(homotopyInitialization, "In " + getInstanceName() +
-     ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
-     level = AssertionLevel.warning);
- 
- equation
-   connect(vol1.ports[2], port_b1) annotation (Line(
-       points={{0,70},{20,70},{20,60},{100,60}},
-       color={0,127,255}));
-   connect(vol2.ports[2], port_b2) annotation (Line(
-       points={{2,-70},{-30,-70},{-30,-60},{-100,-60}},
-       color={0,127,255}));
-   connect(port_a1, preDro1.port_a) annotation (Line(
-       points={{-100,60},{-90,60},{-90,80},{-80,80}},
-       color={0,127,255}));
-   connect(preDro1.port_b, vol1.ports[1]) annotation (Line(
-       points={{-60,80},{0,80},{0,70}},
-       color={0,127,255}));
-   connect(port_a2, preDro2.port_a) annotation (Line(
-       points={{100,-60},{90,-60},{90,-80},{80,-80}},
-       color={0,127,255}));
-   connect(preDro2.port_b, vol2.ports[1]) annotation (Line(
-       points={{60,-80},{2,-80},{2,-70}},
-       color={0,127,255}));
-   annotation (
-     Documentation(info="<html>
+  Received tau2 = "+ String(tau2) + "\n");
+
+  assert(homotopyInitialization, "In " + getInstanceName() +
+    ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
+    level = AssertionLevel.warning);
+
+equation
+  connect(vol1.ports[2], port_b1) annotation (Line(
+      points={{0,70},{20,70},{20,60},{100,60}},
+      color={0,127,255}));
+  connect(vol2.ports[2], port_b2) annotation (Line(
+      points={{2,-70},{-30,-70},{-30,-60},{-100,-60}},
+      color={0,127,255}));
+  connect(port_a1, preDro1.port_a) annotation (Line(
+      points={{-100,60},{-90,60},{-90,80},{-80,80}},
+      color={0,127,255}));
+  connect(preDro1.port_b, vol1.ports[1]) annotation (Line(
+      points={{-60,80},{0,80},{0,70}},
+      color={0,127,255}));
+  connect(port_a2, preDro2.port_a) annotation (Line(
+      points={{100,-60},{90,-60},{90,-80},{80,-80}},
+      color={0,127,255}));
+  connect(preDro2.port_b, vol2.ports[1]) annotation (Line(
+      points={{60,-80},{2,-80},{2,-70}},
+      color={0,127,255}));
+  annotation (
+    Documentation(info="<html>
  <p>
  This component transports two fluid streams between four ports.
  It provides the basic model for implementing a dynamic heat exchanger.
@@ -218,7 +218,7 @@ within AixLib.Fluid.Interfaces;
  <a href=\"modelica://Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX\">
  Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX</a>.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  March 3, 2022, by Michael Wetter:<br/>
@@ -353,27 +353,27 @@ within AixLib.Fluid.Interfaces;
  </li>
  </ul>
  </html>"),
-     Icon(coordinateSystem(
-         preserveAspectRatio=false,
-         extent={{-100,-100},{100,100}},
-         grid={1,1}), graphics={
-         Rectangle(
-           extent={{-70,80},{70,-80}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={95,95,95},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-99,64},{102,54}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-99,-56},{102,-66}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid)}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end FourPortHeatMassExchanger;
+    Icon(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        grid={1,1}), graphics={
+        Rectangle(
+          extent={{-70,80},{70,-80}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-99,64},{102,54}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-99,-56},{102,-66}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid)}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end FourPortHeatMassExchanger;

@@ -1,79 +1,79 @@
 within AixLib.Fluid.Interfaces;
- model StaticFourPortHeatMassExchanger
-   "Partial model transporting two fluid streams between four ports without storing mass or energy"
-   extends AixLib.Fluid.Interfaces.PartialFourPortInterface;
-   extends AixLib.Fluid.Interfaces.FourPortFlowResistanceParameters(
-    final computeFlowResistance1=(dp1_nominal > Modelica.Constants.eps),
-    final computeFlowResistance2=(dp2_nominal > Modelica.Constants.eps));
- 
-   constant Boolean prescribedHeatFlowRate1 = false
-     "Set to true if the heat flow rate into fluid 1 is not a function of the component temperature";
-   constant Boolean prescribedHeatFlowRate2 = false
-     "Set to true if the heat flow rate into fluid 2 is not a function of the component temperature";
- 
-   constant Boolean homotopyInitialization = true "= true, use homotopy method"
-     annotation(HideResult=true);
- 
-   // Q1_flow is sensible plus latent heat flow rate
-   input Modelica.Units.SI.HeatFlowRate Q1_flow
-     "Heat transferred into the medium 1";
-   input Medium1.MassFlowRate mWat1_flow
-     "Moisture mass flow rate added to the medium 1";
-   // Q2_flow is sensible plus latent heat flow rate
-   input Modelica.Units.SI.HeatFlowRate Q2_flow
-     "Heat transferred into the medium 2";
-   input Medium2.MassFlowRate mWat2_flow
-     "Moisture mass flow rate added to the medium 2";
-   constant Boolean sensibleOnly1
-     "Set to true if sensible exchange only for medium 1";
-   constant Boolean sensibleOnly2
-     "Set to true if sensible exchange only for medium 2";
- 
- protected
-   AixLib.Fluid.Interfaces.StaticTwoPortHeatMassExchanger bal1(
-     redeclare final package Medium=Medium1,
-     final sensibleOnly = sensibleOnly1,
-     final prescribedHeatFlowRate=prescribedHeatFlowRate1,
-     final m_flow_nominal = m1_flow_nominal,
-     final dp_nominal = dp1_nominal,
-     final allowFlowReversal = allowFlowReversal1,
-     final m_flow_small = m1_flow_small,
-     final homotopyInitialization = homotopyInitialization,
-     final from_dp = from_dp1,
-     final linearizeFlowResistance = linearizeFlowResistance1,
-     final deltaM = deltaM1,
-     final Q_flow = Q1_flow,
-     final mWat_flow = mWat1_flow)
-     "Model for heat, mass, species, trace substance and pressure balance of stream 1";
-   AixLib.Fluid.Interfaces.StaticTwoPortHeatMassExchanger bal2(
-     redeclare final package Medium=Medium2,
-     final sensibleOnly = sensibleOnly2,
-     final prescribedHeatFlowRate=prescribedHeatFlowRate2,
-     final m_flow_nominal = m2_flow_nominal,
-     final dp_nominal = dp2_nominal,
-     final allowFlowReversal = allowFlowReversal2,
-     final m_flow_small = m2_flow_small,
-     final homotopyInitialization = homotopyInitialization,
-     final from_dp = from_dp2,
-     final linearizeFlowResistance = linearizeFlowResistance2,
-     final deltaM = deltaM2,
-     final Q_flow = Q2_flow,
-     final mWat_flow = mWat2_flow)
-     "Model for heat, mass, species, trace substance and pressure balance of stream 2";
- 
- initial equation
-   assert(homotopyInitialization, "In " + getInstanceName() +
-     ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
-     level = AssertionLevel.warning);
- 
- equation
-   connect(bal1.port_a, port_a1);
-   connect(bal1.port_b, port_b1);
-   connect(bal2.port_a, port_a2);
-   connect(bal2.port_b, port_b2);
-   annotation (
-     preferredView="info",
-     Documentation(info="<html>
+model StaticFourPortHeatMassExchanger
+  "Partial model transporting two fluid streams between four ports without storing mass or energy"
+  extends AixLib.Fluid.Interfaces.PartialFourPortInterface;
+  extends AixLib.Fluid.Interfaces.FourPortFlowResistanceParameters(
+   final computeFlowResistance1=(dp1_nominal > Modelica.Constants.eps),
+   final computeFlowResistance2=(dp2_nominal > Modelica.Constants.eps));
+
+  constant Boolean prescribedHeatFlowRate1 = false
+    "Set to true if the heat flow rate into fluid 1 is not a function of the component temperature";
+  constant Boolean prescribedHeatFlowRate2 = false
+    "Set to true if the heat flow rate into fluid 2 is not a function of the component temperature";
+
+  constant Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(HideResult=true);
+
+  // Q1_flow is sensible plus latent heat flow rate
+  input Modelica.Units.SI.HeatFlowRate Q1_flow
+    "Heat transferred into the medium 1";
+  input Medium1.MassFlowRate mWat1_flow
+    "Moisture mass flow rate added to the medium 1";
+  // Q2_flow is sensible plus latent heat flow rate
+  input Modelica.Units.SI.HeatFlowRate Q2_flow
+    "Heat transferred into the medium 2";
+  input Medium2.MassFlowRate mWat2_flow
+    "Moisture mass flow rate added to the medium 2";
+  constant Boolean sensibleOnly1
+    "Set to true if sensible exchange only for medium 1";
+  constant Boolean sensibleOnly2
+    "Set to true if sensible exchange only for medium 2";
+
+protected
+  AixLib.Fluid.Interfaces.StaticTwoPortHeatMassExchanger bal1(
+    redeclare final package Medium=Medium1,
+    final sensibleOnly = sensibleOnly1,
+    final prescribedHeatFlowRate=prescribedHeatFlowRate1,
+    final m_flow_nominal = m1_flow_nominal,
+    final dp_nominal = dp1_nominal,
+    final allowFlowReversal = allowFlowReversal1,
+    final m_flow_small = m1_flow_small,
+    final homotopyInitialization = homotopyInitialization,
+    final from_dp = from_dp1,
+    final linearizeFlowResistance = linearizeFlowResistance1,
+    final deltaM = deltaM1,
+    final Q_flow = Q1_flow,
+    final mWat_flow = mWat1_flow)
+    "Model for heat, mass, species, trace substance and pressure balance of stream 1";
+  AixLib.Fluid.Interfaces.StaticTwoPortHeatMassExchanger bal2(
+    redeclare final package Medium=Medium2,
+    final sensibleOnly = sensibleOnly2,
+    final prescribedHeatFlowRate=prescribedHeatFlowRate2,
+    final m_flow_nominal = m2_flow_nominal,
+    final dp_nominal = dp2_nominal,
+    final allowFlowReversal = allowFlowReversal2,
+    final m_flow_small = m2_flow_small,
+    final homotopyInitialization = homotopyInitialization,
+    final from_dp = from_dp2,
+    final linearizeFlowResistance = linearizeFlowResistance2,
+    final deltaM = deltaM2,
+    final Q_flow = Q2_flow,
+    final mWat_flow = mWat2_flow)
+    "Model for heat, mass, species, trace substance and pressure balance of stream 2";
+
+initial equation
+  assert(homotopyInitialization, "In " + getInstanceName() +
+    ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
+    level = AssertionLevel.warning);
+
+equation
+  connect(bal1.port_a, port_a1);
+  connect(bal1.port_b, port_b1);
+  connect(bal2.port_a, port_a2);
+  connect(bal2.port_b, port_b2);
+  annotation (
+    preferredView="info",
+    Documentation(info="<html>
  <p>
  This component transports two fluid streams between four ports, without
  storing mass or energy. It is similar to
@@ -118,7 +118,7 @@ within AixLib.Fluid.Interfaces;
       with the environment, then a model that extends this model needs to provide these
       equations.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  April 14, 2020, by Michael Wetter:<br/>
@@ -199,27 +199,27 @@ within AixLib.Fluid.Interfaces;
  </li>
  </ul>
  </html>"),
-     Icon(coordinateSystem(
-         preserveAspectRatio=false,
-         extent={{-100,-100},{100,100}},
-         grid={1,1}), graphics={
-         Rectangle(
-           extent={{-70,80},{70,-80}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={95,95,95},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-100,65},{101,55}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-100,-55},{101,-65}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid)}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end StaticFourPortHeatMassExchanger;
+    Icon(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        grid={1,1}), graphics={
+        Rectangle(
+          extent={{-70,80},{70,-80}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-100,65},{101,55}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-100,-55},{101,-65}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid)}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end StaticFourPortHeatMassExchanger;

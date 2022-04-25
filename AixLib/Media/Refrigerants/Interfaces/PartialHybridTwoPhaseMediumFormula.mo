@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.Interfaces;
+﻿within AixLib.Media.Refrigerants.Interfaces;
 partial package PartialHybridTwoPhaseMediumFormula
   "Base class for two phase medium using a hybrid approach without records"
   extends Modelica.Media.Interfaces.PartialTwoPhaseMedium;
@@ -40,7 +40,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   equation
     // Calculation of basic constants
     //
-    R = Modelica.Constants.R/MM;
+    R_s = Modelica.Constants.R/MM;
     MM = fluidConstants[1].molarMass;
 
     // Calculations of thermodynamic states

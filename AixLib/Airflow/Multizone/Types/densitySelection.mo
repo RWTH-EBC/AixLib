@@ -1,10 +1,10 @@
 within AixLib.Airflow.Multizone.Types;
- type densitySelection = enumeration(
-     fromTop "Density from top port",
-     fromBottom "Density from bottom port",
-     actual "Actual density based on flow direction")
-   "Enumeration to select density in medium column" annotation (
-     Documentation(info="<html>
+type densitySelection = enumeration(
+    fromTop "Density from top port",
+    fromBottom "Density from bottom port",
+    actual "Actual density based on flow direction")
+  "Enumeration to select density in medium column" annotation (
+    Documentation(info="<html>
  <p>
  Enumeration to define the choice of valve flow coefficient
  (to be selected via choices menu):
@@ -26,5 +26,5 @@ within AixLib.Airflow.Multizone.Types;
      <td>Use this setting to use the density based on the actual flow direction.
  </td></tr>
   </table>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");

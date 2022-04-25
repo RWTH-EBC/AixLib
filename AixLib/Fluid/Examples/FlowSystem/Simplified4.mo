@@ -1,27 +1,27 @@
 within AixLib.Fluid.Examples.FlowSystem;
- model Simplified4 "Removed valve dynamics"
-   extends Simplified3(
-     valNorth(use_inputFilter=false),
-     valSouth(use_inputFilter=false),
-     pmpNorth(
-       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-       use_inputFilter=false),
-     pmpSouth(
-       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-       use_inputFilter=false),
-     valSouth1(each use_inputFilter=false),
-     valSouth2(each use_inputFilter=false),
-     valNorth1(each use_inputFilter=false),
-     valNorth2(each use_inputFilter=false),
-     pumpHea(use_inputFilter=false),
-     pumpCoo(use_inputFilter=false),
-     valCoo(use_inputFilter=false),
-     valHea(use_inputFilter=false));
-   annotation (Documentation(info="<html>
+model Simplified4 "Removed valve dynamics"
+  extends Simplified3(
+    valNorth(use_inputFilter=false),
+    valSouth(use_inputFilter=false),
+    pmpNorth(
+      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+      use_inputFilter=false),
+    pmpSouth(
+      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+      use_inputFilter=false),
+    valSouth1(each use_inputFilter=false),
+    valSouth2(each use_inputFilter=false),
+    valNorth1(each use_inputFilter=false),
+    valNorth2(each use_inputFilter=false),
+    pumpHea(use_inputFilter=false),
+    pumpCoo(use_inputFilter=false),
+    valCoo(use_inputFilter=false),
+    valHea(use_inputFilter=false));
+  annotation (Documentation(info="<html>
  <p>
  The model is further simplified by removing the valve and pump control dynamics.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  January 12, 2019 by Michael Wetter:<br/>
@@ -39,8 +39,8 @@ within AixLib.Fluid.Examples.FlowSystem;
  </li>
  </ul>
  </html>"),
- experiment(Tolerance=1e-6, StopTime=1000),
- __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified4.mos"
-         "Simulate and plot"), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end Simplified4;
+experiment(Tolerance=1e-6, StopTime=1000),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified4.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Simplified4;

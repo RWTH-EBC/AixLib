@@ -121,9 +121,8 @@ model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
     annotation (Placement(transformation(extent={{46,-10},{26,10}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
-    freqHz=1/86400,
-    offset=500)
-    "Sinusoidal excitation for additional internal gains"
+    f=1/86400,
+    offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{94,-10},{74,10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1
     "Convective heat flow of additional internal gains"

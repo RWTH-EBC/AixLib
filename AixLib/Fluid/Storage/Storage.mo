@@ -6,18 +6,28 @@ model Storage
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
   parameter Integer n(min = 3) "number of layers";
-  parameter Modelica.SIunits.Length d "storage diameter";
-  parameter Modelica.SIunits.Length h "storage height";
-  parameter Modelica.SIunits.ThermalConductivity lambda_ins
-    "thermal conductivity of insulation"                                                         annotation(Dialog(group = "Heat losses"));
-  parameter Modelica.SIunits.Length s_ins "thickness of insulation" annotation(Dialog(group = "Heat losses"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn "Iinternal heat transfer coefficient"  annotation(Dialog(group="Heat losses"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut "External heat transfer coefficient"   annotation(Dialog(group="Heat losses"));
-  parameter Modelica.SIunits.Volume V_HE "heat exchanger volume" annotation(Dialog(group = "Heat exchanger"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer k_HE
-    "heat exchanger heat transfer coefficient"                                                         annotation(Dialog(group = "Heat exchanger"));
-  parameter Modelica.SIunits.Area A_HE "heat exchanger area" annotation(Dialog(group = "Heat exchanger"));
-  parameter Modelica.SIunits.RelativePressureCoefficient beta = 350e-6 annotation(Dialog(group = "Bouyancy"));
+  parameter Modelica.Units.SI.Length d "storage diameter";
+  parameter Modelica.Units.SI.Length h "storage height";
+  parameter Modelica.Units.SI.ThermalConductivity lambda_ins
+    "thermal conductivity of insulation"
+    annotation (Dialog(group="Heat losses"));
+  parameter Modelica.Units.SI.Length s_ins "thickness of insulation"
+    annotation (Dialog(group="Heat losses"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn
+    "Iinternal heat transfer coefficient"
+    annotation (Dialog(group="Heat losses"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut
+    "External heat transfer coefficient"
+    annotation (Dialog(group="Heat losses"));
+  parameter Modelica.Units.SI.Volume V_HE "heat exchanger volume"
+    annotation (Dialog(group="Heat exchanger"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer k_HE
+    "heat exchanger heat transfer coefficient"
+    annotation (Dialog(group="Heat exchanger"));
+  parameter Modelica.Units.SI.Area A_HE "heat exchanger area"
+    annotation (Dialog(group="Heat exchanger"));
+  parameter Modelica.Units.SI.RelativePressureCoefficient beta=350e-6
+    annotation (Dialog(group="Bouyancy"));
   parameter Real kappa = 0.4 annotation(Dialog(group = "Bouyancy"));
   Modelica.Fluid.Interfaces.FluidPort_a
                     port_a_consumer(redeclare final package Medium = Medium)
@@ -75,9 +85,9 @@ model Storage
     each final dx=dx,
     each final kappa=kappa) annotation (Placement(transformation(extent={{-10,-10},{
             10,10}}, origin={-28,0})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_layer
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_layer
     "Nominal mass flow rate in layers";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_HE
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_HE
     "Nominal mass flow rate of heat exchanger layers";
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -90,18 +100,23 @@ model Storage
     "Start value of pressure" annotation(Dialog(tab="Initialization"));
 
   //Mass flow rates to regulate zero flow
-  parameter Modelica.SIunits.MassFlowRate m_flow_small_layer=1E-4*abs(m_flow_nominal_layer)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
-   parameter Modelica.SIunits.MassFlowRate m_flow_small_layer_HE=1E-4*abs(m_flow_nominal_HE)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer=1E-4*abs(
+      m_flow_nominal_layer)
+    "Small mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer_HE=1E-4*abs(
+      m_flow_nominal_HE) "Small mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced"));
 
 protected
-  parameter Modelica.SIunits.Volume V = A * h;
-  parameter Modelica.SIunits.Area A = Modelica.Constants.pi * d ^ 2 / 4;
-  parameter Modelica.SIunits.Length dx = V / A / n;
-  parameter Modelica.SIunits.ThermalConductance G_middle=2*Modelica.Constants.pi*h/n/(1/(hConIn*d/2) + 1/lambda_ins*log((d/2 + s_ins)/(d/2))
-       + 1/(hConOut*(d/2 + s_ins)));
-  parameter Modelica.SIunits.ThermalConductance G_top_bottom = G_middle + lambda_ins / s_ins * A;
+  parameter Modelica.Units.SI.Volume V=A*h;
+  parameter Modelica.Units.SI.Area A=Modelica.Constants.pi*d^2/4;
+  parameter Modelica.Units.SI.Length dx=V/A/n;
+  parameter Modelica.Units.SI.ThermalConductance G_middle=2*Modelica.Constants.pi
+      *h/n/(1/(hConIn*d/2) + 1/lambda_ins*log((d/2 + s_ins)/(d/2)) + 1/(hConOut
+      *(d/2 + s_ins)));
+  parameter Modelica.Units.SI.ThermalConductance G_top_bottom=G_middle +
+      lambda_ins/s_ins*A;
 equation
   //Connect layers to the upper and lower ports
   connect(port_a_consumer, layer[1].ports[1]) annotation (Line(

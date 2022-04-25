@@ -8,8 +8,9 @@ partial model PartialHuman "Partial model for internal gains of humans"
   parameter Real specificPersons(unit="1/(m.m)") = 0.05 "Specific persons per square metre room area" annotation(Dialog(descriptionLabel = true));
   parameter Real ratioConvectiveHeat=0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area roomArea "Area of room" annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.HeatFlowRate specificHeatPerPerson = 70
+  parameter Modelica.Units.SI.Area roomArea "Area of room"
+    annotation (Dialog(descriptionLabel=true));
+  parameter Modelica.Units.SI.HeatFlowRate specificHeatPerPerson=70
     "Specific heat output per person";
 
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
@@ -22,10 +23,11 @@ partial model PartialHuman "Partial model for internal gains of humans"
     "Air temperature in room"
      annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
 protected
-  parameter Modelica.SIunits.Area surfaceAreaOnePersion=2 "Human Surface (per person)";
-  parameter Modelica.SIunits.HeatFlowRate heatPerPerson=70
+  parameter Modelica.Units.SI.Area surfaceAreaOnePersion=2
+    "Human Surface (per person)";
+  parameter Modelica.Units.SI.HeatFlowRate heatPerPerson=70
     "Average Heat Flow per person taken from DIN V 18599-10"
-   annotation(Dialog(descriptionLabel = true));
+    annotation (Dialog(descriptionLabel=true));
 equation
   connect(TRoom,temperatureSensor. port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(temperatureSensor.T,to_degC. u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));

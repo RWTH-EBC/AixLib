@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
+﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
 model VarTSupplyDpBypass
   "Substation with variable dT for fixed return temperature"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
@@ -7,24 +7,22 @@ model VarTSupplyDpBypass
     final allowFlowReversal=false,
     final m_flow_nominal = Q_flow_nominal/cp_default/dTDesign);
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate added to medium";
 
-  parameter Modelica.SIunits.TemperatureDifference dTDesign(
-    displayUnit="K")
+  parameter Modelica.Units.SI.TemperatureDifference dTDesign(displayUnit="K")
     "Design temperature difference for the substation's heat exchanger";
 
-  parameter Modelica.SIunits.Temperature TReturn
-    "Fixed return temperature";
+  parameter Modelica.Units.SI.Temperature TReturn "Fixed return temperature";
 
-  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
     "Pressure difference at nominal flow rate"
-    annotation(Dialog(group="Design parameter"));
+    annotation (Dialog(group="Design parameter"));
 
   parameter Real deltaM=0.1
     "Fraction of nominal flow rate where flow transitions to laminar"
     annotation (Dialog(tab="Flow resistance"));
-  parameter Modelica.SIunits.Time tau=30
+  parameter Modelica.Units.SI.Time tau=30
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
     annotation (Dialog(tab="Dynamics"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
@@ -34,7 +32,7 @@ model VarTSupplyDpBypass
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics"));
 
-  parameter Modelica.SIunits.MassFlowRate m_flo_bypass
+  parameter Modelica.Units.SI.MassFlowRate m_flo_bypass
     "Minimum bypass flow through substation";
 
 protected
@@ -42,8 +40,8 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-  final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
-    Medium.specificHeatCapacityCp(sta_default)
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
+      Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 
 public

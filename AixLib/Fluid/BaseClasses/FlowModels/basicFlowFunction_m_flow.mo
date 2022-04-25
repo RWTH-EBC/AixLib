@@ -1,45 +1,45 @@
 within AixLib.Fluid.BaseClasses.FlowModels;
- function basicFlowFunction_m_flow
-   "Function that computes pressure drop for given mass flow rate"
- 
-   input Modelica.Units.SI.MassFlowRate m_flow
-     "Mass flow rate in design flow direction";
-   input Real k(unit="")
-     "Flow coefficient, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2)";
-   input Modelica.Units.SI.MassFlowRate m_flow_turbulent(min=0)
-     "Mass flow rate where transition to turbulent flow occurs";
-   output Modelica.Units.SI.PressureDifference dp(displayUnit="Pa")
-     "Pressure difference between port_a and port_b (= port_a.p - port_b.p)";
- protected
-   Modelica.Units.SI.PressureDifference dp_turbulent=(m_flow_turbulent/k)^2
-     "Pressure where flow changes to turbulent";
-   Real m_flowNorm = m_flow/m_flow_turbulent
-     "Normalised mass flow rate";
-   Real m_flowNormSq = m_flowNorm^2
-     "Square of normalised mass flow rate";
- 
- algorithm
-  dp := smooth(2, if noEvent(abs(m_flow)>m_flow_turbulent)
-       then sign(m_flow)*(m_flow/k)^2
-       else (0.375 + (0.75-0.125*m_flowNormSq)*m_flowNormSq)*dp_turbulent*m_flowNorm);
- 
-  annotation (Inline=false,
-              smoothOrder=2,
-              derivative(order=1, zeroDerivative=k, zeroDerivative=m_flow_turbulent)=
-                AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der,
-              inverse(m_flow=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
-                dp=dp, k=k, m_flow_turbulent=m_flow_turbulent)),
-              Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-             -100},{100,100}}), graphics={Line(
-           points={{-80,-40},{-80,60},{80,-40},{80,60}},
-           color={0,0,255},
-           thickness=1), Text(
-           extent={{-40,-40},{40,-80}},
-           textColor={0,0,0},
-           fillPattern=FillPattern.Sphere,
-           fillColor={232,0,0},
-           textString="%name")}),
- Documentation(info="<html>
+function basicFlowFunction_m_flow
+  "Function that computes pressure drop for given mass flow rate"
+
+  input Modelica.Units.SI.MassFlowRate m_flow
+    "Mass flow rate in design flow direction";
+  input Real k(unit="")
+    "Flow coefficient, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2)";
+  input Modelica.Units.SI.MassFlowRate m_flow_turbulent(min=0)
+    "Mass flow rate where transition to turbulent flow occurs";
+  output Modelica.Units.SI.PressureDifference dp(displayUnit="Pa")
+    "Pressure difference between port_a and port_b (= port_a.p - port_b.p)";
+protected
+  Modelica.Units.SI.PressureDifference dp_turbulent=(m_flow_turbulent/k)^2
+    "Pressure where flow changes to turbulent";
+  Real m_flowNorm = m_flow/m_flow_turbulent
+    "Normalised mass flow rate";
+  Real m_flowNormSq = m_flowNorm^2
+    "Square of normalised mass flow rate";
+
+algorithm
+ dp := smooth(2, if noEvent(abs(m_flow)>m_flow_turbulent)
+      then sign(m_flow)*(m_flow/k)^2
+      else (0.375 + (0.75-0.125*m_flowNormSq)*m_flowNormSq)*dp_turbulent*m_flowNorm);
+
+ annotation (Inline=false,
+             smoothOrder=2,
+             derivative(order=1, zeroDerivative=k, zeroDerivative=m_flow_turbulent)=
+               AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der,
+             inverse(m_flow=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
+               dp=dp, k=k, m_flow_turbulent=m_flow_turbulent)),
+             Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,100}}), graphics={Line(
+          points={{-80,-40},{-80,60},{80,-40},{80,60}},
+          color={0,0,255},
+          thickness=1), Text(
+          extent={{-40,-40},{40,-80}},
+          textColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={232,0,0},
+          textString="%name")}),
+Documentation(info="<html>
  <p>
  Function that computes the pressure drop of flow elements as
  </p>
@@ -57,7 +57,7 @@ within AixLib.Fluid.BaseClasses.FlowModels;
  The input <code>m_flow_turbulent</code> determines the location of the regularization.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  December 9, 2019, by Michael Wetter:<br/>
@@ -117,6 +117,6 @@ within AixLib.Fluid.BaseClasses.FlowModels;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end basicFlowFunction_m_flow;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end basicFlowFunction_m_flow;

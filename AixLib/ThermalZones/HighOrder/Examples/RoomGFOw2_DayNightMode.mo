@@ -95,8 +95,10 @@ model RoomGFOw2_DayNightMode
   Modelica.Blocks.Interfaces.RealOutput Q_flowToRoomConv(unit="W") "Convective heat flow from radiator to room" annotation (Placement(transformation(extent={{100,-20},{120,0}}), iconTransformation(extent={{100,-20},{120,0}})));
   Modelica.Blocks.Interfaces.RealOutput Q_flowToRoomRad(unit="W") "Radiant heat flow from radiator to room" annotation (Placement(transformation(extent={{100,0},{120,20}}), iconTransformation(extent={{100,0},{120,20}})));
   Modelica.Blocks.Interfaces.RealOutput m_flowHC(unit="kg/s") "Mass flow rate in heating circuit (HC)" annotation (Placement(transformation(extent={{100,-40},{120,-20}}), iconTransformation(extent={{100,-40},{120,-20}})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.5*max(Pump.m_flowsPump) "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal=0.5*max(Pump.dpsPump) "Nominal pressure difference";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.5*max(Pump.m_flowsPump)
+    "Nominal mass flow rate";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=0.5*max(Pump.dpsPump)
+    "Nominal pressure difference";
 
 
   Modelica.Blocks.Continuous.LimPID controlPIThermostat(
@@ -105,7 +107,8 @@ model RoomGFOw2_DayNightMode
     Ti=1800,
     yMax=1,
     yMin=0,
-    initType=Modelica.Blocks.Types.InitPID.SteadyState) annotation (Placement(transformation(extent={{0,-8},{10,-18}})));
+    initType=Modelica.Blocks.Types.Init.SteadyState)
+    annotation (Placement(transformation(extent={{0,-8},{10,-18}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrder(
     final k=1,
     final T=600,

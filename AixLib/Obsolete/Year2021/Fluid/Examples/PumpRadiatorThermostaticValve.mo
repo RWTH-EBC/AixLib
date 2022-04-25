@@ -47,7 +47,12 @@ model PumpRadiatorThermostaticValve
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature AirTemp annotation(Placement(transformation(extent = {{100, 58}, {112, 70}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RadTemp annotation(Placement(transformation(extent = {{148, 58}, {136, 70}})));
   Modelica.Blocks.Sources.Constant Source_Temp(k = 273.15 + 20) annotation(Placement(transformation(extent = {{56, 80}, {76, 100}})));
-  Modelica.Blocks.Sources.Sine Source_opening(freqHz = 1 / 86400, amplitude = 1, startTime = 0, offset = 273.15 + 18.5) annotation(Placement(transformation(extent = {{10, 60}, {30, 80}})));
+  Modelica.Blocks.Sources.Sine Source_opening(
+    f=1/86400,
+    amplitude=1,
+    startTime=0,
+    offset=273.15 + 18.5)
+    annotation (Placement(transformation(extent={{10,60},{30,80}})));
   Modelica.Blocks.Sources.Constant Source_TempSet_Boiler(k = 273.15 + 75) annotation(Placement(transformation(extent = {{0, 60}, {-20, 80}})));
   AixLib.Fluid.HeatExchangers.Heater_T       hea(
     redeclare package Medium = Medium,

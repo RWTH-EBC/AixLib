@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both safety and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -35,12 +35,12 @@ model HPSystemController
   parameter Boolean use_antLeg=true
     "True if Anti-Legionella control is considered"
     annotation (Dialog(tab="Heat Pump Control", group="Anti Legionella", descriptionLabel = true),choices(checkBox=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TLegMin=333.15
     "Temperature at which the legionella in DWH dies" annotation (Dialog(
       tab="Heat Pump Control",
       group="Anti Legionella",
       enable=use_antLeg), Evaluate=false);
-  parameter Modelica.SIunits.Time minTimeAntLeg
+  parameter Modelica.Units.SI.Time minTimeAntLeg
     "Minimal duration of antilegionella control" annotation (Dialog(
       tab="Heat Pump Control",
       group="Anti Legionella",
@@ -71,16 +71,18 @@ model HPSystemController
   parameter Boolean use_minRunTime=false
     "False if minimal runtime of HP is not considered"
     annotation (Dialog(enable=use_sec, tab="Safety Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minRunTime=300
-    "Minimum runtime of heat pump"
-    annotation (Dialog(tab="Safety Control", group="On-/Off Control",
+  parameter Modelica.Units.SI.Time minRunTime=300
+    "Minimum runtime of heat pump" annotation (Dialog(
+      tab="Safety Control",
+      group="On-/Off Control",
       enable=use_sec and use_minRunTime), Evaluate=false);
   parameter Boolean use_minLocTime=false
     "False if minimal locktime of HP is not considered"
     annotation (Dialog(tab="Safety Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minLocTime=300
-    "Minimum lock time of heat pump"
-    annotation (Dialog(tab="Safety Control", group="On-/Off Control",
+  parameter Modelica.Units.SI.Time minLocTime=300
+    "Minimum lock time of heat pump" annotation (Dialog(
+      tab="Safety Control",
+      group="On-/Off Control",
       enable=use_sec and use_minLocTime), Evaluate=false);
   parameter Boolean use_runPerHou=false
     "False if maximal runs per hour of HP are not considered"
@@ -108,8 +110,12 @@ model HPSystemController
       enable=use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
     annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
-  parameter Modelica.SIunits.TemperatureDifference dTHystOperEnv=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
-    annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=use_opeEnv));
+  parameter Modelica.Units.SI.TemperatureDifference dTHystOperEnv=5
+    "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+    annotation (Dialog(
+      tab="Safety Control",
+      group="Operational Envelope",
+      enable=use_opeEnv));
   parameter Boolean use_deFro=true "False if defrost in not considered"
                                     annotation (choices(checkBox=true), Dialog(
         tab="Safety Control",group="Defrost", descriptionLabel = true, enable=use_sec));
@@ -129,9 +135,9 @@ model HPSystemController
       tab="Safety Control",
       group="Defrost",
       enable=use_sec and use_deFro), choices(checkBox=true));
-  parameter Modelica.SIunits.Power calcPel_deFro
-    "Calculate how much eletrical energy is used to melt ice"
-    annotation (Dialog(
+  parameter Modelica.Units.SI.Power calcPel_deFro
+    "Calculate how much eletrical energy is used to melt ice" annotation (
+      Dialog(
       tab="Safety Control",
       group="Defrost",
       enable=use_sec and use_deFro and not use_chiller));
@@ -141,7 +147,7 @@ model HPSystemController
       tab="Safety Control",
       group="Anti Freeze Control",
       enable=use_sec),choices(checkBox=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TantFre=276.15
     "Limit temperature for anti freeze control" annotation (Dialog(
       tab="Safety Control",
       group="Anti Freeze Control",
@@ -165,7 +171,7 @@ model HPSystemController
     final TantFre=TantFre,
     final tableUpp=tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
-    final dataTable=dataTable) if         use_sec
+    final dataTable=dataTable)         if use_sec
     annotation (Placement(transformation(extent={{8,-16},{48,24}})));
   Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
@@ -230,8 +236,8 @@ model HPSystemController
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
   AixLib.DataBase.HeatPump.PerformanceData.IcingBlock
     icingBlock(redeclare final function iceFunc =
-        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
-       use_deFro
+        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach)
+    if use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro
     annotation (Placement(transformation(extent={{44,56},{60,72}})));
@@ -240,7 +246,7 @@ model HPSystemController
     use_sec "Pass through for mode signal"
     annotation (Placement(transformation(extent={{22,-38},{34,-26}})));
 
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_con=4180
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_con=4180
     "specific heat capacity of condenser medium";
   Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
       Placement(transformation(

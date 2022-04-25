@@ -1,49 +1,49 @@
 within AixLib.Fluid.FMI.Interfaces;
- connector Outlet "Connector for fluid outlet"
-   replaceable package Medium =
-     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-       annotation (choices(
-         choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-         choice(redeclare package Medium = AixLib.Media.Water "Water"),
-         choice(redeclare package Medium =
-             AixLib.Media.Antifreeze.PropyleneGlycolWater (
-           property_T=293.15,
-           X_a=0.40)
-           "Propylene glycol water, 40% mass fraction")));
- 
-   parameter Boolean use_p_in = true
-     "= true to use pressure connector, false to remove it"
-     annotation(Evaluate=true);
- 
-   parameter Boolean allowFlowReversal = true
-     "= true to allow flow reversal, false restricts to design direction (inlet -> outlet)"
-     annotation(Dialog(tab="Assumptions"), Evaluate=true);
- 
-   output Medium.MassFlowRate m_flow
-     "Mass flow rate from the connection point into the component";
-   AixLib.Fluid.FMI.Interfaces.PressureOutput p
-     if use_p_in "Thermodynamic pressure in the connection point";
- 
-   input AixLib.Fluid.FMI.Interfaces.FluidProperties backward(
-     redeclare final package Medium = Medium)
-     if allowFlowReversal "Inflowing properties";
- 
-   output AixLib.Fluid.FMI.Interfaces.FluidProperties forward(
-     redeclare final package Medium = Medium) "Outflowing properties";
- 
-   annotation (defaultComponentName="outlet",
-   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-             {100,100}}), graphics={Polygon(
-           points={{-100,100},{-100,-100},{100,0},{-100,100}},
-           lineColor={0,0,255},
-           smooth=Smooth.None,
-           fillPattern=FillPattern.Solid,
-           fillColor={255,255,255}),
-           Text(
-           extent={{-58,134},{48,94}},
-           textColor={0,0,255},
-           textString="%name")}),
-     Documentation(info="<html>
+connector Outlet "Connector for fluid outlet"
+  replaceable package Medium =
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15,
+          X_a=0.40)
+          "Propylene glycol water, 40% mass fraction")));
+
+  parameter Boolean use_p_in = true
+    "= true to use pressure connector, false to remove it"
+    annotation(Evaluate=true);
+
+  parameter Boolean allowFlowReversal = true
+    "= true to allow flow reversal, false restricts to design direction (inlet -> outlet)"
+    annotation(Dialog(tab="Assumptions"), Evaluate=true);
+
+  output Medium.MassFlowRate m_flow
+    "Mass flow rate from the connection point into the component";
+  AixLib.Fluid.FMI.Interfaces.PressureOutput p
+    if use_p_in "Thermodynamic pressure in the connection point";
+
+  input AixLib.Fluid.FMI.Interfaces.FluidProperties backward(
+    redeclare final package Medium = Medium)
+    if allowFlowReversal "Inflowing properties";
+
+  output AixLib.Fluid.FMI.Interfaces.FluidProperties forward(
+    redeclare final package Medium = Medium) "Outflowing properties";
+
+  annotation (defaultComponentName="outlet",
+  Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            {100,100}}), graphics={Polygon(
+          points={{-100,100},{-100,-100},{100,0},{-100,100}},
+          lineColor={0,0,255},
+          smooth=Smooth.None,
+          fillPattern=FillPattern.Solid,
+          fillColor={255,255,255}),
+          Text(
+          extent={{-58,134},{48,94}},
+          textColor={0,0,255},
+          textString="%name")}),
+    Documentation(info="<html>
  <p>
  This is a connector for a fluid outlet.
  The connector produces as an output the
@@ -98,7 +98,7 @@ within AixLib.Fluid.FMI.Interfaces;
  If <code>allowFlowReversal = false</code>, then these inputs are not present
  and hence not required to be provided.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  January 18, 2019, by Jianjun Hu:<br/>
@@ -120,6 +120,6 @@ within AixLib.Fluid.FMI.Interfaces;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end Outlet;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Outlet;

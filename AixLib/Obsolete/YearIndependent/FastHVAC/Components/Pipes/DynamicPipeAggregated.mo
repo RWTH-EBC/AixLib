@@ -12,21 +12,24 @@ model DynamicPipeAggregated "DynamicPipe with heat loss to ambient"
     annotation (choicesAllMatching);
 
 protected
-    parameter Modelica.SIunits.Volume  V_fluid= Modelica.Constants.pi*length*nParallel*innerDiameter*innerDiameter/4;
-    parameter Modelica.SIunits.Diameter innerDiameter=(if selectable then parameterPipe.d_i else diameter)
-    "Inner diameter of  pipe";
-    parameter Modelica.SIunits.Diameter outerDiameter=(if selectable then parameterPipe.d_o else innerDiameter+2*s_pipeWall)
+  parameter Modelica.Units.SI.Volume V_fluid=Modelica.Constants.pi*length*
+      nParallel*innerDiameter*innerDiameter/4;
+  parameter Modelica.Units.SI.Diameter innerDiameter=(if selectable then
+      parameterPipe.d_i else diameter) "Inner diameter of  pipe";
+  parameter Modelica.Units.SI.Diameter outerDiameter=(if selectable then
+      parameterPipe.d_o else innerDiameter + 2*s_pipeWall)
     "Outer diameter of  pipe";
-    parameter Modelica.SIunits.Density d=(if selectable then parameterPipe.d else rho_pipeWall)
-    "Density of pipe material";
-    parameter Modelica.SIunits.SpecificHeatCapacity c=(if selectable then parameterPipe.c else c_pipeWall)
-    "Heat capacity of pipe material";
-    parameter Modelica.SIunits.ThermalConductivity lambda= (if selectable then parameterPipe.lambda else lambda_pipeWall)
+  parameter Modelica.Units.SI.Density d=(if selectable then parameterPipe.d
+       else rho_pipeWall) "Density of pipe material";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c=(if selectable then
+      parameterPipe.c else c_pipeWall) "Heat capacity of pipe material";
+  parameter Modelica.Units.SI.ThermalConductivity lambda=(if selectable then
+      parameterPipe.lambda else lambda_pipeWall)
     "Thermal Conductivity of pipe material";
 
 public
-    parameter Modelica.SIunits.Temperature T_0=Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature of fluid";
+  parameter Modelica.Units.SI.Temperature T_0=
+      Modelica.Units.Conversions.from_degC(20) "Initial temperature of fluid";
 
   /* *******************************************************************
       Pipe Parameters
@@ -36,23 +39,23 @@ public
 
     parameter Integer nParallel(min=1)=1 "Number of identical parallel pipes"
     annotation(Dialog(group = "Geometry"));
-    parameter Modelica.SIunits.Length length=1 "Length of pipe"
-       annotation(Dialog(group = "Geometry"));
-    parameter Modelica.SIunits.Diameter diameter= 0.01
+  parameter Modelica.Units.SI.Length length=1 "Length of pipe"
+    annotation (Dialog(group="Geometry"));
+  parameter Modelica.Units.SI.Diameter diameter=0.01
     "Inner diameter of  pipe (if selectable=false)"
-    annotation (Dialog(group = "Geometry",enable=not selectable));
-    parameter Modelica.SIunits.Density rho_pipeWall= 8900
+    annotation (Dialog(group="Geometry", enable=not selectable));
+  parameter Modelica.Units.SI.Density rho_pipeWall=8900
     "Density of pipe material (if selectable=false)"
-    annotation (Dialog(group = "Pipe material",enable=not selectable));
-    parameter Modelica.SIunits.Thickness s_pipeWall = 0.001
+    annotation (Dialog(group="Pipe material", enable=not selectable));
+  parameter Modelica.Units.SI.Thickness s_pipeWall=0.001
     "Thickness of pipe wall (if selectable=false)"
-    annotation (Dialog(group = "Geometry", enable=not selectable));
-    parameter Modelica.SIunits.SpecificHeatCapacity c_pipeWall= 390
+    annotation (Dialog(group="Geometry", enable=not selectable));
+  parameter Modelica.Units.SI.SpecificHeatCapacity c_pipeWall=390
     "Heat capacity of pipe material (if selectable=false)"
-    annotation (Dialog(group = "Pipe material",enable=not selectable));
-    parameter Modelica.SIunits.ThermalConductivity lambda_pipeWall= 393
+    annotation (Dialog(group="Pipe material", enable=not selectable));
+  parameter Modelica.Units.SI.ThermalConductivity lambda_pipeWall=393
     "Thermal Conductivity of pipe material (if selectable=false)"
-    annotation (Dialog(group = "Pipe material",enable=not selectable));
+    annotation (Dialog(group="Pipe material", enable=not selectable));
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Type of pipe"
     annotation (Dialog(enable=selectable), choicesAllMatching=true);
@@ -71,16 +74,18 @@ public
     final parameter Boolean withRadiationParam=if not withConvection then false else withRadiation
     "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)"
     annotation (Dialog( enable = false));
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=8 "Heat transfer coefficient to ambient"
-    annotation (Dialog( enable=withConvection));
-    parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
-    annotation (Dialog( enable = withRadiation));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut=8
+    "Heat transfer coefficient to ambient"
+    annotation (Dialog(enable=withConvection));
+  parameter Modelica.Units.SI.Emissivity eps=0.8 "Emissivity"
+    annotation (Dialog(enable=withRadiation));
     parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"
-    annotation(Dialog(enable=not
-          calcHCon));
-    final parameter Modelica.SIunits.Area AOutside = if not withInsulation then Modelica.Constants.pi*outerDiameter*length
-    else Modelica.Constants.pi*(outerDiameter*parameterIso.factor*2 + outerDiameter)*length;
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn_const=30
+    "Fix value for heat transfer coeffiecient inside pipe"
+    annotation (Dialog(enable=not calcHCon));
+  final parameter Modelica.Units.SI.Area AOutside=if not withInsulation then
+      Modelica.Constants.pi*outerDiameter*length else Modelica.Constants.pi*(
+      outerDiameter*parameterIso.factor*2 + outerDiameter)*length;
 
   /* *******************************************************************
       Components
@@ -102,8 +107,8 @@ public
     d_in=fill(outerDiameter, nNodes),
     length=fill(length/nNodes, nNodes),
     lambda=fill(parameterIso.lambda, nNodes),
-    T0=fill(T_0, nNodes)) if
-       withInsulation
+    T0=fill(T_0, nNodes))
+    if withInsulation
   annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside
   annotation (Placement(transformation(extent={{46,82},{66,102}}),
@@ -116,16 +121,16 @@ public
       Placement(transformation(extent={{88,-10},{108,10}}),
         iconTransformation(extent={{88,-10},{108,10}})));
 
-  AixLib.Utilities.Interfaces.RadPort star if
-                                           withRadiationParam annotation (Placement(transformation(extent={{-70,86},{-50,106}}), iconTransformation(extent={{-70,86},{-50,106}})));
+  AixLib.Utilities.Interfaces.RadPort star
+                                        if withRadiationParam annotation (Placement(transformation(extent={{-70,86},{-50,106}}), iconTransformation(extent={{-70,86},{-50,106}})));
   AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hConOut, nNodes), A=AOutside/nNodes) if withConvection
     "Convection from pipe wall"
   annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={58,28})));
-  AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=AOutside/nNodes) if
-                                            withRadiationParam annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=AOutside/nNodes)
+                                         if withRadiationParam annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-58,30})));

@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems;
+﻿within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=false,
@@ -74,22 +74,29 @@ model HeatPumpSystem
   parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"), Evaluate=true);
   parameter Boolean use_refIne=true  "Consider the inertia of the refrigerant cycle"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia"), choices(checkBox=true));
-  constant Modelica.SIunits.Frequency refIneFre_constant
-    "Cut off frequency representing inertia of refrigerant cycle"
-    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne), Evaluate=true);
+  constant Modelica.Units.SI.Frequency refIneFre_constant
+    "Cut off frequency representing inertia of refrigerant cycle" annotation (
+      Dialog(
+      tab="Heat Pump",
+      group="Refrigerant cycle inertia",
+      enable=use_refIne), Evaluate=true);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne));
 //Condenser/Evaporator
-  parameter Modelica.SIunits.Volume VCon(displayUnit="l")
-                                         "Volume in condenser. Typical values range from 1 to 20 l, depending on the size of the heat pump and the mass flow rate."
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=true);
-  parameter Modelica.SIunits.Volume VEva(displayUnit="l")
-                                         "Volume in evaporator. Typical values range from 1 to 20 l, depending on the size of the heat pump and the mass flow rate."
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=true);
-  parameter Modelica.SIunits.PressureDifference dpEva_nominal(displayUnit="kPa")
+  parameter Modelica.Units.SI.Volume VCon(displayUnit="l")
+    "Volume in condenser. Typical values range from 1 to 20 l, depending on the size of the heat pump and the mass flow rate."
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"),
+      Evaluate=true);
+  parameter Modelica.Units.SI.Volume VEva(displayUnit="l")
+    "Volume in evaporator. Typical values range from 1 to 20 l, depending on the size of the heat pump and the mass flow rate."
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"),
+      Evaluate=true);
+  parameter Modelica.Units.SI.PressureDifference dpEva_nominal(displayUnit=
+        "kPa")
     "Pressure drop at nominal mass flow rate. Only relevant if a mover is used. Try to select values to match the nominal mass flow rate."
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
-  parameter Modelica.SIunits.PressureDifference dpCon_nominal(displayUnit="kPa")
+  parameter Modelica.Units.SI.PressureDifference dpCon_nominal(displayUnit=
+        "kPa")
     "Pressure drop at nominal mass flow rate. Only relevant if a mover is used. Try to select values to match the nominal mass flow rate."
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
   parameter Real deltaM_con=0.1
@@ -107,33 +114,45 @@ model HeatPumpSystem
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"),
                                           choices(checkBox=true));
-  parameter Modelica.SIunits.HeatCapacity CEva
+  parameter Modelica.Units.SI.HeatCapacity CEva
     "Heat capacity of Evaporator (= cp*m). If you want to neglace the dry mass of the evaporator, you can set this value to zero"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
+    annotation (Dialog(
+      tab="Evaporator/ Condenser",
+      group="Evaporator",
       enable=use_evaCap), Evaluate=true);
-  parameter Modelica.SIunits.ThermalConductance GEvaOut=percHeatLoss*
+  parameter Modelica.Units.SI.ThermalConductance GEvaOut=percHeatLoss*
       QEva_nominal/(TEva_nominal - TAmbEva_nominal)
     "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a evaporator with additional dry mass but without external heat losses, set the value to zero"
-    annotation (Evaluate=true,Dialog(group="Evaporator", tab="Evaporator/ Condenser",
+    annotation (Evaluate=true, Dialog(
+      group="Evaporator",
+      tab="Evaporator/ Condenser",
       enable=use_evaCap));
-  parameter Modelica.SIunits.ThermalConductance GEvaIns=QEva_nominal/dTPinchEva
+  parameter Modelica.Units.SI.ThermalConductance GEvaIns=QEva_nominal/
+      dTPinchEva
     "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
-    annotation (Evaluate=true,Dialog(group="Evaporator", tab="Evaporator/ Condenser",
+    annotation (Evaluate=true, Dialog(
+      group="Evaporator",
+      tab="Evaporator/ Condenser",
       enable=use_evaCap));
-  parameter Modelica.SIunits.HeatCapacity CCon
+  parameter Modelica.Units.SI.HeatCapacity CCon
     "Heat capacity of Condenser (= cp*m). If you want to neglace the dry mass of the condenser, you can set this value to zero"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
+    annotation (Dialog(
+      tab="Evaporator/ Condenser",
+      group="Condenser",
       enable=use_conCap), Evaluate=true);
-  parameter Modelica.SIunits.ThermalConductance GConOut=percHeatLoss*
+  parameter Modelica.Units.SI.ThermalConductance GConOut=percHeatLoss*
       QCon_nominal/(TCon_nominal - TAmbCon_nominal)
     "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a condenser with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true, Dialog(
       group="Condenser",
       tab="Evaporator/ Condenser",
       enable=use_conCap));
-  parameter Modelica.SIunits.ThermalConductance GConIns=QCon_nominal/dTPinchCon
+  parameter Modelica.Units.SI.ThermalConductance GConIns=QCon_nominal/
+      dTPinchCon
     "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
-    annotation (Evaluate=true,Dialog(group="Condenser", tab="Evaporator/ Condenser",
+    annotation (Evaluate=true, Dialog(
+      group="Condenser",
+      tab="Evaporator/ Condenser",
       enable=use_conCap));
 //Dynamics
   parameter Real x_start[nthOrder]=zeros(nthOrder)
@@ -143,13 +162,15 @@ model HeatPumpSystem
     annotation (Dialog(tab="Initialization", group="System inertia",enable=initType ==
           Modelica.Blocks.Types.Init.InitialOutput and use_refIne));
 //Initialization
-  parameter Modelica.SIunits.Temperature TConCap_start=Medium_con.T_default
-    "Initial temperature of heat capacity of condenser"
-    annotation (Dialog(tab="Initialization", group="Condenser",
+  parameter Modelica.Units.SI.Temperature TConCap_start=Medium_con.T_default
+    "Initial temperature of heat capacity of condenser" annotation (Dialog(
+      tab="Initialization",
+      group="Condenser",
       enable=use_conCap));
-  parameter Modelica.SIunits.Temperature TEvaCap_start=Medium_eva.T_default
-    "Initial temperature of heat capacity at evaporator"
-    annotation (Dialog(tab="Initialization", group="Evaporator",
+  parameter Modelica.Units.SI.Temperature TEvaCap_start=Medium_eva.T_default
+    "Initial temperature of heat capacity at evaporator" annotation (Dialog(
+      tab="Initialization",
+      group="Evaporator",
       enable=use_evaCap));
 equation
 
