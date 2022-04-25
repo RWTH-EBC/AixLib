@@ -2,7 +2,7 @@ within ;
 package AixLib
   annotation (
   uses(
-    Modelica(version="3.2.3"), 
+    Modelica(version="4.0.0"), 
     Modelica_Synchronous(version="0.92.2"),
     NcDataReader2(version="2.5.0"),
     SDF(version="0.4.1"),

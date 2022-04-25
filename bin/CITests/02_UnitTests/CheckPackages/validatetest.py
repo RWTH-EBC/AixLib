@@ -62,7 +62,9 @@ class ValidateTest(object):
             "Advanced.TranslationInCommandLog:=true;")  # Writes all information in the log file, not only the
         #self.dymola.ExecuteCommand("/bin/dymola_scripts/open_MSL_4.0.mos")
         #self.dymola.openModel("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo", changeDirectory=false)
-        self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
+        #self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
+
+        library_check = self.dymola.openModel("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo")  # Load modelica library MSL 4.0.0
         print(f'Open Modelica library Modelica 4.0.0')
 
     def _dym_check_lic(self):  # check the license
@@ -85,9 +87,9 @@ class ValidateTest(object):
     def _checkmodel(self, model_list):  # Check models and return a Error Log, if the check failed
         pack_check = self.dymola.openModel(self.lib_path)
         if pack_check is True:
-            print(f'Found {self.mo_library} Library and start Checkmodel Tests \n Check Package {self.package} \n')
+            print(f'Found {self.mo_library} library and start checkmodel tests \n Check package {self.package} \n')
         elif pack_check is False:
-            print(f'Library Path is wrong. Please Check Path of {self.mo_library} Library Path')
+            print(f'Library path is wrong. Please check path of {self.mo_library} library path')
             exit(1)
         error_model = []
         error_message = []
