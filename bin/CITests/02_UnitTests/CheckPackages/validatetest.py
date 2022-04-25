@@ -60,7 +60,10 @@ class ValidateTest(object):
         self.dymola_exception = DymolaException()
         self.dymola.ExecuteCommand(
             "Advanced.TranslationInCommandLog:=true;")  # Writes all information in the log file, not only the
-        self.dymola.ExecuteCommand("/bin/dymola_scripts/open_MSL_4.0.mos")
+        #self.dymola.ExecuteCommand("/bin/dymola_scripts/open_MSL_4.0.mos")
+        #self.dymola.openModel("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo", changeDirectory=false)
+        self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
+        print(f'Open Modelica library Modelica 4.0.0')
 
     def _dym_check_lic(self):  # check the license
         dym_sta_lic_available = self.dymola.ExecuteCommand('RequestOption("Standard");')
