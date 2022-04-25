@@ -70,14 +70,14 @@ class Reg_Reference(object):
                     ref_list.append(ref_file)
         return ref_list
 
-    def _delte_ref_file(self, ref_list):
+    def _delte_ref_file(self, ref_list):  # delete reference files
         ref_dir = f'{self.library}{os.sep}{self.ref_file_path}'
         for ref in ref_list:
-            print(f'Update reference file {ref_dir}{os.sep}{ref}\n')
+            print(f'Update reference file: {ref_dir}{os.sep}{ref}\n')
             if os.path.exists(f'..{os.sep}{ref_dir}{os.sep}{ref}'):
                 os.remove(f'..{os.sep}{ref_dir}{os.sep}{ref}')
             else:
-                print(f'File ..{os.sep}{ref_dir}{os.sep}{ref} does not exist\n')
+                print(f'File {os.sep}{ref_dir}{os.sep}{ref} does not exist\n')
 
     def _get_ref_package(self):  # reproduces packages in which reference results are missing
         mos_list = Reg_Reference._compare_ref_mos(self)
@@ -170,7 +170,9 @@ class Reg_Reference(object):
     def _get_update_package(self, ref_list):
         ref_package_list = []
         for ref in ref_list:
-            ref_package_list.append(ref[:ref.rfind("_")].replace("_","."))
+            ref_model = ref[:ref.rfind("_")].replace("_", ".")
+            ref_package_list.append(ref_model[:ref_model.rfind(".")])
+        ref_package_list = list(set(ref_package_list))
         return ref_package_list
 
     def _get_update_ref(self):  # get a model to update

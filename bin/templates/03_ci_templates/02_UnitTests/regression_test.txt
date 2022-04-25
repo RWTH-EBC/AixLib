@@ -10,7 +10,7 @@ stages:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > ${exit_file}
@@ -20,7 +20,7 @@ stages:
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
             export PIP_CACHE_DIR="/opt/cache/pip" ;
-            source activate python36 ;
+            source activate ${python_version} ;
             pip install pandas mako matplot ;
             python bin/CITests/05_Converter/google_charts.py --line-html --error --funnel-comp --single-package ${lib_package} ;
             mkdir -p data ;
@@ -56,7 +56,7 @@ CI_Regressiontest_${library}_${package}:
 CI_create_plots:
     stage: prepare
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
@@ -87,7 +87,7 @@ CI_create_plots:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > ${exit_file}
@@ -97,7 +97,7 @@ CI_create_plots:
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
             export PIP_CACHE_DIR="/opt/cache/pip" ;
-            source activate python36 ;
+            source activate ${python_version} ;
             pip install pandas mako matplot ;
             python bin/CITests/05_Converter/google_charts.py --line-html --error --funnel-comp --single-package ${lib_package} ;
             mkdir -p data ;
@@ -137,7 +137,7 @@ Regression_overall_coverage:
     stage: RegressionTest
     before_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
@@ -163,7 +163,7 @@ Regression_overall_coverage:
 prepare_create_plots:
     stage: prepare
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
@@ -197,7 +197,7 @@ prepare_create_plots:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > ${exit_file}
@@ -208,7 +208,7 @@ prepare_create_plots:
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
             export PIP_CACHE_DIR="/opt/cache/pip";
-            source activate python36;
+            source activate ${python_version};
             pip install pandas mako matplot;
             python bin/CITests/05_Converter/google_charts.py --line-html --error --funnel-comp --single-package ${lib_package};
             mkdir -p data ;
@@ -251,7 +251,7 @@ Changed_Regressiontest_${library}_${package}:
 Changed_create_plots:
     stage: prepare
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
@@ -292,7 +292,7 @@ RegressionTest_Check_References:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
         - eval $(ssh-agent -s)
@@ -311,7 +311,7 @@ RegressionTest_Check_References:
         - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 2 < ../${eof_file}
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
         - cd CorrectedVersion && cd ${CI_PROJECT_NAME}
         - git ls-files --others --exclude-standard
@@ -364,7 +364,7 @@ Update_Regression_Results:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
@@ -385,7 +385,7 @@ Update_Regression_Results:
         - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package ${library} -n 2 < ../${eof_file}
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
         - cd CorrectedVersion && cd ${CI_PROJECT_NAME}
         - git ls-files --others --exclude-standard
@@ -436,7 +436,7 @@ Update_Regression_Results:
 plot_reference_results:
     stage: plot_ref
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
         - pip install pandas mako matplot

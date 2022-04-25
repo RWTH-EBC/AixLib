@@ -10,7 +10,8 @@ IBPSA:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36  
+        - source activate ${python_version}
+        - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
         - eval $(ssh-agent -s)
@@ -32,7 +33,7 @@ IBPSA:
         - cd ..
         - cd ..
         - cd .. 
-        - python bin/CITests/06_deploy/IBPSA_Merge/copy_conversion_script.py --dst "Convertmos" --ibpsa-dir  "modelica-ibpsa/IBPSA/Resources/Scripts/Dymola/ConvertIBPSA_*" --aixlib-dir "${library}/Resources/Scripts"
+        - python bin/CITests/06_deploy/IBPSA_Merge/copy_conversion_script.py --dst "Convertmos" --ibpsa-dir  "modelica-ibpsa/IBPSA/Resources/Scripts/Conversion/ConvertIBPSA_*" --aixlib-dir "${library}/Resources/Scripts"
         - python bin/CITests/06_deploy/IBPSA_Merge/correct_userguide.py
         - rm -r modelica-ibpsa
     only:
@@ -42,6 +43,7 @@ IBPSA:
             -  external_pull_requests
         variables:
             - $CI_COMMIT_MESSAGE  =~ /${ci_merge_except_commit}/
+            - $CI_COMMIT_MESSAGE  =~ /${bot_commit}/
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor
@@ -55,7 +57,8 @@ WhiteList:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36  
+        - source activate ${python_version}
+        - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
         - eval $(ssh-agent -s)
@@ -70,7 +73,7 @@ WhiteList:
         - cd Merge_Package/${CI_PROJECT_NAME}
         - python bin/CITests/03_SyntaxTests/html_tidy_errors.py --WhiteList # Update WhiteList for HTML
         - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} --git-url ${git_url} --library ${library} --wh-library ${wh_library} --whitelist
-        - python bin/CITests/05_Converter/lock_model.py --library {library} --wh-library ${wh_library}
+        - python bin/CITests/05_Converter/lock_model.py --library ${library} --wh-library ${wh_library}
         - rm  -r IBPSA 
         - message="${bot_commit}"
         - git add  . 
@@ -83,6 +86,7 @@ WhiteList:
             - external_pull_requests
         variables:
             - $CI_COMMIT_MESSAGE  =~ /${ci_merge_except_commit}/
+            - $CI_COMMIT_MESSAGE  =~ /${bot_commit}/
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor
@@ -95,7 +99,7 @@ WhiteList:
 IBPSA_Pull_Request:
     stage: openMR
     before_script:
-        - source activate python36  
+        - source activate ${python_version}
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
         - export PYTHONIOENCODING=utf-8 # just in case
@@ -110,6 +114,7 @@ IBPSA_Pull_Request:
             - external_pull_requests
         variables:
             - $CI_COMMIT_MESSAGE  =~ /${ci_merge_except_commit}/
+            - $CI_COMMIT_MESSAGE  =~ /${bot_commit}/
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor

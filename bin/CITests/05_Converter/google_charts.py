@@ -246,9 +246,15 @@ class Plot_Charts(object):
                     var = line[line.find((".mat:")) + 5:line.find("exceeds ")].lstrip()  # variable name
                     model_var_list.append(f'{model}:{var}')
                 if line.find("*** Warning: Numerical Jacobian in 'RunScript") > -1 and line.find(".mos") > -1:
-                    model = line[line.rfind(os.sep)+1 :line.find(".mos")].lstrip()
+                    model = line[line.rfind(os.sep)+1:line.find(".mos")].lstrip()
                     var = ""
                     model_var_list.append(f'{model}:{var}')
+                if line.find("*** Warning: Failed to interpret experiment annotation in 'RunScript") > -1 and line.find(".mos") > -1:
+                    model = line[line.rfind(os.sep)+1:line.find(".mos")].lstrip()
+
+                    var = ""
+                    model_var_list.append(f'{model}:{var}')
+
         return model_var_list
 
     def _get_ref_file(self, model):
@@ -396,6 +402,7 @@ class Plot_Charts(object):
         from mako.template import Template
         html_file_list = []
         for file in os.listdir(self.temp_chart_path):
+            print(file)
             if file.endswith(".html") and file != "index.html":
                 html_file_list.append(file)
         mytemplate = Template(filename=self.index_temp_file)
@@ -450,9 +457,8 @@ class Plot_Charts(object):
 def _delte_folder():
     sys.path.append('bin/CITests')
     from _config import chart_dir
-
     if os.path.isdir(chart_dir) is False:
-        print(f'directonary {chart_dir} does not exist.')
+        print(f'Directonary {chart_dir} does not exist.')
     else:
         folder_list = os.listdir(chart_dir)
         print(folder_list)
@@ -530,7 +536,7 @@ if __name__ == '__main__':
         print(f'Please set a package (e.g. --single-package Airflow)')
         exit(0)
     else:
-        print(f'Setting package: {args.single_package}')
+        print(f'Setting package: {args.single_package}\n')
 
     if args.line_html is True:  # Create Line chart html
         _delte_folder()
@@ -539,6 +545,7 @@ if __name__ == '__main__':
             model_var_list = charts._read_unitTest_log()
             charts._check_folder_path()
             print(f'Plot line chart with different reference results.\n')
+            print(model_var_list)
             for model_var in model_var_list:
                 list = model_var.split(":")
                 model = list[0]

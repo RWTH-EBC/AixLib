@@ -6,6 +6,8 @@ import platform
 from git import Repo
 import time
 import glob
+from natsort import natsorted
+
 
 class Git_Repository_Clone(object):
     def __init__(self, repo_dir, git_url):
@@ -18,6 +20,7 @@ class Git_Repository_Clone(object):
         else:
             print(f'Clone IBPSA Repo')
             Repo.clone_from(self.git_url, self.repo_dir)
+
 
 class ValidateTest(object):
     """Class to Check Packages and run CheckModel Tests"""
@@ -287,30 +290,20 @@ class Create_whitelist(object):
             "Advanced.TranslationInCommandLog:=true;")  # ## Writes all information in the log file, not only the
 
     def read_script_version(self):
-        aixlib_dir = self.library + os.sep + "Resources" + os.sep + "Scripts"
+        aixlib_dir = f'{self.library}{os.sep}Resources{os.sep}Scripts'
         filelist = (glob.glob(aixlib_dir + os.sep + "*.mos"))
-        list = []
-        for file in filelist:
-            list.append(file.replace(".mos", ""))
-        data = sorted(list, key=lambda x: float(x[x.find("_to_0") + 6:]))
-        data = data[len(data) - 1]
-        d = data[data.find("_to_0") + 6:data.rfind(".")]
-        last_conv_list = []
-        for i in list:
-            num = i[i.find("_to_0") + 6:i.rfind(".")]
-            if num == str(d):
-                last_conv_list.append(i)
-                continue
-        data = (sorted(last_conv_list, key=lambda x: int(x[x.rfind(".") + 1:])))
-        data = (data[len(data) - 1])
-        data = data.split(os.sep)
-        version = (data[len(data) - 1])
+        if len(filelist) == 0:
+            print("Cant find a Conversion Script in IBPSA Repo")
+            exit(0)
+        l_aixlib_conv = natsorted(filelist)[(-1)]
+        l_aixlib_conv = l_aixlib_conv.split(os.sep)
+        version = (l_aixlib_conv[len(l_aixlib_conv) - 1])
+        print(f'Latest {self.library} version: {version}')
         return version
 
     def _check_fileexist(self):
         if os.path.exists(self.wh_file):
             print(f'Whitelist does exist. Update the whitelist under {self.wh_file}')
-
         else:
             print(f' Whitelist does not exist. Create a new one under {self.wh_file}')
             file = open(self.wh_file, "w+")
@@ -326,7 +319,6 @@ class Create_whitelist(object):
             if line.strip("\n") == version.strip("\n"):
                 print(f'Whitelist is on version {version}. The Whitelist is already up to date')
                 version_check = True
-
         vfile.close()
         return version_check
 
