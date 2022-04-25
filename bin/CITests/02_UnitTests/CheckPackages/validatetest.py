@@ -30,8 +30,8 @@ class ValidateTest(object):
                  filter_wh):
         self.package = package
         self.mo_library = mo_library
-        self.lib_path = self.mo_library + os.sep + "package.mo"
-        self.root_package = self.mo_library + os.sep + self.package
+        self.lib_path = f'{self.mo_library}{os.sep}package.mo'
+        self.root_package = f'{self.mo_library}{os.sep}{self.package}'
         self.n_pro = n_pro
         self.show_gui = show_gui
         self.simulate_ex = simulate_examples
@@ -60,12 +60,6 @@ class ValidateTest(object):
         self.dymola_exception = DymolaException()
         self.dymola.ExecuteCommand(
             "Advanced.TranslationInCommandLog:=true;")  # Writes all information in the log file, not only the
-        #self.dymola.ExecuteCommand("/bin/dymola_scripts/open_MSL_4.0.mos")
-        #self.dymola.openModel("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo", changeDirectory=false)
-        #self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
-        #/ builds / EBC / EBC_all / github_ci / AixLib /.git /
-        #library_check = self.dymola.openModel("../../../../../opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo")   # Load modelica library MSL 4.0.0
-        #library_check = self.dymola.ExecuteCommand('cd("/opt/dymola-2020-x86_64/Modelica/Library/Modelica 4.0.0/package.mo");')
         library_check = self.dymola.openModel("../../../../../library/Modelica 4.0.0/package.mo")  # Load modelica library MSL 4.0.0
 
         if library_check is False:
@@ -73,8 +67,6 @@ class ValidateTest(object):
             exit(1)
         if library_check is True:
             print("Load Modelica library 4.0.0 successful")
-
-        print(f'Open Modelica library Modelica 4.0.0')
 
     def _dym_check_lic(self):  # check dymola license
         dym_sta_lic_available = self.dymola.ExecuteCommand('RequestOption("Standard");')
@@ -94,11 +86,12 @@ class ValidateTest(object):
 
 
     def _checkmodel(self, model_list):  # Check models and return a Error Log, if the check failed
+        print(f'Library path: {self.lib_path}')
         pack_check = self.dymola.openModel(self.lib_path)
         if pack_check is True:
-            print(f'Found {self.mo_library} library and start checkmodel tests \n Check package {self.package} \n')
+            print(f'Found {self.mo_library} library and start checkmodel tests. \nCheck package {self.package} \n')
         elif pack_check is False:
-            print(f'Library path is wrong. Please check path of {self.mo_library} library path')
+            print(f'Library path is wrong. Please check path of {self.mo_library} library path.')
             exit(1)
         error_model = []
         error_message = []
@@ -128,9 +121,9 @@ class ValidateTest(object):
     def _sim_examples(self, example_list):  # Simulate examples or validations
         pack_check = self.dymola.openModel(self.lib_path)
         if pack_check is True:
-            print(f'Found {self.mo_library} Library and start check model test. \n Check Package {self.package} \n')
+            print(f'Found {self.mo_library} Library and start check model test.\nCheck Package {self.package} \n')
         elif pack_check is False:
-            print(f'Library path is wrong. Please check the path of {self.mo_library} library path')
+            print(f'Library path is wrong. Please check the path of {self.mo_library} library path.')
             exit(1)
         error_model = []
         error_message = []
@@ -281,7 +274,7 @@ class Create_whitelist(object):
     def __init__(self, library, wh_lib):
         self.library = library
         self.wh_lib = wh_lib
-        self.wh_lib_path = self.wh_lib + os.sep + self.wh_lib + os.sep + "package.mo"
+        self.wh_lib_path = f'{self.wh_lib}{os.sep}{self.wh_lib}{os.sep}package.mo'
 
         sys.path.append('bin/CITests')
         from _config import ch_file, wh_file, exit_file
@@ -373,7 +366,7 @@ class Create_whitelist(object):
         if package_check is True:
             print(f'Found {self.wh_lib} Library and check models in library {self.wh_lib} \n')
         elif package_check is False:
-            print(f'Library Path is wrong. Please Check Path of {self.wh_lib} Library Path')
+            print(f'Library path is wrong. Please check path of {self.wh_lib} library path.')
             exit(1)
         error_model = []
         #error_message = []
