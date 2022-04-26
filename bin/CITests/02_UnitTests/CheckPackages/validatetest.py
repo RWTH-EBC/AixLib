@@ -87,15 +87,14 @@ class ValidateTest(object):
         elif pack_check is False:
             print(f'Library path is wrong. Please check path of {self.mo_library} library path.')
             exit(1)
-        library_check = self.dymola.openModel("../../../../../library/Modelica 4.0.0/package.mo")  # Load modelica library MSL 4.0.0
+        #library_check = self.dymola.openModel("../../../../../library/Modelica 4.0.0/package.mo")  # Load modelica library MSL 4.0.0
         # self.dymola.ExecuteCommand("DefaultModelicaVersion('4.0.0', true);")
-
-        if library_check is False:
-            print("Failed to load Modelica library 4.0.0")
-            exit(1)
-        if library_check is True:
-            print("Load Modelica library 4.0.0 successful")
-        self.dymola.ExecuteCommand('DymolaCommands.Others.DefaultModelicaVersion("4.0.0", true);')
+        #if library_check is False:
+        #    print("Failed to load Modelica library 4.0.0")
+        #    exit(1)
+        #if library_check is True:
+        #    print("Load Modelica library 4.0.0 successful")
+        #self.dymola.ExecuteCommand('DymolaCommands.Others.DefaultModelicaVersion("4.0.0", true);')
         error_model = []
         error_message = []
         for model in model_list:
