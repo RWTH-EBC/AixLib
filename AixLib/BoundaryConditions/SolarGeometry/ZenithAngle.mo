@@ -48,7 +48,7 @@ equation
  September 6, 2021, by Ettore Zanetti:<br/>
  Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">AixLib, #1477</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
  </li>
  <li>
  February 25, 2012, by Michael Wetter:<br/>

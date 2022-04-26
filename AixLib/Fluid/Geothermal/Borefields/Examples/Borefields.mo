@@ -173,7 +173,7 @@ revisions="<html>
  <li>
  April 8, 2021, by Michael Wetter:<br/>
  Added missing <code>parameter</code> keyword.<br/>
- For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">AixLib, issue 1464</a>.
+ For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">IBPSA, issue 1464</a>.
  </li>
  <li>
  June 2018, by Damien Picard:<br/>

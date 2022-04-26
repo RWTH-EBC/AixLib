@@ -51,7 +51,6 @@ model HeatPumpSystem
       final XEva_start=XEva_start,
       final x_start=x_start,
       final yRefIne_start=yRefIne_start,
-      final massDynamics=massDynamics,
       final energyDynamics=energyDynamics));
 
 //Heat Pump

@@ -77,7 +77,7 @@ model PlugFlowPipe
  a single outlet port <code>port_b</code>.<br/>
  Expanded the core pipe model that was previously a component.
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1494\">AixLib, #1494</a>.<br/>
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1494\">IBPSA, #1494</a>.<br/>
  This change is not backward compatible.<br/>
  The previous classes definitions were moved to
  <a href=\"modelica://AixLib.Obsolete.Fluid.FixedResistances.PlugFlowPipe\">

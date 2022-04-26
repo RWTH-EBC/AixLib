@@ -13,7 +13,7 @@ equation
  September 21, 2021, by Michael Wetter:<br/>
  Renamed class to correct typo in class name.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1524\">AixLib, #1524</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1524\">IBPSA, #1524</a>.
  </li>
  <li>
  November 28, 2013, by Marcus Fuchs:<br/>

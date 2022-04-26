@@ -74,7 +74,7 @@ annotation (
  February 28, 2022, by Massimo Cimmino:<br/>
  Changed function to be <code>pure</code>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">AixLib, #1582</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">IBPSA, #1582</a>.
  </li>
  <li>
  July 18, 2018 by Massimo Cimmino:<br/>

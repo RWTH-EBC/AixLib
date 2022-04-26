@@ -273,7 +273,7 @@ experiment(Tolerance=1e-06, StopTime=3600),
  <li>
  March 26, 2021 by Michael Wetter:<br/>
  Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
  </li>
  <li>
  May 15, 2019, by Jianjun Hu:<br/>

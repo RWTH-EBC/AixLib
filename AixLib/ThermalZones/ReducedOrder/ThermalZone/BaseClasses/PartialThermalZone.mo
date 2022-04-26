@@ -97,7 +97,6 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
     final p_start=p_start,
     final X_start=X_start,
     final T_start=T_start,

@@ -23,7 +23,7 @@ model WD300
  September 6, 2021, by Ettore Zanetti:<br/>
  Removed parameter <code>lat</code> as it is now obtained from the weather data bus.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">AixLib, #1477</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
  </li>
  <li>
  March 11, 2020, by Ettore Zanetti:<br/>

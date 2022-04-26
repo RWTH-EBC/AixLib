@@ -27,7 +27,6 @@ model OpenLoopVarTSupplyDp
         rotation=180,
         origin={-2,-60})));
   FixedResistances.PlugFlowPipe pipeSupply(
-    nPorts=1,
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
@@ -38,7 +37,6 @@ model OpenLoopVarTSupplyDp
         rotation=270,
         origin={60,0})));
   FixedResistances.PlugFlowPipe pipeReturn(
-    nPorts=1,
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
@@ -86,11 +84,11 @@ model OpenLoopVarTSupplyDp
 equation
   connect(sourceIdeal.port_b, pipeSupply.port_a)
     annotation (Line(points={{10,60},{60,60},{60,10}}, color={0,127,255}));
-  connect(pipeSupply.ports_b[1], demand.port_a)
+  connect(pipeSupply.port_b, demand.port_a)
     annotation (Line(points={{60,-10},{60,-60},{8,-60}},  color={0,127,255}));
   connect(demand.port_b, pipeReturn.port_a) annotation (Line(points={{-12,-60},{
           -60,-60},{-60,-10}}, color={0,127,255}));
-  connect(pipeReturn.ports_b[1], sourceIdeal.port_a)
+  connect(pipeReturn.port_b, sourceIdeal.port_a)
     annotation (Line(points={{-60,10},{-60,60},{-10,60}}, color={0,127,255}));
   connect(TSet.y, sourceIdeal.TIn)
     annotation (Line(points={{-20,77},{-20,67},{-10.6,67}}, color={0,0,127}));

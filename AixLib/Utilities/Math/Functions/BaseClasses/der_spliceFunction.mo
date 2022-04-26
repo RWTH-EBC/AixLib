@@ -50,7 +50,7 @@ revisions="<html>
  October 13, 2021, by Michael Wetter:<br/>
  Changed implementation to not use <code>cosh</code> which overflows around <i>800</i>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1531\">AixLib, issue 1531</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1531\">IBPSA, issue 1531</a>.
  </li>
  <li>
  May 10, 2013, by Michael Wetter:<br/>

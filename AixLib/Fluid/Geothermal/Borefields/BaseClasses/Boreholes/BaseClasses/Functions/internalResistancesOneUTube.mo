@@ -124,7 +124,7 @@ annotation (
  February 7, 2022, by Michael Wetter:<br/>
  Changed function to be <code>pure</code>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">AixLib, #1582</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">IBPSA, #1582</a>.
  </li>
  <li>
  December 11, 2021, by Michael Wetter:<br/>

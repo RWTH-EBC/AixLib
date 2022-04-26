@@ -54,7 +54,6 @@ package R134a_IIR_P1_395_T233_455_Formula
       max=473.15),
     smoothModel=true,
     onePhase=false,
-    ThermoStates=Choices.IndependentVariables.phX,
     fluidConstants=refrigerantConstants);
     /*The vector substanceNames is mandatory, as the number of
       substances is determined based on its size. Here we assume

@@ -44,13 +44,13 @@ equation
  September 6, 2021, by Ettore Zanetti:<br/>
  Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">AixLib, #1477</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
  </li>
  <li>
  April 27, 2018, by Michael Wetter:<br/>
  Corrected <code>displayUnit</code>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">AixLib, issue 912</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
  </li>
  <li>
  Dec 7, 2010, by Michael Wetter:<br/>

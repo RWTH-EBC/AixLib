@@ -97,13 +97,13 @@ equation
  Reformulated constraint of replaceable model to avoid access of
  component that is not in constraining type.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1473\">AixLib, #1473</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1473\">IBPSA, #1473</a>.
  </li>
  <li>
  December 23, 2019, by Michael Wetter:<br/>
  Changed constraining clause to ensure that heat port is present.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1268\">AixLib, #1268</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1268\">IBPSA, #1268</a>.
  </li>
  <li>
  January 19, 2016, by Michael Wetter:<br/>

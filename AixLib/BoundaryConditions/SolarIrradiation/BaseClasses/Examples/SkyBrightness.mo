@@ -73,7 +73,7 @@ Documentation(info="<html>
  May 2, 2021, by Ettore Zanetti:<br/>
  Changed extraterrestrial radiation and added time dependent correlation.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">AixLib, #1477</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
  </li>
  <li>
  July 07, 2010, by Wangda Zuo:<br/>

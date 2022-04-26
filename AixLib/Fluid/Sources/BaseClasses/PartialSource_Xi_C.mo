@@ -127,7 +127,7 @@ equation
  <a href=\"modelica://Modelica.Media.IdealGases.MixtureGases.SimpleNaturalGas\">
  Modelica.Media.IdealGases.MixtureGases.SimpleNaturalGas</a>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">AixLib, #1205</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
  </li>
  <li>
  February 13, 2018, by Michael Wetter:<br/>

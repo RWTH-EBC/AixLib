@@ -95,14 +95,14 @@ equation
  It differs from that model in that the internal state of the filter <code>s</code>
  is transformed using <code>x = u_nominal*s</code>.
  It turns out that this transformation leads to smaller system of nonlinear equations if <code>u_nominal &ne; 0</code>, see
- <a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498#issuecomment-885020611\">AixLib, #1498</a>
+ <a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498#issuecomment-885020611\">IBPSA, #1498</a>
  for a discussion.
  </html>",revisions="<html>
  <ul>
  <li>
  July 22, 2021, by Michael Wetter:<br/>
  First implementation for
- <a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498\">AixLib, #1498</a>
+ <a href=\"https://https://github.com/ibpsa/modelica-ibpsa/issues/1498\">IBPSA, #1498</a>
  </li>
  </ul>
  </html>"),

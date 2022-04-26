@@ -4,7 +4,6 @@ model PumpInterface_SpeedControlledNrpm
   extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;
   Fluid.Movers.SpeedControlled_Nrpm pump(redeclare package Medium = Medium,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
     T_start=T_start)
     annotation (Dialog(enable=true), Placement(transformation(extent={{-10,-10},
             {10,10}})));

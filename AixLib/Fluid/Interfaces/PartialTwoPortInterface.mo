@@ -84,13 +84,13 @@ protected
  with <code>inStream()</code> for <code>sta_a</code> and
  removed <code>actualStream()</code> for <code>sta_b</code>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1578\">AixLib, #1578</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1578\">IBPSA, #1578</a>.
  </li>
  <li>
  March 30, 2021, by Michael Wetter:<br/>
  Added annotation <code>HideResult=true</code>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">AixLib, #1459</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">IBPSA, #1459</a>.
  </li>
  <li>
  November 3, 2016, by Michael Wetter:<br/>

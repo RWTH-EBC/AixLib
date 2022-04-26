@@ -75,13 +75,13 @@ Documentation(info="<html>
  Guarded against division by zero if the pressure equation is removed.
  This then leads to a more meaningful error message.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1243\">AixLib, #1243</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1243\">IBPSA, #1243</a>.
  </li>
  <li>
  December 23, 2019, by Antoine Gautier:<br/>
  Added the pressure drop calculation as it is no longer in the base class.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">AixLib, #1188</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">IBPSA, #1188</a>.
  </li>
  <li>
  March 22, 2017, by Michael Wetter:<br/>

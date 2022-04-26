@@ -166,7 +166,7 @@ equation
  September 6, 2021, by Ettore Zanetti:<br/>
  Removed parameter <code>lat</code> as it is now obtained from the weather data bus.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">AixLib, #1477</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
  </li>
  <li>
  March 11, 2020, by Ettore Zanetti:<br/>
@@ -185,7 +185,7 @@ equation
  May 2, 2021, by Ettore Zanetti:<br/>
  Added altitude to parameters.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">AixLib, #1477</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
  </li>
  </ul>
  </html>"),

@@ -104,7 +104,7 @@ initial equation
  February 2, 2022, by Michael Wetter:<br/>
  Revised implementation.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">AixLib, #1436</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
  </li>
  <li>Apr 6, 2021, 2020, by Klaas De Jonge:<br/>
  First implementation.

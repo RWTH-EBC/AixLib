@@ -273,9 +273,10 @@ equation
           -18,-131.4}},  color={255,0,255}));
   connect(massFlowRate.y, fan.m_flow_in) annotation (Line(points={{138.7,-21},{
           148,-21},{148,-50},{112,-50}},     color={0,0,127}));
-  connect(volume.ports[1], hea.port_a) annotation (Line(points={{-72,-6},{-72,-6},
-          {-72,-10},{-114,-10},{-114,-80},{-60,-80}}, color={0,127,255}));
-  connect(volume1.ports[1], hea.port_a) annotation (Line(points={{20,-6},{20,-6},
+  connect(volume.ports[1], hea.port_a) annotation (Line(points={{-71,-6},{-72,
+          -6},{-72,-10},{-114,-10},{-114,-80},{-60,-80}},
+                                                      color={0,127,255}));
+  connect(volume1.ports[1], hea.port_a) annotation (Line(points={{21,-6},{20,-6},
           {20,-28},{-114,-28},{-114,-80},{-60,-80}}, color={0,127,255}));
   connect(volume.heatPort, thermalConductor.port_a) annotation (Line(points={{-80,
           4},{-88,4},{-88,34},{-78,34}}, color={191,0,0}));
@@ -284,11 +285,12 @@ equation
   connect(PID1.y, val1.y)
     annotation (Line(points={{77,34},{70,34},{70,0}}, color={0,0,127}));
   connect(val1.port_b, volume1.ports[2])
-    annotation (Line(points={{60,-12},{24,-12},{24,-6}}, color={0,127,255}));
+    annotation (Line(points={{60,-12},{23,-12},{23,-6}}, color={0,127,255}));
   connect(val1.port_a, fan.port_b) annotation (Line(points={{80,-12},{100,-12},{
           100,-40}}, color={0,127,255}));
-  connect(val.port_b, volume.ports[2]) annotation (Line(points={{-40,-10},{-40,-10},
-          {-68,-10},{-68,-6}}, color={0,127,255}));
+  connect(val.port_b, volume.ports[2]) annotation (Line(points={{-40,-10},{-40,
+          -10},{-69,-10},{-69,-6}},
+                               color={0,127,255}));
   connect(val.port_a, fan.port_b) annotation (Line(points={{-20,-10},{-6,-10},{-6,
           -20},{100,-20},{100,-40}}, color={0,127,255}));
   connect(PID2.y, val.y)
@@ -302,40 +304,45 @@ equation
   connect(hea1.Q_flow, Cap_device1) annotation (Line(points={{41,-74},{74,-74},
           {74,-126},{150,-126}}, color={0,0,127}));
   connect(thermalConductor.port_b, thermalZone.intGainsConv) annotation (Line(
-        points={{-58,34},{-46,34},{-30,34},{-30,64.5},{-34,64.5}}, color={191,0,
+        points={{-58,34},{-46,34},{-30,34},{-30,71.52},{-33.74,71.52}},
+                                                                   color={191,0,
           0}));
   connect(thermalZone.intGainsRad, thermalZone.intGainsConv) annotation (Line(
-        points={{-34,69.7},{-32,69.7},{-32,70},{-30,70},{-30,64.5},{-34,64.5}},
+        points={{-33.74,75.42},{-32,75.42},{-32,70},{-30,70},{-30,71.52},{
+          -33.74,71.52}},
         color={191,0,0}));
   connect(thermalConductor1.port_b, thermalZone1.intGainsConv) annotation (Line(
-        points={{32,34},{54,34},{54,64.5},{48,64.5}}, color={191,0,0}));
+        points={{32,34},{54,34},{54,71.52},{48.26,71.52}},
+                                                      color={191,0,0}));
   connect(thermalZone1.intGainsRad, thermalZone1.intGainsConv) annotation (Line(
-        points={{48,69.7},{52,69.7},{52,70},{54,70},{54,64.5},{48,64.5}}, color=
+        points={{48.26,75.42},{52,75.42},{52,70},{54,70},{54,71.52},{48.26,
+          71.52}},                                                        color=
          {191,0,0}));
   connect(thermalZone1.intGains, internalGains.y) annotation (Line(points={{
           45.4,60.08},{45.4,48},{-62,48},{-84,48},{-84,38},{-114,38},{-114,23},
           {-123.3,23}}, color={0,0,127}));
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-102,102},{-64,102},{-64,71},{-60,71}},
+      points={{-102,102},{-64,102},{-64,78.8},{-60,78.8}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
-      points={{-102,102},{-76,102},{-48,102},{-48,92},{-16,92},{-16,71},{22,71}},
+      points={{-102,102},{-76,102},{-48,102},{-48,92},{-16,92},{-16,78.8},{22,
+          78.8}},
       color={255,204,51},
       thickness=0.5));
 
-  connect(thermalZone.TAir, roomAgent.T) annotation (Line(points={{-32.7,78.8},
-          {-20,78.8},{-20,144},{-52,144},{-52,138}}, color={0,0,127}));
-  connect(thermalZone1.TAir, roomAgent1.T) annotation (Line(points={{49.3,78.8},
-          {62,78.8},{62,144},{28,144},{28,138}}, color={0,0,127}));
-  connect(thermalZone1.TAir, T_room1) annotation (Line(points={{49.3,78.8},{80,
-          78.8},{80,88},{150,88}}, color={0,0,127}));
-  connect(thermalZone1.TAir, PID1.u_m) annotation (Line(points={{49.3,78.8},{
-          112,78.8},{112,12},{88,12},{88,22}}, color={0,0,127}));
+  connect(thermalZone.TAir, roomAgent.T) annotation (Line(points={{-32.7,81.4},
+          {-20,81.4},{-20,144},{-52,144},{-52,138}}, color={0,0,127}));
+  connect(thermalZone1.TAir, roomAgent1.T) annotation (Line(points={{49.3,81.4},
+          {62,81.4},{62,144},{28,144},{28,138}}, color={0,0,127}));
+  connect(thermalZone1.TAir, T_room1) annotation (Line(points={{49.3,81.4},{80,
+          81.4},{80,88},{150,88}}, color={0,0,127}));
+  connect(thermalZone1.TAir, PID1.u_m) annotation (Line(points={{49.3,81.4},{
+          112,81.4},{112,12},{88,12},{88,22}}, color={0,0,127}));
   connect(PID2.u_m, thermalZone.TAir) annotation (Line(points={{-16,22},{-16,12},
-          {-2,12},{-2,78.8},{-32.7,78.8}}, color={0,0,127}));
-  connect(thermalZone.TAir, T_room) annotation (Line(points={{-32.7,78.8},{4,
-          78.8},{4,106},{150,106}}, color={0,0,127}));
+          {-2,12},{-2,81.4},{-32.7,81.4}}, color={0,0,127}));
+  connect(thermalZone.TAir, T_room) annotation (Line(points={{-32.7,81.4},{4,
+          81.4},{4,106},{150,106}}, color={0,0,127}));
   connect(InternalHeatGain.y, gain.u) annotation (Line(points={{-127,-24},{-92,
           -24},{-92,-23},{-57,-23}}, color={0,0,127}));
   connect(gain.y, thermalZone.intGains) annotation (Line(points={{-45.5,-23},{

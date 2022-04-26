@@ -362,7 +362,7 @@ equation
  a single outlet port <code>port_b</code>.<br/>
  Expanded the core pipe model that was previously a component.
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1494\">AixLib, #1494</a>.<br/>
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1494\">IBPSA, #1494</a>.<br/>
  This change is not backward compatible.<br/>
  The previous classes definitions were moved to
  <a href=\"modelica://AixLib.Obsolete.Fluid.FixedResistances.PlugFlowPipe\">
@@ -374,7 +374,7 @@ equation
  April 14, 2020, by Michael Wetter:<br/>
  Changed <code>homotopyInitialization</code> to a constant.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib, #1341</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
  </li>
  <li>
  March 6, 2020, by Jelger Jansen:<br/>

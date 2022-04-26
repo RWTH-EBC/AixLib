@@ -82,12 +82,12 @@ equation
  <li>
  April 1, 2021, by Michael Wetter:<br/>
  Corrected misplaced <code>each</code> and added missing instance comment.<br/>
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1462\">AixLib, #1462</a>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1462\">IBPSA, #1462</a>.
  </li>
  <li>
  January 18, 2019, by Jianjun Hu:<br/>
  Limited the media choice.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">AixLib, #1050</a>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">IBPSA, #1050</a>.
  </li>
  <li>
  May 30, 2018, by Michael Wetter:<br/>
@@ -96,7 +96,7 @@ equation
  <li>
  February 2nd, 2018 by Filip Jorissen<br/>
  Initial version for refactoring inputs of sources.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">AixLib, #882</a>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">IBPSA, #882</a>.
  </li>
  </ul>
  </html>"),

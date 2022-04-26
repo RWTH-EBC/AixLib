@@ -22,13 +22,11 @@ model TestCase900 "Test case 900"
     each outGroCon=true,
     each rho=0.2,
     til={1.5707963267949,1.5707963267949,1.5707963267949,0,1.5707963267949},
-    each lat=0.69394291059295,
     azi={0,1.5707963267949,3.1415926535898,0,-1.5707963267949})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,36},{-48,56}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[5](
     til={1.5707963267949,1.5707963267949,1.5707963267949,0,1.5707963267949},
-    each lat=0.69394291059295,
     azi={0,1.5707963267949,3.1415926535898,0,-1.5707963267949})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,68},{-48,88}})));
@@ -372,11 +370,13 @@ equation
   connect(Inf.y, gain.u) annotation (Line(points={{-85.4,-30},{-85.4,-30},{-81.4,
           -30}}, color={0,0,127}));
   connect(ventilationIn.ports[1], thermalZoneThreeElements.ports[1])
-    annotation (Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,
-          14.05}}, color={0,127,255}));
+    annotation (Line(points={{-34,-38},{-30,-38},{-30,-10},{82.2375,-10},{
+          82.2375,14.05}},
+                   color={0,127,255}));
   connect(ventilationOut.ports[1], thermalZoneThreeElements.ports[2])
-    annotation (Line(points={{-34,-70},{-26,-70},{-26,-14},{84.525,-14},{84.525,
-          14.05}}, color={0,127,255}));
+    annotation (Line(points={{-34,-70},{-26,-70},{-26,-14},{83.7625,-14},{
+          83.7625,14.05}},
+                   color={0,127,255}));
   connect(souWea.y[1], weaDat.TDryBul_in) annotation (Line(points={{-115,84},{-110,
           84},{-110,87},{-99,87}}, color={0,0,127}));
   connect(souWea.y[2], add.u1) annotation (Line(points={{-115,84},{-115,84},{-110,
@@ -387,8 +387,8 @@ equation
           -117.2,57.6}}, color={0,0,127}));
   connect(numRad.y, division.u2) annotation (Line(points={{-121.4,42},{-117.2,42},
           {-117.2,50.4}}, color={0,0,127}));
-  connect(division.y, weaDat.HInfHor_in) annotation (Line(points={{-103.4,54},{-100,
-          54},{-100,62},{-104,62},{-104,68.5},{-99,68.5}}, color={0,0,127}));
+  connect(division.y, weaDat.HInfHor_in) annotation (Line(points={{-103.4,54},{
+          -100,54},{-100,62},{-104,62},{-104,70},{-99,70}},color={0,0,127}));
   connect(souRad.y[1], weaDat.HDirNor_in) annotation (Line(points={{-115,14},{-106,
           14},{-94,14},{-94,64},{-102,64},{-102,67},{-99,67}}, color={0,0,127}));
   connect(souRad.y[2], weaDat.HGloHor_in) annotation (Line(points={{-115,14},{-94,
@@ -419,10 +419,11 @@ equation
           -86},{-7.2,-86}}, color={0,0,127}));
   connect(conCoo.u_m, thermalZoneThreeElements.TAir) annotation (Line(points={{22,-95.6},
           {22,-96},{22,-99},{101,-99},{101,48},{93,48}},        color={0,0,127}));
-  connect(coolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
-          -94},{103,-94},{103,-90.5},{107,-90.5}}, color={0,0,127}));
-  connect(heatFlowSensor.Q_flow, gain3.u) annotation (Line(points={{86,-66},{86,
-          -66},{86,-74},{90,-74},{86,-74},{96,-74},{96,-74.5},{105,-74.5}},
+  connect(coolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92.6},{
+          86,-94},{103,-94},{103,-90.5},{107,-90.5}},
+                                                   color={0,0,127}));
+  connect(heatFlowSensor.Q_flow, gain3.u) annotation (Line(points={{86,-66.6},{
+          86,-66.6},{86,-74},{90,-74},{86,-74},{96,-74},{96,-74.5},{105,-74.5}},
                                                             color={0,0,127}));
   connect(heatFlowSensor.port_a, thermalZoneThreeElements.intGainsConv)
     annotation (Line(points={{92,-60},{94,-60},{94,36},{92,36}}, color={191,0,0}));
@@ -432,10 +433,12 @@ equation
     annotation (Line(points={{76,-60},{78,-60},{80,-60}}, color={191,0,0}));
   connect(coo.port,coolFlowSensor. port_b)
     annotation (Line(points={{76,-86},{78,-86},{80,-86}}, color={191,0,0}));
-  connect(gain2.y,multiSum. u[1]) annotation (Line(points={{118.5,-90.5},{120,-90.5},
-          {120,-90.25},{126,-90.25}},        color={0,0,127}));
-  connect(gain3.y,multiSum. u[2]) annotation (Line(points={{116.5,-74.5},{121.25,
-          -74.5},{121.25,-93.75},{126,-93.75}},        color={0,0,127}));
+  connect(gain2.y,multiSum. u[1]) annotation (Line(points={{118.5,-90.5},{120,
+          -90.5},{120,-92.875},{126,-92.875}},
+                                             color={0,0,127}));
+  connect(gain3.y,multiSum. u[2]) annotation (Line(points={{116.5,-74.5},{
+          121.25,-74.5},{121.25,-91.125},{126,-91.125}},
+                                                       color={0,0,127}));
   connect(gainIntHea.y,annualHeatingLoad)  annotation (Line(points={{138.6,-35},
           {140.3,-35},{152,-35}}, color={0,0,127}));
   connect(gainIntHea.u,integrator1. y) annotation (Line(points={{124.8,-35},{121.4,

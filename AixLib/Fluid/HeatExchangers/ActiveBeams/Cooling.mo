@@ -304,13 +304,13 @@ Documentation(info="<html>
  March 30, 2021, by Michael Wetter:<br/>
  Added annotation <code>HideResult=true</code>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">AixLib, #1459</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">IBPSA, #1459</a>.
  </li>
  <li>
  April 14, 2020, by Michael Wetter:<br/>
  Changed <code>homotopyInitialization</code> to a constant.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib, #1341</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
  </li>
  <li>
  January 18, 2019, by Jianjun Hu:<br/>

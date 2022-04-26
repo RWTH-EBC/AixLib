@@ -113,7 +113,6 @@ model ShadedWindow
     "Base class of ShadedWindow"
     annotation (Placement(transformation(extent={{12,-34},{86,36}})));
   AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](
-    each lat=lat,
     final azi=azi,
     final til=til)
     "Calculates the incidence angle"
@@ -122,19 +121,17 @@ model ShadedWindow
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
   "Calculates the altitude angle"
     annotation (Placement(transformation(extent={{-30,-8},{-22,0}})));
-  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(each lat=lat)
+  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen
   "Calculates the zenith angle"
     annotation (Placement(transformation(extent={{-62,-12},{-54,-4}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](
     final til=til,
-    each lat=lat,
     final azi=azi)
     "Calculates the diffuse irradiation on a tilted surface after Perez"
     annotation (
     Placement(transformation(extent={{-38,-78},{-26,-66}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[n](
     final til=til,
-    each lat=lat,
     final azi=azi)
     "Calculates the direct irradiation on a tilted surface"
     annotation (Placement(transformation(extent={{-66,40},{-52,54}})));
@@ -177,14 +174,14 @@ equation
   Line(points={{-21.6,-4},{-18,
           -4},{-18,-4.6},{8.3,-4.6}}, color={0,0,127}));
   connect(zen.y, solAzi.zen) annotation (
-  Line(points={{-53.6,-8},{-50,-8},{-50,-27.6},
-          {-40.8,-27.6}}, color={0,0,127}));
+  Line(points={{-53.6,-8},{-50,-8},{-50,-26.8},{-40.8,-26.8}},
+                          color={0,0,127}));
   connect(solAzi.solAzi, shadedWindow.solAzi) annotation (
   Line(points={{-31.6,-30},
           {-26,-30},{-26,-14.4},{8.3,-14.4}}, color={0,0,127}));
   connect(decAng.decAng, solAzi.decAng) annotation (
-  Line(points={{-59.7,-33},{-45.85,
-          -33},{-45.85,-30},{-40.8,-30}}, color={0,0,127}));
+  Line(points={{-59.7,-33},{-45.85,-33},{-45.85,-28.48},{-40.8,-28.48}},
+                                          color={0,0,127}));
   connect(weaBus.cloTim, decAng.nDay) annotation (Line(
       points={{-100,0},{-84,0},{-84,-33},{-66.6,-33}},
       color={255,204,51},
@@ -193,9 +190,8 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.solTim, solAzi.solTim) annotation (Line(
-      points={{-100,0},{-84,0},{-84,-44},{-84,-72},{-56,-72},
-      {-56,-44},{-48,-44},
-          {-42,-44},{-42,-32.4},{-40.8,-32.4}},
+      points={{-100,0},{-84,0},{-84,-44},{-84,-72},{-56,-72},{-56,-44},{-48,-44},
+          {-42,-44},{-42,-31.6},{-40.8,-31.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -213,7 +209,8 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(HDirTil.H, shadedWindow.HDirTil) annotation (Line(points={{-51.3,47},{
           -20.65,47},{-20.65,16.4},{8.3,16.4}}, color={0,0,127}));
-  for i in 1:n loop connect(weaBus,HDifTil [i].weaBus) annotation (Line(
+  for i in 1:n loop
+                    connect(weaBus,HDifTil [i].weaBus) annotation (Line(
       points={{-100,0},{-84,0},{-84,-72},{-38,-72}},
       color={255,204,51},
       thickness=0.5), Text(

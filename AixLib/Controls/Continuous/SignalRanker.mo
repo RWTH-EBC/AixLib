@@ -21,7 +21,7 @@ revisions="<html>
  October 15, 2021, by Michael Wetter:<br/>
  Changed implementation to use sort function from Modelica Standard Library.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1534\">AixLib, #1534</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1534\">IBPSA, #1534</a>.
  </li>
  <li>
  November 21, 2011, by Michael Wetter:<br/>

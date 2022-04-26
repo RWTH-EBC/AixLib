@@ -40,7 +40,7 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Cont
  October 15, 2021, by Michael Wetter:<br/>
  Moved start time of sine input signal to avoid simultaneous state event and time event.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1534\">AixLib, #1534</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1534\">IBPSA, #1534</a>.
  </li>
  <li>
  November 21, 2011, by Michael Wetter:<br/>

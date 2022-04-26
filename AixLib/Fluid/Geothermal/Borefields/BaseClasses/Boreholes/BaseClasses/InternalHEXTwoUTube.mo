@@ -264,7 +264,7 @@ equation
  <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesTwoUTube\">
  AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesTwoUTube</a>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">AixLib, #1582</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">IBPSA, #1582</a>.
  </li>
  <li>
  July 10, 2018, by Alex Laferri&egrave;re:<br/>

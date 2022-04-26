@@ -199,7 +199,7 @@ Documentation(info="<html>
  <li>
  March 25, 2021, by Michael Wetter:<br/>
  Integrated changes from Buildings for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1454\">AixLib, #1454</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1454\">IBPSA, #1454</a>.
  </li>
  <li>
  February 26, 2021, by Michael Wetter:<br/>

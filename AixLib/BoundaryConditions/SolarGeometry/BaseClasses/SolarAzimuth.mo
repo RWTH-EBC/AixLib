@@ -57,7 +57,7 @@ equation
  September 16, 2021, by Michael Wetter:<br/>
  Removed parameter <code>lat</code> and added an input connector for this quantity.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">AixLib, #1477</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
  </li>
  <li>
  June 9, 2020, by David Blum:<br/>

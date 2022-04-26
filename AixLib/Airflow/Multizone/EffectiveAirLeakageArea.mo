@@ -133,7 +133,7 @@ revisions="<html>
  February 2, 2022, by Michael Wetter:<br/>
  Revised implementation.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">AixLib, #1436</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
  </li>
  <li>
  Apr 6, 2021, by Klaas De Jonge:<br/>
@@ -148,12 +148,12 @@ revisions="<html>
  which are not used by this model.<br/>
  This change is non-backward compatible.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/932\">AixLib, #932</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/932\">IBPSA, #932</a>.
  </li>
  <li>
  May 30, 2018, by Michael Wetter:<br/>
  Improved documentation for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/546\">AixLib, #546</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/546\">IBPSA, #546</a>.
  </li>
  <li>
  April 24, 2017, by Filip Jorissen:<br/>

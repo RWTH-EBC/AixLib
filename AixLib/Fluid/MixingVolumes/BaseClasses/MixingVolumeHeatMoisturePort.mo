@@ -71,7 +71,7 @@ equation
  November 9, 2021, by Michael Wetter:<br/>
  Corrected annotation.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1547\">AixLib, issue 1547</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1547\">IBPSA, issue 1547</a>.
  </li>
  <li>
  October 23, 2017, by Michael Wetter:<br/>
