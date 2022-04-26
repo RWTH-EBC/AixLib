@@ -1,3 +1,0 @@
-within AixLib.Systems.ModularEnergySystems.ControlUnity;
-package flowTemperatureController
-end flowTemperatureController;

@@ -5,7 +5,7 @@ model ModularBoiler
 
   parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Temperature difference nominal"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Return temperature TCold"
+  parameter Modelica.SIunits.Temperature TColdNom=308.15    "Return temperature TCold"
    annotation (Dialog(group="Nominal condition"));
   parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power"
    annotation (Dialog(group="Nominal condition"));
@@ -22,10 +22,11 @@ model ModularBoiler
   parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Temperature difference setpoint"
    annotation (Dialog(enable=Advanced,tab="Advanced",group="Boiler behaviour"));
 
-  parameter Modelica.SIunits.Temperature THotMax=273.15+90 "Maximal temperature to force shutdown";
+  parameter Modelica.SIunits.Temperature THotMax=363.15    "Maximal temperature to force shutdown";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
-  parameter Modelica.SIunits.Temperature TStart=273.15+20 "T start"
+  parameter Modelica.SIunits.Temperature TStart=273.15 + 20
+                                                          "T start"
    annotation (Dialog(tab="Advanced"));
 
 
