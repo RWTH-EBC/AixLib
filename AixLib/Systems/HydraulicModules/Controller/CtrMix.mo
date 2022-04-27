@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Controller;
+﻿within AixLib.Systems.HydraulicModules.Controller;
 block CtrMix "Controller for mixed and injection circuits "
   //Boolean choice;
 

@@ -18,8 +18,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
-  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package Medium
-      =        Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-70,22},{-50,42}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package

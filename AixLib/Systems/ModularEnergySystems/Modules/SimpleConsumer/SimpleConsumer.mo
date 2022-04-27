@@ -61,7 +61,7 @@ model SimpleConsumer "Simple Consumer"
   Modelica.Blocks.Sources.RealExpression TLevel(y=TControl)
     annotation (Placement(transformation(extent={{-100,-68},{-80,-48}})));
   Fluid.Actuators.Valves.TwoWayEqualPercentage val
-    annotation (Placement(transformation(extent={{-64,-10},{-44,10}})));
+    annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
 equation
 
   connect(heater.port, vol.heatPort) annotation (Line(points={{-1.77636e-15,20},
@@ -89,11 +89,11 @@ equation
   connect(onOffController.reference, TLevel.y)
     annotation (Line(points={{-72,-58},{-79,-58}}, color={0,0,127}));
   connect(port_a, val.port_a)
-    annotation (Line(points={{-100,0},{-64,0}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{-62,0}}, color={0,127,255}));
   connect(val.port_b, vol.ports[2])
-    annotation (Line(points={{-44,0},{48,0},{48,6}}, color={0,127,255}));
+    annotation (Line(points={{-42,0},{48,0},{48,6}}, color={0,127,255}));
   connect(switch.y, val.y) annotation (Line(points={{-17.3,-31},{-12,-31},{-12,
-          26},{-54,26},{-54,12}}, color={0,0,127}));
+          26},{-52,26},{-52,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end SimpleConsumer;

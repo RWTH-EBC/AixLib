@@ -277,8 +277,8 @@ partial model PartialHeatPumpSystem
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
 
-  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
-                                              annotation (Placement(
+  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
+    Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
   Fluid.Movers.SpeedControlled_y           pumSin(

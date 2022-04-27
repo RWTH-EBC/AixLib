@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Controller;
+﻿within AixLib.Systems.ModularAHU.Controller;
 block CtrRegBasic "Controller for heating and cooling registers"
   //Boolean choice;
 

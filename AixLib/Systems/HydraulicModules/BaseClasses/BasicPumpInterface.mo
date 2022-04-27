@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.BaseClasses;
+﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 partial model BasicPumpInterface "Pump interface for different pump types"
  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
