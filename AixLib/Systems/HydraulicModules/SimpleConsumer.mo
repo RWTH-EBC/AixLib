@@ -4,8 +4,7 @@ model SimpleConsumer "Simple Consumer"
   import SI=Modelica.SIunits;
 
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
-  parameter SI.Temperature T_fixed = 293.15
-                                           "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
+  parameter SI.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
   parameter SI.HeatCapacity capacity=1 "Capacity of the material";
   parameter SI.Volume V=0.001 "Volume of water";
   parameter SI.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
@@ -14,15 +13,29 @@ model SimpleConsumer "Simple Consumer"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
-  parameter SI.Temperature T_start=293.15
+  parameter SI.Temperature T_start
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
               choice="T_input",
               choice="Q_flow_fixed",
               choice="Q_flow_input"),Dialog(enable=true));
-
+  parameter Integer demandType=1 "Choose between heating and cooling functionality" annotation (choices(
+              choice=1 "use as heating consumer",
+              choice=-1 "use as cooling consumer"),Dialog(enable=true));
+  parameter SI.PressureDifference dp_nominalPumpConsumer=if pump.rho_default < 500
+       then 500 else 10000
+    "Nominal pressure raise, used for default pressure curve if not specified in record per";
+  parameter Real k_ControlConsumerPump "Gain of controller";
+  parameter SI.Time Ti_ControlConsumerPump
+    "Time constant of Integrator block";
+  parameter Modelica.SIunits.TemperatureDifference dT_maxNominalReturn = 5 "maximum undercooling/overheating based on nominal return temperature";
+  parameter Boolean show_T=false
+    "= true, if actual temperature at port is computed";
+  Modelica.SIunits.HeatFlowRate Q_flow_max;
   Fluid.MixingVolumes.MixingVolume volume(
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
     final V=V,
     final T_start=T_start,
     final allowFlowReversal=allowFlowReversal,
@@ -32,12 +45,6 @@ model SimpleConsumer "Simple Consumer"
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={0,10})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
-                          T(start=T_start, fixed=true), C=capacity)
-    annotation (Placement(transformation(
-        origin={44,40},
-        extent={{-10,10},{10,-10}},
-        rotation=90)));
   Modelica.Thermal.HeatTransfer.Components.Convection convection if
     functionality == "T_input" or functionality == "T_fixed"
     annotation (Placement(transformation(
@@ -73,8 +80,8 @@ model SimpleConsumer "Simple Consumer"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow if
     functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-62,58})));
+        rotation=0,
+        origin={-12,40})));
   Modelica.Blocks.Sources.RealExpression realExpression2(y=Q_flow_fixed) if
     functionality == "Q_flow_fixed"                           annotation (
       Placement(transformation(
@@ -82,6 +89,7 @@ model SimpleConsumer "Simple Consumer"
         rotation=0,
         origin={-90,80})));
   Modelica.Blocks.Interfaces.RealInput Q_flow if functionality == "Q_flow_input"
+    "Consumed heat flow, positive for heating or cooling"
                                               annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
@@ -89,12 +97,100 @@ model SimpleConsumer "Simple Consumer"
         origin={-60,120}), iconTransformation(extent={{-20,-20},{20,20}},
         rotation=270,
         origin={-60,100})));
+  Fluid.Movers.SpeedControlled_y     pump(
+    redeclare package Medium = Medium,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
+    T_start=T_start,
+    allowFlowReversal=allowFlowReversal,
+    show_T=show_T,
+    redeclare Fluid.Movers.Data.Generic per(pressure(V_flow={0,m_flow_nominal/
+            1000,m_flow_nominal/500}, dp={dp_nominalPumpConsumer/0.8,
+            dp_nominalPumpConsumer,0}), motorCooledByFluid=false),
+    addPowerToMedium=false,
+    y_start=0.5)
+    annotation (Placement(transformation(extent={{-40,10},{-20,-10}})));
+
+  Modelica.Blocks.Continuous.LimPID PIPump(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=k_ControlConsumerPump,
+    Ti=Ti_ControlConsumerPump,
+    yMax=1,
+    yMin=0.05,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    y_start=0.5)
+               annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={-50,-40})));
+  Fluid.Sensors.TemperatureTwoPort senTemReturn(
+    redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
+    T_start=T_start)
+                    annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=0,
+        origin={50,0})));
+  Fluid.Sensors.TemperatureTwoPort senTemFlow(
+    redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
+    T_start=T_start)
+                    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-80,0})));
+
+  Modelica.Blocks.Interfaces.RealInput T_returnSet annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={0,120}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={0,100})));
+  Modelica.Blocks.Math.Gain gain2(k=demandType)
+    "Used to reverse direction of operation of controller"
+    annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
+  Modelica.Blocks.Math.Gain gain(k=demandType)
+    "Used to reverse direction of operation of controller"
+    annotation (Placement(transformation(extent={{20,-70},{0,-50}})));
+  Modelica.Blocks.Math.Gain gain1(k=-demandType) if functionality == "Q_flow_input"
+     or functionality == "Q_flow_fixed"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-38,40})));
+
+  Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter
+    annotation (Placement(transformation(extent={{-84,32},{-68,48}})));
+  Modelica.Blocks.Sources.RealExpression ExpressionQ_flow_min(y=0)
+    annotation (Placement(transformation(extent={{-124,20},{-104,40}})));
+  Modelica.Blocks.Sources.RealExpression ExpressionQ_flow_max(y=Q_flow_max)
+    annotation (Placement(transformation(extent={{-124,36},{-104,56}})));
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium)
+    annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_flowReal if
+                                                 functionality == "Q_flow_input"
+    "Consumed real heat flow, positive for heating or cooling" annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={118,46}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={120,52})));
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state";
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=volume.energyDynamics
+    "Type of mass balance: dynamic (3 initialization options) or steady state";
 equation
-  connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
-          {10,40},{34,40}},               color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(heatCapacitor.port,convection. solid) annotation (Line(points={{34,40},
-          {10,40},{10,60}},              color={191,0,0}));
+  if demandType==1 then
+    Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (senTemFlow.T - (T_returnSet - dT_maxNominalReturn)));
+  else
+    Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (T_returnSet + dT_maxNominalReturn - senTemFlow.T));
+  end if;
+
   connect(convection.fluid,prescribedTemperature. port)
     annotation (Line(points={{10,80},{30,80}},   color={191,0,0},
       pattern=LinePattern.Dash));
@@ -107,21 +203,49 @@ equation
   connect(prescribedTemperature.T, T)
     annotation (Line(points={{52,80},{60,80},{60,120}}, color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(prescribedHeatFlow.Q_flow, realExpression2.y)
-    annotation (Line(points={{-62,68},{-62,80},{-79,80}},
-                                                 color={0,0,127},
+  connect(volume.ports[1], pump.port_b)
+    annotation (Line(points={{2,0},{-20,0}},  color={0,127,255}));
+  connect(volume.ports[2], senTemReturn.port_a)
+    annotation (Line(points={{-2,0},{40,0}}, color={0,127,255}));
+  connect(port_b, senTemReturn.port_b)
+    annotation (Line(points={{100,0},{60,0}}, color={0,127,255}));
+  connect(port_a, senTemFlow.port_a)
+    annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
+  connect(PIPump.y, pump.y)
+    annotation (Line(points={{-39,-40},{-30,-40},{-30,-12}},
+                                                          color={0,0,127}));
+  connect(PIPump.u_s, gain2.y)
+    annotation (Line(points={{-62,-40},{-79,-40}}, color={0,0,127}));
+  connect(senTemReturn.T, gain.u)
+    annotation (Line(points={{50,-11},{50,-60},{22,-60}}, color={0,0,127}));
+  connect(gain.y, PIPump.u_m)
+    annotation (Line(points={{-1,-60},{-50,-60},{-50,-52}}, color={0,0,127}));
+  connect(realExpression2.y, gain1.u) annotation (Line(
+      points={{-79,80},{-60,80},{-60,40},{-50,40}},
+      color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(prescribedHeatFlow.Q_flow, Q_flow)
-    annotation (Line(points={{-62,68},{-62,94},{-60,94},{-60,120}},
-                                                           color={0,0,127},
+  connect(gain1.y, prescribedHeatFlow.Q_flow) annotation (Line(
+      points={{-27,40},{-22,40}},
+      color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(prescribedHeatFlow.port, heatCapacitor.port)
-    annotation (Line(points={{-62,48},{-62,40},{34,40}}, color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(port_a, volume.ports[1])
-    annotation (Line(points={{-100,0},{2,0}}, color={0,127,255}));
-  connect(volume.ports[2], port_b)
-    annotation (Line(points={{-2,0},{100,0}}, color={0,127,255}));
+  connect(gain2.u, T_returnSet) annotation (Line(points={{-102,-40},{-120,-40},
+          {-120,90},{0,90},{0,120}}, color={0,0,127}));
+  connect(senMasFlo.port_a, senTemFlow.port_b)
+    annotation (Line(points={{-66,0},{-70,0}}, color={0,127,255}));
+  connect(senMasFlo.port_b, pump.port_a)
+    annotation (Line(points={{-46,0},{-40,0}}, color={0,127,255}));
+  connect(variableLimiter.y, gain1.u)
+    annotation (Line(points={{-67.2,40},{-50,40}}, color={0,0,127}));
+  connect(Q_flow, variableLimiter.u) annotation (Line(points={{-60,120},{-60,60},
+          {-98,60},{-98,40},{-85.6,40}}, color={0,0,127}));
+  connect(ExpressionQ_flow_max.y, variableLimiter.limit1) annotation (Line(
+        points={{-103,46},{-94,46},{-94,46.4},{-85.6,46.4}}, color={0,0,127}));
+  connect(ExpressionQ_flow_min.y, variableLimiter.limit2) annotation (Line(
+        points={{-103,30},{-94,30},{-94,33.6},{-85.6,33.6}}, color={0,0,127}));
+  connect(variableLimiter.y, Q_flowReal) annotation (Line(points={{-67.2,40},{
+          -58,40},{-58,46},{118,46}}, color={0,0,127}));
+  connect(prescribedHeatFlow.port, volume.heatPort)
+    annotation (Line(points={{-2,40},{18,40},{18,10},{10,10}}, color={191,0,0}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(

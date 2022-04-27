@@ -35,8 +35,7 @@ model DelayedOnOffController "CHP On/Off controller"
     "Signal if controller is on or off"
     annotation (Placement(transformation(extent={{100,-10},{120,10}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput controllerOutput
-    "Controller output"
+  Modelica.Blocks.Interfaces.RealInput controllerOutput "Controller output"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}},
         rotation=0)));
   Modelica.Blocks.Interfaces.RealInput minCapacity_in
@@ -58,15 +57,6 @@ model DelayedOnOffController "CHP On/Off controller"
       origin={-60,120},
       extent={{-20,-20},{20,20}},
       rotation=270)));
-  Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
-        extent={{-22,16},{-8,30}}, rotation=0)));
-  Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
-        extent={{-48,-12},{-34,0}}, rotation=0)));
-  Modelica.Blocks.Logical.OnOffController onOffController(
-    final bandwidth=minDeltaT)
-    "OnOff controller"
-    annotation (Placement(transformation(extent={{-76,-16},{
-          -56,4}}, rotation=0)));
   Modelica.Blocks.Logical.LessThreshold lessThreshold(
     threshold=TFlowRange)
     "Maximum allowable flow temperature variation"
@@ -131,40 +121,25 @@ model DelayedOnOffController "CHP On/Off controller"
     "Fixed delay"
     annotation (Placement(transformation(extent={{48,-18},{56,-10}})));
 
+  Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
+        extent={{-16,16},{-2,30}}, rotation=0)));
+  Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
+        extent={{-42,-12},{-28,0}}, rotation=0)));
+  Modelica.Blocks.Logical.OnOffController onOffController(final bandwidth=
+        minDeltaT)
+    "OnOff controller"
+    annotation (Placement(transformation(extent={{-70,-16},{-50,4}},
+                   rotation=0)));
 initial equation
   pre(y)=initialOutput;
 
 equation
-  connect(onOffController.y, pre2.u) annotation (Line(
-    points={{-55,-6},{-49.4,-6}},
-    color={255,0,255},
-    smooth=Smooth.None));
   connect(feedback.u2,flowTemp)  annotation (Line(
     points={{-74.4,60},{-120,60}},
     color={0,0,127},
     smooth=Smooth.None));
-  connect(pre2.y, and1.u2) annotation (Line(
-    points={{-33.3,-6},{-26,-6},{-26,17.4},{-23.4,17.4}},
-    color={255,0,255},
-    smooth=Smooth.None));
-  connect(lessThreshold.y, and1.u1) annotation (Line(
-    points={{-33.2,46},{-26,46},{-26,23},{-23.4,23}},
-    color={255,0,255},
-    smooth=Smooth.None));
   connect(feedback.y, lessThreshold.u) annotation (Line(
     points={{-68,52.8},{-68,46},{-51.6,46}},
-    color={0,0,127},
-    smooth=Smooth.None));
-  connect(and1.y, or1.u1) annotation (Line(
-    points={{-7.3,23},{0,23},{0,-8},{3.2,-8}},
-    color={255,0,255},
-    smooth=Smooth.None));
-  connect(onOffController.u,controllerOutput)  annotation (Line(
-    points={{-78,-12},{-88,-12},{-88,-60},{-120,-60}},
-    color={0,0,127},
-    smooth=Smooth.None));
-  connect(onOffController.reference,minCapacity_in)  annotation (Line(
-    points={{-78,0},{-120,0}},
     color={0,0,127},
     smooth=Smooth.None));
   connect(or1.u2, greaterThreshold.y) annotation (Line(
@@ -247,6 +222,28 @@ equation
       points={{56.4,-14},{51.2,-14},{51.2,0}},
       color={0,0,127},
       smooth=Smooth.None));
+  connect(pre2.y,and1. u2) annotation (Line(
+    points={{-27.3,-6},{-20,-6},{-20,17.4},{-17.4,17.4}},
+    color={255,0,255},
+    smooth=Smooth.None));
+  connect(lessThreshold.y,and1. u1) annotation (Line(
+    points={{-33.2,46},{-20,46},{-20,23},{-17.4,23}},
+    color={255,0,255},
+    smooth=Smooth.None));
+  connect(and1.y, or1.u1) annotation (Line(
+    points={{-1.3,23},{6,23},{6,-8},{3.2,-8}},
+    color={255,0,255},
+    smooth=Smooth.None));
+  connect(onOffController.reference,minCapacity_in)  annotation (Line(
+    points={{-72,0},{-120,0}},
+    color={0,0,127},
+    smooth=Smooth.None));
+  connect(onOffController.u,controllerOutput)  annotation (Line(
+    points={{-72,-12},{-82,-12},{-82,-60},{-120,-60}},
+    color={0,0,127},
+    smooth=Smooth.None));
+  connect(onOffController.y, pre2.u)
+    annotation (Line(points={{-49,-6},{-43.4,-6}}, color={255,0,255}));
   annotation (Diagram(graphics={
       Rectangle(
         extent={{26,20},{80,-20}},

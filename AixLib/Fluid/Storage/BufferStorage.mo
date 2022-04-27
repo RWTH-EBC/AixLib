@@ -36,7 +36,8 @@ model BufferStorage
 
   parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
+  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby
+    DataBase.Storage.BufferStorageBaseDataDefinition                                                                                         "Data record for Storage"
   annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
@@ -144,7 +145,8 @@ model BufferStorage
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
+      package                                                                    Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
@@ -492,6 +494,10 @@ for i in 2:(n-1) loop
 ////////////////////////////////////////////////////////////////////////////////////////////////////
   connect(heatTransfer.therm, layer.heatPort);
 
+  connect(layer.heatPort, TLayersTemp.port) annotation (Line(points={{-6,10},{
+          -10,10},{-10,64},{-24,64}}, color={191,0,0}));
+  connect(TLayersTemp.T, TLayers)
+    annotation (Line(points={{-44,64},{-88,64}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-80,-100},
             {80,100}}), graphics={
         Rectangle(
