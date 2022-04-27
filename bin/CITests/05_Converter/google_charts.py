@@ -463,11 +463,11 @@ def _delte_folder():
         folder_list = os.listdir(chart_dir)
         print(folder_list)
         for folder in folder_list:
-            if folder.find(".") > -1:
-                os.remove(chart_dir + os.sep + folder)
+            if folder.find(".html") > -1:
+                os.remove(f'{chart_dir}{os.sep}{folder}')
                 continue
             else:
-                shutil.rmtree(chart_dir + os.sep + folder)
+                shutil.rmtree(f'{chart_dir}{os.sep}{folder}')
 
 
 if __name__ == '__main__':

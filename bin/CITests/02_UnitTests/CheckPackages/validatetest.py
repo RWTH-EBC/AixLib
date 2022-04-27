@@ -250,11 +250,18 @@ class ValidateTest(object):
         lines = wh_file.readlines()
         wh_list_models = []
         for line in lines:
-            if line.find(self.package) > -1:
+            if line.find(f'{self.wh_library}.{self.package}') > -1:
                 model = line.lstrip()
                 model = model.strip()
                 model = model.replace("\n", "")
+                print(f'Dont test IBPSA model: {model}. Model is on the whitelist')
                 wh_list_models.append(model.replace(self.wh_library, self.mo_library))
+            elif line.find(f'{self.mo_library}.{self.package}') > -1:
+                model = line.lstrip()
+                model = model.strip()
+                model = model.replace("\n", "")
+                print(f'Dont test AixLib model: {model}. Model is on the whitelist')
+                wh_list_models.append(model)
         wh_file.close()
         return wh_list_models
 
