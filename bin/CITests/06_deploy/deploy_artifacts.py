@@ -64,6 +64,7 @@ class Deploy_Artifacts(object):
             except FileNotFoundError:
                 print(f'{self.CRED}Cannot find folder:{self.CEND} {destination}')
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='deploy artifacts')
     unit_test_group = parser.add_argument_group("arguments to run deploy artifacts")
