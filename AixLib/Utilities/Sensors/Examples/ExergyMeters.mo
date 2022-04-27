@@ -34,12 +34,14 @@ model ExergyMeters
     annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Blocks.Sources.Constant X_ref[1](k={1}) "Reference composition"
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
-  inner Modelica.Fluid.System system "Basic parameters"
+  inner Modelica.Fluid.System system(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+                                     "Basic parameters"
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
   ExergyMeter.HeatExergyMeter exHeatSec
     "Exergy content of the heat flux on secondary side"
     annotation (Placement(transformation(extent={{74,5},{94,25}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpPrim(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     addPowerToMedium=false,
     nominalValuesDefineDefaultPressureCurve=true,
     redeclare package Medium = Medium,
@@ -48,6 +50,7 @@ model ExergyMeters
     m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-64,76},{-44,96}})));
   Fluid.Storage.BufferStorage  bufferStorageHeatingcoils(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
     m1_flow_nominal=0.5,
@@ -104,6 +107,7 @@ model ExergyMeters
         rotation=90,
         origin={-84,70})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpSec(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     addPowerToMedium=false,
     nominalValuesDefineDefaultPressureCurve=true,
     redeclare package Medium = Medium,
@@ -395,7 +399,8 @@ equation
           0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=7200, Interval=10),
+    experiment(Tolerance=1e-6, StopTime=7200, Interval=10),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Sensors/Examples/ExergyMeters.mos" "Simulate and plot"),
     Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>

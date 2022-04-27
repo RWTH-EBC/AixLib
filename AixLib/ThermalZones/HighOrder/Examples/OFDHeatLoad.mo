@@ -47,15 +47,19 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
   House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope wholeHouseBuildingEnvelope(
     redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T0_air=294.15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T0_air=293.15,
     TWalls_start=292.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009 Type_Win,
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
-    UValOutDoors=if TIR == 1 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
+    UValOutDoors=if TIR == 1 then 1.8 else 2.9,
+    upperFloor_Building(Corridor(T0_air=288.15), Bath(T0_air=297.15)),
+    groundFloor_Building(Corridor(T0_air=288.15)))
+                                                annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowRad[nRooms] annotation (Placement(transformation(extent={{-60,-24},{-48,-12}})));
   Modelica.Blocks.Sources.Constant adiabaticRadRooms[nRooms](k=fill(0, nRooms)) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-90,-26},{-74,-10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowAttic[1](Q_flow={0}) annotation (Placement(transformation(extent={{-62,-34},{-52,-24}})));
@@ -105,22 +109,23 @@ equation
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,-10}}, color={191,0,0}));
   connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
-     Line(points={{51,69.1667},{48,69.1667},{48,26.4},{43.68,26.4}},  color={
+     Line(points={{51,69.5833},{48,69.5833},{48,26.4},{43.68,26.4}},  color={
           255,128,0}));
   connect(varRad.solarRad_out[2], wholeHouseBuildingEnvelope.East) annotation (
-      Line(points={{51,69.5},{48,69.5},{48,18},{43.68,18}},      color={255,128,
+      Line(points={{51,69.75},{48,69.75},{48,18},{43.68,18}},    color={255,128,
           0}));
   connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation (
-     Line(points={{51,69.8333},{48,69.8333},{48,9.6},{43.68,9.6}},  color={255,
+     Line(points={{51,69.9167},{48,69.9167},{48,9.6},{43.68,9.6}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[4], wholeHouseBuildingEnvelope.West) annotation (
-      Line(points={{51,70.1667},{48,70.1667},{48,1.2},{43.68,1.2}},  color={255,
+      Line(points={{51,70.0833},{48,70.0833},{48,1.2},{43.68,1.2}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
-    annotation (Line(points={{51,70.5},{48,70.5},{48,43.2},{43.68,43.2}},color=
+    annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
+                                                                         color=
           {255,128,0}));
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
-    annotation (Line(points={{51,70.8333},{48,70.8333},{48,34.8},{43.68,34.8}},
+    annotation (Line(points={{51,70.4167},{48,70.4167},{48,34.8},{43.68,34.8}},
         color={255,128,0}));
   connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-20},{-26,-20},{-26,10},{-14,10},{-14,10.16}},        color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (

@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model SimplePipe "Simple pipe model with n discrete elements"
 
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
@@ -92,7 +92,7 @@ model SimplePipe "Simple pipe model with n discrete elements"
     each final T_start=T_start,
     each final m_flow_nominal=m_flow_nominal,
     each final allowFlowReversal=allowFlowReversal,
-    each final V=dh^2*length*Modelica.Constants.pi/4,
+    each final V=dh^2*length/nNodes*Modelica.Constants.pi/4,
     each nPorts=2) annotation (Placement(transformation(extent={{10,0},{30,20}})));
   Utilities.HeatTransfer.CylindricHeatTransfer PipeWall[nNodes](
     each final energyDynamics=energyDynamics,
