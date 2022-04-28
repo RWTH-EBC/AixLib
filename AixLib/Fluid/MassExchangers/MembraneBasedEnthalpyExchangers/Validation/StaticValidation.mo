@@ -284,7 +284,7 @@ equation
   annotation (Diagram(coordinateSystem(extent={{-160,-100},{160,100}})), Icon(
         coordinateSystem(extent={{-160,-100},{160,100}})),
     experiment(StopTime=29600, Interval=1, method="dassl",Tolerance=1E-6),
-    __Dymola_Comands(file=
+    __Dymola_Commands(file=
       "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Validation/StaticValidation.mos"
         "Simulate and plot"),
     Documentation(info="<html><p>
