@@ -2,7 +2,7 @@ within AixLib.Systems.ModularEnergySystems;
 package Examples "Holds examples for the modular energy system units"
   extends Modelica.Icons.ExamplesPackage;
   model HeatPump
-      extends AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer1(
+      extends AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer(
       vol(
         T_start=343.15,
         m_flow_nominal=1,
@@ -74,7 +74,7 @@ package Examples "Holds examples for the modular energy system units"
   end HeatPump;
 
   model Boiler
-     extends AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer1(
+     extends AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer(
       vol(
         T_start=293.15,
         m_flow_nominal=1, nPorts=2),
@@ -134,7 +134,7 @@ package Examples "Holds examples for the modular energy system units"
   end Boiler;
 
   model CHP
-    extends AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer1(
+    extends AixLib.Systems.ModularEnergySystems.Modules.SimpleConsumer.SimpleConsumer(
       vol(m_flow_nominal=1, nPorts=2),
       bou(nPorts=1),
       TSpeicher(y=60 + 273.15),

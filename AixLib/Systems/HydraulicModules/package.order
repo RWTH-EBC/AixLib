@@ -8,6 +8,5 @@ ThrottlePump
 Controller
 Example
 BaseClasses
-SimpleConsumer_1
-SimpleConsumer_2
-SimpleConsumer_3
+SimpleConsumer_wPump
+SimpleConsumer_wPump_wFeedback

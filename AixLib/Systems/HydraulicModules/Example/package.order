@@ -5,3 +5,7 @@ Injection2WayValve
 Pump
 Throttle
 ThrottlePump
+SimpleConsumer
+SimpleConsumer_Pump
+SimpleConsumer_Feedback
+SimpleConsumer_Pump_Feedback

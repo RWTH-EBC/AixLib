@@ -27,7 +27,7 @@ model ERC_ExperimentalHall_CoolingCircuit
     T=280.15)
     annotation (Placement(transformation(extent={{-182,-38},{-162,-18}})));
 
-  SimpleConsumer simpleConsumer(
+  .AixLib.Systems.HydraulicModules.SimpleConsumer simpleConsumer(
     kA=2000,
     T_fixed=303.15,
     m_flow_nominal=1,
@@ -35,7 +35,7 @@ model ERC_ExperimentalHall_CoolingCircuit
     functionality="T_fixed",
     T_start=293.15)
     annotation (Placement(transformation(extent={{-84,36},{-54,66}})));
-  SimpleConsumer simpleConsumer1(
+  .AixLib.Systems.HydraulicModules.SimpleConsumer simpleConsumer1(
     kA=20000,
     T_fixed=303.15,
     m_flow_nominal=1,
@@ -43,7 +43,7 @@ model ERC_ExperimentalHall_CoolingCircuit
     functionality="T_fixed",
     T_start=293.15)
     annotation (Placement(transformation(extent={{-10,36},{20,66}})));
-  SimpleConsumer simpleConsumer2(
+  .AixLib.Systems.HydraulicModules.SimpleConsumer simpleConsumer2(
     T_fixed=303.15,
     m_flow_nominal=1,
     redeclare package Medium = Medium,

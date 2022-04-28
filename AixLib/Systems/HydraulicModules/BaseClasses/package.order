@@ -5,3 +5,4 @@ PumpInterface_PumpHeadControlled
 PumpInterface_PumpSpeedControlled
 PumpInterface_SpeedControlledNrpm
 SimpleConsumer_base
+PumpCircuit

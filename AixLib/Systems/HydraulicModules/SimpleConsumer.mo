@@ -5,8 +5,6 @@ model SimpleConsumer "Simple Consumer"
 
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
   parameter SI.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
-  parameter SI.Temperature T_return=293.15  "Return temperature" annotation (Dialog(enable = fixed_return_T));
-
   parameter SI.HeatCapacity capacity=1 "Capacity of the material";
   parameter SI.Volume V=0.001 "Volume of water";
   parameter SI.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
@@ -16,8 +14,7 @@ model SimpleConsumer "Simple Consumer"
   parameter Boolean energy_calculation=true  "= true, if remaining/missing energy as output";
   parameter Boolean fixed_return_T=true  "= true, if fixed return temperature, false if variable";
 
-  parameter SI.MassFlowRate m_flow_nominal(min=0)
-    "Nominal mass flow rate";
+  parameter SI.MassFlowRate m_flow_nominal(min=0) "Nominal mass flow rate";
   parameter SI.Temperature T_start
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter String functionality "Choose between different functionalities" annotation (choices(
@@ -266,8 +263,8 @@ equation
         points={{-103,46},{-94,46},{-94,46.4},{-89.6,46.4}}, color={0,0,127}));
   connect(ExpressionQ_flow_min.y, variableLimiter.limit2) annotation (Line(
         points={{-103,30},{-94,30},{-94,33.6},{-89.6,33.6}}, color={0,0,127}));
-  connect(variableLimiter.y, Q_flowReal) annotation (Line(points={{-71.2,40},{
-          -58,40},{-58,46},{118,46}}, color={0,0,127}));
+  connect(variableLimiter.y, Q_flowReal) annotation (Line(points={{-71.2,40},{-58,
+          40},{-58,46},{118,46}},     color={0,0,127}));
   connect(prescribedHeatFlow.port, volume.heatPort)
     annotation (Line(points={{-2,40},{18,40},{18,10},{10,10}}, color={191,0,0}));
   if energy_calculation then

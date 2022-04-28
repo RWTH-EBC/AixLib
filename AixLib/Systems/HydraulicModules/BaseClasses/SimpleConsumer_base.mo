@@ -1,25 +1,33 @@
 ﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 model SimpleConsumer_base
-  extends AixLib.Fluid.Interfaces.PartialTwoPort;
-  import SI=Modelica.SIunits;
+  extends AixLib.Fluid.Interfaces.PartialTwoPort(redeclare package Medium =
+        Media.Water);
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
-  parameter SI.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
-  parameter SI.HeatCapacity capacity=1 "Capacity of the material";
-  parameter SI.Volume V=0.001 "Volume of water";
-  parameter SI.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
+  parameter Modelica.SIunits.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
+  parameter Modelica.SIunits.Temperature T_return=293.15  "Return temperature" annotation (Dialog(enable = fixed_return_T));
+  parameter Modelica.SIunits.TemperatureDifference dT_maxNominalReturn = 5 "maximum undercooling/overheating based on nominal return temperature";
+  parameter Modelica.SIunits.HeatCapacity capacity=1 "Capacity of the material";
+  parameter Modelica.SIunits.Volume V=0.001 "Volume of water";
+  parameter Modelica.SIunits.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
   parameter Boolean allowFlowReversal=true
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter SI.MassFlowRate m_flow_nominal(min=0)
+  parameter Boolean fixed_return_T=true  "= true, if fixed return temperature, false if variable" annotation (Dialog(group = "System"), choices(checkBox = true));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
-  parameter SI.Temperature T_start=293.15
-    "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
               choice="T_input",
               choice="Q_flow_fixed",
-              choice="Q_flow_input"),Dialog(enable=true));
+              choice="Q_flow_input"),Dialog(enable=true, group = "System"));
+  parameter Integer demandType   "Choose between heating and cooling functionality" annotation (choices(
+              choice=1 "use as heating consumer",
+              choice=-1 "use as cooling consumer"),Dialog(enable=true, group = "System"));
+
+  Modelica.SIunits.Temperature TReturn = T_return;
+  Modelica.SIunits.HeatFlowRate Q_flow_max;
 
   Fluid.MixingVolumes.MixingVolume volume(
     final V=V,
@@ -27,7 +35,7 @@ model SimpleConsumer_base
     final allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal,
     redeclare package Medium = Medium,
-    nPorts=1)                          annotation (Placement(transformation(
+    nPorts=1)                                                   annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={0,10})));
@@ -49,7 +57,7 @@ model SimpleConsumer_base
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={40,80})));
-  Modelica.Blocks.Sources.RealExpression kA_realExp(y=kA) if     functionality == "T_input"
+  Modelica.Blocks.Sources.RealExpression kA_realExp(y=kA) if functionality == "T_input"
      or functionality == "T_fixed" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -104,34 +112,83 @@ model SimpleConsumer_base
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={80,0})));
+  Modelica.Blocks.Math.Gain gain1(k=-demandType) if functionality == "Q_flow_input"
+     or functionality == "Q_flow_fixed"
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-28,40})));
+  Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter if functionality == "Q_flow_input"
+    annotation (Placement(transformation(extent={{-64,30},{-44,50}})));
+  Modelica.Blocks.Sources.RealExpression Exp_Q_flow_max(y=Q_flow_max) if functionality == "Q_flow_input"
+    annotation (Placement(transformation(extent={{-98,38},{-78,58}})));
+  Modelica.Blocks.Sources.RealExpression Exp_Q_flow_min(y=0) if functionality == "Q_flow_input"
+    annotation (Placement(transformation(extent={{-98,22},{-78,42}})));
+  Modelica.Blocks.Interfaces.RealInput T_ReturnSet if not fixed_return_T annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-104,-92}),
+                         iconTransformation(
+        extent={{-12,-12},{12,12}},
+        rotation=0,
+        origin={-96,-80})));
 equation
-  connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
+  if demandType==1 then
+    Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (senTFlow.T - (TReturn - dT_maxNominalReturn)));
+  else
+    Q_flow_max = max(0, senMasFlo.m_flow * Medium.cp_const * (TReturn + dT_maxNominalReturn - senTFlow.T));
+  end if;
+
+  connect(volume.heatPort,heatCapacitor.port) annotation (Line(points={{10,10},
           {10,40},{34,40}},               color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(heatCapacitor.port,convection. solid) annotation (Line(points={{34,40},
-          {10,40},{10,60}},              color={191,0,0}));
-  connect(convection.fluid,prescribedTemperature. port)
-    annotation (Line(points={{10,80},{30,80}},   color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(kA_realExp.y, convection.Gc)
-    annotation (Line(points={{-7,70},{0,70}}, color={0,0,127}));
-  connect(realExpression1.y, prescribedTemperature.T)
-    annotation (Line(points={{69,80},{52,80}},         color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(prescribedTemperature.T, T)
+  // T functionality
+  if functionality == "T_input" then
+    connect(prescribedTemperature.T, T)
     annotation (Line(points={{52,80},{60,80},{60,120}}, color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(prescribedHeatFlow.port, heatCapacitor.port)
+  elseif functionality == "T_fixed" then
+    connect(realExpression1.y, prescribedTemperature.T)
+    annotation (Line(points={{69,80},{52,80}},         color={0,0,127},
+      pattern=LinePattern.Dash));
+  end if;
+  connect(convection.fluid,prescribedTemperature.port)
+    annotation (Line(points={{10,80},{30,80}},   color={191,0,0},
+      pattern=LinePattern.Dash));
+  if functionality == "T_input" or functionality == "T_fixed" then
+    connect(heatCapacitor.port,convection.solid) annotation (Line(points={{34,40},
+          {10,40},{10,60}},              color={191,0,0}));
+  end if;
+  connect(kA_realExp.y, convection.Gc)
+    annotation (Line(points={{-7,70},{0,70}}, color={0,0,127}));
+  // Q functionality
+  if functionality == "Q_flow_input" or functionality == "Q_flow_fixed" then
+    connect(prescribedHeatFlow.port, heatCapacitor.port)
     annotation (Line(points={{4,40},{34,40}},            color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(port_a, senTFlow.port_a)
-    annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
+  end if;
+  connect(gain1.y, prescribedHeatFlow.Q_flow)
+    annotation (Line(points={{-21.4,40},{-16,40}}, color={0,0,127}));
+  connect(Q_realExp.y, gain1.u) annotation (Line(points={{-41,60},{-40,60},{-40,
+          40},{-35.2,40}}, color={0,0,127}, pattern=LinePattern.Dash));
+  connect(variableLimiter.y, gain1.u) annotation (Line(points={{-43,40},{-35.2,40}},   color={0,0,127}, pattern=LinePattern.Dash));
+  connect(Q_flow, variableLimiter.u) annotation (Line(points={{-60,120},{-60,100},
+          {-72,100},{-72,40},{-66,40}}, color={0,0,127}));
+  connect(Exp_Q_flow_max.y, variableLimiter.limit1)
+    annotation (Line(points={{-77,48},{-66,48}}, color={0,0,127}));
+  connect(Exp_Q_flow_min.y, variableLimiter.limit2)
+    annotation (Line(points={{-77,32},{-66,32}}, color={0,0,127}));
+  // Hydraulics
   connect(senTFlow.port_b, senMasFlo.port_a)
     annotation (Line(points={{-70,0},{-64,0}}, color={0,127,255}));
-  connect(volume.ports[1], senTReturn.port_a)
-    annotation (Line(points={{-1.77636e-15,0},{70,0}}, color={0,127,255}));
   connect(senTReturn.port_b, port_b)
     annotation (Line(points={{90,0},{100,0}}, color={0,127,255}));
+  connect(volume.ports[1], senTReturn.port_a)
+    annotation (Line(points={{-1.77636e-15,0},{70,0}}, color={0,127,255}));
+
+
+  connect(port_a, senTFlow.port_a)
+    annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
