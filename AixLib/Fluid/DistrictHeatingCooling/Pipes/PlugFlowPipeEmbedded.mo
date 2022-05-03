@@ -124,6 +124,7 @@ model PlugFlowPipeEmbedded
 
   AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta plugFlowPipeZeta(
     redeclare final package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     final dh=dh,
     final v_nominal=v_nominal,
     final ReC=ReC,
@@ -137,6 +138,7 @@ model PlugFlowPipeEmbedded
     final thickness=thickness,
     T_start_in=T_start_in,
     T_start_out=T_start_out,
+    initDelay=initDelay,
     final R=R,
     final fac=fac,
     final sum_zetas=sum_zetas,

@@ -111,12 +111,15 @@ model PlugFlowPipeEmbeddedDis
 
   AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
   redeclare final package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    from_dp=from_dp,
   final dh = dh,
   final v_nominal = v_nominal,
   final ReC = ReC,
   final roughness = roughness,
   final length = length,
   final m_flow_nominal = m_flow_nominal,
+    m_flow_small=m_flow_small,
   final dIns = dIns,
   final kIns = kIns,
   final cPip = cPip,
@@ -124,7 +127,10 @@ model PlugFlowPipeEmbeddedDis
   final thickness = thickness,
     T_start_in=T_start_in,
     T_start_out=T_start_out,
+    initDelay=initDelay,
   final R = R,
+    homotopyInitialization=homotopyInitialization,
+    linearized=linearized,
     nPorts=nPorts)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
