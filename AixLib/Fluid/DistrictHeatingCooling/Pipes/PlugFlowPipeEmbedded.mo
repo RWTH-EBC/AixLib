@@ -135,6 +135,8 @@ model PlugFlowPipeEmbedded
     final cPip=cPip,
     final rhoPip=rhoPip,
     final thickness=thickness,
+    T_start_in=T_start_in,
+    T_start_out=T_start_out,
     final R=R,
     final fac=fac,
     final sum_zetas=sum_zetas,
