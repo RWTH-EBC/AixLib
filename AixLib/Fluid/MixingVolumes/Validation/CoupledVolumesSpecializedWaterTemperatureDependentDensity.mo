@@ -19,7 +19,7 @@ within AixLib.Fluid.MixingVolumes.Validation;
  <li>
  April 17, 2018, by Michael Wetter:<br/>
  First implementation for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/910\">AixLib, issue 910</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/910\">IBPSA, issue 910</a>.
  </li>
  </ul>
  </html>"),
@@ -27,7 +27,7 @@ within AixLib.Fluid.MixingVolumes.Validation;
        StopTime=3600,
        Tolerance=1e-06),
      __Dymola_Commands(
-       file="Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/CoupledVolumesSpecializedWaterTemperatureDependentDensity.mos"
+       file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/CoupledVolumesSpecializedWaterTemperatureDependentDensity.mos"
             "Simulate and plot"), 
    __Dymola_LockedEditing="Model from IBPSA");
  end CoupledVolumesSpecializedWaterTemperatureDependentDensity;

@@ -1,8 +1,8 @@
 within AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Examples;
  model ZenithAngle "Test model for zenith angle"
    extends Modelica.Icons.Example;
-   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle zen(lat=
-         0.73268921998722) "Zenith angle"
+   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle zen
+     "Zenith angle"
      annotation (Placement(transformation(extent={{60,-10},{80,10}})));
    AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination decAng
      "Declination angle"
@@ -45,6 +45,14 @@ within AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Examples;
        textString="%first",
        index=-1,
        extent={{-6,3},{-6,3}}));
+   connect(weaBus.lat, zen.lat) annotation (Line(
+       points={{-34,0},{58,0}},
+       color={255,204,51},
+       thickness=0.5), Text(
+       string="%first",
+       index=-1,
+       extent={{-6,3},{-6,3}},
+       horizontalAlignment=TextAlignment.Right));
    annotation (
    Documentation(info="<html>
  <p>

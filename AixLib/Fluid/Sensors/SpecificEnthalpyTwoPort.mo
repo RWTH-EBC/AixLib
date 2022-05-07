@@ -1,10 +1,12 @@
 within AixLib.Fluid.Sensors;
  model SpecificEnthalpyTwoPort "Ideal two port sensor for the specific enthalpy"
    extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
-   extends Modelica.Icons.RotationalSensor;
-   parameter Modelica.SIunits.SpecificEnthalpy h_out_start=
-     Medium.specificEnthalpy_pTX(p=Medium.p_default, T=Medium.T_default, X=Medium.X_default)
-     "Initial or guess value of output (= state)"
+   extends Modelica.Icons.RoundSensor;
+   parameter Modelica.Units.SI.SpecificEnthalpy h_out_start=
+       Medium.specificEnthalpy_pTX(
+       p=Medium.p_default,
+       T=Medium.T_default,
+       X=Medium.X_default) "Initial or guess value of output (= state)"
      annotation (Dialog(group="Initialization"));
    Modelica.Blocks.Interfaces.RealOutput h_out(final quantity="SpecificEnergy",
                                                final unit="J/kg",
@@ -15,7 +17,7 @@ within AixLib.Fluid.Sensors;
          extent={{10,-10},{-10,10}},
          rotation=270)));
  protected
-   Modelica.SIunits.SpecificEnthalpy hMed_out(start=h_out_start)
+   Modelica.Units.SI.SpecificEnthalpy hMed_out(start=h_out_start)
      "Medium enthalpy to which the sensor is exposed";
  initial equation
    if dynamic then
@@ -47,14 +49,14 @@ within AixLib.Fluid.Sensors;
          graphics={
          Text(
            extent={{102,120},{0,90}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            textString="h"),
          Line(points={{0,100},{0,70}}, color={0,0,127}),
          Line(points={{-100,0},{-70,0}}, color={0,128,255}),
          Line(points={{70,0},{100,0}}, color={0,128,255}),
          Text(
            extent={{-20,120},{-140,70}},
-           lineColor={0,0,0},
+           textColor={0,0,0},
            textString=DynamicSelect("", String(h_out, format=".0f")))}),
    Documentation(info="<html>
  <p>

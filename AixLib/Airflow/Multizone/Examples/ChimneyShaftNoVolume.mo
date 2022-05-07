@@ -7,7 +7,6 @@ within AixLib.Airflow.Multizone.Examples;
    AixLib.Fluid.MixingVolumes.MixingVolume roo(
      V=2.5*5*5,
      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
      T_start=273.15 + 20,
      redeclare package Medium = Medium,
      m_flow_nominal=0.05,
@@ -201,7 +200,7 @@ within AixLib.Airflow.Multizone.Examples;
  <li>
  March 26, 2021 by Michael Wetter:<br/>
  Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
  </li>
  <li>
  February 24, 2015 by Michael Wetter:<br/>

@@ -6,7 +6,7 @@ within AixLib.Fluid.FixedResistances.Validation;
  
     parameter Integer nRes(min=2) = 10 "Number of resistances";
  
-    parameter Modelica.SIunits.PressureDifference dp_nominal = 5
+   parameter Modelica.Units.SI.PressureDifference dp_nominal=5
      "Nominal pressure drop for each resistance";
  
     Modelica.Blocks.Sources.Ramp P(

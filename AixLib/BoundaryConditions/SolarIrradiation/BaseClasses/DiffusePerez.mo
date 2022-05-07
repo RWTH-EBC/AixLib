@@ -3,7 +3,7 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
    "Hemispherical diffuse irradiation on a tilted surface with Perez's anisotropic model"
    extends Modelica.Blocks.Icons.Block;
    parameter Real rho=0.2 "Ground reflectance";
-   parameter Modelica.SIunits.Angle til(displayUnit="deg") "Surface tilt angle";
+   parameter Modelica.Units.SI.Angle til(displayUnit="deg") "Surface tilt angle";
    Modelica.Blocks.Interfaces.RealInput briCof1 "Brightening Coeffcient F1"
      annotation (Placement(transformation(extent={{-140,0},{-100,40}})));
    Modelica.Blocks.Interfaces.RealInput briCof2 "Brightening Coeffcient F2"
@@ -83,7 +83,7 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
  April 27, 2018, by Michael Wetter:<br/>
  Corrected <code>displayUnit</code>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">AixLib, issue 912</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
  </li>
  <li>
  June 6, 2012, by Wangda Zuo:<br/>
@@ -102,30 +102,30 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
          Text(
            extent={{-150,110},{150,150}},
            textString="%name",
-           lineColor={0,0,255}),
+           textColor={0,0,255}),
          Text(
            extent={{-48,74},{-100,86}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="HGloHor"),
          Text(
            extent={{-50,44},{-102,56}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="HDifHor"),
          Text(
            extent={{-50,14},{-102,26}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="briCof1"),
          Text(
            extent={{-50,-16},{-102,-4}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="briCof2"),
          Text(
            extent={{-50,-46},{-102,-34}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="zen"),
          Text(
            extent={{-52,-76},{-104,-64}},
-           lineColor={0,0,127},
+           textColor={0,0,127},
            textString="incAng")}), 
    __Dymola_LockedEditing="Model from IBPSA");
  end DiffusePerez;

@@ -43,7 +43,7 @@ within AixLib.Utilities.Math;
  </ul>
  </html>"), Icon(graphics={   Text(
            extent={{-88,38},{92,-34}},
-           lineColor={160,160,164},
+           textColor={160,160,164},
            textString="regNonZeroPower()")}), 
    __Dymola_LockedEditing="Model from IBPSA");
  end RegNonZeroPower;

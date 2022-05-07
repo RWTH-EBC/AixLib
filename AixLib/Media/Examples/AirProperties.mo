@@ -7,7 +7,7 @@ within AixLib.Media.Examples;
      TMin=273.15-30,
      TMax=273.15+60);
  
-   Modelica.SIunits.SpecificEnthalpy hLiq "Specific enthalpy of liquid";
+   Modelica.Units.SI.SpecificEnthalpy hLiq "Specific enthalpy of liquid";
  
  equation
    // Check the implementation of the base properties

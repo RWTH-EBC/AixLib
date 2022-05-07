@@ -3,7 +3,7 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregati
    extends Modelica.Icons.Example;
  
    discrete Integer curCel "Current occupied cell";
-   discrete Modelica.SIunits.HeatFlowRate[5] QAggShi_flow
+   discrete Modelica.Units.SI.HeatFlowRate[5] QAggShi_flow
      "Shifted vector of aggregated loads";
  
  initial equation

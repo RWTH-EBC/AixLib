@@ -4,7 +4,7 @@ within AixLib.Fluid.HeatExchangers.Validation;
  
    package Medium = AixLib.Media.Water "Medium model";
  
-   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.01
+   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.01
      "Nominal mass flow rate";
  
    Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ref(T=283.15)
@@ -33,7 +33,6 @@ within AixLib.Fluid.HeatExchangers.Validation;
      m_flow(start=0.1),
      dp(start=10),
      UA=100,
-     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
      dp_nominal=0,
      tau=5,
      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,

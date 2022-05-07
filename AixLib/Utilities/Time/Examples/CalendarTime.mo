@@ -8,7 +8,7 @@ within AixLib.Utilities.Time.Examples;
  
  equation
  
-   annotation (    __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/Time/Examples/CalendarTime.mos"
+   annotation (    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Time/Examples/CalendarTime.mos"
          "Simulate and plot"),
      Documentation(revisions="<html>
      <ul>

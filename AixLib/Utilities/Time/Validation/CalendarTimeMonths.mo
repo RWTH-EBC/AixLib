@@ -8,7 +8,7 @@ within AixLib.Utilities.Time.Validation;
  equation
  
    annotation (
-     __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/Time/Validation/CalendarTimeMonths.mos"
+     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Time/Validation/CalendarTimeMonths.mos"
          "Simulate and plot"),
    Documentation(
      info="<html>

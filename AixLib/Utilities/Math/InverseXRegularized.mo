@@ -17,7 +17,7 @@ within AixLib.Utilities.Math;
  </ul>
  </html>"), Icon(graphics={   Text(
            extent={{-90,36},{90,-36}},
-           lineColor={160,160,164},
+           textColor={160,160,164},
            textString="inverseXRegularized()")}), 
    __Dymola_LockedEditing="Model from IBPSA");
  end InverseXRegularized;

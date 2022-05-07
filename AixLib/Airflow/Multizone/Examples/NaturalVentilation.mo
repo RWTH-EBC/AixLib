@@ -9,7 +9,6 @@ within AixLib.Airflow.Multizone.Examples;
      redeclare package Medium = Medium,
      V=2.5*10*5,
      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
      T_start=273.15 + 18,
      nPorts=2,
      m_flow_nominal=0.001) "Control volume"
@@ -42,7 +41,6 @@ within AixLib.Airflow.Multizone.Examples;
    AixLib.Fluid.MixingVolumes.MixingVolume volOut(
      redeclare package Medium = Medium,
      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
      V=1E10,
      T_start=273.15 + 20,
      nPorts=2,
@@ -105,7 +103,7 @@ within AixLib.Airflow.Multizone.Examples;
  <li>
  March 26, 2021 by Michael Wetter:<br/>
  Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
  </li>
  <li>
  December 22, 2014 by Michael Wetter:<br/>

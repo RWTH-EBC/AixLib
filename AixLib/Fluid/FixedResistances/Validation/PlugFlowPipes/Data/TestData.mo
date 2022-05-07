@@ -34,8 +34,7 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
  First implementation.
  </li>
  </ul>
- </html>"),__Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PlugFlowPipes/Data/TestData.mos"
+ </html>"),__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PlugFlowPipes/Data/TestData.mos"
          "Simulate and plot"), 
    __Dymola_LockedEditing="Model from IBPSA");
  end TestData;

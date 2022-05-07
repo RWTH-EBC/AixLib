@@ -24,7 +24,7 @@ within AixLib.Fluid.Examples.Performance;
    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
              -40},{40,60}}),    graphics={Text(
            extent={{-62,24},{-18,-4}},
-           lineColor={0,0,255},
+           textColor={0,0,255},
            textString="See code")}),
      experiment(
        Tolerance=1e-6, StopTime=100),
@@ -97,8 +97,7 @@ within AixLib.Fluid.Examples.Performance;
  </li>
  </ul>
  </html>"),
-     __Dymola_Commands(file=
-           "Resources/Scripts/Dymola/Fluid/Examples/Performance/Example6.mos"
+     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/Performance/Example6.mos"
          "Simulate and plot"), 
    __Dymola_LockedEditing="Model from IBPSA");
  end Example6;

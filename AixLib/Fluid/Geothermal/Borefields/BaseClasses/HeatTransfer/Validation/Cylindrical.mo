@@ -3,7 +3,7 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation;
    "Comparison of the Cylindrical with the GroundTemperatureResponse"
    extends Modelica.Icons.Example;
  
-   parameter Modelica.SIunits.Temperature T_start = 295.15
+   parameter Modelica.Units.SI.Temperature T_start=295.15
      "Initial soil temperature";
    parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template borFieDat=
      AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.SandBox_Borefield()
