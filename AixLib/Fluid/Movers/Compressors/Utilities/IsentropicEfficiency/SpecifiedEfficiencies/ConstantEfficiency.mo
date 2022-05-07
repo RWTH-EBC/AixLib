@@ -5,7 +5,7 @@ model ConstantEfficiency
 
   // Definition of parameters
   //
-  parameter Modelica.Units.SI.Efficiency etaIseCon=0.9
+  parameter Modelica.SIunits.Efficiency etaIseCon = 0.9
     "Constant overall isentropic efficiency";
 
 equation

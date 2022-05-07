@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatGenerators.HeatPump;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatGenerators.HeatPump;
 model HeatPump "Base model of FastHVAC Heat Pump"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
@@ -21,7 +21,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
-  parameter Modelica.Units.SI.Power Q_useNominal(start=0)
+  parameter Modelica.SIunits.Power Q_useNominal(start=0)
     "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataHea =
@@ -36,22 +36,21 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   parameter Boolean use_refIne=true "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
         group="Refrigerant inertia"));
-  parameter Modelica.Units.SI.Frequency refIneFre_constant
-    "Cut off frequency for inertia of refrigerant cycle" annotation (Dialog(
-        enable=use_refIne, group="Refrigerant inertia"), Evaluate=true);
+  parameter Modelica.SIunits.Frequency refIneFre_constant
+    "Cut off frequency for inertia of refrigerant cycle"
+    annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"),Evaluate=true);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
           use_refIne, group="Refrigerant inertia"));
   parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet, nSet and iceFac input"
     annotation(choices(checkBox=true), Dialog(group="Input Connectors"));
 
 //Condenser
-  parameter Modelica.Units.SI.MassFlowRate mFlow_conNominal
+  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate"
-    annotation (Dialog(group="Parameters", tab="Condenser"), Evaluate=true);
-  parameter Modelica.Units.SI.Volume VCon "Volume in condenser"
-    annotation (Evaluate=true, Dialog(group="Parameters", tab="Condenser"));
-  parameter Modelica.Units.SI.Mass m_fluidCon=VCon_final*con.medium.rho
-    "Mass of working fluid";
+    annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=true);
+  parameter Modelica.SIunits.Volume VCon "Volume in condenser"
+    annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser"));
+  parameter Modelica.SIunits.Mass m_fluidCon = VCon_final * con.medium.rho "Mass of working fluid";
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Condenser", group="Flow resistance"));
@@ -59,32 +58,25 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Condenser"),
                                           choices(checkBox=true));
-  parameter Modelica.Units.SI.HeatCapacity CCon
-    "Heat capacity of Condenser (= cp*m)" annotation (Evaluate=true, Dialog(
-      group="Heat Losses",
-      tab="Condenser",
+  parameter Modelica.SIunits.HeatCapacity CCon
+    "Heat capacity of Condenser (= cp*m)" annotation (Evaluate=true,Dialog(group="Heat Losses",
+        tab="Condenser",
       enable=use_ConCap));
-  parameter Modelica.Units.SI.ThermalConductance GCon
-    "Constant thermal conductance of condenser material" annotation (Evaluate=
-        true, Dialog(
-      group="Heat Losses",
-      tab="Condenser",
+  parameter Modelica.SIunits.ThermalConductance GCon
+    "Constant thermal conductance of condenser material"
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_ConCap));
-  parameter Modelica.Units.SI.ThermalConductance GConIns
-    "Constant thermal conductance of condenser material" annotation (Evaluate=
-        true, Dialog(
-      group="Heat Losses",
-      tab="Condenser",
+  parameter Modelica.SIunits.ThermalConductance GConIns
+    "Constant thermal conductance of condenser material"
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_ConCap));
 
 //Evaporator
-  parameter Modelica.Units.SI.MassFlowRate mFlow_evaNominal
-    "Nominal mass flow rate"
-    annotation (Dialog(group="Parameters", tab="Evaporator"), Evaluate=true);
-  parameter Modelica.Units.SI.Volume VEva "Volume in evaporator"
-    annotation (Evaluate=true, Dialog(group="Parameters", tab="Evaporator"));
-  parameter Modelica.Units.SI.Mass m_fluidEva=VEva_final*eva.medium.rho
-    "Mass of working fluid";
+  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
+    "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
+  parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
+    annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
+  parameter Modelica.SIunits.Mass m_fluidEva = VEva_final * eva.medium.rho "Mass of working fluid";
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator", group="Flow resistance"));
@@ -92,22 +84,17 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Evaporator"),
                                           choices(checkBox=true));
-  parameter Modelica.Units.SI.HeatCapacity CEva
-    "Heat capacity of Evaporator (= cp*m)" annotation (Evaluate=true, Dialog(
-      group="Heat Losses",
-      tab="Evaporator",
+  parameter Modelica.SIunits.HeatCapacity CEva
+    "Heat capacity of Evaporator (= cp*m)"
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
-  parameter Modelica.Units.SI.ThermalConductance GEva
-    "Constant thermal conductance of Evaporator material" annotation (Evaluate=
-        true, Dialog(
-      group="Heat Losses",
-      tab="Evaporator",
+  parameter Modelica.SIunits.ThermalConductance GEva
+    "Constant thermal conductance of Evaporator material"
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
-  parameter Modelica.Units.SI.ThermalConductance GEvaIns
-    "Constant thermal conductance of Evaporator material" annotation (Evaluate=
-        true, Dialog(
-      group="Heat Losses",
-      tab="Evaporator",
+  parameter Modelica.SIunits.ThermalConductance GEvaIns
+    "Constant thermal conductance of Evaporator material"
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
 
 //Assumptions
@@ -120,17 +107,17 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   parameter Boolean transferHeat=true
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
-  parameter Modelica.Units.SI.Time tauHeaTra=1200
+  parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer in temperature sensors, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors"),
-      Evaluate=true);
-  parameter Modelica.Units.SI.Temperature TAmbCon_nominal=291.15
-    "Fixed ambient temperature for heat transfer of sensors at the condenser side"
-    annotation (Dialog(tab="Assumptions", group="Condenser"));
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors"),Evaluate=true);
+  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
+    "Fixed ambient temperature for heat transfer of sensors at the condenser side" annotation (               Dialog(tab=
+          "Assumptions",                                                                                               group=
+          "Condenser"));
 
-  parameter Modelica.Units.SI.Temperature TAmbEva_nominal=273.15
+  parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
-    annotation (Dialog(tab="Assumptions", group="Evaporator"));
+    annotation (               Dialog(tab="Assumptions",group="Evaporator"));
 //Initialization
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
@@ -231,14 +218,14 @@ model HeatPump "Base model of FastHVAC Heat Pump"
         extent={{-16,-16},{16,16}},
         rotation=90,
         origin={-76,-136})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva
- if use_EvaCap "Forces heat losses according to ambient temperature"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if
+    use_EvaCap "Forces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={68,-108})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon
- if use_ConCap "Forces heat losses according to ambient temperature"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
+    use_ConCap "Forces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
@@ -318,31 +305,17 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
 protected
   parameter Boolean machineType=true "=true if heat pump; =false if chiller";
-  parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_min=0.3
-    "Realistic mass flow minimum for simulation plausibility";
-  parameter Modelica.Units.SI.Volume autoCalc_Vmin=0.003
-    "Realistic volume minimum for simulation plausibility";
+  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
+  parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
 
-  parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_eva=if machineType
-       then max(0.00004*Q_useNominal - 0.3177, autoCalc_mFlow_min) else max(
-      0.00005*Q_useNominal - 0.5662, autoCalc_mFlow_min);
-  parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_con=if machineType
-       then max(0.00004*Q_useNominal - 0.6162, autoCalc_mFlow_min) else max(
-      0.00005*Q_useNominal + 0.3161, autoCalc_mFlow_min);
-  parameter Modelica.Units.SI.MassFlowRate mFlow_evaNominal_final=if
-      use_autoCalc then autoCalc_mFlow_eva else mFlow_evaNominal;
-  parameter Modelica.Units.SI.MassFlowRate mFlow_conNominal_final=if
-      use_autoCalc then autoCalc_mFlow_con else mFlow_conNominal;
-  parameter Modelica.Units.SI.Volume autoCalc_VEva=if machineType then max(
-      0.0000001*Q_useNominal - 0.0075, autoCalc_Vmin) else max(0.0000001*
-      Q_useNominal - 0.0066, autoCalc_Vmin);
-  parameter Modelica.Units.SI.Volume autoCalc_VCon=if machineType then max(
-      0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002*
-      Q_useNominal - 0.0084, autoCalc_Vmin);
-  parameter Modelica.Units.SI.Volume VEva_final=if use_autoCalc then
-      autoCalc_VEva else VEva;
-  parameter Modelica.Units.SI.Volume VCon_final=if use_autoCalc then
-      autoCalc_VCon else VCon;
+  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_eva = if machineType then max(0.00004*Q_useNominal - 0.3177, autoCalc_mFlow_min) else max(0.00005*Q_useNominal - 0.5662, autoCalc_mFlow_min);
+  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_con = if machineType then max(0.00004*Q_useNominal - 0.6162, autoCalc_mFlow_min) else max(0.00005*Q_useNominal + 0.3161, autoCalc_mFlow_min);
+  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal_final=if use_autoCalc then autoCalc_mFlow_eva else mFlow_evaNominal;
+  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal_final=if use_autoCalc then autoCalc_mFlow_con else mFlow_conNominal;
+  parameter Modelica.SIunits.Volume autoCalc_VEva = if machineType then max(0.0000001*Q_useNominal - 0.0075, autoCalc_Vmin) else max(0.0000001*Q_useNominal - 0.0066, autoCalc_Vmin);
+  parameter Modelica.SIunits.Volume autoCalc_VCon = if machineType then max(0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002*Q_useNominal - 0.0084, autoCalc_Vmin);
+  parameter Modelica.SIunits.Volume VEva_final=if use_autoCalc then autoCalc_VEva else VEva;
+  parameter Modelica.SIunits.Volume VCon_final=if use_autoCalc then autoCalc_VCon else VCon;
 
 equation
   //Control and feedback for the auto-calculation of condenser and evaporator data

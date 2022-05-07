@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency;
+within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency;
 model PolynomialIsentropicEfficiency
   "Model describing isentropic efficiency based on polynomial approach"
   extends PartialIsentropicEfficiency;
@@ -24,9 +24,9 @@ model PolynomialIsentropicEfficiency
   parameter Real c[:] = {1}
     "Coefficients used for correction factors if needed"
     annotation(Dialog(group="Modelling approach"));
-  parameter Modelica.Units.SI.Frequency rotSpeRef=9.334
+  parameter Modelica.SIunits.Frequency rotSpeRef = 9.334
     "Reference rotational speed"
-    annotation (Dialog(group="Reference properties"));
+    annotation(Dialog(group="Reference properties"));
 
   // Definition of coefficients
   //

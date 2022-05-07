@@ -1,57 +1,54 @@
 within AixLib.Airflow.Multizone.BaseClasses;
-function powerLaw "Power law used in orifice equations"
-  extends Modelica.Icons.Function;
-
-  input Real C "Flow coefficient, C = V_flow/ dp^m";
-  input Modelica.Units.SI.PressureDifference dp(displayUnit="Pa")
-    "Pressure difference";
-  input Real m(min=0.5, max=1)
-    "Flow exponent, m=0.5 for turbulent, m=1 for laminar";
-  input Modelica.Units.SI.PressureDifference dp_turbulent(
-    min=0,
-    displayUnit="Pa") = 0.001 "Pressure difference where regularization starts";
-  output Modelica.Units.SI.VolumeFlowRate V_flow "Volume flow rate";
-protected
-  constant Real gamma(min=1) = 1.5
-    "Normalized flow rate where dphi(0)/dpi intersects phi(1)";
-  Real a
-    "Polynomial coefficient for regularized implementation of flow resistance";
-  Real b
-    "Polynomial coefficient for regularized implementation of flow resistance";
-  Real c
-    "Polynomial coefficient for regularized implementation of flow resistance";
-  Real d
-    "Polynomial coefficient for regularized implementation of flow resistance";
-  Real pi "Normalized pressure";
-  Real pi2 "Square of normalized pressure";
-algorithm
- if (dp >= dp_turbulent) then
-   V_flow :=C *dp^m;
- elseif (dp <= -dp_turbulent) then
-   V_flow :=-C*(-dp)^m;
- else
-   a := gamma;
-   b := 1/8*m^2 - 3*gamma - 3/2*m + 35.0/8;
-   c := -1/4*m^2 + 3*gamma + 5/2*m - 21.0/4;
-   d := 1/8*m^2 - gamma - m + 15.0/8;
-   pi  := dp/dp_turbulent;
-   pi2 := pi*pi;
-   V_flow :=C *dp_turbulent^m * pi * ( a + pi2 * ( b + pi2 * ( c + pi2 * d)));
- end if;
-
-  annotation (smoothOrder=2,
-Documentation(info="<html>
+ function powerLaw "Power law used in orifice equations"
+   input Real k "Flow coefficient, k = V_flow/ dp^m";
+   input Modelica.SIunits.PressureDifference dp(displayUnit="Pa") "Pressure difference";
+   input Real m(min=0.5, max=1)
+     "Flow exponent, m=0.5 for turbulent, m=1 for laminar";
+   input Modelica.SIunits.PressureDifference dp_turbulent(min=0,
+                                                          displayUnit="Pa")=0.001
+     "Pressure difference where regularization starts";
+   output Modelica.SIunits.VolumeFlowRate V_flow "Volume flow rate";
+ protected
+   constant Real gamma(min=1) = 1.5
+     "Normalized flow rate where dphi(0)/dpi intersects phi(1)";
+   Real a
+     "Polynomial coefficient for regularized implementation of flow resistance";
+   Real b
+     "Polynomial coefficient for regularized implementation of flow resistance";
+   Real c
+     "Polynomial coefficient for regularized implementation of flow resistance";
+   Real d
+     "Polynomial coefficient for regularized implementation of flow resistance";
+   Real pi "Normalized pressure";
+   Real pi2 "Square of normalized pressure";
+ algorithm
+  if (dp >= dp_turbulent) then
+    V_flow := k*dp^m;
+  elseif (dp <= -dp_turbulent) then
+    V_flow :=-k*(-dp)^m;
+  else
+    a := gamma;
+    b := 1/8*m^2 - 3*gamma - 3/2*m + 35.0/8;
+    c := -1/4*m^2 + 3*gamma + 5/2*m - 21.0/4;
+    d := 1/8*m^2 - gamma - m + 15.0/8;
+    pi  := dp/dp_turbulent;
+    pi2 := pi*pi;
+    V_flow := k*dp_turbulent^m * pi * ( a + pi2 * ( b + pi2 * ( c + pi2 * d)));
+  end if;
+ 
+   annotation (smoothOrder=2,
+ Documentation(info="<html>
  <p>
  This model describes the mass flow rate and pressure difference relation
  of an orifice in the form
  </p>
  <p align=\"center\" style=\"font-style:italic;\">
-   V&#775; = C sign(&Delta;p) |&Delta;p|<sup>m</sup>
+   V = k sign(&Delta;p) |&Delta;p|<sup>m</sup>
  </p>
  <p>
  where
- <i>V&#775;</i> is the volume flow rate,
- <i>C &gt; 0</i> is a flow coefficient
+ <i>V</i> is the volume flow rate,
+ <i>k &gt; 0</i> is a flow coefficient
  <i>&Delta; p</i> is the pressure drop and
  <i>m &isin; [0.5, 1]</i> is a flow coefficient.
  The equation is regularized for
@@ -74,20 +71,13 @@ Documentation(info="<html>
  <i>a</i>, <i>b</i>, <i>c</i> and <i>d</i> can be pre-computed.
  In this situation, use
  <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
- AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM</a>, which allows
+ Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>, which allows
  to compute these values outside of this function, for example as parameters
  of a model.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
- <li>
- February 8, 2022, by Michael Wetter:<br/>
- Changed to use <code>C</code> for volume flow coefficient (<i>C = V_flow/dp^m</i>),
- and <code>k</code> for mass flow coefficient (<i>k = m_flow/dp^m</i>).
- This is for consistency with
- <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels\">AixLib.Fluid.BaseClasses.FlowModels</a>.
- </li>
  <li>
  January 22, 2016, by Michael Wetter:<br/>
  Corrected type declaration of pressure difference.
@@ -104,6 +94,6 @@ revisions="<html>
  <li><i>February 4, 2005</i> by Michael Wetter:<br/>
         Released first version.
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end powerLaw;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end powerLaw;

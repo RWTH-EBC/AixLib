@@ -2,15 +2,12 @@ within AixLib.Obsolete.Year2019.Utilities.Sources.InternalGains.Humans;
 model HumanSensibleHeatAreaSpecific "Model for sensible heat output area specific"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   //Internal Gains People
-  parameter Modelica.Units.SI.HeatFlux InternalGainsPeopleSpecific=1.0
-    "Specific Heat Flow from people to the environment"
-    annotation (Dialog(descriptionLabel=true));
+  parameter Modelica.SIunits.HeatFlux InternalGainsPeopleSpecific = 1.0 "Specific Heat Flow from people to the environment" annotation(Dialog(descriptionLabel = true));
   parameter Real RatioConvectiveHeat = 0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.Units.SI.Area RoomArea=20 "Area of room"
-    annotation (Dialog(descriptionLabel=true));
-  parameter Modelica.Units.SI.Temperature T0=
-      Modelica.Units.Conversions.from_degC(22) "Initial temperature";
+  parameter Modelica.SIunits.Area RoomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
+    "Initial temperature";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
   AixLib.Utilities.HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Human, use_A_in=true) annotation (Placement(transformation(extent={{48,-22},{72,2}})));
   AixLib.Utilities.Interfaces.RadPort RadHeat annotation (Placement(transformation(extent={{80,-20},{100,0}})));
@@ -32,11 +29,9 @@ model HumanSensibleHeatAreaSpecific "Model for sensible heat output area specifi
     "Divides total heat by the Heat Output per Person to get number of persons"
     annotation (Placement(transformation(extent={{-46,-54},{-34,-42}})));
 protected
-  parameter Modelica.Units.SI.Area SurfaceArea_Human=2;
+  parameter Modelica.SIunits.Area SurfaceArea_Human = 2;
   parameter Real Emissivity_Human = 0.98;
-  parameter Modelica.Units.SI.HeatFlowRate HeatPerPerson=70
-    "Average Heat Flow per person taken from DIN V 18599-10"
-    annotation (Dialog(descriptionLabel=true));
+  parameter Modelica.SIunits.HeatFlowRate HeatPerPerson = 70 "Average Heat Flow per person taken from DIN V 18599-10" annotation(Dialog(descriptionLabel = true));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, 20}, {42, 44}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
 equation

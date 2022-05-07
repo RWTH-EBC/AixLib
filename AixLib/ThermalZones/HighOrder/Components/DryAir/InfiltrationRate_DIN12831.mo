@@ -1,15 +1,15 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.DryAir;
+within AixLib.ThermalZones.HighOrder.Components.DryAir;
 model InfiltrationRate_DIN12831
   "Heat flow caused by infiltration after european standard DIN EN 12831"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Modelica.Units.SI.Volume room_V=50 "Volume of the room";
+  parameter Modelica.SIunits.Volume room_V = 50 "Volume of the room";
   parameter Real n50(unit = "h-1") = 4
     "Air exchange rate at 50 Pa pressure difference";
   parameter Real e = 0.03 "Coefficient of windshield";
   parameter Real eps = 1.0 "Coefficient of height";
-  parameter Modelica.Units.SI.SpecificHeatCapacity c=1000
+  parameter Modelica.SIunits.SpecificHeatCapacity c = 1000
     "Specific heat capacity of air";
-  parameter Modelica.Units.SI.Density rho=1.25 "Air density";
+  parameter Modelica.SIunits.Density rho = 1.25 "Air density";
 protected
   parameter Real InfiltrationRate = 2 * n50 * e * eps;
 equation

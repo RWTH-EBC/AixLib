@@ -1,14 +1,14 @@
 within AixLib.Fluid.Actuators.Valves;
-model TwoWayLinear "Two way valve with linear flow characteristics"
-  extends BaseClasses.PartialTwoWayValveKv(phi=max(0.1*l, l + y_actual*(1 - l)));
-
-initial equation
-  // Since the flow model AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow computes
-  // 1/k^2, the parameter l must not be zero.
-  assert(l > 0, "Valve leakage parameter l must be bigger than zero.");
-annotation (
-defaultComponentName="val",
-Documentation(info="<html>
+ model TwoWayLinear "Two way valve with linear flow characteristics"
+   extends BaseClasses.PartialTwoWayValveKv(phi=max(0.1*l, l + y_actual*(1 - l)));
+ 
+ initial equation
+   // Since the flow model AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow computes
+   // 1/k^2, the parameter l must not be zero.
+   assert(l > 0, "Valve leakage parameter l must be bigger than zero.");
+ annotation (
+ defaultComponentName="val",
+ Documentation(info="<html>
  <p>
  Two way valve with linear opening characteristic.
  </p><p>
@@ -19,15 +19,8 @@ Documentation(info="<html>
  as the regularization near the origin.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
- <li>
- June 10, 2021, by Michael Wetter:<br/>
- Changed implementation of the filter and changed the parameter <code>order</code> to a constant
- as most users need not change this value.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
- </li>
  <li>
  August 7, 2020, by Ettore Zanetti:<br/>
  changed the computation of <code>phi</code> using
@@ -69,6 +62,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end TwoWayLinear;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end TwoWayLinear;

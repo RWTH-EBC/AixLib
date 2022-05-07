@@ -1,6 +1,6 @@
 within AixLib.Utilities.MassTransfer;
 model MassFlowSensor "Mass flow rate sensor"
-  extends Modelica.Icons.RoundSensor;
+  extends Modelica.Icons.RotationalSensor;
   Modelica.Blocks.Interfaces.RealOutput m_flow(unit="kg/s")
     "Mass flow from port_a to port_b as output signal" annotation (Placement(
         transformation(

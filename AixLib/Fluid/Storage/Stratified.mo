@@ -1,28 +1,28 @@
 within AixLib.Fluid.Storage;
-model Stratified "Model of a stratified tank for thermal energy storage"
-  extends AixLib.Fluid.Storage.BaseClasses.PartialStratified(vol(each nPorts=3));
-
-  Modelica.Fluid.Interfaces.FluidPort_a fluPorVol[nSeg](
-    redeclare each final package Medium = Medium)
-    "Fluid port that connects to the control volumes of the tank"
-    annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
-        iconTransformation(extent={{-36,-10},{-16,10}})));
-equation
-  connect(port_a, vol[1].ports[1]) annotation (Line(points={{-100,0},{-88,0},{
-          -88,-20},{16,-20},{16,-16}}, color={0,127,255}));
-  connect(vol[nSeg].ports[2], port_b) annotation (Line(points={{16,-16},{20,-16},
-          {20,-20},{90,-20},{90,0},{100,0}}, color={0,127,255}));
-  for i in 1:(nSeg-1) loop
-    connect(vol[i].ports[2], vol[i + 1].ports[1]) annotation (Line(points={{16,-16},
-            {16,-32},{14,-32},{14,-16},{16,-16}}, color={0,127,255}));
-  end for;
-  for i in 1:nSeg loop
-    connect(fluPorVol[i], vol[i].ports[3]) annotation (Line(points={{-20,0},{-20,-36},
-          {16,-36},{16,-16}}, color={0,127,255}));
-  end for;
-  annotation (
-defaultComponentName="tan",
-Documentation(info="<html>
+ model Stratified "Model of a stratified tank for thermal energy storage"
+   extends AixLib.Fluid.Storage.BaseClasses.PartialStratified(vol(each nPorts=3));
+ 
+   Modelica.Fluid.Interfaces.FluidPort_a fluPorVol[nSeg](
+     redeclare each final package Medium = Medium)
+     "Fluid port that connects to the control volumes of the tank"
+     annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
+         iconTransformation(extent={{-36,-10},{-16,10}})));
+ equation
+   connect(port_a, vol[1].ports[1]) annotation (Line(points={{-100,0},{-88,0},{
+           -88,-20},{16,-20},{16,-16}}, color={0,127,255}));
+   connect(vol[nSeg].ports[2], port_b) annotation (Line(points={{16,-16},{20,-16},
+           {20,-20},{90,-20},{90,0},{100,0}}, color={0,127,255}));
+   for i in 1:(nSeg-1) loop
+     connect(vol[i].ports[2], vol[i + 1].ports[1]) annotation (Line(points={{16,-16},
+             {16,-32},{14,-32},{14,-16},{16,-16}}, color={0,127,255}));
+   end for;
+   for i in 1:nSeg loop
+     connect(fluPorVol[i], vol[i].ports[3]) annotation (Line(points={{-20,0},{-20,-36},
+           {16,-36},{16,-16}}, color={0,127,255}));
+   end for;
+   annotation (
+ defaultComponentName="tan",
+ Documentation(info="<html>
  <p>
  This is a model of a stratified storage tank.
  </p>
@@ -37,14 +37,8 @@ Documentation(info="<html>
  <a href=\"modelica://AixLib.Fluid.Storage.StratifiedEnhanced\">
  AixLib.Fluid.Storage.StratifiedEnhanced</a>.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Set <code>final massDynamics=energyDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
  <li>
  June 7, 2018 by Filip Jorissen:<br/>
  Copied model from Buildings and update the model accordingly.
@@ -145,116 +139,116 @@ Documentation(info="<html>
  </li>
  </ul>
  </html>"),
-Icon(graphics={
-        Rectangle(
-          extent={{-40,60},{40,20}},
-          lineColor={255,0,0},
-          fillColor={255,0,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-40,-20},{40,-60}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-76,2},{-90,-2}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{0,84},{-80,80}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-76,84},{-80,-2}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{82,0},{78,-86}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{0,84},{-4,60}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{82,-84},{2,-88}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{6,-60},{2,-84}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{92,2},{78,-2}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-40,20},{40,-20}},
-          lineColor={255,0,0},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.CrossDiag),
-        Text(
-          extent={{100,106},{134,74}},
-          textColor={0,0,127},
-          textString="QLoss"),
-        Rectangle(
-          extent={{-10,10},{10,-10}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.Sphere,
-          fillColor={255,255,255}),
-        Rectangle(
-          extent={{50,68},{40,-66}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={255,255,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-40,66},{-50,-68}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={255,255,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-48,68},{50,60}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={255,255,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-48,-60},{50,-68}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={255,255,0},
-          fillPattern=FillPattern.Solid),
-        Line(
-          points={{26,72},{102,72},{100,72}},
-          color={127,0,0},
-          pattern=LinePattern.Dot),
-        Line(
-          points={{56,6},{56,72},{58,72}},
-          color={127,0,0},
-          pattern=LinePattern.Dot),
-        Line(
-          points={{22,-74},{70,-74},{70,72}},
-          color={127,0,0},
-          pattern=LinePattern.Dot)}),
-  __Dymola_LockedEditing="Model from IBPSA");
-end Stratified;
+ Icon(graphics={
+         Rectangle(
+           extent={{-40,60},{40,20}},
+           lineColor={255,0,0},
+           fillColor={255,0,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-40,-20},{40,-60}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-76,2},{-90,-2}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{0,84},{-80,80}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-76,84},{-80,-2}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{82,0},{78,-86}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{0,84},{-4,60}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{82,-84},{2,-88}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{6,-60},{2,-84}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{92,2},{78,-2}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-40,20},{40,-20}},
+           lineColor={255,0,0},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.CrossDiag),
+         Text(
+           extent={{100,106},{134,74}},
+           lineColor={0,0,127},
+           textString="QLoss"),
+         Rectangle(
+           extent={{-10,10},{10,-10}},
+           lineColor={0,0,0},
+           fillPattern=FillPattern.Sphere,
+           fillColor={255,255,255}),
+         Rectangle(
+           extent={{50,68},{40,-66}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={255,255,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-40,66},{-50,-68}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={255,255,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-48,68},{50,60}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={255,255,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-48,-60},{50,-68}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={255,255,0},
+           fillPattern=FillPattern.Solid),
+         Line(
+           points={{26,72},{102,72},{100,72}},
+           color={127,0,0},
+           pattern=LinePattern.Dot),
+         Line(
+           points={{56,6},{56,72},{58,72}},
+           color={127,0,0},
+           pattern=LinePattern.Dot),
+         Line(
+           points={{22,-74},{70,-74},{70,72}},
+           color={127,0,0},
+           pattern=LinePattern.Dot)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end Stratified;

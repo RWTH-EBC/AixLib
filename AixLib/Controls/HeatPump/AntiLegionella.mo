@@ -1,10 +1,10 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model AntiLegionella "Control to avoid Legionella in the DHW"
 
-  parameter Modelica.Units.SI.ThermodynamicTemperature TLegMin=333.15
+  parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
     "Temperature at which the legionella in DWH dies";
 
-  parameter Modelica.Units.SI.Time minTimeAntLeg
+  parameter Modelica.SIunits.Time minTimeAntLeg
     "Minimal duration of antilegionella control";
   parameter Boolean weekly=true
     "Switch between a daily or weekly trigger approach" annotation(Dialog(descriptionLabel=true), choices(choice=true "Weekly",

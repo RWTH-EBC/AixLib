@@ -4,15 +4,22 @@ model HWindow "Calculates the solar heat input through the window"
 
   parameter Integer n(min=1) "Number of windows"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient g[n]
-    "Total energy transmittance of windows" annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient g_TotDir[n] "Total energy transmittance of windows with closed sunscreen for direct
-    radiation" annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient g_TotDif[n] "Total energy transmittance of windows with closed sunscreen for diffuse
-    radiation" annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
-    roof" annotation (Dialog(group="window"));
-  final parameter Modelica.Units.SI.ReflectionCoefficient rho=0.2
+  parameter Modelica.SIunits.TransmissionCoefficient g[n]
+    "Total energy transmittance of windows"
+    annotation(Dialog(group="window"));
+  parameter Modelica.SIunits.TransmissionCoefficient g_TotDir[n]
+    "Total energy transmittance of windows with closed sunscreen for direct
+    radiation"
+    annotation(Dialog(group="window"));
+  parameter Modelica.SIunits.TransmissionCoefficient g_TotDif[n]
+    "Total energy transmittance of windows with closed sunscreen for diffuse
+    radiation"
+    annotation(Dialog(group="window"));
+  parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
+    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+    roof"
+    annotation (Dialog(group="window"));
+  final parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
     "Degree of ground reflection";
   Modelica.Blocks.Interfaces.RealInput alt(
     final quantity="Angle",
@@ -84,9 +91,11 @@ model HWindow "Calculates the solar heat input through the window"
     annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));
 protected
-  Modelica.Units.SI.TransmissionCoefficient g_Dirx[n] "Calculation variable to determine the active total energy transmittance of
+  Modelica.SIunits.TransmissionCoefficient g_Dirx[n]
+    "Calculation variable to determine the active total energy transmittance of
      windows for direct radiation";
-  Modelica.Units.SI.TransmissionCoefficient g_Difx[n] "Calculation variable to determine the active total energy transmittance of
+  Modelica.SIunits.TransmissionCoefficient g_Difx[n]
+    "Calculation variable to determine the active total energy transmittance of
     windows for diffuse radiation";
 equation
   for i in 1:n loop

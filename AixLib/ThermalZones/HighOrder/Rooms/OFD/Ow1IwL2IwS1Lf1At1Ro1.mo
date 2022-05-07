@@ -9,19 +9,19 @@ model Ow1IwL2IwS1Lf1At1Ro1
 
 
   //////////room geometry
-  parameter Modelica.Units.SI.Length room_length=2 "length "
+  parameter Modelica.SIunits.Length room_length=2 "length "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.Units.SI.Length room_lengthb=2 "length_b "
+  parameter Modelica.SIunits.Length room_lengthb=2 "length_b "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.Units.SI.Length room_width_long=2 "w1 "
+  parameter Modelica.SIunits.Length room_width_long=2 "w1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.Units.SI.Length room_width_short=2 "w2 "
+  parameter Modelica.SIunits.Length room_width_short=2 "w2 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.Units.SI.Height room_height_long=2 "h1 "
+  parameter Modelica.SIunits.Height room_height_long=2 "h1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.Units.SI.Height room_height_short=2 "h2 "
+  parameter Modelica.SIunits.Height room_height_short=2 "h2 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.Units.SI.Length roof_width=2 "wRO"
+  parameter Modelica.SIunits.Length roof_width=2 "wRO"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
   parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
@@ -32,7 +32,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
-  parameter Modelica.Units.SI.Area windowarea_RO=0 "Window area" annotation (
+  parameter Modelica.SIunits.Area windowarea_RO=0 "Window area" annotation (
       Dialog(
       group="Windows and Doors",
       naturalWidth=10,

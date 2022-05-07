@@ -45,9 +45,10 @@ model BoilerSystem "Example that illustrates use of boiler model"
     annotation (Placement(transformation(extent={{-30,-50},{-10,-30}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=5,
-    f=1/86400,
+    freqHz=1/86400,
     phase=4.7123889803847,
-    offset=273.15) "Ambient air temperature"
+    offset=273.15)
+    "Ambient air temperature"
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
   Modelica.Blocks.Sources.BooleanConstant isNight(k=false)
     "No night-setback"

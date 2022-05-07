@@ -1,18 +1,18 @@
 within AixLib.Utilities.Math;
-block SmoothMin
-  "Once continuously differentiable approximation to the minimum function"
-  extends Modelica.Blocks.Interfaces.SI2SO;
-  parameter Real deltaX "Width of transition interval";
-equation
-  y = AixLib.Utilities.Math.Functions.smoothMin(x1=u1, x2=u2, deltaX=deltaX);
-  annotation (Icon(graphics={Text(
-          extent={{-88,40},{92,-32}},
-          textColor={160,160,164},
-          textString="smoothMin()"), Text(
-          extent={{-66,-50},{76,-120}},
-          textColor={0,0,255},
-          textString="dX=%deltaX%")}),
-Documentation(info="<html>
+ block SmoothMin
+   "Once continuously differentiable approximation to the minimum function"
+   extends Modelica.Blocks.Interfaces.SI2SO;
+   parameter Real deltaX "Width of transition interval";
+ equation
+   y = AixLib.Utilities.Math.Functions.smoothMin(x1=u1, x2=u2, deltaX=deltaX);
+   annotation (Icon(graphics={Text(
+           extent={{-88,40},{92,-32}},
+           lineColor={160,160,164},
+           textString="smoothMin()"), Text(
+           extent={{-66,-50},{76,-120}},
+           lineColor={0,0,255},
+           textString="dX=%deltaX%")}),
+ Documentation(info="<html>
  <p>
  Once continuously differentiable approximation to the <i>min(.,.)</i> function.
  </p>
@@ -22,7 +22,7 @@ Documentation(info="<html>
  AixLib.Utilities.Math.Examples.SmoothMin</a>.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  March 12, 2015, by Filip Jorissen:<br/>
@@ -33,6 +33,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end SmoothMin;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end SmoothMin;

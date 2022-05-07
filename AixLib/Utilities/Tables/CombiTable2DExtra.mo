@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Tables;
+within AixLib.Utilities.Tables;
 model CombiTable2DExtra
   "Altered CombiTable2D with the option to not extrapolate"
   extends Modelica.Blocks.Interfaces.SI2SO;
@@ -9,10 +9,11 @@ model CombiTable2DExtra
   parameter Real table[:,:]=[0,0]
     "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
                                   //Set default value to [0,0] to obmit warnings
-  Modelica.Blocks.Tables.CombiTable2Ds combiTable2D(
+ Modelica.Blocks.Tables.CombiTable2D combiTable2D(
     final tableOnFile=false,
     final table=table,
-    final smoothness=smoothness) annotation (Placement(transformation(
+    final smoothness=smoothness)                   annotation (Placement(
+        transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={20,0})));

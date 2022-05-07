@@ -1,30 +1,30 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic;
 model StaticTransportDelay "Delay time for given current velocity"
 
-  parameter Modelica.Units.SI.Length length "Pipe length";
-  parameter Modelica.Units.SI.Length dh
+  parameter Modelica.SIunits.Length length "Pipe length";
+  parameter Modelica.SIunits.Length dh
     "Hydraulic diameter (assuming a round cross section area)";
-  parameter Modelica.Units.SI.Density rho "Standard density of fluid";
+  parameter Modelica.SIunits.Density rho "Standard density of fluid";
   parameter Boolean initDelay=false
     "Initialize delay for a constant m_flow_start if true, otherwise start from 0"
     annotation (Dialog(group="Initialization"));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_start=0
+  parameter Modelica.SIunits.MassFlowRate m_flow_start=0
     "Initialization of mass flow rate to calculate initial time delay"
     annotation (Dialog(group="Initialization", enable=initDelay));
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0)
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
-  final parameter Modelica.Units.SI.Time t_in_start=if initDelay and (abs(
-      m_flow_start) > 1E-10*m_flow_nominal) then min(length/m_flow_start*(rho*
-      dh^2/4*Modelica.Constants.pi), 0) else 0
+  final parameter Modelica.SIunits.Time t_in_start=
+    if initDelay and (abs(m_flow_start) > 1E-10*m_flow_nominal)
+      then min(length/m_flow_start*(rho*dh^2/4*Modelica.Constants.pi), 0) else 0
     "Initial value of input time at inlet";
-  final parameter Modelica.Units.SI.Time t_out_start=if initDelay and (abs(
-      m_flow_start) > 1E-10*m_flow_nominal) then min(-length/m_flow_start*(rho*
-      dh^2/4*Modelica.Constants.pi), 0) else 0
+  final parameter Modelica.SIunits.Time t_out_start=
+    if initDelay and (abs(m_flow_start) > 1E-10*m_flow_nominal)
+     then min(-length/m_flow_start*(rho*dh^2/4*Modelica.Constants.pi), 0) else 0
     "Initial value of input time at outlet";
 
-  Modelica.Units.SI.Velocity velocity "Flow velocity within pipe";
+  Modelica.SIunits.Velocity velocity "Flow velocity within pipe";
 
   Modelica.Blocks.Interfaces.RealInput m_flow "Mass flow of fluid" annotation (
       Placement(transformation(extent={{-140,-20},{-100,20}}),

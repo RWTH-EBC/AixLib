@@ -1,115 +1,115 @@
 within AixLib.Fluid.Humidifiers;
-model Humidifier_u
-  "Ideal humidifier or dehumidifier with prescribed water mass flow rate addition or subtraction"
-  extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
-    redeclare replaceable package Medium =
-        Modelica.Media.Interfaces.PartialCondensingGases,
-    redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol(
-    final prescribedHeatFlowRate=true));
-
-  parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal
-    "Water mass flow rate at u=1, positive for humidification";
-
-  Modelica.Blocks.Interfaces.RealInput u(unit="1") "Control input"
-    annotation (Placement(transformation(
-          extent={{-140,40},{-100,80}}), iconTransformation(extent={{-120,50},{
-            -100,70}})));
-
-  Modelica.Blocks.Interfaces.RealOutput mWat_flow(unit="kg/s")
-    "Water added to the fluid"
-    annotation (Placement(transformation(extent={{100,50},{120,70}})));
-
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
-    "Heat port for total heat exchange with the control volume"
-    annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
-
-protected
-  Modelica.Blocks.Math.Gain gai(final k=mWat_flow_nominal) "Gain"
-    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
-
-equation
-  connect(u, gai.u) annotation (Line(
-      points={{-120,60},{-82,60}},
-      color={0,0,127}));
-  connect(gai.y, vol.mWat_flow) annotation (Line(
-      points={{-59,60},{-30,60},{-30,-18},{-11,-18}},
-      color={0,0,127}));
-  connect(vol.heatPort, heatPort) annotation (Line(points={{-9,-10},{-20,-10},{-20,
-          -60},{-100,-60}}, color={191,0,0}));
-
-  connect(gai.y, mWat_flow)
-    annotation (Line(points={{-59,60},{110,60},{110,60}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics={
-        Text(
-          extent={{-52,-60},{58,-120}},
-          textString="m=%m_flow_nominal",
-          pattern=LinePattern.None,
-          lineColor={0,0,127}),
-        Rectangle(
-          extent={{-100,61},{-70,58}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-114,104},{-70,76}},
-          textColor={0,0,127},
-          textString="u"),
-        Rectangle(
-          visible=use_T_in,
-          extent={{-100,-59},{-70,-62}},
-          lineColor={0,0,0},
-          pattern=LinePattern.None,
-          fillColor={191,0,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-100,5},{101,-5}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-70,60},{70,-60}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,62,0},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{42,42},{54,34},{54,34},{42,28},{42,30},{50,34},{50,34},{42,
-              40},{42,42}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{58,-54},{54,52}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{70,61},{100,58}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{30,112},{96,58}},
-          textColor={0,0,127},
-          textString="mWat_flow"),
-        Polygon(
-          points={{42,10},{54,2},{54,2},{42,-4},{42,-2},{50,2},{50,2},{42,8},{
-              42,10}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{42,-26},{54,-34},{54,-34},{42,-40},{42,-38},{50,-34},{50,-34},
-              {42,-28},{42,-26}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}),
-defaultComponentName="hum",
-Documentation(info="<html>
+ model Humidifier_u
+   "Ideal humidifier or dehumidifier with prescribed water mass flow rate addition or subtraction"
+   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
+     redeclare replaceable package Medium =
+         Modelica.Media.Interfaces.PartialCondensingGases,
+     redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol(
+     final prescribedHeatFlowRate=true));
+ 
+   parameter Modelica.SIunits.MassFlowRate mWat_flow_nominal
+     "Water mass flow rate at u=1, positive for humidification";
+ 
+   Modelica.Blocks.Interfaces.RealInput u(unit="1") "Control input"
+     annotation (Placement(transformation(
+           extent={{-140,40},{-100,80}}), iconTransformation(extent={{-120,50},{
+             -100,70}})));
+ 
+   Modelica.Blocks.Interfaces.RealOutput mWat_flow(unit="kg/s")
+     "Water added to the fluid"
+     annotation (Placement(transformation(extent={{100,50},{120,70}})));
+ 
+   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
+     "Heat port for total heat exchange with the control volume"
+     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+ 
+ protected
+   Modelica.Blocks.Math.Gain gai(final k=mWat_flow_nominal) "Gain"
+     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
+ 
+ equation
+   connect(u, gai.u) annotation (Line(
+       points={{-120,60},{-82,60}},
+       color={0,0,127}));
+   connect(gai.y, vol.mWat_flow) annotation (Line(
+       points={{-59,60},{-30,60},{-30,-18},{-11,-18}},
+       color={0,0,127}));
+   connect(vol.heatPort, heatPort) annotation (Line(points={{-9,-10},{-20,-10},{-20,
+           -60},{-100,-60}}, color={191,0,0}));
+ 
+   connect(gai.y, mWat_flow)
+     annotation (Line(points={{-59,60},{110,60},{110,60}}, color={0,0,127}));
+   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+             -100},{100,100}}), graphics={
+         Text(
+           extent={{-52,-60},{58,-120}},
+           textString="m=%m_flow_nominal",
+           pattern=LinePattern.None,
+           lineColor={0,0,127}),
+         Rectangle(
+           extent={{-100,61},{-70,58}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Text(
+           extent={{-114,104},{-70,76}},
+           lineColor={0,0,127},
+           textString="u"),
+         Rectangle(
+           visible=use_T_in,
+           extent={{-100,-59},{-70,-62}},
+           lineColor={0,0,0},
+           pattern=LinePattern.None,
+           fillColor={191,0,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-100,5},{101,-5}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-70,60},{70,-60}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,62,0},
+           fillPattern=FillPattern.Solid),
+         Polygon(
+           points={{42,42},{54,34},{54,34},{42,28},{42,30},{50,34},{50,34},{42,
+               40},{42,42}},
+           lineColor={255,255,255},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{58,-54},{54,52}},
+           lineColor={255,255,255},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{70,61},{100,58}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Text(
+           extent={{30,112},{96,58}},
+           lineColor={0,0,127},
+           textString="mWat_flow"),
+         Polygon(
+           points={{42,10},{54,2},{54,2},{42,-4},{42,-2},{50,2},{50,2},{42,8},{
+               42,10}},
+           lineColor={255,255,255},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Solid),
+         Polygon(
+           points={{42,-26},{54,-34},{54,-34},{42,-40},{42,-38},{50,-34},{50,-34},
+               {42,-28},{42,-26}},
+           lineColor={255,255,255},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Solid)}),
+ defaultComponentName="hum",
+ Documentation(info="<html>
  <p>
  Model for an air humidifier or dehumidifier.
  </p>
@@ -134,14 +134,8 @@ Documentation(info="<html>
  <code>heatPort</code>.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Removed <code>massDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
  <li>
  April 12, 2017, by Michael Wetter:<br/>
  Removed parameters <code>use_T_in</code> and <code>T</code>.
@@ -194,6 +188,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end Humidifier_u;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end Humidifier_u;

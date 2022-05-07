@@ -11,15 +11,15 @@ model ModularInactiveCompressors
 
   parameter Integer nCom = 3
     "Number of compressors";
-  parameter Modelica.Units.SI.AbsolutePressure pInl=Medium.pressure(
-      Medium.setBubbleState(Medium.setSat_T(TInl + 1)))
+  parameter Modelica.SIunits.AbsolutePressure pInl=
+    Medium.pressure(Medium.setBubbleState(Medium.setSat_T(TInl+1)))
     "Current pressure at inlet conditions";
-  parameter Modelica.Units.SI.Temperature TInl=283.15
+  parameter Modelica.SIunits.Temperature TInl = 283.15
     "Current temperature at inlet conditions";
-  parameter Modelica.Units.SI.AbsolutePressure pOut=Medium.pressure(
-      Medium.setDewState(Medium.setSat_T(TOut - 5)))
+  parameter Modelica.SIunits.AbsolutePressure pOut=
+    Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut-5)))
     "Current set point of the compressor's outlet pressure";
-  parameter Modelica.Units.SI.Temperature TOut=333.15
+  parameter Modelica.SIunits.Temperature TOut = 333.15
     "Current temperature at outlet conditions";
 
   // Definition of models
@@ -59,7 +59,8 @@ model ModularInactiveCompressors
   Modelica.Blocks.Sources.Sine valOpe(
     offset=0.5,
     amplitude=0.3,
-    f=1) "Prescribed valve's opening"
+    freqHz=1)
+    "Prescribed valve's opening"
     annotation (Placement(transformation(extent={{-88,-80},{-68,-60}})));
   Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simVal(
     redeclare package Medium = Medium,
@@ -85,7 +86,7 @@ model ModularInactiveCompressors
                 origin={0,0})));
 
   Modelica.Blocks.Sources.Sine rotSpe[nCom](
-    each f=1,
+    each freqHz=1,
     amplitude={50,20,0},
     offset={50,20,0})
     "Input signal to prediscribe compressors' rotational speeds"

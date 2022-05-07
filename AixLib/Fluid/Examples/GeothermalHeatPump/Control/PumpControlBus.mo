@@ -3,15 +3,15 @@ expandable connector PumpControlBus
   "Bus for all the pump set points in the geothermal heat pump"
   extends Modelica.Icons.SignalBus;
 
-  Modelica.Units.SI.Pressure p_pumpGeothermalSource
+  Modelica.SIunits.Pressure p_pumpGeothermalSource
     "Pressure set point of pump moving fluid from geothermal source into system";
-  Modelica.Units.SI.Pressure p_pumpCondenser
+  Modelica.SIunits.Pressure p_pumpCondenser
     "Pressure set point of pump moving fluid from storage tank to condenser of heat pump";
-  Modelica.Units.SI.Pressure p_pumpEvaporator
+  Modelica.SIunits.Pressure p_pumpEvaporator
     "Pressure set point of pump moving fluid from storage tank to evaporator of heat pump";
-  Modelica.Units.SI.Pressure p_pumpColdConsumer
+  Modelica.SIunits.Pressure p_pumpColdConsumer
     "Pressure set point of pump moving fluid from storage tank to cold consumers";
-  Modelica.Units.SI.Pressure p_pumpHeatConsumer
+  Modelica.SIunits.Pressure p_pumpHeatConsumer
     "Pressure set point of pump moving fluid from storage tank to heat consumers";
 
   annotation (

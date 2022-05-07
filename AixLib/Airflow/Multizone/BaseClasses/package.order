@@ -1,14 +1,11 @@
 Door
 DoorDiscretized
 ErrorControl
-PartialOneWayFlowElement
-PowerLawResistanceParameters
+PowerLawResistance
 TwoWayFlowElement
 TwoWayFlowElementBuoyancy
 ZonalFlow
-interpolate
 powerLaw
 powerLawFixedM
 windPressureLowRise
-windPressureProfile
 Examples

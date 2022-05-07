@@ -21,7 +21,7 @@ public
     "Mediums charastics HC2 (heat capacity, density, thermal conductivity)"
     annotation (Dialog(group="Medium"), choicesAllMatching);
 
-  parameter Modelica.Units.SI.Temperature T_start=323.15
+  parameter Modelica.SIunits.Temperature T_start=323.15
     "Start temperature of medium";
 
   /* *******************************************************************
@@ -29,10 +29,8 @@ public
      ******************************************************************* */
   parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn=1500
-    "Heat transfer coefficient at the inner wall";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut=15
-    "Heat transfer coefficient at the outer wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=1500 "Heat transfer coefficient at the inner wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=15 "Heat transfer coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
@@ -43,7 +41,7 @@ public
     "Unloading cycle connection pairs (lower position first)"
     annotation (Dialog(tab="Connections"));
 
-  Modelica.Units.SI.Energy Heat_loss;
+  Modelica.SIunits.Energy Heat_loss;
   parameter Integer n_load_cycles=2 "Number of loading cycle connection pairs"
     annotation (Dialog(tab="Connections"));
    parameter Integer n_unload_cycles=2
@@ -55,12 +53,12 @@ public
   parameter Boolean use_heatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean use_heatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean use_heatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConHC1=20
-    "Model assumptions heat transfer coefficient HC1 <-> Heating Water"
-    annotation (Dialog(enable=use_heatingCoil1, tab="Heating Coils and Rod"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConHC2=400
-    "Model assumptions heat transfer coefficient HC2 <-> Heating Water"
-    annotation (Dialog(enable=use_heatingCoil2, tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC1=20 "Model assumptions heat transfer coefficient HC1 <-> Heating Water"
+                                                                           annotation(Dialog(enable=use_heatingCoil1,  tab=
+          "Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC2=400 "Model assumptions heat transfer coefficient HC2 <-> Heating Water"
+                                                                           annotation(Dialog(enable=use_heatingCoil2,  tab=
+          "Heating Coils and Rod"));
   parameter Boolean Up_to_down_HC1 = true
     "Heating Coil 1 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
@@ -69,9 +67,8 @@ public
                                                  annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
   parameter Boolean calcHCon=true "Use calculated value for inside heat transfer coefficient"
                                                       annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn_const=30
-    "Fix value for heat transfer coefficient inside pipe"
-    annotation (Dialog(enable=not calcHCon, tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coefficient inside pipe"
+                                                         annotation(Dialog(enable=not calcHCon,              tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC1=0.02 "Inner diameter of HC1"
 //                             annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC2=0.02 "Inner diameter of HC2"
@@ -195,10 +192,10 @@ HeatTransfer heatTransfer(final Medium=medium,final data=data,
 protected
   parameter Real k_zyl(final unit="W/K") = 2*Modelica.Constants.pi*data.hTank/n/(1/(hConIn*data.dTank/2) + 1/data.lambdaIns*log((data.dTank
     /2 + data.sIns)/(data.dTank/2)) + 1/(hConOut*(data.dTank/2 + data.sIns)));
-  parameter Modelica.Units.SI.Area A_cov=data.dTank^2/4*Modelica.Constants.pi
+    parameter Modelica.SIunits.Area A_cov = data.dTank^2/4*Modelica.Constants.pi
     "Area cop/bottom cover";
-  parameter Modelica.Units.SI.Area A_wall=(data.dTank + data.sIns + data.sWall)
-      *Modelica.Constants.pi*data.hTank "Area mantle";
+    parameter Modelica.SIunits.Area A_wall = (data.dTank+data.sIns+data.sWall)*Modelica.Constants.pi * data.hTank
+    "Area mantle";
     //parameter Real k_cov(final unit="W/(m2.K)") =  {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank /2)^2 ;
 
   parameter Real k_wall[n](final unit="W/(m2.K)") = cat(

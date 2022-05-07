@@ -1,6 +1,6 @@
 within AixLib.Utilities.Psychrometrics.Functions;
 package Internal "Solve f(x, data) for x with given f"
-  extends ObsoleteModelica4.Media.Common.OneNonLinearEquation;
+  extends Modelica.Media.Common.OneNonLinearEquation;
 
   redeclare function extends f_nonlinear
   algorithm

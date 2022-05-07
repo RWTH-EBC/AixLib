@@ -1,11 +1,11 @@
 within AixLib.Fluid.MassExchangers.Validation;
-model ConstantEffectivenessZeroFlow
-  "Zero flow test for constants effectiveness mass exchanger"
-  extends AixLib.Fluid.MassExchangers.Examples.ConstantEffectiveness(
-    PSin_1(
-      height=0,
-      offset=1E5), PIn(height=0, offset=101325));
-  annotation (Documentation(revisions="<html>
+ model ConstantEffectivenessZeroFlow
+   "Zero flow test for constants effectiveness mass exchanger"
+   extends AixLib.Fluid.MassExchangers.Examples.ConstantEffectiveness(
+     PSin_1(
+       height=0,
+       offset=1E5), PIn(height=0, offset=101325));
+   annotation (Documentation(revisions="<html>
  <ul>
  <li>
  April 30, 2018, by Filip Jorissen:<br/>
@@ -13,14 +13,15 @@ model ConstantEffectivenessZeroFlow
  See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/907\">#907</a>.
  </li>
  </ul>
- </html>",info="<html>
+ </html>", info="<html>
  <p>
- This model tests whether
+ This model tests whether 
  <a href=\"modelica://AixLib.Fluid.MassExchangers.ConstantEffectiveness\">ConstantEffectiveness</a>
  works correctly at zero flow if one stream is zero.
  </p>
- </html>"),experiment(Tolerance=1e-06, StopTime=1),
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/Validation/ConstantEffectivenessZeroFlow.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end ConstantEffectivenessZeroFlow;
+ </html>"), experiment(Tolerance=1e-06, StopTime=1),
+     __Dymola_Commands(file=
+           "Resources/Scripts/Dymola/Fluid/MassExchangers/Validation/ConstantEffectivenessZeroFlow.mos"
+         "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end ConstantEffectivenessZeroFlow;

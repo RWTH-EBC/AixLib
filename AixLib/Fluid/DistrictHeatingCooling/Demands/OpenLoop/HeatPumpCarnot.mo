@@ -11,28 +11,31 @@ model HeatPumpCarnot "Substation with a heat pump carnot model"
       "Medium in the building heating system"
       annotation (choicesAllMatching = true);
 
-  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
+  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate added to medium";
 
-  parameter Modelica.Units.SI.TemperatureDifference dTDesign(displayUnit="K")
+  parameter Modelica.SIunits.TemperatureDifference dTDesign(
+    displayUnit="K")
     "Design temperature difference for the heat pump on its district heating side";
 
-  parameter Modelica.Units.SI.Temperature TReturn "Fixed return temperature";
+  parameter Modelica.SIunits.Temperature TReturn
+    "Fixed return temperature";
 
-  parameter Modelica.Units.SI.TemperatureDifference dTBuilding(displayUnit="K")
+  parameter Modelica.SIunits.TemperatureDifference dTBuilding(
+    displayUnit="K")
     "Design temperature difference for the building's heating system";
 
-  parameter Modelica.Units.SI.Temperature TSupplyBuilding
+  parameter Modelica.SIunits.Temperature TSupplyBuilding
     "Fixed supply temperature for the building heating system";
 
-  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
+  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
     "Pressure difference at nominal flow rate"
-    annotation (Dialog(group="Design parameter"));
+    annotation(Dialog(group="Design parameter"));
 
   parameter Real deltaM=0.1
     "Fraction of nominal flow rate where flow transitions to laminar"
     annotation (Dialog(tab="Flow resistance"));
-  parameter Modelica.Units.SI.Time tau=30
+  parameter Modelica.SIunits.Time tau=30
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
     annotation (Dialog(tab="Dynamics"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
@@ -47,11 +50,11 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
-      Medium.specificHeatCapacityCp(sta_default)
+  final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+    Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid in the district heating system";
-  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default_building=
-      MediumBuilding.specificHeatCapacityCp(sta_default)
+  final parameter Modelica.SIunits.SpecificHeatCapacity cp_default_building=
+    MediumBuilding.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid in the building heating system";
 
 public

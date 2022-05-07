@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient;
 model PowerFlowCoefficient
   "Model describing flow coefficient based on power approach"
   extends BaseClasses.PartialFlowCoefficient;
@@ -19,10 +19,11 @@ model PowerFlowCoefficient
     annotation(Dialog(group="Modelling approach",
                       enable=false));
 
-  parameter Modelica.Units.SI.Diameter dCle=0.02e-3
-    "Clearance diameter dCle = d_inner - d_needle" annotation (Dialog(group=
-          "Further geometry data", enable=if (powMod == Types.PowerModels.ShanweiEtAl2005)
-           then true else false));
+  parameter Modelica.SIunits.Diameter dCle = 0.02e-3
+    "Clearance diameter dCle = d_inner - d_needle"
+    annotation(Dialog(group="Further geometry data",
+               enable=if (powMod == Types.PowerModels.ShanweiEtAl2005) then
+          true else false));
   parameter Real pDifRat = 0.84
     "Pressure differential ratio factor depending on valve moddeld"
     annotation(Dialog(group="Further geometry data",

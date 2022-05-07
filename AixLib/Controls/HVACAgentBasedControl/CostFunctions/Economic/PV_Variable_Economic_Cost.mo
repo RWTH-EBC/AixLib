@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
+within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
 model PV_Variable_Economic_Cost
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real p = 0.30 "Price per kWh of fuel";
@@ -16,11 +16,12 @@ model PV_Variable_Economic_Cost
                                              lessEqualThreshold(threshold=
         rad_treshold)
     annotation (Placement(transformation(extent={{6,-36},{26,-16}})));
-  Modelica.Clocked.RealSignals.Sampler.SampleClocked sample1
+  Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample1
     annotation (Placement(transformation(extent={{66,-16},{54,-4}})));
-  Modelica.Clocked.ClockSignals.Clocks.PeriodicRealClock periodicClock1(period=
-        300) annotation (Placement(transformation(extent={{82,-56},{70,-44}})));
-  Modelica.Clocked.RealSignals.Sampler.Hold hold1(y_start=100)
+  Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock periodicClock1(period=
+        300)
+    annotation (Placement(transformation(extent={{82,-56},{70,-44}})));
+  Modelica_Synchronous.RealSignals.Sampler.Hold hold1(y_start=100)
     annotation (Placement(transformation(extent={{50,-16},{38,-4}})));
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{-32,-62},{-12,-42}})));

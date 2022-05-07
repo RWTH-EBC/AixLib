@@ -17,7 +17,7 @@ model ThreeWayValve
     annotation (Placement(transformation(extent={{-94,2},{-74,22}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=0.5,
-    f=1/3600,
+    freqHz=1/3600,
     offset=0.5)
     annotation (Placement(transformation(extent={{-36,44},{-16,64}})));
 equation

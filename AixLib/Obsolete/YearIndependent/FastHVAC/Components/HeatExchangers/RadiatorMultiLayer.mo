@@ -1,9 +1,8 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatExchangers;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Components.HeatExchangers;
 model RadiatorMultiLayer "Simple radiator multilayer model"
 extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 
-  import SIunits =
-         Modelica.Units.SI;
+  import Modelica.SIunits;
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
 
@@ -40,23 +39,20 @@ extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   parameter SIunits.Length height=(if selectable then radiatorType.height else 0.6)
     "Height of raditor, in m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry", enable=not selectable));
-  parameter Modelica.Units.SI.Area A=2*length*height
+  parameter Modelica.SIunits.Area A=2*length*height
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter Modelica.Units.SI.Length d=0.025 "Thickness of radiator wall"
+  parameter Modelica.SIunits.Length d=0.025 "Thickness of radiator wall"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter Modelica.Units.SI.Emissivity eps=0.95 "Emissivity"
+  parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
 
   /* *********Water And Steel Parameters**********************************/
   parameter Real volumeWater( unit="l/m")=(if selectable then radiatorType.VolumeWater else 20)
     "Water volume inside radiator per m, in l/m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry", enable=not selectable));
-  parameter Modelica.Units.SI.LinearDensity massSteel=(if selectable then
-      radiatorType.MassSteel else 30)
-    "Material mass of radiator per m, in kg/m" annotation (Dialog(
-      tab="Geometry and Material",
-      group="Geometry",
-      enable=not selectable));
+  parameter Modelica.SIunits.LinearDensity massSteel=(if selectable then radiatorType.MassSteel else 30)
+    "Material mass of radiator per m, in kg/m"
+    annotation (Dialog(tab="Geometry and Material", group="Geometry", enable=not selectable));
   parameter SIunits.Density densitySteel=(if selectable then radiatorType.DensitySteel else 7900)
     "Specific density of steel, in kg/m3"
     annotation (Dialog(tab="Geometry and Material", group="Material", enable=not selectable));
@@ -68,14 +64,14 @@ extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   parameter SIunits.ThermalConductivity lambdaSteel=(if selectable then radiatorType.LambdaSteel else 60)
     "Thermal conductivity of steel, in W/mK"
     annotation (Dialog(tab="Geometry and Material", group="Material", enable=not selectable));
-  parameter SIunits.Temperature T0=Modelica.Units.Conversions.from_degC(20)
+  parameter SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius"
     annotation (Dialog(group="Miscellaneous"));
-  parameter SIunits.Temperature RT_nom[3]=(if selectable then
-      Modelica.Units.Conversions.from_degC(radiatorType.RT_nom) else
-      Modelica.Units.Conversions.from_degC({75,65,20}))
+  parameter SIunits.Temperature RT_nom[3]=
+    (if selectable then Modelica.SIunits.Conversions.from_degC(radiatorType.RT_nom)
+    else Modelica.SIunits.Conversions.from_degC({75,65,20}))
     "Nominal temperatures (TIn, TOut, TAir) according to DIN-EN 442."
-    annotation (Dialog(group="Miscellaneous", enable=not selectable));
+    annotation (Dialog(group="Miscellaneous",enable=not selectable));
   parameter Integer N=16 "Number of discretisation layers";
   parameter AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.Temp
     calc_dT=calcT.exp
@@ -91,7 +87,7 @@ extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   SIunits.Temperature TV_1;
   SIunits.Temperature TR_N;
 protected
-  parameter Modelica.Units.SI.Temperature T0_N[N]={(T0 - ki*0.2) for ki in 1:N};
+   parameter Modelica.SIunits.Temperature T0_N[N]= {(T0-ki*0.2) for ki in 1:N};
   parameter SIunits.Volume vol_water=(length*volumeWater/1000)/N;
   parameter SIunits.Volume vol_steel=(length*massSteel) / densitySteel /N
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
@@ -101,10 +97,9 @@ protected
   parameter SIunits.Length d2=2*((vol_water+vol_steel)/Modelica.Constants.pi/length)^0.5
     "outer diameter of single layer";
 
-  parameter Modelica.Units.SI.TemperatureDifference dT_V_nom=RT_nom[1] - RT_nom[
-      3] "Temperature difference between the nominal temperatures Tin and Tair";
-  parameter Modelica.Units.SI.TemperatureDifference dT_R_nom=RT_nom[2] - RT_nom[
-      3]
+  parameter Modelica.SIunits.TemperatureDifference dT_V_nom=RT_nom[1]-RT_nom[3]
+    "Temperature difference between the nominal temperatures Tin and Tair";
+  parameter Modelica.SIunits.TemperatureDifference dT_R_nom=RT_nom[2]-RT_nom[3]
     "Temperature difference between the nominal temperatures Tout and Tair";
 
   /* *********Calculation of convective excess temperature, according to the chosen calculation method**********************************/

@@ -1,12 +1,15 @@
 within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses;
 model Sun "Computes the sun's altitude of the current site"
 
-import Modelica.Units.Conversions.from_deg;
-import Modelica.Units.Conversions.to_deg;
+import Modelica.SIunits.Conversions.from_deg;
+import Modelica.SIunits.Conversions.to_deg;
   parameter Real TimeCorrection = 0.5 "for TRY = 0.5, for TMY = 0";
-  parameter Modelica.Units.NonSI.Angle_deg Latitude "latitude of location";
-  parameter Modelica.Units.NonSI.Angle_deg Longitude "longitude of location in";
-  parameter Modelica.Units.NonSI.Time_hour DiffWeatherDataTime
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude
+    "latitude of location";
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Longitude
+    "longitude of location in";
+  parameter Modelica.SIunits.Conversions.NonSIunits.Time_hour
+    DiffWeatherDataTime
     "difference between local time and UTC, e.g. +1 for MET";
   parameter Real Diff_localStandardTime_WeatherDataTime = 0
     "difference between weather data time and the time of the local time zone";

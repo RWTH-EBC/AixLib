@@ -16,8 +16,8 @@ protected
     annotation (Placement(transformation(extent={{60,-10},{80,10}},
           rotation=0)));
 public
-  parameter Modelica.Units.SI.Time period=86400*4;
-  parameter Modelica.Units.SI.Time sampleTime=86400;
+  parameter Modelica.SIunits.Time period=86400*4;
+  parameter Modelica.SIunits.Time sampleTime=86400;
   parameter Real ystart=279.15 "Start value of EMA";
 protected
   Modelica.Blocks.Continuous.CriticalDamping ExpAVG1(

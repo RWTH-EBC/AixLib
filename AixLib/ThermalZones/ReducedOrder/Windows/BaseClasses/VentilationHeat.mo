@@ -3,17 +3,20 @@ block VentilationHeat "heat input due to ventilation with closed sunblind"
   extends Modelica.Blocks.Icons.Block;
   parameter Real x_f(min=0,max=1) "Percentage of open windowarea"
     annotation(dialog(group="window"));
-  parameter Modelica.Units.SI.Distance d "Distance sunscreen to window"
-    annotation (dialog(group="sunscreen"));
+  parameter Modelica.SIunits.Distance d "Distance sunscreen to window"
+    annotation(dialog(group="sunscreen"));
   parameter Boolean screen "If screen: true, if blind: false"
     annotation(dialog(group="sunscreen"));
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_e
+  parameter Modelica.SIunits.TransmissionCoefficient tau_e
     "Transmission coefficient of sunscreen"
-    annotation (dialog(group="sunscreen"));
-  parameter Modelica.Units.SI.ReflectionCoefficient rho_e
-    "Reflection coefficient of sunscreen" annotation (dialog(group="sunscreen"));
-  parameter Modelica.Units.SI.Angle til(displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
-    roof" annotation (Dialog(group="window"));
+     annotation(dialog(group="sunscreen"));
+  parameter Modelica.SIunits.ReflectionCoefficient rho_e
+    "Reflection coefficient of sunscreen"
+     annotation(dialog(group="sunscreen"));
+  parameter Modelica.SIunits.Angle til(displayUnit="deg")
+    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+    roof"
+    annotation (Dialog(group="window"));
 
    Modelica.Blocks.Interfaces.BooleanInput sunscreen
     "True: sunscreen closed, false: sunscreen open"
@@ -51,7 +54,8 @@ block VentilationHeat "heat input due to ventilation with closed sunblind"
     annotation (Placement(transformation(extent={{-140,-110},{-100,-70}}),
         iconTransformation(extent={{-120,-90},{-100,-70}})));
 
-  parameter Modelica.Units.SI.ReflectionCoefficient rho=0.2 "Ground reflection";
+   parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
+    "Ground reflection";
 protected
    Real factor_gv "Calculation factor";
 

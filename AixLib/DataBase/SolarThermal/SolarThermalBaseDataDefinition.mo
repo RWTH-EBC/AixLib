@@ -2,8 +2,7 @@ within AixLib.DataBase.SolarThermal;
 record SolarThermalBaseDataDefinition
   "Base Data Definition for Solar thermal collectors"
   extends Modelica.Icons.Record;
-  parameter Modelica.Units.SI.Efficiency eta_zero(max=1)
-    "Conversion factor/Efficiency at Q = 0";
+  parameter Modelica.SIunits.Efficiency eta_zero(max=1) "Conversion factor/Efficiency at Q = 0";
   parameter Real c1(unit = "W/(m.m.K)") "Loss coefficient c1";
   parameter Real c2(unit = "W/(m.m.K.K)") "Loss coefficient c2";
   annotation(Documentation(revisions="<html><ul>

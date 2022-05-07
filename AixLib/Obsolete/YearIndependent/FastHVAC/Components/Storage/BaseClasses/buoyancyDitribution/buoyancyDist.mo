@@ -7,7 +7,8 @@ partial function buoyancyDist
                  "position of the highest layer receiving buoyant mass flow";
   input Integer n
                  "total number of layers";
-  input Modelica.Units.SI.Temperature T[n] "Temperature of layers";
+  input Modelica.SIunits.Temperature T[n]
+                                         "Temperature of layers";
   output Real[n] y           "mass fraction of buoyant current received (-1 for emitting layer)";
 
 end buoyancyDist;

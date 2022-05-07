@@ -75,16 +75,18 @@ package DataBase
     record PVBaseRecord
       extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
         extends Modelica.Icons.Record;
-      parameter Modelica.Units.SI.Efficiency Eta0(min=0, max=1)
+      parameter Modelica.SIunits.Efficiency Eta0(min=0, max=1)
         "Maximum efficiency";
-      parameter Modelica.Units.SI.LinearTemperatureCoefficient TempCoeff(min=0,
-          max=1) "Temperature coeffient";
-      parameter Modelica.Units.SI.Temperature NoctTempCell
+      parameter Modelica.SIunits.LinearTemperatureCoefficient TempCoeff(min=0, max=1)
+        "Temperature coeffient";
+      parameter Modelica.SIunits.Temp_K NoctTempCell
         "Meassured cell temperature";
-      parameter Modelica.Units.SI.Temperature NoctTemp "Defined temperature";
-      parameter Modelica.Units.SI.RadiantEnergyFluenceRate NoctRadiation
+      parameter Modelica.SIunits.Temp_K NoctTemp
+        "Defined temperature";
+      parameter Modelica.SIunits.RadiantEnergyFluenceRate NoctRadiation
         "Defined radiation";
-      parameter Modelica.Units.SI.Area Area "Area of one Panel";
+      parameter Modelica.SIunits.Area Area
+        "Area of one Panel";
 
       annotation (Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>

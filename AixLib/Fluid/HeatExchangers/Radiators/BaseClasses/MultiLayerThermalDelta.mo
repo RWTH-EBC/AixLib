@@ -6,7 +6,8 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(each final C_nominal=fill(1E-2, Medium.nC), each final C_start=fill(0, Medium.nC));
 
-  parameter Modelica.Units.SI.Mass M_Radiator "Mass of radiator";
+  parameter Modelica.SIunits.Mass M_Radiator
+    "Mass of radiator";
   parameter calcT.Temp calc_dT
     "Select calculation method of excess temperature";
   parameter
@@ -17,19 +18,21 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
   parameter Real n
     "Radiator exponent"
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
-  parameter Modelica.Units.SI.Density DensitySteel=DensitySteel
+  parameter Modelica.SIunits.Density DensitySteel=DensitySteel
     "Specific density of steel, in kg/m3"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter Modelica.Units.SI.SpecificHeatCapacity CapacitySteel=CapacitySteel
+  parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel=CapacitySteel
     "Specific heat capacity of steel, in J/kgK"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter Modelica.Units.SI.ThermalConductivity LambdaSteel=LambdaSteel
+  parameter Modelica.SIunits.ThermalConductivity LambdaSteel=LambdaSteel
     "Thermal conductivity of steel, in W/mK"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter Modelica.Units.SI.Length length "Length of radiator, in m"
+  parameter Modelica.SIunits.Length length
+    "Length of radiator, in m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
 
-  parameter Modelica.Units.SI.Volume Vol_Water "Water volume inside layer";
+  parameter Modelica.SIunits.Volume Vol_Water
+    "Water volume inside layer";
   parameter Real s_eff=Type[1]
     "Radiative coefficient";
   parameter Real Q_dot_nom_i
@@ -38,9 +41,12 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
     "Nominal access temperature";
   parameter Real delta_nom
     "Nominal Radiation temperature";
-  parameter Modelica.Units.SI.Emissivity eps "Emissivity";
-  parameter Modelica.Units.SI.Area A "Area of radiator layer";
-  parameter Modelica.Units.SI.Length d "Thickness of radiator wall";
+  parameter Modelica.SIunits.Emissivity eps
+    "Emissivity";
+  parameter Modelica.SIunits.Area A
+    "Area of radiator layer";
+  parameter Modelica.SIunits.Length d
+    "Thickness of radiator wall";
 
   parameter Modelica.Fluid.Types.Dynamics initDynamicsWall=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
    "Like energyDynamics, but SteadyState leeds to same behavior as DynamicFreeInitial"

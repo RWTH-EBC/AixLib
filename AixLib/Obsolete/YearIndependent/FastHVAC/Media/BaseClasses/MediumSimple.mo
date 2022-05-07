@@ -1,11 +1,11 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Media.BaseClasses;
 record MediumSimple
-  parameter Modelica.Units.SI.SpecificHeatCapacity c
+parameter Modelica.SIunits.SpecificHeatCapacity c
     "Heat capacity of considered medium";
-  parameter Modelica.Units.SI.Density rho "Density of considered medium";
-  parameter Modelica.Units.SI.ThermalConductivity lambda
+parameter Modelica.SIunits.Density rho "Density of considered medium";
+parameter Modelica.SIunits.ThermalConductivity lambda
     "Thermal conductivity of considered medium";
-  parameter Modelica.Units.SI.DynamicViscosity eta
+parameter Modelica.SIunits.DynamicViscosity eta
     "Dynamic viscosity of considered medium";
   annotation (Documentation(info="<html><p>
   This record declares parameters that are used by models within the

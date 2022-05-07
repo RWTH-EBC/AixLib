@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers;
 model EnthalpyExchanger
   "model for a parallel membrane enthalpy exchanger"
 
@@ -22,13 +22,15 @@ model EnthalpyExchanger
   //----------------------Air Ducts------------------------------------
 
   // Geometry
-  parameter Modelica.Units.SI.Length lengthDuct
+  parameter Modelica.SIunits.Length lengthDuct
     "length of ducts in flow direction"
-    annotation (Dialog(tab="AirDucts", group="Geometry"));
-  parameter Modelica.Units.SI.Length heightDuct "height of ducts"
-    annotation (Dialog(tab="AirDucts", group="Geometry"));
-  parameter Modelica.Units.SI.Length widthDuct "width of ducts"
-    annotation (Dialog(tab="AirDucts", group="Geometry"));
+    annotation(Dialog(tab="AirDucts",group="Geometry"));
+  parameter Modelica.SIunits.Length heightDuct
+    "height of ducts"
+    annotation(Dialog(tab="AirDucts",group="Geometry"));
+  parameter Modelica.SIunits.Length widthDuct
+    "width of ducts"
+    annotation(Dialog(tab="AirDucts",group="Geometry"));
   parameter Boolean couFloArr=true
     "true: counter-flow arrangement; false: quasi-counter-flow arrangement"
      annotation(Dialog(tab="AirDucts",group="Geometry"));
@@ -51,39 +53,40 @@ model EnthalpyExchanger
      annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
 
   // pressure losses
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "nominal mass flow rate";
-  parameter Modelica.Units.SI.Pressure dp_nominal "nominal pressure drop";
+  parameter Modelica.SIunits.Pressure dp_nominal
+    "nominal pressure drop";
 
   //-----------------------Membrane-------------------------------------
 
   // Geometry
-  parameter Modelica.Units.SI.Length lengthMem=lengthDuct
-    "length of membranes in flow direction" annotation (Dialog(
-      enable=false,
-      tab="Membranes",
-      group="Geometry"));
-  parameter Modelica.Units.SI.Length widthMem=widthDuct "width of membranes"
-    annotation (Dialog(
-      enable=false,
-      tab="Membranes",
-      group="Geometry"));
-  parameter Modelica.Units.SI.Length thicknessMem "thickness of membranes"
-    annotation (Dialog(tab="Membranes", group="Geometry"));
-  parameter Modelica.Units.SI.SpecificHeatCapacity cpMem
+  parameter Modelica.SIunits.Length lengthMem=lengthDuct
+    "length of membranes in flow direction"
+    annotation(Dialog(enable=false,tab="Membranes",group="Geometry"));
+  parameter Modelica.SIunits.Length widthMem=widthDuct
+    "width of membranes"
+    annotation(Dialog(enable=false,tab="Membranes",group="Geometry"));
+  parameter Modelica.SIunits.Length thicknessMem
+    "thickness of membranes"
+    annotation(Dialog(tab="Membranes",group="Geometry"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cpMem
     "mass weighted heat capacity of membrane"
-    annotation (Dialog(tab="Membranes", group="Heat and mass transfer"));
+    annotation(Dialog(tab="Membranes",group="Heat and mass transfer"));
 
   // Membrane properties
-  parameter Modelica.Units.SI.ThermalConductivity lambdaMem
+  parameter Modelica.SIunits.ThermalConductivity lambdaMem
     "thermal conductivity of membrane"
-    annotation (Dialog(tab="Membranes", group="Heat and mass transfer"));
-  parameter Modelica.Units.SI.Density rhoMem "density of membrane"
-    annotation (Dialog(tab="Membranes", group="Others"));
+    annotation(Dialog(tab="Membranes",group="Heat and mass transfer"));
+  parameter Modelica.SIunits.Density rhoMem
+    "density of membrane"
+    annotation(Dialog(tab="Membranes",group="Others"));
 
   // calculated parameter
-  parameter Modelica.Units.SI.Area[n] surfaceAreas=fill(lengthMem*widthMem/n, n)
-    "Heat transfer areas" annotation (Dialog(enable=false, tab="calculated"));
+  parameter Modelica.SIunits.Area[n] surfaceAreas=
+    fill(lengthMem*widthMem/n,n)
+    "Heat transfer areas"
+    annotation(Dialog(enable=false,tab="calculated"));
 
   //Advanced
   parameter Boolean useConPer=true
@@ -94,9 +97,9 @@ model EnthalpyExchanger
     annotation(Dialog(tab="Advanced",enable=useConPer));
 
   // Initialization
-  parameter Modelica.Units.SI.MassFlowRate m_flow_start=m_flow_nominal
+  parameter Modelica.SIunits.MassFlowRate m_flow_start = m_flow_nominal
     "Start value for mass flow rate"
-    annotation (Evaluate=true, Dialog(tab="Initialization"));
+     annotation(Evaluate=true, Dialog(tab = "Initialization"));
   parameter Medium.AbsolutePressure p_a1_start=Medium.p_default
       "Start value of pressure at port a1"
     annotation(Dialog(tab = "Initialization"));
@@ -116,9 +119,9 @@ model EnthalpyExchanger
   parameter Medium.Temperature T_start=Medium.T_default
     "Start value of temperature"
     annotation(Evaluate=true, Dialog(tab = "Initialization"));
-  parameter Modelica.Units.SI.Pressure p_start=Medium.p_default
+  parameter Modelica.SIunits.Pressure p_start = Medium.p_default
     "reference pressure"
-    annotation (Evaluate=true, Dialog(tab="Initialization"));
+    annotation(Evaluate=true, Dialog(tab = "Initialization"));
   parameter Medium.MassFraction X_start[Medium.nX](
        quantity=Medium.substanceNames)=Medium.X_default
       "Start value of mass fractions m_i/m"
@@ -127,17 +130,18 @@ model EnthalpyExchanger
        quantity=Medium.extraPropertiesNames)=fill(0, Medium.nC)
       "Start value of trace substances"
     annotation (Dialog(tab="Initialization", enable=Medium.nC > 0));
-  parameter Modelica.Units.SI.Temperature T_start_m
-    "membrane temperature start value" annotation (Dialog(tab="Initialization"));
-  parameter Modelica.Units.SI.TemperatureDifference dT_start
+  parameter Modelica.SIunits.Temperature T_start_m
+    "membrane temperature start value"
+    annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.SIunits.TemperatureDifference dT_start
     "start value for temperature between air ducts"
-    annotation (Dialog(tab="Initialization"));
-  parameter Modelica.Units.SI.PartialPressure p_start_m
+    annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.SIunits.PartialPressure p_start_m
     "start value for mean partial pressure at membrane's surface"
-    annotation (Dialog(tab="Initialization"));
-  parameter Modelica.Units.SI.PartialPressure dp_start
+    annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.SIunits.PartialPressure dp_start
     "Start value for partial pressure gradient over membrane"
-    annotation (Dialog(tab="Initialization"));
+    annotation(Dialog(tab = "Initialization"));
 
   BaseClasses.AirDuct airDuct2(
     redeclare final package Medium=Medium,
@@ -202,8 +206,8 @@ model EnthalpyExchanger
     final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{-36,-28},{22,28}})));
 
-  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)")
-    if not useConPer "membrane permeability in Barrer"
+  Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)") if
+       not useConPer "membrane permeability in Barrer"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
 //   Modelica.Blocks.Interfaces.RealInput[n] coeCroCouSens if not couFloArr
@@ -247,8 +251,8 @@ protected
     final hCons2=airDuct2.heatTransfer.hCons,
     final aspRatCroToTot=aspRatCroToTot,
     final cp1=Medium.specificHeatCapacityCp(airDuct1.states[1]),
-    final cp2=Medium.specificHeatCapacityCp(airDuct2.states[1]))
-      if not couFloArr;
+    final cp2=Medium.specificHeatCapacityCp(airDuct2.states[1])) if
+         not couFloArr;
   BaseClasses.MassTransfer.CrossFlowReduction masRedFac(
     final n=n,
     final nParallel=nParallel,
@@ -258,8 +262,8 @@ protected
     final thicknessMem=thicknessMem,
     final kCons1=airDuct1.massTransfer.kCons,
     final kCons2=airDuct2.massTransfer.kCons,
-    final aspRatCroToTot=aspRatCroToTot)
-      if not couFloArr;
+    final aspRatCroToTot=aspRatCroToTot) if
+         not couFloArr;
 
 equation
   if useConPer then

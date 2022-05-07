@@ -1,10 +1,10 @@
 within AixLib.ThermalZones.HighOrder.Components.DryAir;
 model VarAirExchange "Heat flow caused by air exchange"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Modelica.Units.SI.Volume V=50 "Volume of the room";
-  parameter Modelica.Units.SI.SpecificHeatCapacity c=1000
+  parameter Modelica.SIunits.Volume V = 50 "Volume of the room";
+  parameter Modelica.SIunits.SpecificHeatCapacity c = 1000
     "Specific heat capacity of air";
-  parameter Modelica.Units.SI.Density rho=1.25 "Air density";
+  parameter Modelica.SIunits.Density rho = 1.25 "Air density";
   Modelica.Blocks.Interfaces.RealInput ventRate(unit="1/h")
                                                annotation (Placement(
         transformation(extent={{-100,-54},{-80,-74}})));

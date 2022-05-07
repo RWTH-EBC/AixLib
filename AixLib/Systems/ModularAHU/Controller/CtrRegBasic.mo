@@ -1,20 +1,18 @@
-﻿within AixLib.Systems.ModularAHU.Controller;
+within AixLib.Systems.ModularAHU.Controller;
 block CtrRegBasic "Controller for heating and cooling registers"
   //Boolean choice;
 
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.Units.SI.Temperature TflowSet=293.15
-    "Flow temperature set point of consumer"
-    annotation (Dialog(enable=useExternalTset == false));
+  parameter Modelica.SIunits.Temperature TflowSet = 293.15 "Flow temperature set point of consumer" annotation (Dialog(enable=
+          useExternalTset == false));
   parameter Real k(min=0, unit="1") = 0.02 "Gain of controller";
-  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 130
+  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
-  parameter Modelica.Units.SI.Time Td(min=0) = 4
-    "Time constant of Derivative block";
+  parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
   parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
-  parameter Modelica.Blocks.Types.Init initType=.Modelica.Blocks.Types.Init.InitialState
+  parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation (Dialog(group="PID"));
+    annotation(Dialog(group="PID"));
   parameter Boolean reverseAction = true
     "Set to true if a heating coil, and false if a cooling coil is controlled";
   parameter Real xi_start=0

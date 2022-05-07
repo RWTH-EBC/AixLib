@@ -1,8 +1,8 @@
 within AixLib.Fluid.FMI.ExportContainers.Validation.FMUs;
-block ThermalZoneSimpleAir3 "Validation of simple thermal zone"
-  extends AixLib.Fluid.FMI.ExportContainers.Validation.FMUs.ThermalZoneAir1(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir(extraPropertiesNames={"CO2", "VOC", "CH2O"}));
-  annotation (Documentation(info="<html>
+ block ThermalZoneSimpleAir3 "Validation of simple thermal zone"
+   extends AixLib.Fluid.FMI.ExportContainers.Validation.FMUs.ThermalZoneAir1(
+     redeclare package Medium = Modelica.Media.Air.SimpleAir(extraPropertiesNames={"CO2", "VOC", "CH2O"}));
+   annotation (Documentation(info="<html>
  <p>
  This example validates that
  <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.ThermalZone\">
@@ -10,7 +10,7 @@ block ThermalZoneSimpleAir3 "Validation of simple thermal zone"
  </a>
  exports correctly as an FMU.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  May 03, 2016, by Thierry S. Nouidui:<br/>
@@ -18,7 +18,7 @@ block ThermalZoneSimpleAir3 "Validation of simple thermal zone"
  </li>
  </ul>
  </html>"),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Validation/FMUs/ThermalZoneSimpleAir3.mos"
-        "Export FMU"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end ThermalZoneSimpleAir3;
+ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Validation/FMUs/ThermalZoneSimpleAir3.mos"
+         "Export FMU"), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end ThermalZoneSimpleAir3;

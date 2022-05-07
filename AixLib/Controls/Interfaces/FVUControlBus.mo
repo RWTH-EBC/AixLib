@@ -24,23 +24,23 @@ expandable connector FVUControlBus
  Real freshAirDamperOpening(min=0,max=1)
    "Relative opening of thefresh air damper (0..1)";
 
-  Modelica.Units.SI.ThermodynamicTemperature roomTemperature
-    "Room air temperature measurement";
+ Modelica.SIunits.ThermodynamicTemperature roomTemperature
+   "Room air temperature measurement";
 
-  Modelica.Units.SI.ThermodynamicTemperature outdoorTemperature
-    "Outdoor air temperature measurement";
+ Modelica.SIunits.ThermodynamicTemperature outdoorTemperature
+   "Outdoor air temperature measurement";
 
-  Modelica.Units.SI.ThermodynamicTemperature roomSetTemperature
-    "Room air set temperature measurement";
+  Modelica.SIunits.ThermodynamicTemperature roomSetTemperature
+   "Room air set temperature measurement";
 
  Real co2Concentration(min=0)
    "CO2 concentration measurement in ppm";
 
-  Modelica.Units.SI.ThermodynamicTemperature mixTemperature
-    "Temperature measurement of the mixed circulation and fresh air streams";
+ Modelica.SIunits.ThermodynamicTemperature mixTemperature
+   "Temperature measurement of the mixed circulation and fresh air streams";
 
-  Modelica.Units.SI.ThermodynamicTemperature supplyTemperature
-    "Temperature measurement of the supply air streams";
+ Modelica.SIunits.ThermodynamicTemperature supplyTemperature
+   "Temperature measurement of the supply air streams";
 
 
 

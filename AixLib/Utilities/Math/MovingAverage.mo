@@ -1,6 +1,6 @@
 within AixLib.Utilities.Math;
 model MovingAverage
-  parameter Modelica.Units.SI.Time aveTime=24*3600 "Time span for average";
+  parameter Modelica.SIunits.Time aveTime=24*3600 "Time span for average";
   Modelica.Blocks.Interfaces.RealInput u "Continuous input signal"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y "Continuous output signal"

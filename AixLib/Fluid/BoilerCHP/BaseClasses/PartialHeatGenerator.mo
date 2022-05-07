@@ -2,22 +2,22 @@ within AixLib.Fluid.BoilerCHP.BaseClasses;
 partial model PartialHeatGenerator "Partial model for heat generators"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
-  parameter Modelica.Units.SI.Time tau=1
+  parameter Modelica.SIunits.Time tau=1
     "Time constant of the temperature sensors at nominal flow rate"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
-  parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
+  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Advanced", group="Initialization"));
   parameter Boolean transferHeat=false
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
-  parameter Modelica.Units.SI.Temperature TAmb=Medium.T_default
+  parameter Modelica.SIunits.Temperature TAmb=Medium.T_default
     "Fixed ambient temperature for heat transfer"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
-  parameter Modelica.Units.SI.Time tauHeaTra=1200
+  parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer, default 20 minutes"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
@@ -30,9 +30,8 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     "Start value of pressure"
     annotation (Dialog(tab="Advanced", group="Initialization"));
 
-  parameter Modelica.Units.SI.PressureDifference dp_nominal=m_flow_nominal^2*a/
-      (rho_default^2) "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.SIunits.PressureDifference dp_nominal=m_flow_nominal ^ 2 * a / (rho_default ^ 2)
+    "Pressure drop at nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
@@ -99,11 +98,8 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final dp_nominal=dp_nominal)
     "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
-  parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
-      Medium.p_default,
-      Medium.T_default,
-      Medium.X_default) "Density used for parameterization of pressure curve"
-    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Modelica.SIunits.Density rho_default = Medium.density_pTX(Medium.p_default, Medium.T_default, Medium.X_default)
+  "Density used for parameterization of pressure curve" annotation (Dialog(tab="Advanced", group="Pressure drop"));
 
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,

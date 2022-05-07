@@ -1,21 +1,21 @@
 within AixLib.Utilities.Math.Functions;
-function smoothLimit
-  "Once continuously differentiable approximation to the limit function"
-  extends Modelica.Icons.Function;
-  input Real x "Variable";
-  input Real l "Low limit";
-  input Real u "Upper limit";
-  input Real deltaX "Width of transition interval";
-  output Real y "Result";
-
-protected
-  Real cor;
-algorithm
-  cor :=deltaX/10;
-  y := AixLib.Utilities.Math.Functions.smoothMax(x,l+deltaX,cor);
-  y := AixLib.Utilities.Math.Functions.smoothMin(y,u-deltaX,cor);
-  annotation (smoothOrder = 1,
-  Documentation(info="<html>
+ function smoothLimit
+   "Once continuously differentiable approximation to the limit function"
+   extends Modelica.Icons.Function;
+   input Real x "Variable";
+   input Real l "Low limit";
+   input Real u "Upper limit";
+   input Real deltaX "Width of transition interval";
+   output Real y "Result";
+ 
+ protected
+   Real cor;
+ algorithm
+   cor :=deltaX/10;
+   y := AixLib.Utilities.Math.Functions.smoothMax(x,l+deltaX,cor);
+   y := AixLib.Utilities.Math.Functions.smoothMin(y,u-deltaX,cor);
+   annotation (smoothOrder = 1,
+   Documentation(info="<html>
  <p>
  Once continuously differentiable approximation to the <code>limit(.,.)</code> function.
  The output is bounded to be in <i>[l, u]</i>.
@@ -25,7 +25,7 @@ algorithm
  <a href=\"modelica://AixLib.Utilities.Math.Examples.SmoothMin\">
  AixLib.Utilities.Math.Examples.SmoothMin</a>.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  March 12, 2015, by Filip Jorissen:<br/>
@@ -44,6 +44,6 @@ algorithm
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end smoothLimit;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end smoothLimit;

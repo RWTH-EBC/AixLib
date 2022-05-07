@@ -2,7 +2,7 @@ within AixLib.DataBase.CHP.CHPDataSimple;
 record CHPBaseDataDefinition "Basic CHP data"
 extends Modelica.Icons.Record;
 
-  import      Modelica.Units.SI;
+  import SI = Modelica.SIunits;
 
   parameter SI.Volume vol[:] "Water volume of CHP";
   parameter Real data_CHP[:,5];

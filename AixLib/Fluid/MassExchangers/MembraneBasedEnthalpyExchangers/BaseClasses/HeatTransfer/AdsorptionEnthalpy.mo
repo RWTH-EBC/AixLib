@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
 model AdsorptionEnthalpy
   "model that calculates the adsorption enthalpy based on the Dubinin-Astakhov equation"
 
@@ -9,7 +9,7 @@ model AdsorptionEnthalpy
     "material specific asdoprtion characteristic constant";
   parameter Real n
     "material specific asdoprtion characteristic constant";
-  parameter Modelica.Units.SI.SpecificVolume v_0(min=0)
+  parameter Modelica.SIunits.SpecificVolume v_0(min=0)
     "micropore volume per unit mass of absorbent";
 
   //calculation of adsorption heat
@@ -25,18 +25,22 @@ protected
 
   //============ variables =====================
 public
-  Modelica.Units.SI.MassFraction w(min=0)
+  Modelica.SIunits.MassFraction w(min=0)
     "actual water uptake of adsorbent in kg/kg";
-  Modelica.Units.SI.MassFraction w_0(min=0)
+  Modelica.SIunits.MassFraction w_0(min=0)
     "maximum water uptake of adsorbent in kg/kg (material specific)";
-  Modelica.Units.SI.Density rho "density of water vapour";
+  Modelica.SIunits.Density rho
+    "density of water vapour";
   Real dw0_dT(unit="1/K")
     "derivative of maximum water uptake by temperature";
-  Modelica.Units.SI.SpecificEnthalpy dh_v "vaporization enthalpy of water";
-  Modelica.Units.SI.SpecificEnthalpy q_st "adsorption enthalpy of water";
+  Modelica.SIunits.SpecificEnthalpy dh_v
+    "vaporization enthalpy of water";
+  Modelica.SIunits.SpecificEnthalpy q_st
+    "adsorption enthalpy of water";
 
 
-  input Modelica.Units.SI.Temperature T "Temperature in K";
+  input Modelica.SIunits.Temperature T
+    "Temperature in K";
   input Real phi(min=0.01,max=0.99)
     "relative Humidity, range:0.01...0.99";
   Modelica.Blocks.Interfaces.RealOutput dhAds

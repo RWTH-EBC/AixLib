@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP;
+within AixLib.Fluid.BoilerCHP;
 model CHPNoControl
   "Table based CHP model without an internal controller"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=1e10, vol(
@@ -12,9 +12,9 @@ model CHPNoControl
   parameter Real minCapacity = 0
     "Minimum allowable working capacity (unit [-])"
     annotation(Dialog(group="Unit properties"));
-  parameter Modelica.Units.SI.ThermalConductance G=0.003*param.data_CHP[end, 3]
-      /50 "Constant thermal conductance to environment(G=Q_loss/dT)";
-  parameter Modelica.Units.SI.HeatCapacity C=1.5*param.data_CHP[end, 3]
+  parameter Modelica.SIunits.ThermalConductance G=0.003*param.data_CHP[end,3]/50
+    "Constant thermal conductance to environment(G=Q_loss/dT)";
+  parameter Modelica.SIunits.HeatCapacity C=1.5*param.data_CHP[end,3]
     "Heat capacity of metal (J/K)";
 
   Modelica.Blocks.Interfaces.RealInput u_rel(

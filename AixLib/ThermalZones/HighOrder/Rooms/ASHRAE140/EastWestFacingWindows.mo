@@ -66,8 +66,7 @@ model EastWestFacingWindows "windows facing south and west"
       outside=true,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()));
 
-  parameter Modelica.Units.SI.Area Win_Area=12 "Window area " annotation (
-      Dialog(
+  parameter Modelica.SIunits.Area Win_Area=12 "Window area " annotation (Dialog(
       group="Windows",
       descriptionLabel=true,
       enable=withWindow1));

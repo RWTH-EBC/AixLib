@@ -6,75 +6,75 @@ model Attic_Ro2Lf5
     final room_V=roof_width1*roof_width2*sin(alfa)*0.5*length);
 
   //////////room geometry
-  parameter Modelica.Units.SI.Length length=2 "length " annotation (Dialog(
+  parameter Modelica.SIunits.Length length=2 "length " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room1_length=2 "l1 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room1_length=2 "l1 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room2_length=2 "l2 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room2_length=2 "l2 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room3_length=2 "l3 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room3_length=2 "l3 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room4_length=2 "l4 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room4_length=2 "l4 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room5_length=2 "l5 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room5_length=2 "l5 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true));
-  parameter Modelica.Units.SI.Length width=2 "width " annotation (Dialog(
+  parameter Modelica.SIunits.Length width=2 "width " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room1_width=2 "w1 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room1_width=2 "w1 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room2_width=2 "w2 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room2_width=2 "w2 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room3_width=2 "w3 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room3_width=2 "w3 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room4_width=2 "w4 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room4_width=2 "w4 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length room5_width=2 "w5 " annotation (Dialog(
+  parameter Modelica.SIunits.Length room5_width=2 "w5 " annotation (Dialog(
       group="Dimensions",
       absoluteWidth=6,
       descriptionLabel=true));
-  parameter Modelica.Units.SI.Length roof_width1=2 "wRO1" annotation (Dialog(
+  parameter Modelica.SIunits.Length roof_width1=2 "wRO1" annotation (Dialog(
       group="Dimensions",
       absoluteWidth=28,
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.Units.SI.Length roof_width2=2 "wRO2" annotation (Dialog(
+  parameter Modelica.SIunits.Length roof_width2=2 "wRO2" annotation (Dialog(
       group="Dimensions",
       absoluteWidth=28,
       descriptionLabel=true));
-  parameter Modelica.Units.SI.Angle alfa=Modelica.Units.Conversions.from_deg(90)
-    "alfa" annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.SIunits.Angle alfa=Modelica.SIunits.Conversions.from_deg(
+      90) "alfa" annotation (Dialog(group="Dimensions", descriptionLabel=true));
   // Outer walls properties
   parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
@@ -86,7 +86,7 @@ model Attic_Ro2Lf5
       group="Windows",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
-  parameter Modelica.Units.SI.Area windowarea_RO1=0 "Window area" annotation (
+  parameter Modelica.SIunits.Area windowarea_RO1=0 "Window area" annotation (
       Dialog(
       tab="Outer walls",
       group="Windows",
@@ -99,7 +99,7 @@ model Attic_Ro2Lf5
       group="Windows",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
-  parameter Modelica.Units.SI.Area windowarea_RO2=0 "Window area" annotation (
+  parameter Modelica.SIunits.Area windowarea_RO2=0 "Window area" annotation (
       Dialog(
       tab="Outer walls",
       group="Windows",
@@ -413,9 +413,9 @@ model Attic_Ro2Lf5
         transformation(extent={{-119.5,-10},{-99.5,10}}), iconTransformation(
           extent={{-119.5,10},{-99.5,30}})));
 protected
-  parameter Modelica.Units.SI.Length p=(width + roof_width2 + roof_width1)*0.5;
+  parameter Modelica.SIunits.Length p=(width + roof_width2 + roof_width1)*0.5;
   // semi perimeter
-  parameter Modelica.Units.SI.Area VerticalWall_Area=sqrt(p*(p - width)*(p -
+  parameter Modelica.SIunits.Area VerticalWall_Area=sqrt(p*(p - width)*(p -
       roof_width2)*(p - roof_width1));
   // Heron's formula
 

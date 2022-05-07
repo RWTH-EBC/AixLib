@@ -6,9 +6,9 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
   // a0 to a6 are experimental constants VDI 6007 Part 3 page 20
 
   //Calculating the correction factor for direct solar radiation
-  Modelica.Units.SI.ReflectionCoefficient[n] xn2_Dir
+  Modelica.SIunits.ReflectionCoefficient[n] xn2_Dir
     "Calculation factor to simplify equations";
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_2Dir
+  Modelica.SIunits.TransmissionCoefficient[n] tau_2Dir
     "Energetic degree of transmission for second pane";
   Real[n] q21_Dir
     "Coefficient of heat transfer for exterior pane of double pane window";
@@ -18,9 +18,9 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
     "Overall coefficient of heat transfer for double pane window";
 
   //diffuse clear
-  Modelica.Units.SI.ReflectionCoefficient[n] xn2_DifCle
+  Modelica.SIunits.ReflectionCoefficient[n] xn2_DifCle
     "Calculation factor to simplify equations";
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_2DifCle
+  Modelica.SIunits.TransmissionCoefficient[n] tau_2DifCle
     "Energetic degree of transmission for second pane";
   Real[n] q21_DifCle
     "Coefficient of heat transfer for exterior pane of double pane window";
@@ -30,9 +30,9 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
     "Overall coefficient of heat transfer for double pane window";
 
   //ground
-  Modelica.Units.SI.ReflectionCoefficient[n] xn2_Gro
+  Modelica.SIunits.ReflectionCoefficient[n] xn2_Gro
     "Calculation factor to simplify equations";
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_2Gro
+  Modelica.SIunits.TransmissionCoefficient[n] tau_2Gro
     "Energetic degree of transmission for second pane";
   Real[n] q21_Gro
     "Coefficient of heat transfer for exterior pane of double pane window";
@@ -41,39 +41,44 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
   Real[n] qSek2_Gro
     "Overall coefficient of heat transfer for double pane window";
 protected
-  parameter Modelica.Units.SI.TransmissionCoefficient g_Dir0=taue_Dir0 + q210
-       + q220 "Reference vertical parallel transmission coefficient for direct radiation
+  parameter Modelica.SIunits.TransmissionCoefficient g_Dir0=taue_Dir0+q210+q220
+  "Reference vertical parallel transmission coefficient for direct radiation
     for double pane window";
-  parameter Modelica.Units.SI.TransmissionCoefficient q210=(1 - rho_1Dir0 -
-      0.907*a0)*(1 + (0.907*a0*rho_1Dir0/(1 - rho_1Dir0^2)))*UWin/25 "Calculation factor for g_Dir0. Calculated like q21 but for vertical
+  parameter Modelica.SIunits.TransmissionCoefficient q210=
+    (1-rho_1Dir0-0.907*a0)*(1+(0.907*a0*rho_1Dir0/(1-rho_1Dir0^2)))*UWin/25
+    "Calculation factor for g_Dir0. Calculated like q21 but for vertical
     incidence";
-  parameter Modelica.Units.SI.TransmissionCoefficient q220=(1 - rho_1Dir0 -
-      0.907*a0)*(0.907*a0/(1 - rho_1Dir0^2))*(1 - UWin/7.7) "Calculation factor for g_Dir0. Calculated like q21 but for vertical
+  parameter Modelica.SIunits.TransmissionCoefficient q220=
+    (1-rho_1Dir0-0.907*a0)*(0.907*a0/(1-rho_1Dir0^2))*(1-UWin/7.7)
+    "Calculation factor for g_Dir0. Calculated like q21 but for vertical
     incidence";
 
-  parameter Modelica.Units.SI.TransmissionCoefficient taue_Dir0=(a0*0.907)^2/(1
-       - rho_1Dir0^2)
+  parameter Modelica.SIunits.TransmissionCoefficient taue_Dir0=
+    (a0*0.907)^2/(1-rho_1Dir0^2)
     "Reference vertical parallel transmission coefficient for direct radiation";
-  parameter Modelica.Units.SI.ReflectionCoefficient rho_1Dir0=rho_11Dir0 + (((1
-       - rho_11Dir0)*0.907)^2*rho_11Dir0)/(1 - (rho_11Dir0*0.907)^2) "Calculation factor for g_Dir0. Calculated like rho_1_dir but for vertical
+  parameter Modelica.SIunits.ReflectionCoefficient rho_1Dir0=
+    rho_11Dir0+(((1-rho_11Dir0)*0.907)^2*rho_11Dir0)/
+    (1-(rho_11Dir0*0.907)^2)
+    "Calculation factor for g_Dir0. Calculated like rho_1_dir but for vertical
     incidence";
-  parameter Modelica.Units.SI.ReflectionCoefficient rho_11Dir0=(1 - a0)/(2 - (1
-       - a0)) "Calculation factor for g_Dir0. Calculated like rho_11_dir but for vertical
+  parameter Modelica.SIunits.ReflectionCoefficient rho_11Dir0=(1-a0)/(2-(1-a0))
+  "Calculation factor for g_Dir0. Calculated like rho_11_dir but for vertical
   incidence";
-  parameter Modelica.Units.SI.ReflectionCoefficient xn2_DifCov=1 - rho_1DifCov^
-      2 "Calculation factor to simplify equations";
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_2DifCov=(tau_1DifCov^
-      2)/xn2_DifCov "Energetic degree of transmission for second pane";
-  parameter Modelica.Units.SI.Emissivity a_1DifCov=1 - tau_1DifCov -
-      rho_1DifCov "Degree of absorption for single pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer q21_DifCov=a_1DifCov*(1
-       + (tau_1DifCov*rho_1DifCov/xn2_DifCov))*UWin/25
+  parameter Modelica.SIunits.ReflectionCoefficient xn2_DifCov=1-rho_1DifCov^2
+    "Calculation factor to simplify equations";
+  parameter Modelica.SIunits.TransmissionCoefficient tau_2DifCov=
+    (tau_1DifCov^2)/xn2_DifCov
+    "Energetic degree of transmission for second pane";
+  parameter Modelica.SIunits.Emissivity a_1DifCov=1-tau_1DifCov-rho_1DifCov
+    "Degree of absorption for single pane window";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer q21_DifCov=
+    a_1DifCov*(1+(tau_1DifCov*rho_1DifCov/xn2_DifCov))*UWin/25
     "Coefficient of heat transfer for exterior pane of double pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer q22_DifCov=a_1DifCov*(
-      tau_1DifCov/xn2_DifCov)*(1 - (UWin/7.7))
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer q22_DifCov=
+    a_1DifCov*(tau_1DifCov/xn2_DifCov)*(1-(UWin/7.7))
     "Coefficient of heat transfer for interior pane of double pane window";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer qSek2_DifCov=q21_DifCov
-       + q22_DifCov
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer qSek2_DifCov=
+    q21_DifCov+q22_DifCov
     "Overall coefficient of heat transfer for double pane window";
 
 equation

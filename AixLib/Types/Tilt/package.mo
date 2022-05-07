@@ -2,9 +2,11 @@ within AixLib.Types;
 package Tilt "List of possible constant values for surface tilt"
   extends Modelica.Icons.TypesPackage;
 
-constant Modelica.Units.SI.Angle Ceiling=0 "Tilt for ceiling";
-constant Modelica.Units.SI.Angle Floor=Modelica.Constants.pi "Tilt for floor";
-constant Modelica.Units.SI.Angle Wall=Modelica.Constants.pi/2 "Tilt for wall";
+  constant Modelica.SIunits.Angle Ceiling = 0 "Tilt for ceiling";
+  constant Modelica.SIunits.Angle Floor =   Modelica.Constants.pi
+  "Tilt for floor";
+  constant Modelica.SIunits.Angle Wall =    Modelica.Constants.pi/2
+  "Tilt for wall";
 
 
 annotation(preferredView="info", Documentation(info="<html>
@@ -37,3 +39,4 @@ First implementation.
 </ul>
 </html>"));
 end Tilt;
+

@@ -1,13 +1,13 @@
 within AixLib.Utilities.Time.Validation;
-model CalendarTimeMonthsPlus
-  "Validation model for the calendar time model with start time slightly higher than the full hour"
-  extends AixLib.Utilities.Time.Validation.CalendarTimeMonths;
-
-  annotation (
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Time/Validation/CalendarTimeMonthsPlus.mos"
-        "Simulate and plot"),
-  Documentation(
-    info="<html>
+ model CalendarTimeMonthsPlus
+   "Validation model for the calendar time model with start time slightly higher than the full hour"
+   extends AixLib.Utilities.Time.Validation.CalendarTimeMonths;
+ 
+   annotation (
+     __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/Time/Validation/CalendarTimeMonthsPlus.mos"
+         "Simulate and plot"),
+   Documentation(
+     info="<html>
  <p>
  This model validates the use of the
  <a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">
@@ -18,7 +18,7 @@ model CalendarTimeMonthsPlus
  except that the start and end time are different.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  September 14, 2016, by Michael Wetter:<br/>
@@ -26,6 +26,6 @@ revisions="<html>
  </li>
  </ul>
  </html>"),
-    experiment(StartTime=172801, Tolerance=1e-6, StopTime=345601),
-  __Dymola_LockedEditing="Model from IBPSA");
-end CalendarTimeMonthsPlus;
+     experiment(StartTime=172801, Tolerance=1e-6, StopTime=345601), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end CalendarTimeMonthsPlus;

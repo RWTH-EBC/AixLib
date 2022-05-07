@@ -1,17 +1,17 @@
 within AixLib.Utilities.Math.Functions;
-function integerReplicator "Replicates integer signals"
-  extends Modelica.Icons.Function;
-  input Integer nout "Number of outputs";
-  input Integer u "Integer input signal";
-  output Integer y[nout] "Integer output signals";
-
-algorithm
-  y :=fill(u, nout);
-
-  annotation (Documentation(info="<html>
+ function integerReplicator "Replicates integer signals"
+   extends Modelica.Icons.Function;
+   input Integer nout "Number of outputs";
+   input Integer u "Integer input signal";
+   output Integer y[nout] "Integer output signals";
+ 
+ algorithm
+   y :=fill(u, nout);
+ 
+   annotation (Documentation(info="<html>
  <p>This function replicates the integer input signal to an array of
  <code>nout</code> identical output signals. </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  November 28, 2013, by Marcus Fuchs:<br/>
@@ -20,6 +20,6 @@ algorithm
  AixLib.Utilities.Math.IntegerReplicator</a>.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end integerReplicator;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end integerReplicator;

@@ -13,24 +13,28 @@ partial model PartialCompressor
 
   // Definition of parameters describing general options
   //
-  parameter Modelica.Units.SI.Volume VDis(min=0) = 13e-6
+  parameter Modelica.SIunits.Volume
+    VDis(min=0) = 13e-6
     "Displacement volume of the compressor"
-    annotation (Dialog(tab="General", group="Geometry"));
-  parameter Modelica.Units.SI.Efficiency epsRef(
-    min=0,
-    max=1,
-    nominal=0.05) = 0.04 "Ratio of the real and the ideal displacement volume"
-    annotation (Dialog(tab="General", group="Geometry"));
-  parameter Modelica.Units.SI.Diameter diameterInl(min=0) = 12e-3
+    annotation(Dialog(tab="General",group="Geometry"));
+  parameter Modelica.SIunits.Efficiency
+    epsRef(min=0, max=1, nominal=0.05) = 0.04
+    "Ratio of the real and the ideal displacement volume"
+    annotation(Dialog(tab="General",group="Geometry"));
+  parameter Modelica.SIunits.Diameter
+    diameterInl(min=0) = 12e-3
     "Diameter of the pipe at compressor's inlet"
-    annotation (Dialog(tab="General", group="Geometry"));
-  parameter Modelica.Units.SI.Diameter diameterOut(min=0) = 8e-3
+    annotation(Dialog(tab="General",group="Geometry"));
+  parameter Modelica.SIunits.Diameter
+    diameterOut(min=0) = 8e-3
     "Diameter of the pipe at compressor's outlet"
-    annotation (Dialog(tab="General", group="Geometry"));
+    annotation(Dialog(tab="General",group="Geometry"));
 
-  parameter Modelica.Units.SI.Frequency rotSpeMax(min=0) = 120
-    "Maximal rotational speed executable by the compressor" annotation (Dialog(
-        tab="General", group="Compressor's characterisitcs"), HideResult=true);
+  parameter Modelica.SIunits.Frequency
+    rotSpeMax(min=0) = 120
+    "Maximal rotational speed executable by the compressor"
+    annotation(Dialog(tab="General",group="Compressor's characterisitcs"),
+               HideResult=true);
   parameter Real
     piPreMax(min=1, unit="1") = 15
     "Maximal pressure ratio executable by the compressor"
@@ -40,9 +44,10 @@ partial model PartialCompressor
   parameter Boolean useInpFil = true
     "= true, if transient behaviour of rotational speed is computed"
     annotation(Dialog(group="Transient behaviour"));
-  parameter Modelica.Units.SI.Time risTim=0.5
+  parameter Modelica.SIunits.Time risTim = 0.5
     "Time until rotational speed reaches 99.6 % of its set value"
-    annotation (Dialog(enable=useInpFil, group="Transient behaviour"));
+    annotation(Dialog(enable = useInpFil,
+               group="Transient behaviour"));
 
   // Definition of models describing efficiencies
   //
@@ -122,48 +127,45 @@ partial model PartialCompressor
     annotation(Dialog(tab = "Heat losses",group="General",
                enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
                         then true else false));
-  parameter Modelica.Units.SI.Mass mWal=2.5 "Mass of the fictitious wall"
-    annotation (Dialog(
-      tab="Heat losses",
-      group="Geometry",
-      enable=if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
-           then true else false));
-  parameter Modelica.Units.SI.SpecificHeatCapacity cpWal=450
-    "Specific heat capacity of the fictitious wall" annotation (Dialog(
-      tab="Heat losses",
-      group="Geometry",
-      enable=if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
-           then true else false));
-  parameter Modelica.Units.SI.ThermalConductance kAMeaInl=25 "Effective mean thermal conductance between medium and fictitious wall 
-    at inlet" annotation (Dialog(
-      tab="Heat losses",
-      group="Thermal conductances",
-      enable=if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
-           then true else false));
-  parameter Modelica.Units.SI.ThermalConductance kAMeaOut=35 "Effective mean thermal conductance between medium and fictitious wall 
-    at outlet" annotation (Dialog(
-      tab="Heat losses",
-      group="Thermal conductances",
-      enable=if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
-           then true else false));
-  parameter Modelica.Units.SI.ThermalConductance kAMeaAmb=5 "Effective mean thermal conductance coefficient between fictitious wall 
-    and ambient" annotation (Dialog(
-      tab="Heat losses",
-      group="Thermal conductances",
-      enable=if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
-           then true else false));
+  parameter Modelica.SIunits.Mass mWal=2.5
+    "Mass of the fictitious wall"
+    annotation(Dialog(tab = "Heat losses",group="Geometry",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
+  parameter Modelica.SIunits.SpecificHeatCapacity cpWal=450
+    "Specific heat capacity of the fictitious wall"
+    annotation(Dialog(tab = "Heat losses",group="Geometry",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
+  parameter Modelica.SIunits.ThermalConductance kAMeaInl=25
+    "Effective mean thermal conductance between medium and fictitious wall 
+    at inlet"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
+  parameter Modelica.SIunits.ThermalConductance kAMeaOut=35
+    "Effective mean thermal conductance between medium and fictitious wall 
+    at outlet"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
+  parameter Modelica.SIunits.ThermalConductance kAMeaAmb=5
+    "Effective mean thermal conductance coefficient between fictitious wall 
+    and ambient"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Boolean iniTWal0=true
     "= true, if wall is initialised at fixed temperature; Otherwise, steady state
     initialisation"
     annotation(Dialog(tab = "Heat losses",group="Initialisation",
                enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
                         then true else false));
-  parameter Modelica.Units.SI.Temperature TWal0=293.15
-    "Temperature of wall at initialisation" annotation (Dialog(
-      tab="Heat losses",
-      group="Initialisation",
-      enable=if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
-           then true else false));
+  parameter Modelica.SIunits.Temperature TWal0=293.15
+    "Temperature of wall at initialisation"
+    annotation(Dialog(tab = "Heat losses",group="Initialisation",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
 
   // Definition of parameters deschribing assumptions
   //
@@ -178,18 +180,20 @@ partial model PartialCompressor
 
   // Definition of parameters describing advanced options
   //
-  parameter Modelica.Units.SI.PressureDifference dp_start(displayUnit="Pa") = -20e5
+  parameter Modelica.SIunits.PressureDifference
+    dp_start(displayUnit="Pa") = -20e5
     "Guess value of compressor's dp = port_a.p - port_b.p"
-    annotation (Dialog(tab="Advanced", group="General"));
+    annotation(Dialog(tab = "Advanced",group="General"));
   parameter Medium.MassFlowRate m_flow_start = 0.5*m_flow_nominal
     "Guess value of compressor's m_flow = port_a.m_flowr"
     annotation(Dialog(tab = "Advanced",group="General"));
   parameter Medium.MassFlowRate m_flow_small = 1e-6*m_flow_nominal
     "Small mass flow rate for regularization of compressor's zero flow"
     annotation(Dialog(tab = "Advanced",group="General"));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
-    annotation (Dialog(tab="Advanced", group="General"), HideResult=true);
+    annotation(Dialog(tab="Advanced",group="General"),
+               HideResult=true);
 
   // Definition of parameters describing diagnostics
   //
@@ -210,15 +214,18 @@ partial model PartialCompressor
 
   // Definition of parameters used for initialisation
   //
-  parameter Modelica.Units.SI.Frequency rotSpe0=60
-    "Compressor's rotational spped at initialisation" annotation (Dialog(tab=
-          "Advanced", group="Initialisation"), HideResult=true);
-  parameter Modelica.Units.SI.AbsolutePressure pInl0=3e5
-    "Pressure at compressor's inlet at initialisation" annotation (Dialog(tab=
-          "Advanced", group="Initialisation"), HideResult=true);
-  parameter Modelica.Units.SI.Temperature TInl0=283.15
-    "Temperature at compressor's inlet at initialisation" annotation (Dialog(
-        tab="Advanced", group="Initialisation"), HideResult=true);
+  parameter Modelica.SIunits.Frequency rotSpe0 = 60
+    "Compressor's rotational spped at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
+  parameter Modelica.SIunits.AbsolutePressure pInl0 = 3e5
+    "Pressure at compressor's inlet at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
+  parameter Modelica.SIunits.Temperature TInl0 = 283.15
+    "Temperature at compressor's inlet at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
 
   // Definition of submodels
   //

@@ -58,13 +58,10 @@ model HeatPumpSimple
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowEvaporator
                     "Heat flow on the source side" annotation(Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                                    origin={-46,-50})));
-  Modelica.Blocks.Tables.CombiTable2Ds PowerTable(table=tablePower)
-    "Calculates electric power based on temperature in source and sink"
-    annotation (Placement(transformation(extent={{-52,20},{-32,40}})));
-  Modelica.Blocks.Tables.CombiTable2Ds HeatFlowCondenserTable(table=
-        tableHeatFlowCondenser)
-    "Calculates heat flow based on temperature in source and sink"
-    annotation (Placement(transformation(extent={{-52,-12},{-32,8}})));
+  Modelica.Blocks.Tables.CombiTable2D PowerTable(table = tablePower)
+                    "Calculates electric power based on temperature in source and sink" annotation(Placement(transformation(extent = {{-52, 20}, {-32, 40}})));
+  Modelica.Blocks.Tables.CombiTable2D HeatFlowCondenserTable(table = tableHeatFlowCondenser)
+                    "Calculates heat flow based on temperature in source and sink" annotation(Placement(transformation(extent = {{-52, -12}, {-32, 8}})));
   Modelica.Blocks.Logical.Switch SwitchHeatFlowCondenser
                     "Switch to deactivate heat flow when off" annotation(Placement(transformation(extent = {{14, -20}, {34, 0}})));
   Modelica.Blocks.Sources.Constant constZero2(k = 0)
@@ -76,8 +73,8 @@ model HeatPumpSimple
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
                     "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent = {{10, -60}, {-10, -40}})));
   Modelica.Blocks.Interfaces.RealOutput Power "Connector of Real output signal" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, -90})));
-  parameter Modelica.Units.SI.Volume VolumeEvaporator=0.01 "Volume im m3";
-  parameter Modelica.Units.SI.Volume VolumeCondenser=0.01 "Volume im m3";
+  parameter Modelica.SIunits.Volume VolumeEvaporator = 0.01 "Volume im m3";
+  parameter Modelica.SIunits.Volume VolumeCondenser = 0.01 "Volume im m3";
   parameter Real tablePower[:, :] = fill(0.0, 0, 2)
     "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
   parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2)

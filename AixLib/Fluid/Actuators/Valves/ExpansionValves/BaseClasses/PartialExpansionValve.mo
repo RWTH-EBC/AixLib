@@ -1,38 +1,44 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
 partial model PartialExpansionValve
   "Base model for all expansion valve models"
 
   // Definition of parameters
   //
-  parameter Modelica.Units.SI.Area AVal=2.5e-6
+  parameter Modelica.SIunits.Area AVal = 2.5e-6
     "Cross-sectional area of the valve when it is fully opened"
-    annotation (Dialog(group="Geometry"));
-  parameter Modelica.Units.SI.Diameter dInlPip=7.5e-3
+    annotation(Dialog(group="Geometry"));
+  parameter Modelica.SIunits.Diameter dInlPip = 7.5e-3
     "Diameter of the pipe at valve's inlet"
-    annotation (Dialog(group="Geometry"));
+    annotation(Dialog(group="Geometry"));
 
   parameter Boolean useInpFil = true
     "= true, if transient behaviour of valve opening or closing is computed"
     annotation(Dialog(group="Transient behaviour"));
-  parameter Modelica.Units.SI.Time risTim=0.5
+  parameter Modelica.SIunits.Time risTim = 0.5
     "Time until valve opening reaches 99.6 % of its set value"
-    annotation (Dialog(enable=useInpFil, group="Transient behaviour"));
+    annotation(Dialog(
+      enable = useInpFil,
+      group="Transient behaviour"));
 
   parameter Utilities.Types.CalcProc calcProc=Utilities.Types.CalcProc.nominal
     "Chose predefined calculation method for flow coefficient"
     annotation (Dialog(tab="Flow Coefficient"));
-  parameter Modelica.Units.SI.MassFlowRate mFlowNom=m_flow_nominal
-    "Mass flow at nominal conditions" annotation (Dialog(
-      tab="Flow Coefficient",
-      group="Nominal calculation",
-      enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (calcProc
-           == Utilities.Types.CalcProc.flowCoefficient)) then true else false));
-  parameter Modelica.Units.SI.PressureDifference dpNom=15e5
-    "Pressure drop at nominal conditions" annotation (Dialog(
-      tab="Flow Coefficient",
-      group="Nominal calculation",
-      enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (calcProc
-           == Utilities.Types.CalcProc.flowCoefficient)) then true else false));
+  parameter Modelica.SIunits.MassFlowRate mFlowNom = m_flow_nominal
+    "Mass flow at nominal conditions"
+    annotation(Dialog(
+               tab="Flow Coefficient",
+               group="Nominal calculation",
+               enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (
+          calcProc == Utilities.Types.CalcProc.flowCoefficient)) then true
+           else false));
+  parameter Modelica.SIunits.PressureDifference dpNom = 15e5
+    "Pressure drop at nominal conditions"
+    annotation(Dialog(
+               tab="Flow Coefficient",
+               group="Nominal calculation",
+               enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (
+          calcProc == Utilities.Types.CalcProc.flowCoefficient)) then true
+           else false));
 
   // Definition of model describing flow coefficient
   //
@@ -118,8 +124,8 @@ partial model PartialExpansionValve
     final filterType=Modelica.Blocks.Types.FilterType.LowPass,
     order=2,
     f_cut=5/(2*Modelica.Constants.pi*risTim),
-    x(each stateSelect=StateSelect.always))
-     if useInpFil
+    x(each stateSelect=StateSelect.always)) if
+        useInpFil
     "Second order filter to approximate valve opening or closing time"
     annotation (Placement(transformation(
         extent={{-30,59},{-10,80}})));
@@ -130,15 +136,16 @@ partial model PartialExpansionValve
 
 
 protected
-  Modelica.Units.SI.Area AThr "Current cross-sectional area of the valve";
+  Modelica.SIunits.Area AThr
+    "Current cross-sectional area of the valve";
   Real opening(unit="1")
     "Current valve's opening";
 
-  Modelica.Units.SI.Density dInl=Medium.density(staInl)
+  Modelica.SIunits.Density dInl = Medium.density(staInl)
     "Density at valves's inlet conditions";
-  Modelica.Units.SI.AbsolutePressure pInl=port_a.p
+  Modelica.SIunits.AbsolutePressure pInl = port_a.p
     "Pressure of the fluid at inlet conditions";
-  Modelica.Units.SI.AbsolutePressure pOut=port_b.p
+  Modelica.SIunits.AbsolutePressure pOut = port_b.p
     "Pressure of the fluid at outlet conditions";
 
 

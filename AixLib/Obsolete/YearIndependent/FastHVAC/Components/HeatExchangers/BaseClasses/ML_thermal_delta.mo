@@ -11,49 +11,48 @@ model ML_thermal_delta "Multi layers of heat exchanger"
       FastHVAC.Media.WaterSimple()
     "Standard charastics for fluid (heat capacity, density, thermal conductivity)";
 
-  parameter Modelica.Units.SI.Mass m_radiator=20;
+  parameter Modelica.SIunits.Mass m_radiator=20;
   parameter calcT.Temp calc_dT
     "Select calculation method of excess temperature";
   parameter AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
   Type
   "Type of radiator" annotation (choicesAllMatching=true, Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Real n=1.3  annotation (Dialog(tab="Geometry and Material", group="Geometry"));
-  parameter Modelica.Units.SI.Density densitySteel=densitySteel
+  parameter Modelica.SIunits.Density densitySteel=densitySteel
     "Specific density of steel, in kg/m3"
-    annotation (Dialog(tab="Geometry and Material", group="Material"));
+        annotation (Dialog(tab="Geometry and Material", group="Material"));
 //   parameter Modelica.SIunits.Density densityWater=densityWater
 //     "Specific density of Water, in kg/m3";
 
-  parameter Modelica.Units.SI.SpecificHeatCapacity capacitySteel=capacitySteel
+  parameter Modelica.SIunits.SpecificHeatCapacity capacitySteel=capacitySteel
     "Specific heat capacity of steel, in J/kgK"
-    annotation (Dialog(tab="Geometry and Material", group="Material"));
+     annotation (Dialog(tab="Geometry and Material", group="Material"));
 //    parameter Modelica.SIunits.SpecificHeatCapacity capacityWater=capacityWater
 //     "Specific heat capacity of Water, in J/kgK";
 
-  parameter Modelica.Units.SI.ThermalConductivity lambdaSteel=lambdaSteel
+  parameter Modelica.SIunits.ThermalConductivity lambdaSteel=lambdaSteel
     "Thermal conductivity of steel, in W/mK"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter Modelica.Units.SI.Length length=1.05 "Length of radiator, in m"
+  parameter Modelica.SIunits.Length length=1.05 "Length of radiator, in m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
-  parameter Modelica.Units.SI.Temperature T0=
-      Modelica.Units.Conversions.from_degC(55) "Initial temperature, in Kelvin"
+  parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(55)
+    "Initial temperature, in Kelvin"
     annotation (Dialog(group="Miscellaneous"));
 
-  parameter Modelica.Units.SI.Volume vol_water=0.0001;
+  parameter Modelica.SIunits.Volume vol_water=0.0001;
   parameter Real s_eff=Type[1];
   parameter Real dotQ_nomLayer=100 "Nominal power of single layer";
-  parameter Modelica.Units.SI.Temperature dT_nom=50
-    "Nominal access temperature";
-  parameter Modelica.Units.SI.Temperature delta_nom=50
+  parameter Modelica.SIunits.Temperature dT_nom=50 "Nominal access temperature";
+  parameter Modelica.SIunits.Temperature delta_nom=50
     "Nominal Radiation temperature";
-  parameter Modelica.Units.SI.Emissivity eps=0.95 "Emissivity";
-  parameter Modelica.Units.SI.Area A=1 "Area of radiator layer";
-  parameter Modelica.Units.SI.Length d=0.025 "Thickness of radiator wall";
+  parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity";
+  parameter Modelica.SIunits.Area A=1 "Area of radiator layer";
+  parameter Modelica.SIunits.Length d=0.025 "Thickness of radiator wall";
 
-  Modelica.Units.SI.Temperature Tin;
-  Modelica.Units.SI.Temperature Tout;
-  Modelica.Units.SI.Temperature Trad;
-  Modelica.Units.SI.Temperature Tair;
+  Modelica.SIunits.Temperature Tin;
+  Modelica.SIunits.Temperature Tout;
+  Modelica.SIunits.Temperature Trad;
+  Modelica.SIunits.Temperature Tair;
   Real dT_V;
   Real dT_R;
 

@@ -138,13 +138,13 @@ equation
          {0,0,127}));
   connect(sigBus.iceFacMea, proRedQEva.u1) annotation (Line(
       points={{1.075,104.07},{20,104.07},{20,-42},{72,-42},{72,-54.8},{71.6,-54.8}},
+
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-
   connect(nTimesPel.y, Pel) annotation (Line(points={{-41,-18.7},{-41,-30},{0,
           -30},{0,-110}},          color={0,0,127}));
   connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-13,39.7},{-13,

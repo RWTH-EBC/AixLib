@@ -2,18 +2,18 @@ within AixLib.Controls.VentilationController.BaseClasses;
 model OptimalTempDeCarliHumidity
   "optimal operative Temperature according to Fanger and deCarli model including humidity evaluation"
 
-  import Modelica.Units.Conversions.from_degC;
-  import Modelica.Units.Conversions.to_degC;
+  import Modelica.SIunits.Conversions.from_degC;
+  import Modelica.SIunits.Conversions.to_degC;
 
   extends Modelica.Blocks.Interfaces.MIMO(nin=2, nout=3);
   //  u is 1. ambient temperature and 2. relative humidity; y is Min and max temperatures according to input temperature
-  parameter Modelica.Units.SI.TemperatureDifference cat=2
+  parameter Modelica.SIunits.TemperatureDifference cat=2
     "offset for quality category. cat I: 1 K, cat. II: 2 K, cat. III: 3 K.";
-  Modelica.Units.SI.ThermodynamicTemperature Topt;
+  Modelica.SIunits.ThermodynamicTemperature Topt;
 protected
-  parameter Modelica.Units.SI.Temperature Tclomax=from_degC(0)
+  parameter Modelica.SIunits.Temperature Tclomax=from_degC(0)
     "mean outdoor air temperature when max clo value of 1.0 will be reached";
-  parameter Modelica.Units.SI.Temperature Tclomin=from_degC(27.778)
+  parameter Modelica.SIunits.Temperature Tclomin=from_degC(27.778)
     "mean outdoor air temperature when min clo value of 0.5 will be reached";
 
 equation

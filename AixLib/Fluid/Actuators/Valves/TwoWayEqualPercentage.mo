@@ -1,33 +1,33 @@
 within AixLib.Fluid.Actuators.Valves;
-model TwoWayEqualPercentage
-  "Two way valve with equal percentage flow characteristics"
-  extends BaseClasses.PartialTwoWayValveKv(
-    phi=max(0.1*l, if homotopyInitialization then
-        homotopy(actual=AixLib.Fluid.Actuators.BaseClasses.equalPercentage(
-        y_actual,
-        R,
-        l,
-        delta0), simplified=l + y_actual*(1 - l)) else
-        AixLib.Fluid.Actuators.BaseClasses.equalPercentage(
-        y_actual,
-        R,
-        l,
-        delta0)));
-  parameter Real R=50 "Rangeability, R=50...100 typically";
-  parameter Real delta0=0.01
-    "Range of significant deviation from equal percentage law";
-
-initial equation
-  // Since the flow model AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow computes
-  // 1/k^2, the parameter l must not be zero.
-  assert(l > 0, "Valve leakage parameter l must be bigger than zero.");
-  assert(l < 1/R, "Wrong parameters in valve model.\n"
-                + "  Rangeability R = " + String(R) + "\n"
-                + "  Leakage flow l = " + String(l) + "\n"
-                + "  Must have l < 1/R = " + String(1/R));
-  annotation (
-    defaultComponentName="val",
-    Documentation(info="<html>
+ model TwoWayEqualPercentage
+   "Two way valve with equal percentage flow characteristics"
+   extends BaseClasses.PartialTwoWayValveKv(
+     phi=max(0.1*l, if homotopyInitialization then
+         homotopy(actual=AixLib.Fluid.Actuators.BaseClasses.equalPercentage(
+         y_actual,
+         R,
+         l,
+         delta0), simplified=l + y_actual*(1 - l)) else
+         AixLib.Fluid.Actuators.BaseClasses.equalPercentage(
+         y_actual,
+         R,
+         l,
+         delta0)));
+   parameter Real R=50 "Rangeability, R=50...100 typically";
+   parameter Real delta0=0.01
+     "Range of significant deviation from equal percentage law";
+ 
+ initial equation
+   // Since the flow model AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow computes
+   // 1/k^2, the parameter l must not be zero.
+   assert(l > 0, "Valve leakage parameter l must be bigger than zero.");
+   assert(l < 1/R, "Wrong parameters in valve model.\n"
+                 + "  Rangeability R = " + String(R) + "\n"
+                 + "  Leakage flow l = " + String(l) + "\n"
+                 + "  Must have l < 1/R = " + String(1/R));
+   annotation (
+     defaultComponentName="val",
+     Documentation(info="<html>
  <p>
  Two way valve with an equal percentage valve opening characteristic.
  </p><p>
@@ -37,15 +37,8 @@ initial equation
  Check this model for more information, such
  as the regularization near the origin.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
- <li>
- June 10, 2021, by Michael Wetter:<br/>
- Changed implementation of the filter and changed the parameter <code>order</code> to a constant
- as most users need not change this value.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
- </li>
  <li>
  August 7, 2020, by Ettore Zanetti:<br/>
  changed the computation of <code>phi</code> using
@@ -101,11 +94,11 @@ initial equation
  First implementation.
  </li>
  </ul>
- </html>"),Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}), graphics={Text(
-          extent={{-74,20},{-36,-24}},
-          textColor=DynamicSelect({255,255,255}, (1-y)*{255,255,255}),
-          fillPattern=FillPattern.Solid,
-          textString="%%")}),
-  __Dymola_LockedEditing="Model from IBPSA");
-end TwoWayEqualPercentage;
+ </html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+             {100,100}}), graphics={Text(
+           extent={{-74,20},{-36,-24}},
+           lineColor=DynamicSelect({255,255,255}, (1-y)*{255,255,255}),
+           fillPattern=FillPattern.Solid,
+           textString="%%")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end TwoWayEqualPercentage;

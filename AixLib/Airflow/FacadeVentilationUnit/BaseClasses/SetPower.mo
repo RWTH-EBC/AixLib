@@ -5,20 +5,20 @@ model SetPower
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.05
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=0.05
     "Nominal mass flow rate of fan";
   parameter Medium.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure";
   parameter Integer noUnits=1 "Number of identical FVU units";
-  parameter Modelica.Units.SI.PressureDifference dp_nominal=500
+  parameter Modelica.SIunits.PressureDifference dp_nominal=500
     "Initial pressure difference";
   parameter Medium.Temperature T_start=Medium.T_default
     "Start value of temperature";
 
-  Modelica.Blocks.Tables.CombiTable1Dv volumeFlow(table=[0,1; 0.1,25; 0.2,40;
+  Modelica.Blocks.Tables.CombiTable1D volumeFlow(table=[0,1; 0.1,25; 0.2,40;
         0.3,60; 0.4,90; 0.5,100; 0.6,140; 0.7,175; 0.8,200; 0.9,225; 1,260])
-    "Correlates the relative input signal and a volume flow rate" annotation (
-      Placement(transformation(
+    "Correlates the relative input signal and a volume flow rate"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-56})));

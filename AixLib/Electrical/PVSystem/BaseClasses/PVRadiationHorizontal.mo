@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.BaseClasses;
+within AixLib.Electrical.PVSystem.BaseClasses;
 model PVRadiationHorizontal "PV radiation and absorptance model - input: total irradiance on horizontal plane"
 
  parameter Real lat(final quantity = "Angle",
@@ -84,9 +84,9 @@ model PVRadiationHorizontal "PV radiation and absorptance model - input: total i
 
   Real airMasMod(final unit="1", min=0) "Air mass modifier";
 
-  Modelica.Units.SI.Angle incAngGro "Incidence angle for ground reflection";
+  Modelica.SIunits.Angle incAngGro "Incidence angle for ground reflection";
 
-  Modelica.Units.SI.Angle incAngDif "Incidence angle for diffuse radiation";
+  Modelica.SIunits.Angle incAngDif "Incidence angle for diffuse radiation";
 
   Real incAngMod(final unit="1", min=0) "Incidence angle modifier";
 
@@ -95,12 +95,11 @@ model PVRadiationHorizontal "PV radiation and absorptance model - input: total i
   Real incAngModDif(final unit="1", min=0)
   "Incidence angle modifier for diffuse radiation";
 
-  Modelica.Units.SI.Angle refAng "Angle of refraction";
+  Modelica.SIunits.Angle refAng "Angle of refraction";
 
-  Modelica.Units.SI.Angle refAngGro "Angle of refraction for ground reflection";
+  Modelica.SIunits.Angle refAngGro "Angle of refraction for ground reflection";
 
-  Modelica.Units.SI.Angle refAngDif
-    "Angle of refraction for diffuse irradiation";
+  Modelica.SIunits.Angle refAngDif "Angle of refraction for diffuse irradiation";
 
   Real tau(final unit="1", min=0)
   "Transmittance of the cover system";
@@ -115,7 +114,8 @@ model PVRadiationHorizontal "PV radiation and absorptance model - input: total i
    "Ratio of irradiance on tilted surface to horizontal surface";
 
 
-  Modelica.Units.SI.Angle zen "Zenith angle";
+  Modelica.SIunits.Angle zen
+  "Zenith angle";
 
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarHourAngle
     solHouAng

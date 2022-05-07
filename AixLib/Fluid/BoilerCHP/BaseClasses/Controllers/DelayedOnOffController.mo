@@ -1,13 +1,14 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model DelayedOnOffController "CHP On/Off controller"
 
-  parameter Modelica.Units.SI.Temperature maxTReturn
+  parameter Modelica.SIunits.Temperature maxTReturn
     "Maximum return temperature";
-  parameter Modelica.Units.SI.ThermodynamicTemperature minDeltaT
+  parameter Modelica.SIunits.ThermodynamicTemperature minDeltaT
     "Minimum flow and return temperature difference";
-  parameter Modelica.Units.SI.ThermodynamicTemperature TFlowRange
+  parameter Modelica.SIunits.ThermodynamicTemperature TFlowRange
     "Range of the flow temperature";
-  parameter Modelica.Units.SI.Time delayTime "On/Off delay time";
+  parameter Modelica.SIunits.Time delayTime
+    "On/Off delay time";
   parameter Boolean initialOutput=false
     "Initial output";
   parameter Real delayUnit

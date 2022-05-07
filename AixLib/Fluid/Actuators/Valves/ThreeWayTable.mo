@@ -1,27 +1,27 @@
 within AixLib.Fluid.Actuators.Valves;
-model ThreeWayTable
-  "Three way valve with table-specified characteristics"
-    extends BaseClasses.PartialThreeWayValve(final l={0,0},
-      redeclare TwoWayTable res1(final flowCharacteristics=flowCharacteristics1),
-      redeclare TwoWayTable res3(final flowCharacteristics=flowCharacteristics3));
-
-  parameter Data.Generic flowCharacteristics1
-    "Table with flow characteristics for direct flow path at port_1"
-     annotation (choicesAllMatching=true, Placement(transformation(extent={{-90,80},
-            {-70,100}})));
-  parameter Data.Generic flowCharacteristics3
-    "Table with flow characteristics for bypass flow path at port_3"
-    annotation (choicesAllMatching=true, Placement(transformation(extent={{-50,80},
-            {-30,100}})));
-equation
-  connect(inv.y, res3.y)
-  annotation (Line(points={{-62.6,46},{20,46},{20,-50},{12,-50}}, color={0,0,127}));
-  connect(y_actual, inv.u2)
-  annotation (Line(points={{50,70},{88,70},{88,34},{-68,34},{-68,41.2}}, color={0,0,127}));
-  connect(y_actual, res1.y)
-  annotation (Line(points={{50,70},{88,70},{88,34},{-50,34},{-50,12}}, color={0,0,127}));
-  annotation (defaultComponentName="val",
-Documentation(info="<html>
+ model ThreeWayTable
+   "Three way valve with table-specified characteristics"
+     extends BaseClasses.PartialThreeWayValve(final l={0,0},
+       redeclare TwoWayTable res1(final flowCharacteristics=flowCharacteristics1),
+       redeclare TwoWayTable res3(final flowCharacteristics=flowCharacteristics3));
+ 
+   parameter Data.Generic flowCharacteristics1
+     "Table with flow characteristics for direct flow path at port_1"
+      annotation (choicesAllMatching=true, Placement(transformation(extent={{-90,80},
+             {-70,100}})));
+   parameter Data.Generic flowCharacteristics3
+     "Table with flow characteristics for bypass flow path at port_3"
+     annotation (choicesAllMatching=true, Placement(transformation(extent={{-50,80},
+             {-30,100}})));
+ equation
+   connect(inv.y, res3.y)
+   annotation (Line(points={{-62.6,46},{20,46},{20,-50},{12,-50}}, color={0,0,127}));
+   connect(y_actual, inv.u2)
+   annotation (Line(points={{50,70},{88,70},{88,34},{-68,34},{-68,41.2}}, color={0,0,127}));
+   connect(y_actual, res1.y)
+   annotation (Line(points={{50,70},{88,70},{88,34},{-50,34},{-50,12}}, color={0,0,127}));
+   annotation (defaultComponentName="val",
+ Documentation(info="<html>
  <p>
  Three way valve with table-specified opening characteristics.
  A separate characteristic for each flow path is used.
@@ -111,21 +111,8 @@ Documentation(info="<html>
  </p>
  
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Set <code>final massDynamics=energyDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- June 10, 2021, by Michael Wetter:<br/>
- Changed implementation of the filter and changed the parameter <code>order</code> to a constant
- as most users need not change this value.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
- </li>
  <li>
  November 28, 2019, by Michael Wetter:<br/>
  Revised implementation.
@@ -136,19 +123,19 @@ revisions="<html>
  </li>
  </ul>
  </html>"),
-    Icon(graphics={
-        Rectangle(
-          origin={-80,-79},
-          lineColor={64,64,64},
-          fillColor={255,215,136},
-          fillPattern=FillPattern.Solid,
-          extent={{-12,-11},{12,11}},
-          radius=5.0),
-        Line(
-          points={{-80,-68},{-80,-90}}),
-        Line(
-          points={{-92,-76},{-68,-76}}),
-        Line(
-          points={{-92,-84},{-68,-84}})}),
-  __Dymola_LockedEditing="Model from IBPSA");
-end ThreeWayTable;
+     Icon(graphics={
+         Rectangle(
+           origin={-80,-79},
+           lineColor={64,64,64},
+           fillColor={255,215,136},
+           fillPattern=FillPattern.Solid,
+           extent={{-12,-11},{12,11}},
+           radius=5.0),
+         Line(
+           points={{-80,-68},{-80,-90}}),
+         Line(
+           points={{-92,-76},{-68,-76}}),
+         Line(
+           points={{-92,-84},{-68,-84}})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end ThreeWayTable;

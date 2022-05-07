@@ -1,7 +1,7 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function cBotUp
-  input Modelica.Units.SI.TemperatureDifference dTover;
-  input Modelica.Units.SI.TemperatureDifference dT13;
+  input Modelica.SIunits.TemperatureDifference dTover;
+  input Modelica.SIunits.TemperatureDifference dT13;
 
   output Real c_bot_up;
 protected

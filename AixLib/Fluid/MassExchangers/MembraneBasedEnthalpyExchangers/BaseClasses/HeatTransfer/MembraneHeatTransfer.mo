@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
 model MembraneHeatTransfer
   "model for heat transfer through a membrane"
 
@@ -9,20 +9,27 @@ model MembraneHeatTransfer
     "number of parallel air ducts";
 
   // Parameters
-  parameter Modelica.Units.SI.Length lengthMem
+  parameter Modelica.SIunits.Length lengthMem
     "length of membrane in flow direction";
-  parameter Modelica.Units.SI.Length widthMem "width of membrane";
-  parameter Modelica.Units.SI.Length thicknessMem "thickness of membrane";
-  parameter Modelica.Units.SI.ThermalConductivity lambdaMem
+  parameter Modelica.SIunits.Length widthMem
+    "width of membrane";
+  parameter Modelica.SIunits.Length thicknessMem
+    "thickness of membrane";
+  parameter Modelica.SIunits.ThermalConductivity lambdaMem
     "thermal conductivity of membrane";
-  parameter Modelica.Units.SI.Density rhoMem "density of membrane";
-  parameter Modelica.Units.SI.SpecificHeatCapacity cpMem
+  parameter Modelica.SIunits.Density rhoMem
+    "density of membrane";
+  parameter Modelica.SIunits.SpecificHeatCapacity cpMem
     "mass weighted heat capacity of membrane";
 
-  parameter Modelica.Units.SI.Mass mMem=rhoMem*(lengthMem*widthMem*thicknessMem)
-      *nParallel "mass of membrane" annotation (Dialog(enable=false));
-  parameter Modelica.Units.SI.Area areaMem=lengthMem*widthMem*nParallel
-    "surface area of membrane" annotation (Dialog(enable=false));
+  parameter Modelica.SIunits.Mass mMem=
+    rhoMem*(lengthMem*widthMem*thicknessMem)*nParallel
+    "mass of membrane"
+    annotation (Dialog(enable=false));
+  parameter Modelica.SIunits.Area areaMem=
+    lengthMem*widthMem*nParallel
+    "surface area of membrane"
+    annotation (Dialog(enable=false));
 
   // Assumptions
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=
@@ -31,9 +38,9 @@ model MembraneHeatTransfer
     annotation(Evaluate=true);
 
   // Initialization
-  parameter Modelica.Units.SI.Temperature T_start
+  parameter Modelica.SIunits.Temperature T_start
     "membrane temperature start value";
-  parameter Modelica.Units.SI.TemperatureDifference dT_start
+  parameter Modelica.SIunits.TemperatureDifference dT_start
     "start value for temperature difference between heatPorts_a and heatPorst_b";
 
   // Inputs
@@ -41,14 +48,16 @@ model MembraneHeatTransfer
     "coefficient for heat transfer reduction due to cross-flow portion";
 
   // Mass
-  Modelica.Units.SI.Mass[n] m=fill(mMem/n, n) "Distribution of wall mass";
+  Modelica.SIunits.Mass[n] m=fill(mMem/n, n)
+    "Distribution of wall mass";
 
   // Temperatures
-  Modelica.Units.SI.Temperature[n] Tb(each start=T_start + 0.5*dT_start)
+  Modelica.SIunits.Temperature[n] Tb(each start=T_start+0.5*dT_start)
     "Temperature at side b";
-  Modelica.Units.SI.Temperature[n] Ta(each start=T_start - 0.5*dT_start)
+  Modelica.SIunits.Temperature[n] Ta(each start=T_start-0.5*dT_start)
     "Temperature at side a";
-  Modelica.Units.SI.Temperature[n] Ts "Membrane temperature";
+  Modelica.SIunits.Temperature[n] Ts
+    "Membrane temperature";
 
   // Ports
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] heatPorts_a

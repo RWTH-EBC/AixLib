@@ -19,8 +19,8 @@ model HumanSensibleHeat_VDI2078 "Model for sensible heat output after VDI 2078"
   Modelica.Blocks.Math.Gain Nr_People(k = NrPeople) annotation(Placement(transformation(extent = {{-66, -26}, {-54, -14}})));
   Modelica.Blocks.Math.Gain SurfaceArea_People(k = SurfaceArea_Human) annotation(Placement(transformation(extent={{16,-54},
             {28,-42}})));
-  parameter Modelica.Units.SI.Temperature T0=
-      Modelica.Units.Conversions.from_degC(22) "Initial temperature";
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
+    "Initial temperature";
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax = 1e+23, uMin=1)      annotation(Placement(transformation(extent={{-18,-58},
             {2,-38}})));
   Modelica.Blocks.Math.Gain gain(k = RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, 28}, {14, 36}})));
@@ -31,18 +31,12 @@ model HumanSensibleHeat_VDI2078 "Model for sensible heat output after VDI 2078"
         rotation=90,
         origin={60,32})));
 protected
-  parameter Modelica.Units.SI.Area SurfaceArea_Human=2;
+  parameter Modelica.SIunits.Area SurfaceArea_Human = 2;
   parameter Real Emissivity_Human = 0.98;
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeat(T_ref = T0) annotation(Placement(transformation(extent={{18,20},
             {42,44}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
-  Modelica.Blocks.Tables.CombiTable1Dv HeatOutput(
-    table=[10,100,125,155; 18,100,125,155; 20,95,115,140; 22,90,105,120; 23,85,
-        100,115; 24,75,95,110; 25,75,85,105; 26,70,85,95; 35,70,85,95],
-    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-    tableOnFile=false,
-    columns={ActivityType})
-    annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
+  Modelica.Blocks.Tables.CombiTable1D HeatOutput(table = [10, 100, 125, 155; 18, 100, 125, 155; 20, 95, 115, 140; 22, 90, 105, 120; 23, 85, 100, 115; 24, 75, 95, 110; 25, 75, 85, 105; 26, 70, 85, 95; 35, 70, 85, 95], smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, tableOnFile = false, columns = {ActivityType}) annotation(Placement(transformation(extent = {{-60, 40}, {-40, 60}})));
 equation
   connect(RadiativeHeat.port, RadiationConvertor.convPort) annotation (Line(
       points={{42,-8},{44,-8},{44,-12},{48,-12},{48,-10},{48,-10}},

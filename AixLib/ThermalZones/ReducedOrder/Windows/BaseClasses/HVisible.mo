@@ -5,18 +5,21 @@ model HVisible
   parameter Integer n(min=1) "Number of windows"
     annotation (Dialog(group="window"));
 
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_vis[n]
-    "Degree of light transmission" annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_visTotDir[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
+    "Degree of light transmission"
+    annotation (Dialog(group="window"));
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDir[n]
     "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_visTotDif[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDif[n]
     "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
 
-  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
-    roof" annotation (Dialog(group="window"));
-  final parameter Modelica.Units.SI.ReflectionCoefficient rho=0.2
+  parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
+    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+    roof"
+    annotation (Dialog(group="window"));
+  final parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
     "Degree of ground reflection";
 
   Modelica.Blocks.Interfaces.BooleanInput sunscreen[n]
@@ -111,25 +114,28 @@ protected
   Real Cor_KMDifCle
     "Correction factor for diffuse irradiation at cloudless clear skies
     according to DIN 5034-2";
-  Modelica.Units.SI.TransmissionCoefficient tau_visDifx[n] "Calculation variable for the degree of light transmission for diffuse
+  Modelica.SIunits.TransmissionCoefficient tau_visDifx[n]
+    "Calculation variable for the degree of light transmission for diffuse
     irradiation";
-  Modelica.Units.SI.TransmissionCoefficient tau_visDirx[n] "Calculation variable for the degree of light transmission for direct
+  Modelica.SIunits.TransmissionCoefficient tau_visDirx[n]
+    "Calculation variable for the degree of light transmission for direct
     irradiation";
-  Modelica.Units.SI.EnergyFlowRate H_EvaHor[n] "Evaluated solar irradiation onto the horizontal for determining the ground
+  Modelica.SIunits.EnergyFlowRate H_EvaHor[n]
+    "Evaluated solar irradiation onto the horizontal for determining the ground
      reflection radiation";
 
 equation
   //calculating H_RoomL
-  Cor_KMDir=(17.72 + 4.4585*Modelica.Units.Conversions.to_deg(alt) - 0.087563*
-    Modelica.Units.Conversions.to_deg(alt)^2 + 7.39487*10^(-4)*
-    Modelica.Units.Conversions.to_deg(alt)^3 - 2.167*10^(-6)*
-    Modelica.Units.Conversions.to_deg(alt)^4 - 8.4132*10^(-10)*
-    Modelica.Units.Conversions.to_deg(alt)^5)/115;
-  Cor_KMDifCle=(15.1 + 3.1076*Modelica.Units.Conversions.to_deg(alt) + 0.0048*
-    Modelica.Units.Conversions.to_deg(alt)^2 - 0.0014*
-    Modelica.Units.Conversions.to_deg(alt)^3 + 2.04*10^(-5)*
-    Modelica.Units.Conversions.to_deg(alt)^4 - 8.91*10^(-8)*
-    Modelica.Units.Conversions.to_deg(alt)^5)/115;
+  Cor_KMDir=(17.72+4.4585*Modelica.SIunits.Conversions.to_deg(alt)-0.087563*
+  Modelica.SIunits.Conversions.to_deg(alt)^2+7.39487*10^(-4)
+  *Modelica.SIunits.Conversions.to_deg(alt)^3-2.167*10^(-6)*
+  Modelica.SIunits.Conversions.to_deg(alt)^4-8.4132*10^(-10)*
+  Modelica.SIunits.Conversions.to_deg(alt)^5)/115;
+  Cor_KMDifCle=(15.1+3.1076*Modelica.SIunits.Conversions.to_deg(alt)+0.0048*
+  Modelica.SIunits.Conversions.to_deg(alt)^2-0.0014*
+  Modelica.SIunits.Conversions.to_deg(alt)^3+2.04*10^(-5)*
+  Modelica.SIunits.Conversions.to_deg(alt)^4-8.91*10^(-8)*
+  Modelica.SIunits.Conversions.to_deg(alt)^5)/115;
 
   for i in 1:n loop
     if sunscreen[i] then

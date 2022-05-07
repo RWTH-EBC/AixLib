@@ -35,35 +35,38 @@ partial model PartialModularExpansionVavles
 
   // Definition of parameters describing the expansion valves
   //
-  parameter Modelica.Units.SI.Area AVal[nVal]=fill(2e-6, nVal)
+  parameter Modelica.SIunits.Area AVal[nVal] = fill(2e-6, nVal)
     "Cross-sectional areas of the valves when they are fully opened"
-    annotation (Dialog(tab="Expansion valves", group="Geometry"), HideResult=
-        not show_parVal);
-  parameter Modelica.Units.SI.Diameter dInlPip[nVal]=fill(7.5e-3, nVal)
-    "Diameters of the pipes at valves' inlets" annotation (Dialog(tab=
-          "Expansion valves", group="Geometry"), HideResult=not show_parVal);
+    annotation(Dialog(tab="Expansion valves",group="Geometry"),
+               HideResult=not show_parVal);
+  parameter Modelica.SIunits.Diameter dInlPip[nVal] = fill(7.5e-3, nVal)
+    "Diameters of the pipes at valves' inlets"
+    annotation(Dialog(tab="Expansion valves",group="Geometry"),
+               HideResult=not show_parVal);
 
   parameter Boolean useInpFil[nVal] = fill(false, nVal)
     "= true, if transient behaviours of valves opening or closing are computed"
     annotation(Dialog(tab="Expansion valves",group="Transient behaviour"),
                HideResult=not show_parVal);
-  parameter Modelica.Units.SI.Time risTim[nVal]=fill(0.5, nVal)
-    "Time until valves opening reach 99.6 % of the set values" annotation (
-      Dialog(tab="Expansion valves", group="Transient behaviour"), HideResult=
-        not show_parVal);
+  parameter Modelica.SIunits.Time risTim[nVal] = fill(0.5, nVal)
+    "Time until valves opening reach 99.6 % of the set values"
+    annotation(Dialog(tab="Expansion valves",group="Transient behaviour"),
+               HideResult=not show_parVal);
 
   parameter Utilities.Types.CalcProc calcProc[nVal]=fill(Utilities.Types.CalcProc.flowCoefficient,
       nVal) "Chose predefined calculation method for flow coefficients"
     annotation (Dialog(tab="Expansion valves", group="Flow Coefficient"),
       HideResult=not show_parVal);
-  parameter Modelica.Units.SI.MassFlowRate mFlowNom[nVal]={m_flow_nominal/sum(
-      AVal)*AVal[i] for i in 1:nVal} "Mass flow at nominal conditions"
-    annotation (Dialog(tab="Expansion valves", group="Flow Coefficient"),
-      HideResult=not show_parVal);
-  parameter Modelica.Units.SI.PressureDifference dpNom[nVal]=fill(dp_nominal,
-      nVal) "Pressure drop at nominal conditions" annotation (Dialog(tab=
-          "Expansion valves", group="Flow Coefficient"), HideResult=not
-        show_parVal);
+  parameter Modelica.SIunits.MassFlowRate mFlowNom[nVal]=
+    {m_flow_nominal/sum(AVal)*AVal[i] for i in 1:nVal}
+    "Mass flow at nominal conditions"
+    annotation(Dialog(tab="Expansion valves",group="Flow Coefficient"),
+               HideResult=not show_parVal);
+  parameter Modelica.SIunits.PressureDifference dpNom[nVal]=
+    fill(dp_nominal, nVal)
+    "Pressure drop at nominal conditions"
+    annotation(Dialog(tab="Expansion valves",group="Flow Coefficient"),
+               HideResult=not show_parVal);
 
   replaceable model FlowCoefficient =
     Utilities.FlowCoefficient.SpecifiedFlowCoefficients.ConstantFlowCoefficient
@@ -136,16 +139,18 @@ partial model PartialModularExpansionVavles
     "Gain of controller"
     annotation(Dialog(tab="Controller", group="PID setup"),
                HideResult=not show_parCon);
-  parameter Modelica.Units.SI.Time Ti[nVal]=fill(0.5, nVal)
-    "Time constant of integrator block" annotation (Dialog(tab="Controller",
-        group="PID setup"), HideResult=not show_parCon);
+  parameter Modelica.SIunits.Time Ti[nVal] = fill(0.5,nVal)
+    "Time constant of integrator block"
+    annotation(Dialog(tab="Controller", group="PID setup"),
+               HideResult=not show_parCon);
   parameter Real Ni[nVal] = fill(0.9,nVal)
     "Ni*Ti is time constant of anti-windup compensation"
     annotation(Dialog(tab="Controller", group="PID setup"),
                HideResult=not show_parCon);
-  parameter Modelica.Units.SI.Time Td[nVal]=fill(0.1, nVal)
-    "Time constant of derivative block" annotation (Dialog(tab="Controller",
-        group="PID setup"), HideResult=not show_parCon);
+  parameter Modelica.SIunits.Time Td[nVal] = fill(0.1,nVal)
+    "Time constant of derivative block"
+    annotation(Dialog(tab="Controller", group="PID setup"),
+               HideResult=not show_parCon);
   parameter Real Nd[nVal] = fill(10,nVal)
     "The higher Nd, the more ideal the derivative block"
     annotation(Dialog(tab="Controller", group="PID setup"),
@@ -168,11 +173,11 @@ partial model PartialModularExpansionVavles
     annotation(Dialog(tab="Controller", group="Weighting and limits"),
                HideResult=not show_parCon);
 
-  parameter Modelica.Blocks.Types.Init initType[nVal]=fill(Modelica.Blocks.Types.Init.InitialState,
-      nVal)
+  parameter Modelica.Blocks.Types.InitPID initType[nVal]=
+    fill(Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,nVal)
     "Init: (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation (Dialog(tab="Advanced", group="Initialisation Controller"),
-      HideResult=not show_parCon);
+    annotation(Dialog(tab="Advanced", group="Initialisation Controller"),
+               HideResult=not show_parCon);
   parameter Real xi_start[nVal]=fill(0, nVal)
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(tab="Advanced", group="Initialisation Controller"),

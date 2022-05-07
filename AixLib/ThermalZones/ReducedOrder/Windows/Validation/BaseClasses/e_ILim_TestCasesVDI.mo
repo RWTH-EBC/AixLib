@@ -9,12 +9,13 @@ model e_ILim_TestCasesVDI
         annotation (Placement(transformation(extent={{98,-10},{118,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));
 protected
-  Modelica.Units.SI.Illuminance e_ILim1=250 "Internal illumninance required in reference point in the morning and
+  Modelica.SIunits.Illuminance e_ILim1 = 250
+    "Internal illumninance required in reference point in the morning and
     evening";
-  Modelica.Units.SI.Illuminance e_ILim2=500
+  Modelica.SIunits.Illuminance e_ILim2 = 500
     "Internal illumainance required in reference point during working hours";
-  constant Modelica.Units.SI.Time day=86400 "Number of seconds in a day";
-  constant Modelica.Units.SI.Time week=604800 "Number of seconds in a week";
+  constant Modelica.SIunits.Time day=86400 "Number of seconds in a day";
+  constant Modelica.SIunits.Time week=604800 "Number of seconds in a week";
 equation
   //Picking value for e_ILim
   if (time-integer(time/day)*day)>64800 or (time-integer(time/day)*day)<25200

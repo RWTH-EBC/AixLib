@@ -2,7 +2,7 @@ within AixLib.DataBase.WindowsDoors.Simple;
 record OWBaseDataDefinition_Simple
   "Window base definition"
   extends Modelica.Icons.Record;
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer Uw
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw
     "Thermal transmission coefficient of whole window: glass + frame";
   parameter Real frameFraction(min=0.0, max=1.0) = 0.2
     "frame fraction from total fenestration area";

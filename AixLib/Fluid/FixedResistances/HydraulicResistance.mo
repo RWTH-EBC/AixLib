@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances;
+within AixLib.Fluid.FixedResistances;
 model HydraulicResistance
   "Simple model for a hydraulic resistance using a pressure loss factor"
   extends AixLib.Fluid.BaseClasses.PartialResistance(
@@ -13,8 +13,8 @@ model HydraulicResistance
 
   parameter Real zeta(min=0, unit="")
     "Pressure loss factor for flow of port_a -> port_b";
-  parameter Modelica.Units.SI.Diameter diameter "Diameter of component";
-  parameter Modelica.Units.SI.PressureDifference dp_start(displayUnit="Pa") = 0
+  parameter Modelica.SIunits.Diameter diameter "Diameter of component";
+  parameter Modelica.SIunits.PressureDifference dp_start(displayUnit="Pa") = 0
     "Guess value of dp = port_a.p - port_b.p"
     annotation (Dialog(tab="Advanced"));
   parameter Medium.MassFlowRate m_flow_start=0
@@ -27,15 +27,15 @@ protected
       D=diameter,
       zeta=zeta)
     "Calculate loss coefficient based on diameter and zeta";
-  parameter Modelica.Units.SI.PressureDifference dp_small=1E-4*abs(dp_nominal)
+  parameter Modelica.SIunits.PressureDifference dp_small=1E-4*abs(dp_nominal)
     "Small pressure difference for regularization of zero pressure difference";
-  parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
+  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
       p=Medium.p_default,
       T=Medium.T_default,
       X=Medium.X_default[1:Medium.nXi]) "Density at nominal condition";
 
-  Modelica.Units.SI.Density rho_a "Density of the fluid at port_a";
-  Modelica.Units.SI.Density rho_b "Density of the fluid at port_b";
+  Modelica.SIunits.Density rho_a "Density of the fluid at port_a";
+  Modelica.SIunits.Density rho_b "Density of the fluid at port_b";
 
 initial equation
   assert(m_flow_nominal_pos > 0,

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
 model CrossFlowReduction
   "model that calculates reduction factor for mass transfer in quasi-counter flow arrangement"
 
@@ -6,14 +6,14 @@ model CrossFlowReduction
   parameter Integer n=1 "number of discrete elements in flow direction";
   parameter Integer nParallel=1 "number of parallel membranes";
 
-  parameter Modelica.Units.SI.Length thicknessMem "thickness of membranes";
-  parameter Modelica.Units.SI.Area[n] surfaceAreas "Heat transfer areas";
+  parameter Modelica.SIunits.Length thicknessMem "thickness of membranes";
+  parameter Modelica.SIunits.Area[n] surfaceAreas "Heat transfer areas";
   parameter Real aspRatCroToTot "ratio of cross flow of air duct";
 
   // Constants
   constant Real C_conv = 3.35*10^(-16)
     "conversion factor for permeance to calculate SI-units from Barrer";
-  constant Modelica.Units.SI.MolarMass M_steam=0.01802;
+  constant Modelica.SIunits.MolarMass M_steam = 0.01802;
 
   // Variables
   Real[n] k_tots "total mass transfer coefficient";
@@ -26,8 +26,8 @@ model CrossFlowReduction
     "convective mass transfer coefficients of air flow 1";
   input Real[n] kCons2
     "convective mass transfer coefficients of air flow 2";
-  input Modelica.Units.SI.MassFlowRate m_flow1 "mass flow rate of air flow 1";
-  input Modelica.Units.SI.MassFlowRate m_flow2 "mass flow rate of air flow 2";
+  input Modelica.SIunits.MassFlowRate m_flow1 "mass flow rate of air flow 1";
+  input Modelica.SIunits.MassFlowRate m_flow2 "mass flow rate of air flow 2";
 
   // Outputs
   Modelica.Blocks.Interfaces.RealOutput[n] coeCroCous

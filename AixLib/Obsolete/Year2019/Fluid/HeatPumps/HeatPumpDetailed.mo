@@ -1,8 +1,8 @@
-﻿within AixLib.Obsolete.Year2019.Fluid.HeatPumps;
+within AixLib.Obsolete.Year2019.Fluid.HeatPumps;
 model HeatPumpDetailed
   "Heat pump model with good level of detail. Mainly fed with manufacturing data."
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
-  import      Modelica.Units.SI;
+  import SI = Modelica.SIunits;
   parameter Boolean HPctrlType=true "Capacity control type" annotation (Dialog(
       group="Heat Pump cycle",
       compact=true,
@@ -191,8 +191,8 @@ model HeatPumpDetailed
         origin={130,-50},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  Modelica.Blocks.Interfaces.RealOutput P_eleOut(unit="W")
-                                                if P_eleOutput
+  Modelica.Blocks.Interfaces.RealOutput P_eleOut(unit="W") if
+                                                   P_eleOutput
     "Electical power consumption" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -280,8 +280,8 @@ public
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatConv(G=R_loss)
     "Heat flow through condenser casing with a given conductance"
     annotation (Placement(transformation(extent={{80,52},{100,72}})));
-  Modelica.Blocks.Interfaces.RealInput T_amb
-                                            if heatLosses_con
+  Modelica.Blocks.Interfaces.RealInput T_amb if
+                                               heatLosses_con
     "Ambient temperatur input signal" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

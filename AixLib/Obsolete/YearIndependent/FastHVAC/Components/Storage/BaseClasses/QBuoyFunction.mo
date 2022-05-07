@@ -2,37 +2,34 @@ within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses;
 function QBuoyFunction
 
   input Integer n;
-  input Modelica.Units.SI.Length height;
-  input Modelica.Units.SI.Area A;
-  input Modelica.Units.SI.Temperature[n] T;
+  input Modelica.SIunits.Length height;
+  input Modelica.SIunits.Area A;
+  input Modelica.SIunits.Temperature[n] T;
   input
     AixLib.Obsolete.YearIndependent.FastHVAC.Media.BaseClasses.MediumSimple
     medium=AixLib.Obsolete.YearIndependent.FastHVAC.Media.WaterSimple();
-  input Modelica.Units.SI.Time tau;
-  input Modelica.Units.SI.TemperatureDifference dTref;
-  output Modelica.Units.SI.HeatFlowRate[n] Q_buoy_abs
-    "Cumulative heat flow rate into the layer due to buoyancy";
+  input Modelica.SIunits.Time tau;
+  input Modelica.SIunits.TemperatureDifference dTref;
+  output Modelica.SIunits.HeatFlowRate[n] Q_buoy_abs
+  "Cumulative heat flow rate into the layer due to buoyancy";
   replaceable function fDist =
       AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.buoyancyDitribution.buoyancyDistInv2
     constrainedby
     AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.buoyancyDitribution.buoyancyDist;
 
 protected
-  Modelica.Units.SI.HeatFlowRate Q_buoy
-    "Heat flow rate from layer i to all above layers with lower temperature";
-  Modelica.Units.SI.HeatFlowRate[n] Q_buoy_step
-    "Heat flow rate into each layer resulting from the buoyant mass flow in a particular iteration step";
-  Modelica.Units.SI.TemperatureDifference dT[n - 1]
+  Modelica.SIunits.HeatFlowRate Q_buoy  "Heat flow rate from layer i to all above layers with lower temperature";
+  Modelica.SIunits.HeatFlowRate[ n] Q_buoy_step
+  "Heat flow rate into each layer resulting from the buoyant mass flow in a particular iteration step";
+  Modelica.SIunits.TemperatureDifference dT[n-1]
     "Temperature difference between adjoining volumes";
 
-  Modelica.Units.SI.MassFlowRate m_buoy
-    "Total buoyant mass flow (in a particular iteration step)";
-  Modelica.Units.SI.MassFlowRate[n] m_buoy_in
-    "Buoyant mass flow going into each layer (in a particular iteration step)";
+  Modelica.SIunits.MassFlowRate m_buoy "Total buoyant mass flow (in a particular iteration step)";
+  Modelica.SIunits.MassFlowRate[n] m_buoy_in "Buoyant mass flow going into each layer (in a particular iteration step)";
   Integer k;
   Integer j;
-  Modelica.Units.SI.MassFlowRate s1 "temporary variable for calculations";
-  Modelica.Units.SI.MassFlowRate s2 "temporary variable for calculations";
+  Modelica.SIunits.MassFlowRate s1 "temporary variable for calculations";
+  Modelica.SIunits.MassFlowRate s2 "temporary variable for calculations";
 
 algorithm
   for i in 1:n-1 loop

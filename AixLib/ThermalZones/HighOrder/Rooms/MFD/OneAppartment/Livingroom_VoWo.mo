@@ -19,22 +19,14 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
       choice=3 "Custom hCon (constant)",
       radioButtons=true));
   //Initial temperatures
-  parameter Modelica.Units.SI.Temperature T0_air=295.15 "Air"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.Units.SI.Temperature T0_OW=295.15 "OW"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.Units.SI.Temperature T0_IWChild=295.15 "IWChild"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.Units.SI.Temperature T0_IWCorridor=290.15 "IWCorridor"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.Units.SI.Temperature T0_IWBedroom=295.15 "IWBedroom"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.Units.SI.Temperature T0_IWNeighbour=295.15 "IWNeighbour"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.Units.SI.Temperature T0_CE=295.35 "Ceiling"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.Units.SI.Temperature T0_FL=294.95 "Floor"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.SIunits.Temperature T0_air = 295.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0_OW = 295.15 "OW" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0_IWChild = 295.15 "IWChild" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0_IWCorridor = 290.15 "IWCorridor" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0_IWBedroom = 295.15 "IWBedroom" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0_IWNeighbour = 295.15 "IWNeighbour" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0_CE = 295.35 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0_FL = 294.95 "Floor" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   // Sunblind
   parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
@@ -42,12 +34,12 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
   parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
     "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.Units.SI.Irradiance solIrrThreshold(min=0.0) = 350
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)=350
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation (Dialog(group="Sunblind", enable=use_sunblind));
-  parameter Modelica.Units.SI.Temperature TOutAirLimit
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation (Dialog(group="Sunblind", enable=use_sunblind));
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Neighbour(
     redeclare final model WindowModel=WindowModel,
     redeclare final model CorrSolarGainWin=CorrSolarGainWin,
@@ -203,12 +195,10 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-72,-112},{-46,-86}})));
 
-  replaceable model WindowModel =
-      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
 
-  replaceable model CorrSolarGainWin =
-      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
 
 protected
@@ -227,7 +217,7 @@ protected
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE = if Floor == 1 or Floor == 2 then if TIR == 1 then if TMC == 1 or TMC == 2 then AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf() else AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_L_loHalf() else if TIR == 2 then if TMC == 1 or TMC == 2 then AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_SM_loHalf() else AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_L_loHalf() else if TIR == 3 then if TMC == 1 or TMC == 2 then AixLib.DataBase.Walls.WSchV1995.Ceiling.CEpartition_WSchV1995_SM_loHalf() else AixLib.DataBase.Walls.WSchV1995.Ceiling.CEpartition_WSchV1995_L_loHalf() else if TMC == 1 or TMC == 2 then AixLib.DataBase.Walls.WSchV1984.Ceiling.CEpartition_WSchV1984_SM_loHalf() else AixLib.DataBase.Walls.WSchV1984.Ceiling.CEpartition_WSchV1984_L_loHalf() else if TIR == 1 then AixLib.DataBase.Walls.EnEV2009.Ceiling.CEattic_EnEV2009_SML_loHalf() else if TIR == 2 then AixLib.DataBase.Walls.EnEV2002.Ceiling.CEattic_EnEV2002_SML_loHalf() else if TIR == 3 then AixLib.DataBase.Walls.WSchV1995.Ceiling.CEattic_WSchV1995_SML_loHalf() else AixLib.DataBase.Walls.WSchV1984.Ceiling.CEattic_WSchV1984_SML_loHalf() annotation(Dialog(tab = "Types"));
   //Window type
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win = if TIR == 1 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR == 2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002() else if TIR == 3 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984() annotation(Dialog(tab = "Types"));
-  parameter Modelica.Units.SI.Volume room_V=4.20*4.645*2.46;
+  parameter Modelica.SIunits.Volume room_V = 4.20 * 4.645 * 2.46;
 equation
   connect(outsideWall.SolarRadiationPort, SolarRadiation_SE) annotation(Line(points = {{62, 87.6}, {62, 100}, {-66, 100}, {-66, 134}}, color = {255, 128, 0}));
   connect(outsideWall.WindSpeedPort, WindSpeedPort) annotation(Line(points = {{48.8, 84.6}, {48.8, 100}, {-86, 100}, {-86, 30}, {-160, 30}}, color = {0, 0, 127}));

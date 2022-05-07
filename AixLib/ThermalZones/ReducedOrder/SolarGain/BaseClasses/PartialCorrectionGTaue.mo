@@ -4,14 +4,14 @@ partial model PartialCorrectionGTaue
   translucence"
   parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
-    annotation (dialog(group="window"));
-  parameter Modelica.Units.SI.Angle xi(displayUnit="degree") = 0
+    annotation(dialog(group="window"));
+  parameter Modelica.SIunits.Angle xi( displayUnit="degree")=0
     "Elevation angle";
-  parameter Modelica.Units.SI.Angle[n] til(displayUnit="degree")
+  parameter Modelica.SIunits.Angle[n] til(displayUnit="degree")
     "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof"
-    annotation (dialog(group="window"));
+    annotation(dialog(group="window"));
 
   Modelica.Blocks.Interfaces.RealOutput[n] corG_Dir(
     final quantity="TransmissionCoefficient",
@@ -93,81 +93,85 @@ protected
   parameter Real a6=4.74*10^(-12)
     "Constant 6 to calculate reference transmission";
 
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_1DifCov=tau_DifCov*
-      tau_iDif "Degreee of transmission for single pane window";
-  parameter Modelica.Units.SI.ReflectionCoefficient rho_T1DifCov=1 - (
-      tau_DifCov) "Part of degree of transmission for single pane window related to
+  parameter Modelica.SIunits.TransmissionCoefficient tau_1DifCov=
+    tau_DifCov*tau_iDif
+    "Degreee of transmission for single pane window";
+  parameter Modelica.SIunits.ReflectionCoefficient rho_T1DifCov=1-(tau_DifCov)
+    "Part of degree of transmission for single pane window related to
     tau_1DifCov";
-  parameter Modelica.Units.SI.ReflectionCoefficient rho_11DifCov=rho_T1DifCov/(
-      2 - (rho_T1DifCov)) "Part of degree of transmission for single pane window
+  parameter Modelica.SIunits.ReflectionCoefficient rho_11DifCov=rho_T1DifCov/
+    (2-(rho_T1DifCov)) "Part of degree of transmission for single pane window
     related to rho_T1_diff";
-  parameter Modelica.Units.SI.ReflectionCoefficient rho_1DifCov=rho_11DifCov +
-      (((1 - rho_11DifCov)*tau_iDif)^2*rho_11DifCov)/(1 - (rho_11DifCov*
-      tau_iDif)^2) "Degree of reflection for single pane window";
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_DifCov=0.84 "Energetic degree of transmission for diffuse radiation for uniformly
+  parameter Modelica.SIunits.ReflectionCoefficient rho_1DifCov= rho_11DifCov+
+    (((1-rho_11DifCov)*tau_iDif)^2*rho_11DifCov)/(1-(rho_11DifCov*tau_iDif)^2)
+    "Degree of reflection for single pane window";
+  parameter Modelica.SIunits.TransmissionCoefficient tau_DifCov=0.84
+    "Energetic degree of transmission for diffuse radiation for uniformly
      overcast sky";
 
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_iDif=0.903
+  parameter Modelica.SIunits.TransmissionCoefficient tau_iDif=0.903
     "Pure degree of transmission for diffuse radiation";
-  Modelica.Units.SI.Angle[n] gamma_x
+  Modelica.SIunits.Angle[n] gamma_x
     "Calculation factor for ground reflection radiation";
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_Dir
+  Modelica.SIunits.TransmissionCoefficient[n] tau_Dir
     "Energetic degree of transmission for direct radiation";
-  Modelica.Units.SI.TransmissionCoefficient[n] taui_Dir
+  Modelica.SIunits.TransmissionCoefficient[n] taui_Dir
     "Pure degree of transmission for direct radiation";
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_1Dir
+  Modelica.SIunits.TransmissionCoefficient[n] tau_1Dir
     "Pure degree of transmission for single pane window";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_T1Dir
+  Modelica.SIunits.ReflectionCoefficient[n] rho_T1Dir
     "Part of degree of transmission for single pane window related to tau_1Dir";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_11Dir
+  Modelica.SIunits.ReflectionCoefficient[n] rho_11Dir
     "Part of degree of transmission for single pane window related to T1_Dir";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_1Dir
+  Modelica.SIunits.ReflectionCoefficient[n] rho_1Dir
     "Degree of reflection for single pane window";
-  Modelica.Units.SI.Emissivity[n] a_1Dir
+  Modelica.SIunits.Emissivity[n] a_1Dir
     "Degree of absorption for single pane window";
 
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_DifCle
+  Modelica.SIunits.TransmissionCoefficient[n] tau_DifCle
     "Energetic degree of transmission for diffuse radiation for clear sky";
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_1DifCle
+  Modelica.SIunits.TransmissionCoefficient[n] tau_1DifCle
     "Degreee of transmission for single pane window";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_T1DifCle "Part of degree of transmission for single pane window related to
+  Modelica.SIunits.ReflectionCoefficient[n] rho_T1DifCle
+    "Part of degree of transmission for single pane window related to
     tau_1DifCle";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_11DifCle "Part of degree of transmission for single pane window related to
+  Modelica.SIunits.ReflectionCoefficient[n] rho_11DifCle
+    "Part of degree of transmission for single pane window related to
      T1_DifCle";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_1DifCle
+  Modelica.SIunits.ReflectionCoefficient[n] rho_1DifCle
     "Degree of reflection for single pane window";
-  Modelica.Units.SI.Emissivity[n] a_1DifCle
+  Modelica.SIunits.Emissivity[n] a_1DifCle
     "Degree of absorption for single pane window";
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_Gro
+  Modelica.SIunits.TransmissionCoefficient[n] tau_Gro
     "Energetic degree of transmission for ground reflection radiation";
-  Modelica.Units.SI.TransmissionCoefficient[n] tau_1Gro
+  Modelica.SIunits.TransmissionCoefficient[n] tau_1Gro
     "Degreee of transmission for single pane window";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_T1Gro
+  Modelica.SIunits.ReflectionCoefficient[n] rho_T1Gro
     "Part of degree of transmission for single pane window related to tau_1Gro";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_11Gro
+  Modelica.SIunits.ReflectionCoefficient[n] rho_11Gro
     "Part of degree of transmission for single pane window related to T1_gr";
-  Modelica.Units.SI.ReflectionCoefficient[n] rho_1Gro
+  Modelica.SIunits.ReflectionCoefficient[n] rho_1Gro
     "Degree of reflection for single pane window";
-  Modelica.Units.SI.Emissivity[n] a_1Gro
+  Modelica.SIunits.Emissivity[n] a_1Gro
     "Degree of absorption for single pane window";
 equation
 
   for i in 1:n loop
   //Calculating variables for direct irradiation
   taui_Dir[i]= 0.907^(1/sqrt(1-(Modelica.Math.sin(incAng[i])/1.515)^2));
-    if (((((a6*(incAng[i]) + a5)*Modelica.Units.Conversions.to_deg(incAng[i])
-         + a4)*Modelica.Units.Conversions.to_deg(incAng[i]) + a3)*
-        Modelica.Units.Conversions.to_deg(incAng[i]) + a2)*
-        Modelica.Units.Conversions.to_deg(incAng[i]) + a1)*
-        Modelica.Units.Conversions.to_deg(incAng[i]) + a0 < 0 then
+  if (((((a6*(incAng[i])+a5)*Modelica.SIunits.Conversions.to_deg(incAng[i])+a4)*
+    Modelica.SIunits.Conversions.to_deg(incAng[i])+a3)*
+    Modelica.SIunits.Conversions.to_deg(incAng[i])+a2)*
+    Modelica.SIunits.Conversions.to_deg(incAng[i])+a1)*
+    Modelica.SIunits.Conversions.to_deg(incAng[i])+a0 <0 then
   tau_Dir[i]=0;
   else
-  tau_Dir[i]=(((((a6*Modelica.Units.Conversions.to_deg(incAng[i]) + a5)*
-        Modelica.Units.Conversions.to_deg(incAng[i]) + a4)*
-        Modelica.Units.Conversions.to_deg(incAng[i]) + a3)*
-        Modelica.Units.Conversions.to_deg(incAng[i]) + a2)*
-        Modelica.Units.Conversions.to_deg(incAng[i]) + a1)*
-        Modelica.Units.Conversions.to_deg(incAng[i]) + a0;
+  tau_Dir[i]= (((((a6*Modelica.SIunits.Conversions.to_deg(incAng[i])+a5)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a4)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a3)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a2)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a1)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a0;
   end if;
   tau_1Dir[i]= tau_Dir[i]*taui_Dir[i];
   rho_T1Dir[i]= 1-tau_Dir[i];
@@ -176,18 +180,18 @@ equation
   (1-(rho_11Dir[i]*taui_Dir[i])^2);
   a_1Dir[i]= 1-tau_1Dir[i]-rho_1Dir[i];
   //Calculating variables for diffuse, clear irradiation
-    if 0.83 - 0.075*(Modelica.Units.Conversions.to_deg(
-        AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
-        til[i]))/70 - 1)^2 + (0.052 + 0.033*(Modelica.Units.Conversions.to_deg(
-        AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
-        til[i]))/90 - 1)^2)*(Modelica.Math.cos(incAng[i]) + 0.15)^2 < 0 then
+  if 0.83-0.075*(Modelica.SIunits.Conversions.to_deg(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+    til[i]))/70-1)^2+(0.052+0.033*(Modelica.SIunits.Conversions.to_deg(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+    til[i]))/90-1)^2)*(Modelica.Math.cos(incAng[i])+0.15)^2 < 0 then
   tau_DifCle[i] = 0;
   else
-  tau_DifCle[i]=0.83 - 0.075*(Modelica.Units.Conversions.to_deg(
-        AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
-        til[i]))/70 - 1)^2 + (0.052 + 0.033*(Modelica.Units.Conversions.to_deg(
-        AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
-        til[i]))/90 - 1)^2)*(Modelica.Math.cos(incAng[i]) + 0.15)^2;
+  tau_DifCle[i]=0.83-0.075*(Modelica.SIunits.Conversions.to_deg(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+  til[i]))/70-1)^2+(0.052+0.033*(Modelica.SIunits.Conversions.to_deg(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+  til[i]))/90-1)^2)*(Modelica.Math.cos(incAng[i])+0.15)^2;
   end if;
   tau_1DifCle[i]= tau_DifCle[i]*tau_iDif;
   rho_T1DifCle[i]= 1-tau_DifCle[i];

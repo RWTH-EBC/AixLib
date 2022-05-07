@@ -8,30 +8,31 @@ model DynamicValidation
     "Number of identical parallel flow devices";
   parameter Integer n = 15
     "number of discrete segments";
-  parameter Modelica.Units.SI.Length heightDuct=0.00225 "height of duct";
-  parameter Modelica.Units.SI.Length widthDuct=0.305 "width of duct";
-  parameter Modelica.Units.SI.Length lengthDuct=0.34
+  parameter Modelica.SIunits.Length heightDuct = 0.00225 "height of duct";
+  parameter Modelica.SIunits.Length widthDuct = 0.305 "width of duct";
+  parameter Modelica.SIunits.Length lengthDuct = 0.34
     "length of duct in flow direction";
   parameter Real aspRatCroToTot = 0.25 "aspect ratio of cross flow";
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=400/3600*1.18
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 400/3600*1.18
     "nominal mass flow rate";
-  parameter Modelica.Units.SI.Pressure dp_nominal=119.5 "nominal pressure drop";
-  parameter Modelica.Units.SI.Length thicknessMem=110E-6
+  parameter Modelica.SIunits.Pressure dp_nominal = 119.5
+    "nominal pressure drop";
+  parameter Modelica.SIunits.Length thicknessMem=110E-6
     "thickness of membrane";
-  parameter Modelica.Units.SI.SpecificHeatCapacity cpMem=1900
+  parameter Modelica.SIunits.SpecificHeatCapacity cpMem = 1900
     "mass weighted heat capacity of membrane";
-  parameter Modelica.Units.SI.ThermalConductivity lambdaMem=0.24
+  parameter Modelica.SIunits.ThermalConductivity lambdaMem=0.24
     "thermal conductivity of membrane";
-  parameter Modelica.Units.SI.Density rhoMem=920 "density of membrane";
-  parameter Modelica.Units.SI.Temperature T_start=283.15
+  parameter Modelica.SIunits.Density rhoMem = 920 "density of membrane";
+  parameter Modelica.SIunits.Temperature T_start = 283.15
     "membrane temperature start value";
-  parameter Modelica.Units.SI.Temperature dT=10
+  parameter Modelica.SIunits.Temperature dT = 10
     "Start value for port_b.T - port_a.T";
-  parameter Modelica.Units.SI.Pressure p_start=1200.0
+  parameter Modelica.SIunits.Pressure p_start=1200.0
     "membrane concentration start value";
-  parameter Modelica.Units.SI.Pressure dp=100.0
+  parameter Modelica.SIunits.Pressure dp=100.0
     "Start value for concentration gradient in membrane";
-  parameter Modelica.Units.SI.MassFlowRate m_flow_start=m_flow_nominal
+  parameter Modelica.SIunits.MassFlowRate m_flow_start = m_flow_nominal
     "Start value for mass flow rate";
   parameter Real A=5.38E7
     "constant A of linear dependency equation for permeability";

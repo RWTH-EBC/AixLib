@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 partial model PartialHeatPumpSystem
   "Partial model containing the basic heat pump block and different control blocks(optional)"
     extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -21,11 +21,12 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(group="Sink"),choicesAllMatching=true);
   replaceable package Medium_eva = Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(group="Source"), choicesAllMatching=true);
-  parameter Modelica.Units.SI.MassFlowRate mFlow_conNominal
+  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate, used for regularization near zero flow"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.MassFlowRate mFlow_evaNominal
-    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
+    "Nominal mass flow rate"
+    annotation (Dialog(group="Nominal condition"));
   final parameter Medium_con.ThermodynamicState stateCon_default = Medium_con.setState_pTX(
     T=Medium_con.T_default,
     p=Medium_con.p_default,
@@ -41,7 +42,7 @@ partial model PartialHeatPumpSystem
 
   replaceable model SecHeatGen = AixLib.Fluid.HeatExchangers.HeaterCooler_u                                                                                   annotation(Dialog(group="System", enable=
           use_secHeaGen), choicesAllMatching=true);
-  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
+  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
     annotation (Dialog(group="System", enable=use_secHeaGen), Evaluate=true);
   parameter Boolean use_conPum=true
@@ -93,12 +94,12 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_antLeg=true
     "True if Anti-Legionella control is considered"
     annotation (Dialog(tab="Heat Pump Control", group="Anti Legionella", descriptionLabel = true),choices(checkBox=true));
-  parameter Modelica.Units.SI.ThermodynamicTemperature TLegMin=333.15
+  parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
     "Temperature at which the legionella in DWH dies" annotation (Dialog(
       tab="Heat Pump Control",
       group="Anti Legionella",
       enable=use_antLeg), Evaluate=true);
-  parameter Modelica.Units.SI.Time minTimeAntLeg
+  parameter Modelica.SIunits.Time minTimeAntLeg
     "Minimal duration of antilegionella control" annotation (Dialog(
       tab="Heat Pump Control",
       group="Anti Legionella",
@@ -128,18 +129,16 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_minRunTime=false
     "False if minimal runtime of HP is not considered"
     annotation (Dialog(enable=use_sec, tab="Safety Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
-  parameter Modelica.Units.SI.Time minRunTime=300
-    "Minimum runtime of heat pump" annotation (Dialog(
-      tab="Safety Control",
-      group="On-/Off Control",
+  parameter Modelica.SIunits.Time minRunTime=300
+    "Minimum runtime of heat pump"
+    annotation (Dialog(tab="Safety Control", group="On-/Off Control",
       enable=use_sec and use_minRunTime), Evaluate=true);
   parameter Boolean use_minLocTime=false
     "False if minimal locktime of HP is not considered"
     annotation (Dialog(tab="Safety Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Modelica.Units.SI.Time minLocTime=300
-    "Minimum lock time of heat pump" annotation (Dialog(
-      tab="Safety Control",
-      group="On-/Off Control",
+  parameter Modelica.SIunits.Time minLocTime=300
+    "Minimum lock time of heat pump"
+    annotation (Dialog(tab="Safety Control", group="On-/Off Control",
       enable=use_sec and use_minLocTime), Evaluate=true);
   parameter Boolean use_runPerHou=false
     "False if maximal runs per hour of HP are not considered"
@@ -175,12 +174,8 @@ partial model PartialHeatPumpSystem
       tab="Safety Control",
       group="Operational Envelope",
       enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
-  parameter Modelica.Units.SI.TemperatureDifference dTHystOperEnv=5
-    "Temperature difference used for both upper and lower hysteresis in the operational envelope."
-    annotation (Dialog(
-      tab="Safety Control",
-      group="Operational Envelope",
-      enable=use_opeEnv));
+  parameter Modelica.SIunits.TemperatureDifference dTHystOperEnv=5 "Temperature difference used for both upper and lower hysteresis in the operational envelope."
+    annotation (Dialog(tab="Safety Control", group="Operational Envelope", enable=use_opeEnv));
   parameter Boolean use_deFro=true "False if defrost in not considered"
                                     annotation (choices(checkBox=true), Dialog(
         tab="Safety Control",group="Defrost", descriptionLabel = true, enable=use_sec));
@@ -200,9 +195,9 @@ partial model PartialHeatPumpSystem
       tab="Safety Control",
       group="Defrost",
       enable=use_sec and use_deFro), choices(checkBox=true));
-  parameter Modelica.Units.SI.Power calcPel_deFro
-    "Calculate how much eletrical energy is used to melt ice" annotation (
-      Dialog(
+  parameter Modelica.SIunits.Power calcPel_deFro
+    "Calculate how much eletrical energy is used to melt ice"
+    annotation (Dialog(
       tab="Safety Control",
       group="Defrost",
       enable=use_sec and use_deFro and not use_chiller));
@@ -212,7 +207,7 @@ partial model PartialHeatPumpSystem
       tab="Safety Control",
       group="Anti Freeze Control",
       enable=use_sec),choices(checkBox=true));
-  parameter Modelica.Units.SI.ThermodynamicTemperature TantFre=276.15
+  parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
     "Limit temperature for anti freeze control" annotation (Dialog(
       tab="Safety Control",
       group="Anti Freeze Control",
@@ -248,7 +243,7 @@ partial model PartialHeatPumpSystem
     "Type of energy balance: dynamic (3 initialization options) or steady state (only affects fluid-models)"
     annotation (Dialog(tab="Dynamics", group="Equation"));
 //Assumptions
-  parameter Modelica.Units.SI.Time tauSenT=1
+  parameter Modelica.SIunits.Time tauSenT=1
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
   parameter Boolean transferHeat=true
@@ -269,30 +264,18 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(tab="Assumptions", group="Condenser",
       enable=use_conPum), choices(checkBox=true));
 
-  parameter Modelica.Units.SI.Time tauHeaTraEva=1200
+  parameter Modelica.SIunits.Time tauHeaTraEva=1200
     "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
-    annotation (Dialog(
-      tab="Assumptions",
-      group="Temperature sensors",
-      enable=transferHeat), Evaluate=true);
-  parameter Modelica.Units.SI.Temperature TAmbEva_nominal=273.15
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat), Evaluate=true);
+  parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
-    annotation (Dialog(
-      tab="Assumptions",
-      group="Temperature sensors",
-      enable=transferHeat));
-  parameter Modelica.Units.SI.Time tauHeaTraCon=1200
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
+  parameter Modelica.SIunits.Time tauHeaTraCon=1200
     "Time constant for heat transfer in temperature sensors in condenser, default 20 minutes"
-    annotation (Dialog(
-      tab="Assumptions",
-      group="Temperature sensors",
-      enable=transferHeat), Evaluate=true);
-  parameter Modelica.Units.SI.Temperature TAmbCon_nominal=291.15
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat),Evaluate=true);
+  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
-    annotation (Dialog(
-      tab="Assumptions",
-      group="Temperature sensors",
-      enable=transferHeat));
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
 
   replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
                                               annotation (Placement(
@@ -301,6 +284,7 @@ partial model PartialHeatPumpSystem
   Fluid.Movers.SpeedControlled_y           pumSin(
     redeclare final package Medium = Medium_con,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    final massDynamics=massDynamics,
     final p_start=pCon_start,
     final T_start=TCon_start,
     final X_start=XCon_start,
@@ -309,8 +293,8 @@ partial model PartialHeatPumpSystem
     final init=initType,
     final addPowerToMedium=addPowerToMediumCon,
     final per=perCon,
-    final inputType=AixLib.Fluid.Types.InputType.Continuous)
-                         if use_conPum
+    final inputType=AixLib.Fluid.Types.InputType.Continuous) if
+                            use_conPum
     "Fan or pump at sink side of HP" annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,
@@ -318,7 +302,8 @@ partial model PartialHeatPumpSystem
   Fluid.Movers.SpeedControlled_y      pumSou(
     redeclare package Medium = Medium_eva,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-   final p_start=pEva_start,
+    massDynamics=massDynamics,
+    final p_start=pEva_start,
     final T_start=TEva_start,
     final X_start=XEva_start,
     final allowFlowReversal=allowFlowReversalEva,
@@ -326,8 +311,8 @@ partial model PartialHeatPumpSystem
     final init=initType,
     final addPowerToMedium=addPowerToMediumEva,
     final per=perEva,
-    final inputType=AixLib.Fluid.Types.InputType.Continuous)
-                         if use_evaPum
+    final inputType=AixLib.Fluid.Types.InputType.Continuous) if
+                            use_evaPum
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
@@ -338,8 +323,8 @@ partial model PartialHeatPumpSystem
     annotation (Placement(transformation(extent={{-130,104},{-100,134}})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     final allowFlowReversal=allowFlowReversalEva,
-    redeclare final package Medium = Medium_con)
-                                           if not use_conPum
+    redeclare final package Medium = Medium_con) if
+                                              not use_conPum
                                                             annotation (
       Placement(transformation(
         extent={{6,-6},{-6,6}},
@@ -347,8 +332,8 @@ partial model PartialHeatPumpSystem
         origin={-70,12})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSou(
     final allowFlowReversal=allowFlowReversalCon,
-    redeclare final package Medium = Medium_eva)
-                                           if not use_evaPum
+    redeclare final package Medium = Medium_eva) if
+                                              not use_evaPum
                                                             annotation (
       Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -360,16 +345,17 @@ partial model PartialHeatPumpSystem
     final dp_nominal=0,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
     final Q_flow_nominal=Q_flow_nominal,
-    final energyDynamics=energyDynamics)
-                          if use_secHeaGen annotation (Placement(transformation(
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics) if
+                             use_secHeaGen annotation (Placement(transformation(
         extent={{8,9},{-8,-9}},
         rotation=180,
         origin={40,61})));
 
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
     final allowFlowReversal=allowFlowReversalEva,
-    redeclare final package Medium = Medium_con)
-                                           if not use_secHeaGen
+    redeclare final package Medium = Medium_con) if
+                                              not use_secHeaGen
     "Used if monovalent HP System" annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,

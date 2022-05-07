@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingHeating_usePoke
   extends BuildingHeating(
     roomAgent(usePoke=true),
@@ -9,20 +9,20 @@ model BuildingHeating_usePoke
     heatProducerAgent1(usePoke=true));
 equation
   connect(roomAgent.sendOut, messageNotification.receive[1]) annotation (Line(
-        points={{-41,127},{10,127},{10,150},{102,150},{102,129.2},{122,129.2}},
+        points={{-41,127},{10,127},{10,150},{102,150},{102,128.4},{122,128.4}},
         color={255,0,255}));
   connect(roomAgent1.sendOut, messageNotification.receive[2]) annotation (Line(
-        points={{39,127},{100,127},{100,129.6},{122,129.6}},
+        points={{39,127},{100,127},{100,129.2},{122,129.2}},
                                                          color={255,0,255}));
   connect(heatProducerAgent1.sendOut, messageNotification.receive[3])
     annotation (Line(points={{-1,-131},{114,-131},{114,130},{122,130}},
         color={255,0,255}));
   connect(heatProducerAgent.sendOut, messageNotification.receive[4])
     annotation (Line(points={{-81,-131},{-30,-131},{-30,-142},{116,-142},{116,
-          130.4},{122,130.4}},
+          130.8},{122,130.8}},
                         color={255,0,255}));
   connect(broker.sendOut, messageNotification.receive[5]) annotation (Line(
-        points={{137,67},{144,67},{144,56},{110,56},{110,130.8},{122,130.8}},
+        points={{137,67},{144,67},{144,56},{110,56},{110,131.6},{122,131.6}},
         color={255,0,255}));
   annotation (Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>

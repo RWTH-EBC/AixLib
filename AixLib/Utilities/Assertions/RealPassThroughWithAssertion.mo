@@ -6,8 +6,7 @@ model RealPassThroughWithAssertion
 
   parameter Real minBound "Minimal value for the assertion boundary";
   parameter Real maxBound "Maximal value for the assertion boundary";
-  parameter Modelica.Units.SI.Time startTime=-Modelica.Constants.inf
-    "Time after which assert statement is applied";
+  parameter Modelica.SIunits.Time startTime = -Modelica.Constants.inf "Time after which assert statement is applied";
   parameter AssertionLevel assertLevel=AssertionLevel.error "Level of assertion (built-in enumerator)";
 
 initial equation

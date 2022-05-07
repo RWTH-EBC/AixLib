@@ -2,16 +2,15 @@ within AixLib.Fluid.Storage.BaseClasses;
 model HeatTransferBuoyancyWetter "Heat transfer with buoyancy as in Buildings library"
   extends AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers;
 
-  parameter Modelica.Units.SI.Time tau(min=0) = 100 "Time constant for mixing";
-  Modelica.Units.SI.HeatFlowRate[n - 1] qFlow
-    "Heat flow rate from segment i+1 to i";
+  parameter Modelica.SIunits.Time tau(min=0)=100 "Time constant for mixing";
+  Modelica.SIunits.HeatFlowRate[n-1] qFlow "Heat flow rate from segment i+1 to i";
 
 protected
-  parameter Modelica.Units.SI.Density rho0=1000
+   parameter Modelica.SIunits.Density rho0=1000
     "Density, used to compute fluid mass";
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp0=4180
+   parameter Modelica.SIunits.SpecificHeatCapacity cp0=4180
     "Specific heat capacity";
-  Modelica.Units.SI.TemperatureDifference dT[n - 1]
+   Modelica.SIunits.TemperatureDifference dT[n-1]
     "Temperature difference between adjoining volumes";
    parameter Real k(unit="W/K2") = data.hTank*Modelica.Constants.pi/4*data.dTank^2*rho0*cp0/tau/n
     "Proportionality constant, since we use dT instead of dH";

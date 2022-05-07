@@ -4,8 +4,8 @@ partial model PartialWindow "Partial model for windows"
   parameter Boolean use_windSpeedPort=true "Enable wind speed input connector" annotation (Dialog(tab="Connector usage", group="Inputs"));
   parameter Boolean use_solarRadWinTrans=true "Enable transmitted solar radiation output connector" annotation (Dialog(tab="Connector usage", group="Outputs"));
 
-  parameter Modelica.Units.SI.Area windowarea "Total fenestration area";
-  parameter Modelica.Units.SI.Temperature T0=293.15 "Initial temperature";
+  parameter Modelica.SIunits.Area windowarea "Total fenestration area";
+  parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature";
 
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window record / type" annotation (Dialog(group="Window type", descriptionLabel=true), choicesAllMatching=true);
 

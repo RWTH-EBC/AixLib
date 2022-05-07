@@ -3,7 +3,7 @@ model OpenLoopVarTSupplyDpBypass
   "A small open loop example with a Substation with variable dT for fixed return temperature"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.Units.SI.Temperature T_amb=283.15
+  parameter Modelica.SIunits.Temperature T_amb = 283.15
     "Ambient temperature around pipes";
 
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT (
@@ -29,6 +29,7 @@ model OpenLoopVarTSupplyDpBypass
         rotation=180,
         origin={0,-60})));
   FixedResistances.PlugFlowPipe pipeSupply(
+    nPorts=1,
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
@@ -39,6 +40,7 @@ model OpenLoopVarTSupplyDpBypass
         rotation=270,
         origin={60,0})));
   FixedResistances.PlugFlowPipe pipeReturn(
+    nPorts=1,
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
@@ -72,8 +74,8 @@ model OpenLoopVarTSupplyDpBypass
         origin={-80,-80})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=12000,
-    f=1/10000,
-    offset=24000) "A sine wave for varying heat demands" annotation (Placement(
+    freqHz=1/10000,
+    offset=24000)  "A sine wave for varying heat demands" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -86,11 +88,11 @@ model OpenLoopVarTSupplyDpBypass
 equation
   connect(sourceIdeal.port_b, pipeSupply.port_a)
     annotation (Line(points={{10,60},{60,60},{60,10}}, color={0,127,255}));
-  connect(pipeSupply.port_b, demand.port_a)
+  connect(pipeSupply.ports_b[1], demand.port_a)
     annotation (Line(points={{60,-10},{60,-60},{10,-60}}, color={0,127,255}));
   connect(demand.port_b, pipeReturn.port_a) annotation (Line(points={{-10,-60},{
           -60,-60},{-60,-10}}, color={0,127,255}));
-  connect(pipeReturn.port_b, sourceIdeal.port_a)
+  connect(pipeReturn.ports_b[1], sourceIdeal.port_a)
     annotation (Line(points={{-60,10},{-60,60},{-10,60}}, color={0,127,255}));
   connect(TSet.y, sourceIdeal.TIn)
     annotation (Line(points={{-20,77},{-20,67},{-10.6,67}}, color={0,0,127}));

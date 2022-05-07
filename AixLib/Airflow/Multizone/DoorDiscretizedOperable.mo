@@ -1,90 +1,91 @@
 within AixLib.Airflow.Multizone;
-model DoorDiscretizedOperable
-  "Door model using discretization along height coordinate"
-  extends AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized;
-
-  parameter Modelica.Units.SI.PressureDifference dpCloRat(
-    min=0,
-    displayUnit="Pa") = 4 "Pressure drop at rating condition of closed door"
-    annotation (Dialog(group="Rating conditions"));
-
-  parameter Real CDCloRat(min=0, max=1)=1
-    "Discharge coefficient at rating conditions of closed door"
-      annotation (Dialog(group="Rating conditions"));
-
-  parameter Modelica.Units.SI.Area LClo(min=0)
-    "Effective leakage area of closed door"
-    annotation (Dialog(group="Closed door"));
-
-  parameter Real CDOpe=0.65 "Discharge coefficient of open door"
-    annotation (Dialog(group="Open door"));
-  parameter Real CDClo=0.65 "Discharge coefficient of closed door"
-    annotation (Dialog(group="Closed door"));
-
-  parameter Real mOpe = 0.5 "Flow exponent for door of open door"
-    annotation (Dialog(group="Open door"));
-  parameter Real mClo= 0.65 "Flow exponent for crack of closed door"
-    annotation (Dialog(group="Closed door"));
-
-  Modelica.Blocks.Interfaces.RealInput y(min=0, max=1, unit="1")
-    "Opening signal, 0=closed, 1=open"
-    annotation (Placement(transformation(extent={{-120,-10},{-100,10}}), iconTransformation(extent={{-120,-10},{-100,10}})));
-protected
-  parameter Modelica.Units.SI.Area AOpe=wOpe*hOpe "Open aperture area";
-  parameter Modelica.Units.SI.Area AClo(fixed=false) "Closed aperture area";
-
-  Real COpe "Open aperture flow coefficient, C = V_flow/ dp^m";
-  Real CClo "Closed aperture flow coefficient, C = V_flow/ dp^m";
-
- Real fraOpe "Fraction of aperture that is open";
-initial equation
-  AClo=CDClo/CDCloRat * LClo * dpCloRat^(0.5-mClo);
-equation
-  fraOpe =y;
-  CClo = CDClo * AClo/nCom * sqrt(2/rho_default);
-  COpe = CDOpe * AOpe/nCom * sqrt(2/rho_default);
-
-  // flow exponent
-  m    = fraOpe*mOpe + (1-fraOpe)*mClo;
-  // opening area
-  A = fraOpe*AOpe + (1-fraOpe)*AClo;
-  // friction coefficient for power law
-  CVal = fraOpe*COpe + (1-fraOpe)*CClo;
-
-  // orifice equation
-  for i in 1:nCom loop
-    dV_flow[i] = AixLib.Airflow.Multizone.BaseClasses.powerLaw(C=CVal,
-      dp=dpAB[i],
-      m=m,
-      dp_turbulent=dp_turbulent);
-  end for;
-
-  annotation (Icon(graphics={
-        Text(
-          extent={{-118,34},{-98,16}},
-          textColor={0,0,127},
-          textString=
-               "y"),
-        Rectangle(
-          extent={{-100,2},{-46,-2}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={255,128,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-46,-16},{-20,-20}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={255,128,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-46,2},{-40,-16}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={255,128,0},
-          fillPattern=FillPattern.Solid)}),
-defaultComponentName="doo",
-Documentation(info="<html>
+ model DoorDiscretizedOperable
+   "Door model using discretization along height coordinate"
+   extends AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized;
+ 
+    parameter Modelica.SIunits.PressureDifference dpCloRat(min=0,
+                                                           displayUnit="Pa") = 4
+     "Pressure drop at rating condition of closed door"
+       annotation (Dialog(group="Rating conditions"));
+ 
+   parameter Real CDCloRat(min=0, max=1)=1
+     "Discharge coefficient at rating conditions of closed door"
+       annotation (Dialog(group="Rating conditions"));
+ 
+   parameter Modelica.SIunits.Area LClo(min=0)
+     "Effective leakage area of closed door"
+       annotation (Dialog(group="Closed door"));
+ 
+   parameter Real CDOpe=0.65 "Discharge coefficient of open door"
+     annotation (Dialog(group="Open door"));
+   parameter Real CDClo=0.65 "Discharge coefficient of closed door"
+     annotation (Dialog(group="Closed door"));
+ 
+   parameter Real mOpe = 0.5 "Flow exponent for door of open door"
+     annotation (Dialog(group="Open door"));
+   parameter Real mClo= 0.65 "Flow exponent for crack of closed door"
+     annotation (Dialog(group="Closed door"));
+ 
+   Modelica.Blocks.Interfaces.RealInput y(min=0, max=1, unit="1")
+     "Opening signal, 0=closed, 1=open"
+     annotation (Placement(transformation(extent={{-120,-10},{-100,10}}), iconTransformation(extent={{-120,-10},{-100,10}})));
+ protected
+  parameter Modelica.SIunits.Area AOpe=wOpe*hOpe "Open aperture area";
+  parameter Modelica.SIunits.Area AClo(fixed=false) "Closed aperture area";
+ 
+  Real kOpe "Open aperture flow coefficient, k = V_flow/ dp^m";
+  Real kClo "Closed aperture flow coefficient, k = V_flow/ dp^m";
+ 
+  Real fraOpe "Fraction of aperture that is open";
+ initial equation
+   AClo=CDClo/CDCloRat * LClo * dpCloRat^(0.5-mClo);
+ equation
+   fraOpe =y;
+   kClo = CDClo * AClo/nCom * sqrt(2/rho_default);
+   kOpe = CDOpe * AOpe/nCom * sqrt(2/rho_default);
+ 
+   // flow exponent
+   m    = fraOpe*mOpe + (1-fraOpe)*mClo;
+   // opening area
+   A = fraOpe*AOpe + (1-fraOpe)*AClo;
+   // friction coefficient for power law
+   kVal = fraOpe*kOpe + (1-fraOpe)*kClo;
+ 
+   // orifice equation
+   for i in 1:nCom loop
+     dV_flow[i] = AixLib.Airflow.Multizone.BaseClasses.powerLaw(
+       k=kVal,
+       dp=dpAB[i],
+       m=m,
+       dp_turbulent=dp_turbulent);
+   end for;
+ 
+   annotation (Icon(graphics={
+         Text(
+           extent={{-118,34},{-98,16}},
+           lineColor={0,0,127},
+           textString=
+                "y"),
+         Rectangle(
+           extent={{-100,2},{-46,-2}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={255,128,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-46,-16},{-20,-20}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={255,128,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-46,2},{-40,-16}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={255,128,0},
+           fillPattern=FillPattern.Solid)}),
+ defaultComponentName="doo",
+ Documentation(info="<html>
  <p>
  This model describes the bi-directional air flow through an open door.
  </p>
@@ -104,7 +105,7 @@ Documentation(info="<html>
  for a door that is always closed.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  June 27, 2018, by Michael Wetter:<br/>
@@ -147,6 +148,6 @@ revisions="<html>
  Released first version.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end DoorDiscretizedOperable;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end DoorDiscretizedOperable;

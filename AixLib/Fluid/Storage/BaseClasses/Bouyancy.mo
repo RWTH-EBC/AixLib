@@ -1,15 +1,15 @@
 within AixLib.Fluid.Storage.BaseClasses;
 model Bouyancy
-  parameter Modelica.Units.SI.Area A=1;
-  parameter Modelica.Units.SI.RelativePressureCoefficient beta=350e-6;
-  parameter Modelica.Units.SI.Length dx=0.2;
+  parameter Modelica.SIunits.Area A = 1;
+  parameter Modelica.SIunits.RelativePressureCoefficient beta = 350e-6;
+  parameter Modelica.SIunits.Length dx = 0.2;
   parameter Real kappa = 0.4;
-  Modelica.Units.SI.TemperatureDifference dT;
-  Modelica.Units.SI.ThermalConductivity lambda_eff;
-  parameter Modelica.Units.SI.Acceleration g=Modelica.Constants.g_n;
-  Modelica.Units.SI.SpecificHeatCapacity cp=4180;
-  Modelica.Units.SI.ThermalConductivity lambda=0.598;
-  Modelica.Units.SI.Density rho=1000;
+  Modelica.SIunits.TemperatureDifference dT;
+  Modelica.SIunits.ThermalConductivity lambda_eff;
+  parameter Modelica.SIunits.Acceleration g = Modelica.Constants.g_n;
+  Modelica.SIunits.SpecificHeatCapacity cp = 4180;
+  Modelica.SIunits.ThermalConductivity lambda = 0.598;
+  Modelica.SIunits.Density rho = 1000;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-16, 86}, {4, 106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{-16, -104}, {4, -84}})));
 equation

@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.BaseClasses;
+within AixLib.Controls.HeatPump.BaseClasses;
 model InverterControlledHP "Converter model for an inverter / speed controlled HP modulating between 0 and 1"
   extends PartialTSetToNSet;
   parameter Real hys "Hysteresis of controller";
@@ -15,7 +15,7 @@ model InverterControlledHP "Converter model for an inverter / speed controlled H
     annotation (Placement(transformation(extent={{14,38},{34,58}})));
   parameter Real k=0.1 "Gain of controller"
     annotation (Dialog(group="PI Values"));
-  parameter Modelica.Units.SI.Time Ti=30 "Time constant of Integrator block"
+  parameter Modelica.SIunits.Time Ti=30 "Time constant of Integrator block"
     annotation (Dialog(group="PI Values"));
 equation
   connect(TSet, onOffController.reference) annotation (Line(points={{-116,60},{

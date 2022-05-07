@@ -23,8 +23,8 @@ model SelfShadowingTestBelow
   Modelica.Blocks.Sources.Constant solAzi(k=0)
     "Constant solar azimuth angle (north)"
     annotation (Placement(transformation(extent={{-88,24},{-68,44}})));
-  Modelica.Blocks.Sources.Sine altSine(f=1, amplitude=Modelica.Constants.pi/3)
-    "Solar altitude angle generated as a sine"
+  Modelica.Blocks.Sources.Sine altSine(freqHz=1, amplitude=Modelica.Constants.pi
+        /3) "Solar altitude angle generated as a sine"
     annotation (Placement(transformation(extent={{-88,56},{-68,76}})));
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.SelfShadowing selfShadowingBalkony(
     final bRig={0},
@@ -47,8 +47,9 @@ model SelfShadowingTestBelow
   Modelica.Blocks.Sources.Constant solAzi1(k=0)
     "Constant solar azimuth angle (north)"
     annotation (Placement(transformation(extent={{-88,-62},{-68,-42}})));
-  Modelica.Blocks.Sources.Sine altSine1(f=1, amplitude=Modelica.Constants.pi/3)
-    "Solar altitude angle generated as a sine"
+  Modelica.Blocks.Sources.Sine altSine1(
+                                       freqHz=1, amplitude=Modelica.Constants.pi
+        /3) "Solar altitude angle generated as a sine"
     annotation (Placement(transformation(extent={{-88,-30},{-68,-10}})));
 equation
   connect(incAng1.incAng, selfShadowingBelow.incAng[1]) annotation (Line(

@@ -1,10 +1,10 @@
-﻿within AixLib.BoundaryConditions.InternalGains.Moisture;
+within AixLib.BoundaryConditions.InternalGains.Moisture;
 model MoistureGains
   "Model for moisture gains that are produced by plants, cooking, etc."
 
   parameter Real specificMoistureProduction(unit="g/(h.m.m)") = 0.5
     "Specific moisture production without persons in the room due to plants, cooking, showering, etc.";
-  parameter Modelica.Units.SI.Area roomArea=20 "Area of room";
+  parameter Modelica.SIunits.Area roomArea=20 "Area of room";
 
   Modelica.Blocks.Interfaces.RealOutput QLat_flow
     "Latent heat of moisture gain"
@@ -24,9 +24,8 @@ model MoistureGains
   "Specific latent heat of moisture"
     annotation (Placement(transformation(extent={{56,-44},{36,-24}})));
 protected
-  constant Modelica.Units.SI.SpecificEnergy h_fg=
-      Media.Air.enthalpyOfCondensingGas(273.15 + 37)
-    "Latent heat of water vapor";
+  constant Modelica.SIunits.SpecificEnergy h_fg=
+    Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
   connect(moistureGain.y, squareMetre.u)
     annotation (Line(points={{-59,10},{-32,10}}, color={0,0,127}));

@@ -12,20 +12,15 @@ model HeatConvOutside "Model for heat transfer at outside surfaces. Choice betwe
       choice=2 "ASHRAE Fundamentals (convective + radiative)",
       choice=3 "Custom hCon (constant)",
       radioButtons=true));
-  parameter Modelica.Units.SI.Area A(min=0) "Area of surface"
-    annotation (Dialog(group="Surface properties", descriptionLabel=true));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=25
-    "Custom convective heat transfer coeffient" annotation (Dialog(
-      group="Surface properties",
-      descriptionLabel=true,
-      enable=calcMethod == 3));
+  parameter Modelica.SIunits.Area A(min=0) "Area of surface" annotation(Dialog(group = "Surface properties", descriptionLabel = true));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=25 "Custom convective heat transfer coeffient"     annotation(Dialog(group="Surface properties",   descriptionLabel = true, enable=
+          calcMethod == 3));
   parameter
     DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type"                                                                                                     annotation(Dialog(group = "Surface properties", descriptionLabel = true, enable=
           calcMethod == 2),                                                                                                                                                                                           choicesAllMatching = true);
   // Variables
-  Modelica.Units.SI.CoefficientOfHeatTransfer hCon
-    "Convection heat transfer coeffient";
+  Modelica.SIunits.CoefficientOfHeatTransfer hCon "Convection heat transfer coeffient";
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if calcMethod == 1 or calcMethod == 2              annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent={{-100,-80},{-80,-60}})));
 
 protected

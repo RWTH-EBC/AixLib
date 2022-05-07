@@ -10,15 +10,15 @@ model RotaryCompressorPressureHeatLosses
    Modelica.Media.R134a.R134a_ph
    "Medium of the compressor";
 
-  parameter Modelica.Units.SI.AbsolutePressure pInl=Medium.pressure(
-      Medium.setBubbleState(Medium.setSat_T(TInl + 1)))
+  parameter Modelica.SIunits.AbsolutePressure pInl=
+    Medium.pressure(Medium.setBubbleState(Medium.setSat_T(TInl+1)))
     "Current pressure at inlet conditions";
-  parameter Modelica.Units.SI.Temperature TInl=283.15
+  parameter Modelica.SIunits.Temperature TInl = 283.15
     "Current temperature at inlet conditions";
-  parameter Modelica.Units.SI.AbsolutePressure pOut=Medium.pressure(
-      Medium.setDewState(Medium.setSat_T(TOut - 5)))
+  parameter Modelica.SIunits.AbsolutePressure pOut=
+    Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut-5)))
     "Current set point of the compressor's outlet pressure";
-  parameter Modelica.Units.SI.Temperature TOut=333.15
+  parameter Modelica.SIunits.Temperature TOut = 333.15
     "Current temperature at outlet conditions";
 
   // Definition of models
@@ -32,7 +32,8 @@ model RotaryCompressorPressureHeatLosses
   Modelica.Blocks.Sources.Sine rotSpe(
     amplitude=40,
     offset=80,
-    f=1) "Prescribed compressor's rotational speed"
+    freqHz=1)
+    "Prescribed compressor's rotational speed"
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixTem(T=283.15)
     "Fixed ambient temperature"
@@ -56,7 +57,8 @@ model RotaryCompressorPressureHeatLosses
   Modelica.Blocks.Sources.Sine valOpe(
     offset=0.5,
     amplitude=0.3,
-    f=1) "Prescribed valve's opening"
+    freqHz=1)
+    "Prescribed valve's opening"
     annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
   Obsolete.Year2021.Fluid.Actuators.Valves.SimpleValve simVal(
     redeclare package Medium = Medium,

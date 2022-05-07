@@ -1,54 +1,56 @@
 within AixLib.Fluid.MixingVolumes.Validation;
-model MixingVolumeMFactor
-  "A check for verifying the implementation of the parameter mSenFac"
-  extends AixLib.Fluid.MixingVolumes.Validation.MixingVolumeMassFlow(
-  sou(X={0.02,0.98},
-      T=Medium.T_default),
-  vol(mSenFac=10),
-    bou(nPorts=3));
-  AixLib.Fluid.MixingVolumes.MixingVolume volMFactor(
-    redeclare package Medium = Medium,
-    mSenFac=10,
-    V=1,
-    nPorts=2,
-    m_flow_nominal=m_flow_nominal,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
-    "Mixing volume using mSenFac = 10"
-    annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
-  AixLib.Fluid.MixingVolumes.MixingVolume vol1(
-    redeclare package Medium = Medium,
-    V=10,
-    nPorts=2,
-    m_flow_nominal=m_flow_nominal,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
-    "MixingVolume with V = 10 instead of mSenFac = 10"
-    annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
-  AixLib.Fluid.Sources.MassFlowSource_T boundaryMFactor(
-    redeclare package Medium = Medium,
-    T=300,
-    nPorts=1,
-    m_flow=1,
-    X={0.02,0.98}) "Flow source for mixing volume using mSenFac"
-              annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
-  AixLib.Fluid.Sources.MassFlowSource_T boundary(
-    redeclare package Medium = Medium,
-    T=300,
-    nPorts=1,
-    m_flow=1,
-    X={0.02,0.98}) "Flow source for mixing volume using larger volume"
-    annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
-equation
-  connect(boundaryMFactor.ports[1],volMFactor. ports[1]) annotation (Line(
-      points={{-40,-40},{-2,-40}},
-      color={0,127,255}));
-  connect(boundary.ports[1], vol1.ports[1]) annotation (Line(
-      points={{-40,-80},{-2,-80}},
-      color={0,127,255}));
-  connect(bou.ports[2], volMFactor.ports[2]) annotation (Line(points={{40,
-          1.33227e-15},{20,1.33227e-15},{20,-40},{2,-40}}, color={0,127,255}));
-  connect(bou.ports[3], vol1.ports[2]) annotation (Line(points={{40,1.33227e-15},
-          {20,1.33227e-15},{20,-80},{2,-80}}, color={0,127,255}));
-  annotation (Documentation(info="<html>
+ model MixingVolumeMFactor
+   "A check for verifying the implementation of the parameter mSenFac"
+   extends AixLib.Fluid.MixingVolumes.Validation.MixingVolumeMassFlow(
+   sou(X={0.02,0.98},
+       T=Medium.T_default),
+   vol(mSenFac=10),
+     bou(nPorts=3));
+   AixLib.Fluid.MixingVolumes.MixingVolume volMFactor(
+     redeclare package Medium = Medium,
+     mSenFac=10,
+     V=1,
+     nPorts=2,
+     m_flow_nominal=m_flow_nominal,
+     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial)
+     "Mixing volume using mSenFac = 10"
+     annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
+   AixLib.Fluid.MixingVolumes.MixingVolume vol1(
+     redeclare package Medium = Medium,
+     V=10,
+     nPorts=2,
+     m_flow_nominal=m_flow_nominal,
+     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial)
+     "MixingVolume with V = 10 instead of mSenFac = 10"
+     annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
+   AixLib.Fluid.Sources.MassFlowSource_T boundaryMFactor(
+     redeclare package Medium = Medium,
+     T=300,
+     nPorts=1,
+     m_flow=1,
+     X={0.02,0.98}) "Flow source for mixing volume using mSenFac"
+               annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
+   AixLib.Fluid.Sources.MassFlowSource_T boundary(
+     redeclare package Medium = Medium,
+     T=300,
+     nPorts=1,
+     m_flow=1,
+     X={0.02,0.98}) "Flow source for mixing volume using larger volume"
+     annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
+ equation
+   connect(boundaryMFactor.ports[1],volMFactor. ports[1]) annotation (Line(
+       points={{-40,-40},{-2,-40}},
+       color={0,127,255}));
+   connect(boundary.ports[1], vol1.ports[1]) annotation (Line(
+       points={{-40,-80},{-2,-80}},
+       color={0,127,255}));
+   connect(bou.ports[2], volMFactor.ports[2]) annotation (Line(points={{40,
+           1.33227e-15},{20,1.33227e-15},{20,-40},{2,-40}}, color={0,127,255}));
+   connect(bou.ports[3], vol1.ports[2]) annotation (Line(points={{40,1.33227e-15},
+           {20,1.33227e-15},{20,-80},{2,-80}}, color={0,127,255}));
+   annotation (Documentation(info="<html>
  <p>This model contains two verifications for the implementation of <code>mSenFac</code>:</p>
  <ol>
  <li>
@@ -67,7 +69,7 @@ equation
  AixLib.Fluid.MixingVolumes.Validation.MixingVolumeMassFlow</a>
  for the rational of the selected initial conditions for the volumes.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  March 27, 2015 by Michael Wetter:<br/>
@@ -89,9 +91,9 @@ equation
  </li>
  </ul>
  </html>"),
-experiment(Tolerance=1E-6, StopTime=100),
-__Dymola_Commands(file=
-          "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeMFactor.mos"
-        "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end MixingVolumeMFactor;
+ experiment(Tolerance=1E-6, StopTime=100),
+ __Dymola_Commands(file=
+           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeMFactor.mos"
+         "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end MixingVolumeMFactor;

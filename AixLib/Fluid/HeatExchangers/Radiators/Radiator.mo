@@ -1,7 +1,6 @@
-﻿within AixLib.Fluid.HeatExchangers.Radiators;
+within AixLib.Fluid.HeatExchangers.Radiators;
 model Radiator "Radiator multilayer model"
-  import SIunits =
-         Modelica.Units.SI;
+  import Modelica.SIunits;
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
@@ -64,17 +63,19 @@ model Radiator "Radiator multilayer model"
     "Height of raditor, in m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry",
     enable=not selectable));
-  parameter Modelica.Units.SI.Area A=2*length*height "Radiator surface area"
+  parameter Modelica.SIunits.Area A=2*length*height
+    "Radiator surface area"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter Modelica.Units.SI.Length d=0.025 "Thickness of radiator wall"
+  parameter Modelica.SIunits.Length d=0.025 "Thickness of radiator wall"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-  parameter Modelica.Units.SI.Emissivity eps=0.95 "Emissivity"
+  parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
 
-  parameter SIunits.Temperature RT_nom[3]=(if selectable then radiatorType.RT_nom
-       else Modelica.Units.Conversions.from_degC({75,65,20}))
+  parameter SIunits.Temperature RT_nom[3]=
+    (if selectable then radiatorType.RT_nom
+    else Modelica.SIunits.Conversions.from_degC({75,65,20}))
     "Nominal temperatures (TIn, TOut, TAir) according to DIN-EN 442."
-    annotation (Dialog(group="Miscellaneous", enable=not selectable));
+    annotation (Dialog(group="Miscellaneous",enable=not selectable));
   parameter Real PD = (if selectable then radiatorType.PressureDrop else 548208)
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2"
     annotation (Dialog(group="Miscellaneous", enable=not selectable));

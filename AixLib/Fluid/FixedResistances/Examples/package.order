@@ -5,6 +5,5 @@ GenericPipe
 HydraulicDiameter
 Pipe
 PlugFlowPipe
-PlugFlowPipeDiscretized
 PressureDrop
 SimplePipe

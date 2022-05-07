@@ -1,9 +1,9 @@
-﻿within AixLib.Utilities.MassTransfer;
+within AixLib.Utilities.MassTransfer;
 model MassDiffusion
   "Lumped element transporting mass without storing it"
 
-  Modelica.Units.SI.MassFlowRate m_flow "Mass flow rate from solid -> fluid";
-  Modelica.Units.SI.PartialPressure dp "= solid.p - fluid.p";
+  Modelica.SIunits.MassFlowRate m_flow "Mass flow rate from solid -> fluid";
+  Modelica.SIunits.PartialPressure dp "= solid.p - fluid.p";
   Modelica.Blocks.Interfaces.RealInput Gd(unit="m.m.m/(s.Pa)")
     "Signal representing the convective mass transfer coefficient in [m³/(s Pa)]"
     annotation (Placement(transformation(
@@ -15,7 +15,7 @@ model MassDiffusion
   MassPort fluid
     annotation (Placement(transformation(extent={{84,-16},{116,16}})));
 protected
-  constant Modelica.Units.SI.Density rho=1.21 "density of moist air";
+  constant Modelica.SIunits.Density rho = 1.21 "density of moist air";
 equation
   dp = solid.p - fluid.p;
   solid.m_flow = m_flow;

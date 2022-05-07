@@ -1,35 +1,35 @@
 within AixLib.Fluid.Actuators.Valves;
-model ThreeWayEqualPercentageLinear
-  "Three way valve with equal percentage and linear characteristics"
-    extends BaseClasses.PartialThreeWayValve(
-      redeclare TwoWayEqualPercentage res1(
-        R=R,
-        delta0=delta0,
-        final l=l[1]),
-      redeclare TwoWayLinear res3(
-        final l=l[2]));
-  parameter Real R = 50 "Rangeability, R=50...100 typically";
-  parameter Real delta0 = 0.01
-    "Range of significant deviation from equal percentage law";
-
-equation
-  connect(inv.y, res3.y) annotation (Line(points={{-62.6,46},{20,46},{20,46},{
-          20,-50},{12,-50}},
-                         color={0,0,127}));
-  connect(y_actual, inv.u2) annotation (Line(points={{50,70},{84,70},{84,32},{-68,
-          32},{-68,41.2}},
-                         color={0,0,127}));
-  connect(y_actual, res1.y) annotation (Line(points={{50,70},{84,70},{84,32},{
-          -50,32},{-50,12}},
-        color={0,0,127}));
-  annotation (                       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics={Text(
-          extent={{-72,24},{-34,-20}},
-          textColor=DynamicSelect({255,255,255}, (1-y)*{255,255,255}),
-          fillPattern=FillPattern.Solid,
-          textString="%%")}),
-defaultComponentName="val",
-Documentation(info="<html>
+ model ThreeWayEqualPercentageLinear
+   "Three way valve with equal percentage and linear characteristics"
+     extends BaseClasses.PartialThreeWayValve(
+       redeclare TwoWayEqualPercentage res1(
+         R=R,
+         delta0=delta0,
+         final l=l[1]),
+       redeclare TwoWayLinear res3(
+         final l=l[2]));
+   parameter Real R = 50 "Rangeability, R=50...100 typically";
+   parameter Real delta0 = 0.01
+     "Range of significant deviation from equal percentage law";
+ 
+ equation
+   connect(inv.y, res3.y) annotation (Line(points={{-62.6,46},{20,46},{20,46},{
+           20,-50},{12,-50}},
+                          color={0,0,127}));
+   connect(y_actual, inv.u2) annotation (Line(points={{50,70},{84,70},{84,32},{-68,
+           32},{-68,41.2}},
+                          color={0,0,127}));
+   connect(y_actual, res1.y) annotation (Line(points={{50,70},{84,70},{84,32},{
+           -50,32},{-50,12}},
+         color={0,0,127}));
+   annotation (                       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+             -100},{100,100}}), graphics={Text(
+           extent={{-72,24},{-34,-20}},
+           lineColor=DynamicSelect({255,255,255}, (1-y)*{255,255,255}),
+           fillPattern=FillPattern.Solid,
+           textString="%%")}),
+ defaultComponentName="val",
+ Documentation(info="<html>
  <p>
  Three way valve with equal percentage characteristics
  between <code>port_1</code> and <code>port_2</code>
@@ -52,21 +52,8 @@ Documentation(info="<html>
  for the implementation of the regularization near the origin.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
- <li>
- March 7, 2022, by Michael Wetter:<br/>
- Set <code>final massDynamics=energyDynamics</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
- </li>
- <li>
- June 10, 2021, by Michael Wetter:<br/>
- Changed implementation of the filter and changed the parameter <code>order</code> to a constant
- as most users need not change this value.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
- </li>
  <li>
  February 21, 2020, by Michael Wetter:<br/>
  Changed icon to display its operating stage.<br/>
@@ -102,6 +89,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end ThreeWayEqualPercentageLinear;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end ThreeWayEqualPercentageLinear;

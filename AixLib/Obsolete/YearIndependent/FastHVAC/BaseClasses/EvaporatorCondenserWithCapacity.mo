@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.BaseClasses;
+within AixLib.Obsolete.YearIndependent.FastHVAC.BaseClasses;
 model EvaporatorCondenserWithCapacity
   extends
     AixLib.Obsolete.YearIndependent.FastHVAC.Interfaces.TwoPortHeatMassExchanger(
@@ -7,15 +7,16 @@ model EvaporatorCondenserWithCapacity
   annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
       choice=false "Evaporator",
       radioButtons=true));
-  parameter Modelica.Units.SI.Volume V "Volume in condenser";
+  parameter Modelica.SIunits.Volume V "Volume in condenser";
   parameter Boolean use_cap=true "False if capacity and heat losses are neglected"
   annotation (Dialog(group="Heat losses"),choices(checkBox=true));
-  parameter Modelica.Units.SI.HeatCapacity C "Capacity of heat exchanger"
-    annotation (Dialog(group="Heat losses", enable=use_cap));
-  parameter Modelica.Units.SI.Mass m_fluid "Mass of working fluid";
-  parameter Modelica.Units.SI.ThermalConductance kAOut_nominal
+  parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
+  annotation (Dialog(group="Heat losses", enable=use_cap));
+  parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";
+  parameter Modelica.SIunits.ThermalConductance kAOut_nominal
     "Nominal value for thermal conductance to the ambient"
-    annotation (Dialog(group="Heat losses", enable=use_cap));
+  annotation (Dialog(group="Heat losses", enable=
+          use_cap));
   Modelica.Blocks.Interfaces.RealOutput kAInn
     "Formular for calculation of heat transfer coefficient on the inside"
   annotation (Dialog(group="Heat losses", enable=
@@ -40,8 +41,8 @@ model EvaporatorCondenserWithCapacity
         rotation=270,
         origin={12,52})));
 
-  Modelica.Blocks.Sources.RealExpression heatLossIns(final y=kAInn)
-                                            if use_cap
+  Modelica.Blocks.Sources.RealExpression heatLossIns(final y=kAInn) if
+                                               use_cap
     "Nominal heat loss coefficient to the inside" annotation (Placement(
         transformation(
         extent={{-15,-10},{15,10}},

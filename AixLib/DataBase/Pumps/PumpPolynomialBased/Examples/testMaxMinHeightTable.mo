@@ -17,13 +17,13 @@ model testMaxMinHeightTable
     annotation (Placement(transformation(extent={{40,10},{80,50}})));
   Modelica.Blocks.Interfaces.RealOutput HminCurve
     annotation (Placement(transformation(extent={{40,-50},{80,-10}})));
-  Modelica.Blocks.Tables.CombiTable1Dv maxMinTable(
+  Modelica.Blocks.Tables.CombiTable1D maxMinTable(
     columns={2,3},
     tableName="NoName",
     tableOnFile=false,
     table=param.maxMinHeight)
     "Outputs static head (H). Maximum, minimum and freely selectable pump curve"
-    annotation (Placement(transformation(extent={{-11,-10},{9,10}}, rotation=0)));
+    annotation (Placement(transformation(extent={{-11,-10},{9,10}},  rotation=0)));
 initial equation
   assert(
     (sum(abs(param.maxMinHeight)) <> 0),

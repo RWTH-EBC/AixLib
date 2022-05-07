@@ -21,16 +21,16 @@ model GasolineEngineChp
       AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  parameter Modelica.Units.SI.Temperature T_amb=298.15
+  parameter Modelica.SIunits.Temperature T_amb=298.15
     "Default ambient temperature"
     annotation (Dialog(group="Ambient Parameters"));
-  parameter Modelica.Units.SI.Mass mEng=CHPEngineModel.mEng
+  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
     "Total engine mass for heat capacity calculation"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.Units.SI.Thickness dInn=0.005
+  parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.Units.SI.ThermalConductance GEngToAmb=0.23
+  parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
     "Thermal conductance from engine housing to the surrounding air"
     annotation (Dialog(tab="Engine Cooling Circle"));
 
@@ -105,14 +105,13 @@ protected
   Real modFac=cHPEngBus.modFac
     "Modulation factor for energy outuput control of the Chp unit  "
     annotation (Dialog(group="Engine Parameters"));
-  Modelica.Units.SI.Temperature T_logEngCoo=(cHPEngBus.meaTemInEng + cHPEngBus.meaTemOutEng)
+  Modelica.SIunits.Temperature T_logEngCoo=(cHPEngBus.meaTemInEng + cHPEngBus.meaTemOutEng)
       /2 "Logarithmic mean temperature of coolant inside the engine"
     annotation (Dialog(group="Engine Parameters"));
-  Modelica.Units.SI.Temperature T_ExhCHPOut=cHPEngBus.meaTemExhHexOut
+  Modelica.SIunits.Temperature T_ExhCHPOut=cHPEngBus.meaTemExhHexOut
     "Exhaust gas outlet temperature of CHP unit"
     annotation (Dialog(group="Engine Parameters"));
-  Modelica.Units.SI.Temperature T_Exh=engineToCoolant.T_Exh
-    "Calculated mean temperature of the exhaust gas inside the cylinders"
+  Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Calculated mean temperature of the exhaust gas inside the cylinders"
     annotation (Dialog(group="Thermal"));
 
 equation

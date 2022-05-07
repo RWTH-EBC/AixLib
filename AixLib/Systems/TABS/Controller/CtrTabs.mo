@@ -1,26 +1,23 @@
 within AixLib.Systems.TABS.Controller;
 model CtrTabs "Controller for concrete core activation"
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.Units.SI.Temperature TflowSet=293.15
-    "Flow temperature set point of consumer";
+  parameter Modelica.SIunits.Temperature TflowSet = 293.15 "Flow temperature set point of consumer";
 
 
   parameter Real k_hot(min=0, unit="1") = 0.03 "Gain of controller for the hot throttle circuit" annotation(Dialog(group="Hot water supply circuit"));
-  parameter Modelica.Units.SI.Time Ti_hot(min=Modelica.Constants.small) = 60
-    "Time constant of Integrator block for the hot throttle circuit"
-    annotation (Dialog(group="Hot water supply circuit"));
+  parameter Modelica.SIunits.Time Ti_hot(min=Modelica.Constants.small)=60
+    "Time constant of Integrator block for the hot throttle circuit" annotation(Dialog(group="Hot water supply circuit"));
   parameter Real rpm_pump_hot(min=0, unit="1") = 3000 "Rpm of the pump of the hot throttle circuit" annotation(Dialog(group="Hot water supply circuit"));
 
   parameter Real k_cold(min=0, unit="1") = 0.03 "Gain of controller for the cold throttle circuit" annotation(Dialog(group="Cold water supply circuit"));
-  parameter Modelica.Units.SI.Time Ti_cold(min=Modelica.Constants.small) = 60
-    "Time constant of Integrator block the cold throttle circuit"
-    annotation (Dialog(group="Cold water supply circuit"));
+  parameter Modelica.SIunits.Time Ti_cold(min=Modelica.Constants.small)=60
+    "Time constant of Integrator block the cold throttle circuit" annotation(Dialog(group="Cold water supply circuit"));
   parameter Real rpm_pump_cold(min=0, unit="1") = 3000 "Rpm of the pump of the cold throttle circuit" annotation(Dialog(group="Cold water supply circuit"));
 
 
-  parameter Modelica.Units.NonSI.AngularVelocity_rpm rpm_pump_concrete=2500
-    "Rpm of the Pump that supplies the concrete core"
-    annotation (Dialog(group="Concrete supply circuit"));
+  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm
+  rpm_pump_concrete=2500
+  "Rpm of the Pump that supplies the concrete core" annotation(Dialog(group="Concrete supply circuit"));
 
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,
             -60},{-80,-40}})));
@@ -36,7 +33,7 @@ model CtrTabs "Controller for concrete core activation"
     final Ti=Ti_hot,
     final Td=0,
     final rpm_pump=rpm_pump_hot,
-    initType=Modelica.Blocks.Types.Init.InitialState,
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
     final reverseAction=true)
     annotation (Placement(transformation(extent={{-20,22},{0,42}})));
   HydraulicModules.Controller.CtrThrottle ctrThrottleCold(
@@ -45,7 +42,7 @@ model CtrTabs "Controller for concrete core activation"
     final Ti=Ti_cold,
     final Td=0,
     rpm_pump=rpm_pump_cold,
-    initType=Modelica.Blocks.Types.Init.InitialState,
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
     final reverseAction=false)
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
   HydraulicModules.Controller.CtrPump ctrPump(final rpm_pump=rpm_pump_concrete)

@@ -22,10 +22,10 @@ partial model PartialMassTransfer
   input Medium.ThermodynamicState[n] states
     "Thermodynamic states of flow segments";
 
-  input Modelica.Units.SI.Area[n] surfaceAreas "Heat transfer areas";
+  input Modelica.SIunits.Area[n] surfaceAreas "Heat transfer areas";
 
   // Outputs defined by heat transfer model
-  output Modelica.Units.SI.MassFlowRate[n] m_flows "Mass flow rates";
+  output Modelica.SIunits.MassFlowRate[n] m_flows "Mass flow rates";
 
   // Heat ports
   AixLib.Utilities.MassTransfer.MassPort[n] massPorts
@@ -34,7 +34,7 @@ partial model PartialMassTransfer
             86}})));
 
   // Variables
-  input Modelica.Units.SI.PartialPressure[n] ps "partial pressure at states";
+  input Modelica.SIunits.PartialPressure[n] ps "partial pressure at states";
 
 equation
   m_flows =massPorts.m_flow;

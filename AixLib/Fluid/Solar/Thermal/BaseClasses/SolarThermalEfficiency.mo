@@ -28,9 +28,9 @@ model SolarThermalEfficiency
     "Useful heat flow from solar collector in W/m2"
     annotation (Placement(transformation(extent={{98,-10},{118,10}})));
 protected
-  Modelica.Units.SI.Efficiency eta(max=Collector.eta_zero)
+  Modelica.SIunits.Efficiency eta(max=Collector.eta_zero)
     "Efficiency of solar thermal collector";
-  Modelica.Units.SI.TemperatureDifference dT
+  Modelica.SIunits.TemperatureDifference dT
     "Temperature difference between collector and air in K";
 equation
   dT = T_col - T_air;

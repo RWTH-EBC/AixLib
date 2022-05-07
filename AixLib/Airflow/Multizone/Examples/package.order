@@ -7,9 +7,6 @@ OneEffectiveAirLeakageArea
 OneOpenDoor
 OneRoom
 Orifice
-PowerLaw
-PressurizationData
 ReverseBuoyancy
 ReverseBuoyancy3Zones
-TrickleVent
 ZonalFlow

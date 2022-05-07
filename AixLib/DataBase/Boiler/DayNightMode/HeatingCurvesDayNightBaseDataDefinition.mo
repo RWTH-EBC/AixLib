@@ -2,8 +2,8 @@ within AixLib.DataBase.Boiler.DayNightMode;
 record HeatingCurvesDayNightBaseDataDefinition
   "Base data definition for heating curves for Day and Night"
 extends Modelica.Icons.Record;
-import      Modelica.Units.SI;
-import SIconv = Modelica.Units.NonSI;
+import SI = Modelica.SIunits;
+import SIconv = Modelica.SIunits.Conversions.NonSIunits;
 
 parameter String name "Name of data set";
 parameter Real varFlowTempDay[:,:] "Variable flow temperature during day time";

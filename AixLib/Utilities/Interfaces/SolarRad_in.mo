@@ -1,13 +1,13 @@
 within AixLib.Utilities.Interfaces;
 connector SolarRad_in
   "Scalar total radiation connector (input) with additional direct, diffuse and from ground reflected radiation"
-  input Modelica.Units.SI.RadiantEnergyFluenceRate I
+  input Modelica.SIunits.RadiantEnergyFluenceRate I
     "total radiation normal to the surface";
-  input Modelica.Units.SI.RadiantEnergyFluenceRate I_dir
+  input Modelica.SIunits.RadiantEnergyFluenceRate I_dir
     "direct radiation normal to the surface";
-  input Modelica.Units.SI.RadiantEnergyFluenceRate I_diff
+  input Modelica.SIunits.RadiantEnergyFluenceRate I_diff
     "diffuse radiation normal to the surface";
-  input Modelica.Units.SI.RadiantEnergyFluenceRate I_gr
+  input Modelica.SIunits.RadiantEnergyFluenceRate I_gr
     "radiation due to the ground reflection normal to the surface";
   input Real  AOI(unit = "rad") "Angle of incidence of surface";
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-20, 58}, {96, -58}}, lineColor = {255, 128, 0}), Rectangle(extent = {{52, 100}, {100, -100}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},

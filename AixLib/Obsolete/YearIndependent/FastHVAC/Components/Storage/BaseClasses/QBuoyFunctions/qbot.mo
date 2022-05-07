@@ -1,9 +1,9 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function qbot
-  input Modelica.Units.SI.TemperatureDifference dTover;
-  input Modelica.Units.SI.TemperatureDifference dT13;
+  input Modelica.SIunits.TemperatureDifference dTover;
+  input Modelica.SIunits.TemperatureDifference dT13;
 
-  output Modelica.Units.SI.SpecificEnergy qbot;
+  output Modelica.SIunits.SpecificEnergy qbot;
 
 protected
   parameter Real a=594.1;

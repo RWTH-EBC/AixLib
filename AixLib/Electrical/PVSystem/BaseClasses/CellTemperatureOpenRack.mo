@@ -5,8 +5,8 @@ model CellTemperatureOpenRack
 
  extends AixLib.Electrical.PVSystem.BaseClasses.PartialCellTemperature;
 
-  final parameter Modelica.Units.SI.Temperature T_a_0=293.15
-    "Reference ambient temperature";
+ final parameter Modelica.SIunits.Temperature T_a_0 = 293.15
+ "Reference ambient temperature";
  final parameter Real coeff_trans_abs = 0.9
  "Module specific coefficient as a product of transmission and absorption.
  It is usually unknown and set to 0.9 in literature";

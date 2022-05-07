@@ -1,13 +1,13 @@
-﻿within AixLib.BoundaryConditions.InternalGains.CO2;
+within AixLib.BoundaryConditions.InternalGains.CO2;
 model CO2Balance "Calculation of CO2 concentration within a thermal zone"
-  parameter Modelica.Units.SI.Area areaZon "Zone area";
+  parameter Modelica.SIunits.Area areaZon "Zone area";
   parameter Real actDeg = 1.8 "Activity degree (Met units)";
-  parameter Modelica.Units.SI.Volume VZon "Zone volume";
-  parameter Modelica.Units.SI.MassFraction XCO2_amb=6.12157E-4
+  parameter Modelica.SIunits.Volume VZon "Zone volume";
+  parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)";
-  parameter Modelica.Units.SI.Area areaBod=1.8
+  parameter Modelica.SIunits.Area areaBod=1.8
     "Body surface area source SIA 2024:2015";
-  parameter Modelica.Units.SI.DensityOfHeatFlowRate metOnePerSit=58
+  parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person in Met (1 Met = 58 W/m^2)";
   parameter Real spePeo(unit="1/(m.m)") = 0.05
     "Specific persons per square metre room area";
@@ -39,23 +39,23 @@ model CO2Balance "Calculation of CO2 concentration within a thermal zone"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
 
 protected
-  constant Modelica.Units.SI.MolarMass MolCO2=0.04401;
-  constant Modelica.Units.SI.MolarMass MolAir=0.028949;
+  constant Modelica.SIunits.MolarMass MolCO2=0.04401;
+  constant Modelica.SIunits.MolarMass MolAir=0.028949;
   constant Real CalEqu=5.617*3600*1000
     "caloric equivalent in J/m^3";
   constant Real ResQuo=0.83 "respiratory quotient in m^3_CO2/ m^3_O2";
-  constant Modelica.Units.SI.Pressure pAir=101325;
-  constant Modelica.Units.SI.Density rhoAir=1.2041;
+  constant Modelica.SIunits.Pressure pAir=101325;
+  constant Modelica.SIunits.Density rhoAir=1.2041;
   Real numPeo "Number of people in the thermal zone";
-  Modelica.Units.SI.VolumeFlowRate VCO2OnePer_flow
+  Modelica.SIunits.VolumeFlowRate VCO2OnePer_flow
     "Pure CO2 emission of an adult person";
-  Modelica.Units.SI.DensityOfHeatFlowRate metOnePerAct
+  Modelica.SIunits.DensityOfHeatFlowRate metOnePerAct
     "Metabolic heat production rate considering activity degree in W/m^2";
-  Modelica.Units.SI.MassFlowRate mCO2Peo_flow;
-  Modelica.Units.SI.MassFlowRate mAirExc_flow
+  Modelica.SIunits.MassFlowRate mCO2Peo_flow;
+  Modelica.SIunits.MassFlowRate mAirExc_flow
     "Massflowrate of ventilation and infiltration in kg/s";
-  Modelica.Units.SI.Density rhoCO2 "CO2 density";
-  Modelica.Units.SI.MassFlowRate mCO2OnePer_flow
+  Modelica.SIunits.Density rhoCO2 "CO2 density";
+  Modelica.SIunits.MassFlowRate mCO2OnePer_flow
     "Emission CO2 of one Person in kg/s";
 
 equation

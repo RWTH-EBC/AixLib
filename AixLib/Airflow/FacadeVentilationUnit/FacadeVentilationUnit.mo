@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.FacadeVentilationUnit;
+within AixLib.Airflow.FacadeVentilationUnit;
 model FacadeVentilationUnit
   "Facade Ventilation Unit (FVU) equipped with a recuperator"
   replaceable package Water = AixLib.Media.Water
@@ -10,7 +10,7 @@ model FacadeVentilationUnit
     fVUParam=AixLib.Airflow.FacadeVentilationUnit.DataBase.FVUBaseRecord()
     "Record containing the characteristic parameters of the unit";
 
-  parameter Modelica.Units.SI.ThermodynamicTemperature T_start=273.15 + 20
+  parameter Modelica.SIunits.ThermodynamicTemperature T_start=273.15 + 20
     "Initial temperature in unit";
 
   AixLib.Airflow.FacadeVentilationUnit.BaseClasses.SetPower fanExhaustAir(
@@ -67,15 +67,13 @@ model FacadeVentilationUnit
     m2_flow_nominal=fVUParam.m2_flow_nominal_cooler)
     "The heat exchanger used for cooling"
     annotation (Placement(transformation(extent={{182,22},{162,42}})));
-  Modelica.Fluid.Interfaces.FluidPort_b heaterReturnConnector(redeclare package
-                                                                                Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b heaterReturnConnector(redeclare package Medium =
                Water) "Connector to the heating water sink"
     annotation (Placement(transformation(extent={{82,90},{102,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a heaterFlowConnector(redeclare package Medium =
                Water) "Connector to the heating water source"
     annotation (Placement(transformation(extent={{112,90},{132,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b coolerReturnConnector(redeclare package
-                                                                                Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b coolerReturnConnector(redeclare package Medium =
                Water) "Connector to the cooling water source"
     annotation (Placement(transformation(extent={{152,90},{172,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a coolerFlowConnector(redeclare package Medium =

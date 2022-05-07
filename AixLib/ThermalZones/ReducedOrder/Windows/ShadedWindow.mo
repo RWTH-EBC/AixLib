@@ -1,75 +1,85 @@
 within AixLib.ThermalZones.ReducedOrder.Windows;
 model ShadedWindow
   "Calculation of solar energy transmitted through windows considering shadowing."
-  parameter Modelica.Units.SI.Angle lat "Latitude";
+  parameter Modelica.SIunits.Angle lat "Latitude";
   parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
-    annotation (dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient g[n]
-    "Total energy transmittance of windows" annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_vis[n]
+    annotation(dialog(group="window"));
+   parameter Modelica.SIunits.TransmissionCoefficient g[n]
+    "Total energy transmittance of windows"
+    annotation(Dialog(group="window"));
+  parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
     "Degree of light transmission for direct irradiation"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_visTotDir[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDir[n]
     "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient tau_visTotDif[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDif[n]
     "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.RadiantEnergyFluenceRate lim
+  parameter Modelica.SIunits.RadiantEnergyFluenceRate lim
     "Limit for the sunscreen to become active"
-    annotation (dialog(group="sunscreen"));
-  parameter Modelica.Units.SI.Angle xi(displayUnit="degree") = 0
+    annotation(dialog(group="sunscreen"));
+  parameter Modelica.SIunits.Angle xi(  displayUnit="degree")= 0
     "Elevation angle";
-  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
-    roof" annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length b[n] "Width of window"
+  parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
+    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+    roof"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Height h[n] "Height of window"
+  parameter Modelica.SIunits.Length b[n] "Width of window"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length bLef[n] "Window projection left"
+  parameter Modelica.SIunits.Height h[n] "Height of window"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length bRig[n] "Window projection right"
+  parameter Modelica.SIunits.Length bLef[n] "Window projection left"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length dLef[n]
+  parameter Modelica.SIunits.Length bRig[n] "Window projection right"
+    annotation (Dialog(group="window"));
+  parameter Modelica.SIunits.Length dLef[n]
     "Distance between projection (left) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length dRig[n]
+  parameter Modelica.SIunits.Length dRig[n]
     "Distance between projection (right) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length bAbo[n] "Window projection above"
+  parameter Modelica.SIunits.Length bAbo[n] "Window projection above"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length bBel[n] "Window projection below"
+  parameter Modelica.SIunits.Length bBel[n] "Window projection below"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length dAbo[n]
+  parameter Modelica.SIunits.Length dAbo[n]
     "Distance between projection (above) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Length dBel[n]
+  parameter Modelica.SIunits.Length dBel[n]
     "Distance between projection (below) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.Angle azi[n](displayUnit="degree") "Surface azimuth. azi=-90 degree if surface outward unit normal points
+  parameter Modelica.SIunits.Angle azi[n](displayUnit="degree")
+    "Surface azimuth. azi=-90 degree if surface outward unit normal points
     toward east; azi=0 if it points toward south"
     annotation (Dialog(group="window"));
   parameter Integer nCorPoi(min = 1) "Number of corner points"
       annotation(dialog(group="skyline"));
-  parameter Modelica.Units.SI.Angle[nCorPoi] alpha(displayUnit="deg") "Azimuth of corner points, sorted from north to east to south to west,
+  parameter Modelica.SIunits.Angle[nCorPoi] alpha(displayUnit="deg")
+  "Azimuth of corner points, sorted from north to east to south to west,
      azi=-90 degree if surface outward unit normal points toward east;
-     azi=0 if it points toward south" annotation (dialog(group="skyline"));
-  parameter Modelica.Units.SI.Height[nCorPoi] deltaH
+     azi=0 if it points toward south"
+      annotation(dialog(group="skyline"));
+  parameter Modelica.SIunits.Height[nCorPoi] deltaH
     "Difference between height of corner point and the window centre"
-    annotation (dialog(group="skyline"));
-  parameter Modelica.Units.SI.Distance[nCorPoi] s
+    annotation(dialog(group="skyline"));
+  parameter Modelica.SIunits.Distance[nCorPoi] s
     "Horizontal distance between corner point and window centre"
-    annotation (dialog(group="skyline"));
+    annotation(dialog(group="skyline"));
   parameter Boolean[nCorPoi-1] gap
     "Corner points i and i+1 are gap between buildings: true, else: false"
     annotation(dialog(group="skyline"));
-  parameter Modelica.Units.SI.TransmissionCoefficient g_TotDir[n] "Total energy transmittance of windows with closed sunscreen for direct
-     radiation" annotation (Dialog(group="window"));
-  parameter Modelica.Units.SI.TransmissionCoefficient g_TotDif[n] "Total energy transmittance of windows with closed sunscreen for diffuse
-     radiation" annotation (Dialog(group="window"));
+  parameter Modelica.SIunits.TransmissionCoefficient g_TotDir[n]
+    "Total energy transmittance of windows with closed sunscreen for direct
+     radiation"
+    annotation(Dialog(group="window"));
+  parameter Modelica.SIunits.TransmissionCoefficient g_TotDif[n]
+    "Total energy transmittance of windows with closed sunscreen for diffuse
+     radiation"
+    annotation(Dialog(group="window"));
 
     Modelica.Blocks.Interfaces.RealOutput HVis[n](
     final quantity="RadiantEnergyFluenceRate",
@@ -113,6 +123,7 @@ model ShadedWindow
     "Base class of ShadedWindow"
     annotation (Placement(transformation(extent={{12,-34},{86,36}})));
   AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](
+    each lat=lat,
     final azi=azi,
     final til=til)
     "Calculates the incidence angle"
@@ -121,17 +132,19 @@ model ShadedWindow
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
   "Calculates the altitude angle"
     annotation (Placement(transformation(extent={{-30,-8},{-22,0}})));
-  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen
+  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(each lat=lat)
   "Calculates the zenith angle"
     annotation (Placement(transformation(extent={{-62,-12},{-54,-4}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](
     final til=til,
+    each lat=lat,
     final azi=azi)
     "Calculates the diffuse irradiation on a tilted surface after Perez"
     annotation (
     Placement(transformation(extent={{-38,-78},{-26,-66}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[n](
     final til=til,
+    each lat=lat,
     final azi=azi)
     "Calculates the direct irradiation on a tilted surface"
     annotation (Placement(transformation(extent={{-66,40},{-52,54}})));
@@ -174,14 +187,14 @@ equation
   Line(points={{-21.6,-4},{-18,
           -4},{-18,-4.6},{8.3,-4.6}}, color={0,0,127}));
   connect(zen.y, solAzi.zen) annotation (
-  Line(points={{-53.6,-8},{-50,-8},{-50,-26.8},{-40.8,-26.8}},
-                          color={0,0,127}));
+  Line(points={{-53.6,-8},{-50,-8},{-50,-27.6},
+          {-40.8,-27.6}}, color={0,0,127}));
   connect(solAzi.solAzi, shadedWindow.solAzi) annotation (
   Line(points={{-31.6,-30},
           {-26,-30},{-26,-14.4},{8.3,-14.4}}, color={0,0,127}));
   connect(decAng.decAng, solAzi.decAng) annotation (
-  Line(points={{-59.7,-33},{-45.85,-33},{-45.85,-28.48},{-40.8,-28.48}},
-                                          color={0,0,127}));
+  Line(points={{-59.7,-33},{-45.85,
+          -33},{-45.85,-30},{-40.8,-30}}, color={0,0,127}));
   connect(weaBus.cloTim, decAng.nDay) annotation (Line(
       points={{-100,0},{-84,0},{-84,-33},{-66.6,-33}},
       color={255,204,51},
@@ -190,8 +203,9 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.solTim, solAzi.solTim) annotation (Line(
-      points={{-100,0},{-84,0},{-84,-44},{-84,-72},{-56,-72},{-56,-44},{-48,-44},
-          {-42,-44},{-42,-31.6},{-40.8,-31.6}},
+      points={{-100,0},{-84,0},{-84,-44},{-84,-72},{-56,-72},
+      {-56,-44},{-48,-44},
+          {-42,-44},{-42,-32.4},{-40.8,-32.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -209,8 +223,7 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(HDirTil.H, shadedWindow.HDirTil) annotation (Line(points={{-51.3,47},{
           -20.65,47},{-20.65,16.4},{8.3,16.4}}, color={0,0,127}));
-  for i in 1:n loop
-                    connect(weaBus,HDifTil [i].weaBus) annotation (Line(
+  for i in 1:n loop connect(weaBus,HDifTil [i].weaBus) annotation (Line(
       points={{-100,0},{-84,0},{-84,-72},{-38,-72}},
       color={255,204,51},
       thickness=0.5), Text(

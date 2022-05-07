@@ -1,10 +1,10 @@
-﻿within AixLib.DataBase.HeatPump.Functions.Characteristics;
+within AixLib.DataBase.HeatPump.Functions.Characteristics;
 function PolynomalApproach
   "Function to emulate the polynomal approach of the TRNSYS Type 401 heat pump model"
   extends PartialBaseFct;
-  parameter Modelica.Units.SI.Power p[6]={0,0,0,0,0,0}
+  parameter Modelica.SIunits.Power p[6] = {0,0,0,0,0,0}
     "Polynomal coefficient for the electrical power";
-  parameter Modelica.Units.SI.HeatFlowRate q[6]={0,0,0,0,0,0}
+  parameter Modelica.SIunits.HeatFlowRate q[6] = {0,0,0,0,0,0}
     "Polynomal coefficient for the condenser heat flow";
 
 protected

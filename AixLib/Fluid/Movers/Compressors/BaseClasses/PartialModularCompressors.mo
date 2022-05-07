@@ -72,26 +72,32 @@ partial model PartialModularCompressors
 
   // Definition of parameters describing general options
   //
-  parameter Modelica.Units.SI.Volume VDis[nCom](min=0) = fill(13e-6, nCom)
-    "Displacement volume of the compressor" annotation (Dialog(tab=
-          "Compressors", group="Geometry"), HideResult=not show_parCom);
-  parameter Modelica.Units.SI.Efficiency epsRef[nCom](
-    min=0,
-    max=1,
-    nominal=0.05) = fill(0.04, nCom)
-    "Ratio of the real and the ideal displacement volume" annotation (Dialog(
-        tab="Compressors", group="Geometry"), HideResult=not show_parCom);
-  parameter Modelica.Units.SI.Diameter diameterInl[nCom](min=0) = fill(12e-3,
-    nCom) "Diameter of the pipe at compressor's inlet" annotation (Dialog(tab=
-          "Compressors", group="Geometry"), HideResult=not show_parCom);
-  parameter Modelica.Units.SI.Diameter diameterOut[nCom](min=0) = fill(8e-3,
-    nCom) "Diameter of the pipe at compressor's outlet" annotation (Dialog(tab=
-          "Compressors", group="Geometry"), HideResult=not show_parCom);
+  parameter Modelica.SIunits.Volume
+    VDis[nCom](min=0) = fill(13e-6, nCom)
+    "Displacement volume of the compressor"
+    annotation(Dialog(tab="Compressors",group="Geometry"),
+               HideResult=not show_parCom);
+  parameter Modelica.SIunits.Efficiency
+    epsRef[nCom](min=0, max=1, nominal=0.05) = fill(0.04, nCom)
+    "Ratio of the real and the ideal displacement volume"
+    annotation(Dialog(tab="Compressors",group="Geometry"),
+               HideResult=not show_parCom);
+  parameter Modelica.SIunits.Diameter
+    diameterInl[nCom](min=0) = fill(12e-3, nCom)
+    "Diameter of the pipe at compressor's inlet"
+    annotation(Dialog(tab="Compressors",group="Geometry"),
+               HideResult=not show_parCom);
+  parameter Modelica.SIunits.Diameter
+    diameterOut[nCom](min=0) = fill(8e-3, nCom)
+    "Diameter of the pipe at compressor's outlet"
+    annotation(Dialog(tab="Compressors",group="Geometry"),
+               HideResult=not show_parCom);
 
-  parameter Modelica.Units.SI.Frequency rotSpeMax[nCom](min=0) = fill(120, nCom)
-    "Maximal rotational speed executable by the compressor" annotation (Dialog(
-        tab="Compressors", group="Compressor's characterisitcs"), HideResult=
-        true);
+  parameter Modelica.SIunits.Frequency
+    rotSpeMax[nCom](min=0) = fill(120, nCom)
+    "Maximal rotational speed executable by the compressor"
+    annotation(Dialog(tab="Compressors",group="Compressor's characterisitcs"),
+               HideResult=true);
   parameter Real
     piPreMax[nCom](min=1, unit="1") = fill(15, nCom)
     "Maximal pressure ratio executable by the compressor"
@@ -102,12 +108,11 @@ partial model PartialModularCompressors
     "= true, if transient behaviour of rotational speed is computed"
     annotation(Dialog(tab="Compressors",group="Transient behaviour"),
                HideResult=not show_parCom);
-  parameter Modelica.Units.SI.Time risTim[nCom]=fill(0.5, nCom)
-    "Time until rotational speed reaches 99.6 % of its set value" annotation (
-      Dialog(
-      enable=useInpFil,
-      tab="Compressors",
-      group="Transient behaviour"), HideResult=not show_parCom);
+  parameter Modelica.SIunits.Time risTim[nCom] = fill(0.5, nCom)
+    "Time until rotational speed reaches 99.6 % of its set value"
+    annotation(Dialog(enable = useInpFil,
+               tab="Compressors",group="Transient behaviour"),
+               HideResult=not show_parCom);
 
   // Definition of models describing efficiencies
   //
@@ -206,16 +211,18 @@ partial model PartialModularCompressors
     "Gain of controller"
     annotation(Dialog(tab="Controller", group="PID setup"),
                HideResult=not show_parCon);
-  parameter Modelica.Units.SI.Time Ti[nCom]=fill(0.5, nCom)
-    "Time constant of integrator block" annotation (Dialog(tab="Controller",
-        group="PID setup"), HideResult=not show_parCon);
+  parameter Modelica.SIunits.Time Ti[nCom] = fill(0.5, nCom)
+    "Time constant of integrator block"
+    annotation(Dialog(tab="Controller", group="PID setup"),
+               HideResult=not show_parCon);
   parameter Real Ni[nCom] = fill(0.9, nCom)
     "Ni*Ti is time constant of anti-windup compensation"
     annotation(Dialog(tab="Controller", group="PID setup"),
                HideResult=not show_parCon);
-  parameter Modelica.Units.SI.Time Td[nCom]=fill(0.1, nCom)
-    "Time constant of derivative block" annotation (Dialog(tab="Controller",
-        group="PID setup"), HideResult=not show_parCon);
+  parameter Modelica.SIunits.Time Td[nCom] = fill(0.1, nCom)
+    "Time constant of derivative block"
+    annotation(Dialog(tab="Controller", group="PID setup"),
+               HideResult=not show_parCon);
   parameter Real Nd[nCom] = fill(10, nCom)
     "The higher Nd, the more ideal the derivative block"
     annotation(Dialog(tab="Controller", group="PID setup"),
@@ -286,39 +293,53 @@ partial model PartialModularCompressors
     annotation(Dialog(tab = "Pressure and heat losses",
                group="Heat losses - General"),
                HideResult=not show_parCom);
-  parameter Modelica.Units.SI.Mass mWal[nCom]=fill(2.5, nCom)
-    "Mass of the fictitious wall" annotation (Dialog(tab=
-          "Pressure and heat losses", group="Heat losses - Geometry"),
-      HideResult=not show_parCom);
-  parameter Modelica.Units.SI.SpecificHeatCapacity cpWal[nCom]=fill(450, nCom)
-    "Specific heat capacity of the fictitious wall" annotation (Dialog(tab=
-          "Pressure and heat losses", group="Heat losses - Geometry"),
-      HideResult=not show_parCom);
-  parameter Modelica.Units.SI.ThermalConductance kAMeaInl[nCom]=fill(25, nCom) "Effective mean thermal conductance between medium and fictitious wall 
-    at inlet" annotation (Dialog(tab="Pressure and heat losses", group=
-          "Heat losses - Thermal conductances"), HideResult=not show_parCom);
-  parameter Modelica.Units.SI.ThermalConductance kAMeaOut[nCom]=fill(35, nCom) "Effective mean thermal conductance between medium and fictitious wall 
-    at outlet" annotation (Dialog(tab="Pressure and heat losses", group=
-          "Heat losses - Thermal conductances"), HideResult=not show_parCom);
-  parameter Modelica.Units.SI.ThermalConductance kAMeaAmb[nCom]=fill(10, nCom) "Effective mean thermal conductance coefficient between fictitious wall 
-    and ambient" annotation (Dialog(tab="Pressure and heat losses", group=
-          "Heat losses - Thermal conductances"), HideResult=not show_parCom);
+  parameter Modelica.SIunits.Mass mWal[nCom] = fill(2.5, nCom)
+    "Mass of the fictitious wall"
+    annotation(Dialog(tab = "Pressure and heat losses",
+               group="Heat losses - Geometry"),
+               HideResult=not show_parCom);
+  parameter Modelica.SIunits.SpecificHeatCapacity cpWal[nCom] = fill(450, nCom)
+    "Specific heat capacity of the fictitious wall"
+    annotation(Dialog(tab = "Pressure and heat losses",
+               group="Heat losses - Geometry"),
+               HideResult=not show_parCom);
+  parameter Modelica.SIunits.ThermalConductance kAMeaInl[nCom] = fill(25, nCom)
+    "Effective mean thermal conductance between medium and fictitious wall 
+    at inlet"
+    annotation(Dialog(tab = "Pressure and heat losses",
+               group="Heat losses - Thermal conductances"),
+               HideResult=not show_parCom);
+  parameter Modelica.SIunits.ThermalConductance kAMeaOut[nCom] = fill(35, nCom)
+    "Effective mean thermal conductance between medium and fictitious wall 
+    at outlet"
+    annotation(Dialog(tab = "Pressure and heat losses",
+               group="Heat losses - Thermal conductances"),
+               HideResult=not show_parCom);
+  parameter Modelica.SIunits.ThermalConductance kAMeaAmb[nCom] = fill(10, nCom)
+    "Effective mean thermal conductance coefficient between fictitious wall 
+    and ambient"
+    annotation(Dialog(tab = "Pressure and heat losses",
+               group="Heat losses - Thermal conductances"),
+               HideResult=not show_parCom);
   parameter Boolean iniTWal0[nCom] = fill(true, nCom)
     "= true, if wall is initialised at fixed temperature; Otherwise, steady state
     initialisation"
     annotation(Dialog(tab = "Pressure and heat losses",
                group="Heat losses - Initialisation"),
                HideResult=not show_parCom);
-  parameter Modelica.Units.SI.Temperature TWal0[nCom]=fill(293.15, nCom)
-    "Temperature of wall at initialisation" annotation (Dialog(tab=
-          "Pressure and heat losses", group="Heat losses - Initialisation"),
-      HideResult=not show_parCom);
+  parameter Modelica.SIunits.Temperature TWal0[nCom] = fill(293.15, nCom)
+    "Temperature of wall at initialisation"
+    annotation(Dialog(tab = "Pressure and heat losses",
+               group="Heat losses - Initialisation"),
+               HideResult=not show_parCom);
 
   // Definition of parameters describing advanced options
   //
-  parameter Modelica.Units.SI.PressureDifference dp_start(displayUnit="Pa") = -20e5
-    "Guess value of compressor's dp = port_a.p - port_b.p" annotation (Dialog(
-        tab="Advanced", group="General"), HideResult=not show_parCom);
+  parameter Modelica.SIunits.PressureDifference
+    dp_start(displayUnit="Pa") = -20e5
+    "Guess value of compressor's dp = port_a.p - port_b.p"
+    annotation(Dialog(tab = "Advanced",group="General"),
+               HideResult=not show_parCom);
   parameter Medium.MassFlowRate m_flow_start = 0.5*m_flow_nominal
     "Guess value of compressor's m_flow = port_a.m_flowr"
     annotation(Dialog(tab = "Advanced",group="General"),
@@ -327,9 +348,10 @@ partial model PartialModularCompressors
     "Small mass flow rate for regularization of compressor's zero flow"
     annotation(Dialog(tab = "Advanced",group="General"),
                HideResult=not show_parCom);
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
-    "Nominal mass flow rate" annotation (Dialog(tab="Advanced", group="General"),
-      HideResult=not show_parCom);
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
+    "Nominal mass flow rate"
+    annotation(Dialog(tab="Advanced",group="General"),
+               HideResult=not show_parCom);
 
   // Definition of parameters describing diagnostics
   //
@@ -356,20 +378,23 @@ partial model PartialModularCompressors
 
   // Definition of parameters used for initialisation
   //
-  parameter Modelica.Units.SI.Frequency rotSpe0[nCom]=fill(60, nCom)
-    "Compressor's rotational spped at initialisation" annotation (Dialog(tab=
-          "Advanced", group="Initialisation"), HideResult=true);
-  parameter Modelica.Units.SI.AbsolutePressure pInl0[nCom]=fill(3e5, nCom)
-    "Pressure at compressor's inlet at initialisation" annotation (Dialog(tab=
-          "Advanced", group="Initialisation"), HideResult=true);
-  parameter Modelica.Units.SI.Temperature TInl0[nCom]=fill(283.15, nCom)
-    "Temperature at compressor's inlet at initialisation" annotation (Dialog(
-        tab="Advanced", group="Initialisation"), HideResult=true);
-  parameter Modelica.Blocks.Types.Init initType[nCom]=fill(Modelica.Blocks.Types.Init.InitialState,
-      nCom)
+  parameter Modelica.SIunits.Frequency rotSpe0[nCom] = fill(60, nCom)
+    "Compressor's rotational spped at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
+  parameter Modelica.SIunits.AbsolutePressure pInl0[nCom] = fill(3e5, nCom)
+    "Pressure at compressor's inlet at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
+  parameter Modelica.SIunits.Temperature TInl0[nCom] = fill(283.15, nCom)
+    "Temperature at compressor's inlet at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
+  parameter Modelica.Blocks.Types.InitPID initType[nCom]=
+    fill(Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,nCom)
     "Init: (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation (Dialog(tab="Advanced", group="Initialisation Controller"),
-      HideResult=not show_parCon);
+    annotation(Dialog(tab="Advanced", group="Initialisation Controller"),
+               HideResult=not show_parCon);
   parameter Real xi_start[nCom]=fill(0, nCom)
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(tab="Advanced", group="Initialisation Controller"),

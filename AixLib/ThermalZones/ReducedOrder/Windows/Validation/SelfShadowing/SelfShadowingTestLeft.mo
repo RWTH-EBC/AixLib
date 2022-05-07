@@ -24,8 +24,8 @@ model SelfShadowingTestLeft
   Modelica.Blocks.Sources.Constant alt(k=0.3490658504)
     "Constant altitude angle"
     annotation (Placement(transformation(extent={{-76,8},{-56,28}})));
-  Modelica.Blocks.Sources.Sine solAziSine(amplitude=Modelica.Constants.pi, f=1)
-    "Solar azimuth angle generated as a sine"
+  Modelica.Blocks.Sources.Sine solAziSine(amplitude=Modelica.Constants.pi,
+      freqHz=1) "Solar azimuth angle generated as a sine"
     annotation (Placement(transformation(extent={{-76,-26},{-56,-6}})));
 equation
   connect(incAng1.incAng, selfShadowingLeft.incAng[1]) annotation (Line(

@@ -13,7 +13,7 @@ model SubmodelCooling
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
       CHPEngineModel.m_floCooNominal
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.Units.SI.ThermalConductance GEngToCoo=45
+  parameter Modelica.SIunits.ThermalConductance GEngToCoo=45
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
     annotation (Dialog(tab="Engine Cooling Circle", group=
           "Calibration Parameters"));

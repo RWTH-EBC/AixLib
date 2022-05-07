@@ -1,15 +1,12 @@
-﻿within AixLib.BoundaryConditions.GroundTemperature;
+within AixLib.BoundaryConditions.GroundTemperature;
 model GroundTemperatureKusuda "Model for undisturbed ground temperature"
 
-  parameter Modelica.Units.SI.Temperature T_mean
-    "Average air temperature over the year";
-  parameter Modelica.Units.SI.TemperatureDifference T_amp
+  parameter Modelica.SIunits.Temperature T_mean "Average air temperature over the year";
+  parameter Modelica.SIunits.TemperatureDifference T_amp
     "Amplitude of surface temperature [(maximum air temperature - minimum air temperature)/2]";
-  parameter Modelica.Units.SI.Distance D "Depth of ground temperature";
-  parameter Modelica.Units.SI.ThermalDiffusivity alpha=0.04
-    "Thermal diffusivity of the ground. Declare in m2/day!";
-  parameter Modelica.Units.SI.Time t_shift
-    "Time of the year with minimum air temperature. Declare in days!";
+  parameter Modelica.SIunits.Distance D "Depth of ground temperature";
+  parameter Modelica.SIunits.ThermalDiffusivity alpha=0.04 "Thermal diffusivity of the ground. Declare in m2/day!";
+  parameter Modelica.SIunits.Time t_shift "Time of the year with minimum air temperature. Declare in days!";
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature "Transfers computed ground temperature to heat port"

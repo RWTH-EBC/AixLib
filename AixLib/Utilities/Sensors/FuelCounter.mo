@@ -1,7 +1,7 @@
 within AixLib.Utilities.Sensors;
 model FuelCounter "Fuel counter monitoring fuel consumption in a boiler model"
-  extends Modelica.Icons.RectangularSensor;
-  Modelica.Units.NonSI.Energy_kWh counter;
+  extends Modelica.Icons.TranslationalSensor;
+  Modelica.SIunits.Conversions.NonSIunits.Energy_kWh counter;
   Modelica.Blocks.Interfaces.RealInput fuel_in annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}})));
 equation
   der(counter) = fuel_in / 3600 / 1000;

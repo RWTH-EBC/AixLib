@@ -1,16 +1,15 @@
 within AixLib.Fluid.Storage.BaseClasses;
 model HeatTransferOnlyConduction "Heat transfer for conduction only"
   extends AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers;
-  Modelica.Units.SI.HeatFlowRate[n - 1] qFlow
-    "Heat flow rate from segment i+1 to i";
+  Modelica.SIunits.HeatFlowRate[n-1] qFlow "Heat flow rate from segment i+1 to i";
 protected
-  parameter Modelica.Units.SI.Length height=data.hTank/n
+  parameter Modelica.SIunits.Length height=data.hTank/n
     "Height of fluid layers";
-  parameter Modelica.Units.SI.Area A=Modelica.Constants.pi/4*data.dTank^2
+  parameter Modelica.SIunits.Area A=Modelica.Constants.pi/4*data.dTank^2
     "Area of heat transfer between layers";
-  Modelica.Units.SI.TemperatureDifference dT[n - 1]
+  Modelica.SIunits.TemperatureDifference dT[n-1]
     "Temperature difference between adjoining volumes";
-  parameter Modelica.Units.SI.ThermalConductivity lambdaWater=0.64
+  parameter Modelica.SIunits.ThermalConductivity lambdaWater=0.64
     "Thermal conductivity of water";
 equation
 

@@ -7,10 +7,9 @@ model HeatingRod
       final V=V,
     final prescribedHeatFlowRate=true));
 
-  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
+  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Heat flow rate at u=1, positive for heating";
-  parameter Modelica.Units.SI.Volume V=m_flow_nominal*tau/rho_default
-    "Volume of heat exchanger";
+  parameter Modelica.SIunits.Volume V=m_flow_nominal*tau/rho_default "Volume of heat exchanger";
   parameter Real eta      "Efficiency of the heating rod";
 
   // Count switches
@@ -32,8 +31,8 @@ model HeatingRod
       final y_start=0) if use_countNumSwi
     "To count on-off cycles"
     annotation (Placement(transformation(extent={{68,-68},{86,-52}})));
-  Modelica.Blocks.Sources.IntegerConstant integerConstant(final k=1)
- if use_countNumSwi
+  Modelica.Blocks.Sources.IntegerConstant integerConstant(final k=1) if
+    use_countNumSwi
     annotation (Placement(transformation(extent={{38,-68},{54,-52}})));
   Modelica.Blocks.Interfaces.IntegerOutput numSwi if use_countNumSwi
     "Number of on switches "

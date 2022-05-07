@@ -1,42 +1,51 @@
 within AixLib.Fluid.HeatExchangers;
-model SensibleCooler_T
-  "Sensible cooling device with prescribed outlet temperature"
-  extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialPrescribedOutlet(
-    outCon(
-      final QMin_flow = QMin_flow,
-      final QMax_flow = 0,
-      final mWatMax_flow = 0,
-      final mWatMin_flow = 0,
-      final use_TSet = true,
-      final use_X_wSet = false,
-      final T_start=T_start,
-      final X_start=Medium.X_default));
-
-  parameter Modelica.Units.SI.HeatFlowRate QMin_flow(max=0) = -Modelica.Constants.inf
-    "Maximum heat flow rate for cooling (negative)" annotation (Evaluate=true);
-
-  parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
-    "Start value of temperature" annotation (Dialog(tab="Initialization"));
-
-  Modelica.Blocks.Interfaces.RealInput TSet(
-    unit="K",
-    displayUnit="degC")
-    "Set point temperature of the fluid that leaves port_b"
-    annotation (Placement(transformation(origin={-120,80},
-              extent={{20,-20},{-20,20}},rotation=180)));
-
-  Modelica.Blocks.Interfaces.RealOutput Q_flow(unit="W")
-    "Heat flow rate added to the fluid (if flow is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{100,70},{120,90}})));
-
-equation
-  connect(TSet, outCon.TSet) annotation (Line(points={{-120,80},{10,80},{10,8},
-          {19,8}},color={0,0,127}));
-  connect(outCon.Q_flow, Q_flow) annotation (Line(points={{41,8},{80,8},{80,80},
-          {110,80}}, color={0,0,127}));
-    annotation (
-    defaultComponentName="coo",
-Documentation(info="<html>
+ model SensibleCooler_T
+   "Sensible cooling device with prescribed outlet temperature"
+   extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialPrescribedOutlet(
+     outCon(
+       final QMin_flow = QMin_flow,
+       final QMax_flow = 0,
+       final mWatMax_flow = 0,
+       final mWatMin_flow = 0,
+       final use_TSet = true,
+       final use_X_wSet = false,
+       final energyDynamics = energyDynamics,
+       final massDynamics = Modelica.Fluid.Types.Dynamics.SteadyState,
+       final T_start=T_start,
+       final X_start=Medium.X_default));
+ 
+   parameter Modelica.SIunits.HeatFlowRate QMin_flow(max=0) = -Modelica.Constants.inf
+     "Maximum heat flow rate for cooling (negative)"
+     annotation (Evaluate=true);
+ 
+   parameter Modelica.SIunits.Temperature T_start=Medium.T_default
+     "Start value of temperature"
+     annotation(Dialog(tab = "Initialization"));
+ 
+   // Dynamics
+   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState
+     "Type of energy balance: dynamic (3 initialization options) or steady state"
+     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+ 
+   Modelica.Blocks.Interfaces.RealInput TSet(
+     unit="K",
+     displayUnit="degC")
+     "Set point temperature of the fluid that leaves port_b"
+     annotation (Placement(transformation(origin={-120,80},
+               extent={{20,-20},{-20,20}},rotation=180)));
+ 
+   Modelica.Blocks.Interfaces.RealOutput Q_flow(unit="W")
+     "Heat flow rate added to the fluid (if flow is from port_a to port_b)"
+     annotation (Placement(transformation(extent={{100,70},{120,90}})));
+ 
+ equation
+   connect(TSet, outCon.TSet) annotation (Line(points={{-120,80},{10,80},{10,8},
+           {19,8}},color={0,0,127}));
+   connect(outCon.Q_flow, Q_flow) annotation (Line(points={{41,8},{80,8},{80,80},
+           {110,80}}, color={0,0,127}));
+     annotation (
+     defaultComponentName="coo",
+ Documentation(info="<html>
  <p>
  Model for an ideal sensible-only cooler that controls its outlet temperature to
  a prescribed outlet temperature.
@@ -110,7 +119,7 @@ Documentation(info="<html>
  AixLib.Fluid.HeatExchangers.Validation.PrescribedOutlet_dynamic</a>.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  September 10, 2018, by Michael Wetter:<br/>
@@ -128,54 +137,54 @@ revisions="<html>
  </li>
  </ul>
  </html>"),
-    Icon(graphics={
-        Rectangle(
-          extent={{-70,60},{70,-60}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-                   Text(
-          extent={{20,-10},{64,-56}},
-          textColor={255,255,255},
-          textString="-"),
-        Rectangle(
-          extent={{-64,34},{-34,54}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-64,34},{-52,44},{-64,54}}, color={0,0,0}),
-        Text(
-          extent={{26,108},{94,84}},
-          textColor={0,0,127},
-          textString="Q_flow"),
-        Rectangle(
-          extent={{70,82},{100,78}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{66,60},{70,82}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-70,60},{-66,82}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-100,82},{-70,78}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-110,102},{-74,84}},
-          textColor={0,0,127},
-          textString="T")}),
-  __Dymola_LockedEditing="Model from IBPSA");
-end SensibleCooler_T;
+     Icon(graphics={
+         Rectangle(
+           extent={{-70,60},{70,-60}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+                    Text(
+           extent={{20,-10},{64,-56}},
+           lineColor={255,255,255},
+           textString="-"),
+         Rectangle(
+           extent={{-64,34},{-34,54}},
+           lineColor={0,0,0},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Solid),
+         Line(points={{-64,34},{-52,44},{-64,54}}, color={0,0,0}),
+         Text(
+           extent={{26,108},{94,84}},
+           lineColor={0,0,127},
+           textString="Q_flow"),
+         Rectangle(
+           extent={{70,82},{100,78}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{66,60},{70,82}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-70,60},{-66,82}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-100,82},{-70,78}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,127},
+           fillPattern=FillPattern.Solid),
+         Text(
+           extent={{-110,102},{-74,84}},
+           lineColor={0,0,127},
+           textString="T")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end SensibleCooler_T;

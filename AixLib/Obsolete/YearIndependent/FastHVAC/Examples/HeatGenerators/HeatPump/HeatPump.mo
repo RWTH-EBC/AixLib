@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.YearIndependent.FastHVAC.Examples.HeatGenerators.HeatPump;
+within AixLib.Obsolete.YearIndependent.FastHVAC.Examples.HeatGenerators.HeatPump;
 model HeatPump
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
@@ -91,7 +91,7 @@ model HeatPump
         rotation=270,
         origin={54,-2})));
   Modelica.Blocks.Sources.Sine sine(
-    f=1/3600,
+    freqHz=1/3600,
     amplitude=3000,
     offset=3000) "hourly sine "
     annotation (Placement(transformation(extent={{66,8},{58,16}})));

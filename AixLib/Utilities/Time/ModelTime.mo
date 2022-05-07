@@ -1,41 +1,41 @@
 within AixLib.Utilities.Time;
-block ModelTime "Model time"
-  extends Modelica.Blocks.Icons.Block;
-
-  Modelica.Blocks.Interfaces.RealOutput y "Model time"
-    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-
-equation
-  y = time;
-
-  annotation (
-    defaultComponentName="modTim",
-    Icon(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics={
-        Ellipse(extent={{-80,80},{80,-80}}, lineColor={160,160,164},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid),
-        Line(points={{0,80},{0,60}}, color={160,160,164}),
-        Line(points={{80,0},{60,0}}, color={160,160,164}),
-        Line(points={{0,-80},{0,-60}}, color={160,160,164}),
-        Line(points={{-80,0},{-60,0}}, color={160,160,164}),
-        Line(points={{37,70},{26,50}}, color={160,160,164}),
-        Line(points={{70,38},{49,26}}, color={160,160,164}),
-        Line(points={{71,-37},{52,-27}}, color={160,160,164}),
-        Line(points={{39,-70},{29,-51}}, color={160,160,164}),
-        Line(points={{-39,-70},{-29,-52}}, color={160,160,164}),
-        Line(points={{-71,-37},{-50,-26}}, color={160,160,164}),
-        Line(points={{-71,37},{-54,28}}, color={160,160,164}),
-        Line(points={{-38,70},{-28,51}}, color={160,160,164}),
-        Line(
-          points={{0,0},{-50,50}},
-          thickness=0.5),
-        Line(
-          points={{0,0},{40,0}},
-          thickness=0.5)}),
-    Documentation(info="<html>
+ block ModelTime "Model time"
+   extends Modelica.Blocks.Icons.Block;
+ 
+   Modelica.Blocks.Interfaces.RealOutput y "Model time"
+     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+ 
+ equation
+   y = time;
+ 
+   annotation (
+     defaultComponentName="modTim",
+     Icon(coordinateSystem(
+         preserveAspectRatio=true,
+         extent={{-100,-100},{100,100}},
+         grid={1,1}), graphics={
+         Ellipse(extent={{-80,80},{80,-80}}, lineColor={160,160,164},
+           fillColor={215,215,215},
+           fillPattern=FillPattern.Solid),
+         Line(points={{0,80},{0,60}}, color={160,160,164}),
+         Line(points={{80,0},{60,0}}, color={160,160,164}),
+         Line(points={{0,-80},{0,-60}}, color={160,160,164}),
+         Line(points={{-80,0},{-60,0}}, color={160,160,164}),
+         Line(points={{37,70},{26,50}}, color={160,160,164}),
+         Line(points={{70,38},{49,26}}, color={160,160,164}),
+         Line(points={{71,-37},{52,-27}}, color={160,160,164}),
+         Line(points={{39,-70},{29,-51}}, color={160,160,164}),
+         Line(points={{-39,-70},{-29,-52}}, color={160,160,164}),
+         Line(points={{-71,-37},{-50,-26}}, color={160,160,164}),
+         Line(points={{-71,37},{-54,28}}, color={160,160,164}),
+         Line(points={{-38,70},{-28,51}}, color={160,160,164}),
+         Line(
+           points={{0,0},{-50,50}},
+           thickness=0.5),
+         Line(
+           points={{0,0},{40,0}},
+           thickness=0.5)}),
+     Documentation(info="<html>
  <p>
  This component outputs the model time, which starts at the value at which the simulation starts.
  For example, if a simulation starts at <i>t=-1</i>, then this block outputs first <i>t=-1</i>,
@@ -46,7 +46,7 @@ equation
  the parameters for the clock, as would be necessary for the model
  <a href=\"modelica://Modelica.Blocks.Sources.Clock\">Modelica.Blocks.Sources.Clock</a>.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  April 17, 2020, by Michael Wetter:<br/>
@@ -65,6 +65,6 @@ equation
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end ModelTime;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end ModelTime;

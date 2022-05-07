@@ -2,9 +2,10 @@ within AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses;
 block IncidenceAngleVDI6007
   "The solar incidence angle on a tilted surface"
   extends Modelica.Blocks.Icons.Block;
-  parameter Modelica.Units.SI.Angle azi(displayUnit="degree") "Surface azimuth. azi=-90 degree if surface outward unit normal points
+  parameter Modelica.SIunits.Angle azi(displayUnit="degree")
+    "Surface azimuth. azi=-90 degree if surface outward unit normal points
      toward east; azi=0 if it points toward south";
-  parameter Modelica.Units.SI.Angle til(displayUnit="degree")
+  parameter Modelica.SIunits.Angle til(displayUnit="degree")
     "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof";
   Modelica.Blocks.Interfaces.RealInput solAzi(final quantity="Angle",
     final unit="rad")

@@ -6,37 +6,41 @@ model ModularExpansionValvesSensors
 
   // Definition of parameters
   //
-  parameter Modelica.Units.SI.Time tau=1 "Time constant at nominal flow rate"
-    annotation (Dialog(tab="General", group="Sensors"), HideResult=not
-        show_parSen);
+  parameter Modelica.SIunits.Time tau = 1
+    "Time constant at nominal flow rate"
+    annotation(Dialog(tab="General",group="Sensors"),
+               HideResult=not show_parSen);
 
   parameter Boolean transferHeat = false
     "if true, temperature T converges towards TAmb when no flow"
     annotation(Dialog(tab="General",group="Sensors"),
                HideResult=not show_parSen);
-  parameter Modelica.Units.SI.Temperature TAmb=Medium.T_default
-    "Fixed ambient temperature for heat transfer" annotation (Dialog(tab=
-          "General", group="Sensors"), HideResult=not show_parSen);
-  parameter Modelica.Units.SI.Time tauHeaTra=1200
-    "Time constant for heat transfer, default 20 minutes" annotation (Dialog(
-        tab="General", group="Sensors"), HideResult=not show_parSen);
+  parameter Modelica.SIunits.Temperature TAmb = Medium.T_default
+    "Fixed ambient temperature for heat transfer"
+    annotation(Dialog(tab="General",group="Sensors"),
+               HideResult=not show_parSen);
+  parameter Modelica.SIunits.Time tauHeaTra = 1200
+    "Time constant for heat transfer, default 20 minutes"
+    annotation(Dialog(tab="General",group="Sensors"),
+               HideResult=not show_parSen);
 
   parameter Modelica.Blocks.Types.Init initTypeSen=
     Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation(Dialog(tab="Advanced",group="Initialisation Sensors"),
                HideResult=not show_parSen);
-  parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
-    "Initial or guess value of output (= state)" annotation (Dialog(tab=
-          "Advanced", group="Initialisation Sensors"), HideResult=not
-        show_parSen);
-  parameter Modelica.Units.SI.SpecificEnthalpy h_out_start=
+  parameter Modelica.SIunits.Temperature T_start = Medium.T_default
+    "Initial or guess value of output (= state)"
+    annotation(Dialog(tab="Advanced",group="Initialisation Sensors"),
+               HideResult=not show_parSen);
+  parameter Modelica.SIunits.SpecificEnthalpy h_out_start=
       Medium.specificEnthalpy_pTX(
       p=Medium.p_default,
       T=Medium.T_default,
-      X=Medium.X_default) "Initial or guess value of output (= state)"
-    annotation (Dialog(tab="Advanced", group="Initialisation Sensors"),
-      HideResult=not show_parSen);
+      X=Medium.X_default)
+      "Initial or guess value of output (= state)"
+    annotation(Dialog(tab="Advanced",group="Initialisation Sensors"),
+               HideResult=not show_parSen);
 
   parameter Boolean show_parSen = false
     "= true, if sensors' input parameters are shown in results"

@@ -4,10 +4,10 @@ record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
   parameter Real NominalPower(unit="W/m")
     "Nominal power of radiator per m at nominal temperatures"
     annotation (Dialog(group="Geometry"));
-  parameter Modelica.Units.SI.Temperature RT_nom[3]
+  parameter Modelica.SIunits.Temperature RT_nom[3]
     "Nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442."
     annotation (Dialog(group="Geometry"));
-  parameter Modelica.Units.SI.Pressure PressureDrop
+  parameter Modelica.SIunits.Pressure PressureDrop
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2";
   parameter Real Exponent
     "Radiator exponent"
@@ -18,19 +18,24 @@ record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
  parameter Real MassSteel(unit="kg/m")
     "Material mass of radiator per m"
     annotation (Dialog(group="Geometry"));
-  parameter Modelica.Units.SI.Density DensitySteel=7900
-    "Specific density of steel" annotation (Dialog(group="Material"));
-  parameter Modelica.Units.SI.SpecificHeatCapacity CapacitySteel=551
-    "Specific heat capacity of steel" annotation (Dialog(group="Material"));
-  parameter Modelica.Units.SI.ThermalConductivity LambdaSteel=60
-    "Thermal conductivity of steel" annotation (Dialog(group="Material"));
+parameter Modelica.SIunits.Density DensitySteel=7900
+    "Specific density of steel"
+    annotation (Dialog(group="Material"));
+  parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel=551
+    "Specific heat capacity of steel"
+    annotation (Dialog(group="Material"));
+  parameter Modelica.SIunits.ThermalConductivity LambdaSteel=60
+    "Thermal conductivity of steel"
+    annotation (Dialog(group="Material"));
   parameter
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
     Type
     "Type of radiator"
     annotation (Dialog(group="Geometry"));
-  parameter Modelica.Units.SI.Length length "Length of radiator";
-  parameter Modelica.Units.SI.Height height "Height of radiator";
+  parameter Modelica.SIunits.Length length
+    "Length of radiator";
+  parameter Modelica.SIunits.Height height
+    "Height of radiator";
   annotation (Documentation(info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>

@@ -3,8 +3,8 @@ function SherwoodNumberStephan
   "calculates sherwood number out of reynolds and schmidt number according to Stephan, K."
 
   // Inputs
-  input Modelica.Units.SI.Length dimension "characteristic dimension";
-  input Modelica.Units.SI.Length length "length of flat gap";
+  input Modelica.SIunits.Length dimension "characteristic dimension";
+  input Modelica.SIunits.Length length "length of flat gap";
   input Real Sc "Schmidt number";
   input Real Re "Reynolds number";
 

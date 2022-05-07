@@ -5,26 +5,24 @@ package HeatTransfer "\"Models for different types of heat transfer\""
     "Model for Heat Transfer through convection inside a pipe, based on Nussel Correlations"
     extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
     extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-    parameter Modelica.Units.SI.Length length(min=0) "length of total pipe";
-    parameter Modelica.Units.SI.Length d_i(min=0) "inner diameter of pipe";
-    parameter Modelica.Units.SI.Length d_a(min=0) "outer diameter of pipe";
-    parameter Modelica.Units.SI.Area A_sur(min=0) "surface for heat transfer";
+    parameter Modelica.SIunits.Length length(min=0) "length of total pipe";
+    parameter Modelica.SIunits.Length d_i(min=0) "inner diameter of pipe";
+    parameter Modelica.SIunits.Length d_a(min=0) "outer diameter of pipe";
+    parameter Modelica.SIunits.Area A_sur(min=0) "surface for heat transfer";
     parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
-    parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn_const=30
-      "Constant convective heat transfer coefficient (Inside)"
-      annotation (Dialog(enable=not calcHCon));
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Constant convective heat transfer coefficient (Inside)"
+                                                                             annotation(Dialog(enable=not calcHCon));
     parameter Obsolete.YearIndependent.FastHVAC.Media.BaseClasses.MediumSimple
       medium=Obsolete.YearIndependent.FastHVAC.Media.WaterSimple();
-    Modelica.Units.SI.ReynoldsNumber Re;
-    Modelica.Units.SI.Velocity v;
-    Modelica.Units.SI.NusseltNumber Nu;
-    Modelica.Units.SI.NusseltNumber Nu_lam_1;
-    Modelica.Units.SI.NusseltNumber Nu_lam_2;
-    Modelica.Units.SI.NusseltNumber Nu_lam;
-    Modelica.Units.SI.NusseltNumber Nu_tur;
-    Modelica.Units.SI.PrandtlNumber Pr;
-    Modelica.Units.SI.CoefficientOfHeatTransfer hCon
-      "Convective heat transfer coefficient";
+      Modelica.SIunits.ReynoldsNumber Re;
+    Modelica.SIunits.Velocity v;
+    Modelica.SIunits.NusseltNumber Nu;
+    Modelica.SIunits.NusseltNumber Nu_lam_1;
+    Modelica.SIunits.NusseltNumber Nu_lam_2;
+    Modelica.SIunits.NusseltNumber Nu_lam;
+    Modelica.SIunits.NusseltNumber Nu_tur;
+    Modelica.SIunits.PrandtlNumber Pr;
+    Modelica.SIunits.CoefficientOfHeatTransfer hCon "Convective heat transfer coefficient";
     Real zeta "pressure loss coefficient";
 
     Modelica.Blocks.Interfaces.RealInput m_flow annotation (Placement(transformation(

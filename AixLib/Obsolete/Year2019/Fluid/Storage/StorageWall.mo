@@ -8,12 +8,9 @@ model StorageWall "Sandwich wall construction for heat storages"
     convOutside(hCon=hConOut, A=AOutside),
     loadIns(C=cIns*(rhoIns)*(AIns)*(sIns)));
 
-  parameter Modelica.Units.SI.Length height=0.15 "Height of layer"
-    annotation (Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.Units.SI.Area AIns=(D1 + 2*sWall)*Modelica.Constants.pi*
-      height;
-  parameter Modelica.Units.SI.Area AOutside=(D1 + 2*(sWall + sIns))*Modelica.Constants.pi
-      *height;
+  parameter Modelica.SIunits.Length height=0.15 "Height of layer"  annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Area AIns=(D1+2*sWall)*Modelica.Constants.pi * height;
+  parameter Modelica.SIunits.Area AOutside=(D1+2*(sWall+sIns))*Modelica.Constants.pi * height;
 
 equation
 

@@ -12,7 +12,9 @@ model SkylineShadowingTest
     "Shadow due to buildings on the west and east side"
     annotation (Placement(transformation(extent={{28,-10},{48,10}})));
 
-  Modelica.Blocks.Sources.Sine solAziSine(f=1, amplitude=Modelica.Constants.pi)
+  Modelica.Blocks.Sources.Sine solAziSine(
+  freqHz=1,
+  amplitude=Modelica.Constants.pi)
     "Solar azimuth input generated as sine"
     annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
 equation

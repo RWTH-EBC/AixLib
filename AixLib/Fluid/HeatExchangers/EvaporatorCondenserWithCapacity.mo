@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers;
+within AixLib.Fluid.HeatExchangers;
 model EvaporatorCondenserWithCapacity
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -9,18 +9,18 @@ model EvaporatorCondenserWithCapacity
   parameter Boolean is_con "Type of heat exchanger" annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
       choice=false "Evaporator",
       radioButtons=true));
-  parameter Modelica.Units.SI.Volume V "Volume in condenser";
+  parameter Modelica.SIunits.Volume V "Volume in condenser";
   parameter Boolean use_cap=true "False if capacity and heat losses are neglected"
     annotation (Dialog(group="Heat losses"),choices(checkBox=true));
-  parameter Modelica.Units.SI.HeatCapacity C
-    "Capacity of heat exchanger. If you want to neglace the dry mass of the heat exchanger, you can set this value to zero"
+  parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger. If you want to neglace the dry mass of the heat exchanger, you can set this value to zero"
     annotation (Dialog(group="Heat losses", enable=use_cap));
-  parameter Modelica.Units.SI.Temperature TCap_start=Medium.T_default
+  parameter Modelica.SIunits.Temperature TCap_start=Medium.T_default
     "Initial temperature of heat capacity"
     annotation (Dialog(tab="Initialization", group="Capacity"));
-  Modelica.Units.SI.ThermalConductance GOut
+  Modelica.SIunits.ThermalConductance GOut
     "Formular for calculation of heat transfer coefficient on the outside. If you want to simulate a heat exchanger with additional dry mass but without external heat losses, set the value to zero"
-    annotation (Dialog(group="Heat losses", enable=use_cap));
+                                                           annotation (Dialog(group=
+          "Heat losses",                                                                           enable=use_cap));
   Modelica.Blocks.Interfaces.RealOutput GInn
     "Formular for calculation of heat transfer coefficient on the inside"
                                                                          annotation (Dialog(group=

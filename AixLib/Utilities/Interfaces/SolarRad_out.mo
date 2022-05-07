@@ -2,13 +2,13 @@ within AixLib.Utilities.Interfaces;
 connector SolarRad_out
   "Scalar total radiation connector (output) with additional direct, diffuse and from ground reflected radiation"
 
-  output Modelica.Units.SI.RadiantEnergyFluenceRate I
+  output Modelica.SIunits.RadiantEnergyFluenceRate I
     "total radiation normal to the surface";
-  output Modelica.Units.SI.RadiantEnergyFluenceRate I_dir
+  output Modelica.SIunits.RadiantEnergyFluenceRate I_dir
     "direct radiation normal to the surface";
-  output Modelica.Units.SI.RadiantEnergyFluenceRate I_diff
+  output Modelica.SIunits.RadiantEnergyFluenceRate I_diff
     "diffuse radiation normal to the surface";
-  output Modelica.Units.SI.RadiantEnergyFluenceRate I_gr
+  output Modelica.SIunits.RadiantEnergyFluenceRate I_gr
     "radiation due to the ground reflection normal to the surface";
 
   output Real  AOI(unit = "rad") "Angle of incidence of surface";

@@ -5,7 +5,7 @@ model ConstantEfficiency
 
   // Definition of parameters
   //
-  parameter Modelica.Units.SI.Efficiency lamHCon=0.9
+  parameter Modelica.SIunits.Efficiency lamHCon = 0.9
     "Constant overall volumetric efficiency";
 
 equation

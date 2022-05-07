@@ -17,22 +17,21 @@ protected
       ******************************************************************* */
 
 public
-  parameter Modelica.Units.SI.Area A_HE=2 "Area of the heat exchanger ";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer k_HE=1500
+  parameter Modelica.SIunits.Area  A_HE=2 "Area of the heat exchanger ";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer k_HE=1500
     "Thermal transmission coefficient";
-  parameter Modelica.Units.SI.Temperature T_inlet_DHW=283.15
+  parameter Modelica.SIunits.Temperature T_inlet_DHW=283.15
     "DHW Temperature at inlet";
-  parameter Modelica.Units.SI.Temperature T_set_DHW_ideal=333.15
+  parameter Modelica.SIunits.Temperature T_set_DHW_ideal=333.15
     "DHW set temperature";
   parameter Integer n(min=3) = 5
     "Number of segments the heat exchanger is separated to";
-  parameter Modelica.Units.SI.Mass m_heater=10
+  parameter Modelica.SIunits.Mass m_heater=10
     "How much fluid is inside the heat exchanger at the side of the heater";
-  parameter Modelica.Units.SI.Mass m_DHW=10
+  parameter Modelica.SIunits.Mass m_DHW=10
     "How much fluid is inside the heat exchanger at the side of the DHW";
-  Modelica.Units.SI.HeatFlowRate dotQ;
-  parameter Modelica.Units.SI.Temperature T0=
-      Modelica.Units.Conversions.from_degC(20)
+  Modelica.SIunits.HeatFlowRate dotQ;
+  parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
 
   /* *******************************************************************

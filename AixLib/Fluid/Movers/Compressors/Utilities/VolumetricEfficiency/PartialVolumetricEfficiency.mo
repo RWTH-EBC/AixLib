@@ -1,14 +1,12 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency;
+within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency;
 partial model PartialVolumetricEfficiency
   "Based model used by all models describing volumetric efficiencies"
   extends BaseClasses.PartialEfficiency;
 
   // Definition of outputs
   //
-  output Modelica.Units.SI.Efficiency lamH(
-    min=0,
-    max=1,
-    nominal=0.9) "Overall volumetric efficiency";
+  output Modelica.SIunits.Efficiency lamH(min=0, max=1, nominal= 0.9)
+    "Overall volumetric efficiency";
 
   annotation (Documentation(revisions="<html><ul>
   <li>October 20, 2017, by Mirko Engelpracht:<br/>

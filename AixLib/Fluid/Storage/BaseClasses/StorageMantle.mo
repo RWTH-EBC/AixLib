@@ -6,38 +6,32 @@ model StorageMantle
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
-  parameter Modelica.Units.SI.Length height=0.15 "Height of layer"
-    annotation (Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.Units.SI.Diameter D1=1 "Inner tank diameter"
-    annotation (Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.Units.SI.Thickness sWall=0.1 "Thickness of wall"
-    annotation (Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.Units.SI.Thickness sIns=0.1 "Thickness of insulation"
-    annotation (Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Length height=0.15 "Height of layer"  annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Diameter D1=1 "Inner tank diameter" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
 
-  final parameter Modelica.Units.SI.Area AInside=D1*Modelica.Constants.pi*
-      height "Inner area";
-  final parameter Modelica.Units.SI.Area AOutside=(D1 + 2*(sWall + sIns))*
-      Modelica.Constants.pi*height "Outer area";
+  final parameter Modelica.SIunits.Area AInside= D1*Modelica.Constants.pi * height
+    "Inner area";
+  final parameter Modelica.SIunits.Area AOutside= (D1+2*(sWall+sIns))*Modelica.Constants.pi * height
+    "Outer area";
 
-  parameter Modelica.Units.SI.ThermalConductivity lambdaWall=50
+  parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
     "Thermal Conductivity of wall";
-  parameter Modelica.Units.SI.ThermalConductivity lambdaIns=0.045
+    parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
     "Thermal Conductivity of insulation";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn=2
-    "Heat transfer coefficient water <-> wall";
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut=2
-    "Heat transfer coefficient insulation <-> air";
-  parameter Modelica.Units.SI.Temperature TStartWall=293.15
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=2 "Heat transfer coefficient water <-> wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=2 "Heat transfer coefficient insulation <-> air";
+  parameter Modelica.SIunits.Temperature TStartWall=293.15
     "Starting Temperature of wall in K";
-  parameter Modelica.Units.SI.Temperature TStartIns=293.15
+  parameter Modelica.SIunits.Temperature TStartIns=293.15
     "Starting Temperature of insulation in K";
-  parameter Modelica.Units.SI.Density rhoIns=1600 "Density of insulation";
-  parameter Modelica.Units.SI.SpecificHeatCapacity cIns=1000
-    "Specific heat capacity of insulation";
-  parameter Modelica.Units.SI.Density rhoWall=1600 "Density of Insulation";
-  parameter Modelica.Units.SI.SpecificHeatCapacity cWall=1000
-    "Specific heat capacity of wall";
+    parameter Modelica.SIunits.Density rhoIns=1600 "Density of insulation";
+    parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
+      "Specific heat capacity of insulation";
+    parameter Modelica.SIunits.Density rhoWall=1600 "Density of Insulation";
+    parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
+      "Specific heat capacity of wall";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
     "Outer heat port"

@@ -8,7 +8,6 @@ Heater_T
 HeatingRod
 PrescribedOutlet
 SensibleCooler_T
-WetCoilEffectivenessNTU
 ActiveBeams
 ActiveWalls
 Radiators

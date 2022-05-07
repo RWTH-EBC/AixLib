@@ -3,9 +3,9 @@ model AHU
   "Example to test all states of the AHU model - Play with the possible modes (boolean parameters for: heating, cooling, de-/humidification"
     extends Modelica.Icons.Example;
 
-  Modelica.Blocks.Sources.Sine tempOutside(
+  Modelica.Blocks.Sources.Sine     tempOutside(
     amplitude=10,
-    f=1/86400,
+    freqHz=1/86400,
     phase=-3.1415/2,
     offset=292)
     annotation (Placement(transformation(extent={{-100,-16},{-80,4}})));
@@ -24,7 +24,7 @@ model AHU
     annotation (Placement(transformation(extent={{98,-56},{78,-36}})));
 
   Modelica.Blocks.Sources.Sine waterLoadOutside(
-    f=1/86400,
+    freqHz=1/86400,
     offset=0.008,
     amplitude=0.002,
     phase=-0.054829518451402)
@@ -32,10 +32,11 @@ model AHU
   Modelica.Blocks.Sources.Constant phi_RoomExtractAir(k=0.6)
     annotation (Placement(transformation(extent={{98,-24},{78,-4}})));
   Modelica.Blocks.Sources.Sine tempAddInRoom(
-    f=1/86400,
+    freqHz=1/86400,
     amplitude=2,
     phase=-3.1415/4,
-    offset=1.7) annotation (Placement(transformation(extent={{98,20},{78,40}})));
+    offset=1.7)
+              annotation (Placement(transformation(extent={{98,20},{78,40}})));
   Modelica.Blocks.Math.Add addToExtractTemp
     annotation (Placement(transformation(extent={{46,12},{34,24}})));
   Modelica.Blocks.Interfaces.RealOutput QFlowCool(

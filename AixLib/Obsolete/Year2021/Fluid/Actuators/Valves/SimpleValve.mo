@@ -8,7 +8,7 @@ model SimpleValve
   Modelica.Blocks.Interfaces.RealInput opening "valve opening" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 80})));
 
 protected
-  Modelica.Units.SI.Density rho "Density of the fluid";
+  Modelica.SIunits.Density rho "Density of the fluid";
 equation
   rho = Medium.density(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow)));
   // Enthalpy flow

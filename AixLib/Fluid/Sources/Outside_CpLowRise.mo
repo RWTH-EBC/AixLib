@@ -1,56 +1,51 @@
 within AixLib.Fluid.Sources;
-model Outside_CpLowRise
-  "Boundary that takes weather data as an input and computes the wind pressure for low-rise buildings based on the equation from Swami and Chandra (1987)"
-  extends AixLib.Fluid.Sources.BaseClasses.Outside;
-
-  parameter Real Cp0(min=0, max=1, final unit="1") = 0.6
-    "Wind pressure coefficient for wind normal to wall";
-  parameter Real s(final min=0, final unit="1")
-    "Side ratio, s=length of this wall/length of adjacent wall";
-  parameter Modelica.Units.SI.Angle azi "Surface azimuth (South:0, West:pi/2)"
-    annotation (choicesAllMatching=true);
-
-  Modelica.Units.SI.Angle alpha = winDir-surOut
-    "Wind incidence angle (0: normal to wall)";
-  Real CpAct(final unit="1")=
-   AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise(
-     Cp0=Cp0,
-     alpha=alpha,
-     G=G)
-   "Actual wind pressure coefficient";
-  Modelica.Units.SI.Pressure pWin(displayUnit="Pa")=
-    0.5*CpAct*d*vWin*vWin
-    "Change in pressure due to wind force";
-protected
-  Modelica.Blocks.Interfaces.RealInput pWea(min=0, nominal=1E5, final unit="Pa")
-    "Pressure from weather bus";
-  Modelica.Blocks.Interfaces.RealInput vWin(final unit="m/s")
-    "Wind speed from weather bus";
-  Modelica.Blocks.Interfaces.RealOutput pTot(
-    min=0,
-    nominal=1E5,
-    final unit="Pa") = pWea + pWin
-    "Sum of atmospheric pressure and wind pressure";
-  final parameter Real G = Modelica.Math.log(s)
-    "Natural logarithm of side ratio";
-
-  Modelica.Blocks.Interfaces.RealInput winDir(final unit="rad",
-                                              displayUnit="deg")
-    "Wind direction from weather bus";
-  Modelica.Units.SI.Angle surOut=azi - Modelica.Constants.pi
-    "Angle of surface that is used to compute angle of attack of wind";
-  Modelica.Units.SI.Density d = Medium.density(
-    Medium.setState_pTX(p_in_internal, T_in_internal, X_in_internal))
-    "Air density";
-
-equation
-  connect(weaBus.winDir, winDir);
-  connect(weaBus.winSpe, vWin);
-  connect(weaBus.pAtm, pWea);
-  connect(p_in_internal, pTot);
-  connect(weaBus.TDryBul, T_in_internal);
-  annotation (defaultComponentName="out",
-    Documentation(info="<html>
+ model Outside_CpLowRise
+   "Boundary that takes weather data as an input and computes wind pressure for low-rise buildings"
+   extends AixLib.Fluid.Sources.BaseClasses.Outside;
+ 
+   parameter Real Cp0(min=0, max=1, final unit="1") = 0.6
+     "Wind pressure coefficient for wind normal to wall";
+   parameter Real s(final min=0, final unit="1")
+     "Side ratio, s=length of this wall/length of adjacent wall";
+   parameter Modelica.SIunits.Angle azi "Surface azimuth (South:0, West:pi/2)"
+     annotation (choicesAllMatching=true);
+ 
+   Modelica.SIunits.Angle alpha "Wind incidence angle (0: normal to wall)";
+   Real CpAct(min=0, final unit="1") "Actual wind pressure coefficient";
+   Modelica.SIunits.Pressure pWin(displayUnit="Pa")
+     "Change in pressure due to wind force";
+ protected
+   Modelica.Blocks.Interfaces.RealInput pWea(min=0, nominal=1E5, final unit="Pa")
+     "Pressure from weather bus";
+   Modelica.Blocks.Interfaces.RealInput vWin(final unit="m/s")
+     "Wind speed from weather bus";
+   Modelica.Blocks.Interfaces.RealOutput pTot(min=0, nominal=1E5, final unit="Pa")
+     "Sum of atmospheric pressure and wind pressure";
+   final parameter Real G = Modelica.Math.log(s)
+     "Natural logarithm of side ratio";
+ 
+   Modelica.Blocks.Interfaces.RealInput winDir(final unit="rad",
+                                               displayUnit="deg")
+     "Wind direction from weather bus";
+   Modelica.SIunits.Angle surOut = azi-Modelica.Constants.pi
+     "Angle of surface that is used to compute angle of attack of wind";
+   Modelica.Blocks.Interfaces.RealInput d = Medium.density(
+     Medium.setState_pTX(p_in_internal, T_in_internal, X_in_internal));
+ 
+ equation
+   alpha = winDir-surOut;
+   CpAct = AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise(
+             Cp0=Cp0, incAng=alpha, G=G);
+   pWin = 0.5*CpAct*d*vWin*vWin;
+   pTot = pWea + pWin;
+ 
+   connect(weaBus.winDir, winDir);
+   connect(weaBus.winSpe, vWin);
+   connect(weaBus.pAtm, pWea);
+   connect(p_in_internal, pTot);
+   connect(weaBus.TDryBul, T_in_internal);
+   annotation (defaultComponentName="out",
+     Documentation(info="<html>
  <p>
  This model describes boundary conditions for
  pressure, enthalpy, and species concentration that can be obtained
@@ -65,12 +60,9 @@ equation
  The same correlation is also implemented in CONTAM (Persily and Ivy, 2001).
  <!-- @include_Buildings
  For other buildings, the model
- <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">
- AixLib.Fluid.Sources.Outside_CpData</a> or
  <a href=\"modelica://AixLib.Fluid.Sources.Outside_Cp\">
- AixLib.Fluid.Sources.Outside_Cp</a>
- should be used that takes
- the wind pressure coefficient as a parameter or an input.
+ AixLib.Fluid.Sources.Outside_Cp</a> should be used that takes
+ the wind pressure coefficient as an input or parameter.
  -->
  </p>
  <p>
@@ -120,13 +112,6 @@ equation
  <i>&rho;</i> is the fluid density.
  </p>
  
- <p>
- This model differs from <a href=\"AixLib.Fluid.Sources.Outside_CpData\">
- AixLib.Fluid.Sources.Outside_CpData</a> by the calculation of the wind pressure coefficient C<sub>p,act</sub>.
- The wind pressure coefficient is defined by an equation in stead of a user-defined table.
- This model is only suited for low-rise rectangular buildings.
- </p>
- 
  <h4>References</h4>
  <ul>
  <li>
@@ -152,19 +137,8 @@ equation
  </li>
  </ul>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
- <li>
- February 2, 2022, by Michael Wetter:<br/>
- Revised implementation.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
- </li>
- <li>
- Jun 28, 2021, by Klaas De Jonge:<br/>
- Documentation changes to explain the difference with <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">
- AixLib.Fluid.Sources.Outside_CpData</a>.
- </li>
  <li>
  January 26, 2016, by Michael Wetter:<br/>
  Added <code>unit</code> and <code>quantity</code> attributes.
@@ -175,19 +149,19 @@ revisions="<html>
  </li>
  </ul>
  </html>"),
-    Icon(graphics={Text(
-          visible=use_Cp_in,
-          extent={{-140,92},{-92,62}},
-          textColor={0,0,255},
-          textString="C_p"),
-          Text(
-          visible=use_C_in,
-          extent={{-154,-28},{-102,-62}},
-          textColor={0,0,255},
-          textString="C"),
-        Text(
-          extent={{-28,22},{28,-22}},
-          textColor={255,255,255},
-          textString="Cp")}),
-  __Dymola_LockedEditing="Model from IBPSA");
-end Outside_CpLowRise;
+     Icon(graphics={Text(
+           visible=use_Cp_in,
+           extent={{-140,92},{-92,62}},
+           lineColor={0,0,255},
+           textString="C_p"),
+           Text(
+           visible=use_C_in,
+           extent={{-154,-28},{-102,-62}},
+           lineColor={0,0,255},
+           textString="C"),
+         Text(
+           extent={{-28,22},{28,-22}},
+           lineColor={255,255,255},
+           textString="Cp")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end Outside_CpLowRise;

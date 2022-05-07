@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
+within AixLib.Controls.HVACAgentBasedControl.Agents;
 model ConsumerAgent
   extends BaseClasses.PartialAgent(
     name=10001,
@@ -30,7 +30,7 @@ model ConsumerAgent
   Modelica.StateGraph.Transition requestNoted(enableTimer=true, waitTime=
         0.1)
     annotation (Placement(transformation(extent={{-34,32},{-14,52}})));
-  Modelica.StateGraph.StepWithSignal sendRequest(nOut=2, nIn=1)
+  Modelica.StateGraph.StepWithSignal sendRequest(nOut=2)
     annotation (Placement(transformation(extent={{2,32},{22,52}})));
   Modelica.StateGraph.TransitionWithSignal newMessage1 "confirmation"
     annotation (Placement(transformation(extent={{38,52},{58,32}})));
@@ -45,11 +45,11 @@ model ConsumerAgent
     annotation (Placement(transformation(extent={{106,52},{126,32}})));
   Modelica.StateGraph.Transition repeat1(enableTimer=true, waitTime=10)
     annotation (Placement(transformation(extent={{-8,-38},{-28,-18}})));
-  Modelica.StateGraph.Step composeNotUnderstood(nIn=1, nOut=1)
+  Modelica.StateGraph.Step composeNotUnderstood
     annotation (Placement(transformation(extent={{-56,-240},{-36,-220}})));
   Modelica.StateGraph.Transition transition2(enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{-20,-240},{0,-220}})));
-  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1, nIn=1)
+  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1)
     annotation (Placement(transformation(extent={{16,-240},{36,-220}})));
   Modelica.StateGraph.Transition transition4(enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{54,-240},{74,-220}})));
@@ -58,7 +58,7 @@ model ConsumerAgent
 
   Modelica.StateGraph.Step composeConfirm(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{-74,-118},{-54,-98}})));
-  Modelica.StateGraph.StepWithSignal sendConfirm(nOut=1, nIn=1)
+  Modelica.StateGraph.StepWithSignal sendConfirm(nOut=1)
     annotation (Placement(transformation(extent={{14,-118},{34,-98}})));
   Modelica.StateGraph.Transition confirmNoted(enableTimer=true, waitTime=
         0.1)

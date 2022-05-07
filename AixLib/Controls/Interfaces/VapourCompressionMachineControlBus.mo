@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.Interfaces;
+within AixLib.Controls.Interfaces;
 expandable connector VapourCompressionMachineControlBus
   "Standard data bus with heat pump or chiller information"
 extends Modelica.Icons.SignalBus;
@@ -12,32 +12,31 @@ extends Modelica.Icons.SignalBus;
   Boolean onOffMea
     "Measured value of device being on or off (relative speed greater than 0)"
                          annotation (HideResult=false);
-  Modelica.Units.SI.ThermodynamicTemperature TEvaInMea
+  Modelica.SIunits.ThermodynamicTemperature TEvaInMea
     "Temperature of flow into evaporator";
 
-  Modelica.Units.SI.ThermodynamicTemperature TConInMea
+  Modelica.SIunits.ThermodynamicTemperature TConInMea
     "Temperature of flow into condenser";
 
-  Modelica.Units.SI.ThermodynamicTemperature TEvaOutMea
+  Modelica.SIunits.ThermodynamicTemperature TEvaOutMea
     "temperature of flow out of evaporator";
 
-  Modelica.Units.SI.ThermodynamicTemperature TConOutMea
+  Modelica.SIunits.ThermodynamicTemperature TConOutMea
     "Temperature of flow out of condenser";
 
-  Modelica.Units.SI.Power PelMea "Total electrical active power";
+  Modelica.SIunits.Power PelMea "Total electrical active power";
 
-  Modelica.Units.SI.MassFlowRate m_flowEvaMea
+  Modelica.SIunits.MassFlowRate m_flowEvaMea
     "Mass flow rate through evaporator";
 
-  Modelica.Units.SI.MassFlowRate m_flowConMea
-    "Mass flow rate through condenser";
+  Modelica.SIunits.MassFlowRate m_flowConMea "Mass flow rate through condenser";
 
   Real CoPMea "Coefficient of performance";
 
-  Modelica.Units.SI.ThermodynamicTemperature TOdaMea "Outdoor air temperature";
-  Modelica.Units.SI.ThermodynamicTemperature TEvaAmbMea
+  Modelica.SIunits.ThermodynamicTemperature TOdaMea "Outdoor air temperature";
+  Modelica.SIunits.ThermodynamicTemperature TEvaAmbMea
     "Ambient temperature on evaporator side";
-  Modelica.Units.SI.ThermodynamicTemperature TConAmbMea
+  Modelica.SIunits.ThermodynamicTemperature TConAmbMea
     "Ambient temperature on condenser side";
   Real iceFacMea(start=1)
     "Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen). 1 means no icing/frosting."

@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookSellerAgent
   extends BaseClasses.PartialAgent;
   Real[:,2] bookList( start= [3551551677.0,30; 3551551679.0,20; 3551551616.0, 20]);
@@ -16,13 +16,13 @@ model BookSellerAgent
 
   Modelica.Blocks.Math.IntegerChange integerChange annotation (Placement(
         transformation(extent={{-174,-50},{-154,-30}})));
-  Modelica.StateGraph.InitialStep waiting(nIn=2, nOut=1)
+  Modelica.StateGraph.InitialStep waiting(nIn=2)
     annotation (Placement(transformation(extent={{-180,-120},{-160,-100}})));
   inner Modelica.StateGraph.StateGraphRoot stateGraphRoot
     annotation (Placement(transformation(extent={{-120,160},{-100,180}})));
   Modelica.StateGraph.TransitionWithSignal newMessage
     annotation (Placement(transformation(extent={{-144,-120},{-124,-100}})));
-  Modelica.StateGraph.Step checkPurpose(nOut=2, nIn=1)
+  Modelica.StateGraph.Step checkPurpose(nOut=2)
     annotation (Placement(transformation(extent={{-108,-120},{-88,-100}})));
   Modelica.StateGraph.TransitionWithSignal OfferRequestsServer(enableTimer=true,
       waitTime=0.1)
@@ -30,17 +30,17 @@ model BookSellerAgent
   Modelica.StateGraph.TransitionWithSignal PurchaseOrdersServer(enableTimer=true,
       waitTime=0.1)
     annotation (Placement(transformation(extent={{-120,0},{-100,20}})));
-  Modelica.StateGraph.Step checkLibrary(nIn=1, nOut=1)
+  Modelica.StateGraph.Step checkLibrary
     annotation (Placement(transformation(extent={{-60,100},{-40,120}})));
-  Modelica.StateGraph.Step composeResponse(nIn=1, nOut=1)
+  Modelica.StateGraph.Step composeResponse
     annotation (Placement(transformation(extent={{20,100},{40,120}})));
-  Modelica.StateGraph.StepWithSignal sendResponse(nIn=1, nOut=1)
+  Modelica.StateGraph.StepWithSignal sendResponse
     annotation (Placement(transformation(extent={{100,100},{120,120}})));
-  Modelica.StateGraph.Step checkLibrary1(nIn=1, nOut=1)
+  Modelica.StateGraph.Step checkLibrary1
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
-  Modelica.StateGraph.Step composeResponse1(nIn=1, nOut=1)
+  Modelica.StateGraph.Step composeResponse1
     annotation (Placement(transformation(extent={{20,0},{40,20}})));
-  Modelica.StateGraph.StepWithSignal sendResponse1(nIn=1, nOut=1)
+  Modelica.StateGraph.StepWithSignal sendResponse1
     annotation (Placement(transformation(extent={{100,0},{120,20}})));
   Modelica.StateGraph.Transition transition(enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{-24,100},{-4,120}})));

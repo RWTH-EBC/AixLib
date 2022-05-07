@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Storage;
+within AixLib.Fluid.Storage;
 model TwoPhaseSeparator
   "Model of a fully-mixed two-phase tank that works as ideally phase seperator"
 
@@ -12,16 +12,21 @@ model TwoPhaseSeparator
 
   // Parameters describing tank's geometry
   //
-  parameter Modelica.Units.SI.Volume VTanInn=2e-3
-    "Inner total volume of the tank" annotation (Dialog(group="Geometry"));
-  parameter Modelica.Units.SI.Area ATanInn=VTanInn/hTanInn
+  parameter Modelica.SIunits.Volume VTanInn = 2e-3
+    "Inner total volume of the tank"
+    annotation(Dialog(group = "Geometry"));
+  parameter Modelica.SIunits.Area ATanInn = VTanInn/hTanInn
     "Inner cross-sectional area of the tank"
-    annotation (Dialog(group="Geometry", enable=false));
-  parameter Modelica.Units.SI.Length hTanInn=0.5 "Inner height of the tank"
-    annotation (Dialog(group="Geometry"));
-  parameter Modelica.Units.SI.Diameter dTanInn=sqrt(4*ATanInn/Modelica.Constants.pi)
+    annotation(Dialog(group="Geometry",
+               enable=false));
+  parameter Modelica.SIunits.Length hTanInn = 0.5
+    "Inner height of the tank"
+    annotation(Dialog(group = "Geometry"));
+  parameter Modelica.SIunits.Diameter dTanInn=
+    sqrt(4*ATanInn/Modelica.Constants.pi)
     "Inner diameter of the tank"
-    annotation (Dialog(group="Geometry", enable=false));
+    annotation(Dialog(group="Geometry",
+               enable=false));
 
   // Parameters describing tank's heat losses if computed
   //
@@ -29,27 +34,23 @@ model TwoPhaseSeparator
     "= true, if heat losses are computed"
     annotation(Dialog(tab="Heat losses",group="General"));
 
-  parameter Modelica.Units.SI.Length sIns=0.1 "Thickness of insulation"
-    annotation (Dialog(
-      tab="Heat losses",
-      group="Geometry",
-      enable=useHeatLoss));
+  parameter Modelica.SIunits.Length sIns = 0.1
+    "Thickness of insulation"
+    annotation(Dialog(tab="Heat losses",group="Geometry",
+               enable=useHeatLoss));
 
-  parameter Modelica.Units.SI.ThermalConductivity lamIns=0.04
-    "Thermal conductivity of the insulation" annotation (Dialog(
-      tab="Heat losses",
-      group="Properties",
-      enable=useHeatLoss));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer alpInn=100
-    "Inner mean heat transfer coefficient" annotation (Dialog(
-      tab="Heat losses",
-      group="Properties",
-      enable=useHeatLoss));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer alpOut=10
-    "Outer mean heat transfer coefficient" annotation (Dialog(
-      tab="Heat losses",
-      group="Properties",
-      enable=useHeatLoss));
+  parameter Modelica.SIunits.ThermalConductivity lamIns = 0.04
+    "Thermal conductivity of the insulation"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=useHeatLoss));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpInn = 100
+    "Inner mean heat transfer coefficient"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=useHeatLoss));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpOut = 10
+    "Outer mean heat transfer coefficient"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=useHeatLoss));
 
   // Definition of parameters describing assumptions
   //
@@ -59,9 +60,9 @@ model TwoPhaseSeparator
 
   // Definition of parameters describing initialisation and nominal conditions
   //
-  parameter Modelica.Units.SI.PressureDifference dp_start(displayUnit="Pa") = 0
+  parameter Modelica.SIunits.PressureDifference dp_start(displayUnit="Pa") = 0
     "Guess value of dp = port_a.p - port_b.p"
-    annotation (Dialog(tab="Advanced", group="Medium Initialisation"));
+    annotation(Dialog(tab="Advanced",group="Medium Initialisation"));
   parameter Medium.MassFlowRate m_flow_start_a = 0.1
     "Guess value of port_a.m_flow"
     annotation(Dialog(tab="Advanced",group="Medium Initialisation"));
@@ -72,19 +73,19 @@ model TwoPhaseSeparator
   parameter Boolean steSta = false
     "= true, if tank is initialised steady state"
     annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
-  parameter Modelica.Units.SI.Volume VLiq0=0.2*VTanInn
+  parameter Modelica.SIunits.Volume VLiq0 = 0.2*VTanInn
     "Volume of the liquid phase at initialisation"
-    annotation (Dialog(tab="Advanced", group="Tank Initialisation"));
-  parameter Modelica.Units.SI.AbsolutePressure pTan0=10e5
+    annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
+  parameter Modelica.SIunits.AbsolutePressure pTan0 = 10e5
     "Mean pressure of the medium in the tank at initialisation"
-    annotation (Dialog(tab="Advanced", group="Tank Initialisation"));
-  parameter Modelica.Units.SI.SpecificEnthalpy hTan0=300e3
+    annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
+  parameter Modelica.SIunits.SpecificEnthalpy hTan0 = 300e3
     "Mean specific enthalpy of the medium in the tank at initialisation"
-    annotation (Dialog(tab="Advanced", group="Tank Initialisation"));
+    annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
-    annotation (Dialog(tab="Advanced", group="Numeric limitations"));
+    annotation(Dialog(tab="Advanced",group="Numeric limitations"));
   parameter Medium.MassFlowRate m_flow_small = 1e-6*m_flow_nominal
     "Small mass flow rate for regularization of zero flow"
     annotation(Dialog(tab="Advanced",group="Numeric limitations"));
@@ -116,30 +117,39 @@ model TwoPhaseSeparator
 
   record TankProperties
     "Record that contains properties of the tank"
-    Modelica.Units.SI.AbsolutePressure pTan
+    Modelica.SIunits.AbsolutePressure pTan
       "Mean pressure of the medium in the tank";
-    Modelica.Units.SI.Temperature TTan
+    Modelica.SIunits.Temperature TTan
       "Mean temperature of the medium in the tank";
-    Modelica.Units.SI.Density dTan "Mean density of the medium in the tank";
-    Modelica.Units.SI.SpecificEnthalpy hTan
+    Modelica.SIunits.Density dTan
+      "Mean density of the medium in the tank";
+    Modelica.SIunits.SpecificEnthalpy hTan
       "Mean specific enthalpy of the medium in the tank";
 
-    Modelica.Units.SI.Density dLiq "Density of the liquid phase";
-    Modelica.Units.SI.Density dVap "Density of the vapour phase";
-    Modelica.Units.SI.SpecificEnthalpy hLiq
+    Modelica.SIunits.Density dLiq
+      "Density of the liquid phase";
+    Modelica.SIunits.Density dVap
+      "Density of the vapour phase";
+    Modelica.SIunits.SpecificEnthalpy hLiq
       "Specific enthalpy of the liquid phase";
-    Modelica.Units.SI.SpecificEnthalpy hVap
+    Modelica.SIunits.SpecificEnthalpy hVap
       "Specific enthalpy of the vapour phase";
 
-    Modelica.Units.SI.SpecificEnthalpy hInn "Specific enthalpy at tank's Innet";
-    Modelica.Units.SI.SpecificEnthalpy hOut
+    Modelica.SIunits.SpecificEnthalpy hInn
+      "Specific enthalpy at tank's Innet";
+    Modelica.SIunits.SpecificEnthalpy hOut
       "Specific enthalpy at tank's outlet";
 
-    Modelica.Units.SI.Volume VLiq "Volume of the liquid phase";
-    Modelica.Units.SI.Volume VVap "Volume of the vapour phase";
-    Modelica.Units.SI.Mass mTan "Mass of the medium in the tank";
-    Modelica.Units.SI.Mass mLiq "Mass of the liquid phase";
-    Modelica.Units.SI.Mass mVap "Mass of the vapour phase";
+    Modelica.SIunits.Volume VLiq
+      "Volume of the liquid phase";
+    Modelica.SIunits.Volume VVap
+      "Volume of the vapour phase";
+    Modelica.SIunits.Mass mTan
+      "Mass of the medium in the tank";
+    Modelica.SIunits.Mass mLiq
+      "Mass of the liquid phase";
+    Modelica.SIunits.Mass mVap
+      "Mass of the vapour phase";
 
     Real levTan(unit="1")
       "Relative level of the tank";
@@ -149,13 +159,15 @@ model TwoPhaseSeparator
 
   record TankPropertiesDetailed
     "Record that contains detailed properties of the tank"
-    Modelica.Units.SI.Mass mXi[Medium.nXi]
+    Modelica.SIunits.Mass mXi[Medium.nXi]
       "Masses of independent components in the fluid";
-    Modelica.Units.SI.Mass mC[Medium.nC]
+    Modelica.SIunits.Mass mC[Medium.nC]
       "Masses of trace substances in the fluid";
 
-    Modelica.Units.SI.MassFlowRate dMTan "Change in tank's mass wrt. time";
-    Modelica.Units.SI.Power dUTan "Change in tank's internal energy wrt. time";
+    Modelica.SIunits.MassFlowRate dMTan
+      "Change in tank's mass wrt. time";
+    Modelica.SIunits.Power dUTan
+      "Change in tank's internal energy wrt. time";
     Medium.DerDensityByEnthalpy ddhp
     "Density derivative w.r.t. specific enthalpy";
     Medium.DerDensityByPressure ddph
@@ -169,15 +181,16 @@ model TwoPhaseSeparator
 
   record HeatLosses
     "Record that contains properties of calculated heat losses"
-    Modelica.Units.SI.ThermalConductance G
+    Modelica.SIunits.ThermalConductance G
       "Thermal conductance of the tank's sheat";
-    Modelica.Units.SI.ThermalConductance GShe
+    Modelica.SIunits.ThermalConductance GShe
       "Thermal conductance of the tank's sheat";
-    Modelica.Units.SI.ThermalConductance GTopBot
+    Modelica.SIunits.ThermalConductance GTopBot
       "Thermal conductance of the tank's top and bottom";
-    Modelica.Units.SI.TemperatureDifference dTHeaLos
+    Modelica.SIunits.TemperatureDifference dTHeaLos
       "Temperature difference between tank and ambient";
-    Modelica.Units.SI.Power Q_flow_loss "Heat losses from tank to ambient";
+    Modelica.SIunits.Power Q_flow_loss
+      "Heat losses from tank to ambient";
   end HeatLosses;
 
   // Definition of records that summarise variables computed in the model
@@ -242,31 +255,33 @@ model TwoPhaseSeparator
 
   // Calculating diagnostic values
   //
-  Modelica.Units.SI.VolumeFlowRate port_a_V_flow=port_a.m_flow/
-      Modelica.Fluid.Utilities.regStep(
-      port_a.m_flow,
-      Medium.density(Medium.setState_phX(
-        p=port_a.p,
-        h=inStream(port_a.h_outflow),
-        X=inStream(port_a.Xi_outflow))),
-      Medium.density(Medium.setState_phX(
-        p=port_b.p,
-        h=inStream(port_b.h_outflow),
-        X=inStream(port_b.Xi_outflow))),
-      m_flow_small) if show_V_flow
+  Modelica.SIunits.VolumeFlowRate port_a_V_flow=
+      port_a.m_flow/Modelica.Fluid.Utilities.regStep(port_a.m_flow,
+                  Medium.density(
+                    Medium.setState_phX(
+                      p = port_a.p,
+                      h = inStream(port_a.h_outflow),
+                      X = inStream(port_a.Xi_outflow))),
+                  Medium.density(
+                       Medium.setState_phX(
+                         p = port_b.p,
+                         h = inStream(port_b.h_outflow),
+                         X = inStream(port_b.Xi_outflow))),
+                  m_flow_small) if show_V_flow
     "Volume flow rate at port_a (positive when flow from port_a to port_b)";
-  Modelica.Units.SI.VolumeFlowRate port_b_V_flow=port_b.m_flow/
-      Modelica.Fluid.Utilities.regStep(
-      port_b.m_flow,
-      Medium.density(Medium.setState_phX(
-        p=port_b.p,
-        h=inStream(port_b.h_outflow),
-        X=inStream(port_b.Xi_outflow))),
-      Medium.density(Medium.setState_phX(
-        p=port_a.p,
-        h=inStream(port_a.h_outflow),
-        X=inStream(port_a.Xi_outflow))),
-      m_flow_small) if show_V_flow
+  Modelica.SIunits.VolumeFlowRate port_b_V_flow=
+      port_b.m_flow/Modelica.Fluid.Utilities.regStep(port_b.m_flow,
+                  Medium.density(
+                    Medium.setState_phX(
+                      p = port_b.p,
+                      h = inStream(port_b.h_outflow),
+                      X = inStream(port_b.Xi_outflow))),
+                  Medium.density(
+                       Medium.setState_phX(
+                         p = port_a.p,
+                         h = inStream(port_a.h_outflow),
+                         X = inStream(port_a.Xi_outflow))),
+                  m_flow_small) if show_V_flow
     "Volume flow rate at port_b (positive when flow from port_a to port_b)";
 
   Medium.Temperature port_a_T=
@@ -299,55 +314,64 @@ model TwoPhaseSeparator
     "Temperature close to port_b, if show_T = true";
 
 protected
-  parameter Modelica.Units.SI.ThermalConductance G=GShe + 2*GTopBot
-    "Thermal conductance of the tank's sheat" annotation (Dialog(
-      tab="Heat losses",
-      group="Properties",
-      enable=false));
-  parameter Modelica.Units.SI.ThermalConductance GShe=2*Modelica.Constants.pi*
-      hTanInn/(1/(alpInn*(dTanInn/2)) + 1/lamIns*log(1 + sIns/(dTanInn/2)) + 1/
-      (alpOut*(dTanInn/2 + sIns))) "Thermal conductance of the tank's sheat"
-    annotation (Dialog(
-      tab="Heat losses",
-      group="Properties",
-      enable=false));
-  parameter Modelica.Units.SI.ThermalConductance GTopBot=ATanInn/(1/alpInn +
-      sIns/lamIns + 1/alpOut)
-    "Thermal conductance of the tank's top and bottom" annotation (Dialog(
-      tab="Heat losses",
-      group="Properties",
-      enable=false));
+  parameter Modelica.SIunits.ThermalConductance G = GShe + 2*GTopBot
+    "Thermal conductance of the tank's sheat"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=false));
+  parameter Modelica.SIunits.ThermalConductance GShe = 2*Modelica.Constants.pi*
+    hTanInn / (1/(alpInn*(dTanInn/2)) + 1/lamIns*log(1+sIns/(dTanInn/2)) +
+    1/(alpOut*(dTanInn/2+sIns)))
+    "Thermal conductance of the tank's sheat"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=false));
+  parameter Modelica.SIunits.ThermalConductance GTopBot=
+    ATanInn / (1/alpInn + sIns/lamIns + 1/alpOut)
+    "Thermal conductance of the tank's top and bottom"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=false));
 
-  Modelica.Units.SI.AbsolutePressure pTan(start=pTan0)
+  Modelica.SIunits.AbsolutePressure pTan(start=pTan0)
     "Mean pressure of the medium in the tank";
-  Modelica.Units.SI.Temperature TTan
+  Modelica.SIunits.Temperature TTan
     "Mean temperature of the medium in the tank";
-  Modelica.Units.SI.Density dTan "Mean density of the medium in the tank";
-  Modelica.Units.SI.SpecificEnthalpy hTan(start=hTan0)
+  Modelica.SIunits.Density dTan
+    "Mean density of the medium in the tank";
+  Modelica.SIunits.SpecificEnthalpy hTan(start=hTan0)
     "Mean specific enthalpy of the medium in the tank";
 
-  Modelica.Units.SI.Density dLiq "Density of the liquid phase";
-  Modelica.Units.SI.Density dVap "Density of the vapour phase";
-  Modelica.Units.SI.SpecificEnthalpy hLiq
+  Modelica.SIunits.Density dLiq
+    "Density of the liquid phase";
+  Modelica.SIunits.Density dVap
+    "Density of the vapour phase";
+  Modelica.SIunits.SpecificEnthalpy hLiq
     "Specific enthalpy of the liquid phase";
-  Modelica.Units.SI.SpecificEnthalpy hVap
+  Modelica.SIunits.SpecificEnthalpy hVap
     "Specific enthalpy of the vapour phase";
 
-  Modelica.Units.SI.SpecificEnthalpy hInn "Specific enthalpy at tank's Innet";
-  Modelica.Units.SI.SpecificEnthalpy hOut "Specific enthalpy at tank's outlet";
+  Modelica.SIunits.SpecificEnthalpy hInn
+    "Specific enthalpy at tank's Innet";
+  Modelica.SIunits.SpecificEnthalpy hOut
+    "Specific enthalpy at tank's outlet";
 
-  Modelica.Units.SI.Volume VLiq(start=VLiq0) "Volume of the liquid phase";
-  Modelica.Units.SI.Volume VVap "Volume of the vapour phase";
-  Modelica.Units.SI.Mass mTan "Mass of the medium in the tank";
-  Modelica.Units.SI.Mass mLiq "Mass of the liquid phase";
-  Modelica.Units.SI.Mass mVap "Mass of the vapour phase";
-  Modelica.Units.SI.Mass mXi[Medium.nXi]
+  Modelica.SIunits.Volume VLiq(start=VLiq0)
+    "Volume of the liquid phase";
+  Modelica.SIunits.Volume VVap
+    "Volume of the vapour phase";
+  Modelica.SIunits.Mass mTan
+    "Mass of the medium in the tank";
+  Modelica.SIunits.Mass mLiq
+    "Mass of the liquid phase";
+  Modelica.SIunits.Mass mVap
+    "Mass of the vapour phase";
+  Modelica.SIunits.Mass mXi[Medium.nXi]
     "Masses of independent components in the fluid";
-  Modelica.Units.SI.Mass mC[Medium.nC]
+  Modelica.SIunits.Mass mC[Medium.nC]
     "Masses of trace substances in the fluid";
 
-  Modelica.Units.SI.MassFlowRate dMTan "Change in tank's mass wrt. time";
-  Modelica.Units.SI.Power dUTan "Change in tank's internal energy wrt. time";
+  Modelica.SIunits.MassFlowRate dMTan
+    "Change in tank's mass wrt. time";
+  Modelica.SIunits.Power dUTan
+    "Change in tank's internal energy wrt. time";
   Medium.DerDensityByEnthalpy ddhp
   "Density derivative w.r.t. specific enthalpy";
   Medium.DerDensityByPressure ddph

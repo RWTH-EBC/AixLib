@@ -1,7 +1,7 @@
-﻿within AixLib.Systems.ModularAHU.BaseClasses;
+within AixLib.Systems.ModularAHU.BaseClasses;
 expandable connector RegisterBus "Data bus for modular ahu registers"
   extends Modelica.Icons.SignalBus;
-  import      Modelica.Units.SI;
+  import SI = Modelica.SIunits;
   Systems.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus;
   SI.Temperature TAirInMea "Inlet air temperature";
   SI.Temperature TAirOutMea "Outlet air temperatur";

@@ -5,8 +5,8 @@ model WorkingFluid
     AixLib.Obsolete.YearIndependent.FastHVAC.Media.BaseClasses.MediumSimple
     medium=AixLib.Obsolete.YearIndependent.FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)";
-  parameter Modelica.Units.SI.Temperature T0 " Initial temperature";
-  parameter Modelica.Units.SI.Mass m_fluid "Mass of working fluid";
+   parameter Modelica.SIunits.Temperature T0 " Initial temperature";
+   parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";
 
   AixLib.Obsolete.YearIndependent.FastHVAC.BaseClasses.EnergyBalance energyBalance
     annotation (Placement(transformation(extent={{-34,-30},{26,30}})));

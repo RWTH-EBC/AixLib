@@ -2,10 +2,9 @@ within AixLib.Fluid.Storage.BaseClasses;
 model HeatTransferLambdaSimple "Heat transfer with effective conductivity"
   extends AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers;
 
-  Modelica.Units.SI.HeatFlowRate[n - 1] qFlow
-    "Heat flow rate from segment i+1 to i";
+  Modelica.SIunits.HeatFlowRate[n-1] qFlow "Heat flow rate from segment i+1 to i";
 
-  parameter Modelica.Units.SI.ThermalConductivity const_lambda_eff=100
+  parameter Modelica.SIunits.ThermalConductivity const_lambda_eff=100
     "Effective thermal conductivity";
 
   Modelica.Blocks.Logical.TriggeredTrapezoid triggeredTrapezoid[n - 1](
@@ -19,15 +18,14 @@ model HeatTransferLambdaSimple "Heat transfer with effective conductivity"
                    rotation=0)));
 
 protected
-  parameter Modelica.Units.SI.Length height=data.hTank/n
+  parameter Modelica.SIunits.Length height=data.hTank/n
     "Height of fluid layers";
-  parameter Modelica.Units.SI.Area A=Modelica.Constants.pi/4*data.dTank^2
+  parameter Modelica.SIunits.Area A=Modelica.Constants.pi/4*data.dTank^2
     "Area of heat transfer between layers";
-  Modelica.Units.SI.TemperatureDifference dT[n - 1]
+  Modelica.SIunits.TemperatureDifference dT[n-1]
     "Temperature difference between adjoining volumes";
-  Modelica.Units.SI.ThermalConductance k[n - 1]
-    "Effective heat transfer coefficient";
-  parameter Modelica.Units.SI.ThermalConductivity lambdaWater=0.64
+  Modelica.SIunits.ThermalConductance k[n-1] "Effective heat transfer coefficient";
+  parameter Modelica.SIunits.ThermalConductivity lambdaWater=0.64
     "Thermal conductivity of water";
 
 equation

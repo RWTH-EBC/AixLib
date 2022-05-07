@@ -11,7 +11,7 @@ model Pump " Ideal pump "
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
 protected
-  parameter Modelica.Units.SI.SpecificHeatCapacity cp=medium.c
+ parameter Modelica.SIunits.SpecificHeatCapacity cp=medium.c
     "Medium's specific heat capacity";
   /* *******************************************************************
       Components

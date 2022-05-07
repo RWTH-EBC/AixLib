@@ -1,8 +1,7 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model WindowSimple "Simple window with radiation and U-Value"
   extends BaseClasses.PartialWindow(
-    redeclare replaceable model CorrSolGain =
-        BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare replaceable model CorrSolGain = BaseClasses.CorrectionSolarGain.CorGSimple,
     final use_solarRadWinTrans=false,
     final use_windSpeedPort=false);
 

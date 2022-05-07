@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingWithPV
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;
@@ -89,7 +89,7 @@ model BuildingWithPV
     G=2) annotation (Placement(transformation(extent={{100,14},{120,34}})));
   Modelica.Blocks.Continuous.LimPID PID(
     yMax=1,
-    initType=Modelica.Blocks.Types.Init.InitialOutput,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     k=0.1,
     Ti=1,
     Td=0.01,
@@ -98,7 +98,7 @@ model BuildingWithPV
     annotation (Placement(transformation(extent={{-66,28},{-46,48}})));
   Modelica.Blocks.Continuous.LimPID PID1(
     yMax=1,
-    initType=Modelica.Blocks.Types.Init.InitialOutput,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     k=0.1,
     Ti=1,
     Td=0.01,
@@ -202,17 +202,17 @@ equation
   connect(fan.port_b, val.port_a)
     annotation (Line(points={{72,-86},{72,-18},{56,-18}},
                                                         color={0,127,255}));
-  connect(val.port_b, vol1.ports[1]) annotation (Line(points={{36,-18},{29,-18},
-          {29,10}},                        color={0,127,255}));
+  connect(val.port_b, vol1.ports[1]) annotation (Line(points={{36,-18},{30,-18},
+          {30,10}},                        color={0,127,255}));
   connect(val1.port_b, vol.ports[1]) annotation (Line(points={{0,-18},{-6,-18},
-          {-6,10},{-9,10}},        color={0,127,255}));
+          {-6,10},{-10,10}},       color={0,127,255}));
   connect(fan.port_b, val1.port_a) annotation (Line(points={{72,-86},{72,-40},{24,
           -40},{24,-18},{20,-18}},
                               color={0,127,255}));
-  connect(vol.ports[2], hea.port_a) annotation (Line(points={{-7,10},{-10,10},{
+  connect(vol.ports[2], hea.port_a) annotation (Line(points={{-6,10},{-10,10},{
           -10,2},{-80,2},{-80,-122},{-38,-122}},  color={0,127,255}));
-  connect(vol1.ports[2], hea.port_a) annotation (Line(points={{27,10},{26,10},{
-          26,2},{-80,2},{-80,-122},{-38,-122}}, color={0,127,255}));
+  connect(vol1.ports[2], hea.port_a) annotation (Line(points={{26,10},{26,10},{26,
+          2},{-80,2},{-80,-122},{-38,-122}},    color={0,127,255}));
   connect(heatProducerAgent.calcCapacity, constantFactor.capacity) annotation (
       Line(points={{-44,-87},{-44,-82}},             color={0,0,127}));
   connect(heatProducerAgent.calcCost, constantFactor.cost) annotation (Line(
@@ -299,11 +299,11 @@ equation
   connect(or1.y, heatProducerAgent1.OnOff_external) annotation (Line(points={{25,-94},
           {28,-94},{28,-99.4},{34,-99.4}},         color={255,0,255}));
   connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
-      points={{-40,128},{-40,128},{-6,128},{-6,104},{26,104},{26,90.8},{64,90.8}},
+      points={{-40,128},{-40,128},{-6,128},{-6,104},{26,104},{26,83},{64,83}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus,thermalZone. weaBus) annotation (Line(
-      points={{-40,128},{-22,128},{-22,90.8},{-18,90.8}},
+      points={{-40,128},{-22,128},{-22,83},{-18,83}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus, weaBus) annotation (Line(
@@ -319,17 +319,15 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(vol.heatPort, thermalZone.intGainsConv) annotation (Line(points={{-18,20},
-          {-24,20},{-24,38},{8.26,38},{8.26,83.52}},
-                                                  color={191,0,0}));
-  connect(vol.heatPort, thermalZone.intGainsRad) annotation (Line(points={{-18,20},
-          {-22,20},{-22,18},{-24,18},{-24,38},{8.26,38},{8.26,87.42}},
-                                                                    color={191,
+  connect(vol.heatPort, thermalZone.intGainsConv) annotation (Line(points={{-18,
+          20},{-24,20},{-24,38},{8,38},{8,76.5}}, color={191,0,0}));
+  connect(vol.heatPort, thermalZone.intGainsRad) annotation (Line(points={{-18,
+          20},{-22,20},{-22,18},{-24,18},{-24,38},{8,38},{8,81.7}}, color={191,
           0,0}));
-  connect(vol1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{38,20},
-          {50,20},{50,68},{96,68},{96,83.52},{90.26,83.52}},   color={191,0,0}));
-  connect(vol1.heatPort, thermalZone1.intGainsRad) annotation (Line(points={{38,20},
-          {50,20},{50,68},{98,68},{98,87.42},{90.26,87.42}},color={191,0,0}));
+  connect(vol1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{
+          38,20},{50,20},{50,68},{96,68},{96,76.5},{90,76.5}}, color={191,0,0}));
+  connect(vol1.heatPort, thermalZone1.intGainsRad) annotation (Line(points={{38,
+          20},{50,20},{50,68},{98,68},{98,81.7},{90,81.7}}, color={191,0,0}));
   connect(thermalZone.intGains, internalGains.y) annotation (Line(points={{5.4,
           72.08},{5.4,68},{-40,68},{-40,58},{-70,58},{-70,43},{-77.3,43}},
         color={0,0,127}));
@@ -338,10 +336,10 @@ equation
           -77.3,43}}, color={0,0,127}));
   connect(roomAgent.T, PID.u_m) annotation (Line(points={{-116,30},{-116,38},{
           -100,38},{-100,18},{-56,18},{-56,26}}, color={0,0,127}));
-  connect(thermalZone1.TAir, roomAgent1.T) annotation (Line(points={{91.3,93.4},
-          {108,93.4},{108,32}}, color={0,0,127}));
-  connect(thermalZone.TAir, roomAgent.T) annotation (Line(points={{9.3,93.4},{
-          16,93.4},{16,56},{-116,56},{-116,30}}, color={0,0,127}));
+  connect(thermalZone1.TAir, roomAgent1.T) annotation (Line(points={{91.3,90.8},
+          {108,90.8},{108,32}}, color={0,0,127}));
+  connect(thermalZone.TAir, roomAgent.T) annotation (Line(points={{9.3,90.8},{
+          16,90.8},{16,56},{-116,56},{-116,30}}, color={0,0,127}));
   connect(to_degC3.u, weaBus.TDryBul) annotation (Line(points={{-116,108},{-108,
           108},{-108,142},{35,142},{35,128}}, color={0,0,127}), Text(
       string="%second",

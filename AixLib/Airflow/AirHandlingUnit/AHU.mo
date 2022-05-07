@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit;
+within AixLib.Airflow.AirHandlingUnit;
 model AHU
   "Air Handling Unit with Heat Recovery System, Cooling, Heating, Humidification (adiabatic), Dehumidification"
   extends AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU;
@@ -43,60 +43,57 @@ model AHU
     "efficiency of HRS in the AHU modes when HRS is disabled";
   inner Real phi_t(start=0.5);
 
-  inner Modelica.Units.SI.Temperature T_oda;
-                                      //(start=288.15);
-  inner Modelica.Units.SI.Temperature T_1(start=290.15);
-  inner Modelica.Units.SI.Temperature T_5(start=293.15);
-  inner Modelica.Units.SI.Temperature T_sup(start=295.15);
-  inner Modelica.Units.SI.Temperature T_eta(start=296.15);
-  inner Modelica.Units.SI.Temperature T_6;
-                                    //(start=296.15);
+  inner Modelica.SIunits.Temp_K T_oda;//(start=288.15);
+  inner Modelica.SIunits.Temp_K T_1(start=290.15);
+  inner Modelica.SIunits.Temp_K T_5(start=293.15);
+  inner Modelica.SIunits.Temp_K T_sup(start=295.15);
+  inner Modelica.SIunits.Temp_K T_eta(start=296.15);
+  inner Modelica.SIunits.Temp_K T_6;//(start=296.15);
 
-  inner Modelica.Units.SI.MassFraction X_oda(start=0.007);
-  Modelica.Units.SI.MassFraction X_odaSat(start=0.007);
-  Modelica.Units.SI.MassFraction X_odaRaw(start=0.007);
-  inner Modelica.Units.SI.MassFraction X_sup(start=0.008);
-  Modelica.Units.SI.MassFraction X_supplyMin(start=0.006);
-  Modelica.Units.SI.MassFraction X_supplyMax(start=0.010);
-  inner Modelica.Units.SI.MassFraction X_supMin(start=0.006);
-  inner Modelica.Units.SI.MassFraction X_supMax(start=0.010);
-  Modelica.Units.SI.MassFraction X_extractAir(start=0.008);
-  Modelica.Units.SI.MassFraction X_eta(start=0.008);
+  inner Modelica.SIunits.MassFraction X_oda(start=0.007);
+  Modelica.SIunits.MassFraction X_odaSat(start=0.007);
+  Modelica.SIunits.MassFraction X_odaRaw(start=0.007);
+  inner Modelica.SIunits.MassFraction X_sup(start=0.008);
+  Modelica.SIunits.MassFraction X_supplyMin(start=0.006);
+  Modelica.SIunits.MassFraction X_supplyMax(start=0.010);
+  inner Modelica.SIunits.MassFraction X_supMin(start=0.006);
+  inner Modelica.SIunits.MassFraction X_supMax(start=0.010);
+  Modelica.SIunits.MassFraction X_extractAir(start=0.008);
+  Modelica.SIunits.MassFraction X_eta(start=0.008);
   Real phi_sup(start=0.5);
 
-  inner Modelica.Units.SI.HeatFlowRate Q_dot_C(start=1e-3);
-  inner Modelica.Units.SI.HeatFlowRate Q_dot_H(start=1e-3);
-  Modelica.Units.SI.Power P_el_sup(start=1e-3);
-  Modelica.Units.SI.Power P_el_eta(start=1e-3);
-  inner Modelica.Units.SI.VolumeFlowRate V_dot_sup(start=1e-3);
-  inner Modelica.Units.SI.VolumeFlowRate V_dot_eta(start=1e-3);
+  inner Modelica.SIunits.HeatFlowRate Q_dot_C(start=1e-3);
+  inner Modelica.SIunits.HeatFlowRate Q_dot_H(start=1e-3);
+  Modelica.SIunits.Power P_el_sup(start=1e-3);
+  Modelica.SIunits.Power P_el_eta(start=1e-3);
+  inner Modelica.SIunits.VolumeFlowRate V_dot_sup(start=1e-3);
+  inner Modelica.SIunits.VolumeFlowRate V_dot_eta(start=1e-3);
 
   // Constants from formulas collection of Thermodynamik (institute: LTT)
-  constant Modelica.Units.SI.SpecificHeatCapacityAtConstantPressure c_pL_iG=1E3;
-  constant Modelica.Units.SI.SpecificHeatCapacityAtConstantPressure c_pW_iG=
-      1.86E3;
-  constant Modelica.Units.SI.SpecificEnthalpy r_0=2465E3
+  constant Modelica.SIunits.SpecificHeatCapacityAtConstantPressure c_pL_iG=1E3;
+  constant Modelica.SIunits.SpecificHeatCapacityAtConstantPressure c_pW_iG=1.86E3;
+  constant Modelica.SIunits.SpecificEnthalpy r_0=2465E3
     "enthalpy of vaporization at temperature between T_dew(X_sup=0.008)=11 degC and T_sup = 22 degC";
-  constant Modelica.Units.SI.Density rho=1.2;
-  constant Modelica.Units.SI.Pressure p_0=101325;
-  constant Modelica.Units.SI.SpecificEnthalpy dhV=2501.3E3;
-  constant Modelica.Units.SI.Temperature T_0=273.15;
+  constant Modelica.SIunits.Density rho=1.2;
+  constant Modelica.SIunits.Pressure p_0=101325;
+  constant Modelica.SIunits.SpecificEnthalpy dhV=2501.3E3;
+  constant Modelica.SIunits.Temp_K T_0=273.15;
   constant Real molarMassRatio=Modelica.Media.IdealGases.Common.SingleGasesData.H2O.MM
       /Modelica.Media.Air.SimpleAir.MM_const;
 
   // auxiliary variable
-  Modelica.Units.SI.TemperatureDifference dTFan;
-  Modelica.Units.SI.Temperature TsupplyAirOut(start=295.15);
+  Modelica.SIunits.TemperatureDifference dTFan;
+  Modelica.SIunits.Temp_K TsupplyAirOut(start=295.15);
 
   // Sampler (time-continous to time-discrete variables)
 
-  Modelica.Clocked.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=9)
+  Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=9)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-66,14})));
 
-  Modelica.Clocked.ClockSignals.Clocks.PeriodicRealClock periodicClock(
+  Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock periodicClock(
     solverMethod="ExplicitRungeKutta4",
     useSolver=true,
     period=clockPeriodGeneric)
@@ -110,8 +107,8 @@ model AHU
   //Start State
 
   block StartState
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
 
   equation
     Q_dot_C = previous(Q_dot_C);
@@ -141,30 +138,30 @@ model AHU
   // Dehumidification
 
   block DeHuHRS_true
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    Modelica.Units.SI.Temperature T_2(start=290);
-    Modelica.Units.SI.Temperature T_3(start=282);
-    Modelica.Units.SI.Temperature T_4(start=282);
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer input Modelica.Units.SI.MassFraction X_supMax;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    Modelica.SIunits.Temp_K T_2(start=290);
+    Modelica.SIunits.Temp_K T_3(start=282);
+    Modelica.SIunits.Temp_K T_4(start=282);
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer input Modelica.SIunits.MassFraction X_supMax;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withHRS;
     outer parameter Real BPF_DeHu;
-    Modelica.Units.SI.SpecificEnthalpy h_2(start=0.003) "h_in of cooler";
-    Modelica.Units.SI.SpecificEnthalpy h_surface(start=0.002)
+    Modelica.SIunits.SpecificEnthalpy h_2(start=0.003) "h_in of cooler";
+    Modelica.SIunits.SpecificEnthalpy h_surface(start=0.002)
       "h_surface of cooler";
-    Modelica.Units.SI.SpecificEnthalpy h_CoilOut(start=0.001) "h_out of cooler";
-    Modelica.Units.SI.Pressure p_sat_surface(start=2300);
-    Modelica.Units.SI.MassFraction X_surface(start=0.005);
-    Modelica.Units.SI.Temperature T_surface(start=280);
-    Modelica.Units.SI.Temperature T_CoilOut(start=278);
+    Modelica.SIunits.SpecificEnthalpy h_CoilOut(start=0.001) "h_out of cooler";
+    Modelica.SIunits.Pressure p_sat_surface(start=2300);
+    Modelica.SIunits.MassFraction X_surface(start=0.005);
+    Modelica.SIunits.Temp_K T_surface(start=280);
+    Modelica.SIunits.Temp_K T_CoilOut(start=278);
 
   equation
     phi_t = phi_t_withHRS "heat recovery system is enabled";
@@ -226,30 +223,30 @@ model AHU
   //
 
   block DeHuHRS_false
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    Modelica.Units.SI.Temperature T_2(start=290);
-    Modelica.Units.SI.Temperature T_3(start=282);
-    Modelica.Units.SI.Temperature T_4(start=282);
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer input Modelica.Units.SI.MassFraction X_supMax;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    Modelica.SIunits.Temp_K T_2(start=290);
+    Modelica.SIunits.Temp_K T_3(start=282);
+    Modelica.SIunits.Temp_K T_4(start=282);
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer input Modelica.SIunits.MassFraction X_supMax;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
     outer parameter Real BPF_DeHu;
-    Modelica.Units.SI.SpecificEnthalpy h_2(start=0.003) "h_in of cooler";
-    Modelica.Units.SI.SpecificEnthalpy h_surface(start=0.002)
+    Modelica.SIunits.SpecificEnthalpy h_2(start=0.003) "h_in of cooler";
+    Modelica.SIunits.SpecificEnthalpy h_surface(start=0.002)
       "h_surface of cooler";
-    Modelica.Units.SI.SpecificEnthalpy h_CoilOut(start=0.001) "h_out of cooler";
-    Modelica.Units.SI.Pressure p_sat_surface(start=2300);
-    Modelica.Units.SI.MassFraction X_surface(start=0.005);
-    Modelica.Units.SI.Temperature T_surface(start=280);
-    Modelica.Units.SI.Temperature T_CoilOut(start=278);
+    Modelica.SIunits.SpecificEnthalpy h_CoilOut(start=0.001) "h_out of cooler";
+    Modelica.SIunits.Pressure p_sat_surface(start=2300);
+    Modelica.SIunits.MassFraction X_surface(start=0.005);
+    Modelica.SIunits.Temp_K T_surface(start=280);
+    Modelica.SIunits.Temp_K T_CoilOut(start=278);
 
   equation
     phi_t = phi_t_withoutHRS "heat recovery system is disabled";
@@ -312,16 +309,16 @@ model AHU
   // Humidification
 
   block HuPreHHRS_true
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer input Modelica.Units.SI.MassFraction X_supMin;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer input Modelica.SIunits.MassFraction X_supMin;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withHRS;
 
@@ -359,16 +356,16 @@ model AHU
   //
 
   block HuPreHHRS_false
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer input Modelica.Units.SI.MassFraction X_supMin;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer input Modelica.SIunits.MassFraction X_supMin;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
 
@@ -406,19 +403,19 @@ model AHU
   //
 
   block HuCHRS_true
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    Modelica.Units.SI.Temperature T_2;
-    Modelica.Units.SI.Temperature T_3;
-    Modelica.Units.SI.Temperature T_4;
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer input Modelica.Units.SI.MassFraction X_supMin;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    Modelica.SIunits.Temp_K T_2;
+    Modelica.SIunits.Temp_K T_3;
+    Modelica.SIunits.Temp_K T_4;
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer input Modelica.SIunits.MassFraction X_supMin;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withHRS;
 
@@ -459,19 +456,19 @@ model AHU
   //
 
   block HuCHRS_false
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    Modelica.Units.SI.Temperature T_2;
-    Modelica.Units.SI.Temperature T_3;
-    Modelica.Units.SI.Temperature T_4;
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer input Modelica.Units.SI.MassFraction X_supMin;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    Modelica.SIunits.Temp_K T_2;
+    Modelica.SIunits.Temp_K T_3;
+    Modelica.SIunits.Temp_K T_4;
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer input Modelica.SIunits.MassFraction X_supMin;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
 
@@ -512,18 +509,18 @@ model AHU
   // Only Heating
 
   block OnlyHeatingHRS_true
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    Modelica.Units.SI.Temperature T_2;
-    Modelica.Units.SI.Temperature T_3;
-    Modelica.Units.SI.Temperature T_4;
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    Modelica.SIunits.Temp_K T_2;
+    Modelica.SIunits.Temp_K T_3;
+    Modelica.SIunits.Temp_K T_4;
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withHRS;
 
@@ -562,18 +559,18 @@ model AHU
   //
 
   block OnlyHeatingHRS_false
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    Modelica.Units.SI.Temperature T_2;
-    Modelica.Units.SI.Temperature T_3;
-    Modelica.Units.SI.Temperature T_4;
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    Modelica.SIunits.Temp_K T_2;
+    Modelica.SIunits.Temp_K T_3;
+    Modelica.SIunits.Temp_K T_4;
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
 
@@ -612,18 +609,18 @@ model AHU
   // Only Cooling
 
   block OnlyCoolingHRS_true
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    Modelica.Units.SI.Temperature T_2;
-    Modelica.Units.SI.Temperature T_3;
-    Modelica.Units.SI.Temperature T_4;
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    Modelica.SIunits.Temp_K T_2;
+    Modelica.SIunits.Temp_K T_3;
+    Modelica.SIunits.Temp_K T_4;
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withHRS;
 
@@ -662,18 +659,18 @@ model AHU
   //
 
   block OnlyCoolingHRS_false
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_C;
-    outer output Modelica.Units.SI.HeatFlowRate Q_dot_H;
-    outer input Modelica.Units.SI.Temperature T_oda;
-    outer input Modelica.Units.SI.Temperature T_1;
-    Modelica.Units.SI.Temperature T_2;
-    Modelica.Units.SI.Temperature T_3;
-    Modelica.Units.SI.Temperature T_4;
-    outer input Modelica.Units.SI.Temperature T_5;
-    outer input Modelica.Units.SI.Temperature T_6;
-    outer input Modelica.Units.SI.MassFraction X_oda;
-    outer output Modelica.Units.SI.MassFraction X_sup;
-    outer input Modelica.Units.SI.VolumeFlowRate V_dot_sup;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
+    Modelica.SIunits.Temp_K T_2;
+    Modelica.SIunits.Temp_K T_3;
+    Modelica.SIunits.Temp_K T_4;
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
     outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
 

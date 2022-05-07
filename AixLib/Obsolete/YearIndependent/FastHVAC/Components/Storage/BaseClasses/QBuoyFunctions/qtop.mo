@@ -1,11 +1,11 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function qtop
 
-  input Modelica.Units.SI.TemperatureDifference dTover;
-  input Modelica.Units.SI.TemperatureDifference dTborder;
+  input Modelica.SIunits.TemperatureDifference dTover;
+  input Modelica.SIunits.TemperatureDifference dTborder;
   input Integer dn_gap;
 
-  output Modelica.Units.SI.SpecificEnergy qtop;
+  output Modelica.SIunits.SpecificEnergy qtop;
 
 protected
   parameter Real a(unit="J/(kg.K)")=3896;

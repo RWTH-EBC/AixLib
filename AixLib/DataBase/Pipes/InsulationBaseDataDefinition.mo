@@ -2,7 +2,7 @@ within AixLib.DataBase.Pipes;
 record InsulationBaseDataDefinition
   "Definition of Parameter Values for insulation records"
     extends Modelica.Icons.Record;
-  import      Modelica.Units.SI;
+  import SI = Modelica.SIunits;
 
   // Constant chemical Values assumed
   parameter Real factor

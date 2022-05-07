@@ -35,17 +35,19 @@ partial model PartialModularController
     annotation(Dialog(tab="Controller",group="Proportional term"),
                HideResult=true);
 
-  parameter Modelica.Units.SI.Time Ti[nCom]=fill(0.5, nCom)
-    "Time constant of integrator block" annotation (Dialog(tab="Controller",
-        group="Integral term"), HideResult=true);
+  parameter Modelica.SIunits.Time Ti[nCom] = fill(0.5,nCom)
+    "Time constant of integrator block"
+    annotation(Dialog(tab="Controller",group="Integral term"),
+               HideResult=true);
   parameter Real Ni[nCom] = fill(0.9,nCom)
     "Ni*Ti is time constant of anti-windup compensation"
     annotation(Dialog(tab="Controller",group="Integral term"),
                HideResult=true);
 
-  parameter Modelica.Units.SI.Time Td[nCom]=fill(0.1, nCom)
-    "Time constant of derivative block" annotation (Dialog(tab="Controller",
-        group="Derivative term"), HideResult=true);
+  parameter Modelica.SIunits.Time Td[nCom] = fill(0.1,nCom)
+    "Time constant of derivative block"
+    annotation(Dialog(tab="Controller",group="Derivative term"),
+               HideResult=true);
   parameter Real Nd[nCom] = fill(10,nCom)
     "The higher Nd, the more ideal the derivative block"
     annotation(Dialog(tab="Controller",group="Derivative term"),
@@ -69,10 +71,11 @@ partial model PartialModularController
     annotation(Dialog(tab="Controller",group="Controller limits"),
                HideResult=true);
 
-  parameter Modelica.Blocks.Types.Init initType[nCom]=fill(Modelica.Blocks.Types.Init.InitialState,
-      nCom)
+  parameter Modelica.Blocks.Types.InitPID initType[nCom]=
+    fill(Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,nCom)
     "Init: (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation (Dialog(tab="Initialisation", group="General"), HideResult=true);
+    annotation(Dialog(tab="Initialisation",group="General"),
+               HideResult=true);
   parameter Real xi_start[nCom] = fill(0,nCom)
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(tab="Initialisation",group="Start values"),

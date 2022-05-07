@@ -2,7 +2,7 @@ within AixLib.DataBase.Boiler.General;
 record BoilerTwoPointBaseDataDefinition
   "Basic data for boiler with two point characteristic"
   extends Modelica.Icons.Record;
-  import      Modelica.Units.SI;
+  import SI = Modelica.SIunits;
 
   parameter String name
     "Name of boiler";

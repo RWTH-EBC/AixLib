@@ -28,7 +28,7 @@ model NcDataReader "File reader for external data"
   parameter String attNameInt[:]={""}
     "Name of attribute of type integer in .nc file"
     annotation (Dialog(enable=use_attNameInt));
-  parameter Modelica.Units.SI.Time offset=0
+  parameter Modelica.SIunits.Time offset=0
     "Time period prior current simulation time";
   Modelica.Blocks.Interfaces.RealOutput y[size(varName, 1)]
     if use_varName

@@ -24,7 +24,7 @@ package NaturalGasMixture_GeneralType
     "Needed natural gas data for calculations, manual redefinition of volumetric proportions of the gas components (Xi_mole) required (default:{1/9,1/9,...})!"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
-   import Modelica.Units.SI.*;
+   import Modelica.SIunits.*;
 
   constant Boolean isGas = Fuel.isGasoline "True = Gasoline fuel, False = Liquid fuel";
   constant MoleFraction moleFractions_Gas[:] = Fuel.Xi_mole;

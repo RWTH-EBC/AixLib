@@ -5,13 +5,13 @@ model DHCSupplyHeaterCoolerStorage
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
-  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
-    "Nominal pressure drop";
+      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+      "Nominal pressure drop";
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=m_flow_nominal
+      parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
-  parameter Modelica.Units.SI.Volume V_Tank "Volume of thermal storage tank";
+      parameter Modelica.SIunits.Volume V_Tank "Volume of thermal storage tank";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)

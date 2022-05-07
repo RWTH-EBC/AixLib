@@ -22,10 +22,10 @@ partial model PartialHeatTransfer
   input Medium.ThermodynamicState[n] states
     "Thermodynamic states of flow segments";
 
-  input Modelica.Units.SI.Area[n] surfaceAreas "Heat transfer areas";
+  input Modelica.SIunits.Area[n] surfaceAreas "Heat transfer areas";
 
   // Outputs defined by heat transfer model
-  output Modelica.Units.SI.HeatFlowRate[n] Q_flows "Heat flow rates";
+  output Modelica.SIunits.HeatFlowRate[n] Q_flows "Heat flow rates";
 
   // Heat ports
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] heatPorts
@@ -33,8 +33,7 @@ partial model PartialHeatTransfer
           extent={{-10,60},{10,80}}), iconTransformation(extent={{-10,60},{10,80}})));
 
   // Variables
-  Modelica.Units.SI.Temperature[n] Ts=Medium.temperature(states)
-    "Temperature at states";
+  Modelica.SIunits.Temperature[n] Ts = Medium.temperature(states) "Temperature at states";
 equation
   Q_flows =heatPorts.Q_flow;
   annotation (Documentation(info="<html><p>

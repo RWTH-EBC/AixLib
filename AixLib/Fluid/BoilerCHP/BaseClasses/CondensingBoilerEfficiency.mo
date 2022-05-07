@@ -1,14 +1,15 @@
-﻿within AixLib.Fluid.BoilerCHP.BaseClasses;
+within AixLib.Fluid.BoilerCHP.BaseClasses;
 model CondensingBoilerEfficiency
   "Model for temperature depending efficiency of a condensing boiler"
   parameter Real lambda=0.01 "Offset variable of weighting coefficients sigmas";
 
-  parameter Modelica.Units.SI.Temperature T_nom=343.15 "Nominal temperature";
-  parameter Modelica.Units.SI.Temperature T_part=308.15
+  parameter Modelica.SIunits.Temperature T_nom=343.15
+    "Nominal temperature";
+  parameter Modelica.SIunits.Temperature T_part=308.15
     "Intermediate temperature";
-  parameter Modelica.Units.SI.Efficiency eta_nom=1
+  parameter Modelica.SIunits.Efficiency eta_nom=1
     "Nominal net heating value efficiency";
-  parameter Modelica.Units.SI.Efficiency eta_int=1
+  parameter Modelica.SIunits.Efficiency eta_int=1
     "Intermediate net heating value efficiency";
   parameter Real eta_max=1.11
     "Ratio gross (high) heating value / net (low) heating value defined according to the fuel";
@@ -19,11 +20,7 @@ model CondensingBoilerEfficiency
   Real sigmaSens;
   Real sigmaCond;
   Real etaRP;
-  Modelica.Units.SI.Temperature Tc(
-    start=360,
-    max=380,
-    min=323,
-    nominal=360)
+  Modelica.SIunits.Temperature Tc(start=360, max=380, min=323, nominal=360)
     "Temperature of Sensitive and Latent characteristic intersection";
   //start value is important: equation below has two solutions
 

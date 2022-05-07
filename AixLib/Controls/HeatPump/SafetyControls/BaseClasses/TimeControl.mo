@@ -1,9 +1,9 @@
-﻿within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
+within AixLib.Controls.HeatPump.SafetyControls.BaseClasses;
 block TimeControl
   "Counts seconds a device is turned on and returns true if the time is inside given boundaries"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
 
-  parameter Modelica.Units.SI.Time minRunTime
+  parameter Modelica.SIunits.Time minRunTime
     "Minimal time the device is turned on or off";
   Modelica.Blocks.Logical.Timer runTim
     "Counts the seconds the heat pump is locked still"

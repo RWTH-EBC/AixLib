@@ -117,8 +117,9 @@ model ComparisonThermalZoneMoistAndDryAir
     annotation (Placement(transformation(extent={{46,-22},{26,-2}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
-    f=1/86400,
-    offset=500) "Sinusoidal excitation for additional internal gains"
+    freqHz=1/86400,
+    offset=500)
+    "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{94,-22},{74,-2}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1
     "Convective heat flow of additional internal gains"
@@ -246,8 +247,9 @@ model ComparisonThermalZoneMoistAndDryAir
     annotation (Placement(transformation(extent={{44,74},{24,94}})));
   Modelica.Blocks.Sources.Sine sine1(
     amplitude=500,
-    f=1/86400,
-    offset=500) "Sinusoidal excitation for additional internal gains"
+    freqHz=1/86400,
+    offset=500)
+    "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{92,74},{72,94}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow3
     "Convective heat flow of additional internal gains"

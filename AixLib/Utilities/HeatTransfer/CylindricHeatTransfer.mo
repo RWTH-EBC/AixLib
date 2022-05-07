@@ -5,15 +5,15 @@ model CylindricHeatTransfer "Model for cylindric heat transfer"
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
-  parameter Modelica.Units.SI.Density rho=1600 "Density of material";
-  parameter Modelica.Units.SI.SpecificHeatCapacity c=1000
+  parameter Modelica.SIunits.Density rho=1600 "Density of material";
+  parameter Modelica.SIunits.SpecificHeatCapacity c=1000
     "Specific heat capacity of material";
-  parameter Modelica.Units.SI.Length d_out(min=0) "Outer diameter of pipe";
-  parameter Modelica.Units.SI.Length d_in(min=0) "Inner diameter of pipe";
-  parameter Modelica.Units.SI.Length length(min=0) " Length of pipe";
-  parameter Modelica.Units.SI.ThermalConductivity lambda=373
+  parameter Modelica.SIunits.Length d_out(min=0) "Outer diameter of pipe";
+  parameter Modelica.SIunits.Length d_in(min=0) "Inner diameter of pipe";
+  parameter Modelica.SIunits.Length length(min=0) " Length of pipe";
+  parameter Modelica.SIunits.ThermalConductivity lambda=373
     "Heat conductivity of pipe";
-  parameter Modelica.Units.SI.Temperature T0=289.15 "Initial temperature";
+  parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature";
   parameter Integer nParallel = 1 "Number of identical parallel pipes";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a

@@ -5,7 +5,7 @@ model HysteresisValve
     parameter Real leakageOpening
     "The opening signal is limited by leakageOpening (to improve the numerics)";
 
-  parameter Modelica.Units.SI.Time riseTime;
+     parameter Modelica.SIunits.Time riseTime;
 
  Modelica.Blocks.Continuous.Filter filter(order=2, f_cut=5/(2*Modelica.Constants.pi
        *riseTime)) if filteredOpening

@@ -1,8 +1,8 @@
 within AixLib.Utilities.MassTransfer;
 connector MassPort "connector for mass transfer"
 
-  flow Modelica.Units.SI.MassFlowRate m_flow "mass flow rate of sub-component";
-  Modelica.Units.SI.PartialPressure p "partial pressure of sub-component";
+  flow Modelica.SIunits.MassFlowRate m_flow "mass flow rate of sub-component";
+  Modelica.SIunits.PartialPressure p "partial pressure of sub-component";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(

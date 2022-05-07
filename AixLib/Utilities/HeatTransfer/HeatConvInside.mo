@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.HeatTransfer;
+within AixLib.Utilities.HeatTransfer;
 model HeatConvInside
   "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, according to ASHRAE140-2017 or a constant convective heat transfer coefficient"
   /* calculation of natural convection in the inside of a building according to B.Glueck, ASHRAE140-2017, EN ISO 6946 or using a constant convective heat transfer coefficient hCon_const
@@ -15,14 +15,12 @@ model HeatConvInside
       radioButtons=true),
     Evaluate=true);
 
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=2.5
-    "Custom convective heat transfer coefficient" annotation (Dialog(
-        descriptionLabel=true, enable=if calcMethod == 3 then true else false));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Custom convective heat transfer coefficient"
+                                         annotation (Dialog(descriptionLabel=true,
+        enable=if calcMethod == 3 then true else false));
 
-  parameter Modelica.Units.SI.TemperatureDifference dT_small=0.1
-    "Linearized function around dT = 0 K +/-" annotation (Dialog(
-        descriptionLabel=true, enable=if calcMethod == 1 or calcMethod == 2 or
-          calcMethod == 4 then true else false));
+  parameter Modelica.SIunits.TemperatureDifference dT_small = 0.1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
+        enable=if calcMethod == 1 or calcMethod == 2 or calcMethod == 4 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
@@ -33,13 +31,11 @@ model HeatConvInside
       choice=3 "horizontal facing down",
       radioButtons=true),
       Evaluate=true);
-  parameter Modelica.Units.SI.Area A(min=Modelica.Constants.eps)
-    "Area of surface";
-  Modelica.Units.SI.CoefficientOfHeatTransfer hCon
-    "variable heat transfer coefficient";
+  parameter Modelica.SIunits.Area A(min=Modelica.Constants.eps) "Area of surface";
+  Modelica.SIunits.CoefficientOfHeatTransfer hCon "variable heat transfer coefficient";
 
 protected
-  Modelica.Units.NonSI.Temperature_degC posDiff=noEvent(abs(port_b.T - port_a.T))
+  Modelica.SIunits.Temp_C posDiff=noEvent(abs(port_b.T - port_a.T))
     "Positive temperature difference";
 equation
 

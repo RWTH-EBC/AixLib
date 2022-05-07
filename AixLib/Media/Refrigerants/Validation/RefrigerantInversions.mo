@@ -10,16 +10,18 @@ model RefrigerantInversions
       "Internal medium model";
 
   // Define the fluid limits of the medium that shall be tested
-  parameter Modelica.Units.SI.AbsolutePressure p_min=1e5
+  parameter Modelica.SIunits.AbsolutePressure p_min = 1e5
     "Fluid limit: Minimum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.Units.SI.AbsolutePressure p_max=48e5
+  parameter Modelica.SIunits.AbsolutePressure p_max = 48e5
     "Fluid limit: Maximum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.Units.SI.Temperature T_min=233.15
-    "Fluid limit: Minimum temperature" annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.Units.SI.Temperature T_max=340.15
-    "Fluid limit: Maximum temperature" annotation (Dialog(group="Fluid limits"));
+  parameter Modelica.SIunits.Temperature T_min = 233.15
+    "Fluid limit: Minimum temperature"
+    annotation (Dialog(group="Fluid limits"));
+  parameter Modelica.SIunits.Temperature T_max = 340.15
+    "Fluid limit: Maximum temperature"
+    annotation (Dialog(group="Fluid limits"));
 
   // Define the conversion factor for the unit test
   //
@@ -28,25 +30,30 @@ model RefrigerantInversions
 
   // Define variables that shall be calculated
   //
-  Modelica.Units.SI.Temperature T "Actual temperature";
-  Modelica.Units.SI.Temperature TInv_h
+  Modelica.SIunits.Temperature T
+    "Actual temperature";
+  Modelica.SIunits.Temperature TInv_h
     "Actual inverse temperature calculated with h and p";
-  Modelica.Units.SI.Temperature TInv_s
+  Modelica.SIunits.Temperature TInv_s
     "Actual inverse temperature calculated with s and p";
-  Modelica.Units.SI.AbsolutePressure p "Actual pressure";
-  Modelica.Units.SI.AbsolutePressure pInv_d
+  Modelica.SIunits.AbsolutePressure p
+    "Actual pressure";
+  Modelica.SIunits.AbsolutePressure pInv_d
     "Actual inverse pressure calculated with d and T";
-  Modelica.Units.SI.SpecificEnthalpy h "Actual enthalpy";
-  Modelica.Units.SI.SpecificEnthalpy hInv_d
+  Modelica.SIunits.SpecificEnthalpy h
+    "Actual enthalpy";
+  Modelica.SIunits.SpecificEnthalpy hInv_d
     "Actual inverse enthalpy calculated with d and T";
-  Modelica.Units.SI.SpecificEnthalpy hInv_s
+  Modelica.SIunits.SpecificEnthalpy hInv_s
     "Actual inverse enthalpy calculated with s and p";
-  Modelica.Units.SI.Density d "Actual density";
-  Modelica.Units.SI.Density dInv_h
+  Modelica.SIunits.Density d
+    "Actual density";
+  Modelica.SIunits.Density dInv_h
     "Actual inverse density calculated with h and p";
-  Modelica.Units.SI.Density dInv_s
+  Modelica.SIunits.Density dInv_s
     "Actual inverse density calculated with h and s";
-  Modelica.Units.SI.SpecificEntropy s "Actual specific entropy";
+  Modelica.SIunits.SpecificEntropy s
+    "Actual specific entropy";
 
 equation
 

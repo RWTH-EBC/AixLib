@@ -1,4 +1,4 @@
-﻿within AixLib.Media;
+within AixLib.Media;
 package AirIncompressible
   "Package with incopressible moist air model for air duct simulations"
   extends Modelica.Media.Interfaces.PartialCondensingGases(
@@ -51,12 +51,12 @@ package AirIncompressible
     final standardOrderComponents=true) "Base properties"
 
   protected
-    constant Modelica.Units.SI.MolarMass[2] MMX={steam.MM,dryair.MM}
+    constant Modelica.SIunits.MolarMass[2] MMX = {steam.MM,dryair.MM}
       "Molar masses of components";
 
     MassFraction X_steam "Mass fraction of steam water";
     MassFraction X_air "Mass fraction of air";
-    Modelica.Units.SI.TemperatureDifference dT(start=T_default - reference_T)
+    Modelica.SIunits.TemperatureDifference dT(start=T_default-reference_T)
       "Temperature difference used to compute enthalpy";
   equation
     assert(T >= 200.0, "
@@ -74,7 +74,7 @@ as required from medium model \"" + mediumName + "\".");
     dT = T - reference_T;
     h = dT*dryair.cp * X_air +
        (dT * steam.cp + h_fg) * X_steam;
-    R_s = dryair.R*X_air + steam.R*X_steam;
+    R = dryair.R*X_air + steam.R*X_steam;
 
     // Equation for ideal gas, from h=u+p*v and R*T=p*v, from which follows that  u = h-R*T.
     // u = h-R*T;
@@ -195,7 +195,7 @@ redeclare function extends gasConstant
     "Return ideal gas constant as a function from thermodynamic state, only valid for phi<1"
 
 algorithm
-    R_s := dryair.R*(1 - state.X[Water]) + steam.R*state.X[Water];
+    R := dryair.R*(1 - state.X[Water]) + steam.R*state.X[Water];
   annotation (
     smoothOrder=2,
     Inline=true,
@@ -287,7 +287,7 @@ redeclare function extends specificEntropy
     "Return the specific entropy, only valid for phi<1"
 
   protected
-    Modelica.Units.SI.MoleFraction[2] Y "Molar fraction";
+    Modelica.SIunits.MoleFraction[2] Y "Molar fraction";
 algorithm
     Y := massToMoleFractions(
          state.X, {steam.MM,dryair.MM});
@@ -509,9 +509,9 @@ end setState_pTX;
 redeclare function extends setState_psX
     "Return the thermodynamic state as function of p, s and composition X or Xi"
   protected
-    Modelica.Units.SI.MassFraction[2] X_int "Mass fraction";
-    Modelica.Units.SI.MoleFraction[2] Y "Molar fraction";
-    Modelica.Units.SI.Temperature T "Temperature";
+    Modelica.SIunits.MassFraction[2] X_int "Mass fraction";
+    Modelica.SIunits.MoleFraction[2] Y "Molar fraction";
+    Modelica.SIunits.Temperature T "Temperature";
 algorithm
     if size(X, 1) == nX then
       X_int:=X;
@@ -569,10 +569,10 @@ end specificEnthalpy;
 
 redeclare replaceable function specificEnthalpy_pTX "Specific enthalpy"
   extends Modelica.Icons.Function;
-    input Modelica.Units.SI.Pressure p "Pressure";
-    input Modelica.Units.SI.Temperature T "Temperature";
-    input Modelica.Units.SI.MassFraction X[:] "Mass fractions of moist air";
-    output Modelica.Units.SI.SpecificEnthalpy h "Specific enthalpy at p, T, X";
+  input Modelica.SIunits.Pressure p "Pressure";
+  input Modelica.SIunits.Temperature T "Temperature";
+  input Modelica.SIunits.MassFraction X[:] "Mass fractions of moist air";
+  output Modelica.SIunits.SpecificEnthalpy h "Specific enthalpy at p, T, X";
 
 algorithm
   h := specificEnthalpy(setState_pTX(p, T, X));
@@ -697,9 +697,9 @@ end temperature_phX;
 redeclare function extends thermalConductivity
     "Thermal conductivity of dry air as a polynomial in the temperature"
 algorithm
-  lambda :=Modelica.Math.Polynomials.evaluate({(-4.8737307422969E-008),
-      7.67803133753502E-005,0.0241814385504202},
-      Modelica.Units.Conversions.to_degC(state.T));
+  lambda := Modelica.Media.Incompressible.TableBased.Polynomials_Temp.evaluate(
+      {(-4.8737307422969E-008), 7.67803133753502E-005, 0.0241814385504202},
+   Modelica.SIunits.Conversions.to_degC(state.T));
 annotation(LateInline=true);
 end thermalConductivity;
 //////////////////////////////////////////////////////////////////////
@@ -714,11 +714,11 @@ protected
     "Coefficient data record for properties of perfect gases"
     extends Modelica.Icons.Record;
 
-    Modelica.Units.SI.MolarMass MM "Molar mass";
-    Modelica.Units.SI.SpecificHeatCapacity R "Gas constant";
-    Modelica.Units.SI.SpecificHeatCapacity cp
+    Modelica.SIunits.MolarMass MM "Molar mass";
+    Modelica.SIunits.SpecificHeatCapacity R "Gas constant";
+    Modelica.SIunits.SpecificHeatCapacity cp
       "Specific heat capacity at constant pressure";
-    Modelica.Units.SI.SpecificHeatCapacity cv=cp - R
+    Modelica.SIunits.SpecificHeatCapacity cv = cp-R
       "Specific heat capacity at constant volume";
     annotation (
       preferredView="info",
@@ -740,26 +740,30 @@ protected
   // In the assignments below, we compute cv as OpenModelica
   // cannot evaluate cv=cp-R as defined in GasProperties.
   constant GasProperties dryair(
-    R=Modelica.Media.IdealGases.Common.SingleGasesData.Air.R_s,
-    MM=Modelica.Media.IdealGases.Common.SingleGasesData.Air.MM,
-    cp=AixLib.Utilities.Psychrometrics.Constants.cpAir,
-    cv=AixLib.Utilities.Psychrometrics.Constants.cpAir - Modelica.Media.IdealGases.Common.SingleGasesData.Air.R_s)
+    R =    Modelica.Media.IdealGases.Common.SingleGasesData.Air.R,
+    MM =   Modelica.Media.IdealGases.Common.SingleGasesData.Air.MM,
+    cp =   AixLib.Utilities.Psychrometrics.Constants.cpAir,
+    cv =   AixLib.Utilities.Psychrometrics.Constants.cpAir
+             -Modelica.Media.IdealGases.Common.SingleGasesData.Air.R)
     "Dry air properties";
   constant GasProperties steam(
-    R=Modelica.Media.IdealGases.Common.SingleGasesData.H2O.R_s,
-    MM=Modelica.Media.IdealGases.Common.SingleGasesData.H2O.MM,
-    cp=AixLib.Utilities.Psychrometrics.Constants.cpSte,
-    cv=AixLib.Utilities.Psychrometrics.Constants.cpSte - Modelica.Media.IdealGases.Common.SingleGasesData.H2O.R_s)
+    R =    Modelica.Media.IdealGases.Common.SingleGasesData.H2O.R,
+    MM =   Modelica.Media.IdealGases.Common.SingleGasesData.H2O.MM,
+    cp =   AixLib.Utilities.Psychrometrics.Constants.cpSte,
+    cv =   AixLib.Utilities.Psychrometrics.Constants.cpSte
+             -Modelica.Media.IdealGases.Common.SingleGasesData.H2O.R)
     "Steam properties";
 
   constant Real k_mair =  steam.MM/dryair.MM "Ratio of molar weights";
 
-  constant Modelica.Units.SI.MolarMass[2] MMX={steam.MM,dryair.MM}
+  constant Modelica.SIunits.MolarMass[2] MMX={steam.MM,dryair.MM}
     "Molar masses of components";
 
-  constant Modelica.Units.SI.SpecificEnergy h_fg=AixLib.Utilities.Psychrometrics.Constants.h_fg
+  constant Modelica.SIunits.SpecificEnergy h_fg=
+    AixLib.Utilities.Psychrometrics.Constants.h_fg
     "Latent heat of evaporation of water";
-  constant Modelica.Units.SI.SpecificHeatCapacity cpWatLiq=AixLib.Utilities.Psychrometrics.Constants.cpWatLiq
+  constant Modelica.SIunits.SpecificHeatCapacity cpWatLiq=
+    AixLib.Utilities.Psychrometrics.Constants.cpWatLiq
     "Specific heat capacity of liquid water";
 
 replaceable function der_enthalpyOfLiquid

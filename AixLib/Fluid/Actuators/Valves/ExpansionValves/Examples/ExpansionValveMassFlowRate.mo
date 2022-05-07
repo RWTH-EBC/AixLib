@@ -10,15 +10,15 @@ model ExpansionValveMassFlowRate
    Modelica.Media.R134a.R134a_ph
    "Actual medium of the compressor";
 
-  parameter Modelica.Units.SI.Temperature TInl=343.15
+  parameter Modelica.SIunits.Temperature TInl = 343.15
     "Actual temperature at inlet conditions";
-  parameter Modelica.Units.SI.AbsolutePressure pOut=Medium.pressure(
-      Medium.setDewState(Medium.setSat_T(TOut)))
+  parameter Modelica.SIunits.AbsolutePressure pOut=
+    Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut)))
     "Actual set point of the compressor's outlet pressure";
-  parameter Modelica.Units.SI.Temperature TOut=278.15
+  parameter Modelica.SIunits.Temperature TOut = 278.15
     "Actual temperature at outlet conditions";
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate";
 
   // Define components
@@ -31,9 +31,10 @@ model ExpansionValveMassFlowRate
     "Source of constant mass flow and temperature"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Sources.Sine valOpe(
-    f=1,
+    freqHz=1,
     amplitude=0.3,
-    offset=0.7) "Input signal to prediscribe expansion valve's opening"
+    offset=0.7)
+    "Input signal to prediscribe expansion valve's opening"
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
   SimpleExpansionValves.IsenthalpicExpansionValve linearValve(
     redeclare package Medium = Medium,

@@ -2,14 +2,14 @@ within AixLib.Obsolete.YearIndependent.FastHVAC.Data.CHP;
 record BaseDataDefinition "Basic Mikro_KWK Data"
 extends Modelica.Icons.Record;
 
-  import      Modelica.Units.SI;
-  import SIconv = Modelica.Units.NonSI;
-  Modelica.Units.SI.MassFlowRate dotm_max "maximum mass flow rate";
-  Modelica.Units.SI.MassFlowRate dotm_min "minimum mass flow rate";
+  import SI = Modelica.SIunits;
+  import SIconv = Modelica.SIunits.Conversions.NonSIunits;
+Modelica.SIunits.MassFlowRate dotm_max "maximum mass flow rate";
+Modelica.SIunits.MassFlowRate dotm_min "minimum mass flow rate";
   parameter SI.Power P_elRated "rated electrical power (unit=W)";
-  parameter Modelica.Units.SI.Time tauQ_th
+    parameter Modelica.SIunits.Time tauQ_th
     "time constant thermal power start behavior (unit=sec) ";
-  parameter Modelica.Units.SI.Time tauP_el
+    parameter Modelica.SIunits.Time tauP_el
     "time constant electrical power start behavior (unit=sec)";
 
   parameter Real a_0;

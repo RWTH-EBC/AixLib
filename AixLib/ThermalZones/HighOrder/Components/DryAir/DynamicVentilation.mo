@@ -1,12 +1,12 @@
 within AixLib.ThermalZones.HighOrder.Components.DryAir;
 model DynamicVentilation
   "Dynamic ventilation to ventilate away the solar gains"
-  parameter Modelica.Units.SI.Temperature HeatingLimit=285.15
+  parameter Modelica.SIunits.Temperature HeatingLimit = 285.15
     "Outside temperature at which the heating activates";
   parameter Real Max_VR = 200 "Maximal ventilation rate";
-  parameter Modelica.Units.SI.TemperatureDifference Diff_toTempset=2
+  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 2
     "Difference to set temperature";
-  parameter Modelica.Units.SI.Temperature Tset=295.15 "set temperature";
+  parameter Modelica.SIunits.Temperature Tset = 295.15 "set temperature";
   VarAirExchange varAirExchange annotation(Placement(transformation(extent={{36,-12},{62,12}})));
   Controls.Continuous.PITemp pITemp(h = 0, l = -Max_VR, PI(controllerType = Modelica.Blocks.Types.SimpleController.PI)) annotation(Placement(transformation(extent = {{-22, 26}, {-2, 46}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_inside annotation(Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(extent={{88,-10},{108,10}})));

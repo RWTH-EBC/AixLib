@@ -1,6 +1,6 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function dhDown
-  input Modelica.Units.SI.TemperatureDifference dTover;
+  input Modelica.SIunits.TemperatureDifference dTover;
   input Real dh_gap;
   output Real dhdown;
 

@@ -11,15 +11,15 @@ model ExternalControlNightDayHC
   parameter Real declination
     "Declination"
     annotation (Dialog( group= "Heating curves"));
-  parameter Modelica.Units.SI.TemperatureDifference Tdelta_Max
+  parameter Modelica.SIunits.TemperatureDifference Tdelta_Max
     "Difference from set flow temperature over which boiler stops"
-    annotation (Dialog(group="OnOff"));
-  parameter Modelica.Units.SI.TemperatureDifference Tdelta_Min
+    annotation ( Dialog(group = "OnOff"));
+  parameter Modelica.SIunits.TemperatureDifference Tdelta_Min
     "Difference from set flow temperature under which boiler starts"
-    annotation (Dialog(group="OnOff"));
-  parameter Modelica.Units.SI.Time Fb
+    annotation ( Dialog(group = "OnOff"));
+  parameter Modelica.SIunits.Time Fb
     "Period of time for increased set temperature"
-    annotation (Dialog(group="Day/Night Mode"));
+    annotation ( Dialog(group = "Day/Night Mode"));
   parameter Real FA
     "Increment for increased set temperature"
     annotation ( Dialog(group = "Day/Night Mode"));
@@ -60,10 +60,12 @@ model ExternalControlNightDayHC
     annotation (Placement(transformation(extent={{-84,48},{-76.5,55.5}})));
 
 protected
-  Modelica.Blocks.Tables.CombiTable2Ds flowTempNight(final table=paramHC.varFlowTempNight)
+  Modelica.Blocks.Tables.CombiTable2D flowTempNight(
+    final table=paramHC.varFlowTempNight)
     "Table for setting the flow temperature during night according to the outside temperature"
     annotation (Placement(transformation(extent={{-49.5,49.5},{-31.5,67.5}})));
-  Modelica.Blocks.Tables.CombiTable2Ds flowTempDay(final table=paramHC.varFlowTempDay)
+  Modelica.Blocks.Tables.CombiTable2D flowTempDay(
+    final table=paramHC.varFlowTempDay)
     "Table for setting the flow temperature druing day according to the outside temperature"
     annotation (Placement(transformation(extent={{-49.5,22.5},{-31.5,40.5}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC

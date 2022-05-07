@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Validation;
+within AixLib.Fluid.Movers.Compressors.Validation;
 model EfficiencyModels
   "Validation model to check efficiencies calculated with respect to different 
   prescribed conditions"
@@ -10,15 +10,16 @@ model EfficiencyModels
    Modelica.Media.R134a.R134a_ph
    "Actual medium of the compressor";
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate";
 
   // Definition of variables
   //
-  Modelica.Units.SI.AbsolutePressure pInl=Medium.pressure(Medium.setBubbleState(
-      Medium.setSat_T(preInp.y[2] - 1))) "Actual pressure at inlet conditions";
-  Modelica.Units.SI.AbsolutePressure pOut=Medium.pressure(Medium.setDewState(
-      Medium.setSat_T(preInp.y[3] - 1)))
+  Modelica.SIunits.AbsolutePressure pInl=
+    Medium.pressure(Medium.setBubbleState(Medium.setSat_T(preInp.y[2]-1)))
+    "Actual pressure at inlet conditions";
+  Modelica.SIunits.AbsolutePressure pOut=
+    Medium.pressure(Medium.setDewState(Medium.setSat_T(preInp.y[3]-1)))
     "Actual set point of the compressor's outlet pressure";
 
   // Definition of models
