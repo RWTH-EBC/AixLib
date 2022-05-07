@@ -1,23 +1,23 @@
 within AixLib.Utilities.Cryptographics;
- pure function sha
-   "SHA1 encryption of a String"
-   extends Modelica.Icons.Function;
-   input String str "String to be encrypted";
-   output String sha1 "SHA1-encrypted string";
- 
- external "C" sha1 = cryptographicsHash(str)
-   annotation (
-   Include="#include <cryptographicsHash.c>",
-   IncludeDirectory="modelica://AixLib/Resources/C-Sources");
- 
- annotation (
-     Documentation(info="<html>
+pure function sha
+  "SHA1 encryption of a String"
+  extends Modelica.Icons.Function;
+  input String str "String to be encrypted";
+  output String sha1 "SHA1-encrypted string";
+
+external "C" sha1 = cryptographicsHash(str)
+  annotation (
+  Include="#include <cryptographicsHash.c>",
+  IncludeDirectory="modelica://AixLib/Resources/C-Sources");
+
+annotation (
+    Documentation(info="<html>
  <p>
  This function takes a String input and, using an external function written in C,
  outputs its SHA1 encryption. The input string can be of any length, though the output
  will always be 40 hexadecimal characters.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  December 11, 2021, by Michael Wetter:<br/>
@@ -35,6 +35,6 @@ within AixLib.Utilities.Cryptographics;
  #755</a>.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end sha;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end sha;

@@ -1,18 +1,18 @@
 within AixLib.Utilities.Math.Functions;
- function smoothMin
-   "Once continuously differentiable approximation to the minimum function"
-   extends Modelica.Icons.Function;
-   input Real x1 "First argument";
-   input Real x2 "Second argument";
-   input Real deltaX "Width of transition interval";
-   output Real y "Result";
- algorithm
-   y := AixLib.Utilities.Math.Functions.regStep(
-          y1=x1, y2=x2, x=x2-x1, x_small=deltaX);
-   annotation (
-   Inline=true,
-   smoothOrder=1,
- Documentation(info="<html>
+function smoothMin
+  "Once continuously differentiable approximation to the minimum function"
+  extends Modelica.Icons.Function;
+  input Real x1 "First argument";
+  input Real x2 "Second argument";
+  input Real deltaX "Width of transition interval";
+  output Real y "Result";
+algorithm
+  y := AixLib.Utilities.Math.Functions.regStep(
+         y1=x1, y2=x2, x=x2-x1, x_small=deltaX);
+  annotation (
+  Inline=true,
+  smoothOrder=1,
+Documentation(info="<html>
  <p>
  Once continuously differentiable approximation to the <code>min(.,.)</code> function.
  </p>
@@ -22,7 +22,7 @@ within AixLib.Utilities.Math.Functions;
  AixLib.Utilities.Math.Examples.SmoothMin</a>.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  March 15, 2016, by Michael Wetter:<br/>
@@ -43,6 +43,6 @@ within AixLib.Utilities.Math.Functions;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end smoothMin;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end smoothMin;

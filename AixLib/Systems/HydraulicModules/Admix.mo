@@ -1,8 +1,8 @@
-within AixLib.Systems.HydraulicModules;
+﻿within AixLib.Systems.HydraulicModules;
 model Admix "Admix circuit with three way valve and pump"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
+  parameter Modelica.Units.SI.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
   parameter Fluid.Actuators.Valves.Data.GenericThreeWay valveCharacteristic "Valve characteristic of three way valve"

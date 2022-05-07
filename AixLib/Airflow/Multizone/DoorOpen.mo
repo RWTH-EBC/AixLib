@@ -1,62 +1,62 @@
 within AixLib.Airflow.Multizone;
- model DoorOpen
-   "Door model for bi-directional air flow between rooms"
-   extends AixLib.Airflow.Multizone.BaseClasses.Door(
-     final vAB = VAB_flow/AOpe,
-     final vBA = VBA_flow/AOpe);
- 
-   parameter Real CD=0.65 "Discharge coefficient"
-     annotation (Dialog(group="Orifice characteristics"));
- 
-   parameter Real m = 0.5 "Flow coefficient"
-     annotation (Dialog(group="Orifice characteristics"));
- 
- 
- protected
-   constant Real gamma(min=1) = 1.5
-     "Normalized flow rate where dphi(0)/dpi intersects phi(1)";
-   constant Real a = gamma
-     "Polynomial coefficient for regularized implementation of flow resistance";
-   parameter Real b = 1/8*m^2 - 3*gamma - 3/2*m + 35.0/8
-     "Polynomial coefficient for regularized implementation of flow resistance";
-   parameter Real c = -1/4*m^2 + 3*gamma + 5/2*m - 21.0/4
-     "Polynomial coefficient for regularized implementation of flow resistance";
-   parameter Real d = 1/8*m^2 - gamma - m + 15.0/8
-     "Polynomial coefficient for regularized implementation of flow resistance";
- 
-   parameter Real CVal=CD*AOpe*sqrt(2/rho_default)
-     "Flow coefficient, C = V_flow/ dp^m";
-   parameter Real kT = rho_default * CD * AOpe/3 *
-     sqrt(Modelica.Constants.g_n /(Medium.T_default*conTP) * hOpe)
-     "Constant coefficient for buoyancy driven air flow rate";
- 
-   parameter Modelica.Units.SI.MassFlowRate m_flow_turbulent=CVal*rho_default*
-       sqrt(dp_turbulent)
-     "Mass flow rate where regularization to laminar flow occurs for temperature-driven flow";
- 
- equation
-   // Air flow rate due to static pressure difference
-   VABp_flow = AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM(C=CVal,
-       dp=port_a1.p-port_a2.p,
-       m=m,
-       a=a,
-       b=b,
-       c=c,
-       d=d,
-       dp_turbulent=dp_turbulent);
-   // Air flow rate due to buoyancy
-   // Because powerLawFixedM requires as an input a pressure difference pa-pb,
-   // we convert Ta-Tb by multiplying it with rho*R, and we divide
-   // above the constant expression by (rho*R)^m on the right hand-side of kT.
-   // Note that here, k is for mass flow rate, whereas in powerLawFixedM, it is for volume flow rate.
-   // We can use m=0.5 as this is from Bernoulli.
-   mABt_flow = AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
-       k=kT,
-       dp=conTP*(Medium.temperature(state_a1_inflow)-Medium.temperature(state_a2_inflow)),
-       m_flow_turbulent=m_flow_turbulent);
- 
-   annotation (defaultComponentName="doo",
- Documentation(info="<html>
+model DoorOpen
+  "Door model for bi-directional air flow between rooms"
+  extends AixLib.Airflow.Multizone.BaseClasses.Door(
+    final vAB = VAB_flow/AOpe,
+    final vBA = VBA_flow/AOpe);
+
+  parameter Real CD=0.65 "Discharge coefficient"
+    annotation (Dialog(group="Orifice characteristics"));
+
+  parameter Real m = 0.5 "Flow coefficient"
+    annotation (Dialog(group="Orifice characteristics"));
+
+
+protected
+  constant Real gamma(min=1) = 1.5
+    "Normalized flow rate where dphi(0)/dpi intersects phi(1)";
+  constant Real a = gamma
+    "Polynomial coefficient for regularized implementation of flow resistance";
+  parameter Real b = 1/8*m^2 - 3*gamma - 3/2*m + 35.0/8
+    "Polynomial coefficient for regularized implementation of flow resistance";
+  parameter Real c = -1/4*m^2 + 3*gamma + 5/2*m - 21.0/4
+    "Polynomial coefficient for regularized implementation of flow resistance";
+  parameter Real d = 1/8*m^2 - gamma - m + 15.0/8
+    "Polynomial coefficient for regularized implementation of flow resistance";
+
+  parameter Real CVal=CD*AOpe*sqrt(2/rho_default)
+    "Flow coefficient, C = V_flow/ dp^m";
+  parameter Real kT = rho_default * CD * AOpe/3 *
+    sqrt(Modelica.Constants.g_n /(Medium.T_default*conTP) * hOpe)
+    "Constant coefficient for buoyancy driven air flow rate";
+
+  parameter Modelica.Units.SI.MassFlowRate m_flow_turbulent=CVal*rho_default*
+      sqrt(dp_turbulent)
+    "Mass flow rate where regularization to laminar flow occurs for temperature-driven flow";
+
+equation
+  // Air flow rate due to static pressure difference
+  VABp_flow = AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM(C=CVal,
+      dp=port_a1.p-port_a2.p,
+      m=m,
+      a=a,
+      b=b,
+      c=c,
+      d=d,
+      dp_turbulent=dp_turbulent);
+  // Air flow rate due to buoyancy
+  // Because powerLawFixedM requires as an input a pressure difference pa-pb,
+  // we convert Ta-Tb by multiplying it with rho*R, and we divide
+  // above the constant expression by (rho*R)^m on the right hand-side of kT.
+  // Note that here, k is for mass flow rate, whereas in powerLawFixedM, it is for volume flow rate.
+  // We can use m=0.5 as this is from Bernoulli.
+  mABt_flow = AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
+      k=kT,
+      dp=conTP*(Medium.temperature(state_a1_inflow)-Medium.temperature(state_a2_inflow)),
+      m_flow_turbulent=m_flow_turbulent);
+
+  annotation (defaultComponentName="doo",
+Documentation(info="<html>
  <p>
  Model for bi-directional air flow through a large opening such as a door.
  </p>
@@ -192,7 +192,7 @@ within AixLib.Airflow.Multizone;
  </li>
  </ul>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  January 22, 2020, by Michael Wetter:<br/>
@@ -208,6 +208,6 @@ within AixLib.Airflow.Multizone;
  <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1353\">#1353</a>.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end DoorOpen;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end DoorOpen;

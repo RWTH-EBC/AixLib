@@ -1,31 +1,31 @@
 within AixLib.Utilities.Psychrometrics.Functions;
- function TDewPoi_pW
-   "Function to compute the water vapor partial pressure for a given dew point temperature of moist air"
-   extends Modelica.Icons.Function;
- 
-   input Modelica.Units.SI.Pressure p_w(displayUnit="Pa", min=200)
-     "Water vapor partial pressure";
-   output Modelica.Units.SI.Temperature T "Dew point temperature";
- 
- protected
-   function pW_TDewPoi_inversion
-     "Internal function to solve eps=f(NTU, Z) for NTU for cross flow unmixed"
-     extends Modelica.Math.Nonlinear.Interfaces.partialScalarFunction;
- 
-     input Modelica.Units.SI.Pressure p_w(displayUnit="Pa", min=200)
-       "Water vapor partial pressure";
- 
-   algorithm
-     y :=AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi(T=u) - p_w;
-   end pW_TDewPoi_inversion;
- 
- algorithm
-   T := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
-       f=function pW_TDewPoi_inversion(p_w=p_w),
-       u_min=200,
-       u_max=400);
-   annotation (
-     Documentation(info="<html>
+function TDewPoi_pW
+  "Function to compute the water vapor partial pressure for a given dew point temperature of moist air"
+  extends Modelica.Icons.Function;
+
+  input Modelica.Units.SI.Pressure p_w(displayUnit="Pa", min=200)
+    "Water vapor partial pressure";
+  output Modelica.Units.SI.Temperature T "Dew point temperature";
+
+protected
+  function pW_TDewPoi_inversion
+    "Internal function to solve eps=f(NTU, Z) for NTU for cross flow unmixed"
+    extends Modelica.Math.Nonlinear.Interfaces.partialScalarFunction;
+
+    input Modelica.Units.SI.Pressure p_w(displayUnit="Pa", min=200)
+      "Water vapor partial pressure";
+
+  algorithm
+    y :=AixLib.Utilities.Psychrometrics.Functions.pW_TDewPoi(T=u) - p_w;
+  end pW_TDewPoi_inversion;
+
+algorithm
+  T := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
+      f=function pW_TDewPoi_inversion(p_w=p_w),
+      u_min=200,
+      u_max=400);
+  annotation (
+    Documentation(info="<html>
  <p>
  Dew point temperature calculation for moist air above freezing temperature.
  </p>
@@ -36,7 +36,7 @@ within AixLib.Utilities.Psychrometrics.Functions;
  Peppers has been used, but this equation yielded about <i>15</i> Kelvin lower dew point
  temperatures.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  February 28, 2020, by Michael Wetter:<br/>
@@ -76,6 +76,6 @@ within AixLib.Utilities.Psychrometrics.Functions;
  </li>
  </ul>
  </html>"),
-         Inline=true, 
-   __Dymola_LockedEditing="Model from IBPSA");
- end TDewPoi_pW;
+        Inline=true,
+  __Dymola_LockedEditing="Model from IBPSA");
+end TDewPoi_pW;

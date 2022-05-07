@@ -7,13 +7,13 @@ extends PartialIVCharacteristics;
 
 // Main parameters under standard conditions
 
- Modelica.SIunits.ElectricCurrent I_ph0
+  Modelica.Units.SI.ElectricCurrent I_ph0
     "Photo current under standard conditions";
- Modelica.SIunits.ElectricCurrent I_s0
+  Modelica.Units.SI.ElectricCurrent I_s0
     "Saturation current under standard conditions";
- Modelica.SIunits.Resistance R_s0
+  Modelica.Units.SI.Resistance R_s0
     "Series resistance under standard conditions";
- Modelica.SIunits.Resistance R_sh0
+  Modelica.Units.SI.Resistance R_sh0
     "Shunt resistance under standard conditions";
  Real a_0(unit = "V")
     "Modified diode ideality factor under standard conditions";
@@ -30,42 +30,34 @@ extends PartialIVCharacteristics;
    "Boltzmann's constant";
  constant Real q( unit = "A.s")= 1.602176620924561e-19
    "Electron charge";
- parameter Modelica.SIunits.Energy E_g0=1.79604e-19
+  parameter Modelica.Units.SI.Energy E_g0=1.79604e-19
     "Band gap energy under standard conditions for Si";
  parameter Real C=0.0002677
     "Band gap temperature coefficient for Si";
 
- Modelica.SIunits.ElectricCurrent I_mp( start = 0.5*I_mp0)
-    "MPP current";
+  Modelica.Units.SI.ElectricCurrent I_mp(start=0.5*I_mp0) "MPP current";
 
- Modelica.SIunits.Voltage V_mp
-    "MPP voltage";
+  Modelica.Units.SI.Voltage V_mp "MPP voltage";
 
- Modelica.SIunits.Energy E_g
-    "Band gap energy";
+  Modelica.Units.SI.Energy E_g "Band gap energy";
 
- Modelica.SIunits.ElectricCurrent I_s
-    "Saturation current";
+  Modelica.Units.SI.ElectricCurrent I_s "Saturation current";
 
- Modelica.SIunits.ElectricCurrent I_ph
-    "Photo current";
+  Modelica.Units.SI.ElectricCurrent I_ph "Photo current";
 
- Modelica.SIunits.Resistance R_s
-    "Series resistance";
+  Modelica.Units.SI.Resistance R_s "Series resistance";
 
- Modelica.SIunits.Resistance R_sh
-    "Shunt resistance";
+  Modelica.Units.SI.Resistance R_sh "Shunt resistance";
 
  Real a(final unit = "V", start = 1.3)
     "Modified diode ideality factor";
 
- Modelica.SIunits.Power P_mod
-    "Output power of one PV module";
+  Modelica.Units.SI.Power P_mod "Output power of one PV module";
 
  Real w(final unit = "1", start = 0)
    "MPP auxiliary correlation coefficient";
 
- Modelica.SIunits.Voltage V_oc
+  Modelica.Units.SI.Voltage V_oc
     "Open circuit voltage under operating conditions";
 
 equation

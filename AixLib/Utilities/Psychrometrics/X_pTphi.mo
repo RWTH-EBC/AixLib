@@ -1,46 +1,46 @@
 within AixLib.Utilities.Psychrometrics;
- block X_pTphi
-   "Return steam mass fraction as a function of relative humidity phi and temperature T"
-   extends
-     AixLib.Utilities.Psychrometrics.BaseClasses.HumidityRatioVaporPressure;
- 
-   package Medium = AixLib.Media.Air "Medium model";
-   Modelica.Blocks.Interfaces.RealInput T(final unit="K",
-                                            displayUnit="degC",
-                                            min = 0) "Temperature"
-     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-   Modelica.Blocks.Interfaces.RealInput phi(min = 0, max=1)
-     "Relative humidity (0...1)"
-     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-   Modelica.Blocks.Interfaces.RealOutput X[Medium.nX](each min=0, each max=1)
-     "Steam mass fraction"
-     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
- protected
-   Modelica.Units.SI.AbsolutePressure pSat "Saturation pressure";
-   parameter Integer i_w=
-    sum({(
-      if Modelica.Utilities.Strings.isEqual(
-        string1=Medium.substanceNames[i],
-        string2="Water",
-        caseSensitive=false)
-      then i else 0)
-      for i in 1:Medium.nX});
-   parameter Integer i_nw = if i_w == 1 then 2 else 1 "Index for non-water substance";
-   parameter Boolean found = i_w > 0 "Flag, used for error checking";
- 
- initial equation
-   assert(Medium.nX==2, "The implementation is only valid if Medium.nX=2.");
-   assert(found, "Did not find medium species 'water' in the medium model. Change medium model.");
- 
- equation
-   pSat =  AixLib.Media.Air.saturationPressure(T);
-   X[i_w] =  AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(
-      pSat=pSat,
-      p=p_in_internal,
-      phi=phi);
-   //sum(X[:]) = 1; // The formulation with a sum in an equation section leads to a nonlinear equation system
-   X[i_nw] =  1 - X[i_w];
-   annotation (Documentation(info="<html>
+block X_pTphi
+  "Return steam mass fraction as a function of relative humidity phi and temperature T"
+  extends
+    AixLib.Utilities.Psychrometrics.BaseClasses.HumidityRatioVaporPressure;
+
+  package Medium = AixLib.Media.Air "Medium model";
+  Modelica.Blocks.Interfaces.RealInput T(final unit="K",
+                                           displayUnit="degC",
+                                           min = 0) "Temperature"
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+  Modelica.Blocks.Interfaces.RealInput phi(min = 0, max=1)
+    "Relative humidity (0...1)"
+    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
+  Modelica.Blocks.Interfaces.RealOutput X[Medium.nX](each min=0, each max=1)
+    "Steam mass fraction"
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+protected
+  Modelica.Units.SI.AbsolutePressure pSat "Saturation pressure";
+  parameter Integer i_w=
+   sum({(
+     if Modelica.Utilities.Strings.isEqual(
+       string1=Medium.substanceNames[i],
+       string2="Water",
+       caseSensitive=false)
+     then i else 0)
+     for i in 1:Medium.nX});
+  parameter Integer i_nw = if i_w == 1 then 2 else 1 "Index for non-water substance";
+  parameter Boolean found = i_w > 0 "Flag, used for error checking";
+
+initial equation
+  assert(Medium.nX==2, "The implementation is only valid if Medium.nX=2.");
+  assert(found, "Did not find medium species 'water' in the medium model. Change medium model.");
+
+equation
+  pSat =  AixLib.Media.Air.saturationPressure(T);
+  X[i_w] =  AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(
+     pSat=pSat,
+     p=p_in_internal,
+     phi=phi);
+  //sum(X[:]) = 1; // The formulation with a sum in an equation section leads to a nonlinear equation system
+  X[i_nw] =  1 - X[i_w];
+  annotation (Documentation(info="<html>
  <p>
  Block to compute the water vapor concentration based on
  pressure, temperature and relative humidity.
@@ -52,7 +52,7 @@ within AixLib.Utilities.Psychrometrics;
  if <code>use_p_in</code> is true, then the <code>p</code> parameter is ignored,
  and the value provided by the input connector is used instead.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>November 3, 2017 by Filip Jorissen:<br/>
  Converted (initial) algorithm section into (initial) equation section.
@@ -82,18 +82,18 @@ within AixLib.Utilities.Psychrometrics;
  First implementation.
  </li>
  </ul>
- </html>"), Icon(graphics={
-         Text(
-           extent={{-96,16},{-54,-22}},
-           textColor={0,0,0},
-           textString="T"),
-         Text(
-           extent={{-86,-18},{-36,-100}},
-           textColor={0,0,0},
-           textString="phi"),
-         Text(
-           extent={{26,56},{90,-54}},
-           textColor={0,0,0},
-           textString="X_steam")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end X_pTphi;
+ </html>"),Icon(graphics={
+        Text(
+          extent={{-96,16},{-54,-22}},
+          textColor={0,0,0},
+          textString="T"),
+        Text(
+          extent={{-86,-18},{-36,-100}},
+          textColor={0,0,0},
+          textString="phi"),
+        Text(
+          extent={{26,56},{90,-54}},
+          textColor={0,0,0},
+          textString="X_steam")}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end X_pTphi;

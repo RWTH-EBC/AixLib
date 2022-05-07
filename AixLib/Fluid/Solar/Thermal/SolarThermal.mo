@@ -9,10 +9,10 @@ model SolarThermal "Model of a solar thermal panel"
                        T_start,
                        Medium.reference_X)))^2);
 
-  parameter Modelica.SIunits.Area A=2 "Area of solar thermal collector"
-    annotation(Dialog(group = "Construction measures"));
-  parameter Modelica.SIunits.Volume volPip "Water volume of piping"
-    annotation(Dialog(group = "Construction measures"));
+  parameter Modelica.Units.SI.Area A=2 "Area of solar thermal collector"
+    annotation (Dialog(group="Construction measures"));
+  parameter Modelica.Units.SI.Volume volPip "Water volume of piping"
+    annotation (Dialog(group="Construction measures"));
   parameter Real pressureDropCoeff(unit="(Pa.s2)/m6") = 2500/(A*2.5e-5)^2
     "Pressure drop coefficient, delta_p[Pa] = PD * Q_flow[m^3/s]^2";
   parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition

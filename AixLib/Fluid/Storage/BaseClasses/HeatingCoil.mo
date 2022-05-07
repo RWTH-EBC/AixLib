@@ -4,12 +4,13 @@ model HeatingCoil "Heating coil for heat storage model"
 
  parameter Integer disHC = 2 "Number of elements for heating coil discretization";
 
- parameter Modelica.SIunits.Length lengthHC = 3 "Length of Pipe for HC";
+  parameter Modelica.Units.SI.Length lengthHC=3 "Length of Pipe for HC";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC=20 "Model assumptions heat transfer coefficient HC <-> Heating Water";
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConHC=20
+    "Model assumptions heat transfer coefficient HC <-> Heating Water";
 
- parameter Modelica.SIunits.Temperature TStart=298.15
-    "Start Temperature of fluid" annotation(Dialog(group = "Initialization"));
+  parameter Modelica.Units.SI.Temperature TStart=298.15
+    "Start Temperature of fluid" annotation (Dialog(group="Initialization"));
 
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HC";
@@ -44,8 +45,11 @@ model HeatingCoil "Heating coil for heat storage model"
 protected
   parameter Medium.ThermodynamicState sta_default=
      Medium.setState_pTX(T=Medium.T_default, p=Medium.p_default, X=Medium.X_default);
-  parameter Modelica.SIunits.Density den_default=Medium.density(sta_default) "Density of Medium in default state";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_default=Medium.heatCapacity_cp(sta_default) "Specific heat capacity of Medium in default state";
+  parameter Modelica.Units.SI.Density den_default=Medium.density(sta_default)
+    "Density of Medium in default state";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
+      Medium.heatCapacity_cp(sta_default)
+    "Specific heat capacity of Medium in default state";
 
 equation
 

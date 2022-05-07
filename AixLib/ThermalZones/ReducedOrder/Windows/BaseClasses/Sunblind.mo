@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model Sunblind "Calculates if sunblind of window is active"
   extends Modelica.Blocks.Icons.Block;
-  parameter Modelica.SIunits.RadiantEnergyFluenceRate lim
+  parameter Modelica.Units.SI.RadiantEnergyFluenceRate lim
     "Limit for the sunscreen to become active";
 
   Modelica.Blocks.Interfaces.RealInput HDifTil

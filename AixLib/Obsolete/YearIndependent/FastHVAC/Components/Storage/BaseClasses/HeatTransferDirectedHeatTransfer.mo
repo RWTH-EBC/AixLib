@@ -4,28 +4,28 @@ model HeatTransferDirectedHeatTransfer
 //  import BufferStorage = BufferStorage2;
   extends
     AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers;
-  Modelica.SIunits.HeatFlowRate[n-1] Q_flow
+  Modelica.Units.SI.HeatFlowRate[n - 1] Q_flow
     "Heat flow rate from layer i+1 to i due to heat conduction";
   //Modelica.Thermal.HeatTransfer.TemperatureSensor[n] temperatureSensor
    // annotation 2;
 
-  Modelica.SIunits.HeatFlowRate[ n] Q_buoy_abs
-  "Cumulative heat flow rate into the layer due to buoyancy";
+  Modelica.Units.SI.HeatFlowRate[n] Q_buoy_abs
+    "Cumulative heat flow rate into the layer due to buoyancy";
 
-  parameter Modelica.SIunits.Time tau=100;
-  parameter Modelica.SIunits.TemperatureDifference dTref=1;
+  parameter Modelica.Units.SI.Time tau=100;
+  parameter Modelica.Units.SI.TemperatureDifference dTref=1;
   function fQbuoy =
       AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunction;
 
 protected
-  parameter Modelica.SIunits.Length height=data.hTank/n
+  parameter Modelica.Units.SI.Length height=data.hTank/n
     "height of fluid layers";
-  parameter Modelica.SIunits.Area A=Modelica.Constants.pi/4*data.dTank^2
+  parameter Modelica.Units.SI.Area A=Modelica.Constants.pi/4*data.dTank^2
     "Area of heat transfer between layers";
-  Modelica.SIunits.TemperatureDifference dT[n-1]
+  Modelica.Units.SI.TemperatureDifference dT[n - 1]
     "Temperature difference between adjoining volumes";
 
-  parameter Modelica.SIunits.ThermalConductivity lambda_water=0.64;
+  parameter Modelica.Units.SI.ThermalConductivity lambda_water=0.64;
   parameter
     AixLib.Obsolete.YearIndependent.FastHVAC.Media.BaseClasses.MediumSimple
     medium=AixLib.Obsolete.YearIndependent.FastHVAC.Media.WaterSimple();

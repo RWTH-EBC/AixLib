@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules;
+﻿within AixLib.Systems.HydraulicModules;
 model Injection "Injection circuit with pump and three way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
@@ -6,7 +6,7 @@ model Injection "Injection circuit with pump and three way valve"
     annotation (choicesAllMatching=true,Placement(transformation(extent={{-120,-120},{-100,-100}})),Dialog(group="Actuators"));
 
 
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
+  parameter Modelica.Units.SI.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
 

@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.R134a;
+﻿within AixLib.Media.Refrigerants.R134a;
 package R134a_IIR_P1_395_T233_455_Horner
   "Refrigerant model for R134a using a hybrid approach with explicit
   Horner formulas"

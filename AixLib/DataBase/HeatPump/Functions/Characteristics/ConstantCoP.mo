@@ -6,7 +6,7 @@ function ConstantCoP "Constant CoP and constant electric power"
     T_eva,
     mFlow_eva,
     mFlow_con);
-    parameter Modelica.SIunits.Power powerCompressor=2000
+  parameter Modelica.Units.SI.Power powerCompressor=2000
     "Constant electric power input for compressor";
     parameter Real CoP "Constant CoP";
 algorithm

@@ -1,18 +1,23 @@
-within AixLib.Fluid.HeatExchangers;
+﻿within AixLib.Fluid.HeatExchangers;
 model DynamicHX "Simple dynamic heat exchanger model"
   extends Interfaces.FourPortHeatExchanger;
 
-  parameter Modelica.SIunits.Time tau_C = 10 "Time constant of heat capacity at nominal heat flow and temperature difference."
-                                                                                                                              annotation(Dialog(tab = "Dynamics",group = "Nominal condition"));
-  parameter Modelica.SIunits.TemperatureDifference dT_nom "Temperature difference at nominal conditions (used to calculate Gc)" annotation(Dialog(group = "Heat Transfer"));
+  parameter Modelica.Units.SI.Time tau_C=10
+    "Time constant of heat capacity at nominal heat flow and temperature difference."
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
+  parameter Modelica.Units.SI.TemperatureDifference dT_nom
+    "Temperature difference at nominal conditions (used to calculate Gc)"
+    annotation (Dialog(group="Heat Transfer"));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor[nNodes](
     each final C=Q_nom/dT_nom*tau_C/nNodes,
     each final T(fixed=true, start=TCapacity_start))
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
-  parameter Modelica.SIunits.HeatFlowRate Q_nom "Temperature difference at nominal conditions (used to calculate Gc)" annotation(Dialog(group = "Heat Transfer"));
-  parameter Modelica.SIunits.Temperature TCapacity_start=(T1_start + T2_start)/2
-    "Start value of temperature"
-    annotation(Dialog(tab="Initialization",   group="Heat capacity"));
+  parameter Modelica.Units.SI.HeatFlowRate Q_nom
+    "Temperature difference at nominal conditions (used to calculate Gc)"
+    annotation (Dialog(group="Heat Transfer"));
+  parameter Modelica.Units.SI.Temperature TCapacity_start=(T1_start + T2_start)
+      /2 "Start value of temperature"
+    annotation (Dialog(tab="Initialization", group="Heat capacity"));
   parameter Modelica.Blocks.Interfaces.RealInput Gc1(unit="W/K") = Q_nom/dT_nom*2/nNodes
     "Signal representing the convective thermal conductance in [W/K]" annotation(Dialog(group = "Heat Transfer"));
   parameter Modelica.Blocks.Interfaces.RealInput Gc2(unit="W/K") = Q_nom/dT_nom*2/nNodes

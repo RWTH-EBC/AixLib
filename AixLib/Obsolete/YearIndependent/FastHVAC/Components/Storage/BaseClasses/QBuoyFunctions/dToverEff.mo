@@ -1,9 +1,9 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function dToverEff
 
-  input Modelica.SIunits.TemperatureDifference dTover;
+  input Modelica.Units.SI.TemperatureDifference dTover;
   input Real h_rel;
-  output Modelica.SIunits.TemperatureDifference dTover_eff;
+  output Modelica.Units.SI.TemperatureDifference dTover_eff;
 
 protected
   parameter Real a=0.5023;

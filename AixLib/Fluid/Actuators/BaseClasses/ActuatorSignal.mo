@@ -1,108 +1,108 @@
 within AixLib.Fluid.Actuators.BaseClasses;
- model ActuatorSignal
-   "Partial model that implements the filtered opening for valves and dampers"
- 
-   constant Integer order(min=1) = 2 "Order of filter";
- 
-   parameter Boolean use_inputFilter=true
-     "= true, if opening is filtered with a 2nd order CriticalDamping filter"
-     annotation(Dialog(tab="Dynamics", group="Filtered opening"));
-   parameter Modelica.Units.SI.Time riseTime=120
-     "Rise time of the filter (time to reach 99.6 % of an opening step)"
-     annotation (Dialog(
-       tab="Dynamics",
-       group="Filtered opening",
-       enable=use_inputFilter));
-   parameter Modelica.Blocks.Types.Init init=Modelica.Blocks.Types.Init.InitialOutput
-     "Type of initialization (no init/steady state/initial state/initial output)"
-     annotation(Dialog(tab="Dynamics", group="Filtered opening",enable=use_inputFilter));
-   parameter Real y_start=1 "Initial position of actuator"
-     annotation(Dialog(tab="Dynamics", group="Filtered opening",enable=use_inputFilter));
- 
-   Modelica.Blocks.Interfaces.RealInput y(min=0, max=1)
-     "Actuator position (0: closed, 1: open)"
-     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
-           rotation=270,
-         origin={0,120}),iconTransformation(
-         extent={{-20,-20},{20,20}},
-         rotation=270,
-         origin={0,120})));
- 
-   Modelica.Blocks.Interfaces.RealOutput y_actual
-     "Actual actuator position"
-     annotation (Placement(transformation(extent={{40,60},{60,80}})));
- 
-   // Classes used to implement the filtered opening
- protected
-   final parameter Modelica.Units.SI.Frequency fCut=5/(2*Modelica.Constants.pi*
-       riseTime) "Cut-off frequency of filter";
- 
-   parameter Boolean casePreInd = false
-     "In case of PressureIndependent the model I/O is modified"
-     annotation(Evaluate=true);
-   Modelica.Blocks.Interfaces.RealOutput y_internal(unit="1")
-     "Output connector for internal use (= y_actual if not casePreInd)";
-   Modelica.Blocks.Interfaces.RealOutput y_filtered if use_inputFilter
-     "Filtered valve position in the range 0..1"
-     annotation (Placement(transformation(extent={{40,78},{60,98}}),
-         iconTransformation(extent={{60,50},{80,70}})));
- 
-   AixLib.Fluid.BaseClasses.ActuatorFilter filter(
-     final n=order,
-     final f=fCut,
-     final normalized=true,
-     final initType=init,
-     final y_start=y_start) if use_inputFilter
-     "Second order filter to approximate actuator opening time, and to improve numerics"
-     annotation (Placement(transformation(extent={{6,81},{20,95}})));
- 
- equation
-   connect(filter.y, y_filtered)
-     annotation (Line(points={{20.7,88},{50,88}}, color={0,0,127}));
-   if use_inputFilter then
-     connect(y, filter.u) annotation (Line(points={{1.11022e-15,120},{1.11022e-15,
-             88},{4.6,88}}, color={0,0,127}));
-     connect(filter.y, y_internal) annotation (Line(points={{20.7,88},{30,88},{30,
-             70},{50,70}}, color={0,0,127}));
-   else
-     connect(y, y_internal) annotation (Line(
-       points={{1.11022e-15,120},{0,120},{0,70},{50,70}},
-       color={0,0,127}));
-   end if;
-   if not casePreInd then
-     connect(y_internal, y_actual);
-   end if;
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-             -100},{100,100}}), graphics={
-         Line(
-           points={{0,48},{0,108}}),
-         Line(
-           points={{0,70},{40,70}}),
-         Rectangle(
-           visible=use_inputFilter,
-           extent={{-32,40},{34,100}},
-           lineColor={0,0,0},
-           fillColor={135,135,135},
-           fillPattern=FillPattern.Solid),
-         Ellipse(
-           visible=use_inputFilter,
-           extent={{-32,100},{34,40}},
-           lineColor={0,0,0},
-           fillColor={135,135,135},
-           fillPattern=FillPattern.Solid),
-         Text(
-           visible=use_inputFilter,
-           extent={{-20,94},{22,48}},
-           textColor={0,0,0},
-           fillColor={135,135,135},
-           fillPattern=FillPattern.Solid,
-           textString="M",
-           textStyle={TextStyle.Bold}),
-         Text(
-           extent={{-40,126},{-160,76}},
-           textColor={0,0,0},
-           textString=DynamicSelect("", String(y, format=".2f")))}),
- Documentation(info="<html>
+model ActuatorSignal
+  "Partial model that implements the filtered opening for valves and dampers"
+
+  constant Integer order(min=1) = 2 "Order of filter";
+
+  parameter Boolean use_inputFilter=true
+    "= true, if opening is filtered with a 2nd order CriticalDamping filter"
+    annotation(Dialog(tab="Dynamics", group="Filtered opening"));
+  parameter Modelica.Units.SI.Time riseTime=120
+    "Rise time of the filter (time to reach 99.6 % of an opening step)"
+    annotation (Dialog(
+      tab="Dynamics",
+      group="Filtered opening",
+      enable=use_inputFilter));
+  parameter Modelica.Blocks.Types.Init init=Modelica.Blocks.Types.Init.InitialOutput
+    "Type of initialization (no init/steady state/initial state/initial output)"
+    annotation(Dialog(tab="Dynamics", group="Filtered opening",enable=use_inputFilter));
+  parameter Real y_start=1 "Initial position of actuator"
+    annotation(Dialog(tab="Dynamics", group="Filtered opening",enable=use_inputFilter));
+
+  Modelica.Blocks.Interfaces.RealInput y(min=0, max=1)
+    "Actuator position (0: closed, 1: open)"
+    annotation (Placement(transformation(extent={{-20,-20},{20,20}},
+          rotation=270,
+        origin={0,120}),iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={0,120})));
+
+  Modelica.Blocks.Interfaces.RealOutput y_actual
+    "Actual actuator position"
+    annotation (Placement(transformation(extent={{40,60},{60,80}})));
+
+  // Classes used to implement the filtered opening
+protected
+  final parameter Modelica.Units.SI.Frequency fCut=5/(2*Modelica.Constants.pi*
+      riseTime) "Cut-off frequency of filter";
+
+  parameter Boolean casePreInd = false
+    "In case of PressureIndependent the model I/O is modified"
+    annotation(Evaluate=true);
+  Modelica.Blocks.Interfaces.RealOutput y_internal(unit="1")
+    "Output connector for internal use (= y_actual if not casePreInd)";
+  Modelica.Blocks.Interfaces.RealOutput y_filtered if use_inputFilter
+    "Filtered valve position in the range 0..1"
+    annotation (Placement(transformation(extent={{40,78},{60,98}}),
+        iconTransformation(extent={{60,50},{80,70}})));
+
+  AixLib.Fluid.BaseClasses.ActuatorFilter filter(
+    final n=order,
+    final f=fCut,
+    final normalized=true,
+    final initType=init,
+    final y_start=y_start) if use_inputFilter
+    "Second order filter to approximate actuator opening time, and to improve numerics"
+    annotation (Placement(transformation(extent={{6,81},{20,95}})));
+
+equation
+  connect(filter.y, y_filtered)
+    annotation (Line(points={{20.7,88},{50,88}}, color={0,0,127}));
+  if use_inputFilter then
+    connect(y, filter.u) annotation (Line(points={{1.11022e-15,120},{1.11022e-15,
+            88},{4.6,88}}, color={0,0,127}));
+    connect(filter.y, y_internal) annotation (Line(points={{20.7,88},{30,88},{30,
+            70},{50,70}}, color={0,0,127}));
+  else
+    connect(y, y_internal) annotation (Line(
+      points={{1.11022e-15,120},{0,120},{0,70},{50,70}},
+      color={0,0,127}));
+  end if;
+  if not casePreInd then
+    connect(y_internal, y_actual);
+  end if;
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,100}}), graphics={
+        Line(
+          points={{0,48},{0,108}}),
+        Line(
+          points={{0,70},{40,70}}),
+        Rectangle(
+          visible=use_inputFilter,
+          extent={{-32,40},{34,100}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          visible=use_inputFilter,
+          extent={{-32,100},{34,40}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Text(
+          visible=use_inputFilter,
+          extent={{-20,94},{22,48}},
+          textColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid,
+          textString="M",
+          textStyle={TextStyle.Bold}),
+        Text(
+          extent={{-40,126},{-160,76}},
+          textColor={0,0,0},
+          textString=DynamicSelect("", String(y, format=".2f")))}),
+Documentation(info="<html>
  <p>
  This model implements the filter that is used to approximate the travel
  time of the actuator.
@@ -116,7 +116,7 @@ within AixLib.Fluid.Actuators.BaseClasses;
  AixLib.Fluid.Actuators.UsersGuide</a>
  for a description of the filter.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  June 10, 2021, by Michael Wetter:<br/>
@@ -166,6 +166,6 @@ within AixLib.Fluid.Actuators.BaseClasses;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end ActuatorSignal;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end ActuatorSignal;

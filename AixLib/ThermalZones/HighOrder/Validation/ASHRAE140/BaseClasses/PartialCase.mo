@@ -132,7 +132,7 @@ partial model PartialCase "This is the base class from which the base cases will
     constrainedby Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Area Win_Area=12 "Window area ";
+  parameter Modelica.Units.SI.Area Win_Area=12 "Window area ";
 
   parameter Real tableHeatOrTempMax[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
   parameter Real tableCoolOrTempMin[:,:]=[0.0,0.0,0.0] "Limits to be checked according to ASHRAE 140" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
@@ -148,8 +148,14 @@ partial model PartialCase "This is the base class from which the base cases will
       choice="Q Cool",
       choice="T Max",
       choice="T Min"));
-  parameter Modelica.SIunits.Time checkTimeHeatOrTempMax=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Heating load or max. temperature"));
-  parameter Modelica.SIunits.Time checkTimeCoolOrTempMin=31536000 "Simulation time when block should check if model results lies in limit range" annotation (Dialog(tab="Results check", group="Cooling load or min. temperature"));
+  parameter Modelica.Units.SI.Time checkTimeHeatOrTempMax=31536000
+    "Simulation time when block should check if model results lies in limit range"
+    annotation (Dialog(tab="Results check", group=
+          "Heating load or max. temperature"));
+  parameter Modelica.Units.SI.Time checkTimeCoolOrTempMin=31536000
+    "Simulation time when block should check if model results lies in limit range"
+    annotation (Dialog(tab="Results check", group=
+          "Cooling load or min. temperature"));
 
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
   Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature annotation (Placement(transformation(extent={{130,26},{150,46}})));

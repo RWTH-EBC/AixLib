@@ -1,21 +1,21 @@
 within AixLib.Utilities.Psychrometrics.Functions;
- function saturationPressure
-   "Saturation curve valid for 223.16 <= T <= 373.16 (and slightly outside with less accuracy)"
-   extends Modelica.Icons.Function;
-   input Modelica.Units.SI.Temperature TSat(displayUnit="degC", nominal=300)
-     "Saturation temperature";
-   output Modelica.Units.SI.AbsolutePressure pSat(displayUnit="Pa", nominal=1000)
-     "Saturation pressure";
- 
- algorithm
-   pSat := AixLib.Utilities.Math.Functions.regStep(
-              y1=AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TSat),
-              y2=AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce(TSat),
-              x=TSat-273.16,
-              x_small=1.0);
-   annotation(Inline=true,
-     smoothOrder=1,
-     Documentation(info="<html>
+function saturationPressure
+  "Saturation curve valid for 223.16 <= T <= 373.16 (and slightly outside with less accuracy)"
+  extends Modelica.Icons.Function;
+  input Modelica.Units.SI.Temperature TSat(displayUnit="degC", nominal=300)
+    "Saturation temperature";
+  output Modelica.Units.SI.AbsolutePressure pSat(displayUnit="Pa", nominal=1000)
+    "Saturation pressure";
+
+algorithm
+  pSat := AixLib.Utilities.Math.Functions.regStep(
+             y1=AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TSat),
+             y2=AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce(TSat),
+             x=TSat-273.16,
+             x_small=1.0);
+  annotation(Inline=true,
+    smoothOrder=1,
+    Documentation(info="<html>
  <p>
  Saturation pressure of water, computed from temperature,
  according to Wagner <i>et al.</i> (1993).
@@ -31,7 +31,7 @@ within AixLib.Utilities.Psychrometrics.Functions;
  http://aip.scitation.org/doi/pdf/10.1063/1.555947?class=pdf</a>.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  March 15, 2016, by Michael Wetter:<br/>
@@ -52,6 +52,6 @@ within AixLib.Utilities.Psychrometrics.Functions;
  First implementation, moved from <code>AixLib.Media</code>.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end saturationPressure;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end saturationPressure;

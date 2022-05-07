@@ -17,13 +17,12 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     Dialog(group="Machine characteristics"),
     Placement(transformation(extent={{12,22},{32,42}})));
 
-  parameter Modelica.SIunits.PressureDifference dp_nominal(
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(
     min=0,
-    displayUnit="Pa")=
-      if rho_default < 500 then 500 else 10000 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
+    displayUnit="Pa") = if rho_default < 500 then 500 else 10000 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per"
-    annotation(Dialog(group="Nominal condition"));
+    annotation (Dialog(group="Nominal condition"));
   parameter AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType ctrlType=AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpTotal "Type of mover control" annotation (Dialog(group="Control characteristics"));
   parameter AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters pressureCurve_default(
       V_flow=m_flow_nominal/rho_default*{0,1,1.5,2},
@@ -48,19 +47,24 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
   parameter Boolean prescribeSystemPressure=false
     "=true, to control mover such that pressure difference is obtained across two remote points in system"
     annotation (Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Time tauMov=1
+  parameter Modelica.Units.SI.Time tauMov=1
     "Time constant in mover (pump or fan) of fluid volume for nominal flow, used if energy or mass balance is dynamic"
-    annotation (Dialog(tab="Dynamics",
-                       group="Nominal condition",
-                       enable=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState or massDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
+    annotation (Dialog(
+      tab="Dynamics",
+      group="Nominal condition",
+      enable=energyDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState or
+          massDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
 
   // Classes used to implement the filtered speed
   parameter Boolean use_inputFilter=true
     "= true, if speed is filtered with a 2nd order CriticalDamping filter"
     annotation(Dialog(tab="Dynamics", group="Filtered speed"));
-  parameter Modelica.SIunits.Time riseTime=30
-    "Rise time of the filter (time to reach 99.6 % of the speed)"
-    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
+  parameter Modelica.Units.SI.Time riseTime=30
+    "Rise time of the filter (time to reach 99.6 % of the speed)" annotation (
+      Dialog(
+      tab="Dynamics",
+      group="Filtered speed",
+      enable=use_inputFilter));
   parameter Modelica.Blocks.Types.Init init=Modelica.Blocks.Types.Init.InitialOutput
     "Type of initialization (no init/steady state/initial state/initial output)"
     annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
@@ -69,10 +73,12 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
 
   // Sensor parameters
-  parameter Modelica.SIunits.PressureDifference dp_start=0
-    "Initial value of pressure raise"
-    annotation (Dialog(tab="Dynamics", group="Filtered speed", enable=use_inputFilter));
-  parameter Modelica.SIunits.Time tauSen=0
+  parameter Modelica.Units.SI.PressureDifference dp_start=0
+    "Initial value of pressure raise" annotation (Dialog(
+      tab="Dynamics",
+      group="Filtered speed",
+      enable=use_inputFilter));
+  parameter Modelica.Units.SI.Time tauSen=0
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
     annotation (Dialog(tab="Sensor"));
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
@@ -119,15 +125,13 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     "Sensor to measure volume flow rate"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
-  Modelica.Blocks.Tables.CombiTable1D pressureCurveSelected(
+  Modelica.Blocks.Tables.CombiTable1Dv pressureCurveSelected(
     final tableOnFile=false,
-    final table=
-      if (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst) then
-        [cat(1, pressureCurve_dpConst.V_flow),cat(1, pressureCurve_dpConst.dp)]
-      elseif (ctrlType ==AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar) then
-        [cat(1, pressureCurve_dpVar.V_flow),cat(1, pressureCurve_dpVar.dp)]
-      else
-        [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
+    final table=if (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpConst)
+         then [cat(1, pressureCurve_dpConst.V_flow),cat(1,
+        pressureCurve_dpConst.dp)] elseif (ctrlType == AixLib.Fluid.Movers.DpControlledMovers.Types.CtrlType.dpVar)
+         then [cat(1, pressureCurve_dpVar.V_flow),cat(1, pressureCurve_dpVar.dp)]
+         else [cat(1, per.pressure.V_flow),cat(1, per.pressure.dp)],
     final tableName="NoName",
     final fileName="NoName",
     final verboseRead=true,
@@ -181,37 +185,52 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     annotation (Placement(transformation(extent={{100,30},{120,50}}), iconTransformation(extent={{100,40},{120,60}})));
 
 protected
-  final parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+  final parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
       p=Medium.p_default,
       T=Medium.T_default,
-      X=Medium.X_default)
-    "Default medium density";
+      X=Medium.X_default) "Default medium density";
   final parameter Medium.ThermodynamicState sta_start=Medium.setState_pTX(
       T=T_start,
       p=p_start,
       X=X_start)
     "Medium state at start values";
 
-  final parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start = Medium.specificEnthalpy(sta_start)
-    "Start value for outflowing enthalpy";
+  final parameter Modelica.Units.SI.SpecificEnthalpy h_outflow_start=
+      Medium.specificEnthalpy(sta_start) "Start value for outflowing enthalpy";
 
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_min = min(min(pressureCurve_default.V_flow), min(min(pressureCurve_dpConst.V_flow), min(pressureCurve_dpVar.V_flow)))
-    "Get minimum of three vectors";
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_max = max(max(pressureCurve_default.V_flow), max(max(pressureCurve_dpConst.V_flow), max(pressureCurve_dpVar.V_flow)))
-    "Get maximum of three vectors";
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_min=min(min(
+      pressureCurve_default.V_flow), min(min(pressureCurve_dpConst.V_flow), min(
+      pressureCurve_dpVar.V_flow))) "Get minimum of three vectors";
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_max=max(max(
+      pressureCurve_default.V_flow), max(max(pressureCurve_dpConst.V_flow), max(
+      pressureCurve_dpVar.V_flow))) "Get maximum of three vectors";
 
   constant Integer n_sup_pts = 100
     "Supporting points";
-  final parameter Modelica.SIunits.PressureDifference dps_default[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_default.V_flow,pressureCurve_default.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max)
+  final parameter Modelica.Units.SI.PressureDifference dps_default[:]=array(
+      Modelica.Math.Vectors.interpolate(
+      pressureCurve_default.V_flow,
+      pressureCurve_default.dp,
+      Vi) for Vi in V_flow_min:(V_flow_max - V_flow_min)/n_sup_pts:V_flow_max)
     "Vector (equally spaced) with pressure heads (default curve) on the basis of n_sup_pts supporting points";
-  final parameter Modelica.SIunits.PressureDifference dps_dpConst[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_dpConst.V_flow,pressureCurve_dpConst.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max)
+  final parameter Modelica.Units.SI.PressureDifference dps_dpConst[:]=array(
+      Modelica.Math.Vectors.interpolate(
+      pressureCurve_dpConst.V_flow,
+      pressureCurve_dpConst.dp,
+      Vi) for Vi in V_flow_min:(V_flow_max - V_flow_min)/n_sup_pts:V_flow_max)
     "Vector (equally spaced) with pressure heads (dpConst curve) on the basis of n_sup_pts supporting points";
-  final parameter Modelica.SIunits.PressureDifference dps_dpVar[:] = array(Modelica.Math.Vectors.interpolate(pressureCurve_dpVar.V_flow,pressureCurve_dpVar.dp,Vi) for Vi in V_flow_min:(V_flow_max-V_flow_min)/n_sup_pts:V_flow_max)
+  final parameter Modelica.Units.SI.PressureDifference dps_dpVar[:]=array(
+      Modelica.Math.Vectors.interpolate(
+      pressureCurve_dpVar.V_flow,
+      pressureCurve_dpVar.dp,
+      Vi) for Vi in V_flow_min:(V_flow_max - V_flow_min)/n_sup_pts:V_flow_max)
     "Vector (equally spaced) with pressure heads (dpVar curve) on the basis of n_sup_pts supporting points";
 
   function checkDpCurves
-    input Modelica.SIunits.PressureDifference dps_default[:] "Reference vector containing pressure head points";
-    input Modelica.SIunits.PressureDifference dps_other[:] "Comparing vector containing pressure head points";
+    input Modelica.Units.SI.PressureDifference dps_default[:]
+      "Reference vector containing pressure head points";
+    input Modelica.Units.SI.PressureDifference dps_other[:]
+      "Comparing vector containing pressure head points";
     input Integer n_sup_pts(min=2) "Supporting points";
     output Boolean dps_error "Use a boolean to avoid multiple assertion errors to be printed";
   algorithm

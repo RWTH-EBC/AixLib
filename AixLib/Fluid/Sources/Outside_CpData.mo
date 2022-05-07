@@ -1,95 +1,95 @@
 within AixLib.Fluid.Sources;
- model Outside_CpData
-   "Boundary that takes weather data as an input and computes the wind pressure from a given wind pressure profile"
-   extends AixLib.Fluid.Sources.BaseClasses.Outside;
- 
-   parameter Modelica.Units.SI.Angle azi "Surface azimuth (South:0, West:pi/2)"
-     annotation (choicesAllMatching=true);
- 
-   parameter Modelica.Units.SI.Angle incAngSurNor[:](
-     each displayUnit="deg")
-     "Wind incidence angles, relative to the surface normal (normal=0), first point must be 0, last smaller than 2 pi(=360 deg)";
-   parameter Real Cp[:](
-     each final unit="1")
-     "Cp values at the corresponding incAngSurNor";
- 
-   parameter Real Cs(
-     final min=0,
-     final unit="1")=1
-     "Wind speed modifier";
- 
-   Modelica.Units.SI.Pressure pWin(displayUnit="Pa") = Cs*0.5*CpAct*d*vWin*vWin
-    "Change in pressure due to wind force";
- 
-   Real CpAct(
-     final unit="1") = AixLib.Airflow.Multizone.BaseClasses.windPressureProfile(
-       alpha=alpha,incAngTab=
-       incAngExt,
-       CpTab=CpExt,
-       d=deri) "Actual wind pressure coefficient";
- 
-   Modelica.Units.SI.Angle alpha = winDir-surOut
-     "Wind incidence angle (0: normal to wall)";
- 
- 
- protected
-   final parameter Modelica.Units.SI.Angle surOut = azi-Modelica.Constants.pi
-     "Angle of surface that is used to compute the wind incidence angle relative to the surface normal";
- 
-   final parameter Integer n=size(incAngSurNor, 1)
-     "Number of data points provided by user";
-   final parameter Modelica.Units.SI.Angle incAngExt[n + 3](each displayUnit=
-         "deg") = cat(
-     1,
-     {incAngSurNor[n - 1] - (2*Modelica.Constants.pi)},
-     incAngSurNor,
-     2*Modelica.Constants.pi .+ {incAngSurNor[1],incAngSurNor[2]})
-     "Extended number of incidence angles";
-   final parameter Real CpExt[n+3]=cat(1, {Cp[n-1]}, Cp, {Cp[1], Cp[2]})
-     "Extended number of Cp values";
- 
-   final parameter Real[n+3] deri=
-       AixLib.Utilities.Math.Functions.splineDerivatives(
-       x=incAngExt,
-       y=CpExt,
-       ensureMonotonicity=false) "Derivatives for table interpolation";
- 
-   Modelica.Blocks.Interfaces.RealInput pAtm(
-     min=0,
-     nominal=1E5,
-     final unit="Pa") "Atmospheric pressure";
-   Modelica.Blocks.Interfaces.RealInput vWin(final unit="m/s")
-     "Wind speed from weather bus";
-   Modelica.Blocks.Interfaces.RealInput winDir(final unit="rad",displayUnit="deg") "Wind direction from weather bus";
- 
-   Modelica.Blocks.Interfaces.RealOutput pTot(min=0, nominal=1E5, final unit="Pa")=pAtm + pWin
-     "Sum of atmospheric pressure and wind pressure";
- 
-   Modelica.Units.SI.Density d = Medium.density(
-     Medium.setState_pTX(p_in_internal, T_in_internal, X_in_internal))
-     "Air density";
- 
- initial equation
-   assert(size(incAngSurNor, 1) == size(Cp, 1), "In " + getInstanceName() +
-     ": Size of parameters are size(CpincAng, 1) = " + String(size(incAngSurNor,
-     1)) + " and size(Cp, 1) = " + String(size(Cp, 1)) + ". They must be equal.");
- 
-   assert(abs(incAngSurNor[1]) < 1E-4, "In " + getInstanceName() +
-     ": First point in the table CpAngAtt must be 0.");
- 
-   assert(2*Modelica.Constants.pi - incAngSurNor[end] > 1E-4, "In " +
-     getInstanceName() +
-     ": Last point in the table CpAngAtt must be smaller than 2 pi (360 deg).");
- 
- equation
-   connect(weaBus.winDir, winDir);
-   connect(weaBus.winSpe, vWin);
-   connect(weaBus.pAtm,pAtm);
-   connect(p_in_internal, pTot);
-   connect(weaBus.TDryBul, T_in_internal);
- 
-   annotation (defaultComponentName="out",
-     Documentation(info="<html>
+model Outside_CpData
+  "Boundary that takes weather data as an input and computes the wind pressure from a given wind pressure profile"
+  extends AixLib.Fluid.Sources.BaseClasses.Outside;
+
+  parameter Modelica.Units.SI.Angle azi "Surface azimuth (South:0, West:pi/2)"
+    annotation (choicesAllMatching=true);
+
+  parameter Modelica.Units.SI.Angle incAngSurNor[:](
+    each displayUnit="deg")
+    "Wind incidence angles, relative to the surface normal (normal=0), first point must be 0, last smaller than 2 pi(=360 deg)";
+  parameter Real Cp[:](
+    each final unit="1")
+    "Cp values at the corresponding incAngSurNor";
+
+  parameter Real Cs(
+    final min=0,
+    final unit="1")=1
+    "Wind speed modifier";
+
+  Modelica.Units.SI.Pressure pWin(displayUnit="Pa") = Cs*0.5*CpAct*d*vWin*vWin
+   "Change in pressure due to wind force";
+
+  Real CpAct(
+    final unit="1") = AixLib.Airflow.Multizone.BaseClasses.windPressureProfile(
+      alpha=alpha,incAngTab=
+      incAngExt,
+      CpTab=CpExt,
+      d=deri) "Actual wind pressure coefficient";
+
+  Modelica.Units.SI.Angle alpha = winDir-surOut
+    "Wind incidence angle (0: normal to wall)";
+
+
+protected
+  final parameter Modelica.Units.SI.Angle surOut = azi-Modelica.Constants.pi
+    "Angle of surface that is used to compute the wind incidence angle relative to the surface normal";
+
+  final parameter Integer n=size(incAngSurNor, 1)
+    "Number of data points provided by user";
+  final parameter Modelica.Units.SI.Angle incAngExt[n + 3](each displayUnit=
+        "deg") = cat(
+    1,
+    {incAngSurNor[n - 1] - (2*Modelica.Constants.pi)},
+    incAngSurNor,
+    2*Modelica.Constants.pi .+ {incAngSurNor[1],incAngSurNor[2]})
+    "Extended number of incidence angles";
+  final parameter Real CpExt[n+3]=cat(1, {Cp[n-1]}, Cp, {Cp[1], Cp[2]})
+    "Extended number of Cp values";
+
+  final parameter Real[n+3] deri=
+      AixLib.Utilities.Math.Functions.splineDerivatives(
+      x=incAngExt,
+      y=CpExt,
+      ensureMonotonicity=false) "Derivatives for table interpolation";
+
+  Modelica.Blocks.Interfaces.RealInput pAtm(
+    min=0,
+    nominal=1E5,
+    final unit="Pa") "Atmospheric pressure";
+  Modelica.Blocks.Interfaces.RealInput vWin(final unit="m/s")
+    "Wind speed from weather bus";
+  Modelica.Blocks.Interfaces.RealInput winDir(final unit="rad",displayUnit="deg") "Wind direction from weather bus";
+
+  Modelica.Blocks.Interfaces.RealOutput pTot(min=0, nominal=1E5, final unit="Pa")=pAtm + pWin
+    "Sum of atmospheric pressure and wind pressure";
+
+  Modelica.Units.SI.Density d = Medium.density(
+    Medium.setState_pTX(p_in_internal, T_in_internal, X_in_internal))
+    "Air density";
+
+initial equation
+  assert(size(incAngSurNor, 1) == size(Cp, 1), "In " + getInstanceName() +
+    ": Size of parameters are size(CpincAng, 1) = " + String(size(incAngSurNor,
+    1)) + " and size(Cp, 1) = " + String(size(Cp, 1)) + ". They must be equal.");
+
+  assert(abs(incAngSurNor[1]) < 1E-4, "In " + getInstanceName() +
+    ": First point in the table CpAngAtt must be 0.");
+
+  assert(2*Modelica.Constants.pi - incAngSurNor[end] > 1E-4, "In " +
+    getInstanceName() +
+    ": Last point in the table CpAngAtt must be smaller than 2 pi (360 deg).");
+
+equation
+  connect(weaBus.winDir, winDir);
+  connect(weaBus.winSpe, vWin);
+  connect(weaBus.pAtm,pAtm);
+  connect(p_in_internal, pTot);
+  connect(weaBus.TDryBul, T_in_internal);
+
+  annotation (defaultComponentName="out",
+    Documentation(info="<html>
  <p>
  This model describes boundary conditions for
  pressure, enthalpy, and species concentration that can be obtained
@@ -174,7 +174,7 @@ within AixLib.Fluid.Sources;
  <li>M. W. Liddament, 1996, <i>A guide to energy efficient ventilation</i>. AIVC Annex V. </li>
  </ul>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  February 2, 2022, by Michael Wetter:<br/>
@@ -188,16 +188,16 @@ within AixLib.Fluid.Sources;
  </li>
  </ul>
  </html>"),
-     Icon(graphics={
-         Line(points={{-56,54},{-56,-44},{52,-44}}, color={255,255,255}),
-         Line(points={{-56,16},{-50,16},{-44,12},{-38,-2},{-28,-24},{-20,-40},
-               {-12,-42},{-6,-36},{0,-34},{6,-36},{12,-42},{20,-40},{28,-14},{
-               36,6},{42,12},{50,14}},
-                             color={255,255,255},
-           smooth=Smooth.Bezier),
-         Text(
-           extent={{-54,66},{2,22}},
-           textColor={255,255,255},
-           textString="Cp")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end Outside_CpData;
+    Icon(graphics={
+        Line(points={{-56,54},{-56,-44},{52,-44}}, color={255,255,255}),
+        Line(points={{-56,16},{-50,16},{-44,12},{-38,-2},{-28,-24},{-20,-40},
+              {-12,-42},{-6,-36},{0,-34},{6,-36},{12,-42},{20,-40},{28,-14},{
+              36,6},{42,12},{50,14}},
+                            color={255,255,255},
+          smooth=Smooth.Bezier),
+        Text(
+          extent={{-54,66},{2,22}},
+          textColor={255,255,255},
+          textString="Cp")}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Outside_CpData;

@@ -1,4 +1,4 @@
-within AixLib.Fluid.BaseClasses;
+﻿within AixLib.Fluid.BaseClasses;
 partial model PartialReversibleVapourCompressionMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -30,18 +30,17 @@ partial model PartialReversibleVapourCompressionMachine
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
-  parameter Modelica.SIunits.Power Q_useNominal(start=0)
+  parameter Modelica.Units.SI.Power Q_useNominal(start=0)
     "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
-    annotation (Dialog(enable=
-          use_autoCalc));
+    annotation (Dialog(enable=use_autoCalc));
   parameter Real scalingFactor=1 "Scaling-factor of vapour compression machine";
   parameter Boolean use_refIne=true
     "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
         group="Refrigerant inertia"));
-  parameter Modelica.SIunits.Frequency refIneFre_constant
-    "Cut off frequency for inertia of refrigerant cycle"
-    annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"),Evaluate=true);
+  parameter Modelica.Units.SI.Frequency refIneFre_constant
+    "Cut off frequency for inertia of refrigerant cycle" annotation (Dialog(
+        enable=use_refIne, group="Refrigerant inertia"), Evaluate=true);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
           use_refIne, group="Refrigerant inertia"));
   parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet, nSet and iceFac input"
@@ -49,17 +48,21 @@ partial model PartialReversibleVapourCompressionMachine
 
 
 //Condenser
-  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
+  parameter Modelica.Units.SI.MassFlowRate mFlow_conNominal
     "Manual input of the nominal mass flow rate (if not automatically calculated)"
-    annotation (Dialog(group="Parameters", tab="Condenser", enable=not
-          use_autoCalc), Evaluate=true);
-  parameter Modelica.SIunits.Volume VCon
+    annotation (Dialog(
+      group="Parameters",
+      tab="Condenser",
+      enable=not use_autoCalc), Evaluate=true);
+  parameter Modelica.Units.SI.Volume VCon
     "Manual input of the condenser volume (if not automatically calculated)"
-    annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser", enable=not
-          use_autoCalc));
-  parameter Modelica.SIunits.PressureDifference dpCon_nominal
-    "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Flow resistance", tab="Condenser"), Evaluate=true);
+    annotation (Evaluate=true, Dialog(
+      group="Parameters",
+      tab="Condenser",
+      enable=not use_autoCalc));
+  parameter Modelica.Units.SI.PressureDifference dpCon_nominal
+    "Pressure drop at nominal mass flow rate" annotation (Dialog(group=
+          "Flow resistance", tab="Condenser"), Evaluate=true);
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Condenser", group="Flow resistance"));
@@ -67,30 +70,40 @@ partial model PartialReversibleVapourCompressionMachine
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Condenser"),
                                           choices(checkBox=true));
-  parameter Modelica.SIunits.HeatCapacity CCon
-    "Heat capacity of Condenser (= cp*m). If you want to neglace the dry mass of the condenser, you can set this value to zero" annotation (Evaluate=true,Dialog(group="Heat Losses",
-        tab="Condenser",
+  parameter Modelica.Units.SI.HeatCapacity CCon
+    "Heat capacity of Condenser (= cp*m). If you want to neglace the dry mass of the condenser, you can set this value to zero"
+    annotation (Evaluate=true, Dialog(
+      group="Heat Losses",
+      tab="Condenser",
       enable=use_conCap));
-  parameter Modelica.SIunits.ThermalConductance GConOut
+  parameter Modelica.Units.SI.ThermalConductance GConOut
     "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a condenser with additional dry mass but without external heat losses, set the value to zero"
-    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
+    annotation (Evaluate=true, Dialog(
+      group="Heat Losses",
+      tab="Condenser",
       enable=use_conCap));
-  parameter Modelica.SIunits.ThermalConductance GConIns
+  parameter Modelica.Units.SI.ThermalConductance GConIns
     "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
-    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
+    annotation (Evaluate=true, Dialog(
+      group="Heat Losses",
+      tab="Condenser",
       enable=use_conCap));
 //Evaporator
-  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
+  parameter Modelica.Units.SI.MassFlowRate mFlow_evaNominal
     "Manual input of the nominal mass flow rate (if not automatically calculated)"
-    annotation (Dialog(group="Parameters", tab="Evaporator", enable=not
-          use_autoCalc),                                                               Evaluate=true);
-  parameter Modelica.SIunits.Volume VEva
+    annotation (Dialog(
+      group="Parameters",
+      tab="Evaporator",
+      enable=not use_autoCalc), Evaluate=true);
+  parameter Modelica.Units.SI.Volume VEva
     "Manual input of the evaporator volume (if not automatically calculated)"
-    annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator", enable=not
-          use_autoCalc));
-  parameter Modelica.SIunits.PressureDifference dpEva_nominal
-    "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Flow resistance", tab="Evaporator"),Evaluate=true);
+    annotation (Evaluate=true, Dialog(
+      group="Parameters",
+      tab="Evaporator",
+      enable=not use_autoCalc));
+  parameter Modelica.Units.SI.PressureDifference dpEva_nominal
+    "Pressure drop at nominal mass flow rate" annotation (Dialog(group=
+          "Flow resistance", tab="Evaporator"), Evaluate=true);
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator", group="Flow resistance"));
@@ -98,20 +111,26 @@ partial model PartialReversibleVapourCompressionMachine
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Evaporator"),
                                           choices(checkBox=true));
-  parameter Modelica.SIunits.HeatCapacity CEva
+  parameter Modelica.Units.SI.HeatCapacity CEva
     "Heat capacity of Evaporator (= cp*m). If you want to neglace the dry mass of the evaporator, you can set this value to zero"
-    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
+    annotation (Evaluate=true, Dialog(
+      group="Heat Losses",
+      tab="Evaporator",
       enable=use_evaCap));
-  parameter Modelica.SIunits.ThermalConductance GEvaOut
+  parameter Modelica.Units.SI.ThermalConductance GEvaOut
     "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a evaporator with additional dry mass but without external heat losses, set the value to zero"
-    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
+    annotation (Evaluate=true, Dialog(
+      group="Heat Losses",
+      tab="Evaporator",
       enable=use_evaCap));
-  parameter Modelica.SIunits.ThermalConductance GEvaIns
+  parameter Modelica.Units.SI.ThermalConductance GEvaIns
     "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
-    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
+    annotation (Evaluate=true, Dialog(
+      group="Heat Losses",
+      tab="Evaporator",
       enable=use_evaCap));
 //Assumptions
-  parameter Modelica.SIunits.Time tauSenT=1
+  parameter Modelica.Units.SI.Time tauSenT=1
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
   parameter Boolean transferHeat=true
@@ -123,18 +142,30 @@ partial model PartialReversibleVapourCompressionMachine
   parameter Boolean allowFlowReversalCon=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(group="Condenser", tab="Assumptions"));
-  parameter Modelica.SIunits.Time tauHeaTraEva=1200
+  parameter Modelica.Units.SI.Time tauHeaTraEva=1200
     "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat), Evaluate=true);
-  parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
+    annotation (Dialog(
+      tab="Assumptions",
+      group="Temperature sensors",
+      enable=transferHeat), Evaluate=true);
+  parameter Modelica.Units.SI.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
-  parameter Modelica.SIunits.Time tauHeaTraCon=1200
+    annotation (Dialog(
+      tab="Assumptions",
+      group="Temperature sensors",
+      enable=transferHeat));
+  parameter Modelica.Units.SI.Time tauHeaTraCon=1200
     "Time constant for heat transfer in temperature sensors in condenser, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat),Evaluate=true);
-  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
+    annotation (Dialog(
+      tab="Assumptions",
+      group="Temperature sensors",
+      enable=transferHeat), Evaluate=true);
+  parameter Modelica.Units.SI.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
+    annotation (Dialog(
+      tab="Assumptions",
+      group="Temperature sensors",
+      enable=transferHeat));
 
 //Initialization
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
@@ -146,9 +177,10 @@ partial model PartialReversibleVapourCompressionMachine
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-  parameter Modelica.SIunits.Temperature TConCap_start=Medium_con.T_default
-    "Initial temperature of heat capacity of condenser"
-    annotation (Dialog(tab="Initialization", group="Condenser",
+  parameter Modelica.Units.SI.Temperature TConCap_start=Medium_con.T_default
+    "Initial temperature of heat capacity of condenser" annotation (Dialog(
+      tab="Initialization",
+      group="Condenser",
       enable=use_conCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
@@ -159,9 +191,10 @@ partial model PartialReversibleVapourCompressionMachine
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
-  parameter Modelica.SIunits.Temperature TEvaCap_start=Medium_eva.T_default
-    "Initial temperature of heat capacity at evaporator"
-    annotation (Dialog(tab="Initialization", group="Evaporator",
+  parameter Modelica.Units.SI.Temperature TEvaCap_start=Medium_eva.T_default
+    "Initial temperature of heat capacity at evaporator" annotation (Dialog(
+      tab="Initialization",
+      group="Evaporator",
       enable=use_evaCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
@@ -246,15 +279,15 @@ partial model PartialReversibleVapourCompressionMachine
     final n=nthOrder,
     final f=refIneFre_constant,
     final x_start=x_start,
-    final y_start=yRefIne_start) if
-                                   use_refIne
+    final y_start=yRefIne_start)
+                                if use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
     annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=90,
         origin={-14,-52})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon if
-                                                                 not use_refIne
+  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon
+                                                              if not use_refIne
     "Use default nSet value" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
@@ -265,8 +298,8 @@ partial model PartialReversibleVapourCompressionMachine
     final n=nthOrder,
     final f=refIneFre_constant,
     final x_start=x_start,
-    final y_start=yRefIne_start) if
-                                   use_refIne
+    final y_start=yRefIne_start)
+                                if use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -282,14 +315,14 @@ partial model PartialReversibleVapourCompressionMachine
         extent={{-16,-16},{16,16}},
         rotation=90,
         origin={-76,-136})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if
-    use_evaCap "Foreces heat losses according to ambient temperature"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva
+ if use_evaCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-32,-110})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
-    use_conCap "Foreces heat losses according to ambient temperature"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon
+ if use_conCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,
@@ -402,17 +435,31 @@ partial model PartialReversibleVapourCompressionMachine
         rotation=180,
         origin={-66,-28})));
 protected
-  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
-  parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
+  parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_min=0.3
+    "Realistic mass flow minimum for simulation plausibility";
+  parameter Modelica.Units.SI.Volume autoCalc_Vmin=0.003
+    "Realistic volume minimum for simulation plausibility";
 
-  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_eva = if machineType then max(0.00004*Q_useNominal - 0.3177, autoCalc_mFlow_min) else max(0.00005*Q_useNominal - 0.5662, autoCalc_mFlow_min);
-  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_con = if machineType then max(0.00004*Q_useNominal - 0.6162, autoCalc_mFlow_min) else max(0.00005*Q_useNominal + 0.3161, autoCalc_mFlow_min);
-  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal_final=if use_autoCalc then autoCalc_mFlow_eva else mFlow_evaNominal;
-  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal_final=if use_autoCalc then autoCalc_mFlow_con else mFlow_conNominal;
-  parameter Modelica.SIunits.Volume autoCalc_VEva = if machineType then max(0.0000001*Q_useNominal - 0.0075, autoCalc_Vmin) else max(0.0000001*Q_useNominal - 0.0066, autoCalc_Vmin);
-  parameter Modelica.SIunits.Volume autoCalc_VCon = if machineType then max(0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002*Q_useNominal - 0.0084, autoCalc_Vmin);
-  parameter Modelica.SIunits.Volume VEva_final=if use_autoCalc then autoCalc_VEva else VEva;
-  parameter Modelica.SIunits.Volume VCon_final=if use_autoCalc then autoCalc_VCon else VCon;
+  parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_eva=if machineType
+       then max(0.00004*Q_useNominal - 0.3177, autoCalc_mFlow_min) else max(
+      0.00005*Q_useNominal - 0.5662, autoCalc_mFlow_min);
+  parameter Modelica.Units.SI.MassFlowRate autoCalc_mFlow_con=if machineType
+       then max(0.00004*Q_useNominal - 0.6162, autoCalc_mFlow_min) else max(
+      0.00005*Q_useNominal + 0.3161, autoCalc_mFlow_min);
+  parameter Modelica.Units.SI.MassFlowRate mFlow_evaNominal_final=if
+      use_autoCalc then autoCalc_mFlow_eva else mFlow_evaNominal;
+  parameter Modelica.Units.SI.MassFlowRate mFlow_conNominal_final=if
+      use_autoCalc then autoCalc_mFlow_con else mFlow_conNominal;
+  parameter Modelica.Units.SI.Volume autoCalc_VEva=if machineType then max(
+      0.0000001*Q_useNominal - 0.0075, autoCalc_Vmin) else max(0.0000001*
+      Q_useNominal - 0.0066, autoCalc_Vmin);
+  parameter Modelica.Units.SI.Volume autoCalc_VCon=if machineType then max(
+      0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002*
+      Q_useNominal - 0.0084, autoCalc_Vmin);
+  parameter Modelica.Units.SI.Volume VEva_final=if use_autoCalc then
+      autoCalc_VEva else VEva;
+  parameter Modelica.Units.SI.Volume VCon_final=if use_autoCalc then
+      autoCalc_VCon else VCon;
 
 
 equation

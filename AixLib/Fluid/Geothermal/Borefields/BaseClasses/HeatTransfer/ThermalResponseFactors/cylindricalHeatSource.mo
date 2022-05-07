@@ -1,31 +1,31 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors;
- function cylindricalHeatSource
-   "Cylindrical heat source solution from Carslaw and Jaeger"
-   extends Modelica.Icons.Function;
- 
-   input Modelica.Units.SI.Time t "Time";
-   input Modelica.Units.SI.ThermalDiffusivity aSoi "Ground thermal diffusivity";
-   input Modelica.Units.SI.Distance dis "Radial distance between borehole axes";
-   input Modelica.Units.SI.Radius rBor "Radius of emitting borehole";
- 
-   output Real G "Thermal response factor of borehole 1 on borehole 2";
- 
- protected
-   Real Fo = aSoi*t/rBor^2 "Fourier number";
-   Real p = dis/rBor "Fourier number";
- 
- algorithm
-   G := Modelica.Math.Nonlinear.quadratureLobatto(
-       function AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.cylindricalHeatSource_Integrand(
-       Fo=Fo,
-       p=p),
-     a = 1e-12,
-     b = 100,
-     tolerance = 1e-6);
- 
- annotation (
- Inline=true,
- Documentation(info="<html>
+function cylindricalHeatSource
+  "Cylindrical heat source solution from Carslaw and Jaeger"
+  extends Modelica.Icons.Function;
+
+  input Modelica.Units.SI.Time t "Time";
+  input Modelica.Units.SI.ThermalDiffusivity aSoi "Ground thermal diffusivity";
+  input Modelica.Units.SI.Distance dis "Radial distance between borehole axes";
+  input Modelica.Units.SI.Radius rBor "Radius of emitting borehole";
+
+  output Real G "Thermal response factor of borehole 1 on borehole 2";
+
+protected
+  Real Fo = aSoi*t/rBor^2 "Fourier number";
+  Real p = dis/rBor "Fourier number";
+
+algorithm
+  G := Modelica.Math.Nonlinear.quadratureLobatto(
+      function AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.cylindricalHeatSource_Integrand(
+      Fo=Fo,
+      p=p),
+    a = 1e-12,
+    b = 100,
+    tolerance = 1e-6);
+
+annotation (
+Inline=true,
+Documentation(info="<html>
  <p>
  This function evaluates the cylindrical heat source solution. This solution
  gives the relation between the constant heat transfer rate (per unit length)
@@ -55,13 +55,13 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalRespon
  <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.cylindricalHeatSource_Integrand\">
  AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.cylindricalHeatSource_Integrand</a>.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  March 22, 2018 by Massimo Cimmino:<br/>
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end cylindricalHeatSource;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end cylindricalHeatSource;

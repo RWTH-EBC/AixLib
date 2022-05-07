@@ -1,40 +1,40 @@
 within AixLib.Utilities.Math.Functions;
- function inverseXRegularized
-   "Function that approximates 1/x by a twice continuously differentiable function"
-   extends Modelica.Icons.Function;
-  input Real x "Abscissa value";
-  input Real delta(min=Modelica.Constants.eps)
-     "Abscissa value below which approximation occurs";
-  input Real deltaInv = 1/delta "Inverse value of delta";
- 
-  input Real a = -15*deltaInv "Polynomial coefficient";
-  input Real b = 119*deltaInv^2 "Polynomial coefficient";
-  input Real c = -361*deltaInv^3 "Polynomial coefficient";
-  input Real d = 534*deltaInv^4 "Polynomial coefficient";
-  input Real e = -380*deltaInv^5 "Polynomial coefficient";
-  input Real f = 104*deltaInv^6 "Polynomial coefficient";
- 
-  output Real y "Function value";
- 
- algorithm
-   y :=if (x > delta or x < -delta) then 1/x elseif (x < delta/2 and x > -delta/2) then x/(delta*delta) else
-     AixLib.Utilities.Math.Functions.BaseClasses.smoothTransition(
-        x=x,
-        delta=delta, deltaInv=deltaInv,
-        a=a, b=b, c=c, d=d, e=e, f=f);
- 
-   annotation (smoothOrder=2,
-   derivative(order=1,
-           zeroDerivative=delta,
-           zeroDerivative=deltaInv,
-           zeroDerivative=a,
-           zeroDerivative=b,
-           zeroDerivative=c,
-           zeroDerivative=d,
-           zeroDerivative=e,
-           zeroDerivative=f)=AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized,
-               Inline=true,
- Documentation(info="<html>
+function inverseXRegularized
+  "Function that approximates 1/x by a twice continuously differentiable function"
+  extends Modelica.Icons.Function;
+ input Real x "Abscissa value";
+ input Real delta(min=Modelica.Constants.eps)
+    "Abscissa value below which approximation occurs";
+ input Real deltaInv = 1/delta "Inverse value of delta";
+
+ input Real a = -15*deltaInv "Polynomial coefficient";
+ input Real b = 119*deltaInv^2 "Polynomial coefficient";
+ input Real c = -361*deltaInv^3 "Polynomial coefficient";
+ input Real d = 534*deltaInv^4 "Polynomial coefficient";
+ input Real e = -380*deltaInv^5 "Polynomial coefficient";
+ input Real f = 104*deltaInv^6 "Polynomial coefficient";
+
+ output Real y "Function value";
+
+algorithm
+  y :=if (x > delta or x < -delta) then 1/x elseif (x < delta/2 and x > -delta/2) then x/(delta*delta) else
+    AixLib.Utilities.Math.Functions.BaseClasses.smoothTransition(
+       x=x,
+       delta=delta, deltaInv=deltaInv,
+       a=a, b=b, c=c, d=d, e=e, f=f);
+
+  annotation (smoothOrder=2,
+  derivative(order=1,
+          zeroDerivative=delta,
+          zeroDerivative=deltaInv,
+          zeroDerivative=a,
+          zeroDerivative=b,
+          zeroDerivative=c,
+          zeroDerivative=d,
+          zeroDerivative=e,
+          zeroDerivative=f)=AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized,
+              Inline=true,
+Documentation(info="<html>
  <p>
  Function that approximates <i>y=1 &frasl; x</i>
  inside the interval <i>-&delta; &le; x &le; &delta;</i>.
@@ -69,7 +69,7 @@ within AixLib.Utilities.Math.Functions;
  AixLib.Utilities.Math.Functions.Examples.InverseXRegularized</a>
  for how to efficiently call this function.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  August 10, 2015, by Michael Wetter:<br/>
@@ -91,6 +91,6 @@ within AixLib.Utilities.Math.Functions;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end inverseXRegularized;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end inverseXRegularized;

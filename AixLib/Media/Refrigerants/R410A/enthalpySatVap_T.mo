@@ -1,25 +1,25 @@
 within AixLib.Media.Refrigerants.R410A;
- function enthalpySatVap_T
-   "Function that calculates the specific enthalpy of saturated R410A vapor based on temperature"
-   input Modelica.Units.SI.Temperature T "Temperature of refrigerant";
-   output Modelica.Units.SI.SpecificEnthalpy h
-     "Specific enthalpy of saturated liquid refrigerant";
- 
- protected
-   final constant Real a[:] = {406.0598, -34.78156, 262.8079, 223.8549, -1162.627, 570.6635}
-     "Coefficients for polynomial equation";
- 
-   Real x
-     "Independent variable";
- 
- algorithm
-   // Independent variable
-   x := AixLib.Utilities.Math.Functions.smoothMax(1-T/TCri, 1e-4, 5e-3)^(1/3);
-   // Pressure of saturated liquid refrigerant
-   h := 1000*AixLib.Utilities.Math.Functions.polynomial(a = a, x = x);
- 
- annotation (smoothOrder=1,
- preferredView="info",Documentation(info="<HTML>
+function enthalpySatVap_T
+  "Function that calculates the specific enthalpy of saturated R410A vapor based on temperature"
+  input Modelica.Units.SI.Temperature T "Temperature of refrigerant";
+  output Modelica.Units.SI.SpecificEnthalpy h
+    "Specific enthalpy of saturated liquid refrigerant";
+
+protected
+  final constant Real a[:] = {406.0598, -34.78156, 262.8079, 223.8549, -1162.627, 570.6635}
+    "Coefficients for polynomial equation";
+
+  Real x
+    "Independent variable";
+
+algorithm
+  // Independent variable
+  x := AixLib.Utilities.Math.Functions.smoothMax(1-T/TCri, 1e-4, 5e-3)^(1/3);
+  // Pressure of saturated liquid refrigerant
+  h := 1000*AixLib.Utilities.Math.Functions.polynomial(a = a, x = x);
+
+annotation (smoothOrder=1,
+preferredView="info",Documentation(info="<HTML>
  <p>
  Function that calculates the specific enthalpy of saturated R410A vapor based
  on temperature.
@@ -31,13 +31,13 @@ within AixLib.Media.Refrigerants.R410A;
  https://www.chemours.com/Refrigerants/en_US/assets/downloads/h64423_Suva410A_thermo_prop_si.pdf
  </a>
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  October 17, 2016, by Massimo Cimmino:<br/>
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end enthalpySatVap_T;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end enthalpySatVap_T;
