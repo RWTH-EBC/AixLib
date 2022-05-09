@@ -298,10 +298,9 @@ partial model PartialHeatPumpSystem
                                               annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
-  Fluid.Movers.SpeedControlled_y           pumSin(
+  Fluid.Movers.SpeedControlled_y pumSin(
     redeclare final package Medium = Medium_con,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    final massDynamics=massDynamics,
     final p_start=pCon_start,
     final T_start=TCon_start,
     final X_start=XCon_start,
@@ -310,16 +309,14 @@ partial model PartialHeatPumpSystem
     final init=initType,
     final addPowerToMedium=addPowerToMediumCon,
     final per=perCon,
-    final inputType=AixLib.Fluid.Types.InputType.Continuous)
-                         if use_conPum
+    final inputType=AixLib.Fluid.Types.InputType.Continuous) if use_conPum
     "Fan or pump at sink side of HP" annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-70,40})));
-  Fluid.Movers.SpeedControlled_y      pumSou(
+  Fluid.Movers.SpeedControlled_y pumSou(
     redeclare package Medium = Medium_eva,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=massDynamics,
     final p_start=pEva_start,
     final T_start=TEva_start,
     final X_start=XEva_start,
@@ -328,8 +325,7 @@ partial model PartialHeatPumpSystem
     final init=initType,
     final addPowerToMedium=addPowerToMediumEva,
     final per=perEva,
-    final inputType=AixLib.Fluid.Types.InputType.Continuous)
-                         if use_evaPum
+    final inputType=AixLib.Fluid.Types.InputType.Continuous) if use_evaPum
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
@@ -356,15 +352,15 @@ partial model PartialHeatPumpSystem
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={60,-16})));
- SecHeatGen secHeaGen(redeclare final package Medium = Medium_con,
+  SecHeatGen secHeaGen(
+    redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
     final dp_nominal=0,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
     final Q_flow_nominal=Q_flow_nominal,
-    final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics)
-                          if use_secHeaGen annotation (Placement(transformation(
+    final energyDynamics=energyDynamics) if use_secHeaGen annotation (Placement(
+        transformation(
         extent={{8,9},{-8,-9}},
         rotation=180,
         origin={40,61})));

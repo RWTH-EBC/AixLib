@@ -68,7 +68,7 @@ model GenericPipe
     final thickness=(parameterPipe.d_o - parameterPipe.d_i)/2,
     final T_start_in=T_start,
     final T_start_out=T_start,
-    final fac=fac,          nPorts=1) if pipeModel == "PlugFlowPipe"
+    final fac=fac) if pipeModel == "PlugFlowPipe"
     annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
   SimplePipe simplePipe(
     redeclare final package Medium = Medium,

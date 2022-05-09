@@ -97,14 +97,13 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
     final p_start=p_start,
     final X_start=X_start,
     final T_start=T_start,
     final C_start=C_start,
     final C_nominal=C_nominal,
-    final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
-            {86,92}})));
+    final mSenFac=mSenFac) "RC calculation core"
+    annotation (Placement(transformation(extent={{38,56},{86,92}})));
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +

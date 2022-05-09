@@ -135,10 +135,8 @@ model PVRadiationHorizontal "PV radiation and absorptance model - input: total i
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination decAng
     "Declination angle";
 
-  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle incAng(
-   azi=azi,
-   til=til,
-   lat=lat) "Incidence angle";
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle incAng(azi
+      =azi, til=til) "Incidence angle";
 
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle zenAng(
    lat=lat) "Zenith angle";

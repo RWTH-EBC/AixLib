@@ -781,11 +781,9 @@ model TestCase3_VentilationHeat
         1627200,0; 1630800,0; 1634400,0; 1638000,0])
     "Diffuse irradiation on a horizontal surface at clear sky"
     annotation (Placement(transformation(extent={{-96,36},{-82,50}})));
-  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle
-    incAng(
-    azi(displayUnit="deg") = 0,
-    til(displayUnit="deg") = 1.5707963267949,
-    lat=0.86393797973719) "Incidence angle for the window"
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle incAng(azi(
+        displayUnit="deg") = 0, til(displayUnit="deg") = 1.5707963267949)
+    "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-56,-40},{-44,-28}})));
   AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.DirectTiltedSurface
     HDirTil "Direct solar irradiation on the window"

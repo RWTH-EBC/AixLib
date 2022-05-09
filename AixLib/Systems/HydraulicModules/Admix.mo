@@ -9,8 +9,7 @@ model Admix "Admix circuit with three way valve and pump"
     annotation (choicesAllMatching=true,Placement(transformation(extent={{-120,-120},{-100,-100}})),Dialog(group="Actuators"));
                                                                            // = AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage()
 
-  Fluid.Actuators.Valves.ThreeWayTable                 valve(
-    final massDynamics=massDynamics,
+  Fluid.Actuators.Valves.ThreeWayTable valve(
     order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
@@ -23,9 +22,8 @@ model Admix "Admix circuit with three way valve and pump"
     Kv=Kv,
     dpFixed_nominal={10,10},
     final flowCharacteristics1=valveCharacteristic.a_ab,
-    final flowCharacteristics3=valveCharacteristic.b_ab)
-                                 annotation (Dialog(enable=true, group="Actuators"),
-      Placement(transformation(
+    final flowCharacteristics3=valveCharacteristic.b_ab) annotation (Dialog(
+        enable=true, group="Actuators"), Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-30,20})));

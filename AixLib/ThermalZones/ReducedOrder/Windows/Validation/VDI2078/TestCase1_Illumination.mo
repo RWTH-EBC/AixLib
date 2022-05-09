@@ -806,11 +806,9 @@ model TestCase1_Illumination
     lon=0.15009831567151)
     "Solar hour angle based on the calculations of VDI6007"
     annotation (Placement(transformation(extent={{-76,-98},{-68,-90}})));
-  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle
-    incAng(
-    azi(displayUnit="deg") = 0,
-    til(displayUnit="deg") = 1.5707963267949,
-    lat=0.86393797973719) "Solar incidence angle on the tilted window"
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle incAng(azi(
+        displayUnit="deg") = 0, til(displayUnit="deg") = 1.5707963267949)
+    "Solar incidence angle on the tilted window"
     annotation (Placement(transformation(extent={{-54,-94},{-44,-84}})));
   AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.SolarDeclinationAngleVDI6007 solarDeclinationAngleVDI
     "Solar declination angle based on the calculations of VDI6007"

@@ -29,7 +29,6 @@ model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
         rotation=180,
         origin={0,-66})));
   FixedResistances.PlugFlowPipe pipeSupply(
-    nPorts=1,
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,
@@ -40,7 +39,6 @@ model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
         rotation=270,
         origin={60,0})));
   FixedResistances.PlugFlowPipe pipeReturn(
-    nPorts=1,
     redeclare package Medium = Medium,
     dh=0.05,
     length=50,

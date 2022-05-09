@@ -133,15 +133,11 @@ package PVSystem
               -10},{-90,10}})));
     Modelica.Blocks.Math.Add G "Total irradiation on tilted surface"
       annotation (Placement(transformation(extent={{-28,12},{-8,32}})));
-    AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez    HDifTil(
-      til=til,
-      lat=Latitude,
-      azi=azi)               "Diffuse irradiation on tilted surface"
+    AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(til=til,
+        azi=azi) "Diffuse irradiation on tilted surface"
       annotation (Placement(transformation(extent={{-62,18},{-42,38}})));
-    AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface    HDirTil(
-      til=til,
-      lat=Latitude,
-      azi=azi)               "Direct irradiation on tilted surface"
+    AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(til=
+          til, azi=azi) "Direct irradiation on tilted surface"
       annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
   equation
 
