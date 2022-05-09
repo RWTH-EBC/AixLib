@@ -2,11 +2,10 @@ Admix
 Injection
 Injection2WayValve
 Pump
-SimpleConsumer
+SimpleConsumer_old
 Throttle
 ThrottlePump
 Controller
 Example
 BaseClasses
-SimpleConsumer_wPump
-SimpleConsumer_wPump_wFeedback
+SimpleConsumer
