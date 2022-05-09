@@ -1,6 +1,5 @@
 clear
 
 convertClear();
-convertClass("AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating_usePoke", {"massDynamics"}, fill("",0), true);
+
+convertClass("AixLib.Fluid.Interfaces.LumpedVolumeDeclarations", {"massDynamics"}, fill("",0), true);
