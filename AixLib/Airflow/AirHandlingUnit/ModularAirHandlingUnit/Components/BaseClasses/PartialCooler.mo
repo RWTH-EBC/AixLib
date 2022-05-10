@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
 partial model PartialCooler
   "BaseClass for cooling heat exchangers in air handling units"
 
@@ -164,11 +164,15 @@ equation
   // sepcific enthalpies
   h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
   h_airOut = cp_air * (T_airOut - 273.15) + X_airOut * (cp_steam * (T_airOut - 273.15) + r0);
-  h_Sur = cp_air * (T_Sur - 273.15) + X_Sur * (cp_steam * (T_Sur - 273.15) + r0);
 
   if not use_X_set then
     T_airOut = T_intern;
+    T_Sur=0; //added missing initialization; not used in this condition
+    X_Sur=0;
+    h_Sur=0;
+    p_satSur=0;
   else
+    h_Sur = cp_air * (T_Sur - 273.15) + X_Sur * (cp_steam * (T_Sur - 273.15) + r0); //moved to conditional statement
     (T_airIn - T_Sur)/max(X_airIn - X_Sur,0.00009) = (T_airIn - T_airOut)/max(X_airIn - X_airOut,0.00001);
     eff = (h_airIn - h_airOut)/max(h_airIn - h_Sur,0.0001);
     p_satSur = AixLib.Utilities.Psychrometrics.Functions.saturationPressure(T_Sur);
