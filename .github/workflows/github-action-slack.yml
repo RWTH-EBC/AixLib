@@ -2,7 +2,7 @@ name: github-action-slack
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 12 1 * *'
+    - cron:  '0 18 1 * *'
 
 
 jobs:
