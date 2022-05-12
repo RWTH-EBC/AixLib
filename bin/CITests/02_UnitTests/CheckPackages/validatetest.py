@@ -241,7 +241,6 @@ class ValidateTest(object):
                     wh_list_mo.append(element)
         wh_list_mo = list(set(wh_list_mo))
         for example in wh_list_mo:
-            print(f'Dont test model {example}')
             models.remove(example)
         return models
 

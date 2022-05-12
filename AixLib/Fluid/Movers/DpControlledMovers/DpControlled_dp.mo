@@ -159,19 +159,17 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     final per=per,
     final inputType=AixLib.Fluid.Types.InputType.Continuous,
     final addPowerToMedium=addPowerToMedium,
-    final nominalValuesDefineDefaultPressureCurve=
-        nominalValuesDefineDefaultPressureCurve,
+    final nominalValuesDefineDefaultPressureCurve=nominalValuesDefineDefaultPressureCurve,
     final tau=tauMov,
     final use_inputFilter=use_inputFilter,
     final riseTime=riseTime,
     final init=init,
-    final y_start=y_start,
     final dp_start=dp_start,
     final dp_nominal=dp_nominal,
     final constantHead=dp_nominal,
-    final heads=dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(
-        per.speeds, 1)},
-    final prescribeSystemPressure=prescribeSystemPressure) "Mover: pump or fan"
+    final heads=dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(per.speeds, 1)},
+    final prescribeSystemPressure=prescribeSystemPressure)
+    "Mover: pump or fan"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Modelica.Blocks.Interfaces.RealOutput P(final quantity="Power", final unit="W")
