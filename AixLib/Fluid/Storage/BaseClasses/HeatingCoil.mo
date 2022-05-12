@@ -29,8 +29,7 @@ model HeatingCoil "Heating coil for heat storage model"
     redeclare each final package Medium = Medium,
     each final allowFlowReversal=allowFlowReversal,
     each final dh=pipeHC.d_i,
-    each final v_nominal=4*m_flow_nominal/den_default/pipeHC.d_i/pipeHC.d_i/
-        Modelica.Constants.pi,
+    each final v_nominal=4*m_flow_nominal/den_default/pipeHC.d_i/pipeHC.d_i/Modelica.Constants.pi,
     each final length=lengthHC/disHC,
     each final m_flow_nominal=m_flow_nominal,
     each final m_flow_small=m_flow_small,
@@ -40,8 +39,7 @@ model HeatingCoil "Heating coil for heat storage model"
     each final rhoPip=pipeHC.d,
     each final thickness=0.5*(pipeHC.d_o - pipeHC.d_i),
     each final T_start_in=TStart,
-    each final T_start_out=TStart)
-    annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
+    each final T_start_out=TStart) annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
 
 protected
   parameter Medium.ThermodynamicState sta_default=
@@ -67,12 +65,12 @@ equation
       color={0,127,255},
       pattern=LinePattern.DashDotDot));
   for i in 1:disHC-1 loop
-    connect(pipe[i].ports_b[1], pipe[i + 1].port_a) annotation (Line(
+    connect(pipe[i].port_b, pipe[i + 1].port_a) annotation (Line(
         points={{16,0},{28,0},{28,26},{-28,26},{-28,0},{-16,0}},
         color={0,127,255},
         pattern=LinePattern.DashDotDot));
   end for;
-  connect(pipe[disHC].ports_b[1], port_b) annotation (Line(
+  connect(pipe[disHC].port_b, port_b) annotation (Line(
       points={{16,0},{100,0}},
       color={0,127,255},
       pattern=LinePattern.DashDotDot));
