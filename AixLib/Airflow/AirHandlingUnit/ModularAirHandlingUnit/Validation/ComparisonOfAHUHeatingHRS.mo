@@ -13,7 +13,6 @@ model ComparisonOfAHUHeatingHRS
     dehumidificationSet=false,
     humidificationSet=false,
     HRS=true,
-    efficiencyHRS_disabled=0,
     dp_sup(displayUnit="Pa"),
     dp_eta(displayUnit="Pa"))
               annotation (Placement(transformation(extent={{-68,20},{26,56}})));
@@ -33,7 +32,6 @@ model ComparisonOfAHUHeatingHRS
     heatRecovery=true,
     use_PhiSet=false,
     Twat=273.15,
-    efficiencyHRS_disabled=0,
     dp_sup(displayUnit="Pa"),
     dp_eta(displayUnit="Pa"),
     redeclare model humidifier = Components.SprayHumidifier)
