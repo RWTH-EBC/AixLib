@@ -1,7 +1,7 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler;
 model ModularBoiler_wFeedback
   extends AixLib.Systems.ModularEnergySystems.Modules.BaseClasses.ModularBoiler_base;
-  parameter Boolean hasFeedback = false "circuit has Feedback" annotation (Dialog(group = "Feedback"), choices(checkBox = true));
+  parameter Boolean hasFeedback=false   "circuit has Feedback" annotation (Dialog(group = "Feedback"), choices(checkBox = true));
 
   parameter Real k_ControlBoilerValve(min=Modelica.Constants.small)=1 "Gain of controller"
     annotation (Dialog(enable = hasFeedback, group = "Feedback"));
