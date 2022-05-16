@@ -6,8 +6,6 @@ partial model PartialHuman "Partial model for internal gains of humans"
     gainSurfaces(final k=specificPersons*roomArea*surfaceAreaOnePersion));
   //Internal Gains People
   parameter Real specificPersons(unit="1/(m.m)") = 0.05 "Specific persons per square metre room area" annotation(Dialog(descriptionLabel = true));
-  parameter Real ratioConvectiveHeat=0.5
-    "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area roomArea "Area of room" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.HeatFlowRate specificHeatPerPerson = 70
     "Specific heat output per person";
