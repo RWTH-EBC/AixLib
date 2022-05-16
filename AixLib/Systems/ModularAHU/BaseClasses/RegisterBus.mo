@@ -17,6 +17,7 @@ expandable connector RegisterBus "Data bus for modular ahu registers"
   \"modelica://AixLib/Systems/HydraulicModules/BaseClasses/HydraulicBus.mo\">
   HydraulicBus</a>.
 </p>
+</html>", revisions="<html>
 <ul>
   <li>January 23, 2018, by Alexander Kümpel:<br/>
     First implementation.

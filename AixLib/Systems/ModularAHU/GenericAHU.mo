@@ -418,20 +418,20 @@ equation
     annotation (Line(points={{180,80},{160,80}}, color={0,127,255}));
   connect(senRelHumSup1.port_b, fanRet.port_a)
     annotation (Line(points={{118,80},{100,80}}, color={0,127,255}));
-  connect(fanRet.dp_in, genericAHUBus.dpFanRetSet) annotation (Line(points={{90,92},
+  connect(fanRet.dp_in, genericAHUBus.dpFanEtaSet) annotation (Line(points={{90,92},
           {90,120.09},{0.09,120.09}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fanRet.dp_actual, genericAHUBus.dpFanRetMea) annotation (Line(points={{79,85},
+  connect(fanRet.dp_actual, genericAHUBus.dpFanEtaMea) annotation (Line(points={{79,85},
           {72,85},{72,120.09},{0.09,120.09}},         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fanRet.P, genericAHUBus.powerFanRetMea) annotation (Line(points={{79,89},
-          {79,120.09},{0.09,120.09}}, color={0,0,127}), Text(
+  connect(fanRet.P, genericAHUBus.powerFanEtaMea) annotation (Line(points={{79,89},
+          {79,120},{0,120}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -460,7 +460,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senRelHumSup1.phi, genericAHUBus.relHumRetMea) annotation (Line(
+  connect(senRelHumSup1.phi, genericAHUBus.relHumEtaMea) annotation (Line(
         points={{123.94,86.6},{123.94,102},{124,102},{124,120},{0.09,120},{0.09,
           120.09}},                                                   color={0,0,
           127}), Text(
@@ -498,13 +498,13 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(flapRet.y, genericAHUBus.flapRetSet) annotation (Line(points={{190,92},
+  connect(flapRet.y, genericAHUBus.flapEtaSet) annotation (Line(points={{190,92},
           {190,120.09},{0.09,120.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(flapRet.y_actual, genericAHUBus.flapRetMea) annotation (Line(points={{185,87},
+  connect(flapRet.y_actual, genericAHUBus.flapEtaMea) annotation (Line(points={{185,87},
           {185,108},{184,108},{184,120},{92,120},{92,120.09},{0.09,120.09}},
                                                                    color={0,0,127}),
       Text(
@@ -541,7 +541,7 @@ equation
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senVolFlo.V_flow, genericAHUBus.V_flow_RetAirMea) annotation (Line(
+  connect(senVolFlo.V_flow, genericAHUBus.V_flow_EtaMea) annotation (Line(
         points={{-110,91},{-110,120.09},{0.09,120.09}},           color={0,0,127}),
       Text(
       string="%second",
@@ -604,7 +604,7 @@ equation
   connect(senTSup.T, PT1_airIn.u)
     annotation (Line(points={{206,8.8},{206,15.2}},
                                                   color={0,0,127}));
-  connect(PT1_airIn.y, genericAHUBus.TSupAirMea) annotation (Line(points={{206,
+  connect(PT1_airIn.y, genericAHUBus.TSupMea) annotation (Line(points={{206,
           24.4},{206,52},{234,52},{234,120},{116,120},{116,120.09},{0.09,120.09}},
                                                         color={0,0,127}), Text(
       string="%second",
@@ -613,7 +613,7 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(senTOda.T, PT1_airIn1.u) annotation (Line(points={{-204,11},{-204,
           21.2},{-206,21.2}}, color={0,0,127}));
-  connect(PT1_airIn1.y, genericAHUBus.TOutsAirMea) annotation (Line(points={{-206,
+  connect(PT1_airIn1.y, genericAHUBus.TOdaMea) annotation (Line(points={{-206,
           30.4},{-206,52},{-242,52},{-242,120},{0.09,120},{0.09,120.09}},
                                                                        color={0,
           0,127}), Text(
@@ -623,7 +623,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(senTExh.T, PT1_airIn2.u) annotation (Line(points={{-150,91},{-150,
           101.2}},               color={0,0,127}));
-  connect(PT1_airIn2.y, genericAHUBus.TExhAirMea) annotation (Line(points={{-150,
+  connect(PT1_airIn2.y, genericAHUBus.TEhaMea) annotation (Line(points={{-150,
           110.4},{-150,120.09},{0.09,120.09}},      color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -631,7 +631,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(senTRet.T, PT1_airIn3.u) annotation (Line(points={{150,91},{150,97.2}},
                              color={0,0,127}));
-  connect(PT1_airIn3.y, genericAHUBus.TRetAirMea) annotation (Line(points={{150,
+  connect(PT1_airIn3.y, genericAHUBus.TEtaMea) annotation (Line(points={{150,
           106.4},{150,120.09},{0.09,120.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,

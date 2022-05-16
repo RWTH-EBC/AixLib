@@ -399,9 +399,10 @@ equation
   with a first order element to simulate the dynamic behavior of the
   sensors.
 </p>
+</html>", revisions="<html>
 <ul>
-  <li>Januar 09, 2019, by Alexander Kümpel:<br/>
-    First implementation
+  <li>January 23, 2018, by Alexander Kümpel:<br/>
+    First implementation.
   </li>
 </ul>
 </html>"));

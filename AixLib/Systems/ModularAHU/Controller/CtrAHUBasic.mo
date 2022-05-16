@@ -61,7 +61,7 @@ model CtrAHUBasic "Simple controller for AHU"
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TFlowSet) if not useExternalTset
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
-    "Connector of second Real input signal" annotation (Placement(
+    "Connector of set temperature, if given externally" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
           extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Sources.Constant TFrostProtection(final k=TFrostProtect) if
@@ -167,7 +167,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ConstFlap.y, genericAHUBus.flapRetSet) annotation (Line(points={{32.6,
+  connect(ConstFlap.y, genericAHUBus.flapEtaSet) annotation (Line(points={{32.6,
           -14},{100.05,-14},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -202,28 +202,28 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID_VflowRet.u_m, genericAHUBus.V_flow_RetAirMea) annotation (Line(
-        points={{-10,-92},{100,-92},{100,-50},{100.05,-50},{100.05,0.05}},
+  connect(PID_VflowRet.u_m, genericAHUBus.V_flow_EtaMea) annotation (Line(
+        points={{-10,-92},{100,-92},{100,-50},{100,0.05},{100.05,0.05}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID_VflowRet.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{1,
-          -80},{100.05,-80},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(PID_VflowRet.y, genericAHUBus.dpFanEtaSet) annotation (Line(points={{1,-80},
+          {100.05,-80},{100.05,0.05}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrRh.TMea, genericAHUBus.TSupAirMea) annotation (Line(points={{10,8},
-          {10,0},{100.05,0},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(ctrRh.TMea, genericAHUBus.TSupMea) annotation (Line(points={{10,8},{10,
+          0},{100.05,0},{100.05,0.05}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   if not useTwoFanCtr then
-    connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points={
-            {21,-50},{100.05,-50},{100.05,0.05}}, color={0,0,127}), Text(
+    connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{21,-50},
+            {100,-50},{100,0}},                   color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
