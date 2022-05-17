@@ -15,7 +15,7 @@ model SimpleConsumer_base
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0.001)
   "Nominal mass flow rate";
   parameter Modelica.SIunits.Volume V=0.001 "Volume of water";
-  parameter Modelica.SIunits.PressureDifference dp_nominalPumpConsumer
+  parameter Modelica.SIunits.PressureDifference dp_nominalPumpConsumer=500
     annotation (Dialog(enable = hasPump, group = "Pump"));
   final parameter Modelica.SIunits.VolumeFlowRate Vflow_nom = m_flow_nominal/rho_default;
   parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
