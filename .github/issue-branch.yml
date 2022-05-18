@@ -2,7 +2,7 @@
 branchName: 'Issue${issue.number}_${issue.title}'
 silent: false
 autoCloseIssue: true
-gitSafeReplacementChar: '-'
+gitSafeReplacementChar: '_'
 defaultBranch: 'development'
 
 branches:
