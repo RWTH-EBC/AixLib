@@ -55,10 +55,6 @@ equation
           points={{115,-255},{0,-255}},
           color={0,128,255},
           visible=not allowFlowReversal),
-        Text(
-          extent={{-89,-284},{211,-324}},
-          lineColor={0,0,255},
-          textString="%name"),
         Polygon(
           points={{80,-294},{120,-309},{80,-324},{80,-294}},
           lineColor={0,128,255},
