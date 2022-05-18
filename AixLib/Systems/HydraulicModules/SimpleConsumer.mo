@@ -52,7 +52,7 @@ model SimpleConsumer
         origin={60,120}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
-        origin={80,100})));
+        origin={60,100})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow if
     functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},

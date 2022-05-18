@@ -104,7 +104,7 @@ public
         rotation=180,
         origin={-22,-30})));
   Modelica.Blocks.Sources.RealExpression TSet_Return(y=demandType*T_return) if
-       hasPump
+       hasPump and fixed_return_T
     annotation (Placement(transformation(extent={{-54,-40},{-34,-20}})));
 
   Modelica.Blocks.Continuous.LimPID PIValve(
@@ -119,13 +119,39 @@ public
         extent={{-6,6},{6,-6}},
         rotation=180,
         origin={-52,32})));
-  Modelica.Blocks.Sources.RealExpression TSet_Flow(y=demandType*T_flow) if hasFeedback
+  Modelica.Blocks.Sources.RealExpression TSet_Flow(y=demandType*T_flow) if hasFeedback and fixed_return_T
     annotation (Placement(transformation(extent={{-20,22},{-40,42}})));
   Modelica.Blocks.Math.Gain gain2(k=demandType) if hasFeedback
     "Used to reverse direction of operation of controller"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=90,
         origin={-52,20})));
+  Modelica.Blocks.Math.Gain gain_Tf(k=demandType) if hasPump and not fixed_flow_T     "Used to reverse direction of operation of controller" annotation (
+      Placement(transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=180,
+        origin={-74,-60})));
+  Modelica.Blocks.Math.Gain gain_Tr(k=demandType) if hasFeedback and not fixed_return_T     "Used to reverse direction of operation of controller" annotation (
+      Placement(transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=180,
+        origin={-74,-80})));
+  Modelica.Blocks.Interfaces.RealInput T_Flow if hasPump and not fixed_flow_T annotation (Placement(
+        transformation(
+        extent={{-14,-14},{14,14}},
+        rotation=0,
+        origin={-106,-60}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={-100,-40})));
+  Modelica.Blocks.Interfaces.RealInput T_Return if hasFeedback and not fixed_return_T annotation (Placement(
+        transformation(
+        extent={{-14,-14},{14,14}},
+        rotation=0,
+        origin={-106,-80}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={-110,-90})));
 equation
 
   if hasPump then
@@ -135,8 +161,14 @@ equation
       annotation (Line(points={{-12,0},{-6,0}}, color={0,127,255}));
     connect(PIPump.u_m,gain. y) annotation (Line(points={{-22,-37.2},{-22,-40},{
             -6.4,-40}},     color={0,0,127}));
-    connect(TSet_Return.y,PIPump. u_s) annotation (Line(points={{-33,-30},{-29.2,
+    if fixed_return_T then
+      connect(TSet_Return.y,PIPump. u_s) annotation (Line(points={{-33,-30},{-29.2,
             -30}},      color={0,0,127}));
+    else
+      connect(T_Return,gain_Tr. u)   annotation (Line(points={{-106,-80},{-81.2,-80}}, color={0,0,127}));
+      connect(gain_Tr.y, PIPump.u_s) annotation (Line(points={{-67.4,-80},{-29.2,-80},
+          {-29.2,-30}}, color={0,0,127}));
+    end if;
     connect(gain.u, senTReturn.T)
       annotation (Line(points={{2.8,-40},{68,-40},{68,-11}}, color={0,0,127}));
     connect(PIPump.y, fan.y)
@@ -148,17 +180,24 @@ equation
   if hasFeedback then
     connect(port_a, val.port_1)
       annotation (Line(points={{-100,0},{-90,0}}, color={0,127,255}));
-    connect(volume.ports[2], val.port_3) annotation (Line(points={{32,0},{32,-20},
-            {-80,-20},{-80,-10}},
+    connect(volume.ports[2], val.port_3) annotation (Line(points={{32,0},{32,-18},
+            {-80,-18},{-80,-10}},
                                 color={0,127,255}));
     connect(val.port_2, senTFlow.port_a)
       annotation (Line(points={{-70,0},{-62,0}}, color={0,127,255}));
-    connect(PIValve.u_s,TSet_Flow. y)
-      annotation (Line(points={{-44.8,32},{-41,32}}, color={0,0,127}));
+    if fixed_flow_T then
+      connect(PIValve.u_s,TSet_Flow. y)
+        annotation (Line(points={{-44.8,32},{-41,32}}, color={0,0,127}));
+    else
+      connect(T_Flow,gain_Tf. u)   annotation (Line(points={{-106,-60},{-81.2,-60}}, color={0,0,127}));
+      connect(gain_Tf.y, PIValve.u_s) annotation (Line(points={{-67.4,-60},{-60,-60},
+          {-60,-40},{-100,-40},{-100,44},{-44.8,44},{-44.8,32}}, color={0,0,127}));
+    end if;
     connect(gain2.y,PIValve. u_m)
       annotation (Line(points={{-52,24.4},{-52,24.8}}, color={0,0,127}));
     connect(gain2.u, senTFlow.T)
       annotation (Line(points={{-52,15.2},{-52,11}},          color={0,0,127}));
+
   else
     connect(port_a, senTFlow.port_a);
   end if;
@@ -169,12 +208,9 @@ equation
           {89,-8.88178e-16},{89,0},{100,0}}, color={0,127,255}));
   connect(senTFlow.port_b, senMasFlo.port_a)
     annotation (Line(points={{-42,0},{-32,0}}, color={0,127,255}));
-
-
-
-
   connect(PIValve.y, val.y)
     annotation (Line(points={{-58.6,32},{-80,32},{-80,12}}, color={0,0,127}));
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
           points={{20,-124},{60,-139},{20,-154},{20,-124}},
