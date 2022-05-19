@@ -15,7 +15,6 @@ package Examples "Holds examples for the modular energy system units"
       PLR(y=1));
     Modules.ModularHeatPump.ModularHeatPumpNew
                                             modularHeatPumpNew(
-      dTConFix=false,
       HighTemp=true,
       THotNom=333.15,
       TSourceNom=303.15,
