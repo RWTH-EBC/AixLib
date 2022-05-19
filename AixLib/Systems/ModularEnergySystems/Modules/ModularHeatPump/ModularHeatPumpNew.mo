@@ -60,6 +60,11 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     use_autoCalc=true,
     Q_useNominal=QNom,
     use_refIne=true,
+<<<<<<< HEAD
+=======
+    refIneFre_constant=5,
+    nthOrder=3,
+>>>>>>> issue1147_moduleEnergySystem
     useBusConnectorOnly=true,
     dpCon_nominal=25000,
     use_conCap=false,
@@ -219,10 +224,21 @@ protected
 
 equation
 
+<<<<<<< HEAD
   connect(mFlowEva.y, division1.u2) annotation (Line(points={{81.9,-36},{61.6,
           -36},{61.6,-36.8}},       color={0,0,127}));
   connect(senTCold.port_b, heatPump.port_a1) annotation (Line(points={{-28,0},{
           -8,0}},             color={0,127,255}));
+=======
+  connect(heatPump.port_b1, senTHot.port_a)
+    annotation (Line(points={{10,0},{50,0}},         color={0,127,255}));
+
+  connect(mFlowEva.y, division1.u2) annotation (Line(points={{70.1,-37},{64,-37},
+          {64,-36},{61.6,-36},{61.6,-36.8}},
+                                    color={0,0,127}));
+  connect(senTCold.port_b, heatPump.port_a1) annotation (Line(points={{-28,0},{-10,
+          0}},                color={0,127,255}));
+>>>>>>> issue1147_moduleEnergySystem
   connect(sigBus, heatPump.sigBus) annotation (Line(
       points={{-5,99},{-5,46},{-24,46},{-24,-9.9},{-7.9,-9.9}},
       color={255,204,51},
@@ -300,6 +316,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+<<<<<<< HEAD
   connect(port_a, port_a)
     annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
   connect(senTHot1.port_b, port_b) annotation (Line(points={{78,34},{86,34},{86,
@@ -316,10 +333,16 @@ equation
           {26,20},{144,20},{144,44},{124,44}}, color={0,0,127}));
   connect(mFlowRelWater.y, sigBus.mFlowWaterRel) annotation (Line(points={{101,38},
           {72,38},{72,40},{-4.925,40},{-4.925,99.085}}, color={0,0,127}), Text(
+=======
+
+  connect(mode.y, sigBus.modeSet) annotation (Line(points={{27.2,99},{14,99},{
+          14,80},{8,80},{8,78},{-5,78},{-5,99}}, color={255,0,255}), Text(
+>>>>>>> issue1147_moduleEnergySystem
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+<<<<<<< HEAD
   connect(senTHot.T, control.THot)
     annotation (Line(points={{46,8.8},{46,64},{-38,64}}, color={0,0,127}));
   connect(senTCold.port_a, fan.port_b)
@@ -339,6 +362,8 @@ equation
         points={{12,30},{54,30},{54,34},{62,34}}, color={0,127,255}));
   connect(senTHot.port_b, heatPumpHotWaterFeedback.port_a1) annotation (Line(
         points={{54,0},{60,0},{60,30},{-8,30}}, color={0,127,255}));
+=======
+>>>>>>> issue1147_moduleEnergySystem
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},
