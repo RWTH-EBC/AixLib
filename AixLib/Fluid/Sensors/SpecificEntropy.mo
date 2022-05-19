@@ -1,34 +1,34 @@
 within AixLib.Fluid.Sensors;
-model SpecificEntropy "Ideal one port specific entropy sensor"
-  extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
-  extends Modelica.Icons.RoundSensor;
-  Modelica.Blocks.Interfaces.RealOutput s(final quantity="SpecificEntropy",
-                                          final unit="J/(kg.K)")
-    "Specific entropy in port medium"
-    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-
-equation
-  s = Medium.specificEntropy(state=Medium.setState_phX(
-          p=port.p, h=inStream(port.h_outflow), X=inStream(port.Xi_outflow)));
-annotation (defaultComponentName="senSpeEnt",
-  Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-        graphics={
-        Line(points={{0,-70},{0,-100}}, color={0,0,127}),
-        Text(
-          extent={{-150,80},{150,120}},
-          textString="%name",
-          textColor={0,0,255}),
-        Text(
-          extent={{156,-24},{54,-54}},
-          textColor={0,0,0},
-          textString="s"),
-        Line(points={{70,0},{100,0}}, color={0,0,127}),
-        Ellipse(extent={{-70,70},{70,-70}}, lineColor={255,0,0}),
-        Text(
-          extent={{180,90},{60,40}},
-          textColor={0,0,0},
-          textString=DynamicSelect("", String(s, format=".0f")))}),
-  Documentation(info="<html>
+ model SpecificEntropy "Ideal one port specific entropy sensor"
+   extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
+   extends Modelica.Icons.RoundSensor;
+   Modelica.Blocks.Interfaces.RealOutput s(final quantity="SpecificEntropy",
+                                           final unit="J/(kg.K)")
+     "Specific entropy in port medium"
+     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+ 
+ equation
+   s = Medium.specificEntropy(state=Medium.setState_phX(
+           p=port.p, h=inStream(port.h_outflow), X=inStream(port.Xi_outflow)));
+ annotation (defaultComponentName="senSpeEnt",
+   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+         graphics={
+         Line(points={{0,-70},{0,-100}}, color={0,0,127}),
+         Text(
+           extent={{-150,80},{150,120}},
+           textString="%name",
+           textColor={0,0,255}),
+         Text(
+           extent={{156,-24},{54,-54}},
+           textColor={0,0,0},
+           textString="s"),
+         Line(points={{70,0},{100,0}}, color={0,0,127}),
+         Ellipse(extent={{-70,70},{70,-70}}, lineColor={255,0,0}),
+         Text(
+           extent={{180,90},{60,40}},
+           textColor={0,0,0},
+           textString=DynamicSelect("", String(s, format=".0f")))}),
+   Documentation(info="<html>
  <p>
  This model outputs the specific entropy of the fluid connected to its port.
  The sensor is ideal, i.e., it does not influence the fluid.
@@ -44,7 +44,7 @@ annotation (defaultComponentName="senSpeEnt",
  in a system model.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  September 21, 2020, by Michael Wetter:<br/>
@@ -63,6 +63,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end SpecificEntropy;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end SpecificEntropy;

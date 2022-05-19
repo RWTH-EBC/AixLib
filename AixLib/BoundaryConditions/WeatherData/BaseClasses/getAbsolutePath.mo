@@ -1,11 +1,11 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses;
-pure function getAbsolutePath "Gets the absolute path of a URI"
-  extends Modelica.Icons.Function;
-  input String uri "A URI";
-  output String path "The absolute path of the file pointed to by the URI";
-algorithm
-  path := Modelica.Utilities.Files.loadResource(uri);
-  annotation (Documentation(info="<html>
+ pure function getAbsolutePath "Gets the absolute path of a URI"
+   extends Modelica.Icons.Function;
+   input String uri "A URI";
+   output String path "The absolute path of the file pointed to by the URI";
+ algorithm
+   path := Modelica.Utilities.Files.loadResource(uri);
+   annotation (Documentation(info="<html>
  <p>
  The function returns the absolute path of a
  uniform resource identifier (URI) or local file name.
@@ -19,7 +19,7 @@ algorithm
  to change the current working directory while still
  being able to read the files.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  December 11, 2021, by Michael Wetter:<br/>
@@ -53,6 +53,6 @@ algorithm
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end getAbsolutePath;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end getAbsolutePath;

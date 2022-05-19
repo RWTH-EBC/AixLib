@@ -1,23 +1,23 @@
 within AixLib.Fluid.FMI.Interfaces;
-connector FluidProperties "Type definition for fluid properties"
-  replaceable package Medium =
-    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-      annotation (choices(
-        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-        choice(redeclare package Medium = AixLib.Media.Water "Water"),
-        choice(redeclare package Medium =
-            AixLib.Media.Antifreeze.PropyleneGlycolWater (
-          property_T=293.15,
-          X_a=0.40)
-          "Propylene glycol water, 40% mass fraction")));
-
-
-  Medium.Temperature T "Temperature";
-  AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w
-    if Medium.nXi > 0 "Water vapor mass fractions per kg total air";
-  Medium.ExtraProperty C[Medium.nC] "Properties c_i/m";
-
-  annotation (Documentation(info="<html>
+ connector FluidProperties "Type definition for fluid properties"
+   replaceable package Medium =
+     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+       annotation (choices(
+         choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+         choice(redeclare package Medium = AixLib.Media.Water "Water"),
+         choice(redeclare package Medium =
+             AixLib.Media.Antifreeze.PropyleneGlycolWater (
+           property_T=293.15,
+           X_a=0.40)
+           "Propylene glycol water, 40% mass fraction")));
+ 
+ 
+   Medium.Temperature T "Temperature";
+   AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w
+     if Medium.nXi > 0 "Water vapor mass fractions per kg total air";
+   Medium.ExtraProperty C[Medium.nC] "Properties c_i/m";
+ 
+   annotation (Documentation(info="<html>
  <p>
  This is a connector that declares the following fluid properties:
  </p>
@@ -51,7 +51,7 @@ connector FluidProperties "Type definition for fluid properties"
  is reversed whether the properties are in inlet or
  outlet connector.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  January 18, 2019, by Jianjun Hu:<br/>
@@ -68,6 +68,6 @@ connector FluidProperties "Type definition for fluid properties"
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end FluidProperties;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end FluidProperties;

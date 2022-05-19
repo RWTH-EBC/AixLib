@@ -1,17 +1,17 @@
 within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses;
-partial record PipeDataBaseDefinition
-  "BaseClass for experimental data from the pipe test bench"
-    extends Modelica.Icons.Record;
-      parameter Integer nCol "Number of columns in the data file";
-      parameter String filNam
-      "Name of data file";
-      annotation(Documentation(info="<html>
+ partial record PipeDataBaseDefinition
+   "BaseClass for experimental data from the pipe test bench"
+     extends Modelica.Icons.Record;
+       parameter Integer nCol "Number of columns in the data file";
+       parameter String filNam
+       "Name of data file";
+       annotation(Documentation(info="<html>
  <p>
  Defines basic record of experimental data with <code>n</code> measured points.
  The first column corresponds to <code>time</code>, further columns to measured data.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  March 7, 2020, by Michael Wetter:<br/>
@@ -38,6 +38,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end PipeDataBaseDefinition;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end PipeDataBaseDefinition;

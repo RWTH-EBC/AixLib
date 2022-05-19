@@ -1,19 +1,19 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples;
-model BoreholeOneUTube "Test for the single U-tube borehole model"
-  extends Modelica.Icons.Example;
-  extends
-    AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole(
-      redeclare
-      AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube
-      borHol(
-        energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
-
-  annotation (
-    __Dymola_Commands( file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/Examples/BoreholeOneUTube.mos"
-        "Simulate and plot"),
-    Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
-            100}})),
-    Documentation(info="<html>
+ model BoreholeOneUTube "Test for the single U-tube borehole model"
+   extends Modelica.Icons.Example;
+   extends
+     AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole(
+       redeclare
+       AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube
+       borHol(
+         energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
+ 
+   annotation (
+     __Dymola_Commands( file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/Examples/BoreholeOneUTube.mos"
+         "Simulate and plot"),
+     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
+             100}})),
+     Documentation(info="<html>
  <p>
  This example illustrates the use of the
  <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube\">
@@ -21,7 +21,7 @@ model BoreholeOneUTube "Test for the single U-tube borehole model"
  model. It simulates the behavior of a borehole with a prescribed
  borehole wall temperature boundary condition.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  July 10, 2018, by Alex Laferri&egrave;re:<br/>
@@ -34,6 +34,6 @@ model BoreholeOneUTube "Test for the single U-tube borehole model"
  </li>
  </ul>
  </html>"),
-    experiment(Tolerance=1e-6, StopTime=360000),
-  __Dymola_LockedEditing="Model from IBPSA");
-end BoreholeOneUTube;
+     experiment(Tolerance=1e-6, StopTime=360000), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end BoreholeOneUTube;

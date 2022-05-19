@@ -1,13 +1,13 @@
 within AixLib.Utilities.Math;
-block Polynomial "Polynominal function"
-  extends Modelica.Blocks.Interfaces.SISO;
- parameter Real a[:] "Coefficients";
-equation
-  y = AixLib.Utilities.Math.Functions.polynomial(a=a, x=u);
-  annotation (Documentation(info="<html>
+ block Polynomial "Polynominal function"
+   extends Modelica.Blocks.Interfaces.SISO;
+  parameter Real a[:] "Coefficients";
+ equation
+   y = AixLib.Utilities.Math.Functions.polynomial(a=a, x=u);
+   annotation (Documentation(info="<html>
  <p>This block computes a polynomial of arbitrary order. The polynomial has the form </p>
  <p align=\"center\"><i>y = a1 + a2 x + a3 x2 + ... </i></p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  September 21, 2021, by Michael Wetter:<br/>
@@ -20,9 +20,9 @@ equation
  First implementation.
  </li>
  </ul>
- </html>"),Icon(graphics={   Text(
-          extent={{-90,38},{90,-34}},
-          textColor={160,160,164},
-          textString="polynominal()")}),
-  __Dymola_LockedEditing="Model from IBPSA");
-end Polynomial;
+ </html>"), Icon(graphics={   Text(
+           extent={{-90,38},{90,-34}},
+           textColor={160,160,164},
+           textString="polynominal()")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end Polynomial;

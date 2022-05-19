@@ -1,32 +1,32 @@
 within AixLib.Utilities.Psychrometrics.Functions.BaseClasses;
-function der_sublimationPressureIce
-  "Derivative of function sublimationPressureIce"
-    extends Modelica.Icons.Function;
-  input Modelica.Units.SI.Temperature TSat(displayUnit="degC", nominal=300)
-    "Saturation temperature";
-    input Real dTSat(unit="K/s") "Sublimation temperature derivative";
-    output Real psat_der(unit="Pa/s") "Sublimation pressure derivative";
-protected
-  Modelica.Units.SI.Temperature TTriple=273.16 "Triple point temperature";
-  Modelica.Units.SI.AbsolutePressure pTriple=611.657 "Triple point pressure";
-    Real r1=TSat/TTriple "Common subexpression 1";
-    Real r1_der=dTSat/TTriple "Derivative of common subexpression 1";
-    Real a[2]={-13.9281690,34.7078238} "Coefficients a[:]";
-    Real n[2]={-1.5,-1.25} "Coefficients n[:]";
-algorithm
-    psat_der := exp(a[1] - a[1]*r1^n[1] + a[2] - a[2]*r1^n[2])*pTriple*(-(a[1]
-      *(r1^(n[1] - 1)*n[1]*r1_der)) - (a[2]*(r1^(n[2] - 1)*n[2]*r1_der)));
-    annotation (
-      Inline=false,
-      smoothOrder=5,
-      Documentation(info="<html>
+ function der_sublimationPressureIce
+   "Derivative of function sublimationPressureIce"
+     extends Modelica.Icons.Function;
+   input Modelica.Units.SI.Temperature TSat(displayUnit="degC", nominal=300)
+     "Saturation temperature";
+     input Real dTSat(unit="K/s") "Sublimation temperature derivative";
+     output Real psat_der(unit="Pa/s") "Sublimation pressure derivative";
+ protected
+   Modelica.Units.SI.Temperature TTriple=273.16 "Triple point temperature";
+   Modelica.Units.SI.AbsolutePressure pTriple=611.657 "Triple point pressure";
+     Real r1=TSat/TTriple "Common subexpression 1";
+     Real r1_der=dTSat/TTriple "Derivative of common subexpression 1";
+     Real a[2]={-13.9281690,34.7078238} "Coefficients a[:]";
+     Real n[2]={-1.5,-1.25} "Coefficients n[:]";
+ algorithm
+     psat_der := exp(a[1] - a[1]*r1^n[1] + a[2] - a[2]*r1^n[2])*pTriple*(-(a[1]
+       *(r1^(n[1] - 1)*n[1]*r1_der)) - (a[2]*(r1^(n[2] - 1)*n[2]*r1_der)));
+     annotation (
+       Inline=false,
+       smoothOrder=5,
+       Documentation(info="<html>
  <p>
  Derivative of function
  <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce\">
  AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce</a>.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  September 12, 2020, by Michael Wetter:<br/>
@@ -40,6 +40,6 @@ revisions="<html>
  First implementation, moved from <code>AixLib.Media</code>.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end der_sublimationPressureIce;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end der_sublimationPressureIce;

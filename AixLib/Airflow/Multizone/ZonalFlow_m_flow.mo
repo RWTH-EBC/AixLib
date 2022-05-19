@@ -1,17 +1,17 @@
 within AixLib.Airflow.Multizone;
-model ZonalFlow_m_flow "Zonal flow with input air change per second"
-  extends AixLib.Airflow.Multizone.BaseClasses.ZonalFlow;
-   Modelica.Blocks.Interfaces.RealInput mAB_flow "Mass flow rate from A to B, positive if flow from port_a1 to port_b1"
-    annotation (Placement(transformation(extent={{-120,90},{-100,110}})));
-  Modelica.Blocks.Interfaces.RealInput mBA_flow "Mass flow rate from B to A, positive if flow from port_a2 to port_b2"
-    annotation (Placement(transformation(extent={{120,-110},{100,-90}})));
-
-equation
-  port_a1.m_flow = mAB_flow;
-  port_a2.m_flow = mBA_flow;
-
-  annotation (defaultComponentName="floExc",
-Documentation(info="<html>
+ model ZonalFlow_m_flow "Zonal flow with input air change per second"
+   extends AixLib.Airflow.Multizone.BaseClasses.ZonalFlow;
+    Modelica.Blocks.Interfaces.RealInput mAB_flow "Mass flow rate from A to B, positive if flow from port_a1 to port_b1"
+     annotation (Placement(transformation(extent={{-120,90},{-100,110}})));
+   Modelica.Blocks.Interfaces.RealInput mBA_flow "Mass flow rate from B to A, positive if flow from port_a2 to port_b2"
+     annotation (Placement(transformation(extent={{120,-110},{100,-90}})));
+ 
+ equation
+   port_a1.m_flow = mAB_flow;
+   port_a2.m_flow = mBA_flow;
+ 
+   annotation (defaultComponentName="floExc",
+ Documentation(info="<html>
  <p>
  This model computes the air exchange between volumes.
  </p>
@@ -21,7 +21,7 @@ Documentation(info="<html>
  <code>port_a2</code> to <code>port_b2</code>.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  August 18, 2014, by Michael Wetter:<br/>
@@ -36,6 +36,6 @@ revisions="<html>
  Implemented first version.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end ZonalFlow_m_flow;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end ZonalFlow_m_flow;

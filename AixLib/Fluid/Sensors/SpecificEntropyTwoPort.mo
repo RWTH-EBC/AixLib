@@ -1,76 +1,76 @@
 within AixLib.Fluid.Sensors;
-model SpecificEntropyTwoPort "Ideal two port sensor for the specific entropy"
-  extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
-  extends Modelica.Icons.RoundSensor;
-  parameter Modelica.Units.SI.SpecificEntropy s_start=
-      Medium.specificEntropy_pTX(
-      p=Medium.p_default,
-      T=Medium.T_default,
-      X=Medium.X_default) "Initial or guess value of output (= state)"
-    annotation (Dialog(group="Initialization"));
-  Modelica.Blocks.Interfaces.RealOutput s(final quantity="SpecificEntropy",
-                                          final unit="J/(kg.K)",
-                                          start=s_start)
-    "Specific entropy of the passing fluid"
-    annotation (Placement(transformation(
-        origin={0,110},
-        extent={{10,-10},{-10,10}},
-        rotation=270)));
-protected
-  Modelica.Units.SI.SpecificEntropy sMed(start=s_start)
-    "Medium entropy to which the sensor is exposed";
-  Medium.SpecificEntropy s_a_inflow
-    "Specific entropy of inflowing fluid at port_a";
-  Medium.SpecificEntropy s_b_inflow
-    "Specific entropy of inflowing fluid at port_b, or s_a_inflow if uni-directional flow";
-initial equation
-  if dynamic then
-    if initType == Modelica.Blocks.Types.Init.SteadyState then
-      der(s) = 0;
-    elseif initType == Modelica.Blocks.Types.Init.InitialState or
-           initType == Modelica.Blocks.Types.Init.InitialOutput then
-      s = s_start;
-    end if;
-  end if;
-equation
-  if allowFlowReversal then
-     s_a_inflow = Medium.specificEntropy(state=
-                    Medium.setState_phX(p=port_b.p, h=port_b.h_outflow, X=port_b.Xi_outflow));
-     s_b_inflow = Medium.specificEntropy(state=
-                    Medium.setState_phX(p=port_a.p, h=port_a.h_outflow, X=port_a.Xi_outflow));
-     sMed = Modelica.Fluid.Utilities.regStep(
-           x=port_a.m_flow,
-           y1=s_a_inflow,
-           y2=s_b_inflow,
-           x_small=m_flow_small);
-  else
-     sMed = Medium.specificEntropy(state=
-           Medium.setState_phX(p=port_b.p, h=port_b.h_outflow, X=port_b.Xi_outflow));
-     s_a_inflow = sMed;
-     s_b_inflow = sMed;
-  end if;
-  // Output signal of sensor
-  if dynamic then
-    der(s) = (sMed-s)*k*tauInv;
-  else
-    s = sMed;
-  end if;
-annotation (defaultComponentName="senSpeEnt",
-  Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-        graphics={
-        Text(
-          extent={{120,120},{0,90}},
-          textColor={0,0,0},
-          textString="s"),
-        Line(points={{0,100},{0,70}}, color={0,0,127}),
-        Line(points={{-100,0},{-70,0}}, color={0,128,255}),
-        Line(points={{70,0},{100,0}}, color={0,128,255}),
-        Ellipse(extent={{-70,70},{70,-70}}, lineColor={255,0,0}),
-        Text(
-          extent={{-20,120},{-140,70}},
-          textColor={0,0,0},
-          textString=DynamicSelect("", String(s, format=".0f")))}),
-  Documentation(info="<html>
+ model SpecificEntropyTwoPort "Ideal two port sensor for the specific entropy"
+   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor;
+   extends Modelica.Icons.RoundSensor;
+   parameter Modelica.Units.SI.SpecificEntropy s_start=
+       Medium.specificEntropy_pTX(
+       p=Medium.p_default,
+       T=Medium.T_default,
+       X=Medium.X_default) "Initial or guess value of output (= state)"
+     annotation (Dialog(group="Initialization"));
+   Modelica.Blocks.Interfaces.RealOutput s(final quantity="SpecificEntropy",
+                                           final unit="J/(kg.K)",
+                                           start=s_start)
+     "Specific entropy of the passing fluid"
+     annotation (Placement(transformation(
+         origin={0,110},
+         extent={{10,-10},{-10,10}},
+         rotation=270)));
+ protected
+   Modelica.Units.SI.SpecificEntropy sMed(start=s_start)
+     "Medium entropy to which the sensor is exposed";
+   Medium.SpecificEntropy s_a_inflow
+     "Specific entropy of inflowing fluid at port_a";
+   Medium.SpecificEntropy s_b_inflow
+     "Specific entropy of inflowing fluid at port_b, or s_a_inflow if uni-directional flow";
+ initial equation
+   if dynamic then
+     if initType == Modelica.Blocks.Types.Init.SteadyState then
+       der(s) = 0;
+     elseif initType == Modelica.Blocks.Types.Init.InitialState or
+            initType == Modelica.Blocks.Types.Init.InitialOutput then
+       s = s_start;
+     end if;
+   end if;
+ equation
+   if allowFlowReversal then
+      s_a_inflow = Medium.specificEntropy(state=
+                     Medium.setState_phX(p=port_b.p, h=port_b.h_outflow, X=port_b.Xi_outflow));
+      s_b_inflow = Medium.specificEntropy(state=
+                     Medium.setState_phX(p=port_a.p, h=port_a.h_outflow, X=port_a.Xi_outflow));
+      sMed = Modelica.Fluid.Utilities.regStep(
+            x=port_a.m_flow,
+            y1=s_a_inflow,
+            y2=s_b_inflow,
+            x_small=m_flow_small);
+   else
+      sMed = Medium.specificEntropy(state=
+            Medium.setState_phX(p=port_b.p, h=port_b.h_outflow, X=port_b.Xi_outflow));
+      s_a_inflow = sMed;
+      s_b_inflow = sMed;
+   end if;
+   // Output signal of sensor
+   if dynamic then
+     der(s) = (sMed-s)*k*tauInv;
+   else
+     s = sMed;
+   end if;
+ annotation (defaultComponentName="senSpeEnt",
+   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+         graphics={
+         Text(
+           extent={{120,120},{0,90}},
+           textColor={0,0,0},
+           textString="s"),
+         Line(points={{0,100},{0,70}}, color={0,0,127}),
+         Line(points={{-100,0},{-70,0}}, color={0,128,255}),
+         Line(points={{70,0},{100,0}}, color={0,128,255}),
+         Ellipse(extent={{-70,70},{70,-70}}, lineColor={255,0,0}),
+         Text(
+           extent={{-20,120},{-140,70}},
+           textColor={0,0,0},
+           textString=DynamicSelect("", String(s, format=".0f")))}),
+   Documentation(info="<html>
  <p>
  This model outputs the specific entropy of the passing fluid.
  The sensor is ideal, i.e., it does not influence the fluid.
@@ -80,7 +80,7 @@ annotation (defaultComponentName="senSpeEnt",
  <a href=\"modelica://AixLib.Fluid.Sensors.UsersGuide\">
  AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  February 25, 2020, by Michael Wetter:<br/>
@@ -111,6 +111,6 @@ annotation (defaultComponentName="senSpeEnt",
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end SpecificEntropyTwoPort;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end SpecificEntropyTwoPort;

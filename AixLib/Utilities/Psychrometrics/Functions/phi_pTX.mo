@@ -1,19 +1,19 @@
 within AixLib.Utilities.Psychrometrics.Functions;
-function phi_pTX
-  "Relative humidity for given pressure, dry bulb temperature and moisture mass fraction"
-  extends Modelica.Icons.Function;
-  input Modelica.Units.SI.Pressure p "Absolute pressure of the medium";
-  input Modelica.Units.SI.Temperature T "Dry bulb temperature";
-  input Modelica.Units.SI.MassFraction X_w
-    "Water vapor mass fraction per unit mass total air";
-  output Real phi(unit="1") "Relative humidity";
-algorithm
-  phi :=p/saturationPressure(T)*X_w/(X_w +
-    AixLib.Utilities.Psychrometrics.Constants.k_mair*(1-X_w));
-  annotation (
-    inverse(X_w=X_pTphi(p,T,phi)),
-    smoothOrder=1,
-    Documentation(info="<html>
+ function phi_pTX
+   "Relative humidity for given pressure, dry bulb temperature and moisture mass fraction"
+   extends Modelica.Icons.Function;
+   input Modelica.Units.SI.Pressure p "Absolute pressure of the medium";
+   input Modelica.Units.SI.Temperature T "Dry bulb temperature";
+   input Modelica.Units.SI.MassFraction X_w
+     "Water vapor mass fraction per unit mass total air";
+   output Real phi(unit="1") "Relative humidity";
+ algorithm
+   phi :=p/saturationPressure(T)*X_w/(X_w +
+     AixLib.Utilities.Psychrometrics.Constants.k_mair*(1-X_w));
+   annotation (
+     inverse(X_w=X_pTphi(p,T,phi)),
+     smoothOrder=1,
+     Documentation(info="<html>
  <p>
  Relative humidity of air for given
  pressure, temperature and water vapor mass fraction.
@@ -23,7 +23,7 @@ algorithm
  total air, and not dry air.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  April 4, 2019 by Filip Jorissen:<br/>
@@ -41,6 +41,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end phi_pTX;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end phi_pTX;

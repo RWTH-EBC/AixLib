@@ -1,11 +1,11 @@
 within AixLib.Controls.Continuous;
-block SignalRanker "Ranks output signals such that y[i] >= y[i+1]"
-   extends Modelica.Blocks.Interfaces.MIMO(final nout=nin);
-equation
-  y = Modelica.Math.Vectors.sort(u, ascending=false);
-  annotation (
-defaultComponentName="sigRan",
-Documentation(info="<html>
+ block SignalRanker "Ranks output signals such that y[i] >= y[i+1]"
+    extends Modelica.Blocks.Interfaces.MIMO(final nout=nin);
+ equation
+   y = Modelica.Math.Vectors.sort(u, ascending=false);
+   annotation (
+ defaultComponentName="sigRan",
+ Documentation(info="<html>
  <p>
  Block that sorts the input signal <code>u[:]</code> such that the output
  signal satisfies <code>y[i] &gt;= y[i+1]</code> for all <code>i=1, ..., nin-1</code>.
@@ -15,7 +15,7 @@ Documentation(info="<html>
  controller to access the position of the dampers that are most open.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  October 15, 2021, by Michael Wetter:<br/>
@@ -33,9 +33,9 @@ revisions="<html>
  </li>
  </ul>
  </html>"),
-Icon(graphics={Text(
-          extent={{-94,34},{96,-164}},
-          textColor={0,0,255},
-          textString="y[i] >= y[i+1]")}),
-  __Dymola_LockedEditing="Model from IBPSA");
-end SignalRanker;
+ Icon(graphics={Text(
+           extent={{-94,34},{96,-164}},
+           textColor={0,0,255},
+           textString="y[i] >= y[i+1]")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end SignalRanker;

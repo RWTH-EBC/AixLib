@@ -1,16 +1,16 @@
 within AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature;
-model VDI6007 "Equivalent air temperature as defined in VDI 6007 Part 1"
-  extends BaseClasses.PartialVDI6007;
-
-initial equation
-  assert(noEvent(abs(sum(wfWall) + sum(wfWin) + wfGro - 1) < 0.1),
-  "The sum of the weighting factors (walls,windows and ground)  is
-   <0.9 or >1.1. Normally, the sum should be 1.",level=AssertionLevel.warning);
-
-equation
-  delTEqLWWin=delTEqLW;
-  TEqAir = TEqWall*wfWall + TEqWin*wfWin + TGro*wfGro;
-  annotation (defaultComponentName = "equAirTem",Documentation(revisions="<html>
+ model VDI6007 "Equivalent air temperature as defined in VDI 6007 Part 1"
+   extends BaseClasses.PartialVDI6007;
+ 
+ initial equation
+   assert(noEvent(abs(sum(wfWall) + sum(wfWin) + wfGro - 1) < 0.1),
+   "The sum of the weighting factors (walls,windows and ground)  is
+   <0.9 or >1.1. Normally, the sum should be 1.", level=AssertionLevel.warning);
+ 
+ equation
+   delTEqLWWin=delTEqLW;
+   TEqAir = TEqWall*wfWall + TEqWin*wfWin + TGro*wfGro;
+   annotation (defaultComponentName = "equAirTem",Documentation(revisions="<html>
    <ul>
    <li>
    September 26, 2016, by Moritz Lauster:<br/>
@@ -27,9 +27,9 @@ equation
    Implemented.
    </li>
    </ul>
-   </html>",info="<html>
+   </html>", info="<html>
    <p><code>VDI6007</code> is a strict implementation of the calculations defined
    in VDI 6007 Part 1. The sum of all weightfactors should be one.</p>
-   </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end VDI6007;
+   </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end VDI6007;

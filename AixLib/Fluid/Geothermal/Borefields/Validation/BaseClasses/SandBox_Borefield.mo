@@ -1,17 +1,17 @@
 within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
-record SandBox_Borefield
-  "Borefield data record for the Beier et al. (2011) experiment"
-  extends
-    AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template(
-      filDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.SandBox_Filling(),
-      soiDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.SandBox_Soil(),
-      conDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.SandBox_Configuration());
-
-  annotation (
-  defaultComponentPrefixes="parameter",
-  defaultComponentName="borFieDat",
-    Documentation(
-info="<html>
+ record SandBox_Borefield
+   "Borefield data record for the Beier et al. (2011) experiment"
+   extends
+     AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Template(
+       filDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.SandBox_Filling(),
+       soiDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.SandBox_Soil(),
+       conDat=AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses.SandBox_Configuration());
+ 
+   annotation (
+   defaultComponentPrefixes="parameter",
+   defaultComponentName="borFieDat",
+     Documentation(
+ info="<html>
  <p>
  This record contains the borefield data of the Beier et al. (2011) experiment.
  </p>
@@ -22,7 +22,7 @@ info="<html>
  analysis</i>. Geothermics 40: 79-85.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  July 15, 2018, by Michael Wetter:<br/>
@@ -34,6 +34,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end SandBox_Borefield;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end SandBox_Borefield;

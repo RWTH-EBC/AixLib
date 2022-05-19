@@ -1,10 +1,10 @@
 within AixLib.Fluid.MixingVolumes.Validation;
-model MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate
-  "Validation model for mixing volume with trace substance input and flow reversal, and prescribed heat flow rate"
-  extends MixingVolumeTraceSubstanceReverseFlow(
-    prescribedHeatFlowRate=true);
-  annotation (Documentation(
-info="<html>
+ model MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate
+   "Validation model for mixing volume with trace substance input and flow reversal, and prescribed heat flow rate"
+   extends MixingVolumeTraceSubstanceReverseFlow(
+     prescribedHeatFlowRate=true);
+   annotation (Documentation(
+ info="<html>
  <p>
  This model is identical to
  <a href=\"modelica://AixLib.Fluid.MixingVolumes.Validation.MixingVolumeTraceSubstanceReverseFlow\">
@@ -17,7 +17,7 @@ info="<html>
  <a href=\"modelica://AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation\">
  AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  March 9, 2016, by Michael Wetter:<br/>
@@ -25,8 +25,8 @@ info="<html>
  </li>
  </ul>
  </html>"),
- __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate.mos"
-        "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=10),
-  __Dymola_LockedEditing="Model from IBPSA");
-end MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate;
+  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate.mos"
+         "Simulate and plot"),
+     experiment(Tolerance=1e-6, StopTime=10), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end MixingVolumeTraceSubstanceReverseFlowPrescribedHeatFlowRate;

@@ -1,21 +1,21 @@
 within AixLib.Fluid.MixingVolumes.BaseClasses.Validation;
-model MixingVolumeHeatMoisturePort
-  "Validation model for setting the initialization of the pressure for model with moisture port"
-  extends AixLib.Fluid.MixingVolumes.BaseClasses.Validation.MixingVolumeHeatPortWater(
-    redeclare package Medium = AixLib.Media.Air,
-    redeclare AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatMoisturePort vol);
-
-  Modelica.Blocks.Sources.Constant const[nEle](each k=0) "Zero input signal"
-    annotation (Placement(transformation(extent={{-60,28},{-40,48}})));
-equation
-  connect(const.y, vol.mWat_flow)
-    annotation (Line(points={{-39,38},{-12,38}}, color={0,0,127}));
-  annotation (Documentation(info="<html>
+ model MixingVolumeHeatMoisturePort
+   "Validation model for setting the initialization of the pressure for model with moisture port"
+   extends AixLib.Fluid.MixingVolumes.BaseClasses.Validation.MixingVolumeHeatPortWater(
+     redeclare package Medium = AixLib.Media.Air,
+     redeclare AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatMoisturePort vol);
+ 
+   Modelica.Blocks.Sources.Constant const[nEle](each k=0) "Zero input signal"
+     annotation (Placement(transformation(extent={{-60,28},{-40,48}})));
+ equation
+   connect(const.y, vol.mWat_flow)
+     annotation (Line(points={{-39,38},{-12,38}}, color={0,0,127}));
+   annotation (Documentation(info="<html>
  <p>
  Model that validates that the initial conditions are uniquely set
  and not overdetermined.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  January 3, 2019 by Michael Wetter:<br/>
@@ -30,9 +30,9 @@ equation
  </li>
  </ul>
  </html>"),
-experiment(Tolerance=1E-6, StopTime=1.0),
-__Dymola_Commands(file=
-  "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/BaseClasses/Validation/MixingVolumeHeatMoisturePort.mos"
-  "Simulate and plot"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end MixingVolumeHeatMoisturePort;
+ experiment(Tolerance=1E-6, StopTime=1.0),
+ __Dymola_Commands(file=
+   "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/BaseClasses/Validation/MixingVolumeHeatMoisturePort.mos"
+   "Simulate and plot"), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end MixingVolumeHeatMoisturePort;

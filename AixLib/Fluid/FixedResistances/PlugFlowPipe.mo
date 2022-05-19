@@ -1,65 +1,65 @@
 within AixLib.Fluid.FixedResistances;
-model PlugFlowPipe
-  "Pipe model using spatialDistribution for temperature delay"
-  extends AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowPipe(
-    redeclare final AixLib.Fluid.FixedResistances.HydraulicDiameter res(
-      final dh=dh,
-      final from_dp=from_dp,
-      final length=length,
-      final roughness=roughness,
-      final fac=fac,
-      final ReC=ReC,
-      final v_nominal=v_nominal,
-      final homotopyInitialization=homotopyInitialization,
-      final linearized=linearized,
-    dp(nominal=fac*200*length)));
-
-  annotation (
-    Line(points={{70,20},{72,20},{72,0},{100,0}}, color={0,127,255}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}})),
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}), graphics={
-        Rectangle(
-          extent={{-100,40},{100,-40}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={192,192,192}),
-        Rectangle(
-          extent={{-100,30},{100,-30}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={0,127,255}),
-        Rectangle(
-          extent={{-100,50},{100,40}},
-          lineColor={175,175,175},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Backward),
-        Rectangle(
-          extent={{-100,-40},{100,-50}},
-          lineColor={175,175,175},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Backward),
-        Polygon(
-          points={{0,90},{40,62},{20,62},{20,38},{-20,38},{-20,62},{-40,62},{0,
-              90}},
-          lineColor={0,0,0},
-          fillColor={238,46,47},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-30,30},{28,-30}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={215,202,187}),
-        Text(
-          extent={{-102,-76},{98,-104}},
-          textColor={0,0,0},
-          textString="d = %dh"),
-        Text(
-          extent={{-100,-56},{100,-74}},
-          textColor={0,0,0},
-          textString="L = %length")}),
-    Documentation(revisions="<html>
+ model PlugFlowPipe
+   "Pipe model using spatialDistribution for temperature delay"
+   extends AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowPipe(
+     redeclare final AixLib.Fluid.FixedResistances.HydraulicDiameter res(
+       final dh=dh,
+       final from_dp=from_dp,
+       final length=length,
+       final roughness=roughness,
+       final fac=fac,
+       final ReC=ReC,
+       final v_nominal=v_nominal,
+       final homotopyInitialization=homotopyInitialization,
+       final linearized=linearized,
+     dp(nominal=fac*200*length)));
+ 
+   annotation (
+     Line(points={{70,20},{72,20},{72,0},{100,0}}, color={0,127,255}),
+     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+             100,100}})),
+     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+             100}}), graphics={
+         Rectangle(
+           extent={{-100,40},{100,-40}},
+           lineColor={0,0,0},
+           fillPattern=FillPattern.HorizontalCylinder,
+           fillColor={192,192,192}),
+         Rectangle(
+           extent={{-100,30},{100,-30}},
+           lineColor={0,0,0},
+           fillPattern=FillPattern.HorizontalCylinder,
+           fillColor={0,127,255}),
+         Rectangle(
+           extent={{-100,50},{100,40}},
+           lineColor={175,175,175},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Backward),
+         Rectangle(
+           extent={{-100,-40},{100,-50}},
+           lineColor={175,175,175},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Backward),
+         Polygon(
+           points={{0,90},{40,62},{20,62},{20,38},{-20,38},{-20,62},{-40,62},{0,
+               90}},
+           lineColor={0,0,0},
+           fillColor={238,46,47},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-30,30},{28,-30}},
+           lineColor={0,0,0},
+           fillPattern=FillPattern.HorizontalCylinder,
+           fillColor={215,202,187}),
+         Text(
+           extent={{-102,-76},{98,-104}},
+           textColor={0,0,0},
+           textString="d = %dh"),
+         Text(
+           extent={{-100,-56},{100,-74}},
+           textColor={0,0,0},
+           textString="L = %length")}),
+     Documentation(revisions="<html>
  <ul>
  <li>
  October 05, 2021, by Baptiste Ravache:<br/>
@@ -86,7 +86,7 @@ model PlugFlowPipe
  AixLib.Obsolete.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>.
  </li>
  </ul>
- </html>",info="<html>
+ </html>", info="<html>
  <p>
  Pipe with heat loss using the time delay based heat losses and transport
  of the fluid using a plug flow model, applicable for simulation of long
@@ -172,6 +172,6 @@ model PlugFlowPipe
  <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
  <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
  10.1016/j.enconman.2017.08.072</a>.</p>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end PlugFlowPipe;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end PlugFlowPipe;

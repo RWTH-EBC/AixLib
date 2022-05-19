@@ -1,48 +1,48 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses;
-impure function getLastHeaderElementTMY3
-  "Gets last element from the header of a TMY3 weather data file"
-  extends Modelica.Icons.Function;
- input String filNam "Name of weather data file"
- annotation (Dialog(
-        loadSelector(filter="Weather files (*.mos)", caption=
-            "Select weather file")));
- input String start "Start of the string that contains the elements";
- input String name "Name of data element, used in error reporting";
- output String element
-    "Element at position 'pos' of the line that starts with 'start'";
-protected
- String lin "Line that is used in parser";
- Integer iLin "Line number";
- Integer index =  0 "Index of string #LOCATION";
- Integer staInd "Start index used when parsing a real number";
- Integer lasInd "Next index used when parsing a real number";
- Boolean EOF "Flag, true if EOF has been reached";
-algorithm
-  // Get line that starts with 'start'
-  iLin :=0;
-  EOF :=false;
-  while (not EOF) and (index == 0) loop
-    iLin:=iLin + 1;
-    (lin, EOF) :=Modelica.Utilities.Streams.readLine(fileName=filNam,
-      lineNumber=iLin);
-    index :=Modelica.Utilities.Strings.find(
-      string=lin,
-      searchString=start,
-      startIndex=1,
-      caseSensitive=false);
-  end while;
-  assert(not EOF, "Error: Did not find '" + start + "' when scanning the weather file."
-                      + "\n   Check for correct weather file syntax.");
-    // gest first and last index of the last string header element
-    staInd := Modelica.Utilities.Strings.findLast(
-        string=lin,
-        searchString = ",",
-        startIndex=0);
-    lasInd := integer(Modelica.Utilities.Strings.length(lin));
-  // Get the element
-  element :=Modelica.Utilities.Strings.substring(lin, startIndex=staInd+1, endIndex=lasInd);
-  annotation (Inline=false,
-  Documentation(info="<html>
+ impure function getLastHeaderElementTMY3
+   "Gets last element from the header of a TMY3 weather data file"
+   extends Modelica.Icons.Function;
+  input String filNam "Name of weather data file"
+  annotation (Dialog(
+         loadSelector(filter="Weather files (*.mos)", caption=
+             "Select weather file")));
+  input String start "Start of the string that contains the elements";
+  input String name "Name of data element, used in error reporting";
+  output String element
+     "Element at position 'pos' of the line that starts with 'start'";
+ protected
+  String lin "Line that is used in parser";
+  Integer iLin "Line number";
+  Integer index =  0 "Index of string #LOCATION";
+  Integer staInd "Start index used when parsing a real number";
+  Integer lasInd "Next index used when parsing a real number";
+  Boolean EOF "Flag, true if EOF has been reached";
+ algorithm
+   // Get line that starts with 'start'
+   iLin :=0;
+   EOF :=false;
+   while (not EOF) and (index == 0) loop
+     iLin:=iLin + 1;
+     (lin, EOF) :=Modelica.Utilities.Streams.readLine(fileName=filNam,
+       lineNumber=iLin);
+     index :=Modelica.Utilities.Strings.find(
+       string=lin,
+       searchString=start,
+       startIndex=1,
+       caseSensitive=false);
+   end while;
+   assert(not EOF, "Error: Did not find '" + start + "' when scanning the weather file."
+                       + "\n   Check for correct weather file syntax.");
+     // gest first and last index of the last string header element
+     staInd := Modelica.Utilities.Strings.findLast(
+         string=lin,
+         searchString = ",",
+         startIndex=0);
+     lasInd := integer(Modelica.Utilities.Strings.length(lin));
+   // Get the element
+   element :=Modelica.Utilities.Strings.substring(lin, startIndex=staInd+1, endIndex=lasInd);
+   annotation (Inline=false,
+   Documentation(info="<html>
  This function scans the weather data file for a line that starts with the string <pre>
  start
  </pre>
@@ -50,7 +50,7 @@ algorithm
  When this line is found, the function returns the element at the position number
  <code>position</code>, where <code>position</code> is a parameter.
  A comma is used as the delimiter of the elements.
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  December 11, 2021, by Michael Wetter:<br/>
@@ -87,6 +87,6 @@ algorithm
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end getLastHeaderElementTMY3;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end getLastHeaderElementTMY3;

@@ -1,20 +1,20 @@
 within AixLib.Airflow.Multizone;
-model Table_V_flow
-  "Volume flow(y-axis) vs Pressure(x-axis) cubic spline fit model based on table data, with last two points linearly interpolated"
-  extends AixLib.Airflow.Multizone.Table_m_flow(
-    final mMea_flow_nominal = VMea_flow_nominal*rho_default);
-
-  parameter Modelica.Units.SI.VolumeFlowRate VMea_flow_nominal[:]
-    "Volume flow rate of test points"
-    annotation (Dialog(group="Test data"));
-initial equation
-  assert(size(dpMea_nominal, 1) == size(VMea_flow_nominal, 1),
-    "Size of parameters are size(dpMea_nominal, 1) = " + String(size(dpMea_nominal, 1)) +
-    " and size(VMea_flow_nominal, 1) = " + String(size(VMea_flow_nominal, 1)) + ". They must be equal.");
-
-  annotation (
-    defaultComponentName="tabDat",
-    Documentation(info="<html>
+ model Table_V_flow
+   "Volume flow(y-axis) vs Pressure(x-axis) cubic spline fit model based on table data, with last two points linearly interpolated"
+   extends AixLib.Airflow.Multizone.Table_m_flow(
+     final mMea_flow_nominal = VMea_flow_nominal*rho_default);
+ 
+   parameter Modelica.Units.SI.VolumeFlowRate VMea_flow_nominal[:]
+     "Volume flow rate of test points"
+     annotation (Dialog(group="Test data"));
+ initial equation
+   assert(size(dpMea_nominal, 1) == size(VMea_flow_nominal, 1),
+     "Size of parameters are size(dpMea_nominal, 1) = " + String(size(dpMea_nominal, 1)) +
+     " and size(VMea_flow_nominal, 1) = " + String(size(VMea_flow_nominal, 1)) + ". They must be equal.");
+ 
+   annotation (
+     defaultComponentName="tabDat",
+     Documentation(info="<html>
  <p>
  This model describes the one-directional pressure driven air flow through an
  opening based on user-provided tabular data describing the relation between volume flow rate
@@ -44,7 +44,7 @@ initial equation
  <a href=\"https://doi.org/10.6028/NIST.TN.1887\">10.6028/NIST.TN.1887</a>.
  </li>
  </ul>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  February 2, 2022, by Michael Wetter:<br/>
@@ -57,46 +57,46 @@ initial equation
  </li>
  </ul>
  </html>
- "),Icon(graphics={
-        Rectangle(
-          extent={{-48,80},{52,-80}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-98,6},{-48,-6}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,127,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{52,6},{102,-6}},
-          lineColor={0,0,255},
-          pattern=LinePattern.None,
-          fillColor={0,127,0},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-22,78},{2,-78}},
-          lineColor={28,108,200},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{2,78},{28,-78}},
-          lineColor={28,108,200},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{0,13},{0,-13}},
-          textColor={0,0,127},
-          origin={15,0},
-          rotation=90,
-          textString="V_flow"),
-        Rectangle(
-          extent={{-22,78},{28,58}},
-          lineColor={28,108,200},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Forward),
-        Line(points={{2,78},{2,-78}}, color={28,108,200})}),
-  __Dymola_LockedEditing="Model from IBPSA");
-end Table_V_flow;
+ "), Icon(graphics={
+         Rectangle(
+           extent={{-48,80},{52,-80}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,0,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-98,6},{-48,-6}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,127,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{52,6},{102,-6}},
+           lineColor={0,0,255},
+           pattern=LinePattern.None,
+           fillColor={0,127,0},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{-22,78},{2,-78}},
+           lineColor={28,108,200},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Solid),
+         Rectangle(
+           extent={{2,78},{28,-78}},
+           lineColor={28,108,200},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Solid),
+         Text(
+           extent={{0,13},{0,-13}},
+           textColor={0,0,127},
+           origin={15,0},
+           rotation=90,
+           textString="V_flow"),
+         Rectangle(
+           extent={{-22,78},{28,58}},
+           lineColor={28,108,200},
+           fillColor={255,255,255},
+           fillPattern=FillPattern.Forward),
+         Line(points={{2,78},{2,-78}}, color={28,108,200})}), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end Table_V_flow;

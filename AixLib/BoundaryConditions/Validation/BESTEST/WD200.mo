@@ -1,23 +1,23 @@
 within AixLib.BoundaryConditions.Validation.BESTEST;
-model WD200
-  "Test model for BESTEST weather data: Low Elevation, Hot and Humid Case"
-  extends WD100(
-    rho=0,
-    weaDatHHorIR(
-      filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/WD200.mos")),
-    weaDatTDryBulTDewPoinOpa(
-      filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/WD200.mos")));
-  annotation (
-    experiment(
-      StopTime=3.1536e+07,
-      Interval=900,
-      Tolerance=1e-6),
-    __Dymola_Commands(
-      file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/Validation/BESTEST/WD200.mos" "Simulate and plot"),
-    Documentation(
-      revisions="<html>
+ model WD200
+   "Test model for BESTEST weather data: Low Elevation, Hot and Humid Case"
+   extends WD100(
+     rho=0,
+     weaDatHHorIR(
+       filNam=Modelica.Utilities.Files.loadResource(
+         "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/WD200.mos")),
+     weaDatTDryBulTDewPoinOpa(
+       filNam=Modelica.Utilities.Files.loadResource(
+         "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/WD200.mos")));
+   annotation (
+     experiment(
+       StopTime=3.1536e+07,
+       Interval=900,
+       Tolerance=1e-6),
+     __Dymola_Commands(
+       file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/Validation/BESTEST/WD200.mos" "Simulate and plot"),
+     Documentation(
+       revisions="<html>
  <ul>
  <li>
  September 6, 2021, by Ettore Zanetti:<br/>
@@ -40,7 +40,7 @@ model WD200
  </li>
  </ul>
  </html>",
-      info="<html>
+       info="<html>
  <h4>WD200: Low Elevation, Hot and Humid Case.</h4>
  <p>Weather data file : WD200.epw</p>
  <p><i>Table 1: Site Data for Weather file WD200.epw</i></p>
@@ -61,6 +61,6 @@ model WD200
  <td><p>-5</p></td>
  </tr>
  </table>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end WD200;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end WD200;

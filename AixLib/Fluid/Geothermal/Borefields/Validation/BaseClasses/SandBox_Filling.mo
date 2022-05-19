@@ -1,16 +1,16 @@
 within AixLib.Fluid.Geothermal.Borefields.Validation.BaseClasses;
-record SandBox_Filling
-  "Filling data record for the Beier et al. (2011) experiment"
-  extends
-    AixLib.Fluid.Geothermal.Borefields.Data.Filling.Template(
-      kFil=0.73,
-      dFil=1900,
-      cFil=2000);
-  annotation (
-  defaultComponentPrefixes="parameter",
-  defaultComponentName="filDat",
-Documentation(
-info="<html>
+ record SandBox_Filling
+   "Filling data record for the Beier et al. (2011) experiment"
+   extends
+     AixLib.Fluid.Geothermal.Borefields.Data.Filling.Template(
+       kFil=0.73,
+       dFil=1900,
+       cFil=2000);
+   annotation (
+   defaultComponentPrefixes="parameter",
+   defaultComponentName="filDat",
+ Documentation(
+ info="<html>
  <p>
  This record contains the filling data of the Beier et al. (2011) experiment.
  </p>
@@ -21,7 +21,7 @@ info="<html>
  analysis</i>. Geothermics 40: 79-85.
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  July 15, 2018, by Michael Wetter:<br/>
@@ -33,6 +33,6 @@ revisions="<html>
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end SandBox_Filling;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end SandBox_Filling;

@@ -1,37 +1,37 @@
 within AixLib.Fluid.HeatExchangers.Examples;
-model AirHeater_T
-  "Example model for the heater with prescribed outlet temperature and air as the medium"
-  extends Modelica.Icons.Example;
-  extends AixLib.Fluid.HeatExchangers.Examples.BaseClasses.Heater(
-    redeclare package Medium = AixLib.Media.Air,
-    m_flow_nominal=V*1.2*6/3600,
-    Q_flow_nominal=30*6*6,
-    mov(dp_nominal=1200, nominalValuesDefineDefaultPressureCurve=true));
-
-  Heater_T hea(
-    redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    dp_nominal=1000,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    QMax_flow=Q_flow_nominal) "Heater"
-    annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
-
-  Controls.SetPoints.Table tab(table=[0,273.15 + 15; 1,273.15 + 30])
-    "Temperature set point"
-    annotation (Placement(transformation(extent={{-30,20},{-10,40}})));
-equation
-  connect(hea.port_b, THeaOut.port_a) annotation (Line(
-      points={{0,-40},{20,-40}},
-      color={0,127,255}));
-  connect(conPI.y, tab.u) annotation (Line(
-      points={{-39,30},{-32,30}},
-      color={0,0,127}));
-  connect(tab.y, hea.TSet) annotation (Line(
-      points={{-9,30},{-6,30},{-6,-20},{-32,-20},{-32,-32},{-22,-32}},
-      color={0,0,127}));
-  connect(mov.port_b, hea.port_a) annotation (Line(points={{-50,-40},{-35,-40},
-          {-20,-40}}, color={0,127,255}));
-  annotation ( Documentation(info="<html>
+ model AirHeater_T
+   "Example model for the heater with prescribed outlet temperature and air as the medium"
+   extends Modelica.Icons.Example;
+   extends AixLib.Fluid.HeatExchangers.Examples.BaseClasses.Heater(
+     redeclare package Medium = AixLib.Media.Air,
+     m_flow_nominal=V*1.2*6/3600,
+     Q_flow_nominal=30*6*6,
+     mov(dp_nominal=1200, nominalValuesDefineDefaultPressureCurve=true));
+ 
+   Heater_T hea(
+     redeclare package Medium = Medium,
+     m_flow_nominal=m_flow_nominal,
+     dp_nominal=1000,
+     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+     QMax_flow=Q_flow_nominal) "Heater"
+     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+ 
+   Controls.SetPoints.Table tab(table=[0,273.15 + 15; 1,273.15 + 30])
+     "Temperature set point"
+     annotation (Placement(transformation(extent={{-30,20},{-10,40}})));
+ equation
+   connect(hea.port_b, THeaOut.port_a) annotation (Line(
+       points={{0,-40},{20,-40}},
+       color={0,127,255}));
+   connect(conPI.y, tab.u) annotation (Line(
+       points={{-39,30},{-32,30}},
+       color={0,0,127}));
+   connect(tab.y, hea.TSet) annotation (Line(
+       points={{-9,30},{-6,30},{-6,-20},{-32,-20},{-32,-32},{-22,-32}},
+       color={0,0,127}));
+   connect(mov.port_b, hea.port_a) annotation (Line(points={{-50,-40},{-35,-40},
+           {-20,-40}}, color={0,127,255}));
+   annotation ( Documentation(info="<html>
  <p>
  This example illustrates how to use the heater model that takes as an
  input the leaving fluid temperature.
@@ -48,7 +48,7 @@ equation
  AixLib.Fluid.HeatExchangers.Examples.AirHeater_u</a>
  for a model that takes the heating power as an input.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  May 8, 2017, by Michael Wetter:<br/>
@@ -67,12 +67,12 @@ equation
  </li>
  </ul>
  </html>"),
-    __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Examples/AirHeater_T.mos"
-        "Simulate and plot"),
-    experiment(
-      StopTime=172800,
-      Tolerance=1e-08),
-    Diagram(coordinateSystem(extent={{-100,-100},{120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{120,100}})),
-  __Dymola_LockedEditing="Model from IBPSA");
-end AirHeater_T;
+     __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Examples/AirHeater_T.mos"
+         "Simulate and plot"),
+     experiment(
+       StopTime=172800,
+       Tolerance=1e-08),
+     Diagram(coordinateSystem(extent={{-100,-100},{120,100}})),
+     Icon(coordinateSystem(extent={{-100,-100},{120,100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
+ end AirHeater_T;

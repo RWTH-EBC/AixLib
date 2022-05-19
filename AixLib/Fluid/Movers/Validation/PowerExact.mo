@@ -1,16 +1,16 @@
 within AixLib.Fluid.Movers.Validation;
-model PowerExact
-  "Power calculation comparison among three mover types, using exact power computation for m_flow and dp"
-  extends PowerSimplified(
-    pump_dp(per=per),
-    pump_m_flow(per=per));
-  annotation (
-    experiment(Tolerance=1e-6, StopTime=200),
-    __Dymola_Commands(file=
-          "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/PowerExact.mos"
-        "Simulate and plot"),
-        Documentation(
-info="<html>
+ model PowerExact
+   "Power calculation comparison among three mover types, using exact power computation for m_flow and dp"
+   extends PowerSimplified(
+     pump_dp(per=per),
+     pump_m_flow(per=per));
+   annotation (
+     experiment(Tolerance=1e-6, StopTime=200),
+     __Dymola_Commands(file=
+           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/PowerExact.mos"
+         "Simulate and plot"),
+         Documentation(
+ info="<html>
  <p>
  This example is identical to
  <a href=\"modelica://AixLib.Fluid.Movers.Validation.PowerSimplified\">
@@ -25,7 +25,7 @@ info="<html>
  <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Validation/PowerExact.png\"/>
  </p>
  </html>",
-revisions="<html>
+ revisions="<html>
  <ul>
  <li>
  October 15, 2021, by Hongxiang Fu:<br/>
@@ -39,6 +39,6 @@ revisions="<html>
  <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end PowerExact;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end PowerExact;

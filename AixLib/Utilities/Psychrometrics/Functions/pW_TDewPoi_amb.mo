@@ -1,29 +1,29 @@
 within AixLib.Utilities.Psychrometrics.Functions;
-function pW_TDewPoi_amb
-  "Function to compute the water vapor partial pressure for a given dew point temperature of moist air"
-  extends Modelica.Icons.Function;
-
-  input Modelica.Units.SI.Temperature T "Dew point temperature";
-  output Modelica.Units.SI.Pressure p_w(displayUnit="Pa", min=100)
-    "Water vapor partial pressure";
-protected
-  constant Modelica.Units.SI.Temperature T1=283.15 "First support point";
-  constant Modelica.Units.SI.Temperature T2=293.15 "Second support point";
-  constant Modelica.Units.SI.Pressure p1=1227.97 "First support point";
-  constant Modelica.Units.SI.Pressure p2=2338.76 "Second support point";
-
-  constant Real a1=(Modelica.Math.log(p2) - Modelica.Math.log(p1)*T2/T1)/(1 -
-      T2/T1);
-  constant Real a2(unit="1/K")=(Modelica.Math.log(p1) - a1)/T1;
-
-algorithm
-  p_w := Modelica.Math.exp(a1 + a2*T);
-  annotation (
-    inverse(T=TDewPoi_pW_amb(p_w)),
-    smoothOrder=99,
-    Inline=true,
-    derivative=BaseClasses.der_pW_TDewPoi_amb,
-    Documentation(info="<html>
+ function pW_TDewPoi_amb
+   "Function to compute the water vapor partial pressure for a given dew point temperature of moist air"
+   extends Modelica.Icons.Function;
+ 
+   input Modelica.Units.SI.Temperature T "Dew point temperature";
+   output Modelica.Units.SI.Pressure p_w(displayUnit="Pa", min=100)
+     "Water vapor partial pressure";
+ protected
+   constant Modelica.Units.SI.Temperature T1=283.15 "First support point";
+   constant Modelica.Units.SI.Temperature T2=293.15 "Second support point";
+   constant Modelica.Units.SI.Pressure p1=1227.97 "First support point";
+   constant Modelica.Units.SI.Pressure p2=2338.76 "Second support point";
+ 
+   constant Real a1=(Modelica.Math.log(p2) - Modelica.Math.log(p1)*T2/T1)/(1 -
+       T2/T1);
+   constant Real a2(unit="1/K")=(Modelica.Math.log(p1) - a1)/T1;
+ 
+ algorithm
+   p_w := Modelica.Math.exp(a1 + a2*T);
+   annotation (
+     inverse(T=TDewPoi_pW_amb(p_w)),
+     smoothOrder=99,
+     Inline=true,
+     derivative=BaseClasses.der_pW_TDewPoi_amb,
+     Documentation(info="<html>
  <p>
  Dew point temperature calculation for moist air between <i>0 degC</i> and <i>30 degC</i>.
  </p>
@@ -39,7 +39,7 @@ algorithm
  The benefit of this simpler function is that it can be inverted analytically,
  whereas the other function requires a numerical solution.
  </p>
- </html>",revisions="<html>
+ </html>", revisions="<html>
  <ul>
  <li>
  October 4, 2014, by Michael Wetter:<br/>
@@ -56,6 +56,6 @@ algorithm
  First implementation.
  </li>
  </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
-end pW_TDewPoi_amb;
+ </html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
+ end pW_TDewPoi_amb;
