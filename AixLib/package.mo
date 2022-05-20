@@ -87,9 +87,7 @@ package AixLib
 	version="1.1.0",				  
 					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.1.0_to_1.2.0.mos",
 	version="1.2.0",				  
-					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.0_to_1.2.1.mos",
-    version="1.2.1",
-                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.1_to_1.3.0.mos")),
+					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.0_to_1.2.1.mos")),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed
   for research and teaching purposes. It aims at dynamic simulations of

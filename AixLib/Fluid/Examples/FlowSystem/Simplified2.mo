@@ -1,15 +1,15 @@
 within AixLib.Fluid.Examples.FlowSystem;
- model Simplified2 "Using from_dp"
-   extends Simplified1(
-     valSouth1(each from_dp=true),
-     valSouth2(each from_dp=true),
-     valNorth1(each from_dp=true),
-     valNorth2(each from_dp=true));
-   annotation (Documentation(info="<html>
+model Simplified2 "Using from_dp"
+  extends Simplified1(
+    valSouth1(each from_dp=true),
+    valSouth2(each from_dp=true),
+    valNorth1(each from_dp=true),
+    valNorth2(each from_dp=true));
+  annotation (Documentation(info="<html>
  <p>
  The model is simplified: using <code>from_dp</code> to find more efficient tearing variables.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  December 14, 2016, by Michael Wetter:<br/>
@@ -21,8 +21,8 @@ within AixLib.Fluid.Examples.FlowSystem;
  </li>
  </ul>
  </html>"),
- experiment(Tolerance=1e-6, StopTime=1000),
- __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified2.mos"
-         "Simulate and plot"), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end Simplified2;
+experiment(Tolerance=1e-6, StopTime=1000),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/FlowSystem/Simplified2.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Simplified2;

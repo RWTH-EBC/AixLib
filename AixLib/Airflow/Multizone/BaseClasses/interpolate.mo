@@ -1,45 +1,45 @@
 within AixLib.Airflow.Multizone.BaseClasses;
- function interpolate
-   "Function for the interpolation of table data for airflow models"
-   extends Modelica.Icons.Function;
- 
-   input Real u "Independent variable";
-   input Real[:] xd "X-axis support points";
-   input Real[size(xd, 1)] yd "Y-axis support points";
-   input Real[size(xd, 1)] d(each fixed=false) "Derivatives at the support points";
- 
-   output Real z "Dependent variable with monotone interpolation";
- 
- protected
-   Integer i "Integer to select data interval";
- 
- algorithm
-   i := 1;
-   for j in 1:size(xd, 1) - 1 loop
-     if u > xd[j] then
-       i := j;
-     end if;
-   end for;
- 
-   // Extrapolate or interpolate the data
-   if i == 1 then
-     z:=yd[1]+(u-xd[1])*(yd[2]-yd[1])/(xd[2]-xd[1]); //Interpolate linearly between first and second point
-   elseif i == (size(xd, 1) - 1) then
-     z:=yd[end-1]+(u-xd[end-1])*(yd[end]-yd[end-1])/(xd[end]-xd[end-1]); //Interpolate linearly between last and second-to-last point.
- 
-   else
-     z :=AixLib.Utilities.Math.Functions.cubicHermiteLinearExtrapolation(
-         x=u,
-         x1=xd[i],
-         x2=xd[i + 1],
-         y1=yd[i],
-         y2=yd[i + 1],
-         y1d=d[i],
-         y2d=d[i + 1]);
-   end if;
- 
-   annotation (
-     Documentation(info="<html>
+function interpolate
+  "Function for the interpolation of table data for airflow models"
+  extends Modelica.Icons.Function;
+
+  input Real u "Independent variable";
+  input Real[:] xd "X-axis support points";
+  input Real[size(xd, 1)] yd "Y-axis support points";
+  input Real[size(xd, 1)] d(each fixed=false) "Derivatives at the support points";
+
+  output Real z "Dependent variable with monotone interpolation";
+
+protected
+  Integer i "Integer to select data interval";
+
+algorithm
+  i := 1;
+  for j in 1:size(xd, 1) - 1 loop
+    if u > xd[j] then
+      i := j;
+    end if;
+  end for;
+
+  // Extrapolate or interpolate the data
+  if i == 1 then
+    z:=yd[1]+(u-xd[1])*(yd[2]-yd[1])/(xd[2]-xd[1]); //Interpolate linearly between first and second point
+  elseif i == (size(xd, 1) - 1) then
+    z:=yd[end-1]+(u-xd[end-1])*(yd[end]-yd[end-1])/(xd[end]-xd[end-1]); //Interpolate linearly between last and second-to-last point.
+
+  else
+    z :=AixLib.Utilities.Math.Functions.cubicHermiteLinearExtrapolation(
+        x=u,
+        x1=xd[i],
+        x2=xd[i + 1],
+        y1=yd[i],
+        y2=yd[i + 1],
+        y1d=d[i],
+        y2d=d[i + 1]);
+  end if;
+
+  annotation (
+    Documentation(info="<html>
  <p>
  This function returns the value on a cubic hermite spline through the given support points
  and provided spline derivatives at these points with monotonically increasing values.
@@ -64,7 +64,7 @@ within AixLib.Airflow.Multizone.BaseClasses;
  <a href=\"https://doi.org/10.6028/NIST.TN.1887\">10.6028/NIST.TN.1887</a>.
  </li>
  </ul>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  February 2, 2022, by Michael Wetter:<br/>
@@ -77,6 +77,6 @@ within AixLib.Airflow.Multizone.BaseClasses;
  First Implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end interpolate;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end interpolate;

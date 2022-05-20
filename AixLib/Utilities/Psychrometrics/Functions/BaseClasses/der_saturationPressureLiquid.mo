@@ -1,25 +1,25 @@
 within AixLib.Utilities.Psychrometrics.Functions.BaseClasses;
- function der_saturationPressureLiquid
-   "Derivative of the function saturationPressureLiquid"
-   extends Modelica.Icons.Function;
-   input Modelica.Units.SI.Temperature TSat "Saturation temperature";
-   input Real dTSat(unit="K/s") "Saturation temperature derivative";
-   output Real psat_der(unit="Pa/s") "Differential of saturation pressure";
- 
- algorithm
-   psat_der:=611.657*Modelica.Math.exp(17.2799 - 4102.99
-             /(TSat - 35.719))*4102.99*dTSat/(TSat - 35.719)^2;
- 
-   annotation(Inline=false,
-     smoothOrder=98,
-     Documentation(info="<html>
+function der_saturationPressureLiquid
+  "Derivative of the function saturationPressureLiquid"
+  extends Modelica.Icons.Function;
+  input Modelica.Units.SI.Temperature TSat "Saturation temperature";
+  input Real dTSat(unit="K/s") "Saturation temperature derivative";
+  output Real psat_der(unit="Pa/s") "Differential of saturation pressure";
+
+algorithm
+  psat_der:=611.657*Modelica.Math.exp(17.2799 - 4102.99
+            /(TSat - 35.719))*4102.99*dTSat/(TSat - 35.719)^2;
+
+  annotation(Inline=false,
+    smoothOrder=98,
+    Documentation(info="<html>
  <p>
  Derivative of function
  <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid\">
  AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid</a>.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  September 12, 2020, by Michael Wetter:<br/>
@@ -32,6 +32,6 @@ within AixLib.Utilities.Psychrometrics.Functions.BaseClasses;
  First implementation, moved from <code>AixLib.Media</code>.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end der_saturationPressureLiquid;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end der_saturationPressureLiquid;

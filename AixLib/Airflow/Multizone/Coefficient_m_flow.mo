@@ -1,63 +1,63 @@
 within AixLib.Airflow.Multizone;
- model Coefficient_m_flow "Powerlaw with coefficient for mass flow rate"
-   extends AixLib.Airflow.Multizone.BaseClasses.PartialOneWayFlowElement(
-     m_flow=rho*AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM(
-         C=C,
-         dp=dp,
-         m=m,
-         a=a,
-         b=b,
-         c=c,
-         d=d,
-         dp_turbulent=dp_turbulent),
-     final m_flow_nominal=k*dp_turbulent,
-     final m_flow_small=1E-4*abs(m_flow_nominal));
-   extends AixLib.Airflow.Multizone.BaseClasses.PowerLawResistanceParameters(
-     m = 0.5);
-   parameter Real k "Flow coefficient, k = m_flow/ dp^m";
- protected
-   parameter Real C=k/rho_default "Flow coefficient, C = V_flow/dp^m";
- 
-      annotation (
-     Icon(graphics={
-         Rectangle(
-           extent={{-52,34},{50,-34}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-60,14},{78,-12}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-98,6},{-62,-6}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{50,8},{102,-6}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-68,4},{-50,-4}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-86,6},{-50,-6}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid)}),
-     defaultComponentName="pow",
-     Documentation(info="<html>
+model Coefficient_m_flow "Powerlaw with coefficient for mass flow rate"
+  extends AixLib.Airflow.Multizone.BaseClasses.PartialOneWayFlowElement(
+    m_flow=rho*AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM(
+        C=C,
+        dp=dp,
+        m=m,
+        a=a,
+        b=b,
+        c=c,
+        d=d,
+        dp_turbulent=dp_turbulent),
+    final m_flow_nominal=k*dp_turbulent,
+    final m_flow_small=1E-4*abs(m_flow_nominal));
+  extends AixLib.Airflow.Multizone.BaseClasses.PowerLawResistanceParameters(
+    m = 0.5);
+  parameter Real k "Flow coefficient, k = m_flow/ dp^m";
+protected
+  parameter Real C=k/rho_default "Flow coefficient, C = V_flow/dp^m";
+
+     annotation (
+    Icon(graphics={
+        Rectangle(
+          extent={{-52,34},{50,-34}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-60,14},{78,-12}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-98,6},{-62,-6}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{50,8},{102,-6}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-68,4},{-50,-4}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-86,6},{-50,-6}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid)}),
+    defaultComponentName="pow",
+    Documentation(info="<html>
  <p>
  This model describes the one-directional pressure driven air flow through an opening, using the equation
  </p>
@@ -79,7 +79,7 @@ within AixLib.Airflow.Multizone;
  <li><b>Dols and Walton, 2002.</b> W. Stuart Dols and George N. Walton, <i>CONTAMW 2.0 User Manual, Multizone Airflow and Contaminant Transport Analysis Software</i>, Building and Fire Research Laboratory, National Institute of Standards and Technology, Tech. Report NISTIR 6921, November, 2002. [1]</li>
  <li><b>W. S. Dols and B. J. Polidoro</b>,<b>2015</b>. <i>CONTAM User Guide and Program Documentation Version 3.2</i>, National Institute of Standards and Technology, NIST TN 1887, Sep. 2015. doi: <a href=\"https://doi.org/10.6028/NIST.TN.1887\">10.6028/NIST.TN.1887</a>. </li>
  </ul>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  February 2, 2022, by Michael Wetter:<br/>
@@ -92,6 +92,6 @@ within AixLib.Airflow.Multizone;
  First Implementation. Model expecting direct input of mass flow powerlaw coefficients.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end Coefficient_m_flow;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Coefficient_m_flow;

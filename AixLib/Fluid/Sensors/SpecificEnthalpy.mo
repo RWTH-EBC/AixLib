@@ -1,31 +1,31 @@
 within AixLib.Fluid.Sensors;
- model SpecificEnthalpy "Ideal one port specific enthalpy sensor"
-   extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
-   extends Modelica.Icons.RoundSensor;
-   Modelica.Blocks.Interfaces.RealOutput h_out(final quantity="SpecificEnergy",
-                                               final unit="J/kg")
-     "Specific enthalpy in port medium"
-     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
- equation
-   h_out = inStream(port.h_outflow);
- annotation (defaultComponentName="senSpeEnt",
-   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-         graphics={
-         Line(points={{0,-70},{0,-100}}, color={0,0,127}),
-         Text(
-           extent={{-150,80},{150,120}},
-           textString="%name",
-           textColor={0,0,255}),
-         Text(
-           extent={{168,-30},{52,-60}},
-           textColor={0,0,0},
-           textString="h"),
-         Line(points={{70,0},{100,0}}, color={0,0,127}),
-         Text(
-           extent={{180,90},{60,40}},
-           textColor={0,0,0},
-           textString=DynamicSelect("", String(h_out, format=".0f")))}),
-   Documentation(info="<html>
+model SpecificEnthalpy "Ideal one port specific enthalpy sensor"
+  extends AixLib.Fluid.Sensors.BaseClasses.PartialAbsoluteSensor;
+  extends Modelica.Icons.RoundSensor;
+  Modelica.Blocks.Interfaces.RealOutput h_out(final quantity="SpecificEnergy",
+                                              final unit="J/kg")
+    "Specific enthalpy in port medium"
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+equation
+  h_out = inStream(port.h_outflow);
+annotation (defaultComponentName="senSpeEnt",
+  Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+        graphics={
+        Line(points={{0,-70},{0,-100}}, color={0,0,127}),
+        Text(
+          extent={{-150,80},{150,120}},
+          textString="%name",
+          textColor={0,0,255}),
+        Text(
+          extent={{168,-30},{52,-60}},
+          textColor={0,0,0},
+          textString="h"),
+        Line(points={{70,0},{100,0}}, color={0,0,127}),
+        Text(
+          extent={{180,90},{60,40}},
+          textColor={0,0,0},
+          textString=DynamicSelect("", String(h_out, format=".0f")))}),
+  Documentation(info="<html>
  <p>
  This model outputs the specific enthalpy of the fluid connected to its port.
  The sensor is ideal, i.e. it does not influence the fluid.
@@ -41,7 +41,7 @@ within AixLib.Fluid.Sensors;
  in a system model.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  September 21, 2020, by Michael Wetter:<br/>
@@ -60,6 +60,6 @@ within AixLib.Fluid.Sensors;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end SpecificEnthalpy;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end SpecificEnthalpy;

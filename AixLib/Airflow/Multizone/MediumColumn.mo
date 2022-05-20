@@ -1,160 +1,160 @@
 within AixLib.Airflow.Multizone;
- model MediumColumn
-   "Vertical shaft with no friction and no storage of heat and mass"
- 
-   replaceable package Medium =
-     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-       annotation (choices(
-         choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
- 
-   parameter Modelica.Units.SI.Length h(min=0) = 3 "Height of shaft";
-   parameter AixLib.Airflow.Multizone.Types.densitySelection densitySelection
-     "Select how to pick density" annotation (Evaluate=true);
- 
- 
-   Modelica.Fluid.Interfaces.FluidPort_a port_a(
-     redeclare package Medium = Medium,
-     p(start=Medium.p_default))
-     "Fluid connector a (positive design flow direction is from port_a to port_b)"
-     annotation (Placement(transformation(extent={{-10,90},{10,110}}),
-         iconTransformation(extent={{-10,90},{10,110}})));
-   Modelica.Fluid.Interfaces.FluidPort_b port_b(
-     redeclare package Medium = Medium,
-     p(start=Medium.p_default))
-     "Fluid connector b (positive design flow direction is from port_a to port_b)"
-     annotation (Placement(transformation(extent={{10,-110},{-10,-90}}), iconTransformation(extent={{10,-110},{-10,-90}})));
- 
-   Modelica.Units.SI.VolumeFlowRate V_flow
-     "Volume flow rate at inflowing port (positive when flow from port_a to port_b)";
-   Modelica.Units.SI.MassFlowRate m_flow
-     "Mass flow rate from port_a to port_b (m_flow > 0 is design flow direction)";
-   Modelica.Units.SI.PressureDifference dp(displayUnit="Pa")
-     "Pressure difference between port_a and port_b";
-   Modelica.Units.SI.Density rho "Density in medium column";
- protected
-   Medium.ThermodynamicState sta_a=Medium.setState_phX(
-       port_a.p,
-       actualStream(port_a.h_outflow),
-       actualStream(port_a.Xi_outflow)) "Medium properties in port_a";
-   Medium.MassFraction Xi[Medium.nXi] "Mass fraction used to compute density";
- initial equation
-   // The next assert tests for all allowed values of the enumeration.
-   // Testing against densitySelection > 0 gives an error in OpenModelica as enumerations start with 1.
-   assert(densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromTop
-      or densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromBottom
-      or densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.actual,
-     "You need to set the parameter \"densitySelection\" for the model MediumColumn.");
- equation
-   // Design direction of mass flow rate
-   m_flow = port_a.m_flow;
- 
-   // Pressure difference between ports
-   // Xi is computed first as it is used in two expression, and in one
-   // of them only one component is used.
-   // We test for Medium.nXi == 0 as Modelica.Media.Air.SimpleAir has no
-   // moisture and hence Xi[1] is an illegal statement.
-   // We first compute temperature and then invoke a density function that
-   // takes temperature as an argument. Simply calling a density function
-   // of a medium that takes enthalpy as an argument would be dangerous
-   // as different media can have different datum for the enthalpy.
-   if (densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromTop) then
-       Xi = inStream(port_a.Xi_outflow);
-       rho = AixLib.Utilities.Psychrometrics.Functions.density_pTX(
-         p=Medium.p_default,
-         T=Medium.temperature(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), Xi)),
-         X_w=if Medium.nXi == 0 then 0 else Xi[1]);
-   elseif (densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromBottom) then
-       Xi = inStream(port_b.Xi_outflow);
-       rho = AixLib.Utilities.Psychrometrics.Functions.density_pTX(
-         p=Medium.p_default,
-         T=Medium.temperature(Medium.setState_phX(port_b.p, inStream(port_b.h_outflow), Xi)),
-         X_w=if Medium.nXi == 0 then 0 else Xi[1]);
-    else
-       Xi = actualStream(port_a.Xi_outflow);
-       rho = AixLib.Utilities.Psychrometrics.Functions.density_pTX(
-         p=Medium.p_default,
-         T=Medium.temperature(Medium.setState_phX(port_a.p, actualStream(port_a.h_outflow), Xi)),
-         X_w=if Medium.nXi == 0 then 0 else Xi[1]);
-   end if;
- 
-   V_flow = m_flow/Medium.density(sta_a);
- 
-   dp = port_a.p - port_b.p;
-   dp = -h*rho*Modelica.Constants.g_n;
- 
-   // Isenthalpic state transformation (no storage and no loss of energy)
-   port_a.h_outflow = inStream(port_b.h_outflow);
-   port_b.h_outflow = inStream(port_a.h_outflow);
- 
-   // Mass balance (no storage)
-   port_a.m_flow + port_b.m_flow = 0;
- 
-   // Transport of substances
-   port_a.Xi_outflow = inStream(port_b.Xi_outflow);
-   port_b.Xi_outflow = inStream(port_a.Xi_outflow);
- 
-   port_a.C_outflow = inStream(port_b.C_outflow);
-   port_b.C_outflow = inStream(port_a.C_outflow);
- 
-   annotation (
-     Icon(graphics={
-         Line(
-           points={{0,100},{0,-100},{0,-98}}),
-         Text(
-           extent={{24,-78},{106,-100}},
-           textColor={0,0,127},
-           textString="Bottom"),
-         Text(
-           extent={{32,104},{98,70}},
-           textColor={0,0,127},
-           textString="Top"),
-         Text(
-           extent={{36,26},{88,-10}},
-           textColor={0,0,127},
-           fillColor={255,0,0},
-           fillPattern=FillPattern.Solid,
-           textString="h=%h"),
-         Rectangle(
-           extent={{-16,80},{16,-80}},
-           fillColor={255,0,0},
-           fillPattern=FillPattern.Solid,
-           pattern=LinePattern.None),
-         Rectangle(
-           visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromTop,
-           extent={{-16,80},{16,0}},
-           fillColor={85,170,255},
-           fillPattern=FillPattern.Solid,
-           pattern=LinePattern.None,
-           lineColor={0,0,0}),
-         Text(
-           extent={{-50.5,20.5},{50.5,-20.5}},
-           lineColor={0,0,127},
-           origin={-72.5,-12.5},
-           rotation=90,
-           textString="%name"),
-         Rectangle(
-           visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.actual,
-           extent={{-16,80},{16,54}},
-           fillColor={85,170,255},
-           fillPattern=FillPattern.Solid,
-           pattern=LinePattern.None,
-           lineColor={0,0,0}),
-         Rectangle(
-           visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromBottom,
-           extent={{-16,0},{16,-82}},
-           fillColor={85,170,255},
-           fillPattern=FillPattern.Solid,
-           pattern=LinePattern.None,
-           lineColor={0,0,0}),
-         Rectangle(
-           visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.actual,
-           extent={{-16,-55},{16,-80}},
-           fillColor={85,170,255},
-           fillPattern=FillPattern.Solid,
-           pattern=LinePattern.None,
-           lineColor={0,0,0})}),
- defaultComponentName="col",
- Documentation(info="<html>
+model MediumColumn
+  "Vertical shaft with no friction and no storage of heat and mass"
+
+  replaceable package Medium =
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
+
+  parameter Modelica.Units.SI.Length h(min=0) = 3 "Height of shaft";
+  parameter AixLib.Airflow.Multizone.Types.densitySelection densitySelection
+    "Select how to pick density" annotation (Evaluate=true);
+
+
+  Modelica.Fluid.Interfaces.FluidPort_a port_a(
+    redeclare package Medium = Medium,
+    p(start=Medium.p_default))
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-10,90},{10,110}}),
+        iconTransformation(extent={{-10,90},{10,110}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(
+    redeclare package Medium = Medium,
+    p(start=Medium.p_default))
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{10,-110},{-10,-90}}), iconTransformation(extent={{10,-110},{-10,-90}})));
+
+  Modelica.Units.SI.VolumeFlowRate V_flow
+    "Volume flow rate at inflowing port (positive when flow from port_a to port_b)";
+  Modelica.Units.SI.MassFlowRate m_flow
+    "Mass flow rate from port_a to port_b (m_flow > 0 is design flow direction)";
+  Modelica.Units.SI.PressureDifference dp(displayUnit="Pa")
+    "Pressure difference between port_a and port_b";
+  Modelica.Units.SI.Density rho "Density in medium column";
+protected
+  Medium.ThermodynamicState sta_a=Medium.setState_phX(
+      port_a.p,
+      actualStream(port_a.h_outflow),
+      actualStream(port_a.Xi_outflow)) "Medium properties in port_a";
+  Medium.MassFraction Xi[Medium.nXi] "Mass fraction used to compute density";
+initial equation
+  // The next assert tests for all allowed values of the enumeration.
+  // Testing against densitySelection > 0 gives an error in OpenModelica as enumerations start with 1.
+  assert(densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromTop
+     or densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromBottom
+     or densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.actual,
+    "You need to set the parameter \"densitySelection\" for the model MediumColumn.");
+equation
+  // Design direction of mass flow rate
+  m_flow = port_a.m_flow;
+
+  // Pressure difference between ports
+  // Xi is computed first as it is used in two expression, and in one
+  // of them only one component is used.
+  // We test for Medium.nXi == 0 as Modelica.Media.Air.SimpleAir has no
+  // moisture and hence Xi[1] is an illegal statement.
+  // We first compute temperature and then invoke a density function that
+  // takes temperature as an argument. Simply calling a density function
+  // of a medium that takes enthalpy as an argument would be dangerous
+  // as different media can have different datum for the enthalpy.
+  if (densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromTop) then
+      Xi = inStream(port_a.Xi_outflow);
+      rho = AixLib.Utilities.Psychrometrics.Functions.density_pTX(
+        p=Medium.p_default,
+        T=Medium.temperature(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), Xi)),
+        X_w=if Medium.nXi == 0 then 0 else Xi[1]);
+  elseif (densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromBottom) then
+      Xi = inStream(port_b.Xi_outflow);
+      rho = AixLib.Utilities.Psychrometrics.Functions.density_pTX(
+        p=Medium.p_default,
+        T=Medium.temperature(Medium.setState_phX(port_b.p, inStream(port_b.h_outflow), Xi)),
+        X_w=if Medium.nXi == 0 then 0 else Xi[1]);
+   else
+      Xi = actualStream(port_a.Xi_outflow);
+      rho = AixLib.Utilities.Psychrometrics.Functions.density_pTX(
+        p=Medium.p_default,
+        T=Medium.temperature(Medium.setState_phX(port_a.p, actualStream(port_a.h_outflow), Xi)),
+        X_w=if Medium.nXi == 0 then 0 else Xi[1]);
+  end if;
+
+  V_flow = m_flow/Medium.density(sta_a);
+
+  dp = port_a.p - port_b.p;
+  dp = -h*rho*Modelica.Constants.g_n;
+
+  // Isenthalpic state transformation (no storage and no loss of energy)
+  port_a.h_outflow = inStream(port_b.h_outflow);
+  port_b.h_outflow = inStream(port_a.h_outflow);
+
+  // Mass balance (no storage)
+  port_a.m_flow + port_b.m_flow = 0;
+
+  // Transport of substances
+  port_a.Xi_outflow = inStream(port_b.Xi_outflow);
+  port_b.Xi_outflow = inStream(port_a.Xi_outflow);
+
+  port_a.C_outflow = inStream(port_b.C_outflow);
+  port_b.C_outflow = inStream(port_a.C_outflow);
+
+  annotation (
+    Icon(graphics={
+        Line(
+          points={{0,100},{0,-100},{0,-98}}),
+        Text(
+          extent={{24,-78},{106,-100}},
+          textColor={0,0,127},
+          textString="Bottom"),
+        Text(
+          extent={{32,104},{98,70}},
+          textColor={0,0,127},
+          textString="Top"),
+        Text(
+          extent={{36,26},{88,-10}},
+          textColor={0,0,127},
+          fillColor={255,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="h=%h"),
+        Rectangle(
+          extent={{-16,80},{16,-80}},
+          fillColor={255,0,0},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None),
+        Rectangle(
+          visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromTop,
+          extent={{-16,80},{16,0}},
+          fillColor={85,170,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None,
+          lineColor={0,0,0}),
+        Text(
+          extent={{-50.5,20.5},{50.5,-20.5}},
+          lineColor={0,0,127},
+          origin={-72.5,-12.5},
+          rotation=90,
+          textString="%name"),
+        Rectangle(
+          visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.actual,
+          extent={{-16,80},{16,54}},
+          fillColor={85,170,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None,
+          lineColor={0,0,0}),
+        Rectangle(
+          visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromBottom,
+          extent={{-16,0},{16,-82}},
+          fillColor={85,170,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None,
+          lineColor={0,0,0}),
+        Rectangle(
+          visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.actual,
+          extent={{-16,-55},{16,-80}},
+          fillColor={85,170,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None,
+          lineColor={0,0,0})}),
+defaultComponentName="col",
+Documentation(info="<html>
  <p>
  This model describes the pressure difference of a vertical medium
  column. It can be used to model the pressure difference caused by
@@ -201,7 +201,7 @@ within AixLib.Airflow.Multizone;
  AixLib.Airflow.Multizone.MediumColumnDynamic</a> instead of this model.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  January 18, 2019, by Jianjun Hu:<br/>
@@ -265,6 +265,6 @@ within AixLib.Airflow.Multizone;
  Released first version.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end MediumColumn;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end MediumColumn;

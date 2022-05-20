@@ -1,18 +1,18 @@
 within AixLib.Utilities.Math.Functions;
- function smoothHeaviside
-   "Twice continuously differentiable approximation to the Heaviside function"
-   extends Modelica.Icons.Function;
-   input Real x "Argument";
-   input Real delta(min=Modelica.Constants.eps) "Parameter used for scaling";
-   output Real y "Result";
- protected
-   Real dx=0.5*x/delta "Scaled input argument";
-   Real xpow2=dx*dx "=dx*dx";
- algorithm
-   y := smooth(2, max(0, min(1, 0.5+dx*(1.875+xpow2*(-5+6*xpow2)))));
- 
-  annotation (smoothOrder = 2,
-  Documentation(info="<html>
+function smoothHeaviside
+  "Twice continuously differentiable approximation to the Heaviside function"
+  extends Modelica.Icons.Function;
+  input Real x "Argument";
+  input Real delta(min=Modelica.Constants.eps) "Parameter used for scaling";
+  output Real y "Result";
+protected
+  Real dx=0.5*x/delta "Scaled input argument";
+  Real xpow2=dx*dx "=dx*dx";
+algorithm
+  y := smooth(2, max(0, min(1, 0.5+dx*(1.875+xpow2*(-5+6*xpow2)))));
+
+ annotation (smoothOrder = 2,
+ Documentation(info="<html>
  <p>
  Twice Lipschitz continuously differentiable approximation to the
  <code>Heaviside(.,.)</code> function.<br/>
@@ -21,7 +21,7 @@ within AixLib.Utilities.Math.Functions;
  See Example <a href=\"modelica://AixLib.Utilities.Math.Examples.SmoothHeaviside\">
  AixLib.Utilities.Math.Examples.SmoothHeaviside</a>.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  October 21, 2019:<br/>
@@ -53,6 +53,6 @@ within AixLib.Utilities.Math.Functions;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end smoothHeaviside;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end smoothHeaviside;
