@@ -134,6 +134,7 @@ class Reg_Reference(object):
             package_list.remove(err)
         return package_list
 
+
     def _create_reference_results(self):  # creates reference files that do not yet exist
         self.ut.batchMode(False)
         self.ut.setLibraryRoot(self.path)
