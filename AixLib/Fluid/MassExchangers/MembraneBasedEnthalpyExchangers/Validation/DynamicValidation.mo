@@ -291,7 +291,7 @@ equation
     annotation (Line(points={{-87,0},{-52,0},{-52,6}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-160,-100},{160,100}})), Icon(
         coordinateSystem(extent={{-160,-100},{160,100}})),
-    experiment(StopTime=7200, Interval=2, method="dassl",Tolerance=1E-6),
+    experiment(StopTime=7200, Interval=2, Algorithm="dassl",Tolerance=1E-6),
     __Dymola_Commands(file=
       "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Validation/DynamicValidation.mos"
         "Simulate and plot"),
