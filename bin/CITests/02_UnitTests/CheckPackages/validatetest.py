@@ -385,15 +385,15 @@ class Create_whitelist(object):
                 continue
             if result is False:
                 print(f'\n{self.CRED}Error:{self.CEND} {model}\n')
-                #log = self.dymola.getLastError()
-                #print(f'{log}')
+                log = self.dymola.getLastError()
+                print(f'{log}')
                 error_model.append(model)
-                #error_message.append(log)
+                error_message.append(log)
                 continue
         self.dymola.savelog(f'{self.wh_lib}-log.txt')
         self.dymola.close()
-        #return error_model, error_message
-        return error_model
+        return error_model, error_message
+        #return error_model
 
     def _write_exit_log(self, version_check):  # write entry in exit file
         exit = open(self.exit_file, "w")
