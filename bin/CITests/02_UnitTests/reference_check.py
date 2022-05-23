@@ -74,7 +74,7 @@ class Reg_Reference(object):
         ref_dir = f'{self.library}{os.sep}{self.ref_file_path}'
         for ref in ref_list:
             print(f'Update reference file: {ref_dir}{os.sep}{ref}\n')
-            if os.path.exists(f'..{os.sep}{ref_dir}{os.sep}{ref}'):
+            if os.path.exists(f'..{os.sep}{ref_dir}{os.sep}{ref}') is True:
                 os.remove(f'..{os.sep}{ref_dir}{os.sep}{ref}')
             else:
                 print(f'File {os.sep}{ref_dir}{os.sep}{ref} does not exist\n')
