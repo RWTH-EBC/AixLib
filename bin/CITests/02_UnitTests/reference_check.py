@@ -77,7 +77,7 @@ class Reg_Reference(object):
             if os.path.exists(f'..{os.sep}{ref_dir}{os.sep}{ref}') is True:
                 os.remove(f'..{os.sep}{ref_dir}{os.sep}{ref}')
             else:
-                print(f'File {os.sep}{ref_dir}{os.sep}{ref} does not exist\n')
+                print(f'File {ref_dir}{os.sep}{ref} does not exist\n')
 
     def _get_ref_package(self):  # reproduces packages in which reference results are missing
         mos_list = Reg_Reference._compare_ref_mos(self)
@@ -171,8 +171,11 @@ class Reg_Reference(object):
     def _get_update_package(self, ref_list):
         ref_package_list = []
         for ref in ref_list:
-            ref_model = ref[:ref.rfind("_")].replace("_", ".")
-            ref_package_list.append(ref_model[:ref_model.rfind(".")])
+            if ref.rfind("Validation") > -1:
+                ref_package_list.append(ref[:ref.rfind("_Validation")+11].replace("_","."))
+            elif ref.rfind("Examples") > -1:
+                ref_package_list.append(ref[:ref.rfind("_Examples")+9].replace("_", "."))
+
         ref_package_list = list(set(ref_package_list))
         return ref_package_list
 
@@ -584,6 +587,7 @@ if __name__ == '__main__':
         ref_check._delte_ref_file(ref_list)
         package_list = ref_check._get_update_package(ref_list)
         for package in package_list:
+            print(package)
             ret_val = ref_check._update_ref(package)
         exit(0)
     else:
