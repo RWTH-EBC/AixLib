@@ -15,7 +15,7 @@ stages:
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > ${exit_file}
     script:
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
         - cd .. && echo 'successful' > ${exit_file}
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
@@ -92,7 +92,7 @@ CI_create_plots:
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > ${exit_file}
     script:
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
         - cd .. && echo 'successful' > ${exit_file}
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
@@ -203,7 +203,7 @@ prepare_create_plots:
         - echo 'FAIL' > ${exit_file}
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 > ${ch_file}
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package ${lib_package} --library ${library} --batch -DS ${dymolaversion} -n 2 --modified-model
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package ${lib_package} --library ${library} --batch -DS ${dymolaversion} -n 2 --modified-model
         - cd .. && echo 'successful' > ${exit_file}
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
@@ -308,7 +308,7 @@ RegressionTest_Check_References:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > ${exit_file}
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 2 < ../${eof_file}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 4 < ../${eof_file}
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
@@ -382,7 +382,7 @@ Update_Regression_Results:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > ${exit_file}
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package ${library} -n 2 < ../${eof_file}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package ${library} -n 4 < ../${eof_file}
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}

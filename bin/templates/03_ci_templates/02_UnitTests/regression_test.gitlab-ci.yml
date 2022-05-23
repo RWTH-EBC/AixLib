@@ -15,7 +15,7 @@ stages:
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
+        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
         - cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
@@ -144,7 +144,7 @@ CI_create_plots:
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
+        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
         - cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
@@ -337,7 +337,7 @@ prepare_create_plots:
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 > bin/Configfiles/ci_changed_model_list.txt
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package ${lib_package} --library AixLib --batch -DS 2022 -n 2 --modified-model
+        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package ${lib_package} --library AixLib --batch -DS 2022 -n 2 --modified-model
         - cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
@@ -514,7 +514,7 @@ RegressionTest_Check_References:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > bin/Configfiles/exit.sh
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 2 < ../bin/Configfiles/EOF.sh
+        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 4 < ../bin/Configfiles/EOF.sh
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
@@ -598,7 +598,7 @@ Update_Regression_Results:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > bin/Configfiles/exit.sh
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package AixLib -n 2 < ../bin/Configfiles/EOF.sh
+        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package AixLib -n 4 < ../bin/Configfiles/EOF.sh
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
