@@ -176,13 +176,13 @@ class Reg_Reference(object):
         return ref_package_list
 
     def _get_update_ref(self):  # get a model to update
-        file = open(".."+os.sep+self.update_ref_file, "r")
+        file = open(f'..{os.sep}{self.update_ref_file}', "r")
         lines = file.readlines()
         ref_list = []
         for line in lines:
             if len(line) == 0:
                 continue
-            else:
+            elif line.find(".txt") > -1:
                 ref_list.append(line.strip())
         file.close()
         if len(ref_list) == 0:
