@@ -37,7 +37,11 @@ IBPSA:
         - python bin/CITests/06_deploy/IBPSA_Merge/correct_userguide.py
         - rm -r modelica-ibpsa
     only:
-        - ${merge_branch}
+        refs:
+            - ${merge_branch}
+        variables:
+            - $CI_COMMIT_MESSAGE  =~ /${ci_trigger_ibpsa_commit}/
+
     except:   
         refs:
             -  external_pull_requests
@@ -80,7 +84,11 @@ WhiteList:
         - git commit -m "$message" 
         - git push --force git@github.com:${Github_Repository}.git
     only:
-        - IBPSA_Merge
+        refs:
+            - ${merge_branch}
+        variables:
+            - $CI_COMMIT_MESSAGE  =~ /${ci_trigger_ibpsa_commit}/
+
     except:   
         refs: 
             - external_pull_requests
@@ -108,7 +116,11 @@ IBPSA_Pull_Request:
     script:
        - python bin/CITests/04_api_script/api_github.py --github-repo ${Github_Repository} --working-branch $CI_COMMIT_REF_NAME  --github-token ${GITHUB_API_TOKEN} --create-pr --ibpsa-merge
     only:
-        - ${merge_branch}
+        refs:
+            - ${merge_branch}
+        variables:
+            - $CI_COMMIT_MESSAGE  =~ /${ci_trigger_ibpsa_commit}/
+
     except:    
         refs: 
             - external_pull_requests
