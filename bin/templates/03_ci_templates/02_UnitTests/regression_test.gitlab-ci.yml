@@ -15,7 +15,7 @@ stages:
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
+        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 6 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
         - cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
