@@ -4,7 +4,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
 
   extends Modelica.Icons.Example;
 
-  parameter Integer TIR=4 "Thermal Insulation Regulation" annotation (Dialog(
+  parameter Integer TIR=3 "Thermal Insulation Regulation" annotation (Dialog(
       group="Construction parameters",
       compact=true,
       descriptionLabel=true), choices(
@@ -25,30 +25,16 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     columns={2,3,4,5,6,7,8,9},
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableOnFile=false,
-    table=[0,292.15,292.15,292.15,292.15,293.15,293.15,292.15,292.15; 3600,
-        292.15,292.15,292.15,292.15,293.15,293.15,292.15,292.15; 7200,292.15,
-        292.15,292.15,292.15,293.15,293.15,292.15,292.15; 10800,292.15,292.15,
-        292.15,292.15,293.15,293.15,292.15,292.15; 14400,292.15,292.15,292.15,
-        292.15,293.15,293.15,292.15,292.15; 18000,292.15,292.15,292.15,292.15,
-        293.15,293.15,292.15,292.15; 21600,292.15,292.15,292.15,292.15,293.15,
-        293.15,292.15,292.15; 25200,294.15,292.15,294.15,294.15,292.15,292.15,
-        294.15,292.15; 28800,292.15,292.15,292.15,292.15,292.15,292.15,292.15,
-        292.15; 32400,292.15,292.15,292.15,292.15,292.15,292.15,292.15,292.15;
-        36000,292.15,292.15,292.15,292.15,292.15,292.15,292.15,292.15; 39600,
-        292.15,292.15,292.15,292.15,292.15,292.15,292.15,292.15; 43200,292.15,
-        292.15,294.15,294.15,292.15,292.15,294.15,292.15; 46800,294.15,292.15,
-        292.15,294.15,292.15,292.15,292.15,292.15; 50400,294.15,292.15,294.15,
-        294.15,292.15,294.15,294.15,292.15; 54000,292.15,292.15,292.15,292.15,
-        292.15,294.15,292.15,292.15; 57600,292.15,292.15,292.15,292.15,292.15,
-        294.15,292.15,292.15; 61200,292.15,292.15,292.15,292.15,292.15,292.15,
-        292.15,292.15; 64800,292.15,294.15,294.15,294.15,292.15,292.15,294.15,
-        292.15; 68400,294.15,292.15,292.15,294.15,292.15,294.15,292.15,292.15;
-        72000,294.15,292.15,292.15,292.15,292.15,294.15,292.15,292.15; 75600,
-        294.15,292.15,292.15,292.15,292.15,294.15,292.15,292.15; 79200,294.15,
-        292.15,294.15,292.15,292.15,294.15,294.15,292.15; 82800,292.15,292.15,
-        294.15,292.15,293.15,294.15,294.15,292.15; 86400,292.15,292.15,292.15,
-        292.15,293.15,294.15,292.15,292.15])
-    annotation (Placement(transformation(extent={{-196,-19},{-176,1}})));
+    table=[0,273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17,273.15
+         + 17,273.15 + 17,273.15 + 17; 21600,273.15 + 17,273.15 + 17,273.15 +
+        17,273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17; 21600,
+        273.15 + 20,273.15 + 20,273.15 + 20,273.15 + 20,273.15 + 20,273.15 + 20,
+        273.15 + 20,273.15 + 20; 82800,273.15 + 20,273.15 + 20,273.15 + 20,
+        273.15 + 20,273.15 + 20,273.15 + 20,273.15 + 20,273.15 + 20; 82800,
+        273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17,
+        273.15 + 17,273.15 + 17; 86400,273.15 + 17,273.15 + 17,273.15 + 17,
+        273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17,273.15 + 17])
+    annotation (Placement(transformation(extent={{-197,-19},{-177,1}})));
   Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](unit = "degC") annotation(Placement(transformation(extent={{122,-57},{142,-37}}),    iconTransformation(extent={{101,-7},{117,9}})));
   Modelica.Blocks.Interfaces.RealOutput Toutside(unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={106,-77}),     iconTransformation(extent={{100,83},{116,99}})));
   Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={127,-77}),     iconTransformation(extent={{100,63},{116,79}})));
@@ -66,7 +52,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     Wind_speed=true,
     Air_temp=true,
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/Potsdam_TRY2015_524031130658_Jahr_dymola.txt"),
+        "modelica://AixLib/Resources/weatherdata/file:///D:/Remote-User/yni/Projekte/Git/aixlib/AixLib/AixLib/Resources/weatherdata/Aachen_TRY2015_507755060854_Jahr_dymola.txt"),
     WeatherData(
       tableOnFile=true,
       table=weatherDataDay.weatherData,
@@ -76,7 +62,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     annotation (Placement(transformation(extent={{125,55},{77,87}})));
 
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope OFD(
-    redeclare DataBase.Walls.Collections.OFD.WSchV1984Heavy wallTypes,
+    redeclare DataBase.Walls.Collections.OFD.WSchV1995Heavy wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
@@ -324,31 +310,31 @@ equation
           -17.5},{-41,-17.5},{-41,-11.3455},{-35,-11.3455}},                                                                                                 color={191,0,0}));
   connect(realExpression.y, heatDemand.u)
     annotation (Line(points={{-34,-95},{-19,-95}}, color={0,0,127}));
-  connect(TSet_const.y[1], groundFloor.TSet_GF[1]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[1], groundFloor.TSet_GF[1]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-64.023},{-106.538,-64.023}},
         color={0,0,127}));
-  connect(TSet_const.y[2], groundFloor.TSet_GF[2]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[2], groundFloor.TSet_GF[2]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-63.279},{-106.538,-63.279}},
         color={0,0,127}));
-  connect(TSet_const.y[3], groundFloor.TSet_GF[4]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[3], groundFloor.TSet_GF[4]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-61.791},{-106.538,-61.791}},
         color={0,0,127}));
-  connect(TSet_const.y[4], groundFloor.TSet_GF[5]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[4], groundFloor.TSet_GF[5]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-61.047},{-106.538,-61.047}},
         color={0,0,127}));
-  connect(TSet_const.y[5], upperFloor.TSet_UF[1]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[5], upperFloor.TSet_UF[1]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-28.1238},{-105.308,-28.1238}},
         color={0,0,127}));
-  connect(TSet_const.y[6], upperFloor.TSet_UF[2]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[6], upperFloor.TSet_UF[2]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-27.2712},{-105.308,-27.2712}},
         color={0,0,127}));
-  connect(TSet_const.y[7], upperFloor.TSet_UF[3]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[7], upperFloor.TSet_UF[3]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-26.4187},{-105.308,-26.4187}},
         color={0,0,127}));
-  connect(TSet_const.y[6], upperFloor.TSet_UF[4]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[6], upperFloor.TSet_UF[4]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-25.5663},{-105.308,-25.5663}},
         color={0,0,127}));
-  connect(TSet_const.y[8], groundFloor.TSet_GF[3]) annotation (Line(points={{-175,-9},
+  connect(TSet_const.y[8], groundFloor.TSet_GF[3]) annotation (Line(points={{-176,-9},
           {-160,-9},{-160,-50},{-140,-50},{-140,-62.535},{-106.538,-62.535}},
         color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent={{-170,-100},{170,100}},      grid = {1, 1}), graphics={              Rectangle(extent={{-123,86},{-84,26}},    lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
