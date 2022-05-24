@@ -446,10 +446,11 @@ if __name__ == '__main__':
             else:
                 continue
 
+    '''
     file = open(f'bin{os.sep}Configfiles{os.sep}ci_slack_branch_inactive_list.txt', "w")
     for entry in artifacts_list:
         file.write(entry)
-    file.close()
+    file.close()'''
     print("Check finished.")
 
 
