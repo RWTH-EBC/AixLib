@@ -86,7 +86,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToCombHeaters[9] annotation (Placement(transformation(extent={{-44,-23},{-58,-12}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature tempGround[5](T=fill(273.15
          + 9, 5))
-    annotation (Placement(transformation(extent={{-21.5,-84},{-9,-71}})));
+    annotation (Placement(transformation(extent={{-23.5,-74},{-11,-61}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=OFD.heatingToRooms[1].conv.Q_flow
          + OFD.heatingToRooms[1].rad.Q_flow + OFD.heatingToRooms[2].conv.Q_flow
          + OFD.heatingToRooms[2].rad.Q_flow + OFD.heatingToRooms[3].conv.Q_flow
@@ -144,6 +144,8 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     tableOnFile=false,
     table=[0,0.5,0.5,0.5,0.5,0.5,0.5; 31536000,0.5,0.5,0.5,0.5,0.5,0.5])
     annotation (Placement(transformation(extent={{-53,98},{-73,118}})));
+  Modelica.Blocks.Continuous.Integrator heatDemand
+    annotation (Placement(transformation(extent={{-17,-105},{3,-85}})));
 equation
   // Romm Temperatures
   TAirRooms[1] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Livingroom.airload.heatPort.T);
@@ -255,7 +257,8 @@ equation
           -116.692,-50.405},{-124,-50.405},{-124,-20.9375},{-58,-20.9375}},                                                                                           color={191,0,0}));
   connect(upperFloor.Rad_Children2, heatStarToCombHeaters[9].portRad) annotation (Line(points={{
           -116.385,-44.825},{-121,-44.825},{-121,-14.0625},{-58,-14.0625}},                                                                                          color={95,95,95}));
-  connect(tempGround.port, OFD.groundTemp) annotation (Line(points={{-9,-77.5},{12.5,-77.5},{12.5,-49}},
+  connect(tempGround.port, OFD.groundTemp) annotation (Line(points={{-11,-67.5},
+          {12.5,-67.5},{12.5,-49}},
                               color={191,0,0}));
   connect(TSet_const.y[1], upperFloor.TSet_UF[1]) annotation (Line(points={{-207,25},
           {-117,25},{-117,9},{-119,9},{-119,-5},{-136,-5},{-136,-28.1238},{
@@ -303,6 +306,8 @@ equation
           -17.5},{-41,-17.5},{-41,-12.2091},{-35,-12.2091}},                                                                                                color={191,0,0}));
   connect(heatStarToCombHeaters[9].portConvRadComb, OFD.heatingToRooms[10]) annotation (Line(points={{-44,
           -17.5},{-41,-17.5},{-41,-11.3455},{-35,-11.3455}},                                                                                                 color={191,0,0}));
+  connect(realExpression.y, heatDemand.u)
+    annotation (Line(points={{-34,-95},{-19,-95}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent={{-170,-100},{170,100}},      grid = {1, 1}), graphics={              Rectangle(extent={{-123,86},{-84,26}},    lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-120,72},{-84,34}},    lineColor={0,0,255},
           textString="1-Bedroom
