@@ -36,8 +36,9 @@ equation
     annotation (Line(points={{-100,0},{-94,0}}, color={0,127,255}));
     connect(val.port_2, senTCold.port_a)
     annotation (Line(points={{-74,0},{-70,0}}, color={0,127,255}));
-    connect(port_b, val.port_3) annotation (Line(points={{100,0},{100,-50},{-84,-50},
-          {-84,-10}}, color={0,127,255}));
+    connect(port_b, val.port_3) annotation (Line(points={{100,0},{100,-50},{-84,
+            -50},{-84,-10}},
+                      color={0,127,255}));
   else
      connect(port_a, senTCold.port_a);
   end if;

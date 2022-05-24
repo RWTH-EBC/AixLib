@@ -35,7 +35,8 @@ public
     T_return=313.15,
     T_flow=323.15,
     kA=10,
-    functionality="T_fixed",
+    Q_flow_fixed=1000,
+    functionality="Q_flow_fixed",
       redeclare package Medium = MediumWater)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Fluid.MixingVolumes.MixingVolume volume(
@@ -46,7 +47,7 @@ public
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-44,10})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature   fixedTemperature(T=323.15)
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature   fixedTemperature(T=328.15)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-76,48})));
