@@ -377,7 +377,7 @@ class Create_whitelist(object):
             print(f'Library path is wrong. Please check path of {self.wh_lib} library path.')
             exit(1)
         error_model = []
-        #error_message = []
+        error_message = []
         for model in model_list:
             result = self.dymola.checkModel(model)
             if result is True:

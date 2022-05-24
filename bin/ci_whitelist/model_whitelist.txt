@@ -230,4 +230,7 @@ AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MoistureMixingConservation
 
 
 AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase
+
+
+AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpBypass
  
