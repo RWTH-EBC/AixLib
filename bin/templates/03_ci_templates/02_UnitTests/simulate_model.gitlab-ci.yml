@@ -62,9 +62,14 @@ CI_simulate_AixLib_Systems:
         lib_package: Systems
     extends: .CI_simulate_model_job
 
-CI_simulate_AixLib_ThermalZones:
+CI_simulate_AixLib_ThermalZones.HighOrder:
     variables:
-        lib_package: ThermalZones
+        lib_package: ThermalZones.HighOrder
+    extends: .CI_simulate_model_job
+
+CI_simulate_AixLib_ThermalZones.ReducedOrder:
+    variables:
+        lib_package: ThermalZones.ReducedOrder
     extends: .CI_simulate_model_job
 
 CI_simulate_AixLib_Utilities:
@@ -147,9 +152,14 @@ simulate_AixLib_Systems:
         lib_package: Systems
     extends: .simulate_model_job
 
-simulate_AixLib_ThermalZones:
+simulate_AixLib_ThermalZones.HighOrder:
     variables:
-        lib_package: ThermalZones
+        lib_package: ThermalZones.HighOrder
+    extends: .simulate_model_job
+
+simulate_AixLib_ThermalZones.ReducedOrder:
+    variables:
+        lib_package: ThermalZones.ReducedOrder
     extends: .simulate_model_job
 
 simulate_AixLib_Utilities:
@@ -253,12 +263,20 @@ simulate_AixLib_Systems_changed_models:
             - AixLib/Systems/**/*  
     extends: .simulate_changed_models_job
 
-simulate_AixLib_ThermalZones_changed_models:
+simulate_AixLib_ThermalZones.HighOrder_changed_models:
     variables:
-        lib_package: ThermalZones
+        lib_package: ThermalZones.HighOrder
     only:
         changes:
-            - AixLib/ThermalZones/**/*  
+            - AixLib/ThermalZones.HighOrder/**/*  
+    extends: .simulate_changed_models_job
+
+simulate_AixLib_ThermalZones.ReducedOrder_changed_models:
+    variables:
+        lib_package: ThermalZones.ReducedOrder
+    only:
+        changes:
+            - AixLib/ThermalZones.ReducedOrder/**/*  
     extends: .simulate_changed_models_job
 
 simulate_AixLib_Utilities_changed_models:

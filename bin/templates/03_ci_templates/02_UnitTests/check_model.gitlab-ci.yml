@@ -74,9 +74,14 @@ Check_AixLib_Systems:
         lib_package: Systems
     extends: .check_model_job
 
-Check_AixLib_ThermalZones:
+Check_AixLib_ThermalZones.HighOrder:
     variables:
-        lib_package: ThermalZones
+        lib_package: ThermalZones.HighOrder
+    extends: .check_model_job
+
+Check_AixLib_ThermalZones.ReducedOrder:
+    variables:
+        lib_package: ThermalZones.ReducedOrder
     extends: .check_model_job
 
 Check_AixLib_Utilities:
@@ -180,12 +185,20 @@ Check_AixLib_Systems_changed_models:
             - AixLib/Systems/**/*
     extends: .check_changed_models_job
 
-Check_AixLib_ThermalZones_changed_models:
+Check_AixLib_ThermalZones.HighOrder_changed_models:
     variables:
-        lib_package: ThermalZones
+        lib_package: ThermalZones.HighOrder
     only:
         changes:
-            - AixLib/ThermalZones/**/*
+            - AixLib/ThermalZones.HighOrder/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_ThermalZones.ReducedOrder_changed_models:
+    variables:
+        lib_package: ThermalZones.ReducedOrder
+    only:
+        changes:
+            - AixLib/ThermalZones.ReducedOrder/**/*
     extends: .check_changed_models_job
 
 Check_AixLib_Utilities_changed_models:
@@ -259,9 +272,14 @@ CI_Check_AixLib_Systems:
         lib_package: Systems
     extends: .CI_check_model_job
 
-CI_Check_AixLib_ThermalZones:
+CI_Check_AixLib_ThermalZones.HighOrder:
     variables:
-        lib_package: ThermalZones
+        lib_package: ThermalZones.HighOrder
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_ThermalZones.ReducedOrder:
+    variables:
+        lib_package: ThermalZones.ReducedOrder
     extends: .CI_check_model_job
 
 CI_Check_AixLib_Utilities:

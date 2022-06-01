@@ -15,7 +15,7 @@ stages:
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 6 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
+        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
         - cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
@@ -80,9 +80,14 @@ CI_Regressiontest_AixLib_Systems:
         lib_package: AixLib.Systems
     extends: .CI_Regressiontest
 
-CI_Regressiontest_AixLib_ThermalZones:
+CI_Regressiontest_AixLib_ThermalZones.HighOrder:
     variables:
-        lib_package: AixLib.ThermalZones
+        lib_package: AixLib.ThermalZones.HighOrder
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_ThermalZones.ReducedOrder:
+    variables:
+        lib_package: AixLib.ThermalZones.ReducedOrder
     extends: .CI_Regressiontest
 
 CI_Regressiontest_AixLib_Utilities:
@@ -129,7 +134,9 @@ CI_create_plots:
       artifacts: true
     - job: CI_Regressiontest_AixLib_Systems
       artifacts: true
-    - job: CI_Regressiontest_AixLib_ThermalZones
+    - job: CI_Regressiontest_AixLib_ThermalZones.HighOrder
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_ThermalZones.ReducedOrder
       artifacts: true
     - job: CI_Regressiontest_AixLib_Utilities
       artifacts: true
@@ -222,9 +229,14 @@ Regressiontest_AixLib_Systems:
         lib_package: AixLib.Systems
     extends: .Regressiontest_job
 
-Regressiontest_AixLib_ThermalZones:
+Regressiontest_AixLib_ThermalZones.HighOrder:
     variables:
-        lib_package: AixLib.ThermalZones
+        lib_package: AixLib.ThermalZones.HighOrder
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_ThermalZones.ReducedOrder:
+    variables:
+        lib_package: AixLib.ThermalZones.ReducedOrder
     extends: .Regressiontest_job
 
 Regressiontest_AixLib_Utilities:
@@ -321,7 +333,9 @@ prepare_create_plots:
       artifacts: true
     - job: Regressiontest_AixLib_Systems
       artifacts: true
-    - job: Regressiontest_AixLib_ThermalZones
+    - job: Regressiontest_AixLib_ThermalZones.HighOrder
+      artifacts: true
+    - job: Regressiontest_AixLib_ThermalZones.ReducedOrder
       artifacts: true
     - job: Regressiontest_AixLib_Utilities
       artifacts: true
@@ -418,9 +432,14 @@ Changed_Regressiontest_AixLib_Systems:
         lib_package: AixLib.Systems
     extends: .Regressiontest_changed_Job
 
-Changed_Regressiontest_AixLib_ThermalZones:
+Changed_Regressiontest_AixLib_ThermalZones.HighOrder:
     variables:
-        lib_package: AixLib.ThermalZones
+        lib_package: AixLib.ThermalZones.HighOrder
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_ThermalZones.ReducedOrder:
+    variables:
+        lib_package: AixLib.ThermalZones.ReducedOrder
     extends: .Regressiontest_changed_Job
 
 Changed_Regressiontest_AixLib_Utilities:
@@ -487,7 +506,9 @@ Changed_create_plots:
       artifacts: true
     - job: Changed_Regressiontest_AixLib_Systems
       artifacts: true
-    - job: Changed_Regressiontest_AixLib_ThermalZones
+    - job: Changed_Regressiontest_AixLib_ThermalZones.HighOrder
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_ThermalZones.ReducedOrder
       artifacts: true
     - job: Changed_Regressiontest_AixLib_Utilities
       artifacts: true
