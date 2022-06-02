@@ -85,4 +85,3 @@ if __name__ == '__main__':
         if args.updated_ref is True:  # python bin/02_CITests/deploy/deploy_artifacts.py --library AixLib --ref --updated-ref
             updated_ref = ref_artifact._get_update_ref()
             ref_artifact.copy_txt(updated_ref)
-
