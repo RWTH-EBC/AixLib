@@ -67,9 +67,19 @@ CI_simulate_AixLib_ThermalZones.HighOrder:
         lib_package: ThermalZones.HighOrder
     extends: .CI_simulate_model_job
 
-CI_simulate_AixLib_ThermalZones.ReducedOrder:
+CI_simulate_AixLib_ThermalZones.ReducedOrder.Examples:
     variables:
-        lib_package: ThermalZones.ReducedOrder
+        lib_package: ThermalZones.ReducedOrder.Examples
+    extends: .CI_simulate_model_job
+
+CI_simulate_AixLib_ThermalZones.ReducedOrder.Validation:
+    variables:
+        lib_package: ThermalZones.ReducedOrder.Validation
+    extends: .CI_simulate_model_job
+
+CI_simulate_AixLib_ThermalZones.ReducedOrder.Windows:
+    variables:
+        lib_package: ThermalZones.ReducedOrder.Windows
     extends: .CI_simulate_model_job
 
 CI_simulate_AixLib_Utilities:
@@ -157,9 +167,19 @@ simulate_AixLib_ThermalZones.HighOrder:
         lib_package: ThermalZones.HighOrder
     extends: .simulate_model_job
 
-simulate_AixLib_ThermalZones.ReducedOrder:
+simulate_AixLib_ThermalZones.ReducedOrder.Examples:
     variables:
-        lib_package: ThermalZones.ReducedOrder
+        lib_package: ThermalZones.ReducedOrder.Examples
+    extends: .simulate_model_job
+
+simulate_AixLib_ThermalZones.ReducedOrder.Validation:
+    variables:
+        lib_package: ThermalZones.ReducedOrder.Validation
+    extends: .simulate_model_job
+
+simulate_AixLib_ThermalZones.ReducedOrder.Windows:
+    variables:
+        lib_package: ThermalZones.ReducedOrder.Windows
     extends: .simulate_model_job
 
 simulate_AixLib_Utilities:
@@ -271,12 +291,28 @@ simulate_AixLib_ThermalZones.HighOrder_changed_models:
             - AixLib/ThermalZones.HighOrder/**/*  
     extends: .simulate_changed_models_job
 
-simulate_AixLib_ThermalZones.ReducedOrder_changed_models:
+simulate_AixLib_ThermalZones.ReducedOrder.Examples_changed_models:
     variables:
-        lib_package: ThermalZones.ReducedOrder
+        lib_package: ThermalZones.ReducedOrder.Examples
     only:
         changes:
-            - AixLib/ThermalZones.ReducedOrder/**/*  
+            - AixLib/ThermalZones.ReducedOrder.Examples/**/*  
+    extends: .simulate_changed_models_job
+
+simulate_AixLib_ThermalZones.ReducedOrder.Validation_changed_models:
+    variables:
+        lib_package: ThermalZones.ReducedOrder.Validation
+    only:
+        changes:
+            - AixLib/ThermalZones.ReducedOrder.Validation/**/*  
+    extends: .simulate_changed_models_job
+
+simulate_AixLib_ThermalZones.ReducedOrder.Windows_changed_models:
+    variables:
+        lib_package: ThermalZones.ReducedOrder.Windows
+    only:
+        changes:
+            - AixLib/ThermalZones.ReducedOrder.Windows/**/*  
     extends: .simulate_changed_models_job
 
 simulate_AixLib_Utilities_changed_models:
