@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers;
+﻿within AixLib.Fluid.HeatExchangers;
 model DynamicHX "Simple dynamic heat exchanger model"
   extends Interfaces.FourPortHeatExchanger;
 
@@ -13,9 +13,9 @@ model DynamicHX "Simple dynamic heat exchanger model"
   parameter Modelica.SIunits.Temperature TCapacity_start=(T1_start + T2_start)/2
     "Start value of temperature"
     annotation(Dialog(tab="Initialization",   group="Heat capacity"));
-  parameter Modelica.Blocks.Interfaces.RealInput Gc1(unit="W/K") = Q_nom/dT_nom*2/nNodes
+  parameter Modelica.SIunits.ThermalConductance Gc1 = Q_nom/dT_nom*2/nNodes
     "Signal representing the convective thermal conductance in [W/K]" annotation(Dialog(group = "Heat Transfer"));
-  parameter Modelica.Blocks.Interfaces.RealInput Gc2(unit="W/K") = Q_nom/dT_nom*2/nNodes
+  parameter Modelica.SIunits.ThermalConductance Gc2 = Q_nom/dT_nom*2/nNodes
     "Signal representing the convective thermal conductance in [W/K]"  annotation(Dialog(group = "Heat Transfer"));
   Modelica.Blocks.Sources.RealExpression Gc1_Expression[nNodes](
   each final y=Gc1)

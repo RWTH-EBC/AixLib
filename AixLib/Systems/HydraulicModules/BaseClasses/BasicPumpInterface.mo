@@ -9,7 +9,7 @@ partial model BasicPumpInterface "Pump interface for different pump types"
 
 
   // Initialization
-  parameter Modelica.SIunits.Temperature T_start=303.15
+  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
     "Initialization temperature" annotation(Dialog(tab="Initialization"));
 
   // Dynamics

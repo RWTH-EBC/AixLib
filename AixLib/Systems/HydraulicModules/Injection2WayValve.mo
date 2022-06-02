@@ -3,6 +3,25 @@ model Injection2WayValve
   "Injection circuit with pump and two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
+
+  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"  annotation(Dialog(tab="Advanced"));
+
+
+  Fluid.Actuators.Valves.TwoWayTable  valve(
+    CvData=AixLib.Fluid.Types.CvTypes.Kv,
+    redeclare package Medium = Medium,
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal,
+    Kv=Kv,
+    order=1,
+    init=Modelica.Blocks.Types.Init.InitialState,
+    y_start=0,
+    flowCharacteristics=Fluid.Actuators.Valves.Data.Linear())
+           annotation (Dialog(enable=true, group="Actuators"), Placement(
+        transformation(
+        extent={{8,8},{-8,-8}},
+        rotation=0,
+        origin={-42,-60})));
       replaceable BaseClasses.BasicPumpInterface PumpInterface(
     redeclare package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
@@ -13,24 +32,6 @@ model Injection2WayValve
     Dialog(group="Actuators"),
     choicesAllMatching=true,
     Placement(transformation(extent={{42,12},{58,28}})));
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"  annotation(Dialog(tab="Advanced"));
-
-
-  Fluid.Actuators.Valves.TwoWayLinear valve(
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    redeclare package Medium = Medium,
-    final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal,
-    Kv=Kv,
-    order=1,
-    init=Modelica.Blocks.Types.Init.InitialState,
-    y_start=0)
-           annotation (Dialog(enable=true, group="Actuators"), Placement(
-        transformation(
-        extent={{8,8},{-8,-8}},
-        rotation=0,
-        origin={-42,-60})));
-
   Fluid.FixedResistances.GenericPipe  pipe1(
     redeclare package Medium = Medium,
     pipeModel=pipeModel,

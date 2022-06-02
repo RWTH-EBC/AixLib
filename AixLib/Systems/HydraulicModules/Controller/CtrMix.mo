@@ -12,8 +12,8 @@ block CtrMix "Controller for mixed and injection circuits "
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
-  parameter Boolean reverseAction = false
-    "Set to true for throttling the water flow rate through a cooling coil controller";
+  parameter Boolean reverseAction = true
+    "Set to true if heating system, and false for cooling system";
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(group="PID"));
@@ -36,7 +36,7 @@ block CtrMix "Controller for mixed and injection circuits "
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction)
+    final reverseActing=reverseAction)
             annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
