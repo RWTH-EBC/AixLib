@@ -10,11 +10,9 @@ class Deploy_Artifacts(object):
     def __init__(self, library):
         self.library = library
         self.folder = 'Referencefiles'
-
         self.green = '\033[0;32m'
         self.CRED = '\033[91m'
         self.CEND = '\033[0m'
-
         sys.path.append('bin/CITests')
         from _config import new_ref_file, update_ref_file
         self.new_ref_file = new_ref_file
