@@ -451,7 +451,19 @@ equation
     Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>Model for indoor swimming pools to calculate energy and water demands. Optional use of a wave machine, pool cover, partial load for the circulation pump and heat recovery from wastewater or recycling. </p>
-<p><br><br><img src=\"modelica://AixLib/Resources/Images/Fluid/Pools/IndoorSwimmingPoolFigure.png\"/> </p>
+<p><br><br><img src=\"modelica://AixLib/Resources/Images/Fluid/Pools/IndoorSwimmingPool.png\"/> </p>
+<p> a) Evaporative mass flow and evaporative heat loss
+<p> b) Radiative and convective heat exchhange
+<p> c) Heat conduction through swimming pool walls
+<p> d) Mass flow in an adiabativ pipe to the water storage
+<p> e) Mass flow to the swimming pool
+<p> f) Wastewater mass flow towards sewerage system
+<p> g) Volume of water storage
+<p> h) Mass flow of fresh water supply
+<p> i) Power demand of the circulation pump
+<p> j) Heat flow to compensate heat losses
+<p> k) Possible integration of a heat exchanger to recover heat from wastewater
+
 <p><b><span style=\"color: #008000;\">Important parameters and Inputs</span></b> </p>
 <p>All pool specific parameters are collected in one <a href=\"AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord\">AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord</a> record.</p>
 <p>Input profile for the opening hours to consider a pool cover or a reduced circulation flow during non-operating hours. </p>
