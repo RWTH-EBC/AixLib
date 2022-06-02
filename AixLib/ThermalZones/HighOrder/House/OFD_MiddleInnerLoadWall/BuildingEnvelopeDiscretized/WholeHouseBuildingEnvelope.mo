@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized;
 model WholeHouseBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(    redeclare replaceable parameter
@@ -49,7 +49,6 @@ model WholeHouseBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
     final T0_air=T0_air,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
@@ -89,7 +88,6 @@ model WholeHouseBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
     final T0_air=T0_air,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
@@ -129,7 +127,6 @@ model WholeHouseBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
     final T0_air=T0_air,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,

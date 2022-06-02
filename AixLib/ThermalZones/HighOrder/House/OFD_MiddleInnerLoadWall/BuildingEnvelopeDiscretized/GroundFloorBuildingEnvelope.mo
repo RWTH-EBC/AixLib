@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized;
 model GroundFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
@@ -104,7 +104,6 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -151,7 +150,6 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -196,7 +194,6 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -243,7 +240,6 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -290,7 +286,6 @@ model GroundFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
