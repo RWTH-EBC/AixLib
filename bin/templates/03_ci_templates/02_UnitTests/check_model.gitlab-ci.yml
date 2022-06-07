@@ -39,9 +39,49 @@ stages:
             - $CI_COMMIT_MESSAGE  =~ /ci_html/
             - $CI_COMMIT_MESSAGE  =~ /ci_setting/
             
-Check_AixLib_ThermalZones.ReducedOrder.Examples:
+Check_AixLib_Airflow:
     variables:
-        lib_package: ThermalZones.ReducedOrder.Examples
+        lib_package: Airflow
+    extends: .check_model_job
+
+Check_AixLib_BoundaryConditions:
+    variables:
+        lib_package: BoundaryConditions
+    extends: .check_model_job
+
+Check_AixLib_Controls:
+    variables:
+        lib_package: Controls
+    extends: .check_model_job
+
+Check_AixLib_Electrical:
+    variables:
+        lib_package: Electrical
+    extends: .check_model_job
+
+Check_AixLib_Fluid:
+    variables:
+        lib_package: Fluid
+    extends: .check_model_job
+
+Check_AixLib_Media:
+    variables:
+        lib_package: Media
+    extends: .check_model_job
+
+Check_AixLib_Systems:
+    variables:
+        lib_package: Systems
+    extends: .check_model_job
+
+Check_AixLib_ThermalZones:
+    variables:
+        lib_package: ThermalZones
+    extends: .check_model_job
+
+Check_AixLib_Utilities:
+    variables:
+        lib_package: Utilities
     extends: .check_model_job
 
 
@@ -84,12 +124,76 @@ Check_AixLib_ThermalZones.ReducedOrder.Examples:
         max: 2
         when: runner_system_failure
 
-Check_AixLib_ThermalZones.ReducedOrder.Examples_changed_models:
+Check_AixLib_Airflow_changed_models:
     variables:
-        lib_package: ThermalZones.ReducedOrder.Examples
+        lib_package: Airflow
     only:
         changes:
-            - AixLib/ThermalZones.ReducedOrder.Examples/**/*
+            - AixLib/Airflow/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_BoundaryConditions_changed_models:
+    variables:
+        lib_package: BoundaryConditions
+    only:
+        changes:
+            - AixLib/BoundaryConditions/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_Controls_changed_models:
+    variables:
+        lib_package: Controls
+    only:
+        changes:
+            - AixLib/Controls/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_Electrical_changed_models:
+    variables:
+        lib_package: Electrical
+    only:
+        changes:
+            - AixLib/Electrical/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_Fluid_changed_models:
+    variables:
+        lib_package: Fluid
+    only:
+        changes:
+            - AixLib/Fluid/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_Media_changed_models:
+    variables:
+        lib_package: Media
+    only:
+        changes:
+            - AixLib/Media/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_Systems_changed_models:
+    variables:
+        lib_package: Systems
+    only:
+        changes:
+            - AixLib/Systems/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_ThermalZones_changed_models:
+    variables:
+        lib_package: ThermalZones
+    only:
+        changes:
+            - AixLib/ThermalZones/**/*
+    extends: .check_changed_models_job
+
+Check_AixLib_Utilities_changed_models:
+    variables:
+        lib_package: Utilities
+    only:
+        changes:
+            - AixLib/Utilities/**/*
     extends: .check_changed_models_job
 
 
@@ -120,9 +224,49 @@ Check_AixLib_ThermalZones.ReducedOrder.Examples_changed_models:
         when: runner_system_failure  
     
             
-CI_Check_AixLib_ThermalZones.ReducedOrder.Examples:
+CI_Check_AixLib_Airflow:
     variables:
-        lib_package: ThermalZones.ReducedOrder.Examples
+        lib_package: Airflow
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_BoundaryConditions:
+    variables:
+        lib_package: BoundaryConditions
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_Controls:
+    variables:
+        lib_package: Controls
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_Electrical:
+    variables:
+        lib_package: Electrical
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_Fluid:
+    variables:
+        lib_package: Fluid
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_Media:
+    variables:
+        lib_package: Media
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_Systems:
+    variables:
+        lib_package: Systems
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_ThermalZones:
+    variables:
+        lib_package: ThermalZones
+    extends: .CI_check_model_job
+
+CI_Check_AixLib_Utilities:
+    variables:
+        lib_package: Utilities
     extends: .CI_check_model_job
 
 

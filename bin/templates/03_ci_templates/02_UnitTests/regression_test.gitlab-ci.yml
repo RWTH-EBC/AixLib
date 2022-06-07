@@ -45,9 +45,49 @@ stages:
         max: 2
         when: runner_system_failure
 
-CI_Regressiontest_AixLib_ThermalZones.ReducedOrder.Examples:
+CI_Regressiontest_AixLib_Airflow:
     variables:
-        lib_package: AixLib.ThermalZones.ReducedOrder.Examples
+        lib_package: AixLib.Airflow
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_BoundaryConditions:
+    variables:
+        lib_package: AixLib.BoundaryConditions
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_Controls:
+    variables:
+        lib_package: AixLib.Controls
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_Electrical:
+    variables:
+        lib_package: AixLib.Electrical
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_Fluid:
+    variables:
+        lib_package: AixLib.Fluid
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_Media:
+    variables:
+        lib_package: AixLib.Media
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_Systems:
+    variables:
+        lib_package: AixLib.Systems
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_ThermalZones:
+    variables:
+        lib_package: AixLib.ThermalZones
+    extends: .CI_Regressiontest
+
+CI_Regressiontest_AixLib_Utilities:
+    variables:
+        lib_package: AixLib.Utilities
     extends: .CI_Regressiontest
 
 
@@ -75,7 +115,23 @@ CI_create_plots:
             - $CI_COMMIT_MESSAGE  =~ /ci_regression_test/
     when: on_failure
     needs:
-    - job: CI_Regressiontest_AixLib_ThermalZones.ReducedOrder.Examples
+    - job: CI_Regressiontest_AixLib_Airflow
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_BoundaryConditions
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_Controls
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_Electrical
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_Fluid
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_Media
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_Systems
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_ThermalZones
+      artifacts: true
+    - job: CI_Regressiontest_AixLib_Utilities
       artifacts: true
 
 .Regressiontest_job:
@@ -131,9 +187,49 @@ CI_create_plots:
         max: 2
         when: runner_system_failure
 
-Regressiontest_AixLib_ThermalZones.ReducedOrder.Examples:
+Regressiontest_AixLib_Airflow:
     variables:
-        lib_package: AixLib.ThermalZones.ReducedOrder.Examples
+        lib_package: AixLib.Airflow
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_BoundaryConditions:
+    variables:
+        lib_package: AixLib.BoundaryConditions
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_Controls:
+    variables:
+        lib_package: AixLib.Controls
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_Electrical:
+    variables:
+        lib_package: AixLib.Electrical
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_Fluid:
+    variables:
+        lib_package: AixLib.Fluid
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_Media:
+    variables:
+        lib_package: AixLib.Media
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_Systems:
+    variables:
+        lib_package: AixLib.Systems
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_ThermalZones:
+    variables:
+        lib_package: AixLib.ThermalZones
+    extends: .Regressiontest_job
+
+Regressiontest_AixLib_Utilities:
+    variables:
+        lib_package: AixLib.Utilities
     extends: .Regressiontest_job
 
 
@@ -211,7 +307,23 @@ prepare_create_plots:
             - $CI_COMMIT_MESSAGE  =~ /ci_setting/
     when: on_failure
     needs:
-    - job: Regressiontest_AixLib_ThermalZones.ReducedOrder.Examples
+    - job: Regressiontest_AixLib_Airflow
+      artifacts: true
+    - job: Regressiontest_AixLib_BoundaryConditions
+      artifacts: true
+    - job: Regressiontest_AixLib_Controls
+      artifacts: true
+    - job: Regressiontest_AixLib_Electrical
+      artifacts: true
+    - job: Regressiontest_AixLib_Fluid
+      artifacts: true
+    - job: Regressiontest_AixLib_Media
+      artifacts: true
+    - job: Regressiontest_AixLib_Systems
+      artifacts: true
+    - job: Regressiontest_AixLib_ThermalZones
+      artifacts: true
+    - job: Regressiontest_AixLib_Utilities
       artifacts: true
 
 .Regressiontest_changed_Job:
@@ -271,9 +383,49 @@ prepare_create_plots:
         max: 2
         when: runner_system_failure
 
-Changed_Regressiontest_AixLib_ThermalZones.ReducedOrder.Examples:
+Changed_Regressiontest_AixLib_Airflow:
     variables:
-        lib_package: AixLib.ThermalZones.ReducedOrder.Examples
+        lib_package: AixLib.Airflow
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_BoundaryConditions:
+    variables:
+        lib_package: AixLib.BoundaryConditions
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_Controls:
+    variables:
+        lib_package: AixLib.Controls
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_Electrical:
+    variables:
+        lib_package: AixLib.Electrical
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_Fluid:
+    variables:
+        lib_package: AixLib.Fluid
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_Media:
+    variables:
+        lib_package: AixLib.Media
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_Systems:
+    variables:
+        lib_package: AixLib.Systems
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_ThermalZones:
+    variables:
+        lib_package: AixLib.ThermalZones
+    extends: .Regressiontest_changed_Job
+
+Changed_Regressiontest_AixLib_Utilities:
+    variables:
+        lib_package: AixLib.Utilities
     extends: .Regressiontest_changed_Job
 
 
@@ -321,7 +473,23 @@ Changed_create_plots:
         when: runner_system_failure
     when: on_failure
     needs:
-    - job: Changed_Regressiontest_AixLib_ThermalZones.ReducedOrder.Examples
+    - job: Changed_Regressiontest_AixLib_Airflow
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_BoundaryConditions
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_Controls
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_Electrical
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_Fluid
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_Media
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_Systems
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_ThermalZones
+      artifacts: true
+    - job: Changed_Regressiontest_AixLib_Utilities
       artifacts: true
 
 
