@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
   extends
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
@@ -9,7 +9,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation(choicesAllMatching=true);
   parameter Integer internalGainsMode = 1
      "decides which internal gains model for persons is used";
-  parameter Boolean use_NaturalAirExchange = false
+  parameter Boolean use_NaturalAirExchange = use_MechanicalAirExchange
     "Consider natural infiltration and ventilation by setting true";
  parameter Boolean use_MechanicalAirExchange = false
     "Consider mechanical ventilation by setting true";
