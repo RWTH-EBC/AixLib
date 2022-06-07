@@ -818,6 +818,7 @@ end if;
           -40},{110,-40}},                   color={0,0,127}));
   connect(QIntGainsInternalTot_flow.y, QIntGains_flow) annotation (Line(points={{98.2,
           -40},{110,-40}},                   color={0,0,127}));
+>>>>>>>>> Temporary merge branch 2
   annotation (Documentation(revisions="<html><ul>
   <li>November 20, 2020, by Katharina Breuer:<br/>
     Combine thermal zone models
