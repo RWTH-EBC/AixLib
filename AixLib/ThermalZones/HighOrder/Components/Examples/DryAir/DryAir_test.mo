@@ -33,7 +33,8 @@ equation
   realOut[2] = varAirExchange.port_b.Q_flow;
   realOut[3] = infiltrationRate_DIN12831.port_b.Q_flow;
   realOut[4] = dynamicVentilation.port_inside.Q_flow;
-  connect(dynamicVentilation.port_inside, airload.port) annotation(Line(points={{7.4,-5},{19.5,-5},{19.5,-12},{42,-12}},        color = {191, 0, 0}));
+  connect(dynamicVentilation.port_inside, airload.port) annotation(Line(points={{7.8,-4},
+          {19.5,-4},{19.5,-12},{42,-12}},                                                                                       color = {191, 0, 0}));
   connect(fixedHeatFlow.port, airload1.port) annotation(Line(points={{-70,82},{-38,82},{-38,70},{-2,70}},           color = {191, 0, 0}));
   connect(TempOutsideDaycurve.port, varAirExchange.port_a) annotation(Line(points = {{-70, 50}, {-41, 50}, {-41, 48}, {-12, 48}}, color = {191, 0, 0}));
   connect(TempInside.port, varAirExchange.port_b) annotation(Line(points = {{70, 50}, {49, 50}, {49, 48}, {8, 48}}, color = {191, 0, 0}));
@@ -42,7 +43,8 @@ equation
   connect(sine.y, TempOutsideDaycurve.T) annotation(Line(points = {{-86.6, 26}, {-92, 26}, {-92, 50}}, color = {0, 0, 127}));
   connect(sine1.y, varAirExchange.ventRate) annotation (Line(points={{-23.5,37},
           {-17.75,37},{-17.75,41.6},{-11,41.6}}, color={0,0,127}));
-  connect(TempOutsideDaycurve.port, dynamicVentilation.port_outside) annotation(Line(points = {{-70, 50}, {-50, 50}, {-50, -5}, {-11.6, -5}}, color = {191, 0, 0}));
+  connect(TempOutsideDaycurve.port, dynamicVentilation.port_outside) annotation(Line(points={{-70,50},
+          {-50,50},{-50,-4},{-12,-4}},                                                                                                        color = {191, 0, 0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{12, 90}, {20, 82}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{12, 60}, {20, 52}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{12, 32}, {20, 24}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{12, 6}, {20, -2}}, lineColor = {0, 0, 255}, textString = "4")}), experiment(StopTime = 86400, Interval = 15, Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(revisions = "<html><ul>
   <li>
     <i>May 14, 2013&#160;</i> by Ole Odendahl:<br/>
@@ -72,7 +74,10 @@ equation
 <p>
   The simulation consists of the following models:
 </p>
-<table summary=\"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+<table>
+  <caption>
+    \"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\
+  </caption>
   <tr>
     <td bgcolor=\"#DCDCDC\">
       <p>
