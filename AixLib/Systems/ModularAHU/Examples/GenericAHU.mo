@@ -149,8 +149,7 @@ model GenericAHU "Example of generic ahu model"
     usePreheater=true,
     useTwoFanCtr=true,
     VFlowSet=3000/3600,
-    initType=Modelica.Blocks.Types.InitPID.InitialState,
-                                                      ctrRh(k=0.01))
+    initType=Modelica.Blocks.Types.Init.InitialState, ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)

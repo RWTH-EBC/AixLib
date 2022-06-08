@@ -233,4 +233,7 @@ AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses.PartialCase
 
 
 AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpBypass
+
+
+AixLib.Systems.ModularAHU.Examples.EONERC_AHU2
  

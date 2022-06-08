@@ -211,7 +211,7 @@ model EONERC_AHU2
     TFlowSet=293.15,
     useExternalTset=false,
     useTwoFanCtr=true,
-    initType=Modelica.Blocks.Types.InitPID.InitialState,
+    initType=Modelica.Blocks.Types.Init.InitialState,
     ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
 equation
