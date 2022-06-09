@@ -18,10 +18,10 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  parameter Boolean use_NaturalAirExchange=use_MechanicalAirExchange
-    "Consider natural infiltration by setting true";
   parameter Boolean use_MechanicalAirExchange=true
-    "Consider mechanical ventilation infiltration by setting true";
+    "Consider mechanical ventilation by setting true";
+  parameter Boolean use_NaturalAirExchange=use_MechanicalAirExchange
+    "Consider natural ventilation and infiltration by setting true";
   parameter Boolean use_C_flow=false
     "Set to true to enable input connector for trace substance"
     annotation (Dialog(tab="CO2"));
