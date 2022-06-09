@@ -1,15 +1,11 @@
-﻿within AixLib.Fluid.Pools;
+within AixLib.Fluid.Pools;
 model IndoorSwimmingPool
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam
   "Choose setup for this pool" annotation (choicesAllMatching=true);
 
   replaceable package WaterMedium = AixLib.Media.Water
-    "Water properties for water with 30 °C" annotation (choicesAllMatching=true);
-  //(
-  //  cp_const = 4180,
-  //  d_const = 995.65,
-  //  eta_const = 0.00079722,
-  //  lambda_const = 0.61439)
+    "Medium within pool and water treatment circuit" annotation (choicesAllMatching=true);
+
 
     // Assumptions
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -18,7 +14,6 @@ model IndoorSwimmingPool
   parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-
 
   // Water transfer coefficients according to VDI 2089 Blatt 1
   parameter Real beta_nonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));

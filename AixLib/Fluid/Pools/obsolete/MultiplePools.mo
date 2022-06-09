@@ -1,17 +1,16 @@
-within AixLib.Fluid.Pools;
+within AixLib.Fluid.Pools.obsolete;
 model MultiplePools
 
- replaceable parameter AixLib.DataBase.ThermalZones.SwimmingHallMultiplePools Swimminghall
-    "Choose setup for this zone" annotation (choicesAllMatching=true);
+  replaceable parameter AixLib.Fluid.Pools.obsolete.SwimmingHallMultiplePools
+    Swimminghall "Choose setup for this zone"
+    annotation (choicesAllMatching=true);
 
   final parameter Boolean use_swimmingPools = Swimminghall.use_swimmingPools;
   final parameter Integer numPools = Swimminghall.numPools;
 
-
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools] = Swimminghall.poolParam
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = use_swimmingPools));
     //if use_swimmingPools and  ATot > 0
-
 
   IndoorSwimmingPool indoorSwimmingPool[numPools] if
                               use_swimmingPools
@@ -61,7 +60,6 @@ model MultiplePools
 
   parameter Integer numNonIdeal = numPools - sum(if poolParam[i].use_idealHeatExchanger then 1 else 0 for i in 1:numPools);
 equation
-
 
   if use_swimmingPools then
       connect(indoorSwimmingPool.TSoil, TSoil) annotation (Line(points={{16.81,7.44},

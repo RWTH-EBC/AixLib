@@ -1,6 +1,5 @@
-within AixLib.DataBase.ThermalZones;
-record SwimminghallBaseRecord
-  "Base record definition for zone records"
+within AixLib.Fluid.Pools.obsolete;
+record SwimminghallBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
   // Add for Pools

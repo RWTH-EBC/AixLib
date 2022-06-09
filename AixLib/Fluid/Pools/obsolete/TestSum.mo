@@ -1,4 +1,4 @@
-within AixLib.Fluid.Pools;
+within AixLib.Fluid.Pools.obsolete;
 model TestSum
   parameter Boolean useSecondInput = false;
 
