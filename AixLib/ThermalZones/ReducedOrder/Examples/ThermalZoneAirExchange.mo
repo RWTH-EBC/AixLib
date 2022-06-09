@@ -138,7 +138,7 @@ model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
 
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-72,30},{-34,30},{-34,6},{-10,6}},
+      points={{-72,30},{-34,30},{-34,0},{-10,0}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus, weaBus) annotation (Line(
@@ -148,14 +148,13 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-9.6,-1.6},
-          {-35.65,-1.6},{-35.65,-4},{-61,-4}},       color={0,0,127}), Text(
+  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-11.3,
+          -3.9},{-35.65,-3.9},{-35.65,-4},{-61,-4}},color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(const.y, thermalZone.ventRate) annotation (Line(points={{-71,-30},{-40,
-          -30},{-8,-30},{-7,-30},{-7,-4.2},{-9.6,-4.2}},
-                                                      color={0,0,127}));
+          -30},{-8,-30},{-7,-30},{-7,-4.2},{-9.6,-4.2}},color={0,0,127}));
   connect(internalGains.y, thermalZone.intGains)
     annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
