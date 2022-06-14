@@ -51,13 +51,18 @@ model Test_SteamHumidifier
     annotation (Placement(transformation(extent={{-24,70},{-4,90}})));
   Modelica.Blocks.Sources.Constant m_wat_flow(k=0.006)
     annotation (Placement(transformation(extent={{74,-36},{54,-16}})));
+  Utilities.Psychrometrics.Phi_pTX phi
+    annotation (Placement(transformation(extent={{14,-34},{26,-22}})));
+  Utilities.Psychrometrics.ToTotalAir toTotAir
+    annotation (Placement(transformation(extent={{2,-32},{8,-26}})));
+protected
+  Modelica.Blocks.Sources.Constant p_atm(k=101325)
+    annotation (Placement(transformation(extent={{-8,-44},{0,-36}})));
 equation
   connect(T_airOut_fluid.port_b, X_airOut_fluid.port_a)
     annotation (Line(points={{84,44},{92,44}},   color={0,127,255}));
   connect(m_airIn_equation.y, steamHumidifier.m_flow_airIn) annotation (Line(
         points={{-79,10},{-52,10},{-52,-12},{-25,-12}}, color={0,0,127}));
-  connect(steamHumidifier.T_steamIn, T_steam.y) annotation (Line(points={{-17,-29.4},
-          {-17,-60},{15,-60}}, color={0,0,127}));
   connect(m_airIn_equation.y, boundary.m_flow_in) annotation (Line(points={{-79,10},
           {-52,10},{-52,52},{-14,52}},    color={0,0,127}));
   connect(X_airOut_fluid.port_b, bou.ports[1]) annotation (Line(points={{112,44},
@@ -78,6 +83,16 @@ equation
           50},{25,50}}, color={0,0,127}));
   connect(m_wat_flow.y, steamHumidifier.m_wat_flow) annotation (Line(points={{
           53,-26},{42,-26},{42,-80},{-20,-80},{-20,-29.4}}, color={0,0,127}));
+  connect(T_steam.y, steamHumidifier.T_watIn) annotation (Line(points={{15,-60},
+          {-18,-60},{-18,-29.4},{-17,-29.4}}, color={0,0,127}));
+  connect(p_atm.y, phi.p) annotation (Line(points={{0.4,-40},{8,-40},{8,-32.8},
+          {13.4,-32.8}}, color={0,0,127}));
+  connect(steamHumidifier.T_airOut, phi.T) annotation (Line(points={{-3,-15},{
+          5.5,-15},{5.5,-23.2},{13.4,-23.2}}, color={0,0,127}));
+  connect(toTotAir.XiTotalAir, phi.X_w) annotation (Line(points={{8.3,-29},{
+          11.15,-29},{11.15,-28},{13.4,-28}}, color={0,0,127}));
+  connect(steamHumidifier.X_airOut, toTotAir.XiDry) annotation (Line(points={{
+          -3,-18},{0,-18},{0,-29},{1.7,-29}}, color={0,0,127}));
   annotation (experiment(
       StopTime=8000,
       __Dymola_NumberOfIntervals=8000,

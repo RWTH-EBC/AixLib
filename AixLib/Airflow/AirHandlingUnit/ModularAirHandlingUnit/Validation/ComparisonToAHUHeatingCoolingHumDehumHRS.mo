@@ -1,5 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation;
-model ComparisonToAHUHeatingCoolingDehumHRS
+model ComparisonToAHUHeatingCoolingHumDehumHRS
   "Comparitive simulation with existing AHU model"
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Sine     tempOutside(
@@ -17,7 +17,7 @@ model ComparisonToAHUHeatingCoolingDehumHRS
     heating=true,
     cooling=true,
     dehumidificationSet=true,
-    humidificationSet=false,
+    humidificationSet=true,
     HRS=true,
     efficiencyHRS_enabled=0.5,
     efficiencyHRS_disabled=0.5,
@@ -45,13 +45,13 @@ model ComparisonToAHUHeatingCoolingDehumHRS
   Modelica.Blocks.Math.Add addToExtractTemp
     annotation (Placement(transformation(extent={{46,50},{34,62}})));
   ModularAHU modularAHU(
-    humidifying=false,
+    humidifying=true,
     cooling=true,
     dehumidifying=true,
     heating=true,
     heatRecovery=true,
     use_PhiSet=false,
-    Twat=273.15,
+    Twat=284.15,
     efficiencyHRS_enabled=0.5,
     efficiencyHRS_disabled=0.5,
     dp_sup(displayUnit="Pa"),
@@ -170,4 +170,4 @@ Check whether variable allCond is always 1.")}),
       StopTime=86400,
       Interval=1,
       __Dymola_Algorithm="Dassl"));
-end ComparisonToAHUHeatingCoolingDehumHRS;
+end ComparisonToAHUHeatingCoolingHumDehumHRS;

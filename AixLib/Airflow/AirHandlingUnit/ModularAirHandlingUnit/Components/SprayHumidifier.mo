@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SprayHumidifier "Idealized model of a spray humidifier"
   extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
 
@@ -63,7 +63,7 @@ equation
   // humidification degree
   eta_B = 1 - exp(-k * WLN);
 
-  assert(X_airOut > humRat.X_w,
+  assert(X_airOut < humRat.X_w,
     "saturation exceeded with given set value. Humidification is reduced.",
     AssertionLevel.warning);
 

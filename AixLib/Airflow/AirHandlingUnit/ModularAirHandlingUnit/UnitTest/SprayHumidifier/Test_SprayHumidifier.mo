@@ -40,7 +40,7 @@ model Test_SprayHumidifier
     offset=283.15,
     startTime=2400)
     annotation (Placement(transformation(extent={{-100,-28},{-80,-8}})));
-  Modelica.Blocks.Sources.Constant m_wat_flow(k=0.006)
+  Modelica.Blocks.Sources.Constant m_wat_flow(k=0.002)
     annotation (Placement(transformation(extent={{70,-14},{50,6}})));
   Fluid.Humidifiers.Humidifier_u hum(
     redeclare package Medium = Media.Air,

@@ -1,5 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Validation;
-model ComparisonToAHUHeatingCoolingDehumHRS
+model ComparisonToAHUHeatingCoolingHumDehum
   "Comparitive simulation with existing AHU model"
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Sine     tempOutside(
@@ -17,22 +17,20 @@ model ComparisonToAHUHeatingCoolingDehumHRS
     heating=true,
     cooling=true,
     dehumidificationSet=true,
-    humidificationSet=false,
-    HRS=true,
-    efficiencyHRS_enabled=0.5,
-    efficiencyHRS_disabled=0.5,
+    humidificationSet=true,
+    HRS=false,
     dp_sup(displayUnit="Pa"),
     dp_eta(displayUnit="Pa"))
-              annotation (Placement(transformation(extent={{-68,22},{26,58}})));
+              annotation (Placement(transformation(extent={{-68,20},{26,56}})));
   Modelica.Blocks.Sources.Constant phi_roomMin(k=0.47)
     annotation (Placement(transformation(extent={{68,-18},{48,2}})));
   Modelica.Blocks.Sources.Constant phi_roomMax(k=0.55)
     annotation (Placement(transformation(extent={{98,-18},{78,2}})));
   Modelica.Blocks.Sources.Sine waterLoadOutside(
     freqHz=1/86400,
-    offset=0.006,
+    offset=0.008,
     amplitude=0.002,
-    phase=3.1415926535898)
+    phase=-0.054829518451402)
     annotation (Placement(transformation(extent={{-100,-12},{-80,8}})));
   Modelica.Blocks.Sources.Constant phi_RoomExtractAir(k=0.6)
     annotation (Placement(transformation(extent={{98,14},{78,34}})));
@@ -45,19 +43,17 @@ model ComparisonToAHUHeatingCoolingDehumHRS
   Modelica.Blocks.Math.Add addToExtractTemp
     annotation (Placement(transformation(extent={{46,50},{34,62}})));
   ModularAHU modularAHU(
-    humidifying=false,
+    humidifying=true,
     cooling=true,
     dehumidifying=true,
     heating=true,
-    heatRecovery=true,
+    heatRecovery=false,
     use_PhiSet=false,
-    Twat=273.15,
-    efficiencyHRS_enabled=0.5,
-    efficiencyHRS_disabled=0.5,
+    Twat=284.15,
     dp_sup(displayUnit="Pa"),
     dp_eta(displayUnit="Pa"),
     redeclare model humidifier = Components.SprayHumidifier)
-    annotation (Placement(transformation(extent={{-54,-68},{16,-30}})));
+    annotation (Placement(transformation(extent={{-54,-66},{16,-28}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi(use_p_in=false)
     annotation (Placement(transformation(extent={{60,-60},{48,-48}})));
   Modelica.Blocks.Math.Abs abs1
@@ -71,68 +67,68 @@ protected
     annotation (Placement(transformation(extent={{-100,-68},{-92,-60}})));
 equation
   connect(desiredT_sup.y,ahu. T_supplyAir) annotation (Line(
-      points={{41,22},{34,22},{34,33.7},{18.48,33.7}},
+      points={{41,22},{34,22},{34,31.7},{18.48,31.7}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(tempOutside.y,ahu. T_outdoorAir) annotation (Line(
-      points={{-79,32},{-74,32},{-74,32.8},{-62.36,32.8}},
+      points={{-79,32},{-74,32},{-74,30.8},{-62.36,30.8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(Vflow_in.y,ahu. Vflow_in) annotation (Line(
-      points={{-79,72},{-76,72},{-76,35.5},{-66.12,35.5}},
+      points={{-79,72},{-76,72},{-76,33.5},{-66.12,33.5}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_roomMin.y,ahu. phi_supplyAir[1]) annotation (Line(
-      points={{47,-8},{32,-8},{32,30.1},{18.48,30.1}},
+      points={{47,-8},{32,-8},{32,28.1},{18.48,28.1}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(waterLoadOutside.y,ahu. X_outdoorAir) annotation (Line(
-      points={{-79,-2},{-72,-2},{-72,28.3},{-62.36,28.3}},
+      points={{-79,-2},{-72,-2},{-72,26.3},{-62.36,26.3}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_RoomExtractAir.y,ahu. phi_extractAir) annotation (Line(
-      points={{77,24},{66,24},{66,38},{30,38},{30,45.4},{18.48,45.4}},
+      points={{77,24},{66,24},{66,38},{30,38},{30,43.4},{18.48,43.4}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_roomMax.y,ahu. phi_supplyAir[2]) annotation (Line(points={{77,-8},
-          {72,-8},{72,-28},{28,-28},{28,28.3},{18.48,28.3}},          color={0,0,
+          {72,-8},{72,-28},{28,-28},{28,26.3},{18.48,26.3}},          color={0,0,
           127}));
   connect(ahu.T_extractAir,addToExtractTemp. y) annotation (Line(points={{18.48,
-          49.9},{27.92,49.9},{27.92,56},{33.4,56}},       color={0,0,127}));
+          47.9},{27.92,47.9},{27.92,56},{33.4,56}},       color={0,0,127}));
   connect(tempAddInRoom.y,addToExtractTemp. u1) annotation (Line(points={{77,68},
           {56,68},{56,59.6},{47.2,59.6}},         color={0,0,127}));
   connect(desiredT_sup.y,addToExtractTemp. u2) annotation (Line(points={{41,22},
           {38,22},{38,44},{56,44},{56,52.4},{47.2,52.4}},color={0,0,127}));
   connect(Vflow_in.y, modularAHU.VflowOda) annotation (Line(points={{-79,72},{
-          -76,72},{-76,50},{-100,50},{-100,-37.6},{-54.875,-37.6}}, color={0,0,
+          -76,72},{-76,50},{-100,50},{-100,-35.6},{-54.875,-35.6}}, color={0,0,
           127}));
   connect(tempOutside.y, modularAHU.T_oda) annotation (Line(points={{-79,32},{
-          -74,32},{-74,16},{-100,16},{-100,-42},{-78,-42},{-78,-41.4},{-54.875,
-          -41.4}}, color={0,0,127}));
+          -74,32},{-74,16},{-100,16},{-100,-42},{-78,-42},{-78,-39.4},{-54.875,
+          -39.4}}, color={0,0,127}));
   connect(Vflow_in.y, modularAHU.VflowEta) annotation (Line(points={{-79,72},{
           -76,72},{-76,50},{-100,50},{-100,-26},{22,-26},{22,-38},{20,-38},{20,
-          -37.6},{16.875,-37.6}}, color={0,0,127}));
-  connect(addToExtractTemp.y, modularAHU.T_eta) annotation (Line(points={{33.4,
-          56},{28,56},{28,86},{100,86},{100,-41.4},{16.875,-41.4}}, color={0,0,
+          -35.6},{16.875,-35.6}}, color={0,0,127}));
+  connect(addToExtractTemp.y, modularAHU.T_eta) annotation (Line(points={{33.4,56},
+          {28,56},{28,86},{100,86},{100,-39.4},{16.875,-39.4}},     color={0,0,
           127}));
-  connect(phi_roomMin.y, modularAHU.phi_supplyAir[1]) annotation (Line(points={
-          {47,-8},{32,-8},{32,-80},{7.25,-80},{7.25,-69.14}}, color={0,0,127}));
-  connect(phi_roomMax.y, modularAHU.phi_supplyAir[2]) annotation (Line(points={
-          {77,-8},{72,-8},{72,-80},{7.25,-80},{7.25,-68.38}}, color={0,0,127}));
-  connect(desiredT_sup.y, modularAHU.T_supplyAir) annotation (Line(points={{41,
-          22},{38,22},{38,-74},{11.625,-74},{11.625,-68.76}}, color={0,0,127}));
+  connect(phi_roomMin.y, modularAHU.phi_supplyAir[1]) annotation (Line(points={{47,-8},
+          {32,-8},{32,-80},{7.25,-80},{7.25,-67.14}},         color={0,0,127}));
+  connect(phi_roomMax.y, modularAHU.phi_supplyAir[2]) annotation (Line(points={{77,-8},
+          {72,-8},{72,-80},{7.25,-80},{7.25,-66.38}},         color={0,0,127}));
+  connect(desiredT_sup.y, modularAHU.T_supplyAir) annotation (Line(points={{41,22},
+          {38,22},{38,-74},{11.625,-74},{11.625,-66.76}},     color={0,0,127}));
   connect(phi_RoomExtractAir.y, x_pTphi.phi) annotation (Line(points={{77,24},{
           72,24},{72,-57.6},{61.2,-57.6}}, color={0,0,127}));
   connect(addToExtractTemp.y, x_pTphi.T) annotation (Line(points={{33.4,56},{28,
           56},{28,86},{100,86},{100,-54},{61.2,-54}}, color={0,0,127}));
   connect(x_pTphi.X[1], modularAHU.X_eta) annotation (Line(points={{47.4,-54},{
-          32,-54},{32,-45.2},{16.875,-45.2}}, color={0,0,127}));
-  connect(modularAHU.QflowC, abs1.u) annotation (Line(points={{-30.1563,-68.95},
+          32,-54},{32,-43.2},{16.875,-43.2}}, color={0,0,127}));
+  connect(modularAHU.QflowC, abs1.u) annotation (Line(points={{-30.1563,-66.95},
           {-30.1563,-90},{-44,-90}}, color={0,0,127}));
   connect(waterLoadOutside.y, toTotAir.XiDry) annotation (Line(points={{-79,-2},
           {-66,-2},{-66,-6},{-60.6,-6}}, color={0,0,127}));
   connect(phi.phi, modularAHU.phi_oda) annotation (Line(points={{-67.4,-54},{
-          -60,-54},{-60,-45.2},{-54.875,-45.2}}, color={0,0,127}));
+          -60,-54},{-60,-43.2},{-54.875,-43.2}}, color={0,0,127}));
   connect(phi.X_w, toTotAir.XiTotalAir) annotation (Line(points={{-80.6,-54},{
           -84,-54},{-84,-16},{-40,-16},{-40,-6},{-47.4,-6}}, color={0,0,127}));
   connect(p_atm.y, phi.p) annotation (Line(points={{-91.6,-64},{-84,-64},{-84,
@@ -170,4 +166,4 @@ Check whether variable allCond is always 1.")}),
       StopTime=86400,
       Interval=1,
       __Dymola_Algorithm="Dassl"));
-end ComparisonToAHUHeatingCoolingDehumHRS;
+end ComparisonToAHUHeatingCoolingHumDehum;

@@ -15,9 +15,9 @@ model Test_SprayHumidifier1
   Modelica.Blocks.Sources.Constant T_wat(k=283.15)
     annotation (Placement(transformation(extent={{36,-70},{16,-50}})));
   Modelica.Blocks.Sources.Ramp X_set(
-    height=0.003,
+    height=0.005,
     duration(displayUnit="s") = 600,
-    offset=0.012,
+    offset=0.004,
     startTime(displayUnit="s") = 3600)
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
