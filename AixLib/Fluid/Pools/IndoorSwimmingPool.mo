@@ -6,7 +6,6 @@ model IndoorSwimmingPool
   replaceable package WaterMedium = AixLib.Media.Water
     "Medium within pool and water treatment circuit" annotation (choicesAllMatching=true);
 
-
     // Assumptions
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
@@ -14,7 +13,7 @@ model IndoorSwimmingPool
   parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-
+  parameter Boolean use_idealHeater = true "If true, swimming pools are ideally heated; if false, fluid connectors for heating cuircuit are enabled";
   // Water transfer coefficients according to VDI 2089 Blatt 1
   parameter Real beta_nonUse(unit="m/s")=7/3600 "Water transfer coefficient during non opening hours" annotation (Dialog(group="Water transfer coefficients"));
   parameter Real beta_cover(unit="m/s")=0.7/3600 "Water transfer coefficient during non opening hours"
@@ -30,27 +29,26 @@ model IndoorSwimmingPool
     "Saturation pressure at air temperature";
   Real phi "Relative humidity";
   constant Modelica.SIunits.SpecificHeatCapacity R_D=461.52 "Specific gas constant for steam"; // Source: Klaus Lucas, Thermodynamik (2008)
-  parameter Modelica.SIunits.SpecificEnergy h_vapor = AixLib.Media.Air.enthalpyOfCondensingGas(poolParam.T_pool)
-                                                                                                                "Latent heat of evaporating water";
+  Modelica.SIunits.SpecificEnergy h_vapor = AixLib.Media.Air.enthalpyOfCondensingGas(poolWater.T)     "Latent heat of evaporating water";
 
   // Pump
   parameter Modelica.SIunits.Pressure pumpHead=170000   "Expected average flow resistance of water cycle";
 
   // Pool circulation flow rate
-  parameter Modelica.SIunits.MassFlowRate m_flow = poolParam.V_flow * rhoWater_default "Circulation mass flow rate to the pool";
-  parameter Modelica.SIunits.MassFlowRate m_flow_partial = poolParam.V_flow_partial * rhoWater_default "Partial circulation mass flow rate to pool during non operating hours";
+  final parameter Modelica.SIunits.MassFlowRate m_flow = poolParam.V_flow * rhoWater_default "Circulation mass flow rate to the pool";
+  final parameter Modelica.SIunits.MassFlowRate m_flow_partial = poolParam.V_flow_partial * rhoWater_default "Partial circulation mass flow rate to pool during non operating hours";
   Modelica.SIunits.MassFlowRate m_flow_toPool(start=0.0);
 
   // Fresh water and water recycling
   Modelica.SIunits.MassFlowRate m_flow_freshWater(start=0.0);
-  parameter Modelica.SIunits.Efficiency eps = if poolParam.use_HRS then poolParam.efficiencyHRS else 0;
+  final parameter Modelica.SIunits.Efficiency eps = if poolParam.use_HRS then poolParam.efficiencyHRS else 0;
 
   // Convection and Radiation at pool water surface
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Air=3.5
-    "Coefficient of heat transfer between the water surface and the room air";
+    "Coefficient of heat transfer between the water surface and the room air" annotation(Dialog(group="Coefficients for convection and radiation"));
     // approximated for free and forced convection at velocities between 0,05 to 0,2 m/s  above a plane area
   parameter Real epsilon = 0.9*0.95
-    "Product of expected emission coefficients of water (0.95) and the surrounding wall surfaces (0.95)";
+    "Product of expected emission coefficients of water (0.95) and the surrounding wall surfaces (0.95)" annotation(Dialog(group="Coefficients for convection and radiation"));
 
   AixLib.Fluid.MixingVolumes.MixingVolume Storage(
     redeclare package Medium = WaterMedium,
@@ -83,15 +81,15 @@ model IndoorSwimmingPool
     dp_nominal(displayUnit="bar") = poolParam.dpHeatExchangerPool,
     QMax_flow=1000000,
     energyDynamics=energyDynamics) if
-                          poolParam.use_idealHeatExchanger annotation (
+                          use_idealHeater annotation (
       Placement(transformation(
         extent={{7,-10},{-7,10}},
         rotation=270,
         origin={48,-15})));
   Modelica.Blocks.Sources.RealExpression SetTemperature(y=poolParam.T_pool) if
-    poolParam.use_idealHeatExchanger
+    use_idealHeater
     annotation (Placement(transformation(extent={{86,-36},{64,-20}})));
-  Modelica.Blocks.Interfaces.RealOutput QPool if poolParam.use_idealHeatExchanger
+  Modelica.Blocks.Interfaces.RealOutput QPool if use_idealHeater
     "Heat flow rate to maintain the pool at the set temperature" annotation (
       Placement(transformation(extent={{100,-28},{120,-8}}),iconTransformation(
           extent={{100,-28},{120,-8}})));
@@ -106,7 +104,7 @@ model IndoorSwimmingPool
   Modelica.Blocks.Sources.RealExpression m_Eavporation(y=m_flow_evap)
     annotation (Placement(transformation(extent={{-9,-9},{9,9}},
         rotation=180,
-        origin={63,21})));
+        origin={61,17})));
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness HeatExchanger(
     redeclare package Medium1 = WaterMedium,
     redeclare package Medium2 = WaterMedium,
@@ -172,12 +170,12 @@ model IndoorSwimmingPool
             86,12}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b fromPool(redeclare package Medium =
-        WaterMedium) if                        poolParam.use_idealHeatExchanger == false
+        WaterMedium) if                        use_idealHeater == false
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,-14},{-90,6}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a toPool(redeclare package Medium =
-        WaterMedium) if                        poolParam.use_idealHeatExchanger == false
+        WaterMedium) if                        use_idealHeater == false
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,-38},{-90,-18}})));
 
@@ -221,13 +219,6 @@ model IndoorSwimmingPool
     "Coefficient of heat transfer between water surface and room air" annotation (Placement(transformation(extent={{4,68},{-14,86}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeatFlowEvapLoss annotation (Placement(transformation(extent={{0,36},{-16,52}})));
-
-  Modelica.Blocks.Math.Gain hEvapLatentHeatGain(final k=h_vapor)
-    "Calculation of heat flow rate due to evaporation" annotation (Placement(
-        transformation(
-        extent={{6,-6},{-6,6}},
-        rotation=270,
-        origin={42,34})));
 
   Modelica.Blocks.Interfaces.RealOutput MFlowFreshWater
     "Flow rate of added fresh water to the pool and water treatment system" annotation (Placement(transformation(extent={{100,-96},{120,-76}}),
@@ -297,6 +288,10 @@ final parameter Modelica.SIunits.Density rhoWater_default=
       X=WaterMedium.X_default) "Default medium density";
 
 
+  Modelica.Blocks.Sources.RealExpression m_Eavporation2(y=m_flow_evap*h_vapor)
+    annotation (Placement(transformation(extent={{-9,-9},{9,9}},
+        rotation=180,
+        origin={61,29})));
 equation
   // Fresh water and water recycling
   if poolParam.use_waterRecycling then
@@ -337,7 +332,7 @@ equation
      end if;
    end if;
 
-  if poolParam.use_idealHeatExchanger then
+  if use_idealHeater then
       connect(IdealHeatExchangerPool.port_b, poolWater.ports[2]) annotation (Line(
         points={{48,-8},{48,0},{-10,0},{-10,6}},                color={0,127,255}));
   else
@@ -379,8 +374,8 @@ equation
 
   connect(idealSource1.port_b, SincEvaporation.ports[1]) annotation (Line(
         points={{48,6},{86,6}},                   color={0,127,255}));
-  connect(m_Eavporation.y, idealSource1.m_flow_in) annotation (Line(points={{53.1,21},
-          {41.6,21},{41.6,9.2}},      color={0,0,127}));
+  connect(m_Eavporation.y, idealSource1.m_flow_in) annotation (Line(points={{51.1,17},
+          {41.6,17},{41.6,9.2}},      color={0,0,127}));
   connect(radWaterSurface.port_b, radPoolSurface)  annotation (Line(points={{-61,84},{-61,104}},         color={191,0,0}));
   connect(convWaterSurface.fluid, convPoolSurface) annotation (Line(points={{-29,84},
           {-28,84},{-28,100}},                       color={191,0,0}));
@@ -390,15 +385,11 @@ equation
           {-60,70},{-60,30},{-28,30},{-28,16},{-20,16}},       color={191,0,0}));
   connect(preHeatFlowEvapLoss.port, poolWater.heatPort) annotation (Line(points={{-16,44},
           {-28,44},{-28,16},{-20,16}},        color={191,0,0}));
-  connect(m_Eavporation.y, hEvapLatentHeatGain.u) annotation (Line(points={{53.1,21},
-          {42,21},{42,26.8}},           color={0,0,127}));
   connect(FreshWater.y, MFlowFreshWater) annotation (Line(points={{-48.7,-41},{
           -48,-41},{-48,-60},{-34,-60},{-34,-86},{110,-86}},
                                                            color={0,0,127}));
   connect(heatTransferConduction.heatport_a, poolWater.heatPort) annotation (
       Line(points={{5.76,59.92},{-28,59.92},{-28,16},{-20,16}}, color={191,0,0}));
-  connect(hEvapLatentHeatGain.y, minus1Gain.u)  annotation (Line(points={{42,40.6},{42,44},{28.8,44}}, color={0,0,127}));
-  connect(hEvapLatentHeatGain.y, QEvap) annotation (Line(points={{42,40.6},{42,44},{110,44}}, color={0,0,127}));
   connect(heatTransferConduction.TSoil, TSoil) annotation (Line(points={{22.48,62.88},
           {78,62.88},{78,69},{105,69}}, color={0,0,127}));
   connect(convPoolSurface, convPoolSurface) annotation (Line(points={{-28,100},{-28,100}}, color={191,0,0}));
@@ -422,6 +413,10 @@ equation
   connect(pumpAndPressureDrop.port_b, fromPool) annotation (Line(points={{16,
           -54},{26,-54},{26,-4},{-100,-4}}, color={0,127,255}));
 
+  connect(m_Eavporation2.y, minus1Gain.u) annotation (Line(points={{51.1,29},{42,
+          29},{42,44},{28.8,44}}, color={0,0,127}));
+  connect(m_Eavporation2.y, QEvap) annotation (Line(points={{51.1,29},{42,29},{42,
+          44},{110,44}}, color={0,0,127}));
   annotation (Line(
         points={{47,-32},{47,-14},{-25,-14},{-25,-6}}, color={0,127,255}),
              Line(points={{18.4,-40},
