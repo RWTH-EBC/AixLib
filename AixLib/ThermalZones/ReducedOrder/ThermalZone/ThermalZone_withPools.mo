@@ -395,9 +395,8 @@ public
     "Calculates diffuse solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,61},{-68,77}})));
 
-// ***************************************
- // CHANGES FOR SWIMMING POOL:
- //***************************************
+
+ // Swimming pools
 
   replaceable package MediumWater = AixLib.Media.Water  "Medium in the component"
       annotation (choices(
@@ -412,13 +411,14 @@ public
   final parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[numPools]= zoneParam.poolParam
     "Setup for Swimming Pools" annotation (choicesAllMatching=false,Dialog(tab="Moisture", group="Swimming Pools", enable = use_swimmingPools));
 
-  parameter Boolean use_idealHeaterPool = true "Has to be constitent with pool record" annotation(Dialog(tab="Moisture", group="Swimming Pools"));
+  parameter Boolean use_idealHeaterPool = true "If true, swimming pools are ideally heated; if false, fluid connectors for heating cuircuit are enabled" annotation(Dialog(tab="Moisture", group="Swimming Pools"));
 
 
   AixLib.Fluid.Pools.IndoorSwimmingPool indoorSwimmingPool[numPools](
       poolParam=poolParam, redeclare package WaterMedium = MediumWater,
-    energyDynamics=energyDynamics,
-    massDynamics=massDynamics) if
+    each energyDynamics=energyDynamics,
+    each massDynamics=massDynamics,
+    each use_idealHeater=use_idealHeaterPool) if
                                use_swimmingPools and  ATot > 0
     annotation (Placement(transformation(extent={{-68,-86},{-52,-72}})));
 
