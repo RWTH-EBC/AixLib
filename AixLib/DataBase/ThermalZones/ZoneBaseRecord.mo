@@ -119,10 +119,11 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Sets if the threshold temperatures for ideal heater and cooler should
         be used";
 
-  // Add for Pools
-  parameter Boolean use_swimmingPools=false;
-  parameter Integer numPools;
+  // (indoor) swimming pools
+  parameter Boolean use_swimmingPools=false "Sets if a swimming pool is within the zone";
+  parameter Integer numPools "Number of swimming pools within the zone";
   replaceable parameter  AixLib.DataBase.Pools.IndoorSwimmingPoolBaseRecord poolParam[:]
+                                                                                        "Data records for swimming pools"
    annotation (choicesAllMatching=false);
   annotation(Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
