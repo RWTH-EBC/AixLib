@@ -10,7 +10,6 @@ record IndoorSwimmingPoolDummy
     V_flow = Modelica.Constants.inf,
     V_flow_partial = Modelica.Constants.inf,
     use_partialLoad = false,
-    use_idealHeatExchanger = true,
     dpHeatExchangerPool = Modelica.Constants.inf,
     beta_inUse = Modelica.Constants.inf,
     use_poolCover = false,
