@@ -1,0 +1,5 @@
+within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control.HierarchicalControl_ModularBoiler.InternalControl_ModularBoiler.flowTemperatureController.returnAdmixture;
+package BaseClasses
+  extends Modelica.Icons.BasesPackage;
+
+end BaseClasses;

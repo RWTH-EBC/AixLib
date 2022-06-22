@@ -1,0 +1,4 @@
+within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control.HierarchicalControl_ModularBoiler;
+package ManualControl_ModularBoiler
+
+end ManualControl_ModularBoiler;

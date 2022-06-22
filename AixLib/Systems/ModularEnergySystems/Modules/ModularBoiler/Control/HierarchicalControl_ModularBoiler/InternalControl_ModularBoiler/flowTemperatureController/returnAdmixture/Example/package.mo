@@ -1,0 +1,4 @@
+within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control.HierarchicalControl_ModularBoiler.InternalControl_ModularBoiler.flowTemperatureController.returnAdmixture;
+package Example
+extends Modelica.Icons.ExamplesPackage;
+end Example;

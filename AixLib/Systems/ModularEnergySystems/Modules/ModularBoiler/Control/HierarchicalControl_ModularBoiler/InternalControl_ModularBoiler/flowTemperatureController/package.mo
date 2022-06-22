@@ -1,0 +1,3 @@
+within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control.HierarchicalControl_ModularBoiler.InternalControl_ModularBoiler;
+package flowTemperatureController
+end flowTemperatureController;
