@@ -6,6 +6,7 @@ model RoomGFOw2_DayNightMode
 
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
 
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
   replaceable package Medium =
     AixLib.Media.Water "Medium in the component"
       annotation (choices(
@@ -19,6 +20,7 @@ model RoomGFOw2_DayNightMode
 
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 room_GF_2OW(redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+    redeclare package Medium = MediumAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     TWalls_start=290.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
@@ -136,8 +138,8 @@ equation
                                color={0,127,255}));
   connect(nightMode.SwitchToNightMode,Pump. IsNight) annotation(Line(points={{-67.15,10.3},{-64,10.3},{-64,-15.8}},        color = {255, 0, 255}));
   connect(temperatureSensor.port, room_GF_2OW.thermRoom) annotation(Line(points={{23,8},{23,25},{31.48,25},{31.48,26}},            color = {191, 0, 0}));
-  connect(temperatureSensor.T, TRoom) annotation(Line(points={{23,-2},{40,-2},{40,0},{56,0},{56,30},{110,30}},
-                                                                                        color = {0, 0, 127}));
+  connect(temperatureSensor.T, TRoom) annotation(Line(points={{23,-2.5},{40,-2.5},
+          {40,0},{56,0},{56,30},{110,30}},                                              color = {0, 0, 127}));
   connect(tank.ports[1],Pump. port_a) annotation (Line(
       points={{-84,-26},{-74,-26}},
       color={0,127,255}));
@@ -158,12 +160,15 @@ equation
   connect(heatFlowSenConv.port_b, room_GF_2OW.thermRoom) annotation (Line(points={{58,-4},{58,20},{32,20},{32,26},{31.48,26}}, color={191,0,0}));
   connect(radiator_ML_delta.RadiativeHeat, heatFlowSenRad.port_a) annotation (Line(points={{68,-24},{68,-8}}, color={0,0,0}));
   connect(heatFlowSenRad.port_b, room_GF_2OW.starRoom) annotation (Line(points={{68,4},{68,26},{36.88,26}}, color={191,0,0}));
-  connect(heatFlowSenConv.Q_flow,Q_flowToRoomConv)  annotation (Line(points={{64,-10},{86,-10},{86,-10},{110,-10}}, color={0,0,127}));
-  connect(heatFlowSenRad.Q_flow, Q_flowToRoomRad) annotation (Line(points={{74,-2},{90,-2},{90,10},{110,10}}, color={0,0,127}));
+  connect(heatFlowSenConv.Q_flow,Q_flowToRoomConv)  annotation (Line(points={{64.6,
+          -10},{86,-10},{86,-10},{110,-10}},                                                                        color={0,0,127}));
+  connect(heatFlowSenRad.Q_flow, Q_flowToRoomRad) annotation (Line(points={{74.6,-2},
+          {90,-2},{90,10},{110,10}},                                                                          color={0,0,127}));
   connect(controlPIThermostat.y, heatValve_new.y) annotation (Line(points={{10.5,-13},{20,-13},{20,-10},{32,-10},{32,-14}}, color={0,0,127}));
   connect(Tset.y, controlPIThermostat.u_s) annotation (Line(points={{-7.5,-1},{-4,-1},{-4,-13},{-1,-13}},color={0,0,127}));
   connect(temperatureSensor.T, firstOrder.u)
-    annotation (Line(points={{23,-2},{16.8,-2}}, color={0,0,127}));
+    annotation (Line(points={{23,-2.5},{20,-2.5},{20,-2},{16.8,-2}},
+                                                 color={0,0,127}));
   connect(firstOrder.y, controlPIThermostat.u_m)
     annotation (Line(points={{7.6,-2},{5,-2},{5,-7}}, color={0,0,127}));
   annotation(experiment(StopTime = 86400, Interval = 60, Tolerance=1e-6, Algorithm = "Dassl"),
