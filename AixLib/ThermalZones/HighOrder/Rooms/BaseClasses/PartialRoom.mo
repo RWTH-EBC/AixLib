@@ -1,9 +1,7 @@
 ﻿within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoom "Partial model with base component that are necessary for all HOM rooms"
-
   extends PartialRoomParams;
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
-      Medium = Media.Air,
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
       final T_start=T0_air);
 
   // Air volume of room
