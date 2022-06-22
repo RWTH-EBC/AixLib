@@ -13,12 +13,6 @@ model Admixture
     admixture(m_flow_nominalCon=m_flow_nominalCon, dp_nominalCon=dp_nominalCon,
     dp_Valve(displayUnit="Pa") = 1)
               annotation (Placement(transformation(extent={{-38,-36},{38,40}})));
-  Fluid.Sources.Boundary_pT
-                      bou(
-    use_T_in=false,
-    redeclare package Medium = MediumWater,
-    nPorts=2)
-    annotation (Placement(transformation(extent={{-94,-12},{-70,12}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=0.5,
     freqHz=1/3600,
@@ -50,11 +44,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(bou.ports[1], admixture.port_a1) annotation (Line(points={{-70,2.4},{
-          -60,2.4},{-60,24.8},{-38,24.8}}, color={0,127,255}));
-  connect(admixture.port_b2, bou.ports[2]) annotation (Line(points={{-38,-20.8},
-          {-60,-20.8},{-60,-2},{-68,-2},{-68,-2.4},{-70,-2.4}}, color={0,127,
-          255}));
   connect(bou1.ports[1], admixture.port_b1) annotation (Line(points={{68,2.4},{
           56,2.4},{56,24.8},{38,24.8}}, color={0,127,255}));
   connect(bou1.ports[2], admixture.port_a2) annotation (Line(points={{68,-2.4},
