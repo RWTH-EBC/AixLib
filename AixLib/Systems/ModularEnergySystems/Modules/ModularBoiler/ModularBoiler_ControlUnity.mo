@@ -1,7 +1,7 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler;
 model ModularBoiler_ControlUnity
   extends
-    AixLib.Systems.ModularEnergySystems.Modules.BaseClasses.Base_ModBoiler(
+    AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.BaseClasses.Base_ModBoiler(
   redeclare package Medium=Media.Water);
 
   parameter Boolean use_advancedControl

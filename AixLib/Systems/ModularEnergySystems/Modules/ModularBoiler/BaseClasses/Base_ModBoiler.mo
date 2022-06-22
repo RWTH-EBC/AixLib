@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularEnergySystems.Modules.BaseClasses;
+within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.BaseClasses;
 partial model Base_ModBoiler
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium =Media.Water, final m_flow_nominal=QNom/(Medium.cp_const*dTWaterNom));
