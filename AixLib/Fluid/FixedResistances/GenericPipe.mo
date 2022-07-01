@@ -147,7 +147,7 @@ equation
       points={{-10,-60},{-80,-60},{-80,0},{-100,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(plugFlowPipe.ports_b[1], port_b) annotation (Line(
+  connect(plugFlowPipe.port_b, port_b) annotation (Line(
       points={{10,-60},{80,-60},{80,0},{100,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));
