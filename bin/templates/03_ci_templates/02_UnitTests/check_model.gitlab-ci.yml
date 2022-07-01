@@ -11,7 +11,8 @@ stages:
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist ; pkill -f Xvfb
+
     artifacts:
         when: on_failure
         paths:
@@ -95,7 +96,7 @@ Check_AixLib_Utilities:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 >  bin/Configfiles/ci_changed_model_list.txt
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library AixLib -DS 2022 -CM 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library AixLib -DS 2022 -CM  ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -206,7 +207,7 @@ Check_AixLib_Utilities_changed_models:
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist  ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -292,7 +293,7 @@ whitelist_job:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > bin/Configfiles/exit.sh
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS 2022 --repo-dir IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git  --library AixLib --wh-library IBPSA --whitelist
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS 2022 --repo-dir IBPSA --git-url https://github.com/ibpsa/modelica-ibpsa.git  --library AixLib --wh-library IBPSA --whitelist ; pkill -f Xvfb
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv

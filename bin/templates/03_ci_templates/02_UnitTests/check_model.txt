@@ -11,7 +11,8 @@ stages:
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} ; pkill -f Xvfb
+
     artifacts:
         when: on_failure
         paths:
@@ -47,7 +48,7 @@ Check_${library}_${package}:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 >  ${ch_file}
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} -CM 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} -CM  ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -86,7 +87,7 @@ Check_${library}_${package}_changed_models:
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag}  ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -134,7 +135,7 @@ whitelist_job:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > ${exit_file}
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} ${git_url} ${wh_path} --library ${library} --wh-library ${wh_library} --whitelist
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} ${git_url} ${wh_path} --library ${library} --wh-library ${wh_library} --whitelist ; pkill -f Xvfb
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}

@@ -9,7 +9,7 @@ Style_Check_AixLib:
         - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -DS ${dymolaversion}
+        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -DS ${dymolaversion} ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -36,7 +36,7 @@ Style_Check_ChangedModel:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - (git diff --raw --diff-filter=AMT HEAD^1) > ${ch_file}
-        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -CM -DS ${dymolaversion}
+        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -CM -DS ${dymolaversion} ; pkill -f Xvfb
     only:
         changes:
             - ${library}/**/*

@@ -10,7 +10,7 @@ stages:
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples  ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -83,7 +83,7 @@ CI_simulate_AixLib_Utilities:
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples 
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples  ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
@@ -168,7 +168,7 @@ simulate_AixLib_Utilities:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 >  bin/Configfiles/ci_changed_model_list.txt
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library AixLib -DS 2022 -CM --simulateexamples
+        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library AixLib -DS 2022 -CM --simulateexamples ; pkill -f Xvfb
     artifacts:
         when: on_failure
         paths:
