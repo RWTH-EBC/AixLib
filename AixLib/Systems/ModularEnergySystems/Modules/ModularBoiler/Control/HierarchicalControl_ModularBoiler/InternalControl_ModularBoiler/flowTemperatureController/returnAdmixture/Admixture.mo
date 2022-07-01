@@ -103,7 +103,7 @@ model Admixture
     final allowFlowReversal=allowFlowReversal,
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final m_flow_small=0.001)
-    annotation (Placement(transformation(extent={{-54,-66},{-66,-54}})));
+    annotation (Placement(transformation(extent={{-74,-66},{-86,-54}})));
 
   BaseClasses.AdmixtureBus admixtureBus annotation (Placement(transformation(extent={{-22,76},{22,114}}),
         iconTransformation(extent={{-22,76},{22,114}})));
@@ -112,22 +112,18 @@ model Admixture
     redeclare package Medium = AixLib.Media.Water,
     allowFlowReversal=false,
     m_flow_small=0.001,
-    per(pressure(V_flow={0,V_flow_nominalCon/2,V_flow_nominalCon}, dp={
+    per(pressure(V_flow={0,V_flow_nominalCon,2*V_flow_nominalCon}, dp={
             dp_nominalCon/0.8,dp_nominalCon,0})),
     addPowerToMedium=false)
     annotation (Placement(transformation(extent={{2,10},{22,30}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=1)
     annotation (Placement(transformation(extent={{6,44},{26,64}})));
-  Fluid.Movers.SpeedControlled_y        fan2(
-    redeclare package Medium = Media.Water,
-    allowFlowReversal=false,
-    m_flow_small=0.001,
-    per(pressure(V_flow={0,V_flow_nominalCon/2,V_flow_nominalCon}, dp={
-            dp_nominalCon/0.8,dp_nominalCon,0})),
-    addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{84,-70},{64,-50}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=1)
-    annotation (Placement(transformation(extent={{48,-36},{68,-16}})));
+  Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominalCon,
+    zeta=1,
+    diameter=0.5)
+    annotation (Placement(transformation(extent={{-46,-70},{-66,-50}})));
 equation
   connect(port_a1, VFSen_out.port_a)
     annotation (Line(points={{-100,60},{-88,60},{-88,52}}, color={0,127,255}));
@@ -140,10 +136,6 @@ equation
     annotation (Line(points={{56,20},{74,20},{74,36}}, color={0,127,255}));
   connect(VFSen_in.port_b, port_b1)
     annotation (Line(points={{74,52},{74,60},{100,60}}, color={0,127,255}));
-  connect(port_b2, senT_b2.port_b)
-    annotation (Line(points={{-100,-60},{-66,-60}}, color={0,127,255}));
-  connect(senT_a2.port_b, senT_b2.port_a)
-    annotation (Line(points={{34,-60},{-54,-60}}, color={0,127,255}));
   connect(senT_a2.port_b, valve.port_3)
     annotation (Line(points={{34,-60},{-40,-60},{-40,10}}, color={0,127,255}));
   connect(senT_a1.T, admixtureBus.Tsen_a1) annotation (Line(points={{-78,26.6},{
@@ -159,8 +151,8 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, admixtureBus.Tsen_b2) annotation (Line(points={{-60,-53.4},
-          {-60,0},{-114,0},{-114,95.095},{0.11,95.095}},
+  connect(senT_b2.T, admixtureBus.Tsen_b2) annotation (Line(points={{-80,-53.4},
+          {-80,0},{-114,0},{-114,95.095},{0.11,95.095}},
                                            color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -206,12 +198,14 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(valve.port_2, fan1.port_a)
     annotation (Line(points={{-30,20},{2,20}}, color={0,127,255}));
-  connect(port_a2, fan2.port_a)
-    annotation (Line(points={{100,-60},{84,-60}}, color={0,127,255}));
-  connect(fan2.port_b, senT_a2.port_a)
-    annotation (Line(points={{64,-60},{46,-60}}, color={0,127,255}));
-  connect(realExpression1.y, fan2.y)
-    annotation (Line(points={{69,-26},{74,-26},{74,-48}}, color={0,0,127}));
+  connect(senT_a2.port_a, port_a2)
+    annotation (Line(points={{46,-60},{100,-60}}, color={0,127,255}));
+  connect(senT_b2.port_b, port_b2)
+    annotation (Line(points={{-86,-60},{-100,-60}}, color={0,127,255}));
+  connect(senT_b2.port_a, hydraulicResistance.port_b)
+    annotation (Line(points={{-74,-60},{-66,-60}}, color={0,127,255}));
+  connect(senT_a2.port_b, hydraulicResistance.port_a)
+    annotation (Line(points={{34,-60},{-46,-60}}, color={0,127,255}));
   annotation (
     Icon(coordinateSystem(initialScale=0.1), graphics={
         Polygon(

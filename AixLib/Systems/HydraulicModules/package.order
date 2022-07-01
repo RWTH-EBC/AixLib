@@ -5,7 +5,7 @@ Pump
 SimpleConsumer_old
 Throttle
 ThrottlePump
+SimpleConsumer
 Controller
 Example
 BaseClasses
-SimpleConsumer

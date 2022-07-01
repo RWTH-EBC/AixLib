@@ -29,6 +29,12 @@ model Admixture
     redeclare package Medium = MediumWater,
     nPorts=2)
     annotation (Placement(transformation(extent={{92,-12},{68,12}})));
+  Fluid.Sources.Boundary_pT
+                      bou2(
+    use_T_in=false,
+    redeclare package Medium = MediumWater,
+    nPorts=2)
+    annotation (Placement(transformation(extent={{-92,-8},{-68,16}})));
 equation
   connect(admixtureBus, admixture.admixtureBus) annotation (Line(
       points={{0,74},{0,38.1}},
@@ -48,4 +54,8 @@ equation
           56,2.4},{56,24.8},{38,24.8}}, color={0,127,255}));
   connect(bou1.ports[2], admixture.port_a2) annotation (Line(points={{68,-2.4},
           {57,-2.4},{57,-20.8},{38,-20.8}}, color={0,127,255}));
+  connect(bou2.ports[1], admixture.port_a1) annotation (Line(points={{-68,6.4},
+          {-52,6.4},{-52,24.8},{-38,24.8}}, color={0,127,255}));
+  connect(bou2.ports[2], admixture.port_b2) annotation (Line(points={{-68,1.6},
+          {-54,1.6},{-54,-20.8},{-38,-20.8}}, color={0,127,255}));
 end Admixture;

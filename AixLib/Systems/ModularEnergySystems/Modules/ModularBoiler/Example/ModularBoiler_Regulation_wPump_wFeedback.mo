@@ -1,26 +1,28 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Example;
-model ModularBoiler_wPump_wFeedback
-  "Example for ModularBoiler - With pump and feedback simple pump-feedback regulation"
+model ModularBoiler_Regulation_wPump_wFeedback
+  "Example for ModularBoiler - With pump, feedback and regulation controller"
   extends Modelica.Icons.Example;
 
   package MediumWater = AixLib.Media.Water;
 
-  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler_wPump_wFeedback
-    modularBoiler_wPump_wFeedback(
+  AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.ModularBoiler_Regulation_wPump_wFeedback
+    modularBoiler_Regulation_wPump_wFeedback(
     dTWaterNom=20,
     m_flowVar=true,
     Advanced=false,
     hasFeedback=true,
     dp_Valve(displayUnit="Pa") = 10,
     dpFixed_nominal(displayUnit="Pa") = {10,10},
+    use_advancedControl=true,
+    severalHeatCircuits=true,
     redeclare package Medium = MediumWater)
-    annotation (Placement(transformation(extent={{-32,-28},{30,28}})));
+    annotation (Placement(transformation(extent={{-30,-30},{34,30}})));
   Fluid.Sources.Boundary_pT bou(
     use_T_in=true,
     redeclare package Medium = MediumWater,
     T(displayUnit="K"),
     nPorts=2)
-    annotation (Placement(transformation(extent={{-70,-14},{-46,10}})));
+    annotation (Placement(transformation(extent={{-68,-12},{-44,12}})));
   Modelica.Blocks.Sources.Constant PLR_const(k=1) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -39,15 +41,15 @@ model ModularBoiler_wPump_wFeedback
     offset=308.15) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-92,2})));
+        origin={-90,4})));
+
 equation
-  connect(bou.ports[1], modularBoiler_wPump_wFeedback.port_a)
+  connect(bou.ports[1], modularBoiler_Regulation_wPump_wFeedback.port_a)
+   annotation (Line(points={{-44,2.4},{-34,2.4},{-34,0},{-30,0}},   color={0,127,
+          255}));
+  connect(boilerControlBus, modularBoiler_Regulation_wPump_wFeedback.boilerControlBus)
    annotation (Line(
-        points={{-46,0.4},{-36,0.4},{-36,0},{-34,0},{-34,3.55271e-15},{-32,3.55271e-15}},
-                                                        color={0,127,255}));
-  connect(boilerControlBus, modularBoiler_wPump_wFeedback.boilerControlBus)
-   annotation (Line(
-      points={{0,62},{0,27.44},{-1,27.44}},
+      points={{0,62},{0,30},{2,30}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -68,14 +70,13 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modularBoiler_wPump_wFeedback.port_b, bou.ports[2])
-   annotation (Line(
-        points={{30,3.55271e-15},{48,3.55271e-15},{48,-60},{-46,-60},{-46,-4.4}},
-        color={0,127,255}));
+  connect(modularBoiler_Regulation_wPump_wFeedback.port_b, bou.ports[2])
+   annotation (Line(points={{34,0},{60,0},{60,-60},{-40,-60},{-40,-2.4},{-44,-2.4}},
+                  color={0,127,255}));
   connect(BouT_sine.y, bou.T_in)
-   annotation (Line(points={{-81,2},{-80,2},{-80,2.8},
-          {-72.4,2.8}}, color={0,0,127}));
+   annotation (Line(points={{-79,4},{-74,4},{-74,4.8},
+          {-70.4,4.8}}, color={0,0,127}));
 
 annotation (
     experiment(StopTime=3600));
-end ModularBoiler_wPump_wFeedback;
+end ModularBoiler_Regulation_wPump_wFeedback;

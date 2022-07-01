@@ -1,12 +1,10 @@
 within AixLib.Systems.ModularEnergySystems.Controls;
 model ControlBoilerNotManufacturer
 
-    parameter Modelica.SIunits.TemperatureDifference DeltaTWaterNom=20 "Temperature difference nominal";
+  parameter Modelica.SIunits.TemperatureDifference DeltaTWaterNom=20 "Temperature difference nominal";
   parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Return temperature TCold";
   parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Thermal dimension power";
   parameter Boolean m_flowVar=false "Use variable water massflow";
-
-  parameter Boolean Pump=true "Model includes a pump";
 
 
 
