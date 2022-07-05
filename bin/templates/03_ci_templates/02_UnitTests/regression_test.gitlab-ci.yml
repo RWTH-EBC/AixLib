@@ -8,7 +8,7 @@ stages:
 .CI_Regressiontest:
     stage: RegressionTest
     before_script:
-        - xvfb-run --auto-servernum  & export DISPLAY=:77.0 &&
+        - xvfb-run -n 77  & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
