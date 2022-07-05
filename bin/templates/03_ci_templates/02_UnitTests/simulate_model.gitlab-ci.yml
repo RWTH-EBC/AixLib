@@ -82,7 +82,8 @@ CI_simulate_AixLib_Utilities:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples 
-        when: on_failure
+    artifacts:
+		when: on_failure
         paths:
             - AixLib/AixLib.${lib_package}-log.txt
             - AixLib/AixLib.${lib_package}-errorlog.txt

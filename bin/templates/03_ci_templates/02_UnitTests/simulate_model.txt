@@ -44,7 +44,8 @@ CI_simulate_${library}_${package}:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} --simulateexamples 
-        when: on_failure
+    artifacts:
+		when: on_failure
         paths:
             - ${library}/${library}.${lib_package}-log.txt
             - ${library}/${library}.${lib_package}-errorlog.txt
