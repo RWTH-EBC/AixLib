@@ -8,15 +8,14 @@ stages:
 .CI_Regressiontest:
     stage: RegressionTest
     before_script:
-        - xvfb-run -n 77                  - export DISPLAY=:77.0 
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022 
-        - cd .. && echo 'successful' > bin/Configfiles/exit.sh
+        -  xvfb-run -n 77  cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022 
+        -  cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
             export PIP_CACHE_DIR="/opt/cache/pip" ;
