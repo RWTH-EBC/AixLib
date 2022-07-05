@@ -4,13 +4,12 @@ stages:
 .CI_simulate_model_job:
     stage: simulate
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples  ; pkill -f Xvfb
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples  
     artifacts:
         when: on_failure
         paths:
@@ -77,14 +76,12 @@ CI_simulate_AixLib_Utilities:
 .simulate_model_job:
     stage: simulate
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install natsort
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples  ; pkill -f Xvfb
-    artifacts:
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples 
         when: on_failure
         paths:
             - AixLib/AixLib.${lib_package}-log.txt
@@ -168,7 +165,7 @@ simulate_AixLib_Utilities:
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 >  bin/Configfiles/ci_changed_model_list.txt
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library AixLib -DS 2022 -CM --simulateexamples ; pkill -f Xvfb
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py --single-package "${lib_package}" --library AixLib -DS 2022 -CM --simulateexamples 
     artifacts:
         when: on_failure
         paths:

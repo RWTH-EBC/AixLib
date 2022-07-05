@@ -8,7 +8,6 @@ stages:
 IBPSA:
     stage: IBPSA_Merge
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
         - pip install natsort
@@ -59,7 +58,7 @@ IBPSA:
 WhiteList:
     stage: Update_WhiteList
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+       
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
         - pip install natsort
@@ -76,8 +75,8 @@ WhiteList:
     script:
         - cd Merge_Package/${CI_PROJECT_NAME}
         - python bin/CITests/03_SyntaxTests/html_tidy_errors.py --WhiteList # Update WhiteList for HTML
-        - python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} --git-url ${git_url} --library ${library} --wh-library ${wh_library} --whitelist
-        - python bin/CITests/05_Converter/lock_model.py --library ${library} --wh-library ${wh_library} ; pkill -f Xvfb
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py -DS ${dymolaversion} --repo-dir ${wh_library} --git-url ${git_url} --library ${library} --wh-library ${wh_library} --whitelist
+        - python bin/CITests/05_Converter/lock_model.py --library ${library} --wh-library ${wh_library} 
         - rm  -r IBPSA 
         - message="${bot_commit}"
         - git add  . 

@@ -4,12 +4,11 @@ stages:
 Style_Check_AixLib:
     stage: StyleCheck
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -DS ${dymolaversion} ; pkill -f Xvfb
+        - xvfb-run -n 77 python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -DS ${dymolaversion} 
     artifacts:
         when: on_failure
         paths:
@@ -30,13 +29,12 @@ Style_Check_AixLib:
 Style_Check_ChangedModel:
     stage: StyleCheck
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - (git diff --raw --diff-filter=AMT HEAD^1) > ${ch_file}
-        - python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -CM -DS ${dymolaversion} ; pkill -f Xvfb
+        - xvfb-run -n 77 python bin/CITests/03_SyntaxTests/StyleChecking.py -s ${library} -p ${library}/package.mo -CM -DS ${dymolaversion} 
     only:
         changes:
             - ${library}/**/*
