@@ -4,7 +4,7 @@ stages:
     - Update_Ref
     - plot_ref
     - prepare
-
+
 .CI_Regressiontest:
     stage: RegressionTest
     before_script:
