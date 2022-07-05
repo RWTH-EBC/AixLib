@@ -45,7 +45,7 @@ CI_simulate_${library}_${package}:
     script:
         - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library ${library} -DS ${dymolaversion} ${wh_flag} ${filterflag} --simulateexamples 
     artifacts:
-		when: on_failure
+        when: on_failure
         paths:
             - ${library}/${library}.${lib_package}-log.txt
             - ${library}/${library}.${lib_package}-errorlog.txt
