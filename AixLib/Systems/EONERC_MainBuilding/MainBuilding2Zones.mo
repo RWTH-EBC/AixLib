@@ -929,8 +929,8 @@ equation
           -140},{-22,-124},{-21.2,-124},{-21.2,-100}}, color={0,0,127}));
   connect(temperatureLimiter.y, prescribedTemperature.T)
     annotation (Line(points={{-7.4,-100},{0.8,-100}}, color={0,0,127}));
-  annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
-        coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
+  annotation (Diagram(coordinateSystem(extent={{-220,-120},{560,420}})), Icon(
+        coordinateSystem(extent={{-220,-120},{560,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},
           lineColor={0,0,127},
           pattern=LinePattern.Dash,
