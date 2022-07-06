@@ -1,4 +1,4 @@
-AixLib.Airflow.Multizone.Examples.ReverseBuoyancy.txt
+AixLib_Airflow_Multizone_Examples_ReverseBuoyancy.txt
 AixLib_Airflow_Multizone_Examples_PressurizationData.txt
 AixLib_Airflow_Multizone_Examples_OneOpenDoor.txt
 AixLib_Controls_Continuous_Examples_LimPIDWithReset.txt
