@@ -16,7 +16,8 @@ model ThermalZoneMoistCO2AirExchange
     internalGainsMode=3,
     recOrSep=true,
     use_C_flow=true,
-    use_AirExchange=true) "Thermal zone"
+    use_MechanicalAirExchange=true,
+    use_NaturalAirExchange=true) "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
