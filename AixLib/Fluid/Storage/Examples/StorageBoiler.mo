@@ -93,8 +93,8 @@ equation
           {44,86}}, color={0,0,127}));
   connect(boundary_ph2.ports[1], bufferStorage.fluidportTop2) annotation (Line(
         points={{-28,56},{-9.75,56},{-9.75,38.15}}, color={0,127,255}));
-  connect(bufferStorage.fluidportBottom2, pipe1.port_b) annotation (Line(points
-        ={{-9.45,7.85},{-9.45,-2},{-10,-2},{-10,-12},{-16,-12}}, color={0,127,
+  connect(bufferStorage.fluidportBottom2, pipe1.port_b) annotation (Line(points=
+         {{-9.45,7.85},{-9.45,-2},{-10,-2},{-10,-12},{-16,-12}}, color={0,127,
           255}));
   connect(pipe.port_a, bufferStorage.portHC1Out) annotation (Line(points={{12,
           -2},{14,-2},{14,26.9},{6.15,26.9}}, color={0,127,255}));
@@ -102,7 +102,8 @@ equation
           {6,44},{12,44},{12,31.55},{6.3,31.55}}, color={0,127,255}));
   connect(fixedTemperature.port, bufferStorage.heatportOutside) annotation (
       Line(points={{-36,22},{-28,22},{-28,23.9},{-17.7,23.9}}, color={191,0,0}));
-  annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html><h4>
+  annotation (experiment(Tolerance=1e-6, StopTime=86400, Interval=60),
+    Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>

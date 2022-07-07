@@ -178,7 +178,7 @@ equation
       points={{-20,70.1},{0,70.1},{0,52.3},{-6.66134e-15,52.3}},
       color={255,204,51},
       thickness=0.5));
-  annotation (experiment(StopTime=7200), Documentation(revisions="<html>
+  annotation (experiment(StopTime=7200,Tolerance=1e-06), Documentation(revisions="<html>
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>

@@ -28,7 +28,9 @@ model RegisterModule "AHU register module for heaters and coolers"
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer of temperature sensors in air chanal" annotation(Dialog(tab="Advanced"));
-  replaceable AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
+  replaceable HydraulicModules.Admix hydraulicModule
+  constrainedby
+    AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule(
     length=1,
     Kv=6.3,
     final energyDynamics=energyDynamics,
@@ -50,6 +52,8 @@ model RegisterModule "AHU register module for heaters and coolers"
     final allowFlowReversal2=allowFlowReversal2,
     redeclare final package Medium1 = Medium1,
     redeclare final package Medium2 = Medium2,
+    dp1_nominal=10,
+    dp2_nominal=10,
     tau1=2,
     tau2=8,
     energyDynamics=energyDynamics,
@@ -58,7 +62,7 @@ model RegisterModule "AHU register module for heaters and coolers"
     T2_start=T_start,
     tau_C=10,
     dT_nom=1,
-    Q_nom=1000)
+    Q_nom=1000*m1_flow_nominal)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
             {20,68}})));
   AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus
@@ -395,9 +399,10 @@ equation
   with a first order element to simulate the dynamic behavior of the
   sensors.
 </p>
+</html>", revisions="<html>
 <ul>
-  <li>Januar 09, 2019, by Alexander Kümpel:<br/>
-    First implementation
+  <li>January 23, 2018, by Alexander Kümpel:<br/>
+    First implementation.
   </li>
 </ul>
 </html>"));
