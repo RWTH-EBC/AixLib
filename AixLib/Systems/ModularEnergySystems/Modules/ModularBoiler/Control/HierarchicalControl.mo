@@ -3,11 +3,17 @@ model HierarchicalControl
 
   ///Hierarchy Control
   parameter Real PLRMin=0.15;
-  parameter Boolean use_advancedControl "Selection between two position control and flow temperature control, if true=flow temperature control is active"
+  parameter Boolean use_advancedControl      "Selection between two position control and advanced control, if true=advanced control is active"
     annotation(choices(
-      choice=true "Flow temperature control",
+      choice=true "Advance Control",
       choice=false "Two position control",
       radioButtons=true));
+  parameter Boolean use_flowTControl "Selection between boiler temperature control and flow temperature control, if true=flow temperature control is active"
+    annotation(choices(
+      choice=true "Flow temperature control",
+      choice=false "Boiler temperature control",
+      radioButtons=true), Dialog(enable=
+          use_advancedControl or severalHeatCircuits));
   final parameter Boolean severalHeatCircuits=if k > 1 then true else false
     "If true, there are two or more heat curcuits"
     annotation(Dialog(enable=
@@ -16,6 +22,7 @@ model HierarchicalControl
       choice=true "Several heat curcuits",
       choice=false "One heat curcuit",
       radioButtons=true));
+
   parameter Boolean manualTimeDelay "If true, the user can set a time during which the heat genearator is switched on independently of the internal control";
 
   parameter Integer n=if topLayer then 1 else 3 "Number of layers in the buffer storage"
@@ -75,8 +82,7 @@ model HierarchicalControl
         origin={0,100})));
 
   //Flow temperature control
-  Modelica.Blocks.Interfaces.RealInput Tamb if use_advancedControl and not
-    severalHeatCircuits
+  Modelica.Blocks.Interfaces.RealInput Tamb if use_flowTControl
     "Outdoor temperature"
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
   Modelica.Blocks.Interfaces.RealOutput valPos[k] if use_advancedControl and
@@ -102,8 +108,8 @@ model HierarchicalControl
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={30,-100})));
-  Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and
-    severalHeatCircuits and variableSetTemperature_admix "Variable boiler temperature for the admixture control"
+  Modelica.Blocks.Interfaces.RealInput TBoilerVar if not use_flowTControl and
+    variableSetTemperature_admix                         "Variable boiler temperature for the admixture control"
     annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
@@ -131,6 +137,7 @@ model HierarchicalControl
     final TBoiler= TBoiler,
     final k=k,
     final use_advancedControl=use_advancedControl,
+    final use_flowTControl=use_flowTControl,
     final Tref=Tref,
     final n=n,
     final bandwidth=bandwidth,

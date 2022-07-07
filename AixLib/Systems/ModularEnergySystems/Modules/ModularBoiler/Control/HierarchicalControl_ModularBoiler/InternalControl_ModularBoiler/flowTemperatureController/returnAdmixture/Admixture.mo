@@ -55,6 +55,7 @@ model Admixture
   AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear
                                               valve(
     final massDynamics=massDynamics,
+    use_inputFilter=false,
     final m_flow_nominal=m_flow_nominalCon,
     final energyDynamics=energyDynamics,
     redeclare package Medium = Medium,
@@ -114,7 +115,8 @@ model Admixture
     m_flow_small=0.001,
     per(pressure(V_flow={0,V_flow_nominalCon,2*V_flow_nominalCon}, dp={
             dp_nominalCon/0.8,dp_nominalCon,0})),
-    addPowerToMedium=false)
+    addPowerToMedium=false,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{2,10},{22,30}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=1)
     annotation (Placement(transformation(extent={{6,44},{26,64}})));

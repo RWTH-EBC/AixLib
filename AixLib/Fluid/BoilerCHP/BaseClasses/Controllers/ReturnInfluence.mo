@@ -73,7 +73,7 @@ model ReturnInfluence
         origin={0,-120})));
   Modelica.Blocks.Math.Add add1(k1=1, k2=1)
     annotation (Placement(transformation(extent={{68,-64},{88,-44}})));
- parameter String Filename= if m_flowVar==false then "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/Boiler/Eta_TCold_mNom.sdf" else "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/Boiler/Eta_TCold_mVar.sdf" annotation (Dialog(group="",loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
+ parameter String Filename= if m_flowVar==false then "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/Boiler/Eta_TCold_mNom.sdf" else "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/Boiler/Eta_TCold_mVar.sdf" annotation (Evaluate=true, Dialog(group="",loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
 
 
 equation

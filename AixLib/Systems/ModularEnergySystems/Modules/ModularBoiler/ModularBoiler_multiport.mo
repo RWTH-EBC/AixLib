@@ -1,16 +1,26 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler;
 model ModularBoiler_multiport
-  extends BaseClasses.Boiler_base_MultiPort;
+  extends BaseClasses.Boiler_base_MultiPort(fan(use_inputFilter=false));
 
   // Feedback
   parameter Boolean hasFeedback=false   "circuit has Feedback"
     annotation (Dialog(group = "Feedback"), choices(checkBox = true));
-  parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system"
+  parameter Modelica.SIunits.PressureDifference dp_Valve=10   "Pressure Difference set in regulating valve for pressure equalization in heating system"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
-  parameter Modelica.SIunits.PressureDifference dpFixed_nominal[2] = {0, 0} "Nominal additional pressure drop e.g. for distributor"
+  parameter Modelica.SIunits.PressureDifference dpFixed_nominal[2]={10,10}    "Nominal additional pressure drop e.g. for distributor"
     annotation (Dialog(enable = hasFeedback, group="Feedback"));
   // Hierarchical Control
-  parameter Boolean use_advancedControl=true "Selection between two position control and flow temperature control, if true=flow temperature control is active";
+  parameter Boolean use_advancedControl      "Selection between two position control and advanced control, if true=advanced control is active"
+    annotation(choices(
+      choice=true "Advance Control",
+      choice=false "Two position control",
+      radioButtons=true));
+  parameter Boolean use_flowTControl "Selection between boiler temperature control and flow temperature control, if true=flow temperature control is active"
+    annotation(choices(
+      choice=true "Flow temperature control",
+      choice=false "Boiler temperature control",
+      radioButtons=true), Dialog(enable=
+          use_advancedControl or severalHeatCircuits));
   final parameter Boolean severalHeatCircuits=if k > 1 then true else false "Selection between using several circuit and only one heat circuits";
   //Admixture
   parameter Modelica.SIunits.MassFlowRate m_flow_nominalCon[k] = fill(0.3, k)
@@ -51,7 +61,7 @@ model ModularBoiler_multiport
     annotation(Dialog(enable=use_advancedControl and not severalHeatCircuits, tab="Control", group="Flow temperature control"));
   parameter Real night_hour=22 "Hour of night in which night mode is enabled"
     annotation(Dialog(enable=use_advancedControl and not severalHeatCircuits, tab="Control", group="Flow temperature control"));
-  parameter Modelica.SIunits.ThermodynamicTemperature TOffset=273.15
+  parameter Modelica.SIunits.ThermodynamicTemperature TOffset(displayUnit="K")=0
     "Offset to heating curve temperature"
      annotation(Dialog(enable=use_advancedControl and not severalHeatCircuits, tab="Control", group="Flow temperature control"));
   parameter Modelica.SIunits.Temperature TBoiler=348.15
@@ -78,6 +88,7 @@ model ModularBoiler_multiport
 
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
     redeclare final package Medium = Medium,
+    use_inputFilter=false,
     final m_flow_nominal= m_flow_nominal,
     final dpValve_nominal=dp_Valve,
     final dpFixed_nominal=dpFixed_nominal) if hasFeedback
@@ -90,8 +101,7 @@ model ModularBoiler_multiport
     final m_flow_nominalCon=m_flow_nominalCon,
     final dp_nominalCon=dp_nominalCon,
     each final dp_Valve=dp_Valve) if use_advancedControl and severalHeatCircuits
-     annotation (Placement(transformation(extent={{54,-90},
-            {96,-48}})));
+     annotation (Placement(transformation(extent={{54,-90},{96,-48}})));
 
   Control.HierarchicalControl_ModularBoiler.InternalControl_ModularBoiler.flowTemperatureController.returnAdmixture.BaseClasses.AdmixtureBus
     admixtureBus[k]
@@ -103,6 +113,7 @@ model ModularBoiler_multiport
     final manualTimeDelay=manualTimeDelay,
     final k=k,
     final use_advancedControl=use_advancedControl,
+    final use_flowTControl=use_flowTControl,
     final TBoiler=TBoiler,
     final Tref=Tref,
     final declination=declination,
@@ -144,8 +155,8 @@ model ModularBoiler_multiport
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     redeclare final package Medium = Medium) annotation (Placement(
-        transformation(extent={{-98,-26},{-86,-14}}), iconTransformation(extent={{-98,-26},
-            {-86,-14}})));
+        transformation(extent={{-98,-26},{-86,-14}}), iconTransformation(extent={{0,0},
+            {0,0}})));
 equation
   connect(regulation_wPump_wFeedBack.TCold, senTCold.T)
     annotation (Line(points={{-52,54.6667},{-60,54.6667},{-60,11}},
@@ -199,16 +210,14 @@ equation
   if use_advancedControl and severalHeatCircuits then
     for i in 1:k loop
       connect(port_a, admixture[i].port_a2)
-        annotation (Line(points={{-100,0},{-100,
-              -86},{96,-86},{96,-81.6}},                                                                                             color={0,127,255}, pattern=LinePattern.Dash));
+        annotation (Line(points={{-100,0},{-100,-86},{96,-86},{96,-81.6}},                                                           color={0,127,255}, pattern=LinePattern.Dash));
       connect(admixture[i].port_b2, port_a1)
         annotation (Line(points={{54,-81.6},{-92,-81.6},{-92,-20}},                                   color={0,127,255}, pattern=LinePattern.Dash));
       connect(senTHot.port_b, admixture[i].port_a1)
-        annotation (Line(points={{70,0},{
-              70,-34},{54,-34},{54,-56.4}},              color={0,127,255}, pattern=LinePattern.Dash));
+        annotation (Line(points={{70,0},{70,-34},{54,-34},{54,-56.4}},
+                                                         color={0,127,255}, pattern=LinePattern.Dash));
       connect(admixture[i].port_b1, ports_b[i])
-        annotation (Line(points={{96,-56.4},
-              {100,-56.4},{100,0}},
+        annotation (Line(points={{96,-56.4},{100,-56.4},{100,0}},
                   color={0,127,255}, pattern=LinePattern.Dash));
     end for;
   else

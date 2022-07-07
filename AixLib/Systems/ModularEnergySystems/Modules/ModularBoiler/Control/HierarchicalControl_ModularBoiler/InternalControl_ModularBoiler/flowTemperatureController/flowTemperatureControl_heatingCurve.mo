@@ -36,7 +36,7 @@ model flowTemperatureControl_heatingCurve
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Continuous.LimPID PID(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.5,
+    k=1,
     Ti=3,
     yMax=0.99,
     yMin=0) "PI Controller for controlling the valve position"
@@ -63,8 +63,6 @@ if PLRset >0 then
      isOnMea=false;
   end if;
 
-  connect(Tamb, heatingCurve.T_oda)
-    annotation (Line(points={{-100,0},{-70,0}}, color={0,0,127}));
   connect(heatingCurve.TSet, PID.u_s)
     annotation (Line(points={{-47,0},{-24,0}}, color={0,0,127}));
   connect(TMea, PID.u_m) annotation (Line(points={{-12,-100},{-12,-12}}, color={0,0,127}));
@@ -76,6 +74,8 @@ if PLRset >0 then
           0}}, color={0,0,127}));
   connect(PID.y, switch1.u1)
     annotation (Line(points={{-1,0},{36,0}}, color={0,0,127}));
+  connect(Tamb, heatingCurve.T_oda)
+    annotation (Line(points={{-100,0},{-70,0}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Ambient temperature guided flow temperature control for heat generators. The temperature control can be switched on and off via the isOn input from the outside. A heating curve model is used to determine the required flow temperature depending on the ambient temperature. The associated data are recorded in a table and the values are determined by means of interpolation. Furthermore, the model has a day and night mode, in which the set temperatures differ at the same ambient temperature. The PI-Controller was set for this application. </p>
 <h4>Important parameters</h4>

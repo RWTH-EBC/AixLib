@@ -3,7 +3,12 @@ model returnAdmixture
   "Flow temperature control with return admixture"
   parameter Integer k=1 "Number of heat curcuits";
   parameter Boolean variableSetTemperature_admix=false "Choice between variable oder constant boiler temperature for the admixture control";
-
+  parameter Boolean use_flowTControl "Selection between boiler temperature control and flow temperature control, if true=flow temperature control is active"
+    annotation(choices(
+      choice=true "Flow temperature control",
+      choice=false "Boiler temperature control",
+      radioButtons=true), Dialog(enable=
+          use_advancedControl or severalHeatCircuits));
   parameter Modelica.SIunits.Temperature TBoiler= 273.15+75 "Fix boiler temperature for the admixture";
   parameter Real k_ControlAdmix(min=Modelica.Constants.small)=0.005 "Gain of controller";
   parameter Modelica.SIunits.Time Ti_ControlAdmix(min=Modelica.Constants.small)=10 "Time constant of Integrator block";
@@ -24,17 +29,17 @@ model returnAdmixture
     each yMax=0.95,
     each yMin=0.05)
                  annotation (Placement(transformation(extent={{-10,-68},{10,-48}})));
-  Modelica.Blocks.Interfaces.RealOutput PLRset
+  Modelica.Blocks.Interfaces.RealOutput PLRset if not use_flowTControl
     annotation (Placement(transformation(extent={{90,36},{110,56}})));
   Modelica.Blocks.Interfaces.BooleanInput isOn
     annotation (Placement(transformation(extent={{-120,54},{-80,94}})));
-  Modelica.Blocks.Logical.Switch switch1
+  Modelica.Blocks.Logical.Switch switch1 if not use_flowTControl
     annotation (Placement(transformation(extent={{34,64},{54,84}})));
   Modelica.Blocks.Sources.RealExpression realExpression
     annotation (Placement(transformation(extent={{-16,58},{6,74}})));
   Modelica.Blocks.Interfaces.RealInput TMeaBoiler
     "Measured boiler temperature to keep the fixed temperature"
-    annotation (Placement(transformation(extent={{-122,-20},{-82,20}})));
+    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=TBoiler) if not variableSetTemperature_admix
     annotation (Placement(transformation(extent={{-66,12},{-46,32}})));
   Modelica.Blocks.Continuous.LimPID PID1(
@@ -42,28 +47,24 @@ model returnAdmixture
     k=0.1,
     Ti=2,
     yMax=0.999,
-    yMin=0) "PI Controller for controlling the valve position"
+    yMin=0) if not use_flowTControl
+            "PI Controller for controlling the valve position"
             annotation (Placement(transformation(extent={{-10,12},{10,32}})));
   Modelica.Blocks.Interfaces.RealInput TCon[k]
     "Set temperature for the consumers"
     annotation (Placement(transformation(extent={{-120,-78},{-80,-38}})));
 
-    Boolean isOnMea;
+  //  Boolean isOnMea;
   Modelica.Blocks.Interfaces.RealInput TBoilerVar if variableSetTemperature_admix
     "Variable boiler temperature for the renturn admixture"
     annotation (Placement(transformation(extent={{-120,22},{-80,62}})));
 equation
 
-  /// Set temperature of the consumers
- // for m in 1:k loop
- // TConsumer[m]= Tset[m];
- // end for;
-
- if PLRset >0 then
-    isOnMea=true;
-  else
-     isOnMea=false;
-  end if;
+  //if PLRset >0 then
+  //  isOnMea=true;
+  //else
+  //   isOnMea=false;
+  //end if;
 
   connect(isOn, switch1.u2) annotation (Line(points={{-100,74},{32,74}},
                      color={255,0,255}));
@@ -73,7 +74,7 @@ equation
           66}},             color={0,0,127}));
   connect(realExpression1.y, PID1.u_s) annotation (Line(points={{-45,22},{-12,22}},
                                   color={0,0,127}));
-  connect(TMeaBoiler, PID1.u_m) annotation (Line(points={{-102,0},{0,0},{0,10}},
+  connect(TMeaBoiler, PID1.u_m) annotation (Line(points={{-100,0},{0,0},{0,10}},
                                     color={0,0,127}));
   connect(PID1.y, switch1.u1) annotation (Line(points={{11,22},{22,22},{22,82},{32,82}},
                    color={0,0,127}));

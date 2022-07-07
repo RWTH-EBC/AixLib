@@ -1,11 +1,18 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularBoiler.Control.HierarchicalControl_ModularBoiler;
 model InternalControl "This model contains the internal controller"
    ///Hierarchy Control
-  parameter Boolean use_advancedControl      "Selection between two position control and flow temperature control, if true=flow temperature control is active"
+  parameter Boolean use_advancedControl      "Selection between two position control and advanced control, if true=advanced control is active"
     annotation(choices(
-      choice=true "Flow temperature control",
+      choice=true "Advance Control",
       choice=false "Two position control",
       radioButtons=true));
+  parameter Boolean use_flowTControl "Selection between boiler temperature control and flow temperature control, if true=flow temperature control is active"
+    annotation(choices(
+      choice=true "Flow temperature control",
+      choice=false "Boiler temperature control",
+      radioButtons=true), Dialog(enable=
+          use_advancedControl or severalHeatCircuits));
+
   parameter Modelica.SIunits.Temperature Tref=333.15
     "Reference Temperature for the on off controller"
     annotation(Dialog(
@@ -56,21 +63,20 @@ model InternalControl "This model contains the internal controller"
       final declination=declination,
       final day_hour=day_hour,
       final TOffset=TOffset,
-      final night_hour=night_hour) if use_advancedControl and not severalHeatCircuits
+      final night_hour=night_hour) if use_flowTControl
     annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
 
-  Modelica.Blocks.Interfaces.RealInput Tamb if use_advancedControl and not
-    severalHeatCircuits
+  Modelica.Blocks.Interfaces.RealInput Tamb if use_flowTControl
     "Outdoor temperature"
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
 
   InternalControl_ModularBoiler.flowTemperatureController.returnAdmixture.returnAdmixture returnAdmixture(
     final k=k,
     final variableSetTemperature_admix=variableSetTemperature_admix,
-    final TBoiler=TBoiler) if severalHeatCircuits
+    final TBoiler=TBoiler,
+    final use_flowTControl=use_flowTControl) if severalHeatCircuits
     annotation (Placement(transformation(extent={{42,-74},{62,-54}})));
-  Modelica.Blocks.Interfaces.RealOutput valPos[k] if use_advancedControl and
-    severalHeatCircuits
+  Modelica.Blocks.Interfaces.RealOutput valPos[k] if severalHeatCircuits
     "Valve position to control the three-way valve"
     annotation (Placement(transformation(extent={{94,-70},{114,-50}})));
 
@@ -91,22 +97,21 @@ model InternalControl "This model contains the internal controller"
         origin={0,100})));
   Modelica.Blocks.Interfaces.RealOutput PLRset
     annotation (Placement(transformation(extent={{94,30},{114,50}})));
-  Modelica.Blocks.Interfaces.RealInput TBoilerVar if use_advancedControl and
-    severalHeatCircuits and variableSetTemperature_admix "Variable boiler temperature for the admixture control"
+  Modelica.Blocks.Interfaces.RealInput TBoilerVar if not use_flowTControl and
+    variableSetTemperature_admix                         "Variable boiler temperature for the admixture control"
     annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-102})));
-  Modelica.Blocks.Interfaces.RealInput TCon[k] if use_advancedControl and
-    severalHeatCircuits "Set temperature for the consumers"
+  Modelica.Blocks.Interfaces.RealInput TCon[k] if severalHeatCircuits
+                        "Set temperature for the consumers"
     annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={30,-102})));
-  Modelica.Blocks.Interfaces.RealInput TMeaCon[k] if use_advancedControl and
-    severalHeatCircuits
+  Modelica.Blocks.Interfaces.RealInput TMeaCon[k] if severalHeatCircuits
     "Measurement temperature of the consumer"
     annotation (Placement(
         transformation(
@@ -139,8 +144,8 @@ equation
     annotation (Line(
         points={{-100,-60},{-40,-60}},                     color={0,0,127}));
   connect(Tflow, returnAdmixture.TMeaBoiler)
-    annotation (Line(points={{-100,-20},
-          {-58,-20},{-58,-78},{-8,-78},{-8,-64},{41.8,-64}}, color={0,0,127}));
+    annotation (Line(points={{-100,-20},{-58,-20},{-58,-78},{-8,-78},{-8,-64},{42,
+          -64}},                                             color={0,0,127}));
   connect(TBoilerVar, returnAdmixture.TBoilerVar)
     annotation (Line(points={{0,-102},{0,-82},{20,-82},{20,-60},{40,-60},{40,-59.8},
           {42,-59.8}},                                       color={0,0,127}));
@@ -150,14 +155,22 @@ equation
   connect(TMeaCon, returnAdmixture.TMea)
     annotation (Line(points={{60,-102},{60,
           -82},{52,-82},{52,-74}}, color={0,0,127}));
-  connect(twoPositionController.PLRset, PLRset) annotation (Line(points={{40.48,
-          39.78},{40,39.78},{40,40},{104,40}}, color={0,0,127}));
-  connect(flowTemperatureControl_heatingCurve.PLRset, PLRset)
-    annotation (Line(
+
+  if use_advancedControl then
+    if use_flowTControl then
+      connect(flowTemperatureControl_heatingCurve.PLRset, PLRset)
+        annotation (Line(
         points={{-20,-60},{0,-60},{0,0},{60,0},{60,40},{104,40}},   color={0,0,127}));
-  connect(returnAdmixture.PLRset, PLRset)
-    annotation (Line(points={{62,-59.4},{62,
+    else
+      connect(returnAdmixture.PLRset, PLRset)
+        annotation (Line(points={{62,-59.4},{62,
           -60},{80,-60},{80,40},{104,40}},            color={0,0,127}));
+    end if;
+  else
+    connect(twoPositionController.PLRset, PLRset) annotation (Line(points={{40.48,
+          39.78},{40,39.78},{40,40},{104,40}}, color={0,0,127}));
+  end if;
+
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
