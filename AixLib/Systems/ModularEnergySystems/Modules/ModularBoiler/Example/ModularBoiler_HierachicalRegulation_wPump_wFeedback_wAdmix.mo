@@ -8,7 +8,7 @@ model ModularBoiler_HierachicalRegulation_wPump_wFeedback_wAdmix
 
   ModularBoiler_multiport
     modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_(
-    dTWaterNom=40,
+    dTWaterNom=20,
     TColdNom=308.15,
     QNom=100000,
     m_flowVar=true,
@@ -80,15 +80,6 @@ model ModularBoiler_HierachicalRegulation_wPump_wFeedback_wAdmix
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,-86})));
-  Modelica.Blocks.Sources.Step     TCon1_const3(
-    height=6,
-    offset=15 + 273,
-    startTime=3000)
-    annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-16,114})));
   Modelica.Blocks.Sources.Constant TCon1_const4(k=333.15)
     annotation (Placement(
         transformation(

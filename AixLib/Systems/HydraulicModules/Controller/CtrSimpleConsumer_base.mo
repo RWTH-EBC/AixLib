@@ -85,7 +85,8 @@ model CtrSimpleConsumer_base
     yMax=1,
     yMin=0.05,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
-    y_start=1) if hasPump
+    y_start=0.5) if
+                  hasPump
     annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,

@@ -129,7 +129,7 @@ model HierarchicalControl
         origin={40,100})));
   Modelica.Blocks.Logical.Switch switch2
     annotation (Placement(transformation(extent={{66,-2},{86,18}})));
-  Modelica.Blocks.Sources.RealExpression realExpression
+  Modelica.Blocks.Sources.RealExpression realExpression(y=0.05)
     annotation (Placement(transformation(extent={{-7,-8},{7,8}},
         rotation=90,
         origin={60,-19})));

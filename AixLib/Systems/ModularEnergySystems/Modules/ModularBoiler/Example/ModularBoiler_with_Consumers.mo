@@ -10,6 +10,7 @@ model ModularBoiler_with_Consumers
     modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_(
     dTWaterNom=20,
     TColdNom=308.15,
+    QNom=100000,
     m_flowVar=true,
     Pump=true,
     Advanced=false,
@@ -21,17 +22,18 @@ model ModularBoiler_with_Consumers
     use_flowTControl=true,
     simpleTwoPosition=true,
     TVar=false,
+    manualTimeDelay=false,
     n_layers=1,
     declination=1,
     TMax=348.15,
     redeclare package Medium = MediumWater)
-    annotation (Placement(transformation(extent={{-30,-30},{34,30}})));
+    annotation (Placement(transformation(extent={{-28,-30},{36,30}})));
   Fluid.Sources.Boundary_pT bou(
-    use_T_in=true,
+    use_T_in=false,
     redeclare package Medium = MediumWater,
-    T(displayUnit="K"),
+    T(displayUnit="degC") = 288.15,
     nPorts=2)
-    annotation (Placement(transformation(extent={{-88,-28},{-64,-4}})));
+    annotation (Placement(transformation(extent={{-90,-28},{-66,-4}})));
   Interfaces.BoilerControlBus boilerControlBus
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
   Modelica.Blocks.Sources.Sine BouT_sine(
@@ -52,7 +54,8 @@ model ModularBoiler_with_Consumers
         origin={53,60})));
 
   ModularConsumer.ModularConsumer_multiport modularConsumer_multiport(
-      n_consumers=k, functionality="Q_flow_fixed")
+      n_consumers=k, functionality="Q_flow_fixed",
+    Q_flow_fixed={1000,1000})
     annotation (Placement(transformation(extent={{62,-10},{82,10}})));
   Modelica.Blocks.Sources.Constant TCon1(k=343.15) annotation (Placement(
         transformation(
@@ -69,24 +72,34 @@ model ModularBoiler_with_Consumers
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-2,-78})));
-  Modelica.Blocks.Sources.Step     TCon1_const3(
-    height=6,
-    offset=15 + 273,
-    startTime=3000)
+  Modelica.Blocks.Sources.Sine      sine(
+    amplitude=5,
+    freqHz=1/86400,
+    phase=-1.5707963267949,
+    offset=293.15)
+            "PI Controller for controlling the valve position"
+            annotation (Placement(transformation(extent={{-154,68},{-134,88}})));
+  Modelica.Blocks.Sources.Constant PLR_const(k=0.75)
     annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-44,84})));
+        origin={-72,94})));
+  Modelica.Blocks.Sources.Constant dT_const(k=35)
+    annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-34,60})));
 equation
   connect(bou.ports[1],
     modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.port_a)
-    annotation (Line(points={{-64,-13.6},{-40,-13.6},{-40,0},{-30,0}},
+    annotation (Line(points={{-66,-13.6},{-40,-13.6},{-40,0},{-28,0}},
                                                                  color={0,127,255}));
   connect(boilerControlBus,
     modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.boilerControlBus)
     annotation (Line(
-      points={{0,60},{0,30},{2,30}},
+      points={{0,60},{0,30},{4,30}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -110,19 +123,19 @@ equation
       horizontalAlignment=TextAlignment.Left));
 
   connect(BouT_sine.y, bou.T_in) annotation (Line(points={{-115,-12},{-116,-12},
-          {-116,-11.2},{-90.4,-11.2}},
+          {-116,-11.2},{-92.4,-11.2}},
                                   color={0,0,127}));
   connect(modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.ports_b,
     modularConsumer_multiport.ports_a)
-    annotation (Line(points={{34,0},{62,0}}, color={0,127,255}));
+    annotation (Line(points={{36,0},{62,0}}, color={0,127,255}));
   connect(modularConsumer_multiport.port_b, bou.ports[2]) annotation (Line(
-        points={{82,0},{88,0},{88,-40},{-60,-40},{-60,-18.4},{-64,-18.4}},
+        points={{82,0},{88,0},{88,-40},{-60,-40},{-60,-18.4},{-66,-18.4}},
         color={0,127,255}));
   connect(TCon1.y, modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.TCon[
     1]) annotation (Line(points={{-71,54},{-44,54},{-44,10},{-38,10},{-38,10.2},
-          {-30,10.2}}, color={0,0,127}));
+          {-28,10.2}}, color={0,0,127}));
   connect(TCon2.y, modularBoiler_HierarchicalRegulation_wPump_wFeedback_wAdmix_.TCon[
-    2]) annotation (Line(points={{-71,20},{-52,20},{-52,12},{-30,12},{-30,13.8}},
+    2]) annotation (Line(points={{-71,20},{-52,20},{-52,12},{-28,12},{-28,13.8}},
         color={0,0,127}));
   connect(TCon1.y, modularConsumer_multiport.T_Flow[1]) annotation (Line(points={{-71,54},
           {-44,54},{-44,-32},{50,-32},{50,-7},{62,-7}},          color={0,0,127}));
@@ -132,8 +145,14 @@ equation
         points={{9,-78},{58,-78},{58,-10},{62,-10}}, color={0,0,127}));
   connect(TCon3.y, modularConsumer_multiport.T_Return[2]) annotation (Line(
         points={{9,-78},{58,-78},{58,-8},{62,-8}}, color={0,0,127}));
-  connect(TCon1_const3.y, boilerControlBus.Tamb) annotation (Line(points={{-33,84},
-          {0,84},{0,60}},       color={0,0,127}), Text(
+  connect(sine.y, boilerControlBus.Tamb) annotation (Line(points={{-133,78},{
+          -64,78},{-64,80},{0,80},{0,60}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(dT_const.y, boilerControlBus.DeltaTWater) annotation (Line(points={{
+          -23,60},{-12,60},{-12,60.05},{0.05,60.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
