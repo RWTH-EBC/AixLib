@@ -163,6 +163,7 @@ model WholeHouseBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=TDynVentAttic_set,
+    redeclare package Medium_R = AixLib.Media.Air,
     final solar_absorptance_RO=solar_absorptance_RO,
     length=10.64,
     width=4.75,

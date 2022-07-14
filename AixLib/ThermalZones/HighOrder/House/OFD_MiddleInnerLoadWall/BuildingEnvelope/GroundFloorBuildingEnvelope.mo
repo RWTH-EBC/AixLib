@@ -308,6 +308,7 @@ model GroundFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Corridor,
+    redeclare package Medium_R = AixLib.Media.Air,
     room_length=length2 + length3 + thickness_IWsimple,
     room_width=room_width,
     room_height=room_height,

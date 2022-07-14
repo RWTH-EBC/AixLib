@@ -59,7 +59,8 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
     UValOutDoors=if TIR == 1 then 1.8 else 2.9,
     upperFloor_Building(Corridor(T0_air=288.15), Bath(T0_air=297.15)),
     groundFloor_Building(Corridor(T0_air=288.15)))
-                                                annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
+                                                annotation (Placement(transformation(extent={{-12,-10},
+            {44,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowRad[nRooms] annotation (Placement(transformation(extent={{-60,-24},{-48,-12}})));
   Modelica.Blocks.Sources.Constant adiabaticRadRooms[nRooms](k=fill(0, nRooms)) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-90,-26},{-74,-10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowAttic[1](Q_flow={0}) annotation (Placement(transformation(extent={{-62,-34},{-52,-24}})));
@@ -102,39 +103,42 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(constWind.y, wholeHouseBuildingEnvelope.WindSpeedPort) annotation (
-      Line(points={{-49,46},{-38,46},{-38,37.6},{-16.8,37.6}},    color={0,0,
+      Line(points={{-49,46},{-38,46},{-38,37.6},{-14.8,37.6}},    color={0,0,
           127}));
   connect(prescribedAmbTemperature.port, wholeHouseBuildingEnvelope.thermOutside)
-    annotation (Line(points={{-28,64},{-14,64},{-14,45.44}},    color={191,0,0}));
+    annotation (Line(points={{-28,64},{-12,64},{-12,45.44}},    color={191,0,0}));
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
-    annotation (Line(points={{-42,-90},{14,-90},{14,-10}}, color={191,0,0}));
+    annotation (Line(points={{-42,-90},{16,-90},{16,-10}}, color={191,0,0}));
   connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
-     Line(points={{51,69.5833},{48,69.5833},{48,26.4},{43.68,26.4}},  color={
+     Line(points={{51,69.5833},{48,69.5833},{48,26.4},{45.68,26.4}},  color={
           255,128,0}));
   connect(varRad.solarRad_out[2], wholeHouseBuildingEnvelope.East) annotation (
-      Line(points={{51,69.75},{48,69.75},{48,18},{43.68,18}},    color={255,128,
+      Line(points={{51,69.75},{48,69.75},{48,18},{45.68,18}},    color={255,128,
           0}));
   connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation (
-     Line(points={{51,69.9167},{48,69.9167},{48,9.6},{43.68,9.6}},  color={255,
+     Line(points={{51,69.9167},{48,69.9167},{48,9.6},{45.68,9.6}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[4], wholeHouseBuildingEnvelope.West) annotation (
-      Line(points={{51,70.0833},{48,70.0833},{48,1.2},{43.68,1.2}},  color={255,
+      Line(points={{51,70.0833},{48,70.0833},{48,1.2},{45.68,1.2}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
-    annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
+    annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{45.68,43.2}},
                                                                          color=
           {255,128,0}));
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
-    annotation (Line(points={{51,70.4167},{48,70.4167},{48,34.8},{43.68,34.8}},
+    annotation (Line(points={{51,70.4167},{48,70.4167},{48,34.8},{45.68,34.8}},
         color={255,128,0}));
-  connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-20},{-26,-20},{-26,10},{-14,10},{-14,10.16}},        color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-20},
+          {-26,-20},{-26,10},{-12,10},{-12,10.16}},                                                                                                                      color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
-     Line(points={{-49,16},{-44,16},{-44,32},{-16.8,32}},      color={0,0,127}));
+     Line(points={{-49,16},{-44,16},{-44,32},{-14.8,32}},      color={0,0,127}));
   connect(prescribedHeatFlowRad.port, heatStarToComb.portRad) annotation (Line(points={{-48,-18},{-46,-18},{-46,-16.25},{-44,-16.25}}, color={191,0,0}));
   connect(adiabaticRadRooms.y, prescribedHeatFlowRad.Q_flow)
     annotation (Line(points={{-73.2,-18},{-60,-18}}, color={0,0,127}));
-  connect(wholeHouseBuildingEnvelope.uppFloDown, wholeHouseBuildingEnvelope.groFloUp) annotation (Line(points={{-14,24.72},{-22,24.72},{-22,18},{-14,18}}, color={191,0,0}));
-  connect(wholeHouseBuildingEnvelope.groFloDown, wholeHouseBuildingEnvelope.groPlateUp) annotation (Line(points={{-14,2.32},{-22,2.32},{-22,-4.4},{-14,-4.4}}, color={191,0,0}));
+  connect(wholeHouseBuildingEnvelope.uppFloDown, wholeHouseBuildingEnvelope.groFloUp) annotation (Line(points={{-12,
+          24.72},{-22,24.72},{-22,18},{-12,18}},                                                                                                           color={191,0,0}));
+  connect(wholeHouseBuildingEnvelope.groFloDown, wholeHouseBuildingEnvelope.groPlateUp) annotation (Line(points={{-12,
+          2.32},{-22,2.32},{-22,-4.4},{-12,-4.4}},                                                                                                             color={191,0,0}));
   connect(prescribedTemperature[1:10].port, heatStarToComb[1:10].portConv) annotation (Line(points={{-24,-52},{-20,-52},{-20,-30},{-44,-30},{-44,-23.75}}, color={191,0,0}));
   connect(fixedHeatFlowAttic[1].port, heatStarToComb[1].portConv) annotation (Line(points={{-52,-29},{-50,-29},{-50,-23.75},{-44,-23.75}}, color={191,0,0}));
   annotation (experiment(StartTime = 0, StopTime = 25920000, Interval=3600, Tolerance=1e-6, Algorithm="dassl"),
