@@ -1,9 +1,9 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model ReturnInfluence
 
-  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Nominal TCold";
-  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Nominal thermal power";
-  parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Nominal temperature difference heat circuit";
+  parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Nominal TCold";
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Nominal thermal power";
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Nominal temperature difference heat circuit";
  parameter Boolean m_flowVar=false;
 
 

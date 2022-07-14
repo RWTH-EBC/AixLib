@@ -1,13 +1,13 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model StationaryBehaviour
 
-   parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Nominal TCold";
-   parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Nominal thermal power";
+   parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Nominal TCold";
+   parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Nominal thermal power";
   parameter
     AixLib.DataBase.Boiler.NotManufacturer.EtaTExhaust.EtaTExhaustBaseDataDefinition
     paramEta=AixLib.DataBase.Boiler.NotManufacturer.EtaTExhaust.Ambient1();
    parameter Real EtaTable[:,2]=paramEta.EtaTable;
-   parameter Modelica.SIunits.TemperatureDifference dTWaterNom=20 "Nominal temperature difference heat circuit";
+   parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=20 "Nominal temperature difference heat circuit";
    parameter Boolean m_flowVar=false;
 
 
@@ -28,13 +28,6 @@ model StationaryBehaviour
   Modelica.Blocks.Interfaces.RealOutput TExhaust(final quantity="Temperature",
       final unit="degC") "Exhaust temperature"
     annotation (Placement(transformation(extent={{100,36},{120,56}})));
-  Modelica.Blocks.Tables.CombiTable1D combiTable1D(
-    tableOnFile=false,
-    table=EtaTable,
-    columns={2},
-    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
-    "Table with efficiency parameters"
-    annotation (Placement(transformation(extent={{28,10},{48,30}})));
  Modelica.Blocks.Interfaces.RealInput QLosses "Thermal losses" annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -66,13 +59,16 @@ model StationaryBehaviour
   Modelica.Blocks.Math.Add add1
     annotation (Placement(transformation(extent={{40,-74},{60,-54}})));
 
+  Modelica.Blocks.Tables.CombiTable1Ds EtaAdiabat(
+    tableOnFile=false,
+    table=EtaTable,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.NoExtrapolation)
+    annotation (Placement(transformation(extent={{28,0},{48,20}})));
 protected
   parameter String Filename="modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/Boiler/TAg_mNom.sdf";
 equation
 
 
-  connect(BoilerBehaviour_mNom.y, combiTable1D.u[1]) annotation (Line(points={{1,46},{
-          16,46},{16,20},{26,20}},                      color={0,0,127}));
   connect(BoilerBehaviour_mNom.y, TExhaust)
     annotation (Line(points={{1,46},{110,46}}, color={0,0,127}));
   connect(PLR, qSetPoint.u1) annotation (Line(points={{-120,60},{-90,60},{-90,
@@ -91,14 +87,16 @@ equation
           {-40,84},{-40,70},{-80,70},{-80,53},{-68,53}},     color={0,0,127}));
   connect(qSetPoint.y, division.u1) annotation (Line(points={{-47,-70},{-34,-70},
           {-34,-34},{-12,-34}},                     color={0,0,127}));
-  connect(combiTable1D.y[1], division.u2) annotation (Line(points={{49,20},{54,
-          20},{54,-22},{-54,-22},{-54,-46},{-12,-46}}, color={0,0,127}));
   connect(add1.y, PowerDemand) annotation (Line(points={{61,-64},{78,-64},{78,
           -36},{110,-36}}, color={0,0,127}));
   connect(QLosses, add1.u2)
     annotation (Line(points={{0,-120},{0,-70},{38,-70}}, color={0,0,127}));
   connect(division.y, add1.u1) annotation (Line(points={{11,-40},{20,-40},{20,
           -58},{38,-58}}, color={0,0,127}));
+  connect(BoilerBehaviour_mNom.y, EtaAdiabat.u) annotation (Line(points={{1,46},
+          {12,46},{12,10},{26,10}}, color={0,0,127}));
+  connect(EtaAdiabat.y[1], division.u2) annotation (Line(points={{49,10},{60,10},
+          {60,-14},{-24,-14},{-24,-46},{-12,-46}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                       Rectangle(
           extent={{-100,100},{100,-100}},

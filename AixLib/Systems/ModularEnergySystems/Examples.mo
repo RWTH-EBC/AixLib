@@ -11,7 +11,7 @@ package Examples "Holds examples for the modular energy system units"
         nPorts=2),
       bou(use_T_in=true, nPorts=1),
       TSpeicher(y=50 + 273.15),
-      sine(freqHz=0, offset=-100000),
+      sine(f=1/3600, offset=-100000),
       PLR(y=1));
     Modules.ModularHeatPump.ModularHeatPumpNew
                                             modularHeatPumpNew(
@@ -82,7 +82,7 @@ package Examples "Holds examples for the modular energy system units"
       TSpeicher(y=60 + 273.15),
       sine(
         amplitude=50000,
-        freqHz=1/3600,
+        f=1/3600,
         offset=-50000));
     Modules.ModularBoiler.ModularBoiler
       modularBoilerNotManufacturer(TColdNom=333.15, QNom=100000)

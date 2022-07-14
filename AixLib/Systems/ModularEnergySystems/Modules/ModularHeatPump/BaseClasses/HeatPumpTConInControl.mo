@@ -9,11 +9,11 @@ partial model HeatPumpTConInControl
 
     parameter Boolean EnableFeedback=true;
 parameter Real PLRMin=0.4 "Limit of PLR; less =0";
-    parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+    parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation ();
-  parameter Modelica.SIunits.HeatFlowRate QNom=150000 "Nominal heat flow"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow"
    annotation ();
-  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation ();
 
   Fluid.Sensors.TemperatureTwoPort senTInlet_b(
@@ -86,14 +86,14 @@ parameter Real PLRMin=0.4 "Limit of PLR; less =0";
         extent={{7,-7},{-7,7}},
         rotation=0,
         origin={7,-79})));
-  Fluid.Sensors.MassFlowRate mFlowMainOutlet_b(redeclare final package Medium
-      = AixLib.Media.Water, final allowFlowReversal=true)
+  Fluid.Sensors.MassFlowRate mFlowMainOutlet_b(redeclare final package Medium =
+        AixLib.Media.Water, final allowFlowReversal=true)
     "Mass flow sensor outlet stream" annotation (Placement(transformation(
         origin={42,60},
         extent={{-6,-6},{6,6}},
         rotation=0)));
-  Fluid.Sensors.MassFlowRate mFlowMainOutlet_a(redeclare final package Medium
-      = AixLib.Media.Water, final allowFlowReversal=true)
+  Fluid.Sensors.MassFlowRate mFlowMainOutlet_a(redeclare final package Medium =
+        AixLib.Media.Water, final allowFlowReversal=true)
     "Mass flow sensor outlet stream" annotation (Placement(transformation(
         origin={-42,60},
         extent={{-6,-6},{6,6}},

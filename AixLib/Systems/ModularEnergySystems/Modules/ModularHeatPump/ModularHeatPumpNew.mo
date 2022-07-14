@@ -7,21 +7,21 @@ model ModularHeatPumpNew
  parameter Boolean HighTemp=false "High temperature HP"
    annotation(choices(checkBox=true), Dialog(descriptionLabel=true, group="General machine information"));
 
- parameter Modelica.SIunits.Temperature THotMax= if HighTemp==false then  273.15+55  else 273.15+90 "Max. value of THot to force shutdown"
+ parameter Modelica.Units.SI.Temperature THotMax= if HighTemp==false then  273.15+55  else 273.15+90 "Max. value of THot to force shutdown"
  annotation (Dialog(tab="Advanced", group="General machine information"));
-  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=150000 "Nominal heat flow"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow"
    annotation (Dialog(group="Nominal condition"));
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"
    annotation (Dialog(group="General machine information"));
 
-  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="Advanced",group="General machine information"));
 
-    parameter Modelica.SIunits.Temperature T_Start_Condenser=293.15 "Initial temperature condenser"
+    parameter Modelica.Units.SI.Temperature T_Start_Condenser=293.15 "Initial temperature condenser"
     annotation (Dialog(tab="Advanced"));
 
     parameter Boolean TSourceInternal=true
@@ -30,10 +30,10 @@ model ModularHeatPumpNew
       parameter Boolean THotExternal=false "Use external THot?"
                                                                annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
-   parameter Modelica.SIunits.Temperature TSource=TSourceNom "Temperature of heat source"
+   parameter Modelica.Units.SI.Temperature TSource=TSourceNom "Temperature of heat source"
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
-parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
+parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
 
    replaceable package MediumEvap = AixLib.Media.Water
                                      constrainedby
@@ -46,8 +46,13 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
               X_a=0.40)
               "Propylene glycol water, 40% mass fraction")));
 
-               parameter Modelica.SIunits.Pressure dpExternal=12000
+               parameter Modelica.Units.SI.Pressure dpExternal=12000
                                                                 "Additional system pressure difference";
+
+
+
+parameter Modelica.Units.SI.Pressure dpInternal=25000
+                                                     "Additional system pressure difference";
  AixLib.Fluid.HeatPumps.HeatPump heatPump(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -61,7 +66,7 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     Q_useNominal=QNom,
     use_refIne=true,
     useBusConnectorOnly=true,
-    dpCon_nominal=25000,
+    dpCon_nominal=dpInternal,
     use_conCap=false,
     dpEva_nominal=25000,
     use_evaCap=false,
@@ -106,16 +111,8 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     "Temperature sensor of hot side of heat generator (supply)"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
-        origin={46,0})));
+        origin={30,0})));
 
-  Modelica.Blocks.Sources.RealExpression mFlowEva(y=MediumEvap.cp_const*
-        DeltaTEvap) "massflow heat source"
-    annotation (Placement(transformation(extent={{126,-48},{84,-24}})));
-  Modelica.Blocks.Math.Division division1
-    annotation (Placement(transformation(extent={{60,-40},{44,-24}})));
-  Modelica.Blocks.Sources.RealExpression tSource(y=TSource)
-                                                        "TSource"
-    annotation (Placement(transformation(extent={{-80,-88},{-56,-74}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senTCold(
     redeclare final package Medium = Media.Water,
@@ -125,21 +122,9 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     final allowFlowReversal=false,
     final m_flow_small=0.001)
     "Temperature sensor of hot side of heat generator (supply)"
-    annotation (Placement(transformation(extent={{-9,-10},{9,10}},
+    annotation (Placement(transformation(extent={{-12,-12},{12,12}},
         rotation=0,
-        origin={-37,0})));
-
-  AixLib.Fluid.Sources.Boundary_pT bouEvap_b(redeclare package Medium = MediumEvap, nPorts=1)
-    annotation (Placement(transformation(extent={{-68,-50},{-48,-30}})));
-  AixLib.Fluid.Sources.MassFlowSource_T bouEvap_a(
-    redeclare package Medium = MediumEvap,
-    use_m_flow_in=true,
-    m_flow=1,
-    use_T_in=true,
-    T=306.15,
-    nPorts=1) annotation (Placement(transformation(extent={{60,-82},{40,-62}})));
-  Modelica.Blocks.Continuous.Integrator integrator
-    annotation (Placement(transformation(extent={{52,76},{64,88}})));
+        origin={-40,0})));
 
   AixLib.Systems.ModularEnergySystems.Controls.ControlMflowNotManufacturer control(
     THotMax=THotMax,
@@ -148,81 +133,39 @@ parameter  Modelica.SIunits.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/
     QNom=QNom,
     PLRMin=PLRMin,
     HighTemp=HighTemp,
-    DeltaTCon=DeltaTCon) annotation (Placement(transformation(extent={{-60,58},
-            {-40,78}})));
-  Modelica.Blocks.Logical.Switch switch1
-    annotation (Placement(transformation(extent={{8,-8},{-8,8}},
-        rotation=180,
-        origin={-4,-64})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=TSourceInternal)
-    annotation (Placement(transformation(extent={{-80,-78},{-60,-58}})));
+    DeltaTCon=DeltaTCon) annotation (Placement(transformation(extent={{-66,58},{
+            -46,78}})));
 
-  Modelica.Blocks.Logical.Greater greater
-    annotation (Placement(transformation(extent={{30,60},{14,76}})));
-  Modelica.Blocks.Sources.RealExpression tHotMax(y=THotMax - DeltaTCon)
-    "Maximal THot"
-    annotation (Placement(transformation(extent={{74,54},{50,70}})));
-  Fluid.Sensors.TemperatureTwoPort
-                             senTCold1(
-    redeclare final package Medium = AixLib.Media.Water,
-    final m_flow_nominal=QNom/(4180*DeltaTCon),
-    final initType=Modelica.Blocks.Types.Init.InitialState,
-    final transferHeat=false,
-    final allowFlowReversal=false,
-    final m_flow_small=0.001)
-    "Temperature sensor of hot side of heat generator (supply)"
-    annotation (Placement(transformation(extent={{-9,-10},{9,10}},
-        rotation=0,
-        origin={-87,32})));
-  Fluid.Sensors.TemperatureTwoPort
-                             senTHot1(
-    redeclare final package Medium = Media.Water,
-    final m_flow_nominal=QNom/(4180*DeltaTCon),
-    final initType=Modelica.Blocks.Types.Init.InitialState,
-    final transferHeat=false,
-    final allowFlowReversal=false,
-    final m_flow_small=0.001)
-    "Temperature sensor of hot side of heat generator (supply)"
-    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
-        rotation=0,
-        origin={70,34})));
   Fluid.Sensors.MassFlowRate        senMasFloHP(redeclare package Medium =
         Media.Water)        annotation (Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=180,
-        origin={26,0})));
-  Modelica.Blocks.Math.Division mFlowRelWater "relative water mass flow"
-    annotation (Placement(transformation(extent={{122,28},{102,48}})));
-  Modelica.Blocks.Sources.RealExpression mFlowEva1(y=QNom/MediumCon.cp_const/
-        DeltaTCon)  "massflow heat source"
-    annotation (Placement(transformation(extent={{174,20},{136,42}})));
-  Fluid.Movers.FlowControlled_m_flow fan(
-    redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=m_flow_nominal,
+        origin={72,0})));
+  Modelica.Blocks.Math.Division m_flowRelCon "relative mass flow condenser"
+    annotation (Placement(transformation(extent={{30,50},{10,70}})));
+  Modelica.Blocks.Sources.RealExpression m_flowCon(y=QNom/MediumCon.cp_const/
+        DeltaTCon) "massflow condenser"
+    annotation (Placement(transformation(extent={{68,44},{42,64}})));
+  Fluid.Movers.SpeedControlled_y fan1(
+    redeclare package Medium = Media.Water,
+    redeclare Fluid.Movers.Data.Generic per,
+    inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
-  Modelica.Blocks.Sources.RealExpression tHotMax1(y=m_flow_nominal)
-    "Maximal THot"
-    annotation (Placement(transformation(extent={{-130,64},{-154,80}})));
-  Modelica.Blocks.Math.Product deltaTMainMax
-    annotation (Placement(transformation(extent={{-150,28},{-130,48}})));
-  BaseClasses.HeatPumpHotWaterFeedback heatPumpHotWaterFeedback(
-    PLRMin=PLRMin,
-    THotNom=THotNom,
-    QNom=QNom) annotation (Placement(transformation(extent={{-8,14},{12,34}})));
+    annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
+  BaseClasses.HeatPump_Sources.Liquid heatSource(TSourceNom=TSourceNom)
+    "Liquid heat source"
+    annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 protected
                replaceable package MediumCon = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium heat sink";
 
- parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+ parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="Advanced",group="General machine information"));
 
 equation
 
-  connect(mFlowEva.y, division1.u2) annotation (Line(points={{81.9,-36},{61.6,
-          -36},{61.6,-36.8}},       color={0,0,127}));
-  connect(senTCold.port_b, heatPump.port_a1) annotation (Line(points={{-28,0},{
-          -8,0}},             color={0,127,255}));
+  connect(senTCold.port_b, heatPump.port_a1) annotation (Line(points={{-28,0},{-8,
+          0}},                color={0,127,255}));
   connect(sigBus, heatPump.sigBus) annotation (Line(
       points={{-5,99},{-5,46},{-24,46},{-24,-9.9},{-7.9,-9.9}},
       color={255,204,51},
@@ -231,36 +174,9 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(bouEvap_b.ports[1], heatPump.port_b2) annotation (Line(points={{-48,-40},
-          {-8,-40},{-8,-12}},   color={0,127,255}));
-  connect(bouEvap_a.ports[1], heatPump.port_a2) annotation (Line(points={{40,-72},
-          {26,-72},{26,-12},{12,-12}},    color={0,127,255}));
-   connect(division1.y,bouEvap_a. m_flow_in) annotation (Line(points={{43.2,-32},
-          {40,-32},{40,-50},{86,-50},{86,-64},{62,-64}},       color={0,0,127}));
 
-  connect(switch1.y, bouEvap_a.T_in) annotation (Line(points={{4.8,-64},{10,-64},
-          {10,-82},{68,-82},{68,-68},{62,-68}},                   color={0,0,127}));
-  connect(tSource.y, switch1.u1) annotation (Line(points={{-54.8,-81},{-22,-81},
-          {-22,-70},{-13.6,-70},{-13.6,-70.4}},
-                          color={0,0,127}));
-  connect(booleanExpression.y, switch1.u2) annotation (Line(points={{-59,-68},{
-          -44,-68},{-44,-64},{-13.6,-64}},
-                                       color={255,0,255}));
-  connect(tHotMax.y, greater.u2) annotation (Line(points={{48.8,62},{48.8,61.6},
-          {31.6,61.6}},           color={0,0,127}));
-  connect(greater.y, sigBus.Shutdown) annotation (Line(points={{13.2,68},{10,68},
-          {10,99.085},{-4.925,99.085}}, color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(greater.y, control.Shutdown) annotation (Line(points={{13.2,68},{-38,
-          68}},                  color={255,0,255}));
-  connect(senTCold.T, greater.u1) annotation (Line(points={{-37,11},{-36,11},{
-          -36,48},{36,48},{36,68},{31.6,68}},
-                                       color={0,0,127}));
-  connect(senTCold.T, control.TCold) annotation (Line(points={{-37,11},{-37,52},
-          {-38,52},{-38,59}},          color={0,0,127}));
+  connect(senTCold.T, control.TCold) annotation (Line(points={{-40,13.2},{-40,59},
+          {-44,59}},                   color={0,0,127}));
 
   connect(mode.y, sigBus.modeSet) annotation (Line(points={{27.2,99},{10,99},{
           10,99},{-5,99}}, color={255,0,255}), Text(
@@ -269,76 +185,58 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBus.PLR, control.PLR) annotation (Line(
-      points={{-4.925,99.085},{-4.925,75},{-38,75}},
+      points={{-4.925,99.085},{-4.925,75},{-44,75}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(sigBus.QEvapNom, division1.u1) annotation (Line(
-      points={{-4.925,99.085},{-4.925,92},{80,92},{80,-27.2},{61.6,-27.2}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(sigBus.Pel, integrator.u) annotation (Line(
-      points={{-5,99},{-5,82},{50.8,82}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.TSource, switch1.u3) annotation (Line(
-      points={{-5,99},{-5,84},{-114,84},{-114,-57.6},{-13.6,-57.6}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(port_a, port_a)
     annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
-  connect(senTHot1.port_b, port_b) annotation (Line(points={{78,34},{86,34},{86,
-          0},{100,0}}, color={0,127,255}));
-  connect(port_a, senTCold1.port_a)
-    annotation (Line(points={{-100,0},{-100,32},{-96,32}}, color={0,127,255}));
-  connect(heatPump.port_b1, senMasFloHP.port_a) annotation (Line(points={{12,0},
-          {15,0},{15,8.88178e-16},{18,8.88178e-16}}, color={0,127,255}));
-  connect(senMasFloHP.port_b, senTHot.port_a) annotation (Line(points={{34,-1.11022e-15},
-          {36,-1.11022e-15},{36,0},{38,0}}, color={0,127,255}));
-  connect(mFlowRelWater.u2, mFlowEva1.y)
-    annotation (Line(points={{124,32},{134.1,31}}, color={0,0,127}));
-  connect(senMasFloHP.m_flow, mFlowRelWater.u1) annotation (Line(points={{26,8.8},
-          {26,20},{144,20},{144,44},{124,44}}, color={0,0,127}));
-  connect(mFlowRelWater.y, sigBus.mFlowWaterRel) annotation (Line(points={{101,38},
-          {72,38},{72,40},{-4.925,40},{-4.925,99.085}}, color={0,0,127}), Text(
+  connect(m_flowRelCon.u2, m_flowCon.y)
+    annotation (Line(points={{32,54},{40.7,54}}, color={0,0,127}));
+  connect(senMasFloHP.m_flow, m_flowRelCon.u1)
+    annotation (Line(points={{72,8.8},{72,66},{32,66}}, color={0,0,127}));
+  connect(m_flowRelCon.y, sigBus.mFlowWaterRel) annotation (Line(points={{9,60},
+          {-4.925,60},{-4.925,99.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(senTHot.T, control.THot)
-    annotation (Line(points={{46,8.8},{46,64},{-38,64}}, color={0,0,127}));
-  connect(senTCold.port_a, fan.port_b)
-    annotation (Line(points={{-46,0},{-56,0}}, color={0,127,255}));
-  connect(deltaTMainMax.y, fan.m_flow_in)
-    annotation (Line(points={{-129,38},{-66,38},{-66,12}}, color={0,0,127}));
-  connect(control.mFlowCon, deltaTMainMax.u2) annotation (Line(points={{-61.2,68},
-          {-102,68},{-102,62},{-158,62},{-158,32},{-152,32}}, color={0,0,127}));
-  connect(tHotMax1.y, deltaTMainMax.u1) annotation (Line(points={{-155.2,72},{-172,
-          72},{-172,70},{-184,70},{-184,48},{-152,48},{-152,44}}, color={0,0,127}));
-  connect(senTCold1.port_b, heatPumpHotWaterFeedback.port_a2) annotation (Line(
-        points={{-78,32},{-12,32},{-12,38},{16,38},{16,18},{12,18}}, color={0,
-          127,255}));
-  connect(heatPumpHotWaterFeedback.port_b2, fan.port_a) annotation (Line(points
-        ={{-8,18},{-82,18},{-82,0},{-76,0}}, color={0,127,255}));
-  connect(heatPumpHotWaterFeedback.port_b1, senTHot1.port_a) annotation (Line(
-        points={{12,30},{54,30},{54,34},{62,34}}, color={0,127,255}));
-  connect(senTHot.port_b, heatPumpHotWaterFeedback.port_a1) annotation (Line(
-        points={{54,0},{60,0},{60,30},{-8,30}}, color={0,127,255}));
+    annotation (Line(points={{30,8.8},{30,36},{-16,36},{-16,64},{-44,64}},
+                                                         color={0,0,127}));
+  connect(fan1.port_b, senTCold.port_a)
+    annotation (Line(points={{-62,0},{-52,0}}, color={0,127,255}));
+  connect(port_a, fan1.port_a)
+    annotation (Line(points={{-100,0},{-82,0}}, color={0,127,255}));
+  connect(control.mFlowCon, fan1.y)
+    annotation (Line(points={{-67.2,68},{-72,68},{-72,12}}, color={0,0,127}));
+  connect(heatSource.port_b, heatPump.port_a2) annotation (Line(points={{10,-40},
+          {18,-40},{18,-12},{12,-12}}, color={0,127,255}));
+  connect(heatPump.port_b2, heatSource.port_a) annotation (Line(points={{-8,-12},
+          {-14,-12},{-14,-40},{-10,-40}}, color={0,127,255}));
+  connect(sigBus, heatSource.sigBus) annotation (Line(
+      points={{-5,99},{-5,46},{-24,46},{-24,-22},{0.1,-22},{0.1,-29.7}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(control.schutdown, sigBus.Shutdown) annotation (Line(points={{-67,60},
+          {-94,60},{-94,99.085},{-4.925,99.085}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatPump.port_b1, senTHot.port_a)
+    annotation (Line(points={{12,0},{22,0}}, color={0,127,255}));
+  connect(senTHot.port_b, senMasFloHP.port_a) annotation (Line(points={{38,0},{
+          51,0},{51,8.88178e-16},{64,8.88178e-16}}, color={0,127,255}));
+  connect(senMasFloHP.port_b, port_b) annotation (Line(points={{80,-1.11022e-15},
+          {90,-1.11022e-15},{90,0},{100,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},
@@ -359,10 +257,7 @@ equation
           lineColor={0,0,0},
           origin={1,-64},
           rotation=90)}),                                        Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-162,0},{-122,-22}},
-          lineColor={28,108,200},
-          textString="Muss y_flow Pump?")}),
+        coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=40000),
     Documentation(info="<html>
 <p>Modular heat pump with different options</p>

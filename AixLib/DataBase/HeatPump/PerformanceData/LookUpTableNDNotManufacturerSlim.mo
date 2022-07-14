@@ -5,24 +5,24 @@ model LookUpTableNDNotManufacturerSlim
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
   // Not Manufacturer
-  parameter Modelica.SIunits.Temperature THotMax=333.15 "Max. value of THot before shutdown"
+  parameter Modelica.Units.SI.Temperature THotMax=333.15 "Max. value of THot before shutdown"
   annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+  parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
+  parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.HeatFlowRate QNom=30000 "Nominal heat flow"
+  parameter Modelica.Units.SI.HeatFlowRate QNom=30000 "Nominal heat flow"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
   parameter Boolean HighTemp=false "true: THot > 60°C"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-  parameter Modelica.SIunits.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
+  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=3 "Temperature difference heat source evaporator"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
-  parameter Modelica.SIunits.Temperature TSource=280 "temperature of heat source"
+  parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
    parameter Boolean TSourceInternal=false
@@ -32,115 +32,78 @@ model LookUpTableNDNotManufacturerSlim
     parameter Boolean THotExternal=false "Use external THot?"
                                                              annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
-  NominalHeatPumpNotManufacturer nominalHeatPump(
+  NominalHeatPumpNotManufacturer NominalCOP(
     HighTemp=HighTemp,
     THotNom=THotNom,
     TSourceNom=TSourceNom,
     QNom=QNom,
-    DeltaTCon=DeltaTCon)
-    annotation (Placement(transformation(extent={{-40,32},{-20,52}})));
+    DeltaTCon=DeltaTCon) "Nominal Operating"
+    annotation (Placement(transformation(extent={{28,36},{8,56}})));
   Modelica.Blocks.Logical.LessThreshold pLRMin(threshold=PLRMin)
-    annotation (Placement(transformation(extent={{26,66},{40,80}})));
+    annotation (Placement(transformation(extent={{20,70},{40,90}})));
   Modelica.Blocks.Logical.Switch switch4
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={66,72})));
-  Modelica.Blocks.Logical.Switch switch3
-    annotation (Placement(transformation(extent={{-9,-9},{9,9}},
-        rotation=270,
-        origin={87,29})));
+        rotation=-90,
+        origin={50,44})));
   Modelica.Blocks.Sources.RealExpression zero
-    annotation (Placement(transformation(extent={{26,80},{40,98}})));
+    annotation (Placement(transformation(extent={{102,44},{84,64}})));
   Modelica.Blocks.Math.Add addQEvap(k1=-1) annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
+        extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={86,-46})));
+        origin={80,-86})));
   Modelica.Blocks.Math.Product productPel annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
+        extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={0,-8})));
+        origin={8,14})));
   Modelica.Blocks.Math.Product productQCon annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
+        extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={-80,-40})));
+        origin={-80,-54})));
 
-  Modelica.Blocks.Sources.RealExpression zero1
-    annotation (Placement(transformation(extent={{118,44},{100,64}})));
-
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=15)
-    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
-        rotation=-90,
-        origin={-46,-88})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder1(T=15)
-    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
-        rotation=-90,
-        origin={16,-90})));
-  Modelica.Blocks.Logical.Switch switch5
-    annotation (Placement(transformation(extent={{6,-6},{-6,6}},
-        rotation=90,
-        origin={-84,-86})));
   Modelica.Blocks.Logical.LessThreshold mFlowWaterMin(threshold=0.01)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={30,30})));
-  Modelica.Blocks.Logical.Switch switch6
-    annotation (Placement(transformation(extent={{7,-7},{-7,7}},
-        rotation=90,
-        origin={81,-87})));
-  Modelica.Blocks.Sources.RealExpression zero2
-    annotation (Placement(transformation(extent={{9,-10},{-9,10}},
-        rotation=180,
-        origin={-109,-72})));
+        origin={-30,50})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression3(y=THotExternal)
     annotation (Placement(transformation(extent={{26506,-7302},{26552,-7278}})));
-  COPNotManufacturer cOPNotManufacturer(
+  COPNotManufacturer ActualCOP(
     TSourceInternal=TSourceInternal,
     THotExternal=THotExternal,
     TSource=TSource,
     THotNom=THotNom,
     PLRMin=PLRMin,
-    HighTemp=HighTemp)
-                   annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={-30,70})));
+    HighTemp=HighTemp) "Actual operating is represented" annotation (Placement(
+        transformation(
+        extent={{-10,-20},{10,20}},
+        rotation=270,
+        origin={-80,64})));
   Modelica.Blocks.Sources.RealExpression zero3
-    annotation (Placement(transformation(extent={{38,-98},{46,-88}})));
+    annotation (Placement(transformation(extent={{-48,-12},{-36,2}})));
 
+  Modelica.Blocks.Logical.Switch P_elOnOff annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=90,
+        origin={0,-22})));
+  Modelica.Blocks.Logical.Or or1
+    annotation (Placement(transformation(extent={{58,78},{78,98}})));
 equation
 
-  connect(switch4.y,switch3. u3) annotation (Line(points={{77,72},{80,72},{80,44},
-          {79.8,44},{79.8,39.8}},       color={0,0,127}));
-  connect(pLRMin.y,switch4. u2) annotation (Line(points={{40.7,73},{40.7,72},{54,
-          72}},                              color={255,0,255}));
-  connect(zero.y, switch4.u1) annotation (Line(points={{40.7,89},{54,89},{54,80}},
-                             color={0,0,127}));
-  connect(productPel.y, productQCon.u1) annotation (Line(points={{-1.60982e-15,-16.8},
-          {-1.60982e-15,-26},{-76,-26},{-76,-30.4},{-75.2,-30.4}}, color={0,0,127}));
-  connect(productQCon.y, addQEvap.u2) annotation (Line(points={{-80,-48.8},{-80,
-          -58},{40,-58},{40,-30},{80,-30},{80,-36.4},{81.2,-36.4}}, color={0,0,127}));
-  connect(productPel.y, addQEvap.u1) annotation (Line(points={{-1.55431e-15,
-          -16.8},{-1.55431e-15,-26},{90.8,-26},{90.8,-36.4}},
-                                                       color={0,0,127}));
-  connect(nominalHeatPump.QEvapNom, sigBus.QEvapNom) annotation (Line(points={{-19,44},
-          {-0.925,44},{-0.925,100.07}},                       color={0,0,127}),
-      Text(
+  connect(zero.y, switch4.u1) annotation (Line(points={{83.1,54},{70,54},{70,56},
+          {58,56}},          color={0,0,127}));
+  connect(productQCon.y, addQEvap.u2) annotation (Line(points={{-80,-65},{-80,
+          -70},{74,-70},{74,-74}},                                  color={0,0,127}));
+  connect(NominalCOP.QEvapNom, sigBus.QEvapNom) annotation (Line(points={{7,48},{
+          -0.925,48},{-0.925,100.07}},  color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
 
-  connect(productPel.y, Pel)
-    annotation (Line(points={{-1.60982e-15,-16.8},{0,-110}}, color={0,0,127}));
-  connect(nominalHeatPump.PelFullLoad, productPel.u2)
-    annotation (Line(points={{-19,34},{-4.8,34},{-4.8,1.6}}, color={0,0,127}));
-  connect(zero1.y, switch3.u1) annotation (Line(points={{99.1,54},{94.2,54},{94.2,
-          39.8}},        color={0,0,127}));
-  connect(switch3.y, productPel.u1) annotation (Line(points={{87,19.1},{86,19.1},
-          {86,14},{4.8,14},{4.8,1.6}}, color={0,0,127}));
+  connect(NominalCOP.PelFullLoad, productPel.u2) annotation (Line(points={{7,38},{
+          2,38},{2,26}},                           color={0,0,127}));
   connect(sigBus.PLR, pLRMin.u) annotation (Line(
-      points={{-0.925,100.07},{-0.925,92},{0,92},{0,73},{24.6,73}},
+      points={{-0.925,100.07},{-0.925,92},{0,92},{0,80},{18,80}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -148,42 +111,17 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBus.PLR, switch4.u3) annotation (Line(
-      points={{-0.925,100.07},{-0.925,100},{0,100},{0,64},{54,64}},
+      points={{-0.925,100.07},{-0.925,80},{12,80},{12,60},{42,60},{42,56}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.Shutdown, switch3.u2) annotation (Line(
-      points={{-0.925,100.07},{86,100.07},{86,100},{87,100},{87,39.8}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(productQCon.y, firstOrder.u) annotation (Line(points={{-80,-48.8},{-80,
-          -72},{-46,-72},{-46,-80.8}}, color={0,0,127}));
-  connect(addQEvap.y, firstOrder1.u) annotation (Line(points={{86,-54.8},{70,-54.8},
-          {70,-74},{12,-74},{12,-82.8},{16,-82.8}}, color={0,0,127}));
   connect(QEva, QEva)
     annotation (Line(points={{80,-110},{80,-110}}, color={0,0,127}));
-  connect(switch5.y, QCon) annotation (Line(points={{-84,-92.6},{-84,-96},{-80,-96},
-          {-80,-110}},          color={0,0,127}));
-  connect(switch6.y, QEva) annotation (Line(points={{81,-94.7},{81,-104},{80,-104},
-          {80,-110}},
-                  color={0,0,127}));
-  connect(mFlowWaterMin.y, switch5.u2) annotation (Line(points={{30,19},{30,-68},
-          {-84,-68},{-84,-78.8}}, color={255,0,255}));
-  connect(mFlowWaterMin.y, switch6.u2) annotation (Line(points={{30,19},{30,-68},
-          {81,-68},{81,-78.6}}, color={255,0,255}));
-  connect(productQCon.y, switch5.u3) annotation (Line(points={{-80,-48.8},{-80,-78.8},
-          {-79.2,-78.8}}, color={0,0,127}));
-  connect(zero2.y, switch5.u1) annotation (Line(points={{-99.1,-72},{-88.8,-72},
-          {-88.8,-78.8}},                          color={0,0,127}));
   connect(sigBus.mFlowWaterRel, mFlowWaterMin.u) annotation (Line(
-      points={{-0.925,100.07},{-0.925,48},{30,48},{30,42}},
+      points={{-0.925,100.07},{-0.925,68},{-30,68},{-30,62}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -191,44 +129,70 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
 
-  connect(sigBus.TSource, cOPNotManufacturer.tSource) annotation (Line(
-      points={{-1,100},{-1,61},{-18,61}},
+  connect(sigBus.TSource, ActualCOP.tSource) annotation (Line(
+      points={{-1,100},{-1,102},{-62,102},{-62,76}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.PLR, cOPNotManufacturer.pLR) annotation (Line(
-      points={{-0.925,100.07},{-0.925,67},{-18,67}},
+  connect(sigBus.PLR, ActualCOP.pLR) annotation (Line(
+      points={{-0.925,100.07},{-0.925,102},{-74,102},{-74,76}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.THot, cOPNotManufacturer.tConOutSet) annotation (Line(
-      points={{-0.925,100.07},{-0.925,79},{-18,79}},
+  connect(sigBus.THot, ActualCOP.tConOutSet) annotation (Line(
+      points={{-0.925,100.07},{-0.925,102},{-98,102},{-98,76}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.TConInMea, cOPNotManufacturer.tConIn) annotation (Line(
-      points={{-0.925,100.07},{-0.925,73},{-18,73}},
+  connect(sigBus.TConInMea, ActualCOP.tConIn) annotation (Line(
+      points={{-0.925,100.07},{-0.925,102},{-86,102},{-86,76}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cOPNotManufacturer.COP, productQCon.u2) annotation (Line(points={{-41.2,
-          70},{-84.8,70},{-84.8,-30.4}}, color={0,0,127}));
-  connect(zero3.y, switch6.u1) annotation (Line(points={{46.4,-93},{64,-93},{64,
-          -78.6},{75.4,-78.6}}, color={0,0,127}));
-  connect(addQEvap.y, switch6.u3) annotation (Line(points={{86,-54.8},{86,-70},{
-          86.6,-70},{86.6,-78.6}}, color={0,0,127}));
+  connect(ActualCOP.COP, productQCon.u2) annotation (Line(points={{-80,52.8},{
+          -80,-38},{-86,-38},{-86,-42}}, color={0,0,127}));
+  connect(zero3.y, P_elOnOff.u1)
+    annotation (Line(points={{-35.4,-5},{-8,-5},{-8,-10}}, color={0,0,127}));
+  connect(mFlowWaterMin.y, P_elOnOff.u2) annotation (Line(points={{-30,39},{-30,
+          0},{0,0},{0,-10},{7.77156e-16,-10}}, color={255,0,255}));
+  connect(productPel.y, P_elOnOff.u3)
+    annotation (Line(points={{8,3},{8,-10}}, color={0,0,127}));
+  connect(P_elOnOff.y, productQCon.u1) annotation (Line(points={{-6.66134e-16,
+          -33},{-6.66134e-16,-36},{-74,-36},{-74,-42}}, color={0,0,127}));
+  connect(P_elOnOff.y, addQEvap.u1) annotation (Line(points={{-6.66134e-16,-33},
+          {-6.66134e-16,-36},{86,-36},{86,-74}}, color={0,0,127}));
+  connect(productQCon.y, QCon)
+    annotation (Line(points={{-80,-65},{-80,-110}}, color={0,0,127}));
+  connect(addQEvap.y, QEva)
+    annotation (Line(points={{80,-97},{80,-110}}, color={0,0,127}));
+  connect(P_elOnOff.y, Pel)
+    annotation (Line(points={{-6.66134e-16,-33},{0,-110}}, color={0,0,127}));
+  connect(pLRMin.y, or1.u2)
+    annotation (Line(points={{41,80},{56,80}}, color={255,0,255}));
+  connect(sigBus.Shutdown, or1.u1) annotation (Line(
+      points={{-0.925,100.07},{-0.925,100},{48,100},{48,88},{56,88}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(or1.y, switch4.u2) annotation (Line(points={{79,88},{84,88},{84,62},{
+          50,62},{50,56}}, color={255,0,255}));
+  connect(switch4.y, productPel.u1)
+    annotation (Line(points={{50,33},{50,26},{14,26}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
     Line(points={{-60,40},{-60,-40},{60,-40},{60,40},{30,40},{30,-40},{-30,-40},
               {-30,40},{-60,40},{-60,20},{60,20},{60,0},{-60,0},{-60,-20},{60,-20},

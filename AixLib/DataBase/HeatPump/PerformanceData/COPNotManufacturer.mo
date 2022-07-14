@@ -9,9 +9,9 @@ model COPNotManufacturer
     parameter Boolean THotExternal=false "Use external THot?"
                                                              annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
-      parameter Modelica.SIunits.Temperature TSource=280 "temperature of heat source"
+      parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
-    parameter Modelica.SIunits.Temperature THotNom=313.15 "Nominal temperature of THot"
+    parameter Modelica.Units.SI.Temperature THotNom=313.15 "Nominal temperature of THot"
    annotation (Dialog(tab="NotManufacturer", group="General machine information"));
 
   parameter Real PLRMin=0.4 "Limit of PLR; less =0"

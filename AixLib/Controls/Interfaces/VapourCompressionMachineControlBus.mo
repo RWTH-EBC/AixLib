@@ -65,11 +65,11 @@ annotation (
 
   Boolean Shutdown "true: force shutdown";
 
-  Modelica.SIunits.Power QEvapNom "Nominal evaporation heat flow";
+  Modelica.Units.SI.Power QEvapNom "Nominal evaporation heat flow";
 
    Real mFlowWaterRel;
 
-   Modelica.SIunits.ThermodynamicTemperature THot;
+   Modelica.Units.SI.ThermodynamicTemperature THot;
 
 
   annotation (Documentation(info="<html><p>

@@ -4,10 +4,10 @@ model BoilerNotManufacturer "Simple heat generator without control"
     redeclare package Medium = Media.Water,
         a=coeffPresLoss, vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, V=(1.1615*QNom/1000 - 13.388)/1000));
 
-  parameter Modelica.SIunits.TemperatureDifference dTWaterNom=15 "Nominal temperature difference heat circuit";
-  parameter Modelica.SIunits.TemperatureDifference dTWaterSet=15 "Setpoint temperature difference heat circuit";
-  parameter Modelica.SIunits.Temperature TColdNom=273.15+35 "Nominal TCold";
-  parameter Modelica.SIunits.HeatFlowRate QNom=50000 "Nominal thermal power";
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterNom=15 "Nominal temperature difference heat circuit";
+  parameter Modelica.Units.SI.TemperatureDifference dTWaterSet=15 "Setpoint temperature difference heat circuit";
+  parameter Modelica.Units.SI.Temperature TColdNom=273.15+35 "Nominal TCold";
+  parameter Modelica.Units.SI.HeatFlowRate QNom=50000 "Nominal thermal power";
   parameter Boolean m_flowVar=false "Boolean for use of variable water massflow";
   parameter Real PLRMin=0.15 "Minimal Part Load Ratio";
 
@@ -83,7 +83,7 @@ model BoilerNotManufacturer "Simple heat generator without control"
 protected
     parameter Real coeffPresLoss=7.143*10^8*exp(-0.007078*QNom/1000)
     "Pressure loss coefficient of the heat generator";
-  parameter Modelica.SIunits.HeatCapacity C=1.5*QNom
+  parameter Modelica.Units.SI.HeatCapacity C=1.5*QNom
     "Heat capacity of metal (J/K)";
 
 equation
@@ -115,7 +115,8 @@ TVolume=vol.T;
   connect(switch3.y, heater.Q_flow) annotation (Line(points={{39,-16.9},{39,-22},
           {-60,-22},{-60,-40}}, color={0,0,127}));
   connect(heatFlowSensor.Q_flow, DemandCalc.QLosses)
-    annotation (Line(points={{-20,-28},{-20,68}}, color={0,0,127}));
+    annotation (Line(points={{-20,-27.4},{-20,68}},
+                                                  color={0,0,127}));
   connect(lessEqualThreshold.y, switch1.u2) annotation (Line(points={{-43.4,26},
           {62,26},{62,60},{82,60},{82,52}},                   color={255,0,255}));
   connect(RealZero.y, switch1.u1) annotation (Line(points={{21,72},{90,72},{90,
@@ -127,7 +128,8 @@ TVolume=vol.T;
   connect(senTCold.T, HeatCalc.TColdMeasure) annotation (Line(points={{-70,-69},
           {-70,4},{-26,4},{-26,53},{2,53}}, color={0,0,127}));
   connect(heatFlowSensor.Q_flow, HeatCalc.QLosses) annotation (Line(points={{-20,
-          -28},{-20,20},{14,20},{14,34}}, color={0,0,127}));
+          -27.4},{-20,20},{14,20},{14,34}},
+                                          color={0,0,127}));
   connect(HeatCalc.Q_flow, switch3.u3)
     annotation (Line(points={{25,46},{31.8,46},{31.8,3.8}}, color={0,0,127}));
   connect(ConductanceToEnv.port_a, vol.heatPort)
