@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.Examples;
+within AixLib.Controls.HeatPump.Examples;
 partial model PartialHeatPumpController
   "Example for usage of heat pump controller"
   extends Modelica.Icons.Example;
@@ -67,15 +67,14 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(T_set.y, TSet) annotation (Line(points={{-79,-30},{86,-30},{86,0},{116,
           0}}, color={0,0,127}));
-  annotation (experiment(StopTime=10000, Interval=10), Documentation(info="<html>
-<p>Partial example model for heat pump controls.</p>
+  annotation (experiment(StopTime=10000, Interval=10), Documentation(info="<html><p>
+  Partial example model for heat pump controls.
+</p>
 </html>", revisions="<html><ul>
-  <li>
-    <i>July 14, 2022</i> by Fabian Wüllhorst:<br/>
-    First implementation (see
-    issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/1128\">#1128</a>)
-  </li>
-</ul>
+<li>
+  <i>July 14, 2022</i> by Fabian Wüllhorst:<br/>
+  First implementation (see issue <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/1128\">#1128</a>)
+</li>
 </html>"));
 end PartialHeatPumpController;
