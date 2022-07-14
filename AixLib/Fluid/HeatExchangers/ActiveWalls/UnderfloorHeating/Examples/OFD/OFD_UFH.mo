@@ -16,9 +16,9 @@ model OFD_UFH
       choice=4 "WSchV_1984",
       radioButtons=true));
   parameter Integer dis=10;
-  parameter Modelica.SIunits.Distance Spacing[nHeatedRooms] = fill(0.2, 10);
-  parameter Modelica.SIunits.Diameter d_a[nHeatedRooms] = fill(0.017, 10);
-  parameter Modelica.SIunits.Diameter d[nHeatedRooms] = fill(0.018, 10);
+  parameter Modelica.Units.SI.Distance Spacing[nHeatedRooms] = fill(0.2, 10);
+  parameter Modelica.Units.SI.Diameter d_a[nHeatedRooms] = fill(0.017, 10);
+  parameter Modelica.Units.SI.Diameter d[nHeatedRooms] = fill(0.018, 10);
   Modelica.Blocks.Sources.Constant constAirEx[nRooms](k={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5,0}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
   Modelica.Blocks.Sources.Constant constWind(k=0)
     annotation (Placement(transformation(extent={{-70,36},{-50,56}})));
@@ -43,7 +43,6 @@ model OFD_UFH
     use_UFH=true,
     redeclare BaseClasses.FloorLayers.EnEV2009Heavy_UFH wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=292.15,
     calcMethodIn=1,
@@ -108,8 +107,8 @@ model OFD_UFH
 
   AixLib.Fluid.Sources.MassFlowSource_T m_flow_specification1(
     redeclare package Medium = AixLib.Media.Water,
-    use_m_flow_in=true,
-    use_T_in=true,
+    m_flow=underfloorHeatingSystem.m_flow_nominal,
+    T=underfloorHeatingSystem.T_Vdes,
     nPorts=1)
     annotation (Placement(transformation(extent={{-98,-66},{-82,-50}})));
   AixLib.Fluid.Sources.Boundary_pT boundary(redeclare package Medium =
@@ -154,22 +153,23 @@ equation
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,-10}}, color={191,0,0}));
   connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
-     Line(points={{51,69.1667},{48,69.1667},{48,26.4},{43.68,26.4}},  color={
+     Line(points={{51,69.5833},{48,69.5833},{48,26.4},{43.68,26.4}},  color={
           255,128,0}));
   connect(varRad.solarRad_out[2], wholeHouseBuildingEnvelope.East) annotation (
-      Line(points={{51,69.5},{48,69.5},{48,18},{43.68,18}},      color={255,128,
+      Line(points={{51,69.75},{48,69.75},{48,18},{43.68,18}},    color={255,128,
           0}));
   connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation (
-     Line(points={{51,69.8333},{48,69.8333},{48,9.6},{43.68,9.6}},  color={255,
+     Line(points={{51,69.9167},{48,69.9167},{48,9.6},{43.68,9.6}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[4], wholeHouseBuildingEnvelope.West) annotation (
-      Line(points={{51,70.1667},{48,70.1667},{48,1.2},{43.68,1.2}},  color={255,
+      Line(points={{51,70.0833},{48,70.0833},{48,1.2},{43.68,1.2}},  color={255,
           128,0}));
   connect(varRad.solarRad_out[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
-    annotation (Line(points={{51,70.5},{48,70.5},{48,43.2},{43.68,43.2}},color=
+    annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
+                                                                         color=
           {255,128,0}));
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
-    annotation (Line(points={{51,70.8333},{48,70.8333},{48,34.8},{43.68,34.8}},
+    annotation (Line(points={{51,70.4167},{48,70.4167},{48,34.8},{43.68,34.8}},
         color={255,128,0}));
   connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-12},
           {-26,-12},{-26,10},{-14,10},{-14,10.16}},                                                                                                                      color={191,0,0}));
@@ -184,9 +184,6 @@ equation
   connect(m_flow_specification1.ports[1], underfloorHeatingSystem.port_a)
     annotation (Line(points={{-82,-58},{-76,-58},{-76,-59},{-68,-59}}, color={0,
           127,255}));
-  connect(underfloorHeatingSystem.T_FlowNominal, m_flow_specification1.T_in)
-    annotation (Line(points={{-68,-65.3},{-78,-65.3},{-78,-66},{-110,-66},{-110,
-          -54.8},{-99.6,-54.8}}, color={0,0,127}));
   connect(underfloorHeatingSystem.port_b, boundary.ports[1]) annotation (Line(
         points={{-44,-59},{-44,-58},{-24,-58}}, color={0,127,255}));
   connect(const.y, underfloorHeatingSystem.valveInput) annotation (Line(points={{-79.4,
@@ -197,21 +194,21 @@ equation
           {-14,2.32}}, color={191,0,0}));
   connect(underfloorHeatingSystem.heatCeiling[i], wholeHouseBuildingEnvelope.groPlateUp[4])
     annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -3.28}},
+            -3.84}},
                   color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[dis+i], wholeHouseBuildingEnvelope.groFloDown[i])
     annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
           {-14,2.32}}, color={191,0,0}));
   connect(underfloorHeatingSystem.heatCeiling[dis+i], wholeHouseBuildingEnvelope.groPlateUp[1])
     annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -6.64}},
+            -5.52}},
                   color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[2*dis+i], wholeHouseBuildingEnvelope.groFloDown[dis+i])
     annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
           {-14,2.32}}, color={191,0,0}));
   connect(underfloorHeatingSystem.heatCeiling[2*dis+i], wholeHouseBuildingEnvelope.groPlateUp[2])
     annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -5.52}},
+            -4.96}},
                   color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[3*dis+i], wholeHouseBuildingEnvelope.groFloDown[2*dis+i])
     annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
@@ -224,7 +221,7 @@ equation
           {-14,2.32}}, color={191,0,0}));
   connect(underfloorHeatingSystem.heatCeiling[4*dis+i], wholeHouseBuildingEnvelope.groPlateUp[5])
     annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -2.16}},
+            -3.28}},
                   color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[5*dis+i], wholeHouseBuildingEnvelope.uppFloDown[i])
     annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
@@ -257,9 +254,6 @@ equation
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
           -70},{-44,-66},{-56,-66}}, color={191,0,0}));
           end for;
-  connect(underfloorHeatingSystem.m_flowNominal, m_flow_specification1.m_flow_in)
-    annotation (Line(points={{-68,-63.2},{-74,-63.2},{-74,-64},{-118,-64},{-118,
-          -51.6},{-99.6,-51.6}}, color={0,0,127}));
   annotation (experiment(StartTime = 0, StopTime = 25920000, Interval=3600, Tolerance=1e-6, Algorithm="dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/OFDHeatLoad.mos"
                       "Simulate and plot"),

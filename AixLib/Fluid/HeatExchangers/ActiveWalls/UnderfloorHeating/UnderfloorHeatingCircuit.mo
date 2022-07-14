@@ -12,35 +12,35 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
       choice=2 "Calculate water volume with time constant",
       radioButtons=true));
 
-  parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
-  parameter Modelica.SIunits.MassFlowRate m_flow_Circuit "nominal mass flow rate" annotation (Dialog(group = "Panel Heating"));
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal = m_flow_Circuit / rho_default "nominal volume flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_Pipe=100*PipeLength
+  parameter Modelica.Units.SI.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_Circuit "nominal mass flow rate" annotation (Dialog(group = "Panel Heating"));
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal = m_flow_Circuit / rho_default "nominal volume flow rate";
+  parameter Modelica.Units.SI.PressureDifference dp_Pipe=100*PipeLength
     "Nominal pressure drop" annotation (Dialog(group="Pressure Drop"));
-  parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system" annotation (Dialog(group="Pressure Drop"));
-  parameter Modelica.SIunits.PressureDifference dpFixed_nominal = 0 "Nominal additional pressure drop e.g. for distributor" annotation (Dialog(group="Pressure Drop"));
+  parameter Modelica.Units.SI.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system" annotation (Dialog(group="Pressure Drop"));
+  parameter Modelica.Units.SI.PressureDifference dpFixed_nominal = 0 "Nominal additional pressure drop e.g. for distributor" annotation (Dialog(group="Pressure Drop"));
 
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor
     "Wall type for floor"
     annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  parameter Modelica.SIunits.Temperature T_Fmax = 29 + 273.15 "Maximum surface temperature" annotation (Dialog(group = "Room Specifications"));
-  parameter Modelica.SIunits.Temperature T_Room = 20 + 273.15 "Nominal Room Temperature" annotation (Dialog(group = "Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Fmax = 29 + 273.15 "Maximum surface temperature" annotation (Dialog(group = "Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Room = 20 + 273.15 "Nominal Room Temperature" annotation (Dialog(group = "Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling
     "Wall type for ceiling"
     annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Distance Spacing "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
-  final parameter Modelica.SIunits.Length PipeLength = A / Spacing
+  parameter Modelica.Units.SI.Distance Spacing "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
+  final parameter Modelica.Units.SI.Length PipeLength = A / Spacing
     "Length of Panel Heating Pipe" annotation (Dialog(group="Panel Heating"));
 
   parameter
     UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition PipeMaterial
     "Pipe Material"
     annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
-  final parameter Modelica.SIunits.ThermalConductivity lambda_R = PipeMaterial.lambda "Thermal conductivity of pipe material";
-  parameter Modelica.SIunits.Thickness PipeThickness "thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.SIunits.Diameter d_a "outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
-  final parameter Modelica.SIunits.Diameter d_i = d_a - 2*PipeThickness "inner diameter of pipe";
+  final parameter Modelica.Units.SI.ThermalConductivity lambda_R = PipeMaterial.lambda "Thermal conductivity of pipe material";
+  parameter Modelica.Units.SI.Thickness PipeThickness "thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
+  parameter Modelica.Units.SI.Diameter d_a "outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
+  final parameter Modelica.Units.SI.Diameter d_i = d_a - 2*PipeThickness "inner diameter of pipe";
 
   parameter Boolean withSheathing = false "false if pipe has no Sheathing" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
   parameter
@@ -49,24 +49,24 @@ model UnderfloorHeatingCircuit "One Circuit in an Underfloor Heating System"
       UnderfloorHeating.BaseClasses.Sheathing_Materials.PVCwithTrappedAir()
     "Sheathing Material" annotation (Dialog(group="Panel Heating", enable=
           withSheathing), choicesAllMatching=true);
-  final parameter Modelica.SIunits.ThermalConductivity lambda_M = if withSheathing then SheathingMaterial.lambda else 0 "Thermal Conductivity for Sheathing";
-  parameter Modelica.SIunits.Diameter d(min = d_a) = d_a  "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
-  final parameter Modelica.SIunits.Diameter d_M = if withSheathing then d else 0;
+  final parameter Modelica.Units.SI.ThermalConductivity lambda_M = if withSheathing then SheathingMaterial.lambda else 0 "Thermal Conductivity for Sheathing";
+  parameter Modelica.Units.SI.Diameter d(min = d_a) = d_a  "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
+  final parameter Modelica.Units.SI.Diameter d_M = if withSheathing then d else 0;
 
   final parameter Integer n_pipe( min = 1) = if withSheathing then 2 else 1;
-  final parameter Modelica.SIunits.Thickness d_pipe[n_pipe] = if withSheathing then {PipeThickness, (d - d_a)} else {PipeThickness} "Thickness of pipe layers";
-  final parameter Modelica.SIunits.ThermalConductivity lambda_pipe[n_pipe] = if withSheathing then {lambda_R, lambda_M} else {lambda_R} "Thermal conductivity of pipe layer";
+  final parameter Modelica.Units.SI.Thickness d_pipe[n_pipe] = if withSheathing then {PipeThickness, (d - d_a)} else {PipeThickness} "Thickness of pipe layers";
+  final parameter Modelica.Units.SI.ThermalConductivity lambda_pipe[n_pipe] = if withSheathing then {lambda_R, lambda_M} else {lambda_R} "Thermal conductivity of pipe layer";
 
   parameter Integer use_vmax(min = 1, max = 2) "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
 
-  parameter Modelica.SIunits.ThermalResistance R_x = 0 "additional thermal resistance";
+  parameter Modelica.Units.SI.ThermalResistance R_x = 0 "additional thermal resistance";
 
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 
 public

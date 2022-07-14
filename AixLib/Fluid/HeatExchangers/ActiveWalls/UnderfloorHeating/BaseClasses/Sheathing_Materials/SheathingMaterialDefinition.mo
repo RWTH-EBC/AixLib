@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.She
 record SheathingMaterialDefinition "Record for definition of sheathing material"
   extends Modelica.Icons.Record;
 
- parameter Modelica.SIunits.ThermalConductivity lambda;
+ parameter Modelica.Units.SI.ThermalConductivity lambda;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>

@@ -6,12 +6,12 @@ model qG_TypeA
   extends
     UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.K_H_TypeA;
 
-  parameter Modelica.SIunits.Temperature T_Fmax "maximum surface temperature";
-  parameter Modelica.SIunits.Temperature T_Room "Room temperature";
+  parameter Modelica.Units.SI.Temperature T_Fmax "maximum surface temperature";
+  parameter Modelica.Units.SI.Temperature T_Room "Room temperature";
 
   final parameter Real f_G = if s_u/T <= 0.173 then 1 else (q_Gmax - (q_Gmax - phi * B_G * (dT_HG375 / phi) ^(n_G) * 0.375 / T) * e^(-20 * (s_u / T - 0.173)^2)) / (phi * B_G * (dT_HG375 / phi) ^(n_G) * 0.375 / T);
   final parameter Real phi = ((T_Fmax - T_Room) / d_T0)^(1.1);
-  final parameter Modelica.SIunits.TemperatureDifference d_T0 = 9;
+  final parameter Modelica.Units.SI.TemperatureDifference d_T0 = 9;
   final parameter Real B_G = if s_u / lambda_E <= 0.0792 then
     tableA4.y
  else
@@ -21,15 +21,15 @@ model qG_TypeA
   else
     tableA7.y;
 
-  final parameter Modelica.SIunits.HeatFlux q_G = if T <= 0.375 then phi * B_G * (dT_HG /phi)^(n_G)
+  final parameter Modelica.Units.SI.HeatFlux q_G = if T <= 0.375 then phi * B_G * (dT_HG /phi)^(n_G)
     else
   phi * B_G * (dT_HG / phi) ^(n_G) * 0.375 / T * f_G "limiting heat flux";
 
-  parameter Modelica.SIunits.HeatFlux q_Gmax "maximum possible heat flux";
+  parameter Modelica.Units.SI.HeatFlux q_Gmax "maximum possible heat flux";
 
-  final parameter Modelica.SIunits.TemperatureDifference dT_HG375 = phi *  (B_G / (B * product_ai))^(1/(1-n_G)) "maximum temperature difference at Spacing = 0.375 m";
-  final parameter Modelica.SIunits.TemperatureDifference dT_HG = if T <= 0.375 then phi *  (B_G / (B * product_ai))^(1/(1-n_G)) else phi * ( B_G / (B * product_ai))^(1/(1-n_G)) * f_G "maximum temperature difference between heating medium and room";
-  parameter Modelica.SIunits.TemperatureDifference dT_H "logarithmic temperature difference between heating medium and room";
+  final parameter Modelica.Units.SI.TemperatureDifference dT_HG375 = phi *  (B_G / (B * product_ai))^(1/(1-n_G)) "maximum temperature difference at Spacing = 0.375 m";
+  final parameter Modelica.Units.SI.TemperatureDifference dT_HG = if T <= 0.375 then phi *  (B_G / (B * product_ai))^(1/(1-n_G)) else phi * ( B_G / (B * product_ai))^(1/(1-n_G)) * f_G "maximum temperature difference between heating medium and room";
+  parameter Modelica.Units.SI.TemperatureDifference dT_H "logarithmic temperature difference between heating medium and room";
 
   Tables.CombiTable2DParameter tableA4(
     table=[0.0,0.01,0.0208,0.0292,0.0375,0.0458,0.0542,0.0625,0.0708,0.0792; 0.05,

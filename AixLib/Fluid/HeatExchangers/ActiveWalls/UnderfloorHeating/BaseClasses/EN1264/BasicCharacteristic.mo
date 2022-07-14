@@ -1,9 +1,9 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.EN1264;
 function BasicCharacteristic
   "Calculation of basic characteristic according to EN 1264"
-  input Modelica.SIunits.Temperature T_Fm;
-  input Modelica.SIunits.Temperature T_Room;
-  output Modelica.SIunits.HeatFlux q_Basis;
+  input Modelica.Units.SI.Temperature T_Fm;
+  input Modelica.Units.SI.Temperature T_Room;
+  output Modelica.Units.SI.HeatFlux q_Basis;
 
 algorithm
   q_Basis :=8.92*(T_Fm - T_Room)^1.1;

@@ -18,30 +18,30 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   final parameter Integer CircuitNo[RoomNo]=underfloorHeatingRoom.CircuitNo
     "Number of circuits in a certain room";
   parameter Integer dis  "Number of discretization layers for panel heating pipe";
-  parameter Modelica.SIunits.Power Q_Nf[RoomNo] "Calculated Heat Load for room with panel heating" annotation (Dialog(group="Room Specifications"));
-  parameter Modelica.SIunits.Area A[RoomNo] "Floor Area" annotation(Dialog(group = "Room Specifications"));
+  parameter Modelica.Units.SI.Power Q_Nf[RoomNo] "Calculated Heat Load for room with panel heating" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Area A[RoomNo] "Floor Area" annotation(Dialog(group = "Room Specifications"));
   parameter Integer calculateVol = 1 annotation (Dialog(group="Panel Heating",
         descriptionLabel=true), choices(
       choice=1 "Calculate Water Volume with inner diameter",
       choice=2 "Calculate Water Volume with time constant",
       radioButtons=true));
   parameter Integer use_vmax(min = 1, max = 2) = 1 "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
-  parameter Modelica.SIunits.Length maxLength = 120 "Maximum Length for one Circuit" annotation(Dialog(group = "Panel Heating"));
-  parameter Modelica.SIunits.Temperature T_Fmax[RoomNo] = fill(29 + 273.15, RoomNo) "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
-  parameter Modelica.SIunits.Temperature T_Room[RoomNo] = fill(20 + 273.15, RoomNo) "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Length maxLength = 120 "Maximum Length for one Circuit" annotation(Dialog(group = "Panel Heating"));
+  parameter Modelica.Units.SI.Temperature T_Fmax[RoomNo] = fill(29 + 273.15, RoomNo) "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Room[RoomNo] = fill(20 + 273.15, RoomNo) "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
   parameter Boolean Ceiling[RoomNo] "false if ground plate is under panel heating" annotation (Dialog(group = "Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
-  parameter Modelica.SIunits.Temperature T_U[RoomNo] = fill(Modelica.SIunits.Conversions.from_degC(20), RoomNo) "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
-  parameter Modelica.SIunits.Distance Spacing[RoomNo] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
-  final parameter Modelica.SIunits.Length PipeLength[RoomNo] = A ./ Spacing "Pipe Length in every room";
+  parameter Modelica.Units.SI.Temperature T_U[RoomNo] = fill(Modelica.Units.SI.Conversions.from_degC(20), RoomNo) "Set value for Room Temperature lying under panel heating" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Distance Spacing[RoomNo] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
+  final parameter Modelica.Units.SI.Length PipeLength[RoomNo] = A ./ Spacing "Pipe Length in every room";
 
   parameter
     UnderfloorHeating.BaseClasses.PipeMaterials.PipeMaterialDefinition PipeMaterial=
       UnderfloorHeating.BaseClasses.PipeMaterials.PERTpipe() "Pipe Material"
     annotation (Dialog(group="Panel Heating"), choicesAllMatching=true);
-  parameter Modelica.SIunits.Thickness PipeThickness[RoomNo] "Thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
-  parameter Modelica.SIunits.Diameter d_a[RoomNo] "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
+  parameter Modelica.Units.SI.Thickness PipeThickness[RoomNo] "Thickness of pipe wall" annotation (Dialog( group = "Panel Heating"));
+  parameter Modelica.Units.SI.Diameter d_a[RoomNo] "Outer diameter of pipe" annotation (Dialog( group = "Panel Heating"));
 
   parameter Boolean withSheathing = true "false if pipe has no Sheathing" annotation (Dialog(group = "Panel Heating"), choices(checkBox=true));
   parameter
@@ -50,36 +50,36 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
       UnderfloorHeating.BaseClasses.Sheathing_Materials.PVCwithTrappedAir()
     "Sheathing Material" annotation (Dialog(group="Panel Heating", enable=
           withSheathing), choicesAllMatching=true);
-  parameter Modelica.SIunits.Diameter d[RoomNo](min = d_a) = d_a "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
+  parameter Modelica.Units.SI.Diameter d[RoomNo](min = d_a) = d_a "Outer diameter of pipe including Sheathing" annotation (Dialog( group = "Panel Heating", enable = withSheathing));
 
-  final parameter Modelica.SIunits.MassFlowRate m_flow_total=sum(
+  final parameter Modelica.Units.SI.MassFlowRate m_flow_total=sum(
       underfloorHeatingRoom.m_flow_PanelHeating)
     "Total mass flow in the panel heating system";
-  final parameter Modelica.SIunits.HeatFlux q_max=max(underfloorHeatingRoom.q)
+  final parameter Modelica.Units.SI.HeatFlux q_max=max(underfloorHeatingRoom.q)
     "highest specific heat flux in system";
-  parameter Modelica.SIunits.TemperatureDifference sigma_des(max = 5) = 5  "Temperature Spread for room with highest heat load (max = 5)";
-  final parameter Modelica.SIunits.TemperatureDifference dT_Hdes = q_max / K_H[1] "Temperature difference between medium and room for room with highest heat flux";
-  final parameter Modelica.SIunits.TemperatureDifference dT_Vdes = dT_Hdes + sigma_des / 2 + sigma_des^(2) / (12 * dT_Hdes) "Temperature difference at flow temperature";
-  final parameter Modelica.SIunits.Temperature T_Vdes = (T_Roomdes - ((sigma_des + T_Roomdes) * e^(sigma_des / dT_Hdes))) / (1 - e^(sigma_des / dT_Hdes)) "Flow Temperature according to EN 1264";
-  final parameter Modelica.SIunits.Temperature T_Roomdes = T_Room[1] "Room temperature in room with highest heat flux";
-  final parameter Modelica.SIunits.TemperatureDifference sigma_i[RoomNo] = cat(1, {sigma_des}, {(3 * dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - dT_Hi[n])  / ( 3 * dT_Hi[n])) ^ (0.5) - 1)) for n in 2:RoomNo}) "Nominal temperature spread in rooms";
-  final parameter Modelica.SIunits.Temperature T_Return[RoomNo] = fill(T_Vdes, RoomNo) .- sigma_i "Nominal return temperature in each room";
+  parameter Modelica.Units.SI.TemperatureDifference sigma_des(max = 5) = 5  "Temperature Spread for room with highest heat load (max = 5)";
+  final parameter Modelica.Units.SI.TemperatureDifference dT_Hdes = q_max / K_H[1] "Temperature difference between medium and room for room with highest heat flux";
+  final parameter Modelica.Units.SI.TemperatureDifference dT_Vdes = dT_Hdes + sigma_des / 2 + sigma_des^(2) / (12 * dT_Hdes) "Temperature difference at flow temperature";
+  final parameter Modelica.Units.SI.Temperature T_Vdes = (T_Roomdes - ((sigma_des + T_Roomdes) * e^(sigma_des / dT_Hdes))) / (1 - e^(sigma_des / dT_Hdes)) "Flow Temperature according to EN 1264";
+  final parameter Modelica.Units.SI.Temperature T_Roomdes = T_Room[1] "Room temperature in room with highest heat flux";
+  final parameter Modelica.Units.SI.TemperatureDifference sigma_i[RoomNo] = cat(1, {sigma_des}, {(3 * dT_Hi[n] * (( 1 + 4 * ( dT_Vdes - dT_Hi[n])  / ( 3 * dT_Hi[n])) ^ (0.5) - 1)) for n in 2:RoomNo}) "Nominal temperature spread in rooms";
+  final parameter Modelica.Units.SI.Temperature T_Return[RoomNo] = fill(T_Vdes, RoomNo) .- sigma_i "Nominal return temperature in each room";
 
   final parameter Real K_H[RoomNo]=underfloorHeatingRoom.K_H
     "Specific parameter for dimensioning according to EN 1264 that shows the relation between temperature difference and heat flux";
   final parameter Real q[RoomNo]=underfloorHeatingRoom.q
     "needed heat flux from underfloor heating";
-  final parameter Modelica.SIunits.TemperatureDifference dT_Hi[RoomNo] = q ./ K_H "Nominal temperature difference between heating medium and room for each room";
+  final parameter Modelica.Units.SI.TemperatureDifference dT_Hi[RoomNo] = q ./ K_H "Nominal temperature difference between heating medium and room for each room";
 
-  parameter Modelica.SIunits.PressureDifference dp_Pipe[RoomNo] = 100 * PipeLength ./ CircuitNo "Pressure Difference in each pipe for every room";
-  final parameter Modelica.SIunits.PressureDifference dp_Valve[RoomNo] = max(dp_Pipe) .- dp_Pipe "Pressure Difference set in regulating valve for pressure equalization";
-  final parameter Modelica.SIunits.PressureDifference dp_Distributor=if sum(
+  parameter Modelica.Units.SI.PressureDifference dp_Pipe[RoomNo] = 100 * PipeLength ./ CircuitNo "Pressure Difference in each pipe for every room";
+  final parameter Modelica.Units.SI.PressureDifference dp_Valve[RoomNo] = max(dp_Pipe) .- dp_Pipe "Pressure Difference set in regulating valve for pressure equalization";
+  final parameter Modelica.Units.SI.PressureDifference dp_Distributor=if sum(
       CircuitNo) == 1 then 0 else
       UnderfloorHeating.BaseClasses.PressureLoss.GetPressureLossOfUFHDistributor(
       V_flow_total/n_Distributors, n_HC)
     "Nominal pressure drop of control equipment";
   final parameter Integer n_Distributors(min = 1) = integer(ceil(sum(CircuitNo)/14)) "Number of Distributors needed in the underfloor heating system";
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_total = m_flow_total / rho_default "Nominal system volume flow rate";
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_total = m_flow_total / rho_default "Nominal system volume flow rate";
   final parameter Integer n_HC(min=1) = integer(ceil(sum(CircuitNo) / n_Distributors)) "Average number of heating circuits in distributor";
 
   BaseClasses.Distributor distributor(
@@ -171,7 +171,7 @@ protected
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 
 initial equation
