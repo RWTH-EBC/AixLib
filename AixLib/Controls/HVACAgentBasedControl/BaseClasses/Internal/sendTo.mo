@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.BaseClasses.Internal;
+within AixLib.Controls.HVACAgentBasedControl.BaseClasses.Internal;
 encapsulated function sendTo
   import Modelica;
   extends Modelica.Icons.Function;

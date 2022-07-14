@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.Validation;
+within AixLib.Electrical.PVSystem.Validation;
 model ValidationPVSystem
   "Validation with empirical data from NIST for the date of 14.06.2016"
   extends Modelica.Icons.Example;
