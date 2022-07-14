@@ -1,5 +1,6 @@
 within AixLib.Fluid.Storage;
-model Storage
+model StorageSimple
+  "Simplified multi-layer storage model with volumes as heat exchangers without pressure losses"
 
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
@@ -9,25 +10,15 @@ model Storage
   parameter Modelica.Units.SI.Length d "storage diameter";
   parameter Modelica.Units.SI.Length h "storage height";
   parameter Modelica.Units.SI.ThermalConductivity lambda_ins
-    "thermal conductivity of insulation"
-    annotation (Dialog(group="Heat losses"));
-  parameter Modelica.Units.SI.Length s_ins "thickness of insulation"
-    annotation (Dialog(group="Heat losses"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn
-    "Iinternal heat transfer coefficient"
-    annotation (Dialog(group="Heat losses"));
-  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut
-    "External heat transfer coefficient"
-    annotation (Dialog(group="Heat losses"));
-  parameter Modelica.Units.SI.Volume V_HE "heat exchanger volume"
-    annotation (Dialog(group="Heat exchanger"));
+    "thermal conductivity of insulation"                                                         annotation(Dialog(group = "Heat losses"));
+  parameter Modelica.Units.SI.Length s_ins "thickness of insulation" annotation(Dialog(group = "Heat losses"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn "Iinternal heat transfer coefficient"  annotation(Dialog(group="Heat losses"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut "External heat transfer coefficient"   annotation(Dialog(group="Heat losses"));
+  parameter Modelica.Units.SI.Volume V_HE "heat exchanger volume" annotation(Dialog(group = "Heat exchanger"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer k_HE
-    "heat exchanger heat transfer coefficient"
-    annotation (Dialog(group="Heat exchanger"));
-  parameter Modelica.Units.SI.Area A_HE "heat exchanger area"
-    annotation (Dialog(group="Heat exchanger"));
-  parameter Modelica.Units.SI.RelativePressureCoefficient beta=350e-6
-    annotation (Dialog(group="Bouyancy"));
+    "heat exchanger heat transfer coefficient"                                                         annotation(Dialog(group = "Heat exchanger"));
+  parameter Modelica.Units.SI.Area A_HE "heat exchanger area" annotation(Dialog(group = "Heat exchanger"));
+  parameter Modelica.Units.SI.RelativePressureCoefficient beta = 350e-6 annotation(Dialog(group = "Bouyancy"));
   parameter Real kappa = 0.4 annotation(Dialog(group = "Bouyancy"));
   Modelica.Fluid.Interfaces.FluidPort_a
                     port_a_consumer(redeclare final package Medium = Medium)
@@ -100,30 +91,73 @@ model Storage
     "Start value of pressure" annotation(Dialog(tab="Initialization"));
 
   //Mass flow rates to regulate zero flow
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer=1E-4*abs(
-      m_flow_nominal_layer)
-    "Small mass flow rate for regularization of zero flow"
-    annotation (Dialog(tab="Advanced"));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer_HE=1E-4*abs(
-      m_flow_nominal_HE) "Small mass flow rate for regularization of zero flow"
-    annotation (Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer=1E-4*abs(m_flow_nominal_layer)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+   parameter Modelica.Units.SI.MassFlowRate m_flow_small_layer_HE=1E-4*abs(m_flow_nominal_HE)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
 
+  Modelica.Blocks.Interfaces.RealOutput TTopLayer(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    min=0,
+    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
+        transformation(
+        origin={-99,85},
+        extent={{5,5},{-5,-5}},
+        rotation=0), iconTransformation(
+        extent={{5,5},{-5,-5}},
+        rotation=0,
+        origin={-76,88})));
+  Modelica.Blocks.Interfaces.RealOutput TBottomLayer(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    min=0,
+    displayUnit="degC") "Temperature in the bottom layer" annotation (Placement(
+        transformation(
+        origin={-99,-83},
+        extent={{5,5},{-5,-5}},
+        rotation=0), iconTransformation(
+        extent={{5,5},{-5,-5}},
+        rotation=0,
+        origin={-76,-80})));
+  Modelica.Blocks.Interfaces.RealOutput TTopLayer_HE(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    min=0,
+    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
+        transformation(
+        origin={97,71},
+        extent={{-5,5},{5,-5}},
+        rotation=0), iconTransformation(
+        extent={{-5,5},{5,-5}},
+        rotation=0,
+        origin={102,88})));
+  Modelica.Blocks.Interfaces.RealOutput TBottomLayer_HE(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    min=0,
+    displayUnit="degC") "Temperature in the top layer" annotation (Placement(
+        transformation(
+        origin={95,-69},
+        extent={{-5,5},{5,-5}},
+        rotation=0), iconTransformation(
+        extent={{-5,5},{5,-5}},
+        rotation=0,
+        origin={102,-80})));
 protected
-  parameter Modelica.Units.SI.Volume V=A*h;
-  parameter Modelica.Units.SI.Area A=Modelica.Constants.pi*d^2/4;
-  parameter Modelica.Units.SI.Length dx=V/A/n;
-  parameter Modelica.Units.SI.ThermalConductance G_middle=2*Modelica.Constants.pi
-      *h/n/(1/(hConIn*d/2) + 1/lambda_ins*log((d/2 + s_ins)/(d/2)) + 1/(hConOut
-      *(d/2 + s_ins)));
-  parameter Modelica.Units.SI.ThermalConductance G_top_bottom=G_middle +
-      lambda_ins/s_ins*A;
+  parameter Modelica.Units.SI.Volume V = A * h;
+  parameter Modelica.Units.SI.Area A = Modelica.Constants.pi * d ^ 2 / 4;
+  parameter Modelica.Units.SI.Length dx = V / A / n;
+  parameter Modelica.Units.SI.ThermalConductance G_middle=2*Modelica.Constants.pi*h/n/(1/(hConIn*d/2) + 1/lambda_ins*log((d/2 + s_ins)/(d/2))
+       + 1/(hConOut*(d/2 + s_ins)));
+  parameter Modelica.Units.SI.ThermalConductance G_top_bottom = G_middle + lambda_ins / s_ins * A;
 equation
   //Connect layers to the upper and lower ports
   connect(port_a_consumer, layer[1].ports[1]) annotation (Line(
-      points={{0,-98},{0,-34},{20,-34},{20,-2},{10,-2}},
+      points={{0,-98},{0,-34},{20,-34},{20,-1},{10,-1}},
       color={0,127,255}));
   connect(layer[n].ports[2], port_b_consumer) annotation (Line(
-      points={{10,2},{16,2},{20,2},{20,40},{0,40},{0,92}},
+      points={{10,1},{16,1},{20,1},{20,40},{0,40},{0,92}},
       color={0,127,255}));
 
   //Connect layers
@@ -137,10 +171,10 @@ equation
   end for;
   //Connect layers of Heat Exchanger
   connect(port_a_heatGenerator, layer_HE[n].ports[2]) annotation (Line(
-      points={{84,88},{84,36},{96,22},{94,2}},
+      points={{84,88},{94,36},{94,22},{94,1}},
       color={0,127,255}));
   connect(port_b_heatGenerator, layer_HE[1].ports[1]) annotation (Line(
-      points={{84,-88},{84,-26},{96,-16},{94,-2}},
+      points={{84,-88},{84,-26},{94,-26},{94,-1}},
       color={0,127,255}));
   for k in 1:n - 1 loop
     connect(layer_HE[k].ports[2], layer_HE[k + 1].ports[1]);
@@ -157,6 +191,18 @@ equation
   end for;
   connect(heatPort, heatPort) annotation(Line(points = {{-106, 0}, {-106, 0}}, color = {191, 0, 0}));
 
+///////////////////////////////////////////////////////////////////////////////
+///////////////////  connection of Temperature Sensor//////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+  TBottomLayer = layer[1].heatPort.T;
+
+  TTopLayer = layer[n].heatPort.T;
+
+  TBottomLayer_HE = layer_HE[1].heatPort.T;
+
+  TTopLayer_HE = layer_HE[n].heatPort.T;
+
   annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-154, 3}, {-136, -7}, {-110, -3}, {-84, -7}, {-48, -5}, {-18, -9}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 0, 255},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {78, -59}, rotation = 360), Polygon(points = {{-154, 3}, {-134, -3}, {-110, 1}, {-84, -1}, {-56, -5}, {-30, -11}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {14, 110, 255},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {78, -27}, rotation = 360), Rectangle(extent = {{-80, -71}, {80, 71}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {85, 170, 255},
@@ -164,17 +210,19 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid, origin = {-52, 33}, rotation = 360), Polygon(points = {{-39, -30}, {-31, -30}, {-11, -30}, {23, -30}, {67, -30}, {93, -30}, {121, -30}, {121, 24}, {-39, 26}, {-39, -30}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 170, 170},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {-37, 38}, rotation = 360), Polygon(points = {{-80, 100}, {-80, 54}, {-62, 54}, {-30, 54}, {32, 54}, {80, 54}, {80, 82}, {80, 100}, {-80, 100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 62, 62},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {4, 0}, rotation = 360), Rectangle(extent = {{-76, 100}, {84, -100}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                   1), Line(points = {{-21, 94}, {-21, 132}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-56, 67}, rotation = 270, visible = use_heatingCoil1), Line(points = {{-54, 88}, {68, 56}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{68, 56}, {-48, 44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{-48, 44}, {62, 6}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, 6}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{76, -81}, {-26, -81}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{0, -9}, {0, 9}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-34, -81}, rotation = 90, visible = use_heatingCoil1), Line(points = {{62, -42}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, -42}, {-42, -80}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{48, 88}, {-54, 88}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1)}), Documentation(info = "<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  Simple model for a buffer storage.
+            lineThickness =                                                                                                   1), Line(points = {{-21, 94}, {-21, 132}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-56, 67}, rotation = 270, visible = use_heatingCoil1), Line(points = {{-54, 88}, {68, 56}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{68, 56}, {-48, 44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{-48, 44}, {62, 6}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, 6}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{76, -81}, {-26, -81}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{0, -9}, {0, 9}}, color = {0, 0, 0}, smooth = Smooth.Bezier, thickness = 1, arrow = {Arrow.Filled, Arrow.None}, origin = {-34, -81}, rotation = 90, visible = use_heatingCoil1), Line(points = {{62, -42}, {-44, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{62, -42}, {-42, -80}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1), Line(points = {{48, 88}, {-54, 88}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier, visible = use_heatingCoil1)}), Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
 <p>
-  The water volume can be discretised in several layers.
+  Simple multi-layer thermal energy storage model with volumes as heat
+  exchangers (no pressure losses).
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  The water volume of the thermal energy storage can be discretised in
+  several layers.
 </p>
 <p>
   The following physical processes are modelled
@@ -189,7 +237,24 @@ equation
 </ul>
 <p>
   <br/>
-  <b><span style=\"color: #008000\">Example Results</span></b>
+  In contrast to the StorageDetailed model, the following
+  simplifications are taken as a basis:
+</p>
+<ul>
+  <li>Only indirect charging and discharging using a heat exchanger is
+  possible. Thus, there are two separated hydraulic circuits.
+  </li>
+  <li>The heat exchanger is an array of volumes without any pressure
+  losses
+  </li>
+  <li>There is no optional heating coil and no second heating coil.
+  Hence, the StorageSimple model is limited to a two-circuit
+  application.
+  </li>
+</ul>
+<p>
+  <br/>
+  <b><span style=\"color: #008000;\">Example Results</span></b>
 </p>
 <p>
   <a href=
@@ -200,6 +265,14 @@ equation
   \"AixLib.HVAC.Storage.Examples.StorageSolarCollector\">AixLib.HVAC.Storage.Examples.StorageSolarCollector</a>
 </p>
 <ul>
+  <li>November 2022 by Laura Maier:
+  </li>
+  <li style=\"list-style: none; display: inline\">
+    <p>
+      Rename model and specify difference compared to detailed thermal
+      energy storage model
+    </p>
+  </li>
   <li>
     <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class
@@ -210,4 +283,4 @@ equation
   </li>
 </ul>
 </html>"));
-end Storage;
+end StorageSimple;

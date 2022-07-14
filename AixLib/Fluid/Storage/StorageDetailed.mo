@@ -1,13 +1,9 @@
 within AixLib.Fluid.Storage;
-model BufferStorage
+model StorageDetailed
   "Buffer Storage Model with support for heating rod and two heating coils"
   import      Modelica.Units.SI;
 
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start = TStart);
-
-  replaceable package Medium =
-      Modelica.Media.Interfaces.PartialMedium "Medium model"
-                 annotation (Dialog(group="Medium"),choicesAllMatching = true);
 
   replaceable package MediumHC1 =
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC1"
@@ -16,25 +12,19 @@ model BufferStorage
   replaceable package MediumHC2 =
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC2"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
-  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal(min=0)
+  parameter SI.MassFlowRate m1_flow_nominal(min=0)
     "Nominal mass flow rate of fluid 1 ports"
-    annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal(min=0)
+    annotation(Dialog(group = "Nominal condition"));
+  parameter SI.MassFlowRate m2_flow_nominal(min=0)
     "Nominal mass flow rate of fluid 2 ports"
-    annotation (Dialog(group="Nominal condition"));
+    annotation(Dialog(group = "Nominal condition"));
 
-  parameter Modelica.Units.SI.MassFlowRate mHC1_flow_nominal(min=0)
-    if useHeatingCoil1 "Nominal mass flow rate of fluid 1 ports" annotation (
-      Dialog(
-      tab="Heating Coils and Rod",
-      group="Nominal condition",
-      enable=useHeatingCoil1));
-  parameter Modelica.Units.SI.MassFlowRate mHC2_flow_nominal(min=0)
-    if useHeatingCoil2 "Nominal mass flow rate of fluid 1 ports" annotation (
-      Dialog(
-      tab="Heating Coils and Rod",
-      group="Nominal condition",
-      enable=useHeatingCoil2));
+  parameter SI.MassFlowRate mHC1_flow_nominal(min=0) if useHeatingCoil1
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil1));
+  parameter SI.MassFlowRate mHC2_flow_nominal(min=0) if useHeatingCoil2
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil2));
 
   parameter Boolean useHeatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
@@ -42,8 +32,9 @@ model BufferStorage
 
   parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
-  annotation (choicesAllMatching);
+  replaceable parameter DataBase.Storage.StorageDetailedBaseDataDefinition data
+    constrainedby DataBase.Storage.StorageDetailedBaseDataDefinition
+    "Data record for Storage" annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
 
@@ -66,12 +57,10 @@ model BufferStorage
     "Heating Coil 2 orientation from up to down?"
                                                  annotation(Dialog(enable = useHeatingCoil2,tab="Heating Coils and Rod"));
 
-  parameter Modelica.Units.SI.Temperature TStartWall=293.15
-    "Starting Temperature of wall in K"
-    annotation (Dialog(tab="Initialization", group="Storage specific"));
-  parameter Modelica.Units.SI.Temperature TStartIns=293.15
-    "Starting Temperature of insulation in K"
-    annotation (Dialog(tab="Initialization", group="Storage specific"));
+  parameter SI.Temperature TStartWall=293.15
+    "Starting Temperature of wall in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
+  parameter SI.Temperature TStartIns=293.15
+    "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////Advanced parameters/////////////////////////////////////////////////////////////////////
@@ -147,24 +136,25 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,-80})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(redeclare final package Medium =
-                Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(redeclare final package
+      Medium =  Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
-      package                                                                    Medium =
+      package Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
   Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(redeclare final
-      package                                                                    Medium =
+      package Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
           rotation=0), iconTransformation(extent={{-36,-112},{-18,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop2(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop2(redeclare final package
+      Medium =
         Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,92},{36,110}},rotation=0),
@@ -207,12 +197,14 @@ model BufferStorage
 /////HEATING COIL 1 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-  Modelica.Fluid.Interfaces.FluidPort_a portHC1In(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a portHC1In(redeclare final package
+      Medium =
         MediumHC1) if useHeatingCoil1
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,36},{-72,56}}),
         iconTransformation(extent={{-90,50},{-74,64}})));
-  Modelica.Fluid.Interfaces.FluidPort_b portHC1Out(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b portHC1Out(redeclare final package
+      Medium =
         MediumHC1) if useHeatingCoil1
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,2},{-70,22}}),
@@ -222,12 +214,14 @@ model BufferStorage
 /////HEATING COIL 2 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-  Modelica.Fluid.Interfaces.FluidPort_a portHC2In(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a portHC2In(redeclare final package
+      Medium =
         MediumHC2) if useHeatingCoil2
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,-30},{-72,-10}}),
         iconTransformation(extent={{-88,-32},{-74,-18}})));
-  Modelica.Fluid.Interfaces.FluidPort_b portHC2Out(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b portHC2Out(redeclare final package
+      Medium =
         MediumHC2) if useHeatingCoil2
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,-68},{-72,-48}}),
@@ -822,16 +816,16 @@ for i in 2:(n-1) loop
   </li>
 </ul>
 </html>",
-        info="<html><h4>
-  <span style=\"color: #008000\">Overview</span>
-</h4>
-<p>
-  Buffer Storage Model with support for heating rod and two heating
-  coils.
+        info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
-<h4>
-  <span style=\"color: #008000\">Concept</span>
-</h4>
+<p>
+  Detailed thermal energy storage model with optional heating rod and
+  two heating coils based on a pipe model.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
 <p>
   It represents a buffer storage stratified into n layers where 1
   represents the bottom layer and n represents the top layer. The
@@ -883,9 +877,9 @@ for i in 2:(n-1) loop
   included. Thus external pressure loss models are required for the use
   of the model.
 </p>
-<h4>
-  <span style=\"color: #008000\">Sources</span>
-</h4>
+<p>
+  <b><span style=\"color: #008000;\">Sources</span></b>
+</p>
 <ul>
   <li>R. Viskanta, A. KaraIds: Interferometric observations of the
   temperature structure in water cooled or heated from above.
@@ -893,12 +887,12 @@ for i in 2:(n-1) loop
   Bibtex-Key [R.VISKANTA1977]
   </li>
 </ul>
-<h4>
-  <span style=\"color: #008000;\">Example Results</span>
-</h4>
+<p>
+  <b><span style=\"color: #008000;\">Example Results</span></b>
+</p>
 <p>
   <a href=
   \"AixLib.Fluid.Storage.Examples.BufferStorageCharging\">AixLib.Fluid.Storage.Examples.BufferStorageCharging</a>
 </p>
 </html>"));
-end BufferStorage;
+end StorageDetailed;
