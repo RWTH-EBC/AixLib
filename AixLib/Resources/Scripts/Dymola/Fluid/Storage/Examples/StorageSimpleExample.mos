@@ -1,0 +1,2 @@
+simulateModel("AixLib.Fluid.Storage.Examples.StorageSimpleExample", tolerance=1e-6, stopTime=86400, method="dassl", resultFile="StorageSimple");
+createPlot(id=1, position={104, 0, 742, 420}, y={"storageSimple.layer[1].T","storageSimple.layer[2].T","storageSimple.layer[3].T","storageSimple.layer[4].T"}, grid=true, filename="StorageSimple.mat", colors={{28,108,200},{100,108,150},{50,70,20},{15,15,15}});

@@ -241,5 +241,6 @@ equation
       StopTime=86400,
       Interval=900,
       Tolerance=1e-06,
-      __Dymola_Algorithm="Dassl"));
+      __Dymola_Algorithm="Dassl"),
+          __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageSimpleExample.mos" "Simulate and plot"));
 end StorageSimpleExample;
