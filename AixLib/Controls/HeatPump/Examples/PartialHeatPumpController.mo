@@ -47,7 +47,7 @@ equation
           116,-60}}, color={0,0,127}));
   connect(hPController.TSet, T_set.y) annotation (Line(points={{-23.2,12},{-62,12},
           {-62,-30},{-79,-30}}, color={0,0,127}));
-  connect(hPController.TAct, T_meas.y) annotation (Line(points={{-23.2,-16},{-70,
+  connect(hPController.TMea, T_meas.y) annotation (Line(points={{-23.2,-16},{-70,
           -16},{-70,30},{-79,30}}, color={0,0,127}));
   connect(nSet, hPController.nOut) annotation (Line(points={{116,60},{102,60},{102,
           58},{76,58},{76,0},{22,0}}, color={0,0,127}));

@@ -1,0 +1,13 @@
+//clear
+
+convertClear();
+
+convertElement("AixLib.Controls.HeatPump.BaseClasses.OnOffHP", "hys", "bandwidth");
+convertElement("AixLib.Controls.HeatPump.BaseClasses.InverterControlledHP", "hys", "bandwidth");
+convertElement("AixLib.Controls.HeatPump.HPControllerOnOff", "pre_y_start", "");
+convertElement("AixLib.Controls.HeatPump.BaseClasses.OnOffHP", "TAct", "TMea");
+convertElement("AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet", "TAct", "TMea");
+convertElement("AixLib.Controls.HeatPump.BaseClasses.InverterControlledHP", "TAct", "TMea");
+convertClass("AixLib.Controls.HeatPump.BaseClasses.OnOffHP", "AixLib.Controls.HeatPump.TwoPointControlledHP");
+convertClass("AixLib.Controls.HeatPump.BaseClasses.InverterControlledHP", "AixLib.Controls.HeatPump.InverterControlledHP");
+convertClass("AixLib.Controls.HeatPump.HPControllerOnOff", "AixLib.Controls.HeatPump.TwoPointControlledHP");

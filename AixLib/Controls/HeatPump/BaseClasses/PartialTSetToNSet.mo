@@ -33,7 +33,7 @@ partial model PartialTSetToNSet
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-110})));
-  Modelica.Blocks.Interfaces.RealInput TAct(
+  Modelica.Blocks.Interfaces.RealInput TMea(
       final quantity="ThermodynamicTemperature",
       final unit="K",
       final displayUnit="degC") "Actual temperature, control variable"
@@ -47,8 +47,8 @@ partial model PartialTSetToNSet
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={0,-70})));
-  Utilities.Math.MovingAverage movAve(final aveTime=movAveTime, final u_start=0) if
-       use_heaLim
+  Utilities.Math.MovingAverage movAve(final aveTime=movAveTime, final u_start=0)
+    if use_heaLim
     "Moving average to account for fluctuations in the outdoor air temperature"
     annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
   Modelica.Blocks.Logical.And andHeaLim
@@ -60,8 +60,8 @@ partial model PartialTSetToNSet
 
 
 
-  Modelica.Blocks.Sources.BooleanConstant    booleanConstant(final k=true) if
-    not use_heaLim
+  Modelica.Blocks.Sources.BooleanConstant    booleanConstant(final k=true)
+ if not use_heaLim
     annotation (Placement(transformation(extent={{-60,-80},{-40,-60}})));
 equation
   connect(conZer.y, swiNullHP.u3) annotation (Line(points={{41,-40},{54,-40},{

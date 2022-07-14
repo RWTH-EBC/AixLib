@@ -142,7 +142,7 @@ equation
           {114,20}},          color={0,0,127}));
 
   connect(sigBusHP,ConvTSetToNSet. sigBusHP) annotation (Line(
-      points={{-102,-58},{24,-58},{24,4.41},{42.88,4.41}},
+      points={{-102,-58},{24,-58},{24,3.73},{42.88,3.73}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -163,12 +163,12 @@ equation
   connect(TSup, antiLegionella.TSupAct) annotation (Line(points={{-114,60},{-82,
           60},{-82,6},{-30,6}}, color={0,0,127}));
 
-  connect(TSup,ConvTSetToNSet. TAct) annotation (Line(points={{-114,60},{-82,60},{-82,-22},
+  connect(TSup,ConvTSetToNSet.TMea)  annotation (Line(points={{-114,60},{-82,60},{-82,-22},
           {30,-22},{30,-4.6},{41.44,-4.6}},          color={0,0,127}));
 
   connect(ConvTSetToNSet.ySecHeaGen, ySecHeaGen) annotation (Line(
-      points={{61.92,-9.36},{61.92,-14},{46,-14},{46,-44},{22,-44},{22,-90},{-4,
-          -90},{-4,-104}},
+      points={{60,-9.7},{60,-14},{46,-14},{46,-44},{22,-44},{22,-90},{-4,-90},{
+          -4,-104}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ySecHeaGen, ySecHeaGen)

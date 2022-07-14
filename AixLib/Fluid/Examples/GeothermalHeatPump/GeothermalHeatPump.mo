@@ -171,7 +171,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(getTStorageUpper.y, twoPointControlledHP.TAct) annotation (Line(
+  connect(getTStorageUpper.y,twoPointControlledHP.TMea)  annotation (Line(
         points={{-139,68},{-138,68},{-138,62},{-81.6,62}}, color={0,0,127}));
   annotation (experiment(Tolerance=1e-6, StartTime=0, StopTime=86400), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
         "Simulate and plot"), Documentation(revisions="<html><ul>

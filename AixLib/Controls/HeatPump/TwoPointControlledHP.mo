@@ -2,8 +2,8 @@
 model TwoPointControlledHP
   "Controller gives full speed or stop signal depending on temperature hysteresis"
   extends AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet;
-  parameter Real hys "Hysteresis of controller";
-  Modelica.Blocks.Logical.OnOffController onOffController(final bandwidth=hys,
+  parameter Real bandwidth "Bandwith of hysteresis of controller";
+  Modelica.Blocks.Logical.OnOffController onOffController(final bandwidth=bandwidth,
       final pre_y_start=false)                                                              "Hysteresis controller for set temperature"
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
   Modelica.Blocks.Sources.Constant conOne(final k=1)
@@ -15,7 +15,7 @@ equation
           -85.5,60},{-85.5,36},{-62,36}},         color={0,0,127}));
   connect(conOne.y, swiNullHP.u1) annotation (Line(points={{41,30},{58,30},{58,
           -2}},          color={0,0,127}));
-  connect(TAct, onOffController.u) annotation (Line(points={{-116,-80},{-72,-80},
+  connect(TMea, onOffController.u) annotation (Line(points={{-116,-80},{-72,-80},
           {-72,24},{-62,24}},         color={0,0,127}));
   connect(onOffController.y, andHeaLim.u1) annotation (Line(points={{-39,30},{
           5.7,30},{5.7,-10},{18,-10}},color={255,0,255}));
