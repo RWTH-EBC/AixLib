@@ -32,7 +32,7 @@ model StorageSimpleExample "Example model with simple storage"
   replaceable package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_gen=
-  heatingRod.Q_flow_nominal/(dT_gen*4185)
+  heatingRod.Q_flow_nominal/(dT_gen*Medium.cp_const)
   "Nominal mass flow rate in generation cycle";
 
   parameter Modelica.Units.SI.PressureDifference dp_nominal_hr = 1000
@@ -101,7 +101,7 @@ model StorageSimpleExample "Example model with simple storage"
         transformation(
         extent={{-7,-7},{7,7}},
         rotation=90,
-        origin={-81,-7})));
+        origin={-87,-17})));
   Modelica.Blocks.Continuous.LimPID PID_pump_gen(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.5,
@@ -116,7 +116,7 @@ model StorageSimpleExample "Example model with simple storage"
         transformation(
         extent={{-7,-7},{7,7}},
         rotation=0,
-        origin={47,35})));
+        origin={47,37})));
   Modelica.Blocks.Sources.Constant m_flow_set(k=m_flow_nominal_gen)
     "Set mass flow rate"
     annotation (Placement(transformation(extent={{-96,-88},{-82,-74}})));
