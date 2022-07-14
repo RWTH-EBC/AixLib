@@ -6,36 +6,36 @@ clear
 convertClear();
 
 // Conversion for https://github.com/ibpsa/modelica-ibpsa/issues/1542
-convertClass("AixLib.Airflow.Multizone.MediumColumnDynamic", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Actuators.Valves.ThreeWayLinear", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Actuators.Valves.ThreeWayTable", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.HeatExchangers.Radiators.RadiatorEN442_2", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Movers.FlowControlled_dp", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Movers.FlowControlled_m_flow", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Movers.SpeedControlled_Nrpm", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Movers.SpeedControlled_y", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Storage.Stratified", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Storage.StratifiedEnhanced", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Storage.StratifiedEnhancedInternalHex", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.HeatExchangers.EvaporatorCondenser", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.HeatExchangers.HeaterCooler_u", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Humidifiers.Humidifier_u", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalHEXOneUTube", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalHEXTwoUTube", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.HeatExchangers.PrescribedOutlet", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Interfaces.PrescribedOutlet", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.ThermalZones.ReducedOrder.RC.FourElements", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.ThermalZones.ReducedOrder.RC.OneElement", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.ThermalZones.ReducedOrder.RC.ThreeElements", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.ThermalZones.ReducedOrder.RC.TwoElements", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.HeatExchangers.ActiveBeams.Cooling", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU", {"massDynamics"}, fill("",0), true);
-convertClass("AixLib.Fluid.Delays.DelayFirstOrder", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Airflow.Multizone.MediumColumnDynamic", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.ThreeWayLinear", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Actuators.Valves.ThreeWayTable", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.HeatExchangers.Radiators.RadiatorEN442_2", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Movers.FlowControlled_dp", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Movers.FlowControlled_m_flow", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Movers.SpeedControlled_Nrpm", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Movers.SpeedControlled_y", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Storage.Stratified", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Storage.StratifiedEnhanced", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Storage.StratifiedEnhancedInternalHex", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.HeatExchangers.EvaporatorCondenser", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.HeatExchangers.HeaterCooler_u", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Humidifiers.Humidifier_u", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalHEXOneUTube", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.InternalHEXTwoUTube", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.HeatExchangers.PrescribedOutlet", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Interfaces.PrescribedOutlet", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.ThermalZones.ReducedOrder.RC.FourElements", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.ThermalZones.ReducedOrder.RC.OneElement", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.ThermalZones.ReducedOrder.RC.ThreeElements", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.ThermalZones.ReducedOrder.RC.TwoElements", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.HeatExchangers.ActiveBeams.Cooling", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU", {"massDynamics"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Delays.DelayFirstOrder", {"massDynamics"}, fill("",0), true);
 
-convertClass("AixLib.Fluid.Storage.StratifiedEnhancedInternalHex", {"massDynamicsHex"}, fill("",0), true);
+convertModifiers("AixLib.Fluid.Storage.StratifiedEnhancedInternalHex", {"massDynamicsHex"}, fill("",0), true);
 
 convertElement("AixLib.Fluid.Humidifiers.SteamHumidifier_X",
   "massDynamics",
