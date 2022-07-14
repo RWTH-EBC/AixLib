@@ -22,10 +22,8 @@ model Illumination "Testmodel for Illumination"
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Sunblind sunblind(lim=200)
     "Calculates if the sunblind of the window is active"
     annotation (Placement(transformation(extent={{-16,-64},{-6,-54}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(
-    azi=0,
-    til=1.5707963267949,
-    lat=0.86393797973719) "Diffuse irradiation on the window"
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(azi=0, til=
+        1.5707963267949) "Diffuse irradiation on the window"
     annotation (Placement(transformation(extent={{-60,-18},{-40,2}})));
   AixLib.ThermalZones.ReducedOrder.Windows.Window window(
     n=1,
@@ -44,10 +42,8 @@ model Illumination "Testmodel for Illumination"
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(
-    azi=0,
-    til=1.5707963267949,
-    lat=0.86393797973719) "Direct irradiation on the surface"
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(azi=0,
+      til=1.5707963267949) "Direct irradiation on the surface"
     annotation (Placement(transformation(extent={{-66,-64},{-46,-44}})));
   Modelica.Blocks.Sources.Constant const(k=500)
     annotation (Placement(transformation(extent={{-6,-14},{14,6}})));

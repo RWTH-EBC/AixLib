@@ -21,9 +21,9 @@ model testPumpSpeedCalculation
 
   parameter Real maxQ(unit="m3/h", displayUnit="m3/h") = param.maxMinHeight[
     size(param.maxMinHeight, 1), 1];
-  parameter Modelica.SIunits.Length maxHead = max(param.maxMinHeight[:, 2])
+  parameter Modelica.Units.SI.Length maxHead=max(param.maxMinHeight[:, 2])
     "maximum static head of the pump";
-  parameter Modelica.SIunits.Length minHead = max(param.maxMinHeight[:, 3])
+  parameter Modelica.Units.SI.Length minHead=max(param.maxMinHeight[:, 3])
     "aprox. minimum static head of the pump";
 
   Modelica.Blocks.Sources.TimeTable headTable(table=[

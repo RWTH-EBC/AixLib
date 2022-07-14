@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.Example;
+﻿within AixLib.Systems.HydraulicModules.Example;
 model Admix "Test for admix circuit"
   extends Modelica.Icons.Example;
 

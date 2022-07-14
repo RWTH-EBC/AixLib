@@ -4,11 +4,11 @@ partial model PartialMultizone "Partial model for multizone models"
 
   parameter Integer buildingID
     "Unique identifier of the building";
-  parameter Modelica.SIunits.Volume VAir(min=0)
+  parameter Modelica.Units.SI.Volume VAir(min=0)
     "Indoor air volume of building";
-  parameter Modelica.SIunits.Area ABuilding(min=0)
+  parameter Modelica.Units.SI.Area ABuilding(min=0)
     "Net floor area of building";
-  parameter Modelica.SIunits.Area ASurTot(min=0)
+  parameter Modelica.Units.SI.Area ASurTot(min=0)
     "Total surface area of building walls and windows (including interior walls)";
   parameter Integer numZones(min=1)
     "Number of zones";
@@ -18,18 +18,20 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  parameter Boolean use_AirExchange=true
-    "Consider infiltration and ventilation by setting true";
+  parameter Boolean use_MechanicalAirExchange=true
+    "Consider mechanical ventilation by setting true";
+  parameter Boolean use_NaturalAirExchange=use_MechanicalAirExchange
+    "Consider natural ventilation and infiltration by setting true";
   parameter Boolean use_C_flow=false
     "Set to true to enable input connector for trace substance"
     annotation (Dialog(tab="CO2"));
-  parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
+  parameter Modelica.Units.SI.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
-  parameter Modelica.SIunits.Area areaBod=1.8
+  parameter Modelica.Units.SI.Area areaBod=1.8
     "Body surface area source SIA 2024:2015"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
-  parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
+  parameter Modelica.Units.SI.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
   parameter Boolean use_moisture_balance=false
@@ -37,7 +39,8 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Dialog(tab="Moisture"));
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
 
@@ -70,16 +73,18 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if
-       ASurTot > 0 or VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
+    if ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
         iconTransformation(extent={{-90,-92},{-70,-72}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
-       ASurTot > 0 "Radiative internal gains"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
+    if ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[numZones](
+    each use_NaturalAirExchange=use_NaturalAirExchange,
+    each use_MechanicalAirExchange=use_MechanicalAirExchange,
     each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each h_heater=h_heater,
@@ -93,7 +98,6 @@ partial model PartialMultizone "Partial model for multizone models"
     each TN_cooler=TN_cooler,
     each use_C_flow=use_C_flow,
     each use_moisture_balance=use_moisture_balance,
-    each use_AirExchange=use_AirExchange,
     each XCO2_amb=XCO2_amb,
     each areaBod=areaBod,
     each metOnePerSit=metOnePerSit,
@@ -125,9 +129,11 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real KR_heater=1000 "Gain of the heating controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_heater=1
-    "Time constant of the heating controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Modelica.Units.SI.Time TN_heater=1
+    "Time constant of the heating controller" annotation (Dialog(
+      tab="IdealHeaterCooler",
+      group="Heater",
+      enable=not recOrSep));
   parameter Boolean Cooler_on=true "Activates the cooler"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real h_cooler=0 "Upper limit controller output of the cooler"
@@ -136,9 +142,11 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real KR_cooler=1000 "Gain of the cooling controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_cooler=1
-    "Time constant of the cooling controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Modelica.Units.SI.Time TN_cooler=1
+    "Time constant of the cooling controller" annotation (Dialog(
+      tab="IdealHeaterCooler",
+      group="Cooler",
+      enable=not recOrSep));
 
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
     final quantity="ThermodynamicTemperature",
@@ -176,12 +184,22 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (
     Placement(transformation(extent={{100,-70},{120,-50}}),iconTransformation(
     extent={{80,-100},{100,-80}})));
+  Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[numZones,3](final
+      quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
+    "Heat flow based on internal gains for each zone from persons, machines, and light"
+                        annotation (Placement(transformation(extent={{100,-90},{
+            120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
   if not (ASurTot > 0 or VAir > 0) then
     PHeater[:] = fill(0, numZones);
     PCooler[:] = fill(0, numZones);
+  else
+    for i in 1:numZones loop
+      connect(zone[i].QIntGains_flow, QIntGains_flow[i, :]);
+    end for;
   end if;
+
   // if ideal heating and/or cooling is set by seperate values
   if (ASurTot > 0 or VAir > 0) and not recOrSep then
     if Heater_on then

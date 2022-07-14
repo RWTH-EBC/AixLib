@@ -4,8 +4,11 @@ model MachinesRelToMaxValue "Multiplies relative input with max value (heat flow
     emissivity=0.98,
     gainSurfaces(final k=areaSurfaceMachinesTotal),
     gain(final k=maxHeatFlowAbsolute));
-  parameter Modelica.SIunits.Area areaSurfaceMachinesTotal=0.02*maxHeatFlowAbsolute "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
-  parameter Modelica.SIunits.HeatFlowRate maxHeatFlowAbsolute "Maximal absolute heat flow of machines";
+  parameter Modelica.Units.SI.Area areaSurfaceMachinesTotal=0.02*
+      maxHeatFlowAbsolute
+    "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
+  parameter Modelica.Units.SI.HeatFlowRate maxHeatFlowAbsolute
+    "Maximal absolute heat flow of machines";
 
 equation
 

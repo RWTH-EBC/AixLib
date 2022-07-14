@@ -1,24 +1,22 @@
-within AixLib.Fluid.Movers.Compressors.BaseClasses;
+﻿within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompression
   "Partial model for compression that contains basic definitions used in 
   various compressor models"
 
   // Definition of parameters describing the geometry
   //
-  parameter Modelica.SIunits.Volume
-    VDis(min=0) = 13e-6
+  parameter Modelica.Units.SI.Volume VDis(min=0) = 13e-6
     "Displacement volume of the compressor"
-    annotation(Dialog(tab="General",group="Geometry"));
-  parameter Modelica.SIunits.Efficiency
-    epsRef(min=0, max=1, nominal=0.05) = 0.04
-    "Ratio of the real and the ideal displacement volume"
-    annotation(Dialog(tab="General",group="Geometry"));
+    annotation (Dialog(tab="General", group="Geometry"));
+  parameter Modelica.Units.SI.Efficiency epsRef(
+    min=0,
+    max=1,
+    nominal=0.05) = 0.04 "Ratio of the real and the ideal displacement volume"
+    annotation (Dialog(tab="General", group="Geometry"));
 
-  parameter Modelica.SIunits.Frequency
-    rotSpeMax(min=0) = 120
-    "Maximal rotational speed executable by the compressor"
-    annotation(Dialog(tab="General",group="Compressor's characterisitcs"),
-               HideResult=true);
+  parameter Modelica.Units.SI.Frequency rotSpeMax(min=0) = 120
+    "Maximal rotational speed executable by the compressor" annotation (Dialog(
+        tab="General", group="Compressor's characterisitcs"), HideResult=true);
   parameter Real
     piPreMax(min=1, unit="1") = 15
     "Maximal pressure ratio executable by the compressor"
@@ -28,10 +26,9 @@ partial model PartialCompression
   parameter Boolean useInpFil = true
     "= true, if transient behaviour of rotational speed is computed"
     annotation(Dialog(group="Transient behaviour"));
-  parameter Modelica.SIunits.Time risTim = 0.5
+  parameter Modelica.Units.SI.Time risTim=0.5
     "Time until rotational speed reaches 99.6 % of its set value"
-    annotation(Dialog(enable = useInpFil,
-               group="Transient behaviour"));
+    annotation (Dialog(enable=useInpFil, group="Transient behaviour"));
 
   // Definition of models describing efficiencies
   //
@@ -89,10 +86,9 @@ partial model PartialCompression
 
   // Definition of parameters describing nominal conditions
   //
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate"
-    annotation(Dialog(tab="Advanced"),
-               HideResult=true);
+    annotation (Dialog(tab="Advanced"), HideResult=true);
 
   // Definition of parameters describing diagnostics
   //
@@ -107,30 +103,28 @@ partial model PartialCompression
 
   // Definition of parameters used for initialisation
   //
-  parameter Modelica.SIunits.Frequency rotSpe0 = 60
-    "Compressor's rotational spped at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"),
-               HideResult=true);
-  parameter Modelica.SIunits.AbsolutePressure pInl0 = 3e5
-    "Pressure at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"),
-               HideResult=true);
-  parameter Modelica.SIunits.Temperature TInl0 = 283.15
-    "Temperature at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"),
-               HideResult=true);
-  parameter Modelica.SIunits.Density dInl0=
-    Medium.density(Medium.setState_pTX(p=pInl0,T=TInl0))
-    "Density at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation",
-               enable=false),
-               HideResult=true);
-  parameter Modelica.SIunits.SpecificEnthalpy hInl0=
-    Medium.specificEnthalpy(Medium.setState_pTX(p=pInl0,T=TInl0))
-    "Specific enthalpy at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation",
-               enable=false),
-               HideResult=true);
+  parameter Modelica.Units.SI.Frequency rotSpe0=60
+    "Compressor's rotational spped at initialisation" annotation (Dialog(tab=
+          "Advanced", group="Initialisation"), HideResult=true);
+  parameter Modelica.Units.SI.AbsolutePressure pInl0=3e5
+    "Pressure at compressor's inlet at initialisation" annotation (Dialog(tab=
+          "Advanced", group="Initialisation"), HideResult=true);
+  parameter Modelica.Units.SI.Temperature TInl0=283.15
+    "Temperature at compressor's inlet at initialisation" annotation (Dialog(
+        tab="Advanced", group="Initialisation"), HideResult=true);
+  parameter Modelica.Units.SI.Density dInl0=Medium.density(Medium.setState_pTX(
+      p=pInl0, T=TInl0)) "Density at compressor's inlet at initialisation"
+    annotation (Dialog(
+      tab="Advanced",
+      group="Initialisation",
+      enable=false), HideResult=true);
+  parameter Modelica.Units.SI.SpecificEnthalpy hInl0=Medium.specificEnthalpy(
+      Medium.setState_pTX(p=pInl0, T=TInl0))
+    "Specific enthalpy at compressor's inlet at initialisation" annotation (
+      Dialog(
+      tab="Advanced",
+      group="Initialisation",
+      enable=false), HideResult=true);
 
   // Definition of connectors and submodels
   //
@@ -208,17 +202,14 @@ partial model PartialCompression
     Medium.ThermodynamicState staOut
       "Thermodynamic state at outlet conditions";
 
-    Modelica.SIunits.SpecificEntropy sInl
+    Modelica.Units.SI.SpecificEntropy sInl
       "Specific entropy at inlet conditions";
-    Modelica.SIunits.SpecificEntropy sOut
+    Modelica.Units.SI.SpecificEntropy sOut
       "Specific entropy at outlet conditions";
 
-    Modelica.SIunits.Efficiency etaEng
-      "Overall engine efficiency";
-    Modelica.SIunits.Efficiency etaVol
-      "Overall volumetric efficiency";
-    Modelica.SIunits.Efficiency etaIse
-      "Overall isentropic efficiency";
+    Modelica.Units.SI.Efficiency etaEng "Overall engine efficiency";
+    Modelica.Units.SI.Efficiency etaVol "Overall volumetric efficiency";
+    Modelica.Units.SI.Efficiency etaIse "Overall isentropic efficiency";
   end CompressorStates;
 
   record CompressorQualities
@@ -237,14 +228,10 @@ partial model PartialCompression
     Real quaOut(min=0, max=1, unit="1")
       "Vapour quality at outlet conditions";
 
-    Modelica.SIunits.SpecificEnthalpy hLiqInl
-      "Liquid enthalpy at inlet";
-    Modelica.SIunits.SpecificEnthalpy hVapInl
-      "Vapour enthalpy at inlet";
-    Modelica.SIunits.SpecificEnthalpy hLiqOut
-      "Liquid enthalpy at outlet";
-    Modelica.SIunits.SpecificEnthalpy hVapOut
-      "Vapour enthalpy at outlet";
+    Modelica.Units.SI.SpecificEnthalpy hLiqInl "Liquid enthalpy at inlet";
+    Modelica.Units.SI.SpecificEnthalpy hVapInl "Vapour enthalpy at inlet";
+    Modelica.Units.SI.SpecificEnthalpy hLiqOut "Liquid enthalpy at outlet";
+    Modelica.Units.SI.SpecificEnthalpy hVapOut "Vapour enthalpy at outlet";
   end CompressorQualities;
 
   CompressorStates comSta(
@@ -281,18 +268,18 @@ partial model PartialCompression
              hOut<Medium.dewEnthalpy(Medium.setSat_p(pOut))) then
              (hOut - Medium.bubbleEnthalpy(Medium.setSat_p(pOut)))/
              max(Medium.dewEnthalpy(Medium.setSat_p(pOut)) -
-             Medium.bubbleEnthalpy(Medium.setSat_p(pOut)), 1e-6) else 1.0)) if
-    show_qua
+             Medium.bubbleEnthalpy(Medium.setSat_p(pOut)), 1e-6) else 1.0))
+ if show_qua
     "Record containing compressor's vapour qualities";
 
   // Definition of variables
   //
-  Modelica.SIunits.Power PEle
+  Modelica.Units.SI.Power PEle
     "Compressor's current electrical power consumption";
-  Modelica.SIunits.Power Q_flow_ref
+  Modelica.Units.SI.Power Q_flow_ref
     "Current power transferred to reffrigerant";
 
-  Modelica.SIunits.Frequency rotSpe(min=0, max=rotSpeMax)
+  Modelica.Units.SI.Frequency rotSpe(min=0, max=rotSpeMax)
     "Compressor's current rotational speed";
   Real piPre(min=0, max=piPreMax, unit="1")
     "Ratio of compressor's outlet and inlet pressure";
@@ -303,23 +290,22 @@ protected
   Medium.ThermodynamicState staOut
     "Thermodynamic state at outlet conditions";
 
-  Modelica.SIunits.AbsolutePressure pInl(start=pInl0)
+  Modelica.Units.SI.AbsolutePressure pInl(start=pInl0)
     "Pressure at inlet conditions";
-  Modelica.SIunits.SpecificEnthalpy hInl(start=hInl0)
+  Modelica.Units.SI.SpecificEnthalpy hInl(start=hInl0)
     "Specific enthalpy at inlet conditions";
-  Modelica.SIunits.Density dInl
-    "Density at inlet conditions";
+  Modelica.Units.SI.Density dInl "Density at inlet conditions";
 
-  Modelica.SIunits.AbsolutePressure pOut(start=pInl0-dp_start)
+  Modelica.Units.SI.AbsolutePressure pOut(start=pInl0 - dp_start)
     "Pressure at outlet conditions";
-  Modelica.SIunits.SpecificEnthalpy hOut
+  Modelica.Units.SI.SpecificEnthalpy hOut
     "Specific enthalpy at outlet conditions";
 
-  Modelica.SIunits.SpecificEnthalpy hOutIse
+  Modelica.Units.SI.SpecificEnthalpy hOutIse
     "Specific isentropic enthalpy at outlet conditions";
-  Modelica.SIunits.SpecificEnthalpy dh
+  Modelica.Units.SI.SpecificEnthalpy dh
     "Specific enthalpy difference: hOut - hInl";
-  Modelica.SIunits.SpecificEnthalpy dhIse
+  Modelica.Units.SI.SpecificEnthalpy dhIse
     "Specific isentropic enthalpy difference: hOutIse - hInl";
 
 equation

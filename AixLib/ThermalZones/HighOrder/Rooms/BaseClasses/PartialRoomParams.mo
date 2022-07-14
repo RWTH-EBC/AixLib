@@ -2,23 +2,27 @@ within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoomParams "Partial model with base parameters that are necessary for all HOM rooms and for building propagation"
 
   // Air volume of room
-  parameter Modelica.SIunits.Density denAir=1.19 "Density of air" annotation (Dialog(group="Air volume of room"));
-  parameter Modelica.SIunits.SpecificHeatCapacity cAir=1007 "Specific heat capacity of air" annotation (Dialog(group="Air volume of room"));
+  parameter Modelica.Units.SI.Density denAir=1.19 "Density of air"
+    annotation (Dialog(group="Air volume of room"));
+  parameter Modelica.Units.SI.SpecificHeatCapacity cAir=1007
+    "Specific heat capacity of air"
+    annotation (Dialog(group="Air volume of room"));
 
   replaceable parameter AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
-    wallTypes constrainedby AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
+    wallTypes constrainedby
+    AixLib.DataBase.Walls.Collections.BaseDataMultiWalls
     "Types of walls (contains multiple records)"
     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics"));
-
-  parameter Modelica.Fluid.Types.Dynamics initDynamicsAir=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial "Like energyDynamics, but SteadyState leads to same behavior as DynamicFreeInitial" annotation (Dialog(tab="Initialization", group="Air volume of room"));
-  parameter Modelica.SIunits.Temperature T0_air=295.11 "Air"
+  parameter Modelica.Units.SI.Temperature T0_air=295.11 "Air"
     annotation (Dialog(tab="Initialization", group="Air volume of room"));
-  parameter Modelica.SIunits.Temperature TWalls_start=Modelica.SIunits.Conversions.from_degC(16) "Initial temperature of all walls"
-    annotation(Dialog(tab="Initialization", group="Walls"));
+  parameter Modelica.Units.SI.Temperature TWalls_start=
+      Modelica.Units.Conversions.from_degC(16)
+    "Initial temperature of all walls"
+    annotation (Dialog(tab="Initialization", group="Walls"));
 
   //// Inner / Interior wall parameters
   // Heat convection
@@ -35,9 +39,12 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       choice=4 "ASHRAE140-2017",
       radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=2.5
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn_const=2.5
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
-    annotation(Dialog(tab="Inner walls", group="Heat convection", enable=(calcMethodIn==3)));
+    annotation (Dialog(
+      tab="Inner walls",
+      group="Heat convection",
+      enable=(calcMethodIn == 3)));
 
   parameter Integer radLongCalcMethod=1 "Calculation method for longwave radiation heat transfer"
     annotation (
@@ -49,17 +56,26 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       choice=3 "Linear approx at rad temp",
       choice=4 "Linear approx at constant T_ref",
       radioButtons=true));
-  parameter Modelica.SIunits.Temperature T_ref=Modelica.SIunits.Conversions.from_degC(16) "Reference temperature for optional linearization of longwave radiation"
-    annotation (Dialog(tab="Inner walls", group = "Longwave radiation", enable=radLongCalcMethod == 4));
+  parameter Modelica.Units.SI.Temperature T_ref=
+      Modelica.Units.Conversions.from_degC(16)
+    "Reference temperature for optional linearization of longwave radiation"
+    annotation (Dialog(
+      tab="Inner walls",
+      group="Longwave radiation",
+      enable=radLongCalcMethod == 4));
 
   //// Outer / Exterior wall parameters
   //Window type
 
-  replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
-    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+  replaceable model WindowModel =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow               annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win "Window parametrization" annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
-  replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-    constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+  replaceable model CorrSolarGainWin =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG               "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
 
   // Solar absorptance
   parameter Real solar_absorptance_OW(min=0, max=1)=0.6 "Solar absoptance outer walls "
@@ -76,7 +92,12 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       choice=3 "Custom hCon (constant)",
       radioButtons=true));
   replaceable parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethodOut == 2)));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut_const=25 "Custom convective heat transfer coefficient (just for manual selection, not recommended)" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethodOut == 3)));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut_const=25
+    "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
+    annotation (Dialog(
+      tab="Outer walls",
+      group="Heat convection",
+      enable=(calcMethodOut == 3)));
   // Sunblind
   parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
@@ -84,12 +105,18 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
     "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(tab="Outer walls", group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+  parameter Modelica.Units.SI.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation(Dialog(tab="Outer walls", group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    annotation (Dialog(
+      tab="Outer walls",
+      group="Sunblind",
+      enable=use_sunblind));
+  parameter Modelica.Units.SI.Temperature TOutAirLimit=293.15
     "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation(Dialog(tab="Outer walls", group = "Sunblind", enable=use_sunblind));
+    annotation (Dialog(
+      tab="Outer walls",
+      group="Sunblind",
+      enable=use_sunblind));
 
   // Infiltration rate (building airtightness) according to (DIN) EN 12831-1 (2017-07)
   parameter Boolean use_infiltEN12831=false "Use model to exchange room air with outdoor air acc. to standard"
@@ -105,7 +132,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(tab="Dynamic ventilation", descriptionLabel=true),
       choices(checkBox=true));
-  parameter Modelica.SIunits.Temperature HeatingLimit=288.15
+  parameter Modelica.Units.SI.Temperature HeatingLimit=288.15
     "Outside temperature at which the heating activates" annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
@@ -114,12 +141,12 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=if withDynamicVentilation then true else false));
-  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset=2
+  parameter Modelica.Units.SI.TemperatureDifference Diff_toTempset=2
     "Difference to set temperature" annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=if withDynamicVentilation then true else false));
-  parameter Modelica.SIunits.Temperature Tset=295.15 "Tset" annotation (Dialog(
+  parameter Modelica.Units.SI.Temperature Tset=295.15 "Tset" annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=if withDynamicVentilation then true else false));

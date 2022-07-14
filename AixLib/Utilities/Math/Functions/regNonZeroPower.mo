@@ -1,38 +1,38 @@
 within AixLib.Utilities.Math.Functions;
- function regNonZeroPower
-   "Power function, regularized near zero, but nonzero value for x=0"
-   extends Modelica.Icons.Function;
- 
-  input Real x "Abscissa value";
-  input Real n "Exponent";
-  input Real delta = 0.01 "Abscissa value where transition occurs";
-  output Real y "Function value";
- protected
-   Real a1;
-   Real a3;
-   Real a5;
-   Real delta2;
-   Real x2;
-   Real y_d "=y(delta)";
-   Real yP_d "=dy(delta)/dx";
-   Real yPP_d "=d^2y(delta)/dx^2";
- algorithm
-   if abs(x) > delta then
-    y := abs(x)^n;
-   else
-    delta2 :=delta*delta;
-    x2 :=x*x;
-    y_d :=delta^n;
-    yP_d :=n*delta^(n - 1);
-    yPP_d :=n*(n - 1)*delta^(n - 2);
-    a1 := -(yP_d/delta - yPP_d)/delta2/8;
-    a3 := (yPP_d - 12 * a1 * delta2)/2;
-    a5 := (y_d - delta2 * (a3 + delta2 * a1));
-    y := a5 + x2 * (a3 + x2 * a1);
-    assert(a5>0, "Delta is too small for this exponent.");
-   end if;
-   annotation (
-     Documentation(info="<html>
+function regNonZeroPower
+  "Power function, regularized near zero, but nonzero value for x=0"
+  extends Modelica.Icons.Function;
+
+ input Real x "Abscissa value";
+ input Real n "Exponent";
+ input Real delta = 0.01 "Abscissa value where transition occurs";
+ output Real y "Function value";
+protected
+  Real a1;
+  Real a3;
+  Real a5;
+  Real delta2;
+  Real x2;
+  Real y_d "=y(delta)";
+  Real yP_d "=dy(delta)/dx";
+  Real yPP_d "=d^2y(delta)/dx^2";
+algorithm
+  if abs(x) > delta then
+   y := abs(x)^n;
+  else
+   delta2 :=delta*delta;
+   x2 :=x*x;
+   y_d :=delta^n;
+   yP_d :=n*delta^(n - 1);
+   yPP_d :=n*(n - 1)*delta^(n - 2);
+   a1 := -(yP_d/delta - yPP_d)/delta2/8;
+   a3 := (yPP_d - 12 * a1 * delta2)/2;
+   a5 := (y_d - delta2 * (a3 + delta2 * a1));
+   y := a5 + x2 * (a3 + x2 * a1);
+   assert(a5>0, "Delta is too small for this exponent.");
+  end if;
+  annotation (
+    Documentation(info="<html>
  
  Function that approximates <i>y=|x|<sup>n</sup></i> where <i>n &gt; 0</i>
  so that
@@ -60,7 +60,7 @@ within AixLib.Utilities.Math.Functions;
  where heat conduction dominates convection in the boundary layer.
  </p>
  See the package <code>Examples</code> for the graph.
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  March 30, 2011, by Michael Wetter:<br/>
@@ -71,8 +71,8 @@ within AixLib.Utilities.Math.Functions;
  First implementation.
  </li>
  </ul>
- </html>"), Inline=true,
-            smoothOrder=2,
-            derivative(zeroDerivative=n, zeroDerivative=delta)=BaseClasses.der_regNonZeroPower, 
-   __Dymola_LockedEditing="Model from IBPSA");
- end regNonZeroPower;
+ </html>"),Inline=true,
+           smoothOrder=2,
+           derivative(zeroDerivative=n, zeroDerivative=delta)=BaseClasses.der_regNonZeroPower,
+  __Dymola_LockedEditing="Model from IBPSA");
+end regNonZeroPower;

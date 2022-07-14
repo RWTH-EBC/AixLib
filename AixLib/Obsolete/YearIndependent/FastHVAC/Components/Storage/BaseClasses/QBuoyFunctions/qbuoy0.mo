@@ -1,9 +1,9 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function qbuoy0
 
-  input Modelica.SIunits.TemperatureDifference dTover;
+  input Modelica.Units.SI.TemperatureDifference dTover;
   input Real dh_gap;
-  output Modelica.SIunits.SpecificEnergy qbuoy0;
+  output Modelica.Units.SI.SpecificEnergy qbuoy0;
 
 protected
   parameter Real a(unit="J/(kg.K)")=3844;

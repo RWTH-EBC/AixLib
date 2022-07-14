@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency;
 model PowerVolumetricEfficiency
   "Model describing flow volumetric efficiency on power approach"
   extends PartialVolumetricEfficiency;
@@ -21,12 +21,11 @@ model PowerVolumetricEfficiency
 
   // Definition of further parameters required for special approaches
   //
-  parameter Modelica.SIunits.MolarMass MRef=0.1
-    "Reference molar wheight"
-    annotation(Dialog(group="Reference properties"));
-  parameter Modelica.SIunits.Frequency rotSpeRef = 9.334
+  parameter Modelica.Units.SI.MolarMass MRef=0.1 "Reference molar wheight"
+    annotation (Dialog(group="Reference properties"));
+  parameter Modelica.Units.SI.Frequency rotSpeRef=9.334
     "Reference rotational speed"
-    annotation(Dialog(group="Reference properties"));
+    annotation (Dialog(group="Reference properties"));
 
   // Definition of coefficients
   //

@@ -10,17 +10,17 @@ stages:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > ${exit_file}
     script:
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
         - cd .. && echo 'successful' > ${exit_file}
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
             export PIP_CACHE_DIR="/opt/cache/pip" ;
-            source activate python36 ;
+            source activate ${python_version} ;
             pip install pandas mako matplot ;
             python bin/CITests/05_Converter/google_charts.py --line-html --error --funnel-comp --single-package ${lib_package} ;
             mkdir -p data ;
@@ -56,7 +56,7 @@ CI_Regressiontest_${library}_${package}:
 CI_create_plots:
     stage: prepare
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
@@ -87,17 +87,17 @@ CI_create_plots:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > ${exit_file}
     script:
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
         - cd .. && echo 'successful' > ${exit_file}
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
             export PIP_CACHE_DIR="/opt/cache/pip" ;
-            source activate python36 ;
+            source activate ${python_version} ;
             pip install pandas mako matplot ;
             python bin/CITests/05_Converter/google_charts.py --line-html --error --funnel-comp --single-package ${lib_package} ;
             mkdir -p data ;
@@ -137,7 +137,7 @@ Regression_overall_coverage:
     stage: RegressionTest
     before_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
@@ -163,7 +163,7 @@ Regression_overall_coverage:
 prepare_create_plots:
     stage: prepare
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
@@ -197,18 +197,18 @@ prepare_create_plots:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > ${exit_file}
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 > ${ch_file}
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 2 --tool dymola --single-package ${lib_package} --library ${library} --batch -DS ${dymolaversion} -n 2 --modified-model
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package ${lib_package} --library ${library} --batch -DS ${dymolaversion} -n 2 --modified-model
         - cd .. && echo 'successful' > ${exit_file}
     after_script:
         - if cat ${exit_file} | grep "FAIL"; then
             export PIP_CACHE_DIR="/opt/cache/pip";
-            source activate python36;
+            source activate ${python_version};
             pip install pandas mako matplot;
             python bin/CITests/05_Converter/google_charts.py --line-html --error --funnel-comp --single-package ${lib_package};
             mkdir -p data ;
@@ -251,7 +251,7 @@ Changed_Regressiontest_${library}_${package}:
 Changed_create_plots:
     stage: prepare
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
@@ -292,7 +292,7 @@ RegressionTest_Check_References:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
         - eval $(ssh-agent -s)
@@ -308,10 +308,10 @@ RegressionTest_Check_References:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > ${exit_file}
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 2 < ../${eof_file}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 4 < ../${eof_file}
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
         - cd CorrectedVersion && cd ${CI_PROJECT_NAME}
         - git ls-files --others --exclude-standard
@@ -320,7 +320,7 @@ RegressionTest_Check_References:
             echo $pushmodel ;
             (git ls-files --others --exclude-standard) > ${new_ref_file} ;
             python bin/CITests/06_deploy/deploy_artifacts.py --library AixLib --ref --new-ref;
-            message="Automatic push of CI with new regression reference files.Please pull the new files before push again. Plottet Results ${GITLAB_Page}/$CI_COMMIT_REF_NAME/plots/ [skip ci]" ;
+            message="Automatic push of CI with new regression reference files.Please pull the new files before push again. Plottet Results ${GITLAB_Page}/$CI_COMMIT_REF_NAME/plots/ " ;
             git add $pushmodel ;
             git commit -m "$message";
             git push git@github.com:${Github_Repository}.git ;
@@ -364,7 +364,7 @@ Update_Regression_Results:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
@@ -382,10 +382,10 @@ Update_Regression_Results:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > ${exit_file}
-        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package ${library} -n 2 < ../${eof_file}
+        - cd ${library} && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package ${library} -n 4 < ../${eof_file}
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
         - cd CorrectedVersion && cd ${CI_PROJECT_NAME}
         - git ls-files --others --exclude-standard
@@ -394,7 +394,7 @@ Update_Regression_Results:
             echo $pushmodel ;
             (git ls-files --others --exclude-standard) > ${new_ref_file} ;
             python bin/CITests/06_deploy/deploy_artifacts.py --library ${library} --ref --updated-ref;
-            message="Automatic push of CI with updated or new regression reference files.Please pull the new files before push again. Plottet Results ${GITLAB_Page}/$CI_COMMIT_REF_NAME/plots/ [skip ci]" ;
+            message="Automatic push of CI with updated or new regression reference files.Please pull the new files before push again. Plottet Results ${GITLAB_Page}/$CI_COMMIT_REF_NAME/plots/ " ;
             git add ${library}/Resources/ReferenceResults/Dymola/* ;
             git commit -m "$message";
             git push git@github.com:${Github_Repository}.git ;
@@ -436,7 +436,7 @@ Update_Regression_Results:
 plot_reference_results:
     stage: plot_ref
     before_script:
-        - source activate python36
+        - source activate ${python_version}
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
         - pip install pandas mako matplot

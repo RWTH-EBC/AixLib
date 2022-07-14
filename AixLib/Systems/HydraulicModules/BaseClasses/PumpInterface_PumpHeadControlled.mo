@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.BaseClasses;
+﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 model PumpInterface_PumpHeadControlled
   "Head controlled polynomial based pump with controller"
   extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;
@@ -11,7 +11,7 @@ model PumpInterface_PumpHeadControlled
     annotation (Dialog(tab="Initialization", group="Pressure"));
 
   // Assumptions
-  parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
+  parameter Modelica.Units.SI.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
   // Power and Efficiency

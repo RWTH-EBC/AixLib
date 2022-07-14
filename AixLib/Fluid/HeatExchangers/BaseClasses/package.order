@@ -5,10 +5,16 @@ Internal
 PartialEffectiveness
 PartialEffectivenessNTU
 PartialPrescribedOutlet
+WetCoilDryRegime
+WetCoilDryWetRegime
+WetCoilUARated
+WetCoilWetRegime
+determineWaterIndex
 dynamicViscosityWater
 epsilon_C
 epsilon_ntuZ
 isobaricExpansionCoefficientWater
+lmtd
 ntu_epsilonZ
 prandtlNumberWater
 Examples

@@ -84,66 +84,59 @@ class Plot_Charts(object):
             value_list.append("[" + a + "]")
         value_list = map(str, (value_list))
         return value_list
+    #def calculate_time_interval(self):
+
 
     def _read_data(self, ref_file):  # Read Reference results in AixLib\Resources\ReferenceResults\Dymola\${modelname}.txt
-        Value_List = []
-        X_Axis, Y_Axis = [], []
+        legend_List = []
+        value_list = []
         distriction_values = {}
-        distriction_time = {}  # searches for values and time intervals
+        time_interval_list = []
         for line in open(ref_file, 'r'):
+            current_value = []
             if line.find("last-generated=") > -1:
                 continue
             if line.find("statistics-simulation=") > -1:
                 continue
-            values = (line.split("="))
+            if line.find("statistics-initialization=") > -1:
+                continue
+            if line.find("time=") > -1:
+                time_int = line.split("=")[1]
+                time_int = time_int.split(",")
+                continue
+            values = line.split("=")
             if len(values) < 2:
                 continue
             legend = values[0]
             numbers = values[1]
-            if legend.find("time") > -1:
-                distriction_time[legend] = numbers
-                continue
+            time_interval_steps = len(numbers.split(","))
             distriction_values[legend] = numbers
-            Value_List.append(legend)
+            legend_List.append(legend)
+            number = numbers.split(",")
+            for n in number:
+                value = n.replace("[", "").lstrip()
+                value = value.replace("]", "")
+                value = float(value)
+                current_value.append(value)
+            value_list.append(current_value)
             continue
-        for i in Value_List:
-            y = distriction_values.get(i)
-            y = y.split(",")
-            for v in y:
-                v = v.replace("[", "")
-                v = v.replace("]", "")
-                v = v.replace("\n", "")
-                v = v.replace("'", "")
-                v = v.lstrip()
-                Y_Axis.append(v)
-        x = distriction_time.get("time")
-        if x is None:
-            return distriction_values, distriction_time, Value_List, X_Axis, ref_file
-        else:
-            x = x.replace("[", "")
-            x = x.replace("]", "")
-            x = x.replace("\n", "")
-            x = x.replace("'", "")
-            x = x.lstrip()
-            x = x.split(",")
-        time_end = float((x[len(x) - 1]))
-        time_beg = float((x[0]))
-        time_int = time_end - time_beg
-        if len(Value_List) == 0:
-            return distriction_values, distriction_time, Value_List, X_Axis, ref_file
-        else:
-            tim_seq = time_int / (float(len(Y_Axis)) / float(len(Value_List)))
-            num_times = time_beg
-            times_list = []
-            t = ((float(len(Y_Axis)) / float(len(Value_List))))
-            i = 0
-            while (i) < t:
-                times_list.append(num_times)
-                num_times = num_times + tim_seq
-                i = i + 1
-            X_Axis = times_list
-
-            return distriction_values, distriction_time, Value_List, X_Axis, ref_file
+        first_time_interval = float((time_int[0].replace("[", "").lstrip()))
+        last_time_interval = float((time_int[len(time_int)-1].replace("]", "").lstrip()))
+        time_interval = last_time_interval/time_interval_steps
+        time = first_time_interval
+        for step in range(1, time_interval_steps+1, 1):
+            if time == first_time_interval:
+                time_interval_list.append(time)
+                time = time + time_interval
+            elif step == time_interval_steps:
+                time = time + time_interval
+                time_interval_list.append(time)
+            else:
+                time_interval_list.append(time)
+                time = time + time_interval
+        value_list.insert(0, time_interval_list)
+        value_list = list(map(list, zip(*value_list)))
+        return value_list, legend_List
 
     def _get_updated_reference_files(self):
         if os.path.isfile(self.update_ref_file) is False:
@@ -246,9 +239,15 @@ class Plot_Charts(object):
                     var = line[line.find((".mat:")) + 5:line.find("exceeds ")].lstrip()  # variable name
                     model_var_list.append(f'{model}:{var}')
                 if line.find("*** Warning: Numerical Jacobian in 'RunScript") > -1 and line.find(".mos") > -1:
-                    model = line[line.rfind(os.sep)+1 :line.find(".mos")].lstrip()
+                    model = line[line.rfind(os.sep)+1:line.find(".mos")].lstrip()
                     var = ""
                     model_var_list.append(f'{model}:{var}')
+                if line.find("*** Warning: Failed to interpret experiment annotation in 'RunScript") > -1 and line.find(".mos") > -1:
+                    model = line[line.rfind(os.sep)+1:line.find(".mos")].lstrip()
+
+                    var = ""
+                    model_var_list.append(f'{model}:{var}')
+
         return model_var_list
 
     def _get_ref_file(self, model):
@@ -396,6 +395,7 @@ class Plot_Charts(object):
         from mako.template import Template
         html_file_list = []
         for file in os.listdir(self.temp_chart_path):
+            print(file)
             if file.endswith(".html") and file != "index.html":
                 html_file_list.append(file)
         mytemplate = Template(filename=self.index_temp_file)
@@ -450,18 +450,17 @@ class Plot_Charts(object):
 def _delte_folder():
     sys.path.append('bin/CITests')
     from _config import chart_dir
-
     if os.path.isdir(chart_dir) is False:
-        print(f'directonary {chart_dir} does not exist.')
+        print(f'Directonary {chart_dir} does not exist.')
     else:
         folder_list = os.listdir(chart_dir)
         print(folder_list)
         for folder in folder_list:
-            if folder.find(".") > -1:
-                os.remove(chart_dir + os.sep + folder)
+            if folder.find(".html") > -1:
+                os.remove(f'{chart_dir}{os.sep}{folder}')
                 continue
             else:
-                shutil.rmtree(chart_dir + os.sep + folder)
+                shutil.rmtree(f'{chart_dir}{os.sep}{folder}')
 
 
 if __name__ == '__main__':
@@ -530,7 +529,7 @@ if __name__ == '__main__':
         print(f'Please set a package (e.g. --single-package Airflow)')
         exit(0)
     else:
-        print(f'Setting package: {args.single_package}')
+        print(f'Setting package: {args.single_package}\n')
 
     if args.line_html is True:  # Create Line chart html
         _delte_folder()
@@ -539,6 +538,7 @@ if __name__ == '__main__':
             model_var_list = charts._read_unitTest_log()
             charts._check_folder_path()
             print(f'Plot line chart with different reference results.\n')
+            print(model_var_list)
             for model_var in model_var_list:
                 list = model_var.split(":")
                 model = list[0]
@@ -572,9 +572,8 @@ if __name__ == '__main__':
                 else:
                     print(f'\nCreate plots for reference result {ref_file}')
                     results = charts._read_data(ref_file)
-                    value_list = charts._prepare_data(results)
-                    legend_List = results[2]  # Legend name
-                    ref_file = results[4]  # Reference File
+                    value_list = results[0]
+                    legend_List = results[1]
                     charts._mako_line_html_new_chart(ref_file, value_list, legend_List)
             charts._create_index_layout()
             charts._create_layout()
@@ -590,9 +589,8 @@ if __name__ == '__main__':
                 else:
                     print(f'\nCreate plots for reference result {ref_file}')
                     results = charts._read_data(ref_file)
-                    value_list = charts._prepare_data(results)
-                    legend_List = results[2]  # Legend name
-                    ref_file = results[4]  # Reference File
+                    value_list = results[0]
+                    legend_List = results[1]
                     charts._mako_line_html_new_chart(ref_file, value_list, legend_List)
             charts._create_index_layout()
             charts._create_layout()
@@ -608,9 +606,9 @@ if __name__ == '__main__':
                 else:
                     print(f'\nCreate plots for reference result {ref_file}')
                     results = charts._read_data(ref_file)
-                    value_list = charts._prepare_data(results)
-                    legend_List = results[2]  # Legend name
-                    ref_file = results[4]  # Reference File
+                    value_list = results[0]
+                    legend_List = results[1]
+
                     charts._mako_line_html_new_chart(ref_file, value_list, legend_List)
             charts._create_index_layout()
             charts._create_layout()

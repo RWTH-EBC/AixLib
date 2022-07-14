@@ -1,11 +1,11 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
- record PipeDataAIT151218
-   "Experimental data from AIT monitoring data December 18, 2015"
-     extends BaseClasses.PipeDataBaseDefinition(
-       final nCol = 10,
-       final filNam = Modelica.Utilities.Files.loadResource(
-   "modelica://AixLib/Resources/Data/Fluid/FixedResistances/Validation/PlugFlowPipes/PipeDataAIT151218.mos"));
-      annotation (Documentation(revisions="<html>
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
+record PipeDataAIT151218
+  "Experimental data from AIT monitoring data December 18, 2015"
+    extends BaseClasses.PipeDataBaseDefinition(
+      final nCol = 10,
+      final filNam = Modelica.Utilities.Files.loadResource(
+  "modelica://AixLib/Resources/Data/Fluid/FixedResistances/Validation/PlugFlowPipes/PipeDataAIT151218.mos"));
+     annotation (Documentation(revisions="<html>
  <ul>
  <li>
  March 7, 2020, by Michael Wetter:<br/>
@@ -19,7 +19,7 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
  First implementation.
  </li>
  </ul>
- </html>", info="<html>
+ </html>",info="<html>
  <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
  <p>This record contains data of a real disitrict heating network for week-long period (23-29 Januar 2009) monitored by the Austrian Institut for Technology.</p>
  <p> Pipes are layed underground
@@ -58,6 +58,6 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
  <li>Wall roughness coefficient: 0.1 mm </li>
  </ul>
  
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end PipeDataAIT151218;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end PipeDataAIT151218;
