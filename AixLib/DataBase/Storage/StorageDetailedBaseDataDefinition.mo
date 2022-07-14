@@ -3,7 +3,7 @@ record StorageDetailedBaseDataDefinition
   "Base data definition for Buffer storage records"
   extends Modelica.Icons.Record;
 ///////////input parameters////////////
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   parameter SI.Height hTank "Height of storage";
   parameter SI.Height hLowerPortDemand "Height of lower demand port";
   parameter SI.Height hUpperPortDemand "Height of upper demand port";
@@ -17,9 +17,9 @@ record StorageDetailedBaseDataDefinition
   parameter SI.Diameter dTank "Inner diameter of storage";
   parameter SI.Length sWall "Thickness of storage Wall";
   parameter SI.Length sIns "Thickness of storage insulation";
-  parameter Modelica.SIunits.ThermalConductivity lambdaWall
+  parameter SI.ThermalConductivity lambdaWall
     "thermal conductivity of storage wall";
-  parameter Modelica.SIunits.ThermalConductivity lambdaIns
+  parameter SI.ThermalConductivity lambdaIns
     "thermal conductivity of storage insulation";
   //parameter SI.CoefficientOfHeatTransfer alpha
     //"Coefficient of heat transfer air <-> insulation of tank";
@@ -38,8 +38,8 @@ record StorageDetailedBaseDataDefinition
   parameter DataBase.Pipes.PipeBaseDataDefinition pipeHC2
     "Type of Pipe for HR2";
 
-  parameter Modelica.SIunits.Length lengthHC1 "Length of Pipe for HR1";
-  parameter Modelica.SIunits.Length lengthHC2 "Length of Pipe for HR2";
+  parameter SI.Length lengthHC1 "Length of Pipe for HR1";
+  parameter SI.Length lengthHC2 "Length of Pipe for HR2";
 
   annotation (Icon(graphics),               Documentation(info="<html><h4>
   <span style=\"color:#008000\">Overview</span>
