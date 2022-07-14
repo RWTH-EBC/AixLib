@@ -1,7 +1,7 @@
-within AixLib.Controls.HeatPump.Examples;
+﻿within AixLib.Controls.HeatPump.Examples;
 model TwoPointControlledHeatPump
   extends PartialHeatPumpController(redeclare TwoPointControlledHP hPController(
-        hys=2));
+        bandwidth=2));
 
 annotation(experiment(Tolerance=1e-6, StartTime=0, StopTime=10000), __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Examples/GeothermalHeatPump.mos"
         "Simulate and plot"),

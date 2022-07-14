@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.Examples;
+﻿within AixLib.Controls.HeatPump.Examples;
 partial model PartialHeatPumpController
   "Example for usage of heat pump controller"
   extends Modelica.Icons.Example;
@@ -10,7 +10,7 @@ partial model PartialHeatPumpController
         rotation=0,
         origin={-56,-50})));
   Modelica.Blocks.Sources.Sine T_meas(
-    freqHz=1/3600,
+    f=1/3600,
     amplitude=6,
     offset=310) "Generates the measured temperature"
     annotation (Placement(transformation(extent={{-100,20},{-80,40}})));

@@ -1,7 +1,7 @@
-within AixLib.Controls.HeatPump.Examples;
+﻿within AixLib.Controls.HeatPump.Examples;
 model InverterControlledHeatPump
   extends PartialHeatPumpController(redeclare InverterControlledHP hPController(
-      hys=2,
+      bandwidth=2,
       k=0.05,
       Ti=100));
 
