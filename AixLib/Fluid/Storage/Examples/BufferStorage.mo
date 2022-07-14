@@ -24,7 +24,8 @@ model BufferStorage
         AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
-    TStart=303.15) annotation (Placement(transformation(extent={{0,0},{-20,24}})));
+    TStart={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
+        293.15})   annotation (Placement(transformation(extent={{0,0},{-20,24}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)   annotation(Placement(transformation(extent={{-58,4},
             {-38,24}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(

@@ -16,6 +16,8 @@ model StorageBoiler
     mHC1_flow_nominal=pipe1.m_flow_nominal,
     useHeatingCoil2=false,
     useHeatingRod=false,
+    TStart={293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
+        293.15},
     redeclare AixLib.DataBase.Storage.Generic_New_2000l data(
       hTank=2,
       hUpperPortDemand=1.95,

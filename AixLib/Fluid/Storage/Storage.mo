@@ -39,7 +39,7 @@ model Storage
                      layer[n](
     each final energyDynamics=energyDynamics,
     each final p_start=p_start,
-    each final T_start=T_start,
+    T_start=T_start,
     each final m_flow_small=m_flow_small_layer,
     each final V = V / n,
     redeclare final package Medium = Medium,
@@ -57,7 +57,7 @@ model Storage
                      layer_HE[n](
     each final energyDynamics=energyDynamics,
     each final p_start=p_start,
-    each final T_start=T_start,
+    T_start=T_start,
     each final m_flow_small=m_flow_small_layer_HE,
     each final V = V_HE / n,
     redeclare final package Medium = Medium,
@@ -94,8 +94,8 @@ model Storage
     "Type of energy balance: dynamic (3 initialization options) or steady state in layers and layers_HE";
 
   //Initialization parameters
-  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
-    "Start value of temperature" annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Media.Interfaces.Types.Temperature T_start[n]
+    "Start value of temperature of each layer, e.g. for 3 layers: {20, 20, 20}" annotation(Dialog(tab="Initialization"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure" annotation(Dialog(tab="Initialization"));
 
@@ -120,10 +120,10 @@ protected
 equation
   //Connect layers to the upper and lower ports
   connect(port_a_consumer, layer[1].ports[1]) annotation (Line(
-      points={{0,-98},{0,-34},{20,-34},{20,-2},{10,-2}},
+      points={{0,-98},{0,-34},{20,-34},{20,-1},{10,-1}},
       color={0,127,255}));
   connect(layer[n].ports[2], port_b_consumer) annotation (Line(
-      points={{10,2},{16,2},{20,2},{20,40},{0,40},{0,92}},
+      points={{10,1},{16,1},{20,1},{20,40},{0,40},{0,92}},
       color={0,127,255}));
 
   //Connect layers
@@ -137,10 +137,10 @@ equation
   end for;
   //Connect layers of Heat Exchanger
   connect(port_a_heatGenerator, layer_HE[n].ports[2]) annotation (Line(
-      points={{84,88},{84,36},{96,22},{94,2}},
+      points={{84,88},{94,36},{94,22},{94,1}},
       color={0,127,255}));
   connect(port_b_heatGenerator, layer_HE[1].ports[1]) annotation (Line(
-      points={{84,-88},{84,-26},{96,-16},{94,-2}},
+      points={{84,-88},{84,-26},{94,-26},{94,-1}},
       color={0,127,255}));
   for k in 1:n - 1 loop
     connect(layer_HE[k].ports[2], layer_HE[k + 1].ports[1]);

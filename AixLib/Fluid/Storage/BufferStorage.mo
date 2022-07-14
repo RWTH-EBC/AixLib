@@ -3,7 +3,7 @@ model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import      Modelica.Units.SI;
 
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start = TStart);
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start=TStart[1]);
 
   replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model"
@@ -40,12 +40,12 @@ model BufferStorage
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
-  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
+  parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
+
+  parameter SI.Temperature TStart[n] "Start Temperature of fluid in each layer. e.g. for a 3 layer model: {20, 20, 20}" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
   replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
   annotation (choicesAllMatching);
-
-  parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////CONVECTION/////////////////////////////////////////////////////////////////////////////
@@ -188,7 +188,7 @@ model BufferStorage
     each final m_flow_small=m_flow_small,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
-    final T_start=fill(TStart,n),
+    T_start=TStart,
     redeclare each final package Medium = Medium,
     each final m_flow_nominal=m1_flow_nominal + m2_flow_nominal)
     "Layer volumes"
@@ -310,7 +310,7 @@ model BufferStorage
     pipeHC=data.pipeHC1,
     allowFlowReversal=allowFlowReversal_HC1,
     final m_flow_nominal=mHC1_flow_nominal,
-    TStart=TStart) if useHeatingCoil1
+    TStart=TStart[1]) if useHeatingCoil1
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -324,7 +324,7 @@ model BufferStorage
     redeclare package Medium = MediumHC2,
     allowFlowReversal=allowFlowReversal_HC2,
     final m_flow_nominal=mHC2_flow_nominal,
-    TStart=TStart) if useHeatingCoil2
+    TStart=TStart[1]) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
