@@ -3,20 +3,14 @@ partial model PartialRoom "Partial model with base component that are necessary 
 
   extends PartialRoomParams;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
-      Medium = Medium_R,
+      Medium = MediumAir,
       final T_start=T0_air);
 
   // Medium in the room
-  replaceable package Medium_R = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+  replaceable package MediumAir = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choices(
         choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
-        choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)"),
-        choice(redeclare package MediumR = AixLib.Media.Water "Water"),
-        choice(redeclare package MediumR =
-            AixLib.Media.Antifreeze.PropyleneGlycolWater (
-              property_T=293.15,
-              X_a=0.40)
-              "Propylene glycol water, 40% mass fraction")));
+        choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
 
   // Air volume of room
   parameter Modelica.Units.SI.Volume room_V
