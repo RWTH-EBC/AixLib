@@ -17,9 +17,9 @@ parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
     annotation (choicesAllMatching);
 
 protected
-  parameter Modelica.SIunits.SpecificHeatCapacityAtConstantPressure  capacityWater=medium.c
-    "Heat capacity of medium";
-   parameter Modelica.SIunits.Density  densityWater=medium.rho
+  parameter Modelica.Units.SI.SpecificHeatCapacityAtConstantPressure
+    capacityWater=medium.c "Heat capacity of medium";
+  parameter Modelica.Units.SI.Density densityWater=medium.rho
     "density of medium";
   /* *******************************************************************
       Components

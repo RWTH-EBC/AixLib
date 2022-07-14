@@ -54,7 +54,7 @@ model RoomAgent
     annotation (Placement(transformation(extent={{-72,32},{-52,52}})));
   Modelica.StateGraph.Transition requestNoted(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{-34,32},{-14,52}})));
-  Modelica.StateGraph.StepWithSignal sendRequest(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendRequest(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{2,32},{22,52}})));
   Modelica.StateGraph.TransitionWithSignal newMessage1 "confirmation"
     annotation (Placement(transformation(extent={{38,52},{58,32}})));
@@ -71,11 +71,11 @@ model RoomAgent
   Modelica.StateGraph.Transition repeat1(enableTimer=true, waitTime=
         100000000000.0)
     annotation (Placement(transformation(extent={{-8,-38},{-28,-18}})));
-  Modelica.StateGraph.Step composeNotUnderstood
+  Modelica.StateGraph.Step composeNotUnderstood(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-56,-240},{-36,-220}})));
   Modelica.StateGraph.Transition transition2(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{-20,-240},{0,-220}})));
-  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1)
+  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{16,-240},{36,-220}})));
   Modelica.StateGraph.Transition transition4(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{54,-240},{74,-220}})));
@@ -89,7 +89,7 @@ protected
 public
   Modelica.StateGraph.Step composeConfirm(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{-74,-122},{-54,-102}})));
-  Modelica.StateGraph.StepWithSignal sendConfirm(nOut=1)
+  Modelica.StateGraph.StepWithSignal sendConfirm(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{16,-122},{36,-102}})));
   Modelica.StateGraph.Transition confirmNoted(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{-30,-122},{-10,-102}})));

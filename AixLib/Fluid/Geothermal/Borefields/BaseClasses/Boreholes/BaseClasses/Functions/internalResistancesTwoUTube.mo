@@ -5,30 +5,31 @@ function internalResistancesTwoUTube
     AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.partialInternalResistances;
 
   // Outputs
-  output Modelica.SIunits.ThermalResistance Rgb
+  output Modelica.Units.SI.ThermalResistance Rgb
     "Thermal resistance between a grout capacity and the borehole wall, as defined by Bauer et al (2010)";
-  output Modelica.SIunits.ThermalResistance Rgg1
+  output Modelica.Units.SI.ThermalResistance Rgg1
     "Thermal resistance between two neightbouring grout capacities, as defined by Bauer et al (2010)";
-  output Modelica.SIunits.ThermalResistance Rgg2
+  output Modelica.Units.SI.ThermalResistance Rgg2
     "Thermal resistance between two  grout capacities opposite to each other, as defined by Bauer et al (2010)";
-  output Modelica.SIunits.ThermalResistance RCondGro
+  output Modelica.Units.SI.ThermalResistance RCondGro
     "Thermal resistance between a pipe wall and the grout capacity, as defined by Bauer et al (2010)";
 protected
   Real[4,4] RDelta(each unit="(m.K)/W") "Delta-circuit thermal resistances";
   Real[4,4] R(each unit="(m.K)/W") "Internal thermal resistances";
-  Modelica.SIunits.Position[4] xPip = {-sha, sha, 0., 0.} "x-Coordinates of pipes";
-  Modelica.SIunits.Position[4] yPip = {0., 0., -sha, sha} "y-Coordinates of pipes";
-  Modelica.SIunits.Radius[4] rPip = {rTub, rTub, rTub, rTub} "Outer radius of pipes";
+  Modelica.Units.SI.Position[4] xPip={-sha,sha,0.,0.} "x-Coordinates of pipes";
+  Modelica.Units.SI.Position[4] yPip={0.,0.,-sha,sha} "y-Coordinates of pipes";
+  Modelica.Units.SI.Radius[4] rPip={rTub,rTub,rTub,rTub}
+    "Outer radius of pipes";
   Real[4] RFluPip(each unit="(m.K)/W") = {RCondPipe+RConv, RCondPipe+RConv, RCondPipe+RConv, RCondPipe+RConv} "Fluid to pipe wall thermal resistances";
 
   Real Ra( unit="(m.K)/W")
     "Grout-to-grout resistance (2D) as defined by Hellstrom. Interaction between the different grout parts";
 
-  Modelica.SIunits.ThermalResistance Rg
+  Modelica.Units.SI.ThermalResistance Rg
     "Thermal resistance between outer borehole wall and one tube";
-  Modelica.SIunits.ThermalResistance Rar1
+  Modelica.Units.SI.ThermalResistance Rar1
     "Thermal resistance between the two closest pipe outer walls";
-  Modelica.SIunits.ThermalResistance Rar2
+  Modelica.Units.SI.ThermalResistance Rar2
     "Thermal resistance between the two farthest pipe outer walls";
 
 algorithm
@@ -87,76 +88,77 @@ algorithm
       i := i + 1;
     end while;
   end if;
-  assert(test,
+  assert(test, "In " + getInstanceName() + ":\n" +
   "Maximum number of iterations exceeded. Check the borehole geometry.
-  The tubes may be too close to the borehole wall.
-  Input to the function
-  AixLib.Fluid.HeatExchangers.Boreholes.BaseClasses.doubleUTubeResistances
-  is
-            hSeg = " + String(hSeg) + " m
-            rBor = " + String(rBor) + " m
-            rTub = " + String(rTub) + " m
-            eTub = " + String(eTub) + " m
-            sha = " + String(sha) + " m
-            kSoi = " + String(kSoi) + " W/m/K
-            kFil = " + String(kFil) + " W/m/K
-            kTub = " + String(kTub) + " W/m/K
-  Computed x    = " + String(x) + " m
-            Rgb  = " + String(Rgb) + " K/W
-            Rgg1  = " + String(Rgg1) + " K/W
-            Rgg2  = " + String(Rgg2) + " K/W");
+   The tubes may be too close to the borehole wall.
+   Input to the function
+   AixLib.Fluid.HeatExchangers.Boreholes.BaseClasses.doubleUTubeResistances
+   is
+             hSeg = "+ String(hSeg) + " m
+             rBor = "+ String(rBor) + " m
+             rTub = "+ String(rTub) + " m
+             eTub = "+ String(eTub) + " m
+             sha = "+ String(sha) + " m
+             kSoi = "+ String(kSoi) + " W/m/K
+             kFil = "+ String(kFil) + " W/m/K
+             kTub = "+ String(kTub) + " W/m/K
+   Computed x    = "+ String(x) + " m
+             Rgb  = "+ String(Rgb) + " K/W
+             Rgg1  = "+ String(Rgg1) + " K/W
+             Rgg2  = "+ String(Rgg2) + " K/W");
 
-  if printDebug then
-    Modelica.Utilities.Streams.print("
-      Rb = " + String(Rb_internal) + " m K / W
-      RCondPipe = "+ String(RCondPipe) + " m K / W
-      RConv = " +String(RConv) +"m K / W
-      hSeg = " + String(hSeg) + " m
-      Rg = "+String(Rg) + " K / W
-      Ra = " + String(Ra)  + " m K / W
-      x = " + String(x) + "
-      i = "  + String(i));
-  end if;
-  annotation (Diagram(graphics), Documentation(info="<html>
-<p>
-This model computes the different thermal resistances present in a double U-tube
-borehole using the method of Bauer et al. (2011).
-It also computes the fluid-to-ground thermal resistance <i>R<sub>b</sub></i> 
-and the grout-to-grout thermal resistance <i>R<sub>a</sub></i> 
-as defined by Claesson and Hellstrom (2011) using the multipole method.
-</p>
-
-<h4>References</h4>
-<p>J. Claesson and G. Hellstrom. 
-<i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger. 
-</i>
-HVAC&amp;R Research,
-17(6): 895-911, 2011.</p>
-<p>D. Bauer, W. Heidemann, H. M&uuml;ller-Steinhagen, and H.-J. G. Diersch. 
-<i>Thermal resistance and capacity models for borehole heat exchangers</i>. 
-International Journal of Energy Research, 35:312&ndash;320, 2011.</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 18, 2018 by Massimo Cimmino:<br/>
-Implemented multipole method.
-</li>
-<li>
-February 14, 2014 by Michael Wetter:<br/>
-Added an assert statement to test for non-physical values.
-</li>
-<li>
-February 12, 2014, by Damien Picard:<br/>
-Remove the flow dependency of the resistances, as this function calculates the conduction resistances only.
-</li>
-<li>
-January 24, 2014, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-January 23, 2014, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+annotation (
+  Documentation(info="<html>
+ <p>
+ This model computes the different thermal resistances present in a double U-tube
+ borehole using the method of Bauer et al. (2011).
+ It also computes the fluid-to-ground thermal resistance <i>R<sub>b</sub></i>
+ and the grout-to-grout thermal resistance <i>R<sub>a</sub></i>
+ as defined by Claesson and Hellstrom (2011) using the multipole method.
+ </p>
+ 
+ <h4>References</h4>
+ <p>J. Claesson and G. Hellstrom.
+ <i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger.
+ </i>
+ HVAC&amp;R Research,
+ 17(6): 895-911, 2011.</p>
+ <p>D. Bauer, W. Heidemann, H. M&uuml;ller-Steinhagen, and H.-J. G. Diersch.
+ <i>Thermal resistance and capacity models for borehole heat exchangers</i>.
+ International Journal of Energy Research, 35:312&ndash;320, 2011.</p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 7, 2022, by Michael Wetter:<br/>
+ Changed function to be <code>pure</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1582\">IBPSA, #1582</a>.
+ </li>
+ <li>
+ December 11, 2021, by Michael Wetter:<br/>
+ Added <code>impure</code> declaration for MSL 4.0.0.
+ </li>
+ <li>
+ July 18, 2018 by Massimo Cimmino:<br/>
+ Implemented multipole method.
+ </li>
+ <li>
+ February 14, 2014 by Michael Wetter:<br/>
+ Added an assert statement to test for non-physical values.
+ </li>
+ <li>
+ February 12, 2014, by Damien Picard:<br/>
+ Remove the flow dependency of the resistances, as this function calculates the conduction resistances only.
+ </li>
+ <li>
+ January 24, 2014, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ January 23, 2014, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end internalResistancesTwoUTube;

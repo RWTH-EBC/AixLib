@@ -48,8 +48,8 @@ protected
       p=Medium.p_default,
       X=Medium.X_default[1:Medium.nXi]) "Medium state at default values";
 
-  final parameter Modelica.SIunits.Density rho_default=Medium.density(
-    state=state_default) "Density, used to compute fluid mass";
+  final parameter Modelica.Units.SI.Density rho_default=Medium.density(state=
+      state_default) "Density, used to compute fluid mass";
 
 equation
   connect(traSub.y, thermalZoneFourElements.C_flow[1])
@@ -63,51 +63,58 @@ equation
   connect(traSubAmb.y, souAir.C_in[1])
     annotation (Line(points={{-67,-78},{-42,-78}}, color={0,0,127}));
   annotation ( Documentation(info="<html>
-<p>
-This example shows the application of
-<a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">
-AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>
-considering a trace substance such as CO2
-in combination with
-<a href=\"AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow\">
-AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow</a>
-and
-<a href=\"AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane\">
-AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane</a>.
-Solar radiation on tilted surface is calculated using models of
-AixLib. The thermal zone is a simple room defined in Guideline
-VDI 6007 Part 1 (VDI, 2012).
-The trace substance calculation is based on the CO2 emissions of 2 persons.
-They stay in the thermal zone for 12 hours every 24 hours. The air exchange rate is 2 air changes per hour.
-All further models, parameters and inputs
-except sunblinds, separate handling of heat transfer through
-windows, no wall element for internal walls and solar radiation
-are similar to the ones defined for the guideline&apos;s test
-room. For solar radiation, the example relies on the standard
-weather file in AixLib.
-</p>
-<p>
-The idea of the example is to show a typical application of all
-sub-models and to use the example in unit tests. The results are
-reasonable, but not related to any real use case or measurement
-data.
-</p>
-<h4>References</h4>
-<p>VDI. German Association of Engineers Guideline VDI 6007-1
-March 2012. Calculation of transient thermal response of rooms
-and buildings - modelling of rooms.</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-April 15, 2020, by Katharina Brinkmann:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example shows the application of
+ <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">
+ AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>
+ considering a trace substance such as CO2
+ in combination with
+ <a href=\"AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow\">
+ AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow</a>
+ and
+ <a href=\"AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane\">
+ AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane</a>.
+ Solar radiation on tilted surface is calculated using models of
+ AixLib. The thermal zone is a simple room defined in Guideline
+ VDI 6007 Part 1 (VDI, 2012).
+ The trace substance calculation is based on the CO2 emissions of 2 persons.
+ They stay in the thermal zone for 12 hours every 24 hours. The air exchange rate is 2 air changes per hour.
+ All further models, parameters and inputs
+ except sunblinds, separate handling of heat transfer through
+ windows, no wall element for internal walls and solar radiation
+ are similar to the ones defined for the guideline&apos;s test
+ room. For solar radiation, the example relies on the standard
+ weather file in AixLib.
+ </p>
+ <p>
+ The idea of the example is to show a typical application of all
+ sub-models and to use the example in unit tests. The results are
+ reasonable, but not related to any real use case or measurement
+ data.
+ </p>
+ <h4>References</h4>
+ <p>VDI. German Association of Engineers Guideline VDI 6007-1
+ March 2012. Calculation of transient thermal response of rooms
+ and buildings - modelling of rooms.</p>
+ </html>",  revisions="<html>
+ <ul>
+ <li>
+ September 6, 2021, by Ettore Zanetti:<br/>
+ Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+ </li>
+ <li>
+ April 15, 2020, by Katharina Brinkmann:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
   experiment(Tolerance=1e-6, StopTime=604800),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomFourElementsTraceSubstance.mos"
         "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-100,-120},{100,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})));
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SimpleRoomFourElementsTraceSubstance;

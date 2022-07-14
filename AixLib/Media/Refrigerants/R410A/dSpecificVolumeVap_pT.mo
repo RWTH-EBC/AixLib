@@ -1,10 +1,8 @@
 within AixLib.Media.Refrigerants.R410A;
 function dSpecificVolumeVap_pT
   "Function that calculates the Jacobian of specific volume R410A vapor based on pressure and temperature"
-  input Modelica.SIunits.AbsolutePressure p
-    "Pressure of refrigerant vapor";
-  input Modelica.SIunits.Temperature T
-    "Temperature of refrigerant";
+  input Modelica.Units.SI.AbsolutePressure p "Pressure of refrigerant vapor";
+  input Modelica.Units.SI.Temperature T "Temperature of refrigerant";
   input Real dp(
     final unit="Pa/s")
     "Delta of pressure of refrigerant vapor";
@@ -24,8 +22,7 @@ protected
     final unit="Pa.kg/m3")
      "Derivative of pressure with regards to specific volume";
 
-  Modelica.SIunits.SpecificVolume v
-    "Specific volume of refrigerant";
+  Modelica.Units.SI.SpecificVolume v "Specific volume of refrigerant";
 
 algorithm
 
@@ -36,17 +33,18 @@ algorithm
   dv := dp/dpdv + dT*(dpdT/dpdv);
 
 annotation (preferredView="info",Documentation(info="<HTML>
-<p>
-Function that calculates the derivatives of
-<a href=\"modelica://AixLib.Media.Refrigerants.R410A.specificVolumeVap_pT\">
-AixLib.Media.Refrigerants.R410A.specificVolumeVap_pT</a>
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 30, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Function that calculates the derivatives of
+ <a href=\"modelica://AixLib.Media.Refrigerants.R410A.specificVolumeVap_pT\">
+ AixLib.Media.Refrigerants.R410A.specificVolumeVap_pT</a>
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 30, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end dSpecificVolumeVap_pT;

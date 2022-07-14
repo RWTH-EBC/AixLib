@@ -1,6 +1,6 @@
 ﻿within AixLib.Fluid.Movers.Compressors.Utilities;
 package VolumetricEfficiency "Package that contains models describing different volumetric efficiencies"
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
 
@@ -58,115 +58,120 @@ Documentation(revisions="<html><ul>
   Calculation procedures presented in the litarture have some variables
   in commen and these variables are presented below:<br/>
 </p>
-<table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\"
-cellpadding=\"2\" style=\"border-collapse:collapse;\">
-  <tr>
-    <th>
-      Variable
-    </th>
-    <th>
-      Comment
-    </th>
-  </tr>
-  <tr>
-    <td>
-      <code>epsRef</code>
-    </td>
-    <td>
-      Ratio of the real and the ideal displacement volume
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>VDis</code>
-    </td>
-    <td>
-      Displacement volume
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>piPre</code>
-    </td>
-    <td>
-      Pressure ratio
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>rotSpe</code>
-    </td>
-    <td>
-      Rotational speed
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>staInl</code>
-    </td>
-    <td>
-      Thermodynamic state at compressor's inlet conditions
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>staOut</code>
-    </td>
-    <td>
-      Thermodynamic state at compressor's out conditions
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>TAmb</code>
-    </td>
-    <td>
-      Ambient temperature
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Inputs and outputs\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+    style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <th>
+          Variable
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <code>epsRef</code>
+        </td>
+        <td>
+          Ratio of the real and the ideal displacement volume
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>VDis</code>
+        </td>
+        <td>
+          Displacement volume
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>piPre</code>
+        </td>
+        <td>
+          Pressure ratio
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>rotSpe</code>
+        </td>
+        <td>
+          Rotational speed
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>staInl</code>
+        </td>
+        <td>
+          Thermodynamic state at compressor's inlet conditions
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>staOut</code>
+        </td>
+        <td>
+          Thermodynamic state at compressor's out conditions
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>TAmb</code>
+        </td>
+        <td>
+          Ambient temperature
+        </td>
+      </tr>
+    </table>
+    <p>
+      Moreover, two approaches can be identified in general: A
+      polynomial and a power approach. The characteristics of these
+      approaches are presented below.
+    </p>
+    <h4>
+      Polynomial approaches
+    </h4>
+    <p>
+      A generic polynomial approach is presented below:<br/>
+      <br/>
+      <code>η<sub>vol</sub> = corFact * sum(a[i]*P[i]^b[i] for i in
+      1:nT)</code><br/>
+      <br/>
+      Actually, eight polynomial approaches are implemented in this
+      package.
+    </p>
+    <h4>
+      Power approaches
+    </h4>
+    <p>
+      A generic power approach is presented below:<br/>
+      <br/>
+      <code>η<sub>vol</sub> = corFact * a * product(P[i]^b[i] for i in
+      1:nT)</code><br/>
+      <br/>
+      Actually, one power approache is implemented in this package.
+    </p>
+    <h4>
+      References
+    </h4>
+    <p>
+      In the following, some general references are given for
+      information about calculating efficiencies of compressors:
+    </p>
+    <p>
+      V. A. Cara Martin and R. Radermacher (2015): <a href=
+      \"http://www.ahrinet.org/App_Content/ahri/files/RESEARCH/Technical%20Results/AHRI-8013_Final_Report.pdf\">
+      AHRI Project 8013: A Study of Methods to Represent Compressor
+      Performance Data over an Operating Envelope Based on a Finite Set
+      of Test Data</a>. Publisher: <i>Air-Conditioning, Heating, and
+      Refrigeration Institute (AHRI)</i>
+    </p>
+  </caption>
 </table>
-<p>
-  Moreover, two approaches can be identified in general: A polynomial
-  and a power approach. The characteristics of these approaches are
-  presented below.
-</p>
-<h4>
-  Polynomial approaches
-</h4>
-<p>
-  A generic polynomial approach is presented below:<br/>
-  <br/>
-  <code>η<sub>vol</sub> = corFact * sum(a[i]*P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
-  Actually, eight polynomial approaches are implemented in this
-  package.
-</p>
-<h4>
-  Power approaches
-</h4>
-<p>
-  A generic power approach is presented below:<br/>
-  <br/>
-  <code>η<sub>vol</sub> = corFact * a * product(P[i]^b[i] for i in
-  1:nT)</code><br/>
-  <br/>
-  Actually, one power approache is implemented in this package.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  In the following, some general references are given for information
-  about calculating efficiencies of compressors:
-</p>
-<p>
-  V. A. Cara Martin and R. Radermacher (2015): <a href=
-  \"http://www.ahrinet.org/App_Content/ahri/files/RESEARCH/Technical%20Results/AHRI-8013_Final_Report.pdf\">
-  AHRI Project 8013: A Study of Methods to Represent Compressor
-  Performance Data over an Operating Envelope Based on a Finite Set of
-  Test Data</a>. Publisher: <i>Air-Conditioning, Heating, and
-  Refrigeration Institute (AHRI)</i>
-</p>
 </html>"));
 end VolumetricEfficiency;

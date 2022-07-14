@@ -4,6 +4,7 @@ MassFlowSource_T
 MassFlowSource_WeatherData
 MassFlowSource_h
 Outside
+Outside_CpData
 Outside_CpLowRise
 PropertySource_T
 PropertySource_h

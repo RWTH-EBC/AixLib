@@ -12,9 +12,9 @@ model CHPNoControl
   parameter Real minCapacity = 0
     "Minimum allowable working capacity (unit [-])"
     annotation(Dialog(group="Unit properties"));
-  parameter Modelica.SIunits.ThermalConductance G=0.003*param.data_CHP[end,3]/50
-    "Constant thermal conductance to environment(G=Q_loss/dT)";
-  parameter Modelica.SIunits.HeatCapacity C=1.5*param.data_CHP[end,3]
+  parameter Modelica.Units.SI.ThermalConductance G=0.003*param.data_CHP[end, 3]
+      /50 "Constant thermal conductance to environment(G=Q_loss/dT)";
+  parameter Modelica.Units.SI.HeatCapacity C=1.5*param.data_CHP[end, 3]
     "Heat capacity of metal (J/K)";
 
   Modelica.Blocks.Interfaces.RealInput u_rel(
@@ -204,11 +204,21 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-        Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
-<p>A table based combined heat and power (CHP) model. The input is the relative part load rate [0...1]. </p>
-<p><b><span style=\"color: #008000;\">Concept</span> </b></p>
-<p>The dimension of thermal and electrical power outputs and fuel input as well as the electricity profile should be in kW. The dimension of fuel consumption depends on the user&apos;s data. </p>
+        Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  A table based combined heat and power (CHP) model. The input is the
+  relative part load rate [0...1].
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  The dimension of thermal and electrical power outputs and fuel input
+  as well as the electricity profile should be in kW. The dimension of
+  fuel consumption depends on the user's data.
+</p>
 </html>",
 revisions="<html><ul>
   <li>August 31, 2020, by Alexander Kümpel:<br/>

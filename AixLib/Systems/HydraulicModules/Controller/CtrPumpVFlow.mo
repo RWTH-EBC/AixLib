@@ -15,15 +15,18 @@ public
     annotation (Placement(transformation(extent={{76,-24},{124,24}}),
         iconTransformation(extent={{90,-22},{138,26}})));
           parameter Boolean useExternalVset = false "If True, set Volume Flow can be given externally";
-  parameter Modelica.SIunits.VolumeFlowRate vFlowSetCon = 0.01 "Volume Flow in m³/s set point of consumer";
+  parameter Modelica.Units.SI.VolumeFlowRate vFlowSetCon=0.01
+    "Volume Flow in m³/s set point of consumer";
   parameter Real k(min=0, unit="1") = 100 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=30
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 30
     "Time constant of Integrator block";
-  parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump_max(min=0) = 2000 "Rpm of the Pump";
-  parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
+  parameter Modelica.Units.SI.Time Td(min=0) = 4
+    "Time constant of Derivative block";
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm rpm_pump_max(min=0) = 2000
+    "Rpm of the Pump";
+  parameter Modelica.Blocks.Types.Init initType=.Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation(Dialog(group="PID"));
+    annotation (Dialog(group="PID"));
   parameter Boolean reverseAction = true
     "Set to true if heating system, and false for cooling system";
   parameter Real xi_start=0

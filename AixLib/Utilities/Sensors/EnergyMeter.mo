@@ -10,11 +10,14 @@ model EnergyMeter
         extent={{14,-14},{-14,14}},
         rotation=180,
         origin={-56,0})));
-  Modelica.SIunits.Conversions.NonSIunits.Energy_kWh q_kWh;
-  Modelica.SIunits.Energy q_joule(stateSelect = StateSelect.avoid, start = 0.0, fixed=energyDynamics==Modelica.Fluid.Types.Dynamics.FixedInitial);
+  Modelica.Units.NonSI.Energy_kWh q_kWh;
+  Modelica.Units.SI.Energy q_joule(
+    stateSelect=StateSelect.avoid,
+    start=0.0,
+    fixed=energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial);
 equation
   der(q_joule) = p;
-  q_kWh = Modelica.SIunits.Conversions.to_kWh(q_joule);
+  q_kWh =Modelica.Units.Conversions.to_kWh(q_joule);
   annotation (preferredView = "info", Icon(coordinateSystem(extent={{-60,-80},{
             60,80}}),                      graphics={  Rectangle(extent = {{-40, 66}, {46, -62}}, lineColor = {0, 0, 255}, fillColor = {95, 95, 95},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-20, 38}, {30, 12}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255},

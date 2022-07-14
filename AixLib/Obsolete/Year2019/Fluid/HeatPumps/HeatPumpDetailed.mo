@@ -2,7 +2,7 @@
 model HeatPumpDetailed
   "Heat pump model with good level of detail. Mainly fed with manufacturing data."
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   parameter Boolean HPctrlType=true "Capacity control type" annotation (Dialog(
       group="Heat Pump cycle",
       compact=true,

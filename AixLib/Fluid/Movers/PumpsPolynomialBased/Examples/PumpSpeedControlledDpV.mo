@@ -33,7 +33,8 @@ model PumpSpeedControlledDpV
     annotation (Placement(transformation(extent={{-10,26},{10,46}})));
   BaseClasses.PumpBus pumpBus annotation (Placement(transformation(extent={{-10,
             50},{10,70}}), iconTransformation(extent={{-24,34},{-4,54}})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
+    "Nominal mass flow rate";
   Actuators.Valves.TwoWayLinear             simpleValve(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,

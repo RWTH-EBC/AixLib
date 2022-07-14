@@ -6,7 +6,6 @@ model ReverseBuoyancy
   AixLib.Fluid.MixingVolumes.MixingVolume volBotEas(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     V=2.5*5*5,
     T_start=273.15 + 25,
     nPorts=5,
@@ -86,7 +85,6 @@ model ReverseBuoyancy
     redeclare package Medium = Medium,
     m_flow_nominal=1.2,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     tau=2.5*5*5,
     T_start=273.15 + 22,
     nPorts=3,
@@ -119,7 +117,6 @@ model ReverseBuoyancy
   AixLib.Fluid.MixingVolumes.MixingVolume volTopEas(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     V=2.5*5*10,
     T_start=273.15 + 21,
     nPorts=3,
@@ -128,7 +125,6 @@ model ReverseBuoyancy
   AixLib.Fluid.MixingVolumes.MixingVolume volTopWes(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=273.15 + 20,
     V=2.5*5*10,
     nPorts=3,
@@ -258,42 +254,43 @@ experiment(Tolerance=1e-06, StopTime=3600),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/Examples/ReverseBuoyancy.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model is similar than
-<a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
-AixLib.Airflow.Multizone.Validation.ThreeRoomsContam</a> but it has four
-instead of three rooms.
-The outdoor conditions are held constant at <i>10</i>&deg;C and
-atmospheric pressure.
-All four rooms are at different temperatures, with the rooms on the bottom
-floor being initially at a higher temperature than the rooms on the top floor.
-As time progresses, the temperatures of the two rooms on the respective floors
-asymptotically approach each other. The bottom floor eventually cools below
-the temperature of the top floor, because the
-bottom floor directly exchanges air with the outside.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 26, 2021 by Michael Wetter:<br/>
-Updated comments for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
-</li>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-November 10, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model is similar than
+ <a href=\"modelica://AixLib.Airflow.Multizone.Validation.ThreeRoomsContam\">
+ AixLib.Airflow.Multizone.Validation.ThreeRoomsContam</a> but it has four
+ instead of three rooms.
+ The outdoor conditions are held constant at <i>10</i>&deg;C and
+ atmospheric pressure.
+ All four rooms are at different temperatures, with the rooms on the bottom
+ floor being initially at a higher temperature than the rooms on the top floor.
+ As time progresses, the temperatures of the two rooms on the respective floors
+ asymptotically approach each other. The bottom floor eventually cools below
+ the temperature of the top floor, because the
+ bottom floor directly exchanges air with the outside.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 26, 2021 by Michael Wetter:<br/>
+ Updated comments for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+ </li>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ November 10, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ReverseBuoyancy;

@@ -9,7 +9,6 @@ model MixingVolumeZeroFlow
     m_flow_nominal=1,
     V=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     allowFlowReversal=false)
     "Steady state mixing volume requiring solution of non-linear system"
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
@@ -38,7 +37,7 @@ model MixingVolumeZeroFlow
     "Prescribed temperature"
     annotation (Placement(transformation(extent={{-56,34},{-44,46}})));
   Modelica.Blocks.Sources.Cosine cos1(
-    freqHz=1,
+    f=1,
     offset=283.15,
     amplitude=0.001) "Cosine input"
     annotation (Placement(transformation(extent={{-76,34},{-64,46}})));
@@ -48,7 +47,6 @@ model MixingVolumeZeroFlow
     m_flow_nominal=1,
     V=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     allowFlowReversal=false)
     "Steady state mixing volume with prescribed temperature input"
     annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -64,7 +62,6 @@ model MixingVolumeZeroFlow
     m_flow_nominal=1,
     V=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     allowFlowReversal=false,
     prescribedHeatFlowRate=false)
     "Steady state mixing volume requiring solution of linear system"
@@ -95,7 +92,6 @@ model MixingVolumeZeroFlow
     m_flow_nominal=1,
     V=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     allowFlowReversal=false,
     prescribedHeatFlowRate=true)
     "Steady state mixing volume with fixed heat flow rate input"
@@ -172,63 +168,63 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                     graphics={Text(
           extent={{12,30},{106,10}},
-          lineColor={28,108,200},
+          textColor={28,108,200},
           textString="<- vol.prescribedHeatFlowRate = true")}),
     experiment(
       Tolerance=1E-6, StopTime=2),
     Documentation(revisions="<html>
-<ul>
-<li>
-January 27, 2016, by Filip Jorissen:<br/>
-Changed heat flow rate at zero flow to avoid triggering of
-conservation of energy check.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/470\">
-issue 470</a>.
-</li>
-<li>
-November 2, 2016, by Michael Wetter:<br/>
-Removed assertion as the variable that are tested are already
-part of the regression test.
-Also, the previous implementation mixed graphical with textual programming,
-which we try to avoid.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/441\">issue 441</a>.
-</li>
-<li>
-January 27, 2016, by Michael Wetter:<br/>
-Removed algorithm specification in experiment annotation.
-</li>
-<li>
-July 2, 2015 by Michael Wetter:<br/>
-Revised example.
-</li>
-<li>
-June 30, 2015 by Filip Jorissen:<br/>
-First implementation
-to test
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/282\">
-issue 282</a>.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-This model verifies whether the equations in
-<a href=\"modelica://AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation\">
-AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
-are consisent for all foreseeable cases.
-All <code>MixingVolume</code> instances contain the correct
-setting for <code>prescribedHeatFlowRate</code>.
-Switching the value will result in an error in each case.
-This error either is a non-physical solution to the (non-)linear system
-or a division by zero, which halts the simulation.
-</p>
-<p>
-If you use Dymola, set <code>Advanced.Define.AimForHighAccuracy = false</code> to
-increase the chance of the error being produced for this simple example.
-</p>
-</html>"),
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeZeroFlow.mos"
-        "Simulate and plot"));
+ <ul>
+ <li>
+ January 27, 2016, by Filip Jorissen:<br/>
+ Changed heat flow rate at zero flow to avoid triggering of
+ conservation of energy check.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/470\">
+ issue 470</a>.
+ </li>
+ <li>
+ November 2, 2016, by Michael Wetter:<br/>
+ Removed assertion as the variable that are tested are already
+ part of the regression test.
+ Also, the previous implementation mixed graphical with textual programming,
+ which we try to avoid.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/441\">issue 441</a>.
+ </li>
+ <li>
+ January 27, 2016, by Michael Wetter:<br/>
+ Removed algorithm specification in experiment annotation.
+ </li>
+ <li>
+ July 2, 2015 by Michael Wetter:<br/>
+ Revised example.
+ </li>
+ <li>
+ June 30, 2015 by Filip Jorissen:<br/>
+ First implementation
+ to test
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/282\">
+ issue 282</a>.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ This model verifies whether the equations in
+ <a href=\"modelica://AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation\">
+ AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
+ are consisent for all foreseeable cases.
+ All <code>MixingVolume</code> instances contain the correct
+ setting for <code>prescribedHeatFlowRate</code>.
+ Switching the value will result in an error in each case.
+ This error either is a non-physical solution to the (non-)linear system
+ or a division by zero, which halts the simulation.
+ </p>
+ <p>
+ If you use Dymola, set <code>Advanced.Define.AimForHighAccuracy = false</code> to
+ increase the chance of the error being produced for this simple example.
+ </p>
+ </html>"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeZeroFlow.mos"
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeZeroFlow;

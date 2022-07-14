@@ -4,82 +4,72 @@ model ShadedWindow
   shadowing."
   parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
-    annotation(dialog(group="window"));
-   parameter Modelica.SIunits.TransmissionCoefficient g[n]
-    "Total energy transmittance of windows"
-    annotation(Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
+    annotation (dialog(group="window"));
+  parameter Modelica.Units.SI.TransmissionCoefficient g[n]
+    "Total energy transmittance of windows" annotation (Dialog(group="window"));
+  parameter Modelica.Units.SI.TransmissionCoefficient tau_vis[n]
     "Degree of light transmission for direct irradiation"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDir[n]
+  parameter Modelica.Units.SI.TransmissionCoefficient tau_visTotDir[n]
     "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDif[n]
+  parameter Modelica.Units.SI.TransmissionCoefficient tau_visTotDif[n]
     "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.RadiantEnergyFluenceRate lim
+  parameter Modelica.Units.SI.RadiantEnergyFluenceRate lim
     "Limit for the sunscreen to become active"
-    annotation(dialog(group="sunscreen"));
-  parameter Modelica.SIunits.Angle xi(displayUnit="degree")= 0
+    annotation (dialog(group="sunscreen"));
+  parameter Modelica.Units.SI.Angle xi(displayUnit="degree") = 0
     "Elevation angle";
-  parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
-    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
-     roof"
+  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+     roof" annotation (Dialog(group="window"));
+  parameter Modelica.Units.SI.Length b[n] "Width of window"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length b[n] "Width of window"
+  parameter Modelica.Units.SI.Height h[n] "Height of window"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Height h[n] "Height of window"
+  parameter Modelica.Units.SI.Length bLef[n] "Window projection left"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length bLef[n] "Window projection left"
+  parameter Modelica.Units.SI.Length bRig[n] "Window projection right"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length bRig[n] "Window projection right"
-    annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length dLef[n]
+  parameter Modelica.Units.SI.Length dLef[n]
     "Distance between projection (left) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length dRig[n]
+  parameter Modelica.Units.SI.Length dRig[n]
     "Distance between projection (right) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length bAbo[n] "Window projection above"
+  parameter Modelica.Units.SI.Length bAbo[n] "Window projection above"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length bBel[n] "Window projection below"
+  parameter Modelica.Units.SI.Length bBel[n] "Window projection below"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length dAbo[n]
+  parameter Modelica.Units.SI.Length dAbo[n]
     "Distance between projection (above) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Length dBel[n]
+  parameter Modelica.Units.SI.Length dBel[n]
     "Distance between projection (below) and window"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.Angle azi[n](displayUnit="degree")
-    "Surface azimuth. azi=-90 degree if surface outward unit normal points
+  parameter Modelica.Units.SI.Angle azi[n](displayUnit="degree") "Surface azimuth. azi=-90 degree if surface outward unit normal points
     toward east; azi=0 if it points toward south"
     annotation (Dialog(group="window"));
   parameter Integer nCorPoi(min = 1) "Number of corner points"
       annotation(dialog(group="skyline"));
-  parameter Modelica.SIunits.Angle[nCorPoi] alpha(displayUnit="deg")
-  "Azimuth of corner points, sorted from north to east to south to west,
+  parameter Modelica.Units.SI.Angle[nCorPoi] alpha(displayUnit="deg") "Azimuth of corner points, sorted from north to east to south to west,
      azi=-90 degree if surface outward unit normal points toward east;
-     azi=0 if it points toward south"
-      annotation(dialog(group="skyline"));
-  parameter Modelica.SIunits.Height[nCorPoi] deltaH
+     azi=0 if it points toward south" annotation (dialog(group="skyline"));
+  parameter Modelica.Units.SI.Height[nCorPoi] deltaH
     "Difference between height of corner point and the window centre"
-    annotation(dialog(group="skyline"));
-  parameter Modelica.SIunits.Distance[nCorPoi] s
+    annotation (dialog(group="skyline"));
+  parameter Modelica.Units.SI.Distance[nCorPoi] s
     "Horizontal distance between corner point and window centre"
-    annotation(dialog(group="skyline"));
+    annotation (dialog(group="skyline"));
   parameter Boolean[nCorPoi-1] gap
     "Corner points i and i+1 are gap between buildings: true, else: false"
     annotation(dialog(group="skyline"));
-  parameter Modelica.SIunits.TransmissionCoefficient g_TotDir[n]
-    "Total energy transmittance of windows with closed sunscreen for
-    direct radiation"
-    annotation(Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient g_TotDif[n]
-    "Total energy transmittance of windows with closed sunscreen for
-     diffuse radiation"
-    annotation(Dialog(group="window"));
+  parameter Modelica.Units.SI.TransmissionCoefficient g_TotDir[n] "Total energy transmittance of windows with closed sunscreen for
+    direct radiation" annotation (Dialog(group="window"));
+  parameter Modelica.Units.SI.TransmissionCoefficient g_TotDif[n] "Total energy transmittance of windows with closed sunscreen for
+     diffuse radiation" annotation (Dialog(group="window"));
   Modelica.Blocks.Interfaces.RealInput incAng[n](
     final quantity="Angle",
     final unit="rad",

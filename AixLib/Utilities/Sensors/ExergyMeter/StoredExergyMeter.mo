@@ -1,20 +1,20 @@
 within AixLib.Utilities.Sensors.ExergyMeter;
 model StoredExergyMeter
 
-    extends Modelica.Icons.RotationalSensor;
+    extends Modelica.Icons.RoundSensor;
 
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the sensor" annotation (choicesAllMatching=true);
 
   parameter Integer n=1 "Number of identical volumes";
 
-  parameter Modelica.SIunits.Mass mass=100 "mass of each layer";
-  parameter Modelica.SIunits.Temperature T_start=323.15
+  parameter Modelica.Units.SI.Mass mass=100 "mass of each layer";
+  parameter Modelica.Units.SI.Temperature T_start=323.15
     "Start reference temperature of medium"
     annotation (Dialog(tab="Initialisation"));
-  parameter Modelica.SIunits.Temperature T_ref_start=273.15
+  parameter Modelica.Units.SI.Temperature T_ref_start=273.15
     "Start reference temperature" annotation (Dialog(tab="Initialisation"));
-  parameter Modelica.SIunits.Energy exergyContent_start = 1e+05
+  parameter Modelica.Units.SI.Energy exergyContent_start=1e+05
     "Start exergy content" annotation (Dialog(tab="Initialisation"));
 
   Modelica.Fluid.Sensors.SpecificEntropy specificEntropy[n](redeclare package Medium =

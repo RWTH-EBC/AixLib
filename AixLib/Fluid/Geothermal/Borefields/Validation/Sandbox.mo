@@ -3,7 +3,7 @@ model Sandbox "Validation of BorefieldOneUTube based on the experiment of Beier 
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;
 
-  parameter Modelica.SIunits.Temperature T_start = 273.15 + 22.09
+  parameter Modelica.Units.SI.Temperature T_start=273.15 + 22.09
     "Initial temperature of the sandbox";
 
   // mSenFac is set to its numerical value because it is a constant in the borehole model.
@@ -31,7 +31,6 @@ model Sandbox "Validation of BorefieldOneUTube based on the experiment of Beier 
     addPowerToMedium=false,
     use_inputFilter=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     m_flow_nominal=borFieDat.conDat.mBorFie_flow_nominal,
     nominalValuesDefineDefaultPressureCurve=true,
     inputType=AixLib.Fluid.Types.InputType.Constant)
@@ -93,52 +92,52 @@ equation
           -14},{-52,-14}},
                         color={0,0,127}));
   annotation (experiment(Tolerance=1e-6, StopTime=186360),
-  __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/Sandbox.mos"
+  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/Sandbox.mos"
         "Simulate and Plot"),
 Documentation(info="<html>
-<p>
-This validation case simulates the experiment of Beier et al. (2011). Measured
-experimental data is taken from the reference.
-</p>
-<p>
-The experiment consists in the injection of heat at an average rate of 1142 W
-in a 18 m long borehole over a period 52 h. Dimensions and thermal properties
-reported by Beier et al. (2011) are used in the model. The authors conducted
-multiple independent measurements of soil thermal conductivity. The average of
-reported values (2.88 W/m-K) is used here. Finally, the filling material thermal
-capacity and density was not reported. Values were chosen from the estimated
-volumetric heat capacity used by Pasquier and Marcotte (2014).
-</p>
-<p>
-The construction of the borehole is non-conventional: the borehole is
-contained within an aluminum pipe that acts as the borehole wall. As this
-modifies the thermal resistances inside the borehole, the values evaluated by
-the multipole method are modified to obtain the effective borehole thermal
-resistance reported by Beier et al. (2011).
-<h4>References</h4>
-<p>
-Beier, R.A., Smith, M.D. and Spitler, J.D. 2011. <i>Reference data sets for
-vertical borehole ground heat exchanger models and thermal response test
-analysis</i>. Geothermics 40: 79-85.
-</p>
-<p>
-Pasquier, P., and Marcotte, D. 2014. <i>Joint use of quasi-3D response model and
-spectral method to simulate borehole heat exchanger</i>. Geothermics 51:
-281-299.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 8, 2021, by Michael Wetter:<br/>
-Added missing <code>parameter</code> keyword.<br/>
-For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">AixLib, issue 1464</a>.
-</li>
-<li>
-July 18, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})));
+ <p>
+ This validation case simulates the experiment of Beier et al. (2011). Measured
+ experimental data is taken from the reference.
+ </p>
+ <p>
+ The experiment consists in the injection of heat at an average rate of 1142 W
+ in a 18 m long borehole over a period 52 h. Dimensions and thermal properties
+ reported by Beier et al. (2011) are used in the model. The authors conducted
+ multiple independent measurements of soil thermal conductivity. The average of
+ reported values (2.88 W/m-K) is used here. Finally, the filling material thermal
+ capacity and density was not reported. Values were chosen from the estimated
+ volumetric heat capacity used by Pasquier and Marcotte (2014).
+ </p>
+ <p>
+ The construction of the borehole is non-conventional: the borehole is
+ contained within an aluminum pipe that acts as the borehole wall. As this
+ modifies the thermal resistances inside the borehole, the values evaluated by
+ the multipole method are modified to obtain the effective borehole thermal
+ resistance reported by Beier et al. (2011).
+ <h4>References</h4>
+ <p>
+ Beier, R.A., Smith, M.D. and Spitler, J.D. 2011. <i>Reference data sets for
+ vertical borehole ground heat exchanger models and thermal response test
+ analysis</i>. Geothermics 40: 79-85.
+ </p>
+ <p>
+ Pasquier, P., and Marcotte, D. 2014. <i>Joint use of quasi-3D response model and
+ spectral method to simulate borehole heat exchanger</i>. Geothermics 51:
+ 281-299.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 8, 2021, by Michael Wetter:<br/>
+ Added missing <code>parameter</code> keyword.<br/>
+ For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">IBPSA, issue 1464</a>.
+ </li>
+ <li>
+ July 18, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Sandbox;

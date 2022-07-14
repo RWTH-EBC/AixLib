@@ -89,54 +89,55 @@ equation
           fillPattern=FillPattern.Solid,
           fillColor={255,255,255}), Text(
           extent={{-98,-90},{-62,-72}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="P",
           visible=use_p_in)}),
     Documentation(info="<html>
-<p>
-Model of a sink that takes as an input the medium properties
-temperature, mass fractions (if <code>Medium.nXi &gt; 0</code>)
-and trace substances (if <code>Medium.nC &gt; 0</code>).
-These properties are used during reverse flow.
-</p>
-<p>
-For a system of components with the connectors of the
-<a href=\"modelica://AixLib.Fluid.FMI\">
-AixLib.Fluid.FMI</a>
-package, this component is required to set the medium properties
-for the reverse flow.
-</p>
-<p>
-If the parameter <code>use_p_in</code> is set to <code>true</code>,
-then the model has an output connector <code>p</code>.
-This can be used to obtain the pressure of the sink, which
-may be needed to iteratively solve for the mass flow rate.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air and water.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-April 29, 2015, by Michael Wetter:<br/>
-Redesigned to conditionally remove the pressure connector
-if <code>use_p_in=false</code>.
-</li>
-<li>
-April 29, 2015, by Michael Wetter:<br/>
-Added pressure output signal which is needed to solve for algebraic loops.
-</li>
-<li>
-April 15, 2015 by Michael Wetter:<br/>
-Changed connector variable to be temperature instead of
-specific enthalpy.
-</li>
-<li>
-November 8, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Model of a sink that takes as an input the medium properties
+ temperature, mass fractions (if <code>Medium.nXi &gt; 0</code>)
+ and trace substances (if <code>Medium.nC &gt; 0</code>).
+ These properties are used during reverse flow.
+ </p>
+ <p>
+ For a system of components with the connectors of the
+ <a href=\"modelica://AixLib.Fluid.FMI\">
+ AixLib.Fluid.FMI</a>
+ package, this component is required to set the medium properties
+ for the reverse flow.
+ </p>
+ <p>
+ If the parameter <code>use_p_in</code> is set to <code>true</code>,
+ then the model has an output connector <code>p</code>.
+ This can be used to obtain the pressure of the sink, which
+ may be needed to iteratively solve for the mass flow rate.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air and water.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ April 29, 2015, by Michael Wetter:<br/>
+ Redesigned to conditionally remove the pressure connector
+ if <code>use_p_in=false</code>.
+ </li>
+ <li>
+ April 29, 2015, by Michael Wetter:<br/>
+ Added pressure output signal which is needed to solve for algebraic loops.
+ </li>
+ <li>
+ April 15, 2015 by Michael Wetter:<br/>
+ Changed connector variable to be temperature instead of
+ specific enthalpy.
+ </li>
+ <li>
+ November 8, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Sink_T;

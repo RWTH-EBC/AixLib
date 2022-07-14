@@ -1,7 +1,7 @@
 within AixLib.Utilities.Sensors.ExergyMeter;
 model HeatExergyMeter
 
-  extends Modelica.Icons.RotationalSensor;
+  extends Modelica.Icons.RoundSensor;
 
   parameter Boolean useConvectiveHeatFlow=true
     "Set to 'true' in order to connect the meter to a convective heat port";
@@ -10,7 +10,7 @@ model HeatExergyMeter
   parameter Boolean solarRadiation=false
     "Set to 'true' in order to connect the meter to a solar radiation port"
     annotation (Dialog(enable=if useRadiativeHeatFlow then true else false));
-  parameter Modelica.SIunits.ThermodynamicTemperature sunTemperature=6000
+  parameter Modelica.Units.SI.ThermodynamicTemperature sunTemperature=6000
     "Temperature assumption for the solar radiation";
   Modelica.Blocks.Math.Add add(k2=-1) "Subtract the temperature ratio from one"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));

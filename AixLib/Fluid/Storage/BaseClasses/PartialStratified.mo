@@ -5,10 +5,10 @@ model PartialStratified
 
   import Modelica.Fluid.Types;
   import Modelica.Fluid.Types.Dynamics;
-  parameter Modelica.SIunits.Volume VTan "Tank volume";
-  parameter Modelica.SIunits.Length hTan "Height of tank (without insulation)";
-  parameter Modelica.SIunits.Length dIns "Thickness of insulation";
-  parameter Modelica.SIunits.ThermalConductivity kIns = 0.04
+  parameter Modelica.Units.SI.Volume VTan "Tank volume";
+  parameter Modelica.Units.SI.Length hTan "Height of tank (without insulation)";
+  parameter Modelica.Units.SI.Length dIns "Thickness of insulation";
+  parameter Modelica.Units.SI.ThermalConductivity kIns=0.04
     "Specific heat conductivity of insulation";
   parameter Integer nSeg(min=2) = 2 "Number of volume segments";
 
@@ -16,10 +16,7 @@ model PartialStratified
   // Assumptions
   parameter Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial
     "Formulation of energy balance"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  parameter Types.Dynamics massDynamics=energyDynamics
-    "Formulation of mass balance"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
 
   // Initialization
   parameter Medium.AbsolutePressure p_start = Medium.p_default
@@ -28,9 +25,9 @@ model PartialStratified
   parameter Medium.Temperature T_start=Medium.T_default
     "Start value of temperature"
     annotation(Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.Temperature TFlu_start[nSeg]=T_start*ones(nSeg)
+  parameter Modelica.Units.SI.Temperature TFlu_start[nSeg]=T_start*ones(nSeg)
     "Initial temperature of the tank segments, with TFlu_start[1] being the top segment"
-    annotation(Dialog(tab = "Initialization"));
+    annotation (Dialog(tab="Initialization"));
   parameter Medium.MassFraction X_start[Medium.nX] = Medium.X_default
     "Start value of mass fractions m_i/m"
     annotation (Dialog(tab="Initialization", enable=Medium.nXi > 0));
@@ -40,7 +37,7 @@ model PartialStratified
     annotation (Dialog(tab="Initialization", enable=Medium.nC > 0));
 
   // Dynamics
-  parameter Modelica.SIunits.Time tau=1 "Time constant for mixing";
+  parameter Modelica.Units.SI.Time tau=1 "Time constant for mixing";
 
   ////////////////////////////////////////////////////////////////////
   // Connectors
@@ -68,7 +65,7 @@ model PartialStratified
   AixLib.Fluid.MixingVolumes.MixingVolume[nSeg] vol(
     redeclare each package Medium = Medium,
     each energyDynamics=energyDynamics,
-    each massDynamics=massDynamics,
+    each massDynamics=energyDynamics,
     each p_start=p_start,
     T_start=TFlu_start,
     each X_start=X_start,
@@ -84,15 +81,15 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-  parameter Modelica.SIunits.Length hSeg = hTan / nSeg
-    "Height of a tank segment";
-  parameter Modelica.SIunits.Area ATan = VTan/hTan
+  parameter Modelica.Units.SI.Length hSeg=hTan/nSeg "Height of a tank segment";
+  parameter Modelica.Units.SI.Area ATan=VTan/hTan
     "Tank cross-sectional area (without insulation)";
-  parameter Modelica.SIunits.Length rTan = sqrt(ATan/Modelica.Constants.pi)
+  parameter Modelica.Units.SI.Length rTan=sqrt(ATan/Modelica.Constants.pi)
     "Tank diameter (without insulation)";
-  parameter Modelica.SIunits.ThermalConductance conFluSeg = ATan*Medium.thermalConductivity(sta_default)/hSeg
+  parameter Modelica.Units.SI.ThermalConductance conFluSeg=ATan*
+      Medium.thermalConductivity(sta_default)/hSeg
     "Thermal conductance between fluid volumes";
-  parameter Modelica.SIunits.ThermalConductance conTopSeg = ATan*kIns/dIns
+  parameter Modelica.Units.SI.ThermalConductance conTopSeg=ATan*kIns/dIns
     "Thermal conductance from center of top (or bottom) volume through tank insulation at top (or bottom)";
 
   BaseClasses.Buoyancy buo(
@@ -188,133 +185,139 @@ equation
       smooth=Smooth.None));
   annotation (
 Documentation(info="<html>
-<p>
-This is a partial model of a stratified storage tank.
-</p>
-<p>
-See the
-<a href=\"modelica://AixLib.Fluid.Storage.UsersGuide\">
-AixLib.Fluid.Storage.UsersGuide</a>
-for more information.
-</p>
-<h4>Implementation</h4>
-<p>
-This model does not include the ports that connect to the fluid from
-the outside, because these ports cannot be used for the models that
-contain the
-<a href=\"modelica://AixLib.Fluid.Storage.BaseClasses.ThirdOrderStratifier\">
-AixLib.Fluid.Storage.BaseClasses.ThirdOrderStratifier</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 13, 2019 by Jianjun Hu:<br/>
-Added parameter <code>TFlu_start</code> and changed the initial tank segments
-temperature to <code>TFlu_start</code> so each segment could have different
-temperature.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1246\">#1246</a>.
-</li>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-<li>
-June 1, 2018, by Michael Wetter:<br/>
-Refactored model to allow a fluid port in the tank that do not have
-the enhanced stratification model.<br/>
-This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1182\">
-issue 1182</a>.
-</li>
-<li>
-July 29, 2017, by Michael Wetter:<br/>
-Removed medium declaration, which is not needed and inconsistent with
-the declaration in the base class.
-This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/544\">
-issue 544</a>.
-</li>
-<li>
-March 28, 2015, by Filip Jorissen:<br/>
-Propagated <code>allowFlowReversal</code> and <code>m_flow_small</code>
-and set <code>mSenFac=1</code>.
-</li>
-<li>
-January 26, 2015, by Michael Wetter:<br/>
-Renamed
-<code>hA_flow</code> to <code>H_a_flow</code>,
-<code>hB_flow</code> to <code>H_b_flow</code> and
-<code>hVol_flow</code> to <code>H_vol_flow</code>
-as they output enthalpy flow rate, and not specific enthalpy.
-Made various models <code>protected</code>.
-</li>
-<li>
-January 25, 2015, by Michael Wetter:<br/>
-Added <code>final</code> to <code>tau = 0</code> in <code>EnthalpyFlowRate</code>.
-These sensors do not need dynamics as the enthalpy flow rate
-is used to compute a heat flow which is then added to the volume of the tank.
-Thus, if there were high frequency oscillations of small mass flow rates,
-then they have a small effect on <code>H_flow</code>, and they are
-not used in any control loop. Rather, the oscillations are further damped
-by the differential equation of the fluid volume.
-</li>
-<li>
-January 25, 2015, by Filip Jorissen:<br/>
-Set <code>tau = 0</code> in <code>EnthalpyFlowRate</code>
-sensors for increased simulation speed.
-</li>
-<li>
-August 29, 2014, by Michael Wetter:<br/>
-Replaced the use of <code>Medium.lambda_const</code> with
-<code>Medium.thermalConductivity(sta_default)</code> as
-<code>lambda_const</code> is not declared for all media.
-This avoids a translation error if certain media are used.
-</li>
-<li>
-June 18, 2014, by Michael Wetter:<br/>
-Changed the default value for the energy balance initialization to avoid
-a dependency on the global <code>system</code> declaration.
-</li>
-<li>
-July 29, 2011, by Michael Wetter:<br/>
-Removed <code>use_T_start</code> and <code>h_start</code>.
-</li>
-<li>
-February 18, 2011, by Michael Wetter:<br/>
-Changed default start values for temperature and pressure.
-</li>
-<li>
-October 25, 2009 by Michael Wetter:<br/>
-Changed computation of heat transfer through top (and bottom) of tank. Now,
-the thermal resistance of the fluid is not taken into account, i.e., the
-top (and bottom) element is assumed to be mixed.
-</li>
-<li>
-October 23, 2009 by Michael Wetter:<br/>
-Fixed bug in computing heat conduction of top and bottom segment.
-In the previous version,
-for computing the heat conduction between the top (or bottom) segment and
-the outside,
-the whole thickness of the water volume was used
-instead of only half the thickness.
-</li>
-<li>
-February 19, 2009 by Michael Wetter:<br/>
-Changed declaration that constrains the medium. The earlier
-declaration caused the medium model to be not shown in the parameter
-window.
-</li>
-<li>
-October 31, 2008 by Michael Wetter:<br/>
-Added heat conduction.
-</li>
-<li>
-October 23, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This is a partial model of a stratified storage tank.
+ </p>
+ <p>
+ See the
+ <a href=\"modelica://AixLib.Fluid.Storage.UsersGuide\">
+ AixLib.Fluid.Storage.UsersGuide</a>
+ for more information.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ This model does not include the ports that connect to the fluid from
+ the outside, because these ports cannot be used for the models that
+ contain the
+ <a href=\"modelica://AixLib.Fluid.Storage.BaseClasses.ThirdOrderStratifier\">
+ AixLib.Fluid.Storage.BaseClasses.ThirdOrderStratifier</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Set <code>final massDynamics=energyDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ November 13, 2019 by Jianjun Hu:<br/>
+ Added parameter <code>TFlu_start</code> and changed the initial tank segments
+ temperature to <code>TFlu_start</code> so each segment could have different
+ temperature.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1246\">#1246</a>.
+ </li>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ <li>
+ June 1, 2018, by Michael Wetter:<br/>
+ Refactored model to allow a fluid port in the tank that do not have
+ the enhanced stratification model.<br/>
+ This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1182\">
+ issue 1182</a>.
+ </li>
+ <li>
+ July 29, 2017, by Michael Wetter:<br/>
+ Removed medium declaration, which is not needed and inconsistent with
+ the declaration in the base class.
+ This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/544\">
+ issue 544</a>.
+ </li>
+ <li>
+ March 28, 2015, by Filip Jorissen:<br/>
+ Propagated <code>allowFlowReversal</code> and <code>m_flow_small</code>
+ and set <code>mSenFac=1</code>.
+ </li>
+ <li>
+ January 26, 2015, by Michael Wetter:<br/>
+ Renamed
+ <code>hA_flow</code> to <code>H_a_flow</code>,
+ <code>hB_flow</code> to <code>H_b_flow</code> and
+ <code>hVol_flow</code> to <code>H_vol_flow</code>
+ as they output enthalpy flow rate, and not specific enthalpy.
+ Made various models <code>protected</code>.
+ </li>
+ <li>
+ January 25, 2015, by Michael Wetter:<br/>
+ Added <code>final</code> to <code>tau = 0</code> in <code>EnthalpyFlowRate</code>.
+ These sensors do not need dynamics as the enthalpy flow rate
+ is used to compute a heat flow which is then added to the volume of the tank.
+ Thus, if there were high frequency oscillations of small mass flow rates,
+ then they have a small effect on <code>H_flow</code>, and they are
+ not used in any control loop. Rather, the oscillations are further damped
+ by the differential equation of the fluid volume.
+ </li>
+ <li>
+ January 25, 2015, by Filip Jorissen:<br/>
+ Set <code>tau = 0</code> in <code>EnthalpyFlowRate</code>
+ sensors for increased simulation speed.
+ </li>
+ <li>
+ August 29, 2014, by Michael Wetter:<br/>
+ Replaced the use of <code>Medium.lambda_const</code> with
+ <code>Medium.thermalConductivity(sta_default)</code> as
+ <code>lambda_const</code> is not declared for all media.
+ This avoids a translation error if certain media are used.
+ </li>
+ <li>
+ June 18, 2014, by Michael Wetter:<br/>
+ Changed the default value for the energy balance initialization to avoid
+ a dependency on the global <code>system</code> declaration.
+ </li>
+ <li>
+ July 29, 2011, by Michael Wetter:<br/>
+ Removed <code>use_T_start</code> and <code>h_start</code>.
+ </li>
+ <li>
+ February 18, 2011, by Michael Wetter:<br/>
+ Changed default start values for temperature and pressure.
+ </li>
+ <li>
+ October 25, 2009 by Michael Wetter:<br/>
+ Changed computation of heat transfer through top (and bottom) of tank. Now,
+ the thermal resistance of the fluid is not taken into account, i.e., the
+ top (and bottom) element is assumed to be mixed.
+ </li>
+ <li>
+ October 23, 2009 by Michael Wetter:<br/>
+ Fixed bug in computing heat conduction of top and bottom segment.
+ In the previous version,
+ for computing the heat conduction between the top (or bottom) segment and
+ the outside,
+ the whole thickness of the water volume was used
+ instead of only half the thickness.
+ </li>
+ <li>
+ February 19, 2009 by Michael Wetter:<br/>
+ Changed declaration that constrains the medium. The earlier
+ declaration caused the medium model to be not shown in the parameter
+ window.
+ </li>
+ <li>
+ October 31, 2008 by Michael Wetter:<br/>
+ Added heat conduction.
+ </li>
+ <li>
+ October 23, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 Icon(graphics={
         Rectangle(
           extent={{-40,60},{40,20}},
@@ -383,7 +386,7 @@ Icon(graphics={
           fillPattern=FillPattern.CrossDiag),
         Text(
           extent={{100,106},{134,74}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="QLoss"),
         Rectangle(
           extent={{-10,10},{10,-10}},
@@ -425,5 +428,6 @@ Icon(graphics={
         Line(
           points={{22,-74},{70,-74},{70,72}},
           color={127,0,0},
-          pattern=LinePattern.Dot)}));
+          pattern=LinePattern.Dot)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialStratified;

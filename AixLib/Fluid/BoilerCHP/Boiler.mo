@@ -1,8 +1,8 @@
 ﻿within AixLib.Fluid.BoilerCHP;
 model Boiler "Boiler with internal and external control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.pressureDrop,
-                                     vol(energyDynamics=energyDynamics,
-                                         V=paramBoiler.volume));
+                                      vol(energyDynamics=energyDynamics,
+                                          V=paramBoiler.volume));
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler
@@ -17,24 +17,24 @@ model Boiler "Boiler with internal and external control"
   parameter Real KR=1
     "Gain of Boiler heater"
     annotation (Dialog(tab = "General", group = "Boiler type"));
-  parameter Modelica.SIunits.Time TN=0.1
+  parameter Modelica.Units.SI.Time TN=0.1
     "Time Constant of boiler heater (T>0 required)"
-    annotation (Dialog(tab = "General", group = "Boiler type"));
-  parameter Modelica.SIunits.Time riseTime=30
+    annotation (Dialog(tab="General", group="Boiler type"));
+  parameter Modelica.Units.SI.Time riseTime=30
     "Rise/Fall time for step input(T>0 required)"
-    annotation (Dialog(tab = "General", group = "Boiler type"));
+    annotation (Dialog(tab="General", group="Boiler type"));
   parameter Real declination=1.1
     "Declination"
     annotation(Dialog(tab="External Control"));
-  parameter Modelica.SIunits.TemperatureDifference Tdelta_Max=2
+  parameter Modelica.Units.SI.TemperatureDifference Tdelta_Max=2
     "Difference from set flow temperature over which boiler stops"
-    annotation(Dialog(tab="External Control"));
-  parameter Modelica.SIunits.TemperatureDifference Tdelta_Min=2
+    annotation (Dialog(tab="External Control"));
+  parameter Modelica.Units.SI.TemperatureDifference Tdelta_Min=2
     "Difference from set flow temperature under which boiler starts"
-    annotation(Dialog(tab="External Control"));
-  parameter Modelica.SIunits.Time Fb=3600
+    annotation (Dialog(tab="External Control"));
+  parameter Modelica.Units.SI.Time Fb=3600
     "Period of time for increased set temperature"
-    annotation(Dialog(tab="External Control"));
+    annotation (Dialog(tab="External Control"));
   parameter Real FA=0.2 "Increment for increased set temperature"
     annotation(Dialog(tab="External Control"));
 

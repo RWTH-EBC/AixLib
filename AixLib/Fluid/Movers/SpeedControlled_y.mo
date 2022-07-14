@@ -10,14 +10,17 @@ model SpeedControlled_y
     final constInput(final unit="1") =       per.constantSpeed,
     filter(
       final y_start=y_start,
-      u_nominal=1,
       u(final unit="1"),
       y(final unit="1")),
     eff(
       per(final pressure = per.pressure,
-          final use_powerCharacteristic = per.use_powerCharacteristic)),
+          final use_powerCharacteristic = per.use_powerCharacteristic),
+          r_N(start=y_start)),
     gaiSpe(u(final unit="1"),
            final k=1/per.speed_nominal));
+
+  parameter Real y_start(min=0, max=1, unit="1")=0 "Initial value of speed"
+    annotation(Dialog(tab="Dynamics", group="Filtered speed", enable=use_inputFilter));
 
   Modelica.Blocks.Interfaces.RealInput y(
     unit="1")
@@ -52,11 +55,10 @@ equation
                                                      color={0,0,127}));
 
   if use_inputFilter then
-    connect(filter.y, eff.y_in) annotation (Line(points={{34.7,88},{38,88},{38,26},
-            {-26,26},{-26,-46},{-26,-48},{-26,-46},{-26,-46}},
-                                      color={0,0,127}));
+    connect(filter.y, eff.y_in) annotation (Line(points={{41,70.5},{44,70.5},{44,
+            26},{-26,26},{-26,-46}},  color={0,0,127}));
   else
-    connect(inputSwitch.y, eff.y_in) annotation (Line(points={{1,50},{38,50},{38,
+    connect(inputSwitch.y, eff.y_in) annotation (Line(points={{1,50},{44,50},{44,
             26},{-26,26},{-26,-46}},
                                    color={0,0,127}));
   end if;
@@ -67,93 +69,106 @@ equation
          graphics={
         Text(
           extent={{-40,126},{-160,76}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           visible=inputType == AixLib.Fluid.Types.InputType.Continuous or inputType == AixLib.Fluid.Types.InputType.Stages,
           textString=DynamicSelect("y", if inputType == AixLib.Fluid.Types.InputType.Continuous then String(y, format=".2f") else String(stage)))}),
     Documentation(info="<html>
-<p>
-This model describes a fan or pump with prescribed normalized speed.
-The input connector provides the normalized rotational speed (between 0 and 1).
-The head is computed based on the performance curve that take as an argument
-the actual volume flow rate divided by the maximum flow rate and the relative
-speed of the fan.
-The efficiency of the device is computed based
-on the efficiency curves that take as an argument
-the actual volume flow rate divided by the maximum possible volume flow rate, or
-based on the motor performance curves.
-</p>
-<p>
-See the
-<a href=\"modelica://AixLib.Fluid.Movers.UsersGuide\">
-User's Guide</a> for more information.
-</p>
-</html>",
+ <p>
+ This model describes a fan or pump with prescribed normalized speed.
+ The input connector provides the normalized rotational speed (between 0 and 1).
+ The head is computed based on the performance curve that take as an argument
+ the actual volume flow rate divided by the maximum flow rate and the relative
+ speed of the fan.
+ The efficiency of the device is computed based
+ on the efficiency curves that take as an argument
+ the actual volume flow rate divided by the maximum possible volume flow rate, or
+ based on the motor performance curves.
+ </p>
+ <p>
+ See the
+ <a href=\"modelica://AixLib.Fluid.Movers.UsersGuide\">
+ User's Guide</a> for more information.
+ </p>
+ </html>",
       revisions="<html>
-<ul>
-<li>
-February 21, 2020, by Michael Wetter:<br/>
-Changed icon to display its operating stage.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
-</li>
-<li>
-March 24, 2017, by Michael Wetter:<br/>
-Renamed <code>filteredSpeed</code> to <code>use_inputFilter</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
-</li>
-<li>
-December 2, 2016, by Michael Wetter:<br/>
-Removed <code>min</code> attribute as otherwise numerical noise can cause
-the assertion on the limit to fail.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
-</li>
-<li>
-March 2, 2016, by Filip Jorissen:<br/>
-Refactored model such that it directly extends <code>PartialFlowMachine</code>.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
-</li>
-<li>
-February 17, 2016, by Michael Wetter:<br/>
-Updated parameter names for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
-</li>
-<li>
-April 2, 2015, by Filip Jorissen:<br/>
-Added code for supporting stage input and constant input.
-</li>
-<li>
-January 6, 2015, by Michael Wetter:<br/>
-Revised model for OpenModelica.
-</li>
-<li>
-November 22, 2014, by Michael Wetter:<br/>
-Revised implementation that uses the new performance data as a record.
-</li>
-<li>
-February 14, 2012, by Michael Wetter:<br/>
-Added filter for start-up and shut-down transient.
-</li>
-<li>
-May 25, 2011, by Michael Wetter:<br/>
-Revised implementation of energy balance to avoid having to use conditionally removed models.
-</li>
-<li>
-July 27, 2010, by Michael Wetter:<br/>
-Redesigned model to fix bug in medium balance.
-</li>
-<li>March 24, 2010, by Michael Wetter:<br/>
-Revised implementation to allow zero flow rate.
-</li>
-<li>
-October 1, 2009, by Michael Wetter:<br/>
-Model added to the AixLib library. Changed control signal from rpm to normalized value between 0 and 1</li>
-<li>
-October 31, 2005 by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br/>
-Model added to the Fluid library
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Set <code>final massDynamics=energyDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ June 17, 2021, by Michael Wetter:<br/>
+ Changed implementation of the filter.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">#1498</a>.
+ </li>
+ <li>
+ February 21, 2020, by Michael Wetter:<br/>
+ Changed icon to display its operating stage.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1294\">#1294</a>.
+ </li>
+ <li>
+ March 24, 2017, by Michael Wetter:<br/>
+ Renamed <code>filteredSpeed</code> to <code>use_inputFilter</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+ </li>
+ <li>
+ December 2, 2016, by Michael Wetter:<br/>
+ Removed <code>min</code> attribute as otherwise numerical noise can cause
+ the assertion on the limit to fail.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
+ </li>
+ <li>
+ March 2, 2016, by Filip Jorissen:<br/>
+ Refactored model such that it directly extends <code>PartialFlowMachine</code>.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
+ </li>
+ <li>
+ February 17, 2016, by Michael Wetter:<br/>
+ Updated parameter names for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/396\">#396</a>.
+ </li>
+ <li>
+ April 2, 2015, by Filip Jorissen:<br/>
+ Added code for supporting stage input and constant input.
+ </li>
+ <li>
+ January 6, 2015, by Michael Wetter:<br/>
+ Revised model for OpenModelica.
+ </li>
+ <li>
+ November 22, 2014, by Michael Wetter:<br/>
+ Revised implementation that uses the new performance data as a record.
+ </li>
+ <li>
+ February 14, 2012, by Michael Wetter:<br/>
+ Added filter for start-up and shut-down transient.
+ </li>
+ <li>
+ May 25, 2011, by Michael Wetter:<br/>
+ Revised implementation of energy balance to avoid having to use conditionally removed models.
+ </li>
+ <li>
+ July 27, 2010, by Michael Wetter:<br/>
+ Redesigned model to fix bug in medium balance.
+ </li>
+ <li>March 24, 2010, by Michael Wetter:<br/>
+ Revised implementation to allow zero flow rate.
+ </li>
+ <li>
+ October 1, 2009, by Michael Wetter:<br/>
+ Model added to the AixLib library. Changed control signal from rpm to normalized value between 0 and 1</li>
+ <li>
+ October 31, 2005 by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br/>
+ Model added to the Fluid library
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SpeedControlled_y;

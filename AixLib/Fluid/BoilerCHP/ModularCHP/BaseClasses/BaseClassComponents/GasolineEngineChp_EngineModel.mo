@@ -24,37 +24,52 @@ model GasolineEngineChp_EngineModel
     CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_SenerTecDachsG5_5()
     "Needed engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  constant Modelica.SIunits.Volume VCyl = CHPEngData.VEng/CHPEngData.z "Cylinder displacement";
+  constant Modelica.Units.SI.Volume VCyl=CHPEngData.VEng/CHPEngData.z
+    "Cylinder displacement";
   type RotationSpeed=Real(final unit="1/s", min=0);
   constant RotationSpeed nEngNominal = 25.583 "Nominal engine speed at operating point";
-  constant Modelica.SIunits.Power P_mecNominal = CHPEngData.P_mecNominal "Mecanical power output at nominal operating point";
-  parameter Modelica.SIunits.Temperature T_Amb=298.15     "Ambient temperature (matches to fuel and combustion air temperature)";
+  constant Modelica.Units.SI.Power P_mecNominal=CHPEngData.P_mecNominal
+    "Mecanical power output at nominal operating point";
+  parameter Modelica.Units.SI.Temperature T_Amb=298.15
+    "Ambient temperature (matches to fuel and combustion air temperature)";
   type GasConstant=Real(final unit="J/(mol.K)");
   constant GasConstant R = 8.31446 "Gasconstant for calculation purposes";
   constant Real QuoDCyl = CHPEngData.QuoDCyl;
   constant Boolean FuelType = Medium1.isGas "True = Gasoline fuel, False = Liquid fuel";
-  constant Modelica.SIunits.MassFlowRate m_MaxExh=CHPEngData.P_FueNominal/H_U*(1
-       + Lambda*L_St)
+  constant Modelica.Units.SI.MassFlowRate m_MaxExh=CHPEngData.P_FueNominal/H_U*
+      (1 + Lambda*L_St)
     "Maximal exhaust gas flow based on the fuel and combustion properties";
-  constant Modelica.SIunits.Mass m_FueEngRot=CHPEngData.P_FueNominal*60/(H_U*
+  constant Modelica.Units.SI.Mass m_FueEngRot=CHPEngData.P_FueNominal*60/(H_U*
       CHPEngData.nEngMax*CHPEngData.i)
     "Injected fuel mass per engine rotation(presumed as constant)";
-  constant Modelica.SIunits.Pressure p_Amb = 101325 "Ambient pressure";
-  constant Modelica.SIunits.Pressure p_mi = p_mfNominal+p_meNominal "Constant indicated mean effective cylinder pressure";
-  constant Modelica.SIunits.Pressure p_meNominal = CHPEngData.p_meNominal "Nominal mean effective cylinder pressure";
-  constant Modelica.SIunits.Pressure ref_p_mfNominal = CHPEngData.ref_p_mfNominal "Friction mean pressure of reference engine for calculation(dCyl=91mm & nEng=3000rpm & TEng=90°C)";
-  constant Modelica.SIunits.Pressure p_mfNominal=ref_p_mfNominal*QuoDCyl^(-0.3) "Nominal friction mean pressure";
-  constant Modelica.SIunits.Temperature T_ExhOut = CHPEngData.T_ExhPowUniOut "Assumed exhaust gas outlet temperature of the CHP unit for heat calculations";
-  constant Modelica.SIunits.SpecificEnergy H_U = Medium1.H_U "Specific calorific value of the fuel";
+  constant Modelica.Units.SI.Pressure p_Amb=101325 "Ambient pressure";
+  constant Modelica.Units.SI.Pressure p_mi=p_mfNominal + p_meNominal
+    "Constant indicated mean effective cylinder pressure";
+  constant Modelica.Units.SI.Pressure p_meNominal=CHPEngData.p_meNominal
+    "Nominal mean effective cylinder pressure";
+  constant Modelica.Units.SI.Pressure ref_p_mfNominal=CHPEngData.ref_p_mfNominal
+    "Friction mean pressure of reference engine for calculation(dCyl=91mm & nEng=3000rpm & TEng=90°C)";
+  constant Modelica.Units.SI.Pressure p_mfNominal=ref_p_mfNominal*QuoDCyl^(-0.3)
+    "Nominal friction mean pressure";
+  constant Modelica.Units.SI.Temperature T_ExhOut=CHPEngData.T_ExhPowUniOut
+    "Assumed exhaust gas outlet temperature of the CHP unit for heat calculations";
+  constant Modelica.Units.SI.SpecificEnergy H_U=Medium1.H_U
+    "Specific calorific value of the fuel";
   constant Real Lambda=CHPEngData.Lambda "Combustion air ratio";
   constant Real L_St = Medium1.L_st "Stoichiometric air consumption per mass fuel";
   constant Real l_Min = L_St*MM_Fuel/MM_Air "Minimum molar air consumption per mole fuel";
-  constant Modelica.SIunits.MolarMass MM_Fuel = Medium1.MM "Molar mass of the fuel";
-  constant Modelica.SIunits.MolarMass MM_Air = Medium2.MM "Molar mass of the combustion air";
-  constant Modelica.SIunits.MolarMass MM_ComExh[:] = Medium3.data[:].MM "Molar masses of the combustion products: N2, O2, H2O, CO2";
+  constant Modelica.Units.SI.MolarMass MM_Fuel=Medium1.MM
+    "Molar mass of the fuel";
+  constant Modelica.Units.SI.MolarMass MM_Air=Medium2.MM
+    "Molar mass of the combustion air";
+  constant Modelica.Units.SI.MolarMass MM_ComExh[:]=Medium3.data[:].MM
+    "Molar masses of the combustion products: N2, O2, H2O, CO2";
   constant Real expFacCpComExh[:] = {0.11, 0.15, 0.20, 0.30} "Exponential factor for calculating the specific heat capacity of N2, O2, H2O, CO2";
-  constant Modelica.SIunits.SpecificHeatCapacity cpRefComExh[:] = {1000, 900, 1750, 840} "Specific heat capacities of the combustion products at reference state at 0°C";
-  constant Modelica.SIunits.Temperature RefT_Com = 1473.15 "Reference combustion temperature for calculation purposes";
+  constant Modelica.Units.SI.SpecificHeatCapacity cpRefComExh[:]={1000,900,1750,
+      840}
+    "Specific heat capacities of the combustion products at reference state at 0°C";
+  constant Modelica.Units.SI.Temperature RefT_Com=1473.15
+    "Reference combustion temperature for calculation purposes";
 
   // Exhaust composition for gasoline fuels
 
@@ -67,39 +82,52 @@ model GasolineEngineChp_EngineModel
   else Medium1.Fuel.Xi_liq[1]*Medium1.MM/Medium1.Fuel.MMi_liq[1] "Exhaust: Number of molecules CO2 per mole of fuel";
   constant Real n_ComExh[:] = {n_N2Exh, n_O2Exh, n_H2OExh, n_CO2Exh};
   constant Real n_Exh = sum(n_ComExh[j] for j in 1:size(n_ComExh, 1)) "Number of exhaust gas molecules per mole of fuel";
-  constant Modelica.SIunits.MolarMass MM_Exh = sum(n_ComExh[i]*MM_ComExh[i] for i in 1:size(n_ComExh, 1))/sum(n_ComExh[i] for i in 1:size(n_ComExh, 1))
-  "Molar mass of the exhaust gas";
-  constant Modelica.SIunits.MassFraction X_N2Exh =  MM_ComExh[1]*n_ComExh[1]/(MM_Exh*n_Exh)  "Mass fraction of N2 in the exhaust gas";
-  constant Modelica.SIunits.MassFraction X_O2Exh =  MM_ComExh[2]*n_ComExh[2]/(MM_Exh*n_Exh)  "Mass fraction of O2 in the exhaust gas";
-  constant Modelica.SIunits.MassFraction X_H2OExh =  MM_ComExh[3]*n_ComExh[3]/(MM_Exh*n_Exh)  "Mass fraction of H2O in the exhaust gas";
-  constant Modelica.SIunits.MassFraction X_CO2Exh =  MM_ComExh[4]*n_ComExh[4]/(MM_Exh*n_Exh)  "Mass fraction of CO2 in the exhaust gas";
-  constant Modelica.SIunits.MassFraction Xi_Exh[size(n_ComExh, 1)] = {X_N2Exh, X_O2Exh, X_H2OExh, X_CO2Exh};
+  constant Modelica.Units.SI.MolarMass MM_Exh=sum(n_ComExh[i]*MM_ComExh[i] for
+      i in 1:size(n_ComExh, 1))/sum(n_ComExh[i] for i in 1:size(n_ComExh, 1))
+    "Molar mass of the exhaust gas";
+  constant Modelica.Units.SI.MassFraction X_N2Exh=MM_ComExh[1]*n_ComExh[1]/(
+      MM_Exh*n_Exh) "Mass fraction of N2 in the exhaust gas";
+  constant Modelica.Units.SI.MassFraction X_O2Exh=MM_ComExh[2]*n_ComExh[2]/(
+      MM_Exh*n_Exh) "Mass fraction of O2 in the exhaust gas";
+  constant Modelica.Units.SI.MassFraction X_H2OExh=MM_ComExh[3]*n_ComExh[3]/(
+      MM_Exh*n_Exh) "Mass fraction of H2O in the exhaust gas";
+  constant Modelica.Units.SI.MassFraction X_CO2Exh=MM_ComExh[4]*n_ComExh[4]/(
+      MM_Exh*n_Exh) "Mass fraction of CO2 in the exhaust gas";
+  constant Modelica.Units.SI.MassFraction Xi_Exh[size(n_ComExh, 1)]={X_N2Exh,
+      X_O2Exh,X_H2OExh,X_CO2Exh};
 
   Boolean SwitchOnOff=true
      "Operation switch of the CHP unit (true=On, false=Off)"
     annotation (Dialog(group="Modulation"));
   RotationSpeed nEng(min=0) "Current engine speed";
-  Modelica.SIunits.MassFlowRate m_flow_Exh "Mass flow rate of exhaust gas";
-  Modelica.SIunits.MassFlowRate m_flow_CO2Exh
+  Modelica.Units.SI.MassFlowRate m_flow_Exh "Mass flow rate of exhaust gas";
+  Modelica.Units.SI.MassFlowRate m_flow_CO2Exh
     "Mass flow rate of CO2 in the exhaust gas";
-  Modelica.SIunits.MassFlowRate m_flow_Fue(min=0) "Mass flow rate of fuel";
-  Modelica.SIunits.MassFlowRate m_flow_Air(min=0)
+  Modelica.Units.SI.MassFlowRate m_flow_Fue(min=0) "Mass flow rate of fuel";
+  Modelica.Units.SI.MassFlowRate m_flow_Air(min=0)
     "Mass flow rate of combustion air";
-  Modelica.SIunits.SpecificHeatCapacity meanCpComExh[size(n_ComExh, 1)] "Calculated specific heat capacities of the exhaust gas components for the calculated combustion temperature";
-  Modelica.SIunits.SpecificHeatCapacity meanCpExh "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature";
-  Modelica.SIunits.SpecificEnergy h_Exh = 1000*(-286 + 1.011*T_ExhCHPOut - 27.29*Lambda + 0.000136*T_ExhCHPOut^2 - 0.0255*T_ExhCHPOut*Lambda + 6.425*Lambda^2) "Specific enthalpy of the exhaust gas";
-  Modelica.SIunits.Power P_eff "Effective(mechanical) engine power";
-  Modelica.SIunits.Power P_Fue(min=0) = m_flow_Fue*H_U
+  Modelica.Units.SI.SpecificHeatCapacity meanCpComExh[size(n_ComExh, 1)]
+    "Calculated specific heat capacities of the exhaust gas components for the calculated combustion temperature";
+  Modelica.Units.SI.SpecificHeatCapacity meanCpExh
+    "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature";
+  Modelica.Units.SI.SpecificEnergy h_Exh=1000*(-286 + 1.011*T_ExhCHPOut - 27.29
+      *Lambda + 0.000136*T_ExhCHPOut^2 - 0.0255*T_ExhCHPOut*Lambda + 6.425*
+      Lambda^2) "Specific enthalpy of the exhaust gas";
+  Modelica.Units.SI.Power P_eff "Effective(mechanical) engine power";
+  Modelica.Units.SI.Power P_Fue(min=0) = m_flow_Fue*H_U
     "Fuel expenses at operating point";
-  Modelica.SIunits.Power H_Exh "Enthalpy stream of the exhaust gas";
-  Modelica.SIunits.Power CalQ_therm "Calculated heat from engine combustion";
-  Modelica.SIunits.Power Q_therm(min=0) "Total heat from engine combustion";
-  Modelica.SIunits.Torque Mmot "Calculated engine torque";
-  Modelica.SIunits.Temperature T_logEngCool=356.15 "Logarithmic mean temperature of coolant inside the engine"
-  annotation(Dialog(group="Parameters"));
-  Modelica.SIunits.Temperature T_Com(start=T_Amb) "Temperature of the combustion gases";
-  Modelica.SIunits.Temperature T_ExhCHPOut=383.15 "Exhaust gas outlet temperature of CHP unit"
-  annotation(Dialog(group="Parameters"));
+  Modelica.Units.SI.Power H_Exh "Enthalpy stream of the exhaust gas";
+  Modelica.Units.SI.Power CalQ_therm "Calculated heat from engine combustion";
+  Modelica.Units.SI.Power Q_therm(min=0) "Total heat from engine combustion";
+  Modelica.Units.SI.Torque Mmot "Calculated engine torque";
+  Modelica.Units.SI.Temperature T_logEngCool=356.15
+    "Logarithmic mean temperature of coolant inside the engine"
+    annotation (Dialog(group="Parameters"));
+  Modelica.Units.SI.Temperature T_Com(start=T_Amb)
+    "Temperature of the combustion gases";
+  Modelica.Units.SI.Temperature T_ExhCHPOut=383.15
+    "Exhaust gas outlet temperature of CHP unit"
+    annotation (Dialog(group="Parameters"));
   Real modFac=1 "Modulation factor for energy outuput control of the Chp unit"
     annotation (Dialog(group="Modulation"));
 
@@ -110,8 +138,11 @@ model GasolineEngineChp_EngineModel
   Real A2 = -4.35*10^(-8)+1.12*10^(-9)*(T_logEngCool-273.15)-4.79*10^(-12)*(T_logEngCool-273.15)^2;
   Real B0 = -2.625*10^(-3)+3.75*10^(-7)*(nEng*60)+1.75*10^(-5)*(T_logEngCool-273.15)+2.5*10^(-9)*(T_logEngCool-273.15)*(nEng*60);
   Real B1 = 8.95*10^(-3)+1.5*10^(-7)*(nEng*60)+7*10^(-6)*(T_logEngCool-273.15)-10^(-9)*(T_logEngCool-273.15)*(nEng*60);
-  Modelica.SIunits.Pressure p_mf = p_mfNominal*((A0+A1*(nEng*60)+A2*(nEng*60)^2)+(B0+B1*(p_meNominal/100000))) "Current friction mean pressure at operating point";
-  Modelica.SIunits.Pressure p_me = (modFac*p_mi)-p_mf "Current mean effective pressure at operating point";
+  Modelica.Units.SI.Pressure p_mf=p_mfNominal*((A0 + A1*(nEng*60) + A2*(nEng*60)
+      ^2) + (B0 + B1*(p_meNominal/100000)))
+    "Current friction mean pressure at operating point";
+  Modelica.Units.SI.Pressure p_me=(modFac*p_mi) - p_mf
+    "Current mean effective pressure at operating point";
   Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
 
   Modelica.Fluid.Interfaces.FluidPort_b port_exh(redeclare package Medium =

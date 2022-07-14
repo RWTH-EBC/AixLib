@@ -95,28 +95,29 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/FlowJunction.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model demonstrates the use of the flow junction model
-for different flow directions.
-The example is configured such that the flow changes its direction in
-each flow leg between <i>t = 0</i> seconds to <i>t = 100</i> seconds.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 2, 2017, by Michael Wetter:<br/>
-Removed import statement.
-</li>
-<li>
-October 14, 2017 by Michael Wetter:<br/>
-Updated documentation and added to Annex 60 library.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
-</li>
-<li>
-July 20, 2007 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model demonstrates the use of the flow junction model
+ for different flow directions.
+ The example is configured such that the flow changes its direction in
+ each flow leg between <i>t = 0</i> seconds to <i>t = 100</i> seconds.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 2, 2017, by Michael Wetter:<br/>
+ Removed import statement.
+ </li>
+ <li>
+ October 14, 2017 by Michael Wetter:<br/>
+ Updated documentation and added to Annex 60 library.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
+ </li>
+ <li>
+ July 20, 2007 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowJunction;

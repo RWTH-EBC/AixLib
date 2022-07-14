@@ -7,27 +7,23 @@ model Membrane "model of membrane"
     "number of parallel membranes";
 
   // Parameters
-  parameter Modelica.SIunits.Length lengthMem
-    "length of membrane in flow direction"
-    annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length widthMem
-    "width of membrane"
-    annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length thicknessMem
-    "thickness of membrane"
-    annotation(Dialog(tab="Geometry"));
+  parameter Modelica.Units.SI.Length lengthMem
+    "length of membrane in flow direction" annotation (Dialog(tab="Geometry"));
+  parameter Modelica.Units.SI.Length widthMem "width of membrane"
+    annotation (Dialog(tab="Geometry"));
+  parameter Modelica.Units.SI.Length thicknessMem "thickness of membrane"
+    annotation (Dialog(tab="Geometry"));
   parameter Boolean couFloArr=true
     "true: counter-flow arrangement; false: quasi-counter-flow arrangement"
      annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.SpecificHeatCapacity cpMem
+  parameter Modelica.Units.SI.SpecificHeatCapacity cpMem
     "mass weighted heat capacity of membrane"
-    annotation(Dialog(tab="Membrane properties",group="Heat Transfer"));
-  parameter Modelica.SIunits.ThermalConductivity lambdaMem
+    annotation (Dialog(tab="Membrane properties", group="Heat Transfer"));
+  parameter Modelica.Units.SI.ThermalConductivity lambdaMem
     "thermal conductivity of membrane"
-    annotation(Dialog(tab="Membrane properties",group="Heat Transfer"));
-  parameter Modelica.SIunits.Density rhoMem
-    "density of membrane"
-    annotation(Dialog(tab="Membrane properties",group="Others"));
+    annotation (Dialog(tab="Membrane properties", group="Heat Transfer"));
+  parameter Modelica.Units.SI.Density rhoMem "density of membrane"
+    annotation (Dialog(tab="Membrane properties", group="Others"));
 
   //Advanced
   parameter Boolean useConPer=true
@@ -44,18 +40,18 @@ model Membrane "model of membrane"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   // Initialization
-  parameter Modelica.SIunits.Temperature T_start
+  parameter Modelica.Units.SI.Temperature T_start
     "start value of membrane's temperature"
-    annotation(Dialog(tab="Initialization", group="Heat Transfer"));
-  parameter Modelica.SIunits.TemperatureDifference dT_start
+    annotation (Dialog(tab="Initialization", group="Heat Transfer"));
+  parameter Modelica.Units.SI.TemperatureDifference dT_start
     "start value for temperature difference between heatPorts_a and heatPorst_b"
-    annotation(Dialog(tab="Initialization", group="Heat Transfer"));
-  parameter Modelica.SIunits.PartialPressure p_start
+    annotation (Dialog(tab="Initialization", group="Heat Transfer"));
+  parameter Modelica.Units.SI.PartialPressure p_start
     "start value for mean partial pressure of water vapour at membrane's surface"
-    annotation(Dialog(tab="Initialization", group="Mass Transfer"));
-  parameter Modelica.SIunits.PartialPressure dp_start
+    annotation (Dialog(tab="Initialization", group="Mass Transfer"));
+  parameter Modelica.Units.SI.PartialPressure dp_start
     "start value for partial pressure difference between membrane's surfaces"
-    annotation(Dialog(tab="Initialization", group="Mass Transfer"));
+    annotation (Dialog(tab="Initialization", group="Mass Transfer"));
 
   // Inputs
   Modelica.Blocks.Interfaces.RealInput perMem(unit="mol/(m.s.Pa)")

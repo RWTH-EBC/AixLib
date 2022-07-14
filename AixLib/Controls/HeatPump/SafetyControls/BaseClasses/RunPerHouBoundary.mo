@@ -2,7 +2,7 @@
 block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
   parameter Integer maxRunPer_h "Number of maximal on/off cycles per hour";
-  parameter Modelica.SIunits.Time delayTime(displayUnit="h") = 3600
+  parameter Modelica.Units.SI.Time delayTime(displayUnit="h") = 3600
     "Delay time of output with respect to input signal";
  Modelica.Blocks.Logical.LessThreshold
                               runCouLesMax(threshold=maxRunPer_h)

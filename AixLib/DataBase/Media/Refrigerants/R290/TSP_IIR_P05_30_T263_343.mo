@@ -131,76 +131,82 @@ record TSP_IIR_P05_30_T263_343
   The provided coefficients are fitted to external data by Sangi et al.
   and are valid within the following range:<br/>
 </p>
-<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
-border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
-  <tr>
-    <td>
-      <p>
-        Parameter
-      </p>
-    </td>
-    <td>
-      <p>
-        Minimum Value
-      </p>
-    </td>
-    <td>
-      <p>
-        Maximum Value
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        Pressure (p) in bar
-      </p>
-    </td>
-    <td>
-      <p>
-        0.5
-      </p>
-    </td>
-    <td>
-      <p>
-        30
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p>
-        Temperature (T) in K
-      </p>
-    </td>
-    <td>
-      <p>
-        263.15
-      </p>
-    </td>
-    <td>
-      <p>
-        343.15
-      </p>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"
+    width=\"30%\" style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <td>
+          <p>
+            Parameter
+          </p>
+        </td>
+        <td>
+          <p>
+            Minimum Value
+          </p>
+        </td>
+        <td>
+          <p>
+            Maximum Value
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            Pressure (p) in bar
+          </p>
+        </td>
+        <td>
+          <p>
+            0.5
+          </p>
+        </td>
+        <td>
+          <p>
+            30
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            Temperature (T) in K
+          </p>
+        </td>
+        <td>
+          <p>
+            263.15
+          </p>
+        </td>
+        <td>
+          <p>
+            343.15
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      The reference point is defined as 200 kJ/kg and 1 kJ/kg/K,
+      respectively, for enthalpy and entropy for the saturated liquid
+      at 273.15 K.
+    </p>
+    <h4>
+      References
+    </h4>
+    <p>
+      Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow,
+      Rita; Müller, Dirk (2014): <a href=
+      \"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the
+      Refrigerant Propane for Fast and Accurate Dynamic
+      Simulations</a>. In: <i>The 10th International Modelica
+      Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping
+      University Electronic Press (Linköping Electronic Conference
+      Proceedings), S. 1271–1275
+    </p>
+  </caption>
 </table>
-<p>
-  The reference point is defined as 200 kJ/kg and 1 kJ/kg/K,
-  respectively, for enthalpy and entropy for the saturated liquid at
-  273.15 K.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
-  Müller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A
-  Medium Model for the Refrigerant Propane for Fast and Accurate
-  Dynamic Simulations</a>. In: <i>The 10th International Modelica
-  Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping University
-  Electronic Press (Linköping Electronic Conference Proceedings), S.
-  1271–1275
-</p>
 </html>"));
 end TSP_IIR_P05_30_T263_343;

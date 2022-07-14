@@ -12,31 +12,32 @@ extends Modelica.Icons.SignalBus;
   Boolean onOffMea
     "Measured value of device being on or off (relative speed greater than 0)"
                          annotation (HideResult=false);
-  Modelica.SIunits.ThermodynamicTemperature TEvaInMea
+  Modelica.Units.SI.ThermodynamicTemperature TEvaInMea
     "Temperature of flow into evaporator";
 
-  Modelica.SIunits.ThermodynamicTemperature TConInMea
+  Modelica.Units.SI.ThermodynamicTemperature TConInMea
     "Temperature of flow into condenser";
 
-  Modelica.SIunits.ThermodynamicTemperature TEvaOutMea
+  Modelica.Units.SI.ThermodynamicTemperature TEvaOutMea
     "temperature of flow out of evaporator";
 
-  Modelica.SIunits.ThermodynamicTemperature TConOutMea
+  Modelica.Units.SI.ThermodynamicTemperature TConOutMea
     "Temperature of flow out of condenser";
 
-  Modelica.SIunits.Power PelMea "Total electrical active power";
+  Modelica.Units.SI.Power PelMea "Total electrical active power";
 
-  Modelica.SIunits.MassFlowRate m_flowEvaMea
+  Modelica.Units.SI.MassFlowRate m_flowEvaMea
     "Mass flow rate through evaporator";
 
-  Modelica.SIunits.MassFlowRate m_flowConMea "Mass flow rate through condenser";
+  Modelica.Units.SI.MassFlowRate m_flowConMea
+    "Mass flow rate through condenser";
 
   Real CoPMea "Coefficient of performance";
 
-  Modelica.SIunits.ThermodynamicTemperature TOdaMea "Outdoor air temperature";
-  Modelica.SIunits.ThermodynamicTemperature TEvaAmbMea
+  Modelica.Units.SI.ThermodynamicTemperature TOdaMea "Outdoor air temperature";
+  Modelica.Units.SI.ThermodynamicTemperature TEvaAmbMea
     "Ambient temperature on evaporator side";
-  Modelica.SIunits.ThermodynamicTemperature TConAmbMea
+  Modelica.Units.SI.ThermodynamicTemperature TConAmbMea
     "Ambient temperature on condenser side";
   Real iceFacMea(start=1)
     "Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen). 1 means no icing/frosting."

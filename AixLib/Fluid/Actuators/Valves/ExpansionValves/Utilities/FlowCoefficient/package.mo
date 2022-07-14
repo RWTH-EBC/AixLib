@@ -46,146 +46,153 @@ package FlowCoefficient "Package that contains models describing different flow 
   Calculation procedures presented in the litarture have some variables
   in commen and these variables are presented below:<br/>
 </p>
-<table summary=\"Commen variables\" border=\"1\" cellspacing=\"0\"
-cellpadding=\"2\" style=\"border-collapse:collapse;\">
-  <tr>
-    <th>
-      Variable
-    </th>
-    <th>
-      Comment
-    </th>
-  </tr>
-  <tr>
-    <td>
-      <code>A</code>
-    </td>
-    <td>
-      Cross-sectional flow area
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>d<sub>inlet</sub></code>
-    </td>
-    <td>
-      Diameter of the pipe at valve's inlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>p<sub>inlet</sub></code>
-    </td>
-    <td>
-      Pressure at valve's inlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>p<sub>outlet</sub></code>
-    </td>
-    <td>
-      Pressure at valve's outlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>ρ<sub>inlet</sub></code>
-    </td>
-    <td>
-      Density at valve's inlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>ρ<sub>outlet</sub></code>
-    </td>
-    <td>
-      Density at valve's outlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>T<sub>inlet</sub></code>
-    </td>
-    <td>
-      Temperature at valve's inlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>μ<sub>inlet</sub></code>
-    </td>
-    <td>
-      Dynamic viscosity at valve's inlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>σ<sub>inlet</sub></code>
-    </td>
-    <td>
-      Surface tension at valve's inlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>C<sub>outlet</sub></code>
-    </td>
-    <td>
-      Specific heat capacity at valve's outlet
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>h<sub>fg</sub></code>
-    </td>
-    <td>
-      Heat of vaparisation
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Commen variables\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+    style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <th>
+          Variable
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <code>A</code>
+        </td>
+        <td>
+          Cross-sectional flow area
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>d<sub>inlet</sub></code>
+        </td>
+        <td>
+          Diameter of the pipe at valve's inlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>p<sub>inlet</sub></code>
+        </td>
+        <td>
+          Pressure at valve's inlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>p<sub>outlet</sub></code>
+        </td>
+        <td>
+          Pressure at valve's outlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>ρ<sub>inlet</sub></code>
+        </td>
+        <td>
+          Density at valve's inlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>ρ<sub>outlet</sub></code>
+        </td>
+        <td>
+          Density at valve's outlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>T<sub>inlet</sub></code>
+        </td>
+        <td>
+          Temperature at valve's inlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>μ<sub>inlet</sub></code>
+        </td>
+        <td>
+          Dynamic viscosity at valve's inlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>σ<sub>inlet</sub></code>
+        </td>
+        <td>
+          Surface tension at valve's inlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>C<sub>outlet</sub></code>
+        </td>
+        <td>
+          Specific heat capacity at valve's outlet
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>h<sub>fg</sub></code>
+        </td>
+        <td>
+          Heat of vaparisation
+        </td>
+      </tr>
+    </table>
+    <p>
+      Moreover, two approaches can be identified in general: A
+      polynomial and a power approach. The characteristics of these
+      approaches are presented below.
+    </p>
+    <h4>
+      Polynomial approaches
+    </h4>
+    <p>
+      A generic polynomial approach is presented below:<br/>
+      <br/>
+      <code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br/>
+      <br/>
+      Actually, two polynomial approaches are implemented in this
+      package.
+    </p>
+    <h4>
+      Power approaches
+    </h4>
+    <p>
+      A generic power approach is presented below:<br/>
+      <br/>
+      <code>C = corFact * a * product(P[i]^b[i] for i in
+      1:nT)</code><br/>
+      <br/>
+      Actually, thee power approaches are implemented in this package.
+    </p>
+    <h4>
+      References
+    </h4>
+    <p>
+      X. Zhifang, S. Lin and O. Hongfei. (2008): <a href=
+      \"http://dx.doi.org/10.1016/j.applthermaleng.2007.03.023\">Refrigerant
+      flow characteristics of electronic expansion valve based on
+      thermodynamic analysis and experiment</a>. In: <i>Applied Thermal
+      Engineering 28(2)</i>, S. 238–243
+    </p>
+    <p>
+      Q. Ye, J. Chen and Z. Chen. (2007): <a href=
+      \"http://dx.doi.org/10.1016/j.enconman.2006.11.011\">Experimental
+      investigation of R407c and R410a flow through electronic
+      expansion valve</a>. In: <i>Energy Conversion andManagement
+      48(5)</i>, S. 1624–1630
+    </p>
+  </caption>
 </table>
-<p>
-  Moreover, two approaches can be identified in general: A polynomial
-  and a power approach. The characteristics of these approaches are
-  presented below.
-</p>
-<h4>
-  Polynomial approaches
-</h4>
-<p>
-  A generic polynomial approach is presented below:<br/>
-  <br/>
-  <code>C = corFact * sum(a[i]*P[i]^b[i] for i in 1:nT)</code><br/>
-  <br/>
-  Actually, two polynomial approaches are implemented in this package.
-</p>
-<h4>
-  Power approaches
-</h4>
-<p>
-  A generic power approach is presented below:<br/>
-  <br/>
-  <code>C = corFact * a * product(P[i]^b[i] for i in 1:nT)</code><br/>
-  <br/>
-  Actually, thee power approaches are implemented in this package.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  X. Zhifang, S. Lin and O. Hongfei. (2008): <a href=
-  \"http://dx.doi.org/10.1016/j.applthermaleng.2007.03.023\">Refrigerant
-  flow characteristics of electronic expansion valve based on
-  thermodynamic analysis and experiment</a>. In: <i>Applied Thermal
-  Engineering 28(2)</i>, S. 238–243
-</p>
-<p>
-  Q. Ye, J. Chen and Z. Chen. (2007): <a href=
-  \"http://dx.doi.org/10.1016/j.enconman.2006.11.011\">Experimental
-  investigation of R407c and R410a flow through electronic expansion
-  valve</a>. In: <i>Energy Conversion andManagement 48(5)</i>, S.
-  1624–1630
-</p>
 </html>"));
 end FlowCoefficient;

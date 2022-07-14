@@ -1,7 +1,7 @@
 ﻿within AixLib.Systems.HydraulicModules;
 model SimpleConsumer "Simple Consumer"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
-  import SI=Modelica.SIunits;
+  import    Modelica.Units.SI;
 
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
   parameter SI.Temperature T_fixed = 293.15

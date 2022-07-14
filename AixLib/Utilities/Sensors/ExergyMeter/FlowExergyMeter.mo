@@ -2,7 +2,7 @@ within AixLib.Utilities.Sensors.ExergyMeter;
 model FlowExergyMeter
 
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
-  extends Modelica.Icons.RotationalSensor;
+  extends Modelica.Icons.RoundSensor;
 
   Modelica.Blocks.Interfaces.RealInput X_ref[Medium.nX](
   final quantity="MassFraction", final unit="1", min=0, max=1)

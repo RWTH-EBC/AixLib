@@ -3,11 +3,12 @@ function shaGFunction
   "Returns a SHA1 encryption of the formatted arguments for the g-function generation"
   extends Modelica.Icons.Function;
   input Integer nBor "Number of boreholes";
-  input Modelica.SIunits.Position cooBor[nBor, 2] "Coordinates of boreholes";
-  input Modelica.SIunits.Height hBor "Borehole length";
-  input Modelica.SIunits.Height dBor "Borehole buried depth";
-  input Modelica.SIunits.Radius rBor "Borehole radius";
-  input Modelica.SIunits.ThermalDiffusivity aSoi "Ground thermal diffusivity used in g-function evaluation";
+  input Modelica.Units.SI.Position cooBor[nBor,2] "Coordinates of boreholes";
+  input Modelica.Units.SI.Height hBor "Borehole length";
+  input Modelica.Units.SI.Height dBor "Borehole buried depth";
+  input Modelica.Units.SI.Radius rBor "Borehole radius";
+  input Modelica.Units.SI.ThermalDiffusivity aSoi
+    "Ground thermal diffusivity used in g-function evaluation";
   input Integer nSeg "Number of line source segments per borehole";
   input Integer nTimSho "Number of time steps in short time region";
   input Integer nTimLon "Number of time steps in long time region";
@@ -37,42 +38,43 @@ algorithm
 annotation (
 Inline=false,
 Documentation(info="<html>
-<p>
-This function returns the SHA1 encryption of its arguments.
-</p>
-<h4>Implementation</h4>
-<p>
-Each argument is formatted in exponential notation
-with four significant digits, for example <code>1.234e+001</code>, with no spaces or
-other separating characters between each argument value.
-To prevent too long strings that can cause buffer overflows,
-the sha encoding of each argument is computed and added to the next string that
-is parsed.
-</p>
-<p>
-The SHA1 encryption is computed using
-<a href=\"modelica://AixLib.Utilities.Cryptographics.sha\">AixLib.Utilities.Cryptographics.sha</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 1, 2019 by Michael Wetter:<br/>
-Declared string as a constant due to JModelica's tigther type checking.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1230\">#1230</a>.
-</li>
-<li>
-September 11, 2018, by Michael Wetter:<br/>
-Refactored implementation to avoid buffer overflow.
-</li>
-<li>
-September 11, 2018 by Damien Picard:<br/>
-Split long strings into small strings to avoid buffer overflow.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1018\">#1018</a>.
-</li>
-<li>
-June 22, 2018 by Alex Laferri&egrave;re:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This function returns the SHA1 encryption of its arguments.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ Each argument is formatted in exponential notation
+ with four significant digits, for example <code>1.234e+001</code>, with no spaces or
+ other separating characters between each argument value.
+ To prevent too long strings that can cause buffer overflows,
+ the sha encoding of each argument is computed and added to the next string that
+ is parsed.
+ </p>
+ <p>
+ The SHA1 encryption is computed using
+ <a href=\"modelica://AixLib.Utilities.Cryptographics.sha\">AixLib.Utilities.Cryptographics.sha</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 1, 2019 by Michael Wetter:<br/>
+ Declared string as a constant due to JModelica's tigther type checking.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1230\">#1230</a>.
+ </li>
+ <li>
+ September 11, 2018, by Michael Wetter:<br/>
+ Refactored implementation to avoid buffer overflow.
+ </li>
+ <li>
+ September 11, 2018 by Damien Picard:<br/>
+ Split long strings into small strings to avoid buffer overflow.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1018\">#1018</a>.
+ </li>
+ <li>
+ June 22, 2018 by Alex Laferri&egrave;re:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end shaGFunction;

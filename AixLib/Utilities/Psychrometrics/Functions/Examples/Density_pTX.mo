@@ -2,10 +2,10 @@ within AixLib.Utilities.Psychrometrics.Functions.Examples;
 model Density_pTX "Model to test density_pTX"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Pressure p = 101325 "Pressure of the medium";
-  Modelica.SIunits.Temperature T "Temperature";
-  Modelica.SIunits.MassFraction X_w "Mass fraction";
-  Modelica.SIunits.Density d "Mass density";
+  parameter Modelica.Units.SI.Pressure p=101325 "Pressure of the medium";
+  Modelica.Units.SI.Temperature T "Temperature";
+  Modelica.Units.SI.MassFraction X_w "Mass fraction";
+  Modelica.Units.SI.Density d "Mass density";
   constant Real convT(unit="1/s") = 0.999 "Conversion factor";
   constant Real convX(unit="1/s") = 0.02 "Conversion factor";
 equation
@@ -23,18 +23,19 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psy
         "Simulate and plot"),
     Documentation(
 info="<html>
-<p>
-Model that tests the implementation of
-<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
-AixLib.Utilities.Psychrometrics.Functions.density_pTX</a>.
-</p>
-</html>",
+ <p>
+ Model that tests the implementation of
+ <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
+ AixLib.Utilities.Psychrometrics.Functions.density_pTX</a>.
+ </p>
+ </html>",
     revisions="<html>
-<ul>
-<li>
-February 24, 2015 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ February 24, 2015 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Density_pTX;

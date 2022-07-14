@@ -18,29 +18,30 @@ model PumpHeadControlled
     "Nominal volume flow rate in m³/h (~0.67*Qmax).
     Qmax is taken from pumpParam.maxMinSpeedCurves."
     annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm Nnom=
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm Nnom=
       Modelica.Math.Vectors.interpolate(
-        x=pumpParam.maxMinSpeedCurves[:,1],
-        y=pumpParam.maxMinSpeedCurves[:,2],
-        xi=Qnom)
-    "Pump speed in design point (Qnom,Hnom).
+      x=pumpParam.maxMinSpeedCurves[:, 1],
+      y=pumpParam.maxMinSpeedCurves[:, 2],
+      xi=Qnom) "Pump speed in design point (Qnom,Hnom).
     Default is maximum speed at Qnom from pumpParam.maxMinSpeedCurves.
     Note that N is defined only on [nMin, nMax]. Due to power limitation
-    N might be smaller than nMax for higher Q."
-    annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
-  parameter Modelica.SIunits.Height Hnom=
+    N might be smaller than nMax for higher Q." annotation (Dialog(tab=
+          "Nominal design point", group=
+          "Design point of pump. Used for start value calculation."));
+  parameter Modelica.Units.SI.Height Hnom=
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
       pumpParam.cHQN,
       Qnom,
       Nnom) "Nominal pump head in m (water).
       Will by default be calculated automatically from Qnom and Nnom.
       If you change the value make sure to also set a feasible Qnom."
-    annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
+    annotation (Dialog(tab="Nominal design point", group=
+          "Design point of pump. Used for start value calculation."));
 
 
  // Parameters
   // Initialization
-  parameter Modelica.SIunits.Height Hstart=Hnom "
+  parameter Modelica.Units.SI.Height Hstart=Hnom "
       Start value of pump head. Will be used to initialize criticalDamping."
     annotation (Dialog(tab="Initialization", group="Pressure"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
@@ -56,11 +57,11 @@ model PumpHeadControlled
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   // Assumptions
-  parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
+  parameter Modelica.Units.SI.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
 
-  final parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+  final parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
       p=Medium.p_default,
       T=Medium.T_default,
       X=Medium.X_default) "Default medium density";
@@ -83,11 +84,12 @@ model PumpHeadControlled
       enable=calculate_Efficiency), choicesAllMatching=true);
 
   // Variables
-  Modelica.SIunits.Pressure dp_pump  "Pressure increase";
+  Modelica.Units.SI.Pressure dp_pump "Pressure increase";
   Modelica.Blocks.Interfaces.RealOutput head(
     quantity="Length",
     unit="m") "Pump head";
-  Modelica.SIunits.AngularVelocity n "pump speed calculated from volume flow and head n=f(Q,H)";
+  Modelica.Units.SI.AngularVelocity n
+    "pump speed calculated from volume flow and head n=f(Q,H)";
   Modelica.Blocks.Interfaces.RealOutput power(quantity="Power", unit="W")
     "electical power";
   Modelica.Blocks.Interfaces.RealOutput eta(
@@ -99,7 +101,7 @@ model PumpHeadControlled
     "conversion of mass flow rate to volume flow rate"
     annotation (Placement(transformation(extent={{-100,35},{-80,55}})));
 
-  Modelica.Blocks.Tables.CombiTable1D maxMinTable(
+  Modelica.Blocks.Tables.CombiTable1Dv maxMinTable(
     columns={2,3},
     table=pumpParam.maxMinHeight,
     tableName="NoName",

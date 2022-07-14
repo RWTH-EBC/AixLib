@@ -2,12 +2,12 @@
 record UponorComfortPanelHL_Heating
   "Ceiling heating from Uponor Comfort panel HL"
 
-extends ActiveWallBaseDataDefinition(
-    Temp_nom=Modelica.SIunits.Conversions.from_degC({40,30,20}),
+  extends ActiveWallBaseDataDefinition(
+    Temp_nom=Modelica.Units.Conversions.from_degC({40,30,20}),
     q_dot_nom=100,
     k_isolation=0.38,
-    k_top=q_dot_nom/AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.logDT(
-      {Temp_nom[1],Temp_nom[2],(q_dot_nom/8.92)^(1/1.1) + Temp_nom[3]}),
+    k_top=q_dot_nom/AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.logDT({
+        Temp_nom[1],Temp_nom[2],(q_dot_nom/8.92)^(1/1.1) + Temp_nom[3]}),
     k_down=(k_isolation^(-1) - k_top^(-1))^(-1),
     VolumeWaterPerMeter=0.03848,
     Spacing=0.10,

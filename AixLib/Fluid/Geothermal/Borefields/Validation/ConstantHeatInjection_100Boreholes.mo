@@ -4,7 +4,7 @@ model ConstantHeatInjection_100Boreholes
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;
 
-  parameter Modelica.SIunits.Temperature T_start = 273.15
+  parameter Modelica.Units.SI.Temperature T_start=273.15
     "Initial temperature of the soil";
 
   AixLib.Fluid.Geothermal.Borefields.OneUTube borHol(
@@ -22,7 +22,6 @@ model ConstantHeatInjection_100Boreholes
     addPowerToMedium=false,
     use_inputFilter=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     m_flow_nominal=borFieDat.conDat.mBorFie_flow_nominal,
     nominalValuesDefineDefaultPressureCurve=true,
     inputType=AixLib.Fluid.Types.InputType.Constant)
@@ -81,39 +80,39 @@ equation
   connect(hea.u, heaRat.y) annotation (Line(points={{-52,-14},{-60,-14},{-60,20},
           {-67,20}}, color={0,0,127}));
   annotation (experiment(Tolerance=1e-6, StopTime=31536.0E+06),
-  __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/ConstantHeatInjection_100Boreholes.mos"
+  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Validation/ConstantHeatInjection_100Boreholes.mos"
         "Simulate and Plot"),
 Documentation(info="<html>
-<p>
-This validation case simulates a borefield of 100 boreholes on a square 10 by 10
-grid.
-</p>
-<p>
-The heat injection rate in the borefield is constant and equal to
-<code>2*pi*kSoi*hBor*nBor</code>. In this case, the borehole wall temperature
-variation corresponds to the g-function of the borefield, as evaluated in
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.Validation.GFunction_100boreholes\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.Validation.GFunction_100boreholes</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 8, 2021, by Michael Wetter:<br/>
-Added missing <code>parameter</code> keyword.<br/>
-For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">AixLib, issue 1464</a>.
-</li>
-<li>
-June 24, 2019, by Michael Wetter:<br/>
-Changed <code>StopTime</code> from integer to floating point.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1163\">issue 1163</a>.
-</li>
-<li>
-May 27, 2019, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})));
+ <p>
+ This validation case simulates a borefield of 100 boreholes on a square 10 by 10
+ grid.
+ </p>
+ <p>
+ The heat injection rate in the borefield is constant and equal to
+ <code>2*pi*kSoi*hBor*nBor</code>. In this case, the borehole wall temperature
+ variation corresponds to the g-function of the borefield, as evaluated in
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.Validation.GFunction_100boreholes\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.Validation.GFunction_100boreholes</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 8, 2021, by Michael Wetter:<br/>
+ Added missing <code>parameter</code> keyword.<br/>
+ For <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1464\">IBPSA, issue 1464</a>.
+ </li>
+ <li>
+ June 24, 2019, by Michael Wetter:<br/>
+ Changed <code>StopTime</code> from integer to floating point.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1163\">issue 1163</a>.
+ </li>
+ <li>
+ May 27, 2019, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+    Diagram(coordinateSystem(extent={{-120,-120},{120,120}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ConstantHeatInjection_100Boreholes;

@@ -19,23 +19,20 @@ model PVSystem
 
  parameter Real n_mod
     "Number of connected PV modules";
- parameter Modelica.SIunits.Angle til
- "Surface's tilt angle (0:flat)"
-  annotation (Dialog(tab="Mounting"));
- parameter Modelica.SIunits.Angle azi
-   "Surface's azimut angle (0:South)"
-   annotation (Dialog(tab="Mounting"));
- parameter Modelica.SIunits.Angle lat
- "Location's Latitude"
-   annotation (Dialog(tab="Location"));
- parameter Modelica.SIunits.Angle lon
- "Location's Longitude"
-   annotation (Dialog(tab="Location"));
+  parameter Modelica.Units.SI.Angle til "Surface's tilt angle (0:flat)"
+    annotation (Dialog(tab="Mounting"));
+  parameter Modelica.Units.SI.Angle azi "Surface's azimut angle (0:South)"
+    annotation (Dialog(tab="Mounting"));
+  parameter Modelica.Units.SI.Angle lat "Location's Latitude"
+    annotation (Dialog(tab="Location"));
+  parameter Modelica.Units.SI.Angle lon "Location's Longitude"
+    annotation (Dialog(tab="Location"));
  parameter Real alt(final quantity="Length", final unit="m")
    "Site altitude in Meters, default= 1"
    annotation (Dialog(tab="Location"));
- parameter Modelica.SIunits.Time timZon(displayUnit="h")
-    "Time zone. Should be equal with timZon in ReaderTMY3, if PVSystem and ReaderTMY3 are used together." annotation (Dialog(tab="Location"));
+  parameter Modelica.Units.SI.Time timZon(displayUnit="h")
+    "Time zone. Should be equal with timZon in ReaderTMY3, if PVSystem and ReaderTMY3 are used together."
+    annotation (Dialog(tab="Location"));
  parameter Real groRef(final unit="1") = 0.2
   "Ground reflectance (default=0.2)
   Urban environment: 0.14 - 0.22

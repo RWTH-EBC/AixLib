@@ -3,9 +3,9 @@ model FlowControlled_dpSystem
   "Demonstration of the use of prescribedPressure"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Air;
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 0.1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_nominal = 100
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=100
     "Nominal pressure difference";
   Modelica.Blocks.Sources.Ramp y(
     duration=0.5,
@@ -215,25 +215,26 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/FlowControlled_dpSystem.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example demonstrates and tests the use of
-<a href=\"modelica://AixLib.Fluid.Movers.Validation.FlowControlled_dp\">
-AixLib.Fluid.Movers.Validation.FlowControlled_dp</a>
-movers that use parameter
-<code>prescribeSystemPressure</code>.
-</p>
-<p>
-The mass flow rates and actual pressure heads of the two configurations are compared.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 4 2017, by Filip Jorissen:<br/>
-First implementation.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/770\">#770</a>.
-</li>
-</ul>
-</html>"),
-    Icon(coordinateSystem(extent={{-120,-120},{120,120}})));
+ <p>
+ This example demonstrates and tests the use of
+ <a href=\"modelica://AixLib.Fluid.Movers.Validation.FlowControlled_dp\">
+ AixLib.Fluid.Movers.Validation.FlowControlled_dp</a>
+ movers that use parameter
+ <code>prescribeSystemPressure</code>.
+ </p>
+ <p>
+ The mass flow rates and actual pressure heads of the two configurations are compared.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 4 2017, by Filip Jorissen:<br/>
+ First implementation.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/770\">#770</a>.
+ </li>
+ </ul>
+ </html>"),
+    Icon(coordinateSystem(extent={{-120,-120},{120,120}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowControlled_dpSystem;

@@ -20,50 +20,55 @@ model Generic_VarRef_VarDisVol_RotaryScroll
   just fitted to various experimental data obtained by a literature
   review and, therefore, to use with caution.<br/>
 </p>
-<table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
-cellpadding=\"2\" style=\"border-collapse:collapse;\">
-  <tr>
-    <th>
-      Reference
-    </th>
-    <th>
-      Formula
-    </th>
-    <th>
-      Refrigerants
-    </th>
-    <th>
-      Validity <code>n<sub>compressor</sub></code>
-    </th>
-    <th>
-      Validity <code>Π<sub>pressure</sub></code>
-    </th>
-  </tr>
-  <tr>
-    <td>
-      Engelpracht2017
-    </td>
-    <td>
-      <code>η<sub>ise</sub> = a1 + a2*n + a3*n^3 + a5*π^2</code>
-    </td>
-    <td>
-      Generic model
-    </td>
-    <td>
-      <code>0 - 120</code>
-    </td>
-    <td>
-      <code>1 - 10</code>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Polynomial approaches\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+    style=\"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <th>
+          Reference
+        </th>
+        <th>
+          Formula
+        </th>
+        <th>
+          Refrigerants
+        </th>
+        <th>
+          Validity <code>n<sub>compressor</sub></code>
+        </th>
+        <th>
+          Validity <code>Π<sub>pressure</sub></code>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          Engelpracht2017
+        </td>
+        <td>
+          <code>η<sub>ise</sub> = a1 + a2*n + a3*n^3 + a5*π^2</code>
+        </td>
+        <td>
+          Generic model
+        </td>
+        <td>
+          <code>0 - 120</code>
+        </td>
+        <td>
+          <code>1 - 10</code>
+        </td>
+      </tr>
+    </table>
+    <h4>
+      References
+    </h4>
+    <p>
+      Engelpracht, Mirko (2017): Development of modular and scalable
+      simulation models for heat pumps and chillers considering various
+      refrigerants. <i>Master Thesis</i>
+    </p>
+  </caption>
 </table>
-<h4>
-  References
-</h4>
-<p>
-  Engelpracht, Mirko (2017): Development of modular and scalable
-  simulation models for heat pumps and chillers considering various
-  refrigerants. <i>Master Thesis</i>
-</p>
 </html>"));
 end Generic_VarRef_VarDisVol_RotaryScroll;

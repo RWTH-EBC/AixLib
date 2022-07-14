@@ -42,19 +42,19 @@ model MultizoneEquipped
     tab="AirHandlingUnit",
     group="Settings AHU Value",
     enable=HRS));
-  parameter Modelica.SIunits.Time sampleRateAHU(min=0) = 1800
-    "Time period for sampling"
-    annotation (Dialog(tab="AirHandlingUnit", group="Settings for State Machines"));
-  parameter Modelica.SIunits.Pressure dpAHU_sup
+  parameter Modelica.Units.SI.Time sampleRateAHU(min=0) = 1800
+    "Time period for sampling" annotation (Dialog(tab="AirHandlingUnit", group=
+          "Settings for State Machines"));
+  parameter Modelica.Units.SI.Pressure dpAHU_sup
     "Pressure difference over supply fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
-  parameter Modelica.SIunits.Pressure dpAHU_eta
+  parameter Modelica.Units.SI.Pressure dpAHU_eta
     "Pressure difference over extract fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
-  parameter Modelica.SIunits.Efficiency effFanAHU_sup
+  parameter Modelica.Units.SI.Efficiency effFanAHU_sup
     "Efficiency of supply fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
-  parameter Modelica.SIunits.Efficiency effFanAHU_eta
+  parameter Modelica.Units.SI.Efficiency effFanAHU_eta
     "Efficiency of extract fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
   replaceable model AHUMod =

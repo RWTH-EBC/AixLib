@@ -11,110 +11,83 @@ expandable connector CHPControlBus
   RotationSpeed meaRotEng "Measured engines' speed"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
-  Modelica.SIunits.Power meaFuePowEng
+  Modelica.Units.SI.Power meaFuePowEng
     "Needed fuel power at combustion engines'"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
-  Modelica.SIunits.Power meaThePowEng
+    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
+  Modelica.Units.SI.Power meaThePowEng
     "Thermal power output at combustion engines'"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
-  Modelica.SIunits.Torque meaTorEng
-    "Engine torque at combustion engines'"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
-  Modelica.SIunits.MassFlowRate meaMasFloFueEng
+    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
+  Modelica.Units.SI.Torque meaTorEng "Engine torque at combustion engines'"
+    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
+  Modelica.Units.SI.MassFlowRate meaMasFloFueEng
     "Fuel consumption at engines' inlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
-  Modelica.SIunits.MassFlowRate meaMasFloAirEng
+    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
+  Modelica.Units.SI.MassFlowRate meaMasFloAirEng
     "Air consumption at engines' inlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
-  Modelica.SIunits.MassFlowRate meaMasFloCO2Eng
+    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
+  Modelica.Units.SI.MassFlowRate meaMasFloCO2Eng
     "CO2 mass flow rates at engines' exhaust outlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
-  Modelica.SIunits.SpecificHeatCapacity calMeaCpExh
+    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
+  Modelica.Units.SI.SpecificHeatCapacity calMeaCpExh
     "Calculated mean specific heat capacity of the exhaust gas flow"
     annotation (Dialog(tab="Operation point", group="Combustion Engine"));
-  Modelica.SIunits.Temperature meaTemInEng
+  Modelica.Units.SI.Temperature meaTemInEng
     "Measured coolant temperature at engines' inlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
-  Modelica.SIunits.Temperature meaTemOutEng
+    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
+  Modelica.Units.SI.Temperature meaTemOutEng
     "Measured coolant temperature at engines' outlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
+    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
 
   // Definition of variables describing generators
   //
-  Modelica.SIunits.Power meaElPowGen
-    "Electric power at generators' clamps"
-    annotation(Dialog(tab="Operation point",
-                                         group="Generator"));
-  Modelica.SIunits.Current meaCurGen
-    "Electric current at generators' clamps"
-    annotation(Dialog(tab="Operation point",
-                                         group="Generator"));
-  Modelica.SIunits.Torque meaTorGen
-    "Generators' torque"
-    annotation(Dialog(tab="Operation point",
-                                         group="Generator"));
+  Modelica.Units.SI.Power meaElPowGen "Electric power at generators' clamps"
+    annotation (Dialog(tab="Operation point", group="Generator"));
+  Modelica.Units.SI.Current meaCurGen "Electric current at generators' clamps"
+    annotation (Dialog(tab="Operation point", group="Generator"));
+  Modelica.Units.SI.Torque meaTorGen "Generators' torque"
+    annotation (Dialog(tab="Operation point", group="Generator"));
   Real calEtaGen(unit="1")
     "Calculated generators' efficiency"
     annotation(Dialog(tab="Operation point",
                                          group="Generator"));
-  Modelica.SIunits.Power calThePowGen
-    "Thermal loss power"
-    annotation(Dialog(tab="Operation point",
-                                         group="Generator"));
+  Modelica.Units.SI.Power calThePowGen "Thermal loss power"
+    annotation (Dialog(tab="Operation point", group="Generator"));
 
   // Definition of variables describing exhaust heat exchangers
   //
-  Modelica.SIunits.Temperature meaTemExhHexOut
+  Modelica.Units.SI.Temperature meaTemExhHexOut
     "Measured exhaust gas temperatures at exhaust heat exchangers' outlets"
-    annotation (Dialog(tab="Operation point",
-                                           group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Temperature meaTemExhHexIn
+    annotation (Dialog(tab="Operation point", group="Exhaust Heat Exchanger"));
+  Modelica.Units.SI.Temperature meaTemExhHexIn
     "Measured exhaust gas temperatures at exhaust heat exchangers' inlets"
-    annotation (Dialog(tab="Operation point",
-                                           group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Power meaThePowOutHex
+    annotation (Dialog(tab="Operation point", group="Exhaust Heat Exchanger"));
+  Modelica.Units.SI.Power meaThePowOutHex
     "Measured thermal power of exhaust heat exchangers'"
-    annotation (Dialog(tab="Operation point",
-                                           group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.MassFlowRate meaMasFloConHex
+    annotation (Dialog(tab="Operation point", group="Exhaust Heat Exchanger"));
+  Modelica.Units.SI.MassFlowRate meaMasFloConHex
     "Measured condensed water mass flow rates at exhaust heat exchangers' outlets"
-    annotation (Dialog(tab="Operation point",
-                                           group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Temperature meaTemInHex
+    annotation (Dialog(tab="Operation point", group="Exhaust Heat Exchanger"));
+  Modelica.Units.SI.Temperature meaTemInHex
     "Measured coolant temperature at exhaust heat exchangers' inlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Temperature meaTemOutHex
+    annotation (Dialog(tab="Operation point", group="Exhaust Heat Exchanger"));
+  Modelica.Units.SI.Temperature meaTemOutHex
     "Measured coolant temperature at exhaust heat exchangers' outlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Exhaust Heat Exchanger"));
+    annotation (Dialog(tab="Operation point", group="Exhaust Heat Exchanger"));
 
   // Definition of variables describing CHP units in general
   //
-  Modelica.SIunits.Power meaThePowChp
+  Modelica.Units.SI.Power meaThePowChp
     "Measured thermal power at CHP units' outlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="CHP Unit"));
-  Modelica.SIunits.Temperature meaTemRetCooChp
+    annotation (Dialog(tab="Operation point", group="CHP Unit"));
+  Modelica.Units.SI.Temperature meaTemRetCooChp
     "Measured temperatures at CHP units' coolant return flow"
-    annotation(Dialog(tab="Operation point",
-                                         group="CHP Unit"));
-  Modelica.SIunits.Temperature meaTemSupCooChp
+    annotation (Dialog(tab="Operation point", group="CHP Unit"));
+  Modelica.Units.SI.Temperature meaTemSupCooChp
     "Measured temperatures at CHP units' coolant supply flow"
-    annotation(Dialog(tab="Operation point",
-                                         group="CHP Unit"));
-  Modelica.SIunits.VolumeFlowRate preVolFloHea
+    annotation (Dialog(tab="Operation point", group="CHP Unit"));
+  Modelica.Units.SI.VolumeFlowRate preVolFloHea
     "Prescribed coolant volume flow rate inside primary cooling circuit"
-    annotation (Dialog(tab="Operation point",
-                                           group="CHP Unit"));
+    annotation (Dialog(tab="Operation point", group="CHP Unit"));
   SpecificEmission calEmiCO2Chp
     "Calculated specific CO2 emissions of CHP units"
     annotation(Dialog(tab="Operation point",

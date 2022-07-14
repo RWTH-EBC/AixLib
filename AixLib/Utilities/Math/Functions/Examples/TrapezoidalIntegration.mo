@@ -13,18 +13,19 @@ algorithm
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/TrapezoidalIntegration.mos"
         "Simulate and plot"),
                      Documentation(info="<html>
-<p>
-Tests the correct implementation of function
-<a href=\"modelica://AixLib.Utilities.Math.Functions.trapezoidalIntegration\">
-AixLib.Utilities.Math.Functions.trapezoidalIntegration</a>.
-</p>
-<p>Integrands y1[7]={72, 70, 64, 54, 40, 22, 0} are the function values of y = -2*x^2-72 for x = {0,1,2,3,4,5,6}. The trapezoidal integration over the 7 integrand points should give a result of 286.</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 8, 2014, by Marcus Fuchs:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Tests the correct implementation of function
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.trapezoidalIntegration\">
+ AixLib.Utilities.Math.Functions.trapezoidalIntegration</a>.
+ </p>
+ <p>Integrands y1[7]={72, 70, 64, 54, 40, 22, 0} are the function values of y = -2*x^2-72 for x = {0,1,2,3,4,5,6}. The trapezoidal integration over the 7 integrand points should give a result of 286.</p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 8, 2014, by Marcus Fuchs:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TrapezoidalIntegration;

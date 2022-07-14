@@ -5,15 +5,15 @@ model SimplePipe "Simple pipe model with n discrete elements"
 
   parameter Integer nNodes(min=1) = 2 "Spatial segmentation";
 
-  parameter Modelica.SIunits.Length dh
+  parameter Modelica.Units.SI.Length dh
     "Inner/hydraulic diameter (assuming a round cross section area)";
 
   parameter Boolean withHeattransfer=true "True, if heat transfer to ambient" annotation (Dialog(group="Material"), choices(checkBox=true));
 
-  parameter Modelica.SIunits.Length length(min=0) "Pipe length";
+  parameter Modelica.Units.SI.Length length(min=0) "Pipe length";
 
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_small(min=0) = 1E-4*abs(
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small(min=0) = 1E-4*abs(
     m_flow_nominal) "Small mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced"));
 
@@ -25,30 +25,33 @@ model SimplePipe "Simple pipe model with n discrete elements"
     "Reynolds number where transition to turbulent starts"
     annotation (Dialog(group="Material"));
 
-  parameter Modelica.SIunits.Height roughness=2.5e-5
+  parameter Modelica.Units.SI.Height roughness=2.5e-5
     "Average height of surface asperities (default: smooth steel pipe)"
     annotation (Dialog(group="Material"));
 
   // Material for heattransfer
-  parameter Modelica.SIunits.ThermalConductivity lambda=370
-    "Heat conductivity of pipe material" annotation (Dialog(group="Material", enable = withHeattransfer));
-  parameter Modelica.SIunits.SpecificHeatCapacity c=1600
-    "Specific heat capacity of pipe material" annotation (Dialog(group="Material", enable = withHeattransfer));
-  parameter Modelica.SIunits.Density rho=1000 "Density of pipe material"
-    annotation (Dialog(group="Material", enable = withHeattransfer));
+  parameter Modelica.Units.SI.ThermalConductivity lambda=370
+    "Heat conductivity of pipe material"
+    annotation (Dialog(group="Material", enable=withHeattransfer));
+  parameter Modelica.Units.SI.SpecificHeatCapacity c=1600
+    "Specific heat capacity of pipe material"
+    annotation (Dialog(group="Material", enable=withHeattransfer));
+  parameter Modelica.Units.SI.Density rho=1000 "Density of pipe material"
+    annotation (Dialog(group="Material", enable=withHeattransfer));
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
     annotation (Evaluate=true, Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Length thickness(min=0)=0.001 "Pipe wall thickness"
-    annotation (Dialog(group="Material", enable = withHeattransfer));
+  parameter Modelica.Units.SI.Length thickness(min=0) = 0.001
+    "Pipe wall thickness"
+    annotation (Dialog(group="Material", enable=withHeattransfer));
 
-  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
+  parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
     "Initialization temperature at pipe inlet"
     annotation (Dialog(tab="Initialization"));
 
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
 
@@ -92,7 +95,7 @@ model SimplePipe "Simple pipe model with n discrete elements"
     each final T_start=T_start,
     each final m_flow_nominal=m_flow_nominal,
     each final allowFlowReversal=allowFlowReversal,
-    each final V=dh^2*length*Modelica.Constants.pi/4,
+    each final V=dh^2*length/nNodes*Modelica.Constants.pi/4,
     each nPorts=2) annotation (Placement(transformation(extent={{10,0},{30,20}})));
   Utilities.HeatTransfer.CylindricHeatTransfer PipeWall[nNodes](
     each final energyDynamics=energyDynamics,

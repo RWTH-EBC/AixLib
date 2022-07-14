@@ -5,8 +5,8 @@ model HeaterCooler_u "Model that demonstrates the ideal heater model"
   package Medium = AixLib.Media.Air;
 
 
-  parameter Modelica.SIunits.MassFlowRate
-    m_flow_nominal=3000/1000/20 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=3000/1000/20
+    "Nominal mass flow rate";
 
   AixLib.Fluid.Sources.Boundary_pT sin(
     redeclare package Medium = Medium,
@@ -108,32 +108,33 @@ equation
             200}}), graphics),
     __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/HeaterCooler_u.mos" "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Model that demonstrates the use of an ideal heater.
-Both heater models are identical, except that one model is configured
-as a steady-state model, whereas the other is configured as a dynamic model.
-Both heaters add heat to the medium to track a set-point for the outlet
-temperature.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 11, 2014, by Christoph Nytsch-Geusen:<br/>
-Rename experiment to HetaterColler_u
-in the Annex 60 library.
-</li>
-<li>
-September 19, 2013, by Michael Wetter:<br/>
-Removed fan with a prescribed mass flow source for inclusion of the test model
-in the Annex 60 library.
-</li>
-<li>
-July 11, 2011, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Model that demonstrates the use of an ideal heater.
+ Both heater models are identical, except that one model is configured
+ as a steady-state model, whereas the other is configured as a dynamic model.
+ Both heaters add heat to the medium to track a set-point for the outlet
+ temperature.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 11, 2014, by Christoph Nytsch-Geusen:<br/>
+ Rename experiment to HetaterColler_u
+ in the Annex 60 library.
+ </li>
+ <li>
+ September 19, 2013, by Michael Wetter:<br/>
+ Removed fan with a prescribed mass flow source for inclusion of the test model
+ in the Annex 60 library.
+ </li>
+ <li>
+ July 11, 2011, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     experiment(
       StopTime=1200,
-      Tolerance=1e-6));
+      Tolerance=1e-6),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HeaterCooler_u;

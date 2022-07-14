@@ -17,8 +17,8 @@ protected
 algorithm
   if (n>1) then
     assert(x[1] < x[n], "x must be strictly increasing.
-  Received x[1] = " + String(x[1]) + "
-           x[" + String(n) + "] = " + String(x[n]));
+   Received x[1] = "+ String(x[1]) + "
+            x["+ String(n) + "] = " + String(x[n]));
   // Check data
     assert(isMonotonic(x, strict=true),
       "x-values must be strictly monontone increasing or decreasing.");
@@ -70,46 +70,47 @@ algorithm
     end for;
   end if;
   annotation (Documentation(info="<html>
-<p>
-This function computes the derivatives at the support points <i>x<sub>i</sub></i>
-that can be used as input for evaluating a cubic hermite spline.
-</p>
-<p>
-If <code>ensureMonotonicity=true</code>, then the support points <i>y<sub>i</sub></i>
-need to be monotone increasing (or increasing), and the computed derivatives
-<i>d<sub>i</sub></i> are such that the cubic hermite is monotone increasing (or decreasing).
-The algorithm to ensure monotonicity is based on the method described in Fritsch and Carlson (1980) for
-<i>&rho; = &rho;<sub>2</sub></i>.
-</p>
-<p>
-This function is typically used with
-<a href=\"modelica://AixLib.Utilities.Math.Functions.cubicHermiteLinearExtrapolation\">
-AixLib.Utilities.Math.Functions.cubicHermiteLinearExtrapolation</a>
-which is used to evaluate the cubic spline.
-Because in many applications, the shape of the spline depends on parameters,
-this function has been implemented in such a way that all derivatives can be
-computed at once and then stored for use during the time stepping,
-in which the above function may be called.
-</p>
-<h4>References</h4>
-<p>
-F.N. Fritsch and R.E. Carlson, <a href=\"http://dx.doi.org/10.1137/0717021\">Monotone piecewise cubic interpolation</a>.
-<i>SIAM J. Numer. Anal.</i>, 17 (1980), pp. 238-246.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 26, 2016 by Michael Wetter:<br/>
-Corrected documentation.
-</li>
-<li>
-September 29, 2011 by Michael Wetter:<br/>
-Added special case for one data point and two data points.
-</li>
-<li>
-September 27, 2011 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This function computes the derivatives at the support points <i>x<sub>i</sub></i>
+ that can be used as input for evaluating a cubic hermite spline.
+ </p>
+ <p>
+ If <code>ensureMonotonicity=true</code>, then the support points <i>y<sub>i</sub></i>
+ need to be monotone increasing (or increasing), and the computed derivatives
+ <i>d<sub>i</sub></i> are such that the cubic hermite is monotone increasing (or decreasing).
+ The algorithm to ensure monotonicity is based on the method described in Fritsch and Carlson (1980) for
+ <i>&rho; = &rho;<sub>2</sub></i>.
+ </p>
+ <p>
+ This function is typically used with
+ <a href=\"modelica://AixLib.Utilities.Math.Functions.cubicHermiteLinearExtrapolation\">
+ AixLib.Utilities.Math.Functions.cubicHermiteLinearExtrapolation</a>
+ which is used to evaluate the cubic spline.
+ Because in many applications, the shape of the spline depends on parameters,
+ this function has been implemented in such a way that all derivatives can be
+ computed at once and then stored for use during the time stepping,
+ in which the above function may be called.
+ </p>
+ <h4>References</h4>
+ <p>
+ F.N. Fritsch and R.E. Carlson, <a href=\"http://dx.doi.org/10.1137/0717021\">Monotone piecewise cubic interpolation</a>.
+ <i>SIAM J. Numer. Anal.</i>, 17 (1980), pp. 238-246.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 26, 2016 by Michael Wetter:<br/>
+ Corrected documentation.
+ </li>
+ <li>
+ September 29, 2011 by Michael Wetter:<br/>
+ Added special case for one data point and two data points.
+ </li>
+ <li>
+ September 27, 2011 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end splineDerivatives;

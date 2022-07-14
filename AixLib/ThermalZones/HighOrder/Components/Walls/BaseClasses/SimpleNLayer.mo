@@ -1,12 +1,14 @@
 within AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses;
 model SimpleNLayer "Wall consisting of n layers"
-  parameter Modelica.SIunits.Area A "Area" annotation(Dialog(group = "Geometry"));
+  parameter Modelica.Units.SI.Area A "Area"
+    annotation (Dialog(group="Geometry"));
 
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
     wallRec constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
     annotation (choicesAllMatching=true, Placement(transformation(extent={{48,-98},{68,-78}})));
-  parameter Modelica.SIunits.Temperature T_start[wallRec.n]=fill(Modelica.SIunits.Conversions.from_degC(16), wallRec.n) "Initial temperature"
-                                                                                                               annotation(Dialog(group="Thermal"));
+  parameter Modelica.Units.SI.Temperature T_start[wallRec.n]=fill(
+      Modelica.Units.Conversions.from_degC(16), wallRec.n)
+    "Initial temperature" annotation (Dialog(group="Thermal"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));

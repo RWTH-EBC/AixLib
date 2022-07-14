@@ -21,21 +21,21 @@ package Trox "Performance data for Trox"
   "Performance data for Trox DID 632A for cooling mode"
        annotation (
     Documentation(revisions="<html>
-<ul>
-<li>
-June 13, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Performance data for Trox active beam for cooling mode.
-</p>
-</html>"));
+ <ul>
+ <li>
+ June 13, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Performance data for Trox active beam for cooling mode.
+ </p>
+ </html>"));
 
 
   record DID632A_nozzleH_length6ft_heating =
@@ -59,26 +59,27 @@ Performance data for Trox active beam for cooling mode.
   "Performance data for Trox DID 632A for heating mode"
       annotation (
     Documentation(revisions="<html>
-<ul>
-<li>
-June 13, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Performance data for Trox active beam for heating mode.
-</p>
-</html>"));
+ <ul>
+ <li>
+ June 13, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Performance data for Trox active beam for heating mode.
+ </p>
+ </html>"));
 
 
 annotation (Documentation(revisions="", info="<html>
-<p>
-Package with performance data for active beams from Trox.
-</p>
-</html>"));
+ <p>
+ Package with performance data for active beams from Trox.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Trox;

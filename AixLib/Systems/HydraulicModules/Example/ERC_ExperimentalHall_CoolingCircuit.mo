@@ -5,7 +5,7 @@ model ERC_ExperimentalHall_CoolingCircuit
   package Medium = AixLib.Media.Water
     "Medium within the system simulation"
     annotation (choicesAllMatching=true);
-  parameter Modelica.SIunits.Temperature T_amb = 293.15 "Ambient temperature";
+  parameter Modelica.Units.SI.Temperature T_amb=293.15 "Ambient temperature";
 
   AixLib.Fluid.Sources.Boundary_pT bou(nPorts=1, redeclare package Medium =
         Medium)
@@ -56,11 +56,11 @@ model ERC_ExperimentalHall_CoolingCircuit
     Ti=180,
     k=0.12,
     xi_start=0.5,
-    initType=Modelica.Blocks.Types.InitPID.InitialState,
+    initType=Modelica.Blocks.Types.Init.InitialState,
     reverseAction=false)
     annotation (Placement(transformation(extent={{-140,0},{-120,20}})));
   Controller.CtrThrottle ctrUnmixedThrottle(
-    initType=Modelica.Blocks.Types.InitPID.InitialState,
+    initType=Modelica.Blocks.Types.Init.InitialState,
     reverseAction=false,
     Td=0,
     rpm_pump=3000,

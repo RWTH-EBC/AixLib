@@ -245,45 +245,46 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/Pump_Nrpm_stratos.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>This example provides a validation for the Nrpm model.
-A Wilo Stratos 80/1-12 pump is simulated for five different RPMs for load
-that changes with time.
-The resulting curves for the pump head and mass flow rate are plotted
-using colored lines over the pump data sheet.
-The resulting figures are shown below.
-</p>
-<p>Pump heads:</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Examples/PumpValidationHead.png\"
-alt=\"Pump head.\"/>
-</p>
-<p>Pump electrical power:</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Examples/PumpValidationPower.png\"
-alt=\"Pump power.\"/></p>
-<p>The figures are adapted from the
-<a href=\"http://productfinder.wilo.com/en/COM/product/0000001700017d670001003a/fc_product_datasheet\">
-Wilo Stratos 80/1-12 data sheet</a>.
-</p>
-</html>",
+ <p>This example provides a validation for the Nrpm model.
+ A Wilo Stratos 80/1-12 pump is simulated for five different RPMs for load
+ that changes with time.
+ The resulting curves for the pump head and mass flow rate are plotted
+ using colored lines over the pump data sheet.
+ The resulting figures are shown below.
+ </p>
+ <p>Pump heads:</p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Examples/PumpValidationHead.png\"
+ alt=\"Pump head.\"/>
+ </p>
+ <p>Pump electrical power:</p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Examples/PumpValidationPower.png\"
+ alt=\"Pump power.\"/></p>
+ <p>The figures are adapted from the
+ <a href=\"http://productfinder.wilo.com/en/COM/product/0000001700017d670001003a/fc_product_datasheet\">
+ Wilo Stratos 80/1-12 data sheet</a>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 6, 2015, by Michael Wetter:<br/>
-Removed dublicate <code>experiment</code> annotation.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
-</li>
-<li>
-November 26, 2014, by Filip Jorissen:<br/>
-Cleaned up implementation
-</li>
-<li>
-February 27, 2014, by Filip Jorissen:<br/>
-First implementation. See
-<a href=\"https://github.com/lbl-srg/modelica-buildings/pull/202\">#202</a>
-for a discussion and validation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ June 6, 2015, by Michael Wetter:<br/>
+ Removed dublicate <code>experiment</code> annotation.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+ </li>
+ <li>
+ November 26, 2014, by Filip Jorissen:<br/>
+ Cleaned up implementation
+ </li>
+ <li>
+ February 27, 2014, by Filip Jorissen:<br/>
+ First implementation. See
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/202\">#202</a>
+ for a discussion and validation.
+ </li>
+ </ul>
+ </html>"),
     Diagram(coordinateSystem(extent={{-140,-140},{140,120}},
-          preserveAspectRatio=false)));
+          preserveAspectRatio=false)),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Pump_Nrpm_stratos;

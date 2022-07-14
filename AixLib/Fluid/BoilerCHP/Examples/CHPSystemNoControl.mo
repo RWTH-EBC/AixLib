@@ -49,8 +49,8 @@ equation
 </h4>
 <p>
   The simulation illustrates the behavior of <a href=
-  \"AixLib.Fluid.BoilerCHP.CHPNoControl\">AixLib.Fluid.BoilerCHP.CHPNoControl</a> in
-  different conditions. Inlet and outlet temperature as well as the
+  \"AixLib.Fluid.BoilerCHP.CHPNoControl\">AixLib.Fluid.BoilerCHP.CHPNoControl</a>
+  in different conditions. Inlet and outlet temperature as well as the
   electrical and thermal power of the CHP can be observed.
 </p>
 </html>",

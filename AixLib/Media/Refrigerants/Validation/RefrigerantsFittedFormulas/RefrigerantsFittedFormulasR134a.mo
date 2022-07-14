@@ -11,36 +11,32 @@ model RefrigerantsFittedFormulasR134a
 
   // Define parameters that define the range for calculating the fitted formulas
   //
-  parameter Modelica.SIunits.SpecificEnthalpy h_min = 180e3
+  parameter Modelica.Units.SI.SpecificEnthalpy h_min=180e3
     "Fluid limit: Minimum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_max = 550e3
+  parameter Modelica.Units.SI.SpecificEnthalpy h_max=550e3
     "Fluid limit: Maximum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEntropy s_min = 1.0e3
+  parameter Modelica.Units.SI.SpecificEntropy s_min=1.0e3
     "Fluid limit: Minimum specific entropy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEntropy s_max = 1.8e3
+  parameter Modelica.Units.SI.SpecificEntropy s_max=1.8e3
     "Fluid limit: Maximum specific entropy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_min = 2.0
-    "Fluid limit: Minimum density"
+  parameter Modelica.Units.SI.Density d_min=2.0 "Fluid limit: Minimum density"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_max = 1425
-    "Fluid limit: Maximum density"
+  parameter Modelica.Units.SI.Density d_max=1425 "Fluid limit: Maximum density"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_min = 1e5
+  parameter Modelica.Units.SI.AbsolutePressure p_min=1e5
     "Fluid limit: Minimum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_max = 38.5e5
+  parameter Modelica.Units.SI.AbsolutePressure p_max=38.5e5
     "Fluid limit: Maximum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_min = 233.15
-    "Fluid limit: Minimum temperature"
-    annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_max = 455.15
-    "Fluid limit: Maximum temperature"
-    annotation (Dialog(group="Fluid limits"));
+  parameter Modelica.Units.SI.Temperature T_min=233.15
+    "Fluid limit: Minimum temperature" annotation (Dialog(group="Fluid limits"));
+  parameter Modelica.Units.SI.Temperature T_max=455.15
+    "Fluid limit: Maximum temperature" annotation (Dialog(group="Fluid limits"));
 
   // Define submodels and connectors
   //
@@ -69,15 +65,15 @@ model RefrigerantsFittedFormulasR134a
 
   // Defines state variables
   //
-  Modelica.SIunits.AbsolutePressure p_sat
+  Modelica.Units.SI.AbsolutePressure p_sat
     "Actual pressure for calculating saturation properties";
-  Modelica.SIunits.Temperature T "Actual pulsating temperature";
-  Modelica.SIunits.Temperature T_sat
+  Modelica.Units.SI.Temperature T "Actual pulsating temperature";
+  Modelica.Units.SI.Temperature T_sat
     "Actual temperature for calculating saturation properties";
-  Modelica.SIunits.Density d "Actual raising density";
-  Modelica.SIunits.SpecificEnthalpy h
+  Modelica.Units.SI.Density d "Actual raising density";
+  Modelica.Units.SI.SpecificEnthalpy h
     "Actual pulsating specific enthalpy for calculating state properties";
-  Modelica.SIunits.SpecificEntropy s
+  Modelica.Units.SI.SpecificEntropy s
     "Actual pulsating specific enthalpy for calculating state properties";
   Real tauInt "Actual dimensionless temperature of internal medium";
   Real deltaInt "Actual dimensionless density of internal medium";
@@ -117,33 +113,33 @@ model RefrigerantsFittedFormulasR134a
 
   record Saturation
     "Record that contains calculated saturation properties"
-    Modelica.SIunits.AbsolutePressure p_satInt
+    Modelica.Units.SI.AbsolutePressure p_satInt
       "Saturation pressure of internal medium";
-    Modelica.SIunits.AbsolutePressure p_satExt
+    Modelica.Units.SI.AbsolutePressure p_satExt
       "Saturation pressure of external medium";
-    Modelica.SIunits.Temperature T_satInt
+    Modelica.Units.SI.Temperature T_satInt
       "Saturation temperature of internal medium";
-    Modelica.SIunits.Temperature T_satExt
+    Modelica.Units.SI.Temperature T_satExt
       "Saturation temperature of external medium";
-    Modelica.SIunits.Density d_lInt "Bubble density of internal medium";
-    Modelica.SIunits.Density d_lExt "Bubble density of external medium";
-    Modelica.SIunits.Density d_vInt "Dew density of internal medium";
-    Modelica.SIunits.Density d_vExt "Dew density of external medium";
-    Modelica.SIunits.SpecificEnthalpy h_lInt
+    Modelica.Units.SI.Density d_lInt "Bubble density of internal medium";
+    Modelica.Units.SI.Density d_lExt "Bubble density of external medium";
+    Modelica.Units.SI.Density d_vInt "Dew density of internal medium";
+    Modelica.Units.SI.Density d_vExt "Dew density of external medium";
+    Modelica.Units.SI.SpecificEnthalpy h_lInt
       "Specific bubble enthalpy of internal medium";
-    Modelica.SIunits.SpecificEnthalpy h_lExt
+    Modelica.Units.SI.SpecificEnthalpy h_lExt
       "Specific bubble enthalpy of external medium";
-    Modelica.SIunits.SpecificEnthalpy h_vInt
+    Modelica.Units.SI.SpecificEnthalpy h_vInt
       "Specific dew enthalpy internal medium";
-    Modelica.SIunits.SpecificEnthalpy h_vExt
+    Modelica.Units.SI.SpecificEnthalpy h_vExt
       "Specific dew enthalpy of external medium";
-    Modelica.SIunits.SpecificEntropy s_lInt
+    Modelica.Units.SI.SpecificEntropy s_lInt
       "Specific bubble entropy of internal medium";
-    Modelica.SIunits.SpecificEntropy s_lExt
+    Modelica.Units.SI.SpecificEntropy s_lExt
       "Specific bubble entropy of external medium";
-    Modelica.SIunits.SpecificEntropy s_vInt
+    Modelica.Units.SI.SpecificEntropy s_vInt
       "Specific dew entropy of internal medium";
-    Modelica.SIunits.SpecificEntropy s_vExt
+    Modelica.Units.SI.SpecificEntropy s_vExt
       "Specific dew entropy of external medium";
     Real dp_sat "Relative difference of saturation pressure";
     Real dT_sat "Relative difference of saturation temperature";
@@ -169,9 +165,9 @@ model RefrigerantsFittedFormulasR134a
   Properties properties "Record that contains calculated state properties";
 
 protected
-  Modelica.SIunits.Time convChange(start = 0)
+  Modelica.Units.SI.Time convChange(start=0)
     "Time to reset calculation of actual temperature";
-  Modelica.SIunits.Time convChangeTmp(start = 0)
+  Modelica.Units.SI.Time convChangeTmp(start=0)
     "Temporary time to reset calculation of actual temperature";
 
 algorithm

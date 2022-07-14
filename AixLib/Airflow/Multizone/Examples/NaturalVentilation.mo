@@ -9,7 +9,6 @@ model NaturalVentilation
     redeclare package Medium = Medium,
     V=2.5*10*5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=273.15 + 18,
     nPorts=2,
     m_flow_nominal=0.001) "Control volume"
@@ -42,7 +41,6 @@ model NaturalVentilation
   AixLib.Fluid.MixingVolumes.MixingVolume volOut(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     V=1E10,
     T_start=273.15 + 20,
     nPorts=2,
@@ -89,34 +87,35 @@ experiment(Tolerance=1e-06, StopTime=7200),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/Examples/NaturalVentilation.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model illustrates buoyancy-driven natural ventilation between
-two volumes of air.
-The volume <code>volA</code> can be considered as the volume of a room,
-and the volume <code>volOut</code> is parameterized to be very large to emulate
-outside air.
-The outside air is <i>20</i>&deg;C and at initial time, the room air is
-<i>18</i>&deg;C.
-This induces an airflow in counter clock-wise direction. Since
-heat is added to the room air volume, its temperature raises above the temperature of the outside, which causes the air flow to reverse its direction.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 26, 2021 by Michael Wetter:<br/>
-Updated comments for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-November 10, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model illustrates buoyancy-driven natural ventilation between
+ two volumes of air.
+ The volume <code>volA</code> can be considered as the volume of a room,
+ and the volume <code>volOut</code> is parameterized to be very large to emulate
+ outside air.
+ The outside air is <i>20</i>&deg;C and at initial time, the room air is
+ <i>18</i>&deg;C.
+ This induces an airflow in counter clock-wise direction. Since
+ heat is added to the room air volume, its temperature raises above the temperature of the outside, which causes the air flow to reverse its direction.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 26, 2021 by Michael Wetter:<br/>
+ Updated comments for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ November 10, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end NaturalVentilation;

@@ -4,7 +4,7 @@ partial model PartialBorehole "Partial model for borehole example models"
 
   parameter Integer nSeg(min=1) = 10
     "Number of segments to use in vertical discretization of the boreholes";
-  parameter Modelica.SIunits.Temperature T_start = 273.15 + 22
+  parameter Modelica.Units.SI.Temperature T_start=273.15 + 22
     "Initial soil temperature";
 
   parameter AixLib.Fluid.Geothermal.Borefields.Data.Borefield.Example
@@ -70,17 +70,18 @@ equation
   connect(borHol.port_wall, preTem.port) annotation (Line(points={{1.77636e-15,14},
           {0,14},{0,70},{-40,70}}, color={191,0,0}));
   annotation(Documentation(info="<html>
-<p>
-This partial model is used for examples using boreholes models which extend
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 9, 2018, by Alex Laferri&egrave;re:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This partial model is used for examples using boreholes models which extend
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 9, 2018, by Alex Laferri&egrave;re:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialBorehole;

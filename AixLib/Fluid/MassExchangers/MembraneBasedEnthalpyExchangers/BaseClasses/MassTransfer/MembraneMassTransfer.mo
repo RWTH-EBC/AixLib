@@ -9,23 +9,18 @@ model MembraneMassTransfer "model for mass transfer through membrane in
     "number of parallel air ducts";
 
   // Parameter
-  parameter Modelica.SIunits.Length lengthMem
+  parameter Modelica.Units.SI.Length lengthMem
     "length of membrane in flow direction";
-  parameter Modelica.SIunits.Length widthMem
-    "width of membrane";
-  parameter Modelica.SIunits.Length thicknessMem
-    "thickness of membrane";
-  parameter Modelica.SIunits.Density rhoMem
-    "density of membrane";
-  parameter Modelica.SIunits.Area areaMem=
-    lengthMem*widthMem*nParallel
-    "surface area of membrane"
-    annotation (Dialog(enable=false));
+  parameter Modelica.Units.SI.Length widthMem "width of membrane";
+  parameter Modelica.Units.SI.Length thicknessMem "thickness of membrane";
+  parameter Modelica.Units.SI.Density rhoMem "density of membrane";
+  parameter Modelica.Units.SI.Area areaMem=lengthMem*widthMem*nParallel
+    "surface area of membrane" annotation (Dialog(enable=false));
 
   // Initialization
-  parameter Modelica.SIunits.PartialPressure p_start
+  parameter Modelica.Units.SI.PartialPressure p_start
     "start value for mean partial pressure at membrane's surfaces";
-  parameter Modelica.SIunits.PartialPressure dp_start
+  parameter Modelica.Units.SI.PartialPressure dp_start
     "start value for partial pressure difference between membrane's surfaces";
 
   // Inputs
@@ -49,7 +44,7 @@ protected
   // 1 Barrer = 3.33*10^(-16) (mol*m)/(m²*s*Pa)
   // calculated from: Stern, S.A.: The "Barrer" Permeability Unit.
   //                  J. of Polym. Sci. Vol. 6. 1968
-   constant Modelica.SIunits.MolarMass M_steam = 0.01802;
+  constant Modelica.Units.SI.MolarMass M_steam=0.01802;
 //   constant Modelica.SIunits.MolarMass M_air = 0.028949;
   // source: Detlev Möller: Luft: Chemie, Physik, Biologie, Reinhaltung, Recht.
   //         Walter de Gruyter, 2003, ISBN 3-11-016431-0, S. 173

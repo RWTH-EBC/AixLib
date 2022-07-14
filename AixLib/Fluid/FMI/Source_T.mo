@@ -82,48 +82,49 @@ equation
           fillPattern=FillPattern.Solid,
           fillColor={255,255,255}), Text(
           extent={{-94,60},{94,-58}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="m_flow
-p")}),
+ p")}),
     Documentation(info="<html>
-<p>
-Model of a source that takes as an input the mass flow rate,
-pressure and the medium properties
-temperature, mass fractions (if <code>Medium.nXi &gt; 0</code>)
-and trace substances (if <code>Medium.nC &gt; 0</code>).
-</p>
-<p>
-For a system of components with the connectors of the
-<a href=\"modelica://AixLib.Fluid.FMI\">
-AixLib.Fluid.FMI</a>
-package, this component is required to set the pressure
-and the mass flow rate of the system.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-October 15, 2016, by Michael Wetter:<br/>
-Removed redundant connection.
-</li>
-<li>
-April 29, 2015, by Michael Wetter:<br/>
-Redesigned to conditionally remove the pressure connector
-if <code>use_p_in=false</code>.
-</li>
-<li>
-April 15, 2015 by Michael Wetter:<br/>
-Changed connector variable to be temperature instead of
-specific enthalpy.
-</li>
-<li>
-November 8, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Model of a source that takes as an input the mass flow rate,
+ pressure and the medium properties
+ temperature, mass fractions (if <code>Medium.nXi &gt; 0</code>)
+ and trace substances (if <code>Medium.nC &gt; 0</code>).
+ </p>
+ <p>
+ For a system of components with the connectors of the
+ <a href=\"modelica://AixLib.Fluid.FMI\">
+ AixLib.Fluid.FMI</a>
+ package, this component is required to set the pressure
+ and the mass flow rate of the system.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ October 15, 2016, by Michael Wetter:<br/>
+ Removed redundant connection.
+ </li>
+ <li>
+ April 29, 2015, by Michael Wetter:<br/>
+ Redesigned to conditionally remove the pressure connector
+ if <code>use_p_in=false</code>.
+ </li>
+ <li>
+ April 15, 2015 by Michael Wetter:<br/>
+ Changed connector variable to be temperature instead of
+ specific enthalpy.
+ </li>
+ <li>
+ November 8, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Source_T;

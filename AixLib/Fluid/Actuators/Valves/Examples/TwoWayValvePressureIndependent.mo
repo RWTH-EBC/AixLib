@@ -98,14 +98,15 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValvePressureIndependent.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>Test model for pressure independent valves. Note that the leakage at full mass flow rate (<code>l2</code>) has been set to a large value for better visualization of the valve characteristics. To use common values, use the default values. </p>
-<p>The parameter <code>filterOpening</code> is set to <code>false</code>, as this model is used to plot the flow at different opening signals without taking into account the travel time of the actuator. </p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 29, 2015 by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>Test model for pressure independent valves. Note that the leakage at full mass flow rate (<code>l2</code>) has been set to a large value for better visualization of the valve characteristics. To use common values, use the default values. </p>
+ <p>The parameter <code>filterOpening</code> is set to <code>false</code>, as this model is used to plot the flow at different opening signals without taking into account the travel time of the actuator. </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 29, 2015 by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValvePressureIndependent;

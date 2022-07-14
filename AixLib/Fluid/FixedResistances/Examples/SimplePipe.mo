@@ -30,7 +30,7 @@ model SimplePipe
     nNodes=4,
     dh=0.028,
     length=10,
-    lambda=400,
+    lambda=0.035,
     thickness=0.001,
     T_start=323.15,
     m_flow_nominal=0.5,
@@ -63,8 +63,8 @@ equation
     annotation (Line(points={{40,0},{68,0}}, color={0,127,255}));
   connect(Tin.y, Source.T_in)
     annotation (Line(points={{-81,4},{-70,4}}, color={0,0,127}));
-  connect(simplePipe.heatPorts, fixedTemp.port) annotation (Line(points={{0,5.2},
-          {-4,5.2},{-4,38},{-20,38},{-20,50}}, color={127,0,0}));
+  connect(simplePipe.heatPorts, fixedTemp.port) annotation (Line(points={{0,5.2},{0,50},{-20,50}},
+                                               color={127,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>

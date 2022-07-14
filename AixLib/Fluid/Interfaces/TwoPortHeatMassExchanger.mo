@@ -10,17 +10,14 @@ model TwoPortHeatMassExchanger
   constant Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(HideResult=true);
 
-  parameter Modelica.SIunits.Time tau = 30
+  parameter Modelica.Units.SI.Time tau=30
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
-     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
 
   // Dynamics
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
-    "Type of mass balance: dynamic (3 initialization options) or steady state"
-    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Conservation equations"));
 
   // Initialization
   parameter Medium.AbsolutePressure p_start = Medium.p_default
@@ -47,7 +44,7 @@ model TwoPortHeatMassExchanger
     final mSenFac=1,
     final m_flow_nominal = m_flow_nominal,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
+    final massDynamics=energyDynamics,
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
@@ -69,24 +66,19 @@ model TwoPortHeatMassExchanger
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default, p=Medium.p_default, X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
   parameter Medium.ThermodynamicState sta_start=Medium.setState_pTX(
       T=T_start, p=p_start, X=X_start);
-  parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start = Medium.specificEnthalpy(sta_start)
-    "Start value for outflowing enthalpy";
+  parameter Modelica.Units.SI.SpecificEnthalpy h_outflow_start=
+      Medium.specificEnthalpy(sta_start) "Start value for outflowing enthalpy";
 
 initial algorithm
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau > Modelica.Constants.eps,
 "The parameter tau, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau = " + String(tau) + "\n");
-  assert((massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-          tau > Modelica.Constants.eps,
-"The parameter tau, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau = " + String(tau) + "\n");
+  You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
+  Received tau = "+ String(tau) + "\n");
 
   assert(homotopyInitialization, "In " + getInstanceName() +
     ": The constant homotopyInitialization has been modified from its default value. This constant will be removed in future releases.",
@@ -104,147 +96,153 @@ equation
       color={0,127,255}));
   annotation (
     Documentation(info="<html>
-<p>
-This component transports one fluid stream.
-It provides the basic model for implementing dynamic and steady-state
-models that exchange heat and water vapor with the fluid stream.
-The model also computes the pressure drop due to the flow resistance.
-By setting the parameter <code>dp_nominal=0</code>, the computation
-of the pressure drop can be avoided.
-The variable <code>vol.heatPort.T</code> always has the value of
-the temperature of the medium that leaves the component.
-For the actual temperatures at the port, the variables <code>sta_a.T</code>
-and <code>sta_b.T</code> can be used. These two variables are provided by
-the base class
-<a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPortInterface\">
-AixLib.Fluid.Interfaces.PartialTwoPortInterface</a>.
-</p>
-
-For models that extend this model, see for example
-<ul>
-<li>
-the ideal heater or cooler
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
-AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>, and
-</li>
-<li>
-the ideal humidifier
-<a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
-AixLib.Fluid.Humidifiers.Humidifier_u</a>.
-</li>
-</ul>
-
-<h4>Implementation</h4>
-<p>
-The variable names follow the conventions used in
-<a href=\"modelica://Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX\">
-Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX
-</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-Changed <code>homotopyInitialization</code> to a constant.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib, #1341</a>.
-</li>
-<li>
-December 1, 2016, by Michael Wetter:<br/>
-Updated model as <code>use_dh</code> is no longer a parameter in the pressure drop model.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
-</li>
-<li>
-January 26, 2016, by Michael Wetter:<br/>
-Added <code>final quantity=Medium.substanceNames</code> for <code>X_start</code>.
-</li>
-<li>
-May 6, 2015, by Michael Wetter:<br/>
-Added missing propagation of <code>allowFlowReversal</code> to
-instance <code>vol</code>.
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">#412</a>.
-</li>
-<li>
-May 1, 2015, by Marcus Fuchs:<br/>
-Fixed links in documentation.
-</li>
-<li>
-October 6, 2014, by Michael Wetter:<br/>
-Changed medium declaration in pressure drop element to be final.
-</li>
-<li>
-May 28, 2014, by Michael Wetter:<br/>
-Removed <code>annotation(Evaluate=true)</code> for parameter <code>tau</code>.
-This is needed to allow changing the time constant after translation.
-</li>
-<li>
-November 12, 2013, by Michael Wetter:<br/>
-Removed <code>import Modelica.Constants</code> statement.
-</li>
-<li>
-October 8, 2013, by Michael Wetter:<br/>
-Removed parameter <code>show_V_flow</code>.
-</li>
-<li>
-December 14, 2012 by Michael Wetter:<br/>
-Renamed protected parameters for consistency with the naming conventions.
-</li>
-<li>
-October 17, 2012, by Michael Wetter:<br/>
-Fixed broken link in documentation.
-</li>
-<li>
-February 3, 2012, by Michael Wetter:<br/>
-Removed assignment of <code>m_flow_small</code> as it is no
-longer used in the pressure drop model.
-</li>
-<li>
-January 15, 2011, by Michael Wetter:<br/>
-Fixed wrong class reference in information section.
-</li>
-<li>
-September 13, 2011, by Michael Wetter:<br/>
-Changed assignment of <code>vol(mass/energyDynamics=...)</code> as the
-previous assignment caused a non-literal start value that was ignored.
-</li>
-<li>
-July 29, 2011, by Michael Wetter:<br/>
-Added start value for outflowing enthalpy.
-</li>
-<li>
-July 11, 2011, by Michael Wetter:<br/>
-Changed parameterization of fluid volume so that steady-state balance is
-used when <code>tau = 0</code>.
-</li>
-<li>
-May 25, 2011, by Michael Wetter:<br/>
-Removed temperature sensor and changed implementation of fluid volume
-to allow use of this model for the steady-state and dynamic humidifier
-<a href=\"modelica://AixLib.Fluid.MassExchangers.HumidifierPrescribed\">
-AixLib.Fluid.MassExchangers.HumidifierPrescribed</a>.
-</li>
-<li>
-March 25, 2011, by Michael Wetter:<br/>
-Added homotopy operator.
-</li>
-<li>
-March 21, 2010 by Michael Wetter:<br/>
-Changed pressure start value from <code>system.p_start</code>
-to <code>Medium.p_default</code> since HVAC models may have water and
-air, which are typically at different pressures.
-</li>
-<li>
-April 13, 2009, by Michael Wetter:<br/>
-Added model to compute flow friction.
-</li>
-<li>
-January 29, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This component transports one fluid stream.
+ It provides the basic model for implementing dynamic and steady-state
+ models that exchange heat and water vapor with the fluid stream.
+ The model also computes the pressure drop due to the flow resistance.
+ By setting the parameter <code>dp_nominal=0</code>, the computation
+ of the pressure drop can be avoided.
+ The variable <code>vol.heatPort.T</code> always has the value of
+ the temperature of the medium that leaves the component.
+ For the actual temperatures at the port, the variables <code>sta_a.T</code>
+ and <code>sta_b.T</code> can be used. These two variables are provided by
+ the base class
+ <a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPortInterface\">
+ AixLib.Fluid.Interfaces.PartialTwoPortInterface</a>.
+ </p>
+ 
+ For models that extend this model, see for example
+ <ul>
+ <li>
+ the ideal heater or cooler
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
+ AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>, and
+ </li>
+ <li>
+ the ideal humidifier
+ <a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
+ AixLib.Fluid.Humidifiers.Humidifier_u</a>.
+ </li>
+ </ul>
+ 
+ <h4>Implementation</h4>
+ <p>
+ The variable names follow the conventions used in
+ <a href=\"modelica://Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX\">
+ Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX
+ </a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 3, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
+ </li>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ December 1, 2016, by Michael Wetter:<br/>
+ Updated model as <code>use_dh</code> is no longer a parameter in the pressure drop model.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
+ </li>
+ <li>
+ January 26, 2016, by Michael Wetter:<br/>
+ Added <code>final quantity=Medium.substanceNames</code> for <code>X_start</code>.
+ </li>
+ <li>
+ May 6, 2015, by Michael Wetter:<br/>
+ Added missing propagation of <code>allowFlowReversal</code> to
+ instance <code>vol</code>.
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">#412</a>.
+ </li>
+ <li>
+ May 1, 2015, by Marcus Fuchs:<br/>
+ Fixed links in documentation.
+ </li>
+ <li>
+ October 6, 2014, by Michael Wetter:<br/>
+ Changed medium declaration in pressure drop element to be final.
+ </li>
+ <li>
+ May 28, 2014, by Michael Wetter:<br/>
+ Removed <code>annotation(Evaluate=true)</code> for parameter <code>tau</code>.
+ This is needed to allow changing the time constant after translation.
+ </li>
+ <li>
+ November 12, 2013, by Michael Wetter:<br/>
+ Removed <code>import Modelica.Constants</code> statement.
+ </li>
+ <li>
+ October 8, 2013, by Michael Wetter:<br/>
+ Removed parameter <code>show_V_flow</code>.
+ </li>
+ <li>
+ December 14, 2012 by Michael Wetter:<br/>
+ Renamed protected parameters for consistency with the naming conventions.
+ </li>
+ <li>
+ October 17, 2012, by Michael Wetter:<br/>
+ Fixed broken link in documentation.
+ </li>
+ <li>
+ February 3, 2012, by Michael Wetter:<br/>
+ Removed assignment of <code>m_flow_small</code> as it is no
+ longer used in the pressure drop model.
+ </li>
+ <li>
+ January 15, 2011, by Michael Wetter:<br/>
+ Fixed wrong class reference in information section.
+ </li>
+ <li>
+ September 13, 2011, by Michael Wetter:<br/>
+ Changed assignment of <code>vol(mass/energyDynamics=...)</code> as the
+ previous assignment caused a non-literal start value that was ignored.
+ </li>
+ <li>
+ July 29, 2011, by Michael Wetter:<br/>
+ Added start value for outflowing enthalpy.
+ </li>
+ <li>
+ July 11, 2011, by Michael Wetter:<br/>
+ Changed parameterization of fluid volume so that steady-state balance is
+ used when <code>tau = 0</code>.
+ </li>
+ <li>
+ May 25, 2011, by Michael Wetter:<br/>
+ Removed temperature sensor and changed implementation of fluid volume
+ to allow use of this model for the steady-state and dynamic humidifier
+ <a href=\"modelica://AixLib.Fluid.MassExchangers.HumidifierPrescribed\">
+ AixLib.Fluid.MassExchangers.HumidifierPrescribed</a>.
+ </li>
+ <li>
+ March 25, 2011, by Michael Wetter:<br/>
+ Added homotopy operator.
+ </li>
+ <li>
+ March 21, 2010 by Michael Wetter:<br/>
+ Changed pressure start value from <code>system.p_start</code>
+ to <code>Medium.p_default</code> since HVAC models may have water and
+ air, which are typically at different pressures.
+ </li>
+ <li>
+ April 13, 2009, by Michael Wetter:<br/>
+ Added model to compute flow friction.
+ </li>
+ <li>
+ January 29, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
@@ -266,5 +264,6 @@ First implementation.
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={255,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoPortHeatMassExchanger;

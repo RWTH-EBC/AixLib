@@ -1,19 +1,19 @@
 within AixLib.Controls.AirHandling;
 model FVUController "Rule-based controller of a facade ventilation unit"
 
-  parameter Modelica.SIunits.Temperature minimumSupTemp=273.15 + 17
+  parameter Modelica.Units.SI.Temperature minimumSupTemp=273.15 + 17
     "Minimum supply air temperature";
 
   parameter Real co2SetConcentration(min=0) = 600
     "Set point for CO2 concentration in ppm";
 
-  parameter Real maxSupFanPower(min=0, max=0) = 1
+  parameter Real maxSupFanPower(min=0, max=1) = 1
     "Maximum relative supply air fan power (0..1)";
 
-  parameter Real maxExFanPower(min=0, max=0) = 1
+  parameter Real maxExFanPower(min=0, max=1) = 1
     "Maximum relative exhaust air fan power (0..1)";
 
-  parameter Modelica.SIunits.TemperatureDifference deltaTemp = 1
+  parameter Modelica.Units.SI.TemperatureDifference deltaTemp=1
     "Added to the set temperature in cooling mode";
 
   Modelica.Blocks.Logical.OnOffController roomToBeCooled(bandwidth=2)

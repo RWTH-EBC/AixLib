@@ -11,12 +11,12 @@ model OneAppartment_Radiators
   parameter Real ratioSunblind(min=0.0, max=1.0)
     "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+  parameter Modelica.Units.SI.Irradiance solIrrThreshold(min=0.0)
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit
+    annotation (Dialog(group="Sunblind", enable=use_sunblind));
+  parameter Modelica.Units.SI.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+    annotation (Dialog(group="Sunblind", enable=use_sunblind));
 
   replaceable model WindowModel =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow

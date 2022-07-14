@@ -6,7 +6,7 @@ block OccupancySchedule "Occupancy schedule with look-ahead"
     "Occupancy table, each entry switching occupancy on or off";
   parameter Boolean firstEntryOccupied = true
     "Set to true if first entry in occupancy denotes a changed from unoccupied to occupied";
-  parameter Modelica.SIunits.Time period =   86400 "End time of periodicity";
+  parameter Modelica.Units.SI.Time period=86400 "End time of periodicity";
 
   Modelica.Blocks.Interfaces.RealOutput tNexNonOcc
     "Time until next non-occupancy"
@@ -21,15 +21,15 @@ protected
   final parameter Integer nRow = size(occupancy,1)
     "Number of rows in the schedule";
 
-  discrete Modelica.SIunits.Time tOcc "Time when next occupancy starts";
-  discrete Modelica.SIunits.Time tNonOcc "Time when next non-occupancy starts";
-  discrete Modelica.SIunits.Time tNext "Time of next switch in schedule";
+  discrete Modelica.Units.SI.Time tOcc "Time when next occupancy starts";
+  discrete Modelica.Units.SI.Time tNonOcc "Time when next non-occupancy starts";
+  discrete Modelica.Units.SI.Time tNext "Time of next switch in schedule";
 
   function getOutput "Get the next occupancy or non-occupancy outputs"
     extends Modelica.Icons.Function;
 
-    input Modelica.SIunits.Time t "Current model time";
-    input Modelica.SIunits.Time period "Periodicity";
+    input Modelica.Units.SI.Time t "Current model time";
+    input Modelica.Units.SI.Time period "Periodicity";
     input Real occupancy[nRow]
       "Occupancy table, each entry switching occupancy on or off";
     input Boolean firstEntryOccupied
@@ -37,11 +37,11 @@ protected
     input Integer nRow
       "Number of rows in the schedule";
 
-    output Modelica.SIunits.Time tOcc "Time when next occupancy starts";
-    output Modelica.SIunits.Time tNonOcc "Time when next non-occupancy starts";
+    output Modelica.Units.SI.Time tOcc "Time when next occupancy starts";
+    output Modelica.Units.SI.Time tNonOcc "Time when next non-occupancy starts";
     output Boolean occupied
     "Outputs true if occupied at current time";
-    output Modelica.SIunits.Time tNext "Time of next switch in schedule";
+    output Modelica.Units.SI.Time tNext "Time of next switch in schedule";
 
   protected
     Integer iPerSta
@@ -163,79 +163,80 @@ equation
           color={0,0,255}),
         Text(
           extent={{34,74},{90,50}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="occupancy"),
         Text(
           extent={{32,16},{92,-16}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="non-occupancy"),
         Text(
           extent={{34,-44},{94,-76}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="occupied")}),
 defaultComponentName="occSch",
 Documentation(info="<html>
-<p>
-This model outputs whether the building is currently occupied,
-and how long it will take until the next time when the building
-will be occupied or non-occupied.
-The latter may be used, for example, to start a ventilation system
-half an hour before occupancy starts in order to ventilate the room.
-</p>
-<p>
-The occupancy is defined by a time schedule of the form
-</p>
-<pre>
-  occupancy = 3600*{7, 12, 14, 19}
-</pre>
-<p>
-This indicates that the occupancy is from <i>7:00</i> until <i>12:00</i>
-and from <i>14:00</i> to <i>19:00</i>. This will be repeated periodically.
-The parameter <code>periodicity</code> defines the periodicity.
-The period always starts at <i>t=0</i> seconds.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 25, 2021, by Michael Wetter:<br/>
-Integrated changes from Buildings for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1454\">AixLib, #1454</a>.
-</li>
-<li>
-February 26, 2021, by Michael Wetter:<br/>
-Refactored implementation to use a function to compute the next time events.<br/>
-This is a work-around for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2369\">Buildings, issue 2369</a>.
-</li>
-<li>
-October 30, 2017, by Michael Wetter:<br/>
-Rewrote using <code>equation</code> rather than <code>algorithm</code>
-and removed assertion.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/844\">issue 844</a>.
-</li>
-<li>
-September 11, 2012, by Michael Wetter:<br/>
-Added <code>pre</code> operator in <code>when</code> clause and relaxed
-tolerance in <code>assert</code> statement.
-</li>
-<li>
-July 26, 2012, by Michael Wetter:<br/>
-Fixed a bug that caused an error in the schedule if the simulation start time was negative or equal to the first entry in the schedule.
-</li>
-<li>
-February 16, 2012, by Michael Wetter:<br/>
-Removed parameter <code>startTime</code>. It was removed because <code>startTime=0</code>
-would imply that the schedule should not start for one day if the simulation were
-to be started at <i>t=-8760</i> seconds.
-Fixed bug that prevented schedule to start when the simulation was started at a time that
-is higher than <code>endTime</code>.
-Renamed parameter <code>endTime</code> to <code>period</code>.
-</li>
-<li>
-April 2, 2009, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model outputs whether the building is currently occupied,
+ and how long it will take until the next time when the building
+ will be occupied or non-occupied.
+ The latter may be used, for example, to start a ventilation system
+ half an hour before occupancy starts in order to ventilate the room.
+ </p>
+ <p>
+ The occupancy is defined by a time schedule of the form
+ </p>
+ <pre>
+   occupancy = 3600*{7, 12, 14, 19}
+ </pre>
+ <p>
+ This indicates that the occupancy is from <i>7:00</i> until <i>12:00</i>
+ and from <i>14:00</i> to <i>19:00</i>. This will be repeated periodically.
+ The parameter <code>periodicity</code> defines the periodicity.
+ The period always starts at <i>t=0</i> seconds.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 25, 2021, by Michael Wetter:<br/>
+ Integrated changes from Buildings for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1454\">IBPSA, #1454</a>.
+ </li>
+ <li>
+ February 26, 2021, by Michael Wetter:<br/>
+ Refactored implementation to use a function to compute the next time events.<br/>
+ This is a work-around for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2369\">Buildings, issue 2369</a>.
+ </li>
+ <li>
+ October 30, 2017, by Michael Wetter:<br/>
+ Rewrote using <code>equation</code> rather than <code>algorithm</code>
+ and removed assertion.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/844\">issue 844</a>.
+ </li>
+ <li>
+ September 11, 2012, by Michael Wetter:<br/>
+ Added <code>pre</code> operator in <code>when</code> clause and relaxed
+ tolerance in <code>assert</code> statement.
+ </li>
+ <li>
+ July 26, 2012, by Michael Wetter:<br/>
+ Fixed a bug that caused an error in the schedule if the simulation start time was negative or equal to the first entry in the schedule.
+ </li>
+ <li>
+ February 16, 2012, by Michael Wetter:<br/>
+ Removed parameter <code>startTime</code>. It was removed because <code>startTime=0</code>
+ would imply that the schedule should not start for one day if the simulation were
+ to be started at <i>t=-8760</i> seconds.
+ Fixed bug that prevented schedule to start when the simulation was started at a time that
+ is higher than <code>endTime</code>.
+ Renamed parameter <code>endTime</code> to <code>period</code>.
+ </li>
+ <li>
+ April 2, 2009, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end OccupancySchedule;

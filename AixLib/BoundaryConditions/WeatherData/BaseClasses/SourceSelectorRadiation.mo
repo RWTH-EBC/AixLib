@@ -86,7 +86,7 @@ block SourceSelectorRadiation
 
 protected
   constant Real epsCos = 1e-6 "Small value to avoid division by 0";
-  constant Modelica.SIunits.HeatFlux solCon = 1367.7 "Solar constant";
+  constant Modelica.Units.SI.HeatFlux solCon=1367.7 "Solar constant";
 
   // Conditional connectors
   Modelica.Blocks.Interfaces.RealInput HGloHor_in_internal(
@@ -151,32 +151,32 @@ equation
   annotation (
   defaultComponentName="souSel",
 Documentation(info="<html>
-<p>
-Block that outputs the direct normal, diffuse horizontal and diffuse global
-solar irradiation.
-This block computes these output quantities based on conditionally provided
-input signals.
-</p>
-<p>
-The computations are based on Wetter (2004).
-</p>
-<h4>References</h4>
-<ul>
-<li>
-Michael Wetter.<br/>
-<a href=\"http://simulationresearch.lbl.gov/wetter/download/mwdiss.pdf\">
-Simulation-based Building Energy Optimization</a>.<br/>
-Dissertation. University of California at Berkeley. 2004.
-</li>
-</ul>
-</html>", revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Block that outputs the direct normal, diffuse horizontal and diffuse global
+ solar irradiation.
+ This block computes these output quantities based on conditionally provided
+ input signals.
+ </p>
+ <p>
+ The computations are based on Wetter (2004).
+ </p>
+ <h4>References</h4>
+ <ul>
+ <li>
+ Michael Wetter.<br/>
+ <a href=\"http://simulationresearch.lbl.gov/wetter/download/mwdiss.pdf\">
+ Simulation-based Building Energy Optimization</a>.<br/>
+ Dissertation. University of California at Berkeley. 2004.
+ </li>
+ </ul>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={
       Rectangle(
           extent={{-100,100},{100,-100}},
@@ -196,5 +196,6 @@ First implementation.
         Ellipse(lineColor={0,0,255},
           pattern=LinePattern.None,
           fillPattern=FillPattern.Solid,
-          extent={{-2,-8},{14,8}})}));
+          extent={{-2,-8},{14,8}})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SourceSelectorRadiation;

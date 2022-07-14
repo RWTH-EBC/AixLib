@@ -1,58 +1,39 @@
-#!/bin/bash
-image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
-
-stages:
-    - deleteBranch
-    - IBPSA_Merge
-    - Update_WhiteList
-    - Release
-    - SetSettings
-    - CheckSettings
-    - Ref_Check
-    - Ref_Update
-    - Dif_Ref
-    - build
-    - HTMLCheck
-    - deploy
-    - openMR
-    - post
-    - ChangedModels
-    - StyleCheck
-    - Check
-    - Simulate
-    - RegressionTest
-
- 
-variables:
-    Praefix_Branch: "Correct_HTML_"
-    TARGET_BRANCH: $CI_COMMIT_REF_NAME
-    Newbranch: ${Praefix_Branch}${CI_COMMIT_REF_NAME}
-    Github_Repository : RWTH-EBC/AixLib
+
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:Dymola_2022-miniconda
+
+stages:
+    - check_setting
+    - build_templates
+    - Ref_Check
+    - build
+    - HTML_Check
+    - IBPSA_Merge
+    - create_html_whitelist
+    - Update_WhiteList
+    - Release
+    - StyleCheck
+    - check
+    - openMR
+    - post
+    - create_whitelist
+    - simulate
+    - RegressionTest
+    - Update_Ref
+    - plot_ref
+    - prepare
+    - deploy
+    
+variables:
+    Github_Repository: RWTH-EBC/AixLib
+    GITLAB_Page: https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib
+    
+include:
+    - 'bin/templates/03_ci_templates/01_deploy/gitlab_pages.gitlab-ci.yml'  
+    - 'bin/templates/03_ci_templates/01_deploy/IBPSA_Merge.gitlab-ci.yml'  
+    - 'bin/templates/03_ci_templates/02_UnitTests/check_model.gitlab-ci.yml'  
+    - 'bin/templates/03_ci_templates/02_UnitTests/regression_test.gitlab-ci.yml'  
+    - 'bin/templates/03_ci_templates/02_UnitTests/simulate_model.gitlab-ci.yml'  
+    - 'bin/templates/03_ci_templates/03_SyntaxTest/html_check.gitlab-ci.yml'  
+    - 'bin/templates/03_ci_templates/03_SyntaxTest/style_check.gitlab-ci.yml'  
+    - 'bin/templates/03_ci_templates/04_CleanUpScript/ci_setting.gitlab-ci.yml'  
   
-include:
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/deploy/deploy_ref.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/UnitTests/development_check.gitlab-ci.yml' 
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/deploy/IBPSA_Merge.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/UnitTests/regression_ref_check.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/SyntaxTests/style_check.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/UnitTests/check_model.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/UnitTests/regression_test.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/UnitTests/simulate_model.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/UnitTests/changed_simulate_model.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file:  'modelica-ci-tests/UnitTests/changed_check_model.gitlab-ci.yml'
-  - project: 'EBC/EBC_all/gitlab_ci/templates'
-    file: 'modelica-ci-tests/UnitTests/changed_regression_test.gitlab-ci.yml'

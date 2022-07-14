@@ -8,9 +8,9 @@ model InternalControl "Internal control model for boiler"
     choicesAllMatching = true);
   parameter Real KR
     "Gain of boiler heater";
-  parameter Modelica.SIunits.Time TN
+  parameter Modelica.Units.SI.Time TN
     "Time constant of boiler heater (T>0 required)";
-  parameter Modelica.SIunits.Time riseTime
+  parameter Modelica.Units.SI.Time riseTime
     "Rise/fall time for step input(T>0 required)";
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
@@ -80,7 +80,7 @@ model InternalControl "Internal control model for boiler"
         energyDynamics)
     "For secondary energy consumption"
     annotation (Placement(transformation(extent={{30,82.5},{49.5,103.5}})));
-  Modelica.Blocks.Tables.CombiTable1D efficiencyTable(
+  Modelica.Blocks.Tables.CombiTable1Dv efficiencyTable(
     final tableOnFile=false,
     final table=paramBoiler.eta,
     final columns={2},

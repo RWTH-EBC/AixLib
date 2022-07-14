@@ -6,10 +6,10 @@ model CrossFlowReduction
   parameter Integer n=1 "number of discrete elements in flow direction";
   parameter Integer nParallel=1 "number of parallel membranes";
 
-  parameter Modelica.SIunits.Length thicknessMem "thickness of membranes";
-  parameter Modelica.SIunits.ThermalConductivity lambdaMem
+  parameter Modelica.Units.SI.Length thicknessMem "thickness of membranes";
+  parameter Modelica.Units.SI.ThermalConductivity lambdaMem
     "thermal conductivity of membrane";
-  parameter Modelica.SIunits.Area[n] surfaceAreas "Heat transfer areas";
+  parameter Modelica.Units.SI.Area[n] surfaceAreas "Heat transfer areas";
   parameter Real aspRatCroToTot "cross flow portion of transfer area";
 
   // Variables
@@ -17,14 +17,14 @@ model CrossFlowReduction
   Real[n] NTUs "number of heat transfer units";
 
   // Inputs
-  input Modelica.SIunits.HeatCapacity cp1 "heat capacity of air flow 1";
-  input Modelica.SIunits.HeatCapacity cp2 "heat capacity of air flow 2";
-  input Modelica.SIunits.CoefficientOfHeatTransfer[n] hCons1
+  input Modelica.Units.SI.HeatCapacity cp1 "heat capacity of air flow 1";
+  input Modelica.Units.SI.HeatCapacity cp2 "heat capacity of air flow 2";
+  input Modelica.Units.SI.CoefficientOfHeatTransfer[n] hCons1
     "convective heat transfer coefficients of air flow 1";
-  input Modelica.SIunits.CoefficientOfHeatTransfer[n] hCons2
+  input Modelica.Units.SI.CoefficientOfHeatTransfer[n] hCons2
     "convective heat transfer coefficients of air flow 2";
-  input Modelica.SIunits.MassFlowRate m_flow1 "mass flow rate of air flow 1";
-  input Modelica.SIunits.MassFlowRate m_flow2 "mass flow rate of air flow 2";
+  input Modelica.Units.SI.MassFlowRate m_flow1 "mass flow rate of air flow 1";
+  input Modelica.Units.SI.MassFlowRate m_flow2 "mass flow rate of air flow 2";
 
   // Outputs
   Modelica.Blocks.Interfaces.RealOutput[n] coeCroCous

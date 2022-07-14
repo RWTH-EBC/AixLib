@@ -15,7 +15,7 @@ model TemperatureDependentMoistureOutputSIA2024
     annotation (Placement(transformation(extent={{-74,32},{-54,52}})));
 protected
   constant Real HeatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
-  constant Modelica.SIunits.Area BodySurface=1.8 "Body surface of one person";
+  constant Modelica.Units.SI.Area BodySurface=1.8 "Body surface of one person";
   constant Real MoistGain(unit="g/h") = 10/7 "Gain for moisture output";
 equation
 

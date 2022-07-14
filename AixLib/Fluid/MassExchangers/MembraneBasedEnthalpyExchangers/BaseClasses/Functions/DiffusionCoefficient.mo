@@ -2,17 +2,17 @@
 function DiffusionCoefficient
   "calculates diffusion coefficient of substance 2 in substance 1"
 
-  input Modelica.SIunits.MolarMass M_1 "molar mass of component one";
-  input Modelica.SIunits.MolarMass M_2 "molar mass of component two";
-  input Modelica.SIunits.Temperature T "temperature in K";
-  input Modelica.SIunits.Pressure p "pressure in atm";
+  input Modelica.Units.SI.MolarMass M_1 "molar mass of component one";
+  input Modelica.Units.SI.MolarMass M_2 "molar mass of component two";
+  input Modelica.Units.SI.Temperature T "temperature in K";
+  input Modelica.Units.SI.Pressure p "pressure in atm";
   input Real sigma1 "collision diameter component 1";
   input Real sigma2 "collision diameter component 2";
   //input Real eps_1 "lennard-Jones potential component 1";
   //input Real eps_2 "lennard-Jones potential component 2";
   input Real omega "CollisionIntegral";
 
-  output Modelica.SIunits.DiffusionCoefficient D_12
+  output Modelica.Units.SI.DiffusionCoefficient D_12
     "diffusion coefficient of component two in one";
 
 protected

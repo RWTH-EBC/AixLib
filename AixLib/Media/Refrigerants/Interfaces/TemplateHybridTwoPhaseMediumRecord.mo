@@ -29,7 +29,8 @@ partial package TemplateHybridTwoPhaseMediumRecord
     are the refrigerant name as well as the valid refrigerant limits in terms
     of specific enthalpy, density, absolute pressure and temperature.
   */
-  extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+  extends
+    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="Name",
     substanceNames={"Name"},
     singleState=false,
@@ -55,8 +56,7 @@ partial package TemplateHybridTwoPhaseMediumRecord
       max=423.15),
     smoothModel=true,
     onePhase=false,
-    ThermoStates=
-      .Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.phX,
+    ThermoStates=.Modelica.Media.Interfaces.Choices.IndependentVariables.phX,
     fluidConstants=refrigerantConstants);
     /*The vector substanceNames is mandatory, as the number of
       substances is determined based on its size. Here we assume

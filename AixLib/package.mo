@@ -3,12 +3,12 @@ package AixLib
 
   annotation (
   uses(
-    Modelica_Synchronous(version="0.92.2"),
     NcDataReader2(version="2.5.0"),
     SDF(version="0.4.1"),
     Modelica_DeviceDrivers(version="1.7.0"),
-    Modelica(version="3.2.3")),
-  version = "1.0.0",
+    ObsoleteModelica4(version="4.0.0"),
+    Modelica(version="4.0.0")),
+  version="1.2.1",
   conversion(from(
     version="0.3.2",
                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.3.2_to_0.4.mos",
@@ -77,7 +77,17 @@ package AixLib
     version="0.11.1",
                       script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.11.1_to_0.12.0.mos",
     version="0.12.0",
-                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.12.0_to_0.12.1.mos")),
+                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.12.0_to_0.12.1.mos",
+    version="1.0.1",
+                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.0.1_to_1.0.2.mos",
+	  version="1.0.2",
+                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.0.2_to_1.0.3.mos",
+    version="1.0.3",
+                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.0.3_to_1.1.0.mos",
+	  version="1.1.0",				  
+					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.1.0_to_1.2.0.mos",
+	  version="1.2.0",				  
+					  script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_1.2.0_to_1.2.1.mos")),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed
   for research and teaching purposes. It aims at dynamic simulations of

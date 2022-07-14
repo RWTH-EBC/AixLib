@@ -24,19 +24,19 @@ equation
   annotation (
   defaultComponentName="souSel",
 Documentation(info="<html>
-<p>
-Block that produces at its output the input value <code>uCon</code>, <code>uFil</code>
-or the parameter value <code>p</code> depending on the parameter value
-<code>datSou</code>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Block that produces at its output the input value <code>uCon</code>, <code>uFil</code>
+ or the parameter value <code>p</code> depending on the parameter value
+ <code>datSou</code>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={
       Rectangle(
           extent={{-100,100},{100,-100}},
@@ -60,5 +60,6 @@ First implementation.
         Ellipse(lineColor={0,0,255},
           pattern=LinePattern.None,
           fillPattern=FillPattern.Solid,
-          extent={{2,-8},{18,8}})}));
+          extent={{2,-8},{18,8}})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SourceSelector;

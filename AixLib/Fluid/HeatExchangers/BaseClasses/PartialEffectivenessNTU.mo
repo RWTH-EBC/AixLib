@@ -19,32 +19,31 @@ model PartialEffectivenessNTU
     annotation (Evaluate=true,
                 Dialog(group="Nominal thermal performance"));
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal(fixed=use_Q_flow_nominal)
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal(fixed=
+        use_Q_flow_nominal)
     "Nominal heat flow rate (positive for heat transfer from 1 to 2)"
-    annotation (Dialog(group="Nominal thermal performance",
-                       enable=use_Q_flow_nominal));
-  parameter Modelica.SIunits.Temperature T_a1_nominal(fixed=use_Q_flow_nominal)
-    "Nominal temperature at port a1"
-    annotation (Dialog(group="Nominal thermal performance",
-                       enable=use_Q_flow_nominal));
-  parameter Modelica.SIunits.Temperature T_a2_nominal(fixed=use_Q_flow_nominal)
-    "Nominal temperature at port a2"
-    annotation (Dialog(group="Nominal thermal performance",
-                       enable=use_Q_flow_nominal));
+    annotation (Dialog(group="Nominal thermal performance", enable=
+          use_Q_flow_nominal));
+  parameter Modelica.Units.SI.Temperature T_a1_nominal(fixed=use_Q_flow_nominal)
+    "Nominal temperature at port a1" annotation (Dialog(group=
+          "Nominal thermal performance", enable=use_Q_flow_nominal));
+  parameter Modelica.Units.SI.Temperature T_a2_nominal(fixed=use_Q_flow_nominal)
+    "Nominal temperature at port a2" annotation (Dialog(group=
+          "Nominal thermal performance", enable=use_Q_flow_nominal));
 
   parameter Real eps_nominal(fixed=not use_Q_flow_nominal)
     "Nominal heat transfer effectiveness"
     annotation (Dialog(group="Nominal thermal performance",
                        enable=not use_Q_flow_nominal));
 
-  input Modelica.SIunits.ThermalConductance UA "UA value";
+  input Modelica.Units.SI.ThermalConductance UA "UA value";
 
   Real eps(min=0, max=1) "Heat exchanger effectiveness";
 
   // NTU has been removed as NTU goes to infinity as CMin goes to zero.
   // This quantity is not good for modeling.
   //  Real NTU(min=0) "Number of transfer units";
-  final parameter Modelica.SIunits.ThermalConductance UA_nominal(fixed=false)
+  final parameter Modelica.Units.SI.ThermalConductance UA_nominal(fixed=false)
     "Nominal UA value";
   final parameter Real NTU_nominal(min=0, fixed=false)
     "Nominal number of transfer units";
@@ -59,25 +58,25 @@ protected
      p=Medium2.p_default,
      X=Medium2.X_default[1:Medium2.nXi]) "Default state for medium 2";
 
-  parameter Modelica.SIunits.SpecificHeatCapacity cp1_nominal(fixed=false)
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp1_nominal(fixed=false)
     "Specific heat capacity of medium 1 at nominal condition";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp2_nominal(fixed=false)
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp2_nominal(fixed=false)
     "Specific heat capacity of medium 2 at nominal condition";
-  parameter Modelica.SIunits.ThermalConductance C1_flow_nominal(fixed=false)
+  parameter Modelica.Units.SI.ThermalConductance C1_flow_nominal(fixed=false)
     "Nominal capacity flow rate of Medium 1";
-  parameter Modelica.SIunits.ThermalConductance C2_flow_nominal(fixed=false)
+  parameter Modelica.Units.SI.ThermalConductance C2_flow_nominal(fixed=false)
     "Nominal capacity flow rate of Medium 2";
-  parameter Modelica.SIunits.ThermalConductance CMin_flow_nominal(fixed=false)
+  parameter Modelica.Units.SI.ThermalConductance CMin_flow_nominal(fixed=false)
     "Minimal capacity flow rate at nominal condition";
-  parameter Modelica.SIunits.ThermalConductance CMax_flow_nominal(fixed=false)
+  parameter Modelica.Units.SI.ThermalConductance CMax_flow_nominal(fixed=false)
     "Maximum capacity flow rate at nominal condition";
   parameter Real Z_nominal(
     min=0,
     max=1,
     fixed=false) "Ratio of capacity flow rate at nominal condition";
-  parameter Modelica.SIunits.Temperature T_b1_nominal(fixed=false)
+  parameter Modelica.Units.SI.Temperature T_b1_nominal(fixed=false)
     "Nominal temperature at port b1";
-  parameter Modelica.SIunits.Temperature T_b2_nominal(fixed=false)
+  parameter Modelica.Units.SI.Temperature T_b2_nominal(fixed=false)
     "Nominal temperature at port b2";
   parameter flo flowRegime_nominal(fixed=false)
     "Heat exchanger flow regime at nominal flow rates";
@@ -189,79 +188,80 @@ equation
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="hex",
     Documentation(info="<html>
-<p>
-Partial model of a heat exchanger without humidity condensation.
-This model transfers heat in the amount of
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-  Q = Q<sub>max</sub>  &epsilon;<br/>
-  &epsilon; = f(NTU, Z, flowRegime),
-</p>
-<p>
-where
-<i>Q<sub>max</sub></i> is the maximum heat that can be transferred,
-<i>&epsilon;</i> is the heat transfer effectiveness,
-<i>NTU</i> is the Number of Transfer Units,
-<i>Z</i> is the ratio of minimum to maximum capacity flow rate and
-<i>flowRegime</i> is the heat exchanger flow regime.
-such as
-parallel flow, cross flow or counter flow.
-</p>
-<p>
-The flow regimes depend on the heat exchanger configuration. All configurations
-defined in
-<a href=\"modelica://AixLib.Fluid.Types.HeatExchangerConfiguration\">
-AixLib.Fluid.Types.HeatExchangerConfiguration</a>
-are supported.
-</p>
-<p>
-Models that extend from this partial model need to provide an assignment
-for <code>UA</code>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 25, 2021 by Baptiste Ravache:<br/>
-Added a warning for when Q_flow_nominal is specified with the wrong sign.
-</li>
-<li>
-January 10, 2018 by Michael Wetter:<br/>
-Removed variable <code>Z</code> that is not used.
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
-</li>
-<li>
-January 10, 2018 by Filip Jorissen:<br/>
-Corrected an error where the value of NTU was assigned to Z.
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
-</li>
-<li>
-February 27, 2016 by Michael Wetter:<br/>
-Introduced <code>sta1_default</code> and <code>sta2_default</code>
-to enable translation under OpenModelica.
-Removed <code>max=1</code> attribute for <code>Z</code>. This is needed as near
-zero flow, <code>Z</code> can be larger than one due to the regularization.
-As <code>Z</code> is not used in this model other than for reporting, this bound
-need not be enforced (and the calculation of <code>eps</code> is fine at these small flow rates).
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/490\">issue 490</a>.
-</li>
-<li>
-April 29, 2014 by Michael Wetter:<br/>
-Changed <code>assert</code> statement to avoid comparing
-enumeration with an integer, which triggers a warning
-in Dymola 2015.
-</li>
-<li>
-July 30, 2013 by Michael Wetter:<br/>
-Updated model to use new variable <code>mWat_flow</code>
-in the base class.
-</li>
-<li>
-February 12, 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Partial model of a heat exchanger without humidity condensation.
+ This model transfers heat in the amount of
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+   Q = Q<sub>max</sub>  &epsilon;<br/>
+   &epsilon; = f(NTU, Z, flowRegime),
+ </p>
+ <p>
+ where
+ <i>Q<sub>max</sub></i> is the maximum heat that can be transferred,
+ <i>&epsilon;</i> is the heat transfer effectiveness,
+ <i>NTU</i> is the Number of Transfer Units,
+ <i>Z</i> is the ratio of minimum to maximum capacity flow rate and
+ <i>flowRegime</i> is the heat exchanger flow regime.
+ such as
+ parallel flow, cross flow or counter flow.
+ </p>
+ <p>
+ The flow regimes depend on the heat exchanger configuration. All configurations
+ defined in
+ <a href=\"modelica://AixLib.Fluid.Types.HeatExchangerConfiguration\">
+ AixLib.Fluid.Types.HeatExchangerConfiguration</a>
+ are supported.
+ </p>
+ <p>
+ Models that extend from this partial model need to provide an assignment
+ for <code>UA</code>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 25, 2021 by Baptiste Ravache:<br/>
+ Added a warning for when Q_flow_nominal is specified with the wrong sign.
+ </li>
+ <li>
+ January 10, 2018 by Michael Wetter:<br/>
+ Removed variable <code>Z</code> that is not used.
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
+ </li>
+ <li>
+ January 10, 2018 by Filip Jorissen:<br/>
+ Corrected an error where the value of NTU was assigned to Z.
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1328\">issue 1328</a>.
+ </li>
+ <li>
+ February 27, 2016 by Michael Wetter:<br/>
+ Introduced <code>sta1_default</code> and <code>sta2_default</code>
+ to enable translation under OpenModelica.
+ Removed <code>max=1</code> attribute for <code>Z</code>. This is needed as near
+ zero flow, <code>Z</code> can be larger than one due to the regularization.
+ As <code>Z</code> is not used in this model other than for reporting, this bound
+ need not be enforced (and the calculation of <code>eps</code> is fine at these small flow rates).
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/490\">issue 490</a>.
+ </li>
+ <li>
+ April 29, 2014 by Michael Wetter:<br/>
+ Changed <code>assert</code> statement to avoid comparing
+ enumeration with an integer, which triggers a warning
+ in Dymola 2015.
+ </li>
+ <li>
+ July 30, 2013 by Michael Wetter:<br/>
+ Updated model to use new variable <code>mWat_flow</code>
+ in the base class.
+ </li>
+ <li>
+ February 12, 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialEffectivenessNTU;

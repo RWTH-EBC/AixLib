@@ -1,7 +1,7 @@
 ﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.Functions;
 function CollisionIntegral "calculates collision integral for water in air"
 
-  input Modelica.SIunits.Temperature T;
+  input Modelica.Units.SI.Temperature T;
 
   output Real Omega_D;
 

@@ -131,79 +131,79 @@ equation
 
   annotation (defaultComponentName = "con",
     Documentation(info="<html>
-<p>
-Block that takes an inlet connector of type
-<a href=\"modelica://AixLib.Fluid.FMI.Interfaces.Inlet\">
-AixLib.Fluid.FMI.Interfaces.Inlet
-</a>
-and converts
-it to real outputs for properties of an air-based
-HVAC system.
-</p>
-<p>
-The output signal <code>m_flow</code> is equal to
-<code>inlet.m_flow</code>, whereas the output signals
-<code>T</code>, <code>X_w</code> and <code>C</code>
-are set the the properties
-<code>inlet.forward</code>.
-Similarly, the properties of
-<code>inlet.backward</code> are set the the values
-of the input signals
-<code>TAirZon</code>, <code>X_wZon</code> and <code>CZon</code>.
-</p>
-<p>
-If <code>allowFlowReversal = true</code>,
-input signal connectors are enabled that are used
-to set the fluid properties for backflow in the connector
-<code>inlet.backward</code>.
-This can be used if this block is used to connect an HVAC
-system to a thermal zone, in which case the supply air
-properties are in the connector
-<code>inlet.forward</code>,
-and the return air properties are in the connector
-<code>inlet.backward</code>.
-</p>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.ThermalZone\">
-AixLib.Fluid.FMI.Adaptors.ThermalZone</a>
-for its usage.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-June 28, 2016, by Michael Wetter:<br/>
-Revised implementation to allow flow out of the
-thermal zone, for example to model the return
-air flow.
-</li>
-<li>
-April 27, 2016, by Thierry S. Nouidui:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Block that takes an inlet connector of type
+ <a href=\"modelica://AixLib.Fluid.FMI.Interfaces.Inlet\">
+ AixLib.Fluid.FMI.Interfaces.Inlet
+ </a>
+ and converts
+ it to real outputs for properties of an air-based
+ HVAC system.
+ </p>
+ <p>
+ The output signal <code>m_flow</code> is equal to
+ <code>inlet.m_flow</code>, whereas the output signals
+ <code>T</code>, <code>X_w</code> and <code>C</code>
+ are set the the properties
+ <code>inlet.forward</code>.
+ Similarly, the properties of
+ <code>inlet.backward</code> are set the the values
+ of the input signals
+ <code>TAirZon</code>, <code>X_wZon</code> and <code>CZon</code>.
+ </p>
+ <p>
+ If <code>allowFlowReversal = true</code>,
+ input signal connectors are enabled that are used
+ to set the fluid properties for backflow in the connector
+ <code>inlet.backward</code>.
+ This can be used if this block is used to connect an HVAC
+ system to a thermal zone, in which case the supply air
+ properties are in the connector
+ <code>inlet.forward</code>,
+ and the return air properties are in the connector
+ <code>inlet.backward</code>.
+ </p>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.ThermalZone\">
+ AixLib.Fluid.FMI.Adaptors.ThermalZone</a>
+ for its usage.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ June 28, 2016, by Michael Wetter:<br/>
+ Revised implementation to allow flow out of the
+ thermal zone, for example to model the return
+ air flow.
+ </li>
+ <li>
+ April 27, 2016, by Thierry S. Nouidui:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={
         Text(
           extent={{58,60},{90,34}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="T"),
         Text(
           extent={{20,96},{84,70}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="m_flow"),
         Text(
           extent={{28,-26},{92,-52}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="X_w"),
         Text(
           extent={{36,-66},{100,-92}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="C"),
         Line(points={{-80,0},{40,0}}, color={191,0,0}),
         Polygon(
@@ -214,7 +214,7 @@ First implementation.
         Text(
           visible=allowFlowReversal,
           extent={{-78,-70},{-46,-96}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="T"),
         Text(
           visible=allowFlowReversal and Medium.nXi > 0,
@@ -233,5 +233,6 @@ First implementation.
           visible=allowFlowReversal,
           points={{-76,-16},{-34,-36},{-8,-66}},
           color={0,0,255},
-          smooth=Smooth.Bezier)}));
+          smooth=Smooth.Bezier)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InletToAir;

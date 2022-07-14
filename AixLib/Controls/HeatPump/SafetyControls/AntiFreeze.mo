@@ -4,7 +4,7 @@ model AntiFreeze "Model to prevent source from freezing"
 
   parameter Boolean use_antFre=true
     "True if anti freeze control is part of safety control" annotation(choices(checkBox=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TAntFre=276.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TAntFre=276.15
     "Limit temperature for anti freeze control"
     annotation (Dialog(enable=use_antFre));
   parameter Real dTHys=2

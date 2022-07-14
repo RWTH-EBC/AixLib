@@ -19,16 +19,24 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
       choice=3 "Custom hCon (constant)",
       radioButtons=true));
   //Initial temperatures
-  parameter Modelica.SIunits.Temperature T0_air = 290.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_Staircase = 288.15 "IWStaircase" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_IWKitchen = 295.15 "IWKitchen" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_IWBath = 297.15 "IWBath" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_IWBedroom = 295.15 "IWBedroom" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_IWLivingroom = 295.15
-    "IWLivingroom"                                                               annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_IWChild = 295.15 "IWChild" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_CE = 295.35 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0_FL = 294.95 "Floor" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
+  parameter Modelica.Units.SI.Temperature T0_air=290.15 "Air"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_Staircase=288.15 "IWStaircase"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_IWKitchen=295.15 "IWKitchen"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_IWBath=297.15 "IWBath"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_IWBedroom=295.15 "IWBedroom"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_IWLivingroom=295.15 "IWLivingroom"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_IWChild=295.15 "IWChild"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_CE=295.35 "Ceiling"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+  parameter Modelica.Units.SI.Temperature T0_FL=294.95 "Floor"
+    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   // Sunblind
   parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
@@ -36,12 +44,12 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
   parameter Real ratioSunblind(min=0.0, max=1.0)= 0.8
     "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)=350
+  parameter Modelica.Units.SI.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit
+    annotation (Dialog(group="Sunblind", enable=use_sunblind));
+  parameter Modelica.Units.SI.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+    annotation (Dialog(group="Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Children(
     redeclare final model WindowModel=WindowModel,
     redeclare final model CorrSolarGainWin=CorrSolarGainWin,
@@ -246,7 +254,7 @@ protected
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE = if Floor == 1 or Floor == 2 then if TIR == 1 then if TMC == 1 or TMC == 2 then AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf() else AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_L_loHalf() else if TIR == 2 then if TMC == 1 or TMC == 2 then AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_SM_loHalf() else AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_L_loHalf() else if TIR == 3 then if TMC == 1 or TMC == 2 then AixLib.DataBase.Walls.WSchV1995.Ceiling.CEpartition_WSchV1995_SM_loHalf() else AixLib.DataBase.Walls.WSchV1995.Ceiling.CEpartition_WSchV1995_L_loHalf() else if TMC == 1 or TMC == 2 then AixLib.DataBase.Walls.WSchV1984.Ceiling.CEpartition_WSchV1984_SM_loHalf() else AixLib.DataBase.Walls.WSchV1984.Ceiling.CEpartition_WSchV1984_L_loHalf() else if TIR == 1 then AixLib.DataBase.Walls.EnEV2009.Ceiling.CEattic_EnEV2009_SML_loHalf() else if TIR == 2 then AixLib.DataBase.Walls.EnEV2002.Ceiling.CEattic_EnEV2002_SML_loHalf() else if TIR == 3 then AixLib.DataBase.Walls.WSchV1995.Ceiling.CEattic_WSchV1995_SML_loHalf() else AixLib.DataBase.Walls.WSchV1984.Ceiling.CEattic_WSchV1984_SML_loHalf() annotation(Dialog(tab = "Types"));
   //Window type
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win = if TIR == 1 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR == 2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002() else if TIR == 3 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984() annotation(Dialog(tab = "Types"));
-  parameter Modelica.SIunits.Volume room_V = 5.73 * 2.46;
+  parameter Modelica.Units.SI.Volume room_V=5.73*2.46;
 equation
   connect(infiltrationRate.port_b, airload.port) annotation(Line(points={{-18,73},{0,73},{0,-12},{-22,-12}},        color = {191, 0, 0}));
   connect(Wall_Staircase.port_outside, thermStaircase) annotation(Line(points={{112.2,-32},{140,-32},{140,-130},{-80,-130},{-80,80},{-102,80}},              color = {191, 0, 0}));

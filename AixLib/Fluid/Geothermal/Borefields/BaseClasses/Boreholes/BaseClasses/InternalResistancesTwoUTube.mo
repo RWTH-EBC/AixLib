@@ -4,12 +4,13 @@ model InternalResistancesTwoUTube
   extends
     AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.PartialInternalResistances;
 
-  parameter Modelica.SIunits.ThermalResistance Rgg1_val
+  parameter Modelica.Units.SI.ThermalResistance Rgg1_val
     "Thermal resistance between two neightbouring grout capacities, as defined by Bauer et al (2010)";
-  parameter Modelica.SIunits.ThermalResistance Rgg2_val
+  parameter Modelica.Units.SI.ThermalResistance Rgg2_val
     "Thermal resistance between two  grout capacities opposite to each other, as defined by Bauer et al (2010)";
-  parameter Modelica.SIunits.HeatCapacity Co_fil=borFieDat.filDat.dFil*borFieDat.filDat.cFil*hSeg*Modelica.Constants.pi
-    *(borFieDat.conDat.rBor^2 - 4*borFieDat.conDat.rTub^2)
+  parameter Modelica.Units.SI.HeatCapacity Co_fil=borFieDat.filDat.dFil*
+      borFieDat.filDat.cFil*hSeg*Modelica.Constants.pi*(borFieDat.conDat.rBor^2
+       - 4*borFieDat.conDat.rTub^2)
     "Heat capacity of the whole filling material";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_3
@@ -211,44 +212,45 @@ equation
           rotation=135,
           thickness=0.5),        Text(
           extent={{-100,144},{100,106}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,255},
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
-<p>
-This model simulates the internal thermal resistance network of a borehole segment in
-the case of a double U-tube borehole using the method of Bauer et al. (2011) 
-and computing explicitely the fluid-to-ground thermal resistance 
-<i>R<sub>b</sub></i> and the 
-grout-to-grout resistance
-<i>R<sub>a</sub></i> as defined by Claesson and Hellstrom (2011)
-using the multipole method. 
-</p>
-<h4>References</h4>
-<p>J. Claesson and G. Hellstrom. 
-<i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger. 
-</i>
-HVAC&amp;R Research,
-17(6): 895-911, 2011.</p>
-<p>
-D. Bauer, W. Heidemann, H. M&uuml;ller-Steinhagen, and H.-J. G. Diersch.
-<i>
-Thermal resistance and capacity models for borehole heat exchangers
-</i>.
-International Journal Of Energy Research, 35:312-320, 2011.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 5, 2018, by Alex Laferri&egrave;re:<br/>
-Extended the model from a partial class.
-</li>
-<li>
-June, 2018, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model simulates the internal thermal resistance network of a borehole segment in
+ the case of a double U-tube borehole using the method of Bauer et al. (2011) 
+ and computing explicitely the fluid-to-ground thermal resistance 
+ <i>R<sub>b</sub></i> and the 
+ grout-to-grout resistance
+ <i>R<sub>a</sub></i> as defined by Claesson and Hellstrom (2011)
+ using the multipole method. 
+ </p>
+ <h4>References</h4>
+ <p>J. Claesson and G. Hellstrom. 
+ <i>Multipole method to calculate borehole thermal resistances in a borehole heat exchanger. 
+ </i>
+ HVAC&amp;R Research,
+ 17(6): 895-911, 2011.</p>
+ <p>
+ D. Bauer, W. Heidemann, H. M&uuml;ller-Steinhagen, and H.-J. G. Diersch.
+ <i>
+ Thermal resistance and capacity models for borehole heat exchangers
+ </i>.
+ International Journal Of Energy Research, 35:312-320, 2011.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 5, 2018, by Alex Laferri&egrave;re:<br/>
+ Extended the model from a partial class.
+ </li>
+ <li>
+ June, 2018, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InternalResistancesTwoUTube;

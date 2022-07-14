@@ -90,24 +90,22 @@ model FacadeVentilationUnit
     annotation (Placement(transformation(extent={{120,-54},{140,-34}})));
   Modelica.Blocks.Sources.Sine roomTemperature(
     amplitude=5,
-    freqHz=1/86400,
+    f=1/86400,
     phase=3.1415926535898,
-    offset=273.15 + 20)
-    "Provides a test value of the room temperature"
+    offset=273.15 + 20) "Provides a test value of the room temperature"
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Modelica.Blocks.Sources.Sine roomSetTemperature(
     amplitude=5,
-    freqHz=1/86400,
+    f=1/86400,
     phase=1.5707963267949,
-    offset=273.15 + 20)
-    "Provides a test value of the room set temperature"
+    offset=273.15 + 20) "Provides a test value of the room set temperature"
     annotation (Placement(transformation(extent={{-100,-36},{-80,-16}})));
   Modelica.Blocks.Sources.Constant co2Concentration(k=1000)
     "Provides a test value of the CO2 concnetration"
     annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
   Modelica.Blocks.Sources.Sine outdoorTemperature(
     amplitude=5,
-    freqHz=1/86400,
+    f=1/86400,
     offset=273.15 + 10) "Provides a test value of the outdoor temperature"
     annotation (Placement(transformation(extent={{-100,6},{-80,26}})));
   AixLib.Controls.Interfaces.FVUControlBus fVUControlBus

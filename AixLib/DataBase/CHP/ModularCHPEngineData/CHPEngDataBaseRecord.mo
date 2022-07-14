@@ -16,27 +16,43 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
   constant Real z "Number of cylinders";
   constant Real eps = if SIEngine then 12 else 21 "Compression ratio (default values are 12(SI) and 21(DI))";
   constant Real i "Number of combustion for one operating cycle (1->two-stroke, 0.5->four-stroke)";
-  constant Modelica.SIunits.Mass mEng = 70389*VEng+17.913 "Total dry weight of the engine block";
-  constant Modelica.SIunits.Volume VEng = 0.25*hStr*Modelica.Constants.pi*dCyl^2*z "Engine displacement";
-  constant Modelica.SIunits.Length hStr "Stroke";
-  constant Modelica.SIunits.Length dCyl(min=0.01) "Cylinder diameter";
-  constant Modelica.SIunits.Length ref_dCyl=0.091 "Reference cylinder diameter for friction calculation";
-  constant Modelica.SIunits.Pressure ref_p_mfNominal = if SIEngine then 75000 else 110000 "Friction mean pressure of reference engine for calculation(dCyl=91mm & nEng=3000rpm & TEng=90°C)";
-  constant Modelica.SIunits.Pressure p_meNominal = P_mecNominal/(i*nEngNominal*VEng) "Nominal mean effective cylinder pressure";
-  constant Modelica.SIunits.Efficiency etaCHP "Nominal efficiency of the power unit referring to the fuel input";
-  constant Modelica.SIunits.Efficiency etaGen = 0.92 "Generator efficiency";
-  constant Modelica.SIunits.Power P_mecNominal = P_elNominal/etaGen "Mechanical power output of the engine at nominal operating point";
-  constant Modelica.SIunits.Power P_FueNominal = (P_elNominal+Q_MaxHea)/etaCHP "Nominal fuel expenses";
-  constant Modelica.SIunits.Power Q_MaxHea "Maximum of usable heat";
-  constant Modelica.SIunits.Temperature T_ExhPowUniOut = 373.15 "Exhaust gas temperature after exhaust heat exchanger (default=100°C)";
+  constant Modelica.Units.SI.Mass mEng=70389*VEng + 17.913
+    "Total dry weight of the engine block";
+  constant Modelica.Units.SI.Volume VEng=0.25*hStr*Modelica.Constants.pi*dCyl^2
+      *z "Engine displacement";
+  constant Modelica.Units.SI.Length hStr "Stroke";
+  constant Modelica.Units.SI.Length dCyl(min=0.01) "Cylinder diameter";
+  constant Modelica.Units.SI.Length ref_dCyl=0.091
+    "Reference cylinder diameter for friction calculation";
+  constant Modelica.Units.SI.Pressure ref_p_mfNominal=if SIEngine then 75000
+       else 110000
+    "Friction mean pressure of reference engine for calculation(dCyl=91mm & nEng=3000rpm & TEng=90°C)";
+  constant Modelica.Units.SI.Pressure p_meNominal=P_mecNominal/(i*nEngNominal*
+      VEng) "Nominal mean effective cylinder pressure";
+  constant Modelica.Units.SI.Efficiency etaCHP
+    "Nominal efficiency of the power unit referring to the fuel input";
+  constant Modelica.Units.SI.Efficiency etaGen=0.92 "Generator efficiency";
+  constant Modelica.Units.SI.Power P_mecNominal=P_elNominal/etaGen
+    "Mechanical power output of the engine at nominal operating point";
+  constant Modelica.Units.SI.Power P_FueNominal=(P_elNominal + Q_MaxHea)/etaCHP
+    "Nominal fuel expenses";
+  constant Modelica.Units.SI.Power Q_MaxHea "Maximum of usable heat";
+  constant Modelica.Units.SI.Temperature T_ExhPowUniOut=373.15
+    "Exhaust gas temperature after exhaust heat exchanger (default=100°C)";
 
   //General CHP parameters
 
-  constant Modelica.SIunits.Diameter dExh = 0.0612+(Lambda*P_FueNominal)*10^(-7) "Exhaust pipe diameter for heat transfer calculation";
-  constant Modelica.SIunits.Diameter dCoo = 0.0224+Q_MaxHea*2*10^(-7) "Coolant circle pipe diameter for heat transfer calculation";
-  constant Modelica.SIunits.Thickness dInn "Thickness of the cylinder wall between combustion chamber and cooling circle (default value is 5mm)";
-  constant Modelica.SIunits.MassFlowRate m_floCooNominal = 0.00003*Q_MaxHea-0.2043 "Nominal mass flow rate of coolant inside the engine cooling circle (default density of coolant is 1kg/l)";
-  constant Modelica.SIunits.Pressure dp_Coo = 15000 "Pressure loss between coolant supply and return flow (default value is 0.15bar)";
+  constant Modelica.Units.SI.Diameter dExh=0.0612 + (Lambda*P_FueNominal)*10^(-7)
+    "Exhaust pipe diameter for heat transfer calculation";
+  constant Modelica.Units.SI.Diameter dCoo=0.0224 + Q_MaxHea*2*10^(-7)
+    "Coolant circle pipe diameter for heat transfer calculation";
+  constant Modelica.Units.SI.Thickness dInn
+    "Thickness of the cylinder wall between combustion chamber and cooling circle (default value is 5mm)";
+  constant Modelica.Units.SI.MassFlowRate m_floCooNominal=0.00003*Q_MaxHea -
+      0.2043
+    "Nominal mass flow rate of coolant inside the engine cooling circle (default density of coolant is 1kg/l)";
+  constant Modelica.Units.SI.Pressure dp_Coo=15000
+    "Pressure loss between coolant supply and return flow (default value is 0.15bar)";
 
   //Electric power converter (as an induction machine)
 
@@ -44,12 +60,15 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
   constant Real p=f_1/n0 "Number of pole pairs";
   constant Real gearRatio=1 "Gear ratio: engine speed to generator speed (default=1)";
   constant Boolean useHeat=false "Is the thermal loss energy of the elctric machine used?";
-  constant Modelica.SIunits.Frequency n0=f_1/p "Idling speed of the electric machine";
-  constant Modelica.SIunits.Frequency n_nominal "Rated rotor speed [1/s]";
-  constant Modelica.SIunits.Frequency f_1 "Source frequency";
-  constant Modelica.SIunits.Voltage U_1 "Rated voltage";
-  constant Modelica.SIunits.Current I_elNominal=P_elNominal/(sqrt(3)*U_1*cosPhi) "Rated current";
-  constant Modelica.SIunits.Power P_elNominal "Nominal electrical power of electric machine";
+  constant Modelica.Units.SI.Frequency n0=f_1/p
+    "Idling speed of the electric machine";
+  constant Modelica.Units.SI.Frequency n_nominal "Rated rotor speed [1/s]";
+  constant Modelica.Units.SI.Frequency f_1 "Source frequency";
+  constant Modelica.Units.SI.Voltage U_1 "Rated voltage";
+  constant Modelica.Units.SI.Current I_elNominal=P_elNominal/(sqrt(3)*U_1*
+      cosPhi) "Rated current";
+  constant Modelica.Units.SI.Power P_elNominal
+    "Nominal electrical power of electric machine";
 
   annotation (Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>

@@ -4,11 +4,11 @@ partial model Heater "Base class for example model for the heater and cooler"
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model";
 
-  parameter Modelica.SIunits.Volume V = 6*6*2.7 "Volume";
+  parameter Modelica.Units.SI.Volume V=6*6*2.7 "Volume";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = V*1.2*6/3600
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=V*1.2*6/3600
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal = 30*6*6
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal=30*6*6
     "Nominal heat loss of the room";
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -106,55 +106,56 @@ equation
           -20},{52.6667,-10}},
                           color={0,127,255}));
   annotation ( Documentation(info="<html>
-<p>
-This partial model is used to construct the models
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.AirHeater_T\">
-AixLib.Fluid.HeatExchangers.Examples.AirHeater_T</a>
-and
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.AirHeater_u\">
-AixLib.Fluid.HeatExchangers.Examples.AirHeater_u</a> and
-the similar models
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.WaterHeater_T\">
-AixLib.Fluid.HeatExchangers.Examples.WaterHeater_T</a>
-and
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.WaterHeater_u\">
-AixLib.Fluid.HeatExchangers.Examples.WaterHeater_u</a>.
-It consists of a volume with heat loss to the ambient,
-a fan,
-a set point for the temperature of the volume and a PI controller.
-</p>
-<p>
-The instance <code>bou</code> is required to set a reference pressure
-for system models in which the fluid is modelled as an incompressible fluid,
-and it also is required to account for a variation of density of the fluid.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-May 8, 2017, by Michael Wetter:<br/>
-Updated model for new heater model.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
-AixLib, #763</a>.
-</li>
-<li>February 20, 2016, by Ruben Baetens:<br/>
-Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
-</li>
-<li>
-January 6, 2015, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-November 12, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+ <p>
+ This partial model is used to construct the models
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.AirHeater_T\">
+ AixLib.Fluid.HeatExchangers.Examples.AirHeater_T</a>
+ and
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.AirHeater_u\">
+ AixLib.Fluid.HeatExchangers.Examples.AirHeater_u</a> and
+ the similar models
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.WaterHeater_T\">
+ AixLib.Fluid.HeatExchangers.Examples.WaterHeater_T</a>
+ and
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.WaterHeater_u\">
+ AixLib.Fluid.HeatExchangers.Examples.WaterHeater_u</a>.
+ It consists of a volume with heat loss to the ambient,
+ a fan,
+ a set point for the temperature of the volume and a PI controller.
+ </p>
+ <p>
+ The instance <code>bou</code> is required to set a reference pressure
+ for system models in which the fluid is modelled as an incompressible fluid,
+ and it also is required to account for a variation of density of the fluid.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ May 8, 2017, by Michael Wetter:<br/>
+ Updated model for new heater model.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+ AixLib, #763</a>.
+ </li>
+ <li>February 20, 2016, by Ruben Baetens:<br/>
+ Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
+ </li>
+ <li>
+ January 6, 2015, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ November 12, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{120,100}})));
+    Icon(coordinateSystem(extent={{-100,-100},{120,100}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Heater;

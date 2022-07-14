@@ -12,30 +12,30 @@ partial block PartialLimiter
 annotation (
 defaultComponentName="lim",
 Documentation(info="<html>
-<p>
-Block that computes <i>y_internal=min(uMax, max(uMin, u))</i>,
-where <code>y_internal</code> is a protected connector.
-</p>
-<p>
-This block is used because interpolation of weather data can lead to
-a slight overshoot of values. This block is extended by other blocks
-that then provide the output connector.
-Extending this block is needed for the output connector to have the correct
-comment string in the weather data bus, because the weather
-data bus displays the comment string of the output signal
-that is connected to the weather data bus.
-Without this construct, the weather data bus would simply show
-\"Connector of Real output signal\".
-</p>
-</html>",
+ <p>
+ Block that computes <i>y_internal=min(uMax, max(uMin, u))</i>,
+ where <code>y_internal</code> is a protected connector.
+ </p>
+ <p>
+ This block is used because interpolation of weather data can lead to
+ a slight overshoot of values. This block is extended by other blocks
+ that then provide the output connector.
+ Extending this block is needed for the output connector to have the correct
+ comment string in the weather data bus, because the weather
+ data bus displays the comment string of the output signal
+ that is connected to the weather data bus.
+ Without this construct, the weather data bus would simply show
+ \"Connector of Real output signal\".
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
      Icon(coordinateSystem(
     preserveAspectRatio=true,
     extent={{-100,-100},{100,100}}), graphics={
@@ -55,8 +55,9 @@ First implementation.
     Text(
       extent={{-150,-150},{150,-110}},
           textString="%uMin <= u <= %uMax",
-          lineColor={0,0,0})}),
+          textColor={0,0,0})}),
     Diagram(coordinateSystem(
     preserveAspectRatio=true,
-    extent={{-100,-100},{100,100}})));
+    extent={{-100,-100},{100,100}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PartialLimiter;

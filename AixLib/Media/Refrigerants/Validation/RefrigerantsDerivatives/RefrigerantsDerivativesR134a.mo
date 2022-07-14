@@ -53,10 +53,10 @@ model RefrigerantsDerivativesR134a
   record TheStaExt
     "Record that contains thermodynamic state properties for external medium"
     Real phase "Phase of the refrigerant";
-    Modelica.SIunits.Density d "Density of the refrigerant";
-    Modelica.SIunits.Temperature T "Temperature of the refrigerant";
-    Modelica.SIunits.AbsolutePressure p "Pressure of the refrigerant";
-    Modelica.SIunits.SpecificEnthalpy h "Specific enthalpy of the refrigerant";
+    Modelica.Units.SI.Density d "Density of the refrigerant";
+    Modelica.Units.SI.Temperature T "Temperature of the refrigerant";
+    Modelica.Units.SI.AbsolutePressure p "Pressure of the refrigerant";
+    Modelica.Units.SI.SpecificEnthalpy h "Specific enthalpy of the refrigerant";
   end TheStaExt;
 
   // Definition of states that include both one-phase and two-phase regions
@@ -112,17 +112,17 @@ model RefrigerantsDerivativesR134a
   //
   record DerProp
     "Record that containts properties derived by partial derivatives of the EoS"
-    Modelica.SIunits.SpecificHeatCapacity cp_Int
+    Modelica.Units.SI.SpecificHeatCapacity cp_Int
       "Isobaric heat capacity calculated by the internal medium model";
-    Modelica.SIunits.SpecificHeatCapacity cp_Ext
+    Modelica.Units.SI.SpecificHeatCapacity cp_Ext
       "Isobaric heat capacity calculated by the external medium model";
-    Modelica.SIunits.SpecificHeatCapacity cv_Int
+    Modelica.Units.SI.SpecificHeatCapacity cv_Int
       "Isochoric heat capacity calculated by the internal medium model";
-    Modelica.SIunits.SpecificHeatCapacity cv_Ext
+    Modelica.Units.SI.SpecificHeatCapacity cv_Ext
       "Isochoric heat capacity calculated by the external medium model";
-    Modelica.SIunits.VelocityOfSound a_Int
+    Modelica.Units.SI.VelocityOfSound a_Int
       "Velocity of sound calculated by the internal medium model";
-    Modelica.SIunits.VelocityOfSound a_Ext
+    Modelica.Units.SI.VelocityOfSound a_Ext
       "Velocity of sound calculated by the external medium model";
     MediumInt.IsobaricExpansionCoefficient beta_Int
       "Isobaric expansion coefficient calculated by the internal medium model";
@@ -132,9 +132,9 @@ model RefrigerantsDerivativesR134a
       "Isentropic exponent calculated by the internal medium model";
     MediumInt.IsentropicExponent gamma_Ext
       "Isentropic exponent calculated by the external medium model";
-    Modelica.SIunits.IsothermalCompressibility kappa_Int
+    Modelica.Units.SI.IsothermalCompressibility kappa_Int
       "Isothermal compressibility calculated by the internal medium model";
-    Modelica.SIunits.IsothermalCompressibility kappa_Ext
+    Modelica.Units.SI.IsothermalCompressibility kappa_Ext
       "Isothermal compressibility calculated by the external medium model";
     Real delta_T_Int
       "Isothermal throttling coefficient calculated by the internal medium model";

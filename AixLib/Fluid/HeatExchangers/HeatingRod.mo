@@ -7,9 +7,10 @@ model HeatingRod
       final V=V,
     final prescribedHeatFlowRate=true));
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
+  parameter Modelica.Units.SI.HeatFlowRate Q_flow_nominal
     "Heat flow rate at u=1, positive for heating";
-  parameter Modelica.SIunits.Volume V=m_flow_nominal*tau/rho_default "Volume of heat exchanger";
+  parameter Modelica.Units.SI.Volume V=m_flow_nominal*tau/rho_default
+    "Volume of heat exchanger";
   parameter Real eta      "Efficiency of the heating rod";
 
   // Count switches

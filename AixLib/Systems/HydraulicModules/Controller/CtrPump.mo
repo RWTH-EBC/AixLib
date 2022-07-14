@@ -2,7 +2,8 @@
 block CtrPump "controller for pump circuit"
   //Boolean choice;
 
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm rpm_pump(min=0) = 2000
+    "Rpm of the Pump";
 
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant

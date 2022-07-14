@@ -79,7 +79,7 @@ model Chiller "Example for the reversible chiller model."
         rotation=0,
         origin={54,-38})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/3600,
+    f=1/3600,
     amplitude=500,
     offset=500,
     phase=3.1415926535898)

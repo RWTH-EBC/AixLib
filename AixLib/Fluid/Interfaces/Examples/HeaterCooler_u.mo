@@ -10,8 +10,7 @@ model HeaterCooler_u
     Q_flow_nominal=5000,
     m_flow_nominal=0.5,
     dp_nominal=200,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial)
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Heater and cooler"                                  annotation (Placement(
         transformation(extent={{-14,90},{6,110}})));
   Modelica.Blocks.Sources.Constant TDb(k=293.15) "Drybulb temperature"
@@ -63,8 +62,7 @@ model HeaterCooler_u
     Q_flow_nominal=5000,
     m_flow_nominal=0.5,
     dp_nominal=200,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial)
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Heater and cooler"                                   annotation (Placement(
         transformation(extent={{-14,-30},{6,-10}})));
   AixLib.Fluid.FixedResistances.PressureDrop res_2(
@@ -107,8 +105,7 @@ model HeaterCooler_u
     Q_flow_nominal=5000,
     m_flow_nominal=0.5,
     dp_nominal=200,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial)
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Heater and cooler"                                  annotation (Placement(
         transformation(extent={{-10,-190},{10,-170}})));
   AixLib.Fluid.FixedResistances.PressureDrop res_1(
@@ -134,8 +131,7 @@ model HeaterCooler_u
     Q_flow_nominal=5000,
     m_flow_nominal=0.5,
     dp_nominal=200,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial)
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Heater and cooler"                                  annotation (Placement(
         transformation(extent={{-10,-330},{10,-310}})));
   AixLib.Fluid.FixedResistances.PressureDrop res_6(
@@ -301,34 +297,34 @@ equation
   connect(gain.y, hea7.u) annotation (Line(points={{-29,184},{-20,184},{-20,
           -314},{-14,-314},{-12,-314}},            color={0,0,127}));
   connect(sin_1.ports[1], res_12.port_a) annotation (Line(
-      points={{-148,145},{-124,145},{-124,144},{-100,144}},
+      points={{-148,140.5},{-124,140.5},{-124,144},{-100,144}},
       color={0,127,255}));
   connect(sin_1.ports[2], res_3.port_a) annotation (Line(
-      points={{-148,143},{-124,143},{-124,32},{-100,32}},
+      points={{-148,141.5},{-124,141.5},{-124,32},{-100,32}},
       color={0,127,255}));
   connect(sou_1.ports[1], res_11.port_a) annotation (Line(
-      points={{-150,103},{-125,103},{-125,100},{-100,100}},
+      points={{-150,98.5},{-125,98.5},{-125,100},{-100,100}},
       color={0,127,255}));
   connect(sou_1.ports[2], res_2.port_a) annotation (Line(
-      points={{-150,101},{-128,101},{-128,-20},{-100,-20}},
+      points={{-150,99.5},{-128,99.5},{-128,-20},{-100,-20}},
       color={0,127,255}));
   connect(sin_1.ports[3], res_1.port_a) annotation (Line(
-      points={{-148,141},{-128,141},{-128,-180},{-100,-180}},
+      points={{-148,142.5},{-128,142.5},{-128,-180},{-100,-180}},
       color={0,127,255}));
   connect(sin_1.ports[4], res_6.port_a) annotation (Line(
-      points={{-148,139},{-128,139},{-128,-320},{-100,-320}},
+      points={{-148,143.5},{-128,143.5},{-128,-320},{-100,-320}},
       color={0,127,255}));
   connect(sou_1.ports[3], res_5.port_a) annotation (Line(
-      points={{-150,99},{-124,99},{-124,-120},{-100,-120}},
+      points={{-150,100.5},{-124,100.5},{-124,-120},{-100,-120}},
       color={0,127,255}));
   connect(sou_1.ports[4], res_7.port_a) annotation (Line(
-      points={{-150,97},{-124,97},{-124,-260},{-100,-260}},
+      points={{-150,101.5},{-124,101.5},{-124,-260},{-100,-260}},
       color={0,127,255}));
   connect(mix1.ports[1], res_4.port_a) annotation (Line(
-      points={{70,-20},{110,-20},{110,32},{100,32}},
+      points={{71,-20},{110,-20},{110,32},{100,32}},
       color={0,127,255}));
   connect(mix2.ports[1], res_8.port_a) annotation (Line(
-      points={{68,-320},{106,-320},{106,-260},{100,-260}},
+      points={{69,-320},{106,-320},{106,-260},{100,-260}},
       color={0,127,255}));
   connect(senTem1a.T,che1. u1) annotation (Line(
       points={{-40,108.8},{-40,122},{140,122},{140,176},{158,176}},
@@ -421,7 +417,7 @@ equation
       points={{6,-20},{20,-20}},
       color={0,127,255}));
   connect(senTem3b.port_b, mix1.ports[2]) annotation (Line(
-      points={{40,-20},{74,-20}},
+      points={{40,-20},{73,-20}},
       color={0,127,255}));
   connect(hea4.port_b, senTem4b.port_a) annotation (Line(
       points={{40,32},{50,32}},
@@ -469,7 +465,7 @@ equation
       points={{60,-260},{80,-260}},
       color={0,127,255}));
   connect(mix2.ports[2], senTem7b.port_b) annotation (Line(
-      points={{72,-320},{40,-320}},
+      points={{71,-320},{40,-320}},
       color={0,127,255}));
   connect(senTem7b.port_a, hea7.port_b) annotation (Line(
       points={{20,-320},{10,-320}},
@@ -483,55 +479,56 @@ equation
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
             -400},{200,240}}), graphics={Text(
           extent={{32,232},{160,190}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Temperature check"),             Text(
           extent={{-188,-20},{-38,-84}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="Same system as above, but with flow reversed")}),
 experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/HeaterCooler_u.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>Model that tests the basic class that is used for the heater models.
-It adds and removes heat for forward and reverse flow.
-The top and bottom models should give similar results,
-although the sign of the temperature difference over the components
-differ because of the reverse flow.
-The model computes differences in results that are expected to be
-close to each other after the initial transients decayed.
-All temperature sensors are configured as steady-state sensors to avoid
-differences in temperature due to the dynamic response of the sensor.
-</p>
-</html>",
+ <p>Model that tests the basic class that is used for the heater models.
+ It adds and removes heat for forward and reverse flow.
+ The top and bottom models should give similar results,
+ although the sign of the temperature difference over the components
+ differ because of the reverse flow.
+ The model computes differences in results that are expected to be
+ close to each other after the initial transients decayed.
+ All temperature sensors are configured as steady-state sensors to avoid
+ differences in temperature due to the dynamic response of the sensor.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-November 2, 2016, by Michael Wetter:<br/>
-Changed assertions to blocks that compute the difference,
-and added the difference to the regression results.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
-</li>
-<li>
-May 30, 2014, by Michael Wetter:<br/>
-Changed initialization of mass dynamics to avoid overspecified system
-of equations if the medium model is incompressible.
-</li>
-<li>
-January 24, 2013, by Michael Wetter:<br/>
-Increased parameter <code>startTime</code> of the assert block
-and set initial conditions to
-<code>Modelica.Fluid.Types.Dynamics.FixedInitial</code>.
-</li>
-<li>
-July 11, 2011, by Michael Wetter:<br/>
-Changed model to sensors with two fluid ports.
-Moved model to <code>AixLib.Fluid.Interfaces.Examples</code>.
-</li>
-<li>
-April 17, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ November 2, 2016, by Michael Wetter:<br/>
+ Changed assertions to blocks that compute the difference,
+ and added the difference to the regression results.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+ </li>
+ <li>
+ May 30, 2014, by Michael Wetter:<br/>
+ Changed initialization of mass dynamics to avoid overspecified system
+ of equations if the medium model is incompressible.
+ </li>
+ <li>
+ January 24, 2013, by Michael Wetter:<br/>
+ Increased parameter <code>startTime</code> of the assert block
+ and set initial conditions to
+ <code>Modelica.Fluid.Types.Dynamics.FixedInitial</code>.
+ </li>
+ <li>
+ July 11, 2011, by Michael Wetter:<br/>
+ Changed model to sensors with two fluid ports.
+ Moved model to <code>AixLib.Fluid.Interfaces.Examples</code>.
+ </li>
+ <li>
+ April 17, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HeaterCooler_u;

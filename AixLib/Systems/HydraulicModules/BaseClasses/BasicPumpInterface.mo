@@ -9,8 +9,8 @@ partial model BasicPumpInterface "Pump interface for different pump types"
 
 
   // Initialization
-  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
-    "Initialization temperature" annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
+    "Initialization temperature" annotation (Dialog(tab="Initialization"));
 
   // Dynamics
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial

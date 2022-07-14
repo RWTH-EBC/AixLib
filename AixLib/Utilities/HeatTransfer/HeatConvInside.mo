@@ -15,12 +15,14 @@ model HeatConvInside
       radioButtons=true),
     Evaluate=true);
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Custom convective heat transfer coefficient"
-                                         annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 3 then true else false));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=2.5
+    "Custom convective heat transfer coefficient" annotation (Dialog(
+        descriptionLabel=true, enable=if calcMethod == 3 then true else false));
 
-  parameter Modelica.SIunits.TemperatureDifference dT_small = 0.1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 1 or calcMethod == 2 or calcMethod == 4 then true else false));
+  parameter Modelica.Units.SI.TemperatureDifference dT_small=0.1
+    "Linearized function around dT = 0 K +/-" annotation (Dialog(
+        descriptionLabel=true, enable=if calcMethod == 1 or calcMethod == 2 or
+          calcMethod == 4 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
@@ -31,11 +33,13 @@ model HeatConvInside
       choice=3 "horizontal facing down",
       radioButtons=true),
       Evaluate=true);
-  parameter Modelica.SIunits.Area A(min=Modelica.Constants.eps) "Area of surface";
-  Modelica.SIunits.CoefficientOfHeatTransfer hCon "variable heat transfer coefficient";
+  parameter Modelica.Units.SI.Area A(min=Modelica.Constants.eps)
+    "Area of surface";
+  Modelica.Units.SI.CoefficientOfHeatTransfer hCon
+    "variable heat transfer coefficient";
 
 protected
-  Modelica.SIunits.Temp_C posDiff=noEvent(abs(port_b.T - port_a.T))
+  Modelica.Units.NonSI.Temperature_degC posDiff=noEvent(abs(port_b.T - port_a.T))
     "Positive temperature difference";
 equation
 
@@ -322,8 +326,9 @@ equation
 </p>
 <ul>
   <li>
-    <i>May 6, 2021</i> by Felix Stegemerten / Larissa K&uuml;hn<br/>
-    Bugfixing Method &quot;Glueck&quot;</li>
+    <i>May 6, 2021</i> by Felix Stegemerten / Larissa Kühn<br/>
+    Bugfixing Method \"Glueck\"
+  </li>
   <li>
     <i>May 30, 2019</i> by Katharina Brinkmann / Philipp Mehrfeld:<br/>
     <a href=

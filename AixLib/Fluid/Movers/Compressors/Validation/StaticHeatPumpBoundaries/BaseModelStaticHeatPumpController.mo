@@ -21,29 +21,28 @@ model BaseModelStaticHeatPumpController
 
   // Definition of parameters describing boundary conditions
   //
-  parameter Modelica.SIunits.TemperatureDifference dTPinEva = 5
+  parameter Modelica.Units.SI.TemperatureDifference dTPinEva=5
     "Pinch temperature at evaporator's outlet"
     annotation (Dialog(tab="General", group="Evaporator"));
-  parameter Modelica.SIunits.TemperatureDifference dTSupHea = 1
+  parameter Modelica.Units.SI.TemperatureDifference dTSupHea=1
     "Superheating of working fluid"
     annotation (Dialog(tab="General", group="Evaporator"));
 
-  parameter Modelica.SIunits.TemperatureDifference dTPinCon = 2.5
+  parameter Modelica.Units.SI.TemperatureDifference dTPinCon=2.5
     "Pinch temperature at evaporator's outlet"
     annotation (Dialog(tab="General", group="Condenser"));
-  parameter Modelica.SIunits.TemperatureDifference dTSubCool = 8
+  parameter Modelica.Units.SI.TemperatureDifference dTSubCool=8
     "Supercooling of working fluid"
     annotation (Dialog(tab="General", group="Condenser"));
 
-  parameter Modelica.SIunits.Density dSec=1000
+  parameter Modelica.Units.SI.Density dSec=1000
     "Constant density of secondary fluid"
     annotation (Dialog(tab="General", group="Condenser"));
-  parameter Modelica.SIunits.SpecificHeatCapacity cpSec=4.1813e3
+  parameter Modelica.Units.SI.SpecificHeatCapacity cpSec=4.1813e3
     "Constant specific heat capacity of secondary fluid"
     annotation (Dialog(tab="General", group="Condenser"));
-  parameter Modelica.SIunits.VolumeFlowRate
-    V_flowSec=(0.776 + 0.781 + 0.44)/3/3600
-    "Constant volume flow of secondary fluid"
+  parameter Modelica.Units.SI.VolumeFlowRate V_flowSec=(0.776 + 0.781 + 0.44)/3
+      /3600 "Constant volume flow of secondary fluid"
     annotation (Dialog(tab="General", group="Condenser"));
 
   // Definition of variables describing boundary conditions
@@ -179,12 +178,12 @@ protected
 
     // Definition of parameters describing evaporator
     //
-    parameter Modelica.SIunits.TemperatureDifference dTPin = 5
+    parameter Modelica.Units.SI.TemperatureDifference dTPin=5
       "Pinch temperature at evaporator's outlet"
-      annotation(Dialog(tab="General",group="Evaporator"));
-    parameter Modelica.SIunits.TemperatureDifference dTSupHea = 1
+      annotation (Dialog(tab="General", group="Evaporator"));
+    parameter Modelica.Units.SI.TemperatureDifference dTSupHea=1
       "Superheating of working fluid"
-      annotation(Dialog(tab="General",group="Evaporator"));
+      annotation (Dialog(tab="General", group="Evaporator"));
 
     // Definition of parameters describing assumptions
     //
@@ -238,15 +237,12 @@ protected
       "Thermodynamic state of the working fluid  at evaporator's outlet"
       annotation (Placement(transformation(extent={{-20,-8},{0,12}})));
 
-    Modelica.SIunits.AbsolutePressure pSat
+    Modelica.Units.SI.AbsolutePressure pSat
       "Absolute pressure at evaporator's outlet";
-    Modelica.SIunits.Temperature TSat
-      "Saturation temperature";
-    Modelica.SIunits.Temperature TOut
-      "Temperature at evaporator's outlet";
+    Modelica.Units.SI.Temperature TSat "Saturation temperature";
+    Modelica.Units.SI.Temperature TOut "Temperature at evaporator's outlet";
 
-    Modelica.SIunits.Temperature TAmb
-      "Temperature of ambient";
+    Modelica.Units.SI.Temperature TAmb "Temperature of ambient";
 
   equation
     // Connection of ports
@@ -352,22 +348,22 @@ protected
 
     // Definition of parameters describing condenser
     //
-    parameter Modelica.SIunits.TemperatureDifference dTPin = 2.5
+    parameter Modelica.Units.SI.TemperatureDifference dTPin=2.5
       "Supercooling of working fluid"
-      annotation(Dialog(tab="General",group="Condenser"));
-    parameter Modelica.SIunits.TemperatureDifference dTSubCool = 8
+      annotation (Dialog(tab="General", group="Condenser"));
+    parameter Modelica.Units.SI.TemperatureDifference dTSubCool=8
       "Supercooling of working fluid"
-      annotation(Dialog(tab="General",group="Condenser"));
+      annotation (Dialog(tab="General", group="Condenser"));
 
-    parameter Modelica.SIunits.Density dSec = 1000
+    parameter Modelica.Units.SI.Density dSec=1000
       "Constant density of secondary fluid"
-      annotation(Dialog(tab="General",group="Condenser"));
-    parameter Modelica.SIunits.SpecificHeatCapacity cpSec = 4.1813e3
+      annotation (Dialog(tab="General", group="Condenser"));
+    parameter Modelica.Units.SI.SpecificHeatCapacity cpSec=4.1813e3
       "Constant specific heat capacity of secondary fluid"
-      annotation(Dialog(tab="General",group="Condenser"));
-    parameter Modelica.SIunits.VolumeFlowRate V_flowSec = (0.776+0.781+0.44)/3/3600
-      "Constant volume flow of secondary fluid"
-      annotation(Dialog(tab="General",group="Condenser"));
+      annotation (Dialog(tab="General", group="Condenser"));
+    parameter Modelica.Units.SI.VolumeFlowRate V_flowSec=(0.776 + 0.781 + 0.44)
+        /3/3600 "Constant volume flow of secondary fluid"
+      annotation (Dialog(tab="General", group="Condenser"));
 
     // Definition of parameters describing assumptions
     //
@@ -401,30 +397,24 @@ protected
 
     // Definition of variables describing condenser
     //
-    Modelica.SIunits.AbsolutePressure pSat
+    Modelica.Units.SI.AbsolutePressure pSat
       "Absolute pressure at condenser's outlet";
-    Modelica.SIunits.Temperature TSat
-      "Saturation temperature";
+    Modelica.Units.SI.Temperature TSat "Saturation temperature";
 
-    Modelica.SIunits.Temperature TInl
-      "Temperature at condenser's inlet";
-    Modelica.SIunits.Temperature TOut
-      "Temperature at condenser's outlet";
-    Modelica.SIunits.SpecificEnthalpy hInl
+    Modelica.Units.SI.Temperature TInl "Temperature at condenser's inlet";
+    Modelica.Units.SI.Temperature TOut "Temperature at condenser's outlet";
+    Modelica.Units.SI.SpecificEnthalpy hInl
       "Specific enthalpy at condenser's inlet";
-    Modelica.SIunits.SpecificEnthalpy hOut
+    Modelica.Units.SI.SpecificEnthalpy hOut
       "Specific enthalpy at condenser's outlet";
 
-    Modelica.SIunits.MassFlowRate m_flow
-      "Mass flow rate";
-    Modelica.SIunits.HeatFlowRate Q_flow
-      "Heat capacity";
+    Modelica.Units.SI.MassFlowRate m_flow "Mass flow rate";
+    Modelica.Units.SI.HeatFlowRate Q_flow "Heat capacity";
 
-    Modelica.SIunits.MassFlowRate m_flowSec
+    Modelica.Units.SI.MassFlowRate m_flowSec
       "Mass flow rate of secondary fluid";
-    Modelica.SIunits.Temperature TFlo
-      "Temperature flow at heat capacity";
-    Modelica.SIunits.Temperature TRetFlo
+    Modelica.Units.SI.Temperature TFlo "Temperature flow at heat capacity";
+    Modelica.Units.SI.Temperature TRetFlo
       "Temperature return flow at heat capacity";
 
   equation

@@ -12,7 +12,7 @@ model GenericPipe
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(group="Parameters"));
 
-  parameter Modelica.SIunits.Length length(min=0) "Pipe length";
+  parameter Modelica.Units.SI.Length length(min=0) "Pipe length";
 
   parameter Boolean withInsulation=true "Pipe with or without insulation" annotation (Dialog(group="Heat Transfer"),choices(checkBox=true));
 
@@ -22,10 +22,11 @@ model GenericPipe
 
   parameter Boolean withConvection=true "convectional heat transfer" annotation (Dialog(group="Heat Transfer"),choices(checkBox=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=4
-    "Convection heat transfer coeffient" annotation (choicesAllMatching=true, Dialog(enable=withConvection==true,group="Heat Transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon=4
+    "Convection heat transfer coeffient" annotation (choicesAllMatching=true,
+      Dialog(enable=withConvection == true, group="Heat Transfer"));
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
   // Advanced
@@ -34,9 +35,9 @@ model GenericPipe
   parameter Real ReC=2300
     "Reynolds number where transition to turbulent starts"
                                                           annotation (Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Height roughness=2.5e-5
+  parameter Modelica.Units.SI.Height roughness=2.5e-5
     "Average height of surface asperities (default: smooth steel pipe)"
-                                                                       annotation (Dialog(tab="Advanced"));
+    annotation (Dialog(tab="Advanced"));
   parameter Integer nNodes=3 "Spatial segmentation for SimplePipe" annotation (Dialog(tab="Advanced", enable=pipeModel=="SimplePipe"));
 
   // Assumptions
@@ -48,7 +49,7 @@ model GenericPipe
     annotation (Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
   // Initialization
-  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
+  parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
     "Initialization temperature at pipe inlet"
     annotation (Dialog(tab="Initialization"));
 
@@ -67,7 +68,7 @@ model GenericPipe
     final thickness=(parameterPipe.d_o - parameterPipe.d_i)/2,
     final T_start_in=T_start,
     final T_start_out=T_start,
-    final fac=fac,          nPorts=1) if pipeModel == "PlugFlowPipe"
+    final fac=fac) if pipeModel == "PlugFlowPipe"
     annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
   SimplePipe simplePipe(
     redeclare final package Medium = Medium,
@@ -146,7 +147,7 @@ equation
       points={{-10,-60},{-80,-60},{-80,0},{-100,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(plugFlowPipe.ports_b[1], port_b) annotation (Line(
+  connect(plugFlowPipe.port_b, port_b) annotation (Line(
       points={{10,-60},{80,-60},{80,0},{100,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));

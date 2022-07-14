@@ -6,7 +6,7 @@ model InverseDewPointTemperatureDerivativeCheck_amb
   Real y "Function value";
   Real y_comp "Function value for comparison";
   Real err(unit="K", displayUnit="K") "Integration error";
-  Modelica.SIunits.Pressure p_w "Water vapor partial pressure";
+  Modelica.Units.SI.Pressure p_w "Water vapor partial pressure";
 initial equation
   y=y_comp;
 equation
@@ -23,23 +23,24 @@ equation
       StopTime=1,
       Tolerance=1E-9),
     Documentation(info="<html>
-<p>
-This example checks whether the function derivative
-is implemented correctly. If the derivative implementation
-is not correct, the model will stop with an assert statement.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 17, 2015 by Michael Wetter:<br/>
-Updated regression test to have slope that is different from one.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
-</li>
-<li>
-October 29, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example checks whether the function derivative
+ is implemented correctly. If the derivative implementation
+ is not correct, the model will stop with an assert statement.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 17, 2015 by Michael Wetter:<br/>
+ Updated regression test to have slope that is different from one.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
+ </li>
+ <li>
+ October 29, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InverseDewPointTemperatureDerivativeCheck_amb;

@@ -89,7 +89,7 @@ model BuildingWithPV
     G=2) annotation (Placement(transformation(extent={{100,14},{120,34}})));
   Modelica.Blocks.Continuous.LimPID PID(
     yMax=1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     k=0.1,
     Ti=1,
     Td=0.01,
@@ -98,7 +98,7 @@ model BuildingWithPV
     annotation (Placement(transformation(extent={{-66,28},{-46,48}})));
   Modelica.Blocks.Continuous.LimPID PID1(
     yMax=1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     k=0.1,
     Ti=1,
     Td=0.01,

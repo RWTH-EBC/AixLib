@@ -47,16 +47,17 @@ partial model PartialAHU "Defines necessary parameters and connectors"
     (in case that a HRS is physically installed in the AHU)"
     annotation (Dialog(group="Settings AHU Value", enable=HRS));
   // assumed increase in ventilator pressure
-  parameter Modelica.SIunits.Pressure dp_sup=800
+  parameter Modelica.Units.SI.Pressure dp_sup=800
     "pressure difference over supply fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
-  parameter Modelica.SIunits.Pressure dp_eta=800
+  parameter Modelica.Units.SI.Pressure dp_eta=800
     "pressure difference over extract fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
   // assumed efficiencies of the ventilators
-  parameter Modelica.SIunits.Efficiency eta_sup=0.7 "efficiency of supply fan"
+  parameter Modelica.Units.SI.Efficiency eta_sup=0.7 "efficiency of supply fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
-  parameter Modelica.SIunits.Efficiency eta_eta=0.7 "efficiency of extract fan"
+  parameter Modelica.Units.SI.Efficiency eta_eta=0.7
+    "efficiency of extract fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
 
   Modelica.Blocks.Interfaces.RealInput Vflow_in(unit="m3/s") "m3/s"
@@ -155,7 +156,7 @@ protected
   Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir_internal(unit="m3/s") "Needed to connect to conditional connector";
 equation
   dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
-  humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
+  humidification = if humidificationSet and heating and cooling then humidificationSet else false;
 
   connect(Vflow_in_extractAir, Vflow_in_extractAir_internal);
 

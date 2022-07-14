@@ -57,10 +57,11 @@ model HeatPump_PrimaryExergyDestruction_Heating
     annotation (Placement(transformation(extent={{-20,-78},{0,-58}})));
   Modelica.Blocks.Math.Product product1
     annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
-  Modelica.Blocks.Tables.CombiTable2D HeatFlowCondenserTable(table = tableHeatFlowCondenser) annotation(Placement(transformation(extent={{54,-96},
-            {74,-76}})));
-  Modelica.Blocks.Tables.CombiTable2D PowerTable(table = tablePower) annotation(Placement(transformation(extent={{54,-64},
-            {74,-44}})));
+  Modelica.Blocks.Tables.CombiTable2Ds HeatFlowCondenserTable(table=
+        tableHeatFlowCondenser)
+    annotation (Placement(transformation(extent={{54,-96},{74,-76}})));
+  Modelica.Blocks.Tables.CombiTable2Ds PowerTable(table=tablePower)
+    annotation (Placement(transformation(extent={{54,-64},{74,-44}})));
   Modelica.Blocks.Math.Gain gain(k=PEF)
     annotation (Placement(transformation(extent={{2,62},{22,82}})));
 equation

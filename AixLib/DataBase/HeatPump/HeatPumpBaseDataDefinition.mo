@@ -3,9 +3,9 @@ record HeatPumpBaseDataDefinition "Basic heat pump data"
     extends Modelica.Icons.Record;
   parameter Real tableQdot_con[:,:] "Heating power table; T in degC; Q_flow in W";
   parameter Real tableP_ele[:,:] "Electrical power table; T in degC; Q_flow in W";
-  parameter Modelica.SIunits.MassFlowRate mFlow_conNom
+  parameter Modelica.Units.SI.MassFlowRate mFlow_conNom
     "Nominal mass flow rate in condenser";
-  parameter Modelica.SIunits.MassFlowRate mFlow_evaNom
+  parameter Modelica.Units.SI.MassFlowRate mFlow_evaNom
     "Nominal mass flow rate in evaporator";
   parameter Real tableUppBou[:,2] "Points to define upper boundary for sink temperature";
 

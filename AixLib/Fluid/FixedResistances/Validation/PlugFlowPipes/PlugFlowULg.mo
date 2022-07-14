@@ -3,13 +3,13 @@ model PlugFlowULg "Validation against data from Université de Liège"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate, used for regularization near zero flow";
-  parameter Modelica.SIunits.Temperature T_start_in=pipeDataULg.T_start_in + 273.15
-    "Initial temperature at pipe inlet";
-  parameter Modelica.SIunits.Temperature T_start_out=pipeDataULg.T_start_out + 273.15
-    "Initial temperature at pipe outlet";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+  parameter Modelica.Units.SI.Temperature T_start_in=pipeDataULg.T_start_in +
+      273.15 "Initial temperature at pipe inlet";
+  parameter Modelica.Units.SI.Temperature T_start_out=pipeDataULg.T_start_out
+       + 273.15 "Initial temperature at pipe outlet";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
       Medium.specificHeatCapacityCp(state=sta_default)
     "Heat capacity of medium";
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
@@ -94,7 +94,6 @@ model PlugFlowULg "Validation against data from Université de Liège"
     T_start_in=T_start_in,
     R=((1/(2*pipe.kIns)*log((0.0603/2 + pipe.dIns)/(0.0603/2))) + 1/(5*(0.0603
          + 2*pipe.dIns)))/Modelica.Constants.pi,
-    nPorts=1,
     initDelay=true,
     m_flow_start=pipeDataULg.m_flowIni,
     cPip=500,
@@ -149,7 +148,7 @@ equation
           0}},                                  color={0,127,255}));
   connect(senTem_out.port_a, senEntOut.port_b)
     annotation (Line(points={{-160,0},{-140,0}},       color={0,127,255}));
-  connect(senEntOut.port_a, pipe.ports_b[1])
+  connect(senEntOut.port_a, pipe.port_b)
     annotation (Line(points={{-120,0},{-100,0}},       color={0,127,255}));
   connect(pipe.port_a, senEntIn.port_b)
     annotation (Line(points={{-80,0},{-62,0}}, color={0,127,255}));
@@ -180,54 +179,55 @@ equation
     annotation (Line(points={{78,66},{-130,66},{-130,11}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
-<p>
-The example contains
-experimental data from a real district heating network.
-</p>
-<p>
-This model compares the results with the original Modelica Standard Library pipes.
-</p>
-<p>The pipes' temperatures are not initialized. Therefore, results of
-outflow temperature before approximately the first 10000 seconds should not be
-considered.
-</p>
-<h4>Test bench schematic</h4>
-<p><img alt=\"Schematic of test rig at ULg\"
-src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Validation/PlugFlowPipes/ULgTestBench.png\"/> </p>
-<h4>Calibration</h4>
-<p>
-There are some uncertainties about the heat loss coefficient between pipe and
-surrounding air as well as regarding the heat conductivity of the insulation
-material.
-With the <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.PipeDataULg150801\">
-given data</a>, the length specific thermal resistance is <code>R = 2.164
-</code>((m K)/W), calculated as follows:
-</p>
-<p align=\"center\"style=\"font-style:italic;\">
-R=((1/(2*pipe.kIns)*log((0.0603+2*pipe.dIns)/(0.0603)))+1/(5*(0.0603+2*pipe.dIns)))/Modelica.Constants.pi</p>
-<p align=\"center\"style=\"font-style:italic;\">
-U = 1/R = 0.462 W/(m K)</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 7, 2020, by Michael Wetter:<br/>
-Replaced measured data from specification in Modelica file to external table,
-as this reduces the computing time.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1289\"> #1289</a>.
-</li>
-<li>
-November 24, 2016 by Bram van der Heijde:<br/>Add pipe thickness for wall
-capacity calculation and expand documentation section.</li>
-<li>April 2, 2016 by Bram van der Heijde:<br/>Change thermal conductivity and
-put boundary condition in K.
-</li>
-<li>Januar 26, 2016 by Carles Ribas:<br/>First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ The example contains
+ experimental data from a real district heating network.
+ </p>
+ <p>
+ This model compares the results with the original Modelica Standard Library pipes.
+ </p>
+ <p>The pipes' temperatures are not initialized. Therefore, results of
+ outflow temperature before approximately the first 10000 seconds should not be
+ considered.
+ </p>
+ <h4>Test bench schematic</h4>
+ <p><img alt=\"Schematic of test rig at ULg\"
+ src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Validation/PlugFlowPipes/ULgTestBench.png\"/> </p>
+ <h4>Calibration</h4>
+ <p>
+ There are some uncertainties about the heat loss coefficient between pipe and
+ surrounding air as well as regarding the heat conductivity of the insulation
+ material.
+ With the <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.PipeDataULg150801\">
+ given data</a>, the length specific thermal resistance is <code>R = 2.164
+ </code>((m K)/W), calculated as follows:
+ </p>
+ <p align=\"center\"style=\"font-style:italic;\">
+ R=((1/(2*pipe.kIns)*log((0.0603+2*pipe.dIns)/(0.0603)))+1/(5*(0.0603+2*pipe.dIns)))/Modelica.Constants.pi</p>
+ <p align=\"center\"style=\"font-style:italic;\">
+ U = 1/R = 0.462 W/(m K)</p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 7, 2020, by Michael Wetter:<br/>
+ Replaced measured data from specification in Modelica file to external table,
+ as this reduces the computing time.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1289\"> #1289</a>.
+ </li>
+ <li>
+ November 24, 2016 by Bram van der Heijde:<br/>Add pipe thickness for wall
+ capacity calculation and expand documentation section.</li>
+ <li>April 2, 2016 by Bram van der Heijde:<br/>Change thermal conductivity and
+ put boundary condition in K.
+ </li>
+ <li>Januar 26, 2016 by Carles Ribas:<br/>First implementation.
+ </li>
+ </ul>
+ </html>"),
     experiment(StopTime=875, Tolerance=1e-006),
-    __Dymola_Commands(file="Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PlugFlowPipes/PlugFlowULg.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PlugFlowPipes/PlugFlowULg.mos"
         "Simulate and plot"),
-    Diagram(coordinateSystem(extent={{-260,-120},{260,120}})));
+    Diagram(coordinateSystem(extent={{-260,-120},{260,120}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowULg;

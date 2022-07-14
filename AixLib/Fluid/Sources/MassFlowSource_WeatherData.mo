@@ -1,7 +1,7 @@
 within AixLib.Fluid.Sources;
 model MassFlowSource_WeatherData
   "Ideal flow source that produces a prescribed mass flow with prescribed
-  trace substances, outside specific enthalpy and mass fraction "
+   trace substances, outside specific enthalpy and mass fraction "
   extends AixLib.Fluid.Sources.BaseClasses.PartialSource(final verifyInputs=true);
   parameter Boolean use_m_flow_in = false
     "Get the mass flow rate from the input connector"
@@ -9,9 +9,9 @@ model MassFlowSource_WeatherData
   parameter Boolean use_C_in = false
     "Get the trace substances from the input connector"
     annotation(Evaluate=true, HideResult=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow = 0
+  parameter Modelica.Units.SI.MassFlowRate m_flow=0
     "Fixed mass flow rate going out of the fluid port"
-    annotation (Dialog(enable = not use_m_flow_in));
+    annotation (Dialog(enable=not use_m_flow_in));
   parameter Medium.ExtraProperty C[Medium.nC](
     final quantity=Medium.extraPropertiesNames)=fill(0, Medium.nC)
     "Fixed values of trace substances"
@@ -128,7 +128,7 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-54,32},{16,-30}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid,
           textString="m"),
@@ -140,70 +140,71 @@ equation
         Text(
           visible=use_m_flow_in,
           extent={{-185,132},{-45,100}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="m_flow"),
         Text(
           visible=use_C_in,
           extent={{-155,-98},{-35,-126}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="C"),        Text(
           extent={{-161,110},{139,150}},
           textString="%name",
-          lineColor={0,0,255})}),
+          textColor={0,0,255})}),
     Documentation(info="<html>
-<p>
-Models an ideal flow source, with prescribed values of flow rate and trace
-substances, with temperature and specific enthalpy from outside:
-</p>
-<ul>
-<li> Prescribed mass flow rate.</li>
-<li> Boundary composition (trace-substance flow).</li>
-<li> Outside specific enthalpy.</li>
-<li> Multi-substance composition (e.g. water vapor) from outside.</li>
-</ul>
-<p>If <code>use_m_flow_in</code> is false (default option), the <code>m_flow
-</code> parameter is used as boundary flow rate, and the <code>m_flow_in</code>
-input connector is disabled;
-if <code>use_m_flow_in</code> is true, then the <code>m_flow</code> parameter
-is ignored, and the value provided by the input connector is used instead.</p>
-<p>The same applies to the trace substances.</p>
-<p>The <a href=\"modelica://AixLib.Utilities.Psychrometrics.X_pTphi\">
-AixLib.Utilities.Psychrometrics.X_pTphi</a> block is used with the input data
-including <code>pAtm</code>, <code>TDryBul</code>, <code>relHum</code> from
-weather bus <code>weaBus</code>, to calculate <code>X</code>.</p>
-<p>The same applies to the specific enthalpy.</p>
-<p>
-Note, that boundary temperature,
-mass fractions and trace substances have only an effect if the mass flow
-is from the boundary into the port. If mass is flowing from
-the port into the boundary, the boundary definitions,
-with exception of boundary flow rate, do not have an effect.
-</p>
-</html>",
+ <p>
+ Models an ideal flow source, with prescribed values of flow rate and trace
+ substances, with temperature and specific enthalpy from outside:
+ </p>
+ <ul>
+ <li> Prescribed mass flow rate.</li>
+ <li> Boundary composition (trace-substance flow).</li>
+ <li> Outside specific enthalpy.</li>
+ <li> Multi-substance composition (e.g. water vapor) from outside.</li>
+ </ul>
+ <p>If <code>use_m_flow_in</code> is false (default option), the <code>m_flow
+ </code> parameter is used as boundary flow rate, and the <code>m_flow_in</code>
+ input connector is disabled;
+ if <code>use_m_flow_in</code> is true, then the <code>m_flow</code> parameter
+ is ignored, and the value provided by the input connector is used instead.</p>
+ <p>The same applies to the trace substances.</p>
+ <p>The <a href=\"modelica://AixLib.Utilities.Psychrometrics.X_pTphi\">
+ AixLib.Utilities.Psychrometrics.X_pTphi</a> block is used with the input data
+ including <code>pAtm</code>, <code>TDryBul</code>, <code>relHum</code> from
+ weather bus <code>weaBus</code>, to calculate <code>X</code>.</p>
+ <p>The same applies to the specific enthalpy.</p>
+ <p>
+ Note, that boundary temperature,
+ mass fractions and trace substances have only an effect if the mass flow
+ is from the boundary into the port. If mass is flowing from
+ the port into the boundary, the boundary definitions,
+ with exception of boundary flow rate, do not have an effect.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-November 14, 2019, by Michael Wetter:<br/>
-Removed duplicate connector.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1248\"> #1248</a>.
-</li>
-<li>
-January 14, 2019 by Jianjun Hu:<br/>
-Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
-AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\"> #1050</a>.
-</li>
-<li>
-May 21, 2017, by Jianjun Hu:<br/>
-First implementation. Created flow source with prescribed mass flow and trace
-substances, outside enthalpy and composition. Weather bus is used.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/777\">#777</a>.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ November 14, 2019, by Michael Wetter:<br/>
+ Removed duplicate connector.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1248\"> #1248</a>.
+ </li>
+ <li>
+ January 14, 2019 by Jianjun Hu:<br/>
+ Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
+ AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\"> #1050</a>.
+ </li>
+ <li>
+ May 21, 2017, by Jianjun Hu:<br/>
+ First implementation. Created flow source with prescribed mass flow and trace
+ substances, outside enthalpy and composition. Weather bus is used.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/777\">#777</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MassFlowSource_WeatherData;

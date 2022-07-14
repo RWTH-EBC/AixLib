@@ -6,7 +6,7 @@ model ThirdOrderStratifier
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model" annotation (choicesAllMatching=true);
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_small(min=0)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small(min=0)
     "Small mass flow rate for regularization of zero flow";
   parameter Integer nSeg(min=4) "Number of volume segments";
 
@@ -32,13 +32,13 @@ model ThirdOrderStratifier
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
 
 protected
-  Modelica.SIunits.SpecificEnthalpy[nSeg + 1] hOut
+  Modelica.Units.SI.SpecificEnthalpy[nSeg + 1] hOut
     "Extended vector with new outlet enthalpies to reduce numerical dissipation (at the boundary between two volumes)";
-  Modelica.SIunits.SpecificEnthalpy[nSeg + 2] h
+  Modelica.Units.SI.SpecificEnthalpy[nSeg + 2] h
     "Extended vector with port enthalpies, needed to simplify loop";
-  Modelica.SIunits.HeatFlowRate Q_flow[nSeg]
+  Modelica.Units.SI.HeatFlowRate Q_flow[nSeg]
     "Heat exchange computed using upwind third order discretization scheme";
-  //    Modelica.SIunits.HeatFlowRate Q_flow_upWind
+  //    Modelica.Units.SI.HeatFlowRate Q_flow_upWind
   //     "Heat exchange computed using upwind third order discretization scheme"; //Used to test the energy conservation
   Real sig
     "Sign used to implement the third order upwind scheme without triggering a state event";
@@ -103,68 +103,68 @@ equation
     heatPort[i].Q_flow = Q_flow[i]*alpha;
   end for;
   annotation (Documentation(info="<html>
-<p>
-This model reduces the numerical dissipation that is introduced
-by the standard first-order upwind discretization scheme which is
-created when connecting fluid volumes in series.
-</p>
-<p>
-The model is used in conjunction with
-<a href=\"modelica://AixLib.Fluid.Storage.Stratified\">
-AixLib.Fluid.Storage.Stratified</a>.
-It computes a heat flux that needs to be added to each volume of <a href=\"modelica://AixLib.Fluid.Storage.Stratified\">
-AixLib.Fluid.Storage.Stratified</a> in order to give the results that a third-order upwind discretization scheme (QUICK) would give.
-</p>
-<p>
-The QUICK method can cause oscillations in the tank temperatures since the high order method introduces numerical dispersion.
-There are two ways to reduce the oscillations:</p>
-<ul>
-<li>
-To use an under-relaxation coefficient <code>alpha</code> when adding the heat flux into the volume.
-</li>
-<li>
-To use the first-order upwind for <code>hOut[2]</code> and <code>hOut[nSeg]</code>. Note: Using it requires <code>nSeg &ge; 4</code>.
-</li>
-</ul>
-<p>
-Both approaches are implemented in the model.
-</p>
-<p>
-The model is used by
-<a href=\"modelica://AixLib.Fluid.Storage.StratifiedEnhanced\">
-AixLib.Fluid.Storage.StratifiedEnhanced</a>.
-</p>
-<h4>Limitations</h4>
-<p>
-The model requires at least 4 fluid segments. Hence, set <code>nSeg</code> to 4 or higher.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-<li>
-December 14, 2012 by Michael Wetter:<br/>
-Removed unused protected parameters <code>sta0</code> and <code>cp0</code>.
-</li>
-<li>
-March 29, 2012 by Wangda Zuo:<br/>
-Revised the implementation to reduce the temperature overshoot.
-</li>
-<li>
-July 28, 2010 by Wangda Zuo:<br/>
-Rewrote third order upwind scheme to avoid state events.
-This leads to more robust and faster simulation.
-</li>
-<li>
-June 23, 2010 by Michael Wetter and Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"), Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+ <p>
+ This model reduces the numerical dissipation that is introduced
+ by the standard first-order upwind discretization scheme which is
+ created when connecting fluid volumes in series.
+ </p>
+ <p>
+ The model is used in conjunction with
+ <a href=\"modelica://AixLib.Fluid.Storage.Stratified\">
+ AixLib.Fluid.Storage.Stratified</a>.
+ It computes a heat flux that needs to be added to each volume of <a href=\"modelica://AixLib.Fluid.Storage.Stratified\">
+ AixLib.Fluid.Storage.Stratified</a> in order to give the results that a third-order upwind discretization scheme (QUICK) would give.
+ </p>
+ <p>
+ The QUICK method can cause oscillations in the tank temperatures since the high order method introduces numerical dispersion.
+ There are two ways to reduce the oscillations:</p>
+ <ul>
+ <li>
+ To use an under-relaxation coefficient <code>alpha</code> when adding the heat flux into the volume.
+ </li>
+ <li>
+ To use the first-order upwind for <code>hOut[2]</code> and <code>hOut[nSeg]</code>. Note: Using it requires <code>nSeg &ge; 4</code>.
+ </li>
+ </ul>
+ <p>
+ Both approaches are implemented in the model.
+ </p>
+ <p>
+ The model is used by
+ <a href=\"modelica://AixLib.Fluid.Storage.StratifiedEnhanced\">
+ AixLib.Fluid.Storage.StratifiedEnhanced</a>.
+ </p>
+ <h4>Limitations</h4>
+ <p>
+ The model requires at least 4 fluid segments. Hence, set <code>nSeg</code> to 4 or higher.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ <li>
+ December 14, 2012 by Michael Wetter:<br/>
+ Removed unused protected parameters <code>sta0</code> and <code>cp0</code>.
+ </li>
+ <li>
+ March 29, 2012 by Wangda Zuo:<br/>
+ Revised the implementation to reduce the temperature overshoot.
+ </li>
+ <li>
+ July 28, 2010 by Wangda Zuo:<br/>
+ Rewrote third order upwind scheme to avoid state events.
+ This leads to more robust and faster simulation.
+ </li>
+ <li>
+ June 23, 2010 by Michael Wetter and Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
             {100,100}}),graphics={
         Rectangle(
           extent={{-48,66},{48,34}},
@@ -182,5 +182,6 @@ First implementation.
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.None,
-          lineColor={0,0,0})}));
+          lineColor={0,0,0})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ThirdOrderStratifier;

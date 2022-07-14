@@ -4,7 +4,7 @@ block DefrostControl
   parameter Real minIceFac "Minimal value above which no defrost is necessary";
   parameter Boolean use_chiller=true
     "True if defrost operates by changing mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));
-  parameter Modelica.SIunits.Power calcPel_deFro
+  parameter Modelica.Units.SI.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=not use_chiller));
   parameter Real deltaIceFac = 0.1 "Bandwitdth for hystereses. If the icing factor is based on the duration of defrost, this value is necessary to avoid state-events.";

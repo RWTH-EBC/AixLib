@@ -1,27 +1,24 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
 model FourElements "Thermal Zone with four elements for exterior walls,
-  interior walls, floor plate and roof"
+   interior walls, floor plate and roof"
   extends ThreeElements(AArray={ATotExt,ATotWin,AInt,AFloor,ARoof});
 
-  parameter Modelica.SIunits.Area ARoof "Area of roof"
-    annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConRoof
+  parameter Modelica.Units.SI.Area ARoof "Area of roof"
+    annotation (Dialog(group="Roof"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoof
     "Convective coefficient of heat transfer of roof (indoor)"
-    annotation(Dialog(group="Roof"));
+    annotation (Dialog(group="Roof"));
   parameter Integer nRoof(min = 1) "Number of RC-elements of roof"
     annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.ThermalResistance RRoof[nRoof](
-    each min=Modelica.Constants.small)
+  parameter Modelica.Units.SI.ThermalResistance RRoof[nRoof](each min=Modelica.Constants.small)
     "Vector of resistances of roof, from inside to outside"
-    annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.ThermalResistance RRoofRem(
-    min=Modelica.Constants.small)
+    annotation (Dialog(group="Roof"));
+  parameter Modelica.Units.SI.ThermalResistance RRoofRem(min=Modelica.Constants.small)
     "Resistance of remaining resistor RRoofRem between capacity n and outside"
-    annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.HeatCapacity CRoof[nRoof](
-    each min=Modelica.Constants.small)
+    annotation (Dialog(group="Roof"));
+  parameter Modelica.Units.SI.HeatCapacity CRoof[nRoof](each min=Modelica.Constants.small)
     "Vector of heat capacities of roof, from inside to outside"
-    annotation(Dialog(group="Roof"));
+    annotation (Dialog(group="Roof"));
   parameter Boolean indoorPortRoof = false
     "Additional heat port at indoor surface of roof"
     annotation(Dialog(group="Roof"),choices(checkBox = true));
@@ -181,7 +178,7 @@ equation
     fillPattern=FillPattern.Solid),
   Text(
     extent={{16,168},{46,156}},
-    lineColor={0,0,255},
+    textColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
     textString="Roof")}),
@@ -193,48 +190,55 @@ equation
   fillColor={230,230,230},
   fillPattern=FillPattern.Solid), Text(
   extent={{-60,60},{64,-64}},
-  lineColor={0,0,0},
+  textColor={0,0,0},
   textString="4")}),
   Documentation(revisions="<html>
-  <ul>
-  <li>
-  December 9, 2019, by Moritz Lauster:<br/>
-  Changes <code>nExt</code> to <code>nRoof</code> for
-  <code>RRoof</code> and <code>CRoof</code>
-  </li>
-  <li>
-  July 11, 2019, by Katharina Brinkmann:<br/>
-  Renamed <code>alphaRoof</code> to <code>hConRoof</code>,
-  <code>alphaRoofConst</code> to <code>hConRoof_const</code>
-  </li>
-  <li>
-  August 31, 2018 by Moritz Lauster:<br/>
-  Updated schema in documentation and fixes
-  orientation and connections of roofRC for
-  <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/997\">
-  issue 997</a>.
-  </li>
-  <li>
-  September 11, 2015 by Moritz Lauster:<br/>
-  First Implementation.
-  </li>
-  </ul>
-</html>",   info="<html>
-  <p>
-  This model adds another element for the roof. Roofs commonly
-  exhibit the same excitations as exterior walls but have different coefficients
-  of heat transfer due to their orientation. Adding an extra element for the roof
-  might lead to a finer resolution of the dynamic behaviour but increases
-  calculation times. The roof is parameterized via the length of the RC-chain
-  <code>nRoof</code>,
-  the vector of capacities <code>CRoof[nRoof]</code>, the vector of resistances
-  <code>RRoof[nRoof]</code> and remaining resistances <code>RRoofRem</code>.
-  </p>
-  <p>
-  The image below shows the RC-network of this model.
-  </p>
-  <p align=\"center\">
-  <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/FourElements.png\" alt=\"image\"/>
-  </p>
-  </html>"));
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ December 9, 2019, by Moritz Lauster:<br/>
+ Changes <code>nExt</code> to <code>nRoof</code> for
+ <code>RRoof</code> and <code>CRoof</code>
+ </li>
+ <li>
+ July 11, 2019, by Katharina Brinkmann:<br/>
+ Renamed <code>alphaRoof</code> to <code>hConRoof</code>,
+ <code>alphaRoofConst</code> to <code>hConRoof_const</code>
+ </li>
+ <li>
+ August 31, 2018 by Moritz Lauster:<br/>
+ Updated schema in documentation and fixes
+ orientation and connections of roofRC for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/997\">
+ issue 997</a>.
+ </li>
+ <li>
+ September 11, 2015 by Moritz Lauster:<br/>
+ First Implementation.
+ </li>
+ </ul>
+ </html>",  info="<html>
+   <p>
+   This model adds another element for the roof. Roofs commonly
+   exhibit the same excitations as exterior walls but have different coefficients
+   of heat transfer due to their orientation. Adding an extra element for the roof
+   might lead to a finer resolution of the dynamic behaviour but increases
+   calculation times. The roof is parameterized via the length of the RC-chain
+   <code>nRoof</code>,
+   the vector of capacities <code>CRoof[nRoof]</code>, the vector of resistances
+   <code>RRoof[nRoof]</code> and remaining resistances <code>RRoofRem</code>.
+   </p>
+   <p>
+   The image below shows the RC-network of this model.
+   </p>
+   <p align=\"center\">
+   <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/FourElements.png\" alt=\"image\"/>
+   </p>
+   </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FourElements;

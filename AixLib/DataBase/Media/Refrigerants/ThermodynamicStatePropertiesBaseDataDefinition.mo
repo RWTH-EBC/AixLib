@@ -131,159 +131,167 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   \"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
   AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:<br/>
 </p>
-<table summary=\"Formulas for calculating thermodynamic properties\"
-cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\" style=
-\"border-collapse:collapse;\">
-  <tr>
-    <td valign=\"middle\" rowspan=\"2\">
-      <p>
-        <i>Temperature_ph</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        First Input
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input1.png\"
-        alt=
-        \"First input required to calculate temperature by pressure and specific enthalpy\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        Second Input
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input2.png\"
-        alt=
-        \"Second input required to calculate temperature by pressure and specific enthalpy\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\" rowspan=\"2\">
-      <p>
-        <i>Temperature_ps</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        First Input
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input1.png\"
-        alt=
-        \"First input required to calculate temperature by pressure and specific entropy\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        Second Input
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input2.png\"
-        alt=
-        \"Second input required to calculate temperature by pressure and specific entropy\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\" rowspan=\"2\">
-      <p>
-        <i>Density_pT</i>
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        First Input
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input1.png\"
-        alt=
-        \"First input required to calculate density by pressure and temperature\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        Second Input
-      </p>
-    </td>
-    <td valign=\"middle\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input2.png\"
-        alt=
-        \"Second input required to calculate density by pressure and temperature\">
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign=\"middle\">
-      <p>
-        <i>Functional approach</i>
-      </p>
-    </td>
-    <td valign=\"middle\" colspan=\"2\">
-      <p>
-        <img src=
-        \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\"
-        alt=
-        \"Functional approach of calculating supercooled and superheated region\">
-      </p>
-    </td>
-  </tr>
+<table>
+  <caption>
+    \"Formulas for calculating thermodynamic properties\" cellspacing=\"0\"
+    cellpadding=\"3\" border=\"1\" width=\"80%\" style=
+    \"border-collapse:collapse;\"&gt;
+    <table>
+      <tr>
+        <td valign=\"middle\" rowspan=\"2\">
+          <p>
+            <i>Temperature_ph</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            First Input
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input1.png\"
+            alt=
+            \"First input required to calculate temperature by pressure and specific enthalpy\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            Second Input
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input2.png\"
+            alt=
+            \"Second input required to calculate temperature by pressure and specific enthalpy\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\" rowspan=\"2\">
+          <p>
+            <i>Temperature_ps</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            First Input
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input1.png\"
+            alt=
+            \"First input required to calculate temperature by pressure and specific entropy\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            Second Input
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input2.png\"
+            alt=
+            \"Second input required to calculate temperature by pressure and specific entropy\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\" rowspan=\"2\">
+          <p>
+            <i>Density_pT</i>
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            First Input
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input1.png\"
+            alt=
+            \"First input required to calculate density by pressure and temperature\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            Second Input
+          </p>
+        </td>
+        <td valign=\"middle\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input2.png\"
+            alt=
+            \"Second input required to calculate density by pressure and temperature\">
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td valign=\"middle\">
+          <p>
+            <i>Functional approach</i>
+          </p>
+        </td>
+        <td valign=\"middle\" colspan=\"2\">
+          <p>
+            <img src=
+            \"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\"
+            alt=
+            \"Functional approach of calculating supercooled and superheated region\">
+          </p>
+        </td>
+      </tr>
+    </table>
+    <p>
+      As it can be seen, the fitted formulas consist basically of the
+      coefficient c<sub>i</sub> as well as of the parameters
+      Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the
+      fitting coefficients and must be obtained during a fitting
+      procedure. While the fitting procedure, the formulas presented
+      above are fitted to external data (e.g. obtained from
+      measurements or external media libraries) and the fitting
+      coefficients are determined.
+    </p>
+    <h4>
+      Assumptions and limitations
+    </h4>
+    <p>
+      The fitting procedure is performed for a <b>predefined range of
+      the external data</b> that is given in terms of, for example,
+      temperature and pressure. As a consequence, the fitting
+      coefficients are also just valid within the predefined range of
+      external data.
+    </p>
+    <h4>
+      References
+    </h4>
+    <p>
+      Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow,
+      Rita; Müller, Dirk (2014): <a href=
+      \"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the
+      Refrigerant Propane for Fast and Accurate Dynamic
+      Simulations</a>. In: <i>The 10th International Modelica
+      Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping
+      University Electronic Press (Linköping Electronic Conference
+      Proceedings), S. 1271–1275
+    </p>
+  </caption>
 </table>
-<p>
-  As it can be seen, the fitted formulas consist basically of the
-  coefficient c<sub>i</sub> as well as of the parameters
-  Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the
-  fitting coefficients and must be obtained during a fitting procedure.
-  While the fitting procedure, the formulas presented above are fitted
-  to external data (e.g. obtained from measurements or external media
-  libraries) and the fitting coefficients are determined.
-</p>
-<h4>
-  Assumptions and limitations
-</h4>
-<p>
-  The fitting procedure is performed for a <b>predefined range of the
-  external data</b> that is given in terms of, for example, temperature
-  and pressure. As a consequence, the fitting coefficients are also
-  just valid within the predefined range of external data.
-</p>
-<h4>
-  References
-</h4>
-<p>
-  Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
-  Müller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A
-  Medium Model for the Refrigerant Propane for Fast and Accurate
-  Dynamic Simulations</a>. In: <i>The 10th International Modelica
-  Conference</i>. Lund, Sweden, March 10-12, 2014: Linköping University
-  Electronic Press (Linköping Electronic Conference Proceedings), S.
-  1271–1275
-</p>
 </html>"));
 end ThermodynamicStatePropertiesBaseDataDefinition;

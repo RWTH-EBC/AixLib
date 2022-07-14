@@ -159,52 +159,52 @@ equation
   connect(outlet.backward, bacPro_internal);
   annotation (defaultComponentName = "con",
     Documentation(info="<html>
-<p>
-Block that takes real inputs for properties of an air-based HVAC
-system and converts them to an outlet connector of type
-<a href=\"modelica://AixLib.Fluid.FMI.Interfaces.Outlet\">
-AixLib.Fluid.FMI.Interfaces.Outlet</a>.
-</p>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.HVAC\">
-AixLib.Fluid.FMI.Adaptors.HVAC</a>
-for its usage.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-November 8, 2016, by Michael Wetter:<br/>
-Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.
-</li>
-<li>
-April 20, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Block that takes real inputs for properties of an air-based HVAC
+ system and converts them to an outlet connector of type
+ <a href=\"modelica://AixLib.Fluid.FMI.Interfaces.Outlet\">
+ AixLib.Fluid.FMI.Interfaces.Outlet</a>.
+ </p>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.HVAC\">
+ AixLib.Fluid.FMI.Adaptors.HVAC</a>
+ for its usage.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ November 8, 2016, by Michael Wetter:<br/>
+ Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.
+ </li>
+ <li>
+ April 20, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={
         Text(
           extent={{-98,52},{-66,26}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="h"),
         Text(
           extent={{-92,94},{-28,68}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="m_flow"),
         Text(
           extent={{-104,-26},{-40,-52}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           visible=Medium.nXi > 0,
           textString="Xi"),
         Text(
           extent={{-104,-64},{-40,-90}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           visible=Medium.nC > 0,
           textString="C"),
         Polygon(
@@ -227,5 +227,6 @@ First implementation.
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           origin={-4,-58},
-          rotation=270)}));
+          rotation=270)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end AirToOutlet;

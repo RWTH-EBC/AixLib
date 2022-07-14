@@ -88,10 +88,10 @@ model Chiller
         rotation=270,
         origin={54,-2})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/3600,
+    f=1/3600,
     amplitude=500,
     phase=3.1415926535898,
-    offset=500)  "hourly sine "
+    offset=500) "hourly sine "
     annotation (Placement(transformation(extent={{66,8},{58,16}})));
   Components.Pumps.Pump pump "source pump"
                              annotation (Placement(transformation(

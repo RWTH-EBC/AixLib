@@ -4,19 +4,19 @@ model Carnot_y "Test model for chiller based on Carnot_y efficiency"
  package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.Power P_nominal=10E3
+  parameter Modelica.Units.SI.Power P_nominal=10E3
     "Nominal compressor power (at y=1)";
-  parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-10
+  parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=-10
     "Temperature difference evaporator outlet-inlet";
-  parameter Modelica.SIunits.TemperatureDifference dTCon_nominal=10
+  parameter Modelica.Units.SI.TemperatureDifference dTCon_nominal=10
     "Temperature difference condenser outlet-inlet";
   parameter Real COPc_nominal = 3 "Chiller COP";
 
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal=
-     -P_nominal*COPc_nominal/dTEva_nominal/4200
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal=-P_nominal*
+      COPc_nominal/dTEva_nominal/4200
     "Nominal mass flow rate at chilled water side";
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal=
-    m2_flow_nominal*(COPc_nominal+1)/COPc_nominal
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=m2_flow_nominal*(
+      COPc_nominal + 1)/COPc_nominal
     "Nominal mass flow rate at condenser water wide";
 
   AixLib.Fluid.Chillers.Carnot_y chi(
@@ -111,36 +111,37 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Examples/Carnot_y.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
-<ul>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 25, 2015 by Michael Wetter:<br/>
-Changed sign of <code>dTEva_nominal</code> to be consistent.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-March 26, 2013 by Michael Wetter:<br/>
-Removed assignment of parameter that had attribute <code>fixed=false</code>.
-</li>
-<li>
-March 3, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Example that simulates a chiller whose efficiency is scaled based on the
-Carnot cycle.
-The chiller control signal is the compressor speed.
-</p>
-</html>"));
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ November 25, 2015 by Michael Wetter:<br/>
+ Changed sign of <code>dTEva_nominal</code> to be consistent.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ March 26, 2013 by Michael Wetter:<br/>
+ Removed assignment of parameter that had attribute <code>fixed=false</code>.
+ </li>
+ <li>
+ March 3, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Example that simulates a chiller whose efficiency is scaled based on the
+ Carnot cycle.
+ The chiller control signal is the compressor speed.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_y;

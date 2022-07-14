@@ -45,7 +45,7 @@ model Broker
 // This section contains the blocks for the state-machine logic of the agent
 
 public
-  Modelica.StateGraph.InitialStep waiting(nIn=7)
+  Modelica.StateGraph.InitialStep waiting(nIn=7, nOut=1)
                                           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -55,7 +55,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-122,-444})));
-  Modelica.StateGraph.Step message(nOut=2)
+  Modelica.StateGraph.Step message(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-108,-454},{-88,-434}})));
   Modelica.Blocks.Math.IntegerChange integerChange
     annotation (Placement(transformation(extent={{-184,-496},{-164,-476}})));
@@ -70,7 +70,7 @@ public
     annotation (Placement(transformation(extent={{102,148},{122,168}})));
   Modelica.StateGraph.TransitionWithSignal newRequests
     annotation (Placement(transformation(extent={{32,108},{12,128}})));
-  Modelica.StateGraph.Step callForProposal(nIn=2)
+  Modelica.StateGraph.Step callForProposal(nIn=2, nOut=1)
     annotation (Placement(transformation(extent={{-142,38},{-122,58}})));
   Modelica.StateGraph.TransitionWithSignal newProposal(waitTime=0.1,
       enableTimer=false)
@@ -78,7 +78,7 @@ public
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=noEvent((
         getperformative.y[1] == 13) or (getperformative.y[1] == 17)))
     annotation (Placement(transformation(extent={{-32,4},{-6,22}})));
-  Modelica.StateGraph.Step collectProposal(nOut=2)
+  Modelica.StateGraph.Step collectProposal(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{54,38},{74,58}})));
   Modelica.StateGraph.TransitionWithSignal allProposalsCollected(enableTimer=true, waitTime=
        0.1)
@@ -94,7 +94,7 @@ public
     annotation (Placement(transformation(extent={{126,38},{146,58}})));
   Modelica.Blocks.Logical.Not not2
     annotation (Placement(transformation(extent={{122,-10},{130,-2}})));
-  Modelica.StateGraph.StepWithSignal sendCall(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendCall(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-78,38},{-58,58}})));
   Modelica.StateGraph.Transition transition(enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{-110,38},{-90,58}})));
@@ -102,13 +102,13 @@ public
     annotation (Placement(transformation(extent={{-22,-210},{-2,-190}})));
   Modelica.StateGraph.Transition transition1(enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{-86,-210},{-66,-190}})));
-  Modelica.StateGraph.Step check(nOut=2)
+  Modelica.StateGraph.Step check(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-22,38},{-2,58}})));
   Modelica.StateGraph.TransitionWithSignal correctPerformative(waitTime=0.5,
       enableTimer=false)
     annotation (Placement(transformation(extent={{10,38},{30,58}})));
   Modelica.StateGraph.Step check1(
-                                 nOut=1)
+                                 nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{-26,108},{-46,128}})));
   Modelica.StateGraph.TransitionWithSignal correctPerformative1(
                                                                waitTime=0.5,
@@ -116,7 +116,7 @@ public
     annotation (Placement(transformation(extent={{-68,108},{-88,128}})));
   Modelica.StateGraph.Transition requestNoted(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{-2,148},{18,168}})));
-  Modelica.StateGraph.StepWithSignal sendConfirmation(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendConfirmation(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{40,148},{60,168}})));
 
   Modelica.StateGraph.TransitionWithSignal actionConfirmed(waitTime=0.5,
@@ -130,11 +130,11 @@ public
                                                                 enableTimer=
        true, waitTime=0.5)
     annotation (Placement(transformation(extent={{-56,-428},{-36,-408}})));
-  Modelica.StateGraph.Step composeNotUnderstood
+  Modelica.StateGraph.Step composeNotUnderstood(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-14,-428},{6,-408}})));
   Modelica.StateGraph.Transition transition2(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{20,-428},{40,-408}})));
-  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1)
+  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{56,-428},{76,-408}})));
   Modelica.StateGraph.Transition transition4(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{88,-428},{108,-408}})));
@@ -150,15 +150,15 @@ public
   Modelica.StateGraph.TransitionWithSignal newConfirm(waitTime=0.1, enableTimer=
        false)
     annotation (Placement(transformation(extent={{-136,-134},{-116,-114}})));
-  Modelica.StateGraph.Step check2(nOut=2)
+  Modelica.StateGraph.Step check2(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-104,-134},{-84,-114}})));
   Modelica.StateGraph.TransitionWithSignal correctPerformative2(
                                                                waitTime=0.5,
       enableTimer=false)
     annotation (Placement(transformation(extent={{-70,-134},{-50,-114}})));
-  Modelica.StateGraph.Step collectConfirm(nOut=3)
+  Modelica.StateGraph.Step collectConfirm(nOut=3, nIn=1)
     annotation (Placement(transformation(extent={{-32,-134},{-12,-114}})));
-  Modelica.StateGraph.Step computePrice(nOut=1)
+  Modelica.StateGraph.Step computePrice(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{-134,-64},{-114,-44}})));
   Modelica.StateGraph.TransitionWithSignal
                                  transition5(
@@ -167,17 +167,17 @@ public
   Modelica.StateGraph.Transition transition6(
                                             enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{24,-64},{44,-44}})));
-  Modelica.StateGraph.StepWithSignal sendInformation
+  Modelica.StateGraph.StepWithSignal sendInformation(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{74,-44},{94,-64}})));
   Modelica.StateGraph.TransitionWithSignal confirmComplete(waitTime=0.5,
       enableTimer=false)
     annotation (Placement(transformation(extent={{10,-134},{30,-114}})));
-  Modelica.StateGraph.Step computeFinalConstellation(nOut=1)
+  Modelica.StateGraph.Step computeFinalConstellation(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{52,-134},{72,-114}})));
   Modelica.StateGraph.Transition transition7(
                                             enableTimer=true, waitTime=0.1)
     annotation (Placement(transformation(extent={{96,-134},{116,-114}})));
-  Modelica.StateGraph.Step checkRequestComplete(nOut=2)
+  Modelica.StateGraph.Step checkRequestComplete(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{84,-210},{104,-190}})));
   Modelica.StateGraph.TransitionWithSignal requestsComplete(waitTime=0.5,
       enableTimer=false)
@@ -225,7 +225,7 @@ public
   Modelica.Blocks.Sources.BooleanExpression booleanExpression11(y=noEvent(
         calculationDone))
     annotation (Placement(transformation(extent={{-122,-106},{-96,-88}})));
-  Modelica.StateGraph.Step prepareTableforRejections(nOut=1)
+  Modelica.StateGraph.Step prepareTableforRejections(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{118,-108},{138,-88}})));
   Modelica.StateGraph.Transition transition3(
                                             enableTimer=true, waitTime=0.1)

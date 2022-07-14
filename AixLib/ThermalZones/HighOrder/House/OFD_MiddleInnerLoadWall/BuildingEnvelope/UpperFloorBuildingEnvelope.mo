@@ -4,93 +4,94 @@ model UpperFloorBuildingEnvelope
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
     final Tset=372.15,
     withDynamicVentilation=false,                                               redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
-
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   //////////room geometry
-  parameter Modelica.SIunits.Length room_width_long=3.92 "w1 "
+  parameter Modelica.Units.SI.Length room_width_long=3.92 "w1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width_short=2.28 "w2 "
+  parameter Modelica.Units.SI.Length room_width_short=2.28 "w2 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height_long=2.60 "h1 "
+  parameter Modelica.Units.SI.Height room_height_long=2.60 "h1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height_short=1 "h2 "
+  parameter Modelica.Units.SI.Height room_height_short=1 "h2 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length roof_width=2.21 "wRO"
+  parameter Modelica.Units.SI.Length roof_width=2.21 "wRO"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length5=3.3
-    "l5 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length6=2.44 "l6 "
+  parameter Modelica.Units.SI.Length length5=3.3 "l5 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length7=1.33 "l7 "
+  parameter Modelica.Units.SI.Length length6=2.44 "l6 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length8=3.3
-    "l8 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length thickness_IWsimple=0.145
+  parameter Modelica.Units.SI.Length length7=1.33 "l7 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length length8=3.3 "l8 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length thickness_IWsimple=0.145
     "thickness IWsimple "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   // Outer walls properties
   parameter Real solar_absorptance_RO=0.1 "Solar absoptance roof "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
   //Windows and Doors
-  parameter Modelica.SIunits.Area windowarea_62=1.73 " Area Window62"
+  parameter Modelica.Units.SI.Area windowarea_62=1.73 " Area Window62"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_63=1.73 " Area Window63  "
+  parameter Modelica.Units.SI.Area windowarea_63=1.73 " Area Window63  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_72=1.73 " Area Window72"
+  parameter Modelica.Units.SI.Area windowarea_72=1.73 " Area Window72"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_73=1.73 " Area Window73  "
+  parameter Modelica.Units.SI.Area windowarea_73=1.73 " Area Window73  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_92=1.73 " Area Window51"
+  parameter Modelica.Units.SI.Area windowarea_92=1.73 " Area Window51"
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_102=1.73 " Area Window102"
+  parameter Modelica.Units.SI.Area windowarea_102=1.73 " Area Window102"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_103=1.73 " Area Window103  "
+  parameter Modelica.Units.SI.Area windowarea_103=1.73 " Area Window103  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
 
-  parameter Modelica.SIunits.Temperature Tset_Bedroom=295.15 "Tset_bedroom"
+  parameter Modelica.Units.SI.Temperature Tset_Bedroom=295.15 "Tset_bedroom"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Children1=295.15 "Tset_children1"
+  parameter Modelica.Units.SI.Temperature Tset_Children1=295.15
+    "Tset_children1" annotation (Dialog(
+      tab="Dynamic ventilation",
+      descriptionLabel=true,
+      enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature Tset_Corridor=291.15 "Tset_corridor"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Corridor=291.15 "Tset_corridor"
-    annotation (Dialog(
-      tab="Dynamic ventilation",
-      descriptionLabel=true,
-      enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Bath=297.15 "Tset_Bath"
+  parameter Modelica.Units.SI.Temperature Tset_Bath=297.15 "Tset_Bath"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Children2=295.15 "Tset_children2"
-    annotation (Dialog(
+  parameter Modelica.Units.SI.Temperature Tset_Children2=295.15
+    "Tset_children2" annotation (Dialog(
       group="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors "U-value (thermal transmittance) of doors in outer walls" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
-  parameter Modelica.SIunits.Emissivity epsOutDoors(min=0, max=1)=0.95 "Emissivity of inside surface of outer doors" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UValOutDoors
+    "U-value (thermal transmittance) of doors in outer walls"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
+  parameter Modelica.Units.SI.Emissivity epsOutDoors(
+    min=0,
+    max=1) = 0.95 "Emissivity of inside surface of outer doors"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
 
   Utilities.Interfaces.SolarRad_in RoofS annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -115,7 +116,7 @@ model UpperFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -156,13 +157,13 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Bedroom,
-    final T0_air=T0_air) annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
+    T0_air=T0_air)       annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Children1(
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -200,7 +201,7 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Children1,
-    final T0_air=T0_air,
+    T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
     final U_door_OD2=UValOutDoors) annotation (Placement(transformation(extent={{82,28},{44,76}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Bath(
@@ -208,7 +209,7 @@ model UpperFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -247,7 +248,7 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Bath,
-    final T0_air=T0_air,
+    T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
     final U_door_OD2=UValOutDoors) annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Children2(
@@ -255,7 +256,7 @@ model UpperFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -296,13 +297,13 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Children2,
-    final T0_air=T0_air) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
+    T0_air=T0_air)       annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1 Corridor(
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -337,7 +338,7 @@ model UpperFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    final T0_air=T0_air) annotation (Placement(transformation(extent={{82,-28},{42,10}})));
+    T0_air=T0_air)       annotation (Placement(transformation(extent={{82,-28},{42,10}})));
   Utilities.Interfaces.SolarRad_in North annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -492,11 +493,15 @@ equation
   connect(Bath.thermRoom, heatStarToCombHeaters[4].portConv) annotation (Line(points={{67.66,-60},{68,-60},{68,-42},{20,-42},{20,-38},{5,-38}}, color={191,0,0}));
   connect(Children2.starRoom, heatStarToCombHeaters[5].portRad) annotation (Line(points={{-60.8,-52},{-60.8,-38},{-5,-38}}, color={0,0,0}));
   connect(Children2.thermRoom, heatStarToCombHeaters[5].portConv) annotation (Line(points={{-66.8,-52},{-66,-52},{-66,-36},{-18,-36},{-18,-42},{5,-42},{5,-38}}, color={191,0,0}));
-  connect(AirExchangePort[1], Bedroom.AirExchangePort) annotation (Line(points={{-115,-23},{-92,-23},{-92,68.24},{-84,68.24}}, color={0,0,127}));
-  connect(AirExchangePort[2], Children1.AirExchangePort) annotation (Line(points={{-115,-17},{-92,-17},{-92,88},{92,88},{92,68.68},{83.9,68.68}}, color={0,0,127}));
+  connect(AirExchangePort[1], Bedroom.AirExchangePort) annotation (Line(points={{-115,
+          -17},{-92,-17},{-92,68.24},{-84,68.24}},                                                                             color={0,0,127}));
+  connect(AirExchangePort[2], Children1.AirExchangePort) annotation (Line(points={{-115,
+          -14},{-92,-14},{-92,88},{92,88},{92,68.68},{83.9,68.68}},                                                                               color={0,0,127}));
   connect(AirExchangePort[3], Corridor.AirExchangePort) annotation (Line(points={{-115,-11},{-92,-11},{-92,88},{92,88},{92,4.205},{84,4.205}}, color={0,0,127}));
-  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-115,-5},{-92,-5},{-92,88},{92,88},{92,-76.68},{85.9,-76.68}}, color={0,0,127}));
-  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-115,1},{-92,1},{-92,-74.24},{-86,-74.24}}, color={0,0,127}));
+  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-115,-8},
+          {-92,-8},{-92,88},{92,88},{92,-76.68},{85.9,-76.68}},                                                                              color={0,0,127}));
+  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-115,-5},
+          {-92,-5},{-92,-74.24},{-86,-74.24}},                                                                                 color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=

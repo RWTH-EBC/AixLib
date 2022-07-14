@@ -5,14 +5,18 @@ function aggregationWeightingFactors
 
   input Integer i "Size of aggregation vector";
   input Integer nTimTot "Size of g-function time table";
-  input Modelica.SIunits.ThermalResistance TStep[nTimTot,2] "Time matrix with TStep";
-  input Modelica.SIunits.Time nu[i] "Aggregation time vector nu";
+  input Modelica.Units.SI.ThermalResistance TStep[nTimTot,2]
+    "Time matrix with TStep";
+  input Modelica.Units.SI.Time nu[i] "Aggregation time vector nu";
 
-  output Modelica.SIunits.ThermalResistance kappa[i] "Weighting factors vector";
+  output Modelica.Units.SI.ThermalResistance kappa[i]
+    "Weighting factors vector";
 
 protected
-  Modelica.SIunits.ThermalResistance prevT "Interpolated value of TStep at previous cell";
-  Modelica.SIunits.ThermalResistance curT "Interpolated value of TStep at current cell";
+  Modelica.Units.SI.ThermalResistance prevT
+    "Interpolated value of TStep at previous cell";
+  Modelica.Units.SI.ThermalResistance curT
+    "Interpolated value of TStep at current cell";
   Integer curInt "Integer to select data interval";
   Real[size(TStep[:,1], 1)] d(each unit="K/J") "Derivatives at the support points";
 
@@ -63,18 +67,19 @@ algorithm
   end for;
 
   annotation (Documentation(info="<html>
-<p>
-This function uses spline interpolation to construct the weighting factors
-vector <code>kappa</code> using the aggregation times <code>nu</code> and the
-temperature step reponse (a time-series in the form of a matrix) of the
-borefield as an input.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 5, 2018, by Alex Laferri&egrave;re:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This function uses spline interpolation to construct the weighting factors
+ vector <code>kappa</code> using the aggregation times <code>nu</code> and the
+ temperature step reponse (a time-series in the form of a matrix) of the
+ borefield as an input.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 5, 2018, by Alex Laferri&egrave;re:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end aggregationWeightingFactors;

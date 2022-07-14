@@ -39,17 +39,18 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StartTime=0.0, StopTime=10.0),
     Documentation(info="<html>
-<p>
-This example demonstrates the use of 
-<a href=\"modelica://AixLib.Fluid.BaseClasses.MassFlowRateMultiplier\">
-AixLib.Fluid.BaseClasses.MassFlowRateMultiplier</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 19, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This example demonstrates the use of 
+ <a href=\"modelica://AixLib.Fluid.BaseClasses.MassFlowRateMultiplier\">
+ AixLib.Fluid.BaseClasses.MassFlowRateMultiplier</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 19, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MassFlowRateMultiplier;

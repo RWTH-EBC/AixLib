@@ -13,16 +13,15 @@ model PressureIndependent
   parameter Real deltax(unit="1", min=1E-5) = 0.02 "Transition interval for flow rate"
     annotation(Dialog(tab="Advanced"));
 protected
-  Real kSquInv
-    "Square inverse of flow coefficient (damper plus fixed resistance)";
-  Real kDamSquInv
-    "Square inverse of flow coefficient (damper only)";
-  parameter Real y_min = 2E-2
+  constant Real y_min = 2E-2
     "Minimum value of control signal before zeroing of the opening";
-  parameter Integer sizeSupSplBnd = 5
+  constant Integer sizeSupSplBnd = 5
     "Number of support points on each quadratic domain for spline interpolation";
-  parameter Integer sizeSupSpl = 2 * sizeSupSplBnd + 3
+  constant Integer sizeSupSpl = 2 * sizeSupSplBnd + 3
     "Total number of support points for spline interpolation";
+  constant Real y2dd = 0
+    "Second derivative at second support point";
+
   parameter Real[sizeSupSpl] ySupSpl_raw = cat(
     1,
     linspace(1, yU, sizeSupSplBnd),
@@ -44,19 +43,30 @@ protected
     "Parameter for avoiding unnecessary computations";
   parameter Real coeff2 = 1/coeff1
     "Parameter for avoiding unnecessary computations";
-  constant Real y2dd = 0
-    "Second derivative at second support point";
-  Modelica.SIunits.MassFlowRate m_flow_set
-    "Requested mass flow rate";
-  Modelica.SIunits.PressureDifference dp_min(displayUnit="Pa")
+
+  Real kSquInv
+    "Square inverse of flow coefficient (damper plus fixed resistance)";
+  Real kDamSquInv
+    "Square inverse of flow coefficient (damper only)";
+
+  Modelica.Units.SI.MassFlowRate m_flow_set "Requested mass flow rate";
+  Modelica.Units.SI.PressureDifference dp_min(displayUnit="Pa")
     "Minimum pressure difference required for delivering requested mass flow rate";
-  Modelica.SIunits.PressureDifference dp_x, dp_x1, dp_x2, dp_y2, dp_y1
+  Modelica.Units.SI.PressureDifference dp_x;
+  Modelica.Units.SI.PressureDifference dp_x1;
+  Modelica.Units.SI.PressureDifference dp_x2;
+  Modelica.Units.SI.PressureDifference dp_y2;
+  Modelica.Units.SI.PressureDifference dp_y1
     "Support points for interpolation flow functions";
-  Modelica.SIunits.MassFlowRate m_flow_x, m_flow_x1, m_flow_x2, m_flow_y2, m_flow_y1
+  Modelica.Units.SI.MassFlowRate m_flow_x;
+  Modelica.Units.SI.MassFlowRate m_flow_x1;
+  Modelica.Units.SI.MassFlowRate m_flow_x2;
+  Modelica.Units.SI.MassFlowRate m_flow_y2;
+  Modelica.Units.SI.MassFlowRate m_flow_y1
     "Support points for interpolation flow functions";
-  Modelica.SIunits.MassFlowRate m_flow_smooth
+  Modelica.Units.SI.MassFlowRate m_flow_smooth
     "Smooth interpolation result between two flow regimes";
-  Modelica.SIunits.PressureDifference dp_smooth
+  Modelica.Units.SI.PressureDifference dp_smooth
     "Smooth interpolation result between two flow regimes";
   Real y_actual_smooth(final unit="1")
     "Fractional opening computed based on m_flow_smooth and dp";
@@ -64,20 +74,22 @@ protected
 function basicFlowFunction_dp_m_flow
   "Inverse of flow function that computes that computes the square inverse of flow coefficient"
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.MassFlowRate m_flow
-    "Mass flow rate in design flow direction";
-  input Modelica.SIunits.PressureDifference dp
-    "Pressure difference between port_a and port_b (= port_a.p - port_b.p)";
-  input Modelica.SIunits.MassFlowRate m_flow_small
-    "Minimum value of mass flow rate guarding against k=(0)/sqrt(dp)";
-  input Modelica.SIunits.PressureDifference dp_small
-    "Minimum value of pressure drop guarding against k=m_flow/(0)";
+    input Modelica.Units.SI.MassFlowRate m_flow
+      "Mass flow rate in design flow direction";
+    input Modelica.Units.SI.PressureDifference dp
+      "Pressure difference between port_a and port_b (= port_a.p - port_b.p)";
+    input Modelica.Units.SI.MassFlowRate m_flow_small
+      "Minimum value of mass flow rate guarding against k=(0)/sqrt(dp)";
+    input Modelica.Units.SI.PressureDifference dp_small
+      "Minimum value of pressure drop guarding against k=m_flow/(0)";
   output Real kSquInv
     "Square inverse of flow coefficient";
   protected
-  Modelica.SIunits.PressureDifference dpPos=
-    AixLib.Utilities.Math.Functions.smoothMax(dp, -dp, dp_small)
-    "Regularized absolute value of pressure drop";
+    Modelica.Units.SI.PressureDifference dpPos=
+        AixLib.Utilities.Math.Functions.smoothMax(
+        dp,
+        -dp,
+        dp_small) "Regularized absolute value of pressure drop";
   Real mSqu_flow = AixLib.Utilities.Math.Functions.smoothMax(
     m_flow^2, m_flow_small^2, m_flow_small^2)
     "Regularized square value of mass flow rate";
@@ -122,8 +134,13 @@ end exponentialDamper_inv;
 
 initial equation
   (kSupSpl, idx_sorted) = Modelica.Math.Vectors.sort(kSupSpl_raw, ascending=true);
-  ySupSpl = ySupSpl_raw[idx_sorted];
-  invSplDer = AixLib.Utilities.Math.Functions.splineDerivatives(x=kSupSpl, y=ySupSpl);
+  // The sum below is a trick to avoid in OPTIMICA the warning
+  // Variable array index in equation can result in slow simulation time.
+  // This warning was issued for the formulation ySupSpl = ySupSpl_raw[idx_sorted];
+  for i in 1:sizeSupSpl loop
+    ySupSpl[i] = sum((if k == idx_sorted[i] then ySupSpl_raw[k] else 0) for k in 1:sizeSupSpl);
+  end for;
+  invSplDer = AixLib.Utilities.Math.Functions.splineDerivatives(x=kSupSpl_raw, y=ySupSpl_raw);
 equation
   // From TwoWayPressureIndependent valve model
   m_flow_set = m_flow_nominal*phi;
@@ -257,80 +274,94 @@ equation
 annotation (
   defaultComponentName="damPreInd",
   Documentation(info="<html>
-<p>
-Model for an air damper whose airflow is proportional to the input signal, assuming
-that at <code>y = 1</code>, <code>m_flow = m_flow_nominal</code>. This is unless the pressure difference
-<code>dp</code> is too low,
-in which case a <code>kDam = m_flow_nominal/sqrt(dp_nominal)</code> characteristic is used.
-</p>
-<p>
-The model is similar to
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent\">
-AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent</a>,
-except for adaptations for damper parameters.
-Please see that documentation for more information.
-</p>
-<h4>Computation of the damper opening</h4>
-<p>
-The fractional opening of the damper is computed by
-</p>
-<ul>
-<li>
-inverting the quadratic flow function to compute the flow coefficient
-from the flow rate and the pressure drop values (under the assumption
-of a turbulent flow regime);
-</li>
-<li>
-inverting the exponential characteristics to compute the fractional opening
-from the loss coefficient value (directly derived from the flow coefficient).
-</li>
-</ul>
-<p>
-The quadratic interpolation used outside the exponential domain in the function
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.exponentialDamper\">
-AixLib.Fluid.Actuators.BaseClasses.exponentialDamper</a>
-yields a local extremum.
-Therefore, the formal inversion of the function is not possible.
-A cubic spline is used instead to fit the inverse of the damper characteristics.
-The central domain of the characteritics having a monotonous exponential profile, its
-inverse can be properly approximated with three equidistant support points.
-However, the quadratic functions used outside of the exponential domain can have
-various profiles depending on the damper coefficients.
-Therefore, five linearly distributed support points are used on each side domain to
-ensure a good fit of the inverse.
-</p>
-<p>
-Note that below a threshold value of the input control signal (fixed at 0.02),
-the fractional opening is forced to zero and no more related to the actual
-flow coefficient of the damper.
-This avoids steep transients of the computed opening while transitioning from reverse flow.
-This is to be considered as a modeling workaround (avoiding the introduction of
-an additional state variable) to prevent control chattering during
-shut off operation where the pressure difference at the damper boundaries
-can vary between slightly positive and negative values due to outdoor pressure
-variations.
-</p>
-</html>",
+ <p>
+ Model for an air damper whose airflow is proportional to the input signal, assuming
+ that at <code>y = 1</code>, <code>m_flow = m_flow_nominal</code>. This is unless the pressure difference
+ <code>dp</code> is too low,
+ in which case a <code>kDam = m_flow_nominal/sqrt(dp_nominal)</code> characteristic is used.
+ </p>
+ <p>
+ The model is similar to
+ <a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent\">
+ AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent</a>,
+ except for adaptations for damper parameters.
+ Please see that documentation for more information.
+ </p>
+ <h4>Computation of the damper opening</h4>
+ <p>
+ The fractional opening of the damper is computed by
+ </p>
+ <ul>
+ <li>
+ inverting the quadratic flow function to compute the flow coefficient
+ from the flow rate and the pressure drop values (under the assumption
+ of a turbulent flow regime);
+ </li>
+ <li>
+ inverting the exponential characteristics to compute the fractional opening
+ from the loss coefficient value (directly derived from the flow coefficient).
+ </li>
+ </ul>
+ <p>
+ The quadratic interpolation used outside the exponential domain in the function
+ <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.exponentialDamper\">
+ AixLib.Fluid.Actuators.BaseClasses.exponentialDamper</a>
+ yields a local extremum.
+ Therefore, the formal inversion of the function is not possible.
+ A cubic spline is used instead to fit the inverse of the damper characteristics.
+ The central domain of the characteritics having a monotonous exponential profile, its
+ inverse can be properly approximated with three equidistant support points.
+ However, the quadratic functions used outside of the exponential domain can have
+ various profiles depending on the damper coefficients.
+ Therefore, five linearly distributed support points are used on each side domain to
+ ensure a good fit of the inverse.
+ </p>
+ <p>
+ Note that below a threshold value of the input control signal (fixed at 0.02),
+ the fractional opening is forced to zero and no more related to the actual
+ flow coefficient of the damper.
+ This avoids steep transients of the computed opening while transitioning from reverse flow.
+ This is to be considered as a modeling workaround (avoiding the introduction of
+ an additional state variable) to prevent control chattering during
+ shut off operation where the pressure difference at the damper boundaries
+ can vary between slightly positive and negative values due to outdoor pressure
+ variations.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-April 6, 2020, by Antoine Gautier:<br/>
-Added the computation of the damper opening.
-</li>
-<li>
-December 23, 2019 by Antoine Gautier:<br/>
-Refactored as the model can now extend directly
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
-AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</a>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">#1188</a>.
-</li>
-<li>
-March 21, 2017 by David Blum:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ August 11, 2021, by Michael Wetter:<br/>
+ Reformulated initial equation section to avoid warning in OPTIMICA about
+ variable array index.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1513\">IBPSA #1513</a>.
+ </li>
+ <li>
+ June 10, 2021, by Michael Wetter:<br/>
+ Changed implementation of the filter and changed the parameter <code>order</code> to a constant
+ as most users need not change this value.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">IBPSA #1498</a>.
+ </li>
+ <li>
+ April 6, 2020, by Antoine Gautier:<br/>
+ Added the computation of the damper opening.
+ </li>
+ <li>
+ December 23, 2019 by Antoine Gautier:<br/>
+ Refactored as the model can now extend directly
+ <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
+ AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</a>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">IBPSA #1188</a>.
+ </li>
+ <li>
+ March 21, 2017 by David Blum:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
    Icon(graphics={Line(
          points={{0,100},{0,-24}}),
         Rectangle(
@@ -342,5 +373,6 @@ First implementation.
           extent={{-100,22},{100,-24}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={0,127,255})}));
+          fillColor={0,127,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PressureIndependent;

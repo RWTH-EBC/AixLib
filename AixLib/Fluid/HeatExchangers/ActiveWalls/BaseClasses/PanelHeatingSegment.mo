@@ -6,17 +6,18 @@ extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
 parameter Boolean isFloor = true;
 
-parameter Modelica.SIunits.Area A "Area of Floor part";
+  parameter Modelica.Units.SI.Area A "Area of Floor part";
 
-parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity";
+  parameter Modelica.Units.SI.Emissivity eps=0.95 "Emissivity";
 
-parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
+  parameter Modelica.Units.SI.Temperature T0=
+      Modelica.Units.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
 
-parameter Modelica.SIunits.Volume VWater "Volume of Water in m^3";
+  parameter Modelica.Units.SI.Volume VWater "Volume of Water in m^3";
 
-parameter Modelica.SIunits.CoefficientOfHeatTransfer kTop;
-parameter Modelica.SIunits.CoefficientOfHeatTransfer kDown;
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer kTop;
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer kDown;
 
 parameter HeatCapacityPerArea cTop;
 parameter HeatCapacityPerArea cDown;
@@ -29,10 +30,11 @@ parameter HeatCapacityPerArea cDown;
         choice=3 "Custom hCon (constant)",
         radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Constant heat transfer coefficient"
-    annotation (Dialog(group="Heat convection",
-    descriptionLabel=true,
-        enable=if calcMethod == 3 then true else false));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=2.5
+    "Constant heat transfer coefficient" annotation (Dialog(
+      group="Heat convection",
+      descriptionLabel=true,
+      enable=if calcMethod == 3 then true else false));
 
   Modelica.Fluid.Vessels.ClosedVolume vol(
     redeclare package Medium = Medium,

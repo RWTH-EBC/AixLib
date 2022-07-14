@@ -7,16 +7,21 @@ model GenericHumidifier_u
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol(
     final prescribedHeatFlowRate=true));
 
-  parameter Modelica.SIunits.MassFlowRate mWat_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal
     "Water mass flow rate at u=1, positive for humidification";
 
-  parameter Modelica.SIunits.Temperature TLiqWat_in "Temperature of liquid water that is vaporized";
+  parameter Modelica.Units.SI.Temperature TLiqWat_in
+    "Temperature of liquid water that is vaporized";
 
   parameter Boolean steamHumidifier=true  "True: steam humidifier, false: adiabatic (water) humidifier";
 
   parameter Boolean TVapFixed = true "True: fixed vaporization temperature, false: vaporization temperature from pressure" annotation (Dialog(enable=steamHumidifier, tab = "Advanced", group = "Vaporization"));
 
-  parameter Modelica.SIunits.Temperature TVap=373.15   "Vaporization temperature of steam" annotation (Dialog(enable=TVapFixed and steamHumidifier,tab = "Advanced", group = "Vaporization"));
+  parameter Modelica.Units.SI.Temperature TVap=373.15
+    "Vaporization temperature of steam" annotation (Dialog(
+      enable=TVapFixed and steamHumidifier,
+      tab="Advanced",
+      group="Vaporization"));
 
   Modelica.Blocks.Interfaces.RealInput u(unit="1") "Control input"
     annotation (Placement(transformation(

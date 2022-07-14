@@ -19,10 +19,10 @@ model Wall_ASHRAE140 "Wall modell for ASHRAE 140 with absorbtion of solar radiat
     "Type of wall"
     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{2,76},{22,96}})));
 
-   parameter Modelica.SIunits.Length wall_length=2 "Length of wall"
-                      annotation(Dialog(group="Room Geometry"));
-   parameter Modelica.SIunits.Height wall_height=2 "Height of wall"
-                      annotation(Dialog(group="Room Geometry"));
+  parameter Modelica.Units.SI.Length wall_length=2 "Length of wall"
+    annotation (Dialog(group="Room Geometry"));
+  parameter Modelica.Units.SI.Height wall_height=2 "Height of wall"
+    annotation (Dialog(group="Room Geometry"));
 
 // Surface parameters
   parameter Real solar_absorptance=0.25
@@ -38,11 +38,12 @@ model Wall_ASHRAE140 "Wall modell for ASHRAE 140 with absorbtion of solar radiat
       choice=3 "Custom hCon (constant)",
       radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=25
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=25
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
-                                                                               annotation(Dialog(tab="Surface Parameters", group=
-          "Outside surface",                                                                                                                          enable=
-          calcMethodOut == 3 and outside));
+    annotation (Dialog(
+      tab="Surface Parameters",
+      group="Outside surface",
+      enable=calcMethodOut == 3 and outside));
     parameter
     AixLib.DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     surfaceType =    AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
@@ -71,7 +72,8 @@ model Wall_ASHRAE140 "Wall modell for ASHRAE 140 with absorbtion of solar radiat
            AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Choose a window type from the database"
                            annotation(Dialog( tab="Window", enable = withWindow and outside),choicesAllMatching= true);
-   parameter Modelica.SIunits.Area windowarea=2 "Area of window" annotation(Dialog( tab="Window",  enable = withWindow and outside));
+  parameter Modelica.Units.SI.Area windowarea=2 "Area of window"
+    annotation (Dialog(tab="Window", enable=withWindow and outside));
 
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
@@ -79,36 +81,40 @@ model Wall_ASHRAE140 "Wall modell for ASHRAE 140 with absorbtion of solar radiat
     "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)"
     annotation(Dialog(tab="Window",   enable=withWindow and outside and
           withSunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit if withWindow and outside and withSunblind
-    "Temperature at which sunblind closes (see also LimitSolIrr)"
-    annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
+  parameter Modelica.Units.SI.Temperature TOutAirLimit
+    if withWindow and outside and withSunblind
+    "Temperature at which sunblind closes (see also LimitSolIrr)" annotation (
+      Dialog(tab="Window", enable=withWindow and outside and withSunblind));
 
    // door parameters
    parameter Boolean withDoor = false "Choose if the wall has got a door"  annotation(Dialog(tab="Door"));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U_door=1.8
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_door=1.8
     "Thermal transmission coefficient of door"
-    annotation (Dialog(tab="Door", enable = withDoor));
+    annotation (Dialog(tab="Door", enable=withDoor));
 
-  parameter Modelica.SIunits.Emissivity eps_door = 0.9
-    "Solar emissivity of door material"                                                    annotation (Dialog(tab="Door", enable = withDoor));
+  parameter Modelica.Units.SI.Emissivity eps_door=0.9
+    "Solar emissivity of door material"
+    annotation (Dialog(tab="Door", enable=withDoor));
 
-   parameter Modelica.SIunits.Length door_height=2 annotation(Dialog(tab="Door", enable = withDoor));
-   parameter Modelica.SIunits.Length door_width=1 annotation(Dialog( tab="Door", enable = withDoor));
+  parameter Modelica.Units.SI.Length door_height=2
+    annotation (Dialog(tab="Door", enable=withDoor));
+  parameter Modelica.Units.SI.Length door_width=1
+    annotation (Dialog(tab="Door", enable=withDoor));
 
 // Calculation of clearance
 
- final parameter Modelica.SIunits.Area clearance=
- if not (outside) and withDoor then  door_height*door_width else
- if outside and withDoor and withWindow then (windowarea + door_height*door_width) else
- if outside and withWindow then  windowarea else
- if outside and withDoor then door_height*door_width else
-      0 "Wall clearance";
+  final parameter Modelica.Units.SI.Area clearance=if not (outside) and
+      withDoor then door_height*door_width else if outside and withDoor and
+      withWindow then (windowarea + door_height*door_width) else if outside
+       and withWindow then windowarea else if outside and withDoor then
+      door_height*door_width else 0 "Wall clearance";
 
 // Initial temperature
 
- parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature"                                                   annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T0=
+      Modelica.Units.Conversions.from_degC(20) "Initial temperature"
+    annotation (Dialog(tab="Initialization"));
 
 // COMPONENT PART
 

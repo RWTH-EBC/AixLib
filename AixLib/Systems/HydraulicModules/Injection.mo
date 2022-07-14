@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules;
+﻿within AixLib.Systems.HydraulicModules;
 model Injection "Injection circuit with pump and three way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
@@ -6,12 +6,11 @@ model Injection "Injection circuit with pump and three way valve"
     annotation (choicesAllMatching=true,Placement(transformation(extent={{-120,-120},{-100,-100}})),Dialog(group="Actuators"));
 
 
-  parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
+  parameter Modelica.Units.SI.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
 
-  Fluid.Actuators.Valves.ThreeWayTable                        valve(
-    final massDynamics=massDynamics,
+  Fluid.Actuators.Valves.ThreeWayTable valve(
     order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
@@ -24,9 +23,8 @@ model Injection "Injection circuit with pump and three way valve"
     Kv=Kv,
     dpFixed_nominal={10,10},
     flowCharacteristics1=valveCharacteristic.a_ab,
-    flowCharacteristics3=valveCharacteristic.b_ab)
-                                 annotation (Dialog(enable=true, group="Actuators"),
-      Placement(transformation(
+    flowCharacteristics3=valveCharacteristic.b_ab) annotation (Dialog(enable=
+          true, group="Actuators"), Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
         origin={-40,-60})));
@@ -431,17 +429,39 @@ equation
           lineColor={135,135,135},
           textString="3")}),
     Diagram(coordinateSystem(extent={{-120,-120},{120,120}}, initialScale=0.1)),
-    Documentation(info="<html>
-<p>Injection circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>
-<h4><span style=\"color: #008000\">Characteristics</span></h4>
-<p>When the valve is fully opened, the consumer module is plugged into the primary hydronic circuit whereas when the valve is fully closed, the consumer is isolated from the primary hydronic circuit</p>
-<p>This model uses a pipe model to include the heat loss and insulation effects</p>
+    Documentation(info="<html><p>
+  Injection circuit with a replaceable pump model for the distribution
+  of hot or cold water. All sensor and actor values are connected to
+  the hydraulic bus.
+</p>
+<h4>
+  <span style=\"color: #008000\">Characteristics</span>
+</h4>
+<p>
+  When the valve is fully opened, the consumer module is plugged into
+  the primary hydronic circuit whereas when the valve is fully closed,
+  the consumer is isolated from the primary hydronic circuit
+</p>
+<p>
+  This model uses a pipe model to include the heat loss and insulation
+  effects
+</p>
 </html>", revisions="<html>
 <ul>
-<li>August 09, 2018, by Alexander K&uuml;mpel:<br/>Extension from base PartioalHydraulicModuls</li>
-<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
-<li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li><i>March,2016&nbsp;</i> by Rohit Lad:<br/>Implemented</li>
+  <li>August 09, 2018, by Alexander Kümpel:<br/>
+    Extension from base PartioalHydraulicModuls
+  </li>
+  <li>Mai 30, 2018, by Alexander Kümpel:<br/>
+    Transfer from ZUGABE to AixLib
+  </li>
+  <li>2017-07-25 by Peter Matthes:<br/>
+    Renames sensors and introduces PT1 behavior for temperature
+    sensors. Adds sensors to icon.
+  </li>
+  <li>
+    <i>March,2016&#160;</i> by Rohit Lad:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end Injection;

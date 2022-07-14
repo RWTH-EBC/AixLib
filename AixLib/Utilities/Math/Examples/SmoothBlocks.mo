@@ -5,11 +5,10 @@ model SmoothBlocks "Test model for smooth min and smooth max functions"
             -20,40},{0,60}})));
   Modelica.Blocks.Math.Max max annotation (Placement(transformation(extent={{
             -20,0},{0,20}})));
-  Modelica.Blocks.Sources.Sine sine(freqHz=8)
+  Modelica.Blocks.Sources.Sine sine(f=8)
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-  Modelica.Blocks.Sources.Sine sine1(freqHz=1)
-                                     annotation (Placement(transformation(
-          extent={{-100,0},{-80,20}})));
+  Modelica.Blocks.Sources.Sine sine1(f=1)
+    annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Diagnostics.AssertEquality assEquMax(threShold=0.08)
     annotation (Placement(transformation(extent={{40,20},{60,40}})));
   AixLib.Utilities.Math.SmoothMin smoMin(deltaX=0.5)
@@ -48,20 +47,21 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/SmoothBlocks.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests the implementation of blocks that approximate non-differentiable functions
-by smooth functions.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 12, 2013, by Michael Wetter:<br/>
-Added missing parameter value for <code>sine1.freqHz</code>.
-</li>
-<li>
-August 15, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This model tests the implementation of blocks that approximate non-differentiable functions
+ by smooth functions.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 12, 2013, by Michael Wetter:<br/>
+ Added missing parameter value for <code>sine1.freqHz</code>.
+ </li>
+ <li>
+ August 15, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SmoothBlocks;

@@ -2,7 +2,7 @@ within AixLib.Utilities.Psychrometrics.Functions.BaseClasses;
 function der_saturationPressureLiquid
   "Derivative of the function saturationPressureLiquid"
   extends Modelica.Icons.Function;
-  input Modelica.SIunits.Temperature TSat "Saturation temperature";
+  input Modelica.Units.SI.Temperature TSat "Saturation temperature";
   input Real dTSat(unit="K/s") "Saturation temperature derivative";
   output Real psat_der(unit="Pa/s") "Differential of saturation pressure";
 
@@ -13,24 +13,25 @@ algorithm
   annotation(Inline=false,
     smoothOrder=98,
     Documentation(info="<html>
-<p>
-Derivative of function
-<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid\">
-AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid</a>.
-</p>
-</html>",
+ <p>
+ Derivative of function
+ <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid\">
+ AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid</a>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-September 12, 2020, by Michael Wetter:<br/>
-Corrected name of argument to comply with derivative specification.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1393\">#1393</a>.
-</li>
-<li>
-November 20, 2013 by Michael Wetter:<br/>
-First implementation, moved from <code>AixLib.Media</code>.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ September 12, 2020, by Michael Wetter:<br/>
+ Corrected name of argument to comply with derivative specification.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1393\">#1393</a>.
+ </li>
+ <li>
+ November 20, 2013 by Michael Wetter:<br/>
+ First implementation, moved from <code>AixLib.Media</code>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end der_saturationPressureLiquid;

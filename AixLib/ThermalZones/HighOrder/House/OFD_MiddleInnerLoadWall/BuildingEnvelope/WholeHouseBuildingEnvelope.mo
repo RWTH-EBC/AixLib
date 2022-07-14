@@ -2,52 +2,64 @@
 model WholeHouseBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(    redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
-
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
     annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
 
   parameter Real solar_absorptance_RO=0.1 "Solar absoptance roof "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors=2.5 "U-value (thermal transmittance) of doors in outer walls" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
-  parameter Modelica.SIunits.Emissivity epsOutDoors(min=0, max=1)=0.95 "Emissivity of inside surface of outer doors" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UValOutDoors=2.5
+    "U-value (thermal transmittance) of doors in outer walls"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
+  parameter Modelica.Units.SI.Emissivity epsOutDoors(
+    min=0,
+    max=1) = 0.95 "Emissivity of inside surface of outer doors"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
 
   // Dynamic ventilation (individual temperatures)
-  parameter Modelica.SIunits.Temperature TDynVentLivingroom_set = 295.15 "Livingroom set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentHobby_set = 295.15 "Hobby set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentCorridorGF_set = 291.15 "Corridor (GF) set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentWCStorage_set = 291.15 "WC / Storage room set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentKitchen_set = 295.15 "Kitchen set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentBedroom_set = 295.15 "Bedroom set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentChildren1_set = 295.15 "Children 1 room set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentCorridorUF_set = 291.15 "Corridor (UF) set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentBath_set = 297.15 "Bathroom set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentChildren2_set = 295.15 "Children 2 room set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentAttic_set = 288.15 "Attic set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentLivingroom_set=295.15
+    "Livingroom set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentHobby_set=295.15
+    "Hobby set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentCorridorGF_set=291.15
+    "Corridor (GF) set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentWCStorage_set=291.15
+    "WC / Storage room set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentKitchen_set=295.15
+    "Kitchen set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentBedroom_set=295.15
+    "Bedroom set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentChildren1_set=295.15
+    "Children 1 room set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentCorridorUF_set=291.15
+    "Corridor (UF) set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentBath_set=297.15
+    "Bathroom set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentChildren2_set=295.15
+    "Children 2 room set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentAttic_set=288.15
+    "Attic set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
 
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope groundFloor_Building(
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final T0_air=T0_air,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
@@ -85,7 +97,7 @@ model WholeHouseBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final T0_air=T0_air,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
@@ -124,7 +136,7 @@ model WholeHouseBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final T0_air=T0_air,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
@@ -291,9 +303,10 @@ equation
   connect(AirExchangeCorridor_Source.y, varAirExchange.ventRate) annotation (
       Line(points={{49.7,-13},{28,-13},{28,-24},{42.2,-24},{42.2,-16.5}},
         color={0,0,127}));
-  connect(upperFloor_Building.AirExchangePort[1:5], AirExchangePort[6:10]) annotation (Line(points={{-27.45,11.23},{-74,11.23},{-74,66.1818},{-114,66.1818}}, color={0,0,127}));
-  connect(AirExchangePort[1:5], groundFloor_Building.AirExchangePort[1:5]) annotation (Line(points={{-114,53.4545},{-76,53.4545},{-76,-47.84},{-23,-47.84}},
-                                                                                                                                                           color={0,0,127}));
+  connect(upperFloor_Building.AirExchangePort[1:5], AirExchangePort[6:10]) annotation (Line(points={{-27.45,
+          9.85},{-74,9.85},{-74,61.0909},{-114,61.0909}},                                                                                                     color={0,0,127}));
+  connect(AirExchangePort[1:5], groundFloor_Building.AirExchangePort[1:5]) annotation (Line(points={{-114,
+          54.7273},{-76,54.7273},{-76,-49.28},{-23,-49.28}},                                                                                               color={0,0,127}));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO1, SolarRadiationPort_RoofS)
     annotation (Line(points={{-11,80.1},{-11,90},{60,90},{60,58},{106,58}},
                 color={255,128,0}));
@@ -319,27 +332,37 @@ equation
   connect(attic_2Ro_5Rooms.thermRoom5, upperFloor_Building.thermCeiling_Children2) annotation (Line(points={{17.6,45.9},{14.87,45.9},{14.87,36.07}},
                                                                                                                                                  color={191,0,0}));
 
-  connect(heatingToRooms[1:5], groundFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,-21.8182},{-90,-21.8182},{-90,-22},{-78,-22},{-78,-46},{0,-46},{0,-48.08}},
-                                                                                                                                                       color={191,0,0}));
-  connect(heatingToRooms[6:10], upperFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,-12.7273},{-76,-12.7273},{-76,-6},{-1,-6},{-1,12.84}},
-                                                                                                                                                   color={191,0,0}));
+  connect(heatingToRooms[1:5], groundFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,
+          -20.9091},{-90,-20.9091},{-90,-22},{-78,-22},{-78,-46},{0,-46},{0,-49.04}},                                                                  color={191,0,0}));
+  connect(heatingToRooms[6:10], upperFloor_Building.portConvRadRooms[1:5]) annotation (Line(points={{-102,
+          -16.3636},{-76,-16.3636},{-76,-6},{-1,-6},{-1,11.92}},                                                                                   color={191,0,0}));
   connect(heatStarToCombAttic.portConv, attic_2Ro_5Rooms.thermRoom) annotation (Line(points={{-30,54.125},{-20,54.125},{-20,54},{-3.08,54},{-3.08,63}}, color={191,0,0}));
   connect(attic_2Ro_5Rooms.starRoom, heatStarToCombAttic.portRad) annotation (Line(points={{3.52,63},{3.52,52},{-26,52},{-26,47.875},{-30,47.875}}, color={0,0,0}));
-  connect(heatStarToCombAttic.portConvRadComb, heatingToRooms[11]) annotation (Line(points={{-42,51},{-46,51},{-46,50},{-72,50},{-72,-10.9091},{-102,-10.9091}}, color={191,0,0}));
-  connect(AirExchangePort[11], attic_2Ro_5Rooms.AirExchangePort) annotation (Line(points={{-114,68.7273},{-76,68.7273},{-76,76.205},{-24.2,76.205}}, color={0,0,127}));
+  connect(heatStarToCombAttic.portConvRadComb, heatingToRooms[11]) annotation (Line(points={{-42,51},
+          {-46,51},{-46,50},{-72,50},{-72,-15.4545},{-102,-15.4545}},                                                                                            color={191,0,0}));
+  connect(AirExchangePort[11], attic_2Ro_5Rooms.AirExchangePort) annotation (Line(points={{-114,
+          62.3636},{-76,62.3636},{-76,76.205},{-24.2,76.205}},                                                                                       color={0,0,127}));
   connect(groPlateLowPart.port_b, groundTemp) annotation (Line(points={{0,-90},{0,-100}}, color={191,0,0}));
   connect(groPlateLowPart.port_a, groPlateUp) annotation (Line(points={{8.88178e-16,-82},{0,-82},{0,-80},{-38,-80},{-38,-90},{-102,-90}}, color={191,0,0}));
   connect(groFloDown, groundFloor_Building.groundTemp) annotation (Line(points={{-102,-68},{-38,-68},{-38,-74},{0,-74}}, color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Bedroom, uppFloDown[1]) annotation (Line(points={{-13.88,-14.3},{-13.88,-18},{-40,-18},{-40,20},{-100,20}}, color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Children1, uppFloDown[2]) annotation (Line(points={{-8.36,-14.3},{-8.36,-18},{-40,-18},{-40,24},{-100,24}}, color={191,0,0}));
+  connect(upperFloor_Building.thermFloor_Bedroom, uppFloDown[1]) annotation (Line(points={{-13.88,
+          -14.3},{-13.88,-18},{-40,-18},{-40,24},{-100,24}},                                                                                         color={191,0,0}));
+  connect(upperFloor_Building.thermFloor_Children1, uppFloDown[2]) annotation (Line(points={{-8.36,
+          -14.3},{-8.36,-18},{-40,-18},{-40,26},{-100,26}},                                                                                          color={191,0,0}));
   connect(upperFloor_Building.thermFloor_Corridor, uppFloDown[3]) annotation (Line(points={{-1,-14.3},{-1,-18},{-40,-18},{-40,28},{-100,28}}, color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Bath, uppFloDown[4]) annotation (Line(points={{5.9,-14.3},{5.9,-18},{-40,-18},{-40,32},{-100,32}}, color={191,0,0}));
-  connect(upperFloor_Building.thermFloor_Children2, uppFloDown[5]) annotation (Line(points={{15.1,-14.3},{15.1,-18},{-40,-18},{-40,36},{-100,36}}, color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_Livingroom, groFloUp[1]) annotation (Line(points={{-18.4,-23.84},{-18.4,-20},{-44,-20},{-44,-2},{-100,-2}}, color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_Hobby, groFloUp[2]) annotation (Line(points={{-9.8,-23.84},{-9.8,-20},{-44,-20},{-44,2},{-100,2}}, color={191,0,0}));
+  connect(upperFloor_Building.thermFloor_Bath, uppFloDown[4]) annotation (Line(points={{5.9,
+          -14.3},{5.9,-18},{-40,-18},{-40,30},{-100,30}},                                                                                   color={191,0,0}));
+  connect(upperFloor_Building.thermFloor_Children2, uppFloDown[5]) annotation (Line(points={{15.1,
+          -14.3},{15.1,-18},{-40,-18},{-40,32},{-100,32}},                                                                                         color={191,0,0}));
+  connect(groundFloor_Building.thermCeiling_Livingroom, groFloUp[1]) annotation (Line(points={{-18.4,
+          -23.84},{-18.4,-20},{-44,-20},{-44,2},{-100,2}},                                                                                              color={191,0,0}));
+  connect(groundFloor_Building.thermCeiling_Hobby, groFloUp[2]) annotation (Line(points={{-9.8,
+          -23.84},{-9.8,-20},{-44,-20},{-44,4},{-100,4}},                                                                                      color={191,0,0}));
   connect(groundFloor_Building.thermCeiling_Corridor, groFloUp[3]) annotation (Line(points={{-2.2,-23.84},{-2.2,-20},{-44,-20},{-44,6},{-100,6}}, color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_WCStorage, groFloUp[4]) annotation (Line(points={{5.8,-23.84},{5.8,-20},{-44,-20},{-44,10},{-100,10}}, color={191,0,0}));
-  connect(groundFloor_Building.thermCeiling_Kitchen, groFloUp[5]) annotation (Line(points={{14.2,-23.84},{14.2,-20},{-44,-20},{-44,14},{-100,14}}, color={191,0,0}));
+  connect(groundFloor_Building.thermCeiling_WCStorage, groFloUp[4]) annotation (Line(points={{5.8,
+          -23.84},{5.8,-20},{-44,-20},{-44,8},{-100,8}},                                                                                           color={191,0,0}));
+  connect(groundFloor_Building.thermCeiling_Kitchen, groFloUp[5]) annotation (Line(points={{14.2,
+          -23.84},{14.2,-20},{-44,-20},{-44,10},{-100,10}},                                                                                        color={191,0,0}));
 
   annotation (Icon(graphics={Rectangle(
           extent={{100,100},{-100,-100}},

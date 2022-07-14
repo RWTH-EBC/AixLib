@@ -37,7 +37,8 @@ model PumpSpeedControlled "Testing the pump speed controlled model."
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-36,20})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
+    "Nominal mass flow rate";
   Actuators.Valves.TwoWayLinear             simpleValve(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
