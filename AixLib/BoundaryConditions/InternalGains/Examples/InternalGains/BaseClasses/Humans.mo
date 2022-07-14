@@ -5,9 +5,10 @@ partial model Humans "Base class with bounday conditions for humans' examples"
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 28740,0; 28800,1; 43200,1; 43260,0; 46800,0; 46860,1; 64800,1; 64860,0; 86400,0])             annotation(Placement(transformation(extent = {{-82, -26}, {-62, -6}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=2,
-    freqHz=1/(24*3600),
+    f=1/(24*3600),
     offset=273.15 + 20,
-    phase(displayUnit="deg") = -3.1415926535898)                                                                                                  annotation(Placement(transformation(extent={{-70,18},{-82,30}})));
+    phase(displayUnit="deg") = -3.1415926535898)
+    annotation (Placement(transformation(extent={{-70,18},{-82,30}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensorConv annotation (Placement(transformation(extent={{38,12},{52,26}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=293.15)   annotation(Placement(transformation(extent={{80,4},{60,24}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensorRad annotation (Placement(transformation(extent={{18,-16},{34,0}})));

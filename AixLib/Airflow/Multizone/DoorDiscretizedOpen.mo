@@ -1,42 +1,42 @@
 within AixLib.Airflow.Multizone;
- model DoorDiscretizedOpen
-   "Door model using discretization along height coordinate"
-   extends AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized;
- 
-   parameter Real CD=0.65 "Discharge coefficient"
-     annotation (Dialog(group="Orifice characteristics"));
- 
- protected
-   constant Real mFixed = 0.5 "Fixed value for flow coefficient";
-   constant Real gamma(min=1) = 1.5
-     "Normalized flow rate where dphi(0)/dpi intersects phi(1)";
-   constant Real a = gamma
-     "Polynomial coefficient for regularized implementation of flow resistance";
-   constant Real b = 1/8*mFixed^2 - 3*gamma - 3/2*mFixed + 35.0/8
-     "Polynomial coefficient for regularized implementation of flow resistance";
-   constant Real c = -1/4*mFixed^2 + 3*gamma + 5/2*mFixed - 21.0/4
-     "Polynomial coefficient for regularized implementation of flow resistance";
-   constant Real d = 1/8*mFixed^2 - gamma - mFixed + 15.0/8
-     "Polynomial coefficient for regularized implementation of flow resistance";
- equation
-   m=mFixed;
-   A = wOpe*hOpe;
-   kVal = CD*dA*sqrt(2/rho_default);
-   // orifice equation
-   for i in 1:nCom loop
-     dV_flow[i] = AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM(
-       k=kVal,
-       dp=dpAB[i],
-       m=mFixed,
-       a=a,
-       b=b,
-       c=c,
-       d=d,
-       dp_turbulent=dp_turbulent);
-   end for;
- 
-   annotation (defaultComponentName="doo",
- Documentation(info="<html>
+model DoorDiscretizedOpen
+  "Door model using discretization along height coordinate"
+  extends AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized;
+
+  parameter Real CD=0.65 "Discharge coefficient"
+    annotation (Dialog(group="Orifice characteristics"));
+
+protected
+  constant Real mFixed = 0.5 "Fixed value for flow coefficient";
+  constant Real gamma(min=1) = 1.5
+    "Normalized flow rate where dphi(0)/dpi intersects phi(1)";
+  constant Real a = gamma
+    "Polynomial coefficient for regularized implementation of flow resistance";
+  constant Real b = 1/8*mFixed^2 - 3*gamma - 3/2*mFixed + 35.0/8
+    "Polynomial coefficient for regularized implementation of flow resistance";
+  constant Real c = -1/4*mFixed^2 + 3*gamma + 5/2*mFixed - 21.0/4
+    "Polynomial coefficient for regularized implementation of flow resistance";
+  constant Real d = 1/8*mFixed^2 - gamma - mFixed + 15.0/8
+    "Polynomial coefficient for regularized implementation of flow resistance";
+equation
+  m=mFixed;
+  A = wOpe*hOpe;
+  CVal = CD*dA*sqrt(2/rho_default);
+  // orifice equation
+  for i in 1:nCom loop
+    dV_flow[i] = AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM(
+      C=CVal,
+      dp=dpAB[i],
+      m=mFixed,
+      a=a,
+      b=b,
+      c=c,
+      d=d,
+      dp_turbulent=dp_turbulent);
+  end for;
+
+  annotation (defaultComponentName="doo",
+Documentation(info="<html>
  <p>
  This model describes the bi-directional air flow through an open door.
  </p>
@@ -53,7 +53,7 @@ within AixLib.Airflow.Multizone;
  for a door that can either be open or closed.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  January 8, 2019, by Michael Wetter:<br/>
@@ -89,6 +89,6 @@ within AixLib.Airflow.Multizone;
  Released first version.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end DoorDiscretizedOpen;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end DoorDiscretizedOpen;

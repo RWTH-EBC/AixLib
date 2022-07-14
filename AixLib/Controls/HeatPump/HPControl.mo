@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump;
+﻿within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
@@ -35,10 +35,10 @@ model HPControl
 //Anti Legionella
   parameter Boolean use_antLeg "True if Legionella Control is of relevance"
     annotation (Dialog(tab="Anti Legionella"),choices(checkBox=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
+  parameter Modelica.Units.SI.ThermodynamicTemperature TLegMin=333.15
     "Temperature at which the legionella in DWH dies"
     annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
-  parameter Modelica.SIunits.Time minTimeAntLeg
+  parameter Modelica.Units.SI.Time minTimeAntLeg
     "Minimal duration of antilegionella control"
     annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
   parameter Boolean weekly=true
@@ -57,8 +57,8 @@ model HPControl
     trigWeekDay=trigWeekDay,
     trigHour=trigHour,
     yearRef=2017,
-    final zerTim=zerTim) if
-                       use_antLeg
+    final zerTim=zerTim)
+                    if use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
   Interfaces.VapourCompressionMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));

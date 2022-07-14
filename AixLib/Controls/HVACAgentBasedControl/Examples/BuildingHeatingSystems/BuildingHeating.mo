@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingHeating
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
@@ -6,7 +6,8 @@ model BuildingHeating
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(zoneParam=
         DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
-                                                                 redeclare package Medium =
+                                                                 redeclare
+      package                                                                      Medium =
                        Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
             {-34,84}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
@@ -105,13 +106,12 @@ model BuildingHeating
     annotation (Placement(transformation(extent={{80,-22},{60,-2}})));
   Modelica.Blocks.Continuous.LimPID PID1(
     yMax=1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     k=0.1,
     Ti=1,
     Td=0.01,
     y_start=0.3,
-    yMin=0.1)
-    annotation (Placement(transformation(extent={{98,24},{78,44}})));
+    yMin=0.1) annotation (Placement(transformation(extent={{98,24},{78,44}})));
   AixLib.Fluid.Actuators.Valves.TwoWayLinear val(
     m_flow_nominal=1,
     dpValve_nominal(displayUnit="bar") = 10000,
@@ -119,13 +119,12 @@ model BuildingHeating
     annotation (Placement(transformation(extent={{-20,-20},{-40,0}})));
   Modelica.Blocks.Continuous.LimPID PID2(
     yMax=1,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     k=0.1,
     Ti=1,
     Td=0.01,
     y_start=0.3,
-    yMin=0.1)
-    annotation (Placement(transformation(extent={{-6,24},{-26,44}})));
+    yMin=0.1) annotation (Placement(transformation(extent={{-6,24},{-26,44}})));
   Modelica.Blocks.Sources.Constant internalGains[3](k={0,0,0})
     annotation (Placement(transformation(extent={{-138,16},{-124,30}})));
   Modelica.Blocks.Interfaces.RealOutput T_room(unit="K") "Temperature in room"

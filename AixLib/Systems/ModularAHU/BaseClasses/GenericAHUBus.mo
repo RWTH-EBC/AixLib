@@ -2,7 +2,7 @@
 expandable connector GenericAHUBus
   "Data bus for generic air-handling unit"
   extends Modelica.Icons.SignalBus;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   Systems.ModularAHU.BaseClasses.RegisterBus preheaterBus;
   Systems.ModularAHU.BaseClasses.RegisterBus coolerBus;
   Systems.ModularAHU.BaseClasses.RegisterBus heaterBus;

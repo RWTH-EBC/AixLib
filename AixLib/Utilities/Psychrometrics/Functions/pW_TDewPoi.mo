@@ -1,23 +1,23 @@
 within AixLib.Utilities.Psychrometrics.Functions;
- function pW_TDewPoi
-   "Function to compute the water vapor partial pressure for a given dew point temperature of moist air"
-   extends Modelica.Icons.Function;
-   input Modelica.SIunits.Temperature T(min=100) "Dew point temperature";
-   output Modelica.SIunits.Pressure p_w(displayUnit="Pa", min=100)
-     "Water vapor partial pressure";
- protected
-   constant Real C8=-5.800226E3;
-   constant Real C9=1.3914993E0;
-   constant Real C10=-4.8640239E-2;
-   constant Real C11=4.1764768E-5;
-   constant Real C12=-1.4452093E-8;
-   constant Real C13=6.5459673E0;
- 
- algorithm
-   p_w := Modelica.Math.exp(C8/T + C9 + T*(C10 + T*(C11 + T*C12)) + C13*
-     Modelica.Math.log(T));
-   annotation (
-     Documentation(info="<html>
+function pW_TDewPoi
+  "Function to compute the water vapor partial pressure for a given dew point temperature of moist air"
+  extends Modelica.Icons.Function;
+  input Modelica.Units.SI.Temperature T(min=100) "Dew point temperature";
+  output Modelica.Units.SI.Pressure p_w(displayUnit="Pa", min=100)
+    "Water vapor partial pressure";
+protected
+  constant Real C8=-5.800226E3;
+  constant Real C9=1.3914993E0;
+  constant Real C10=-4.8640239E-2;
+  constant Real C11=4.1764768E-5;
+  constant Real C12=-1.4452093E-8;
+  constant Real C13=6.5459673E0;
+
+algorithm
+  p_w := Modelica.Math.exp(C8/T + C9 + T*(C10 + T*(C11 + T*C12)) + C13*
+    Modelica.Math.log(T));
+  annotation (
+    Documentation(info="<html>
  <p>
  Dew point temperature calculation for moist air above freezing temperature.
  </p>
@@ -28,7 +28,7 @@ within AixLib.Utilities.Psychrometrics.Functions;
  Peppers has been used, but this equation yielded about <i>15</i> Kelvin lower dew point
  temperatures.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  March 9, 2012 by Michael Wetter:<br/>
@@ -54,8 +54,8 @@ within AixLib.Utilities.Psychrometrics.Functions;
  </li>
  </ul>
  </html>"),
-     Inline=true,
-     smoothOrder=99,
-     derivative=BaseClasses.der_pW_TDewPoi, 
-   __Dymola_LockedEditing="Model from IBPSA");
- end pW_TDewPoi;
+    Inline=true,
+    smoothOrder=99,
+    derivative=BaseClasses.der_pW_TDewPoi,
+  __Dymola_LockedEditing="Model from IBPSA");
+end pW_TDewPoi;

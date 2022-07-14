@@ -2,8 +2,8 @@ within AixLib.Obsolete.YearIndependent.FastHVAC.Data.Boiler.General;
 record BoilerTwoPointBaseDataDefinition
   "Basic data for boiler with two point characteristic"
   extends Modelica.Icons.Record;
-  import SI = Modelica.SIunits;
-  import SIconv = Modelica.SIunits.Conversions.NonSIunits;
+  import      Modelica.Units.SI;
+  import SIconv = Modelica.Units.NonSI;
 
   parameter String name "Name of Boiler";
   parameter SI.Volume volume "Water volume of Boiler";

@@ -15,23 +15,18 @@ model VentilationHeat "Testmodel for VentilationHeat"
     filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data for Chicago"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(
-    azi=0,
-    til=1.5707963267949,
-    lat=0.86393797973719) "Diffuse irradiation on the window"
-           annotation (Placement(transformation(extent={{-42,20},{-26,36}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(
-    azi=0,
-    til=1.5707963267949,
-    lat=0.86393797973719) "Direct solar irradiation on the window"
-           annotation (Placement(transformation(extent={{-42,-8},{-26,8}})));
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(azi=0, til=
+        1.5707963267949) "Diffuse irradiation on the window"
+    annotation (Placement(transformation(extent={{-42,20},{-26,36}})));
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(azi=0,
+      til=1.5707963267949) "Direct solar irradiation on the window"
+    annotation (Placement(transformation(extent={{-42,-8},{-26,8}})));
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Sunblind sunblind(lim=200) "Sunblind of the window"
     annotation (Placement(transformation(extent={{-16,8},{-2,22}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
     "Solar altitude angle"
     annotation (Placement(transformation(extent={{10,-20},{20,-10}})));
-  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(lat=0.86393797973719)
-    "Solar zenith angle"
+  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen "Solar zenith angle"
     annotation (Placement(transformation(extent={{-2,-20},{8,-10}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
                                             annotation (Placement(

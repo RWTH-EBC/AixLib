@@ -1,11 +1,11 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses;
 model HeatConductionSegment
 
-parameter Modelica.SIunits.ThermalConductance kA
+  parameter Modelica.Units.SI.ThermalConductance kA
     "Constant thermal conductance of material";
-parameter Modelica.SIunits.HeatCapacity mc_p
+  parameter Modelica.Units.SI.HeatCapacity mc_p
     "Heat capacity of element (= cp*m)";
-parameter Modelica.SIunits.Temperature T0 "Initial Temperature of element";
+  parameter Modelica.Units.SI.Temperature T0 "Initial Temperature of element";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
     annotation (Placement(transformation(extent={{-108,-8},{-74,26}})));

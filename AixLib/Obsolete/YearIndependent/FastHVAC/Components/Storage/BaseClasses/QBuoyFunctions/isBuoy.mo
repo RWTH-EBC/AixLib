@@ -1,7 +1,7 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function isBuoy
     input Integer n;
-  input Modelica.SIunits.Temperature T[n];
+  input Modelica.Units.SI.Temperature T[n];
 
   output Boolean isBuoy;
 

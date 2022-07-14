@@ -3,11 +3,11 @@ model DpControlled_dpConst
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1.0
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1.0
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_max = 2*m_flow_nominal "To describe max point of mover's characteristic curve.";
-  parameter Modelica.SIunits.PressureDifference dp_nominal=100000
-                                                                 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_max=2*m_flow_nominal
+    "To describe max point of mover's characteristic curve.";
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=100000 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per";
 

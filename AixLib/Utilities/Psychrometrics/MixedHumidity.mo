@@ -2,8 +2,10 @@ within AixLib.Utilities.Psychrometrics;
 model MixedHumidity
   "Calculates the air humidity of the mixed flow of infiltration and ventilation air weighted by air change per hour"
 
-  parameter Modelica.SIunits.Density rho_flow1 = 1.25 "Air density volume flow 1";
-  parameter Modelica.SIunits.Density rho_flow2 = 1.25 "Air density volume flow 2";
+  parameter Modelica.Units.SI.Density rho_flow1=1.25
+    "Air density volume flow 1";
+  parameter Modelica.Units.SI.Density rho_flow2=1.25
+    "Air density volume flow 2";
 
   Modelica.Blocks.Interfaces.RealInput humidity_flow1(
     final quantity="MassFraction",

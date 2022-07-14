@@ -1,30 +1,30 @@
 within AixLib.Fluid.Geothermal.Borefields.Data.Soil;
- record Template
-   "Template for soil data records"
-   extends Modelica.Icons.Record;
-   parameter Modelica.SIunits.ThermalConductivity kSoi
-     "Thermal conductivity of the soil material";
-   parameter Modelica.SIunits.SpecificHeatCapacity cSoi
-     "Specific heat capacity of the soil material";
-   parameter Modelica.SIunits.Density dSoi(displayUnit="kg/m3")
-     "Density of the soil material";
-   parameter Boolean steadyState = (cSoi < Modelica.Constants.eps or dSoi < Modelica.Constants.eps)
-     "Flag, if true, then material is computed using steady-state heat conduction"
-     annotation(Evaluate=true);
-   final parameter Modelica.SIunits.ThermalDiffusivity aSoi=kSoi/(dSoi*cSoi)
-     "Heat diffusion coefficient of the soil material";
-   annotation (
-   defaultComponentPrefixes="parameter",
-   defaultComponentName="soiDat",
- Documentation(
- info="<html>
+record Template
+  "Template for soil data records"
+  extends Modelica.Icons.Record;
+  parameter Modelica.Units.SI.ThermalConductivity kSoi
+    "Thermal conductivity of the soil material";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cSoi
+    "Specific heat capacity of the soil material";
+  parameter Modelica.Units.SI.Density dSoi(displayUnit="kg/m3")
+    "Density of the soil material";
+  parameter Boolean steadyState = (cSoi < Modelica.Constants.eps or dSoi < Modelica.Constants.eps)
+    "Flag, if true, then material is computed using steady-state heat conduction"
+    annotation(Evaluate=true);
+  final parameter Modelica.Units.SI.ThermalDiffusivity aSoi=kSoi/(dSoi*cSoi)
+    "Heat diffusion coefficient of the soil material";
+  annotation (
+  defaultComponentPrefixes="parameter",
+  defaultComponentName="soiDat",
+Documentation(
+info="<html>
  <p>
  This record is a template for the records in
  <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.Data.Soil\">
  AixLib.Fluid.Geothermal.Borefields.Data.Soil</a>.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  July 15, 2018, by Michael Wetter:<br/>
@@ -37,6 +37,6 @@ within AixLib.Fluid.Geothermal.Borefields.Data.Soil;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end Template;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Template;

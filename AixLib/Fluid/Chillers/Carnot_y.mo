@@ -1,12 +1,12 @@
 within AixLib.Fluid.Chillers;
- model Carnot_y
-   "Chiller with performance curve adjusted based on Carnot efficiency"
-   extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_y(
-     final COP_is_for_cooling = true);
- 
-   annotation (
- defaultComponentName="chi",
- Documentation(info="<html>
+model Carnot_y
+  "Chiller with performance curve adjusted based on Carnot efficiency"
+  extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_y(
+    final COP_is_for_cooling = true);
+
+  annotation (
+defaultComponentName="chi",
+Documentation(info="<html>
  <p>
  This is model of a chiller whose coefficient of performance COP changes
  with temperatures in the same way as the Carnot efficiency changes.
@@ -82,7 +82,7 @@ within AixLib.Fluid.Chillers;
  <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_y\">AixLib.Fluid.HeatPumps.Carnot_y</a>.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  January 2, 2017, by Filip Jorissen:<br/>
@@ -161,7 +161,7 @@ within AixLib.Fluid.Chillers;
  </li>
  </ul>
  </html>"),
-     Icon(graphics={
-         Line(points={{0,-70},{0,-90},{100,-90}}, color={0,0,255})}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end Carnot_y;
+    Icon(graphics={
+        Line(points={{0,-70},{0,-90},{100,-90}}, color={0,0,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Carnot_y;

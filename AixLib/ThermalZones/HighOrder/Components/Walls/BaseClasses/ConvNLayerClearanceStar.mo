@@ -6,9 +6,12 @@ model ConvNLayerClearanceStar
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
-  parameter Modelica.SIunits.Height h "Height" annotation(Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Length l "Length" annotation(Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Area clearance = 0 "Area of clearance" annotation(Dialog(group = "Geometry"));
+  parameter Modelica.Units.SI.Height h "Height"
+    annotation (Dialog(group="Geometry"));
+  parameter Modelica.Units.SI.Length l "Length"
+    annotation (Dialog(group="Geometry"));
+  parameter Modelica.Units.SI.Area clearance=0 "Area of clearance"
+    annotation (Dialog(group="Geometry"));
 
   parameter Boolean use_condLayers = true "Use conductive wall layers" annotation(Dialog(group = "Structure of wall layers"));
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
@@ -16,14 +19,15 @@ model ConvNLayerClearanceStar
     "Type of wall" annotation(Dialog(group = "Structure of wall layers", enable=use_condLayers), choicesAllMatching = true, Placement(transformation(extent={{48,-98},{68,-78}})));
   final parameter Integer n(min = 1) = wallType.n
     "Number of layers" annotation(Dialog(group = "Structure of wall layers"));
-  final parameter Modelica.SIunits.Thickness d[n] = wallType.d
-    "Thickness" annotation(Dialog(group = "Structure of wall layers"));
-  final parameter Modelica.SIunits.Density rho[n] = wallType.rho
-    "Density" annotation(Dialog(group = "Structure of wall layers"));
-  final parameter Modelica.SIunits.ThermalConductivity lambda[n] = wallType.lambda
-    "Thermal conductivity" annotation(Dialog(group = "Structure of wall layers"));
-  final parameter Modelica.SIunits.SpecificHeatCapacity c[n] = wallType.c
-    "Specific heat capacity" annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.Units.SI.Thickness d[n]=wallType.d "Thickness"
+    annotation (Dialog(group="Structure of wall layers"));
+  final parameter Modelica.Units.SI.Density rho[n]=wallType.rho "Density"
+    annotation (Dialog(group="Structure of wall layers"));
+  final parameter Modelica.Units.SI.ThermalConductivity lambda[n]=wallType.lambda
+    "Thermal conductivity" annotation (Dialog(group="Structure of wall layers"));
+  final parameter Modelica.Units.SI.SpecificHeatCapacity c[n]=wallType.c
+    "Specific heat capacity"
+    annotation (Dialog(group="Structure of wall layers"));
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true), choices(choice = 1
         "vertical",                                                                                                    choice = 2
@@ -36,8 +40,9 @@ model ConvNLayerClearanceStar
       choice=3 "Custom hCon (constant)",
       choice=4 "ASHRAE140-2017",
       radioButtons=true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2 "Constant convective heat transfer coefficient"     annotation(Dialog(group="Convection",   enable=
-          calcMethod == 1));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=2
+    "Constant convective heat transfer coefficient"
+    annotation (Dialog(group="Convection", enable=calcMethod == 1));
 
   parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
     Evaluate=true,
@@ -48,10 +53,14 @@ model ConvNLayerClearanceStar
       choice=3 "Linear approx at rad temp",
       choice=4 "Linear approx at constant T_ref",
       radioButtons=true));
-  parameter Modelica.SIunits.Temperature T_ref=Modelica.SIunits.Conversions.from_degC(16) "Reference temperature for optional linearization" annotation (Dialog(group = "Radiation", enable=radCalcMethod == 4));
+  parameter Modelica.Units.SI.Temperature T_ref=
+      Modelica.Units.Conversions.from_degC(16)
+    "Reference temperature for optional linearization"
+    annotation (Dialog(group="Radiation", enable=radCalcMethod == 4));
 
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
-    "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
+  parameter Modelica.Units.SI.Temperature T0=
+      Modelica.Units.Conversions.from_degC(16) "Initial temperature"
+    annotation (Dialog(group="Thermal"));
   // 2n HeatConds
   // n Loads
   AixLib.Utilities.HeatTransfer.HeatConvInside heatConv(
@@ -93,7 +102,7 @@ model ConvNLayerClearanceStar
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-28})));
-  parameter Modelica.SIunits.Area A = h * l - clearance annotation(Dialog(enable = false));
+  parameter Modelica.Units.SI.Area A = h * l - clearance annotation(Dialog(enable = false));
 
 equation
   connect(port_a, simpleNLayer.port_a)

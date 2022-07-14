@@ -4,10 +4,10 @@ expandable connector BoilerControlBus
   extends Modelica.Icons.SignalBus;
 
 Boolean isOn "Switches Controller on and off";
-Modelica.SIunits.Temperature TAmbient "Ambient air temperature";
+  Modelica.Units.SI.Temperature TAmbient "Ambient air temperature";
 Boolean switchToNightMode "Switches the boiler to night mode";
-Modelica.SIunits.Power chemicalEnergyFlowRate
-  "Flow of primary (chemical) energy into boiler";
+  Modelica.Units.SI.Power chemicalEnergyFlowRate
+    "Flow of primary (chemical) energy into boiler";
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),

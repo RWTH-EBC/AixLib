@@ -14,7 +14,7 @@ trigger_check_HTML:
     stage: build
     before_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36  
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - python bin/CITests/03_SyntaxTests/html_tidy_errors.py --s ${library} --correct-view --log  --align --font
@@ -39,7 +39,7 @@ HTML_Merge_Checks:
     stage: HTML_Check
     before_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36  
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - python bin/CITests/03_SyntaxTests/html_tidy_errors.py --s ${library} --correct-view --log  --align --font
@@ -77,7 +77,7 @@ HTML_Check:
         - git config --global user.name "${GITLAB_USER_NAME}" 
         - git config --global user.email "${GITLAB_USER_EMAIL}"
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36  
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - python bin/CITests/03_SyntaxTests/html_tidy_errors.py --s ${library} --correct-view --log  --align --font
@@ -126,7 +126,7 @@ CI_HTML_Check:
         - git config --global user.name "${GITLAB_USER_NAME}" 
         - git config --global user.email "${GITLAB_USER_EMAIL}"
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36  
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
         - python bin/CITests/03_SyntaxTests/html_tidy_errors.py --s ${library} --correct-view --log  --align --font
@@ -159,7 +159,7 @@ CI_HTML_Check:
 Open_Pull_Request:
     stage: openMR
     before_script:
-        - source activate python36  
+        - source activate ${python_version}
         - pip install --upgrade pip &&  apt-get update -y && apt-get install zip unzip -y
         - pip install requests
         - export PYTHONIOENCODING=utf-8 # just in case
@@ -179,7 +179,7 @@ html_whitelist_job:
     before_script:
         - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
-        - source activate python36  
+        - source activate ${python_version}
         - export PYTHONIOENCODING=utf-8 
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
         - eval $(ssh-agent -s)
