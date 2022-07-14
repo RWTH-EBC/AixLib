@@ -5,4 +5,5 @@ convertClear();
 convertClass("AixLib.DataBase.Storage.BufferStorageBaseDataDefinition", "AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition");
 convertClass("AixLib.Fluid.Storage.BufferStorage", "AixLib.Fluid.Storage.StorageDetailed");
 convertClass("AixLib.Fluid.Storage.Storage", "AixLib.Fluid.Storage.StorageSimple");
+convertClass("AixLib.Fluid.Storage.Examples.BufferStorageExample", "AixLib.Fluid.Storage.Examples.StorageDetailedExample");
 
