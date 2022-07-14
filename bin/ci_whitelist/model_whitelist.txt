@@ -208,7 +208,7 @@ AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.SpecifiedMod
 AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.SpecifiedModels.RefrigerantR134aScrollCompressor
 
 
-AixLib.Fluid.Storage.BufferStorage
+AixLib.Fluid.Storage.StorageDetailed
 
 
 AixLib.Fluid.Storage.Examples.TwoPhaseSeparator
