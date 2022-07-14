@@ -1,76 +1,28 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model Cooler "Idealized model for cooler considering condensation"
   extends BaseClasses.PartialCooler;
 
-  parameter Modelica.SIunits.Length s=0.003 "distance of parallel heat exchanger plates (fins)" annotation (HideResult = (use_T_set));
-
-  parameter Boolean use_constant_heatTransferCoefficient=false "if true then a constant heat transfer coefficient is used";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer k=60 "constant heat transfer coefficient (only used if use_constan_heatTransferCoefficient is true)" annotation (HideResult = (not use_constant_heatTransferCoefficient));
-
-  // Variables
-  Modelica.SIunits.Temperature T_dew "dew point temperature";
-
-  // Objects
-  BaseClasses.HeatTransfer.ConvectiveHeatTransferCoefficient heatTransfer(
-    m_flow=m_flow_airIn,
-    length=length,
-    width=width,
-    nFins=nFins,
-    s=s);
-
-  Modelica.Blocks.Interfaces.RealInput T_coolingSurf(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC") "temperature of cooling Surface"
-                                     annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={-40,-108}), iconTransformation(
-        extent={{-11,-11},{11,11}},
-        rotation=90,
-        origin={-49,-99})));
-  AixLib.Utilities.Psychrometrics.pW_X pWat(use_p_in=false)
-    annotation (Placement(transformation(extent={{-64,68},{-44,88}})));
-  AixLib.Utilities.Psychrometrics.TDewPoi_pW dewPoi
-    annotation (Placement(transformation(extent={{-32,68},{-12,88}})));
-  AixLib.Utilities.Psychrometrics.SaturationPressure pSat
-    annotation (Placement(transformation(extent={{-46,-70},{-66,-50}})));
-  AixLib.Utilities.Psychrometrics.X_pW humRat(use_p_in=false)
-    annotation (Placement(transformation(extent={{-74,-70},{-94,-50}})));
+  AixLib.Utilities.Psychrometrics.SaturationPressure pSat if use_T_set
+    annotation (Placement(transformation(extent={{-24,26},{-4,46}})));
+  AixLib.Utilities.Psychrometrics.X_pW humRat(use_p_in=false) if use_T_set
+    annotation (Placement(transformation(extent={{8,26},{28,46}})));
 protected
-  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=20)
-    annotation (Placement(transformation(extent={{40,-72},{60,-52}})));
-  Modelica.Blocks.Sources.Constant Q_ref(k=0)
-    annotation (Placement(transformation(extent={{20,-60},{28,-52}})));
+  Modelica.Blocks.Math.Min min_X if use_T_set annotation (Placement(transformation(extent={{50,54},{62,66}})));
 equation
-  T_dew = dewPoi.T;
 
-  // convective heat transfer
-  if use_constant_heatTransferCoefficient then
-    k_air = k;
-  else
-    k_air = heatTransfer.alpha;
-  end if;
-
-  if onOffController.y and not use_X_set then
-    X_airOut = smooth(1, if T_coolingSurf > T_dew then X_airIn else humRat.X_w + (X_airIn - humRat.X_w)*0.3);
-  elseif not use_X_set then
+  if not use_T_set then
     X_airOut = X_airIn;
+    X_intern = X_airIn;
+  else
+    X_airOut = X_intern;
   end if;
-  // Efficiency of dehumidfication assumed to 70 %.
 
-  connect(X_airIn, pWat.X_w) annotation (Line(points={{-120,10},{-80,10},{-80,78},
-          {-65,78}}, color={0,0,127}));
-  connect(pWat.p_w, dewPoi.p_w) annotation (Line(points={{-43,78},{-33,78}},
-                         color={0,0,127}));
-  connect(T_coolingSurf, pSat.TSat) annotation (Line(points={{-40,-108},{-40,-60},
-          {-45,-60}}, color={0,0,127}));
+  connect(min_X.y, X_intern);
   connect(pSat.pSat, humRat.p_w)
-    annotation (Line(points={{-67,-60},{-73,-60}}, color={0,0,127}));
-  connect(heatFlowSensor.Q_flow, onOffController.u) annotation (Line(points={{-2,
-          20},{14,20},{14,-68},{38,-68}}, color={0,0,127}));
-  connect(Q_ref.y, onOffController.reference)
-    annotation (Line(points={{28.4,-56},{38,-56}}, color={0,0,127}));
+    annotation (Line(points={{-3,36},{7,36}},      color={0,0,127}));
+  connect(T_set, pSat.TSat) annotation (Line(points={{0,110},{0,60},{-34,60},{-34,36},{-25,36}}, color={0,0,127}));
+  connect(humRat.X_w, min_X.u2) annotation (Line(points={{29,36},{36,36},{36,56.4},{48.8,56.4}}, color={0,0,127}));
+  connect(X_airIn, min_X.u1) annotation (Line(points={{-120,10},{-62,10},{-62,63.6},{48.8,63.6}}, color={0,0,127}));
   annotation (Icon(graphics={
         Line(
           points={{100,94},{-100,-94}},

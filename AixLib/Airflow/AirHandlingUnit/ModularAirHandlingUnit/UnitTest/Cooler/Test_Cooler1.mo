@@ -1,5 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler;
-model Test_Cooler
+model Test_Cooler1 "Test case using Q_flow_nominal"
   Modelica.Blocks.Sources.Ramp m_airIn(
     height=1000/3600*1.18,
     duration=600,
@@ -14,8 +14,6 @@ model Test_Cooler
     offset=283.15,
     startTime=2400)
     annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow(Q_flow=-5000)
-    annotation (Placement(transformation(extent={{-42,-80},{-22,-60}})));
   AixLib.Fluid.HeatExchangers.HeaterCooler_u hea(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=2000/3600*1.18,
@@ -35,15 +33,13 @@ model Test_Cooler
     annotation (Placement(transformation(extent={{100,58},{80,80}})));
   Modelica.Blocks.Sources.Constant factor(k=1)
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort T_airOut_fluid(redeclare package
-      Medium = AixLib.Media.Air, m_flow_nominal=2000/3600*1.18)
+  AixLib.Fluid.Sensors.TemperatureTwoPort T_airOut_fluid(redeclare package Medium =
+               AixLib.Media.Air, m_flow_nominal=2000/3600*1.18)
     annotation (Placement(transformation(extent={{26,58},{46,78}})));
-  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Cooler cooler(
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Cooler cooler(Q_flow_nominal=5000,
     redeclare model PartialPressureDrop =
         AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=280.15)
-    annotation (Placement(transformation(extent={{-46,-52},{-26,-32}})));
 equation
   connect(boundary.ports[1],hea. port_a) annotation (Line(points={{-32,48},{-32,
           58},{-26,58},{-26,66},{-12,66}}, color={0,127,255}));
@@ -53,22 +49,19 @@ equation
           {63,69},{63,68},{46,68}}, color={0,127,255}));
   connect(hea.port_b,T_airOut_fluid. port_a) annotation (Line(points={{8,66},{16,
           66},{16,68},{26,68}}, color={0,127,255}));
-  connect(fixedHeatFlow.port, cooler.heatPort)
-    annotation (Line(points={{-22,-70},{10,-70},{10,-40}}, color={191,0,0}));
   connect(m_airIn.y, cooler.m_flow_airIn) annotation (Line(points={{-79,-10},{-46,
           -10},{-46,-22},{-1,-22}}, color={0,0,127}));
   connect(T_airIn.y, cooler.T_airIn) annotation (Line(points={{-79,-50},{-72,-50},
           {-72,-25},{-1,-25}}, color={0,0,127}));
   connect(X_in.y, cooler.X_airIn) annotation (Line(points={{-79,-90},{-64,-90},{
           -64,-28},{-1,-28}}, color={0,0,127}));
-  connect(realExpression.y, cooler.T_coolingSurf) annotation (Line(points={{-25,
-          -42},{-14,-42},{-14,-48},{5.1,-48},{5.1,-39.9}}, color={0,0,127}));
   connect(m_airIn.y, boundary.m_flow_in) annotation (Line(points={{-79,-10},{-66,
           -10},{-66,56},{-54,56}}, color={0,0,127}));
   connect(T_airIn.y, boundary.T_in) annotation (Line(points={{-79,-50},{-64,-50},
           {-64,52},{-54,52}}, color={0,0,127}));
   connect(X_in.y, boundary.Xi_in[1]) annotation (Line(points={{-79,-90},{-64,-90},
           {-64,44},{-54,44}}, color={0,0,127}));
+  connect(factor.y, cooler.u) annotation (Line(points={{-39,90},{-24,90},{-24,-8},{10,-8},{10,-20}}, color={0,0,127}));
   annotation (experiment(StopTime=8000, __Dymola_NumberOfIntervals=7200),
    Documentation(info="<html><p>
   Simple test for <a href=
@@ -97,4 +90,4 @@ equation
                 pattern = LinePattern.None,
                 fillPattern = FillPattern.Solid,
                 points = {{-36,60},{64,0},{-36,-60},{-36,60}})}));
-end Test_Cooler;
+end Test_Cooler1;

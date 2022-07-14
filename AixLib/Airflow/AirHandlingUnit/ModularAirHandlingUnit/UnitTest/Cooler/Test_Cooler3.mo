@@ -1,23 +1,23 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Cooler;
-model Test_Cooler2 "Test case using T_set with condensation"
+model Test_Cooler3 "Test case using T_set without condensation"
   Modelica.Blocks.Sources.Ramp m_airIn(
     height=1000/3600*1.18,
     duration=600,
     offset=2000/3600*1.18,
     startTime=600)
     annotation (Placement(transformation(extent={{-100,-32},{-80,-12}})));
-  Modelica.Blocks.Sources.Constant X_in(k=0.015)
+  Modelica.Blocks.Sources.Constant X_in(k=0.005)
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
   Modelica.Blocks.Sources.Ramp T_airIn(
     height=2,
     duration=600,
-    offset=288.15,
+    offset=298.15,
     startTime=3000)
     annotation (Placement(transformation(extent={{-100,-66},{-80,-46}})));
   Modelica.Blocks.Sources.Ramp T_set(
     height=2,
     duration=600,
-    offset=283.15,
+    offset=288.15,
     startTime=1800)
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
@@ -112,4 +112,4 @@ equation
                 fillPattern = FillPattern.Solid,
                 points = {{-36,60},{64,0},{-36,-60},{-36,60}})}),
     experiment(StopTime=7000));
-end Test_Cooler2;
+end Test_Cooler3;
