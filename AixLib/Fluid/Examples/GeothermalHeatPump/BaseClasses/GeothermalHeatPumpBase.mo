@@ -266,9 +266,9 @@ equation
           {-33.5,-8.00001},{-88,-8.00001},{-88,24.8},{-146,24.8}}, color={0,127,
           255}));
   connect(heatPump.port_a2, valveHeatSource.port_b) annotation (Line(points={{-33.5,
-          20},{-44,20},{-44,7},{-60,7}}, color={0,127,255}));
+          20},{-62,20},{-62,7},{-60,7}}, color={0,127,255}));
   connect(heatPump.port_a2, valveColdStorage.port_b) annotation (Line(points={{-33.5,
-          20},{-44,20},{-44,38},{-58,38}}, color={0,127,255}));
+          20},{-62,20},{-62,38},{-58,38}}, color={0,127,255}));
   connect(valveHeatSink.port_b, heatPump.port_a1) annotation (Line(points={{-24,
           -54},{-24,-56},{-16.5,-56},{-16.5,-8.00002}}, color={0,127,255}));
   connect(heatPumpControlBus, heatPump.sigBus) annotation (Line(
@@ -286,12 +286,12 @@ equation
   connect(heatPump.port_b2, coldStorage.portHC1Out) annotation (Line(points={{
           -33.5,-8.00002},{-33.5,-22},{16,-22},{16,7.42},{23.825,7.42}}, color=
           {0,127,255}));
-  connect(pumpEvaporator.port_a, coldStorage.portHC1In) annotation (Line(points
-        ={{14,36},{18,36},{18,12.69},{23.65,12.69}}, color={0,127,255}));
-  connect(pumpCondenser.port_a, heatStorage.portHC1Out) annotation (Line(points
-        ={{6,-98},{16,-98},{16,-74.58},{23.825,-74.58}}, color={0,127,255}));
-  connect(heatPump.port_b1, heatStorage.portHC1In) annotation (Line(points={{
-          -16.5,20},{8,20},{8,-69.31},{23.65,-69.31}}, color={0,127,255}));
+  connect(pumpEvaporator.port_a, coldStorage.portHC1In) annotation (Line(points=
+         {{14,36},{18,36},{18,12.69},{23.65,12.69}}, color={0,127,255}));
+  connect(pumpCondenser.port_a, heatStorage.portHC1Out) annotation (Line(points=
+         {{6,-98},{16,-98},{16,-74.58},{23.825,-74.58}}, color={0,127,255}));
+  connect(heatPump.port_b1, heatStorage.portHC1In) annotation (Line(points={{-16.5,
+          20},{8,20},{8,-69.31},{23.65,-69.31}},       color={0,127,255}));
   connect(heatStorage.fluidportTop2, pumpHeatConsumer.port_a) annotation (Line(
         points={{42.375,-61.83},{42.375,-50},{58,-50}}, color={0,127,255}));
   connect(resistanceHeatConsumerReturn.port_b, heatStorage.fluidportBottom2)

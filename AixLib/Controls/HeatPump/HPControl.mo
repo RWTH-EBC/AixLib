@@ -1,9 +1,10 @@
-within AixLib.Controls.HeatPump;
+﻿within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
   replaceable model TSetToNSet =
-      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
+      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby
+    AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
     final use_secHeaGen=use_secHeaGen) annotation(choicesAllMatching=true);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
@@ -15,8 +16,8 @@ model HPControl
       choice=false "Function",
       radioButtons=true));
   replaceable function HeatingCurveFunction =
-      SetPoints.Functions.HeatingCurveFunction constrainedby SetPoints.Functions.PartialBaseFct
-                                       annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
+      SetPoints.Functions.HeatingCurveFunction constrainedby
+    SetPoints.Functions.PartialBaseFct annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     heatingCurveRecord=
@@ -118,8 +119,8 @@ model HPControl
 
 equation
 
-  connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-114,1.77636e-15},{-90,
-          1.77636e-15},{-90,-57.93},{-101.93,-57.93}},
+  connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-114,1.77636e-15},{
+          -90,1.77636e-15},{-90,-58},{-102,-58}},
                                          color={0,0,127}), Text(
       string="%second",
       index=1,
