@@ -138,6 +138,20 @@ model StorageSimpleExample "Example model with simple storage"
   Modelica.Blocks.Sources.Constant addToSetTemp(k=bandwidth/2)
     annotation (Placement(transformation(extent={{-96,82},{-88,90}})));
   parameter Real bandwidth=5 "Bandwidth around reference signal";
+  FixedResistances.PressureDrop res(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal_gen,
+    dp_nominal=20000) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-88,6})));
+  FixedResistances.PressureDrop res1(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal_gen,
+    dp_nominal=20000) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={22,36})));
 equation
   connect(heatingRod.port_b, storageSimple.port_a_heatGenerator) annotation (
       Line(points={{-50,22},{-30,22},{-30,19.36},{-16.64,19.36}}, color={0,127,255}));
@@ -176,18 +190,15 @@ equation
   connect(dailyHeatDemand.y, greaterZero.u) annotation (Line(points={{81.3,17},{
           68,17},{68,34},{100,34},{100,-100},{12,-100},{12,-82},{16.8,-82}},
         color={0,0,127}));
-  connect(senMasFlo_gen.port_b, heatingRod.port_a) annotation (Line(points={{-81,
-          0},{-80,0},{-80,22},{-70,22}}, color={0,127,255}));
   connect(pumpGen.port_b, senMasFlo_gen.port_a) annotation (Line(points={{-68,-30},
-          {-81,-30},{-81,-14}}, color={0,127,255}));
-  connect(storageSimple.port_b_consumer, senMasFlo_con.port_a)
-    annotation (Line(points={{1,22},{1,35},{40,35}}, color={0,127,255}));
+          {-87,-30},{-87,-24}}, color={0,127,255}));
   connect(senMasFlo_con.port_b, simpleConsumer.port_a)
-    annotation (Line(points={{54,35},{62,35},{62,14}}, color={0,127,255}));
+    annotation (Line(points={{54,37},{62,37},{62,14}}, color={0,127,255}));
   connect(m_flow_set.y, PID_pump_gen.u_s) annotation (Line(points={{-81.3,-81},{
           -76,-81},{-76,-80},{-69.2,-80}}, color={0,0,127}));
-  connect(senMasFlo_gen.m_flow, PID_pump_gen.u_m) annotation (Line(points={{-88.7,
-          -7},{-100,-7},{-100,-100},{-62,-100},{-62,-87.2}}, color={0,0,127}));
+  connect(senMasFlo_gen.m_flow, PID_pump_gen.u_m) annotation (Line(points={{-94.7,
+          -17},{-100,-17},{-100,-100},{-62,-100},{-62,-87.2}},
+                                                             color={0,0,127}));
   connect(m_flow_set.y, PID_pump_gen1.u_s) annotation (Line(points={{-81.3,-81},
           {-40,-81},{-40,-66},{2,-66},{2,-70},{42.8,-70}}, color={0,0,127}));
   connect(PID_pump_gen1.y, PumpOnOffCon.u1) annotation (Line(points={{56.6,-70},
@@ -198,8 +209,8 @@ equation
           {62,-88.6},{68.6,-88.6}}, color={0,0,127}));
   connect(PumpOnOffCon.y, pumpCon.y) annotation (Line(points={{84.7,-83},{90,-83},
           {90,-60},{34,-60},{34,-42}}, color={0,0,127}));
-  connect(senMasFlo_con.m_flow, PID_pump_gen1.u_m) annotation (Line(points={{47,
-          42.7},{47,40},{100,40},{100,-60},{50,-60},{50,-62.8}}, color={0,0,127}));
+  connect(senMasFlo_con.m_flow, PID_pump_gen1.u_m) annotation (Line(points={{47,44.7},
+          {47,40},{100,40},{100,-60},{50,-60},{50,-62.8}},       color={0,0,127}));
   connect(PID_pump_gen.y, PumpOnOffGen.u1) annotation (Line(points={{-55.4,-80},
           {-52,-80},{-52,-72},{-38,-72},{-38,-76},{-29.4,-76},{-29.4,-77.4}},
         color={0,0,127}));
@@ -216,6 +227,14 @@ equation
           {-82,82},{-73,82}}, color={0,0,127}));
   connect(addToSetTemp.y, add.u1) annotation (Line(points={{-87.6,86},{-87.6,88},
           {-73,88}}, color={0,0,127}));
+  connect(senMasFlo_gen.port_b, res.port_a) annotation (Line(points={{-87,-10},
+          {-87,-7},{-88,-7},{-88,-4}}, color={0,127,255}));
+  connect(res.port_b, heatingRod.port_a)
+    annotation (Line(points={{-88,16},{-88,22},{-70,22}}, color={0,127,255}));
+  connect(storageSimple.port_b_consumer, res1.port_a) annotation (Line(points={
+          {1,22},{2,22},{2,36},{12,36}}, color={0,127,255}));
+  connect(res1.port_b, senMasFlo_con.port_a) annotation (Line(points={{32,36},{
+          36,36},{36,37},{40,37}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
