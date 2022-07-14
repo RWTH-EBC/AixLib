@@ -2,8 +2,8 @@ within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Controler;
 model ControlerCoolerPID
   parameter Boolean activeDehumidifying=false
     "true if active dehumidifying is done in cooler";
-  Modelica.Blocks.Interfaces.RealInput phiSup(start=0.5)
-    "max. set value for relative humidity of supply air"
+  Modelica.Blocks.Interfaces.RealInput xSup(start=0.007)
+    "max. set value for absolute humidity of supply air"
                                                     annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}),   iconTransformation(
           extent={{-120,50},{-100,70}})));
@@ -13,8 +13,6 @@ model ControlerCoolerPID
           extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-110,-20})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi(use_p_in=false)
-    annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   Modelica.Blocks.Continuous.LimPID PID(
     k=0.1,
     Ti=0.5,
@@ -37,11 +35,8 @@ model ControlerCoolerPID
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
   Modelica.Blocks.Math.Min min_X if activeDehumidifying
     annotation (Placement(transformation(extent={{40,-20},{60,0}})));
+  //ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum relToAbsHum annotation (Placement(transformation(extent={{-72,44},{-52,64}})));
 equation
-  connect(x_pTphi.T, TsupSet) annotation (Line(points={{-42,70},{-54,70},{-54,-20},
-          {-120,-20}}, color={0,0,127}));
-  connect(x_pTphi.phi, phiSup) annotation (Line(points={{-42,64},{-94,64},{-94,60},
-          {-120,60}}, color={0,0,127}));
   connect(TsupSet, min_X.u2) annotation (Line(points={{-120,-20},{30,-20},{30,-16},
           {38,-16}}, color={0,0,127}));
   connect(min_X.y, TcoolerSet) annotation (Line(points={{61,-10},{94,-10},{94,0},
@@ -50,12 +45,11 @@ equation
           -50},{92,-10},{94,-10},{94,0},{110,0}}, color={0,0,127}));
   connect(TsupSet, realPassThrough.u) annotation (Line(points={{-120,-20},{32,
           -20},{32,-50},{38,-50}}, color={0,0,127}));
-  connect(x_pTphi.X[1], PID.u_s) annotation (Line(points={{-19,70},{-14,70},{
-          -14,44},{-28,44},{-28,30},{-22,30}}, color={0,0,127}));
   connect(Xout, PID.u_m) annotation (Line(points={{-120,-60},{-50,-60},{-50,12},
           {-10,12},{-10,18}}, color={0,0,127}));
   connect(PID.y, min_X.u1) annotation (Line(points={{1,30},{32,30},{32,-4},{38,
           -4}}, color={0,0,127}));
+  connect(xSup, PID.u_s) annotation (Line(points={{-120,60},{-52,60},{-52,30},{-22,30}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ControlerCoolerPID;

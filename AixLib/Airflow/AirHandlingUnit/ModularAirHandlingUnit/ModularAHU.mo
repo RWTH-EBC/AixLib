@@ -76,9 +76,7 @@ model ModularAHU "model of a modular air handling unit"
   Modelica.Blocks.Interfaces.RealInput T_eta(unit="K", start=288.15) "K"
     annotation (Placement(transformation(extent={{174,26},{146,54}}),
         iconTransformation(extent={{168,36},{160,44}})));
-  Modelica.Blocks.Interfaces.RealInput X_eta(start=0.007)
-    "kg of water/kg of dry air" annotation (Placement(transformation(extent={{174,
-            -14},{146,14}}), iconTransformation(extent={{168,16},{160,24}})));
+  Modelica.Blocks.Interfaces.RealInput phi_eta(start=0.5) "relative humidity [0...1]" annotation (Placement(transformation(extent={{174,-14},{146,14}}), iconTransformation(extent={{168,16},{160,24}})));
 
   Components.Cooler coo(
     rho_air(displayUnit="kg/m3") = rho,
@@ -247,6 +245,14 @@ protected
                           relToAbsHum
     "Converter from relative humidity to absolute humidity"
     annotation (Placement(transformation(extent={{-136,-8},{-126,2}})));
+  ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum
+                          relToAbsHum1
+    "Converter from relative humidity to absolute humidity"
+    annotation (Placement(transformation(extent={{108,44},{98,34}})));
+  ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum
+                          relToAbsHum2
+    "Converter from relative humidity to absolute humidity"
+    annotation (Placement(transformation(extent={{56,-86},{46,-96}})));
 equation
 
   if phi_oda > 1 or phi_oda < 0 then
@@ -290,8 +296,6 @@ equation
           {-6,80},{-6,66},{-19,66}}, color={0,0,127}));
   connect(T_eta, fanSimple1.T_airIn) annotation (Line(points={{160,40},{126,40},
           {126,63},{-19,63}}, color={0,0,127}));
-  connect(X_eta, fanSimple1.X_airIn) annotation (Line(points={{160,0},{126,0},{126,
-          60},{-19,60}}, color={0,0,127}));
   connect(dpEtaIn.y, fanSimple1.dpIn)
     annotation (Line(points={{-47.6,80},{-30,80},{-30,69}}, color={0,0,127}));
   connect(dpSupIn.y, fanSimple.dpIn) annotation (Line(points={{6.4,6},{18,6},{
@@ -443,10 +447,15 @@ equation
           0,127}));
   connect(T_oda, relToAbsHum.TDryBul) annotation (Line(points={{-160,40},{-120,
           40},{-120,-12},{-142,-12},{-142,-5.8},{-137,-5.8}}, color={0,0,127}));
-  connect(phi_supplyAir[2], controlerCoolerPID.phiSup) annotation (Line(points={{72,-93},{-40,-93},{-40,-74},{-35,-74}}, color={0,0,127}));
-  connect(T_supplyAir, controlerCoolerPID.TsupSet) annotation (Line(points={{100,-100},{-40,-100},{-40,-82},{-35,-82}}, color={0,0,127}));
   connect(coo.X_airOut, controlerCoolerPID.Xout) annotation (Line(points={{-11,-38},{0,-38},{0,-70},{-40,-70},{-40,-86},{-35,-86}}, color={0,0,127}));
   connect(controlerCoolerPID.TcoolerSet, coo.T_set) annotation (Line(points={{-13,-80},{-6,-80},{-6,-58},{-42,-58},{-42,-26},{-22,-26},{-22,-30}}, color={0,0,127}));
+  connect(add1.y, controlerCoolerPID.TsupSet) annotation (Line(points={{5.4,-82},{-2,-82},{-2,-94},{-40,-94},{-40,-82},{-35,-82}}, color={0,0,127}));
+  connect(phi_eta, relToAbsHum1.relHum) annotation (Line(points={{160,0},{122,0},{122,36.4},{109,36.4}}, color={0,0,127}));
+  connect(T_eta, relToAbsHum1.TDryBul) annotation (Line(points={{160,40},{126,40},{126,41.8},{109,41.8}}, color={0,0,127}));
+  connect(relToAbsHum1.absHum, fanSimple1.X_airIn) annotation (Line(points={{97,39},{84,39},{84,60},{-19,60}}, color={0,0,127}));
+  connect(phi_supplyAir[2], relToAbsHum2.relHum) annotation (Line(points={{72,-93},{64,-93},{64,-93.6},{57,-93.6}}, color={0,0,127}));
+  connect(T_supplyAir, relToAbsHum2.TDryBul) annotation (Line(points={{100,-100},{100,-88.2},{57,-88.2}}, color={0,0,127}));
+  connect(relToAbsHum2.absHum, controlerCoolerPID.xSup) annotation (Line(points={{45,-91},{-40,-91},{-40,-74},{-35,-74}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));
