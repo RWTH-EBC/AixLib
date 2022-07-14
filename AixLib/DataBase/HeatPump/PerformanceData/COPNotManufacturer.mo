@@ -106,7 +106,7 @@ model COPNotManufacturer
         origin={-120,-90})));
 
 protected
-parameter String FilenameCOP= if HighTemp==true then "modelica:/AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Hubkolben_R134a.sdf" else "modelica:/AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf" annotation (evaluate=True);
+parameter String FilenameCOP="modelica:/AixLib/Resources/Data/Fluid/HeatPumps/NotManufacturer/COP_Scroll_R410a.sdf" annotation (evaluate=True);
 
 
 equation
