@@ -5,10 +5,6 @@ model StorageDetailed
 
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start = TStart);
 
-  replaceable package Medium =
-      Modelica.Media.Interfaces.PartialMedium "Medium model"
-                 annotation (Dialog(group="Medium"),choicesAllMatching = true);
-
   replaceable package MediumHC1 =
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC1"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
