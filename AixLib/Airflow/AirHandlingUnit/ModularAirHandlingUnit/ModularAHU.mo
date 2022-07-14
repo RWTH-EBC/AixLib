@@ -83,10 +83,9 @@ model ModularAHU "model of a modular air handling unit"
   Components.Cooler coo(
     rho_air(displayUnit="kg/m3") = rho,
     use_T_set=true,
-    use_X_set=dehumidifying,
     redeclare model PartialPressureDrop =
-        Components.PressureDrop.PressureDropSimple,
-    use_constant_heatTransferCoefficient=true) if cooling or dehumidifying
+        Components.PressureDrop.PressureDropSimple) if
+                                                  cooling or dehumidifying
     annotation (Placement(transformation(extent={{-32,-50},{-12,-30}})));
 
   replaceable model humidifier = Components.SteamHumidifier
@@ -192,9 +191,6 @@ model ModularAHU "model of a modular air handling unit"
         extent={{-5,-5},{5,5}},
         rotation=-90,
         origin={-31,-105})));
-  Modelica.Blocks.Sources.Constant cooSur(k=TcooSur) if cooling or
-    dehumidifying
-    annotation (Placement(transformation(extent={{-94,-66},{-86,-58}})));
   Controler.ControlerHeatRecovery controlerHeatRecovery(
     eps=plateHeatExchangerFixedEfficiency.epsEnabled,
     dT_min=2) if heatRecovery
@@ -227,13 +223,10 @@ protected
     annotation (Placement(transformation(extent={{96,-36},{116,-16}})));
   // Controler
 public
-  Controler.ControlerCooler controlerCooler(
-    use_PhiSet=true,
-    dehumidifying=dehumidifying)
-    annotation (Placement(transformation(extent={{-44,-82},{-32,-70}})));
   Controler.ControlerHumidifier controlerHumidifier(use_PhiSet=true)
     annotation (Placement(transformation(extent={{46,-12},{54,-4}})));
   // Utilities
+  Controler.ControlerCoolerPID controlerCoolerPID(activeDehumidifying=dehumidifying) if cooling or dehumidifying annotation (Placement(transformation(extent={{-34,-90},{-14,-70}})));
 protected
   Modelica.Blocks.Sources.Constant p_atm(k=101325)
     annotation (Placement(transformation(extent={{126,-96},{134,-88}})));
@@ -330,14 +323,6 @@ equation
           {84,-52},{84,-31},{95,-31}}, color={0,0,127}));
   connect(T_supplyAir, hea.T_set) annotation (Line(points={{100,-100},{100,-80},
           {106,-80},{106,-44}}, color={0,0,127}));
-  connect(controlerCooler.XCooSet, coo.X_set) annotation (Line(points={{-31.4,
-          -78.4},{-16,-78.4},{-16,-30}},
-                                color={0,0,127}));
-  connect(controlerCooler.TCooSet, coo.T_set) annotation (Line(points={{-31.4,
-          -73.6},{-22,-73.6},{-22,-30}},
-                                color={0,0,127}));
-  connect(phi_supplyAir[2], controlerCooler.PhiSet) annotation (Line(points={{72,-93},
-          {72,-92},{-46,-92},{-46,-79.6},{-44.6,-79.6}},      color={0,0,127}));
   connect(phi_supplyAir[1], controlerHumidifier.PhiSet) annotation (Line(points=
          {{72,-107},{72,-80},{40,-80},{40,-10.4},{45.6,-10.4}}, color={0,0,127}));
   connect(T_supplyAir, controlerHumidifier.Tset) annotation (Line(points={{100,-100},
@@ -377,8 +362,6 @@ equation
   connect(fanSimple1.X_airOut, plateHeatExchangerFixedEfficiency.X_airInEta)
     annotation (Line(points={{-41,60},{-66,60},{-66,14},{-73,14}}, color={0,0,
           127}));
-  connect(cooSur.y, coo.T_coolingSurf) annotation (Line(points={{-85.6,-62},{
-          -26.9,-62},{-26.9,-49.9}},               color={0,0,127}));
   connect(fanSimple1.T_airOut, controlerHeatRecovery.T_airInEta) annotation (
       Line(points={{-41,63},{-114,63},{-114,50},{-111,50}}, color={0,0,127}));
   connect(T_oda, controlerHeatRecovery.T_airInOda) annotation (Line(points={{-160,
@@ -445,24 +428,12 @@ equation
           36,-36},{36,-52},{53,-52}}, color={0,0,127}));
   connect(fanSimple.PelFan, add.u1) annotation (Line(points={{29,-46},{32,-46},
           {32,-66.8},{-56.4,-66.8}}, color={0,0,127}));
-  connect(passThroughHrs.X_airOut, controlerCooler.X_coolerIn) annotation (Line(
-        points={{-73,-21},{-56,-21},{-56,-56},{-38,-56},{-38,-82.6}}, color={0,
-          0,127}));
-  connect(plateHeatExchangerFixedEfficiency.X_airOutOda, controlerCooler.X_coolerIn)
-    annotation (Line(points={{-73,4},{-56,4},{-56,-56},{-38,-56},{-38,-82.6}},
-        color={0,0,127}));
   connect(fanSimple.dT_fan, add1.u2) annotation (Line(points={{29,-43},{32,-43},
           {32,-78.4},{19.2,-78.4}}, color={0,0,127}));
   connect(T_supplyAir, add1.u1) annotation (Line(points={{100,-100},{100,-80},{
           34,-80},{34,-85.6},{19.2,-85.6}}, color={0,0,127}));
-  connect(add1.y, controlerCooler.Tset) annotation (Line(points={{5.4,-82},{-6,
-          -82},{-6,-92},{-46,-92},{-46,-72},{-44,-72},{-44,-72.4},{-44.6,-72.4}},
-        color={0,0,127}));
   connect(controlerHeatRecovery.hrsOn, plateHeatExchangerFixedEfficiency.hrsOn)
     annotation (Line(points={{-89,44},{-84,44},{-84,24}}, color={255,0,255}));
-  connect(T_supplyAir, controlerCooler.TsupSet) annotation (Line(points={{100,
-          -100},{100,-80},{34,-80},{34,-66},{-38,-66},{-38,-69.4}}, color={0,0,
-          127}));
   connect(relToAbsHum.absHum, passThroughHrs.X_airIn) annotation (Line(points={
           {-125,-3},{-120,-3},{-120,-21},{-95,-21}}, color={0,0,127}));
   connect(phi_oda, relToAbsHum.relHum)
@@ -472,6 +443,10 @@ equation
           0,127}));
   connect(T_oda, relToAbsHum.TDryBul) annotation (Line(points={{-160,40},{-120,
           40},{-120,-12},{-142,-12},{-142,-5.8},{-137,-5.8}}, color={0,0,127}));
+  connect(phi_supplyAir[2], controlerCoolerPID.phiSup) annotation (Line(points={{72,-93},{-40,-93},{-40,-74},{-35,-74}}, color={0,0,127}));
+  connect(T_supplyAir, controlerCoolerPID.TsupSet) annotation (Line(points={{100,-100},{-40,-100},{-40,-82},{-35,-82}}, color={0,0,127}));
+  connect(coo.X_airOut, controlerCoolerPID.Xout) annotation (Line(points={{-11,-38},{0,-38},{0,-70},{-40,-70},{-40,-86},{-35,-86}}, color={0,0,127}));
+  connect(controlerCoolerPID.TcoolerSet, coo.T_set) annotation (Line(points={{-13,-80},{-6,-80},{-6,-58},{-42,-58},{-42,-26},{-22,-26},{-22,-30}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));
