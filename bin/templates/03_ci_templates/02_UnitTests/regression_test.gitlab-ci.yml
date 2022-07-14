@@ -8,14 +8,13 @@ stages:
 .CI_Regressiontest:
     stage: RegressionTest
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
+        - cd AixLib && xvfb-run -n 77 python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022 
         - cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
@@ -137,14 +136,13 @@ CI_create_plots:
 .Regressiontest_job:
     stage: RegressionTest
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
         - export PYTHONIOENCODING=utf-8 # just in case
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022
+        - cd AixLib && xvfb-run -n 77 python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library AixLib --batch -DS 2022 
         - cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
@@ -329,7 +327,6 @@ prepare_create_plots:
 .Regressiontest_changed_Job:
     stage: RegressionTest
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
@@ -337,7 +334,7 @@ prepare_create_plots:
         - echo 'FAIL' > bin/Configfiles/exit.sh
     script:
         - git diff --raw --diff-filter=AMT HEAD^1 > bin/Configfiles/ci_changed_model_list.txt
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package ${lib_package} --library AixLib --batch -DS 2022 -n 2 --modified-model
+        - cd AixLib && xvfb-run -n 77 python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package ${lib_package} --library AixLib --batch -DS 2022 -n 2 --modified-model 
         - cd .. && echo 'successful' > bin/Configfiles/exit.sh
     after_script:
         - if cat bin/Configfiles/exit.sh | grep "FAIL"; then
@@ -496,7 +493,6 @@ Changed_create_plots:
 RegressionTest_Check_References:
     stage: Ref_Check
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - export PYTHONIOENCODING=utf-8 # just in case
@@ -514,7 +510,7 @@ RegressionTest_Check_References:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > bin/Configfiles/exit.sh
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 4 < ../bin/Configfiles/EOF.sh
+        - cd AixLib && xvfb-run -n 77 python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 4 < ../bin/Configfiles/EOF.sh 
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
@@ -578,7 +574,6 @@ RegressionTest_Check_References:
 Update_Regression_Results:
     stage: Update_Ref
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
@@ -598,7 +593,7 @@ Update_Regression_Results:
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
         - echo "FAIL" > bin/Configfiles/exit.sh
-        - cd AixLib && python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package AixLib -n 4 < ../bin/Configfiles/EOF.sh
+        - cd AixLib && xvfb-run -n 77 python ../bin/CITests/02_UnitTests/reference_check.py --update-ref --single-package AixLib -n 4 < ../bin/Configfiles/EOF.sh 
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
