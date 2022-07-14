@@ -1,23 +1,24 @@
 within AixLib.Fluid.BaseClasses.FlowModels.Validation;
- model InvertingBasicFlowFunction_dp
-   "Test model that inverts basicFlowFunction_dp"
-   extends Modelica.Icons.Example;
- 
-  parameter Real k = 0.5 "Flow coefficient";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 1.5
-     "Nominal mass flow rate";
- 
-  Modelica.SIunits.MassFlowRate m_flow "Mass flow rate";
-  Modelica.SIunits.PressureDifference dp(displayUnit="Pa", start=0) "Pressure difference";
- equation
-   m_flow = 4*(time-0.5);
-   m_flow = FlowModels.basicFlowFunction_dp(dp=dp, k=k, m_flow_turbulent=m_flow_nominal*0.3);
- 
- annotation (
- experiment(Tolerance=1e-6, StopTime=1.0),
- __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/BaseClasses/FlowModels/Validation/InvertingBasicFlowFunction_dp.mos"
-         "Simulate and plot"),
-               Documentation(info="<html>
+model InvertingBasicFlowFunction_dp
+  "Test model that inverts basicFlowFunction_dp"
+  extends Modelica.Icons.Example;
+
+ parameter Real k = 0.5 "Flow coefficient";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1.5
+    "Nominal mass flow rate";
+
+  Modelica.Units.SI.MassFlowRate m_flow "Mass flow rate";
+  Modelica.Units.SI.PressureDifference dp(displayUnit="Pa", start=0)
+    "Pressure difference";
+equation
+  m_flow = 4*(time-0.5);
+  m_flow = FlowModels.basicFlowFunction_dp(dp=dp, k=k, m_flow_turbulent=m_flow_nominal*0.3);
+
+annotation (
+experiment(Tolerance=1e-6, StopTime=1.0),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/BaseClasses/FlowModels/Validation/InvertingBasicFlowFunction_dp.mos"
+        "Simulate and plot"),
+              Documentation(info="<html>
  <p>
  This model tests whether the Modelica translator substitutes the
  inverse function for
@@ -30,7 +31,7 @@ within AixLib.Fluid.BaseClasses.FlowModels.Validation;
  Translating this model should therefore give no nonlinear equations
  after the symbolic manipulation.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  January 25, 2019, by Michael Wetter:<br/>
@@ -47,6 +48,6 @@ within AixLib.Fluid.BaseClasses.FlowModels.Validation;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end InvertingBasicFlowFunction_dp;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end InvertingBasicFlowFunction_dp;

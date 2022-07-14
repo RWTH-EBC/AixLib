@@ -1,6 +1,6 @@
-within AixLib.Fluid.Movers.Compressors.Utilities;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities;
 package EngineEfficiency "Package that contains models describing different engine efficiencies"
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 annotation (Icon(coordinateSystem(preserveAspectRatio=false),
               graphics={

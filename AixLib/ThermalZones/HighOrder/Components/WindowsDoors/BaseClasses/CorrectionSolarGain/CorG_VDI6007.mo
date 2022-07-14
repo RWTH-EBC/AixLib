@@ -2,7 +2,7 @@ within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.Correct
 model CorG_VDI6007 "correction of the solar gain factor according to VDI6007"
   extends PartialCorG;
 
-  import Modelica.SIunits.Conversions.to_deg;
+  import Modelica.Units.Conversions.to_deg;
 
 //  parameter Real coeff=0.6 "Weight coefficient";
  // parameter Modelica.SIunits.Area A=6 "Area of surface";

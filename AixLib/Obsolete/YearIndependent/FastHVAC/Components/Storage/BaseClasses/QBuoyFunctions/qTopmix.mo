@@ -4,10 +4,10 @@ function qTopmix
   input Integer n;
   input Integer nbuoy;
   input Integer nstop;
-  input Modelica.SIunits.TemperatureDifference dTover;
-  input Modelica.SIunits.TemperatureDifference dTborder;
+  input Modelica.Units.SI.TemperatureDifference dTover;
+  input Modelica.Units.SI.TemperatureDifference dTborder;
 
-  output Modelica.SIunits.SpecificEnergy q_topmix[n];
+  output Modelica.Units.SI.SpecificEnergy q_topmix[n];
 
 protected
   Integer dn_gap;
@@ -16,7 +16,7 @@ protected
   Real c_td;
   Real c_tu;
 
-  Modelica.SIunits.SpecificEnergy qt0;
+  Modelica.Units.SI.SpecificEnergy qt0;
 
 algorithm
 

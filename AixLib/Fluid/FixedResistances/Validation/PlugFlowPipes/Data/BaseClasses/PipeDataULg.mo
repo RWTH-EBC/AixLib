@@ -1,13 +1,13 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses;
- partial record PipeDataULg "Base class for ULg experimental data"
-   extends PipeDataBaseDefinition;
-   parameter Modelica.SIunits.Temp_C T_start_in = 20
-     "Initial temperature at inlet";
-   parameter Modelica.SIunits.Temp_C T_start_out = 20
-     "Initial temperature at outlet";
-   parameter Modelica.SIunits.MassFlowRate m_flowIni = 0
-     "Mass flow initialization";
-   annotation (Documentation(info="<html>
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses;
+partial record PipeDataULg "Base class for ULg experimental data"
+  extends PipeDataBaseDefinition;
+  parameter Modelica.Units.NonSI.Temperature_degC T_start_in=20
+    "Initial temperature at inlet";
+  parameter Modelica.Units.NonSI.Temperature_degC T_start_out=20
+    "Initial temperature at outlet";
+  parameter Modelica.Units.SI.MassFlowRate m_flowIni=0
+    "Mass flow initialization";
+  annotation (Documentation(info="<html>
  <p>
  This record contains information of an aproximately 15 minutes long test bench
  carried out at the University of Liège.
@@ -70,6 +70,6 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses;
  </li>
  </ul>
  
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end PipeDataULg;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end PipeDataULg;

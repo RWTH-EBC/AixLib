@@ -6,30 +6,29 @@ model HydraulicSeparator
       annotation (choicesAllMatching = true);
   parameter Boolean allowFlowReversal=true;
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate"
-    annotation(Dialog(group = "Nominal condition"));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
     ///////////////////////////////////////////////////////////////////////////
     //Geometric parameters                                                   //
     ///////////////////////////////////////////////////////////////////////////
-  parameter Modelica.SIunits.VolumeFlowRate pumpMaxVolumeFlow
+  parameter Modelica.Units.SI.VolumeFlowRate pumpMaxVolumeFlow
     "Maximum VolumeFlowRate of either primary or secondary Pump";
-  parameter Modelica.SIunits.Velocity vmaxExchange=0.2
+  parameter Modelica.Units.SI.Velocity vmaxExchange=0.2
     "Maximum velocity of the exchange-flow between top and bottom of the Hydraulic Separator";
-  parameter Modelica.SIunits.Diameter DFlange "Diameter of the flanges";
-  parameter Modelica.SIunits.Diameter D = sqrt(pumpMaxVolumeFlow*4/(Modelica.Constants.pi*vmaxExchange))
+  parameter Modelica.Units.SI.Diameter DFlange "Diameter of the flanges";
+  parameter Modelica.Units.SI.Diameter D=sqrt(pumpMaxVolumeFlow*4/(Modelica.Constants.pi
+      *vmaxExchange))
     "Diameter of the main-body (Calculated by the model to not exceed vmaxExchang)";
 
     ///////////////////////////////////////////////////////////////////////////
     //Initialization of temperatures                                         //
     ///////////////////////////////////////////////////////////////////////////
-  parameter Modelica.SIunits.Temperature T_top = 293.15
-    "Initial temperature in the top"
-    annotation (Dialog(tab = "Initialization"));
-  parameter Modelica.SIunits.Temperature T_bottom = 293.15
+  parameter Modelica.Units.SI.Temperature T_top=293.15
+    "Initial temperature in the top" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T_bottom=293.15
     "Initial temperature in the bottom"
-    annotation (Dialog(tab = "Initialization"));
+    annotation (Dialog(tab="Initialization"));
 
     ///////////////////////////////////////////////////////////////////////////
     //Measurement of water exchanged between primary and secondary circuit   //

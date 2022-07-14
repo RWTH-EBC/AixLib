@@ -9,10 +9,10 @@ partial model PartialCellTemperature
  "PV Panel data definition"
                            annotation (choicesAllMatching);
 
- final parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
+  final parameter Modelica.Units.SI.Efficiency eta_0=data.eta_0
     "Efficiency under standard conditions";
 
- final parameter Modelica.SIunits.Temp_K T_NOCT=data.T_NOCT
+  final parameter Modelica.Units.SI.Temperature T_NOCT=data.T_NOCT
     "Cell temperature under NOCT conditions";
 
  final parameter Real radNOCT(final quantity="Irradiance",

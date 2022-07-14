@@ -1,14 +1,14 @@
 within AixLib.Utilities.Math;
- block Bicubic "Bicubic function"
-   extends Modelica.Blocks.Interfaces.SI2SO;
-  input Real a[10] "Coefficients";
- equation
-   y =  AixLib.Utilities.Math.Functions.bicubic(a=a, x1=u1, x2=u2);
-   annotation (Icon(graphics={Text(
-           extent={{-88,40},{92,-32}},
-           lineColor={160,160,164},
-           textString="bicubic()")}),
- Documentation(info="<html>
+block Bicubic "Bicubic function"
+  extends Modelica.Blocks.Interfaces.SI2SO;
+ input Real a[10] "Coefficients";
+equation
+  y =  AixLib.Utilities.Math.Functions.bicubic(a=a, x1=u1, x2=u2);
+  annotation (Icon(graphics={Text(
+          extent={{-88,40},{92,-32}},
+          textColor={160,160,164},
+          textString="bicubic()")}),
+Documentation(info="<html>
  <p>
  This block computes
  </p>
@@ -22,13 +22,13 @@ within AixLib.Utilities.Math;
      + a<sub>9</sub>  x<sub>1</sub><sup>2</sup>  x<sub>2</sub>
      + a<sub>1</sub>0  x<sub>1</sub>  x<sub>2</sub><sup>2</sup>
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  Sep 17, 2010 by Michael Wetter:<br/>
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end Bicubic;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Bicubic;

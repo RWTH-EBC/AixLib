@@ -1,29 +1,30 @@
 within AixLib.Utilities.Psychrometrics.Functions;
- function X_pW "Mass fraction for given water vapor pressure"
-   extends Modelica.Icons.Function;
-   input Modelica.SIunits.Pressure p_w(displayUnit="Pa",
-                                       min=0.003,
-                                       nominal=1000) "Water vapor pressure";
-   input Modelica.SIunits.Pressure p=101325 "Total pressure";
-   output Modelica.SIunits.MassFraction X_w(
-     min=0,
-     max=1,
-     nominal=0.01) "Species concentration at dry bulb temperature";
- 
- protected
-   Modelica.SIunits.MassFraction x_w(nominal=0.01)
-     "Water mass fraction per mass of dry air";
- algorithm
-   x_w := 0.62198*p_w/(p - p_w);
-   X_w := x_w/(1 + x_w);
-   annotation (
-     smoothOrder=99,
-     Inline=true,
-     Documentation(info="<html>
+function X_pW "Mass fraction for given water vapor pressure"
+  extends Modelica.Icons.Function;
+  input Modelica.Units.SI.Pressure p_w(
+    displayUnit="Pa",
+    min=0.003,
+    nominal=1000) "Water vapor pressure";
+  input Modelica.Units.SI.Pressure p=101325 "Total pressure";
+  output Modelica.Units.SI.MassFraction X_w(
+    min=0,
+    max=1,
+    nominal=0.01) "Species concentration at dry bulb temperature";
+
+protected
+  Modelica.Units.SI.MassFraction x_w(nominal=0.01)
+    "Water mass fraction per mass of dry air";
+algorithm
+  x_w := 0.62198*p_w/(p - p_w);
+  X_w := x_w/(1 + x_w);
+  annotation (
+    smoothOrder=99,
+    Inline=true,
+    Documentation(info="<html>
  <p>
  Function to compute the mass fraction for a given water vapor partial pressure.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  February 14, 2021 by Ettore Zanetti:<br/>
@@ -50,6 +51,6 @@ within AixLib.Utilities.Psychrometrics.Functions;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end X_pW;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end X_pW;

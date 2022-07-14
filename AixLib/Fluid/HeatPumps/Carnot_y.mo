@@ -1,14 +1,14 @@
 within AixLib.Fluid.HeatPumps;
- model Carnot_y
-   "Reversible heat pump with performance curve adjusted based on Carnot efficiency"
-   extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_y(
-     final COP_is_for_cooling = false);
- 
- initial equation
-   assert(COP_nominal > 1, "The nominal COP of a heat pump must be bigger than one.");
-   annotation (
- defaultComponentName="heaPum",
- Documentation(info="<html>
+model Carnot_y
+  "Reversible heat pump with performance curve adjusted based on Carnot efficiency"
+  extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_y(
+    final COP_is_for_cooling = false);
+
+initial equation
+  assert(COP_nominal > 1, "The nominal COP of a heat pump must be bigger than one.");
+  annotation (
+defaultComponentName="heaPum",
+Documentation(info="<html>
  <p>
  This is model of a heat pump whose coefficient of performance COP changes
  with temperatures in the same way as the Carnot efficiency changes.
@@ -83,7 +83,7 @@ within AixLib.Fluid.HeatPumps;
  <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_y\">AixLib.Fluid.Chillers.Carnot_y</a>.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  January 3, 2017, by Michael Wetter:<br/>
@@ -166,8 +166,8 @@ within AixLib.Fluid.HeatPumps;
  </li>
  </ul>
  </html>"),
-     Icon(graphics={
-         Line(points={{0,68},{0,90},{90,90},{90,90},{100,90}},
-                                                  color={0,0,255})}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end Carnot_y;
+    Icon(graphics={
+        Line(points={{0,68},{0,90},{90,90},{90,90},{100,90}},
+                                                 color={0,0,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Carnot_y;

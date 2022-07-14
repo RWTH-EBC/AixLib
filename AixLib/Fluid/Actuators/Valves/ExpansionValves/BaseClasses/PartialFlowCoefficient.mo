@@ -11,18 +11,18 @@ partial model PartialFlowCoefficient
 
   input Real opening(unit="1")
     "Current valve's opening";
-  input Modelica.SIunits.Area AVal
+  input Modelica.Units.SI.Area AVal
     "Cross-sectional area of the expansion valve";
-  input Modelica.SIunits.Diameter dInlPip
+  input Modelica.Units.SI.Diameter dInlPip
     "Diameter of the pipe at valve's inlet";
 
   input Medium.ThermodynamicState staInl
     "Thermodynamic state at valve's inlet conditions";
   input Medium.ThermodynamicState staOut
     "Thermodynamic state at valve's outlet conditions";
-  input Modelica.SIunits.AbsolutePressure pInl
+  input Modelica.Units.SI.AbsolutePressure pInl
     "Pressure at valves's inlet conditions";
-  input Modelica.SIunits.AbsolutePressure pOut
+  input Modelica.Units.SI.AbsolutePressure pOut
     "Pressure at valves's outlet conditions";
 
   // Definition of base variables

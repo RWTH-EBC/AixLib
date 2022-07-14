@@ -1,110 +1,111 @@
 within AixLib.Fluid.Sensors;
- model LatentEnthalpyFlowRate
-   "Ideal enthalphy flow rate sensor that outputs the latent enthalpy flow rate only"
-   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor(
-     redeclare replaceable package Medium =
-         Modelica.Media.Interfaces.PartialCondensingGases,
-     tau=0);
-   extends AixLib.Fluid.BaseClasses.IndexMassFraction(final substanceName="water");
-   extends Modelica.Icons.RotationalSensor;
-   Modelica.Blocks.Interfaces.RealOutput H_flow(final unit="W")
-     "Latent enthalpy flow rate, positive if from port_a to port_b"
-     annotation (Placement(transformation(
-         origin={0,110},
-         extent={{-10,-10},{10,10}},
-         rotation=90)));
-   parameter Modelica.SIunits.SpecificEnthalpy h_out_start=
-     Medium.specificEnthalpy_pTX(
-       p=Medium.p_default, T=Medium.T_default, X=Medium.X_default)
-     -Medium.enthalpyOfNonCondensingGas(T=Medium.T_default)
-     "Initial or guess value of measured specific latent enthalpy"
-     annotation (Dialog(group="Initialization"));
- 
- protected
-   Modelica.SIunits.SpecificEnthalpy hMed_out(start=h_out_start)
-     "Medium latent enthalpy to which the sensor is exposed";
-   Modelica.SIunits.SpecificEnthalpy h_out(start=h_out_start)
-     "Medium latent enthalpy that is used to compute the enthalpy flow rate";
- 
-   Medium.MassFraction XiActual[Medium.nXi]
-     "Medium mass fraction to which sensor is exposed to";
-   Medium.SpecificEnthalpy hActual
-     "Medium enthalpy to which sensor is exposed to";
- initial equation
-  // Compute initial state
-  if dynamic then
-     if initType == Modelica.Blocks.Types.Init.SteadyState then
-       der(h_out) = 0;
-     elseif initType == Modelica.Blocks.Types.Init.InitialState or
-            initType == Modelica.Blocks.Types.Init.InitialOutput then
-       h_out = h_out_start;
-     end if;
+model LatentEnthalpyFlowRate
+  "Ideal enthalphy flow rate sensor that outputs the latent enthalpy flow rate only"
+  extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor(
+    redeclare replaceable package Medium =
+        Modelica.Media.Interfaces.PartialCondensingGases,
+    tau=0);
+  extends AixLib.Fluid.BaseClasses.IndexMassFraction(final substanceName="water");
+  extends Modelica.Icons.RoundSensor;
+  Modelica.Blocks.Interfaces.RealOutput H_flow(final unit="W")
+    "Latent enthalpy flow rate, positive if from port_a to port_b"
+    annotation (Placement(transformation(
+        origin={0,110},
+        extent={{-10,-10},{10,10}},
+        rotation=90)));
+  parameter Modelica.Units.SI.SpecificEnthalpy h_out_start=
+      Medium.specificEnthalpy_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default) - Medium.enthalpyOfNonCondensingGas(T=Medium.T_default)
+    "Initial or guess value of measured specific latent enthalpy"
+    annotation (Dialog(group="Initialization"));
+
+protected
+  Modelica.Units.SI.SpecificEnthalpy hMed_out(start=h_out_start)
+    "Medium latent enthalpy to which the sensor is exposed";
+  Modelica.Units.SI.SpecificEnthalpy h_out(start=h_out_start)
+    "Medium latent enthalpy that is used to compute the enthalpy flow rate";
+
+  Medium.MassFraction XiActual[Medium.nXi]
+    "Medium mass fraction to which sensor is exposed to";
+  Medium.SpecificEnthalpy hActual
+    "Medium enthalpy to which sensor is exposed to";
+initial equation
+ // Compute initial state
+ if dynamic then
+    if initType == Modelica.Blocks.Types.Init.SteadyState then
+      der(h_out) = 0;
+    elseif initType == Modelica.Blocks.Types.Init.InitialState or
+           initType == Modelica.Blocks.Types.Init.InitialOutput then
+      h_out = h_out_start;
+    end if;
+ end if;
+equation
+  if allowFlowReversal then
+     XiActual = Modelica.Fluid.Utilities.regStep(
+                 x=port_a.m_flow,
+                 y1=port_b.Xi_outflow,
+                 y2=port_a.Xi_outflow,
+                 x_small=m_flow_small);
+     hActual = Modelica.Fluid.Utilities.regStep(
+                 x=port_a.m_flow,
+                 y1=port_b.h_outflow,
+                 y2=port_a.h_outflow,
+                 x_small=m_flow_small);
+  else
+     XiActual = port_b.Xi_outflow;
+     hActual = port_b.h_outflow;
   end if;
- equation
-   if allowFlowReversal then
-      XiActual = Modelica.Fluid.Utilities.regStep(
-                  x=port_a.m_flow,
-                  y1=port_b.Xi_outflow,
-                  y2=port_a.Xi_outflow,
-                  x_small=m_flow_small);
-      hActual = Modelica.Fluid.Utilities.regStep(
-                  x=port_a.m_flow,
-                  y1=port_b.h_outflow,
-                  y2=port_a.h_outflow,
-                  x_small=m_flow_small);
-   else
-      XiActual = port_b.Xi_outflow;
-      hActual = port_b.h_outflow;
-   end if;
-   // Specific enthalpy measured by sensor.
-   // Compute H_flow as difference between total enthalpy and enthalpy on non-condensing gas.
-   // This is needed to compute the liquid vs. gas fraction of water, using the equations
-   // provided by the medium model
-   hMed_out = (hActual -
-      (1-XiActual[i_x]) * Medium.enthalpyOfNonCondensingGas(
-        T=Medium.temperature(Medium.setState_phX(p=port_a.p, h=hActual, X=XiActual))));
-   if dynamic then
-     der(h_out) = (hMed_out-h_out)*k*tauInv;
-   else
-     h_out = hMed_out;
-   end if;
-   // Sensor output signal
-   H_flow = port_a.m_flow * h_out;
- annotation (defaultComponentName="senLatEnt",
-   Icon(graphics={
-         Line(points={{-100,0},{-70,0}}, color={0,128,255}),
-         Line(points={{70,0},{100,0}}, color={0,128,255}),
-         Line(points={{0,100},{0,70}}, color={0,0,127}),
-         Text(
-           extent={{180,151},{20,99}},
-           lineColor={0,0,0},
-           textString="HL_flow"),
-         Ellipse(
-           extent={{-70,70},{70,-70}},
-           lineColor={0,0,0},
-           fillColor={85,170,255},
-           fillPattern=FillPattern.Solid),
-         Ellipse(
-           extent={{-5,5},{5,-5}},
-           lineColor={0,0,0},
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Line(points={{0,0},{9.02,28.6}}),
-         Polygon(
-           points={{-0.48,31.6},{18,26},{18,57.2},{-0.48,31.6}},
-           lineColor={0,0,0},
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Line(points={{0,70},{0,40}}),
-         Line(points={{-22.9,32.8},{-40.2,57.3}}),
-         Line(points={{-37.6,13.7},{-65.8,23.9}}),
-         Line(points={{22.9,32.8},{40.2,57.3}}),
-         Line(points={{37.6,13.7},{65.8,23.9}}),
-         Text(
-          extent={{-20,120},{-140,70}},
-           lineColor={0,0,0},
-           textString=DynamicSelect("", String(H_flow, leftjustified=false, significantDigits=3)))}),
-   Documentation(info="<html>
+  // Specific enthalpy measured by sensor.
+  // Compute H_flow as difference between total enthalpy and enthalpy on non-condensing gas.
+  // This is needed to compute the liquid vs. gas fraction of water, using the equations
+  // provided by the medium model
+  hMed_out = (hActual -
+     (1-XiActual[i_x]) * Medium.enthalpyOfNonCondensingGas(
+       T=Medium.temperature(Medium.setState_phX(p=port_a.p, h=hActual, X=XiActual))));
+  if dynamic then
+    der(h_out) = (hMed_out-h_out)*k*tauInv;
+  else
+    h_out = hMed_out;
+  end if;
+  // Sensor output signal
+  H_flow = port_a.m_flow * h_out;
+annotation (defaultComponentName="senLatEnt",
+  Icon(graphics={
+        Line(points={{-100,0},{-70,0}}, color={0,128,255}),
+        Line(points={{70,0},{100,0}}, color={0,128,255}),
+        Line(points={{0,100},{0,70}}, color={0,0,127}),
+        Text(
+          extent={{180,151},{20,99}},
+          textColor={0,0,0},
+          textString="HL_flow"),
+        Ellipse(
+          extent={{-70,70},{70,-70}},
+          lineColor={0,0,0},
+          fillColor={85,170,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-5,5},{5,-5}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Line(points={{0,0},{9.02,28.6}}),
+        Polygon(
+          points={{-0.48,31.6},{18,26},{18,57.2},{-0.48,31.6}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Line(points={{0,70},{0,40}}),
+        Line(points={{-22.9,32.8},{-40.2,57.3}}),
+        Line(points={{-37.6,13.7},{-65.8,23.9}}),
+        Line(points={{22.9,32.8},{40.2,57.3}}),
+        Line(points={{37.6,13.7},{65.8,23.9}}),
+        Text(
+         extent={{-20,120},{-140,70}},
+          textColor={0,0,0},
+          textString=DynamicSelect("", String(H_flow, leftJustified=false, significantDigits=3)))}),
+  Documentation(info="<html>
  <p>
  This model outputs the <i>latent</i> enthalphy flow rate of the medium in the flow
  between its fluid ports. In particular, if the total enthalpy flow rate is
@@ -142,7 +143,7 @@ within AixLib.Fluid.Sensors;
  <code>enthalpyOfNonCondensingGas(T)</code>.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  October 19, 2020, by Antoine Gautier:<br/>
@@ -212,6 +213,6 @@ within AixLib.Fluid.Sensors;
  Implementation is based on enthalpy sensor of <code>Modelica.Fluid</code>.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end LatentEnthalpyFlowRate;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end LatentEnthalpyFlowRate;

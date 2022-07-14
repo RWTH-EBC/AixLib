@@ -1,14 +1,14 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses;
- block LimiterWindSpeed "Block that limits the wind speed"
-   extends PartialLimiterMin;
- 
-   Modelica.Blocks.Interfaces.RealOutput winSpe(
-     final unit="m/s") = max(0, u) "Wind speed"
-     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
- 
-   annotation (
- defaultComponentName="limMin",
- Documentation(info="<html>
+block LimiterWindSpeed "Block that limits the wind speed"
+  extends PartialLimiterMin;
+
+  Modelica.Blocks.Interfaces.RealOutput winSpe(
+    final unit="m/s") = max(0, u) "Wind speed"
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+
+  annotation (
+defaultComponentName="limMin",
+Documentation(info="<html>
  <p>
  Block that limits the wind speed to be positive.
  </p>
@@ -17,13 +17,13 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
  negative values.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  April 14, 2020, by Michael Wetter:<br/>
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end LimiterWindSpeed;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end LimiterWindSpeed;

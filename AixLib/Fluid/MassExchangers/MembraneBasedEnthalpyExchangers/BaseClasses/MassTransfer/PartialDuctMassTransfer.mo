@@ -1,12 +1,12 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
+﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
 partial model PartialDuctMassTransfer
   "partial model for rectangular duct mass transfer models"
   extends PartialFlowMassTransfer;
 
   parameter Integer nWidth(min=1) "number of parallel segments in width direction";
 
-  parameter Modelica.SIunits.Length[n] heights "height of duct";
-  parameter Modelica.SIunits.Length[n] widths "width of duct";
+  parameter Modelica.Units.SI.Length[n] heights "height of duct";
+  parameter Modelica.Units.SI.Length[n] widths "width of duct";
 
   Real[n] aspRats "aspect ratio between duct height and width";
   parameter Boolean uniWalTem
@@ -19,23 +19,24 @@ partial model PartialDuctMassTransfer
   Real[n] kCons;
 
   // Variables
-  Modelica.SIunits.ThermalConductivity[n] lambdas "thermal conductivity of medium";
-  Modelica.SIunits.Density[n] rhos "density of medium";
-  Modelica.SIunits.DynamicViscosity[n] mus "dynamic viscosity of medium";
+  Modelica.Units.SI.ThermalConductivity[n] lambdas
+    "thermal conductivity of medium";
+  Modelica.Units.SI.Density[n] rhos "density of medium";
+  Modelica.Units.SI.DynamicViscosity[n] mus "dynamic viscosity of medium";
   Real[n] Scs "Schmidt number";
   Real[n] Res "Reynolds number";
   Real[n] Shs "Shwerwood number";
-  Modelica.SIunits.Area[n] croSecs "cross section of duct";
+  Modelica.Units.SI.Area[n] croSecs "cross section of duct";
   Real[n] zSterns "dimensionless length";
 
 protected
-  constant Modelica.SIunits.MolarMass M_air = 28.96;
-  constant Modelica.SIunits.MolarMass M_steam = 18.02;
+  constant Modelica.Units.SI.MolarMass M_air=28.96;
+  constant Modelica.Units.SI.MolarMass M_steam=18.02;
   constant Real sigmaAir = 3.711 "distance of air molecules in Atom";
   constant Real sigmaSteam = 2.655 "distance of steam molecules in Atom";
 
   Real[n] omegas "collision integral";
-  Modelica.SIunits.DiffusionCoefficient[n] Ds
+  Modelica.Units.SI.DiffusionCoefficient[n] Ds
     "diffusion coefficient for water vapour into air";
 
 equation

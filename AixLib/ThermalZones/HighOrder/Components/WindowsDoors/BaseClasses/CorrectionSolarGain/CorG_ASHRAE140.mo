@@ -1,9 +1,9 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
 model CorG_ASHRAE140
   "Correction of the solar gain factor according to ASHRAE 140"
   extends PartialCorG;
 
-  import Modelica.SIunits.Conversions.to_deg;
+  import Modelica.Units.Conversions.to_deg;
   import Modelica.Math.asin;
   import Modelica.Math.sin;
   import Modelica.Math.tan;

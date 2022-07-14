@@ -1,13 +1,13 @@
 within AixLib.Obsolete.YearIndependent.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions;
 function qbuoyTotal
   input Integer n;
-  input Modelica.SIunits.Temperature T[n];
-  output Modelica.SIunits.SpecificEnergy q_total[n];
+  input Modelica.Units.SI.Temperature T[n];
+  output Modelica.Units.SI.SpecificEnergy q_total[n];
 
 protected
-  Modelica.SIunits.TemperatureDifference dTover;
-  Modelica.SIunits.TemperatureDifference dT13;
-  Modelica.SIunits.TemperatureDifference dTborder;
+  Modelica.Units.SI.TemperatureDifference dTover;
+  Modelica.Units.SI.TemperatureDifference dT13;
+  Modelica.Units.SI.TemperatureDifference dTborder;
   Integer nbuoy;
   Integer dngap;
   Integer nstop;

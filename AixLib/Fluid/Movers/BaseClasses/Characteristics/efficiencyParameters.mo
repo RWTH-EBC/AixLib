@@ -1,11 +1,11 @@
 within AixLib.Fluid.Movers.BaseClasses.Characteristics;
- record efficiencyParameters "Record for efficiency parameters"
-   extends Modelica.Icons.Record;
-   parameter Modelica.SIunits.VolumeFlowRate V_flow[:](
-     each min=0) "Volumetric flow rate at user-selected operating points";
-   parameter Modelica.SIunits.Efficiency eta[size(V_flow,1)](
-     each max=1) "Fan or pump efficiency at these flow rates";
-   annotation (Documentation(info="<html>
+record efficiencyParameters "Record for efficiency parameters"
+  extends Modelica.Icons.Record;
+  parameter Modelica.Units.SI.VolumeFlowRate V_flow[:](each min=0)
+    "Volumetric flow rate at user-selected operating points";
+  parameter Modelica.Units.SI.Efficiency eta[size(V_flow, 1)](each max=1)
+    "Fan or pump efficiency at these flow rates";
+  annotation (Documentation(info="<html>
  <p>
  Data record for performance data that describe volume flow rate versus
  efficiency.
@@ -15,13 +15,13 @@ within AixLib.Fluid.Movers.BaseClasses.Characteristics;
  must have the same size.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  September 28, 2011, by Michael Wetter:<br/>
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end efficiencyParameters;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end efficiencyParameters;

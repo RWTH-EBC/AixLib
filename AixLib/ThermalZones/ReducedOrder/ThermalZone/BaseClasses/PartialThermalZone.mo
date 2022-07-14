@@ -50,8 +50,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-49,-108},{49,-84}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
-    ATot > 0 or zoneParam.VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv
+ if ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{94,10},{114,30}}),
                               iconTransformation(extent={{92,-6},{112,14}})));
@@ -97,14 +97,13 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
     final p_start=p_start,
     final X_start=X_start,
     final T_start=T_start,
     final C_start=C_start,
     final C_nominal=C_nominal,
-    final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,56},
-            {86,92}})));
+    final mSenFac=mSenFac) "RC calculation core"
+    annotation (Placement(transformation(extent={{38,56},{86,92}})));
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +

@@ -1,14 +1,14 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
- record PipeDataULg151204_2
-   "Experimental data from ULg's pipe test bench from December 4, 2015 (2)"
-   extends AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg(
-     T_start_out=14.3,
-     T_start_in=14.7,
-     m_flowIni=1.251,
-     final nCol = 6,
-     final filNam = Modelica.Utilities.Files.loadResource(
-   "modelica://AixLib/Resources/Data/Fluid/FixedResistances/Validation/PlugFlowPipes/PipeDataULg151204_2.mos"));
-   annotation (Documentation(revisions="<html>
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
+record PipeDataULg151204_2
+  "Experimental data from ULg's pipe test bench from December 4, 2015 (2)"
+  extends AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg(
+    T_start_out=14.3,
+    T_start_in=14.7,
+    m_flowIni=1.251,
+    final nCol = 6,
+    final filNam = Modelica.Utilities.Files.loadResource(
+  "modelica://AixLib/Resources/Data/Fluid/FixedResistances/Validation/PlugFlowPipes/PipeDataULg151204_2.mos"));
+  annotation (Documentation(revisions="<html>
  <ul>
  <li>
  March 7, 2020, by Michael Wetter:<br/>
@@ -30,7 +30,7 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
  First implementation.
  </li>
  </ul>
- </html>", info="<html>
+ </html>",info="<html>
  <p>
  This data record contains the experimental data from the
  long test bench carried out at the University of Liège.
@@ -38,6 +38,6 @@ within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
  AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg</a>
  for more information.
  </p>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end PipeDataULg151204_2;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end PipeDataULg151204_2;

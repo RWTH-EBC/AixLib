@@ -5,17 +5,15 @@ model SkylineShadowing
   extends Modelica.Blocks.Icons.Block;
   parameter Integer n(min = 1) "Number of corner points"
       annotation(dialog(group="skyline"));
-  parameter Modelica.SIunits.Angle[n] alpha(displayUnit="deg")
-  "Azimuth of corner points, sorted from north to east to south to west,
+  parameter Modelica.Units.SI.Angle[n] alpha(displayUnit="deg") "Azimuth of corner points, sorted from north to east to south to west,
      azi=-90 degree if surface outward unit normal points toward east;
-     azi=0 if it points toward south"
-      annotation(dialog(group="skyline"));
-  parameter Modelica.SIunits.Height[n] deltaH
+     azi=0 if it points toward south" annotation (dialog(group="skyline"));
+  parameter Modelica.Units.SI.Height[n] deltaH
     "Difference between height of corner point and the window centre"
-    annotation(dialog(group="skyline"));
-  parameter Modelica.SIunits.Distance[n] s
+    annotation (dialog(group="skyline"));
+  parameter Modelica.Units.SI.Distance[n] s
     "Horizontal distance between corner point and window centre"
-    annotation(dialog(group="skyline"));
+    annotation (dialog(group="skyline"));
   parameter Boolean[n-1] gap
     "Corner points i and i+1 are gap between buildings: true, else: false"
     annotation(dialog(group="skyline"));
@@ -34,13 +32,14 @@ model SkylineShadowing
         iconTransformation(extent={{100,-10},{120,10}})));
 
 protected
-  Modelica.SIunits.Angle[n-1] X "Calculation factor to simplify equations";
-  Modelica.SIunits.Angle[n-1] Y "Calculation factor to simplify equations";
-  Modelica.SIunits.Angle altLimi[n-1](displayUnit="deg")
+  Modelica.Units.SI.Angle[n - 1] X "Calculation factor to simplify equations";
+  Modelica.Units.SI.Angle[n - 1] Y "Calculation factor to simplify equations";
+  Modelica.Units.SI.Angle altLimi[n - 1](displayUnit="deg")
     "Limit elevation angle for shadowing by a skyline for point i and i+1";
-  Modelica.SIunits.Angle gamma[n]( min=0,max=Modelica.Constants.pi/2,
-    displayUnit="deg")
-    "Elevation angle of the obstruction for point i";
+  Modelica.Units.SI.Angle gamma[n](
+    min=0,
+    max=Modelica.Constants.pi/2,
+    displayUnit="deg") "Elevation angle of the obstruction for point i";
 equation
   //Calculating gamma
   for i in 1:n loop
