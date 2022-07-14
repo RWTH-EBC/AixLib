@@ -4,12 +4,12 @@ function qFreebuoy
   input Integer n;
   input Integer nbuoy;
   input Integer nstop;
-  input Modelica.SIunits.TemperatureDifference dTover;
+  input Modelica.Units.SI.TemperatureDifference dTover;
 
-  output Modelica.SIunits.SpecificEnergy q_freebuoy[n];
+  output Modelica.Units.SI.SpecificEnergy q_freebuoy[n];
 
 protected
-  Modelica.SIunits.SpecificEnergy qb0;
+  Modelica.Units.SI.SpecificEnergy qb0;
   Real dh_gap;
   Real dhdwn;
   Real c_qu;

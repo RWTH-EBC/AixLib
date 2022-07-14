@@ -5,10 +5,10 @@ partial model GeothermalHeatPumpBase
   replaceable package Medium = AixLib.Media.Water
     "Medium model used for hydronic components";
 
-  parameter Modelica.SIunits.Temperature T_start_cold = 300
+  parameter Modelica.Units.SI.Temperature T_start_cold=300
     "Initial temperature of cold components";
 
-  parameter Modelica.SIunits.Temperature T_start_hot=300
+  parameter Modelica.Units.SI.Temperature T_start_hot=300
     "Initial temperature of warm components";
 
     replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
@@ -217,9 +217,9 @@ partial model GeothermalHeatPumpBase
         extent={{-14,17},{14,-17}},
         rotation=90,
         origin={-25,5.99998})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_layer=0.5
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_layer=0.5
     "Nominal mass flow rate in layers of storages";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_HE=0.5
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal_HE=0.5
     "Nominal mass flow rate of heat exchanger layers of storages";
 equation
 

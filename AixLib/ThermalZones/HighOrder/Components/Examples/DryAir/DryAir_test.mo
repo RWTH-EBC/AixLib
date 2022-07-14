@@ -24,8 +24,16 @@ model DryAir_test "Simulation to test the dry air models"
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow(Q_flow = 150) annotation(Placement(transformation(extent = {{-90, 72}, {-70, 92}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempOutsideDaycurve annotation(Placement(transformation(extent = {{-90, 40}, {-70, 60}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TempInside(T = 293.15) annotation(Placement(transformation(extent = {{90, 40}, {70, 60}})));
-  Modelica.Blocks.Sources.Sine sine(amplitude = 7, offset = 273.15 + 13, freqHz = 1 / (3600 * 24)) annotation(Placement(transformation(extent = {{-74, 20}, {-86, 32}})));
-  Modelica.Blocks.Sources.Sine sine1(amplitude = 1, freqHz = 1 / 3600, offset = 1.5) annotation(Placement(transformation(extent = {{-34, 32}, {-24, 42}})));
+  Modelica.Blocks.Sources.Sine sine(
+    amplitude=7,
+    offset=273.15 + 13,
+    f=1/(3600*24))
+    annotation (Placement(transformation(extent={{-74,20},{-86,32}})));
+  Modelica.Blocks.Sources.Sine sine1(
+    amplitude=1,
+    f=1/3600,
+    offset=1.5)
+    annotation (Placement(transformation(extent={{-34,32},{-24,42}})));
   Modelica.Blocks.Interfaces.RealOutput realOut[4] annotation(Placement(transformation(extent = {{72, -22}, {92, -2}})));
 equation
   //Connecting the most relevant outputs

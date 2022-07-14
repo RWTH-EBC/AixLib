@@ -17,15 +17,12 @@ model AirDuct "model of the air duct"
     "number of segments in width direction";
 
   // Geometry
-  parameter Modelica.SIunits.Length lengthDuct
-    "length in flow direction of duct"
-    annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length widthDuct
-    "width of duct"
-     annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length heightDuct
-    "height of duct"
-     annotation(Dialog(tab="Geometry"));
+  parameter Modelica.Units.SI.Length lengthDuct
+    "length in flow direction of duct" annotation (Dialog(tab="Geometry"));
+  parameter Modelica.Units.SI.Length widthDuct "width of duct"
+    annotation (Dialog(tab="Geometry"));
+  parameter Modelica.Units.SI.Length heightDuct "height of duct"
+    annotation (Dialog(tab="Geometry"));
   parameter Boolean couFloArr=true
     "true: counter-flow arrangement; false: quasi-counter-flow arrangement"
      annotation(Dialog(tab="Geometry"));
@@ -78,25 +75,23 @@ model AirDuct "model of the air duct"
     annotation (Dialog(tab="Initialization", enable=Medium.nC > 0));
 
   // Variables
-  Modelica.SIunits.Length[nNodes] lengths=
-    {i*(lengthDuct/((nNodes+1)*nNodes/2)) for i in 1:nNodes}
-    "length of segements in flow direction";
-  Modelica.SIunits.Area[nNodes] croSecs = fill(heightDuct*widthDuct,nNodes)
+  Modelica.Units.SI.Length[nNodes] lengths={i*(lengthDuct/((nNodes + 1)*nNodes/
+      2)) for i in 1:nNodes} "length of segements in flow direction";
+  Modelica.Units.SI.Area[nNodes] croSecs=fill(heightDuct*widthDuct, nNodes)
     "cross section of duct segments";
-  Modelica.SIunits.Velocity[nNodes] vs={port_a.m_flow/Medium.density(states[i])
-    /croSecs[i] for i in 1:nNodes}/nParallel
-    "velocity in air duct segments";
-  Modelica.SIunits.PartialPressure[nNodes] ps={vol[i].p*vol[i].X_w*(Ms[i]/
-    M_steam) for i in 1:nNodes};
-  Modelica.SIunits.MolarMass[nNodes] Ms={1/(vol[i].X_w/M_steam+(1-vol[i].X_w)/
-    M_air) for i in 1:nNodes};
+  Modelica.Units.SI.Velocity[nNodes] vs={port_a.m_flow/Medium.density(states[i])
+      /croSecs[i] for i in 1:nNodes}/nParallel "velocity in air duct segments";
+  Modelica.Units.SI.PartialPressure[nNodes] ps={vol[i].p*vol[i].X_w*(Ms[i]/
+      M_steam) for i in 1:nNodes};
+  Modelica.Units.SI.MolarMass[nNodes] Ms={1/(vol[i].X_w/M_steam + (1 - vol[i].X_w)
+      /M_air) for i in 1:nNodes};
 
   Medium.ThermodynamicState[nNodes] states={Medium.setState_pTX(
     vol[i].p,
     vol[i].T,
     vol[i].Xi) for i in 1:nNodes};
 
-  Modelica.SIunits.SpecificEnthalpy dhAds=adsorptionEnthalpy.dhAds
+  Modelica.Units.SI.SpecificEnthalpy dhAds=adsorptionEnthalpy.dhAds
     "adsorption enthalpy";
 
   // Inputs
@@ -193,15 +188,14 @@ model AirDuct "model of the air duct"
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default, p=Medium.p_default, X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
   parameter Medium.ThermodynamicState sta_start=Medium.setState_pTX(
       T=T_start, p=p_start, X=X_start);
-  parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start=
-    Medium.specificEnthalpy(sta_start)
-    "Start value for outflowing enthalpy";
-  constant Modelica.SIunits.MolarMass M_steam = 0.01802 "Molar mass of steam";
-  constant Modelica.SIunits.MolarMass M_air = 0.028949 "Molar mass of dry air";
+  parameter Modelica.Units.SI.SpecificEnthalpy h_outflow_start=
+      Medium.specificEnthalpy(sta_start) "Start value for outflowing enthalpy";
+  constant Modelica.Units.SI.MolarMass M_steam=0.01802 "Molar mass of steam";
+  constant Modelica.Units.SI.MolarMass M_air=0.028949 "Molar mass of dry air";
 
   Modelica.Blocks.Interfaces.RealInput[nNodes] coeCroCouSenInts
     "coefficient for heat transfer reduction due to cross-flow portion";

@@ -35,7 +35,7 @@ model HeatGeneratorNoControl "Simple heat generator without control"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={40,90})));
-  parameter Modelica.SIunits.Volume V
+  parameter Modelica.Units.SI.Volume V
     "Volume of the heat exchanger inside the heat generator";
   parameter Real coeffPresLoss
     "Pressure loss coefficient of the heat generator";

@@ -2,7 +2,8 @@ within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.BaseClasses;
 block CheckResultsAccordingToASHRAE
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Modelica.SIunits.Time checkTime "Simulation time when block should check if model results lies in limit range";
+  parameter Modelica.Units.SI.Time checkTime
+    "Simulation time when block should check if model results lies in limit range";
 
   parameter String dispType = "None" "Letter displayed in icon" annotation (
     Dialog(group="Graphical only"),

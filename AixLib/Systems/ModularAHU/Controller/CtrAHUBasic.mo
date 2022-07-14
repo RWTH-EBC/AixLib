@@ -1,7 +1,7 @@
 within AixLib.Systems.ModularAHU.Controller;
 model CtrAHUBasic "Simple controller for AHU"
 
-  parameter Modelica.SIunits.Temperature TFlowSet=289.15
+  parameter Modelica.Units.SI.Temperature TFlowSet=289.15
     "Flow temperature set point of consumer"
     annotation (Dialog(enable=useExternalTset == false));
   parameter Boolean usePreheater=true "Set true, if ahu contains a preaheater"
@@ -34,7 +34,7 @@ model CtrAHUBasic "Simple controller for AHU"
 
 
   // Parameter for volume flow controller
-  parameter Modelica.SIunits.VolumeFlowRate VFlowSet=3000/3600
+  parameter Modelica.Units.SI.VolumeFlowRate VFlowSet=3000/3600
     "Set value of volume flow [m^3/s]"
     annotation (dialog(group="Fan Controller"));
   parameter Real dpMax=5000 "Maximal pressure difference of the fans [Pa]"
@@ -44,11 +44,11 @@ model CtrAHUBasic "Simple controller for AHU"
     annotation (dialog(group="Fan Controller"));
   parameter Real k=50 "Gain of controller"
     annotation (dialog(group="Fan Controller"));
-  parameter Modelica.SIunits.Time Ti=5 "Time constant of Integrator block"
+  parameter Modelica.Units.SI.Time Ti=5 "Time constant of Integrator block"
     annotation (dialog(group="Fan Controller"));
   parameter Real y_start=0 "Initial value of output"
     annotation (dialog(group="Fan Controller"));
-  parameter Modelica.Blocks.Types.InitPID initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.NoInit
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation (dialog(group="Initialization"));
 
@@ -64,8 +64,8 @@ model CtrAHUBasic "Simple controller for AHU"
     "Connector of set temperature, if given externally" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
           extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Sources.Constant TFrostProtection(final k=TFrostProtect) if
-    usePreheater
+  Modelica.Blocks.Sources.Constant TFrostProtection(final k=TFrostProtect)
+ if usePreheater
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
   Controls.Continuous.LimPID PID_VflowSup(
     final yMax=dpMax,

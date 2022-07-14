@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Agents;
+﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
 model IntermediateAgent
   extends BaseClasses.PartialAgent;
   parameter Integer broker = 10003 "Name of the corresponding broker-agent";
@@ -22,10 +22,10 @@ model IntermediateAgent
         extent={{10,10},{-10,-10}},
         rotation=0,
         origin={-160,-136})));
-  Modelica.StateGraph.Step message(nOut=2)
+  Modelica.StateGraph.Step message(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-178,-98},{-158,-78}})));
 
-  Modelica.StateGraph.Step passOnCall
+  Modelica.StateGraph.Step passOnCall(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-36,86},{-16,106}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=noEvent(
         getperformative.y[1] == 4))
@@ -37,7 +37,7 @@ model IntermediateAgent
       enableTimer=true)
     annotation (Placement(transformation(extent={{14,86},{34,106}})));
 
-  Modelica.StateGraph.StepWithSignal sendCall(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendCall(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{74,86},{94,106}})));
   Modelica.Blocks.Math.IntegerChange integerChange annotation (Placement(
         transformation(extent={{-176,-34},{-156,-14}})));
@@ -50,12 +50,12 @@ model IntermediateAgent
     annotation (Placement(transformation(extent={{-120,-250},{-94,-232}})));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(extent={{-88,-244},{-82,-238}})));
-  Modelica.StateGraph.Step composeNotUnderstood
+  Modelica.StateGraph.Step composeNotUnderstood(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-34,-238},{-14,-218}})));
   Modelica.StateGraph.Transition transition3(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{4,-238},{24,-218}})));
 
-  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1)
+  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{44,-238},{64,-218}})));
   Modelica.StateGraph.Transition transition4(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{84,-238},{104,-218}})));
@@ -69,17 +69,17 @@ model IntermediateAgent
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-108,40})));
-  Modelica.StateGraph.Step check
+  Modelica.StateGraph.Step check(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression4(y=noEvent((
         getperformative.y[1] == 8) and (getsender.y[1] == broker)))
     annotation (Placement(transformation(extent={{-70,6},{-44,24}})));
-  Modelica.StateGraph.Step passOnInformation
+  Modelica.StateGraph.Step passOnInformation(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{2,30},{22,50}})));
   Modelica.StateGraph.Transition transition7(                  waitTime=0.1,
       enableTimer=true)
     annotation (Placement(transformation(extent={{44,30},{64,50}})));
-  Modelica.StateGraph.StepWithSignal sendInformation(nOut=2)
+  Modelica.StateGraph.StepWithSignal sendInformation(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{84,30},{104,50}})));
   Modelica.StateGraph.TransitionWithSignal newMessage2
                                                       annotation (Placement(
@@ -87,18 +87,18 @@ model IntermediateAgent
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-110,-40})));
-  Modelica.StateGraph.Step check1
+  Modelica.StateGraph.Step check1(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-86,-50},{-66,-30}})));
   Modelica.StateGraph.TransitionWithSignal fromBottomBroker(waitTime=0.5,
       enableTimer=false)
     annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
-  Modelica.StateGraph.Step passOnConfirmation
+  Modelica.StateGraph.Step passOnConfirmation(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-2,-50},{18,-30}})));
   Modelica.StateGraph.Transition transition8(                  waitTime=0.1,
       enableTimer=true)
     annotation (Placement(transformation(extent={{38,-50},{58,-30}})));
   Modelica.StateGraph.StepWithSignal sendConfirmation(
-                                                     nOut=1)
+                                                     nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{82,-50},{102,-30}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y=noEvent((
         getsender.y[1] == currentClient)))
@@ -106,13 +106,13 @@ model IntermediateAgent
   Modelica.StateGraph.Transition transition2(                  waitTime=0.1,
       enableTimer=true)
     annotation (Placement(transformation(extent={{-112,-118},{-92,-98}})));
-  Modelica.StateGraph.Step confirmToBottom
+  Modelica.StateGraph.Step confirmToBottom(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-70,-118},{-50,-98}})));
   Modelica.StateGraph.Transition transition5(                  waitTime=0.1,
       enableTimer=true)
     annotation (Placement(transformation(extent={{-22,-118},{-2,-98}})));
   Modelica.StateGraph.StepWithSignal sendConfirmation1(
-                                                     nOut=1)
+                                                     nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{34,-118},{54,-98}})));
   Modelica.StateGraph.Transition transition6(                  waitTime=0.1,
       enableTimer=true)
@@ -176,7 +176,7 @@ model IntermediateAgent
   Modelica.Blocks.Logical.And and1
     annotation (Placement(transformation(extent={{-150,-300},{-130,-280}})));
   Modelica.StateGraph.Step shutDown(
-                                   nOut=2)
+                                   nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-80,-274},{-60,-254}})));
   Modelica.StateGraph.Transition transition9(                  waitTime=0.1,
       enableTimer=true)

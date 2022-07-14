@@ -13,7 +13,8 @@ FallingFactorial
 IntegerReplicator
 IntegratorWithReset
 InverseXRegularized
-Polynominal
+MovingAverage
+Polynomial
 PowerLinearized
 QuadraticLinear
 RegNonZeroPower
@@ -24,4 +25,3 @@ SmoothLimit
 SmoothMin
 Splice
 VectorFunctions
-MovingAverage

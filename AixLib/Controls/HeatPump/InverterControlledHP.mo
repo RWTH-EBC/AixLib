@@ -16,7 +16,7 @@ model InverterControlledHP
     annotation (Placement(transformation(extent={{20,40},{40,60}})));
   parameter Real k     "Gain of controller"
     annotation (Dialog(group="PI Values"));
-  parameter Modelica.SIunits.Time Ti    "Time constant of Integrator block"
+  parameter Modelica.Units.SI.Time Ti    "Time constant of Integrator block"
     annotation (Dialog(group="PI Values"));
 equation
   connect(TSet, onOffController.reference) annotation (Line(points={{-116,60},{

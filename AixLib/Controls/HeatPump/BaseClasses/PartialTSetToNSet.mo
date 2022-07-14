@@ -6,10 +6,10 @@ partial model PartialTSetToNSet
 
   // Heating limit temperature
   parameter Boolean use_heaLim=true "=false to disable moving average heating limit" annotation (Dialog(group="Heating limit temperature"));
-  parameter Modelica.SIunits.Temperature T_heaLim=293.15
+  parameter Modelica.Units.SI.Temperature T_heaLim=293.15
     "Heating limit temperature. If the filtered outdoor air temperature surpasses this threshold, the device will be shut down" annotation(Dialog(group=
           "Heating limit temperature", enable=use_heaLim));
-  parameter Modelica.SIunits.Time movAveTime=360
+  parameter Modelica.Units.SI.Time movAveTime=360
     "Time span for building the average of the outdoor air temperature. Used for heating limit temperature" annotation (Dialog(group=
           "Heating limit temperature", enable=use_heaLim));
 

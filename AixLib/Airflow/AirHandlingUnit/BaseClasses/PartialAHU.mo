@@ -47,16 +47,17 @@ partial model PartialAHU "Defines necessary parameters and connectors"
     (in case that a HRS is physically installed in the AHU)"
     annotation (Dialog(group="Settings AHU Value", enable=HRS));
   // assumed increase in ventilator pressure
-  parameter Modelica.SIunits.Pressure dp_sup=800
+  parameter Modelica.Units.SI.Pressure dp_sup=800
     "pressure difference over supply fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
-  parameter Modelica.SIunits.Pressure dp_eta=800
+  parameter Modelica.Units.SI.Pressure dp_eta=800
     "pressure difference over extract fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
   // assumed efficiencies of the ventilators
-  parameter Modelica.SIunits.Efficiency eta_sup=0.7 "efficiency of supply fan"
+  parameter Modelica.Units.SI.Efficiency eta_sup=0.7 "efficiency of supply fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
-  parameter Modelica.SIunits.Efficiency eta_eta=0.7 "efficiency of extract fan"
+  parameter Modelica.Units.SI.Efficiency eta_eta=0.7
+    "efficiency of extract fan"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
 
   Modelica.Blocks.Interfaces.RealInput Vflow_in(unit="m3/s") "m3/s"
@@ -147,8 +148,8 @@ partial model PartialAHU "Defines necessary parameters and connectors"
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,-4})));
-  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s") if
-   use_Vflow_in_extractAir "Volume flow of extract air"
+  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s")
+if use_Vflow_in_extractAir "Volume flow of extract air"
     annotation (Placement(transformation(extent={{114,80},{86,108}}),
         iconTransformation(extent={{88,32},{80,40}})));
 protected

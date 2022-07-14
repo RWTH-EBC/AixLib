@@ -1,28 +1,28 @@
 within AixLib.Fluid.Geothermal.Borefields.Data.Filling;
- record Template
-   "Template for filling data records"
-   extends Modelica.Icons.Record;
-   parameter Modelica.SIunits.ThermalConductivity kFil
-     "Thermal conductivity of the borehole filling material";
-   parameter Modelica.SIunits.SpecificHeatCapacity cFil
-     "Specific heat capacity of the borehole filling material";
-   parameter Modelica.SIunits.Density dFil(displayUnit="kg/m3")
-     "Density of the borehole filling material";
-   parameter Boolean steadyState = (cFil < Modelica.Constants.eps or dFil < Modelica.Constants.eps)
-     "Flag, if true, then material is computed using steady-state heat conduction"
-     annotation(Evaluate=true);
-   final parameter Modelica.SIunits.ThermalDiffusivity aFil = kFil/(dFil*cFil)
-     "Heat diffusion coefficient of the borehole filling material";
-   annotation (
-   defaultComponentPrefixes="parameter",
-   defaultComponentName="filDat",
- Documentation(
- info="<html>
+record Template
+  "Template for filling data records"
+  extends Modelica.Icons.Record;
+  parameter Modelica.Units.SI.ThermalConductivity kFil
+    "Thermal conductivity of the borehole filling material";
+  parameter Modelica.Units.SI.SpecificHeatCapacity cFil
+    "Specific heat capacity of the borehole filling material";
+  parameter Modelica.Units.SI.Density dFil(displayUnit="kg/m3")
+    "Density of the borehole filling material";
+  parameter Boolean steadyState = (cFil < Modelica.Constants.eps or dFil < Modelica.Constants.eps)
+    "Flag, if true, then material is computed using steady-state heat conduction"
+    annotation(Evaluate=true);
+  final parameter Modelica.Units.SI.ThermalDiffusivity aFil=kFil/(dFil*cFil)
+    "Heat diffusion coefficient of the borehole filling material";
+  annotation (
+  defaultComponentPrefixes="parameter",
+  defaultComponentName="filDat",
+Documentation(
+info="<html>
  <p>This record is a template for the records in
  <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.Data.Filling\">
  AixLib.Fluid.Geothermal.Borefields.Data.Filling</a>.</p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  July 15, 2018, by Michael Wetter:<br/>
@@ -35,6 +35,6 @@ within AixLib.Fluid.Geothermal.Borefields.Data.Filling;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end Template;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Template;

@@ -3,19 +3,52 @@ model Radiators
   //Pipe lengths
  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
-  parameter Modelica.SIunits.Length Length_thSt = 2.5 "L1" annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_thBath = 2.5 "L2  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_thChildren1 = 2.3 "L3  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_thChildren2 = 1.5 "L4  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true));
-  parameter Modelica.SIunits.Length Length_toKi = 2.5 "l5" annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toBath = 2 "l4  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toChildren = 0.5 "l3  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toBedroom = 4.0 "l2  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toLi = 7 "l1  " annotation(Dialog(group = "Pipe lengths", groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/GroundFloor_Hydraulics.png", descriptionLabel = true));
+  parameter Modelica.Units.SI.Length Length_thSt=2.5 "L1" annotation (Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_thBath=2.5 "L2  " annotation (
+      Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_thChildren1=2.3 "L3  " annotation (
+      Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_thChildren2=1.5 "L4  "
+    annotation (Dialog(group="Pipe lengths", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length Length_toKi=2.5 "l5" annotation (Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_toBath=2 "l4  " annotation (Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_toChildren=0.5 "l3  " annotation (
+      Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_toBedroom=4.0 "l2  " annotation (
+      Dialog(
+      group="Pipe lengths",
+      descriptionLabel=true,
+      joinNext=true));
+  parameter Modelica.Units.SI.Length Length_toLi=7 "l1  " annotation (Dialog(
+      group="Pipe lengths",
+      groupImage=
+          "modelica://AixLib/Resources/Images/Building/HighOrder/GroundFloor_Hydraulics.png",
+
+      descriptionLabel=true));
   //Pipe diameters
-  parameter Modelica.SIunits.Diameter Diam_Main = 0.016 "Diameter main pipe" annotation(Dialog(group = "Pipe diameters", descriptionLabel = true));
-  parameter Modelica.SIunits.Diameter Diam_Sec = 0.013
-    "Diameter secondary pipe  "                                                    annotation(Dialog(group = "Pipe diameters", descriptionLabel = true));
+  parameter Modelica.Units.SI.Diameter Diam_Main=0.016 "Diameter main pipe"
+    annotation (Dialog(group="Pipe diameters", descriptionLabel=true));
+  parameter Modelica.Units.SI.Diameter Diam_Sec=0.013
+    "Diameter secondary pipe  "
+    annotation (Dialog(group="Pipe diameters", descriptionLabel=true));
   //Hydraulic resistance
   parameter Real zeta_lateral = 2.5 "zeta lateral" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true, joinNext = true));
   parameter Real zeta_through = 0.6 "zeta through" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true));

@@ -1,12 +1,12 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+﻿within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
 partial model PartialDuctHeatTransfer
   "partial model for rectangular duct heat transfer models"
   extends PartialFlowHeatTransfer;
 
   parameter Integer nWidth(min=1) "number of parallel segments in width direction";
 
-  parameter Modelica.SIunits.Length[n] heights "height of duct";
-  parameter Modelica.SIunits.Length[n] widths "width of duct";
+  parameter Modelica.Units.SI.Length[n] heights "height of duct";
+  parameter Modelica.Units.SI.Length[n] widths "width of duct";
 
   Real[n] aspRats "aspect ratio between duct height and width";
   parameter Boolean uniWalTem
@@ -16,16 +16,17 @@ partial model PartialDuctHeatTransfer
   parameter Boolean recDuct
     "true if rectangular duct is used for Sherwood number calculation, else flat gap is used.";
 
-  Modelica.SIunits.CoefficientOfHeatTransfer[n] hCons;
+  Modelica.Units.SI.CoefficientOfHeatTransfer[n] hCons;
 
   // Variables
-  Modelica.SIunits.ThermalConductivity[n] lambdas "thermal conductivity of medium";
-  Modelica.SIunits.Density[n] rhos "density of medium";
-  Modelica.SIunits.DynamicViscosity[n] mus "dynamic viscosity of medium";
+  Modelica.Units.SI.ThermalConductivity[n] lambdas
+    "thermal conductivity of medium";
+  Modelica.Units.SI.Density[n] rhos "density of medium";
+  Modelica.Units.SI.DynamicViscosity[n] mus "dynamic viscosity of medium";
   Real[n] Prs "Prandtl number";
   Real[n] Res "Reynolds number";
   Real[n] Nus "Nusselt number";
-  Modelica.SIunits.Area[n] croSecs "cross section of duct";
+  Modelica.Units.SI.Area[n] croSecs "cross section of duct";
   Real[n] zSterns "dimensionless length";
 
 equation

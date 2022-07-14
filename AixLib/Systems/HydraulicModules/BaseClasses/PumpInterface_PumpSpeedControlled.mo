@@ -1,4 +1,4 @@
-within AixLib.Systems.HydraulicModules.BaseClasses;
+﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 model PumpInterface_PumpSpeedControlled
   "Speed controlled polynomial based pump with controller"
   extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;
@@ -10,7 +10,7 @@ model PumpInterface_PumpSpeedControlled
     annotation (Dialog(tab="Initialization", group="Pressure"));
 
 
-  parameter Modelica.SIunits.Volume V=0 "Volume inside the pump"
+  parameter Modelica.Units.SI.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   // Power and Efficiency
   parameter Boolean calculatePower=false "calc. power consumption?"

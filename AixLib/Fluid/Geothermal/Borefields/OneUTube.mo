@@ -1,12 +1,12 @@
 within AixLib.Fluid.Geothermal.Borefields;
- model OneUTube
-   "Borefield model containing single U-tube boreholes"
-   extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield(
-     redeclare AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube borHol);
- 
-   annotation (
-   defaultComponentName="borFie",
-   Documentation(info="<html>
+model OneUTube
+  "Borefield model containing single U-tube boreholes"
+  extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.PartialBorefield(
+    redeclare AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube borHol);
+
+  annotation (
+  defaultComponentName="borFie",
+  Documentation(info="<html>
  <p>
  This model simulates a borefield containing one or many single U-tube boreholes
  using the parameters in the <code>borFieDat</code> record.
@@ -19,7 +19,7 @@ within AixLib.Fluid.Geothermal.Borefields;
  network for the internal thermal resistances between the individual pipes and
  between each pipe and the borehole wall.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  July 2018, by Alex Laferri&egrave;re:<br/>
@@ -31,6 +31,6 @@ within AixLib.Fluid.Geothermal.Borefields;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end OneUTube;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end OneUTube;

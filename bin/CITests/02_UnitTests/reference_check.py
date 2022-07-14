@@ -70,14 +70,14 @@ class Reg_Reference(object):
                     ref_list.append(ref_file)
         return ref_list
 
-    def _delte_ref_file(self, ref_list):
+    def _delte_ref_file(self, ref_list):  # delete reference files
         ref_dir = f'{self.library}{os.sep}{self.ref_file_path}'
         for ref in ref_list:
-            print(f'Update reference file {ref_dir}{os.sep}{ref}\n')
-            if os.path.exists(f'..{os.sep}{ref_dir}{os.sep}{ref}'):
+            print(f'Update reference file: {ref_dir}{os.sep}{ref}\n')
+            if os.path.exists(f'..{os.sep}{ref_dir}{os.sep}{ref}') is True:
                 os.remove(f'..{os.sep}{ref_dir}{os.sep}{ref}')
             else:
-                print(f'File ..{os.sep}{ref_dir}{os.sep}{ref} does not exist\n')
+                print(f'File {ref_dir}{os.sep}{ref} does not exist\n')
 
     def _get_ref_package(self):  # reproduces packages in which reference results are missing
         mos_list = Reg_Reference._compare_ref_mos(self)
@@ -134,6 +134,7 @@ class Reg_Reference(object):
             package_list.remove(err)
         return package_list
 
+
     def _create_reference_results(self):  # creates reference files that do not yet exist
         self.ut.batchMode(False)
         self.ut.setLibraryRoot(self.path)
@@ -170,17 +171,22 @@ class Reg_Reference(object):
     def _get_update_package(self, ref_list):
         ref_package_list = []
         for ref in ref_list:
-            ref_package_list.append(ref[:ref.rfind("_")].replace("_","."))
+            if ref.rfind("Validation") > -1:
+                ref_package_list.append(ref[:ref.rfind("_Validation")+11].replace("_","."))
+            elif ref.rfind("Examples") > -1:
+                ref_package_list.append(ref[:ref.rfind("_Examples")+9].replace("_", "."))
+
+        ref_package_list = list(set(ref_package_list))
         return ref_package_list
 
     def _get_update_ref(self):  # get a model to update
-        file = open(".."+os.sep+self.update_ref_file, "r")
+        file = open(f'..{os.sep}{self.update_ref_file}', "r")
         lines = file.readlines()
         ref_list = []
         for line in lines:
             if len(line) == 0:
                 continue
-            else:
+            elif line.find(".txt") > -1:
                 ref_list.append(line.strip())
         file.close()
         if len(ref_list) == 0:
@@ -581,6 +587,7 @@ if __name__ == '__main__':
         ref_check._delte_ref_file(ref_list)
         package_list = ref_check._get_update_package(ref_list)
         for package in package_list:
+            print(package)
             ret_val = ref_check._update_ref(package)
         exit(0)
     else:

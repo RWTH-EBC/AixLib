@@ -11,20 +11,20 @@ partial model PartialEfficiency
 
   // Definition of inputs
   //
-  input Modelica.SIunits.Efficiency epsRef(min=0, max=1, nominal=0.05)
-    "Ratio of the real and the ideal displacement volume";
-  input Modelica.SIunits.Volume VDis(min=0)
-    "Displacement volume";
+  input Modelica.Units.SI.Efficiency epsRef(
+    min=0,
+    max=1,
+    nominal=0.05) "Ratio of the real and the ideal displacement volume";
+  input Modelica.Units.SI.Volume VDis(min=0) "Displacement volume";
   input Real piPre(min=0, unit="1")
     "Ratio of compressor's outlet and inlet pressure";
-  input Modelica.SIunits.Frequency rotSpe(min=0)
+  input Modelica.Units.SI.Frequency rotSpe(min=0)
     "Compressor's current rotational speed";
   input Medium.ThermodynamicState staInl
     "Thermodynamic state at compressor's inlet";
   input Medium.ThermodynamicState staOut
     "Thermodynamic state at compressor's outlet";
-  input Modelica.SIunits.Temperature TAmb
-    "Ambient temperature";
+  input Modelica.Units.SI.Temperature TAmb "Ambient temperature";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false),
               graphics={

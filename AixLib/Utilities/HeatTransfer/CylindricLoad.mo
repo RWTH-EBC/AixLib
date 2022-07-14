@@ -5,15 +5,16 @@ class CylindricLoad "Model for a cylindric heat capacity"
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
-  parameter Modelica.SIunits.Density rho=1600 "Density of material";
-  parameter Modelica.SIunits.SpecificHeatCapacity c=1000
+  parameter Modelica.Units.SI.Density rho=1600 "Density of material";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c=1000
     "Specific heat capacity of material";
-  parameter Modelica.SIunits.Length d_out(min=0) "outer diameter of pipe";
-  parameter Modelica.SIunits.Length d_in(min=0) "inner diameter of pipe";
-  parameter Modelica.SIunits.Length length(min=0) " Length of pipe";
-  parameter Modelica.SIunits.Temperature T0=289.15 "initial temperature";
+  parameter Modelica.Units.SI.Length d_out(min=0) "outer diameter of pipe";
+  parameter Modelica.Units.SI.Length d_in(min=0) "inner diameter of pipe";
+  parameter Modelica.Units.SI.Length length(min=0) " Length of pipe";
+  parameter Modelica.Units.SI.Temperature T0=289.15 "initial temperature";
   parameter Integer nParallel = 1 "Number of identical parallel pipes";
-  final parameter Modelica.SIunits.Mass m = nParallel*rho*length*Modelica.Constants.pi*(d_out*d_out - d_in*d_in)/4 "Mass of material";
+  final parameter Modelica.Units.SI.Mass m=nParallel*rho*length*Modelica.Constants.pi
+      *(d_out*d_out - d_in*d_in)/4 "Mass of material";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port
     annotation (Placement(transformation(extent={{-12,-18},{8,2}}, rotation=0)));

@@ -1,4 +1,4 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
 model Poly_R407C_Unknown_Scroll
   "Scroll Compressor - R407C - Unknown displacement volume - Polynomial"
   extends PolynomialVolumetricEfficiency(
