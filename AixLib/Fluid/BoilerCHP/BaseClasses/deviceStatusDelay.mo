@@ -63,13 +63,19 @@ equation
           {-100,-44},{-66,-44}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>When the input signal exceeds the given <code>thresholdInput</code> value the output will be hold on true independent from the input value and the timer starts counting. After the moment when <code>thresholdTimer</code> is exceeded the output signal can switch to false but will stay true until the input value is greater the <code>thresholdInput</code> value.</p>
+    Documentation(info="<html><p>
+  When the input signal exceeds the given <code>thresholdInput</code>
+  value the output will be hold on true independent from the input
+  value and the timer starts counting. After the moment when
+  <code>thresholdTimer</code> is exceeded the output signal can switch
+  to false but will stay true until the input value is greater the
+  <code>thresholdInput</code> value.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-October 10, 2019, by David Jansen:<br/>
-Implemented model
+  <li>October 10, 2019, by David Jansen:<br/>
+    Implemented model
+  </li>
 </ul>
 </html>"));
 end deviceStatusDelay;

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
+within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model InternalControl "Internal control model for boiler"
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition

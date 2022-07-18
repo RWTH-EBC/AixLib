@@ -150,11 +150,15 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Control")}), Diagram(coordinateSystem(preserveAspectRatio=
            false)),
-    Documentation(info="<html>
-<p>Simple controller for TABS. The temperature of the water that flows into the concrete is controlled.</p>
+    Documentation(info="<html><p>
+  Simple controller for TABS. The temperature of the water that flows
+  into the concrete is controlled.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>December 09, 2021, by Alexander K&uuml;mpel:<br>First implementation.</li>
+  <li>December 09, 2021, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end CtrTabs;

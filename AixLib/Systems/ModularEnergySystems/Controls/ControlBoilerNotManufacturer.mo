@@ -137,7 +137,9 @@ equation
           fillPattern=FillPattern.Solid,
           fillColor={255,255,255})}),                            Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Boiler control unit, which estimates the relative water mass flow and chooses the right water temperature difference.</p>
+    Documentation(info="<html><p>
+  Boiler control unit, which estimates the relative water mass flow and
+  chooses the right water temperature difference.
+</p>
 </html>"));
 end ControlBoilerNotManufacturer;

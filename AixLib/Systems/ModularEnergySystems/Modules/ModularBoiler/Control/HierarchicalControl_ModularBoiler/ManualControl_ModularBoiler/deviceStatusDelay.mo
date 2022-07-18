@@ -123,14 +123,26 @@ equation
           -56},{-96,-80},{-92,-80}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>The model makes sure that an on signal is only passed through if the device was on for a given time <span style=\"font-family: Courier New;\">thresholdTimer</span> asdf</p>
-<p><br>When the input signal is set to true the given <span style=\"font-family: Courier New;\">thresholdTimer</span>  starts counting. After the moment when <span style=\"font-family: Courier New;\">thresholdTimer</span> is exceeded the output signal can switch to false but will stay true until the input value is set to false again. Then again the timer start to count and the output won&apos;t change to true until the timer is finished again.</p>
+    Documentation(info="<html><p>
+  The model makes sure that an on signal is only passed through if the
+  device was on for a given time <span style=
+  \"font-family: Courier New;\">thresholdTimer</span> asdf
+</p>
+<p>
+  <br/>
+  When the input signal is set to true the given <span style=
+  \"font-family: Courier New;\">thresholdTimer</span> starts counting.
+  After the moment when <span style=
+  \"font-family: Courier New;\">thresholdTimer</span> is exceeded the
+  output signal can switch to false but will stay true until the input
+  value is set to false again. Then again the timer start to count and
+  the output won't change to true until the timer is finished again.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-October 10, 2019, by David Jansen:<br/>
-Implemented model
+  <li>October 10, 2019, by David Jansen:<br/>
+    Implemented model
+  </li>
 </ul>
 </html>"));
 end deviceStatusDelay;

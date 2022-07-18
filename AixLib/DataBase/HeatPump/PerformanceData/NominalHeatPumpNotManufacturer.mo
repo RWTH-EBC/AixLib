@@ -124,7 +124,9 @@ equation
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Auslegung des Betriebspunktes indem die maximale elektrische Leistung vorliegt</p>
+    Documentation(info="<html><p>
+  Auslegung des Betriebspunktes indem die maximale elektrische Leistung
+  vorliegt
+</p>
 </html>"));
 end NominalHeatPumpNotManufacturer;

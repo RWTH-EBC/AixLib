@@ -196,12 +196,21 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={192,192,192})}),                            Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>A boiler model consisting of physical components. The user has the choice to run the model for three different setpoint options:</p>
+    Documentation(info="<html><p>
+  A boiler model consisting of physical components. The user has the
+  choice to run the model for three different setpoint options:
+</p>
 <ol>
-<li>Setpoint depends on part load ratio (water mass flow=dimension water mass flow; advanced=false &amp; m_flowVar=false)</li>
-<li>Setpoint depends on part load ratio and a constant water temperature difference which is idependent from part load ratio (water mass flow is variable; advanced=false &amp; m_flowVar=true)</li>
-<li>Setpoint depends on part load ratio an a variable water temperature difference (water mass flow is variable; advanced=true)</li>
+  <li>Setpoint depends on part load ratio (water mass flow=dimension
+  water mass flow; advanced=false & m_flowVar=false)
+  </li>
+  <li>Setpoint depends on part load ratio and a constant water
+  temperature difference which is idependent from part load ratio
+  (water mass flow is variable; advanced=false & m_flowVar=true)
+  </li>
+  <li>Setpoint depends on part load ratio an a variable water
+  temperature difference (water mass flow is variable; advanced=true)
+  </li>
 </ol>
 </html>"),
     experiment(StopTime=10));
