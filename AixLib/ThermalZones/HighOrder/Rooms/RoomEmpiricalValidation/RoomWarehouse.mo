@@ -17,11 +17,11 @@ model RoomWarehouse "Room model of Warehouse for Empirical validation"
     roofRoomUpFloor=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition()),
       final room_V=0.7*room_length*room_width*room_height);
 
-  parameter Modelica.SIunits.Length room_length=72 "length"
+  parameter Modelica.Units.SI.Length room_length=72 "length"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=22 "height"
+  parameter Modelica.Units.SI.Height room_height=22 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width=22 "width"
+  parameter Modelica.Units.SI.Length room_width=22 "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   Components.Walls.Wall wallWest(
     final energyDynamics=energyDynamicsWalls,

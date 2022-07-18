@@ -1,22 +1,22 @@
 within AixLib.Fluid.Delays;
- model DelayFirstOrder
-   "Delay element, approximated by a first order differential equation"
-   extends AixLib.Fluid.MixingVolumes.MixingVolume(final V=V_nominal,
-                                                  final mSenFac=1);
- 
-   parameter Modelica.SIunits.Time tau = 60 "Time constant at nominal flow"
-     annotation (Dialog(tab="Dynamics", group="Nominal condition"));
- 
- protected
-    parameter Modelica.SIunits.Volume V_nominal = m_flow_nominal*tau/rho_default
-     "Volume of delay element";
-   annotation (    Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
-             100}}), graphics={      Text(
-           extent={{-70,-26},{70,-66}},
-           lineColor={255,255,255},
-           textString="tau=%tau")}),
- defaultComponentName="del",
-     Documentation(info="<html>
+model DelayFirstOrder
+  "Delay element, approximated by a first order differential equation"
+  extends AixLib.Fluid.MixingVolumes.MixingVolume(final V=V_nominal,
+                                                 final mSenFac=1);
+
+  parameter Modelica.SIunits.Time tau = 60 "Time constant at nominal flow"
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
+
+protected
+   parameter Modelica.SIunits.Volume V_nominal = m_flow_nominal*tau/rho_default
+    "Volume of delay element";
+  annotation (    Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
+            100}}), graphics={      Text(
+          extent={{-70,-26},{70,-66}},
+          lineColor={255,255,255},
+          textString="tau=%tau")}),
+defaultComponentName="del",
+    Documentation(info="<html>
  <p>
  This model approximates a transport delay using a first order differential equations.
  </p>
@@ -30,7 +30,7 @@ within AixLib.Fluid.Delays;
  The heat flux connector is optional, it need not be connnected.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  September 14, 2013, by Michael Wetter:<br/>
@@ -52,6 +52,6 @@ within AixLib.Fluid.Delays;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end DelayFirstOrder;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end DelayFirstOrder;

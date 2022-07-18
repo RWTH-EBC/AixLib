@@ -1,87 +1,87 @@
 within AixLib.Fluid.Sources;
- model TraceSubstancesFlowSource
-   "Source with mass flow that does not take part in medium mass balance (such as CO2)"
- 
-   replaceable package Medium =
-     AixLib.Media.Air(extraPropertiesNames={"CO2"}) "Medium in the component"
-       annotation (choices(
-         choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-         choice(redeclare package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"}) "Moist air with CO2")));
- 
-   parameter Integer nPorts=0 "Number of ports" annotation(Dialog(connectorSizing=true));
- 
-   parameter String substanceName = "CO2" "Name of trace substance";
-   parameter Boolean use_m_flow_in = false
-     "Get the trace substance mass flow rate from the input connector"
-     annotation(Evaluate=true, HideResult=true);
- 
-   parameter Modelica.SIunits.MassFlowRate m_flow = 0
-     "Fixed mass flow rate going out of the fluid port"
-     annotation (Dialog(enable = not use_m_flow_in));
-   Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s") if
-        use_m_flow_in "Prescribed mass flow rate for extra property"
-     annotation (Placement(transformation(extent={{-141,-20},{-101,20}})));
- 
-   Modelica.Fluid.Interfaces.FluidPorts_b ports[nPorts](
-     redeclare each package Medium = Medium)
-     "Connector for fluid ports"
-     annotation (Placement(transformation(extent={{90,40},{110,-40}})));
- 
- protected
-   parameter Medium.ExtraProperty C_in_internal[Medium.nC](
-     final quantity=Medium.extraPropertiesNames)=
-      {if (Modelica.Utilities.Strings.isEqual(string1=Medium.extraPropertiesNames[i],
-                                              string2=substanceName,
-                                              caseSensitive=false)) then 1 else 0
-                                              for i in 1:Medium.nC}
-      "Boundary trace substances"
-      annotation(Evaluate=true);
-   Modelica.Blocks.Interfaces.RealInput m_flow_in_internal(final unit="kg/s")
-     "Needed to connect to conditional connector";
- 
-   Modelica.SIunits.SpecificEnthalpy h_default=
-     Medium.specificEnthalpy(Medium.setState_pTX(
-       Medium.p_default,
-       Medium.T_default,
-       Medium.X_default))
-       "Enthalpy of outstreaming medium";
- 
- initial equation
-   assert(sum(C_in_internal) > 1E-4, "Trace substance '" + substanceName + "' is not present in medium '"
-          + Medium.mediumName + "'.\n"
-          + "Check source parameter and medium model.");
- 
-   // Only one connection allowed to a port to avoid unwanted ideal mixing
-   for i in 1:nPorts loop
-     assert(cardinality(ports[i]) <= 1,"
+model TraceSubstancesFlowSource
+  "Source with mass flow that does not take part in medium mass balance (such as CO2)"
+
+  replaceable package Medium =
+    AixLib.Media.Air(extraPropertiesNames={"CO2"}) "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"}) "Moist air with CO2")));
+
+  parameter Integer nPorts=0 "Number of ports" annotation(Dialog(connectorSizing=true));
+
+  parameter String substanceName = "CO2" "Name of trace substance";
+  parameter Boolean use_m_flow_in = false
+    "Get the trace substance mass flow rate from the input connector"
+    annotation(Evaluate=true, HideResult=true);
+
+  parameter Modelica.SIunits.MassFlowRate m_flow = 0
+    "Fixed mass flow rate going out of the fluid port"
+    annotation (Dialog(enable = not use_m_flow_in));
+  Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s")
+    if use_m_flow_in "Prescribed mass flow rate for extra property"
+    annotation (Placement(transformation(extent={{-141,-20},{-101,20}})));
+
+  Modelica.Fluid.Interfaces.FluidPorts_b ports[nPorts](
+    redeclare each package Medium = Medium)
+    "Connector for fluid ports"
+    annotation (Placement(transformation(extent={{90,40},{110,-40}})));
+
+protected
+  parameter Medium.ExtraProperty C_in_internal[Medium.nC](
+    final quantity=Medium.extraPropertiesNames)=
+     {if (Modelica.Utilities.Strings.isEqual(string1=Medium.extraPropertiesNames[i],
+                                             string2=substanceName,
+                                             caseSensitive=false)) then 1 else 0
+                                             for i in 1:Medium.nC}
+     "Boundary trace substances"
+     annotation(Evaluate=true);
+  Modelica.Blocks.Interfaces.RealInput m_flow_in_internal(final unit="kg/s")
+    "Needed to connect to conditional connector";
+
+  Modelica.SIunits.SpecificEnthalpy h_default=
+    Medium.specificEnthalpy(Medium.setState_pTX(
+      Medium.p_default,
+      Medium.T_default,
+      Medium.X_default))
+      "Enthalpy of outstreaming medium";
+
+initial equation
+  assert(sum(C_in_internal) > 1E-4, "Trace substance '" + substanceName + "' is not present in medium '"
+         + Medium.mediumName + "'.\n"
+         + "Check source parameter and medium model.");
+
+  // Only one connection allowed to a port to avoid unwanted ideal mixing
+  for i in 1:nPorts loop
+    assert(cardinality(ports[i]) <= 1,"
  Each ports[i] of boundary shall at most be connected to one component.
  If two or more connections are present, ideal mixing takes
  place in these connections, which is usually not the intention
  of the modeller. Increase nPorts to add an additional port.
  ");
-   end for;
- 
- equation
-   sum(ports.m_flow) = -m_flow_in_internal;
- 
-   connect(m_flow_in, m_flow_in_internal);
-   if not use_m_flow_in then
-     m_flow_in_internal = m_flow;
-   end if;
- 
-   assert(m_flow_in_internal >= 0, "Reverse flow for species source is not yet implemented.");
- 
-   for i in 2:nPorts loop
-     ports[1].p = ports[i].p;
-   end for;
- 
-   ports.C_outflow = fill(C_in_internal, nPorts);
-   ports.h_outflow = fill(h_default, nPorts);
-   ports.Xi_outflow = fill(Medium.X_default[1:Medium.nXi], nPorts);
- 
-   annotation (
- defaultComponentName="souTraSub",
- Documentation(info="<html>
+  end for;
+
+equation
+  sum(ports.m_flow) = -m_flow_in_internal;
+
+  connect(m_flow_in, m_flow_in_internal);
+  if not use_m_flow_in then
+    m_flow_in_internal = m_flow;
+  end if;
+
+  assert(m_flow_in_internal >= 0, "Reverse flow for species source is not yet implemented.");
+
+  for i in 2:nPorts loop
+    ports[1].p = ports[i].p;
+  end for;
+
+  ports.C_outflow = fill(C_in_internal, nPorts);
+  ports.h_outflow = fill(h_default, nPorts);
+  ports.Xi_outflow = fill(Medium.X_default[1:Medium.nXi], nPorts);
+
+  annotation (
+defaultComponentName="souTraSub",
+Documentation(info="<html>
  <p>
  This model can be used to inject trace substances into a system.
  The model adds a mass flow rate to its port with a
@@ -103,7 +103,7 @@ within AixLib.Fluid.Sources;
  allow to directly add a trace substance mass flow rate,
  which is more efficient than using this model.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  November 14, 2019, by Michael Wetter:<br/>
@@ -159,55 +159,55 @@ within AixLib.Fluid.Sources;
  First implementation.
  </li>
  </ul>
- </html>"),                       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-             -100},{100,100}}), graphics={
-         Rectangle(
-           extent={{20,60},{100,-60}},
-           lineColor={0,0,0},
-           fillPattern=FillPattern.HorizontalCylinder,
-           fillColor={192,192,192}),
-         Rectangle(
-           extent={{38,40},{100,-40}},
-           lineColor={0,0,0},
-           fillPattern=FillPattern.HorizontalCylinder,
-           fillColor={0,127,255}),
-         Ellipse(
-           extent={{-100,80},{60,-80}},
-           lineColor={0,0,0},
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid),
-         Polygon(
-           points={{-60,70},{60,0},{-60,-68},{-60,70}},
-           lineColor={0,0,0},
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Text(
-           extent={{-54,32},{16,-30}},
-           lineColor={255,0,0},
-           fillColor={255,0,0},
-           fillPattern=FillPattern.Solid,
-           textString="m"),
-         Ellipse(
-           extent={{-26,30},{-18,22}},
-           lineColor={255,0,0},
-           fillColor={255,0,0},
-           fillPattern=FillPattern.Solid),
-         Text(
-           extent={{-212,62},{-72,30}},
-           lineColor={0,0,0},
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid,
-           visible=use_m_flow_in,
-           textString="m_flow"),
-         Text(
-           extent={{-100,14},{-60,-20}},
-           lineColor={0,0,0},
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid,
-           textString="C"),
-         Text(
-           extent={{-150,110},{150,150}},
-           textString="%name",
-           lineColor={0,0,255})}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end TraceSubstancesFlowSource;
+ </html>"),                      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,100}}), graphics={
+        Rectangle(
+          extent={{20,60},{100,-60}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={192,192,192}),
+        Rectangle(
+          extent={{38,40},{100,-40}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={0,127,255}),
+        Ellipse(
+          extent={{-100,80},{60,-80}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-60,70},{60,0},{-60,-68},{-60,70}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-54,32},{16,-30}},
+          lineColor={255,0,0},
+          fillColor={255,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="m"),
+        Ellipse(
+          extent={{-26,30},{-18,22}},
+          lineColor={255,0,0},
+          fillColor={255,0,0},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-212,62},{-72,30}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          visible=use_m_flow_in,
+          textString="m_flow"),
+        Text(
+          extent={{-100,14},{-60,-20}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="C"),
+        Text(
+          extent={{-150,110},{150,150}},
+          textString="%name",
+          lineColor={0,0,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end TraceSubstancesFlowSource;

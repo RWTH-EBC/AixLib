@@ -4,7 +4,8 @@ partial model PartialRoom "Partial model with base component that are necessary 
   extends PartialRoomParams;
 
   // Air volume of room
-  parameter Modelica.SIunits.Volume room_V annotation (Dialog(group="Air volume of room"));
+  parameter Modelica.Units.SI.Volume room_V
+    annotation (Dialog(group="Air volume of room"));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation (
       Placement(transformation(extent={{-20,12},{0,32}}),   iconTransformation(

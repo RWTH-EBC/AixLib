@@ -14,32 +14,43 @@ model TABSCircuit "One Circuit in an Underfloor Heating System"
       choice=1 "Calculate water volume with inner diameter",
       choice=2 "Calculate water volume with time constant",
       radioButtons=true));
-  parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
-  parameter Modelica.SIunits.ThermalResistance R_Pipe(min=Modelica.Constants.small) "Resistance of Pipe";
-  parameter Modelica.SIunits.Thickness d_i(min=Modelica.Constants.small) "Inner Diameters of pipe layers" annotation(Dialog(group = "Panel Heating"));
+  parameter Modelica.Units.SI.Area A "Floor Area"
+    annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.ThermalResistance R_Pipe(min=Modelica.Constants.small)
+    "Resistance of Pipe";
+  parameter Modelica.Units.SI.Thickness d_i(min=Modelica.Constants.small)
+    "Inner Diameters of pipe layers" annotation (Dialog(group="Panel Heating"));
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_Circuit "nominal mass flow rate" annotation (Dialog(group = "Panel Heating"));
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_nominal = m_flow_Circuit / rho_default "nominal volume flow rate";
-  parameter Modelica.SIunits.PressureDifference dp_Pipe=100*PipeLength
+  parameter Modelica.Units.SI.MassFlowRate m_flow_Circuit
+    "nominal mass flow rate" annotation (Dialog(group="Panel Heating"));
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_nominal=
+      m_flow_Circuit/rho_default "nominal volume flow rate";
+  parameter Modelica.Units.SI.PressureDifference dp_Pipe=100*PipeLength
     "Nominal pressure drop" annotation (Dialog(group="Pressure Drop"));
-  parameter Modelica.SIunits.PressureDifference dp_Valve = 0 "Pressure Difference set in regulating valve for pressure equalization in heating system" annotation (Dialog(group="Pressure Drop"));
-  parameter Modelica.SIunits.PressureDifference dpFixed_nominal = 0 "Nominal additional pressure drop e.g. for distributor" annotation (Dialog(group="Pressure Drop"));
+  parameter Modelica.Units.SI.PressureDifference dp_Valve=0
+    "Pressure Difference set in regulating valve for pressure equalization in heating system"
+    annotation (Dialog(group="Pressure Drop"));
+  parameter Modelica.Units.SI.PressureDifference dpFixed_nominal=0
+    "Nominal additional pressure drop e.g. for distributor"
+    annotation (Dialog(group="Pressure Drop"));
 
-  parameter Modelica.SIunits.Temperature T_Room=293.15        "Nominal Room Temperature" annotation (Dialog(group = "Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Room=293.15
+    "Nominal Room Temperature" annotation (Dialog(group="Room Specifications"));
 
-  parameter Modelica.SIunits.Distance Spacing "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
-  final parameter Modelica.SIunits.Length PipeLength = A / Spacing
+  parameter Modelica.Units.SI.Distance Spacing "Spacing between tubes"
+    annotation (Dialog(group="Panel Heating"));
+  final parameter Modelica.Units.SI.Length PipeLength=A/Spacing
     "Length of Panel Heating Pipe" annotation (Dialog(group="Panel Heating"));
 
   parameter Integer use_vmax(min = 1, max = 2) "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
-  final parameter Modelica.SIunits.Volume V_Water = sum(TABSElement.V_Water);
+  final parameter Modelica.Units.SI.Volume V_Water=sum(TABSElement.V_Water);
 
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 
 public

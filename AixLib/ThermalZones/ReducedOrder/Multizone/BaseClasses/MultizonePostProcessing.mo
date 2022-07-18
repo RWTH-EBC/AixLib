@@ -1,15 +1,14 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
+﻿within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 model MultizonePostProcessing
   "Calculates and outputs values of interest for multizone model"
-  parameter Modelica.SIunits.Volume VAir
-     "Indoor air volume of building";
+  parameter Modelica.Units.SI.Volume VAir "Indoor air volume of building";
   parameter Integer numZones(min=1)
     "Number of zones";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Setup for zones" annotation (choicesAllMatching=false);
-  parameter Modelica.SIunits.Pressure PAirConstant = 101325
-    "constant pressure of indoor air for rel. humidity calculation"  annotation (Dialog(
-    enable=calc_rel_humidity));
+  parameter Modelica.Units.SI.Pressure PAirConstant=101325
+    "constant pressure of indoor air for rel. humidity calculation"
+    annotation (Dialog(enable=calc_rel_humidity));
   parameter Boolean calc_rel_humidity "true to calculate rel. humidity";
   Modelica.Blocks.Math.Sum PHeaterSumCalc(nin=numZones)
     "Power consumed for heating with ideal heaters"
@@ -146,8 +145,8 @@ model MultizonePostProcessing
   Utilities.Psychrometrics.Phi_pTX calcPhi[numZones] if calc_rel_humidity
     "Calculates relative humdity"
     annotation (Placement(transformation(extent={{-22,32},{-2,52}})));
-  Modelica.Blocks.Sources.Constant constPressure[numZones](k=PAirConstant) if
-    calc_rel_humidity
+  Modelica.Blocks.Sources.Constant constPressure[numZones](k=PAirConstant)
+ if calc_rel_humidity
     annotation (Placement(transformation(extent={{-78,20},{-62,36}})));
   Modelica.Blocks.Interfaces.RealOutput TOperativeMean(
     final quantity="ThermodynamicTemperature",
@@ -155,8 +154,8 @@ model MultizonePostProcessing
     displayUnit="degC") "Average operative air temperature in building"
     annotation (Placement(transformation(extent={{100,68},{120,88}}),
         iconTransformation(extent={{100,68},{120,88}})));
-  Modelica.Blocks.Interfaces.RealOutput RelHumidityMean(final unit="1") if
-    calc_rel_humidity
+  Modelica.Blocks.Interfaces.RealOutput RelHumidityMean(final unit="1")
+ if calc_rel_humidity
     "Average relative humidity in building" annotation (Placement(
         transformation(extent={{100,50},{120,70}}), iconTransformation(extent={{100,50},
             {120,70}})));

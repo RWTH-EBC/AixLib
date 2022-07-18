@@ -8,16 +8,20 @@ model Pump
     "Head = f(V_flow) for minimal and maximal rotational speed"                                                                                                     annotation(choicesAllMatching = true);
   parameter Integer ControlStrategy = 1 "Control Strategy" annotation(Dialog(group = "Control strategy"), choices(choice = 1
         "dp-const",                                                                                                    choice = 2 "dp-var", radioButtons = true));
-  parameter Modelica.SIunits.Height Head_max = max(MinMaxCharacteristics.minMaxHead[:,3])
-    "Set head for the control strategy"                                              annotation(Dialog(group = "Control strategy"));
+  parameter Modelica.Units.SI.Height Head_max=max(MinMaxCharacteristics.minMaxHead[
+      :, 3]) "Set head for the control strategy"
+    annotation (Dialog(group="Control strategy"));
   parameter Real V_flow_max(unit="m3/h") = max(MinMaxCharacteristics.minMaxHead[:,1]) "Vmax in m3/h for the control strategy" annotation(Dialog(group = "Control strategy", enable = if ControlStrategy == 2 then true else false));
-  Modelica.SIunits.Height Head(start = 0, min = 0) "Pumping head";
+  Modelica.Units.SI.Height Head(start=0, min=0) "Pumping head";
   Modelica.Blocks.Tables.CombiTable1Ds table_minMaxCharacteristics(tableOnFile = false, columns = {2, 3}, table = MinMaxCharacteristics.minMaxHead)
     "Table with Head = f(V_flow) min amd max characteristics for the pump"                                                                                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.BooleanInput IsNight annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-2, 100}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, 102})));
 
-  parameter Modelica.SIunits.MassFlowRate m_flowsPump[:] = MinMaxCharacteristics.minMaxHead[:,1]./3600.*rho_default "Convert VFlow in m3/h to kg/s";
-  parameter Modelica.SIunits.PressureDifference dpsPump[:] = MinMaxCharacteristics.minMaxHead[:,3].*rho_default.*Modelica.Constants.g_n "Convert m of head to Pa";
+  parameter Modelica.Units.SI.MassFlowRate m_flowsPump[:]=MinMaxCharacteristics.minMaxHead[
+      :, 1] ./ 3600.*rho_default "Convert VFlow in m3/h to kg/s";
+  parameter Modelica.Units.SI.PressureDifference dpsPump[:]=
+      MinMaxCharacteristics.minMaxHead[:, 3] .* rho_default .* Modelica.Constants.g_n
+    "Convert m of head to Pa";
 
 protected
   final parameter Medium.ThermodynamicState state_default = Medium.setState_pTX(
@@ -25,8 +29,8 @@ protected
       p=Medium.p_default,
       X=Medium.X_default[1:Medium.nXi]) "Medium state at default values";
   // Density at medium default values, used to compute the size of control volumes
-  final parameter Modelica.SIunits.Density rho_default=Medium.density(
-    state=state_default) "Density, used to volume flow rate from mass flow rate";
+  final parameter Modelica.Units.SI.Density rho_default=Medium.density(state=
+      state_default) "Density, used to volume flow rate from mass flow rate";
 equation
   // Enthalpie flow
   port_a.h_outflow = inStream(port_b.h_outflow);

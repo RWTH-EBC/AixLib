@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelopeDiscretized;
 model GroundFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
@@ -8,92 +8,91 @@ model GroundFloorBuildingEnvelope
   parameter Integer dis = 1 "Discretisation layers for underfloor heating" annotation (Dialog(enable = use_UFH));
 
   //////////room geometry
-  parameter Modelica.SIunits.Length room_width=3.92
-    "width" annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=2.60 "height"
+  parameter Modelica.Units.SI.Length room_width=3.92 "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length1=3.3
-    "l1 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length2=2.44 "l2 "
+  parameter Modelica.Units.SI.Height room_height=2.60 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length3=1.33 "l3 "
+  parameter Modelica.Units.SI.Length length1=3.3 "l1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length4=3.3
-    "l4 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length thickness_IWsimple=0.145
+  parameter Modelica.Units.SI.Length length2=2.44 "l2 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length length3=1.33 "l3 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length length4=3.3 "l4 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length thickness_IWsimple=0.145
     "thickness IWsimple "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
   //Windows and Doors
-  parameter Modelica.SIunits.Area windowarea_11=8.44 " Area Window11"
+  parameter Modelica.Units.SI.Area windowarea_11=8.44 " Area Window11"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_12=1.73 " Area Window12  "
+  parameter Modelica.Units.SI.Area windowarea_12=1.73 " Area Window12  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_22=1.73 " Area Window22"
+  parameter Modelica.Units.SI.Area windowarea_22=1.73 " Area Window22"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_41=1.4 " Area Window41  "
+  parameter Modelica.Units.SI.Area windowarea_41=1.4 " Area Window41  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_51=3.46 " Area Window51"
+  parameter Modelica.Units.SI.Area windowarea_51=3.46 " Area Window51"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_52=1.73 " Area Window52  "
+  parameter Modelica.Units.SI.Area windowarea_52=1.73 " Area Window52  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Length door_width_31=1.01 "Width Door31"
+  parameter Modelica.Units.SI.Length door_width_31=1.01 "Width Door31"
     annotation (Dialog(
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true));
-  parameter Modelica.SIunits.Length door_height_31=2.25 "Height Door31  "
+  parameter Modelica.Units.SI.Length door_height_31=2.25 "Height Door31  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Length door_width_42=1.25 "Width Door42"
+  parameter Modelica.Units.SI.Length door_width_42=1.25 "Width Door42"
     annotation (Dialog(
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true));
-  parameter Modelica.SIunits.Length door_height_42=2.25 "Height Door42  "
+  parameter Modelica.Units.SI.Length door_height_42=2.25 "Height Door42  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors "U-value (thermal transmittance) of doors in outer walls" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
-  parameter Modelica.SIunits.Emissivity epsOutDoors(min=0, max=1)=0.95 "Emissivity of inside surface of outer doors" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UValOutDoors
+    "U-value (thermal transmittance) of doors in outer walls"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
+  parameter Modelica.Units.SI.Emissivity epsOutDoors(
+    min=0,
+    max=1) = 0.95 "Emissivity of inside surface of outer doors"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
 
   // Dynamic Ventilation
-  parameter Modelica.SIunits.Temperature Tset_Livingroom=295.15
+  parameter Modelica.Units.SI.Temperature Tset_Livingroom=295.15
     "Tset_livingroom" annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Hobby=295.15 "Tset_hobby"
+  parameter Modelica.Units.SI.Temperature Tset_Hobby=295.15 "Tset_hobby"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Corridor=291.15 "Tset_corridor"
+  parameter Modelica.Units.SI.Temperature Tset_Corridor=291.15 "Tset_corridor"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_WC=291.15 "Tset_WC" annotation (
+  parameter Modelica.Units.SI.Temperature Tset_WC=291.15 "Tset_WC" annotation (
       Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Kitchen=295.15 "Tset_kitchen"
+  parameter Modelica.Units.SI.Temperature Tset_Kitchen=295.15 "Tset_kitchen"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,

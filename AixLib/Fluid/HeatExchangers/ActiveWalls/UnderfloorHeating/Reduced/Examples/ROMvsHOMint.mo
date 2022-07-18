@@ -3,12 +3,12 @@ model ROMvsHOMint
   extends Modelica.Icons.Example;
   package MediumAir = AixLib.Media.Air;
   package MediumWater = AixLib.Media.Water;
-  parameter Modelica.SIunits.Area area=20;
+  parameter Modelica.Units.SI.Area area=20;
   parameter Integer dis=100;
-  parameter Modelica.SIunits.MassFlowRate m_flow_total=0.05
+  parameter Modelica.Units.SI.MassFlowRate m_flow_total=0.05
     "Total mass flow in the panel heating system";
-  parameter Modelica.SIunits.Temperature T_start=278.15                                     "Initial temperature";
-  parameter Modelica.SIunits.Power Q_Nf=500 "Initial temperature";
+  parameter Modelica.Units.SI.Temperature T_start=278.15 "Initial temperature";
+  parameter Modelica.Units.SI.Power Q_Nf=500 "Initial temperature";
   parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics"));
@@ -118,9 +118,9 @@ model ROMvsHOMint
     offset=0,
     startTime=1E5)
     annotation (Placement(transformation(extent={{-112,4},{-96,20}})));
-  Modelica.Blocks.Sources.Cosine   cosine(
+  Modelica.Blocks.Sources.Cosine cosine(
+    f(displayUnit="Hz") = 1/86400,
     amplitude=200/2,
-    freqHz(displayUnit="Hz") = 1/86400,
     offset=-200/2,
     startTime=1E5)
     annotation (Placement(transformation(extent={{-112,30},{-98,44}})));

@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.EnEV2009.Floor;
+﻿within AixLib.DataBase.Walls.EnEV2009.Floor;
 record FLground_EnEV2009_SML_upHalf "Floor towards ground (upper part) after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht)"
   extends WallBaseDataDefinition(
     n(min=1) = 2 "Number of wall layers",

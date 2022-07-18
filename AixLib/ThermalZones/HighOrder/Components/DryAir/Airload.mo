@@ -13,15 +13,13 @@ model Airload "Air volume"
   parameter Modelica.Fluid.Types.Dynamics initDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Like energyDynamics, but SteadyState leeds to same behavior as DynamicFreeInitial"
     annotation(Evaluate=true, Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T0
-    "initial temperature" annotation(Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Temperature T0 "initial temperature"
+    annotation (Dialog(tab="Initialization"));
 
-  parameter Modelica.SIunits.Density rho = 1.19
-    "Density of air";
-  parameter Modelica.SIunits.SpecificHeatCapacity c = 1007
+  parameter Modelica.Units.SI.Density rho=1.19 "Density of air";
+  parameter Modelica.Units.SI.SpecificHeatCapacity c=1007
     "Specific heat capacity of air";
-  parameter Modelica.SIunits.Volume V
-    "Volume of the room";
+  parameter Modelica.Units.SI.Volume V "Volume of the room";
 
 equation
 

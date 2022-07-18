@@ -1,32 +1,32 @@
 within AixLib.Media.Refrigerants.R410A;
- function specificIsobaricHeatCapacityVap_Tv
-   "Function that calculates the specific isobaric heat capacity of R410A vapor based on temperature and specific volume"
-   input Modelica.SIunits.Temperature T
-     "Temperature of refrigerant";
-   input Modelica.SIunits.SpecificVolume v
-     "Specific volume of refrigerant";
-   output Modelica.SIunits.SpecificHeatCapacity cp
-     "Specific isobaric heat capacity";
- 
- protected
-   Real dpdT
-     "First derivative w.r.t. temperature of the Martin-Hou equation";
- 
-   Real dpdv
-     "First derivative w.r.t. specific volume of the Martin-Hou equation";
- 
-   Modelica.SIunits.SpecificHeatCapacity cv
-     "Specific isochoric heat capacity";
- 
- algorithm
-   cv := AixLib.Media.Refrigerants.R410A.specificIsochoricHeatCapacityVap_Tv(T, v);
-   dpdT := AixLib.Media.Refrigerants.R410A.dPressureVap_dTemperature_Tv(T, v);
-   dpdv := AixLib.Media.Refrigerants.R410A.dPressureVap_dSpecificVolume_Tv(T, v);
- 
-   cp := cv - T * dpdT^2 / dpdv;
- 
- annotation (smoothOrder=1,
- preferredView="info",Documentation(info="<HTML>
+function specificIsobaricHeatCapacityVap_Tv
+  "Function that calculates the specific isobaric heat capacity of R410A vapor based on temperature and specific volume"
+  input Modelica.SIunits.Temperature T
+    "Temperature of refrigerant";
+  input Modelica.SIunits.SpecificVolume v
+    "Specific volume of refrigerant";
+  output Modelica.SIunits.SpecificHeatCapacity cp
+    "Specific isobaric heat capacity";
+
+protected
+  Real dpdT
+    "First derivative w.r.t. temperature of the Martin-Hou equation";
+
+  Real dpdv
+    "First derivative w.r.t. specific volume of the Martin-Hou equation";
+
+  Modelica.SIunits.SpecificHeatCapacity cv
+    "Specific isochoric heat capacity";
+
+algorithm
+  cv := AixLib.Media.Refrigerants.R410A.specificIsochoricHeatCapacityVap_Tv(T, v);
+  dpdT := AixLib.Media.Refrigerants.R410A.dPressureVap_dTemperature_Tv(T, v);
+  dpdv := AixLib.Media.Refrigerants.R410A.dPressureVap_dSpecificVolume_Tv(T, v);
+
+  cp := cv - T * dpdT^2 / dpdv;
+
+annotation (smoothOrder=1,
+preferredView="info",Documentation(info="<HTML>
  <p>
  Function that calculates the specific isobaric heat capacity (<i>c<sub>p</sub></i>) of R410A vapor based on temperature and specific volume.
  </p>
@@ -51,7 +51,7 @@ within AixLib.Media.Refrigerants.R410A;
  https://www.chemours.com/Refrigerants/en_US/assets/downloads/h64423_Suva410A_thermo_prop_si.pdf
  </a>
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  November 8, 2020, by Michael Wetter:<br/>
@@ -64,6 +64,6 @@ within AixLib.Media.Refrigerants.R410A;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end specificIsobaricHeatCapacityVap_Tv;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end specificIsobaricHeatCapacityVap_Tv;

@@ -4,11 +4,11 @@ partial model PartialMultizone "Partial model for multizone models"
 
   parameter Integer buildingID
     "Unique identifier of the building";
-  parameter Modelica.SIunits.Volume VAir(min=0)
+  parameter Modelica.Units.SI.Volume VAir(min=0)
     "Indoor air volume of building";
-  parameter Modelica.SIunits.Area ABuilding(min=0)
+  parameter Modelica.Units.SI.Area ABuilding(min=0)
     "Net floor area of building";
-  parameter Modelica.SIunits.Area ASurTot(min=0)
+  parameter Modelica.Units.SI.Area ASurTot(min=0)
     "Total surface area of building walls and windows (including interior walls)";
   parameter Integer numZones(min=1)
     "Number of zones";
@@ -23,13 +23,13 @@ partial model PartialMultizone "Partial model for multizone models"
   parameter Boolean use_C_flow=false
     "Set to true to enable input connector for trace substance"
     annotation (Dialog(tab="CO2"));
-  parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
+  parameter Modelica.Units.SI.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
-  parameter Modelica.SIunits.Area areaBod=1.8
+  parameter Modelica.Units.SI.Area areaBod=1.8
     "Body surface area source SIA 2024:2015"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
-  parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
+  parameter Modelica.Units.SI.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
   parameter Boolean use_moisture_balance=false
@@ -71,13 +71,13 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if
-       ASurTot > 0 or VAir > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
+    if ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
         iconTransformation(extent={{-90,-92},{-70,-72}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
-       ASurTot > 0 "Radiative internal gains"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
+    if ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[numZones](
@@ -126,9 +126,11 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real KR_heater=1000 "Gain of the heating controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_heater=1
-    "Time constant of the heating controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Modelica.Units.SI.Time TN_heater=1
+    "Time constant of the heating controller" annotation (Dialog(
+      tab="IdealHeaterCooler",
+      group="Heater",
+      enable=not recOrSep));
   parameter Boolean Cooler_on=true "Activates the cooler"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real h_cooler=0 "Upper limit controller output of the cooler"
@@ -137,9 +139,11 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real KR_cooler=1000 "Gain of the cooling controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_cooler=1
-    "Time constant of the cooling controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Modelica.Units.SI.Time TN_cooler=1
+    "Time constant of the cooling controller" annotation (Dialog(
+      tab="IdealHeaterCooler",
+      group="Cooler",
+      enable=not recOrSep));
 
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
     final quantity="ThermodynamicTemperature",

@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model GenericPipe
   "Pipe model that includes several selectable pipe models"
 
@@ -12,7 +12,7 @@ model GenericPipe
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(group="Parameters"));
 
-  parameter Modelica.SIunits.Length length(min=0) "Pipe length";
+  parameter Modelica.Units.SI.Length length(min=0) "Pipe length";
 
   parameter Boolean withInsulation=true "Pipe with or without insulation" annotation (Dialog(group="Heat Transfer"),choices(checkBox=true));
 
@@ -22,10 +22,11 @@ model GenericPipe
 
   parameter Boolean withConvection=true "convectional heat transfer" annotation (Dialog(group="Heat Transfer"),choices(checkBox=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=4
-    "Convection heat transfer coeffient" annotation (choicesAllMatching=true, Dialog(enable=withConvection==true,group="Heat Transfer"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon=4
+    "Convection heat transfer coeffient" annotation (choicesAllMatching=true,
+      Dialog(enable=withConvection == true, group="Heat Transfer"));
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
   // Advanced
@@ -34,9 +35,9 @@ model GenericPipe
   parameter Real ReC=2300
     "Reynolds number where transition to turbulent starts"
                                                           annotation (Dialog(tab="Advanced"));
-  parameter Modelica.SIunits.Height roughness=2.5e-5
+  parameter Modelica.Units.SI.Height roughness=2.5e-5
     "Average height of surface asperities (default: smooth steel pipe)"
-                                                                       annotation (Dialog(tab="Advanced"));
+    annotation (Dialog(tab="Advanced"));
   parameter Integer nNodes=3 "Spatial segmentation for SimplePipe" annotation (Dialog(tab="Advanced", enable=pipeModel=="SimplePipe"));
 
   // Assumptions
@@ -48,7 +49,7 @@ model GenericPipe
     annotation (Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
   // Initialization
-  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
+  parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
     "Initialization temperature at pipe inlet"
     annotation (Dialog(tab="Initialization"));
 
@@ -89,8 +90,8 @@ model GenericPipe
     final massDynamics=massDynamics) if pipeModel == "SimplePipe"
     annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
-    final m=nNodes) if
-       pipeModel == "SimplePipe"
+    final m=nNodes)
+    if pipeModel == "SimplePipe"
                 annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,14})));
@@ -115,13 +116,13 @@ model GenericPipe
         rotation=270,
         origin={0,70})));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughInsulation(final m=1) if
-       not withInsulation annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughInsulation(final m=1)
+    if not withInsulation annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,42})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1) if
-        not withConvection annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalPassthroughConvection(final m=1)
+     if not withConvection annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-32,70})));

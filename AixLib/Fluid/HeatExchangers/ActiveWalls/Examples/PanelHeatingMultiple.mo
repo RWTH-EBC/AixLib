@@ -4,7 +4,7 @@ model PanelHeatingMultiple
       replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system"                annotation(choicesAllMatching = true);
 
-  parameter Modelica.SIunits.Area panelHeatingArea = 10 "Area of heating panels";
+  parameter Modelica.Units.SI.Area panelHeatingArea=10 "Area of heating panels";
 
   Distributor distributor(redeclare package Medium = Medium, m_flow_nominal=0.5, n=6)
     annotation (Placement(transformation(extent={{-32,-20},{8,20}})));

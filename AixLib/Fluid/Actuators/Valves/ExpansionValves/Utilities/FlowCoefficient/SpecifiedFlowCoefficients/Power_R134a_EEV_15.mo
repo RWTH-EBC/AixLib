@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients;
+﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients;
 model Power_R134a_EEV_15 "Power - R134a - EEV - 1.5 mm"
   extends PowerFlowCoefficient(
     final powMod=Types.PowerModels.ZhifangAndOu2008,

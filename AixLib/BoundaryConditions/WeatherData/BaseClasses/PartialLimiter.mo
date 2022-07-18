@@ -1,17 +1,17 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses;
- partial block PartialLimiter
-   "Partial block to limit a signal"
-   extends Modelica.Blocks.Icons.Block;
- 
-   constant Real uMin = 0 "Minimum value";
-   constant Real uMax = 1 "Maximum value";
- 
-   Modelica.Blocks.Interfaces.RealInput u "Connector of Real input signal" annotation (Placement(
-         transformation(extent={{-140,-20},{-100,20}})));
- 
- annotation (
- defaultComponentName="lim",
- Documentation(info="<html>
+partial block PartialLimiter
+  "Partial block to limit a signal"
+  extends Modelica.Blocks.Icons.Block;
+
+  constant Real uMin = 0 "Minimum value";
+  constant Real uMax = 1 "Maximum value";
+
+  Modelica.Blocks.Interfaces.RealInput u "Connector of Real input signal" annotation (Placement(
+        transformation(extent={{-140,-20},{-100,20}})));
+
+annotation (
+defaultComponentName="lim",
+Documentation(info="<html>
  <p>
  Block that computes <i>y_internal=min(uMax, max(uMin, u))</i>,
  where <code>y_internal</code> is a protected connector.
@@ -28,7 +28,7 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
  \"Connector of Real output signal\".
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  April 14, 2020, by Michael Wetter:<br/>
@@ -36,28 +36,28 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
  </li>
  </ul>
  </html>"),
-      Icon(coordinateSystem(
-     preserveAspectRatio=true,
-     extent={{-100,-100},{100,100}}), graphics={
-     Line(points={{0,-90},{0,68}}, color={192,192,192}),
-     Polygon(
-       points={{0,90},{-8,68},{8,68},{0,90}},
-       lineColor={192,192,192},
-       fillColor={192,192,192},
-       fillPattern=FillPattern.Solid),
-     Line(points={{-90,0},{68,0}}, color={192,192,192}),
-     Polygon(
-       points={{90,0},{68,-8},{68,8},{90,0}},
-       lineColor={192,192,192},
-       fillColor={192,192,192},
-       fillPattern=FillPattern.Solid),
-     Line(points={{-80,-70},{-50,-70},{50,70},{80,70}}),
-     Text(
-       extent={{-150,-150},{150,-110}},
-           textString="%uMin <= u <= %uMax",
-           lineColor={0,0,0})}),
-     Diagram(coordinateSystem(
-     preserveAspectRatio=true,
-     extent={{-100,-100},{100,100}})), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end PartialLimiter;
+     Icon(coordinateSystem(
+    preserveAspectRatio=true,
+    extent={{-100,-100},{100,100}}), graphics={
+    Line(points={{0,-90},{0,68}}, color={192,192,192}),
+    Polygon(
+      points={{0,90},{-8,68},{8,68},{0,90}},
+      lineColor={192,192,192},
+      fillColor={192,192,192},
+      fillPattern=FillPattern.Solid),
+    Line(points={{-90,0},{68,0}}, color={192,192,192}),
+    Polygon(
+      points={{90,0},{68,-8},{68,8},{90,0}},
+      lineColor={192,192,192},
+      fillColor={192,192,192},
+      fillPattern=FillPattern.Solid),
+    Line(points={{-80,-70},{-50,-70},{50,70},{80,70}}),
+    Text(
+      extent={{-150,-150},{150,-110}},
+          textString="%uMin <= u <= %uMax",
+          lineColor={0,0,0})}),
+    Diagram(coordinateSystem(
+    preserveAspectRatio=true,
+    extent={{-100,-100},{100,100}})),
+  __Dymola_LockedEditing="Model from IBPSA");
+end PartialLimiter;

@@ -68,8 +68,8 @@ partial model PartialThermalZone_Tabs
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs if zoneParam.ATabs>0
     "Radiative internal gains" annotation (Placement(transformation(extent={{-106,54},
             {-94,66}}),      iconTransformation(extent={{-76,-84},{-56,-64}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs_int if
-                                                              zoneParam.ATabs_int>0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs_int
+                                                           if zoneParam.ATabs_int>0
     "Radiative internal gains" annotation (Placement(transformation(extent={{-106,44},
             {-94,56}}),     iconTransformation(extent={{-76,-84},{-56,-64}})));
 equation

@@ -1,15 +1,16 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 model GasolineEngineChp_EngineHousing_CylToInnerWall
 
-  parameter Modelica.SIunits.ThermalConductance GInnWall=lambda*A_WInn/dInn
-  "Thermal conductance of the inner engine wall"
-  annotation (Dialog(group="Thermal"));
-  parameter Modelica.SIunits.Thickness dInn=0.005
+  parameter Modelica.Units.SI.ThermalConductance GInnWall=lambda*A_WInn/dInn
+    "Thermal conductance of the inner engine wall"
+    annotation (Dialog(group="Thermal"));
+  parameter Modelica.Units.SI.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Structure Calculations"));
-  parameter Modelica.SIunits.ThermalConductivity lambda=44.5
-    "Thermal conductivity of the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Modelica.SIunits.Area A_WInn
+  parameter Modelica.Units.SI.ThermalConductivity lambda=44.5
+    "Thermal conductivity of the engine block material"
+    annotation (Dialog(tab="Structure", group="Material Properties"));
+  parameter Modelica.Units.SI.Area A_WInn
     "Area of heat transporting surface from cylinder wall to outer engine block"
     annotation (Dialog(tab="Structure Calculations"));
   parameter Real z=4

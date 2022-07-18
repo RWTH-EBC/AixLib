@@ -1,26 +1,26 @@
 within AixLib.Utilities.IO.Files;
- model CSVWriter
-   "Model for writing results to a .csv file"
-   extends AixLib.Utilities.IO.Files.BaseClasses.FileWriter(
-     final isCombiTimeTable=false);
- 
- initial algorithm
-   if writeHeader then
-     str := str + "time" + delimiter;
-     for i in 1:nin-1 loop
-       str := str + headerNames[i] + delimiter;
-       if mod(i+1,10)==0 then // write out buffer every 10 entries to avoid overflow
-         writeLine(filWri, str, 1);
-         str:="";
-       end if;
-     end for;
-     str := str + headerNames[nin] + "\n";
-     writeLine(filWri, str, 1);
-   end if;
- 
-   annotation (
-   defaultComponentName="csvWri",
-   Documentation(info="<html>
+model CSVWriter
+  "Model for writing results to a .csv file"
+  extends AixLib.Utilities.IO.Files.BaseClasses.FileWriter(
+    final isCombiTimeTable=false);
+
+initial algorithm
+  if writeHeader then
+    str := str + "time" + delimiter;
+    for i in 1:nin-1 loop
+      str := str + headerNames[i] + delimiter;
+      if mod(i+1,10)==0 then // write out buffer every 10 entries to avoid overflow
+        writeLine(filWri, str, 1);
+        str:="";
+      end if;
+    end for;
+    str := str + headerNames[nin] + "\n";
+    writeLine(filWri, str, 1);
+  end if;
+
+  annotation (
+  defaultComponentName="csvWri",
+  Documentation(info="<html>
  <p>This model samples the model inputs <code>u</code> and saves them to a .csv file,
  which can be read using e.g. Excel or Python.
  </p>
@@ -52,7 +52,7 @@ within AixLib.Utilities.IO.Files;
  This model samples the outputs at an equidistant interval and
  hence disregards the simulation tool output interval settings.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  October 17, 2019 by Filip Jorissen:<br/>
@@ -65,10 +65,10 @@ within AixLib.Utilities.IO.Files;
  See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
  </li>
  </ul>
- </html>"), Icon(graphics={                                                Text(
-           extent={{-88,90},{88,48}},
-           lineColor={0,0,127},
-           horizontalAlignment=TextAlignment.Right,
-           textString="CSV")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end CSVWriter;
+ </html>"),Icon(graphics={                                                Text(
+          extent={{-88,90},{88,48}},
+          lineColor={0,0,127},
+          horizontalAlignment=TextAlignment.Right,
+          textString="CSV")}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end CSVWriter;

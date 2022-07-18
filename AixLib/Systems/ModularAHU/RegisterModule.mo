@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU;
+﻿within AixLib.Systems.ModularAHU;
 model RegisterModule "AHU register module for heaters and coolers"
     extends AixLib.Fluid.Interfaces.PartialFourPortParallel;
 
@@ -11,23 +11,23 @@ model RegisterModule "AHU register module for heaters and coolers"
               choice="Throttle",
               choice="ThrottlePump"),Dialog(enable=true, group="Hydraulics"));
 
-  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
-    "Nominal mass flow rate"
-    annotation(Dialog(group = "Nominal condition"));
-  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
-    "Nominal mass flow rate"
-    annotation(Dialog(group = "Nominal condition"));
-    parameter Modelica.SIunits.Temperature T_start=293.15
-    "Initialization temperature" annotation(Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Time tau=15
-    "Time constant for PT1 behavior of temperature sensors in air canal" annotation(Dialog(group="Heat exchanger"));
-  parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
+  parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal(min=0)
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal(min=0)
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.Units.SI.Temperature T_start=293.15
+    "Initialization temperature" annotation (Dialog(tab="Initialization"));
+  parameter Modelica.Units.SI.Time tau=15
+    "Time constant for PT1 behavior of temperature sensors in air canal"
+    annotation (Dialog(group="Heat exchanger"));
+  parameter Modelica.Units.SI.Temperature T_amb "Ambient temperature";
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
-  parameter Modelica.SIunits.Time tauHeaTra=1200
-    "Time constant for heat transfer of temperature sensors in air chanal" annotation(Dialog(tab="Advanced"));
+  parameter Modelica.Units.SI.Time tauHeaTra=1200
+    "Time constant for heat transfer of temperature sensors in air chanal"
+    annotation (Dialog(tab="Advanced"));
   replaceable AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
     final energyDynamics=energyDynamics,
     final T_amb=T_amb,

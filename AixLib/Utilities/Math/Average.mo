@@ -1,13 +1,13 @@
 within AixLib.Utilities.Math;
- block Average "Average of a vector"
-   extends Modelica.Blocks.Interfaces.MISO;
- equation
-  y = AixLib.Utilities.Math.Functions.average(u=u, nin=nin);
- annotation (defaultComponentName="ave",
- Documentation(info="<html>
+block Average "Average of a vector"
+  extends Modelica.Blocks.Interfaces.MISO;
+equation
+ y = AixLib.Utilities.Math.Functions.average(u=u, nin=nin);
+annotation (defaultComponentName="ave",
+Documentation(info="<html>
  <p>This block outputs the average of the vector. </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>November 28, 2013, by Marcus Fuchs:<br/>
  Changed block to use function average.
@@ -17,9 +17,9 @@ within AixLib.Utilities.Math;
  First implementation.
  </li>
  </ul>
- </html>"), Icon(graphics={Text(
-           extent={{-74,46},{66,-58}},
-           lineColor={0,0,255},
-           textString="ave")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
- end Average;
+ </html>"),Icon(graphics={Text(
+          extent={{-74,46},{66,-58}},
+          lineColor={0,0,255},
+          textString="ave")}),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Average;

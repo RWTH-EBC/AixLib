@@ -1,28 +1,28 @@
 within AixLib.Fluid.HeatPumps;
- model ReciprocatingWaterToWater
-   "Model for a reciprocating water to water heat pump"
- 
-   extends AixLib.Fluid.HeatPumps.BaseClasses.PartialWaterToWater(
-     final UAEva=per.UAEva * scaling_factor,
-     final UACon=per.UACon * scaling_factor,
-     redeclare HeatPumps.Compressors.ReciprocatingCompressor com(
-       redeclare final package ref=ref,
-       pisDis=per.pisDis * scaling_factor,
-       cleFac=per.cleFac,
-       etaEle=per.etaEle,
-       PLos=per.PLos * scaling_factor,
-       pDro=per.pDro,
-       dTSup=per.dTSup));
- 
-   parameter Data.ReciprocatingWaterToWater.Generic per
-     "Heat pump performance data"
-     annotation (choicesAllMatching=true, Placement(transformation(extent={{-98,
-             78},{-78,98}})));
- 
-     annotation (Placement(transformation(extent={{100,-100},{120,-80}}),
-         iconTransformation(extent={{100,-100},{120,-80}})),
-               defaultComponentName="heaPum",
-     Documentation(info="<html>
+model ReciprocatingWaterToWater
+  "Model for a reciprocating water to water heat pump"
+
+  extends AixLib.Fluid.HeatPumps.BaseClasses.PartialWaterToWater(
+    final UAEva=per.UAEva * scaling_factor,
+    final UACon=per.UACon * scaling_factor,
+    redeclare HeatPumps.Compressors.ReciprocatingCompressor com(
+      redeclare final package ref=ref,
+      pisDis=per.pisDis * scaling_factor,
+      cleFac=per.cleFac,
+      etaEle=per.etaEle,
+      PLos=per.PLos * scaling_factor,
+      pDro=per.pDro,
+      dTSup=per.dTSup));
+
+  parameter Data.ReciprocatingWaterToWater.Generic per
+    "Heat pump performance data"
+    annotation (choicesAllMatching=true, Placement(transformation(extent={{-98,
+            78},{-78,98}})));
+
+    annotation (Placement(transformation(extent={{100,-100},{120,-80}}),
+        iconTransformation(extent={{100,-100},{120,-80}})),
+              defaultComponentName="heaPum",
+    Documentation(info="<html>
  <p>
  Model for a water to water heat pump with a reciprocating compressor, as
  described in Jin (2002). The thermodynamic heat pump cycle is represented below.
@@ -83,7 +83,7 @@ within AixLib.Fluid.HeatPumps;
  </i>
  PhD Thesis. Oklahoma State University. Stillwater, Oklahoma, USA. 2012.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  May 30, 2017, by Filip Jorissen:<br/>
@@ -95,6 +95,6 @@ within AixLib.Fluid.HeatPumps;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end ReciprocatingWaterToWater;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end ReciprocatingWaterToWater;

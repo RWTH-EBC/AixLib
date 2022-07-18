@@ -14,7 +14,8 @@ model Chiller "Example for the reversible chiller model."
     nPorts=1) "Ideal mass flow source at the inlet of the sink side"
     annotation (Placement(transformation(extent={{-54,-58},{-34,-38}})));
 
-  Sources.Boundary_pT                sinkSideFixedBoundary(          redeclare package Medium =
+  Sources.Boundary_pT                sinkSideFixedBoundary(          redeclare
+      package                                                                          Medium =
                        Medium_sin, nPorts=1)
     "Fixed boundary at the outlet of the sink side" annotation (Placement(
         transformation(
@@ -78,7 +79,7 @@ model Chiller "Example for the reversible chiller model."
         rotation=0,
         origin={54,-38})));
   Modelica.Blocks.Sources.Sine sine(
-    freqHz=1/3600,
+    f=1/3600,
     amplitude=500,
     offset=500,
     phase=3.1415926535898)

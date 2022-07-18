@@ -7,7 +7,7 @@ model Reduced_comparison_pipe_heat
   parameter Integer dis=100
     "Number of discretization layers for panel heating pipe";
     parameter Integer dis2=100;
-  final parameter Modelica.SIunits.MassFlowRate m_flow_total=0.05
+  final parameter Modelica.Units.SI.MassFlowRate m_flow_total=0.05
     "Total mass flow in the panel heating system";
 
   UnderfloorHeatingCircuit_reduced underfloorHeatingCircuit_reduced(

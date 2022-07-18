@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Agents;
+﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
 model ColdProducerAgent
   extends BaseClasses.PartialAgent;
   parameter Real maxCapacity = 0
@@ -28,15 +28,15 @@ model ColdProducerAgent
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-92,-108})));
-  Modelica.StateGraph.Step message(nOut=2)
+  Modelica.StateGraph.Step message(nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-72,-118},{-52,-98}})));
-  Modelica.StateGraph.Step adjustHeat
+  Modelica.StateGraph.Step adjustHeat(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-36,20},{-16,40}})));
   Modelica.StateGraph.Transition transition2(
       enableTimer=true, waitTime=2)
     annotation (Placement(transformation(extent={{-8,20},{12,40}})));
 
-  Modelica.StateGraph.Step computeProposal
+  Modelica.StateGraph.Step computeProposal(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-26,86},{-6,106}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=noEvent(
         getperformative.y[1] == 4))
@@ -54,7 +54,7 @@ model ColdProducerAgent
       enableTimer=true)
     annotation (Placement(transformation(extent={{44,86},{64,106}})));
 
-  Modelica.StateGraph.StepWithSignal sendProposal(nOut=3)
+  Modelica.StateGraph.StepWithSignal sendProposal(nOut=3, nIn=1)
     annotation (Placement(transformation(extent={{76,86},{96,106}})));
   Modelica.Blocks.Math.IntegerChange integerChange annotation (Placement(
         transformation(extent={{-170,-50},{-150,-30}})));
@@ -73,12 +73,12 @@ model ColdProducerAgent
     annotation (Placement(transformation(extent={{-124,-68},{-98,-50}})));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(extent={{-90,-62},{-84,-56}})));
-  Modelica.StateGraph.Step composeNotUnderstood
+  Modelica.StateGraph.Step composeNotUnderstood(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-36,-56},{-16,-36}})));
   Modelica.StateGraph.Transition transition3(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{2,-56},{22,-36}})));
 
-  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1)
+  Modelica.StateGraph.StepWithSignal sendNotUnderstood(nOut=1, nIn=1)
     annotation (Placement(transformation(extent={{42,-56},{62,-36}})));
   Modelica.StateGraph.Transition transition4(enableTimer=true, waitTime=1)
     annotation (Placement(transformation(extent={{82,-56},{102,-36}})));
@@ -116,7 +116,7 @@ protected
     annotation (Placement(transformation(extent={{140,-204},{180,-164}})));
 
 public
-  Modelica.StateGraph.Step confirm
+  Modelica.StateGraph.Step confirm(nIn=1, nOut=1)
     annotation (Placement(transformation(extent={{-38,-26},{-18,-6}})));
   Modelica.StateGraph.Transition transition6(
       enableTimer=true, waitTime=2)
@@ -146,7 +146,7 @@ public
         rotation=0,
         origin={-82,-154})));
   Modelica.StateGraph.Step shutDown(
-                                   nOut=2)
+                                   nOut=2, nIn=1)
     annotation (Placement(transformation(extent={{-56,-164},{-36,-144}})));
   Modelica.StateGraph.Transition transition7(                  waitTime=0.1,
       enableTimer=true)

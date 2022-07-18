@@ -1,29 +1,29 @@
 within AixLib.Media.Refrigerants.R410A;
- function isentropicExponentVap_Tv
-   "Function that calculates the isentropic exponent of R410A vapor based on temperature and specific volume"
-   input Modelica.SIunits.Temperature T
-     "Temperature of refrigerant";
-   input Modelica.SIunits.SpecificVolume v
-     "Specific volume of refrigerant";
-   output Modelica.SIunits.IsentropicExponent k
-     "Specific isobaric heat capacity";
- 
- protected
-   Modelica.SIunits.SpecificHeatCapacity cp
-     "Specific isobaric heat capacity";
- 
-   Modelica.SIunits.SpecificHeatCapacity cv
-     "Specific isochoric heat capacity";
- 
- algorithm
-   // Evaluate the specific isobaric and isochoric heat capacities
-   cp := AixLib.Media.Refrigerants.R410A.specificIsobaricHeatCapacityVap_Tv(T, v);
-   cv := AixLib.Media.Refrigerants.R410A.specificIsochoricHeatCapacityVap_Tv(T, v);
- 
-   k := cp / cv;
- 
- annotation (smoothOrder=1,
- preferredView="info",Documentation(info="<HTML>
+function isentropicExponentVap_Tv
+  "Function that calculates the isentropic exponent of R410A vapor based on temperature and specific volume"
+  input Modelica.SIunits.Temperature T
+    "Temperature of refrigerant";
+  input Modelica.SIunits.SpecificVolume v
+    "Specific volume of refrigerant";
+  output Modelica.SIunits.IsentropicExponent k
+    "Specific isobaric heat capacity";
+
+protected
+  Modelica.SIunits.SpecificHeatCapacity cp
+    "Specific isobaric heat capacity";
+
+  Modelica.SIunits.SpecificHeatCapacity cv
+    "Specific isochoric heat capacity";
+
+algorithm
+  // Evaluate the specific isobaric and isochoric heat capacities
+  cp := AixLib.Media.Refrigerants.R410A.specificIsobaricHeatCapacityVap_Tv(T, v);
+  cv := AixLib.Media.Refrigerants.R410A.specificIsochoricHeatCapacityVap_Tv(T, v);
+
+  k := cp / cv;
+
+annotation (smoothOrder=1,
+preferredView="info",Documentation(info="<HTML>
  <p>
  Function that calculates the isentropic exponent of R410A vapor based on temperature and specific volume. The isentropic exponent is equal to the ratio of specific heat capacities:
  </p>
@@ -48,13 +48,13 @@ within AixLib.Media.Refrigerants.R410A;
  https://www.chemours.com/Refrigerants/en_US/assets/downloads/h64423_Suva410A_thermo_prop_si.pdf
  </a>
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  October 31, 2016, by Massimo Cimmino:<br/>
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end isentropicExponentVap_Tv;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end isentropicExponentVap_Tv;

@@ -16,18 +16,19 @@ model ThermostaticValve
  parameter Boolean filteredOpening=false
     "= true, if opening is filtered with a 2nd order CriticalDamping filter"
    annotation(Dialog(group="Filtered opening"),choices(__Dymola_checkBox=true));
- parameter Modelica.SIunits.Time riseTime=1
+  parameter Modelica.Units.SI.Time riseTime=1
     "Rise time of the filter (time to reach 99.6 % of an opening step)"
-   annotation(Dialog(group="Filtered opening",enable=filteredOpening));
+    annotation (Dialog(group="Filtered opening", enable=filteredOpening));
  parameter Real leakageOpening(min=0,max=1)=0.001
     "The opening signal is limited by leakageOpening (to improve the numerics)"
    annotation(Dialog(group="Filtered opening",enable=filteredOpening));
 
 parameter Real k(min=0, unit="1") = 0.1 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small, start=0.5) = 1000
-    "Time constant of Integrator block";
+  parameter Modelica.Units.SI.Time Ti(
+    min=Modelica.Constants.small,
+    start=0.5) = 1000 "Time constant of Integrator block";
 
-parameter Modelica.SIunits.MassFlowRate dotm_nominal = 0.5;
+  parameter Modelica.Units.SI.MassFlowRate dotm_nominal=0.5;
 
 //Modelica.SIunits.MassFlowRate dotm;
 //Real relativeFlowCoefficient;
@@ -136,14 +137,14 @@ public
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=k,
     Ti=Ti,
-    limitsAtInit=true,
     yMax=1,
     yMin=0,
     xi_start=0,
     xd_start=0,
     y_start=0.5,
-    initType=Modelica.Blocks.Types.InitPID.InitialOutput)
-           annotation (Placement(transformation(extent={{11,-11},{-11,11}},
+    initType=Modelica.Blocks.Types.Init.InitialOutput) annotation (Placement(
+        transformation(
+        extent={{11,-11},{-11,11}},
         rotation=180,
         origin={-25,-1})));
   FastHVAC.Components.Valves.BaseClases.HysteresisValve hysteresisValve(

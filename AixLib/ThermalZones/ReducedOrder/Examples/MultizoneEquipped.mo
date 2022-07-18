@@ -56,9 +56,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
-    freqHz=1/86400,
-    offset=500)
-    "Sinusoidal excitation for additional internal gains"
+    f=1/86400,
+    offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[5]
     "Convective heat flow of additional internal gains"

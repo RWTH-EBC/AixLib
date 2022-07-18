@@ -8,9 +8,9 @@ model CDD_TABS "VDI 6007 Test Case 3 model"
   package MediumAir = AixLib.Media.Air;
   package MediumWater = AixLib.Media.Water;
 
-  parameter Modelica.SIunits.Temperature T_start=296.25;
-  parameter Modelica.SIunits.Area ATabs=13.3;
-  parameter Modelica.SIunits.Power PowerTabs=-745;
+  parameter Modelica.Units.SI.Temperature T_start=296.25;
+  parameter Modelica.Units.SI.Area ATabs=13.3;
+  parameter Modelica.Units.SI.Power PowerTabs=-745;
   parameter Integer location(min = 1, max = 2) = 1 "Location of validation" annotation(choices(choice = 1 "Hamburg", choice = 2 "Mannheim"));
 
 

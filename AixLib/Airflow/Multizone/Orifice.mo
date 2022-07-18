@@ -1,43 +1,43 @@
 within AixLib.Airflow.Multizone;
- model Orifice "Orifice"
-   extends AixLib.Airflow.Multizone.BaseClasses.PowerLawResistance(
-     m=0.5,
-     k=CD*A*sqrt(2.0/rho_default));
- 
-   parameter Modelica.SIunits.Area A "Area of orifice"
-     annotation (Dialog(group="Orifice characteristics"));
-   parameter Real CD=0.65 "Discharge coefficient"
-     annotation (Dialog(group="Orifice characteristics"));
- 
- equation
-   v = V_flow/A;
-   annotation (Icon(graphics={
-         Rectangle(
-           extent={{-100,8},{100,-8}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-20,100},{20,20}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-20,-20},{20,-100}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Text(
-           extent={{24,-24},{96,-100}},
-           lineColor={0,0,255},
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid,
-           textString="A=%A")}),
- defaultComponentName="ori",
- Documentation(info="<html>
+model Orifice "Orifice"
+  extends AixLib.Airflow.Multizone.BaseClasses.PowerLawResistance(
+    m=0.5,
+    k=CD*A*sqrt(2.0/rho_default));
+
+  parameter Modelica.SIunits.Area A "Area of orifice"
+    annotation (Dialog(group="Orifice characteristics"));
+  parameter Real CD=0.65 "Discharge coefficient"
+    annotation (Dialog(group="Orifice characteristics"));
+
+equation
+  v = V_flow/A;
+  annotation (Icon(graphics={
+        Rectangle(
+          extent={{-100,8},{100,-8}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-20,100},{20,20}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-20,-20},{20,-100}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{24,-24},{96,-100}},
+          lineColor={0,0,255},
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid,
+          textString="A=%A")}),
+defaultComponentName="ori",
+Documentation(info="<html>
  <p>
  This model describes the mass flow rate and pressure difference relation
  of an orifice in the form
@@ -80,7 +80,7 @@ within AixLib.Airflow.Multizone;
  </li>
  </ul>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  June 27, 2018, by Michael Wetter:<br/>
@@ -121,6 +121,6 @@ within AixLib.Airflow.Multizone;
  Released first version.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end Orifice;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end Orifice;

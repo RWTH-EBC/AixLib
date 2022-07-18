@@ -5,33 +5,33 @@ model DHCSubstationHeatPumpDirectCooling "Substation model for bidirctional low-
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.Units.SI.Pressure dp_nominal(displayUnit="Pa") = 30000
     "Nominal pressure drop";
 
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=m_flow_nominal
     "Nominal mass flow rate"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.HeatFlowRate heaDem_max
+  parameter Modelica.Units.SI.HeatFlowRate heaDem_max
     "Maximum heat demand for scaling of heat pump"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.Temperature deltaT_heaSecSet = 10
+  parameter Modelica.Units.SI.Temperature deltaT_heaSecSet=10
     "Set temperature difference for heating on secondary site (building system)"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
-    parameter Modelica.SIunits.Temperature T_heaSecSet = 273.15 + 55
+  parameter Modelica.Units.SI.Temperature T_heaSecSet=273.15 + 55
     "Set supply temperature for space heating on secondary side (building)"
-    annotation (Dialog(tab = "General", group = "Building System"));
+    annotation (Dialog(tab="General", group="Building System"));
 
 
-    parameter Modelica.SIunits.Temperature T_heaPriSet = 273.15 + 22
+  parameter Modelica.Units.SI.Temperature T_heaPriSet=273.15 + 22
     "Set temperature of primary side (warm line of grid)"
-    annotation (Dialog(tab = "General", group = "Grid"));
-    parameter Modelica.SIunits.Temperature T_cooPriSet = 273.15 + 12
+    annotation (Dialog(tab="General", group="Grid"));
+  parameter Modelica.Units.SI.Temperature T_cooPriSet=273.15 + 12
     "Set temperature of primary side (cold line of grid)"
-    annotation (Dialog(tab = "General", group = "Grid"));
+    annotation (Dialog(tab="General", group="Grid"));
 
 
 
@@ -183,8 +183,8 @@ protected
     T=Medium.T_default,
     p=Medium.p_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
-      final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
-    Medium.specificHeatCapacityCp(sta_default)
+  final parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
+      Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 
 equation

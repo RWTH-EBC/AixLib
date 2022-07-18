@@ -2,45 +2,41 @@ within AixLib.ThermalZones.ReducedOrder.RC;
 model FourElements_TABS
   extends FourElements;
   // External TABS
-  parameter Modelica.SIunits.Area ATabs=0 "Area of interior walls"
-    annotation(Dialog(group="Tabs"));
+  parameter Modelica.Units.SI.Area ATabs=0 "Area of interior walls"
+    annotation (Dialog(group="Tabs"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TABS_up=AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy()
     "Upper TABS layers"    annotation (Dialog(group="Tabs"), choicesAllMatching=true);
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TABS_lo=AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy() "Upper TABS layers"    annotation (Dialog(group="Tabs"), choicesAllMatching=true);
 
-  parameter Modelica.SIunits.ThermalResistance RExt_tabs(
-    min=Modelica.Constants.small)
+  parameter Modelica.Units.SI.ThermalResistance RExt_tabs(min=Modelica.Constants.small)
     "Vector of resistances of exterior walls, from inside to outside"
-    annotation(Dialog(group="Exterior tabs"));
-  parameter Modelica.SIunits.ThermalResistance RExtRem_tabs(
-    min=Modelica.Constants.small)
+    annotation (Dialog(group="Exterior tabs"));
+  parameter Modelica.Units.SI.ThermalResistance RExtRem_tabs(min=Modelica.Constants.small)
     "Resistance of remaining resistor RExtRem between capacity n and outside"
-    annotation(Dialog(group="Exterior tabs"));
-  parameter Modelica.SIunits.HeatCapacity CExt_tabs(
-    min=Modelica.Constants.small)
+    annotation (Dialog(group="Exterior tabs"));
+  parameter Modelica.Units.SI.HeatCapacity CExt_tabs(min=Modelica.Constants.small)
     "Vector of heat capacities of exterior walls, from inside to outside"
-    annotation(Dialog(group="Exterior tabs"));
-  parameter Modelica.SIunits.Angle OrientationTabs[1] "Orientation of exterior tabs";
+    annotation (Dialog(group="Exterior tabs"));
+  parameter Modelica.Units.SI.Angle OrientationTabs[1]
+    "Orientation of exterior tabs";
   // Internal TABS
-  parameter Modelica.SIunits.Area ATabs_int=0 "Area of interior walls"
-    annotation(Dialog(group="Tabs"));
+  parameter Modelica.Units.SI.Area ATabs_int=0 "Area of interior walls"
+    annotation (Dialog(group="Tabs"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TABS_int_up=AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy()
     "Upper TABS layers"    annotation (Dialog(group="Tabs"), choicesAllMatching=true);
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TABS_int_lo=AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy() "Upper TABS layers"    annotation (Dialog(group="Tabs"), choicesAllMatching=true);
 
-  parameter Modelica.SIunits.ThermalResistance RInt_tabs(
-    min=Modelica.Constants.small)
+  parameter Modelica.Units.SI.ThermalResistance RInt_tabs(min=Modelica.Constants.small)
     "Vector of resistances of interior tabs, from port to center"
-    annotation(Dialog(group="Interior tabs"));
-  parameter Modelica.SIunits.ThermalResistance RIntRem_tabs(
-    min=Modelica.Constants.small)
+    annotation (Dialog(group="Interior tabs"));
+  parameter Modelica.Units.SI.ThermalResistance RIntRem_tabs(min=Modelica.Constants.small)
     "Vector of resistances of interior tabs, from port to center"
-    annotation(Dialog(group="Interior tabs"));
-  parameter Modelica.SIunits.HeatCapacity CInt_tabs(
-    min=Modelica.Constants.small)
+    annotation (Dialog(group="Interior tabs"));
+  parameter Modelica.Units.SI.HeatCapacity CInt_tabs(min=Modelica.Constants.small)
     "Vector of heat capacities of interior tabs, from port to center"
-    annotation(Dialog(group="Interior tabs"));
-  parameter Modelica.SIunits.Angle OrientationTabsInt[1] "Orientation of exterior tabs";
+    annotation (Dialog(group="Interior tabs"));
+  parameter Modelica.Units.SI.Angle OrientationTabsInt[1]
+    "Orientation of exterior tabs";
 
   Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.Reduced.RCTABS rCTABS(
     final External=true,
@@ -51,7 +47,7 @@ model FourElements_TABS
     final R_up=RExt_tabs,
     final C_up=CExt_tabs,
     final R_up_rest=RExtRem_tabs,
-    final T_start=T_start) if   ATabs > 0 annotation (Placement(transformation(
+    final T_start=T_start)   if ATabs > 0 annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-198,4})));
@@ -68,23 +64,23 @@ model FourElements_TABS
     R_up=RInt_tabs,
     C_up=CInt_tabs,
     R_up_rest=RIntRem_tabs,
-    final T_start=T_start) if   ATabs_int > 0 annotation (Placement(transformation(
+    final T_start=T_start)   if ATabs_int > 0 annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={210,-152})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs_int if
-                                                              ATabs_int > 0
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a tabs_int
+                                                           if ATabs_int > 0
     "heat port for TABS" annotation (Placement(transformation(extent={{-250,-190},
             {-230,-170}}),iconTransformation(extent={{-250,-24},{-230,-4}})));
 protected
-  Modelica.Thermal.HeatTransfer.Components.Convection convTABS(dT(start=0)) if
-                                                                     ATabs > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection convTABS(dT(start=0))
+                                                                  if ATabs > 0
     "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-168,8})));
-  Modelica.Thermal.HeatTransfer.Components.Convection convTABS_int(dT(start=0)) if
-                                                                     ATabs_int > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection convTABS_int(dT(start=0))
+                                                                  if ATabs_int > 0
     "Convective heat transfer of exterior walls" annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},

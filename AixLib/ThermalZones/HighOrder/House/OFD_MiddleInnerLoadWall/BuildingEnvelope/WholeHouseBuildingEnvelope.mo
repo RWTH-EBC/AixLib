@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model WholeHouseBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(    redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
@@ -9,38 +9,48 @@ model WholeHouseBuildingEnvelope
   parameter Real solar_absorptance_RO=0.1 "Solar absoptance roof "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors=2.5 "U-value (thermal transmittance) of doors in outer walls" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
-  parameter Modelica.SIunits.Emissivity epsOutDoors(min=0, max=1)=0.95 "Emissivity of inside surface of outer doors" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UValOutDoors=2.5
+    "U-value (thermal transmittance) of doors in outer walls"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
+  parameter Modelica.Units.SI.Emissivity epsOutDoors(
+    min=0,
+    max=1) = 0.95 "Emissivity of inside surface of outer doors"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
 
   // Dynamic ventilation (individual temperatures)
-  parameter Modelica.SIunits.Temperature TDynVentLivingroom_set = 295.15 "Livingroom set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentHobby_set = 295.15 "Hobby set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentCorridorGF_set = 291.15 "Corridor (GF) set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentWCStorage_set = 291.15 "WC / Storage room set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentKitchen_set = 295.15 "Kitchen set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentBedroom_set = 295.15 "Bedroom set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentChildren1_set = 295.15 "Children 1 room set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentCorridorUF_set = 291.15 "Corridor (UF) set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentBath_set = 297.15 "Bathroom set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentChildren2_set = 295.15 "Children 2 room set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature TDynVentAttic_set = 288.15 "Attic set temperature for dyn. vent."
-    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentLivingroom_set=295.15
+    "Livingroom set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentHobby_set=295.15
+    "Hobby set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentCorridorGF_set=291.15
+    "Corridor (GF) set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentWCStorage_set=291.15
+    "WC / Storage room set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentKitchen_set=295.15
+    "Kitchen set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentBedroom_set=295.15
+    "Bedroom set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentChildren1_set=295.15
+    "Children 1 room set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentCorridorUF_set=291.15
+    "Corridor (UF) set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentBath_set=297.15
+    "Bathroom set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentChildren2_set=295.15
+    "Children 2 room set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature TDynVentAttic_set=288.15
+    "Attic set temperature for dyn. vent." annotation (Dialog(tab=
+          "Dynamic ventilation", enable=withDynamicVentilation));
 
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope groundFloor_Building(
     final denAir=denAir,
@@ -253,8 +263,8 @@ model WholeHouseBuildingEnvelope
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloUp[5] "Heat port ceiling of ground floor" annotation (Placement(transformation(extent={{-110,-4},{-90,16}}), iconTransformation(extent={{-110,-10},{-90,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloDown[5] "Heat port floor of ground floor (towards ground plate)" annotation (Placement(transformation(extent={{-112,-78},{-92,-58}}), iconTransformation(extent={{-110,-66},{-90,-46}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groPlateUp[5] "Heat port ground plate towards ground floor" annotation (Placement(transformation(extent={{-112,-100},{-92,-80}}), iconTransformation(extent={{-110,-90},{-90,-70}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorGroundPlate[5](each m=1) if
-       use_UFH
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorGroundPlate[5](each m=1)
+    if use_UFH
     annotation (Placement(transformation(extent={{-32,-98},{-20,-86}})));
 equation
   connect(upperFloor_Building.thermOutside, thermOutside) annotation (Line(

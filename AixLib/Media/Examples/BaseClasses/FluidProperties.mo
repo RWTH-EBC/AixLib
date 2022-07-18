@@ -1,37 +1,37 @@
 within AixLib.Media.Examples.BaseClasses;
- partial model FluidProperties
-   "Model that tests the implementation of the fluid properties"
-   extends PartialProperties;
- 
-   Medium.ThermodynamicState state_phX "Medium state";
-   Medium.ThermodynamicState state_psX "Medium state";
- 
-   Modelica.Media.Interfaces.Types.DerDensityByPressure ddpT
-     "Density derivative w.r.t. pressure";
-   Modelica.Media.Interfaces.Types.DerDensityByTemperature ddTp
-     "Density derivative w.r.t. temperature";
-   Modelica.SIunits.Density[Medium.nX] dddX
-     "Density derivative w.r.t. mass fraction";
- 
- equation
- 
-    // Check setting the states
-     state_pTX = Medium.setState_pTX(p=p, T=T, X=X);
-     state_phX = Medium.setState_phX(p=p, h=h, X=X);
-     state_psX = Medium.setState_psX(p=p, s=s, X=X);
-     checkState(state_pTX, state_phX, "state_phX");
-     checkState(state_pTX, state_psX, "state_psX");
- 
-     // Check the implementation of the functions
-     ddpT = Medium.density_derp_T(state_pTX);
-     ddTp = Medium.density_derT_p(state_pTX);
-     dddX   = Medium.density_derX(state_pTX);
-    annotation (Documentation(info="<html>
+partial model FluidProperties
+  "Model that tests the implementation of the fluid properties"
+  extends PartialProperties;
+
+  Medium.ThermodynamicState state_phX "Medium state";
+  Medium.ThermodynamicState state_psX "Medium state";
+
+  Modelica.Media.Interfaces.Types.DerDensityByPressure ddpT
+    "Density derivative w.r.t. pressure";
+  Modelica.Media.Interfaces.Types.DerDensityByTemperature ddTp
+    "Density derivative w.r.t. temperature";
+  Modelica.SIunits.Density[Medium.nX] dddX
+    "Density derivative w.r.t. mass fraction";
+
+equation
+
+   // Check setting the states
+    state_pTX = Medium.setState_pTX(p=p, T=T, X=X);
+    state_phX = Medium.setState_phX(p=p, h=h, X=X);
+    state_psX = Medium.setState_psX(p=p, s=s, X=X);
+    checkState(state_pTX, state_phX, "state_phX");
+    checkState(state_pTX, state_psX, "state_psX");
+
+    // Check the implementation of the functions
+    ddpT = Medium.density_derp_T(state_pTX);
+    ddTp = Medium.density_derT_p(state_pTX);
+    dddX   = Medium.density_derX(state_pTX);
+   annotation (Documentation(info="<html>
  <p>
  This example checks thermophysical properties of the medium.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  June 6, 2015, by Michael Wetter:<br/>
@@ -55,6 +55,6 @@ within AixLib.Media.Examples.BaseClasses;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end FluidProperties;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end FluidProperties;

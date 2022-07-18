@@ -19,7 +19,7 @@ model ThermostaticValve
   Modelica.Blocks.Interfaces.RealInput T_room "temperature in room" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-64, 98})));
   Modelica.Blocks.Interfaces.RealInput T_setRoom "set temperature in room" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {56, 98})));
 protected
-  Modelica.SIunits.Density rho "Density of the fluid";
+  Modelica.Units.SI.Density rho "Density of the fluid";
 equation
   rho = Medium.density(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow)));
   // Enthalpie flow

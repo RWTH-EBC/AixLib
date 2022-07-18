@@ -3,7 +3,7 @@ model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
   "A small open loop example with a Substation with variable supply temperature and fixed dT"
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Temperature T_amb = 283.15
+  parameter Modelica.Units.SI.Temperature T_amb=283.15
     "Ambient temperature around pipes";
 
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT (
@@ -74,8 +74,8 @@ model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
         origin={-80,-80})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=12000,
-    freqHz=1/10000,
-    offset=24000)  "A sine wave for varying heat demands" annotation (Placement(
+    f=1/10000,
+    offset=24000) "A sine wave for varying heat demands" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,

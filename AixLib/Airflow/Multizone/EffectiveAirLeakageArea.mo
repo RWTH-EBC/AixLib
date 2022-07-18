@@ -1,77 +1,77 @@
 within AixLib.Airflow.Multizone;
- model EffectiveAirLeakageArea "Effective air leakage area"
-   extends AixLib.Airflow.Multizone.BaseClasses.PowerLawResistance(
-     m=0.65,
-     final k=L * CDRat * sqrt(2.0/rho_default) * dpRat^(0.5-m));
- 
-   parameter Modelica.SIunits.PressureDifference dpRat(
-     min=0,
-     displayUnit="Pa") = 4 "Pressure drop"
-     annotation (Dialog(group="Rating conditions"));
-   parameter Real CDRat(
-     min=0,
-     max=1) = 1 "Discharge coefficient"
-     annotation (Dialog(group="Rating conditions"));
- 
-   parameter Modelica.SIunits.Area L(min=0) "Effective leakage area";
- 
- equation
-    v = V_flow/L;
-   annotation (Icon(graphics={
-         Rectangle(
-           extent={{-50,48},{50,-42}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,0,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-74,12},{-38,-14}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid),
-         Text(
-           extent={{-104,92},{-20,54}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid,
-           textString=
-                "L=%L"),
-         Text(
-           extent={{22,94},{98,56}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={255,255,255},
-           fillPattern=FillPattern.Solid,
-           textString=
-                "m=%m"),
-         Rectangle(
-           extent={{-100,6},{-64,-6}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{22,6},{100,-6}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-70,4},{-52,-4}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid),
-         Rectangle(
-           extent={{-86,2},{-38,-2}},
-           lineColor={0,0,255},
-           pattern=LinePattern.None,
-           fillColor={0,127,0},
-           fillPattern=FillPattern.Solid)}),
- defaultComponentName="lea",
- Documentation(info="<html>
+model EffectiveAirLeakageArea "Effective air leakage area"
+  extends AixLib.Airflow.Multizone.BaseClasses.PowerLawResistance(
+    m=0.65,
+    final k=L * CDRat * sqrt(2.0/rho_default) * dpRat^(0.5-m));
+
+  parameter Modelica.SIunits.PressureDifference dpRat(
+    min=0,
+    displayUnit="Pa") = 4 "Pressure drop"
+    annotation (Dialog(group="Rating conditions"));
+  parameter Real CDRat(
+    min=0,
+    max=1) = 1 "Discharge coefficient"
+    annotation (Dialog(group="Rating conditions"));
+
+  parameter Modelica.SIunits.Area L(min=0) "Effective leakage area";
+
+equation
+   v = V_flow/L;
+  annotation (Icon(graphics={
+        Rectangle(
+          extent={{-50,48},{50,-42}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-74,12},{-38,-14}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-104,92},{-20,54}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString=
+               "L=%L"),
+        Text(
+          extent={{22,94},{98,56}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString=
+               "m=%m"),
+        Rectangle(
+          extent={{-100,6},{-64,-6}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{22,6},{100,-6}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-70,4},{-52,-4}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-86,2},{-38,-2}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,127,0},
+          fillPattern=FillPattern.Solid)}),
+defaultComponentName="lea",
+Documentation(info="<html>
  <p>
  This model describes the one-directional pressure driven
  air flow through a crack-like opening, using the equation
@@ -126,7 +126,7 @@ within AixLib.Airflow.Multizone;
  </li>
  </ul>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  June 24, 2018, by Michael Wetter:<br/>
@@ -172,6 +172,6 @@ within AixLib.Airflow.Multizone;
  Released first version.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end EffectiveAirLeakageArea;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end EffectiveAirLeakageArea;

@@ -43,19 +43,19 @@ model MultizoneEquipped
     tab="AirHandlingUnit",
     group="Settings AHU Value",
     enable=HRS));
-  parameter Modelica.SIunits.Time sampleRateAHU(min=0) = 1800
-    "Time period for sampling"
-    annotation (Dialog(tab="AirHandlingUnit", group="Settings for State Machines"));
-  parameter Modelica.SIunits.Pressure dpAHU_sup
+  parameter Modelica.Units.SI.Time sampleRateAHU(min=0) = 1800
+    "Time period for sampling" annotation (Dialog(tab="AirHandlingUnit", group=
+          "Settings for State Machines"));
+  parameter Modelica.Units.SI.Pressure dpAHU_sup
     "Pressure difference over supply fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
-  parameter Modelica.SIunits.Pressure dpAHU_eta
+  parameter Modelica.Units.SI.Pressure dpAHU_eta
     "Pressure difference over extract fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
-  parameter Modelica.SIunits.Efficiency effFanAHU_sup
+  parameter Modelica.Units.SI.Efficiency effFanAHU_sup
     "Efficiency of supply fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
-  parameter Modelica.SIunits.Efficiency effFanAHU_eta
+  parameter Modelica.Units.SI.Efficiency effFanAHU_eta
     "Efficiency of extract fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
   replaceable model AHUMod =
@@ -106,8 +106,8 @@ model MultizoneEquipped
     final dp_sup=dpAHU_sup,
     final dp_eta=dpAHU_eta,
     final eta_sup=effFanAHU_sup,
-    final eta_eta=effFanAHU_eta) if
-       ASurTot > 0 or VAir > 0
+    final eta_eta=effFanAHU_eta)
+    if ASurTot > 0 or VAir > 0
     "Air Handling Unit"
     annotation (
     Placement(transformation(extent={{-52,10},{18,40}})));
@@ -129,8 +129,8 @@ protected
     extent={{-5,-5},{5,5}},
     rotation=90,
     origin={23,53})));
-  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1) if
-       ASurTot > 0 or VAir > 0
+  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1)
+    if ASurTot > 0 or VAir > 0
     "Temperature limiter for measured indoor air temperature for AHU"
     annotation (Placement(transformation(extent={{30,-33},{20,-23}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSplit airFlowRateSplit(
@@ -148,14 +148,14 @@ protected
   RC.BaseClasses.ThermSplitter splitterThermPercentAir(
     final splitFactor=zoneFactor,
     final nOut=numZones,
-    final nIn=1) if        ASurTot > 0 or VAir > 0
+    final nIn=1)        if ASurTot > 0 or VAir > 0
     "Collector of indoor air temperatures of all zones"
     annotation (Placement(transformation(
     extent={{-4,-4},{4,4}},
     rotation=0,
     origin={50,-28})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg if
-       ASurTot > 0 or VAir > 0
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
+    if ASurTot > 0 or VAir > 0
     "Averaged air temperature of the zones which are supplied by the AHU"
     annotation (Placement(transformation(extent={{42,-32},{34,-24}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSum airFlowRate(
@@ -171,7 +171,7 @@ protected
     final splitFactor=zoneFactor) if (ASurTot > 0 or VAir > 0) and use_moisture_balance
     "Sums up a vector[numZones] of identical humidities to an average humidity"
     annotation (Placement(transformation(extent={{-68,76},{-48,96}})));
-  BaseClasses.AbsToRelHum absToRelHum if     (ASurTot > 0 or VAir > 0) and use_moisture_balance
+  BaseClasses.AbsToRelHum absToRelHum     if (ASurTot > 0 or VAir > 0) and use_moisture_balance
     "Converter from absolute humidity to relative humidity"
     annotation (Placement(transformation(extent={{-36,76},{-26,86}})));
   BaseClasses.RelToAbsHum relToAbsHum1 if (ASurTot > 0 or VAir > 0) and use_moisture_balance

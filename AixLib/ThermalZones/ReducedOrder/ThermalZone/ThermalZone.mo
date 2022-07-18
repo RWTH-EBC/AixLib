@@ -31,9 +31,11 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
   parameter Real KR_heater=1000 "Gain of the heating controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_heater=1
-    "Time constant of the heating controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Modelica.Units.SI.Time TN_heater=1
+    "Time constant of the heating controller" annotation (Dialog(
+      tab="IdealHeaterCooler",
+      group="Heater",
+      enable=not recOrSep));
   parameter Boolean Cooler_on=true "Activates the cooler"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real h_cooler=0 "Upper limit controller output of the cooler"
@@ -42,18 +44,20 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
   parameter Real KR_cooler=1000 "Gain of the cooling controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_cooler=1
-    "Time constant of the cooling controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Modelica.Units.SI.Time TN_cooler=1
+    "Time constant of the cooling controller" annotation (Dialog(
+      tab="IdealHeaterCooler",
+      group="Cooler",
+      enable=not recOrSep));
 
   // CO2 parameters
-  parameter Modelica.SIunits.MassFraction XCO2_amb=6.12157E-4
+  parameter Modelica.Units.SI.MassFraction XCO2_amb=6.12157E-4
     "Massfraction of CO2 in atmosphere (equals 403ppm)"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
-  parameter Modelica.SIunits.Area areaBod=1.8
+  parameter Modelica.Units.SI.Area areaBod=1.8
     "Body surface area source SIA 2024:2015"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
-  parameter Modelica.SIunits.DensityOfHeatFlowRate metOnePerSit=58
+  parameter Modelica.Units.SI.DensityOfHeatFlowRate metOnePerSit=58
     "Metabolic rate of a relaxed seated person  [1 Met = 58 W/m^2]"
     annotation (Dialog(tab="CO2", enable=use_C_flow));
 
@@ -93,8 +97,8 @@ model ThermalZone "Thermal zone containing moisture balance"
 
   corG corGMod(
     final n=zoneParam.nOrientations,
-    final UWin=zoneParam.UWin) if
-    sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
+    final UWin=zoneParam.UWin)
+ if sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-16,43},{-4,55}})));
   EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
@@ -210,8 +214,8 @@ model ThermalZone "Thermal zone containing moisture balance"
   SolarGain.SimpleExternalShading simpleExternalShading(
     final nOrientations=zoneParam.nOrientations,
     final maxIrrs=zoneParam.maxIrr,
-    final gValues=zoneParam.shadingFactor) if
-    sum(zoneParam.ATransparent) > 0
+    final gValues=zoneParam.shadingFactor)
+ if sum(zoneParam.ATransparent) > 0
     annotation (Placement(transformation(extent={{4,44},{10,50}})));
 
   // Air Exchange
@@ -222,16 +226,16 @@ model ThermalZone "Thermal zone containing moisture balance"
     final maxOverheatingACH=zoneParam.maxOverheatingACH,
     final maxSummerACH=zoneParam.maxSummerACH,
     final winterReduction=zoneParam.winterReduction,
-    final Tmean_start=zoneParam.T_start) if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
+    final Tmean_start=zoneParam.T_start)
+    if (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
     "Calculates natural venitlation and infiltration"
     annotation (Placement(transformation(extent={{-68,-34},{-48,-14}})));
-  Utilities.Psychrometrics.MixedTemperature mixedTemp if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
+  Utilities.Psychrometrics.MixedTemperature mixedTemp
+    if (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-56,-2},{-48,6}})));
-  HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange and not use_moisture_balance
+  HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir)
+    if (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange and not use_moisture_balance
     "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-12},{-6,4}})));
 
@@ -265,16 +269,16 @@ model ThermalZone "Thermal zone containing moisture balance"
     annotation (Placement(transformation(extent={{-40,-68},{-28,-56}})));
   BoundaryConditions.InternalGains.Moisture.MoistureGains moistureGains(
     final roomArea=zoneParam.AZone,
-    final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
-       ATot > 0 and use_moisture_balance
+    final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople)
+    if ATot > 0 and use_moisture_balance
     "Internal moisture gains by plants, etc."
     annotation (Dialog(enable=use_moisture_balance, tab="Moisture"),
       Placement(transformation(extent={{-70,-78},{-60,-68}})));
-  Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if
-       internalGainsMode <> 3 and use_moisture_balance
+  Modelica.Blocks.Sources.Constant noMoisturePerson(k=0)
+    if internalGainsMode <> 3 and use_moisture_balance
     annotation (Placement(transformation(extent={{-58,-66},{-50,-58}})));
-  Modelica.Blocks.Interfaces.RealOutput X_w if
-       (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
+  Modelica.Blocks.Interfaces.RealOutput X_w
+    if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
     "Humidity output" annotation (Placement(transformation(extent={{100,-80},{
             120,-60}}),
                     iconTransformation(extent={{100,-80},{120,-60}})));
@@ -285,8 +289,8 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Ventilation and infiltration humidity" annotation (Placement(
         transformation(extent={{-128,-108},{-88,-68}}), iconTransformation(
           extent={{-106,-82},{-84,-60}})));
-  HighOrder.Components.MoistAir.VarMoistAirExchange airExcMoi(final V=zoneParam.VAir) if
-    (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange and use_moisture_balance
+  HighOrder.Components.MoistAir.VarMoistAirExchange airExcMoi(final V=zoneParam.VAir)
+ if (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange and use_moisture_balance
     "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-12},{-6,4}})));
 
@@ -316,24 +320,24 @@ protected
     Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof" annotation (Placement(transformation(extent={{-14,68},
             {-6,76}})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConRoof if
-    zoneParam.ARoof > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConRoof
+ if zoneParam.ARoof > 0
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,5},{-5,-5}},rotation=0,
     origin={5,83})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof if
-    zoneParam.ARoof > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof
+ if zoneParam.ARoof > 0
     "Prescribed temperature for roof outdoor surface temperature"
     annotation (Placement(transformation(extent={{-4.5,-4},{4.5,4}},
                                                                 rotation=0,
     origin={-9.5,84})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor if
-    zoneParam.AFloor > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor
+ if zoneParam.AFloor > 0
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={48,36})));
-  Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) if
-    zoneParam.AFloor > 0
+  Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil)
+ if zoneParam.AFloor > 0
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={39,22})));
@@ -341,15 +345,15 @@ protected
     "Outdoor coefficient of heat transfer for walls" annotation (Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                               rotation=180,
         origin={-2,16})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWall if
-    sum(zoneParam.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWall
+ if sum(zoneParam.AExt) > 0
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{26,24},{16,14}})));
   Modelica.Blocks.Sources.Constant hConWin(final k=(zoneParam.hConWinOut + zoneParam.hRadWall)*sum(zoneParam.AWin))
     "Outdoor coefficient of heat transfer for windows" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90,
         origin={22,48})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWin if
-    sum(zoneParam.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWin
+ if sum(zoneParam.AWin) > 0
     "Outdoor convective heat transfer of windows"
     annotation (Placement(transformation(extent={{26,30},{16,40}})));
   Modelica.Blocks.Math.Add solRadRoof[zoneParam.nOrientationsRoof]
@@ -358,26 +362,26 @@ protected
   Modelica.Blocks.Math.Add solRadWall[zoneParam.nOrientations]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-54,22},{-44,32}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall if
-    sum(zoneParam.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall
+ if sum(zoneParam.AExt) > 0
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{-18,16},{-10,24}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin if
-    sum(zoneParam.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin
+ if sum(zoneParam.AWin) > 0
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{4,31},{12,38}})));
 
   // protected: AirExchange
-  Modelica.Blocks.Math.Add addInfVen if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
+  Modelica.Blocks.Math.Add addInfVen
+    if (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
     "Combines infiltration and ventilation"
     annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-34,-28})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemVen if
-       (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemVen
+    if (ATot > 0 or zoneParam.VAir > 0) and use_AirExchange
     "Prescribed temperature for ventilation"
     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -385,8 +389,8 @@ protected
         origin={-36,0})));
 
   // protected: MoistAir
-  Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w) if
-       (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
+  Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w)
+    if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-58},{-60,-42}})));
 
 public

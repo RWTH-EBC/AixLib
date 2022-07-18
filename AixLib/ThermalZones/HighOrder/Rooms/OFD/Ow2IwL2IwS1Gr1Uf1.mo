@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.OFD;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow2IwL2IwS1Gr1Uf1
   "2 outer walls, 2 inner walls load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
 
@@ -6,13 +6,13 @@ model Ow2IwL2IwS1Gr1Uf1
                                                                           final room_V=room_length*room_width*room_height);
 
   //////////room geometry
-  parameter Modelica.SIunits.Length room_length=2 "length "
+  parameter Modelica.Units.SI.Length room_length=2 "length "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_lengthb=1 "length_b "
+  parameter Modelica.Units.SI.Length room_lengthb=1 "length_b "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width=2 "width "
+  parameter Modelica.Units.SI.Length room_width=2 "width "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=2 "height"
+  parameter Modelica.Units.SI.Height room_height=2 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
 
@@ -21,7 +21,7 @@ model Ow2IwL2IwS1Gr1Uf1
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
-  parameter Modelica.SIunits.Area windowarea_OW1=0 "Window area " annotation (
+  parameter Modelica.Units.SI.Area windowarea_OW1=0 "Window area " annotation (
       Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
@@ -30,7 +30,7 @@ model Ow2IwL2IwS1Gr1Uf1
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
-  parameter Modelica.SIunits.Area windowarea_OW2=0 "Window area" annotation (
+  parameter Modelica.Units.SI.Area windowarea_OW2=0 "Window area" annotation (
       Dialog(
       group="Windows and Doors",
       naturalWidth=10,
@@ -40,13 +40,13 @@ model Ow2IwL2IwS1Gr1Uf1
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
-  parameter Modelica.SIunits.Length door_width_OD1=0 "width " annotation (
+  parameter Modelica.Units.SI.Length door_width_OD1=0 "width " annotation (
       Dialog(
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true,
       enable=withDoor1));
-  parameter Modelica.SIunits.Length door_height_OD1=0 "height " annotation (
+  parameter Modelica.Units.SI.Length door_height_OD1=0 "height " annotation (
       Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
@@ -55,13 +55,13 @@ model Ow2IwL2IwS1Gr1Uf1
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
-  parameter Modelica.SIunits.Length door_width_OD2=0 "width " annotation (
+  parameter Modelica.Units.SI.Length door_width_OD2=0 "width " annotation (
       Dialog(
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true,
       enable=withDoor2));
-  parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (
+  parameter Modelica.Units.SI.Length door_height_OD2=0 "height " annotation (
       Dialog(
       group="Windows and Doors",
       descriptionLabel=true,

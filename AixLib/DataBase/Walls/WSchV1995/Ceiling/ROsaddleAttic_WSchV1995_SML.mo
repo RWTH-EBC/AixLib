@@ -1,4 +1,4 @@
-within AixLib.DataBase.Walls.WSchV1995.Ceiling;
+﻿within AixLib.DataBase.Walls.WSchV1995.Ceiling;
 record ROsaddleAttic_WSchV1995_SML
   "Saddle roof in attic after WSchV1995, for building of type S (schwer), M (mittel) and L (leicht)"
   extends WallBaseDataDefinition(n(min = 1) = 1 "Number of wall layers", d = {0.18}

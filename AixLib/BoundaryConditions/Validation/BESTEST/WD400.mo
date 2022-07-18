@@ -1,25 +1,25 @@
 within AixLib.BoundaryConditions.Validation.BESTEST;
- model WD400
-   "Test model for BESTEST weather data: high latitude case"
-   extends WD100(
-     lat=1.2441754105767,
-     rho=0,
-     alt=10,
-     weaDatHHorIR(
-       filNam=Modelica.Utilities.Files.loadResource(
-         "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/700260.mos")),
-     weaDatTDryBulTDewPoinOpa(
-       filNam=Modelica.Utilities.Files.loadResource(
-         "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/700260.mos")));
-   annotation (
-     experiment(
-       StopTime=3.1536e+07,
-       Interval=900,
-       Tolerance=1e-6),
-     __Dymola_Commands(
-       file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/Validation/BESTEST/WD400.mos" "Simulate and plot"),
-     Documentation(
-       revisions="<html>
+model WD400
+  "Test model for BESTEST weather data: high latitude case"
+  extends WD100(
+    lat=1.2441754105767,
+    rho=0,
+    alt=10,
+    weaDatHHorIR(
+      filNam=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/700260.mos")),
+    weaDatTDryBulTDewPoinOpa(
+      filNam=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/Data/BoundaryConditions/Validation/BESTEST/700260.mos")));
+  annotation (
+    experiment(
+      StopTime=3.1536e+07,
+      Interval=900,
+      Tolerance=1e-6),
+    __Dymola_Commands(
+      file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/Validation/BESTEST/WD400.mos" "Simulate and plot"),
+    Documentation(
+      revisions="<html>
  <ul>
  <li>
  March 11, 2020, by Ettore Zanetti:<br/>
@@ -32,7 +32,7 @@ within AixLib.BoundaryConditions.Validation.BESTEST;
  </li>
  </ul>
  </html>",
-       info="<html>
+      info="<html>
  <h4>WD400: High Latitude Case</h4>
  <p>Weather data file : 700260.epw</p>
  <p><i>Table 1: Site Data for Weather file 700260.epw</i></p>
@@ -53,6 +53,6 @@ within AixLib.BoundaryConditions.Validation.BESTEST;
  <td><p>9</p></td>
  </tr>
  </table>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end WD400;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end WD400;

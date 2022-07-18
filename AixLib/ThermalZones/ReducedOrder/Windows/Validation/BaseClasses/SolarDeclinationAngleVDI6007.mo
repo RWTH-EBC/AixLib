@@ -10,14 +10,14 @@ model SolarDeclinationAngleVDI6007 "Calculates the solar azimuth angle based on
     displayUnit="deg") "Solar declination angle"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
-    constant Modelica.SIunits.Time day=86400 "Number of seconds in a day";
-    Modelica.SIunits.Angle J_ "Daily Angle for 105th day of the year";
+  constant Modelica.Units.SI.Time day=86400 "Number of seconds in a day";
+  Modelica.Units.SI.Angle J_ "Daily Angle for 105th day of the year";
 equation
-  J_=Modelica.SIunits.Conversions.from_deg(360*105/365);
-  decAng=Modelica.SIunits.Conversions.from_deg(0.3948-23.2559*
-  Modelica.Math.cos(J_+Modelica.SIunits.Conversions.from_deg(9.1))-0.3915*
-  Modelica.Math.cos(2*J_+Modelica.SIunits.Conversions.from_deg(5.4))-0.1764*
-  Modelica.Math.cos(3*J_+Modelica.SIunits.Conversions.from_deg(26)));
+  J_=Modelica.Units.Conversions.from_deg(360*105/365);
+  decAng=Modelica.Units.Conversions.from_deg(0.3948 - 23.2559*Modelica.Math.cos(
+    J_ + Modelica.Units.Conversions.from_deg(9.1)) - 0.3915*Modelica.Math.cos(2
+    *J_ + Modelica.Units.Conversions.from_deg(5.4)) - 0.1764*Modelica.Math.cos(
+    3*J_ + Modelica.Units.Conversions.from_deg(26)));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),

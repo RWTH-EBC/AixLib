@@ -3,21 +3,20 @@ model ExergyMeters
 
   extends Modelica.Icons.Example;
 
-  parameter Modelica.SIunits.Temperature T_start=323.15
+  parameter Modelica.Units.SI.Temperature T_start=323.15
     "Start reference temperature of medium";
 
   parameter Integer n = 10 "Number of layers";
 
-  parameter Modelica.SIunits.Mass mass = 1000 "Mass of one layer";
+  parameter Modelica.Units.SI.Mass mass=1000 "Mass of one layer";
 
   package Medium = AixLib.Media.Water "Medium in the sensor"
                            annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Sources.Sine pulse(
-    each freqHz=1/3600,
+    each f=1/3600,
     each offset=3000,
-    each amplitude=3000)
-                      "Sine wave to vary heat generation and demand"
+    each amplitude=3000) "Sine wave to vary heat generation and demand"
     annotation (Placement(transformation(extent={{-12,-14},{8,6}})));
   ExergyMeter.StoredExergyMeter exergyStorageMeterMedium(
     redeclare package Medium = Medium,

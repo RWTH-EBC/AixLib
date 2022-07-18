@@ -5,8 +5,8 @@ block CtrThrottleQFlow
     "Connector of measurement input signal" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent=
            {{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput Q_flowSet if
-                                               useExternalQset
+  Modelica.Blocks.Interfaces.RealInput Q_flowSet
+                                            if useExternalQset
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-140,-70},{-100,-30}}), iconTransformation(
           extent={{-140,-70},{-100,-30}})));
@@ -15,15 +15,18 @@ block CtrThrottleQFlow
         iconTransformation(extent={{90,-22},{138,26}})));
 
   parameter Boolean useExternalQset = false "If True, set Volume Flow can be given externally";
-  parameter Modelica.SIunits.Power Q_flowSetCon = 0 "Power set point of consumer in W";
+  parameter Modelica.Units.SI.Power Q_flowSetCon=0
+    "Power set point of consumer in W";
   parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small) = 130
     "Time constant of Integrator block";
-  parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
-  parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
+  parameter Modelica.Units.SI.Time Td(min=0) = 4
+    "Time constant of Derivative block";
+  parameter Modelica.Units.NonSI.AngularVelocity_rpm rpm_pump(min=0) = 2000
+    "Rpm of the Pump";
+  parameter Modelica.Blocks.Types.Init initType=.Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
-    annotation(Dialog(group="PID"));
+    annotation (Dialog(group="PID"));
   parameter Boolean reverseAction = true
     "Set to true if heating system, and false for cooling system";
   parameter Real xi_start=0
@@ -34,8 +37,8 @@ block CtrThrottleQFlow
     annotation(Dialog(group="PID"));
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
-  Modelica.Blocks.Sources.Constant constQ_flowSet(final k=Q_flowSetCon) if
-                                                                         not useExternalQset
+  Modelica.Blocks.Sources.Constant constQ_flowSet(final k=Q_flowSetCon)
+                                                                      if not useExternalQset
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   AixLib.Controls.Continuous.LimPID PID(
     final yMax=1,

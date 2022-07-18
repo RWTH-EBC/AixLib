@@ -3,15 +3,18 @@ model MultizoneEquipped_TABS
   extends MultizoneEquipped;
   // TABS
   parameter Integer numTabs = 1;
-  parameter Modelica.SIunits.Area ATabs[numTabs] = fill(0, numTabs) "Areas of exterior walls by orientations";
+  parameter Modelica.Units.SI.Area ATabs[numTabs]=fill(0, numTabs)
+    "Areas of exterior walls by orientations";
   parameter Boolean ExtTabs[numTabs] = fill(false, numTabs) "Areas of exterior walls by orientations";
   parameter Integer TabsConnection[numTabs] = fill(1, numTabs)  "";
-  parameter Modelica.SIunits.Power TabsHeatLoad[numTabs] = fill(0, numTabs) "Calculated Heat Load for room with panel heating";
+  parameter Modelica.Units.SI.Power TabsHeatLoad[numTabs]=fill(0, numTabs)
+    "Calculated Heat Load for room with panel heating";
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TabswallTypeFloor[numTabs]=
   fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(), numTabs) "Wall type for floor";
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TabswallTypeCeiling[numTabs]=
   fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(), numTabs) "Wall type for ceiling";
-  parameter Modelica.SIunits.Distance TabsSpacing[numTabs] = fill(0.35, numTabs) "Spacing between tubes";
+  parameter Modelica.Units.SI.Distance TabsSpacing[numTabs]=fill(0.35, numTabs)
+    "Spacing between tubes";
   parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition TabsPipes[numTabs]=
   fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PBpipe(),numTabs) "Pipe type for TABS";
 
@@ -25,7 +28,7 @@ model MultizoneEquipped_TABS
     WallTypeCeiling=TabswallTypeCeiling,
     PipeRecord=TabsPipes,
     Controlled=true,
-    Reduced=false) if  ATabs[1] > 0
+    Reduced=false)  if ATabs[1] > 0
     annotation (Placement(transformation(extent={{-14,-80},{20,-50}})));
 
 equation

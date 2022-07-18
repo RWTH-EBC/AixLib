@@ -1,22 +1,22 @@
 within AixLib.Media.Antifreeze.BaseClasses;
- record PropertyCoefficients
-   "Polynomial coefficients to evaluate fluid properties"
-   extends Modelica.Icons.Record;
- 
-   Modelica.SIunits.MassFraction X_a_ref "Reference mass fraction";
-   Modelica.SIunits.Temperature T_ref "Reference temperature";
-   parameter Integer nX_a "Order of polynomial in x";
-   Integer nT[nX_a] "Order of polynomial in y";
-   parameter Integer nTot "Total number of coefficients";
-   Real a_d[nTot] "Polynomial coefficients for density";
-   Real a_eta[nTot] "Polynomial coefficients for dynamic viscosity";
-   Real a_Tf[nTot] "Polynomial coefficients for fusion temperature";
-   Real a_cp[nTot] "Polynomial coefficients for specific heat capacity";
-   Real a_lambda[nTot] "Polynomial coefficients for thermal conductivity";
- 
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-         coordinateSystem(preserveAspectRatio=false)),
-     Documentation(info="<html>
+record PropertyCoefficients
+  "Polynomial coefficients to evaluate fluid properties"
+  extends Modelica.Icons.Record;
+
+  Modelica.SIunits.MassFraction X_a_ref "Reference mass fraction";
+  Modelica.SIunits.Temperature T_ref "Reference temperature";
+  parameter Integer nX_a "Order of polynomial in x";
+  Integer nT[nX_a] "Order of polynomial in y";
+  parameter Integer nTot "Total number of coefficients";
+  Real a_d[nTot] "Polynomial coefficients for density";
+  Real a_eta[nTot] "Polynomial coefficients for dynamic viscosity";
+  Real a_Tf[nTot] "Polynomial coefficients for fusion temperature";
+  Real a_cp[nTot] "Polynomial coefficients for specific heat capacity";
+  Real a_lambda[nTot] "Polynomial coefficients for thermal conductivity";
+
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
  <p>
  Record that is used by media packages in 
  <a href=\"modelica://AixLib.Media.Antifreeze\">
@@ -29,13 +29,13 @@ within AixLib.Media.Antifreeze.BaseClasses;
  Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
  IIR/IIF.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  May 11, 2018, by Michael Wetter:
  Added documentation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end PropertyCoefficients;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end PropertyCoefficients;

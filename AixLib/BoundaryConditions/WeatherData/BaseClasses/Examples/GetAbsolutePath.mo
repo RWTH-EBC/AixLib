@@ -1,25 +1,25 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
- model GetAbsolutePath "Test model to get the absolute path of a URI"
-   extends Modelica.Icons.Example;
-   parameter String f = "modelica://AixLib/package.mo"
-    "Name of a file that exists";
-   parameter String fAbs=
-     AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath(uri=f)
-     "Absolute path of f";
-   final parameter Integer dummy = 1
-     "Dummy variable, used to have a result as needed for the unit tests";
- initial algorithm
-   Modelica.Utilities.Streams.print("Absolute path = " + fAbs);
- 
-   annotation (
- experiment(Tolerance=1e-6, StopTime=1.0),
- __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/GetAbsolutePath.mos"
-         "Simulate and plot"),
-     Documentation(info="<html>
+model GetAbsolutePath "Test model to get the absolute path of a URI"
+  extends Modelica.Icons.Example;
+  parameter String f = "modelica://AixLib/package.mo"
+   "Name of a file that exists";
+  parameter String fAbs=
+    AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath(uri=f)
+    "Absolute path of f";
+  final parameter Integer dummy = 1
+    "Dummy variable, used to have a result as needed for the unit tests";
+initial algorithm
+  Modelica.Utilities.Streams.print("Absolute path = " + fAbs);
+
+  annotation (
+experiment(Tolerance=1e-6, StopTime=1.0),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/GetAbsolutePath.mos"
+        "Simulate and plot"),
+    Documentation(info="<html>
  <p>
  This model tests the function that gets the absolute path of a URI.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  November 18, 2016, by Michael Wetter:<br/>
@@ -37,6 +37,6 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end GetAbsolutePath;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end GetAbsolutePath;

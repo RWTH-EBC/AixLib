@@ -47,7 +47,8 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     TWalls_start=292.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995 Type_Win,
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
     withDynamicVentilation=true,
@@ -66,27 +67,27 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     annotation (Placement(transformation(extent={{-21.5,-84},{-9,-71}})));
 equation
   // Romm Temperatures
-  TAirRooms[1] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Livingroom.airload.port.T);
-  TAirRooms[2] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Hobby.airload.port.T);
-  TAirRooms[3] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Corridor.airload.port.T);
-  TAirRooms[4] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.WC_Storage.airload.port.T);
-  TAirRooms[5] = Modelica.SIunits.Conversions.to_degC(OFD.groundFloor_Building.Kitchen.airload.port.T);
-  TAirRooms[6] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Bedroom.airload.port.T);
-  TAirRooms[7] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Children1.airload.port.T);
-  TAirRooms[8] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Corridor.airload.port.T);
-  TAirRooms[9] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Bath.airload.port.T);
-  TAirRooms[10] = Modelica.SIunits.Conversions.to_degC(OFD.upperFloor_Building.Children2.airload.port.T);
+  TAirRooms[1] =Modelica.Units.Conversions.to_degC(OFD.groundFloor_Building.Livingroom.airload.port.T);
+  TAirRooms[2] =Modelica.Units.Conversions.to_degC(OFD.groundFloor_Building.Hobby.airload.port.T);
+  TAirRooms[3] =Modelica.Units.Conversions.to_degC(OFD.groundFloor_Building.Corridor.airload.port.T);
+  TAirRooms[4] =Modelica.Units.Conversions.to_degC(OFD.groundFloor_Building.WC_Storage.airload.port.T);
+  TAirRooms[5] =Modelica.Units.Conversions.to_degC(OFD.groundFloor_Building.Kitchen.airload.port.T);
+  TAirRooms[6] =Modelica.Units.Conversions.to_degC(OFD.upperFloor_Building.Bedroom.airload.port.T);
+  TAirRooms[7] =Modelica.Units.Conversions.to_degC(OFD.upperFloor_Building.Children1.airload.port.T);
+  TAirRooms[8] =Modelica.Units.Conversions.to_degC(OFD.upperFloor_Building.Corridor.airload.port.T);
+  TAirRooms[9] =Modelica.Units.Conversions.to_degC(OFD.upperFloor_Building.Bath.airload.port.T);
+  TAirRooms[10] =Modelica.Units.Conversions.to_degC(OFD.upperFloor_Building.Children2.airload.port.T);
   //SimulationData
   VentilationSchedule[1] = NaturalVentilation.y[1];
   VentilationSchedule[2] = NaturalVentilation.y[2];
   VentilationSchedule[3] = NaturalVentilation.y[3];
   VentilationSchedule[4] = NaturalVentilation.y[4];
-  TsetValvesSchedule[1] = Modelica.SIunits.Conversions.to_degC(TSet.y[1]);
-  TsetValvesSchedule[2] = Modelica.SIunits.Conversions.to_degC(TSet.y[2]);
-  TsetValvesSchedule[3] = Modelica.SIunits.Conversions.to_degC(TSet.y[3]);
-  TsetValvesSchedule[4] = Modelica.SIunits.Conversions.to_degC(TSet.y[4]);
-  TsetValvesSchedule[5] = Modelica.SIunits.Conversions.to_degC(TSet.y[5]);
-  Toutside = Modelica.SIunits.Conversions.to_degC(Weather.AirTemp);
+  TsetValvesSchedule[1] =Modelica.Units.Conversions.to_degC(TSet.y[1]);
+  TsetValvesSchedule[2] =Modelica.Units.Conversions.to_degC(TSet.y[2]);
+  TsetValvesSchedule[3] =Modelica.Units.Conversions.to_degC(TSet.y[3]);
+  TsetValvesSchedule[4] =Modelica.Units.Conversions.to_degC(TSet.y[4]);
+  TsetValvesSchedule[5] =Modelica.Units.Conversions.to_degC(TSet.y[5]);
+  Toutside =Modelica.Units.Conversions.to_degC(Weather.AirTemp);
   //SolarRadiation
   SolarRadiation[1] = Weather.SolarRadiation_OrientedSurfaces[1].I;
   SolarRadiation[2] = Weather.SolarRadiation_OrientedSurfaces[2].I;

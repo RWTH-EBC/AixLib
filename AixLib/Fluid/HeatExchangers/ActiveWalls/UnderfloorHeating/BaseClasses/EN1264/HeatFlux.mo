@@ -4,14 +4,24 @@ model HeatFlux "Upward and downward heat flux of an underfloor heating circuit a
     UnderfloorHeating.BaseClasses.EN1264.TablesAndParameters.qG_TypeA;
   import Modelica.Constants.pi;
 
-  parameter Modelica.SIunits.Temperature T_U "Temperature of room / ground under panel heating";
+  parameter Modelica.Units.SI.Temperature T_U
+    "Temperature of room / ground under panel heating";
 
-  final parameter Modelica.SIunits.ThermalInsulance R_U = if Ceiling then R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster + R_alphaCeiling  else R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster "Thermal resistance of wall layers under panel heating";
-  final parameter Modelica.SIunits.ThermalInsulance R_O = 1 / alpha_Floor + R_lambdaB + s_u / lambda_E "Thermal resistance of wall layers above panel heating";
+  final parameter Modelica.Units.SI.ThermalInsulance R_U=if Ceiling then
+      R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster + R_alphaCeiling else
+      R_lambdaIns + R_lambdaCeiling + R_lambdaPlaster
+    "Thermal resistance of wall layers under panel heating";
+  final parameter Modelica.Units.SI.ThermalInsulance R_O=1/alpha_Floor +
+      R_lambdaB + s_u/lambda_E
+    "Thermal resistance of wall layers above panel heating";
 
-  final parameter Modelica.SIunits.HeatFlux q_max = K_H * dT_H;
-  final parameter Modelica.SIunits.HeatFlux q_U = 1 / R_U * (R_O * q_max + T_Room - T_U);
-  final parameter Modelica.SIunits.ThermalResistance R_pipe = if withSheathing then (log(D/d_a))/(2*lambda_M*pi) + (log(d_a/(d_a-2*s_R)))/(2*lambda_R*pi) else (log(d_a/(d_a-2*s_R)))/(2*lambda_R*pi) "thermal resistance through pipe layers";
+  final parameter Modelica.Units.SI.HeatFlux q_max=K_H*dT_H;
+  final parameter Modelica.Units.SI.HeatFlux q_U=1/R_U*(R_O*q_max + T_Room -
+      T_U);
+  final parameter Modelica.Units.SI.ThermalResistance R_pipe=if withSheathing
+       then (log(D/d_a))/(2*lambda_M*pi) + (log(d_a/(d_a - 2*s_R)))/(2*lambda_R
+      *pi) else (log(d_a/(d_a - 2*s_R)))/(2*lambda_R*pi)
+    "thermal resistance through pipe layers";
 
 initial equation
 if Ceiling then

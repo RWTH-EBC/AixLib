@@ -7,91 +7,90 @@ model UpperFloorBuildingEnvelope
       AixLib.DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
  parameter Integer dis = 2 "Discretisation layers for underfloor heating" annotation (Dialog(enable = use_UFH));
   //////////room geometry
-  parameter Modelica.SIunits.Length room_width_long=3.92 "w1 "
+  parameter Modelica.Units.SI.Length room_width_long=3.92 "w1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width_short=2.28 "w2 "
+  parameter Modelica.Units.SI.Length room_width_short=2.28 "w2 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height_long=2.60 "h1 "
+  parameter Modelica.Units.SI.Height room_height_long=2.60 "h1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height_short=1 "h2 "
+  parameter Modelica.Units.SI.Height room_height_short=1 "h2 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length roof_width=2.21 "wRO"
+  parameter Modelica.Units.SI.Length roof_width=2.21 "wRO"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length5=3.3
-    "l5 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length6=2.44 "l6 "
+  parameter Modelica.Units.SI.Length length5=3.3 "l5 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length7=1.33 "l7 "
+  parameter Modelica.Units.SI.Length length6=2.44 "l6 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length8=3.3
-    "l8 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length thickness_IWsimple=0.145
+  parameter Modelica.Units.SI.Length length7=1.33 "l7 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length length8=3.3 "l8 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.Units.SI.Length thickness_IWsimple=0.145
     "thickness IWsimple "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   // Outer walls properties
   parameter Real solar_absorptance_RO=0.1 "Solar absoptance roof "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
   //Windows and Doors
-  parameter Modelica.SIunits.Area windowarea_62=1.73 " Area Window62"
+  parameter Modelica.Units.SI.Area windowarea_62=1.73 " Area Window62"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_63=1.73 " Area Window63  "
+  parameter Modelica.Units.SI.Area windowarea_63=1.73 " Area Window63  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_72=1.73 " Area Window72"
+  parameter Modelica.Units.SI.Area windowarea_72=1.73 " Area Window72"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_73=1.73 " Area Window73  "
+  parameter Modelica.Units.SI.Area windowarea_73=1.73 " Area Window73  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_92=1.73 " Area Window51"
+  parameter Modelica.Units.SI.Area windowarea_92=1.73 " Area Window51"
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Modelica.SIunits.Area windowarea_102=1.73 " Area Window102"
+  parameter Modelica.Units.SI.Area windowarea_102=1.73 " Area Window102"
     annotation (Dialog(
       group="Windows and Doors",
       descriptionLabel=true,
       joinNext=true));
-  parameter Modelica.SIunits.Area windowarea_103=1.73 " Area Window103  "
+  parameter Modelica.Units.SI.Area windowarea_103=1.73 " Area Window103  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
 
-  parameter Modelica.SIunits.Temperature Tset_Bedroom=295.15 "Tset_bedroom"
+  parameter Modelica.Units.SI.Temperature Tset_Bedroom=295.15 "Tset_bedroom"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Children1=295.15 "Tset_children1"
+  parameter Modelica.Units.SI.Temperature Tset_Children1=295.15
+    "Tset_children1" annotation (Dialog(
+      tab="Dynamic ventilation",
+      descriptionLabel=true,
+      enable=withDynamicVentilation));
+  parameter Modelica.Units.SI.Temperature Tset_Corridor=291.15 "Tset_corridor"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Corridor=291.15 "Tset_corridor"
-    annotation (Dialog(
-      tab="Dynamic ventilation",
-      descriptionLabel=true,
-      enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Bath=297.15 "Tset_Bath"
+  parameter Modelica.Units.SI.Temperature Tset_Bath=297.15 "Tset_Bath"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Children2=295.15 "Tset_children2"
-    annotation (Dialog(
+  parameter Modelica.Units.SI.Temperature Tset_Children2=295.15
+    "Tset_children2" annotation (Dialog(
       group="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors "U-value (thermal transmittance) of doors in outer walls" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
-  parameter Modelica.SIunits.Emissivity epsOutDoors(min=0, max=1)=0.95 "Emissivity of inside surface of outer doors" annotation (
-     Dialog(
-      tab="Outer walls",
-      group="Doors"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer UValOutDoors
+    "U-value (thermal transmittance) of doors in outer walls"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
+  parameter Modelica.Units.SI.Emissivity epsOutDoors(
+    min=0,
+    max=1) = 0.95 "Emissivity of inside surface of outer doors"
+    annotation (Dialog(tab="Outer walls", group="Doors"));
 
   AixLib.Utilities.Interfaces.SolarRad_in RoofS annotation (Placement(
         transformation(

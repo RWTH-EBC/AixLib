@@ -6,10 +6,13 @@ model ControlledTABS
 
   parameter Integer dis= if not Reduced then 100 else 10  "Number of discretization layers for panel heating pipe";
   parameter Integer RoomNo(min=1)=1 "Number of rooms heated with panel heating" annotation (Dialog(group="General"));
-  parameter Modelica.SIunits.Area Area[RoomNo] "Floor Area" annotation(Dialog(group=
-          "Room Specifications"));
-  parameter Modelica.SIunits.Power HeatLoad[RoomNo] "Calculated Heat Load for room with panel heating" annotation (Dialog(group="Room Specifications"));
-  parameter Modelica.SIunits.Distance Spacing[RoomNo] "Spacing between tubes" annotation (Dialog( group = "Panel Heating"));
+  parameter Modelica.Units.SI.Area Area[RoomNo] "Floor Area"
+    annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Power HeatLoad[RoomNo]
+    "Calculated Heat Load for room with panel heating"
+    annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Distance Spacing[RoomNo] "Spacing between tubes"
+    annotation (Dialog(group="Panel Heating"));
   parameter DataBase.Walls.WallBaseDataDefinition WallTypeFloor[RoomNo]
     "Wall type for floor"                                                                            annotation (Dialog(group=
           "Room Specifications"),                                                                                                                     choicesAllMatching=true);
@@ -19,10 +22,10 @@ model ControlledTABS
   parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition PipeRecord[RoomNo] "Pipe type for TABS" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
   parameter Boolean Controlled=true annotation (Dialog(group="General"));
   parameter Boolean Reduced=true;
-  final parameter Modelica.SIunits.Volume V_Water = tABSSystem.V_Water;
-  final parameter Modelica.SIunits.MassFlowRate m_flow_total = tABSSystem.m_flow_total;
-  final parameter Modelica.SIunits.PressureDifference dp_total = tABSSystem.dp_total;
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow_total = tABSSystem.V_flow_total;
+  final parameter Modelica.Units.SI.Volume V_Water=tABSSystem.V_Water;
+  final parameter Modelica.Units.SI.MassFlowRate m_flow_total=tABSSystem.m_flow_total;
+  final parameter Modelica.Units.SI.PressureDifference dp_total=tABSSystem.dp_total;
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow_total=tABSSystem.V_flow_total;
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatFloor[RoomNo]
     annotation (Placement(transformation(extent={{-10,70},{10,90}}),
@@ -34,10 +37,10 @@ model ControlledTABS
     each yMax=1,
     each yMin=0) if Controlled
     annotation (Placement(transformation(extent={{-58,48},{-34,72}})));
-  Modelica.Blocks.Interfaces.RealInput T_Soll[RoomNo] if  Controlled annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput T_Soll[RoomNo]  if Controlled annotation (Placement(
         transformation(extent={{-116,48},{-92,72}}), iconTransformation(extent={{-116,48},
             {-92,72}})));
-  Modelica.Blocks.Interfaces.RealInput T_Room[RoomNo] if  Controlled annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput T_Room[RoomNo]  if Controlled annotation (Placement(
         transformation(extent={{-116,28},{-92,52}}), iconTransformation(extent={{-116,18},
             {-92,42}})));
   Modelica.Blocks.Sources.Constant const[RoomNo](each k=1)

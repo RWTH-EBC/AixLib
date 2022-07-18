@@ -14,10 +14,11 @@ model PumpCircuit
               property_T=293.15,
               X_a=0.40)
               "Propylene glycol water, 40% mass fraction")));
-  parameter Modelica.SIunits.MassFlowRate m_flow_total;
-  final parameter Modelica.SIunits.VolumeFlowRate Vflow_nom = m_flow_total/rho_default;
-  parameter Modelica.SIunits.PressureDifference dp_nom;
-  parameter Modelica.SIunits.Volume V_Water;
+  parameter Modelica.Units.SI.MassFlowRate m_flow_total;
+  final parameter Modelica.Units.SI.VolumeFlowRate Vflow_nom=m_flow_total/
+      rho_default;
+  parameter Modelica.Units.SI.PressureDifference dp_nom;
+  parameter Modelica.Units.SI.Volume V_Water;
   Movers.SpeedControlled_y pump(
     redeclare package Medium = Medium,
     per(pressure(V_flow={0,Vflow_nom,Vflow_nom/0.7}, dp={dp_nom/0.7,dp_nom,0})),
@@ -64,7 +65,7 @@ protected
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 
 equation

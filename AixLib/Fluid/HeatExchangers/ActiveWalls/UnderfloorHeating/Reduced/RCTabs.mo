@@ -11,17 +11,17 @@ model RCTABS "Pipe Segment of Underfloor Heating System"
     annotation (Dialog(enable=not from_TEASER,
     group="Room Specifications"), choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Area A "TABS Area"
-    annotation(Dialog(enable=not from_TEASER,
-    group = "Room Specifications"));
-  final parameter Modelica.SIunits.Time t_bt_up = 7*86400
-    annotation(Dialog(enable=not from_TEASER,
-    group = "Room Specifications"));
-  final parameter Modelica.SIunits.Time t_bt_lo = 7*86400
-    annotation(Dialog(enable=not from_TEASER,
-    group = "Room Specifications"));
-  parameter Modelica.SIunits.Temperature T_Fmax=302.15        "Maximum surface temperature" annotation (Dialog(group = "Room Specifications"));
-  parameter Modelica.SIunits.Angle OrientationTabs=-1 "Orientation of exterior tabs";
+  parameter Modelica.Units.SI.Area A "TABS Area"
+    annotation (Dialog(enable=not from_TEASER, group="Room Specifications"));
+  final parameter Modelica.Units.SI.Time t_bt_up=7*86400
+    annotation (Dialog(enable=not from_TEASER, group="Room Specifications"));
+  final parameter Modelica.Units.SI.Time t_bt_lo=7*86400
+    annotation (Dialog(enable=not from_TEASER, group="Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Fmax=302.15
+    "Maximum surface temperature"
+    annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Angle OrientationTabs=-1
+    "Orientation of exterior tabs";
 
   final parameter Real param_upper[3]=if not from_TEASER then
       AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.TABSparameters(
@@ -34,19 +34,21 @@ model RCTABS "Pipe Segment of Underfloor Heating System"
       area=A,
       t_bt=t_bt_lo);
 
-  parameter Modelica.SIunits.ThermalResistance R_up = param_upper[1];
+  parameter Modelica.Units.SI.ThermalResistance R_up=param_upper[1];
   //param_upper[1];
   //(param_upper[1]+param_upper[3])*0.3;
-  parameter Modelica.SIunits.HeatCapacity C_up = A* sum(UpperTABS.d .* UpperTABS.rho .* UpperTABS.c);
-  parameter Modelica.SIunits.ThermalResistance R_up_rest = param_upper[3];
+  parameter Modelica.Units.SI.HeatCapacity C_up=A*sum(UpperTABS.d .* UpperTABS.rho
+       .* UpperTABS.c);
+  parameter Modelica.Units.SI.ThermalResistance R_up_rest=param_upper[3];
 
-  parameter Modelica.SIunits.ThermalResistance R_lo = param_lower[1];
-  parameter Modelica.SIunits.HeatCapacity C_lo = param_lower[2];
+  parameter Modelica.Units.SI.ThermalResistance R_lo=param_lower[1];
+  parameter Modelica.Units.SI.HeatCapacity C_lo=param_lower[2];
   // A* sum(LowerTABS.d .* LowerTABS.rho .* LowerTABS.c);
-  parameter Modelica.SIunits.ThermalResistance R_lo_rest = param_lower[3];
+  parameter Modelica.Units.SI.ThermalResistance R_lo_rest=param_lower[3];
 
-  parameter Modelica.SIunits.Temperature T_start=
-      Modelica.SIunits.Conversions.from_degC(16) "Initial temperature" annotation(Dialog(group="Thermal"));
+  parameter Modelica.Units.SI.Temperature T_start=
+      Modelica.Units.Conversions.from_degC(16) "Initial temperature"
+    annotation (Dialog(group="Thermal"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
@@ -98,7 +100,7 @@ model RCTABS "Pipe Segment of Underfloor Heating System"
         rotation=270,
         origin={0,-24})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor RTabs_Lo_2(final R=
-        R_lo_rest) if      External annotation (Placement(transformation(
+        R_lo_rest)      if External annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-62})));

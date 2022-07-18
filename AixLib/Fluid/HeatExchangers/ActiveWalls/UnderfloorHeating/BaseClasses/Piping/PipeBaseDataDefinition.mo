@@ -5,13 +5,11 @@ record PipeBaseDataDefinition "Pipe base data definition"
   parameter Integer n(min = 1)
     "Number of pipe layers"
     annotation(Dialog(tab = "Pipe", group = "Pipe parameters"));
-  parameter Modelica.SIunits.Diameter d[n]
-    "Diameter of pipe layers"
-    annotation(Dialog(tab = "Pipe", group = "Pipe parameters"));
-  parameter Modelica.SIunits.Length t[n]
-    "Thickness of pipe layers"
-    annotation(Dialog(tab = "Pipe", group = "Pipe parameters"));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n]
+  parameter Modelica.Units.SI.Diameter d[n] "Diameter of pipe layers"
+    annotation (Dialog(tab="Pipe", group="Pipe parameters"));
+  parameter Modelica.Units.SI.Length t[n] "Thickness of pipe layers"
+    annotation (Dialog(tab="Pipe", group="Pipe parameters"));
+  parameter Modelica.Units.SI.ThermalConductivity lambda[n]
     "Thermal conductivity of pipe layers"
-    annotation(Dialog(tab = "Pipe", group = "Pipe parameters"));
+    annotation (Dialog(tab="Pipe", group="Pipe parameters"));
 end PipeBaseDataDefinition;

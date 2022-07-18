@@ -17,12 +17,11 @@ model RoomTwinHouseN2 "N2"
     IW2_vert_half_b=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition(),
     roofRoomUpFloor=AixLib.DataBase.Walls.EmpiricalValidation.DummyDefinition()));
 
-  parameter Modelica.SIunits.Length room_length=10 "length"
+  parameter Modelica.Units.SI.Length room_length=10 "length"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=2.6
-                                                   "height"
+  parameter Modelica.Units.SI.Height room_height=2.6 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width=10  "width"
+  parameter Modelica.Units.SI.Length room_width=10 "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   Components.Walls.Wall wallEast(
     final energyDynamics=energyDynamicsWalls,

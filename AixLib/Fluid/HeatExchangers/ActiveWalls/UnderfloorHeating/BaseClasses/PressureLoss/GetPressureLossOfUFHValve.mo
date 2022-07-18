@@ -1,9 +1,10 @@
 ﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
 function GetPressureLossOfUFHValve
   "Function to evaluate the pressure loss for regulating valve of heating circuit."
-  input Modelica.SIunits.VolumeFlowRate vol_flow "Volume flow rate";
-  input Modelica.SIunits.PressureDifference dp_Pipe "Pressure Drop in Pipe";
-  output Modelica.SIunits.PressureDifference preDrop "Pressure drop for the given input";
+  input Modelica.Units.SI.VolumeFlowRate vol_flow "Volume flow rate";
+  input Modelica.Units.SI.PressureDifference dp_Pipe "Pressure Drop in Pipe";
+  output Modelica.Units.SI.PressureDifference preDrop
+    "Pressure drop for the given input";
 protected
   Real vol_flow_internal= vol_flow*1000*3600 "Used for conversion of m^3/s to litre/h";
   Real table_internal "Table with offset for the different Kv-Values";

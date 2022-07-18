@@ -1,9 +1,11 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Door "Simple door"
-  parameter Modelica.SIunits.Area door_area = 2 "Total door area" annotation(Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U = 1.8
-    "Thermal transmission coefficient"                                                            annotation(Dialog(group = "Properties"));
-  parameter Modelica.SIunits.Emissivity eps = 0.9 "Emissivity of door material" annotation(Dialog(group = "Radiation"));
+  parameter Modelica.Units.SI.Area door_area=2 "Total door area"
+    annotation (Dialog(group="Geometry"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer U=1.8
+    "Thermal transmission coefficient" annotation (Dialog(group="Properties"));
+  parameter Modelica.Units.SI.Emissivity eps=0.9 "Emissivity of door material"
+    annotation (Dialog(group="Radiation"));
 
   parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
     Evaluate=true,
@@ -14,7 +16,10 @@ model Door "Simple door"
       choice=3 "Linear approx at rad temp",
       choice=4 "Linear approx at constant T_ref",
       radioButtons=true));
-  parameter Modelica.SIunits.Temperature T_ref=Modelica.SIunits.Conversions.from_degC(16) "Reference temperature for optional linearization" annotation (Dialog(group = "Radiation", enable=radCalcMethod == 4));
+  parameter Modelica.Units.SI.Temperature T_ref=
+      Modelica.Units.Conversions.from_degC(16)
+    "Reference temperature for optional linearization"
+    annotation (Dialog(group="Radiation", enable=radCalcMethod == 4));
 
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}})));

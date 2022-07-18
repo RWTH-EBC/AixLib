@@ -4,38 +4,35 @@ block SelfShadowing
   parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
   extends Modelica.Blocks.Icons.Block;
-  parameter Modelica.SIunits.Length b[n] "Width of window"
+  parameter Modelica.Units.SI.Length b[n] "Width of window"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Height h[n] "Height of window"
+  parameter Modelica.Units.SI.Height h[n] "Height of window"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Length bLef[n] "Window projection left"
+  parameter Modelica.Units.SI.Length bLef[n] "Window projection left"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Length bRig[n] "Window projection right"
+  parameter Modelica.Units.SI.Length bRig[n] "Window projection right"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Length dLef[n]
+  parameter Modelica.Units.SI.Length dLef[n]
     "Distance between projection (left) and window"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Length dRig[n]
+  parameter Modelica.Units.SI.Length dRig[n]
     "Distance between projection (right) and window"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Length bAbo[n] "Window projection above"
+  parameter Modelica.Units.SI.Length bAbo[n] "Window projection above"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Length bBel[n] "Window projection below"
+  parameter Modelica.Units.SI.Length bBel[n] "Window projection below"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Length dAbo[n]
+  parameter Modelica.Units.SI.Length dAbo[n]
     "Distance between projection (above) and window"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Length dBel[n]
+  parameter Modelica.Units.SI.Length dBel[n]
     "Distance between projection (below) and window"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Angle azi[n](displayUnit="degree")
-    "Surface azimuth. azi=-90 degree if surface outward unit normal points
+  parameter Modelica.Units.SI.Angle azi[n](displayUnit="degree") "Surface azimuth. azi=-90 degree if surface outward unit normal points
      toward east; azi=0 if it points toward south"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.SIunits.Angle til[n](displayUnit="degree")
-    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
-    roof"
-    annotation (Dialog(group="Window parameter"));
+  parameter Modelica.Units.SI.Angle til[n](displayUnit="degree") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+    roof" annotation (Dialog(group="Window parameter"));
 
    Modelica.Blocks.Interfaces.RealInput incAng[n](
     final quantity="Angle",
@@ -64,17 +61,14 @@ block SelfShadowing
 protected
   Real e_hn[n] "Horizontal calculation factor";
   Real e_vn[n] "Vertical calculation factor";
-  Modelica.SIunits.Distance x1[n] "Auxiliary variable for shadow from left";
-  Modelica.SIunits.Distance x2[n]
-    "Auxiliary variable for shadow from right";
-  Modelica.SIunits.Distance x3[n]
-    "Auxiliary variable for shadow from above";
-  Modelica.SIunits.Distance x4[n]
-    "Auxiliary variable for shadow from below";
-  Modelica.SIunits.Distance s_h[n] "Horizontal reduction of window";
-  Modelica.SIunits.Distance s_v[n] "Vertical reduction of window";
-  Modelica.SIunits.Area A_S[n] "Auxiliary variable for effective area";
-  Modelica.SIunits.Area A_s[n] "Effective windowarea";
+  Modelica.Units.SI.Distance x1[n] "Auxiliary variable for shadow from left";
+  Modelica.Units.SI.Distance x2[n] "Auxiliary variable for shadow from right";
+  Modelica.Units.SI.Distance x3[n] "Auxiliary variable for shadow from above";
+  Modelica.Units.SI.Distance x4[n] "Auxiliary variable for shadow from below";
+  Modelica.Units.SI.Distance s_h[n] "Horizontal reduction of window";
+  Modelica.Units.SI.Distance s_v[n] "Vertical reduction of window";
+  Modelica.Units.SI.Area A_S[n] "Auxiliary variable for effective area";
+  Modelica.Units.SI.Area A_s[n] "Effective windowarea";
 equation
   for i in 1:n loop
   //Calculating e_hn and e_vn

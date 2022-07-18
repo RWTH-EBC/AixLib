@@ -16,9 +16,9 @@ model OFD_UFH
       choice=4 "WSchV_1984",
       radioButtons=true));
   parameter Integer dis=10;
-  parameter Modelica.SIunits.Distance Spacing[nHeatedRooms] = fill(0.2, 10);
-  parameter Modelica.SIunits.Diameter d_a[nHeatedRooms] = fill(0.017, 10);
-  parameter Modelica.SIunits.Diameter d[nHeatedRooms] = fill(0.018, 10);
+  parameter Modelica.Units.SI.Distance Spacing[nHeatedRooms]=fill(0.2, 10);
+  parameter Modelica.Units.SI.Diameter d_a[nHeatedRooms]=fill(0.017, 10);
+  parameter Modelica.Units.SI.Diameter d[nHeatedRooms]=fill(0.018, 10);
   Modelica.Blocks.Sources.Constant constAirEx[nRooms](k={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5,0}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
   Modelica.Blocks.Sources.Constant constWind(k=0)
     annotation (Placement(transformation(extent={{-70,36},{-50,56}})));

@@ -2,10 +2,10 @@ within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 function TABSparameters
     // Resistors calculation
   import Modelica.Constants.pi;
-  input Modelica.SIunits.Time t_bt = 7*86400;
+  input Modelica.Units.SI.Time t_bt=7*86400;
   input AixLib.DataBase.Walls.WallBaseDataDefinition TABSlayers
     "Upper TABS layers"    annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
-  input Modelica.SIunits.Area area;
+  input Modelica.Units.SI.Area area;
   output Real param[3] = zeros(3);
 protected
   Real omega = 2*pi/t_bt;

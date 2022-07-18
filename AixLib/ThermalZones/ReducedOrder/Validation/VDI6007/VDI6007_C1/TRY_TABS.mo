@@ -5,9 +5,9 @@ model TRY_TABS "VDI 6007 Test Case 3 model"
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord RoomRecord=
       BaseClasses.RoomTypes.RoomType_M()
   annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
- parameter Modelica.SIunits.Temperature T_start=295.15;
- parameter Modelica.SIunits.Area ATabs=16;
- parameter Modelica.SIunits.Power PowerTabs=-1168;
+  parameter Modelica.Units.SI.Temperature T_start=295.15;
+  parameter Modelica.Units.SI.Area ATabs=16;
+  parameter Modelica.Units.SI.Power PowerTabs=-1168;
 
   RC.TwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
@@ -77,8 +77,8 @@ model TRY_TABS "VDI 6007 Test Case 3 model"
     annotation (Placement(transformation(extent={{-168,20},{-148,40}})));
 
   SolarGain.CorrectionGDoublePane
-       corGMod(final n=RoomRecord.nOrientations, final UWin=RoomRecord.UWin) if
-    sum(RoomRecord.ATransparent) > 0 "Correction factor for solar transmission"
+       corGMod(final n=RoomRecord.nOrientations, final UWin=RoomRecord.UWin)
+ if sum(RoomRecord.ATransparent) > 0 "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-56,7},{-44,19}})));
   EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
@@ -110,8 +110,8 @@ model TRY_TABS "VDI 6007 Test Case 3 model"
   SolarGain.SimpleExternalShading simpleExternalShading(
     final nOrientations=RoomRecord.nOrientations,
     final maxIrrs=RoomRecord.maxIrr,
-    final gValues=RoomRecord.shadingFactor) if
-    sum(RoomRecord.ATransparent) > 0
+    final gValues=RoomRecord.shadingFactor)
+ if sum(RoomRecord.ATransparent) > 0
     annotation (Placement(transformation(extent={{-36,8},{-30,14}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
@@ -202,27 +202,27 @@ protected
     "Outdoor coefficient of heat transfer for walls" annotation (Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                               rotation=180,
         origin={-42,-20})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWall1 if
-    sum(RoomRecord.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWall1
+ if sum(RoomRecord.AExt) > 0
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{-14,-10},{-24,-20}})));
   Modelica.Blocks.Sources.Constant hConWin(final k=(RoomRecord.hConWinOut +
         RoomRecord.hRadWall)*sum(RoomRecord.AWin))
     "Outdoor coefficient of heat transfer for windows" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90,
         origin={-18,12})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWin if
-    sum(RoomRecord.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWin
+ if sum(RoomRecord.AWin) > 0
     "Outdoor convective heat transfer of windows"
     annotation (Placement(transformation(extent={{-14,-6},{-24,4}})));
   Modelica.Blocks.Math.Add solRadWall[RoomRecord.nOrientations]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-94,-14},{-84,-4}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall if
-    sum(RoomRecord.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall
+ if sum(RoomRecord.AExt) > 0
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{-58,-20},{-50,-12}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin if
-    sum(RoomRecord.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin
+ if sum(RoomRecord.AWin) > 0
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{-36,-5},{-28,2}})));
 protected

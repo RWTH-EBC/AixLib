@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140;
 model EastWestFacingWindows "windows facing south and west"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(
-    redeclare replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
+    redeclare replaceable model WindowModel =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
       redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls
       wallTypes(
@@ -20,14 +21,15 @@ model EastWestFacingWindows "windows facing south and west"
       roofRoomUpFloor=DataBase.Walls.ASHRAE140.DummyDefinition()), final room_V=
        room_length*room_width*room_height);
 
-  parameter Modelica.SIunits.Length room_length=6 "length"
+  parameter Modelica.Units.SI.Length room_length=6 "length"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=2.7 "height"
+  parameter Modelica.Units.SI.Height room_height=2.7 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width=8 "width"
+  parameter Modelica.Units.SI.Length room_width=8 "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
-  parameter Modelica.SIunits.Area Win_Area=12 "Window area " annotation (Dialog(
+  parameter Modelica.Units.SI.Area Win_Area=12 "Window area " annotation (
+      Dialog(
       group="Windows",
       descriptionLabel=true,
       enable=withWindow1));
@@ -71,8 +73,6 @@ model EastWestFacingWindows "windows facing south and west"
         extent={{-5,-35},{5,35}},
         rotation=90,
         origin={18,-68})));
-    final use_condLayers=true)
-                      annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_West(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -102,11 +102,6 @@ model EastWestFacingWindows "windows facing south and west"
         rotation=0,
         origin={-83,13})));
 
-    final use_condLayers=true)
-                             annotation (Placement(transformation(
-        extent={{-4,-24},{4,24}},
-        rotation=-90,
-        origin={26,78})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_East(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -135,11 +130,6 @@ model EastWestFacingWindows "windows facing south and west"
         rotation=180,
         origin={69,13})));
 
-    final use_condLayers=true)
-                             annotation (Placement(transformation(
-        extent={{-4.00001,-24},{4.00001,24}},
-        rotation=90,
-        origin={26,-68})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_North(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -169,8 +159,6 @@ model EastWestFacingWindows "windows facing south and west"
         rotation=90,
         origin={18,69})));
 
-    final use_condLayers=true)
-                     annotation (Placement(transformation(extent={{74,-36},{60,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
     final energyDynamics=energyDynamicsWalls,
     use_shortWaveRadIn=true,
@@ -223,7 +211,7 @@ model EastWestFacingWindows "windows facing south and west"
                      annotation (Placement(transformation(
         extent={{-2.00031,-12},{2.00003,12}},
         rotation=90,
-        origin={-42,-68})));
+        origin={-42,-68})))));
 
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
       annotation (Placement(transformation(extent={{-36,-100},{-28,-92}})));

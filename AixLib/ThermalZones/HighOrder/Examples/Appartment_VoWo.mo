@@ -8,7 +8,8 @@ model Appartment_VoWo "Simulation of 1 apartment "
     VoWoWSchV1984(
     redeclare package Medium = Medium,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
-    redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
+    redeclare model CorrSolarGainWin =
+        Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     fixedHeatFlow3(T_ref=288.15),
     fixedHeatFlow5(T_ref=283.15),
     fixedHeatFlow16(T_ref=288.15),

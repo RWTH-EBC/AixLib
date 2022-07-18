@@ -3,7 +3,7 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
   extends Modelica.Icons.Example;
   package MediumAir = AixLib.Media.Air;
    package MediumWater = AixLib.Media.Water;
-   parameter Modelica.SIunits.Area area=20;
+  parameter Modelica.Units.SI.Area area=20;
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = MediumAir,

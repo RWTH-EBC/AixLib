@@ -9,32 +9,45 @@ model TABSElement "Pipe Segment of Underfloor Heating System"
     "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics"));
   parameter Boolean Reduced=true;
-  parameter Modelica.SIunits.ThermalResistance R_Pipe(min=Modelica.Constants.small) "Resistance of Pipe";
+  parameter Modelica.Units.SI.ThermalResistance R_Pipe(min=Modelica.Constants.small)
+    "Resistance of Pipe";
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor "Wall type for floor" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable=not ROM), choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Thickness d_i(min=Modelica.Constants.small) "Inner Diameters of pipe layers" annotation(Dialog(group = "Panel Heating"));
-  parameter Modelica.SIunits.Length PipeLength "Length of pipe" annotation (Dialog( group = "Panel Heating"));
+  parameter Modelica.Units.SI.Thickness d_i(min=Modelica.Constants.small)
+    "Inner Diameters of pipe layers" annotation (Dialog(group="Panel Heating"));
+  parameter Modelica.Units.SI.Length PipeLength "Length of pipe"
+    annotation (Dialog(group="Panel Heating"));
 
   parameter Integer dis(min = 1) "Parameter to enable dissertisation layers";
 
-  parameter Modelica.SIunits.Area A "Floor Area" annotation(Dialog(group = "Room Specifications"));
+  parameter Modelica.Units.SI.Area A "Floor Area"
+    annotation (Dialog(group="Room Specifications"));
   parameter Integer calculateVol "Calculation method to determine Water Volume" annotation (Dialog(group="Calculation Method to determine Water Volume in Pipe",
         descriptionLabel=true), choices(
       choice=1 "Calculation with inner diameter",
       choice=2 "Calculation with time constant",
       radioButtons=true));
-  final parameter Modelica.SIunits.Volume V_Water = if calculateVol == 1 then (pi / 4 * d_i^(2) * PipeLength) else (vol.m_flow_nominal * tau / (rho_default * dis))  "Water Volume in Tube";
-  final parameter Modelica.SIunits.Time tau = 250 "Time constant to heat up the medium";
-  final parameter Modelica.SIunits.Time tau_nom = V_Water * (rho_default * dis) / m_flow_Circuit;
+  final parameter Modelica.Units.SI.Volume V_Water=if calculateVol == 1 then (
+      pi/4*d_i^(2)*PipeLength) else (vol.m_flow_nominal*tau/(rho_default*dis))
+    "Water Volume in Tube";
+  final parameter Modelica.Units.SI.Time tau=250
+    "Time constant to heat up the medium";
+  final parameter Modelica.Units.SI.Time tau_nom=V_Water*(rho_default*dis)/
+      m_flow_Circuit;
 
-  parameter Modelica.SIunits.Temperature T0(start = 273.15 + 20) "Start Temperature";
+  parameter Modelica.Units.SI.Temperature T0(start=273.15 + 20)
+    "Start Temperature";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_Circuit "Nominal Mass Flow Rate";
-  final parameter Modelica.SIunits.VolumeFlowRate V_flow = m_flow_Circuit / rho_default "Nominal Volume Flow Rate in pipe";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_Circuit
+    "Nominal Mass Flow Rate";
+  final parameter Modelica.Units.SI.VolumeFlowRate V_flow=m_flow_Circuit/
+      rho_default "Nominal Volume Flow Rate in pipe";
   parameter Integer use_vmax(min = 1, max = 2) "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
-  final parameter Modelica.SIunits.Velocity v = V_flow / (pi / 4 * d_i ^ (2)) "velocity of medium in pipe";
-  final parameter Modelica.SIunits.Diameter d_i_nom = sqrt(abs(4 * V_flow / (pi * 0.5))) "Inner pipe diameter as a comparison for user parameter";
+  final parameter Modelica.Units.SI.Velocity v=V_flow/(pi/4*d_i^(2))
+    "velocity of medium in pipe";
+  final parameter Modelica.Units.SI.Diameter d_i_nom=sqrt(abs(4*V_flow/(pi*0.5)))
+    "Inner pipe diameter as a comparison for user parameter";
 
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
@@ -85,7 +98,7 @@ protected
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default);
-  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+  parameter Modelica.Units.SI.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 initial equation
   if use_vmax == 1 then

@@ -1,9 +1,10 @@
 ﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PressureLoss;
 function GetPressureLossOfUFHDistributor
   "Function to evaluate the pressure loss for a given number of heating circuit distributor outlets."
-  input Modelica.SIunits.VolumeFlowRate vol_flow "Volume flow rate";
+  input Modelica.Units.SI.VolumeFlowRate vol_flow "Volume flow rate";
   input Integer numHeaCirDisOut(min=2, max=14) "Number of heating circuit distributor outlets";
-  output Modelica.SIunits.PressureDifference preDrop "Pressure drop for the given input";
+  output Modelica.Units.SI.PressureDifference preDrop
+    "Pressure drop for the given input";
 protected
   Real vol_flow_internal= vol_flow*1000*3600 "Used for conversion of m^3/s to litre/h";
   Real table_internal "Table with offset for the different number of heating circuit outlets";

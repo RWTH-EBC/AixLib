@@ -1,21 +1,21 @@
 within AixLib.Airflow.Multizone.BaseClasses;
- partial model TwoWayFlowElementBuoyancy
-   "Flow resistance that uses the power law"
-   extends AixLib.Airflow.Multizone.BaseClasses.TwoWayFlowElement;
- 
-   parameter Modelica.SIunits.Length wOpe=0.9 "Width of opening"
-     annotation (Dialog(group="Geometry"));
-   parameter Modelica.SIunits.Length hOpe=2.1 "Height of opening"
-     annotation (Dialog(group="Geometry"));
- 
-   parameter Modelica.SIunits.Length hA=2.7/2
-     "Height of reference pressure zone A"
-       annotation (Dialog(group="Geometry"));
-   parameter Modelica.SIunits.Length hB=2.7/2
-     "Height of reference pressure zone B"
-       annotation (Dialog(group="Geometry"));
- 
-   annotation (Documentation(info="<html>
+partial model TwoWayFlowElementBuoyancy
+  "Flow resistance that uses the power law"
+  extends AixLib.Airflow.Multizone.BaseClasses.TwoWayFlowElement;
+
+  parameter Modelica.SIunits.Length wOpe=0.9 "Width of opening"
+    annotation (Dialog(group="Geometry"));
+  parameter Modelica.SIunits.Length hOpe=2.1 "Height of opening"
+    annotation (Dialog(group="Geometry"));
+
+  parameter Modelica.SIunits.Length hA=2.7/2
+    "Height of reference pressure zone A"
+      annotation (Dialog(group="Geometry"));
+  parameter Modelica.SIunits.Length hB=2.7/2
+    "Height of reference pressure zone B"
+      annotation (Dialog(group="Geometry"));
+
+  annotation (Documentation(info="<html>
  <p>
  This is a partial model for models that describe the bi-directional
  air flow through large openings.
@@ -29,7 +29,7 @@ within AixLib.Airflow.Multizone.BaseClasses;
  for doors that can be open or closed as a function of an input signal.
  </p>
  </html>",
- revisions="<html>
+revisions="<html>
  <ul>
  <li>
  June 27, 2018, by Michael Wetter:<br/>
@@ -43,6 +43,6 @@ within AixLib.Airflow.Multizone.BaseClasses;
  February 4, 2005 by Michael Wetter:<br/>
  Released first version.
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end TwoWayFlowElementBuoyancy;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end TwoWayFlowElementBuoyancy;

@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140;
 model SouthFacingWindows "windows facing south"
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoom(
-    redeclare replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
+    redeclare replaceable model WindowModel =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 Type_Win,
       redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls
       wallTypes(
@@ -20,14 +21,15 @@ model SouthFacingWindows "windows facing south"
       roofRoomUpFloor=DataBase.Walls.ASHRAE140.DummyDefinition()), final room_V=
        room_length*room_width*room_height);
 
-  parameter Modelica.SIunits.Length room_length=6 "length"
+  parameter Modelica.Units.SI.Length room_length=6 "length"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Height room_height=2.7 "height"
+  parameter Modelica.Units.SI.Height room_height=2.7 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length room_width=8 "width"
+  parameter Modelica.Units.SI.Length room_width=8 "width"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
-  parameter Modelica.SIunits.Area Win_Area=12 "Window area " annotation (Dialog(
+  parameter Modelica.Units.SI.Area Win_Area=12 "Window area " annotation (
+      Dialog(
       group="Windows",
       descriptionLabel=true,
       enable=withWindow1));
@@ -197,11 +199,6 @@ model SouthFacingWindows "windows facing south"
     final TOutAirLimit=TOutAirLimit,
     calcMethodOut=calcMethodOut)
       annotation(Placement(transformation(extent={{-2.00031,-12},{2.00003,12}}, rotation=90, origin={-38,-70})));
-    use_condLayers=not use_UFH)
-                     annotation (Placement(transformation(
-        extent={{-2.00031,-12},{2.00003,12}},
-        rotation=90,
-        origin={-32,-64})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
     annotation (Placement(transformation(extent={{-104,-104},{-96,-96}}), iconTransformation(extent={{-108,-108},{-92,-92}})));

@@ -1,29 +1,29 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregation.Validation;
- model ShiftAggregationCells "This validation case test the cell shifting procedure"
-   extends Modelica.Icons.Example;
- 
-   discrete Integer curCel "Current occupied cell";
-   discrete Modelica.SIunits.HeatFlowRate[5] QAggShi_flow
-     "Shifted vector of aggregated loads";
- 
- initial equation
-   curCel=3;
-   QAggShi_flow={1,3,2,0,0};
- 
- equation
-   when (sample(4, 1)) then
-     (curCel,QAggShi_flow) = AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregation.shiftAggregationCells(
-         i=5,
-         QAgg_flow=pre(QAggShi_flow),
-         rCel={1,1,1,2,2},
-         nu={1,2,3,5,7},
-         curTim=time);
-   end when;
- 
- annotation (experiment(StartTime=3.5,StopTime=5.5,Tolerance=1e-6),
- __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/LoadAggregation/Validation/ShiftAggregationCells.mos"
-         "Simulate and plot"),
- Documentation(info="<html>
+model ShiftAggregationCells "This validation case test the cell shifting procedure"
+  extends Modelica.Icons.Example;
+
+  discrete Integer curCel "Current occupied cell";
+  discrete Modelica.SIunits.HeatFlowRate[5] QAggShi_flow
+    "Shifted vector of aggregated loads";
+
+initial equation
+  curCel=3;
+  QAggShi_flow={1,3,2,0,0};
+
+equation
+  when (sample(4, 1)) then
+    (curCel,QAggShi_flow) = AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregation.shiftAggregationCells(
+        i=5,
+        QAgg_flow=pre(QAggShi_flow),
+        rCel={1,1,1,2,2},
+        nu={1,2,3,5,7},
+        curTim=time);
+  end when;
+
+annotation (experiment(StartTime=3.5,StopTime=5.5,Tolerance=1e-6),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/LoadAggregation/Validation/ShiftAggregationCells.mos"
+        "Simulate and plot"),
+Documentation(info="<html>
  <p>
  This validation case replicates the load-shifting procedure illustred in the figure below by Cimmino (2014).
  </p>
@@ -36,13 +36,13 @@ within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.LoadAggregati
  thermique pour champs de puits g&eacute;othermiques</i>,
  Ph.D. Thesis, &Eacute;cole Polytechnique de Montr&eacute;al.
  </p>
- </html>", revisions="<html>
+ </html>",revisions="<html>
  <ul>
  <li>
  July 18, 2018, by Alex Laferri&egrave;re:<br/>
  First implementation.
  </li>
  </ul>
- </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
- end ShiftAggregationCells;
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
+end ShiftAggregationCells;
