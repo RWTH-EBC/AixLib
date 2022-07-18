@@ -11,11 +11,14 @@ partial model ModularConsumer_base
               choice="T_input",
               choice="Q_flow_fixed",
               choice="Q_flow_input"),Dialog(enable=true, group = "System"));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominalCon[n_consumers] = fill(0.3, n_consumers) "Nominal mass flow rate";
   parameter Modelica.SIunits.HeatFlowRate Q_flow_fixed[n_consumers] = fill(10000, n_consumers) "Prescribed heat flow";
   parameter Modelica.SIunits.PressureDifference dp_nominalCon[n_consumers] = fill(10, n_consumers)
     "Pressure drop at nominal conditions for the individual consumers"
      annotation(Dialog(tab="Advanced", group="Nominal conditions consumer"));
+
+  parameter Modelica.SIunits.HeatCapacity capacity[n_consumers] =  fill(500, n_consumers) "Capacity of the material";
+  parameter Modelica.SIunits.HeatFlowRate Q_flow_nom[n_consumers] =  fill(10000, n_consumers) "Nominal heat flow";
+  parameter Modelica.SIunits.TemperatureDifference dT_nom[n_consumers] =  fill(20, n_consumers) "nominal temperature difference";
 
   HydraulicModules.SimpleConsumer simpleConsumer[n_consumers](
     redeclare each final package Medium = MediumWater,
@@ -23,9 +26,11 @@ partial model ModularConsumer_base
     demandType=demandType,
     hasPump=hasPump,
     hasFeedback=hasFeedback,
-    m_flow_nominal=m_flow_nominalCon,
     dp_nominalPumpConsumer=dp_nominalCon,
-    Q_flow_fixed=Q_flow_fixed)
+    Q_flow_fixed=Q_flow_fixed,
+    capacity=capacity,
+    Q_flow_nom=Q_flow_nom,
+    dT_nom= dT_nom)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Interfaces.RealInput T[n_consumers] if functionality == "T_input"
                                          annotation (Placement(transformation(

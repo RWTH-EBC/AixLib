@@ -7,7 +7,7 @@ model ModularConsumer
   AixLib.Systems.ModularEnergySystems.Modules.Distributor.Distributor
     distributor(
     redeclare package Medium = Medium,
-    final m_flow_nominal = sum(m_flow_nominalCon),
+    final m_flow_nominal = sum(simpleConsumer.m_flow_nominal),
     n=n_consumers) annotation (
       Placement(transformation(
         extent={{-24,-24},{24,24}},

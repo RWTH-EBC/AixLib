@@ -1,12 +1,18 @@
 within AixLib.Systems.HydraulicModules;
 model SimpleConsumer
-  extends AixLib.Systems.HydraulicModules.BaseClasses.SimpleConsumer_base;
+  extends AixLib.Systems.HydraulicModules.BaseClasses.SimpleConsumer_base(
+  final V=Q_flow_nom*5.24444e-06,
+  final m_flow_nominal=Q_flow_nom/(Medium.cp_const*dT_nom));
 
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
   parameter Modelica.SIunits.Temperature T_fixed=293.15  "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
   parameter Modelica.SIunits.TemperatureDifference dT_maxNominalReturn = 5 "maximum undercooling/overheating based on nominal return temperature";
-  parameter Modelica.SIunits.HeatCapacity capacity=1 "Capacity of the material";
+  parameter Modelica.SIunits.HeatCapacity capacity=500 "Capacity of the material";
   parameter Modelica.SIunits.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
+
+  parameter Modelica.SIunits.HeatFlowRate Q_flow_nom= 0 "Nominal heat flow";
+  parameter Modelica.SIunits.TemperatureDifference dT_nom = 20 "nominal temperature difference";
+
 
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
