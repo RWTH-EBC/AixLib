@@ -16,7 +16,7 @@ block X_pTphi
     "Steam mass fraction"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
-  Modelica.SIunits.AbsolutePressure pSat "Saturation pressure";
+  Modelica.Units.SI.AbsolutePressure pSat "Saturation pressure";
   parameter Integer i_w=
    sum({(
      if Modelica.Utilities.Strings.isEqual(
@@ -85,15 +85,15 @@ equation
  </html>"),Icon(graphics={
         Text(
           extent={{-96,16},{-54,-22}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T"),
         Text(
           extent={{-86,-18},{-36,-100}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="phi"),
         Text(
           extent={{26,56},{90,-54}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="X_steam")}),
   __Dymola_LockedEditing="Model from IBPSA");
 end X_pTphi;

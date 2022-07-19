@@ -22,14 +22,12 @@ model TestCase900 "Test case 900"
     each outGroCon=true,
     each rho=0.2,
     til={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949},
-    each lat=0.69394291059295,
     azi={0,1.5707963267949,3.1415926535898,-1.5707963267949})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,36},{-48,56}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[4](
-    til={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949},
-    each lat=0.69394291059295,
-    azi={0,1.5707963267949,3.1415926535898,-1.5707963267949})
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[4](til
+      ={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949}, azi={
+        0,1.5707963267949,3.1415926535898,-1.5707963267949})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,68},{-48,88}})));
   AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
@@ -174,16 +172,12 @@ model TestCase900 "Test case 900"
     "modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
-    til={0},
-    each lat=0.69394291059295,
-    azi={0})
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1]
+    (til={0}, azi={0})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,124},{-48,144}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](
-    til={0},
-    each lat=0.69394291059295,
-    azi={0})
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](til={0},
+      azi={0})
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,96},{-48,116}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(

@@ -86,7 +86,7 @@ block SourceSelectorRadiation
 
 protected
   constant Real epsCos = 1e-6 "Small value to avoid division by 0";
-  constant Modelica.SIunits.HeatFlux solCon = 1367.7 "Solar constant";
+  constant Modelica.Units.SI.HeatFlux solCon=1367.7 "Solar constant";
 
   // Conditional connectors
   Modelica.Blocks.Interfaces.RealInput HGloHor_in_internal(

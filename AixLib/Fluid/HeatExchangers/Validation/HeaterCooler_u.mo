@@ -5,8 +5,8 @@ model HeaterCooler_u "Model that demonstrates the ideal heater model"
   package Medium = AixLib.Media.Air;
 
 
-  parameter Modelica.SIunits.MassFlowRate
-    m_flow_nominal=3000/1000/20 "Nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=3000/1000/20
+    "Nominal mass flow rate";
 
   AixLib.Fluid.Sources.Boundary_pT sin(
     redeclare package Medium = Medium,

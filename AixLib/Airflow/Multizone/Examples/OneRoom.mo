@@ -48,8 +48,7 @@ model OneRoom
     V=1E12,
     p_start=Medium.p_default,
     nPorts=2,
-    m_flow_nominal=0.001,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+    m_flow_nominal=0.001)
     "Control volume for outside"                             annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -113,7 +112,7 @@ experiment(Tolerance=1e-06, StopTime=1),
  <li>
  March 26, 2021 by Michael Wetter:<br/>
  Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
  </li>
  <li>
  December 22, 2014 by Michael Wetter:<br/>

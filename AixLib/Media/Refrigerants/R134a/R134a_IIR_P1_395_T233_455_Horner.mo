@@ -55,7 +55,6 @@ package R134a_IIR_P1_395_T233_455_Horner
       max=473.15),
     smoothModel=true,
     onePhase=false,
-    ThermoStates=Choices.IndependentVariables.phX,
     fluidConstants=refrigerantConstants);
     /*The vector substanceNames is mandatory, as the number of
       substances is determined based on its size. Here we assume
@@ -1552,14 +1551,14 @@ package R134a_IIR_P1_395_T233_455_Horner
       1,1,1,2|Tetrafluoroethane (HFC|134a) for Temperatures from 170 K
       to 455 K and Pressures up to 70 MPa. In: <i>Journal of physical
       and chemical reference data (23)</i>, S. 657–729. DOI:
-      10.1063/1.555958.
+      10.1063/1.555958 .
     </p>
     <p>
       Huber, Marcia L.; Laesecke, Arno; Perkins, Richard A. (2003):
       Model for the Viscosity and Thermal Conductivity of Refrigerants,
       Including a New Correlation for the Viscosity of R134a. In:
       <i>Ind. Eng. Chem. Res. 42 (13)</i> , S. 3163–3178. DOI:
-      10.1021/ie0300880.
+      10.1021/ie0300880 .
     </p>
     <p>
       Perkins, R. A.; Laesecke, A.; Howley, J.; Ramires, M. L. V.;
@@ -1572,7 +1571,7 @@ package R134a_IIR_P1_395_T233_455_Horner
       Mulero, A.; Cachadiña, I.; Parra, M. I. (2012): Recommended
       Correlations for the Surface Tension of Common Fluids. In:
       <i>Journal of physical and chemical reference data 41 (4)</i>, S.
-      43105. DOI: 10.1063/1.4768782.
+      43105. DOI: 10.1063/1.4768782 .
     </p>
     <p>
       Engelpracht, Mirko (2017): Development of modular and scalable

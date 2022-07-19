@@ -10,12 +10,6 @@ final constant Modelica.Units.SI.Temperature TCri=345.25 "Critical temperature";
 final constant Modelica.Units.SI.Temperature T_min=173.15
   "Minimum temperature for correlated properties";
 
-protected 
-  final constant Real b = 4.355134e-4
-    "Coefficient b for Martin-Hou equation of state";
-  final constant Real k = 5.75
-    "Coefficient K for Martin-Hou equation of state";
-public 
 final constant Modelica.Units.SI.AbsolutePressure pCri=4926.1e3
   "Critical pressure";
 

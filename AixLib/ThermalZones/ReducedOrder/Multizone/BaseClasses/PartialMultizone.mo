@@ -18,8 +18,10 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  parameter Boolean use_AirExchange=true
-    "Consider infiltration and ventilation by setting true";
+  parameter Boolean use_MechanicalAirExchange=true
+    "Consider mechanical ventilation by setting true";
+  parameter Boolean use_NaturalAirExchange=use_MechanicalAirExchange
+    "Consider natural ventilation and infiltration by setting true";
   parameter Boolean use_C_flow=false
     "Set to true to enable input connector for trace substance"
     annotation (Dialog(tab="CO2"));
@@ -81,6 +83,8 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-90,-60},{-70,-40}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[numZones](
+    each use_NaturalAirExchange=use_NaturalAirExchange,
+    each use_MechanicalAirExchange=use_MechanicalAirExchange,
     each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each h_heater=h_heater,
@@ -94,7 +98,6 @@ partial model PartialMultizone "Partial model for multizone models"
     each TN_cooler=TN_cooler,
     each use_C_flow=use_C_flow,
     each use_moisture_balance=use_moisture_balance,
-    each use_AirExchange=use_AirExchange,
     each XCO2_amb=XCO2_amb,
     each areaBod=areaBod,
     each metOnePerSit=metOnePerSit,
@@ -181,12 +184,22 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (
     Placement(transformation(extent={{100,-70},{120,-50}}),iconTransformation(
     extent={{80,-100},{100,-80}})));
+  Modelica.Blocks.Interfaces.RealOutput QIntGains_flow[numZones,3](final
+      quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
+    "Heat flow based on internal gains for each zone from persons, machines, and light"
+                        annotation (Placement(transformation(extent={{100,-90},{
+            120,-70}}), iconTransformation(extent={{80,-100},{100,-80}})));
 equation
   // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
   if not (ASurTot > 0 or VAir > 0) then
     PHeater[:] = fill(0, numZones);
     PCooler[:] = fill(0, numZones);
+  else
+    for i in 1:numZones loop
+      connect(zone[i].QIntGains_flow, QIntGains_flow[i, :]);
+    end for;
   end if;
+
   // if ideal heating and/or cooling is set by seperate values
   if (ASurTot > 0 or VAir > 0) and not recOrSep then
     if Heater_on then

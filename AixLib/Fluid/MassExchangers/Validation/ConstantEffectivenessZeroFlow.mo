@@ -15,13 +15,12 @@ model ConstantEffectivenessZeroFlow
  </ul>
  </html>",info="<html>
  <p>
- This model tests whether 
+ This model tests whether
  <a href=\"modelica://AixLib.Fluid.MassExchangers.ConstantEffectiveness\">ConstantEffectiveness</a>
  works correctly at zero flow if one stream is zero.
  </p>
  </html>"),experiment(Tolerance=1e-06, StopTime=1),
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/MassExchangers/Validation/ConstantEffectivenessZeroFlow.mos"
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/Validation/ConstantEffectivenessZeroFlow.mos"
         "Simulate and plot"),
   __Dymola_LockedEditing="Model from IBPSA");
 end ConstantEffectivenessZeroFlow;

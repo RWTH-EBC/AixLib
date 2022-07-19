@@ -19,7 +19,7 @@ revisions="<html>
  </ul>
  </html>"),Icon(graphics={Text(
           extent={{-74,46},{66,-58}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="ave")}),
   __Dymola_LockedEditing="Model from IBPSA");
 end Average;

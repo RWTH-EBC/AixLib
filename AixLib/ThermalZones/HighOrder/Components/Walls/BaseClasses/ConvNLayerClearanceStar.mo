@@ -14,7 +14,7 @@ model ConvNLayerClearanceStar
     annotation (Dialog(group="Geometry"));
 
   parameter Boolean use_condLayers = true "Use conductive wall layers" annotation(Dialog(group = "Structure of wall layers"));
-  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+    replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
     wallType constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
     "Type of wall" annotation(Dialog(group = "Structure of wall layers", enable=use_condLayers), choicesAllMatching = true, Placement(transformation(extent={{48,-98},{68,-78}})));
   final parameter Integer n(min = 1) = wallType.n
@@ -104,6 +104,8 @@ model ConvNLayerClearanceStar
         origin={0,-28})));
   parameter Modelica.Units.SI.Area A=h*l - clearance
     annotation (Dialog(enable=false));
+protected
+  parameter Modelica.Units.SI.Area A=h*l - clearance;
 
 equation
   connect(port_a, simpleNLayer.port_a)

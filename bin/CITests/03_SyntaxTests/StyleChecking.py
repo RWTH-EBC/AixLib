@@ -90,7 +90,7 @@ class StyleCheck(object):
 						changed_model_list.append(line)
 					log.close()	
 					os.remove(inputfile)
-				all_logs = codecs.open(path + "ChangedModels_StyleCheckLog.html", "w", encoding='utf8')
+				all_logs = codecs.open(f'{path}ChangedModels_StyleCheckLog.html', "w", encoding='utf8')
 				for model in changed_model_list:
 					all_logs.write(model)
 				all_logs.close()

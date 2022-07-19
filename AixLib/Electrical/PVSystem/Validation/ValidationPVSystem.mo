@@ -81,8 +81,8 @@ equation
       StartTime=28684800,
       StopTime=28771200,
       Tolerance=1e-06,
-      Method="dassl"),
-      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Electrical/Validation/ValidationPVSystem.mos" "Simulate and Plot"),
+      Algorithm="dassl"),
+      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Electrical/Validation/ValidationPVSystem.mos" "Simulate and plot"),
     Documentation(info="<html><p>
   The PVSystem model is validaded with empirical data from: <a href=
   \"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a>

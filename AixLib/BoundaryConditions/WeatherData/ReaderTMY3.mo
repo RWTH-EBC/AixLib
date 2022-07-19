@@ -18,7 +18,7 @@ block ReaderTMY3 "Reader for TMY3 weather data"
   parameter AixLib.BoundaryConditions.Types.DataSource pAtmSou=AixLib.BoundaryConditions.Types.DataSource.Parameter
     "Atmospheric pressure"
     annotation (Evaluate=true, HideResult=true, Dialog(tab="Data source"));
-  parameter Modelica.SIunits.Pressure pAtm=101325
+  parameter Modelica.Units.SI.Pressure pAtm=101325
     "Atmospheric pressure (used if pAtmSou=Parameter)"
     annotation (Dialog(tab="Data source"));
   Modelica.Blocks.Interfaces.RealInput pAtm_in(
@@ -34,7 +34,7 @@ block ReaderTMY3 "Reader for TMY3 weather data"
   parameter AixLib.BoundaryConditions.Types.DataSource TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.File
     "Dry bulb temperature"
     annotation (Evaluate=true, HideResult=true, Dialog(tab="Data source"));
-  parameter Modelica.SIunits.Temperature TDryBul(displayUnit="degC") = 293.15
+  parameter Modelica.Units.SI.Temperature TDryBul(displayUnit="degC") = 293.15
     "Dry bulb temperature (used if TDryBul=Parameter)"
     annotation (Dialog(tab="Data source"));
   Modelica.Blocks.Interfaces.RealInput TDryBul_in(
@@ -49,7 +49,7 @@ block ReaderTMY3 "Reader for TMY3 weather data"
   parameter AixLib.BoundaryConditions.Types.DataSource TDewPoiSou=AixLib.BoundaryConditions.Types.DataSource.File
     "Dew point temperature"
     annotation (Evaluate=true, HideResult=true, Dialog(tab="Data source"));
-  parameter Modelica.SIunits.Temperature TDewPoi(displayUnit="degC") = 283.15
+  parameter Modelica.Units.SI.Temperature TDewPoi(displayUnit="degC") = 283.15
     "Dew point temperature (used if TDewPoi=Parameter)"
     annotation (Dialog(tab="Data source"));
   Modelica.Blocks.Interfaces.RealInput TDewPoi_in(
@@ -63,7 +63,7 @@ block ReaderTMY3 "Reader for TMY3 weather data"
   // Black body sky temperature
   parameter AixLib.BoundaryConditions.Types.DataSource TBlaSkySou=AixLib.BoundaryConditions.Types.DataSource.File
     "Black-body sky temperature" annotation (Evaluate=true, HideResult=true, Dialog(tab="Data source"));
-  parameter Modelica.SIunits.Temperature TBlaSky=273.15
+  parameter Modelica.Units.SI.Temperature TBlaSky=273.15
     "Black-body sky temperature (used if TBlaSkySou=Parameter)"
     annotation (Dialog(tab="Data source"));
   Modelica.Blocks.Interfaces.RealInput TBlaSky_in(
@@ -94,7 +94,7 @@ block ReaderTMY3 "Reader for TMY3 weather data"
   // Wind speed
   parameter AixLib.BoundaryConditions.Types.DataSource winSpeSou=AixLib.BoundaryConditions.Types.DataSource.File
     "Wind speed" annotation (Evaluate=true, HideResult=true, Dialog(tab="Data source"));
-  parameter Modelica.SIunits.Velocity winSpe(min=0) = 1
+  parameter Modelica.Units.SI.Velocity winSpe(min=0) = 1
     "Wind speed (used if winSpe=Parameter)"
     annotation (Dialog(tab="Data source"));
   Modelica.Blocks.Interfaces.RealInput winSpe_in(
@@ -108,7 +108,7 @@ block ReaderTMY3 "Reader for TMY3 weather data"
   // Wind direction
   parameter AixLib.BoundaryConditions.Types.DataSource winDirSou=AixLib.BoundaryConditions.Types.DataSource.File
     "Wind direction" annotation (Evaluate=true, HideResult=true, Dialog(tab="Data source"));
-  parameter Modelica.SIunits.Angle winDir=1.0
+  parameter Modelica.Units.SI.Angle winDir=1.0
     "Wind direction (used if winDir=Parameter)"
     annotation (Dialog(tab="Data source"));
   Modelica.Blocks.Interfaces.RealInput winDir_in(
@@ -122,7 +122,7 @@ block ReaderTMY3 "Reader for TMY3 weather data"
   // Infrared horizontal radiation
   parameter AixLib.BoundaryConditions.Types.DataSource HInfHorSou=AixLib.BoundaryConditions.Types.DataSource.File
     "Infrared horizontal radiation" annotation (Evaluate=true, HideResult=true, Dialog(tab="Data source"));
-  parameter Modelica.SIunits.HeatFlux HInfHor=0.0
+  parameter Modelica.Units.SI.HeatFlux HInfHor=0.0
     "Infrared horizontal radiation (used if HInfHorSou=Parameter)"
     annotation (Dialog(tab="Data source"));
   Modelica.Blocks.Interfaces.RealInput HInfHor_in(
@@ -222,20 +222,23 @@ block ReaderTMY3 "Reader for TMY3 weather data"
     Evaluate=true,
     Dialog(tab="Advanced", group="Sky temperature"));
 
-  final parameter Modelica.SIunits.Angle lon(displayUnit="deg")=
-    AixLib.BoundaryConditions.WeatherData.BaseClasses.getLongitudeTMY3(
-    filNam) "Longitude";
-  final parameter Modelica.SIunits.Angle lat(displayUnit="deg")=
-    AixLib.BoundaryConditions.WeatherData.BaseClasses.getLatitudeTMY3(
-    filNam) "Latitude";
-  final parameter Modelica.SIunits.Time timZon(displayUnit="h")=
+  final parameter Modelica.Units.SI.Angle lon(displayUnit="deg")=
+    AixLib.BoundaryConditions.WeatherData.BaseClasses.getLongitudeTMY3(filNam)
+    "Longitude";
+  final parameter Modelica.Units.SI.Angle lat(displayUnit="deg")=
+    AixLib.BoundaryConditions.WeatherData.BaseClasses.getLatitudeTMY3(filNam)
+    "Latitude";
+  final parameter Modelica.Units.SI.Time timZon(displayUnit="h")=
     AixLib.BoundaryConditions.WeatherData.BaseClasses.getTimeZoneTMY3(filNam)
     "Time zone";
+  final parameter Modelica.Units.SI.Length alt(displayUnit="m")=
+    AixLib.BoundaryConditions.WeatherData.BaseClasses.getAltitudeLocationTMY3(
+    filNam) "Location altitude above sea level";
 
 protected
-  final parameter Modelica.SIunits.Time[2] timeSpan=
-    AixLib.BoundaryConditions.WeatherData.BaseClasses.getTimeSpanTMY3(filNam, "tab1")
-  "Start time, end time of weather data";
+  final parameter Modelica.Units.SI.Time[2] timeSpan=
+      AixLib.BoundaryConditions.WeatherData.BaseClasses.getTimeSpanTMY3(filNam,
+      "tab1") "Start time, end time of weather data";
 
   Modelica.Blocks.Tables.CombiTable1Ds datRea(
     final tableOnFile=true,
@@ -387,8 +390,8 @@ protected
     annotation (Placement(transformation(extent={{40,-240},{60,-220}})));
   SolarGeometry.BaseClasses.AltitudeAngle altAng "Solar altitude angle"
     annotation (Placement(transformation(extent={{-28,-226},{-8,-206}})));
-   SolarGeometry.BaseClasses.ZenithAngle zenAng(
-     final lat = lat) "Zenith angle"
+   SolarGeometry.BaseClasses.ZenithAngle zenAng
+                      "Zenith angle"
     annotation (Placement(transformation(extent={{-70,-226},{-50,-206}})));
    SolarGeometry.BaseClasses.Declination decAng "Declination angle"
     annotation (Placement(transformation(extent={{-120,-220},{-100,-200}})));
@@ -399,7 +402,8 @@ protected
     annotation (Placement(transformation(extent={{-150,-290},{-130,-270}})));
   Longitude longitude(final longitude=lon) "Longitude"
     annotation (Placement(transformation(extent={{-120,-282},{-100,-262}})));
-
+  Altitude altitude(final Altitude=alt) "Altitude"
+    annotation (Placement(transformation(extent={{226,94},{246,114}})));
   //---------------------------------------------------------------------------
   // Optional instanciation of a block that computes the wet bulb temperature.
   // This block may be needed for evaporative cooling towers.
@@ -429,7 +433,7 @@ protected
   block Latitude "Generate constant signal of type Real"
     extends Modelica.Blocks.Icons.Block;
 
-    parameter Modelica.SIunits.Angle latitude "Latitude";
+    parameter Modelica.Units.SI.Angle latitude "Latitude";
 
     Modelica.Blocks.Interfaces.RealOutput y(
       unit="rad",
@@ -443,7 +447,7 @@ protected
         extent={{-100,-100},{100,100}}), graphics={
         Text(
           extent={{-81,32},{84,-24}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
             textString="Latitude")}),
     Documentation(info="<html>
  <p>
@@ -473,7 +477,7 @@ protected
   block Longitude "Generate constant signal of type Real"
     extends Modelica.Blocks.Icons.Block;
 
-    parameter Modelica.SIunits.Angle longitude "Longitude";
+    parameter Modelica.Units.SI.Angle longitude "Longitude";
 
     Modelica.Blocks.Interfaces.RealOutput y(
       unit="rad",
@@ -487,7 +491,7 @@ protected
         extent={{-100,-100},{100,100}}), graphics={
         Text(
           extent={{-81,32},{84,-24}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
             textString="Longitude")}),
     Documentation(info="<html>
  <p>
@@ -513,6 +517,50 @@ protected
  </ul>
  </html>"));
   end Longitude;
+
+  block Altitude "Generate constant signal of type Real"
+    extends Modelica.Blocks.Icons.Block;
+
+    parameter Modelica.Units.SI.Length Altitude
+      "Location altitude above sea level";
+
+    Modelica.Blocks.Interfaces.RealOutput y(
+      unit="m") "Location altitude above sea level"
+      annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+  equation
+    y = Altitude;
+    annotation (
+    Icon(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}}), graphics={
+        Text(
+          extent={{-81,32},{84,-24}},
+          textColor={0,0,0},
+            textString="Altitude")}),
+    Documentation(info="<html>
+ <p>
+ Block to output the altitude of the location.
+ This block is added so that the altitude is displayed
+ with a comment in the GUI of the weather bus connector.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ If
+ <a href=\"modelica://Modelica.Blocks.Sources.Constant\">
+ Modelica.Blocks.Sources.Constant</a> where used, then
+ the comment for the Altitude would be \"Connector of Real output signal\".
+ As this documentation string cannot be overwritten, a new block
+ was implemented.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 2, 2021, by Ettore Zanetti:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"));
+  end Altitude;
 
 equation
 
@@ -809,7 +857,12 @@ equation
   connect(latitude.y, weaBus.lat) annotation (Line(
       points={{-129,-280},{-124,-280},{-124,-290},{290,-290},{290,0},{300,0}},
       color={0,0,127}));
-
+  connect(altitude.y, weaBus.alt) annotation (Line(points={{247,104},{290,104},{
+          290,0},{300,0}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   connect(chePre.pAtm, weaBus.pAtm) annotation (Line(points={{181,270},{220,270},
           {220,0},{300,0}}, color={0,0,127}), Text(
       string="%second",
@@ -817,6 +870,8 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
 
+  connect(latitude.y, zenAng.lat) annotation (Line(points={{-129,-280},{-124,
+          -280},{-124,-290},{-90,-290},{-90,-216},{-72,-216}}, color={0,0,127}));
     annotation (
     defaultComponentName="weaDat",
     Icon(coordinateSystem(
@@ -831,7 +886,7 @@ equation
         Text(
           extent={{-162,270},{138,230}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Text(
           visible=(pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Input),
           extent={{-190,216},{-164,184}},
@@ -888,7 +943,7 @@ equation
           fillColor={230,230,230}),
         Text(
           extent={{140,-106},{-126,-192}},
-          lineColor={255,255,255},
+          textColor={255,255,255},
           textString=DynamicSelect("", String(weaBus.TDryBul-273.15, format=".1f")))}),
     Documentation(info="<html>
  <p>
@@ -1542,6 +1597,18 @@ equation
  </ul>
  </html>",revisions="<html>
  <ul>
+ <li>
+ September 6, 2021, by Ettore Zanetti:<br/>
+ Changed alt and lat to real inputs.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+ </li>
+ <li>
+ May 2, 2021, by Ettore Zanetti:<br/>
+ Added altitude to parameters.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+ </li>
  <li>
  October 4, 2020, by Ettore Zanetti:<br/>
  Updated documentation for Java weather file generator.<br/>

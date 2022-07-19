@@ -129,7 +129,7 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{100,100},{-100,-100}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="f")}),
   __Dymola_LockedEditing="Model from IBPSA");
 end ModificationFactor;

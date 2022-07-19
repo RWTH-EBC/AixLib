@@ -2,6 +2,63 @@ within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
 partial model PartialThermalZone "Partial model for thermal zone models"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.BaseThermalZone;
 
+  parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
+    "Choose setup for this zone" annotation (choicesAllMatching=true);
+  parameter Integer nPorts=0
+    "Number of fluid ports"
+    annotation(Evaluate=true,
+    Dialog(connectorSizing=true, tab="General",group="Ports"));
+  parameter Boolean use_C_flow=false
+    "Set to true to enable input connector for trace substance"
+    annotation (Dialog(tab="CO2"));
+  parameter Boolean use_moisture_balance=false
+    "If true, input connector QLat_flow is enabled and room air computes moisture balance"
+    annotation (Dialog(tab="Moisture"));
+
+  Modelica.Blocks.Interfaces.RealInput intGains[3]
+    "Input profiles for internal gains persons, machines, light"
+    annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={80,-100}), iconTransformation(
+        extent={{-12,-12},{12,12}},
+        rotation=90,
+        origin={80,-84})));
+  Modelica.Blocks.Interfaces.RealOutput TAir(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if ATot > 0 or zoneParam.VAir > 0
+    "Indoor air temperature"
+    annotation (Placement(transformation(extent={{100,70},{120,90}}),
+        iconTransformation(extent={{100,70},{120,90}})));
+  Modelica.Blocks.Interfaces.RealOutput TRad(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if ATot > 0
+    "Mean indoor radiation temperature"
+    annotation (Placement(transformation(
+          extent={{100,50},{120,70}}), iconTransformation(extent={{100,50},{120,
+            70}})));
+  BoundaryConditions.WeatherData.Bus weaBus
+    "Weather data bus"
+    annotation (Placement(
+    transformation(extent={{-117,18},{-83,50}}), iconTransformation(
+    extent={{-110,50},{-90,70}})));
+  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
+    redeclare each final package Medium = Medium)
+    "Auxilliary fluid inlets and outlets to indoor air volume"
+    annotation (Placement(transformation(extent={{-49,-108},{49,-84}}),
+        iconTransformation(extent={{-47,-84},{47,-60}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv
+ if ATot > 0 or zoneParam.VAir > 0
+    "Convective internal gains"
+    annotation (Placement(transformation(extent={{94,10},{114,30}}),
+                              iconTransformation(extent={{92,-6},{112,14}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
+    "Radiative internal gains"
+    annotation (Placement(transformation(extent={{94,30},{114,50}}),
+                            iconTransformation(extent={{92,24},{112,44}})));
   RC.FourElements ROM(
     redeclare final package Medium = Medium,
     final use_moisture_balance=use_moisture_balance,
@@ -40,7 +97,6 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
     final p_start=p_start,
     final X_start=X_start,
     final T_start=T_start,

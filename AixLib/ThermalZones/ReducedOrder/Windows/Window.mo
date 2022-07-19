@@ -58,32 +58,24 @@ model Window "Calculation of solar energy transmitted through windows"
     "Base class of window"
     annotation (
     Placement(transformation(extent={{20,-32},{86,30}})));
-  AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](
-    each lat=lat,
-    final azi=azi,
-    final til=til)
-    "Calculates the incidence angle" annotation (
-    Placement(transformation(extent={{-40,74},{-30,84}})));
+  AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](final azi=
+        azi, final til=til) "Calculates the incidence angle"
+    annotation (Placement(transformation(extent={{-40,74},{-30,84}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
     annotation (Placement(transformation(extent={{-108,-10},{-88,10}}),
         iconTransformation(extent={{-108,-10},{-88,10}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
     "Calculates the altitude angle"
     annotation (Placement(transformation(extent={{-18,56},{-10,64}})));
-  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(each lat=lat)
+  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen
     "Calculates the zenith angle"
     annotation (Placement(transformation(extent={{-28,56},{-20,64}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](
-    final til=til,
-    each lat=lat,
-    final azi=azi)
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](final til=
+        til, final azi=azi)
     "Calculates the diffuse irradiation on a tilted surface after Perez"
-    annotation (
-    Placement(transformation(extent={{-32,-6},{-20,6}})));
+    annotation (Placement(transformation(extent={{-32,-6},{-20,6}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[n](
-    final til=til,
-    each lat=lat,
-    final azi=azi)
+      final til=til, final azi=azi)
     "Calculates the direct irradiation on a tilted surfcae"
     annotation (Placement(transformation(extent={{-60,-54},{-40,-34}})));
 equation

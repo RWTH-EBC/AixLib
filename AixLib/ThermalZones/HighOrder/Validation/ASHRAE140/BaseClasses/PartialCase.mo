@@ -59,7 +59,7 @@ partial model PartialCase "This is the base class from which the base cases will
         "Room with east and west facing window")));
    RoomModel Room(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=294.15,
     TWalls_start=289.15,
     final wallTypes=wallTypes,
@@ -178,11 +178,12 @@ equation
       color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-75.4,60.6},{-61,60.6},{-61,61},{-51,61},{-51,51.2},{-29.8,51.2}},
+      points={{-75.4,60.6},{-61,60.6},{-61,61},{-51,61},{-51,50.12},{-29.8,50.12}},
       color={255,128,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
-      points={{-85.15,21.5},{-68,21.5},{-68,22},{-48,22},{-48,43},{-29.8,43},{-29.8,43.1}},
+      points={{-85.15,21.5},{-68,21.5},{-68,22},{-48,22},{-48,43},{-29.8,43},{-29.8,
+          33.38}},
       color={0,0,127}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
       points={{-78,-43},{-48,-43},{-48,-19},{-27,-19},{-27,8}},

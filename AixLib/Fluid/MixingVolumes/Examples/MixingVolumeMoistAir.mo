@@ -4,7 +4,7 @@ model MixingVolumeMoistAir "Test model for mixing volume with moist air input"
 
   package Medium = AixLib.Media.Air;
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.001
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.001
     "Nominal mass flow rate";
 
   AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol1(

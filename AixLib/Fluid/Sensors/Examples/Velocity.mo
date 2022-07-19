@@ -4,7 +4,7 @@ model Velocity "Test model for the flow velocity sensor"
 
   package Medium = AixLib.Media.Air "Medium model";
 
-  parameter Modelica.SIunits.Area A = 0.1*0.1/4*Modelica.Constants.pi
+  parameter Modelica.Units.SI.Area A=0.1*0.1/4*Modelica.Constants.pi
     "Cross sectional area of flow channel";
 
   AixLib.Fluid.Sources.Boundary_pT sin(

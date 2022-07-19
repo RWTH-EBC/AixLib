@@ -110,16 +110,16 @@ revisions="<html>
         Line(points={{-40,70},{-12,70}}),
         Text(
           extent={{126,-30},{6,-60}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T"),
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Line(points={{12,0},{60,0}}, color={0,0,127}),
         Text(
           extent={{180,90},{60,40}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString=DynamicSelect("", String(T-273.15, format=".1f")))}),
   __Dymola_LockedEditing="Model from IBPSA");
 end Temperature;

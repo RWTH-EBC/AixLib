@@ -159,8 +159,8 @@ equation
     annotation (Line(points={{23,80},{38.5,80}}, color={0,0,127}));
   connect(latEff.y, realValue1.numberPort)
     annotation (Line(points={{23,60},{38.5,60}}, color={0,0,127}));
-  annotation (experiment(StopTime=7200, Interval=1, method="dassl",Tolerance=1E-6),
-    __Dymola_Comands(file=
+  annotation (experiment(StopTime=7200, Interval=1, Algorithm="dassl",Tolerance=1E-6),
+    __Dymola_Commands(file=
       "modelica://AixLib/Resources/Scripts/Dymola/Fluid/MassExchangers/MembraneBasedEnthalpyExchangers/Examples/Test_EnthalpyExchanger.mos"
         "Simulate and plot"),
     Documentation(info="<html>This example shows the functionality of the membrane-based enthalpy

@@ -6,6 +6,7 @@ Junction
 LosslessPipe
 Pipe
 PlugFlowPipe
+PlugFlowPipeDiscretized
 PressureDrop
 SimplePipe
 Examples

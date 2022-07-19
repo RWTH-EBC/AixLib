@@ -170,14 +170,14 @@ revisions="<html>
         Text(
           visible=use_h_in,
           extent={{-162,34},{-60,-6}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="h"),
         Text(
           visible=use_p_in,
           extent={{-152,134},{-68,94}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="p"),
@@ -189,6 +189,6 @@ revisions="<html>
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255})}),
+          textColor={0,0,255})}),
   __Dymola_LockedEditing="Model from IBPSA");
 end Boundary_ph;

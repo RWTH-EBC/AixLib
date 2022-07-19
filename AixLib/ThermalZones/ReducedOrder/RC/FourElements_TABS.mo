@@ -89,8 +89,8 @@ protected
 equation
   connect(rCTABS.port_ext, extWallRC.port_b) annotation (Line(points={{-208,4},
           {-220,4},{-220,-40},{-178,-40}},                                                                color={191,0,0}));
-  connect(senTAir.T,rCTABS. TAir) annotation (Line(points={{102,0},{102,24},{-218,
-          24},{-218,8},{-209,8}},      color={0,0,127}));
+  connect(senTAir.T,rCTABS. TAir) annotation (Line(points={{101,0},{101,24},{
+          -218,24},{-218,8},{-209,8}}, color={0,0,127}));
   connect(rCTABS.alpha_TABS,convTABS.Gc) annotation (Line(points={{-209,12},{-212,
           12},{-212,22},{-184,22},{-184,-14},{-168,-14},{-168,-2}},      color=
           {0,0,127}));
@@ -106,8 +106,8 @@ equation
   connect(rCTABS_int.port_heat,tabs_int)  annotation (Line(points={{210,-162},{210,
           -168},{-226,-168},{-226,-180},{-240,-180}},
                                     color={191,0,0}));
-  connect(senTAir.T,rCTABS_int.TAir) annotation (Line(points={{102,0},{56,0},{56,
-          -148},{199,-148}},     color={0,0,127}));
+  connect(senTAir.T,rCTABS_int.TAir) annotation (Line(points={{101,0},{56,0},{
+          56,-148},{199,-148}},  color={0,0,127}));
   connect(convTABS_int.Gc,rCTABS_int.alpha_TABS) annotation (Line(points={{164,
           -140},{164,-124},{186,-124},{186,-144},{199,-144}}, color={0,0,127}));
   connect(convTABS_int.fluid, convIntWall.fluid) annotation (Line(points={{154,-150},

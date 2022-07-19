@@ -1,19 +1,8 @@
 within AixLib.Controls.Continuous;
 block SignalRanker "Ranks output signals such that y[i] >= y[i+1]"
    extends Modelica.Blocks.Interfaces.MIMO(final nout=nin);
-protected
-  Real t "Temporary variable";
-algorithm
-  y[:] := u[:];
-  for i in 1:nin loop
-    for j in 1:nin-1 loop
-    if y[j] < y[j+1] then
-      t      := y[j+1];
-      y[j+1] := y[j];
-      y[j]   := t;
-    end if;
-   end for;
-  end for;
+equation
+  y = Modelica.Math.Vectors.sort(u, ascending=false);
   annotation (
 defaultComponentName="sigRan",
 Documentation(info="<html>
@@ -29,6 +18,12 @@ Documentation(info="<html>
 revisions="<html>
  <ul>
  <li>
+ October 15, 2021, by Michael Wetter:<br/>
+ Changed implementation to use sort function from Modelica Standard Library.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1534\">IBPSA, #1534</a>.
+ </li>
+ <li>
  November 21, 2011, by Michael Wetter:<br/>
  Removed <code>assert</code> statement.
  </li>
@@ -40,7 +35,7 @@ revisions="<html>
  </html>"),
 Icon(graphics={Text(
           extent={{-94,34},{96,-164}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="y[i] >= y[i+1]")}),
   __Dymola_LockedEditing="Model from IBPSA");
 end SignalRanker;

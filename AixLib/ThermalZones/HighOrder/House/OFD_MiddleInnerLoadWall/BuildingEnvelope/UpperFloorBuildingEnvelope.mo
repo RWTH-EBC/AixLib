@@ -4,7 +4,9 @@ model UpperFloorBuildingEnvelope
   extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
     final Tset=372.15,
     withDynamicVentilation=false,                                               redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
-
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   //////////room geometry
   parameter Modelica.Units.SI.Length room_width_long=3.92 "w1 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
@@ -115,7 +117,7 @@ model UpperFloorBuildingEnvelope
     final use_UFH=use_UFH,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -156,13 +158,13 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Bedroom,
-    final T0_air=T0_air) annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
+    T0_air=T0_air)       annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Children1(
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -200,7 +202,7 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Children1,
-    final T0_air=T0_air,
+    T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
     final U_door_OD2=UValOutDoors,
     final use_UFH=use_UFH)         annotation (Placement(transformation(extent={{82,28},{44,76}})));
@@ -209,7 +211,7 @@ model UpperFloorBuildingEnvelope
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -248,7 +250,7 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Bath,
-    final T0_air=T0_air,
+    T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
     final U_door_OD2=UValOutDoors,
     final use_UFH=use_UFH)         annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
@@ -258,7 +260,7 @@ model UpperFloorBuildingEnvelope
     final use_UFH=use_UFH,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -299,13 +301,13 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Children2,
-    final T0_air=T0_air) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
+    T0_air=T0_air)       annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1 Corridor(
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
     final energyDynamicsWalls=energyDynamicsWalls,
-    final initDynamicsAir=initDynamicsAir,
+    final energyDynamics=energyDynamics,
     final TWalls_start=TWalls_start,
     final calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
@@ -497,11 +499,15 @@ equation
   connect(Bath.thermRoom, heatStarToCombHeaters[4].portConv) annotation (Line(points={{67.66,-60},{68,-60},{68,-42},{20,-42},{20,-38},{5,-38}}, color={191,0,0}));
   connect(Children2.starRoom, heatStarToCombHeaters[5].portRad) annotation (Line(points={{-60.8,-52},{-60.8,-38},{-5,-38}}, color={0,0,0}));
   connect(Children2.thermRoom, heatStarToCombHeaters[5].portConv) annotation (Line(points={{-66.8,-52},{-66,-52},{-66,-36},{-18,-36},{-18,-42},{5,-42},{5,-38}}, color={191,0,0}));
-  connect(AirExchangePort[1], Bedroom.AirExchangePort) annotation (Line(points={{-115,-23},{-92,-23},{-92,68.24},{-84,68.24}}, color={0,0,127}));
-  connect(AirExchangePort[2], Children1.AirExchangePort) annotation (Line(points={{-115,-17},{-92,-17},{-92,88},{92,88},{92,68.68},{83.9,68.68}}, color={0,0,127}));
+  connect(AirExchangePort[1], Bedroom.AirExchangePort) annotation (Line(points={{-115,
+          -17},{-92,-17},{-92,68.24},{-84,68.24}},                                                                             color={0,0,127}));
+  connect(AirExchangePort[2], Children1.AirExchangePort) annotation (Line(points={{-115,
+          -14},{-92,-14},{-92,88},{92,88},{92,68.68},{83.9,68.68}},                                                                               color={0,0,127}));
   connect(AirExchangePort[3], Corridor.AirExchangePort) annotation (Line(points={{-115,-11},{-92,-11},{-92,88},{92,88},{92,4.205},{84,4.205}}, color={0,0,127}));
-  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-115,-5},{-92,-5},{-92,88},{92,88},{92,-76.68},{85.9,-76.68}}, color={0,0,127}));
-  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-115,1},{-92,1},{-92,-74.24},{-86,-74.24}}, color={0,0,127}));
+  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-115,-8},
+          {-92,-8},{-92,88},{92,88},{92,-76.68},{85.9,-76.68}},                                                                              color={0,0,127}));
+  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-115,-5},
+          {-92,-5},{-92,-74.24},{-86,-74.24}},                                                                                 color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=

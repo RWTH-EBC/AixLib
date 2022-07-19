@@ -147,7 +147,6 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
   AixLib.Fluid.Movers.FlowControlled_dp mov(
     redeclare final package Medium = Medium,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
@@ -165,7 +164,6 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     final use_inputFilter=use_inputFilter,
     final riseTime=riseTime,
     final init=init,
-    final y_start=y_start,
     final dp_start=dp_start,
     final dp_nominal=dp_nominal,
     final constantHead=dp_nominal,

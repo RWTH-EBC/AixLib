@@ -19,7 +19,7 @@ model CoupledVolumesSpecializedWaterConstantProperties_pT
  <li>
  April 17, 2018, by Michael Wetter:<br/>
  First implementation for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/910\">AixLib, issue 910</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/910\">IBPSA, issue 910</a>.
  </li>
  </ul>
  </html>"),
@@ -27,7 +27,7 @@ model CoupledVolumesSpecializedWaterConstantProperties_pT
       StopTime=3600,
       Tolerance=1e-06),
     __Dymola_Commands(
-      file="Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/CoupledVolumesSpecializedWaterConstantProperties_pT.mos"
+      file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/CoupledVolumesSpecializedWaterConstantProperties_pT.mos"
            "Simulate and plot"),
   __Dymola_LockedEditing="Model from IBPSA");
 end CoupledVolumesSpecializedWaterConstantProperties_pT;

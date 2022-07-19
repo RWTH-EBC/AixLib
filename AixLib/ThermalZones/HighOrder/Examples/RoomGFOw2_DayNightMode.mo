@@ -19,7 +19,7 @@ model RoomGFOw2_DayNightMode
 
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 room_GF_2OW(redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes,
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     TWalls_start=290.15,
     redeclare model WindowModel = Components.WindowsDoors.WindowSimple,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002 Type_Win,

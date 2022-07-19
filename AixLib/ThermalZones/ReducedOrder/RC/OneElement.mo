@@ -1,57 +1,54 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
 model OneElement "Thermal Zone with one element for exterior walls"
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
+    final massDynamics=energyDynamics);
 
-  parameter Modelica.SIunits.Volume VAir "Air volume of the zone"
-    annotation(Dialog(group="Thermal zone"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hRad
+  parameter Modelica.Units.SI.Volume VAir "Air volume of the zone"
+    annotation (Dialog(group="Thermal zone"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRad
     "Coefficient of heat transfer for linearized radiation exchange between walls"
-    annotation(Dialog(group="Thermal zone"));
+    annotation (Dialog(group="Thermal zone"));
   parameter Integer nOrientations(min=1) "Number of orientations"
     annotation(Dialog(group="Thermal zone"));
   parameter Integer nPorts=0 "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  parameter Modelica.SIunits.Area AWin[nOrientations]
+  parameter Modelica.Units.SI.Area AWin[nOrientations]
     "Vector of areas of windows by orientations"
-    annotation(Dialog(group="Windows"));
-  parameter Modelica.SIunits.Area ATransparent[nOrientations] "Vector of areas of transparent (solar radiation transmittend) elements by
+    annotation (Dialog(group="Windows"));
+  parameter Modelica.Units.SI.Area ATransparent[nOrientations] "Vector of areas of transparent (solar radiation transmittend) elements by
      orientations"
-    annotation(Dialog(group="Windows"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWin
+                  annotation (Dialog(group="Windows"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWin
     "Convective coefficient of heat transfer of windows (indoor)"
-    annotation(Dialog(group="Windows"));
-  parameter Modelica.SIunits.ThermalResistance RWin "Resistor for windows"
-    annotation(Dialog(group="Windows"));
-  parameter Modelica.SIunits.TransmissionCoefficient gWin
-    "Total energy transmittance of windows"
-    annotation(Dialog(group="Windows"));
+    annotation (Dialog(group="Windows"));
+  parameter Modelica.Units.SI.ThermalResistance RWin "Resistor for windows"
+    annotation (Dialog(group="Windows"));
+  parameter Modelica.Units.SI.TransmissionCoefficient gWin
+    "Total energy transmittance of windows" annotation (Dialog(group="Windows"));
   parameter Real ratioWinConRad
     "Ratio for windows between indoor convective and radiative heat emission"
     annotation(Dialog(group="Windows"));
   parameter Boolean indoorPortWin = false
     "Additional heat port at indoor surface of windows"
     annotation(Dialog(group="Windows"),choices(checkBox = true));
-  parameter Modelica.SIunits.Area AExt[nOrientations]
+  parameter Modelica.Units.SI.Area AExt[nOrientations]
     "Vector of areas of exterior walls by orientations"
-    annotation(Dialog(group="Exterior walls"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt
+    annotation (Dialog(group="Exterior walls"));
+  parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConExt
     "Convective coefficient of heat transfer of exterior walls (indoor)"
-    annotation(Dialog(group="Exterior walls"));
+    annotation (Dialog(group="Exterior walls"));
   parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls"
     annotation(Dialog(group="Exterior walls"));
-  parameter Modelica.SIunits.ThermalResistance RExt[nExt](
-    each min=Modelica.Constants.small)
+  parameter Modelica.Units.SI.ThermalResistance RExt[nExt](each min=Modelica.Constants.small)
     "Vector of resistances of exterior walls, from inside to outside"
-    annotation(Dialog(group="Exterior walls"));
-  parameter Modelica.SIunits.ThermalResistance RExtRem(
-    min=Modelica.Constants.small)
+    annotation (Dialog(group="Exterior walls"));
+  parameter Modelica.Units.SI.ThermalResistance RExtRem(min=Modelica.Constants.small)
     "Resistance of remaining resistor RExtRem between capacity n and outside"
-    annotation(Dialog(group="Exterior walls"));
-  parameter Modelica.SIunits.HeatCapacity CExt[nExt](
-    each min=Modelica.Constants.small)
+    annotation (Dialog(group="Exterior walls"));
+  parameter Modelica.Units.SI.HeatCapacity CExt[nExt](each min=Modelica.Constants.small)
     "Vector of heat capacities of exterior walls, from inside to outside"
-    annotation(Dialog(group="Exterior walls"));
+    annotation (Dialog(group="Exterior walls"));
   parameter Boolean indoorPortExtWalls = false
     "Additional heat port at indoor surface of exterior walls"
     annotation(Dialog(group="Exterior walls"),choices(checkBox = true));
@@ -136,7 +133,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     m_flow_nominal=VAir*6/3600*1.2,
     final V=VAir,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
+    final massDynamics=energyDynamics,
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
@@ -152,7 +149,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     m_flow_nominal=VAir*6/3600*1.2,
     final V=VAir,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
+    final massDynamics=energyDynamics,
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
@@ -201,14 +198,15 @@ model OneElement "Thermal Zone with one element for exterior walls"
     annotation (Placement(transformation(extent={{-280,70},{-240,110}}), iconTransformation(extent={{-260,90},{-240,110}})));
 
 protected
-  constant Modelica.SIunits.SpecificEnergy h_fg=
-    AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
-  parameter Modelica.SIunits.Area ATot=sum(AArray) "Sum of wall surface areas";
-  parameter Modelica.SIunits.Area ATotExt=sum(AExt)
+  constant Modelica.Units.SI.SpecificEnergy h_fg=
+      AixLib.Media.Air.enthalpyOfCondensingGas(273.15 + 37)
+    "Latent heat of water vapor";
+  parameter Modelica.Units.SI.Area ATot=sum(AArray) "Sum of wall surface areas";
+  parameter Modelica.Units.SI.Area ATotExt=sum(AExt)
     "Sum of exterior wall surface areas";
-  parameter Modelica.SIunits.Area ATotWin=sum(AWin)
+  parameter Modelica.Units.SI.Area ATotWin=sum(AWin)
     "Sum of window surface areas";
-  parameter Modelica.SIunits.Area[:] AArray = {ATotExt, ATotWin}
+  parameter Modelica.Units.SI.Area[:] AArray={ATotExt,ATotWin}
     "List of all wall surface areas";
   parameter Integer dimension = sum({if A>0 then 1 else 0 for A in AArray})
     "Number of non-zero wall surface areas";
@@ -450,7 +448,7 @@ equation
     fillPattern=FillPattern.Solid),
   Text(
     extent={{-201,180},{-144,152}},
-    lineColor={0,0,255},
+    textColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
     textString="Solar Radiation"),
@@ -461,13 +459,13 @@ equation
     fillPattern=FillPattern.Solid),
   Text(
     extent={{-201,-59},{-146,-76}},
-    lineColor={0,0,255},
+    textColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
     textString="Exterior Walls"),
   Text(
     extent={{-202,82},{-168,64}},
-    lineColor={0,0,255},
+    textColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
     textString="Windows"),
@@ -478,7 +476,7 @@ equation
     fillPattern=FillPattern.Solid),
   Text(
     extent={{-11,18},{26,4}},
-    lineColor={0,0,255},
+    textColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
     textString="Indoor Air")}),
@@ -513,14 +511,14 @@ equation
     smooth=Smooth.None),
   Text(
     extent={{-260,266},{24,182}},
-    lineColor={0,0,255},
+    textColor={0,0,255},
     lineThickness=0.5,
     fillColor={236,99,92},
     fillPattern=FillPattern.Solid,
     textString="%name"),
   Text(
     extent={{-67,60},{57,-64}},
-    lineColor={0,0,0},
+    textColor={0,0,0},
     textString="1")}),
   Documentation(info="<html>
  <p>
@@ -544,10 +542,16 @@ equation
 revisions="<html>
  <ul>
  <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
  October 9, 2019, by Michael Wetter:<br/>
  Refactored addition of moisture to also account for the energy content of the
  water vapor.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">AixLib, issue 1209</a>.
+ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">IBPSA, issue 1209</a>.
  </li>
    <li>
    September 24, 2019, by Martin Kremer:<br/>

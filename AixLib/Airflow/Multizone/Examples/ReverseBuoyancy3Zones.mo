@@ -6,7 +6,6 @@ model ReverseBuoyancy3Zones
   AixLib.Fluid.MixingVolumes.MixingVolume volEas(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     V=2.5*5*5,
     T_start=273.15 + 25,
     nPorts=5,
@@ -39,7 +38,6 @@ model ReverseBuoyancy3Zones
   AixLib.Fluid.MixingVolumes.MixingVolume volOut(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     V=1E12,
     T_start=273.15 + 15,
     nPorts=2,
@@ -118,7 +116,6 @@ model ReverseBuoyancy3Zones
   AixLib.Fluid.MixingVolumes.MixingVolume volTop(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=273.15 + 20,
     m_flow_nominal=0.001,
     V=2.5*10*10,
@@ -127,7 +124,6 @@ model ReverseBuoyancy3Zones
   AixLib.Fluid.MixingVolumes.MixingVolume volWes(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     V=2.5*5*5,
     T_start=273.15 + 22,
     nPorts=3,
@@ -217,7 +213,7 @@ experiment(Tolerance=1e-06, StopTime=3600),
  <li>
  March 26, 2021 by Michael Wetter:<br/>
  Updated comments for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">AixLib, #515</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
  </li>
  <li>
  December 22, 2014 by Michael Wetter:<br/>

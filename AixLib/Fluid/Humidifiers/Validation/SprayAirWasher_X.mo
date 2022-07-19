@@ -5,11 +5,11 @@ model SprayAirWasher_X
 
   package Medium = AixLib.Media.Air;
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1
     "Nominal mass flow rate";
 
-  parameter Modelica.SIunits.MassFlowRate mWat_flow_nominal = m_flow_nominal * 0.004
-    "Maximum humidification water mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal=m_flow_nominal*
+      0.004 "Maximum humidification water mass flow rate";
 
   AixLib.Fluid.Sources.Boundary_pT sin(
     redeclare package Medium = Medium,
@@ -21,7 +21,7 @@ model SprayAirWasher_X
 
   replaceable AixLib.Fluid.Humidifiers.SprayAirWasher_X hum(
     mWatMax_flow=mWat_flow_nominal,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
       constrainedby AixLib.Fluid.Humidifiers.SprayAirWasher_X(
         redeclare package Medium = Medium,
         m_flow_nominal=m_flow_nominal,
@@ -83,7 +83,7 @@ equation
  Reformulated constraint of replaceable model to avoid access of
  component that is not in constraining type.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1473\">AixLib, #1473</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1473\">IBPSA, #1473</a>.
  </li>
  <li>
  May 3, 2017, by Michael Wetter:<br/>

@@ -17,7 +17,7 @@ equation
  </ul>
  </html>"),Icon(graphics={   Text(
           extent={{-86,38},{94,-34}},
-          lineColor={160,160,164},
+          textColor={160,160,164},
           textString="quadraticLinear()")}),
   __Dymola_LockedEditing="Model from IBPSA");
 end QuadraticLinear;

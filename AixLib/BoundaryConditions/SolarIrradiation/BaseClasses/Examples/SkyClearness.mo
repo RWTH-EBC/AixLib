@@ -2,8 +2,7 @@ within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.Examples;
 model SkyClearness "Test model for sky clearness"
   extends Modelica.Icons.Example;
 
-  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(lat=
-        0.34906585039887)
+  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
   AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.SkyClearness skyCle
     annotation (Placement(transformation(extent={{40,0},{60,20}})));
@@ -25,7 +24,7 @@ equation
       textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(weaBus.HGloHor, skyCle.HGloHor) annotation (Line(
+  connect(weaBus.HDirNor, skyCle.HDirNor) annotation (Line(
       points={{8,30},{24,30},{24,16},{38,16}},
       color={255,204,51},
       thickness=0.5), Text(

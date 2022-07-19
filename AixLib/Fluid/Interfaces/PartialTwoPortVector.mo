@@ -76,7 +76,7 @@ partial model PartialTwoPortVector "Partial component with two ports, one of whi
  March 30, 2021, by Michael Wetter:<br/>
  Added annotation <code>HideResult=true</code>.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">AixLib, #1459</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1459\">IBPSA, #1459</a>.
  </li>
  <li>
  January 31, 2019, by Michael Mans:<br/>
@@ -140,7 +140,7 @@ partial model PartialTwoPortVector "Partial component with two ports, one of whi
           visible=not allowFlowReversal),
         Text(
           extent={{-149,-114},{151,-154}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),

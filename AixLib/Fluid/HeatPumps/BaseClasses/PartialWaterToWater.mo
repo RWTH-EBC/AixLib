@@ -19,23 +19,23 @@ partial model PartialWaterToWater
   parameter Real scaling_factor = 1.0
     "Scaling factor for heat pump capacity";
 
-  parameter Modelica.SIunits.ThermalConductance UACon
+  parameter Modelica.Units.SI.ThermalConductance UACon
     "Thermal conductance of condenser";
 
-  parameter Modelica.SIunits.ThermalConductance UAEva
+  parameter Modelica.Units.SI.ThermalConductance UAEva
     "Thermal conductance of evaporator";
 
-  parameter Modelica.SIunits.Time tau1=60
+  parameter Modelica.Units.SI.Time tau1=60
     "Time constant at nominal flow rate (used if energyDynamics1 <> Modelica.Fluid.Types.Dynamics.SteadyState)"
     annotation (Dialog(tab="Dynamics", group="Condenser"));
-  parameter Modelica.SIunits.Time tau2=60
+  parameter Modelica.Units.SI.Time tau2=60
     "Time constant at nominal flow rate (used if energyDynamics2 <> Modelica.Fluid.Types.Dynamics.SteadyState)"
     annotation (Dialog(tab="Dynamics", group="Evaporator"));
 
-  parameter Modelica.SIunits.Temperature T1_start=Medium1.T_default
+  parameter Modelica.Units.SI.Temperature T1_start=Medium1.T_default
     "Initial or guess value of set point"
     annotation (Dialog(tab="Dynamics", group="Condenser"));
-  parameter Modelica.SIunits.Temperature T2_start=Medium2.T_default
+  parameter Modelica.Units.SI.Temperature T2_start=Medium2.T_default
     "Initial or guess value of set point"
     annotation (Dialog(tab="Dynamics", group="Evaporator"));
 
@@ -47,12 +47,12 @@ partial model PartialWaterToWater
   parameter Boolean enable_temperature_protection = true
     "Enable temperature protection"
     annotation(Evaluate=true, Dialog(group="Temperature protection"));
-  parameter Modelica.SIunits.Temperature TConMax = ref.TCri-5
-    "Upper bound for condenser temperature"
-    annotation(Dialog(enable=enable_temperature_protection, group="Temperature protection"));
-  parameter Modelica.SIunits.Temperature TEvaMin = 275.15
-    "Lower bound for evaporator temperature"
-    annotation(Dialog(enable=enable_temperature_protection, group="Temperature protection"));
+  parameter Modelica.Units.SI.Temperature TConMax=ref.TCri - 5
+    "Upper bound for condenser temperature" annotation (Dialog(enable=
+          enable_temperature_protection, group="Temperature protection"));
+  parameter Modelica.Units.SI.Temperature TEvaMin=275.15
+    "Lower bound for evaporator temperature" annotation (Dialog(enable=
+          enable_temperature_protection, group="Temperature protection"));
   parameter Real dTHys(unit="K",min=0) = 5
     "Hysteresis interval width"
     annotation(Dialog(enable=enable_temperature_protection, group="Temperature protection"));
@@ -315,7 +315,7 @@ equation
  <i>
  Parameter estimation based models of water source heat pumps.
  </i>
- PhD Thesis. Oklahoma State University. Stillwater, Oklahoma, USA. 2012.
+ PhD Thesis. Oklahoma State University. Stillwater, Oklahoma, USA. 2002.
  </p>
  </html>",revisions="<html>
  <ul>
@@ -323,7 +323,7 @@ equation
  April 14, 2020, by Michael Wetter:<br/>
  Changed <code>homotopyInitialization</code> to a constant.<br/>
  This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">AixLib, #1341</a>.
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
  </li>
  <li>
  May 30, 2017, by Filip Jorissen:<br/>

@@ -105,7 +105,7 @@ partial model PartialTwoPort "Partial component with two ports"
           visible=not allowFlowReversal),
         Text(
           extent={{-149,-114},{151,-154}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}),
   __Dymola_LockedEditing="Model from IBPSA");
 end PartialTwoPort;

@@ -68,7 +68,7 @@ model GenericPipe
     final thickness=(parameterPipe.d_o - parameterPipe.d_i)/2,
     final T_start_in=T_start,
     final T_start_out=T_start,
-    final fac=fac,          nPorts=1) if pipeModel == "PlugFlowPipe"
+    final fac=fac) if pipeModel == "PlugFlowPipe"
     annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
   SimplePipe simplePipe(
     redeclare final package Medium = Medium,
@@ -147,7 +147,7 @@ equation
       points={{-10,-60},{-80,-60},{-80,0},{-100,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(plugFlowPipe.ports_b[1], port_b) annotation (Line(
+  connect(plugFlowPipe.port_b, port_b) annotation (Line(
       points={{10,-60},{80,-60},{80,0},{100,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));

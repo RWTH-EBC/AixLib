@@ -48,7 +48,7 @@ equation
  <li>
  October 9, 2019, by Michael Wetter:<br/>
  First implementation.<br/>
- This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">AixLib, issue 1209</a>.
+ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">IBPSA, issue 1209</a>.
  </li>
  </ul>
  </html>"),
