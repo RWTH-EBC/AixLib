@@ -71,7 +71,8 @@ model TRY "VDI 6007 Test Case 3 model"
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="D:/dja-dco/Git Projekts/AixLib/AixLib/ThermalZones/ReducedOrder/Validation/VDI6007/VDI6007_C1/BaseClasses/DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos")
+    filNam=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/weatherdata/DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-172,34},{-152,54}})));
 
