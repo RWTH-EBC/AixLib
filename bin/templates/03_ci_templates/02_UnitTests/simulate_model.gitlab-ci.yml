@@ -159,7 +159,6 @@ simulate_AixLib_Utilities:
 .simulate_changed_models_job:
     stage: simulate
     before_script:
-        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
         - pip install natsort
