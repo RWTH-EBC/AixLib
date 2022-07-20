@@ -4,7 +4,7 @@ partial model BaseThermalZone "Base model for thermal zone models"
 
   parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);
-  parameter Integer nPorts
+  parameter Integer nPorts=0
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));

@@ -1,7 +1,13 @@
-within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
+ replaceable partial model TZMod =
+      AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
+ constrainedby
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.BaseThermalZone
+        "Model for partial thermal zone"
+    annotation(choicesAllMatching=true);
   extends
-    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
+    TZMod;
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
     constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
@@ -128,20 +134,19 @@ model ThermalZone "Thermal zone containing moisture balance"
         extent={{3,-3},{-3,3}},
         rotation=90,
         origin={-36,95})));
-  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilWall[zoneParam.nOrientations]
-    (
+  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilWall[zoneParam.nOrientations](
     each final outSkyCon=true,
     each final outGroCon=true,
     final azi=zoneParam.aziExtWalls,
     final til=zoneParam.tiltExtWalls)
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,10},{-68,26}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[zoneParam.nOrientations]
-    (final azi=zoneParam.aziExtWalls, final til=zoneParam.tiltExtWalls)
+  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[zoneParam.nOrientations](
+     final azi=zoneParam.aziExtWalls, final til=zoneParam.tiltExtWalls)
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,31},{-68,48}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[zoneParam.nOrientationsRoof]
-    (final azi=zoneParam.aziRoof, final til=zoneParam.tiltRoof)
+  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[zoneParam.nOrientationsRoof](
+     final azi=zoneParam.aziRoof, final til=zoneParam.tiltRoof)
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,82},{-68,98}})));
 
@@ -225,8 +230,8 @@ model ThermalZone "Thermal zone containing moisture balance"
      > 0) and use_NaturalAirExchange and use_MechanicalAirExchange
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-56,-4},{-48,4}})));
-  HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
-       (ATot > 0 or zoneParam.VAir > 0) and  (use_NaturalAirExchange or use_MechanicalAirExchange) and not use_moisture_balance
+  HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir)
+    if (ATot > 0 or zoneParam.VAir > 0) and  (use_NaturalAirExchange or use_MechanicalAirExchange) and not use_moisture_balance
     "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-14},{-6,2}})));
 
@@ -307,8 +312,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Mass fraction of co2 in ROM in kg_CO2/ kg_TotalAir"
     annotation (Placement(transformation(extent={{-8,-74},{10,-60}})));
 
-  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[zoneParam.nOrientationsRoof]
-    (
+  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[zoneParam.nOrientationsRoof](
     each final outSkyCon=false,
     each final outGroCon=false,
     final azi=zoneParam.aziRoof,
@@ -428,13 +432,15 @@ equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
           127}));
-  connect(intGains[3], lights.uRel) annotation (Line(points={{80,-86.6667},{80,-86},{50,-86},{50,-68.5},{56,-68.5}},
+  connect(intGains[3], lights.uRel) annotation (Line(points={{80,-86.6667},{80,
+          -86},{50,-86},{50,-68.5},{56,-68.5}},
                                            color={0,0,127}));
   connect(lights.convHeat, ROM.intGainsConv) annotation (Line(points={{75,-62.8},
           {92,-62.8},{92,78},{86,78}}, color={191,0,0}));
   connect(machinesSenHea.convHeat, ROM.intGainsConv) annotation (Line(points={{75,
           -40.8},{92,-40.8},{92,78},{86,78}}, color={191,0,0}));
-  connect(intGains[1], humanSenHeaDependent.uRel) annotation (Line(points={{80,-113.333},{80,-92},{46,-92},{46,-24},{56,-24}},
+  connect(intGains[1], humanSenHeaDependent.uRel) annotation (Line(points={{80,
+          -113.333},{80,-92},{46,-92},{46,-24},{56,-24}},
                                                 color={0,0,127}));
   connect(humanSenHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(
         points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
@@ -442,15 +448,16 @@ equation
          {{86,78},{92,78},{92,-10},{57,-10},{57,-15}}, color={191,0,0}));
   connect(humanSenHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(
         points={{75,-30},{94,-30},{94,82},{86,82}}, color={95,95,95}));
-  connect(intGains[1], humanSenHeaIndependent.uRel) annotation (Line(points={{80,-113.333},{80,-92},{46,-92},{46,-24},{56,-24}},
-                                                          color={0,0,127}));
+  connect(intGains[1], humanSenHeaIndependent.uRel) annotation (Line(points={{80,
+          -113.333},{80,-92},{46,-92},{46,-24},{56,-24}}, color={0,0,127}));
   connect(humanSenHeaIndependent.convHeat, ROM.intGainsConv) annotation (Line(
         points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
   connect(ROM.intGainsConv, humanSenHeaIndependent.TRoom) annotation (Line(
         points={{86,78},{92,78},{92,-10},{57,-10},{57,-15}}, color={191,0,0}));
   connect(humanSenHeaIndependent.radHeat, ROM.intGainsRad) annotation (Line(
         points={{75,-30},{94,-30},{94,82},{86,82}}, color={95,95,95}));
-  connect(intGains[1], humanTotHeaDependent.uRel) annotation (Line(points={{80,-113.333},{80,-92},{46,-92},{46,-24},{56,-24}},
+  connect(intGains[1], humanTotHeaDependent.uRel) annotation (Line(points={{80,
+          -113.333},{80,-92},{46,-92},{46,-24},{56,-24}},
                                                 color={0,0,127}));
   connect(humanTotHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(
         points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
@@ -615,8 +622,8 @@ equation
       points={{-50.8,-26},{-46,-26},{-46,-24},{-41,-24}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,-113.333},{80,-92},{46,-92},{46,-36},{-68,-36},{-68,-30}},
-                                                                         color=
+  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
+          -113.333},{80,-92},{46,-92},{46,-36},{-66,-36},{-66,-30.8}},   color=
           {0,0,127}));
   connect(ventRate, addInfVen.u2) annotation (Line(points={{-108,-64},{-76,-64},
           {-76,-34},{-44,-34},{-44,-30},{-41,-30}},

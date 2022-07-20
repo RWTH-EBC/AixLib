@@ -2,19 +2,6 @@ within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
 partial model PartialThermalZone "Partial model for thermal zone models"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.BaseThermalZone;
 
-  parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
-    "Choose setup for this zone" annotation (choicesAllMatching=true);
-  parameter Integer nPorts=0
-    "Number of fluid ports"
-    annotation(Evaluate=true,
-    Dialog(connectorSizing=true, tab="General",group="Ports"));
-  parameter Boolean use_C_flow=false
-    "Set to true to enable input connector for trace substance"
-    annotation (Dialog(tab="CO2"));
-  parameter Boolean use_moisture_balance=false
-    "If true, input connector QLat_flow is enabled and room air computes moisture balance"
-    annotation (Dialog(tab="Moisture"));
-
   Modelica.Blocks.Interfaces.RealInput intGains[3]
     "Input profiles for internal gains persons, machines, light"
     annotation (
