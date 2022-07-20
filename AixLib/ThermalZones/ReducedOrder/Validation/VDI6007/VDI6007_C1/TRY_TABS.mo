@@ -96,13 +96,11 @@ model TRY_TABS "VDI 6007 Test Case 3 model"
   BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilWall[RoomRecord.nOrientations](
     each final outSkyCon=true,
     each final outGroCon=true,
-    each final lat=RoomRecord.lat,
     final azi=RoomRecord.aziExtWalls,
     final til=RoomRecord.tiltExtWalls)
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-124,-26},{-108,-10}})));
   BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[RoomRecord.nOrientations](
-    each final lat=RoomRecord.lat,
     final azi=RoomRecord.aziExtWalls,
     final til=RoomRecord.tiltExtWalls)
     "Calculates direct solar radiation on titled surface for both directions"
@@ -364,7 +362,7 @@ equation
   connect(thermalZoneTwoElements.TAir,sum2. u[2]) annotation (Line(points={{93,32},
           {220,32},{220,-72},{240,-72},{240,-71.75},{244.6,-71.75}},
                                              color={0,0,127}));
-  connect(heatFlowSensor.Q_flow, OutCoolingLoad.u) annotation (Line(points={{182,
+  connect(heatFlowSensor.Q_flow, OutCoolingLoad.u) annotation (Line(points={{183,
           -112},{194.8,-112}},                         color={0,0,127}));
   connect(perRad.port, port_a)
     annotation (Line(points={{74,-90},{152,-90},{152,-14}}, color={191,0,0}));
