@@ -72,7 +72,92 @@ CI_simulate_AixLib_Utilities:
     extends: .CI_simulate_model_job
 
     
-    
+.dev_simulate_model_job:
+    stage: simulate
+    before_script:
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate myenv
+        - pip install natsort
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist --simulateexamples
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.${lib_package}-log.txt
+            - AixLib/AixLib.${lib_package}-errorlog.txt
+        expire_in: 7 day
+    only:
+        refs:
+            - master
+            - development
+    except:
+        variables:
+            - $CI_COMMIT_MESSAGE  =~ /ci_update_ref/
+            - $CI_COMMIT_MESSAGE  =~ /ci_dif_ref/
+            - $CI_COMMIT_MESSAGE  =~ /ci_correct_html/
+            - $CI_COMMIT_MESSAGE  =~ /ci_create_whitelist/
+            - $CI_COMMIT_MESSAGE  =~ /Automatic push of CI with new regression reference files. Please pull the new files before push again./
+            - $CI_COMMIT_MESSAGE  =~ /New reference files were pushed to this branch. The job was successfully and the newly added files are tested in another commit./
+            - $CI_COMMIT_MESSAGE  =~ /ci_show_ref/
+            - $CI_COMMIT_MESSAGE  =~ /ci_regression_test/
+            - $CI_COMMIT_MESSAGE  =~ /ci_check/
+            - $CI_COMMIT_MESSAGE  =~ /ci_simulate/
+            - $CI_COMMIT_MESSAGE  =~ /ci_create_html_whitelist/
+            - $CI_COMMIT_MESSAGE  =~ /ci_html/
+            - $CI_COMMIT_MESSAGE  =~ /ci_setting/
+    retry:
+        max: 2
+        when: runner_system_failure
+
+Development_simulate_AixLib_Airflow:
+    variables:
+        lib_package: Airflow
+    extends: .dev_simulate_model_job
+
+Development_simulate_AixLib_BoundaryConditions:
+    variables:
+        lib_package: BoundaryConditions
+    extends: .dev_simulate_model_job
+
+Development_simulate_AixLib_Controls:
+    variables:
+        lib_package: Controls
+    extends: .dev_simulate_model_job
+
+Development_simulate_AixLib_Electrical:
+    variables:
+        lib_package: Electrical
+    extends: .dev_simulate_model_job
+
+Development_simulate_AixLib_Fluid:
+    variables:
+        lib_package: Fluid
+    extends: .dev_simulate_model_job
+
+Development_simulate_AixLib_Media:
+    variables:
+        lib_package: Media
+    extends: .dev_simulate_model_job
+
+Development_simulate_AixLib_Systems:
+    variables:
+        lib_package: Systems
+    extends: .dev_simulate_model_job
+
+Development_simulate_AixLib_ThermalZones:
+    variables:
+        lib_package: ThermalZones
+    extends: .dev_simulate_model_job
+
+Development_simulate_AixLib_Utilities:
+    variables:
+        lib_package: Utilities
+    extends: .dev_simulate_model_job
+
+
+
+
 .simulate_model_job:
     stage: simulate
     before_script:
@@ -91,6 +176,7 @@ CI_simulate_AixLib_Utilities:
     only:
         refs:
             - external_pull_requests
+
     except:
         variables:
             - $CI_COMMIT_MESSAGE  =~ /ci_update_ref/
@@ -106,6 +192,10 @@ CI_simulate_AixLib_Utilities:
             - $CI_COMMIT_MESSAGE  =~ /ci_create_html_whitelist/
             - $CI_COMMIT_MESSAGE  =~ /ci_html/
             - $CI_COMMIT_MESSAGE  =~ /ci_setting/
+        refs:
+            - master
+            - development
+
     retry:
         max: 2
         when: runner_system_failure  
@@ -176,6 +266,8 @@ simulate_AixLib_Utilities:
         refs:
             - external_pull_requests
             - IBPSA_Merge
+            - master
+            - development
         variables:
             - $CI_COMMIT_MESSAGE  =~ /ci_update_ref/
             - $CI_COMMIT_MESSAGE  =~ /ci_dif_ref/
