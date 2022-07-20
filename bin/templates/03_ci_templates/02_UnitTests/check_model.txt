@@ -57,8 +57,9 @@ Check_${library}_${package}:
             - ${library}/${library}.${lib_package}-errorlog.txt
         expire_in: 7 day
     only:
-        - master
-        - development
+        refs:
+            - master
+            - development
     retry:
         max: 2
         when: runner_system_failure
