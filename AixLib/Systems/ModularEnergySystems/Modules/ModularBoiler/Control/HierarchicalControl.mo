@@ -220,23 +220,49 @@ equation
     annotation (
       Line(points={{-43.6,40},{-38,40},{-38,26},{-22,26}}, color={255,0,255}));
 
-  annotation (Documentation(info="<html>
-<p>Model that contains the three different variants of control for heat generators:</p>
+  annotation (Documentation(info="<html><p>
+  Model that contains the three different variants of control for heat
+  generators:
+</p>
 <ul>
-<li>Two position control: Flow temperature of the boiler is controlled by an On-Off-Controller with hysteresis.</li>
-<li>Ambient guided flow temperature control: Variable flow temperature of boiler which is determined by a heating curve as a function of the ambient temperature.</li>
-<li>Admixture control: Fix flow temperature of boiler which is set by the user. The flow temperature to the consumer is also set by the user and is controlled to the set temperature by a valve.</li>
+  <li>Two position control: Flow temperature of the boiler is
+  controlled by an On-Off-Controller with hysteresis.
+  </li>
+  <li>Ambient guided flow temperature control: Variable flow
+  temperature of boiler which is determined by a heating curve as a
+  function of the ambient temperature.
+  </li>
+  <li>Admixture control: Fix flow temperature of boiler which is set by
+  the user. The flow temperature to the consumer is also set by the
+  user and is controlled to the set temperature by a valve.
+  </li>
 </ul>
-<p>The control model is build up hierarchically. The emergency swith precedes all types of regulation. </p>
-<h4>Important parameters</h4>
+<p>
+  The control model is build up hierarchically. The emergency swith
+  precedes all types of regulation.
+</p>
+<h4>
+  Important parameters
+</h4>
 <ul>
-<li>use_advancedControl: The user can select between two position control or flow temperature control.</li>
-<li>severalHeatcurcuits: The user can select between ambient guided flow temperature control or admixture control.</li>
-<li>n: Indicates the number of layers of the buffer storage.</li>
-<li>k: Indicates the number of heat curcuits for the different consumers.</li>
-<li>TBoiler: The user sets the fix flow temperature of the boiler before the simulation.</li>
-<li>Tref: Set temperature for the two position controller.</li>
-<li>bandwidth: Width of the hysteresis.</li>
+  <li>use_advancedControl: The user can select between two position
+  control or flow temperature control.
+  </li>
+  <li>severalHeatcurcuits: The user can select between ambient guided
+  flow temperature control or admixture control.
+  </li>
+  <li>n: Indicates the number of layers of the buffer storage.
+  </li>
+  <li>k: Indicates the number of heat curcuits for the different
+  consumers.
+  </li>
+  <li>TBoiler: The user sets the fix flow temperature of the boiler
+  before the simulation.
+  </li>
+  <li>Tref: Set temperature for the two position controller.
+  </li>
+  <li>bandwidth: Width of the hysteresis.
+  </li>
 </ul>
 </html>"));
 end HierarchicalControl;

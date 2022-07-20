@@ -270,7 +270,11 @@ equation
       Interval=1,
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
-    Documentation(info="<html>
-<p>Model of a CHP-module with an inner cooling circuit and a control unit. Heat circuit and cooling circuit are connected with a heat exchanger. Further informations are given in the submodel discribtion.</p>
+    Documentation(info="<html><p>
+  Model of a CHP-module with an inner cooling circuit and a control
+  unit. Heat circuit and cooling circuit are connected with a heat
+  exchanger. Further informations are given in the submodel
+  discribtion.
+</p>
 </html>"));
 end ModularCHP;

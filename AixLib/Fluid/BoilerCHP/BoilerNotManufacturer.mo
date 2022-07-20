@@ -134,20 +134,42 @@ TVolume=vol.T;
     annotation (Line(points={{-44,-34},{-50,-34},{-50,-70}}, color={191,0,0}));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-        Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>A boiler model consisting of physical components.The efficiency is based on the part load rate and the inflow water temperature.</p>
-<p><br>Assumptions for predefined parameter values (based on Vissmann data cheat) as given by BoilerNoControl:</p>
-<p>G: a heat loss of 0.3 &percnt; of nominal power at a temperature difference of 50 K to ambient is assumed.</p>
-<p>C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default.</p>
-<p><br>Further informations are described in the submodels &quot;Set&quot; and &quot;ReturnInfluence&quot;. </p>
+        Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  A boiler model consisting of physical components.The efficiency is
+  based on the part load rate and the inflow water temperature.
+</p>
+<p>
+  <br/>
+  Assumptions for predefined parameter values (based on Vissmann data
+  cheat) as given by BoilerNoControl:
+</p>
+<p>
+  G: a heat loss of 0.3 &amp;percnt; of nominal power at a temperature
+  difference of 50 K to ambient is assumed.
+</p>
+<p>
+  C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal
+  power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus,
+  a value of 1.5 is used as default.
+</p>
+<p>
+  <br/>
+  Further informations are described in the submodels \"Set\" and
+  \"ReturnInfluence\".
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First
-implementation</li>
+        revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end BoilerNotManufacturer;

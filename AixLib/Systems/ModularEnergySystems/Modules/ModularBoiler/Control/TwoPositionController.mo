@@ -117,7 +117,11 @@ equation
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Partial model for the two position control of heat heat generators. The temperature control can be switched on and off via the isOn input from the outside. The user can set the controller with the parameters Tset and bandwidth.</p>
+    Documentation(info="<html><p>
+  Partial model for the two position control of heat heat generators.
+  The temperature control can be switched on and off via the isOn input
+  from the outside. The user can set the controller with the parameters
+  Tset and bandwidth.
+</p>
 </html>"));
 end TwoPositionController;

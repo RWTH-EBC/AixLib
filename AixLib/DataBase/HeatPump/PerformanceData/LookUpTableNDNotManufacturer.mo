@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTableNDNotManufacturer
   "4-dimensional table without manufacturer data for heat pump"
  extends
@@ -372,9 +372,23 @@ equation
           extent={{58,4},{150,-28}},
           lineColor={28,108,200},
           textString="COP calc for dT fix and THotCurrent")}),
-    Documentation(info="<html>
-<p>This model uses 4-dimensional table data, wich are calculated for a simplyfied refrigerant circuit with the use of isentropic compressor efficienciecs as a function of pressure gradient and frequency, superheating and calibration of minimal temperature differencees in condeser and evaporater. The table data ist a function of THot, TSource, deltaTCon and relative power, which represents compressor frequency.</p>
-<p><br><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_Prel.png\"/></p>
-<p><img src=\"modelica://AixLib/../../../Diagramme AixLib/WP/KennfeldScroll_DeltaT_HK.png\"/></p>
+    Documentation(info="<html><p>
+  This model uses 4-dimensional table data, wich are calculated for a
+  simplyfied refrigerant circuit with the use of isentropic compressor
+  efficienciecs as a function of pressure gradient and frequency,
+  superheating and calibration of minimal temperature differencees in
+  condeser and evaporater. The table data ist a function of THot,
+  TSource, deltaTCon and relative power, which represents compressor
+  frequency.
+</p>
+<p>
+  <br/>
+  <img src=
+  \"modelica://AixLib/../../../Diagramme%20AixLib/WP/KennfeldScroll_Prel.png\">
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/../../../Diagramme%20AixLib/WP/KennfeldScroll_DeltaT_HK.png\">
+</p>
 </html>"));
 end LookUpTableNDNotManufacturer;

@@ -84,7 +84,11 @@ equation
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>With this model, the switch between internal and external control takes place. In addition, this model implements the function of manually specifying a fixed operating time for the heat generator from the outside. </p>
+    Documentation(info="<html><p>
+  With this model, the switch between internal and external control
+  takes place. In addition, this model implements the function of
+  manually specifying a fixed operating time for the heat generator
+  from the outside.
+</p>
 </html>"));
 end ManualControl;

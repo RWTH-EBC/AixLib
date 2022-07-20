@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularAHU.Validation;
+within AixLib.Systems.ModularAHU.Validation;
 model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
   extends Modelica.Icons.Example;
     package MediumWater = AixLib.Media.Water

@@ -163,9 +163,19 @@ THotEngine=vol.T;
           34,46},{34.6,46},{34.6,45.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Model of a CHP which is based on AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator. The model describes an adiabtaic heatflow which is brought to the volume. </p>
-<p>The adiabsatic heat flow is calculated with the adiabatic power to heat ratio which is based on table data for different relative electric power:</p>
-<p><img src=\"modelica://AixLib/../../../Diagramme AixLib/BHKW/Stromkennzahl.png\"/></p>
+    Documentation(info="<html><p>
+  Model of a CHP which is based on
+  AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator. The model
+  describes an adiabtaic heatflow which is brought to the volume.
+</p>
+<p>
+  The adiabsatic heat flow is calculated with the adiabatic power to
+  heat ratio which is based on table data for different relative
+  electric power:
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/../../../Diagramme%20AixLib/BHKW/Stromkennzahl.png\">
+</p>
 </html>"));
 end CHPNotManufacturer;

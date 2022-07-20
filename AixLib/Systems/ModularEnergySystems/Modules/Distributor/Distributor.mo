@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularEnergySystems.Modules.Distributor;
+within AixLib.Systems.ModularEnergySystems.Modules.Distributor;
 model Distributor "Heating circuit distributor for underfloor heating systems"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 

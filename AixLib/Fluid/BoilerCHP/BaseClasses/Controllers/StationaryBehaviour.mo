@@ -106,8 +106,15 @@ equation
           fillPattern=FillPattern.Solid,
           fillColor={255,255,255})}),                              Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model estimates the exhaust temperature. The adiabatic efficiency is a function of the exhaust temperature. The power demand is the sum of the ambient losses, the given thermal power of the setpoint and the exhaust losses.</p>
-<p><img src=\"modelica://AixLib/../../../Diagramme AixLib/Boiler/Kennfeld_TAG_PLRvar_20K_mNom.png\"/></p>
+    Documentation(info="<html><p>
+  This model estimates the exhaust temperature. The adiabatic
+  efficiency is a function of the exhaust temperature. The power demand
+  is the sum of the ambient losses, the given thermal power of the
+  setpoint and the exhaust losses.
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/../../../Diagramme%20AixLib/Boiler/Kennfeld_TAG_PLRvar_20K_mNom.png\">
+</p>
 </html>"));
 end StationaryBehaviour;

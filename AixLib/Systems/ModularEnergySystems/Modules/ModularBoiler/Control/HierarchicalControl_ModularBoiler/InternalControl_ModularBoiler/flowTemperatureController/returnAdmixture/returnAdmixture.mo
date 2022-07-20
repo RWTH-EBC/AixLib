@@ -89,15 +89,30 @@ equation
     annotation (Line(points={{11,-58},{100,-58}}, color={0,0,127}));
  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
        coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Admixture control for heat generators. The temperature control can be switched on and off via the isOn input from the outside. This model controls two seperate control loops:</p>
+    Documentation(info="<html><p>
+  Admixture control for heat generators. The temperature control can be
+  switched on and off via the isOn input from the outside. This model
+  controls two seperate control loops:
+</p>
 <ul>
-<li>Flow temperature control of the boiler: The fix flow temperature of the boiler is controller by a PI-Controller which sets the PLR depending on the temperature difference between set temperature and actual temperature.</li>
-<li>Flow temperature to the consument: Fix or variable flow temperature to the consument. The valve for the admixture is controlled by a PI-Controller regarding to the temperature difference between set temperature and actual temperature.</li>
+  <li>Flow temperature control of the boiler: The fix flow temperature
+  of the boiler is controller by a PI-Controller which sets the PLR
+  depending on the temperature difference between set temperature and
+  actual temperature.
+  </li>
+  <li>Flow temperature to the consument: Fix or variable flow
+  temperature to the consument. The valve for the admixture is
+  controlled by a PI-Controller regarding to the temperature difference
+  between set temperature and actual temperature.
+  </li>
 </ul>
-<h4>Important parameters</h4>
+<h4>
+  Important parameters
+</h4>
 <ul>
-<li>TBoiler: The user sets the fix flow temperature of the boiler before the simulation.</li>
+  <li>TBoiler: The user sets the fix flow temperature of the boiler
+  before the simulation.
+  </li>
 </ul>
 </html>"));
 end returnAdmixture;

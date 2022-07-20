@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model IcingBlock
   "Block which decreases evaporator power by an icing factor"
   AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
