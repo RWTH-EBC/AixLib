@@ -38,6 +38,9 @@ stages:
             - $CI_COMMIT_MESSAGE  =~ /ci_create_html_whitelist/
             - $CI_COMMIT_MESSAGE  =~ /ci_html/
             - $CI_COMMIT_MESSAGE  =~ /ci_setting/
+        refs:
+            - master
+            - development
             
 Check_AixLib_Airflow:
     variables:
@@ -85,6 +88,75 @@ Check_AixLib_Utilities:
     extends: .check_model_job
 
 
+.dev_check_model_job:
+    stage: check
+    before_script:
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate myenv
+        - pip install natsort
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - xvfb-run -n 77 python bin/CITests/02_UnitTests/CheckPackages/validatetest.py  --single-package "${lib_package}" --library AixLib -DS 2022 --wh-library IBPSA --filterwhitelist
+
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib.${lib_package}-log.txt
+            - AixLib/AixLib.${lib_package}-errorlog.txt
+        expire_in: 7 day
+    only:
+        - master
+        - development
+    retry:
+        max: 2
+        when: runner_system_failure
+
+Development_Check_AixLib_Airflow:
+    variables:
+        lib_package: Airflow
+    extends: .dev_check_model_job
+
+Development_Check_AixLib_BoundaryConditions:
+    variables:
+        lib_package: BoundaryConditions
+    extends: .dev_check_model_job
+
+Development_Check_AixLib_Controls:
+    variables:
+        lib_package: Controls
+    extends: .dev_check_model_job
+
+Development_Check_AixLib_Electrical:
+    variables:
+        lib_package: Electrical
+    extends: .dev_check_model_job
+
+Development_Check_AixLib_Fluid:
+    variables:
+        lib_package: Fluid
+    extends: .dev_check_model_job
+
+Development_Check_AixLib_Media:
+    variables:
+        lib_package: Media
+    extends: .dev_check_model_job
+
+Development_Check_AixLib_Systems:
+    variables:
+        lib_package: Systems
+    extends: .dev_check_model_job
+
+Development_Check_AixLib_ThermalZones:
+    variables:
+        lib_package: ThermalZones
+    extends: .dev_check_model_job
+
+Development_Check_AixLib_Utilities:
+    variables:
+        lib_package: Utilities
+    extends: .dev_check_model_job
+
+
 .check_changed_models_job:
     stage: check
     before_script:
@@ -105,6 +177,8 @@ Check_AixLib_Utilities:
         refs:
             - external_pull_requests
             - IBPSA_Merge
+            - master
+            - development
         variables:
             - $CI_COMMIT_MESSAGE  =~ /ci_update_ref/
             - $CI_COMMIT_MESSAGE  =~ /ci_dif_ref/
@@ -319,3 +393,4 @@ whitelist_job:
     except:
         refs:
             - external_pull_requests
+
