@@ -4,7 +4,7 @@ model ControlledTABS
   package MediumAir = AixLib.Media.Air;
   package MediumWater = AixLib.Media.Water;
 
-  parameter Integer dis= if not Reduced then 100 else 10  "Number of discretization layers for panel heating pipe";
+  parameter Integer dis= if not Reduced then 100 else 20  "Number of discretization layers for panel heating pipe";
   parameter Integer RoomNo(min=1)=1 "Number of rooms heated with panel heating" annotation (Dialog(group="General"));
   parameter Modelica.Units.SI.Area Area[RoomNo] "Floor Area"
     annotation (Dialog(group="Room Specifications"));
@@ -37,10 +37,10 @@ model ControlledTABS
     each yMax=1,
     each yMin=0) if Controlled
     annotation (Placement(transformation(extent={{-58,48},{-34,72}})));
-  Modelica.Blocks.Interfaces.RealInput T_Soll[RoomNo]  if Controlled annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput T_Soll[RoomNo] if  Controlled annotation (Placement(
         transformation(extent={{-116,48},{-92,72}}), iconTransformation(extent={{-116,48},
             {-92,72}})));
-  Modelica.Blocks.Interfaces.RealInput T_Room[RoomNo]  if Controlled annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput T_Room[RoomNo] if  Controlled annotation (Placement(
         transformation(extent={{-116,28},{-92,52}}), iconTransformation(extent={{-116,18},
             {-92,42}})));
   Modelica.Blocks.Sources.Constant const[RoomNo](each k=1)
@@ -249,5 +249,7 @@ equation
                                      color={28,108,200}),
         Line(points={{82,4},{82,10}}, color={28,108,200})}),     Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-120},{100,80}})),
-    experiment(StopTime=8640000));
+    experiment(StopTime=8640000),
+    Documentation(info="<html>
+</html>"));
 end ControlledTABS;

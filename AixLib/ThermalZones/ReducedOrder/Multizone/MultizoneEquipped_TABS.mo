@@ -2,21 +2,30 @@ within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped_TABS
   extends MultizoneEquipped;
   // TABS
-  parameter Integer numTabs = 1;
+  parameter Integer numTabs = 1 annotation (
+    Dialog(tab="TABS"));
   parameter Modelica.Units.SI.Area ATabs[numTabs]=fill(0, numTabs)
-    "Areas of exterior walls by orientations";
-  parameter Boolean ExtTabs[numTabs] = fill(false, numTabs) "Areas of exterior walls by orientations";
-  parameter Integer TabsConnection[numTabs] = fill(1, numTabs)  "";
+    "Areas of exterior walls by orientations" annotation (
+    Dialog(tab="TABS"));
+  parameter Boolean ExtTabs[numTabs] = fill(false, numTabs) "Areas of exterior walls by orientations" annotation (
+    Dialog(tab="TABS"));
+  parameter Integer TabsConnection[numTabs] = fill(1, numTabs)  "" annotation (
+    Dialog(tab="TABS"));
   parameter Modelica.Units.SI.Power TabsHeatLoad[numTabs]=fill(0, numTabs)
-    "Calculated Heat Load for room with panel heating";
+    "Calculated Heat Load for room with panel heating" annotation (
+    Dialog(tab="TABS"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TabswallTypeFloor[numTabs]=
-  fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(), numTabs) "Wall type for floor";
+  fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(), numTabs) "Wall type for floor" annotation (
+    Dialog(tab="TABS"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TabswallTypeCeiling[numTabs]=
-  fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(), numTabs) "Wall type for ceiling";
+  fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.FloorLayers.Ceiling_Dummy(), numTabs) "Wall type for ceiling" annotation (
+    Dialog(tab="TABS"));
   parameter Modelica.Units.SI.Distance TabsSpacing[numTabs]=fill(0.35, numTabs)
-    "Spacing between tubes";
+    "Spacing between tubes" annotation (
+    Dialog(tab="TABS"));
   parameter AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PipeBaseDataDefinition TabsPipes[numTabs]=
-  fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PBpipe(),numTabs) "Pipe type for TABS";
+  fill(AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.Piping.PBpipe(),numTabs) "Pipe type for TABS" annotation (
+    Dialog(tab="TABS"));
 
 
   Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.ControlledTABS TABS(
@@ -28,7 +37,7 @@ model MultizoneEquipped_TABS
     WallTypeCeiling=TabswallTypeCeiling,
     PipeRecord=TabsPipes,
     Controlled=true,
-    Reduced=false)  if ATabs[1] > 0
+    Reduced=false) if  ATabs[1] > 0
     annotation (Placement(transformation(extent={{-14,-80},{20,-50}})));
 
 equation
