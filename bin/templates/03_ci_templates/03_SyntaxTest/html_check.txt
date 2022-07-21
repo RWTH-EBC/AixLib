@@ -58,11 +58,15 @@ HTML_Merge_Checks:
     only:
         refs:
             - external_pull_requests
+
     except:
         variables:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor
+        refs:
+            - master
+            - development
   
 HTML_Check:
     stage: HTML_Check
@@ -107,7 +111,7 @@ HTML_Check:
         refs:
             - external_pull_requests
             - /^Correct_HTML.*$/
-            ${merge_branch} 
+            ${merge_branch}
         variables:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/

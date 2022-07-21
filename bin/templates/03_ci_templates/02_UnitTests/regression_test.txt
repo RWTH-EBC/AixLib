@@ -44,6 +44,9 @@ stages:
         max: 2
         when: runner_system_failure
 
+
+
+
 %for package in package_list:
 CI_Regressiontest_${library}_${package}:
     variables:
@@ -51,6 +54,55 @@ CI_Regressiontest_${library}_${package}:
     extends: .CI_Regressiontest
 
 %endfor
+
+
+
+.dev_Regressiontest:
+    stage: RegressionTest
+    before_script:
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate ${python_version}
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - export PYTHONIOENCODING=utf-8 # just in case
+        - echo 'FAIL' > ${exit_file}
+    script:
+        - cd ${library} && xvfb-run -n 77 python ../bin/CITests/02_UnitTests/reference_check.py -n 4 --tool dymola --single-package "${lib_package}" --library ${library} --batch -DS ${dymolaversion}
+        - cd .. && echo 'successful' > ${exit_file}
+    after_script:
+        - if cat ${exit_file} | grep "FAIL"; then
+            export PIP_CACHE_DIR="/opt/cache/pip" ;
+            source activate ${python_version} ;
+            pip install pandas mako matplot ;
+            python bin/CITests/05_Converter/google_charts.py --line-html --error --funnel-comp --single-package ${lib_package} ;
+            mkdir -p data ;
+            cp -r ${library}/simulator-dymola.log data ;
+            cp -r ${library}/unitTests-dymola.log data ;
+            cp -r ${library}/funnel_comp data ;
+          else
+            echo "Test was succesful!" ;
+          fi
+    artifacts:
+        when: on_failure
+        paths:
+          - data
+          - ${chart_dir}/${lib_package}
+        expire_in: 7 day
+    only:
+        refs:
+            - development
+            - master
+    retry:
+        max: 2
+        when: runner_system_failure
+
+%for package in package_list:
+Development_Regressiontest_${library}_${package}:
+    variables:
+        lib_package: ${library}.${package}
+    extends: .dev_Regressiontest
+
+%endfor
+
 
 CI_create_plots:
     stage: prepare
@@ -119,6 +171,10 @@ CI_create_plots:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor
+        refs:
+            - master
+            - development
+
     retry:
         max: 2
         when: runner_system_failure
@@ -154,6 +210,9 @@ Regression_overall_coverage:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor
+        refs:
+            - master
+            - development
     retry:
         max: 2
         when: runner_system_failure
@@ -183,6 +242,9 @@ prepare_create_plots:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
             %endfor
+        refs:
+            - master
+            - development
     when: on_failure
     needs:
     %for package in package_list:
@@ -225,6 +287,8 @@ prepare_create_plots:
         refs:
             - external_pull_requests
             ${merge_branch}
+            - master
+            - development
         variables:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
@@ -266,6 +330,8 @@ Changed_create_plots:
         refs:
             - external_pull_requests
             ${merge_branch}
+            - master
+            - development
         variables:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
@@ -348,6 +414,8 @@ RegressionTest_Check_References:
     except:
         refs:
             ${merge_branch}
+            - master
+            - development
         variables:
             %for commit in except_commit_list:
             - $CI_COMMIT_MESSAGE  =~ /${commit}/
