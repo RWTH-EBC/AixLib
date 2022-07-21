@@ -238,8 +238,8 @@ model CDD "VDI 6007 Test Case 3 model"
   Modelica.Blocks.Math.Gain gain2(k=1)
     "Reverses ventilation rate"
     annotation (Placement(transformation(extent={{46,-153},{60,-139}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow IluRad1
-    "Radiative heat flow persons"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow TABSheat
+    "heat flow from tabs "
     annotation (Placement(transformation(extent={{102,-156},{122,-136}})));
   Modelica.Blocks.Sources.CombiTimeTable SollTempHamburg(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -402,8 +402,8 @@ equation
   connect(multiProduct.y, gain2.u)
     annotation (Line(points={{13.19,-146},{44.6,-146}}, color={0,0,127}));
 
-  connect(gain2.y, IluRad1.Q_flow) annotation (Line(points={{60.7,-146},{102,-146}},
-                                 color={0,0,127}));
+  connect(gain2.y, TABSheat.Q_flow)
+    annotation (Line(points={{60.7,-146},{102,-146}}, color={0,0,127}));
   connect(thermalZoneTwoElements.intGainsConv, port_a) annotation (Line(points={
           {92,20},{130,20},{130,-22},{170,-22}}, color={191,0,0}));
   connect(product1.y, thermalZoneTwoElements.solRad[2]) annotation (Line(points={{-5.5,
@@ -427,8 +427,8 @@ equation
                          color={0,0,127}));
   connect(gain3.y, greaterThreshold1.u) annotation (Line(points={{-99.3,76},{-82,
           76},{-82,69},{-69,69}}, color={0,0,127}));
-  connect(IluRad1.port, rCTABS.port_heat) annotation (Line(points={{122,-146},{146,
-          -146},{146,-128}},                       color={191,0,0}));
+  connect(TABSheat.port, rCTABS.port_heat) annotation (Line(points={{122,-146},
+          {146,-146},{146,-128}}, color={191,0,0}));
   if location == 1 then
     connect(OutdoorTemp_Hamburg.y[1], sum1.u[1]) annotation (Line(points={{-131.2,
           28},{-114,28},{-114,11.3},{-103.4,11.3}},
@@ -457,18 +457,21 @@ equation
   connect(convTABS.Gc, rCTABS.alpha_TABS) annotation (Line(points={{172,-108},{172,
           -90},{126,-90},{126,-110},{135,-110}}, color={0,0,127}));
     annotation ( Documentation(info="<html>
-  <p>Test Case 3 of the VDI 6007 Part 1: Calculation of indoor air
-  temperature excited by a convective heat source for room version L.</p>
-  <h4>Boundary conditions</h4>
-  <ul>
-  <li>constant outdoor air temperature 22&deg;C</li>
-  <li>no solar or short-wave radiation on the exterior wall</li>
-  <li>no solar or short-wave radiation through the windows</li>
-  <li>no long-wave radiation exchange between exterior wall, windows
-  and ambient environment</li>
-  </ul>
-  <p>This test validates basic functionalities.</p>
-  </html>", revisions="<html>
+<p>Test Case 3 of the VDI 6007 Part 1: Calculation of indoor air temperature excited by a convective heat source for room version L. </p>
+<p><b>Boundary conditions</b> </p>
+<ul>
+<li>constant outdoor air temperature 22&deg;C </li>
+<li>no solar or short-wave radiation on the exterior wall </li>
+<li>no solar or short-wave radiation through the windows </li>
+<li>no long-wave radiation exchange between exterior wall, windows and ambient environment </li>
+</ul>
+<p>This test validates basic functionalities. </p>
+<p><b>Tabs conditions</b> </p>
+<ul>
+<li>The pasive part of the tabs is represented by the model RCTabs  (based on the room&apos;s floor characteristics)</li>
+<li>The active part of the tabs is represented by a prescribed heat flow controled by a PID controller</li>
+</ul>
+</html>",   revisions="<html>
   <ul>
   <li>
   July 11, 2019, by Katharina Brinkmann:<br/>

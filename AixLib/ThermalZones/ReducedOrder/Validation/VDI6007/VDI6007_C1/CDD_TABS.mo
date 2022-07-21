@@ -442,18 +442,21 @@ equation
           29,-146},{24,-146},{24,-200},{198,-200},{198,32},{93,32}}, color={0,0,
           127}));
     annotation ( Documentation(info="<html>
-  <p>Test Case 3 of the VDI 6007 Part 1: Calculation of indoor air
-  temperature excited by a convective heat source for room version L.</p>
-  <h4>Boundary conditions</h4>
-  <ul>
-  <li>constant outdoor air temperature 22&deg;C</li>
-  <li>no solar or short-wave radiation on the exterior wall</li>
-  <li>no solar or short-wave radiation through the windows</li>
-  <li>no long-wave radiation exchange between exterior wall, windows
-  and ambient environment</li>
-  </ul>
-  <p>This test validates basic functionalities.</p>
-  </html>", revisions="<html>
+<p>Test Case 3 of the VDI 6007 Part 1: Calculation of indoor air temperature excited by a convective heat source for room version L. </p>
+<p><b>Boundary conditions</b> </p>
+<ul>
+<li>constant outdoor air temperature 22&deg;C </li>
+<li>no solar or short-wave radiation on the exterior wall </li>
+<li>no solar or short-wave radiation through the windows </li>
+<li>no long-wave radiation exchange between exterior wall, windows and ambient environment </li>
+</ul>
+<p>This test validates basic functionalities. </p>
+<h4>Tabs conditions </h4>
+<ul>
+<li>The pasive part of the tabs is represented by the model RCTabs (based on the room&apos;s floor characteristics)</li>
+<li>The active part of the tabs is represented by the TABS hydraulic system with model controlled_TABS</li>
+</ul>
+</html>",   revisions="<html>
   <ul>
   <li>
   July 11, 2019, by Katharina Brinkmann:<br/>

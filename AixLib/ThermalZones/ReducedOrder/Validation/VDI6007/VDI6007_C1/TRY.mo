@@ -77,8 +77,8 @@ model TRY "VDI 6007 Test Case 3 model"
     annotation (Placement(transformation(extent={{-172,34},{-152,54}})));
 
   SolarGain.CorrectionGDoublePane
-       corGMod(final n=RoomRecord.nOrientations, final UWin=RoomRecord.UWin)
- if sum(RoomRecord.ATransparent) > 0 "Correction factor for solar transmission"
+       corGMod(final n=RoomRecord.nOrientations, final UWin=RoomRecord.UWin) if
+    sum(RoomRecord.ATransparent) > 0 "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-56,7},{-44,19}})));
   EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
@@ -108,8 +108,8 @@ model TRY "VDI 6007 Test Case 3 model"
   SolarGain.SimpleExternalShading simpleExternalShading(
     final nOrientations=RoomRecord.nOrientations,
     final maxIrrs=RoomRecord.maxIrr,
-    final gValues=RoomRecord.shadingFactor)
- if sum(RoomRecord.ATransparent) > 0
+    final gValues=RoomRecord.shadingFactor) if
+    sum(RoomRecord.ATransparent) > 0
     annotation (Placement(transformation(extent={{-36,8},{-30,14}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
@@ -152,7 +152,7 @@ model TRY "VDI 6007 Test Case 3 model"
   Modelica.Blocks.Math.Mean OutCoolingLoad(f=1/3600)
     "Hourly mean of indoor air temperature"
     annotation (Placement(transformation(extent={{202,-118},{214,-106}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow IluRad1
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow TABSheat
     "Radiative heat flow persons"
     annotation (Placement(transformation(extent={{-16,-160},{4,-140}})));
   Modelica.Blocks.Continuous.LimPID PID(
@@ -199,27 +199,27 @@ protected
     "Outdoor coefficient of heat transfer for walls" annotation (Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                               rotation=180,
         origin={-42,-20})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWall1
- if sum(RoomRecord.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWall1 if
+    sum(RoomRecord.AExt) > 0
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{-14,-10},{-24,-20}})));
   Modelica.Blocks.Sources.Constant hConWin(final k=(RoomRecord.hConWinOut +
         RoomRecord.hRadWall)*sum(RoomRecord.AWin))
     "Outdoor coefficient of heat transfer for windows" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90,
         origin={-18,12})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWin
- if sum(RoomRecord.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWin if
+    sum(RoomRecord.AWin) > 0
     "Outdoor convective heat transfer of windows"
     annotation (Placement(transformation(extent={{-14,-6},{-24,4}})));
   Modelica.Blocks.Math.Add solRadWall[RoomRecord.nOrientations]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-94,-14},{-84,-4}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall
- if sum(RoomRecord.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWall if
+    sum(RoomRecord.AExt) > 0
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{-58,-20},{-50,-12}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin
- if sum(RoomRecord.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin if
+    sum(RoomRecord.AWin) > 0
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{-36,-5},{-28,2}})));
 protected
@@ -365,11 +365,11 @@ equation
           -124.4,-150}},              color={0,0,127}));
   connect(multiProduct.y, gain2.u)
     annotation (Line(points={{-64.81,-150},{-45.4,-150}}, color={0,0,127}));
-  connect(gain2.y, IluRad1.Q_flow) annotation (Line(points={{-29.3,-150},{-16,
-          -150}},                          color={0,0,127}));
-  connect(IluRad1.port, rCTABS.port_heat) annotation (Line(points={{4,-150},{22,
-          -150}},                     color={191,0,0}));
-  connect(heatFlowSensor.Q_flow, OutCoolingLoad.u) annotation (Line(points={{191,
+  connect(gain2.y, TABSheat.Q_flow)
+    annotation (Line(points={{-29.3,-150},{-16,-150}}, color={0,0,127}));
+  connect(TABSheat.port, rCTABS.port_heat)
+    annotation (Line(points={{4,-150},{22,-150}}, color={191,0,0}));
+  connect(heatFlowSensor.Q_flow, OutCoolingLoad.u) annotation (Line(points={{190,
           -114},{196,-114},{196,-112},{200.8,-112}},
                                                    color={0,0,127}));
   connect(perRad.port, port_a)
@@ -396,18 +396,21 @@ equation
           -132},{6,-122},{36,-122},{36,-154},{100,-154},{100,-150}}, color={0,0,
           127}));
   annotation ( Documentation(info="<html>
-  <p>Test Case 3 of the VDI 6007 Part 1: Calculation of indoor air
-  temperature excited by a convective heat source for room version L.</p>
-  <h4>Boundary conditions</h4>
-  <ul>
-  <li>constant outdoor air temperature 22&deg;C</li>
-  <li>no solar or short-wave radiation on the exterior wall</li>
-  <li>no solar or short-wave radiation through the windows</li>
-  <li>no long-wave radiation exchange between exterior wall, windows
-  and ambient environment</li>
-  </ul>
-  <p>This test validates basic functionalities.</p>
-  </html>", revisions="<html>
+<p>Test Case 3 of the VDI 6007 Part 1: Calculation of indoor air temperature excited by a convective heat source for room version L. </p>
+<p><b>Boundary conditions</b> </p>
+<ul>
+<li>constant outdoor air temperature 22&deg;C </li>
+<li>no solar or short-wave radiation on the exterior wall </li>
+<li>no solar or short-wave radiation through the windows </li>
+<li>no long-wave radiation exchange between exterior wall, windows and ambient environment </li>
+</ul>
+<p>This test validates basic functionalities. </p>
+<h4>Tabs conditions </h4>
+<ul>
+<li>The pasive part of the tabs is represented by the model RCTabs (based on the room&apos;s floor characteristics)</li>
+<li>The active part of the tabs is represented by a prescribed heat flow controled by a PID controller</li>
+</ul>
+</html>",   revisions="<html>
   <ul>
   <li>
   July 11, 2019, by Katharina Brinkmann:<br/>
