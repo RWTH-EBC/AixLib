@@ -2,4 +2,4 @@ clear
 
 convertClear();
 
-convertModifiers("AixLib.Fluid.Interfaces.LumpedVolumeDeclarations", {"massDynamics"}, fill("",0), true);
+ConvertModifiers("AixLib.Fluid.Interfaces.LumpedVolumeDeclarations", {"massDynamics"}, fill("",0), true);
