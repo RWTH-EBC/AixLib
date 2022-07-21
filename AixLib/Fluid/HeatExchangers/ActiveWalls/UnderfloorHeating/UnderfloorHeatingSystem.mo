@@ -70,8 +70,8 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
   final parameter Modelica.Units.SI.TemperatureDifference sigma_i[RoomNo]=cat(
       1,
       {sigma_des},
-      {(3*dT_Hi[n]*((1 + 4*(dT_Vdes - dT_Hi[n])/(3*dT_Hi[n]))^(0.5) - 1)) for n
-         in 2:RoomNo}) "Nominal temperature spread in rooms";
+      {(3*dT_Hi[n]*((1 + 4*(dT_Vdes - dT_Hi[n])/(3*dT_Hi[n]))^(0.5) - 1)) for n in
+            2:RoomNo}) "Nominal temperature spread in rooms";
   final parameter Modelica.Units.SI.Temperature T_Return[RoomNo]=fill(T_Vdes,
       RoomNo) .- sigma_i "Nominal return temperature in each room";
 

@@ -25,8 +25,8 @@ model TABSRoom
        ./ (PipeRecord.d .- 2*PipeRecord.t)) ./ (2*pi*PipeLength .* PipeRecord.lambda))
     "Thermal Resistance for pipe layers (conduction)";
 
-  final parameter Modelica.Units.SI.ThermalResistance R_Pipe(min=Modelica.Constants.small)
-     = R_add + R_conv + R_cond
+  final parameter Modelica.Units.SI.ThermalResistance R_Pipe(min=Modelica.Constants.small)=
+       R_add + R_conv + R_cond
     "Resistance of resistors RCond_up for upper part";
 
   parameter Integer calculateVol annotation (Dialog(group="Panel Heating",

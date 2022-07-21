@@ -37,7 +37,7 @@ model MultizoneEquipped_TABS
     WallTypeCeiling=TabswallTypeCeiling,
     PipeRecord=TabsPipes,
     Controlled=true,
-    Reduced=false) if  ATabs[1] > 0
+    Reduced=false)  if ATabs[1] > 0
     annotation (Placement(transformation(extent={{-14,-80},{20,-50}})));
 
 equation

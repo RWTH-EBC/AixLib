@@ -395,7 +395,7 @@ equation
          {{-5.5,74},{2,74},{2,31},{43,31}}, color={0,0,127}));
   connect(OutOpTemp.u, multiSum.y) annotation (Line(points={{162.8,66},{133.19,
           66}},                    color={0,0,127}));
-  connect(heatFlowSensor.Q_flow, OutCoolingLoad.u) annotation (Line(points={{164,
+  connect(heatFlowSensor.Q_flow, OutCoolingLoad.u) annotation (Line(points={{165,
           -118},{182.8,-118}},               color={0,0,127}));
   connect(sum2.y, OutAirTemp.u) annotation (Line(points={{178.7,42},{184.8,42}},
                          color={0,0,127}));
