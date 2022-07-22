@@ -153,8 +153,11 @@ class Reg_Reference(object):
                 self.ut.setSinglePackage(package)
                 self.ut.setNumberOfThreads(self.n_pro)
                 self.ut.pedanticModelica(False)
+                print("I am still here")
                 self.ut.showGUI(self.show_gui)
+                print("I am still here")
                 response = self.ut.run()
+                print("I am still here")
                 if response == 1:
                     print(f'{self.CRED}Error in package: {self.CEND} {package}')
                     continue
