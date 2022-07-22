@@ -613,7 +613,7 @@ RegressionTest_Check_References:
         - mkdir CorrectedVersion && cd CorrectedVersion
         - git clone --single-branch --branch $CI_COMMIT_REF_NAME git@github.com:${Github_Repository}.git
         - cd ${CI_PROJECT_NAME}
-        - echo "FAIL" > bin/Configfiles/exit.sh
+        - echo "FAIL" > bin/Configfiles/exit.sh                - echo ${XDG_RUNTIME_DIR}
         - cd AixLib && xvfb-run -n 77 python ../bin/CITests/02_UnitTests/reference_check.py --create-ref -n 4 < ../bin/Configfiles/EOF.sh 
     after_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
