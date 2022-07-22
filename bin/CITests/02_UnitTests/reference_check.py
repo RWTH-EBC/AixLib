@@ -471,7 +471,6 @@ def _run_coverage_only(batch, tool, package, path):  # Specifies which models ar
 
 
 if __name__ == '__main__':
-    print("XFB error prior?")
     # python bin/02_CITests/UnitTests/reference_check.py --single-package Airflow --library AixLib -DS 2019
     # cd AixLib && python ../bin/02_CITests/UnitTests/reference_check.py --single-package Airflow --library AixLib -DS 2019
     # cd AixLib && python ../bin/02_CITests/UnitTests/reference_check.py --single-package ci_update_ref_Airflow.Multizone --library AixLib -DS 2019 --update-ref
