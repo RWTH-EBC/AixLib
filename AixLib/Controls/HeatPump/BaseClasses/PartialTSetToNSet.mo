@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.BaseClasses;
+﻿within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
   parameter Boolean use_secHeaGen=false
@@ -13,7 +13,7 @@ partial model PartialTSetToNSet
     "Time span for building the average of the outdoor air temperature. Used for heating limit temperature" annotation (Dialog(group=
           "Heating limit temperature", enable=use_heaLim));
 
-  AixLib.Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
+  Modelica.Blocks.Logical.Switch        swiNullHP "If HP is off, zero is passed"
     annotation (Placement(transformation(extent={{60,-20},{80,0}})));
   Modelica.Blocks.Sources.Constant conZer(final k=0)
                                                "If an error occurs, the compressor speed is set to zero"

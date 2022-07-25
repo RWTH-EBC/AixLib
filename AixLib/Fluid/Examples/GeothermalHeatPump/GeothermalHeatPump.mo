@@ -1,4 +1,4 @@
-within AixLib.Fluid.Examples.GeothermalHeatPump;
+﻿within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;
@@ -84,7 +84,7 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
     use_heaLim=false,
     T_heaLim=293.15,
     movAveTime=300,
-    hys=2)
+    bandwidth=2)
     "Controls the temperature in the heat storage by switching the heat pump on or off"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Sources.Constant TStorageSet(k=273.15 + 45)
