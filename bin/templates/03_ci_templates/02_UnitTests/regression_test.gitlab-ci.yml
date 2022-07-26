@@ -599,8 +599,10 @@ RegressionTest_Check_References:
     before_script:
         - export PIP_CACHE_DIR="/opt/cache/pip"
         - source activate myenv
-        - export PYTHONIOENCODING=utf-8 # just in case
+        - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+        - apt-get update -y && apt-get install xdg-utils --fix-missing -y
         - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+        - export PYTHONIOENCODING=utf-8 # just in case
         - eval $(ssh-agent -s)
         - mkdir -p ~/.ssh
         - ssh-keyscan github.com >> ~/.ssh/known_hosts
