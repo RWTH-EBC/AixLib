@@ -1,5 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
-model OneElementSP "Thermal Zone with one element for exterior walls"
+model OneElementSP_new
+  "Thermal Zone with one element for exterior walls"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter Modelica.SIunits.Volume VAir "Air volume of the zone"
@@ -63,9 +64,10 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
     "Set to true to enable input connector for trace substance"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
+  parameter Boolean use_ConstantEnthalpyOfCondensingGas
+  "Set to true to use constant ethalpy of condensing gas to calculate water flow rate due to latent heat gain";
 
-  parameter Integer nu=1
-  "Number of input connections for different moisture sources in the zone"
+  parameter Integer nu = 1  "Number of input connections for different moisture sources in the zone"
     annotation (Dialog(connectorSizing=true), HideResult=true);
 
 
@@ -77,6 +79,11 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
     annotation (
     Placement(transformation(extent={{-280,120},{-240,160}}),
     iconTransformation(extent={{-260,140},{-240,160}})));
+
+  Modelica.Blocks.Interfaces.RealInput QLat_flow[nu](final unit="W") if
+    use_moisture_balance and ATot >0 "Latent heat gains for the room"
+    annotation (Placement(transformation(extent={{-280,-150},{-240,-110}}),
+        iconTransformation(extent={{-260,-130},{-240,-110}})));
 
   Modelica.Blocks.Interfaces.RealOutput TAir(
     final quantity="ThermodynamicTemperature",
@@ -201,33 +208,8 @@ model OneElementSP "Thermal Zone with one element for exterior walls"
     "Trace substance mass flow rate added to the thermal zone"
     annotation (Placement(transformation(extent={{-280,70},{-240,110}}), iconTransformation(extent={{-260,90},{-240,110}})));
 
-  Modelica.Blocks.Math.Sum      sumQLat(final nin=nu) if  use_moisture_balance and
-    ATot > 0                                   "Sum of all QLat intakes"
-    annotation (Placement(transformation(extent={{-214,-126},{-202,-114}})));
-
-  Modelica.Blocks.Math.Sum sumM_flow(nin=nu) if     use_moisture_balance and
-    ATot > 0 "Sum of different m flow"
-    annotation (Placement(transformation(extent={{-158,-96},{-148,-86}})));
-  Modelica.Blocks.Interfaces.RealInput TLat_flow[nu](final unit="K", final
-      quantity="Thermodynamical Temperature") if use_moisture_balance and ATot >
-    0        "Input Temperatures of different moisture sources" annotation (
-      Placement(transformation(extent={{-266,-116},{-234,-84}}),
-        iconTransformation(extent={{-264,-112},{-232,-80}})));
-  Modelica.Blocks.Interfaces.RealInput QLat_flow[nu](final unit="W", final
-      quantity="HeatFlowRate") if use_moisture_balance and
-    ATot > 0 "Input of QLat of different moisture sources"
-    annotation (Placement(transformation(extent={{-266,-162},{-234,-130}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
-    use_moisture_balance and ATot >0 "Converter for latent heat flow rate"
-    annotation (Placement(transformation(extent={{-192,-130},{-172,-110}})));
-
-  Modelica.SIunits.SpecificEnergy h_fg[nu] = AixLib.Media.Air.enthalpyOfCondensingGas(TLat_flow) if use_moisture_balance and ATot > 0;
-
-  Modelica.Blocks.Sources.RealExpression EnthalphyOfCondensingGas[nu](y=h_fg) if
-    use_moisture_balance and ATot > 0
-    annotation (Placement(transformation(extent={{-216,-108},{-196,-88}})));
 protected
-  constant Modelica.SIunits.SpecificEnergy h_fg_const=
+  constant Modelica.SIunits.SpecificEnergy h_fg=
     AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
   parameter Modelica.SIunits.Area ATot=sum(AArray) "Sum of wall surface areas";
   parameter Modelica.SIunits.Area ATotExt=sum(AExt)
@@ -296,11 +278,17 @@ protected
     "Sums up solar radiation from different directions"
     annotation (Placement(transformation(extent={{-186,118},{-174,130}})));
 
-  Modelica.Blocks.Math.Division mWat_flow[nu](
-    y(each final unit="kg/s")) if use_moisture_balance and ATot > 0
+  Modelica.Blocks.Math.Gain mWat_flow(
+    final k(unit="kg/J") = 1/h_fg,
+    u(final unit="W"),
+    y(final unit="kg/s")) if use_moisture_balance and ATot > 0
     "Water flow rate due to latent heat gain"
-    annotation (Placement(transformation(extent={{-180,-98},{-166,-84}})));
+    annotation (Placement(transformation(extent={{-200,-100},{-180,-80}})));
 
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
+    use_moisture_balance and ATot >0
+    "Converter for latent heat flow rate"
+    annotation (Placement(transformation(extent={{-202,-130},{-182,-110}})));
 equation
   connect(volAir.ports, ports)
     annotation (Line(
@@ -375,6 +363,7 @@ equation
     connect(thermSplitterSolRad.portOut[1], convExtWall.solid);
     connect(thermSplitterIntGains.portOut[1], convExtWall.solid);
   end if;
+
   connect(eRadSol.u, solRad)
     annotation (Line(points={{-207,146},{-214,146},{-214,140},{-260,140}},
     color={0,0,127}));
@@ -412,12 +401,12 @@ equation
     annotation (Line(points={{100,0},{108,0},{108,160},{250,160}},
     color={0,0,127}));
   connect(convWin.solid, windowIndoorSurface)
-    annotation (Line(points={{-116,40},{-130,40},{-130,-166},{-200,-166},{-200,
-          -180}},
+    annotation (Line(points={{-116,40},{-130,40},{-130,-10},{-212,-10},{-212,
+    -146},{-200,-146},{-200,-180}},
     color={191,0,0}));
   connect(convExtWall.solid, extWallIndoorSurface)
-    annotation (Line(points={{-114,-40},{-152,-40},{-152,-58},{-142,-58},{-142,
-          -162},{-160,-162},{-160,-180}},
+    annotation (Line(points={{-114,-40},{-134,-40},{-152,-40},{-152,-58},{-208,
+    -58},{-208,-140},{-160,-140},{-160,-180}},
     color={191,0,0}));
   connect(senTRad.port, thermSplitterIntGains.portIn[1])
     annotation (
@@ -438,28 +427,24 @@ equation
     pattern=LinePattern.Dash));
   connect(sumSolRad.y, convHeatSol.Q_flow)
     annotation (Line(points={{-173.4,124},{-166,124}}, color={0,0,127}));
+  connect(mWat_flow.y, volMoiAir.mWat_flow) annotation (Line(
+        points={{-179,-90},{-168,-90},{-168,-80},{-34,-80},{-34,-8},{-22,-8}},
+        color={0,0,127},
+        pattern=LinePattern.Dash));
 
+  connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-182,
+          -120},{-166,-120},{-166,-82},{-32,-82},{-32,-16},{-20,-16}}, color={191,
+          0,0}));
+  connect(mWat_flow.u, QLat_flow) annotation (Line(points={{-202,-90},{-232,-90},
+          {-232,-130},{-260,-130}}, color={0,0,127}));
+  connect(conQLat_flow.Q_flow, QLat_flow)
+    annotation (Line(points={{-202,-120},{-232,-120},{-232,-130},{-260,-130}},
+                                                       color={0,0,127}));
   connect(volMoiAir.C_flow, C_flow) annotation (Line(points={{-22,-22},{-52,-22},
           {-52,90},{-260,90}}, color={0,0,127}));
   connect(volAir.C_flow, C_flow) annotation (Line(points={{44,-22},{56,-22},{56,
           90},{-260,90}}, color={0,0,127}));
-  connect(QLat_flow, sumQLat.u) annotation (Line(points={{-250,-146},{-230,-146},
-          {-230,-120},{-215.2,-120}},
-                          color={0,0,127}));
-  connect(sumM_flow.y, volMoiAir.mWat_flow) annotation (Line(points={{-147.5,-91},
-          {-136.49,-91},{-136.49,-8},{-22,-8}}, color={0,0,127}));
-  connect(sumQLat.y, conQLat_flow.Q_flow) annotation (Line(points={{-201.4,-120},
-          {-192,-120}},                         color={0,0,127}));
-  connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-172,
-          -120},{-44,-120},{-44,-16},{-20,-16}}, color={191,0,0}));
-  connect(mWat_flow.y, sumM_flow.u)
-    annotation (Line(points={{-165.3,-91},{-159,-91}}, color={0,0,127}));
-  connect(mWat_flow.u1, QLat_flow) annotation (Line(points={{-181.4,-86.8},{-230,
-          -86.8},{-230,-146},{-250,-146}}, color={0,0,127}));
-  connect(EnthalphyOfCondensingGas.y, mWat_flow.u2) annotation (Line(points={{-195,
-          -98},{-186,-98},{-186,-95.2},{-181.4,-95.2}}, color={0,0,127}));
-    annotation (Dialog(connectorSizing=true), HideResult=true,
-              defaultComponentName="theZon",Diagram(coordinateSystem(
+  annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
   Rectangle(
@@ -546,57 +531,60 @@ equation
     extent={{-67,60},{57,-64}},
     lineColor={0,0,0},
     textString="1")}),
-  Documentation(info="<html><p>
-  This model merges all thermal masses into one element, parameterized
-  by the length of the RC-chain <code>nExt,</code> the vector of the
-  capacities <code>CExt[nExt]</code> that is connected via the vector
-  of resistances <code>RExt[nExt]</code> and <code>RExtRem</code> to
-  the ambient and indoor air. By default, the model neglects all
-  internal thermal masses that are not directly connected to the
-  ambient. However, the thermal capacity of the room air can be
-  increased by using the parameter <code>mSenFac</code>.
+  Documentation(info="<html>
+<p>
+This model merges all thermal masses into one
+element, parameterized by the length of the RC-chain
+<code>nExt,</code> the vector of the capacities <code>CExt[nExt]</code> that is
+connected via the vector of resistances <code>RExt[nExt]</code> and
+<code>RExtRem</code> to the ambient and indoor air.
+By default, the model neglects all
+internal thermal masses that are not directly connected to the ambient.
+However, the thermal capacity of the room air can be increased by
+using the parameter <code>mSenFac</code>.
 </p>
 <p>
-  The image below shows the RC-network of this model.
+The image below shows the RC-network of this model.
 </p>
-<p style=\"text-align:center;\">
-  <img src=
-  \"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\"
-  alt=\"image\">
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
 </p>
-</html>",
-revisions="<html><ul>
-  <li>October 9, 2019, by Michael Wetter:<br/>
-    Refactored addition of moisture to also account for the energy
-    content of the water vapor.<br/>
-    This is for <a href=
-    \"https://github.com/IBPSA/modelica-ibpsa/issues/1209\">IBPSA, issue
-    1209</a>.
+  </html>",
+revisions="<html>
+<ul>
+<li>
+October 9, 2019, by Michael Wetter:<br/>
+Refactored addition of moisture to also account for the energy content of the
+water vapor.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">AixLib, issue 1209</a>.
+</li>
+  <li>
+  September 24, 2019, by Martin Kremer:<br/>
+  Added possibility to consider moisture balance. <br/>
+  Defined <code>volAir</code> conditional. Added conditional <code>volMoistAir</code> and corresponding in- and output connectors.
   </li>
-  <li>September 24, 2019, by Martin Kremer:<br/>
-    Added possibility to consider moisture balance.<br/>
-    Defined <code>volAir</code> conditional. Added conditional
-    <code>volMoistAir</code> and corresponding in- and output
-    connectors.
+  <li>
+  July 11, 2019, by Katharina Brinkmann:<br/>
+  Renamed <code>alphaRad</code> to <code>hRad</code>,
+  <code>alphaWin</code> to <code>hConWin</code>,
+  <code>alphaExt</code> to <code>hConExt</code>,
+  <code>alphaExtWallConst</code> to <code>hConExtWall_const</code>,
+  <code>alphaWinConst</code> to <code>hConWin_const</code>
   </li>
-  <li>July 11, 2019, by Katharina Brinkmann:<br/>
-    Renamed <code>alphaRad</code> to <code>hRad</code>,
-    <code>alphaWin</code> to <code>hConWin</code>,
-    <code>alphaExt</code> to <code>hConExt</code>,
-    <code>alphaExtWallConst</code> to <code>hConExtWall_const</code>,
-    <code>alphaWinConst</code> to <code>hConWin_const</code>
+  <li>
+  January 25, 2019, by Michael Wetter:<br/>
+  Added start value to avoid warning in JModelica.
   </li>
-  <li>January 25, 2019, by Michael Wetter:<br/>
-    Added start value to avoid warning in JModelica.
+  <li>
+  September 26, 2016, by Moritz Lauster:<br/>
+  Added conditional statements to solar radiation part.<br/>
+  Deleted conditional statements of
+  <code>splitFactor</code> and <code>splitFactorSolRad</code>.
   </li>
-  <li>September 26, 2016, by Moritz Lauster:<br/>
-    Added conditional statements to solar radiation part.<br/>
-    Deleted conditional statements of <code>splitFactor</code> and
-    <code>splitFactorSolRad</code>.
-  </li>
-  <li>April 17, 2015, by Moritz Lauster:<br/>
-    First implementation.
+  <li>
+  April 17, 2015, by Moritz Lauster:<br/>
+  First implementation.
   </li>
 </ul>
 </html>"));
-end OneElementSP;
+end OneElementSP_new;

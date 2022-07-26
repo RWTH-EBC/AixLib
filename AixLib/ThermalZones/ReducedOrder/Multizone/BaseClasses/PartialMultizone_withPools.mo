@@ -84,7 +84,7 @@ partial model PartialMultizone_withPools
        ASurTot > 0 "Radiative internal gains" annotation (Placement(
         transformation(extent={{-110,-30},{-90,-50}}), iconTransformation(
           extent={{-90,-60},{-70,-40}})));
-  ThermalZone.ThermalZone_withPools  zone[numZones](
+  ThermalZone.ThermalZone zone[numZones](
     each recOrSep=recOrSep,
     each Heater_on=Heater_on,
     each h_heater=h_heater,
@@ -102,8 +102,8 @@ partial model PartialMultizone_withPools
     each XCO2_amb=XCO2_amb,
     each areaBod=areaBod,
     each metOnePerSit=metOnePerSit,
-    each use_swimmingPools = use_swimmingPools,
-    each use_idealHeaterPool = use_idealHeaterPools,
+    each use_swimmingPools=use_swimmingPools,
+    each use_idealHeaterPool=use_idealHeaterPools,
     final zoneParam=zoneParam,
     redeclare each final model corG = corG,
     each final internalGainsMode=internalGainsMode,

@@ -5,8 +5,7 @@ model MultizoneMoistAirCO2EquippedWithPool
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped_withPools
-    multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     VAir=33500,
@@ -14,11 +13,11 @@ model MultizoneMoistAirCO2EquippedWithPool
     ASurTot=12744.27,
     numZones=6,
     zoneParam={AixLib.DataBase.ThermalZones.SwimmingBath.ChangingRooms(),
-    AixLib.DataBase.ThermalZones.SwimmingBath.EntranceHall(),
-    AixLib.DataBase.ThermalZones.SwimmingBath.SaniteryAreas(),
-    AixLib.DataBase.ThermalZones.SwimmingBath.StaffAreas(),
-    AixLib.DataBase.ThermalZones.SwimmingBath.SwimmingHall(),
-    AixLib.DataBase.ThermalZones.SwimmingBath.TechnicalAreas()},
+        AixLib.DataBase.ThermalZones.SwimmingBath.EntranceHall(),
+        AixLib.DataBase.ThermalZones.SwimmingBath.SaniteryAreas(),
+        AixLib.DataBase.ThermalZones.SwimmingBath.StaffAreas(),
+        AixLib.DataBase.ThermalZones.SwimmingBath.SwimmingHall(),
+        AixLib.DataBase.ThermalZones.SwimmingBath.TechnicalAreas()},
     use_C_flow=true,
     use_moisture_balance=true,
     use_swimmingPools=true,
@@ -54,10 +53,10 @@ model MultizoneMoistAirCO2EquippedWithPool
     tableName="Internals",
     fileName=
         "D:/02_Projekte/EESchwimm/ebc0459_bmwi_baeder_ipbb/AixLib/AixLib/Resources/LowOrder_ExampleData/InternalGains_SwimmingBath.txt",
-
     columns=2:19)
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
+
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[6]
     "Radiative heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
@@ -103,10 +102,10 @@ model MultizoneMoistAirCO2EquippedWithPool
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=
         "D:/02_Projekte/EESchwimm/ebc0459_bmwi_baeder_ipbb/AixLib/AixLib/Resources/LowOrder_ExampleData/TsetHeat_6Zones_SwimmingBath.txt",
-
     columns=2:7)
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
+
   Modelica.Blocks.Sources.Constant const[6](each k=0)
     "Set point for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));

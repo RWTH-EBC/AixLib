@@ -2,15 +2,17 @@ within AixLib.ThermalZones.ReducedOrder.Examples;
 model ThermalZoneMoistAirWithPool "Illustrates the use of ThermalZoneMoistAirWithPool"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone_withPools
-                                                           thermalZone_withPools(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone
+    thermalZone_withPools(
     use_moisture_balance=true,
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = AixLib.Media.Air,
     internalGainsMode=3,
-    recOrSep=true,
+    recOrSep=false,
+    Heater_on=false,
+    Cooler_on=false,
     use_idealHeaterPool=true,
     nPorts=2,
     T_start=293.15,

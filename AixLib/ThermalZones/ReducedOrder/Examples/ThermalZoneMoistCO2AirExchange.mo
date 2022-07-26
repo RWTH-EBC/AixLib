@@ -4,8 +4,8 @@ model ThermalZoneMoistCO2AirExchange
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Air (extraPropertiesNames={"C_flow"});
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone_withPools
-                                                           thermalZone_withPools(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone
+    thermalZone_withPools(
     use_moisture_balance=true,
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),

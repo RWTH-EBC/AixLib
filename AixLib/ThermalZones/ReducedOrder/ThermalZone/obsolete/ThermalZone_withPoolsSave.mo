@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone.obsolete;
 model ThermalZone_withPoolsSave
   "Thermal zone containing moisture balance and swimming pools"
    extends
@@ -487,10 +487,9 @@ equation
         connect(indoorSwimmingPool[i].openingHours, openingHours) annotation (
           Line(points={{-66.08,-73.19},{-78,-73.19},{-78,-88},{48,-88},{48,-100},
               {50,-100}},color={0,0,127}));
-        connect(indoorSwimmingPool[i].T_Pool, ROM.T[i+1]) annotation (Line(points={{-49.2,
-              -72.56},{-49.2,-68},{-14,-68},{-14,-42},{30,-42},{30,64},{37.2,64},
-              {37.2,64.4}},             color={0,0,
-          127}));
+      connect(indoorSwimmingPool[i].T_Pool, ROM.TLat_flow[i + 1]) annotation (
+          Line(points={{-49.2,-72.56},{-49.2,-68},{-14,-68},{-14,-42},{30,-42},
+              {30,64},{37.2,64},{37.2,64.4}}, color={0,0,127}));
         connect(indoorSwimmingPool[i].QEvap, ROM.QLat_flow[i + 1]) annotation (
           Line(points={{-49.2,-78.16},{-49.2,-70},{-22,-70},{-22,-62},{-4,-62},{
               -4,-6},{32,-6},{32,59.6},{37,59.6}},
@@ -813,9 +812,9 @@ equation
           {-4,-50},{-4,0},{-6,0},{-6,0.16},{-6.8,0.16}}, color={0,0,127}));
   connect(ROM.intGainsConv, intGainsRad) annotation (Line(points={{86,78},{92,
           78},{92,40},{104,40}}, color={191,0,0}));
-  connect(moistureGains.TMoistureSource, ROM.T[1]) annotation (Line(points={{-61.76,
-          -60.24},{-61.76,-60},{-56,-60},{-56,-40},{10,-40},{10,64},{37.2,64},{37.2,
-          64.4}},                                 color={0,0,127}));
+  connect(moistureGains.TMoistureSource, ROM.TLat_flow[1]) annotation (Line(
+        points={{-61.76,-60.24},{-61.76,-60},{-56,-60},{-56,-40},{10,-40},{10,
+          64},{37.2,64},{37.2,64.4}}, color={0,0,127}));
 
    annotation (Documentation(revisions="<html><ul>
   <li>November 20, 2020, by Katharina Breuer:<br/>
