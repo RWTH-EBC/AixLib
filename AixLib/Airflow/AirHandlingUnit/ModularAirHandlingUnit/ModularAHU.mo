@@ -225,11 +225,9 @@ public
     annotation (Placement(transformation(extent={{46,-12},{54,-4}})));
   // Utilities
   Controler.ControlerCoolerPID controlerCoolerPID(activeDehumidifying=dehumidifying) if cooling or dehumidifying annotation (Placement(transformation(extent={{-34,-90},{-14,-70}})));
+  ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum annotation (Placement(transformation(extent={{142,-88},
+            {152,-78}})));
 protected
-  Modelica.Blocks.Sources.Constant p_atm(k=101325)
-    annotation (Placement(transformation(extent={{126,-96},{134,-88}})));
-  Utilities.Psychrometrics.Phi_pTX phi
-    annotation (Placement(transformation(extent={{142,-84},{150,-76}})));
   Modelica.Blocks.Routing.RealPassThrough realPassThrough
     annotation (Placement(transformation(extent={{126,-84},{134,-76}})));
   Modelica.Blocks.Math.Add add annotation (Placement(transformation(
@@ -333,25 +331,14 @@ equation
           {100,-80},{40,-80},{40,-5.6},{45.6,-5.6}}, color={0,0,127}));
   connect(controlerHumidifier.XHumSet, hum.X_set)
     annotation (Line(points={{54.4,-8},{64,-8},{64,-43.8}}, color={0,0,127}));
-  connect(hea.T_airOut, T_supplyAirOut) annotation (Line(points={{117,-49},{134,
-          -49},{134,-27},{159,-27}}, color={0,0,127}));
+  connect(hea.T_airOut, T_supplyAirOut) annotation (Line(points={{117,-49},{136,
+          -49},{136,-27},{159,-27}}, color={0,0,127}));
   connect(passThroughHea.T_airOut, T_supplyAirOut) annotation (Line(points={{117,
           -26},{134,-26},{134,-27},{159,-27}}, color={0,0,127}));
   connect(hea.X_airOut, realPassThrough.u) annotation (Line(points={{117,-52},{122,
           -52},{122,-80},{125.2,-80}}, color={0,0,127}));
   connect(passThroughHea.X_airOut, realPassThrough.u) annotation (Line(points={{
           117,-31},{122,-31},{122,-80},{125.2,-80}}, color={0,0,127}));
-  connect(realPassThrough.y, phi.X_w)
-    annotation (Line(points={{134.4,-80},{141.6,-80}}, color={0,0,127}));
-  connect(passThroughHea.T_airOut, phi.T) annotation (Line(points={{117,-26},{134,
-          -26},{134,-70},{138,-70},{138,-76.8},{141.6,-76.8}}, color={0,0,127}));
-  connect(hea.T_airOut, phi.T) annotation (Line(points={{117,-49},{134,-49},{
-          134,-70},{138,-70},{138,-76.8},{141.6,-76.8}},
-                                                     color={0,0,127}));
-  connect(p_atm.y, phi.p) annotation (Line(points={{134.4,-92},{138,-92},{138,-83.2},
-          {141.6,-83.2}}, color={0,0,127}));
-  connect(phi.phi, phi_supplyAirOut) annotation (Line(points={{150.4,-80},{156,-80},
-          {156,-60},{160,-60}}, color={0,0,127}));
   connect(add.y, Pel)
     annotation (Line(points={{-60,-80.6},{-60,-100}}, color={0,0,127}));
   connect(fanSimple1.PelFan, add.u2) annotation (Line(points={{-41,50},{-63.6,
@@ -456,6 +443,14 @@ equation
   connect(phi_supplyAir[2], relToAbsHum2.relHum) annotation (Line(points={{72,-93},{64,-93},{64,-93.6},{57,-93.6}}, color={0,0,127}));
   connect(T_supplyAir, relToAbsHum2.TDryBul) annotation (Line(points={{100,-100},{100,-88.2},{57,-88.2}}, color={0,0,127}));
   connect(relToAbsHum2.absHum, controlerCoolerPID.xSup) annotation (Line(points={{45,-91},{-40,-91},{-40,-74},{-35,-74}}, color={0,0,127}));
+  connect(absToRelHum.absHum, realPassThrough.y) annotation (Line(points={{141,
+          -80.4},{138.5,-80.4},{138.5,-80},{134.4,-80}}, color={0,0,127}));
+  connect(absToRelHum.relHum, phi_supplyAirOut) annotation (Line(points={{153,
+          -83},{153,-72.5},{160,-72.5},{160,-60}}, color={0,0,127}));
+  connect(hea.T_airOut, absToRelHum.TDryBul) annotation (Line(points={{117,-49},
+          {136,-49},{136,-85.8},{141,-85.8}}, color={0,0,127}));
+  connect(passThroughHea.T_airOut, absToRelHum.TDryBul) annotation (Line(points
+        ={{117,-26},{136,-26},{136,-85.8},{141,-85.8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));

@@ -10,7 +10,7 @@ model ControlerHumidifier "controler for humidifier"
     "set value for relative humidity at ahu outlet"
     annotation (Placement(transformation(extent={{-140,-90},{-100,-50}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi(use_p_in=false) if use_PhiSet
+  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum x_pTphi if use_PhiSet
     annotation (Placement(visible=(use_PhiSet==true),transformation(extent={{-60,-44},{-40,-24}})));
   Modelica.Blocks.Interfaces.RealInput Tset if use_PhiSet
     "set value for temperature at cooler outlet"
@@ -24,11 +24,13 @@ protected
 equation
 
   if use_PhiSet then
-    connect(x_pTphi.X[1],X_intern);
-    connect(Tset, x_pTphi.T) annotation (Line(visible=(use_PhiSet==true),points={{-120,50},{-74,50},{-74,-34},
-          {-62,-34}}, color={0,0,127}));
-    connect(PhiSet, x_pTphi.phi) annotation (Line(visible=(use_PhiSet==true),points={{-120,-70},{-74,-70},{-74,
-          -40},{-62,-40}}, color={0,0,127}));
+    connect(x_pTphi.absHum,X_intern);
+    connect(Tset, x_pTphi.TDryBul) annotation (Line(visible=(use_PhiSet==true),points={{-120,50},
+            {-74,50},{-74,-39.6},{-62,-39.6}},
+                      color={0,0,127}));
+    connect(PhiSet, x_pTphi.relHum) annotation (Line(visible=(use_PhiSet==true),points={{-120,
+            -70},{-74,-70},{-74,-28.8},{-62,-28.8}},
+                           color={0,0,127}));
   else
     connect(Xset, X_intern);
   end if;
