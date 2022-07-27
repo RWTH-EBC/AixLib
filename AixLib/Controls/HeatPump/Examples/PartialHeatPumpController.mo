@@ -1,7 +1,6 @@
 ﻿within AixLib.Controls.HeatPump.Examples;
 partial model PartialHeatPumpController
   "Example for usage of heat pump controller"
-  extends Modelica.Icons.Example;
 
   AixLib.Controls.Interfaces.VapourCompressionMachineControlBus heatPumpControlBus
     "Required to make the signals on the bus accessible" annotation (Placement(

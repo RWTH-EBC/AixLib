@@ -1,5 +1,6 @@
 ﻿within AixLib.Controls.HeatPump.Examples;
 model TwoPointControlledHeatPump
+  extends Modelica.Icons.Example;
   extends PartialHeatPumpController(redeclare TwoPointControlledHP hPController(
         bandwidth=2));
 
