@@ -3,8 +3,14 @@ partial model PartialRoom "Partial model with base component that are necessary 
 
   extends PartialRoomParams;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
-      Medium = Media.Air,
+      Medium = MediumAir,
       final T_start=T0_air);
+
+  // Medium in the room
+  replaceable package MediumAir = AixLib.Media.Air constrainedby Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package MediumR = AixLib.Media.Air "Moist air"),
+        choice(redeclare package MediumR = AixLib.Media.Air (extraPropertiesNames={"CO2"}, C_nominal = {6.12E-4}) "Moist air with tracer gas (404 ppm CO2)")));
 
   // Air volume of room
   parameter Modelica.Units.SI.Volume room_V
@@ -127,11 +133,11 @@ equation
   mWat_flow_internal = 0;
 
   connect(QLat_flow, sumQLat_flow.u[2]) annotation (Line(
-      points={{-112,-56},{80,-56},{80,-38.05},{76,-38.05}},
+      points={{-112,-56},{80,-56},{80,-36.475},{76,-36.475}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(NaturalVentilation.QLat_flow, sumQLat_flow.u[1]) annotation (Line(
-      points={{-21.76,-21.72},{-16,-21.72},{-16,-50},{80,-50},{80,-35.95},{76,-35.95}},
+      points={{-21.76,-21.72},{-16,-21.72},{-16,-50},{80,-50},{80,-37.525},{76,-37.525}},
       color={0,0,127},
       pattern=LinePattern.Dash));
 
