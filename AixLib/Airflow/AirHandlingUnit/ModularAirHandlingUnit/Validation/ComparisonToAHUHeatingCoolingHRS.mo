@@ -54,17 +54,9 @@ model ComparisonToAHUHeatingCoolingHRS
     dp_eta(displayUnit="Pa"),
     redeclare model humidifier = Components.SprayHumidifier)
     annotation (Placement(transformation(extent={{-54,-68},{16,-30}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi(use_p_in=false)
-    annotation (Placement(transformation(extent={{60,-60},{48,-48}})));
   Modelica.Blocks.Math.Abs abs1
     annotation (Placement(transformation(extent={{-46,-100},{-66,-80}})));
-  Utilities.Psychrometrics.ToTotalAir toTotAir
-    annotation (Placement(transformation(extent={{-60,-12},{-48,0}})));
-  Utilities.Psychrometrics.Phi_pTX phi
-    annotation (Placement(transformation(extent={{-80,-60},{-68,-48}})));
-protected
-  Modelica.Blocks.Sources.Constant p_atm(k=101325)
-    annotation (Placement(transformation(extent={{-100,-68},{-92,-60}})));
+  ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum annotation (Placement(transformation(extent={{-82,-58},{-72,-48}})));
 equation
   connect(desiredT_sup.y,ahu. T_supplyAir) annotation (Line(
       points={{41,22},{34,22},{34,31.7},{18.48,31.7}},
@@ -117,25 +109,18 @@ equation
           {77,-8},{72,-8},{72,-80},{7.25,-80},{7.25,-68.38}}, color={0,0,127}));
   connect(desiredT_sup.y, modularAHU.T_supplyAir) annotation (Line(points={{41,
           22},{38,22},{38,-74},{11.625,-74},{11.625,-68.76}}, color={0,0,127}));
-  connect(phi_RoomExtractAir.y, x_pTphi.phi) annotation (Line(points={{77,24},{
-          72,24},{72,-57.6},{61.2,-57.6}}, color={0,0,127}));
-  connect(addToExtractTemp.y, x_pTphi.T) annotation (Line(points={{33.4,56},{28,
-          56},{28,86},{100,86},{100,-54},{61.2,-54}}, color={0,0,127}));
-  connect(x_pTphi.X[1], modularAHU.X_eta) annotation (Line(points={{47.4,-54},{
-          32,-54},{32,-45.2},{16.875,-45.2}}, color={0,0,127}));
   connect(modularAHU.QflowC, abs1.u) annotation (Line(points={{-30.1563,-68.95},
           {-30.1563,-90},{-44,-90}}, color={0,0,127}));
-  connect(waterLoadOutside.y, toTotAir.XiDry) annotation (Line(points={{-79,-2},
-          {-66,-2},{-66,-6},{-60.6,-6}}, color={0,0,127}));
-  connect(phi.phi, modularAHU.phi_oda) annotation (Line(points={{-67.4,-54},{
-          -60,-54},{-60,-45.2},{-54.875,-45.2}}, color={0,0,127}));
-  connect(phi.X_w, toTotAir.XiTotalAir) annotation (Line(points={{-80.6,-54},{
-          -84,-54},{-84,-16},{-40,-16},{-40,-6},{-47.4,-6}}, color={0,0,127}));
-  connect(p_atm.y, phi.p) annotation (Line(points={{-91.6,-64},{-84,-64},{-84,
-          -58.8},{-80.6,-58.8}}, color={0,0,127}));
-  connect(tempOutside.y, phi.T) annotation (Line(points={{-79,32},{-74,32},{-74,
-          30},{-72,30},{-72,16},{-70,16},{-70,-14},{-86,-14},{-86,-40},{-80.6,
-          -40},{-80.6,-49.2}}, color={0,0,127}));
+  connect(phi_RoomExtractAir.y, modularAHU.phi_eta) annotation (Line(points={{
+          77,24},{68,24},{68,-46},{42,-46},{42,-45.2},{16.875,-45.2}}, color={0,
+          0,127}));
+  connect(absToRelHum.relHum, modularAHU.phi_oda) annotation (Line(points={{-71,
+          -53},{-62.5,-53},{-62.5,-45.2},{-54.875,-45.2}}, color={0,0,127}));
+  connect(waterLoadOutside.y, absToRelHum.absHum) annotation (Line(points={{-79,
+          -2},{-72,-2},{-72,-32},{-92,-32},{-92,-50.4},{-83,-50.4}}, color={0,0,
+          127}));
+  connect(tempOutside.y, absToRelHum.TDryBul) annotation (Line(points={{-79,32},
+          {-76,32},{-76,-40},{-96,-40},{-96,-55.8},{-83,-55.8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
