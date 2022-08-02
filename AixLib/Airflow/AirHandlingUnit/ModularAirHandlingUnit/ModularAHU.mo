@@ -224,9 +224,10 @@ public
   Controler.ControlerHumidifier controlerHumidifier(use_PhiSet=true)
     annotation (Placement(transformation(extent={{46,-12},{54,-4}})));
   // Utilities
-  Controler.ControlerCoolerPID controlerCoolerPID(activeDehumidifying=dehumidifying) if cooling or dehumidifying annotation (Placement(transformation(extent={{-34,-90},{-14,-70}})));
   ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum annotation (Placement(transformation(extent={{142,-88},
             {152,-78}})));
+  Controler.ControlerCooler controlerCooler
+    annotation (Placement(transformation(extent={{-36,-90},{-16,-70}})));
 protected
   Modelica.Blocks.Routing.RealPassThrough realPassThrough
     annotation (Placement(transformation(extent={{126,-84},{134,-76}})));
@@ -434,23 +435,30 @@ equation
           0,127}));
   connect(T_oda, relToAbsHum.TDryBul) annotation (Line(points={{-160,40},{-120,
           40},{-120,-12},{-142,-12},{-142,-5.8},{-137,-5.8}}, color={0,0,127}));
-  connect(coo.X_airOut, controlerCoolerPID.Xout) annotation (Line(points={{-11,-38},{0,-38},{0,-70},{-40,-70},{-40,-86},{-35,-86}}, color={0,0,127}));
-  connect(controlerCoolerPID.TcoolerSet, coo.T_set) annotation (Line(points={{-13,-80},{-6,-80},{-6,-58},{-42,-58},{-42,-26},{-22,-26},{-22,-30}}, color={0,0,127}));
-  connect(add1.y, controlerCoolerPID.TsupSet) annotation (Line(points={{5.4,-82},{-2,-82},{-2,-94},{-40,-94},{-40,-82},{-35,-82}}, color={0,0,127}));
   connect(phi_eta, relToAbsHum1.relHum) annotation (Line(points={{160,0},{122,0},{122,36.4},{109,36.4}}, color={0,0,127}));
   connect(T_eta, relToAbsHum1.TDryBul) annotation (Line(points={{160,40},{126,40},{126,41.8},{109,41.8}}, color={0,0,127}));
   connect(relToAbsHum1.absHum, fanSimple1.X_airIn) annotation (Line(points={{97,39},{84,39},{84,60},{-19,60}}, color={0,0,127}));
   connect(phi_supplyAir[2], relToAbsHum2.relHum) annotation (Line(points={{72,-93},{64,-93},{64,-93.6},{57,-93.6}}, color={0,0,127}));
   connect(T_supplyAir, relToAbsHum2.TDryBul) annotation (Line(points={{100,-100},{100,-88.2},{57,-88.2}}, color={0,0,127}));
-  connect(relToAbsHum2.absHum, controlerCoolerPID.xSup) annotation (Line(points={{45,-91},{-40,-91},{-40,-74},{-35,-74}}, color={0,0,127}));
   connect(absToRelHum.absHum, realPassThrough.y) annotation (Line(points={{141,
           -80.4},{138.5,-80.4},{138.5,-80},{134.4,-80}}, color={0,0,127}));
   connect(absToRelHum.relHum, phi_supplyAirOut) annotation (Line(points={{153,
           -83},{153,-72.5},{160,-72.5},{160,-60}}, color={0,0,127}));
   connect(hea.T_airOut, absToRelHum.TDryBul) annotation (Line(points={{117,-49},
           {136,-49},{136,-85.8},{141,-85.8}}, color={0,0,127}));
-  connect(passThroughHea.T_airOut, absToRelHum.TDryBul) annotation (Line(points
-        ={{117,-26},{136,-26},{136,-85.8},{141,-85.8}}, color={0,0,127}));
+  connect(passThroughHea.T_airOut, absToRelHum.TDryBul) annotation (Line(points=
+         {{117,-26},{136,-26},{136,-85.8},{141,-85.8}}, color={0,0,127}));
+  connect(controlerCooler.TcoolerSet, coo.T_set) annotation (Line(points={{-15,
+          -80},{-8,-80},{-8,-30},{-22,-30}}, color={0,0,127}));
+  connect(relToAbsHum2.absHum, controlerCooler.xSup) annotation (Line(points={{
+          45,-91},{-48,-91},{-48,-74},{-37,-74}}, color={0,0,127}));
+  connect(add1.y, controlerCooler.TsupSet) annotation (Line(points={{5.4,-82},{
+          -6,-82},{-6,-96},{-44,-96},{-44,-82},{-37,-82}}, color={0,0,127}));
+  connect(passThroughHrs.X_airOut, controlerCooler.Xout) annotation (Line(
+        points={{-73,-21},{-40,-21},{-40,-86},{-37,-86}}, color={0,0,127}));
+  connect(plateHeatExchangerFixedEfficiency.X_airOutOda, controlerCooler.Xout)
+    annotation (Line(points={{-73,4},{-40,4},{-40,-86},{-37,-86}}, color={0,0,
+          127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})));

@@ -1,82 +1,77 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Controler;
 model ControlerCooler
-  parameter Boolean dehumidifying = false
-    "true if dehumidifying is done in cooler";
-  parameter Boolean use_PhiSet = false
-    "true if relative humidity is controlled, otherwise absolute humidity is controlled";
-
-  Modelica.Blocks.Interfaces.RealInput Tset(start=293.15)
-    "set value for temperature at cooler outlet"
-    annotation (Placement(transformation(extent={{-140,30},{-100,70}}),
-        iconTransformation(extent={{-120,50},{-100,70}})));
-  Modelica.Blocks.Interfaces.RealInput Xset if dehumidifying and not use_PhiSet
-    "set value for absolute humidity at cooler outlet"
-    annotation (Placement(visible=(dehumidifying==true and use_PhiSet==false),transformation(extent={{-140,-30},{-100,10}}),
-        iconTransformation(extent={{-120,-10},{-100,10}})));
-  Modelica.Blocks.Interfaces.RealInput PhiSet if dehumidifying and use_PhiSet
-    "set value for relative humidity at ahu outlet"
-    annotation (Placement(visible=(dehumidifying==true and use_PhiSet==true),transformation(extent={{-140,-90},{-100,-50}}),
-        iconTransformation(extent={{-120,-70},{-100,-50}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi(use_p_in=false) if dehumidifying and use_PhiSet
-    annotation (Placement(visible=(dehumidifying and use_PhiSet==true),transformation(extent={{-60,-44},{-40,-24}})));
-  Utilities.Psychrometrics.TDewPoi_pW dewPoi
-    annotation (Placement(transformation(extent={{-38,8},{-28,18}})));
-  Utilities.Psychrometrics.pW_X pWat(use_p_in=false)
-    annotation (Placement(transformation(extent={{-58,8},{-48,18}})));
-  Modelica.Blocks.Interfaces.RealInput X_coolerIn
-    "absolute humidity at inlet of cooler" annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={10,-120}), iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,-110})));
-  Modelica.SIunits.Temperature TsetCoo "internal set value for temperature at cooler outlet";
-  Modelica.Blocks.Sources.RealExpression Tintern(y=TsetCoo)
-    annotation (Placement(transformation(extent={{20,14},{40,34}})));
-  Modelica.Blocks.Interfaces.RealOutput TCooSet
-    "set value for temperature control of cooler"
-    annotation (Placement(transformation(extent={{100,30},{120,50}})));
-  Modelica.Blocks.Interfaces.RealOutput XCooSet if dehumidifying
-    "set value for humidity control of cooler"
-    annotation (Placement(visible=(dehumidifying==true),transformation(extent={{100,-50},{120,-30}})));
+  parameter Boolean activeDehumidifying=false
+    "true if active dehumidifying is done in cooler";
+  Modelica.Blocks.Interfaces.RealInput xSup(start=0.007)
+    "max. set value for absolute humidity of supply air"
+                                                    annotation (Placement(
+        transformation(extent={{-140,40},{-100,80}}),   iconTransformation(
+          extent={{-120,50},{-100,70}})));
   Modelica.Blocks.Interfaces.RealInput TsupSet(start=293.15)
     "set value for temperature at supply air outlet" annotation (Placement(
-        transformation(extent={{-140,-60},{-100,-20}}), iconTransformation(
+        transformation(extent={{-140,-40},{-100,0}}),   iconTransformation(
           extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={0,110})));
-protected
-  Modelica.Blocks.Interfaces.RealInput X_intern(start=0.01)
-    "internal mass fraction";
+        rotation=0,
+        origin={-110,-20})));
+  Modelica.Blocks.Continuous.LimPID PID(
+    k=0.1,
+    Ti=0.5,
+    Td=0.1,
+    yMax=273.15 + 60,
+    yMin=273.15)
+    annotation (Placement(transformation(extent={{-20,20},{0,40}})));
+  Modelica.Blocks.Interfaces.RealInput Xout(start=0.01)
+    "measured value for absolute humidity at cooler outlet" annotation (
+      Placement(transformation(extent={{-140,-80},{-100,-40}}),
+        iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-110,-60})));
+  Modelica.Blocks.Interfaces.RealOutput TcoolerSet
+    "Connector of Real output signal" annotation (Placement(transformation(
+          extent={{100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,
+            10}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough if not activeDehumidifying
+    annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
+  Modelica.Blocks.Math.Min min_X if activeDehumidifying
+    annotation (Placement(transformation(extent={{40,-20},{60,0}})));
+  //ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum relToAbsHum annotation (Placement(transformation(extent={{-72,44},{-52,64}})));
+  Utilities.Psychrometrics.pW_X pWat(use_p_in=false)
+    annotation (Placement(transformation(extent={{-30,62},{-10,82}})));
+  Utilities.Psychrometrics.TDewPoi_pW dewPoi
+    annotation (Placement(transformation(extent={{8,62},{28,82}})));
+  Modelica.Blocks.Logical.Greater greater
+    annotation (Placement(transformation(extent={{-24,102},{-4,122}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{86,84},{106,104}})));
 equation
-
-  if not dehumidifying then
-    X_intern = X_coolerIn;
-  else
-    if use_PhiSet then
-      connect(X_intern,x_pTphi.X[1]);
-      connect(TsupSet, x_pTphi.T) annotation (Line(visible=(dehumidifying==true and use_PhiSet==true),points={{-120,
-              -40},{-76,-40},{-76,-34},{-62,-34}},
-                      color={0,0,127}));
-      connect(PhiSet, x_pTphi.phi) annotation (Line(visible=(dehumidifying==true and use_PhiSet==true),points={{-120,-70},{-76,-70},{-76,
-          -40},{-62,-40}},                     color={0,0,127}));
-    else
-      connect(X_intern,Xset);
-    end if;
-  end if;
-
-  //TsetCoo = if X_intern < X_coolerIn then dewPoi.T else Tset;
-  TsetCoo = Tset;
-
-  connect(X_intern, pWat.X_w);
-
-  connect(pWat.p_w, dewPoi.p_w) annotation (Line(points={{-47.5,13},{-42.75,13},
-          {-42.75,13},{-38.5,13}}, color={0,0,127}));
-
-  connect(Tintern.y, TCooSet) annotation (Line(points={{41,24},{58,24},{58,40},{
-          110,40}}, color={0,0,127}));
-  connect(X_intern, XCooSet);
+  connect(TsupSet, min_X.u2) annotation (Line(points={{-120,-20},{30,-20},{30,-16},
+          {38,-16}}, color={0,0,127}));
+  connect(realPassThrough.y, TcoolerSet) annotation (Line(points={{61,-50},{92,
+          -50},{92,-10},{94,-10},{94,0},{110,0}}, color={0,0,127}));
+  connect(TsupSet, realPassThrough.u) annotation (Line(points={{-120,-20},{32,
+          -20},{32,-50},{38,-50}}, color={0,0,127}));
+  connect(Xout, PID.u_m) annotation (Line(points={{-120,-60},{-50,-60},{-50,12},
+          {-10,12},{-10,18}}, color={0,0,127}));
+  connect(xSup, PID.u_s) annotation (Line(points={{-120,60},{-52,60},{-52,30},{-22,30}}, color={0,0,127}));
+  connect(xSup, pWat.X_w) annotation (Line(points={{-120,60},{-80,60},{-80,72},
+          {-31,72}}, color={0,0,127}));
+  connect(pWat.p_w, dewPoi.p_w)
+    annotation (Line(points={{-9,72},{7,72}}, color={0,0,127}));
+  connect(dewPoi.T, min_X.u1) annotation (Line(points={{29,72},{32,72},{32,-4},
+          {38,-4}}, color={0,0,127}));
+  connect(Xout, greater.u1) annotation (Line(points={{-120,-60},{-120,112},{-26,
+          112}}, color={0,0,127}));
+  connect(xSup, greater.u2) annotation (Line(points={{-120,60},{-79,60},{-79,
+          104},{-26,104}}, color={0,0,127}));
+  connect(greater.y, switch1.u2) annotation (Line(points={{-3,112},{42,112},{42,
+          94},{84,94}}, color={255,0,255}));
+  connect(min_X.y, switch1.u1)
+    annotation (Line(points={{61,-10},{61,102},{84,102}}, color={0,0,127}));
+  connect(TsupSet, switch1.u3) annotation (Line(points={{-120,-20},{70,-20},{70,
+          86},{84,86}}, color={0,0,127}));
+  connect(switch1.y, TcoolerSet) annotation (Line(points={{107,94},{106,94},{
+          106,0},{110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ControlerCooler;
