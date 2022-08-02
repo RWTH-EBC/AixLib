@@ -13,13 +13,6 @@ model ControlerCooler
           extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-110,-20})));
-  Modelica.Blocks.Continuous.LimPID PID(
-    k=0.1,
-    Ti=0.5,
-    Td=0.1,
-    yMax=273.15 + 60,
-    yMin=273.15)
-    annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Interfaces.RealInput Xout(start=0.01)
     "measured value for absolute humidity at cooler outlet" annotation (
       Placement(transformation(extent={{-140,-80},{-100,-40}}),
@@ -51,9 +44,6 @@ equation
           -50},{92,-10},{94,-10},{94,0},{110,0}}, color={0,0,127}));
   connect(TsupSet, realPassThrough.u) annotation (Line(points={{-120,-20},{32,
           -20},{32,-50},{38,-50}}, color={0,0,127}));
-  connect(Xout, PID.u_m) annotation (Line(points={{-120,-60},{-50,-60},{-50,12},
-          {-10,12},{-10,18}}, color={0,0,127}));
-  connect(xSup, PID.u_s) annotation (Line(points={{-120,60},{-52,60},{-52,30},{-22,30}}, color={0,0,127}));
   connect(xSup, pWat.X_w) annotation (Line(points={{-120,60},{-80,60},{-80,72},
           {-31,72}}, color={0,0,127}));
   connect(pWat.p_w, dewPoi.p_w)

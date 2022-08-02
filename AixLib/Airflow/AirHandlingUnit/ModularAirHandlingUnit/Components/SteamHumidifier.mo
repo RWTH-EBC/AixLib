@@ -12,13 +12,10 @@ equation
 
   //mass balances
   m_flow_airIn + m_wat_flow_intern - m_flow_airOut = 0;
+  m_flow_dryairIn * (1 + X_airIn) = m_flow_airIn;
 
   //mass balance moisture
-  if not use_X_set then
-    m_flow_airIn * X_airIn + m_wat_flow_intern - m_flow_airOut * X_intern = 0;
-  else
-    m_wat_flow_intern = m_flow_airIn / (1+X_airIn) * (X_intern-X_airIn);
-  end if;
+  m_flow_dryairIn * X_airIn + m_wat_flow_intern - m_flow_dryairOut * X_intern = 0;
 
   //heat flows
   Q_flow = m_wat_flow_intern * h_steam;

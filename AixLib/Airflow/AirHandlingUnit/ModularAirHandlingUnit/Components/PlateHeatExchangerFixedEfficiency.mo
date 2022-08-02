@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model PlateHeatExchangerFixedEfficiency
 
   parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
@@ -8,6 +8,12 @@ model PlateHeatExchangerFixedEfficiency
   parameter Real epsDisabled = 0.1 "efficiency of the heat recovery system (0...1) if it is bypassed";
 
   constant Modelica.SIunits.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
+
+  Modelica.SIunits.MassFlowRate m_flow_dryairInOda "mass flow rate of incoming dry outdoor air";
+  Modelica.SIunits.MassFlowRate m_flow_dryairInEta "mass flow rate of incoming dry exhaust air";
+
+  Modelica.SIunits.MassFlowRate m_flow_dryairOutOda "mass flow rate of outgoing dry outdoor air";
+  Modelica.SIunits.MassFlowRate m_flow_dryairOutEta "mass flow rate of outgoing dry exhaust air";
 
   Modelica.SIunits.SpecificEnthalpy h_airInOda "specific enthalpy of incoming outdoor air";
   Modelica.SIunits.SpecificEnthalpy h_airOutOda "specific enthalpy of outgoing outdoor air";
@@ -121,6 +127,12 @@ equation
   m_flow_airInOda - m_flow_airOutOda = 0;
   m_flow_airInEta - m_flow_airOutEta = 0;
 
+  m_flow_dryairInOda * (1 + X_airInOda) = m_flow_airInOda;
+  m_flow_dryairInEta * (1 + X_airInEta) = m_flow_airInEta;
+
+  m_flow_dryairOutOda * (1 + X_airOutOda) = m_flow_airOutOda;
+  m_flow_dryairOutEta * (1 + X_airOutEta) = m_flow_airOutEta;
+
   // mass balance moisture
   X_airInOda = X_airOutOda;
   X_airInEta = X_airOutEta;
@@ -135,8 +147,8 @@ equation
   T_airOutOda_max = epsEnabled * (T_airInEta - T_airInOda) + T_airInOda;
   T_airOutOda_min = epsDisabled * (T_airInEta - T_airInOda) + T_airInOda;
 
-  Q_flow = (m_flow_airInEta * h_airInEta - m_flow_airOutEta * h_airOutEta);
-  Q_flow = -(m_flow_airInOda * h_airInOda - m_flow_airOutOda * h_airOutOda);
+  Q_flow = (m_flow_dryairInEta * h_airInEta - m_flow_dryairOutEta * h_airOutEta);
+  Q_flow = -(m_flow_dryairInOda * h_airInOda - m_flow_dryairOutOda * h_airOutOda);
 
   partialPressureDrop.dp + partialPressureDrop2.dp = dp;
 

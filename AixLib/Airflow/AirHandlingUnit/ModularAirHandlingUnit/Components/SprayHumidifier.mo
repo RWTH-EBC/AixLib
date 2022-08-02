@@ -2,13 +2,13 @@
 model SprayHumidifier "Idealized model of a spray humidifier"
   extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
 
-  parameter Boolean simplify_m_wat_flow = false "If set to true, mass flow rate and enthalpy of water are not considered in the mass and energy balance";
   parameter Real k = 500 "exponent for humidification degree";
 
   // Variables
   Modelica.SIunits.SpecificEnthalpy h_watIn "specific enthalpy of incoming water";
 
   Real eta_B "humidification degree";
+
 
   Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
@@ -22,6 +22,7 @@ model SprayHumidifier "Idealized model of a spray humidifier"
 protected
   Real WLN "water to air ratio";
   Modelica.SIunits.Temperature T_intern "internal outlet temperature";
+
   Modelica.Blocks.Sources.RealExpression realExpression(y=T_intern)
     annotation (Placement(transformation(extent={{-78,-6},{-58,14}})));
   Modelica.Blocks.Math.Min min if use_X_set
@@ -32,24 +33,26 @@ protected
     annotation (Placement(transformation(extent={{-20,-8},{0,12}})));
 equation
   T_intern = T_airOut;
+  m_flow_dryairIn * (1 + X_airIn) = m_flow_airIn;
 
   // mass balance
-  if simplify_m_wat_flow then
-    m_flow_airIn - m_flow_airOut = 0;
-  else
-    m_flow_airIn + m_wat_flow_intern * eta_B - m_flow_airOut = 0;
-  end if;
+  m_flow_airIn + m_wat_flow_intern * eta_B - m_flow_airOut = 0;
+  m_flow_dryairIn * X_airIn + m_wat_flow_intern * eta_B - m_flow_dryairOut * X_intern = 0;
 
   if not use_X_set then
-    m_flow_airIn * X_airIn + m_wat_flow_intern * eta_B - m_flow_airOut * X_intern = 0;
+    // water to air ratio
+    WLN = m_wat_flow_intern/m_flow_airIn;
+    // humidification degree
+    eta_B = 1 - exp(-k * WLN);
   else
+    WLN=0;
+    eta_B = 1;
     X_intern = X_airOut;
-    m_wat_flow_intern = m_flow_airIn / (1+X_airIn) * (X_intern-X_airIn);
   end if;
   mWat = m_wat_flow_intern;
 
   // energy balance
-  m_flow_airIn * h_airIn + m_wat_flow_intern * eta_B * h_watIn - m_flow_airOut * h_airOut = 0;
+  m_flow_dryairIn * h_airIn + m_wat_flow_intern * eta_B * h_watIn - m_flow_dryairOut * h_airOut = 0;
 
   // heat flow
   Q = m_wat_flow_intern * eta_B * h_watIn;
@@ -57,11 +60,7 @@ equation
   // specific enthalpies
   h_watIn = cp_water * (T_watIn - 273.15);
 
-  // water to air ratio
-  WLN = m_wat_flow_intern/m_flow_airIn;
 
-  // humidification degree
-  eta_B = 1 - exp(-k * WLN);
 
   assert(X_airOut < humRat.X_w,
     "saturation exceeded with given set value. Humidification is reduced.",

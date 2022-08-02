@@ -16,6 +16,9 @@ model PartialHumidifier "partial model of a humidifier"
   Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
   Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
 
+  Modelica.SIunits.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
+  Modelica.SIunits.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
+
   Modelica.SIunits.HeatFlowRate Q_flow "heat flow";
 
   replaceable model PartialPressureDrop =
@@ -102,8 +105,11 @@ protected
   Modelica.Blocks.Interfaces.RealInput m_wat_flow_intern "internal mass flow rate of water";
 equation
 
+  //mass flow rate
+  m_flow_dryairIn - m_flow_dryairOut = 0;
+
   //heat flows
-  Q_flow = m_flow_airIn * (h_airOut - h_airIn);
+  Q_flow = m_flow_dryairOut * h_airOut - m_flow_dryairIn * h_airIn;
 
   // specific enthalpies
    h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);

@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses;
 partial model PartialHeater
   "BaseClass for heat exchangers in air handling units"
 
@@ -30,6 +30,9 @@ partial model PartialHeater
   // Variables
   Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
   Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
+
+  Modelica.SIunits.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
+  Modelica.SIunits.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
 
   Modelica.SIunits.CoefficientOfHeatTransfer k_air "convective heat transfer coefficient"
                                                                                          annotation(enable=false,HideResult = (use_T_set));
@@ -131,9 +134,11 @@ equation
 
   // mass balances
   m_flow_airIn - m_flow_airOut = 0;
+  m_flow_dryairIn - m_flow_dryairOut = 0;
+  m_flow_dryairIn * (1 + X_airIn) = m_flow_airIn;
 
   // heat flows
-  Q_flow = -(m_flow_airIn * h_airIn - m_flow_airOut * h_airOut);
+  Q_flow = -(m_flow_dryairIn * h_airIn - m_flow_dryairOut * h_airOut);
   Q = Q_flow;
 
   if not use_T_set then

@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model FanSimple "model of a simple fan"
 
   // parameters
@@ -15,6 +15,9 @@ model FanSimple "model of a simple fan"
   Modelica.SIunits.HeatFlowRate Q_flow "heat flow rate added to air flow";
   Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
   Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
+
+  Modelica.SIunits.MassFlowRate m_flow_dryairIn "mass flow rate of incoming dry air";
+  Modelica.SIunits.MassFlowRate m_flow_dryairOut "mass flow rate of outgoing dry air";
 
   // objects
   Modelica.Blocks.Interfaces.RealInput m_flow_airIn(final quantity="MassFlowRate",
@@ -66,6 +69,8 @@ model FanSimple "model of a simple fan"
 equation
   // mass balance
   m_flow_airIn - m_flow_airOut = 0;
+  m_flow_dryairIn - m_flow_dryairOut = 0;
+  m_flow_dryairIn * ( 1 + X_airIn) = m_flow_airIn;
   X_airIn = X_airOut;
 
   // Power of fan
@@ -76,7 +81,7 @@ equation
   Q_flow = P_el;
 
   // energy balance
-  Q_flow = m_flow_airOut * h_airOut - m_flow_airIn * h_airIn;
+  Q_flow = m_flow_dryairOut * h_airOut - m_flow_dryairIn * h_airIn;
 
   // specific enthalpies
   h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
