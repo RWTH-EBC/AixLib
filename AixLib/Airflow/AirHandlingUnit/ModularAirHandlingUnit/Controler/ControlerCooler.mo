@@ -42,7 +42,7 @@ model ControlerCooler
     annotation (Placement(transformation(extent={{8,62},{28,82}})));
   Modelica.Blocks.Logical.Greater greater
     annotation (Placement(transformation(extent={{-24,102},{-4,122}})));
-  Modelica.Blocks.Logical.Switch switch1
+  Modelica.Blocks.Logical.Switch switch1 if activeDehumidifying
     annotation (Placement(transformation(extent={{86,84},{106,104}})));
 equation
   connect(TsupSet, min_X.u2) annotation (Line(points={{-120,-20},{30,-20},{30,-16},

@@ -226,7 +226,7 @@ public
   // Utilities
   ThermalZones.ReducedOrder.Multizone.BaseClasses.AbsToRelHum absToRelHum annotation (Placement(transformation(extent={{142,-88},
             {152,-78}})));
-  Controler.ControlerCooler controlerCooler
+  Controler.ControlerCooler controlerCooler(activeDehumidifying=dehumidifying)
     annotation (Placement(transformation(extent={{-36,-90},{-16,-70}})));
 protected
   Modelica.Blocks.Routing.RealPassThrough realPassThrough
