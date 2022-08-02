@@ -306,7 +306,6 @@ equation
   connect(plateHeatExchangerFixedEfficiency.T_set, T_set_HRS) annotation (Line(
         points={{-62,20},{-62,26},{-90,26},{-90,-82},{-160,-82},{-160,-110}},
         color={0,0,127}));
-
   connect(sprayHumidifier.m_flow_airOut, reheater.m_flow_airIn)
     annotation (Line(points={{53,6},{63,6}}, color={0,0,127}));
   connect(sprayHumidifier.T_airOut, reheater.T_airIn) annotation (Line(points={
