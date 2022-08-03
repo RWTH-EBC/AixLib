@@ -18,7 +18,7 @@ class Reg_Reference(object):
         self.path = path
 
         sys.path.append('../bin/CITests')
-        from _config import ref_file_dir, resource_dir,  exit_file, ref_file, ref_whitelist_file, update_ref_file
+        from _config_CI_tests import ref_file_dir, resource_dir,  exit_file, ref_file, ref_whitelist_file, update_ref_file
         self.ref_file_path = ref_file_dir
         self.resource_file_path = resource_dir
         self.ref_whitelist = f'..{os.sep}{ref_whitelist_file}'
@@ -250,7 +250,7 @@ class Extended_model(object):
         self.dymolaversion = dymolaversion
         self.path = path
         sys.path.append('../bin/CITests')
-        from _config import ch_file, resource_dir
+        from _config_CI_tests import ch_file, resource_dir
         self.changed_file = f'..{os.sep}{ch_file}'
         self.resource_file_path = f'{resource_dir}{os.sep}{self.package.replace(self.library + ".", "")}'
         self.package_path = f'{self.package}'

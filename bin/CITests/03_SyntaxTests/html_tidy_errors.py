@@ -56,7 +56,7 @@ class HTML_Tidy(object):
         self.library = library
         self.wh_library = wh_library
         sys.path.append('bin/CITests')
-        from _config import exit_file, html_wh_file
+        from _config_CI_tests import exit_file, html_wh_file
         self.exit_file = exit_file
         self.html_wh_file = html_wh_file
         self.CRED = '\033[91m'
@@ -541,7 +541,7 @@ class HTML_whitelist(object):
         self.wh_library = wh_library
         self.git_url = git_url
         sys.path.append('bin/CITests')
-        from _config import html_wh_file
+        from _config_CI_tests import html_wh_file
         self.html_wh_file = html_wh_file
 
     def create_whitelist(self):  # Create a new whiteList

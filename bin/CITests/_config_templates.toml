@@ -1,0 +1,91 @@
+
+[image_name]
+image_name = 'registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest'
+
+[variable_main_list]
+variable_main_list = ['Github_Repository: RWTH-EBC/AixLib', 'GITLAB_Page: https://ebc.pages.rwth-aachen.de/EBC_all/github_ci/AixLib']
+
+
+[CI_changed_files]
+    CI_ch_file_list = [
+        'ch_file = bin{os.sep}Configfiles{os.sep}ci_changed_model_list.txt',
+
+
+
+
+    ]
+[Config_files]
+    Config_file_list = [
+    'exit_file = bin{os.sep}Configfiles{os.sep}exit.sh',
+    'eof_file = bin{os.sep}Configfiles{os.sep}EOF.sh',
+    'new_ref_file = bin{os.sep}Configfiles{os.sep}ci_new_created_reference.txt',
+    'ref_file = bin{os.sep}Configfiles{os.sep}ci_reference_list.txt',
+
+
+
+    ]
+
+[Whitelist files]
+    whitelist_file_list = [
+    'wh_file = bin{os.sep}ci_whitelist{os.sep}model_whitelist.txt',
+    'html_wh_file = bin{os.sep}ci_whitelist{os.sep}html_whitelist.txt'
+
+    ]
+
+[CI_Templates]
+    CI_Template_List = [
+    'reg_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}02_UnitTests{os.sep}regression_test.txt',
+    'write_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}02_UnitTests{os.sep}check_model.txt',
+    'sim_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}02_UnitTests{os.sep}simulate_model.txt',
+    'page_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}01_deploy{os.sep}gitlab_pages.txt',
+    'ibpsa_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}01_deploy{os.sep}IBPSA_Merge.txt',
+    'style_check_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}03_SyntaxTest{os.sep}style_check.txt',
+    'html_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}03_SyntaxTest{os.sep}html_check.txt',
+    'main_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}gitlab-ci.txt',
+    'setting_temp_file = bin{os.sep}templates{os.sep}03_ci_templates{os.sep}04_CleanUpScript{os.sep}ci_setting.txt',
+    'main_yml_file = .gitlab-ci.yml',
+    ]
+
+[CI_folder]
+    CI_folder_list = [
+    'temp_dir = bin{os.sep}templates{os.sep}03_ci_templates',
+    'setting_file = bin{os.sep}Setting{os.sep}CI_setting_template.txt',
+    'chart_dir = bin{os.sep}templates{os.sep}02_charts',
+    ]
+
+
+[CI_stages]
+    stage_list = [
+        "check_setting",
+        "build_templates",
+        "Ref_Check",
+        "build",
+        "HTML_Check",
+        "IBPSA_Merge",
+        "create_html_whitelist",
+        "Update_WhiteList",
+        "Release",
+        "StyleCheck",
+        "check",
+        "openMR",
+        "post",
+        "create_whitelist",
+        "simulate",
+        "RegressionTest",
+        "Update_Ref",
+        "plot_ref",
+        "prepare",
+        "deploy"]
+
+[gitlab_ci_variables]
+ gitlab_ci_variables = [
+     "GITHUB_API_TOKEN",
+     "GITHUB_PRIVATE_KEY",
+     "GL_TOKEN"
+    ] # Set these Token with this name in your gitlab ci under CI/Variables
+
+
+
+
+
+

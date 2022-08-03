@@ -9,7 +9,7 @@ class Lock_model(object):
         self.library = library
         self.wh_library = wh_library
         sys.path.append('bin/CITests')
-        from _config import html_wh_file
+        from _config_CI_tests import html_wh_file
         self.html_wh_file = html_wh_file
 
     def _read_wh(self):  # Read whitelist and return a list
@@ -62,7 +62,6 @@ class Lock_model(object):
 
     def lock_model(self, model, content):
         mo = model[model.rfind(os.sep) + 1:model.rfind(".mo")]
-
         last_entry = content[len(content) - 1]
         flag = '   __Dymola_LockedEditing="Model from IBPSA");'
         old_html_flag = '</html>"));'
@@ -70,7 +69,6 @@ class Lock_model(object):
         old = ');'
         new = ', \n' + flag
         replacements = {old_html_flag: new_html_flag, old: new}
-
         if last_entry.find(mo) > -1 and last_entry.find("end") > -1:
             flag_lines = content[len(content) - 2]
             if flag_lines.isspace() == True:

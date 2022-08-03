@@ -17,8 +17,6 @@ def folder_userguide(aixlib_dir):
 							print(line)
 					new_order_file.close()
 			
-	
-
 if  __name__ == '__main__':
 	parser = argparse.ArgumentParser(description="Set Github Environment Variables")
 	check_test_group = parser.add_argument_group("Arguments to set Environment Variables")

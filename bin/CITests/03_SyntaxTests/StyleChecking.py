@@ -16,7 +16,7 @@ class StyleCheck(object):
 		self.dymolaversion = dymolaversion
 		self.changed_models = changed_models
 		sys.path.append('bin/CITests')
-		from _config import exit_file, html_wh_file
+		from _config_CI_tests import exit_file, html_wh_file
 		self.exit_file = exit_file
 		self.html_wh_file = html_wh_file
 

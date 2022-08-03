@@ -42,9 +42,8 @@ class CI_yml_templates(object):
             self.merge_branch = None
         else:
             self.merge_branch = self.wh_library + "_Merge"
-
         sys.path.append('bin/CITests')  # files
-        from _config import ch_file, wh_file, reg_temp_file, write_temp_file, sim_temp_file, page_temp_file, ibpsa_temp_file, main_temp_file, \
+        from _config_templates import ch_file, wh_file, reg_temp_file, write_temp_file, sim_temp_file, page_temp_file, ibpsa_temp_file, main_temp_file, \
             temp_dir, exit_file, new_ref_file, chart_dir, image_name,  variable_main_list, main_yml_file, stage_list, eof_file, html_temp_file, html_wh_file,\
             style_check_temp_file, setting_file, setting_temp_file
         self.ch_file = ch_file.replace(os.sep, "/")
@@ -69,10 +68,8 @@ class CI_yml_templates(object):
         self.setting_file = setting_file
 
         self.image_name = image_name
-        #self.project_name = project_name
         self.variable_main_list = variable_main_list
         self.stage_list = stage_list
-
 
     def _write_page_template(self):
         mytemplate = Template(filename=self.page_temp)
@@ -97,8 +94,6 @@ class CI_yml_templates(object):
         else:
             git = ""
             merge_branch = ""
-
-
         mytemplate = Template(filename=self.html_temp_file)
         yml_text = mytemplate.render(merge_branch=merge_branch,
                                      except_commit_list=self.except_commit_list, GITLAB_USER_NAME="${GITLAB_USER_NAME}",
@@ -138,10 +133,7 @@ class CI_yml_templates(object):
                                      Target_Branch="${Target_Branch}", wh_library=self.wh_library,
                                      GITHUB_API_TOKEN="${GITHUB_API_TOKEN}", bot_commit=self.bot_merge_commit, ci_merge_except_commit=self.ci_merge_except_commit, python_version=self.python_version,  ci_trigger_ibpsa_commit=self.ci_trigger_ibpsa_commit)
         yml_tmp = open(self.ibpsa_temp.replace(".txt", ".gitlab-ci.yml"), "w")
-
-        #yml_tmp.write(yml_text.replace("\n", ""))
         yml_tmp.write(yml_text)
-
         yml_tmp.close()
 
     def _write_regression_template(self):
@@ -149,7 +141,6 @@ class CI_yml_templates(object):
             merge_branch = "- " + self.merge_branch
         else:
             merge_branch = ""
-
         mytemplate = Template(filename=self.reg_temp)
         yml_text = mytemplate.render(library=self.library, lib_package="${lib_package}",
                                      dymolaversion=self.dymolaversion,
@@ -295,11 +286,9 @@ class CI_yml_templates(object):
         yml_tmp.write(yml_text)
         yml_tmp.close()
 
-
 def _get_package(library):
     for subdir, dirs, files in os.walk(library):
         return dirs
-
 
 def _config_test():
     config_list = []
@@ -371,14 +360,12 @@ def _config_settings_check():
     wh_path = None
     return library, package_list_final, dymolaversion, wh_library, git_url, wh_path, python_version
 
-
 def _delte_yml_files(temp_dir):
     for subdir, dirs, files in os.walk(temp_dir):
         for file in files:
             filepath = subdir + os.sep + file
             if filepath.endswith(".yml") and file != ".gitlab-ci.yml":
                 os.remove(filepath)
-
 
 def _read_setting_file():
     setting_file = f'bin{os.sep}Setting{os.sep}CI_setting.toml'
@@ -480,7 +467,7 @@ if __name__ == '__main__':
 
     from ci_templates import CI_yml_templates
     sys.path.append('bin/CITests')
-    from _config import setting_file, temp_dir
+    from _config_templates import setting_file, temp_dir
 
     _delte_yml_files(temp_dir)
     if args.setting is False:

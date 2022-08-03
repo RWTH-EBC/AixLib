@@ -17,7 +17,7 @@ class Plot_Charts(object):
         self.package = package
         self.library = library
         sys.path.append('bin/CITests')  # Set files for informations, templates and storage locations
-        from _config import chart_dir, chart_temp_file, index_temp_file, layout_temp_file, ch_file, new_ref_file, show_ref_file, update_ref_file
+        from _config_CI_tests import chart_dir, chart_temp_file, index_temp_file, layout_temp_file, ch_file, new_ref_file, show_ref_file, update_ref_file
         self.new_ref_file = new_ref_file
         self.ch_file = ch_file
         self.chart_temp_file = chart_temp_file  # path for google chart template
@@ -84,8 +84,6 @@ class Plot_Charts(object):
             value_list.append("[" + a + "]")
         value_list = map(str, (value_list))
         return value_list
-    #def calculate_time_interval(self):
-
 
     def _read_data(self, ref_file):  # Read Reference results in AixLib\Resources\ReferenceResults\Dymola\${modelname}.txt
         legend_List = []
@@ -449,7 +447,7 @@ class Plot_Charts(object):
 
 def _delte_folder():
     sys.path.append('bin/CITests')
-    from _config import chart_dir
+    from _config_CI_tests import chart_dir
     if os.path.isdir(chart_dir) is False:
         print(f'Directonary {chart_dir} does not exist.')
     else:
@@ -608,7 +606,6 @@ if __name__ == '__main__':
                     results = charts._read_data(ref_file)
                     value_list = results[0]
                     legend_List = results[1]
-
                     charts._mako_line_html_new_chart(ref_file, value_list, legend_List)
             charts._create_index_layout()
             charts._create_layout()

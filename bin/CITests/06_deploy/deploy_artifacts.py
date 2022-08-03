@@ -14,7 +14,7 @@ class Deploy_Artifacts(object):
         self.CRED = '\033[91m'
         self.CEND = '\033[0m'
         sys.path.append('bin/CITests')
-        from _config import new_ref_file, update_ref_file
+        from _config_CI_tests import new_ref_file, update_ref_file
         self.new_ref_file = new_ref_file
         self.update_ref_file = update_ref_file
 

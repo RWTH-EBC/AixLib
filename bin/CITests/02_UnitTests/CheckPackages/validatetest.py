@@ -40,7 +40,7 @@ class ValidateTest(object):
         self.filter_wh = filter_wh
 
         sys.path.append('bin/CITests')
-        from _config import ch_file, wh_file
+        from _config_CI_tests import ch_file, wh_file
         self.ch_file = ch_file
         self.wh_file = wh_file
         self.err_log = f'{self.mo_library}{os.sep}{self.mo_library}.{self.package}-errorlog.txt'
@@ -285,7 +285,7 @@ class Create_whitelist(object):
         self.wh_lib_path = f'{self.wh_lib}{os.sep}{self.wh_lib}{os.sep}package.mo'
 
         sys.path.append('bin/CITests')
-        from _config import ch_file, wh_file, exit_file
+        from _config_CI_tests import ch_file, wh_file, exit_file
         self.ch_file = ch_file
         self.wh_file = wh_file
         self.exit_file = exit_file
