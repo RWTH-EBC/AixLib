@@ -2,6 +2,3 @@
 	path = Templates
 	url = https://git.rwth-aachen.de/EBC/EBC_all/gitlab_ci/templates.git
 	branch = AixLib
-[submodule "templates"]
-	path = templates
-	url = https://git.rwth-aachen.de/EBC/EBC_all/gitlab_ci/templates
