@@ -8,7 +8,7 @@ package AixLib
     Modelica_DeviceDrivers(version="1.7.0"),
     ObsoleteModelica4(version="4.0.0"),
     Modelica(version="4.0.0")),
-  version="1.2.2",
+  version="1.3.0",
   conversion(from(
     version="0.3.2",
                      script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.3.2_to_0.4.mos",
