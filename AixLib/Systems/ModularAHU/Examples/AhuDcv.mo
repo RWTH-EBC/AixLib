@@ -124,7 +124,7 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
     use_moisture_balance=true,
     internalGainsMode=3,
     use_NaturalAirExchange=true,
-    metOnePerSit=80,
+    metOnePerSit=58,
     nPorts=2)            annotation (Placement(transformation(extent={{56,54},{
             100,96}})));
   Fluid.Sources.Boundary_pT SourcePreheater(
@@ -193,7 +193,7 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
     "Table with profiles for internal gains"
     annotation(Placement(transformation(extent={{7,-7},{-7,7}},
         rotation=0,
-        origin={93,42})));
+        origin={95,40})));
   Controller.CtrAHUCO2 ctrAHUCO2_1(TFlowSet=293.15, useTwoFanCtr=false)
                                                       annotation (Placement(transformation(extent={{-40,40},
             {-20,60}})));
@@ -201,7 +201,7 @@ equation
   connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{60.5455,
           20},{75.415,20},{75.415,59.88}},                                                                                          color={0,127,255}));
   connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{60.5455,
-          -4},{74,-4},{74,20},{80.585,20},{80.585,59.88}},                                                          color={0,127,255}));
+          -4},{80.585,-4},{80.585,59.88}},                                                                          color={0,127,255}));
   connect(SourcePreheater.ports[1], genericAHU.port_a3) annotation (Line(points={{-45,-66},
           {-45,-34},{-43.6364,-34}},           color={0,127,255}));
   connect(SinkPreheater.ports[1], genericAHU.port_b3) annotation (Line(points={{-29,-66},
@@ -228,8 +228,8 @@ equation
       points={{-80,88},{-12,88},{-12,87.6},{56,87.6}},
       color={255,204,51},
       thickness=0.5));
-  connect(internalGains.y, thermalZone.intGains) annotation (Line(points={{85.3,42},
-          {84,42},{84,57.36},{95.6,57.36}},                                                             color={0,0,127}));
+  connect(internalGains.y, thermalZone.intGains) annotation (Line(points={{87.3,40},
+          {88,40},{88,57.36},{95.6,57.36}},                                                             color={0,0,127}));
   connect(ctrAHUCO2_1.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
       points={{-20,50.1},{-7.10543e-15,50.1},{-7.10543e-15,32.3}},
       color={255,204,51},
