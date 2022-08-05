@@ -27,8 +27,8 @@ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(allowFlowReversal=
       radioButtons=true));
   parameter Integer use_vmax(min = 1, max = 2) = 1 "Output if v > v_max (0.5 m/s)" annotation(choices(choice = 1 "Warning", choice = 2 "Error"));
   parameter Modelica.Units.SI.Length maxLength = 120 "Maximum Length for one Circuit" annotation(Dialog(group = "Panel Heating"));
-  parameter Modelica.Units.SI.Temperature T_Fmax[RoomNo]=302.15                      "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
-  parameter Modelica.Units.SI.Temperature T_Room[RoomNo]=293.15                      "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Fmax[RoomNo]=fill(302.15, RoomNo) "Maximum surface temperature" annotation (Dialog(group="Room Specifications"));
+  parameter Modelica.Units.SI.Temperature T_Room[RoomNo]=fill(293.15, RoomNo) "Nominal room temperature" annotation (Dialog(group="Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeFloor[RoomNo] "Wall type for floor" annotation (Dialog(group="Room Specifications"), choicesAllMatching=true);
   parameter Boolean Ceiling[RoomNo] "false if ground plate is under panel heating" annotation (Dialog(group = "Room Specifications"));
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallTypeCeiling[RoomNo] "Wall type for ceiling" annotation (Dialog(group="Room Specifications", enable = Ceiling), choicesAllMatching=true);
@@ -180,16 +180,6 @@ initial equation
 
 equation
 
-  // HEAT CONNECTIONS
-
-   for i in 1:RoomNo loop
-     for n in 1:dis loop
-  connect(heatFloor[(i-1)*dis+n], underfloorHeatingRoom[i].heatFloor[n])
-    annotation (Line(points={{0,60},{0,36}}, color={191,0,0}));
-  connect(underfloorHeatingRoom[i].heatCeiling[n], heatCeiling[(i-1)*dis+n])
-    annotation (Line(points={{0,16},{0,-60}}, color={191,0,0}));
-     end for;
-          end for;
 
  // OUTER FLUID CONNECTIONS
   connect(port_a, TFlow.port_a)
@@ -231,6 +221,10 @@ equation
     annotation (Line(points={{-81,-54},{-100,-54}}, color={0,0,127}));
   connect(valveInput, underfloorHeatingRoom.valveInput) annotation (Line(points=
          {{-64,68},{-64,50},{-9.92,50},{-9.92,38}}, color={0,0,127}));
+  connect(underfloorHeatingRoom.heatCeiling, heatCeiling)
+    annotation (Line(points={{0,16},{0,-60}}, color={191,0,0}));
+  connect(underfloorHeatingRoom.heatFloor, heatFloor)
+    annotation (Line(points={{0,36},{0,60}}, color={191,0,0}));
     annotation (Icon(coordinateSystem(extent={{-100,-60},{100,60}}, initialScale=0.1),
         graphics={
         Rectangle(

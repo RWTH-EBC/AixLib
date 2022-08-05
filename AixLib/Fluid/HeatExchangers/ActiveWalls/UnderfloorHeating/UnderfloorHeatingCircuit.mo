@@ -131,13 +131,13 @@ public
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-74,58})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling(each
-      final m=dis) annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorCeiling(each final
+            m=dis) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={0,-28})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor(each
-      final m=dis) annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollectorFloor(each final
+            m=dis) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,24})));
@@ -188,8 +188,8 @@ equation
   connect(heatCeiling, thermalCollectorCeiling.port_b)
     annotation (Line(points={{0,-46},{0,-38}}, color={191,0,0}));
   connect(underfloorHeatingElement.heatCeiling, thermalCollectorCeiling.port_a)
-    annotation (Line(points={{-0.2,-4.2},{-0.2,-11.1},{0,-11.1},{0,-18}}, color
-        ={191,0,0}));
+    annotation (Line(points={{-0.2,-4.2},{-0.2,-11.1},{0,-11.1},{0,-18}}, color=
+         {191,0,0}));
   connect(heatFloor, thermalCollectorFloor.port_b) annotation (Line(points={{0,
           44},{0,39},{1.22125e-15,39},{1.22125e-15,34}}, color={191,0,0}));
   connect(thermalCollectorFloor.port_a, underfloorHeatingElement.heatFloor)

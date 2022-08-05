@@ -364,6 +364,7 @@ model GroundFloorBuildingEnvelope
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCorridor
     annotation (Placement(transformation(extent={{100,100},{120,120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5]
+    if not use_UFH
     "HeatPort to force a ground temperature for the ground level's floor."
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Utilities.Interfaces.Adaptors.ConvRadToCombPort        heatStarToCombHeaters[5] annotation (Placement(transformation(extent={{10,-8},{-10,8}},

@@ -204,55 +204,69 @@ equation
             -5.52}},
                   color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[2*dis+i], wholeHouseBuildingEnvelope.groFloDown[dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
-          {-14,2.32}}, color={191,0,0}));
+    annotation (Line(points={{-56,-52.4083},{-54,-52.4083},{-54,-44},{-22,-44},
+            {-22,2.32},{-14,2.32}},
+                       color={191,0,0}));
   connect(underfloorHeatingSystem.heatCeiling[2*dis+i], wholeHouseBuildingEnvelope.groPlateUp[2])
-    annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -4.96}},
+    annotation (Line(points={{-56,-66.4083},{-56,-70},{-4,-70},{-4,-30},{-14,
+            -30},{-14,-4.96}},
                   color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[3*dis+i], wholeHouseBuildingEnvelope.groFloDown[2*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
-          {-14,2.32}}, color={191,0,0}));
+    annotation (Line(points={{-56,-52.2917},{-54,-52.2917},{-54,-44},{-22,-44},
+            {-22,2.32},{-14,2.32}},
+                       color={191,0,0}));
   connect(underfloorHeatingSystem.heatCeiling[3*dis+i], wholeHouseBuildingEnvelope.groPlateUp[3])
-    annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-          -4.4}}, color={191,0,0}));
+    annotation (Line(points={{-56,-66.2917},{-56,-70},{-4,-70},{-4,-30},{-14,
+            -30},{-14,-4.4}},
+                  color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[4*dis+i], wholeHouseBuildingEnvelope.groFloDown[4*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,2.32},
-          {-14,2.32}}, color={191,0,0}));
+    annotation (Line(points={{-56,-52.175},{-54,-52.175},{-54,-44},{-22,-44},{
+            -22,2.32},{-14,2.32}},
+                       color={191,0,0}));
   connect(underfloorHeatingSystem.heatCeiling[4*dis+i], wholeHouseBuildingEnvelope.groPlateUp[5])
-    annotation (Line(points={{-56,-66},{-56,-70},{-4,-70},{-4,-30},{-14,-30},{-14,
-            -3.28}},
+    annotation (Line(points={{-56,-66.175},{-56,-70},{-4,-70},{-4,-30},{-14,-30},
+            {-14,-3.28}},
                   color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[5*dis+i], wholeHouseBuildingEnvelope.uppFloDown[i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
+    annotation (Line(points={{-56,-52.0583},{-54,-52.0583},{-54,-44},{-22,-44},
+            {-22,24.72},{-14,24.72}},
+                        color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloUp[i], underfloorHeatingSystem.heatCeiling[5*dis+i])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
+            -70},{-44,-66.0583},{-56,-66.0583}},
+                                     color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[6*dis+i], wholeHouseBuildingEnvelope.uppFloDown[dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
+    annotation (Line(points={{-56,-51.9417},{-54,-51.9417},{-54,-44},{-22,-44},
+            {-22,24.72},{-14,24.72}},
+                        color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloUp[dis+i], underfloorHeatingSystem.heatCeiling[6*dis+i])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
+            -70},{-44,-65.9417},{-56,-65.9417}},
+                                     color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[7*dis+i], wholeHouseBuildingEnvelope.uppFloDown[2*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
+    annotation (Line(points={{-56,-51.825},{-54,-51.825},{-54,-44},{-22,-44},{
+            -22,24.72},{-14,24.72}},
+                        color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloUp[2*dis+i], underfloorHeatingSystem.heatCeiling[7*dis+i])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
+            -70},{-44,-65.825},{-56,-65.825}},
+                                     color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[8*dis+i], wholeHouseBuildingEnvelope.uppFloDown[3*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
+    annotation (Line(points={{-56,-51.7083},{-54,-51.7083},{-54,-44},{-22,-44},
+            {-22,24.72},{-14,24.72}},
+                        color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloUp[3*dis+i], underfloorHeatingSystem.heatCeiling[8*dis+i])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
+            -70},{-44,-65.7083},{-56,-65.7083}},
+                                     color={191,0,0}));
   connect(underfloorHeatingSystem.heatFloor[9*dis+i], wholeHouseBuildingEnvelope.uppFloDown[4*dis+i])
-    annotation (Line(points={{-56,-52},{-54,-52},{-54,-44},{-22,-44},{-22,24.72},
-          {-14,24.72}}, color={191,0,0}));
+    annotation (Line(points={{-56,-51.5917},{-54,-51.5917},{-54,-44},{-22,-44},
+            {-22,24.72},{-14,24.72}},
+                        color={191,0,0}));
   connect(wholeHouseBuildingEnvelope.groFloUp[4*dis+i], underfloorHeatingSystem.heatCeiling[9*dis+i])
     annotation (Line(points={{-14,18},{-18,18},{-18,-30},{-4,-30},{-4,-70},{-44,
-          -70},{-44,-66},{-56,-66}}, color={191,0,0}));
+            -70},{-44,-65.5917},{-56,-65.5917}},
+                                     color={191,0,0}));
           end for;
   annotation (experiment(StartTime = 0, StopTime = 25920000, Interval=3600, Tolerance=1e-6, Algorithm="dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/OFDHeatLoad.mos"
