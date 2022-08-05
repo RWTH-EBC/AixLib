@@ -23,7 +23,8 @@ model CtrAHUBasic "Simple controller for AHU"
     final useExternalTset=true,
     Td=0,
     final initType=initType,
-    final reverseAction=true) annotation (dialog(group="Register controller",
+    final reverseAction=false)
+                              annotation (dialog(group="Register controller",
         enable=True), Placement(transformation(extent={{0,40},{20,60}})));
   CtrRegBasic ctrRh(
     final useExternalTset=true,

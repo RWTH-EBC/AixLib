@@ -114,63 +114,70 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
       dp_nominal=100,
       mWat_flow_nominal=0.5,
       TLiqWat_in=288.15))
-    annotation (Placement(transformation(extent={{-80,-34},{40,32}})));
+    annotation (Placement(transformation(extent={{-60,-34},{60,32}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = MediumAir,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(useConstantACHrate=true),
+    zoneParam=
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(
+        VAir=3000, useConstantACHrate=true),
     use_C_flow=true,
     use_moisture_balance=true,
     internalGainsMode=3,
     use_NaturalAirExchange=true,
-    nPorts=2)            annotation (Placement(transformation(extent={{64,56},{84,76}})));
+    metOnePerSit=80,
+    nPorts=2)            annotation (Placement(transformation(extent={{56,54},{
+            100,96}})));
   Fluid.Sources.Boundary_pT SourcePreheater(
     nPorts=1,
     redeclare package Medium = MediumWater,
     T=333.15) annotation (Placement(transformation(
-        extent={{8,-8},{-8,8}},
+        extent={{7,-7},{-7,7}},
         rotation=270,
-        origin={-64,-80})));
+        origin={-45,-73})));
   Fluid.Sources.Boundary_pT SinkPreheater(
     nPorts=1,
     redeclare package Medium = MediumWater,
     p=102000,
     T=283.15) annotation (Placement(transformation(
-        extent={{8,-8},{-8,8}},
+        extent={{7,-7},{-7,7}},
         rotation=270,
-        origin={-44,-80})));
+        origin={-29,-73})));
   Fluid.Sources.Boundary_pT SourceCooler(
     nPorts=1,
     redeclare package Medium = MediumWater,
     T=283.15) annotation (Placement(transformation(
-        extent={{8,-8},{-8,8}},
+        extent={{7,-7},{-7,7}},
         rotation=270,
-        origin={-20,-80})));
+        origin={-3,-73})));
   Fluid.Sources.Boundary_pT SinkCooler(
     nPorts=1,
     redeclare package Medium = MediumWater,
     T=283.15) annotation (Placement(transformation(
-        extent={{8,-8},{-8,8}},
+        extent={{7,-7},{-7,7}},
         rotation=270,
-        origin={-4,-80})));
+        origin={13,-73})));
   Fluid.Sources.Boundary_pT SourceHeater(
     nPorts=1,
     redeclare package Medium = MediumWater,
     T=333.15) annotation (Placement(transformation(
-        extent={{8,-8},{-8,8}},
+        extent={{7,-7},{-7,7}},
         rotation=270,
-        origin={14,-80})));
-  Fluid.Sources.Boundary_pT SinkHeater(nPorts=1, redeclare package Medium = MediumWater)
-                     annotation (Placement(transformation(
-        extent={{8,-8},{-8,8}},
+        origin={31,-73})));
+  Fluid.Sources.Boundary_pT SinkHeater(nPorts=1, redeclare package Medium =
+        MediumWater) annotation (Placement(transformation(
+        extent={{7,-7},{-7,7}},
         rotation=270,
-        origin={30,-80})));
-  Fluid.Sources.Outside out(nPorts=1, redeclare package Medium = MediumAir) annotation (Placement(transformation(extent={{-122,-20},{-102,0}})));
-  Fluid.Sources.Boundary_pT boundaryExhaustAir(nPorts=1, redeclare package Medium = MediumAir)
+        origin={47,-73})));
+  Fluid.Sources.Outside out(nPorts=1, redeclare package Medium = MediumAir) annotation (Placement(transformation(extent={{-90,-14},
+            {-70,6}})));
+  Fluid.Sources.Boundary_pT boundaryExhaustAir(nPorts=1, redeclare package
+      Medium =                                                                      MediumAir)
                           annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
-        origin={-108,24})));
-  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"), computeWetBulbTemperature=false) annotation (Placement(transformation(extent={{-124,58},{-104,78}})));
+        origin={-80,20})));
+  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/weatherdata/TRY2015_Jahr_City_Aachen.mos"), computeWetBulbTemperature=false) annotation (Placement(transformation(extent={{-100,78},
+            {-80,98}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="UserProfiles",
@@ -184,42 +191,54 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
         1,1; 399600,1,1,1,1; 403140,1,1,1,1; 403200,0.4,0.4,1,1; 406740,0.4,0.4,1,1; 406800,0,0.1,0,0; 410340,0,0.1,0,0; 410400,0,0.1,0,0; 413940,0,0.1,0,0; 414000,0,0.1,0,0; 417540,0,0.1,0,0; 417600,0,0.1,0,0; 421140,0,0.1,0,0; 421200,0,0.1,0,0; 424740,0,0.1,0,0; 424800,0,0.1,0,0; 428340,0,0.1,0,0; 428400,0,0.1,0,0; 431940,0,0.1,0,0; 432000,0,0,0,0; 435540,0,0,0,0; 435600,0,0,0,0; 439140,0,0,0,0; 439200,0,0,0,0; 442740,0,0,0,0; 442800,0,0,0,0; 446340,0,0,0,0; 446400,0,0,0,0; 449940,0,0,0,0; 450000,0,0,0,0; 453540,0,0,0,0; 453600,0,0,0,0; 457140,0,0,0,0; 457200,0,0,0,0; 460740,0,0,0,0; 460800,0,0,0,0; 464340,0,0,0,0; 464400,0,0,0,0; 467940,0,0,0,0; 468000,0,0,0,0; 471540,0,0,0,0; 471600,0,0,0,0; 475140,0,0,0,0; 475200,0,0,0,0; 478740,0,0,0,0; 478800,0,0,0,0; 482340,0,0,0,0; 482400,0,0,0,0; 485940,0,0,0,0; 486000,0,0,0,0; 489540,0,0,0,0; 489600,0,0,0,0; 493140,0,0,0,0; 493200,0,0,0,0; 496740,0,0,0,0; 496800,0,0,0,0; 500340,0,0,0,0; 500400,0,0,0,0; 503940,0,0,0,0; 504000,0,0,0,0; 507540,
         0,0,0,0; 507600,0,0,0,0; 511140,0,0,0,0; 511200,0,0,0,0; 514740,0,0,0,0; 514800,0,0,0,0; 518340,0,0,0,0; 518400,0,0,0,0; 521940,0,0,0,0; 522000,0,0,0,0; 525540,0,0,0,0; 525600,0,0,0,0; 529140,0,0,0,0; 529200,0,0,0,0; 532740,0,0,0,0; 532800,0,0,0,0; 536340,0,0,0,0; 536400,0,0,0,0; 539940,0,0,0,0; 540000,0,0,0,0; 543540,0,0,0,0; 543600,0,0,0,0; 547140,0,0,0,0; 547200,0,0,0,0; 550740,0,0,0,0; 550800,0,0,0,0; 554340,0,0,0,0; 554400,0,0,0,0; 557940,0,0,0,0; 558000,0,0,0,0; 561540,0,0,0,0; 561600,0,0,0,0; 565140,0,0,0,0; 565200,0,0,0,0; 568740,0,0,0,0; 568800,0,0,0,0; 572340,0,0,0,0; 572400,0,0,0,0; 575940,0,0,0,0; 576000,0,0,0,0; 579540,0,0,0,0; 579600,0,0,0,0; 583140,0,0,0,0; 583200,0,0,0,0; 586740,0,0,0,0; 586800,0,0,0,0; 590340,0,0,0,0; 590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])
     "Table with profiles for internal gains"
-    annotation(Placement(transformation(extent={{100,23},{86,37}})));
-  Controller.CtrAHUCO2 ctrAHUCO2_1(useTwoFanCtr=true) annotation (Placement(transformation(extent={{-60,42},{-40,62}})));
+    annotation(Placement(transformation(extent={{7,-7},{-7,7}},
+        rotation=0,
+        origin={93,42})));
+  Controller.CtrAHUCO2 ctrAHUCO2_1(TFlowSet=293.15, useTwoFanCtr=false)
+                                                      annotation (Placement(transformation(extent={{-40,40},
+            {-20,60}})));
 equation
-  connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{40.5455,20},{72,20},{72,40},{71.65,40},{71.65,58.8}}, color={0,127,255}));
-  connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{40.5455,-4},{76.35,-4},{76.35,58.8}}, color={0,127,255}));
-  connect(SourcePreheater.ports[1], genericAHU.port_a3) annotation (Line(points={{-64,-72},{-64,-34},{-63.6364,-34}},
-                                               color={0,127,255}));
-  connect(SinkPreheater.ports[1], genericAHU.port_b3) annotation (Line(points={{-44,-72},{-44,-34},{-52.7273,-34}},
-                                              color={0,127,255}));
-  connect(SourceCooler.ports[1], genericAHU.port_a4) annotation (Line(points={{-20,-72},{-20,-34}},
-                                             color={0,127,255}));
-  connect(SinkCooler.ports[1], genericAHU.port_b4) annotation (Line(points={{-4,-72},{-8,-72},{-8,-34},{-9.09091,-34}},
-                                                 color={0,127,255}));
-  connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{14,-72},{12,-72},{12,-62},{2,-62},{2,-34},{1.81818,-34}},
-                                                                   color={0,127,
+  connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{60.5455,
+          20},{75.415,20},{75.415,59.88}},                                                                                          color={0,127,255}));
+  connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{60.5455,
+          -4},{74,-4},{74,20},{80.585,20},{80.585,59.88}},                                                          color={0,127,255}));
+  connect(SourcePreheater.ports[1], genericAHU.port_a3) annotation (Line(points={{-45,-66},
+          {-45,-34},{-43.6364,-34}},           color={0,127,255}));
+  connect(SinkPreheater.ports[1], genericAHU.port_b3) annotation (Line(points={{-29,-66},
+          {-29,-34},{-32.7273,-34}},          color={0,127,255}));
+  connect(SourceCooler.ports[1], genericAHU.port_a4) annotation (Line(points={{-3,-66},
+          {-3,-54},{0,-54},{0,-34}},         color={0,127,255}));
+  connect(SinkCooler.ports[1], genericAHU.port_b4) annotation (Line(points={{13,-66},
+          {12,-66},{12,-34},{10.9091,-34}},      color={0,127,255}));
+  connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{31,-66},
+          {32,-66},{32,-62},{22,-62},{22,-34},{21.8182,-34}},      color={0,127,
           255}));
-  connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{30,-72},{30,-66},{12.1818,-66},{12.1818,-34}},
+  connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{47,-66},
+          {40,-66},{40,-56},{32,-56},{32,-46},{32.1818,-46},{32.1818,-34}},
                                                       color={0,127,255}));
-  connect(out.ports[1], genericAHU.port_a1) annotation (Line(points={{-102,-10},{-86,-10},{-86,-4},{-80,-4}}, color={0,127,255}));
-  connect(genericAHU.port_b2, boundaryExhaustAir.ports[1]) annotation (Line(points={{-80,20},{-90,20},{-90,24},{-98,24}}, color={0,127,255}));
+  connect(out.ports[1], genericAHU.port_a1) annotation (Line(points={{-70,-4},{
+          -60,-4}},                                                                                           color={0,127,255}));
+  connect(genericAHU.port_b2, boundaryExhaustAir.ports[1]) annotation (Line(points={{-60,20},
+          {-70,20}},                                                                                                      color={0,127,255}));
   connect(weaDat.weaBus, out.weaBus) annotation (Line(
-      points={{-104,68},{-98,68},{-98,42},{-132,42},{-132,-9.8},{-122,-9.8}},
+      points={{-80,88},{-76,88},{-76,66},{-100,66},{-100,-3.8},{-90,-3.8}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-104,68},{56,68},{56,72},{64,72}},
+      points={{-80,88},{-12,88},{-12,87.6},{56,87.6}},
       color={255,204,51},
       thickness=0.5));
-  connect(internalGains.y, thermalZone.intGains) annotation (Line(points={{85.3,30},{82,30},{82,57.6}}, color={0,0,127}));
+  connect(internalGains.y, thermalZone.intGains) annotation (Line(points={{85.3,42},
+          {84,42},{84,57.36},{95.6,57.36}},                                                             color={0,0,127}));
   connect(ctrAHUCO2_1.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
-      points={{-40,52.1},{-32,52.1},{-32,52},{-20,52},{-20,32.3}},
+      points={{-20,50.1},{-7.10543e-15,50.1},{-7.10543e-15,32.3}},
       color={255,204,51},
       thickness=0.5));
-  connect(thermalZone.CO2Con, ctrAHUCO2_1.CO2Mea) annotation (Line(points={{85,57},{94,57},{94,84},{-70,84},{-70,44.8},{-62,44.8}}, color={0,0,127}));
+  connect(thermalZone.CO2Con, ctrAHUCO2_1.CO2Mea) annotation (Line(points={{102.2,
+          56.1},{104,56.1},{104,100},{-50,100},{-50,42.8},{-42,42.8}},                                                              color={0,0,127}));
   annotation (experiment(
       StopTime=86400,
       Interval=120,
+      Tolerance=1e-05,
       __Dymola_Algorithm="Dassl"));
 end AhuDcv;
