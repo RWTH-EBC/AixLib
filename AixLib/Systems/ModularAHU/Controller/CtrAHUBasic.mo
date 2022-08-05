@@ -110,6 +110,8 @@ model CtrAHUBasic "Simple controller for AHU"
 
 
 
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough if not useTwoFanCtr
+    annotation (Placement(transformation(extent={{60,-66},{72,-54}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
       points={{20.2,80},{100.05,80},{100.05,0.05}},
@@ -223,13 +225,15 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   if not useTwoFanCtr then
-    connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{21,-50},
-            {100,-50},{100,0}},                   color={0,0,127}), Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
   end if;
+  connect(PID_VflowSup.y, realPassThrough.u) annotation (Line(points={{21,-50},
+          {22,-50},{22,-60},{58.8,-60}}, color={0,0,127}));
+  connect(realPassThrough.y, genericAHUBus.dpFanEtaSet) annotation (Line(points
+        ={{72.6,-60},{100.05,-60},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(

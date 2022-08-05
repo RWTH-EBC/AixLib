@@ -125,6 +125,8 @@ model CtrAHUCO2 "Controller for AHU with CO2-control"
     final reset=AixLib.Types.Reset.Disabled) "PID controller for CO2 concentration" annotation (Placement(transformation(extent={{-68,-60},{-48,-40}})));
   Modelica.Blocks.Sources.Constant constCO2Set(final k=CO2set) if not useExternalTset annotation (Placement(transformation(extent={{-100,-38},{-80,-18}})));
   Modelica.Blocks.Interfaces.RealInput CO2Mea "measurement input signal for CO2 concentration" annotation (Placement(transformation(extent={{-140,-92},{-100,-52}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough if not useTwoFanCtr
+    annotation (Placement(transformation(extent={{58,-68},{70,-56}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
       points={{20.2,80},{100.05,80},{100.05,0.05}},
@@ -234,17 +236,19 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   if not useTwoFanCtr then
-    connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{21,-50},
-            {100,-50},{100,0}},                   color={0,0,127}), Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
   end if;
   connect(constCO2Set.y, PID_CO2.u_s) annotation (Line(points={{-79,-28},{-74,-28},{-74,-50},{-70,-50}}, color={0,0,127}));
   connect(PID_CO2.y, PID_VflowSup.u_s) annotation (Line(points={{-47,-50},{-2,-50}}, color={0,0,127}));
   connect(PID_CO2.y, PID_VflowRet.u_s) annotation (Line(points={{-47,-50},{-34,-50},{-34,-80},{-22,-80}}, color={0,0,127}));
   connect(PID_CO2.u_m, CO2Mea) annotation (Line(points={{-58,-62},{-58,-72},{-120,-72}}, color={0,0,127}));
+  connect(PID_VflowSup.y, realPassThrough.u) annotation (Line(points={{21,-50},
+          {20,-50},{20,-62},{56.8,-62}}, color={0,0,127}));
+  connect(realPassThrough.y, genericAHUBus.dpFanEtaSet) annotation (Line(points
+        ={{70.6,-62},{100.05,-62},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
