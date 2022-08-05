@@ -9,29 +9,33 @@ model CtrAHUCO2 "Controller for AHU with CO2-control"
   parameter Real TFrostProtect=273.15 + 5
     "Temperature set point of preheater for frost protection"
     annotation (Dialog(enable=usePreheater == true));
+  parameter Real relHumSupSet=0.6
+    "Set point for steam humidifier for relative humidity";
 
   parameter Boolean useExternalTset=false
     "If True, set temperature can be given externally";
+
+
 
   // Register controllers
   CtrRegBasic ctrPh(
     final useExternalTset=true,
     Td=0,
     final initType=initType) if usePreheater annotation (dialog(group="Register controller",
-        enable=usePreheater), Placement(transformation(extent={{0,70},{20,90}})));
+        enable=usePreheater), Placement(transformation(extent={{0,80},{20,100}})));
   CtrRegBasic ctrCo(
     final useExternalTset=true,
     Td=0,
     final initType=initType,
     final reverseAction=false)
                               annotation (dialog(group="Register controller",
-        enable=True), Placement(transformation(extent={{0,40},{20,60}})));
+        enable=True), Placement(transformation(extent={{0,50},{20,70}})));
   CtrRegBasic ctrRh(
     final useExternalTset=true,
     final useExternalTMea=true,
     Td=0,
     final initType=initType) annotation (dialog(group="Register controller",
-        enable=True), Placement(transformation(extent={{0,10},{20,30}})));
+        enable=True), Placement(transformation(extent={{0,20},{20,40}})));
 
   // Parameter for volume flow controller
   parameter Modelica.Units.SI.VolumeFlowRate Vflow_nominal=3000/3600
@@ -67,14 +71,14 @@ model CtrAHUCO2 "Controller for AHU with CO2-control"
         iconTransformation(extent={{84,-14},{116,16}})));
 
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TFlowSet) if not useExternalTset
-    annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
+    annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
     "Connector of set temperature, if given externally" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
           extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Sources.Constant TFrostProtection(final k=TFrostProtect)
  if usePreheater
-    annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
+    annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Controls.Continuous.LimPID PID_VflowSup(
     final yMax=dpMax,
     final yMin=0,
@@ -110,7 +114,7 @@ model CtrAHUCO2 "Controller for AHU with CO2-control"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
-        origin={66,-36})));
+        origin={66,-38})));
 
   Controls.Continuous.LimPID PID_CO2(
     final yMax=Vflow_nominal,
@@ -123,13 +127,29 @@ model CtrAHUCO2 "Controller for AHU with CO2-control"
     y_start=y_start,
     final reverseActing=false,
     final reset=AixLib.Types.Reset.Disabled) "PID controller for CO2 concentration" annotation (Placement(transformation(extent={{-68,-60},{-48,-40}})));
-  Modelica.Blocks.Sources.Constant constCO2Set(final k=CO2set) if not useExternalTset annotation (Placement(transformation(extent={{-100,-38},{-80,-18}})));
+  Modelica.Blocks.Sources.Constant constCO2Set(final k=CO2set)
+    if not useExternalTset                                                            annotation (Placement(transformation(extent={{-100,-38},{-80,-18}})));
   Modelica.Blocks.Interfaces.RealInput CO2Mea "measurement input signal for CO2 concentration" annotation (Placement(transformation(extent={{-140,-92},{-100,-52}})));
   Modelica.Blocks.Routing.RealPassThrough realPassThrough if not useTwoFanCtr
     annotation (Placement(transformation(extent={{58,-68},{70,-56}})));
+  Controls.Continuous.LimPID PID_SteamHum(
+    final yMax=1,
+    final yMin=0,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    final k=0.5,
+    final Ti=10,
+    final Td=0,
+    final initType=initType,
+    y_start=y_start,
+    final reverseActing=true,
+    final reset=AixLib.Types.Reset.Disabled) "PID controller for supply fan"
+    annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+  Modelica.Blocks.Sources.Constant constRelHumSup(final k=relHumSupSet)
+    if not useExternalTset
+    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
-      points={{20.2,80},{100.05,80},{100.05,0.05}},
+      points={{20.2,90},{34,90},{34,0.05},{100.05,0.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -137,7 +157,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrCo.registerBus, genericAHUBus.coolerBus) annotation (Line(
-      points={{20.2,50},{100.05,50},{100.05,0.05}},
+      points={{20.2,60},{34,60},{34,0.05},{100.05,0.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -145,7 +165,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrRh.registerBus, genericAHUBus.heaterBus) annotation (Line(
-      points={{20.2,20},{100.05,20},{100.05,0.05}},
+      points={{20.2,30},{34,30},{34,0.05},{100.05,0.05}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -153,15 +173,15 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constTflowSet.y, ctrCo.Tset) annotation (Line(
-      points={{-79,50},{-2,50}},
+      points={{-79,60},{-2,60}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(constTflowSet.y, ctrRh.Tset) annotation (Line(
-      points={{-79,50},{-28,50},{-28,20},{-2,20}},
+      points={{-79,60},{-8,60},{-8,30},{-2,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(TFrostProtection.y, ctrPh.Tset)
-    annotation (Line(points={{-39,80},{-2,80}}, color={0,0,127}));
+    annotation (Line(points={{-39,90},{-2,90}}, color={0,0,127}));
   connect(PID_VflowSup.u_m, genericAHUBus.heaterBus.VFlowAirMea) annotation (
       Line(points={{10,-62},{10,-72},{100,-72},{100,-36},{100.05,-36},{100.05,0.05}},
         color={0,0,127}), Text(
@@ -170,11 +190,11 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(Tset, ctrCo.Tset) annotation (Line(
-      points={{-120,0},{-28,0},{-28,50},{-2,50}},
+      points={{-120,0},{-88,0},{-88,30},{-8,30},{-8,60},{-2,60}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(Tset, ctrRh.Tset) annotation (Line(
-      points={{-120,0},{-28,0},{-28,20},{-2,20}},
+      points={{-120,0},{-88,0},{-88,30},{-2,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ConstHRS.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{52.6,
@@ -191,20 +211,6 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(ConstFlap.y, genericAHUBus.flapSupSet) annotation (Line(points={{32.6,
           -14},{100.05,-14},{100.05,0.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(ConstHum.y, genericAHUBus.steamHumSet) annotation (Line(points={{72.6,
-          -36},{100,-36},{100,-2},{100.05,-2},{100.05,0.05}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(ConstHum.y, genericAHUBus.adiabHumSet) annotation (Line(points={{72.6,
-          -36},{100,-36},{100,0},{100.05,0},{100.05,0.05}}, color={0,0,127}),
-      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -229,8 +235,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrRh.TMea, genericAHUBus.TSupMea) annotation (Line(points={{10,8},{10,
-          0},{100.05,0},{100.05,0.05}},     color={0,0,127}), Text(
+  connect(ctrRh.TMea, genericAHUBus.TSupMea) annotation (Line(points={{10,18},{10,
+          10},{100.05,10},{100.05,0.05}},   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -241,10 +247,32 @@ equation
   connect(PID_CO2.y, PID_VflowSup.u_s) annotation (Line(points={{-47,-50},{-2,-50}}, color={0,0,127}));
   connect(PID_CO2.y, PID_VflowRet.u_s) annotation (Line(points={{-47,-50},{-34,-50},{-34,-80},{-22,-80}}, color={0,0,127}));
   connect(PID_CO2.u_m, CO2Mea) annotation (Line(points={{-58,-62},{-58,-72},{-120,-72}}, color={0,0,127}));
-  connect(PID_VflowSup.y, realPassThrough.u) annotation (Line(points={{21,-50},
-          {20,-50},{20,-62},{56.8,-62}}, color={0,0,127}));
-  connect(realPassThrough.y, genericAHUBus.dpFanEtaSet) annotation (Line(points
-        ={{70.6,-62},{100.05,-62},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(PID_VflowSup.y, realPassThrough.u) annotation (Line(points={{21,-50},{
+          20,-50},{20,-62},{56.8,-62}}, color={0,0,127}));
+  connect(realPassThrough.y, genericAHUBus.dpFanEtaSet) annotation (Line(points=
+         {{70.6,-62},{100.05,-62},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ConstHum.y, genericAHUBus.adiabHumSet) annotation (Line(points={{72.6,
+          -38},{100,-38},{100,-18},{100.05,-18},{100.05,0.05}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PID_SteamHum.u_m, genericAHUBus.relHumSupMea) annotation (Line(points={{-10,-12},
+          {-10,-18},{14,-18},{14,0.05},{100.05,0.05}},
+                                                 color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constRelHumSup.y, PID_SteamHum.u_s)
+    annotation (Line(points={{-39,0},{-22,0}},     color={0,0,127}));
+  connect(PID_SteamHum.y, genericAHUBus.steamHumSet) annotation (Line(points={{1,
+          0},{50,0},{50,0.05},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

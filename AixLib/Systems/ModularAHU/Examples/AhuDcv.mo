@@ -108,13 +108,13 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
       Q_nom=1100),
     humidifier(
       dp_nominal=100,
-      mWat_flow_nominal=1,
+      mWat_flow_nominal=0.01,
       TLiqWat_in=288.15),
     humidifierRet(
       dp_nominal=100,
       mWat_flow_nominal=0.5,
       TLiqWat_in=288.15))
-    annotation (Placement(transformation(extent={{-60,-34},{60,32}})));
+    annotation (Placement(transformation(extent={{-58,-34},{62,32}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = MediumAir,
     zoneParam=
@@ -194,31 +194,38 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
     annotation(Placement(transformation(extent={{7,-7},{-7,7}},
         rotation=0,
         origin={95,40})));
-  Controller.CtrAHUCO2 ctrAHUCO2_1(TFlowSet=293.15, useTwoFanCtr=false)
+  Controller.CtrAHUCO2 ctrAHUCO2_1(
+    TFlowSet=293.15,
+    relHumSupSet=0.4,                               useTwoFanCtr=false)
                                                       annotation (Placement(transformation(extent={{-40,40},
             {-20,60}})));
+  Utilities.Psychrometrics.Phi_pTX phi
+    annotation (Placement(transformation(extent={{128,56},{148,76}})));
+  BoundaryConditions.WeatherData.Bus weaBus1
+             "Weather data bus"
+    annotation (Placement(transformation(extent={{-82,78},{-62,98}})));
 equation
-  connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{60.5455,
+  connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{62.5455,
           20},{75.415,20},{75.415,59.88}},                                                                                          color={0,127,255}));
-  connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{60.5455,
+  connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{62.5455,
           -4},{80.585,-4},{80.585,59.88}},                                                                          color={0,127,255}));
   connect(SourcePreheater.ports[1], genericAHU.port_a3) annotation (Line(points={{-45,-66},
-          {-45,-34},{-43.6364,-34}},           color={0,127,255}));
+          {-45,-34},{-41.6364,-34}},           color={0,127,255}));
   connect(SinkPreheater.ports[1], genericAHU.port_b3) annotation (Line(points={{-29,-66},
-          {-29,-34},{-32.7273,-34}},          color={0,127,255}));
+          {-29,-34},{-30.7273,-34}},          color={0,127,255}));
   connect(SourceCooler.ports[1], genericAHU.port_a4) annotation (Line(points={{-3,-66},
-          {-3,-54},{0,-54},{0,-34}},         color={0,127,255}));
+          {-3,-54},{2,-54},{2,-34}},         color={0,127,255}));
   connect(SinkCooler.ports[1], genericAHU.port_b4) annotation (Line(points={{13,-66},
-          {12,-66},{12,-34},{10.9091,-34}},      color={0,127,255}));
+          {12,-66},{12,-34},{12.9091,-34}},      color={0,127,255}));
   connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{31,-66},
-          {32,-66},{32,-62},{22,-62},{22,-34},{21.8182,-34}},      color={0,127,
+          {32,-66},{32,-62},{22,-62},{22,-34},{23.8182,-34}},      color={0,127,
           255}));
   connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{47,-66},
-          {40,-66},{40,-56},{32,-56},{32,-46},{32.1818,-46},{32.1818,-34}},
+          {40,-66},{40,-56},{32,-56},{32,-46},{34.1818,-46},{34.1818,-34}},
                                                       color={0,127,255}));
   connect(out.ports[1], genericAHU.port_a1) annotation (Line(points={{-70,-4},{
-          -60,-4}},                                                                                           color={0,127,255}));
-  connect(genericAHU.port_b2, boundaryExhaustAir.ports[1]) annotation (Line(points={{-60,20},
+          -58,-4}},                                                                                           color={0,127,255}));
+  connect(genericAHU.port_b2, boundaryExhaustAir.ports[1]) annotation (Line(points={{-58,20},
           {-70,20}},                                                                                                      color={0,127,255}));
   connect(weaDat.weaBus, out.weaBus) annotation (Line(
       points={{-80,88},{-76,88},{-76,66},{-100,66},{-100,-3.8},{-90,-3.8}},
@@ -231,14 +238,28 @@ equation
   connect(internalGains.y, thermalZone.intGains) annotation (Line(points={{87.3,40},
           {88,40},{88,57.36},{95.6,57.36}},                                                             color={0,0,127}));
   connect(ctrAHUCO2_1.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
-      points={{-20,50.1},{-7.10543e-15,50.1},{-7.10543e-15,32.3}},
+      points={{-20,50.1},{2,50.1},{2,32.3}},
       color={255,204,51},
       thickness=0.5));
   connect(thermalZone.CO2Con, ctrAHUCO2_1.CO2Mea) annotation (Line(points={{102.2,
           56.1},{104,56.1},{104,100},{-50,100},{-50,42.8},{-42,42.8}},                                                              color={0,0,127}));
+  connect(thermalZone.X_w, phi.X_w) annotation (Line(points={{102.2,60.3},{118,
+          60.3},{118,66},{127,66}}, color={0,0,127}));
+  connect(thermalZone.TAir, phi.T) annotation (Line(points={{102.2,91.8},{124,
+          91.8},{124,74},{127,74}}, color={0,0,127}));
+  connect(weaDat.weaBus, weaBus1) annotation (Line(
+      points={{-80,88},{-76,88},{-76,90},{-70,90},{-70,88},{-72,88}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(phi.p, weaBus1.pAtm) annotation (Line(points={{127,58},{110,58},{110,
+          100},{-72,100},{-72,88}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (experiment(
-      StopTime=86400,
-      Interval=120,
+      StopTime=604800,
+      Interval=120.000096,
       Tolerance=1e-05,
       __Dymola_Algorithm="Dassl"));
 end AhuDcv;
