@@ -117,9 +117,7 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
     annotation (Placement(transformation(extent={{-58,-34},{62,32}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = MediumAir,
-    zoneParam=
-        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(
-        VAir=3000, useConstantACHrate=true),
+    zoneParam=AixLib.DataBase.ThermalZones.Office_1995_1000(),
     use_C_flow=true,
     use_moisture_balance=true,
     internalGainsMode=3,
@@ -205,23 +203,20 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
              "Weather data bus"
     annotation (Placement(transformation(extent={{-82,78},{-62,98}})));
 equation
-  connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{62.5455,
-          20},{75.415,20},{75.415,59.88}},                                                                                          color={0,127,255}));
-  connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{62.5455,
-          -4},{80.585,-4},{80.585,59.88}},                                                                          color={0,127,255}));
-  connect(SourcePreheater.ports[1], genericAHU.port_a3) annotation (Line(points={{-45,-66},
-          {-45,-34},{-41.6364,-34}},           color={0,127,255}));
-  connect(SinkPreheater.ports[1], genericAHU.port_b3) annotation (Line(points={{-29,-66},
-          {-29,-34},{-30.7273,-34}},          color={0,127,255}));
+  connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{62.5455,20},{72.83,20},{72.83,59.88}},                color={0,127,255}));
+  connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{62.5455,-4},{83.17,-4},{83.17,59.88}},color={0,127,255}));
+  connect(SourcePreheater.ports[1], genericAHU.port_a3) annotation (Line(points={{-45,-66},{-45,-34},{-41.6364,-34}},
+                                               color={0,127,255}));
+  connect(SinkPreheater.ports[1], genericAHU.port_b3) annotation (Line(points={{-29,-66},{-29,-34},{-30.7273,-34}},
+                                              color={0,127,255}));
   connect(SourceCooler.ports[1], genericAHU.port_a4) annotation (Line(points={{-3,-66},
           {-3,-54},{2,-54},{2,-34}},         color={0,127,255}));
   connect(SinkCooler.ports[1], genericAHU.port_b4) annotation (Line(points={{13,-66},
           {12,-66},{12,-34},{12.9091,-34}},      color={0,127,255}));
-  connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{31,-66},
-          {32,-66},{32,-62},{22,-62},{22,-34},{23.8182,-34}},      color={0,127,
+  connect(SourceHeater.ports[1], genericAHU.port_a5) annotation (Line(points={{31,-66},{32,-66},{32,-62},{22,-62},{22,-34},{23.8182,-34}},
+                                                                   color={0,127,
           255}));
-  connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{47,-66},
-          {40,-66},{40,-56},{32,-56},{32,-46},{34.1818,-46},{34.1818,-34}},
+  connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{47,-66},{40,-66},{40,-56},{32,-56},{32,-46},{34.1818,-46},{34.1818,-34}},
                                                       color={0,127,255}));
   connect(out.ports[1], genericAHU.port_a1) annotation (Line(points={{-70,-4},{
           -58,-4}},                                                                                           color={0,127,255}));
