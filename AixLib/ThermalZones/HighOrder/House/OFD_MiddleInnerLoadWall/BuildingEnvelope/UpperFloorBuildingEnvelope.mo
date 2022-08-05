@@ -102,14 +102,19 @@ model UpperFloorBuildingEnvelope
         rotation=180,
         origin={110,76})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Bedroom
+    if not use_UFH
     annotation (Placement(transformation(extent={{-66,-120},{-46,-100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Children1
+    if not use_UFH
     annotation (Placement(transformation(extent={{-42,-120},{-22,-100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Corridor
+    if not use_UFH
     annotation (Placement(transformation(extent={{-10,-120},{10,-100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Bath
+    if not use_UFH
     annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Children2
+    if not use_UFH
     annotation (Placement(transformation(extent={{60,-120},{80,-100}})));
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Bedroom(
     final denAir=denAir,

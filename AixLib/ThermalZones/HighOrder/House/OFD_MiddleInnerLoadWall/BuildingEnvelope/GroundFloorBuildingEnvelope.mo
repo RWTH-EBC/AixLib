@@ -352,14 +352,19 @@ model GroundFloorBuildingEnvelope
     annotation (Placement(transformation(extent={{-130,-18},{-100,12}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling_Livingroom
+    if not use_UFH
     annotation (Placement(transformation(extent={{-100,100},{-84,118}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling_Hobby
+    if not use_UFH
     annotation (Placement(transformation(extent={{-58,100},{-40,118}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling_Corridor
+    if not use_UFH
     annotation (Placement(transformation(extent={{-20,100},{-2,118}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling_WCStorage
+    if not use_UFH
     annotation (Placement(transformation(extent={{20,100},{38,118}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling_Kitchen
+    if not use_UFH
     annotation (Placement(transformation(extent={{62,100},{80,118}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCorridor
     annotation (Placement(transformation(extent={{100,100},{120,120}})));

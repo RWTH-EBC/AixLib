@@ -14,7 +14,7 @@ model OFD_UFH_WODis "Test environment for OFD with underfloor heating system"
       choice=3 "WSchV_1995",
       choice=4 "WSchV_1984",
       radioButtons=true));
-  parameter Integer dis=10;
+  parameter Integer dis=1;
   parameter Modelica.Units.SI.Distance Spacing[nHeatedRooms] = fill(0.2, 10);
   parameter Modelica.Units.SI.Diameter d_a[nHeatedRooms] = fill(0.017, 10);
   parameter Modelica.Units.SI.Diameter d[nHeatedRooms] = fill(0.018, 10);
@@ -234,9 +234,6 @@ equation
   connect(wholeHouseBuildingEnvelope.heatingToRooms[5], underfloorHeatingSystem.heatCeiling[10]) annotation (Line(points={{-14,
           9.90545},{-22,9.90545},{-22,8},{-18,8},{-18,-30},{-56,-30},{-56,-65.475}},
                                              color={191,0,0}));
-
-  connect(wholeHouseBuildingEnvelope.uppFloDown, wholeHouseBuildingEnvelope.groFloUp)
-    annotation (Line(points={{-14,24.72},{-14,24.72},{-14,18}}, color={191,0,0}));
 
   for i in 1:5 loop
     connect(radConvToSingle[i].heatFloor, underfloorHeatingSystem.heatCeiling[i])
