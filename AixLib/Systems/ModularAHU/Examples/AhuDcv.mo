@@ -185,13 +185,7 @@ model AhuDcv "Example for air hanling unit with demand controlled ventilation"
         0,0,0,0; 507600,0,0,0,0; 511140,0,0,0,0; 511200,0,0,0,0; 514740,0,0,0,0; 514800,0,0,0,0; 518340,0,0,0,0; 518400,0,0,0,0; 521940,0,0,0,0; 522000,0,0,0,0; 525540,0,0,0,0; 525600,0,0,0,0; 529140,0,0,0,0; 529200,0,0,0,0; 532740,0,0,0,0; 532800,0,0,0,0; 536340,0,0,0,0; 536400,0,0,0,0; 539940,0,0,0,0; 540000,0,0,0,0; 543540,0,0,0,0; 543600,0,0,0,0; 547140,0,0,0,0; 547200,0,0,0,0; 550740,0,0,0,0; 550800,0,0,0,0; 554340,0,0,0,0; 554400,0,0,0,0; 557940,0,0,0,0; 558000,0,0,0,0; 561540,0,0,0,0; 561600,0,0,0,0; 565140,0,0,0,0; 565200,0,0,0,0; 568740,0,0,0,0; 568800,0,0,0,0; 572340,0,0,0,0; 572400,0,0,0,0; 575940,0,0,0,0; 576000,0,0,0,0; 579540,0,0,0,0; 579600,0,0,0,0; 583140,0,0,0,0; 583200,0,0,0,0; 586740,0,0,0,0; 586800,0,0,0,0; 590340,0,0,0,0; 590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])
     "Table with profiles for internal gains"
     annotation(Placement(transformation(extent={{100,23},{86,37}})));
-  Controller.CtrAHUBasic ctrAHUBasic(
-    TFlowSet=293.15,
-    useExternalTset=false,
-    useTwoFanCtr=true,
-    initType=Modelica.Blocks.Types.Init.InitialState,
-    ctrRh(k=0.01))
-    annotation (Placement(transformation(extent={{-56,38},{-36,58}})));
+  Controller.CtrAHUCO2 ctrAHUCO2_1(useTwoFanCtr=true) annotation (Placement(transformation(extent={{-60,42},{-40,62}})));
 equation
   connect(genericAHU.port_a2, thermalZone.ports[1]) annotation (Line(points={{40.5455,20},{72,20},{72,40},{71.65,40},{71.65,58.8}}, color={0,127,255}));
   connect(genericAHU.port_b1, thermalZone.ports[2]) annotation (Line(points={{40.5455,-4},{76.35,-4},{76.35,58.8}}, color={0,127,255}));
@@ -219,8 +213,13 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(internalGains.y, thermalZone.intGains) annotation (Line(points={{85.3,30},{82,30},{82,57.6}}, color={0,0,127}));
-  connect(ctrAHUBasic.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
-      points={{-36,48.1},{-20,48.1},{-20,32.3}},
+  connect(ctrAHUCO2_1.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
+      points={{-40,52.1},{-32,52.1},{-32,52},{-20,52},{-20,32.3}},
       color={255,204,51},
       thickness=0.5));
+  connect(thermalZone.CO2Con, ctrAHUCO2_1.CO2Mea) annotation (Line(points={{85,57},{94,57},{94,84},{-70,84},{-70,44.8},{-62,44.8}}, color={0,0,127}));
+  annotation (experiment(
+      StopTime=86400,
+      Interval=120,
+      __Dymola_Algorithm="Dassl"));
 end AhuDcv;
